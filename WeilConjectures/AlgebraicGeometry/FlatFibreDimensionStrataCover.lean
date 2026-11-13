@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.RestrictedFibreLocallyNoetherian
 /-! # Dense fibre opens contain component generic points
 
 Source: Stacks Project, Tag 054U.
-(blueprint: lem-sbc-flat-fibre-dimension-strata-cover)
 -/
 
 @[expose] public section
@@ -54,8 +53,7 @@ There are finitely many components of A. Remove all the other components; the re
 contains z and is contained in its component, and is nonempty. The dense open W intersects O in a
 point y. Since y belongs to the closure of z, z generalizes y; openness of W forces z to lie in W.
 This proves the inclusion for every component generic point. Empty fibres have no component
-generic points.
-(blueprint: lem-sbc-flat-fibre-dimension-strata-cover) -/
+generic points. -/
 theorem generic_points_mem_dense_open_fibre_of_flat_restrict
     {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)]

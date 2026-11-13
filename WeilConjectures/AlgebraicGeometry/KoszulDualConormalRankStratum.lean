@@ -22,8 +22,7 @@ import WeilConjectures.RingTheory.KoszulConormalBasis
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 
 /-! # Local rank of the dual conormal for a Koszul-regular immersion
-Source: Stacks Project, Duality for Schemes, Tags 0BQZ and 0BR0.
-(blueprint: lem-sc-koszul-dual-conormal-rank-stratum). -/
+Source: Stacks Project, Duality for Schemes, Tags 0BQZ and 0BR0. -/
 
 @[expose] public section
 
@@ -35,7 +34,6 @@ namespace AlgebraicGeometry
 
 /-- The dual conormal restricts to a finite locally free module of rank n on the rank-n
 stratum. Source: Stacks Project, Duality for Schemes, Tags 0BQZ and 0BR0.
-(blueprint: lem-sc-koszul-dual-conormal-rank-stratum).
 
 Proof: On an affine neighbourhood supplied by hregular, put A = O_Y(U), I = ker(i),
 and B = A/I. The pullback of the ideal sheaf is the associated sheaf of I/I².

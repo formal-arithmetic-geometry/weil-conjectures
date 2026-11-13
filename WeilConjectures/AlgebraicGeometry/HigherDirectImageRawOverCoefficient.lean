@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawOverComplex
 /-! # The fixed coefficient morphism for raw pullback over W
 
 Source: Stacks Project, Tags 03Q8 and 09Z1, composition of inverse images.
-(blueprint: def-sbc-higher-image-raw-over-coefficient).
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ set_option backward.isDefEq.respectTransparency true
 
 /-- The single-complex comparison followed by the fixed identification of restricted
 coefficients. Its explicit type keeps the constructed coefficient map folded.
-Source: Stacks Project, Tags 03Q8 and 09Z1, inverse-image composition.
-(blueprint: def-sbc-higher-image-raw-over-coefficient). -/
+Source: Stacks Project, Tags 03Q8 and 09Z1, inverse-image composition. -/
 noncomputable def higherDirectImageRawOverCoefficient
     (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -41,7 +39,6 @@ noncomputable def higherDirectImageRawOverCoefficient
 /-- The shared coefficient has the original formula, including its original endpoints.
 The heterogeneous equality permits transport of the endpoints by the complex equation.
 Source: Stacks Project, Tags 03Q8 and 09Z1, inverse-image composition.
-(blueprint: def-sbc-higher-image-raw-over-coefficient).
 Proof: Unfold the concrete coefficient; both maps are the same composite. -/
 theorem higherDirectImageRawOverCoefficient_heq
     (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}

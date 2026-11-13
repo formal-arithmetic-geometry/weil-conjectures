@@ -27,8 +27,7 @@ reflects units, so the original determinant is a unit in R. Multiplying the
 adjugate by its inverse gives a two-sided inverse of the original matrix.
 Transport this inverse through the chosen bases to obtain an inverse of φ.
 The argument includes rank zero (empty determinant 1); unequal ranks cannot
-satisfy the premise. No flatness is required.
-(blueprint: lem-sc-local-free-base-change-reflects-iso) -/
+satisfy the premise. No flatness is required. -/
 theorem isIso_of_isIso_extendScalars_of_finite_free
     {R : Type u} {S : Type v} [CommRing R] [CommRing S]
     [IsLocalRing R] [IsLocalRing S] (f : R →+* S) [IsLocalHom f]

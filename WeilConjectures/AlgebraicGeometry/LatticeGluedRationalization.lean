@@ -11,7 +11,6 @@ import Mathlib.CategoryTheory.Sites.SheafHom
 # The map from a glued integral module to its rational sheaf
 
 Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59–60.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -191,7 +190,6 @@ noncomputable def latticeCoverEmbeddingHom (i : latticeCoverIndex U r) :
 
 /-- The local lattice embeddings glue to a morphism from the tuple module.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of embedded lattices.
-(auxiliary; not a blueprint node).
 Proof: compose each tuple projection with its local integral embedding. The
 transition formula and tuple compatibility identify these maps on all overlap
 tests. The sheaf Hom glues the underlying additive maps; scalar linearity can

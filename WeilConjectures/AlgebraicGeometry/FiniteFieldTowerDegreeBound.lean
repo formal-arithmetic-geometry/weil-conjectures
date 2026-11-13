@@ -14,7 +14,6 @@ import WeilConjectures.RingTheory.SemilocalFiberGenerators
 # Degree estimate for a tower finite over a field
 
 Source: Stacks Project, Morphisms, proof of Tag 03J6, algebraic dimension estimate.
-(blueprint: lem-weil-pbc-finite-field-tower-degree-bound).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ of its first map.
 
 Source: Stacks Project, Morphisms, proof of Tag 03J6, the argument after writing
 `X_z = Spec A` and `Y_z = Spec B`.
-(blueprint: lem-weil-pbc-finite-field-tower-degree-bound)
 
 Proof: Both schemes are affine because their structure morphisms are finite. Put
 `B = Γ(Y, ⊤)` and `A = Γ(X, ⊤)`, with the compatible algebra structures induced by

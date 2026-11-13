@@ -22,10 +22,6 @@ import WeilConjectures.CategoryTheory.Monoidal.Mod.Limits
 /-!
 # Exactness and countable products for integral coefficient extension
 
-Source: current blueprint, det-sp-field-extension-towers.proof.md,
-det-sp-field-extension-towers,
-proof (1), first two sentences (blueprint: lem-coef-semilinear-tensor-base).
-
 The coefficient rings are the native pulled-back condensed rings of integers.
 The map in the product clause is the canonical map induced by the projections.
 -/
@@ -43,9 +39,6 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Integral coefficient extension is additive, preserves short exact sequences,
 and its canonical countable-product comparison is invertible.
-
-Source: current blueprint, det-sp-field-extension-towers, proof (1), first two
-sentences (blueprint: lem-coef-semilinear-tensor-base).
 
 Proof:
 1. Choose an integral basis of O_F over O_E. The coefficient-sheaf basis theorem

@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.TorsorUnitEquivarianceReflection
 # Finite étale equivalences and transport of torsors
 
 Source: Stacks Project Tag 0A5G, final paragraph, and Tag 03RV.
-(blueprint: lem-weil-pbc-finite-etale-torsor-reflection)
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- Transport by inverse image reflects isomorphisms of finite constant torsors.
 Source: Stacks Project Tag 0A5G, final paragraph, using Tag 03RV.
-(blueprint: lem-weil-pbc-finite-etale-torsor-reflection)
 
 Proof: A torsor under the finite constant group M is étale locally the finite set M,
 so Tag 03RV represents its underlying sheaf by a finite étale scheme. Yoneda represents

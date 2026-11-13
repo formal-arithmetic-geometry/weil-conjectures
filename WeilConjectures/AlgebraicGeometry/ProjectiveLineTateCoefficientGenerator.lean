@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 import WeilConjectures.Topology.RingedSpaceModuleCohomology
 
 /-! # Finite Tate coefficients from the normalized projective-line Kummer class
-
-Source: the coefficient extension in blueprint thm-amb-p1-decomposition.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -155,8 +152,6 @@ private theorem kummer_lineHomEquiv_eq
 
 /-- The actual scalar-extended Kummer class generates the Tate-line H² once
 its roots-of-unity class is normalized to one by an additive isomorphism.
-Source: blueprint thm-amb-p1-decomposition, finite coefficient extension.
-(auxiliary; not a blueprint node).
 
 Proof: choose a primitive root to identify the root sheaf with constant Z/N.
 The supplied normalization makes the corresponding constant H² class a cyclic

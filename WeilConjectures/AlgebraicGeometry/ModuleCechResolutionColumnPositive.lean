@@ -21,7 +21,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Vanishing open cohomology in degree p makes the corresponding column homology zero.
 Source: Stacks Project, Tag 01ET, proof using the columns of the double complex of 01EQ.
-(blueprint: lem-sc-module-cech-resolution-column-positive)
 
 Proof: for each tuple y, apply the resolution-computation isomorphism for the right
 derived functor of sections on the intersection of U(y(l)). By the hypothesis its

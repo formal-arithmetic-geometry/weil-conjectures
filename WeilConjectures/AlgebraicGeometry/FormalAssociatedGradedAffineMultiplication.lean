@@ -120,7 +120,6 @@ private theorem projection_kernel {X : Scheme.{u}} (I : X.IdealSheafData)
 
 /-- Multiplication of representatives descends on the affine basis.
 Source: Stacks Tags 087Z, 01I8 and 01IC.
-(blueprint: lem-weil-pbc-formal-associated-graded-affine-multiplication).
 
 Proof: Put R = Gamma(X,V) and J = I.ideal V. The affine power range theorem
 identifies the monic inclusion of the m-th power with J^m (degree zero is R).

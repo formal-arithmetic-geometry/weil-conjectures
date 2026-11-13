@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageLimitAffineClassRep
 
 /-! # Descent of higher direct image cohomology-presheaf classes
 
-Source: Stacks Project, Tag 09Z1
-(blueprint: lem-sbc-higher-direct-image-limit-presheaf-class-cover).
+Source: Stacks Project, Tag 09Z1.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Raw cohomology-presheaf classes locally descend to stage higher direct images.
 Source: Stacks Project, Lemma 59.51.7, Tag 09Z1, cohomology comparison in its proof,
-and Lemma 59.51.6, Tag 03Q8
-(blueprint: lem-sbc-higher-direct-image-limit-presheaf-class-cover).
+and Lemma 59.51.6, Tag 03Q8.
 
 Proof:
 1. Take the natural sheafification isomorphism e of Tag 03Q8. The presheaf P is

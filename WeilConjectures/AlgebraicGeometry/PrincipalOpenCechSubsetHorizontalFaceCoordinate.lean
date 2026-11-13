@@ -12,7 +12,6 @@ import Mathlib.Order.Interval.Finset.Fin
 /-! # One coordinate of the horizontal Čech differential
 
 Source: Stacks Project, Tags 08C1, 08C0, and 01FG.
-(blueprint: lem-sc-principal-open-cech-subset-horizontal-face-coordinate).
 -/
 
 @[expose] public section
@@ -256,7 +255,6 @@ private theorem transport_cast
 /-- The horizontal differential at one increasing target tuple.
 
 Source: Stacks Project, Tag 01FG, ordered-complex differential, and Tags 08C0 and 08C1.
-(blueprint: lem-sc-principal-open-cech-subset-horizontal-face-coordinate).
 
 Proof: Expand the alternating differential at the increasing enumeration of S.
 Biject deleted positions with elements j of S. Deleting position j enumerates
@@ -266,7 +264,7 @@ embeddings with equal ranges agree. Naturality of overFunctorEquiv, restriction
 and the coefficient presheaf identifies the face map with restriction on the
 principal opens. The degree equality he and the cardinality assumption identify
 the coefficients; functoriality and proof irrelevance identify all transports.
-The integer sign action agrees with the action of (-1 : A) to the same power.
+The integer sign action agrees with the action of (-1: A) to the same power.
 Summing the terms gives the displayed equality. Since S has cardinality at least
 two, each deletion is nonempty. For r=0 or r=1 no such target subset exists. -/
 theorem principalSubsetHorizontalFaceCoordinate

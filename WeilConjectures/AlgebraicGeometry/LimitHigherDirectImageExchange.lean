@@ -84,7 +84,6 @@ inverse limit. This assertion concerns a single cohomology sheaf, with arbitrary
 abelian coefficients; it has no smoothness, torsion, or injectivity assumption.
 Source: Stacks Project, Lemma 59.86.3, Tag 0EZT, second assertion, and
 Lemma 59.51.8, Tag 0EYM.
-(blueprint: lem-sc-limit-higher-direct-image-exchange)
 
 Proof: Replace I by a cofinal directed inverse system. Pull f back to every D_i;
 the resulting sources have affine transition morphisms and limit the pullback of f

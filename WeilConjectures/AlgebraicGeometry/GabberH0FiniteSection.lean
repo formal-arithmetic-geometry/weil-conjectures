@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement
 /-! # Finite-cover sections before imposing the descent equation
 
 Source: Stacks Project, Tag 09ZF, proof of lemma-gabber-h0, fourth paragraph
-through the construction of s', before comparing its two projection pullbacks
-(blueprint: lem-weil-pbc-gabber-h0-finite-section).
+through the construction of s', before comparing its two projection pullbacks.
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ namespace AlgebraicGeometry
 
 /-- A section on the closed subscheme lifts after a finite surjective cover.
 Source: Stacks Project, Tag 09ZF, proof of lemma-gabber-h0, fourth paragraph,
-through "the section t' comes from a section s'"
-(blueprint: lem-weil-pbc-gabber-h0-finite-section).
+through "the section t' comes from a section s'".
 
 Proof:
 1. Every nonempty closed subset T of X meets i(Z). Otherwise the pushforward
@@ -50,7 +48,7 @@ Proof:
    the sheaf axiom identifies t there with the inverse-image unit of s_j.
 3. The union of the open images of U_j in X contains i(Z). Its closed complement
    is empty by step 1, so the U_j cover X. Finite refinement of this etale cover
-   gives finite surjective h : X' to X and opens W_alpha covering X', each
+   gives finite surjective h: X' to X and opens W_alpha covering X', each
    mapping to some U_j over X. Pull the s_j back to sections s'_alpha of h^*F.
 4. Put Z' = Z times_X X'. Transport the pullback of t to a section t' of
    i'^*(h^*F) by the unit-compatible composition isomorphisms. Their naturality

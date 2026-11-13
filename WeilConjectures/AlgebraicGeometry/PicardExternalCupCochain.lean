@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 /-! # Cochain realization of the external cup product
 
 Source: Stacks Project, Cohomology, Tags 01FD, 07MB and 0FKV; Varieties, Tag 0BED.
-(blueprint: lem-sc-picard-external-cup-cochain).
 -/
 
 @[expose] public section
@@ -29,7 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
 /-- The tensor total complex of the two actual scalar sections models.
-Source: Stacks, Tag 0BED (blueprint: lem-sc-picard-external-cup-cochain). -/
+Source: Stacks, Tag 0BED. -/
 noncomputable def picardExternalTotal
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) : CochainComplex (ModuleCat.{w} k) ℤ :=
@@ -38,8 +37,7 @@ noncomputable def picardExternalTotal
 
 /-- Normalization of a specified cochain map on tensor cycles. This imposes only the
 external cup formula, not injectivity or surjectivity on homology.
-Source: Stacks, Tags 01FD, 07MB and 0FKV; equation 33.29.1.1 of Tag 0BED
-(blueprint: lem-sc-picard-external-cup-cochain). -/
+Source: Stacks, Tags 01FD, 07MB and 0FKV; equation 33.29.1.1 of Tag 0BED. -/
 def IsPicardExternalCupCochain
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules)
@@ -267,8 +265,7 @@ end
 /-- External cup admits a cochain realization between the explicitly constructed models.
 This asserts no geometric Kunneth isomorphism and needs no compactness or affine diagonal.
 Source: Stacks Project, Cohomology, Tags 01FD, 07MB and 0FKV;
-Varieties, Tag 0BED, construction before equation 33.29.1.1
-(blueprint: lem-sc-picard-external-cup-cochain).
+Varieties, Tag 0BED, construction before equation 33.29.1.1.
 
 Proof: Resolve the coefficient sheaves, compute the projection pullbacks on resolution
 representatives, and use the signed tensor pairing of Tag 0FKV followed by the

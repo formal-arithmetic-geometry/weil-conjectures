@@ -7,9 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleChartExchangePasting
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalComponents
 
-/-! # Identifying the recorded diagonal chart transport
-
-Source: blueprint thm-amb-p1-adjunction.proof.md, selected projection chart. -/
+/-! # Identifying the recorded diagonal chart transport -/
 
 @[expose] public noncomputable section
 set_option Elab.async false
@@ -96,9 +94,7 @@ private meta def structuralHEq : Nat → Lean.Expr → Lean.Expr → Lean.MetaM 
       return ← Lean.Meta.mkAppM ``heq_of_eq #[pf]
     return pf
 
-/-- Generic identification of the recorded chart transport with the canonical derived chart map.
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node). -/
+/-- Generic identification of the recorded chart transport with the canonical derived chart map. -/
 theorem ordinaryFiniteChartTransport_eq_derivedChartCoefficientMap
     (A : Type (u + 1)) [CommRing A] {X Y Z : Scheme.{u}}
     (e : X ⟶ Y) (p : Y ⟶ Z) (r : X ⟶ Z) (hr : e ≫ p = r)
@@ -120,10 +116,7 @@ comparison and direct image of the shifted coefficient comparison. Expand the ge
 coefficient map to the same four factors. The recorded ordinary adjunction is the canonical
 derived adjunction by its defining equation, and the recorded ordinary pullback and pushforward
 are the canonical derived functors. Replacing these aliases identifies each factor; composition
-congruence gives the equality. No projective-line trace or triangle identity is used.
-
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node). -/
+congruence gives the equality. No projective-line trace or triangle identity is used. -/
 theorem ordinaryFiniteDiagonalChartMap_eq_generic (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) (a : Bool) :

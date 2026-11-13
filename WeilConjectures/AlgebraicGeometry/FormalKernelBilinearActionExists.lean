@@ -76,7 +76,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Bilinear action maps on formal kernels, before imposing any algebra laws.
 Source: Stacks Project, Lemma 087Z, its associated graded module construction,
 and Section 0EHN; https://stacks.math.columbia.edu/tag/087Z.
-(blueprint: lem-weil-pbc-formal-kernel-bilinear-action-exists).
 
 Proof: The product-section lemma supplies, for each fixed a and x, the unique
 kernel section satisfying all local representative equations. Choose this unique

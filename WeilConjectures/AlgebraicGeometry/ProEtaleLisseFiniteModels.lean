@@ -40,8 +40,7 @@ private noncomputable def comparisonConstantIso (X : Scheme.{u})
 /-- Finite étale local models remain finite pro-étale models after comparison.
 Source: Stacks Project, Tag 099Y, proof of `lemma-compare-locally-constant`.
 The proof transports each finite constant trivialization through comparison pullback,
-its restriction comparison, and the constant-sheaf comparison.
-(auxiliary; not a blueprint node) -/
+its restriction comparison, and the constant-sheaf comparison. -/
 theorem comparison_finite_models_of_etale_finite_values
     (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

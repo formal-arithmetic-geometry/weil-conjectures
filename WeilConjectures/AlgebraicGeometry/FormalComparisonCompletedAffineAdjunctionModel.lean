@@ -57,7 +57,6 @@ of the comparison itself, either globally or on an open.
 
 Source: Stacks Project, Tag 088B, proof, from flat completion base change through
 algebraization of the formal pullback isomorphism; Tags 087W, 087X and 0883.
-(blueprint: lem-weil-pbc-formal-comparison-completed-affine-adjunction-model)
 
 Proof: Restrict the original data to U=Spec B, and form the base change of f along
 Spec R -> Spec B -> Y, where R is the J(U)-adic completion. Completion is flat,

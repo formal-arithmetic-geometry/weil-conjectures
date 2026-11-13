@@ -23,9 +23,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The derived-composition comparison for a module acyclic for open pushforward.
-Source: blueprint lem-pc-cech-resolution, proof paragraphs 2 and 3;
+Source:, proof paragraphs 2 and 3;
 Stacks Project, Derived Categories, Tag 015M.
-(blueprint: lem-pc-open-pushforward-derived-comparison)
 
 Proof: resolve M by an injective resolution I on W. Restriction to W is an exact
 left adjoint of j_*, so j_* preserves injectives. Since M is j_*-acyclic, applying

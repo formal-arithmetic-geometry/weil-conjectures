@@ -41,7 +41,6 @@ local instance : MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).2.1
 /-- Concrete global pullback admits the tensor constraint normalized by its counit.
 Source: Stacks Tags 008A, 008Y and 0FKU.
-(blueprint: lem-sc-global-tensor-pullback-monoidal-normalization)
 Proof: the inverse image and change-of-rings formula identifies P with p* after point
 evaluation. Inverse image preserves the sheaf tensor product, and extension of scalars
 has the tensor constraint multiplying the two O_X coefficients. These constraints are

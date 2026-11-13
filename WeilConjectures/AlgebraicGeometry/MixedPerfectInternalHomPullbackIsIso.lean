@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorMonoidalRealizat
 
 /-! # Perfect internal-Hom pullback with no module localization choice
 Source: Stacks Project, cohomology.tex, Tags 08I3 and 0FPC.
-(blueprint: lem-sc-mixed-perfect-internal-hom-pullback-isIso).
 -/
 
 @[expose] public section
@@ -60,7 +59,6 @@ private noncomputable def mixedTensorHomCore (S : Scheme.{u}) (K : schemeDerived
 /-- The evaluation-mate map on sheaf internal Hom is invertible for perfect M.
 It uses no global sections or scalar extension and assumes no flatness or qcqs.
 Source: Stacks Project, cohomology.tex, Remark 08I3 and Example 0FPC.
-(blueprint: lem-sc-mixed-perfect-internal-hom-pullback-isIso).
 
 Proof: locally resolve M by a bounded complex of finite projective modules. The
 canonical tensor-Hom equivalence computes evaluation on this representative.

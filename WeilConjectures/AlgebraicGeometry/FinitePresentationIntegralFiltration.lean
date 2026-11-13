@@ -17,8 +17,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 /-! # Integral-ideal filtrations in the finite-presentation interface
 
 Source: Stacks Project, Tag 01YF.
-(blueprint: lem-pc-e2-finite-presentation-integral-filtration)
- -/
+-/
 
 @[expose] public section
 
@@ -32,7 +31,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 quotients are pushforwards of ideals on integral closed subschemes.
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 30.12.3, Tag 01YF.
-(blueprint: lem-pc-e2-finite-presentation-integral-filtration)
 
 Proof: Use Noetherian induction on closed subsets of X, with induction assertion that
 all finitely presented modules whose support closure is contained in the given closed

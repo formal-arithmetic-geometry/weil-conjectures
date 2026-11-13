@@ -17,7 +17,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 /-! # Homology of a localized closed-pushforward stalk complex
 
 Source: Stacks Project, Sheaves, Tag 00AE, and Modules, Tag 01AG.
-(blueprint: lem-sc-open-module-stalk-closed-pushforward-homology).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ set_option backward.isDefEq.respectTransparency false in
 stalk homology. No boundedness or projectivity of its terms is assumed or asserted.
 Source: Stacks Project, Sheaves, Tag 00AE, and Modules, Tag 01AG;
 steps 3 and 4 of lem-sc-strict-perfect-closed-pushforward-stalk-model.
-(blueprint: lem-sc-open-module-stalk-closed-pushforward-homology).
 
 Proof: the equivalence of the slice site with the open-subspace site is exact.
 Module stalks commute with kernels and cokernels by Tag 01AG, and restriction

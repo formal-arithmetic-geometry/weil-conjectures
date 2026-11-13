@@ -24,7 +24,6 @@ namespace AlgebraicGeometry
 /-- A proper finitely presented scheme over a Noetherian approximation descends to
 one proper stage, with its pullback square retained.
 Source: Stacks Project, Limits, Tags 01ZM and 081F, as used in Tag 0A0P.
-(blueprint: lem-weil-pbc-proper-noetherian-stage)
 Proof: reindex N by a nonempty directed set using Tag 0032. Apply
 finite-presentation descent to its limiting cone. This gives a finitely presented
 stage morphism p and a cartesian square with g.

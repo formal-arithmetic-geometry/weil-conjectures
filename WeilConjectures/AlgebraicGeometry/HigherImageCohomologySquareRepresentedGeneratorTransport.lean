@@ -12,8 +12,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 /-- Composing the hom of an isomorphism built by `Coyoneda.ext` with a morphism out of
 its target is computed by the given inverse correspondence `q`.
-Source: Stacks Project, Tag 001P (Yoneda lemma).
-(blueprint: lem-sf-higher-image-cohomology-square-represented-generator-transport). -/
+Source: Stacks Project, Tag 001P (Yoneda lemma). -/
 theorem CategoryTheory.Coyoneda.ext_hom_comp {C : Type*} [Category C] (X Y : C)
     (p : ∀ {Z : C}, (X ⟶ Z) → (Y ⟶ Z))
     (q : ∀ {Z : C}, (Y ⟶ Z) → (X ⟶ Z))
@@ -26,8 +25,7 @@ theorem CategoryTheory.Coyoneda.ext_hom_comp {C : Type*} [Category C] (X Y : C)
 namespace AlgebraicGeometry.Etale
 /-- Naturality of the free-representable generator across inverse image.
 This is the represented-generator step in the derived-mate calculation.
-Source: Stacks Project, Tags 03CB and 03Q8.
-(blueprint: lem-sf-higher-image-cohomology-square-represented-generator-transport). -/
+Source: Stacks Project, Tags 03CB and 03Q8. -/
 theorem higherImageCohomologySquare_represented_generator_transport
     {S T : Scheme.{u}} (a : T ⟶ S) (U : S.Etale)
     (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})

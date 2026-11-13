@@ -52,12 +52,11 @@ theorem cohomologyRefinement_eq_finite (F : Sheaf X.smallEtaleTopology A)
 variable [IsGrothendieckAbelian.{u + 1} A]
 
 /-- The colimit injection respects a map defined only through degree q+1.
-Source: the finite-cochain argument of blueprint étale cohomology continuity.
+
 Extend the finite map to full refinements from one common hypercover, retaining
 its source skeleton. Functoriality on the three cochain terms expresses the second
 refinement map as the composite of the finite map and the first refinement map.
-Apply homology and the two refinement equations for colimit injections.
-(auxiliary; not a blueprint node) -/
+Apply homology and the two refinement equations for colimit injections. -/
 theorem finiteRefinement_homology_comp_ι (F : Sheaf X.smallEtaleTopology A)
     (U V : FiniteSplitEtaleHypercover X) (q : ℕ)
     (t : (SimplicialObject.truncation (q + 1)).obj U.simplicial ⟶

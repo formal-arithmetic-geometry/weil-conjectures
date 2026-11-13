@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 /-! # Eventual exactness of shifted kernel quotient transitions
 
 Source: Stacks Project, Lemma 087X, proof of claims (a)--(c).
-(blueprint: lem-weil-pbc-formal-kernel-quotient-transition-exact-bound).
 -/
 
 @[expose] public section
@@ -111,10 +110,9 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The kernel of each sufficiently shifted quotient transition is its ideal product.
 
 Source: Stacks Project, Lemma 087X, proof of claims (a)--(c).
-(blueprint: lem-weil-pbc-formal-kernel-quotient-transition-exact-bound).
 
 Proof: Restrict to a finite affine cover. The affine formal-module equivalence represents
-alpha by a map f : M to N over the Noetherian completed ring. Put L = ker f.
+alpha by a map f: M to N over the Noetherian completed ring. Put L = ker f.
 Artin--Rees for im f in N gives a constant a such that
 f inverse(I^t N) = L + I^(t-a) f inverse(I^a N) for t >= a.
 For l >= m+a, its image modulo I^(m+1) M is therefore the image of L.

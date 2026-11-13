@@ -16,7 +16,6 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
 SGA 4, Exposé IX, 5.1.
-(blueprint: lem-weil-pbc-finite-etale-trace-pullback-sum)
 -/
 
 @[expose] public section
@@ -50,7 +49,6 @@ private theorem cofan_index_eq {Z : Scheme.{u}} {J : Type u} (V : J → Scheme.{
 /-- A trace characterized by local sums satisfies the split formula for a splitting
 of the original finite cover, by pulling that splitting back to each site object.
 Source: Stacks Project, Section 03SH, after Definition 03SE, split case.
-(blueprint: lem-weil-pbc-finite-etale-trace-pullback-sum)
 
 Proof. Fix `W`. Pull every piece `V_j → Y` back along `W ×_X Y → Y`. Its new inclusion
 is open and closed by base change. The pullback pieces cover and are disjoint, since

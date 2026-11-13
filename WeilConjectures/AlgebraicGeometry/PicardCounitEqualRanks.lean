@@ -72,7 +72,6 @@ private theorem isIso_of_splitMono_of_fixed_rank
 agree on neighbourhoods in the base. Neither cup product nor an adjunction is needed.
 
 Source: Stacks Project, Tag 0BDP, final paragraph, equal-size dual-basis matrices.
-(blueprint: lem-sc-picard-split-mono-equal-ranks)
 
 Proof: For each base point w choose U and r from hRanks. The canonical map
 X_U to X_W is the base change of the open immersion U to W. Pullback composition

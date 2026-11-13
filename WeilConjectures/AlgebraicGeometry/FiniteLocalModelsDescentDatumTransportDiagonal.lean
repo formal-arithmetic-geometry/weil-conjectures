@@ -13,7 +13,6 @@ namespace AlgebraicGeometry.Scheme
 /-- The identity law for compatible transport.
 
 Source: Stacks Project, Tags 03RV and 02W5.
-(blueprint: lem-weil-pbc-finite-local-model-compatible-transport-diagonal)
 Proof: The universal Q-point on Q,
 compatibility, and naturality identify transport along equal lifts with the
 identity; pulling back the universal equality along an arbitrary scheme point

@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 /-! # Normalizing the restricted tensor unit through a chart
 
 Source: Stacks Project, Sheaves, Tags 0096 and 0097.
-(blueprint: lem-pc-restriction-chart-unit-normalization)
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ set_option maxHeartbeats 800000 in
 -- The statement elaborates nested pullback and pushforward comparisons.
 /-- The unit square pins the double transpose to the canonical pullback comparison.
 Source: Stacks Project, Sheaves, Tags 0096 and 0097, adjunction and composition.
-(blueprint: lem-pc-restriction-chart-unit-normalization)
 
 Proof: Let adj1 be the composite of restriction along a, pullback along t and
 pullback along sigma; let adj2 be tensor pullback along p followed by restriction

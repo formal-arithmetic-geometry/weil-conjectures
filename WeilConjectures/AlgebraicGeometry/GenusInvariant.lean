@@ -19,9 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Regular
 
 /-!
 # Genus and Jacobians under algebraically closed extension
-
-Source: blueprint, `sec-curve-estimates/sbc-thm-algebraically-closed-invariance`, order 1030
-(blueprint: lem-sc-genus-invariant).
 -/
 
 @[expose] public section
@@ -68,8 +65,7 @@ private theorem exists_jacobian_of_connected
     rw [Iso.symm_symm_eq, Equiv.symm_apply_apply]
     exact he
 
-/-- Source: blueprint, `sec-curve-estimates/sbc-thm-algebraically-closed-invariance`, order 1030
-(blueprint: lem-sc-genus-invariant).
+/--
 
 The genus is unchanged, and any two Jacobian identifications are carried to one another
 by an isomorphism over the extended field. Compatibility is tested on degree-zero line

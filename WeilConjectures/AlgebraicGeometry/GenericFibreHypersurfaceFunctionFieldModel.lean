@@ -93,9 +93,7 @@ unchanged. Polynomial algebras in finitely many variables and their principal
 quotients are finitely presented, hence their generic structure maps are locally
 of finite type. The two generic section rings are domains and their fraction rings
 are K-isomorphic, giving the stated isomorphism and compatibility. For a purely
-transcendental L, use the additional variable with equation T, including L = K.
-
-(blueprint: lem-sbc-generic-fibre-hypersurface-function-field-model) -/
+transcendental L, use the additional variable with equation T, including L = K. -/
 theorem exists_generic_fibre_hypersurface_function_field_model
     {X S : Scheme.{u}} [IsAffine X] [IsAffine S] [IsIntegral S]
     (f : X ⟶ S) [LocallyOfFinitePresentation f]

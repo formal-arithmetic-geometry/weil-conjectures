@@ -56,7 +56,6 @@ private theorem localFree_of_comap {X : Scheme.{u}}
 /-- A map of finite free integral modules whose rational cokernel is locally free
 has locally free integral kernel.
 Source: Bhatt--Scholze, Section 6.8; the continuous matrix pivot construction.
-(auxiliary; not a blueprint node)
 Proof. Induct on the source rank using integralMatrix_pivot_cover. On a zero-matrix
 piece the kernel is the source. On a nonzero piece, the monic pivot identifies the
 kernel with the kernel of the smaller Schur complement. After rationalization the
@@ -128,8 +127,7 @@ theorem integralMatrixKernel_locallyFree (ℓ : ℕ) [Fact ℓ.Prime]
   exact H n X A B a hn hB hLF
 
 /-- The kernel is locally free when the rationalized matrix is surjective.
-Source: the preceding pivot induction, with zero rational cokernel.
-(auxiliary; not a blueprint node) -/
+Source: the preceding pivot induction, with zero rational cokernel. -/
 theorem integralMatrixKernel_locallyFree_of_rational_epi
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u}) (n m : ℕ)

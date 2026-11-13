@@ -16,8 +16,7 @@ import Mathlib.AlgebraicGeometry.Limits
 /-!
 # Finite étale morphisms split étale locally
 
-Source: Stacks Project, Etale Morphisms, Lemma 04HN (lemma-finite-etale-etale-local)
-(blueprint: lem-weil-pbc-finite-etale-etale-local-split)
+Source: Stacks Project, Etale Morphisms, Lemma 04HN
 -/
 
 @[expose] public section
@@ -156,22 +155,20 @@ private theorem split_clopen_baseChange {Z U : Scheme.{u}} (p : Z ⟶ U)
   rw [hs]
   exact htw
 
-/-- A finite étale morphism `f : Y ⟶ X` is, around every point `x` of its target, a finite
-disjoint union of copies of an étale neighbourhood: there are an étale `g : U ⟶ X`, a point
-`u` over `x`, a finite `J` and open-and-closed pieces `ι j : V j ⟶ Y ×_X U` exhibiting
+/-- A finite étale morphism `f: Y ⟶ X` is, around every point `x` of its target, a finite
+disjoint union of copies of an étale neighbourhood: there are an étale `g: U ⟶ X`, a point
+`u` over `x`, a finite `J` and open-and-closed pieces `ι j: V j ⟶ Y ×_X U` exhibiting
 `Y ×_X U` as their coproduct (`IsColimit (Cofan.mk _ ι)`, the split-cover spelling of
 lem-weil-pbc-direct-image-split-cover-product; the pieces are then pairwise disjoint and
-cover), each mapping isomorphically to `U` under `pullback.snd`. Stacks Lemma 04HN
-(blueprint: lem-weil-pbc-finite-etale-etale-local-split).
+cover), each mapping isomorphically to `U` under `pullback.snd`. Stacks Lemma 04HN.
 
 Proof (the five steps of the node):
 1. An étale morphism is unramified; apply lem-weil-pbc-finite-unramified-etale-local
-   (Stacks 04HJ) to `f` and `x`: an étale `g : U → X`, `u ↦ x`, a finite `J₀` and pairwise
-   disjoint open and closed `V_j ⊆ Y_U` covering `Y_U` with each `p_j : V_j → U` a closed
+   (Stacks 04HJ) to `f` and `x`: an étale `g: U → X`, `u ↦ x`, a finite `J₀` and pairwise
+   disjoint open and closed `V_j ⊆ Y_U` covering `Y_U` with each `p_j: V_j → U` a closed
    immersion.
-2. `pr₂ : Y_U → U` is étale (base change), the inclusion of `V_j` is an open immersion, so
-   `p_j` is an étale closed immersion, hence an open immersion
-   (lem-weil-pbc-etale-closed-immersion-open) onto an open and closed `T_j ⊆ U`.
+2. `pr₂: Y_U → U` is étale (base change), the inclusion of `V_j` is an open immersion, so
+   `p_j` is an étale closed immersion, hence an open immersion onto an open and closed `T_j ⊆ U`.
 3. Shrink: `J = {j | u ∈ T_j}`, `U' = ⋂_{j ∈ J} T_j \ ⋃_{j ∉ J} T_j`, open with `u ∈ U'`;
    `g' = g ∘ ι` is étale with `g'(u) = x`.
 4. Restrict the coproduct to the iterated pullback over `U'`, using pullback ranges

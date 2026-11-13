@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.RingedGeneratingListsLocalEquality
 # Strict descent data for sheafified functorial ring complexes
 
 Source: Stacks Project, algebraization.tex, Tag 099E, independence of generating ideals.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +29,7 @@ open CategoryTheory Opposite AlgebraicGeometry
 namespace CategoryTheory
 
 /-- The explicit augmented model on a slice with a specified generating list.
-Source: Stacks Project, Tag 099E, K_{U,I}.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 099E, K_{U,I}. -/
 abbrev ringFamilySliceModel
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})
@@ -46,7 +44,6 @@ abbrev ringFamilySliceModel
 /-- The sheafified ring-family slice complexes carry strict descent data, including their
 augmentations. This assertion involves no Čech complex or derived comparison.
 Source: Stacks Project, Tag 099E, second and third paragraphs.
-(auxiliary; not a blueprint node).
 
 Proof: for two finite generating ideals on slices, their extensions to a common test object
 both generate the same ideal subsheaf. Locally each of the finitely many generators of one

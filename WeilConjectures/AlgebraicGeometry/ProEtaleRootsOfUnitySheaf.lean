@@ -13,8 +13,7 @@ import Mathlib.Algebra.Category.Grp.EpiMono
 
 /-! # Roots of unity on the small pro-etale site
 
-Source: Stacks Project, Section 59.28, Tag 03PK; Definition 59.23.1, Tag 03P4
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Section 59.28, Tag 03PK; Definition 59.23.1, Tag 03P4.
 
 The power map, kernel, constant-ring module and transition maps use the original
 sectionwise global-sections rings. No invertibility hypothesis on the exponent is imposed.
@@ -29,26 +28,26 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The `N`-th power morphism on `G_m`, written additively as `N • 𝟙`.
-Source: Stacks Project, Tag 03PK (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 03PK. -/
 def proEtaleUnitsPower (S : Scheme.{u}) (N : ℕ) :
     proEtaleUnitsSheaf S ⟶ proEtaleUnitsSheaf S :=
   N • 𝟙 (proEtaleUnitsSheaf S)
 
 /-- The sheaf of `N`-th roots of unity, the kernel of the power map on `O_Sˣ`.
-Source: Stacks Project, Tags 03PK and 03P4 (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 03PK and 03P4. -/
 noncomputable def proEtaleRootsOfUnitySheaf (S : Scheme.{u}) (N : ℕ) :
     Sheaf (ProEt.topology S) AddCommGrpCat.{u + 1} :=
   kernel (proEtaleUnitsPower S N)
 
 /-- The canonical inclusion of roots of unity into units.
-Source: Stacks Project, Tags 03PK and 03P4 (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 03PK and 03P4. -/
 noncomputable def proEtaleRootsOfUnityInclusion (S : Scheme.{u}) (N : ℕ) :
     proEtaleRootsOfUnitySheaf S N ⟶ proEtaleUnitsSheaf S :=
   kernel.ι (proEtaleUnitsPower S N)
 
 /-- The canonical sectionwise identification of the kernel with the roots-of-unity group
 is uniquely determined by its compatibility with the inclusion into units.
-Source: Stacks Project, Tags 03PK and 03P4 (auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 03PK and 03P4.
 Proof: the inclusion of abelian sheaves into presheaves creates kernels and evaluation
 preserves them. Thus its sectionwise kernel is the subgroup of units whose `N`-th power
 is one, precisely Mathlib's `rootsOfUnity`. The inclusion determines the identification
@@ -94,7 +93,7 @@ theorem existsUnique_proEtaleRootsOfUnitySections (S : Scheme.{u}) (N : ℕ) (U 
   exact congrArg (fun y ↦ y.down.toMul) ((he'' x).trans (he x).symm)
 
 /-- Sections of the roots-of-unity sheaf, identified by the canonical kernel inclusion.
-Source: Stacks Project, Tags 03PK and 03P4 (auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 03PK and 03P4.
 The selected equivalence is uniquely characterized, rather than an arbitrary isomorphism. -/
 noncomputable def proEtaleRootsOfUnitySections (S : Scheme.{u}) (N : ℕ) (U : S.ProEtᵒᵖ) :
     (proEtaleRootsOfUnitySheaf S N).obj.obj U ≃+
@@ -102,7 +101,7 @@ noncomputable def proEtaleRootsOfUnitySections (S : Scheme.{u}) (N : ℕ) (U : S
   (existsUnique_proEtaleRootsOfUnitySections S N U).exists.choose
 
 /-- Every group of sections is killed by `N`.
-Source: Stacks Project, Tag 03PK (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 03PK.
 Proof: use the sectionwise kernel description: a section is a unit `x` with `x^N = 1`.
 In additive notation this equality is `N • x = 0`. Injectivity of the kernel inclusion
 then proves the same equality in the roots-of-unity sheaf. -/
@@ -120,20 +119,20 @@ theorem proEtaleRootsOfUnity_nsmul (S : Scheme.{u}) (N : ℕ)
   simpa only [map_nsmul, map_zero] using hx
 
 /-- The constant coefficient ring in the ambient universe of pro-etale abelian sheaves.
-Source: Stacks Project, Tags 03PK and 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 03PK and 03CY. -/
 noncomputable abbrev proEtaleRootsOfUnityCoefficientRing (S : Scheme.{u}) (N : ℕ) :
     Sheaf (ProEt.topology S) RingCat.{u + 1} :=
   constantZModRingSheaf (ProEt.topology S) N
 
 /-- The canonical module sheaf over the constant ring sheaf `Z/N` for positive `N`.
-Source: Stacks Project, Tags 03PK and 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 03PK and 03CY. -/
 noncomputable def proEtaleRootsOfUnityModule (S : Scheme.{u}) (N : ℕ) (hN : 0 < N) :
     ringedSiteModules.{u + 1} (proEtaleRootsOfUnityCoefficientRing S N) :=
   torsionSheafModule.{u + 1} (ProEt.topology S) N hN (proEtaleRootsOfUnitySheaf S N)
     (proEtaleRootsOfUnity_nsmul S N)
 
 /-- Taking the `(N'/N)`-th power of an `N'`-th root lands in the kernel of `[N]`.
-Source: Stacks Project, Tag 03PK (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 03PK.
 Proof: from `N ∣ N'` and positive `N`, obtain `(N'/N)*N = N'`. Compose the two
 power maps and use the kernel equation for `[N']`; sectionwise this is
 `(x^(N'/N))^N = x^N' = 1`. -/
@@ -149,7 +148,7 @@ theorem proEtaleRootsOfUnityTransition_condition (S : Scheme.{u}) (N N' : ℕ)
   exact kernel.condition (proEtaleUnitsPower S N')
 
 /-- The transition morphism, induced by `x ↦ x^(N'/N)` on units via the kernel property.
-Source: Stacks Project, Tag 03PK (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 03PK. -/
 noncomputable def proEtaleRootsOfUnityTransition (S : Scheme.{u}) (N N' : ℕ)
     (hN : 0 < N) (hN' : 0 < N') (h : N ∣ N') :
     proEtaleRootsOfUnitySheaf S N' ⟶ proEtaleRootsOfUnitySheaf S N :=

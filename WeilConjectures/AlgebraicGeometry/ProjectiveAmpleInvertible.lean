@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.NonvanishingTensorPullback
 # An ample invertible module from a projective closed immersion
 
 Source: Stacks Project, Properties, Definition 01PS and Lemma 01PU; Constructions,
-Definition 01MN and Lemma 01NG (blueprint: lem-weil-pbc-projective-ample-invertible).
+Definition 01MN and Lemma 01NG.
 -/
 
 @[expose] public section
@@ -63,7 +63,7 @@ The coordinates are `ULift (Fin (n+1))`, `P^n_ℤ` is `Proj` of the polynomial r
 `T_k` is `Proj.unitToTwist (isHomogeneous_X _ k)` applied to `1`, and sections are pulled back
 by the unit of the chosen tensor-pullback adjunction.
 Source: Stacks Project, Properties, Definition 01PS and Lemma 01PU; Constructions,
-Definition 01MN and Lemma 01NG (blueprint: lem-weil-pbc-projective-ample-invertible).
+Definition 01MN and Lemma 01NG.
 
 Proof:
 1. The source instance proves the Proj twist invertible. Uniqueness of left adjoints

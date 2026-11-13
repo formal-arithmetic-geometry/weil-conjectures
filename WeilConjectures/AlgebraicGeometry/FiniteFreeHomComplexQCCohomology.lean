@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 /-! # Quasi-coherent cohomology of Hom from a finite free complex
 
 Source: Stacks Project, Tags 0A6H (2) and 08I5, finite-column Hom calculation.
-(blueprint: lem-sc-finite-free-hom-complex-qc-cohomology)
 -/
 
 @[expose] public section
@@ -43,13 +42,12 @@ biproducts of the target complex. Finite free internal Hom is a finite biproduct
 cohomology is a finite biproduct of the target's cohomology and is quasi-coherent. Induct
 along the finite filtration. For each short exact sequence of Hom complexes A → B → C,
 the long exact sequence gives 0 → coker δ^(n-1) → H^n(B) → ker δ^n → 0, where
-δ^(n-1) : H^(n-1)(C) → H^n(A) and δ^n : H^n(C) → H^(n+1)(A) are the connecting
+δ^(n-1): H^(n-1)(C) → H^n(A) and δ^n: H^n(C) → H^(n+1)(A) are the connecting
 maps. Kernels, cokernels, and extensions of quasi-coherent sheaves on a scheme are
 quasi-coherent, so H^n(B) is quasi-coherent.
 For the localized site of U, transport these facts through the exact equivalence with
 module sheaves on U.toScheme. Transport back to obtain the stated property. Empty support
-and rank zero give zero complexes and zero cohomology; no boundedness of the target is used.
-(blueprint: lem-sc-finite-free-hom-complex-qc-cohomology). -/
+and rank zero give zero complexes and zero cohomology; no boundedness of the target is used. -/
 theorem finiteFree_homComplex_qc_cohomology
     (X : Scheme.{u}) (U : X.Opens)
     (E I : CochainComplex

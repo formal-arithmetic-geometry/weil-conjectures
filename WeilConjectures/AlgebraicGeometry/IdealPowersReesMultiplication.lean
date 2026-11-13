@@ -27,7 +27,6 @@ namespace AlgebraicGeometry
 
 /-- Multiplication by a homogeneous Rees coefficient lifts to the ideal-power products.
 Source: Stacks Project, coherent.tex, Tag 02O8, lines 5330--5400.
-(blueprint: lem-weil-pbc-ideal-powers-rees-multiplication).
 
 Proof: Write a homogeneous polynomial b as a t^k with a in I^k. The inclusion
 J^m F into F is a monomorphism. Locally every section of J^m F is a finite sum

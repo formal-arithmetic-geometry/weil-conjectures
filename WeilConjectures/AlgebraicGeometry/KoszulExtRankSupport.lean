@@ -63,7 +63,6 @@ private theorem isIso_rankSupport_unit {X : Scheme.{u}} (U : X.Opens)
 /-- Scalar Ext pulled back to the closed subscheme is supported on its matching rank stratum.
 
 Source: Stacks Project, Tag 0BQZ, proof of lemma-regular-immersion-ext.
-(blueprint: lem-sc-koszul-ext-rank-support).
 
 Proof: The off-rank stalk vanishing theorem makes the pulled-back degree-q
 cohomology stalk zero outside the rank-q stratum. Nonnegativity of q identifies

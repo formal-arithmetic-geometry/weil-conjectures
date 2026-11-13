@@ -18,8 +18,8 @@ import WeilConjectures.AlgebraicGeometry.SectionRestrictionSTorsion
 
 /-! # Localization of sections at a section of an invertible module
 
-Source: Stacks Project, Properties, Lemma 01PW (lemma-invert-s-sections), part (2),
-equation module-invert-s (blueprint: lem-sc-p1-invertible-section-localization).
+Source: Stacks Project, Properties, Lemma 01PW, part (2),
+equation module-invert-s.
 -/
 
 @[expose] public section
@@ -86,8 +86,7 @@ private theorem fraction_normal_form {X : Scheme.{uL}} (L F : X.Modules)
 open. The fraction formula is written without choosing an inverse tensor power:
 `e(t/s^n) ⊗ s^n = t|_U`. Scalar compatibility specifies an isomorphism of modules,
 with scalars restricted along `Γ(X, O_X) → Γ(U, O_X)`.
-Source: Stacks Project, Properties, Lemma 01PW (lemma-invert-s-sections), part (2).
-(blueprint: lem-sc-p1-invertible-section-localization).
+Source: Stacks Project, Properties, Lemma 01PW, part (2).
 
 Step 1: if a fraction restricts to zero, its numerator restricts to zero because `s`
 trivializes `L` on this open. Apply lem-sc-p1-section-restriction-s-torsion to obtain a

@@ -25,8 +25,7 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits
 
 /-- The presheaf of homotopy classes from free representables to the integer extension
-of a nonnegative complex of abelian sheaves. It is constructed by preadditive Yoneda. 
-(blueprint: lem-weil-pbc-free-representable-homotopy-homology)
+of a nonnegative complex of abelian sheaves. It is constructed by preadditive Yoneda.
 -/
 def freeRepresentableHomotopyPresheaf
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
@@ -110,7 +109,6 @@ private def freeSectionsFunctorIso
 nonnegative complex of abelian sheaves; injectivity and Ext are not involved.
 Source: Stacks Project, Section 01FT and Tag 03F3 (Hom-sections identification);
 Derived Categories, Tag 06XR (homotopy classes from a single object).
-(blueprint: lem-weil-pbc-free-representable-homotopy-homology)
 
 Proof: Sheafification adjunction, the free abelian adjunction, and Yoneda identify
 maps from the free abelian sheaf on U to G with G(U), additively and naturally in

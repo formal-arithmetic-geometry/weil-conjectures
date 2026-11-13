@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainData
 /-! # The explicit restriction-localization chain
 
 Source: Stacks Project, Tags 08FE and 08BV.
-(blueprint: def-pc-mayer-vietoris-restriction-localization-chain).
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ restriction/direct-image comparison, then the direct-image unit on the restricte
 complex, then the derived restricted direct image of the inverse X-restriction factor.
 All four maps are the existing explicit constructions; no existence witness is chosen.
 Irreducibility keeps their construction out of downstream categorical conversions;
-its unit compatibility is stated in MayerVietorisImageRestrictionLocalization.
-(blueprint: def-pc-mayer-vietoris-restriction-localization-chain). -/
+its unit compatibility is stated in MayerVietorisImageRestrictionLocalization. -/
 @[irreducible]
 def schemeMVRestrictionLocalizationChain
     (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)

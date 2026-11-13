@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationOverTensorFormula
 /-! # Compatible ordinary evaluation comparisons on the open scheme
 
 Source: Stacks Project, Tags 08DL, 08DJ and 08DQ, ordinary complex constructions.
-(blueprint: lem-pc-ordinary-evaluation-over-comparisons).
 No acyclicity, quasi-isomorphism or K-injectivity assertion is included here. -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ set_option backward.isDefEq.respectTransparency true in
 -- Compare the chosen Hom bifunctors without unfolding their existence proofs.
 /-- Compatible comparisons for ordinary Hom, its dual and ordinary evaluation.
 Source: Stacks Project, Tags 08DL, 08DJ and 08DQ; Mathlib `Modules.overEquiv`.
-(blueprint: lem-pc-ordinary-evaluation-over-comparisons).
 
 Proof: choose the natural termwise internal-Hom comparison together with its
 evaluation compatibility. Take the

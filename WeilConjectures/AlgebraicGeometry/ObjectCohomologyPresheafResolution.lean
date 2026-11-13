@@ -16,7 +16,6 @@ import Mathlib.CategoryTheory.Abelian.Injective.Ext
 /-! # Object cohomology as homology of the presheaf resolution
 
 Source: Stacks Project, Cohomology on Sites, Section 01FT and Tag 03F3.
-(blueprint: lem-weil-pbc-object-cohomology-presheaf-resolution)
 -/
 
 @[expose] public section
@@ -55,7 +54,6 @@ private theorem resolutionHomotopyEquiv_naturality
 /-- Object cohomology is naturally the objectwise homology of any injective resolution.
 Source: Stacks Project, Section 01FT, definition of cohomology over an object;
 Tag 03F3, proof. The Ext formulation uses the free abelian representable adjunction.
-(blueprint: lem-weil-pbc-object-cohomology-presheaf-resolution)
 
 Proof: For U in C, let A(U) be the sheafification of the free abelian presheaf
 on yoneda(U). Sheafification, the free abelian adjunction and Yoneda give the

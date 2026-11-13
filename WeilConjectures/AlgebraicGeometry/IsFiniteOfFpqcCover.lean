@@ -14,8 +14,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 /-!
 # Finiteness descends along fpqc covering families
 
-Source: Stacks Project, Descent, Lemma Tag 02LA, descent direction of Definition Tag 02KO
-(blueprint: lem-weil-pbc-fpqc-descend-finite).
+Source: Stacks Project, Descent, Lemma Tag 02LA, descent direction of Definition Tag 02KO.
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Finiteness descends along an fpqc covering family.
-Source: Stacks Project, Descent, Lemma Tag 02LA and Definition Tag 02KO
-(blueprint: lem-weil-pbc-fpqc-descend-finite).
+Source: Stacks Project, Descent, Lemma Tag 02LA and Definition Tag 02KO.
 
 Proof:
 1. Use the source library's proved descent of finiteness along surjective flat

@@ -20,7 +20,6 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 # Fibrewise comparison for the evaluated free Čech complex
 
 Source: Stacks Project, Tags 03AT and 03F5.
-(blueprint: lem-weil-pbc-free-cech-complex-fibre-comparison)
 -/
 
 @[expose] public section
@@ -36,13 +35,12 @@ in each tuple complex over a fixed map to the base. This comparison does not ass
 any of the tuple complexes is exact.
 Source: Stacks Project, sites-cohomology.tex, proof of Tag 03AT up to the direct-sum
 of tuple complexes, and the first proof of Tag 03F5 with `O(W)` coefficients.
-(blueprint: lem-weil-pbc-free-cech-complex-fibre-comparison)
 
 Proof: In degree `n`, evaluation identifies the coproduct of free representable modules
 with the free `O(W)`-module on pairs consisting of a tuple of indices and a map from `W`
 to their fibre product over `U₀`. By the universal property of that fibre product, such a
-pair is uniquely a map `φ : W ⟶ U₀` together with an `(n+1)`-tuple in
-`Sφ = Σ i, {g : W ⟶ U i // g ≫ f i = φ}`. The inverse takes a tuple of compatible lifts
+pair is uniquely a map `φ: W ⟶ U₀` together with an `(n+1)`-tuple in
+`Sφ = Σ i, {g: W ⟶ U i // g ≫ f i = φ}`. The inverse takes a tuple of compatible lifts
 to the unique map to the fibre product. Extend these inverse bijections linearly. They
 identify the evaluated degree with the direct sum over `φ` of `O(W)[Sφ^(n+1)]`.
 Every projection deletes precisely the corresponding lift and preserves `φ`, so the

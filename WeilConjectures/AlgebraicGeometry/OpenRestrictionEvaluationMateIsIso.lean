@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.OpenExtensionProjectionFormula
 
 /-! # Invertibility of the mixed-universe open-restriction evaluation mate
 Source: Stacks Project, Tags 08DJ, 08DL and 08BS.
-(blueprint: lem-pc-open-restriction-evaluation-mate-is-iso).
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 /-- Use the standard localization on the open scheme.
-Source: Stacks Project, Tag 05RU.
-(blueprint: lem-pc-open-restriction-evaluation-mate-is-iso). -/
+Source: Stacks Project, Tag 05RU. -/
 local instance openRestrictionMateStandardDerived (X : Scheme.{u}) (U : X.Opens) :
     HasDerivedCategory.{u + 1}
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
@@ -108,7 +106,6 @@ structure on the exact restriction functor, with independently specified localiz
 
 Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DL;
 Tag 08BS and modules.tex, Tag 01AK, for exact extension by zero.
-(blueprint: lem-pc-open-restriction-evaluation-mate-is-iso).
 
 Proof: let J be exact derived extension by zero, transported from the over-site
 along its equivalence with modules on U.toScheme. Localization of the ordinary

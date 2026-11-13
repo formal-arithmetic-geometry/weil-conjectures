@@ -20,10 +20,10 @@ open CategoryTheory Opposite LocalizedModule
 namespace AlgebraicGeometry.Proj
 /-- Canonical evaluation on a further localization.
 Source: Stacks Project, Section 27.8, localization maps preceding Tag 01M7;
-Mathlib `LocalizedModule.lift`. (blueprint: new-canonical-eval)
+Mathlib `LocalizedModule.lift`.
 
 Proof: give the prime localization T its B-module structure through the composite
-B → A_f → T. The canonical ring map F : A_f → T is B-linear. Every power of g
+B → A_f → T. The canonical ring map F: A_f → T is B-linear. Every power of g
 maps to a unit of T by the hypothesis; its multiplication endomorphism is therefore
 also a unit. Apply `LocalizedModule.lift` to this linear map. `lift_comp` gives the
 identity on z/1, and linearity of the lift gives the scalar identity. No choice of

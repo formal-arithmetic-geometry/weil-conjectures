@@ -17,7 +17,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 /-! # Derived comparison for the specified finite affine Čech model
 
 Source: Stacks Project, Tags 01XB, 01XD and 01FK.
-(blueprint: lem-pc-finite-affine-cech-model-derived-comparison).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The specified section complex computes derived direct image over an affine base.
 Neither properness, finite presentation nor relative flatness is required.
 Source: Stacks Project, Tags 01XB, 01XD and 01FK.
-(blueprint: lem-pc-finite-affine-cech-model-derived-comparison).
 
 Proof: separatedness over the affine base makes every nonempty finite intersection
 of members of V affine. Form the augmented alternating sheaf Čech resolution with

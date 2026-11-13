@@ -23,7 +23,6 @@ namespace AlgebraicGeometry
 
 /-- Restriction of ordinary internal Hom is natural in the second complex.
 Source: Stacks Project, Cohomology, Tag 08DL, the ordinary Hom computation in its proof.
-(blueprint: lem-sc-hom-complex-restrict-scheme-natural).
 
 Proof: Restrict local module maps to the over-U site and transport them through
 `Scheme.Modules.overEquiv U`. For each source degree and target degree, the sheaf

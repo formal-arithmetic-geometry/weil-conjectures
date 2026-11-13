@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 /-! # A finitely presented replacement on one affine open
 
 Source: Stacks Project, Properties, Lemma 01PI, affine construction.
-(blueprint: lem-weil-pbc-module-finite-presentation-affine-replacement).
 -/
 
 @[expose] public section
@@ -176,7 +175,6 @@ with a map which is an isomorphism on the overlap with the previous open.
 
 Source: Stacks Project, Properties, Lemma 01PI, affine construction
 (https://stacks.math.columbia.edu/tag/01PI).
-(blueprint: lem-weil-pbc-module-finite-presentation-affine-replacement).
 
 Proof: The intersection K = W intersect V is compact by quasi-separatedness.
 Restrict the finite presentation on W to K. The finite affine generators lemma

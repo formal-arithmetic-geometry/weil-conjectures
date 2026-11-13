@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunc
 /-! # Derived localization universes on open subschemes
 
 Source: Stacks Project, Tag 08FE; Mathlib, Localization/LocallySmall.
-(blueprint: lem-pc-open-derived-category-small).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry.Scheme
 /-- An open subscheme admits a derived category in the same Hom universe as the ambient scheme.
 Source: Stacks Project, Tag 08FE, derived restriction and direct image;
 Mathlib, MorphismProperty.hasLocalizationOfLocallySmall.
-(blueprint: lem-pc-open-derived-category-small).
 
 Proof: first choose the standard derived category of modules on U. Open restriction
 is exact and left adjoint to open direct image. Open direct image is fully faithful,

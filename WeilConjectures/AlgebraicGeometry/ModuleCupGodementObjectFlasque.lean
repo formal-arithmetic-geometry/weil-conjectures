@@ -26,7 +26,6 @@ noncomputable section
 
 /-- Products of the actual module stalk skyscrapers are flasque.
 Source: Stacks Project, Tag 0FKR, construction preceding Lemma 20.30.1.
-(blueprint: lem-sc-module-cup-godement-object-flasque)
 Proof: evaluation on an open set preserves the product of module sheaves.
 Its underlying sections identify with families (s_x) indexed by points x of
 the open, with s_x in F_x. The action of a section of the structure sheaf is

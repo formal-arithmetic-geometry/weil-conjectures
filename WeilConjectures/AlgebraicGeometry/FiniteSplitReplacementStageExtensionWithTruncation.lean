@@ -17,8 +17,7 @@ namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 /-- A finite replacement stage extends, retaining its simplicial map in all initial degrees.
 Source: Stacks 0DAV, relative split hypercover induction. Repeatedly apply the
 one-stage relative extension, restrict to diagonal degrees, and assemble the tower.
-The tower's initial restriction equality identifies both the skeleton and its map.
-(auxiliary; not a blueprint node) -/
+The tower's initial restriction equality identifies both the skeleton and its map. -/
 theorem exists_extension_of_replacement_stage
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale) (hK : IsEtaleHypercover K) (r : ℕ)

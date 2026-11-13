@@ -31,8 +31,7 @@ Proof: write q and p for the two projections of the pullback square. Apply
 Associativity and cancellation of the displayed isomorphisms give exactly the
 factorization equation. This uses no stalk or cohomology calculation and also
 covers empty opens and zero complexes by the same naturality equations.
-Source: Stacks Project, Tags 0D5S and 0D5U.
-(blueprint: lem-pc-open-restricted-counit-factorization). -/
+Source: Stacks Project, Tags 0D5S and 0D5U. -/
 private theorem openRestricted_counit_factorization_private
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X X' : Scheme.{u}} (g' : X' ⟶ X) (U : X.Opens)

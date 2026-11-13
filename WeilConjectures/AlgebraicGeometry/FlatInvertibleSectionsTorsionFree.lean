@@ -14,7 +14,6 @@ import Mathlib.RingTheory.Flat.TorsionFree
 /-! # Torsion-freeness of sections of an invertible module
 
 Source: Stacks Project, More on Morphisms, Tag 0EX8, general-case proof.
-(blueprint: lem-sc-flat-invertible-sections-torsion-free)
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 Source: Stacks Project, More on Morphisms, Tag 0EX8, general-case proof, assertion
 that global sections are torsion-free by flatness.
-(blueprint: lem-sc-flat-invertible-sections-torsion-free)
 
 Proof: Cover X by affine opens U with free generators of L. Flatness of f makes
 the map Gamma(Spec A, O) to Gamma(U, O) flat. Composing with the spectrum global

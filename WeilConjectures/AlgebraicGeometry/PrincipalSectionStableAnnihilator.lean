@@ -67,7 +67,6 @@ private theorem stable_annihilator_localization
 
 Source: Stacks Project, Tag 01YB, second paragraph (stabilization of ideal-power
 annihilators), using Tags 01PO and 01Y8.
-(blueprint: lem-sbc-principal-section-stable-annihilator)
 
 Proof: On each affine open the ascending annihilator ideals of powers of g
 stabilize, since its ring is Noetherian. A finite affine cover supplies a

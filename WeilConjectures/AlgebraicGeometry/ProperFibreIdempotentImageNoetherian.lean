@@ -72,8 +72,7 @@ The component on the ordinary fibre is A-linear and m kills its target; conseque
 x and z have the same fibre image, namely e. Represent x by a section t over f⁻¹(U)
 for a neighbourhood U of s. The formal-functions germ formula identifies its fibre
 restriction with e. The first infinitesimal fibre and the usual fibre are identified
-by A/m = κ(s) and symmetry of the pullback, preserving their projections to X.
-(blueprint: lem-weil-pbc-stein-fibre-idempotent-image-noetherian) -/
+by A/m = κ(s) and symmetry of the pullback, preserving their projections to X. -/
 theorem proper_fibre_idempotent_image_noetherian
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [IsLocallyNoetherian S] (s : S)
     (e : Γ(f.fiber s, ⊤)) (he : IsIdempotentElem e) :

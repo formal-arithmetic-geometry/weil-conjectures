@@ -61,7 +61,7 @@ private def K (U : Cᵒᵖ) : Ideal (R.obj.obj U) := RingHom.ker (q.hom.app U).h
 end QuotientKernel
 
 /-- The sectionwise quotient unit, sending x to 1 tensor x.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 noncomputable def commonQuotientPresheafUnit
     {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (M : Mod R) :
     M.val ⟶ (PresheafOfModules.restrictScalars
@@ -79,7 +79,7 @@ noncomputable def commonQuotientPresheafUnit
       Classical.choose_spec (exists_changeOfRingsMap q M f) 1 x, map_one]
 
 /-- The actual sheaf quotient unit constructed from the sheafification adjunction.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 noncomputable def commonQuotientUnit
     {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (M : Mod R) :
     M ⟶ (Res q).obj (changeOfRings q M) where
@@ -91,7 +91,7 @@ noncomputable def commonQuotientUnit
           (𝟙 (changeOfRings q M)))
 
 /-- The actual quotient units are natural in the module.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 theorem commonQuotientUnit_naturality
     {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S)
     {M N : Mod R} (f : M ⟶ N) :
@@ -109,7 +109,7 @@ theorem commonQuotientUnit_naturality
   exact h
 
 /-- The quotient unit transported to a prescribed ordinary scalar-extension model.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 noncomputable def commonQuotientModelUnit
     {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S)
     [HasDerivedCategory.{wR} (Mod R)] [HasDerivedCategory.{wS} (Mod S)]
@@ -541,8 +541,7 @@ variable {R B : Sheaf J CommRingCat.{r}} {φ : R ⟶ B}
 
 /-- Ordinary common-quotient maps, characterized on the sheafification-unit images
 of pure tensors. There are no complexes, K-flatness, or derived comparisons here.
-Source: Stacks 03EK
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 structure OrdinaryCommonQuotientTower where
   ordinary : ∀ n : ℕ, Res φ ⋙ (a n).E ≅ (b n).E
   ordinary_sections : ∀ (n : ℕ) (M : Mod B) (U : Cᵒᵖ)
@@ -571,7 +570,7 @@ structure OrdinaryCommonQuotientTower where
 variable {D a b}
 
 /-- The quotient units are constructed, rather than chosen as part of the comparison.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 def OrdinaryCommonQuotientTower.unit (_O : OrdinaryCommonQuotientTower D a b) (n : ℕ) :
     𝟭 (Mod R) ⟶ (a n).E ⋙ Res (D.projection n) :=
   commonQuotientModelUnit (D.projection n) (a n)

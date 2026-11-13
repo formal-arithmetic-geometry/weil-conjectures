@@ -22,7 +22,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 /-! # Relative-spectrum realization of a finite-type graded module
 
 Source: Stacks Project, Cohomology of Schemes, Tag 0897(1).
-(blueprint: lem-weil-pbc-graded-module-relative-spec-realization).
 -/
 
 @[expose] public section
@@ -51,7 +50,6 @@ private theorem finitePresentation_of_quasicoherent_finiteType
 
 Source: Stacks Project, Cohomology of Schemes, Tag 0897(1), relative-spectrum proof,
 lines 5267--5300; affine module correspondence (01SB) and finite type (01PB).
-(blueprint: lem-weil-pbc-graded-module-relative-spec-realization).
 
 Proof: Put Y = X ×_(Spec A) Spec B, pi = pr_X and fB = pr_B. On each affine open
 U = Spec C of X, extend the homogeneous mu maps by finite sums to the module

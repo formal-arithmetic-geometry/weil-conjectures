@@ -22,7 +22,6 @@ import Mathlib.RingTheory.Ideal.AssociatedPrime.Localization
 /-! # Associated-prime detection of non-normal localizations
 
 Source: Stacks Project, Algebra, Lemma Tag 0332, proof, Cases I and II.
-(blueprint: lem-weil-pbc-normal-locus-associated-prime)
 -/
 
 @[expose] public section
@@ -74,7 +73,6 @@ private theorem normal_local_depth_bound {A : Type*} [CommRing A]
 local ring has depth at most one.
 
 Source: Stacks Project, Algebra, Tag 0332, proof, Cases I and II.
-(blueprint: lem-weil-pbc-normal-locus-associated-prime)
 
 Proof:
 1. Apply Serre's criterion to the Noetherian local domain R_p. A failure of
@@ -159,7 +157,6 @@ private theorem exists_nonNormal_lowDepth_prime_le
 principal quotient.
 
 Source: Stacks Project, Algebra, Lemma Tag 0332, proof, Cases I and II.
-(blueprint: lem-weil-pbc-normal-locus-associated-prime)
 
 Proof:
 1. Localize at `p` and apply Serre's criterion. Since `R_p` is not normal,

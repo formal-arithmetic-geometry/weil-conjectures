@@ -89,7 +89,6 @@ private theorem tensor_normalization_unique (a : Λ ⟶ Λ') [IsMonHom a]
 
 Source: Stacks 06YY, 0G7E, 07A6; integral proper-base-change proof (1), (3),
 first step of the scalar-route normalization.
-(auxiliary; not a blueprint node).
 
 Proof. Naturality of the normalized tensor presentation moves the exact pullback
 computation counit to its input. On a cochain representative apply TensorNormalized,

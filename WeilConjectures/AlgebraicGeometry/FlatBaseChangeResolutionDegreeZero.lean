@@ -77,7 +77,6 @@ attribute [local instance] enoughInjectives
 /-- The degree-zero resolution comparison agrees with ordinary base change under
 canonical zeroth-derived-functor identifications.
 Source: Stacks Project, Tag 02N7, the augmentation diagram defining the comparison.
-(blueprint: lem-weil-pbc-flat-base-change-resolution-degree-zero).
 
 Proof: The augmentation equation for t, after applying pushforward f and the
 pushforward square, identifies the degree-zero component of Q on the augmentation

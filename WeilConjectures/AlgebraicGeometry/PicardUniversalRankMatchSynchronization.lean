@@ -17,7 +17,6 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 Source: Stacks Project, Tag 0BDP, the intersection of the two rank loci;
 the empty-fibre case is the adaptation in the parent rank-match construction.
-(blueprint: lem-sc-picard-universal-rank-match-synchronization).
 -/
 
 @[expose] public section
@@ -101,7 +100,6 @@ private theorem rank_zero_of_empty_preimage {A B : Scheme.{u}} (f : A ⟶ B)
 /-- The two single-image conditions have a common local rank witness even on empty fibres.
 Source: Stacks Project, Tag 0BDP, first and third proof paragraphs, and the
 empty-fibre rank-zero clause of the parent construction.
-(blueprint: lem-sc-picard-universal-rank-match-synchronization)
 
 Proof: Fix a further base change h and a point t. Choose U containing t with rank r
 from the E direct-image condition, and V containing t with rank s from the dual

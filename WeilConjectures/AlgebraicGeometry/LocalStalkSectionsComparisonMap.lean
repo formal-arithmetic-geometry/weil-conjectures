@@ -25,16 +25,14 @@ namespace LocalStalkSections
 variable {X : Scheme.{u + 1}} (i : X.Opens ⥤ X.Etale)
   (hi : i ⋙ Scheme.Etale.forget X = X.restrictFunctor) (x : X)
 
-/-- Identify the supplied open object with its canonical open subscheme. 
-(blueprint: new-local-stalk-sections-comparison-map)
+/-- Identify the supplied open object with its canonical open subscheme.
 -/
 noncomputable def openIso (U : X.Opens) :
     (Scheme.Etale.forget X).obj (i.obj U) ≅ X.restrictFunctor.obj U :=
   eqToIso (congrArg (fun F : X.Opens ⥤ Over X ↦ F.obj U) hi)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The local scheme maps canonically into every open neighbourhood of its point. 
-(blueprint: new-local-stalk-sections-comparison-map)
+/-- The local scheme maps canonically into every open neighbourhood of its point.
 -/
 noncomputable def lift (U : OpenNhds x) :
     Spec (X.presheaf.stalk x) ⟶ (i.obj U.1).left :=
@@ -43,7 +41,6 @@ noncomputable def lift (U : OpenNhds x) :
 set_option backward.isDefEq.respectTransparency false in
 /-- The neighbourhood lift lies over the canonical map to X.
 Source: Stacks Project, Tag 03Q6, the canonical degree-zero pullback maps.
-(blueprint: new-local-stalk-sections-comparison-map)
 
 Proof: Compose the equality-induced inverse in Over X with the structure map.
 Its over-category compatibility reduces the composite to the canonical map to
@@ -59,7 +56,6 @@ include hi in
 set_option backward.isDefEq.respectTransparency false in
 /-- The structural map of a supplied open object is monic.
 Source: Stacks Project, Tag 03Q6, identifying neighbourhoods with open subschemes.
-(blueprint: new-local-stalk-sections-comparison-map)
 
 Proof: The equality-induced over-category isomorphism identifies the structural
 map with an isomorphism followed by the canonical open inclusion. Both are open
@@ -76,7 +72,6 @@ lemma open_mono (U : X.Opens) : Mono (i.obj U).hom := by
 set_option backward.isDefEq.respectTransparency false in
 /-- Neighbourhood lifts commute with inclusions.
 Source: Stacks Project, Tag 03Q6, compatibility of degree-zero pullback maps.
-(blueprint: new-local-stalk-sections-comparison-map)
 
 Proof: Postcompose both lifts with the larger neighbourhood's monic structural
 map. The over-category relation and lift_fac identify both composites with
@@ -91,8 +86,7 @@ lemma lift_naturality {U V : OpenNhds x} (f : U ⟶ V) :
   exact (lift_fac i hi x U).trans (lift_fac i hi x V).symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A neighbourhood becomes a pointed etale object after base change to the local scheme. 
-(blueprint: new-local-stalk-sections-comparison-map)
+/-- A neighbourhood becomes a pointed etale object after base change to the local scheme.
 -/
 noncomputable def baseChangeSection (U : OpenNhds x) :
     Scheme.Etale.mk (𝟙 (Spec (X.presheaf.stalk x))) ⟶
@@ -104,7 +98,6 @@ noncomputable def baseChangeSection (U : OpenNhds x) :
 set_option backward.isDefEq.respectTransparency false in
 /-- The terminal-to-base-change sections commute with neighbourhood inclusions.
 Source: Stacks Project, Tag 03Q6, compatibility of degree-zero pullback maps.
-(blueprint: new-local-stalk-sections-comparison-map)
 
 Proof: Compare the underlying scheme maps by the two pullback projections.
 The first projection is lift_naturality, and the second is the identity.
@@ -133,15 +126,13 @@ variable (H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤
     AddCommGrpCat.{u + 1} X.smallEtaleTopology
     (Spec (X.presheaf.stalk x)).smallEtaleTopology)
 
-/-- The diagram defining the Zariski stalk of sections of an etale sheaf. 
-(blueprint: new-local-stalk-sections-comparison-map)
+/-- The diagram defining the Zariski stalk of sections of an etale sheaf.
 -/
 abbrev neighbourhoodDiagram (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
   ((OpenNhds.inclusion (X := X.toLocallyRingedSpace.toTopCat) x) ⋙ i).op ⋙ F.obj
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Pull back a neighbourhood section by the adjunction unit, then by its local-scheme section. 
-(blueprint: new-local-stalk-sections-comparison-map)
+/-- Pull back a neighbourhood section by the adjunction unit, then by its local-scheme section.
 -/
 noncomputable def cocone (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     Cocone (neighbourhoodDiagram i x F) where
@@ -167,8 +158,7 @@ noncomputable def cocone (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical map from neighbourhood germs to sections on the local scheme.
 It is induced by the adjunction unit and the canonical local-scheme maps to neighbourhoods.
-Source: Stacks Project, Tag 03Q6, the degree-zero pullback map of Lemma 59.51.5.
-(blueprint: new-local-stalk-sections-comparison-map) -/
+Source: Stacks Project, Tag 03Q6, the degree-zero pullback map of Lemma 59.51.5. -/
 noncomputable def comparison :
     etaleObjectStalkSections X i x ⟶
       H ⋙ (sheafSections (Spec (X.presheaf.stalk x)).smallEtaleTopology
@@ -197,8 +187,7 @@ noncomputable def comparison :
     rw [← Category.assoc, hu, Category.assoc, ← hn, ← Category.assoc]
 
 /-- The comparison sends each neighbourhood section to its unit pullback.
-Source: Stacks Project, Tag 03Q6, the defining degree-zero pullback map.
-(blueprint: new-local-stalk-sections-comparison-map) -/
+Source: Stacks Project, Tag 03Q6, the defining degree-zero pullback map. -/
 @[reassoc]
 theorem ι_comparison (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (U : (OpenNhds x)ᵒᵖ) :

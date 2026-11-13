@@ -18,7 +18,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 /-- Vanishing of positive columns makes the constructed Leray edge invertible.
-(blueprint: lem-pc-leray-edge-vanishing-iso)
 
 Source: Stacks Project, Cohomology, Tags 01F4 (2), 01F2, and 01EX.
 

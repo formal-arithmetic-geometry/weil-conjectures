@@ -21,7 +21,6 @@ namespace AlgebraicGeometry
 
 Source: Stacks Project, Descent, Lemma Tag 03N0, proof after the set construction;
 https://stacks.math.columbia.edu/tag/03N0.
-(blueprint: lem-weil-pbc-fpqc-detects-openness)
 
 Proof: Work locally on the affine open cover of S and pull back the fpqc family.
 The pullback square and continuity preserve the open inverse images. Over Spec R,

@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.KoszulOpenHomChainClassNaturality
 /-! # The augmented exponent-one class is restriction of one
 
 Source: Stacks Project, Tags 08D1 and 08DC.
-(blueprint: lem-sc-koszul-open-exponent-one-unit).
 -/
 
 @[expose] public section
@@ -77,7 +76,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The fixed exponent-one chain class evaluates to the ordinary sections unit.
 Source: Stacks Project, Tag 08D1, the signed fraction comparison; Tag 08DC,
 equation 36.9.4.1, and its construction in Lemma 36.9.4.
-(blueprint: lem-sc-koszul-open-exponent-one-unit).
 
 Proof: Let t be the augmentation of the extended exponent-one Koszul tail
 into the extended single structure complex. Postcomposition naturality of

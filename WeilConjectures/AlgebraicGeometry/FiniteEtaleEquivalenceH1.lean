@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.Sites.EtaleTorsorH1Functoriality
 # Finite étale equivalence and first cohomology
 
 Source: the categorical last step of Stacks Project Tag 0A5G, using Tags 03AJ and 03RV.
-(blueprint: lem-weil-pbc-finite-etale-equivalence-h1)
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace AlgebraicGeometry.Etale
 Source: Stacks Project Tag 0A5G, last paragraph; Tags 03AJ and 03RV provide the torsor
 classification used there. Only the categorical implication is stated: there is no
 henselian ring, proper morphism, closed fibre, or assumption on the image of `i`.
-(blueprint: lem-weil-pbc-finite-etale-equivalence-h1)
 
 Proof: Write F for finite étale base change along i. A torsor under the finite constant
 abelian group M is a finite locally constant sheaf of sets: étale locally it is the

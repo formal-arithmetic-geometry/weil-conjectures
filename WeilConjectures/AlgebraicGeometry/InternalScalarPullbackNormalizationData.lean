@@ -13,8 +13,7 @@ public import WeilConjectures.Topology.ProfiniteCondensedRing
 /-! # Data for normalized internal scalar extension and geometric pullback
 
 (1);
-Stacks Project, Tags 03EK, 06YS, 06YY, 0G7E, 0D6D, 07A6 and 0B65
-(auxiliary; not a blueprint node).
+Stacks Project, Tags 03EK, 06YS, 06YY, 0G7E, 0D6D, 07A6 and 0B65.
 
 All tensors and derived categories are the ordinary unbounded, uncompleted ones.
 The section-derived-category parameters select localizations of the recorded section
@@ -47,8 +46,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 /-- Comparison of the specified internal scalar functor with an actual section-ring
 left-derived pair. SectionScalarNormalized below requires the ordinary balanced-generator
 identity and pins the derived comparison by its flat-term K-flat computation counits.
-Source: Stacks 03EK, 06YY and 07A6; blueprint integral proper-base-change proof (1)
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03EK, 06YY and 07A6; blueprint integral proper-base-change proof (1). -/
 structure SectionScalarComparison (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) where
   pair : SheafOfModules.ScalarDerivedPair.{u + 1, u, u + 1, u + 1}
     (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T) (coefficientMap a T))
@@ -63,8 +61,7 @@ structure SectionScalarComparison (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
 
 /-- The ordinary generator and K-flat counit equations for the specified D comparison.
 These are properties of the same scalar data used below in both conjugation equations.
-Source: Stacks 03EK, 06YY and 07A6; blueprint integral proper-base-change proof (1)
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03EK, 06YY and 07A6; blueprint integral proper-base-change proof (1). -/
 def SectionScalarNormalized (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (s : SectionScalarComparison a T) : Prop :=
   (∀ (N : Modules Λ' T) (U : T.ProEtᵒᵖ) (x : N.X.obj.obj U),
@@ -100,8 +97,7 @@ def SectionScalarNormalized (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
           (((ModuleRingedComparison.equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj P)
 
 /-- Localization of the section restriction comparison, using the fixed exact functors.
-Source: Stacks 07A6; blueprint integral proper-base-change proof (1)
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A6; blueprint integral proper-base-change proof (1). -/
 def sectionScalarRestriction (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (s : SectionScalarComparison a T) :
     V a T ⋙ (ModuleRingedComparison.derivedEquivalence Λ T).functor ≅
@@ -117,8 +113,7 @@ def sectionScalarRestriction (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
         (coefficientMap a T)))).symm
 
 /-- Tensor with the restricted regular coefficient in the existing section derived tensor.
-Source: Stacks 06YU; blueprint integral proper-base-change proof (1)
-(auxiliary; not a blueprint node). -/
+Source: Stacks 06YU; blueprint integral proper-base-change proof (1). -/
 def sectionScalarTensor (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
     DerivedCategory (ModuleRingedComparison.modules Λ T) ⥤
       DerivedCategory (ModuleRingedComparison.modules Λ T) :=
@@ -128,8 +123,7 @@ def sectionScalarTensor (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
 
 /-- The exact section equivalence carries the actual coefficient in degree zero to
 its section module in degree zero, with the canonical localization and single factors.
-Source: Stacks 06YU; blueprint integral proper-base-change proof (1)
-(auxiliary; not a blueprint node). -/
+Source: Stacks 06YU; blueprint integral proper-base-change proof (1). -/
 def sectionScalarCoefficient (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
     (ModuleRingedComparison.derivedEquivalence Λ T).functor.obj (B a T) ≅
       DerivedCategory.Q.obj ((CochainComplex.singleFunctor _ 0).obj
@@ -143,8 +137,7 @@ def sectionScalarCoefficient (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
 /-- The chosen internal tensor identification, conjugated to sections, is the section
 K-flat balanced construction. Its ordinary map sends s tensor x to x tensor s on every
 local generator; its derived map has that ordinary map as its K-flat computation.
-Source: Stacks 03EK and 06YY; blueprint integral proper-base-change proof (1)
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03EK and 06YY; blueprint integral proper-base-change proof (1). -/
 def SectionTensorNormalized (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (s : SectionScalarComparison a T) (t : TensorNormalization a T) : Prop :=
   ∃ o : s.pair.extension ⋙ SheafOfModules.scalarRestriction.{u + 1, u, u + 1}
@@ -202,8 +195,7 @@ def SectionTensorNormalized (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
 /-- The fixed geometric section comparison with the scalar interface's name L.
 This only unfolds that name for the actual total derived pullback; its components
 are the existing derivedPullComparison, with no new comparison choice.
-Source: Stacks 07A6; blueprint integral proper-base-change proof (1)
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A6; blueprint integral proper-base-change proof (1). -/
 def scalarSectionPullComparison
     (Λ₀ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ₀] [IsCommMonObj Λ₀]
@@ -220,8 +212,7 @@ fixed scalar and geometric comparisons. The ordinary comparison is specified as 
 conjugate of the identity restriction/direct-image square. Since the scalar units insert
 1 and the geometric adjunction is the specified ringed adjunction, this is exactly
 f inverse (x tensor s) mapping to f inverse x tensor f inverse s, using alpha_f.
-Source: Stacks 03D7, 0B65, 0D6D and 0G7E; blueprint integral proper-base-change proof (1)
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03D7, 0B65, 0D6D and 0G7E; blueprint integral proper-base-change proof (1). -/
 def SectionPullNormalized (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (sX : SectionScalarComparison a X) (sY : SectionScalarComparison a Y)
     (b : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) : Prop :=

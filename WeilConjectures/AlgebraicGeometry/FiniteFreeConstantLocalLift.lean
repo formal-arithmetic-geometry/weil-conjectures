@@ -15,7 +15,6 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 # Local lifting of maps from finite free constant sheaves
 
 Source: Stacks Project, Tag 093U, `lemma-kernel-finite-locally-constant`, extension paragraph.
-(blueprint: lem-pc-finite-free-constant-local-lift)
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ on that object. This statement needs neither an epimorphism nor a free module.
 
 Source: Stacks Project, Tag 093U, extension paragraph: extend the lifted generators linearly
 and obtain the morphism from the constant sheaf.
-(blueprint: lem-pc-finite-free-constant-local-lift)
 
 Proof: Identify étale pullback with restriction along the localization functor using
 Etale.upperStarIsoLocalizationRestriction. Under this identification its sections over the
@@ -153,7 +151,6 @@ private theorem exists_constant_lift_of_sections_lift {X : Scheme.{u}}
 
 Source: Stacks Project, Tag 093U, `lemma-kernel-finite-locally-constant`, extension paragraph,
 lifting the finitely many generators.
-(blueprint: lem-pc-finite-free-constant-local-lift)
 
 Proof: By the constant-sheaf/global-sections adjunction, the given map is a linear map
 from the free module to the sections of G over the terminal etale object. Evaluate on

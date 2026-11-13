@@ -34,7 +34,6 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 polynomial, and its nonvanishing locus is its standard open.
 
 Source: Stacks Project, Constructions, Tags 01MS, 01MU, 01MV and 01NG.
-(blueprint: lem-sc-p1-homogeneous-section-tensor-powers).
 
 Proof: On each coordinate chart D_+(x_i), O(m) is free on x_i^m for every integer m.
 Multiplication of fractions gives O(m) tensor O(n) -> O(m+n), carrying the tensor

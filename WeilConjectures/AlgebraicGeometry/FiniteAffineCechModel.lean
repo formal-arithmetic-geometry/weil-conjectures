@@ -26,8 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Associate the alternating section complex to the base, after restricting scalars.
 The negative terms are zero. Degree `p ≥ 0` is the sheaf associated to the product of
 sections on increasing `(p+1)`-tuples, with the signed restriction differential.
-Source: Stacks Project, Tag 02KE, proof's Čech construction.
-(blueprint: def-pc-finite-affine-cech-model). -/
+Source: Stacks Project, Tag 02KE, proof's Čech construction. -/
 noncomputable def finiteAffineCechModel {X T : Scheme.{u}} (f : X ⟶ T) (F : X.Modules)
     {r : ℕ} (V : Fin r → X.Opens) : CochainComplex T.Modules ℤ :=
   ((Modules.pullback T.toSpecΓ).mapHomologicalComplex _).obj
@@ -35,7 +34,6 @@ noncomputable def finiteAffineCechModel {X T : Scheme.{u}} (f : X ⟶ T) (F : X.
 
 /-- The explicit model has no negative terms.
 Source: Stacks Project, Tag 02KE, finite Čech construction.
-(blueprint: def-pc-finite-affine-cech-model).
 Proof: extension from natural degrees is zero in negative degrees, and each of the
 additive functors used in the construction preserves zero objects. -/
 theorem finiteAffineCechModel_ge {X T : Scheme.{u}} (f : X ⟶ T) (F : X.Modules)
@@ -45,7 +43,6 @@ theorem finiteAffineCechModel_ge {X T : Scheme.{u}} (f : X ⟶ T) (F : X.Modules
 
 /-- There are no increasing tuples above the size of the finite cover.
 Source: Stacks Project, Tags 02KE and 01FK, finite Čech construction.
-(blueprint: def-pc-finite-affine-cech-model).
 Proof: an order embedding Fin (n+1) into Fin r forces n+1 ≤ r. Thus above r the
 product has empty index type and is a zero module. Extension and additive functors
 preserve this zero object. -/
@@ -74,7 +71,6 @@ theorem finiteAffineCechModel_le {X T : Scheme.{u}} (f : X ⟶ T) (F : X.Modules
 
 /-- The terms are pullbacks of associated modules, hence quasi-coherent.
 Source: Stacks Project, Tags 01I6 and 02KE.
-(blueprint: def-pc-finite-affine-cech-model).
 Proof: the tilde functor produces quasi-coherent modules, and pullback preserves
 quasi-coherence. This also covers negative and empty-product terms. -/
 theorem finiteAffineCechModel_quasicoherent {X T : Scheme.{u}} (f : X ⟶ T)

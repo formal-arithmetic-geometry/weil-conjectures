@@ -10,11 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Proper.Unbounded.ProperUnbounded
 /-!
 # Proper direct image of unbounded complexes: statement
 
-Source: literature/blueprint/latest/blueprint/part-six-operations/sec-six-functors-basics/
-sec-brown-construction/sec-proper-direct-image-of-unbounded-complexes/
-sk-lem-proper-unbounded-window/_section.md, assertions (1)--(3)
-(blueprint: sk-lem-proper-unbounded-window).
-
 The theorem states the three assertions for both coefficient choices in the current
 condensed model.  The two existing predicates expand the degreewise ind-constructible
 condition, the two amplitude bounds, the canonical finite truncation window, and the
@@ -35,16 +30,11 @@ namespace AlgebraicGeometry.ProEtale
 /-- Proper direct image of unbounded ind-constructible complexes, with its finite
 cohomological window and arbitrary direct sums, for both `E` and `ℚ̄_ℓ` coefficients.
 
-Source: literature/blueprint/latest/blueprint/part-six-operations/sec-six-functors-basics/
-sec-brown-construction/sec-proper-direct-image-of-unbounded-complexes/
-sk-lem-proper-unbounded-window/_section.md, assertions (1)--(3); proof in
-sk-lem-proper-unbounded-window.proof.md (blueprint: sk-lem-proper-unbounded-window).
-
 Proof plan, the eight steps of the DAG node:
 1. Ambient setting: Dic and IndCons as in sk-cor-ambient-ind-derived and sk-prop-ind-heart.
-   The module categories are Grothendieck (det-prop-sfb-module-category), so
+   The module categories are Grothendieck, so
    lem-sfb-grothendieck-k-injective gives K-injective resolutions, and
-   lem-pc-right-derived-functor-triangulated makes Rp_* (sk-def-sfb-module-derived-pushpull)
+   lem-pc-right-derived-functor-triangulated makes Rp_*
    exact and shift-compatible.
 2. Bounded-below K: the spectral sequence of thm-sp-truncation-e2,
    E_2^{u,v} = R^u p_* H^v(K) => H^{u+v}(Rp_*K), has columns 0 <= u <= 2d+1 with
@@ -56,10 +46,10 @@ Proof plan, the eight steps of the DAG node:
    Rp_*K = Rlim_n Rp_*A_n with the images of the canonical projections.
 4. The fibre of A_(n+1) -> A_n is H^(-n-1)(K)[n+1], whose image lies in degrees
    [-n-1, 2d-n]. For fixed q the towers H^q and H^(q-1) of Rp_*A_n are eventually constant,
-   so lim^1 = 0 (sk-prop-pe-milnor) and H^q(Rp_*K) = H^q(Rp_*A_n) for large n. Step 2 then
+   so lim^1 = 0 and H^q(Rp_*K) = H^q(Rp_*A_n) for large n. Step 2 then
    gives (1).
 5. The triangles tau_le q K -> K -> tau_ge (q+1) K and tau_le (q-2d-2) K -> tau_le q K -> W_q K,
-   W_q = tau_ge(q-2d-1) tau_le q (lem-sf-derived-truncation-triangle), with the bounds of (1)
+   W_q = tau_ge(q-2d-1) tau_le q, with the bounds of (1)
    and lem-sf-derived-homology-long-exact, make both canonical arrows on H^q Rp_* invertible.
    Inverse of the first followed by the second is (6.5) in IndCons. This proves (2).
 6. Sums: exact small sums in the Grothendieck categories; lem-kun-grothendieck-derived-coproducts,

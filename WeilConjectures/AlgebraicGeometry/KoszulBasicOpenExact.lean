@@ -17,7 +17,6 @@ import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
 /-! # Local exactness of the sheafified Koszul complex
 
 Source: Stacks Project, More on Algebra, Tag 0663.
-(blueprint: lem-r4-koszul-basic-open-exact).
 -/
 
 @[expose] public section
@@ -27,9 +26,8 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- The sheafified Koszul complex is exact on each generator's basic open.
-Source: Stacks Project, More on Algebra, Tag 0663 (lemma-homotopy-koszul),
-and Derived Categories of Schemes, Tag 09IR (lemma-orthogonal-koszul-complex).
-(blueprint: lem-r4-koszul-basic-open-exact).
+Source: Stacks Project, More on Algebra, Tag 0663,
+and Derived Categories of Schemes, Tag 09IR.
 
 Proof: Write e_i for the i-th standard basis vector. Exterior multiplication
 by e_i is a homotopy between multiplication by f_i and zero: contraction

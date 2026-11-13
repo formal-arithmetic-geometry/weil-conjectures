@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Pur.PurEtaleScalarMateProjection
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
 
 /-! Canonical constant-complex models for derived coefficient extension.
-Source: Zheng, Construction 2.26 (blueprint: lem-sfb-ordinary-exceptional-change-of-rings).
+Source: Zheng, Construction 2.26.
 -/
 
 @[expose] public noncomputable section
@@ -20,16 +20,14 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- The coefficient complex B[0] with its restricted A action.
-Source: Zheng, Construction 2.26
-(blueprint: def-sfb-ordinary-exceptional-scalar-tensor-data). -/
+Source: Zheng, Construction 2.26. -/
 def ordinaryCoefficientComplex {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) : DerivedCategory (ModuleCat.{u + 1} A) :=
   (DerivedCategory.singleFunctor _ 0).obj
     ((ModuleCat.restrictScalars φ).obj (ModuleCat.of B B))
 
 /-- Identify the restricted coefficient sheaf with the constant coefficient complex.
-Source: constant sheaf commutes with scalar restriction and the degree-zero embedding
-(blueprint: def-sfb-ordinary-exceptional-scalar-tensor-data). -/
+Source: constant sheaf commutes with scalar restriction and the degree-zero embedding. -/
 def ordinaryScalarCoefficientIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :
     scalarCoefficient φ T ≅ (constantFunctor A T).obj (ordinaryCoefficientComplex φ) :=
@@ -40,8 +38,7 @@ def ordinaryScalarCoefficientIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
       (constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) 0).app _).symm
 
 /-- Scalar extension followed by restriction is left tensor with B[0].
-Source: the canonical scalar tensor comparison and derived tensor symmetry
-(blueprint: def-sfb-ordinary-exceptional-scalar-tensor-data). -/
+Source: the canonical scalar tensor comparison and derived tensor symmetry. -/
 def ordinaryScalarTensorIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :
     scalarExtension φ T ⋙ Sheaf.derivedRestrictScalars T.smallEtaleTopology φ ≅
@@ -52,8 +49,7 @@ def ordinaryScalarTensorIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (derivedTensor (ModuleCat.{u + 1} A) T).mapIso (ordinaryScalarCoefficientIso φ T)
 
 /-- The scalar-coefficient version of the ordered proper projection map.
-Source: the projection clause of properFiniteCoefficientExtension
-(blueprint: def-sfb-ordinary-exceptional-scalar-tensor-data). -/
+Source: the projection clause of properFiniteCoefficientExtension. -/
 def ordinaryScalarProjectionMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y)
@@ -84,8 +80,7 @@ private theorem genericTensorSymmetry_swap
   exact SymmetricCategory.braiding_swap_eq_inv_braiding L K
 
 /-- Swapping the factors gives the inverse signed derived symmetry.
-Source: symmetry of the signed cochain tensor product
-(blueprint: def-sfb-ordinary-exceptional-scalar-tensor-data). -/
+Source: symmetry of the signed cochain tensor product. -/
 theorem ordinaryTensorSymmetry_swap
     (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (K L : DerivedCategoryModule A T) :

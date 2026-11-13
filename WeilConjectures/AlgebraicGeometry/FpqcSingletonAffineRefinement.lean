@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Limits
 # Affine refinement of a singleton fpqc covering
 
 Source: Stacks Project, Topologies, Definition 022B and Lemma 022E, with the finite
-coproduct construction (blueprint: lem-galois-fpqc-singleton-affine-refinement).
+coproduct construction.
 -/
 
 @[expose] public section
@@ -27,8 +27,7 @@ namespace AlgebraicGeometry.Scheme
 /-- If a singleton fpqc covering has affine base, finitely many affine opens of its source
 give an affine coproduct whose induced map is flat, surjective, and an fpqc covering.
 
-Source: Stacks Project, Topologies, Definition 022B and Lemma 022E
-(blueprint: lem-galois-fpqc-singleton-affine-refinement).
+Source: Stacks Project, Topologies, Definition 022B and Lemma 022E.
 
 Apply the finite affine-open image condition of the fpqc covering to the whole affine base;
 the source map is flat. Form the finite coproduct of the chosen opens and use its universal

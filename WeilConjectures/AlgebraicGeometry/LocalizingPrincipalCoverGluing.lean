@@ -15,7 +15,6 @@ import Mathlib.AlgebraicGeometry.StructureSheaf
 /-! # Unique gluing on principal affine covers
 
 Source: Stacks Project, Tag 01HV (associated module sheaves).
-(blueprint: lem-pc-localizing-principal-cover-gluing).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- A localizing module presheaf has unique gluing on every cover of one affine
 open by its principal opens.
 Source: Stacks Project, Tag 01HV, Lemma `lemma-spec-sheaves` (4),(5).
-(blueprint: lem-pc-localizing-principal-cover-gluing).
 
 Proof: Put A = Gamma(T,W) and N = P(W). Restrict scalars on P(D(a)) to A.
 Localization uniqueness gives an A-linear equivalence e(a) from P(D(a)) to

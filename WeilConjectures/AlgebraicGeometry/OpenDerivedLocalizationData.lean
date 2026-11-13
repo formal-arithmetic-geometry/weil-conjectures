@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Localization.LocallySmall
 For an open `U` of `X`, derived categories of `𝒪_U`-modules and of modules on the localized
 sites of `U`, in the universe of the derived categories given on `X`.
 Source: Stacks Project, Tag 079W.
-(blueprint: lem-pc-open-derived-localization-adjunction).
 -/
 
 @[expose] public section

@@ -19,8 +19,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 /-! # Restriction detects vanishing of ideal-power products
 
 Source: Stacks Project, Cohomology of Schemes, proof of Lemma 01YD;
-Schemes, Lemma 01I8; Modules, Lemma 01CD
-(blueprint: lem-weil-pbc-ideal-power-product-restriction-zero).
+Schemes, Lemma 01I8; Modules, Lemma 01CD.
 -/
 
 @[expose] public section
@@ -122,8 +121,7 @@ private theorem single_product_restrict {X : Scheme.{u}} (K : X.IdealSheafData)
 /-- Restricting an ideal-power product to an open gives zero exactly when the
 corresponding product of the restricted ideal and module is zero.
 Source: Stacks Project, Cohomology of Schemes, proof of Lemma 01YD;
-Schemes, Lemma 01I8; Modules, Lemma 01CD
-(blueprint: lem-weil-pbc-ideal-power-product-restriction-zero).
+Schemes, Lemma 01I8; Modules, Lemma 01CD.
 
 Proof: Restriction computes sections on image opens, with scalars transported by
 the structure-ring isomorphism. Kernels are computed on sections, so restriction

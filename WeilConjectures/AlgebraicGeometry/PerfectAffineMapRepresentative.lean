@@ -13,8 +13,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
 
 /-! # Representing affine perfect derived arrows by chain maps
 
-Source: Stacks Project, Tag 08CR, second proof; Tag 06Z0, affine derived equivalence
-(blueprint: lem-pc-perfect-affine-map-representative).
+Source: Stacks Project, Tag 08CR, second proof; Tag 06Z0, affine derived equivalence.
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A derived arrow between strictly perfect complexes on an affine open is represented by
-an actual chain map. Source: Stacks Project, Tag 08CR, second proof; Tag 06Z0
-(blueprint: lem-pc-perfect-affine-map-representative).
+an actual chain map. Source: Stacks Project, Tag 08CR, second proof; Tag 06Z0.
 
 Proof: Identify the localized site over U with the site of the affine scheme U, and
 identify U with the spectrum of its ring of sections. The finite-free retract equations

@@ -17,8 +17,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Derived internal Hom from a pseudo-coherent algebra
 
-Source: Stacks Project, Tag 0A6H (1), and Tags 0BV0, 0BV1, 0AX2
-(blueprint: lem-sc-pseudo-coherent-rhom-qcoherent).
+Source: Stacks Project, Tag 0A6H (1), and Tags 0BV0, 0BV1, 0AX2.
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ pseudo-coherent as an underlying module takes bounded-below quasi-coherent objec
 bounded-below quasi-coherent algebra-module objects. Forgetting the algebra action gives
 an object of the bounded-below quasi-coherent derived category of the scheme.
 
-Source: Stacks Project, Tag 0A6H (1), and Tags 0BV0, 0BV1, 0AX2
-(blueprint: lem-sc-pseudo-coherent-rhom-qcoherent).
+Source: Stacks Project, Tag 0A6H (1), and Tags 0BV0, 0BV1, 0AX2.
 
 Proof:
 1. By def-pur-pseudo-coherent-complex, choose affine neighbourhoods with bounded-above

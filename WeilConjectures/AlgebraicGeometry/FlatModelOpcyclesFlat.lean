@@ -23,8 +23,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 /-! # Flatness of degree-zero opcycles of a free model
 
 Source: Stacks Project, Tag 0653, applied on stalks; Tags 01U4 and 00HT
-for the affine-local flatness comparisons
-(blueprint: lem-pc-flat-model-opcycles-flat-zero).
+for the affine-local flatness comparisons.
 -/
 
 @[expose] public section
@@ -160,8 +159,7 @@ inclusion of affine opens W in V, quasi-coherence identifies sections on W with
 extension of scalars from V. They are flat over the ring of W, which is flat over
 the ring of V because W to V is an open immersion. Transitivity gives flatness
 over the ring of V, proving the affine-pair condition `IsFlatOver` for the identity.
-There is no assertion of finite freeness here, and no neighbourhood is chosen.
-(blueprint: lem-pc-flat-model-opcycles-flat-zero). -/
+There is no assertion of finite freeness here, and no neighbourhood is chosen. -/
 theorem isFlatOver_opcycles_zero_of_quasiIso {X : Scheme.{u}}
     (C Q : CochainComplex X.Modules ℤ) (d : ℕ)
     (hCge : C.IsStrictlyGE 0) (hCle : C.IsStrictlyLE d)

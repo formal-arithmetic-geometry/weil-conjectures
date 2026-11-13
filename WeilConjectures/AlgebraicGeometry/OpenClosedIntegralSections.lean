@@ -9,8 +9,7 @@ import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerCoefficients
 
 /-! # Integral open–closed sequence with its sections normalization
 
-Source: Stacks Project, Tags 095L and 03F3, and the Cartier proof (G1).
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 095L and 03F3, and the Cartier proof (G1). -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -100,7 +99,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The integral open–closed sequence has an open source representing sections,
 with its inclusion corresponding to the constant section one.
 Source: Stacks Project, Tags 095L and 03F3.
-(auxiliary; not a blueprint node)
 Proof: apply the open–closed short exact sequence to the integer constant sheaf.
 Identify its closed restriction with the integer constant on D. Replace open
 pullback by literal restriction. Its constant comparison is an isomorphism:

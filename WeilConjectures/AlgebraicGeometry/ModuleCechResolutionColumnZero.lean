@@ -50,7 +50,6 @@ private theorem pi_kernel {C : Type*} [Category C] [HasZeroMorphisms C]
 set_option backward.isDefEq.respectTransparency false in
 /-- The resolution augmentation identifies Cech cochains with degree-zero column homology.
 Source: Stacks Project, Tag 01EQ, the beta construction; Tag 01DZ, left exactness of sections.
-(blueprint: lem-sc-module-cech-resolution-column-zero)
 
 Proof: the resolution augmentation identifies F with the kernel of I^0 → I^1.
 For each finite intersection, sections preserve this kernel, since sections are left exact.

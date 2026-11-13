@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 /-! # One local representative equation
 
 Source: Stacks Project, Tag 09ZF, fourth proof paragraph.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-representative-equation).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ private lemma sheaf_restriction {S : Scheme.{u}}
 
 /-- A representative on one open gives the restriction of the transported section.
 Source: Stacks Project, Tag 09ZF, fourth proof paragraph.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-representative-equation).
 
 Proof: The map from W to U times_X X' is pullback.lift phi W.ι hphi.
 Pull the representative s through the etale unit for h and restrict along this

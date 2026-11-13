@@ -28,19 +28,19 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
 /-- The product of the skyscrapers of the stalks of a module sheaf.
-Source: Stacks, Tag 0FKR (blueprint: def-sc-module-cup-godement-model). -/
+Source: Stacks, Tag 0FKR. -/
 def moduleCup_godementObject (X : Scheme.{u}) (F : X.Modules) : X.Modules :=
   ∏ᶜ fun x : X ↦ skyscraper x (F.presheaf.stalk x)
 
 /-- The germ map into the product of stalk skyscrapers.
-Source: Stacks, Tag 0FKR (blueprint: def-sc-module-cup-godement-model). -/
+Source: Stacks, Tag 0FKR. -/
 def moduleCup_godementUnit (X : Scheme.{u}) (F : X.Modules) :
     F ⟶ moduleCup_godementObject X F :=
   Pi.lift fun x : X ↦ toSkyscraper (LinearMap.id :
     F.presheaf.stalk x →ₗ[X.presheaf.stalk x] F.presheaf.stalk x)
 
 /-- The map between products of stalk skyscrapers induced by a module morphism.
-Source: Stacks, Tag 0FKR (blueprint: def-sc-module-cup-godement-model). -/
+Source: Stacks, Tag 0FKR. -/
 def moduleCup_godementMap (X : Scheme.{u}) {F G : X.Modules} (f : F ⟶ G) :
     moduleCup_godementObject X F ⟶ moduleCup_godementObject X G :=
   Pi.lift fun x : X ↦
@@ -48,13 +48,13 @@ def moduleCup_godementMap (X : Scheme.{u}) {F G : X.Modules} (f : F ⟶ G) :
       toSkyscraper (f.stalkLinearMap x ∘ₗ skyscraperStalkEval x (F.presheaf.stalk x))
 
 /-- Iterates of the concrete product-of-stalks construction, beginning with `F`.
-Source: Stacks, Tag 0FKR (blueprint: def-sc-module-cup-godement-model). -/
+Source: Stacks, Tag 0FKR. -/
 def moduleCup_godementIterate (X : Scheme.{u}) (F : X.Modules) : ℕ → X.Modules
   | 0 => F
   | n + 1 => moduleCup_godementObject X (moduleCup_godementIterate X F n)
 
 /-- Insert the germ map at the specified position in an iterate.
-Source: Banerjee, §1.1.4 (blueprint: def-sc-module-cup-godement-model). -/
+Source: Banerjee, §1.1.4. -/
 def moduleCup_godementInsert (X : Scheme.{u}) (F : X.Modules) :
     (n : ℕ) → Fin (n + 1) →
       (moduleCup_godementIterate X F n ⟶ moduleCup_godementIterate X F (n + 1))
@@ -67,8 +67,7 @@ def moduleCup_godementInsert (X : Scheme.{u}) (F : X.Modules) :
 /-- A cosimplicial object and augmentation have the actual Godement terms,
 unit-insertion cofaces, and degree-zero germ map. This predicate contains no
 flasqueness, exactness, homology, or quasi-isomorphism assertion.
-Source: Stacks, Tag 0FKR; Banerjee, §1.1.4
-(blueprint: def-sc-module-cup-godement-model). -/
+Source: Stacks, Tag 0FKR; Banerjee, §1.1.4. -/
 def ModuleCupGodementModel (X : Scheme.{u}) (F : X.Modules)
     (A : CosimplicialObject X.Modules)
     (a : (CochainComplex.singleFunctor X.Modules 0).obj F ⟶

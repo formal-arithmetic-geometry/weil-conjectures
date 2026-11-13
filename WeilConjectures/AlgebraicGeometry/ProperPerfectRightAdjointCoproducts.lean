@@ -20,8 +20,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 
 /-! # Right adjoints of proper perfect pushforward preserve coproducts
 
-Source: Stacks Project, Duality for Schemes, Lemma 48.13.1, Tag 0A9R
-(blueprint: lem-sc-smooth-proper-tensor-direct-sums).
+Source: Stacks Project, Duality for Schemes, Lemma 48.13.1, Tag 0A9R.
 -/
 
 @[expose] public section
@@ -41,19 +40,16 @@ quasi-coherent subcategories; they do not supply an unrelated direct-image funct
 Preservation of colimits of discrete shape says exactly that the canonical coproduct
 comparison is an isomorphism for every family, including the empty family.
 
-Source: Stacks Project, Duality for Schemes, Lemma 48.13.1, Tag 0A9R
-(blueprint: lem-sc-smooth-proper-tensor-direct-sums).
+Source: Stacks Project, Duality for Schemes, Lemma 48.13.1, Tag 0A9R.
 
-Proof. For a perfect object P on X, proper perfect direct image makes Rf_*P perfect
-(lem-pc-proper-perfect-direct-image-perfect). Perfect objects on Noetherian schemes are
-compact (lem-pc-perfect-object-compact), so Hom(Rf_*P,-) commutes with direct sums.
+Proof. For a perfect object P on X, proper perfect direct image makes Rf_*P perfect. Perfect objects on Noetherian schemes are
+compact, so Hom(Rf_*P,-) commutes with direct sums.
 Adjunction identifies this calculation with Hom(P,c(-)); compactness of P identifies
 Hom(P, the direct sum of c(K_j)) with the direct sum of Hom(P,c(K_j)). Thus Hom(P,-)
 of the canonical comparison is an isomorphism for every perfect P, and also every
 shift of P. The long exact Hom sequence makes its cone orthogonal to all these shifts.
 The class of objects whose shifts are orthogonal to that cone is closed under shifts,
-cones, retracts, and arbitrary sums. Perfect generation
-(lem-pc-derived-qcoh-perfect-generation) makes this class the entire category.
+cones, retracts, and arbitrary sums. Perfect generation makes this class the entire category.
 Taking the cone itself gives its identity zero, so the cone vanishes and the comparison
 is an isomorphism. -/
 theorem properPerfect_rightAdjoint_preservesCoproducts

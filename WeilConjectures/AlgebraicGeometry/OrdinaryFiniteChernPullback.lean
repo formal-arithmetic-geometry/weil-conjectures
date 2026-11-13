@@ -29,9 +29,7 @@ attribute [local irreducible] Scheme.finiteEtaleTateLine Scheme.kummerδ₁
   Scheme.Pic.toCohomologicalPicardGroup Scheme.Pic.map
 
 /-- Pull a shifted-line arrow back using the fixed constant and twist comparisons.
-This is the literal normalized pullback composite, recorded once for arbitrary schemes.
-Source: the normalized comparisons in blueprint thm-amb-p1-adjunction.
-(auxiliary; not a blueprint node). -/
+This is the literal normalized pullback composite, recorded once for arbitrary schemes. -/
 @[irreducible]
 def ordinaryFiniteLinePullbackMap (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
@@ -43,9 +41,8 @@ def ordinaryFiniteLinePullbackMap (A : Type (u + 1)) [CommRing A] (N : ℕ)
 
 /-- The normalized derived pullback realizes the Kummer class of the pulled-back line.
 This assertion involves no direct image, diagonal, trace, or projective-line splitting.
-Source: Stacks 03PL, 03FD; blueprint lem-amb-p1-diagonal-integrals, Kummer pullback;
+Source: Stacks 03PL, 03FD, Kummer pullback;
 lem-sp-finite-p1-diagonal-kummer-component-formula, proof steps 2 and 3.
-(auxiliary; not a blueprint node)
 
 Proof: compute a derived map from the free constant module by an injective module
 resolution, then forget coefficients and evaluate on the integral generator one.

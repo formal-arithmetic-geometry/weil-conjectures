@@ -41,7 +41,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 # Lisse pro-etale module sheaves have etale origin
 
 Source: Stacks Project, Pro-etale Cohomology, Tag 099Y, lemma-compare-locally-constant;
-Bhatt--Scholze, Corollary 5.1.5 (auxiliary; not a blueprint node).
+Bhatt--Scholze, Corollary 5.1.5.
 
 Both clauses use the fixed-coefficient comparison adjunction. Local constancy uses
 module-sheaf isomorphisms, and finiteness is tested at all bounded geometric points.
@@ -57,8 +57,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A fixed-coefficient pro-etale module sheaf is lisse when it is locally constant
 and all geometric stalks are finite as sets. No freeness or constant rank is required.
-Source: Stacks Project, Tag 099Y, specialized to a finite commutative coefficient ring
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 099Y, specialized to a finite commutative coefficient ring. -/
 noncomputable def IsLisseProEtaleFixedModuleSheaf (X : Scheme.{u})
     (Λ : Type (u + 1)) [CommRing Λ]
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ)) : Prop :=
@@ -69,7 +68,7 @@ noncomputable def IsLisseProEtaleFixedModuleSheaf (X : Scheme.{u})
 /-- Inverse image preserves lisse module sheaves, and every lisse pro-etale module sheaf
 is isomorphic to the inverse image of a lisse etale module sheaf.
 Source: Stacks Project, Tag 099Y, lemma-compare-locally-constant; Bhatt--Scholze,
-Corollary 5.1.5 (auxiliary; not a blueprint node).
+Corollary 5.1.5.
 
 Proof:
 1. Choose finite etale constant models using finite_locally_constant_module_values_iff.

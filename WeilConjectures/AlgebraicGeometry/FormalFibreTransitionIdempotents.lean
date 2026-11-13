@@ -21,7 +21,6 @@ namespace AlgebraicGeometry
 
 /-- Restriction across one infinitesimal-fibre transition uniquely lifts idempotents.
 Source: Stacks Project, Tags 0G7X, 09ZU, 04EX and 00EE.
-(blueprint: lem-weil-pbc-formal-fibre-transition-idempotents)
 
 Proof: Write A = O_(S,s) and m = its maximal ideal. The quotient map
 A/m^(n+2) → A/m^(n+1) has kernel J, the image of m^(n+1). Its square is zero:

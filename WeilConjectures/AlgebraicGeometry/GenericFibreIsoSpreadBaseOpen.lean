@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-! # Descending a whole generic-fibre isomorphism to a base open
 
 Source: Stacks Project, Tag 01ZM, morphism descent and eventual equality.
-(blueprint: lem-sbc-generic-fibre-iso-spread-base-open)
 -/
 
 @[expose] public section
@@ -102,9 +101,7 @@ The canonical pullback comparisons identify these base changes with the
 open restrictions f^{-1}(U) and g^{-1}(U). Conjugate the descended isomorphism
 by those comparisons. Their projection equations give compatibility over U;
 composition with U's inclusion gives the displayed equality over S. No
-nonemptiness of either generic fibre is used, so the empty case is covered.
-
-(blueprint: lem-sbc-generic-fibre-iso-spread-base-open) -/
+nonemptiness of either generic fibre is used, so the empty case is covered. -/
 theorem exists_base_open_iso_of_generic_fibre_iso
     {X Y S : Scheme.{u}} [IsAffine X] [IsAffine Y] [IsAffine S] [IsIntegral S]
     (f : X ⟶ S) (g : Y ⟶ S)

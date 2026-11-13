@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.OpenPinnedCounitHomotopyRestriction
 import all WeilConjectures.AlgebraicGeometry.OpenPinnedSingleTensorRestrictionFactors
 
 /-! # Restriction of the pinned single tensor counit
-Source: Stacks Project, Tags 08DW, 08IB and 08HY.
-(blueprint: lem-pc-open-pinned-single-degree-zero-counit). -/
+Source: Stacks Project, Tags 08DW, 08IB and 08HY. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -24,8 +23,7 @@ noncomputable section
 namespace AlgebraicGeometry
 
 /-- The degree-zero counit selected by the pullback composition structure.
-Source: Stacks Project, Tag 08HY.
-(blueprint: lem-pc-open-pinned-single-degree-zero-counit). -/
+Source: Stacks Project, Tag 08HY. -/
 def openPinnedSingleDegreeZeroCounit
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -61,7 +59,6 @@ private theorem assembleCounitSquare
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction of the pinned counit, before applying any direct image.
 Source: Stacks Project, Tags 08DW, 08IB and 08HY.
-(blueprint: lem-pc-open-pinned-single-degree-zero-counit).
 Proof: compare the tensor pullback of a restricted module with restriction of its
 pullback by the underived composition comparisons and uniqueness of open pullback
 as left adjoint to pushforward. Apply the exact single-complex restriction

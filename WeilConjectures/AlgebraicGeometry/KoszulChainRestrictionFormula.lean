@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
 /-! # The restriction formula for a Koszul chain representative
 
 Source: Stacks Project, Tags 06Z0, 08DC and 08DD.
-(blueprint: lem-sc-koszul-chain-restriction-formula).
 -/
 
 @[expose] public section
@@ -48,7 +47,6 @@ set_option maxHeartbeats 1000000 in
 /-- The canonical comparison on an actual chain representative is restriction followed
 by inverse augmentation and evaluation at one.
 Source: Stacks Project, Equation 36.9.4.1, Tag 08DC; Tags 08D1 and 08DD.
-(blueprint: lem-sc-koszul-chain-restriction-formula)
 
 Proof: On the principal intersection indexed by J, apply the canonical affine counit
 s to the module chain map g. The Koszul-to-Cech cocone evaluates g on the ordered wedge

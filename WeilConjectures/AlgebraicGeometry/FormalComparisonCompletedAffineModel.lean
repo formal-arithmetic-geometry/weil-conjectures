@@ -20,7 +20,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 /-! # Coherent model of the affine formal comparison
 
 Source: Stacks Project, Lemma 088B, base change to the completion and algebraization.
-(blueprint: lem-weil-pbc-formal-comparison-completed-affine-model)
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ is invertible away from the extended exceptional ideal. No annihilation is asser
 
 Source: Stacks Project, Lemma 088B, second half of its proof, through the assertion
 that the algebraized adjunction map is invertible over the complement of V(K).
-(blueprint: lem-weil-pbc-formal-comparison-completed-affine-model)
 
 Proof: Restrict f, F, G, beta and the two comparison equations to the affine U.
 Put B = Gamma(U,O) and R = its J(U)-adic completion. R is Noetherian and flat over

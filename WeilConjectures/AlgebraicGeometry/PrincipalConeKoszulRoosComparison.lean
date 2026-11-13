@@ -12,7 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.IntegralDerivedOperationsOnSlices
 /-! # The normalized scalar cone and tensor Koszul Roos comparison
 
 Source: Stacks 0A0E and 0941.
-(auxiliary; not a blueprint node).
 
 The finite tensor-cone comparison is kept behind its naturality and inclusion lemmas,
 so type checking does not repeatedly expand the total tensor construction. -/
@@ -523,7 +522,6 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- The scalar cone completion and the tensor Koszul Roos model have the same unit.
 
 Source: Stacks 0A0E and 0941.
-(auxiliary; not a blueprint node).
 
 Proof: tensoring a mapping cone with P commutes with that mapping cone, including
 its two inclusions. The unit-tensor isomorphism conjugates scalar multiplication

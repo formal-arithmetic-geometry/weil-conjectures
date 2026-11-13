@@ -41,8 +41,7 @@ support. Its reduced induced scheme is the reduction of the scheme-theoretic bas
 change of the original reduced support. Reduction is a closed immersion; compose
 it with the proper base change of the original support morphism. This proves
 properness for precisely the closed support required by HasSupportProperOver.
-Empty supports and zero modules are included, and the base change need not be flat.
-(blueprint: lem-pc-proper-support-tensor-pullback-properties). -/
+Empty supports and zero modules are included, and the base change need not be flat. -/
 theorem properSupport_tensorPullback_properties
     {X S T : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (p : T ⟶ S)
     (F : X.Modules) [F.IsFinitePresentation]

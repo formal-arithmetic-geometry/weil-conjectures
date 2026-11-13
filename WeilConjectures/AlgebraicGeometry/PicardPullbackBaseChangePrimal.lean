@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 /-! # Primal base change for a module pulled back from the base
 
 Source: Stacks Project, Tag 0BDP, projection-formula paragraph; Tag 01E8.
-(blueprint: lem-sc-picard-pullback-base-change-primal)
 -/
 
 @[expose] public section
@@ -94,7 +93,6 @@ private theorem tensorPullback_finiteLocallyFree {A B : Scheme.{u}} (h : A ⟶ B
 
 /-- The primal base-change map for a pulled-back finite locally free module is invertible.
 Source: Stacks Project, Tag 0BDP, projection-formula paragraph.
-(blueprint: lem-sc-picard-pullback-base-change-primal)
 Proof: The finite-locally-free unit theorem applies to N at g and to h^*N at h ≫ g;
 pullback preserves finite local freeness by uniqueness of left adjoints and the proved
 abstract-pullback instance. Pasting the pullback squares identifies the iterated

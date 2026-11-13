@@ -15,8 +15,7 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 /-!
 # Affine weakly contractible pro-etale hypercovers
 
-Source: Stacks Project, proetale.tex, Tag 09A1, clause (2); sites.tex, Tags 090K, 090L
-(auxiliary; not a blueprint node).
+Source: Stacks Project, proetale.tex, Tag 09A1, clause (2); sites.tex, Tags 090K, 090L.
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ open scoped Simplicial
 namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- A qcqs object of the small pro-etale site has a hypercover with affine weakly
-contractible terms. Source: Stacks Project, Tag 09A1 (2), and Tags 090K, 090L
-(auxiliary; not a blueprint node).
+contractible terms. Source: Stacks Project, Tag 09A1 (2), and Tags 090K, 090L.
 
 The simplicial object takes values in the slice over `W`, so all its operators commute
 with the augmentation. Weak contractibility is tested on sheaves on the full site of `X`.

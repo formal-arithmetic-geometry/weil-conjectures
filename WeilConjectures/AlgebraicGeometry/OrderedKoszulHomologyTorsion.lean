@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorSections
 /-! # Scalar contraction for the ordered ringed Koszul complex
 
 Source: Stacks Project, More on Algebra, Tag 0913.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -208,7 +207,6 @@ private theorem ordered_scalar_nullhomotopy
 
 /-- A uniform positive ideal power annihilates the homology of an ordered Koszul stage.
 Source: Stacks Project, More on Algebra, Tags 0626 and 0913.
-(auxiliary; not a blueprint node).
 
 Proof: multiplication by a generator to exponent n+1 contracts its two-term factor.
 Tensor that homotopy with the other factors, with the total-complex signs. Naturality

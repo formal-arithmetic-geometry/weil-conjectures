@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationComponent
 /-! # Evaluation components with a fixed normalized tensor comparison
 
 Source: Stacks Project, Tag 0A8X, ordinary tensor totalization; the open-site
-reindexing construction in Mathlib `Scheme.Modules.overEquiv`.
-(blueprint: lem-pc-ordinary-evaluation-component-over-transport). -/
+reindexing construction in Mathlib `Scheme.Modules.overEquiv`. -/
 
 @[expose] public section
 
@@ -52,7 +51,6 @@ set_option linter.unusedVariables false in
 /-- A fixed normalized tensor comparison transports all ordinary evaluation components.
 Source: Stacks Project, Tags 0A8X and 08DQ, the ordinary evaluation calculation;
 Tag 08DL, restriction of internal Hom.
-(blueprint: lem-pc-ordinary-evaluation-component-over-transport).
 
 Proof: use the summand equation for c and naturality of the total tensor of d
 at (p,q) to move the target inclusion through the inverse tensor comparison.
@@ -85,7 +83,7 @@ so both composites evaluate on a generator as the scalar action
 
 This is the dual/output cancellation, rather than an appeal to a canonical
 reindexing of e. More explicitly, apply he to the two maps represented by the
-generators x : 𝟙_ ⟶ P.X r and y : F.X p ⟶ F.X p (and to the corresponding
+generators x: 𝟙_ ⟶ P.X r and y: F.X p ⟶ F.X p (and to the corresponding
 unit maps). The resulting naturality squares move e across the dual projection
 and across the output projection. Their middle arrows are the two composites
 just computed, hence are equal on every local generator; cancelling the

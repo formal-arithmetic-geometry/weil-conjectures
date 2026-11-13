@@ -91,12 +91,11 @@ set_option backward.isDefEq.respectTransparency.types false in
 composition and localization comparisons.
 Source: Stacks Project, Tag 03F3; steps 2 and 3 of
 `lem-weil-pbc-etale-open-section-pullback` and `open_restriction_pullback_unit`.
-(blueprint: lem-weil-pbc-nested-open-section-unit)
 
 Proof: Evaluate the localization adjunction unit at vU and restrict along the
-identity diagonal δ : bU → U ×_X U. The site adjunct of δ is the identity of vU,
+identity diagonal δ: bU → U ×_X U. The site adjunct of δ is the identity of vU,
 so the unit followed by δ is the inverse U localization comparison. Next use the
-map ψ = (i,id) : bV → U ×_X V. Its site adjunct is the inclusion f : vV → vU,
+map ψ = (i,id): bV → U ×_X V. Its site adjunct is the inclusion f: vV → vU,
 so the V unit followed by ψ and the V localization comparison is F(f).
 The pullback composition comparison sends ψ to t followed by the pullback of δ:
 check the two outer projections and the two inner projections by the pullback

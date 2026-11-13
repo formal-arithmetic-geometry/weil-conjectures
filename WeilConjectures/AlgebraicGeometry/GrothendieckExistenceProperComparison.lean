@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.FormalSystemsPushPull
 /-! # Projective-modification comparison for proper algebraization
 
 Source: Stacks Project, Proposition 088C, last paragraph, and Lemma 088B.
-(blueprint: lem-weil-pbc-proper-existence-comparison).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace AlgebraicGeometry
 The error is killed by a power of an ideal all of whose positive powers are nonzero.
 This statement does not assume algebraization on any closed subscheme.
 Source: Stacks Project, Proposition 088C, last paragraph, and Lemma 088B.
-(blueprint: lem-weil-pbc-proper-existence-comparison).
 
 Proof:
 1. Apply Chow's lemma (Tag 0200) to f. Its proper surjective modification q:Y -> X

@@ -15,8 +15,7 @@ import Mathlib.Topology.DiscreteSubset
 
 /-! # A normalized frame cover for prescribed component sections
 
-Source: Stacks Project, Varieties Lemma 09NE (lemma-glue-invertible-sheaves).
-(blueprint: lem-sc-normalized-component-section-cover) -/
+Source: Stacks Project, Varieties Lemma 09NE. -/
 
 @[expose] public section
 
@@ -53,8 +52,7 @@ members overlaps outside T: point neighborhoods have distinct distinguished poin
 and all other members avoid T. Thus for every open W contained in a distinct overlap,
 the reduced-cover section bijection applies. This proves all the asserted clauses.
 If T is empty take only component neighborhoods; if Y is empty take the empty cover.
-No transition unit, cocycle, glued module, or global section is constructed here.
-(blueprint: lem-sc-normalized-component-section-cover) -/
+No transition unit, cocycle, glued module, or global section is constructed here. -/
 theorem exists_normalized_component_section_cover
     {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]
     (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ Y) [∀ a : ι, IsClosedImmersion (i a)]

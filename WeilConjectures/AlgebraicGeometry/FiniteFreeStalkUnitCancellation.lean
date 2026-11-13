@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkUnitCancellationAt
 
 /-! # One unit cancellation over a scheme stalk
 
-Source: Stacks Project, Tag 00MT, and blueprint lem-pc-perfect-locus, proof step 4.
-(blueprint: lem-pc-finite-free-stalk-unit-cancellation)
+Source: Stacks Project, Tag 00MT, and, proof step 4.
 -/
 
 @[expose] public section
@@ -27,9 +26,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A nonzero residue differential permits one cancellation, dropping two term ranks.
 
-Source: Stacks Project, Tag 00MT (`lemma-add-trivial-complex`), applied once over the
-local ring of the stalk; blueprint lem-pc-perfect-locus, proof step 4.
-(blueprint: lem-pc-finite-free-stalk-unit-cancellation).
+Source: Stacks Project, Tag 00MT, applied once over the
+local ring of the stalk, proof step 4.
 
 Proof: Use the chosen finite free sheaf identifications to take global sections on
 Spec of the stalk. Maps between these free sheaves are matrices over the stalk,

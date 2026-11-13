@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackIdealQuotient
 /-! # A maximal closed counterexample to proper algebraization
 
 Source: Stacks Project, Proposition 088C, first two paragraphs of the proof.
-(blueprint: lem-weil-pbc-proper-existence-maximal-failure).
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ namespace AlgebraicGeometry
 /-- Failure of proper existence reduces to a nonempty closed subscheme on which
 algebraization fails, but completion on every nonzero closed quotient is an equivalence.
 Source: Stacks Project, Proposition 088C, first two paragraphs of the proof.
-(blueprint: lem-weil-pbc-proper-existence-maximal-failure).
 
 Proof:
 1. Identify the kernel ideal of Spec(A/I) with the ideal sheaf of I, using the

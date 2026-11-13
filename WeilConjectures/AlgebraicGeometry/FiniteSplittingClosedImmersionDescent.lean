@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteOpenPartitionThickeningTransport
 
 Source: Stacks Project Tag 04DZ and steps 2--3 of
 `lem-weil-pbc-generic-finite-noetherian-scheme-splitting`.
-(blueprint: lem-weil-pbc-finite-splitting-closed-immersion-descent)
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Source: Stacks Project Tag 04DF; step 3 of finite splitting descent.
 A finite morphism is integral. Universal injectivity descends after pulling back the
-surjective precomposition to each test square, and surjectivity cancels directly.
-(blueprint: lem-weil-pbc-finite-splitting-closed-immersion-descent) -/
+surjective precomposition to each test square, and surjectivity cancels directly. -/
 private theorem universalHomeomorphism_of_surjective_precomp
     {A B C : Scheme.{u}} (a : A ⟶ B) (g : B ⟶ C)
     [Surjective a] [IsFinite g] [IsUniversalHomeomorphism (a ≫ g)] :
@@ -56,7 +54,6 @@ Noetherian, density, affine, or generic-splitting assumption.
 
 Source: Stacks Project Tag 04DZ; steps 2--3 of
 `lem-weil-pbc-generic-finite-noetherian-scheme-splitting`.
-(blueprint: lem-weil-pbc-finite-splitting-closed-immersion-descent)
 
 Proof: Restrict r to U. This is again a surjective closed immersion, and hence a
 universal homeomorphism. The equivalence of small etale sites lifts each scheme

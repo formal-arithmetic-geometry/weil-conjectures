@@ -70,7 +70,6 @@ private theorem locallyInjective_zero_of_iso
 of the corresponding derived direct image along the inclusion of opens.
 Source: Stacks Project, Cohomology on Sites, Tags 072W and 0733(1).
 https://stacks.math.columbia.edu/tag/072W
-(blueprint: lem-sc-etale-positive-direct-image-object-acyclic)
 
 Proof: Choose an injective resolution I of F. The free-abelian representable
 adjunction and the injective-resolution computation of Ext identify the object

@@ -23,8 +23,7 @@ noncomputable section
 
 /-- A natural tensor pairing for the concrete Godement construction, compatible with its
 unit and multiplication. This is a type of data, not a choice of an unproved witness.
-Source: Banerjee, arXiv:1004.1491, §1.1.4; Stacks, Tag 0FKR.
-(blueprint: new-module-cup-godement-iterate-pairings-canonical-exists) -/
+Source: Banerjee, arXiv:1004.1491, §1.1.4; Stacks, Tag 0FKR. -/
 structure ModuleCupGodementBeta (X : Scheme.{u}) where
   map : ∀ H K : X.Modules,
     moduleCup_godementObject X H ⊗ moduleCup_godementObject X K ⟶
@@ -43,7 +42,6 @@ structure ModuleCupGodementBeta (X : Scheme.{u}) where
 
 /-- Canonical recursively generated tensor pairing.
 Source: Banerjee, arXiv:1004.1491, §1.1.4, pp. 15–16; Stacks, Tag 0FKR.
-(blueprint: new-module-cup-godement-iterate-pairings-canonical-exists)
 Proof: Project each factor T(H), T(K) to the skyscraper at x. Their tensor maps, by the tensor
 universal property and the tensor map on stalks, into the skyscraper of the stalk of H tensor K.
 Product universality defines beta. Naturality follows on pure tensors after each product

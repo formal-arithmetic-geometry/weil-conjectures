@@ -18,7 +18,6 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 
 Source: Stacks Project, Tag 09ZF, fourth proof paragraph, construction of the
 section of the Zariski inverse image and compatibility with its unit.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-gluing).
 -/
 
 @[expose] public section
@@ -63,7 +62,6 @@ section in the Zariski inverse image. The map lift identifies global Zariski
 sections with étale sections, and compare is compatible with the Zariski unit.
 Source: Stacks Project, Tag 09ZF, fourth proof paragraph, construction of t'
 and its membership in the Zariski inverse-image subsheaf.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-gluing).
 
 Proof:
 1. Put F' = h^*F and i' = pullback.snd i h. Restrict F' to the open-subscheme

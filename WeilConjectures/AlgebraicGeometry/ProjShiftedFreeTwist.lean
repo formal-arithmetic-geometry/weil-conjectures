@@ -20,9 +20,8 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineTwist
 /-!
 # Shifted free graded modules and the glued twists on the projective line
 
-Source: blueprint `lem-sc-p1-graded-resolution`, final clause; Stacks Project,
+Source:, final clause; Stacks Project,
 Constructions, Definitions 01M6, 01MN and Lemma 01M7.
-(blueprint: lem-sc-p1-proj-shifted-free-twist)
 
 `Proj.twist` is the recorded sheaf of `S(d)`. Its comparison target is the glued
 `ProjectiveLine.TwistData`, transported along a chart-compatible scheme isomorphism.
@@ -45,7 +44,6 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 /-- The sheaf of `S(d)` agrees with the twist glued using `g₀ = t⁻ᵈ g₁`, and the
 sheaf of a finite direct sum of shifts is the coproduct of their twists.
 Source: Stacks Project, Constructions, Definitions 01M6 (3), 01MN (1), Lemma 01M7 (2),(3).
-(blueprint: lem-sc-p1-proj-shifted-free-twist)
 
 Proof:
 1. On `Uᵢ = D₊(xᵢ)`, def-weil-pbc-proj-twisting-sheaf gives the degree-`d`

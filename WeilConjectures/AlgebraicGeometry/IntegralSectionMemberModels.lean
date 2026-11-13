@@ -32,7 +32,7 @@ attribute [local irreducible] upperStarFromPoint CondensedRing.upperStar upperSt
   Scheme.proEtaleModuleInverseImage Scheme.integralConstantModule continuousScalarFunctor
 
 /-- Pullback to a member admits a finite point model, before any coefficient comparison.
-Source: finite constant local models (auxiliary; not a blueprint node). -/
+Source: finite constant local models. -/
 def sectionPointModelAlong
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X S : Scheme.{u}} (g : S ⟶ X)
@@ -44,7 +44,7 @@ def sectionPointModelAlong
         ((upperStarFromPoint Y).mapMod Λ).obj Q)
 
 /-- The explicit scalar model in the localized module category.
-Source: the completed scalar model (auxiliary; not a blueprint node). -/
+Source: the completed scalar model. -/
 def integralSectionMemberModel (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X S : Scheme.{u}} (g : S ⟶ X) (U : S.ProEt)
@@ -249,7 +249,6 @@ private theorem symmNonemptyIso {C : Type*} [Category C] {M N : C}
 /-- On a single member, the fixed section comparison preserves finite scalar models.
 Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), scalar comparison
 in step 7 of the integral constructibility bridge.
-(auxiliary; not a blueprint node).
 
 Proof: write a finite presentation of the point module as a matrix between finite sums
 of the regular module. Evaluation of continuous scalar functions at the singleton

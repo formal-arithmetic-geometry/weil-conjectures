@@ -23,8 +23,7 @@ specified source open. Apply the
 Mathlib open-immersion pullback criterion to this equality, index by index.
 Empty index types give a vacuous conclusion; empty charts are covered by the
 same criterion. The inverse-image hypothesis is essential: commuting arbitrary
-local models and covering open embeddings need not arise from descended overlaps.
-(blueprint: lem-pd-glued-effective-model-charts-pullback) -/
+local models and covering open embeddings need not arise from descended overlaps. -/
 theorem glued_model_chart_pullbacks
     {X Y : Scheme.{u}} {p : X ⟶ Y} {V : Over X}
     {I : Type u} (U : I → V.left.Opens) (W : I → Over Y)

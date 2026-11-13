@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.ProjHomogeneousSectionTensorPowersLocus
 /-!
 # Multiplication and coordinate loci of twists on the projective line
 
-Source: Stacks Project, Constructions, Tags 01MS, 01MU, 01MV and 01NG
-(blueprint: lem-sc-p1-twist-multiplication).
+Source: Stacks Project, Constructions, Tags 01MS, 01MU, 01MV and 01NG.
 -/
 
 @[expose] public section
@@ -108,8 +107,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 (and of its dual in negative degree) identify coherently with the twists, and the
 nonvanishing locus of each coordinate section is its standard chart.
 
-Source: Stacks Project, Constructions, Tags 01MS, 01MU, 01MV and 01NG
-(blueprint: lem-sc-p1-twist-multiplication).
+Source: Stacks Project, Constructions, Tags 01MS, 01MU, 01MV and 01NG.
 
 Proof: The polynomial variables generate the algebra, so their basic opens cover
 by Proj.iSup_basicOpen_eq_top'. Apply Proj.isInvertible_twist to this degree-one

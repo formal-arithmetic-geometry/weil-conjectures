@@ -25,7 +25,6 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry Topological
 set_option backward.isDefEq.respectTransparency false in
 /-- Descent of sections from the local scheme.
 Source: Stacks Project, Tag 03Q6, degree zero and proof steps (1)-(3).
-(blueprint: new-local-stalk-sections-descent-sections)
 
 Proof: Choose an affine neighbourhood V of x. Principal opens of V containing x
 are cofinal among neighbourhoods of x: intersect any neighbourhood with V and use

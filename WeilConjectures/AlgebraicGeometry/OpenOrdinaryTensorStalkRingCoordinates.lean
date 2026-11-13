@@ -62,8 +62,7 @@ identify these latter maps with the two displayed tensor algebra maps.
 The input and output normalizations follow directly from their construction.
 This uses no derived objects, flatness or nonzero-ring assumptions.
 Source: Mathlib Scheme.Opens.stalkIso, Scheme.Hom.stalkMap_comp,
-Scheme.Hom.stalkMap_congr_hom and stalkMap_congr; Stacks Project, Tag 0098.
-(blueprint: lem-pc-open-ordinary-tensor-stalk-ring-coordinates). -/
+Scheme.Hom.stalkMap_congr_hom and stalkMap_congr; Stacks Project, Tag 0098. -/
 theorem exists_openOrdinaryTensor_stalk_ring_coordinates
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -23,8 +23,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Proper closed support for a coherent thickening system
 
-Source: Stacks Project, Tags 088E and 088F
-(blueprint: lem-weil-pbc-grothendieck-existence-system-support).
+Source: Stacks Project, Tags 088E and 088F.
 -/
 
 @[expose] public section
@@ -102,7 +101,6 @@ private theorem formalSupport_of_chow
 /-- A coherent system whose first term has proper support has one proper closed subscheme
 annihilating all its pushed-forward terms.
 Source: Stacks, Theorem 088E, proof after the first paragraph, in the form of Remark 088F.
-(blueprint: lem-weil-pbc-grothendieck-existence-system-support).
 
 Proof:
 1. Package the input as a coherent thickening system. The dictionary provides the

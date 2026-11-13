@@ -27,7 +27,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Intrinsic affine-local flatness of a quasi-coherent module implies tensor flatness.
 Source: Stacks Project, Tags 01U4 (affine-local flatness) and 05NE (flat stalks).
-(blueprint: lem-pc-intrinsic-flat-module-tensor-flat).
 
 Proof: On an affine neighbourhood of each point, evaluate IsFlatOver at equal affine
 opens. The identity ring map makes the section module flat over its own coordinate

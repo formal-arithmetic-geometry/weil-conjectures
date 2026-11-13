@@ -74,8 +74,7 @@ private theorem finite_sections_equal
 
 /-- A filtered colimit of presheaves satisfying the sheaf condition for one finite
 presieve with pairwise pullbacks satisfies that same condition.
-Source: Stacks Project, Sites, Tag 0738(4) and Tag 00VM; Categories, Tag 002W
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tag 0738(4) and Tag 00VM; Categories, Tag 002W.
 
 Proof: Index the arrows of R by its finite subtype of uncurried arrows. Evaluation
 preserves presheaf colimits. For separatedness, lift two sections over X to a common
@@ -559,7 +558,6 @@ private theorem affineClassicalCover (X : Scheme.{u})
 
 /-- Local etale presentations imply continuity on affine ind-etale presentations.
 Source: Bhatt--Scholze, Lemma 5.1.4, using the continuity criterion of Lemma 5.1.2.
-(auxiliary; not a blueprint node).
 
 Proof: Refine the given cover over each affine basis object by all affine ind-etale
 objects admitting a map to one of its members. Cocontinuity of localization and of

@@ -13,8 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 /-!
 # The cycle class of an effective Cartier divisor
 
-Stacks Project, Tag 03PL
-(auxiliary; not a blueprint node).
+Stacks Project, Tag 03PL.
 
 We use the fixed-scalar sheaf presentation of ordinary pro-etale modules, canonically
 realized by `finiteCoefficientRealization` over the coefficient ring sheaf of
@@ -37,8 +36,7 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- Cache the existing smallness proof used by integral pro-etale Ext classes.
-Source: the existing Grothendieck-abelian sheaf category and its Ext instance
-(auxiliary; not a blueprint node).
+Source: the existing Grothendieck-abelian sheaf category and its Ext instance.
 Proof: apply the library instance for Ext in this sheaf category. This names only
 its smallness proof, so it does not alter the Ext objects or their operations. -/
 instance (priority := 10000) geoCartierIntegralExt (Z : Scheme.{u}) :
@@ -46,39 +44,32 @@ instance (priority := 10000) geoCartierIntegralExt (Z : Scheme.{u}) :
   infer_instance
 
 /-- Cache finite-coefficient pro-etale Ext smallness, without changing any Ext data.
-Source: the existing Grothendieck-abelian sheaf Ext instance
-(auxiliary; not a blueprint node). The proof only specializes that instance. -/
+Source: the existing Grothendieck-abelian sheaf Ext instance. The proof only specializes that instance. -/
 instance (priority := 10000) geoCartierModuleExt
     (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
     HasExt.{u + 1} (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} A)) := by
   infer_instance
 
-/-- The ordinary pro-etale constant module used in the Cartier class.
-Source: blueprint sk-lem-geo-cartier, statement (auxiliary; not a blueprint node). -/
+/-- The ordinary pro-etale constant module used in the Cartier class. -/
 def geoCartierConstant (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
     Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} A) :=
   (constantSheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A)
 
-/-- The finite Tate line is exactly comparison inverse image of the etale roots tensor.
-Source: blueprint sk-lem-geo-cartier, displayed definition of Λ(1)
-(auxiliary; not a blueprint node). -/
+/-- The finite Tate line is exactly comparison inverse image of the etale roots tensor. -/
 def geoCartierLine (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (Z : Scheme.{u}) : Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} A) :=
   (comparisonUpperStar (ModuleCat.{u + 1} A) Z).obj
     (Scheme.finiteEtaleTateLine Z N A hA)
 
 /-- The supported cycle class, represented through the canonical degree-two Ext/Hom
-bijection. Its source uses ordinary closed direct image, not an arbitrary support object.
-Source: blueprint sk-lem-geo-cartier, displayed c_D (auxiliary; not a blueprint node). -/
+bijection. Its source uses ordinary closed direct image, not an arbitrary support object. -/
 abbrev GeoCartierClass (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     {D Z : Scheme.{u}} (i : D ⟶ Z) :=
   Ext ((lowerStar (ModuleCat.{u + 1} A) i).obj (geoCartierConstant A D))
     (geoCartierLine A N hA Z) 2
 
 /-- The comparison on the ordinary supported constant, with its canonical mate and
-constant-sheaf identification. Invertibility is asserted in the main statement.
-Source: blueprint sk-lem-geo-cartier, proof paragraph 1
-(auxiliary; not a blueprint node). -/
+constant-sheaf identification. Invertibility is asserted in the main statement. -/
 @[irreducible]
 def geoCartierSourceComparison (A : Type (u + 1)) [CommRing A]
     {D Z : Scheme.{u}} (i : D ⟶ Z) :
@@ -92,8 +83,7 @@ def geoCartierSourceComparison (A : Type (u + 1)) [CommRing A]
 
 /-- The direct image of the constant-sheaf comparison, typed with the Cartier constant as
 target, is invertible; instance search cannot see through geoCartierConstant itself.
-Source: blueprint sk-lem-geo-cartier, proof paragraph 1
-(auxiliary; not a blueprint node).
+
 Proof: after unfolding the constant, it is the image of an isomorphism under a functor. -/
 instance geoCartierSourceConstant_isIso (A : Type (u + 1)) [CommRing A]
     {D Z : Scheme.{u}} (i : D ⟶ Z) :

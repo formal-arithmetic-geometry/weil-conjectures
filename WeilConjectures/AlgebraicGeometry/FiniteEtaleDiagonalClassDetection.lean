@@ -322,7 +322,6 @@ endomorphisms of its finite etale Tate line. This statement concerns only finite
 etale coefficients; it has no reduction tower, completion or pro-etale object.
 Source: diagonal coefficient changes (3), residue one, using the arbitrary-base
 finite P1 integral normalization.
-(blueprint: lem-diagonal-finite-etale-class-detection).
 
 Proof: choose an arbitrary-base finite P1 splitting and use uniqueness of the
 positive supported Kummer boundary to identify its diagonal class with the

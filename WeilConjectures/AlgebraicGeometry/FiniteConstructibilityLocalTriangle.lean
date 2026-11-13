@@ -115,8 +115,7 @@ private theorem finite_local_triangle
   exact fun q ↦ (hm _).mpr (h₂ q)
 
 /-- Fixed-stratum finite models are closed under distinguished triangles over a positive
-finite quotient. Source: blueprint latest, integral-finite-levels, first paragraph.
-(blueprint: lem-pe-finite-constructibility-middle-closure).
+finite quotient.
 
 Proof: finite quotient coefficients are a finite Noetherian discrete ring. Normalized
 encoding identifies finite constant models with finite locally constant modules.

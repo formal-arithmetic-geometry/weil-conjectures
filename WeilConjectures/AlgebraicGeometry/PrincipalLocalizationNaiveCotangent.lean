@@ -12,8 +12,7 @@ import Mathlib.LinearAlgebra.Isomorphisms
 /-!
 # Principal localization and the naive cotangent complex
 
-Source: Stacks Project, Algebra, Lemma 08JZ, statement and proof
-(blueprint: lem-weil-pbc-principal-localization-naive-cotangent).
+Source: Stacks Project, Algebra, Lemma 08JZ, statement and proof.
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ namespace Algebra.Generators
 set_option backward.isDefEq.respectTransparency false in
 set_option maxRecDepth 2048 in
 /-- A polynomial presentation and its principal localization have the displayed conormal
-and differential splittings. Source: Stacks Project, Algebra, Lemma 08JZ
-(blueprint: lem-weil-pbc-principal-localization-naive-cotangent).
+and differential splittings. Source: Stacks Project, Algebra, Lemma 08JZ.
 
 `P` bundles the surjection alpha from `A[x_s]` and a chosen section; its kernel is `P.ker`.
 `localizationAway Bg g` sends its sole variable to `1/g`; its `comp P` is beta.

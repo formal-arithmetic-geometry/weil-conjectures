@@ -18,7 +18,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # A linear presentation of ideal-power numerators
 
 Source: Stacks Project, Properties, Lemma 01PM, monomial construction in its proof.
-(blueprint: lem-weil-pbc-ideal-power-numerator-presentation).
 -/
 
 @[expose] public section
@@ -60,7 +59,6 @@ set_option backward.isDefEq.respectTransparency false in
 
 Source: Stacks Project, Properties, Lemma 01PM, paragraphs defining the exponent
 and assigning an image to each degree-d monomial; Lemma 01PQ, affine reduction.
-(blueprint: lem-weil-pbc-ideal-power-numerator-presentation).
 
 Proof: Put R=O_X(V), M=F(V), J=(g_i), and H=(g_i^k). The existing affine-power
 calculation proves that P_n is quasi-coherent and has section image J^n. We use

@@ -13,8 +13,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 /-!
 # The homogeneous action on graded cohomology
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 0897
-(blueprint: lem-weil-pbc-graded-cohomology-module-structure).
+Source: Stacks Project, Cohomology of Schemes, Lemma 0897.
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace AlgebraicGeometry
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 0897(1), the graded action in
 its statement; this algebraic part does not require properness or finite generation.
-(blueprint: lem-weil-pbc-graded-cohomology-module-structure).
 
 Proof:
 Write H_m = H^p(X, G_m). Applying the additive cohomology functor to mu gives

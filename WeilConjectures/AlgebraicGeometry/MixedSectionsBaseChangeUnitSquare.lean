@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.MixedSectionsSquareComparisonCoherence
 
 /-! # Sections of the base-change unit square with independent universes
 Source: Stacks Project, cohomology.tex, Tags 08HY and 0D5T.
-(blueprint: lem-sc-mixed-sections-base-change-unit-square).
 -/
 
 @[expose] public section
@@ -82,7 +81,6 @@ variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 over the global ring of Y. No affine or quasi-coherence hypothesis is needed.
 It concerns only the canonical unit at E, and constructs no extension isomorphism.
 Source: Stacks Project, cohomology.tex, Remark 08HY and Lemma 0D5T.
-(blueprint: lem-sc-mixed-sections-base-change-unit-square).
 
 Proof:
 1. Expand schemeDerivedBaseChangeMap as the f'-adjunct of the pullback-composition

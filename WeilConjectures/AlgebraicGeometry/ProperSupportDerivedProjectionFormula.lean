@@ -32,7 +32,6 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 /-! # Derived projection formula for a complex with proper support
 
 Source: Stacks Project, Tags 08EV (support reduction) and 08EU (projection formula).
-(blueprint: lem-pc-proper-support-derived-projection-formula)
 -/
 
 @[expose] public section
@@ -126,7 +125,6 @@ private theorem qc_single (S : Scheme.{u})
 /-- Proper support permits the derived projection formula without assuming f quasi-compact.
 Source: Stacks Project, Tag 08EV, proof, support reduction and first displayed equality;
 Tag 08EU.
-(blueprint: lem-pc-proper-support-derived-projection-formula)
 
 Proof: Boundedness gives finitely many nonzero cohomology sheaves. Their supports
 have proper union T over S, hence T is quasi-compact. Choose a quasi-compact open

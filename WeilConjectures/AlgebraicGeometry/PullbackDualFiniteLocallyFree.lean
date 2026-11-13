@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
 Source: the finite free calculation in Stacks Project, Modules, Example 0FNV,
 and pullback of locally free modules, Lemma 01C8.
-(blueprint: lem-ag-pullback-dual-finite-locally-free)
 -/
 
 @[expose] public section
@@ -37,9 +36,7 @@ On the inverse image of this neighbourhood the map is the comparison
 `O_S^r ⟶ Hom(O_S^r, O_S)`, which sends each dual basis vector to its coordinate
 functional and is an isomorphism, including when `r = 0`. Thus the canonical map
 is locally an isomorphism on an open cover, hence an isomorphism of sheaves.
-Take its associated isomorphism.
-
-(blueprint: lem-ag-pullback-dual-finite-locally-free) -/
+Take its associated isomorphism. -/
 theorem nonempty_pullback_dual_iso_of_isFiniteLocallyFree
     {X S : Scheme.{u}} (e : S ⟶ X) (M : X.Modules) [M.IsFiniteLocallyFree] :
     Nonempty ((pullback e).obj (dual M) ≅ dual ((pullback e).obj M)) := by

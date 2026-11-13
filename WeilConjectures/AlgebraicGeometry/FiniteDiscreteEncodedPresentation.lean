@@ -296,7 +296,6 @@ private lemma normalizedPullback_encoding (T U : Scheme.{u}) (j : U ⟶ T)
 /-- Transport an internal finite local presentation to an ordinary presentation
 by finite constant module sheaves, before refining the matrix to be constant.
 Source: Bhatt--Scholze, Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3.
-(auxiliary; not a blueprint node)
 
 Proof in words. Choose the cover and finite free cokernel presentations from hM.
 Pull the coefficient identification to each cover member. The common sectionwise

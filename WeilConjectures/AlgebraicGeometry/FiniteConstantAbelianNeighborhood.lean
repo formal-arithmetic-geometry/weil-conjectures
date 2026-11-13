@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteConstantLabelSubgroupNeighborhood
 
 Source: Stacks Project, Tag 03RU (definitions); explicit finite-operation
 refinement of steps 1--3 of `lem-weil-pbc-finite-constant-abelian-refinement`.
-(blueprint: lem-weil-pbc-finite-constant-abelian-neighborhood).
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ namespace AlgebraicGeometry.Scheme
 /-- A finite constant set chart admits, near each underlying point, a locally bijective
 map from an actual constant abelian presheaf into the restricted abelian sheaf.
 Source: Stacks Project, Tag 03RU (definitions only); explicit argument,
-steps 1--3 of the finite-operation refinement
-(blueprint: lem-weil-pbc-finite-constant-abelian-neighborhood).
+steps 1--3 of the finite-operation refinement.
 
 Proof: choose an algebraic closure of the residue field at the given point. Identify the
 localized site at U with the small etale site of its domain. The constant set chart

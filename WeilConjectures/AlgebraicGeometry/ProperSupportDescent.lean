@@ -21,8 +21,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 # Descent of proper module support
 
 Source: Stacks Project, Limits of Schemes, Lemma 32.13.5 (Tag 081G), together with
-Cohomology of Schemes, Lemma 30.26.7 (Tag 0CYS)
-(blueprint: lem-pc-proper-support-descent).
+Cohomology of Schemes, Lemma 30.26.7 (Tag 0CYS).
 -/
 
 @[expose] public section
@@ -39,8 +38,7 @@ transition maps. These bases are qcqs. The cone `c` with `hc` is their inverse l
 and `IsAffine c.pt` expresses that the limit is `Spec R` for a ring `R`.
 The scheme and module at the limit and at a later stage are their indicated pullbacks.
 
-Source: Stacks Project, Tag 081G and Tag 0CYS
-(blueprint: lem-pc-proper-support-descent).
+Source: Stacks Project, Tag 081G and Tag 0CYS.
 
 Proof:
 1. Finite presentation implies quasi-coherence and finite type. By

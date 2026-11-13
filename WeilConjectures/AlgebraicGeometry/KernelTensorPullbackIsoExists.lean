@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionConormalFunctorial
 
 Source: Stacks Project, Morphisms, Section 01R1, Lemmas 29.32.2 and 29.32.3;
 Sheaves, Definition 0095 and Lemma 0096.
-(blueprint: lem-weil-pbc-kernel-tensor-pullback-iso-exists).
 -/
 
 @[expose] public section
@@ -186,18 +185,17 @@ an isomorphism of the pulled back kernel ideals, with the canonical section form
 No square-zero or universal property assumption is needed, and uniqueness is not
 asserted here.
 Source: Stacks Project, Section 01R1, Lemmas 29.32.2 and 29.32.3, and Tags 0095, 0096.
-(blueprint: lem-weil-pbc-kernel-tensor-pullback-iso-exists).
 Proof: Write Iⱼ = iⱼ.ker.toModules and Mⱼ = iⱼ* Iⱼ. For every open U of Z₂,
 φ.app U maps the structure-sheaf image of s₂ in I₂(U) into the kernel of
  i₁.app (φ⁻¹ U), by the equation i₁ ≫ φ = i₂. The kernel inclusion is
 injective, so there is a unique section β_U(s₂) of I₁(φ⁻¹ U) with that image.
 The maps β_U are additive, φ.app U-linear, and commute with restrictions:
 apply the injective kernel inclusion to check each identity in the structure
-sheaf. They define an O_Z₂-linear map β : I₂ → φ_* I₁.
+sheaf. They define an O_Z₂-linear map β: I₂ → φ_* I₁.
 Compose β with φ_* of the normalized pullback unit I₁ → i₁_* M₁.
 The pushforward composition comparison and hc identify its target with
  i₂_* M₁. Take its adjoint under the normalized i₂ pullback adjunction,
-obtaining e_hom : M₂ → M₁. The unit/Hom-equivalence identity says on U that
+obtaining e_hom: M₂ → M₁. The unit/Hom-equivalence identity says on U that
  e_hom sends the i₂ unit of s₂ to the i₁ unit of β_U(s₂), transported
 along the equality i₂⁻¹ U = i₁⁻¹(φ⁻¹ U). Thus if s₁ satisfies the displayed
 kernel equation it equals β_U(s₂). Naturality of e_hom and the units gives

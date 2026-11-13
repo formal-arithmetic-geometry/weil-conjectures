@@ -25,7 +25,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- A section on an affine etale object killed by the limit comparison is killed at a stage.
 Source: Stacks Project, Tag 09Z1, proof on qcqs etale objects; Tag 03Q8.
-(blueprint: sbc-lem-higher-direct-image-affine-section-vanishing).
 
 Proof:
 1. Write each higher direct image as the sheafification of its restricted cohomology

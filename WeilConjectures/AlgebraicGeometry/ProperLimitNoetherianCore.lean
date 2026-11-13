@@ -24,7 +24,6 @@ namespace AlgebraicGeometry
 
 /-- Core inverse-system construction for a proper morphism.
 Source: Stacks limits.tex, Tag 0A0P, proof steps 1--8.
-(blueprint: lem-weil-pbc-proper-limit-noetherian-core)
 The construction descends a proper finitely presented envelope, forms scheme-theoretic
 images, and verifies the two limit cones, affine transitions, proper stage maps, and
 finite-type base stages. -/
@@ -108,7 +107,6 @@ theorem exists_proper_limit_noetherian_core
 
 /-- Construct proper models using the finitely generated subrings of an affine base.
 Source: Stacks limits.tex, Tag 0A0P, proof steps 1--9.
-(blueprint: lem-weil-pbc-proper-limit-noetherian-affine-clause)
 Choose the affine Noetherian approximation before descending the proper envelope.
 Its stages remain affine after cofinal reindexing; their section rings are finite type.
 Global sections preserve the limit of affine schemes as a ring colimit. -/

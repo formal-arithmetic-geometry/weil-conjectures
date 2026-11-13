@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 # An integral-base model of a pointed clopen piece
 
 Source: Stacks Project, Tag 055N, reduction to the reduced closure of a point.
-(blueprint: lem-sbc-pointed-clopen-integral-model)
 -/
 
 @[expose] public section
@@ -45,9 +44,7 @@ The base inclusion gives the open embedding `j` into the closure of `y`. Closed 
 change preserves residue fields, so the fibre homeomorphisms followed by restriction
 to `A` give the displayed homeomorphisms. The base-changed section at the generic
 point belongs to this open subscheme by `hpoint`; its factorization yields the
-rational point `r`, and the section equation yields the final equality.
-
-(blueprint: lem-sbc-pointed-clopen-integral-model) -/
+rational point `r`, and the section equation yields the final equality. -/
 theorem exists_pointed_clopen_integral_model {P T : Scheme.{u}}
     (g : P ⟶ T) [LocallyOfFiniteType g] [QuasiCompact g]
     (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) (y : T) (V : Set T) (A : Set P)

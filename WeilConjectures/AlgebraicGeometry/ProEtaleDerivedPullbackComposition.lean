@@ -17,8 +17,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # Composition of derived pro-etale module pullbacks
 
-Source: Stacks Project, sites-cohomology.tex, Lemma 0D6D
-(auxiliary; not a blueprint node).
+Source: Stacks Project, sites-cohomology.tex, Lemma 0D6D.
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ open scoped ChangeOfRings
 namespace AlgebraicGeometry.Scheme
 
 /-- The induced identification on the composite, with no independent third choice.
-Source: Stacks, Tags 03D8 and 0D6D
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tags 03D8 and 0D6D. -/
 noncomputable def proEtaleRingCompositeCoefficients
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (R_V : Sheaf (ProEt.topology V) CommRingCat.{u + 1})
@@ -48,8 +46,7 @@ noncomputable def proEtaleRingCompositeCoefficients
 
 /-- Section of the canonical module unit: the model-site inverse-image unit followed
 by the sheafification of `1 ⊗ m`. The model only enlarges the Hom universe.
-Source: Stacks, Tags 03D2, 03EK and 03D8
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tags 03D2, 03EK and 03D8. -/
 noncomputable def proEtaleRingModuleUnitSection
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -72,7 +69,7 @@ noncomputable def proEtaleRingModuleUnitSection
             (Opposite.op (AsSmall.up.obj U)) m))
 
 /-- Normalization of the module adjunction by its constructed unit on every section.
-Source: Stacks, Tag 03D2 (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03D2. -/
 def proEtaleRingModuleAdjunctionNormalized
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -146,8 +143,7 @@ private theorem derived_formula
 The existential adjunctions have their units fixed sectionwise by the construction;
 `d` is fixed by fibre-product pasting, `a` by conjugation, and `b` degree by degree.
 Thus these witnesses express the ordinary canonical comparison, not arbitrary isomorphisms.
-Source: Stacks, sites-cohomology.tex, Lemma 0D6D and Modules on Sites, Lemma 03D8
-(auxiliary; not a blueprint node).
+Source: Stacks, sites-cohomology.tex, Lemma 0D6D and Modules on Sites, Lemma 03D8.
 Proof: (1) On each test object the fibre-product pasting isomorphism identifies the two
 module direct images. The induced coefficient identification makes it linear. The
 module adjunctions have the displayed tensor units; form their composite using

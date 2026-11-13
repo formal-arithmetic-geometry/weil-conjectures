@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.PerfectRHomEvaluationIsomorphisms
 
 /-! # Perfect RHom tensor comparison
 
-Source: Stacks Project, Cohomology, Tags 08DQ, 0FPC and 0GM7
-(blueprint: lem-pc-perfect-rhom-tensor-comparison).
+Source: Stacks Project, Cohomology, Tags 08DQ, 0FPC and 0GM7.
 -/
 
 @[expose] public section
@@ -89,8 +88,7 @@ set_option maxHeartbeats 1600000 in
 -- The shared derived tensor instances make the witness and pairing elaboration expensive.
 /-- The dual of a perfect complex is perfect, with evaluation, coevaluation, biduality,
 base change, and the tensor--internal-Hom comparison.
-Source: Stacks Project, Cohomology, Tags 08DQ, 0FPC and 0GM7
-(blueprint: lem-pc-perfect-rhom-tensor-comparison).
+Source: Stacks Project, Cohomology, Tags 08DQ, 0FPC and 0GM7.
 
 Proof: choose a strictly perfect local representative of `K`. By
 lem-sc-derived-internal-hom-restrict-open and lem-pc-rhom-strict-perfect-hom,

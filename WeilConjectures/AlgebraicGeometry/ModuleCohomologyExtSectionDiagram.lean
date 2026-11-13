@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
 /-! # The abelian Ext map in the common section-complex diagram
 
 Source: Stacks Project, Tags 01FB, 01F7 and 03FD.
-(blueprint: new-module-cohomology-ext-section-diagram)
 -/
 
 @[expose] public section
@@ -119,7 +118,7 @@ private theorem section_lift_homology_eq
 
 /-- The section-diagram equality is stable after inserting the identity on its codomain.
 This is a strict intermediate compatibility statement; cancelling the identity gives the
-item theorem. Source: Stacks Project, Tag 01FB. (blueprint: new-abelian-edge-section-identity) -/
+item theorem. Source: Stacks Project, Tag 01FB. -/
 theorem abelianEdge_section_diagram_after_identity {X Y : Scheme.{u}} (f : X ⟶ Y) (F : X.Modules)
     (D : ModuleCohomologyFMapData f ((pushforward f).obj F) F
       (𝟙 ((pushforward f).obj F))) (p : ℕ) :
@@ -165,7 +164,6 @@ This is a square between abelian Ext and section homology; neither the module
 edge map nor the module/Ext equivalence occurs in the assertion.
 Source: Stacks Project, Tag 01FB, the common section diagram;
 Tag 01F7, its functorial cohomology map; Tag 03FD, forgotten injective acyclicity.
-(blueprint: new-module-cohomology-ext-section-diagram)
 
 Proof: Forget modules in I,J,K and in the augmentation equation D.compatible.
 The forgotten I and J are resolutions by abelian-section-acyclic objects;

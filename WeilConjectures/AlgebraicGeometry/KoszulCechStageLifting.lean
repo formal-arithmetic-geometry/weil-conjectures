@@ -13,7 +13,6 @@ public import Mathlib.Algebra.Module.LocalizedModule.Away
 /-! # Finite-stage lifting for the Koszul-to-Čech cocone
 
 Source: Stacks, Tags 08D0 and 08D1.
-(blueprint: lem-sc-koszul-cech-stage-lifting)
 -/
 
 @[expose] public section
@@ -122,7 +121,7 @@ private theorem koszul_basis_values
 
 /-- Every total Čech cochain is the image of a cochain at one positive Koszul exponent.
 Source: Stacks, Tag 08D0, proof's localization description, and Tag 08D1,
-finite total-degree diagonals (blueprint: lem-sc-koszul-cech-stage-lifting).
+finite total-degree diagonals.
 
 Proof: Transport the target through principalCechObjIso. For each nonempty subset J,
 put p = card(J)-1 and q = n-p. Quasi-coherence on Spec(A) identifies its section on

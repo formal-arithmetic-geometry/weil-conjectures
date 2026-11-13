@@ -32,7 +32,6 @@ Source: Bhatt--Scholze, Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1)
 for the integral coefficient framework and kernel-closure application. The
 continuous-function pivot argument below is an agent reduction, not an argument
 written out in Lemma 6.8.7 (which reduces to Corollary 6.8.5).
-(auxiliary; not a blueprint node)
 
 Proof:
 1. Refine the supplied covering where the scalar-extended cokernel is finite free.

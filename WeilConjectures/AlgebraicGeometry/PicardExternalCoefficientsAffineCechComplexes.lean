@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.PicardExternalCoefficientsAffineCechDif
 
 Source: Stacks Project, Varieties, Tag 0BED, lemma-kunneth, the equality of complexes
 following "Let V be an affine open".
-(blueprint: lem-sc-picard-external-coefficients-affine-cech-complexes).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 There is no covering hypothesis and no assertion about cohomology or derived functors.
 Source: Stacks Project, Tag 0BED, lemma-kunneth, the equality of complexes after
 "Let V be an affine open"; Tags 01I9 and 01CD for affine sections and pullback tensor.
-(blueprint: lem-sc-picard-external-coefficients-affine-cech-complexes).
 
 Proof: The intersection of the inverse images of U_i in pr2 inverse V is the
 fibre product of their intersection with V over Spec k. Both factors are affine,

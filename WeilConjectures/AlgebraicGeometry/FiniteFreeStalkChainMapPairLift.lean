@@ -12,9 +12,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkChainMapLift
 
 /-! # Lifting a pair of finite free chain maps from a stalk
-
-Source: lem-pc-finite-free-stalk-homotopy-spread, proof steps 1 and 2.
-(blueprint: lem-pc-finite-free-stalk-chain-map-pair-lift)
 -/
 
 @[expose] public section
@@ -25,10 +22,6 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A given pair of chain maps over the stalk lifts, without imposing inverse identities.
-
-Source: blueprint lem-pc-perfect-locus, finite matrix extension argument, as expanded
-in lem-pc-finite-free-stalk-homotopy-spread, steps 1 and 2.
-(blueprint: lem-pc-finite-free-stalk-chain-map-pair-lift).
 
 Proof: Choose an affine neighbourhood and bases in every nonzero term. The source
 complex has support [0,d] and the single complex has support {i}. The components

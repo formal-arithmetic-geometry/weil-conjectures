@@ -47,7 +47,6 @@ Source: Banerjee, Tensor Structure on Smooth Motives, arXiv:1004.1491,
 §1.1.4, p. 16, Alexander--Whitney front/back formula and (1.1.2).
 The same formula applies to the sheaf tensor product since tensoring is additive
 and the simplex identities are identities of sheaf morphisms.
-(blueprint: lem-sc-module-cup-cosimplicial-aw)
 Proof: on the summand in bidegree (r,s), r,s nonnegative, apply to the first
 factor the cofaces associated with the inclusion [r] → [r+s] of the first
 r+1 vertices, and to the second factor those associated with the inclusion

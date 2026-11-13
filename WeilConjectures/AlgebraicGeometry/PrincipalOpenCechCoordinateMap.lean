@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechCoefficientMap
 /-! # Functorial subset Čech coordinate construction
 
 Source: Stacks Project, Cohomology, Tag 08C1.
-(blueprint: lem-sc-principal-open-cech-coordinate-map).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ The target section complex is supplied as an input. No injectivity,
 K-injectivity, quasi-isomorphism or homotopy assumption is required.
 
 Source: Stacks Project, Cohomology, Tag 08C1, equation (20.40.0.1), finite totalization.
-(blueprint: lem-sc-principal-open-cech-coordinate-map).
 
 Proof: In degree n take the product over nonempty subsets S of sections of
 I in degree n+1-card(S). Give it the displayed differential: the vertical

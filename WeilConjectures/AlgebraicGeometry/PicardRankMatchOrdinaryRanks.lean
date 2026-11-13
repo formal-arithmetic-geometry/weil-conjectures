@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.PicardBaseChangeStalkFinrankEq
 /-! # Ordinary ranks under iterated Picard base change
 
 Source: Stacks Project, Tag 0BDP, first three proof paragraphs.
-(blueprint: lem-sc-picard-rank-match-ordinary-ranks).
 -/
 
 @[expose] public section
@@ -160,7 +159,6 @@ private theorem fixedRank_of_finrank {X : Scheme.{u}} (M : X.Modules)
 /-- The ordinary direct image is finite locally free, and its further direct images
 have one fixed rank on each sufficiently small base neighbourhood.
 Source: Stacks Project, Tag 0BDP, rank decomposition and the ordinary rank dictionary.
-(blueprint: lem-sc-picard-rank-match-ordinary-ranks).
 
 Proof:
 1. Apply the universal rank test to the identity of T. The canonical isomorphism

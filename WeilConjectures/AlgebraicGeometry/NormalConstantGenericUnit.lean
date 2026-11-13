@@ -246,7 +246,6 @@ private theorem isIso_constant_unit_stalk_of_connected_strict_fibre
 
 /-- The unit from a constant sheaf to its generic-point pushforward is an isomorphism.
 Source: Stacks Project, Tag 09Z5, generic-point part.
-(blueprint: lem-weil-pbc-normal-constant-generic-unit)
 
 Proof: evaluate the unit at an arbitrary geometric point and use the strict-henselization
 stalk formula for the direct image. The strict henselization of the normal local domain at that

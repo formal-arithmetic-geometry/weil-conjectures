@@ -12,7 +12,6 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 # Scalar extension from the ring of global sections
 
 Source: Stacks Project, algebraization.tex, Tag 099E, final paragraph.
-(auxiliary; not a blueprint node).
 
 The functor is the constant module presheaf followed by presheaf scalar extension and
 module sheafification. Its map to the ring sheaf is constructed by the two adjunctions.
@@ -30,16 +29,14 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 variable (O : Sheaf J CommRingCat.{u})
 
 /-- The ring of compatible global sections, with pointwise ring operations.
-Source: Stacks Project, Tag 099E.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 099E. -/
 def ringFamilyGlobalRing : CommRingCat.{u} :=
   let S := RingCat.sectionsSubring (O.obj ⋙ forget₂ CommRingCat RingCat)
   letI : CommRing S := @Subring.toCommRing _ _ S
   CommRingCat.of S
 
 /-- Evaluation of global sections as a ring-presheaf map.
-Source: Stacks Project, Tag 099E.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 099E. -/
 def ringFamilyGlobalEvaluation :
     (Functor.const Cᵒᵖ).obj (RingCat.of (ringFamilyGlobalRing O)) ⟶
       (𝟭 C).op ⋙ ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).obj where
@@ -54,14 +51,12 @@ def ringFamilyGlobalEvaluation :
     exact (s.property a).symm
 
 /-- The given global list, regarded as elements of the global ring.
-Source: Stacks Project, Tag 099E.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 099E. -/
 def ringFamilyGlobalList (r : ℕ) (f : Fin r → (O.obj ⋙ forget CommRingCat).sections) :
     Fin r → ringFamilyGlobalRing O := f
 
 /-- The finitely generated ideal of the global ring specified by the list.
-Source: Stacks Project, Tag 099E.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 099E. -/
 def ringFamilyGlobalIdeal (r : ℕ) (f : Fin r → (O.obj ⋙ forget CommRingCat).sections) :
     {I : Ideal (ringFamilyGlobalRing O) // I.FG} :=
   ⟨Ideal.span (Set.range (ringFamilyGlobalList O r f)),
@@ -69,7 +64,6 @@ def ringFamilyGlobalIdeal (r : ℕ) (f : Fin r → (O.obj ⋙ forget CommRingCat
 
 /-- Evaluation extends the global generated ideal to the sectionwise generated ideal.
 Source: Stacks Project, Tag 099E.
-(auxiliary; not a blueprint node).
 Proof: ideal map commutes with span, and the image of the global list is its value at X. -/
 theorem ringFamilyGlobalIdeal_map (r : ℕ)
     (f : Fin r → (O.obj ⋙ forget CommRingCat).sections) (X : Cᵒᵖ) :
@@ -79,8 +73,7 @@ theorem ringFamilyGlobalIdeal_map (r : ℕ)
   rfl
 
 /-- Regard a one-point module as a constant module presheaf on C.
-Source: Stacks Project, Tag 099E.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 099E. -/
 def ringFamilyConstantPresheaf : RingSiteModules (ringFamilyGlobalRing O) ⥤
     PresheafOfModules.{u} ((Functor.const Cᵒᵖ).obj (RingCat.of (ringFamilyGlobalRing O))) where
   obj M :=
@@ -110,8 +103,7 @@ theorem ringFamilyGlobalPullback_additive :
 attribute [local instance] ringFamilyGlobalPullback_additive
 
 /-- Extend the constant module presheaf to O and sheafify.
-Source: Stacks Project, Tag 099E.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 099E. -/
 def ringFamilyGlobalExtension : RingSiteModules (ringFamilyGlobalRing O) ⥤
     ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) :=
   ringFamilyConstantPresheaf O ⋙
@@ -129,8 +121,7 @@ theorem ringFamilyGlobalExtension_additive : (ringFamilyGlobalExtension O).Addit
 attribute [local instance] ringFamilyGlobalExtension_additive
 
 /-- Multiplication O tensor_A A to O, constructed by adjoint transposition of evaluation.
-Source: Stacks Project, Tag 099E.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 099E. -/
 def ringFamilyGlobalExtensionUnit :
     (ringFamilyGlobalExtension O).obj (ringComplexUnit (ringFamilyGlobalRing O)) ⟶
       SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) := by
@@ -159,16 +150,14 @@ def ringFamilyGlobalExtensionUnit :
       (ringFamilyGlobalEvaluation O)).homEquiv _ _).symm g)
 
 /-- Scalar extension of a complex over the global ring.
-Source: Stacks Project, Tag 099E.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 099E. -/
 def ringFamilyGlobalExtensionComplex
     (P : CochainComplex (RingSiteModules (ringFamilyGlobalRing O)) ℤ) :
     ringedSiteComplex O :=
   ((ringFamilyGlobalExtension O).mapHomologicalComplex (.up ℤ)).obj P
 
 /-- Scalar extension of the augmentation, followed by O tensor_A A = O.
-Source: Stacks Project, Tag 099E.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 099E. -/
 def ringFamilyGlobalExtensionAugmentation
     {P : CochainComplex (RingSiteModules (ringFamilyGlobalRing O)) ℤ}
     (ε : P ⟶ ringComplexSingle (ringFamilyGlobalRing O)) :

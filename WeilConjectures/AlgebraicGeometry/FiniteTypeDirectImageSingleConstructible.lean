@@ -511,9 +511,7 @@ private theorem finite_normed_integral (E : Type) [NormedField E] [NormedAlgebra
 
 /-- All higher direct images of a constructible sheaf of `ℚ̲̄_ℓ`-modules are constructible.
 
-Source: Deligne, SGA 4½, Th. finitude 1.1; Bhatt--Scholze, Sections 6.7--6.8;
-blueprint `lem-sfb-dc-lower-star-preserves`, coefficient-reduction argument.
-(auxiliary; not a blueprint node)
+Source: Deligne, SGA 4½, Th. finitude 1.1; Bhatt--Scholze, Sections 6.7--6.8, coefficient-reduction argument.
 
 Proof: the integral case (for the unit ball of a finite extension `E` of `ℚ_ℓ`): the sheaf is
 derived complete with constructible etale reduction. Direct image preserves derived completeness

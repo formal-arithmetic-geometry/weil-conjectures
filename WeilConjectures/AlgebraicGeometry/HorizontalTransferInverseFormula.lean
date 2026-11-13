@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.QCohInverseBaseChangeMate
 /-! # Canonical isomorphism transfer from its inverse formula
 
 Source: Stacks Project, Tags 0D5S, 0D5T and 08HY.
-(blueprint: lem-sc-horizontal-transfer-inverse-formula).
 -/
 
 @[expose] public section
@@ -56,7 +55,6 @@ private theorem restricted_counit_map
 
 /-- Identify the equivalence-unit transfer by its adjunction-unit inverse formula.
 Source: Stacks Project, Tags 0D5S, 0D5T and 08HY.
-(blueprint: lem-sc-horizontal-transfer-inverse-formula)
 
 Proof: Substitute k = k₀. Write L for pullback along e.hom, Rq for direct
 image along q, η for the pinned adjunction unit, U for ev.unitIso, and δ for

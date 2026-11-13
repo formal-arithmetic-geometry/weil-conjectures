@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered
 /-! # Affine restrictions of raw classes eventually vanish
 
 Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: lem-sbc-higher-direct-image-raw-affine-restriction-vanishing).
 -/
 
 @[expose] public section
@@ -52,7 +51,6 @@ private theorem exists_addCommGrp_stage_eq_zero {I : Type v} [Preorder I]
 set_option backward.isDefEq.respectTransparency true in
 /-- On an affine etale test object a zero raw limit class dies at a later stage.
 Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: lem-sbc-higher-direct-image-raw-affine-restriction-vanishing).
 
 Proof: Commute raw pullback with restriction to W by the naturality of inverse-image
 composition and the comparison with the single functor. Base change the cone to W.

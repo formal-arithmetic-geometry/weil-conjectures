@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.DerivedDirectImageSquareMate
 
 /-! # Right path of the normalized mixed Leray unit diagram
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W.
-(blueprint: lem-sc-mixed-sections-right-unit-normalization).
 -/
 
 @[expose] public section
@@ -132,7 +131,6 @@ private theorem mixed_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- The right path becomes the iterated scalar-factor path before any unit cancellation.
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W; the pinned-unit calculation
 in lem-sc-mixed-sections-composition-kinjective.
-(blueprint: lem-sc-mixed-sections-right-unit-normalization).
 
 Proof: Distribute derived global sections over the final two direct-image maps in p.
 The factors e.inv and e.hom cancel because e is an isomorphism. The mixed Leray

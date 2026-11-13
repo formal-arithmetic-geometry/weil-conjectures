@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.MixedCommutatorTangent
 # Tangent matrices and the differential of a rational representation
 
 Source: Milne, Algebraic Groups (2017), Chapter 10, Lie algebra of a closed matrix subgroup
-and differential of a representation (blueprint: `def-wf-lie-algebra-derivation`).
+and differential of a representation.
 -/
 
 @[expose] public section
@@ -27,8 +27,7 @@ namespace AlgebraicGeometry.GeneralLinearGroup
 /-- The matrices `X` for which `1 + εX` belongs to a closed matrix subgroup form a linear
 subspace closed under commutators. Every rational representation has a linear differential
 on this subspace, characterized by its dual-number points, preserving the commutator.
-Source: Milne, Algebraic Groups (2017), Chapter 10
-(blueprint: `def-wf-lie-algebra-derivation`).
+Source: Milne, Algebraic Groups (2017), Chapter 10.
 
 Proof: the subspace is the matrix Lie algebra `lieSubalgebra I`. The differential of the closed
 immersion `V(I) ⟶ GL_n` identifies `Lie(V(I))` with it, and the differential of `r` is read

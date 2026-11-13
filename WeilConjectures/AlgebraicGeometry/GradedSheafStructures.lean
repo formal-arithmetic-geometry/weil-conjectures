@@ -12,7 +12,7 @@ public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 /-! # Homogeneous algebra and module operations on sheaves
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 087Z, the graded algebra and
-module in its statement (blueprint: def-weil-pbc-graded-sheaf-structures).
+module in its statement.
 
 Bilinear operations compatible with restrictions are sheaf operations. Their extension
 by the sheaf coproduct universal property gives the algebra and module on the direct sums.
@@ -30,7 +30,7 @@ namespace AlgebraicGeometry
 
 /-- A commutative unital graded O_X-algebra, specified on homogeneous sheaves by bilinear
 multiplication, restriction compatibility, a linear unit, and the algebra laws.
-Source: Stacks, Lemma 087Z (blueprint: def-weil-pbc-graded-sheaf-structures). -/
+Source: Stacks, Lemma 087Z. -/
 structure GradedSheafAlgebra {X : Scheme.{ug}} (B : ℕ → X.Modules) where
   mul : ∀ (m n : ℕ) (U : X.Opens),
     (B m).val.obj (op U) →ₗ[Γ(X, U)]
@@ -54,7 +54,7 @@ structure GradedSheafAlgebra {X : Scheme.{ug}} (B : ℕ → X.Modules) where
 
 /-- A graded module over a graded sheaf algebra, given by bilinear homogeneous actions,
 compatible with restrictions and satisfying associativity and the unit law.
-Source: Stacks, Lemma 087Z (blueprint: def-weil-pbc-graded-sheaf-structures). -/
+Source: Stacks, Lemma 087Z. -/
 structure GradedSheafModule {X : Scheme.{ug}} {B : ℕ → X.Modules}
     (A : GradedSheafAlgebra B) (K : ℕ → X.Modules) where
   act : ∀ (m n : ℕ) (U : X.Opens),
@@ -76,8 +76,7 @@ structure GradedSheafModule {X : Scheme.{ug}} {B : ℕ → X.Modules}
 homogeneous degree is locally a linear combination of the restrictions of these sections,
 with coefficients in the corresponding algebra degree. This is equivalent to a locally
 surjective map from a finite sum of copies of the graded algebra (with zero shifts).
-Source: Stacks, Lemma 087Z, affine proof
-(blueprint: def-weil-pbc-graded-sheaf-structures). -/
+Source: Stacks, Lemma 087Z, affine proof. -/
 def GradedSheafModule.IsLocallyGeneratedInDegreeZero {X : Scheme.{ug}}
     {B K : ℕ → X.Modules} {A : GradedSheafAlgebra B} (M : GradedSheafModule A K) : Prop :=
   ∀ p : X, ∃ (U : X.Opens) (_hp : p ∈ U) (t : ℕ)

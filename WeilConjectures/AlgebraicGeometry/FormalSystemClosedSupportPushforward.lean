@@ -23,7 +23,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 /-! # Direct image of a formal system with closed ambient support
 
 Source: Stacks Project, Theorem 088E and Lemma 0CYJ.
-(blueprint: lem-weil-pbc-formal-system-closed-support-pushforward)
 -/
 
 @[expose] public section
@@ -253,9 +252,8 @@ private theorem powerQuotient_pushforward_iso {Y X : Scheme.{u}}
 all levels have support in a fixed closed subset of the ambient scheme contained in
 that open immersion's image.
 
-Source: Stacks Project, coherent.tex, Theorem 088E (theorem-grothendieck-existence),
-the extension paragraph, and Lemma 0CYJ (lemma-pushforward-coherent-on-open).
-(blueprint: lem-weil-pbc-formal-system-closed-support-pushforward)
+Source: Stacks Project, coherent.tex, Theorem 088E,
+the extension paragraph, and Lemma 0CYJ.
 
 Proof: Identify Y with the open image U of j. Lemma 0CYJ makes every j_*F_n coherent
 and zero on X minus T. On U the restriction/direct-image counit identifies the entire

@@ -25,7 +25,6 @@ namespace AlgebraicGeometry.Etale
 uniformly for abelian sheaves killed by the fixed integer n.
 
 Source: Stacks Project, Tags 09ZE and 09ZI, finite Z/n coefficient construction.
-(blueprint: lem-weil-pbc-henselian-bounded-abelian-comparison-step)
 
 Proof:
 1. Put Lambda = ULift (ZMod n). On a sheaf killed by n, scalar multiplication

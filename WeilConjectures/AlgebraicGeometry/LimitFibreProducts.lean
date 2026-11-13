@@ -15,8 +15,7 @@ import Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Pullbacks
 # Fibre products commute with limits along affine transition morphisms
 
 Source: Stacks Project, Derived Categories, proof of Lemma 0G7X (line 8166),
-with Categories Lemma 002M and Morphisms Lemmas 01SD, 01SC, 01SG
-(blueprint: lem-weil-pbc-limit-fibre-products).
+with Categories Lemma 002M and Morphisms Lemmas 01SD, 01SC, 01SG.
 -/
 
 @[expose] public section
@@ -33,7 +32,7 @@ limits, including their canonical projections. Equalities of objects and `HEq` o
 identify the chosen representatives without introducing extra isomorphism choices.
 
 Source: Stacks Project, proof of Lemma 0G7X, the limit argument, and Tags 002M,
-01SD, 01SC, 01SG (blueprint: lem-weil-pbc-limit-fibre-products).
+01SD, 01SC, 01SG.
 
 Proof:
 1. Form the pointwise pullback diagram with Mathlib's `PullbackCone.combine`.
@@ -47,7 +46,7 @@ Proof:
    lem-weil-pbc-fibre-product-affine-transition: factor via the affine diagonal of
    the base transition and the base changes of the affine transitions on X and T.
    Use stability under base change and composition (01SD, 01SC, 01SG).
-3. `exists_isColimit_residueField_of_isLimit` (lem-weil-pbc-limit-residue-field)
+3. `exists_isColimit_residueField_of_isLimit`
    identifies the residue-field point of s with the limit of its stage points.
    Apply steps 1 and 2 to X, S and these residue-field spectra. This gives the
    limiting fibre cone with affine transitions and the stated projections to X.

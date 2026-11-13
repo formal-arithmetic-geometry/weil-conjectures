@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.TorsionControlledCompletionHomLift
 
 /-! # Torsion-controlled triples for easy algebraization
 
-Source: Stacks Project, Tag 0889, part (1)
-(blueprint: lem-weil-pbc-easy-algebraization-torsion-triple).
+Source: Stacks Project, Tag 0889, part (1).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ Uniqueness is among torsion-controlled triples. This restriction matters when th
 is the unit ideal: completion then forgets everything, and an unrestricted triple need
 not be isomorphic to the chosen one.
 
-Source: Stacks Project, Tag 0889, part (1), including condition (1)(b)
-(blueprint: lem-weil-pbc-easy-algebraization-torsion-triple).
+Source: Stacks Project, Tag 0889, part (1), including condition (1)(b).
 
 Proof:
 Restrict to a finite affine cover. The coherent-formal-module affine equivalence turns

@@ -13,7 +13,6 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 /-! # One direct-image rank condition with a reference bundle
 
 Source: Stacks Project, Tag 0BDP, first three proof paragraphs.
-(blueprint: def-sc-picard-universal-single-rank-match).
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace AlgebraicGeometry.Scheme
 The reference E fixes the rank on the whole inverse image of each neighbourhood.
 This is one of the two direct-image clauses used in Tag 0BDP, with F equal to E
 or its dual; no condition on the other direct image is imposed.
-Source: Stacks Project, Tag 0BDP, first three proof paragraphs.
-(blueprint: def-sc-picard-universal-single-rank-match). -/
+Source: Stacks Project, Tag 0BDP, first three proof paragraphs. -/
 def PicardUniversalSingleRankMatch {X S T : Scheme.{u}} (f : X ⟶ S)
     (E F : X.Modules) (g : T ⟶ S) : Prop :=
   ∀ {T' : Scheme.{u}} (h : T' ⟶ T) (t : T'),

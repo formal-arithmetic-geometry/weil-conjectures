@@ -19,7 +19,6 @@ public import Mathlib.Algebra.Category.Grp.Zero
 /-! # Projective cohomology finiteness over an affine base
 
 Source: Stacks Project, Tag 01YS, Lemma 30.14.1 (3).
-(blueprint: lem-pc-m1-projective-affine-finite-cohomology-independent)
 -/
 
 @[expose] public section
@@ -115,7 +114,6 @@ private theorem finite_of_exact_segment {R M L Q : Type*} [CommRing R]
 /-- Finiteness for an explicit projective model over an arbitrary affine Noetherian scheme.
 
 Source: Stacks Project, Tag 01YS, Lemma 30.14.1 (3), and Tag 01Y6, Lemma 30.9.9.
-(blueprint: lem-pc-m1-projective-affine-finite-cohomology-independent)
 
 Proof: identify T with Spec Gamma(T,O) by its affine canonical isomorphism, and base
 change the specified embedding along this isomorphism. Closed pushforward of F is

@@ -24,7 +24,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- A fibrewise descended invertible coefficient is trivial when the structure unit
 is universally invertible.
 Source: Stacks Project, Tag 0BF2, reduction to the structure coefficient; Tag 0BDP.
-(blueprint: lem-sc-picard-descended-fibre-coefficient-trivial)
 
 Proof: Apply the structure unit at Spec kappa(s). If the source fibre were empty,
 its structure module and its pushforward would be zero. The invertible unit would

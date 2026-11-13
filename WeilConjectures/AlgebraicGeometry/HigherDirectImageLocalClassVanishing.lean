@@ -13,7 +13,6 @@ import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 /-! # Local eventual vanishing of higher-image sections
 
 Source: Stacks Project, Tags 09Z1, 03Q8 and 0738.
-(blueprint: sbc-lem-higher-image-local-class-vanishing).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry.Etale
 Source: Stacks Project, Tag 09Z1, proof of lemma-relative-colimit; Tag 03Q8,
 lemma-higher-direct-images; Tag 0EZM, lemma-colimit-variant-complexes;
 Tag 03FD, lemma-cohomology-modules-abelian.
-(blueprint: sbc-lem-higher-image-local-class-vanishing).
 
 Proof:
 1. Present the opposite index by a small directed final category. Opposite initiality

@@ -78,7 +78,6 @@ set_option maxHeartbeats 500000 in
 -- The derived unit calculation elaborates several affine carrier identifications.
 /-- The extension counit computes the affine chart source, and intertwines Hom transposes.
 Source: Stacks Project, Tags 06Z0, 08DW(2), 0AA7.
-(blueprint: lem-sc-mixed-affine-extension-unit-normalization).
 
 Proof: The ordinary affine tilde unit identifies H(F(P)) with P termwise, so this
 complex is K-flat. Its left-derived extension counit is therefore invertible.

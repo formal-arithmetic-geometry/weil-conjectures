@@ -21,7 +21,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 /-- Source: Stacks Project, Étale Cohomology, Lemma 59.80.6 (Tag 09ZA),
-first paragraph of the proof (blueprint: lem-weil-pbc-gabber-finite-etale-section-opens).
+first paragraph of the proof.
 
 Proof: Write `X = Spec R`. A closed subscheme of an affine scheme is affine, so
 `Z = Spec (R/I)`, and write `V = Spec B` as an étale algebra over `R/I`.

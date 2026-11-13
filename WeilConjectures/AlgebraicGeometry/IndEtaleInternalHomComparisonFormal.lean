@@ -22,7 +22,6 @@ They are specialised to `ModuleCat A` in
 `AlgebraicGeometry.Etale.indEtaleInternalHomComparison_coherence_and_bounds`.
 
 Source: Bhatt--Scholze, Lemma 6.3.16, with the closed monoidal mate calculus.
-(blueprint: lem-weil-pbc-ind-etale-internal-hom-coherence).
 
 ## Main statements
 

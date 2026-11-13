@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.FlatSinglePairingSymmetricPullback
 /-! # The flat single-object square for finite-line evaluation
 
 Source: Stacks Tags 03PK and 06YQ; the degree-zero evaluation step in
-thm-amb-p1-decomposition.proof.md
-(auxiliary; not a blueprint node).
+thm-amb-p1-decomposition.proof.md.
 -/
 
 @[expose] public noncomputable section
@@ -62,7 +61,7 @@ private theorem module_flat_pairing
 /-- The actual internal-Hom evaluation lifts to the reversed flat single-object square.
 
 Source: Stacks Tags 03PK and 06YQ; the flat degree-zero step of the finite-twist
-pullback argument (auxiliary; not a blueprint node).
+pullback argument.
 
 Proof: negative normalization at n=0 is the ordinary evaluation pullback square.
 Zero normalization identifies its output map with constant-sheaf pullback. Lift

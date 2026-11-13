@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicTopology.SimplicialSetAddSimplices
 /-!
 # Local lifting along finite simplicial inclusions in a hypercover
 
-Source: Stacks Project, Tag 01GN (Lemma 25.8.2), using Tag 01GM and unpacking Tag 01G3
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 01GN (Lemma 25.8.2), using Tag 01GM and unpacking Tag 01G3.
 -/
 
 @[expose] public section
@@ -262,8 +261,7 @@ private theorem covering_one_step {X : Scheme.{u}}
 /-- Restriction along a finite simplicial inclusion is a covering and admits local lifts
 of every étale test object's point. The Hom objects are arbitrary representing pairs for
 `simplicialHomFamilyFunctor`, so the assertion applies to the fixed choices of those pairs.
-Source: Stacks Project, Tag 01GN, with the local-lifting clause unpacked from Tag 01G3
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 01GN, with the local-lifting clause unpacked from Tag 01G3.
 
 Proof:
 1. By lem-weil-pbc-simplicial-set-add-simplices (Stacks 018S), insert finitely many
@@ -278,7 +276,7 @@ Proof:
    restriction with the composite of those maps. Coverings are closed under composition
    by lem-weil-pbc-semi-representable-covering-permanence (01G4). For a chain of length
    zero it is the identity, which is a covering in def-weil-pbc-etale-site.
-4. Write a test point as `(j, a : T → H_A.obj j)` using
+4. Write a test point as `(j, a: T → H_A.obj j)` using
    def-weil-pbc-semi-representable-object. Pull back the covering components over `j`
    along `a`. By lem-weil-pbc-etale-covering-base-change the projections form an étale
    covering of `T`; the other projections are points of `H_B`, and the pullback equation

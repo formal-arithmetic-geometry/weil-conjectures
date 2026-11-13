@@ -18,10 +18,6 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # Lissity of a finite direct image on a splitting cover
-
-Source: smooth purity blueprint, finite-algebra calculation and final paragraph of
-`lem-weil-pbc-finite-pushforward-generic-constructible`.
-(blueprint: lem-weil-pbc-finite-split-cover-lisse-image).
 -/
 
 @[expose] public section
@@ -84,14 +80,9 @@ homeomorphisms, the direct image of a lisse restriction is lisse on the cover.
 This is the sheaf-theoretic part of generic lisse preservation; it makes no
 integrality, Noetherian, or generic-open assumption on the base.
 
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, proof of
-`lem-weil-pbc-finite-pushforward-generic-constructible`, final paragraph;
-steps 3--5 of `lem-weil-pbc-finite-map-generic-lisse-preservation`.
-(blueprint: lem-weil-pbc-finite-split-cover-lisse-image).
-
 Proof: Pull E back to the source over T. Its map to Z factors through the open
 g inverse image V, so the assumed lissity pulls back to this source and to each
-of its open components (`lem-weil-pbc-pullback-finite-locally-constant`). Each
+of its open components. Each
 component map to T is a universal homeomorphism. The etale-site equivalence of
 `thm-weil-pbc-universal-homeomorphism-invariance` transports the component
 sheaf's trivializing cover to T, showing that its direct image is locally

@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.HorizontalOrdinaryForwardFixedPa
 /-! # Ordinary inverse geometric pasting with fixed comparisons
 
 Source: Stacks Project, Tags 0ATM and 0ATR.
-(blueprint: lem-sc-horizontal-ordinary-inverse-fixed-pasting).
 -/
 
 @[expose] public section
@@ -90,7 +89,6 @@ private theorem qc_inverse_cancel
 adjoints to the direct images of the outer or iterated projection are introduced.
 Source: Stacks Project, Remark 20.28.5 (Tag 0ATM), and the ordinary-square
 comparison used at the end of Lemma 48.5.2 (Tag 0ATR).
-(blueprint: lem-sc-horizontal-ordinary-inverse-fixed-pasting).
 
 Proof: Transpose the outer ordinary base-change square and the horizontally
 pasted forward ordinary squares under the pinned pullback/direct-image adjunction

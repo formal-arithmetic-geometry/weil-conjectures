@@ -252,8 +252,7 @@ the underlying-module isomorphism e. The adjoints of psi composed with pullback 
 multiplication and unit by the same comparisons. They are therefore algebra maps b. The
 adjunction unit and pushforward-composition comparison give the displayed section formula.
 This lemma does not claim that the b commute with transitions; that is a separate adjunction
-calculation. Empty opens, zero modules and empty schemes obey the same construction.
-(blueprint: lem-weil-pbc-finite-structure-algebra-adjoints-construct). -/
+calculation. Empty opens, zero modules and empty schemes obey the same construction. -/
 theorem finite_structure_algebra_adjoints_construct
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]

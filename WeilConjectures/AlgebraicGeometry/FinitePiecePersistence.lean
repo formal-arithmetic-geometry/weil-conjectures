@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.FibreProductPointResidueField
 /-!
 # Persistence of a finite open piece under residue-field-preserving base change
 
-Source: Stacks Project, More on Morphisms, Tag 02LK, final assertion
-(blueprint: lem-weil-pbc-elementary-etale-finite-piece-persistence).
+Source: Stacks Project, More on Morphisms, Tag 02LK, final assertion.
 -/
 
 @[expose] public section
@@ -72,12 +71,11 @@ private theorem pullback_point_unique {A B C : Scheme.{u}}
 /-- A finite open piece with a unique point above `u` and unchanged residue field at `x`
 persists under any base change preserving the residue field at `u`.
 Source: Stacks Project, Tag 02LK, final assertion; the generalization to arbitrary `ψ`
-uses no étaleness (blueprint: lem-weil-pbc-elementary-etale-finite-piece-persistence).
+uses no étaleness.
 
 Proof:
 1. The square with projections `π` and `pullback.snd f (ψ ≫ φ)` is cartesian by
-`lem-weil-pbc-cartesian-square-pasting`, using the two specified fibre products
-(`def-pc-fibre-product`).
+`lem-weil-pbc-cartesian-square-pasting`, using the two specified fibre products.
 2. By `lem-weil-pbc-open-fibre-product`, the inverse-image open is the base change
 of `V` over `U`. Finiteness follows from `lem-weil-pbc-finite-morphism-permanence`.
 3. Every point of this open above `u'` maps to `v`, by uniqueness above `u`.

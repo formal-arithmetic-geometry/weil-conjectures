@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 /-! # Enlarging the open of finite type by one affine open
 
 Source: Stacks Project, Properties, Lemma 01PF, proof, lines 2865--2894.
-(blueprint: lem-weil-pbc-module-finite-type-affine-enlargement).
 -/
 
 @[expose] public section
@@ -36,7 +35,6 @@ set_option backward.isDefEq.respectTransparency false in
 finite type on W union V, equal to the original on W, when V is affine.
 
 Source: Stacks Project, Properties, Lemma 01PF, proof, lines 2865--2894.
-(blueprint: lem-weil-pbc-module-finite-type-affine-enlargement).
 
 Proof: The overlap W intersect V is quasi-compact by quasi-separatedness. On V,
 identify H with the associated sheaf of its module of sections. Cover the overlap

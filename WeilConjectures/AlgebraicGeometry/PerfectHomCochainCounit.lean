@@ -13,8 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectHomTransportExtension
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # The fixed composition counits on cochain complexes
-Source: Stacks Project, Tag 0D5S.
-(blueprint: lem-pc-perfect-hom-cochain-counit). -/
+Source: Stacks Project, Tag 0D5S. -/
 
 @[expose] public section
 universe u w
@@ -26,15 +25,13 @@ set_option backward.isDefEq.respectTransparency.types false
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
-/-- The additive structure already selected in the fixed composition theorem. 
-(blueprint: lem-pc-perfect-hom-cochain-counit)
+/-- The additive structure already selected in the fixed composition theorem.
 -/
 abbrev perfectHomTensorAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (Scheme.Modules.tensorPullback f).Additive :=
   Classical.choose exists_derivedPullbackComposition f
 
-/-- Termwise tensor pullback with the additive structure used by composition. 
-(blueprint: lem-pc-perfect-hom-cochain-counit)
+/-- Termwise tensor pullback with the additive structure used by composition.
 -/
 noncomputable abbrev perfectHomTensorComplex {X Y : Scheme.{u}} (f : X ⟶ Y) :
     CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ ⥤
@@ -42,8 +39,7 @@ noncomputable abbrev perfectHomTensorComplex {X Y : Scheme.{u}} (f : X ⟶ Y) :
   let := perfectHomTensorAdditive f
   (Scheme.Modules.tensorPullback f).mapHomologicalComplex (.up ℤ)
 
-/-- The original fixed counit; this is the witness already used by perfectHomComposition. 
-(blueprint: lem-pc-perfect-hom-cochain-counit)
+/-- The original fixed counit; this is the witness already used by perfectHomComposition.
 -/
 noncomputable abbrev perfectHomTensorCounit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategory.Qh ⋙ derivedPullback f ⟶
@@ -73,7 +69,6 @@ private theorem tensorDerivedCounit {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 /-- The fixed composition counit is invertible at any K-flat complex.
 Source: Stacks Project, Tags 06YJ and 0D5S.
-(blueprint: lem-pc-perfect-hom-cochain-counit).
 Proof: the defining derived-pullback counit is invertible on K-flat models.
 Uniqueness of left derived functors identifies it with the counit selected for
 composition. Its comparison is an isomorphism, so the fixed counit is invertible
@@ -114,15 +109,13 @@ theorem perfectHomTensorCounit_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     exact IsIso.of_isIso_comp_left (τ.app _) _
   exact hfixed
 
-/-- The fixed termwise tensor pullback on homotopy categories. 
-(blueprint: lem-pc-perfect-hom-cochain-counit)
+/-- The fixed termwise tensor pullback on homotopy categories.
 -/
 noncomputable abbrev perfectHomTensorHomotopy {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   let := perfectHomTensorAdditive f
   (Scheme.Modules.tensorPullback f).mapHomotopyCategory (.up ℤ)
 
-/-- The underived mate already used by the fixed derived composition comparison. 
-(blueprint: lem-pc-perfect-hom-cochain-counit)
+/-- The underived mate already used by the fixed derived composition comparison.
 -/
 noncomputable def perfectHomTensorComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     Scheme.Modules.tensorPullback g ⋙ Scheme.Modules.tensorPullback f ≅
@@ -133,8 +126,7 @@ noncomputable def perfectHomTensorComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y
       (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)))).symm
     (Scheme.Modules.pushforwardComp f g).symm
 
-/-- Successive tensor pullbacks, with the exact mate used by derived composition. 
-(blueprint: lem-pc-perfect-hom-cochain-counit)
+/-- Successive tensor pullbacks, with the exact mate used by derived composition.
 -/
 noncomputable def perfectHomTensorHomotopyComp {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
@@ -145,8 +137,7 @@ noncomputable def perfectHomTensorHomotopyComp {X Y Z : Scheme.{u}}
   let := perfectHomTensorAdditive (f ≫ g)
   Functor.mapHomotopyCategoryCompIso (perfectHomTensorComp f g) (.up ℤ)
 
-/-- The fixed underived composition mate on cochain complexes. 
-(blueprint: lem-pc-perfect-hom-cochain-counit)
+/-- The fixed underived composition mate on cochain complexes.
 -/
 noncomputable def perfectHomTensorComplexComp {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
@@ -158,8 +149,7 @@ noncomputable def perfectHomTensorComplexComp {X Y Z : Scheme.{u}}
   Functor.mapHomologicalComplexCompIso (perfectHomTensorComp f g) (.up ℤ)
 
 /-- Homotopy tensor pullback sends quotient maps to quotient maps of termwise pullback.
-Source: the quotient construction; Stacks Project, Tag 0D5S.
-(blueprint: lem-pc-perfect-hom-cochain-counit). -/
+Source: the quotient construction; Stacks Project, Tag 0D5S. -/
 theorem perfectHomTensorHomotopy_map {X Y : Scheme.{u}} (f : X ⟶ Y)
     {K L : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ}
     (m : K ⟶ L) :
@@ -167,8 +157,7 @@ theorem perfectHomTensorHomotopy_map {X Y : Scheme.{u}} (f : X ⟶ Y)
       (HomotopyCategory.quotient _ (.up ℤ)).map ((perfectHomTensorComplex f).map m) := rfl
 
 /-- The homotopy comparison is the quotient of the termwise comparison.
-Source: the quotient construction; Stacks Project, Tag 0D5S.
-(blueprint: lem-pc-perfect-hom-cochain-counit). -/
+Source: the quotient construction; Stacks Project, Tag 0D5S. -/
 theorem perfectHomTensorHomotopyComp_hom_app {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z)
     (K : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ) :
@@ -179,7 +168,6 @@ theorem perfectHomTensorHomotopyComp_hom_app {X Y Z : Scheme.{u}}
 
 /-- The defining counit equation for the fixed derived comparison, at a homotopy model.
 Source: Stacks Project, Tag 0D5S.
-(blueprint: lem-pc-perfect-hom-cochain-counit).
 Proof: the fixed comparison is the left-derived lift of the composite counits.
 The factorization equation of this lift gives the result after evaluating at K
 and removing the identity components of functor associators. No flatness is used. -/

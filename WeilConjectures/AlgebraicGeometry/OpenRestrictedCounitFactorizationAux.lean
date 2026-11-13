@@ -170,7 +170,6 @@ attribute [local irreducible] openRestrictionRepresentativeIso openRestrictedCom
 
 /-- Auxiliary counit compatibility equation used to derive the strict factorization.
 Source: Stacks Project, Tags 0D5S and 0D5U.
-(blueprint: new-open-restricted-counit-compatibility-aux).
 The equation follows by evaluating the defining left-derived composition
 factorization and the exact restriction adjunction, then identifying the
 remaining tensor comparisons with `openRestrictedTensorDerivedIso`.

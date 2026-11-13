@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkChainMapEquality
 /-! # Spreading a single stalk homotopy of a strictly perfect complex
 
 Source: Stacks Project, Tags 09RE, 0BC7 (2) and 01CP.
-(blueprint: lem-sc-perfect-open-stalk-homotopy-spread).
 -/
 
 @[expose] public section
@@ -48,7 +47,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Two fixed endomorphisms which are homotopic at the stalk become homotopic
 on an affine neighbourhood inside any prescribed smaller neighbourhood.
 Source: Stacks Project, Tag 09RE, affine case (1); Tag 0BC7 (2).
-(blueprint: lem-sc-perfect-open-stalk-homotopy-spread).
 
 Proof: Lift the reverse-degree components, without equations, inside T. The
 canonical stalk comparison identifies the stalk of their null-homotopic map with

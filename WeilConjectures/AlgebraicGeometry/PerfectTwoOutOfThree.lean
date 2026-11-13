@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.PerfectAffineConeModel
 
 /-! # Two out of three for perfect complexes on a scheme
 
-Source: Stacks Project, Cohomology of Sheaves, Lemma 20.49.7, Tag 08CR
-(blueprint: lem-pc-perfect-two-out-of-three).
+Source: Stacks Project, Cohomology of Sheaves, Lemma 20.49.7, Tag 08CR.
 -/
 
 @[expose] public section
@@ -52,19 +51,17 @@ private theorem perfect_shift (X : Scheme.{u})
       ((DerivedCategory.Q.commShiftIso n).app K).symm⟩
 
 /-- In a distinguished triangle of `D(𝒪_X)`, any two perfect terms force the third to be
-perfect. Source: Stacks Project, Cohomology of Sheaves, Lemma 20.49.7, Tag 08CR
-(blueprint: lem-pc-perfect-two-out-of-three).
+perfect. Source: Stacks Project, Cohomology of Sheaves, Lemma 20.49.7, Tag 08CR.
 
 Proof: By `def-pc-perfect-complex`, intersect and refine the local covers of the two
-perfect terms to a common affine cover. Restriction is exact and preserves cone triangles
-(`def-weil-abstract-derived-category`). On each affine open, Tag 08EB represents both
+perfect terms to a common affine cover. Restriction is exact and preserves cone triangles. On each affine open, Tag 08EB represents both
 perfect terms by bounded complexes of finite projective modules.
 
 If the first two terms are perfect, `lem-pc-affine-qcoh-derived-equivalence` lifts their
 arrow to the module derived category, and `lem-sc-affine-projective-complex-derived-hom`
 represents it by a chain map. Its cone is bounded, with terms the direct sums of the second
 complex's terms and shifted terms of the first, hence finite projective. Sheafification
-commutes with that cone. TR3 (`def-weil-triangulated-category`) extends the first two
+commutes with that cone. TR3 extends the first two
 isomorphisms to a triangle morphism; `lem-sf-triangle-morphism-iso` makes the third component
 an isomorphism. Thus the third term is locally represented by a strictly perfect complex.
 

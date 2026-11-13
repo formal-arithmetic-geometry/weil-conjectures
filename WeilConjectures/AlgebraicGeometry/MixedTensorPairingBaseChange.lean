@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.MixedTensorPairingBaseChangeNaturality
 /-! # Base change preserves the direct-image tensor pairing
 Source: Stacks Project, cohomology.tex Tag 08I3 and Remark 08HY;
 duality.tex Tag 0AA8, final comparison diagrams.
-(blueprint: lem-sc-mixed-tensor-pairing-base-change).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
 /-- The direct-image tensor pairing, constructed by transposing the tensor of counits.
-Source: Stacks Project, cohomology.tex Tag 079U and Remark 08HY.
-(blueprint: def-sc-mixed-direct-image-tensor-pairing). -/
+Source: Stacks Project, cohomology.tex Tag 079U and Remark 08HY. -/
 def mixedDirectImageTensorPairing {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A B : schemeDerivedCategory X) :
     (schemeDerivedDirectImage f).obj A ⊗ (schemeDerivedDirectImage f).obj B ⟶
@@ -46,7 +44,6 @@ def mixedDirectImageTensorPairing {X Y : Scheme.{u}} (f : X ⟶ Y)
 Hom: `a` is any morphism from a tensor product, with no closed structure involved.
 Source: Stacks Project, cohomology.tex Tag 08I3 and Remark 08HY;
 duality.tex Tag 0AA8, final comparison diagrams.
-(blueprint: lem-sc-mixed-tensor-pairing-base-change).
 
 Proof: first take a to be the identity on A tensor B and transpose under the f'
 pullback/direct-image adjunction. Expand both base-change components by Remark 08HY.

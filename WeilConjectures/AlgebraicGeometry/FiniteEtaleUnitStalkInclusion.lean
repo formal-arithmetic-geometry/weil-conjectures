@@ -86,7 +86,6 @@ at a lift into the corresponding summand of the pushforward stalk.
 Source: Stacks Project, Section 03SH (trace as adjunction counit), Lemma 03S7
 (`f_! = f_*` for finite étale maps), and the explicit extension by zero construction
 in `WeilConjectures/SixFunctors/Etale/UpperLowerStar/FiniteEtale.lean`.
-(blueprint: lem-weil-pbc-finite-etale-unit-stalk-inclusion)
 
 Proof: The reverse adjunction is constructed from `lowerStarUnit`, whose section
 on an étale `Y`-object `U` extends a section of `H(U)` by zero from the graph into

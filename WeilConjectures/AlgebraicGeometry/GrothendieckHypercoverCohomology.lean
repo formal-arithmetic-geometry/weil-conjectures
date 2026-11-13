@@ -20,9 +20,8 @@ The indexing category keeps actual finite split hypercovers and quotients their
 refinements by simplicial homotopy. Geometric refinement makes its opposite
 filtered. The cohomology object is a colimit of the alternating cochain cohomologies.
 
-Source: blueprint lemma-weil-pbc-etale-cohomology-continuity, hypercover construction;
+Source:, hypercover construction;
 Stacks Project, Hypercoverings, Tag 01H0.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section

@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorModel
 /-! # Ordinary pullback data and the derived residue tensor square
 
 Source: Bhatt--Scholze, Lemma 6.5.9(3) and Remark 6.8.15.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -60,8 +59,7 @@ inverse monoidal unit comparison. Unfolding its name recovers exactly the
 ordinary isomorphism used in `residueRestrictedRegularPullIso`.
 
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; the fixed ordinary and
-single-object comparisons above.
-(auxiliary; not a blueprint node) -/
+single-object comparisons above. -/
 theorem residueRestrictedRegularPullIso_def
     (Λ A : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] [MonObj A] [IsCommMonObj A]

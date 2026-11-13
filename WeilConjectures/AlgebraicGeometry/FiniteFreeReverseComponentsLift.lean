@@ -16,9 +16,6 @@ import Mathlib.Data.Fintype.Sets
 import Mathlib.Data.Fintype.Prod
 
 /-! # Lifting reverse-degree components without imposing homotopy equations
-
-Source: lem-pc-perfect-locus, extension of the finite calculation near a point.
-(blueprint: lem-pc-finite-free-reverse-components-lift)
 -/
 
 @[expose] public section
@@ -58,10 +55,6 @@ private theorem transport_lift
 
 -- Termwise restriction and pullback require additional definitional-equality checks.
 /-- Lift a family of reverse-degree maps, without any equations involving the differential.
-
-Source: lem-pc-finite-free-stalk-homotopy-p-only, steps 1 and 2, expanding the finite
-calculation in lem-pc-perfect-locus (first two proof paragraphs).
-(blueprint: lem-pc-finite-free-reverse-components-lift)
 
 Proof: Choose finite bases for the terms of P. Restriction preserves these bases by
 restrictFunctorIsoPullback and pullbackFreeIso. Pullback to Spec O_{Y,y} preserves them

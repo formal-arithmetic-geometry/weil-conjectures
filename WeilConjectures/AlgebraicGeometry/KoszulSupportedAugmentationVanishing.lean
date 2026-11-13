@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Localization.HomEquiv
 /-! # Supported maps are eventually killed by Koszul augmentations
 
 Source: Stacks Project, Tags 08DC, 08DD and 09IR.
-(blueprint: lem-pc-koszul-supported-augmentation-vanishing).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The unshifted Hom diagram of Koszul tails into a supported quasi-coherent
 object has a singleton colimit, independently of the chosen localization universes.
 Source: Stacks Project, Equation 36.9.4.1 (Tag 08DC) and Proposition 36.9.5 (Tag 08DD).
-(blueprint: lem-pc-koszul-supported-augmentation-vanishing).
 
 Proof: Represent E by a complex K. Choose the standard derived localizations on
 Spec A, its localized sites, and the scheme of U. Transport quasi-coherence of K
@@ -231,7 +229,6 @@ of the finite principal open is killed by an augmentation in the Koszul power sy
 No orthogonality hypothesis is made.
 Source: Stacks Project, Equation 36.9.4.1, Tag 08DC; Proposition 36.9.5, Tag 08DD;
 Lemma 36.15.2, Tag 09IR, reduction to an object restricting to zero.
-(blueprint: lem-pc-koszul-supported-augmentation-vanishing).
 
 Proof: Move the shift on the source to the inverse shift on the target. This shifted
 object still has quasi-coherent cohomology and restricts to zero. Apply the canonical

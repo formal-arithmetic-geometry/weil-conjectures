@@ -30,8 +30,7 @@ set_option backward.isDefEq.respectTransparency.types false
 attribute [local irreducible] tensorPullback tensorPullbackObj
 
 /-- The explicit adjoint followed by pushforward composition.
-Source: Stacks Project, Tags 0093 and 0096
-(blueprint: lem-weil-pbc-finite-structure-adjoint-transitions). -/
+Source: Stacks Project, Tags 0093 and 0096. -/
 noncomputable def finiteStructureAdjoint
     {X S Y : Scheme.{u}} (j : S ⟶ X) (p : Y ⟶ S) (G : X.Modules)
     (a : (tensorPullback j).obj G ⟶ (pushforward p).obj
@@ -55,8 +54,7 @@ composition isomorphisms and the two square equations then identify both composi
 the module category. Evaluate on U and x. Pushforward composition is restriction along
 the equality of inverse-image opens, so this is exactly the displayed appLE equation.
 The argument uses no affineness, coherence, properness or invertibility of a. On an empty
-open both sides are maps to the zero ring, and the same computation applies.
-(blueprint: lem-weil-pbc-finite-structure-adjoint-transitions). -/
+open both sides are maps to the zero ring, and the same computation applies. -/
 theorem finiteStructureAdjoint_transitions
     (X : Scheme.{u}) (S Y : ℕ → Scheme.{u})
     (j : ∀ n, S n ⟶ X) (p : ∀ n, Y n ⟶ S n)

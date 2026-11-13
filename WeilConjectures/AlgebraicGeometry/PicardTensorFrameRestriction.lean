@@ -26,10 +26,9 @@ namespace AlgebraicGeometry.Scheme
 /-- Raw residue restriction evaluates the normalized rank-one coordinate.
 Source: Stacks Project, Tag 0096, composition of the tensor adjunction;
 Tag 0BF2, degree-zero calculation.
-(blueprint: lem-sc-picard-tensor-frame-restriction)
 
 Proof: Write L_g for tensorPullback g and epsilon_g for its pinned unit
-isomorphism. For i followed by g equal to g', let A_g : L_g' ≅ L_g ⋙ L_i
+isomorphism. For i followed by g equal to g', let A_g: L_g' ≅ L_g ⋙ L_i
 be exactly the conjugate comparison in picardOrdinaryModelRestriction. Its unit
 compatibility is
 A_g.hom.app O ≫ L_i.map epsilon_g ≫ epsilon_i = epsilon_g'.

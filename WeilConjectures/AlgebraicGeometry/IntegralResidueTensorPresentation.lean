@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 /-! # The canonical restricted residue tensor presentation
 
 Source: Bhatt--Scholze, Lemma 6.5.9(3), and derived scalar extension.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -57,8 +56,7 @@ instance genericTensorLeft_preservesKFlatQuasiIso (B : C) :
 
 /-- The canonical comparison from a degree-zero derived object to its homotopy
 representative. This is the standard single/quotient comparison, kept as one map.
-Source: the single-object and quotient localization comparisons.
-(auxiliary; not a blueprint node) -/
+Source: the single-object and quotient localization comparisons. -/
 @[irreducible] noncomputable def homotopySingleComparisonIso (B : C) :
     (DerivedCategory.singleFunctor C 0).obj B ≅
       DerivedCategory.Qh.obj ((HomotopyCategory.quotient C (.up ℤ)).obj
@@ -82,8 +80,7 @@ Source: the single-object and quotient localization comparisons.
 /-- The fixed braiding used by the derived tensor comparisons.
 Its data are the existing derived monoidal braiding; the name lets the
 presentation and model use exactly the same instance.
-Source: the canonical braided structure on the derived tensor product.
-(auxiliary; not a blueprint node) -/
+Source: the canonical braided structure on the derived tensor product. -/
 @[instance_reducible] noncomputable def derivedTensorPresentationBraiding :
     BraidedCategory (DerivedCategory C) :=
   DerivedMonoidal.braidedCategory' (DerivedCategory.Qh (C := C))
@@ -109,8 +106,7 @@ attribute [local instance] derivedTensorPresentationBraiding
 Cancel the braiding and the two standard single comparisons. The defining
 left-derived natural-transformation equation then gives the stated counit.
 
-Source: Bhatt--Scholze, Remark 6.8.15; canonical derived tensor comparison.
-(auxiliary; not a blueprint node) -/
+Source: Bhatt--Scholze, Remark 6.8.15; canonical derived tensor comparison. -/
 theorem derivedTensorPresentationIso_fac (B : C)
     (H : DerivedCategory C ⥤ DerivedCategory C)
     (ε : DerivedCategory.Qh ⋙ H ⟶

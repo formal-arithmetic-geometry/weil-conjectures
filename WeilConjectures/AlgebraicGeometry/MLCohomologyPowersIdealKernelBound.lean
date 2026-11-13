@@ -38,7 +38,7 @@ into F with the transition to J^0 F followed by its inclusion into F. Mapping
 this bound along the latter A-linear map gives I^(n-c) H^p(F).
 Restriction of scalars preserves exactness. Only the image estimate is used.
 Source: Stacks Project, Cohomology of Schemes, Lemma 02OB,
-part (1) (blueprint: ml-cohomology-powers-ideal-kernel-bound). -/
+part (1). -/
 theorem ml_cohomology_powers_ideal_kernel_bound
     {A : Type u} [CommRing A] [IsNoetherianRing A]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of A)) [IsProper f]

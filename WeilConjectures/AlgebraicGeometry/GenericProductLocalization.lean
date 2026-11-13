@@ -20,10 +20,6 @@ import WeilConjectures.AlgebraicGeometry.GenericProductIdempotentBound
 
 /-!
 # GenericProductLocalization
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
-`lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9.
-(blueprint: lem-weil-pbc-generic-product-localization)
 -/
 
 @[expose] public section
@@ -37,11 +33,6 @@ open scoped TensorProduct
 /-- A generic reduced product acquires an injective map and its coordinate idempotents
 on a principal localization of the model ring. Any further principal localization retains
 these properties. This statement does not descend the model to the original base.
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
-`lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9; steps 1--2 of
-`lem-weil-pbc-spread-generic-product-embedding`.
-(blueprint: lem-weil-pbc-generic-product-localization)
 
 Proof: Put C = (B tensor_A R0)_red. Tensor associativity and localization of the
 nilradical identify its localization at the nonzero elements of R0 with the given

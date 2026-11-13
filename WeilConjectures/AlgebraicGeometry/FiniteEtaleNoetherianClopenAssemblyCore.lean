@@ -22,7 +22,6 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Reduced-case Noetherian induction for the generic affine property.
 Source: Stacks Project, Tags 01OZ and 01J3.
-(blueprint: lem-a1-finite-etale-noetherian-clopen-assembly-core).
 
 The proof is decomposed into two strict subarguments: one chooses an affine open in an
 irreducible component and produces the strict closed complement, and the other appends

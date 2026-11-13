@@ -23,7 +23,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 /-! # Compactness after comparison with proper perfect direct image
 
 Source: Stacks Project, Tags 0B6G, 08EV, 09M1, and 00M3.
-(blueprint: lem-sc-proper-perfect-transport-compact).
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ universe u wX wY
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 /-- Proper perfect direct image of a perfect object is compact after comparison with the
-quasi-coherent model. Source: Stacks Project, Tags 09M1, 0B6G, and 0A9R.
-(blueprint: lem-sc-proper-perfect-transport-compact). -/
+quasi-coherent model. Source: Stacks Project, Tags 09M1, 0B6G, and 0A9R. -/
 theorem properPerfect_transport_compact
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

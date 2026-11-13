@@ -21,7 +21,6 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 Source: Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07F9
 (`smoothing.tex`, lemma-delocalize-weak), and Algebra, Definition Tag 00T6.
-(blueprint: lem-weil-pbc-popescu-delocalize-weak-localization-smooth).
 -/
 
 @[expose] public section
@@ -36,9 +35,8 @@ namespace Algebra
 open Classical in
 /-- Source: Stacks Project, proof of Lemma Tag 07F9, the construction of `B` and `b`;
 Algebra, Definition Tag 00T6 and Lemma Tag 00T7.
-(blueprint: lem-weil-pbc-popescu-delocalize-weak-localization-smooth)
 
-The small polynomial ring numbers `x₁,...,xₙ₊ₘ` by `Fin (n+m)` starting at zero.
+The small polynomial ring numbers `x₁..,xₙ₊ₘ` by `Fin (n+m)` starting at zero.
 In the large ring, index zero is `x₀`, index `i+1` is the original variable `i`,
 and index `n+m+1` is the homogenizing variable. The sum in `hdegree` counts only
 exponents of the last `m` original variables. The formula in `hF` homogenizes
@@ -47,8 +45,8 @@ those variables and leaves the first `n` variables as coefficient variables.
 Proof (the seven steps of the node):
 1. Expand the finite monomial sum to obtain `Fⱼ(u,v*w,w) = w^dⱼ*fⱼ(u,v)`;
 for a unit `w` this also gives the inverse dehomogenization identity. Use the
-polynomial universal property (def-weil-pbc-mv-polynomial-ring).
-2. Put `s = ∏ sⱼ` and form `C = R[x₀,...,xₙ₊ₘ₊₁,y,z]/(f,x₀*xₙ₊ₘ₊₁*y-1,s*z-1)`.
+polynomial universal property.
+2. Put `s = ∏ sⱼ` and form `C = R[x₀..,xₙ₊ₘ₊₁,y,z]/(f,x₀*xₙ₊ₘ₊₁*y-1,s*z-1)`.
 In `C`, `x₀`, `xₙ₊ₘ₊₁` and every `sⱼ` are units. The two ideal memberships imply
 that the `gⱼ` vanish and that the Jacobian determinant is a unit.
 3. The derivatives with respect to the first `c` original variables, `y`, `z`
@@ -57,10 +55,10 @@ Thus `C` is standard smooth (def-weil-pbc-polynomial-partial-derivative and
  def-weil-pbc-standard-smooth-algebra, Tag 00T6).
 4. Map the large ring to `C` by `Xₙ₊ᵢ ↦ xₙ₊ᵢ*xₙ₊ₘ₊₁`, fixing the other variables.
 Step 1 kills `x₀*Fⱼ`; Step 2 kills `gⱼ`. This factors through `B` and extends to
-`B_b` since `b` maps to a unit (lem-weil-pbc-localization-away-universal-property).
+`B_b` since `b` maps to a unit.
 5. Conversely send `xₙ₊ᵢ` to `Xₙ₊ᵢ/Xₙ₊ₘ₊₁` in `B_b`, and `y,z` to the inverses
 of `x₀*Xₙ₊ₘ₊₁,s`. Step 1 kills `fⱼ` since `x₀` and `Xₙ₊ₘ₊₁` are units.
-This gives `C → B_b` (def-weil-ring-localization-away).
+This gives `C → B_b`.
 6. The two maps agree with the identity on every polynomial generator, and
 then on the quotients and localization by their universal properties. They
 are inverse `R`-algebra maps.

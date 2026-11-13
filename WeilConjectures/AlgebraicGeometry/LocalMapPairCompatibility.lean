@@ -10,8 +10,7 @@ public import Mathlib.CategoryTheory.Sites.Descent.DescentData
 
 /-! # Pairwise compatibility of components of a descent morphism
 
-Source: Stacks Project, Tag 01ZR (3), agreement on overlaps.
-(blueprint: def-pc-local-map-pair-compatibility). -/
+Source: Stacks Project, Tag 01ZR (3), agreement on overlaps. -/
 
 @[expose] public section
 
@@ -25,7 +24,6 @@ variable {C : Type*} [Category* C]
 
 /-- Compatibility of a component family on one ordered pair.
 Source: Stacks Project, Tag 01ZR (3), agreement on overlaps.
-(blueprint: def-pc-local-map-pair-compatibility).
 
 The field is exactly the universal-test descent square for this pair. The
 structure contains only a proof of that square and introduces no chosen data. -/

@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteP1KummerSplitting
 /-!
 # Finite projective-line splitting and diagonal integrals over arbitrary bases
 
-proof.md, levelwise check
-(auxiliary; not a blueprint node).
+proof.md, levelwise check.
 
 The splitting contains exactly its two normalized components. Its trace is the second
 projection of its inverse. No Noetherian hypothesis or adjunction datum is imposed.
@@ -52,9 +51,7 @@ attribute [local irreducible] AlgebraicGeometry.ProjectiveSpace
   rightDerivedLowerStarComp rightDerivedLowerStarCongr
 
 /-- The Kummer-normalized two-summand splitting at an arbitrary base. The Chern
-specification is the actual scalar-extended Kummer class of the existing O(1).
-Source: blueprint tower P1 adjunction, finite levelwise check
-(auxiliary; not a blueprint node). -/
+specification is the actual scalar-extended Kummer class of the existing O(1). -/
 structure ArbitraryBaseFiniteP1Splitting (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) where
@@ -67,9 +64,7 @@ structure ArbitraryBaseFiniteP1Splitting (A : Type (u + 1)) [CommRing A] (N : �
     ordinaryFiniteP1SplittingTarget A N hA S
   decomposition_hom : decomposition.hom = ordinaryFiniteP1SplittingMap A N hA t S hS chern
 
-/-- The trace is the second projection of the inverse of the normalized splitting.
-Source: blueprint tower P1 adjunction, finite trace normalization
-(auxiliary; not a blueprint node). -/
+/-- The trace is the second projection of the inverse of the normalized splitting. -/
 def ArbitraryBaseFiniteP1Splitting.trace {A : Type (u + 1)} [CommRing A] {N : ℕ}
     {hA : (N : A) = 0} {t : OrdinaryFiniteTwistTransport A N hA}
     {S : Scheme.{u}} {hS : IsUnit (N : Γ(S, ⊤))}
@@ -80,9 +75,7 @@ def ArbitraryBaseFiniteP1Splitting.trace {A : Type (u + 1)} [CommRing A] {N : �
       (Y := ordinaryFiniteUnit A S)
 
 /-- The two arbitrary-base exchange squares, for the splitting and its trace.
-All comparisons are the canonical arrows of the recorded dependency nodes.
-Source: blueprint tower P1 adjunction, finite levelwise check and base-change normalization
-(auxiliary; not a blueprint node). -/
+All comparisons are the canonical arrows of the recorded dependency nodes. -/
 def ArbitraryBaseFiniteP1BaseChange (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (d : ∀ (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))),
@@ -106,9 +99,7 @@ def ArbitraryBaseFiniteP1BaseChange (A : Type (u + 1)) [CommRing A] (N : ℕ)
 
 /-- Transport the specified trace on P1 over P along the canonical chart for either
 projection of P times P. This uses the chart adjunction unit and derived composition,
-followed by the normalized twist comparison and the given splitting's own trace.
-Source: blueprint tower P1 adjunction, identification of the two projections with r_P
-(auxiliary; not a blueprint node). -/
+followed by the normalized twist comparison and the given splitting's own trace. -/
 def arbitraryBaseFiniteP1DiagonalTrace (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (d : ∀ (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))),
@@ -193,9 +184,7 @@ private theorem biprod_trace_components
     simp only [Category.assoc, Iso.hom_inv_id_assoc, biprod.inr_snd]
 
 /-- The supported diagonal classes and the two normalized integrals. This is the
-diagonal clause of the arbitrary-base finite projective-line theorem.
-Source: blueprint tower P1 adjunction, finite diagonal check
-(auxiliary; not a blueprint node). -/
+diagonal clause of the arbitrary-base finite projective-line theorem. -/
 def finiteP1DiagonalProperty (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (d : ∀ (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))),
@@ -231,8 +220,7 @@ def finiteP1DiagonalProperty (A : Type (u + 1)) [CommRing A] (N : ℕ)
 The supported boundary fixes the sign through its canonical relative Kummer construction.
 The maps alpha are the existing canonical composition identifications, explicitly isomorphisms.
 
-proof.md, levelwise finite diagonal check
-(auxiliary; not a blueprint node).
+proof.md, levelwise finite diagonal check.
 
 Proof:
 1. Use exists_ordinaryFiniteP1SplittingMap, whose universal-Noetherian-base argument

@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleCupResolutionAugmentation
 /-! # Realizing a resolution pairing in the derived category
 
 Source: Stacks Project, Section 20.31, Tags 0FKU and 0FKV.
-(blueprint: lem-sc-module-cup-resolution-realization)
 -/
 
 @[expose] public section
@@ -42,7 +41,6 @@ attribute [local instance] cupRealizationMonoidalCategory cupRealizationSymmetri
 has the same H-zero map as the canonical derived-to-ordinary tensor comparison.
 Source: Stacks Project, Section 20.31 (0FKU), construction preceding Lemma 20.31.3,
 and Tag 06YH, the degree-zero calculation for derived tensor.
-(blueprint: lem-sc-module-cup-resolution-realization)
 Proof: the tensor universal property sheafifies the restriction-compatible
 sectionwise bilinear maps in each bidegree. On the direct-sum total tensor,
 assemble these maps using the coproduct universal property. The signed Leibniz

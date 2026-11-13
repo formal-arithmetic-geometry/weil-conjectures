@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMapEquality
 /-! # Local equality of morphisms from finite free retracts
 
 Source: Stacks Project, Tag 01CP, finite-type injectivity argument.
-(blueprint: lem-sc-perfect-open-stalk-retract-hom-equality).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ if their maps on the open module stalk agree.
 
 Source: Stacks Project, Tag 01CP, injectivity for a finite-type source;
 Tag 09RE, finite-presentation calculation.
-(blueprint: lem-sc-perfect-open-stalk-retract-hom-equality).
 
 Proof: Restrict the inclusion and projection exhibiting M as a retract to W.
 Precompose a and b with the projection from the restricted finite free sheaf.

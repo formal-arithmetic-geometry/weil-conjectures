@@ -113,8 +113,7 @@ The map T to K_0 defines the degree-zero refinement. The only degree-zero simple
 operator is the identity, so the constant truncated functor with nondegenerate
 object T, identity inclusion, and terminal matching object is a split hypercover
 stage. The chosen affine coproduct presentation proves StageSolves, by the sieve's
-closure under precomposition. This also handles empty X and the empty covering.
-(auxiliary; not a blueprint node) -/
+closure under precomposition. This also handles empty X and the empty covering. -/
 theorem exists_local_replacement_stage_zero
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale) (hK : IsEtaleHypercover K)

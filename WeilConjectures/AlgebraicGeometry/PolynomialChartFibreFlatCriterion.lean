@@ -26,7 +26,6 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 /-! # Fibre flatness on a quasi-finite polynomial chart
 
 Source: Stacks Project, Tags 00RE and 00R7, as used in Tag 00RH.
-(blueprint: lem-sbc-polynomial-chart-fibre-flat-criterion)
 -/
 
 @[expose] public section
@@ -68,7 +67,7 @@ Source: Stacks Project, Tags 00RE, 00R7, 00RH and 00N8.
 Proof: An open immersion identifies the fibre stalk of U.ι followed by f with
 that of f at U.ι x, and preserves the topological dimension at the fibre point.
 Work in the affine coordinate rings A of T and B of U. The factorization gives
-an A-algebra map P = A[t_1,...,t_n] to B. It is finitely presented and quasi-finite.
+an A-algebra map P = A[t_1..,t_n] to B. It is finitely presented and quasi-finite.
 Put p equal to the prime in A below x. After base change to κ(p), its localized
 source is a regular polynomial local ring and the closed fibre is Artinian.
 Tag 00RE says that the map on these fibre local rings is flat if and only if
@@ -85,8 +84,7 @@ B is flat over A because f is flat, both local maps are essentially finitely
 presented, and the self-module B_x is nonzero and finitely presented over itself.
 In the other direction stalk flatness survives base change to κ(p). Finally,
 Tag 00N8 identifies the self-module Cohen-Macaulay condition with the displayed
-depth equality. This argument concerns only a point and asserts no openness.
-(blueprint: lem-sbc-polynomial-chart-fibre-flat-criterion) -/
+depth equality. This argument concerns only a point and asserts no openness. -/
 theorem polynomial_chart_flat_stalk_iff_fibre_depth_and_dimension
     {X T : Scheme.{u}} [IsAffine T] (f : X ⟶ T)
     [Flat f] [LocallyOfFinitePresentation f]

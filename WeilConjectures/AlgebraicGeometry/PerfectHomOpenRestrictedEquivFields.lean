@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.RelativeMVInverseOpenIso
 /-! # Restricted representing Hom equivalences
 
 Source: Stacks Project, Tags 079W and 08FE.
-(blueprint: new-perfect-hom-open-restricted-equiv-fields).
 -/
 
 @[expose] public section
@@ -22,7 +21,7 @@ namespace AlgebraicGeometry
 noncomputable section
 /-- The Hom equivalence and testing-object naturality fields needed before the
 transition and cocone maps are assembled. Source: Stacks Project, Tags 079W and
-08FE; perfect.tex, Tag 09RE. (blueprint: new-perfect-hom-open-restricted-equiv-fields). -/
+08FE; perfect.tex, Tag 09RE. -/
 structure PerfectHomOpenRestrictedEquivFields
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))
@@ -133,8 +132,7 @@ in reverse. Associativity and left naturality of that adjunction prove naturalit
 in the testing object. Apply this construction to every stage and to the apex and
 assemble the four fields. No perfectness or quasi-coherence argument is required;
 the same comparisons apply to empty opens and zero objects.
-Source: Stacks Project, Tags 079W and 08FE.
-(blueprint: new-perfect-hom-open-restricted-equiv-fields). -/
+Source: Stacks Project, Tags 079W and 08FE. -/
 theorem perfect_hom_open_restricted_equiv_fields_exists
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))

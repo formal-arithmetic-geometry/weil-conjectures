@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.NormalizedTensorHomCochainComponents
 
 /-! # Component-normalized tensor-Hom equivalence on homotopy classes
 Source: Stacks Project, Cohomology on Sites, Tag 0A90.
-(blueprint: lem-pc-normalized-homotopy-tensor-hom).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry
 
 /-- Uncurrying induces a bijection on homotopy classes, with the actual component formula.
 Source: Stacks Project, sites-cohomology.tex, Tag 0A90 (lemma-compose).
-(blueprint: lem-pc-normalized-homotopy-tensor-hom).
 
 Proof: use the degreewise isomorphisms `homTensorDegreewiseMap_spec` between the
 iterated sheaf Hom complex and the Hom complex from the total tensor. Their

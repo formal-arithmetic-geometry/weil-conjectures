@@ -18,7 +18,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 /-! # Detecting vanishing of an ideal-power product on an affine cover
 
 Source: Stacks Project, Cohomology of Schemes, proof of Lemma 01Y9, and
-Schemes, Lemma 01I8 (blueprint: lem-weil-pbc-ideal-power-product-zero-affine-cover).
+Schemes, Lemma 01I8.
 -/
 
 @[expose] public section
@@ -70,7 +70,7 @@ corresponding powers of ideals of affine sections annihilate the section modules
 on an affine open cover. Neither finiteness nor Noetherianity is needed here.
 
 Source: Stacks Project, Cohomology of Schemes, proof of Lemma 01Y9; Schemes,
-Lemma 01I8 (blueprint: lem-weil-pbc-ideal-power-product-zero-affine-cover).
+Lemma 01I8.
 
 Proof: On each affine open identify the ideal and module with the tilde sheaves
 of their sections by the tilde/global-sections adjunction. The tensor comparison

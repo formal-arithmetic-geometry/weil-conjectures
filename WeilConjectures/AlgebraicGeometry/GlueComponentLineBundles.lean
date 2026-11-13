@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.ExistsGluedSection
 # Gluing invertible modules and sections across components
 
 Source: literature/stacks-project/varieties.tex, Varieties Lemma 09NE
-(varieties-lemma-glue-invertible-sheaves) (blueprint: lem-sc-glue-component-line-bundles).
+(varieties-lemma-glue-invertible-sheaves).
 -/
 
 @[expose] public section
@@ -29,14 +29,12 @@ open scoped AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 
 /--
-Let `Y` be reduced and covered by finitely many closed subschemes `i a : Z a ⟶ Y` with
+Let `Y` be reduced and covered by finitely many closed subschemes `i a: Z a ⟶ Y` with
 discrete pairwise intersections. Invertible modules `M a` on the components glue to an
 invertible module on `Y`, and sections nonvanishing at every point of the pairwise
 intersections glue as well (Stacks, Varieties Lemma 09NE).
-Module pullback is `tensorPullback` (def-pc-module-pullback); `res N a` is restriction of
-global sections to `Z a`, the unit of its canonical adjunction
-(lem-pc-module-pullback-adjunction). `X_s` is `nonvanishingLocus`
-(def-weil-pbc-ample-invertible-module): nonzero in the residue-field fibre.
+Module pullback is `tensorPullback`; `res N a` is restriction of
+global sections to `Z a`, the unit of its canonical adjunction. `X_s` is `nonvanishingLocus`: nonzero in the residue-field fibre.
 
 Proof (the direct proof of Varieties Lemma 09NE):
 1. Let `T` be the union of pairwise intersections. It is closed and discrete. Off `T`,
@@ -54,9 +52,8 @@ Proof (the direct proof of Varieties Lemma 09NE):
    component restriction isomorphisms.
 4. For prescribed sections, take `1` on each `U_t` and the local expression of `s_i`
    on each `U_ij`. The normalized frames make these expressions compatible with the
-   transition cocycle of step 3 (`lem-sc-glue-component-transition-cocycle`). The sheaf
+   transition cocycle of step 3. The sheaf
    condition glues them to one global section restricting to all the prescribed sections.
-(blueprint: lem-sc-glue-component-line-bundles)
 -/
 theorem glueComponentLineBundles
     {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]

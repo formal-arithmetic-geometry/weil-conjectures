@@ -29,7 +29,6 @@ attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 -- Elaborating restriction and section transports uses several nested complex functors.
 /-- Before sheafification, the section map of the augmented lift computes the h-map.
 Source: Stacks Project, Cohomology, Tags 01FB, 01EZ and 02N7.
-(blueprint: lem-weil-pbc-flat-base-change-restricted-lift-homology).
 
 Proof: Restrict t to U = f⁻¹V. Conjugate by D.source.comparison and
 D.target.comparison and by the restriction/direct-image comparison to obtain a map

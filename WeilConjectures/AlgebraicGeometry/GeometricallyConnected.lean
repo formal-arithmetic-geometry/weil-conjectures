@@ -47,8 +47,7 @@ nontrivial idempotents, the kernel of the evaluation `Γ(X) → k` at the ration
 (`RingHom.IsIntegral.isNilpotent_of_eq_zero`), hence `Γ(X) ⊗_k L` has no nontrivial idempotents
 (`Algebra.TensorProduct.eq_zero_or_eq_one_of_isIdempotentElem`), and `X_L` is connected.
 
-This is the step "a connected group scheme is geometrically connected" in the proof of blueprint
-`lem-sc-abelian-variety-characterization`. -/
+This is the step "a connected group scheme is geometrically connected" in the proof of -/
 @[stacks 04KV "The universally closed case."]
 theorem GeometricallyConnected.of_universallyClosed_of_section {k : Type u} [Field k]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [UniversallyClosed f] [QuasiSeparated f]

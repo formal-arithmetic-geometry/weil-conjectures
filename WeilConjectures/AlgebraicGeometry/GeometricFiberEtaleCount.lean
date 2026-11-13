@@ -16,14 +16,14 @@ public import Mathlib.LinearAlgebra.FreeModule.Finite.Matrix
 * `Algebra.natCard_algHom_eq_finrank_of_etale`: an étale algebra `A` over a separably closed
   field `K` has exactly `finrank K A` points with values in `K`.
 * `AlgebraicGeometry.Scheme.Hom.natCard_geometricFiber_Spec_map_eq_finrank`: for a finite free
-  ring map `R ⟶ S` and a geometric point `ζ : R ⟶ Ω` over which `Spec S ⟶ Spec R` is étale (the
+  ring map `R ⟶ S` and a geometric point `ζ: R ⟶ Ω` over which `Spec S ⟶ Spec R` is étale (the
   base change to `Spec Ω` is étale), the geometric fibre has `finrank R S` points.
 * `AlgebraicGeometry.Scheme.Hom.geometricFiberPullbackEquiv`: the geometric fibre of a fibre
   product over the base is the product of the geometric fibres.
 * `AlgebraicGeometry.etale_comp_ι_of_isPullback`, `AlgebraicGeometry.etale_pullback_snd_of_range`:
   étaleness over an open subset is stable under base change.
 
-These are used for the punctured diagonal of blueprint `det-tf-restriction-zero-covers` (ii).
+These are used for the punctured diagonal of (ii).
 -/
 
 @[expose] public section

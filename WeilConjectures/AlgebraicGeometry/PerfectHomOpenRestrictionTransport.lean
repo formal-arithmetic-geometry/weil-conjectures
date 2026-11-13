@@ -51,8 +51,7 @@ components and their inverses cancel. The resulting composites are identical.
 Specialize the cartesian map to R.map(j≤k) and to c.ι.app j. No representing
 equivalences, quasi-coherence, or existence of restricted cocone data are used.
 Empty opens, identities, zero objects, and a one-stage diagram obey the same
-composition and inverse cancellation identities.
-(blueprint: new-perfect-hom-open-restriction-transport). -/
+composition and inverse cancellation identities. -/
 theorem perfect_hom_open_restriction_transport
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))

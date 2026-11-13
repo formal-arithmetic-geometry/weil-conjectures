@@ -28,8 +28,7 @@ Source: Stacks Project, Tag 054F. Choose an affine neighbourhood of the special 
 it also contains the general point. The corresponding primes form a strict inclusion.
 Apply `Ideal.exists_isDiscreteValuationRing_of_lt` to obtain a ring map whose kernel is
 the smaller prime and whose inverse image of the maximal ideal is the larger prime.
-Its spectrum map, followed by the affine chart, has the required values.
-(blueprint: lem-sbc-noetherian-specialization-trait) -/
+Its spectrum map, followed by the affine chart, has the required values. -/
 theorem exists_trait_of_strict_specializes {X : Scheme.{u}} [IsLocallyNoetherian X]
     {x y : X} (hxy : y ⤳ x) (hne : y ≠ x) :
     ∃ (R : Type u) (_ : CommRing R) (_ : IsDomain R) (_ : IsDiscreteValuationRing R)

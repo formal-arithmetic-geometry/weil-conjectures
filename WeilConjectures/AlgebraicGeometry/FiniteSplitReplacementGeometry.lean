@@ -163,8 +163,7 @@ Lift the truncated diagram to this category. The category of arrows from retaine
 simplices to [n+1] is finite; its opposite limit is the matching object. Its
 projections give the displayed naturality. Apply preservation to get its limiting
 cone in Over X, which gives existence and uniqueness for every test scheme over X.
-The matching object's structure map is qcqs; since X is qcqs, its source is qcqs.
-(auxiliary; not a blueprint node) -/
+The matching object's structure map is qcqs; since X is qcqs, its source is qcqs. -/
 theorem exists_replacement_boundary {X : Scheme.{u}} [CompactSpace X]
     [QuasiSeparatedSpace X] {n : ℕ}
     (U : TruncatedFiniteSplitEtaleHypercover X n) : Nonempty (ReplacementBoundary U) := by

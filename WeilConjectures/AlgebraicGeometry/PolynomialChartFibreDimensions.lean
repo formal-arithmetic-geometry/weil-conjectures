@@ -15,7 +15,6 @@ import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 /-! # Dimension formulas for the canonical polynomial fibre chart
 
 Source: Stacks Project, Tags 00RE and 00P1.
-(blueprint: lem-sbc-polynomial-chart-fibre-dimensions)
 -/
 
 @[expose] public section
@@ -102,8 +101,7 @@ n-space has local topological dimension n at every point. Applying the dimension
 formula there gives n = d + t. At the point of V it gives r + t. The open
 immersion of V into f.fiber p identifies their stalks and preserves local
 topological dimension, giving the displayed identities for the actual fibre.
-No flatness hypothesis is needed for these dimension formulas.
-(blueprint: lem-sbc-polynomial-chart-fibre-dimensions) -/
+No flatness hypothesis is needed for these dimension formulas. -/
 theorem polynomial_chart_fibre_dimensions
     {X T : Scheme.{u}} [IsAffine T] (f : X ⟶ T)
     (U : X.Opens) [IsAffine U.toScheme] (n : ℕ)

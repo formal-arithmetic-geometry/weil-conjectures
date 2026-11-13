@@ -31,7 +31,6 @@ variable (X : Scheme.{u})
 set_option backward.isDefEq.respectTransparency false in
 /-- Exact augmented section rows imply descent for a bounded-below complex.
 Source: Stacks Project, Tags 09A2 and 01GE.
-(auxiliary; not a blueprint node).
 Proof: use the canonical restriction as a chain augmentation into the zeroth
 simplicial column. Naturality makes it a map of complexes. Its transposed column
 in coefficient degree n is precisely the single-sheaf row augmentation, hence is

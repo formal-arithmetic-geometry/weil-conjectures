@@ -53,7 +53,6 @@ private theorem openShiftEquiv_natural (Y : Scheme.{u}) (B : Y.Opens)
 
 /-- The Hom equivalences and their stage/apex compatibility after a chosen open
 localization. Source: Stacks Project, perfect.tex Tags 09RE and 079W.
-(blueprint: lem-pc-perfect-hom-open-stage-maps).
 Proof: Put B = t inverse-image W and L = exact derived restriction to B.
 Yoneda and derived adjunction identify F_j with Rpi_j* Lpi_j*Q;
 evaluate stageNatural at identities to recover the representing isomorphism.

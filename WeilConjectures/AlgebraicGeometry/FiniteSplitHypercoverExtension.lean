@@ -17,8 +17,7 @@ namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 Source: Stacks 0DAV, split hypercover induction. Regard the skeleton as a
 replacement of the terminal simplicial object. Extend it one degree at a time
 with the existing replacement-stage extension theorem. Restrict this tower to
-its diagonal stages and assemble it, retaining its prescribed truncation.
-(auxiliary; not a blueprint node) -/
+its diagonal stages and assemble it, retaining its prescribed truncation. -/
 theorem exists_extension_of_finite_skeleton
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (r : ℕ) (U : TruncatedFiniteSplitEtaleHypercover X r) :

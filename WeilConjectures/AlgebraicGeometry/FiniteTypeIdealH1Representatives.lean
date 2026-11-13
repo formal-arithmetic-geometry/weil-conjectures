@@ -19,7 +19,7 @@ import Mathlib.AlgebraicGeometry.Properties
 /-! # Finite-type representatives for first cohomology of ideal sheaves
 
 Source: Stacks Project, Tag 01XG, first two sentences of the proof, using
-Tags 01PG and 01FF (blueprint: lem-pqf-finite-type-ideal-h1-representatives).
+Tags 01PG and 01FF.
 -/
 
 @[expose] public section
@@ -35,8 +35,7 @@ from a finite-type subideal. The morphism is the inclusion of the subideal, as w
 by its compatibility with the two inclusions into the structure sheaf.
 
 Source: Stacks Project, Tag 01XG, first two sentences of the proof; Properties,
-Tag 01PG; Cohomology, Tag 01FF
-(blueprint: lem-pqf-finite-type-ideal-h1-representatives).
+Tag 01PG; Cohomology, Tag 01FF.
 
 Proof:
 1. Index the finite-type quasi-coherent subideals of I by inclusion, including the zero

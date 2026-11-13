@@ -37,7 +37,6 @@ cohomology and requires no strict-local hypothesis.
 
 Source: Stacks Project, Tag 03FD (module/abelian acyclic comparison), together
 with the termwise mate construction of Tag 0736 and Remark 07A7.
-(blueprint: lem-weil-pbc-module-abelian-stalk-exchange)
 
 Proof: Use the canonical derived direct-image coefficient comparison. Its
 invertibility is proved by identifying injective module sheaves with modules

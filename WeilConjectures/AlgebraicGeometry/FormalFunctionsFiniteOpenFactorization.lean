@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 Source: Stacks Project, Tag 02OD, factorization through the local spectrum;
 Tags 01F7 and 01FB, composition and restriction of cohomology maps.
-(blueprint: lem-weil-pbc-formal-functions-finite-open-factorization)
 -/
 
 @[expose] public section
@@ -99,7 +98,6 @@ with restriction and the two restricted pullbacks. No germ or stalk comparison
 occurs in this statement.
 Source: Stacks Project, Tag 02OD, the finite maps factor through the local spectrum;
 Tags 01F7 and 01FB, functoriality of cohomology.
-(blueprint: lem-weil-pbc-formal-functions-finite-open-factorization)
 
 Proof: write g' for the projection from the local base change to X and i' for
 formalFunctionsFiniteι. Put U=f inverse V, U'=g' inverse U and W=i_n inverse U.

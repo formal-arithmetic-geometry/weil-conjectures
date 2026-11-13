@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
 /-! # Local transport through the composition comparison
 
 Source: Stacks Project, Tag 09ZF, third and fourth proof paragraphs.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-local-comparison).
 -/
 
 @[expose] public section
@@ -58,7 +57,6 @@ private lemma identityPullback_hom_ext {S T : Scheme.{u}} (f : T ⟶ S)
 /-- The local representative calculation before identifying the global target section.
 Source: Stacks Project, Tag 09ZF, third and fourth proof paragraphs;
 Sites, Tags 03CB and 03CC.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-local-comparison).
 
 Proof: Let j be the second projection and k = j followed by h. Naturality of the
 unit for j moves the representative's restriction through that unit. Naturality

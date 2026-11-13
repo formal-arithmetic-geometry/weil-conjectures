@@ -179,10 +179,6 @@ private theorem reductionComp_counit_chain (W : Scheme.{u})
 
 /-- Homotopy-level specialization of the scalar-extension counit composition square.
 
-Source: `lem-pe-internal-scalar-extension-counit-composition` together with the
-comparison definition `def-pe-internal-perfect-reduction-hom-equiv`.
-(blueprint: lem-pe-internal-perfect-reduction-counit-coherence).
-
 Proof: unfold the ordinary reduction step and the derived reduction comparison,
 then apply the generic counit composition identity to the two quotient maps.
 The remaining conversion from the chain quotient to the homotopy quotient is the

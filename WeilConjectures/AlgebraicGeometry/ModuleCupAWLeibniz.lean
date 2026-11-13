@@ -14,7 +14,6 @@ import Mathlib.Tactic.Abel
 /-! # Signed Leibniz identity for the front/back components
 
 Source: Banerjee, Tensor Structure on Smooth Motives, §1.1.4, p. 16.
-(blueprint: lem-sc-module-cup-aw-leibniz).
 -/
 
 @[expose] public section
@@ -314,7 +313,6 @@ private theorem transport_pairing
 /-- The signed differential calculation on a single nonnegative bidegree.
 Source: Banerjee, Tensor Structure on Smooth Motives, arXiv:1004.1491,
 §1.1.4, p. 16, the front/back formula immediately before (1.1.2).
-(blueprint: lem-sc-module-cup-aw-leibniz)
 
 Proof: Write f_{r,s}(i)=i and b_{r,s}(j)=r+j for the front and back inclusions.
 Transport the differentials along the three extension isomorphisms, so they

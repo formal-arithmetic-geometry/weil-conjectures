@@ -110,7 +110,6 @@ self Ext on the Koszul-regular open. This asserts generation, not injectivity.
 
 Source: Stacks Project, Tags 0BQW and 0BQY, the degree-one boundary and the
 contraction-product spanning argument.
-(blueprint: lem-sc-koszul-self-ext-yoneda-surjection).
 
 Proof: The second-order thickening sequence gives the intrinsic degree-one map
 from the conormal dual to self Ext by pushing out extensions. Compose n such

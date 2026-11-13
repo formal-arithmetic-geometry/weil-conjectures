@@ -21,8 +21,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 # Limits under inverse image along a pro-etale immersion
 
 Source: Stacks Project, Tag 09AA (1), with open slice restriction, and Modules on Sites,
-Tags 03D2, 03DB and 04JC
-(auxiliary; not a blueprint node).
+Tags 03D2, 03DB and 04JC.
 -/
 
 @[expose] public section
@@ -221,8 +220,7 @@ condition on arbitrary test sheaves expresses transport of the scalar action und
 finite-product comparison. The final functor is characterized on both objects and maps
 by the specified sheaf tensor extension, so it is not an arbitrary exact functor.
 
-Source: Stacks Project, Tag 09AA (1), and Modules on Sites, Tags 03D2, 03DB and 04JC
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 09AA (1), and Modules on Sites, Tags 03D2, 03DB and 04JC.
 
 Proof:
 1. For a weakly etale map, composition on pro-etale site objects is left adjoint

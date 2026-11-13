@@ -23,8 +23,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 /-! # The theorem on formal functions at a point of the base
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 02OD, with the canonical-map
-identification in the proof of Tag 0G7X
-(blueprint: lem-weil-pbc-formal-functions-stalk).
+identification in the proof of Tag 0G7X.
 
 The index n represents the positive level n+1. The maps theta_n are the canonical stalk
 maps, tied by `IsFormalFunctionsTheta`; the isomorphism is specified on every limit
@@ -99,10 +98,10 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 700000 in
 -- Transport through limits and restriction of scalars needs extra elaboration.
-/-- The canonical maps theta_n : M → H^p(X_n, F_n) are compatible with the transitions,
+/-- The canonical maps theta_n: M → H^p(X_n, F_n) are compatible with the transitions,
 kill m^(n+1) M, and induce an isomorphism over the completed local ring from the
 completion of M to the inverse limit, whose composite with M → M^ is (theta_n)_n.
-Source: Stacks, Tag 02OD (blueprint: lem-weil-pbc-formal-functions-stalk).
+Source: Stacks, Tag 02OD.
 
 Proof (the node's nine steps):
 1. A=O_(Y,y) is Noetherian. The canonical map c: Spec A → Y is flat and its image is
@@ -229,7 +228,7 @@ theorem formal_functions_stalk {X Y : Scheme.{uS}} (f : X ⟶ Y) [IsProper f]
 
 /-- In degree zero for O_X, the comparison is the inverse limit of actual global
 sections. It sends every germ of a section to the pullbacks of that section.
-Source: Stacks, Tags 02OD and 0G7X (blueprint: lem-weil-pbc-formal-functions-stalk).
+Source: Stacks, Tags 02OD and 0G7X.
 
 Proof: apply the preceding nine-step argument in degree zero to O_X. Tensor pullback
 of the unit module is the unit module, H^0 is global sections, and R^0 f_* is f_*.

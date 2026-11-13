@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 Source: Stacks Project, Tag 0E62 (the injective part of the proper-flat criterion),
 with the flat local-ring argument in Mathlib's `epi_of_flat_of_surjective`.
-(blueprint: lem-sc-proper-flat-structure-sheaf-stalk-injective).
 -/
 
 @[expose] public section
@@ -89,7 +88,6 @@ Source: Stacks Project, Tag 0E62, proof of `perfect-lemma-proper-flat-h0`, local
 at the fixed point. The shorter injectivity argument uses Mathlib's flat local-ring
 argument in `epi_of_flat_of_surjective` and the structure-sheaf adjunction comparison
 of Stacks Tags 0096 and 01CA.
-(blueprint: lem-sc-proper-flat-structure-sheaf-stalk-injective).
 
 Proof: The fibre is nonempty: otherwise its global sections are the zero ring,
 contradicting injectivity of the assumed isomorphism from the residue field.

@@ -30,7 +30,6 @@ variable [QuasiCompact f] [QuasiSeparated f] [HasInjectiveResolutions X.Modules]
 
 /-- A section of a higher direct image on a principal open has a denominator bound.
 Source: Stacks Project, Tag 01XJ (1), via localization in Tag 09MR and Tag 01E4.
-(blueprint: lem-pc-higher-direct-image-section-denominators).
 
 Proof:
 Work on an affine open W = Spec A of the base. The inverse image Y = f⁻¹W is

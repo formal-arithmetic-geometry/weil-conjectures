@@ -25,7 +25,6 @@ namespace AlgebraicGeometry.Proj
 
 /-- A finite principal cover carries fractions representing the section on every chart.
 Source: Stacks Project, Tag 01M7, construction preceding Definition 27.8.3 (Tag 01M6).
-(blueprint: lem-sc-proj-twist-finite-local-representatives)
 
 Proof: around each point take a local homogeneous fraction for the section. Refine its
 neighborhood by a homogeneous basic open contained in D₊(f), multiplying numerator and

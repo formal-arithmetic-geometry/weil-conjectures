@@ -24,7 +24,7 @@ import WeilConjectures.AlgebraicGeometry.ThickeningSystemsDictionary
 # Grothendieck existence with proper support
 
 Source: Stacks Project, Cohomology of Schemes, Theorem 088E and Remark 088F,
-with indices shifted by one (blueprint: prop-weil-pbc-grothendieck-existence).
+with indices shifted by one.
 -/
 
 @[expose] public section
@@ -53,8 +53,7 @@ private theorem eq_of_comp_unit_eq {C D E : Type*} [Category C] [Category D] [Ca
 /-- Full faithfulness in Grothendieck existence: for any comparison `c` of the iterated and the
 direct pullbacks to the thickenings, a family of maps on the thickenings compatible with `c`
 between coherent modules with proper support comes from a unique map of modules.
-Source: Stacks Project, Tags 088E and 088F.
-(blueprint: prop-weil-pbc-grothendieck-existence). -/
+Source: Stacks Project, Tags 088E and 088F. -/
 theorem grothendieck_existence_fullyFaithful
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]
@@ -207,8 +206,7 @@ Proof plan (Stacks 088E, in the form 088F):
    lem-weil-pbc-closed-subset-proper-over-base-union-preimage.
 10. The complement ideal has nonzero powers since its vanishing locus misses the dense U.
     Induction supports the kernel and cokernel on proper closed subschemes. Conclude for
-    the system by lem-weil-pbc-formal-systems-proper-support-serre.
-(blueprint: prop-weil-pbc-grothendieck-existence). -/
+    the system by lem-weil-pbc-formal-systems-proper-support-serre. -/
 theorem grothendieck_existence
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

@@ -14,7 +14,6 @@ public import Mathlib.Data.Int.Interval
 /-! # Finite source decomposition
 
 Source: Stacks Project, Tags 08DQ and 08DM.
-(blueprint: lem-pc-ordinary-evaluation-source-biproduct).
 -/
 
 @[expose] public section
@@ -155,7 +154,6 @@ private lemma finiteTensorBiproduct {C : Type*} [Category C] [Preadditive C]
 
 /-- The total tensor degree is the finite biproduct of its possibly nonzero summands.
 Source: Stacks Project, Tag 08DQ, proof of `lemma-dual-perfect-complex`, tensor sum.
-(blueprint: lem-pc-ordinary-evaluation-source-biproduct).
 
 Proof: the product projections of Hom(P,O[0]) identify degree q with
 Hom(P^(-q),O): all factors except r=-q have zero target and hence are zero.

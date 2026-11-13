@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentPerfectPart
 
 /-! # Scalar-extension comparison for global Hom over arbitrary affine bases
 Source: Stacks Project, perfect.tex, Tag 0AA7.
-(blueprint: lem-sc-flat-affine-global-hom-comparison).
 -/
 
 @[expose] public section
@@ -84,7 +83,6 @@ def mixedAffineGlobalHomBaseChangeMap {X Y Y' : Scheme.{u}}
 
 /-- Scalar extension of global RHom commutes with a flat square over affine bases.
 Source: Stacks Project, perfect.tex, Tag 0AA7, case (1).
-(blueprint: lem-sc-flat-affine-global-hom-comparison).
 
 Proof: identify Y and Y' with spectra of their global rings using their canonical
 isomorphisms. Flatness of f makes the square stalkwise Tor independent. For perfect M,

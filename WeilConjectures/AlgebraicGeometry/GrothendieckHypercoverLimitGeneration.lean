@@ -44,9 +44,6 @@ private theorem filteredShortComplex_hom_ext
 /-- Stage hypercover cohomology objects jointly generate the limit object.
 This statement concerns alternating cochain complexes and their colimits only;
 it makes no reference to injective resolutions or derived sections.
-Source: blueprint lemma-weil-pbc-finite-hypercover-descent and the finite-cochain
-argument of lemma-weil-pbc-etale-cohomology-continuity, steps 2–4.
-(auxiliary; not a blueprint node).
 
 Proof: pull a finite split hypercover at a stage to the limit. Base change preserves
 its splitting, finite coproduct decomposition and matching covers. The inverse-image

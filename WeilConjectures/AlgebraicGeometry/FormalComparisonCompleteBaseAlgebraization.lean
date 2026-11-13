@@ -38,7 +38,6 @@ of an algebraic adjunction map, followed by the pushforward of an isomorphism.
 
 Source: Stacks Project, Tag 088B, paragraph beginning with the complete affine base,
 and Tags 087W and 0883.
-(blueprint: lem-weil-pbc-formal-comparison-complete-base-algebraization)
 
 Proof: The affine formal-module equivalence identifies G with the completion of the
 coherent sheaf associated to its finite module of inverse-limit sections. Completeness

@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.LerayEdgeVanishingIso
 /-!
 # The canonical Leray edge and its degeneration
 
-Source: Stacks Project, Cohomology, Tag 01F4 (2), with Tags 01F2 and 01EX
-(blueprint: lem-pc-leray-degenerate-sections).
+Source: Stacks Project, Cohomology, Tag 01F4 (2), with Tags 01F2 and 01EX.
 -/
 
 @[expose] public section
@@ -36,25 +35,21 @@ representatives. Projection by `homologyπ` followed by the inverse resolution c
 is precisely the class of `z` in the higher direct image. The universally quantified `K`
 and equality `hK` merely name the direct-image complex, without introducing a new notion.
 
-Source: Stacks Project, Cohomology, Tag 01F4 (2), with Tags 01F2 and 01EX
-(blueprint: lem-pc-leray-degenerate-sections).
+Source: Stacks Project, Cohomology, Tag 01F4 (2), with Tags 01F2 and 01EX.
 
 Proof:
-1. Choose an injective resolution (def-sp-injective-resolutions). Sections of its direct
-image are sections on inverse-image opens (def-pc-module-pullback). A global cocycle is a
+1. Choose an injective resolution. Sections of its direct
+image are sections on inverse-image opens. A global cocycle is a
 section of its cycle sheaf; quotienting by boundaries gives the displayed map. Cohomology
-and higher direct images are the right derived functors (pqf-def-cohomology).
+and higher direct images are the right derived functors.
 2. Apply thm-sp-grothendieck to direct image followed by global sections. The module-sheaf
-categories are Grothendieck abelian (prop-pur-kinjective-resolutions-exist), as is Ab
-(lem-weil-pbc-ring-modules-grothendieck-abelian). Both functors are additive and left exact
-(def-weil-sheaf-of-modules-category); lem-weil-pbc-module-pushforward-injective-acyclic
-supplies composite acyclicity (def-sp-composite-acyclicity). The composite is global
+categories are Grothendieck abelian, as is Ab. Both functors are additive and left exact; lem-weil-pbc-module-pushforward-injective-acyclic
+supplies composite acyclicity. The composite is global
 sections on X. By lem-sp-derived-well-defined the derived identifications are independent
 of resolution; lem-sp-grothendieck-edge-maps gives naturality and
 lem-pc-grothendieck-edge-cocycle identifies this edge with the cocycle formula.
 3. Under the vanishing hypothesis all columns except p = 0 vanish. The first-quadrant
-spectral sequence and finite abutment filtration (thm-sp-grothendieck and
-lem-sp-grothendieck-edge-maps) collapse. The edge-isomorphism clause of
+spectral sequence and finite abutment filtration collapse. The edge-isomorphism clause of
 lem-pc-grothendieck-edge-cocycle therefore makes this same edge an isomorphism. -/
 theorem exists_lerayEdge_isIso_of_vanishing {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ ε : ∀ q : ℕ,

@@ -43,8 +43,7 @@ Uniqueness of this factorization and the matching face equations give the simpli
 identities and naturality of V to K. The canonical degeneracy cofans are coproduct
 cofans, giving the required splitting. N_n covers the entire matching object, so V's
 matching arrow is surjective. Repeat without a degree bound; dependent choice gives
-compatible skeletons in all degrees and hence the stated full refinement.
-(auxiliary; not a blueprint node) -/
+compatible skeletons in all degrees and hence the stated full refinement. -/
 theorem exists_finite_split_replacement
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale) (hK : IsEtaleHypercover K) :

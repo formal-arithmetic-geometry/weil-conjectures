@@ -185,8 +185,7 @@ def principalSubsetInsertOne
     H.map e.inv ≫ H.map (K.ιTotal (ComplexShape.up ℤ) (p : ℤ) q n hpq)
 
 /-- Insert all subset coordinates by the finite sum of total summand inclusions.
-Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
-(blueprint: def-sc-principal-open-cech-subset-insertion). -/
+Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM. -/
 def principalSubsetInsertion
     (J : CochainComplex (Spec (.of A)).Modules ℤ) (n : ℤ) :
     principalSubsetCoordinates A r f J n ⟶ (principalSubsetTotal A r f J).X n := by

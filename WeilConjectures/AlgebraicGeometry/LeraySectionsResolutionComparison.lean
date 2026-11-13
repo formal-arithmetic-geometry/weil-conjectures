@@ -12,8 +12,7 @@ import Mathlib.Algebra.Homology.ConcreteCategory
 
 /-! # Resolution comparison for sections of a direct image
 
-Source: Stacks Project, Cohomology, Tags 01F4 (2), 01F2, and 01EX
-(blueprint: lem-pc-leray-sections-resolution-comparison).
+Source: Stacks Project, Cohomology, Tags 01F4 (2), 01F2, and 01EX.
 -/
 
 @[expose] public section
@@ -344,7 +343,6 @@ set_option backward.isDefEq.respectTransparency false in
 No edge map or acyclicity witness occurs in this statement.
 
 Source: Stacks Project, Cohomology, Tags 01F4 (2), 01F2, and 01EX.
-(blueprint: lem-pc-leray-sections-resolution-comparison)
 
 Proof: Restriction along Opens.map_top identifies sections of the direct image on Y
 with sections on X, naturally in the module sheaf. After forgetting scalars this is

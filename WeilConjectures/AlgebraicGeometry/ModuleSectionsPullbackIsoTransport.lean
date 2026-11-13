@@ -13,7 +13,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 /-! # Module sections transported along an isomorphism
 
 Source: Stacks Project, Tags 01ZR, 0095, 0097 and 01I6.
-(blueprint: new-module-sections-pullback-iso-transport).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace AlgebraicGeometry
 
 /-- Global sections of a pulled-back module transport along a scheme isomorphism.
 Source: Stacks Project, Modules on Schemes Tags 0095, 0097 and 01I6.
-(blueprint: new-module-sections-pullback-iso-transport).
 
 Proof: Composition of module pullbacks identifies the pullback along g' with
 pullback along h.hom of the module pulled back along g, using the equation hg.

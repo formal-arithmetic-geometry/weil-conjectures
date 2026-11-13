@@ -25,7 +25,7 @@ over it.
 - `AlgebraicGeometry.PoincareDualitySetting.geometricFiber`: the base change
   `X = X₀ ×_{k₀} k` to the algebraic closure.
 - `AlgebraicGeometry.PoincareDualitySetting.structureMorphism`: the structure morphism
-  `a_X : X ⟶ Spec k`.
+  `a_X: X ⟶ Spec k`.
 
 ## Implementation notes
 
@@ -33,16 +33,14 @@ Properness of `X₀` is deliberately *not* part of the datum: the duality statem
 formulated with compact supports and do not use it. It is imposed explicitly, as an
 `[IsProper …]` instance hypothesis, exactly where `Ra_{X!} ≅ Ra_{X*}` is needed.
 
-The blueprint (`sk-def-set`) imposes no admissibility on `a_X`. In Lean, `Ra_{X!}` and
+The blueprint imposes no admissibility on `a_X`. In Lean, `Ra_{X!}` and
 `Ra_X^!` are only constructed for morphisms admitting a compactification, so
 `AlgebraicGeometry.HasCompactification` is carried as an instance hypothesis by the statements
 that use them rather than as a field of the datum. For `a_X` this hypothesis is redundant
 mathematically: `a_X` is separated of finite type over the quasi-compact quasi-separated
 `Spec k`, so Nagata's theorem (`AlgebraicGeometry.NagataCompactification`, which comes with an
 instance) provides a compactification once those properties of `a_X` are available as
-instances.
-
-The blueprint node `sk-def-set` fixes, besides the geometry, a *coefficient* datum
+instances. fixes, besides the geometry, a *coefficient* datum
 `(ℓ, E, 𝒪_E, ϖ_E, Λ)` subject to `ℓ ≠ ring characteristic of k₀`. That half of the datum is
 not recorded here: the coefficient category is a type parameter of the six operations, and
 the constraint `ℓ ≠ p` is a hypothesis of the duality *theorems*, none of which is stated
@@ -52,7 +50,6 @@ Likewise the Frobenius endomorphism of the geometric fibre is not constructed he
 geometric Galois Frobenius `𝟙_{X₀} × Spec σ` of
 `WeilConjectures.AlgebraicGeometry.GeometricFrobenius`, where `σ` is the geometric — not the
 arithmetic — Frobenius of the algebraic closure.
-
 -/
 
 @[expose] public section
@@ -65,7 +62,7 @@ namespace AlgebraicGeometry
 
 variable (k₀ : Type u) [Field k₀] [Finite k₀]
 
-/-- Blueprint `sk-def-set`: The fixed setting.
+/-- The fixed setting.
 
 The geometric datum of the Poincaré duality chapter over the finite field `k₀`: a scheme `X₀`
 over `k₀` which is smooth of relative dimension `d`, separated of finite type and

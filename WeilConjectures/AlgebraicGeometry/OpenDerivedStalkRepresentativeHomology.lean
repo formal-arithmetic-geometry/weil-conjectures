@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.OpenDerivedStalkIso
 /-! # The open derived stalk comparison on a literal representative
 
 Source: Stacks Project, Tags 0098 and 0D5U, exact restriction and stalks.
-(blueprint: lem-pc-open-derived-stalk-representative-homology).
 -/
 
 @[expose] public section
@@ -164,8 +163,7 @@ left homology data (its kernel and cokernel). Cancel these comparisons to obtain
 the formula below. This computation is valid also for zero complexes, arbitrary
 homology, and identity open immersions; it uses no choice of a representative.
 Source: Stacks Project, Tag 0D5U, opening paragraph; Tag 0098, stalk identification;
-exact-functor homology and localization naturality.
-(blueprint: lem-pc-open-derived-stalk-representative-homology). -/
+exact-functor homology and localization naturality. -/
 theorem openDerivedStalk_representative_homology
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

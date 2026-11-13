@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.SpecFieldPointResidueField
 /-!
 # Residue field of a point of a fibre product
 
-Source: Stacks Project, Schemes, Lemma 26.17.5 (Tag 01JT)
-(blueprint: lem-weil-pbc-fibre-product-point-residue-field).
+Source: Stacks Project, Schemes, Lemma 26.17.5 (Tag 01JT).
 -/
 
 @[expose] public section
@@ -94,8 +93,7 @@ private theorem residueField_equiv_ofPointTensor_core {X Y S : Scheme.{u}}
   · exact (congrArg (fun h => h.comp T.tensorInr.hom) hcomp).trans hinr
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Stacks Project, Schemes, Lemma 26.17.5 (Tag 01JT), residue-field assertion
-(blueprint: lem-weil-pbc-fibre-product-point-residue-field).
+/-- Stacks Project, Schemes, Lemma 26.17.5 (Tag 01JT), residue-field assertion.
 The residue field of the kernel of the canonical tensor map is isomorphic to the residue
 field of the point, compatibly with both factor fields. If the tensor quotient is already a
 field, its induced map is likewise an isomorphism compatible with both factors.

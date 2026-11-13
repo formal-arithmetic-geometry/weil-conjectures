@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
 /-! # Core object comparison data (without the final Hom pin).
 
 Source: Stacks Project, Tags 09RE, 08DW and 0D5S.
-(blueprint: lem-pc-perfect-overlap-object-realization-core-data).
 -/
 
 @[expose] public section
@@ -426,8 +425,7 @@ theorem overlapDiagram_gammaV_inv_on_image
 /-- Geometric object comparisons and their natural compatibility with apex pullback.
 The transition functors and their fixed conjugation formula are recorded explicitly;
 the Hom pin will be derived from naturality, rather than included as a field.
-Source: Stacks Project, Tags 08DW and 0D5S.
-(blueprint: lem-pc-perfect-overlap-object-realization-core-data). -/
+Source: Stacks Project, Tags 08DW and 0D5S. -/
 structure PerfectHomObjectRealizationCore
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (i : I)
@@ -474,8 +472,7 @@ attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverMo
   schemeOpenOverlapRestriction_preservesFiniteColimits
 
 /-- The object-comparison proposition for the fixed overlap scheme and pullback objects.
-Source: Stacks Project, Tags 09RE, 08DW and 0D5S.
-(blueprint: lem-pc-perfect-overlap-object-realization-core-data). -/
+Source: Stacks Project, Tags 09RE, 08DW and 0D5S. -/
 @[irreducible] noncomputable def perfectOverlapObjectRealizationCoreStatement
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

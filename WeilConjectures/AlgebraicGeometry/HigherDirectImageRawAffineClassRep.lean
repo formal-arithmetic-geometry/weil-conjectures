@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawAffineComplexPresen
 /-! # Raw affine cohomology classes descend to a stage
 
 Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: lem-sbc-higher-direct-image-raw-affine-class-rep).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ pullback of a raw class at one stage. This assertion concerns derived Hom only;
 no higher-direct-image sheaf or choice of sheafification comparison occurs.
 Source: Stacks Project, Tag 09Z1, the displayed cohomology colimit in the proof;
 Tag 0EZM, specialized to degree-zero complexes with common lower bound zero.
-(blueprint: lem-sbc-higher-direct-image-raw-affine-class-rep).
 
 Proof: Fix the affine etale U over S. Base change the underlying scheme diagram
 and its limiting cone along U.hom. Each stage U times_S X_i is qcqs because its

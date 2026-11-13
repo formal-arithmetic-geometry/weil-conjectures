@@ -15,7 +15,6 @@ import Mathlib.Algebra.Homology.HomologicalComplexBiprod
 /-! # Exactness of the concrete complex on an arbitrary open union
 
 Source: Stacks Project, Tag 08BV, displayed sequence applied on the union.
-(blueprint: lem-pc-open-union-image-complex-exact).
 -/
 
 @[expose] public section
@@ -70,7 +69,6 @@ form a short exact sequence for a complex with injective terms.
 
 Source: Stacks Project, Tag 08BV, lemma-exact-sequence-j-star, the displayed
 sequence of complexes; Tag 01EB, lemma-mayer-vietoris, its sectionwise proof.
-(blueprint: lem-pc-open-union-image-complex-exact).
 
 Proof: In degree n over a test open T, identify the four direct-image terms
 with I^n(T intersection (U union V)), I^n(T intersection U),

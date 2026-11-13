@@ -13,7 +13,6 @@ import WeilConjectures.EtaleCohomology.EtaleSectionZeroOpen
 /-! # Support of a section of the proper-support direct image
 
 Source: Stacks Project, Tag 0F50.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ set_option backward.isDefEq.respectTransparency false
 /-- A module-sheaf section with zero germs at every separably closed geometric point is zero.
 
 Source: Stacks Project, Tags 04FR and 04FT; the zero-open criterion.
-(auxiliary; not a blueprint node)
 
 Proof: Apply the additive zero-open criterion after forgetting scalars. At each point
 of the etale object choose an algebraic closure of its residue field. The zero germ
@@ -129,7 +127,6 @@ private theorem germ_zero_off_support_image
 of the support of its underlying section.
 
 Source: Stacks Project, Tag 0F50, support-image argument.
-(auxiliary; not a blueprint node)
 
 Proof:
 Choose the closed support T of the underlying section. It is proper over V by the

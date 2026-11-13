@@ -22,7 +22,6 @@ noncomputable section
 
 /-- A single coefficient sheaf has an augmented concrete Godement model.
 Source: Stacks Project, Tag 0FKR; Banerjee, arXiv:1004.1491, §1.1.4.
-(blueprint: lem-sc-module-cup-godement-model-pairing-models-exist)
 Proof: the stalk functor to families of modules has right adjoint given by the
 product of stalk skyscrapers. The hom equivalence is the product of the
 `skyscraperHomEquiv` equivalences. Its unit is `moduleCup_godementUnit`, its

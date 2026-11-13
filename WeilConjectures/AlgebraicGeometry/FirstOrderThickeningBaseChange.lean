@@ -14,8 +14,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 # Base change of a first order thickening
 
 Source: Stacks Project, More on Morphisms, Lemma 37.2.4 (Tag 09ZU), and
-Schemes, Lemma 26.17.6 (Tag 01JU), part (1)
-(blueprint: lem-weil-pbc-first-order-thickening-base-change).
+Schemes, Lemma 26.17.6 (Tag 01JU), part (1).
 -/
 
 @[expose] public section
@@ -42,8 +41,7 @@ Proof:
    makes this `⊥.comap p`, which is `⊥` by `Scheme.IdealSheafData.comap_bot`.
 4. The closed immersion and square-zero kernel give the first order thickening.
    The defining pullback equation supplies the required commuting square.
-
-(blueprint: lem-weil-pbc-first-order-thickening-base-change). -/
+. -/
 theorem IsFirstOrderThickening.baseChange {W W' Z' : Scheme.{u}}
     (i : W ⟶ W') (p : Z' ⟶ W') (hi : IsFirstOrderThickening i) :
     IsFirstOrderThickening (pullback.fst p i) ∧

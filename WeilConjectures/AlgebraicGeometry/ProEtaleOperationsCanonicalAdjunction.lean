@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 # Canonically normalized pro-etale module adjunctions
 
 Source: Stacks Project, Modules on Sites, lemma-adjoint-push-pull-modules;
-Cohomology on Sites, Tag 07A6 (blueprint: def-weil-pbc-proetale-operations).
+Cohomology on Sites, Tag 07A6.
 -/
 
 @[expose] public section
@@ -316,8 +316,7 @@ private theorem canonicalHomEquiv_naturality_right
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The unique adjunction whose transpose is the model-site pullback transpose after
 precomposition with the tensor unit `m ↦ 1 ⊗ m` and sheafification.
-Source: Stacks, lemma-adjoint-push-pull-modules
-(blueprint: def-weil-pbc-proetale-operations).
+Source: Stacks, lemma-adjoint-push-pull-modules.
 Proof: precompose with the tensor sheafification unit to obtain a map from the
 inverse-image module. Transport to the small model; the equivalence on the original
 and model sites acts identically on sections. Apply the canonical module pullback
@@ -408,8 +407,7 @@ theorem proEtaleRingModuleAdjunction_existsUnique :
     exact he' W m
 
 /-- The actual module adjunction, selected from its unique tensor-unit normalization.
-Source: Stacks, lemma-adjoint-push-pull-modules
-(blueprint: def-weil-pbc-proetale-operations). -/
+Source: Stacks, lemma-adjoint-push-pull-modules. -/
 noncomputable def proEtaleRingModuleAdjunction :
     proEtaleRingModulePullback f R S c ⊣ proEtaleRingModuleDirectImage f R S c :=
   Classical.choose (proEtaleRingModuleAdjunction_existsUnique f R S c)

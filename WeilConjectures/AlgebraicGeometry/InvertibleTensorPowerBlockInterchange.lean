@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 /-! # Interchanging blocks of powers of a line bundle
 
 Source: Stacks Project, Tag 01CA (tensor symmetry), and Tag 09MS (tensor powers).
-(blueprint: lem-sc-invertible-tensor-power-block-interchange).
 -/
 
 @[expose] public section
@@ -70,7 +69,6 @@ private theorem localPowerSection_add {X : Scheme.{u}} {L : X.Modules}
 its two blocks and casting the total degree.
 
 Source: Stacks Project, Tag 01CA (tensor symmetry), Tag 09MS, coherent-equation-ses.
-(blueprint: lem-sc-invertible-tensor-power-block-interchange).
 Proof: restrict to a trivializing open for L. The recursive tensorPowAddIso sends
 ell^(a+b) to ell^a tensor ell^b, as follows by induction on a; its inverse
 concatenates these generators. The braiding interchanges the two generators,

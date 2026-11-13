@@ -18,7 +18,6 @@ import all WeilConjectures.AlgebraicGeometry.PerfectHomMayerVietorisGeometricCol
 /-! # Local comparisons for the outer columns of geometric triangle diagrams
 
 Source: Stacks Project, Tags 09RE and 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-geometric-columns-even).
 -/
 
 @[expose] public section
@@ -192,7 +191,6 @@ private noncomputable def shiftedBinaryHomEquiv
 set_option backward.isDefEq.respectTransparency false in
 /-- Fixed outer-column comparison at index 0.
 Source: Stacks Project, perfect.tex Tag 09RE.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-geometric-columns-even-zero).
 
 Proof: Apply the single-open stage presentation with shift -1 on U and on V.
 Their mapped cocones are recognized as local comparisons by the set-colimit

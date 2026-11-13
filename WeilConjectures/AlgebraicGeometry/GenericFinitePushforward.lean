@@ -15,9 +15,6 @@ import WeilConjectures.AlgebraicGeometry.PullbackFiniteLocallyConstant
 
 /-!
 # Generic lissity of finite direct images
-
-Source: smooth purity blueprint, unit `sk-prop-sf-cbc`, order 1578
-(blueprint: lem-weil-pbc-finite-pushforward-generic-constructible).
 -/
 
 @[expose] public section
@@ -31,8 +28,6 @@ namespace AlgebraicGeometry.Scheme
 /-- A finite direct image of a constructible abelian etale sheaf is lisse on a dense
 open of an integral Noetherian affine base. Finiteness here means finite geometric
 stalks, as in the blueprint, rather than finitely generated abelian stalks.
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, order 1578
-(blueprint: lem-weil-pbc-finite-pushforward-generic-constructible).
 
 Proof: Write the base as Spec A for a Noetherian domain A. Finite morphisms are closed
 by `pqf-lem-finite-integral-lft`. Replace the source by its reduction using

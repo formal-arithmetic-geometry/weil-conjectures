@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.PullbackDualFiniteLocallyFree
 /-! # Base change for the dual of a pulled-back finite locally free module
 
 Source: Stacks Project, Tag 0BDP, projection-formula paragraph, and Tag 0FNV.
-(blueprint: lem-sc-picard-pullback-base-change-dual)
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ private theorem tensorPullback_dual_iso {A B : Scheme.{u}} (k : A ⟶ B)
 
 /-- The dual base-change map for a pulled-back finite locally free module is invertible.
 Source: Stacks Project, Tag 0BDP, projection-formula paragraph, after dualizing frames.
-(blueprint: lem-sc-picard-pullback-base-change-dual)
 Proof: Duals of finite locally free modules are finite locally free. Uniqueness of
 left adjoints identifies tensor pullback with ordinary module pullback, so the
 pullback-duality comparison gives P_k(M^dual) ≅ (P_k M)^dual. Apply this comparison

@@ -17,7 +17,6 @@ set_option linter.privateModule false
 
 The remaining construction takes place entirely before alternating cofaces and extension by zero.
 Source: Stacks Project, Tags 0FKR and 0FKU, extended by the coordinate argument below.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section

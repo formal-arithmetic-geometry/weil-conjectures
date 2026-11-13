@@ -20,7 +20,6 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 /-! # Natural comparison of restriction cohomology and open derived sections
 
 Source: Stacks Project, Cohomology, Tags 01E1 and 01E4.
-(blueprint: lem-pc-open-restriction-module-cohomology).
 -/
 
 @[expose] public section
@@ -197,7 +196,6 @@ private def openDerivedIso (X : Scheme.{u}) (U : X.Opens) (p : ℕ) :
 /-- Open restriction commutes with derived module sections, after forgetting scalars.
 
 Source: Stacks Project, Cohomology, Lemma 20.7.1, Tag 01E1.
-(blueprint: lem-pc-open-restriction-module-cohomology).
 
 Proof: Write R for restriction along U.ι. Open restriction is exact and its exact
 left adjoint is extension by zero, hence R preserves injectives. Transport the

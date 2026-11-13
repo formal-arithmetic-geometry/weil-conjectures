@@ -18,8 +18,7 @@ import Mathlib.Order.Minimal
 /-! # Ascending chains of quasi-coherent submodules
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 30.10.1 (Tag 01Y8), and the
-maximal-element form used in Tags 088C and 088E
-(blueprint: lem-weil-pbc-noetherian-acc-quasi-coherent).
+maximal-element form used in Tags 088C and 088E.
 -/
 
 @[expose] public section
@@ -56,8 +55,7 @@ private theorem exists_finite_affine_cover (X : Scheme.{u}) [IsNoetherian X] :
 module stabilize. Every nonempty set of these submodules, or of quasi-coherent ideal
 sheaves (`X.IdealSheafData`), has a maximal element under inclusion.
 
-Source: Stacks Project, Tag 01Y8; maximal-element form as used in Tags 088C and 088E
-(blueprint: lem-weil-pbc-noetherian-acc-quasi-coherent).
+Source: Stacks Project, Tag 01Y8; maximal-element form as used in Tags 088C and 088E.
 
 Proof:
 1. Choose a finite affine open cover using compactness and the affine-open basis.

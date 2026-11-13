@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleOperations
 # Restricting a constant ring sheaf to its constant scalars
 
 Source: Stacks Project, Tags 093I and 03CY.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -26,7 +25,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Sheafification of the constant ring unit remains locally bijective after
 forgetting commutativity. Source: the constant-sheaf construction in Bhatt--Scholze
-7.3.1(1) (blueprint: def-weil-proetale-locally-constant-sheaf).
+7.3.1(1).
 Proof: the unit is locally bijective on underlying sets; forgetting commutativity
 leaves those sets and every restriction map unchanged. -/
 theorem proEtaleConstantRingUnit_locallyBijective (Y : Scheme.{u}) (A : Type u)

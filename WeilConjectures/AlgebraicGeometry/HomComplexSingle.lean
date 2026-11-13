@@ -14,7 +14,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 # Internal Hom complexes from a sheaf in degree zero
 
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X, the Hom-complex formula.
-(blueprint: lem-sc-hom-complex-single).
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- Postcomposition of localized linear maps is additive.
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(blueprint: lem-sc-hom-complex-single). -/
+Source: Stacks Project, sites-cohomology.tex, Section 0A8X. -/
 instance sheafHomFunctor_additive (Y : Scheme.{u})
     (P : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :
     ((SheafOfModules.homFunctor Y.toRingedSpace.sheaf).obj (op P)).Additive where
@@ -65,7 +63,6 @@ assumption is needed, and the coefficient complex can be unbounded.
 
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X, the product and
 map formulas defining the Hom complex.
-(blueprint: lem-sc-hom-complex-single).
 
 Proof:
 1. In degree `n`, the product defining the Hom complex from `P[0]` has factors

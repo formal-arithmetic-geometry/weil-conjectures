@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ZariskiModuleAbelianCohomologyNatural
 /-! # Linear Leray comparison for an acyclic direct image
 
 Source: Stacks Project, Tag 01F4 (1), Lemma 20.13.6.
-(blueprint: lem-pc-m1-leray-acyclic-pushforward-linear-comparison)
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 Source: Stacks Project, Tag 01F4 (1), Lemma 20.13.6, and the naturality of its
 spectral sequence in coefficient-module maps (Tag 01EY).
-(blueprint: lem-pc-m1-leray-acyclic-pushforward-linear-comparison)
 
 Proof: use the Leray spectral sequence for p and F. The assumed vanishing removes all
 rows except higher-direct-image degree zero; the edge gives an additive isomorphism

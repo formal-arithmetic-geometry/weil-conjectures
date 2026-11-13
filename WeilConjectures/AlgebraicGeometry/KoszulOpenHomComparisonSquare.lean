@@ -25,7 +25,6 @@ set_option maxHeartbeats 800000 in
 /-- The stage Hom and restricted structure-Hom identifications intertwine the canonical
 Koszul comparison with restriction and augmentation.
 Source: Stacks Project, Tag 08DD, proof of Proposition 36.9.5, and Tag 08D1.
-(blueprint: lem-sc-koszul-open-hom-comparison-square)
 
 Proof: The extended Koszul tail has finite free terms and vanishes in positive degrees,
 so it is K-projective. Zeroth Hom-complex cohomology is therefore its derived Hom group.

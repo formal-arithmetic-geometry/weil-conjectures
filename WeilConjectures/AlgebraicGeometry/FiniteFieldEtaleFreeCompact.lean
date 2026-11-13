@@ -34,7 +34,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 Source: Bhatt--Scholze, The pro-étale topology for schemes, Lemma 6.3.11,
 Section 6.4, Lemma 6.4.5(1), Proposition 6.4.8; the finite-field bound is
-`sk-lem-base-field-cd` (blueprint: lem-sfb-finite-field-etale-free-compact).
+`sk-lem-base-field-cd`.
 
 The indexing and Hom universe is `u + 1`; the ordinary derived category has
 object universe `u + 2`. A chosen small skeleton of the affine étale basis is
@@ -87,8 +87,7 @@ whole unbounded derived category. The extension-by-zero isomorphism is normalize
 by the two evaluation bijections, so it is the representing-object comparison.
 
 Source: Bhatt--Scholze, Lemma 6.3.11, Section 6.4, Lemma 6.4.5(1),
-Proposition 6.4.8; Stacks Tags 03DI, 03S8, 03EV and 0F11
-(blueprint: lem-sfb-finite-field-etale-free-compact).
+Proposition 6.4.8; Stacks Tags 03DI, 03S8, 03EV and 0F11.
 
 Proof in words:
 1. The affine étale basis is essentially small.  The given equivalence and

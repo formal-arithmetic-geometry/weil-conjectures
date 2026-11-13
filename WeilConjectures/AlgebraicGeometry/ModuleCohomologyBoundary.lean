@@ -12,8 +12,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTri
 
 /-! # The canonical boundary in module cohomology
 
-Source: Stacks Project, Cohomology, Tags 01DZ and 0B8S
-(blueprint: def-sc-module-cohomology-boundary).
+Source: Stacks Project, Cohomology, Tags 01DZ and 0B8S.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ right-derived cohomology functors by the canonical single-complex comparison iso
 The triangle is `CategoryTheory.ShortComplex.ShortExact.singleTrianglePlus`; the displayed
 expression is the right-hand side of the second conjunct of
 `CategoryTheory.rightDerived_triangle_connecting` for `v = Γ(X, -)`.
-Source: Stacks Project, Cohomology, Tags 01DZ and 0B8S
-(blueprint: def-sc-module-cohomology-boundary). -/
+Source: Stacks Project, Cohomology, Tags 01DZ and 0B8S. -/
 noncomputable def moduleCohomologyBoundary (X : RingedSpace.{uB})
     [HasDerivedCategory.{wCB} (SheafOfModules.{uB} (moduleRings X))]
     [HasDerivedCategory.{wDB} (ModuleCat.{uB} ((moduleRings X).obj.obj (Opposite.op ⊤)))]

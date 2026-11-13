@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.InjectiveTermsAlternatingCechAugmen
 # Augmentation comparison for finite ordered Čech complexes
 
 Source: Stacks Project, Cohomology, Tags 09SZ and 01ET.
-(auxiliary; not a blueprint node)
 
 Flasque Čech row exactness and the finite-strip row augmentation theorem give
 the quasi-isomorphism from global sections into the ordered Čech total complex.
@@ -33,10 +32,9 @@ set_option backward.isDefEq.respectTransparency false
 /-- The augmentation map for a finite ordered flasque Čech resolution is a
 quasi-isomorphism.
 Source: Stacks Project, Cohomology, Tags 09SZ and 01ET.
-(auxiliary; not a blueprint node)
 Proof: every nonnegative row has the flasque row augmentation quasi-isomorphism.
 Every negative row is zero; its coefficient is injective and the existing
-injective row lemma applies. Columns outside 0,...,r-1 vanish because there
+injective row lemma applies. Columns outside 0..,r-1 vanish because there
 are no increasing tuples of the required length. Apply finite-strip row
 augmentation to these rows and the canonical restriction components.
 -/

@@ -10,7 +10,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit
 /-! # The canonical comparison of module and abelian inverse image
 
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3,
 `lemma-pullback-module` and `lemma-adjoint-push-pull-modules`.
-(auxiliary; not a blueprint node).
 
 Proof: Transport both sites to their strict AsSmall models. The transported ring
 unit presents the inverse-image ring, by proEtaleModelRingPresentation. Construct

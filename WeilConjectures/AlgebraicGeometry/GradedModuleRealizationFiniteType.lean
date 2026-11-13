@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.AffineModuleFiniteType
 /-! # Homogeneous generators give finite type on the realization
 
 Source: Stacks Project, Tag 0897, finite-type paragraph, with Tags 01SB and 01PB.
-(blueprint: lem-weil-pbc-graded-module-realization-finite-type).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry
 homogeneous generators is of finite type. No Noetherian or properness assumption is used.
 
 Source: Stacks Project, Tag 0897, finite-type paragraph, with Tags 01SB and 01PB.
-(blueprint: lem-weil-pbc-graded-module-realization-finite-type).
 
 Proof: Near x choose U, degrees d_i and sections s_i from hfinite. Shrink U to an
 affine neighbourhood; its inverse image under pi is affine since pi is a base change

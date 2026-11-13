@@ -22,7 +22,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Blueprint: thm-weil-pbc-hypercover-cohomology. -/
+/-- -/
 theorem hypercover_cohomology (X : Scheme.{u₁}) [CompactSpace X] [QuasiSeparatedSpace X]
     (q : ℕ) :
     FiniteSplitEtaleHypercover.IsCohomologyColimit AddCommGrpCat.{u₁ + 1} q

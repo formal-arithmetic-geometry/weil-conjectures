@@ -84,10 +84,8 @@ construction; its proof uses quasi-compactness and finite-presentation
 vanishing on the overlap.
 Source: Stacks Project, Tag 01ZR (3), first proof by Zariski gluing.
 Proof: construct the overlap defect on the quasi-compact overlap, apply finite-presentation
-vanishing, and transport the resulting equality through canonical comparisons.
-(blueprint: lem-pc-fp-local-map-pair-composites-compatible). -/
+vanishing, and transport the resulting equality through canonical comparisons. -/
 /- Core overlap-defect eventual vanishing.
-   (blueprint: lem-pc-fp-local-map-pair-composites-defect-zero-core)
    Proof: isolated overlap-defect construction. -/
 theorem finitePresentation_local_map_pair_eventually_composites_defect_zero_core
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
@@ -173,7 +171,7 @@ theorem finitePresentation_local_map_pair_eventually_composites_defect_zero_core
     (overlapStageMap R f hik hkm)).mpr hz
   exact pairDefectZero_of_pairCompatibility hcStage
 
-/-- (blueprint: lem-pc-fp-local-map-pair-composites-compatible) -/
+/-- -/
 theorem finitePresentation_local_map_pair_eventually_composites_compatible
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

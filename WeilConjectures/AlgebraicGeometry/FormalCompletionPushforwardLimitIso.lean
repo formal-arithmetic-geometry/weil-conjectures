@@ -31,7 +31,6 @@ namespace AlgebraicGeometry
 /-- The supplied canonical comparison induces an isomorphism of limit sheaves.
 Source: Stacks Project, Theorem 02OC (degree zero), and Lemma 088B, the paragraph
 identifying the inverse limit of the modules M_n with the completion of M.
-(blueprint: lem-weil-pbc-formal-completion-pushforward-limit-iso)
 
 Proof: Fix an affine open U = Spec A of Y and set I = J(U), H = f_*F and
 M = Gamma(U,H). Restrict f to f^(-1)U; it remains proper, and F remains coherent.

@@ -21,8 +21,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Noetherian assembly of a generic affine-integral property.
-Source: Stacks Project, Tags 01OZ and 01J3
-(blueprint: lem-a1-finite-etale-noetherian-clopen-assembly).
+Source: Stacks Project, Tags 01OZ and 01J3.
 
 The reduced case is supplied by the core induction lemma. The vanishing ideal of the
 whole space gives a reduced closed subscheme with surjective underlying map, and the

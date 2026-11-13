@@ -12,7 +12,6 @@ public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 /-! # Canonical section transport to an open subscheme
 
 Source: Stacks Project, Tag 01FM; Mathlib's restriction equivalence.
-(blueprint: lem-sc-principal-open-cech-section-transport).
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 /-- The canonical additive section identification for restriction to an open subscheme.
 Source: Mathlib's `overFunctorEquiv` and `restrictAppIso`; Stacks Project, Tag 01FM.
 The map transports the open equality, then applies the inverse of the restriction
-comparison. All data are explicit. 
-(blueprint: lem-sc-principal-open-cech-section-transport)
+comparison. All data are explicit.
 -/
 noncomputable def principalOpenSectionTransport (A : Type u) [CommRing A]
     (V : (Spec (.of A)).Opens) (M : (Spec (.of A)).Modules) :
@@ -47,7 +45,6 @@ noncomputable def principalOpenSectionTransport (A : Type u) [CommRing A]
 
 /-- Canonical section transport is natural in the coefficient module.
 Source: Stacks Project, Tag 01FM; naturality of Mathlib's restriction equivalence.
-(blueprint: lem-sc-principal-open-cech-section-transport).
 Proof: Naturality of the coefficient presheaf transports the open equality. Naturality
 of the inverse of overFunctorEquiv then identifies the two composites. -/
 theorem principalOpenSectionTransport_natural (A : Type u) [CommRing A]

@@ -22,9 +22,7 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace AlgebraicGeometry.Etale
 
 -- Keep the large canonical comparison behind a shared, fully constructed arrow.
-/-- Source: latest blueprint, sec-smooth-purity/sk-lem-sp-reduction/
-sk-lem-sp-reduction-exceptional.proof.md, Charts, ordered Tate factors.
-(blueprint: def-sp-finite-affine-tate-pairing)
+/--
 
 Construction: take the product p of finiteEtaleTwistPullbackData at the nonnegative
 exponents r and s, rewrite their sum as the cast of r+s, and reduce the nonnegative

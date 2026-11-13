@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.FpqcDetectsOpenness
 /-!
 # Fpqc descent of compatible open subschemes
 
-Source: literature/stacks-project/descent.tex, Lemma Tag 03N0
-(blueprint: lem-weil-pbc-open-subscheme-fpqc-descent).
+Source: literature/stacks-project/descent.tex, Lemma Tag 03N0.
 -/
 
 @[expose] public section
@@ -31,10 +30,9 @@ namespace AlgebraicGeometry
 /-- Compatible open subschemes descend uniquely along an fpqc covering.
 
 Source: literature/stacks-project/descent.tex, Lemma Tag 03N0.
-(blueprint: lem-weil-pbc-open-subscheme-fpqc-descent).
 
 Proof:
-1. By the fibre-product point description (`lem-weil-pbc-fibre-product-points`),
+1. By the fibre-product point description,
    compatibility implies that the subset W = ⋃ i, g i (W i) has inverse image W i
    under every g i. Joint surjectivity from `def-weil-pbc-fpqc-covering` makes
    this subset unique.

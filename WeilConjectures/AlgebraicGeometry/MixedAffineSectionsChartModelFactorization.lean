@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.MixedAffineSectionsPullbackUnitNormaliz
 
 /-! # Localization of the ordinary affine chart comparison in independent universes
 Source: Stacks Project, Tags 06Z0, 08DW(2), 0AA7 and 0D5T.
-(blueprint: lem-sc-mixed-affine-sections-chart-model-factorization).
 -/
 
 @[expose] public section
@@ -42,7 +41,6 @@ private theorem chartModelFactorization_of_units
 /-- Localization transports the ordinary unit equation to the fixed mixed
 adjunction mate. No invertibility of the ordinary comparison c is assumed.
 Source: Stacks Project, Tags 06Z0, 08DW(2), 0AA7 and 0D5T.
-(blueprint: lem-sc-mixed-affine-sections-chart-model-factorization).
 
 Proof: Write C = F(P), X = Gamma_S(C), and Y = tensorPullback_g(C).
 The affine tilde unit identifies X with P. Thus X is K-flat. Tilde preserves
@@ -65,24 +63,24 @@ the localized ordinary direct-image/sections comparison with that fixed Leray
 isomorphism. Cancel the invertible sections comparison maps and use the adjunction
 hom-equivalence formula to obtain the displayed equality. More explicitly, suppress
 only the quotient-to-homotopy factor isomorphisms, and let q denote localization.
-Write s_C : q(H(C)) -> RGamma_S(q(C)), s_Y : q(J(Y)) -> RGamma_T(q(Y)),
-and e_E : LE(q(X)) -> q(E(X)), e_K : Lg*(q(C)) -> q(Y).
-Let r_Z : q(R(Z)) -> R(q(Z)) be the exact scalar restriction comparison.
+Write s_C: q(H(C)) -> RGamma_S(q(C)), s_Y: q(J(Y)) -> RGamma_T(q(Y)),
+and e_E: LE(q(X)) -> q(E(X)), e_K: Lg*(q(C)) -> q(Y).
+Let r_Z: q(R(Z)) -> R(q(Z)) be the exact scalar restriction comparison.
 The derived extension unit equation is
-  eta_LE(q(X)) ; R(e_E) = q(eta_E(X)) ; r_E(X).
+  eta_LE(q(X)); R(e_E) = q(eta_E(X)); r_E(X).
 The pinned derived pullback unit equation is
-  eta_Lg(q(C)) ; Rg_*(e_K) = q(eta_K(C)) ; u_DI(Y),
+  eta_Lg(q(C)); Rg_*(e_K) = q(eta_K(C)); u_DI(Y),
 where u_DI is the right-derived direct-image unit. Naturality of s and the
 normalized Leray equation say
-  s_C ; RGamma_S(q(eta_K(C))) = q(H(eta_K(C))) ; s_DI(Y),
-  s_DI(Y) ; RGamma_S(u_DI(Y)) ; Leray(q(Y)) = r_J(Y) ; R(s_Y).
+  s_C; RGamma_S(q(eta_K(C))) = q(H(eta_K(C))); s_DI(Y),
+  s_DI(Y); RGamma_S(u_DI(Y)); Leray(q(Y)) = r_J(Y); R(s_Y).
 Naturality of Leray at e_K now identifies the Hom-equivalent of
-LE(s_C) ; n ; b.hom with q(H(eta_K(C))) ; r_J(Y).
+LE(s_C); n; b.hom with q(H(eta_K(C))); r_J(Y).
 Localizing hc, then using naturality of r at c_P, identifies this with
-q(eta_E(X)) ; r_E(X) ; R(q(c_P)). The extension unit equation identifies
-the latter with the Hom-equivalent of e_E ; q(c_P).
+q(eta_E(X)); r_E(X); R(q(c_P)). The extension unit equation identifies
+the latter with the Hom-equivalent of e_E; q(c_P).
 Injectivity of the extension Hom equivalence gives
-LE(s_C) ; n ; b.hom = e_E ; q(c_P).
+LE(s_C); n; b.hom = e_E; q(c_P).
 Cancel the invertible LE(s_C); with a.hom = LE(s_C) inverse followed by e_E,
 this is the exact factorization in the statement. All these equations are in
 module categories after their indicated localization; the sheaf units enter only

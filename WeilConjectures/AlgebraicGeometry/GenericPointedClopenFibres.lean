@@ -42,9 +42,7 @@ geometrically connected. Such an open contains y. Represent it by an ambient ope
 and intersect W with V to ensure W is a subset of V. The closed-base-change and fibre
 homeomorphisms identify each fibre with the set g inverse image {t} intersect A.
 Geometric connectedness implies its topological preconnectedness. Empty fibres are
-allowed by the conclusion, and no assertion is made outside the closure of y.
-
-(blueprint: lem-sbc-generic-pointed-clopen-fibres) -/
+allowed by the conclusion, and no assertion is made outside the closure of y. -/
 theorem exists_open_preconnected_fibres_of_pointed_clopen {P T : Scheme.{u}}
     (g : P ⟶ T) [LocallyOfFiniteType g] [QuasiCompact g]
     (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) (y : T) (V : Set T) (A : Set P)

@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.OpenCoverTensorDescentComparisonCoheren
 
 /-! # Detecting pairwise compatibility on the base change of the overlap
 
-Source: Stacks Project, Tag 01ZR (3), first proof by Zariski gluing.
-(blueprint: lem-pc-local-map-pair-overlap-base-change). -/
+Source: Stacks Project, Tag 01ZR (3), first proof by Zariski gluing. -/
 
 @[expose] public section
 
@@ -240,8 +239,7 @@ private lemma comparisonObj_components
 
 /-- The overlap defect is the difference of the two sides of the descent square
 on the universal overlap. Its source and target are actual pullbacks of modules.
-Source: Stacks Project, Tag 01ZR (3), first proof by Zariski gluing.
-(blueprint: lem-pc-local-map-pair-overlap-base-change). -/
+Source: Stacks Project, Tag 01ZR (3), first proof by Zariski gluing. -/
 noncomputable def localMapPairOverlapDefect
     {X : Scheme.{u}} (U : X.OpenCover.{u}) (F G : X.Modules)
     (r : ∀ x, (Scheme.Modules.pullback (U.f x)).obj F ⟶
@@ -268,7 +266,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 vanishing of the pulled back, explicitly constructed overlap defect.
 Source: Stacks Project, Tag 01ZR (3), first proof by Zariski gluing;
 Mathlib pseudofunctor composition and descent naturality.
-(blueprint: lem-pc-local-map-pair-overlap-base-change).
 
 Proof: Let W be the universal overlap of charts a and b, with structural map t.
 The pullback W times_X Y is canonically the overlap of the base changed charts.

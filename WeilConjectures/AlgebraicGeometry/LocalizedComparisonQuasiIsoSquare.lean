@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModelExtensio
 /-! # The localized comparison square for a quasi-isomorphism
 
 Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8.
-(blueprint: lem-pc-localized-comparison-quasiiso-square).
 -/
 
 @[expose] public section
@@ -99,8 +98,7 @@ tensorStalkIso commute with s, by naturality of the pullback-stalk isomorphism.
 Taking homology and composing these squares gives the displayed identity.
 Neither ordinary pullback of s nor its homology is asserted to be invertible.
 Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8;
-More on Algebra, Tags 06Y6 and 08IB.
-(blueprint: lem-pc-localized-comparison-quasiiso-square). -/
+More on Algebra, Tags 06Y6 and 08IB. -/
 theorem exists_localizedComparison_quasiIso_square
     (P G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (s : P ⟶ G) (hs : QuasiIso s) (z : X') (i : ℤ) :

@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictedComparisonTransport
 
 Source: Stacks Project, perfect.tex, Tag 0DJ8, locality of equation-bc on X′;
 Tag 0DJ9, source-open restriction.
-(blueprint: lem-pc-open-comparison-into-pullback-transport).
 -/
 
 @[expose] public section
@@ -106,8 +105,7 @@ without any target complex, coefficient morphism, base flatness, or invertibilit
 of the horizontal maps. Empty opens have no z; top opens, zero complexes and zero
 rings are covered by the same ring and derived isomorphisms.
 Source: Stacks Project, perfect.tex, Tag 0DJ8, proof of locality of equation-bc;
-Tag 0DJ9, source-open induction paragraph.
-(blueprint: lem-pc-open-comparison-into-pullback-transport). -/
+Tag 0DJ9, source-open induction paragraph. -/
 theorem exists_open_comparisonIntoPullback_transport
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

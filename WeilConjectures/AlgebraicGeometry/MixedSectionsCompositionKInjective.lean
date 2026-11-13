@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.MixedSectionsRightUnitNormalization
 
 /-! # Mixed Leray composition on K-injective complexes
 Source: Stacks Project, cohomology.tex, Tags 08HY, 0D5T and 0D5W.
-(blueprint: lem-sc-mixed-sections-composition-kinjective).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 -- Checking the canonical comparisons expands sheaf and derived-functor instances.
 /-- Composition coherence computed on a K-injective complex.
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W.
-(blueprint: lem-sc-mixed-sections-composition-kinjective).
 
 Proof: Put K = quotient(I), Df = f_* and Dg = g_* on module sheaves, and write
 ΓX, ΓY, ΓZ for underived global sections. Precompose the asserted equality with

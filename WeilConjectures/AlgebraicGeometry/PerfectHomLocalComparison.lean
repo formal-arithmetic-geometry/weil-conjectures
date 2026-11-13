@@ -12,7 +12,7 @@ import Mathlib.CategoryTheory.Limits.Types.Colimits
 /-! # Recognition of local filtered Hom comparisons
 
 Source: Stacks Project, Tag 09RE, the local continuity step in the
-Mayer--Vietoris argument. (blueprint: lem-pc-perfect-hom-local-comparison).
+Mayer--Vietoris argument.
 -/
 
 @[expose] public section
@@ -30,8 +30,7 @@ variable {I : Type u} [Preorder I]
 /-- A map presented by the filtered Hom comparison on an open. All data are
 existential, and the two equivalences and transition equation pin the comparison;
 this predicate asserts neither injectivity nor surjectivity.
-Source: Stacks Project, Tag 09RE.
-(blueprint: def-pc-perfect-hom-local-comparison). -/
+Source: Stacks Project, Tag 09RE. -/
 def PerfectHomLocalComparison (W : X.Opens)
     {α β : Type (max u w)} (m : α → β) : Prop :=
   ∃ (Y : Scheme.{u}) (t : Y ⟶ X) (_ : IsOpenImmersion t),
@@ -58,8 +57,7 @@ def PerfectHomLocalComparison (W : X.Opens)
 /-- Finite products of local comparisons, transported through equivalences.
 In a Mayer--Vietoris row the two-open terms use `prod`, while the intersection
 terms use `basic`. Empty opens and zero groups need no additional constructor.
-Source: Stacks Project, Tag 09RE.
-(blueprint: def-pc-perfect-hom-local-map). -/
+Source: Stacks Project, Tag 09RE. -/
 inductive PerfectHomLocalMap (U V : X.Opens) :
     {α β : Type (max u w)} → (α → β) → Prop
   | basic {α β : Type (max u w)} {m : α → β} (W : X.Opens)
@@ -120,7 +118,6 @@ private theorem local_bijective [IsDirected I (· ≤ ·)] (W : X.Opens)
 comparisons bijective.
 
 Source: Stacks Project, Tag 09RE, Mayer--Vietoris induction step.
-(blueprint: lem-pc-perfect-hom-local-comparison).
 
 Proof: For one comparison, every element of the source colimit has a stage
 representative. Move two representatives to a common stage. If their limit images

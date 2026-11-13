@@ -14,7 +14,6 @@ import Mathlib.LinearAlgebra.TensorProduct.Map
 
 Source: Bhatt--Scholze, Proposition 6.8.4(6), invariance of lattice pairs under
 identifying the integral and rational coefficient rings.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -210,7 +209,6 @@ attribute [irreducible] coefficientPushforwardCancel pushforwardSheafificationIs
 set_option backward.isDefEq.respectTransparency true in
 /-- A commuting square of coefficient isomorphisms transports a given integral lattice pair.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), lattice pairs and their rationalizations.
-(auxiliary; not a blueprint node)
 
 Proof: restrict both coefficient isomorphisms to the slice at U. Restrict the integral
 module of P along the inverse integral isomorphism, obtaining an R-module M. Local finite

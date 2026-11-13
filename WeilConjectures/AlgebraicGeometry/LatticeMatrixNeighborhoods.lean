@@ -11,8 +11,7 @@ import Mathlib.Topology.Algebra.OpenSubgroup
 /-!
 # Neighborhoods on which a continuous matrix has constant lattice coset
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), local constancy of matrix lattices
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Proposition 6.8.4(6), local constancy of matrix lattices.
 -/
 
 @[expose] public section
@@ -24,8 +23,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- The ring of integral coefficients is an open subring of the rational coefficient field.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), openness of integral lattices
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Proposition 6.8.4(6), openness of integral lattices.
 Proof: the ball of radius one around zero lies in the integral ring by the absolute-value
 characterization. An additive subgroup containing a neighborhood of zero is open. -/
 theorem isOpen_latticeCoefficientIntegers (l : ℕ) [Fact l.Prime]
@@ -42,8 +40,7 @@ theorem isOpen_latticeCoefficientIntegers (l : ℕ) [Fact l.Prime]
   exact hx'.le
 
 /-- Continuous matrices and their continuous inverses have locally constant integral coset.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), local constancy of matrix lattices
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Proposition 6.8.4(6), local constancy of matrix lattices.
 Proof: near x require every entry of g(x) inverse times g(y), and of its inverse,
 to lie in the open integral subring. At x these are the entries of the identity.
 The finitely many requirements define an open neighborhood. The integral-entry

@@ -22,7 +22,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A section on an affine neighbourhood that pulls back to zero on the local scheme
 vanishes after shrinking the neighbourhood.
 Source: Stacks Project, Tag 03Q6, Lemma 59.51.5, degree zero.
-(blueprint: new-local-stalk-sections-affine-vanishing)
 
 Proof: Write the affine neighbourhood A as Spec R and the point as a prime p.
 The principal opens D(f), f outside p, form a directed system with coordinate-ring

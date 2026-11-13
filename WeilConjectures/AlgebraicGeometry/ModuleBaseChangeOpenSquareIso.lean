@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 # Components of module base change under restriction
 
 Source: Stacks Project, Sheaves, Tag 00A0 and Cohomology, Tags 0ATL and 0ATM.
-(blueprint: lem-weil-pbc-module-open-square-isiso).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ set_option autoImplicit false
 isomorphism, for every module; no quasi-coherence assumption is required.
 Source: Stacks Project, Sheaves, Lemma 00A0, parts (2) and (5) and its module variant;
 Cohomology on Sites, Remark 08HY for the adjoint-defined map.
-(blueprint: lem-weil-pbc-module-open-square-isiso)
 
 Proof: identify tensor pullback along jU and jX with restriction using uniqueness of
 left adjoints to their pushforwards. These identifications preserve the units.

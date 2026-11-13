@@ -37,7 +37,6 @@ restriction maps; it must not use projective-line base change or curve invarianc
 
 Source: Stacks Project, proof of Theorem 59.91.11 (Tag 095T), paragraphs 3--4,
 and the blueprint geometric-stalk lemma, proof of the upper commutative square.
-(blueprint: lem-weil-pbc-p1-geometric-stalk-strict-local-reduction).
 
 Proof: choose a common algebraic closure extending the field map contravariantly
 associated to iota. Form the strict henselizations A and B at the induced geometric

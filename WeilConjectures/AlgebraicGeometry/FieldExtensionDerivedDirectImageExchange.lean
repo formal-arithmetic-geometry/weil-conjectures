@@ -34,7 +34,6 @@ namespace AlgebraicGeometry.Etale
 an integer invertible in the base field. This statement concerns arbitrary sheaves,
 and does not assert acyclicity of the pullback of an injective module sheaf.
 Source: Stacks Project, Lemma 59.90.1, Tag 0F1C.
-(blueprint: lem-sc-field-extension-derived-direct-image-exchange)
 
 Proof: Because k is algebraically closed it is perfect. Every finitely generated
 intermediate field is separably generated over k by the perfect-field transcendence

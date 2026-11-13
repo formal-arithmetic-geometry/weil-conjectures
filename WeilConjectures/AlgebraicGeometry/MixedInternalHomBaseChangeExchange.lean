@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 /-! # Internal Hom exchange with the canonical base-change mate
 Source: Stacks Project, duality.tex, Tag 0AA8, lemma-more-base-change,
 final comparison diagrams; cohomology.tex, Tag 08I3.
-(blueprint: lem-sc-mixed-internal-hom-base-change-exchange).
 -/
 
 @[expose] public section
@@ -186,7 +185,6 @@ private theorem tensorHom_pullback_evaluation
 Here `p` is the pullback of evaluation transposed by the fixed tensor-Hom bijection.
 Source: Stacks Project, duality.tex, Tag 0AA8, lemma-more-base-change,
 final comparison diagrams; cohomology.tex, Tag 08I3.
-(blueprint: lem-sc-mixed-internal-hom-base-change-exchange).
 
 Proof: transpose both sides by the tensor-Hom bijection on Y'. Naturality in the
 first Hom input replaces precomposition by beta_M with tensoring by beta_M;

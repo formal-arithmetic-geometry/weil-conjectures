@@ -21,8 +21,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Flat ringed-site equivalence on locally derived complete objects
 
-Source: Stacks Project, Algebraization, Tags 099I and 0999
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Algebraization, Tags 099I and 0999.
 -/
 
 @[expose] public section
@@ -40,8 +39,7 @@ attribute [local instance 20000] ringedCompletionHasSheafCompose
 attribute [local irreducible] homComplexFunctor ringedHomUnitEvaluationIso
 
 /-- Restriction of scalars is exact on module sheaves.
-Source: Stacks Project, Algebraization, Tag 099C
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Algebraization, Tag 099C.
 Proof: the underlying additive sheaf is unchanged. Kernels are sectionwise kernels with
 restricted action; cokernels are sheafifications of the same additive presheaf cokernels.
 The same description applies to finite products and coproducts. -/
@@ -67,8 +65,7 @@ theorem siteRestrictScalars_exact {C : Type u} [SmallCategory C]
       (SheafOfModules.toSheaf.{u} (siteModuleRings R))⟩
 
 /-- Restriction of scalars reflects isomorphisms of sheaves of modules.
-Source: Stacks Project, Algebraization, Tag 099I, first paragraph
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Algebraization, Tag 099I, first paragraph.
 Proof: its composite with the forgetful functor to abelian sheaves is precisely the
 forgetful functor over B, which reflects isomorphisms. -/
 theorem siteRestrictScalars_reflectsIsomorphisms
@@ -83,8 +80,7 @@ theorem siteRestrictScalars_reflectsIsomorphisms
   exact reflectsIsomorphisms_of_comp F (SheafOfModules.toSheaf.{u} (siteModuleRings R))
 
 /-- Termwise restriction preserves and reflects quasi-isomorphisms.
-Source: Stacks Project, Algebraization, Tag 099I, the construction of E prime
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Algebraization, Tag 099I, the construction of E prime.
 Proof: exactness identifies the restricted cohomology maps with restriction of the
 original cohomology maps. Restriction reflects isomorphisms of these sheaves. -/
 theorem siteRestrictScalars_quasiIso_iff
@@ -101,8 +97,7 @@ theorem siteRestrictScalars_quasiIso_iff
 
 /-- Derived restriction of scalars, using Mathlib's restriction of scalars and its exact
 functor localization, rather than an unspecified functor between derived categories.
-Source: Stacks Project, Algebraization, Tags 099C and 099I
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Algebraization, Tags 099C and 099I. -/
 noncomputable def siteDerivedRestrictScalars {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (siteModuleRings R))]
@@ -115,8 +110,7 @@ noncomputable def siteDerivedRestrictScalars {C : Type u} [SmallCategory C]
     ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).mapDerivedCategory
 
 /-- Derived restriction of scalars reflects isomorphisms.
-Source: Stacks Project, Algebraization, Tag 099I, first paragraph
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Algebraization, Tag 099I, first paragraph.
 Proof: the forgetful functor to abelian sheaves reflects isomorphisms, and its composite
 with restriction is the same forgetful functor over B. Exactness commutes restriction
 with every cohomology functor. Thus invertibility after restriction implies invertibility
@@ -165,8 +159,7 @@ private theorem locallyDerivedRingedIdealComplete_of_iso
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The specified exact derived restriction preserves and reflects local completeness.
-Source: Stacks Project, Algebraization, Tag 099C
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Algebraization, Tag 099C.
 Proof: the extension ideal's unique local-membership description is the hypothesis of
 restrictScalars_locallyDerivedComplete_iff. Identify its image of the chosen complex
 representative with the exact derived functor using mapDerivedCategoryFactors and the
@@ -214,8 +207,7 @@ theorem siteDerivedRestrictScalars_locallyDerivedComplete_iff
     fun hM ↦ locallyDerivedRingedIdealComplete_of_iso R I e (h.mpr hM)⟩
 
 /-- Restriction of scalars on the full subcategories of locally derived complete objects.
-Source: Stacks Project, Algebraization, Tag 099I, first paragraph
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Algebraization, Tag 099I, first paragraph.
 This is the lift of the specified exact derived restriction, with no choices of objects. -/
 noncomputable def siteCompleteRestrictScalars
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
@@ -237,8 +229,7 @@ noncomputable def siteCompleteRestrictScalars
     (fun M ↦ (siteDerivedRestrictScalars_locallyDerivedComplete_iff φ I M.obj).mpr M.property)
 
 /-- Restriction on locally derived complete objects is conservative.
-Source: Stacks Project, Algebraization, Tag 099I, first paragraph
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Algebraization, Tag 099I, first paragraph.
 Proof: compose with the fully faithful inclusion into the ambient derived category.
 This composite is the ambient conservative restriction after a fully faithful inclusion,
 and hence reflects isomorphisms. Reflection by the composite implies reflection by the
@@ -263,8 +254,7 @@ theorem siteCompleteRestrictScalars_reflectsIsomorphisms
     (ObjectProperty.ι (IsLocallyDerivedRingedIdealComplete R I.module I.inclusion))
 
 /-- The categorical last step of the complete-restriction equivalence argument.
-Source: Stacks Project, Algebraization, Tag 099I, final paragraph
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Algebraization, Tag 099I, final paragraph.
 Proof: reflection of isomorphisms makes every component of beta invertible.
 Use beta as the unit and the inverse of alpha as the counit; the standard
 adjointification of an equivalence supplies the triangle identity. Its forward
@@ -307,8 +297,7 @@ theorem siteCompleteRestrictScalars_equivalence_of_inverse
 set_option backward.isDefEq.respectTransparency false in
 /-- An ambient coefficient-Hom construction with its augmentation comparison gives
 an equivalence on complete objects.
-Source: Stacks Project, Algebraization, Tag 099I, the last two paragraphs
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Algebraization, Tag 099I, the last two paragraphs.
 Proof: the extended Cech reflector theorem makes the completion of every object
 complete. Transport along theta and reflect completeness by restriction to lift F
 to the complete subcategories. On a complete object the completion unit is invertible;
@@ -603,8 +592,7 @@ locally finitely generated ideal induces an equivalence of the locally derived c
 full subcategories. The natural isomorphism in the conclusion identifies the equivalence
 with the specified derived restriction functor on the ambient categories.
 
-Source: Stacks Project, Algebraization, Tags 099I and 0999
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Algebraization, Tags 099I and 0999.
 
 Proof:
 1. Restriction of scalars is exact and conservative, since its underlying additive sheaf
@@ -612,11 +600,11 @@ is unchanged. It therefore induces the stated derived functor. By
 `lem-weil-pbc-restriction-local-completeness`, it preserves and reflects local completeness.
 2. Choose the augmented extended Cech model `K → R[0]` from
 `lem-weil-pbc-extended-cech-completion-model`. Flatness makes termwise tensoring with `B`
-exact, giving `K_B → B[0]` and `u : K → r K_B`. On every generating slice, localization
+exact, giving `K_B → B[0]` and `u: K → r K_B`. On every generating slice, localization
 commutes with tensor: `(a/f^n) ⊗ b ↦ φ(a)b/φ(f)^n` with inverse
 `b/φ(f)^n ↦ (1/f^n) ⊗ b`. Finite products in this model are finite direct sums.
-Slice restriction is exact (`lem-weil-pbc-site-restriction-exact`) and preserves quotients;
-flatness restricts (`lem-weil-pbc-slice-restriction-flat`). Apply
+Slice restriction is exact and preserves quotients;
+flatness restricts. Apply
 `lem-weil-pbc-flat-extended-cech-comparison` locally to deduce that `u` is a quasi-isomorphism.
 3. Define `F(E)` by the Hom complex from `r K_B` into the functorial K-injective replacement
 of a representative of `E`, with action `(b h)(k) = h(bk)`. This action commutes with the

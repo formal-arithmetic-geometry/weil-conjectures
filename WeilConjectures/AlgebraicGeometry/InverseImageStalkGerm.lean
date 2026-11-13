@@ -10,8 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-! # Stalk of an inverse image, compatible with germs of pulled-back sections
 
-Source: literature/stacks-project/etale-cohomology.tex, Lemma Tag 03Q1 (3)
-(blueprint: lem-weil-pbc-inverse-image-stalk-germ).
+Source: literature/stacks-project/etale-cohomology.tex, Lemma Tag 03Q1 (3).
 -/
 
 @[expose] public section
@@ -23,9 +22,9 @@ open AlgebraicGeometry Scheme
 
 namespace AlgebraicGeometry
 
-/-- **Stalk of an inverse image, compatible with germs.** Let `f : Y ⟶ X` be a morphism of
-schemes, `y : Spec Ω ⟶ Y` a geometric point and `x̄ = y ≫ f`. There is an isomorphism
-`c_G : (f⁻¹ G)_ȳ ≅ G_x̄`, natural in the abelian étale sheaf `G`, such that for every pointed
+/-- **Stalk of an inverse image, compatible with germs.** Let `f: Y ⟶ X` be a morphism of
+schemes, `y: Spec Ω ⟶ Y` a geometric point and `x̄ = y ≫ f`. There is an isomorphism
+`c_G: (f⁻¹ G)_ȳ ≅ G_x̄`, natural in the abelian étale sheaf `G`, such that for every pointed
 étale neighbourhood `(U, ū)` of `x̄` and every section `a ∈ G(U)`, `c_G` sends the germ of
 `η_{f,G}(U)(a) ∈ (f⁻¹G)(U ×_X Y)` at the induced pointed neighbourhood `(U ×_X Y, (ū, ȳ))`
 of `ȳ` to the germ of `a` at `(U, ū)`. Here `f⁻¹ = Etale.upperStar`, `η` is the unit of
@@ -43,8 +42,7 @@ unit of `Etale.upperStarLowerStarAdjunction`. Naturality in `G` is already part 
 chosen natural isomorphism. This is the general-site route of Stacks Tag 03Q1 (3),
 which cites Sites Tag 05V1, rather than its alternative direct colimit computation.
 
-Source: literature/stacks-project/etale-cohomology.tex, Lemma Tag 03Q1 (3)
-(blueprint: lem-weil-pbc-inverse-image-stalk-germ). -/
+Source: literature/stacks-project/etale-cohomology.tex, Lemma Tag 03Q1 (3). -/
 theorem inverseImage_stalk_germ
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

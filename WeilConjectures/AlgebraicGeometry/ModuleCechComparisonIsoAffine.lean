@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleCechBetaAffineQuasiIso
 /-! # The canonical Čech comparison for affine-intersection covers
 
 Source: Stacks Project, Cohomology of Schemes, Tag 01XD, via Cohomology of Sheaves,
-Tags 01ET and 01EQ (blueprint: lem-sc-cech-comparison-map-iso-affine).
+Tags 01ET and 01EQ.
 -/
 
 @[expose] public section
@@ -27,8 +27,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- For a quasi-coherent module and an open cover whose nonempty finite intersections
 are affine, the canonical Čech comparison is an isomorphism of global-section modules.
 Thus this canonical map gives the identification of `lem-pc-cech-computes`.
-Source: Stacks Project, Tags 01XD, 01ET and 01EQ
-(blueprint: lem-sc-cech-comparison-map-iso-affine).
+Source: Stacks Project, Tags 01XD, 01ET and 01EQ.
 Proof: fix a degree p. The canonical comparison of
 lem-sc-cech-comparison-map-naturality is defined by the alpha and beta maps of an
 injective resolution and is independent of the resolution. Under the present affine

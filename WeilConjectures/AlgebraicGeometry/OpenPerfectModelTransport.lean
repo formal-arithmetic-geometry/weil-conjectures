@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 /-! # Transport of perfect models from an open subscheme
 
 Source: Stacks Project, Definition 08CM, Definition 08C4 and restriction in Tag 08DW.
-(blueprint: lem-sc-open-perfect-model-transport).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 set_option backward.isDefEq.respectTransparency false in
 /-- A perfect model on an open subscheme is an ambient local perfect model.
 Source: Stacks Project, Definition 08CM, Definition 08C4 and Tag 08DW.
-(blueprint: lem-sc-open-perfect-model-transport).
 
 Proof: Fix x in U and choose an open V of U and a strictly perfect complex K
 representing F near x, using IsPerfect. Set O = U.ι image V. This is open in X

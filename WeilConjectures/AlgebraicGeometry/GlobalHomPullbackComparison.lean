@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 
 /-! # Canonical pullback comparison on global derived Hom
 Source: Stacks Project, Cohomology, Remark 08I3 and Section 0B6A;
-Duality, Tag 0AA8 (blueprint: def-pc-global-hom-pullback-comparison).
+Duality, Tag 0AA8.
 -/
 
 @[expose] public section
@@ -31,8 +31,7 @@ variable [∀ (R : Type uP) [Ring R], HasDerivedCategory.{wP} (ModuleCat.{uP} R)
 
 /-- Apply global sections to the evaluation-mate pullback map, then the canonical
 Leray comparison. No comparison map is supplied as an input.
-Source: Stacks, Tags 08I3, 0B6A and 0AA8
-(blueprint: def-pc-global-hom-pullback-comparison). -/
+Source: Stacks, Tags 08I3, 0B6A and 0AA8. -/
 def schemeGlobalDerivedHom_pullback_comparison
     {S T : Scheme.{uP}} (h : T ⟶ S) (P Q : schemeDerivedCategory S) :
     (schemeGlobalDerivedHom S).obj (op P, Q) ⟶
@@ -56,8 +55,7 @@ def schemeGlobalDerivedHom_pullback_comparison
         (op ((derivedPullback h).obj P), (derivedPullback h).obj Q))
 
 /-- Restriction of scalars along a composite, with the identity module comparison.
-Source: Stacks, Tags 0B6A and 0AA8
-(blueprint: def-pc-global-hom-pullback-comparison). -/
+Source: Stacks, Tags 0B6A and 0AA8. -/
 def schemeGlobalScalarRestrictionCompIso {X Y Z : Scheme.{uP}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
     schemeGlobalScalarRestriction (f ≫ g) ≅
@@ -67,8 +65,7 @@ def schemeGlobalScalarRestrictionCompIso {X Y Z : Scheme.{uP}}
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Scalar identification of the two paths around a commutative square.
-Source: Stacks, Tags 0B6A and 0AA8
-(blueprint: def-pc-global-hom-pullback-comparison). -/
+Source: Stacks, Tags 0B6A and 0AA8. -/
 def schemeGlobalScalarSquareIso {X Y X' Y' : Scheme.{uP}}
     (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (gX : X' ⟶ X)
     (h : gX ≫ f = f' ≫ g) :

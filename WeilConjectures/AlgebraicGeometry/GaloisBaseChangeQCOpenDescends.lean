@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.DescendQCOpenFGSubalgebra
 # Quasi-compact opens under Galois base change
 
 Source: Stacks Project, Varieties, Tag 04KU, using Tag 0388 and the preceding equation
-`equation-galois-action-base-change-kbar`
-(blueprint: lem-weil-pbc-galois-base-change-qc-open-descends).
+`equation-galois-action-base-change-kbar`.
 -/
 
 @[expose] public section
@@ -45,16 +44,13 @@ private theorem specAlgEquivOver_one {k L : Type u} [Field k] [Field L]
 /-- A quasi-compact open descends to a finite intermediate field and is invariant under
 all automorphisms fixing that field. Source: Stacks Project, Varieties, Tag 04KU and the
 preceding Galois-action equation.
-(blueprint: lem-weil-pbc-galois-base-change-qc-open-descends).
 
 Proof:
-1. Functoriality of `Spec` (def-weil-affine-spectrum) and `baseChangeMap`
-   (def-pc-base-change) gives the contravariant composition law. The map for the inverse
+1. Functoriality of `Spec` and `baseChangeMap` gives the contravariant composition law. The map for the inverse
    algebra automorphism is an inverse, so every induced scheme map is an automorphism.
 2. Apply lem-weil-pbc-descend-qc-open-fg-subalgebra (Stacks Tag 0388) with algebra `L`.
    It gives a finitely generated subalgebra and a quasi-compact open pulling back to `V`.
-3. Every generator is algebraic, hence integral, since `L/k` is Galois
-   (def-weil-pbc-separable-algebraic-extension, def-weil-algebraic-element).
+3. Every generator is algebraic, hence integral, since `L/k` is Galois.
    By lem-weil-pbc-finite-of-integral-generators the subalgebra is finite-dimensional.
    It is a domain inside `L`, so lem-weil-pbc-finite-dimensional-domain-is-field makes
    it a field. Take this finite intermediate field as `K` and the descended open as `V'`.

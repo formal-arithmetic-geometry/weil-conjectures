@@ -12,8 +12,7 @@ import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
 
 /-! # Single-complex identities for exact restriction and tensor reassociation
-Source: Stacks Project, Tags 08DW and 08HY; Mathlib exact single comparison.
-(blueprint: lem-pc-open-pinned-single-tensor-restriction-factors). -/
+Source: Stacks Project, Tags 08DW and 08HY; Mathlib exact single comparison. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -176,7 +175,6 @@ private lemma derived_single_square
 
 /-- Termwise identities specializing the homotopy counit square to singles.
 Source: Stacks Project, Tags 08DW and 08HY; Mathlib ExactFunctor.
-(blueprint: lem-pc-open-pinned-single-tensor-restriction-factors).
 Proof: expand mapDerivedCategorySingleFunctor and mapDerivedCategoryFactorsh.
 The quotientCompQhIso factors cancel, leaving Qh applied to the quotient of
 singleMapHomologicalComplex for exact restriction; this proves the first

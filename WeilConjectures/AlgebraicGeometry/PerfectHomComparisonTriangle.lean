@@ -13,8 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectHomTransportExtension
 import all WeilConjectures.AlgebraicGeometry.PerfectHomTransportExtension
 
 /-! # Projection triangles for derived pullback
-Source: Stacks Project, Tag 0D5S, composition of derived pullbacks.
-(blueprint: lem-pc-perfect-hom-comparison-triangle). -/
+Source: Stacks Project, Tag 0D5S, composition of derived pullbacks. -/
 
 @[expose] public section
 universe u w
@@ -65,7 +64,6 @@ private theorem comparison_symm {X S : Scheme.{u}} (s : X ⟶ S)
 
 /-- The projection comparisons satisfy the object triangle for two over-category arrows.
 Source: Stacks Project, Tag 0D5S, associativity of derived pullback.
-(blueprint: lem-pc-perfect-hom-comparison-triangle).
 
 Proof: the inverse perfectHomComparison is the fixed composition comparison followed
 by transport along baseChangeMap_fst. Apply the associativity clause of

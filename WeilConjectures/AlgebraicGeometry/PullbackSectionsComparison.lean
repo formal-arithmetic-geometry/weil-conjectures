@@ -14,7 +14,6 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 /-! # Sections on an étale object as global sections on its base change
 
 Source: Stacks Project, Tags 03S2, 03CF and 03EF; naturality of restriction and pullback units.
-(blueprint: lem-weil-pbc-pullback-sections-comparison)
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Evaluation at an étale object, followed by restriction to its base change and the
-inverse-image composition isomorphism. Source: Stacks Tags 03S2 and 00XZ.
-(blueprint: lem-weil-pbc-pullback-sections-comparison) -/
+inverse-image composition isomorphism. Source: Stacks Tags 03S2 and 00XZ. -/
 noncomputable def pullbackSectionsEquiv {R X : Scheme.{u}}
     (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1}) (W : R.Etale) (f : X ⟶ R) :
     ((lowerStar AddCommGrpCat.{u + 1} f).obj
@@ -80,7 +78,6 @@ set_option maxRecDepth 4000 in
 sections of the pullback of G to W ×_R X. This is a comparison for a single cartesian
 square, independent of any limit or compactness hypotheses.
 Source: Stacks Project, Tags 03S2, 03CF and 03EF.
-(blueprint: lem-weil-pbc-pullback-sections-comparison)
 
 Proof: By the definition of direct image, the source is (f^* G)(W ×_R X). Restriction
 along the étale second projection identifies this with Γ(W ×_R X, p^* f^* G), using the

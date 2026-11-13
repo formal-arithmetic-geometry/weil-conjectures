@@ -181,7 +181,6 @@ private theorem ordinary_tor (T : Scheme.{u}) (K : Scheme.proEtaleDerivedCategor
 set_option backward.isDefEq.respectTransparency false in
 /-- Tensor products and Tor intervals under the normalized section-action encoding.
 Source: blueprint coefficient-identification proof, steps 5--7; Stacks Tags 08BJ and 08FZ.
-(auxiliary; not a blueprint node).
 
 Proof: section-action identifies relative tensor products by the universal property of
 balanced bilinear maps. Scalar restriction along the normalized coefficient isomorphism

@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.GenericFibreIsoSpreadBaseOpen
 Source: Stacks Project, Tag 0559, first proof, the common-open paragraph;
 Tag 0552, the finite-generator common-localization argument;
 Tag 01ZM, morphism descent and eventual equality.
-(blueprint: lem-sbc-generic-fibre-partial-iso-spread-open)
 -/
 
 @[expose] public section
@@ -46,9 +45,7 @@ target open inclusions to obtain an open immersion i:O -> Y over S. Transport
 the original point of U to V_eta; its fibre-inclusion image maps to eta,
 and therefore belongs to Z since eta lies in B. Its image in O proves eta
 lies in the range of O -> S. This argument allows arbitrary vertical
-components and nilpotents in the special fibres.
-
-(blueprint: lem-sbc-generic-fibre-partial-iso-spread-open) -/
+components and nilpotents in the special fibres. -/
 theorem exists_open_of_generic_fibre_partial_iso
     {X Y S : Scheme.{u}} [IsAffine X] [IsAffine Y] [IsAffine S] [IsIntegral S]
     (f : X ⟶ S) (g : Y ⟶ S)

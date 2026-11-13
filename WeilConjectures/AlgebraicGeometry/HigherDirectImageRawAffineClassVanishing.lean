@@ -13,7 +13,6 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 /-! # Eventual zero of raw affine cohomology classes
 
 Source: Stacks Project, Tags 09Z1, 0EZM and 03FD.
-(blueprint: sbc-lem-higher-image-raw-affine-class-vanishing).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ zero as a raw class at a later stage. The hypothesis is zero in cohomology,
 not zero in the associated higher-image sheaf; no sheafification occurs here.
 Source: Stacks Project, Tag 09Z1 (cohomology continuity in the proof), Tag 0EZM
 (complex continuity), and Tag 03FD (module cohomology after forgetting scalars).
-(blueprint: sbc-lem-higher-image-raw-affine-class-vanishing).
 
 Proof: Base change the inverse system and its limiting scheme cone along U -> S.
 The stages are qcqs, since their structure maps to affine U are qcqs; transitions

@@ -65,8 +65,7 @@ colimit satisfies the sheaf condition on the basis. The universal property of
 inverse image identifies it with the restriction of the limit sheaf. The unit
 normalization makes the colimit legs exactly tailSectionMap. This construction
 is natural in the étale object. An empty cover gives the terminal, hence zero,
-section object, so empty schemes and empty étale objects are included.
-(auxiliary; not a blueprint node) -/
+section object, so empty schemes and empty étale objects are included. -/
 theorem exists_tail_section_colimit
     [IsCofiltered I] [∀ {i j} (g : i ⟶ j), IsAffineHom (D.map g).left]
     (F : Sheaf S.smallEtaleTopology A)

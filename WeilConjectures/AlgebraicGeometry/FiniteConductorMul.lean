@@ -15,7 +15,6 @@ import Mathlib.RingTheory.Ideal.Maps
 /-! The ideal-power form of the finite conductor statement.
 
 Source: literature/stacks-project/varieties.tex, Varieties Lemma 09N2.
-(blueprint: semilocal-dim-one-conductor-power-mul)
 -/
 @[expose] public section
 universe u v
@@ -24,8 +23,6 @@ universe u v
 `(J(B)A)^r` multiplied by an element of `A` comes from `B`. The explicit hypothesis
 `hconductor` states the base ideal power conductor property. The proof extends it
 to the mapped ideal by span induction.
-
-(blueprint: semilocal-dim-one-conductor-power-mul)
 
 Source: literature/stacks-project/varieties.tex, Varieties Lemma 09N2.
 

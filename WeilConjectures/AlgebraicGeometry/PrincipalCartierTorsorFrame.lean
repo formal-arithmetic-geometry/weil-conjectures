@@ -90,7 +90,7 @@ private theorem pullback_section_eq_local {D T : Scheme.{u}} (i : D ⟶ T)
 
 /-- The dual frame of a principal Cartier ideal is global, and its complementary
 canonical section is that frame acted on by the equation as a unit.
-Source: Stacks Tags 01WQ and 0A45 (blueprint: lem-pur-principal-cartier-torsor-frame).
+Source: Stacks Tags 01WQ and 0A45.
 Proof: the equation is a global free generator of its invertible ideal. Dualize
 its associated isomorphism to obtain a frame of the dual ideal. The dual of the
 ideal inclusion is the equation times this frame, by functoriality of internal

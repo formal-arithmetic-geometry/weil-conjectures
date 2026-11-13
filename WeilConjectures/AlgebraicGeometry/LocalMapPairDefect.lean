@@ -16,7 +16,6 @@ variable {C : Type*} [Category* C]
 
 /-- The difference of the two sides of the pairwise descent square vanishes on every test.
 Source: Stacks Project, Tag 01ZR (3), agreement on overlaps.
-(blueprint: lem-pc-fp-local-map-pair-defect-zero).
 -/
 def PairDefectZero (r : ∀ a, D₁.obj a ⟶ D₂.obj a) (a b : ι) : Prop :=
   ∀ ⦃W : C⦄ (t : W ⟶ S) (g₁ : W ⟶ X a) (g₂ : W ⟶ X b)
@@ -26,9 +25,6 @@ def PairDefectZero (r : ∀ a, D₁.obj a ⟶ D₂.obj a) (a b : ι) : Prop :=
 
 /-- A vanishing pair defect is exactly the pairwise compatibility equation.
 Source: Stacks Project, Tag 01ZR (3), agreement on overlaps.
-(blueprint: lem-pc-fp-local-map-pair-defect-zero).
-
-(blueprint: def-pc-local-map-pair-defect-zero)
 -/
 theorem pairCompatibility_of_pairDefectZero
     (r : ∀ a, D₁.obj a ⟶ D₂.obj a) (a b : ι)

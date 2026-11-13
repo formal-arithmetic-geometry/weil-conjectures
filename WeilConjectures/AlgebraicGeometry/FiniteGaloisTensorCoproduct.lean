@@ -13,8 +13,7 @@ public import Mathlib.FieldTheory.Galois.Basic
 /-!
 # Fibre product of a finite Galois field extension
 
-Source: Stacks Project, `pione.tex`, Tag 03SF (blueprint:
-lem-exc-finite-galois-algebra-tensor-decomposition).
+Source: Stacks Project, `pione.tex`, Tag 03SF.
 -/
 
 @[expose] public section
@@ -25,12 +24,11 @@ open CategoryTheory CategoryTheory.Limits TensorProduct
 
 namespace AlgebraicGeometry
 
-/-- (blueprint: lem-exc-finite-galois-algebra-tensor-decomposition) For a finite Galois
+/-- For a finite Galois
 extension `E/L`, a supplied algebra isomorphism sending `a ⊗ b` to `(a * q b)₍q₎`
 identifies the affine fibre product with the finite coproduct of copies of `Spec E`.
-Under the affine pullback isomorphism (lem-weil-pbc-fibre-product-affine-spectra),
-the component maps are induced by the coordinate projections of the product ring
-(lem-weil-pbc-spec-finite-product-fields). On the `q`-th component the first pullback
+Under the affine pullback isomorphism,
+the component maps are induced by the coordinate projections of the product ring. On the `q`-th component the first pullback
 projection is the identity and the second is `Spec q`: the tensor inclusions
 `a ↦ a ⊗ 1` and `b ↦ 1 ⊗ b` become `a ↦ a` and `b ↦ q b` after evaluation at `q`.
 The argument includes `E = L`, when the automorphism group has one element.

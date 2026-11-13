@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtCoefficientFactor
 /-! # Transport of coefficient naturality through the edge comparison
 
 Source: Stacks Project, Tags 01FB and 01F7.
-(blueprint: new-module-cohomology-coefficient-transport)
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 for an arbitrary coefficient morphism, on each cohomology class.
 
 Source: Stacks Project, Tags 01FB and 01F7, functoriality in coefficients.
-(blueprint: new-module-cohomology-coefficient-transport)
 
 Proof: Factor the module h-map as the module cohomology map of the coefficient
 morphism followed by the edge map. Apply edge compatibility to this class, then

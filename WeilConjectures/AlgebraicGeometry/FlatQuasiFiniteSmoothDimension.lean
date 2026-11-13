@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 
 Source: Stacks Project, Tag 01UA; flat quasi-finite codimension invariance;
 the source library smooth dimension theorem.
-(blueprint: lem-sbc-flat-quasi-finite-smooth-local-dimension)
 -/
 
 @[expose] public section
@@ -41,8 +40,7 @@ dim V is at most dim U, so dim U equals n. All neighbourhoods of x therefore hav
 dimension n, and the infimum defining local dimension is n.
 The point x guarantees the nonemptiness needed for the smooth dimension theorem.
 No separability, reducedness, or etaleness of h is assumed. This includes finite flat
-inseparable charts and charts with nonreduced source.
-(blueprint: lem-sbc-flat-quasi-finite-smooth-local-dimension) -/
+inseparable charts and charts with nonreduced source. -/
 theorem topologicalKrullDimAt_eq_of_flat_quasiFinite_to_smooth
     {k : Type u} [Field k] {X P : Scheme.{u}}
     (h : X ⟶ P) (g : P ⟶ Spec (.of k)) (n : ℕ)

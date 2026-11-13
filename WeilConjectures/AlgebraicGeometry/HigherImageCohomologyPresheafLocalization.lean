@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.SectionCohomologyPrincipalLocalization
 /-! # Principal localization of the higher-image cohomology presheaf
 
 Source: Stacks Project, Tag 09MR, tensor-unit specialization, and Tag 01E4.
-(blueprint: lem-pc-higher-image-cohomology-presheaf-localization).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 module localization at the defining function. This concerns presheaf cohomology,
 not sections of the higher direct image sheaf.
 Source: Stacks Project, Tags 09MR and 01E4.
-(blueprint: lem-pc-higher-image-cohomology-presheaf-localization).
 
 Proof: Let Y = f⁻¹W and b = f^♯a. The qcqs hypotheses and affineness of W imply
 that Y is qcqs. Restriction of F to Y remains quasi-coherent. Apply 09MR on Y

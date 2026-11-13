@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.PrincipalCechColumns
 
 /-! # Cancellation of two horizontal Čech deletions
 
-Source: Stacks, Tag 08D1, alternating Čech double complex
-(blueprint: lem-sc-principal-cech-horizontal-square).
+Source: Stacks, Tag 08D1, alternating Čech double complex.
 -/
 
 @[expose] public section
@@ -146,8 +145,7 @@ private theorem doubleRestrictionTerm_swap {A : Type u} [CommRing A]
   rw [Finset.erase_right_comm]
 
 /-- Two successive alternating restriction maps compose to zero.
-Source: Stacks, Tag 08D1, proof, alternating Čech double complex
-(blueprint: lem-sc-principal-cech-horizontal-square).
+Source: Stacks, Tag 08D1, proof, alternating Čech double complex.
 
 Proof: project to a target subset S of cardinality p+3. Expand both finite sums
 and use the product projection equations. A surviving term deletes two distinct

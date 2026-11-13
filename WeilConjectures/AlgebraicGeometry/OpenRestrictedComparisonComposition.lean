@@ -16,8 +16,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.SingleComplexBaseChange
 /-- The specified composition comparison for an open pullback square.
 This abbreviates the existing chosen composition isomorphisms; it adds no data choice.
-Source: Stacks Project, Tag 0D5S.
-(blueprint: def-pc-open-restricted-composition-map). -/
+Source: Stacks Project, Tag 0D5S. -/
 noncomputable def openRestrictedCompositionMap
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

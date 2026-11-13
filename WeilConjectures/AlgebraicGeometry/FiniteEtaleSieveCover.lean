@@ -28,8 +28,7 @@ still have open images covering M. Quasi-compactness selects finitely many.
 Their disjoint union N has the asserted finite affine cofan, and its map to E
 belongs to R on each constituent because R is closed under precomposition.
 Each affine piece is qcqs; its etale structure map to X has all the stated
-finiteness properties. No compactness of E is required.
-(auxiliary; not a blueprint node) -/
+finiteness properties. No compactness of E is required. -/
 theorem exists_finite_etale_sieve_cover
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (M E : X.Etale) [CompactSpace M.left] (e : E ⟶ M) (he : Surjective e.left)

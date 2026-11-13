@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.MayerVietorisImageRestrictionLocalizati
 /-! # Explicit restriction-induced comparison maps
 
 Source: Stacks Project, Tags 08FE and 08BV.
-(blueprint: def-pc-mayer-vietoris-image-chain-data).
 -/
 
 @[expose] public section
@@ -92,7 +91,6 @@ private theorem image_unit_square
 This concerns only the sectionwise isomorphism on a source K-injective complex;
 it contains no chosen map to a target resolution and no Mayer--Vietoris morphism.
 Source: Stacks Tags 08FE, 079V and 0D5T.
-(blueprint: lem-pc-mayer-vietoris-image-localization-compatibility).
 
 Proof: The direct-image computation map is the inverse right-derived unit.
 The comparison for the open image is the inverse right-derived unit on the

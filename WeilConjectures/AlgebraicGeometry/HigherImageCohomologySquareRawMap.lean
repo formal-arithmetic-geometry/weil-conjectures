@@ -24,8 +24,7 @@ namespace AlgebraicGeometry.Etale
 The test-object arrow first maps the free sheaf on `W'` to the pullback of
 that on `W`. Pullback by `h'`, followed by inverse-image composition across
 `sq`, produces a morphism to `a^* h^* ℤ[W]`.
-Source: Stacks Project, Tags 03CB and 03Q8.
-(blueprint: def-sf-higher-image-cohomology-square-raw-map). -/
+Source: Stacks Project, Tags 03CB and 03Q8. -/
 noncomputable def higherImageCohomologySquareRawSource
     {Y Y' S S' : Scheme.{u}}
     {h : Y ⟶ S} {h' : Y' ⟶ S'} {a : Y' ⟶ Y} {b : S' ⟶ S}
@@ -49,8 +48,7 @@ noncomputable def higherImageCohomologySquareRawSource
 /-- The explicit raw square pullback. It uses only the free-sheaf source map,
 the exact inverse-image single and shift comparisons, and the coefficient map.
 No cohomology comparison or higher-direct-image exchange is used to define it.
-Source: Stacks Project, Tags 03Q8, 07A7 and 0EYM.
-(blueprint: def-sf-higher-image-cohomology-square-raw-map). -/
+Source: Stacks Project, Tags 03Q8, 07A7 and 0EYM. -/
 noncomputable def higherImageCohomologySquareRawMap
     {Y Y' S S' : Scheme.{u}}
     {h : Y ⟶ S} {h' : Y' ⟶ S'} {a : Y' ⟶ Y} {b : S' ⟶ S}

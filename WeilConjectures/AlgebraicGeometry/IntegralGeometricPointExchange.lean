@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 Source: Stacks Project, Tag 0EYP, specialized to a geometric point; the strict-henselian
 proof uses Tags 03Q9, 09XK, 09ZH and 0A3I.
-(blueprint: lem-sbc-integral-geometric-point-exchange).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ namespace AlgebraicGeometry.Etale
 
 Source: Stacks Project, Tag 0EYP, specialized to a geometric point; the strict-henselian
 argument combines Tags 03Q9, 09XK, 09ZH and 0A3I.
-(blueprint: lem-sbc-integral-geometric-point-exchange).
 
 Proof: work over an affine neighbourhood of the image of s. By Tag 03Q9 the direct-image
 stalk is the module of sections over X times_Y Spec A, where A is the strict henselization

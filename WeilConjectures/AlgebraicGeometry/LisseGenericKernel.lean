@@ -12,8 +12,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 /-! # A generic stalk detects kernels in a locally constant sheaf
 
-Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-lisse-generic-kernel`
-(blueprint: lem-weil-pbc-lisse-generic-kernel).
+Source:
 -/
 
 @[expose] public section
@@ -27,22 +26,18 @@ namespace AlgebraicGeometry.Scheme
 /-- A morphism from a locally constant abelian étale sheaf is mono when its
 geometric generic stalk map is mono. Local constancy is that of
 `def-weil-pbc-etale-sheaves`, applied to the underlying sheaf of sets.
-Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-lisse-generic-kernel`,
-node `lem-weil-pbc-lisse-generic-kernel` (blueprint: lem-weil-pbc-lisse-generic-kernel).
+
 Proof:
-1. Set `N = ker φ`. Exactness of geometric stalks
-   (`prop-weil-pbc-geometric-stalks-exact`) gives injective maps from stalks of `N`
+1. Set `N = ker φ`. Exactness of geometric stalks gives injective maps from stalks of `N`
    to stalks of `F` and a zero generic stalk of `N`. If `N` were nonzero,
    `lemma-weil-pbc-geometric-stalk-conservative` would give a nonzero geometric germ.
    Choose an étale cover member `V` on which the underlying sheaf of sets of `F` is
-   isomorphic to the constant sheaf of a set `M` (`def-weil-pbc-etale-sheaves`,
-   `def-weil-pbc-constant-sheaf`).
+   isomorphic to the constant sheaf of a set `M`.
    Lift the geometric point to `V`: the nonempty étale fibre over its algebraically
    closed field has a rational point. Pointed neighbourhoods over `V` are cofinal
-   among those on `X`, by fibre products (`def-weil-pbc-geometric-stalks`), so both
+   among those on `X`, by fibre products, so both
    stalks are unchanged. Represent the nonzero germ by a section `s` of `N` on a
-   pointed neighbourhood. The constant-sheaf stalk formula
-   (`lem-weil-pbc-constant-sheaf-geometric-stalk`) identifies the germs of the image
+   pointed neighbourhood. The constant-sheaf stalk formula identifies the germs of the image
    of `s` in `F` and of the zero section of `F` with elements `m ≠ z` of `M`.
    Equality in a filtered colimit holds after refinement: shrink to a nonempty pointed
    étale neighbourhood `W` where the image of `s` is constantly `m` and the zero

@@ -14,7 +14,6 @@ import Mathlib.Data.Int.Interval
 /-! # Lifting reverse-degree stalk components
 
 Source: Stacks Project, Tags 09RE, 0BC7 and 01CP.
-(blueprint: lem-sc-perfect-open-stalk-reverse-components-lift).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Lift reverse-degree stalk components without imposing differential equations.
 Source: Stacks Project, Tag 09RE, affine case (1); Tag 0BC7 (2);
 Tag 01CP, finitely presented internal Hom comparison.
-(blueprint: lem-sc-perfect-open-stalk-reverse-components-lift).
 
 Proof: Choose the support interval and the finite-free retractions for P.
 Restriction preserves zero terms and these retractions. There are only finitely

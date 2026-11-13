@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.PopescuAuxiliarySubmersivePresentation
 
 Source: Stacks Project, proof of Tag 07F9, the final displayed localization;
 Algebra, Definition Tag 00T6.
-(blueprint: lem-weil-pbc-popescu-delocalize-jacobian-localization)
 -/
 
 @[expose] public section
@@ -26,12 +25,11 @@ namespace Algebra
 
 /-- Source: Stacks Project, proof of Tag 07F9, the final displayed localization,
 and Definition Tag 00T6.
-(blueprint: lem-weil-pbc-popescu-delocalize-jacobian-localization)
 
-Proof: Write D = R[x₀,x₁,...,x_N,w]/(f), with f inserted into variables 1,...,N,
+Proof: Write D = R[x₀,x₁..,x_N,w]/(f), with f inserted into variables 1..,N,
 and a = x₀*w*∏sⱼ. In D[1/a], x₀, w and every sⱼ are units. The image of the
 ideal membership gives s₀ = h*Δ, so Δ is a unit with inverse h/s₀. Present D[1/a]
-as R[x₀,x₁,...,x_N,w,y]/(f,a*y-1). This identification sends y to the inverse of a
+as R[x₀,x₁..,x_N,w,y]/(f,a*y-1). This identification sends y to the inverse of a
 and is inverse on every generator by the quotient and localization universal
 properties. Select the c original variables specified by hc, and y, for the
 Jacobian minor. The derivatives of f with respect to y are zero. The final

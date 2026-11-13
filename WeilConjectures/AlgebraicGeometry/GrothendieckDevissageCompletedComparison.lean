@@ -26,8 +26,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- Double quotient comparison gives an isomorphism after K-completion, natural in
 all I-levels. No torsion hypothesis is needed for this purely quotient-theoretic step.
-Source: Stacks Project, Tag 088A, final paragraph
-(blueprint: lem-weil-pbc-devissage-completed-comparison).
+Source: Stacks Project, Tag 088A, final paragraph.
 
 Proof: the two iterated quotients of any module by I^(n+1) and K^(e+1) are the
 cokernel quotient by the sum of these ideal products. The universal cokernel maps

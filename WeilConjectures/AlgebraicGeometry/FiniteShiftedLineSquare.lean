@@ -10,7 +10,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Basic
 
 /-! # Coherence of the shifted finite Tate line
 
-Source: blueprint thm-amb-p1-decomposition, base-change paragraph. The
+ The
 positive-case degree-zero and shift calculations reuse proved private helpers
 from FiniteP1TwistedUnitBaseChange; the final square also covers N = 0.
 -/
@@ -460,9 +460,7 @@ private theorem shifted_line_square_pos
     (exactLine_square A N hN hA t sq hY hY' hX)
 
 /-- The normalized shifted finite Tate line respects every commuting square.
-Source: Stacks, Tags 03PK and 03Q1, and the normalized comparisons in blueprint
-thm-amb-p1-decomposition.proof.md, base-change paragraph.
-(auxiliary; not a blueprint node)
+Source: Stacks, Tags 03PK and 03Q1, and the normalized comparisons in, base-change paragraph.
 
 Proof: the roots inclusion determines its comparison uniquely, and pure scalar
 root generators determine the coefficient-line comparison. Identify the given

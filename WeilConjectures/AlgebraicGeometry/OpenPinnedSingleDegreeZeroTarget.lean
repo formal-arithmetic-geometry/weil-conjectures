@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounit
 import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroApex
 import WeilConjectures.AlgebraicGeometry.SingleComplexOpenBaseChangeCalculation
 /-! # Constructed target comparison for the degree-zero open square
-Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.
-(blueprint: lem-pc-open-pinned-single-degree-zero-target). -/
+Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U. -/
 @[expose] public section
 set_option autoImplicit false
 universe u w
@@ -115,7 +114,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 independent ingredients: restriction of the pinned tensor counit and invariance
 under an isomorphic apex.
 Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.
-(blueprint: lem-pc-open-pinned-single-degree-zero-target).
 Proof: restrict the cartesian square using isPullback_resLE and identify its apex
 with the chosen pullback. Whisker the explicit direct-image restriction comparison
 with the single tensor source, then apply the counit restriction isomorphism to

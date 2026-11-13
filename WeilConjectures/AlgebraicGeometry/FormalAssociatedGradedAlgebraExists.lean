@@ -94,7 +94,6 @@ private theorem quotient_heq_of_inclusion_eq {X : Scheme.{u}} (I : X.IdealSheafD
 /-- The associated graded ideal pieces carry the multiplication induced by representatives.
 Source: Stacks Project, Lemma 087Z and Section 0EHN,
 https://stacks.math.columbia.edu/tag/087Z.
-(blueprint: lem-weil-pbc-formal-associated-graded-algebra-exists).
 
 Proof: On affine opens the ideal-power range formula identifies the inclusion of I^r
 with I(U)^r; the quotient projection identifies B_r with I(U)^r/I(U)^(r+1).

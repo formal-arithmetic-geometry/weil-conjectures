@@ -222,7 +222,6 @@ private lemma pullback_tensor_unit_map {X Y : Scheme.{u}} (f : Y ⟶ X)
 /-- A single pullback cotensorator sends the adjunction unit on an elementary
 section tensor to the tensor of the two unit sections.
 Source: Stacks Project, Tag 0095, Definition 6.26.1(2); Tag 0096.
-(blueprint: lem-sc-pullback-tensor-unit-section)
 
 Proof: On presheaves the pullback cotensorator is the adjoint of the pushforward
 lax tensorator. The adjunction unit inserts coefficient 1; the pushforward

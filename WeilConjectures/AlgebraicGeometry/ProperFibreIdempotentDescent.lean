@@ -122,8 +122,7 @@ of the stage fibres with affine transitions. Global sections commute with that l
 descend e to a stage, then descend its equation e * e = e to a later stage. The
 Noetherian model is that stage and the projections provide p, r and q. Commutation
 with the fibre embeddings is the defining property of the induced fibre projections.
-This statement asks for no section on a neighbourhood of s.
-(blueprint: lem-weil-pbc-stein-fibre-idempotent-descent) -/
+This statement asks for no section on a neighbourhood of s. -/
 theorem proper_fibre_idempotent_descent
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] (s : S)
     (e : Γ(f.fiber s, ⊤)) (he : IsIdempotentElem e) :

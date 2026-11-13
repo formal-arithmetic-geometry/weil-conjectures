@@ -148,9 +148,7 @@ The other coefficient rings of Deligne's finiteness theorem are the declarations
 name in the namespaces `ContinuousMapRingObj`, `PadicIntegersRingObj`, `UnitBallRingObj` and
 `FiniteDiscreteRingObj`.
 
-Source: Deligne, SGA 4½, Th. finitude 1.1; Bhatt--Scholze, Sections 6.7--6.8;
-blueprint `lem-sfb-dc-lower-star-preserves`, coefficient-reduction argument.
-(auxiliary; not a blueprint node)
+Source: Deligne, SGA 4½, Th. finitude 1.1; Bhatt--Scholze, Sections 6.7--6.8, coefficient-reduction argument.
 
 Proof: finite type over a field makes both schemes noetherian of finite dimension and
 makes the morphism qcqs. For finite discrete coefficients killed by a power of ell,

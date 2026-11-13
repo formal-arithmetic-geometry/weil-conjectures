@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceSplitSumCompatibility
 
 Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
 SGA 4, Exposé IX, 5.1.
-(blueprint: lem-weil-pbc-finite-etale-trace-section-descent)
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- Descent of one section of the pullback sheaf to its characterized local sum.
 Source: Stacks Project, Section 03SH, after Definition 03SE; SGA 4, Exposé IX, 5.1.
-(blueprint: lem-weil-pbc-finite-etale-trace-section-descent)
 
 Proof. Cover `W` by étale objects whose pullbacks of `Y` split (Stacks 04HN and
 covering base change). Sum the restrictions of the given section along each splitting's

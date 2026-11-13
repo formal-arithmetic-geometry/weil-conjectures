@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.LocalOverlapTransitions
 
 /-! # Transport of limit comparisons under canonical chart refinement
 
-Source: Stacks Project, Tag 01ZR, first proof (Zariski gluing).
-(blueprint: lem-pc-overlap-comparison-refinement). -/
+Source: Stacks Project, Tag 01ZR, first proof (Zariski gluing). -/
 
 @[expose] public section
 
@@ -148,7 +147,6 @@ with the restriction datum on a fixed scheme. No finiteness or coherence at the
 stage is required.
 Source: Stacks Project, Tag 01ZR, first proof (Zariski gluing); the categorical
 composition calculation is Mathlib's `DescentData.pullFunctorCompIso`.
-(blueprint: lem-pc-overlap-comparison-refinement).
 
 Proof: For each chart use the pullback universal property to map its refinement
 at the fixed scheme L into the original chart at L. The square expressing this

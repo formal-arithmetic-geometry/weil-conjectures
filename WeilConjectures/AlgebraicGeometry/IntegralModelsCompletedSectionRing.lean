@@ -25,8 +25,7 @@ attribute [local irreducible] upperStarFromPoint integralSectionRingIso
   IntegralConstantModel.pointComparison
 
 /-- Section reconstruction of the specified point comparison.
-Source: Stacks Tag 00YV and the normalized integral point identification.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tag 00YV and the normalized integral point identification. -/
 def pointSectionIso (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :
@@ -46,8 +45,7 @@ def pointSectionIso (l : ℕ) [Fact l.Prime]
           inv_hom_id := by ext1; exact k.inv_hom_id }
 
 /-- The normalized completed coefficient ring, in continuous section coordinates.
-Source: Stacks Tags 00YV and 099L, and the normalized integral limit comparison.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 00YV and 099L, and the normalized integral limit comparison. -/
 def completedSectionIso (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :

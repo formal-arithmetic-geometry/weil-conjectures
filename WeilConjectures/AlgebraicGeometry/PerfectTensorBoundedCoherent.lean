@@ -17,8 +17,7 @@ import Mathlib.Data.Finset.Max
 
 /-! # Bounded coherent cohomology of a perfect tensor
 
-Source: Stacks Project, Tags 0DJQ and 01Y0
-(blueprint: lem-pc-perfect-tensor-bounded-coherent).
+Source: Stacks Project, Tags 0DJQ and 01Y0.
 -/
 
 @[expose] public section
@@ -45,8 +44,7 @@ Proof:
    so the global cohomology sheaves are coherent.
 3. The j-th total tensor vanishes outside [a_j+c,b_j+d]. Choose one interval containing
    these finitely many intervals. Vanishing of cohomology is local, giving global bounds.
-   If X is empty, every sheaf is zero and any interval suffices.
-(blueprint: lem-pc-perfect-tensor-bounded-coherent). -/
+   If X is empty, every sheaf is zero and any interval suffices. -/
 theorem perfect_tensor_bounded_coherent
     {X : Scheme.{u}} [IsNoetherian X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

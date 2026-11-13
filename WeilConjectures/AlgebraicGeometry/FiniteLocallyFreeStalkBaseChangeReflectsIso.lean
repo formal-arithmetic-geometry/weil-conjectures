@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.LocalFreeBaseChangeReflectsIso
 /-! # Reflection of invertibility at a vector bundle stalk
 
 Source: Stacks Project, Tag 00O0, Lemma 10.79.4(3), finite free matrix argument.
-(blueprint: lem-sc-finite-locally-free-stalk-base-change-reflects-iso)
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Extension along the local ring map of a scheme morphism reflects invertibility
 of a map between finite locally free stalks.
 Source: Stacks Project, Tag 00O0, Lemma 10.79.4(3), finite free matrix argument.
-(blueprint: lem-sc-finite-locally-free-stalk-base-change-reflects-iso)
 
 Proof: Choose finite free frames for M and N near h(t), so their stalks are free
 of finite ranks m and n over R = O_{W,h(t)}. Put S = O_{T,t}. Reducing the given

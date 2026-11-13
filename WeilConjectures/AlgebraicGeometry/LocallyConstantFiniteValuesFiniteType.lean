@@ -15,8 +15,7 @@ import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 /-!
 # Locally constant sheaves with finitely generated values are of finite type
 
-Source: Stacks Project, Lemma 093N (1), direction from finite values to finite type
-(blueprint: lem-weil-pbc-locally-constant-finite-values-finite-type).
+Source: Stacks Project, Lemma 093N (1), direction from finite values to finite type.
 -/
 
 @[expose] public section
@@ -35,20 +34,15 @@ sections are exactly the global sections corresponding to the specified generato
 Proof:
 1. On each cover member use the supplied isomorphism to transport the canonical sections
    associated to the generators of the constant value. The displayed linear map sends each
-   basis vector to its specified generator (`def-weil-finitely-generated-module`,
-   `def-weil-pbc-constant-sheaf`, `def-weil-pbc-etale-module-finite-type`).
-2. Every section of the constant sheaf locally comes from an element of the value module
-   (`lem-weil-pbc-constant-module-sheaf-sections-locally-constant`). Write that element as a
+   basis vector to its specified generator.
+2. Every section of the constant sheaf locally comes from an element of the value module. Write that element as a
    linear combination of the generators. Linearity and compatibility with restriction give
    a local lift through the displayed sheaf map, including the zero-generator case.
-3. Local surjectivity gives an epimorphism of underlying abelian sheaves
-   (`lem-weil-pbc-abelian-sheaf-epi-locally-surjective`). The faithful forgetful functor
+3. Local surjectivity gives an epimorphism of underlying abelian sheaves. The faithful forgetful functor
    reflects epimorphisms, so this is an epimorphism of module sheaves. On each member choose
-   a finite generating tuple; the given etale cover then witnesses finite type
-   (`def-weil-pbc-etale-module-finite-type`).
+   a finite generating tuple; the given etale cover then witnesses finite type.
 
-Source: Stacks Project, Lemma 093N (1), first two sentences of the proof; Lemma 093J
-(blueprint: lem-weil-pbc-locally-constant-finite-values-finite-type). -/
+Source: Stacks Project, Lemma 093N (1), first two sentences of the proof; Lemma 093J. -/
 theorem locallyConstant_finiteValues_isFiniteType
     {Y : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))

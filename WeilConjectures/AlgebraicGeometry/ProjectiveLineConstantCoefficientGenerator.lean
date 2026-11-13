@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveLineGenusZero
 /-! # A projective-line cohomology generator with finite constant coefficients
 
 Source: the proper-curve cohomology calculation and the structure theorem for finite
-abelian groups, blueprint thm-amb-p1-decomposition.
-(auxiliary; not a blueprint node).
+abelian groups.
 -/
 
 @[expose] public noncomputable section
@@ -107,9 +106,7 @@ private theorem p1_generator_cyclic
 
 /-- A generator of H²(P¹,Z/n) induces the canonical coefficient classification
 Hom(Z/n,A) ≃ H²(P¹,A) for every finite abelian group A killed by n.
-Source: proper-curve cohomology and finite abelian group decomposition, blueprint
-thm-amb-p1-decomposition.
-(auxiliary; not a blueprint node).
+Source: proper-curve cohomology and finite abelian group decomposition.
 
 Proof: for m dividing n, the coefficient reduction Z/n -> Z/m induces a surjection
 on H² because H³ of its torsion kernel vanishes on a curve. Thus the image of θ

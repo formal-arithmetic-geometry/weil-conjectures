@@ -13,7 +13,6 @@ import Mathlib.Data.Nat.Choose.Basic
 /-! # The horizontal localized Koszul boundary calculation
 
 Source: Stacks Project, Tags 08D0 and 08D1.
-(blueprint: lem-sc-koszul-cech-localized-boundary).
 -/
 
 @[expose] public section
@@ -114,7 +113,6 @@ private theorem localized_fraction_restriction
 /-- The precomposition term alone becomes the alternating Cech deletion sum.
 Source: Stacks Project, Tag 08D0, the two displayed differential calculations,
 and Tag 08D1, the correction of totalization signs.
-(blueprint: lem-sc-koszul-cech-localized-boundary)
 Proof: put p=card(J)-1. The hypothesis card(J)>1 makes every erased subset
 nonempty and places both tail degrees in the supported range. Transport the tail
 differential to the negative Koszul contraction. On the

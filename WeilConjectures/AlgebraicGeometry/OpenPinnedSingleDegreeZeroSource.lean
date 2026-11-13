@@ -9,8 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.PinnedSingleBaseChangeShift
 public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenBaseChangeComparisons
 
 /-! # Constructed source comparison for the degree-zero open square
-Source: Stacks Project, Tags 08FE, 08HY and 08DW.
-(blueprint: def-pc-open-pinned-single-degree-zero-source). -/
+Source: Stacks Project, Tags 08FE, 08HY and 08DW. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -23,8 +22,7 @@ namespace AlgebraicGeometry
 exact open pullback, the sectionwise derived direct-image comparison, and exact
 restriction of the single complex. No resolution or isomorphism is selected from
 an arbitrary existence statement.
-Source: Stacks Project, Tags 08FE, 08HY and 08DW.
-(blueprint: def-pc-open-pinned-single-degree-zero-source). -/
+Source: Stacks Project, Tags 08FE, 08HY and 08DW. -/
 def openPinnedSingleDegreeZeroSourceIso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -67,8 +65,7 @@ def openPinnedSingleDegreeZeroSourceIso
 -- Identifying the reassociated functor categories needs additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Component formula for the constructed source isomorphism.
-Source: Stacks Project, Tags 08FE and 08HY.
-(blueprint: def-pc-open-pinned-single-degree-zero-source). -/
+Source: Stacks Project, Tags 08FE and 08HY. -/
 theorem openPinnedSingleDegreeZeroSourceIso_app
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

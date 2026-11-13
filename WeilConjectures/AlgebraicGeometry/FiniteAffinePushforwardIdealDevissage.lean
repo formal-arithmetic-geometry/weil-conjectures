@@ -25,8 +25,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 /-! # Ideal subobjects of finite affine pushforwards
 
 Source: Stacks Project, Cohomology of Schemes, proof of Lemma 01YQ, steps using
-Tags 01YP, 089W and 01XB
-(blueprint: lem-weil-pbc-finite-affine-pushforward-ideal-devissage).
+Tags 01YP, 089W and 01XB.
 -/
 
 @[expose] public section
@@ -42,8 +41,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Construction of the coherent ideal-product subobject and its stalk property.
 Source: Stacks Project, Cohomology of Schemes, Lemma 01YQ, devissage paragraph.
 The proof constructs the image of `J ⊗ f_*F → f_*F`, uses quasi-coherence and
-local Noetherian coherence of images, and computes its stalk image as `JₓGₓ`.
-(blueprint: lem-weil-pbc-finite-affine-pushforward-ideal-devissage) -/
+local Noetherian coherence of images, and computes its stalk image as `JₓGₓ`. -/
 private theorem finite_affine_pushforward_ideal_devissage_coherent
     {X Y : Scheme.{u}} (f : Y ⟶ X) [IsFinite f] [IsAffine Y]
     [IsLocallyNoetherian X] (F : Y.Modules)
@@ -121,8 +119,7 @@ private noncomputable def topCohomologyEquiv (X : TopCat.{u})
 /-- Vanishing of first cohomology for the coherent ideal-product subobject.
 Source: Stacks Project, Cohomology of Schemes, Lemma 01YQ, using 089W and 01XB.
 The affine projection formula identifies the ideal product with the pushforward of
-`(f*J)F`; affine cohomology comparison and affine vanishing then give `IsZero`.
-(blueprint: lem-weil-pbc-finite-affine-pushforward-ideal-devissage) -/
+`(f*J)F`; affine cohomology comparison and affine vanishing then give `IsZero`. -/
 private theorem finite_affine_pushforward_ideal_devissage_cohomology
     {X Y : Scheme.{u}} (f : Y ⟶ X) [IsFinite f] [IsAffine Y]
     [IsLocallyNoetherian X] (F : Y.Modules)
@@ -178,7 +175,6 @@ at any point where the ideal has full stalk.
 
 Source: Stacks Project, Cohomology of Schemes, proof of Lemma 01YQ, the paragraph
 beginning "Let J be a quasi-coherent sheaf of ideals", using Tags 01YP, 089W and 01XB.
-(blueprint: lem-weil-pbc-finite-affine-pushforward-ideal-devissage).
 
 Proof:
 Put G = f_*F and K = JG, constructed as the image of multiplication. Finite

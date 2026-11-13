@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 /-!
 # Support and pullback of finite type quasi-coherent modules
 
-Source: Stacks Project, Morphisms of Schemes, Lemma 056J (lemma-support-finite-type)
-(blueprint: lem-weil-pbc-support-pullback-finite-type).
+Source: Stacks Project, Morphisms of Schemes, Lemma 056J.
 -/
 
 @[expose] public section
@@ -153,14 +152,13 @@ residue-field fibres, and pulls back to the inverse image under every scheme mor
 Support is the inline nonzero-stalk locus of def-weil-pbc-closed-subset-proper-over-base;
 membership in it is nonvanishing of the stalk by definition, so part (2) is stated as the
 Nakayama equivalence with the residue fibre `residueFiber F x` (κ(x) ⊗ F_x).
-Source: Stacks Project, Morphisms of Schemes, Lemma 056J (lemma-support-finite-type).
-(blueprint: lem-weil-pbc-support-pullback-finite-type)
+Source: Stacks Project, Morphisms of Schemes, Lemma 056J.
 
 Proof:
 1. Apply lem-weil-pbc-finite-type-module-support-closed to obtain closedness.
 2. Membership in support is nonvanishing of the stalk by
    def-weil-pbc-closed-subset-proper-over-base.
-3. Choose an affine neighbourhood of x (def-pc-scheme). By the affine description in
+3. Choose an affine neighbourhood of x. By the affine description in
    lem-weil-pbc-finite-type-module-support-closed, its finite module localizes to F_x.
    The images of a finite generating family generate this localization, hence F_x is finite.
 4. The stalk ring is local and its residue field is def-weil-residue-field. Apply

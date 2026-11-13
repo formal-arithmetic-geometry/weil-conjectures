@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.PicardBaseChangeStalkFinrankEq
 /-! # Equal finite ranks of the stalks in Picard base change
 
 Source: Stacks Project, Tags 0BDP and 01C6.
-(blueprint: lem-sc-picard-base-change-stalk-ranks).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace AlgebraicGeometry.Scheme
 This compares the objects only; it makes no assertion about the canonical map.
 Source: Stacks Project, Tag 0BDP, common-rank reduction in the first three proof
 paragraphs; Tag 01C6, finite locally free modules and their ranks.
-(blueprint: lem-sc-picard-base-change-stalk-ranks)
 
 Proof:
 1. Apply hR to the identity of T at h(t). On the resulting neighbourhood V, both

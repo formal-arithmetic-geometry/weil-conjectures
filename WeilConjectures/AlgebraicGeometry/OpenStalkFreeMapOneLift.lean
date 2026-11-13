@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 /-! # One finite-free open-site stalk map lifts on one neighbourhood
 
 Source: Stacks Project, Modules Tag 01CP, and Sheaves Tag 00A0 (3).
-(blueprint: lem-sc-open-stalk-free-map-one-lift).
 -/
 
 @[expose] public section
@@ -54,9 +53,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- A single finite-free stalk map lifts on one smaller open. The comparison may
 be chosen with this lift; no comparison family or further-restriction assertion is made.
 
-Source: Stacks Project, Modules Tag 01CP (`lemma-stalk-internal-hom`), the
+Source: Stacks Project, Modules Tag 01CP, the
 finite-generator part of the finite-presentation proof; Sheaves Tag 00A0 (3).
-(blueprint: lem-sc-open-stalk-free-map-one-lift).
 
 Proof: Use the slice/open-subspace equivalence to regard the source and target
 as module sheaves on U.toScheme. This equivalence carries the rank-m free sheaf

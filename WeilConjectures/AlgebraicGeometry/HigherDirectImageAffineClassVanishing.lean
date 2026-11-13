@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageOverCoherence
 /-! # Eventual vanishing of affine higher-image sections
 
 Source: Stacks Project, Tags 09Z1, 03Q8 and 0738.
-(blueprint: sbc-lem-higher-image-affine-class-vanishing).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- A stage section with zero limit image becomes zero at a later stage.
 Source: Stacks Project, Tag 09Z1, proof; Tag 0738(2).
-(blueprint: sbc-lem-higher-image-affine-class-vanishing).
 
 Proof:
 1. Replace the filtered opposite index by a directed final presentation, keeping

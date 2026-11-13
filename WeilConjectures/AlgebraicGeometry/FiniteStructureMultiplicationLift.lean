@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteStructureTensorTestsFaithful
 
 /-! # Lift multiplication of finite structure sheaves
 
-Source: Stacks Project, Tag 09ZT
-(blueprint: lem-weil-pbc-finite-structure-multiplication-lift).
+Source: Stacks Project, Tag 09ZT.
 -/
 
 @[expose] public section
@@ -55,8 +54,7 @@ The pullback tensor comparison carries pulled-back elementary tensors to their t
 product. Evaluating the lifted multiplication under the adjunction unit and pushforward
 composition therefore gives the displayed multiplicativity of every adjoint. For uniqueness,
 that formula determines the completed multiplication on local generators of pullback;
-full faithfulness then determines μ. Zero modules and empty schemes use the same argument.
-(blueprint: lem-weil-pbc-finite-structure-multiplication-lift). -/
+full faithfulness then determines μ. Zero modules and empty schemes use the same argument. -/
 theorem finite_structure_multiplication_lift
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]

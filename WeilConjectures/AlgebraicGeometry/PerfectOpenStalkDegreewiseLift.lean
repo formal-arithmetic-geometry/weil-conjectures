@@ -16,7 +16,6 @@ import Mathlib.Data.Int.Interval
 /-! # Extending degreewise maps between perfect open-site stalks
 
 Source: Stacks Project, Tags 09RE and 01CP.
-(blueprint: lem-sc-perfect-open-stalk-degreewise-lift).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ chain equations, in the coordinates of the canonical restriction comparison.
 
 Source: Stacks Project, Tag 09RE, affine finite-presentation calculation, and
 Tag 01CP, finite-presentation internal-Hom stalk comparison.
-(blueprint: lem-sc-perfect-open-stalk-degreewise-lift).
 
 Proof: Pass from the slice site over U to the open subscheme U. The finite-free
 retractions make every term of P finitely presented. Apply the internal-Hom stalk

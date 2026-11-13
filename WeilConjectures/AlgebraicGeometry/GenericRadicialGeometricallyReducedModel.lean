@@ -63,9 +63,7 @@ the original generic point is generic. Reduction and radicial base change
 preserve all geometric fibre spaces, giving the displayed equivalence at every
 point of S. This construction also works in characteristic zero (take K'=K),
 and in relative dimension zero. The generic fibre hypothesis excludes an empty
-source.
-
-(blueprint: lem-sbc-generic-radicial-geometrically-reduced-model) -/
+source. -/
 theorem exists_generic_radicial_geometrically_reduced_model
     {X T : Scheme.{u}} [IsAffine X] (f : X ⟶ T) [LocallyOfFiniteType f]
     (V : T.Opens) (hV : IsAffineOpen V) (himage : Set.range f ⊆ V)

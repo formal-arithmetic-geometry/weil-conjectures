@@ -18,7 +18,6 @@ namespace AlgebraicGeometry
 quasi-coherence assertion about the coproduct of kernels.
 Source: Stacks Project, Cohomology of Schemes, Lemma 087Z (affine proof), via Lemma 087W
 and Section 0EHN; https://stacks.math.columbia.edu/tag/087Z.
-(blueprint: lem-weil-pbc-formal-systems-kernel-rees-finite-existence).
 
 Proof:
 1. The reduction condition iterates to identify F_l / I^r F_l with F_r for l >= r >= 1.

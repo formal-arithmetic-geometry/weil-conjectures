@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.RingFamilyRestriction
 /-! # Descent from locally equal section ideals
 
 Source: Stacks Project, algebraization.tex, Tag 099E, second and third paragraphs.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -1304,8 +1303,7 @@ private theorem spanTransitionEquiv_toSingle
 Source: Stacks Project, Tag 099E, augmentation compatibility of the canonical
 identifications. The proof is obtained by evaluating the degree-zero comparison on
 unit sections and using the single-complex augmentation, with zero target components
-in every other degree.
-(auxiliary; not a blueprint node). -/
+in every other degree. -/
 private theorem ringFamily_idealDescent_augmentation
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) (K : RingComplexFamily.{u})
@@ -1371,7 +1369,6 @@ attribute [-instance] commRingForgetHasSheafCompose moduleZeroObject moduleZeroM
 ring-family complexes. This assertion has no ideal module, finite-type assumption,
 covering-family assumption, derived category or Čech complex.
 Source: Stacks Project, Tag 099E, the canonical identifications and their cocycle.
-(auxiliary; not a blueprint node).
 
 Proof: on a common test span, restrict both presheaf complexes to the slice of the test
 object. The section ideals are equal on a restriction-stable locus which covers every

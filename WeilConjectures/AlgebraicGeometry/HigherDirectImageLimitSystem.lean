@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageLimitClassVanishing
 /-!
 # Higher direct images and inverse limits of schemes
 
-Source: Stacks Project, Lemma 59.51.7, Tag 09Z1
-(blueprint: sbc-lem-higher-direct-image-limit).
+Source: Stacks Project, Lemma 59.51.7, Tag 09Z1.
 -/
 
 @[expose] public section
@@ -34,7 +33,7 @@ of their colimit on the limit scheme is an isomorphism.
 `H` records the pulled-back sheaf diagram via `eH` and `hH`; `K` records the higher
 image diagram via `eK` and `hK`; `η` records the canonical comparison cocone via `hη`.
 These are presentations of the diagrams and comparison map, not restrictions on the sheaves.
-Source: Stacks, Tag 09Z1 (blueprint: sbc-lem-higher-direct-image-limit).
+Source: Stacks, Tag 09Z1.
 
 Proof:
 1. By sbc-lem-higher-direct-image-presheaf (Tag 03Q8), higher direct images are

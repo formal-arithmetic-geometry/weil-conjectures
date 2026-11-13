@@ -239,7 +239,6 @@ set_option maxHeartbeats 500000 in
 arbitrary generalized sections.
 
 Source: Stacks Project, Tags 03D2, 03D3 and 04JC.
-(auxiliary; not a blueprint node)
 
 Proof: use the small model sites. The actual ring adjunction unit presents the underlying
 inverse-image ring as set inverse image. Apply finite-product-preserving set inverse image

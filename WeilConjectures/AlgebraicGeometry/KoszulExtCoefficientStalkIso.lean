@@ -36,8 +36,7 @@ namespace AlgebraicGeometry
 /-- The scalar coefficient comparison, induced by O_Y -> i_* O_Z. Pullback is
 applied only to the degree-n cohomology map, not to the Hom complex.
 
-Source: Stacks Project, Tag 0BQZ, coefficient map in lemma-regular-immersion-ext.
-(blueprint: lem-sc-koszul-ext-coefficient-stalk-iso). -/
+Source: Stacks Project, Tag 0BQZ, coefficient map in lemma-regular-immersion-ext. -/
 noncomputable def koszulScalarExtCoefficientMap
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -81,7 +80,6 @@ Koszul-regular affine chart. This is solely a local assertion about a specified 
 
 Source: Stacks Project, Tag 0BQZ, lemma-regular-immersion-ext, final coefficient
 comparison between the two dual Koszul complexes.
-(blueprint: lem-sc-koszul-ext-coefficient-stalk-iso).
 
 Proof: Write A = O_Y(U), I = ker(i)(U), and B = A/I. The closed immersion
 identifies the closed preimage with Spec B. The sheafified augmented Koszul

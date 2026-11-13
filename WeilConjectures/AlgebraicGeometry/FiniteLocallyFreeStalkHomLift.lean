@@ -15,7 +15,6 @@ import all WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 /-! # Extending a linear map from a finite locally free stalk
 
 Source: Stacks Project, Tag 05GF, Lemma 10.79.2, finite matrix argument.
-(blueprint: lem-sc-finite-locally-free-stalk-hom-lift)
 -/
 
 @[expose] public section
@@ -83,7 +82,6 @@ private lemma homFromSections_app {W : Scheme.{u}} (M N : W.Modules)
 
 /-- Any linear map from a finite locally free stalk is represented near the point.
 Source: Stacks Project, Tag 05GF, Lemma 10.79.2.
-(blueprint: lem-sc-finite-locally-free-stalk-hom-lift)
 
 Proof: Choose a finite free frame for M on an open neighbourhood of x. Apply t to
 its finitely many basis germs. Each resulting germ of N is represented by a

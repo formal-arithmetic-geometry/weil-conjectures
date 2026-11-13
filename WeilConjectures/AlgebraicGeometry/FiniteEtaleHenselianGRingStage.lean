@@ -74,7 +74,6 @@ closed-fibre inclusions. This constructs the stage only; it does not lift the co
 
 Source: Stacks Project, Tag 0GS2, proof, General case, using Tags 0A0P, 01ZM, 01ZO,
 07RP, 07PX, 0A02, 0A04 and 0AH3.
-(blueprint: lem-weil-pbc-finite-etale-henselian-g-ring-stage).
 
 Proof:
 1. Approximate Y over Spec A by proper Y_i over Spec A_i, where the A_i are finitely
@@ -92,11 +91,11 @@ Proof:
    henselization universal property (also the specialization in Tag 0A04), and
    this extension sends J into I.
 5. Put Z = Y_i times Spec B over Spec A_i and let g be its proper projection.
-   Pullback universality gives s : Y to Z from the limit projection and B to A.
+   Pullback universality gives s: Y to Z from the limit projection and B to A.
    The quotient isomorphism identifies the closed fibre of Z with Y_i,0;
    transport the descended cover across this identification to obtain W.
 6. The induced quotient map B/J to A/I and the closed-fibre limit projection give
-   k : Y_0 to Z_0. Both sides of j_Y followed by s = k followed by j_Z have the
+   k: Y_0 to Z_0. Both sides of j_Y followed by s = k followed by j_Z have the
    same projections to Y_i and Spec B, so they agree by pullback extensionality.
    Base change of the descended cover along k gives V, as an isomorphism over Y_0.
    No lifting theorem for arbitrary henselian pairs is used in these steps. -/

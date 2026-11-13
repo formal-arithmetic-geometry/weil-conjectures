@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ExternalCupZeroGlobalSections
 /-! # Degree-zero external tensor comparison
 
 Source: Stacks Project, Varieties, Tag 0BED, equation-kunneth-on-cech.
-(blueprint: lem-sc-picard-external-cup-zero-tensor).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 with the identification expressed on degree-zero scalar cohomology.
 Source: Stacks Project, Varieties, Tag 0BED, equation-kunneth-on-cech;
 Cohomology, Tags 01FD, 07MB and 0FKV.
-(blueprint: lem-sc-picard-external-cup-zero-tensor).
 
 Proof: Take a finite affine cover of X. Affine diagonal makes all pairwise
 intersections affine. For each affine open V of Y, the affine pullback and tensor

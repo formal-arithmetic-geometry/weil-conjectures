@@ -16,8 +16,7 @@ import WeilConjectures.Topology.PresheafModuleStalkFunctor
 # Constant support of a coherent formal module
 
 Source: Stacks Project, Cohomology of Schemes, proof of Lemma 30.26.11 (Tag 0CYV),
-first sentence of the proof of (1)
-(blueprint: lem-weil-pbc-formal-system-support-constant).
+first sentence of the proof of (1).
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ namespace AlgebraicGeometry
 The index `op n` denotes level `n + 1`, and `op 0` denotes level one. Support is the
 nonzero-stalk locus, following def-weil-pbc-closed-subset-proper-over-base (2).
 
-Source: Stacks Project, Tag 0CYV, first sentence of the proof of (1)
-(blueprint: lem-weil-pbc-formal-system-support-constant).
+Source: Stacks Project, Tag 0CYV, first sentence of the proof of (1).
 
 Proof: (1) Fix a positive level k and a point x. Put A = O_{X,x}, a = I_x and
 M = (F_{k+1})_x. The defining conditions of def-weil-pbc-coherent-formal-module and

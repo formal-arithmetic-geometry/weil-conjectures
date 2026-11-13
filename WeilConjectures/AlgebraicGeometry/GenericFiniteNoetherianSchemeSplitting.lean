@@ -19,7 +19,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 Source: the proof of `lem-weil-pbc-finite-module-generic-reflection`, step 1,
 using Stacks Project Tags 095K, 0959 and 04DZ.
-(blueprint: lem-weil-pbc-generic-finite-noetherian-scheme-splitting)
 -/
 
 @[expose] public section
@@ -157,7 +156,6 @@ smaller dense open. This assertion concerns schemes alone and has no sheaf hypot
 
 Source: `lem-weil-pbc-finite-module-generic-reflection`, proof step 1;
 Stacks Project Tags 095K, 0959 and 04DZ.
-(blueprint: lem-weil-pbc-generic-finite-noetherian-scheme-splitting)
 
 Proof: Reduce the Noetherian target. Its finitely many irreducible components have
 pairwise disjoint dense affine integral opens, after removing their intersections.

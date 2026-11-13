@@ -38,7 +38,7 @@ local instance : MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRinged
 local instance : MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).2.1
 /-- Underived global pullback data and its tensor-counit normalization.
-Source: Stacks Tags 008A, 008Y, 0FKU (blueprint: lem-sc-global-tensor-pullback-underived-data).
+Source: Stacks Tags 008A, 008Y, 0FKU.
 The proof transports the concrete ringed-space pullback adjunction along point evaluation,
 then applies the separate monoidal normalization theorem for the tensor-counit identity. -/
 theorem exists_globalTensorPullback_underived_data :

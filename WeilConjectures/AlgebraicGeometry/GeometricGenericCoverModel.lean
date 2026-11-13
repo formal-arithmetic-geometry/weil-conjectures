@@ -144,9 +144,7 @@ embedding and closedness of A_i prove a⁻¹(C_i) = A_i. Use the closed-family s
 theorem and the existing closed-cover shrinking theorem; intersect their opens.
 Pullback pasting proves the field-fibre assertion on this restricted model, and the
 range formula for pullback.map lifts every given generic intersection.
-No persistence of intersections at nongeneric points is asserted here.
-
-(blueprint: lem-sbc-geometric-generic-cover-model) -/
+No persistence of intersections at nongeneric points is asserted here. -/
 theorem exists_geometric_generic_cover_model {X S : Scheme.{u}}
     [IrreducibleSpace S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f]
     {L : Type u} [Field L]

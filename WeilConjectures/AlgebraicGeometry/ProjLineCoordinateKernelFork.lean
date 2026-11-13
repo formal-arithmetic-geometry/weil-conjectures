@@ -159,7 +159,6 @@ set_option backward.isDefEq.respectTransparency false in
 Source: the two-chart calculation in
 `dag/nodes/sec-picard-framework/lem-sc-p1-proj-coordinate-short-exact.json`,
 proof steps 1 and 2, and Stacks Project, Tag 01MN for the twisting sheaves.
-(blueprint: lem-sc-p1-proj-coordinate-kernel-fork).
 
 Proof: Write μ_i(d) for G whiskered with multiplication by x_i from O(d)
 to O(d+1). Define f by its two components -μ_1(z-1) and μ_0(z-1),

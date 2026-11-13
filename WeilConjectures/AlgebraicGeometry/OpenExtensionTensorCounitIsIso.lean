@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.OpenExtensionDerivedUnitIsIso
 import all WeilConjectures.AlgebraicGeometry.DerivedOpenTensorHomBijective
 
 /-! # Open extension counit on a derived tensor
-Source: Stacks Project, Tags 00A7, 08BS and 06YB.
-(blueprint: lem-pc-open-extension-tensor-counit-isiso). -/
+Source: Stacks Project, Tags 00A7, 08BS and 06YB. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -47,8 +46,7 @@ unit, by the triangle identity and invertibility of the unit; outside U its sour
 and target have zero cohomology stalks. The cone therefore has acyclic stalks at
 all points, so is zero in the derived category. This proves the actual counit
 component invertible. The empty open makes both objects zero; for the total open
-the adjunction is an equivalence. No monoidal structure on R is used.
-(blueprint: lem-pc-open-extension-tensor-counit-isiso). -/
+the adjunction is an equivalence. No monoidal structure on R is used. -/
 theorem openExtension_tensor_counit_isIso (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (U : X.Opens)

@@ -13,7 +13,6 @@ import Mathlib.Algebra.Homology.QuasiIso
 /-! # Comparing basic-open sections with sections of the restricted scheme
 
 Source: Stacks Project, Tags 08D2 and 08BS; restriction of scalars for section modules.
-(blueprint: lem-sc-principal-open-sections-restriction-comparison).
 -/
 
 @[expose] public section
@@ -50,7 +49,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Basic-open sections detect the same quasi-isomorphisms as global sections after
 restriction to the open subscheme. No quasi-coherence or resolution is assumed.
 Source: Stacks Project, Tags 08D2 and 08BS, sections on an open subscheme.
-(blueprint: lem-sc-principal-open-sections-restriction-comparison).
 
 Proof: Put U = D(g). Restriction to the localized site followed by the canonical
 module equivalence overEquiv U is ordinary open-subscheme restriction. Its global

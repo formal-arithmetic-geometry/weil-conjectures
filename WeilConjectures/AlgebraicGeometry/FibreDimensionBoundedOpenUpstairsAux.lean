@@ -20,7 +20,6 @@ import Mathlib.RingTheory.TensorProduct.MvPolynomial
 # Fibre dimension bound from a quasi-finite polynomial factorization
 
 Source: Stacks Project, proof of Tag 00QH, after the application of Tag 00QE.
-(blueprint: lem-weil-pbc-fibre-dimension-bound-of-polynomial-factorization).
 -/
 
 @[expose] public section
@@ -91,7 +90,6 @@ No distinguished prime or initial fibre-dimension hypothesis is needed.
 
 Source: Stacks Project, Algebra, proof of Tag 00QH, the sentence "Considering the fibres",
 using Tags 00PN, 00QG and 00E4.
-(blueprint: lem-weil-pbc-fibre-dimension-bound-of-polynomial-factorization).
 
 Proof: fix `q ∈ D(g)` and let `p` be its contraction to `R`. Localize `q` to a prime
 `qg` of `S[g⁻¹]`; its contraction to `R` remains `p`. Write `k = κ(p)` and

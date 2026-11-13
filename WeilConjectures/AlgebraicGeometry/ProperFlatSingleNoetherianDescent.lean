@@ -23,7 +23,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-! # Descent of a proper morphism and a relatively flat finitely presented sheaf
 
 Source: Stacks Project, Tags 0A1H, 05LY and 081F.
-(blueprint: lem-pc-proper-flat-single-noetherian-descent).
 -/
 
 @[expose] public section
@@ -139,8 +138,7 @@ Proof: Choose an affine neighbourhood V of x inside U. Write its coordinate ring
  and locally of finite type over a Noetherian scheme. The original pullback is the
  base change of Y along g; its projection q gives the displayed cartesian square.
  Descent of the finite presentation gives the indicated sheaf isomorphism. For zero F
- descend the zero sheaf. Empty U has no x; empty X descends the empty source.
-(blueprint: lem-pc-proper-flat-single-noetherian-descent). -/
+ descend the zero sheaf. Empty U has no x; empty X descends the empty source. -/
 theorem properFlat_single_noetherian_descent
     {X S : Scheme.{u}} (f : X ⟶ S)
     [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]

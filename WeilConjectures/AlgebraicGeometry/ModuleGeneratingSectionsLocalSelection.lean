@@ -32,8 +32,7 @@ members of a specified global generating family generate. Compactness is not ass
 Source: Stacks Project, Modules, Lemma 01BB, first paragraph of the proof, applied
 to the directed finite sub-coproducts of the free sheaf; Lemma 01B8.
 https://stacks.math.columbia.edu/tag/01BB
-https://stacks.math.columbia.edu/tag/01B8
-(blueprint: lem-weil-pbc-module-generating-sections-local-selection).
+https://stacks.math.columbia.edu/tag/01B8.
 
 Proof: Restrict to K and choose a finite local generating family near x, using
 finite type. The given epimorphism from the free sheaf on sigma.I locally lifts

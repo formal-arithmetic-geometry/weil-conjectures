@@ -100,12 +100,11 @@ variable {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalC
   (S : D) [MonObj S] [IsCommMonObj (F.obj (G.obj S))]
 
 /-- Extending constant scalar modules along the counit is left adjoint to sections.
-Source: blueprint local boundary duality, Step 5, scalar extension adjunction.
+
 Proof: compose the module lift of the monoidal adjunction with extension/restriction
 of scalars. The resulting restriction is along the unit followed by the image of
 its counit; the right triangle identity identifies this with restriction along the
-identity. This also applies to the zero algebra and the zero module.
-(blueprint: lem-a1-condensed-point-scalar-adjunction) -/
+identity. This also applies to the zero algebra and the zero module. -/
 def counitScalarAdjunction :
     F.mapMod (G.obj S) ⋙ Mod.extendScalars (adj.counitAlgHom S) ⊣ G.mapMod S := by
   let a := (adj.mapModAdjunction (G.obj S)).comp
@@ -240,20 +239,17 @@ section PointAdjunction
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   (k : Type u) [Field k] [IsSepClosed k]
 
-/-- The scalar module sections transported along the geometric-point equivalence.
-Source: blueprint local boundary duality, Step 5, sections adjunction
-(blueprint: lem-a1-condensed-point-scalar-adjunction). -/
+/-- The scalar module sections transported along the geometric-point equivalence. -/
 def pointInternalScalarSections :=
   (((upperStarFromPoint (Spec (.of k))).mapMod Λ).asEquivalence).inverse ⋙
     scalarSections.mapMod Λ
 
 /-- The finite-constant-model scalar extension is left adjoint to point scalar sections.
-Source: blueprint local boundary duality, Step 5, scalar extension adjunction.
+
 Proof: factor scalar realization into constant sheaf, extension along the counit,
 and the point inverse image. The preceding monoidal scalar adjunction supplies the
 first two factors, and the point inverse image is an equivalence. Transport the
-composed adjunction through the canonical scalar realization factorization.
-(blueprint: lem-a1-condensed-point-scalar-adjunction) -/
+composed adjunction through the canonical scalar realization factorization. -/
 theorem finiteConstantPointAdjunction :
     Nonempty (finiteConstantScalarExtension Λ (Spec (.of k)) ⊣
       pointInternalScalarSections Λ k) := by

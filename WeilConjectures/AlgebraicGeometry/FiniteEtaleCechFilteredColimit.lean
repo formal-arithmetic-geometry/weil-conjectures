@@ -21,7 +21,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 # Finite étale Čech cohomology and filtered colimits
 
 Source: Stacks Project, Cohomology on Sites, Tag 0739, proof of `lemma-colim-works-over-collection`.
-(blueprint: lem-weil-pbc-finite-etale-cech-filtered-colimit).
 -/
 
 @[expose] public section
@@ -144,12 +143,11 @@ private theorem finiteEtaleCechComplexColimit (X : Scheme.{u}) (U : X.Etale)
 then its Čech cohomology functors preserve those colimits, in every degree.
 Source: Stacks Project, Tag 0739, proof of `lemma-colim-works-over-collection`,
 the finite-cover Čech step.
-(blueprint: lem-weil-pbc-finite-etale-cech-filtered-colimit).
 
 Proof:
 1. In degree `q`, the Čech complex is the product of evaluation at the objects
-   `piObj (fun j : Fin (q + 1) ↦ Over.mk (f (a j)))`, indexed by
-   `a : Fin (q + 1) → K`. This index type is finite, including when `K` is empty.
+   `piObj (fun j: Fin (q + 1) ↦ Over.mk (f (a j)))`, indexed by
+   `a: Fin (q + 1) → K`. This index type is finite, including when `K` is empty.
 2. The hypothesis identifies each factor of the image cocone with a colimit.
    Filtered colimits in abelian groups commute with finite products (finite products
    are finite biproducts). Thus the image cocone is a colimit in every degree.

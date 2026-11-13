@@ -46,7 +46,6 @@ private theorem exists_unit_of_span_top
 Spec(A_(f)), with evaluations agreeing with the original section.
 Source: Stacks Project, Section 27.8, preceding Definition 27.8.3 (Tag 01M6),
 and Lemma 27.8.4 (Tag 01M7).
-(blueprint: lem-sc-proj-twist-finite-localization-data)
 
 Proof: at each point use the local homogeneous-fraction witness of s. Choose a
 homogeneous basic neighborhood inside its witness neighborhood and D₊(f). Multiply the

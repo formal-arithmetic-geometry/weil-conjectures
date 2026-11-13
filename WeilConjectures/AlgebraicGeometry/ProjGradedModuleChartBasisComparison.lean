@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ProjGradedModuleChartBasisComparisonFix
 # Principal-open section comparison for a graded-module chart
 
 Source: Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-basis-comparison)
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
 localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-basis-comparison) -/
+Source: Stacks, Algebra, Section 00JM. -/
 local instance localizedModuleHomogeneousScalarsBasisComparison (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -51,9 +49,8 @@ local notation "ModX" => (Proj 𝒜).Modules
 open basis of a fixed affine chart. This asserts only the sectionwise comparison;
 extending these maps to a morphism of sheaves is a separate step.
 
-Source: Stacks Project, Constructions, Lemma 01MB (lemma-proj-scheme), last paragraph,
-Lemma 01M4 (lemma-standard-open), (1)(e),(g),(h), and Lemma 01M7 (lemma-proj-sheaves).
-(blueprint: lem-weil-pbc-proj-graded-module-chart-basis-comparison)
+Source: Stacks Project, Constructions, Lemma 01MB, last paragraph,
+Lemma 01M4, (1)(e),(g),(h), and Lemma 01M7.
 
 Proof:
 Fix f of degree d>0 and write r in R[f] as a/f^n with a homogeneous of degree n*d.

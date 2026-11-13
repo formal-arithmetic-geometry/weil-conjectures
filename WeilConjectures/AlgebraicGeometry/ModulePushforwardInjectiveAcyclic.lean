@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleSectionsAcyclicOfCohomologyVanish
 /-!
 # Direct images of injective modules are acyclic on every open
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 01EX (2), and Tag 01E1 (2)
-(blueprint: lem-weil-pbc-module-pushforward-injective-acyclic).
+Source: Stacks Project, Cohomology of Sheaves, Tag 01EX (2), and Tag 01E1 (2).
 -/
 
 @[expose] public section
@@ -35,15 +34,13 @@ on every open `V` of the target. Equivalently it is acyclic for the module-value
 sections functor `Γ(V,-)`. Direct image need not itself be injective, since tensor
 pullback need not be exact.
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 01EX (2), and Tag 01E1 (2)
-(blueprint: lem-weil-pbc-module-pushforward-injective-acyclic).
+Source: Stacks Project, Cohomology of Sheaves, Tag 01EX (2), and Tag 01E1 (2).
 
 Proof:
 1. For any covering `(V_j)` of `V`, inverse images cover `h⁻¹(V)`. Sections of
    `h_* I` on each finite intersection are sections of `I` on its inverse image.
    Inverse image commutes with intersections and the restriction maps agree.
-   Thus the Cech complexes coincide, including the alternating differentials
-   (def-sc-zariski-site, def-pc-module-pullback, def-weil-pbc-site-cech-complex).
+   Thus the Cech complexes coincide, including the alternating differentials.
 2. The Cech cohomology of `I` for this covering vanishes in positive degrees by
    lem-weil-pbc-module-injective-open-cover-cech-acyclic (Tag 01EP), so the same
    holds for `h_* I` on every covering of every open.

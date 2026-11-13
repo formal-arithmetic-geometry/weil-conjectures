@@ -17,7 +17,6 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-! # Annihilator calculus for sheaves of modules
 
 Source: Stacks Project, proof of Lemma 0CYV, part (2).
-(blueprint: lem-weil-pbc-ideal-module-product-exact-calculus).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 /-- A module sheaf is zero exactly when every module stalk is zero, by the faithful
 forgetful functor and the zero-stalk criterion for abelian sheaves.
-Source: Stacks Project, 01AG, 01CB, and the annihilator argument in 0CYV (2).
-(blueprint: lem-weil-pbc-ideal-module-product-exact-calculus). -/
+Source: Stacks Project, 01AG, 01CB, and the annihilator argument in 0CYV (2). -/
 private theorem zero_iff_stalks (X : Scheme.{u}) (F : X.Modules) :
     IsZero F ↔ ∀ x : X,
       IsZero ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F) := by
@@ -50,8 +48,7 @@ private theorem zero_iff_stalks (X : Scheme.{u}) (F : X.Modules) :
 set_option backward.isDefEq.respectTransparency false in
 /-- Injectivity and the range formula for the product inclusion turn zero product
 stalks into scalar annihilation by the image ideal.
-Source: Stacks Project, 01AG, 01CB, and the annihilator argument in 0CYV (2).
-(blueprint: lem-weil-pbc-ideal-module-product-exact-calculus). -/
+Source: Stacks Project, 01AG, 01CB, and the annihilator argument in 0CYV (2). -/
 private theorem product_stalk_zero_iff {X : Scheme.{u}} {J : X.Modules}
     (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]
     (F : X.Modules) (x : X)
@@ -98,8 +95,7 @@ private theorem product_stalk_zero_iff {X : Scheme.{u}} {J : X.Modules}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Exactness at the middle term passes to module stalks.
-Source: Stacks Project, 01AG, 01CB, and the annihilator argument in 0CYV (2).
-(blueprint: lem-weil-pbc-ideal-module-product-exact-calculus). -/
+Source: Stacks Project, 01AG, 01CB, and the annihilator argument in 0CYV (2). -/
 private theorem stalk_exact {X : Scheme.{u}} (T : ShortComplex X.Modules)
     (h : T.Exact) (x : X) :
     let := RingedSpace.moduleStalkFunctor_preservesZeroMorphisms_proof X.toRingedSpace x
@@ -108,8 +104,7 @@ private theorem stalk_exact {X : Scheme.{u}} (T : ShortComplex X.Modules)
     T.X₃ T.f T.g T.zero).mp h x
 
 /-- A module-sheaf monomorphism gives injective module stalk maps.
-Source: Stacks Project, 01AG, 01CB, and the annihilator argument in 0CYV (2).
-(blueprint: lem-weil-pbc-ideal-module-product-exact-calculus). -/
+Source: Stacks Project, 01AG, 01CB, and the annihilator argument in 0CYV (2). -/
 private theorem stalk_injective {X : Scheme.{u}} {F G : X.Modules}
     (a : F ⟶ G) [Mono a] (x : X) :
     Function.Injective ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map a).hom := by
@@ -122,8 +117,7 @@ private theorem stalk_injective {X : Scheme.{u}} {F G : X.Modules}
 set_option backward.isDefEq.respectTransparency false in
 /-- A module-sheaf epimorphism gives surjective module stalk maps: apply stalk
 exactness to the complex F -> G -> 0.
-Source: Stacks Project, 01AG, 01CB, and the annihilator argument in 0CYV (2).
-(blueprint: lem-weil-pbc-ideal-module-product-exact-calculus). -/
+Source: Stacks Project, 01AG, 01CB, and the annihilator argument in 0CYV (2). -/
 private theorem stalk_surjective {X : Scheme.{u}} {F G : X.Modules}
     (a : F ⟶ G) [Epi a] (x : X) :
     Function.Surjective ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map a).hom := by
@@ -136,8 +130,7 @@ private theorem stalk_surjective {X : Scheme.{u}} {F G : X.Modules}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The ideal inclusion on stalks sends an ideal-section germ to its ring germ.
-Source: Stacks Project, 01AG, 01CB, and the annihilator argument in 0CYV (2).
-(blueprint: lem-weil-pbc-ideal-module-product-exact-calculus). -/
+Source: Stacks Project, 01AG, 01CB, and the annihilator argument in 0CYV (2). -/
 private theorem inclusion_stalk_germ {X : Scheme.{u}} (J : X.IdealSheafData) (x : X)
     (e : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj
       (SheafOfModules.unit X.ringCatSheaf) ≅
@@ -158,8 +151,7 @@ private theorem inclusion_stalk_germ {X : Scheme.{u}} (J : X.IdealSheafData) (x 
 set_option backward.isDefEq.respectTransparency false in
 /-- An element belongs to the stalk image ideal exactly when it is a germ of an
 ideal section on an affine neighborhood.
-Source: Stacks Project, 01AG, 01CB, and the annihilator argument in 0CYV (2).
-(blueprint: lem-weil-pbc-ideal-module-product-exact-calculus). -/
+Source: Stacks Project, 01AG, 01CB, and the annihilator argument in 0CYV (2). -/
 private theorem mem_stalkIdeal_iff {X : Scheme.{u}} (J : X.IdealSheafData) (x : X)
     (e : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj
       (SheafOfModules.unit X.ringCatSheaf) ≅
@@ -194,8 +186,7 @@ private theorem mem_stalkIdeal_iff {X : Scheme.{u}} (J : X.IdealSheafData) (x : 
 set_option backward.isDefEq.respectTransparency false in
 /-- The stalk image ideal of J*K is the product of the stalk image ideals.
 Use affine ideal sections, Ideal.map_mul, and a common affine neighborhood.
-Source: Stacks Project, 01AG, 01CB, and the annihilator argument in 0CYV (2).
-(blueprint: lem-weil-pbc-ideal-module-product-exact-calculus). -/
+Source: Stacks Project, 01AG, 01CB, and the annihilator argument in 0CYV (2). -/
 private theorem stalkIdeal_mul {X : Scheme.{u}} (J K : X.IdealSheafData) (x : X)
     (e : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj
       (SheafOfModules.unit X.ringCatSheaf) ≅
@@ -251,7 +242,6 @@ set_option backward.isDefEq.respectTransparency false in
 of ideals annihilating the outer terms annihilates the middle term.
 
 Source: Stacks Project, proof of Lemma 0CYV, part (2), the annihilator argument.
-(blueprint: lem-weil-pbc-ideal-module-product-exact-calculus).
 
 Proof: The forgetful functor to abelian sheaves is faithful and preserves zero
 morphisms. Hence a module sheaf is zero exactly when all its module stalks are zero.

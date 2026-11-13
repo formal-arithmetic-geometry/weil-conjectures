@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.IsFiniteOfFpqcCover
 /-!
 # Essential surjectivity of finite etale descent
 
-Source: Stacks Project, Descent, Tags 0245, 02LA, 02VN; Topologies, Tag 022C
-(blueprint: lem-galois-descent-essentially-surjective).
+Source: Stacks Project, Descent, Tags 0245, 02LA, 02VN; Topologies, Tag 022C.
 -/
 
 @[expose] public section
@@ -50,7 +49,7 @@ private theorem compatible_hom {Y Y' : Scheme.{v}} {g : Y' ⟶ Y}
 
 /-- Canonical base change is essentially surjective along an etale surjection.
 Source: Stacks Project, Descent, Tags 0245, 02LA, 02VN; Steps 4--5 of
-`lem-galois-descent` (blueprint: lem-galois-descent-essentially-surjective).
+`lem-galois-descent`.
 
 Proof: an etale surjection is an fppf, hence fpqc, singleton covering.
 A finite scheme over the cover is affine. Effective affine descent gives

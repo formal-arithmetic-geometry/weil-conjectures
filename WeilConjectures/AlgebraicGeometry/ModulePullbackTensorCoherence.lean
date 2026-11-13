@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-! # Coherence of the module pullback tensor comparison
 
-Source: Stacks Project, Modules, Tag 01CD; Cohomology, Tag 079U and Section 20.27
-(blueprint: lem-pc-module-pullback-tensor-coherence).
+Source: Stacks Project, Modules, Tag 01CD; Cohomology, Tag 079U and Section 20.27.
 -/
 
 @[expose] public section
@@ -85,7 +84,6 @@ private theorem tensor_triple_hom_ext {Y : Scheme.{uModel}} {M N L H : Y.Modules
 open Opposite TopologicalSpace in
 /-- The chosen tensor comparison commutes with the associator.
 Source: Stacks Project, Modules, Tag 01CD; Cohomology, Tag 079U.
-(blueprint: lem-pc-module-pullback-tensor-coherence).
 Proof: apply the tensor-pullback adjunction to both composites. On a local triple
 pure tensor (s tensor t) tensor w, the comparison section formula, naturality of
 adjunction units, and the associator section formula send both composites to
@@ -136,7 +134,6 @@ private theorem tensorPullback_tensor_associativity {X Y : Scheme.{uModel}} (g :
 open Opposite TopologicalSpace in
 /-- The adjoint structure-sheaf comparison satisfies both unit diagrams.
 Source: Stacks Project, Modules, Tag 01CD; Cohomology, Tag 079U.
-(blueprint: lem-pc-module-pullback-tensor-coherence).
 Proof: apply the pullback adjunction to the inverse-unit diagrams. Naturality
 of its unit moves the pullback of the inverse unitor onto the original section.
 The inverse unitor sends s to 1 tensor s (respectively s tensor 1); the recorded
@@ -213,8 +210,7 @@ end
 end Scheme.Modules
 
 /-- The recorded module pullback tensor comparison is coherent with a unit comparison.
-Source: Stacks Project, Modules, Tag 01CD; Cohomology, Tag 079U and Section 20.27
-(blueprint: lem-pc-module-pullback-tensor-coherence).
+Source: Stacks Project, Modules, Tag 01CD; Cohomology, Tag 079U and Section 20.27.
 Proof: identify F with tensor-formula pullback using hF and hmap. On local pure tensors,
 the comparison sends a pullback of s tensor t to the tensor of their pullbacks, by the
 section formula of module_pullback_tensor. Thus its two iterates on three factors agree

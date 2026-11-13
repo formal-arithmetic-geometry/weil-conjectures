@@ -29,7 +29,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 Source: Stacks Project, Cohomology of Schemes, Tag 01YH,
 `lemma-property-irreducible`, proof, generic ideal inclusion and ideal intersection.
-(blueprint: lem-pc-a2-integral-ideal-common-submodule)
 -/
 
 @[expose] public section
@@ -95,7 +94,6 @@ No filtration is asserted here.
 
 Source: Stacks Project, Cohomology of Schemes, Tag 01YH,
 `lemma-property-irreducible`, proof, paragraphs beginning "Let G" and "Next, suppose".
-(blueprint: lem-pc-a2-integral-ideal-common-submodule)
 
 Proof: The closed subscheme W of the Noetherian X is Noetherian. Every quasi-coherent
 ideal on W is coherent, since its affine section modules are ideals in Noetherian

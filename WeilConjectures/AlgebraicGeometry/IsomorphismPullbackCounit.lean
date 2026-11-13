@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 /-! # Exact computation of pullback along scheme isomorphisms
 
 Source: Stacks Project, Tags 0D5S and 0098.
-(blueprint: lem-pc-isomorphism-pullback-counit).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ Both that counit and the pinned counit exhibit the same left-derived functor.
 The canonical left-derived comparison is therefore invertible, and its factorization
 identifies the pinned counit with a composite of two invertible morphisms.
 Source: Stacks Project, Tag 0D5S, derived pullback and its composition.
-This is the K-flat computation step of
-(blueprint: lem-pc-isomorphism-pullback-counit). -/
+This is the K-flat computation step of. -/
 theorem counit_isIso_kFlat
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -75,8 +73,7 @@ counit at P is invertible too. Thus the counit at M is invertible by cancellatio
 No K-flatness or boundedness assumption on M is needed. Zero complexes and
 empty schemes satisfy the same naturality argument.
 Source: Stacks Project, Tag 0D5S, pullback composition; Tag 0098,
-stalk formula for pullback, specialized to an isomorphism.
-(blueprint: lem-pc-isomorphism-pullback-counit). -/
+stalk formula for pullback, specialized to an isomorphism. -/
 theorem isIso_counit_of_isIso
     [d : ∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

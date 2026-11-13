@@ -36,13 +36,12 @@ is independent of the sequence length `n`.
 
 Source: Stacks Project, Tag 0BQZ, lemma-regular-immersion-ext, affine Koszul
 resolution and coefficient comparison.
-(blueprint: new-j3-koszul-ext-coefficient-stalk-model).
 
 Proof: Let A=O_Y(U) and I=ker(i)(U). The quotient-spectrum description of a closed
 immersion identifies the closed preimage of U with Spec(A/I). Use the quotient
 augmentation of the finite free Koszul resolution, sheafify it, and extend from
 chain degrees to the corresponding nonpositive cochain degrees. Every exterior
-term is finite free by the standard exterior basis and terms outside 0,...,n
+term is finite free by the standard exterior basis and terms outside 0..,n
 vanish. Restriction of derived internal Hom and the bounded finite free Hom
 model compute the two degree-m Ext objects by the sheafifications of Hom(K,A) and
 Hom(K,A/I), with the signed precomposition differential. Use the same resolution

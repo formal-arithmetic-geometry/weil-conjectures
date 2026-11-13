@@ -163,7 +163,6 @@ private theorem sections_heq_of_local {X : Scheme.{u}} (K : ℕ → X.Modules)
 for any multiplication induced by ideal-power representatives.
 Source: Stacks Project, Lemma 087Z and Section 0EHN;
 https://stacks.math.columbia.edu/tag/087Z.
-(blueprint: lem-weil-pbc-formal-kernel-bilinear-action-associative).
 
 Proof: Fix l,m,n,U and coefficient sections a,b and a kernel section x. Around every
 point of U shrink to lift a to I^l, b to I^m and the inclusion of x to a section t

@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 /-!
 # The Čech vanishing criterion for module sheaves
 
-Source: Stacks Project, Cohomology of Sheaves, Tags 01EV and 01E1 (2)
-(blueprint: lem-weil-pbc-module-cech-vanishing-criterion).
+Source: Stacks Project, Cohomology of Sheaves, Tags 01EV and 01E1 (2).
 -/
 
 @[expose] public section
@@ -37,8 +36,7 @@ The products in `SiteCechComplex` on the poset of opens are uniquely the finite
 intersections, and its index maps are the omitted-factor inclusions. Quantifying over
 all choices therefore expresses the same hypothesis as the intersection Čech complex.
 
-Source: Stacks Project, Cohomology of Sheaves, Tags 01EV and 01E1 (2)
-(blueprint: lem-weil-pbc-module-cech-vanishing-criterion).
+Source: Stacks Project, Cohomology of Sheaves, Tags 01EV and 01E1 (2).
 
 Proof (the nine steps of the node):
 1. Induct on positive degree, simultaneously for all Čech-acyclic module sheaves.
@@ -50,8 +48,7 @@ Proof (the nine steps of the node):
    to all coverings of each open W: vanishing Čech H¹(G) makes I(W) → Q(W) surjective.
    Thus the sequence is short exact as presheaves, not just as sheaves.
 5. Taking products of these sectionwise short exact sequences on the intersections
-   gives a short exact sequence of Čech complexes (def-weil-pbc-site-cech-complex and
-   lem-weil-pbc-cochain-complexes-degreewise-exact).
+   gives a short exact sequence of Čech complexes.
 6. Its long exact cohomology sequence, lem-weil-pbc-complex-ses-homology-long-exact,
    places positive Čech Hᵖ(Q) between zero groups Hᵖ(I) and Hᵖ⁺¹(G). Hence Q is
    again Čech-acyclic.
@@ -62,7 +59,7 @@ Proof (the nine steps of the node):
    global sections in modules, computed with injective resolutions.
 9. Apply lem-weil-pbc-derived-functor-long-exact to the restricted sequence. Positive
    cohomology of I vanishes by lem-weil-pbc-derived-functor-injective-vanishing (015B).
-   In degree one, R⁰Γ ≅ Γ (lem-weil-pbc-right-derived-universal-delta-functor) and
+   In degree one, R⁰Γ ≅ Γ and
    surjectivity in step 4 imply H¹(G) = 0. In higher degrees the induction hypothesis
    for Q from step 6 and the exact sequence imply Hᵖ(G) = 0. Apply this to F. -/
 theorem module_cohomology_isZero_of_cech_vanishing (X : Scheme.{u}) (F : X.Modules)

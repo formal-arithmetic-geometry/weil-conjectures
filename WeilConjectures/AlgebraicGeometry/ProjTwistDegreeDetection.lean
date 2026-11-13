@@ -65,7 +65,6 @@ private theorem twist_local_component_zero
 an equal-degree numerator and denominator for the shifted grading.
 Source: Stacks Project, Tag 01MN, homogeneous localization of a graded module,
 and Tag 01M7, Lemma 27.8.4 (injectivity on a basic open).
-(blueprint: lem-sc-proj-twist-degree-detection)
 
 Proof: represent z by a/f^r and decompose a into its finitely many homogeneous
 components. This gives components of degrees i-r*b. At a homogeneous prime p away from f,

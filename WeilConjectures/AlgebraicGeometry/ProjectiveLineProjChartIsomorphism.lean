@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection
 # Chart-compatible comparison of the two models of the projective line
 
 Source: Stacks Project, Constructions, Tag 01NG; blueprint proof of
-`lem-sc-p1-graded-resolution` (blueprint: def-sc-p1-proj-chart-isomorphism).
+`lem-sc-p1-graded-resolution`.
 -/
 
 @[expose] public section
@@ -27,8 +27,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- A comparison of polynomial Proj with the glued projective line, whose maps on the
 standard charts send the coordinate to the ratio of the other variable to the chart variable.
-Source: Stacks Project, Constructions, Tag 01NG.
-(blueprint: def-sc-p1-proj-chart-isomorphism). -/
+Source: Stacks Project, Constructions, Tag 01NG. -/
 structure ProjChartIsomorphism (k : Type u) [Field k] where
   iso : Proj (homogeneousSubmodule (Fin 2) k) ≅ ProjectiveLine (Spec (.of k))
   chart_eq (i : ULift.{u} (Fin 2)) :

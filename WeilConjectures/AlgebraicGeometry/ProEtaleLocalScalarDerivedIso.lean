@@ -179,7 +179,6 @@ There is no adic, perfectness, boundedness or finiteness assumption.
 Source: Stacks Project, Cohomology on Sites, Tags 06YY and 0G7E
 (derived pullback and pullback of K-flat complexes), and Tag 0E8K
 (restriction of K-flat complexes).
-(auxiliary; not a blueprint node).
 
 Proof: let R' and B' be the inverse images of R and the constant ring B.
 The module inverse image to R' and restriction to U are exact. Resolve each complex

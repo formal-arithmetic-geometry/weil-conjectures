@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Localization.LocallySmall
 /-! # Comparison data for inverse image opens of a union
 
 Source: Stacks Project, Tag 08BW; canonical restriction diagram.
-(blueprint: lem-sc-open-union-restriction-comparison-data).
 -/
 
 @[expose] public section
@@ -85,7 +84,6 @@ set_option maxHeartbeats 400000 in
 -- Transporting three localizations and their dependent comparison witnesses needs this limit.
 /-- Comparison equivalences and restriction isomorphisms on the three inverse image opens.
 Source: Stacks Project Tag 08BW, canonical restriction diagram.
-(blueprint: lem-sc-open-union-restriction-comparison-data).
 
 Proof: The image of U under the union inclusion is W, since W is contained in the union;
 likewise the image of T is V and the image of their intersection is W intersect V.

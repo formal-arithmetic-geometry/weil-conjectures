@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.ZariskiDescent
 
 /-! # Restricting a conjugated transition to an iterated overlap
 
-Source: Stacks Project, Tag 01ZR (2), first proof, and Tag 0095.
-(blueprint: lem-pc-overlap-conjugate-restriction). -/
+Source: Stacks Project, Tag 01ZR (2), first proof, and Tag 0095. -/
 
 @[expose] public section
 
@@ -32,8 +31,6 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- The comparison of tensor and abstract inverse image determined by their adjunctions.
 Source: Stacks Project, Tag 0096.
-(blueprint: lem-pc-overlap-conjugate-restriction). 
-(blueprint: lem-pc-overlap-conjugate-restriction-explicit)
 -/
 @[irreducible]
 def overlapAdjunctionComparison {X Y : Scheme.{u}} (p : X ⟶ Y) :
@@ -44,8 +41,6 @@ def overlapAdjunctionComparison {X Y : Scheme.{u}} (p : X ⟶ Y) :
 
 /-- The direct model comparison with prescribed chart projections.
 Source: Stacks Project, Tags 0095 and 0096.
-(blueprint: lem-pc-overlap-conjugate-restriction). 
-(blueprint: lem-pc-overlap-conjugate-restriction-explicit)
 -/
 @[irreducible]
 def overlapDirectModelComparison {H H₀ A B : Scheme.{u}}
@@ -59,8 +54,6 @@ def overlapDirectModelComparison {H H₀ A B : Scheme.{u}}
 
 /-- The stage model comparison with prescribed chart projections.
 Source: Stacks Project, Tags 0095 and 0096.
-(blueprint: lem-pc-overlap-conjugate-restriction). 
-(blueprint: lem-pc-overlap-conjugate-restriction-explicit)
 -/
 @[irreducible]
 def overlapStageModelComparison {K H H₀ A B : Scheme.{u}}
@@ -76,8 +69,6 @@ def overlapStageModelComparison {K H H₀ A B : Scheme.{u}}
 
 /-- The part of the iterated comparison preceding the component isomorphism.
 Source: Stacks Project, Tag 0095.
-(blueprint: lem-pc-overlap-conjugate-restriction). 
-(blueprint: lem-pc-overlap-conjugate-restriction-explicit)
 -/
 def overlapIteratedRestrictionIso {X Y Z : Scheme.{u}} (U : X.OpenCover.{u})
     (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t)
@@ -92,8 +83,6 @@ def overlapIteratedRestrictionIso {X Y Z : Scheme.{u}} (U : X.OpenCover.{u})
 
 /-- Comparison from a model restriction to the iterated chart restriction.
 Source: Stacks Project, Tag 0095, composition of inverse images.
-(blueprint: lem-pc-overlap-conjugate-restriction). 
-(blueprint: lem-pc-overlap-conjugate-restriction-explicit)
 -/
 def overlapDirectRestrictionIso {X Y Z H : Scheme.{u}} (U : X.OpenCover.{u})
     (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t)
@@ -119,8 +108,6 @@ def overlapDirectRestrictionIso {X Y Z H : Scheme.{u}} (U : X.OpenCover.{u})
 
 /-- The explicit conjugation of a transition on a direct model overlap.
 Source: Stacks Project, Tag 01ZR (2), first proof.
-(blueprint: lem-pc-overlap-conjugate-restriction). 
-(blueprint: lem-pc-overlap-conjugate-restriction-explicit)
 -/
 @[irreducible]
 def overlapConjugatedTransition {X Z H : Scheme.{u}} (U : X.OpenCover.{u})
@@ -372,7 +359,6 @@ private theorem pair_square_native
 A pair morphism whose base change is this restricted conjugate satisfies the pair square.
 There is no tensor stage morphism or recovery hypothesis in this statement.
 Source: Stacks Project, Tag 01ZR (2), first proof, and Tag 0095.
-(blueprint: lem-pc-overlap-conjugate-restriction-explicit).
 
 Proof: Substitute the equation naming the conjugated transition. Expand the two
 direct restriction isomorphisms. Naturality moves the

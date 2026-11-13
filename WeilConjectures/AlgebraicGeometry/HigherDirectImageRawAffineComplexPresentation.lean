@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.RestrictedAffineComplexSystem
 /-! # Complex presentation of raw restricted cohomology
 
 Source: Stacks Project, Tags 03Q8 and 09Z1.
-(blueprint: lem-sbc-higher-direct-image-raw-affine-complex-presentation).
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ namespace AlgebraicGeometry.Etale
 /-- Existence of input data for complex continuity, together with identifications of its cocone with
 specified groups and maps. This proposition does not assert that the cohomology cocone is a
 colimit, or that its legs represent every class. The coefficient cocone `L` is a colimit
-of complexes; cohomology need not preserve it without the geometric continuity theorem. 
-(blueprint: lem-sbc-higher-direct-image-raw-affine-complex-presentation)
+of complexes; cohomology need not preserve it without the geometric continuity theorem.
 -/
 inductive RawCohomologyComplexPresentation
     (J : Type v) [SmallCategory J] (A : Jᵒᵖ → AddCommGrpCat.{v + 1})
@@ -127,7 +125,6 @@ cohomology cocone of uniformly bounded-below complexes on a qcqs inverse system.
 Source: Stacks Project, Tag 09Z1 (base change to an affine etale object and the
 restricted-cohomology system), Tag 03Q8 (derived Hom computes restricted cohomology),
 and Tag 0EZM (the canonical complex cohomology maps).
-(blueprint: lem-sbc-higher-direct-image-raw-affine-complex-presentation).
 
 Proof: Apply exists_restricted_affine_complex_system to the geometric and coefficient
 system. It supplies the qcqs limiting diagram, single-complex transitions, common

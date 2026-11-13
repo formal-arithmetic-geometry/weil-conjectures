@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.Sites.FinitarySliceEnoughPoints
 /-!
 # Enough points of the small pro-étale topos
 
-Source: Stacks Project, Pro-étale Cohomology, Tag 0992, `lemma-points-proetale`
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Pro-étale Cohomology, Tag 0992, `lemma-points-proetale`.
 -/
 
 @[expose] public section
@@ -131,8 +130,7 @@ private theorem representables_cover
 
 
 /-- The small pro-étale topos of any scheme has a set-indexed conservative family
-of points. Source: Stacks Project, Tag 0992, `lemma-points-proetale`
-(auxiliary; not a blueprint node).
+of points. Source: Stacks Project, Tag 0992, `lemma-points-proetale`.
 
 The site has objects in universe `u + 1` and morphisms in universe `u`; sheaves
 and points take values in `Type (max (u + 1) v)`, allowing any compatible larger

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteSurjectiveSetDescentLocalLifts
 /-! # Lifting compatible sections along a finite surjective morphism
 
 Source: Stacks Project, Étale Cohomology, Remark 09Z3 and Lemma 09Z2.
-(blueprint: lem-weil-pbc-sets-finite-surjective-descent-equalizer).
 -/
 
 @[expose] public section
@@ -69,7 +68,6 @@ private theorem lift_of_covering_image
   exact Presheaf.app_localPreimage φ.hom s i hi
 
 /-- Source: Stacks Project, Étale Cohomology, Remark 09Z3, following Lemma 09Z2.
-(blueprint: lem-weil-pbc-sets-finite-surjective-descent-equalizer).
 Every compatible section is in the image of the unit.
 
 Proof:
@@ -80,8 +78,8 @@ Proof:
    the canonical fibre-product pasting isomorphism. Naturality of units and of
    the comparisons makes these maps morphisms of sheaves.
 3. Their sectionwise equalizer E is a sheaf. The composition-unit equation shows
-   the unit G → A equalizes these two morphisms, hence factors as ψ : G → E.
-4. Fix a geometric point x : Spec Ω → X. Its set P of lifts to X' is nonempty:
+   the unit G → A equalizes these two morphisms, hence factors as ψ: G → E.
+4. Fix a geometric point x: Spec Ω → X. Its set P of lifts to X' is nonempty:
    lift the underlying point using surjectivity, then use finite geometric-point
    lifting. Lifts to D correspond to P × P by the pullback universal property.
 5. Finite pushforward stalks and the inverse-image germ bijection identify A_x

@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 Source: Stacks Project, More on Morphisms, Tag 0BF2, final paragraph;
 Tag 0BF1, final topological argument, and Modules, Tag 01CY.
-(blueprint: lem-sc-proper-fibre-generator-pullback-locus)
 -/
 
 @[expose] public section
@@ -30,13 +29,13 @@ on an open neighbourhood, universally for all schemes mapping into that neighbou
 This assertion does not involve H1, a collection of comparison families, or Picard loci.
 
 Source: Stacks Project, More on Morphisms, Tags 0BF1 and 0BF2, final proof paragraphs;
-Modules, Tag 01CY. (blueprint: lem-sc-proper-fibre-generator-pullback-locus)
+Modules, Tag 01CY.
 
-Proof: Let p : X_W -> W be the base change of f and M the pullback of L. Uniqueness
+Proof: Let p: X_W -> W be the base change of f and M the pullback of L. Uniqueness
 of left adjoints compares tensor pullback with the usual pullback, so M is invertible.
 The nonvanishing locus D of sigma is open by Tag 01CY. Its complement C is closed.
 Properness of p makes p(C) closed, and the fibre hypothesis says w is not in p(C).
-Set V = W minus p(C). For h : T -> W with image in V, construct q : X_T -> X_W by
+Set V = W minus p(C). For h: T -> W with image in V, construct q: X_T -> X_W by
 the pullback universal property. Its second projection is the composite of the map
 X_T -> T with h. Consequently q has image in D, so q inverse(D) is the whole X_T.
 The unique division assertion of Tag 01CY makes sigma a free generator on D.

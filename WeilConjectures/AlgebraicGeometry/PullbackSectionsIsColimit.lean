@@ -29,14 +29,13 @@ The diagram and its coherence are supplied as hypotheses; the conclusion is sole
 universal property, rather than the elementwise clauses of the parent statement.
 
 Source: Stacks Project, Etale Cohomology, Theorem 09YQ (theorem-colimit), degree zero,
-as applied in Lemma 09YU (lemma-category-is-colimit), proof, Fully faithful.
-(blueprint: lem-weil-pbc-pullback-sections-is-colimit)
+as applied in Lemma 09YU, proof, Fully faithful.
 
 Proof: Restrict the scheme diagram to the directed tail i >= i0, which is nonempty
 and cofinal, with the same limit. Base change every stage along V0 -> X_i0. The resulting
 V_i and V are affine, since the transitions and limit projections are affine and V0 is
 affine; base change of the scheme limit identifies V with their inverse limit. Put
-w_i : V_i -> X_i0 and F_i = w_i inverse image of G. Their composition comparisons give
+w_i: V_i -> X_i0 and F_i = w_i inverse image of G. Their composition comparisons give
 transition isomorphisms. On V these sheaves all identify with w inverse image of G;
 associativity identifies the transitions with identities. The constant connected diagram
 has that sheaf as its colimit. Forget to abelian sheaves, compatibly with inverse-image

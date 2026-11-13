@@ -15,7 +15,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- (blueprint: lem-weil-pbc-sets-finite-pushforward-stalk-map-bijective)
+/--
 The substantive restriction-of-germs bijection in the finite pushforward stalk formula,
 assuming finiteness of the geometric fibre.
 

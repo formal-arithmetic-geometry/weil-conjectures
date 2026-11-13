@@ -17,8 +17,7 @@ import WeilConjectures.RingTheory.ArtinSchreierKernel
 # Frobenius-fixed global sections of arbitrary schemes
 
 Source: Stacks Project, Etale Cohomology, Tag 0A3J, `section-artin-schreier`, opening
-Artin–Schreier exact sequence; the current blueprint, `lem-fd-as-cover`, automorphism paragraph
-(blueprint: lem-fd-frobenius-fixed-sections).
+Artin–Schreier exact sequence; the current, automorphism paragraph.
 
 ## Main statements
 
@@ -251,23 +250,17 @@ scheme on which `p` vanishes. The existential subring has exactly the carrier `e
 restriction clause specifies the canonical gluing map, rather than an arbitrary equivalence.
 The scalar `a.val` denotes the canonical constant `a · 1`, including in the zero section ring.
 Source: Stacks Project, Etale Cohomology, Tag 0A3J, `section-artin-schreier`,
-opening exact sequence;
-blueprint `lem-fd-as-cover`, automorphism paragraph.
-(blueprint: lem-fd-frobenius-fixed-sections)
+opening exact sequence, automorphism paragraph.
 
 Proof:
 1. The finitely many open fibres of a locally constant function are also closed and disjoint.
-   Glue their constant sections by the structure-sheaf axiom
-   [def-weil-locally-ringed-space-morphism]. The field calculation
-   [lem-sc-field-artin-schreier-kernel] gives `a ^ p = a`; restriction and sheaf uniqueness show
+   Glue their constant sections by the structure-sheaf axiom. The field calculation gives `a ^ p = a`; restriction and sheaf uniqueness show
    that the glued section is fixed by the p-th power map, including on empty fibres.
-2. At a point, the stalk of a fixed section is a nonzero local ring
-   [def-weil-locally-ringed-space-morphism, def-weil-pbc-module-stalk] in which `p = 0`, and the
-   germ is fixed by the p-th power map. The local-ring Artin–Schreier kernel
-   [lem-sc-local-ring-artin-schreier-kernel] gives a unique prime-field constant equal to it.
-3. Equality of germs means equality on a smaller neighbourhood [def-weil-pbc-module-stalk], so
+2. At a point, the stalk of a fixed section is a nonzero local ring in which `p = 0`, and the
+   germ is fixed by the p-th power map. The local-ring Artin–Schreier kernel gives a unique prime-field constant equal to it.
+3. Equality of germs means equality on a smaller neighbourhood, so
    the unique pointwise constants define a locally constant function. Equality of sections from
-   equality of germs [lem-weil-pbc-sheaf-sections-determined-by-germs] shows that it is inverse
+   equality of germs shows that it is inverse
    to the gluing map. No reducedness assumption is used.
 4. The sections with `e ^ p = e` form a subring: Frobenius additivity is checked in each stalk,
    which has characteristic `p`. Gluing is a ring homomorphism into it because the prime-field
@@ -276,7 +269,7 @@ Proof:
    fibre-restriction clause follow by comparing germs. On the empty scheme both rings are
    singleton.
 5. For a scheme morphism, the germ of a pulled-back section is the stalk map applied to the germ
-   of the section [def-weil-locally-ringed-space-morphism]; stalk maps are unital ring maps, so
+   of the section; stalk maps are unital ring maps, so
    both sides of the naturality formula have germ `b (v x)` at `x`. Germs determine sections. -/
 theorem exists_frobeniusFixedSections_ringEquiv (p : ℕ) (hp : p.Prime) :
     ∃ S : (W : Scheme.{u}) → (p : Γ(W, ⊤)) = 0 → Subring Γ(W, ⊤),

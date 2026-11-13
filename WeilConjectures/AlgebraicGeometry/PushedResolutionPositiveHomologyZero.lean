@@ -62,9 +62,8 @@ private theorem locallyInjective_zero_of_iso
 
 /-- Positive homology of the pushed injective resolution is zero.
 
-Source: Stacks Project, Cohomology on Sites, Tag 072W (lemma-higher-direct-images),
+Source: Stacks Project, Cohomology on Sites, Tag 072W,
 proof; the local-vanishing hypothesis is the acyclicity condition of Tag 0733(1).
-(blueprint: lem-weil-pbc-pushed-resolution-positive-homology-zero)
 
 Proof: use the natural injective-resolution comparison for object cohomology,
 lifting the Ext groups and section-complex homology to a common universe.

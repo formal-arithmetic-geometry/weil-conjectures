@@ -10,7 +10,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 /-! # Integral reduction as a derived tensor functor
 
 Source: Bhatt--Scholze, Lemma 6.5.9(3), and the definition of derived extension
-of scalars (auxiliary; not a blueprint node).
+of scalars.
 -/
 
 @[expose] public section

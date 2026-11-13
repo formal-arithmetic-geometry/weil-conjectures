@@ -25,8 +25,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 /-! # Intrinsic completion over the completed coefficient sheaf
 
-Source: blueprint, proper base change, order 1247; Stacks Tags 099M and 091Z
-(blueprint: def-weil-pbc-intrinsic-completion).
+Source: blueprint, proper base change, order 1247; Stacks Tags 099M and 091Z.
 
 The ring and tensor product are those of Mod(A_T), with site object universe t+1
 and morphism universe t. The mapping cocone of minus (1-shift) has differential
@@ -61,12 +60,12 @@ variable {M : Type*} [Category* M] [Preadditive M] [MonoidalCategory M]
 end TensorUnits
 
 /-- Constant A-modules extended to the actual completed coefficient sheaf.
-Source: order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+Source: order 1247. -/
 def completedKoszulConstant : ModuleCat.{t + 1} A ⥤ adicDatumModules X d :=
   adicLisseConstantModules X A ⋙ completedConstantExtension X (adicDatumScalar X d)
 
 /-- Constant module sheafification and scalar extension are additive.
-Source: order 1247 (blueprint: def-weil-pbc-intrinsic-completion).
+Source: order 1247.
 Proof: addition and zero hold on the constant presheaves, then on their sheafification;
 scalar extension is additive by its specified tensor/restriction adjunction. -/
 theorem completedKoszulConstant_additive : (completedKoszulConstant X d).Additive := by
@@ -80,7 +79,7 @@ attribute [instance] completedKoszulConstant_additive
 
 /-- The completed unit is the image of 1 tensor 1 in the extended constant module.
 The section formula uniquely determines it, including over the empty scheme.
-Source: order 1247 (blueprint: def-weil-pbc-intrinsic-completion).
+Source: order 1247.
 Proof: maps from the regular module correspond to global sections. The compatible
 section 1 tensor 1 gives the map and determines it uniquely by linearity. -/
 theorem completedKoszulOne_exists :
@@ -121,7 +120,7 @@ theorem completedKoszulOne_exists :
         (M.unitHomEquiv.apply_symm_apply s)).symm
 
 /-- The canonical degree-zero unit of the extended Koszul complex.
-Source: order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+Source: order 1247. -/
 def completedKoszulOne := (completedKoszulOne_exists X d).exists.choose
 
 section Descent

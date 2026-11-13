@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.DescentNormAffineShrinking
 # Invariant affine neighbourhoods for finite locally free descent
 
 Source: Stacks Project, Groupoid Schemes, Tags 0H8K and 03JE; Algebra, Tag 00DS.
-(blueprint: lem-pd-invariant-affine-neighbourhoods).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ namespace CategoryTheory.Over.DescentDatum
 
 /-- Every point has an affine neighbourhood invariant under transport, lying over an affine
 open of the base. Source: Stacks Project, Tags 0H8K, 03JE and 00DS.
-(blueprint: lem-pd-invariant-affine-neighbourhoods).
 
 Proof: Choose an affine neighbourhood B of the image of v in Y and restrict X and V
 above B. The transport defines a groupoid on V; both projections are finite locally

@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 /-! # The pointwise multiplication morphism of twists
 
 Source: Stacks Project, Constructions, Equation 27.10.1.1 and Tag 01MS.
-(blueprint: lem-sc-p1-twist-product-morphism).
 -/
 
 @[expose] public section
@@ -41,7 +40,6 @@ private theorem exists_tensorHom (X : Scheme.{u}) (F G H : X.Modules)
 
 Source: Stacks Project, Constructions, Equation 27.10.1.1 and Tag 01MS;
 Step 2 of lem-sc-p1-twist-multiplication.
-(blueprint: lem-sc-p1-twist-product-morphism).
 
 Proof: For each open U multiply two twisting sections pointwise in each prime
 localization. Their product has degree n+m, by the graded multiplication rule.

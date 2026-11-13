@@ -79,7 +79,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
 /-- A map from an integral bounded constructible complex to a sequential colimit of
 complexes with a common cohomological lower bound factors through a finite stage.
 Source: Bhatt--Scholze, Lemma 6.8.12, with the sequential telescope argument.
-(auxiliary; not a blueprint node)
 
 Proof. Lift the sequence along the equivalence with AsSmall(ℕ), preserving its
 colimit cocone and common lower bound. Shifted Hom continuity is known for each

@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
 /-! # The single complex of coefficients restricted from W
 
 Source: Stacks Project, Tags 03Q8 and 09Z1, cohomology of restricted coefficients.
-(blueprint: def-sbc-higher-image-raw-over-complex).
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The restricted coefficient sheaf placed in degree zero, shared by raw pullback
 and its comparison. This is the actual single complex, with no choices added.
-Source: Stacks Project, Tags 03Q8 and 09Z1.
-(blueprint: def-sbc-higher-image-raw-over-complex). -/
+Source: Stacks Project, Tags 03Q8 and 09Z1. -/
 noncomputable def higherDirectImageRawOverComplex
     (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (B : Over W) :
@@ -35,7 +33,6 @@ noncomputable def higherDirectImageRawOverComplex
 
 /-- The shared complex is the original restricted single complex.
 Source: Stacks Project, Tags 03Q8 and 09Z1.
-(blueprint: def-sbc-higher-image-raw-over-complex).
 Proof: Unfold the concrete construction; both sides are the same single complex. -/
 theorem higherDirectImageRawOverComplex_eq
     (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}

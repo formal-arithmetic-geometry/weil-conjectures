@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomOpenRestrictedQCoh
 
 The compatibility at identity morphisms determines compatibility at every testing morphism.
 Source: Stacks Project, Tags 079W, 08FE and 09RE.
-(blueprint: lem-pc-perfect-hom-open-restricted-data).
 -/
 
 @[expose] public section
@@ -53,8 +52,7 @@ Source: Stacks Tags 079W and 09RE.
 Proof: express each natural Hom equivalence at f by its value on the identity of
 F_j. Apply restriction-map naturality to the original expression and use the
 supplied identity equation. Independent representing data without that equation
-need not agree; this hypothesis repairs the earlier false universal assertion.
-(blueprint: new-perfect-hom-open-restricted-stage-pinned). -/
+need not agree; this hypothesis repairs the earlier false universal assertion. -/
 theorem perfect_hom_open_restricted_stage_pinned
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))
@@ -83,8 +81,7 @@ theorem perfect_hom_open_restricted_stage_pinned
 Source: Stacks Tags 079W and 09RE.
 Proof: use testing-object naturality at f and the identity of d.pt on each side,
 then restriction-map naturality and the supplied apex identity equation.
-This statement makes no assertion about independently chosen unpinned data.
-(blueprint: new-perfect-hom-open-restricted-limit-pinned). -/
+This statement makes no assertion about independently chosen unpinned data. -/
 theorem perfect_hom_open_restricted_limit_pinned
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))
@@ -110,8 +107,7 @@ theorem perfect_hom_open_restricted_limit_pinned
 
 /-- Combine the identity-normalized stage and apex equations.
 Source: Stacks Tags 079W and 09RE.
-Proof: apply the two naturality lemmas to the supplied identity equations.
-(blueprint: lem-pc-perfect-hom-open-restricted-data-pinned). -/
+Proof: apply the two naturality lemmas to the supplied identity equations. -/
 theorem perfect_hom_open_restricted_data_pinned
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))
@@ -148,12 +144,11 @@ testing objects to the concrete perfectHomOpenRestrictionMap. These equations sp
 which restriction of the original representing equivalences is used.
 
 Source: Stacks Project, Cohomology, Tags 079W and 08FE; perfect.tex, Tag 09RE.
-(blueprint: lem-pc-perfect-hom-open-restricted-data).
 
 Proof: For the supplied adjunction a, set sigma =
 (conjugateIsoEquiv a (schemeMVAdjunction Y B)).symm (Iso.refl _).
-Thus sigma : L -> LB.ι* is the mate of the identity on the common right adjoint.
-For any r : T -> Spec(R_i), let b_r be perfectHomOpenBaseChangeMap s B r,
+Thus sigma: L -> LB.ι* is the mate of the identity on the common right adjoint.
+For any r: T -> Spec(R_i), let b_r be perfectHomOpenBaseChangeMap s B r,
 p = pullback.fst s r and p' = pullback.fst (B.ι followed by s) r. Its fst equation
 is b_r followed by p = p' followed by B.ι. The concrete comparison kappa_r is
 perfectHomComposition b_r p, followed by eqToIso of that fst equation, followed
@@ -164,7 +159,7 @@ kappa_r(Q).hom: this is exactly perfectHomOpenRestrictionMap s B r a f.
 Write L for restriction to B, pi_j for the original projection, A_j for
 Lpi_j*, and J_j = Rpi_j* A_j Q. Choose the derived adjunction a_j of Tag 079W
 compatible with the fixed pullback counit and direct-image unit. Its equivalence is
-eta_j(M) : Hom(A_j M,A_j Q) -> Hom(M,J_j). Define
+eta_j(M): Hom(A_j M,A_j Q) -> Hom(M,J_j). Define
 rho_j = eta_j(F_j)(h.stageEquiv j F_j (id)). Its inverse is
 (h.stageEquiv j J_j).symm (eta_j(J_j).symm (id)). Naturality in M of eta_j and
 h.stageEquiv proves eta_j(M)(h.stageEquiv j M f) = f followed by rho_j.
@@ -172,7 +167,7 @@ Applying this identity to rho_j and its proposed inverse proves both inverse law
 Do the same at the apex, using h.limitEquiv and h.limitNatural.
 
 Put U_j = pi_j inverse-image B and v_j = pi_j restricted to B. Restriction gives
-L rho_j : L F_j -> L J_j. Compose it with the component of the explicitly
+L rho_j: L F_j -> L J_j. Compose it with the component of the explicitly
 constructed schemeMVOpenRestrictionComparison pi_j B at A_j Q. This identifies
 L J_j with Rv_j* (restriction to U_j of A_j Q). The cartesian square identifies
 U_j.toScheme with the pullback of B.ι followed by s along the same ring map:
@@ -188,7 +183,7 @@ The inverse-image comparison is the composite of these two composition
 isomorphisms and the equality of the square's morphisms, not an arbitrary iso.
 Transport direct image across k_j using the right-derived composition comparison
 and the identity comparison; k_j is an isomorphism, so its adjunction counit is
-invertible. We obtain a representing isomorphism sigma_j : L F_j ->
+invertible. We obtain a representing isomorphism sigma_j: L F_j ->
 Rpi'_j* (Lpi'_j* (L Q)). Repeat this construction at the apex to obtain sigma_inf.
 
 For every M on B, define the new stage equivalence by postcomposition with sigma_j,

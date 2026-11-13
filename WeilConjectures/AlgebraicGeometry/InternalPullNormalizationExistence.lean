@@ -81,7 +81,7 @@ private def compositeScalarCounit (a : Λ ⟶ Λ') [IsMonHom a]
 
 /-- A normalized scalar/geometric pullback comparison exists for every morphism.
 (1);
-Stacks Tags 0D6D, 0G7E, 07A6 (auxiliary; not a blueprint node).
+Stacks Tags 0D6D, 0G7E, 07A6.
 Proof: compare the two composite ordinary pullback functors by the specified coefficient
 pullback isomorphism, construct both derived counits, and apply the K-flat universal
 characterization. Geometric pullback preserves K-flat complexes; cancellation of the

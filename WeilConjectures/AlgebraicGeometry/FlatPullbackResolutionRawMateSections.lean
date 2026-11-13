@@ -73,7 +73,6 @@ set_option maxHeartbeats 200000 in
 -- Comparing section and pushforward functor interfaces involves identity scalar restriction.
 /-- The homology mate on a fixed pair of resolution complexes acts on raw section classes.
 Source: Stacks Project, Cohomology, Tags 02N7 and 01E4.
-(blueprint: lem-weil-pbc-flat-pullback-resolution-raw-mate-sections).
 
 Proof: Apply the degreewise adjunction unit to a cycle of the source section complex.
 Naturality for the cycle inclusion identifies the resulting section with the unit on

@@ -36,8 +36,7 @@ so it factors through the local image. Finite-cover descent shows that x restric
 factors through the local image on V. These factorizations give the defining inequalities
 for the qcqs local image. Thus x factors through this subobject and is the required
 amalgamation. Uniqueness follows from monicity of the inclusion and uniqueness in G.
-Empty objects and empty finite covering families are included by the same proof.
-(auxiliary; not a blueprint node). -/
+Empty objects and empty finite covering families are included by the same proof. -/
 theorem qcqsLocalImage_isSheaf
     {F G : Sheaf X.smallEtaleTopology A} (p : F ⟶ G) :
     Presheaf.IsSheaf X.smallEtaleTopology (qcqsLocalImagePresheaf p) := by

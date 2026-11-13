@@ -17,8 +17,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 /-!
 # A finite unramified morphism with one purely inseparable fibre point is locally a closed immersion
 
-Source: Stacks Project, Etale Morphisms, Lemma 04DG
-(blueprint: lem-weil-pbc-finite-unramified-one-point-closed).
+Source: Stacks Project, Etale Morphisms, Lemma 04DG.
 -/
 
 @[expose] public section
@@ -71,11 +70,10 @@ private theorem isIso_asFiberHom_of_unique_unramified
       exact isOpen_univ⟩
   exact (isIso_iff_isOpenImmersion_and_surjective _).mpr ⟨this, ⟨hsurj⟩⟩
 
-/-- Let `π : X ⟶ S` be finite and unramified. If `x` is the unique point of the fibre over
+/-- Let `π: X ⟶ S` be finite and unramified. If `x` is the unique point of the fibre over
 `s` and the residue-field extension at `x` over `s` is purely inseparable, then `π` is a
 closed immersion after restriction to some open neighbourhood of `s`.
-Source: Stacks Project, Etale Morphisms, Lemma 04DG
-(blueprint: lem-weil-pbc-finite-unramified-one-point-closed).
+Source: Stacks Project, Etale Morphisms, Lemma 04DG.
 
 Proof:
 1. Unramifiedness passes to the fibre by Mathlib base-change stability. Its local rings

@@ -163,7 +163,6 @@ private theorem tensor_compat_iso {X Y Z : Scheme.{u}}
 /-- Factorization of one canonical chart comparison through the stage model.
 Source: Stacks Project, Tags 0095, 0096 and 0097 (composition of inverse images and
 uniqueness of their adjunction comparisons); Tag 01ZR (2), first proof.
-(blueprint: lem-pc-overlap-model-chart-factorization).
 
 Proof: Expand the direct and stage model comparisons. The tensor composition
 comparison followed by the comparisons from tensor to abstract pullback equals

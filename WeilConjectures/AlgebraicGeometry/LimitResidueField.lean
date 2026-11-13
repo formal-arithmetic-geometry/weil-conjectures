@@ -12,8 +12,7 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 /-!
 # Residue fields at points of inverse limits
 
-Source: Stacks Project, Limits, Lemma 0CUG (1)
-(blueprint: lem-weil-pbc-limit-residue-field).
+Source: Stacks Project, Limits, Lemma 0CUG (1).
 -/
 
 @[expose] public section
@@ -170,8 +169,7 @@ with the canonical maps into the original schemes. `HEq` identifies the actual c
 maps despite the equal, but not definitionally equal, image points in their source types.
 No arbitrary transition or projection maps are allowed by these identifications.
 
-Source: Stacks Project, Limits, Lemma 0CUG (1)
-(blueprint: lem-weil-pbc-limit-residue-field).
+Source: Stacks Project, Limits, Lemma 0CUG (1).
 
 Proof:
 1. Transport each canonical residue map along the cone identity. Residue-map

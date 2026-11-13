@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.DQCoheratorDerivedGlobalSections
 /-! # Global Hom adjunction with independent localization universes
 
 Source: Stacks Project, Tag 0B6I, lemma-iso-global-hom.
-(blueprint: lem-sc-mixed-global-hom-adjunction-isIso).
 -/
 
 @[expose] public section
@@ -46,7 +45,7 @@ def mixedHomDirectImageComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 /-- The canonical global direct-image Hom comparison: Leray followed by the
 internal-Hom comparison defined by the evaluation mate equation.
-Source: Stacks, Tag 0B6I (blueprint: lem-pc-global-hom-adjunction). -/
+Source: Stacks, Tag 0B6I. -/
 def mixedGlobalHomDirectImageMap {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : schemeDerivedCategory X) :
     (schemeGlobalScalarRestriction f).obj ((schemeGlobalDerivedHom X).obj (op P, Q)) ⟶
@@ -58,7 +57,7 @@ def mixedGlobalHomDirectImageMap {X Y : Scheme.{u}} (f : X ⟶ Y)
       ((mixedHomDirectImageComparison f).app (op P, Q))
 
 /-- The global Hom adjunction map is induced by the counit, not an arbitrary iso.
-Source: Stacks, Tag 0B6I (blueprint: lem-pc-global-hom-adjunction). -/
+Source: Stacks, Tag 0B6I. -/
 def mixedGlobalHomAdjunctionMap {X Y : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
     (f : X ⟶ Y)
@@ -79,7 +78,6 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- The canonical counit-induced global Hom adjunction is invertible with independent
 sheaf and global-ring localization universes.
 Source: Stacks Project, Tag 0B6I, lemma-iso-global-hom.
-(blueprint: lem-sc-mixed-global-hom-adjunction-isIso).
 
 Proof: the evaluation-mate internal Hom comparison followed by Hom of the counit
 becomes invertible after the quasi-coherator, by qcqsSheafRHomAdjunction. The coherator

@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.FormalFunctionsDegreeZeroCompatibility
 /-! # Degree-zero identifications for the formal fibre system
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 02OD, degree-zero specialization,
-and Cohomology, Tags 01E4 and 01FB
-(blueprint: lem-weil-pbc-formal-functions-degree-zero-dictionary).
+and Cohomology, Tags 01E4 and 01FB.
 -/
 
 @[expose] public section
@@ -35,8 +34,7 @@ namespace AlgebraicGeometry
 cohomology system of the pulled-back unit module is the system of global sections.
 The identifications carry the canonical stalk maps to section pullback on germs.
 Source: Stacks Project, Cohomology of Schemes, Lemma 02OD (degree zero); Cohomology,
-Tags 01E4 and 01FB
-(blueprint: lem-weil-pbc-formal-functions-degree-zero-dictionary).
+Tags 01E4 and 01FB.
 
 Proof: Direct image and global sections are left exact additive functors. Their
 augmentation maps to the zeroth right derived functors are natural isomorphisms:

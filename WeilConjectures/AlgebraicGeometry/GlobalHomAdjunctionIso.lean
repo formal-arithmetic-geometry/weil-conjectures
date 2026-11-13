@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.InternalHomMateCounitTransport
 /-!
 Canonical adjunction and tensor data are pinned by their characterising equations.
  # Canonical global Hom adjunction
-Source: Stacks Project, duality.tex, Tag 0B6I (lemma-iso-global-hom).
-(blueprint: lem-pc-global-hom-adjunction).
+Source: Stacks Project, duality.tex, Tag 0B6I.
 -/
 
 @[expose] public section
@@ -53,7 +52,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 include hx hy in
 /-- Transpose evaluation with fixed natural tensor-Hom bijections.
-Source: Stacks, Tag 08I3 (blueprint: lem-pc-global-hom-adjunction). -/
+Source: Stacks, Tag 08I3. -/
 private theorem internalHomMate_exists :
     ∃ c : H ⋙ R ⟶ R.op.prod R ⋙ J,
       ∀ (L M : C) (A : D) (α : A ⟶ R.obj (H.obj (op L, M))),
@@ -144,7 +143,7 @@ variable {C : Type uC} [Category.{vC} C] [MonoidalCategory C]
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Build the tensor-Hom adjunction from the pinned natural bijections.
-Source: Stacks, Tag 08DJ (blueprint: lem-pc-global-hom-adjunction). -/
+Source: Stacks, Tag 08DJ. -/
 private def tensorAdjunctionCore (L : C) :
     Adjunction.CoreHomEquiv (tensorRight L) ((Functor.curry.obj H).obj (op L)) where
   homEquiv A M := (e A L M).symm
@@ -171,7 +170,7 @@ variable {C : Type uC} {D : Type uD} {E : Type uE} {B : Type uB}
   (R : C ⥤ D) (G : D ⥤ E) (GX : C ⥤ B) (S : B ⥤ E)
   (e : R ⋙ G ≅ GX ⋙ S)
 /-- Transport a natural comparison through a Leray isomorphism.
-Source: Stacks, Tag 0B6I (blueprint: lem-pc-global-hom-adjunction). -/
+Source: Stacks, Tag 0B6I. -/
 private theorem lerayNaturality {U U' : C} {V V' : D} (u : U ⟶ U') (v : V ⟶ V')
     (q : R.obj U ⟶ V) (q' : R.obj U' ⟶ V') (h : R.map u ≫ q' = q ≫ v) :
     S.map (GX.map u) ≫ e.inv.app U' ≫ G.map q' =
@@ -185,7 +184,7 @@ end LerayNaturality
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Derived Leray from acyclicity and an exact change of scalar category.
-Source: Stacks, Tag 0D5T (blueprint: lem-pc-global-hom-adjunction). -/
+Source: Stacks, Tag 0D5T. -/
 private theorem lerayCore
     {C D B E : Type*} [Category* C] [Category* D] [Category* B] [Category* E]
     [Abelian C] [Abelian D] [Abelian B] [Abelian E]
@@ -282,7 +281,7 @@ private theorem lerayCore
 
 
 /-- Exact restriction along the map on global functions.
-Source: Stacks, Tag 0B6I (blueprint: lem-pc-global-hom-adjunction). -/
+Source: Stacks, Tag 0B6I. -/
 def schemeGlobalScalarRestriction
     [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :=
@@ -291,8 +290,7 @@ def schemeGlobalScalarRestriction
     (S := (moduleRings X.toRingedSpace).obj.obj (op ⊤)) f.appTop.hom).mapDerivedCategory
 
 /-- The normalized Leray comparison with independent module and sheaf localization universes.
-Source: Stacks Tags 0D5T and 0B6I. Its derived-unit equation determines the comparison.
-(blueprint: lem-sc-mixed-global-sections-direct-image-iso). -/
+Source: Stacks Tags 0D5T and 0B6I. Its derived-unit equation determines the comparison. -/
 theorem exists_mixedGlobalSectionsDirectImageIso
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -349,7 +347,7 @@ theorem exists_mixedGlobalSectionsDirectImageIso
   rfl
 
 /-- The canonical derived Leray isomorphism, chosen with its unit compatibility.
-Source: Stacks, Tags 0B6I and 0D5T (blueprint: lem-pc-global-hom-adjunction). -/
+Source: Stacks, Tags 0B6I and 0D5T. -/
 def mixedGlobalSectionsDirectImageIso
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -368,7 +366,7 @@ variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)]
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The same pinned derived adjunction as the canonical base-change map.
-Source: Stacks, Tags 079W and 0B6I (blueprint: lem-pc-global-hom-adjunction). -/
+Source: Stacks, Tags 079W and 0B6I. -/
 def schemeHomPullbackAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     derivedPullback f ⊣ schemeDerivedDirectImage f :=
   Classical.choose (exists_schemeDerivedAdjunction f
@@ -384,8 +382,7 @@ On K-flat representatives, tensor, pullback, localization tensor maps and the sh
 left-derived counits are invertible. The canonical coordinate equation thus makes
 its components invertible. K-flat resolutions and naturality transport invertibility
 to arbitrary objects. Package these components as a natural isomorphism.
-Source: Stacks Tags 079U and 0B6I
-(blueprint: lem-sc-mixed-hom-tensor-pullback-iso). -/
+Source: Stacks Tags 079U and 0B6I. -/
 theorem exists_mixedHomTensorPullbackIso {T S : Scheme.{u}} (h : T ⟶ S) :
     ∃ t : tensor (schemeDerivedCategory S) ⋙ derivedPullback h ≅
       (derivedPullback h).prod (derivedPullback h) ⋙ tensor (schemeDerivedCategory T),
@@ -413,7 +410,7 @@ def mixedHomTensorPullbackIso {T S : Scheme.{u}} (h : T ⟶ S) :
 
 omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
 /-- Naturality of the fixed family, isolated from its representative equation.
-Source: Stacks, Tag 08DJ (blueprint: lem-pc-global-hom-adjunction). -/
+Source: Stacks, Tag 08DJ. -/
 private theorem schemeHomTensorHom_naturality (X : Scheme.{u})
     (A A' L L' M M' : schemeDerivedCategory X)
     (a : A' ⟶ A) (b : L' ⟶ L) (d : M ⟶ M')
@@ -430,7 +427,7 @@ omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
 Fixed-data form of the existing `exists_derivedDirectImage_internalHom_comparison`,
 using the pinned tensor-Hom family.
 All adjunction and tensor data here are fixed, shared with the pullback comparison.
-Source: Stacks, Tags 08I3 and 0B6I (blueprint: lem-pc-global-hom-adjunction).
+Source: Stacks, Tags 08I3 and 0B6I.
 Proof: for every test object A transpose a map into Rf_* internal Hom by the
 pullback adjunction and tensor-Hom bijection. Pull back A tensor Rf_*L, apply the
 counit at L, then evaluation. Transpose back. This is natural in A, so Yoneda
@@ -468,7 +465,7 @@ omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
 /-- The fixed direct-image internal-Hom comparison also satisfies the mate equation
 when the pullback adjunction and tensor iso are transported together. In particular
 this applies to the unique change from the composition counit to the original one.
-Source: Stacks, Tags 08I3, 06YJ and 0B6I (blueprint: lem-pc-global-hom-adjunction).
+Source: Stacks, Tags 08I3, 06YJ and 0B6I.
 Proof: tensor-Hom naturality with identity maps in the last two variables gives
 naturality of evaluation in its test object. Apply the formal counit-transport
 calculation to identify the transported mate with the original mate. The defining
@@ -512,7 +509,7 @@ omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
 /-- Transporting the pinned adjunction along a counit comparison gives the
 representative Hom equation for the new counit. This can be applied to the
 original-counit comparison without choosing another adjunction.
-Source: Stacks, Tags 079W and 06YJ (blueprint: lem-pc-global-hom-adjunction).
+Source: Stacks, Tags 079W and 06YJ.
 Proof: the transported Hom equivalence precomposes by the comparison iso.
 The counit comparison equation replaces that composite by the composition counit.
 The recorded representative equation of the legacy adjunction gives the result. -/
@@ -546,7 +543,7 @@ theorem schemeHomPullbackAdjunction_counit_transport
 
 /-- The canonical global direct-image Hom comparison: Leray followed by the
 internal-Hom comparison defined by the evaluation mate equation.
-Source: Stacks, Tag 0B6I (blueprint: lem-pc-global-hom-adjunction). -/
+Source: Stacks, Tag 0B6I. -/
 def schemeGlobalHomDirectImageMap {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : schemeDerivedCategory X) :
     (schemeGlobalScalarRestriction f).obj ((schemeGlobalDerivedHom X).obj (op P, Q)) ⟶
@@ -558,7 +555,7 @@ def schemeGlobalHomDirectImageMap {X Y : Scheme.{u}} (f : X ⟶ Y)
       ((Classical.choose (exists_schemeHomDirectImageComparison f)).app (op P, Q))
 
 /-- The global Hom adjunction map is induced by the counit, not an arbitrary iso.
-Source: Stacks, Tag 0B6I (blueprint: lem-pc-global-hom-adjunction). -/
+Source: Stacks, Tag 0B6I. -/
 def schemeGlobalHomAdjunctionMap {X Y : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
     (f : X ⟶ Y)
@@ -577,7 +574,7 @@ def schemeGlobalHomAdjunctionMap {X Y : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The counit-induced global Hom adjunction is invertible, naturally in P and K.
-Source: Stacks, Tag 0B6I (blueprint: lem-pc-global-hom-adjunction).
+Source: Stacks, Tag 0B6I.
 Proof:
 1. The qcqs right adjoint supplies the counit (sheafy trace). The evaluation-mate
 comparison followed by internal Hom of this counit is invertible after DQ_Y, by
@@ -677,7 +674,7 @@ theorem schemeGlobalHomAdjunctionMap_isIso {X Y : Scheme.{u}}
 
 
 /-- The canonical global Hom adjunction iso.
-Source: Stacks, Tag 0B6I (blueprint: lem-pc-global-hom-adjunction). -/
+Source: Stacks, Tag 0B6I. -/
 def schemeGlobalHomAdjunctionIso {X Y : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
     (f : X ⟶ Y)

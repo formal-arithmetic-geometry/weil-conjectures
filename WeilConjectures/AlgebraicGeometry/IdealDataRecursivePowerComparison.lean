@@ -22,7 +22,6 @@ import Mathlib.CategoryTheory.Subobject.Basic
 /-! # Comparing ideal-data powers with recursive image powers
 
 Source: Stacks Project, Schemes, Tags 01I8 and 01IC, ideal products on affine opens.
-(blueprint: lem-pc-ideal-data-recursive-power-comparison)
 -/
 
 @[expose] public section
@@ -235,7 +234,6 @@ private theorem power_mono {X : Scheme.{u}} (I : X.IdealSheafData) (n : ℕ) :
 /-- Ideal-data powers are quasi-coherent and agree with recursive image powers.
 
 Source: Stacks Project, Schemes, Tags 01I8 and 01IC, ideal products on affine opens.
-(blueprint: lem-pc-ideal-data-recursive-power-comparison)
 
 Proof: The ideal module is quasi-coherent: locally on an affine it is the tilde
 module of the specified ideal. This applies to every ideal-data power. Both

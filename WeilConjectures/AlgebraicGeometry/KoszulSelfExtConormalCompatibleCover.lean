@@ -33,7 +33,6 @@ namespace AlgebraicGeometry
 family of neighborhoods, without gluing to an arbitrary prescribed neighborhood.
 
 Source: Stacks Project, Tag 0BQY, change of regular generators, and Tag 062I.
-(blueprint: new-s3-koszul-conormal-compatible-cover).
 
 Proof: Choose a regular affine chart around each point of V. Use its augmented
 Koszul resolution to compute derived Hom into the quotient. Its differential

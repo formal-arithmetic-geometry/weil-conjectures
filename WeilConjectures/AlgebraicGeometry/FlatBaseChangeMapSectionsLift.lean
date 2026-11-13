@@ -47,7 +47,7 @@ private theorem augmentedLift {C : Type u} [Category.{v} C] [Abelian C]
 namespace AlgebraicGeometry.Scheme.Modules
 universe uBC
 /-- An augmented flat-pushforward lift exists by degreewise extension into injectives.
-Source: Stacks, Tag 02N7. (blueprint: lem-weil-pbc-flat-base-change-lift)
+Source: Stacks, Tag 02N7.
 Extend in degree zero across the monic resolution augmentation. Its composite with
  the next differential vanishes on F, so exactness allows extension in degree one.
 Repeat using exactness in each positive degree and the equation d²=0. -/

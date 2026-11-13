@@ -21,7 +21,7 @@ import Mathlib.Data.Finset.Order
 # Descent of morphisms between perfect complexes
 
 Source: Stacks Project, Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE,
-used in Lemma 36.29.3, Tag 09RF (blueprint: lem-pc-perfect-descend-morphisms).
+used in Lemma 36.29.3, Tag 09RF.
 
 The shared coherent derived-pullback composition comparisons transport the stage map
 to the direct pullbacks of both objects. The equality clause uses a common starting stage for the
@@ -39,8 +39,7 @@ namespace AlgebraicGeometry
 /-- The recorded canonical composition comparison along a base-change map.
 This specializes the explicit composition lift from the original derived-pullback
 counits; it introduces no new pullback functor or independently selected comparison.
-Source: Stacks Project, Derived Categories of Schemes, Tag 09RE; Cohomology, Tag 0D5S
-(blueprint: lem-pc-perfect-descend-morphisms). -/
+Source: Stacks Project, Derived Categories of Schemes, Tag 09RE; Cohomology, Tag 0D5S. -/
 noncomputable abbrev perfectDescentComparison
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -68,8 +67,7 @@ private theorem homMap_eq_iff
 
 /-- Morphisms between perfect complexes descend, isomorphisms descend as isomorphisms,
 and finitely many equalities are eventually true at one common stage.
-Source: Stacks Project, Derived Categories of Schemes, Tag 09RE, used in Tag 09RF
-(blueprint: lem-pc-perfect-descend-morphisms).
+Source: Stacks Project, Derived Categories of Schemes, Tag 09RE, used in Tag 09RF.
 
 Proof: `recorded_perfect_hom_continuity` isolates the affine calculation and quasi-compact-open
 induction of Tag 09RE. Apply its surjectivity clause to lift a morphism. If the morphism

@@ -164,8 +164,7 @@ omitting h(t). On its open complement the direct image of either F is zero.
 Its pullback along h is zero, and the base-changed projection also has empty
 inverse image over the inverse-image open. Hence both stalks are zero and
 both finranks are zero, regardless of the r and s selected by hR on empty
-preimages. This handles rank zero as well; empty T' has no point to check.
-(blueprint: lem-sc-picard-base-change-stalk-finrank-eq) -/
+preimages. This handles rank zero as well; empty T' has no point to check. -/
 theorem picardRankMatch_baseChange_stalk_finrank_eq {X S T : Scheme.{u}} (f : X ⟶ S)
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]
     (E : X.Modules) [E.IsFiniteLocallyFree] (g : T ⟶ S)

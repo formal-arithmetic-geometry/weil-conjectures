@@ -12,9 +12,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.CompactificationRefinementLower
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence
 
 /-! # Proper support comparison for one relative Kunneth route
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, first triangle, comparison of canonical mates.
 -/
 
 @[expose] public noncomputable section
@@ -272,8 +269,7 @@ private meta def support_transport_local (userName : Name) : TacticM Unit :=
 end ProofTransport
 
 /-- Tensor of two specified isomorphisms, constructed for a general bifunctor.
-Source: the proper comparison tensor in the first coordinate calculation
-(auxiliary; not a blueprint node). -/
+Source: the proper comparison tensor in the first coordinate calculation. -/
 def kunnethComparisonTensorIso {D : Type v} [Category.{u + 1} D]
     (T : D ⥤ D ⥤ D) {M M' N N' : D} (a : M ≅ M') (b : N ≅ N') :
     (T.obj M).obj N ≅ (T.obj M').obj N' :=
@@ -302,9 +298,7 @@ section InputDefinition
 
 attribute [local irreducible] rightDerivedLowerShriek
 
-/-- Tensor of the two canonical proper forget-supports isomorphisms.
-Source: the proper-support comparison in the first triangle of the blueprint
-(auxiliary; not a blueprint node). -/
+/-- Tensor of the two canonical proper forget-supports isomorphisms. -/
 def properKunnethInput {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
     [IsProper f] [IsProper g] (E : DerivedCategoryModule A X)
     (K : DerivedCategoryModule A Y) :
@@ -495,9 +489,8 @@ open Lean Meta Elab Tactic
 
 /-- One relative Kunneth route agrees with the ordinary external product under proper
 forget supports. This is a normalization of one route, for arbitrary proper factors.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, first triangle, the
-canonical pullback-counit computation; Stacks Tags 07A7, 0B56 and 0D6E
-(auxiliary; not a blueprint node).
+Source:, first triangle, the
+canonical pullback-counit computation; Stacks Tags 07A7, 0B56 and 0D6E.
 
 Proof: expand properSupportedKunnethRoute inverse. Replace its two forward
 compact-support projection maps by ordinary projection maps using

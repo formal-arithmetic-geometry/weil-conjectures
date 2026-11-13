@@ -14,7 +14,6 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 /-! # Exactness of complexes of module sheaves on a union of opens
 
 Source: Stacks Project, Modules, Tag 01AG.
-(blueprint: lem-r4-open-cover-restriction-exact).
 -/
 
 @[expose] public section
@@ -54,7 +53,6 @@ private theorem isZero_over_of_open_cover
 /-- Exactness of a complex after open restriction is local on an open cover.
 Source: Stacks Project, Modules, Tag 01AG (lemma-abelian), applied to the
 short complex of consecutive differentials in a fixed degree.
-(blueprint: lem-r4-open-cover-restriction-exact).
 
 Proof: Fix a point x of U and choose an index i with x in V_i using hU.
 Restriction to an open containing x does not change stalks. The exactness

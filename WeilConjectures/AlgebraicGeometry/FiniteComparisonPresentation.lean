@@ -36,7 +36,7 @@ set_option linter.privateModule false
 /-! # Coefficient presentation of the finite comparison predicates
 
 Source: blueprint finite comparison, coefficient paragraph, and Stacks Tags 03CY,
-09AJ and 09AL (auxiliary; not a blueprint node).
+09AJ and 09AL.
 -/
 
 @[expose] public noncomputable section

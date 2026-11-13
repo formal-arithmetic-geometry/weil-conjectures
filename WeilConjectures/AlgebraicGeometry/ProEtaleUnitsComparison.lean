@@ -100,8 +100,7 @@ private theorem isIso_app_of_colimits {C B J : Type*} [Category* C] [Category* B
   infer_instance
 
 /-- The comparison counit for full units is invertible.
-Source: Stacks Project, Tags 0GLZ and 01ZC
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 0GLZ and 01ZC.
 Proof: on an affine pro-etale presentation, comparison sections are the filtered
 colimit of etale sections. Units commute with filtered colimits of rings: descend
 a unit and its inverse, then descend their product equation. Global sections

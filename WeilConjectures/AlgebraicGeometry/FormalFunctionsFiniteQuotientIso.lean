@@ -17,15 +17,14 @@ open CategoryTheory CategoryTheory.Limits Opposite IsLocalRing
 namespace AlgebraicGeometry
 /-- The canonical quotient-system isomorphism, with its factorization of pullback.
 Source: Stacks Project, Tags 02OD and 089W; Tags 01F7 and 01FB.
-(blueprint: lem-weil-pbc-formal-functions-finite-quotient-iso)
 
-Proof: Write A = O_y, g' : X' → X and i'_n = formalFunctionsFiniteι f y n.
+Proof: Write A = O_y, g': X' → X and i'_n = formalFunctionsFiniteι f y n.
 Pasting the pullback squares shows that i'_n is the base change of
 Spec(A/m^(n+1)) → Spec A, with ideal J^(n+1). Pullback of F' along i'_n
 identifies with F_n: the identification is fixed by the equation of adjunction
 units in formalFunctionsFiniteFMap. Coherence implies quasi-coherence, preserved
 by tensor pullback. The closed-immersion unit quotient theorem therefore gives
-rho_n : F'/J^(n+1)F' ≅ i'_(n*)F_n, with rho_n q_n equal to this h-map.
+rho_n: F'/J^(n+1)F' ≅ i'_(n*)F_n, with rho_n q_n equal to this h-map.
 Apply H^p to rho_n and compose with the affine cohomology edge isomorphism 089W
 to obtain b_n. The edge map is the canonical cohomology h-map. Functoriality
 then identifies b_n H^p(q_n) with formalFunctionsFinitePullback f y F p n.

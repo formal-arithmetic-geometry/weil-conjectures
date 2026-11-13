@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSe
 /-! # Lifting homogeneous evaluations into ideal powers
 
 Source: Stacks Project, proof of Lemma 0884, affine power refinement.
-(blueprint: lem-weil-pbc-formal-polynomial-power-lifts).
 -/
 
 @[expose] public section
@@ -79,7 +78,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Homogeneous evaluations lift to the actual ideal-power sheaves on every open.
 Source: Stacks Project, proof of Lemma 0884, associated graded algebra refinement;
 Schemes, Tags 01I8 and 01IC, for the affine power calculation.
-(blueprint: lem-weil-pbc-formal-polynomial-power-lifts).
 
 Proof: on an affine open V, ideal_comap_appLE and ideal_top_ofIdealTop identify
 J(V) with the ideal spanned by the images of the generators. A degree-k polynomial

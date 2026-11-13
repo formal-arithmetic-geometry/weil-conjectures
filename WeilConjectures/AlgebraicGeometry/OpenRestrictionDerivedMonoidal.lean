@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Strong monoidal descent of open restriction
 Source: Stacks Project, Tags 06YH and 079U.
-(blueprint: lem-pc-open-restriction-derived-monoidal).
 -/
 
 @[expose] public section
@@ -35,8 +34,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 /-- Use the standard localization on the open scheme.
-Source: Stacks Project, Tag 05RU.
-(blueprint: lem-pc-open-restriction-derived-monoidal). -/
+Source: Stacks Project, Tag 05RU. -/
 local instance openRestrictionMonoidalStandardDerived (X : Scheme.{u}) (U : X.Opens) :
     HasDerivedCategory.{u + 1}
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
@@ -45,7 +43,6 @@ local instance openRestrictionMonoidalStandardDerived (X : Scheme.{u}) (U : X.Op
 /-- Strong monoidal descent of exact restriction to the standard category on the open.
 
 Source: Stacks Project, cohomology.tex, Tags 06YH and 079U.
-(blueprint: lem-pc-open-restriction-derived-monoidal).
 
 Proof: identify tensor pullback along U.ι with ordinary restriction by
 uniqueness of left adjoints to pushforward. Compose with overFunctorEquiv to

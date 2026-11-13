@@ -22,8 +22,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteRelationDescent
 # Descent of bounded finitely presented complexes
 
 Source: Stacks Project, Limits of Schemes, Lemma 32.10.2 (Tag 01ZR), in the
-Noetherian approximation setting of Lemma 32.10.4 (Tag 05LY)
-(blueprint: lem-pc-fp-complex-descent).
+Noetherian approximation setting of Lemma 32.10.4 (Tag 05LY).
 -/
 
 @[expose] public section
@@ -37,7 +36,7 @@ namespace AlgebraicGeometry
 /-- A bounded complex of finitely presented quasi-coherent modules on the limit base change
 of a finitely presented scheme descends to some later stage.
 Source: Stacks Project, Limits of Schemes, Tag 01ZR; Noetherian approximation setting of
-Tag 05LY (blueprint: lem-pc-fp-complex-descent).
+Tag 05LY.
 
 The functor `R` presents the inverse system of affine schemes contravariantly. Affine
 schemes are quasi-compact and quasi-separated, and the transition maps between spectra

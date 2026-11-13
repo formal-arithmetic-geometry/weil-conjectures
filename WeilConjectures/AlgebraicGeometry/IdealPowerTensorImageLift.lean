@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.IdealTensorRestrictedMultiplicationImag
 
 Source: Stacks Project, Tag 01YB, proof of lemma-homs-over-open, the second
 Artin-Rees argument for the kernel of tensor multiplication.
-(blueprint: lem-pc-ideal-power-tensor-image-lift)
 -/
 
 @[expose] public section
@@ -31,9 +30,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- A sufficiently high ideal product lifts through tensor multiplication.
 Source: Stacks Project, Tag 01YB, proof of lemma-homs-over-open, the kernel K and
 its zero intersection with a high ideal power of the tensor product.
-(blueprint: lem-pc-ideal-power-tensor-image-lift)
 
-Proof: Set T = I^n tensor H and let mu : T -> H be multiplication. Both T and its
+Proof: Set T = I^n tensor H and let mu: T -> H be multiplication. Both T and its
 kernel K are coherent on the Noetherian scheme. On an affine open, a tensor in K
 is a sum of b_j tensor h_j with sum b_j h_j = 0. For a in I^n, balancing gives
 a times this sum = a tensor (sum b_j h_j) = 0, so I^n K = 0. Artin-Rees supplies

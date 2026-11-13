@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.FlatRingedCechLocalComparison
 /-! Quasi-isomorphism of the scalar-extended augmented model.
 
 Source: Stacks Project, Algebraization, Tags 099I and 099H.
-(auxiliary; not a blueprint node).
 
 The canonical unit of termwise scalar extension is a quasi-isomorphism on a
 locally extended Čech model. On finite generating slices this follows from the
@@ -76,7 +75,6 @@ private theorem quasiIso_of_cover
 
 /-- The canonical scalar-extension unit on a locally extended Čech model is a
 quasi-isomorphism. Source: Stacks Project, Algebraization, Tags 099H and 099I.
-(auxiliary; not a blueprint node).
 
 Proof: restrict to finite generating slices and apply the local scalar-unit theorem,
 which uses torsion in ordered Koszul homology and exact filtered colimits. Exact

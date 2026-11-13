@@ -12,7 +12,6 @@ import Mathlib.Data.Fin.Tuple.Basic
 /-! # Assembly of a pivot in a finite biproduct
 
 This is the categorical block-matrix step of the integral pivot construction.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -80,7 +79,6 @@ private noncomputable def finitePivotSplit (P : C) {n : ℕ} (j : Fin (n + 1)) :
 
 Source: the finite biproduct step in the continuous-function pivot argument for
 Bhatt--Scholze, Section 6.8, Proposition 6.8.11(1).
-(auxiliary; not a blueprint node)
 
 Proof: split the selected source and target indices from their finite complements.
 The other row coefficients factor through the selected coefficient by assumption.

@@ -38,7 +38,6 @@ variable [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
 
 /-- Transport and termwise tensor composition in a commuting open square.
 Source: Stacks Project, Tags 08DW and 0D5S.
-(blueprint: lem-pc-open-pinned-tensor-counit-transport).
 Proof: the source and target homotopy comparison isomorphisms are the two
 termwise paths from tensor pullback along the composite to restriction
 followed by tensor pullback. Expand openPinnedTensorRestrictionIso into its

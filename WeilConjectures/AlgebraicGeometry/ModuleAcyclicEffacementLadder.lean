@@ -52,11 +52,10 @@ private theorem exactForget (X : Scheme.{u}) (r : ℕ) :
 
 /-- An injective embedding gives a right exact cohomology ladder for dimension shifting.
 Source: Stacks Project, Tags 03FD, 095T and 010S.
-(blueprint: new-module-acyclic-effacement-ladder)
 
 Proof: Embed M into an injective module-valued sheaf J, using enough injectives
 in the Grothendieck abelian category of module-valued sheaves. Let Q be its cokernel
-and g : J → Q the quotient. Forgetting coefficients is exact, so 0 → U(M) → U(J)
+and g: J → Q the quotient. Forgetting coefficients is exact, so 0 → U(M) → U(J)
 → U(Q) → 0 is short exact. Exact abelian inverse image gives the second short exact
 sequence. Take the canonical connecting homomorphisms δX and δY in degree q.
 The long exact sequences give exactness at H^q(U(Q)) and its pullback.

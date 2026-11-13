@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 # Lifting a finite diagram with prescribed object models
 
 Source: Stacks Project, Limits, Tag 01ZM (2), (3), and its closing colimit assertion.
-(blueprint: lem-weil-pbc-finite-diagram-lift-of-models).
 -/
 
 @[expose] public section
@@ -247,7 +246,6 @@ is asserted here.
 
 Source: Stacks Project, Limits, Tag 01ZM (2), (3), closing colimit assertion;
 step 4 of lem-weil-pbc-etale-finite-data-descent.
-(blueprint: lem-weil-pbc-finite-diagram-lift-of-models).
 
 Proof:
 1. Conjugate each generating arrow of F by the supplied object isomorphisms.

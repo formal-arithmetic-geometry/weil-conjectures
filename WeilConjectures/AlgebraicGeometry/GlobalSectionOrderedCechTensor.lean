@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.GlobalSectionTensorBaseChange
 
 Source: Stacks Project, algebraization.tex, Tags 0996 and 099D(d), and Tag 099E,
 final paragraph.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -67,7 +66,6 @@ private noncomputable def pointIso {A : Type u} [CommRing A]
 Čech complex after scalar extension. This is an isomorphism of augmented complexes,
 without a derived-category hypothesis, a replacement complex P, or a derived comparison.
 Source: Stacks Project, algebraization.tex, Tags 0996, 099D(d), and 099E, final paragraph.
-(auxiliary; not a blueprint node).
 
 Proof: put A = Gamma(O). The actual tensor localization complex over the
 one-point A-ring site has ordered coordinates by ringTensorCech_coordinates.

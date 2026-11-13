@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleModuleSectionClosedSupport
 
 /-! # Restriction and locality of proper support
 
-Source: Stacks Project, Tag 0F4X
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 0F4X.
 -/
 
 @[expose] public section
@@ -37,8 +36,7 @@ private theorem germ_zero_congr
   rfl
 
 /-- Restriction preserves the vanishing of the germ at a specified geometric point.
-Source: Stacks Project, Tag 04FR.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 04FR. -/
 theorem etaleModuleGerm_restrict_zero
     (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -63,8 +61,7 @@ theorem etaleModuleGerm_restrict_zero
       hb.symm (v ≫ h.left) hb rfl)
 
 /-- The natural restriction square between two base-changed etale objects is Cartesian.
-Source: Stacks Project, Tag 0F4X.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 0F4X. -/
 theorem etaleObjectPullbackSquare {X Y : Scheme.{u}} (f : X ⟶ Y)
     {V W : Y.Etale} (h : W ⟶ V) :
     IsPullback (f.Etale.map h).left (pullback.fst W.hom f)
@@ -79,7 +76,6 @@ theorem etaleObjectPullbackSquare {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- Transport properness of a closed support across an isomorphism over the base.
 Source: Stacks Project, Tag 0F4X, invariance of proper support under isomorphisms.
-(auxiliary; not a blueprint node)
 
 Proof: The proper-image assertion gives a closed image proper over the base. The inverse
 isomorphism identifies that image with the inverse image of the original support. -/
@@ -194,10 +190,9 @@ private theorem restriction_support_iff
 /-- Proper support is preserved by restriction and can be checked on a covering sieve.
 
 Source: Stacks Project, Tag 0F4X, restriction and sheaf-condition paragraphs.
-(auxiliary; not a blueprint node)
 
 Proof:
-For h : W -> V in the target's small etale site, the induced map X_W -> X_V
+For h: W -> V in the target's small etale site, the induced map X_W -> X_V
 is the base change of h.left. The geometric-germ restriction formula says that the
 support of s restricted to X_W is the inverse image of the support of s in X_V.
 Apply closed_proper_support_locality to the support of s over V, and transport

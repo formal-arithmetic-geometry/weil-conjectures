@@ -38,7 +38,6 @@ noncomputable local instance {X : Scheme.{v}} (F : X.Modules) {U V : X.Opens}
 /-- Affine core of the local coefficient span argument.  On an affine open `W`,
 the ideal-power product section is in the coefficient span of the given affine
 generators.  This is the algebraic expansion step in Stacks Tag 02O8.
-(blueprint: lem-weil-pbc-ideal-powers-local-coefficient-span-affine-core)
 The proof expands the ideal-module product using the extended-ideal formula,
 inducts on the recursive ideal power, and rewrites each module factor using
 the spanning hypothesis. -/
@@ -175,7 +174,7 @@ theorem idealPowersLocalCoefficientSpan_affine {A : Type v} [CommRing A]
       rintro z ⟨b, ⟨a, ha, rfl⟩, v, ⟨i, rfl⟩, rfl⟩
       exact ⟨i, a, ha, rfl⟩
 
-/-- (blueprint: lem-weil-pbc-ideal-powers-local-coefficient-span) -/
+/-- -/
 theorem idealPowersLocalCoefficientSpan {A : Type v} [CommRing A]
     {X : Scheme.{v}} (f : X ⟶ Spec (CommRingCat.of A))
     (I : Ideal A) (J : X.IdealSheafData)

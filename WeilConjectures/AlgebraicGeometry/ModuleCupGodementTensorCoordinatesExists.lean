@@ -21,7 +21,6 @@ noncomputable section
 
 /-- The coordinatewise tensor map exists, before checking its monad laws.
 Source: Banerjee, arXiv:1004.1491, §1.1.4, pp. 15–16; Stacks, Tag 0FKR.
-(blueprint: new-module-cup-godement-tensor-coordinates-exists)
 Proof: For two stalk elements choose representatives on a common neighbourhood and take the
 stalk germ of their sectionwise tensor under `moduleCup_sectionTensor`. Restriction
 compatibility makes this independent of representatives: intersect neighbourhoods on which

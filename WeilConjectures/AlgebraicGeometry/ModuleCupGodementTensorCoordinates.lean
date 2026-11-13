@@ -20,8 +20,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
 /-- The canonical map from sectionwise tensors to the sheaf tensor product.
-Source: the sheafification adjunction; Banerjee, §1.1.4.
-(blueprint: new-module-cup-godement-tensor-coordinates) -/
+Source: the sheafification adjunction; Banerjee, §1.1.4. -/
 def moduleCup_sectionTensor (X : Scheme.{u}) (H K : X.Modules) :
     H.val ⊗ K.val ⟶ (H ⊗ K).val :=
   (PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).unit.app
@@ -31,8 +30,7 @@ def moduleCup_sectionTensor (X : Scheme.{u}) (H K : X.Modules) :
 /-- The coordinate characterization fixes the tensor pairing without imposing its laws.
 Here `t` is the tensor of stalk germs, characterized by sectionwise pure tensors; each
 coordinate of `b` tensors the two evaluated Godement coordinates.
-Source: Banerjee, §1.1.4, pp. 15–16; Stacks, Tag 0FKR.
-(blueprint: new-module-cup-godement-tensor-coordinates) -/
+Source: Banerjee, §1.1.4, pp. 15–16; Stacks, Tag 0FKR. -/
 def ModuleCupGodementTensorCoordinates (X : Scheme.{u})
     (b : ∀ H K : X.Modules,
       moduleCup_godementObject X H ⊗ moduleCup_godementObject X K ⟶

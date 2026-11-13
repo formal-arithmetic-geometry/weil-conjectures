@@ -65,7 +65,6 @@ private theorem fullCoordinate_ext {X' T' : Scheme.{u}} (f' : X' ⟶ T')
 
 /-- The signed projection is homotopic to identity before any kernel hypothesis.
 Source: Stacks 01FM, equations 20.23.6.1 and 20.23.6.2.
-(blueprint: lem-pc-ordered-cech-module-projection-homotopy).
 
 Proof: Transport the first sorting family H and the second family J along e on every
 open. Their identities give dH+Hd=id-kappa and dJ+Jd=kappa-P. Naturality follows

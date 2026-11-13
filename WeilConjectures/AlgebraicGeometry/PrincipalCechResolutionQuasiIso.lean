@@ -13,8 +13,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 
 /-! # Principal Čech totalization of a quasi-coherent resolution
 
-Source: Stacks, Tags 08D2 and 08C2
-(blueprint: lem-sc-principal-cech-resolution-quasi-iso).
+Source: Stacks, Tags 08D2 and 08C2.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace AlgebraicGeometry
 /-- On a finite principal-open cover, totalization takes a K-injective resolution
 of a termwise quasi-coherent complex to a quasi-isomorphism. The resolution's
 terms need not be quasi-coherent.
-Source: Stacks, Tags 08D2 and 08C2
-(blueprint: lem-sc-principal-cech-resolution-quasi-iso).
+Source: Stacks, Tags 08D2 and 08C2.
 
 Proof:
 1. Restrict F and its resolution i to each nonempty principal intersection D(g_J).

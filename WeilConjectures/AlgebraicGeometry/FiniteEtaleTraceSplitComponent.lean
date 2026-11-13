@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTrace
 
 Source: Stacks Project, Tag 03SH (section-trace-method), paragraph after
 Definition 03SE.
-(blueprint: lem-weil-pbc-finite-etale-trace-split-component).
 -/
 
 @[expose] public section
@@ -177,7 +176,6 @@ private theorem split_component_localized
 trace after restriction is the sum of one identity per piece. No degree or connectedness
 hypothesis is used. Source: Stacks Project, Tag 03SH (section-trace-method), paragraph
 following Definition 03SE.
-(blueprint: lem-weil-pbc-finite-etale-trace-split-component).
 
 Proof:
 1. Identify inverse image with localization restriction using

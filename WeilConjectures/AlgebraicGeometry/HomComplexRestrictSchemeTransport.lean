@@ -16,8 +16,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # Transport of Hom complexes through the open-subscheme equivalence
 
-Source: Stacks Project, Cohomology, Tag 08DL and Cohomology on Sites, Tag 0A8X.
-(blueprint: lem-sc-hom-complex-restrict-scheme-transport). -/
+Source: Stacks Project, Cohomology, Tag 08DL and Cohomology on Sites, Tag 0A8X. -/
 
 @[expose] public section
 
@@ -79,7 +78,6 @@ set_option backward.isDefEq.respectTransparency false in
 product construction and the differential compatibility produce the Hom-complex comparison.
 
 Source: Stacks Project, Cohomology, Tag 08DL and Cohomology on Sites, Tag 0A8X.
-(blueprint: lem-sc-hom-complex-restrict-scheme-transport).
 
 Proof: Apply `homComplex_restrict_open` and transport its componentwise product
 projections through the supplied internal-Hom isomorphisms. Preservation of products

@@ -23,7 +23,6 @@ import all Mathlib.Algebra.Homology.Localization
 /-! # The perfect immersion tensor formula in independent derived universes
 
 Source: Stacks Project, Tag 0A9U, and uniqueness of localization, Tag 05RU.
-(blueprint: lem-sc-perfect-immersion-tensor-across-universes).
 -/
 
 @[expose] public section
@@ -51,7 +50,6 @@ private noncomputable def standardUnitComparison (X : Scheme.{u})
 
 /-- The tensor formula for a specified right adjoint of a perfect proper closed immersion.
 Source: Stacks Project, Tag 0A9U, the second equality of Tag 0BRT, and Tag 05RU.
-(blueprint: lem-sc-perfect-immersion-tensor-across-universes).
 
 Proof: `perfectImmersion_standardPerfection` transfers the perfection hypothesis
 and identifies the standard derived pushforward of the tensor unit. The proved

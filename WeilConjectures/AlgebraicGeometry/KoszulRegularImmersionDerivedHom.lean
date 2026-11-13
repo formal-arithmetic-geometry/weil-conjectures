@@ -23,8 +23,7 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionRankStrataScalarFormalit
 /-!
 # Derived Hom for a Koszul-regular closed immersion
 
-Source: Stacks Project, Duality for Schemes, Tag 0BQZ
-(blueprint: lem-sc-koszul-regular-immersion-derived-hom).
+Source: Stacks Project, Duality for Schemes, Tag 0BQZ.
 -/
 
 @[expose] public section
@@ -39,8 +38,7 @@ namespace AlgebraicGeometry
 Koszul-regular closed immersion is the pushforward of the shifted top exterior
 power of the dual conormal sheaf.
 
-Source: Stacks Project, Duality for Schemes, Tag 0BQZ, lemma-regular-immersion-ext
-(blueprint: lem-sc-koszul-regular-immersion-derived-hom).
+Source: Stacks Project, Duality for Schemes, Tag 0BQZ, lemma-regular-immersion-ext.
 
 Proof:
 1. Apply koszulRegularImmersion_extSheaf in every integer degree. It computes the

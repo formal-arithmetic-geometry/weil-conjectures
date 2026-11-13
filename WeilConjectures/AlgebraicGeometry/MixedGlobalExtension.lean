@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 
 /-! # Derived extension and restriction of global scalars
 Source: Stacks Project, Tag 0AA7.
-(blueprint: lem-sc-mixed-global-extension-adjunction).
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ namespace AlgebraicGeometry
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
 /-- The normalized derived extension/restriction adjunction.
-Source: Stacks Tag 0AA7, computed on K-flat resolutions.
-(blueprint: lem-sc-mixed-global-extension-adjunction). -/
+Source: Stacks Tag 0AA7, computed on K-flat resolutions. -/
 theorem mixedGlobalExtension_adjunction {R B : Type u} [CommRing R] [CommRing B]
     (ρ : R →+* B) :
     ∃ E : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B),

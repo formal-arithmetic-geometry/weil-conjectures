@@ -13,7 +13,6 @@ import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 /-! # Local surjectivity of the higher-image colimit comparison
 
 Source: Stacks Project, Tags 09Z1, 03Q8, 0EZM and 03FD.
-(blueprint: sbc-lem-higher-image-colimit-comparison-epi).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry.Etale
 This asserts local lifting of sections; it does not assert a representative over
 an entire affine object or any uniqueness of representatives.
 Source: Stacks Project, Tag 09Z1, proof, using Tags 03Q8, 0EZM and 03FD.
-(blueprint: sbc-lem-higher-image-colimit-comparison-epi).
 
 Proof:
 1. Choose a small directed final presentation of the filtered opposite of I.

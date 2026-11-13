@@ -28,8 +28,7 @@ of Bhatt--Scholze, Section 6.8. Choose a member with maximum norm at the point. 
 is positive. Intersect, over the finite family, the open loci where the difference from
 its value at the point has norm below this maximum. The ultrametric inequality bounds
 all functions by the maximum there, and the isosceles triangle identity keeps the
-selected function's norm equal to the positive maximum.
-(auxiliary; not a blueprint node) -/
+selected function's norm equal to the positive maximum. -/
 theorem exists_open_dominating_member
     {S E I : Type*} [TopologicalSpace S] [NormedField E] [IsUltrametricDist E]
     [Finite I] (a : I → C(S, E)) (x : S) (hx : ∃ i, a i x ≠ 0) :

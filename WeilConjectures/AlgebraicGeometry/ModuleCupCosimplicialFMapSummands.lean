@@ -12,7 +12,6 @@ set_option linter.privateModule false
 
 This construction uses only paired cosimplicial objects and natural transformations to pushforward.
 Source: Banerjee, arXiv:1004.1491, §1.1.4, front/back formula; Stacks, Tag 0FKU.
-(auxiliary; not a blueprint node).
 No Godement construction or resolution property enters the argument.
 -/
 

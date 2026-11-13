@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.HorizontalInverseSquareFixedPasting
 /-! # Rectangle inverse mate with fixed endpoint comparisons
 
 Source: Stacks Project, Tag 0ATR, proof of Lemma 48.5.2; Tag 0ATM.
-(blueprint: lem-sc-horizontal-rectangle-inverse-mate-fixed-transport).
 -/
 
 @[expose] public section
@@ -144,7 +143,6 @@ set_option backward.isDefEq.respectTransparency.types true in
 base-change square using the fixed source and target comparisons. There is no
 middle right adjoint in this statement.
 Source: Stacks Project, Tag 0ATR, proof of Lemma 48.5.2; Tag 0ATM.
-(blueprint: lem-sc-horizontal-rectangle-inverse-mate-fixed-transport).
 
 Proof: Transpose the ordinary rectangle base-change map under the outer
 pullback/direct-image adjunction. Expand its counit definition and the two square

@@ -17,7 +17,6 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 /-! # Affine raw classes in the image of a stage
 
 Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: sbc-lem-higher-image-raw-affine-image-rep).
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ set_option backward.isDefEq.respectTransparency true in
 higher-image section as a raw class at one stage. This says nothing about arbitrary
 higher-image sections, sheaf colimits, or the injectivity of the comparison.
 Source: Stacks Project, Tag 09Z1, the cohomology colimit in the proof; Tag 0EZM.
-(blueprint: sbc-lem-higher-image-raw-affine-image-rep).
 
 Proof: The existing raw complex presentation identifies the raw diagram and
 cocone with a uniformly bounded-below abelian etale complex system on the

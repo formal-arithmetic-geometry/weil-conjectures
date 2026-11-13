@@ -15,7 +15,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # The pure-tensor component calculation for ordinary cochains
 
 Source: Stacks Project, sites-cohomology.tex, Tag 0A90 (lemma-compose).
-(blueprint: lem-pc-normalized-tensor-hom-cochain-components).
 -/
 
 @[expose] public section
@@ -279,7 +278,6 @@ set_option backward.isDefEq.respectTransparency true in
 /-- Restricting the explicitly constructed degree-zero uncurrying comparison
  to a tensor summand gives the inverse sheaf tensor-Hom adjunction.
 Source: Stacks Project, sites-cohomology.tex, Tag 0A90 (lemma-compose).
-(blueprint: lem-pc-normalized-tensor-hom-cochain-components).
 
 Proof: put s equal to the inverse normalized global comparison applied to c.
 The global comparison component formula identifies c's p-component with the

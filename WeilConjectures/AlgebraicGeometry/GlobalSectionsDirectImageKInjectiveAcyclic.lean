@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 /-! # Global-sections acyclicity of direct images of K-injective complexes
 
 Source: Stacks Project, Cohomology, Tags 0D5T and 079V.
-(blueprint: lem-pc-global-sections-direct-image-kinjective-acyclic).
 -/
 
 @[expose] public section
@@ -60,7 +59,6 @@ private theorem unit_isIso_comp_of_exact
 by any restriction of scalars. This requires neither flatness nor preservation of
 K-injectivity by module direct image.
 Source: Stacks Project, Cohomology, Lemma 20.28.2 (Tag 0D5T) and Section 20.28 (Tag 079V).
-(blueprint: lem-pc-global-sections-direct-image-kinjective-acyclic).
 
 Proof: The existing direct-image global-sections acyclicity theorem says that the
 unit of RΓ(Y,-) is invertible at f_*I. Restriction of scalars along φ is exact

@@ -29,8 +29,7 @@ finite stage. Splitting, finiteness and the matching universal property in a fix
 degree are the corresponding properties of that finite stage. The object and refinement
 component in degree n are read
 at stage n, so the finite cofan and sieve membership supplied by hA n transfer
-without any change of objects or maps.
-(auxiliary; not a blueprint node) -/
+without any change of objects or maps. -/
 theorem exists_local_replacement_of_stage_tower
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale)

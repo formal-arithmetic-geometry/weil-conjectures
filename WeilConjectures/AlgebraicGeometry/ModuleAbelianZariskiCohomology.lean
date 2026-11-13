@@ -18,8 +18,7 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Cohomology of a module sheaf agrees with that of its underlying abelian sheaf
 
-Source: Stacks Project, sites-cohomology.tex, Lemma Tag 03FD
-(blueprint: lem-sc-module-abelian-zariski-cohomology).
+Source: Stacks Project, sites-cohomology.tex, Lemma Tag 03FD.
 -/
 
 @[expose] public section
@@ -83,7 +82,7 @@ cohomology of its underlying abelian sheaf, naturally in the module sheaf.
 Source: Stacks Project, sites-cohomology.tex, Lemma Tag 03FD.
 Proof: forgetful exactness and an injective module resolution give an injective
 resolution after forgetting; the acyclic-resolution comparison identifies both
-cohomologies, naturally in the sheaf (blueprint: lem-sc-module-abelian-zariski-cohomology). -/
+cohomologies, naturally in the sheaf. -/
 theorem module_cohomology_iso_underlying_abelian
     (X : Scheme.{u})
     (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))

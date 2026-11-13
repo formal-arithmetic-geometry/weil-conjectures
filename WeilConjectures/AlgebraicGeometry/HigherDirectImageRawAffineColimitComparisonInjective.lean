@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.AbelianRawCoconeComplexPresentation
 /-! # Injectivity of the raw affine cohomology colimit comparison
 
 Source: Stacks Project, Tags 03Q8 and 09Z1.
-(blueprint: lem-sbc-raw-affine-colimit-comparison-injective).
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Data for the raw affine comparison, with the canonical maps retained as natural
 transformations. Its existence is asserted by the theorem below; this type makes
-no choice of a witness and contains no unproved data.
-(blueprint: lem-sbc-raw-affine-colimit-comparison-injective). -/
+no choice of a witness and contains no unproved data. -/
 structure RawAffineColimitComparisonData {I : Type v} [Preorder I]
     [IsDirected I (· ≤ ·)] [Nonempty I] {S : Scheme.{v}}
     (A : I → S.Etaleᵒᵖ ⥤ AddCommGrpCat.{v + 1})
@@ -59,7 +57,6 @@ This statement asserts no eventual vanishing and no
 uniformity over further restrictions.
 Source: Stacks Project, Tag 09Z1 (the displayed cohomology colimit in the proof),
 Tag 03Q8 (restricted cohomology), and Tag 0EZM (continuity for single complexes).
-(blueprint: lem-sbc-raw-affine-colimit-comparison-injective).
 
 Proof: Base change the diagram and its limiting cone along U → S. The pullback
 universal properties preserve the limit. The stages are qcqs because the structure

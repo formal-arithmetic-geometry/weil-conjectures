@@ -16,7 +16,6 @@ import Mathlib.RingTheory.LocalRing.Module
 # Spreading a closed immersion of a finite fibre
 
 Source: Stacks Project, Tag 04DG, proof, the Nakayama and spreading-out steps.
-(blueprint: lem-weil-pbc-finite-closed-immersion-near-fibre).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace AlgebraicGeometry
 /-- A finite morphism whose fibre at `s` is a closed immersion is a closed immersion
 on some open neighbourhood of `s`.
 Source: Stacks Project, Tag 04DG, proof, last two sentences (Nakayama and localization).
-(blueprint: lem-weil-pbc-finite-closed-immersion-near-fibre).
 
 Proof: Choose an affine neighbourhood `Spec A` of `s`, corresponding to a prime `p`.
 The inverse image is `Spec B`, where `B` is finite as an `A`-module. The closed-immersion

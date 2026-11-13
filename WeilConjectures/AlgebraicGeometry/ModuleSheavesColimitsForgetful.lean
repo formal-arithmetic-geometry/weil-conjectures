@@ -12,8 +12,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-!
 # Colimits of sheaves of modules and the forgetful functor
 
-Source: Stacks Project, Modules on Sites, Lemmas 03DA, 03DB, 03CO and 03CY
-(blueprint: lem-weil-pbc-module-sheaves-colimits-forgetful).
+Source: Stacks Project, Modules on Sites, Lemmas 03DA, 03DB, 03CO and 03CY.
 -/
 
 @[expose] public section
@@ -24,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Modules on Sites, Lemmas 03DA, 03DB, 03CO and 03CY
-(blueprint: lem-weil-pbc-module-sheaves-colimits-forgetful).
+/-- Source: Stacks Project, Modules on Sites, Lemmas 03DA, 03DB, 03CO and 03CY.
 The forgetful functor from module sheaves to abelian sheaves is faithful and exact.
 Small limits exist and are sectionwise; small colimits exist and are the module
 sheafifications of sectionwise presheaf colimits, with the canonical coprojections.
@@ -43,11 +41,10 @@ through `P`, and then uniquely through its sheafification by the sheafification 
 Uniqueness of both factorizations proves the colimit property, with coprojections induced
 by the sheafification unit, as in `def-weil-pbc-category-colimit`.
 3. Forgetting the module structure of `P` gives the presheaf colimit in abelian groups.
-Module sheafification has the same underlying abelian sheaf as abelian sheafification
-(`def-weil-pbc-sheafification`). The same two universal properties show that the resulting
+Module sheafification has the same underlying abelian sheaf as abelian sheafification. The same two universal properties show that the resulting
 abelian cocone is a colimit. Thus forgetting preserves colimits, including coprojections.
 4. Morphisms are componentwise linear maps of abelian sheaves, so forgetting is faithful
-and additive (`def-weil-sheaf-of-modules-category`). Kernels are limits of a map and zero;
+and additive. Kernels are limits of a map and zero;
 cokernels are colimits of a map and zero. Steps 1 and 3 preserve these, and hence preserve
 images and exact sequences in the abelian categories, as in `def-pur-abelian-sheaf-kernel`.
 Equivalently, the forgetful functor preserves finite limits and finite colimits. -/

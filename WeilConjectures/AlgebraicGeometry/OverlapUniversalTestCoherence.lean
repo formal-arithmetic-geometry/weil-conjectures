@@ -11,8 +11,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.ChosenPullback
 
 /-! # Coherence from universal overlap tests
 
-Source: Stacks Project, Tag 01ZR, first proof.
-(blueprint: lem-pc-overlap-universal-test-coherence). -/
+Source: Stacks Project, Tag 01ZR, first proof. -/
 
 @[expose] public section
 
@@ -22,7 +21,6 @@ namespace AlgebraicGeometry
 
 /-- Raw transition coherence follows from diagonal and universal triple tests.
 Source: Stacks Project, Tag 01ZR, first proof, Zariski gluing.
-(blueprint: lem-pc-overlap-universal-test-coherence).
 
 Proof: Pull each tested diagonal identity along an arbitrary chart map. For an
 arbitrary triple of chart maps with common image in the base, the universal

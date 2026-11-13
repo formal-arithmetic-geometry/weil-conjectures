@@ -50,8 +50,7 @@ Apply cartesian_tensor_data_comparison to f and j. Pull its isomorphism back alo
 U.isoSpec.hom, then use composition of derived pullbacks and the identity comparison
 for U.isoSpec.hom followed by j = U.ι. This gives the displayed comparison.
 The construction works on an empty affine open and for zero complexes; no Noetherian
-approximation or direct-image perfectness is used.
-(blueprint: lem-pc-proper-support-affine-tensor-restriction). -/
+approximation or direct-image perfectness is used. -/
 theorem properSupport_affine_tensor_restriction
     {X S : Scheme.{u}} (f : X ⟶ S)
     [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]

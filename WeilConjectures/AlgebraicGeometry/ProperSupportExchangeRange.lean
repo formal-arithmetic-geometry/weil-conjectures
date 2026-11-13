@@ -10,8 +10,7 @@ import WeilConjectures.SecSmoothPurity.ProperSupportFibreRestrictionCompatibilit
 
 /-! # The image of the ordinary exchange on proper-support sections
 
-Source: Stacks Project, Tags 0F55 and 0F76
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 0F55 and 0F76.
 -/
 
 @[expose] public section
@@ -93,12 +92,11 @@ private theorem properSupportUnitPullback_eq_square
 subsheaf, is injective and has exactly the proper-support sections as image.
 
 Source: Stacks Project, Tags 0F55 and 0F76.
-(auxiliary; not a blueprint node)
 
 Proof:
 Pullback of a section pulls its support back, so properness survives base change.
 This defines a map G -> b_*H, for G = f_! F and H = f'_! a^*F. Adjunction gives
-beta : b^*G -> H. Naturality of the adjunction identifies its composite with H's
+beta: b^*G -> H. Naturality of the adjunction identifies its composite with H's
 inclusion with the restricted ordinary comparison. At an algebraically closed
 geometric point, properSupport_geometricStalk identifies both support stalks with
 properly supported sections on the same geometric fibre. Inverse-image stalk/germ

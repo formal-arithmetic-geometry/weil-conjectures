@@ -10,7 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.FiniteComparisonModelRealization
 
 /-! # The ordinary comparison square for fixed scalars
 
-Source: Stacks Tags 03CY, 099R and 00YV (auxiliary; not a blueprint node).
+Source: Stacks Tags 03CY, 099R and 00YV.
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +35,7 @@ private def inverseProEtaleRealization (X : Scheme.{u})
 
 /-- Ordinary inverse image commutes with the explicitly fixed scalar presentation functors.
 This concerns sheaves alone, with no derived, bounded, constructible or Tor hypothesis.
-Source: Stacks Modules on Sites Tag 03CY; Sites Tag 00YV (6); proetale.tex Tag 099R
-(auxiliary; not a blueprint node).
+Source: Stacks Modules on Sites Tag 03CY; Sites Tag 00YV (6); proetale.tex Tag 099R.
 
 Proof: the existing finiteComparisonModelPullbackSquare is valid over every commutative
 ring. Identify its etale and pro-etale realization functors with the inverses of the

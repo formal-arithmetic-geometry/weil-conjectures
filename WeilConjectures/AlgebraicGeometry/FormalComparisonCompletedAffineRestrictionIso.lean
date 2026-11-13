@@ -23,7 +23,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 /-! # The completed affine comparison is invertible off the exceptional ideal
 
 Source: Stacks Project, Tag 088B, proof, completed-base adjunction argument.
-(blueprint: lem-weil-pbc-formal-comparison-completed-affine-restriction-iso)
 -/
 
 @[expose] public section
@@ -44,7 +43,6 @@ extended exceptional ideal. Unlike the model theorem, this supplies no objects,
 map, or limit isomorphisms: all are inputs and the commuting square is a hypothesis.
 Source: Stacks Project, Tag 088B, proof from the flat completed-base change through
 invertibility of the algebraized adjunction off V(K).
-(blueprint: lem-weil-pbc-formal-comparison-completed-affine-restriction-iso)
 
 Proof: First reduce to the standard tensor adjunction: uniqueness of adjunctions
 for the same functors relates the supplied unit to the standard unit by a natural

@@ -33,7 +33,6 @@ set_option maxHeartbeats 500000 in
 /-- A coefficient comparison morphism with the unit formula is bijective on affine opens.
 This is a single-open statement: no tuples, face maps, or gluing are involved.
 Source: Stacks Project, Tag 02KG (Lemma 30.5.1); Tags 01I9 and 01IA.
-(blueprint: lem-pc-finite-affine-cech-coefficient-comparison-bijective).
 
 Proof: Write A = Gamma(U,O), D = Gamma(Z,O), N = Gamma(Z,F), and
 R = Gamma(B,O). The affine intersection base-change theorem shows that

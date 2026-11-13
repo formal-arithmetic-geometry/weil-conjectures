@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleLiftingLimitDescentCore
 /-!
 # Reduction of finite étale lifting to henselian G-rings
 
-Source: Stacks Project, Fundamental Groups, Lemma 0GS2, proof, "General case"
-(blueprint: lem-weil-pbc-finite-etale-lifting-limit-descent).
+Source: Stacks Project, Fundamental Groups, Lemma 0GS2, proof, "General case".
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Lifting finite étale covers of proper schemes over arbitrary henselian pairs follows
 from lifting them over henselian G-ring pairs. Hypothesis `H` is the statement of
 `exists_finiteEtale_lift_of_henselianPair_of_isGRing`.
-Source: Stacks Project, Lemma 0GS2, proof, "General case"
-(blueprint: lem-weil-pbc-finite-etale-lifting-limit-descent).
+Source: Stacks Project, Lemma 0GS2, proof, "General case".
 
 Proof (the eight steps of the blueprint node):
 1. By lem-weil-pbc-proper-limit-noetherian and lem-weil-pbc-limit-affine-transition,

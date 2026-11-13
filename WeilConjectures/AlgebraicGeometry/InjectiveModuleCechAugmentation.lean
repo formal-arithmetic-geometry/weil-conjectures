@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.InjectiveModuleCechAugmentationZero
 /-! # The augmented Čech complex of an injective module
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 01EP, as used in Tag 01EQ.
-(blueprint: lem-sc-injective-module-cech-augmentation).
 -/
 
 @[expose] public section
@@ -32,9 +31,7 @@ single injective module is a quasi-isomorphism. The supplied map's degree-zero
 component is precisely the canonical restriction map, including the scalar
 identification at the whole space.
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 01EP
-(lemma-injective-trivial-cech), and its use in the proof of Tag 01EQ.
-(blueprint: lem-sc-injective-module-cech-augmentation).
+Source: Stacks Project, Cohomology of Sheaves, Tag 01EP, and its use in the proof of Tag 01EQ.
 
 Proof: Sheaf gluing identifies the kernel of the first Čech differential with
 sections on the union of the cover, which is the whole space. Under this

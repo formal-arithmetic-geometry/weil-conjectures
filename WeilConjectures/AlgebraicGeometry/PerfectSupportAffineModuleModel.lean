@@ -21,7 +21,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 /-! # Affine module models with supported cohomology
 
 Source: Stacks Project, Tags 08EJ, 08EB and 06Z0.
-(blueprint: lem-sc-perfect-support-affine-module-model).
 -/
 
 @[expose] public section
@@ -63,7 +62,6 @@ set_option linter.unusedVariables false in
 whose cohomology is elementwise power torsion. The comparison is full and additive
 and intertwines the scalar identity of the source with restriction of global scalars.
 Source: Stacks Project, Tag 08EJ, affine paragraph; Tags 08EB and 06Z0.
-(blueprint: lem-sc-perfect-support-affine-module-model).
 
 Proof: Compare localized-site restriction with restriction to the open subscheme U
 using open_derived_restriction_comparison. Perfectness restricts: intersect each

@@ -23,7 +23,6 @@ import WeilConjectures.AlgebraicGeometry.NormalizedDirectImageSquareUnit
 /-! # Normalization of the open-square comparison on K-injective representatives
 
 Source: Stacks Project, Cohomology, Tags 08FE, 08BS, 079W and 0D5S.
-(blueprint: lem-pc-perfect-hom-open-mate-resolution-normalization).
 -/
 
 @[expose] public section
@@ -133,8 +132,7 @@ variable [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
 /-- Derive the ordinary sectionwise comparison and identify exact open pullback
 by uniqueness of left adjoints. All data are specified by functorial derivation
 and adjunction uniqueness; the ordinary IsIso theorem determines only the inverse.
-Source: Stacks Tags 08FE, 08BS, 079W
-(blueprint: lem-pc-perfect-hom-open-mate-resolution-normalization). -/
+Source: Stacks Tags 08FE, 08BS, 079W. -/
 def perfectHomOpenDerivedComparison {S Y T : Scheme.{u}}
     (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S) :
     schemeDerivedDirectImage (pullback.fst s r) ⋙ schemeMVDerivedRestriction Y B ≅
@@ -193,8 +191,7 @@ def perfectHomOpenDerivedComparison {S Y T : Scheme.{u}}
 
 /-- Transport the explicitly derived comparison to the supplied adjunctions.
 The conjugations are isomorphisms determined by the identity of the left adjoints.
-Source: Stacks Tag 079W and Mathlib's adjoint uniqueness
-(blueprint: lem-pc-perfect-hom-open-mate-resolution-normalization). -/
+Source: Stacks Tag 079W and Mathlib's adjoint uniqueness. -/
 def perfectHomOpenSuppliedComparison {S Y T : Scheme.{u}}
     (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S)
     (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι)
@@ -242,7 +239,6 @@ the counit equation for the fixed pullback-composition comparison and canonical 
 Source: Stacks Project, Cohomology, `lemma-restrict-direct-image-open` (08FE),
 `lemma-restrict-K-injective-to-open` (08BS), `lemma-adjoint` (079W), and
 `lemma-derived-pullback-composition` (0D5S).
-(blueprint: lem-pc-perfect-hom-open-mate-resolution-normalization).
 
 Proof: First take the projection and open adjunctions pinned to the shared
 left-derived counits and ordinary tensor adjunctions. Expand the derived

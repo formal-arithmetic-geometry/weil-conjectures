@@ -15,7 +15,6 @@ import Mathlib.Algebra.Homology.HomologicalComplexBiprod
 /-! Degreewise exactness for the concrete Mayer--Vietoris complex.
 
 Source: Stacks Project, Cohomology, Tag 08BV, using Tags 01EB and 01EA.
-(blueprint: lem-pc-kinjective-mayer-vietoris-degreewise).
 -/
 
 @[expose] public section
@@ -69,7 +68,6 @@ private theorem schemeOpenModuleImageRestriction_epi
 
 /-- The concrete Mayer--Vietoris sequence is short exact in a degree whose term is injective.
 Source: Stacks Project, Cohomology, Tag 08BV, using Tags 01EB and 01EA.
-(blueprint: lem-pc-kinjective-mayer-vietoris-degreewise).
 
 Proof: Fix n and put M = I.X n. Evaluation preserves the biproduct and
 identifies the first arrow with the pair of underived restriction units. The

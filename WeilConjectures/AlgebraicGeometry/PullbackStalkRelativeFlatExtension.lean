@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.PullbackStalkTensorFlat
 
 Source: Stacks Project, Algebra, Section Tag 051D, Lemma 10.100.1(1);
 Examples, Tag 0FLS, the canonical stalk map.
-(blueprint: lem-pc-pullback-stalk-relative-flat-extension).
 -/
 
 @[expose] public section
@@ -409,7 +408,6 @@ end RelativeFlatTensorExtension
  over the new base stalk. This is a statement about an arbitrary module over one
 source stalk, independent of any sheaf or global flatness condition.
 Source: Stacks Project, Algebra, Tag 051D, Lemma 10.100.1(1), and Examples, Tag 0FLS.
-(blueprint: lem-pc-pullback-stalk-relative-flat-extension).
 
 Proof: Write x = fst(z), t = snd(z), s = f(x), and R, A, B, C for the stalk
 rings at s, x, t, z. The equality f(x) = p(t), obtained from pullback.condition,

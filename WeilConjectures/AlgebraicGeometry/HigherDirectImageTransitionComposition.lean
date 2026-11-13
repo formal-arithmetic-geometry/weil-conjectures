@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitionNaturality
 /-! # Composition of higher direct image triangles
 
 Source: Stacks Project, Tag 09Z1, canonical comparison maps, and Tag 03Q8.
-(blueprint: lem-sbc-higher-image-transition-composition).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry.Etale
 /-- The two successive transitions in a tower of commutative triangles agree with
 its composite, after the ordinary pullback composition comparison.
 Source: Stacks Project, Tag 09Z1, canonical comparisons; Tag 03Q8.
-(blueprint: lem-sbc-higher-image-transition-composition).
 
 Proof: Before homology, expand both transitions as the adjoints of the pulled-back
 counits. Express the unit for the composite pullback adjunction as the successive

@@ -19,7 +19,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Pushforward identifies the successor finite sum with the old sum and one
 additional summand.
 Source: Stacks Project, Tag 01YF, finite-sum comparison in the successor step.
-(blueprint: new-pushforward-fin-sum-succ-iso)
 -/
 theorem pushforward_fin_sum_succ_iso
     {X Z : Scheme.{u}} (i : Z ⟶ X) (r : ℕ) (I : Z.IdealSheafData) :

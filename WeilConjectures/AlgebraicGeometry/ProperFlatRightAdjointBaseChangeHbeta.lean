@@ -93,7 +93,6 @@ private theorem baseChange_naturality
 
 /-- Flat proper finite-presentation morphisms satisfy derived base change after arbitrary pullback.
 Source: Stacks Project, Derived Categories of Schemes, Tag 0A1D (Lemma 36.26.4).
-(blueprint: lem-sc-proper-flat-right-adjoint-basechange-hbeta)
 Proof: Properness implies that f is quasi-compact and quasi-separated.
 Apply relatively flat complex base change (Tag 0A1D) with G = O_X[0].
 This complex is bounded above and quasi-coherent; flatness of f makes its only

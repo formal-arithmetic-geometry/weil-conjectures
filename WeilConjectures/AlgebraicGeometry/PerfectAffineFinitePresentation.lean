@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedQCoh
 
 /-! # Finite-term presentations on arbitrary affine schemes
 
-Source: Stacks Project, Tag 08EB, transported by the canonical affine isomorphism
-(blueprint: lem-pc-perfect-affine-finite-presentation).
+Source: Stacks Project, Tag 08EB, transported by the canonical affine isomorphism.
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 /-- Termwise associated sheaf followed by pushforward along the canonical affine isomorphism.
 This is an explicit construction on complexes, before passage to the derived category.
-Source: Stacks Project, Tag 08EB (blueprint: lem-pc-perfect-affine-finite-presentation). 
-(blueprint: def-pc-affine-module-complex-functor)
+Source: Stacks Project, Tag 08EB.
 -/
 noncomputable def affineModuleComplexFunctor (Y : Scheme.{u}) [IsAffine Y] :
     CochainComplex (ModuleCat.{u} Γ(Y, ⊤)) ℤ ⥤
@@ -48,10 +46,9 @@ noncomputable def affineModuleComplexFunctor (Y : Scheme.{u}) [IsAffine Y] :
 set_option backward.isDefEq.respectTransparency false in
 /-- Every perfect quasi-coherent derived object on an affine scheme has a finite-term module
 complex presentation under the explicit associated-sheaf functor.
-Source: Stacks Project, Tag 08EB; Step 1 of lem-pc-perfect-affine-classes-small
-(blueprint: lem-pc-perfect-affine-finite-presentation).
+Source: Stacks Project, Tag 08EB; Step 1 of lem-pc-perfect-affine-classes-small.
 
-Proof: Put A = Γ(Y, O_Y) and use Y.isoSpec : Y ≅ Spec A. Pushforward along the
+Proof: Put A = Γ(Y, O_Y) and use Y.isoSpec: Y ≅ Spec A. Pushforward along the
 isomorphism and its inverse are exact mutually inverse functors on module sheaves;
 their termwise extensions therefore invert quasi-isomorphisms and give mutually inverse
 functors on derived categories. Quasi-coherence is preserved by these functors, as can

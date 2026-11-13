@@ -86,8 +86,7 @@ private theorem baseChange_postcompose_counit {X S T X' : Scheme.{u}}
   rw [Functor.map_comp, Category.assoc, hn, ← Category.assoc]
 
 /-- The square comparison from the bottom composite pullback to the top composite.
-Source: Stacks Project, Tags 0095 and 0096, composition of module pullbacks.
-(blueprint: lem-sc-picard-base-change-counit) -/
+Source: Stacks Project, Tags 0095 and 0096, composition of module pullbacks. -/
 noncomputable def picardBaseChangeSquareIso
     {X S W T : Scheme.{u}} (f : X ⟶ S) (j : W ⟶ S) (h : T ⟶ W) (A : W.Modules) :
     (tensorPullback (Limits.pullback.snd f (h ≫ j))).obj ((tensorPullback h).obj A) ≅
@@ -99,8 +98,7 @@ noncomputable def picardBaseChangeSquareIso
     (picardTensorCompIso (picardBaseChangeTop f j h) (Limits.pullback.snd f j) A).symm
 
 /-- Identify the iterated top pullback of a coefficient with its pullback to X_T.
-Source: Stacks Project, Tags 0095 and 0096, composition of module pullbacks.
-(blueprint: lem-sc-picard-base-change-counit) -/
+Source: Stacks Project, Tags 0095 and 0096, composition of module pullbacks. -/
 noncomputable def picardBaseChangeCoefficientIso
     {X S W T : Scheme.{u}} (f : X ⟶ S) (j : W ⟶ S) (h : T ⟶ W) (M : X.Modules) :
     (tensorPullback (picardBaseChangeTop f j h)).obj
@@ -112,7 +110,7 @@ noncomputable def picardBaseChangeCoefficientIso
 
 /-- The adjoint of the canonical base-change map for one coefficient.
 Source: Stacks Project, Tag 08HY, mate description; Tags 0095 and 0096,
-composition comparisons. (blueprint: lem-sc-picard-base-change-counit)
+composition comparisons.
 
 Proof: Express the map as the mate of the pushforward square, as in its definition.
 Take its transpose along p_T. Naturality of the top unit and the bottom counit,

@@ -16,7 +16,7 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 # Composition and base change for sections with proper support
 
 Source: Stacks Project, More on Étale Cohomology, Tags 0F4X, 0F4Y, 0F50, 0F51,
-0F55 and 0F77 (auxiliary; not a blueprint node).
+0F55 and 0F77.
 -/
 
 @[expose] public section
@@ -157,7 +157,6 @@ set_option linter.unusedVariables false in
 /-- The proper-support subsheaves form functors, with composition, proper and open
 specializations, and base change compatible with composition.
 Source: Stacks Project, Tags 0F4X, 0F4Y, 0F50, 0F51, 0F55, 0F77.
-(auxiliary; not a blueprint node)
 
 The functors and inclusions are specified together: objectwise their images are exactly
 sections with the indicated closed geometric-germ support and proper reduced subscheme.
@@ -183,7 +182,7 @@ lem-cbc-proper-support-exchange-range, to construct e. Expanding squareUpperStar
 and the ordinary mate gives exactly the unit/counit formula required here.
 6. Postcompose both pasted support paths with the injective inclusion for the final
 composite. Substitute the equations specifying c and e, use naturality, and apply
-ordinary base-change mate pasting (lem-weil-pbc-mate-pasting). The two composites
+ordinary base-change mate pasting. The two composites
 agree, so injectivity cancels that inclusion and proves the final coherence. Every
 factorization is linear and natural; uniqueness determines all chosen preimages. -/
 theorem properSupportSheafComposition (Λ : Type (u + 1)) [CommRing Λ] :

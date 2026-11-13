@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.ProjLineCoordinateQuotientEpi
 
 Source: Stacks Project, Tag 01MN; the locally split coordinate sequence used in
 lem-sc-p1-section-coordinate-surjective, proof steps 1 and 3.
-(blueprint: lem-sc-p1-proj-coordinate-short-exact).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ No coherence or flatness assumption on G is needed.
 
 Source: Stacks Project, Tag 01MN, and the coordinate sequence in the proof of
 lem-sc-p1-section-coordinate-surjective, step 1.
-(blueprint: lem-sc-p1-proj-coordinate-short-exact).
 
 Proof: On the polynomial projective line form the sequence
 0 -> O(-1) -> O direct-sum O -> O(1) -> 0, with maps

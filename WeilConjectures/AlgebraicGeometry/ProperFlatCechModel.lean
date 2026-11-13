@@ -48,8 +48,7 @@ Proof:
    (the Noetherian approximation argument of 0A1H). The affine pseudo-coherent resolution
    of 064U gives `Q -> C`, with finite free terms and upper bound `d`, since `C` vanishes
    above `d`. Shrink the initial affine neighbourhood if necessary for this resolution.
-
-(blueprint: lem-pc-proper-flat-cech-model). -/
+. -/
 theorem exists_proper_flat_cech_model {X T : Scheme.{u}} (f : X ⟶ T) (F : X.Modules)
     [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]
     [HasInjectiveResolutions X.Modules] [F.IsFinitePresentation]

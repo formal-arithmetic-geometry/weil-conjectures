@@ -25,7 +25,6 @@ Both its inclusion in the new source and its map to the new base are affine morp
 No affineness of the new base is asserted or needed.
 Source: Stacks Project, Tags 01S5 (affine morphisms and base change), 01KP
 (separated intersections), and the intersection calculation in Tag 02KE.
-(blueprint: lem-pc-finite-affine-cech-intersection-base-change).
 
 Proof: Write Y = f inverse image U. The restricted map Y -> U is separated and U
 is affine, so Y is separated. An affine open Z in Y has affine inclusion into Y:

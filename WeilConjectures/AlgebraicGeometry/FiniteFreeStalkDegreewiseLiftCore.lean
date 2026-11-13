@@ -14,8 +14,7 @@ set_option autoImplicit false
 universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
-/-- Finite intersection combines degreewise local representatives into one neighbourhood.
-(blueprint: lem-pc-finite-free-stalk-degreewise-lift-core) -/
+/-- Finite intersection combines degreewise local representatives into one neighbourhood. -/
 theorem exists_degreewise_of_stalk_local_core
     {Y : Scheme.{u}} (P Q : CochainComplex Y.Modules ℤ)
     (a b c e : ℤ)

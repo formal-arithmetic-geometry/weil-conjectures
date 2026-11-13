@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.FindGloballyGenerated
 
 Source: Stacks Project, Varieties, Lemma 09ND
 (varieties-lemma-dim-1-noetherian-integral-separated-has-ample).
-(blueprint: lem-sc-integral-dim-one-ample).
 -/
 
 @[expose] public section
@@ -44,7 +43,6 @@ Proof:
    the integral curve, and their local dimensions are at most `dim Y = 1`.
 3. The ample criterion `lem-sc-enough-globally-generated-ample` applied to
    these principal opens gives an ample invertible module.
-(blueprint: lem-sc-integral-dim-one-ample)
 -/
 theorem exists_isAmple_of_integral_dim_one
     (Y : Scheme.{u}) [IsIntegral Y] [IsLocallyNoetherian Y] [CompactSpace Y]

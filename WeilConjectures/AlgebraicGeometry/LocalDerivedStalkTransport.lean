@@ -36,9 +36,8 @@ set_option maxHeartbeats 700000 in
  a section s to the canonical class of xi, the transported germ restricts to xi.
 Source: Stacks Project, Tag 02OD, the local-stalk and global-cohomology identifications;
 Tags 01J7 and 0098 for the pullback-unit germ formula, and Tag 01E4 for section classes.
-(blueprint: lem-weil-pbc-local-derived-stalk-transport)
 
-Proof: Set A = O_y, c : Spec A → Y, and let z be the closed point. The unit on module
+Proof: Set A = O_y, c: Spec A → Y, and let z be the closed point. The unit on module
 stalks gives G_y ≅ (c^*G)_z because c induces an isomorphism on local rings at z.
 Apply the stalk functor to beta to identify this with (R^p f'_*F')_z. Every open of
 Spec A containing z is the whole spectrum: every prime specializes to z. Hence

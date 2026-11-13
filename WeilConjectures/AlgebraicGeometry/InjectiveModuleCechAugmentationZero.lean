@@ -24,7 +24,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Degree-zero part of the augmented Čech quasi-isomorphism.
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 01EP.
-(blueprint: lem-sc-injective-module-cech-augmentation-zero)
 
 Proof: identify categorical products of opens with their finite intersections
 and products of modules with families of sections. The differential from degree

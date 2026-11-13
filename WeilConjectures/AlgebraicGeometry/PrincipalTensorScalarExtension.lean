@@ -8,9 +8,6 @@ public import WeilConjectures.SixFunctors.ProEtale.DerivedCompletion
 import WeilConjectures.Algebra.Homology.InternalKFlatScalarTowerRealization
 
 /-! # Derived tensor and extension-restriction with their specified maps
-
-Source: blueprint, derived Nakayama resolution, On X paragraph.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -30,10 +27,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Tensor with the pulled-back finite quotient agrees with derived extension followed
 by restriction, preserving the quotient transitions and the adjunction units.
-
-Source: blueprint derived Nakayama resolution, On X paragraph; principal reduction
-normalization proof steps 2 and 3.
-(auxiliary; not a blueprint node).
 
 Proof: the coequalizer for extension followed by restriction is the balanced tensor
 with the restricted regular quotient. Its inverse sends the class of b tensor x to

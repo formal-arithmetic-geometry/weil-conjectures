@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 /-! # Stalk compatibility of a specified tensor pullback chain map
 
 Source: Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: lem-pc-pinned-tensor-square-left-summand).
 -/
 
 @[expose] public section
@@ -101,8 +100,7 @@ extensionality or chain-map
 extensionality occurs here. Zero stalk rings, zero modules, and unbounded complexes
 are allowed, since the calculation is in the two modules in degrees p and q.
 Source: Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ; Modules, Tags 01CD
-and 01CB; Sheaves, Tag 0098.
-(blueprint: lem-pc-pinned-tensor-square-left-summand). -/
+and 01CB; Sheaves, Tag 0098. -/
 theorem pinned_tensor_square_left_summand
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -37,8 +37,7 @@ pulled-back germ to one tensor the original germ. The pullback tensor comparison
 pulled-back pure tensors to tensors of pulled-back sections. Applying the target tensor
 stalk map and the two pullback stalk maps therefore gives the scalar tensorator on
 one tensor a pure tensor. Additivity and scalar linearity give equality everywhere.
-Source: Stacks Project, Modules, Tags 01CD and 01CB; Sheaves, Tag 0098.
-(blueprint: lem-pc-module-pinned-tensor-stalk-square). -/
+Source: Stacks Project, Modules, Tags 01CD and 01CB; Sheaves, Tag 0098. -/
 theorem module_pinned_tensor_stalk_square {X Y : Scheme.{u}}
     (f : X ⟶ Y) (x : X) (M N : Y.Modules) :
     let SX := RingedSpace.moduleStalkFunctor X.toRingedSpace x

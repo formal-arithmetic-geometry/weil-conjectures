@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawPullbackComposition
 /-! # Composition of raw cohomology pullbacks
 
 Source: Stacks Project, Tag 09Z1, canonical cohomology comparison maps.
-(blueprint: lem-sbc-higher-image-raw-pullback-composition).
 -/
 
 @[expose] public section
@@ -23,9 +22,8 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- Two raw pullbacks agree with the pullback of the composite arrow in Over W.
-Source: Stacks Project, Tag 09Z1 (lemma-relative-colimit), canonical comparison maps;
+Source: Stacks Project, Tag 09Z1, canonical comparison maps;
 Tag 03CB, composition of inverse image functors.
-(blueprint: lem-sbc-higher-image-raw-pullback-composition).
 
 Proof: Expand both five-factor formulas. Map the inner five factors through the
 outer derived inverse image, using preservation of composition. Naturality of the

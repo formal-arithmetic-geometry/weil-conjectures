@@ -52,7 +52,6 @@ private theorem transport_left_congr {S X T : Scheme.{u}} {a : X ⟶ S}
 
 /-- A descended underlying morphism preserves the original descent data.
 Source: Stacks Project, Descent, Lemma 0241, verification after refinement.
-(blueprint: lem-galois-fpqc-descent-morphism-compatibility).
 
 Proof: The two sides of the compatibility equation are morphisms over X ×_S X.
 Pull back along X' ×_S X' → X ×_S X. By the base-change equations for both data

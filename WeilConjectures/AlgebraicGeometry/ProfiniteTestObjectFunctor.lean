@@ -23,8 +23,7 @@ public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 # Relative profinite test schemes
 
 Source: RefactorInstruction, Section 4, equations finite-XI and XS, Lemma lem:XS;
-ModuleObject/Basic.lean, module docstring, lines 38–52; Stacks Project, Tag 097D
-(auxiliary; not a blueprint node).
+ModuleObject/Basic.lean, module docstring, lines 38–52; Stacks Project, Tag 097D.
 -/
 
 @[expose] public section
@@ -221,8 +220,7 @@ Over `Spec ℤ` the last natural isomorphism identifies it with `Spec LC(-, ℤ)
 `profiniteToScheme` sends a continuous map to the spectrum of precomposition.
 
 Source: RefactorInstruction, Section 4, equations finite-XI and XS, Lemma lem:XS;
-ModuleObject/Basic.lean, lines 38–52; Stacks Project, Tag 097D
-(auxiliary; not a blueprint node).
+ModuleObject/Basic.lean, lines 38–52; Stacks Project, Tag 097D.
 
 Proof plan (the ten steps of the node):
 1. Use `lem-weil-pbc-profinite-limit-function-factorization` and
@@ -239,19 +237,17 @@ Proof plan (the ten steps of the node):
 4. Precomposition and `def-weil-affine-spectrum` give the local maps; glue them by
    `lem-weil-pbc-scheme-morphism-gluing`. The ring-map identities give functoriality
    and the functorial identification over `Spec ℤ`.
-5. Compute the tensor product formulas using finite clopen partitions, compactness
-   (`lem-weil-pbc-tychonoff-product-quasi-compact`) and the clopen basis. Apply
+5. Compute the tensor product formulas using finite clopen partitions, compactness and the clopen basis. Apply
    `lem-weil-pbc-spec-small-colimit-limit` and glue to obtain products over `X`.
 6. Extend locally constant functions from a closed subspace using the clopen basis.
    For an equalizer, characteristic functions generate the kernel of restriction.
    The spectrum theorem and gluing give equalizers; these and products give finite limits.
 7. `lem-weil-pbc-locally-constant-prime-spectrum` identifies points as `(s,p)`.
    `lem-weil-pbc-affine-open-stalk-localization` identifies stalks with `R_p` by
-   evaluation, with inverse given by constants. Hence the induced stalk maps are flat
-   (`def-weil-flat-morphism`).
+   evaluation, with inverse given by constants. Hence the induced stalk maps are flat.
 8. Apply the finite-limit formula to the diagonal. Step 7 makes it flat, so the
-   maps are weakly etale (`def-weil-weakly-etale-morphism`) and lie in the recorded
-   small pro-etale site (`def-weil-pbc-proetale-site`).
+   maps are weakly etale and lie in the recorded
+   small pro-etale site.
 9. Finite jointly surjective families remain jointly surjective on the points `(s,p)`.
    Their arrows are affine (`pqf-def-affine-morphism`, `pqf-lem-affine-local-target`,
    and `lem-weil-pbc-morphism-affine-schemes-affine`) and flat, so their affine

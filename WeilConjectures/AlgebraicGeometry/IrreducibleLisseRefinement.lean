@@ -24,8 +24,6 @@ namespace AlgebraicGeometry.Scheme
 /-- A finite lisse stratification can be refined so that every stratum is irreducible.
 This is the topological and scheme theoretic refinement step in the proof of
 `exists_irreducible_lisse_stratification`.
-Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc`, order 1602
-(blueprint: lem-weil-pbc-irreducible-refinement).
 
 Proof: refine each Noetherian lisse stratum by its finitely many irreducible
 components, removing earlier components and pulling back the sheaf; the resulting

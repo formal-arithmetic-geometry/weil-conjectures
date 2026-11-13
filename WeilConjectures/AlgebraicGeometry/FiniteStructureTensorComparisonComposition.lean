@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 /-! # Tensor compatibility of the pinned composition comparison
 
 Source: Stacks Project, Tags 01CD, 0095 and 0096, used in the multiplication paragraph of
-Tag 09ZT (blueprint: lem-weil-pbc-finite-structure-tensor-comparison-composition).
+Tag 09ZT.
 -/
 
 @[expose] public section
@@ -86,7 +86,7 @@ private theorem composition_unit_sections
   exact he
 
 /-- The tensor comparisons respect the composition comparison pinned by adjunction mates.
-Source: Stacks Project, Tags 01CD (`lemma-tensor-product-pullback`), 0095 and 0096;
+Source: Stacks Project, Tags 01CD, 0095 and 0096;
 this is the tensor coherence calculation in the multiplication paragraph of 09ZT.
 
 Proof: Apply the composite pullback-pushforward adjunction to both morphisms. The mate
@@ -100,8 +100,7 @@ M and N identifies these two answers. Pushforward comparison on sections is rest
 along the equality of inverse-image opens; such restriction commutes with pure tensor
 sections. The tensor universal property and the adjunction bijection imply equality of
 the original morphisms. Empty schemes and zero modules need no separate choice: the
-same universal properties and formulas apply.
-(blueprint: lem-weil-pbc-finite-structure-tensor-comparison-composition). -/
+same universal properties and formulas apply. -/
 theorem finiteStructure_tensorComparison_composition
     {X S T : Scheme.{u}} (g : T ⟶ S) (h : S ⟶ X) (k : T ⟶ X)
     (w : g ≫ h = k) (M N : X.Modules) :

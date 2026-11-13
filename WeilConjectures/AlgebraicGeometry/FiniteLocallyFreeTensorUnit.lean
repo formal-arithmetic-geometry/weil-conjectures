@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 /-! # Units on finite locally free modules
 
 Source: Stacks Project, Tags 0BDP and 01E8.
-(blueprint: lem-sc-finite-locally-free-tensor-unit)
 -/
 
 @[expose] public section
@@ -46,7 +45,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 when it is invertible on the structure module.
 Source: Stacks Project, Tag 01E8, degree-zero projection formula and its local proof;
 Tag 0BDP, projection-formula paragraph.
-(blueprint: lem-sc-finite-locally-free-tensor-unit)
 
 Proof: Cover Y by opens U on which N is free with a finite basis of size r. Direct
 image restricts to the full inverse image of U, and tensor pullback along U's inclusion

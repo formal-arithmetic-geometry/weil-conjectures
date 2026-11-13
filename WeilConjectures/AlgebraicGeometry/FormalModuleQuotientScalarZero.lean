@@ -19,7 +19,6 @@ namespace AlgebraicGeometry
 /-- A scalar from the nth power of the base ideal kills every section of F/J^nF.
 Source: Stacks Project, Tag 02OC, construction of the comparison maps;
 Modules, Tags 01AG and 01CB, stalks of products and quotients.
-(blueprint: lem-weil-pbc-formal-module-quotient-scalar-zero).
 
 Proof: At a point z, let K be the image of J_z in O_{X,z}. The germ of the
 image of a base scalar in I lies in K by the definition of the extended ideal.

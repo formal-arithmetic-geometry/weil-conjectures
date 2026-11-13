@@ -87,8 +87,7 @@ lemma fp_extend
 omit [IsCommMonObj S] in
 /-- Extension of scalars preserves locally finitely presented internal modules.
 Source: the finite-presentation argument in the proof of scalar-extension preservation
-in Bhatt--Scholze, Sections 6.5 and 6.8, and the existing bounded scalar-extension proof
-(auxiliary; not a blueprint node).
+in Bhatt--Scholze, Sections 6.5 and 6.8, and the existing bounded scalar-extension proof.
 
 Proof: extension of scalars preserves finite colimits and sends the regular module to
 the regular module, so it sends a finite free cokernel presentation to one over the

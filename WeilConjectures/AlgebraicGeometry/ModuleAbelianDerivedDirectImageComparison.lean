@@ -27,7 +27,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleAbelianInverseImageComparison
 /-! # Canonical derived direct image comparison for module coefficients
 
 Source: Stacks Project, Tags 03FD and 072W.
-(blueprint: lem-weil-pbc-module-abelian-derived-direct-image-comparison)
 -/
 
 @[expose] public section
@@ -65,8 +64,7 @@ noncomputable def moduleAbelianDerivedLowerStarComparison
   Functor.rightDerivedFunctorPlusBaseChange (moduleAbelianLowerStarIso Λ f).hom
 
 /-- The Cech criterion on all etale objects gives abelian evaluation acyclicity.
-Source: Stacks 03FD, second proof paragraph, via 03FC and 03F9. 
-(blueprint: lem-sbc-injective-module-forget-evaluation-acyclic)
+Source: Stacks 03FD, second proof paragraph, via 03FC and 03F9.
 -/
 private theorem moduleAbelianForget_injective_evaluation_acyclic
     (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
@@ -134,7 +132,6 @@ private theorem moduleAbelianForget_injective_evaluation_acyclic
 /-- The canonical derived direct-image coefficient comparison is invertible.
 
 Source: Stacks Project, Tag 03FD, second paragraph of its proof, and Tag 072W.
-(blueprint: lem-weil-pbc-module-abelian-derived-direct-image-comparison)
 
 Proof: Identify a ModuleCat-valued sheaf with a module over the constant ring
 sheaf, preserving its underlying abelian sheaf and injectivity. Tag 03FD gives

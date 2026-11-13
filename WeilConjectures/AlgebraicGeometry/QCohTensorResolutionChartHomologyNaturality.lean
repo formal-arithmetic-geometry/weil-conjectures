@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.AffineTildeTensor
 /-! # Affine tensor-homology naturality
 
 Source: Stacks Project, Tags 08DX(2), 06YT and 01I9.
-(blueprint: new-t3-qcoh-tensor-resolution-chart-homology-naturality).
 -/
 
 @[expose] public section
@@ -56,9 +55,7 @@ extension homology in degree -n, with tensorResolutionExtendHomologyMapData, to
 identify the induced map with H_n(k) followed by the restriction-of-scalars
 homology isomorphism. Compose these three squares and cancel inverse isomorphisms.
 This argument includes n = 0, zero modules, and the zero ring, and does not require
-the ring restriction map to be flat.
-
-(blueprint: new-t3-qcoh-tensor-resolution-chart-homology-naturality) -/
+the ring restriction map to be flat. -/
 theorem tensorResolutionChartHomologyIso_naturality
     (Y : Scheme.{u}) (N : Y.Modules) [N.IsQuasicoherent]
     (MA NA : ∀ U : Y.affineOpens, ModuleCat.{u} (Γ(Y, U.1) : Type u))

@@ -36,8 +36,7 @@ module. Induction on the recursive idealSheafPower therefore makes each power
 inclusion an isomorphism on U, including the identity at n = 0. Restricting further to
 any W contained in U and taking sections gives the asserted bijection.
 
-Source: Stacks Project, Properties, Lemma 01PQ and its reduction to Lemma 01PM.
-(blueprint: lem-weil-pbc-ideal-power-complement). -/
+Source: Stacks Project, Properties, Lemma 01PQ and its reduction to Lemma 01PM. -/
 theorem ideal_power_complement
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]

@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMapEquality
 /-! # Shrinking stalk equality for a finite retract sheaf
 
 Source: Stacks Project, Tags 09RE, 0BC7 and 01CP.
-(blueprint: lem-sc-perfect-open-stalk-retract-map-equality).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Equality of endomorphisms of a finite free retract at one stalk holds nearby.
 Source: Stacks Project, Tag 01CP, finite-type injectivity proof.
-(blueprint: lem-sc-perfect-open-stalk-retract-map-equality).
 
 Proof: Restrict the finite-free inclusion and retraction to Z and transport them
 through the equivalence with module sheaves on the open subscheme. These functors

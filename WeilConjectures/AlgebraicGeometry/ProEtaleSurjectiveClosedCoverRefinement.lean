@@ -129,7 +129,6 @@ supply its refinement maps. Identify any affine closed immersion with an affine
 quotient using its ideal and the canonical affine isomorphisms. Finally apply
 this construction on an affine open cover of the target and bind the resulting
 covers. All constructions allow an empty family when the target is empty.
-(auxiliary; not a blueprint node)
 -/
 theorem exists_cover_refinement_surjective_closed {X Z : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] [Surjective i]

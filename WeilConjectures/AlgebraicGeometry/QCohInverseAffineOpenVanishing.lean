@@ -22,7 +22,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 /-! # Quasi-coherent vanishing over inverse images of affine opens
 
 Source: Stacks Project, Tags 08D4 (3), 08D5 and 01F4 (2).
-(blueprint: new-qcoh-inverse-affine-open-vanishing).
 -/
 
 @[expose] public section
@@ -101,7 +100,6 @@ private theorem open_cohomology_restrict_iso (X : Scheme.{u}) (F : X.Modules)
 /-- Positive module cohomology vanishes on inverse images of affine opens
 when higher direct image vanishes on quasi-coherent modules.
 Source: Stacks Project, Tags 08D5, 01F4 (2), 01XJ and 01XB.
-(blueprint: new-qcoh-inverse-affine-open-vanishing).
 
 Proof:
 1. Put U = f inverse-image V. The restriction F|U is quasi-coherent.

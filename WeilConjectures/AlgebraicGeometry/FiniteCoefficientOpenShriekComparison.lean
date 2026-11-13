@@ -10,9 +10,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImme
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek
 
 /-! # Extension by zero under the canonical finite coefficient equivalence
-
-Source: the extension-by-zero comparison in det-thm-sf-pf-finite.proof.md.
-(blueprint: lem-d5-finite-coefficient-open-shriek-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -46,9 +43,6 @@ private def openShriekFiniteCoefficientModEquivalenceIso
   exact a.leftAdjointUniq (b.ofNatIsoRight kr.symm)
 
 /-- The canonical finite coefficient equivalence commutes with derived open extension.
-
-Source: det-thm-sf-pf-finite.proof.md, extension-by-zero comparison, and uniqueness
-of left adjoints (blueprint: lem-d5-finite-coefficient-open-shriek-comparison).
 
 Proof: the finite coefficient equivalence commutes with restriction by the canonical
 pullback comparison. Compose the two open-extension adjunctions with the coefficient

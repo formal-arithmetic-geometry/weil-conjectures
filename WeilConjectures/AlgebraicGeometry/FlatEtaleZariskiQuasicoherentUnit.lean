@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.SchemeZariskiEtaleQuasiCoherentEquivalence
 
 /-! Quasi-coherent sheafification units in the tensor-section comparison.
-Source: Descent 03FH and 03DX (blueprint: lem-fd-etale-zariski-ringed-pullback-flat).
+Source: Descent 03FH and 03DX.
 -/
 
 @[expose] public section
@@ -20,8 +20,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A presheaf of étale modules identified with tensor sections of a quasi-coherent
 Zariski module is fixed by module sheafification.
-Source: Stacks, Descent, Tags 03DR and 03FH
-(blueprint: lem-fd-etale-zariski-quasicoherent-unit).
+Source: Stacks, Descent, Tags 03DR and 03FH.
 
 Proof: quasi-coherent étale descent says that the tensor-section presheaf is a sheaf.
 Transport this property through `p`. Under the faithful module-to-abelian-presheaf

@@ -46,22 +46,19 @@ section ShrinkToClosed
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsImmersion f] [CompactSpace X]
 
 /-- **The shrinking of an immersion to a closed immersion** `Y^cl(f)`: for an immersion
-`f : X ⟶ Y` with `X` quasi-compact, a chosen quasi-compact open `W ⊆ Y` such that `f` factors
+`f: X ⟶ Y` with `X` quasi-compact, a chosen quasi-compact open `W ⊆ Y` such that `f` factors
 through a closed immersion `X ⟶ W` (selected by
-`AlgebraicGeometry.Scheme.Hom.exists_isCompact_isClosedImmersion`).
-(blueprint: `def-nagata-immersion-shrink-to-closed`) -/
+`AlgebraicGeometry.Scheme.Hom.exists_isCompact_isClosedImmersion`). -/
 noncomputable def Scheme.Hom.closedShrink : Y.Opens :=
   f.exists_isCompact_isClosedImmersion.choose
 
-/-- The closed immersion `X ⟶ Y^cl(f)` through which the immersion `f` factors.
-(blueprint: `def-nagata-immersion-shrink-to-closed`) -/
+/-- The closed immersion `X ⟶ Y^cl(f)` through which the immersion `f` factors. -/
 noncomputable def Scheme.Hom.toClosedShrink : X ⟶ f.closedShrink.toScheme :=
   f.exists_isCompact_isClosedImmersion.choose_spec.choose
 
 /-- **The shrinking of an immersion to a closed immersion**: `Y^cl(f)` is a quasi-compact open of
 `Y`, the morphism `X ⟶ Y^cl(f)` is a closed immersion, and it recovers `f` after composing with
-the inclusion of `Y^cl(f)`; in particular `Y^cl(f)` contains the image of `f`.
-(blueprint: `lemma-nagata-immersion-shrink-to-closed`) -/
+the inclusion of `Y^cl(f)`; in particular `Y^cl(f)` contains the image of `f`. -/
 theorem Scheme.Hom.closedShrink_spec :
     IsCompact (f.closedShrink : Set Y) ∧ IsClosedImmersion f.toClosedShrink ∧
       f.toClosedShrink ≫ f.closedShrink.ι = f :=
@@ -92,11 +89,10 @@ section StageData
 
 variable {X S : Scheme.{u}} (f : X ⟶ S)
 
-/-- A **finite-stage datum** for a morphism `f : X ⟶ S`, relative to Noetherian approximations
+/-- A **finite-stage datum** for a morphism `f: X ⟶ S`, relative to Noetherian approximations
 `X = lim X_λ` and `S = lim S_μ`: stages `λ_X` and `λ_S`, a morphism
-`φ : X_{λ_X} ⟶ S_{λ_S}` such that `X ⟶ S ⟶ S_{λ_S}` equals `X ⟶ X_{λ_X} ⟶ S_{λ_S}`, and such
-that the induced comparison `X ⟶ X_{λ_X} ×_{S_{λ_S}} S` is an immersion.
-(blueprint: `def-nagata-relative-stage-morphism-data`) -/
+`φ: X_{λ_X} ⟶ S_{λ_S}` such that `X ⟶ S ⟶ S_{λ_S}` equals `X ⟶ X_{λ_X} ⟶ S_{λ_S}`, and such
+that the induced comparison `X ⟶ X_{λ_X} ×_{S_{λ_S}} S` is an immersion. -/
 structure Scheme.Hom.NoetherianStageData (NX : X.NoetherianApproximation)
     (NS : S.NoetherianApproximation) where
   /-- The stage `λ_X` of the approximation of the source. -/
@@ -138,11 +134,10 @@ instance : QuasiSeparated D.φ := inferInstance
 end Scheme.Hom.NoetherianStageData
 
 /-- **Existence of a finite-stage datum**: if `X` and `S` are quasi-compact and quasi-separated
-and `f : X ⟶ S` is locally of finite type, then for any Noetherian approximations of `X` and `S`
+and `f: X ⟶ S` is locally of finite type, then for any Noetherian approximations of `X` and `S`
 there is a finite-stage datum for `f`. The morphism `X ⟶ S ⟶ S_{λ_S}` descends to a stage of `X`
 since `S_{λ_S}` is of finite presentation over `ℤ` (Stacks Project Tag 01ZC), and the comparison
-with `X_{λ_X} ×_{S_{λ_S}} S` is an immersion for `λ_X` large (Stacks Project Tag 01ZE).
-(blueprint: `lemma-nagata-relative-stage-morphism-data-exists`) -/
+with `X_{λ_X} ×_{S_{λ_S}} S` is an immersion for `λ_X` large (Stacks Project Tag 01ZE). -/
 theorem Scheme.Hom.nonempty_noetherianStageData [CompactSpace X] [QuasiSeparatedSpace X]
     [LocallyOfFiniteType f] (NX : X.NoetherianApproximation) (NS : S.NoetherianApproximation) :
     Nonempty (f.NoetherianStageData NX NS) := by
@@ -177,24 +172,23 @@ variable [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace S] [QuasiSeparat
   [LocallyOfFiniteType f]
 
 /-- The chosen finite-stage datum of `f`, relative to the chosen Noetherian approximations
-`AlgebraicGeometry.Scheme.noetherianBaseSystem` of `X` and of `S`.
-(blueprint: `def-nagata-relative-stage-morphism-data`) -/
+`AlgebraicGeometry.Scheme.noetherianBaseSystem` of `X` and of `S`. -/
 noncomputable def Scheme.Hom.noetherianStageData :
     f.NoetherianStageData X.noetherianBaseSystem S.noetherianBaseSystem :=
   Classical.choice (f.nonempty_noetherianStageData _ _)
 
-/-- **The immersion model** `Y^imm(X/S) = X_{λ_X} ×_{S_{λ_S}} S` of a morphism `f : X ⟶ S`
+/-- **The immersion model** `Y^imm(X/S) = X_{λ_X} ×_{S_{λ_S}} S` of a morphism `f: X ⟶ S`
 locally of finite type between quasi-compact quasi-separated schemes, built from the chosen
-finite-stage datum. (blueprint: `def-nagata-immersion-into-fp-model`) -/
+finite-stage datum. -/
 noncomputable def Scheme.Hom.immersionModel : Scheme.{u} :=
   pullback f.noetherianStageData.φ (S.noetherianBaseSystem.π.app f.noetherianStageData.iS)
 
-/-- The structure morphism `Y^imm(X/S) ⟶ S`. (blueprint: `def-nagata-immersion-into-fp-model`) -/
+/-- The structure morphism `Y^imm(X/S) ⟶ S`. -/
 noncomputable def Scheme.Hom.immersionModelHom : f.immersionModel ⟶ S :=
   pullback.snd _ _
 
-/-- The immersion `i^imm : X ⟶ Y^imm(X/S)` over `S` induced by the compatibility of the
-finite-stage datum. (blueprint: `def-nagata-immersion-into-fp-model`) -/
+/-- The immersion `i^imm: X ⟶ Y^imm(X/S)` over `S` induced by the compatibility of the
+finite-stage datum. -/
 noncomputable def Scheme.Hom.toImmersionModel : X ⟶ f.immersionModel :=
   pullback.lift _ f f.noetherianStageData.w
 
@@ -217,8 +211,7 @@ instance Scheme.Hom.quasiSeparated_immersionModelHom : QuasiSeparated f.immersio
   MorphismProperty.pullback_snd _ _ inferInstance
 
 /-- **The immersion model**: `Y^imm(X/S)` is quasi-compact, quasi-separated and locally of finite
-presentation over `S`, and `i^imm : X ⟶ Y^imm(X/S)` is an immersion over `S`.
-(blueprint: `def-nagata-immersion-into-fp-model`, `lemma-nagata-immersion-into-fp-model`) -/
+presentation over `S`, and `i^imm: X ⟶ Y^imm(X/S)` is an immersion over `S`. -/
 theorem Scheme.Hom.immersionModel_spec :
     LocallyOfFinitePresentation f.immersionModelHom ∧ QuasiCompact f.immersionModelHom ∧
       QuasiSeparated f.immersionModelHom ∧ IsImmersion f.toImmersionModel ∧
@@ -258,12 +251,11 @@ lemma Scheme.Hom.toClosedShrink_closedModelHom :
     f.toImmersionModel.toClosedShrink ≫ f.closedModelHom = f := by
   simp [Scheme.Hom.closedModelHom]
 
-/-- **The finite presentation model system** `FP(X/S)` of a morphism `f : X ⟶ S` locally of
+/-- **The finite presentation model system** `FP(X/S)` of a morphism `f: X ⟶ S` locally of
 finite type between quasi-compact quasi-separated schemes: the closed immersion
 `X ⟶ Y° = Y^cl(i^imm)` into the quasi-compact open of the immersion model, followed by the
 system of closed subschemes of `Y°` cut out by the finite type subideals of the ideal of `X`
-(`AlgebraicGeometry.Scheme.Hom.FinitePresentationApproximation.ofIsClosedImmersion`).
-(blueprint: `def-nagata-finite-type-fp-model-system`) -/
+(`AlgebraicGeometry.Scheme.Hom.FinitePresentationApproximation.ofIsClosedImmersion`). -/
 noncomputable def Scheme.Hom.finitePresentationApproximation :
     f.FinitePresentationApproximation :=
   .ofIsClosedImmersion f.closedModelHom f.toImmersionModel.toClosedShrink

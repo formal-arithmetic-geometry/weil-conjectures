@@ -17,9 +17,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # Finite coefficients of a finite-stalk module sheaf
-
-Source: the normalization exact-sequence blueprint, unit `sk-thm-p1`, finite-coefficient
-reduction in lem-weil-pbc-finite-pushforward-finite-stalk-module.
 -/
 
 @[expose] public section
@@ -39,10 +36,6 @@ private theorem finite_quotient_annihilator (R M : Type*) [CommRing R]
 
 /-- The canonical sectionwise annihilator of a constructible module sheaf with finite
 stalks has finite quotient.
-
-Source: normalization exact-sequence blueprint, finite-coefficient reduction in
-`lem-weil-pbc-finite-pushforward-finite-stalk-module`, step 1.
-(blueprint: lem-weil-pbc-finite-coefficient-of-finite-stalks)
 
 Proof: Choose the finite module-constructible stratification. On each stratum discard
 empty members of a trivializing etale cover. Identify each remaining constant value

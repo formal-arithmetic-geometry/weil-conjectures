@@ -237,7 +237,6 @@ end PresheafExtension
 left adjoint, also when the modules live in a universe larger than the site.
 
 Source: Stacks Project, Sheaves on Spaces, Tag 0096; Mathlib presheaf pullback construction.
-(blueprint: lem-sc-field-scalar-presheaf-pullback-exists).
 
 Proof: for each open U, form R(U) tensor over k with the sections of the input
 presheaf. For a possibly noncommutative R(U), the right k-action is

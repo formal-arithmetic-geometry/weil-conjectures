@@ -75,7 +75,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The affine quotient identifications give a canonical completion isomorphism.
 Source: Stacks Project, Tags 01I8 and 01IC; Cohomology of Schemes, Lemma 088B.
-(blueprint: lem-weil-pbc-formal-completion-affine-sections)
 
 Proof: Set A = Gamma(Y,U), I = J(U), and M = Gamma(U,H). On an affine open,
 quasi-coherent sheaves are modules, and affine sections are exact. The range of the

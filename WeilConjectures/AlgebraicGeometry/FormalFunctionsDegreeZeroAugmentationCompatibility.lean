@@ -14,7 +14,6 @@ Source: Stacks Project, Tags 01E4 and 01FB, with formal-fibre notation from Tag 
 The component and transition calculations use the canonical construction already
 proved in FormalFunctionsDegreeZeroSystemIso, imported with `import all` to use
 its private canonical components and transition theorem.
-(blueprint: lem-weil-pbc-formal-functions-degree-zero-augmentation-compatibility).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ attribute [local instance] Scheme.Modules.enoughInjectives
 classes obtained from the fixed degree-zero direct-image augmentation.
 Source: Stacks Project, Tags 01E4 and 01FB (degree zero), and Tag 02OD for the
 formal-fibre notation. No formal-functions completion theorem is used.
-(blueprint: lem-weil-pbc-formal-functions-degree-zero-augmentation-compatibility).
 
 Proof: At each n compose the inverse of the global-sections degree-zero
 augmentation with global sections of tensorPullbackObjUnitToUnit. Both maps are

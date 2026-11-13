@@ -28,7 +28,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- The unit to the pushforward from every nonempty open subscheme is an isomorphism.
 Source: Stacks Project, Tag 09Z5, nonempty-open part.
-(blueprint: lem-weil-pbc-normal-constant-generic-open-unit)
 
 Proof: a nonempty open subscheme of an integral scheme contains its generic point. The map
 from the spectrum of the generic local ring therefore factors through the open immersion as

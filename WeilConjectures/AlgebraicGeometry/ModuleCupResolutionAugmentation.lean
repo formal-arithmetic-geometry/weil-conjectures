@@ -78,7 +78,6 @@ private lemma singleTensor_component (F G : SheafOfModules.{u}
 set_option linter.unusedSectionVars false in
 /-- A realization respects the coefficient augmentations before localization.
 Source: Stacks Project, Tag 0FKU, construction before Lemma 20.31.3.
-(blueprint: lem-sc-module-cup-resolution-augmentation)
 Proof: the source tensor of single complexes is concentrated in degree zero. In all
 other degrees both maps vanish. In degree zero, test the maps on elementary tensors
 of sections over each open. The extension/single and tensor/single isomorphisms send

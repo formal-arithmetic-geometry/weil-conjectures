@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.PerfectComplex
 
 /-! # PerfectDescentAffineOpen
 
-Source: Stacks Project, Tag 09RF (blueprint: lem-pc-perfect-descent-affine-open).
+Source: Stacks Project, Tag 09RF.
 -/
 
 @[expose] public section
@@ -28,8 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Perfect complexes descend on an affine open, and on the empty open.
-Source: Stacks Project, Tag 09RF, affine case; Tag 0BC7 and Tag 08EB
-(blueprint: lem-pc-perfect-descent-affine-open).
+Source: Stacks Project, Tag 09RF, affine case; Tag 0BC7 and Tag 08EB.
 
 Proof: An open immersion with affine image identifies its source with that affine
 subscheme. The empty open is affine as well, by isAffineOpen_bot.

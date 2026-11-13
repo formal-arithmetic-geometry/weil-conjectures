@@ -59,7 +59,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 -- Scalar restriction and the two cohomology functors require extra elaboration steps.
 /-- Finite quotient-system isomorphism and quotient-unit factorization.
 Source: Stacks Project, Tag 02OD and Tag 089W.
-(blueprint: lem-weil-pbc-formal-functions-finite-quotient-iso-b)
 Proof: Construct the finite-level closed-immersion quotient identifications, apply
 cohomology and the affine edge isomorphism, and check adjacent-level naturality.
 The quotient-unit equation is the defining adjunction-unit equation. -/

@@ -13,7 +13,6 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Flat morphisms give stalkwise Tor-independent squares
 Source: Stacks Project, Tags 00M3 and 08IB.
-(blueprint: lem-sc-flat-pullback-tor-independent).
 -/
 
 @[expose] public section
@@ -24,7 +23,6 @@ namespace AlgebraicGeometry
 
 /-- Flatness of the left morphism makes every pair of stalks Tor independent.
 Source: Stacks Project, Algebra, Tag 00M3, and perfect.tex, Tag 08IB.
-(blueprint: lem-sc-flat-pullback-tor-independent).
 
 Proof: the left stalk is flat over the base stalk by the stalk criterion for flat
 morphisms. By symmetry of Tor, resolve the other stalk by projectives and tensor

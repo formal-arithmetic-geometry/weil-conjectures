@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.SupportedMapAffineAttachment
 /-! # The finite stabilization construction for supported map lifting
 
 Source: Stacks Project, Tag 09IM, proof of Lemma 36.13.11.
-(blueprint: lem-sc-perfect-supported-stabilized-lift).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The affine-cover construction extends one finite stabilization of the given map.
 This records the actual iterated object and its first-projection map.
 Source: Stacks Project, Tag 09IM, proof of Lemma 36.13.11 and Remark 36.13.12.
-(blueprint: lem-sc-perfect-supported-stabilized-lift).
 
 Proof: Choose finitely many affine opens whose union with U is X, and attach them
 one at a time. Start with S 0 and a 0 on U. At an attachment V, the intersection

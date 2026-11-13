@@ -15,8 +15,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Sections of a quasi-coherent resolution on a basic open
 
-Source: Stacks, Tags 08C2, 08D2 and 08BS
-(blueprint: lem-sc-principal-open-sections-resolution-quasi-iso).
+Source: Stacks, Tags 08C2, 08D2 and 08BS.
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ namespace AlgebraicGeometry
 
 /-- Taking sections on a basic open sends a resolution of a termwise quasi-coherent
 complex to a quasi-isomorphism, even when the resolution is not termwise quasi-coherent.
-Source: Stacks, Tags 08C2, 08D2 and 08BS
-(blueprint: lem-sc-principal-open-sections-resolution-quasi-iso).
+Source: Stacks, Tags 08C2, 08D2 and 08BS.
 
 Proof:
 1. Restrict the map to D(g). Restriction is exact and preserves K-injective complexes

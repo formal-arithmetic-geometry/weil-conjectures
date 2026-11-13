@@ -78,10 +78,6 @@ private theorem finiteLisse_of_range_subset {X Y Z : Scheme.{u}}
         ((Etale.upperStar AddCommGrpCat.{u + 1} a).obj E)).addCommGroupIsoToAddEquiv.toEquiv
 
 /-- Finite set-stalk lissity on each stratum implies lissity on the union of their interiors.
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, proof paragraphs 1--3 of
-`lem-weil-pbc-finite-pushforward-generic-constructible`; the Zariski gluing argument
-is also written in `WeilConjectures/ConstructibleSheaf/GenericConstancy.lean`.
-(blueprint: lem-weil-pbc-lisse-stratum-interiors).
 
 Proof: Cover the union W of the interiors by the open subschemes V_i = interior(T_i).
 For each i form P_i = V_i x_Z T.domain i. The first projection is an immersion

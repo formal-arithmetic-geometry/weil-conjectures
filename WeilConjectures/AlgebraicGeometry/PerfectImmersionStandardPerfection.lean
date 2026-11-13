@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 /-! # Perfection of closed-immersion pushforward in the standard localization
 
 Source: Stacks Project, Tags 05RU, 08CM and 0A9U.
-(blueprint: lem-sc-perfect-immersion-standard-perfection).
 -/
 
 @[expose] public section
@@ -81,7 +80,6 @@ private theorem closedDirectImageColimits {Z Y : Scheme.{u}} (i : Z ⟶ Y)
 
 /-- A perfect single pushforward of O_Z gives a perfect standard Ri_* of the unit.
 Source: Stacks Project, Tags 05RU, 08CM and 0A9U.
-(blueprint: lem-sc-perfect-immersion-standard-perfection).
 
 Proof: on every open of Y compare the given derived localization with the standard
 one by the Qh comparison. Restriction is an exact functor of module categories;

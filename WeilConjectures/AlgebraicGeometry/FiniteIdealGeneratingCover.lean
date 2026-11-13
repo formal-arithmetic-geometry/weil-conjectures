@@ -10,7 +10,6 @@ public import WeilConjectures.CategoryTheory.RingedIdealGenerators
 # A cover with finite generating lists for an ideal sheaf
 
 Source: Stacks Project, algebraization.tex, Tag 099E, first paragraph.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace CategoryTheory
 /-- Local finite type gives a covering family with an explicitly indexed finite generating
 list on each slice. The indexing type of the covering stays in the universe of the site.
 Source: Stacks Project, Tag 099E, first paragraph.
-(auxiliary; not a blueprint node).
 
 Proof: take Mathlib's local generators data of a finite-type module. Each generator
 index type is finite; choose its equivalence with Fin of its cardinality. Apply the ideal
@@ -59,8 +57,7 @@ theorem exists_finiteIdealGeneratingCover
   rw [Equiv.symm_apply_apply]
 
 /-- An object with a specified finite generating list for the restricted ideal.
-Source: Stacks Project, Tag 099E, the finite-generator subsite.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 099E, the finite-generator subsite. -/
 structure RingedIdealGeneratingIndex
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})
@@ -73,7 +70,6 @@ structure RingedIdealGeneratingIndex
 
 /-- All objects with specified finite generating lists form a covering family.
 Source: Stacks Project, Tag 099E, first paragraph.
-(auxiliary; not a blueprint node).
 
 Proof: the finite generating cover gives a subfamily of this family. Enlarge its
 covering sieves to the sieves of all objects carrying generating lists. -/

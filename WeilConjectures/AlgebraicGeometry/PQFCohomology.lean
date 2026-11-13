@@ -18,7 +18,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 # Sheaf cohomology and higher direct images
 
 Source: Stacks Project, Cohomology, Tag 01DZ, equations cohomology-modules and
-higher-direct-image-modules; Tag 079W (blueprint: pqf-def-cohomology).
+higher-direct-image-modules; Tag 079W.
 -/
 
 @[expose] public section
@@ -33,11 +33,11 @@ namespace AlgebraicGeometry
 `RingedSpace.moduleCohomology X.toRingedSpace p`, the right derived functors of global
 sections on `𝒪_X`-modules (by definition). They form a cohomological δ-functor, so a short
 exact sequence of `𝒪_X`-modules gives a long exact cohomology sequence. For a morphism
-`f : X ⟶ S`, the higher direct image `R^p f_* F = H^p(Rf_*(F[0]))` is naturally isomorphic
+`f: X ⟶ S`, the higher direct image `R^p f_* F = H^p(Rf_*(F[0]))` is naturally isomorphic
 to the `p`-th right derived functor of module direct image `f_*`.
 
 Source: Stacks Project, Cohomology, Tag 01DZ, equations cohomology-modules and
-higher-direct-image-modules; Tag 079W (blueprint: pqf-def-cohomology).
+higher-direct-image-modules; Tag 079W.
 
 Proof:
 1. Use def-sc-ringed-space-module-cohomology: an injective resolution followed by global

@@ -14,8 +14,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # A nonzero morphism into a locally constant sheaf has locally nonzero germs
 
-Source: the first step of blueprint `lem-weil-pbc-lisse-generic-kernel`
-(blueprint: lem-weil-pbc-locally-constant-nonzero-germs).
+Source: the first step of
 -/
 
 @[expose] public section
@@ -29,9 +28,6 @@ namespace AlgebraicGeometry.Scheme
 /-- A nonzero morphism into an abelian sheaf whose underlying set sheaf is locally
 constant has a section on a nonempty etale neighbourhood whose image has nonzero
 geometric germs everywhere on that neighbourhood.
-
-Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-lisse-generic-kernel`,
-first proof step (blueprint: lem-weil-pbc-locally-constant-nonzero-germs).
 
 Proof:
 1. Geometric stalks are jointly faithful, so a nonzero morphism has a nonzero map

@@ -14,8 +14,7 @@ import Mathlib.Topology.Sheaves.SheafCondition.Sites
 /-! # Sheafification of module presheaves identified on affine opens
 
 Source: Stacks Project, Tags 009U and 0089, the module basis equivalence and the
-universal property of module sheafification
-(blueprint: lem-sc-module-sheafification-affine-restriction).
+universal property of module sheafification.
 -/
 
 @[expose] public section
@@ -97,8 +96,7 @@ private theorem affine_module_restriction_bijective (Y : Scheme.{u})
 set_option backward.isDefEq.respectTransparency false in
 /-- A natural identification with a module sheaf on all affine opens extends after
 sheafification, naturally in an arbitrary parameter category.
-Source: Stacks Project, Tags 009U and 0089
-(blueprint: lem-sc-module-sheafification-affine-restriction).
+Source: Stacks Project, Tags 009U and 0089.
 
 Proof: Affine opens form a basis. For each parameter, extend the given affine-open
 maps into the target sheaf to all opens: cover each open by affine opens, apply the

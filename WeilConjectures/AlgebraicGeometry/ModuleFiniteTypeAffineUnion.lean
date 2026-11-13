@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleSubmoduleBinaryGluing
 /-! # The finite-type submodule on the union with an affine open
 
 Source: Stacks Project, Properties, Lemma 01PF, affine reduction and gluing.
-(blueprint: lem-weil-pbc-module-finite-type-affine-union).
 -/
 
 @[expose] public section
@@ -93,7 +92,6 @@ private theorem finiteType_pushforward.{u₁, u₂, v₁, v₂}
 
 Source: Stacks Project, Properties, Lemma 01PF, proof, affine reduction and gluing
 (https://stacks.math.columbia.edu/tag/01PF).
-(blueprint: lem-weil-pbc-module-finite-type-affine-union).
 
 Proof: Quasi-separatedness makes the overlap W intersect V quasi-compact. Identify
 H on V with the tilde of its sections. Finite type on W restricts to finite type on

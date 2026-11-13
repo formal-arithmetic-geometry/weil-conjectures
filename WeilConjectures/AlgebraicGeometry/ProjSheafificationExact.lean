@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 # Exactness of associated sheaves on the projective line
 
 Source: Stacks Project, Constructions, Lemma 01M7, final paragraph; the sheafifying
-clause of blueprint `lem-sc-p1-graded-resolution`.
-(blueprint: lem-sc-p1-proj-sheafification-exact)
+clause of.
 
 `P = Proj k[x₀,x₁]` is `Proj (homogeneousSubmodule (Fin 2) k)` with the standard
 total-degree grading `MvPolynomial.gradedAlgebra`, as in the landed sibling
@@ -41,7 +40,6 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 /-- Sheafifying a short exact graded sequence over `k[x₀,x₁]` gives a short exact
 sequence of modules on its Proj.
 Source: Stacks, Constructions, Lemma 01M7, final paragraph.
-(blueprint: lem-sc-p1-proj-sheafification-exact)
 
 Proof:
 1. By `lem-sc-p1-proj-tilde-functorial`, the given chart fraction formulas are those

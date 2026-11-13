@@ -49,7 +49,6 @@ private theorem exists_affine_compact_isoLocus_neighbourhood {W : Scheme.{u}}
 
 /-- On an affine open, the locally invertible locus of a vector bundle map is compact.
 Source: Stacks Project, Tag 05GD, Lemma 10.79.4(3), and Tag 0BDP, final sentence.
-(blueprint: lem-sc-finite-locally-free-map-iso-locus-compact)
 
 Proof: Cover the affine open V by simultaneous finite free frames for M and N, refining
 these frames to affine opens contained in V. Compactness of V gives a finite subcover.

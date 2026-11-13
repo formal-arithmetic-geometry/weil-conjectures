@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint
 /-! # A right adjoint to derived direct image for Noetherian schemes
 
 Source: Stacks Project, Duality for Schemes, Lemma 48.3.1, Tag 0A9E, and Derived Categories
-of Schemes, Lemma 36.4.1 (1), Tag 08D5
-(blueprint: lem-pc-noetherian-derived-direct-image-right-adjoint).
+of Schemes, Lemma 36.4.1 (1), Tag 08D5.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace AlgebraicGeometry
 
 /-- Derived direct image between Noetherian schemes preserves quasi-coherent cohomology,
 and its restriction to the full quasi-coherent derived subcategories has a right adjoint.
-Source: Stacks Project, Tags 0A9E and 08D5 (1)
-(blueprint: lem-pc-noetherian-derived-direct-image-right-adjoint).
+Source: Stacks Project, Tags 0A9E and 08D5 (1).
 
 Proof:
 1. Noetherian schemes are quasi-compact by hypothesis and quasi-separated by

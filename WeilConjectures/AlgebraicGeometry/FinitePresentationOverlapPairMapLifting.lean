@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.OverlapPairRefinementPersistence
 
 /-! # Descent of a map on one pairwise overlap
 
-Source: Stacks Project, Tags 01ZR and 05N7.
-(blueprint: lem-pc-fp-overlap-pair-map-lifting). -/
+Source: Stacks Project, Tags 01ZR and 05N7. -/
 
 @[expose] public section
 
@@ -27,8 +26,7 @@ open CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat
 
 namespace AlgebraicGeometry
 
-/-- The limit map factors through every later stage.
-(blueprint: lem-pc-fp-overlap-pair-map-lifting). -/
+/-- The limit map factors through every later stage. -/
 lemma overlapLimitMap_stage_comp {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cone (R.op ⋙ Scheme.Spec))
     {i j k : I} {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))
@@ -46,7 +44,6 @@ lemma overlapLimitMap_stage_comp {I : Type u} [Preorder I]
 set_option linter.unusedVariables false in
 /-- Descend the conjugated transition on one pairwise overlap, with persistence at later stages.
 Source: Stacks Project, Tag 01ZR, first proof (Zariski gluing), and Tag 05N7 (2), (3).
-(blueprint: lem-pc-fp-overlap-pair-map-lifting).
 
 Proof: The overlap of the two fixed affine charts is quasi-compact because the ambient
 scheme is quasi-separated. Cover it by finitely many affine opens, and cover their

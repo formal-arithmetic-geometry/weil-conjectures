@@ -18,7 +18,7 @@ public import Mathlib.Algebra.Category.ModuleCat.AB
 # Local constancy with fixed module coefficients on the pro-etale site
 
 Source: Bhatt--Scholze, Definition 7.3.1(1), with module coefficients;
-Stacks Project, Tag 099Y (auxiliary; not a blueprint node).
+Stacks Project, Tag 099Y.
 
 This is the fixed-coefficient encoding used by the canonical comparison adjunction.
 -/
@@ -36,8 +36,7 @@ namespace AlgebraicGeometry.Scheme
 The constants are sheafifications of constant module presheaves, including their scalar
 multiplication. The modules may vary and need not be finite. This is the encoding needed by the
 module-valued comparison adjunction.
-Source: Bhatt--Scholze, Definition 7.3.1(1), module version; Stacks Project, Tag 099Y
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Definition 7.3.1(1), module version; Stacks Project, Tag 099Y. -/
 noncomputable def IsLocallyConstantProEtaleFixedModuleSheaf (Y : Scheme.{u})
     (A : Type (u + 1)) [CommRing A]
     (F : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A)) : Prop :=

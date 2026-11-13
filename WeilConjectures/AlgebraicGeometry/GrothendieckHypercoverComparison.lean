@@ -31,7 +31,6 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A]
 /-- Finite split hypercovers compute the classical derived terminal-section functor.
 Source: Stacks Project, Hypercoverings, Tag 01H0, first proof, with the same
 argument in a Grothendieck abelian coefficient category.
-(auxiliary; not a blueprint node).
 
 Proof: use the explicit comparison cocone from the section bicomplex of an
 injective resolution. Its injective-row acyclicity is proved by Gabriel--Popescu

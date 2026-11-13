@@ -15,7 +15,6 @@ import all Mathlib.Algebra.Homology.Localization
 /-! # Target localization and derived-unit transport
 
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-injective-exchange-target-transport).
 -/
 
 @[expose] public section
@@ -46,7 +45,6 @@ set_option backward.defeqAttrib.useBackward true in
 /-- Localization of the exchange prefix on a bounded-below complex.
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and the
 exact localization comparisons.
-(blueprint: lem-weil-pbc-injective-exchange-target-transport).
 Proof: apply the inclusion to the two factors. Its image of the exact U
 comparison is mapDerivedCategoryFactorsh. At a quotient complex this is the
 complex comparison, since mapHomotopyCategoryFactors is the identity.
@@ -106,7 +104,6 @@ set_option backward.defeqAttrib.useBackward true in
 /-- Transport of a target derived unit and an exact representative map.
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and
 Functor.rightDerivedFunctorPlusCompatibility.
-(blueprint: lem-weil-pbc-injective-exchange-target-transport).
 Proof: the defining rightDerivedUnique identity identifies the included
 bounded-below F unit with the unbounded unit followed by the inverse
 compatibility. Naturality of the inverse compatibility moves this inverse
@@ -225,7 +222,6 @@ set_option backward.defeqAttrib.useBackward true in
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph; the exact
 localization comparisons and defining unit compatibility of
 `Functor.rightDerivedFunctorPlusCompatibility`.
-(blueprint: lem-weil-pbc-injective-exchange-target-transport).
 
 Proof: map the bounded-below composite through the inclusion and use its
 compatibility with mapDerivedCategoryPlusFactorsh. The first factor is the

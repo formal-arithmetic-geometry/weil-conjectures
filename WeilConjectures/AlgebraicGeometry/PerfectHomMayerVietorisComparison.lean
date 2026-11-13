@@ -17,7 +17,6 @@ import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
 /-! # The five-term comparison diagram for perfect Hom continuity
 
 Source: Stacks Project, Tag 09RE, Mayer--Vietoris induction step, and Tag 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-comparison).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ both to stage transport and to limit transport. The four adjacent comparisons ar
 invertible by open-local continuity, in degrees -1 and 0.
 
 Source: Stacks Project, Tag 09RE, proof's Mayer--Vietoris step, using Tag 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-comparison).
 
 Proof:
 1. Pull U and V back along t. Their union is top on Y. The open immersion identifies

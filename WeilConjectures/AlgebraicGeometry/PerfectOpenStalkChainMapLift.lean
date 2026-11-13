@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.StalkInternalHomFinitePresentation
 /-! # Lifting a perfect stalk chain map
 
 Source: Stacks Project, Tag 09RE, affine proof, and Tag 0BC7 (2).
-(blueprint: lem-sc-perfect-open-stalk-chain-map-lift).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ noncomputable section
 in the coordinates of the canonical restriction comparison.
 Source: Stacks Project, Tag 09RE, affine proof's finite-presentation calculation;
 Tag 0BC7 (2), chain representatives, and Tag 00CR.
-(blueprint: lem-sc-perfect-open-stalk-chain-map-lift).
 
 Proof: Extend the degreewise stalk maps by
 `exists_affine_perfect_open_stalk_degreewise_lift`. The given chain map makes

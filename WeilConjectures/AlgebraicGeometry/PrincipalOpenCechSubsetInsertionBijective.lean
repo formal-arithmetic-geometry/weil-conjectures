@@ -290,7 +290,6 @@ private theorem subsetInsertion_read
 /-- The explicit finite sum of subset insertions is bijective.
 
 Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
-(blueprint: lem-sc-principal-open-cech-subset-insertion-bijective).
 
 Proof: In column p, the extension by zero identifies the nonnegative component with
 sections on increasing (p+1)-tuples. Increasing enumeration bijects these tuples with

@@ -44,7 +44,6 @@ set_option maxHeartbeats 600000 in
 set_option backward.isDefEq.respectTransparency false in
 /-- The resolution map admits a semilinear lift over the map on global functions.
 Source: Stacks Project, Cohomology of Sheaves, Equation 01F9 and Remark 01FB.
-(blueprint: lem-weil-pbc-module-cohomology-fmap-semilinear-lift)
 
 The lift is obtained by checking scalar compatibility on the section, cycle and
 homology maps in the defining resolution comparison. -/

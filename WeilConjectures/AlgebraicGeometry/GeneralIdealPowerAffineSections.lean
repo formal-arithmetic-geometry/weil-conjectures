@@ -15,7 +15,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Affine sections of recursive powers of a quasi-coherent ideal module
 
 Source: Stacks Project, Properties, Lemma 01PQ, affine ideal powers.
-(blueprint: lem-weil-pbc-general-ideal-power-affine-sections).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ are the powers of the original affine section ideal.
 
 Source: Stacks Project, Properties, Lemma 01PQ, affine ideal powers; existing
 proved helper Modules.powers_affine_sections in CoherentSupportVanishingIdealNilpotence.
-(blueprint: lem-weil-pbc-general-ideal-power-affine-sections).
 
 Proof: For powers zero and one the claims follow from the unit module and the
 original module. For every later power, quasi-coherence of tensor products and

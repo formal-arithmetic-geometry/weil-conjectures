@@ -23,7 +23,6 @@ namespace AlgebraicGeometry.Proj
 /-- Finite representatives satisfy the section values for every canonical evaluation.
 Source: Stacks Project, Section 27.8, Lemma 27.8.1 (finite standard-open refinements)
 and the construction preceding Lemma 27.8.4, Tag 01M7, applied to A(k).
-(blueprint: new-finite-values)
 
 Proof: write the section near each point as a homogeneous fraction a/d. Choose a
 homogeneous u whose basic open contains that point and is inside

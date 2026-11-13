@@ -13,7 +13,6 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-! # Products of formal kernel representatives
 
 Source: Stacks Project, Lemma 087Z and Section 0EHN.
-(blueprint: lem-weil-pbc-formal-kernel-representative-product).
 -/
 
 @[expose] public section
@@ -324,9 +323,8 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Multiplication of actual representatives lands in the successive kernel and is
 independent of the representatives. This statement neither lifts arbitrary quotient
 sections nor glues local products.
-Source: Stacks Project, Lemma 087Z (lemma-finite-over-rees-algebra), associated graded
+Source: Stacks Project, Lemma 087Z, associated graded
 construction, and Section 0EHN, equation 0880.
-(blueprint: lem-weil-pbc-formal-kernel-representative-product).
 
 Proof: On each stalk the adjacent formal quotient identifications, iterated through
 nested ideal powers, identify the reduction from level m+n+1 to level n+1 with

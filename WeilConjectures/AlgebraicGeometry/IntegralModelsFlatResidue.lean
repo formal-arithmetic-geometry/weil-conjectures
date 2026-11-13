@@ -806,7 +806,6 @@ modulo the finite type ideal given by its first residue kernel. This statement c
 ordinary module sheaves only; no derived completeness or derived equivalence is asserted.
 
 Source: Stacks Tags 093M and 099L; blueprint integral-models, proof (1).
-(auxiliary; not a blueprint node).
 
 Proof: reconstruct the section rings, then transport them to the coefficient-sized small
 site. Constant-sheaf inverse image identifies the discrete integral and residue rings

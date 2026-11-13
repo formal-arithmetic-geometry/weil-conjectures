@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
 /-! # Global transport through the composition comparison
 
 Source: Stacks Project, Tag 09ZF, third and fourth proof paragraphs.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-target-comparison).
 -/
 
 @[expose] public section
@@ -123,7 +122,6 @@ private lemma sectionIso_inverse_component
 side of the pullback square.
 Source: Stacks Project, Tag 09ZF, third and fourth proof paragraphs; Sites,
 Tags 03CB and 03CC.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-target-comparison).
 
 Proof: Expand the inverse defining the target section and the section isomorphism.
 The latter first identifies the top open with the twice-pulled-back identity,

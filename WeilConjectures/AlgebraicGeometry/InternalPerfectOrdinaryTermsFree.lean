@@ -28,7 +28,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- Every term of the ordinary quotient complex is a finite sum of the regular module.
 No boundedness or weak contractibility is needed for this termwise assertion.
 Source: Stacks Tag 09C6, finite-free scalar reduction.
-(blueprint: lem-pe-internal-perfect-ordinary-terms-free).
 
 Proof: choose a finite basis in the scalar module and lift it to the coefficient universe.
 The constant scalar realization identifies the corresponding finite power with the same

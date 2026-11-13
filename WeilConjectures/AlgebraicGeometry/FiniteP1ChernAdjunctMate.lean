@@ -8,8 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackComp
 
 /-! # The formal mate step for the projective-line Chern map
-
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public noncomputable section
@@ -237,9 +235,6 @@ private lemma native_adjunct_square
 
 set_option linter.unusedVariables false in
 /-- The Chern-map square transposes to the direct-image adjunct square.
-Source: the mate-unit and mate-counit identities in
-`lem-sp-finite-p1-chern-adjunct-base-change`, proof step 3.
-(auxiliary; not a blueprint node)
 
 Expand `ordinaryFiniteP1ChernPushforward` as the inverse-image/direct-image
 adjunct, use the defining mate formula for `ordinaryFiniteP1Exchange`, and

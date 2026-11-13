@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeReverseComponentsLift
 import WeilConjectures.AlgebraicGeometry.FiniteFreeChainMapStalkEquality
 
 /-! # Spreading a homotopy of a bounded finite free complex
-
-Source: lem-pc-perfect-locus, extension of finite calculations near a point.
-(blueprint: lem-pc-finite-free-stalk-homotopy-p-only)
 -/
 
 @[expose] public section
@@ -38,11 +35,6 @@ private def homotopyOfNaturalIso
   simpa only [Category.assoc, Iso.hom_inv_id, Category.comp_id] using ht
 
 /-- A stalk homotopy of two fixed endomorphisms spreads near the point.
-
-Source: blueprint sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus,
-proof, extension of the finite calculation to a neighbourhood; expanded in
-lem-pc-finite-free-stalk-homotopy-pair-shrink, steps 1--3.
-(blueprint: lem-pc-finite-free-stalk-homotopy-p-only).
 
 Proof: Choose the termwise finite bases supplied by hfree and a homotopy in hP.
 Restriction and pullback carry these bases to finite bases; over Spec O_{Y,y}

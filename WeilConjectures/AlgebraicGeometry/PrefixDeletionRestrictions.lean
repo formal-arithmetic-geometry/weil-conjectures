@@ -66,8 +66,7 @@ The incoming property gives the same constraints on η, hence η₀=η.
 The defining restriction equations now give the two asserted identities.
 This proof is pointwise and needs no particular construction of e, nor its
 bijectivity or the before condition. It includes p=0, b=0, b=p and repeated
-values. For an empty I there are no tuples to check.
-(blueprint: new-prefix-deletion-restrictions) -/
+values. For an empty I there are no tuples to check. -/
 theorem prefixDeletionRestrictions {I : Type v} [LinearOrder I] (p : ℕ)
     (t : Fin (p + 2) → I)
     (e : ({x : Equiv.Perm (Fin (p + 2)) × Fin (p + 2) ×

@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceExists
 /-!
 # Restriction and trace for finite étale morphisms
 
-Source: Stacks Project, Section 03SH, Definition 03SE and the characterization following it
-(blueprint: def-weil-pbc-finite-etale-trace).
+Source: Stacks Project, Section 03SH, Definition 03SE and the characterization following it.
 
 ## Main definitions
 
@@ -34,7 +33,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- Restriction is the unit at `F` of `f⁻¹ ⊣ f_*`. Source: Stacks Project, Section 03SH,
-first paragraph (blueprint: def-weil-pbc-finite-etale-trace).
+first paragraph.
 
 Construction step 1: use the adjunction of def-weil-pbc-inverse-image with the direct
 image of def-weil-pbc-direct-image and evaluate its unit at `F`. -/
@@ -48,8 +47,7 @@ noncomputable def finiteEtaleRestriction {X Y : Scheme.{u}} (f : Y ⟶ X)
 `existsUnique_finiteEtaleTrace`. That family is natural in `F`, commutes with étale
 localization, and is the sum map for every finite split covering, including the empty one.
 The definition selects data from the named existence theorem, rather than postponing data.
-Source: Stacks Project, Definition 03SE and the following characterization in Section 03SH
-(blueprint: def-weil-pbc-finite-etale-trace).
+Source: Stacks Project, Definition 03SE and the following characterization in Section 03SH.
 
 Construction steps 2 and 3: Stacks permits using the localization and split-sum
 characterization without constructing `f_!`. Choose the entire family supplied by

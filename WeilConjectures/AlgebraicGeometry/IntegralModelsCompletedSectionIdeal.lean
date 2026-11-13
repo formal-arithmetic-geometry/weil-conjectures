@@ -268,7 +268,6 @@ of ordinary ring sheaves, independently of complexes and completeness predicates
 
 Source: blueprint integral-models proof (1), coefficient identification; Stacks Tags
 093M, 099C and 099L.
-(auxiliary; not a blueprint node).
 
 Proof: the maximal ideal of O_E is the radical of (l): it contains the nonzero
 rational prime, and it is the unique nonzero prime ideal of this DVR. Constant

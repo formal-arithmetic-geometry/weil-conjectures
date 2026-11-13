@@ -15,7 +15,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 
 /-! # Descent of the normalized global tensor comparison
 
-Source: Stacks Project, Tag 079U. (blueprint: lem-sc-global-tensor-pullback-tensor-descent).
+Source: Stacks Project, Tag 079U.
 -/
 
 @[expose] public section
@@ -224,7 +224,6 @@ private theorem tensorComparison_of_additive_monoidal
 
 /-- Descend the tensor comparison once the derived pair is fixed.
 Source: Stacks Project, Tag 079U; uniqueness of left derived bifunctors.
-(blueprint: lem-sc-global-tensor-pullback-tensor-descent)
 
 Proof: form the bifunctors U(A,B)=L(A tensor B) and V(A,B)=LA tensor LB.
 Their comparison counits are respectively L(mu) followed by alpha on the tensor,

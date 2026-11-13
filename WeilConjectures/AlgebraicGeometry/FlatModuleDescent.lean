@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.FlatModuleDescentAffineCharts
 /-!
 # Eventual descent of flatness for finitely presented scheme modules
 
-Source: Stacks Project, Lemma 32.10.4 (Tag 05LY), with the target equal to the base
-(blueprint: lem-pc-flat-module-descent).
+Source: Stacks Project, Lemma 32.10.4 (Tag 05LY), with the target equal to the base.
 -/
 
 @[expose] public section
@@ -30,15 +29,13 @@ namespace AlgebraicGeometry
 
 /-- A finitely presented quasi-coherent module whose limit pullback is flat over the base
 is flat over every sufficiently late base.
-Source: Stacks Project, Tag 05LY (blueprint: lem-pc-flat-module-descent).
+Source: Stacks Project, Tag 05LY.
 
 Proof:
-1. Cover the finitely presented source by finitely many affine opens
-   (`lem-weil-pbc-qcqs-finite-affine-open-cover`). Their rings are finitely presented over
-   the stage ring (`lem-weil-pbc-lfp-affine-opens-finite-presentation`), and the chart modules
+1. Cover the finitely presented source by finitely many affine opens. Their rings are finitely presented over
+   the stage ring, and the chart modules
    are finitely presented (`def-sc-finitely-presented-module`, Stacks Tag 01PC).
-   Base change identifies the pulled-back charts and modules with tensor products
-   (`def-pc-base-change`). Limit flatness implies flatness of their sections (Tag 01U4).
+   Base change identifies the pulled-back charts and modules with tensor products. Limit flatness implies flatness of their sections (Tag 01U4).
 2. Apply `lem-pc-affine-flat-module-descent` to each chart with its base algebra equal to
    the stage ring. Directedness gives a common upper bound of `i` and the finitely many
    stages; when the affine cover is empty, take `i` itself.

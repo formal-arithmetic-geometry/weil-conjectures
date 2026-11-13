@@ -76,7 +76,6 @@ The complex is fixed by F, U and V; no assertion about an arbitrary flat complex
 No relative flatness is needed for this comparison of ordinary section complexes.
 Source: Stacks Project, Tag 02KE, affine termwise base-change calculation in the proof
 of flat base change; Tags 01XD, 01XK and 01FK for the cohomology comparison.
-(blueprint: lem-pc-finite-affine-cech-model-comparison).
 
 Proof: Put Y=f^{-1}(U), p=f|_U and G=F|_Y. On an affine open W of a new base T',
 the inverse images of the V_i form a finite affine cover of X'_W. Separatedness over

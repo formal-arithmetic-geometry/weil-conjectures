@@ -32,7 +32,6 @@ set_option backward.isDefEq.respectTransparency true in
 -- Exact single-sheaf triangles carry the integral coefficient instance.
 /-- Hom continuity for a locally finitely presented integral module on the scheme itself.
 Source: Bhatt--Scholze, Definition 6.8.10, Proposition 6.8.11(3) and Lemma 6.8.12.
-(auxiliary; not a blueprint node)
 
 Proof. Resolve P by the two locally finite free modules F₁ and F₀ in the integral
 resolution theorem. For the fixed diagram N and its canonical colimit cocone, the

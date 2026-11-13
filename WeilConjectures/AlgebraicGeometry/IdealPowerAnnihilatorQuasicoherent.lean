@@ -27,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Sections locally annihilated by a module inclusion into the structure sheaf. 
-(blueprint: lem-weil-pbc-ideal-power-annihilator-quasicoherent)
+/-- Sections locally annihilated by a module inclusion into the structure sheaf.
 -/
 def idealAnnihilatorSections {X : Scheme.{u}} {P : X.Modules}
     (j : P ⟶ SheafOfModules.unit X.ringCatSheaf) (F : X.Modules)
@@ -43,8 +42,7 @@ def idealAnnihilatorSections {X : Scheme.{u}} {P : X.Modules}
     intro r s hs V h b
     rw [F.map_smul, smul_comm, hs V h b, smul_zero]
 
-/-- The local annihilation condition is stable under restriction. 
-(blueprint: lem-weil-pbc-ideal-power-annihilator-quasicoherent)
+/-- The local annihilation condition is stable under restriction.
 -/
 def idealAnnihilatorPresheaf {X : Scheme.{u}} {P : X.Modules}
     (j : P ⟶ SheafOfModules.unit X.ringCatSheaf) (F : X.Modules) : F.val.Submodule where
@@ -59,7 +57,7 @@ def idealAnnihilatorPresheaf {X : Scheme.{u}} {P : X.Modules}
     rw [← ConcreteCategory.comp_apply, ← Functor.map_comp]
     convert hh using 1
 
-/-- (blueprint: lem-weil-pbc-ideal-power-annihilator-quasicoherent) -/
+/-- -/
 theorem idealAnnihilatorPresheaf_isSheaf {X : Scheme.{u}} {P : X.Modules}
     (j : P ⟶ SheafOfModules.unit X.ringCatSheaf) (F : X.Modules) :
     Presheaf.IsSheaf (Opens.grothendieckTopology X)
@@ -105,16 +103,14 @@ theorem idealAnnihilatorPresheaf_isSheaf {X : Scheme.{u}} {P : X.Modules}
     intro i
     exact congrArg Subtype.val (ht i)
 
-/-- The actual subsheaf of sections annihilated locally by the ideal inclusion. 
-(blueprint: lem-weil-pbc-ideal-power-annihilator-quasicoherent)
+/-- The actual subsheaf of sections annihilated locally by the ideal inclusion.
 -/
 noncomputable def idealAnnihilator {X : Scheme.{u}} {P : X.Modules}
     (j : P ⟶ SheafOfModules.unit X.ringCatSheaf) (F : X.Modules) : X.Modules :=
   ⟨(idealAnnihilatorPresheaf j F).toPresheafOfModules,
     idealAnnihilatorPresheaf_isSheaf j F⟩
 
-/-- The inclusion of the canonical annihilator subsheaf. 
-(blueprint: lem-weil-pbc-ideal-power-annihilator-quasicoherent)
+/-- The inclusion of the canonical annihilator subsheaf.
 -/
 noncomputable def idealAnnihilatorι {X : Scheme.{u}} {P : X.Modules}
     (j : P ⟶ SheafOfModules.unit X.ringCatSheaf) (F : X.Modules) :
@@ -231,7 +227,6 @@ private theorem annihilator_quasicoherent_of_affine_fg {X : Scheme.{u}} {P : X.M
 
 Source: Stacks Project, Properties, Tag 01PO, proof of (1), applied to the powers
 in the proof of Tag 01PQ.
-(blueprint: lem-weil-pbc-ideal-power-annihilator-quasicoherent).
 
 Proof: On an affine open Spec R identify I with a finitely generated ideal J and
 F with the sheaf associated to an R-module M. The recursive image construction

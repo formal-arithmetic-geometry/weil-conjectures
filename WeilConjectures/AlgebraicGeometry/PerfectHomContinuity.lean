@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # Continuity of Hom sets for perfect complexes in a ring-colimit system.
 Source: Stacks Project, perfect.tex, Tag 09RE, affine calculation and open induction.
-(blueprint: lem-pc-perfect-hom-continuity).
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ namespace AlgebraicGeometry
 with the same image agree on some entire later tail. These are the set-colimit
 consequences of continuity of Hom; no isomorphism descent or finite collection of
 relations is asserted here.
-Source: Stacks Project, perfect.tex, Tag 09RE, proof of lemma-descend-homomorphisms
-(blueprint: lem-pc-perfect-hom-continuity).
+Source: Stacks Project, perfect.tex, Tag 09RE, proof of lemma-descend-homomorphisms.
 
 Proof: Define `PerfectHomContinuityOn` for each open, quantifying over all
 perfect pairs and all open-immersion presentations of that open. The affine

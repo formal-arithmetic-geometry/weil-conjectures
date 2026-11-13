@@ -101,8 +101,7 @@ map to K_0 gives the degree-zero refinement. Take N_0=T, with identity inclusion
 the only surjection [0] to a retained degree is the identity, so this is a splitting.
 The finite affine pieces give finite_each_degree and the map to the terminal matching
 object is surjective. There are no nontrivial face or compatibility conditions in
-this degree, and the unique maps of [0] give the constant truncated functor.
-(auxiliary; not a blueprint node) -/
+this degree, and the unique maps of [0] give the constant truncated functor. -/
 theorem exists_replacement_stage_zero
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale) (hK : IsEtaleHypercover K) :

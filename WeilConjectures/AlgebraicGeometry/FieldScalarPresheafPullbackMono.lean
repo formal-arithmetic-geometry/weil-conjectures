@@ -42,7 +42,6 @@ private theorem fieldModuleFunctor_preservesMonomorphisms
 sheafification.
 
 Source: Stacks Project, Modules, Tag 02N4; Sheaves on Spaces, Tag 0095.
-(blueprint: lem-sc-field-scalar-presheaf-pullback-mono).
 
 Proof: put α_U = R(X -> U) ∘ α. The identity-site presheaf pullback is computed
 at U by R(U) ⊗[k] V(U). Here R(U) is a right k-module by a · c = a α_U(c),

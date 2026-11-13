@@ -12,8 +12,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 /-! # Evaluation components with a fixed normalized tensor comparison
 
 Source: Stacks Project, Tag 0A8X, ordinary tensor totalization; the open-site
-reindexing construction in Mathlib `Scheme.Modules.overEquiv`.
-(blueprint: lem-pc-ordinary-evaluation-component-over-transport). -/
+reindexing construction in Mathlib `Scheme.Modules.overEquiv`. -/
 
 @[expose] public section
 
@@ -46,7 +45,6 @@ set_option maxHeartbeats 800000 in
 -- Expanding the total-tensor map and degreewise isomorphism needs extra elaboration heartbeats.
 /-- Transport of one tensor summand followed by one Hom projection.
 Source: Stacks Project, Tag 0A8X, total tensor and Hom-complex projections.
-(blueprint: lem-pc-ordinary-evaluation-transport-summand-projection).
 
 Proof: apply naturality of the total tensor map for the inverse of `d` to
 move the tensor summand across that map. The summand equation for `c`,

@@ -133,7 +133,7 @@ This is a monoidal coherence statement: a and b are arbitrary maps, g is an
 arbitrary pairing satisfying the displayed pullback equation, and there is no
 base-change map or adjunction unit in the conclusion.
 Source: Stacks Project, Tags 0095 and 0096 (tensor pullback and composition),
-Tag 0BDP, evaluation formula. (blueprint: lem-sc-picard-pairing-pullback-coherence)
+Tag 0BDP, evaluation formula.
 
 Proof: Write P_k for tensor pullback, δ_k for picardTensorObjIso(k).hom,
 u_k for picardTensorUnitIso(k).hom, C_A for the square comparison, and D_M

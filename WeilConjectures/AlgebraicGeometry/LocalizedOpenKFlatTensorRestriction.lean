@@ -17,7 +17,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 /-! # K-flat tensor models under localized open restriction
 
 Source: Stacks Project, Tags 06YC, 01CD and 08DX.
-(blueprint: lem-sc-localized-open-kflat-tensor-restriction).
 -/
 
 @[expose] public section
@@ -132,7 +131,6 @@ private theorem localizedEquiv_totalTensor_iso (X : Scheme.{u}) (U : X.Opens)
 /-- Exact open restriction preserves K-flatness and the total tensor model.
 Source: Stacks Project, Tag 06YC for K-flat pullback, Tag 01CD for sheaf tensor
 and Tag 08DX for local derived tensor computation.
-(blueprint: lem-sc-localized-open-kflat-tensor-restriction).
 
 Proof: identify the localized site over U with the usual open site of U.toScheme.
 The exact equivalence on module sheaves identifies restriction with pullback along

@@ -12,7 +12,6 @@ import Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-! # Sheafification and the localized open-site equivalence
 Source: Stacks Project, Tag 01CD, localized-site construction.
-(blueprint: lem-sc-localized-open-sheafification).
 -/
 
 @[expose] public section
@@ -88,7 +87,6 @@ private noncomputable def sheafificationTransportIso
 
 /-- Sheafification commutes with transport along the localized open-site equivalence.
 Source: Stacks Project, Tag 01CD, sheafification step in the localized-site construction.
-(blueprint: lem-sc-localized-open-sheafification).
 
 Proof: the inverse open-site equivalence identifies presheaves of modules, using
 restriction of the structure sheaf for the coefficient rings. Its inverse is

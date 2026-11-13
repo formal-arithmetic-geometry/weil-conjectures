@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 /-! # Compatible finite-descent sections have preimages on geometric stalks
 
 Source: Stacks Project, Étale Cohomology, Lemma 09Z2 and Remark 09Z3.
-(blueprint: lem-weil-pbc-sets-finite-descent-germ-lifts).
 -/
 
 @[expose] public section
@@ -73,7 +72,6 @@ private theorem descent_coordinate
   exact hg U z s
 
 /-- Source: Stacks Project, Étale Cohomology, Lemma 09Z2 and Remark 09Z3.
-(blueprint: lem-weil-pbc-sets-finite-descent-germ-lifts).
 
 Proof: Fix a geometric point x. Its lift set P along f is nonempty: choose a
 point above x and use finite geometric-point lifting with the same algebraically

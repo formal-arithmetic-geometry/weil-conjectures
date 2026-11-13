@@ -192,7 +192,6 @@ set_option backward.defeqAttrib.useBackward true in
 with a given finite free epimorphism.
 Source: Stacks Project, Modules, Lemma 01BP(1), first paragraph of the proof;
 kernel restriction is Modules, Section 01AF.
-(blueprint: lem-weil-pbc-finite-presentation-local-comparison)
 
 Proof: Choose a finite presentation near x from the finite-presentation data.
 Each of the finitely many basis images of psi lifts locally through its generator

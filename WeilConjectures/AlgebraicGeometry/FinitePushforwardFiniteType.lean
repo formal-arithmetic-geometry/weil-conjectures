@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-! Finite pushforward preserves quasi-coherence and finite type without
 Noetherian hypotheses.
-(blueprint: lem-pc-f3-finite-pushforward-finite-type)
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- A finite direct image preserves quasi-coherent modules of finite type on arbitrary
 schemes. Source: Stacks Project, Tag 01Y6, finite morphism case, and Tag 01LC.
-(blueprint: lem-pc-f3-finite-pushforward-finite-type)
 
 Proof: Finite morphisms are quasi-compact and separated, so the existing qcqs
 pushforward theorem proves quasi-coherence. Restriction of a finite-type module

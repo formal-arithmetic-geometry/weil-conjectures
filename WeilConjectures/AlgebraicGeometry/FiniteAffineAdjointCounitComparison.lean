@@ -87,8 +87,7 @@ private theorem pointwise_adjoint_comparison
 bounded-below quasi-coherent object. No identification with internal Hom or evaluation
 at one is asserted here. The boundedness of a(K) is an explicit input.
 
-Source: Stacks Project, Tag 0AX2, comparison-of-right-adjoints paragraph; Tag 0AVW
-(blueprint: lem-sc-finite-affine-adjoint-counit-comparison).
+Source: Stacks Project, Tag 0AX2, comparison-of-right-adjoints paragraph; Tag 0AVW.
 
 Proof:
 1. Scalar restriction is exact. On a K-injective representative, Rg_* followed by

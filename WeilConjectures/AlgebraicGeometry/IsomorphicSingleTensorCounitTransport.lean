@@ -11,8 +11,7 @@ import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.PinnedSingleTensorShifts
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 /-! # Canonical transport under an isomorphic source
-Source: Stacks Project, Tags 08HY, 0096 and 0D5S.
-(blueprint: lem-pc-isomorphic-single-tensor-counit-transport). -/
+Source: Stacks Project, Tags 08HY, 0096 and 0D5S. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -26,7 +25,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 -- Derived universal-property comparisons must identify the sheaf-module category instances.
 /-- The canonical transport isomorphism for an isomorphic source.
 Source: Stacks Project, Tags 08HY, 0096 and 0D5S.
-(blueprint: lem-pc-isomorphic-single-tensor-counit-transport).
 Proof: tensor pullback along the isomorphism is an equivalence, and its
 selected derived adjunction transports the single-complex functor. More precisely,
 the inverse components are the derived adjunction unit on (p^*M)[0], followed

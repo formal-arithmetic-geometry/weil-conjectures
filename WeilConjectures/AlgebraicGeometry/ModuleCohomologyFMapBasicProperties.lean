@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.BasicPropertiesRestriction
 
 /-! # Basic properties of maps on module cohomology
 
-Source: Stacks Project, Cohomology of Sheaves, Section 01F7, Tags 01F8--01FB
-(blueprint: lem-weil-pbc-module-cohomology-fmap-basic-properties).
+Source: Stacks Project, Cohomology of Sheaves, Section 01F7, Tags 01F8--01FB.
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Linearity, degree zero, identity, and restriction properties of the map induced by an
 `h`-map.  The degree-zero clause is expressed using the canonical derived-functor
 identifications with global sections.
-Source: Stacks Project, Cohomology of Sheaves, Section 01F7;
-(blueprint: lem-weil-pbc-module-cohomology-fmap-basic-properties).
+Source: Stacks Project, Cohomology of Sheaves, Section 01F7;.
 
 Proof plan (all parts are left as the stage-3 proof): choose injective resolutions and
 use the derived-functor comparison isomorphisms. The global-sections complexes are

@@ -33,7 +33,6 @@ HomologicalComplex.Hom.isoOfComponents. Its components are definitionally the
 degreewise maps, so their injection formula proves the required pinned equation.
 Arbitrary coproducts cover unbounded complexes, including zero factors.
 Source: Stacks Project, perfect.tex, Tag 0DJA(1).
-(blueprint: lem-pc-tensor-pullback-stalk-square).
 -/
 theorem exists_pinned_stalk_tensor (Y : Scheme.{u}) (z : Y) :
     letI := SheafOfModules.monoidalCategory Y.sheaf

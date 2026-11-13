@@ -23,7 +23,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Stalk criterion for scalar restriction on an open site
 
 Source: Stacks Project, Tags 05NE, 01CB, 01AG and 0098.
-(blueprint: lem-pc-open-scalar-restriction-stalk-criterion).
 -/
 
 @[expose] public section
@@ -160,7 +159,6 @@ private theorem scalar_stalk_flat (X : RingedSpace.{u})
 
 /-- Flatness of the restricted stalks implies flatness on the localized open site.
 Source: Stacks Project, Tags 05NE, 01CB, 01AG and 0098.
-(blueprint: lem-pc-open-scalar-restriction-stalk-criterion).
 
 Proof: Regard R as the structure sheaf of a ringed space Y on the same carrier.
 Restricting G scalars along φ gives an R-module H with the same additive presheaf.

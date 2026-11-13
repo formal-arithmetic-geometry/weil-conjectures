@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.FinitePresentationLocalMapOverlapCompat
 /-! # Local finite-presentation descent data
 
 Source: Stacks Project, Limits, Tag 01ZR, first proof.
-(blueprint: lem-pc-fp-local-map-datum).
 -/
 
 @[expose] public section
@@ -69,7 +68,6 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Local maps between fixed models descend compatibly on a cover.
 Source: Stacks Project, Limits, Tag 01ZR, first proof, map descent on overlaps.
-(blueprint: lem-pc-fp-local-map-datum).
 
 Proof: Choose a finite affine cover at stage j. Descend the restrictions of the
 map using Tag 05N7. Cover pairwise intersections by finitely many affine opens;

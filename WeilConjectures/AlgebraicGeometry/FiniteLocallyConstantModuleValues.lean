@@ -23,8 +23,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 # Finite values of locally constant etale module sheaves
 
 Source: Stacks Project, Tags 03RU, 03RW(3), and 093N(1); the equivalences are
-agent-formulated from these definitions
-(blueprint: lem-weil-pbc-finite-locally-constant-module-values).
+agent-formulated from these definitions.
 -/
 
 @[expose] public section
@@ -150,8 +149,7 @@ Proof:
 The existing finite-sheaf predicate uses finitely generated stalks at separably closed
 points; over a finite ring this is equivalent to finite stalks. Testing at algebraically
 closed points is equivalent by invariance under algebraic closure of the geometric field.
-Source: Stacks Project, Tags 03RU, 03RW(3), 093N(1), and the stalk calculations of 03PN
-(blueprint: lem-weil-pbc-finite-locally-constant-module-values). -/
+Source: Stacks Project, Tags 03RU, 03RW(3), 093N(1), and the stalk calculations of 03PN. -/
 theorem finite_locally_constant_module_values_iff
     {Y : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :

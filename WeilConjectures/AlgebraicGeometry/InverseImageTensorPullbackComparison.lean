@@ -13,7 +13,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Inverse image as tensor pullback along the identity adjoint ring map
 
 Source: Stacks Project, Sheaves, Tags 008A and 0094; Cohomology, Tag 06YC.
-(blueprint: lem-pc-inverse-image-tensor-pullback-comparison).
 -/
 
 @[expose] public section
@@ -126,8 +125,7 @@ inverse-image module. Naturality in module maps follows on pure tensors from
 `id ⊗ a` and `a (r • m) = r • a m`, and survives sheafification. Apply this naturality
 to each differential of `K` to get inverse morphisms of complexes degreewise.
 This uses neither K-flatness nor exactness; it also applies to empty spaces and to
-zero rings and modules.
-(blueprint: lem-pc-inverse-image-tensor-pullback-comparison). -/
+zero rings and modules. -/
 theorem exists_inverseImage_tensorPullback_iso {X Y : TopCat.{u}} (f : X ⟶ Y)
     (R : CategoryTheory.Sheaf (Opens.grothendieckTopology Y) CommRingCat.{u})
     (K : CochainComplex (SheafOfModules.{u}

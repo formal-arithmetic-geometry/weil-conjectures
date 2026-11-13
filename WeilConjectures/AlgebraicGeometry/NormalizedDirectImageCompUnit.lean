@@ -10,7 +10,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Normalization of derived direct-image composition units
 Source: Stacks Project, Cohomology, Tag 0D5T.
-(blueprint: lem-pc-normalized-direct-image-square-unit-comp-normalization).
 -/
 @[expose] public section
 noncomputable section
@@ -52,7 +51,6 @@ set_option maxHeartbeats 700000 in
 -- The chosen composition comparison unfolds the two module-category presentations.
 /-- The fixed composition comparison converts the ringed-space unit to the scheme unit.
 Source: Stacks Project, Cohomology, Tag 0D5T.
-(blueprint: lem-pc-normalized-direct-image-square-unit-comp-normalization).
 -/
 theorem normalizedDirectImageCompUnit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C)
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings A.toRingedSpace)) (.up ℤ)) :

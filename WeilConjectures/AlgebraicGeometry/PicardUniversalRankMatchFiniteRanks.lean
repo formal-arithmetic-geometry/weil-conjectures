@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 /-! # Finitely many ranks on an affine part of the universal rank locus
 
 Source: Stacks Project, Tag 0BDP, first proof paragraph.
-(blueprint: lem-sc-picard-universal-rank-match-finite-ranks).
 -/
 
 @[expose] public section
@@ -150,7 +149,6 @@ private theorem picardUniversalRankMatch_localRank {X S : Scheme.{u}}
 /-- On an affine base open, finitely many fibre ranks cover the universal rank locus.
 Source: Stacks Project, Tag 0BDP, rank decomposition paragraph; finite local freeness
 and properness give the finite bound even without connected fibres.
-(blueprint: lem-sc-picard-universal-rank-match-finite-ranks).
 
 Proof:
 1. The inverse image of the affine open is quasi-compact, since f is proper.

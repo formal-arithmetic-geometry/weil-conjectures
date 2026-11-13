@@ -38,8 +38,7 @@ with empty inverse image, and every section of the structure sheaf there is zero
 Consequently all germs there are zero. The full closed subset Y is proper over S,
 and its image in the separated finite-type X is proper over S by 0CYQ. A closed
 subset of that image is proper by 0CYN. This includes Y empty and the zero section
-rings without a nonempty-fiber assumption.
-(blueprint: lem-weil-pbc-finite-structure-proper-support). -/
+rings without a nonempty-fiber assumption. -/
 theorem finite_structure_proper_support {Y X S : Scheme.{u}}
     (p : Y ⟶ X) (f : X ⟶ S) [IsFinite p] [IsLocallyNoetherian X]
     [IsSeparated f] [LocallyOfFiniteType f] [IsProper (p ≫ f)] :

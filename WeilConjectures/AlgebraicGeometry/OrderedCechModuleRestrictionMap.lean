@@ -26,7 +26,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Ordered coordinates of the usual differential are the signed face sum.
 Source: Stacks Project, Tags 01FJ and 01FK, ordered restriction.
-(blueprint: lem-pc-ordered-cech-module-restriction-map).
 
 Proof: Transport the extended differential through extendXIso in degrees p and p+1.
 Evaluation of pushforward is evaluation on the inverse-image open. Apply hd to
@@ -117,7 +116,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction to increasing coordinates is a morphism of module cochain complexes.
 Source: Stacks Project, Tags 01FJ and 01FK, ordered restriction.
-(blueprint: lem-pc-ordered-cech-module-restriction-map).
 
 Proof: In degree p and on B take the inverse of a p B applied to the family of
 orderedCechModuleCoordinate values. Additivity follows from additivity of a and

@@ -12,8 +12,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 /-!
 # Canonical Künneth maps in module-valued global sections
 
-Source: Stacks Project, Tag 0F1E; blueprint sec-smooth-purity,
-unit sk-prop-sf-kunneth-ordinary (blueprint: def-kun-kunneth-map).
+Source: Stacks Project, Tag 0F1E,
+unit sk-prop-sf-kunneth-ordinary.
 
 The external product is the existing `kunnethMap`, transported by the canonical
 constant-sheaf equivalence over a separably closed point and the Leray comparisons.
@@ -37,7 +37,7 @@ namespace AlgebraicGeometry.Etale
 variable (Λ : Type (u + 1)) [CommRing Λ]
   {k : Type u} [Field k] [IsSepClosed k]
 
-/-- (blueprint: def-kun-kunneth-map) The canonical tensor comparison for global sections
+/-- The canonical tensor comparison for global sections
 over a separably closed point. Source: Stacks Project, Tag 0F1E, read through the
 constant-sheaf equivalence. It is the tensor comparison of the derived constant functor,
 conjugated by its unit and counit and the exact-global-sections comparison.
@@ -70,7 +70,7 @@ noncomputable def pointGlobalSectionsTensorIso
       ((derivedTensor (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C).mapIso (e D)
   (e' (R.obj C ⊗ R.obj D)).symm ≪≫ R.mapIso i
 
-/-- (blueprint: def-kun-kunneth-map) The canonical external product in module-valued
+/-- The canonical external product in module-valued
 global sections. Source: Stacks Project, Tag 0F1E, canonical adjoint construction.
 First use the inverse Leray maps, then the canonical tensor comparison at the point,
 then apply global sections to the existing adjunction mate `kunnethMap`, and finally

@@ -16,9 +16,6 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 /-!
 # Finite coefficients on the small pro-etale site
 
-Source: blueprint, sec-proper-base-change/sk-thm-properbasechange,
-node def-weil-pbc-proetale-modules (blueprint: def-weil-pbc-proetale-modules).
-
 ## Main definitions
 
 * `finiteCoefficientRingSheaf`: sheafified continuous functions on connected components.
@@ -40,9 +37,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- A diagram of left modules is a module presheaf over the constant ring presheaf.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+/-- A diagram of left modules is a module presheaf over the constant ring presheaf. -/
 noncomputable def finiteCoefficientModulePresheaf (C : Type uC) [Category.{vC} C]
     (Λ : Type (u + 1)) [Ring Λ] :
     (Cᵒᵖ ⥤ ModuleCat.{u + 1} Λ) ⥤
@@ -119,8 +114,7 @@ variable (T : Scheme.{u}) (Λ : Type (u + 1)) [Ring Λ] [Finite Λ]
   [TopologicalSpace Λ] [DiscreteTopology Λ]
 
 /-- Continuous functions on the quotient space of connected components, with pointwise
-ring operations and restriction by precomposition. Source: blueprint,
-`def-weil-pbc-proetale-modules` (blueprint: def-weil-pbc-proetale-modules). -/
+ring operations and restriction by precomposition. -/
 noncomputable def finiteCoefficientPresheaf (T : Scheme.{u}) (Λ : Type (u + 1))
     [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :
     T.ProEtᵒᵖ ⥤ RingCat.{u + 1} where
@@ -143,15 +137,12 @@ noncomputable def finiteCoefficientPresheaf (T : Scheme.{u}) (Λ : Type (u + 1))
     rfl
 
 /-- The coefficient ring sheaf is the sheafification of continuous functions on connected
-components. Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+components. -/
 noncomputable def finiteCoefficientRingSheaf : Sheaf (Scheme.ProEt.topology T) RingCat.{u + 1} :=
   (presheafToSheaf (Scheme.ProEt.topology T) RingCat.{u + 1}).obj
     (finiteCoefficientPresheaf T Λ)
 
-/-- Constant scalar sections of the continuous-function coefficient presheaf.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+/-- Constant scalar sections of the continuous-function coefficient presheaf. -/
 noncomputable def finiteCoefficientConstants :
     (Functor.const T.ProEtᵒᵖ).obj (RingCat.of Λ) ⟶ finiteCoefficientPresheaf T Λ where
   app U := RingCat.ofHom
@@ -162,17 +153,14 @@ noncomputable def finiteCoefficientConstants :
       map_add' := fun _ _ ↦ rfl }
   naturality _ _ f := by ext r; rfl
 
-/-- The canonical scalar map from the constant presheaf to the coefficient ring sheaf.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+/-- The canonical scalar map from the constant presheaf to the coefficient ring sheaf. -/
 noncomputable def finiteCoefficientScalarMap :
     (Functor.const T.ProEtᵒᵖ).obj (RingCat.of Λ) ⟶ (finiteCoefficientRingSheaf T Λ).obj :=
   finiteCoefficientConstants T Λ ≫
     toSheafify (Scheme.ProEt.topology T) (finiteCoefficientPresheaf T Λ)
 
 /-- Constant scalar sections identify the coefficient sheaf with the sheafification of
-constant scalars. Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules).
+constant scalars.
 
 Proof: continuous functions to a discrete ring are locally constant. Their level sets,
 pulled back along the quotient map to connected components, are open and give an open
@@ -218,16 +206,12 @@ theorem finiteCoefficientScalarMap_locallyBijective :
       exact y.property.symm
   constructor <;> dsimp only [finiteCoefficientScalarMap] <;> infer_instance
 
-/-- Local injectivity needed for the associated module sheaf construction.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+/-- Local injectivity needed for the associated module sheaf construction. -/
 noncomputable instance finiteCoefficientScalarMap_isLocallyInjective :
     Presheaf.IsLocallyInjective (Scheme.ProEt.topology T) (finiteCoefficientScalarMap T Λ) :=
   (finiteCoefficientScalarMap_locallyBijective T Λ).1
 
-/-- Local surjectivity needed for the associated module sheaf construction.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
+/-- Local surjectivity needed for the associated module sheaf construction. -/
 noncomputable instance finiteCoefficientScalarMap_isLocallySurjective :
     Presheaf.IsLocallySurjective (Scheme.ProEt.topology T) (finiteCoefficientScalarMap T Λ) :=
   (finiteCoefficientScalarMap_locallyBijective T Λ).2

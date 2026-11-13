@@ -11,9 +11,8 @@ import WeilConjectures.AlgebraicGeometry.PseudoCoherentQCohDegree
 
 /-! # Quasi-coherent cohomology of pseudo-coherent complexes
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 08E5 (lemma-pseudo-coherent),
-invoked in the first sentence of the proof of Tag 08EE
-(blueprint: lem-sc-pseudo-coherent-qcoh).
+Source: Stacks Project, Derived Categories of Schemes, Tag 08E5,
+invoked in the first sentence of the proof of Tag 08EE.
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Every pseudo-coherent object of `D(𝒪_Y)` has quasi-coherent cohomology in every degree.
-Source: Stacks Project, Tag 08E5 (lemma-pseudo-coherent), invoked in the proof of Tag 08EE
-(blueprint: lem-sc-pseudo-coherent-qcoh).
+Source: Stacks Project, Tag 08E5, invoked in the proof of Tag 08EE.
 
 Proof: By `def-pur-pseudo-coherent-complex`, each point has an open neighbourhood on which
 `E` is represented by a bounded-above complex of finite free modules. Its cohomology sheaves

@@ -25,7 +25,6 @@ attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 
 /-- The map of open cohomology computed directly from t on section complexes.
 Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
-(blueprint: def-weil-pbc-flat-base-change-resolution-open-map).
 The source and target homology isomorphisms are the canonical resolution comparisons,
 forgetful homology comparisons, and the section isomorphisms pinned by D. No replacement
 complex, arbitrary witness, or unproved choice is used in this construction. -/

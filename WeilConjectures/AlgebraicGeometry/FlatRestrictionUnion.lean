@@ -13,9 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 
 /-! # Flatness on a union of finite locally free loci
-
-Source: blueprint lem-pc-perfect-locus, cohomology-sheaf gluing paragraph.
-(blueprint: lem-pc-flat-restriction-union).
 -/
 
 @[expose] public section
@@ -27,10 +24,6 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A module is flat on a union of opens where it is finite locally free.
-
-Source: blueprint lem-pc-perfect-locus, cohomology-sheaf gluing paragraph; step 2
-of lem-pc-derived-single-open-locus.
-(blueprint: lem-pc-flat-restriction-union).
 
 Proof: put W = the union of the U a. Each M restricted to U a is finite locally
 free of some rank r a. Refine this cover by finite free trivializations. On each

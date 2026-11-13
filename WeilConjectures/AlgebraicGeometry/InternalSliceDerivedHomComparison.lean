@@ -24,7 +24,7 @@ import Mathlib.Algebra.Ring.Ext
 /-! # Module objects and derived Hom on a slice
 
 Source: Stacks Project, Tags 03DH, 08J9 and 08JB; Step 5 of the module-object
-comparison (auxiliary; not a blueprint node).
+comparison.
 -/
 
 @[expose] public noncomputable section
@@ -88,7 +88,7 @@ private theorem sectionRing_over_eq {C : Type (u + 1)} [Category.{u} C] (J : Gro
     rfl
 
 /-- Literal restriction of the coefficient ring object, with its induced multiplication.
-Source: Stacks 03DH (auxiliary; not a blueprint node). -/
+Source: Stacks 03DH. -/
 def sliceRingObject :
     Sheaf ((Scheme.ProEt.topology X).over U) AddCommGrpCat.{u + 1} :=
   ((Scheme.ProEt.topology X).overPullback AddCommGrpCat.{u + 1} U).obj
@@ -96,23 +96,23 @@ def sliceRingObject :
 
 /-- The functor-induced monoid structure, named with instance transparency so
 native constructions can reuse it without unfolding the whole restriction functor.
-Source: Stacks 03DH (auxiliary; not a blueprint node). -/
+Source: Stacks 03DH. -/
 @[instance_reducible] instance sliceRingMonObj : MonObj (sliceRingObject Λ X U) :=
   ((Scheme.ProEt.topology X).overPullback AddCommGrpCat.{u + 1} U).monObjObj _
 
 /-- Restriction preserves commutativity of the coefficient multiplication.
-Source: Stacks 03DH (auxiliary; not a blueprint node). -/
+Source: Stacks 03DH. -/
 instance sliceRingComm : IsCommMonObj (sliceRingObject Λ X U) :=
   Functor.isCommMonObj_obj
     (F := (Scheme.ProEt.topology X).overPullback AddCommGrpCat.{u + 1} U)
 
 /-- Module objects over the restricted ring, on the actual slice site.
-Source: Stacks 03DH (auxiliary; not a blueprint node). -/
+Source: Stacks 03DH. -/
 abbrev SliceInternal := Mod
   (Sheaf ((Scheme.ProEt.topology X).over U) AddCommGrpCat.{u + 1}) (sliceRingObject Λ X U)
 
 /-- Section rings commute with literal restriction.
-Source: Stacks 03DH (auxiliary; not a blueprint node).
+Source: Stacks 03DH.
 Proof: both underlying presheaves send V over U to B(V); their units and products
 are the same sectionwise unit and product. Extensionality of ring structures and
 presheaf natural transformations identifies the two bundled ring sheaves. -/
@@ -126,7 +126,7 @@ attribute [local irreducible] sliceRingMonObj
 
 /-- The actual section-action equivalence for B restricted to U. Equality transport
 changes only the two presentations of its section ring, retaining the functor's data.
-Source: Stacks 00YV, 03DH (auxiliary; not a blueprint node). -/
+Source: Stacks 00YV, 03DH. -/
 def sliceEquivalence : SliceInternal Λ X U ≌ SheafOfModules.{u + 1}
     ((sheafCompose ((Scheme.ProEt.topology X).over U)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj ((ring Λ X).over U)) :=
@@ -138,7 +138,7 @@ def sliceEquivalence : SliceInternal Λ X U ≌ SheafOfModules.{u + 1}
       (sliceRingObject Λ X U))
 
 /-- The local section equivalence is additive, including equality transport.
-Source: Stacks 00YV, 03DH (auxiliary; not a blueprint node).
+Source: Stacks 00YV, 03DH.
 Proof: every equivalence of these preadditive categories preserves binary products
 and zero morphisms, hence addition. This applies directly to the transported
 equivalence, without unfolding its equality transport. -/
@@ -149,26 +149,26 @@ equivalence, without unfolding its equality transport. -/
 attribute [local irreducible] sliceEquivalence
 
 /-- Sectionwise modules over the literally restricted section ring.
-Source: Stacks 03DH (auxiliary; not a blueprint node). -/
+Source: Stacks 03DH. -/
 abbrev SliceModules := SheafOfModules.{u + 1}
   ((sheafCompose ((Scheme.ProEt.topology X).over U)
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj ((ring Λ X).over U))
 
 /-- The direct derived section functor. Naming it avoids unfolding the equivalence
 and both its coherence isomorphisms when checking representative endpoints.
-Source: Stacks 05RU (auxiliary; not a blueprint node). -/
+Source: Stacks 05RU. -/
 def sliceForward :
     DerivedCategory (SliceInternal Λ X U) ⥤ DerivedCategory (SliceModules Λ X U) :=
   (sliceEquivalence Λ X U).functor.mapDerivedCategory
 
 /-- Termwise extension of the fixed local section-action equivalence.
-Source: Stacks 05RU (auxiliary; not a blueprint node). -/
+Source: Stacks 05RU. -/
 def sliceComplexForward :
     CochainComplex (SliceInternal Λ X U) ℤ ⥤ CochainComplex (SliceModules Λ X U) ℤ :=
   (sliceEquivalence Λ X U).functor.mapHomologicalComplex (.up ℤ)
 
 /-- The actual localization comparison for the termwise local section functor.
-Source: Stacks 05RU (auxiliary; not a blueprint node). -/
+Source: Stacks 05RU. -/
 def sliceLocalizationIso :
     DerivedCategory.Q ⋙ sliceForward Λ X U ≅
       sliceComplexForward Λ X U ⋙ DerivedCategory.Q :=
@@ -177,24 +177,24 @@ def sliceLocalizationIso :
 set_option backward.isDefEq.respectTransparency false
 
 /-- Fixed existence of the graded tensor coproducts on the actual slice.
-Source: Stacks 06YL (auxiliary; not a blueprint node). -/
+Source: Stacks 06YL. -/
 theorem sliceGradedTensor (P Q : GradedObject ℤ (SliceInternal Λ X U)) :
     P.HasTensor Q := inferInstance
 
 attribute [local instance] sliceGradedTensor
 
 /-- Fixed fourfold summand extensionality for the graded slice tensor.
-Source: Stacks 06YL (auxiliary; not a blueprint node). -/
+Source: Stacks 06YL. -/
 theorem sliceGradedTensorFour (P Q R S : GradedObject ℤ (SliceInternal Λ X U)) :
     GradedObject.HasTensor₄ObjExt P Q R S := inferInstance
 
 /-- Fixed left iterated graded-tensor comparison on the slice.
-Source: Stacks 06YL (auxiliary; not a blueprint node). -/
+Source: Stacks 06YL. -/
 theorem sliceGradedTensorLeft (P Q R : GradedObject ℤ (SliceInternal Λ X U)) :
     GradedObject.HasGoodTensor₁₂Tensor P Q R := inferInstance
 
 /-- Fixed right iterated graded-tensor comparison on the slice.
-Source: Stacks 06YL (auxiliary; not a blueprint node). -/
+Source: Stacks 06YL. -/
 theorem sliceGradedTensorRight (P Q R : GradedObject ℤ (SliceInternal Λ X U)) :
     GradedObject.HasGoodTensorTensor₂₃ P Q R := inferInstance
 
@@ -203,28 +203,27 @@ attribute [local instance] sliceGradedTensor sliceGradedTensorFour
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Fix the existing native total tensor instance once for local cochains.
-Source: Stacks 06YL; native Mod.monoidalCategoryCochainComplex
-(auxiliary; not a blueprint node). -/
+Source: Stacks 06YL; native Mod.monoidalCategoryCochainComplex. -/
 @[instance_reducible, instance] def sliceCochainMonoidal :
     MonoidalCategory (CochainComplex (SliceInternal Λ X U) ℤ) :=
   CategoryTheory.Mod.monoidalCategoryCochainComplex
 
 /-- The native K-flat derived relative tensor for the actual restricted monoid.
-Source: Stacks 06YS (auxiliary; not a blueprint node). -/
+Source: Stacks 06YS. -/
 def sliceNativeTensor :
     DerivedCategory (SliceInternal Λ X U) × DerivedCategory (SliceInternal Λ X U) ⥤
       DerivedCategory (SliceInternal Λ X U) :=
   MonoidalCategory.tensor (DerivedCategory (SliceInternal Λ X U))
 
 /-- The native total tensor on local internal complexes.
-Source: Stacks 06YL (auxiliary; not a blueprint node). -/
+Source: Stacks 06YL. -/
 def sliceTotalTensor (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
     CochainComplex (SliceInternal Λ X U) ℤ :=
   (sliceCochainMonoidal Λ X U).tensorObj P Q
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Fix the dependency's coproduct instance rather than rediscovering it by search.
-Source: Stacks 012Z (auxiliary; not a blueprint node). -/
+Source: Stacks 012Z. -/
 instance sliceTotalExists (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
     P.HasMapBifunctor Q (curriedTensor (SliceInternal Λ X U)) :=
   comparison_internalTotalExists ((Scheme.ProEt.topology X).over U) (sliceRingObject Λ X U) P Q
@@ -235,7 +234,7 @@ attribute [local irreducible] sliceComplexForward
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The actual lax localization map for the native local tensor.
-Source: Stacks 06YS (auxiliary; not a blueprint node). -/
+Source: Stacks 06YS. -/
 def sliceLocalizationTensorMap (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
     (sliceNativeTensor Λ X U).obj
       ((DerivedCategory.Q (C := SliceInternal Λ X U)).obj P,

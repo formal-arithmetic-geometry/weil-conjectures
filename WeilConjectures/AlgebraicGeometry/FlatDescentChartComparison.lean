@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.AffineTripleTensorBaseChange
 # Tensor-spectrum comparisons for one affine triple
 
 Source: Stacks Project, Limits, proof of Tag 04AI, first paragraph.
-(blueprint: lem-weil-pbc-flat-descent-chart-comparison).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ image of the given source open. No flatness hypothesis or conclusion occurs here
 
 Source: Stacks Project, Limits, proof of Tag 04AI, first paragraph, and Situation 081D;
 the affine limit comparison is Tag 01YW.
-(blueprint: lem-weil-pbc-flat-descent-chart-comparison).
 
 Proof: For j in the upper tail, take W_j to be the inverse image of W₀ in D(j).
 Affine transition morphisms make each W_j affine. Their section rings and the section

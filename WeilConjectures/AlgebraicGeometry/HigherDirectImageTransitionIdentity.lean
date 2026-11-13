@@ -17,7 +17,6 @@ import all WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyPullbackLaws
 /-! # Identity triangle for higher direct images
 
 Source: Stacks Project, Tag 09Z1, canonical comparison maps, and Tag 03Q8.
-(blueprint: lem-sbc-higher-image-transition-identity).
 -/
 
 @[expose] public section
@@ -107,7 +106,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The transition for the identity triangle becomes the identity after identifying
 identity pullback with the original sheaf.
 Source: Stacks Project, Tag 09Z1, canonical comparisons; Tag 03Q8.
-(blueprint: lem-sbc-higher-image-transition-identity).
 
 Proof: Expand the transition before taking homology. The inverse-image composition
 comparison for `id ≫ h = h` is the inverse of the identity comparison whiskered by

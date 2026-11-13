@@ -26,7 +26,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- On an affine etale object, a section killed at the limit dies at a later stage.
 Source: Stacks Project, Tag 09Z1, proof of lemma-relative-colimit; Tag 03Q8;
-Tag 0EZM (blueprint: lem-sbc-higher-direct-image-affine-computation-vanishing).
+Tag 0EZM.
 
 Proof: Use the natural cohomology-presheaf comparison of Tag 03Q8 at each stage
 and at the limit. Locally lift the section to cohomology representatives. Naturality

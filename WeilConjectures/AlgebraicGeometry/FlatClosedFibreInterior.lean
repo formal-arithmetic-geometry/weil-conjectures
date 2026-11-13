@@ -19,7 +19,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 /-! # Empty fibre interior for a flat closed family
 
 Source: Stacks Project, Tag 054X, the argument after generic flatness.
-(blueprint: lem-sbc-flat-closed-fibre-interior)
 -/
 
 @[expose] public section
@@ -49,9 +48,7 @@ of every irreducible component has strictly smaller dimension. Thus some
 ambient component is contained in the closed generic fibre, contradicting
 its empty interior. This proves the assertion. Empty fibres have empty
 interior and require no choice of xi. The open U may equal the whole base;
-the assertion uses no reducedness of the source or of the closed subfamily.
-
-(blueprint: lem-sbc-flat-closed-fibre-interior) -/
+the assertion uses no reducedness of the source or of the closed subfamily. -/
 theorem interior_fibre_closed_eq_empty_of_flat_restrict
     {Z X T : Scheme.{u}} [IsIntegral T]
     (f : X ⟶ T) [LocallyOfFiniteType f] [QuasiCompact f]

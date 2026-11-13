@@ -30,8 +30,7 @@ Pull this union back along x; AB5 says the resulting subobjects have union the s
 For each member pull its witnessing epimorphism back to this source subobject.
 Its composite into B has the required local lifts, so the hypothesis kills it.
 Cancel that epimorphism. All subobjects in the directed union now factor through
-the kernel of g, hence the whole source does and g is zero.
-(auxiliary; not a blueprint node). -/
+the kernel of g, hence the whole source does and g is zero. -/
 theorem eq_zero_of_factors_localImage
     {F G : Sheaf X.smallEtaleTopology A} (p : F ⟶ G)
     (W : X.Etale) (B T : A) (x : B ⟶ G.obj.obj (op W)) (g : B ⟶ T)

@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 /-! # Transporting a finite open partition across a thickening
 
 Source: Stacks Project Tag 04DF; step 2 of finite splitting closed immersion descent.
-(blueprint: lem-weil-pbc-finite-open-partition-thickening-transport)
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ namespace AlgebraicGeometry.Scheme
 
 Source: Stacks Project Tag 04DF; step 2 of
 `lem-weil-pbc-finite-splitting-closed-immersion-descent`.
-(blueprint: lem-weil-pbc-finite-open-partition-thickening-transport)
 
 Proof: A surjective closed immersion induces a homeomorphism on points. Take
 V_j to be the image of W_j under this homeomorphism. Injectivity and

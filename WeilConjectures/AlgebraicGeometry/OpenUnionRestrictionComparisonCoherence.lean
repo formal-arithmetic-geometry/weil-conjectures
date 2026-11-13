@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
 /-! # Coherence of supplied open-union restriction comparisons
 
 Source: Stacks Project Tags 08BW and 08BT; Mathlib restriction composition.
-(blueprint: lem-sc-open-union-restriction-comparison-coherence).
 -/
 
 @[expose] public section
@@ -36,7 +35,6 @@ set_option maxHeartbeats 400000 in
 /-- Supplied direct restriction comparisons descend to commuting overlap comparisons.
 Source: Stacks Project Tag 08BW, cohomology.tex, lemma-mayer-vietoris-hom;
 Tag 08BT, lemma-adjoint-lower-shriek-restrict.
-(blueprint: lem-sc-open-union-restriction-comparison-coherence).
 
 Proof: Treat each chain W intersect V into W into W union V, and W intersect V into
 V into W union V separately. Direct restriction through the inverse image of W is a

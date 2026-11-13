@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.FixedScalarOrdinaryComparison
 /-! # Etale origin under fixed-scalar and small-site equivalences
 
 Source: Stacks Tags 03CY, 09A5 and 09AL; Bhatt--Scholze, Remark 6.3.2.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -95,8 +94,7 @@ private theorem comparisonPresentation (X : Scheme.{u}) (k : Type (u + 1)) [Comm
 /-- Changing between constant-ring modules on the small models and fixed-scalar
 sheaves on the original sites preserves the etale-origin witness. This concerns an
 arbitrary residue-field complex, without integral coefficients or completeness.
-Source: Stacks Tags 03CY, 09A5 and 09AL; Bhatt--Scholze, Remark 6.3.2
-(auxiliary; not a blueprint node).
+Source: Stacks Tags 03CY, 09A5 and 09AL; Bhatt--Scholze, Remark 6.3.2.
 
 Proof: On the etale site, precomposition by AsSmall.down is an exact equivalence.
 Compose it with the inverse constant-scalar restriction equivalence, just as in

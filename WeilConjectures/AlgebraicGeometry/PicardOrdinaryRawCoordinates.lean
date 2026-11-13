@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 /-! # Raw scalar coordinates and differential formulas
 
 Source: Stacks Project, Tags 0BF2, 01I7, 01IB and 0096.
-(blueprint: lem-sc-picard-ordinary-raw-coordinates)
 -/
 
 @[expose] public section
@@ -50,7 +49,6 @@ private lemma residueLift_appTop (W : Scheme.{v}) (w : W)
 Unlike cycle lifting, this calculation does not assume that the coefficients vanish
 at the residue point or that a scalar annihilates them.
 Source: Stacks Project, Tag 0BF2, degree-zero calculation; Tags 01I7, 01IB and 0096.
-(blueprint: lem-sc-picard-ordinary-raw-coordinates)
 
 Proof: Strict perfectness makes the two terms retracts of finite free sheaves,
 hence quasi-coherent. The affine tilde/Gamma equivalence on U sheafifies e0 and e1.

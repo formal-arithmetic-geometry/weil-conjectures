@@ -8,8 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.ProperSupportedKunnethRoute
 import WeilConjectures.AlgebraicGeometry.ProperShriekCompSupportsCanonicalHelper
 
 /-! # Canonical-composite proper forget-supports calculation
-
-Source: blueprint latest, first triangle of thm-amb-p1-adjunction.proof.md.
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +25,6 @@ The specified proper compact-support compositor agrees with the raw compositor
 when the composite morphism is written canonically. This is the canonical-composite
 special case used to transport the raw forget-supports calculation to an arbitrary
 specified composite.
-Source: blueprint latest, first triangle of thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node)
 -/
 theorem properShriekComp_comp_forgetSupports_canonical {W X S : Scheme.{u}}
     (p : W ⟶ X) (f : X ⟶ S) [IsProper p] [IsProper f] [IsProper (p ≫ f)]

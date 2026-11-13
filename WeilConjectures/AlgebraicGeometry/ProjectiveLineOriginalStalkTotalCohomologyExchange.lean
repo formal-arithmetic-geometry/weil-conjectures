@@ -39,7 +39,6 @@ open Scheme Etale
 This comparison has no local higher-direct-image stalks in its conclusion.
 
 Source: Stacks Project, Tags 03Q9 and 03FD, and the last two paragraphs of Tag 095T.
-(blueprint: lem-weil-pbc-p1-original-stalk-total-cohomology-exchange).
 
 Proof: properness makes the projective-line projection qcqs. The inverse-image
 stalk formula identifies the source with the higher-direct-image stalk at sigma.

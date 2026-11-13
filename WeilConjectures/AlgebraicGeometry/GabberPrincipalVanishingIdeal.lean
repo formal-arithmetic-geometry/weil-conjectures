@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 
 /-! # GabberPrincipalVanishingIdeal
 
-Source: Stacks Project, Tag 0GY0.
-(blueprint: lem-weil-pbc-gabber-principal-vanishing-ideal) -/
+Source: Stacks Project, Tag 0GY0. -/
 
 @[expose] public section
 
@@ -68,7 +67,6 @@ private theorem cohomologyMap_eq_zero_of_transport {X Y : Scheme.{u}}
 
 Source: Stacks Project, Etale Cohomology, Lemma 0GY0, label lemma-gabber-criterion,
 proof's ideal and addition-closure paragraphs.
-(blueprint: lem-weil-pbc-gabber-principal-vanishing-ideal)
 
 Proof: let I consist of f such that the class restricts to zero on D(fh).
 The empty open D(0) gives zero membership, and restriction functoriality gives

@@ -14,7 +14,6 @@ import WeilConjectures.RingTheory.KoszulGeneratorChainMap
 /-! # Increasing-wedge Koszul boundary evaluation
 
 Source: Stacks Project, Tags 08D0 and 08D1.
-(blueprint: lem-sc-koszul-cech-boundary-evaluation).
 -/
 
 @[expose] public section
@@ -106,7 +105,6 @@ private theorem evaluate_extend_transport
 
 /-- Evaluation of the negative tail boundary on an increasing wedge, before localization.
 Source: Stacks Project, Tags 08D0 and 08D1, the first differential calculation.
-(blueprint: lem-sc-koszul-cech-boundary-evaluation)
 Proof: since card(J)>1, both tail degrees and every erased subset are supported.
 Use extendXIso to transport the differential to minus koszulBoundary. Include the
 exterior powers into the exterior algebra and apply the contraction recursion

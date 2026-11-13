@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemCo
 /-! # Adjacent maps between second-ideal algebraizations
 
 Source: Stacks Project, Tag 088A, the maps G_(e+1) to G_e.
-(blueprint: lem-weil-pbc-formal-second-ideal-algebraization-transitions).
 -/
 
 @[expose] public section
@@ -117,7 +116,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Adjacent quotient transitions lift to maps inducing the smaller K-quotient.
 Source: Stacks Project, Tag 088A, construction of the transitions of G_e.
-(blueprint: lem-weil-pbc-formal-second-ideal-algebraization-transitions).
 
 Proof: Write F_e for the pushforward of G_e from V(K^(e+1)). It is annihilated
 by K^(e+1): on each affine open the action factors through the quotient ring, and

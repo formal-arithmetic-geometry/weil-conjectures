@@ -22,7 +22,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 /-! # Detecting open support by global perfect tests
 
 Source: Stacks Project, Tags 09IS and 09IM; Tag 0E4G, first paragraph of the proof.
-(blueprint: lem-sc-perfect-open-support-detection).
 -/
 
 @[expose] public section
@@ -88,12 +87,11 @@ private theorem map_eq_zero_of_comp_iso
 /-- If every map from a global perfect complex into K vanishes after restriction to a
 quasi-compact open U, every cohomology stalk of K on U is zero.
 Source: Stacks Project, Tags 09IS, 09IM, and the proof of Tag 0E4G.
-(blueprint: lem-sc-perfect-open-support-detection).
 
 Proof: U is qcqs. Exact restriction preserves quasi-coherent cohomology. If K restricts
 nontrivially, perfect generation on U detects it by a nonzero map from a perfect object
 on U (absorb a shift into that perfect object). Apply the perfect supported map lifting
-lemma with closed subset X: it supplies a global perfect P and beta : P -> K, and a
+lemma with closed subset X: it supplies a global perfect P and beta: P -> K, and a
 split inclusion of the original test into P restricted to U compatible with the maps.
 Perfection implies quasi-coherent cohomology, so P is an object of D_QCoh(X). The assumed
 vanishing of beta restricted to U forces the original map to vanish, a contradiction.

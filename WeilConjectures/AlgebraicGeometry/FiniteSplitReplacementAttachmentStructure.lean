@@ -576,8 +576,7 @@ attachedSimplicial identifies the simplicial fields. Dependent structure
 extensionality, uniqueness of colimit witnesses, and proof irrelevance for
 proposition-valued fields yield the exact restriction equality stated below.
 This theorem has no refinement target K:
-the simplicial object and all its operator laws are already constructed.
-(auxiliary; not a blueprint node) -/
+the simplicial object and all its operator laws are already constructed. -/
 theorem exists_attached_split_structure
     {X : Scheme.{u}} {n : ℕ} (U : TruncatedFiniteSplitEtaleHypercover X n)
     (V : X.Etale) (Q : ReplacementBoundary U) (b : V ⟶ Q.M)

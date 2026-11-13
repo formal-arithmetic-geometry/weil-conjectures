@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 # Sections on a quasi-compact open of a locally Noetherian normal scheme
 
 Source: Stacks Project, Tags 0357 and 0358.
-(blueprint: lem-sbc-normal-sections-finite-product)
 -/
 
 @[expose] public section
@@ -70,7 +69,6 @@ private theorem sections_product {X : Scheme.{u}} {ι : Type v}
 finite product of integrally closed domains.
 
 Source: Stacks Project, Tags 0357 and 0358, and Tag 035L, first paragraph of its proof.
-(blueprint: lem-sbc-normal-sections-finite-product)
 
 Proof: The open subscheme U is locally Noetherian, so it is locally connected. Its
 connected components are clopen. Quasi-compactness implies that their discrete quotient

@@ -23,7 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Blueprint: lemma-weil-pbc-finite-hypercover-descent. -/
+/-- -/
 theorem finite_hypercover_descent
     {I : Type w} [SmallCategory I] [IsFiltered I]
     (D : Iᵒᵖ ⥤ Scheme.{w})

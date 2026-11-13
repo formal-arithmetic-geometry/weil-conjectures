@@ -14,8 +14,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleSectionModuleFunctors
 
 /-! # Actual internal oplax components on resolving models
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0G7E, 07A2 and 07A4
-(auxiliary; not a blueprint node).
+Source: Stacks Project, sites-cohomology.tex, Tags 0G7E, 07A2 and 07A4.
 
 The generic predicates expose the component equations of the specified localized arrows.
 The final statement specializes them to the actual internal pro-etale module pullback.
@@ -35,8 +34,7 @@ namespace CategoryTheory.Functor
 
 /-- A natural square commutes also on the actual inverse images of specified arrows.
 The isomorphisms have the functor images as their forward maps, fixing the inverses.
-Source: Stacks 07A4, resolving localization
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4, resolving localization. -/
 def ResolvingInverseSquares {A : Type a} [Category.{b} A]
     {B : Type c} [Category.{d} B] {U V : A ⥤ B}
     (τ : U ⟶ V) (W : MorphismProperty A) : Prop :=
@@ -79,27 +77,27 @@ variable {C : Type a} [Category.{u + 1} C] [Abelian C]
   [F.IsLeftAdjoint] [F.Monoidal]
 
 /-- The actual comparison a: L(r⁻¹) followed by the resolution transformation.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def resolvingComparisonA := Functor.uncurry.map F.leftDerivedDerivedTensorCounit
 
 /-- The actual comparison c: tensor the resolution transformations, then apply r⁻¹.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def resolvingComparisonC := Functor.uncurry.map F.derivedTensorLeftDerivedCounit
 
 /-- The homotopy total oplax arrow, followed by the derived localization.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def resolvingTotalArrow :=
   Functor.uncurry.map (Functor.postcompose₂MapWhiskeringLeft₂
     (OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F) DerivedCategory.Qh)
 
 /-- Restrict the specified localized tensor transformation to homotopy representatives.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def resolvingDelta (δ : F.leftDerivedDerivedTensor ⟶ F.derivedTensorLeftDerived) :=
   Functor.uncurry.map
     ((((Functor.whiskeringLeft₂ _).obj DerivedCategory.Qh).obj DerivedCategory.Qh).map δ)
 
 /-- Quasi-isomorphisms between resolving pairs, in both homotopy variables.
-Source: Stacks 0G7E and 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 0G7E and 07A4. -/
 def resolvingPairArrows (P : ObjectProperty (CochainComplex C ℤ)) :
     MorphismProperty (HomotopyCategory C (.up ℤ) × HomotopyCategory C (.up ℤ)) :=
   fun A B s ↦ P A.1.as ∧ P A.2.as ∧ P B.1.as ∧ P B.2.as ∧
@@ -108,7 +106,7 @@ def resolvingPairArrows (P : ObjectProperty (CochainComplex C ℤ)) :
 
 /-- The resolving component assertion for a fixed localized tensor transformation.
 Its comparison transformations are the existing derived counits; no new lift is chosen.
-Source: Stacks 0G7E and 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 0G7E and 07A4. -/
 def ResolvingOplaxComponents
     (P : ObjectProperty (CochainComplex C ℤ))
     (Q : ObjectProperty (CochainComplex D ℤ))
@@ -324,8 +322,7 @@ private theorem internal_monoidal_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
   exact internalPullOplax_eq_canonical Λ f
 
 /-- The actual internal oplax components on flat-term K-flat models.
-Source: Stacks 0G7E, 07A2 and 07A4; the component identities are agent calculations
-(auxiliary; not a blueprint node).
+Source: Stacks 0G7E, 07A2 and 07A4; the component identities are agent calculations.
 
 Proof, following the six DAG steps.
 1. The section K-flat comparison preserves and reflects resolving membership. Transport

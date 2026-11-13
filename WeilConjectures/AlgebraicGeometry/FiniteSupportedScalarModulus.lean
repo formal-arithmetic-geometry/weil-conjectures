@@ -12,9 +12,6 @@ import WeilConjectures.AlgebraicGeometry.Supported.SupportedKummerScalarOfSource
 import all WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionModulus
 
 /-! # Scalar and modulus reduction of ordinary supported boundaries
-
-Source: blueprint finite reduction of purity, Step 4.
-(blueprint: lem-pur-supported-scalar-modulus).
 -/
 
 @[expose] public noncomputable section
@@ -49,8 +46,7 @@ private theorem compose_scalar_modulus
 -- Elaborating the fixed scalar/support maps requires a larger finite budget.
 /-- Changing coefficients and then the Kummer modulus preserves the normalized
 supported boundary, with its sectionwise coefficient and root maps.
-Source: blueprint finite reduction Step 4; Stacks 03PL and 07A6
-(blueprint: lem-pur-supported-scalar-modulus).
+Source: blueprint finite reduction Step 4; Stacks 03PL and 07A6.
 Proof: first keep the larger modulus and use the normalized scalar units on the
 supported constant and root sheaves. The scalar boundary theorem gives their
 Yoneda square. For the smaller modulus, the morphism of Kummer sequences is the

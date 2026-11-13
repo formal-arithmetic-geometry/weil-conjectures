@@ -38,7 +38,6 @@ of the conormal dual, in every nonnegative degree, without a rank hypothesis.
 
 Source: Stacks Project, Tags 0BQW and 0BQY, as used in the first paragraph of
 Tag 0BQZ, lemma-regular-immersion-ext.
-(blueprint: lem-sc-koszul-self-ext-exterior).
 
 Proof: On an affine chart put A = O_Y(U), I = ker(i)(U), and B = A/I, and resolve
 B by the augmented finite free Koszul complex of the supplied regular sequence.

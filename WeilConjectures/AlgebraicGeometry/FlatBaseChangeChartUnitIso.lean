@@ -29,7 +29,6 @@ set_option linter.unusedVariables false in
 -- The statement elaborates several successive module pushforwards and pullbacks.
 /-- The adjoint of the restricted tensor unit is invertible on a fixed chart.
 Source: Stacks Project, Tags 0096 and 0097, and Tag 02KH's affine-local dictionary.
-(blueprint: new-flat-base-change-chart-unit-iso)
 
 Proof: Write p for pullback.snd g f and t for baseChangeFst h. The equality ef
 and the restriction equations give sigma.hom followed by t and then the open

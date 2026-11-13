@@ -14,8 +14,7 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Composition of coherent upper shriek for proper morphisms
 
-Source: Stacks Project, Duality for Schemes, Lemma 48.16.3 (Tag 0ATX), proper case
-(blueprint: lem-sc-proper-upper-shriek-composition).
+Source: Stacks Project, Duality for Schemes, Lemma 48.16.3 (Tag 0ATX), proper case.
 -/
 
 @[expose] public section
@@ -30,12 +29,11 @@ namespace AlgebraicGeometry
 categories, with the counit of the composite identified with the two successive counits.
 The restricted direct images `Rf`, `Rg`, `Rfg` on `D_QCoh` are tied to
 `schemeDerivedDirectImage` by the comparison isomorphisms `eRf`, `eRg`, `eRfg`; the
-comparison `c : Rg_* ∘ Rf_* ≅ R(g ∘ f)_*` is the canonical one, characterized by the
+comparison `c: Rg_* ∘ Rf_* ≅ R(g ∘ f)_*` is the canonical one, characterized by the
 right-derived unit equation of `RingedSpace.exists_derivedModuleDirectImageComposition`
 (Tag 0D5T). The right adjoints `uf`, `ug`, `ufg` with their adjunctions are the `h^!`
-of the statement (def-pc-upper-shriek-right-adjoint).
-Source: Stacks Project, Tag 0ATX, proper case
-(blueprint: lem-sc-proper-upper-shriek-composition).
+of the statement.
+Source: Stacks Project, Tag 0ATX, proper case.
 
 Proof:
 1. `lem-pc-proper-derived-direct-image-composition` gives the canonical comparison on
@@ -43,10 +41,9 @@ Proof:
    faithful).
 2. `lem-pc-noetherian-derived-direct-image-right-adjoint` supplies the right adjoints,
    as in `def-pc-upper-shriek-right-adjoint`. Compose the adjunctions for f and g and
-   transport across the comparison. The uniqueness isomorphism for right adjoints
-   (`lem-cat-right-adjoint-composition`) gives `(g ∘ f)^! ≅ f^! ∘ g^!`.
+   transport across the comparison. The uniqueness isomorphism for right adjoints gives `(g ∘ f)^! ≅ f^! ∘ g^!`.
 3. The composite-adjunction counit formula and compatibility of right-adjoint uniqueness
-   with counits (`lem-cat-right-adjoint-composition`) give the displayed equality at K,
+   with counits give the displayed equality at K,
    read after the faithful inclusion into `D(𝒪_Z)`. Since the isomorphism is a functor
    isomorphism, it is natural in every K. -/
 theorem exists_properUpperShriekComposition

@@ -18,8 +18,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 /-!
 # Noetherian finite-Tor comparison
 
-md
-(blueprint: det-pe-finite-tor-comparison-noetherian).
+md.
 
 We use the same coefficient-sized small site models, constant ring sheaves and standard
 localizations as `constructibleComparison`. The Tor predicates test all module sheaves in
@@ -94,8 +93,7 @@ The first natural isomorphism characterizes the derived comparison by its action
 complexes; the final one identifies the forward restricted equivalence with that functor.
 
 md;
-Stacks Tags 05VD, 07A4, 06YQ, 08G0 and 08G1
-(blueprint: det-pe-finite-tor-comparison-noetherian).
+Stacks Tags 05VD, 07A4, 06YQ, 08G0 and 08G1.
 
 Proof:
 1. Obtain the canonical derived comparison D, its factorization on every cochain

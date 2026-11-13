@@ -17,12 +17,11 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 # Lisse sheaves of finite modules and module objects
 
 Source: literature/stacks-project/etale-cohomology.tex, Lemma 0DV5, proof of (1)--(3),
-with sites-modules Lemma 093S (1)
-(blueprint: lem-pod-lisse-module-sheaves-as-module-objects).
+with sites-modules Lemma 093S (1).
 
 Sheaves of left `Λ`-modules on `Y_et` are `Sheaf Y.smallEtaleTopology (ModuleCat.{u+1} Λ)`
-with `Λ : Type (u + 1)` (STATE: the encoding of the six-functor and constructible chapters).
-`FLC(Y)` is `IsFiniteLocallyConstantSheafOfTypes` (def-weil-pbc-etale-sheaves).
+with `Λ: Type (u + 1)` (STATE: the encoding of the six-functor and constructible chapters).
+`FLC(Y)` is `IsFiniteLocallyConstantSheafOfTypes`.
 -/
 
 @[expose] public section
@@ -38,8 +37,7 @@ variable {Y : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ]
 /-- A sheaf of left `Λ`-modules on `Y_et` is *lisse* when there are an etale covering
 `{U_i → Y}` and finite left `Λ`-modules `M_i` with `F|_{U_i}` isomorphic, as a sheaf of
 `Λ`-modules, to the constant sheaf (the sheafified constant presheaf) of `M_i`.
-Source: Stacks Project, Lemma 0DV5
-(blueprint: lem-pod-lisse-module-sheaves-as-module-objects). -/
+Source: Stacks Project, Lemma 0DV5. -/
 def IsLisseModuleSheaf (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Prop :=
   ∃ 𝒰 : Cover.{u} etalePrecoverage Y, ∀ i : 𝒰.I₀,
     ∃ M : ModuleCat.{u + 1} Λ, Finite M ∧
@@ -48,10 +46,10 @@ def IsLisseModuleSheaf (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
           (ModuleCat.{u + 1} Λ)).obj M)
 
 /-- A `Λ`-module structure on a sheaf of sets `A` in the sense of commutative diagrams:
-morphisms `+ : A × A → A`, `0 : * → A` from the final object, `- : A → A` and `λ · : A → A`
+morphisms `+: A × A → A`, `0: * → A` from the final object, `-: A → A` and `λ ·: A → A`
 for every `λ ∈ Λ`, satisfying the axioms of a left `Λ`-module as equalities of morphisms
 (products are those of all sheaves of sets). Source: Stacks Project, Lemma 0DV5, proof of
-(2)--(3) (blueprint: lem-pod-lisse-module-sheaves-as-module-objects). -/
+(2)--(3). -/
 structure ModuleObjectStruct (Λ : Type (u + 1)) [Ring Λ]
     (A : Sheaf Y.smallEtaleTopology (Type (u + 1))) where
   /-- Addition. -/
@@ -77,7 +75,7 @@ structure ModuleObjectStruct (Λ : Type (u + 1)) [Ring Λ]
 variable (Y Λ) in
 /-- A `Λ`-module object of `FLC(Y)`: a finite locally constant sheaf of sets with a
 `Λ`-module structure in the sense of commutative diagrams. Source: Stacks Project,
-Lemma 0DV5 (blueprint: lem-pod-lisse-module-sheaves-as-module-objects). -/
+Lemma 0DV5. -/
 structure LambdaModuleObject where
   /-- The underlying sheaf of sets. -/
   sheaf : Sheaf Y.smallEtaleTopology (Type (u + 1))
@@ -88,8 +86,7 @@ structure LambdaModuleObject where
 namespace LambdaModuleObject
 
 /-- A morphism of `Λ`-module objects: a morphism of `FLC(Y)` commuting with addition, zero,
-negation and every scalar multiplication. Source: Stacks Project, Lemma 0DV5
-(blueprint: lem-pod-lisse-module-sheaves-as-module-objects). -/
+negation and every scalar multiplication. Source: Stacks Project, Lemma 0DV5. -/
 @[ext]
 structure Hom (A B : LambdaModuleObject Y Λ) where
   /-- The underlying morphism of sheaves of sets. -/
@@ -99,8 +96,7 @@ structure Hom (A B : LambdaModuleObject Y Λ) where
   neg : A.str.neg ≫ hom = hom ≫ B.str.neg
   smul (r : Λ) : A.str.smul r ≫ hom = hom ≫ B.str.smul r
 
-/-- The category of `Λ`-module objects of `FLC(Y)`. Source: Stacks Project, Lemma 0DV5
-(blueprint: lem-pod-lisse-module-sheaves-as-module-objects). -/
+/-- The category of `Λ`-module objects of `FLC(Y)`. Source: Stacks Project, Lemma 0DV5. -/
 instance : Category (LambdaModuleObject Y Λ) where
   Hom := Hom
   id A := ⟨𝟙 _, by simp, by simp, by simp, by simp⟩
@@ -113,8 +109,7 @@ end LambdaModuleObject
 
 variable (Y Λ) in
 /-- The category of lisse sheaves of left `Λ`-modules, with `Λ`-linear maps of sheaves.
-Source: Stacks Project, Lemma 0DV5
-(blueprint: lem-pod-lisse-module-sheaves-as-module-objects). -/
+Source: Stacks Project, Lemma 0DV5. -/
 abbrev LisseModuleSheafCategory : Type (u + 2) :=
   ObjectProperty.FullSubcategory
     (IsLisseModuleSheaf (Y := Y) (Λ := Λ))
@@ -122,8 +117,7 @@ abbrev LisseModuleSheafCategory : Type (u + 2) :=
 /-- A module-object structure on the underlying sheaf of sets of a sheaf of `Λ`-modules `F`
 is the one of `F` when, on the sections over every `U`, its addition, zero, negation and
 scalar multiplications are those of the `Λ`-module `F(U)`. Source: Stacks Project,
-Lemma 0DV5, proof of (2)--(3)
-(blueprint: lem-pod-lisse-module-sheaves-as-module-objects). -/
+Lemma 0DV5, proof of (2)--(3). -/
 def ModuleObjectStruct.IsUnderlying (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (S : ModuleObjectStruct Λ ((sheafForget Y.smallEtaleTopology).obj F)) : Prop :=
   (∀ U x, S.add.hom.app U x =
@@ -270,7 +264,7 @@ private theorem finiteModuleConstantModel_over
 
 /-- Clause (1): a sheaf of left modules over a finite ring `Λ` is lisse if and only if its
 underlying sheaf of sets lies in `FLC(Y)`. Source: Stacks Project, Lemma 0DV5 (1), using
-Lemma 093S (1) (blueprint: lem-pod-lisse-module-sheaves-as-module-objects).
+Lemma 093S (1).
 
 Proof: if `F` is lisse, choose an etale covering on which it is isomorphic, as a sheaf of
 `Λ`-modules, to the constant sheaf of a finite left `Λ`-module `M_i`; forgetting the module
@@ -321,8 +315,7 @@ theorem lisseModuleSheaf_iff_underlying_finiteLocallyConstant [Finite Λ]
 
 /-- The underlying sheaf of sets of a sheaf of `Λ`-modules carries exactly one module-object
 structure given on sections by the operations of the modules `F(U)`. Source: Stacks Project,
-Lemma 0DV5, proof of (2)--(3)
-(blueprint: lem-pod-lisse-module-sheaves-as-module-objects).
+Lemma 0DV5, proof of (2)--(3).
 
 Proof: products of sheaves of sets are computed on sections, and the operations of the
 modules `F(U)` commute with the restriction maps, so they are morphisms of sheaves; the
@@ -429,16 +422,14 @@ theorem existsUnique_moduleObjectStruct_isUnderlying
   exact moduleObjectStruct_ext ea ez en em
 
 /-- The module-object structure of the underlying sheaf of sets of a sheaf of `Λ`-modules:
-its addition, zero, negation and scalar multiplications. Source: Stacks Project, Lemma 0DV5
-(blueprint: lem-pod-lisse-module-sheaves-as-module-objects). -/
+its addition, zero, negation and scalar multiplications. Source: Stacks Project, Lemma 0DV5. -/
 noncomputable def underlyingModuleObjectStruct
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     ModuleObjectStruct Λ ((sheafForget Y.smallEtaleTopology).obj F) :=
   (existsUnique_moduleObjectStruct_isUnderlying F).exists.choose
 
 /-- A `Λ`-linear map of sheaves commutes with the underlying addition, zero, negation and
-scalar multiplications. Source: Stacks Project, Lemma 0DV5, proof of (2)--(3)
-(blueprint: lem-pod-lisse-module-sheaves-as-module-objects).
+scalar multiplications. Source: Stacks Project, Lemma 0DV5, proof of (2)--(3).
 
 Proof: on sections over every `U` the map is `Λ`-linear, and morphisms of sheaves of sets
 are determined by their sections. -/
@@ -501,7 +492,7 @@ variable (Y Λ) in
 /-- The functor of clause (2): a lisse sheaf `F` goes to its underlying sheaf of sets (in
 `FLC(Y)` by clause (1)) with the addition, zero, negation and scalar multiplications of `F`;
 a `Λ`-linear map goes to its underlying map of sheaves of sets. Source: Stacks Project,
-Lemma 0DV5 (blueprint: lem-pod-lisse-module-sheaves-as-module-objects). -/
+Lemma 0DV5. -/
 noncomputable def lisseToModuleObject [Finite Λ] :
     LisseModuleSheafCategory Y Λ ⥤ LambdaModuleObject Y Λ where
   obj F := ⟨(sheafForget Y.smallEtaleTopology).obj F.obj,
@@ -877,8 +868,7 @@ private theorem lisseToModuleObject_full [Finite Λ] :
 /-- Clause (2): the functor sending a lisse sheaf of left `Λ`-modules to its underlying sheaf
 of sets with its addition, zero, negation and scalar multiplications is an isomorphism of
 categories (an equivalence that is bijective on objects) onto the `Λ`-module objects of
-`FLC(Y)`. Source: Stacks Project, Lemma 0DV5 (2)--(3)
-(blueprint: lem-pod-lisse-module-sheaves-as-module-objects).
+`FLC(Y)`. Source: Stacks Project, Lemma 0DV5 (2)--(3).
 
 Proof: by clause (1) the functor lands in `FLC(Y)`. Conversely a module object of `FLC(Y)`
 gives on every `U` a `Λ`-module structure on its sections, compatible with restriction, so a

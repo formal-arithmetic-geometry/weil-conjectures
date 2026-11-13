@@ -25,9 +25,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
 
 /-!
 # The two Kummer-normalized projective-line components
-
-Source: blueprint thm-amb-p1-decomposition and its proof.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -91,27 +88,21 @@ local instance (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) 
 
 attribute [local irreducible] ordinaryFinitePullback ordinaryFinitePushforward
 
-/-- A family of projective-line Chern arrows on Noetherian bases.
-Source: blueprint thm-amb-p1-decomposition.
-(auxiliary; not a blueprint node). -/
+/-- A family of projective-line Chern arrows on Noetherian bases. -/
 abbrev OrdinaryFiniteP1ChernFamily (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) :=
   ∀ (S : Scheme.{u}) [IsNoetherian S], IsUnit (N : Γ(S, ⊤)) →
     (ordinaryFiniteUnit A (ProjectiveLine S) ⟶
       (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧)
 
-/-- The Chern family represents the actual scalar-extended Kummer boundary of O(1).
-Source: blueprint thm-amb-p1-decomposition.
-(auxiliary; not a blueprint node). -/
+/-- The Chern family represents the actual scalar-extended Kummer boundary of O(1). -/
 def OrdinaryFiniteP1ChernFamilySpec (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (c : OrdinaryFiniteP1ChernFamily A N hA) : Prop :=
   ∀ (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))),
     ordinaryFiniteP1ChernSpec A N hA S
       (affineTraceProjectiveInvertible N S hS) (c S hS)
 
-/-- The specified twisted-unit and Chern components, before proving invertibility.
-Source: blueprint thm-amb-p1-decomposition.
-(auxiliary; not a blueprint node). -/
+/-- The specified twisted-unit and Chern components, before proving invertibility. -/
 def ordinaryFiniteP1KummerMap (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (c : OrdinaryFiniteP1ChernFamily A N hA)
@@ -122,9 +113,7 @@ def ordinaryFiniteP1KummerMap (A : Type (u + 1)) [CommRing A]
   biprod.desc (ordinaryFiniteP1Unit A N hA t S hS)
     (ordinaryFiniteP1ChernPushforward A N hA S (c S hS))
 
-/-- The decomposition square uses the exact ordinary-etale exchange of the item.
-Source: blueprint thm-amb-p1-decomposition, base-change assertion.
-(auxiliary; not a blueprint node). -/
+/-- The decomposition square uses the exact ordinary-etale exchange of the item. -/
 def OrdinaryFiniteP1KummerMapBaseChange (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (c : OrdinaryFiniteP1ChernFamily A N hA) : Prop :=
@@ -171,7 +160,6 @@ private theorem p1_twist_degree_one (k : Type u) [Field k] :
 
 /-- The degree-normalized Kummer isomorphism sends the actual class of O(1) to one.
 Source: Curve.RootsOfUnityTop.sheafHTwoTrace and the two-chart computation of O(d).
-(auxiliary; not a blueprint node).
 Proof: the Kummer trace is bijective and takes a line bundle's boundary to its degree
 modulo N. The two-chart cohomology of O(d) gives Euler characteristic d+1 for d>=0.
 Since the unit is O(0), O(1) has degree 2-1=1. Substitute this in the trace equation. -/
@@ -209,9 +197,7 @@ theorem ordinaryFiniteP1_geometric_kummer_normalization
 /-- On an algebraically closed geometric fibre the root sheaf has cohomology only
 in degrees zero and two, both cyclic of order N. The isomorphisms here do not yet
 normalize the actual Chern arrow.
-Source: ProjectiveLineGenusZero and Curve.Estimate, the geometric-fibre part of
-blueprint thm-amb-p1-decomposition.
-(auxiliary; not a blueprint node).
+
 Proof: apply the proper-curve calculation to the genus-zero projective line. Its
 first cohomology is a function group on Fin 0, hence zero. A primitive root
 identifies the constant Z/N sheaf with the root sheaf in every degree; transport
@@ -755,9 +741,6 @@ private theorem kummer_relative_iso
 
 /-- The Kummer-normalized two-component map is invertible and commutes with base change.
 This concerns only cohomology and its two specified arrows; it asserts no duality adjunction.
-Source: blueprint thm-amb-p1-decomposition.md and its proof, and the decomposition/trace
-part of lem-asd-ordinary-finite-p1-adjunction, steps 2--4.
-(auxiliary; not a blueprint node).
 
 Proof: First use Z/N coefficients. At an algebraically closed geometric fibre the projective
 line is a smooth proper connected genus-zero curve. Proper-curve cohomology gives Z/N in

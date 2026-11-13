@@ -184,7 +184,6 @@ abbrev pinnedDerivedAdjunction
 /-- The selected derived adjunction respects the counit-compatible pullback shifts
 and the recorded right-derived direct-image shifts.
 Source: Stacks Project, Tag 08HY, canonical derived adjunction; Tag 079W.
-(blueprint: lem-pc-pinned-derived-adjunction-shifts).
 Proof: the normalization equation of exists_schemeDerivedAdjunction identifies
 its Hom equivalence on localized representatives with the termwise tensor-pullback
 adjunction, the selected left-derived counit and the right-derived unit. The

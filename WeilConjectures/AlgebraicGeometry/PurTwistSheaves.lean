@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.LisseLatticeCoefficients
 
 /-! # The integral Tate line on the pro-etale site
 
-Source: Stacks Project, Tag 03PK; the coefficient-twist blueprint, order 1505
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 03PK; the coefficient-twist blueprint, order 1505.
 
 The auxiliary constructions retain the root tower, constant scalar extension and completed
 scalar action. All choices below have a uniqueness specification. The tensor of commutative
@@ -52,7 +51,7 @@ attribute [-instance] WeilConjectures.integralCoefficientRingSheafify
 variable (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
 
 /-- Forgetting commutativity preserves sheafification on the small pro-etale site.
-Source: Stacks Tag 00W1 (auxiliary; not a blueprint node).
+Source: Stacks Tag 00W1.
 Proof: sheafification uses covering-compatible families and their local equality relation.
 Forgetting commutativity preserves the finite limits and filtered colimits in this
 construction. Thus the same sheafification is obtained before and after forgetting. -/
@@ -72,7 +71,7 @@ theorem purTwistForgetPreservesSheafification :
   · exact ⟨fun x ↦ Presheaf.imageSieve_mem (ProEt.topology S) f x⟩
 
 /-- The constant-ring comparison coming from commutation with forgetting commutativity.
-Source: Stacks Tags 03CY and 03PK (auxiliary; not a blueprint node). -/
+Source: Stacks Tags 03CY and 03PK. -/
 noncomputable def purTwistFiniteRingIso (n : ℕ) :
     purTwistRing S (purTwistFiniteRing S l n) ≅
       proEtaleRootsOfUnityCoefficientRing S (l ^ (n + 1)) :=
@@ -81,7 +80,7 @@ noncomputable def purTwistFiniteRingIso (n : ℕ) :
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).app _
 
 /-- The recorded finite roots module, transported along the canonical coefficient comparison.
-Source: Stacks Tags 03CY and 03PK (auxiliary; not a blueprint node). -/
+Source: Stacks Tags 03CY and 03PK. -/
 noncomputable def purTwistRootsModule (n : ℕ) :=
   (SheafOfModules.restrictScalars (purTwistFiniteRingIso S l n).hom).obj
     (proEtaleRootsOfUnityModule S (l ^ (n + 1)) (pow_pos (Fact.out : l.Prime).pos _))

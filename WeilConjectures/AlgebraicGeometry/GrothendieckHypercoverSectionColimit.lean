@@ -45,9 +45,7 @@ private theorem sectionComplexFunctor_map_tail
 
 /-- The three cochain terms of a pulled-back stage hypercover are a filtered
 colimit of their canonical later-stage counterparts.
-Source: blueprint étale cohomology continuity, finite-cochain proof, paragraph 2;
-the geometric finite-cover argument of étale section continuity, categorified
-using exact filtered colimits. No assertion about derived functors is used.
+ No assertion about derived functors is used.
 
 Proof: the over category of a stage is cofiltered and its forgetful functor is
 initial, so its pulled-back cone still has the given limit. In each relevant
@@ -65,8 +63,7 @@ short-complex diagram and cocone; the displayed isomorphisms identify its object
 with the actual stage section terms. Inverse-image composition and pullback
 pasting identify the cocone components with tailCochainMap. At q=0 the incoming
 differential is zero and the same degree-zero term can be used twice. Empty
-étale objects have zero section objects by the empty-cover sheaf condition.
-(auxiliary; not a blueprint node) -/
+étale objects have zero section objects by the empty-cover sheaf condition. -/
 theorem exists_tail_section_shortComplex_colimit
     {S : Scheme.{u}} (F : Sheaf S.smallEtaleTopology A)
     {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Over S)

@@ -18,7 +18,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 Source: Stacks Project, More on Morphisms, Tag 0B6G, verification of condition (3),
 and `more-morphisms-lemma-check-perfect-stalks`.
-(blueprint: lem-pc-perfect-relative-finite-tor).
 -/
 
 @[expose] public section
@@ -48,8 +47,7 @@ Choose a complex K representing E and a K-flat resolution P of its restriction o
 scalars. Tensoring P with any inverse-image-structure-sheaf module computes the
 relative derived tensor. The stalkwise bounds imply its homology vanishes outside
 [a,b], for every module. Enlarge the interval if necessary to have a ≤ b.
-For empty X, use [0,0]; the zero complex likewise has amplitude in [0,0].
-(blueprint: lem-pc-perfect-relative-finite-tor). -/
+For empty X, use [0,0]; the zero complex likewise has amplitude in [0,0]. -/
 theorem perfect_hasFiniteTorDimensionOver
     {X Y : Scheme.{u}} [CompactSpace X] [IsNoetherian Y]
     (f : X ⟶ Y) [LocallyOfFiniteType f]

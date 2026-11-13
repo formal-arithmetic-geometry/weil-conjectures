@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.PerfectAffineMapRepresentative
 
 /-! # A strictly perfect model for a cone on an affine open
 
-Source: Stacks Project, Tag 08CR, second proof, mapping cone construction
-(blueprint: lem-pc-perfect-affine-cone-model).
+Source: Stacks Project, Tag 08CR, second proof, mapping cone construction.
 -/
 
 @[expose] public section
@@ -65,7 +64,7 @@ private theorem strictlyPerfect_mappingCone (X : Scheme.{u}) (U : X.Opens)
 
 /-- On an affine open, strictly perfect models of the first two objects of a distinguished
 triangle give a strictly perfect model of its third object. Source: Stacks Project, Tag 08CR,
-second proof, cone construction (blueprint: lem-pc-perfect-affine-cone-model).
+second proof, cone construction.
 
 Proof: Restriction to U is exact and therefore preserves the distinguished triangle.
 Conjugate its first arrow by eA and eB, and apply perfect_affine_map_representative to

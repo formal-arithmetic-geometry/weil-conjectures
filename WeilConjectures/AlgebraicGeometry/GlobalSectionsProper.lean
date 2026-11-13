@@ -37,9 +37,7 @@ integral over `k` (`AlgebraicGeometry.Scheme.isIntegral_globalSectionsRingHom`).
 it is moreover finite over `k` by finiteness of coherent cohomology
 (`AlgebraicGeometry.Scheme.finite_globalSectionsRingHom_of_isProper`), so it is a finite field
 extension of `k`. Part (2) of the blueprint node is
-`AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_geometricallyIntegral`.
-
-(blueprint: `lem-pc-h0-proper-variety`) -/
+`AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_geometricallyIntegral`. -/
 theorem isField_globalSections_of_universallyClosed [UniversallyClosed (X ↘ Spec (.of k))]
     [IsIntegral X] : IsField Γ(X, ⊤) := by
   let : Algebra k Γ(X, ⊤) := (globalSectionsRingHom k (X := X)).toAlgebra
@@ -51,9 +49,7 @@ reduced scheme `X` over a field `k` has `Γ(X, 𝒪_X) = k` if and only if it is
 connected. If `Γ(X, 𝒪_X) = k`, then by flat base change `Γ(X_K, 𝒪_{X_K}) = K` for every field
 `K` over `k` (`AlgebraicGeometry.Scheme.GlobalSectionsBijective.pullback`), so `X_K` is connected;
 the converse is Stacks 0BUG
-(`AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_geometricallyConnected`).
-
-(blueprint: `lem-pc-h0-geom-connected`) -/
+(`AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_geometricallyConnected`). -/
 theorem globalSectionsBijective_iff_geometricallyConnected [IsProper (X ↘ Spec (.of k))]
     [GeometricallyReduced (X ↘ Spec (.of k))] :
     GlobalSectionsBijective k X ↔ GeometricallyConnected (X ↘ Spec (.of k)) := by

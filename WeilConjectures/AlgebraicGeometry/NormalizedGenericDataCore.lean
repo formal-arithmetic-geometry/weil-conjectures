@@ -89,7 +89,6 @@ private theorem isIso_unit_constantSheaf_of_generic_residueFieldIso
 
 /-- Core normalized generic data, omitting the geometric lifting clause.
 Source: Stacks Project, Tag 09Z6, normalization and generic trivialization.
-(blueprint: new-normalized-generic-data-core).
 The construction pulls back to the residue field, trivializes after a finite
 separable extension, and normalizes that extension over the reduced closure. -/
 theorem exists_constructible_module_normalized_generic_data_core

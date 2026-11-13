@@ -14,18 +14,17 @@ import WeilConjectures.AlgebraicGeometry.FpqcDescentMorphismCompatibility
 /-!
 # Fully faithful pullback of descent data along an fpqc singleton
 
-Source: Stacks Project, Descent, Lemma 0241 (lemma-fully-faithful)
-(blueprint: lem-galois-fpqc-singleton-fully-faithful-0241).
+Source: Stacks Project, Descent, Lemma 0241.
 
 ## Main definitions
 
 - `CategoryTheory.Over.DescentDataCategory`: the category `DD(X/S)` of descent data on
-  schemes over `X` relative to `a : X ⟶ S`, with the morphisms of descent data.
+  schemes over `X` relative to `a: X ⟶ S`, with the morphisms of descent data.
 
 ## Main statements
 
 - `CategoryTheory.fpqc_singleton_pullback_fullyFaithful`: pullback of descent data along a
-  singleton fpqc covering `r : X' ⟶ X` is fully faithful.
+  singleton fpqc covering `r: X' ⟶ X` is fully faithful.
 -/
 
 @[expose] public section
@@ -37,13 +36,13 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace CategoryTheory
 
 /--
-Let `a : X ⟶ S` be a morphism of schemes and let `r : X' ⟶ X` be a singleton
+Let `a: X ⟶ S` be a morphism of schemes and let `r: X' ⟶ X` be a singleton
 fpqc covering.  Pullback along `r` gives a fully faithful functor from descent
 data on schemes over `X` relative to `X/S` to descent data on schemes over
 `X'` relative to `X'/S`.
 
-Source: Stacks Project, Descent, Lemma 0241 (lemma-fully-faithful), assumptions
-(1)--(2) and conclusion (blueprint: lem-galois-fpqc-singleton-fully-faithful-0241).
+Source: Stacks Project, Descent, Lemma 0241, assumptions
+(1)--(2) and conclusion.
 
 For each object, `q` exhibits the image as the pullback of its underlying scheme,
 and `IsBaseChange` identifies its datum with the pulled-back datum. Naturality

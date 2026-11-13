@@ -19,7 +19,6 @@ import Mathlib.CategoryTheory.Functor.OfSequence
 
 Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0885,
 the paragraph constructing a quotient of a completed finite sum of negative twists.
-(blueprint: lem-weil-pbc-formal-module-cover-from-lifted-sections).
 -/
 
 @[expose] public section
@@ -37,9 +36,7 @@ set_option backward.isDefEq.respectTransparency false in
 cohomology of every twisted transition kernel, gives a map from a completed coherent
 module whose first component is epi. No algebraization or full faithfulness is assumed.
 
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0885
-(lemma-existence-projective), the paragraph beginning "We first show".
-(blueprint: lem-weil-pbc-formal-module-cover-from-lifted-sections).
+Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0885, the paragraph beginning "We first show".
 
 Proof:
 1. Every transition of F is a quotient projection followed by an isomorphism, hence

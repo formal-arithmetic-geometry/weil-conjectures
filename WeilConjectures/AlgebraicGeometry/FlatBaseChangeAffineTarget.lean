@@ -88,7 +88,6 @@ set_option maxHeartbeats 1000000 in
 -- The affine comparisons carry several definitionally equal section and scalar instances.
 /-- Target affine dictionary for a source comparison with a normalized linear lift.
 Source: Stacks Project, Tags 02KH (both parts), 01XJ, 01E4 and 03FD.
-(blueprint: new-flat-base-change-affine-target)
 
 Proof: Write A = Gamma(V), B = Gamma(W), H = HOver(h,N,p), T = B tensor_A H,
 and C = HOver(h_B,N_B,p). First use the canonical module/abelian comparison on
@@ -109,7 +108,7 @@ map with the pullback unit. Thus b0(baseChangeLinear(y)) is the displayed target
 class evaluated on e0 inverse y, after restriction to W. This compatibility is
 proved on complexes, without assuming the parent dictionary or beta isomorphism.
 
-Let c : T equiv_B C be the canonical H.baseChange equivalence. It is invertible
+Let c: T equiv_B C be the canonical H.baseChange equivalence. It is invertible
 by flat cohomology base change: B is A-flat by g.flat_appLE, U is qcqs by f and
 V affine, and N is quasi-coherent. More explicitly, the separated case uses a
 finite affine Cech cover and exact tensor; compact-open induction and the

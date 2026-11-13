@@ -104,8 +104,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 variable (σ : Type u) (A : Type u) [CommRing A]
 
 /-- The projective space `ℙ^σ_A` over an affine base, defined as `Proj` of the polynomial
-ring `A[T]` in the variables `σ` with its total-degree grading.
-(blueprint: `def:nagata-affine-proj`, for a polynomial ring) -/
+ring `A[T]` in the variables `σ` with its total-degree grading. -/
 def Proj.projectiveSpaceOverAffine : Scheme.{u} :=
   Proj (MvPolynomial.homogeneousSubmodule σ A)
 
@@ -125,9 +124,8 @@ end Affine
 
 /-- `ℙ(n; S)` is the projective `n`-space over `S`, that is, the base change
 `S ×_{Spec ℤ} ℙⁿ_ℤ` of the integral model along the structure morphism of `S`.
-Note that `n : Type u` indexes the *homogeneous* coordinates, so that the classical `ℙⁿ_S` is
-`ℙ(Fin (n + 1); S)`.
-(blueprint: `def:nagata-projective-space-base-change`) -/
+Note that `n: Type u` indexes the *homogeneous* coordinates, so that the classical `ℙⁿ_S` is
+`ℙ(Fin (n + 1); S)`. -/
 def ProjectiveSpace (n : Type u) (S : Scheme.{u}) : Scheme.{u} :=
   pullback (terminal.from S) (terminal.from (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ)))
 
@@ -164,8 +162,8 @@ lemma isPullback_over_toProjInt :
 `ℙ(n; S) ↘ S` is proper, being a base change of the proper morphism `ℙⁿ_ℤ ⟶ Spec ℤ`.
 
 Together with the instances for closed immersions and composites, `inferInstance` shows that
-`i ≫ ℙ(n; S) ↘ S` is proper for any closed immersion `i : X ⟶ ℙ(n; S)`: projective morphisms
-are proper (blueprint: `lem-pc-projective-proper`). -/
+`i ≫ ℙ(n; S) ↘ S` is proper for any closed immersion `i: X ⟶ ℙ(n; S)`: projective morphisms
+are proper. -/
 instance instIsProper [Finite n] : IsProper (ℙ(n; S) ↘ S) := by
   have hZ : terminal.from (Spec (.of (ULift.{u} ℤ))) =
       (specULiftZIsTerminal.uniqueUpToIso terminalIsTerminal).hom := terminal.hom_ext _ _
@@ -259,7 +257,7 @@ lemma map_comp {S S' S'' : Scheme.{u}} (f : S ⟶ S') (g : S' ⟶ S'') :
     map n (f ≫ g) = map n f ≫ map n g := by
   ext1 <;> simp
 
-/-- **Projective space commutes with base change**: for a morphism `g : X ⟶ S`, the square
+/-- **Projective space commutes with base change**: for a morphism `g: X ⟶ S`, the square
 
 ```
             map n g
@@ -281,8 +279,7 @@ is cartesian, i.e. `ℙ(n; X)` is the base change of `ℙ(n; S)` along `g`. Inde
      X ------- g ------> S --------------> Spec ℤ
 ```
 
-are cartesian, and so is the outer rectangle.
-(blueprint: `lemma-nagata-projective-space-base-change-pullback`) -/
+are cartesian, and so is the outer rectangle. -/
 lemma isPullback_map {X S : Scheme.{u}} (g : X ⟶ S) :
     IsPullback (map n g) (ℙ(n; X) ↘ X) (ℙ(n; S) ↘ S) g := by
   refine (IsPullback.paste_horiz_iff (isPullback_over_toProjInt n S).flip (map_over n g)).mp ?_
@@ -380,10 +377,9 @@ instance isImmersion_liftBaseChange [IsImmersion b] : IsImmersion (liftBaseChang
     infer_instance
   .of_comp _ (map n g)
 
-/-- The lift of a closed immersion `b : T ⟶ ℙ(n; S)` along a separated morphism `g` is a
+/-- The lift of a closed immersion `b: T ⟶ ℙ(n; S)` along a separated morphism `g` is a
 closed immersion: `map n g` is separated, being a base change of `g`, and closed immersions
-cancel along separated morphisms.
-(blueprint: `lem-weil-pbc-projective-embedding`, general statement) -/
+cancel along separated morphisms. -/
 instance isClosedImmersion_liftBaseChange [IsSeparated g] [IsClosedImmersion b] :
     IsClosedImmersion (liftBaseChange a b w) :=
   have : IsClosedImmersion (liftBaseChange a b w ≫ map n g) := by

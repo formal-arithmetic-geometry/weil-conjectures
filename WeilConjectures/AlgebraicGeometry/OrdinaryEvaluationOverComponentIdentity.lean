@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationOverDualProjection
 /-! # Evaluation components with a fixed normalized tensor comparison
 
 Source: Stacks Project, Tag 0A8X, ordinary tensor totalization; the open-site
-reindexing construction in Mathlib `Scheme.Modules.overEquiv`.
-(blueprint: lem-pc-ordinary-evaluation-component-over-transport). -/
+reindexing construction in Mathlib `Scheme.Modules.overEquiv`. -/
 
 @[expose] public section
 
@@ -46,19 +45,18 @@ attribute [local irreducible] homComplexFunctor Scheme.Modules.overEquiv
 set_option linter.unusedVariables false in
 /-- The tensor-Hom component identity after dual and output transport.
 Source: Stacks Project, Tags 08DQ and 08DL; Tag 0A8X, Hom projections.
-(blueprint: lem-pc-ordinary-evaluation-over-component-identity).
 
 Proof: first compare `e` with the explicit sectionwise internal-Hom
 reindexing isomorphism. Their quotient is a natural automorphism alpha of
 internal Hom on the open scheme. Applying alpha to each global identity
 map defines endomorphisms z_A. Naturality in both variables gives
-alpha(f) = z_B f = f z_A for every global map f : A -> B. These
+alpha(f) = z_B f = f z_A for every global map f: A -> B. These
 endomorphisms are all multiplication by the same global scalar t: for an
 open V use extension by zero j_! O_V and its canonical map to O. That map
 is the identity over V, so z_(j_! O_V) is multiplication by t there, where
 t is z_O(1). Every section of A over V is a map j_! O_V -> A;
 naturality then gives z_A(x) = t*x. To obtain the same description of
-alpha on a local Hom section phi : A|V -> B|V, use its adjoint global map
+alpha on a local Hom section phi: A|V -> B|V, use its adjoint global map
 j_!(A|V) -> B and precomposition with j_!(A|V) -> A. Over V the latter is
 the identity, and the naturality square says alpha(phi) = t*phi.
 The scalar t is a unit since alpha_(O,O) is an isomorphism.

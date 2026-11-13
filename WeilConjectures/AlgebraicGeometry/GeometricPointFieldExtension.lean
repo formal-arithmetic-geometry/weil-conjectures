@@ -12,7 +12,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 /-! # Extension of the field of a geometric point
 
 Source: Stacks Project, Tags 03PN and 03Q1.
-(blueprint: lem-weil-pbc-geometric-point-field-extension).
 -/
 
 @[expose] public section
@@ -23,8 +22,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Precompose pointed étale lifts with a field extension. This is a map of points,
 with the direction opposite to that of the fibre functors.
-Source: Stacks Project, Tag 03PN.
-(blueprint: lem-weil-pbc-geometric-point-field-extension). -/
+Source: Stacks Project, Tag 03PN. -/
 noncomputable def pointSmallEtalePrecomp
     {S : Scheme.{u}} {k l : Type u} [Field k] [IsSepClosed k]
     [Field l] [IsSepClosed l] (s : Spec (.of k) ⟶ S)
@@ -44,7 +42,6 @@ noncomputable def pointSmallEtalePrecomp
 /-- Enlargement of a separably closed point field induces an isomorphism on abelian
 stalks. No algebraicity of the extension is required.
 Source: Stacks Project, Tag 03PN, description of geometric stalks, and Tag 03Q1.
-(blueprint: lem-weil-pbc-geometric-point-field-extension).
 
 Proof: base change an étale neighbourhood to Spec k. Every point of this fibre has
 finite separable residue field over k, hence residue field k. It is an open component

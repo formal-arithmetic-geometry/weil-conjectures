@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalTriangles
 
 /-!
 # The diagonal unit for the Kummer-normalized projective-line trace
-
-Source: blueprint thm-amb-p1-adjunction and lem-amb-p1-diagonal-integrals.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -33,9 +30,6 @@ attribute [local irreducible] ordinaryFinitePullback ordinaryFinitePushforward
 set_option linter.unusedVariables false in
 /-- The supported diagonal gives a unit for the already specified trace counit.
 The decomposition and Chern arrows are inputs; no decomposition is asserted here.
-Source: blueprint thm-amb-p1-adjunction.md and its proof;
-lem-amb-p1-diagonal-integrals.md and its proof.
-(auxiliary; not a blueprint node).
 
 Proof: Apply the supported Cartier Kummer construction to the diagonal of P times_S P.
 Its existing component formula, in either projective-line chart, expresses the pushed

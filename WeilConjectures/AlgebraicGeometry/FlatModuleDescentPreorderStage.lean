@@ -57,10 +57,9 @@ private theorem flatStageProjection_mono {I : Type u} [Preorder I] :
 /-- Flatness at the limit descends to one canonical stage of a directed preorder.
 
 Source: Stacks Project, limits.tex, Tag 05LY; categories.tex, Tag 0032.
-(blueprint: lem-pc-flat-module-descent-preorder-stage).
 
 Proof: i makes the directed thin category nonempty and filtered. By Tag 0032 choose
-a nonempty directed partial order J and a final functor F : J -> I. Finality supplies
+a nonempty directed partial order J and a final functor F: J -> I. Finality supplies
 t in J and a morphism i -> F(t). Pull M back to the canonical base change at F(t).
 Finite presentation of the morphism and module is preserved by base change, and
 finite presentation supplies quasi-coherence. Restrict R and c along F and F.op;

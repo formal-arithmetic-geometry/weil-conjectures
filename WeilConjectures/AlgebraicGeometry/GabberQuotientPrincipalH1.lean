@@ -46,7 +46,6 @@ Identify `Spec ((R/I)_h)` with the principal open `D(h)`. Pullback of a constant
 is constant; cohomology is preserved under this scheme isomorphism. Finally identify
 the derived cohomology of the sheaf in degree zero with its Ext-defined `Sheaf.H`.
 The case `I = R` also gives the empty spectrum and causes no exception.
-(blueprint: lem-weil-pbc-gabber-quotient-principal-h1)
 -/
 theorem gabber_quotient_principal_h1
     (R : Type u) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]

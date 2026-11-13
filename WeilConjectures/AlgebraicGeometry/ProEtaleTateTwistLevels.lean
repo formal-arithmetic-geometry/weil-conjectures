@@ -229,7 +229,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoeffici
 
 /-! # Finite levels and integral and rational Tate twist objects
 
-Source: blueprint `sk-def-sp-tate-twist`. The index n denotes exponent n+1.
+ The index n denotes exponent n+1.
 The integral levels use the finite quotient tensor with the roots, restricted
 along O_X -> B_X. The integral object is their limit in O_X-modules, and the
 rational object is its specified extension of scalars. These are the original
@@ -257,25 +257,20 @@ variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- The standard size witness at the coefficient universe, used with explicit universes.
 This merely exposes Mathlib's existing small-category witness to instance search;
-it avoids selecting an unrelated instance with an unconstrained extra universe.
-Source: def-weil-size-convention and the small pro-etale site
-(blueprint: sk-def-sp-tate-twist). -/
+it avoids selecting an unrelated instance with an unconstrained extra universe. -/
 instance spProEtEssentiallySmall : EssentiallySmall.{u + 1} X.ProEt :=
   essentiallySmallSelf.{0, u, u + 1} X.ProEt
 
-/-- The cofinal ell-power ideals in the ring of integers.
-Source: blueprint integral-twist formula (blueprint: sk-def-sp-tate-twist). -/
+/-- The cofinal ell-power ideals in the ring of integers. -/
 def spTateEllIdeal (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :
     Ideal (PadicAlgCl.integers ℓ E.1) :=
   Ideal.span { (ℓ : PadicAlgCl.integers ℓ E.1) ^ (n + 1) }
 
-/-- The finite coefficient B_E,n+1 = O_E / ell^(n+1).
-Source: blueprint integral-twist formula (blueprint: sk-def-sp-tate-twist). -/
+/-- The finite coefficient B_E,n+1 = O_E / ell^(n+1). -/
 abbrev spEllQuotient (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :=
   (PadicAlgCl.integers ℓ E.1) ⧸ spTateEllIdeal ℓ E n
 
-/-- The integer-ring topology inherited from its specified embedding in Qbar.
-Source: blueprint coefficient convention (blueprint: sk-def-sp-tate-twist). -/
+/-- The integer-ring topology inherited from its specified embedding in Qbar. -/
 @[instance_reducible] def spIntegersTopology (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     TopologicalSpace (PadicAlgCl.integers ℓ E.1) :=
   letI := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
@@ -283,7 +278,7 @@ Source: blueprint coefficient convention (blueprint: sk-def-sp-tate-twist). -/
 
 /-- Positive ell-power quotients are finite and their quotient maps are continuous
 for the discrete target topology.
-Source: blueprint cofinal-ideal paragraph (blueprint: sk-def-sp-tate-twist).
+
 Proof: write ell = v*pi^e with v a unit and e positive, using the DVR of the
 coefficient-extension node. Then (ell^(n+1)) = (pi^(e*(n+1))). Finiteness is the
 finite-quotient theorem for that positive exponent. The ideal is open in the
@@ -311,8 +306,7 @@ theorem spEllQuotient_finite_continuous (E : PadicAlgCl.FiniteIntermediateField 
 
 /-- The discrete finite coefficient as a continuous-function condensed ring.
 It is canonically the constant finite ring sheaf, since continuous maps to a
-finite discrete set are locally constant.
-Source: blueprint finite-coefficient convention (blueprint: sk-def-sp-tate-twist). -/
+finite discrete set are locally constant. -/
 def spEllPointRing (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :
     Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1} :=
   letI : TopologicalSpace (spEllQuotient ℓ E n) := ⊥
@@ -320,15 +314,13 @@ def spEllPointRing (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :
   letI : IsTopologicalRing (spEllQuotient ℓ E n) := DiscreteTopology.topologicalRing
   Profinite.continuousMapRingSheaf (spEllQuotient ℓ E n)
 
-/-- The abelian ring object underlying the finite condensed coefficient.
-Source: blueprint finite-coefficient convention (blueprint: sk-def-sp-tate-twist). -/
+/-- The abelian ring object underlying the finite condensed coefficient. -/
 abbrev spEllPointRingObj (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :=
   (sheafCompose (coherentTopology Profinite.{u})
     (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).obj (spEllPointRing ℓ E n)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The actual continuous quotient map on condensed coefficients.
-Source: blueprint coordinatewise quotient action (blueprint: sk-def-sp-tate-twist). -/
+/-- The actual continuous quotient map on condensed coefficients. -/
 def spEllPointReduction (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :
     Profinite.padicIntegersRingObj.{u} ℓ E.1 ⟶ spEllPointRingObj ℓ E n :=
   letI := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
@@ -344,7 +336,7 @@ attribute [local irreducible] spEllPointReduction
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The condensed finite quotient map preserves the ring structure.
-Source: blueprint quotient action (blueprint: sk-def-sp-tate-twist).
+
 Proof: its maps are postcomposition with a ring homomorphism, so preserve one
 and multiplication sectionwise; forgetting to abelian sheaves retains these laws. -/
 @[instance] theorem spEllPointReduction_isMonHom
@@ -353,13 +345,12 @@ and multiplication sectionwise; forgetting to abelian sheaves retains these laws
   unfold spEllPointReduction
   infer_instance
 
-/-- The pulled-back reduction O_E,X -> (B_E,n+1)_X.
-Source: blueprint quotient action (blueprint: sk-def-sp-tate-twist). -/
+/-- The pulled-back reduction O_E,X -> (B_E,n+1)_X. -/
 abbrev spEllReduction (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :=
   coefficientMap.{u} (spEllPointReduction.{u} ℓ E n) X
 
 /-- Successive positive ell-power ideals are nested.
-Source: blueprint quotient transitions (blueprint: sk-def-sp-tate-twist).
+
 Proof: ell^(n+2) = ell^(n+1)*ell lies in the ideal generated by ell^(n+1).
 The span universal property gives the inclusion. -/
 theorem spTateEllIdeal_succ_le (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :
@@ -367,8 +358,7 @@ theorem spTateEllIdeal_succ_le (E : PadicAlgCl.FiniteIntermediateField ℓ) (n :
   exact Ideal.span_singleton_le_span_singleton.mpr
     (pow_dvd_pow (ℓ : PadicAlgCl.integers ℓ E.1) (Nat.le_succ (n + 1)))
 
-/-- The finite coefficient reduction at the point, induced by the identity on O_E.
-Source: blueprint quotient transitions (blueprint: sk-def-sp-tate-twist). -/
+/-- The finite coefficient reduction at the point, induced by the identity on O_E. -/
 def spEllPointTransition (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :
     spEllPointRingObj.{u} ℓ E (n + 1) ⟶ spEllPointRingObj ℓ E n :=
   letI : TopologicalSpace (spEllQuotient ℓ E (n + 1)) := ⊥
@@ -386,7 +376,7 @@ attribute [local irreducible] spEllPointTransition
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite reduction preserves one and multiplication.
-Source: blueprint quotient transitions (blueprint: sk-def-sp-tate-twist).
+
 Proof: it is postcomposition with the quotient ring homomorphism; ring operations
 on continuous functions are pointwise. -/
 @[instance] theorem spEllPointTransition_isMonHom
@@ -397,8 +387,7 @@ on continuous functions are pointwise. -/
 
 /-- The finite twist, regarded as an O_E,X-module through the quotient map.
 Since mu is killed by ell^(n+1), B_X tensor_Z mu is precisely its extension
-from (Z/ell^(n+1))_X to B_X.
-Source: blueprint finite-level integral twist (blueprint: sk-def-sp-tate-twist). -/
+from (Z/ell^(n+1))_X to B_X. -/
 def spIntegralTwistLevel (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :=
   (Mod.comap (spEllReduction X ℓ E n)).obj
     ((Mod.free (condensedRingObj.{u} (spEllPointRingObj ℓ E n) X)).obj
@@ -437,7 +426,7 @@ private theorem spFreeTensor_linear
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The normalized transition is linear over O_E,X.
-Source: blueprint u tensor a -> u^ell tensor a-bar (blueprint: sk-def-sp-tate-twist).
+
 Proof: reduce the scalar factor and apply the root power transition. Both commute
 with restrictions. Reduction commutes with the O_E action, so the tensor map is
 O_E-linear. The forgetful functor is faithful, giving uniqueness. -/
@@ -461,28 +450,24 @@ theorem spIntegralLevelTransition_existsUnique (E : PadicAlgCl.FiniteIntermediat
       (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_pos (Fact.out : ℓ.Prime).pos _)
       (pow_dvd_pow ℓ (Nat.le_succ (n + 1))))
 
-/-- The specified finite-level transition, with its reduction and Kummer factors.
-Source: blueprint integral inverse system (blueprint: sk-def-sp-tate-twist). -/
+/-- The specified finite-level transition, with its reduction and Kummer factors. -/
 def spIntegralLevelTransition (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :
     spIntegralTwistLevel X ℓ E (n + 1) ⟶ spIntegralTwistLevel X ℓ E n :=
   (spIntegralLevelTransition_existsUnique X ℓ E n).exists.choose
 
-/-- The positive finite-level twist system in O_E,X-modules.
-Source: blueprint integral inverse system (blueprint: sk-def-sp-tate-twist). -/
+/-- The positive finite-level twist system in O_E,X-modules. -/
 def spIntegralTwistSystem (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     ℕᵒᵖ ⥤ Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
       (condensedRingObj.{u} (Profinite.padicIntegersRingObj.{u} ℓ E.1) X) :=
   Functor.ofOpSequence (spIntegralLevelTransition X ℓ E)
 
-/-- O_E,X(1), the inverse limit with the pulled-back continuous integer coefficients.
-Source: blueprint Tate twists, integral formula (blueprint: sk-def-sp-tate-twist). -/
+/-- O_E,X(1), the inverse limit with the pulled-back continuous integer coefficients. -/
 def spIntegralTwist (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
       (condensedRingObj.{u} (Profinite.padicIntegersRingObj.{u} ℓ E.1) X) :=
   limit (spIntegralTwistSystem X ℓ E)
 
-/-- E_X(1), extension of the integral twist along the continuous inclusion O_E -> E.
-Source: blueprint Tate twists, rational formula (blueprint: sk-def-sp-tate-twist). -/
+/-- E_X(1), extension of the integral twist along the continuous inclusion O_E -> E. -/
 def spRationalTwist (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
       (condensedRingObj.{u} (Profinite.continuousMapRingObj.{u} E.1) X) :=

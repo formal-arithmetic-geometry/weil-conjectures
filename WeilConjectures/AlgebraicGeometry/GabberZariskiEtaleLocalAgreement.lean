@@ -98,8 +98,7 @@ private theorem etale_agreement_on_open_image
 
 /-- Equality of pulled-back sections on a neighbourhood of z reflects to equality
 on an open neighbourhood of i(z) in X.
-Source: Stacks Project, Tag 09ZF (lemma-gabber-h0), first proof paragraph.
-(blueprint: lem-weil-pbc-gabber-zariski-etale-local-agreement).
+Source: Stacks Project, Tag 09ZF, first proof paragraph.
 
 Proof: express the étale unit as the identity-indexed coprojection into the
 presheaf left Kan extension followed by sheafification. Equality in the

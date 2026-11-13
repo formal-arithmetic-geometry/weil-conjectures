@@ -84,8 +84,7 @@ transition equation, using commutation of cartesian restriction and transport.
 For any testing morphism f on B, testing-object naturality expresses both sides
 as pullback(f) followed by those identity values. Naturality of conjugated Hom
 transport allows the same expression on the right. Thus the identity equation
-implies the equation for every f, without lifting f to Y.
-(blueprint: new-perfect-hom-open-restricted-pinned-maps). -/
+implies the equation for every f, without lifting f to Y. -/
 theorem perfect_hom_open_restricted_pinned_maps
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))

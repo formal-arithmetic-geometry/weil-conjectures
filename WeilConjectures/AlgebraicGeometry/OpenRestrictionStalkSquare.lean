@@ -12,7 +12,6 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 /-! # Stalks of a commuting square of open-restricted module morphisms
 
 Source: Stacks Project, Tag 0098; Mathlib open restriction and stalk germ formulas.
-(blueprint: lem-pc-open-restriction-stalk-square).
 -/
 
 @[expose] public section
@@ -156,8 +155,7 @@ complex or nonzero-module assumption is used.
 Source: Stacks Project, Tag 0098; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean
 restrictAdjunction_unit_app_app and germ_restrictStalkNatIso_inv_app;
 Mathlib/Topology/Sheaves/Stalks.lean stalkFunctor_map_germ_apply,
-stalkPushforward_germ_apply, and germ_res_apply.
-(blueprint: lem-pc-open-restriction-stalk-square). -/
+stalkPushforward_germ_apply, and germ_res_apply. -/
 theorem openRestriction_stalk_square
     {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
     (M : X.Modules) (N : X'.Modules) (Z : (pullback k U.ι : Scheme.{u}).Modules)

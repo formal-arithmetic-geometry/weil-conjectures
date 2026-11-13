@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 /-! # The distinguished section of a closed-point ideal quotient
 
 Source: Stacks Project, Tag 01XF, first paragraph of the proof.
-(blueprint: lem-pqf-h1-closed-point-ideal-quotient)
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry
 /-- The quotient of the two reduced vanishing ideals has a section with residue one.
 
 Source: Stacks Project, Tag 01XF, first paragraph, up to the application of H¹ vanishing.
-(blueprint: lem-pqf-h1-closed-point-ideal-quotient)
 
 Proof: Set Z = X \ U and Z' = Z union {x}, and take their reduced vanishing ideals I
 and J. Their sections are functions whose residues vanish on the respective closed sets.

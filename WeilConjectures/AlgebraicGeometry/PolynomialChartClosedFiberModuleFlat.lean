@@ -14,7 +14,6 @@ import Mathlib.RingTheory.TensorProduct.Quotient
 /-! # The closed-fibre module of a polynomial chart
 
 Source: Stacks Project, Tag 00RH, the displayed map of localized closed-fibre rings.
-(blueprint: lem-sbc-polynomial-chart-closed-fiber-module-flat)
 -/
 
 @[expose] public section
@@ -270,8 +269,7 @@ The open-fibre inclusion identifies the latter stalk with the fibre stalk used b
 PolynomialChart.stalkMap. Transport its assumed flatness across these two ring isomorphisms.
 Finally the canonical (S / m_R S)-linear isomorphism
 (S / m_R S) tensor_S B = B / m_R B identifies this flat module with the one displayed here.
-Source: Stacks Project, Tag 00RH, displayed closed-fibre map and application of Tag 00R7.
-(blueprint: lem-sbc-polynomial-chart-closed-fiber-module-flat) -/
+Source: Stacks Project, Tag 00RH, displayed closed-fibre map and application of Tag 00R7. -/
 theorem polynomial_chart_closedFiber_module_flat
     {X T : Scheme.{u}} (f : X ⟶ T) (U : X.Opens) (n : ℕ)
     (e : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin n)) T)

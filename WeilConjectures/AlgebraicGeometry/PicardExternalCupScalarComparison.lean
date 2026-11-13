@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.PicardExternalCupUnitComparison
 
 Source: Stacks Project, Varieties, Tag 0BED, the pullback and cup-product maps;
 Cohomology on Sites, Tag 03FD.
-(blueprint: lem-sc-picard-external-cup-scalar-comparison).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ products, without a Kunneth or spanning assertion and without properness assumpt
 
 Source: Stacks Project, Varieties, Tag 0BED, maps preceding
 `varieties-equation-kunneth-on-cech`; Cohomology on Sites, Tag 03FD.
-(blueprint: lem-sc-picard-external-cup-scalar-comparison).
 
 Proof: Apply the module-to-abelian comparison to the unit modules on X and Y. On the
 product, first identify the external coefficient module with the unit module: tensor

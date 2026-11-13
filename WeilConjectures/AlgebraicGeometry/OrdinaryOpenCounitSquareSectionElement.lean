@@ -20,7 +20,7 @@ namespace AlgebraicGeometry
 Source: Stacks Project, Cohomology of Sheaves, Tags 08FE and 08BV.
 The proof expands the two comparison maps and counits on an open and an element;
 functoriality of the presheaf restriction maps and thinness of opens identify the
-resulting maps. (blueprint: lem-pc-mayer-vietoris-ordinary-open-counit-square-section-element) -/
+resulting maps. -/
 theorem schemeMVOrdinaryOpenCounit_square_section_element
     (X Y : Scheme.{u}) (h : X ⟶ Y) (U : Y.Opens)
     (M : SheafOfModules.{u} (moduleRings (h ⁻¹ᵁ U).toScheme.toRingedSpace))

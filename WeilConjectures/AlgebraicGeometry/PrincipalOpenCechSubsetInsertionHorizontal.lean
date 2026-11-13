@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetHorizontalFaces
 
 Source: Stacks Project, Tag 08C1 and equation (20.40.0.1) (Tag 08C0),
 and Tag 01FG, ordered-complex differential preceding Definition 20.23.2.
-(blueprint: lem-sc-principal-open-cech-subset-insertion-horizontal).
 -/
 
 @[expose] public section
@@ -120,7 +119,6 @@ private theorem principalSubsetInsertOne_horizontal
 
 Source: Stacks Project, Tag 08C1, equation (20.40.0.1) (Tag 08C0), and
 Tag 01FG, ordered-complex differential preceding Definition 20.23.2.
-(blueprint: lem-sc-principal-open-cech-subset-insertion-horizontal).
 
 Proof: Expand insertion as its finite sum, and apply Mathlib's `ι_D₁` and
 `d₁_eq` to each summand. Its horizontal sign is one. Extension by zero identifies

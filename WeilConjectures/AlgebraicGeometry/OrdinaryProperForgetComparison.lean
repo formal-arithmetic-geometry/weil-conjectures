@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 
 Source: the canonical proper forget-supports comparison in
 WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -35,8 +34,7 @@ forget-supports followed by ordinary direct-image composition and congruence.
 The original isomorphism supplies both arrows and the inverse identities.
 The definition is not irreducible: consumers of `diagonalLift` and
 `projectionComparison` identify it with the original isomorphism by `rfl`.
-Source: LowerShriekToLowerStar, rightDerivedLowerShriekIsoRightDerivedLowerStar.
-(auxiliary; not a blueprint node). -/
+Source: LowerShriekToLowerStar, rightDerivedLowerShriekIsoRightDerivedLowerStar. -/
 noncomputable def ordinaryProperForgetComparison
     (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] :

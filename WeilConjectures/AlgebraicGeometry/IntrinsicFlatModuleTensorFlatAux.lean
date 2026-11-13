@@ -18,7 +18,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Flat affine sections give flat stalks
 
 Source: Stacks Project, Tag 01U4, implication (2) to (1).
-(blueprint: lem-pc-intrinsic-flat-module-flat-stalk).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace AlgebraicGeometry
 
 /-- Flat affine sections of a quasi-coherent module give flat modules at every stalk.
 Source: Stacks Project, Tag 01U4, implication (2) to (1), with the identity morphism.
-(blueprint: lem-pc-intrinsic-flat-module-flat-stalk).
 
 Proof: Fix a point x and an affine open neighbourhood V of x. The identity's map
 on sections of V is the identity, so the hypothesis gives flatness of G(V) over O(V).

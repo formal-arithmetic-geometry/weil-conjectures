@@ -10,8 +10,6 @@ public import Mathlib.RingTheory.Smooth.StandardSmooth
 
 /-! Explicit submersive presentation for the Popescu Jacobian localization.
 
-(blueprint: popescu-auxiliary-submersive-presentation)
-
 The presentation is obtained by adjoining an inverse to the localization element and
 using the original equations together with the inverse relation.  The selected Jacobian
 minor is a unit by the ideal membership hypothesis, so the resulting presentation is
@@ -27,7 +25,6 @@ open MvPolynomial
 namespace Algebra
 
 /-- Explicit finite presentation for the localized quotient.
-(blueprint: popescu-auxiliary-submersive-presentation)
 
 Proof: adjoin an inverse to the localization element, retain the original equations,
 and compute the selected Jacobian minor. The ideal membership hypothesis makes that

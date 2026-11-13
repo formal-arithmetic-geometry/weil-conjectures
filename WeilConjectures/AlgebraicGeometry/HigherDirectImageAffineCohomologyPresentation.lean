@@ -18,7 +18,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Affine-local presentation of ordinary higher direct images
 
 Source: Stacks Project, Cohomology, Tags 01E1 and 01E4.
-(blueprint: lem-pc-higher-direct-image-affine-cohomology-presentation).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ set_option backward.isDefEq.respectTransparency.types false in
  affine basis. No compactness, separation or coproduct hypothesis is needed.
 
 Source: Stacks Project, Cohomology, Tags 01E1 and 01E4.
-(blueprint: lem-pc-higher-direct-image-affine-cohomology-presentation).
 
 Proof: For an open V of Y, restrict an injective module resolution on X to
 U = f^{-1}(V). Open restriction is exact and preserves injectives (01E1). Taking

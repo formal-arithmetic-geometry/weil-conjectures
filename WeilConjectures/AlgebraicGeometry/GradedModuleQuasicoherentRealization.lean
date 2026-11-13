@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.BalancedActionQuasicoherentRealization
 /-! # Quasi-coherent realization of a graded action
 
 Source: Stacks Project, Tag 0897, relative-spectrum construction; Tags 01LX and 01SB.
-(blueprint: lem-weil-pbc-graded-module-quasicoherent-realization).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace AlgebraicGeometry
 assumption on its homogeneous generators, the algebra, or the base.
 
 Source: Stacks Project, Tag 0897, relative-spectrum construction, using 01LX and 01SB.
-(blueprint: lem-weil-pbc-graded-module-quasicoherent-realization).
 
 Proof: On an affine open U = Spec C of X take the direct sum of the modules of
 sections G_m(U). The internal decomposition of B extends the homogeneous maps mu

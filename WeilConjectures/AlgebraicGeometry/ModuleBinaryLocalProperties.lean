@@ -154,7 +154,6 @@ set_option maxHeartbeats 400000 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Quasi-coherence and finite type descend from the two members of a binary open cover.
 Source: Stacks Project, Modules, Definitions 01BE and 01B5, and Properties, Lemma 01PF.
-(blueprint: lem-weil-pbc-module-binary-local-properties).
 
 Proof: Choose local presentations and finite generating families for the two restricted
 modules. An object of the slice site Over W or Over V is an open T contained in that

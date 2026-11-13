@@ -24,8 +24,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The limit-descent construction produces a lift together with the canonical identity
 isomorphism of the proper base.  The latter records the compatibility datum used in the
 limit argument.
-Source: Stacks Project, Lemma 0GS2, proof, General case.
-(blueprint: lem-weil-pbc-finite-etale-lifting-limit-descent-core). -/
+Source: Stacks Project, Lemma 0GS2, proof, General case. -/
 theorem exists_finiteEtale_lift_of_henselianPair_of_gRing_lifting_core
     (H : ∀ (B : Type u) [CommRing B], IsGRing B →
       ∀ (J : Ideal B) [HenselianRing B J] (Z : Scheme.{u})

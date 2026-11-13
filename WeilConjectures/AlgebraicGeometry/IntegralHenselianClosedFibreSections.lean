@@ -34,8 +34,7 @@ isomorphism identifies this with the fibre over A/m_A. Transport the comparison
 through the affine presentation and the given Cartesian square. These section
 isomorphisms respect the inverse-image adjunction unit, so the displayed restriction
 is an isomorphism, in particular injective. For B = 0 all the schemes in question
-are empty and the section module is zero; the same argument applies.
-(blueprint: new-integral-henselian-closed-fibre-sections) -/
+are empty and the section module is zero; the same argument applies. -/
 theorem integralHenselianClosedFibreSections_injective
     (Λ : Type (u + 1)) [CommRing Λ]
     (A : Type u) [CommRing A] [HenselianLocalRing A]

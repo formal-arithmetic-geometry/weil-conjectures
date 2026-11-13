@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
-/-- (blueprint: lem-weil-pbc-sets-finite-pushforward-stalk-fiber-finite)
+/--
 The geometric fibre of a finite morphism over an algebraically closed field is finite.
 
 Source: Stacks Project, Proposition 59.55.2, Tag 03QP (1), first display and its

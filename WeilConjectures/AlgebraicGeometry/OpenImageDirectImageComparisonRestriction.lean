@@ -12,7 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.OpenImageComplexComparisonRestricti
 /-! # Compatibility of the ordinary open-image comparison with nested restriction
 
 Source: Stacks Project, Cohomology, Tags 08FE and 08BV.
-(blueprint: lem-pc-open-image-direct-image-comparison-restriction).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry
 
 /-- The fixed ordinary comparison commutes with restriction to any smaller open.
 Source: Stacks Project, Tags 08FE and 08BV.
-(blueprint: lem-pc-open-image-direct-image-comparison-restriction).
 Proof: Open direct image is fully faithful, so the larger-open restriction
 of its adjunction unit is invertible. Applying the overlap restriction and
 conjugating by schemeOpenRestrictionCompIso shows that restriction of this

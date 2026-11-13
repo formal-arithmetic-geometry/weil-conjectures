@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.PullbackSectionsIsColimit
 # Sections of a pulled-back module sheaf over a descended affine etale object
 
 Source: Stacks Project, Etale Cohomology, Lemma 09YU, proof, paragraph 'Fully faithful',
-a special case of Theorem 09YQ in degree 0
-(blueprint: lem-weil-pbc-limit-pullback-sections-colimit).
+a special case of Theorem 09YQ in degree 0.
 -/
 
 @[expose] public section
@@ -41,25 +40,21 @@ the limit projection `f_i`) form a directed system with a compatible family; the
 filtered colimits: every section on the limit comes from a stage, and two sections at a stage
 with the same image on the limit agree at a later stage.
 
-Source: Stacks Project, Tag 09YU ('Fully faithful'), Tag 09YQ in degree 0
-(blueprint: lem-weil-pbc-limit-pullback-sections-colimit).
+Source: Stacks Project, Tag 09YU ('Fully faithful'), Tag 09YQ in degree 0.
 
 Proof:
 1. The `V_i` are affine, etale over `X_i`, form an inverse system with affine transitions and
-   limit `V = V₀ ×_{X₀} X` (`lem-weil-pbc-scheme-over-limit`,
-   `lem-weil-pbc-affine-morphism-permanence`).
-2. Module inverse images and their units are those of the underlying abelian sheaves
-   (`prop-weil-pbc-inverse-image-modules-exact`); the composition isomorphisms are
-   `Λ`-linear by uniqueness of adjoints (`lem-weil-pbc-conjugate-iso-unit-equation`).
+   limit `V = V₀ ×_{X₀} X`.
+2. Module inverse images and their units are those of the underlying abelian sheaves; the composition isomorphisms are
+   `Λ`-linear by uniqueness of adjoints.
 3. The sheaves `F_i = w_i^{-1} G` on `V_i` with the composition isomorphisms form a system
    with colimit `w^{-1} G` on `V` (constant connected diagram).
-4. Theorem 09YQ in degree 0 (`lem-weil-pbc-etale-cohomology-limit-of-schemes`), translated to
+4. Theorem 09YQ in degree 0, translated to
    sections, gives a bijection `colim_i F_i(V_i) → (w^{-1} G)(V)`.
 5. Etale restriction isomorphisms and `lem-weil-pbc-etale-restriction-pullback-unit` identify
    that system with the maps `ρ`.
 6. Hence the identities of a directed system and the cocone identities hold.
-7. The elementwise criterion for filtered colimits of modules
-   (`lem-weil-pbc-filtered-colimit-modules-elementwise`) gives bijectivity. -/
+7. The elementwise criterion for filtered colimits of modules gives bijectivity. -/
 theorem limit_pullback_sections_colimit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)]
     [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]

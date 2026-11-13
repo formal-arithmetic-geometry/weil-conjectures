@@ -18,7 +18,6 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Transport reduced strata along a surjective closed immersion.
 Source: Stacks Project, Tag 01J3.
-(blueprint: lem-a1-finite-etale-noetherian-clopen-assembly-reduction).
 
 Proof: keep the domains and compose every stratum immersion with r; a composite of
 immersions is an immersion, so its range is locally closed. Since r is injective, the

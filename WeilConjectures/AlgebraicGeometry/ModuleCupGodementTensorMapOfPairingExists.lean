@@ -19,7 +19,6 @@ noncomputable section
 
 /-- Extension of a stalkwise pairing to the Godement tensor map.
 Source: Banerjee, arXiv:1004.1491, §1.1.4, pp. 15–16; Stacks, Tag 0FKR.
-(blueprint: new-module-cup-godement-tensor-map-of-pairing-exists)
 The maps to each skyscraper coordinate are obtained from tensor universality and
 sheafification, then assembled by the product universal property. -/
 theorem moduleCup_godement_tensor_map_of_pairing_exists (X : Scheme.{u})

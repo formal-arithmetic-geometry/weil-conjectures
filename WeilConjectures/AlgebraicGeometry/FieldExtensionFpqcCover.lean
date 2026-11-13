@@ -12,8 +12,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 # Fpqc cover from a field extension
 
 Source: Stacks Project, Topologies, Definition 34.9.1 (Tag 022B) and Lemma 34.9.2
-(Tag 03L7); Algebra, Definition 10.39.1 (Tag 00HB)
-(blueprint: lem-pc-field-extension-fpqc-cover).
+(Tag 03L7); Algebra, Definition 10.39.1 (Tag 00HB).
 -/
 
 @[expose] public section
@@ -24,7 +23,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- (blueprint: lem-pc-field-extension-fpqc-cover) For a field extension `K/k`, the
+/-- For a field extension `K/k`, the
 structure map `Spec K ⟶ Spec k` is flat, surjective, and quasi-compact, and its
 singleton presieve is an fpqc covering (Stacks, Tags 022B, 03L7, 00HB).
 

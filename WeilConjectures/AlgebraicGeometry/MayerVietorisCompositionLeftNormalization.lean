@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.MayerVietorisOpenCompositionRestriction
 /-! # Left-hand composition normalization
 
 Source: Stacks Project, Tags 08FE and 0D5T.
-(blueprint: lem-pc-mayer-vietoris-composition-left-normalization).
 -/
 
 @[expose] public section
@@ -41,8 +40,7 @@ unit equation with open direct image of that factor and the inverse derived rest
 comparison. Functoriality combines these three maps. This calculation involves no image
 component, no exact Y-restriction factor, and no injectivity hypothesis.
 The argument applies to arbitrary complexes, empty and full opens, and identity morphisms:
-only functoriality, naturality and inverse-isomorphism equations are used.
-(blueprint: lem-pc-mayer-vietoris-composition-left-normalization). -/
+only functoriality, naturality and inverse-isomorphism equations are used. -/
 theorem schemeMV_composition_left_normalization
     (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

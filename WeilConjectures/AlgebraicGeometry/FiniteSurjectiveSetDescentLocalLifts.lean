@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteSurjectiveSetDescentGermLifts
 /-! # Compatible finite-descent sections lift étale locally
 
 Source: Stacks Project, Étale Cohomology, Remark 09Z3 and Lemma 09Z2.
-(blueprint: lem-weil-pbc-sets-finite-descent-local-lifts).
 -/
 
 @[expose] public section
@@ -87,7 +86,6 @@ private theorem imageSieve_mem_of_geometric_germ_lifts
 /-- A compatible section belongs étale locally to the image of the adjunction unit.
 Source: Stacks Project, Étale Cohomology, Remark 09Z3, proved as Lemma 09Z2
 using Proposition 03QP (1) and Lemma 03Q1 (3).
-(blueprint: lem-weil-pbc-sets-finite-descent-local-lifts).
 
 Proof: Put A = f_* f⁻¹G and D = X' ×_X X', with h = p₁ ≫ f = p₂ ≫ f.
 The projections and h are finite by base change and composition. For a geometric

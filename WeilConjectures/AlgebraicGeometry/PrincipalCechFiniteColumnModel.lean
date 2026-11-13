@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.PrincipalCechBicomplexComparison
 
 /-! # Finite-column bicomplex models for principal Čech maps
 
-Source: Stacks, Tag 08D1; the finite Čech-degree filtration in Tag 08C2
-(blueprint: lem-sc-principal-cech-finite-column-model).
+Source: Stacks, Tag 08D1; the finite Čech-degree filtration in Tag 08C2.
 -/
 
 @[expose] public section
@@ -25,11 +24,10 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- A principal Čech map is a total map of bicomplexes supported in columns 0,...,r-1.
+/-- A principal Čech map is a total map of bicomplexes supported in columns 0..,r-1.
 Column quasi-isomorphisms require only the section quasi-isomorphisms on intersections.
 No quasi-coherence, K-injectivity or quasi-isomorphism assumption is made on i itself.
-Source: Stacks, Tag 08D1, and the finite Čech-degree filtration used in Tag 08C2
-(blueprint: lem-sc-principal-cech-finite-column-model).
+Source: Stacks, Tag 08D1, and the finite Čech-degree filtration used in Tag 08C2.
 
 Proof:
 1. In column p, for 0 ≤ p < r, take the finite product of section complexes on D(f_S)

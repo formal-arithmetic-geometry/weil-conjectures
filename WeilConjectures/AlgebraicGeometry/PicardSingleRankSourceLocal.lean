@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-! # Source locality of one universal direct-image rank condition
 
 Source: Stacks Project, Tag 0BDP, first three proof paragraphs, local rank conditions.
-(blueprint: lem-sc-picard-single-rank-source-local).
 -/
 
 @[expose] public section
@@ -82,7 +81,6 @@ private noncomputable def directImageOpenIso {X X' T A S : Scheme.{u}}
 /-- Local single-rank conditions on a neighbourhood of every test point imply the condition.
 No flatness, properness, connectedness or finite local freeness assumptions are needed.
 Source: Stacks Project, Tag 0BDP, first three proof paragraphs, local rank conditions.
-(blueprint: lem-sc-picard-single-rank-source-local).
 
 Proof:
 1. Fix a further test h:T' to T and a point t'. Choose V around h(t') on which

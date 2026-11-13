@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairsAux
 /-!
 # Fibre dimension is bounded on a neighbourhood
 
-Source: Stacks Project, Algebra, Lemma Tag 00QH (lemma-dimension-fibres-bounded-open-upstairs)
-(blueprint: lem-weil-pbc-fibre-dimension-bounded-open-upstairs).
+Source: Stacks Project, Algebra, Lemma Tag 00QH.
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ namespace Algebra
 `κ(p) ⊗[R] S` (`p` the contracted prime) has local dimension `d`, there is an open
 neighbourhood `V` of `q` in `Spec S` such that every prime `q' ∈ V` has local fibre
 dimension at most `d`.
-Source: Stacks Project, Algebra, Lemma Tag 00QH (lemma-dimension-fibres-bounded-open-upstairs)
-(blueprint: lem-weil-pbc-fibre-dimension-bounded-open-upstairs).
+Source: Stacks Project, Algebra, Lemma Tag 00QH.
 
 The point of the fibre attached to a prime `q'` is `PrimeSpectrum.preimageEquivFiber`: its ideal
 is the kernel of the canonical map `κ(p') ⊗[R] S → κ(q')`; Mathlib places the residue field on

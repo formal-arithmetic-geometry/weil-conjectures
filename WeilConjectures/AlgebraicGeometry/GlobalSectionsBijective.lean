@@ -115,8 +115,7 @@ reduced `k`-algebra without nontrivial idempotents, hence equal to `k`
 
 The blueprint states this for proper connected curves; reducedness is needed, as the proper
 connected curve `ℙ¹_k ×_k Spec k[ε]/(ε²)` has `H⁰ = k[ε]/(ε²)`. It holds for the smooth curves to
-which the blueprint applies it.
-(blueprint: `lem-sc-global-functions`) -/
+which the blueprint applies it. -/
 instance GlobalSectionsBijective.of_isAlgClosed [IsAlgClosed k] [IsProper (X ↘ Spec (.of k))]
     [IsReduced X] [ConnectedSpace X] : GlobalSectionsBijective k X := by
   let A := Γ(X, ⊤)
@@ -141,8 +140,7 @@ instance GlobalSectionsBijective.of_isAlgClosed [IsAlgClosed k] [IsProper (X ↘
   exact ⟨c, hc⟩
 
 /-- A proper `k`-scheme that is geometrically connected and geometrically reduced has
-`H⁰(X, 𝒪_X) = k` (Stacks 0BUG). This is the input `Γ(X, 𝒪_X) = k` of Step 4 of blueprint
-`lem-sc-rigidity` (`sk-prop-av-rigidity`).
+`H⁰(X, 𝒪_X) = k` (Stacks 0BUG). This is the input `Γ(X, 𝒪_X) = k` of Step 4 of.
 
 Let `K` be an algebraic closure of `k`, `A = Γ(X, 𝒪_X)` and `B = Γ(X_K, 𝒪_{X_K})`. By flat base
 change `B = K ⊗_k A`, and `B = K` since `X_K` is proper, reduced and connected over the

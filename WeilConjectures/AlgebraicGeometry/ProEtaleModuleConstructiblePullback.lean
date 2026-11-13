@@ -17,7 +17,6 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 
 Source: `ConstructibleSheaf/ProEtaleModule/Def.lean` and
 `ConstructibleSheaf/Pullback.lean`; finite presentations and stratifications pull back.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -212,8 +211,7 @@ Pull back the finite stratification and, on each stratum, the pro-étale cover p
 module. Inverse image preserves finite sums and cokernels and takes the regular coefficient
 module to the regular pulled-back coefficient module. Thus the pulled-back presentations
 are finite presentations. The coefficient comparison identifies these with the prescribed
-condensed coefficient modules.
-(auxiliary; not a blueprint node) -/
+condensed coefficient modules. -/
 theorem isConstructibleModuleObject_upperStar
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y)

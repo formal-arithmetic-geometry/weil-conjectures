@@ -24,7 +24,6 @@ namespace AlgebraicGeometry.Scheme
 Source: Stacks Project, Tag 09BG (3), and the etale-local constant-section argument
 in Tag 09BH (3) (https://stacks.math.columbia.edu/tag/09BG and
 https://stacks.math.columbia.edu/tag/09BH).
-(blueprint: lem-weil-pbc-generic-all-stalks).
 
 Proof: Fix a geometric point s and an element a of the stalk of F there. Suppose
 its image b in the stalk of G is nonzero. Lift s to a member V of an etale cover

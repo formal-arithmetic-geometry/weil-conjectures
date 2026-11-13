@@ -23,8 +23,7 @@ open scoped Simplicial
 namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- The underlying augmentation of a simplicial object in a slice category.
-Source: Stacks Project, Tag 01GE.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 01GE. -/
 def hypercoverUnderlyingAugmentation (X : Scheme.{u}) (W : X.ProEt)
     (U : SimplicialObject (Over W)) :
     U ⋙ Over.forget W ⟶ (Functor.const _).obj W where
@@ -61,7 +60,6 @@ private theorem lower_simplex_eq_of_faces {C : Type*} [Category* C]
 set_option backward.isDefEq.respectTransparency false in
 /-- Epimorphic matching maps supply local lifts of all compatible lower-simplex data.
 Source: Stacks Project, Tags 0186 and 00WN, used in Tags 01GE and 01GW.
-(auxiliary; not a blueprint node).
 
 Proof: regard w:T→W and its compatible lower-simplex maps as objects and morphisms
 of the slice over W. In degree zero lift w locally along U_0→W. In degree one the

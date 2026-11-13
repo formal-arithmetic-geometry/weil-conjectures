@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkInverseHomotopiesSpread
 /-! # Detecting a quasi-isomorphism of strictly perfect complexes near a point
 
 Source: Stacks Project, Tags 09RE, 0BC7 (2), and 00CR.
-(blueprint: lem-sc-perfect-stalk-quasi-iso-detection).
 -/
 
 @[expose] public section
@@ -56,7 +55,6 @@ private theorem perfect_stalk_isKProjective
 quasi-isomorphism at one stalk becomes a quasi-isomorphism on a smaller affine open.
 
 Source: Stacks Project, Tags 09RE, 0BC7 (2), and 00CR.
-(blueprint: lem-sc-perfect-stalk-quasi-iso-detection).
 
 Proof: Taking stalks carries each finite-free retraction to a retraction of a
 projective stalk module. The support bounds are preserved, so both stalk complexes

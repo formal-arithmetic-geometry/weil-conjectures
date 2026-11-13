@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomTrianglePresentedRowsExact
 /-! # The geometric diagram before taking the exact filtered colimit
 
 Source: Stacks Project, Tags 09RE and 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-stage-rows).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ This supplies exactness in the diagram category, not exactness of its colimit,
 and does not use an externally supplied set-valued Hom system.
 
 Source: Stacks Project, Tag 09RE, Mayer--Vietoris induction step; Tag 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-stage-rows).
 
 Proof: Pull the cover back along t and the ring-stage projections. The opens
 are quasi-compact and their intersection is quasi-compact by quasi-separatedness.

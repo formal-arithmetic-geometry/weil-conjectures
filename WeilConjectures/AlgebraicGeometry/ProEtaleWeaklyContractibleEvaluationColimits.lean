@@ -25,8 +25,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafi
 /-!
 # Evaluation at affine weakly contractible pro-etale objects
 
-Source: Stacks Project, Tags 0946 (1), 03DA and 0935 (2)
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 0946 (1), 03DA and 0935 (2).
 -/
 
 @[expose] public section

@@ -90,7 +90,6 @@ private lemma pullbackForgetIso_unit {X Y : Scheme.{u}} (i : Y ⟶ X) (R : Type 
 
 /-- Forgetting coefficients preserves bijectivity of restriction on global sections.
 Source: Stacks Project, Tag 03FD (forgetting coefficients) and Tag 095T, paragraph 2.
-(blueprint: new-module-acyclic-underlying-sections)
 
 Proof: The forgetful functor from modules to abelian groups preserves limits and
 colimits. It therefore commutes with the sheafification construction of inverse

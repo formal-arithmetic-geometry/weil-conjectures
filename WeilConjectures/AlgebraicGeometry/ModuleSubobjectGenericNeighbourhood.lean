@@ -27,7 +27,6 @@ namespace AlgebraicGeometry.Scheme
 /-- A subsheaf of a finite locally constant module sheaf is locally constant near each
 component generic point.
 Source: Stacks Project, Tag 09BH, proof of Proposition 59.74.1 (3), before induction.
-(blueprint: lem-weil-pbc-module-subobject-generic-neighbourhood).
 
 Proof: Remove the other irreducible components, then choose an etale trivialization of
 G about the chosen geometric generic point. Shrink the trivializing scheme to an

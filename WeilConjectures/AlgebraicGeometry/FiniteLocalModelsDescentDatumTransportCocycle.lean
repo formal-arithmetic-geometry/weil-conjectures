@@ -76,7 +76,6 @@ private theorem transport_cocycle_of_lift
 /-- The cocycle law for compatible transport.
 
 Source: Stacks Project, Tags 03RV and 02W5.
-(blueprint: lem-weil-pbc-finite-local-model-compatible-transport-cocycle)
 Proof: Put R = Q ×_T U ×_T U, with its three maps to U. Since Q → U and
 U → T are etale, R → T is etale. Its projection to Q is the universal point
 above the first lift. Apply e inverse to that point to obtain a section s of

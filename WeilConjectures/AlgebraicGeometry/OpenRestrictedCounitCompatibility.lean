@@ -16,7 +16,6 @@ import all WeilConjectures.AlgebraicGeometry.OpenRestrictedCounitFactorization
 /-! # The counit equation for literal open restriction
 
 Source: Stacks Project, Tags 0D5S and 0D5U.
-(blueprint: lem-pc-open-restricted-counit-compatibility).
 -/
 
 @[expose] public section
@@ -53,8 +52,7 @@ without K-flatness, counit invertibility, a base-change square to S,
 or a chosen point or cohomological degree. Top and empty opens and zero
 complexes use the same natural-transformation equations.
 Source: Stacks Project, Tag 0D5S, pullback composition; Tag 0D5U, exact
-restriction to an open subspace.
-(blueprint: lem-pc-open-restricted-counit-compatibility). -/
+restriction to an open subspace. -/
 private theorem openRestricted_counit_compatibility_private
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

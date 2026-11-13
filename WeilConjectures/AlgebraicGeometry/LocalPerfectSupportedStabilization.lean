@@ -19,7 +19,6 @@ import Mathlib.Topology.Sheaves.Abelian
 /-! # Supported local perfect models after open restriction
 
 Source: Stacks Project, Tags 08CM and 09IM.
-(blueprint: lem-sc-local-perfect-supported-stabilization).
 -/
 
 @[expose] public section
@@ -41,7 +40,6 @@ set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Restrict local perfect models and their support, also after stabilization.
 Source: Stacks Project, Tag 08CM and the stabilization in Tag 09IM.
-(blueprint: lem-sc-local-perfect-supported-stabilization).
 
 Proof: At x in W, intersect its given neighbourhood O with W. Restrict the bounded
 complex K to this intersection and transport it through the equivalence between the

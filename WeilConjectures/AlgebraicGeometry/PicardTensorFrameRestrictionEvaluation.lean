@@ -15,7 +15,6 @@ namespace AlgebraicGeometry.Scheme
 Source: Mathlib/AlgebraicGeometry/Stalk.lean,
 Opens.fromSpecStalkOfMem_toSpecΓ; Mathlib/AlgebraicGeometry/ResidueField.lean,
 the definition of Scheme.evaluation. Used in the degree-zero argument of Stacks 0BF2.
-(blueprint: lem-sc-picard-tensor-frame-restriction-evaluation)
 
 Proof: Cancel the open immersion to identify the residue lift with Spec of the
 residue quotient followed by the stalk lift. The composite with U.toSpecΓ is

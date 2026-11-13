@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Persistent eventual diagonal overlap equation
 
-Source: Stacks Project, Tags 01ZR and 05N7.
-(blueprint: lem-pc-fp-overlap-diagonal-eventually). -/
+Source: Stacks Project, Tags 01ZR and 05N7. -/
 
 @[expose] public section
 
@@ -104,7 +103,6 @@ set_option linter.unusedVariables false in
 /-- The identity defect of a single cover chart vanishes eventually, and remains
 zero at every later stage.
 Source: Stacks Project, Tag 01ZR (3), finite-type zero-map descent.
-(blueprint: lem-pc-fp-overlap-diagonal-eventually).
 
 Proof: On the chart at k subtract the identity from its self transition. Its source
 and target are pullbacks of the prescribed finitely presented quasi-coherent module,

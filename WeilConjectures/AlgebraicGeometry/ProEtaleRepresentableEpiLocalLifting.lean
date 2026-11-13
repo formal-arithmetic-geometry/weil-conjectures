@@ -286,7 +286,6 @@ private theorem proetale_hasSmallSheafify (X : Scheme.{u}) :
 /-- An epimorphism between represented sheaves lifts each represented section locally.
 Source: Stacks Project, Tag 00WN, with the small pro-etale site of Tag 098K and
 bounded affine weakly contractible refinements of Tags 098I and 0990.
-(auxiliary; not a blueprint node).
 
 Proof: use the image sieve of the section g under the represented map of mu.
 Its membership at f:V→T is exactly the existence of t with t mu=f g. The

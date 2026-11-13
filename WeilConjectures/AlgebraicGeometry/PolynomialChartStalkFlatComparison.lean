@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.PolynomialChartStalkFlatComparisonRever
 /-! # Flatness comparison for a polynomial chart and its closed fibre
 
 Source: Stacks Project, Tags 00R7 and 00RH.
-(blueprint: lem-sbc-polynomial-chart-stalk-flat-comparison)
 -/
 
 @[expose] public section
@@ -41,8 +40,7 @@ this map flat. Conversely, flatness of this map is the closed-fibre module
 hypothesis of Tag 00R7 for M = B in the tower A -> P -> B. Its other hypotheses
 were checked above, so the criterion makes B flat over P. The identifications
 preserve flatness and recover the displayed equivalence. Quasi-finiteness is
-not required for this comparison.
-(blueprint: lem-sbc-polynomial-chart-stalk-flat-comparison) -/
+not required for this comparison. -/
 theorem polynomial_chart_stalk_flat_comparison
     {X T : Scheme.{u}} [IsAffine T] (f : X ⟶ T)
     [Flat f] [LocallyOfFinitePresentation f]

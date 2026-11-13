@@ -14,7 +14,6 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 
 /-! # Koszul complexes vanish on the basic-open complement
 Source: Stacks Project, Tag 09IR.
-(blueprint: lem-pc-koszul-restriction-zero).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry
 /-- All shifts of the sheafified Koszul complex vanish on the union of the basic opens.
 Source: Stacks Project, Tag 09IR, proof of lemma-orthogonal-koszul-complex;
 Tag 0663, null-homotopy of multiplication by a Koszul generator.
-(blueprint: lem-pc-koszul-restriction-zero).
 
 Proof: On D(f_i), multiplication by f_i is invertible. Exterior multiplication by
 f_i⁻¹ times the i-th basis vector contracts the Koszul complex: contraction with f

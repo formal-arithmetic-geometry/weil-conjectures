@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 /-! # PrincipalOpenCechSingletonAugmentation
 
 Source: Stacks Project, Cohomology, Tag 08C1.
-(blueprint: lem-sc-principal-open-cech-singleton-augmentation).
 -/
 
 @[expose] public section
@@ -61,7 +60,6 @@ private theorem augmentation_transport_restrict
 -- The pair calculation contains dependent transports of the section modules.
 /-- A separate construction step for the finite subset Čech argument.
 Source: Stacks Project, Cohomology, Tag 08C1, equation (20.40.0.1).
-(blueprint: lem-sc-principal-open-cech-singleton-augmentation).
 
 Proof: Define the degree-n linear map by σ₁ followed by restriction and degree transport
 on singleton coordinates, and zero on larger coordinates. On singleton coordinates

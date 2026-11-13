@@ -18,7 +18,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 Source: Stacks Project, Tag 0BDP, first three proof paragraphs, with the empty
 and mixed-fibre cases of the unrestricted chart argument.
-(blueprint: lem-sc-picard-rank-match-direct-image-normal-form).
 -/
 
 @[expose] public section
@@ -105,7 +104,6 @@ of the ordinary direct image, or the condition that the test scheme is empty.
 No derived category, complex, perfectness, or Tor bound occurs in this assertion.
 Source: Stacks Project, Tag 0BDP, first three proof paragraphs; the empty and
 mixed-fibre adaptation in the unrestricted perfect-chart argument.
-(blueprint: lem-sc-picard-rank-match-direct-image-normal-form).
 
 Proof: Let X_r be the clopen local rank-r locus of E. Flatness and local finite
 presentation make f open; properness makes f closed, so f(X_r), f(X minus X_r)

@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.OpenStalkFreeMapLocalLift
 /-! # Finite-interval lifting for finite-projective open-site terms
 
 Source: Stacks Project, Tags 09RE and 01CP.
-(blueprint: lem-sc-finite-projective-open-stalk-maps-lift).
 -/
 
 @[expose] public section
@@ -21,9 +20,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 /-- Simultaneously lift a finite family of stalk maps with finite-projective sources.
-Source: Stacks Project, Tag 01CP (lemma-stalk-internal-hom), and the finite
+Source: Stacks Project, Tag 01CP, and the finite
 matrix calculation of Tags 09RE and 0BC7 (2).
-(blueprint: lem-sc-finite-projective-open-stalk-maps-lift).
 
 Proof: Choose the given finite-free retractions. The uniform open-site finite-free
 lifting theorem supplies a family of natural restriction-stalk comparisons,

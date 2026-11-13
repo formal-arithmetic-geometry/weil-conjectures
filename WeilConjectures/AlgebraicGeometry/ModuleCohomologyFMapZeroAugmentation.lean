@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # Augmentation square for degree zero resolution maps
 
-Source: Stacks Project, Tags 01F8, 01F9 and 01FB
-(blueprint: lem-weil-pbc-module-cohomology-fmap-zero-augmentation).
+Source: Stacks Project, Tags 01F8, 01F9 and 01FB.
 -/
 
 @[expose] public section
@@ -77,8 +76,7 @@ set_option maxHeartbeats 800000 in
 set_option backward.isDefEq.respectTransparency false in
 /-- The degree-zero resolution formula commutes with the canonical augmentations.
 Source: Stacks Project, Cohomology of Sheaves, Remark 01FB, equation-choice;
-Mathlib CategoryTheory.Abelian.RightDerived, toRightDerivedZero_eq
-(blueprint: lem-weil-pbc-module-cohomology-fmap-zero-augmentation).
+Mathlib CategoryTheory.Abelian.RightDerived, toRightDerivedZero_eq.
 
 Proof: express each toRightDerivedZero using its resolution by
 InjectiveResolution.toRightDerivedZero_eq. Before the inverse vertical map is

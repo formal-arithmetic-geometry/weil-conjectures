@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.LatticePairRestriction
 # The presheaf of embedded lattice images
 
 Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59–60.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -104,7 +103,6 @@ theorem latticeImageClass_eq_of_cover {U : X.ProEt}
 
 /-- Equality of represented image families is local.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of embedded lattices.
-(auxiliary; not a blueprint node).
 Proof: equal restrictions of two amalgamations give equal image families on the
 cover. Pull that cover back to every slice test object. Local membership in each
 integral image gives both inclusions there, hence equality of the families. -/

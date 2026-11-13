@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.SupportedKummerChernRealization
 /-!
 # Ordinary Chern realization of a normalized supported Kummer class
 
-Source: Stacks 03PL and 0A45; blueprint lem-asd-ordinary-supported-kummer.
-(auxiliary; not a blueprint node).
+Source: Stacks 03PL and 0A45.
 -/
 
 @[expose] public noncomputable section
@@ -36,7 +35,7 @@ attribute [local instance 100000] ordinaryFiniteClass._proof_1 ordinaryFiniteCla
 
 /-- Forgetting support in the uniquely normalized class gives the ordinary divisor Chern class.
 Source: Stacks 03PL and 0A45; the unit and scalar-Chern clauses of
-`ordinary_supported_kummer` (auxiliary; not a blueprint node).
+`ordinary_supported_kummer`.
 
 Proof: unfold the ordinary finite-class realization. The proved unit-forgetting
 equation identifies this class with the supported integral unit and generator

@@ -15,7 +15,6 @@ import Mathlib.RingTheory.Spectrum.Prime.Topology
 /-! # Finite coefficient models for principal covers
 
 Source: Stacks Project, Algebra, proof of Tag 00SU, final paragraph.
-(blueprint: lem-weil-pbc-noetherian-principal-cover-model).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace Algebra
 original coefficient ring.
 
 Source: Stacks Project, Algebra, proof of Tag 00SU, final paragraph.
-(blueprint: lem-weil-pbc-noetherian-principal-cover-model).
 
 Proof: The images of the G_j generate the unit ideal of the quotient over R, since no
 prime contains them all. Membership of 1 in this ideal uses finitely many indices and

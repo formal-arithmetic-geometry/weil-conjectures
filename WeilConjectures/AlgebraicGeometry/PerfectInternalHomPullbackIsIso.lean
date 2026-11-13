@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedInternalHomAdjunction
 /-! # Invertibility of the evaluation-defined perfect internal-Hom pullback map
 
 Source: Stacks Project, cohomology.tex, Tags 08I3 and 0FPC.
-(blueprint: lem-pc-perfect-internal-hom-pullback-isIso).
 -/
 
 @[expose] public section
@@ -129,7 +128,6 @@ tensor-Hom adjunctions and a canonical pullback tensor comparison, rather than
 existence of an unrelated isomorphism between the two objects.
 
 Source: Stacks Project, cohomology.tex, Remark 08I3 and Example 0FPC.
-(blueprint: lem-pc-perfect-internal-hom-pullback-isIso).
 
 Proof: Equip M with quasi-coherent cohomology using PerfectImpliesQCoh, and
 apply perfect_rhom_tensor_comparison with both inputs M to obtain an exact pairing

@@ -176,8 +176,7 @@ attribute [-instance] coefficientModelAdditiveSheafify coefficientEtaleModelAddi
   WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective in
 /-- Constant-ring module pullback agrees with fixed-scalar inverse image before deriving.
-Source: Stacks Tags 00YV, 03A0, 03CY and 03D2
-(auxiliary; not a blueprint node).
+Source: Stacks Tags 00YV, 03A0, 03CY and 03D2.
 
 Proof: transpose the whiskered constant-presheaf unit to construct the canonical
 constant-ring direct-image map. The constantInverseImageScalarNormalization

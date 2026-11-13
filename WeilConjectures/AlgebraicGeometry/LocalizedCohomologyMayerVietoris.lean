@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.CohomologyFractionMayerVietorisSquares
 
 /-! # Mayer--Vietoris diagram for localized twisted cohomology
 
-Source: Stacks Project, Cohomology of Schemes, Tag 09MR, Mayer--Vietoris paragraph
-(blueprint: lem-sc-invert-s-cohomology-mayer-vietoris-diagram).
+Source: Stacks Project, Cohomology of Schemes, Tag 09MR, Mayer--Vietoris paragraph.
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ open AlgebraicGeometry.Scheme.Modules AlgebraicGeometry.RingedSpace
 namespace AlgebraicGeometry
 
 /-- The canonical comparison maps on fractions form a map of exact Mayer--Vietoris
-sequences. Fractions are represented by the landed presentation `CohomologyFractionPresentation`
-(def-sc-cohomology-fraction-presentation). The comparison `c` is tied by
+sequences. Fractions are represented by the landed presentation `CohomologyFractionPresentation`. The comparison `c` is tied by
 `s^n · c(ξ/s^n) = ξ|_{W ⊓ S}`; since `s` trivializes `L` on `S`, this is the formula
 ξ/s^n ↦ s^(-n) ξ and determines `c`. The connecting transformations `δ` are tied as
 Mayer--Vietoris connecting maps of every module and every pair of opens: exactness of the
@@ -41,8 +39,7 @@ long sequence and compatibility with restriction to a smaller open (Tag 01EB).
 The formulas on fractions specify the upper maps uniquely, including the connecting
 maps. Exactness at degree zero is injectivity of `a 0`; thus H^(-1) is zero.
 
-Source: Stacks, Tag 09MR, Mayer--Vietoris paragraph; Tags 01EB and 05QB
-(blueprint: lem-sc-invert-s-cohomology-mayer-vietoris-diagram).
+Source: Stacks, Tag 09MR, Mayer--Vietoris paragraph; Tags 01EB and 05QB.
 
 Proof: (1) Apply lem-sc-mayer-vietoris-open-cover to every twist. Naturality in the
 module makes every map, including the boundary, commute with multiplication by s.
@@ -51,8 +48,7 @@ preserves intersection and union. (2) Apply lem-sc-graded-localization-exact to
 localize the exact graded sequence and take degree zero; the fraction presentation
 is the same localization. (3) Apply the same Mayer--Vietoris sequence to the cover
 on the nonvanishing open. Restriction and division by the trivializing section
-commute with the boundary by naturality (lem-weil-pbc-right-derived-universal-delta-functor
-and pqf-def-cohomology). Check every square on xi/s^n; these fractions generate. -/
+commute with the boundary by naturality. Check every square on xi/s^n; these fractions generate. -/
 theorem localizedCohomology_mayerVietoris (X : Scheme.{uMV}) [CompactSpace X]
     [QuasiSeparatedSpace X] (L F : X.Modules) [L.IsInvertible] [F.IsQuasicoherent]
     (s : Γ(L, ⊤)) (U V : X.Opens)

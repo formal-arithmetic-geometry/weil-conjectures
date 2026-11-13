@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
 /-! # Descent of derived morphisms between open perfect stalks
 
 Source: Stacks Project, Tags 09RE (affine proof), 0BC7 (2), 00CR, and 06Z0.
-(blueprint: lem-sc-perfect-open-stalk-derived-hom-descent).
 -/
 
 @[expose] public section
@@ -58,7 +57,6 @@ restriction comparison. This does not choose a chain representative
 and does not involve a comparison with any global complex.
 
 Source: Stacks Project, Tag 09RE affine proof; Tag 0BC7 (2), with Tags 00CR and 06Z0.
-(blueprint: lem-sc-perfect-open-stalk-derived-hom-descent).
 
 Proof: On U, finite-free retracts are quasi-coherent. Global sections identify P and Q
 with bounded complexes of finite projective modules over A = Gamma(X,U). The stalk at x

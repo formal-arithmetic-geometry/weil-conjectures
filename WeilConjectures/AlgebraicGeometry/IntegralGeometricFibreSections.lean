@@ -71,7 +71,6 @@ There is no assertion about the exchange transformation in this statement.
 Source: Stacks Project, Tag 0EYP; Tag 03Q9 for direct-image stalks, Tag 09XK for
 integral algebras over a henselian pair, Tag 09ZH for henselian restriction of
 sections, and Tag 0A3I for extension of separably closed fields.
-(blueprint: lem-sbc-integral-geometric-fibre-sections).
 
 Proof: restrict to an affine open of Y through the image of s. Integrality makes
 the pullback over the strict henselization Spec A affine, say Spec B, with B

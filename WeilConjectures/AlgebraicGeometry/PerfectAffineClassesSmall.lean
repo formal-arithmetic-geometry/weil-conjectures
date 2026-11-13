@@ -16,7 +16,7 @@ import Mathlib.Algebra.Category.FGModuleCat.EssentiallySmall
 /-! # Smallness of perfect isomorphism classes on an affine scheme
 
 Source: Step 1 of lem-pc-perfect-complexes-compact-set, using Stacks Project,
-Tag 08EB (blueprint: lem-pc-perfect-affine-classes-small).
+Tag 08EB.
 -/
 
 @[expose] public section
@@ -63,8 +63,7 @@ private theorem exists_finiteTermModel {A : Type u} [CommRing A]
 
 /-- Perfect quasi-coherent derived objects on an affine scheme have `u`-small
 isomorphism classes.
-Source: Step 1 of lem-pc-perfect-complexes-compact-set; Stacks Project, Tag 08EB
-(blueprint: lem-pc-perfect-affine-classes-small).
+Source: Step 1 of lem-pc-perfect-complexes-compact-set; Stacks Project, Tag 08EB.
 
 Proof: Identify `Y` with `Spec Γ(Y, 𝒪_Y)` using `Y.isoSpec`, and transport the
 module categories, their derived categories, quasi-coherence and perfectness along

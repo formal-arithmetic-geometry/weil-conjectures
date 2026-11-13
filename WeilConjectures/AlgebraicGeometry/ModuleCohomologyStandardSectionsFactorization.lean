@@ -14,7 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNat
 /-! # The module-to-abelian-sections part of the standard comparison
 
 Source: Stacks Project, Tags 015E and 03FD.
-(blueprint: new-module-cohomology-standard-sections-factorization)
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ private theorem evaluate_right_factor
 comparison applied to the exact-forgetting module resolution comparison at x.
 Source: Stacks Project, Tags 015E and 03FD, first half of the standard-resolution
 calculation in `new-module-cohomology-ext-standard-resolution-formula`.
-(blueprint: new-module-cohomology-standard-sections-factorization)
 
 Proof: Substitute the equality identifying I with the standard injective resolution
 and the defining equation of a. The component of resolutionSectionsNatIso is,

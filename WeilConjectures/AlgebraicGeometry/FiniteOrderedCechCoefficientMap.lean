@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 /-! # The coefficient map into the ordered Čech total complex
 
 Source: Stacks Project, Cohomology, Tags 01EQ and 01ET.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ private theorem coefficient_closed : e.f 0 ≫ G.d 0 1 = 0 := by
 
 /-- The coefficient components satisfy the cochain identity.
 Source: Stacks Project, Tag 01EQ.
-(auxiliary; not a blueprint node)
 Proof: the horizontal identity is functoriality of the Čech functor and the
 vertical term vanishes by the augmentation cochain identity. -/
 theorem coefficient_comm (n m : ℤ) :
@@ -87,8 +85,7 @@ theorem coefficient_comm (n m : ℤ) :
     simp
 
 /-- The coefficient augmentation into the resolution-degree-zero summands.
-Source: Stacks Project, Tag 01EQ.
-(auxiliary; not a blueprint node) -/
+Source: Stacks Project, Tag 01EQ. -/
 def orderedCechCoefficientMap :
     (alternatingCechModuleFunctor V).obj F ⟶ (alternatingCechTotalFunctor V).obj G where
   f n := ((alternatingCechModuleFunctor V).map (e.f 0)).f n ≫
@@ -97,7 +94,6 @@ def orderedCechCoefficientMap :
 
 /-- The coefficient map commutes with maps respecting coefficient augmentations.
 Source: Stacks Project, Tag 01EQ, componentwise functoriality.
-(auxiliary; not a blueprint node)
 Proof: apply the coefficient augmentation identity in every Čech degree, and
 use the naturality of each total summand inclusion. -/
 theorem orderedCechCoefficientMap_naturality
@@ -127,7 +123,6 @@ theorem orderedCechCoefficientMap_naturality
 
 /-- The two coefficient augmentations agree in degree zero.
 Source: Stacks Project, Tag 01EQ.
-(auxiliary; not a blueprint node)
 Proof: the global restriction map is natural for e in degree zero. Compose
 this equality with the common (0,0) inclusion into the total. -/
 theorem orderedCechCoefficientMap_zero :
@@ -173,7 +168,6 @@ theorem orderedCechCoefficientMap_zero :
 
 /-- Totalization of a single coefficient sheaf is its Čech complex.
 Source: Stacks Project, Tag 01EQ, the resolution-degree-zero axis.
-(auxiliary; not a blueprint node)
 Proof: all summands off resolution degree zero are zero. Projection onto the
 sole remaining summand in each total degree inverts its total inclusion. -/
 theorem orderedCechCoefficientMap_single_isIso

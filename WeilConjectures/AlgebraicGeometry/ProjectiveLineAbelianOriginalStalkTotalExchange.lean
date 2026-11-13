@@ -38,7 +38,6 @@ open Scheme Etale
 No module resolution, comparison of coefficient categories, or closed fibre is involved.
 
 Source: Stacks Project, Tag 03Q9 and the final stalk calculation of Tag 095T.
-(blueprint: lem-weil-pbc-p1-abelian-original-stalk-total-exchange).
 
 Proof:
 1. The projective-line projection is qcqs by properness. Its base change to Spec A

@@ -15,8 +15,7 @@ import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 /-!
 # Finite type is preserved by module pullback
 
-Source: Stacks Project, Modules, Lemma 01B6 (lemma-pullback-finite-type),
-(blueprint: lem-weil-pbc-module-pullback-finite-type).
+Source: Stacks Project, Modules, Lemma 01B6.
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ set_option maxHeartbeats 600000 in
 -- The over-site equivalences and tensor-pullback object require extra definitional reductions.
 /-- For a morphism of schemes, the pullback of a finite type module is finite type.
 
-Source: Stacks Project, Modules, Lemma 01B6 (lemma-pullback-finite-type),
-(blueprint: lem-weil-pbc-module-pullback-finite-type).
+Source: Stacks Project, Modules, Lemma 01B6.
 
 The hypothesis `[G.IsFiniteType]` renders that every point of the target has an open
 neighbourhood on which a finite direct sum of the structure sheaf surjects onto `G`.
@@ -44,7 +42,7 @@ conjunct records this explicitly for every surjection on an open `V`: `(Opens.ma
 is `f⁻¹ V`, and `free (ULift (Fin n))` is the direct sum of `n` structure sheaves.
 
 Proof, following the four steps of the node:
-1. For an open `V` of `Y`, put `U = f⁻¹ V` and let `f' : U → V` be the restricted
+1. For an open `V` of `Y`, put `U = f⁻¹ V` and let `f': U → V` be the restricted
    morphism. The over-site equivalences, restriction-pullback and composition isomorphisms
    identify pullback of `G.over V` along `f'` with `(pullback f G).over U`.
    Uniqueness of left adjoints compares Mathlib pullback with `tensorPullback`.

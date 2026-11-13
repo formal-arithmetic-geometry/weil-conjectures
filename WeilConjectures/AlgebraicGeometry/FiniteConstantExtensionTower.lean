@@ -29,8 +29,7 @@ No chain complex representing the tower, or chain representative of its boundary
 is part of these data.
 
 Source: Stacks Project, Cohomology on Sites, Tag 094G, the induction through
-`lemma-locally-constant`'s triangle, before the last differential is constructed.
-(auxiliary; not a blueprint node) -/
+`lemma-locally-constant`'s triangle, before the last differential is constructed. -/
 inductive FiniteConstantExtensionTower
     {B : Type u} [CommRing B]
     {A : Type z} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]

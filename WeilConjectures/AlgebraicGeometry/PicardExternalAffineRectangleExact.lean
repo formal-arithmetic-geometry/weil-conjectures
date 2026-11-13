@@ -18,7 +18,6 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 /-! # Exactness on affine rectangles of the external coefficient
 
 Source: Stacks Project, Tag 0BED, the short exact coefficient diagram.
-(blueprint: lem-sc-picard-external-affine-rectangle-exact).
 -/
 
 @[expose] public section
@@ -30,7 +29,7 @@ noncomputable section
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
 /-- The external coefficient, as a functor in the left module.
-Source: Stacks, Tag 0BED (blueprint: lem-sc-picard-external-affine-rectangle-exact). -/
+Source: Stacks, Tag 0BED. -/
 def picardExternalCoefficientFunctor
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (G : Y.Modules) : X.Modules ⥤ (Limits.pullback f g).Modules :=
@@ -39,7 +38,7 @@ def picardExternalCoefficientFunctor
 
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The coefficient functor preserves zero maps.
-Source: additive adjunctions (blueprint: lem-sc-picard-external-affine-rectangle-exact). -/
+Source: additive adjunctions. -/
 instance picardExternalCoefficientFunctor_zero
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (G : Y.Modules) : (picardExternalCoefficientFunctor f g G).PreservesZeroMorphisms := by
@@ -50,8 +49,7 @@ instance picardExternalCoefficientFunctor_zero
 
 /-- External-coefficient sections on one affine rectangle are short exact in the left
 quasi-coherent coefficient. No flatness over the structure sheaf of Y is required.
-Source: Stacks, Tag 0BED, equation-kunneth-on-cech and its coefficient diagram
-(blueprint: lem-sc-picard-external-affine-rectangle-exact).
+Source: Stacks, Tag 0BED, equation-kunneth-on-cech and its coefficient diagram.
 
 Proof: For affine opens U and V, their inverse-image intersection in the fibre product
 is the affine scheme Spec (Gamma(U) tensor_k Gamma(V)). Affine pullback sections and

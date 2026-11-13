@@ -62,7 +62,6 @@ its section inverse limit. This step neither algebraizes the source nor lifts be
 
 Source: Stacks Project, Tag 088B, paragraphs introducing the completed base Y' and X';
 Tags 02KH, 087W, 02OC and 05GG.
-(blueprint: lem-weil-pbc-formal-comparison-completed-affine-transport)
 
 Proof: Let g be Spec of the completion map followed by the inverse affine chart and
 its open inclusion. Set Z = X times_Y Spec R, q its projection to X, and p its

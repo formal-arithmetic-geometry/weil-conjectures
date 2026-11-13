@@ -299,7 +299,6 @@ set on a single Koszul-regular chart. No compatibility of the two bases is asser
 
 Source: Stacks Project, Tag 0BQY, the zero-differential Hom calculation;
 Tags 062I and 01R3 for the conormal basis.
-(blueprint: lem-sc-koszul-self-ext-stalk-bases).
 
 Proof: Let A be the section ring of U, I its closed-immersion ideal and B=A/I.
 Sheafify the actual augmented Koszul projective resolution of B. Restriction of

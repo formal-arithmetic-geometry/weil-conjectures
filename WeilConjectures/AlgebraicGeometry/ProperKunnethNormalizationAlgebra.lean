@@ -9,7 +9,6 @@ public import Mathlib.CategoryTheory.Functor.Category
 /-! # The diagram calculation for proper Kunneth normalization
 
 Source: the proper forget-supports calculation in the first coordinate triangle.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -20,8 +19,6 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- A route calculation using the compositor, inner map, projection and tensor squares.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, first triangle
-(auxiliary; not a blueprint node).
 
 Proof: replace the final compositor followed by comparison by its supported
 factorization. Combine the two maps inside F and use the inner-map square.

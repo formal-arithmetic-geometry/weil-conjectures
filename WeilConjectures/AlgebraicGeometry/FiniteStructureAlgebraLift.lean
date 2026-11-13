@@ -68,8 +68,7 @@ Tensor pullback is extension of scalars, so ψ identifies its section ring with
 B(U)/JB(U); this is the displayed ring equivalence and its formula on quotient classes.
 The empty affine chart and zero module obey the same formulas. No witness is selected
 from a mere existence statement to define data: the ring operations on G are uniquely
-determined by full faithfulness, and the ring sheaf is explicitly constructed from them.
-(blueprint: lem-weil-pbc-finite-structure-algebra-lift). -/
+determined by full faithfulness, and the ring sheaf is explicitly constructed from them. -/
 theorem finite_structure_algebra_lift
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]

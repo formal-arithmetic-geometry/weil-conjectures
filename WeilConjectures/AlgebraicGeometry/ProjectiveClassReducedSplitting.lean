@@ -108,7 +108,6 @@ private theorem isIso_of_reduced_isIso
 /-- Lift a split reduced right-exact sequence for a projective class.
 
 Source: Stacks Project, More on Algebra, Tag 0BCA, final paragraph.
-(blueprint: lem-sc-projective-class-reduced-splitting).
 
 Proof: Choose a class member T lifting the last reduced module. Lift the reduced
 projection from the middle term to T using projectivity of the middle term. It is

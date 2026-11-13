@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomMayerVietorisGeometricColumns
 /-! # Local comparisons for the outer columns of geometric triangle diagrams
 
 Source: Stacks Project, Tags 09RE and 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-geometric-columns-even).
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ It asserts nothing about distinguishedness or the central Hom comparison.
 
 Source: Stacks Project, perfect.tex Tag 09RE, Mayer--Vietoris induction;
 cohomology.tex Tag 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-geometric-columns-even).
 
 Proof:
 1. Let U' and V' be the preimages under t, and W' their intersection. Since t is

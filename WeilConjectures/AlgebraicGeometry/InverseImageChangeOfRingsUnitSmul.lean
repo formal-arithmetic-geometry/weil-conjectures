@@ -44,7 +44,6 @@ private theorem map_one_tmul_smul {R S : Type u} [CommRing R] [CommRing S]
 semilinear for the ring inverse-image unit followed by the extension ring map.
 
 Source: Stacks Project, Tags 008X and 03EK; Tag 01SB, the two tensor actions.
-(blueprint: lem-w2-inverse-image-change-of-rings-unit-smul).
 
 Proof: Let eta be the additive inverse-image unit and etaR the ring unit. The canonical
 inverse-image module structure gives eta(c n) = etaR(c) eta(n), by the second conclusion

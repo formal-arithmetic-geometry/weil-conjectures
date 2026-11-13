@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 /-! # Independent finite type of projective pushforward
 
 Source: Stacks Project, Tag 02O4, Lemma 30.16.3.
-(blueprint: lem-pc-m1-projective-pushforward-finite-type-independent)
 -/
 
 @[expose] public section
@@ -54,7 +53,6 @@ set_option backward.isDefEq.respectTransparency false in
 without the general proper-coherence theorem.
 
 Source: Stacks Project, Tag 02O4, Lemma 30.16.3, with Tags 01XZ and 01XJ.
-(blueprint: lem-pc-m1-projective-pushforward-finite-type-independent)
 
 Proof: restrict to an affine open V of S. Base change of the specified closed immersion
 embeds its inverse image in projective space over V. The projective cohomology finiteness

@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.TildePrincipalLocalizationTransport
 # Principal-open section comparison for a graded-module chart
 
 Source: Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-basis-comparison-fixed-core)
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
 localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-basis-comparison-fixed-core) -/
+Source: Stacks, Algebra, Section 00JM. -/
 local instance localizedModuleHomogeneousScalarsBasisComparisonFixedCore (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -108,7 +106,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 extending the same additive comparison on whole-chart sections.
 
 Source: Stacks Project, Constructions, Lemmas 01M4, 01M7 and 01MB, last paragraph.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-basis-comparison-fixed-core)
 
 Proof:
 Use alpha f and the inverse of the tilde global-section equivalence to define the

@@ -14,7 +14,6 @@ import WeilConjectures.RingTheory.OpenFlatLocus
 /-! Forward flatness comparison for a polynomial chart.
 
 Source: Stacks Project, Tag 00RH, application of Tag 00R7.
-(blueprint: lem-sbc-polynomial-chart-stalk-flat-comparison-forward)
 -/
 
 @[expose] public section
@@ -114,8 +113,7 @@ private theorem flat_pullback_stalk
 
 The proof uses the local tower of stalk rings, base change to the residue field,
 and localization. The canonical fibre stalk identification transports flatness.
-Source: Stacks Project, Tag 00RH.
-(blueprint: lem-sbc-polynomial-chart-stalk-flat-comparison-forward) -/
+Source: Stacks Project, Tag 00RH. -/
 theorem polynomial_chart_stalk_flat_comparison_forward
     {X T : Scheme.{u}} [IsAffine T] (f : X ⟶ T)
     [Flat f] [LocallyOfFinitePresentation f]

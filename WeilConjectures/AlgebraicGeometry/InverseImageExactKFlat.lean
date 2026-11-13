@@ -16,7 +16,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Exact inverse image and K-flat resolutions
 
 Source: Stacks Project, Cohomology, Tags 06YI and 06YC.
-(blueprint: lem-pc-inverse-image-exact-kflat-resolution).
 -/
 
 @[expose] public section
@@ -56,8 +55,7 @@ ring sheaf g⁻¹ O_S on T and identity adjoint ring map. Tensoring with that sa
 is naturally the identity, identifying this pullback complex with termwise inverse
 image. It is therefore K-flat. The two conclusions give preservation of resolutions.
 For the empty space the stalk criterion is vacuous and the module category is trivial;
-no surjectivity or flatness hypothesis on g is required.
-(blueprint: lem-pc-inverse-image-exact-kflat-resolution). -/
+no surjectivity or flatness hypothesis on g is required. -/
 theorem exists_inverseImage_exact_kFlat {T S : Scheme.{u}} (g : T ⟶ S) :
     ∃ (I : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
           SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology T)

@@ -7,8 +7,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 import all Mathlib.Logic.Small.Defs
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # Constant coefficient comparison component
 -/
@@ -23,10 +21,9 @@ attribute [local irreducible] DerivedCategory.singleFunctors
   Functor.leftDerivedFunctor Functor.rightDerivedFunctor upperStar
 
 /-- The canonical constant comparison has its two prescribed factors.
-Source: blueprint thm-amb-p1-adjunction.proof.md, constant coefficient pullback.
+
 Specialize the generic component equation to module coefficients, leaving the
-single-complex comparison and constant-sheaf comparison as the two factors.
-(auxiliary; not a blueprint node). -/
+single-complex comparison and constant-sheaf comparison as the two factors. -/
 theorem ordinaryFiniteConstantPullback_hom (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (constantSinglePullbackIso (ModuleCat.{u + 1} A) f (ModuleCat.of A A)).hom =

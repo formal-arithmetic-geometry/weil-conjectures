@@ -78,7 +78,6 @@ set_option maxHeartbeats 160000 in
 -- Resolution and section comparisons require comparing the composite functor interfaces.
 /-- The homology mate of q acts on resolution classes through its open cohomology map.
 Source: Stacks Project, Cohomology, Tags 02N7 and 01E4.
-(blueprint: lem-weil-pbc-flat-pullback-homology-sections).
 
 Proof: Represent the source section-complex homology class by a cycle s. The unit
 followed by pushforward of the termwise adjoint c of q equals q, so it sends s to

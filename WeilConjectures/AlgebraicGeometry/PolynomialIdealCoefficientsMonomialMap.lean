@@ -25,7 +25,6 @@ namespace MvPolynomial
 
 /-- Coefficient quotient map and induced quotient isomorphism for the coordinate ideal.
 Source: literature/stacks-project/algebra.tex, proof of Lemma Tag 07DW.
-(blueprint: new-polynomial-ideal-coefficients-map)
 The coefficient map is formed componentwise into the ideal quotients; finite support
 of a polynomial gives its codomain in the direct sum, monomials give surjectivity,
 and the preceding coefficient-membership criterion identifies its kernel. The

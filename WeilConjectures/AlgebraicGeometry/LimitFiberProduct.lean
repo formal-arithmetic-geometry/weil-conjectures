@@ -13,13 +13,11 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 ## Main results
 
-- `CategoryTheory.IsPullback.isPullback_map_of_isLimit` (blueprint
-  `lem-kun-fibre-product-limits`): in any category, a limit of cartesian squares is cartesian;
+- `CategoryTheory.IsPullback.isPullback_map_of_isLimit`: in any category, a limit of cartesian squares is cartesian;
   in particular inverse limits of schemes commute with fibre products.
 - `CategoryTheory.Limits.limitPullbackIso`: the canonical comparison
   `lim (Xᵢ ×_{Sᵢ} Yᵢ) ≅ (lim Xᵢ) ×_{lim Sᵢ} (lim Yᵢ)`.
-- `AlgebraicGeometry.Scheme.exists_preimage_eq_of_isAffine` (blueprint
-  `lem-kun-descent-limit-open`): a quasi-compact open of a cofiltered limit of affine schemes
+- `AlgebraicGeometry.Scheme.exists_preimage_eq_of_isAffine`: a quasi-compact open of a cofiltered limit of affine schemes
   descends to a quasi-compact open of some stage.
 -/
 
@@ -33,7 +31,7 @@ namespace CategoryTheory
 
 variable {J : Type*} [Category J] {C : Type*} [Category C]
 
-/-- Blueprint `lem-kun-fibre-product-limits`: **limits commute with fibre products.** Let
+/-- **limits commute with fibre products.** Let
 `Pⱼ → Xⱼ, Pⱼ → Yⱼ, Xⱼ → Sⱼ, Yⱼ → Sⱼ` be a system of cartesian squares, natural in `j`, and let
 `cP, cX, cY, cS` be limit cones of the four diagrams. Then the square of limits, formed by the
 induced maps `lim P → lim X`, `lim P → lim Y`, `lim X → lim S`, `lim Y → lim S`, is cartesian:
@@ -78,7 +76,7 @@ namespace AlgebraicGeometry
 
 variable {I : Type u} [Category.{u} I] (D : I ⥤ Scheme.{u})
 
-/-- Blueprint `lem-kun-descent-limit-open`: **descent of a quasi-compact open in an affine
+/-- **descent of a quasi-compact open in an affine
 limit.** Let `X = lim Xᵢ` be a cofiltered limit of affine schemes (so that all transition maps
 are affine) and `U ⊆ X` a quasi-compact open. Then there are an index `i` and a quasi-compact open
 `Uᵢ ⊆ Xᵢ` with `U = pᵢ⁻¹(Uᵢ)`. Write `U` as a finite union of basic opens `D(fₖ)`; the finitely

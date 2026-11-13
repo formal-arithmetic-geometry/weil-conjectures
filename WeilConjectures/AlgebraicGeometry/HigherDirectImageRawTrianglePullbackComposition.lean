@@ -14,7 +14,6 @@ import all WeilConjectures.AlgebraicGeometry.AbelianDerivedDirectImageTransition
 /-! # Composition of raw triangle pullbacks with arbitrary coefficient maps
 
 Source: Stacks Project, Tags 03CB and 09Z1, canonical inverse-image comparisons.
-(blueprint: lem-sbc-raw-triangle-pullback-composition).
 -/
 
 @[expose] public section
@@ -75,7 +74,6 @@ set_option backward.isDefEq.respectTransparency true in
 
 Source: Stacks Project, Tags 03CB and 09Z1; the source and shift factors of
 lem-sbc-higher-image-raw-pullback-composition-formula, step 2.
-(blueprint: lem-sbc-raw-triangle-pullback-composition).
 
 Proof: Expand both triangle pullbacks as `rawTriangleMap`. Map the inner four
 factors through the outer derived pullback, using functoriality. Naturality of

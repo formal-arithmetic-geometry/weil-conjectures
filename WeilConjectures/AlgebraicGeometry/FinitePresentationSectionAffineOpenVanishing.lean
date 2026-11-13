@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.SectionBaseChangeZeroPersists
 
 Source: Stacks Project, Limits, Tag 01ZR (3), affine part of the first proof;
 Algebra, Tags 05N7 (3) and 05LI (1).
-(blueprint: lem-pc-fp-section-affine-open-eventually-zero).
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ set_option backward.isDefEq.respectTransparency.types false
 /-- A single section that vanishes at the limit vanishes at all sufficiently late stages.
 Source: Stacks Project, Limits, Tag 01ZR (3), first proof, affine case;
 Algebra, Tags 05N7 (3) and 05LI (1).
-(blueprint: lem-pc-fp-section-affine-open-eventually-zero).
 
 Proof: put V_j = p_j⁻¹(U). All these opens and the corresponding limit open are affine,
 since the projections are base changes of morphisms of affine schemes. Their rings

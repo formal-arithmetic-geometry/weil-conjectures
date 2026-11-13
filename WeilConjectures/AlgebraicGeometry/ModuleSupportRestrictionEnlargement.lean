@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 /-! # Restricting a supported section and enlarging its support
 
 Source: Stacks Project, Modules, proof of Tag 01BB, first paragraph, and Tag 01AH (2).
-(blueprint: lem-weil-pbc-module-support-restriction-enlargement).
 -/
 
 @[expose] public section
@@ -30,9 +29,8 @@ set_option backward.isDefEq.respectTransparency false in
 restriction and inclusion into a larger finite support.
 
 Source: Stacks Project, Modules, proof of Tag 01BB, first paragraph, and Tag 01AH (2).
-(blueprint: lem-weil-pbc-module-support-restriction-enlargement).
 
-Proof: Let inc : S -> T send j to the same basis index, using hST. The composite
+Proof: Let inc: S -> T send j to the same basis index, using hST. The composite
 of freeMap inc and freeMap (T -> I) is freeMap (S -> I): precompose with every
 basis inclusion and apply iotaFree_freeMap twice, then use coproduct extensionality.
 Apply the functor overMap(Z -> W) to ha and expand its map of a composite. On

@@ -16,8 +16,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additi
 
 /-! # Boundedness below of finite twisted inverse image
 
-Source: Stacks Project, Duality for Schemes, Tag 0A9I (finite case, Tag 0AX2)
-(blueprint: lem-sc-finite-twisted-inverse-bounded-below).
+Source: Stacks Project, Duality for Schemes, Tag 0A9I (finite case, Tag 0AX2).
 -/
 
 @[expose] public section
@@ -80,8 +79,7 @@ boundedness below for a finite morphism of Noetherian schemes. `comparison` iden
 with the restriction of the shared derived direct image; `adj` specifies its right adjoint.
 Quasi-coherence of the image is included in the codomain of `a`.
 
-Source: Stacks Project, Tag 0A9I, specialized to the finite case of Tag 0AX2
-(blueprint: lem-sc-finite-twisted-inverse-bounded-below).
+Source: Stacks Project, Tag 0A9I, specialized to the finite case of Tag 0AX2.
 Proof:
 1. Finite morphisms of Noetherian schemes are quasi-compact and quasi-separated, with
 quasi-compact target. Apply lem-pc-derived-direct-image-uniform-truncation-bound to shifted

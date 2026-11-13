@@ -32,7 +32,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The actual derived extension counit is invertible on the integral scalar complex.
 Source: Stacks Tag 06YY.
-(blueprint: def-pe-internal-perfect-reduction-hom-equiv).
 Proof: the integral complex is K-flat, so the defining left derived functor computes
 ordinary extension on this complex. Apply the K-flat counit criterion. -/
 theorem internalPerfectReductionCounit_isIso (W : Scheme.{u})
@@ -49,8 +48,7 @@ theorem internalPerfectReductionCounit_isIso (W : Scheme.{u})
 
 /-- Canonical comparison of actual derived reduction with the localized ordinary model.
 It is the derived counit, preceded by the quotient factorization of the integral complex.
-Source: Stacks Tag 06YY.
-(blueprint: def-pe-internal-perfect-reduction-hom-equiv). -/
+Source: Stacks Tag 06YY. -/
 def internalPerfectReductionOrdinaryIso (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
     (a b : ℤ) (ha : P.IsStrictlyGE a) (hb : P.IsStrictlyLE b)
@@ -68,8 +66,7 @@ def internalPerfectReductionOrdinaryIso (W : Scheme.{u})
 
 /-- Endomorphism comparison fixed by the derived counit and K-projective localization.
 The inverse of localization is uniquely determined by the localization bijection.
-Source: Stacks Tags 06YY and 064B.
-(blueprint: def-pe-internal-perfect-reduction-hom-equiv). -/
+Source: Stacks Tags 06YY and 064B. -/
 def internalPerfectReductionHomEquiv (X : Scheme.{u}) (W : X.ProEt)
     (hW : (Scheme.ProEt.topology X).IsWeaklyContractible.{u + 1} W)
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
@@ -89,7 +86,6 @@ def internalPerfectReductionHomEquiv (X : Scheme.{u}) (W : X.ProEt)
 
 /-- Localization of the canonical Hom comparison is conjugation by the model isomorphism.
 Source: the uniquely determined inverse of K-projective localization.
-(blueprint: def-pe-internal-perfect-reduction-hom-equiv).
 Proof: localization and its inverse cancel; the Hom congruence is conjugation. -/
 theorem internalPerfectReductionHomEquiv_localize (X : Scheme.{u}) (W : X.ProEt)
     (hW : (Scheme.ProEt.topology X).IsWeaklyContractible.{u + 1} W)
@@ -114,7 +110,6 @@ theorem internalPerfectReductionHomEquiv_localize (X : Scheme.{u}) (W : X.ProEt)
 
 /-- The successor derived counit intertwines ordinary reduction of endomorphisms.
 Source: naturality of the universal derived counit and ordinary balancing.
-(blueprint: def-pe-internal-perfect-reduction-hom-equiv).
 Proof: apply counit naturality to the homotopy endomorphism, then cancel the ordinary
 balancing isomorphism with its inverse. No flatness assumption is needed for this identity. -/
 theorem internalPerfectOrdinaryStepCounit_naturality (W : Scheme.{u})

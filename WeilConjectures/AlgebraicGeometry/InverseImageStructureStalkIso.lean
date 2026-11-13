@@ -12,7 +12,6 @@ import WeilConjectures.Topology.InverseImageStalk
 /-! # The inverse-image structure map on stalks
 
 Source: Stacks Project, Tags 0098 and 0095.
-(blueprint: lem-pc-inverse-image-structure-stalk-iso).
 -/
 
 @[expose] public section
@@ -24,7 +23,6 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 /-- The inverse-image ring stalk is the base stalk, compatibly with the structure map.
 Source: Stacks Project, Tags 0098 and 0095.
-(blueprint: lem-pc-inverse-image-structure-stalk-iso).
 
 Proof: The presheaf inverse image has stalk O_{S,f(x)} (Tag 0098).
 Sheafification preserves stalks, giving a ring isomorphism to the stalk of the

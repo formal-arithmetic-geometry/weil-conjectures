@@ -25,7 +25,6 @@ namespace AlgebraicGeometry
 
 /-- An idempotent on the zeroth formal fibre extends to a compatible system of sections.
 Source: Stacks Project, Tag 0G7X, lines 8133--8146; Tags 09ZU, 04EX and 00EE.
-(blueprint: lem-weil-pbc-formal-fibre-idempotent-limit)
 
 Proof: Put A = O_(S,s) and m = its maximal ideal. The map from X_0 to X_n is
 base change of A/m^(n+1) to A/m. Its quotient ideal m/m^(n+1) has (n+1)st power

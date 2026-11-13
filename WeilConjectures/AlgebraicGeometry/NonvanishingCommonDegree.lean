@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.AffineComplement
 /-! # Two nonvanishing loci represented in a common tensor degree
 
 Source: Stacks Project, Properties, proof of Lemma 01PY and Lemma 01PT.
-(blueprint: lem-weil-pbc-nonvanishing-common-degree)
 -/
 
 @[expose] public section
@@ -56,7 +55,6 @@ private theorem nonvanishingLocus_power_transport {X : Scheme.{u}} {N M : X.Modu
 module without changing either nonvanishing locus.
 
 Source: Stacks Project, Properties, proof of Lemma 01PY, second paragraph, and Lemma 01PT.
-(blueprint: lem-weil-pbc-nonvanishing-common-degree)
 
 Proof: put `M = L.tensorPow (p * q)`. Tensor powers of an invertible module are invertible.
 Take the q-fold tensor power of s and the p-fold tensor power of t, and transport them

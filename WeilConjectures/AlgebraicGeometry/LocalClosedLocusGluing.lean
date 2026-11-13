@@ -13,7 +13,6 @@ import Mathlib.AlgebraicGeometry.Gluing
 /-! # Gluing closed loci representing a local predicate
 
 Source: Stacks Project, Tag 0BDL, gluing of local closed subschemes.
-(blueprint: lem-sc-local-closed-locus-gluing).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Closed representatives of a predicate stable under open restriction and local
 on the source glue over an open cover of the target.
 Source: Stacks Project, Tag 0BDL, final gluing paragraph; Schemes, Tags 01JB and 01JC.
-(blueprint: lem-sc-local-closed-locus-gluing).
 
 Proof: Choose the given neighbourhood at each target point. On an overlap,
 pull back the two closed representatives. Their maps into every scheme over

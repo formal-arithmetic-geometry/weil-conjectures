@@ -134,7 +134,6 @@ private theorem quotient_presentation {Z Y : Scheme.{u}} (i : Z ⟶ Y)
 
 /-- The associated sheaf of quotient-valued dual Koszul homology has its wedge frame.
 Source: Stacks Project, Tag 0BQY, Lemma 48.15.4, zero-differential Hom calculation.
-(blueprint: lem-y3-koszul-quotient-homology-frame).
 
 Proof: Every generator lies in I, so multiplication by it on A/I is zero.
 The Koszul boundary is an alternating sum with these coefficients; hence

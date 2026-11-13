@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
 /-! # Finite Tor amplitude of the affine module model
 
 Source: Stacks Project, Tag 08EB (perfect-lemma-perfect-affine).
-(blueprint: lem-pc-perfect-affine-module-preimage).
 -/
 
 @[expose] public section
@@ -56,7 +55,6 @@ private noncomputable def derivedCategoryOfEquivalence
 /-- A perfect affine object has a pseudo-coherent finite-Tor preimage under the
 associated-sheaf derived equivalence.
 Source: Stacks Project, perfect.tex, Lemma perfect-lemma-perfect-affine (Tag 08EB).
-(blueprint: lem-pc-perfect-affine-module-preimage)
 
 Proof: Take the equivalence of lem-pc-affine-qcoh-derived-equivalence and a complex M
 representing e.inverse.obj E using essential surjectivity of Q. Set C = Q.obj M.
@@ -70,8 +68,7 @@ lem-pc-perfect-pseudo-coherent-locally-finite-tor. A finite subcover of Spec A s
 one interval: take the minimum of the finitely many lower bounds and the maximum of
 upper bounds, enlarging to a nonempty interval if the spectrum is empty. Derived tensor
 commutes with restriction, and vanishing on an open cover detects zero cohomology sheaves.
-The finite-subcover argument is hasFiniteTorDimension_of_locallyFinite
-(lem-pc-quasi-compact-finite-tor-dimension); it uses the fixed-interval locality theorem
+The finite-subcover argument is hasFiniteTorDimension_of_locallyFinite; it uses the fixed-interval locality theorem
 lem-pc-tor-amplitude-open-local. Thus S has global finite Tor amplitude. Apply
 lem-pc-affine-pseudo-coherent-criterion and lem-pc-affine-tor-amplitude-criterion to M.
 For the zero ring the spectrum is empty and both derived categories are zero, so the

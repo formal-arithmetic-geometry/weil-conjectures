@@ -20,7 +20,6 @@ public import Mathlib.Topology.Sheaves.CommRingCat
 /-! # Affine sections present a quasi-coherent stalk by a tensor product
 
 Source: Stacks Project, Tags 01IA and 01HV (6), (7).
-(blueprint: lem-pc-intrinsic-flat-module-stalk-tensor-presentation)
 -/
 
 @[expose] public section
@@ -36,11 +35,10 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- The stalk of a quasi-coherent module is extension of its affine section scalars.
 Source: Stacks Project, Tags 01IA and 01HV (6), (7).
-(blueprint: lem-pc-intrinsic-flat-module-stalk-tensor-presentation)
 
 Proof: Use the ordinary section action, since the equal-open appLE of the identity
 is the identity ring homomorphism. Let S be the complement of the prime of x in
-A = O(V), and let f : G(V) -> G_x be the germ map with scalars restricted along
+A = O(V), and let f: G(V) -> G_x be the germ map with scalars restricted along
 A -> O_x. The affine stalk ring is the localization of A at S, so every s in S
 acts invertibly on G_x. For surjectivity, represent a stalk element by a germ on
 an open W and shrink to a basic open D(g) inside W. Quasi-coherence extends its

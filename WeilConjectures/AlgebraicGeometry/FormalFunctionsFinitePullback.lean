@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.FormalFunctionsLocalStalkCompari
 
 Source: Stacks Project, Tag 02OD, factorization of the infinitesimal neighbourhoods;
 Tags 01F7 and 01FB, functoriality of cohomology.
-(blueprint: def-weil-pbc-formal-functions-finite-pullback)
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ namespace AlgebraicGeometry
 noncomputable section
 
 /-- The map from the infinitesimal fibre to the local base change, by pullback pasting.
-Source: Stacks Project, Tag 02OD, factorization through Spec O_y.
-(blueprint: def-weil-pbc-formal-functions-finite-pullback) -/
+Source: Stacks Project, Tag 02OD, factorization through Spec O_y. -/
 def formalFunctionsFiniteι {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) (n : ℕ) :
     formalFibre f y n ⟶ pullback (Y.fromSpecStalk y) f :=
   pullback.lift
@@ -39,8 +37,7 @@ def formalFunctionsFiniteι {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) (n : ℕ) :
       (pullback.condition (f := formalFibreBaseMap Y y n) (g := f)))
 
 /-- The finite-level map has the expected projection to X.
-Source: Stacks Project, Tag 02OD; the second pullback projection.
-(blueprint: def-weil-pbc-formal-functions-finite-pullback) -/
+Source: Stacks Project, Tag 02OD; the second pullback projection. -/
 theorem formalFunctionsFiniteι_snd {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) (n : ℕ) :
     formalFunctionsFiniteι f y n ≫ pullback.snd (Y.fromSpecStalk y) f =
       formalFibreι f y n := by
@@ -48,8 +45,7 @@ theorem formalFunctionsFiniteι_snd {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) (n 
 
 /-- The h-map from F' to the direct image of F_n, obtained by adjunction from
 F → i_n*F_n. This specifies the map without choosing a module isomorphism.
-Source: Stacks Project, Tags 02OD and 01F7.
-(blueprint: def-weil-pbc-formal-functions-finite-pullback) -/
+Source: Stacks Project, Tags 02OD and 01F7. -/
 def formalFunctionsFiniteFMap {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y)
     (F : X.Modules) (n : ℕ) :
     (Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F ⟶
@@ -66,8 +62,7 @@ def formalFunctionsFiniteFMap {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y)
           ((Scheme.Modules.tensorPullback (formalFibreι f y n)).obj F))
 
 /-- The canonical finite-level pullback on the underlying cohomology groups.
-Source: Stacks Project, Tags 02OD and 01FB.
-(blueprint: def-weil-pbc-formal-functions-finite-pullback) -/
+Source: Stacks Project, Tags 02OD and 01FB. -/
 def formalFunctionsFinitePullback {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y)
     (F : X.Modules) (p n : ℕ) :
     formalFunctionsLocalCohomology f y F p →+ formalFibreCohomologyLocal f y F p n :=

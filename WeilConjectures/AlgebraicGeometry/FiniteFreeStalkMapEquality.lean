@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Equality of maps with finite free source near a stalk
-
-Source: lem-pc-perfect-locus, finite germ calculation.
-(blueprint: lem-pc-finite-free-stalk-map-eq-shrink)
 -/
 
 @[expose] public section
@@ -153,9 +150,6 @@ private theorem restrict_map_injective_of_isIso {X Y : Scheme.{u}}
   exact (congrArg (fun T ↦ Hom.app f T = Hom.app g T) hQ).mp hh
 
 /-- Equality after pullback to the local scheme spreads for maps with finite free source.
-
-Source: blueprint sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus,
-finite germ calculation. (blueprint: lem-pc-finite-free-stalk-map-eq-shrink)
 
 Proof: Use the given source isomorphism to obtain r generating sections over V.
 The pullback equality implies equality of the germs of their images in N at y:

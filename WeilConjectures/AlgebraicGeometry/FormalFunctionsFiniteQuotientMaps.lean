@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.FormalFunctionsFiniteOpenFactorization
 /-! # Finite pullback of the local germ formula
 
 Source: Stacks Project, Tags 02OD, 01F7, 01FB and 01E4.
-(blueprint: lem-weil-pbc-formal-functions-finite-quotient-maps)
 -/
 
 @[expose] public section
@@ -36,7 +35,6 @@ set_option maxHeartbeats 400000 in
 -- Nested cohomology restrictions and resolution comparisons need extra elaboration heartbeats.
 /-- Composing the local germ formula with canonical finite-level pullback gives theta.
 Source: Stacks Project, Tag 02OD, factorization c_n through c; Tags 01F7, 01FB, 01E4.
-(blueprint: lem-weil-pbc-formal-functions-finite-quotient-maps)
 
 Proof: Fix the prescribed finite choices D and choose an injective resolution K of F'.
 The local spectrum map and its base change are flat, so the open-choice existence

@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomOpenColimitLocalComparison
 /-! # Local comparisons for the outer columns of geometric triangle diagrams
 
 Source: Stacks Project, Tags 09RE and 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-geometric-columns-even).
 -/
 
 @[expose] public section
@@ -166,7 +165,6 @@ private theorem localMap_of_split_colimit
 set_option backward.isDefEq.respectTransparency false in
 /-- Fixed outer-column comparison at index 3.
 Source: Stacks Project, perfect.tex Tag 09RE.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-geometric-columns-even-three).
 -/
 theorem perfect_hom_mayerVietoris_geometric_columns_even_three
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]

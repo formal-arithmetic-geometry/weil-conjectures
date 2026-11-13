@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
 /-! # Evaluation at one and the chain-level Koszul restriction comparison
 
 Source: Stacks Project, Tags 08DC, 08DD, 08D1 and 09M1.
-(blueprint: lem-sc-koszul-open-hom-chain-evaluation).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ The statement concerns chain maps into F; it does not identify arbitrary stage d
 maps with Hom-complex homology, nor does it transport F to another derived object.
 Source: Stacks Project, Tag 09M1, first paragraph of the compact/perfect proof;
 Tags 08DC (Equation 36.9.4.1), 08DD (Proposition 36.9.5) and 08D1 (sign calculation).
-(blueprint: lem-sc-koszul-open-hom-chain-evaluation).
 
 Proof: The extended tilde of A[0] is the structure sheaf in degree zero. Derived
 restriction takes it to the structure sheaf on U. Evaluation at one identifies its

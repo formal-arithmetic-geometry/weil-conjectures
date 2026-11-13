@@ -13,7 +13,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 # Finite homogeneous coordinates
 
 Source: Stacks Project, Tags 01N0 (Lemma 27.11.3) and 01ND (Section 27.13).
-(blueprint: lem-weil-pbc-projective-space-finite-coordinates).
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ Enumerate `Option N`, send its extra variable to zero and its other variables to
 corresponding variables of `N`. Renaming back along `i ↦ e (some i)` is a right inverse,
 and preserves every homogeneous degree, so the irrelevant ideal of the target is
 contained in the image of the source irrelevant ideal. This gives a surjective graded map;
-its Proj map is a closed immersion. Base change the integral map to `S`.
-(blueprint: lem-weil-pbc-projective-space-finite-coordinates). -/
+its Proj map is a closed immersion. Base change the integral map to `S`. -/
 theorem ProjectiveSpace.exists_isClosedImmersion_finite_coordinates (N : Type u) [Finite N]
     (S : Scheme.{u}) :
     ∃ (n : ℕ) (k : ℙ(N; S) ⟶ ℙ(ULift.{u} (Fin (n + 1)); S)),

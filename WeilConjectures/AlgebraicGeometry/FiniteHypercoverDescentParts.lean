@@ -20,7 +20,7 @@ universe w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Blueprint: lemma-weil-pbc-finite-hypercover-descent-objects. -/
+/-- -/
 theorem finite_hypercover_descent_objects
     {I : Type w} [SmallCategory I] [IsFiltered I]
     (D : Iᵒᵖ ⥤ Scheme.{w})
@@ -40,7 +40,7 @@ theorem finite_hypercover_descent_objects
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Blueprint: lemma-weil-pbc-finite-hypercover-descent-morphisms. -/
+/-- -/
 theorem finite_hypercover_descent_morphisms
     {I : Type w} [SmallCategory I] [IsFiltered I]
     (D : Iᵒᵖ ⥤ Scheme.{w})
@@ -195,7 +195,7 @@ theorem finite_hypercover_descent_morphisms
   simp only [Category.assoc]
   rw [hj Δ]
 
-/-- Blueprint: lemma-weil-pbc-finite-hypercover-descent-equalities. -/
+/-- -/
 theorem finite_hypercover_descent_equalities
     {I : Type w} [SmallCategory I] [IsFiltered I]
     (D : Iᵒᵖ ⥤ Scheme.{w})

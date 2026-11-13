@@ -84,7 +84,6 @@ set_option backward.isDefEq.respectTransparency false in
 all their components agree on overlaps.
 
 Source: Stacks Project, Tag 0BQY, change of generators in the Koszul resolution.
-(blueprint: new-w4-koszul-self-ext-local-alignment).
 
 Proof: On each regular chart use the normalized Koszul Hom coordinate map.
 On intersections refine by affine subopens around each point. The conormal

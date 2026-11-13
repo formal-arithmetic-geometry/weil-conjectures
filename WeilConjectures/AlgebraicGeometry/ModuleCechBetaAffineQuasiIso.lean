@@ -14,7 +14,7 @@ import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
 /-! # Affine acyclicity makes the beta augmentation a quasi-isomorphism
 
 Source: Stacks Project, Cohomology of Schemes, Tag 01XD, and Cohomology of Sheaves,
-Tags 01ET and 01EQ (blueprint: lem-sc-module-cech-beta-affine-quasi-iso).
+Tags 01ET and 01EQ.
 -/
 
 @[expose] public section
@@ -33,8 +33,7 @@ local instance localInst_ModuleCechBetaAffineQuasiIso_1
 /-- The augmentation from the Cech complex of a quasi-coherent module into the total
 Cech complex of an injective resolution is a quasi-isomorphism when every finite
 intersection is affine. No covering hypothesis is needed for this augmentation.
-Source: Stacks Project, Tags 01XD, 01ET and 01EQ
-(blueprint: lem-sc-module-cech-beta-affine-quasi-iso).
+Source: Stacks Project, Tags 01XD, 01ET and 01EQ.
 
 Proof: Restriction of an injective module to an open remains injective, so applying
 sections on an intersection to the resolution computes cohomology on that open.

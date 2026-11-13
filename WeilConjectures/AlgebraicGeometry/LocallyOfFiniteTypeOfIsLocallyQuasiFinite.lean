@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 # Locally quasi-finite morphisms are locally of finite type
 
 Source: Stacks Project, Morphisms of Schemes, remark after Definition Tag 01TD,
-and Lemma Tag 01T2 (blueprint: lem-weil-pbc-lqf-locally-finite-type).
+and Lemma Tag 01T2.
 -/
 
 @[expose] public section
@@ -24,16 +24,13 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Hom
 
 /-- A locally quasi-finite morphism in the Stacks sense is locally of finite type.
-Source: Stacks Project, remark after Definition Tag 01TD and Lemma Tag 01T2
-(blueprint: lem-weil-pbc-lqf-locally-finite-type).
+Source: Stacks Project, remark after Definition Tag 01TD and Lemma Tag 01T2.
 
-Proof: For each point `x`, unpack `IsLocallyQuasiFinite` and `IsQuasiFiniteAtPoint`
-(pqf-def-quasifinite) to obtain affine opens `U` containing `x` and `V` with
-`U ≤ f ⁻¹ᵁ V`. The induced map on sections is of finite type
-(def-weil-pbc-finite-type-algebra). Discard its quasi-finiteness-at-the-prime clause.
+Proof: For each point `x`, unpack `IsLocallyQuasiFinite` and `IsQuasiFiniteAtPoint` to obtain affine opens `U` containing `x` and `V` with
+`U ≤ f ⁻¹ᵁ V`. The induced map on sections is of finite type. Discard its quasi-finiteness-at-the-prime clause.
 Apply the pointwise criterion for locally finite type
 (lem-weil-pbc-lft-pointwise-criterion, Stacks Tags 01T1 and 01T2) to these affine
-pairs, obtaining `LocallyOfFiniteType f` (def-weil-finite-type-morphism). -/
+pairs, obtaining `LocallyOfFiniteType f`. -/
 theorem locallyOfFiniteType_of_isLocallyQuasiFinite {X S : Scheme.{u}} (f : X ⟶ S)
     (hf : f.IsLocallyQuasiFinite) : LocallyOfFiniteType f := by
   rw [HasRingHomProperty.iff_exists_appLE (P := @LocallyOfFiniteType)

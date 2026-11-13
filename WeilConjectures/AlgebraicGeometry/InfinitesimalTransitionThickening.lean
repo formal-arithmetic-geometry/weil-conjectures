@@ -21,7 +21,6 @@ namespace AlgebraicGeometry
 universal homeomorphism.
 Source: Stacks Project, Tag 0GS2, construction of the infinitesimal fibres; Tags 04EX,
 09ZU, and 04DF.
-(blueprint: lem-weil-pbc-infinitesimal-transition-thickening).
 
 Proof: the map A/I^(n+2) → A/I^(n+1) is surjective, with kernel the image of I^(n+1).
 Its kernel has square zero: I^(2*(n+1)) is contained in I^(n+2), since n+2 ≤ 2*(n+1).

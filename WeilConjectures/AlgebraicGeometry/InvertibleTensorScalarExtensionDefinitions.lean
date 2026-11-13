@@ -9,11 +9,6 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 
 /-!
 # Tensor powers and duals under scalar extension
-
-Source: literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/
-  sk-def-sp-scalar-extension-functor.proof.md, proof paragraphs (3) and (4),
-  tensor powers and dual evaluation under ordinary scalar extension
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -42,7 +37,7 @@ local notation:max "𝒯" N:arg P:arg => (siteSheafTensorRight P).obj N
 
 /-- The image of a pure scalar-extension tensor under the module sheafification unit.
 The module universe may exceed the coefficient universe, as happens for internal Hom.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03EK. -/
 noncomputable def scalarExtensionSection
     [J.WEqualsLocallyBijective AddCommGrpCat.{max u m}]
     [HasWeakSheafify J AddCommGrpCat.{max u m}]
@@ -61,8 +56,7 @@ attribute [local irreducible] changeOfRingsOfUniverses changeOfRingsHomOfUnivers
 
 /-- Canonical associators and unitors for the actual sheafified tensor product.
 Each isomorphism is specified by its action on local pure tensors, rather than an
-unspecified monoidal structure. Source: Stacks, Tag 03EK
-(auxiliary; not a blueprint node). -/
+unspecified monoidal structure. Source: Stacks, Tag 03EK. -/
 structure ScalarTensorCoherence (R : Sheaf J CommRingCat.{u}) where
   associator : ∀ (N P Q : Mod R), 𝒯 (𝒯 N P) Q ≅ 𝒯 N (𝒯 P Q)
   associator_tmul : ∀ (N P Q : Mod R) (U : Cᵒᵖ)

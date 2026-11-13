@@ -10,8 +10,7 @@ import WeilConjectures.AlgebraicGeometry.NilpotentReductionStep
 
 /-! # Lissity propagates through powers of a coefficient ideal
 
-Source: Stacks Project, sites-cohomology.tex, Tag 094I, with Tag 094H
-(auxiliary; not a blueprint node).
+Source: Stacks Project, sites-cohomology.tex, Tag 094I, with Tag 094H.
 -/
 
 @[expose] public section
@@ -24,23 +23,19 @@ namespace SheafOfModules
 
 /-- Lissity of all cohomology sheaves after reduction modulo an ideal implies lissity
 modulo every positive power, and implies lissity of the original object for a nilpotent
-ideal. Source: Stacks Project, sites-cohomology.tex, Tags 094I and 094H
-(auxiliary; not a blueprint node).
+ideal. Source: Stacks Project, sites-cohomology.tex, Tags 094I and 094H.
 
 Proof:
-1. Locally constant finite-type module sheaves form a weak Serre subcategory
-(`lem-weil-pbc-locally-constant-derived-serre`). Cohomology in that subcategory is closed
-under distinguished triangles (`lem-sbc-cohomology-in-weak-serre-subcategory`).
+1. Locally constant finite-type module sheaves form a weak Serre subcategory. Cohomology in that subcategory is closed
+under distinguished triangles.
 2. Put Q_n = J^n/J^(n+1). The quotient short exact sequence gives a distinguished triangle
-with terms K tensor Q_n, K tensor B/J^(n+1), and K tensor B/J^n. Exact sheafification
-(`lem-weil-pbc-site-module-presheaf-sheafification-exact`) and a flat K-flat resolution
-(`lem-pc-kflat-resolution`, `def-pc-flat-sheaf-modules`, `def-pc-kflat-complex`) compute
+with terms K tensor Q_n, K tensor B/J^(n+1), and K tensor B/J^n. Exact sheafification and a flat K-flat resolution compute
 this triangle. Balancing identifies its first term with (K tensor B/J) tensor_(B/J) Q_n
 using `lem-pur-derived-change-of-rings`.
 3. B/J is Noetherian, and Q_n is finite over B/J because J^n is finitely generated.
 Good truncation followed by `lem-pc-kflat-bounded-flat-replacement` and
 `lem-pc-bounded-above-flat-kflat-site` shows that K tensor B/J is bounded above.
-Tag 094H (`lem-weil-pbc-locally-constant-tensor`) makes the first triangle term lisse.
+Tag 094H makes the first triangle term lisse.
 Induction and Step 1 make the middle term lisse over B. Quotient each local finite module
 M by J^(n+1)M; exact sheafification preserves its constant sheaf since this ideal acts
 as zero. This supplies the required quotient-linear local descriptions.

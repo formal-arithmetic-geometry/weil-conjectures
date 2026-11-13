@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.KFlatDerivedTensorComparison
 
 /-! # Natural tensor comparison with a fixed K-flat model
 Source: Stacks Project, Tag 06YH.
-(blueprint: lem-sc-kflat-tensor-model-natural-comparison).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ set_option synthInstance.maxSize 2048
 /-- The localization comparison is a natural isomorphism for a fixed K-flat
 first complex and arbitrary second complexes.
 Source: Stacks Project, Tag 06YH.
-(blueprint: lem-sc-kflat-tensor-model-natural-comparison).
 
 Proof: apply the K-flat bifunctor comparison to the constant singleton family
 with value P and the identity family of all cochain complexes. The K-flatness

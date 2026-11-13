@@ -13,10 +13,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMapEquality
 
 /-! # Finitely many equations of maps between finite free sheaves
-
-Source: lem-pc-perfect-locus, finite matrix calculation, expanded in
-lem-pc-finite-free-stalk-degreewise-shrink, steps 1 and 2.
-(blueprint: lem-pc-finite-free-stalk-finite-equations)
 -/
 
 @[expose] public section
@@ -43,9 +39,6 @@ private lemma restrict_eq_trans {Y : Scheme.{u}} {U V W : Y.Opens}
 /-- Finitely many equations of module maps between finite free sheaves hold near a point
 if they hold after pullback to its stalk scheme.
 
-Source: lem-pc-perfect-locus, finite matrix calculation, expanded in
-lem-pc-finite-free-stalk-degreewise-shrink, steps 1 and 2.
-
 Proof: Induct over the finite set of indices, starting with U for the empty set.
 Given a neighbourhood V where the previous maps agree, zero sources or targets
 have only one map, so keep V. Otherwise restrict the source's finite free
@@ -55,8 +48,7 @@ Equality for the previous pairs persists on W: the natural restriction-compositi
 isomorphism identifies direct restriction to W with restriction to V followed by
 restriction to W, and the latter preserves equality. Thus the enlarged family
 agrees on W. Apply the induction to all indices. Rank zero is included in the
-single-map lemma, and an empty indexing type returns U.
-(blueprint: lem-pc-finite-free-stalk-finite-equations) -/
+single-map lemma, and an empty indexing type returns U. -/
 theorem exists_shrink_finite_free_map_eq
     {Y : Scheme.{u}} {ι : Type v} [Finite ι] (A B : ι → Y.Modules)
     (hA : ∀ i, IsZero (A i) ∨ ∃ s : ℕ, Nonempty

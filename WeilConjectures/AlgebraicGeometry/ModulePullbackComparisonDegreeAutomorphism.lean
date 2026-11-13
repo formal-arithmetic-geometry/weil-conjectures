@@ -29,8 +29,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-- A witnessing tensor-pullback counit at the single complex in degree n.
-Source: Stacks Project, Tag 08HY
-(blueprint: lem-pc-module-pullback-degree-target-automorphism). -/
+Source: Stacks Project, Tag 08HY. -/
 def IsModulePullbackComparisonInDegree
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -225,7 +224,6 @@ private theorem modulePullback_single_isLE
 ordinary pullback. There is no cover, direct image or base-change square in this lemma.
 Source: Stacks Project, Tags 06YJ and 08HY; Step 4 of the affine alternating model
 factorization proof (the truncation argument is written out here).
-(blueprint: lem-pc-module-pullback-degree-target-automorphism).
 
 Proof: A bounded-above flat resolution supported in degrees at most n shows that
 left-derived pullback of G[n] is in D≤n. Right exactness of tensor pullback identifies

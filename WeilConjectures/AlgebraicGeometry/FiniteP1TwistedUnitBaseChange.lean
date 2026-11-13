@@ -8,9 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTwistTransportUniqueness
 
 /-! # Exchange for the twisted projective-line unit
-
-Source: blueprint thm-amb-p1-decomposition, base-change paragraph; the mate-unit
-calculation in lem-sp-finite-p1-kummer-naturality, step 3.
 -/
 
 @[expose] public noncomputable section
@@ -426,9 +423,6 @@ private theorem p1Unit_eq (A : Type (u + 1)) [CommRing A] (N : ℕ)
   rfl
 
 /-- The twisted unit commutes with projective-line exchange over arbitrary bases.
-Source: blueprint thm-amb-p1-decomposition, base-change paragraph, and
-lem-sp-finite-p1-kummer-naturality, step 3.
-(auxiliary; not a blueprint node).
 
 Proof: the roots comparison is unique since the kernel inclusion into G_m is
 monic. The pure-tensor generators then determine the coefficient-line comparison.

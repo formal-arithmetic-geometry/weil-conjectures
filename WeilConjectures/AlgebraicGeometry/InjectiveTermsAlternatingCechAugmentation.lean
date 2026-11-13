@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Homology.FiniteStripAugmentation
 /-! # Finite-cover augmentation for complexes with injective terms
 
 Source: Stacks Project, Tag 08C1, proof; Tags 01EP and 01FM.
-(blueprint: lem-sc-injective-terms-alternating-cech-augmentation)
 -/
 
 @[expose] public section
@@ -58,7 +57,7 @@ private theorem alternatingCechDouble_isZero_column
 K-injectivity assumption on the coefficient complex is needed.
 
 Source: Stacks Project, Tag 08C1, first paragraph of the proof, using Tags 01EP
-and 01FM (blueprint: lem-sc-injective-terms-alternating-cech-augmentation).
+and 01FM.
 
 Proof: For each integer q, augment the alternating section complex of I.X q by
 its global sections. The sheaf gluing axiom identifies the kernel in degree zero

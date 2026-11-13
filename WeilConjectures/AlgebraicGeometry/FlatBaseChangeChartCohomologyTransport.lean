@@ -71,7 +71,6 @@ set_option maxHeartbeats 800000 in
 of the specified coefficient h-map. No Leray edge or higher image is involved.
 Source: Stacks Project, Tag 02KH, first paragraph of the proof; Tag 01FB,
 Remark 20.14.2; Tags 0096 (Lemma 6.26.2) and 0097 (Lemma 6.26.3).
-(blueprint: new-flat-base-change-chart-cohomology-transport)
 
 Proof: Write U0 = f inverse V and L = f' inverse W. The affine identifications
 V = Spec Gamma(V) and W = Spec Gamma(W), together with the equality hAlgebra,

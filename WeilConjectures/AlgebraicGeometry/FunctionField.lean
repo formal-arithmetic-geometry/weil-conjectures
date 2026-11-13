@@ -11,10 +11,10 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 /-!
 # Function fields of curves
 
-Source: literature/blueprint/master/blueprint/sec-abelian-varieties/
+Source:
 def-sc-picard-group/def-sc-function-field.md,
 node def-sc-function-field; Stacks Project, Morphisms, Lemma 01RV and
-Definition 01RW (blueprint: def-sc-function-field).
+Definition 01RW.
 
 The product definition below specializes to the node's curves over a field. Its finite
 component indexing follows from finite type over a Noetherian field spectrum, as stated
@@ -43,8 +43,8 @@ irreducible components. For a curve this is its function field. The generic poin
 using scheme sobriety; components are closed, so `IsIrreducible.genericPoint` is a generic
 point of the component itself, not merely of a larger closure. No reducedness is assumed:
 the factors are local rings, and become fields in the integral case.
-Source: blueprint node `def-sc-function-field`; Stacks Project, Morphisms, Lemma 01RV
-and Definition 01RW (blueprint: def-sc-function-field). -/
+Source:; Stacks Project, Morphisms, Lemma 01RV
+and Definition 01RW. -/
 noncomputable def Scheme.functionFieldOfComponents (X : Scheme.{u}) : CommRingCat.{u} :=
   CommRingCat.of
     (∀ Z : {s : Set X // s ∈ irreducibleComponents X},

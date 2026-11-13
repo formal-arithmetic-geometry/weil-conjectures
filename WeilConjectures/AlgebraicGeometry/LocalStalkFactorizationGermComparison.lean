@@ -15,7 +15,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Germ comparison for an already descended local factorization
 
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`), third paragraph.
+Source: Stacks Project, Modules, Lemma 01CP, third paragraph.
 -/
 
 @[expose] public section
@@ -30,9 +30,8 @@ epimorphism, the descended map induces the prescribed map on all section germs.
 There is no finite presentation or finite free source assumption, and this result
 neither constructs a generator lift nor kills relations nor constructs the descent.
 
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`), third
+Source: Stacks Project, Modules, Lemma 01CP, third
 paragraph, comparing the two finite-coordinate kernels after cokernel descent.
-(blueprint: lem-weil-pbc-local-stalk-factorization-germ-comparison)
 
 Proof: Restricting F first to U, then to V, then to W is canonically isomorphic
 to restricting F to W, with identity maps on the section carriers. The analogous

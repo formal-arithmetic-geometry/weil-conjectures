@@ -188,7 +188,6 @@ private theorem sortingSectionCochain_boundary {X : Scheme.{u}} (M : X.Modules) 
 open Classical in
 /-- The second sorting operator assembles into module-sheaf maps.
 Source: Stacks Project, Tag 01FM, equation 20.23.6.2.
-(blueprint: lem-pc-ordered-cech-module-second-sorting-boundary).
 
 Proof: On an open B of X', identify the full cochains of D with sections on the
 products of the W₀ using e. Apply the explicit first-repeat sum cechSecondSortingHom:

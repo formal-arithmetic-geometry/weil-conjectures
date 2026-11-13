@@ -90,7 +90,6 @@ labels, or abelian presheaf transformation, is part of this conclusion.
 Source: explicit finite-operation refinement of
 `lem-weil-pbc-finite-constant-abelian-neighborhood`, steps 1--2; Stacks Project Tag 03RU
 supplies the finite local constancy definitions.
-(blueprint: lem-weil-pbc-finite-constant-label-subgroup-neighborhood).
 
 Proof: view G over U on the localized etale site. Its finite set chart provides one
 constant label section for every s in S. Form the zero section, each pairwise sum of

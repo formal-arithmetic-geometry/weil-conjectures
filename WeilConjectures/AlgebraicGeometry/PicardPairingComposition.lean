@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.PicardUnitComposition
 /-! # Composition of pulled pairings
 
 Source: Stacks Project, Tag 0095, tensor formula; Tag 0096, adjunction.
-(blueprint: lem-sc-picard-pairing-composition).
 -/
 
 @[expose] public section
@@ -42,7 +41,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Pulling a pairing twice agrees with pulling it along the composite, after the
 specified composition comparison on each argument.
 Source: Stacks Project, Tag 0095, tensor formula; Tag 0096, adjunction.
-(blueprint: lem-sc-picard-pairing-composition)
 
 Proof: Eliminate e, making t definitionally k followed by l and the two
 object-equality comparisons identities. Expand functoriality of tensorPullback k

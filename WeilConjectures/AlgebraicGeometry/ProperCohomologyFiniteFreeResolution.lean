@@ -38,8 +38,7 @@ class. Fullness of the homotopy quotient gives a chain map f. Naturality of the 
 between Q and quotient followed by Qh shows Q(f) is the original derived isomorphism;
 hence f is a quasi-isomorphism. Apply affine sheafification to P and f. This last step
 uses exact tilde, the quasi-coherent counit and preservation of finite free modules.
-No exactness of global sections is needed to establish the termwise upper bound.
-(blueprint: lem-pc-proper-cohomology-finite-free-resolution). -/
+No exactness of global sections is needed to establish the termwise upper bound. -/
 theorem exists_proper_cohomology_finite_free_resolution {T : Scheme.{u}}
     (U : T.Opens) [IsAffine U.toScheme]
     (C : CochainComplex U.toScheme.Modules ℤ) (d : ℕ)

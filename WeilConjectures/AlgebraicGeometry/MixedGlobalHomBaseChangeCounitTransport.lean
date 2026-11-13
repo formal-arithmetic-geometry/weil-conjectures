@@ -15,7 +15,6 @@ import all WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 # Transport of global Hom comparisons across a counit square
 
 Source: Stacks Project, Tag 0AA8, the commutative diagrams in the final part of the proof.
-(blueprint: lem-sc-mixed-global-hom-base-change-counit-transport).
 -/
 
 @[expose] public section
@@ -187,7 +186,6 @@ are used.
 
 Source: Stacks Project, Tag 0AA8, the final commutative diagrams; the comparisons
 are the evaluation mates of Tags 08I3 and 0B6I.
-(blueprint: lem-sc-mixed-global-hom-base-change-counit-transport).
 
 Proof:
 1. Expand the pullback comparison and direct-image comparison as evaluation mates.

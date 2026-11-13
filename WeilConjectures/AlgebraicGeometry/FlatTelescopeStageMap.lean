@@ -17,7 +17,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
 /-! # Flat telescope presentations and stage maps
 
 Source: Stacks Project, Tags 06YS and 06YJ; concrete model morphisms in the
-normalization plan. (blueprint: def-sc-flat-telescope-stage-map).
+normalization plan.
 -/
 
 @[expose] public section
@@ -39,8 +39,6 @@ local instance (Y : Scheme.{u}) :
 /-- A concrete sequential telescope of bounded-above flat complexes.
 The transition cone is constructed explicitly; no existence witness supplies its data.
 Source: Stacks Project, Tag 06YS, telescope construction.
-(blueprint: lem-sc-normalized-flat-telescope-comparison). 
-(blueprint: def-sc-flat-telescope-stage-map)
 -/
 def isFlatTelescope (Y : Scheme.{u})
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) : Prop :=
@@ -55,8 +53,6 @@ def isFlatTelescope (Y : Scheme.{u})
 /-- Homotopy objects represented by flat telescopes or their translates by one.
 This predicate records actual representatives and contains no choice of data.
 Source: Stacks Project, Tag 06YJ.
-(blueprint: lem-sc-normalized-flat-telescope-comparison). 
-(blueprint: def-sc-flat-telescope-stage-map)
 -/
 def flatTelescopeShiftRepresentative (Y : Scheme.{u})
     (X : HomotopyCategory
@@ -67,8 +63,7 @@ def flatTelescopeShiftRepresentative (Y : Scheme.{u})
         ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)⟦(1 : ℤ)⟧ = X)
 
 /-- The endomorphism whose cone is the sequential telescope.
-Source: Stacks Project, Tag 06YS.
-(blueprint: def-sc-flat-telescope-stage-map). -/
+Source: Stacks Project, Tag 06YS. -/
 noncomputable def flatTelescopeDifferential {Y : Scheme.{u}}
     (E : ℕ → CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (t : ∀ n : ℕ, E n ⟶ E (n + 1)) : (∐ E) ⟶ (∐ E) :=
@@ -77,8 +72,7 @@ noncomputable def flatTelescopeDifferential {Y : Scheme.{u}}
 /-- Maps obtained from maps of bounded-flat towers, allowing an integer translate
 and transport along homotopy isomorphisms. The commutative square is a condition
 on the explicitly constructed sum map, not unspecified cone-map data.
-Source: Stacks Project, Tags 06YS and 06YJ; model-map part of the parent plan.
-(blueprint: def-sc-flat-telescope-stage-map). -/
+Source: Stacks Project, Tags 06YS and 06YJ; model-map part of the parent plan. -/
 def flatTelescopeStageMap (Y : Scheme.{u})
     {X X' : HomotopyCategory
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)}

@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.OverlapBaseChangeFormula
 
 /-! # Restricting a stage morphism through a commutative model diagram
 
-Source: Stacks Project, Tags 0095 and 0096; Tag 01ZR (2), first proof.
-(blueprint: lem-pc-overlap-stage-model-restriction). -/
+Source: Stacks Project, Tags 0095 and 0096; Tag 01ZR (2), first proof. -/
 
 @[expose] public section
 universe u
@@ -30,7 +29,6 @@ set_option backward.isDefEq.respectTransparency.types false
 This is transport of an arbitrary tensor compatibility equation, independent of
 a limit module, its component isomorphisms, or a prescribed descent transition.
 Source: Stacks Project, Tags 0095 and 0096; Tag 01ZR (2), first proof.
-(blueprint: lem-pc-overlap-stage-model-restriction).
 
 Proof: Substitute the four comparison equalities. Expand the stage comparison
 and the two direct restriction comparisons.

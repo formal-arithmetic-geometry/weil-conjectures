@@ -18,8 +18,7 @@ import Mathlib.RingTheory.ZariskisMainTheorem
 /-!
 # Integral-closure localization of a finite fibre component
 
-Source: Stacks Project, `more-algebra.tex`, Lemma 09XH;
-blueprint: `lem-weil-pbc-integral-closure-finite-fibre-part-localization`.
+Source: Stacks Project, `more-algebra.tex`, Lemma 09XH.
 -/
 
 @[expose] public section
@@ -66,8 +65,7 @@ private theorem exists_isIso_neighborhood_of_awayMap_bijective
 /-- The finite component of a fibre of a finite-type algebra is obtained from the
 integral closure, and the two algebras agree after inverting one element.
 
-Source: Stacks Project, `more-algebra.tex`, Lemma 09XH;
-(blueprint: lem-weil-pbc-integral-closure-finite-fibre-part-localization).
+Source: Stacks Project, `more-algebra.tex`, Lemma 09XH;.
 Proof:
 1. The finite A/I-algebra C₁ makes A → B quasi-finite at each prime of
    T = Spec C₁, by lem-weil-pbc-integral-closure-finite-fibre-quasi-finite.

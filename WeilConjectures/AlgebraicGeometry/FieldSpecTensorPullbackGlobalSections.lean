@@ -14,7 +14,6 @@ import WeilConjectures.Topology.PointModuleEvaluationEquivalence
 /-! # Global sections of tensor pullback between field spectra
 
 Source: Stacks Project, Tags 01I9 and 009A.
-(blueprint: lem-sc-field-spec-tensor-pullback-global-sections).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry
 
 /-- On field spectra tensor pullback becomes extension of scalars on global sections.
 Source: Stacks Project, Tags 01I9 and 009A.
-(blueprint: lem-sc-field-spec-tensor-pullback-global-sections).
 
 Proof: evaluation is an equivalence on the one-point spectrum of a field. Transporting
 scalars along GammaSpecIso is also an equivalence, so the tilde-global-sections

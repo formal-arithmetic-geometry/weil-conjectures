@@ -16,8 +16,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 /-!
 # Integral local finite presentation and constant models
 
-Source: Hemo--Richarz--Scholbach, Example 3.1 and Theorems 4.13, 6.2 and 6.12
-(auxiliary; not a blueprint node).
+Source: Hemo--Richarz--Scholbach, Example 3.1 and Theorems 4.13, 6.2 and 6.12.
 
 The coefficient ring is the valuation-topology ring of integers in a finite extension of
 `Q_l`.  The two predicates in the equivalence are the canonical general local-finite-
@@ -40,8 +39,7 @@ namespace AlgebraicGeometry.ProEtale
 finite extension `E / Q_l` with its valuation topology. The universe-polymorphic
 continuous-map construction is used because the ring of integers has the same universe as
 the base scheme. Source: Hemo--Richarz--Scholbach, Example 3.1; item statement, "Give `A` its
-valuation topology" [sk-def-sfb-condensed-ring]
-(auxiliary; not a blueprint node). -/
+valuation topology". -/
 noncomputable def integralCondensedRing (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (ℚ_[l]) E]
     [FiniteDimensional (ℚ_[l]) E] :
@@ -50,8 +48,7 @@ noncomputable def integralCondensedRing (l : ℕ) [Fact l.Prime]
     (latticeCoefficientIntegers l E)
 
 /-- The canonical ring-object structure of `A̲`, from the continuous-map condensed ring.
-Source: Hemo--Richarz--Scholbach, Example 3.1 [sk-def-sfb-condensed-ring]
-(auxiliary; not a blueprint node). -/
+Source: Hemo--Richarz--Scholbach, Example 3.1. -/
 noncomputable instance integralCondensedRingMonObj (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (ℚ_[l]) E]
     [FiniteDimensional (ℚ_[l]) E] :
@@ -60,8 +57,7 @@ noncomputable instance integralCondensedRingMonObj (l : ℕ) [Fact l.Prime]
     (latticeCoefficientIntegers l E)
 
 /-- The ring object `A̲` is commutative, since `O_E` is commutative.
-Source: Hemo--Richarz--Scholbach, Example 3.1 [sk-def-sfb-condensed-ring]
-(auxiliary; not a blueprint node). -/
+Source: Hemo--Richarz--Scholbach, Example 3.1. -/
 noncomputable instance integralCondensedRingComm (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (ℚ_[l]) E]
     [FiniteDimensional (ℚ_[l]) E] :
@@ -70,9 +66,7 @@ noncomputable instance integralCondensedRingComm (l : ℕ) [Fact l.Prime]
     (latticeCoefficientIntegers l E)
 
 /-- The integral coefficient ring `B_X = p_X^* A̲` on the small pro-etale site of `X`.
-Source: Hemo--Richarz--Scholbach, Example 3.1; item statement, "put `B_X = p_X^* A̲`"
-[sk-def-sfb-pulled-back-coefficients]
-(auxiliary; not a blueprint node). -/
+Source: Hemo--Richarz--Scholbach, Example 3.1; item statement, "put `B_X = p_X^* A̲`". -/
 noncomputable def integralCoefficientRing (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (ℚ_[l]) E]
     [FiniteDimensional (ℚ_[l]) E] (X : Scheme.{u}) :
@@ -80,8 +74,7 @@ noncomputable def integralCoefficientRing (l : ℕ) [Fact l.Prime]
   AlgebraicGeometry.ProEtale.coefficientRing X (Mon.mk (integralCondensedRing l E))
 
 /-- The ring-object structure of `B_X`, carried by the bundled pulled-back ring object.
-Source: item statement, [sk-def-sfb-pulled-back-coefficients]
-(auxiliary; not a blueprint node). -/
+Source: item statement. -/
 noncomputable instance integralCoefficientRingMonObj (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (ℚ_[l]) E]
     [FiniteDimensional (ℚ_[l]) E] (X : Scheme.{u}) :
@@ -328,8 +321,7 @@ Proof (node steps):
 6. Conversely, a scalar presentation `A^u → A^v → P → 0` gives the presentation
    `B^u → B^v → B ⊗_A P → 0` by the relative-tensor universal property, so (ii) gives (i);
    this direction does not use Noetherianity.
-Torsion, zero matrices, empty strata, and rank-zero presentations are included.
-(auxiliary; not a blueprint node). -/
+Torsion, zero matrices, empty strata, and rank-zero presentations are included. -/
 theorem integralLfpConstantModelComparison
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (ℚ_[l]) E]

@@ -16,9 +16,6 @@ import WeilConjectures.CategoryTheory.LanContinuityFromRepresentables
 
 /-!
 # Sections of the etale to pro-etale comparison inverse image
-
-Source: blueprint, sec-proper-base-change/sk-thm-properbasechange,
-Sections of the comparison inverse image (blueprint: lem-weil-pbc-comparison-sections).
 -/
 
 @[expose] public section
@@ -31,9 +28,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The section cocone induced by a map to the restriction of a pro-etale sheaf.
-Its legs are the given map at a stage followed by restriction to the limit object.
-Source: blueprint, comparison-sections, adjunction paragraph
-(blueprint: lem-weil-pbc-comparison-sections). -/
+Its legs are the given map at a stage followed by restriction to the limit object. -/
 def proEtaleComparisonSectionsCocone {X : Scheme.{u}}
     {A : Type v} [Category.{w} A] {I : Type u} [SmallCategory I]
     (D : I ⥤ X.Etale) (V : X.ProEt)
@@ -60,9 +55,7 @@ def proEtaleComparisonSectionsCocone {X : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 /-- Pulling a section on an etale object back to the terminal object over a basis
 scheme, along a specified map to that object. This is the inverse-image unit followed
-by restriction along the graph into the scheme fibre product.
-Source: blueprint, comparison-sections, scheme inverse-image clause
-(blueprint: lem-weil-pbc-comparison-sections). -/
+by restriction along the graph into the scheme fibre product. -/
 noncomputable def proEtaleBasisPulledBackSection {X : Scheme.{u}}
     {A : Type v} [Category.{w} A] (U : X.AffineProEt) (W : X.Etale)
     (h : (Scheme.AffineProEt.toProEt X).obj U ⟶ (Scheme.toProEt X).obj W)
@@ -433,8 +426,6 @@ The first equality is a natural isomorphism in the sheaf. The second equality sa
 that the canonical unit-and-restriction cocone for every affine etale
 finite-presentation presentation is a colimit, so the identification uses the
 restriction transition maps, rather than an unspecified bijection.
-Source: blueprint, comparison-sections, statement and both proof paragraphs
-(blueprint: lem-weil-pbc-comparison-sections).
 
 Proof:
 1. On an affine basis object put P(F)(U) = Gamma(U_et, F|U), where restriction is
@@ -711,8 +702,6 @@ The first equality is a natural isomorphism in the sheaf. The second equality sa
 that the canonical unit-and-restriction cocone for every affine etale
 finite-presentation presentation is a colimit, so the identification uses the
 restriction transition maps, rather than an unspecified bijection.
-Source: blueprint, comparison-sections, statement and both proof paragraphs
-(blueprint: lem-weil-pbc-comparison-sections).
 
 Proof:
 1. On an affine basis object put P(F)(U) = Gamma(U_et, F|U), where restriction is
@@ -790,7 +779,6 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Full faithfulness of the set-valued comparison, in its unit-normalized form.
 Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.2.
-(auxiliary; not a blueprint node).
 
 Proof: Restrict the unit to the dense affine etale subsite. At every affine etale
 object the Kan-extension unit is invertible because the inclusion is fully faithful,
@@ -881,7 +869,6 @@ private theorem setLanAffineContinuous (X : Scheme.{u})
 /-- The inverse image of an etale sheaf is continuous on affine ind-etale limits.
 Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.2, with the same finite-presentation
 argument for arbitrary affine ind-etale stages.
-(auxiliary; not a blueprint node).
 
 Proof: Before sheafification the inverse image is a Kan extension. An etale
 scheme is locally of finite presentation, so maps to it from a cofiltered limit
@@ -927,7 +914,6 @@ theorem proEtaleComparisonSets_continuous (X : Scheme.{u})
 /-- The comparison counit is invertible for a sheaf continuous on affine ind-etale
 presentations.
 Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.2.
-(auxiliary; not a blueprint node).
 
 Proof: Test on the dense affine ind-etale subsite. Present each basis object by
 an etale cofiltered diagram. Both the sheaf and its comparison inverse image carry

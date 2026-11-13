@@ -23,8 +23,7 @@ import WeilConjectures.AlgebraicGeometry.FormalCompletionMapSurjectiveProper
 
 /-! # Fully faithful completion over a complete proper base
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 0883 (lemma-fully-faithful)
-(blueprint: lem-weil-pbc-formal-completion-fully-faithful-proper).
+Source: Stacks Project, Cohomology of Schemes, Lemma 0883.
 -/
 
 @[expose] public section
@@ -41,22 +40,15 @@ namespace AlgebraicGeometry
 scheme over an adically complete Noetherian ring. The ideal of completion is I O_X:
 transport I to global sections of Spec A, form its ideal sheaf, and extend it along f.
 Noetherianity of X is derived from the proper morphism, not assumed separately.
-Source: Stacks Project, Cohomology of Schemes, Lemma 0883 (lemma-fully-faithful)
-(blueprint: lem-weil-pbc-formal-completion-fully-faithful-proper).
+Source: Stacks Project, Cohomology of Schemes, Lemma 0883.
 
 Proof:
-1. Spec A is Noetherian, and properness makes f finite type, so X is Noetherian
-   (lem-weil-pbc-finite-type-over-noetherian). The extended ideal I O_X is quasi-coherent:
-   pull back the quasi-coherent ideal on Spec A and take its image
-   (lem-weil-pbc-module-pullback-quasi-coherent,
-   lem-weil-pbc-quasi-coherent-module-cokernel-image, def-nagata-extended-ideal).
-2. The internal Hom H = Hom(G,F) is coherent
-   (lem-weil-pbc-coherent-sheaf-hom-coherent), and its global sections are Hom(G,F)
-   (def-pur-sheaf-hom).
-3. Lemma 0882 (lem-weil-pbc-completion-internal-hom) identifies the inverse limit of
+1. Spec A is Noetherian, and properness makes f finite type, so X is Noetherian. The extended ideal I O_X is quasi-coherent:
+   pull back the quasi-coherent ideal on Spec A and take its image.
+2. The internal Hom H = Hom(G,F) is coherent, and its global sections are Hom(G,F).
+3. Lemma 0882 identifies the inverse limit of
    global sections of H/I^n H with morphisms of the completed modules.
-4. Formal functions in degree zero over the complete base
-   (lem-weil-pbc-formal-functions-complete-base) identifies global sections of H with
+4. Formal functions in degree zero over the complete base identifies global sections of H with
    that inverse limit, by reduction modulo I^n.
 5. The composite of these bijections sends u to its compatible family of reductions:
    evaluation of the reduced internal-Hom section is precisely u modulo I^n.

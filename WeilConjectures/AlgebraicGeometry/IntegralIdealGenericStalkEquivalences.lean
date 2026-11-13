@@ -36,7 +36,6 @@ injectivity of restriction maps on an integral scheme. Conversely, for the zero 
 represent any stalk element by a section and shrink to an affine neighborhood. Its image
 belongs to the zero section ideal; sectionwise injectivity makes the restricted section
 zero, so the original germ is zero. Thus a nontrivial stalk excludes the zero ideal.
-(blueprint: lem-weil-pbc-integral-scheme-ideal-generic-stalk-stalk)
 -/
 theorem integral_ideal_nonzero_iff_generic_stalk (X : Scheme.{u}) [IsIntegral X]
     (J : X.IdealSheafData) :

@@ -24,7 +24,6 @@ import WeilConjectures.Topology.Sheaves.CechFlasque
 /-! # An acyclic resolution representing the specified section complex
 
 Source: Stacks Project, Tags 01XB, 01XD, 01FK and 01FM.
-(blueprint: lem-pc-finite-affine-cech-model-acyclic-resolution).
 -/
 
 @[expose] public section
@@ -102,7 +101,6 @@ private theorem affine_open_rightAcyclic {X T : Scheme.{u}} (f : X ⟶ T)
 This assertion concerns complexes and ordinary direct image, without a derived
 localization or a total derived comparison.
 Source: Stacks Project, Tags 01XB, 01XD, 01FK and 01FM.
-(blueprint: lem-pc-finite-affine-cech-model-acyclic-resolution).
 
 Proof: In degree p form the finite product of j_J,*(F restricted to U_J), where J
 runs over the increasing (p+1)-tuples of the cover and U_J is their intersection.

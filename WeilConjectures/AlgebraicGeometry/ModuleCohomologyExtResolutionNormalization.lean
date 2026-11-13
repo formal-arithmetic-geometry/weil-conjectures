@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFo
 /-! # Computing the fixed comparison on arbitrary injective resolutions
 
 Source: Stacks Project, Tags 03FD and 015E.
-(blueprint: new-module-cohomology-ext-resolution-normalization)
 -/
 
 @[expose] public section
@@ -181,7 +180,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The fixed comparison can be computed on any injective module resolution.
 Source: Stacks Project, Tag 015E, naturality of acyclic-resolution comparisons;
 Tag 03FD, acyclicity of forgotten injective modules.
-(blueprint: new-module-cohomology-ext-resolution-normalization)
 
 Proof: Lift the identity from I to the standard module resolution J. Naturality
 of isoRightDerivedObj and of exact forgetting of homology makes the module

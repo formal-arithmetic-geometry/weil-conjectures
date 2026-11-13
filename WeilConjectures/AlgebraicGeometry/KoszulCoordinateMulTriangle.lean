@@ -17,7 +17,6 @@ import Mathlib.Algebra.Homology.HomotopyCategory.Triangulated
 /-! # Multiplication in one Koszul coordinate
 
 Source: Stacks Project, Tags 062C and 09IR.
-(blueprint: lem-pc-koszul-coordinate-mul-triangle).
 -/
 
 @[expose] public section
@@ -43,9 +42,8 @@ private theorem triangle_transport
     (by simp [Category.assoc, ← Functor.map_comp])
 
 /-- Replacing one Koszul generator by a product gives a distinguished triangle.
-Source: Stacks Project, More on Algebra, Tag 062C (lemma-koszul-mult), and
-Derived Categories of Schemes, Tag 09IR (lemma-orthogonal-koszul-complex).
-(blueprint: lem-pc-koszul-coordinate-mul-triangle).
+Source: Stacks Project, More on Algebra, Tag 062C, and
+Derived Categories of Schemes, Tag 09IR.
 
 Proof: Let `P` be the extended Koszul complex on the coordinates other than `i`.
 For each scalar `c`, the coordinate-cone isomorphism identifies the sheafified

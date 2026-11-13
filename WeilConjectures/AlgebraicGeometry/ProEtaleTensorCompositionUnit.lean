@@ -15,8 +15,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 # The explicit pro-etale tensor comparison and its adjunction units
 
 Source: Stacks Project, Modules on Sites, Tag 03D3, lemma-adjoint-push-pull-modules;
-Sites, Tag 03CB, lemma-composition-morphisms-sites; Categories, Tag 0B65
-(auxiliary; not a blueprint node).
+Sites, Tag 03CB, lemma-composition-morphisms-sites; Categories, Tag 0B65.
 
 The generator formulas use the coprojections of the inverse-image colimits, followed by
 sheafification. All test objects and all indexing arrows are quantified. Thus the formulas
@@ -34,12 +33,11 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The local tensor generator `m ⊗ r`, indexed by `p : T ⟶ B_f U`.
+/-- The local tensor generator `m ⊗ r`, indexed by `p: T ⟶ B_f U`.
 The specified module adjunction sends `m` to the sheafification of `m ⊗ 1`;
 restriction along `p`, followed by multiplication by `r`, is the general generator.
 This uses the uniquely tensor-normalized adjunction, not an arbitrary adjunction.
-Source: Stacks, Tag 03D3 and the inverse-image colimit of Sites, Tag 00VC
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03D3 and the inverse-image colimit of Sites, Tag 00VC. -/
 def proEtalePullbackTensorGenerator {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
@@ -54,8 +52,7 @@ def proEtalePullbackTensorGenerator {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- The image of a local scalar in the source coefficient sheaf: apply the ring map
 adjoint to `c`, then restrict along the inverse-image index arrow. Under the canonical
 inverse-image identifications this is `c(a)`.
-Source: Stacks, Tag 03D3 and Sites, Tag 00VC
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03D3 and Sites, Tag 00VC. -/
 def proEtalePullbackTensorScalar {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
@@ -184,7 +181,7 @@ attribute [local irreducible] proEtaleRingModulePullback
 /-- The tensor formulas define inverse natural module maps, preserving the specified
 composite adjunction unit, and uniquely characterized by that unit equation.
 Source: Stacks, Tags 03D3, 03CB and 0B65; the explicit tensor calculation is the agent
-deduction recorded in the blueprint (auxiliary; not a blueprint node).
+deduction recorded in the blueprint.
 
 The equality `hc_hk` only names the prescribed composite coefficient identification.
 `Over.pullbackComp.hom` goes from composite base change to iterated base change;

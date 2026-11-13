@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceSplitReindexing
 
 Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
 SGA 4, Exposé IX, 5.1.
-(blueprint: lem-weil-pbc-finite-etale-trace-split-sum-compatibility)
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry.Etale
 No finiteness assumption on `f` is needed: the two finite splittings are supplied.
 Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
 SGA 4, Exposé IX, 5.1.
-(blueprint: lem-weil-pbc-finite-etale-trace-split-sum-compatibility)
 
 Proof. Pull the two clopen coproducts back along `g₁` and `g₂`. Their pieces still form
 finite clopen coproducts of the common pullback `Z ×[X] Y`, and their projections to `Z`

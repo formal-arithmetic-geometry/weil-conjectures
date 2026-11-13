@@ -18,8 +18,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 # Derived internal Hom from a finite locally free sheaf
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 08DQ, Lemma 20.50.5,
-specialized to a finite locally free module in degree zero
-(blueprint: lem-sc-finite-locally-free-derived-hom).
+specialized to a finite locally free module in degree zero.
 -/
 
 @[expose] public section
@@ -34,20 +33,18 @@ namespace AlgebraicGeometry
 ordinary sheaf Hom in degree zero. In particular its positive cohomology sheaves
 (the higher sheaf Exts) vanish. The finite rank may vary over the open cover.
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 08DQ (the case `K = P[0]`)
-(blueprint: lem-sc-finite-locally-free-derived-hom).
+Source: Stacks Project, Cohomology of Sheaves, Tag 08DQ (the case `K = P[0]`).
 
 Proof:
 1. On a trivializing cover the dual of `P` is finite free. By
    `lem-sc-ext-tensor-exact`, tensoring with this dual is exact, and
-   `lem-sc-ext-evaluation` identifies it naturally with sheaf Hom from `P`
-   (`def-pur-sheaf-hom`). Thus `T = Hom(P,-)` is exact.
+   `lem-sc-ext-evaluation` identifies it naturally with sheaf Hom from `P`. Thus `T = Hom(P,-)` is exact.
 2. By `def-pur-derived-internal-hom`, a K-injective resolution `L[0] → I`
    computes derived Hom as the Hom complex from `P[0]` to `I`, namely `T(I)`.
    Exactness of `T` identifies its degree-`n` cohomology with `T(H^n(I))`:
    this is `Hom(P,L)` for `n = 0` and zero otherwise. In particular all
    positive sheaf Exts vanish. The truncation quasi-isomorphisms identify this
-   complex in `D(O_Y)` (`def-pc-derived-category`) with `Hom(P,L)[0]`. -/
+   complex in `D(O_Y)` with `Hom(P,L)[0]`. -/
 theorem finiteLocallyFree_derivedInternalHom_single
     (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

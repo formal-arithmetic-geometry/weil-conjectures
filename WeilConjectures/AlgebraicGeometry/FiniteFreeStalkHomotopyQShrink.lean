@@ -14,9 +14,6 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-! # Shrinking equality for a single finite free complex
-
-Source: lem-pc-perfect-locus, extension of finite calculations near a point.
-(blueprint: lem-pc-finite-free-stalk-homotopy-q-inside)
 -/
 
 @[expose] public section
@@ -27,11 +24,6 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A stalk homotopy of single-complex maps spreads inside a prescribed neighbourhood.
-
-Source: blueprint sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus,
-proof, extension of the finite calculation to a neighbourhood; the single-complex
-case of lem-pc-finite-free-stalk-homotopy-pair-shrink, steps 1--3.
-(blueprint: lem-pc-finite-free-stalk-homotopy-q-inside).
 
 Proof: The single complex Q has zero differentials, and its restrictions and
 pullbacks still have zero differentials. Thus the equations of the homotopy hQ

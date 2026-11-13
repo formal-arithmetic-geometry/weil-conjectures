@@ -27,8 +27,7 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 namespace AlgebraicGeometry
 
 /-- The additive stalk functor on the localized module site, through the canonical
-module equivalence with the open subscheme. Source: Stacks, Tag 0098.
-(blueprint: lem-sc-localized-homology-stalk-comparison). -/
+module equivalence with the open subscheme. Source: Stacks, Tag 0098. -/
 noncomputable def localizedModuleStalk (S : Scheme.{u}) (U : S.Opens) (s : U.toScheme) :
     SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U) ⥤ AddCommGrpCat.{u} :=
   (Scheme.Modules.overEquiv U).functor ⋙
@@ -62,7 +61,6 @@ private instance schemeStalk_preservesFiniteColimits (S : Scheme.{u}) (s : S) :
 
 /-- Localized stalks are exact, and restriction preserves every derived homology stalk
 naturally in the derived object. Source: Stacks, Tags 01AF, 01AG, and 0098.
-(blueprint: lem-sc-localized-homology-stalk-comparison).
 
 Proof: Forget a module sheaf to its underlying abelian sheaf, then take its stalk.
 The first functor preserves finite limits and colimits; stalks of abelian sheaves

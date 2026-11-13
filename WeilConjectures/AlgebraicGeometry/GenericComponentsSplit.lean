@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.SubsetGeometricIrreducibility
 # Splitting the irreducible components over a field
 
 Source: Stacks Project, Tags 0551 and 054R.
-(blueprint: lem-sbc-generic-components-split)
 -/
 
 @[expose] public section
@@ -46,9 +45,7 @@ every field base change of this subscheme is irreducible and nonempty. The under
 subset of that base change in the base changed ambient scheme is exactly the inverse
 image of C under the first pullback projection. Hence that inverse image is
 irreducible. If the scheme is empty, use the identity extension; there are no
-components and the universal assertion is vacuous.
-
-(blueprint: lem-sbc-generic-components-split) -/
+components and the universal assertion is vacuous. -/
 theorem exists_finite_etale_geometric_component_extension {k : Type u} [Field k]
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k))
     [LocallyOfFiniteType f] [QuasiCompact f] :

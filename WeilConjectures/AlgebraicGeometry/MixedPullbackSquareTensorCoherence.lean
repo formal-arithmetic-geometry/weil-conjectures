@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackCompositionTensorKFlat
 /-! # Tensor coherence of the canonical pullback square
 Source: Stacks Project, cohomology.tex, Tags 079U and 08HY;
 duality.tex, Tag 0AA8, final comparison diagrams.
-(blueprint: lem-sc-mixed-pullback-square-tensor-coherence).
 -/
 
 @[expose] public section
@@ -36,8 +35,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- Canonical square comparison, made from the fixed composition comparisons.
-Source: Stacks Project, Remark 08HY
-(blueprint: lem-sc-mixed-pullback-square-tensor-coherence). -/
+Source: Stacks Project, Remark 08HY. -/
 def mixedPullbackSquareComparison
     {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y) :
     derivedPullback g ⋙ derivedPullback (pullback.snd f g) ≅
@@ -179,7 +177,6 @@ private theorem composition_tensor
 /-- Tensor coherence of the canonical square comparison.
 Source: Stacks Project, cohomology.tex, Lemma 079U and Remark 08HY;
 duality.tex, Tag 0AA8, final comparison diagrams.
-(blueprint: lem-sc-mixed-pullback-square-tensor-coherence).
 
 Proof: choose K-flat representatives of P and Q. Their tensor and successive
 pullbacks are K-flat. The normalization equations identify all four tensorators with

@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 
 Source: Stacks Project, cohomology.tex, Tags 08I3 and 08I4, evaluation-mate construction;
 Tag 06YJ, uniqueness of derived functors with their counits.
-(blueprint: lem-pc-internal-hom-mate-counit-transport).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry
 /-- Simultaneously transporting the pullback adjunction and its tensor comparison
 leaves the internal-Hom evaluation mate unchanged.
 Source: Stacks Project, cohomology.tex, Tags 08I3, 08I4 and 06YJ.
-(blueprint: lem-pc-internal-hom-mate-counit-transport).
 
 Proof: the transported Hom equivalence precomposes with the comparison iso; its
 inverse and its counit precompose with the inverse iso. Naturality of tensor-Hom

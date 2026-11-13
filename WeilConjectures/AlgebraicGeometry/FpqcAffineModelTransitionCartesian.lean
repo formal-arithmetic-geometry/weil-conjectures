@@ -13,8 +13,7 @@ import Mathlib.CategoryTheory.Sites.Hypercover.Subcanonical
 /-!
 # Cartesian transitions between fpqc local models
 
-Source: Stacks Project, Descent, Tags 02W3 and 023Q
-(blueprint: lem-galois-fpqc-affine-model-transition-cartesian).
+Source: Stacks Project, Descent, Tags 02W3 and 023Q.
 
 The canonical restriction square is pasted with the model over the larger open.
 Mathlib's pullback criterion for covers in a subcanonical topology then applies to the
@@ -31,9 +30,8 @@ namespace AlgebraicGeometry
 
 /-- A reconstructed transition between Cartesian local models is Cartesian.
 Source: Stacks Project, Descent, Tag 02W3 (nested affine models), using Tag 02W0.
-(blueprint: lem-galois-fpqc-affine-model-transition-cartesian)
 
-Proof: Put P = W_B times_B U and let k : W_U -> P be induced by t and the
+Proof: Put P = W_B times_B U and let k: W_U -> P be induced by t and the
 structural map to U. The Cartesian squares hp B and the two canonical
 restriction squares X_U -> X_B and V_U -> V_B identify the pullback of P along
 X_U -> U with V_U. The square hp U makes the same identification for W_U.

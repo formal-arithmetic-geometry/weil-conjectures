@@ -25,7 +25,6 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- Internal Hom commutes with open restriction, compatibly with both compositions.
 Source: Stacks Project, Cohomology, Tag 08DL, ordinary internal Hom restriction.
-(blueprint: lem-sc-internal-hom-restrict-scheme)
 
 Proof: First restrict to the over-U site with `overHomObjIso`, which identifies
 local linear maps on its iterated slices. Apply the functor of `overEquiv U` and

@@ -13,7 +13,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Shrinking a finite free local map with zero germ action
 
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`).
+Source: Stacks Project, Modules, Lemma 01CP.
 -/
 
 @[expose] public section
@@ -27,9 +27,8 @@ set_option linter.unusedVariables false in
 /-- A morphism from a restricted finite free sheaf which is zero on all germs
 becomes the zero morphism on a smaller neighborhood.
 
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`),
+Source: Stacks Project, Modules, Lemma 01CP,
 second paragraph applied to the finite free relation sheaf in the third paragraph.
-(blueprint: lem-weil-pbc-finite-free-local-hom-zero)
 
 Proof: Evaluate ψ on each restricted basis section at V. The hypothesis says
 that each of these finitely many image sections has zero germ. The germ equality

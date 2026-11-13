@@ -12,7 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
 /-! # Transition functions between section trivializations
 
 Source: Stacks Project, Modules, Lemma 01CY; Properties, proofs of 01PV and 01PY.
-(blueprint: lem-weil-pbc-nonvanishing-transition-functions)
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ universe u
 open; their transition coefficients multiply to one on the intersection.
 
 Source: Stacks Project, Modules, Lemma 01CY; Properties, proofs of Lemmas 01PV and 01PY.
-(blueprint: lem-weil-pbc-nonvanishing-transition-functions)
 
 Proof: s trivializes M on U and t trivializes M on V by Lemma 01CY. Thus there are
 unique coefficients f in O(U) and g in O(V) with t|U = f*s|U and s|V = g*t|V.

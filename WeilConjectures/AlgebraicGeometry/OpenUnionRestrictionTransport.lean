@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.OpenUnionRestrictionComparisonDiagram
 /-! # Transport the restriction diagram to covering opens of an open union
 
 Source: Stacks Project, Tag 08BW, restriction to the union before applying exactness.
-(blueprint: lem-sc-open-union-restriction-transport).
 -/
 
 @[expose] public section
@@ -153,7 +152,6 @@ isomorphisms, and compatibility of local maps; it does not assert any gluing.
 Source: Stacks Project, Tag 08BW, canonical restriction to the union; Mathlib's
 `Modules.overMapCompOverEquiv`, `overFunctorEquiv`, `restrictFunctorComp` and
 `restrictFunctorCongr` implement the change of open schemes.
-(blueprint: lem-sc-open-union-restriction-transport).
 
 Proof: Put Y = (W union V).toScheme and take U and T to be the inverse images
 of W and V under the open inclusion Y into X. Inverse image preserves union,

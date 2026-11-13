@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 
 Source: Stacks Project, Tags 0983, 098H and 0990, as proved in
 `WeilConjectures.RingTheory.ProEtale.WContractible` and
-`WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible`
-(auxiliary; not a blueprint node).
+`WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible`.
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ on every small pro-etale site to which its structural map belongs.
 
 Source: Stacks Project, Tags 0983, 098H and 0990; the already proved source-library theorems
 `exists_isWContractibleRing` and `Scheme.ProEt.isWeaklyContractible_of_iso`.
-(auxiliary; not a blueprint node).
 
 Proof: choose a faithfully flat ind-etale w-contractible extension D of A in the same
 universe, using exists_isWContractibleRing. Ind-etaleness makes its spectrum map weakly

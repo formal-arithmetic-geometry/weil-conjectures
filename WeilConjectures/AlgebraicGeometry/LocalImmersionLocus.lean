@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.CompatibleImmersionGluing
 /-! # Gluing local immersion loci
 
 Source: Stacks Project, Tag 0BDL, final proof paragraph (gluing characterized loci).
-(blueprint: lem-sc-local-immersion-locus).
 -/
 
 @[expose] public section
@@ -51,7 +50,6 @@ private theorem exists_factor_of_locally_factors {S W T : Scheme.{u}}
 /-- A base-change-stable, source-local predicate represented locally by immersions
 is represented by an immersion over the entire base.
 Source: Stacks Project, Tag 0BDL, final proof paragraph, spelling out the gluing.
-(blueprint: lem-sc-local-immersion-locus).
 
 Proof:
 1. Choose a neighbourhood U_s and its representing immersion for every s.

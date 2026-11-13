@@ -77,7 +77,6 @@ private theorem flatOver_of_cartesian_model
 /-- Two cartesian models of the same base change give equivalent relative-flatness tests.
 Source: Stacks Project, schemes.tex, Tag 01JX; morphisms.tex, Tag 01U4;
 sheaves.tex, Tag 0097.
-(blueprint: lem-pc-pullback-model-flatness-comparison).
 
 Proof: the two cartesian squares give a unique isomorphism e:P -> Q preserving both
 projections. Tensor-pullback composition identifies a^*M with e^*((a')^*M).

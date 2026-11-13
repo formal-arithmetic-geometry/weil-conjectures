@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.CoefficientTorFlatModel
 # Local and global finite Tor dimension on a quasi-compact pro-etale site
 
 Source: Stacks Project, Tags 08FZ and 09C2, the uniform Tor interval in the proof of
-`lemma-describe-constructible-complexes`
-(auxiliary; not a blueprint node).
+`lemma-describe-constructible-complexes`.
 -/
 
 @[expose] public noncomputable section
@@ -31,7 +30,7 @@ namespace CategoryTheory
 
 /-- The recorded exact derived slice restriction at the standard localizations used by
 `HasCoefficientModelTorAmplitude`. Both rings are the actual sectionwise restrictions.
-Source: Stacks Tags 03DH and 08JB (auxiliary; not a blueprint node). -/
+Source: Stacks Tags 03DH and 08JB. -/
 def coefficientModelSliceRestriction {C : Type w} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w}) (V : C) :
     ConstantCompletion.D R ⥤ ConstantCompletion.D (R.over V) :=
@@ -302,11 +301,11 @@ namespace AlgebraicGeometry.Scheme
 object of the small pro-etale site. A covering is expressed by a presieve whose generated
 sieve belongs to the topology; each of its arrows has its own ordered Tor interval.
 The coefficient-sized small model retains all objects and coverings of the recorded site.
-Source: Stacks Tags 08FZ and 09C2 (auxiliary; not a blueprint node).
+Source: Stacks Tags 08FZ and 09C2.
 
 Proof:
-1. Exact module restriction (`lem-pur-site-restriction-module-adjunction-exact`) commutes
-   with cohomology (`lem-weil-pbc-exact-functor-complex-cohomology`). The localization case
+1. Exact module restriction commutes
+   with cohomology. The localization case
    of `lem-weil-pbc-ringed-topoi-derived-tensor-pullback` identifies restricted derived
    tensor with derived tensor of restrictions, for arbitrary unbounded complexes.
 2. A global interval remains an interval against every slice module by
@@ -319,7 +318,7 @@ Proof:
    using `def-weil-pbc-sites-and-cohomology`, to obtain a finite covering of X.
 4. Restrict the selected intervals further along the refinement, again using
    `lem-sf-site-tor-interval-restriction`. Relocalization identifies the iterated restriction
-   with restriction to the refined object (`def-pur-localized-ringed-site`). Take the minimum
+   with restriction to the refined object. Take the minimum
    of the finitely many lower bounds and 0, and the maximum of the upper bounds and 0.
    This gives an ordered common interval and includes the empty-scheme case.
 5. For every global module N and q outside this interval, step 1 identifies the restriction

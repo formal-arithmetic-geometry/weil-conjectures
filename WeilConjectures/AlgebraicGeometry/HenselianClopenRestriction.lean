@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
 # Clopen restriction to a proper henselian closed fibre
 
 Source: Stacks Project, Tags 0A0B (Stein connectedness) and 0CAM (clopen lifting).
-(blueprint: lem-weil-pbc-henselian-clopen-restriction)
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace AlgebraicGeometry
 
 /-- Restriction to the closed fibre is injective and surjective on clopen subsets.
 Source: Stacks Project, Etale Cohomology, Lemma 59.91.1, Tag 0A0B.
-(blueprint: lem-weil-pbc-henselian-clopen-restriction)
 
 Proof: The quotient spectrum morphism is a closed immersion, and so is its base change
 `i`. The pullback range formula identifies its image `Z` with `f⁻¹(V(I))`. Stein

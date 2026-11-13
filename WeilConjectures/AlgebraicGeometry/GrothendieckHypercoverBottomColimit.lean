@@ -881,8 +881,7 @@ private theorem mono_desc_of_kernel_refinements
 
 /-- Finite refinement makes the positive-degree bottom comparison a colimit isomorphism.
 Source: Stacks Project, Hypercoverings, Tag 01H0, first proof; the finite staircase
-argument of blueprint lem-sc-hypercover-bottom-refinement-descent.
-(auxiliary; not a blueprint node).
+argument of.
 
 Proof: use the explicit section bicomplex of an injective resolution and flip
 its indices so that resolution degree is first. The signed total flip is

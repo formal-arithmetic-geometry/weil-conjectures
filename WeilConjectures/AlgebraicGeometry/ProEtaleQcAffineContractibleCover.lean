@@ -14,8 +14,7 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 /-!
 # An affine weakly contractible singleton cover
 
-Source: Stacks Project, proetale.tex, Tag 0F4P, last sentence; sites.tex, Tags 090K, 090L
-(auxiliary; not a blueprint node).
+Source: Stacks Project, proetale.tex, Tag 0F4P, last sentence; sites.tex, Tags 090K, 090L.
 -/
 
 @[expose] public section
@@ -77,8 +76,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Every quasi-compact object has a singleton pro-etale covering by an affine object
 weakly contractible in the full site. Source: Stacks Project, Tag 0F4P, last sentence,
-and Tags 090K (2), 090L
-(auxiliary; not a blueprint node).
+and Tags 090K (2), 090L.
 
 Proof:
 1. Use lem-weil-pbc-proetale-affine-wcontractible-covering-family to cover `T` by
@@ -91,8 +89,7 @@ Proof:
 3. Take the finite disjoint union `V` of this family. By
    lem-weil-pbc-proetale-qcqs-finite-family-geometry it is an affine object of the site.
    The induced map to `T` is weakly etale: flatness is checked on each summand, and
-   the diagonal is flat on equal-summand pieces and empty on distinct-summand pieces
-   (def-weil-weakly-etale-morphism). The same affine-open witnesses establish the
+   the diagonal is flat on equal-summand pieces and empty on distinct-summand pieces. The same affine-open witnesses establish the
    singleton covering criterion of def-weil-pbc-proetale-covering.
 4. The finite-family geometry lemma identifies sheaf evaluation at `V` naturally
    with the product of evaluations at the summands. For any epimorphism of sheaves,

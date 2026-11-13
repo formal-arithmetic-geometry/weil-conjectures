@@ -14,8 +14,7 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Small classes of restrictions of perfect objects
 
-Source: Step 2 of lem-pc-perfect-complexes-compact-set; Stacks Project, Tag 08DR
-(blueprint: lem-perfect-restriction-classes-small).
+Source: Step 2 of lem-pc-perfect-complexes-compact-set; Stacks Project, Tag 08DR.
 -/
 
 @[expose] public section
@@ -114,10 +113,9 @@ private theorem perfect_exactOpenRestriction (Y : Scheme.{u}) (A : Y.Opens)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Smallness on an open bounds the restriction classes of perfect objects on a larger open.
-Source: Step 2 of lem-pc-perfect-complexes-compact-set; Stacks Project, Tag 08DR
-(blueprint: lem-perfect-restriction-classes-small).
+Source: Step 2 of lem-pc-perfect-complexes-compact-set; Stacks Project, Tag 08DR.
 
-Proof: The composite j : (f⁻¹W).toScheme → Y → X is an open immersion.
+Proof: The composite j: (f⁻¹W).toScheme → Y → X is an open immersion.
 Its image is f.opensRange ∩ W = W, using hW. Module sheaves on (f⁻¹W).toScheme
 are equivalent to module sheaves on the localized site of Y at f⁻¹W, via
 Modules.overEquiv. Transport the given derived category across this abelian

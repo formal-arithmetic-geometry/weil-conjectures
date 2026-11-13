@@ -85,8 +85,7 @@ mapped natural isomorphism, and equality induction gives the stated transport.
 No resolution, flatness, boundedness or nonzero-ring hypothesis is used.
 Source: Stacks Project, Tag 0098, and Mathlib restrictStalkNatIso;
 the proved inverse_stalkMap_germ and restriction_stalk_smul argument in
-Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso.
-(blueprint: lem-pc-open-semilinear-input-complex-iso). -/
+Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso. -/
 theorem exists_openSemilinearInputComplexIso (X : Scheme.{u}) (U : X.Opens) (x : U.toScheme) (y : X)
     (hxy : x.val = y)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :

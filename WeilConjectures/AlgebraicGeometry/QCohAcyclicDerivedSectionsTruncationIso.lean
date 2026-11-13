@@ -24,7 +24,6 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 /-! # Affine-open invertibility of the derived sections truncation projection
 
 Source: Stacks Project, Tags 08D4 (3), 08D5 and 01F4 (2).
-(blueprint: new-qcoh-sections-truncation-projection).
 -/
 
 @[expose] public section
@@ -39,7 +38,6 @@ namespace AlgebraicGeometry
 induces an isomorphism on degree-i derived sections for quasi-coherent objects.
 This only compares E with its lower truncation, not with its cohomology sheaf.
 Source: Stacks Project, Tags 08D4 (3), 08D5 and 01F4 (2).
-(blueprint: new-qcoh-sections-truncation-projection).
 
 Proof:
 1. For an affine V in Y, put U = f inverse-image V. Restriction of injective

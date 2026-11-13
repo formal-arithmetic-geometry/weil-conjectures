@@ -14,7 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNat
 /-! # The Ext-to-abelian-sections part of the comparison
 
 Source: Stacks Project, Tags 015E and 03FD.
-(blueprint: new-module-cohomology-ext-sections-factorization)
 -/
 
 @[expose] public section
@@ -55,7 +54,6 @@ set_option maxHeartbeats 800000 in
 /-- The fixed module-to-Ext comparison factors through abelian derived sections.
 Source: Stacks Project, Tags 015E and 03FD; the Ext-to-sections half of the defining
 composite in ModuleCohomologyExtResolutionNaturality.
-(blueprint: new-module-cohomology-ext-sections-factorization)
 
 Proof: Unfold the fixed comparison and its natural isomorphism. Its constructor
 composes the common-resolution section comparison, the inverse site-section

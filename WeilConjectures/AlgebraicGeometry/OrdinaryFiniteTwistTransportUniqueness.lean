@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 
 Source: blueprint vector integration, normalized Tate comparisons; Stacks Project,
 Tags 03PK and 03Q1.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -80,7 +79,6 @@ namespace AlgebraicGeometry.Etale
 transport uniquely, even without a chosen system of identity and composition laws.
 Source: Stacks Project, Tags 03PK and 03Q1; blueprint vector integration, canonical
 coefficient identifications.
-(auxiliary; not a blueprint node).
 
 Proof: cancel the monomorphism from roots of unity to units to identify the roots
 comparisons. For a coefficient comparison, transpose under inverse image/direct image.

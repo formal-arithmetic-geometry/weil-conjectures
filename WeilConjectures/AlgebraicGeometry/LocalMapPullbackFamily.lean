@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackCompariso
 
 /-! # The explicit pulled-back local map family
 
-Source: Stacks Project, Tag 01ZR, first proof, Zariski gluing.
-(blueprint: def-pc-local-map-pullback-family). -/
+Source: Stacks Project, Tag 01ZR, first proof, Zariski gluing. -/
 
 @[expose] public section
 
@@ -23,8 +22,7 @@ namespace AlgebraicGeometry
 The definition is the composite of restriction of κ, the inverse tensor restriction
 comparison, the ordinary pullback of r₀, the forward comparison, and restriction of ρ.
 It chooses no object or map and uses no existence statement.
-Source: Stacks Project, Tag 01ZR, first proof, Zariski gluing.
-(blueprint: def-pc-local-map-pullback-family). -/
+Source: Stacks Project, Tag 01ZR, first proof, Zariski gluing. -/
 noncomputable def localMapPullbackFamily
     {X Y : Scheme.{u}} (q : Y ⟶ X) (U₀ : X.OpenCover.{u})
     (F G : X.Modules) (F' G' : Y.Modules)

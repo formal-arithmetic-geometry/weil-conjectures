@@ -15,10 +15,6 @@ import WeilConjectures.AlgebraicGeometry.PullbackFiniteLocallyConstant
 
 /-!
 # Generic lissity on the source of a finite morphism
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`,
-`lem-weil-pbc-finite-pushforward-generic-constructible`, proof paragraphs 1--3.
-(blueprint: lem-weil-pbc-finite-source-generic-lisse).
 -/
 
 @[expose] public section
@@ -35,15 +31,11 @@ namespace AlgebraicGeometry.Scheme
 is lisse over some dense open of the base.
 This concerns the source sheaf, not its direct image.
 
-Source: smooth purity blueprint, `sk-prop-sf-cbc`,
-`lem-weil-pbc-finite-pushforward-generic-constructible`, proof paragraphs 1--3.
-(blueprint: lem-weil-pbc-finite-source-generic-lisse).
-
 Proof:
-1. A finite morphism is integral and closed (`pqf-lem-finite-integral-lft`), and its
+1. A finite morphism is integral and closed, and its
 source is Noetherian. Replace the source by its reduction using
 `thm-weil-pbc-universal-homeomorphism-invariance`. Its irreducible components are
-finite in number (`lem-weil-pbc-noetherian-finite-components`).
+finite in number.
 2. Remove the closed images of the components not dominating the integral base.
 For each remaining component the points above the generic point are its generic
 point: a finite algebra over the fraction field is Artinian. Use

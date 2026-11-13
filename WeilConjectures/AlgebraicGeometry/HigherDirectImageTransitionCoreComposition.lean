@@ -356,7 +356,6 @@ private meta def congrProofs : Nat → Lean.Expr → Lean.Expr → Lean.MetaM Le
 
 /-- Transitions compose for the canonical pullback coefficients.
 Source: Stacks Tag 09Z1, canonical comparisons; Tag 03Q8.
-(blueprint: lem-sbc-higher-image-transition-core-composition).
 
 Proof: use the derived transition composition identity at F[0], then apply homology.
 The derived identity follows by applying the inverse h'' adjunction hom-set equivalence:

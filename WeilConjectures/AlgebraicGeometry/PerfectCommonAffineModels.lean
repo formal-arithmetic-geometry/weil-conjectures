@@ -11,8 +11,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Common affine models for two perfect objects
 
-Source: Stacks Project, Tag 08CR, affine localization in the second proof
-(blueprint: lem-pc-perfect-common-affine-models).
+Source: Stacks Project, Tag 08CR, affine localization in the second proof.
 -/
 
 @[expose] public section
@@ -69,8 +68,7 @@ private theorem restrict_model (X : Scheme.{u})
         F.mapDerivedCategoryFactors.app K⟩
 
 /-- Two perfect objects have strictly perfect representatives on one affine neighbourhood
-of any specified point. Source: Stacks Project, Tag 08CR, second proof, local reduction
-(blueprint: lem-pc-perfect-common-affine-models).
+of any specified point. Source: Stacks Project, Tag 08CR, second proof, local reduction.
 
 Proof: At the specified point choose the neighbourhoods and strictly perfect complexes
 in the definition of perfectness for E and F. Their intersection is an open neighbourhood.

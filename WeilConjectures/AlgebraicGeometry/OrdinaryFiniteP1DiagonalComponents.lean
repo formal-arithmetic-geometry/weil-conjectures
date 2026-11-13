@@ -17,10 +17,7 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteChernPullback
 
 /-! # The Chern-component formula for the supported diagonal boundary
 
-Canonical constructions: (auxiliary; not a blueprint node).
-
-Source: blueprint lem-amb-p1-diagonal-integrals, standard-chart Cartier calculation;
-lem-sp-tower-p1-arbitrary-base-integrals, steps 2 and 6.
+Canonical constructions:.
 -/
 
 @[expose] public noncomputable section
@@ -56,8 +53,7 @@ attribute [local irreducible] Scheme.finiteEtaleTateLine Scheme.kummerδ₁
   ordinaryFiniteP1Unit ordinaryFiniteP1ChernPushforward
 
 /-- The ordinary supported Ext group, with its category structures recorded once.
-Source: the supported Cartier Kummer class in Stacks 03PL and 0A45.
-(auxiliary; not a blueprint node). -/
+Source: the supported Cartier Kummer class in Stacks 03PL and 0A45. -/
 @[implicit_reducible]
 def ordinaryFiniteSupportedExt (A : Type (u + 1)) [CommRing A]
     {D T : Scheme.{u}} (i : D ⟶ T)
@@ -66,8 +62,7 @@ def ordinaryFiniteSupportedExt (A : Type (u + 1)) [CommRing A]
     (ordinaryFiniteConstant A D)) F 2
 
 /-- The existing supported realization, on the named ordinary degree-zero objects.
-Source: supportedExactDerivedMap for the exact direct image of a closed immersion.
-(auxiliary; not a blueprint node). -/
+Source: supportedExactDerivedMap for the exact direct image of a closed immersion. -/
 @[irreducible]
 def ordinaryFiniteSupportedRealization (A : Type (u + 1)) [CommRing A]
     {D T : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i]
@@ -79,8 +74,7 @@ def ordinaryFiniteSupportedRealization (A : Type (u + 1)) [CommRing A]
     (ordinaryFiniteConstant A D) F κ
 
 /-- The supported arrow after forgetting support, on the named ordinary objects.
-Source: the supported exact realization and canonical constant unit, Stacks 0A45.
-(auxiliary; not a blueprint node). -/
+Source: the supported exact realization and canonical constant unit, Stacks 0A45. -/
 @[irreducible]
 def ordinaryFiniteSupportedArrow (A : Type (u + 1)) [CommRing A]
     {D T : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i]
@@ -92,8 +86,7 @@ def ordinaryFiniteSupportedArrow (A : Type (u + 1)) [CommRing A]
 attribute [local semireducible] ordinaryFiniteSupportedArrow
 
 /-- Factoring the two mapped supported arrows preserves their original composite.
-Source: functoriality of direct image and associativity of composition.
-(auxiliary; not a blueprint node). -/
+Source: functoriality of direct image and associativity of composition. -/
 theorem ordinaryFiniteSupportedArrow_pushforward (A : Type (u + 1)) [CommRing A]
     {D T U : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i] (p : T ⟶ U)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))
@@ -111,9 +104,7 @@ theorem ordinaryFiniteSupportedArrow_pushforward (A : Type (u + 1)) [CommRing A]
       ((ordinaryFinitePushforward A p).map_comp (supportedDerivedUnit A i)
         (ordinaryFiniteSupportedRealization A i F κ)).symm)
 
-/-- The shifted-twist direct image for one of the product projections.
-Source: blueprint finite diagonal check, canonical projection direct image.
-(auxiliary; not a blueprint node). -/
+/-- The shifted-twist direct image for one of the product projections. -/
 @[implicit_reducible]
 def ordinaryFiniteP1DiagonalTarget (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u}) (a : Bool) :
@@ -125,9 +116,7 @@ def ordinaryFiniteP1DiagonalTarget (A : Type (u + 1)) [CommRing A] (N : ℕ)
         (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)))⟦(2 : ℤ)⟧)
 
 /-- Apply the projected supported class to the canonical constant-object unit.
-This is the canonical composite before the trace in the finite diagonal integral.
-Source: blueprint finite diagonal check, supported class and composition unit.
-(auxiliary; not a blueprint node). -/
+This is the canonical composite before the trace in the finite diagonal integral. -/
 @[irreducible]
 def ordinaryFiniteP1DiagonalSupportedMap (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u}) (a : Bool)
@@ -142,8 +131,7 @@ def ordinaryFiniteP1DiagonalSupportedMap (A : Type (u + 1)) [CommRing A] (N : �
           (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N A hA) κ)
 
 /-- The canonical adjunction transport around a commuting composition diagram.
-Source: adjunction-unit pasting in the projective-line diagonal calculation.
-(auxiliary; not a blueprint node). -/
+Source: adjunction-unit pasting in the projective-line diagonal calculation. -/
 @[irreducible]
 def ordinaryFiniteChartTransport (A : Type (u + 1)) [CommRing A]
     {X Y Z : Scheme.{u}} (e : X ⟶ Y) (p : Y ⟶ Z) (r : X ⟶ Z)
@@ -158,9 +146,7 @@ def ordinaryFiniteChartTransport (A : Type (u + 1)) [CommRing A]
     (ordinaryFinitePushforward A r).map v
 
 /-- Direct-image transport from either product projection to the standard P1 projection.
-This is the comparison preceding the trace in arbitraryBaseFiniteP1DiagonalTrace.
-Source: blueprint lem-amb-p1-diagonal-integrals, identification of each projection.
-(auxiliary; not a blueprint node). -/
+This is the comparison preceding the trace in arbitraryBaseFiniteP1DiagonalTrace. -/
 @[irreducible]
 def ordinaryFiniteP1DiagonalChartMap (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
@@ -257,8 +243,6 @@ attribute [local semireducible] ordinaryFiniteSupportedRealization
   ordinaryFiniteP1Unit ordinaryFiniteP1ChernPushforward ordinaryFiniteP1DiagonalSupportedMap
 
 /-- The diagonal component formula with the base hyperplane Chern arrow specified.
-Source: blueprint lem-amb-p1-diagonal-integrals, Chern additivity and adjunct steps.
-(blueprint: lem-amb-p1-diagonal-chern-fixed-base)
 
 Proof: the supported Chern equation identifies the unsupported diagonal class with
 its divisor line. The chart Picard identity factors this line into the relative
@@ -381,9 +365,6 @@ theorem ordinaryFiniteP1_diagonal_kummer_component_formula_fixed (N : ℕ) (hN :
           (ordinaryFiniteUnitPullback A r).hom c)))
 
 /-- The supported diagonal boundary has the base and relative hyperplane components.
-Source: blueprint lem-amb-p1-diagonal-integrals, standard-chart proof;
-lem-sp-tower-p1-arbitrary-base-integrals, steps 2 and 6.
-(blueprint: lem-sp-finite-p1-diagonal-kummer-component-formula)
 
 Proof: the diagonal's regular equations on the four product charts are y-x, x-y,
 1-xy and xy-1. On the chart indexed by i,j the ideal generator is

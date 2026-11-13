@@ -23,7 +23,6 @@ namespace AlgebraicGeometry
 /-- A finite étale cover lifts across a finite order thickening which is a universal
 homeomorphism, with a cartesian comparison map.
 Source: Stacks Project, Tags 039R and 09ZW(8), as used in Tag 0GS2.
-(blueprint: lem-weil-pbc-finite-etale-thickening-lift).
 
 Proof: essential surjectivity of étale base change gives an étale cover upstairs and
 an isomorphism of its pullback with the given cover. Use the inverse isomorphism followed

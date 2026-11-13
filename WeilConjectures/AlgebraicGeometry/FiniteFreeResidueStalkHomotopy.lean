@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMinimalComplex
 
 /-! # The local-ring homotopy normal form of a finite free complex
 
-Source: blueprint lem-pc-perfect-locus, proof step 4; Stacks Project, Tag 00MT.
-(blueprint: lem-pc-finite-free-residue-stalk-homotopy)
+Source:, proof step 4; Stacks Project, Tag 00MT.
 -/
 
 @[expose] public section
@@ -51,8 +50,7 @@ private theorem nonempty_free_iso_of_pullback_rank {S : Scheme.{u}}
 
 /-- Residue cohomology determines the homotopy normal form over the local ring.
 
-Source: blueprint lem-pc-perfect-locus, proof step 4, and Stacks Project, Tag 00MT.
-(blueprint: lem-pc-finite-free-residue-stalk-homotopy).
+Source:, proof step 4, and Stacks Project, Tag 00MT.
 
 Proof: Choose finite bases of the terms. Pullback to Spec of the local ring gives
 quasicoherent finite free terms, hence a bounded finite free complex of modules over

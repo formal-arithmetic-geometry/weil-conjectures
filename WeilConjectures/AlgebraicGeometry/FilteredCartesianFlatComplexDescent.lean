@@ -20,7 +20,6 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 /-! # Flat complex descent from a cartesian model
 
 Source: Stacks Project, Tags 0032, 01ZR, 05LY, 081G and 0CYS.
-(blueprint: lem-pc-filtered-cartesian-flat-complex-descent).
 -/
 
 @[expose] public section
@@ -56,7 +55,6 @@ Proof:
    finite-presentation properties. Compose the comparison with the isomorphism in
    step 2 to recover G on the original X.
 Source: Stacks Project, Tags 0032, 01ZR, 05LY, 081G and 0CYS.
-(blueprint: lem-pc-filtered-cartesian-flat-complex-descent).
 -/
 theorem filtered_cartesian_flat_complex_descent
     {I : Type u} [SmallCategory I] [IsFiltered I]

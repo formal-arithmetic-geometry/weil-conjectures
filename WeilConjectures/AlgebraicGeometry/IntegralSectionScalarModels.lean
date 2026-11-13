@@ -107,7 +107,6 @@ module, extended from the condensed point, to its completed constant realization
 
 Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), the scalar
 comparison in the integral constructibility bridge.
-(auxiliary; not a blueprint node).
 
 Proof: choose a finite presentation of N by free scalar modules. The two realizations
 preserve finite sums and cokernels: constant sheafification, extension of scalars,

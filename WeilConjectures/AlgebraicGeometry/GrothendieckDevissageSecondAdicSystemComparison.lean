@@ -12,8 +12,7 @@ import all WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 
 /-! # Interchanging two ideal-power quotients
 
-Source: Stacks Project, Tag 088A, the quotient by I^n + K^e
-(blueprint: lem-weil-pbc-devissage-second-adic-system-comparison).
+Source: Stacks Project, Tag 088A, the quotient by I^n + K^e.
 -/
 
 @[expose] public section
@@ -80,8 +79,7 @@ private def quotientSwapIso {X : Scheme.{u}} (I K : X.IdealSheafData)
       quotientSwapMap_projection, Category.comp_id]
 
 /-- The canonical quotient interchange, natural in both positive indices.
-Source: Stacks Project, Tag 088A, the quotient by I^n + K^e
-(blueprint: lem-weil-pbc-devissage-second-adic-system-comparison).
+Source: Stacks Project, Tag 088A, the quotient by I^n + K^e.
 
 Proof: a map out of (H/K^e H)/I^n is precisely a map out of H killing both
 K^e H and I^n H, by the two cokernel universal properties. Tensoring by an

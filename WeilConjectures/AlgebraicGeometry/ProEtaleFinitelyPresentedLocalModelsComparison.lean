@@ -28,8 +28,7 @@ namespace ProFiniteModels
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Finite constant models on covering sieves of a fixed-coefficient site.
-Source: Stacks Project, Tag 093U
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 093U. -/
 def fixedModels {C : Type u} [Category.{v} C]
     (J : GrothendieckTopology C) (B : Type (max u v)) [CommRing B]
     (F : Sheaf J (ModuleCat.{max u v} B)) : Prop :=
@@ -131,8 +130,7 @@ private theorem constantComparison_isIso {C : Type u} [Category.{v} C]
     exact Presheaf.isLocallySurjective_of_isLocallySurjective_fac J hf
 
 /-- Finite local constant models are invariant under isomorphism.
-Source: Stacks Project, Tag 093U
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 093U. -/
 theorem fixedModels_of_iso {C : Type u} [Category.{v} C]
     (J : GrothendieckTopology C) (B : Type (max u v)) [CommRing B]
     {F G : Sheaf J (ModuleCat.{max u v} B)} (e : F ≅ G)

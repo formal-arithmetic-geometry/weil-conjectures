@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.FieldPointFactorsThroughClosedImmersion
 # Field-valued points factor through immersions
 
 Source: literature/stacks-project/schemes.tex, Definitions 01IO and 01HK,
-Lemmas 01HI, 0356, and 01L7, and the discussion before Lemma 01J9
-(blueprint: lem-weil-pbc-field-point-factors-through-immersion).
+Lemmas 01HI, 0356, and 01L7, and the discussion before Lemma 01J9.
 -/
 
 @[expose] public section
@@ -40,8 +39,7 @@ by `lem-weil-pbc-field-point-factors-through-closed-immersion`. Uniqueness follo
 universal quantification includes the algebraically closed-field case defining geometric
 points.
 Source: Stacks Project, Schemes, Definitions 01IO and 01HK, Lemmas 01HI, 0356,
-and 01L7, and the discussion before Lemma 01J9
-(blueprint: lem-weil-pbc-field-point-factors-through-immersion). -/
+and 01L7, and the discussion before Lemma 01J9. -/
 theorem fieldPoint_factorsThrough_immersion
     {Z X : Scheme.{u}} (iota : Z ⟶ X) [IsImmersion iota]
     (z : Z) :

@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionLocalization
 /-! # Coherent descent through open restriction
 
 Source: Stacks Project, Tags 08EU and 08FE.
-(blueprint: lem-pc-open-restriction-tensor-counit-descent).
 -/
 
 @[expose] public section
@@ -183,8 +182,7 @@ Combine this counit identity with the tensor naturality square. Their composite 
 the displayed identity between morphisms BEFORE transposing along q. Thus this is
 the tensor/counit step, not an assertion comparing projection mates as arrows.
 No quasi-coherence or invertibility of a projection mate is used. All localization
-counits and K-flat restriction comparisons apply unchanged when the open is empty.
-(blueprint: lem-pc-open-restriction-tensor-counit-descent). -/
+counits and K-flat restriction comparisons apply unchanged when the open is empty. -/
 theorem exists_openRestriction_tensor_counit_descent
     (p : derivedPullback f ⊣ schemeDerivedDirectImage f)
     (t : tensor (schemeDerivedCategory Y) ⋙ derivedPullback f ≅

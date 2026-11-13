@@ -13,8 +13,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # A K-flat representative for tensoring two single complexes
 
-Source: Stacks Project, Cohomology, Tags 06YH and 06YS.
-(blueprint: lem-pc-kflat-single-tensor-representative). -/
+Source: Stacks Project, Cohomology, Tags 06YH and 06YS. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -25,7 +24,6 @@ namespace AlgebraicGeometry
 
 /-- Tensoring a K-flat resolution of A with B in degree zero computes A tensor^L B.
 Source: Stacks Project, Cohomology, Tags 06YH and 06YS.
-(blueprint: lem-pc-kflat-single-tensor-representative).
 
 Proof: pass P to the homotopy category and use the acyclic-tensor characterization
 of categorical K-flatness. The given definition controls V tensor P; symmetry

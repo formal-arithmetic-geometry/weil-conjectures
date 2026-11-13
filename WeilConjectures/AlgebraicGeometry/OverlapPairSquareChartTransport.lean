@@ -11,8 +11,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.IsPrestack
 
 /-! # Transport of pair squares through chart refinements
 
-Source: Stacks Project, Tag 01ZR, first proof; Mathlib pullHom composition.
-(blueprint: lem-pc-overlap-pair-square-chart-transport). -/
+Source: Stacks Project, Tag 01ZR, first proof; Mathlib pullHom composition. -/
 
 @[expose] public section
 
@@ -443,7 +442,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Transport a pair square along a diagram of cover charts, using specified chart isomorphisms.
 Source: Stacks Project, Tag 01ZR, first proof, successive restriction; Mathlib
 Sites/Descent/IsPrestack.lean, pullHom_pullHom.
-(blueprint: lem-pc-overlap-pair-square-chart-transport).
 
 Proof: Write K for the map from the later stage overlap to the earlier stage overlap,
 constructed by pullback.lift from fst followed by ρ a and snd followed by ρ b. Write L

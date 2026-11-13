@@ -28,7 +28,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 image of any locally linear usual Čech presentation. No cover, affine, flatness or
 quasi-coherence hypothesis is needed.
 Source: Stacks Project, Tags 01FJ, 01FK and 01FM, the two sorting homotopies.
-(blueprint: lem-pc-ordered-cech-module-comparison).
 
 Proof: On an open B of T', evaluate the usual presentation on f' inverse image B.
 Use e to identify the cochains with all tuples and a to identify the other complex
@@ -40,7 +39,7 @@ ordered composite is the identity. For the other composite, stably sort the entr
 an output p-tuple by a
 permutation sigma. Let sigma_a list its first a sorted positions and then the remaining
 positions in their original order. The first homotopy evaluates a (p+1)-cochain on
-sigma(0), ..., sigma(a), sigma_a(a), ..., sigma_a(p), summed over a with coefficient
+sigma(0), .., sigma(a), sigma_a(a), .., sigma_a(p), summed over a with coefficient
 (-1)^a sign(sigma_a), using the unique isomorphisms between equal intersections.
 In dh + hd, deleting an entry away from the junction pairs with the same deletion
 in the adjacent summand, with opposite sign. The endpoint terms give identity minus

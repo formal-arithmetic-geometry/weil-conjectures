@@ -30,7 +30,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- On a scheme with weakly contractible final object, the explicit ordinary reductions
 of a bounded-above finite-free scalar complex are K-projective.
 Source: Stacks Tags 064B and 09C5.
-(blueprint: lem-pe-internal-perfect-ordinary-kprojective).
 
 Proof: exact final-object evaluation makes the sheafified constant integers projective.
 Its canonical tensor-unit isomorphism makes the abelian tensor unit projective, hence

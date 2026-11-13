@@ -237,10 +237,9 @@ end Geometry
 /-- Local primitives after refinement jointly detect a morphism from the source.
 Source: Stacks Project, Hypercoverings, Tag 01H0, first proof, local killing of
 vertical cohomology classes; finite split refinement construction.
-(auxiliary; not a blueprint node).
 
 Proof: evaluation preserves kernels, so x factors through the sections of
-K = ker(S.g). Exactness makes the canonical map p : S.X₁ → K epic. The terms of
+K = ker(S.g). Exactness makes the canonical map p: S.X₁ → K epic. The terms of
 U are qcqs: each nondegenerate summand is a finite coproduct of the qcqs pieces
 in finite_each_degree, and the split decomposition is a finite coproduct of
 these summands. Apply eq_zero_of_locally_liftable_maps to p at the degree-n term.

@@ -28,7 +28,6 @@ zero-locus description of support says membership there is equivalent to the sec
 being zero. Negating gives the forward direction on every nonempty affine open. For the
 reverse direction choose an affine neighborhood of the generic point; its nonzero section
 ideal excludes the generic point from the support and hence excludes the zero ideal.
-(blueprint: lem-weil-pbc-integral-scheme-ideal-generic-stalk-affine)
 -/
 theorem integral_ideal_nonzero_iff_affine_sections (X : Scheme.{u}) [IsIntegral X]
     (J : X.IdealSheafData) :

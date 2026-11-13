@@ -12,9 +12,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 
 /-! # Openness of the finite free residue locus
-
-Source: blueprint lem-pc-perfect-locus, proof steps 1--3.
-(blueprint: lem-pc-finite-free-residue-locus-open)
 -/
 
 @[expose] public section
@@ -47,18 +44,15 @@ private theorem exists_residue_rank_le {Y : Scheme.{u}}
 /-- The points where a bounded nonnegative finite free complex has residue cohomology
 concentrated in degree i with rank r form an open set.
 
-Source: blueprint lem-pc-perfect-locus, proof steps 1--3.
-(blueprint: lem-pc-finite-free-residue-locus-open).
-
 Proof: choose bases of the finite free terms. At a field-valued point write β(q) for
 cohomology dimension and ρ(q) for the rank of the outgoing differential. Rank-nullity
 gives β(q) + ρ(q) + ρ(q-1) = rank(P.X q). A maximal nonzero minor of each differential
 remains nonzero on a basic open, so differential ranks cannot decrease nearby. This
 also gives the existing upper-semicontinuity bound for β(q).
 At a point of the indicated locus choose the finitely many upper-semicontinuity
-neighbourhoods for q = 0,...,d; outside this interval the terms and homology vanish.
+neighbourhoods for q = 0..,d; outside this interval the terms and homology vanish.
 Thus cohomology outside i stays zero on their intersection. Also choose basic opens
-on which the four differential ranks in degrees i-2,...,i+1 cannot decrease.
+on which the four differential ranks in degrees i-2..,i+1 cannot decrease.
 The displayed rank-nullity identities in degrees i-1 and i+1, whose original β is
 zero, force each of their differential ranks to remain equal to its original value.
 The identity in degree i now forces β(i) to remain r. Finite-dimensional modules on

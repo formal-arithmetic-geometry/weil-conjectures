@@ -17,7 +17,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensio
 /-! # Lifting a derived stalk morphism to a chain map between local perfect models
 
 Source: Stacks Project, Tags 09RE (affine case), 0BC7 (2), 00CR, and 06Z0.
-(blueprint: lem-sc-perfect-stalk-derived-hom-lift).
 -/
 
 @[expose] public section
@@ -119,7 +118,6 @@ the derived image of that chain map with the original morphism. No invertibility
 original morphism or the lifted map is asserted.
 
 Source: Stacks Project, Tags 09RE (affine case), 0BC7 (2), 00CR, and 06Z0.
-(blueprint: lem-sc-perfect-stalk-derived-hom-lift).
 
 Proof: On an affine neighbourhood of x in U, the finite-free retract terms of P and Q are
 quasi-coherent and

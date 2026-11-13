@@ -53,7 +53,6 @@ factor, provided that factor's direct image is finite locally free. No rank comp
 between the first factor and its direct image is needed.
 
 Source: Stacks Project, Tag 0BDP, final paragraph, lifting the coordinate dual basis.
-(blueprint: lem-sc-picard-perfect-pairing-split-counit)
 
 Proof: A perfect pairing between p_*M and p_*D makes p_*D the dual of p_*M, since
 p_*M is finite locally free. Pulling this exact pairing back gives an exact pairing

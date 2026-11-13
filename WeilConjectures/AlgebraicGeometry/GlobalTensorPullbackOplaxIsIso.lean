@@ -41,7 +41,6 @@ local instance globalPullbackOplaxClosed :
 /-- The mate isomorphisms coincide with the explicit oplax structure transported
 from the adjunction.
 Source: Mathlib.CategoryTheory.Monoidal.Functor, Adjunction.leftAdjointOplaxMonoidal.
-(blueprint: lem-sc-global-tensor-pullback-oplax-isiso)
 Proof: unfold the transported oplax unit and tensor maps, rewrite them using
 the prescribed concrete lax unit and tensor maps, and apply the isomorphism
 assertions for the corresponding adjunction mates. -/

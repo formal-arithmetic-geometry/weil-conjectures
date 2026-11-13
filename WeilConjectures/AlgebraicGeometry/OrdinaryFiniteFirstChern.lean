@@ -31,8 +31,7 @@ attribute [local irreducible] Scheme.finiteEtaleTateLine Scheme.kummerδ₁
   ordinaryFiniteRootMap Sheaf.H.map Scheme.Pic.toCohomologicalPicardGroup Scheme.Pic.map
 
 /-- The existing class bijection, on the recorded degree-zero objects.
-Source: ordinaryFiniteClass_bijective_arbitraryBase
-(auxiliary; not a blueprint node). -/
+Source: ordinaryFiniteClass_bijective_arbitraryBase. -/
 @[irreducible]
 def ordinaryFiniteClassEquiv (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (n : ℕ) :=
@@ -43,8 +42,7 @@ section
 attribute [local semireducible] ordinaryFiniteClassEquiv
 
 /-- The bundled bijection is the existing realization.
-Source: the definition of Equiv.ofBijective
-(auxiliary; not a blueprint node). -/
+Source: the definition of Equiv.ofBijective. -/
 theorem ordinaryFiniteClassEquiv_apply (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (n : ℕ)
     (c : ordinaryFiniteUnit A T ⟶ (ordinaryFiniteDegreeZero A T F)⟦(n : ℤ)⟧) :
@@ -55,8 +53,7 @@ end
 
 /-- The unique derived arrow realizing the scalar Kummer class of a line bundle.
 The inverse bijection fixes the arrow uniquely, rather than choosing an arbitrary witness.
-Source: Stacks 03PL, 03FD and ordinaryFiniteClass_bijective_arbitraryBase.
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03PL, 03FD and ordinaryFiniteClass_bijective_arbitraryBase. -/
 @[irreducible]
 def ordinaryFiniteFirstChern (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))) (M : T.Pic) :
@@ -66,7 +63,7 @@ def ordinaryFiniteFirstChern (A : Type (u + 1)) [CommRing A] (N : ℕ)
       (T.kummerδ₁ N hT (Scheme.Pic.toCohomologicalPicardGroup T M)))
 
 /-- The class of the canonical derived Chern arrow is its defining Kummer class.
-Source: inverse-bijection cancellation (auxiliary; not a blueprint node). -/
+Source: inverse-bijection cancellation. -/
 theorem ordinaryFiniteFirstChern_class (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))) (M : T.Pic) :
     ordinaryFiniteClass A T (Scheme.finiteEtaleTateLine T N A hA) 2
@@ -80,8 +77,7 @@ theorem ordinaryFiniteFirstChern_class (A : Type (u + 1)) [CommRing A] (N : ℕ)
         (Scheme.finiteEtaleTateLine T N A hA) 2).apply_symm_apply _)
 
 /-- A specified Kummer realization equals the canonical derived Chern arrow.
-Source: injectivity of the class bijection
-(auxiliary; not a blueprint node). -/
+Source: injectivity of the class bijection. -/
 theorem ordinaryFiniteFirstChern_unique (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))) (M : T.Pic)
     (c : ordinaryFiniteUnit A T ⟶ (ordinaryFiniteLine A N hA T)⟦(2 : ℤ)⟧)
@@ -107,8 +103,7 @@ private theorem finiteClassCore_add {C : Type*} {D : Type*}
     Ext.homAddEquiv.symm.map_add x y, Ext.mapExactFunctor_add, Ext.comp_add]
 
 /-- Tensor products of line bundles give sums of canonical derived Chern arrows.
-Source: additivity of the Kummer connecting map and of the Ext realization
-(auxiliary; not a blueprint node). -/
+Source: additivity of the Kummer connecting map and of the Ext realization. -/
 theorem ordinaryFiniteFirstChern_mul (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))) (M L : T.Pic) :
     ordinaryFiniteFirstChern A N hA T hT (M * L) =
@@ -127,8 +122,7 @@ theorem ordinaryFiniteFirstChern_mul (A : Type (u + 1)) [CommRing A] (N : ℕ)
     map_add, map_add]
 
 /-- Canonical derived Chern arrows commute with the normalized pullback comparison.
-Source: naturality of scalar Kummer realization and uniqueness of the class
-(auxiliary; not a blueprint node). -/
+Source: naturality of scalar Kummer realization and uniqueness of the class. -/
 theorem ordinaryFiniteFirstChern_pullback (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     {X Y : Scheme.{u}} (f : X ⟶ Y)

@@ -12,7 +12,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 
 /-! # Universal rank matching for Picard direct images
 
-Source: Stacks Project, Tag 0BDP (blueprint: def-sc-picard-universal-rank-match).
+Source: Stacks Project, Tag 0BDP.
 -/
 
 @[expose] public section
@@ -25,8 +25,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Universal local equality of the ranks of a module and its two ordinary direct images.
 This is only the rank clause; it asserts no invertibility of canonical base-change maps.
-Source: Stacks Project, Tag 0BDP, first three proof paragraphs.
-(blueprint: def-sc-picard-universal-rank-match) -/
+Source: Stacks Project, Tag 0BDP, first three proof paragraphs. -/
 def PicardUniversalRankMatch {X S T : Scheme.{u}} (f : X ⟶ S)
     (E : X.Modules) (g : T ⟶ S) : Prop :=
   ∀ {T' : Scheme.{u}} (h : T' ⟶ T) (t : T'),

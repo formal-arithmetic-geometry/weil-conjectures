@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteSurjectiveSetDescent
 /-! # Equality of projection pullbacks after restriction to the closed fibre
 
 Source: Stacks Project, Tag 09ZF, proof of lemma-gabber-h0, third paragraph
-and fourth paragraph's parenthetical comparison on Z' times_Z Z'
-(blueprint: lem-weil-pbc-gabber-h0-projection-restrictions).
+and fourth paragraph's parenthetical comparison on Z' times_Z Z'.
 -/
 
 @[expose] public section
@@ -237,13 +236,12 @@ private theorem restricted_comparisons {X B Y D : Scheme.{u}}
 set_option backward.defeqAttrib.useBackward true in
 /-- A compatible section has equal projection pullbacks after restriction.
 Source: Stacks Project, Tag 09ZF, proof of lemma-gabber-h0, third paragraph
-and fourth paragraph: "this is true for the pullbacks of t'"
-(blueprint: lem-weil-pbc-gabber-h0-projection-restrictions).
+and fourth paragraph: "this is true for the pullbacks of t'".
 
 Proof:
 Put Y = X' times_X X', a = p_1 followed by h = p_2 followed by h,
-and D = Z times_X Y with j : D to Y. Put Z' = Z times_X X' and k : Z' to X'.
-For each projection p_r : Y to X', the pullback property gives q_r : D to Z'
+and D = Z times_X Y with j: D to Y. Put Z' = Z times_X X' and k: Z' to X'.
+For each projection p_r: Y to X', the pullback property gives q_r: D to Z'
 with q_r followed by k = j followed by p_r and q_r followed by (Z' to Z)
 equal to the projection D to Z. Apply the unit along q_r to hres. Naturality
 in the sheaf and the unit-compatible composition isomorphisms identify its

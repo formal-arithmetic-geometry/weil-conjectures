@@ -12,8 +12,7 @@ import Mathlib.CategoryTheory.Linear.LinearFunctor
 
 /-! # Hom complex comparison with specified product projections
 
-Source: Stacks Project, Tags 0A8X and 08DL, Hom complexes and their differential.
-(blueprint: lem-pc-hom-complex-over-equiv-projections). -/
+Source: Stacks Project, Tags 0A8X and 08DL, Hom complexes and their differential. -/
 
 @[expose] public section
 
@@ -280,7 +279,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Assemble any natural termwise internal-Hom comparison through the specified
 product projections, retaining both the differential and naturality in the target.
 Source: Stacks Project, Tags 0A8X and 08DL.
-(blueprint: lem-pc-hom-complex-over-equiv-projections).
 
 Proof: the equivalence preserves each product fan. Postcompose its projections
 with the given termwise isomorphisms and use uniqueness of product objects to

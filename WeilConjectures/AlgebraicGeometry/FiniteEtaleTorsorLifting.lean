@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleTorsorUnitActionUnique
 # Finite étale equivalences and transport of torsors
 
 Source: Stacks Project Tag 0A5G, final paragraph, and Tag 03RV.
-(blueprint: lem-weil-pbc-finite-etale-torsor-lifting)
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- Every inverse-image-coefficient torsor lifts under a finite étale equivalence.
 Source: Stacks Project Tag 0A5G, final paragraph, using Tags 03RV and 03Q1.
-(blueprint: lem-weil-pbc-finite-etale-torsor-lifting)
 
 Proof: Identify the inverse image of the constant abelian sheaf M with the constant
 sheaf M on Y₀. Tag 03RV represents a torsor R by a finite étale surjective scheme W.

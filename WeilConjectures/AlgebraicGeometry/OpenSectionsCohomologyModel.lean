@@ -30,14 +30,12 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The canonical abelian structure on ringed-space modules, cached for elaboration.
-This is an abbreviation of Mathlib's sheaf-module abelian instance.
-(blueprint: lem-sc-open-sections-cohomology-model-comparison). -/
+This is an abbreviation of Mathlib's sheaf-module abelian instance. -/
 abbrev openComparisonModuleAbelian (X : RingedSpace.{u}) :
     Abelian (SheafOfModules.{u} (moduleRings X)) := inferInstance
 
 /-- The canonical abelian structure on over-site modules, cached for elaboration.
-This is an abbreviation of Mathlib's sheaf-module abelian instance.
-(blueprint: lem-sc-open-sections-cohomology-model-comparison). -/
+This is an abbreviation of Mathlib's sheaf-module abelian instance. -/
 abbrev openComparisonOverModuleAbelian (X : RingedSpace.{u})
     (V : TopologicalSpace.Opens X) :
     Abelian (SheafOfModules.{u} ((moduleRings X).over V)) := inferInstance
@@ -258,7 +256,6 @@ set_option linter.style.haveILetI false in
 -- The normalized comparison checks several concrete functor identifications.
 /-- The open-sections comparison is normalized on every ordinary complex class.
 Source: Stacks Project, Tags 08BS and 079V.
-(blueprint: lem-sc-open-sections-cohomology-model-comparison).
 
 Proof: Let T be restriction through the over-equivalence. Extension by zero is an exact
 left adjoint of over-restriction, so the adjunction criterion for preservation of

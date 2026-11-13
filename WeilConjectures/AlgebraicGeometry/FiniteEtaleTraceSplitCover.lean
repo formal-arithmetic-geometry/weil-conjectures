@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
 # The presieve of finite étale splittings covers
 
 Source: Stacks Project, Lemma 04HN, and Section 03SH after Definition 03SE.
-(blueprint: lem-weil-pbc-finite-etale-trace-split-cover)
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ namespace AlgebraicGeometry.Etale
 `W ×[X] Y → W`, and identify its further pullback with `T ×[X] Y` using pullback pasting.
 The inverses of the piece projections supply the splitting data. The resulting arrows cover
 all points of `W`; the sieve criterion then gives the covering. The empty base is covered
-vacuously. Source: Stacks Project, Lemma 04HN, and Section 03SH after Definition 03SE.
-(blueprint: lem-weil-pbc-finite-etale-trace-split-cover) -/
+vacuously. Source: Stacks Project, Lemma 04HN, and Section 03SH after Definition 03SE. -/
 theorem finiteEtaleTrace_split_cover {X Y : Scheme.{u}} (f : Y ⟶ X)
     (hfin : IsFinite f) (hf : Etale f) (W : X.Etale) :
     Sieve.generate (finiteEtaleTraceSplitPresieve f W) ∈ X.smallEtaleTopology W := by

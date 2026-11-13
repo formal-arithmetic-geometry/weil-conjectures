@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 /-! # A lift at one stage on one affine chart
 
 Source: Stacks Project, Limits Tag 01ZR, affine case, and Algebra Tag 05N7 (2).
-(blueprint: lem-pc-fp-one-chart-map-lift-at-stage).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- A restricted limit morphism lifts at one stage of the affine chart system.
 Source: Stacks Project, Tag 01ZR, first proof; Tag 05N7 (2).
-(blueprint: lem-pc-fp-one-chart-map-lift-at-stage).
 
 Proof: Restrict the inverse system to the upper tail of j, and pass to its
 partial-order quotient. Pull back the selected affine chart along each transition

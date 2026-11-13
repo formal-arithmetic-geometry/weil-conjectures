@@ -28,7 +28,6 @@ attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 
 /-- The section formula for one augmented resolution lift.
 Source: Stacks, Cohomology, Tags 02N7, 01FB, 01E4, 01EZ.
-(blueprint: lem-weil-pbc-flat-base-change-resolution-sections).
 
 Proof: Restrict t to U = f⁻¹V and use the augmentation-preserving comparisons
  in D to obtain a map of the source resolution into the direct image of the

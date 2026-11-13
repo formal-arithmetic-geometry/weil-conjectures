@@ -20,9 +20,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Combine a base-change composition comparison and a restriction comparison.
-This is an explicit composite of supplied isomorphisms, with functor associators.
-Source: the canonical comparison construction in lem-pc-open-cover-map-lift-transport.
-(blueprint: def-pc-module-recovery-comparison-iso). -/
+This is an explicit composite of supplied isomorphisms, with functor associators. -/
 def moduleRecoveryComparisonIso
     {C E D K V : Type*}
     [Category* C] [Category* E] [Category* D] [Category* K] [Category* V]

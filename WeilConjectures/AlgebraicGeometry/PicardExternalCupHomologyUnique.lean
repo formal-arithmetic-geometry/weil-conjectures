@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.TensorKunnethNat
 /-! # Uniqueness of normalized external cup on total homology
 
 Source: Stacks Project, Varieties, Tag 0BED, equation-kunneth-on-cech.
-(blueprint: lem-sc-picard-external-cup-homology-unique).
 -/
 
 @[expose] public section
@@ -23,8 +22,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
 /-- Normalize a family of homology maps on the external tensor cycles.
-Source: Stacks, Tag 0BED
-(blueprint: lem-sc-picard-external-cup-homology-unique). -/
+Source: Stacks, Tag 0BED. -/
 def IsPicardExternalCupHomology
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules)
@@ -56,7 +54,6 @@ def IsPicardExternalCupHomology
 
 /-- Normalization determines the map on all total homology classes.
 Source: Stacks, Tag 0BED, equation-kunneth-on-cech.
-(blueprint: lem-sc-picard-external-cup-homology-unique).
 
 Proof: Tensor Kunneth expresses natural-degree total homology as the direct sum
 of the tensors of factor homologies. Lift each factor class through its surjective

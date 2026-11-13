@@ -15,8 +15,7 @@ public import WeilConjectures.RingTheory.CurveBranches
 For a reduced one-dimensional strictly henselian excellent local ring `R`, the punctured spectrum
 `Spec R ∖ {𝔪}` is the finite disjoint union `∐ₐ Spec Frac(B(R)ₐ)` of the spectra of the fraction
 fields of the branches `B(R)ₐ` (`IsLocalRing.branch`), which are excellent strictly henselian
-discrete valuation rings with the residue field of `R` (blueprint
-`lem-exc-punctured-curve-branches`).
+discrete valuation rings with the residue field of `R`.
 -/
 
 @[expose] public section
@@ -74,7 +73,7 @@ lemma ι_puncturedSpectrumIsoOfIsLocalization_inv [IsLocalRing R] {f : R}
   ext r
   simp [AlgEquiv.commutes]
 
-/-- Blueprint `lem-exc-punctured-curve-branches`: The punctured strictly local curve has DVR
+/-- The punctured strictly local curve has DVR
 branches.
 
 Let `R` be a reduced excellent one-dimensional local ring which is henselian with algebraically

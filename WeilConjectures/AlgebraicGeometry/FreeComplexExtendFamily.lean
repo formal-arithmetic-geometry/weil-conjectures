@@ -14,7 +14,6 @@ import Mathlib.Algebra.Category.ModuleCat.Abelian
 
 /-! Recursive extension of a comparison map along an exact resolution.
 Source: literature/stacks-project/algebra.tex, Tag 00LS.
-(blueprint: lem-weil-pbc-free-complex-extend-family).
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ open CategoryTheory
 /-- Given the degree-zero lift, projectivity and exactness recursively produce
 all higher components of the chain map.  The theorem packages the dependent
 infinite recursion from Tag 00LS into one strictly lower intermediate claim.
-Source: Algebra, Tag 00LS, proof of lemma-compare-resolutions (1), lines 17527--17535.
-(blueprint: lem-weil-pbc-free-complex-extend-family). -/
+Source: Algebra, Tag 00LS, proof of lemma-compare-resolutions (1), lines 17527--17535. -/
 theorem free_complex_extend_family
     (R : Type u) [CommRing R]
     (N : ModuleCat R) (N' : ℕ → ModuleCat R)

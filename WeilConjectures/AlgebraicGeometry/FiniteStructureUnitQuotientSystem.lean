@@ -22,8 +22,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteStructureSupportedUnitKernel
 
 /-! # Factor reduced units through a proper supporting quotient
 
-Source: Stacks Project, Tag 09ZT
-(blueprint: lem-weil-pbc-finite-structure-unit-quotient-system).
+Source: Stacks Project, Tag 09ZT.
 -/
 
 @[expose] public section
@@ -290,8 +289,7 @@ both sides agree after the epimorphic pullback of q. The section formula follows
 by the canonical adjunction unit, which sends r to 1 tensor r, and pushforward
 composition. No completion, multiplication on G, or lifted map is used here.
 For G=0 the scheme-theoretic support and Q are zero; for I=0 the same quotient
-factorization applies unchanged; on an empty scheme the equations are unique.
-(blueprint: lem-weil-pbc-finite-structure-unit-quotient-system). -/
+factorization applies unchanged; on an empty scheme the equations are unique. -/
 theorem finite_structure_unit_quotient_system
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A]

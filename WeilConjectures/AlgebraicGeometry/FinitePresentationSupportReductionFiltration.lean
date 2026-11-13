@@ -24,7 +24,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 /-! # A filtration with unresolved factors of smaller support
 
 Source: Stacks Project, Tag 01YF, proof before applying support minimality.
-(blueprint: lem-pc-s3-support-reduction-filtration)
 -/
 
 @[expose] public section
@@ -53,7 +52,6 @@ This does not assert integral-ideal filtrations for those factors.
 
 Source: Stacks Project, Tag 01YF (`coherent.tex`, `lemma-coherent-filter`), proof,
 reducible support, the J-adic filtration, and the generic ideal inclusion of Tag 01YE.
-(blueprint: lem-pc-s3-support-reduction-filtration)
 
 Proof: Finite presentation on a Noetherian scheme gives coherence and closed support.
 Prove the stronger coherent integral-ideal filtration assertion by well-founded induction

@@ -46,8 +46,7 @@ composite is the factorization obtained by repeating this rule, so their actions
 last simplex is nondegenerate, the only extra case is two proper faces, already checked by the
 matching equations. This verifies the simplicial identities that Stacks 0DAV leaves implicit.
 Repeating for every $n$ gives a hypercover finite in each degree as defined in (def-weil-pbc-
-finite-split-hypercover).
-(auxiliary; not a blueprint node) -/
+finite-split-hypercover). -/
 theorem exists_finite_split_hypercover (X : Scheme.{u}) [CompactSpace X]
     [QuasiSeparatedSpace X] : Nonempty (FiniteSplitEtaleHypercover X) := by
   let E : X.Etale := Scheme.Etale.mk (𝟙 X)

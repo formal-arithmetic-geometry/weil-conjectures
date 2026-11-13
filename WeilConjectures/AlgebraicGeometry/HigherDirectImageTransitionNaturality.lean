@@ -62,7 +62,6 @@ private lemma coefficient_transition_naturality
 
 /-- The transition is natural in its coefficient sheaf.
 Source: Stacks Tag 09Z1, canonical comparison maps; Tag 03Q8.
-(blueprint: lem-sbc-higher-image-transition-naturality).
 
 Proof: write the derived transition as the composite natural transformation formed by
 the h' adjunction unit, the pullback composition comparison, and pullback of the h

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 /-! # A product section determined by local representatives
 
 Source: Stacks Project, Lemma 087Z and Section 0EHN.
-(blueprint: lem-weil-pbc-formal-kernel-product-section).
 -/
 
 @[expose] public section
@@ -157,7 +156,6 @@ set_option backward.isDefEq.respectTransparency false in
 No linear map or compatibility between different pairs of inputs is asserted.
 Source: Stacks Project, Lemma 087Z and Section 0EHN, the associated graded construction;
 https://stacks.math.columbia.edu/tag/087Z.
-(blueprint: lem-weil-pbc-formal-kernel-product-section).
 
 Proof: On stalks, induct through the adjacent quotient isomorphisms of F. Reducing
 level r+1 to level n+1 is quotient by I^(n+1): iterated quotients by nested ideal

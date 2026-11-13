@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 
 /-! # Composition of normalized mixed Leray comparisons
 Source: Stacks Project, cohomology.tex, Tags 08HY, 0D5T and 0D5W.
-(blueprint: lem-sc-mixed-sections-composition-coherence).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 /-- Normalized mixed Leray comparisons compose with the normalized direct-image
 comparison and restriction along a composite.
 Source: Stacks Project, Tags 0D5T and 0D5W.
-(blueprint: lem-sc-mixed-sections-composition-coherence).
 
 Proof: Let J be a K-injective representative on X. Precompose both sides with the
 pasted right-derived unit for f_* followed by g_* followed by global sections on Z.

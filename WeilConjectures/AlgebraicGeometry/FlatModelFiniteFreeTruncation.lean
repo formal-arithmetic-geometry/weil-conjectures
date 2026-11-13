@@ -66,8 +66,7 @@ an open neighbourhood of t on which it is finite free. Restriction is exact, so 
 restricted cokernel is the cokernel of the restricted differential. The degree-zero
 term of Mathlib's truncGE 0 is canonically isomorphic to that cokernel; transport the
 finite-free isomorphism along it. Only the open neighbourhood and rank are existential;
-the complex itself is the explicit canonical truncation, not an arbitrary witness.
-(blueprint: lem-pc-flat-model-finite-free-truncation-zero). -/
+the complex itself is the explicit canonical truncation, not an arbitrary witness. -/
 theorem exists_local_finiteFree_truncation_zero {T : Scheme.{u}} (U : T.Opens)
     (C Q : CochainComplex U.toScheme.Modules ℤ) (d : ℕ)
     (hCge : C.IsStrictlyGE 0) (hCle : C.IsStrictlyLE d)

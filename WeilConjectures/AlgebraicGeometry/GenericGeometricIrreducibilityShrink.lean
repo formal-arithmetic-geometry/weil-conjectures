@@ -48,9 +48,7 @@ by inverting one nonzero base element. Their product rules out all factorization
 in every field specialization. Density transfers irreducibility to the original
 fibres. Shrink to the open image of the flat finitely presented morphism for
 nonemptiness. Descend the open through the universal homeomorphisms; its nonemptiness
-means it contains the generic point.
-
-(blueprint: lem-sbc-generic-geometric-irreducibility-shrink) -/
+means it contains the generic point. -/
 theorem exists_open_generic_geometric_irreducibility_shrink {X T : Scheme.{u}}
     (f : X ⟶ T) [LocallyOfFiniteType f] [QuasiCompact f]
     (η : T) (hη : IsGenericPoint η Set.univ)

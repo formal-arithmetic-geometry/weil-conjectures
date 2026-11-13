@@ -19,7 +19,6 @@ import Mathlib.RingTheory.TensorProduct.Quotient
 /-! # Descending a polynomial hypersurface from the generic residue field
 
 Source: Stacks Project, Tag 0559, first proof, clearing coefficient denominators.
-(blueprint: lem-sbc-generic-polynomial-hypersurface-descent)
 -/
 
 @[expose] public section
@@ -152,9 +151,7 @@ ring over K, including Q=0 (choose d=1 when its support is empty). Base change o
 coefficient-induced spectrum map identifies the generic fibre with Spec(K[t]/(P_K)).
 The equality of principal ideals gives the displayed isomorphism with Spec(K[t]/(Q)).
 All the maps are induced by coefficient maps, so the isomorphism commutes with the two
-structure maps to Spec K. No integrality or irreducibility of Q is needed.
-
-(blueprint: lem-sbc-generic-polynomial-hypersurface-descent) -/
+structure maps to Spec K. No integrality or irreducibility of Q is needed. -/
 theorem exists_base_hypersurface_of_generic_polynomial
     {S : Scheme.{u}} [IsAffine S] [IsIntegral S]
     (η : S) (hη : IsGenericPoint η Set.univ)

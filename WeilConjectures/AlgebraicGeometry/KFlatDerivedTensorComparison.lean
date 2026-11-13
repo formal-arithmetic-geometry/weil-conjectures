@@ -12,7 +12,6 @@ public import WeilConjectures.Algebra.Homology.KFlat
 /-! # Natural computation of derived tensor on K-flat first models
 
 Source: Stacks Project, Tag 06YH, construction of the derived tensor product.
-(blueprint: lem-pc-kflat-derived-tensor-comparison).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- The derived tensor counit is a natural isomorphism on any family of K-flat first
 models and any family of second models. Source: Stacks Project, Tag 06YH.
-(blueprint: lem-pc-kflat-derived-tensor-comparison).
 
 Proof: equip sheaves of modules with the recorded symmetric, closed, additive tensor
 structure and functorial flat resolutions. For a K-flat complex P, the defining

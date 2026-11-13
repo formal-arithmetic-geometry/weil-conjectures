@@ -12,8 +12,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # Regrouping the graded terms of principal Čech columns
 
-Source: Stacks, Tag 08D1, alternating total cochains
-(blueprint: lem-sc-principal-cech-total-regrouping).
+Source: Stacks, Tag 08D1, alternating total cochains.
 -/
 
 @[expose] public section
@@ -28,7 +27,7 @@ variable (F : CochainComplex (SheafOfModules.{u}
   (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)
 
 /-- Include a single product row into the explicit cochains, extending by zero.
-Source: Stacks, Tag 08D1 (blueprint: lem-sc-principal-cech-total-regrouping). -/
+Source: Stacks, Tag 08D1. -/
 def principalCechRowToTerms (p q n : ℤ) (hpq : p + q = n) :
     ((principalCechColumnFunctor r f p).obj F).X q ⟶ principalCechTerms r f F n := by
   classical
@@ -48,7 +47,7 @@ def principalCechRowToTerms (p q n : ℤ) (hpq : p + q = n) :
       map_smul' := fun a x ↦ by funext J; exact (component J).hom.map_smul a x }
 
 /-- The subset coordinate of a row inclusion is its projection, or zero off the row.
-Source: Stacks, Tag 08D1 (blueprint: lem-sc-principal-cech-total-regrouping). -/
+Source: Stacks, Tag 08D1. -/
 theorem principalCechRowToTerms_apply (p q n : ℤ) (hpq : p + q = n)
     (x : ((principalCechColumnFunctor r f p).obj F).X q)
     (J : {J : Finset (Fin r) // J.Nonempty}) :
@@ -70,7 +69,7 @@ theorem principalCechRowToTerms_apply (p q n : ℤ) (hpq : p + q = n)
 
 /-- The explicit graded regrouping map, for any bicomplex with the given columns.
 It uses the coproduct universal property, rather than a chosen existence witness.
-Source: Stacks, Tag 08D1 (blueprint: lem-sc-principal-cech-total-regrouping). -/
+Source: Stacks, Tag 08D1. -/
 def principalCechTotalRegroup
     (B : HomologicalComplex₂ (ModuleCat.{u} A) (ComplexShape.up ℤ) (ComplexShape.up ℤ))
     (e : ∀ p, B.X p ≅ (principalCechColumnFunctor r f p).obj F) (n : ℤ) :
@@ -174,8 +173,7 @@ private theorem retract_row_apply (p q n : ℤ) (h : p + q = n)
   · rfl
 
 /-- Regrouping is an isomorphism of modules in each total degree.
-Source: Stacks, Tag 08D1, the finite alternating total
-(blueprint: lem-sc-principal-cech-total-regrouping).
+Source: Stacks, Tag 08D1, the finite alternating total.
 
 Proof: evaluate each categorical product of section complexes in degree q. Its
 projections exhibit a product of the section modules in that degree, since evaluation

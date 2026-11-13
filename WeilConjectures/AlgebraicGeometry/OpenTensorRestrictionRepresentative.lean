@@ -14,7 +14,6 @@ import all Mathlib.Algebra.Homology.Localization
 /-! # The representative of ordinary open tensor restriction
 
 Source: Stacks Project, Tags 08HY and 08DW.
-(blueprint: lem-pc-open-tensor-restriction-representative).
 -/
 
 @[expose] public section
@@ -94,8 +93,7 @@ Q.map of the termwise map followed by mapDerivedCategoryFactors.inv. No exactnes
 of tensor pullback is asserted or used: only open restriction is exact. This
 works for every complex, including the zero complex and top or empty opens.
 Source: Stacks Project, Tags 08HY, 08DW and 015F; homotopy and exact localization
-factorization identities.
-(blueprint: lem-pc-open-tensor-restriction-representative). -/
+factorization identities. -/
 theorem openTensorRestriction_representative
     [d : ∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

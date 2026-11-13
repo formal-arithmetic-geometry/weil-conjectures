@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 /-! # Čech augmentation of a K-injective complex
 
 Source: Stacks Project, Cohomology, Lemma 08C1.
-(blueprint: lem-sc-kinjective-alternating-cech-augmentation-quasi-iso)
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace AlgebraicGeometry
 complex. Injectivity of its individual terms is not required.
 
 Source: Stacks Project, Cohomology, Lemma 08C1 and Tag 01EP.
-(blueprint: lem-sc-kinjective-alternating-cech-augmentation-quasi-iso).
 
 Proof: Resolve J into a K-injective complex I with injective terms. Each augmented
 alternating section row of I is exact: degree zero is the sheaf gluing axiom, and

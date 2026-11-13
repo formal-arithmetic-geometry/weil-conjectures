@@ -56,9 +56,8 @@ private theorem exists_common_germ_sections (X : RingedSpace.{u}) (F : Modules X
 /-- A finite local presentation gives a finite presentation of the source stalk,
 with basis vectors sent to germs of the local generating sections.
 
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`), third
+Source: Stacks Project, Modules, Lemma 01CP, third
 paragraph, the last displayed right exact sequence; Definition 01BN.
-(blueprint: lem-weil-pbc-finite-presentation-source-stalk)
 
 Proof: Choose a supplied finite local presentation around x from
 IsFinitePresentation.exists_quasicoherentData and its covering property.

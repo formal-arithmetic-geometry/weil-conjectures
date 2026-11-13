@@ -141,7 +141,6 @@ generated subideal of the quotient ideal.
 
 Source: Stacks Project, More on Morphisms, Tag 07RZ, proof, second paragraph,
 and Limits, Tag 06AC.
-(blueprint: lem-weil-pbc-finite-locally-free-degree-quotient-approximation).
 
 Proof: Base change f along g. Its source is quasi-compact, since f is quasi-compact
 and Spec A is quasi-compact, and quasi-separated, since f is separated. The base

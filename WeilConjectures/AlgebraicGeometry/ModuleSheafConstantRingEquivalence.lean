@@ -181,7 +181,6 @@ private noncomputable instance (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u}
 
 Source: Stacks Project, Tag 093I, opening paragraph (constant algebraic structures),
 and Tag 03FD (underlying abelian sheaves). The encoding argument is written here.
-(blueprint: lem-weil-pbc-module-sheaf-constant-ring-equivalence)
 
 Proof: let R be the sheafification of the constant ring presheaf with value Λ.
 For a ModuleCat Λ-valued sheaf F, a section of R is locally represented by elements

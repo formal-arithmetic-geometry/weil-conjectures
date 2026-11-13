@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 # Transport of integral lattices from a slice site
 
 Source: Bhatt--Scholze, Proposition 6.8.4(6), restriction to an etale member.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -155,7 +154,6 @@ private noncomputable def pushforwardSheafificationIso
 small site, with the identity coefficient identification on continuous functions.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), restriction to a covering member;
 Stacks Project, Tags 098K, 094T and 0951, localization of the pro-etale site.
-(auxiliary; not a blueprint node)
 
 Proof: an object over the etale member U is a weakly etale arrow V → U;
 composition with U → X identifies its small pro-etale site with the slice of

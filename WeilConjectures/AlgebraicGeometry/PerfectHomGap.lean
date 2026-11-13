@@ -34,8 +34,7 @@ import Mathlib.AlgebraicGeometry.Limits
 /-! # Vanishing of maps from a perfect complex across a cohomology gap
 
 Source: Stacks Project, Derived Categories of Schemes, Lemma 36.13.5(1), Tag 09M4,
-label `lemma-ext-from-perfect-into-bounded-QCoh`
-(blueprint: lem-sc-perfect-ext-bounded-qcoh-vanishing).
+label `lemma-ext-from-perfect-into-bounded-QCoh`.
 -/
 
 @[expose] public section
@@ -191,8 +190,7 @@ private theorem tensor_homology_isZero_of_gap (X : Scheme.{u})
 /-- On a quasi-compact and quasi-separated scheme, a perfect complex admits a finite
 cohomology gap such that every object with quasi-coherent cohomology vanishing in that gap
 receives only the zero morphism from it.
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.13.5(1), Tag 09M4
-(blueprint: lem-sc-perfect-ext-bounded-qcoh-vanishing).
+Source: Stacks Project, Derived Categories of Schemes, Lemma 36.13.5(1), Tag 09M4.
 
 Proof, following the node's four steps:
 1. By `lem-pc-perfect-rhom-tensor-comparison`, the dual of `K` is perfect, with finite

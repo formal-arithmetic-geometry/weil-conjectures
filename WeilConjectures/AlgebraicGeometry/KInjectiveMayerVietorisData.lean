@@ -12,7 +12,6 @@ public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 /-! # The concrete restriction/direct-image complex for Mayer--Vietoris
 
 Source: Stacks Project, Cohomology, Tag 08BV, displayed short exact sequence.
-(blueprint: def-pc-kinjective-mayer-vietoris-data).
 
 All objects and arrows below are constructed from the underived adjunction; no
 existence theorem is used to choose the data.
@@ -48,33 +47,33 @@ private theorem unit_comp_mate
   exact b.homEquiv_id M
 
 /-- Restriction/direct-image adjunction transported along the open-site equivalence.
-Source: Stacks, Tag 08BV (blueprint: def-pc-kinjective-mayer-vietoris-data). -/
+Source: Stacks, Tag 08BV. -/
 def schemeOpenModuleAdjunction (X : Scheme.{u}) (U : X.Opens) :
     schemeOpenRestriction X U ⊣ Scheme.Modules.pushforward U.ι :=
   (Scheme.Modules.restrictAdjunction U.ι).ofNatIsoLeft
     (Scheme.Modules.overFunctorEquiv U).symm
 
 /-- Restrict to an open and then apply underived direct image.
-Source: Stacks, Tag 08BV (blueprint: def-pc-kinjective-mayer-vietoris-data). -/
+Source: Stacks, Tag 08BV. -/
 abbrev schemeOpenModuleImage (X : Scheme.{u}) (U : X.Opens) :
     SheafOfModules.{u} (moduleRings X.toRingedSpace) ⥤
       SheafOfModules.{u} (moduleRings X.toRingedSpace) :=
   schemeOpenRestriction X U ⋙ Scheme.Modules.pushforward U.ι
 
 /-- Additivity follows from the sectionwise action on module morphisms.
-Source: Stacks, Tag 08BV (blueprint: def-pc-kinjective-mayer-vietoris-data). -/
+Source: Stacks, Tag 08BV. -/
 instance schemeOpenModuleImage_additive (X : Scheme.{u}) (U : X.Opens) :
     (schemeOpenModuleImage X U).Additive :=
   Functor.Additive.mk (by intros; rfl)
 
 /-- Zero preservation, recorded directly to avoid searching through both adjunctions.
-Source: Stacks, Tag 08BV (blueprint: def-pc-kinjective-mayer-vietoris-data). -/
+Source: Stacks, Tag 08BV. -/
 instance schemeOpenModuleImage_preservesZero (X : Scheme.{u}) (U : X.Opens) :
     (schemeOpenModuleImage X U).PreservesZeroMorphisms where
   map_zero _ _ := rfl
 
 /-- The restriction to a smaller open, expressed as the mate of the restricted counit.
-Source: Stacks, Tag 08BV (blueprint: def-pc-kinjective-mayer-vietoris-data). -/
+Source: Stacks, Tag 08BV. -/
 def schemeOpenModuleImageRestriction (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U) :
     schemeOpenModuleImage X U ⟶ schemeOpenModuleImage X W :=
   Functor.whiskerLeft (schemeOpenModuleImage X U) (schemeOpenModuleAdjunction X W).unit ≫
@@ -87,7 +86,7 @@ def schemeOpenModuleImageRestriction (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶
       (Scheme.Modules.pushforward W.ι)
 
 /-- Restricting the unit further is the unit for the smaller open.
-Source: Stacks, Tag 08BV (blueprint: def-pc-kinjective-mayer-vietoris-data).
+Source: Stacks, Tag 08BV.
 Proof: naturality of the smaller unit and of the nested-restriction comparison
 reduces the assertion to the left triangle identity for the larger adjunction. -/
 theorem schemeOpenModuleImage_unit_restriction (X : Scheme.{u})
@@ -100,14 +99,14 @@ theorem schemeOpenModuleImage_unit_restriction (X : Scheme.{u})
     (schemeOpenOverlapRestriction X i) (schemeOpenRestrictionCompIso X i) M
 
 /-- The complex whose degree n sections over T are Iⁿ(T ∩ U).
-Source: Stacks, Tag 08BV (blueprint: def-pc-kinjective-mayer-vietoris-data). -/
+Source: Stacks, Tag 08BV. -/
 abbrev schemeOpenModuleImageComplex (X : Scheme.{u}) (U : X.Opens)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
     CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ :=
   ((schemeOpenModuleImage X U).mapHomologicalComplex (ComplexShape.up ℤ)).obj I
 
 /-- The termwise restriction unit.
-Source: Stacks, Tag 08BV (blueprint: def-pc-kinjective-mayer-vietoris-data). -/
+Source: Stacks, Tag 08BV. -/
 def schemeOpenModuleImageComplexUnit (X : Scheme.{u}) (U : X.Opens)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
     I ⟶ schemeOpenModuleImageComplex X U I where
@@ -115,7 +114,7 @@ def schemeOpenModuleImageComplexUnit (X : Scheme.{u}) (U : X.Opens)
   comm' i j _ := ((schemeOpenModuleAdjunction X U).unit.naturality (I.d i j)).symm
 
 /-- Termwise restriction between the direct-image complexes.
-Source: Stacks, Tag 08BV (blueprint: def-pc-kinjective-mayer-vietoris-data). -/
+Source: Stacks, Tag 08BV. -/
 def schemeOpenModuleImageComplexRestriction (X : Scheme.{u}) {W U : X.Opens}
     (i : W ⟶ U)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
@@ -123,14 +122,14 @@ def schemeOpenModuleImageComplexRestriction (X : Scheme.{u}) {W U : X.Opens}
   ((schemeOpenModuleImageRestriction X i).mapHomologicalComplex (ComplexShape.up ℤ)).app I
 
 /-- The middle term of the concrete Mayer--Vietoris complex.
-Source: Stacks, Tag 08BV (blueprint: def-pc-kinjective-mayer-vietoris-data). -/
+Source: Stacks, Tag 08BV. -/
 abbrev schemeMayerVietorisB (X : Scheme.{u}) (U V : X.Opens)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
     CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ :=
   schemeOpenModuleImageComplex X U I ⊞ schemeOpenModuleImageComplex X V I
 
 /-- The first arrow is the pair of restriction units.
-Source: Stacks, Tag 08BV (blueprint: def-pc-kinjective-mayer-vietoris-data). -/
+Source: Stacks, Tag 08BV. -/
 def schemeMayerVietorisF (X : Scheme.{u}) (U V : X.Opens)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
     I ⟶ schemeMayerVietorisB X U V I :=
@@ -138,7 +137,7 @@ def schemeMayerVietorisF (X : Scheme.{u}) (U V : X.Opens)
     (schemeOpenModuleImageComplexUnit X V I)
 
 /-- The second arrow is the difference of restrictions to the intersection.
-Source: Stacks, Tag 08BV (blueprint: def-pc-kinjective-mayer-vietoris-data). -/
+Source: Stacks, Tag 08BV. -/
 def schemeMayerVietorisG (X : Scheme.{u}) (U V : X.Opens)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
     schemeMayerVietorisB X U V I ⟶ schemeOpenModuleImageComplex X (U ⊓ V) I :=
@@ -146,7 +145,7 @@ def schemeMayerVietorisG (X : Scheme.{u}) (U V : X.Opens)
     (-(schemeOpenModuleImageComplexRestriction X (homOfLE inf_le_right) I))
 
 /-- The two arrows of the concrete diagram compose to zero.
-Source: Stacks, Tag 08BV (blueprint: def-pc-kinjective-mayer-vietoris-data).
+Source: Stacks, Tag 08BV.
 Proof: each iterated restriction of the unit is the unit to the intersection;
 the difference of these identical morphisms is zero. -/
 theorem schemeMayerVietoris_zero (X : Scheme.{u}) (U V : X.Opens)
@@ -163,7 +162,7 @@ theorem schemeMayerVietoris_zero (X : Scheme.{u}) (U V : X.Opens)
     Preadditive.comp_neg, h, add_neg_cancel]
 
 /-- The concrete short complex, without any exactness claim in its definition.
-Source: Stacks, Tag 08BV (blueprint: def-pc-kinjective-mayer-vietoris-data). -/
+Source: Stacks, Tag 08BV. -/
 def schemeMayerVietorisComplex (X : Scheme.{u}) (U V : X.Opens)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
     ShortComplex (CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :=

@@ -16,7 +16,6 @@ public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
 
 /-! Rank of a finite flat structure-sheaf pushforward on a constant-rank open.
 Source: Stacks Project, Tags 02KB and 04MH.
-(blueprint: lem-sc-finite-pushforward-rank-on-open)
 -/
 
 @[expose] public section
@@ -185,7 +184,6 @@ private theorem pushforward_restrict_iso {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y
 `n`, its structure-sheaf pushforward has finite locally free rank `n`.
 
 Source: Stacks Project, Morphisms of Schemes, Tags 02KB and 04MH.
-(blueprint: lem-sc-finite-pushforward-rank-on-open)
 
 Proof: Cover `U` by affine opens `V = Spec A` of `Y` contained in `U`. Since `f` is finite,
 its inverse image is affine, say `Spec B`. The module of sections of the pushforward on `V`

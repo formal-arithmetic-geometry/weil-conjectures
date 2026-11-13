@@ -24,8 +24,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Serre vanishing for finite graded modules
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 0897 (2)
-(blueprint: lem-weil-pbc-formal-systems-graded-vanishing).
+Source: Stacks Project, Cohomology of Schemes, Lemma 0897 (2).
 -/
 
 @[expose] public section
@@ -45,8 +44,7 @@ The graded module `G = ⊕ G m` over `f ^* B~` is written, as in
 homogeneous action maps `mu`; finite type allows generators in arbitrary degrees `d i`.
 No equality between the degree-zero algebra and the base ring, and no degree-one
 algebra generators, are assumed.
-Source: Stacks Project, Cohomology of Schemes, Lemma 0897 (2)
-(blueprint: lem-weil-pbc-formal-systems-graded-vanishing).
+Source: Stacks Project, Cohomology of Schemes, Lemma 0897 (2).
 
 Proof:
 1. Forget the grading. Set X' = Spec(B) ×_Spec(A) X. Its projection pi to X is affine
@@ -54,10 +52,8 @@ Proof:
    lem-weil-pbc-affine-morphism-permanence; its map to Spec(B) is proper by
    lem-weil-pbc-proper-fp-permanence. B and X' are Noetherian by
    lem-weil-pbc-finite-type-algebra-noetherian and lem-weil-pbc-finite-type-over-noetherian.
-2. The associated algebra and tensor pullback identify X' with the relative spectrum
-   (lem-weil-pbc-affine-morphism-relative-spec). The affine module correspondence
-   (lem-weil-pbc-affine-module-correspondence) realizes G as pi_* G'. Local finite
-   generation is preserved (lem-weil-pbc-affine-module-finite-type), so G' is coherent
+2. The associated algebra and tensor pullback identify X' with the relative spectrum. The affine module correspondence realizes G as pi_* G'. Local finite
+   generation is preserved, so G' is coherent
    by pqf-lem-coherent-ft-locnoeth.
 3. The pullback L' = pi^* L is ample by lem-weil-pbc-pullback-ample-invertible.
    Apply lem-weil-pbc-coherent-serre-vanishing on X' to obtain one bound d0 for all p > 0.

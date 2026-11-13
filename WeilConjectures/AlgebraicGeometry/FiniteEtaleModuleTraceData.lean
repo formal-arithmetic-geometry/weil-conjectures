@@ -129,7 +129,6 @@ theorem unit_app_comp_lowerStarUpperStarAdjunctionOfIsFinite_counit_app
  the prescribed cardinality of every geometric fibre.
 
 Source: Stacks Project, Section 03SH, Definition 03SE and the following degree formula.
-(blueprint: lem-weil-pbc-finite-etale-module-trace-data)
 
 Proof: take the counit of the existing reverse adjunction `f_* ⊣ f^*`. The ordinary
 adjunction triangle identifies restriction on each geometric stalk with the diagonal.
@@ -137,7 +136,7 @@ The reverse-adjunction triangle and `finiteEtaleUnit_stalk_inclusion` identify t
 trace on each summand with the pullback stalk comparison. The finite pushforward
 stalk formula and orthogonality of extensions by zero give the resolution of the
 identity as the sum of projection-inclusion composites. Consequently the composite
-is the sum of one identity for each lift, hence `(d : R)` times the identity.
+is the sum of one identity for each lift, hence `(d: R)` times the identity.
 Geometric stalks detect equality of sheaf morphisms. Empty fibres and the empty
 base are covered by the same calculation; no invertibility is used. -/
 theorem finiteEtaleModuleTraceData

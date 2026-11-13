@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.Comma.Over.Pullback
 # Closed immersions of base-changed diagonals
 
 Source: Stacks Project, Limits, Tag 01ZQ; compatibility of diagonals with base change.
-(blueprint: lem-weil-pbc-over-pullback-diagonal-closed-immersion).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ base-changed morphism.
 
 Source: Stacks Project, Limits, Tag 01ZQ, the diagonal base-change identification in the
 proof; equivalently the universal property of fibre products.
-(blueprint: lem-weil-pbc-over-pullback-diagonal-closed-immersion).
 
 Proof: Write X' = X ×_S T and Y' = Y ×_S T. The universal properties of the fibre products
 identify (X ×_Y X) ×_S T with X' ×_{Y'} X': the two components are the base-changed

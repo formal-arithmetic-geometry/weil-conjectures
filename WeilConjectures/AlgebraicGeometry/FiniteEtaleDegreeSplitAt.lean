@@ -14,9 +14,8 @@ import WeilConjectures.AlgebraicGeometry.FiberDegreeOfSplitCofan
 /-!
 # Splitting neighbourhoods with prescribed degree
 
-Source: Stacks Project, Tag 04HN (lemma-finite-etale-etale-local) and Tag 03SH
+Source: Stacks Project, Tag 04HN and Tag 03SH
 (section-trace-method), paragraph after Definition 03SE.
-(blueprint: lem-weil-pbc-finite-etale-degree-split-at).
 -/
 
 @[expose] public section
@@ -31,14 +30,13 @@ namespace AlgebraicGeometry.Etale
 
 /-- Each point of a small étale object has a neighbourhood on which a finite étale
 morphism of degree `d` splits into exactly `d` clopen copies of that neighbourhood.
-Source: Stacks Project, Tag 04HN (lemma-finite-etale-etale-local), with the fibre-degree
+Source: Stacks Project, Tag 04HN, with the fibre-degree
 count in Tag 03SH (section-trace-method), after Definition 03SE.
-(blueprint: lem-weil-pbc-finite-etale-degree-split-at).
 
 Proof:
 1. Apply `finite_etale_etale_local_split` to the finite étale projection
    `Y ×_X W → W` and the given point `w`. It supplies an étale neighbourhood
-   `g : U → W`, a point above `w`, and a finite clopen coproduct of copies of `U`.
+   `g: U → W`, a point above `w`, and a finite clopen coproduct of copies of `U`.
 2. Choose an algebraic closure of the residue field of the distinguished point of `U`.
    The degree of the geometric fibre of `f` at the composite geometric point is `d`:
    use `fiberDegree_of_isPullback`, `fiberDegree_eq_finrankΓ`, and the prescribed

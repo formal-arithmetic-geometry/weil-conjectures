@@ -20,7 +20,7 @@ namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
 /-- The actual finite free point module, with its point-module category fixed.
 Source: the finite-presentation construction in Stacks Tag 03CY and the integral-models
-local-model step (auxiliary; not a blueprint node).
+local-model step.
 The object is the existing finite biproduct of copies of the regular module. This named
 construction keeps that biproduct behind a typed interface; it introduces no new choice. -/
 def pointModelFree

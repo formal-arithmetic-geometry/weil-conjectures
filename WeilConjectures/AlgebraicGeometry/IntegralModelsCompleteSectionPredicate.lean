@@ -171,7 +171,6 @@ boundedness condition occurs in this comparison.
 
 Source: blueprint integral-models, proof (1), coefficient identification; Stacks Tags
 00YV, 099C and 099L.
-(auxiliary; not a blueprint node).
 
 Proof: identify the spectral and absolute integral coefficient rings by pointComparison.
 The integral limit comparison and the normalized finite projection comparisons identify

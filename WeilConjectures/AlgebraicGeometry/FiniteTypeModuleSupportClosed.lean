@@ -19,8 +19,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 # Closed support of a finite type module
 
 Source: Stacks Project, Morphisms, Lemma 056J (part (1)), via Lemma 056I,
-Properties Lemma 01PB and Algebra Lemma 00L2 (blueprint:
-lem-weil-pbc-finite-type-module-support-closed).
+Properties Lemma 01PB and Algebra Lemma 00L2.
 -/
 
 @[expose] public section
@@ -39,8 +38,7 @@ set_option linter.style.haveILetI false in
 /-- Restriction preserves finite type: pull the local generating cover back along
 `Over.forget U`; its local maps preserve colimits and the unit, hence carry each finite
 family of generators to a finite family. Source: Stacks Project, Modules, Tag 01B5,
-the locality of finite type used in the finite-pushforward argument
-(blueprint: lem-weil-pbc-finite-type-module-support-closed). -/
+the locality of finite type used in the finite-pushforward argument. -/
 private theorem isFiniteType_over (X : Scheme.{u}) (F : X.Modules)
     (hF : F.IsFiniteType) (U : X.Opens) : (F.over U).IsFiniteType := by
   classical
@@ -90,8 +88,7 @@ shrink their equality to a basic open; the basic-open torsion lemma kills their 
 by a power of `g`. These are the three axioms of `IsLocalizedModule`. Its canonical
 isomorphism sends `m/1` to the germ of `m`, so linearity gives the denominator identity.
 No finite generation is needed, and for the zero module both sides are zero.
-Source: Stacks Project, Morphisms, Lemma 056I, proof; Schemes, Lemma 01HV (7).
-(blueprint: lem-weil-pbc-finite-type-module-support-closed) -/
+Source: Stacks Project, Morphisms, Lemma 056I, proof; Schemes, Lemma 01HV (7). -/
 private theorem quasicoherent_affine_stalk_germ_localization (X : Scheme.{u}) (F : X.Modules)
     [F.IsQuasicoherent] :
     (∀ (U : X.affineOpens) (x : X) (hx : x ∈ U.1),
@@ -176,8 +173,7 @@ stalk of `M~` at `p_x` is `M_{p_x}` (Schemes 01HV (7)), giving (1). By Algebra 0
 module has `M_p ≠ 0` iff `Ann_A(M) ⊆ p`, giving (2) and (3). The sets `V(Ann_A(M))` are closed
 in each affine chart and the affine opens cover `X`, giving (4).
 Source: Stacks Project, Morphisms, Lemma 056J (1), via Lemma 056I, Properties Lemma 01PB and
-Algebra Lemma 00L2.
-(blueprint: lem-weil-pbc-finite-type-module-support-closed) -/
+Algebra Lemma 00L2. -/
 theorem finite_type_module_support_closed (X : Scheme.{u}) (F : X.Modules)
     [F.IsQuasicoherent] [F.IsFiniteType] :
     (∀ (U : X.affineOpens) (x : X) (hx : x ∈ U.1),

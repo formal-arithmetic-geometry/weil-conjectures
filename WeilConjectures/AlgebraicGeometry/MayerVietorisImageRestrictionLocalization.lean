@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.MayerVietorisRestrictionChainQuotientTr
 /-! # Complex localization of the open restriction square
 
 Source: Stacks Project, Tags 08FE and 08BV.
-(blueprint: lem-pc-mayer-vietoris-image-restriction-localization).
 -/
 
 @[expose] public section
@@ -45,8 +44,7 @@ and the comparison followed by its inverse is the identity. This gives the displ
 inverse-normalized identity, with its four-map composite named by
 schemeMVRestrictionLocalizationChain. No open direct
 image occurs in this square, and no K-injectivity of I or h_*I is required.
-The formula remains valid for empty and full opens and identity morphisms.
-(blueprint: lem-pc-mayer-vietoris-image-restriction-localization). -/
+The formula remains valid for empty and full opens and identity morphisms. -/
 theorem schemeMV_image_restriction_localization
     (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

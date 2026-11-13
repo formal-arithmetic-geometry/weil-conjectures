@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 /-!
 # Inverse image of the three coefficient comparisons
 
-md`, clauses 1--3
-(blueprint: det-prop-sfb-qlbar-colimit-x-pullback).
+md`, clauses 1--3.
 
 The integral comparison is normalized by the same adjunction mate as its dependency.
 Localization is stated for any module-colimit representatives with their localization
@@ -34,9 +33,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The normalization of the integral comparison from the integral-limit dependency:
 its adjunction mate is reduction on every profinite test object, using the natural
-finite-label representation. This predicate introduces no new coefficient object.
-Source: blueprint integral-limit clause 3 and pullback proof Steps 2--3
-(blueprint: det-prop-sfb-qlbar-colimit-x-pullback). -/
+finite-label representation. This predicate introduces no new coefficient object. -/
 def SfbIntegralComparison (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u})

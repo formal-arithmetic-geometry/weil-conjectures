@@ -18,8 +18,7 @@ import Mathlib.CategoryTheory.Subobject.Limits
 /-!
 # Finite-cover sites with finite limits have enough points
 
-Source: Stacks Project, Sites, Tag 00YQ, Proposition `proposition-criterion-points`
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tag 00YQ, Proposition `proposition-criterion-points`.
 -/
 
 @[expose] public section
@@ -209,8 +208,7 @@ private lemma systemHomIso_naturality
   rfl
 
 /-- A small site with finite limits and finite covering refinements has a
-set-indexed conservative family of points. Source: Stacks Project, Sites, Tag 00YQ
-(auxiliary; not a blueprint node).
+set-indexed conservative family of points. Source: Stacks Project, Sites, Tag 00YQ.
 
 The sheaves take values in `Type (max u w)`, a universe containing the site's
 universe `u`: in the source the site is a set and its sheaves are valued in all sets

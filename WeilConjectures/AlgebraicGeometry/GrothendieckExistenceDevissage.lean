@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageRecoverLevels
 /-!
 # Grothendieck existence by devissage
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 088A (blueprint:
-lem-weil-pbc-grothendieck-existence-devissage).
+Source: Stacks Project, Cohomology of Schemes, Lemma 088A.
 -/
 
 @[expose] public section
@@ -31,7 +30,7 @@ namespace AlgebraicGeometry
 
 /-- Algebraizing a formal coherent module which is algebraizable on all thickenings
 and differs from a completion by uniform ideal-power torsion.
-Source: Stacks Project, Lemma 088A (blueprint: lem-weil-pbc-grothendieck-existence-devissage).
+Source: Stacks Project, Lemma 088A.
 
 Proof, following the five steps of the node and Stacks Lemma 088A:
 1. By lem-weil-pbc-closed-immersion-coherent-equivalence (Stacks 087T), pushforward
@@ -39,13 +38,13 @@ identifies coherent modules and formal systems on X_e with those on X killed by 
 The thickening hypothesis therefore gives the corresponding completion equivalence.
 2. Apply this equivalence to (F_n / K^e F_n)_n to obtain coherent modules G_e killed
 by K^e. The quotient transitions induce G_{e+1} / K^e G_{e+1} ≅ G_e, so these form
-an object of Coh(X,K) (def-weil-pbc-coherent-formal-module).
+an object of Coh(X,K).
 3. The comparison induces G_e → H / K^e H. Use
 lem-weil-pbc-formal-systems-annihilated-by-power (Stacks Remark 0888) to choose a
 uniform componentwise exponent t, then obtain bounds K^(2t) after quotienting by K^e
 and K^(4t) for the kernels and cokernels of G_e → H / K^e H.
 4. Apply lem-weil-pbc-grothendieck-existence-easy (Stacks 0889), part (1), with ideal K.
-It gives coherent F, a map a : F → H with K-power-torsion kernel and cokernel, and
+It gives coherent F, a map a: F → H with K-power-torsion kernel and cokernel, and
 an isomorphism (G_e)_e ≅ (F / K^e F)_e compatible with a.
 5. Fix a positive level n and reduce the comparison modulo I^n. The uniqueness clause
 of lem-weil-pbc-grothendieck-existence-easy identifies F / I^n F with F_n. Uniqueness

@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 /-! # The finite free complex computing a local derived dual
 
 Source: Stacks Project, Cohomology, Tags 08DQ and 08DM.
-(blueprint: lem-pc-finite-free-derived-dual-model).
 -/
 
 @[expose] public section
@@ -172,8 +171,7 @@ this degree-zero unit, so Q(O[0]) is canonically isomorphic to the displayed res
 of the global unit. Apply RHom in its second variable to this isomorphism and compose.
 The construction also applies to the zero complex and rank-zero terms; the signs in
 its differential are those of the ordinary Hom complex, not a termwise dual with an
-unspecified differential.
-(blueprint: lem-pc-finite-free-derived-dual-model). -/
+unspecified differential. -/
 theorem exists_bounded_finiteFree_derived_dual_model
     (X : Scheme.{u}) (U : X.Opens) [IsAffine U.toScheme]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleFiniteTypeAffineEnlargement
 /-! # Finite-type approximation of a global quasi-coherent module
 
 Source: Stacks Project, Properties, Lemma 01PF, proof, lines 2865--2894.
-(blueprint: lem-weil-pbc-module-finite-type-global-approximation).
 -/
 
 @[expose] public section
@@ -76,7 +75,6 @@ private theorem finiteType_of_top (X : Scheme.{u}) (M : X.Modules)
 contains a finite-type quasi-coherent submodule equal to it on that open.
 
 Source: Stacks Project, Properties, Lemma 01PF, proof, lines 2865--2894.
-(blueprint: lem-weil-pbc-module-finite-type-global-approximation).
 
 Proof: Cover X by finitely many affine opens V, and enlarge the initial open U
 one affine at a time. The intersection of the current quasi-compact open W with V

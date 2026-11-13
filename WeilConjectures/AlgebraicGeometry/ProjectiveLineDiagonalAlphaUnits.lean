@@ -7,8 +7,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalMaps
 
 /-! # The cached diagonal source unit as the supported-unit composite
-
-Source: blueprint lem-amb-p1-diagonal-integrals, the canonical source identification.
 -/
 
 @[expose] public section
@@ -26,8 +24,6 @@ attribute [local irreducible] HasDerivedCategory.ofIsGrothendieckAbelian
   DerivedCategory.singleFunctors
 
 /-- The cached pair of constant single-object units is the original supported-unit pair.
-Source: blueprint lem-amb-p1-diagonal-integrals, alpha and unit pasting.
-(auxiliary; not a blueprint node)
 
 Proof: expand the cached pair and the two supported units. Both are the same
 composite of derived single-object units, using the canonical constant-sheaf

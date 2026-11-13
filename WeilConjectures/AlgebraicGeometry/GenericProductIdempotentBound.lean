@@ -65,10 +65,6 @@ private theorem clear_span_denominator
 /-- After one principal localization, every reduced generic product map compatible
 with the fixed splitting contains all the coordinate idempotents in its image.
 
-Source: smooth purity blueprint, `sk-prop-sf-cbc`,
-`lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9.
-(blueprint: lem-weil-pbc-generic-product-idempotent-bound)
-
 Proof: Put C = (B tensor_A R0)_red. Tensor associativity and localization
 of the nilradical identify its generic localization with the given product via e.
 For each of the finitely many coordinate idempotents, choose a numerator in C and a

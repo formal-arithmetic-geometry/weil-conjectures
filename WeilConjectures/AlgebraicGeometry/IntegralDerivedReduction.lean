@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.CompletedIntegralConstantMapOfUniverses
 /-! # Integral derived reduction
 
 Source: Bhatt--Scholze, Section 6.5, Definition 6.5.1 and Lemma 6.5.4;
-Stacks Project, Tags 06YS and 06YY (auxiliary; not a blueprint node).
+Stacks Project, Tags 06YS and 06YY.
 
 The natural-number index n denotes the positive exponent n+1. The functor is chosen
 from the universal derived-change-of-rings pair, not from an arbitrary existence
@@ -31,13 +31,13 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p) (n : ℕ)
 
 /-- Standard localization for finite quotient coefficient module sheaves.
-Source: Stacks, Tag 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 06YY. -/
 noncomputable instance integralReductionTargetHasDerivedCategory :
     HasDerivedCategory (SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n)) :=
   HasDerivedCategory.standard _
 
 /-- The small pro-etale site fits in the ambient coefficient universe.
-Source: Stacks, Tag 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 06YY. -/
 noncomputable instance (priority := low) integralReductionSiteEssentiallySmall :
     EssentiallySmall.{max u (t + 1)} (AlgebraicGeometry.Scheme.ProEt Y) :=
   essentiallySmallSelf _

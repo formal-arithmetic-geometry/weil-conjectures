@@ -25,7 +25,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Local triviality of an invertible module gives a rank-one trivialization of each stalk.
 
 Source: Stacks Project, Modules, Lemma 01CY, proof.
-(blueprint: lem-weil-pbc-invertible-stalk-linear-equiv).
 
 Proof: Trivialize L on an open neighbourhood U of y. The restriction isomorphism
 carries the unit free generator to a section t which freely generates L on every

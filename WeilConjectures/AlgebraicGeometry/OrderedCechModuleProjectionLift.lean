@@ -23,7 +23,7 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- All-tuple coordinate, with the actual extension transport.
-Source: Stacks 01FK. (blueprint: lem-pc-ordered-cech-module-projection-lift). -/
+Source: Stacks 01FK. -/
 noncomputable def orderedCechFullCoordinate {X' T' : Scheme.{u}} (f' : X' ⟶ T')
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)
@@ -45,7 +45,7 @@ noncomputable def orderedCechFullCoordinate {X' T' : Scheme.{u}} (f' : X' ⟶ T'
       ComplexShape.embeddingUpNat (i := p) rfl).hom.app B s)
 
 /-- Restrict an ordered coordinate back to an arbitrary permuted full tuple.
-Source: Stacks 01FK. (blueprint: lem-pc-ordered-cech-module-projection-lift). -/
+Source: Stacks 01FK. -/
 noncomputable def orderedCechProjectionOpenMap {X : Scheme.{u}} {r p : ℕ}
     (W : ULift.{u} (Fin r) → X.Opens) (B : X.Opens)
     (y : Fin (p + 1) → ULift.{u} (Fin r)) (σ : Equiv.Perm (Fin (p + 1)))
@@ -56,8 +56,7 @@ noncomputable def orderedCechProjectionOpenMap {X : Scheme.{u}} {r p : ℕ}
     (prod.fst ≫ Pi.π (fun k ↦ W (y k)) (σ l)).le) prod.snd.le)
 
 /-- The finite signed extension formula characterizes the projection completely.
-Source: Stacks 01FK and 01FM.
-(blueprint: lem-pc-ordered-cech-module-projection-lift). -/
+Source: Stacks 01FK and 01FM. -/
 def IsOrderedCechModuleProjection {X' T' : Scheme.{u}} (f' : X' ⟶ T')
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)
@@ -85,7 +84,6 @@ def IsOrderedCechModuleProjection {X' T' : Scheme.{u}} (f' : X' ⟶ T')
 
 /-- Signed extension lifts to a cochain endomorphism of module sheaves.
 Source: Stacks 01FK, signed extension; 01FM, the map cπ.
-(blueprint: lem-pc-ordered-cech-module-projection-lift).
 
 Proof: Obtain the degreewise module maps and their coordinate formula from
 orderedCech_degreewise_projection_exists, whose construction uses the actual finite

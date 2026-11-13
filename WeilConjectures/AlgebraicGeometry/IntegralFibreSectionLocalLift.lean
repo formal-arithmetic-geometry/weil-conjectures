@@ -27,7 +27,6 @@ open Scheme
 of a section over some pointed etale neighbourhood of the geometric point.
 
 Source: Stacks Project, Tag 0EYP, degree zero, via Tags 03Q9, 09XK, 09ZH and 0A3I.
-(blueprint: lem-sbc-integral-fibre-section-local-lift).
 
 Proof: pass to an affine neighbourhood of the image of s and let A be its strict
 henselization at s. The pullback of the integral morphism is affine Spec B, with B

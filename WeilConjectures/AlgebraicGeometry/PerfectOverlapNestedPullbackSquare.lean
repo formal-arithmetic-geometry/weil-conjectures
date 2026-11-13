@@ -30,8 +30,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 /-- The restricted maps form a square over the two nested open inclusions.
 Both maps agree after the open immersion of the larger target open.
-Source: Stacks Project, Tag 08DW.
-(blueprint: lem-pc-perfect-overlap-nested-pullback-square). -/
+Source: Stacks Project, Tag 08DW. -/
 theorem perfectOverlapNestedRestrictedMaps
     {X Y : Scheme.{u}} (g : X ⟶ Y) {W U : Y.Opens} {T P : X.Opens}
     (iY : W ⟶ U) (iX : T ⟶ P)
@@ -48,8 +47,7 @@ variable [∀ Z : Scheme.{u},
 /-- Compare pullback and exact restriction around the nested restricted square.
 This is constructed from the fixed pullback composition comparisons and the
 fixed comparison between nested exact restriction and open-inclusion pullback.
-Source: Stacks Project, Tags 08DW and 0D5S.
-(blueprint: lem-pc-perfect-overlap-nested-pullback-square). -/
+Source: Stacks Project, Tags 08DW and 0D5S. -/
 @[irreducible] noncomputable def perfectOverlapNestedPullbackSquare
     {X Y : Scheme.{u}} (g : X ⟶ Y) {W U : Y.Opens} {T P : X.Opens}
     (iY : W ⟶ U) (iX : T ⟶ P)

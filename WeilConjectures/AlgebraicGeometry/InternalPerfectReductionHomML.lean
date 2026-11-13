@@ -37,9 +37,8 @@ import Mathlib.CategoryTheory.CofilteredSystem
 /-! # Uniform stable images for internal perfect reduction Hom
 
 Source: literature/stacks-project/proetale.tex, Tag 09C5;
-current blueprint sk-prop-integral-local-structure, Compatible isomorphisms,
-paragraph beginning These Hom groups can be infinite
-(blueprint: lem-pe-internal-perfect-reduction-hom-ml).
+current, Compatible isomorphisms,
+paragraph beginning These Hom groups can be infinite.
 
 Natural-number index n denotes the positive exponent n+1. The scalar model uses
 constant discrete scalar modules extended to continuous integral coefficients.
@@ -269,9 +268,7 @@ private theorem locallyConstant_range_eq {Y : Type*} [TopologicalSpace Y]
     exact hlift (x t)
 
 /-- Uniform stable images for the internal perfect reduction Hom tower, hence ML.
-Source: literature/stacks-project/proetale.tex, Tag 09C5; current blueprint
-sk-prop-integral-local-structure, Compatible isomorphisms, uniform-bound paragraph
-(blueprint: lem-pe-internal-perfect-reduction-hom-ml).
+Source: literature/stacks-project/proetale.tex, Tag 09C5; current, Compatible isomorphisms, uniform-bound paragraph.
 
 Proof:
 1. Identify the site over W with W_proet by weakly-etale localization. The DVR and

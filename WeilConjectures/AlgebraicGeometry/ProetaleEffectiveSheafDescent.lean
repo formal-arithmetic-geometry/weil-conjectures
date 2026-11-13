@@ -11,9 +11,6 @@ import Mathlib.CategoryTheory.Sites.SheafHom
 import Mathlib.CategoryTheory.Sites.LocalProperties
 
 /-! # Representing a sheaf from effective pro-etale descent
-
-Source: blueprint `det-lem-stratified-lattice-scheme`, proof (2)
-(blueprint: lem-sfb-proetale-effective-sheaf-descent).
 -/
 
 @[expose] public section
@@ -74,8 +71,7 @@ private theorem iso_of_compatible_equiv
   exact hcompat A.unop.left (A.unop.hom ≫ a) (A.unop.hom ≫ b) x
 
 /-- Explicit equivalence between points of an étale object and points in the
-pro-etale slice after a pullback square. Source: blueprint proof (2).
-(blueprint: lem-sfb-proetale-effective-sheaf-descent, step 2). -/
+pro-etale slice after a pullback square. -/
 noncomputable def effectivePointEquiv {X V T : Scheme.{u}}
     (p : V ⟶ X) [WeaklyEtale p] (t : T ⟶ V) (Z : X.Etale)
     (q : T ⟶ Z.left) (hq : IsPullback q t Z.hom p)
@@ -107,8 +103,7 @@ private theorem effectivePointEquiv_comp_q {X V T : Scheme.{u}}
     (effectivePointEquiv p t Z q hq W a).left ≫ q = a.left :=
   hq.lift_fst _ _ _
 
-/-- Naturality of the pullback-point equivalence. Source: blueprint proof (2).
-(blueprint: lem-sfb-proetale-effective-point-naturality). -/
+/-- Naturality of the pullback-point equivalence. -/
 theorem effectivePointEquiv_naturality {X V T : Scheme.{u}}
     (p : V ⟶ X) [WeaklyEtale p] (t : T ⟶ V) (Z : X.Etale)
     (q : T ⟶ Z.left) (hq : IsPullback q t Z.hom p)
@@ -130,8 +125,7 @@ theorem effectivePointEquiv_naturality {X V T : Scheme.{u}}
 
 
 /-- The pullback-point equivalence intertwines descent transport with the second
-projection. Source: blueprint proof (2).
-(blueprint: lem-sfb-proetale-effective-point-transport). -/
+projection. -/
 theorem effectivePointEquiv_transport {X V T : Scheme.{u}}
     (p : V ⟶ X) [WeaklyEtale p] (t : T ⟶ V) (Z : X.Etale)
     (q : T ⟶ Z.left) (hq : IsPullback q t Z.hom p)
@@ -158,7 +152,6 @@ theorem effectivePointEquiv_transport {X V T : Scheme.{u}}
         (effectivePointEquiv p t Z q hq (Over.mk b) s).w.symm
 
 /-- Effective pro-etale descent represents the sheaf by the descended etale object.
-Source: blueprint `det-lem-stratified-lattice-scheme`, proof (2).
 
 Proof. The pro-etale topology is subcanonical, so the lifted Yoneda presheaf `H` of `Z`
 is a sheaf. On the slice over `V` the pullback square gives `effectivePointEquiv`;
@@ -167,8 +160,7 @@ composed with `rho` it is a natural bijection `H(W) ≃ F(W)`
 object, `effectivePointEquiv_transport` and `hcompat` show the bijections agree, so the
 local isomorphism glues in the sheaf `sheafHom H F` over the cover `hcover`; the glued
 morphism restricts to an isomorphism, hence is one (`Sheaf.isIso_of_coversTop`). Full
-faithfulness of `Scheme.ProEt.forget X` identifies `H` with the stated lifted Hom presheaf.
-(blueprint: lem-sfb-proetale-effective-sheaf-descent). -/
+faithfulness of `Scheme.ProEt.forget X` identifies `H` with the stated lifted Hom presheaf. -/
 theorem representable_of_effective_proetale_descent {X V T : Scheme.{u}}
     (p : V ⟶ X) [WeaklyEtale p]
     (t : T ⟶ V) (Z : X.Etale) (q : T ⟶ Z.left)

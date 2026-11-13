@@ -25,7 +25,6 @@ namespace AlgebraicGeometry.ProEtale
 /-- Local finite presentation on an immersed stratum pulls back along maps into its image.
 Source: Bhatt--Scholze, Lemma 5.4.2 (topological invariance) and Definition 6.8.10;
 Hemo--Richarz--Scholbach, proof of Lemma 5.3(2), restriction to stratum interiors.
-(auxiliary; not a blueprint node)
 
 Proof: form V = U ×_T Z. Pull the given local finite presentations on Z back to V.
 The projection V → U is a surjective immersion, hence a surjective closed immersion:

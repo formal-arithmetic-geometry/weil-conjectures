@@ -96,8 +96,7 @@ L as a field. The injection of the fibre ring into its fraction field gives a
 scheme-theoretically dominant spectrum map j. Its composite to the base spectrum is the
 spectrum of the induced field algebra map by contravariant functoriality.
 The empty fibre is excluded by geometric irreducibility; a zero-dimensional fibre gives
-its ordinary finite function field. No geometrically reduced hypothesis is used.
-(blueprint: lem-sbc-generic-fibre-dominant-field) -/
+its ordinary finite function field. No geometrically reduced hypothesis is used. -/
 theorem exists_generic_fibre_dominant_field
     {Z S : Scheme.{u}} [IsAffine Z] [IsReduced Z] [IsAffine S] [IsIntegral S]
     (g : Z ⟶ S) [Flat g] [LocallyOfFinitePresentation g]

@@ -173,7 +173,6 @@ private theorem isIso_integral_henselianRestriction
 henselian local ring is an isomorphism on sections of every module sheaf.
 
 Source: Stacks Project, Tag 0EYP, via Tags 09XK, 09ZH and 0A3I.
-(blueprint: lem-sbc-integral-strict-henselian-geometric-fibre-sections).
 
 Proof: Since p is integral and its base is affine, write Z = Spec B, with B integral
  over A. Let m be the maximal ideal of A. The pair (A,m) is henselian, so Tag 09XK

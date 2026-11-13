@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.FormalFunctionsFiniteQuotientMaps
 /-! # Finite quotient cohomology on the local base change
 
 Source: Stacks Project, Tag 02OD, finite-level identifications; Tags 089W and 01FB.
-(blueprint: lem-weil-pbc-formal-functions-finite-quotient-comparison)
 -/
 
 @[expose] public section
@@ -27,9 +26,8 @@ namespace AlgebraicGeometry
 infinitesimal fibre cohomology system. The theorem records only the finite-level
 part of the geometric dictionary and leaves the stalk comparison separate.
 Source: Stacks Project, Tag 02OD, finite-level identifications; Tags 089W and 01FB.
-(blueprint: lem-weil-pbc-formal-functions-finite-quotient-comparison)
 
-Proof: Write A = O_y and let i'_n : X_n → X' be induced by the factorization
+Proof: Write A = O_y and let i'_n: X_n → X' be induced by the factorization
 Spec(A/m^(n+1)) → Spec A → Y. Pasting pullback squares identifies X_n with the
 quotient base change of X'. Its immersion ideal is J^(n+1), by compatibility of
 extended ideals with powers. Composition of tensor pullbacks identifies F_n with

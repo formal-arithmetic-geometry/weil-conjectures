@@ -12,10 +12,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 /-!
 # Dual of a lisse tensor
 
-Source: `literature/blueprint/latest/blueprint/part-weights-riemann-hypothesis/
-  sec-fourier-transform/sec-wft-perverse/sk-lem-wft-curve-heart/lem-per-dual-lisse-tensor.md`
-(blueprint: lem-per-dual-lisse-tensor).
-
 The statement is formulated in the closed symmetric monoidal category `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` of bounded
 constructible complexes, with the Verdier dual `𝔻_X K = RHom(K, ω_X)` of
 `ProEtale.CondensedRing.verdierDual`. The dual `L^∨` of `L` is its internal Hom `RHom(L, ℚ̄_ℓ)`
@@ -60,13 +56,8 @@ noncomputable def verdierDualTensorComparison {X : Over (Spec (.of k))}
 
 /-- The Verdier dual of a bounded constructible complex tensored with a lisse module is
 canonically the tensor of its Verdier dual with the dual module: the canonical map
-`verdierDualTensorComparison : 𝔻_X K ⊗ᴸ L^∨ ⟶ 𝔻_X (K ⊗ᴸ L)` is an isomorphism, for `L` a lisse
+`verdierDualTensorComparison: 𝔻_X K ⊗ᴸ L^∨ ⟶ 𝔻_X (K ⊗ᴸ L)` is an isomorphism, for `L` a lisse
 module `M` placed in degree zero.
-
-(blueprint: lem-per-dual-lisse-tensor)
-Source: latest blueprint, `part-weights-riemann-hypothesis/sec-fourier-transform/`
-`sec-wft-perverse/sk-lem-wft-curve-heart/lem-per-dual-lisse-tensor.md` and its proof
-(`lem-per-dual-lisse-tensor.proof.md`), paragraphs 1--3.
 
 Proof (the four DAG steps):
 1. Work in the ordinary uncompleted derived category over the pulled-back condensed
@@ -79,7 +70,7 @@ Proof (the four DAG steps):
    `L`'s ordinary dual tensored with `omega` to `RHom(L, omega)` is locally the
    finite-free coordinate isomorphism. Hom restriction and tensor pullback preserve it.
 3. Put `V = Hom(L, B)`. Transpose evaluation, using symmetry, to obtain
-   `beta : RHom(K, omega) ⊗ᴸ V → RHom(K, V ⊗ᴸ omega)`. On a trivializing slice
+   `beta: RHom(K, omega) ⊗ᴸ V → RHom(K, V ⊗ᴸ omega)`. On a trivializing slice
    both sides are the same finite power of `RHom(K, omega)` and `beta` is the identity.
    This uses finite products and adjunction and requires no perfectness of `K`.
 4. Exact restriction commutes with cohomology. The comparison cones vanish on the cover,

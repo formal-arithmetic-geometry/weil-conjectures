@@ -29,7 +29,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 after pullback of a finite locally free module.
 
 Source: Stacks Project, Tags 0FNV and 01C8, finite free evaluation and pullback.
-(blueprint: lem-sc-picard-pullback-perfect-evaluation)
 
 Proof: Finite local freeness makes E dualizable. Use its canonical exact pairing
 with internal dual, whose evaluation is dualEvaluation E. The ordinary monoidal

@@ -13,8 +13,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 /-!
 # Nonnegative finite torsion Tate twists on the small étale site
 
-Source: Stacks Project, Étale Cohomology, Section 03PK and Groupoids, Example 040M
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Étale Cohomology, Section 03PK and Groupoids, Example 040M.
 
 Module-valued sheaves are modules over the constant ring sheaf, via the existing
 `etaleConstantModuleFunctor` and its inverse. The tensor below is the canonical
@@ -33,7 +32,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace AlgebraicGeometry.Scheme
 
 /-- Sections of the existing roots-of-unity sheaf are killed by `N`.
-Source: Stacks, Section 03PK (auxiliary; not a blueprint node).
+Source: Stacks, Section 03PK.
 Proof: the kernel inclusion into the multiplicative-group sheaf is injective on sections.
 Its composite with multiplication by `N` is zero by the kernel condition. Naturality of
 scalar multiplication therefore makes `N` times every kernel section zero. -/
@@ -53,14 +52,14 @@ theorem finiteEtaleMu_annihilated (T : Scheme.{u}) (N : ℕ) (U : T.Etaleᵒᵖ)
   exact hx
 
 /-- The existing roots-of-unity sections with their unique `ZMod N`-module action.
-Source: Stacks, Section 03PK (auxiliary; not a blueprint node). -/
+Source: Stacks, Section 03PK. -/
 def finiteEtaleMuModuleObj (T : Scheme.{u}) (N : ℕ) (U : T.Etaleᵒᵖ) :
     ModuleCat.{u + 1} (ZMod N) :=
   letI := AddCommGroup.zmodModule (finiteEtaleMu_annihilated T N U)
   ModuleCat.of (ZMod N) ((T.rootsOfUnitySheaf N).obj.obj U)
 
 /-- Restriction of roots of unity, with the same additive map made `ZMod N`-linear.
-Source: Stacks, Section 03PK (auxiliary; not a blueprint node). -/
+Source: Stacks, Section 03PK. -/
 def finiteEtaleMuModuleMap (T : Scheme.{u}) (N : ℕ) {U V : T.Etaleᵒᵖ} (f : U ⟶ V) :
     finiteEtaleMuModuleObj T N U ⟶ finiteEtaleMuModuleObj T N V :=
   letI := AddCommGroup.zmodModule (finiteEtaleMu_annihilated T N U)
@@ -68,7 +67,7 @@ def finiteEtaleMuModuleMap (T : Scheme.{u}) (N : ℕ) {U V : T.Etaleᵒᵖ} (f :
   ModuleCat.ofHom (((T.rootsOfUnitySheaf N).obj.map f).hom.toZModLinearMap N)
 
 /-- Identity law for the module enhancement of roots of unity.
-Source: Stacks, Section 03PK (auxiliary; not a blueprint node).
+Source: Stacks, Section 03PK.
 Proof: forgetting the linear structure gives exactly the identity restriction of the
 existing roots-of-unity sheaf; linear maps are equal when their functions are equal. -/
 theorem finiteEtaleMuModuleMap_id (T : Scheme.{u}) (N : ℕ) (U : T.Etaleᵒᵖ) :
@@ -80,7 +79,7 @@ theorem finiteEtaleMuModuleMap_id (T : Scheme.{u}) (N : ℕ) (U : T.Etaleᵒᵖ)
   rfl
 
 /-- Composition law for the module enhancement of roots of unity.
-Source: Stacks, Section 03PK (auxiliary; not a blueprint node).
+Source: Stacks, Section 03PK.
 Proof: both underlying maps are restrictions in the existing roots-of-unity sheaf.
 Its functor composition law identifies them, and equality of underlying functions gives
 equality of the linear maps. -/
@@ -96,7 +95,7 @@ theorem finiteEtaleMuModuleMap_comp (T : Scheme.{u}) (N : ℕ)
   rfl
 
 /-- The existing roots-of-unity presheaf with its exponent action of `ZMod N`.
-Source: Stacks, Section 03PK (auxiliary; not a blueprint node). -/
+Source: Stacks, Section 03PK. -/
 def finiteEtaleMuModulePresheaf (T : Scheme.{u}) (N : ℕ) :
     T.Etaleᵒᵖ ⥤ ModuleCat.{u + 1} (ZMod N) where
   obj := finiteEtaleMuModuleObj T N
@@ -105,14 +104,14 @@ def finiteEtaleMuModulePresheaf (T : Scheme.{u}) (N : ℕ) :
   map_comp := finiteEtaleMuModuleMap_comp T N
 
 /-- The canonical scalar map exists exactly when the coefficient ring is killed by `N`.
-Source: Stacks, Section 03PK (auxiliary; not a blueprint node). -/
+Source: Stacks, Section 03PK. -/
 def finiteEtaleTwistScalar (N : ℕ) (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0) :
     ZMod N →+* A :=
   ZMod.castHom ((CharP.cast_eq_zero_iff A (ringChar A) N).mp hA) A
 
 /-- The first finite torsion twist: sheafify the sectionwise extension of scalars
 `A ⊗[ZMod N] μ_N`, canonically the same as `μ_N ⊗[ZMod N] A` by symmetry.
-Source: Stacks, Section 03PK (auxiliary; not a blueprint node). -/
+Source: Stacks, Section 03PK. -/
 def finiteEtaleTateLine (T : Scheme.{u}) (N : ℕ)
     (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0) :
     Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A) :=
@@ -122,7 +121,7 @@ def finiteEtaleTateLine (T : Scheme.{u}) (N : ℕ)
 /-- The nonnegative finite torsion twists: degree zero is the constant coefficient sheaf,
 degree one is extension of scalars of roots of unity, and subsequent degrees are tensor
 powers using the canonical sheaf tensor product.
-Source: Stacks, Section 03PK (auxiliary; not a blueprint node). -/
+Source: Stacks, Section 03PK. -/
 def finiteEtaleTateTwist (T : Scheme.{u}) (N : ℕ)
     (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0) :
     ℕ → Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)

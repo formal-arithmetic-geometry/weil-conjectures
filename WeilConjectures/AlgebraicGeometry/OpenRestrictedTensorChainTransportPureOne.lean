@@ -112,8 +112,7 @@ the germ of the restricted section. Thus the two routes agree. Every x admits
 a section representative, so the result follows for all k and x. Empty opens
 have no z0; zero modules, zero rings, and negative degrees cause no exception.
 Source: Stacks Project, Tags 0098 and 0D5U; the specified unit identities for
-composition mates and uniqueness of left adjoints.
-(blueprint: lem-pc-open-restricted-tensor-chain-transport-pure-one). -/
+composition mates and uniqueness of left adjoints. -/
 theorem openRestricted_tensor_chain_transport_pure_one
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

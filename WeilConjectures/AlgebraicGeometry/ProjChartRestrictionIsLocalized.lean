@@ -13,7 +13,6 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 # Universal property of principal-chart restriction
 
 Source: Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
-(blueprint: lem-weil-pbc-proj-chart-restriction-is-localized)
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
 localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM.
-(blueprint: lem-weil-pbc-proj-chart-restriction-is-localized) -/
+Source: Stacks, Algebra, Section 00JM. -/
 local instance localizedModuleHomogeneousScalarsRestrictionLocalization (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -87,7 +85,6 @@ private theorem canonical_chart_constants
 /-- Pulled-back affine constants agree with the canonical homogeneous-chart restriction.
 
 Source: Stacks Project, Constructions, Tag 01M4 (1)(h) and Tag 01MB.
-(blueprint: lem-weil-pbc-proj-chart-restriction-is-localized)
 
 Proof: The canonical affine chart isomorphism is induced by awayToSection,
 so a constant x pulled back from Spec R[f] is awayToSection f x, restricted
@@ -271,7 +268,7 @@ private theorem gradedModuleChart_restriction_transport
 with scalars restricted along the pulled-back chart constants.
 
 Source: Stacks Project, Constructions, Tags 01M4 (1)(e),(h), 01M7 and 01MB,
-last paragraph. (blueprint: lem-weil-pbc-proj-chart-restriction-is-localized)
+last paragraph.
 
 Proof:
 Write r=a/f^n with a homogeneous of degree n*deg(f), and take the positive-degree

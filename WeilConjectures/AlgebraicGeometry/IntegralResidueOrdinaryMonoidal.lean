@@ -13,7 +13,6 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.RelativeTensorCoequal
 
 Balanced tensor coequalizers give the tensorator, with coherence checked on their
 presentation epimorphisms. Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section

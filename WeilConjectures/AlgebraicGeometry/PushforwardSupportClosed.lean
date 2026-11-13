@@ -30,7 +30,6 @@ namespace AlgebraicGeometry
 
 /-- The support of a pushforward is closed and is contained in the image of the support.
 Source: Stacks Project, Tag 088E, support paragraph (the closedness and stalk argument).
-(blueprint: new-chow-pushforward-support-closed)
 
 Proof: A proper morphism to the Noetherian Z is of finite type, hence Y is
 Noetherian too. Tag 02O5 implies that q_*F is coherent. On a Noetherian scheme,

@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.PicardTermwiseCompositeCounitCore
 /-! # Composition equation for explicit termwise comparison morphisms
 
 Source: Stacks Project, Tags 06YJ and 0D5S.
-(blueprint: lem-sc-picard-termwise-composite-counit)
 -/
 
 @[expose] public section
@@ -112,7 +111,6 @@ of E on the open site is assumed: this is an equation of explicitly given morphi
 
 Source: Stacks Project, Tag 0D5S, composition of derived pullbacks, and Tag 06YJ,
 computation on complexes.
-(blueprint: lem-sc-picard-termwise-composite-counit)
 
 Proof:
 1. Substitute t = s;U.ι, s' = i;s and t' = i;t using hf, hs and ht.

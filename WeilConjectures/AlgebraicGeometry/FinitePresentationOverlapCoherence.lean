@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.OverlapUniversalTestCoherence
 
 /-! # Eventual identity and cocycle equations for lifted maps
 
-Source: Stacks Project, Tags 01ZR and 05N7.
-(blueprint: lem-pc-fp-overlap-eventual-coherence). -/
+Source: Stacks Project, Tags 01ZR and 05N7. -/
 
 @[expose] public section
 
@@ -42,7 +41,6 @@ private lemma overlapLimitMap_stage_comp {I : Type u} [Preorder I]
 /-- The specific lifted natural overlap maps become coherent at a later stage.
 Source: Stacks Project, Tag 01ZR, first proof, Zariski gluing, and Tag 05N7,
 eventual equality of maps.
-(blueprint: lem-pc-fp-overlap-eventual-coherence).
 
 Proof: The comparison with M makes the diagonal and triple cocycle equations
 true after pullback to the limit. Test the diagonal equation on each member of

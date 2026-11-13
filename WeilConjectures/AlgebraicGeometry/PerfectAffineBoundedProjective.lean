@@ -15,7 +15,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTo
 /-! # Perfect objects on affine schemes
 
 Source: literature/stacks-project/perfect.tex, Lemma perfect-lemma-perfect-affine
-(Tag 08EB) (blueprint: lem-pc-perfect-affine-bounded-projective).
+(Tag 08EB).
 -/
 
 @[expose] public section
@@ -30,7 +30,7 @@ namespace AlgebraicGeometry
 it is isomorphic in `D(𝒪_Y)` to `tilde(P)` for a bounded complex `P` of finite projective
 `A`-modules.
 Source: literature/stacks-project/perfect.tex, Lemma perfect-lemma-perfect-affine
-(Tag 08EB) (blueprint: lem-pc-perfect-affine-bounded-projective).
+(Tag 08EB).
 
 Proof: By the affine derived equivalence write `E ≅ tilde(M)` with `M = RΓ(Y, E)` in `D(A)`.
 If `E` is perfect, it is pseudo-coherent and locally of finite Tor amplitude; as `Y` is

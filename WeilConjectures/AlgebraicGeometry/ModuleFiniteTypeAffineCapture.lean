@@ -14,7 +14,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Finite-type capture on a compact open inside an affine open
 
 Source: Stacks Project, Properties, Lemma 01PF, affine finite-numerator step.
-(blueprint: lem-weil-pbc-module-finite-type-affine-capture).
 -/
 
 @[expose] public section
@@ -105,8 +104,7 @@ with it on a compact open where it is already of finite type.
 
 Source: Stacks Project, Properties, Lemma 01PF (label lemma-extend), the affine
 finite-numerator argument, and Lemma 01PB (label lemma-finite-type-module).
-https://stacks.math.columbia.edu/tag/01PF
-(blueprint: lem-weil-pbc-module-finite-type-affine-capture).
+https://stacks.math.columbia.edu/tag/01PF.
 
 Proof: Choose a finite free-module map on V which becomes epimorphic on K by
 exists_finiteType_affine_generators, the finite-numerator step of Lemma 01PF.

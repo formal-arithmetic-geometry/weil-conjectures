@@ -184,8 +184,7 @@ preserves the finite matching diagrams on the affine etale basis, so affine sect
 are L applied to sections of F. Uniqueness of left adjoints gives the coefficient/pullback
 comparison. Its unit equation and composition coherence identify every transition and leg.
 Apply the colimit-preserving L to the module cocone and transport it along these comparisons
-and the supplied e and eK. This gives the colimit property of K with its original normalization.
-(auxiliary; not a blueprint node) -/
+and the supplied e and eK. This gives the colimit property of K with its original normalization. -/
 theorem affine_globalSections_limit_isColimit_of_directed
     {J : Type u} [Preorder J] [IsDirected J (· ≤ ·)] [Nonempty J] {S : Scheme.{u}}
     [IsAffine S]

@@ -37,9 +37,7 @@ augmentation and restricted q and s are the local terms displayed here. The two
 K-flatness proofs and the quasi-isomorphism proofs coincide by proof irrelevance.
 Project the hom of the resulting isomorphism. The two sides are the same
 four-map tensorResolutionComparison construction. This is a single-chart
-identification; it asserts no naturality under a change of chart.
-
-(blueprint: new-h4-qcoh-chart-comparison-hom-identification) -/
+identification; it asserts no naturality under a change of chart. -/
 theorem tensorResolutionChartComparisonIso_hom_eq
     (Y : Scheme.{u}) (M N : Y.Modules) [M.IsQuasicoherent]
     (U : Y.affineOpens) (MA : ModuleCat.{u} (Γ(Y, U.1) : Type u))

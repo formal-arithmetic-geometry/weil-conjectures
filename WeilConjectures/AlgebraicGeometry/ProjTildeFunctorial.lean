@@ -14,7 +14,7 @@ import Mathlib.Topology.Sheaves.SheafCondition.Sites
 # Functoriality of associated module sheaves on Proj
 
 Source: Stacks Project, Constructions, Lemma 01M7, final paragraph, and the construction
-before Definition 01M6 (blueprint: lem-sc-p1-proj-tilde-functorial).
+before Definition 01M6.
 
 The three graded modules are indexed by `Fin 3`. Chart and stalk identifications are
 written as injective additive maps into the ordinary localizations with prescribed image.
@@ -55,7 +55,7 @@ private theorem localized_map_smul
 /-- A fixed degree-preserving map extends to a morphism having the standard-open fraction
 formula. No uniqueness, functor laws, or stalk formulas are asserted here.
 Source: Stacks Project, Constructions, Lemma 01M7, final paragraph, and the construction
-before Definition 01M6. (blueprint: lem-sc-p1-proj-tilde-functorial)
+before Definition 01M6.
 
 Proof:
 1. Localize the linear map at each positive homogeneous f using IsLocalizedModule.map.
@@ -235,7 +235,6 @@ private theorem tilde_chart_map_exists
 /-- A degree-preserving linear map has a unique associated sheaf map, with the indicated
 fraction formulas on charts and stalks. These maps preserve composition and identities.
 Source: Stacks, Constructions, Lemma 01M7 and the construction before Definition 01M6.
-(blueprint: lem-sc-p1-proj-tilde-functorial)
 
 Proof:
 1. Localize each degree-preserving linear map with `IsLocalizedModule.map`. The prescribed

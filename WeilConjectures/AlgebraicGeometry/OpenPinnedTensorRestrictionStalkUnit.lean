@@ -329,8 +329,7 @@ Every stalk element is represented by a section germ, so equality on germs
 proves the equality of additive maps. No flatness or cartesian hypothesis is
 used. Empty opens have no z; zero sheaves and identity open immersions satisfy
 the same unit identities.
-Source: Stacks Project, Tags 0096 and 0098; Mathlib adjunction mate unit identities.
-(blueprint: lem-pc-open-pinned-tensor-restriction-stalk-unit). -/
+Source: Stacks Project, Tags 0096 and 0098; Mathlib adjunction mate unit identities. -/
 theorem openPinnedTensorRestriction_stalk_unit
     {X X' : Scheme.{u}} (k : X' ⟶ X)
     (U : X.Opens) (U' : X'.Opens) (j : U'.toScheme ⟶ U.toScheme)

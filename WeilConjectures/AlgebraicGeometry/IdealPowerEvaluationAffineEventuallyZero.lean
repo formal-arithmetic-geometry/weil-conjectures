@@ -18,7 +18,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Affine local vanishing of ideal-power evaluation
 
 Source: Stacks Project, Properties, Lemma 01PM, injectivity argument, as used in 01PQ.
-(blueprint: lem-weil-pbc-ideal-power-evaluation-affine-eventually-zero).
 -/
 
 @[expose] public section
@@ -132,7 +131,6 @@ set_option backward.isDefEq.respectTransparency false in
 
 Source: Stacks Project, Properties, Lemma 01PM, proof of injectivity, and 01PQ,
 first proof paragraph.
-(blueprint: lem-weil-pbc-ideal-power-evaluation-affine-eventually-zero).
 
 Proof: put A = Gamma(V, O_X) and J = image(Gamma(V, I) -> A). Quasi-coherence
 and finite type identify Gamma(V, I) with a finite A-module; its image J is
@@ -229,7 +227,6 @@ of the ambient scheme is required.
 
 Source: Stacks Project, Properties, Lemma 01PM, proof of injectivity, and Lemma 01PQ,
 first proof paragraph.
-(blueprint: lem-weil-pbc-ideal-power-evaluation-affine-eventually-zero).
 
 Proof: On V put A = Γ(V, O_X) and let J be the image of the ideal inclusion on
 sections. Tensor and image sections identify the section image of P_n with J^n,

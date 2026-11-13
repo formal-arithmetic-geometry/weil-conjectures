@@ -132,7 +132,6 @@ private theorem homComplex_to_single_components
 
 /-- Hom-to-single comparison is compatible with a coefficient morphism.
 Source: Stacks Project, Tag 0A8X, product Hom construction.
-(blueprint: new-g3-hom-to-single-coefficient-square).
 
 Proof: Choose the same product projections of the Hom bifunctor for both
 coefficient sheaves. In degree k the projection with source degree -k is an

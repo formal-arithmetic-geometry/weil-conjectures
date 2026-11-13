@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.BoundedProjectiveHomPowerT
 /-! # Power torsion on an affine open
 
 Source: Stacks Project, Tag 08EJ, affine paragraph.
-(blueprint: lem-sc-perfect-support-affine-open-torsion).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ set_option maxHeartbeats 400000 in
 /-- Every local morphism from a restricted perfect source into a shift of a restricted
 supported target is killed by a power of the global function on an affine open.
 Source: Stacks Project, Tag 08EJ, affine paragraph.
-(blueprint: lem-sc-perfect-support-affine-open-torsion).
 
 Proof: Compare localized-site restriction with restriction to the open subscheme U.
 Perfectness and quasi-coherence restrict, and the stalk comparison restricts the support

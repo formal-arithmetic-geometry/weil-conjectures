@@ -89,7 +89,6 @@ private theorem flatCohomologyBaseChange_bijective
 /-- The actual resolution-defined comparison is invertible for qcqs direct image
 of a quasi-coherent module, for every augmented comparison lift.
 Source: Stacks Project, Tag 02KH, part (1), using the map of Tag 02N7.
-(blueprint: lem-weil-pbc-flat-base-change-resolution-iso)
 
 Proof: Work locally on the two bases, reducing to a flat map of affine rings A → B.
 On a finite affine cover of the qcqs source use the Cech-to-cohomology spectral

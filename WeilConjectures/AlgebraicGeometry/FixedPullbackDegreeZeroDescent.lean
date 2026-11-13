@@ -25,7 +25,6 @@ at a later stage. No varying coefficient sheaves or colimit of sheaves occurs he
 
 Source: Stacks Project, Étale Cohomology, Tag 09YQ, degree-zero argument using
 Tags 0EYL, 04HR, 09YN and restriction along an étale morphism, Tag 03S2.
-(blueprint: lem-weil-pbc-fixed-pullback-degree-zero-descent).
 
 Proof: Identify degree-zero cohomology with sections of the identity étale object
 by H.equiv₀. Restrict the inverse scheme diagram to the cofinal upper tail of i.

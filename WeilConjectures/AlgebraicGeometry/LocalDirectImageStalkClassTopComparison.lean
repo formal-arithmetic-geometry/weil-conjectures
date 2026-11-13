@@ -129,7 +129,6 @@ private theorem topSection_naturality {Z Y : Scheme.{u}} (h : Z ⟶ Y)
 /-- The defined local class map can be computed on the top open using any
 injective resolution of the pulled-back module.
 Source: Stacks Project, Lemma 20.7.3 (Tag 01E4).
-(blueprint: lem-weil-pbc-local-direct-image-stalk-class-top-comparison)
 
 Proof: Let R be the fixed injective resolution in localDirectImage_stalk_class
 and let h be the first projection. Lift the identity of the pulled-back module

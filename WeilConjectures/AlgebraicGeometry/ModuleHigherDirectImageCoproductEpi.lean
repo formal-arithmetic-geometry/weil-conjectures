@@ -19,7 +19,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 /-! # Surjectivity of ordinary higher direct image on coproducts
 
 Source: Stacks Project, Tag 07TB, with Tags 01FF and 01FE.
-(blueprint: lem-pc-module-higher-direct-image-coproduct-epi).
 -/
 
 @[expose] public section
@@ -56,7 +55,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 surjective family. No quasi-coherence hypothesis is needed.
 Source: Stacks Project, Tag 07TB, proof using cohomology on inverse images of affine
 opens, with Tags 01FF and 01FE.
-(blueprint: lem-pc-module-higher-direct-image-coproduct-epi).
 
 Proof: Restriction to an open subspace preserves coproducts of module sheaves, since
 it is left adjoint to direct image for the open immersion. For an affine open V of Y,

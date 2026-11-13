@@ -12,7 +12,6 @@ public import Mathlib.Topology.Sheaves.Functors
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-! # Naturality of the restricted étale inverse-image unit
 Source: Stacks Project, Tag 09ZF, first proof paragraph.
-(blueprint: lem-weil-pbc-gabber-zariski-etale-unit-natural)
 -/
 
 @[expose] public section
@@ -28,9 +27,8 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- The étale unit, transported by the open/base-change identifications, is natural.
-Source: Stacks Project, Tag 09ZF (lemma-gabber-h0), first proof paragraph,
+Source: Stacks Project, Tag 09ZF, first proof paragraph,
 and Sites, Tag 00WX, the inverse-image adjunction.
-(blueprint: lem-weil-pbc-gabber-zariski-etale-unit-natural).
 Proof: restrict the étale adjunction unit along the open-subscheme inclusion.
 For an inclusion of opens, the square of base-change identifications commutes:
 compose both proposed scheme morphisms with the two pullback projections.

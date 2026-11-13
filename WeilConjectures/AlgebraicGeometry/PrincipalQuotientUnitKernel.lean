@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.PrincipalQuotientMultiplicationImage
 
 Source: Stacks Project, More on Morphisms, Tag 0EX8, the divisibility step in both
 proofs; Modules, Tag 08KS, the description of pullback to a closed subscheme.
-(blueprint: lem-sc-principal-quotient-unit-kernel)
 -/
 
 @[expose] public section
@@ -88,7 +87,6 @@ nonzero base scalar is the kernel of the unit restricting to its principal quoti
 
 Source: Stacks Project, Tag 0EX8, the step asserting that a section which vanishes
 modulo pi can be divided by pi; Modules, Tag 08KS, pullback to a closed subscheme.
-(blueprint: lem-sc-principal-quotient-unit-kernel)
 
 Proof:
 1. The quotient map A -> A/(pi) is surjective, so its spectrum and its base change

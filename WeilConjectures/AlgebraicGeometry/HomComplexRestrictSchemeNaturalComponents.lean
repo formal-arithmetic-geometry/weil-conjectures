@@ -131,7 +131,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Restriction isomorphisms for ordinary Hom complexes can be chosen
 naturally in the second complex.
 Source: Stacks Project, Cohomology, Tag 08DL.
-(blueprint: lem-sc-hom-complex-restrict-scheme-natural-components)
 Proof: choose the componentwise chain isomorphisms induced by restriction of
 local module maps. Naturality follows by checking every product projection;
 the two composites are restrictions of the same postcomposition map. -/

@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeCounit
 /-!
 # Counit and cochain representative equations for the published mixed open tensor comparison
 
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4 (lemma-pullback-tensor-product)
-(blueprint: lem-sf-finite-open-mixed-tensor-representative).
+Source: Stacks Project, sites-cohomology.tex, Tag 07A4.
 The statement is given for an arbitrary coefficient category; the finite coefficient
 case `Mod_A` is obtained by instantiation.
 -/
@@ -37,8 +36,8 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [Abelian.HasFunctorialFlatResolution A] [ProEtale.UpperStarPreservesFlat A]
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- For a coefficient category `A` and an open immersion `j : U ⟶ X`, with
-`F = j^*` on pro-étale `A`-valued sheaves, `κ : LF ≅ DF`, `a : DF ∘ Q_X ≅ Q_U ∘ F_c`, `φ` the
+/-- For a coefficient category `A` and an open immersion `j: U ⟶ X`, with
+`F = j^*` on pro-étale `A`-valued sheaves, `κ: LF ≅ DF`, `a: DF ∘ Q_X ≅ Q_U ∘ F_c`, `φ` the
 published left-derived tensor comparison, `μ` the native lax tensorators of the cochain
 localizations and `c` the signed total of the oplax tensorator of `F`:
 (1) the left-derived counit at the homotopy image of `P`, transported along
@@ -46,10 +45,10 @@ localizations and `c` the signed total of the oplax tensorator of `F`:
 (2) `φ ≫ (ε_P ⊗ ε_Q) ≫ μ^U = LF(μ^X) ≫ ε_{T_X(P,Q)} ≫ Q_U(c)`;
 (3) `(κ⁻¹ ⊗ 1) ≫ φ⁻¹ ≫ κ ≫ DF(μ^X) ≫ a = (a_P ⊗ ε_Q) ≫ μ^U ≫ Q_U(c)⁻¹`.
 No boundedness, flatness or K-flatness is assumed on `P, Q`; no `μ` is inverted.
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4 (lemma-pullback-tensor-product).
+Source: Stacks Project, sites-cohomology.tex, Tag 07A4.
 
 Proof.
-Step 1. `j^*` is exact, so the termwise factor `a^h : DF ∘ Q_{h,X} ≅ Q_{h,U} ∘ F_h` is
+Step 1. `j^*` is exact, so the termwise factor `a^h: DF ∘ Q_{h,X} ≅ Q_{h,U} ∘ F_h` is
 invertible on every complex and `(DF, a^h)` is a left-derived presentation of the same
 functor as `(LF, ε^h)`. `κ` is the canonical comparison of the two presentations; the
 counit-compatible uniqueness of right Kan extensions gives `κ_{Q_h H} ≫ a^h_H = ε^h_H`.
@@ -66,7 +65,6 @@ Step 4. Naturality of `κ` gives `κ ≫ DF(μ^X) = LF(μ^X) ≫ κ`, so the lef
 `(κ⁻¹ ⊗ 1) ≫ φ⁻¹ ≫ LF(μ^X) ≫ ε_{T_X(P,Q)}`. Clause (2), composed with `φ⁻¹` before and
 `Q_U(c)⁻¹` after, rewrites this as `(κ⁻¹ ⊗ 1) ≫ (ε_P ⊗ ε_Q) ≫ μ^U ≫ Q_U(c)⁻¹`, and
 `κ⁻¹ ≫ ε_P = a_P` gives clause (3). Only `κ`, `φ` and `c` are inverted.
-(blueprint: lem-sf-finite-open-mixed-tensor-representative)
 -/
 theorem finiteOpenMixedTensorRepresentative
     (P Q : CochainComplex (Sheaf (Scheme.ProEt.topology X) A) ℤ) :

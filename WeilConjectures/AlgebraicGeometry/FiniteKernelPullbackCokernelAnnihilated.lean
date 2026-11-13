@@ -134,8 +134,7 @@ cokernel C of E -> F, the image of P -> F is a quotient of P/E and is killed by
 I^(n+1); the quotient by that image is coker(P -> F), killed by I^s. Multiplying
 these annihilators kills C by I^(s+n+1). The ideal-product stalk formula and the
 zero-stalk criterion give the stated sheaf annihilation. This includes J=0 and J=1,
-zero modules and the empty scheme; it does not require finite generation.
-(blueprint: lem-weil-pbc-finite-kernel-pullback-cokernel-annihilated). -/
+zero modules and the empty scheme; it does not require finite generation. -/
 theorem finiteKernelPullback_cokernel_annihilated
     {X : Scheme.{u}} (J : X.IdealSheafData)
     {F F' H G : X.Modules} (a : F ⟶ H) (a' : F' ⟶ H)

@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 # Components of module base change under restriction
 
 Source: Stacks Project, Sheaves, Tag 00A0 and Cohomology, Tags 0ATL and 0ATM.
-(blueprint: lem-weil-pbc-module-square-restriction-commutes).
 -/
 
 @[expose] public section
@@ -146,7 +145,6 @@ private theorem baseChangeMapCore_congr {X S T Y : Scheme.{u}}
 /-- Base change commutes with restriction of a commutative square. This is purely
 pasting coherence: the four vertical maps need not be open immersions.
 Source: Stacks Project, Cohomology, Remarks 0ATL and 0ATM, with Remark 08HY.
-(blueprint: lem-weil-pbc-module-square-restriction-commutes)
 
 Proof: paste the original square with the primed restriction square. Taking mates
 of the sectionwise pushforward composition identity gives the outer base change map

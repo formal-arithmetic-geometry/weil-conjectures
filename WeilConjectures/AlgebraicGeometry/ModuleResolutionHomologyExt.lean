@@ -15,7 +15,6 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-! # A fixed module resolution computes Ext from the structure sheaf
 
 Source: Stacks Project, Cohomology, Tags 01DZ and 0B6A.
-(blueprint: lem-sc-module-resolution-homology-ext).
 -/
 
 @[expose] public section
@@ -203,7 +202,6 @@ private lemma forget_homologyπ
 /-- A single fixed injective module resolution computes Ext from the structure sheaf.
 Source: Stacks Project, Cohomology, Tag 01DZ (cohomology of modules) and Tag 0B6A
 (cohomology as Ext from the structure sheaf).
-(blueprint: lem-sc-module-resolution-homology-ext).
 
 Proof: An O-linear map from the structure sheaf is determined by the image of 1
 on the whole space. Conversely a global section defines such a map by multiplying

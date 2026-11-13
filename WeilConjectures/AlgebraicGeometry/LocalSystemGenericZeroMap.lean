@@ -24,7 +24,6 @@ namespace AlgebraicGeometry.Scheme
 /-- A morphism into a local system vanishes if it vanishes at the geometric generic point.
 Source: Stacks Project, Tag 09BG, the persistence of a nonzero constant germ used
 in the generic-neighbourhood argument of Tag 09BH (3).
-(blueprint: lem-weil-pbc-local-system-generic-zero-map).
 
 Proof: If the morphism is nonzero, conservativity of geometric stalks and exactness
 of those stalks give a germ whose image in G is nonzero. Pull back to an etale

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionAugment
 /-! # Subset coordinates for the alternating tuple total
 
 Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
-(blueprint: lem-sc-principal-open-cech-subset-coordinates).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ and the restriction of a section into the singleton coordinates. The source comp
 and a map from it are not part of this statement.
 
 Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
-(blueprint: lem-sc-principal-open-cech-subset-coordinates).
 
 Proof: Send an increasing tuple to its range; its inverse is the increasing enumeration
 of a finite subset. Its intersection is the preimage of the basic open of the product.

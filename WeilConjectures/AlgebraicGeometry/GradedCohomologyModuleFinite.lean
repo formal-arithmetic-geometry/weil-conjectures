@@ -26,8 +26,7 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComple
 /-!
 # Finiteness for a compatible graded cohomology action
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 0897
-(blueprint: lem-weil-pbc-graded-cohomology-module-finite).
+Source: Stacks Project, Cohomology of Schemes, Lemma 0897.
 -/
 
 @[expose] public section
@@ -95,7 +94,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 0897(1), relative-spectrum
 proof of finiteness, with the compatible action given as an input.
-(blueprint: lem-weil-pbc-graded-cohomology-module-finite-generators).
 
 Proof:
 1. Let X' = X times_(Spec A) Spec B, with projection pi to X and f' to Spec B.
@@ -278,7 +276,7 @@ theorem gradedCohomologyModuleFinite_generators
     Module.Finite.equiv (LinearEquiv.ofBijective L hphi).symm
   exact Module.Finite.fg_top
 
-/-- (blueprint: lem-weil-pbc-graded-cohomology-module-finite) -/
+/-- -/
 theorem gradedCohomologyModuleFinite
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
     [IsNoetherianRing A] [Algebra.FiniteType A B]

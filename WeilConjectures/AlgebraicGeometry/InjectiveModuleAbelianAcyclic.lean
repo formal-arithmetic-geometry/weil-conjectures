@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSiteCechComplexComparison
 /-!
 # Abelian cohomology of injective etale module sheaves
 
-Source: Stacks Project, Cohomology on Sites, Lemma 03FD, second paragraph of the proof
-(blueprint: lem-weil-pbc-injective-module-abelian-acyclic).
+Source: Stacks Project, Cohomology on Sites, Lemma 03FD, second paragraph of the proof.
 -/
 
 @[expose] public section
@@ -37,8 +36,7 @@ positive-degree cohomology on every object of the small etale site, computed in 
 sheaves. No injectivity of the underlying abelian sheaf is assumed. `ULift` only places
 coefficients in the universe of the sheaf values.
 
-Source: Stacks Project, Lemma 03FD, second paragraph of the proof
-(blueprint: lem-weil-pbc-injective-module-abelian-acyclic).
+Source: Stacks Project, Lemma 03FD, second paragraph of the proof.
 
 Proof (the node's five steps). Fix an object U and any covering of U. Write O for the
 constant ring sheaf and K for the chain complex of free presheaves of O-modules of this

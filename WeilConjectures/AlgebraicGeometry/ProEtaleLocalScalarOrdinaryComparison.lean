@@ -616,7 +616,7 @@ including the specified constant B-action.
 
 Source: Stacks Project, Modules on Sites, Tags 03D2, 03EL and 03EK;
 Cohomology on Sites, lemma-pullback-tensor-product, the ordinary comparison used in
-Tag 06YY. (auxiliary; not a blueprint node).
+Tag 06YY.
 
 Proof: apply inverse image to the tensor presentation of scalar extension. Inverse
 image preserves colimits and finite products, so it preserves the coequalizer imposing

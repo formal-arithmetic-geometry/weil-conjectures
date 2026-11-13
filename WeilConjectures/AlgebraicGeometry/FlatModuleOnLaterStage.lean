@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackFinitePresentation
 /-! # A flat module on a fixed affine-limit model descends to a later stage
 
 Source: Stacks Project, Tags 01ZR and 05LY.
-(blueprint: lem-pc-flat-module-on-later-stage).
 -/
 
 @[expose] public section
@@ -147,9 +146,8 @@ private theorem exists_eventually_isFlatOver_of_limit
 relatively flat module descends to a finitely presented relatively flat module at a
 later stage. The source model is fixed; no scheme approximation or properness is asserted.
 
-Source: Stacks Project, limits.tex, Tag 01ZR (lemma-descend-modules-finite-presentation)
-and Tag 05LY (lemma-descend-module-flat-finite-presentation).
-(blueprint: lem-pc-flat-module-on-later-stage).
+Source: Stacks Project, limits.tex, Tag 01ZR
+and Tag 05LY.
 
 Proof: Work on the directed tail of indices above i; it is cofinal, so the limit
 is unchanged. The base changes of Zi on this tail are quasi-compact and quasi-separated,

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisComparisons
 /-! # The short exact complex presenting direct-image Mayer--Vietoris
 
 Source: Stacks Project, Cohomology, Tag 08BV, proof before passage to the triangle.
-(blueprint: lem-pc-kinjective-mayer-vietoris-presentation).
 -/
 
 @[expose] public section
@@ -38,7 +37,6 @@ set_option maxHeartbeats 800000 in
 its first two arrows to the derived units and the difference of restriction maps.
 Source: Stacks Project, Cohomology, Tag 08BV, construction of the short exact sequence
 and its identification with the three derived direct-image objects.
-(blueprint: lem-pc-kinjective-mayer-vietoris-presentation).
 
 Proof:
 For each open W among U, V and their intersection, restrict I termwise. Exact

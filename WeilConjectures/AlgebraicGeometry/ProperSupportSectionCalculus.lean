@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.ProperSupportSectionLocality
 
 /-! # Local and linear calculus of proper-support sections
 
-Source: Stacks Project, Tags 04FR, 04FT and 0F4X
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 04FR, 04FT and 0F4X.
 -/
 
 @[expose] public section
@@ -133,7 +132,6 @@ sheaf morphisms, and membership is local on the base. Their support can equivale
 be tested at every separably closed geometric point.
 
 Source: Stacks Project, Tags 04FR, 04FT and 0F4X.
-(auxiliary; not a blueprint node)
 
 Proof:
 1. Apply the zero-open theorem to the underlying abelian sheaf. Its open zero locus

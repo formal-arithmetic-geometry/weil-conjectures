@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleCoproductRepresentation
 # Assembly of the finite etale local representatives
 
 Source: Stacks Project, Tag 03RV and Descent Tag 02W5.
-(blueprint: lem-weil-pbc-finite-local-models-descent-datum-existence)
 -/
 
 @[expose] public section
@@ -56,7 +55,6 @@ private theorem finite_sigmaMap {ι : Type u} {X Y : ι → Scheme.{u}}
 
 Source: Stacks Project, Tag 03RV, assembly of the local representatives before descent;
 Descent Tag 02W5, gluing the local representations.
-(blueprint: lem-weil-pbc-finite-local-models-descent-datum-existence)
 
 Proof: Choose Q_i and its representation isomorphism from hrep by choice. The equivalence
 between the site localized at U_i and the small etale site of U_i transports each isomorphism

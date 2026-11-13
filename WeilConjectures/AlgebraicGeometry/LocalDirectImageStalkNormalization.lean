@@ -85,7 +85,6 @@ set_option maxHeartbeats 1000000 in
 -- Elaborating the nested cohomology and stalk types needs more than the default heartbeats.
 /-- Normalization of the inverse of the specified canonical class map.
 Source: Stacks Project, Tags 01E4 and 01FB; Tag 02OD for the local spectrum.
-(blueprint: lem-weil-pbc-local-direct-image-stalk-cohomology-normalization)
 
 Proof: For V containing y, c^{-1}V is top. The pullback-square identity therefore
 identifies W = g'^{-1}(f^{-1}V) with all of X'. Restriction from X' to W is thus

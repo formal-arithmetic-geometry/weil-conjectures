@@ -30,7 +30,6 @@ namespace AlgebraicGeometry
 /-- Proper perfect pushforward admits a small family of compact isomorphism tests
 whose images are compact. This statement makes no reference to a right adjoint.
 Source: Stacks Project, Tags 0A9R (first paragraph), 0B6G, 09M1, and 09IS.
-(blueprint: lem-sc-proper-perfect-compact-tests).
 
 Proof. Work first in the K-injective derived models with small Hom sets and the
 corresponding derived models on every open. The localization equivalences transport

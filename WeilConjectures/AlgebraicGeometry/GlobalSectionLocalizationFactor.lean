@@ -101,7 +101,6 @@ private theorem globalExtension_localization
 
 /-- Scalar extension identifies a single augmented two-term localization complex.
 Source: Stacks Project, algebraization.tex, Tag 0996; algebra.tex, Tag 00DK.
-(auxiliary; not a blueprint node).
 
 Proof: transpose the fixed multiplication map through its two defining adjunctions.
 Its transpose is evaluation of sections, which commutes with multiplication by s.

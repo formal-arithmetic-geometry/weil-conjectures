@@ -23,7 +23,6 @@ import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # Tower descent over a prescribed local-ring system
 Source: Stacks Project, Algebra, proof of Tag 00R7, using Tags 00QV and 00QX.
-(blueprint: lem-weil-pbc-limit-tower-over-local-system)
 -/
 
 @[expose] public section
@@ -60,7 +59,7 @@ restricted along a final functor, rather than constructed afresh. Finite generat
 omitted because it follows from the displayed cokernel presentation.
 
 Source: Stacks Project, Algebra, proof of Tag 00R7, first paragraph, using the constructions
-of Tags 00QV and 00QX (blueprint: lem-weil-pbc-limit-tower-over-local-system).
+of Tags 00QV and 00QX.
 
 Proof: Apply `RingHom.exists_limit_module_essentially_finite_presentation_over_system` to
 `F`, its supplied colimit cocone, the presentation of `S` over `R`, and the zero module

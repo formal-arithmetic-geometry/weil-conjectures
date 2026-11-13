@@ -217,7 +217,6 @@ The morphism-level coherence underlying the raw pullback comparison.  It is obta
 expanding the derived adjunction comparison, the transition map, and the shift comparison;
 naturality of the adjunction unit and the triangle identity identify the two composites.
 Source: Stacks Project, Tags 03Q8 and 09Z1.
-(blueprint: sbc-lem-higher-image-raw-transition-to-hom-core).
 -/
 theorem higherDirectImageRawTransition_toHom_core
     (Λ : Type (u + 1)) [CommRing Λ] {Y Y' S : Scheme.{u}}

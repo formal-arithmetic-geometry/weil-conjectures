@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.InjectiveExchangeTargetTransport
 /-! # Injective representative computation of the derived exchange
 
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-injective-exchange-representative).
 -/
 
 @[expose] public section
@@ -52,7 +51,6 @@ private lemma map_comp_naturality {A B C D : Type*}
 
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, with the
 factorization `Adjunction.derivedPlus_mateEquiv_app_fac`.
-(blueprint: lem-weil-pbc-injective-exchange-representative).
 
 Proof: regard the injective complex as an object of the bounded-below homotopy
 category. Lift q to its localization using the fully faithful inclusion of D⁺

@@ -13,8 +13,7 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 /-!
 # Structure sections on a reduced scheme away from component intersections
 
-Source: Stacks Project, Varieties Lemma 09NE, proof, first paragraph after setting T
-(blueprint: lem-sc-glue-component-reduced-cover-sections).
+Source: Stacks Project, Varieties Lemma 09NE, proof, first paragraph after setting T.
 -/
 
 @[expose] public section
@@ -25,14 +24,13 @@ open CategoryTheory AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
-/-- Let `X` be a reduced scheme and `i a : Z a ⟶ X` finitely many closed immersions whose
+/-- Let `X` be a reduced scheme and `i a: Z a ⟶ X` finitely many closed immersions whose
 images cover `X`. With `T` the union of the pairwise intersections `Z a ∩ Z b`, `a ≠ b`, the
 sets `Z a \ T` are open in `X`, pairwise disjoint and cover `X \ T`, and for every open
 `V ⊆ X \ T` the restriction maps `Γ(X, V) → Γ(Z a, (i a)⁻¹ V)` together give a bijection
 onto the product over `a` (empty factors are the zero ring), so `X \ T` is the
 scheme-theoretic union of the open subschemes `Z a \ T`.
-Source: Stacks Project, Varieties Lemma 09NE, proof, first paragraph after setting T
-(blueprint: lem-sc-glue-component-reduced-cover-sections).
+Source: Stacks Project, Varieties Lemma 09NE, proof, first paragraph after setting T.
 
 Proof: The finite union `T` is closed. The complement of `T` together with all component
 images other than `a` is exactly `Z a \ T`, so that set is open. Disjointness and coverage

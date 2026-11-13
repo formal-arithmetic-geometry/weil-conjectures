@@ -47,7 +47,6 @@ private noncomputable def restrictLocalFrame
 /-- Every point has a local isomorphism from dual exterior conormal to self Ext.
 
 Source: Stacks Project, Tag 0BQY (Hom of the Koszul resolution) and Tag 062I.
-(blueprint: new-w4-koszul-self-ext-local-iso).
 
 Proof: At z choose the supplied chart U and its regular generators. The existing
 self-Ext pullback local frame identifies the target over i⁻¹U with the free sheaf

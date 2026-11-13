@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 /-! # Natural comparison with the source library's ordinary cohomology
 
 Source: Stacks Project, Tag 03FD, and the Ext definition of sheaf cohomology.
-(blueprint: lem-sc-module-cohomology-source-comparison)
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Module right-derived sections agree naturally with the ordinary Ext model H.
 Source: Stacks Project, Tag 03FD, Lemma 21.12.4; Mathlib's constant-sheaf and
 free-abelian-Yoneda adjunctions identify the two terminal Ext source objects.
-(blueprint: lem-sc-module-cohomology-source-comparison)
 
 Proof: Use zariskiModuleAbelianCohomologyAgree to compare module right-derived
 sections with Ext from the sheafified free abelian representable at the top open.

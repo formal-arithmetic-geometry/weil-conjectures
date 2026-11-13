@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.Category.Preorder
 /-! # Transport of an adjunction mate along an isomorphism of diagrams
 
 Source: Stacks Project, Tag 02N7, mate construction; Tag 0B65, adjunction conjugation.
-(blueprint: lem-weil-pbc-formal-system-exchange-mate-compatibility).
 -/
 
 @[expose] public section
@@ -47,7 +46,6 @@ private theorem exchange_unit
 
 /-- A mate identity on objects transports to isomorphic diagrams.
 Source: Stacks Project, Tag 02N7 (adjunction mate construction) and Tag 0B65.
-(blueprint: lem-weil-pbc-formal-system-exchange-mate-compatibility).
 
 Proof: Evaluate at a level n. Expand pullback of the composite unit and beta.
 Naturality of B at beta moves beta after B at L(G_n). Substitute the supplied

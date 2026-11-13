@@ -143,7 +143,6 @@ private lemma tensorColumn_app_top {X Y : Scheme.{v}} (g : X ⟶ Y)
 
 /-- Tensor pullback applies the structure-ring map to a framed column morphism.
 Source: Stacks Project, Tags 0096 and 01CA.
-(blueprint: lem-sc-picard-tensor-frame-map)
 
 Proof: The chosen tensor adjunction makes tensor pullback preserve coproducts.
 The free comparison is characterized on the inclusions by the pinned tensor-unit

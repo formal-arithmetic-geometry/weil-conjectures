@@ -16,7 +16,6 @@ import Mathlib.AlgebraicGeometry.ResidueField
 /-! # The isomorphism locus in an affine finite free frame
 
 Source: Stacks Project, Tag 05GD, Lemma 10.79.4(3), and Tag 0BDP, final sentence.
-(blueprint: lem-sc-finite-free-map-iso-locus-basic-open)
 -/
 
 @[expose] public section
@@ -183,7 +182,6 @@ private theorem card_eq_of_mem_locus {W : Scheme.{u}} {M N : W.Modules}
 is a basic open.
 Source: Stacks Project, Tag 05GD, Lemma 10.79.4(3), local matrix argument, and
 Tag 0BDP, final determinant sentence.
-(blueprint: lem-sc-finite-free-map-iso-locus-basic-open)
 
 Proof: Give the finite index types Fintype structures. If their cardinalities agree,
 reindex the target frame to the source index type and form the square matrix of the

@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 /-! # surjective on cohomology for the principal-open Čech augmentation
 
 Source: Stacks Project, Cohomology, Tag 08C1, finite augmented Čech argument.
-(blueprint: lem-sc-principal-open-cech-homology-surjective).
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ namespace AlgebraicGeometry
 The source and target are specified by degree isomorphisms and the actual differential
 and augmentation formulas; no choice of unspecified Čech data occurs.
 
-Source: Stacks Project, Cohomology, Tag 08C1 (lemma-alternating-cech-complex-complex).
-(blueprint: lem-sc-principal-open-cech-homology-surjective).
+Source: Stacks Project, Cohomology, Tag 08C1.
 
 Proof: Restrict J to the open union V. Open restriction preserves K-injectivity,
 and the equivalence from modules on the over-site to modules on the open scheme

@@ -16,7 +16,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 /-! # Finite basic-open covers generate the unit ideal under ideal H¹ vanishing
 
 Source: Stacks Project, Tag 01XF, label lemma-quasi-compact-h1-zero-covering,
-last two paragraphs of the proof (blueprint: lem-pqf-h1-finite-basic-cover-unit-ideal).
+last two paragraphs of the proof.
 -/
 
 @[expose] public section
@@ -57,9 +57,9 @@ set_option backward.defeqAttrib.useBackward true in
 /-- Ideal H¹ vanishing makes any finite basic-open covering family generate one.
 
 Source: Stacks Project, Tag 01XF, label lemma-quasi-compact-h1-zero-covering,
-last two paragraphs of the proof (blueprint: lem-pqf-h1-finite-basic-cover-unit-ideal).
+last two paragraphs of the proof.
 
-Proof: Enumerate the finite set s by f₁,...,fₙ. The map O_X^n → O_X sending
+Proof: Enumerate the finite set s by f₁..,fₙ. The map O_X^n → O_X sending
 eᵢ to fᵢ is surjective on stalks, since at every point one fᵢ is a unit.
 Let F be its quasi-coherent kernel. Put Fᵢ = F ∩ O_X^i, using the first i
 summands. Projection onto the i-th coordinate identifies Fᵢ/Fᵢ₋₁ with a

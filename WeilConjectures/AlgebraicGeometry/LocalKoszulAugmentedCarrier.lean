@@ -24,8 +24,7 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-! # A locally augmented Koszul carrier
 
-Source: Stacks Project, Tags 0BQY and 068C.
-(blueprint: new-s1-local-koszul-augmented-carrier). -/
+Source: Stacks Project, Tags 0BQY and 068C. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -342,7 +341,6 @@ restricted tensor pullback has bounded finite-free terms and zero differential.
 
 Source: Stacks Project, Tag 068C, finite-free Koszul resolution; Tag 0BQY,
 proof's local Koszul construction and quotient calculation.
-(blueprint: new-s1-local-koszul-augmented-carrier).
 
 Proof: Put A = Gamma(Y,U) and I = ker(i)(U). The closed immersion on U identifies
 its source with Spec(A/I). Extend Q.pi to integer degrees and replace Q.complex

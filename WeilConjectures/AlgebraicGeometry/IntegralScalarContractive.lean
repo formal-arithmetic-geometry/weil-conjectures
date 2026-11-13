@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.PointLanAffineEvaluation
 /-! # Scalar units in the integral coefficient sheaf
 
 Source: Bhatt--Scholze, Section 6.8, integral Nakayama argument.
-(auxiliary; not a blueprint node)
 
 The continuous-ring realization argument is generalized from the proved comparison in
 `WeilConjectures.AlgebraicGeometry.CondensedFieldLfpLocalTriviality` to a totally disconnected
@@ -528,7 +527,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 
 /-- One minus ℓ times an endomorphism of the regular integral module is invertible.
 Source: Bhatt--Scholze, Section 6.8, integral Nakayama argument.
-(auxiliary; not a blueprint node)
 
 Proof: realize the pulled coefficient ring as the ring sheaf of continuous integral
 functions. The comparison sends a function on a profinite test space to its composite

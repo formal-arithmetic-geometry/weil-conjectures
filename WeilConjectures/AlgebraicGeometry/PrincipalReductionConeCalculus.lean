@@ -18,10 +18,9 @@ import WeilConjectures.CategoryTheory.Sites.MonObj
 # Strict principal reduction and its compatible cone comparisons
 
 proof.md`,
-Cones paragraph; Stacks Tag 014E, definition-cone
-(auxiliary; not a blueprint node).
+Cones paragraph; Stacks Tag 014E, definition-cone.
 
-Positive level n+1 is indexed by n : ℕ, as in AdicCompletion. Cone coordinates
+Positive level n+1 is indexed by n: ℕ, as in AdicCompletion. Cone coordinates
 are ordered target, shifted source. The comparison is one natural family,
 including its quotient transitions and its specified reduction coaugmentations.
 -/
@@ -42,17 +41,14 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- The standard cone coordinates in target, shifted-source order.
-Source: Stacks Tag 014E, definition-cone
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tag 014E, definition-cone. -/
 def principalConeCoordinates {C : Type uC} [Category.{vC} C] [Preadditive C]
     [HasBinaryBiproducts C] {A B : CochainComplex C ℤ} (f : A ⟶ B) (q : ℤ) :
     (CochainComplex.mappingCone f).X q ≅ B.X q ⊞ A.X (q + 1) :=
   HomologicalComplex.homotopyCofiber.XIsoBiprod f q (q + 1) rfl ≪≫
     biprod.braiding _ _
 
-/-- The signed four-coordinate interchange (b,a,b',a') to (b,b',a,-a').
-Source: blueprint Cones paragraph, explicit cone interchange
-(auxiliary; not a blueprint node). -/
+/-- The signed four-coordinate interchange (b,a,b',a') to (b,b',a,-a'). -/
 def principalConeInterchange {C : Type uC} [Category.{vC} C] [Preadditive C]
     [HasBinaryBiproducts C] (B A B' A' : C) :
     (B ⊞ A) ⊞ (B' ⊞ A') ⟶ (B ⊞ B') ⊞ (A ⊞ A') :=
@@ -1062,16 +1058,12 @@ namespace PrincipalReduction
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
-/-- Multiplication by the (n+1)-st power of the specified uniformizer on a complex.
-Source: blueprint Cones paragraph and the scalar construction in the resolution
-(auxiliary; not a blueprint node). -/
+/-- Multiplication by the (n+1)-st power of the specified uniformizer on a complex. -/
 abbrev scalar (d : End (Mod.regular (DerivedNakayama.integerRing l E))) (n : ℕ)
     (M : CochainComplex (AdicCompletion.Modules l E X) ℤ) : M ⟶ M :=
   DerivedNakayama.scalarOnComplex l E X (d ^ (n + 1)) M
 
-/-- The canonical derived reduction followed by integral scalar restriction.
-Source: blueprint Cones paragraph, underlying integral-module reductions
-(auxiliary; not a blueprint node). -/
+/-- The canonical derived reduction followed by integral scalar restriction. -/
 abbrev reductionFunctor (n : ℕ) : DerivedCategory (AdicCompletion.Modules l E X) ⥤
     DerivedCategory (AdicCompletion.Modules l E X) :=
   AdicCompletion.derivedReduction l E X n ⋙ AdicCompletion.restrict l E X n
@@ -1159,8 +1151,7 @@ private theorem action_succ
 /-- Strict principal reductions, with the signed cone and shift comparisons and their
 canonical derived interpretation, simultaneously at all positive levels.
 
-Stacks Tag 014E, definition-cone
-(auxiliary; not a blueprint node).
+Stacks Tag 014E, definition-cone.
 
 Proof plan (the ten steps of the node):
 1. Use the scalar differential (dx + pi^(n+1)y,-dy). Diagonal maps are functorial;
@@ -1317,8 +1308,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 also retains all existential comparison data and equations of the node.
 Its strict objects, maps, transitions and units are fixed
 by the scalar and coordinate equations; the comparisons retain all normalizations.
-Source: blueprint first-reduction proof, Cones paragraph; Stacks Tag 014E
-(auxiliary; not a blueprint node). -/
+Source: blueprint first-reduction proof, Cones paragraph; Stacks Tag 014E. -/
 structure PrincipalReductionConeData where
   d : End (Mod.regular (DerivedNakayama.integerRing l E))
   D : ℕ → CochainComplex (Modules l E X) ℤ ⥤ CochainComplex (Modules l E X) ℤ
@@ -1333,8 +1323,7 @@ structure PrincipalReductionConeData where
 The conjunction is under the scalar test binders. This is equivalent to placing
 its remaining clauses outside them: use the one-point profinite test and the zero
 section. Keeping these binders shared avoids repeated closed-proof abstraction.
-Source: blueprint first-reduction proof, Cones paragraph; Stacks Tag 014E
-(auxiliary; not a blueprint node). -/
+Source: blueprint first-reduction proof, Cones paragraph; Stacks Tag 014E. -/
 def PrincipalReductionConeData.IsCanonical (data : PrincipalReductionConeData l E X) : Prop :=
   ∀ (S : Profinite.{u}ᵒᵖ)
     (a : (DerivedNakayama.integerRing l E).obj.obj S) (s : S.unop),
@@ -1432,8 +1421,7 @@ def PrincipalReductionConeData.IsCanonical (data : PrincipalReductionConeData l 
 /-- Strict principal reductions, with the signed cone and shift comparisons and their
 canonical derived interpretation, simultaneously at all positive levels.
 
-Stacks Tag 014E, definition-cone
-(auxiliary; not a blueprint node).
+Stacks Tag 014E, definition-cone.
 
 Proof plan (the ten steps of the node):
 1. Use the scalar differential (dx + pi^(n+1)y,-dy). Diagonal maps are functorial;

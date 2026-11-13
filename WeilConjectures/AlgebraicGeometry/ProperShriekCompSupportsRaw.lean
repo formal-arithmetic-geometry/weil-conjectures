@@ -10,8 +10,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.CompactificationRefinementLower
 import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
 
 /-! Raw proper compositor compatibility after canonicalizing the composite.
-Source: blueprint latest, first triangle of thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public noncomputable section
@@ -58,8 +56,6 @@ This is the compositor calculation after the equality-congruence part has been
 removed.  It is strictly simpler than the route statement because the target
 map is the definitional composite `p ≫ f` and no extra morphism-equality
 transport is present.
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, first supported coordinate extraction before a trace.
 -/
 theorem properShriekComp_comp_forgetSupports_raw {W X S : Scheme.{u}}
     (p : W ⟶ X) (f : X ⟶ S)

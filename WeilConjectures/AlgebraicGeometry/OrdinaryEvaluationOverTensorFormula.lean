@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationComponentOverTranspor
 
 /-! # Tensor summand calculation for ordinary evaluation under open reindexing
 
-Source: Stacks Project, Tags 0A8X, 08DL and 08DQ, ordinary Hom and evaluation.
-(blueprint: lem-pc-ordinary-evaluation-over-tensor-formula). -/
+Source: Stacks Project, Tags 0A8X, 08DL and 08DQ, ordinary Hom and evaluation. -/
 
 @[expose] public section
 
@@ -42,7 +41,6 @@ comparison and a natural termwise Hom comparison can be chosen to preserve the
 evaluation component formula. The dual
 comparison in this statement is constructed from the single-unit isomorphism.
 Source: Stacks Project, Tags 0A8X, 08DL and 08DQ; ordinary-complex calculation.
-(blueprint: lem-pc-ordinary-evaluation-over-tensor-formula).
 
 Proof: first construct e by reindexing the compatible families of local linear
 maps on the slice over each open. The inverse uses the inverse slice equivalence;

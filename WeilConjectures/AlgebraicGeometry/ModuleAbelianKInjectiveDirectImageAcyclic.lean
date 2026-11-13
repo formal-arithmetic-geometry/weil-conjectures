@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.RingedToposDerivedPushforwardComposition
 /-! # Underlying abelian direct-image acyclicity of module K-injectives
 
 Source: Stacks Project, Cohomology on Sites, Tag 0D6J(3).
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ preserves K-injectivity.
 
 Source: Stacks Project, Cohomology on Sites, Tag 0D6J(3), including its resolution
 normalization; equivalently apply Tag 0D6E to coefficient restriction and direct image.
-(auxiliary; not a blueprint node).
 
 Proof: Use the constant-ring module equivalence, retaining the underlying additive
 sheaf. Encode abelian sheaves as modules over the constant integers; ULift of the

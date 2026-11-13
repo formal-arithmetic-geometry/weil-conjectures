@@ -18,7 +18,6 @@ import Mathlib.Data.Finset.Order
 
 Source: Stacks Project, Limits, Tag 01ZR (3), first proof, affine case;
 Algebra, Tag 05N7 (3), finite-generator argument.
-(blueprint: lem-pc-fp-zero-map-affine-open-eventually).
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ namespace AlgebraicGeometry
 /-- Vanishing on one affine open of the fixed model holds at every sufficiently late stage.
 No quasi-compactness of the whole model is needed.
 Source: Stacks Project, Limits, Tag 01ZR (3), first proof, affine case;
-Algebra, Tag 05N7 (3), finite-generator argument
-(blueprint: lem-pc-fp-zero-map-affine-open-eventually).
+Algebra, Tag 05N7 (3), finite-generator argument.
 
 Proof: restrict to the inverse images of the affine open `U`. They are affine because
 all base changes of the affine transition maps are affine. Their coordinate rings

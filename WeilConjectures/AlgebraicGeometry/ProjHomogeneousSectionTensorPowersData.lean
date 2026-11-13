@@ -36,8 +36,7 @@ power is (f/x_i^d)^n. The identifications therefore send the tensor-power sectio
 and its product with any local section of O(m) to multiplication by f^n. Equality
 on the chart cover proves both morphism identities globally. At n=0 these are the
 unit isomorphisms and multiplication by 1; for f=0 positive powers are zero.
-Negative m uses the same local basis and the fraction multiplication rule.
-(blueprint: lem-sc-p1-homogeneous-section-tensor-powers-data) -/
+Negative m uses the same local basis and the fraction multiplication rule. -/
 theorem proj_homogeneous_section_tensor_powers_data (k : Type u) [Field k]
     {d : ℕ} (hd : 0 < d) {f : MvPolynomial (Fin 2) k}
     (hf : f ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k d) :

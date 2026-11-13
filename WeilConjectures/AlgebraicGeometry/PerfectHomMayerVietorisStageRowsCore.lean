@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomTriangleRow
 /-! # The geometric diagram before taking the exact filtered colimit
 
 Source: Stacks Project, Tags 09RE and 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-stage-rows).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace AlgebraicGeometry
 consecutive short complex, before the categorical exactness argument.
 
 Source: Stacks Project, Tags 09RE and 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-stage-rows-core).
 
 Proof: Pull U,V to Y and each stage. Restrict P,Q and the preceding shift;
 localized pullback comparisons and thick closure preserve perfectness, and

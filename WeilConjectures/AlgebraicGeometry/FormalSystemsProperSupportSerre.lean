@@ -25,8 +25,7 @@ import WeilConjectures.AlgebraicGeometry.FormalModuleSupportConstant
 /-!
 # Serre subcategories of coherent formal modules with proper support
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 0CYV
-(blueprint: lem-weil-pbc-formal-systems-proper-support-serre).
+Source: Stacks Project, Cohomology of Schemes, Lemma 0CYV.
 -/
 
 @[expose] public section
@@ -218,7 +217,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 subcategories.  The proof uses the support and annihilator calculations from the
 node proof, together with abelianity of `CoherentFormalModule`.
 Source: Stacks Project, Cohomology of Schemes, Lemma 0CYV.
-(blueprint: lem-weil-pbc-formal-systems-proper-support-serre).
 Proof: supports in a short exact sequence are the union of the outer supports;
 proper closed subsets and finite unions remain proper.  For the second class,
 annihilators pass to subobjects and quotients, while extensions are annihilated

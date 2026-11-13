@@ -15,9 +15,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived
 
 /-! # Descent of finite Tor amplitude along a pro-etale cover
-
-Source: blueprint latest, scalar-six-ctf proof (2), local models.
-(blueprint: lem-sfb-perfect-local-model-finite-tor-amplitude).
 -/
 
 @[expose] public section
@@ -33,10 +30,6 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Finite Tor amplitude descends from a pro-etale cover of a Noetherian scheme.
 No scalar model or admissibility assumption is needed for this descent step.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-scalar-six,
-det-prop-scalar-six-ctf.proof.md (2), local models.
-(blueprint: lem-sfb-perfect-local-model-finite-tor-amplitude).
 
 Proof in words:
 1. Choose a Tor interval on each cover member. Cover S by finitely many affine

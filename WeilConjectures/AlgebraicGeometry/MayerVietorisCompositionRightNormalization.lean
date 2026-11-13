@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.MayerVietorisImageComponentCompositionF
 /-! # Right-hand image normalization
 
 Source: Stacks Project, Tags 08FE and 0D5T.
-(blueprint: lem-pc-mayer-vietoris-composition-right-normalization).
 -/
 
 @[expose] public section
@@ -63,8 +62,7 @@ on Y; cancel the inverse and hom of the exact Y-restriction factor inside R. Ass
 and functoriality give the displayed three-map composite. This calculation uses no
 h-localization unit and no derived composition isomorphism.
 The argument applies to arbitrary complexes, empty and full opens, and identity morphisms:
-only functoriality, naturality and inverse-isomorphism equations are used.
-(blueprint: lem-pc-mayer-vietoris-composition-right-normalization). -/
+only functoriality, naturality and inverse-isomorphism equations are used. -/
 theorem schemeMV_composition_right_normalization
     (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

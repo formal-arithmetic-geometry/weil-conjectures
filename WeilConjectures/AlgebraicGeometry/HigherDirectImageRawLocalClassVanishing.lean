@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawAffineRestrictionVa
 /-! # Raw affine cohomology classes eventually vanish
 
 Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: lem-sbc-higher-direct-image-raw-local-class-vanishing).
 -/
 
 @[expose] public section
@@ -43,7 +42,6 @@ private lemma covering_of_affine_arrows {S : Scheme.{v}} (W : S.Etale)
 
 /-- A raw class whose limit sheafification is zero is locally killed at later stages.
 Source: Stacks Project, Tag 09Z1, proof of lemma-relative-colimit; Tags 03Q8 and 0EZM.
-(blueprint: lem-sbc-higher-direct-image-raw-local-class-vanishing).
 
 Proof: Local injectivity of the sheafification unit first gives a covering sieve
 on which the raw limit class itself is zero. Refine each member by its affine

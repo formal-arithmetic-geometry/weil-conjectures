@@ -66,7 +66,6 @@ private theorem pair_square_chart_transport_exists
 No finite presentation, quasi-coherence, affineness or limit hypothesis is used.
 Source: Stacks Project, Tag 01ZR, first proof, successive Zariski restrictions;
 Mathlib pseudofunctor pullHom composition and pullback overlapIteratedComparison coherence.
-(blueprint: lem-pc-fp-overlap-pair-refinement-persistence).
 
 Proof: For each chart use overlapRefinementHom U q q' r hr to map the later
 chart to the earlier one. Pull the given pair map along the induced map of the

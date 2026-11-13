@@ -19,8 +19,7 @@ set_option linter.privateModule false
 /-!
 # Tor bounds from bounded flat models on a finite pro-etale cover
 
-proof.md, (2) Local models; Stacks Tags 06YQ, 06YY, 07A4, 06YU
-(auxiliary; not a blueprint node).
+proof.md, (2) Local models; Stacks Tags 06YQ, 06YY, 07A4, 06YU.
 
 Module objects are identified with sectionwise module sheaves by the existing
 `InternalAbelianSheafModule.sectionModuleEquivalence`. Flatness below uses exactly

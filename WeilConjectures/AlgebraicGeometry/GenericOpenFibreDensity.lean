@@ -97,9 +97,7 @@ of Z at the lifted point consequently has the dimension of a component of
 X there, contradicting nowhere density in the generic fibre. Thus the
 complement is nowhere dense in each fibre. Its open complement is dense.
 The common nonempty base open contains the generic point; transport it back
-through the reduction homeomorphism. Empty fibres satisfy density vacuously.
-
-(blueprint: lem-sbc-generic-open-fibre-density) -/
+through the reduction homeomorphism. Empty fibres satisfy density vacuously. -/
 theorem exists_open_fibre_dense_of_generic_dense {X T : Scheme.{u}}
     (f : X ⟶ T) [LocallyOfFiniteType f] [QuasiCompact f]
     (W : X.Opens) (η : T) (hη : IsGenericPoint η Set.univ)

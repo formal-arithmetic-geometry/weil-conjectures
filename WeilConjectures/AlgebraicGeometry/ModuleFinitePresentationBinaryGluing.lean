@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 /-! # Gluing a finite presentation and its map across two opens
 
 Source: Stacks Project, Properties, Lemma 01PI, gluing paragraph.
-(blueprint: lem-weil-pbc-module-finite-presentation-binary-gluing).
 -/
 
 @[expose] public section
@@ -123,7 +122,6 @@ W union V, with a map to the restriction of H.
 
 Source: Stacks Project, Properties, Lemma 01PI, second paragraph of the proof
 (https://stacks.math.columbia.edu/tag/01PI), and sheaf-module descent, Tag 00AK.
-(blueprint: lem-weil-pbc-module-finite-presentation-binary-gluing).
 
 Proof: Restrict the map j to W intersect V. It is an isomorphism by hypothesis.
 Identify its target with the restriction of H on W by the canonical iterated

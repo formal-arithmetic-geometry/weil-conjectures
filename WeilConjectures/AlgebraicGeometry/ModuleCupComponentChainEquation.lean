@@ -121,7 +121,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 -- Tensor sheaf instances and the three transported component formulas need extra elaboration.
 /-- The assembled component maps satisfy the signed chain equation by Leibniz. Source: Stacks
 Project, Tag 0FKU, construction before Lemma 20.31.3.
-(blueprint: lem-sc-module-cup-resolution-chain-equation).
 Proof: equality of maps out of a total term can be tested on its coproduct inclusions.
 For a nonnegative bidegree, equality out of the tensor sheaf is tested after the
 sheafification unit, then on elementary tensors of sections on every open. The assumed

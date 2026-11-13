@@ -40,7 +40,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- A formal pullback isomorphism over a complete affine base lifts to an algebraic
 isomorphism, compatibly with the actual quotient projections.
 Source: Stacks Project, Tag 088B, final complete-base paragraph; Tags 087W and 0883.
-(blueprint: lem-weil-pbc-formal-comparison-algebraization-quotient-lift)
 
 Proof: Tag 087W associates to G its finite module over the completion of A.
 Since A is I-adically complete, restrict this module along the isomorphism

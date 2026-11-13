@@ -101,7 +101,6 @@ set_option linter.unusedSectionVars false in
 
 Source: Bhatt--Scholze, Proposition 6.8.4(3), Proposition 6.8.14,
 Remark 6.8.15 and bounded-below continuity in Section 6.3.
-(auxiliary; not a blueprint node)
 
 Proof: choose the finite constructible stratification of F. Finite-rank local systems,
 their finite presentation matrices and their gluing data descend to a finite

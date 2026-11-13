@@ -17,8 +17,7 @@ import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 /-!
 # Integral closure of a one-dimensional Noetherian domain
 
-Source: literature/stacks-project/algebra.tex, Algebra Lemma 09IG
-(blueprint: lem-sc-integral-closure-dedekind-surjective-fibres).
+Source: literature/stacks-project/algebra.tex, Algebra Lemma 09IG.
 -/
 
 @[expose] public section
@@ -130,14 +129,10 @@ extension is Dedekind, and its spectrum maps surjectively with finite fibres and
 finite residue-field extensions (Stacks, Algebra Lemma 09IG).
 
 Proof (Stacks, Algebra Lemma 09IG, `lemma-integral-closure-Dedekind`):
-1. Since `A ⊆ C ⊆ L`, Krull--Akizuki gives Noetherianity of `C`
-   (`lem-sc-krull-akizuki-noetherian`).
-2. The integral injective inclusion preserves dimension, giving `dim C = 1`
-   (`lem-weil-pbc-integral-injective-dimension-equal`). The integral closure is a
-   normal domain with fraction field `L`
-   (`lem-weil-pbc-integral-closure-finite-extension-normal`), hence is Dedekind.
-3. Lying over for the integral injective inclusion gives surjectivity on spectra
-   (`lem-weil-pbc-integral-injective-lying-over`).
+1. Since `A ⊆ C ⊆ L`, Krull--Akizuki gives Noetherianity of `C`.
+2. The integral injective inclusion preserves dimension, giving `dim C = 1`. The integral closure is a
+   normal domain with fraction field `L`, hence is Dedekind.
+3. Lying over for the integral injective inclusion gives surjectivity on spectra.
 4. At each nonzero prime of `A`, dimension one gives maximality, and Mathlib's
    `IsDedekindDomain.primesOver_finite` gives finitely many primes of `C` above it.
    Mathlib's `Ideal.eq_bot_of_comap_eq_bot` leaves only the zero ideal in the
@@ -154,7 +149,6 @@ Proof (Stacks, Algebra Lemma 09IG, `lemma-integral-closure-Dedekind`):
 
 Mathlib's Dedekind predicate permits dimension zero, so dimension one is stated
 separately to retain the node's convention.
-(blueprint: lem-sc-integral-closure-dedekind-surjective-fibres).
 -/
 theorem integralClosure_isDedekind_surjective_finite_fibres
     (A L : Type u) (K : Type v) [CommRing A] [IsDomain A] [Field K] [Field L]

@@ -29,7 +29,6 @@ import all WeilConjectures.CategoryTheory.HalfPlaneWeakConvergence
 /-! # Bounded coherent direct image in the Noetherian proper case
 
 Source: Stacks Project, Tag 08E2, specialized to a proper morphism; Tag 02O5.
-(blueprint: lem-pc-noetherian-proper-bounded-coherent-image).
 -/
 
 @[expose] public section
@@ -208,8 +207,7 @@ No relative flatness, finite Tor dimension or finite-free image is used.
 
 The existing proper-support direct-image module cannot be imported here: its current
 proof dependencies reach the arbitrary-base pseudo-coherence item. This strictly
-Noetherian proper case isolates the calculation needed before approximation pullback.
-(blueprint: lem-pc-noetherian-proper-bounded-coherent-image). -/
+Noetherian proper case isolates the calculation needed before approximation pullback. -/
 theorem noetherian_proper_directImage_bounded_coherent
     {Y T : Scheme.{u}} [IsNoetherian T] (p : Y ⟶ T)
     [IsProper p]

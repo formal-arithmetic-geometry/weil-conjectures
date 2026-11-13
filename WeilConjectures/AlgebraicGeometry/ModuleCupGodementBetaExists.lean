@@ -305,7 +305,6 @@ private lemma coordinates_multiply (X : Scheme.{u})
 
 /-- The coordinatewise Godement tensor maps obey naturality, unit and multiplication laws.
 Source: Banerjee, arXiv:1004.1491, §1.1.4, pp. 15–16; Stacks, Tag 0FKR.
-(blueprint: new-module-cup-godement-beta-exists)
 Proof: For each point x, project TH and TK onto their x skyscrapers and evaluate their
 stalks at x. Identify (TH tensor TK)_x with TH_x tensor TK_x by the canonical
 stalk tensor isomorphism. Tensor the two evaluation maps into H_x tensor K_x, then

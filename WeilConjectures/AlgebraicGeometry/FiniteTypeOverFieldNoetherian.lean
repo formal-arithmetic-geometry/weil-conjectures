@@ -12,8 +12,6 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 
 This small interface supplies the geometric hypothesis for the inherited shift on bounded
 constructible complexes without importing the six-functor triangulatedness package.
-Source: the finite-type ambient setting of the latest blueprint, order 4192
-(blueprint: lem-per-finite-type-over-field-noetherian).
 -/
 
 @[expose] public section
@@ -29,11 +27,7 @@ namespace AlgebraicGeometry
 /-- A scheme of finite type over a field has Noetherian underlying space.
 Proof: the field spectrum is Noetherian. Local finite type therefore gives a locally
 Noetherian source, and quasi-compactness of the structure map gives a compact source.
-Together these make the source a Noetherian scheme, hence a Noetherian space.
-Source: latest blueprint, order 4192, finite-type ambient setting; Mathlib's
-`LocallyOfFiniteType.isLocallyNoetherian`, `QuasiCompact.compactSpace_of_compactSpace`, and
-`IsNoetherian.noetherianSpace`
-(blueprint: lem-per-finite-type-over-field-noetherian). -/
+Together these make the source a Noetherian scheme, hence a Noetherian space. -/
 instance finiteTypeOverField_noetherianSpace {k : Type u} [Field k]
     (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] :
     TopologicalSpace.NoetherianSpace X.left := by

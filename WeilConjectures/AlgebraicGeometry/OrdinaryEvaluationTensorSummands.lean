@@ -15,8 +15,7 @@ import Mathlib.CategoryTheory.Localization.Monoidal.Functor
 /-! # Normalized tensor summands under the open-site equivalence
 
 Source: Stacks Project, Tag 0A8X, ordinary tensor totalization; the open-site
-reindexing construction in Mathlib `Scheme.Modules.overEquiv`.
-(blueprint: lem-pc-ordinary-evaluation-tensor-summands). -/
+reindexing construction in Mathlib `Scheme.Modules.overEquiv`. -/
 
 @[expose] public section
 
@@ -133,8 +132,7 @@ Proof: lift the braided monoidal presheaf reindexing functor through sheafificat
 The lifting isomorphism is monoidal, and its tensor equation descends the braided equation.
 Normalize the unit by transporting along the explicit scalar natural automorphism from
 `scalarIso`; `normalize` proves that this preserves braiding and gives the prescribed unit.
-The construction applies to empty opens and zero rings and does not involve complexes.
-(blueprint: lem-pc-ordinary-evaluation-tensor-summands). -/
+The construction applies to empty opens and zero rings and does not involve complexes. -/
 private theorem exists_normalizedOpen_coreMonoidal (X : Scheme.{u}) (U : X.Opens) :
     let L := Equivalence.functor
       (C := localEvaluationModules X U)
@@ -211,7 +209,6 @@ set_option maxHeartbeats 700000 in
 -- Elaborating two nested bicomplex comparisons requires additional heartbeats.
 /-- The open-site tensor comparison has the prescribed unit, symmetry and total summands.
 Source: Stacks Project, Tag 0A8X, tensor totalization; Mathlib `overEquiv`.
-(blueprint: lem-pc-ordinary-evaluation-tensor-summands).
 
 Proof: on presheaves reindex each pure tensor along the open-site equivalence.
 The coefficient identifications preserve balancing, restriction, associativity

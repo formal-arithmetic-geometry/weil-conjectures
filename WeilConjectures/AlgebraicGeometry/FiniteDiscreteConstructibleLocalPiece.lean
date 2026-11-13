@@ -61,7 +61,6 @@ variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
 sectionwise finite coefficient encoding to a finite locally constant ordinary
 module sheaf. This is the finite presentation and locally constant matrix step
 in Proposition 5.3.2 and Lemmas 5.4.1, 5.4.3 of Bhatt--Scholze.
-(auxiliary; not a blueprint node)
 
 Proof in words. Choose the presentation cover from the encoded-presentation
 theorem. On each member the ordinary restriction is a cokernel between finite

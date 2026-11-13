@@ -50,7 +50,6 @@ admits analytic pivot charts.
 
 Source: Bhatt--Scholze, Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1);
 the continuous-function pivot argument is an agent reduction.
-(auxiliary; not a blueprint node)
 
 Proof: refine the supplied cover, transport the standard finite-free bases along the
 coefficient pullback comparisons, and use the canonical comparison with continuous

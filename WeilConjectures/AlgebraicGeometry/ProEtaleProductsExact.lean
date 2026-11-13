@@ -13,10 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleSectionsLimitsColimits
 
 /-!
 # Exact products of pro-etale module sheaves
-
-Source: Weil conjectures blueprint, snapshot main-20261015,
-sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-exact.md
-(blueprint: det-pe-products-exact).
 -/
 
 @[expose] public section
@@ -34,10 +30,6 @@ namespace AlgebraicGeometry.Scheme.ProEt
 its left exactness follows because it is a limit functor. Thus this says that the
 product of any family of short exact sequences is short exact, including both endpoints.
 The module universe contains the site and the indexing set.
-
-Source: Weil conjectures blueprint, snapshot main-20261015,
-sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-exact.md
-(blueprint: det-pe-products-exact).
 
 Proof: Evaluate at an affine weakly contractible object W. Evaluation commutes with
 products by det-pe-sections-limits-colimits, and det-pe-wc-sections-exact makes each

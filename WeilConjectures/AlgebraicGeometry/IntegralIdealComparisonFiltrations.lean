@@ -29,7 +29,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 /-! # Comparing an integral ideal with a module of generic rank one
 
 Source: Stacks Project, Cohomology of Schemes, Tags 01YF and 01YH.
-(blueprint: lem-pc-v3-integral-ideal-comparison-filtrations)
 -/
 
 @[expose] public section
@@ -183,7 +182,6 @@ set_option linter.unusedVariables false in
 
 Source: Stacks Project, Cohomology of Schemes, Tag 01YH, proof of
 `lemma-property-irreducible`, and Tag 01YF, `lemma-coherent-filter`.
-(blueprint: lem-pc-v3-integral-ideal-comparison-filtrations)
 
 Proof: Split on whether the ideal pushforward is zero. In the nonzero case,
 `exists_integral_ideal_common_submodule` supplies two monomorphisms with coherent

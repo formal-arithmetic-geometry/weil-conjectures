@@ -27,18 +27,14 @@ namespace AlgebraicGeometry
 /-- On the full category of affine opens of Y, derived section cohomology of an
 object with quasi-coherent cohomology agrees with sections of its cohomology sheaf.
 
-Source: Stacks Project, Tags 08D4 and 08D5
-(blueprint: new-qcoh-acyclic-sections-component).
+Source: Stacks Project, Tags 08D4 and 08D5.
 
 Proof:
 1. Fix an affine open V and put U = f⁻¹V. Restriction of an injective resolution
-   to U computes cohomology there (`lem-sc-ringed-space-restrict-injective-resolution`).
-   Open restriction commutes with derived direct image
-   (`lem-pc-restrict-derived-direct-image-open`), so the positive higher direct images
+   to U computes cohomology there.
+   Open restriction commutes with derived direct image, so the positive higher direct images
    of F|U vanish by hacyc. They are quasi-coherent by the quasi-coherence clause
-   of `lem-pc-finite-support-hi` (only this clause is used). Affine vanishing
-   (`pqf-lem-affine-vanishing`) and the Leray edge
-   (`lem-pc-leray-degenerate-sections`) give H^p(U,F|U) = 0 for every p > 0.
+   of `lem-pc-finite-support-hi` (only this clause is used). Affine vanishing and the Leray edge give H^p(U,F|U) = 0 for every p > 0.
    Sections on U commute with countable products, by their universal property.
 2. Shift the derived object to reduce to degree zero. Apply
    `lem-pc-unbounded-derived-functor-cohomological-bound` with N = 1 to τ≤(-1)E.

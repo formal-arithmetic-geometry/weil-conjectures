@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.QcqsSchemeCofinalFiniteCoverings
 /-! # Lifting sections into ideal-power annihilator quotients
 
 Source: Stacks Project, Properties, Lemmas 01PQ and 01PM.
-(blueprint: lem-weil-pbc-ideal-power-quotient-local-lifting-section).
 -/
 
 @[expose] public section
@@ -37,13 +36,13 @@ set_option maxHeartbeats 700000 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Every section on the ideal complement lifts into an ideal-power annihilator quotient.
 
-Proof: On an affine open write I = (f_1,...,f_t) and F = M~. The condition hann
+Proof: On an affine open write I = (f_1..,f_t) and F = M~. The condition hann
 identifies A_n with Ann_M(I^n)~: localization commutes with this annihilator because
 I^n is finitely generated. Hence the cokernel is (M/Ann_M(I^n))~.
 Represent the section on D(f_i) as x_i/f_i^k with k positive. Equality on overlaps
 means (f_i f_j)^e (f_j^k x_i - f_i^k x_j) = 0. A common e works for all pairs;
 replace x_i by f_i^e x_i and k by k+e. Now f_j^k x_i = f_i^k x_j.
-Put d = t*(k-1)+1 and K = {x : f_i^k x = 0 for every i}. A degree-d monomial
+Put d = t*(k-1)+1 and K = {x: f_i^k x = 0 for every i}. A degree-d monomial
 has an exponent at least k; lower that exponent by k and multiply by x_i.
 Multiplication of any resulting relation by f_j^k gives the original relation
 multiplied by x_j, so it lies in K. This defines I^d -> M/K, and K is contained
@@ -65,8 +64,7 @@ for the unit ideal take degree zero and the map corresponding to the section.
 
 Source: Stacks Project, Properties, Lemma 01PM (affine denominator construction)
 and Lemma 01PQ (finite affine gluing), https://stacks.math.columbia.edu/tag/01PM
-and https://stacks.math.columbia.edu/tag/01PQ.
-(blueprint: lem-weil-pbc-ideal-power-quotient-local-lifting-section). -/
+and https://stacks.math.columbia.edu/tag/01PQ. -/
 theorem ideal_power_quotient_local_lifting_section
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]

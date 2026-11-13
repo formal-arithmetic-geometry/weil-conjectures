@@ -21,9 +21,6 @@ universe u
 namespace AlgebraicGeometry.Scheme
 
 /-- Every point of the generic fibre lies in the union of the interiors of the strata.
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, proof paragraphs 1--3 of
-`lem-weil-pbc-finite-pushforward-generic-constructible`.
-(blueprint: lem-weil-pbc-finite-generic-fiber-stratum-interiors).
 
 Proof: The finite source is Noetherian. Let C be an irreducible component
 containing a point x of the generic fibre, and c its generic point. Continuity

@@ -122,8 +122,7 @@ The identity-on-sections lower-star/restriction comparison has mate equal to the
 source lowerStarCompComparisonLowerStarIso, as checked by the pullback projections.
 The iterated mate identity then makes its mate under the comparison adjunctions
 invertible. The mate counit equation identifies the restricted global counit, up to
-these isomorphisms, with the local counit. Cancel the comparison isomorphisms.
-(auxiliary; not a blueprint node) -/
+these isomorphisms, with the local counit. Cancel the comparison isomorphisms. -/
 theorem comparison_counit_restriction_isIso
     (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] (V : X.Etale)
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))

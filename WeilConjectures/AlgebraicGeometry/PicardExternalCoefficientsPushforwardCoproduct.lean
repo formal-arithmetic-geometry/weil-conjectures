@@ -17,7 +17,6 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 /-! # Coproduct presentation of the ordinary external direct image
 
 Source: Stacks Project, Varieties, Tag 0BED, lemma-kunneth, degree-zero formula.
-(blueprint: lem-sc-picard-external-coefficients-pushforward-coproduct).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ set_option backward.isDefEq.respectTransparency false in
 No positive-degree acyclicity of either coefficient is needed.
 Source: Stacks Project, Varieties, Tag 0BED, lemma-kunneth, the degree-zero
 case of the displayed derived-direct-image formula.
-(blueprint: lem-sc-picard-external-coefficients-pushforward-coproduct).
 
 Proof: Choose a k-basis of Gamma(X,F), indexed by a small type I. Each basis
 section defines a map G to pr2_* E: over V send t to the external product of the

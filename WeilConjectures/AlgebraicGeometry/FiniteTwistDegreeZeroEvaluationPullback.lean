@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteTwistDegreeZeroEvaluationPairing
 import WeilConjectures.AlgebraicGeometry.FiniteTwistFlatEvaluationPullback
 
 /-! # Pullback of the finite-twist evaluation before shifting
-
-Source: the degree-zero evaluation step of thm-amb-p1-decomposition.proof.md
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -56,8 +53,7 @@ private theorem positive_flat
 /-- The normalized finite-line evaluation commutes with derived inverse image in degree zero.
 
 Source: Stacks Tags 03PK and 06YQ; the degree-zero step of the evaluation identification
-in thm-amb-p1-decomposition.proof.md
-(auxiliary; not a blueprint node).
+in thm-amb-p1-decomposition.proof.md.
 
 Proof: apply the negative normalization of the canonical twist transport at n=0.
 Its zero normalization identifies the output with constant-sheaf pullback. The

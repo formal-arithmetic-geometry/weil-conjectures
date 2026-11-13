@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictedTensorCoordinateData
 /-! # Open restriction of the comparison before the pullback counit
 
 Source: Stacks Project, Tags 0DJ8 and 0098.
-(blueprint: lem-pc-open-restricted-ordinary-comparison-square).
 -/
 
 @[expose] public section
@@ -53,8 +52,7 @@ the horizontal comparison, no K-flatness or base flatness, and no bounds.
 For an empty open no z exists; top opens, zero complexes and zero rings
 satisfy the same functorial identities.
 Source: Stacks Project, Tag 0DJ8, locality of equation-bc; Tag 0098, stalks
-of pullback; Tag 0D5U, exact restriction; Tag 06Y6, derived tensor functoriality.
-(blueprint: lem-pc-open-restricted-ordinary-comparison-square). -/
+of pullback; Tag 0D5U, exact restriction; Tag 06Y6, derived tensor functoriality. -/
 theorem exists_open_restricted_ordinary_comparison_square
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -100,7 +100,6 @@ private theorem inclusion_cast {X : Scheme.{v}} {M F : X.Modules}
 set_option backward.isDefEq.respectTransparency false in
 /-- A finite type module generates all its ideal-power products in degree zero.
 Source: Stacks Project, coherent.tex, Tag 02O8, lines 5330--5400.
-(blueprint: lem-weil-pbc-ideal-powers-rees-zero-generators).
 
 Proof: Since J^0=O_X, its product with F maps isomorphically onto F by the
 left unitor. At x choose an open U and finitely many generators of F, using

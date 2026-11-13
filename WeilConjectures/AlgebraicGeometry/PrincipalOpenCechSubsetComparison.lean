@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetCoordinates
 /-! # Subset coordinates and the alternating Čech augmentation on the union
 
 Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
-(blueprint: lem-sc-principal-open-cech-subset-comparison).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ comparison for arbitrary coefficient complexes, with no K-injectivity assumption
 
 Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM, the increasing
 index convention for alternating Čech cochains.
-(blueprint: lem-sc-principal-open-cech-subset-comparison).
 
 Proof: Set V to the union of the principal opens and restrict J to V by overFunctor
 followed by overEquiv. A restricted module's sections on an open of V are its original

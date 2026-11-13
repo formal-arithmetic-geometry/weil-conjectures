@@ -167,7 +167,6 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- The ordinary exchange is the mate of the canonical pullback square on homotopy
 categories, expressed by its counit transpose.
 Source: Stacks Project, Tag 08HY, the two descriptions of the base-change map.
-(blueprint: lem-pc-homotopy-base-change-counit).
 
 Proof: On modules, let k be the f' adjoint of the pullback square at f_*D
 followed by p* of the f counit. Apply the g Hom equivalence to k: its expression

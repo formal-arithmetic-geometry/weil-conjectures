@@ -504,7 +504,6 @@ private def scalarConstantEncodedIso [Finite A] [DiscreteTopology A]
 
 /-- Finite scalar models correspond to constant finite ordinary modules.
 Source: Stacks Tag 099Y.
-(auxiliary; not a blueprint node).
 
 Proof: evaluation identifies continuous functions on the one-point profinite set with A.
 The scalar module encoding preserves regular modules, finite free sums and cokernels.

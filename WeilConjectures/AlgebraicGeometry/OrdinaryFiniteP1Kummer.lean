@@ -14,9 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 /-!
 # Canonical arrows for the ordinary finite projective-line calculation
 
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-decomposition.md and
-thm-amb-p1-adjunction.md; Stacks Project, Tags 03PL and 03FD
-(auxiliary; not a blueprint node).
+Source:; Stacks Project, Tags 03PL and 03FD.
 
 ## Main definitions
 
@@ -49,8 +47,7 @@ attribute [local irreducible] ModuleCat.extendScalars
   Ext.homEquiv Ext.comp Ext.mk₀ Ext.mapExactFunctor
 
 /-- The existing chosen derived localization, cached before its object projections.
-Source: the canonical module-sheaf derived category in blueprint thm-amb-p1-adjunction
-(auxiliary; not a blueprint node). -/
+Source: the canonical module-sheaf derived category in -/
 @[instance_reducible]
 def ordinaryFiniteDerivedCategoryInstance (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) :
@@ -60,14 +57,13 @@ def ordinaryFiniteDerivedCategoryInstance (A : Type (u + 1)) [CommRing A]
 attribute [local instance 100000] ordinaryFiniteDerivedCategoryInstance
 
 /-- The constant coefficient sheaf, in the existing finite-twist encoding.
-Source: blueprint thm-amb-p1-decomposition
-(auxiliary; not a blueprint node). -/
+Source: -/
 abbrev ordinaryFiniteConstant (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :=
   (constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The map from the integral constant sheaf sending one to one.
-Source: Stacks, Tag 03FD (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03FD. -/
 def ordinaryFiniteIntegralGenerator (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     (constantSheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
         (AddCommGrpCat.of (ULift.{u + 1} ℤ)) ⟶
@@ -82,28 +78,24 @@ def ordinaryFiniteIntegralGenerator (A : Type (u + 1)) [CommRing A] (T : Scheme.
         ((Int.castAddHom A).comp AddEquiv.ulift.toAddMonoidHom)))
 
 /-- Degree zero in the ordinary derived category, with a stable object interface.
-Source: the degree-zero construction in the ordinary Kummer class
-(auxiliary; not a blueprint node). -/
+Source: the degree-zero construction in the ordinary Kummer class. -/
 def ordinaryFiniteDegreeZero (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) : DerivedCategoryModule A T :=
   (DerivedCategory.singleFunctor _ 0).obj F
 
 /-- The degree-zero embedding, cached as a functor before taking its object map.
-Source: the canonical degree-zero embedding used in the ordinary Kummer construction
-(auxiliary; not a blueprint node). -/
+Source: the canonical degree-zero embedding used in the ordinary Kummer construction. -/
 def ordinaryFiniteSingleFunctor (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A) ⥤ DerivedCategoryModule A T :=
   { DerivedCategory.singleFunctor _ 0 with obj := ordinaryFiniteDegreeZero A T }
 
 /-- The cached embedding is the canonical single-degree functor.
-Source: definition of the degree-zero embedding
-(auxiliary; not a blueprint node). -/
+Source: definition of the degree-zero embedding. -/
 theorem ordinaryFiniteSingleFunctor_eq (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     ordinaryFiniteSingleFunctor A T = DerivedCategory.singleFunctor _ 0 := rfl
 
 /-- The canonical Ext/derived-morphism equivalence, with the cached embeddings.
-Source: the Ext realization used in the ordinary Kummer class, Stacks Tag 03FD
-(auxiliary; not a blueprint node). -/
+Source: the Ext realization used in the ordinary Kummer class, Stacks Tag 03FD. -/
 def ordinaryFiniteExtHomEquiv (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (M F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (n : ℕ) :
     Ext M F n ≃ ((ordinaryFiniteSingleFunctor A T).obj M ⟶
@@ -112,8 +104,7 @@ def ordinaryFiniteExtHomEquiv (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
   exact Ext.homEquiv
 
 /-- The cached equivalence is the canonical Ext/derived-morphism equivalence.
-Source: Mathlib's Ext realization, Stacks Tag 03FD
-(auxiliary; not a blueprint node). -/
+Source: Mathlib's Ext realization, Stacks Tag 03FD. -/
 theorem ordinaryFiniteExtHomEquiv_eq (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (M F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (n : ℕ) :
     ordinaryFiniteExtHomEquiv A T M F n = Ext.homEquiv := rfl
@@ -123,8 +114,7 @@ attribute [local implicit_reducible] ordinaryFiniteSingleFunctor
 attribute [local irreducible] ordinaryFiniteExtHomEquiv
 
 /-- Exact forgetting and precomposition applied to an Ext representative.
-Source: the ordinary Kummer realization formula, Stacks Tag 03FD
-(auxiliary; not a blueprint node). -/
+Source: the ordinary Kummer realization formula, Stacks Tag 03FD. -/
 def ordinaryFiniteExtClassCore {C : Type*} {D : Type*}
     [Category C] [Category D] [Abelian C] [Abelian D]
     [HasExt.{u + 1} C] [HasExt.{u + 1} D]
@@ -135,8 +125,7 @@ def ordinaryFiniteExtClassCore {C : Type*} {D : Type*}
 
 /-- Realize a derived morphism after an exact functor and a specified source map.
 This generic construction keeps concrete derived localization instances abstract.
-Source: the Ext composition and exact-functor APIs, Stacks Tag 03FD.
-(auxiliary; not a blueprint node). -/
+Source: the Ext composition and exact-functor APIs, Stacks Tag 03FD. -/
 def ordinaryFiniteClassCore {C : Type*} {D : Type*}
     [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasExt.{u + 1} C] [HasExt.{u + 1} D]
@@ -151,7 +140,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- View a derived module class as an abelian cohomology class, by forgetting its Ext
 class and precomposing with the integral generator. This is a map, not a chosen
 cohomology equivalence.
-Source: Stacks, Tag 03FD (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03FD. -/
 @[irreducible]
 def ordinaryFiniteClass (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (n : ℕ)
@@ -166,8 +155,7 @@ private theorem realize_equiv_apply {U V W : Type*} (e : U ≃ V) (f : U → W) 
     f (e.symm (e x)) = f x := congrArg f (e.symm_apply_apply x)
 
 /-- Realizing a cached Ext representative gives its exact-forgetting composite.
-Source: the canonical Ext realization formula, Stacks Tag 03FD
-(auxiliary; not a blueprint node). -/
+Source: the canonical Ext realization formula, Stacks Tag 03FD. -/
 theorem ordinaryFiniteClass_extHomEquiv
     (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (n : ℕ)
@@ -210,7 +198,7 @@ attribute [local irreducible]
   Scheme.finiteEtaleTwistScalar
 
 /-- The canonical scalar map on roots of unity, `z ↦ 1 ⊗ z`, on sections.
-Source: Stacks, Tag 03PK (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03PK. -/
 def ordinaryFiniteRootGenerator (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (T : Scheme.{u}) (W : T.Etaleᵒᵖ) :
     (T.rootsOfUnitySheaf N).obj.obj W →+
@@ -225,7 +213,7 @@ def ordinaryFiniteRootGenerator (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (Scheme.finiteEtaleTwistScalar N A hA) σ).hom.toAddMonoidHom
 
 /-- Naturality of the scalar map `z ↦ 1 ⊗ z`.
-Source: Stacks, Tag 03PK (auxiliary; not a blueprint node).
+Source: Stacks, Tag 03PK.
 Proof: the scalar-extension unit is natural and the sheafification unit is natural;
 compose their two squares. Their underlying maps are the displayed section maps. -/
 theorem ordinaryFiniteRootGenerator_naturality (A : Type (u + 1)) [CommRing A]
@@ -245,7 +233,7 @@ theorem ordinaryFiniteRootGenerator_naturality (A : Type (u + 1)) [CommRing A]
       ModuleCat.extendScalars (Scheme.finiteEtaleTwistScalar N A hA))).naturality f)
 
 /-- Scalar extension of roots of unity, as an abelian sheaf map.
-Source: Stacks, Tag 03PK (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03PK. -/
 def ordinaryFiniteRootMap (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (T : Scheme.{u}) :
     T.rootsOfUnitySheaf N ⟶
@@ -257,22 +245,19 @@ def ordinaryFiniteRootMap (A : Type (u + 1)) [CommRing A] (N : ℕ)
 attribute [local irreducible] ordinaryFiniteRootMap Sheaf.H.map
 
 /-- The twist line placed in degree zero, using the existing finite etale twist.
-Source: blueprint thm-amb-p1-decomposition
-(auxiliary; not a blueprint node). -/
+Source: -/
 abbrev ordinaryFiniteLine (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (T : Scheme.{u}) : DerivedCategoryModule A T :=
   ordinaryFiniteDegreeZero A T (Scheme.finiteEtaleTateLine T N A hA)
 
 /-- The untwisted coefficient sheaf in degree zero.
-Source: blueprint thm-amb-p1-decomposition
-(auxiliary; not a blueprint node). -/
+Source: -/
 abbrev ordinaryFiniteUnit (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     DerivedCategoryModule A T :=
   ordinaryFiniteDegreeZero A T (ordinaryFiniteConstant A T)
 
 /-- The scalar-extended Kummer class of a specified Picard class on any scheme.
-Source: the Kummer boundary and coefficient map, Stacks Tags 03PK and 03PL
-(auxiliary; not a blueprint node). -/
+Source: the Kummer boundary and coefficient map, Stacks Tags 03PK and 03PL. -/
 def ordinaryFiniteKummerClass (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))) (L : T.Pic) :
     Sheaf.H ((moduleAbelianForget A T).obj (Scheme.finiteEtaleTateLine T N A hA)) 2 :=
@@ -280,16 +265,14 @@ def ordinaryFiniteKummerClass (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (T.kummerδ₁ N hT (Scheme.Pic.toCohomologicalPicardGroup T L))
 
 /-- The Picard class of the canonical O(1) on the projective line.
-Source: blueprint thm-amb-p1-decomposition and Stacks Tag 03PL
-(auxiliary; not a blueprint node). -/
+Source: and Stacks Tag 03PL. -/
 def ordinaryFiniteP1PicardClass (S : Scheme.{u}) : (ProjectiveLine S).Pic :=
   Scheme.Pic.ofIsInvertible (ProjectiveSpace.twist (ULift.{u} (Fin 2)) S 1)
 
 /-- The actual scalar-extended Kummer Chern class in abelian cohomology.
-The Picard class is that of the existing `ProjectiveSpace.twist ... 1`, whose
+The Picard class is that of the existing `ProjectiveSpace.twist .. 1`, whose
 transition is `g₀ = (x₁/x₀)⁻¹ g₁`.
-Source: Stacks, Tag 03PL; blueprint thm-amb-p1-decomposition
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03PL. -/
 @[irreducible]
 def ordinaryFiniteP1KummerClass (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u})
@@ -300,7 +283,7 @@ def ordinaryFiniteP1KummerClass (A : Type (u + 1)) [CommRing A] (N : ℕ)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The Chern-class specification predicate used by the normalized datum.
-Source: Stacks Tag 03PL (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03PL. -/
 def ordinaryFiniteP1ChernSpec (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u})
     (hP : IsUnit (N : Γ(ProjectiveLine S, ⊤)))
@@ -311,8 +294,7 @@ def ordinaryFiniteP1ChernSpec (A : Type (u + 1)) [CommRing A] (N : ℕ)
     ordinaryFiniteP1KummerClass A N hA S hP
 
 /-- The Chern specification is the scalar-extended Kummer class of O(1).
-Source: the defining normalization, blueprint thm-amb-p1-decomposition
-(auxiliary; not a blueprint node). -/
+Source: the defining normalization. -/
 theorem ordinaryFiniteP1ChernSpec_iff
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (S : Scheme.{u}) (hP : IsUnit (N : Γ(ProjectiveLine S, ⊤)))

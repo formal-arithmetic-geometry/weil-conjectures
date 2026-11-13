@@ -16,17 +16,14 @@ public import WeilConjectures.RingTheory.Etale.IntegrallyClosed
 
 Four elementary facts used by the Noetherian theory of constructible étale sheaves:
 
-- `AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian` (blueprint
-  `lem-weil-pbc-noetherian-finite-components`): a Noetherian scheme has finitely many
+- `AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian`: a Noetherian scheme has finitely many
   irreducible components.
-- `AlgebraicGeometry.UniversallyOpen.of_flat` (blueprint
-  `lem-weil-pbc-flat-lfp-open`): a flat morphism locally of finite presentation is universally
+- `AlgebraicGeometry.UniversallyOpen.of_flat`: a flat morphism locally of finite presentation is universally
   open, in particular open (`AlgebraicGeometry.Scheme.Hom.isOpenMap`).
 - `AlgebraicGeometry.Scheme.exists_isClopen_isIntegral_of_isIntegrallyClosed_stalk` (Stacks 033M):
   a Noetherian scheme whose local rings are integrally closed domains is a finite disjoint union
   of open and closed normal integral subschemes.
-- `AlgebraicGeometry.Scheme.exists_isClopen_isIntegral_of_etale` (blueprint
-  `lem-fin-etale-normal-components`): a Noetherian scheme étale over a normal integral scheme is
+- `AlgebraicGeometry.Scheme.exists_isClopen_isIntegral_of_etale`: a Noetherian scheme étale over a normal integral scheme is
   a finite disjoint union of open and closed normal integral subschemes.
 -/
 
@@ -114,9 +111,9 @@ theorem Scheme.exists_isClopen_isIntegral_of_isIntegrallyClosed_stalk (W : Schem
   have := (hW ((U a).ι w)).2
   exact .of_equiv (hst w)
 
-/-- Blueprint `lem-fin-etale-normal-components`: Normal components after étale pullback.
+/-- Normal components after étale pullback.
 
-Let `f : W ⟶ Y` be étale with `W` Noetherian and `Y` normal integral (an integral scheme all
+Let `f: W ⟶ Y` be étale with `W` Noetherian and `Y` normal integral (an integral scheme all
 of whose local rings are integrally closed). Then `W` is a finite disjoint union of open and
 closed subschemes `W_a` which are normal integral. -/
 theorem Scheme.exists_isClopen_isIntegral_of_etale {W Y : Scheme.{u}} (f : W ⟶ Y) [Etale f]

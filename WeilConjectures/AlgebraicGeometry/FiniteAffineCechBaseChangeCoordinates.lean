@@ -28,7 +28,6 @@ set_option maxHeartbeats 500000 in
 /-- The pulled-back specified model has the ordered section formulas, naturally on all
 opens and linearly over their local rings. This is a termwise statement, before homology.
 Source: Stacks Project, Tag 02KE, affine Čech terms and arbitrary base change.
-(blueprint: lem-pc-finite-affine-cech-base-change-coordinates).
 
 Proof: Separatedness makes every nonempty finite intersection of the V_i affine over U.
 For each such intersection Z, the cartesian square identifies its new inverse image

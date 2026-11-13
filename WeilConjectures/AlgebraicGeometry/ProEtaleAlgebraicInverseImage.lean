@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImageTensorComparison
 /-! # Algebraic presentation of the specified pro-etale module inverse image
 
 Source: Stacks Project, Tags 00YV and 03D2.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -171,7 +170,6 @@ private theorem moduleSetsIdentification_naturality {X Y : Scheme.{u}} (f : X ‚ü
 set inverse image.
 Source: Stacks Project, Sites, Tag 00YV, and Modules on Sites, Tag 03D2;
 the algebraic-structure step in stratum scalar extension.
-(auxiliary; not a blueprint node)
 
 Proof: use the existing unit-normalized underlying-set identifications for rings and
 modules. The module adjunction unit is natural, so the module identification is natural:

@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.GabberH0ZariskiSectionUnitEquation
 /-! # The top-open comparison unit equation
 
 Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-top-unit-equation).
 -/
 
 @[expose] public section
@@ -23,7 +22,6 @@ namespace AlgebraicGeometry
 
 /-- The explicit section comparison carries the topological unit to the etale unit.
 Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-top-unit-equation).
 
 Proof: Apply hbeta at the top open. Its right side is the etale unit for i'
 followed by restriction along the preimage-open isomorphism. Unfold the section

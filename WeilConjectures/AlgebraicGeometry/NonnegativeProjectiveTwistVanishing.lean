@@ -260,7 +260,6 @@ namespace Scheme.Modules
 
 /-- Nonnegative twists have no positive cohomology over any commutative ring.
 Source: Stacks Project, Tag 01XT, the projective-space twist computation.
-(blueprint: lem-pc-d2-nonnegative-projective-twist-vanishing)
 
 Proof: The standard affine coordinate cover computes cohomology, since the twist is
 quasi-coherent and all finite intersections are affine. Identify its Cech complex with

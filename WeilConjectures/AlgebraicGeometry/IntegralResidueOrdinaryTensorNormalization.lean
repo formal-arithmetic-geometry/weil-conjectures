@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorModel
 
 Source: Bhatt--Scholze, Remark 6.8.15 and Lemma 6.5.9(5), p. 51;
 explicit comparison of the ordinary tensor and single-complex constructions.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -186,7 +185,6 @@ set_option maxHeartbeats 900000 in
 -- The degreewise calculation compares several concrete module-functor composites.
 /-- The scalar tensor square agrees with ordinary pullback's comonoidal map.
 Source: Bhatt--Scholze, Remark 6.8.15 and Lemma 6.5.9(5), p. 51.
-(auxiliary; not a blueprint node)
 
 Proof. Use the balanced coequalizer presentation of extension of scalars to
 identify restriction after extension with tensoring by the restricted regular

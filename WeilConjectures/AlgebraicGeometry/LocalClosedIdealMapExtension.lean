@@ -31,7 +31,6 @@ by a nonzero ideal on the integral closed subscheme. No injectivity is assumed o
 asserted. Agreement holds on the entire given open, not just on the generic stalk.
 Source: Stacks Project, Tag 01YB (extension from ideal powers), as used in the last
 paragraph of Tag 01YE, with the affine closed-pushforward calculation of Tag 01QY.
-(blueprint: lem-pc-local-closed-ideal-map-extension)
 
 Proof: let I be the vanishing ideal of the closed complement of U. Mathlib's
 support formula identifies its support with that complement. The ambient extension

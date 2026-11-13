@@ -29,7 +29,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- A finite affine alternating complex gives a bounded flat universal cohomology model.
 Properness and finite presentation are not needed for this construction.
 Source: Stacks Project, Tags 0A1D and 01XK; the construction preceding Tag 0A1H.
-(blueprint: lem-pc-proper-flat-cohomology-model-data).
 Proof: choose an affine neighbourhood U of t. Quasi-compactness gives a finite affine
 cover of its inverse image; separatedness makes all its nonempty finite intersections
 affine. In degree n take the finite direct sum of sections of F on increasing

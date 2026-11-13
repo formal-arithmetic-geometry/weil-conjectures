@@ -10,7 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 /-! # Evaluation of the transported nested-open restriction
 
 Source: Stacks Project, Cohomology, Tag 08BV.
-(blueprint: lem-pc-open-module-image-section-restriction).
 -/
 @[expose] public section
 universe u
@@ -19,10 +18,9 @@ set_option autoImplicit false
 namespace AlgebraicGeometry
 
 /-- The overlap mate is ordinary restriction after the open-site comparisons.
-Source: Stacks Project, Cohomology, Tag 08BV (lemma-exact-sequence-j-star),
+Source: Stacks Project, Cohomology, Tag 08BV,
 sectionwise sequence, with the concrete maps of
 `schemeOpenModuleImageRestriction`.
-(blueprint: lem-pc-open-module-image-section-restriction)
 Proof: Conjugate the nested-open restriction by the direct images of
 `overFunctorEquiv`. The proved `schemeOpenModuleImage_unit_restriction`
 identity, together with `ofNatIsoLeft_unit`, says that this ordinary map

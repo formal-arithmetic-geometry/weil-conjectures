@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestricti
 /-!
 # Pasting of module base change maps
 
-Source: Stacks Project, Cohomology, Remarks 0ATM and 08HY; Sheaves, Lemmas 0096 and 0097
-(blueprint: lem-weil-pbc-module-base-change-map-pasting).
+Source: Stacks Project, Cohomology, Remarks 0ATM and 08HY; Sheaves, Lemmas 0096 and 0097.
 -/
 
 @[expose] public section
@@ -81,11 +80,9 @@ private theorem pushforwardSquare_pasting
 /-- Underived module base change maps paste along horizontal commutative squares.
 Source: Stacks Project, Cohomology, Remarks 08HY and 0ATM (the derived version), and
 Sheaves, Lemmas 0096 and 0097 (the module adjunction and composition identifications).
-(blueprint: lem-weil-pbc-module-base-change-map-pasting)
 
 The base change map `β` of a square and its naturality in `F` (the definitional clauses of
-the node) are the landed `moduleBaseChangeMap` and `moduleBaseChangeMap_naturality`
-(lem-weil-pbc-module-base-change-map-open-restriction). The composition isomorphism
+the node) are the landed `moduleBaseChangeMap` and `moduleBaseChangeMap_naturality`. The composition isomorphism
 `c_{b,a}` of the node is the inverse of
 `(conjugateIsoEquiv ((adj b).comp (adj a)) (adj (a ≫ b))).symm (pushforwardComp a b)`,
 `adj k` the canonical adjunction `Classical.choose (exists_tensorPullbackAdjunction k)`:
@@ -96,8 +93,8 @@ Proof, following the four steps of the node:
 its adjoint, the unit is natural, and sectionwise pushforward composes (0096, 0097).
 2. `β` is the inverse Hom equivalence applied to the pushforward of the top-arrow unit,
 natural in `F` since both naturality composites have the same adjoint.
-3. Compose the two adjunctions (`def-weil-pbc-composite-adjunction`) and conjugate the
-pushforward composition isomorphism (`lem-weil-pbc-conjugate-iso-unit-equation`). This
+3. Compose the two adjunctions and conjugate the
+pushforward composition isomorphism. This
 produces the unique pullback composition isomorphism compatible with the composite unit.
 4. Take the adjoint of the displayed four-arrow composite. (a) Unit compatibility for
 `c_{g,h}` replaces the outer unit by the composite unit. (b) Naturality of the unit for `h`

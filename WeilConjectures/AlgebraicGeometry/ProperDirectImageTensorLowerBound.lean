@@ -24,7 +24,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 
 Source: Stacks Project, Tag 08EV, proof, the quasi-compact support reduction,
 projection formula, and the lower bound after applying the right-derived direct image.
-(blueprint: lem-pc-proper-direct-image-tensor-lower-bound)
 -/
 
 @[expose] public section
@@ -84,7 +83,6 @@ private theorem tensor_vanishes_of_isZero (Y : Scheme.{u})
 /-- Proper-support direct image gives a uniform lower bound after tensoring with
 quasi-coherent modules. No upper bound or arbitrary-module test is asserted here.
 Source: Stacks Project, Tag 08EV, proof, lower-bound argument; Tags 08EU and 08DZ.
-(blueprint: lem-pc-proper-direct-image-tensor-lower-bound)
 
 Proof:
 1. Boundedness leaves finitely many nonzero cohomology sheaves. Their supports have

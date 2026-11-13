@@ -16,7 +16,7 @@ import Mathlib.RingTheory.LocalRing.RingHom.Basic
 /-! # Local criterion of flatness modulo a nonzerodivisor
 
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00ML and the remark
-following it (blueprint: lem-weil-pbc-flat-local-criterion-nonzerodivisor).
+following it.
 -/
 
 @[expose] public section
@@ -30,7 +30,7 @@ namespace RingTheory
 /-- Local criterion of flatness modulo a nonzerodivisor.
 
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00ML and the remark
-following it (blueprint: lem-weil-pbc-flat-local-criterion-nonzerodivisor).
+following it.
 
 The local homomorphism `φ` is `algebraMap A B`, and `M` is an `A`-module via `φ` by the
 scalar tower, so `IsSMulRegular M x` is injectivity of multiplication by `φ(x)` on `M`.
@@ -40,14 +40,13 @@ Proof (the two steps of the node):
 1. Put `I = (x)`. Since `x` belongs to the maximal ideal, `I` is proper. Regularity of
    `x` makes the surjective map `A → I`, `a ↦ a * x`, injective, hence an isomorphism.
    Tensoring this isomorphism with `M` and using `A ⊗[A] M ≃ M` gives an isomorphism
-   `β : M ≃ I ⊗[A] M` sending `m` to `x ⊗ m`. The multiplication map
-   `μ : I ⊗[A] M → M`, `a ⊗ m ↦ φ(a) • m`, composed with `β`, is multiplication
+   `β: M ≃ I ⊗[A] M` sending `m` to `x ⊗ m`. The multiplication map
+   `μ: I ⊗[A] M → M`, `a ⊗ m ↦ φ(a) • m`, composed with `β`, is multiplication
    by `φ(x)`. This is injective by hypothesis, so `μ` is injective. This is the
    remark after Tag 00ML read through Remark Tag 00M6, which identifies Tor with
    the kernel of `μ`; no Tor construction is needed here.
 2. The submodule `I • M` equals `xM`, and `A/I = A/xA`, so the quotient-flatness
-   hypothesis is exactly flatness of `M/IM` over `A/I`
-   (`def-weil-pbc-flat-ring-map`). Apply `lem-weil-pbc-flat-variant-local-criterion`
+   hypothesis is exactly flatness of `M/IM` over `A/I`. Apply `lem-weil-pbc-flat-variant-local-criterion`
    (Tag 00ML) to the given local homomorphism of Noetherian local rings, the proper
    ideal `I`, and the finite `B`-module `M`, using injectivity of `μ` from step 1
    and quotient flatness. It gives flatness of `M` over `A`.

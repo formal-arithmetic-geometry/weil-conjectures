@@ -63,7 +63,6 @@ private theorem fullCoordinate_eq_zero {X' T' : Scheme.{u}} (f' : X' ⟶ T')
 /-- An endomorphism of the usual presentation vanishing on increasing coordinates
 is null homotopic as a morphism of module-sheaf complexes. No ordered complex is given.
 Source: Stacks Project, Tag 01FM, equations 20.23.6.1 and 20.23.6.2.
-(blueprint: lem-pc-ordered-cech-module-kernel-null-homotopic).
 
 Proof: On each inverse-image open identify D by e with full tuple cochains.
 Use the explicit first and second sorting families already defined for additive

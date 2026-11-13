@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.OpenCohomologyZeroSections
 /-! # Comparing degree-zero cohomology fractions with section fractions
 
 Source: Stacks Project, Tag 09MR, degree-zero fraction presentation.
-(blueprint: lem-sc-open-cohomology-fraction-zero-comparison).
 -/
 
 @[expose] public section
@@ -24,7 +23,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The canonical degree-zero comparison descends to fraction presentations on any open.
 Source: Stacks Project, Tag 09MR, degree-zero case.
-(blueprint: lem-sc-open-cohomology-fraction-zero-comparison).
 
 Proof: Take the direct sum of the canonical additive equivalences on numerator groups.
 Naturality in the coefficient module takes every fraction relation to its section

@@ -40,8 +40,7 @@ tensors to every element, and extensionality gives equality of additive maps.
 This is only a degreewise statement: it uses neither homology nor localization.
 Empty opens have no z0; zero complexes and zero rings require no extra condition.
 Source: Stacks Project, Tag 0098 (stalks of pullback modules), and Tag 0D5U
-(exact restriction); the units of the specified pullback adjunctions.
-(blueprint: lem-pc-open-restricted-tensor-chain-transport). -/
+(exact restriction); the units of the specified pullback adjunctions. -/
 theorem openRestricted_tensor_chain_transport
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

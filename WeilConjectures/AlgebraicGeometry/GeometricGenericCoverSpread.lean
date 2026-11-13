@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.CommonFieldFibreComparison
 # Spreading a supplied geometric generic cover
 
 Source: Stacks Project, Tag 055G, proof after splitting generic components.
-(blueprint: lem-sbc-geometric-generic-cover-spread)
 -/
 
 @[expose] public section
@@ -55,9 +54,7 @@ flat, so p is surjective. The fibres of the closures give the irreducible nonemp
 sets B covering Z, and all prescribed intersections remain nonempty after field
 extension. If the index type is empty, the generic cover forces the generic fibre
 to be empty; Tag 054W supplies an open of empty fibres. Take Z to be the test fibre,
-p its identity, and B the empty family. No connectedness is used.
-
-(blueprint: lem-sbc-geometric-generic-cover-spread) -/
+p its identity, and B the empty family. No connectedness is used. -/
 theorem exists_open_spreading_geometric_generic_cover {X S : Scheme.{u}}
     [IrreducibleSpace S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f]
     {L : Type u} [Field L]

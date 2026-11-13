@@ -21,7 +21,6 @@ import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 
 Source: Stacks Project, Varieties, Tag 0BED, lemma-kunneth, the short exact
 coefficient diagram after equation-kunneth-on-cech.
-(blueprint: lem-sc-picard-external-cup-left-cech-exact).
 -/
 
 @[expose] public section
@@ -34,13 +33,13 @@ noncomputable section
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
 /-- The genuine finite subcover of the affine cover, as a family of opens.
-Source: Stacks, Tag 0BED (blueprint: lem-sc-picard-external-cup-left-cech-exact). -/
+Source: Stacks, Tag 0BED. -/
 def picardFiniteAffineOpens (X : Scheme.{w}) [CompactSpace X] :
     X.affineCover.finiteSubcover.I₀ → X.Opens :=
   fun i ↦ (X.affineCover.finiteSubcover.f i).opensRange
 
 /-- Scalar-valued Cech cochains, functorially in the coefficient sheaf.
-Source: Stacks, Tag 0BED (blueprint: lem-sc-picard-external-cup-left-cech-exact). -/
+Source: Stacks, Tag 0BED. -/
 def picardScalarCechFunctor (f : X ⟶ Spec (CommRingCat.of k))
     {ι : Type w} (U : ι → X.Opens) : X.Modules ⥤ CochainComplex (ModuleCat.{w} k) ℕ :=
   scalarFunctor f ⋙ sheafToPresheaf _ _ ⋙ cechComplexFunctor U
@@ -63,7 +62,7 @@ private instance scalarCech_zero (f : X ⟶ Spec (CommRingCat.of k))
     exact comp_zero
 
 /-- Tensor with a fixed integer-index complex.
-Source: Stacks, Tag 0BED (blueprint: lem-sc-picard-external-cup-left-cech-exact). -/
+Source: Stacks, Tag 0BED. -/
 def picardCechTensorRight (C : CochainComplex (ModuleCat.{w} k) ℤ) :
     CochainComplex (ModuleCat.{w} k) ℤ ⥤ CochainComplex (ModuleCat.{w} k) ℤ :=
   ((curriedTensor (ModuleCat.{w} k)).map₂HomologicalComplex
@@ -81,7 +80,7 @@ private instance cechTensorRight_zero (C : CochainComplex (ModuleCat.{w} k) ℤ)
     simp
 
 /-- Tensor-total Cech model for the left coefficient, extended by zero.
-Source: Stacks, Tag 0BED (blueprint: lem-sc-picard-external-cup-left-cech-exact). -/
+Source: Stacks, Tag 0BED. -/
 def picardLeftTensorCechFunctor
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     [CompactSpace X] [CompactSpace Y] (G : Y.Modules) :
@@ -93,7 +92,7 @@ def picardLeftTensorCechFunctor
         ComplexShape.embeddingUpNat)
 
 /-- Product cover, indexed by pairs from the two finite affine covers.
-Source: Stacks, Tag 0BED (blueprint: lem-sc-picard-external-cup-left-cech-exact). -/
+Source: Stacks, Tag 0BED. -/
 def picardProductAffineOpens
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     [CompactSpace X] [CompactSpace Y] :
@@ -103,7 +102,7 @@ def picardProductAffineOpens
     pullback.snd f g ⁻¹ᵁ picardFiniteAffineOpens Y i.2
 
 /-- Product-cover Cech model of the external coefficient, extended by zero.
-Source: Stacks, Tag 0BED (blueprint: lem-sc-picard-external-cup-left-cech-exact). -/
+Source: Stacks, Tag 0BED. -/
 def picardLeftProductCechFunctor
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     [CompactSpace X] [CompactSpace Y] (G : Y.Modules) :
@@ -114,7 +113,7 @@ def picardLeftProductCechFunctor
     ComplexShape.embeddingUpNat.extendFunctor _
 
 /-- The tensor Cech functor sends zero coefficient morphisms to zero.
-Source: termwise tensor maps (blueprint: lem-sc-picard-external-cup-left-cech-exact).
+Source: termwise tensor maps.
 Proof: Scalar Cech maps, tensor maps and extension by zero all preserve zero. -/
 instance picardLeftTensorCechFunctor_zero
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
@@ -125,7 +124,7 @@ instance picardLeftTensorCechFunctor_zero
 
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The product Cech functor sends zero coefficient morphisms to zero.
-Source: termwise coefficient maps (blueprint: lem-sc-picard-external-cup-left-cech-exact).
+Source: termwise coefficient maps.
 Proof: Pullback, tensor, scalar Cech and extension functors preserve zero. -/
 instance picardLeftProductCechFunctor_zero
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
@@ -324,7 +323,6 @@ private theorem finite_affine_opens (Z : Scheme.{w}) [CompactSpace Z]
 /-- Both explicit Cech sequences are short exact in the left coefficient.
 Source: Stacks Project, Varieties, Tag 0BED, lemma-kunneth, the short exact
 coefficient diagram after equation-kunneth-on-cech.
-(blueprint: lem-sc-picard-external-cup-left-cech-exact).
 
 Proof: The finite affine covers have affine finite intersections by the affine
 relative diagonals over Spec k. On each intersection a quasi-coherent short exact

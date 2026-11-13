@@ -14,7 +14,6 @@ import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
 /-! # Explicit K-injective comparison for one open
 
 Source: Stacks Project, Cohomology, Tags 08BS and 08BV.
-(blueprint: def-pc-open-image-complex-comparison-iso).
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ namespace AlgebraicGeometry
 
 /-- Open restriction, transported to the open subscheme, preserves K-injectivity.
 Source: Stacks, Tag 08BS (lemma-restrict-K-injective-to-open).
-Proof: restrict on the open site and then apply the exact additive equivalence.
-(blueprint: def-pc-open-image-complex-comparison-iso). -/
+Proof: restrict on the open site and then apply the exact additive equivalence. -/
 theorem isKInjective_schemeOpenRestriction (X : Scheme.{u}) (U : X.Opens)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     [I.IsKInjective] :
@@ -49,11 +47,10 @@ theorem isKInjective_schemeOpenRestriction (X : Scheme.{u}) (U : X.Opens)
 
 set_option backward.isDefEq.respectTransparency true in
 /-- A constructed comparison, normalized to the supplied derived adjunction.
-Source: Stacks, Tag 08BV (lemma-exact-sequence-j-star), first proof paragraph.
+Source: Stacks, Tag 08BV, first proof paragraph.
 The inverse K-injective computation is followed by exact-restriction localization
 and the unique right-adjoint comparison from the derived underived adjunction.
-No witness of an existence theorem is chosen.
-(blueprint: def-pc-open-image-complex-comparison-iso). -/
+No witness of an existence theorem is chosen. -/
 def schemeOpenModuleImageComplexComparison (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]

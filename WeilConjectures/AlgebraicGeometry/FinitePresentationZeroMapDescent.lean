@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.FinitePresentationZeroMapAffineOpen
 # Eventual vanishing of one finitely generated module map
 
 Source: Stacks Project, Limits, Tag 01ZR (3), affine vanishing argument.
-(blueprint: lem-pc-fp-zero-map-descent).
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ namespace AlgebraicGeometry
 
 /-- A map from a finite type quasi-coherent model to a finitely presented model
 which vanishes on the inverse limit vanishes at some finite stage.
-Source: Stacks Project, Limits, Tag 01ZR (3), affine vanishing argument
-(blueprint: lem-pc-fp-zero-map-descent).
+Source: Stacks Project, Limits, Tag 01ZR (3), affine vanishing argument.
 
 Proof: the quasi-compactness of `f` over an affine base makes `Xi` quasi-compact.
 Choose finitely many affine opens covering `Xi`. Their inverse images in every stage

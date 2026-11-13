@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 # Locally constant fibre degree of a finite locally free morphism
 
 Source: literature/stacks-project/morphisms.tex, Section 02K9, Definition 02KA
-and Lemma 04MH (blueprint: lem-weil-pbc-finite-locally-free-degree-locally-constant).
+and Lemma 04MH.
 -/
 
 @[expose] public section
@@ -27,8 +27,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- For a finite locally free morphism, the fibre dimension is finite and locally constant;
 the clopen fibres give the equivalent decomposition into constant-degree restrictions.
-Source: Stacks Morphisms, Definition 02KA and Lemma 04MH
-(blueprint: lem-weil-pbc-finite-locally-free-degree-locally-constant).
+Source: Stacks Morphisms, Definition 02KA and Lemma 04MH.
 Step 1 applies the finite-flat rank statement `lem-weil-pbc-finite-flat-rank-iso` to identify
 this dimension with the finite rank and obtain local constancy. Step 2 takes the clopen fibres
 of the locally constant function and restricts `f` to each one, preserving finite, flat, and

@@ -10,7 +10,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 
 /-! # Contractibility of the power-set complex
 Source: literature/stacks-project/sites-cohomology.tex, Tag 03AT
-(blueprint: lem-weil-pbc-power-set-complex-contractible)
 -/
 
 @[expose] public section
@@ -24,17 +23,17 @@ universe u v
 variable (A : Type u) [Ring A] (S : Type v)
 
 /-- The free `A`-module on `(p+1)`-tuples in `S`.
-Source: Stacks Project, Tag 03AT (blueprint: lem-weil-pbc-power-set-complex-contractible). -/
+Source: Stacks Project, Tag 03AT. -/
 abbrev powerSetComplexObject (p : ℕ) : Type (max u v) := (Fin (p + 1) → S) →₀ A
 
 /-- Deletion of the `j`-th entry of a tuple.
-Source: Stacks Project, Tag 03AT (blueprint: lem-weil-pbc-power-set-complex-contractible). -/
+Source: Stacks Project, Tag 03AT. -/
 def powerSetComplexFace {p : ℕ} (j : Fin (p + 2))
     (x : Fin (p + 2) → S) : Fin (p + 1) → S :=
   fun i => x (Fin.succAbove j i)
 
 /-- The alternating face differential on free modules on tuples.
-Source: Stacks Project, Tag 03AT (blueprint: lem-weil-pbc-power-set-complex-contractible). -/
+Source: Stacks Project, Tag 03AT. -/
 noncomputable def powerSetComplexDifferential (p : ℕ) :
     powerSetComplexObject A S (p + 1) →ₗ[A] powerSetComplexObject A S p :=
   (Finsupp.lift _ _ _) (fun x =>
@@ -42,19 +41,19 @@ noncomputable def powerSetComplexDifferential (p : ℕ) :
       ((-1 : A) ^ (j : ℕ)) • Finsupp.single (powerSetComplexFace S (p := p) j x) 1)
 
 /-- The augmentation sending each basis element to `1`.
-Source: Stacks Project, Tag 03AT (blueprint: lem-weil-pbc-power-set-complex-contractible). -/
+Source: Stacks Project, Tag 03AT. -/
 noncomputable def powerSetComplexAugmentation :
     powerSetComplexObject A S 0 →ₗ[A] A :=
   (Finsupp.lift _ _ _) (fun _ => 1)
 
-/-- The contracting homotopy `[(s₀,…,sₚ)] ↦ [(s,s₀,…,sₚ)]` prefixing a chosen `s : S`.
-Source: Stacks Project, Tag 03AT (blueprint: lem-weil-pbc-power-set-complex-contractible). -/
+/-- The contracting homotopy `[(s₀,…,sₚ)] ↦ [(s,s₀,…,sₚ)]` prefixing a chosen `s: S`.
+Source: Stacks Project, Tag 03AT. -/
 noncomputable def powerSetComplexHomotopy (s : S) (p : ℕ) :
     powerSetComplexObject A S p →ₗ[A] powerSetComplexObject A S (p + 1) :=
   Finsupp.lmapDomain A A (fun x : Fin (p + 1) → S => (Fin.cons s x : Fin (p + 2) → S))
 
 /-- The degree `-1` part of the contracting homotopy, `A → C₀(S;A)`, `1 ↦ [s]`.
-Source: Stacks Project, Tag 03AT (blueprint: lem-weil-pbc-power-set-complex-contractible). -/
+Source: Stacks Project, Tag 03AT. -/
 noncomputable def powerSetComplexAugmentationHomotopy (s : S) :
     A →ₗ[A] powerSetComplexObject A S 0 :=
   Finsupp.lsingle (fun _ => s)
@@ -75,8 +74,7 @@ private theorem powerSetComplexFace_cons_succ (p : ℕ) (s : S)
 /-- Contracting homotopy identities on basis tuples.
 Source: Stacks Project, Tag 03AT.
 Proof: evaluate the maps on each basis tuple; the first face is the identity and
-the remaining alternating faces are the prefix of the differential.
-(blueprint: lem-weil-pbc-power-set-complex-homotopy-identities) -/
+the remaining alternating faces are the prefix of the differential. -/
 theorem powerSetComplex_homotopy_identities :
     ∀ s : S,
       (powerSetComplexAugmentation A S).comp
@@ -123,8 +121,7 @@ theorem powerSetComplex_homotopy_identities :
 /-- Basis computation of d²=0, εd=0, and the empty case.
 Source: Stacks Project, Tag 03AT.
 Proof: compute both compositions on Finsupp basis elements and use sign cancellation;
-when S is empty every tuple type is empty.
-(blueprint: lem-weil-pbc-power-set-complex-basic-identities) -/
+when S is empty every tuple type is empty. -/
 theorem powerSetComplex_basic_identities :
     (∀ p : ℕ,
       (powerSetComplexDifferential A S p).comp
@@ -194,8 +191,7 @@ theorem powerSetComplex_basic_identities :
 /-- Exactness from the chosen contracting homotopy.
 Source: Stacks Project, Tag 03AT.
 Proof: for a chosen element of S, prefixing gives a contracting homotopy; the
-standard contracting-homotopy argument identifies each range with the next kernel.
-(blueprint: lem-weil-pbc-power-set-complex-nonempty-contracting) -/
+standard contracting-homotopy argument identifies each range with the next kernel. -/
 theorem powerSetComplex_nonempty_contracting :
     Nonempty S →
       (∀ p : ℕ,
@@ -231,16 +227,14 @@ theorem powerSetComplex_nonempty_contracting :
 /-- The tuple complex `C_•(S;A)` with `d ∘ d = 0` and `ε ∘ d = 0`; it is zero when `S` is
 empty; for nonempty `S` the augmented complex `⋯ → C₁ → C₀ → A → 0` is exact in every
 degree (at `C_{p+1}`, at `C₀`, and at `A`: `ε` is surjective), so `H_p = 0` for `p > 0` and
-`ε` induces `H₀ ≅ A`; and for every `s : S` the prefixing maps form a contracting homotopy of
+`ε` induces `H₀ ≅ A`; and for every `s: S` the prefixing maps form a contracting homotopy of
 the augmented complex.
-Source: Stacks Project, Lemma Tag 03AT, last paragraph of the proof
-(blueprint: lem-weil-pbc-power-set-complex-contractible).
+Source: Stacks Project, Lemma Tag 03AT, last paragraph of the proof.
 Proof: (1) `d ∘ d = 0` and `ε ∘ d = 0` on basis tuples by the sign cancellation of the
 two deletion orders, and `ε(d[(s₀,s₁)]) = 1 - 1 = 0`. (2) If `S` is empty there are no
-tuples, so every `C_p` is zero. (3) For `s : S`, on basis elements
+tuples, so every `C_p` is zero. (3) For `s: S`, on basis elements
 `d(h x) = x - h(d x)` in positive degrees, `d(h[s₀]) + h(ε[s₀]) = [s₀]` and `ε(h 1) = 1`.
-(4) A contracting homotopy of the augmented complex gives its exactness in every degree
-(lem-weil-pbc-contractible-complex-acyclic). -/
+(4) A contracting homotopy of the augmented complex gives its exactness in every degree. -/
 theorem powerSetComplex_contractible :
     (∀ p : ℕ,
       (powerSetComplexDifferential A S p).comp

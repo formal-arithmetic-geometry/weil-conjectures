@@ -19,7 +19,6 @@ set_option linter.privateModule false
 
 Source: Stacks Project, Modules on Sites, Tags 03CY, 03DA, 03DB and 03EK;
 Bhatt--Scholze, Lemma 3.4.12.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section

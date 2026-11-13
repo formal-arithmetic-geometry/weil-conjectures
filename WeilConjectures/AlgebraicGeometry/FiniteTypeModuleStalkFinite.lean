@@ -27,7 +27,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A finite type module sheaf has finitely generated stalks.
 
 Source: Stacks Project, Modules, Tag 01B4, finite local generating sections.
-(blueprint: lem-weil-pbc-finite-type-module-stalk-finite)
 
 Proof: Choose a finite local generating family on a neighbourhood U of x. Its
 free-sheaf map is an epimorphism, hence locally surjective on sections. Any germ

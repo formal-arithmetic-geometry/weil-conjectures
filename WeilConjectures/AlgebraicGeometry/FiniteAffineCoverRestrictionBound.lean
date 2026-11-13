@@ -32,7 +32,6 @@ cohomological bound. No injectivity or torsion assumption is needed for this ste
 
 Source: Stacks Project, Tag 0A51, final paragraph of the proof, with the affine
 vanishing used there made an explicit hypothesis.
-(blueprint: lem-weil-pbc-finite-affine-cover-restriction-bound)
 
 Proof: induct on n, simultaneously for all schemes and sheaves satisfying hlocal.
 For n = 0 the sole affine open is the whole scheme, so hlocal gives the result

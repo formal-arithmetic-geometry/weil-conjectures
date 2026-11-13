@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.MixedPullbackSquareTensorCoherence
 /-! # Base change preserves the direct-image tensor pairing
 Source: Stacks Project, cohomology.tex Tag 08I3 and Remark 08HY;
 duality.tex Tag 0AA8, final comparison diagrams.
-(blueprint: lem-sc-mixed-tensor-pairing-base-change-identity).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ variable [∀ Z : Scheme.{u},
 /-- Identity-pairing coherence for the canonical base-change mate.
 Source: Stacks Project, cohomology.tex, Remark 08HY and Lemma 079U;
 duality.tex, Tag 0AA8, final comparison diagrams.
-(blueprint: lem-sc-mixed-tensor-pairing-base-change-identity).
 
 Proof: transpose under the upper pullback/direct-image adjunction and expand the
 base-change mates. Counit naturality and triangle identities reduce the equality

@@ -14,7 +14,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Fin
 /-!
 # Repleteness of the pro-étale topos
 
-Source: blueprint `det-pe-replete-epimorphism` (sec-proetale-coefficients, sk-prop-pe-replete);
+Source:;
 Bhatt–Scholze, *The pro-étale topology*, Proposition 4.2.8.
 -/
 
@@ -24,8 +24,7 @@ universe u w
 
 namespace AlgebraicGeometry.Scheme
 
-/-- **Repleteness of the pro-étale topos** (blueprint: det-pe-replete-epimorphism;
-Bhatt–Scholze, Proposition 4.2.8). For every scheme, the topos of set-valued sheaves on its
+/-- **Repleteness of the pro-étale topos**. For every scheme, the topos of set-valued sheaves on its
 small pro-étale site is replete: inverse sequences with epimorphic transition maps have
 epimorphic limit projections at every natural-number index.
 

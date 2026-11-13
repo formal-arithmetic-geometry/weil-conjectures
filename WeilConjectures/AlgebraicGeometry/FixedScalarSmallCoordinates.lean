@@ -24,7 +24,6 @@ constant-ring model is ordinary small-site precomposition and the normalized sca
 restriction. No complex, derived functor or integral completion occurs.
 
 Source: Stacks Tags 03CY and 09A5, integral-models proof (1)--(2).
-(auxiliary; not a blueprint node).
 
 Proof: compose both functors with the fully faithful constant-scalar restriction on
 the small site. On the left its counit cancels the inverse restriction used by

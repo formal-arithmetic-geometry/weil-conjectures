@@ -131,7 +131,6 @@ private theorem homogeneous_localization_zero
 
 /-- Homogeneous primes of a positive-degree basic open detect equality in A_f.
 Source: Stacks Project, Lemma 27.8.4, Tag 01M7, localization injectivity argument.
-(blueprint: lem-sc-proj-basic-open-localization-detection)
 
 Proof: first localize at the homogeneous elements outside a homogeneous prime p.
 This localization B has a Z-grading and injects into the ordinary localization A_p.

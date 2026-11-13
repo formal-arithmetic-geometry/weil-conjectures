@@ -47,7 +47,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Global sections generate a module exactly when their germs span every stalk.
 
 Source: Stacks Project, Modules, Definition 01AM; Sheaves, Lemma 0H7H(2).
-(blueprint: lem-weil-pbc-generating-sections-stalk-span).
 
 Proof: The free sheaf morphism sends its i-th basis section to s i. The stalk map
 is linear. For a finite family the identity on the free sheaf is the sum of the

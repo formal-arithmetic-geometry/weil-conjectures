@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.ScalarSectionsIsoTransport
 
 Source: Stacks Project, Varieties, Tag 0BED, the right-variable version of the
 coefficient diagram following `equation-kunneth-on-cech`.
-(blueprint: lem-sc-picard-external-right-rectangle-symmetry).
 -/
 
 @[expose] public section
@@ -38,10 +37,9 @@ private theorem tensorRight_pullback_iso {P Q : Scheme.{w}} (a : P ⟶ Q)
 with the left external section functor on the transposed rectangle.
 Source: Stacks Project, Varieties, Tag 0BED, right-variable coefficient argument
 ("Arguing in the same fashion for G"), using symmetry of pullback and tensor.
-(blueprint: lem-sc-picard-external-right-rectangle-symmetry).
 
 Proof: Let P = X ×_k Y and Q = Y ×_k X. The pullback universal property gives
-the transposition isomorphism e : P ≅ Q, with e followed by the first projection
+the transposition isomorphism e: P ≅ Q, with e followed by the first projection
 of Q equal to the second projection of P, and similarly for the other projection.
 It identifies the rectangle pr₁⁻¹A ∩ pr₂⁻¹B in P with pr₁⁻¹B ∩ pr₂⁻¹A in Q.
 For each O_Y-module G, functoriality of module pullback and its compatibility

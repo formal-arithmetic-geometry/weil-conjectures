@@ -113,7 +113,6 @@ private theorem closed_mapMod_isEquivalence {X Z : Scheme.{u}}
 
 /-- Surjective closed inverse image reflects pro-etale local finite presentation.
 Source: Bhatt--Scholze, Lemma 5.4.2, Theorem 2.3.4 and Definition 6.8.10.
-(auxiliary; not a blueprint node)
 
 Proof: a surjective closed immersion is a universal homeomorphism. Topological
 invariance is computed on the affine ind-etale basis of Theorem 2.3.4. On this basis

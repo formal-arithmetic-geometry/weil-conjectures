@@ -76,7 +76,6 @@ set_option backward.isDefEq.respectTransparency false in
 sections and quotient system of the restricted proper morphism to a spectrum.
 This is a finite-level dictionary; it asserts no completion or limit isomorphism.
 Source: Stacks Project, Theorem 02OC and Lemma 088B; Schemes, Tags 01I8 and 01IC.
-(blueprint: lem-weil-pbc-formal-functions-affine-restriction-dictionary)
 
 Proof: Let V = f^(-1)U and g = (f restricted to U) followed by U = Spec Gamma(Y,U).
 The restriction square is cartesian, so properness of f gives properness of g.

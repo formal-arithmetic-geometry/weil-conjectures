@@ -32,7 +32,6 @@ for abelian sheaves killed by a prime.
 Source: Stacks Project, Tag 095T, second paragraph of the proof, abstracted from
 projective lines; the identification with the canonical pullback is the comparison
 of resolutions in prop-weil-pbc-p1-strict-henselian-comparison, steps (c)--(d).
-(blueprint: lem-weil-pbc-prime-injective-cohomology-comparison)
 
 Proof: the equation r • id G = 0 says sectionwise that every section is killed by r.
 Give each section group its canonical Z/r-module structure. Restriction maps respect

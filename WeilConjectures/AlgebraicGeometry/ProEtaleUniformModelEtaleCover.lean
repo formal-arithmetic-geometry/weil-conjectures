@@ -523,7 +523,6 @@ set_option backward.isDefEq.respectTransparency false in
 is trivialized etale locally, over any discrete commutative coefficient ring.
 Source: Stacks Project, Tag 099Y, proof of lemma-compare-locally-constant; the finite
 lifting argument is extended here from finite underlying sets to finite generating sets.
-(auxiliary; not a blueprint node).
 
 Proof: Isomorphisms of restrictions form a sheaf by gluing maps and their inverses
 in the sheafHom sheaves. For constant modules M,N with M finitely generated, choose
@@ -609,8 +608,7 @@ theorem etale_cover_of_proetale_uniform_finiteType_model
 
 /-- The finite-ring finite-model case of the finite-type model comparison.
 Source: Stacks Project, Tag 099Y, proof of lemma-compare-locally-constant.
-The finite underlying module is finitely generated, so apply the finite-type theorem.
-(auxiliary; not a blueprint node) -/
+The finite underlying module is finitely generated, so apply the finite-type theorem. -/
 theorem etale_cover_of_proetale_uniform_model
     (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))

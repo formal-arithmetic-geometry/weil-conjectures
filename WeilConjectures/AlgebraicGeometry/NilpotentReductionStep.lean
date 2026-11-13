@@ -674,8 +674,7 @@ private theorem restriction_lisse_homology
     (locallyConstantFiniteTypeModules_restrictScalars_surjective T f hf _ (hP i))
 
 /-- The quotient triangle advances finite locally constant cohomology from J^n to
-J^(n+1). Source: Stacks Project, Cohomology on Sites, Tag 094I
-(auxiliary; not a blueprint node).
+J^(n+1). Source: Stacks Project, Cohomology on Sites, Tag 094I.
 
 Proof: put D = B/J^(n+1) and Q = J^n/J^(n+1). Regard the exact coefficient
 sequence 0 to Q to D to B/J^n to 0 as a sequence of D-modules. A flat K-flat

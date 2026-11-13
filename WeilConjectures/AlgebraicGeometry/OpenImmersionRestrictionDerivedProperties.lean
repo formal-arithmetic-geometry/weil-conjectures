@@ -15,7 +15,6 @@ import Mathlib.AlgebraicGeometry.Restrict
 
 /-! # Exactness and K-injective preservation for open-immersion restriction
 Source: Stacks Project, Tag 08BS and sectionwise module limits (Tag 01AH).
-(blueprint: lem-pc-open-immersion-restriction-derived-properties).
 -/
 
 @[expose] public section
@@ -35,8 +34,7 @@ sections over opens in the source are the same sections in the target. It preser
 K-injectives by Tag 08BS: extension by zero is an exact left adjoint, and the adjunction
 identifies Hom complexes against acyclic complexes. The two equivalences are exact and
 preserve K-injectives. Transport these properties across the natural restriction
-isomorphism and compose them. This also covers an empty image open.
-(blueprint: lem-pc-open-immersion-restriction-derived-properties). -/
+isomorphism and compose them. This also covers an empty image open. -/
 theorem openImmersion_restriction_derived_properties
     {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
     PreservesFiniteLimits (Scheme.Modules.restrictFunctor j) ∧

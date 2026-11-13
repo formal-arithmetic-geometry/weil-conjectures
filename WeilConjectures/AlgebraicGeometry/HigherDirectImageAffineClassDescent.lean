@@ -16,7 +16,6 @@ import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 /-! # Descent of affine higher-image sections
 
 Source: Stacks Project, Tags 09Z1, 03Q8 and 0738.
-(blueprint: sbc-lem-higher-image-affine-class-descent).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- Every section of the limit higher image on an affine etale object descends.
 Source: Stacks Project, Tag 09Z1, proof; Tag 0738(4).
-(blueprint: sbc-lem-higher-image-affine-class-descent).
 
 Proof:
 1. Construct the opposite-indexed diagram K with canonical higher-image transitions

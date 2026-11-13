@@ -13,7 +13,6 @@ public import Mathlib.Data.Fintype.Order
 /-! # Eventual vanishing in the kernel of the Koszul-to-Čech cocone
 
 Source: Stacks, Tags 08D0 and 08D1.
-(blueprint: lem-sc-koszul-cech-stage-kernel)
 -/
 
 @[expose] public section
@@ -142,7 +141,7 @@ private theorem koszul_transition_zero
 
 /-- A finite-stage cochain with zero Čech image becomes zero at a later stage.
 Source: Stacks, Tag 08D0, proof's localization equality criterion, and Tag 08D1,
-finite total-degree diagonals (blueprint: lem-sc-koszul-cech-stage-kernel).
+finite total-degree diagonals.
 
 Proof: Transport z through koszulCechHomObjIso and evaluate on the ordered exterior
 basis indexed by nonempty subsets J. Put g_J = product of f_j over J. Transport

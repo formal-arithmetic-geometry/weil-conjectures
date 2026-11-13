@@ -47,7 +47,6 @@ private def restrictedLiftSectionsIso {Y Z : Scheme.{uBC}} (h : Y ⟶ Z)
 
 /-- Restriction of an augmented lift, together with its canonical section square.
 Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
-(blueprint: lem-weil-pbc-flat-base-change-restricted-lift-sections).
 
 Proof: Put U = f inverse-image V and W = g' inverse-image U. Restrict t to U,
 then conjugate its source and target by the augmentation-preserving comparisons

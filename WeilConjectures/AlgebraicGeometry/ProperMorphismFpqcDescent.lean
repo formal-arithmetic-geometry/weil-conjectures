@@ -12,8 +12,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 /-!
 # Proper morphisms descend along fpqc covering families
 
-Source: Stacks Project, Descent, Tag 02L1, `lemma-descending-property-proper`
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Descent, Tag 02L1, `lemma-descending-property-proper`.
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ namespace AlgebraicGeometry
 
 /-- Properness descends along an fpqc covering family.
 
-Source: Stacks Project, Descent, Tag 02L1, `lemma-descending-property-proper`
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Descent, Tag 02L1, `lemma-descending-property-proper`.
 
 Proof: properness is Zariski local on the target and stable under base change.
 The source-library instance

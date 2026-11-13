@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.KoszulCoordinateMulTriangle
 
 /-! # Koszul orthogonality propagates to positive powers
 Source: Stacks Project, Tag 09IR.
-(blueprint: lem-pc-koszul-powers-orthogonality).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry
 /-- Orthogonality to every shift persists after raising the generators to positive powers.
 Source: Stacks Project, Tag 09IR, proof of lemma-orthogonal-koszul-complex;
 Tag 062C, lemma-koszul-mult.
-(blueprint: lem-pc-koszul-powers-orthogonality).
 
 Proof: Induct on the sum of the positive exponents minus r. The zero case has every
 exponent equal to one, so it is the hypothesis. Otherwise select a coordinate with

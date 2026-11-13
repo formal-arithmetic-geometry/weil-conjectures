@@ -56,7 +56,6 @@ set_option linter.unusedSectionVars false in
 Source: Stacks Project, Sites, Tag 00WL, the image subsheaf argument, and
 Hypercoverings, Tag 01H0, the local primitive step. This is the categorical
 finite-cover version for Grothendieck abelian coefficients.
-(auxiliary; not a blueprint node).
 
 Proof: define the local image at each etale object as the union of subobjects whose
 inclusions lift locally after an epimorphism onto their source. These subobjects form a

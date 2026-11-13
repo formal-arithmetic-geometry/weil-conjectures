@@ -77,8 +77,7 @@ Source: Stacks Project, Tag 099Y, proof of lemma-compare-locally-constant.
 At a geometric point of a double overlap, both models identify with the same fiber,
 so they are isomorphic. For each fixed model, select the whole space on cover members
 of that type and the empty open on other members. These opens agree on overlaps and
-descend by fpqc open descent. Joint surjectivity proves that the descended opens cover.
-(auxiliary; not a blueprint node) -/
+descend by fpqc open descent. Joint surjectivity proves that the descended opens cover. -/
 theorem proEtale_model_type_opens
     {X : Scheme.{u}} (Λ : Type (u + 1)) [CommRing Λ]
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))

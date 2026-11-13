@@ -41,7 +41,6 @@ Its spectrum map is a closed immersion. The spectrum of `(R/I)_h` is isomorphic 
 the open subscheme `D(h)` of `Spec (R/I)`, and composing with this isomorphism gives
 the required closed immersion. For the unit ideal, all the opens are empty; the same
 argument applies without imposing a nontriviality assumption on the quotient.
-(blueprint: lem-weil-pbc-gabber-principal-open-closed-presentation)
 -/
 theorem gabber_principal_open_closed_presentation
     (R : Type u) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]

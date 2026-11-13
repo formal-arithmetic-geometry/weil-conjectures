@@ -8,8 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSingleFunctorMonoidalCompat
 
 /-! # Pullback of flat single-object pairings after symmetry
 
-Source: Stacks Tags 06YQ and 06YU
-(auxiliary; not a blueprint node).
+Source: Stacks Tags 06YQ and 06YU.
 -/
 
 @[expose] public noncomputable section
@@ -55,8 +54,7 @@ private theorem swap_pairing_pullback
 
 /-- A flat degree-zero pairing remains compatible with pullback after swapping its factors.
 
-Source: Stacks Tags 06YQ and 06YU; the symmetry step of the finite-line evaluation argument
-(auxiliary; not a blueprint node).
+Source: Stacks Tags 06YQ and 06YU; the symmetry step of the finite-line evaluation argument.
 
 Proof: lift the given ordinary pairing square using the pullback field of
 etaleSingleFunctor_monoidalCompatibility. Use the supplied braiding square for the

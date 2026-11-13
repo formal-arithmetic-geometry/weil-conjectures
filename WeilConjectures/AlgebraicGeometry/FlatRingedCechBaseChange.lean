@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.FlatRingedCechBaseChangeQuasiIso
 /-! # Flat base change of the global augmented Cech model
 
 Source: Stacks Project, Algebraization, Tag 099I, second paragraph, using Tag 099H.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -42,7 +41,6 @@ private theorem augmented_model_of_adjunction
 /-- Termwise scalar extension of the global augmented model has a quasi-isomorphic
 underlying R-complex, compatibly with its augmentation.
 Source: Stacks Project, Algebraization, Tags 099I and 099H.
-(auxiliary; not a blueprint node).
 
 Proof: take termwise scalar extension of K for L and its adjunction unit for u.
 The canonical-unit comparison makes u a quasi-isomorphism. Define delta as the

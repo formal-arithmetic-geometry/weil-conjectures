@@ -48,8 +48,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 # Bounded-below derived evaluation by weakly contractible hypercovers
 
 Source: Stacks Project, proetale.tex, Tag 09A2, lemma-compute-cohomology;
-sites-cohomology.tex, Tag 0946, lemma-w-contractible
-(auxiliary; not a blueprint node).
+sites-cohomology.tex, Tag 0946, lemma-w-contractible.
 -/
 
 @[expose] public section

@@ -21,7 +21,7 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 # Finite étale lifting by henselian G-ring approximation
 
 Source: Stacks Project, Fundamental Groups, proof of Lemma 0GS2, the essential-surjectivity
-paragraph for a Noetherian G-ring (blueprint: lem-weil-pbc-finite-etale-lifting-approximation).
+paragraph for a Noetherian G-ring.
 -/
 
 @[expose] public section
@@ -34,8 +34,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Every finite étale cover of the closed fibre of a proper scheme over a henselian G-ring
 lifts to a finite étale cover of the scheme, with an isomorphism over the closed fibre.
-Source: Stacks Project, proof of Lemma 0GS2, Noetherian G-ring essential-surjectivity paragraph
-(blueprint: lem-weil-pbc-finite-etale-lifting-approximation).
+Source: Stacks Project, proof of Lemma 0GS2, Noetherian G-ring essential-surjectivity paragraph.
 
 Proof:
 1. Apply `exists_finiteEtale_completion_stage`: complete at I, lift V by the complete-case
@@ -45,7 +44,7 @@ Proof:
 2. Apply `exists_algHom_approximation_mod_ideal` to the map from R to the completion.
    Its proof presents R by finite generators and relations and applies polynomial
    approximation with N = 1, then descends evaluation through the presentation.
-3. The resulting A-algebra map σ : R → A induces s : Y → Y_R by the pullback universal
+3. The resulting A-algebra map σ: R → A induces s: Y → Y_R by the pullback universal
    property. Equality modulo I and the projection identities of k show that the composite
    Y₀ → Y → Y_R is k, by pullback extensionality.
 4. Set U = W ×_{Y_R} Y along s. Base-change stability makes U finite étale. Pullback

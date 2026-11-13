@@ -13,7 +13,6 @@ import all Mathlib.Algebra.Homology.Localization
 /-! # Source transport on an injective representative
 
 Source: Stacks Project, Tags 03Q8 and 03Q9, injective-complex computation.
-(blueprint: lem-weil-pbc-injective-exchange-source-transport).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry.Etale
 
 Source: Stacks Project, Tags 03Q8 and 03Q9, injective-complex computation;
 `sourceInjectiveDirectImageIso` in StrictLocalInjectiveSourceComparison.
-(blueprint: lem-weil-pbc-injective-exchange-source-transport).
 
 Proof: the defining isomorphism is the image of the direct-image transport by
 q', followed by the inverse derived unit, then the homotopy and complex

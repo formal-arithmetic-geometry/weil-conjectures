@@ -16,7 +16,6 @@ import all WeilConjectures.CategoryTheory.StrictRoosDerivedLimitComparison
 
 Source: Stacks Project, algebraization.tex, Tags 099B and 0A0E;
 sites-cohomology.tex, Tag 0941.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -47,8 +46,7 @@ local instance (priority := 1100)
 /-- The zero-coordinate Roos lift of a strict augmentation of a tower of complexes.
 This factors the construction through abstract tower data to avoid unfolding a concrete
 Koszul tensor tower while checking its compatibility proof.
-Source: Stacks Tag 0941
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0941. -/
 def principalTowerRoosUnit
     (P : CochainComplex (ringedSiteModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
@@ -61,8 +59,7 @@ def principalTowerRoosUnit
       (Category.id_comp _))
 
 /-- The strict degree-zero unit into the principal Koszul Roos complex.
-Source: Stacks Tags 0A0E and 0941
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 0A0E and 0941. -/
 def principalKoszulRoosUnit
     (P : CochainComplex (ringedSiteModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
@@ -174,8 +171,7 @@ private theorem normalized_augmentation_transport
 normalized strict derived completion, for every presentation of the latter.
 
 Source: Stacks Project, algebraization.tex, proof of Tag 0A0E;
-sites-cohomology.tex, Tag 0941
-(auxiliary; not a blueprint node).
+sites-cohomology.tex, Tag 0941.
 
 Proof: evaluate the dual positive two-term Koszul complex at one in each of its two
 nonzero degrees. The signed Hom differential identifies it with the negative cone of

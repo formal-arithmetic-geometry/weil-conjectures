@@ -16,9 +16,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeResidueStalkHomotopy
 import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkHomotopySpread
 
 /-! # Local homotopy normal form after pullback at a good residue point
-
-Source: blueprint lem-pc-perfect-locus, proof step 4.
-(blueprint: lem-pc-finite-free-residue-local-homotopy)
 -/
 
 @[expose] public section
@@ -29,9 +26,6 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Local homotopy normal form after pullback at a good residue point.
-
-Source: blueprint lem-pc-perfect-locus, proof step 4.
-(blueprint: lem-pc-finite-free-residue-local-homotopy).
 
 Proof: At the local ring at g(z), split a unit differential coefficient until none
 remain. Each cancellation lowers the finite total rank. The remaining residue

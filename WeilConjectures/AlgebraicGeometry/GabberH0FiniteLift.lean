@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.GabberH0ProjectionRestrictions
 
 /-! # Finite lifts with descent data in Gabber's degree-zero argument
 
-Source: Stacks Project, Tag 09ZF, final proof paragraph before finite descent
-(blueprint: lem-weil-pbc-gabber-h0-finite-lift).
+Source: Stacks Project, Tag 09ZF, final proof paragraph before finite descent.
 -/
 
 @[expose] public section
@@ -64,7 +63,7 @@ private theorem unit_injective_terminal
 /-- A section on Z lifts on a finite surjective cover of X, with equal projection
 pullbacks. This stops before descending the section to X.
 Source: Stacks Project, Tag 09ZF, final proof paragraph through the equality of the
-pullbacks to X' ×_X X' (blueprint: lem-weil-pbc-gabber-h0-finite-lift).
+pullbacks to X' ×_X X'.
 
 Proof:
 1. Every nonempty closed subset of X meets i(Z). Otherwise the pushforward from

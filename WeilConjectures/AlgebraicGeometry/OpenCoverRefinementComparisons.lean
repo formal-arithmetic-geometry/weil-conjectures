@@ -28,8 +28,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 This names real constructions from pullback composition, congruence and the
 existing tensor comparisons, so that proofs can share their kernel expressions.
 Source: Stacks Project, Tags 0095 and 0096; the refinement comparison step of
-lem-pc-open-cover-map-lift-transport.
-(blueprint: def-pc-open-cover-refinement-comparisons). -/
+lem-pc-open-cover-map-lift-transport. -/
 noncomputable def openCoverRefinementComparisons
     {X Y Z W : Scheme.{u}} (q : Y ⟶ X) (v : Z ⟶ X) (h : W ⟶ X)
     (pk : W ⟶ Y) (pl : W ⟶ Z) (wk : pk ≫ q = h) (wl : pl ≫ v = h)

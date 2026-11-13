@@ -48,8 +48,7 @@ is used. Empty opens have no point, and zero complexes give zero morphisms.
 This lemma supplies only the homology equation; it constructs none of the ring,
 input-chain or tensor-chain isomorphisms.
 Source: Stacks Project, Tags 0098 and 0D5U, Section 20.32 opening paragraph;
-Mathlib exact-functor homology naturality.
-(blueprint: lem-pc-open-restricted-tensor-homology-transport). -/
+Mathlib exact-functor homology naturality. -/
 theorem openRestricted_tensor_homology_transport
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

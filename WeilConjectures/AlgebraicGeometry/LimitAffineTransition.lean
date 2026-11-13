@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.AffineOverLimitInclusion
 /-!
 # Existence of inverse limits with affine transition morphisms
 
-Source: Stacks Project, Limits, Lemmas 01YX and 01YW
-(blueprint: lem-weil-pbc-limit-affine-transition).
+Source: Stacks Project, Limits, Lemmas 01YX and 01YW.
 -/
 
 @[expose] public section
@@ -52,8 +51,7 @@ set_option backward.isDefEq.respectTransparency false in
 The proof constructs the relative spectrum of the filtered colimit of the pushforward
 structure algebras along one stage.  On every affine open of that stage, the resulting
 cone is the spectrum of a filtered colimit of rings, hence is limiting; compatible local
-factorizations glue uniquely.  This is the construction in Stacks, Limits, Lemma 01YX.
-(blueprint: lem-weil-pbc-limit-affine-transition-core). -/
+factorizations glue uniquely.  This is the construction in Stacks, Limits, Lemma 01YX. -/
 theorem exists_limit_affine_transition_core
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})
@@ -111,7 +109,7 @@ theorem exists_limit_affine_transition_core
 When every stage is affine, the cone with vertex the spectrum of the filtered colimit of
 global sections is limiting by the affine-scheme limit theorem.  Uniqueness of limits then
 gives the displayed isomorphism and its compatibility with every projection.  This is
-Stacks, Limits, Lemma 01YW (blueprint: lem-weil-pbc-limit-affine-transition-affine-comparison).
+Stacks, Limits, Lemma 01YW.
 -/
 theorem limit_affine_transition_affine_comparison
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
@@ -143,8 +141,7 @@ its projections are affine, and inverse images of arbitrary opens of any stage a
 of the corresponding inverse images. For affine stages the limit is the spectrum of the
 colimit of their global sections.
 
-Source: Stacks Project, Limits, Lemmas 01YX and 01YW
-(blueprint: lem-weil-pbc-limit-affine-transition). -/
+Source: Stacks Project, Limits, Lemmas 01YX and 01YW. -/
 theorem exists_limit_affine_transition
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

@@ -195,8 +195,7 @@ Reducing modulo I makes the completed first projection surjective. For a finite 
 its completion modulo I is canonically the original module modulo I, compatibly with
 maps. Hence E -> F/IF is surjective on affine sections. These affine opens cover X,
 so the displayed sheaf morphism is epi. For J=0 the graph is the usual graph; for J=1
-the target quotient is zero. Zero modules and an empty scheme also satisfy the assertion.
-(blueprint: lem-weil-pbc-formal-graph-first-quotient-epi). -/
+the target quotient is zero. Zero modules and an empty scheme also satisfy the assertion. -/
 theorem formalGraph_first_quotient_epi
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     {H F F' : CoherentModules X} (a : F ⟶ H) (a' : F' ⟶ H)

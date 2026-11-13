@@ -20,8 +20,7 @@ public import WeilConjectures.AlgebraicGeometry.GabberCriterionDegree
 /-!
 # Gabber's criterion for vanishing of higher etale cohomology
 
-Source: Stacks Project, Etale Cohomology, Lemma 0GY0, label `lemma-gabber-criterion`
-(blueprint: lem-weil-pbc-gabber-criterion).
+Source: Stacks Project, Etale Cohomology, Lemma 0GY0, label `lemma-gabber-criterion`.
 -/
 
 @[expose] public section

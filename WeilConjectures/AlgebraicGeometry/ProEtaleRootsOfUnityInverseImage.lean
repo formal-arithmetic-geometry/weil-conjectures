@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleRootsOfUnitySheaf
 
 /-! # Inverse-image comparison for pro-etale roots of unity
 
-Source: Stacks Project, Tag 03PK (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 03PK.
 
 ## Main definitions
 
@@ -50,7 +50,7 @@ private theorem sections_map (S : Scheme.{u}) (N : ℕ) {U V : S.ProEtᵒᵖ}
   exact congrArg (fun y ↦ y.down.toMul) h
 
 /-- Naturality of the sectionwise projection formula.
-Source: Stacks Project, Tag 03PK (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 03PK.
 The pullback projection square commutes, and global sections turn this commutative
 square into the equality of ring maps used below. -/
 private theorem proEtaleRootsOfUnityDirectImageNaturality {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -109,7 +109,7 @@ private theorem proEtaleRootsOfUnityDirectImageNaturality {X Y : Scheme.{u}} (f 
         ((eX U).apply_symm_apply (r U (eY U x)))).symm.trans h.symm)
 
 /-- Pullback of roots along the fibre-product projection uniquely determines a sheaf map.
-Source: Stacks Project, Tag 03PK (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 03PK.
 Proof: on `V`, pull units back by the global-sections ring map of `pullback.fst V.hom f`.
 Ring homomorphisms preserve multiplication, powers and one, so this is a group homomorphism
 on roots. The pullback projection commutes with every arrow `V' → V`; functoriality of
@@ -153,7 +153,7 @@ theorem existsUnique_proEtaleRootsOfUnityDirectImageMap {X Y : Scheme.{u}} (f : 
         ((proEtaleBaseChange f).op.obj V)).apply_symm_apply _).symm
 
 /-- The direct-image root map `β`, fixed uniquely by the fibre-product projection formula.
-Source: Stacks Project, Tag 03PK (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 03PK. -/
 noncomputable def proEtaleRootsOfUnityDirectImageMap {X Y : Scheme.{u}} (f : X ⟶ Y)
     (N : ℕ) :
     proEtaleRootsOfUnitySheaf Y N ⟶

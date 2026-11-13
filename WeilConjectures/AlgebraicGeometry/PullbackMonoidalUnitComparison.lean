@@ -24,7 +24,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The monoidal counit is the canonical pullback map of the structure sheaf.
 Source: Stacks Project, Tag 01CD (Modules), and Tag 0096 (Sheaves).
-(blueprint: lem-sc-pullback-monoidal-unit-comparison).
 
 Proof: apply the pullback-pushforward adjunction's injective hom equivalence.
 The image of pullbackObjUnitIso.hom is unitToPushforwardObjUnit, the structure-ring

@@ -22,8 +22,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 # Split presentations of a pro-etale constant trivialization
 
 Source: Stacks Project, Tags 098Z, 03P5, 03YW and 0AP6; blueprint proof of
-`det-lem-stratified-lattice-scheme`, part (2)
-(blueprint: lem-sfb-proetale-constant-split-descent).
+`det-lem-stratified-lattice-scheme`, part (2).
 
 The overlap isomorphism is stated explicitly. Its cocycle is expressed using the
 recorded scheme descent datum, whose transport is required to preserve the same
@@ -41,38 +40,33 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The codiagonal of the coproduct of copies of a scheme.
-Source: Stacks Project, Tag 03YW
-(blueprint: lem-sfb-proetale-constant-split-descent). -/
+Source: Stacks Project, Tag 03YW. -/
 noncomputable def proetaleSplitCodiagonal (V : Scheme.{u}) (S : Type w)
     [Small.{u} S] : (∐ fun _ : S ↦ V) ⟶ V :=
   Sigma.desc (fun _ : S ↦ 𝟙 V)
 
 /-- Forget a localized pro-etale object to its underlying scheme over the cover.
-Source: Stacks Project, Tag 098Z, localized site
-(blueprint: lem-sfb-proetale-constant-split-descent). -/
+Source: Stacks Project, Tag 098Z, localized site. -/
 def proetaleSliceToOver {X V : Scheme.{u}} (p : V ⟶ X) [WeaklyEtale p] :
     Over (Scheme.ProEt.mk p) ⥤ Over V :=
   Over.post (Scheme.ProEt.forget X) ⋙ Over.iteratedSliceForward (Over.mk p)
 
 /-- The first overlap projection as a morphism in the small pro-etale site.
-Source: Stacks Project, Tag 023V, and blueprint proof (2)
-(blueprint: lem-sfb-proetale-constant-split-descent). -/
+Source: Stacks Project, Tag 023V, and blueprint proof (2). -/
 noncomputable def proetaleSplitOverlapFirst {X V : Scheme.{u}} (p : V ⟶ X)
     [WeaklyEtale p] :
     Scheme.ProEt.mk (pullback.fst p p ≫ p) ⟶ Scheme.ProEt.mk p :=
   MorphismProperty.Over.homMk (pullback.fst p p) rfl
 
 /-- The second overlap projection as a morphism in the small pro-etale site.
-Source: Stacks Project, Tag 023V, and blueprint proof (2)
-(blueprint: lem-sfb-proetale-constant-split-descent). -/
+Source: Stacks Project, Tag 023V, and blueprint proof (2). -/
 noncomputable def proetaleSplitOverlapSecond {X V : Scheme.{u}} (p : V ⟶ X)
     [WeaklyEtale p] :
     Scheme.ProEt.mk (pullback.fst p p ≫ p) ⟶ Scheme.ProEt.mk p :=
   MorphismProperty.Over.homMk (pullback.snd p p) (pullback.condition (f := p) (g := p)).symm
 
 /-- The point in the labelled component of a split presentation.
-Source: Stacks Project, Tag 03YW
-(blueprint: lem-sfb-proetale-constant-split-descent). -/
+Source: Stacks Project, Tag 03YW. -/
 noncomputable def proetaleSplitLabel {X V : Scheme.{u}} (p : V ⟶ X) [WeaklyEtale p]
     (S : Type w) [Small.{u} S] (W : Over (Scheme.ProEt.mk p)) (s : S) :
     (proetaleSliceToOver p).obj W ⟶ Over.mk (proetaleSplitCodiagonal V S) :=
@@ -85,9 +79,7 @@ noncomputable def proetaleSplitLabel {X V : Scheme.{u}} (p : V ⟶ X) [WeaklyEta
 bijections `rho` from maps over `V` into the labelled coproduct to the sections of `F`,
 normalized on labels by `e`, the unique overlap isomorphism matching the two `rho`, and a
 transport-form scheme descent datum preserving `rho`.
-Source: Stacks Project, Tags 098Z, 03P5, 03YW and 001P
-(blueprint: lem-sfb-proetale-constant-split-descent;
-split blueprint: lem-sfb-proetale-constant-split-descent-data). -/
+Source: Stacks Project, Tags 098Z, 03P5, 03YW and 001P. -/
 def proetaleConstantSplitDescentData {X V : Scheme.{u}} (p : V ⟶ X)
     [QuasiCompact p] [Surjective p] [WeaklyEtale p] [IsAffine V]
     (S : Type w) [Small.{u} S] [UnivLE.{u + 1, w}]
@@ -128,9 +120,7 @@ def proetaleConstantSplitDescentData {X V : Scheme.{u}} (p : V ⟶ X)
         rho (Over.mk a) f)
 
 /-- The representability and overlap/descent-data part of the split presentation.
-Source: Tags 098Z, 03P5, 03YW and 001P
-(blueprint: lem-sfb-proetale-constant-split-descent;
-split blueprint: lem-sfb-proetale-constant-split-descent-data).
+Source: Tags 098Z, 03P5, 03YW and 001P.
 
 Proof: representable fpqc descent makes the presheaf of maps over `V` into the labelled
 coproduct a sheaf. The clopen-component description gives local surjectivity and local
@@ -151,9 +141,7 @@ theorem proetaleConstantSplitDescentData_proof {X V : Scheme.{u}} (p : V ⟶ X)
   sorry
 
 /-- The geometric properties of the split codiagonal.
-Source: Tags 03YW and 0AP6
-(blueprint: lem-sfb-proetale-constant-split-descent;
-split blueprint: lem-sfb-proetale-constant-split-descent-geometry).
+Source: Tags 03YW and 0AP6.
 
 Proof: the clopen-coproduct calculation identifies the pullback with components indexed by
 pairs of labels; the diagonal is the closed union of the equal-label components, proving
@@ -180,9 +168,7 @@ theorem proetaleConstantSplitDescentGeometry {V : Scheme.{u}} (S : Type w)
 matching overlap isomorphism and its scheme descent cocycle. The codiagonal is
 separated, etale, surjective for nonempty labels, and ind-quasi-affine.
 
-Source: Stacks Project, Tags 098Z, 03P5, 03YW, 001P, 023V and 0AP6;
-blueprint `det-lem-stratified-lattice-scheme`, proof (2)
-(blueprint: lem-sfb-proetale-constant-split-descent).
+Source: Stacks Project, Tags 098Z, 03P5, 03YW, 001P, 023V and 0AP6, proof (2).
 
 Proof: the conjunction of `proetaleConstantSplitDescentData_proof`
 (`lem-sfb-proetale-constant-split-descent-data`, steps 2-6 below) and
@@ -219,7 +205,7 @@ components. It is open in their finite union, which is affine by
 `lem-weil-pbc-finite-affine-coproduct-spectrum`, hence is quasi-affine. For the
 empty open use the empty union and the zero ring. No effectiveness is asserted.
 
-Sizes (`def-weil-size-convention`): the labels are `u`-small, so the coproduct exists in
+Sizes: the labels are `u`-small, so the coproduct exists in
 `Scheme.{u}`; sheaves of sets take values in any universe `w` containing the `u + 1`-sized
 site (`UnivLE.{u + 1, w}`), where sheafification and the constant sheaf exist.
 -/

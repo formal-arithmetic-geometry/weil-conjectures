@@ -14,7 +14,6 @@ import Mathlib.Data.Int.Interval
 /-! # Shrinking stalk equality of complex maps
 
 Source: Stacks Project, Tags 09RE, 0BC7 and 01CP.
-(blueprint: lem-sc-perfect-open-stalk-chain-map-equality).
 -/
 
 @[expose] public section
@@ -55,7 +54,6 @@ set_option backward.isDefEq.respectTransparency false in
 holds on a smaller neighbourhood.
 Source: Stacks Project, Tag 01CP, finite-type injectivity proof;
 Tag 09RE, affine case (1), finite-component argument.
-(blueprint: lem-sc-perfect-open-stalk-chain-map-equality).
 
 Proof: Fix the bounded support interval of P and finite-free retractions of its
 terms. For every degree in that interval sandwich a.f n - b.f n between the

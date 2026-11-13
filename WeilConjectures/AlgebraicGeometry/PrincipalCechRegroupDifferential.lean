@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.DoubleComplexTotal
 
 /-! # Differential compatibility of the explicit regrouping
 
-Source: Stacks, Tag 08D1, signs of alternating total cochains
-(blueprint: lem-sc-principal-cech-regroup-differential).
+Source: Stacks, Tag 08D1, signs of alternating total cochains.
 -/
 
 @[expose] public section
@@ -62,7 +61,7 @@ private theorem module_zsmul_apply {X Y : ModuleCat.{u} A}
   simp only [ModuleCat.hom_zsmul, LinearMap.smul_apply]
 
 /-- The total differential of one row has its horizontal and signed vertical parts.
-Source: Stacks, Tag 08D1 (blueprint: lem-sc-principal-cech-regroup-differential).
+Source: Stacks, Tag 08D1.
 
 Proof: evaluate at a nonempty subset J. The vertical term is zero unless
 card(J)=p+1. In that row, the product projection is a chain map and degree
@@ -207,12 +206,12 @@ private theorem principalCechRowToTerms_differential
 
 
 /-- The explicit graded regrouping commutes with the total differential.
-Source: Stacks, Tag 08D1 (blueprint: lem-sc-principal-cech-regroup-differential).
+Source: Stacks, Tag 08D1.
 
 Proof: precompose the equation with every diagonal coproduct inclusion and read
 its subset coordinates. The vertical part of Mathlib's total differential has
 sign p.negOnePow. A nonzero coordinate has card(J)=p+1 and therefore p≥0;
-this sign acts as (-1 : A)^(card(J)-1). The chain-map equation of e p identifies
+this sign acts as (-1: A)^(card(J)-1). The chain-map equation of e p identifies
 the vertical differential with the section differential in this coordinate.
 For the horizontal part, the displayed hypothesis identifies the column map
 with principalCechHorizontal. Its subset projection is the sum over j in J of

@@ -104,7 +104,6 @@ private noncomputable def sheafFiberOverIso
 
 /-- Finite constant models on a pro-etale covering give finite geometric stalks.
 Source: Stacks Project, Tags 099Y and 098K.
-(auxiliary; not a blueprint node).
 
 Proof: the geometric-point fiber functor sends an object U to the lifts of x to U.
 It is a point of the pro-etale site: a weakly etale covering member above the image

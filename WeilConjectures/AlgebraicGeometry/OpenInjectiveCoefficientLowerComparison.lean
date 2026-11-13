@@ -28,7 +28,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- The pulled-back coefficient counit is the lower-degree base-change comparison.
 Source: Stacks Project, Tag 0F07, proof of condition (3), and Tag 0734.
-(blueprint: lem-sbc-open-injective-coefficient-lower-comparison).
 
 Proof: Resolve the injective coefficient J by J[0]. Thus Rj_* J[0] is canonically
 (j_* J)[0]. The mate defining derived base change for the Cartesian square is the

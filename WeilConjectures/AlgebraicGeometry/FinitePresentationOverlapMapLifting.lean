@@ -15,8 +15,7 @@ import Mathlib.Data.Finset.Order
 
 /-! # Lifting overlap maps for fixed local models
 
-Source: Stacks Project, Tags 01ZR and 05N7.
-(blueprint: lem-pc-fp-overlap-map-lifting). -/
+Source: Stacks Project, Tags 01ZR and 05N7. -/
 
 @[expose] public section
 
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry
 /-- Lift natural overlap maps without asserting their identity or cocycle equations.
 Source: Stacks Project, Tag 01ZR, first proof (Zariski gluing), and Tag 05N7,
 map lifting and equality on intersections of refinement charts.
-(blueprint: lem-pc-fp-overlap-map-lifting).
 
 Proof: Conjugate the restriction transitions of M by e. The pairwise overlaps
 of U are quasi-compact, by quasi-separatedness, and have finite affine covers.

@@ -34,8 +34,7 @@ operators. Face compatibility is precisely the relative matching equation. Uniqu
 of image factorization proves all composition laws. The new summand covers the whole
 matching scheme, proving the covering condition. The old data, including the map to K,
 are retained literally, giving the displayed equality after restriction.
-This statement is finite: it attaches only degree n+1 to a given finite skeleton.
-(auxiliary; not a blueprint node) -/
+This statement is finite: it attaches only degree n+1 to a given finite skeleton. -/
 theorem exists_replacement_stage_extension
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale) (hK : IsEtaleHypercover K)

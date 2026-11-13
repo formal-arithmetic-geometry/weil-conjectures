@@ -18,7 +18,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 /-! # Natural affine comparison for coherent completion
 
 Source: Stacks Project, Lemmas 087W and 0881, affine identification of quotient systems.
-(blueprint: lem-weil-pbc-formal-completion-affine-natural-comparison).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 of affine sections, naturally for every coherent module map. No exact sequence is assumed.
 
 Source: Stacks Project, Lemma 087W and the affine identification in Lemma 0881.
-(blueprint: lem-weil-pbc-formal-completion-affine-natural-comparison).
 
 Proof:
 1. Construct F by pushforward along U's inclusion, evaluation on U, and the actual

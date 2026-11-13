@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.InversePartialMapRestrictions
 
 Source: Stacks Project, Tag 0552, the inverse rational map argument, together with
 Tag 01RR (rational maps determined at the generic point).
-(blueprint: lem-sbc-generic-inverse-partial-map-restrictions)
 -/
 
 @[expose] public section
@@ -95,9 +94,7 @@ forward domain and in the inverse image of W_Y. Put U = W_X intersect f^{-1}(W_Y
 and V = W_Y intersect g^{-1}(U). The equalities g f = id on W_X and f g = id on W_Y
 show that f maps U into V and g maps V into U. These opens contain the generic points
 and hence are dense. Restrict f and g to them. Cancelling the open inclusions proves
-both inverse identities and gives the asserted equality with the original forward map.
-
-(blueprint: lem-sbc-generic-inverse-partial-map-restrictions) -/
+both inverse identities and gives the asserted equality with the original forward map. -/
 theorem exists_inverse_restrictions_of_generic_inverse
     {X Y : Scheme.{u}} [IsIntegral X] [IsIntegral Y]
     (f : X.PartialMap Y) (g : Y.PartialMap X)

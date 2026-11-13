@@ -31,28 +31,27 @@ noncomputable section
 
 
 /-- Extend the unnormalized alternating coface complex by zero in negative degrees.
-Source: Stacks Project, Tag 0FKR (blueprint: lem-sc-module-cup-godement-cosimplicial-input). -/
+Source: Stacks Project, Tag 0FKR. -/
 def moduleCup_cosimplicialComplex (X : Scheme.{u}) (A : CosimplicialObject X.Modules) :
     CochainComplex X.Modules ℤ :=
   ((alternatingCofaceMapComplex X.Modules).obj A).extend ComplexShape.embeddingUpNat
 
 /-- The degree-zero identification with the cosimplicial term.
-Source: Stacks Project, Tag 0FKR (blueprint: lem-sc-module-cup-godement-cosimplicial-input). -/
+Source: Stacks Project, Tag 0FKR. -/
 def moduleCup_cosimplicialZeroIso (X : Scheme.{u}) (A : CosimplicialObject X.Modules) :
     (moduleCup_cosimplicialComplex X A).X 0 ≅ A.obj ⦋0⦌ :=
   ((alternatingCofaceMapComplex X.Modules).obj A).extendXIso
     ComplexShape.embeddingUpNat (i := 0) rfl
 
 /-- Pointwise tensor product of two cosimplicial objects.
-Source: Stacks Project, Tag 0FKR
-(blueprint: lem-sc-module-cup-godement-cosimplicial-input). -/
+Source: Stacks Project, Tag 0FKR. -/
 def moduleCup_cosimplicialTensor (X : Scheme.{u})
     (A B : CosimplicialObject X.Modules) : CosimplicialObject X.Modules :=
   CategoryTheory.Monoidal.FunctorCategory.tensorObj
     (C := SimplexCategory) (D := X.Modules) A B
 
 /-- The degree-zero pairing induced by a pointwise cosimplicial tensor morphism.
-Source: Stacks Project, Tag 0FKR (blueprint: lem-sc-module-cup-godement-cosimplicial-input). -/
+Source: Stacks Project, Tag 0FKR. -/
 def moduleCup_cosimplicialZeroPair (X : Scheme.{u})
     (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C) :
     (moduleCup_cosimplicialComplex X A).X 0 ⊗
@@ -124,7 +123,6 @@ private theorem modelFlasque {X : Scheme.{u}} {F : X.Modules}
 Source: Stacks Project, Cohomology of Sheaves, Section 20.30, Tag 0FKR,
 Lemma 20.30.1 (Tag 0FKS); Banerjee, Tensor Structure on Smooth Motives,
 arXiv:1004.1491, §1.1.4, pp. 15--16 (cosimplicial Godement multiplication).
-(blueprint: lem-sc-module-cup-godement-cosimplicial-input)
 Proof: let T(F) be the sheaf of all discontinuous sections of the stalks of F.
 It has sections over V equal to the product of F_x for x in V, with the O(V)
 action through germs. The germ map is the unit of the stalk/product-skyscraper

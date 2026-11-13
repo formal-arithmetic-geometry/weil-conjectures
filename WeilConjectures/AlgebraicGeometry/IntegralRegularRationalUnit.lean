@@ -24,7 +24,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 /-- A nowhere-zero continuous integral multiplier becomes invertible over E.
 
 Source: Bhatt--Scholze, Section 6.8, integral-to-field coefficient extension.
-(auxiliary; not a blueprint node)
 
 Proof: realize regular-module maps as multiplication by their continuous coefficient.
 Extension from O_E to E sends the regular module to the regular E-module and sends this

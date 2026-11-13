@@ -239,7 +239,6 @@ private theorem matching_local_lifting (U : FiniteSplitEtaleHypercover X)
 
 /-- An injective module sheaf has an exact augmented hypercover section complex.
 Source: Stacks Project, Hypercoverings, Tag 01GW, for free left modules.
-(auxiliary; not a blueprint node).
 
 Proof: realize the sheaf as modules over the sheafified constant ring, without changing
 its underlying abelian presheaf. This equivalence preserves injectivity. Enlarge the

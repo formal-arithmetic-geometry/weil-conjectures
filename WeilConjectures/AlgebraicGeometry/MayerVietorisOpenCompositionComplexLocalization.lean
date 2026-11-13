@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisOpenCompositionNorm
 /-! # The complex form of the open composition unit equation
 
 Source: Stacks Project, Tags 08FE and 0D5T.
-(blueprint: lem-pc-mayer-vietoris-open-composition-complex-localization).
 -/
 
 @[expose] public section
@@ -36,8 +35,7 @@ its units with the homotopy units. The homotopy composition comparison is the qu
 of the displayed complex comparison, by mapHomotopyCategoryCompIso. Functoriality of Q
 and the naturality of the quotient comparison give the displayed equation. There is
 no restriction factor, counit, or K-injectivity hypothesis. This applies also to the
-empty open, full open, and identity h because the same quotient identities apply.
-(blueprint: lem-pc-mayer-vietoris-open-composition-complex-localization). -/
+empty open, full open, and identity h because the same quotient identities apply. -/
 theorem schemeMVOpenComposition_complex_localization
     (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

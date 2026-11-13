@@ -17,7 +17,7 @@ public import Mathlib.RingTheory.Finiteness.Projective
 # Perfect closed immersions
 
 Source: Stacks Project, More on Morphisms, Tag 0687, Definition 37.61.2,
-and More on Algebra, Tag 068Y, Lemma 15.84.2 (blueprint: def-sc-perfect-closed-immersion).
+and More on Algebra, Tag 068Y, Lemma 15.84.2.
 -/
 
 @[expose] public section
@@ -30,7 +30,6 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry
 
 /--
-(blueprint: def-sc-perfect-closed-immersion)
 
 A closed immersion is perfect when it is affine-locally the quotient immersion
 for an ideal whose quotient module has a bounded resolution by finite projective

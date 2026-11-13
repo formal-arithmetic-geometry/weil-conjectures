@@ -85,7 +85,6 @@ private theorem pullbackComp_tensor_inv
 set_option backward.isDefEq.respectTransparency false in
 /-- The ordinary pullback composition isomorphism preserves the tensorator.
 Source: Stacks Project, Definition 6.26.1(2), Tag 0095; Lemma 6.26.2, Tag 0096.
-(blueprint: lem-sc-pullback-tensor-composition)
 
 Proof: The presheaf pullback is extension of scalars after the inverse-image
 construction. Its tensorator multiplies scalar coefficients. Its canonical

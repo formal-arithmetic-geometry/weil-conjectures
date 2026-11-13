@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceSplitComponent
 # Trace after restriction for a finite étale morphism of fixed degree
 
 Source: Stacks Project, Section 03SH (section-trace-method), the paragraph following
-Definition 03SE; local splitting is Lemma 04HN (lemma-finite-etale-etale-local).
-(blueprint: lem-weil-pbc-finite-etale-trace-degree-trace).
+Definition 03SE; local splitting is Lemma 04HN.
 -/
 
 @[expose] public section
@@ -31,7 +30,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Restriction followed by trace is multiplication by the prescribed finite locally free
  degree. Source: Stacks Project, Section 03SH (section-trace-method), paragraph following
-Definition 03SE (blueprint: lem-weil-pbc-finite-etale-trace-degree-trace).
+Definition 03SE.
 
 Proof:
 1. A geometric fibre over an algebraically closed field Ω has dimension d: choose the unique
@@ -39,7 +38,7 @@ point z of Spec Ω, use `fiberDegree_eq_finrankΓ` and `fiberDegree_of_isPullbac
 assumed `IsFiniteLocallyFreeOfDegree.fiberDegree_eq`. The existing geometric fibre theorem
 `exists_overIso_sigma_of_isSepClosed` splits it into n copies of Spec Ω with n equal to that
 dimension. Each Spec Ω has one point, so the fibre has d points.
-2. At each x of X, Lemma 04HN supplies an étale neighbourhood g : U → X with a point u
+2. At each x of X, Lemma 04HN supplies an étale neighbourhood g: U → X with a point u
 mapping to x and a finite clopen splitting of Y ×_X U into pieces isomorphic to U. Choose
 an algebraic closure Ω of κ(u). Base change the splitting to Spec Ω. Cartesian pasting
 identifies its coproduct with the geometric fibre of f at Spec Ω → U → X. Thus its number

@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coh
 /-! # Vanishing of local quotient obstructions
 
 Source: Stacks Project, Sites, Tag 04TR.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -117,7 +116,6 @@ private lemma mate_square_iso {W A B X : Scheme.{u}} {p : W ⟶ A} {s : W ⟶ B}
 kernel when the subobjects agree on overlaps.
 
 Source: Stacks Project, Sites, Tag 04TR.
-(auxiliary; not a blueprint node).
 
 Proof: inverse image along each weakly etale covering arrow is restriction to the
 localized site and preserves products. It is enough to compose with each product

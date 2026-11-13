@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-! # Localizing the actual kernel conormal
 
 Source: Stacks Project, Tags 01R3 (1), 00A0 and 0096.
-(blueprint: lem-sc-open-kernel-conormal-transport).
 -/
 
 @[expose] public section
@@ -264,7 +263,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restrict the actual kernel pullback to a chart where the morphism is closed.
 Source: Stacks Project, Tags 01R3 (1), 00A0 and 0096.
-(blueprint: lem-sc-open-kernel-conormal-transport).
 
 Proof: The preimage equality identifies the square of g and its restriction i
 with a Cartesian square of open immersions. Restriction of sheaves preserves

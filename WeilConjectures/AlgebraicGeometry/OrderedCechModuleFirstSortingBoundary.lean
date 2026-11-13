@@ -173,7 +173,7 @@ private theorem firstSorting_exists {X' : Scheme.{u}}
   exact ⟨Q, hQ⟩
 
 /-- The intersection model on the base open B.
-Source: Stacks 01FJ. (blueprint: lem-pc-ordered-cech-degreewise-projection-differential). -/
+Source: Stacks 01FJ. -/
 private noncomputable def naturalCechSectionSite {X : Scheme.{u}} {r : ℕ}
     (W : ULift.{u} (Fin r) → X.Opens) (B : X.Opens) :
     SiteCechComplex (fun i : Fin r ↦ W ⟨i⟩ ⊓ B)
@@ -191,7 +191,7 @@ private noncomputable def naturalCechSectionSite {X : Scheme.{u}} {r : ℕ}
   indexMap_pr _ _ _ := Subsingleton.elim _ _
 
 /-- Restriction from the chosen product to the intersection model.
-Source: Stacks 01FJ. (blueprint: lem-pc-ordered-cech-degreewise-projection-differential). -/
+Source: Stacks 01FJ. -/
 private noncomputable def naturalCechSectionMap {X : Scheme.{u}} {r p : ℕ}
     (W : ULift.{u} (Fin r) → X.Opens) (B : X.Opens) (t : Fin (p + 1) → Fin r) :
     (naturalCechSectionSite W B).W p t ⟶ (∏ᶜ fun k ↦ W ⟨t k⟩) ⨯ B :=
@@ -208,7 +208,7 @@ private theorem naturalCechSectionMap_isIso {X : Scheme.{u}} {r p : ℕ}
   exact le_inf (prod.fst ≫ Pi.π (fun l ↦ W ⟨t l⟩) k).le prod.snd.le
 
 /-- All tuple coordinates, transported by actual restriction maps.
-Source: Stacks 01FJ. (blueprint: lem-pc-ordered-cech-degreewise-projection-differential). -/
+Source: Stacks 01FJ. -/
 private noncomputable def naturalCechSectionCochain {X : Scheme.{u}} (M : X.Modules) {r : ℕ}
     (W : ULift.{u} (Fin r) → X.Opens) (D : CochainComplex X.Modules ℕ)
     (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj
@@ -224,7 +224,6 @@ private noncomputable def naturalCechSectionCochain {X : Scheme.{u}} (M : X.Modu
 set_option backward.isDefEq.respectTransparency false in
 /-- Coordinate transport identifies the given differential with the alternating face sum.
 Source: Stacks 01FJ, the Čech differential, and 01FK, restriction to ordered tuples.
-(blueprint: lem-pc-ordered-cech-degreewise-projection-differential).
 
 Proof: Compose hd with the projection to a full tuple and evaluate at B and s.
 The Mathlib Čech differential is the sum of signed coface maps. Its j-th coface,
@@ -418,7 +417,6 @@ private theorem firstSorting_boundary_cochain {X' : Scheme.{u}}
 open Classical in
 /-- The first sorting operator assembles into module-sheaf maps.
 Source: Stacks Project, Tag 01FM, equation 20.23.6.1.
-(blueprint: lem-pc-ordered-cech-module-first-sorting-boundary).
 
 Proof: On an open B of X', identify the full cochains of D with sections on the
 products of the W₀ using e. Apply the explicit junction sum cechFirstSortingHom:

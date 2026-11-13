@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictedRepresentativeData
 /-! # Comparison on the literal restriction of a complex
 
 Source: Stacks Project, Tag 0DJ8, locality of equation-bc; Tag 0DJ9.
-(blueprint: lem-pc-open-restricted-comparison-transport).
 -/
 
 @[expose] public section
@@ -54,8 +53,7 @@ right-hand transport with β. This proves the displayed equation. No change of
 representative is required here. Empty opens have no z; top opens, zero complexes
 and zero rings satisfy the same construction. No base-flatness is assumed.
 Source: Stacks Project, Tag 0DJ8 (locality of equation-bc), Tag 0DJ9 (source-open
-induction), and Tag 06YB (K-flatness can be checked on stalks).
-(blueprint: lem-pc-open-restricted-comparison-transport). -/
+induction), and Tag 06YB (K-flatness can be checked on stalks). -/
 theorem exists_open_restricted_comparison_transport
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

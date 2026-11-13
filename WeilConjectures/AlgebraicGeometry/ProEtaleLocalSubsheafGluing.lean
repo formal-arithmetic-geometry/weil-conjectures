@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleLocalSubobjectKernelEffective
 /-! # Descent of compatible local subobjects of an abelian sheaf
 
 Source: Stacks Project, Sites, Tag 04TR.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ namespace AlgebraicGeometry.ProEtale
 subobject has the expected local factorization property.
 
 Source: Stacks Project, Sites, Tag 04TR.
-(auxiliary; not a blueprint node).
 
 Proof: take the kernel of the map from Q to the product of the pushforwards
 of the local cokernels. Its inclusion is monic. The canonical local comparisons

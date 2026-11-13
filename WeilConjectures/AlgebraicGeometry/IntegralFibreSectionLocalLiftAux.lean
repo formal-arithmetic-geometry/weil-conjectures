@@ -42,7 +42,6 @@ only two schemes; it does not assert that strict-local sections have neighbourho
 representatives, which is the separate qcqs continuity theorem.
 
 Source: Stacks Project, Tag 0EYP, using Tags 09XK, 09ZH and 0A3I.
-(blueprint: lem-sbc-integral-strict-local-fibre-comparison).
 
 Proof: the maps of the geometric point to its affine pointed neighbourhoods are
 compatible. The limit property of strictHenselizationAffineCone constructs their unique

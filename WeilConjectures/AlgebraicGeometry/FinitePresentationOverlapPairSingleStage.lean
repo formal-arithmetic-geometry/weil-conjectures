@@ -33,7 +33,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Lift the conjugated map on a fixed pair at one stage, without any assertion
 about later stages.
 Source: Stacks Project, Tag 01ZR (2), first proof, and Tag 05N7 (2), (3).
-(blueprint: lem-pc-fp-overlap-pair-single-stage).
 
 Proof: The ambient stage is quasi-separated, so the intersection of its two
 chosen affine opens is quasi-compact. Cover this intersection at stage j by

@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.FrobeniusLinearFreeFrameCoordinates
 /-!
 # Natural affine coordinates for Frobenius-linear vector bundles
 
-Source: Stacks Project, `more-etale.tex`, Tag 0GKU, lines 4213--4270
-(blueprint: lem-fd-frobenius-linear-vector-bundle-affine-coordinates).
+Source: Stacks Project, `more-etale.tex`, Tag 0GKU, lines 4213--4270.
 
 This is the affine coordinate comparison used in the polynomial solution construction.
 -/
@@ -72,7 +71,6 @@ private theorem exists_affine_tensor_frame (S : Scheme.{u}) (E : S.Modules) [E.I
 in coordinates compatible with pullback to every étale object over the chart.
 
 Source: Stacks Project, Tag 0GKU, lemma-frobenius-linear-on-vb, first paragraph.
-(blueprint: lem-fd-frobenius-linear-vector-bundle-affine-coordinates).
 
 Proof: pull the finite locally free module back to U and trivialize it near x.
 Refine the trivializing open to an affine open V containing x. A finite frame on

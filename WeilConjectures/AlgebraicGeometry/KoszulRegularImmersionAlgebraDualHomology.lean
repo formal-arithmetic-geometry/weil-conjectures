@@ -68,8 +68,7 @@ private noncomputable def scalarRestriction_fullyFaithful
 
 /-- The scalar cohomology calculation, without an algebra action or a choice of right adjoint.
 
-Source: Stacks Project, Tag 0BQZ, proof of Lemma 48.15.5
-(blueprint: lem-sc-koszul-regular-immersion-algebra-dual-homology).
+Source: Stacks Project, Tag 0BQZ, proof of Lemma 48.15.5.
 
 Proof: Compute derived internal Hom using the same K-injective resolution in both
 the given derived universe and the standard derived universe. In the standard universe,
@@ -160,8 +159,7 @@ private theorem koszulRegularImmersion_scalar_homology
 This computes cohomology only; it does not identify the derived objects or split
 extensions between different cohomological degrees.
 
-Source: Stacks Project, Tag 0BQZ, proof of Lemma 48.15.5; Tag 0AX3 and Tag 0AVW
-(blueprint: lem-sc-koszul-regular-immersion-algebra-dual-homology).
+Source: Stacks Project, Tag 0BQZ, proof of Lemma 48.15.5; Tag 0AX3 and Tag 0AVW.
 
 Proof:
 1. Use `exists_affine_derivedHom_evaluation_counit` for the closed immersion, which

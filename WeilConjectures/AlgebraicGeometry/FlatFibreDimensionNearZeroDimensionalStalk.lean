@@ -19,7 +19,6 @@ import WeilConjectures.RingTheory.DepthLeSupportDimension
 /-! # Constant fibre dimension near a zero-dimensional fibre stalk
 
 Source: Stacks Project, Tags 045U, 02NM and 02NJ.
-(blueprint: lem-sbc-flat-fibre-dimension-near-zero-dimensional-stalk)
 -/
 
 @[expose] public section
@@ -52,8 +51,7 @@ nonempty open neighbourhood in such a fibre has dimension n, so its local
 topological dimension at each point is n. The fibre of the piece is an open
 subscheme of the original fibre, and local topological dimension is unchanged by
 an open embedding. These identifications give the equality for every y in V.
-Empty schemes and the empty base open have no x satisfying the hypotheses.
-(blueprint: lem-sbc-flat-fibre-dimension-near-zero-dimensional-stalk) -/
+Empty schemes and the empty base open have no x satisfying the hypotheses. -/
 theorem exists_constant_fibre_dimension_neighbourhood_of_stalk_dimension_zero
     {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)]

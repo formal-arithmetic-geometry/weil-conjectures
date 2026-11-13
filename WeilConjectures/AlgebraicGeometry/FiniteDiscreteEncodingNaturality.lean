@@ -45,8 +45,6 @@ private theorem terminal_map_exists (T : Scheme.{u}) (V : T.ProEt) :
   ⟨(proEtIsTerminal _).from V⟩
 
 /-- Canonical constant scalars commute with every scheme direct-image coefficient map.
-Source: blueprint coefficient-identification proof, step 8; the unit comparison for
-constantSchemeIso. (auxiliary; not a blueprint node).
 
 Proof: at the base change of the terminal pro-etale object over Spec Z, the two maps
 are the same constant-sheaf unit followed by the inverse-image adjunction unit. The

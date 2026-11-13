@@ -16,8 +16,7 @@ import WeilConjectures.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
 /-!
 # Finite type modules: images and extensions
 
-Source: Stacks Project, Modules, Lemma 01B7 (blueprint:
-lem-weil-pbc-module-finite-type-image-extension).
+Source: Stacks Project, Modules, Lemma 01B7.
 -/
 
 @[expose] public section
@@ -224,10 +223,9 @@ private theorem extension_generators_near (X : RingedSpace.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Images of finite type module sheaves and extensions of finite type module sheaves are
-finite type (blueprint: lem-weil-pbc-module-finite-type-image-extension).
+finite type.
 
-Source: Stacks Project, Modules, Lemma 01B7 (blueprint:
-lem-weil-pbc-module-finite-type-image-extension).
+Source: Stacks Project, Modules, Lemma 01B7.
 Proof: for an epimorphism, push local finite generators along the map.  The image of a
 morphism is the codomain of the induced epimorphism from its source to its image.  For a
 short exact sequence, locally lift finitely many generators of the quotient and adjoin

@@ -50,7 +50,7 @@ and exactness places tau_(k,n)(x) in the image of H^p(F). Conversely the quotien
 maps satisfy tau_(k,n) rho_k = rho_n, giving the reverse inclusion of images.
 This argument uses only positive quotient levels, including n = 1 and c = 0.
 Source: Stacks Project, Cohomology of Schemes, Lemma 02OB,
-part (3) (blueprint: ml-cohomology-powers-ideal-image-stabilization). -/
+part (3). -/
 theorem ml_cohomology_powers_ideal_image_stabilization
     {A : Type u} [CommRing A] [IsNoetherianRing A]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of A)) [IsProper f]

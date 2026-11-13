@@ -256,7 +256,6 @@ private noncomputable def encodingPullbackNatIso (T U : Scheme.{u}) (j : U ⟶ T
 /-- The common coefficient encoding commutes with inverse image along a scheme morphism.
 Source: Bhatt--Scholze, Proposition 5.3.2; the sectionwise encoding of internal
 modules and the coefficient identification pulled back from one fixed point.
-(blueprint: lem-weil-pbc-finite-discrete-restriction-encoding)
 
 Proof in words. Write the encoding as restriction of scalars along the fixed
 constant-ring identification, followed by sectionwise encoding. At the presheaf

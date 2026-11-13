@@ -17,7 +17,6 @@ import Mathlib.Data.Int.Interval
 /-! # Terms of an ordinary bounded finite-projective tensor complex
 
 Source: Stacks Project, Tags 0DJQ and 01Y0.
-(blueprint: lem-pc-finite-retract-tensor-complex-terms).
 -/
 
 @[expose] public section
@@ -86,7 +85,6 @@ private theorem coherent_free_tensor {X : Scheme.{u}}
 coherent complex has coherent terms, even if the second complex is unbounded.
 Source: Stacks Project, perfect.tex, Tag 0DJQ, local tensor calculation;
 coherent.tex, Tag 01Y0, label lemma-coherent-abelian-Noetherian.
-(blueprint: lem-pc-finite-retract-tensor-complex-terms).
 
 Proof: In total degree n the summands are P^p tensor N^q for p+q=n.
 The bounds of P make a summand zero unless a<=p<=b.

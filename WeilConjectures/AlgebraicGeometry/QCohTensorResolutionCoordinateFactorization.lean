@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionCoordinateSh
 /-! # Factorization of canonical affine tensor coordinates
 
 Source: the definition of tensorResolutionCoordinateSheafIso, following Stacks Tag 08DX(2).
-(blueprint: new-t3-qcoh-tensor-resolution-coordinate-factorization).
 -/
 
 @[expose] public section
@@ -33,9 +32,7 @@ local instance QCohTensorResolutionCoordinateFactorization_objZero
 
 Source: the definition of tensorResolutionCoordinateSheafIso. The proof unfolds
 that definition once; exposing its formula avoids repeated expensive unfolding
-in proofs about the comparison.
-
-(blueprint: new-t3-qcoh-tensor-resolution-coordinate-factorization) -/
+in proofs about the comparison. -/
 theorem tensorResolutionCoordinateSheafIso_factors
     (Y : Scheme.{u}) (M N : Y.Modules) [M.IsQuasicoherent] [N.IsQuasicoherent]
     (U : Y.affineOpens) (MA NA : ModuleCat.{u} (Γ(Y, U.1) : Type u))

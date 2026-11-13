@@ -23,9 +23,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Projection-formula arrows and their specified finite-total inverse
-
-Source: Weil conjectures blueprint, proper base change, definition 1264
-(blueprint: def-weil-pbc-projection-formula-arrows).
 -/
 
 @[expose] public section
@@ -47,7 +44,7 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [MonoidalCategory A]
   (e : ∀ X Y : A, L.obj (X ⊗ Y) ≅ L.obj X ⊗ L.obj Y)
 
 /-- The chain mate whose degree maps are the sums of the ordinary t_{I^a,F^r}.
-Source: definition 1264 (blueprint: def-weil-pbc-projection-formula-arrows). -/
+Source: definition 1264. -/
 noncomputable def tensorAdjunctionTotal
     (he : ∀ {X X' Y Y' : A} (f : X ⟶ X') (g : Y ⟶ Y'),
       L.map (f ⊗ₘ g) ≫ (e X' Y').hom = (e X Y).hom ≫ (L.map f ⊗ₘ L.map g))
@@ -82,7 +79,7 @@ variable {A : Type u} [Category.{v} A] {B : Type u'} [Category.{v'} B]
 /-- The uncurried presentation of the existing right-adjoint projection map.
 This only transports the bifunctor interface; the mate itself is the upstream
 `CategoryTheory.Adjunction.rightAdjointProjectionMap`.
-Source: definition 1264 (blueprint: def-weil-pbc-projection-formula-arrows). -/
+Source: definition 1264. -/
 noncomputable def derivedProjectionFormulaMate
     (L : A ⥤ B) (V : B ⥤ A) (adj : L ⊣ V)
     (TR : A × A ⥤ A) (TS : B × B ⥤ B)

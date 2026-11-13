@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.HorizontalDualityMateCommutativity
 /-! # Horizontal pasting of canonical duality mates
 
 Source: Stacks Project, duality.tex, Remark 48.6.1 (Tag 0E9S).
-(blueprint: lem-sc-horizontal-duality-mate-pasting).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace AlgebraicGeometry
 /-- The horizontal mate-pasting law for two consecutive base morphisms, before
 transport to an open subscheme. No mate is assumed invertible.
 Source: Stacks Project, duality.tex, Tags 0ATR and 0E9S; cohomology.tex, Tag 0ATM.
-(blueprint: lem-sc-horizontal-duality-mate-pasting)
 
 Proof: Use derived pullback composition to identify the two source functors.
 The canonical pullback associativity isomorphism identifies the two total spaces;

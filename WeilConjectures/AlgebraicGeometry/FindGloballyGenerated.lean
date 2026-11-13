@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
 /-! # Globally generated invertible modules with a prescribed affine section locus
 
 Source: Stacks Project, Varieties Lemma 09NB (varieties-lemma-find-globally-generated),
-specialized to Noetherian integral separated schemes of dimension one
-(blueprint: lem-sc-find-globally-generated).
+specialized to Noetherian integral separated schemes of dimension one.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A nonempty affine open with finite complement in an integral separated Noetherian
 one-dimensional scheme is the nonvanishing locus of a section of a globally generated
-invertible module. Source: Stacks Project, Varieties Lemma 09NB
-(blueprint: lem-sc-find-globally-generated).
+invertible module. Source: Stacks Project, Varieties Lemma 09NB.
 
 Proof:
 1. Write `U = Spec A` and `K = k(X)`. At each point `xᵢ` of the finite complement,

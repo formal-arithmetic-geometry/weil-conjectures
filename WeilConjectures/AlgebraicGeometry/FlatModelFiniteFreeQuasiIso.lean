@@ -36,8 +36,7 @@ is exact, so the same argument and comparison hold on the shrunken neighbourhood
 Retain the quotient map from the restricted Q to P as eQ. It is a
 quasi-isomorphism and eQ ≫ eP equals the restriction of e, by the cokernel
 universal property in degree zero and identity maps in positive degrees.
-The witnesses are constructed simultaneously; no assertion concerns an arbitrary P.
-(blueprint: lem-pc-flat-model-finite-free-quasi-iso). -/
+The witnesses are constructed simultaneously; no assertion concerns an arbitrary P. -/
 theorem exists_local_finiteFree_quasiIso {T : Scheme.{u}} (U : T.Opens)
     (C Q : CochainComplex U.toScheme.Modules ℤ) (d : ℕ)
     (hCge : C.IsStrictlyGE 0) (hCle : C.IsStrictlyLE d)

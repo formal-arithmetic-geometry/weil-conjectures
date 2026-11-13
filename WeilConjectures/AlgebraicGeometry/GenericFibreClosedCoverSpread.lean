@@ -44,9 +44,7 @@ generalization from η to f(w), giving a point a over η specializing to w.
 Projecting a to P gives a point of the original fibre over y, hence of C union D.
 The projection of a specializes to x. Since C union D is closed, it contains x.
 An empty generic fibre causes no exception: the same lifting argument shows
-there can be no such x.
-
-(blueprint: lem-sbc-generic-fibre-closed-cover-spread) -/
+there can be no such x. -/
 theorem exists_open_generic_fibre_closed_cover {P T : Scheme.{u}} (g : P ⟶ T)
     [LocallyOfFiniteType g] [QuasiCompact g] (y : T) (C D : Set P)
     (hC : IsClosed C) (hD : IsClosed D) (hcover : g ⁻¹' {y} ⊆ C ∪ D) :

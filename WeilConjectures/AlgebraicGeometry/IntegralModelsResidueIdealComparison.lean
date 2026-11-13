@@ -626,7 +626,6 @@ attribute [local irreducible] discreteAbIso pointConstantAbIso residueLiftIso
 residue kernel with the first completed residue kernel in section coordinates.
 
 Source: Stacks Tags 093M and 099L, integral-models proof (1).
-(auxiliary; not a blueprint node).
 
 Proof: use the discrete coefficient comparisons, their naturality for the residue
 map, and the compact-adic comparison normalized on constant scalars. The small-site

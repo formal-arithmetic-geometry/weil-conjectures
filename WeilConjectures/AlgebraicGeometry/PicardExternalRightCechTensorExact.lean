@@ -234,7 +234,6 @@ private theorem picard_right_tensor_total_shortExact
 /-- The tensor-total Cech sequence is short exact in the right coefficient.
 Source: Stacks Project, Varieties, Tag 0BED, the coefficient diagram following
 equation-kunneth-on-cech, applied in the right variable.
-(blueprint: lem-sc-picard-external-right-cech-exact-tensor).
 
 Proof: In Cech degree q, every tuple has q+1 entries, so its intersection
 is nonempty as a family of opens. Repeated use of the affine diagonal criterion

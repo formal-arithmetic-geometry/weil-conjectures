@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.AffinePerfectKoszulPrincipalUnit
 /-! # Natural evaluation normalized on the Koszul identity
 
 Source: Stacks Project, Tags 08DC, 08DD, 08D1 and 09M1.
-(blueprint: lem-sc-koszul-open-hom-identity-evaluation).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ set_option maxHeartbeats 900000 in
 -- Nested derived restriction functors require extra elaboration heartbeats.
 /-- Natural evaluation, normalized only on the identity of each Koszul tail.
 Source: Stacks Project, Tags 09M1, 08DC, 08DD and 08D1.
-(blueprint: lem-sc-koszul-open-hom-identity-evaluation).
 Proof: Identify the restricted extended tilde of A[0] with O_U[0]. Evaluation
 at one on a K-injective representative identifies maps from this object with
 zeroth derived global sections; the comparison with affineOpenSections restricts

@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackTensorIsIso
 # Pullback of modules and tensor products
 
 Source: Stacks Project, Modules, Lemma 17.16.4 (Tag 01CD), label
-`lemma-tensor-product-pullback` (blueprint: lem-weil-pbc-module-pullback-tensor).
+`lemma-tensor-product-pullback`.
 
 ## Main statement
 
@@ -177,7 +177,7 @@ private theorem tensorComparison_naturality {X Y : Scheme.{v}} (f : X ⟶ Y)
 adjunction `Classical.choose (exists_tensorPullbackAdjunction f)`.
 
 Source: Stacks Project, Modules, Lemma 17.16.4 (Tag 01CD), label
-`lemma-tensor-product-pullback` (blueprint: lem-weil-pbc-module-pullback-tensor).
+`lemma-tensor-product-pullback`.
 Proof: construct the comparison by adjunction from the bilinear map on sections; check its
 stalks using the stalk pullback and tensor lemmas and the base-change tensor identity; detect
 isomorphisms on stalks. Naturality follows from the same adjunction and the sheaf tensor

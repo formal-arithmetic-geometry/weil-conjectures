@@ -12,7 +12,6 @@ public import Mathlib.Algebra.Homology.Monoidal
 /-! # Explicit Alexander--Whitney components
 
 Source: Banerjee, Tensor Structure on Smooth Motives, §1.1.4, p. 16.
-(blueprint: def-sc-module-cup-aw-components).
 -/
 
 @[expose] public section
@@ -28,7 +27,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
 /-- The front/back formula on one summand, zero if either degree is negative.
-Source: Banerjee, §1.1.4, p. 16 (blueprint: def-sc-module-cup-aw-components). -/
+Source: Banerjee, §1.1.4, p. 16. -/
 def moduleCup_awSummand (X : Scheme.{u}) [MonoidalPreadditive X.Modules]
     (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C)
     (r s n : ℤ) (h : r + s = n) :
@@ -51,7 +50,7 @@ def moduleCup_awSummand (X : Scheme.{u}) [MonoidalPreadditive X.Modules]
   else 0
 
 /-- Assemble the summands by the coproduct universal property in each total degree.
-Source: Banerjee, §1.1.4, p. 16 (blueprint: def-sc-module-cup-aw-components). -/
+Source: Banerjee, §1.1.4, p. 16. -/
 def moduleCup_awComponent (X : Scheme.{u}) [MonoidalPreadditive X.Modules]
     (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C)
     (n : ℤ) :
@@ -60,7 +59,7 @@ def moduleCup_awComponent (X : Scheme.{u}) [MonoidalPreadditive X.Modules]
   HomologicalComplex.mapBifunctorDesc (fun r s h ↦ moduleCup_awSummand X A B C μ r s n h)
 
 /-- Descent recovers the specified summand.
-Source: coproduct universal property (blueprint: def-sc-module-cup-aw-components). -/
+Source: coproduct universal property. -/
 @[reassoc]
 theorem moduleCup_ι_awComponent (X : Scheme.{u}) [MonoidalPreadditive X.Modules]
     (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C)
@@ -76,7 +75,7 @@ private theorem subinterval_zero_zero :
   rfl
 
 /-- Both front/back maps in bidegree zero are identities.
-Source: Banerjee, §1.1.4, p. 16 (blueprint: def-sc-module-cup-aw-components). -/
+Source: Banerjee, §1.1.4, p. 16. -/
 theorem moduleCup_awSummand_zero (X : Scheme.{u}) [MonoidalPreadditive X.Modules]
     (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C) :
     moduleCup_awSummand X A B C μ 0 0 0 (by simp) =

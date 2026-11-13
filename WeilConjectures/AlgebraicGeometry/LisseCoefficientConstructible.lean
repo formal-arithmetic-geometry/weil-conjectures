@@ -11,7 +11,6 @@ import WeilConjectures.CategoryTheory.CoefficientFiniteLocalSystemsPullback
 /-! # Lisse coefficient modules are constructible
 
 Source: Stacks Project, etale-cohomology.tex, Tag 03RW(3).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -98,7 +97,6 @@ private theorem fixed_lisse {D : Type w} [SmallCategory D]
 
 /-- A finite locally constant module is constructible on the coefficient-sized etale site.
 Source: Stacks Project, etale-cohomology.tex, Tag 03RW(3).
-(auxiliary; not a blueprint node).
 
 Proof: Restrict the scalar action along constant sections. This exact equivalence sends
 constant module sheaves to constant module-valued sheaves and commutes with restriction

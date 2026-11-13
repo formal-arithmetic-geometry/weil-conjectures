@@ -30,7 +30,6 @@ attribute [local instance] etaleFieldDiscreteForget₂ etaleFieldActionForget₂
 
 /-- A continuous discrete Galois set is a disjoint union of finite separable embedding sets.
 Source: Stacks Project, Tag 03QR, construction of the inverse functor.
-(blueprint: lem-exc-galois-set-embedding-decomposition).
 
 Proof: Take I to be the orbit quotient of the underlying action, in the same universe.
 For each orbit choose a representative. Its stabilizer is open because the orbit map

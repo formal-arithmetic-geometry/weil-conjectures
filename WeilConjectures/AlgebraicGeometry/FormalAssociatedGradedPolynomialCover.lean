@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.FormalPolynomialQuotientSpan
 /-! # A local polynomial cover of the associated graded ideal algebra
 
 Source: Stacks Project, proof of Lemma 0884, polynomial cover refinement.
-(blueprint: lem-weil-pbc-formal-associated-graded-polynomial-cover).
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- Homogeneous polynomials in finite generators locally span the graded ideal algebra.
 Source: Stacks Project, proof of Lemma 0884, first paragraph, polynomial cover refinement;
-Lemma 087Z for the associated graded algebra
-(blueprint: lem-weil-pbc-formal-associated-graded-polynomial-cover).
+Lemma 087Z for the associated graded algebra.
 
 Proof: write x_i for the given generators of I. On an affine open V of X, the affine
 ideal formula Scheme.IdealSheafData.ideal_comap_appLE identifies J(V) with the ideal

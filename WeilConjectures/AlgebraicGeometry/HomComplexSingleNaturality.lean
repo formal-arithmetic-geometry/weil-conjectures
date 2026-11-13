@@ -154,7 +154,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- The single-source Hom comparison is natural in both the sheaf and the complex.
 
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X, Hom-complex product
-and functoriality formulas. (blueprint: lem-sc-hom-complex-single-naturality)
+and functoriality formulas.
 
 Proof: For each sheaf P and complex I, project the product defining Hom(P[0],I)
 to its degree-zero source factor. All other factors are zero, because P[0]^p

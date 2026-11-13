@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainData
 /-! # Restriction factors across open composition
 
 Source: Stacks Project, Tags 08FE and 0D5T.
-(blueprint: lem-pc-mayer-vietoris-open-composition-restriction-factors).
 -/
 
 @[expose] public section
@@ -54,8 +53,7 @@ of QI with the beta component at QJ followed by Rj_Y(R(h|W)(f)). Associate the
 composites and combine the two final maps using functoriality of Rj_Y. This gives the
 stated equality without using the h-localization unit or the complex-composition map.
 Only naturality and functoriality are used, so arbitrary complexes, empty and full
-opens and identity morphisms are included; there is no injectivity or cover hypothesis.
-(blueprint: lem-pc-mayer-vietoris-open-composition-restriction-factors). -/
+opens and identity morphisms are included; there is no injectivity or cover hypothesis. -/
 theorem schemeMVOpenComposition_restriction_factors
     (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

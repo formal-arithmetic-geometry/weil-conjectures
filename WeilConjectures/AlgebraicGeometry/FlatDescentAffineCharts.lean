@@ -61,7 +61,6 @@ flatness. This is only the affine reduction, with no eventual flatness assertion
 
 Source: Stacks Project, Limits, proof of Tag 04AI, first paragraph, and the affine
 identification in Situation 081D.
-(blueprint: lem-weil-pbc-flat-descent-affine-charts).
 
 Proof: At each point of X₀ choose nested affine opens U ⊆ X₀, V ⊆ Y₀, W ⊆ S₀
 with f₀(U) ⊆ V and Y₀.hom(V) ⊆ W. Quasi-compactness of X₀ supplies finitely many

@@ -22,8 +22,7 @@ import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Coherent sheaf with prescribed generic support
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YO (blueprint:
-lem-weil-pbc-finite-surjective-coherent-generic-support).
+Source: Stacks Project, Cohomology of Schemes, Lemma 01YO.
 -/
 
 @[expose] public section
@@ -38,26 +37,18 @@ namespace AlgebraicGeometry.Scheme
 /-- A finite surjective map to a locally Noetherian scheme admits a coherent module whose
 pushforward is supported on a prescribed integral closed subscheme and is annihilated at its
 generic point by the maximal ideal.
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YO, lines 3479--3521
-(blueprint: lem-weil-pbc-finite-surjective-coherent-generic-support).
+Source: Stacks Project, Cohomology of Schemes, Lemma 01YO, lines 3479--3521.
 
 Proof:
-1. Finite implies locally finite type, so Y is locally Noetherian
-   (lem-weil-pbc-finite-iff-integral-lft, pqf-lem-locnoeth-lft). Lift ξ by surjectivity
-   and take its reduced closure (lem-weil-pbc-reduced-induced-closed-subscheme).
-2. Its image is exactly closure {ξ}, since a finite map is closed
-   (lem-weil-pbc-finite-closed-map-finite-fibres). Factor its reduced source through Z
-   (lem-weil-pbc-reduced-source-factors-through-closed-subscheme).
-3. Push forward its structure sheaf along the closed immersion into Y. This is coherent
-   (lem-weil-pbc-closed-immersion-finite, pqf-lem-coherent-ft-locnoeth,
-   lem-weil-pbc-finite-pushforward-coherent). Sectionwise pushforward composes.
-4. On affine neighborhoods the generic stalk is (B/q)_p. Integrality and incomparability
-   (lem-weil-pbc-finite-algebra-is-integral, lem-weil-pbc-integral-incomparability) show
+1. Finite implies locally finite type, so Y is locally Noetherian. Lift ξ by surjectivity
+   and take its reduced closure.
+2. Its image is exactly closure {ξ}, since a finite map is closed. Factor its reduced source through Z.
+3. Push forward its structure sheaf along the closed immersion into Y. This is coherent. Sectionwise pushforward composes.
+4. On affine neighborhoods the generic stalk is (B/q)_p. Integrality and incomparability show
    this is the residue field of the chosen lift and therefore nonzero.
-5. The stalk action factors through the residue field of ξ (def-weil-residue-field,
-   def-weil-pbc-module-stalk), so the maximal ideal annihilates the stalk.
-6. The pushforward has closed support (lem-weil-pbc-finite-type-module-support-closed).
-   Closed-pushforward stalks put it inside i(Z) (lem-weil-pbc-closed-pushforward-stalks).
+5. The stalk action factors through the residue field of ξ, so the maximal ideal annihilates the stalk.
+6. The pushforward has closed support.
+   Closed-pushforward stalks put it inside i(Z).
    It contains ξ by step 4, hence contains its closure and equals i(Z).
 -/
 theorem exists_coherent_pushforward_support_eq_range

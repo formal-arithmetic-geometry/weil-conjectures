@@ -30,16 +30,14 @@ attribute [local irreducible] AlgebraicGeometry.ProjectiveSpace
   projectiveLineTraceTransport projectiveLineTraceDatum
 
 /-- The ordered source of the finite P1 decomposition, constructed as a biproduct.
-Source: blueprint thm-amb-p1-decomposition, after twisting by A(1)[2].
-(auxiliary; not a blueprint node). -/
+Source:, after twisting by A(1)[2]. -/
 @[implicit_reducible]
 def ordinaryFiniteP1SplittingSource (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u}) : DerivedCategoryModule A S :=
   (ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧ ⊞ ordinaryFiniteUnit A S
 
 /-- The target of the finite P1 decomposition, constructed by derived direct image.
-Source: blueprint thm-amb-p1-decomposition, after twisting by A(1)[2].
-(auxiliary; not a blueprint node). -/
+Source:, after twisting by A(1)[2]. -/
 @[implicit_reducible]
 def ordinaryFiniteP1SplittingTarget (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u}) : DerivedCategoryModule A S :=
@@ -48,8 +46,7 @@ def ordinaryFiniteP1SplittingTarget (A : Type (u + 1)) [CommRing A] (N : ℕ)
       ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧)
 
 /-- The two specified components, before asserting invertibility.
-Source: blueprint thm-amb-p1-decomposition, after twisting by A(1)[2].
-(auxiliary; not a blueprint node). -/
+Source:, after twisting by A(1)[2]. -/
 @[irreducible]
 def ordinaryFiniteP1SplittingMap (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
@@ -77,9 +74,6 @@ private theorem splitting_map_naturality
 
 /-- The hyperplane Kummer class and its two-component map are natural over every base.
 Over a Noetherian base this is the already normalized Chern morphism.
-Source: blueprint thm-amb-p1-decomposition, arbitrary-base compatibility, and
-lem-sp-tower-p1-arbitrary-base-integrals, steps 2–3.
-(auxiliary; not a blueprint node)
 
 Proof: the hyperplane equation is t on the first standard chart and the unit ideal
 on the other. It is Cartier after every change of base, and its dual ideal has the

@@ -83,7 +83,7 @@ private theorem compute_eq_scalarCounit (a : Λ ⟶ Λ') [IsMonHom a] (T : Schem
 
 /-- The section scalar comparison and its normalized counit equations exist.
 (1);
-Stacks Tags 03EK, 06YY, 07A6 (auxiliary; not a blueprint node).
+Stacks Tags 03EK, 06YY, 07A6.
 Proof: use the normalized internal section scalar adjunction, transport its left-derived
 counit through the homotopy quotient, and identify its component with `compute`.
 The extension comparison is normalized on balanced local generators and the K-flat

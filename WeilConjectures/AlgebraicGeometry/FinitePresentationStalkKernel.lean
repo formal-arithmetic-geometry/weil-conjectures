@@ -23,8 +23,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-!
 # A local finite presentation and its internal-Hom stalk kernel
 
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`), third paragraph
-(blueprint: lem-weil-pbc-finite-presentation-stalk-kernel).
+Source: Stacks Project, Modules, Lemma 01CP, third paragraph.
 -/
 
 @[expose] public section
@@ -38,9 +37,8 @@ namespace AlgebraicGeometry.RingedSpace
 an injective coordinate map on the internal-Hom stalk, with the indicated kernel image.
 It does not construct or assert bijectivity of the canonical stalk-Hom map.
 
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`), third paragraph,
+Source: Stacks Project, Modules, Lemma 01CP, third paragraph,
 using Lemma 01CO (1) for the internal-Hom exact sequence.
-(blueprint: lem-weil-pbc-finite-presentation-stalk-kernel)
 
 Proof: Choose a finite free presentation on a neighborhood U of x from
 IsFinitePresentation, with basis images s_i in F(U). Identify the stalks of the two

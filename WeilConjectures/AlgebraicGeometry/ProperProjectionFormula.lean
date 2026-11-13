@@ -12,8 +12,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 /-!
 # The proper projection formula with the base factor first
 
-Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/lem-amb-proper-coproducts-projection.md`
-(blueprint: lem-amb-proper-coproducts-projection); Stacks Project, Tag 0F0G, and Tag 06YU.
+Source:; Stacks Project, Tag 0F0G, and Tag 06YU.
 
 The map is the specified composite of the canonical signed derived symmetry, the
 adjoint-of-counit projection map, and direct image of the signed symmetry on the source.
@@ -31,8 +30,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The proper projection formula for ordinary unbounded small-etale module complexes, with
 finite commutative coefficients and the tensor factors ordered as in the blueprint.
-Source: Stacks Project, Tag 0F0G and the signed symmetry following Tag 06YU
-(blueprint: lem-amb-proper-coproducts-projection).
+Source: Stacks Project, Tag 0F0G and the signed symmetry following Tag 06YU.
 
 Proof:
 1. Apply the existing finite-coefficient proper projection theorem

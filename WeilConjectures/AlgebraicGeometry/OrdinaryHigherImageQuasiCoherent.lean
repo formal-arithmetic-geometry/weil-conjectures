@@ -27,7 +27,6 @@ namespace AlgebraicGeometry
 
 /-- Ordinary higher direct images preserve quasi-coherence for qcqs scheme morphisms.
 Source: Stacks Project, Tag 01XJ (1).
-(blueprint: lem-pc-ordinary-higher-image-quasi-coherent).
 
 Proof:
 Restrict to affine base opens; higher images commute with restriction and quasi-coherence

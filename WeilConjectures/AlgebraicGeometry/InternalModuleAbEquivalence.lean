@@ -13,8 +13,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 /-! # Internal modules in abelian groups and ordinary modules
 
 Source: the tensor-product universal property for bilinear module actions,
-used sectionwise in Bhatt--Scholze, Section 5.3
-(auxiliary; not a blueprint node).
+used sectionwise in Bhatt--Scholze, Section 5.3.
 -/
 
 @[expose] public section
@@ -120,10 +119,9 @@ private instance : (internalToModule R).IsEquivalence where
 with exactly the same underlying abelian groups and maps.
 
 Source: the universal property of the tensor product over ℤ, applied to a module
-scalar action; the pointwise encoding step used in Bhatt--Scholze, Section 5.3
-(auxiliary; not a blueprint node).
+scalar action; the pointwise encoding step used in Bhatt--Scholze, Section 5.3.
 
-Proof in words. An internal action γ : R ⊗ℤ M → M gives scalar multiplication by
+Proof in words. An internal action γ: R ⊗ℤ M → M gives scalar multiplication by
 r • m = γ(r ⊗ m). Evaluate the internal unit equation at 1 ⊗ m and its associativity
 equation at (r ⊗ s) ⊗ m to obtain the module unit and associativity laws. The additive
 laws follow from bilinearity. Evaluating an internal linearity diagram at r ⊗ m

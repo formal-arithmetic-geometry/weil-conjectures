@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 /-! # Serre vanishing for the polynomial Proj model of the projective line
 
 Source: Stacks Project, Tag 01YS (4), with twists as in Tag 01MN.
-(blueprint: lem-sc-p1-proj-serre-h1-vanishing).
 -/
 
 @[expose] public section
@@ -74,7 +73,6 @@ end Scheme.Modules
 /-- Serre vanishing in degree one, expressed for polynomial Proj twists.
 
 Source: Stacks Project, Tag 01YS (4), and Tag 01MN (1),(2).
-(blueprint: lem-sc-p1-proj-serre-h1-vanishing).
 
 Proof: Polynomial Proj is the projective line over k. Identify it with the relative
 projective line using the standard affine charts, sending their parameters to x1/x0

@@ -24,7 +24,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteCompari
 /-! # Geometric stalks of a proper-support subsheaf
 
 Source: Stacks Project, Tag 0F76, including the restriction normalization in the first
-paragraph of its proof (auxiliary; not a blueprint node).
+paragraph of its proof.
 -/
 
 @[expose] public section
@@ -41,8 +41,7 @@ open Scheme
 fibre sections. This is the support-image and extension-by-zero part of Stacks Project,
 Tag 0F76. The proof constructs the image submodule, identifies membership with proper
 support using base-change locality, and extends every properly supported fibre section
-by zero after shrinking to a quasi-compact open and applying compactification.
-(auxiliary; not a blueprint node). -/
+by zero after shrinking to a quasi-compact open and applying compactification. -/
 theorem properSupport_geometricStalk_image
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f]
@@ -128,8 +127,7 @@ module sheaf. On every proper-support subsheaf it induces a linear isomorphism o
 exactly the submodule of properly supported fibre sections. The displayed factorization
 identifies its composite with the inclusion with ordinary restriction, and the germ
 formula specifies that restriction on every representative.
-Source: Stacks Project, Tag 0F76
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 0F76.
 
 Proof:
 1. Pull representatives to the fibre. Properness survives base change, so their supports

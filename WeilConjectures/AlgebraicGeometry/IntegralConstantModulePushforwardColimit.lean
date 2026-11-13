@@ -18,7 +18,6 @@ import WeilConjectures.Compactification.Defs
 # Integral constant module pushforwards are filtered colimits of finite pushforwards
 
 Source: Stacks Project, Tag 09Z6, finite approximation paragraph, using Tag 09Z1.
-(blueprint: lem-weil-pbc-integral-constant-module-pushforward-colimit).
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ a small filtered colimit of finite direct images of the same constant module.
 
 Source: Stacks Project, Tag 09Z6, final paragraph of the proof of (1), transferred to (3),
 using Tags 09YZ and 09Z1.
-(blueprint: lem-weil-pbc-integral-constant-module-pushforward-colimit).
 
 Proof: Present the integral morphism nu as a cofiltered limit of finite X-schemes with
 an index category of size u, using its finite approximation. Each transition map is affine,

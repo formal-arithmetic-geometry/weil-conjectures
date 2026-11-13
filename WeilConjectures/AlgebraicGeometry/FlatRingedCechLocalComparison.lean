@@ -19,7 +19,6 @@ import WeilConjectures.CategoryTheory.RingedCechKoszulColimitIso
 /-! # Flat scalar comparison on a generating slice
 
 Source: Stacks Project, Algebraization, Tags 099H and 099I.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -678,7 +677,6 @@ private theorem tensor_unit_cech_quasiIso
 /-- The scalar-extension unit is a quasi-isomorphism after restriction to a slice
 where the source is identified with the extended Čech complex for a generating list.
 Source: Stacks Project, Algebraization, Tags 099H and 099I.
-(auxiliary; not a blueprint node).
 
 Proof: scalar extension is tensor with the restricted target ring after forgetting scalars.
 Flatness makes this functor exact. Restriction to a slice commutes with sheafification and

@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 /-! # Proper cohomology for integral-ideal filtration factors
 
 Source: Stacks Project, Tags 02O5 and 01YH.
-(blueprint: lem-pc-e2-integral-ideal-proper-cohomology)
- -/
+-/
 
 @[expose] public section
 
@@ -144,7 +143,6 @@ closed subscheme of the source.
 
 Source: Stacks Project, Cohomology of Schemes, proof of Proposition 30.19.1, Tag 02O5,
 and Lemmas 30.12.5 and 30.12.6, Tags 01YH and 01YI.
-(blueprint: lem-pc-e2-integral-ideal-proper-cohomology)
 
 Proof: First X is Noetherian: the affine Noetherian base is Noetherian, and f is
 proper, hence of finite type and quasi-compact. Closed subschemes of X are Noetherian,
@@ -156,7 +154,7 @@ two-out-of-three property by the long exact sequence over the Noetherian base ri
 for the left term use the segment starting in degree q - 1 (zero when q = 0), and
 for the right term use the segment ending in degree q + 1. For Z closed in X, Chow's
 lemma gives a
-projective modification pi : Z' -> Z, an isomorphism on a dense open, together with a
+projective modification pi: Z' -> Z, an isomorphism on a dense open, together with a
 closed immersion into projective space over the affine base. Choose a large common twist
 L^n that kills positive higher direct images both for pi and for Z' -> T. Projective
 cohomology finiteness, proved independently from the projective-space case, makes

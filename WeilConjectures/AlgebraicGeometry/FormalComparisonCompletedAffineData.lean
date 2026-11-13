@@ -48,7 +48,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 This statement makes no assertion about section diagrams or their limits.
 
 Source: Stacks Project, Tag 088B, completed-base change paragraph; Tags 02KH and 0887.
-(blueprint: lem-weil-pbc-formal-comparison-completed-affine-data)
 
 Proof: Restrict to the affine chart and base change along B to its adic completion R.
 The extended ideal on Spec R is J₀. Apply formal-system pullback to construct G₀

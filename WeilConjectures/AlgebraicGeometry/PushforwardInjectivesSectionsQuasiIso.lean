@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.Ext
 /-! # Global sections of a resolution of the direct image of injectives
 
 Source: Stacks Project, Cohomology of Sheaves, Tags 01FB, 01EZ, 01F0, 01EX;
-Derived Categories, Tag 015E
-(blueprint: lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso).
+Derived Categories, Tag 015E.
 -/
 
 @[expose] public section
@@ -43,12 +42,10 @@ both over `O_Y(Y)` (Mathlib's `SheafOfModules.evaluation` at `⊤`, as in
 The source has terms `(h_* I^n)(Y) = I^n(h⁻¹ Y) = I^n(X)` by
 `pushforward_obj_obj`; its differentials are those of `I` on `X` by `pushforward_map_app`.
 The `O_Y(Y)`-action on these terms is restriction along the structure-sheaf map of `h`.
-Source: Stacks Project, Tags 01FB, 01EZ, 01F0, 01EX, 015E
-(blueprint: lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso).
+Source: Stacks Project, Tags 01FB, 01EZ, 01F0, 01EX, 015E.
 
 Proof: (1) In the abelian category of module sheaves, global sections is additive and
-left exact by sectionwise computation of limits
-(`lem-weil-pbc-module-sheaves-limits-sectionwise`). Enough injectives is supplied by
+left exact by sectionwise computation of limits. Enough injectives is supplied by
 `lem-weil-pbc-scheme-modules-enough-injectives`.
 (2) Every term of the direct image of `I` is acyclic for global sections by
 `lem-weil-pbc-module-pushforward-injective-acyclic` (01EX, with the whole space as open).

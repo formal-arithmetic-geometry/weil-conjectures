@@ -1749,7 +1749,6 @@ extension by zero after shrinking and compactifying to lift every properly suppo
 section.  The proof is deliberately separated from the elementary construction of the range
 submodule and its canonical isomorphism.
 Source: Stacks Project, Tag 0F76, support-image and extension-by-zero paragraphs.
-(auxiliary; not a blueprint node).
 -/
 theorem properSupport_geometricStalk_image_core
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}

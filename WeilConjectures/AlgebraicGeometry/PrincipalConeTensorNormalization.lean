@@ -10,9 +10,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.UnitEnd
 
 /-! # Signed principal cones and derived tensor
-
-Source: blueprint, derived Nakayama resolution, On X paragraph.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +26,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
 /-- The standard shift on derived right tensor by the finite quotient.
-Source: derived tensor localized from total tensor
-(auxiliary; not a blueprint node). -/
+Source: derived tensor localized from total tensor. -/
 abbrev tensorReductionShift (n : ℕ) :
     (DerivedNakayama.reductionFunctor l E X (n + 1)).CommShift ℤ := by
   change (tensorRight _).CommShift ℤ
@@ -285,10 +281,6 @@ end Generic
 
 /-- The scalar cone comparison with derived tensor preserves quotient maps, the
 specified tensor unit and the signed shift. No change of coefficient category is involved.
-
-Source: blueprint derived Nakayama resolution, On X paragraph, and first reduction,
-Cones paragraph; original normalization proof steps 1, 3 and 4.
-(auxiliary; not a blueprint node).
 
 Proof: equality on profinite sections identifies d with the specified uniformizer.
 The exact coefficient sequence gives the augmentation from its two-term free

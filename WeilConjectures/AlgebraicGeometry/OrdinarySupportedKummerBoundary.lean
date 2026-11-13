@@ -10,9 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 /-!
 # Relative supported Cartier Kummer boundary
 
-Source: Stacks Project, Tags 03PL and 0A45; blueprint
-sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 03PL and 0A45.
 
 ## Main definitions
 
@@ -33,7 +31,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- The adjunction unit on the constant sheaf, with its canonical constant comparison.
-Source: Stacks 0A45 (auxiliary; not a blueprint node). -/
+Source: Stacks 0A45. -/
 def supportedConstantUnit (A : Type (u + 1)) [CommRing A]
     {D T : Scheme.{u}} (i : D ⟶ T) :
     ordinaryFiniteConstant A T ⟶
@@ -43,13 +41,13 @@ def supportedConstantUnit (A : Type (u + 1)) [CommRing A]
       (ModuleCat.of A A)).hom
 
 /-- The integral constant sheaf used to evaluate a supported class on one.
-Source: Stacks 03FD (auxiliary; not a blueprint node). -/
+Source: Stacks 03FD. -/
 abbrev supportedIntegralConstant (T : Scheme.{u}) :=
   (constantSheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
     (AddCommGrpCat.of (ULift.{u + 1} ℤ))
 
 /-- Integral unit for a closed support, with the same inverse-image adjunction.
-Source: Stacks 0A45 (auxiliary; not a blueprint node). -/
+Source: Stacks 0A45. -/
 def supportedIntegralUnit {D T : Scheme.{u}} (i : D ⟶ T) :
     supportedIntegralConstant T ⟶
       (lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant D) :=
@@ -58,7 +56,7 @@ def supportedIntegralUnit {D T : Scheme.{u}} (i : D ⟶ T) :
       (AddCommGrpCat.of (ULift.{u + 1} ℤ))).hom
 
 /-- The section one of the integral constant sheaf.
-Source: Stacks 03FD (auxiliary; not a blueprint node). -/
+Source: Stacks 03FD. -/
 def supportedIntegralOne (T : Scheme.{u}) :
     (supportedIntegralConstant T).obj.obj (op (Scheme.Etale.mk (𝟙 T))) :=
   (toSheafify T.smallEtaleTopology
@@ -66,7 +64,7 @@ def supportedIntegralOne (T : Scheme.{u}) :
       (op (Scheme.Etale.mk (𝟙 T))) (ULift.up 1)
 
 /-- Map from the supported integral coefficient sheaf to the underlying A-coefficients.
-Source: Stacks 03FD (auxiliary; not a blueprint node). -/
+Source: Stacks 03FD. -/
 def supportedIntegralGenerator (A : Type (u + 1)) [CommRing A]
     {D T : Scheme.{u}} (i : D ⟶ T) :
     (lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant D) ⟶
@@ -74,9 +72,7 @@ def supportedIntegralGenerator (A : Type (u + 1)) [CommRing A]
         ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D)) :=
   (lowerStar AddCommGrpCat.{u + 1} i).map (ordinaryFiniteIntegralGenerator A D)
 
-/-- The canonical section of O(D), transposed from the inclusion of its ideal.
-Source: blueprint lem-amb-cartier-kummer-map, paragraph 1
-(auxiliary; not a blueprint node). -/
+/-- The canonical section of O(D), transposed from the inclusion of its ideal. -/
 def supportedDivisorSection {D T : Scheme.{u}} (i : D ⟶ T) :
     Scheme.Modules.unit T ⟶ Scheme.Modules.dual i.ker.toModules :=
   (SheafOfModules.unitHomEquiv _).symm
@@ -84,9 +80,7 @@ def supportedDivisorSection {D T : Scheme.{u}} (i : D ⟶ T) :
       i.ker.toModulesι)
 
 /-- Restriction of the canonical divisor section, transported to the recorded frame
- torsor's ordinary-pullback interface by uniqueness of left adjoints.
-Source: blueprint lem-amb-cartier-kummer-map, paragraph 1
-(auxiliary; not a blueprint node). -/
+ torsor's ordinary-pullback interface by uniqueness of left adjoints. -/
 def supportedDivisorSectionPullback {D T : Scheme.{u}} (i : D ⟶ T) (W : T.Opens) :
     (Scheme.Modules.pullback W.ι).obj (Scheme.Modules.unit T) ⟶
       (Scheme.Modules.pullback W.ι).obj (Scheme.Modules.dual i.ker.toModules) :=
@@ -97,7 +91,7 @@ def supportedDivisorSectionPullback {D T : Scheme.{u}} (i : D ⟶ T) (W : T.Open
       (e.app (Scheme.Modules.dual i.ker.toModules)).hom
 
 /-- The actual finite-coefficient Chern class, before the module/abelian comparison.
-Source: Stacks 03PL (auxiliary; not a blueprint node). -/
+Source: Stacks 03PL. -/
 @[irreducible]
 def supportedKummerChern (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) {D T : Scheme.{u}} (i : D ⟶ T)
@@ -113,8 +107,7 @@ def supportedKummerChern (A : Type (u + 1)) [CommRing A] (N : ℕ)
 The lifting torsor of E at the supported section one is the frame torsor of O(D),
 and its specified section over the complementary open is sent to zero in E.
 Thus it remembers the trivialization, not merely the ordinary Picard class.
-Source: Stacks 03AJ, 03PL, 0A45 and blueprint lem-amb-cartier-kummer-map, paragraphs 1--4
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03AJ, 03PL, 0A45 and, paragraphs 1--4. -/
 @[irreducible]
 def SupportedKummerBoundary (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) {D T : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i]

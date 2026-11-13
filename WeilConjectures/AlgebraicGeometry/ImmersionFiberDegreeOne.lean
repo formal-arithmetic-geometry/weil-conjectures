@@ -12,8 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.FiberDegreeBound
 /-!
 # Fibres of an immersion have degree at most one
 
-Source: Stacks Project, Morphisms, Lemma Tag 03J9
-(blueprint: lem-weil-pbc-immersion-fibre-degree-one).
+Source: Stacks Project, Morphisms, Lemma Tag 03J9.
 -/
 
 @[expose] public section
@@ -28,26 +27,21 @@ namespace AlgebraicGeometry.Scheme.Hom
 empty; on its image the canonical projection to the spectrum of the residue field is an
 isomorphism. In particular its fibres are universally bounded.
 
-Source: Stacks Project, Morphisms, Lemma Tag 03J9
-(blueprint: lem-weil-pbc-immersion-fibre-degree-one).
+Source: Stacks Project, Morphisms, Lemma Tag 03J9.
 
 Proof, following the five steps of the node:
 1. Base change the immersion to `Spec κ(x)`. The fibre projection is an immersion by
-   `lem-weil-pbc-immersion-base-change-lft`, hence factors into a closed and an open immersion
-   (`def-weil-closed-immersion`, `def-weil-open-immersion`, `def-pc-scheme-fibre`,
-   `def-pc-fibre-product`).
+   `lem-weil-pbc-immersion-base-change-lft`, hence factors into a closed and an open immersion.
 2. The spectrum of a field has one point, so the open part has empty source or is an
-   isomorphism (`def-weil-affine-spectrum`, `def-weil-open-immersion`).
+   isomorphism.
 3. In the latter case the closed part is the spectrum of a quotient of the residue field.
-   Its ideal is zero or the whole field, giving an isomorphism or the empty scheme
-   (`def-weil-closed-immersion`, `def-weil-affine-spectrum`).
+   Its ideal is zero or the whole field, giving an isomorphism or the empty scheme.
 4. The fibre homeomorphism onto the inverse image of `x` identifies the empty case with
-   `x` outside the image (`def-pc-scheme-fibre`). Thus on the image the projection is an iso.
+   `x` outside the image. Thus on the image the projection is an iso.
 5. The empty scheme is affine with zero global sections; the other case has the residue
    field as its algebra of global sections. Both projections are finite, and their degrees
-   are respectively zero and one (`pqf-def-affine-morphism`,
-   `def-weil-finite-integral-morphism`, `def-weil-affine-spectrum`). The bound one witnesses
-   universal boundedness (`def-weil-pbc-fibre-degree-bound`). -/
+   are respectively zero and one. The bound one witnesses
+   universal boundedness. -/
 theorem immersion_fiber_degree_one {Z X : Scheme.{u}} (j : Z ⟶ X) [IsImmersion j] :
     BoundsFiberDegrees j 1 ∧
       (∀ x : X, (x ∉ Set.range j → IsEmpty (j.fiber x)) ∧

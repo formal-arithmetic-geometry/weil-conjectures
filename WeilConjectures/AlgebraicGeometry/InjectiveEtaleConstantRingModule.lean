@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
 
 Source: Stacks Project, Modules on Sites, Sections 093I and 03CV;
 Cohomology on Sites, Tags 03FC and 03FD.
-(blueprint: lem-weil-pbc-injective-etale-constant-ring-module)
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ module realization with the same underlying abelian presheaf.
 Source: Stacks Project, Modules on Sites, Sections 093I and 03CV; Sites Example 0H7J;
 Cohomology on Sites, Tags 03FC and 03FD. This is the constant-coefficient interface
 in step 1 of lem-weil-pbc-injective-etale-module-cech-h1.
-(blueprint: lem-weil-pbc-injective-etale-constant-ring-module)
 
 Proof: Sheafify the constant presheaf of rings with value Λ to obtain R.
 The underlying-set identification uses lem-weil-pbc-ring-sheafification-underlying-sets;

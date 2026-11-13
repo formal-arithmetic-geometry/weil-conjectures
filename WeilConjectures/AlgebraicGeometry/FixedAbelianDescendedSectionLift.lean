@@ -14,7 +14,6 @@ import all WeilConjectures.AlgebraicGeometry.AbelianPullbackGlobalSectionsCompar
 /-! # Fixed-coefficient lifting on a descended qcqs étale object
 
 Source: Stacks Project, Sites Tags 09YM and 09YN, and Étale Cohomology Tag 09YQ.
-(blueprint: lem-weil-pbc-fixed-abelian-descended-section-lift).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ private lemma pullbackComp_first {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z
 /-- A section of the inverse image of one stage sheaf lifts to a later stage.
 Source: Stacks Project, Sites Tag 09YN, proof of lemma-colimit, and Étale
 Cohomology Tag 09YQ, degree-zero affine-site comparison.
-(blueprint: lem-weil-pbc-fixed-abelian-descended-section-lift).
 
 Proof: Restrict the scheme diagram to the directed upper tail of i. Its limit
 is the same scheme, since the tail is cofinal. Present its full affine étale

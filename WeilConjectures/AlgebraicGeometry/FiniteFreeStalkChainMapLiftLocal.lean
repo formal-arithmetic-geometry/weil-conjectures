@@ -11,10 +11,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkDegreewiseLift
 import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkDegreewiseShrink
 
 /-! # Finite matrix extension to one neighbourhood
-
-Source: lem-pc-perfect-locus, finite matrix extension argument, expanded in
-lem-pc-finite-free-stalk-chain-map-lift.
-(blueprint: lem-pc-finite-free-stalk-chain-map-lift-local)
 -/
 
 @[expose] public section
@@ -23,9 +19,6 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 /-- Finite matrix extension to one neighbourhood.
-
-Source: lem-pc-perfect-locus, extension of the finite calculation to a
-neighbourhood, expanded in lem-pc-finite-free-stalk-chain-map-lift, steps 1--3.
 
 Proof: For each nonzero term choose its finite free presentation. Pullback preserves
 zero objects and takes a free sheaf with a finite basis to the free sheaf with that
@@ -47,8 +40,7 @@ entry: the comparison replaces open restriction by pullback and then composes
 pullback along the open inclusion with the map from Spec O_{Y,y}. Therefore
 S_U.map fU = eP.hom >> f >> eQ.inv, checked degreewise in the chosen bases.
 If a support interval is empty or a rank is zero, its relevant maps and equations
-are unique; empty finite intersections can be taken to be the whole scheme.
-(blueprint: lem-pc-finite-free-stalk-chain-map-lift-local) -/
+are unique; empty finite intersections can be taken to be the whole scheme. -/
 theorem exists_chainMap_of_stalk_local
     {Y : Scheme.{u}} (P Q : CochainComplex Y.Modules ℤ)
     (a b c e : ℤ)

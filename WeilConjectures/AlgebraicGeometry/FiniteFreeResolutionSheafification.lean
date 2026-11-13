@@ -18,7 +18,7 @@ import Mathlib.Algebra.Category.ModuleCat.Projective
 /-! # Sheafifying a prescribed finite free resolution
 
 Source: Stacks Project, Algebra, Tag 00LP; Schemes, Tag 01HV;
-Modules, Tag 01AG (blueprint: lem-sc-finite-free-resolution-sheafification).
+Modules, Tag 01AG.
 -/
 
 @[expose] public section
@@ -34,9 +34,8 @@ namespace AlgebraicGeometry
 /-- Sheafification of an already specified exact finite free resolution, followed by transport
 along an affine chart and the equivalence between open subschemes and the over-site.
 No coherence, Noetherian hypothesis, or choice of an affine neighbourhood is required.
-Source: Stacks Project, Algebra, Tag 00LP (lemma-resolution-by-finite-free), Schemes,
-Tag 01HV (lemma-spec-sheaves), and Modules, Tag 01AG (lemma-abelian)
-(blueprint: lem-sc-finite-free-resolution-sheafification).
+Source: Stacks Project, Algebra, Tag 00LP, Schemes,
+Tag 01HV, and Modules, Tag 01AG (lemma-abelian).
 
 Proof:
 1. Put `A^(n j)` in cochain degree `-j`, zero in every positive degree, and use `d j`

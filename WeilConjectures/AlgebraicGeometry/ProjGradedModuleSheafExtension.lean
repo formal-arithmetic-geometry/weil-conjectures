@@ -18,7 +18,7 @@ import WeilConjectures.Topology.SheafOfModulesFromIndexedBasis
 # ProjGradedModuleSheafExtension
 
 Source: Stacks Project, Constructions, Section 01M3, Lemma 01M4, Definition 01M6,
-Lemma 01M7 and Lemma 01MB (blueprint: lem-weil-pbc-proj-graded-module-sheaf-extension).
+Lemma 01M7 and Lemma 01MB.
 
 The degree-zero modules are submodules with the already defined `degreeZeroFractions`
 as carriers. All choices of fraction representatives occur in the restriction formula.
@@ -39,8 +39,7 @@ variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
 localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM.
-(blueprint: lem-weil-pbc-proj-graded-module-sheaf-extension) -/
+Source: Stacks, Algebra, Section 00JM. -/
 local instance localizedModuleHomogeneousScalarsExtension (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -95,7 +94,7 @@ private theorem ringRestriction
 
 /-- Extension for a graded-module chart system.
 Source: Stacks Project, Constructions, Section 01M3 before Definition 01M6;
-Lemma 01M7 and Lemma 01MB. (blueprint: lem-weil-pbc-proj-graded-module-sheaf-extension)
+Lemma 01M7 and Lemma 01MB.
 
 Proof:
 1. For each distinct positive homogeneous standard open choose one denominator. Identity

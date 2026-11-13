@@ -279,10 +279,9 @@ private theorem coefficient_of_abstract_transport
 Source: Bhatt--Scholze, Section 6.8, continuous coefficient realization and scalar
 extension of integral coefficients. The construction is the standard inverse-image
 and scalar-extension construction for internal module objects.
-(auxiliary; not a blueprint node)
 
 Proof: put R = O_E,X, S = E_X, U = g* and let A be the abelian sheaf underlying
-continuous E-valued functions on Y. The canonical comparison e : U(S) → A is an
+continuous E-valued functions on Y. The canonical comparison e: U(S) → A is an
 isomorphism of monoids: E is ultrametric as a normed Q_l-algebra and hence totally
 disconnected. Use the functor L = extendScalars(R → S) followed by U.mapMod(S),
 then restriction along e inverse. Each factor is additive and preserves finite

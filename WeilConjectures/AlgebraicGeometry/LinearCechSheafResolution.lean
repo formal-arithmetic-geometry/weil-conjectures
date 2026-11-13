@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.CechSheafLocalQuasiIso
 
 /-! # Čech sheaf resolution with local scalar compatibility
 
-Source: blueprint lem-pc-cech-resolution, displayed complex and proof paragraph 1;
+Source:, displayed complex and proof paragraph 1;
 Stacks Project, Tag 02FU (construction and insertion homotopy).
 -/
 
@@ -29,9 +29,8 @@ namespace AlgebraicGeometry
 /-- The section identifications of the Čech resolution respect scalars on every open.
 This refines the global-ring-linear presheaf description without changing its complex,
 differential, augmentation, or termwise open-direct-image description.
-Source: blueprint lem-pc-cech-resolution, displayed complex and proof paragraph 1;
+Source:, displayed complex and proof paragraph 1;
 Stacks Project, Tag 02FU (construction and insertion homotopy).
-(blueprint: lem-pc-linear-cech-sheaf-resolution).
 
 Proof: Construct P(Z) = j_Z,*(F|Z) as an actual module sheaf on X, with sections
 on B equal to F(Z intersect B), and scalar action through O_X(B) -> O_X(Z intersect B).

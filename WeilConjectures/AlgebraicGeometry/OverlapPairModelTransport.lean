@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.OverlapStageModelRestriction
 
 /-! # The fixed overlap model and its canonical comparison
 
-Source: Stacks Project, Tag 01ZR (2), first proof, restriction to an overlap.
-(blueprint: lem-pc-overlap-pair-model-transport). -/
+Source: Stacks Project, Tag 01ZR (2), first proof, restriction to an overlap. -/
 
 @[expose] public section
 
@@ -32,8 +31,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The tensor and abstract pullbacks are canonically identified by their adjunctions.
-Source: Stacks Project, Tag 0096.
-(blueprint: lem-pc-overlap-pair-model-transport). -/
+Source: Stacks Project, Tag 0096. -/
 abbrev overlapTensorComparison {X Y : Scheme.{u}} (p : X ⟶ Y) :
     Scheme.Modules.tensorPullback p ≅ Scheme.Modules.pullback p :=
   overlapAdjunctionComparison p
@@ -45,15 +43,13 @@ variable {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u})
   (a b : U.I₀)
 
 /-- The structure map of the fixed universal overlap to its stage base.
-Source: Stacks Project, Tag 01ZR (2).
-(blueprint: lem-pc-overlap-pair-model-transport). -/
+Source: Stacks Project, Tag 01ZR (2). -/
 def overlapModelHom : pullback (U.f a) (U.f b) ⟶ Spec (R.obj j) :=
   pullback.fst (U.f a) (U.f b) ≫ U.f a ≫
     pullback.snd f (Spec.map (R.map (homOfLE hij)))
 
 /-- A chart projection from the identity base change of the overlap.
-Source: Stacks Project, Tag 01ZR (2).
-(blueprint: lem-pc-overlap-pair-model-transport). -/
+Source: Stacks Project, Tag 01ZR (2). -/
 def overlapModelChart (d : U.I₀)
     (r : pullback (U.f a) (U.f b) ⟶ U.X d) :
     pullback (overlapModelHom R f hij U a b)
@@ -62,8 +58,7 @@ def overlapModelChart (d : U.I₀)
 
 /-- The map from the limit overlap model to the original limit scheme.
 It is the universal lift with the two indicated projections.
-Source: Stacks Project, Tag 01ZR (2).
-(blueprint: lem-pc-overlap-pair-model-transport). -/
+Source: Stacks Project, Tag 01ZR (2). -/
 def overlapModelLimitToBase :
     pullback (overlapModelHom R f hij U a b) (c.π.app (op j)) ⟶
       pullback f (c.π.app (op i)) :=
@@ -80,8 +75,7 @@ def overlapModelLimitToBase :
       simpa using c.w (homOfLE hij).op)
 
 /-- The limit model map lies over the original stage overlap.
-Source: Stacks Project, Tag 01ZR (2).
-(blueprint: lem-pc-overlap-pair-model-transport). -/
+Source: Stacks Project, Tag 01ZR (2). -/
 lemma overlapModelLimitToBase_comp :
     overlapModelLimitToBase R c f hij U a b ≫ overlapLimitMap R c f hij =
       pullback.fst (overlapModelHom R f hij U a b) (c.π.app (op j)) ≫
@@ -99,8 +93,7 @@ lemma overlapModelLimitToBase_comp :
         (g := c.π.app (op j))).symm
 
 /-- The map from the limit overlap model to either pulled-back chart.
-Source: Stacks Project, Tag 01ZR (2).
-(blueprint: lem-pc-overlap-pair-model-transport). -/
+Source: Stacks Project, Tag 01ZR (2). -/
 def overlapModelLimitChart (d : U.I₀)
     (r : pullback (U.f a) (U.f b) ⟶ U.X d)
     (hr : r ≫ U.f d = pullback.fst (U.f a) (U.f b) ≫ U.f a) :
@@ -111,8 +104,7 @@ def overlapModelLimitChart (d : U.I₀)
       rw [Category.assoc, hr, overlapModelLimitToBase_comp])
 
 /-- The canonical comparison on a chart of the limit overlap model.
-Source: Stacks Project, Tags 01ZR (2) and 0096.
-(blueprint: lem-pc-overlap-pair-model-transport). -/
+Source: Stacks Project, Tags 01ZR (2) and 0096. -/
 abbrev overlapModelLimitComparison
     (N : (d : U.I₀) → (U.X d).Modules) (d : U.I₀)
     (r : pullback (U.f a) (U.f b) ⟶ U.X d)
@@ -135,8 +127,7 @@ abbrev overlapModelLimitComparison
 
 /-- The conjugated transition on the limit of the fixed overlap model.
 This is an explicit map, without choosing a witness of map descent.
-Source: Stacks Project, Tag 01ZR (2), first proof.
-(blueprint: lem-pc-overlap-pair-model-transport). -/
+Source: Stacks Project, Tag 01ZR (2), first proof. -/
 abbrev overlapModelConjugate
     (N : (d : U.I₀) → (U.X d).Modules)
     (M : (pullback f (c.π.app (op i))).Modules)
@@ -163,8 +154,7 @@ abbrev overlapModelConjugate
 
 
 /-- The map from a stage overlap to the original overlap, by its two projections.
-Source: Stacks Project, Tag 01ZR (2).
-(blueprint: lem-pc-overlap-pair-model-transport). -/
+Source: Stacks Project, Tag 01ZR (2). -/
 def overlapPairToOriginal {k : I} (hjk : j ≤ k) :
     let V := U.pullback₁ (overlapStageMap R f hij hjk)
     pullback (V.f a) (V.f b) ⟶ pullback (U.f a) (U.f b) :=
@@ -178,8 +168,7 @@ def overlapPairToOriginal {k : I} (hjk : j ≤ k) :
 
 /-- The map from a stage overlap to the base change of the original overlap.
 Both projections are prescribed; no descent witness is selected.
-Source: Stacks Project, Tag 01ZR (2).
-(blueprint: lem-pc-overlap-pair-model-transport). -/
+Source: Stacks Project, Tag 01ZR (2). -/
 def overlapPairToModel {k : I} (hjk : j ≤ k) :
     let V := U.pullback₁ (overlapStageMap R f hij hjk)
     pullback (V.f a) (V.f b) ⟶
@@ -200,8 +189,7 @@ def overlapPairToModel {k : I} (hjk : j ≤ k) :
         rw [hq])
 
 /-- Compare the restriction of a stage overlap model module with the chart restriction.
-Source: Stacks Project, Tags 01ZR (2), 0095 and 0096.
-(blueprint: lem-pc-overlap-pair-model-transport). -/
+Source: Stacks Project, Tags 01ZR (2), 0095 and 0096. -/
 abbrev overlapModelStageComparison {k : I} (hjk : j ≤ k)
     (N : (d : U.I₀) → (U.X d).Modules) (d : U.I₀)
     (r : pullback (U.f a) (U.f b) ⟶ U.X d)
@@ -241,8 +229,7 @@ abbrev overlapModelStageComparison {k : I} (hjk : j ≤ k)
         _ = _ := hr) (N d)
 
 /-- The first chart comparison, kept as a named construction to prevent expansion.
-Source: Stacks Project, Tags 0095 and 0096.
-(blueprint: lem-pc-overlap-pair-model-transport). -/
+Source: Stacks Project, Tags 0095 and 0096. -/
 @[irreducible]
 def overlapModelStageComparisonFst {k : I} (hjk : j ≤ k)
     (N : (d : U.I₀) → (U.X d).Modules) :=
@@ -252,8 +239,7 @@ def overlapModelStageComparisonFst {k : I} (hjk : j ≤ k)
     (pullback.lift_fst _ _ _)
 
 /-- The second chart comparison, kept as a named construction to prevent expansion.
-Source: Stacks Project, Tags 0095 and 0096.
-(blueprint: lem-pc-overlap-pair-model-transport). -/
+Source: Stacks Project, Tags 0095 and 0096. -/
 @[irreducible]
 def overlapModelStageComparisonSnd {k : I} (hjk : j ≤ k)
     (N : (d : U.I₀) → (U.X d).Modules) :=
@@ -263,8 +249,7 @@ def overlapModelStageComparisonSnd {k : I} (hjk : j ≤ k)
     (pullback.lift_snd _ _ _)
 
 /-- An explicit map on the stage overlap, transported from a fixed-model map.
-Source: Stacks Project, Tag 01ZR (2), first proof.
-(blueprint: lem-pc-overlap-pair-model-transport). -/
+Source: Stacks Project, Tag 01ZR (2), first proof. -/
 @[irreducible]
 def overlapPairMapOfModel {k : I} (hjk : j ≤ k)
     (N : (d : U.I₀) → (U.X d).Modules)
@@ -401,7 +386,6 @@ This is only transport of a given map at a given stage: it does not lift a map
 or assert the existence of a later stage. No finiteness assumptions are needed.
 Source: Stacks Project, Tag 01ZR (2), first proof, identification after restriction;
 Tags 0095 and 0096, composition of inverse images.
-(blueprint: lem-pc-overlap-pair-model-transport).
 
 Proof: At stage k the universal overlap of the pulled-back charts is canonically
 isomorphic to the base change of the fixed overlap. The isomorphism has first

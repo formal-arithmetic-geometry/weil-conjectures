@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.PinnedTensorSquareRightSummand
 /-! # Stalk compatibility of a specified tensor pullback chain map
 
 Source: Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: lem-pc-pinned-tensor-square-component).
 -/
 
 @[expose] public section
@@ -53,8 +52,7 @@ the module tensorator followed by κ_P,p tensor κ_Q,q, identity tensor S(a)_q, 
 injection into the target stalk tensor complex, and the inverse pinned comparison.
 Transitivity proves the summand equality; coproduct extensionality proves the component
 equality. The module generator calculation is used only by the left-route formula.
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), degreewise generator calculation.
-(blueprint: lem-pc-pinned-tensor-square-component). -/
+Source: Stacks Project, perfect.tex, Tag 0DJA(1), degreewise generator calculation. -/
 theorem pinned_tensor_pullback_stalk_component
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

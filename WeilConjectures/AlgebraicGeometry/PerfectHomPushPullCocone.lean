@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 /-! # Representing the stage pullback Hom functors on the original scheme
 
 Source: Stacks Project, Tags 079W, 0D5S and 09RE.
-(blueprint: lem-pc-perfect-hom-push-pull-cocone).
 -/
 
 @[expose] public section
@@ -40,8 +39,7 @@ variable {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
 all testing objects is essential: it pins the representing maps by Yoneda, including
 what their open restrictions do. This is data about derived objects, not triangles
 or colimits of groups.
-Source: Stacks Project, Tags 079W and 0D5S.
-(blueprint: lem-pc-perfect-hom-push-pull-cocone). -/
+Source: Stacks Project, Tags 079W and 0D5S. -/
 structure PerfectHomPushPullData (Q : schemeDerivedCategory Y)
     (F : Set.Ici i ⥤ schemeDerivedCategory Y) (d : Cocone F) where
   stageQCoh : ∀ j, schemeDerivedQCohProperty Y (F.obj j)
@@ -139,7 +137,6 @@ quasi-coherent derived objects on Y. No Mayer--Vietoris triangles, cover, perfec
 source object, or group-colimit comparisons are asserted.
 
 Source: Stacks Project, Tags 079W, 0D5S and 09RE.
-(blueprint: lem-pc-perfect-hom-push-pull-cocone).
 
 Proof: Write pi_j for the projection of Y_j = Y x Spec(R_j) to Y, and pi_inf
 for the limit projection. Represent Hom(Lpi_j* M,Lpi_j* Q) by
@@ -148,8 +145,8 @@ Use its Hom equivalence for every M; its left naturality gives stageNatural.
 For j <= k, transport on these Hom functors is perfectStageMap, which is natural
 in M by the naturality of the counit-pinned pullback composition comparison.
 Conjugate transport by the adjunction equivalences to obtain a natural map
-mu_M : Hom(M,B_j) -> Hom(M,B_k). Evaluate mu at M = B_j and id to define the
-representing arrow. Naturality with respect to f : M -> B_j says
+mu_M: Hom(M,B_j) -> Hom(M,B_k). Evaluate mu at M = B_j and id to define the
+representing arrow. Naturality with respect to f: M -> B_j says
 f followed by this arrow equals mu_M(f); this is the elementary Yoneda argument.
 The identity law is read from perfect_hom_stage_colimit at the identity arrow.
 The composition law follows from perfectHomMap_trans. Applying the injective

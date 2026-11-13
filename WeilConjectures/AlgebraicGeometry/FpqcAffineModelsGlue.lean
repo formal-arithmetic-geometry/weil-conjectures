@@ -84,7 +84,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Effective affine-open models give a global pullback projection, invariant locally.
 Source: Stacks Project, Descent, Tag 02W3, general-base part of the proof, and
 Schemes, Tag 01LH.
-(blueprint: lem-galois-fpqc-affine-models-glue)
 
 For each affine open U choose the effective model of E_U. For an inclusion of
 an affine open B into U, pull back the U-model to B. The two effective models

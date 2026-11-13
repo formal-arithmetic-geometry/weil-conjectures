@@ -107,7 +107,6 @@ Proof: assume the displayed quasi-isomorphism from P to the restriction of C.
 The bounded flat representatives compute derived pullback termwise; the
 quasi-isomorphism is preserved, and taking homology gives the displayed
 isomorphism for every scheme map and degree.
-(blueprint: lem-pc-flat-model-finite-free-shortening-comparison).
 Proof: The construction argument supplies the stated local data and its induced
 quasi-isomorphism. Pulling it back along any scheme map preserves it for these
 finite-free and flat complexes; taking homology gives the displayed isomorphism.

@@ -13,7 +13,6 @@ import Mathlib.Data.Fintype.Order
 # Simultaneous descent of a finite family of scheme morphisms
 
 Source: Stacks Project, Limits 01ZM(2).
-(blueprint: lem-pbc-finite-pullback-hom-descent).
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ its individual stage. The first projection formula gives the structure-map equat
 Functoriality of pullback maps and the cone naturality equation give the equality
 with the original limit morphism. For an empty family choose i; there are no maps
 or equations to supply. This proves all assertions without choosing arbitrary
-geometric objects: the domains are the specified canonical pullbacks.
-(blueprint: lem-pbc-finite-pullback-hom-descent). -/
+geometric objects: the domains are the specified canonical pullbacks. -/
 theorem finite_pullback_hom_descent
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

@@ -13,8 +13,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-! # Localized Mayer--Vietoris endpoint families
 
-Source: Stacks Project, Tags 08BV and 08DR
-(blueprint: def-perfect-gluing-endpoint-properties).
+Source: Stacks Project, Tags 08BV and 08DR.
 -/
 
 @[expose] public section
@@ -34,7 +33,7 @@ variable (Y : Scheme.{u})
 
 /-- Restrict to the localized site of an open and take derived direct image back.
 This uses the actual right adjoint to restriction, not an unspecified witness.
-Source: Stacks Project, Tag 08BV (blueprint: def-perfect-gluing-endpoint-properties). -/
+Source: Stacks Project, Tag 08BV. -/
 def perfectGluingDirectImage (W : Y.Opens) :
     DerivedCategory (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W)) ⥤
       schemeDerivedCategory Y := by
@@ -52,15 +51,13 @@ def perfectGluingDirectImage (W : Y.Opens) :
   exact G.rightDerivedFunctor
 
 /-- Restrict to an open and take its derived direct image.
-Source: Stacks Project, Tag 08BV (blueprint: def-perfect-gluing-endpoint-properties). -/
+Source: Stacks Project, Tag 08BV. -/
 def perfectGluingLocalTerm (W : Y.Opens) :
     schemeDerivedCategory Y ⥤ schemeDerivedCategory Y :=
   (SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) W).mapDerivedCategory ⋙
     perfectGluingDirectImage Y W
 
-/-- Restrictions of perfect quasi-coherent objects to a localized open site.
-Source: Step 2 of lem-pc-perfect-complexes-compact-set
-(blueprint: def-perfect-gluing-endpoint-properties). -/
+/-- Restrictions of perfect quasi-coherent objects to a localized open site. -/
 def perfectGluingRestrictionProperty (W : Y.Opens) :
     ObjectProperty
       (DerivedCategory (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W))) :=
@@ -69,7 +66,7 @@ def perfectGluingRestrictionProperty (W : Y.Opens) :
       (moduleRings Y.toRingedSpace) W).mapDerivedCategory.obj E.obj ≅ Z)
 
 /-- The possible middle terms in the two-open Mayer--Vietoris triangle.
-Source: Stacks Project, Tag 08BV (blueprint: def-perfect-gluing-endpoint-properties). -/
+Source: Stacks Project, Tag 08BV. -/
 def perfectGluingMiddleProperty (A B : Y.Opens) :
     ObjectProperty (schemeDerivedCategory Y) := fun Z ↦
   ∃ E : schemeDerivedQCohCategory Y, IsPerfect Y E.obj ∧
@@ -77,7 +74,7 @@ def perfectGluingMiddleProperty (A B : Y.Opens) :
       (perfectGluingLocalTerm Y B).obj E.obj) ≅ Z)
 
 /-- The possible overlap terms in the two-open Mayer--Vietoris triangle.
-Source: Stacks Project, Tag 08BV (blueprint: def-perfect-gluing-endpoint-properties). -/
+Source: Stacks Project, Tag 08BV. -/
 def perfectGluingOverlapProperty (A B : Y.Opens) :
     ObjectProperty (schemeDerivedCategory Y) := fun Z ↦
   ∃ E : schemeDerivedQCohCategory Y, IsPerfect Y E.obj ∧

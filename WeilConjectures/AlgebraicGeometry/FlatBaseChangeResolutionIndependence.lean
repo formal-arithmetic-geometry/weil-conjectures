@@ -59,7 +59,6 @@ set_option maxHeartbeats 600000 in
 -- Comparing the nested module-sheaf functors and four homology transports needs this budget.
 /-- Resolution comparison and homotopy invariance of the flat base-change morphism.
 Source: Stacks, Cohomology, Tag 02N7 and Derived Categories, Tags 013P, 013S.
-(blueprint: lem-weil-pbc-flat-base-change-resolution-independence).
 
 Proof: Compare I and I₁ by lifts of the identity of F, and J and J₁ by lifts of
  the identity of g'^*F. Their composites are homotopic to identities. Pushforward

@@ -16,9 +16,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Base change and the neighbourhood limit
-
-Source: Weil conjectures blueprint, `sec-curve-estimates/lem-sc-second-kummer-divisors`,
-(blueprint: lemma-weil-pbc-fibre-product-limit).
 -/
 
 @[expose] public section
@@ -36,21 +33,16 @@ This states the canonical isomorphism with the inverse limit without assuming th
 exists beforehand. The order of the two factors is immaterial: `Over.pullback f` uses
 `V ×_S X` with its projection to `X`.
 
-Source: blueprint `sec-curve-estimates/lem-sc-second-kummer-divisors`,
-(blueprint: lemma-weil-pbc-fibre-product-limit).
-
 Proof:
 1. The strict-henselization cone is limiting on the small affine representatives by
    `lem-weil-pbc-spec-small-colimit-limit`. Transport through the affine spectrum
-   equivalence, and then along the initial affine inclusion
-   (`lemma-weil-pbc-affine-neighbourhood-cofinal` and
-   `lem-weil-pbc-colimit-initial-full-subcategory`), to get the full neighbourhood cone.
+   equivalence, and then along the initial affine inclusion, to get the full neighbourhood cone.
    Its leg at `(S,s)` is the structure map `p`; all its legs are over `S`.
 2. A compatible cone to the fibre products gives a compatible cone to the neighbourhoods
    and hence a unique map to the strict henselization. Its components to `X` agree:
-   cofilteredness (`lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered`) supplies common
+   cofilteredness supplies common
    refinements. The component at `(S,s)` ensures that the two maps agree over `S`.
-3. The fibre-product universal property (`def-pc-fibre-product`) gives the unique map to
+3. The fibre-product universal property gives the unique map to
    the vertex of the displayed cone. Equality of its two components proves uniqueness,
    so this cone is limiting and gives the canonical comparison isomorphism. -/
 theorem fibre_product_neighbourhood_limit

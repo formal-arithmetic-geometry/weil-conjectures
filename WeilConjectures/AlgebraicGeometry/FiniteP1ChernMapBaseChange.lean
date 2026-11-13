@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctorConj
 /-! # Base change of the projective-line Chern map
 
 This is the geometric Chern-square part of the adjunct base-change argument.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public noncomputable section
@@ -452,9 +451,6 @@ attribute [local irreducible] AlgebraicGeometry.ProjectiveSpace
 -- The original interface retains hN; this naturality proof works without positivity.
 set_option linter.unusedVariables false in
 /-- The normalized projective-line Chern maps satisfy the inverse-image square.
-Source: the base-change step in blueprint `thm-amb-p1-decomposition`, the arbitrary-scheme
-Kummer and Picard pullback identities, and the pullback isomorphism for O(1).
-(auxiliary; not a blueprint node)
 
 The normalized roots comparison is the canonical one, since its composite with the
 kernel inclusion is specified. The coefficient-line normalization at 1 makes the roots

@@ -85,8 +85,7 @@ assumed operator stability sends this solution into S_(n+1) along the degeneracy
 Combine these finite cofans and the chosen one for N to present the whole top
 term. Lower cofans are retained via the restriction equality. All new affine
 pieces have the finiteness properties required for a replacement stage, and
-the boundary cover gives its matching surjectivity.
-(auxiliary; not a blueprint node) -/
+the boundary cover gives its matching surjectivity. -/
 theorem exists_local_replacement_stage_extension
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale) (hK : IsEtaleHypercover K)

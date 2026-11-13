@@ -29,7 +29,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- The section complex associated to an affine base is flat over that base termwise.
 No cohomology comparison, cover condition, or existence of a complex is asserted.
 Source: Stacks Project, Tag 02KE, proof of flat base change, and Tag 01U4.
-(blueprint: lem-pc-finite-affine-cech-model-flat-over).
 
 Proof: Since T is affine and f is separated, X is separated and each nonempty finite
 intersection of the affine V_i is affine. Apply hF to that intersection and the top

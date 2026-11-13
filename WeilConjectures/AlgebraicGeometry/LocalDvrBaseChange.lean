@@ -15,10 +15,6 @@ import WeilConjectures.AlgebraicGeometry.DensePoints
 
 /-!
 # Local orders at rational points after extension of algebraically closed fields
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-thm-sc-constant-invariance, affine-case unit quotient paragraph
-(blueprint: lem-sc-local-dvr-base-change).
 -/
 
 @[expose] public section
@@ -71,8 +67,7 @@ private theorem ord_eq_of_stalk_uniformizer
       Multiplicative.toAdd (z.unzeroD 1)) hfrac
 
 /-- The unique point over a rational closed point has a DVR stalk, and pullback preserves
-normalized orders. Source: blueprint thm-sc-constant-invariance, affine-case unit quotient
-paragraph (blueprint: lem-sc-local-dvr-base-change).
+normalized orders.
 
 Proof:
 1. Choose an affine neighbourhood Spec A of P. Its residue field is k because P is closed,

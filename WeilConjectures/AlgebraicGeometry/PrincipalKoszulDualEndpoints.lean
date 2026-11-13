@@ -10,7 +10,6 @@ import all WeilConjectures.AlgebraicGeometry.PrincipalKoszulDualDifferential
 /-! # Singleton dual transitions and the degree-zero unit
 
 Source: Stacks Project, algebraization.tex, Tag 0A0E.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -536,7 +535,6 @@ private theorem finiteDualTerm_unit (m : ℕ) :
 components and the degree-zero unit component.
 
 Source: Stacks Project, algebraization.tex, Tag 0A0E, singleton dual Koszul calculation.
-(auxiliary; not a blueprint node).
 
 Proof: naturality of the total-tensor right unitor removes the constant unit from
 the positive singleton diagram, including its forward map. The positive map is

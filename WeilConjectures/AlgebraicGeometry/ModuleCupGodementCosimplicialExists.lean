@@ -78,7 +78,6 @@ private theorem presentation_full : SimplexCategoryGenRel.toSimplexCategory.Full
 
 /-- The unit insertions and multiplication collapses form a cosimplicial object.
 Source: Stacks Project, Tag 0FKR; Banerjee, arXiv:1004.1491, §1.1.4, pp. 15–16.
-(blueprint: lem-sc-module-cup-godement-cosimplicial-exists)
 Proof: take the stalk functor to families of stalk modules and its right adjoint,
 the product of stalk skyscrapers. The product of skyscraperHomEquiv gives the
 adjunction. Its endofunctor and unit are the concrete Godement object, map and

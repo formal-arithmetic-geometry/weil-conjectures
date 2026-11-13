@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSe
 /-! # Local spanning of associated graded quotients
 
 Source: Stacks Project, proof of Lemma 0884, affine power refinement.
-(blueprint: lem-weil-pbc-formal-polynomial-quotient-span).
 -/
 
 @[expose] public section
@@ -64,7 +63,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Projections of homogeneous evaluation lifts locally span each graded quotient.
 Source: Stacks Project, proof of Lemma 0884, associated graded algebra refinement;
 Schemes, Tags 01I8 and 01IC, for affine quotients and ideal powers.
-(blueprint: lem-weil-pbc-formal-polynomial-quotient-span).
 
 Proof: fix k, U and a point y of U. Choose an affine neighbourhood W contained in U.
 Every power module is quasi-coherent: in degree zero it is the structure module,

@@ -15,10 +15,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 
 /-!
 # Descent of lissity along a surjective etale map
-
-Source: smooth purity blueprint, final paragraph of
-`lem-weil-pbc-finite-pushforward-generic-constructible`.
-(blueprint: lem-weil-pbc-lisse-etale-surjective-descent).
 -/
 
 @[expose] public section
@@ -58,11 +54,6 @@ private theorem isConstant_over_iff_setRestriction {X : Scheme.{u}} (U : X.Etale
     exact Sheaf.isConstant_congr _ (overSetIsoRestriction U F).symm
 
 /-- Lissity of a set sheaf descends through a surjective etale cover.
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, proof of
-`lem-weil-pbc-finite-pushforward-generic-constructible`, final paragraph;
-step 5 of `lem-weil-pbc-finite-map-generic-lisse-preservation`.
-(blueprint: lem-weil-pbc-lisse-etale-surjective-descent).
 
 Proof: Choose an etale cover of T trivializing p inverse image F. Compose its
 members with p. Surjectivity makes the composite family a cover of Y, and

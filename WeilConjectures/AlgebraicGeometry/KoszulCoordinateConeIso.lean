@@ -19,7 +19,6 @@ import WeilConjectures.Algebra.Homology.ChainConeCoordinatesIso
 /-! # A Koszul coordinate as a scalar mapping cone
 
 Source: Stacks Project, Tag 0629.
-(blueprint: lem-pc-koszul-coordinate-cone-iso).
 -/
 
 @[expose] public section
@@ -157,7 +156,6 @@ private theorem koszul_cone_coordinates (A : Type u) [CommRing A] (r : ℕ)
 /-- The sheafified Koszul complex, with one distinguished coordinate, is the
 mapping cone of multiplication by that coordinate on the remaining complex.
 Source: Stacks Project, More on Algebra, Tags 0628 and 0629.
-(blueprint: lem-pc-koszul-coordinate-cone-iso).
 
 Proof: Reindex the standard basis by the equivalence which places `i` last
 and sends the preceding coordinates to `i.succAbove`. Exterior powers of this

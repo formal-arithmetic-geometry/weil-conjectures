@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ProjChartRestrictionIsLocalized
 # Localization of sections of a graded-module chart
 
 Source: Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-principal-localization)
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
 localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-principal-localization) -/
+Source: Stacks, Algebra, Section 00JM. -/
 local instance localizedModuleHomogeneousScalarsPrincipalLocalization (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -54,7 +52,7 @@ its chart module localized at the defining element, with canonical scalars and
 normalization on restrictions of whole-chart sections.
 
 Source: Stacks Project, Constructions, Lemmas 01M4 (1)(e),(h), 01M7 and 01MB,
-last paragraph. (blueprint: lem-weil-pbc-proj-graded-module-chart-principal-localization)
+last paragraph.
 
 Proof:
 Identify whole-chart sections with Z f by restriction along the chart inclusion

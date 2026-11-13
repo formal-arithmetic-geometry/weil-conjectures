@@ -20,12 +20,10 @@ import WeilConjectures.AlgebraicGeometry.BoundedConstructibleTower
 
 /-! # Closed slice comparison with transported pro-etale coefficients
 
-Comparison data and their defining section and representative equations
-(auxiliary; not a blueprint node).
+Comparison data and their defining section and representative equations.
 
 Source: Hemo--Richarz--Scholbach, Lemma 4.5, and Stacks Project, Tags 03CE,
-03EL, 07A4, 08J7, 08J9, 08JB and 0FPT
-(auxiliary; not a blueprint node).
+03EL, 07A4, 08J7, 08J9, 08JB and 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -39,15 +37,14 @@ open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 namespace AlgebraicGeometry.Scheme
 
 /-- Slice coefficients, written on the equivalent small site of the source scheme.
-Source: Stacks 03CE (auxiliary; not a blueprint node). -/
+Source: Stacks 03CE. -/
 abbrev proEtaleSliceRing {X : Scheme.{u}} (U : X.ProEt)
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   (AlgebraicGeometry.ProEtale.localizationRestriction CommRingCat.{u + 1}
     U.hom U.prop).obj O
 
 /-- Exact sectionwise module restriction, under the canonical equivalence with the slice.
-Source: Stacks 03CE, 08JB
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03CE, 08JB. -/
 def proEtaleSliceModuleRestriction {X : Scheme.{u}} (U : X.ProEt)
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     proEtaleRingModules X O ⥤ proEtaleRingModules U.left (proEtaleSliceRing U O) :=
@@ -57,8 +54,7 @@ def proEtaleSliceModuleRestriction {X : Scheme.{u}} (U : X.ProEt)
     (J := ProEt.topology U.left) (K := ProEt.topology X) (𝟙 _)
 
 /-- The coefficient isomorphism b = c after the inverse of the canonical delta.
-Source: HRS Lemma 4.5 and Stacks 03CE
-(auxiliary; not a blueprint node). -/
+Source: HRS Lemma 4.5 and Stacks 03CE. -/
 def proEtaleSliceCoefficientIso {X : Scheme.{u}} (U : X.ProEt)
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (B : Sheaf (ProEt.topology U.left) CommRingCat.{u + 1})
@@ -69,8 +65,7 @@ def proEtaleSliceCoefficientIso {X : Scheme.{u}} (U : X.ProEt)
 
 /-- Termwise scalar transport: underlying abelian sheaves and maps are unchanged,
 and the B-action is restriction along b inverse.
-Source: Stacks 03CZ, 03CY
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03CZ, 03CY. -/
 abbrev proEtaleSliceScalarTransport {X : Scheme.{u}} (U : X.ProEt)
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (B : Sheaf (ProEt.topology U.left) CommRingCat.{u + 1})
@@ -78,14 +73,13 @@ abbrev proEtaleSliceScalarTransport {X : Scheme.{u}} (U : X.ProEt)
   SheafOfModules.scalarRestriction.{u + 1, u, u + 1} b.inv
 
 /-- The fixed ordinary derived internal Hom on arbitrary pro-etale coefficients.
-Source: Stacks 08J7 (auxiliary; not a blueprint node). -/
+Source: Stacks 08J7. -/
 abbrev proEtaleCoefficientHom (X : Scheme.{u})
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   derivedInternalHomOfUniverses.{u + 1, u, u + 1} (ProEt.topology X) O
 
 /-- The distinguished inverse-image section, followed by extension of scalars.
-Source: Stacks 03CE, 03D2, 03EL
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03CE, 03D2, 03EL. -/
 def proEtaleSlicePullbackSection {X : Scheme.{u}} (U : X.ProEt)
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (B : Sheaf (ProEt.topology U.left) CommRingCat.{u + 1})
@@ -108,15 +102,15 @@ variable {X : Scheme.{u}} (U : X.ProEt)
   (delta : ProEtaleObjectRestrictionComparison U CommRingCat.{u + 1})
 
 /-- The fixed scalar isomorphism b = c delta inverse, without a new coefficient choice.
-Source: Stacks 03CE (auxiliary; not a blueprint node). -/
+Source: Stacks 03CE. -/
 abbrev b := proEtaleSliceCoefficientIso U O B c delta
 
 /-- Scalar transport along b inverse, acting identically on underlying abelian sheaves.
-Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
+Source: Stacks 03CZ. -/
 abbrev e := proEtaleSliceScalarTransport U O B (b U O B c delta)
 
 /-- Actual exact module inverse image with the specified coefficient isomorphism c.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 03EL. -/
 abbrev f := proEtaleRingModulePullback U.hom O B c
 
 variable (S : CoefficientClosedStructure (proEtaleCoefficientHom X O))

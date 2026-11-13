@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawTrianglePullbackExt
 /-! # Identity of raw cohomology pullback
 
 Source: Stacks Project, Tag 09Z1, canonical cohomology comparison maps.
-(blueprint: lem-sbc-higher-image-raw-pullback-identity).
 -/
 
 @[expose] public section
@@ -168,9 +167,8 @@ private lemma upperStarComp_identity_inv
   simp
 
 /-- The explicit raw pullback of an identity arrow is the identity on classes.
-Source: Stacks Project, Tag 09Z1 (lemma-relative-colimit), canonical comparison maps;
-Tag 015F (lemma-right-derived-exact-functor), exact derived inverse image.
-(blueprint: lem-sbc-higher-image-raw-pullback-identity).
+Source: Stacks Project, Tag 09Z1, canonical comparison maps;
+Tag 015F, exact derived inverse image.
 
 Proof: Let P be inverse image along the identity scheme map and e:P iso identity
 its canonical unit comparison. Apply upperStarComp_id_left separately to A.hom

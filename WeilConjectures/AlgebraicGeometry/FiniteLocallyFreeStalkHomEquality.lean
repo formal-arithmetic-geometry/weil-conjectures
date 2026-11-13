@@ -14,7 +14,6 @@ import all WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMapEquality
 /-! # Shrinking equality of morphisms with finite locally free source
 
 Source: Stacks Project, Tag 05GF, Lemma 10.79.2, finite relations argument.
-(blueprint: lem-sc-finite-locally-free-stalk-hom-equality)
 -/
 
 @[expose] public section
@@ -78,7 +77,6 @@ private theorem exists_shrink_of_stalk_eq
 
 /-- Equality on germs of local sections gives equality on a smaller neighbourhood.
 Source: Stacks Project, Tag 05GF, Lemma 10.79.2.
-(blueprint: lem-sc-finite-locally-free-stalk-hom-equality)
 
 Proof: Intersect U with a finite free frame neighbourhood for M at x. Apply the
 given equality of germs to the finitely many frame sections on this intersection.

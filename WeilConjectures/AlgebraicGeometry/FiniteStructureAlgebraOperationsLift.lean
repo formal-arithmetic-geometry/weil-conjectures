@@ -69,8 +69,7 @@ comparison hc identify the two composites with the displayed transition equality
 This equality holds on every open, without an affineness assumption. Empty schemes,
 zero modules and empty opens give the zero ring and the same construction. No data
 is defined by choosing a witness of mere existence: operations are determined
-uniquely by full faithfulness, and B is built explicitly from these operations.
-(blueprint: lem-weil-pbc-finite-structure-algebra-operations-lift). -/
+uniquely by full faithfulness, and B is built explicitly from these operations. -/
 theorem finite_structure_algebra_operations_lift
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]

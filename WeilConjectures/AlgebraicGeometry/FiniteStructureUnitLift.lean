@@ -21,8 +21,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 /-! # Lift the unit of finite structure sheaves
 
-Source: Stacks Project, Tag 09ZT
-(blueprint: lem-weil-pbc-finite-structure-unit-lift).
+Source: Stacks Project, Tag 09ZT.
 -/
 
 @[expose] public section
@@ -58,8 +57,7 @@ unit law. For uniqueness, if η and η' both satisfy the left unit law, then on 
 μ(η(1),η'(1)) equals η'(1) by the first law and η(1) by symmetry and the second law.
 Thus η(1)=η'(1); linearity gives η(r)=rη(1)=rη'(1)=η'(r). Sectionwise extensionality
 proves equality of the module morphisms. No properness of O_X itself is assumed.
-For the zero algebra or an empty scheme all maps are the unique zero maps.
-(blueprint: lem-weil-pbc-finite-structure-unit-lift). -/
+For the zero algebra or an empty scheme all maps are the unique zero maps. -/
 theorem finite_structure_unit_lift
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]

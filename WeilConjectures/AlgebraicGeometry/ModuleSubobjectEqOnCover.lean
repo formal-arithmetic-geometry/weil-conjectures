@@ -61,7 +61,6 @@ private theorem comp_cokernel_eq_zero_on_cover {X : Scheme.{u}} {ι : Type v}
 /-- Equal section ranges locally on a cover identify two module subobjects.
 
 Source: Stacks Project, Lemma 087X, affine-local verification of kernel image equalities.
-(blueprint: new-module-subobject-eq-on-cover).
 
 Proof: Range inclusion on W ∩ U_i makes g followed by the cokernel projection of f
 zero there: every value of g is a value of f, which the projection kills. Apply the

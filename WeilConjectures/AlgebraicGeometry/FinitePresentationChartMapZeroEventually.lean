@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Eventual vanishing on a fixed affine cover chart
 
-Source: Stacks Project, Tag 01ZR (3).
-(blueprint: lem-pc-fp-chart-map-zero-eventually). -/
+Source: Stacks Project, Tag 01ZR (3). -/
 
 @[expose] public section
 
@@ -97,9 +96,8 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A map on a base-changed affine chart, with finite type source and finitely
 presented target, vanishes at some finite stage if it vanishes after pullback to the limit.
 Source: Stacks Project, Tag 01ZR (3), applied to a single affine cover chart.
-(blueprint: lem-pc-fp-chart-map-zero-eventually).
 
-Proof: Write W for the chart at k and b : W → Spec(R_k) for its structural map.
+Proof: Write W for the chart at k and b: W → Spec(R_k) for its structural map.
 The stage map X_k → X_j is affine, since it is a base change of a map between
 spectra. Thus W, the inverse image of an affine chart of U, is affine, and b is
 quasi-compact. Apply finitePresentation_zero_map_descent to b with both initial

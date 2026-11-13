@@ -28,7 +28,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Proper pushforward preserves coproducts for arbitrary finite rings
 
 Source: Stacks Project, Tags 0F0D, 0F11 and 095U.
-(blueprint: lem-sfb-finite-proper-derived-coproducts)
 -/
 
 @[expose] public section
@@ -225,7 +224,6 @@ private theorem ring_geometric_detects_zero
 
 /-- Proper derived direct image preserves arbitrary coproducts over a finite ring.
 Source: Stacks Project, Tags 0F0D, 0F11, 095U.
-(blueprint: lem-sfb-finite-proper-derived-coproducts)
 
 Proof: forgetting coefficients is exact, conservative and preserves coproducts.
 Its bounded derived comparison identifies every higher direct image with the

@@ -45,7 +45,6 @@ its pushforward pairing is perfect when the structure-sheaf unit is invertible.
 No finite local freeness or rank condition on the direct image is required.
 
 Source: Stacks Project, Tag 0BDP, final paragraph, converse implication.
-(blueprint: lem-sc-picard-perfect-pairing-of-counit)
 
 Proof: For each Y-module P, adjunction identifies maps P to p_*D with maps p^*P
 to D. Perfectness identifies the latter with maps M tensor p^*P to O_X.

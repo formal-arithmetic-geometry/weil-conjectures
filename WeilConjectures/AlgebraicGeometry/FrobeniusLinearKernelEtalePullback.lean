@@ -17,7 +17,6 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 # Kernel transport to an open étale chart
 
 Source: Stacks Project, Tags 03DR, 03DT and 0GKU.
-(blueprint: lem-fd-frobenius-linear-kernel-etale-pullback).
 -/
 
 @[expose] public section
@@ -63,7 +62,6 @@ isomorphism `Φ` between the restricted étale sheaf of `E` and the étale sheaf
 
 Source: Stacks Project, Tags 03DR (35.8.0.1), 03DT, and 0GKU, the passage to a
 trivializing open in the proof of lemma-frobenius-linear-on-vb.
-(blueprint: lem-fd-frobenius-linear-kernel-etale-pullback).
 
 Proof: use etaleTensorSectionsSheaf_openIdentification to identify restriction of
 the given sheaf with the tensor-section sheaf of the ordinary module restriction.

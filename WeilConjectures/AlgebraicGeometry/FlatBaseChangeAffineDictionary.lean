@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.FlatBaseChangeAffineTarget
 
 Source: Stacks Project, Tags 02KH and 02N7; Tags 01E4 and 03FD for the
 higher-direct-image and module/abelian cohomology identifications.
-(blueprint: lem-weil-pbc-flat-base-change-affine-dictionary)
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ set_option maxHeartbeats 700000 in
 -- The affine cohomology comparison elaborates substantial derived-category terms.
 /-- Normalized affine section identifications, before choosing a resolution lift.
 Source: Stacks Project, Tags 02KH (affine-local reduction), 01XJ, 01E4 and 03FD.
-(blueprint: lem-weil-pbc-flat-base-change-affine-dictionary)
 
 Proof: Set U = f inverse V and N = F restricted to U. The given D identifies
 its resolutions with the restrictions of I and J to U and g' inverse U,

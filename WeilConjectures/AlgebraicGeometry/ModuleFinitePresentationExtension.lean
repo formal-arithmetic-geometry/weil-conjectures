@@ -15,8 +15,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Extension of finitely presented modules and their morphisms
 
-Source: Stacks Project, Properties of Schemes, Lemma 28.23.4, Tag 01PI
-(blueprint: lem-weil-pbc-module-finite-presentation-extension).
+Source: Stacks Project, Properties of Schemes, Lemma 28.23.4, Tag 01PI.
 
 Restriction to an open is expressed on the localized site with `SheafOfModules.over`.
 -/
@@ -74,8 +73,7 @@ private theorem finitePresentation_affine_enlargement
 
 /-- A morphism from a finitely presented module on a quasi-compact open of a qcqs scheme
 into a quasi-coherent module extends to a finitely presented module on the whole scheme.
-Source: Stacks Project, Properties of Schemes, Lemma 28.23.4, Tag 01PI
-(blueprint: lem-weil-pbc-module-finite-presentation-extension).
+Source: Stacks Project, Properties of Schemes, Lemma 28.23.4, Tag 01PI.
 
 Proof:
 1. Extend G and its map quasi-coherently across U using

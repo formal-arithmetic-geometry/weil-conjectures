@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomOpenMateResolutionNormalizati
 /-! # The open direct-image mate of the fixed pullback comparison
 
 Source: Stacks Project, Cohomology, Tags 08FE, 079W and 0D5S.
-(blueprint: lem-pc-perfect-hom-open-comparison-mate-is-iso).
 -/
 
 @[expose] public section
@@ -125,7 +124,6 @@ of the testing and coefficient objects.
 
 Source: Stacks Project, Cohomology, Lemma 20.32.4 (Tag 08FE),
 Lemma 20.28.1 (Tag 079W), and Lemma 20.27.2 (Tag 0D5S).
-(blueprint: lem-pc-perfect-hom-open-comparison-mate-is-iso).
 
 Proof: Put pi = pullback.fst s r and pi' = pullback.fst (B.ι ≫ s) r.
 The maps b and pi' identify B x_S T with the inverse-image open pi inverse B:

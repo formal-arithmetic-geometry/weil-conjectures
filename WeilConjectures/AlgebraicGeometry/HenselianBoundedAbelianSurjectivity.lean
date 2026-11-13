@@ -33,7 +33,6 @@ it is independent of the general-coefficient effacement theorem in Gabber.lean.
 
 Source: Stacks Project, Tags 09ZE (finite-coefficient effacement), 09ZH (degree zero)
 and 09ZI (the long-exact-sequence induction).
-(blueprint: lem-weil-pbc-henselian-bounded-abelian-surjectivity)
 
 Proof: Regard G as a sheaf of modules over the finite ring Z/n. To prove comparison
 in all degrees for these sheaves, first use 09ZE within Z/n-module sheaves. Here

@@ -23,8 +23,7 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The first-repeat sum before pushforward and extension.
-Source: Stacks 01FM, equation 20.23.6.2.
-(blueprint: lem-pc-ordered-cech-second-sorting-degreewise). -/
+Source: Stacks 01FM, equation 20.23.6.2. -/
 noncomputable def orderedCechSecondSortingValue {X' : Scheme.{u}}
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)
@@ -50,7 +49,6 @@ noncomputable def orderedCechSecondSortingValue {X' : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 /-- The explicit second-sorting formula lifts to locally linear module-sheaf maps.
 Source: Stacks 01FM, equation 20.23.6.2.
-(blueprint: lem-pc-ordered-cech-second-sorting-degreewise).
 
 Proof: Project through e in degree p+1 to every duplicated sorted tuple, restrict
 along its product map, multiply by the permutation sign and the first-repeat sign,

@@ -20,8 +20,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Perfect direct image along a proper perfect morphism
 
-Source: literature/stacks-project/more-morphisms.tex, Lemma 37.61.13, Tag 0B6G
-(blueprint: lem-pc-proper-perfect-direct-image-perfect).
+Source: literature/stacks-project/more-morphisms.tex, Lemma 37.61.13, Tag 0B6G.
 -/
 
 @[expose] public section
@@ -36,9 +35,9 @@ namespace AlgebraicGeometry
 preserves perfect objects. Perfectness of the morphism is expressed by the equivalent
 stalkwise finite Tor criterion of Stacks Lemma 37.61.11.
 Source: Stacks Project, More on Morphisms, Lemma 37.61.13, Tag 0B6G.
-Proof: (1) Properness (def-weil-proper-morphism) gives finite type, a Noetherian source,
+Proof: (1) Properness gives finite type, a Noetherian source,
 and proper supports for the coherent cohomology of P. Locally P has a bounded strictly
-perfect representative (def-pc-perfect-complex), so its cohomology is coherent. A finite
+perfect representative, so its cohomology is coherent. A finite
 open cover of the quasi-compact source makes the cohomological bounds uniform. The
 finite Tor dimension of the source local rings implies that these local representatives
 have finite Tor dimension over the inverse image of the target structure sheaf; local
@@ -46,8 +45,7 @@ bounds become uniform by quasi-compactness.
 (2) Apply lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect (Stacks Tag 08EV)
 with S = Y and E = P: the target is Noetherian, f is locally of finite type, P is bounded
 coherent, its supports are proper, and its relative Tor dimension is finite. The
-criterion concludes that Rf_*P is perfect on Y.
-(blueprint: lem-pc-proper-perfect-direct-image-perfect). -/
+criterion concludes that Rf_*P is perfect on Y. -/
 theorem proper_perfect_directImage_perfect
     {X Y : Scheme.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

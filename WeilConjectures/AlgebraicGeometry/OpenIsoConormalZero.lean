@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.UniversalThickeningOpenRestriction
 # Conormal vanishing on an open subscheme mapping isomorphically to the base
 
 Source: Stacks Project, Tags 04FA and 04FF.
-(blueprint: lem-weil-pbc-open-iso-conormal-zero).
 -/
 
 @[expose] public section
@@ -71,7 +70,6 @@ private theorem iso_conormal_isZero {Z S Z' : Scheme.{u}} (h : Z ⟶ S)
 /-- Restricting the universal conormal to an open subscheme on which the structure
 morphism is an isomorphism gives a zero module. No flatness is needed.
 Source: Stacks Project, Tag 04FA and the calculation C_{X/X} = 0 in Tag 04FF.
-(blueprint: lem-weil-pbc-open-iso-conormal-zero).
 Proof: let V be the open image of j and identify T with V by the open immersion
 isomorphism. Apply universalFirstOrderThickening_open_restriction with V and the
 whole base S. It identifies the restriction of C_h with the universal conormal of

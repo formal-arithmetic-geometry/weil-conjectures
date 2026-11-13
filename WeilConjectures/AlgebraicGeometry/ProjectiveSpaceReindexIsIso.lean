@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
 /-! # Invertibility of the coordinate reindexing morphism
 
 Source: Stacks Project, Constructions, Definition 01NF and Lemma 01NE.
-(blueprint: lem-weil-pbc-projective-space-reindex-is-iso).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ set_option backward.isDefEq.respectTransparency false in
 is an isomorphism. No finiteness or nonemptiness assumption is needed.
 
 Source: Stacks Project, Constructions, Definition 01NF and Lemma 01NE.
-(blueprint: lem-weil-pbc-projective-space-reindex-is-iso).
 
 Proof: On the open indexed by i, the free generator is the pullback of T_(b i)
 under the identity. The coefficients of the other sections are T_(b j)/T_(b i).

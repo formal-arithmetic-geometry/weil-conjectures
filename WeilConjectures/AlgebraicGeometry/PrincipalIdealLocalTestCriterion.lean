@@ -14,8 +14,7 @@ import WeilConjectures.Algebra.Homology.PrincipalKoszulQuotientTowers
 import WeilConjectures.CategoryTheory.UnitPowerCompleteness
 /-! # The principal image ideal and the covering-sieve local tests
 
-Source: Stacks 0999, 099B and 03DA.
-(auxiliary; not a blueprint node). -/
+Source: Stacks 0999, 099B and 03DA. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -37,8 +36,7 @@ variable [HasDerivedCategory.{w} A]
 restricted commutative ring sheaf with forgetful coefficients agrees definitionally with
 restricting its ring sheaf.
 
-Source: Stacks 0999, 099B and 03DA.
-(auxiliary; not a blueprint node). -/
+Source: Stacks 0999, 099B and 03DA. -/
 abbrev principalLocalTestSliceDerived :
     ∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u}
       ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U))) :=

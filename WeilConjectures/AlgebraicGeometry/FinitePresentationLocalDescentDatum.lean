@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 /-! # Local finite-presentation descent data
 
 Source: Stacks Project, Limits, Tag 01ZR, first proof.
-(blueprint: lem-pc-fp-local-descent-datum).
 -/
 
 @[expose] public section
@@ -40,7 +39,6 @@ private theorem nonempty_descentData_iso_of_components
 
 /-- Local modules and their overlap identifications descend to one finite stage.
 Source: Stacks Project, Limits, Tag 01ZR, first proof, general case.
-(blueprint: lem-pc-fp-local-descent-datum).
 
 Proof: Choose a finite affine cover of Xi. On each member, its base-change rings form
 an affine directed colimit. Apply the object clause of Tag 05N7 to descend the

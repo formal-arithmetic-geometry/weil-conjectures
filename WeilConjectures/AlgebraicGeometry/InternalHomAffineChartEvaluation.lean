@@ -13,7 +13,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 # Affine chart equivalences for internal Hom
 
 Source: Stacks Project, schemes.tex, Tag 01I7; duality.tex, Tag 0BUZ.
-(blueprint: lem-sc-internal-hom-affine-chart-evaluation).
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ namespace AlgebraicGeometry
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- Sections of the affine chart, with their original scalar action. 
-(blueprint: lem-sc-internal-hom-affine-chart-evaluation)
+/-- Sections of the affine chart, with their original scalar action.
 -/
 noncomputable def chartSectionsEquiv {X : Scheme.{u}} (M : X.Modules)
     (U : X.Opens) (hU : IsAffineOpen U) :
@@ -49,8 +47,7 @@ noncomputable def chartSectionsEquiv {X : Scheme.{u}} (M : X.Modules)
 
 open Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
-/-- Restriction along an isomorphism is an equivalence. 
-(blueprint: lem-sc-internal-hom-affine-chart-evaluation)
+/-- Restriction along an isomorphism is an equivalence.
 -/
 noncomputable def isoRestrictEquiv {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f] :
     Y.Modules ≌ X.Modules := by
@@ -65,8 +62,7 @@ noncomputable def isoRestrictEquiv {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f] :
   have : F.IsEquivalence := Functor.IsEquivalence.mk' G η ε
   exact F.asEquivalence
 set_option backward.isDefEq.respectTransparency false in
-/-- Morphisms on the over-site identified with morphisms on the affine chart. 
-(blueprint: lem-sc-internal-hom-affine-chart-evaluation)
+/-- Morphisms on the over-site identified with morphisms on the affine chart.
 -/
 noncomputable def chartHomEquiv {X : Scheme.{u}} (M F : X.Modules)
     (U : X.Opens) (hU : IsAffineOpen U) :
@@ -87,7 +83,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The constructed chart equivalences preserve evaluation at the terminal open.
 
 Source: Stacks Project, schemes.tex, Tag 01I7; duality.tex, Tag 0BUZ.
-(blueprint: lem-sc-internal-hom-affine-chart-evaluation).
 
 Proof: The fully faithful forgetful functor identifies a presheaf morphism over U with
 its sheaf morphism, keeping each component. The over-site equivalence is induced by

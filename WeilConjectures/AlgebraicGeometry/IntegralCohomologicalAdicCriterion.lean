@@ -24,8 +24,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 # The integral cohomological adic criterion
 
 Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), using Definition 6.5.1,
-Remark 6.3.2 and Proposition 6.6.11; Stacks Project, Tag 09C0
-(auxiliary; not a blueprint node).
+Remark 6.3.2 and Proposition 6.6.11; Stacks Project, Tag 09C0.
 
 The completed ring is the actual limit of positive constant quotients. ULift only places
 scalars in the sheaf universe. The residue quotient and its finite Tor condition are those
@@ -399,8 +398,7 @@ coefficient-linear derived isomorphism and tests tensor with every degree-zero e
 residue-module sheaf. Torsion finitely presented integer modules are allowed.
 
 Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), Definition 6.5.1,
-Remark 6.3.2 and Proposition 6.6.11; Stacks Tag 09C0
-(auxiliary; not a blueprint node).
+Remark 6.3.2 and Proposition 6.6.11; Stacks Tag 09C0.
 
 Proof:
 1. The extension-integers DVR theorem makes R Noetherian. Write r = |pi| < 1.
@@ -421,7 +419,7 @@ after scalar extension. Thus B tensor_R P has a two-term finite free model.
 models. Step 2 and (b) implies (a) of lem-sfb-adic-stratified-perfect show that a
 constructible module in degree zero satisfies the right hand side.
 4. For bounded K, choose cohomological bounds u <= v. Starting with tau_{<=u-1}K = 0,
-apply lem-weil-pbc-truncation-triangle successively for q = u,...,v. Each third term
+apply lem-weil-pbc-truncation-triangle successively for q = u..,v. Each third term
 H^q(K)[-q] satisfies (a) by step 3 and shift closure. The triangulated closure of
 lem-sfb-adic-stratified-perfect gives (a) for tau_{<=v}K, hence for K.
 5. Conversely that lemma gives boundedness and stratified perfect R-complex models.

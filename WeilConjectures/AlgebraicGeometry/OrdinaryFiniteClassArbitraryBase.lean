@@ -139,7 +139,6 @@ private theorem bijective_extToSheafHOf_arbitraryBase
 
 /-- The specified class map is bijective over every base scheme.
 Source: Stacks Project, Tag 03FD, and the normalized constants adjunction.
-(auxiliary; not a blueprint node).
 
 Proof: the constant free rank-one module represents sections, by evaluation at
 one; the chosen integral generator realizes exactly this identification. In

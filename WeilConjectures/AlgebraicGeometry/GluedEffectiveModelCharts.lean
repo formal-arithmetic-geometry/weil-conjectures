@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.GluedEffectiveModelChartsPullback
 # Gluing local effective models along descended overlaps
 
 Source: Stacks Project, Descent, Tag 0AP4, construction of the descended open overlaps.
-(blueprint: lem-pd-glued-effective-model-charts).
 -/
 
 @[expose] public section
@@ -65,7 +64,6 @@ private theorem glued_chart_preimage
 
 /-- Local effective models embed into one scheme, and their charts pull back to the given opens.
 Source: Stacks Project, Descent, Tag 0AP4, proof, through the construction of the glued scheme.
-(blueprint: lem-pd-glued-effective-model-charts).
 
 Proof: For each pair i,j, take the inverse image of U_j inside U_i. Compatibility of the
 restricted transports with D, followed by inverse transport, shows that this open is

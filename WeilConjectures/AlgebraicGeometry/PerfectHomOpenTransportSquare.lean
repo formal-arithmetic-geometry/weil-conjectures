@@ -105,7 +105,6 @@ set_option backward.isDefEq.respectTransparency false
 
 /-- Open restriction commutes with transport along any morphism over the base.
 Source: Stacks Project, Cohomology, Tag 0D5S; perfect.tex, Tag 09RE.
-(blueprint: lem-pc-perfect-hom-open-transport-square).
 
 Proof: Substitute the supplied equations for κ. The two composites of cartesian
 arrows from B x_S T' to Y x_S T agree:

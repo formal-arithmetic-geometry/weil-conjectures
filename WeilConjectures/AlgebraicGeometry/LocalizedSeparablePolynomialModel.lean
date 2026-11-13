@@ -47,7 +47,6 @@ ambient field is the fraction field of this monogenic algebra.
 
 Source: Stacks Project, Algebra, Tag 00UB, denominator-clearing calculation in the proof of
 `lem-weil-pbc-spread-finite-separable-extension`.
-(blueprint: lem-weil-pbc-localized-separable-polynomial-model)
 
 Proof: Write the coefficients of the monic minimal polynomial p as fractions over A.
 Since p is separable, choose a Bezout identity u*p + v*p' = 1 over K. Include the

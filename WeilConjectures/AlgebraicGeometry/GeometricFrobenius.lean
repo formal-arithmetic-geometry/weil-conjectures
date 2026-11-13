@@ -441,9 +441,9 @@ namespace Scheme.Hom
 
 variable {k} {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
 
-/-- Blueprint `def-weil-frobenius-detailed`: Arithmetic and geometric Frobenius.
+/-- Arithmetic and geometric Frobenius.
 
-The arithmetic Frobenius `φ_q : k̄ → k̄, z ↦ z ^ q` is `FiniteField.frobeniusAlgEquivOfAlgebraic`,
+The arithmetic Frobenius `φ_q: k̄ → k̄, z ↦ z ^ q` is `FiniteField.frobeniusAlgEquivOfAlgebraic`,
 its inverse `γ = Frob_q = φ_q⁻¹` is `FiniteField.geometricFrobeniusAlgEquivOfAlgebraic` and
 `σ = Spec γ` is `AlgebraicGeometry.specGeometricFrobenius`.
 

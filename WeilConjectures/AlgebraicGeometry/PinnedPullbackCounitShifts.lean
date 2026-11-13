@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
 
 /-! # Shifts compatible with the composition-pinned pullback counits
-Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: lem-pc-pinned-pullback-counit-shifts). -/
+Source: Stacks Project, Tags 08HY and 0D5S. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -22,9 +21,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The left-derived counit selected by the composition theorem.
-Source: Stacks Project, Tag 0D5S
-(blueprint: lem-pc-ringed-spaces-derived-pullback-composition).
-(blueprint: lem-pc-pinned-pullback-counit-shifts)
+Source: Stacks Project, Tag 0D5S.
 -/
 abbrev pinnedPullbackCounit
     [∀ Y : Scheme.{u},
@@ -35,7 +32,6 @@ abbrev pinnedPullbackCounit
 
 /-- The composition-pinned left-derived counits admit compatible integer shifts.
 Source: Stacks Project, Tags 0D5S and 08HY; derived universal property.
-(blueprint: lem-pc-pinned-pullback-counit-shifts).
 Proof: for each f, compare the two functors obtained by shifting before and after
 Lf*. Both are left derived functors of the corresponding shifted termwise tensor
 pullback. Shift is an equivalence and preserves quasi-isomorphisms, so the

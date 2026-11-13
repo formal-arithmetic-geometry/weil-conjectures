@@ -20,7 +20,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 Source: Stacks Project, Tag 01YH, `lemma-property-irreducible`, proof, the intersection
 of the two nonzero ideals and its two inclusions.
-(blueprint: lem-pc-r2-integral-ideals-common-generic-lattice)
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Two nonzero integral ideals have coherent pushforward and a coherent common generic lattice.
 Source: Stacks Project, Tag 01YH, `lemma-property-irreducible`, proof, the paragraph
 beginning "Next, suppose" and its two intersection sequences.
-(blueprint: lem-pc-r2-integral-ideals-common-generic-lattice)
 
 Proof: W is locally Noetherian as a closed subscheme of X. The zero ideal has zero
 sections on every affine open, hence a zero module; pushforward preserves zero objects.

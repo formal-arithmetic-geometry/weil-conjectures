@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 /-! # Incoming kernel and image acyclicity for integer complexes
 
 Source: Stacks Project, Tags 015B and 08C2, conditions (3)(b) and (3)(c).
-(blueprint: lem-sc-integer-section-acyclic-incoming-kernel-image).
 -/
 
 @[expose] public section
@@ -141,7 +140,6 @@ private theorem cohomology_isZero_of_H {Y : Scheme.{u}} (M : Y.Modules) (q : ℕ
 positive ordinary cohomology of differential cokernels and homology sheaves vanishes.
 Source: Stacks Project, Tag 015B, applied to the cycle and opcycle sequences;
 Tag 08C2, hypotheses (3)(b) and (3)(c).
-(blueprint: lem-sc-integer-section-acyclic-incoming-kernel-image).
 
 Proof: Write Q^j = coker(d^(j-1)), B^j = im(d^(j-1)), Z^j = ker(d^j).
 The sequence 0 -> H^j(F) -> Q^j -> B^(j+1) -> 0 gives H^1(B^(j+1)) = 0,

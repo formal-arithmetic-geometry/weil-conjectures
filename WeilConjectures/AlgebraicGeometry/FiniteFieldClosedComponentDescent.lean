@@ -135,8 +135,7 @@ Descent of invariant closed subsets (Stacks Tag 038B, applied over L) supplies c
 subsets of X_L whose full preimages are those components. The projection is surjective
 by faithful flatness of field extension. The pullback tower isomorphism identifies the
 iterated base change with X_ksep and transports the given finiteness of components.
-For empty X take the bottom field and use the vacuous component assertion.
-(blueprint: new-lem-sbc-finite-field-closed-component-descent) -/
+For empty X take the bottom field and use the vacuous component assertion. -/
 theorem exists_finite_intermediateField_closed_component_descent {k : Type u} [Field k]
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType f]
     (hfinite : (irreducibleComponents

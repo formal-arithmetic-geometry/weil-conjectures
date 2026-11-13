@@ -16,7 +16,6 @@ import Mathlib.CategoryTheory.Sites.CoversTop.Over
 
 Source: Stacks Project, Modules, Lemma 01BY (2), proof, second paragraph;
 Lemma 01B7 (1) and Definition 01B5.
-(blueprint: lem-weil-pbc-finite-type-kernel-local-generators).
 -/
 
 @[expose] public section
@@ -152,7 +151,6 @@ finite type, then the original kernel is finite type. No coherence assumption
 or finiteness assumption on the chosen generating families is needed.
 Source: Stacks Project, Modules, Lemma 01BY (2), proof, second paragraph;
 Lemma 01B7 (1) and Definition 01B5.
-(blueprint: lem-weil-pbc-finite-type-kernel-local-generators).
 
 Proof: On the cover q.X, put p = (q.generators i).π and L = kernel (p ≫ φ.over _).
 The morphism kernel.ι (p ≫ φ.over _) ≫ p factors through kernel (φ.over _).

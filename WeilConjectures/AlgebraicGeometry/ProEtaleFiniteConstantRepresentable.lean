@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.CoproductCopiesMorphismsClopen
 /-! # Representing finite constant sheaves on the pro-etale site
 
 Source: Stacks Project, Tags 0H7J, 03YW and 098T.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -83,7 +82,6 @@ noncomputable def proEtaleFiniteConstantComparison (U : Scheme.{u}) (E : Type u)
 
 /-- Finite disjoint unions represent finite constant pro-etale sheaves.
 Source: Stacks Project, Tags 0H7J, 03YW and 098T.
-(auxiliary; not a blueprint node)
 
 Proof: The constant-section map labels the components. A represented section is a
 clopen partition, so the map is locally surjective on the open cover by its pieces.

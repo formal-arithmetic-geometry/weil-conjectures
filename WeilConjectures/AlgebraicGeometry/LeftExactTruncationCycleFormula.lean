@@ -15,7 +15,6 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 /-! # Underived lower truncation on cycle classes
 
 Source: Stacks Project, Tag 05TC, and the kernel calculation underlying Tag 08D4 (1).
-(blueprint: lem-sc-left-exact-truncation-cycle-formula).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ set_option backward.isDefEq.respectTransparency false in
 homology, including the map on cycles.
 
 Source: Stacks Project, Tag 05TC; kernel calculation in the proof of Tag 08D4 (1).
-(blueprint: lem-sc-left-exact-truncation-cycle-formula).
 
 Proof: The incoming differential of K = truncGE n I is zero. Its homology is
 therefore a kernel of the outgoing differential. F preserves that kernel and

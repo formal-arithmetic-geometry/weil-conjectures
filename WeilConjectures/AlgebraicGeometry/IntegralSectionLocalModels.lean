@@ -15,7 +15,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherenc
 /-! # Finite scalar models under the normalized integral section comparison
 
 Source: Bhatt--Scholze, Definition 6.8.10; integral constructibility bridge, step 7.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -188,7 +187,6 @@ scalar models of an individual module sheaf.
 
 Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), coefficient
 comparison in step 7 of lem-sfb-integral-constructible-completion-bridge.
-(auxiliary; not a blueprint node).
 
 Proof: identify the two completed coefficient rings by their positive quotient
 projections. The section-action equivalence retains the underlying abelian sheaf,

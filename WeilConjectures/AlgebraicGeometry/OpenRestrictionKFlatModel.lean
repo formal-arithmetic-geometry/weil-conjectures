@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-! # K-flat models under open restriction
 
 Source: Stacks Project, Tag 08DX, proof of (1).
-(blueprint: lem-pc-open-restriction-kflat-model).
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- The recorded sheaf tensor, used for total complexes. Source: Stacks, Tag 06Y7
-(blueprint: lem-pc-open-restriction-kflat-model). -/
+/-- The recorded sheaf tensor, used for total complexes. Source: Stacks, Tag 06Y7. -/
 noncomputable local instance openRestrictionKFlatModelTensor (X : Scheme.{u}) :
     MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.monoidalCategory X.sheaf
@@ -47,8 +45,7 @@ identifications; they are natural in module maps, so they also identify differen
 of the stalk complexes. Transport tensor products and acyclicity through the stalk-ring
 isomorphism. K-flatness of P supplies the stalkwise K-flatness on X, hence that of its
 restriction on U. Apply the stalk criterion on U to conclude. No condition on the
-terms or boundedness is used. For the empty open the stalk condition is vacuous.
-(blueprint: lem-pc-open-restriction-kflat-model). -/
+terms or boundedness is used. For the empty open the stalk condition is vacuous. -/
 theorem openRestriction_isKFlat (X : Scheme.{u}) (U : X.Opens)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (hP : CochainComplex.IsKFlatTensor (R := X.sheaf) P) :

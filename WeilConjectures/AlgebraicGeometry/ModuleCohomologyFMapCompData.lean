@@ -96,17 +96,17 @@ set_option backward.isDefEq.respectTransparency.types false in
 comparison target. This is the diagram step, before cancellation or transport through
 `isoRightDerivedObj`, of composition.
 Source: Stacks Project, Cohomology of Sheaves, Tags 01F8 and 01FB; Derived Categories,
-Tags 013P and 013S (blueprint: lem-weil-pbc-module-cohomology-fmap-comp-data).
+Tags 013P and 013S.
 
 Proof: Z.Modules has enough injectives. Replace k_*Ch.K by a nonnegative
 termwise injective complex L with a quasi-isomorphism mu. Since Ch.K is termwise
 injective, the canonical sections comparison followed by Gamma(mu) induces an
 isomorphism s on homology (01EZ).
 Lift k_*(desc id from Ck.I to Ch.J) followed by k_*(Ch.beta) and mu across
-Ck.lambda to obtain e : Ck.K -> L up to homotopy. Lift (kh)_*(desc id from
+Ck.lambda to obtain e: Ck.K -> L up to homotopy. Lift (kh)_*(desc id from
 Ccomp.I to Ch.I), followed by the inverse successive-pushforward comparison at
 Ch.I, k_*(Ch.lambda), and mu across Ccomp.lambda to obtain
-f : Ccomp.K -> L up to homotopy.
+f: Ccomp.K -> L up to homotopy.
 Precomposing the beta square with Ccomp.J's augmentation gives homotopic maps:
 the two beta compatibility equations, the augmentation equation for identity
 descent, and naturality of pushforwardComp identify both routes. Uniqueness of

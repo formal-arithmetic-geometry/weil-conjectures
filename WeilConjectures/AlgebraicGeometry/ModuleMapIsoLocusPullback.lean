@@ -30,7 +30,6 @@ private theorem isIso_tensorPullback_iff_pullback {X Y : Scheme.{u}} (f : X ⟶ 
 produces an isomorphism. No finite generation assumption is needed in this direction.
 Source: Stacks Project, Tag 0097 (composition of pullback), and Tag 04TN
 (isomorphisms are local on the source).
-(blueprint: lem-sc-module-map-iso-locus-pullback)
 
 Proof: The inverse images of all invertibility opens cover T by the range-containment
 hypothesis. On each, composition of pullbacks identifies the restricted pulled-back

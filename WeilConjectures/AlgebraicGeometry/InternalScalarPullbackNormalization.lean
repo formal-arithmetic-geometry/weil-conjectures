@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.SectionTensorNormalizationTransport
 /-! # Normalized internal scalar extension and geometric pullback
 
 Source: Stacks Tags 03EK, 06YY, 0G7E and 07A6.
-(auxiliary; not a blueprint node).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -33,7 +32,7 @@ with the universal computation normalizations and the fixed section comparisons.
 
 (1),
 scalar-refined reduction comparison; Stacks Tags 03EK, 06YS, 06YY, 0G7E, 0D6D,
-07A6 and 0B65 (auxiliary; not a blueprint node).
+07A6 and 0B65.
 
 Proof (the eight steps of the node):
 1. Use lem-pe-internal-section-tensor-comparison,

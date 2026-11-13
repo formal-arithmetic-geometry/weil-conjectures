@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.PinnedPullbackCompositionShifts
 import WeilConjectures.AlgebraicGeometry.PinnedDerivedAdjunctionShifts
 
 /-! # Shift compatibility of the canonical derived base-change mate
-Source: Stacks Project, Tag 08HY.
-(blueprint: lem-pc-pinned-base-change-mate-shifts). -/
+Source: Stacks Project, Tag 08HY. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -38,7 +37,6 @@ private theorem pullback_eqToHom_commShift
 /-- The base-change components form a natural transformation commuting with shift,
 when pullback shifts are transported using the selected left-derived counits.
 Source: Stacks Project, Tag 08HY, canonical base-change mate.
-(blueprint: lem-pc-pinned-base-change-mate-shifts).
 Proof: the Hom equivalences of the selected derived adjunctions are pinned to the
 underived adjunction and the selected left-derived counits, as recorded in
 exists_schemeDerivedAdjunction. Hence their units and counits commute with the

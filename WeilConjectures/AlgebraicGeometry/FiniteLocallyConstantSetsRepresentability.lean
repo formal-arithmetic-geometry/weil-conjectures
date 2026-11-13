@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantEtale
 /-! # Representability of finite locally constant sheaves of sets
 
 Source: Stacks Project, Tag 03RV, implication (1) to (2).
-(blueprint: lem-weil-pbc-finite-locally-constant-sets-representability)
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace AlgebraicGeometry.Scheme
 of sets with finite geometric stalks. This is
 `AlgebraicGeometry.Scheme.exists_iso_uliftYoneda_of_isFiniteLocallyConstant`.
 
-Source: Stacks Project, Tag 03RV, implication (1) to (2).
-(blueprint: lem-weil-pbc-finite-locally-constant-sets-representability) -/
+Source: Stacks Project, Tag 03RV, implication (1) to (2). -/
 theorem finiteLocallyConstant_sets_representable
     (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
     (hloc : ∃ 𝒰 : Cover.{u} etalePrecoverage T, ∀ i,

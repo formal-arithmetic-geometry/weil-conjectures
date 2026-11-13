@@ -17,8 +17,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry
 /-- Unshifted restriction of the sheafified Koszul complex is zero on the union of
 basic opens. This is the contraction and sheaf gluing argument of Stacks Tags 09IR
-and 0663, before applying the derived-category shift.
-(blueprint: lem-pc-koszul-restriction-zero-base). -/
+and 0663, before applying the derived-category shift. -/
 theorem isZero_restrict_koszul_base
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{w}

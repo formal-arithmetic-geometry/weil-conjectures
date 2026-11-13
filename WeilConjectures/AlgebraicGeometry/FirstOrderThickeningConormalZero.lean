@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.AffineConormalSections
 # A first order thickening with zero conormal is an isomorphism
 
 Source: Stacks Project, Tags 04FE and 01R3.
-(blueprint: lem-weil-pbc-first-order-thickening-conormal-zero).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ attribute [local instance] RingHomInvPair.of_ringEquiv RingHomInvPair.of_ringEqu
 This is the ideal-theoretic part of (3) implies (2) in Tag 04FE; it does not require
 any universal lifting property.
 Source: Stacks Project, Tag 04FE, proof, and Tag 01R3 (2).
-(blueprint: lem-weil-pbc-first-order-thickening-conormal-zero).
 Proof: on any affine open U in X', let I be the kernel of the section map of i.
 The affine conormal identification (01R3 (2)) identifies the conormal sections
 on i⁻¹(U) with I/I². Zero conormal makes this quotient zero. The first order

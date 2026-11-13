@@ -12,19 +12,17 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineImmersion
 /-!
 # Projective morphisms, properness and compactifications of affine schemes
 
-Projective morphisms in the sense of blueprint `def-kun-projective` (a closed immersion into a
+Projective morphisms in the sense of (a closed immersion into a
 projective space `ℙ(n; Y)` followed by the projection) are the H-projective morphisms
 `AlgebraicGeometry.IsHProjective` of `WeilConjectures/AlgebraicGeometry/Curve/SmoothProjective`.
 
 ## Main results
 
-- `AlgebraicGeometry.isHProjective_iff` (blueprint `def-kun-projective`): the defining
+- `AlgebraicGeometry.isHProjective_iff`: the defining
   characterisation of projective morphisms.
-- `AlgebraicGeometry.isProper_of_isHProjective` (blueprint `lem-kun-projective-implies-proper`).
-- `AlgebraicGeometry.isProper_isStableUnderBaseChange_and_comp` (blueprint
-  `lem-kun-proper-stability`).
-- `AlgebraicGeometry.exists_isHProjective_compactification_of_isAffine` (blueprint
-  `lem-kun-compactification-affine`): an affine scheme of finite type over a field is a dense
+- `AlgebraicGeometry.isProper_of_isHProjective`.
+- `AlgebraicGeometry.isProper_isStableUnderBaseChange_and_comp`.
+- `AlgebraicGeometry.exists_isHProjective_compactification_of_isAffine`: an affine scheme of finite type over a field is a dense
   open subscheme of a projective scheme of the same dimension.
 -/
 
@@ -36,9 +34,9 @@ open CategoryTheory Limits Topology
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `def-kun-projective`: **projective morphisms.** A morphism `f : X ⟶ Y` is
+/-- **projective morphisms.** A morphism `f: X ⟶ Y` is
 projective (`AlgebraicGeometry.IsHProjective`) if and only if there are a finite type `n` of
-homogeneous coordinates and a closed immersion `i : X ⟶ ℙ(n; Y)` whose composite with the
+homogeneous coordinates and a closed immersion `i: X ⟶ ℙ(n; Y)` whose composite with the
 structural projection `ℙ(n; Y) ⟶ Y` is `f`. A scheme is projective over a field `k` if its
 structure morphism is projective. -/
 theorem isHProjective_iff {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -46,13 +44,13 @@ theorem isHProjective_iff {X Y : Scheme.{u}} (f : X ⟶ Y) :
       ∃ (n : Type u) (_ : Finite n) (i : X ⟶ ℙ(n; Y)), IsClosedImmersion i ∧ i ≫ ℙ(n; Y) ↘ Y = f :=
   ⟨fun h ↦ h.exists_isClosedImmersion, fun h ↦ ⟨h⟩⟩
 
-/-- Blueprint `lem-kun-projective-implies-proper`: **projective morphisms are proper**, as the
+/-- **projective morphisms are proper**, as the
 composite of a closed immersion with the proper projection `ℙ(n; Y) ⟶ Y`. -/
 theorem isProper_of_isHProjective {X Y : Scheme.{u}} (f : X ⟶ Y) [IsHProjective f] :
     IsProper f :=
   inferInstance
 
-/-- Blueprint `lem-kun-proper-stability`: **properness survives base change and composition.**
+/-- **properness survives base change and composition.**
 Proper morphisms are stable under base change and under composition; in particular, if `X` is
 proper over a field `k` and `Y` is any `k`-scheme, the projection `X ×_k Y ⟶ Y` is proper. -/
 theorem isProper_isStableUnderBaseChange_and_comp :
@@ -62,9 +60,9 @@ theorem isProper_isStableUnderBaseChange_and_comp :
         (b : Y ⟶ Spec (.of k)) [IsProper a], IsProper (pullback.snd a b) :=
   ⟨inferInstance, inferInstance, fun _ _ ↦ inferInstance⟩
 
-/-- Blueprint `lem-kun-compactification-affine`: **compactification of an affine scheme.** Let
+/-- **compactification of an affine scheme.** Let
 `X` be an affine scheme of finite type over a field `K`. There is an open immersion
-`j : X ⟶ X̄` over `K` with dense image into a projective `K`-scheme `X̄`, and
+`j: X ⟶ X̄` over `K` with dense image into a projective `K`-scheme `X̄`, and
 `dim X̄ = dim X`. Take an immersion `X ⟶ ℙ(n; K)` and let `X̄` be the scheme-theoretic
 closure of its image: it is a closed subscheme of `ℙ(n; K)`, the immersion factors through it as
 a dense open immersion, and the dimension of `X̄` is that of its dense open subscheme `X`. -/

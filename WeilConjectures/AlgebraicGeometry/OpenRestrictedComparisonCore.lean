@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.IsKFlatRestriction
 /-! # Comparison square on literal restrictions
 
 Source: Stacks Project, Tags 0DJ8 and 0DJ9 (locality of the stalk comparison).
-(blueprint: lem-pc-open-restricted-comparison-core).
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -92,7 +91,6 @@ set_option linter.unusedVariables false in
 /-- The open comparison square when the restricted representative data are supplied.
 Source: Stacks Project, Tag 0DJ8 (locality of equation-bc), Tag 0DJ9
 (source-open induction), and Tag 06YB (K-flat stalks).
-(blueprint: lem-pc-open-restricted-comparison-core).
 
 Proof: put p = pullback.fst g′ U.ι and q = pullback.snd g′ U.ι. The open
 immersion p has exact module restriction. Uniqueness of left adjoints identifies

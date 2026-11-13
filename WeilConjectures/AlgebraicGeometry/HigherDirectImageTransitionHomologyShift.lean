@@ -93,8 +93,7 @@ The comparison between iterated pullbacks commutes with shifts because the exact
 functor comparisons do. Thus the mate defining the transition commutes with shifts.
 Apply degree-zero homology, then naturality of its shift-zero and degree-q isomorphisms.
 Source: the generic calculations in AbelianDerivedDirectImageTransitionShift and
-DerivedAdjunctionCommShift, specialized to ModuleCat rather than AddCommGrpCat.
-(blueprint: sbc-lem-module-transition-homology-shift). -/
+DerivedAdjunctionCommShift, specialized to ModuleCat rather than AddCommGrpCat. -/
 theorem higherDirectImageTransition_homologyShift
     (Λ : Type (u + 1)) [CommRing Λ] {Y Y' S : Scheme.{u}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (q : ℤ)

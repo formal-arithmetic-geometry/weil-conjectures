@@ -166,8 +166,7 @@ The Hom equivalence is determined by these equations and naturality: its value
 on any f:N → LP is determined after the supported testing isomorphism and unique
 Hom lift. No data is defined by an arbitrary mere-existence witness. Empty opens
 and zero objects yield singleton Hom sets, and the full open has the same inverse
-cancellation; independent sign twists are excluded by identity normalization.
-(blueprint: new-perfect-hom-open-restricted-pinned-equiv). -/
+cancellation; independent sign twists are excluded by identity normalization. -/
 theorem perfect_hom_open_restricted_pinned_equiv
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))

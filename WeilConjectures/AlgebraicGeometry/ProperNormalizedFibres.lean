@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.SteinUniversallyClosedFactor
 # Connected fibres of a normalized proper morphism to an affine scheme
 
 Source: Stacks Project, More on Morphisms, Theorem 37.53.5 (Tag 03H2), normalized
- affine reduction (blueprint: lem-weil-pbc-stein-normalized-fibre-idempotent).
+ affine reduction.
 -/
 
 @[expose] public section
@@ -28,7 +28,6 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Source: Stacks Project, Theorem 37.53.5 (Tag 03H2), normalized affine reduction.
-(blueprint: lem-weil-pbc-stein-normalized-fibre-idempotent)
 If the canonical map from the base ring to global sections is an isomorphism, every fibre
 of a proper morphism is nonempty and connected; `ConnectedSpace` includes nonemptiness.
 

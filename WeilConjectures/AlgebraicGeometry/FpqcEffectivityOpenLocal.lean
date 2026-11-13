@@ -36,7 +36,6 @@ private theorem transport_left_congr {X S T : Scheme.{u}} {f : X ⟶ S}
 
 /-- Effectivity follows from effective, transport-compatible affine-open restrictions.
 Source: Stacks Project, Descent, Tag 02W3, final paragraph of the general-base proof.
-(blueprint: lem-galois-fpqc-effectivity-open-local)
 
 First glue the models to obtain a global pullback projection q which is invariant
 for test schemes mapping into an affine open of S. For arbitrary test points

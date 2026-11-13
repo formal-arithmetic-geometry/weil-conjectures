@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.InverseImageStalkPairRepresentatives
 
 /-! # Stalk injectivity of Gabber's comparison
 Source: Stacks Project, Tag 09ZF, first proof paragraph.
-(blueprint: lem-weil-pbc-gabber-zariski-etale-comparison-stalk-injective)
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- A comparison satisfying the unit equation is injective on stalks.
-Source: Stacks Project, Tag 09ZF (lemma-gabber-h0), first proof paragraph.
-(blueprint: lem-weil-pbc-gabber-zariski-etale-comparison-stalk-injective).
+Source: Stacks Project, Tag 09ZF, first proof paragraph.
 Proof: the stalk of the topological inverse image at z identifies with the stalk
 of Fzar at i(z). Represent two germs on a common open W around i(z). The unit
 equation identifies their images with germs of the étale pullbacks of those

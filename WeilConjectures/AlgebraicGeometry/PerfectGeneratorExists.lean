@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.PerfectObjectCompact
 
 /-! # Existence of a single perfect generator
 
-Source: literature/stacks-project/derived-categories-of-schemes.tex, Tag 09IS
-(blueprint: lem-pc-perfect-generator-exists).
+Source: literature/stacks-project/derived-categories-of-schemes.tex, Tag 09IS.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- For a quasi-compact and quasi-separated scheme, a single perfect complex generates the
-quasi-coherent derived category. Source: Stacks Project, Tag 09IS
-(blueprint: lem-pc-perfect-generator-exists).
+quasi-coherent derived category. Source: Stacks Project, Tag 09IS.
 
 Proof:
 1. Apply `lem-pc-supported-perfect-generator` with support equal to all of X. Its

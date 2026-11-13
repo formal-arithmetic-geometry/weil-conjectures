@@ -169,7 +169,6 @@ private theorem finiteP1_isIso_sourceMap (A : Type (u + 1)) [CommRing A] (N : â„
 /-- The canonical Kummer maps are invertible and commute with every base change.
 Only the two-component maps occur here; neither traces nor diagonal classes occur.
 lem-sp-tower-p1-arbitrary-base-integrals, proof steps 1â€“4.
-(auxiliary; not a blueprint node)
 
 Proof: put U = Spec Z[1/N], using finiteP1_exists_noetherianBase. Its normalized datum
 is projectiveLineTraceDatum. The hyperplane has equation t on one standard chart and

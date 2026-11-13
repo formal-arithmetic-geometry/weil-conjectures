@@ -7,8 +7,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceCounit
 import WeilConjectures.AlgebraicGeometry.EtaleOrderedProjectionComparison
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # Change of coefficient in the prescribed trace counit -/
 @[expose] public noncomputable section

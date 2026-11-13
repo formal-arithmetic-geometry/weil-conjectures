@@ -26,8 +26,7 @@ public import WeilConjectures.CategoryTheory.SheafTensor
 public import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
 
 /-! # Finite discrete internal and ordinary coefficients
-
-(auxiliary; not a blueprint node).
+.
 -/
 
 @[expose] public noncomputable section
@@ -48,33 +47,24 @@ namespace AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary
 
 variable (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
 
-/-- The already defined continuous condensed coefficient ring.
-Source: blueprint coefficient identification
-(auxiliary; not a blueprint node). -/
+/-- The already defined continuous condensed coefficient ring. -/
 abbrev coefficient := Profinite.continuousCoefficientRingObj A
 
-/-- The pulled-back internal module category, without boundedness or completion.
-Source: blueprint coefficient identification
-(auxiliary; not a blueprint node). -/
+/-- The pulled-back internal module category, without boundedness or completion. -/
 abbrev Internal (T : Scheme.{u}) :=
   Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj (coefficient A) T)
 
-/-- Ordinary modules over the constant commutative ring sheaf, in the scalar universe.
-Source: blueprint coefficient identification
-(auxiliary; not a blueprint node). -/
+/-- Ordinary modules over the constant commutative ring sheaf, in the scalar universe. -/
 abbrev Ordinary (T : Scheme.{u}) :=
   realizationModules (Scheme.ProEt.topology T) (ULift.{u + 1} A)
 
 /-- The reconstructed commutative section-ring sheaf of the pulled-back coefficients.
-Source: Stacks 00YV, section-action equivalence
-(auxiliary; not a blueprint node). -/
+Source: Stacks 00YV, section-action equivalence. -/
 abbrev sectionRing (T : Scheme.{u}) :=
   InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
     (Scheme.ProEt.topology T) (condensedRingObj (coefficient A) T)
 
-/-- Constant functions, as a map into the actual continuous condensed sheaf.
-Source: blueprint proof step 1, constant-section normalization
-(auxiliary; not a blueprint node). -/
+/-- Constant functions, as a map into the actual continuous condensed sheaf. -/
 def pointConstants :
     (Functor.const Profinite.{u}ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} A)) ⟶
       (coefficient A).obj where
@@ -85,9 +75,7 @@ def pointConstants :
   naturality _ _ _ := rfl
 
 /-- The canonical constant-coefficient map: sheafify constant functions on the point,
-then apply the monoidal inverse image and its constant-sheaf comparison.
-Source: blueprint proof step 1
-(auxiliary; not a blueprint node). -/
+then apply the monoidal inverse image and its constant-sheaf comparison. -/
 def canonicalAbelianMap (T : Scheme.{u}) :
     (constantSheaf (Scheme.ProEt.topology T) Ab.{u + 1}).obj
       (AddCommGrpCat.of (ULift.{u + 1} A)) ⟶ condensedRingObj (coefficient A) T :=
@@ -98,8 +86,7 @@ def canonicalAbelianMap (T : Scheme.{u}) :
 
 /-- The intrinsic-to-fixed coefficient functor restricts to constant scalar sections.
 The commutative-ring/underlying-ring constant-sheaf comparison is canonical.
-Source: blueprint proof step 3, Stacks 03CY
-(auxiliary; not a blueprint node). -/
+Source: blueprint proof step 3, Stacks 03CY. -/
 def fixedRestriction (T : Scheme.{u}) :
     Ordinary A T ⥤ Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A)) :=
   SheafOfModules.restrictScalars
@@ -109,8 +96,7 @@ def fixedRestriction (T : Scheme.{u}) :
     constantRingModuleRestriction (Scheme.ProEt.topology T) (ULift.{u + 1} A)
 
 /-- Restrict the section-action equivalence along the specified coefficient isomorphism.
-Source: blueprint proof step 2, Stacks 00YV
-(auxiliary; not a blueprint node). -/
+Source: blueprint proof step 2, Stacks 00YV. -/
 def sectionEncoding (T : Scheme.{u})
     (c : realizationRing (Scheme.ProEt.topology T) (ULift.{u + 1} A) ≅ sectionRing A T) :
     Internal A T ⥤ Ordinary A T :=
@@ -124,8 +110,7 @@ def sectionEncoding (T : Scheme.{u})
 The ring isomorphism is normalized by the canonical constant-function map; the
 forward intrinsic functor is precisely section-action followed by scalar restriction.
 The fixed scalar encoding likewise restricts along the constant-sheaf unit.
-Source: blueprint proof steps 1--3, Stacks 00YV and 03CY
-(auxiliary; not a blueprint node). -/
+Source: blueprint proof steps 1--3, Stacks 00YV and 03CY. -/
 structure Encoding (T : Scheme.{u}) where
   ringIso : realizationRing (Scheme.ProEt.topology T) (ULift.{u + 1} A) ≅ sectionRing A T
   normalization : ∀ (U : T.ProEtᵒᵖ) (a : ULift.{u + 1} A),
@@ -149,8 +134,7 @@ attribute [instance] Encoding.ordinaryAdditive Encoding.ordinaryInverseAdditive
   Encoding.fixedAdditive Encoding.fixedInverseAdditive
 
 /-- Termwise extension of the specified intrinsic equivalence to unbounded derived categories.
-Source: blueprint proof step 4, Stacks 015F
-(auxiliary; not a blueprint node). -/
+Source: blueprint proof step 4, Stacks 015F. -/
 def Encoding.ordinaryDerived {T : Scheme.{u}} (e : Encoding A T) :
     DerivedCategory (Internal A T) ≌ Scheme.proEtaleDerivedCategory T A :=
   letI := HasDerivedCategory.standard (Ordinary A T)
@@ -459,7 +443,6 @@ private def scalarEquivalence (T : Scheme.{u})
 
 /-- The normalized finite-discrete coefficient encoding exists.
 Source: blueprint coefficient identification, proof steps 1--3; Stacks Tags 00YV and 03CY.
-(auxiliary; not a blueprint node).
 
 Proof: the finite clopen fibres of each continuous function give local surjectivity of
 constant functions. Equality of constants is local, using the empty cover at the empty
@@ -521,8 +504,7 @@ attribute [local instance] sfbSheafTensor_monoidalPreadditive sfbSheafTensor_has
 
 
 /-- Termwise extension to fixed scalar sheaves, using the same intrinsic equivalence.
-Source: blueprint proof steps 3--4, Stacks 015F
-(blueprint: lem-sf-finite-discrete-normalized-encoding). -/
+Source: blueprint proof steps 3--4, Stacks 015F. -/
 def Encoding.fixedDerived {T : Scheme.{u}} (e : Encoding A T) :
     DerivedCategory (Internal A T) ≌
       DerivedCategory (Sheaf (Scheme.ProEt.topology T)
@@ -535,9 +517,7 @@ def Encoding.fixedDerived {T : Scheme.{u}} (e : Encoding A T) :
 
 /-- The ordinary finite constant local models: on each member of one pro-etale cover
 there is a constant finite module. Over a finite ring, finite modules are precisely
-finitely presented modules. This is the ordinary side of the source's local-model clause.
-Source: blueprint proof step 9 and sk-def-sfb-constructible, clause 1
-(blueprint: lem-sf-finite-discrete-normalized-encoding). -/
+finitely presented modules. This is the ordinary side of the source's local-model clause. -/
 def ordinaryLocalModel (T : Scheme.{u})
     (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) : Prop :=
   ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage T, ∀ i : C.I₀,
@@ -546,9 +526,7 @@ def ordinaryLocalModel (T : Scheme.{u})
         (constantSheaf (Scheme.ProEt.topology (C.X i))
           (ModuleCat.{u + 1} (ULift.{u + 1} A))).obj P)
 
-/-- The ordinary finite stratification condition in the same scalar presentation.
-Source: sk-def-sfb-constructible, clause 2, and blueprint proof step 9
-(blueprint: lem-sf-finite-discrete-normalized-encoding). -/
+/-- The ordinary finite stratification condition in the same scalar presentation. -/
 def ordinaryStratified (T : Scheme.{u})
     (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) : Prop :=
   ∃ S : Scheme.Stratification T, ∀ a : Fin S.n,
@@ -556,18 +534,14 @@ def ordinaryStratified (T : Scheme.{u})
       ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) (S.immersion a)).obj M)
 
 open Classical in
-/-- Qcqs schemes use finite constructible stratifications; otherwise use every affine open.
-Source: sk-def-sfb-constructible, clause 2, and blueprint proof step 9
-(blueprint: lem-sf-finite-discrete-normalized-encoding). -/
+/-- Qcqs schemes use finite constructible stratifications; otherwise use every affine open. -/
 def ordinaryConstructible (T : Scheme.{u})
     (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) : Prop :=
   if CompactSpace T ∧ QuasiSeparatedSpace T then ordinaryStratified A T M
   else ∀ U : T.Opens, IsAffineOpen U → ordinaryStratified A U.toScheme
     ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) U.ι).obj M)
 
-/-- The ordinary bounded constructible predicate in the fixed scalar presentation.
-Source: sk-def-sfb-constructible, final paragraph, and blueprint proof step 9
-(blueprint: lem-sf-finite-discrete-normalized-encoding). -/
+/-- The ordinary bounded constructible predicate in the fixed scalar presentation. -/
 def ordinaryBoundedConstructible (T : Scheme.{u}) :
     ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology T)
       (ModuleCat.{u + 1} (ULift.{u + 1} A)))) :=

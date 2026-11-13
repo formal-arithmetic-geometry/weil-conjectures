@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.MonoidalProjectionConjugate
 /-! # The counit calculation for tensor-Hom duality and a right adjoint
 
 Source: Stacks Project, Duality for Schemes, Tag 0A9T.
-(blueprint: lem-sc-perfect-right-adjoint-tensor-hom-comparison).
 -/
 
 @[expose] public section
@@ -95,7 +94,6 @@ private theorem projection_duality
 
 /-- The tensor-Hom chain of Tag 0A9T is postcomposition with the canonical mate.
 Source: Stacks Project, Duality for Schemes, Tag 0A9T.
-(blueprint: lem-sc-perfect-right-adjoint-tensor-hom-comparison).
 Proof: transpose both sides under `adj`. Naturality of its Hom equivalence turns
 postcomposition with the mate into application of the restricted direct image to q,
 followed by the counit defining that mate. Expand the two tensor-Hom equivalences:

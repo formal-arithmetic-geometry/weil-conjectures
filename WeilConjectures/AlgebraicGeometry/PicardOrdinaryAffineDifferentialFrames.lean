@@ -248,7 +248,6 @@ private lemma overFree_projection (W : Scheme.{w}) (U : W.Opens)
 /-- The section bases realize the differential as a column of sheaf maps.
 Source: Stacks Project, Tag 0BF2, degree-zero calculation, and the finite-projective
 module argument applied to sheaves of modules.
-(blueprint: lem-sc-picard-ordinary-affine-differential-frames)
 
 Proof: Maps from the unit sheaf are sections at the terminal object. Therefore
 maps out of a retract of a free sheaf are determined by their terminal section

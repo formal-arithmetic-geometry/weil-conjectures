@@ -18,7 +18,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 /-! # Lifting compatible maps through the formal-functions comparison
 
 Source: Stacks Project, Lemma 088B, construction of alpha from the inverse limit of gamma.
-(blueprint: lem-weil-pbc-formal-completion-pushforward-lift)
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ proper pushforward comparison.
 
 Source: Stacks Project, Lemma 088B, first half of the proof, paragraphs constructing
 alpha from the inverse limit of gamma; https://stacks.math.columbia.edu/tag/088B.
-(blueprint: lem-weil-pbc-formal-completion-pushforward-lift)
 
 Proof: The canonical comparison induces an isomorphism on inverse-limit sheaves:
 on an affine basis this is the degree-zero theorem on formal functions, using the

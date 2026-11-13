@@ -26,7 +26,6 @@ namespace AlgebraicGeometry
 
 /-- The finite presentation of the restricted module descends as algebraic sections.
 Source: Stacks Project, Algebra Tag 05N7 and Limits Tag 01ZR, affine object clause.
-(blueprint: lem-pc-fp-affine-chart-sections-model).
 
 Proof: On the upper tail above i the stage chart rings are base changes of the fixed
 chart ring. Affine pullback identifies these with tensor products, which commute

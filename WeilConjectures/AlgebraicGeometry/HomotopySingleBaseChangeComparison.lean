@@ -92,7 +92,6 @@ private theorem single_homotopy_exchange
 
 /-- The ordinary exchange intertwines the termwise single-object identifications.
 Source: Stacks Project, Tag 08HY, ordinary mate construction.
-(blueprint: lem-sc-homotopy-single-base-change-comparison).
 
 Proof: Form the natural transformation of module functors whose components are
 moduleBaseChangeMap. Apply the functors to single complexes. Postcompose both

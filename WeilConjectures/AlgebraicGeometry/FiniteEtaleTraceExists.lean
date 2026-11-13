@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceExistsUniqueness
 /-!
 # Existence and uniqueness of the finite étale trace
 
-Source: Stacks Project, Section 03SH, following Definition 03SE
-(blueprint: lem-weil-pbc-finite-etale-trace-exists).
+Source: Stacks Project, Section 03SH, following Definition 03SE.
 -/
 
 @[expose] public section
@@ -30,21 +29,20 @@ namespace AlgebraicGeometry.Etale
 /-- The unique family of finite étale trace morphisms, natural in the abelian sheaf,
 compatible with étale localization, and equal to the sum of restrictions for every finite
 clopen splitting (including the empty splitting). A splitting is written as the split covers of
-lem-weil-pbc-direct-image-split-cover-product: pieces `i j : V j ⟶ Y` exhibiting `Y` as their
+lem-weil-pbc-direct-image-split-cover-product: pieces `i j: V j ⟶ Y` exhibiting `Y` as their
 coproduct (`IsColimit (Cofan.mk Y i)`, open and closed immersions, hence pairwise disjoint and
 covering), `t j` the inverse of `i j ≫ f`, `s j = t j ≫ i j`, and
 `σ j = (id_W, s j ∘ w) = pullback.lift (𝟙 W.left) (W.hom ≫ s j)`. Source: Stacks, Section 03SH after
-Definition 03SE (blueprint: lem-weil-pbc-finite-etale-trace-exists).
+Definition 03SE.
 
 Proof plan, following the node's ten steps:
 1. Identify `f_* f⁻¹ F` with the sheaf `W ↦ F(W ×_X Y)` using the natural restriction
-isomorphism (lem-weil-pbc-etale-inverse-image-restriction). Giving a trace is equivalent to
+isomorphism. Giving a trace is equivalent to
 giving an additive presheaf map from this sheaf to `F`.
 2. For a finite clopen splitting define the local sum of restrictions along its sections.
-It is additive and natural in `F` (def-weil-pbc-abelian-etale-sheaves).
+It is additive and natural in `F`.
 3. Pull a splitting back along an étale-site morphism. Cartesian-square pasting and open
-fibre products identify its pieces and sections; local sums commute with restriction
-(lem-weil-pbc-cartesian-square-pasting, lem-weil-pbc-open-fibre-product).
+fibre products identify its pieces and sections; local sums commute with restriction.
 4. Two splittings give the same sum: intersect their pieces and cover the base by the opens
 on which their sections agree up to a permutation. Reindex the finite sums and use sheaf
 separatedness. Unequal cardinalities force the base empty, whose sections are zero.

@@ -15,10 +15,6 @@ import WeilConjectures.AlgebraicGeometry.SplitTensorAlgebraSchemeComponents
 
 /-!
 # Scheme-level generic splitting of a finite morphism
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
-`lem-weil-pbc-finite-pushforward-generic-constructible`.
-(blueprint: lem-weil-pbc-generic-finite-scheme-splitting).
 -/
 
 @[expose] public section
@@ -41,8 +37,7 @@ private theorem isUniversalHomeomorphism_of_finite_universally_isHomeomorph
     exact (hf i₁ i₂ f' H).injective
   exact {}
 
-/-- Restriction of a finite étale splitting along a smaller open.
-(blueprint: lem-weil-pbc-generic-finite-scheme-splitting) -/
+/-- Restriction of a finite étale splitting along a smaller open. -/
 private theorem finite_scheme_splitting_restrict
     (S : Scheme.{u}) {Z : Scheme.{u}} (g : Z ⟶ S)
     (U : S.Opens) (T : Scheme.{u}) (p : T ⟶ U.toScheme)
@@ -101,11 +96,6 @@ private theorem finite_scheme_splitting_restrict
 /-- A finite map over an integral Noetherian affine base has a dense open on every
 subopen of which an etale surjective base change splits its source into finitely
 many open components universally homeomorphic to the cover.
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, proof of
-`lem-weil-pbc-finite-pushforward-generic-constructible`, finite-algebra calculation;
-steps 1 and 2 of `lem-weil-pbc-finite-map-generic-lisse-preservation`.
-(blueprint: lem-weil-pbc-generic-finite-scheme-splitting).
 
 Proof: Write S = Spec A and Z = Spec B, using affineness of finite morphisms.
 Apply `lem-weil-pbc-generic-finite-algebra-splitting` to B over A. Its nonzero

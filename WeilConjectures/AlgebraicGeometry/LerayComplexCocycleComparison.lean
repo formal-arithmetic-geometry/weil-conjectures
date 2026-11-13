@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.PQFCohomology
 /-!
 # The cycle comparison for direct image before deriving
 
-Source: Stacks Project, Cohomology, Tag 01F4 (2), construction on complexes
-(blueprint: lem-pc-leray-complex-cocycle-comparison).
+Source: Stacks Project, Cohomology, Tag 01F4 (2), construction on complexes.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ cohomology sheaf is natural in arbitrary nonnegative complexes, before any resol
 or derived-functor identification is chosen.
 
 Source: Stacks Project, Cohomology, Tag 01F4 (2), cycle construction of the edge;
-the direct-proof exercise in its proof (expanded by K1)
-(blueprint: lem-pc-leray-complex-cocycle-comparison).
+the direct-proof exercise in its proof (expanded by K1).
 
 Proof: Sections of the direct image on the whole target are sections on the inverse
 image of that open, identified with the whole source by `Opens.map_top`. This gives a

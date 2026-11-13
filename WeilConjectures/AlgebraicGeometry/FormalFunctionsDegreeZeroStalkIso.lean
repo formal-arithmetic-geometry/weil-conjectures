@@ -15,8 +15,7 @@ set_option linter.unusedVariables false in
 /-- Degree-zero stalk comparison, obtained from the augmentation of the zeroth
 right-derived direct image.
 Proof: Apply the degree-zero augmentation comparison and take the stalk;
-this gives the displayed equivalence.
-(blueprint: lem-weil-pbc-formal-functions-degree-zero-stalk-iso) -/
+this gives the displayed equivalence. -/
 theorem formalFunctions_degreeZero_stalkIso {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) :
     ∃ a : (((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).obj
         ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf))) ≃ₗ[

@@ -16,7 +16,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Cons
 # Extension by zero of constructible module objects
 
 Source: the open–closed stratification argument for constructible sheaves.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -154,8 +153,7 @@ over empty fibre products. Faithfulness of the module forgetful functor reflects
 vanishing. The zero module has a rank-zero finite presentation. Concatenate the open
 stratification with the trivial stratification on the complement, transporting the
 presentations through pullback composition. Quasi-compactness makes the resulting strata
-constructible in the ambient scheme. Empty schemes and rank zero are included.
-(auxiliary; not a blueprint node) -/
+constructible in the ambient scheme. Empty schemes and rank zero are included. -/
 theorem isConstructibleModuleObject_openImmersionLowerShriek
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]

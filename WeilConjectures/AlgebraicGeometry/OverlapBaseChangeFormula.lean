@@ -23,7 +23,6 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- The abstract module pullback formula for base change of a pair morphism.
 Source: Stacks Project, Tag 0097, functoriality of inverse images.
-(blueprint: lem-pc-overlap-base-change-formula).
 
 Proof: The two projection equations identify l with the canonical universal
 lift by the pullback universal property. Substitute that equality and expand

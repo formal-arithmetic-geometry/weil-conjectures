@@ -8,8 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PinnedSingleTensorShifts
 import WeilConjectures.AlgebraicGeometry.IsomorphicSingleTensorCounitEquation
 /-! # Pinned single tensor counits under an isomorphism
-Source: Stacks Project, Tags 08HY, 0096 and 0D5S.
-(blueprint: lem-pc-isomorphic-single-tensor-counit). -/
+Source: Stacks Project, Tags 08HY, 0096 and 0D5S. -/
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -21,7 +20,6 @@ noncomputable section
 namespace AlgebraicGeometry
 /-- The single tensor counit factors through pullback along a scheme isomorphism.
 Source: Stacks Project, Tags 08HY, 0096 and 0D5S.
-(blueprint: lem-pc-isomorphic-single-tensor-counit).
 Proof: tensor pullback along e is an exact equivalence, with inverse direct image.
 Use the underived tensor composition comparison, the single-complex comparison
 for this exact equivalence, and the inverse of its right-derived unit to identify

@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Sites.Hypercover.One
 /-! # Degree-zero hypercover comparison
 
 Source: the sheaf equalizer argument in Stacks Project, Hypercoverings, Tag 01GV.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -235,7 +234,6 @@ local instance : HasColimitsOfSize.{u, u + 1} A :=
 set_option backward.isDefEq.respectTransparency false in
 /-- The explicit comparison cocone is colimiting in degree zero.
 Source: Stacks Project, Hypercoverings, Tag 01GV, the sheaf equalizer argument.
-(auxiliary; not a blueprint node).
 
 Proof: the degree-zero and degree-one matching covers give a one-hypercover.
 The sheaf multifork is limiting, so its augmentation is a degree-zero

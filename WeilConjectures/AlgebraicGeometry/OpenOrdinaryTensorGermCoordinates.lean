@@ -52,8 +52,7 @@ asserts no compatibility with derived homology factors.
 Empty opens have no z; top opens give the identity germ maps. Zero complexes
 and zero rings obey the same formulas, without a nonzero or flatness assumption.
 Source: Stacks Project, Tags 0098 and 0096; Mathlib restrictStalkNatIso and its
-same-germ formulas; the pinned tensor pullback unit and composition comparisons.
-(blueprint: lem-pc-open-ordinary-tensor-germ-coordinates). -/
+same-germ formulas; the pinned tensor pullback unit and composition comparisons. -/
 theorem exists_openOrdinaryTensor_germ_coordinates
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

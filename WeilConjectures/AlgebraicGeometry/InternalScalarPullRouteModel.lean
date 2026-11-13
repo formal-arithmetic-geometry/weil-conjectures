@@ -12,8 +12,7 @@ import all WeilConjectures.AlgebraicGeometry.InternalScalarRestrictionMateNormal
 
 /-! # The scalar route in the common tensor model
 
-Source: Stacks 06YY, 0G7E, 07A6; integral proper-base-change proof (1), (3).
-(auxiliary; not a blueprint node). -/
+Source: Stacks 06YY, 0G7E, 07A6; integral proper-base-change proof (1), (3). -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -75,7 +74,6 @@ set_option maxHeartbeats 500000 in
 
 Source: Stacks 06YY, 0G7E, 07A6; integral proper-base-change proof (1), (3),
 steps 2 and 3 of the tensor-pull normalization argument.
-(auxiliary; not a blueprint node).
 
 Proof. Write P as the homotopy quotient of a cochain complex. Naturality of
 `tX.derived` moves the exact pullback counit past the X tensor presentation.

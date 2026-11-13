@@ -28,7 +28,6 @@ namespace AlgebraicGeometry
 
 /-- Flasqueness of a module's underlying abelian sheaf implies module cohomology vanishes.
 Source: Stacks Project, Tags 01E1 and 03FD.
-(blueprint: lem-sc-module-cup-flasque-acyclicity)
 Proof: compare the underlying abelian group of module cohomology with the cohomology
 of the underlying abelian sheaf. Flasque acyclicity makes the latter group zero in
 positive degrees, hence the former is zero. The forgetful functor reflects zero objects.

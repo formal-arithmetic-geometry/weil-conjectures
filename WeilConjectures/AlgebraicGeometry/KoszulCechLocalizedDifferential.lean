@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.KoszulCechLocalizedBoundary
 
 /-! # The differential identity for signed localized Koszul evaluation
 
-Source: Stacks Project, Tags 08D0 and 08D1
-(blueprint: lem-sc-koszul-cech-localized-differential).
+Source: Stacks Project, Tags 08D0 and 08D1.
 The degree maps are constructed using the inverse of scalar multiplication on principal
 opens. Only their compatibility with adjacent differentials remains to be proved.
 -/
@@ -34,8 +33,7 @@ variable (F : CochainComplex
 
 /-- The explicit localized degree maps commute with adjacent differentials when B
 is the ordered exterior basis transported into the extended Koszul tail.
-Source: Stacks Project, Tags 08D0 and 08D1
-(blueprint: lem-sc-koszul-cech-localized-differential).
+Source: Stacks Project, Tags 08D0 and 08D1.
 Proof: In degree n and at a nonempty subset J, put p=card(J)-1 and q=n-p.
 The Hom differential is postcomposition by d_F plus (-1)^n precomposition by the
 positive Koszul boundary, since the tail uses the negative boundary. On the ordered

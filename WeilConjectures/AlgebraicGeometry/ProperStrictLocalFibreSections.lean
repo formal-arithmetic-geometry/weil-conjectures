@@ -87,8 +87,7 @@ private theorem isIso_sections_fieldExtension
   infer_instance
 
 /-- Restriction to a geometric closed fibre preserves sections over a strictly local base.
-Source: Stacks Project, Tags 0A0C, 0A3I and 0A3T
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 0A0C, 0A3I and 0A3T.
 
 Proof: factor `t` through the residue field of R; its image is the closed point, so its
 ring map kills exactly the maximal ideal. Restrict first to the residue-field fibre.

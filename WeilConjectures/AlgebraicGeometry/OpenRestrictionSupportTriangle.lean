@@ -22,8 +22,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 /-! # The support triangle for restriction to an open subscheme
 
 Source: Stacks Project, Duality for Schemes, Tag 0E4G, proof of Lemma 48.4.3;
-Derived Categories of Schemes, Lemma 36.4.1 and Definition 36.6.1
-(blueprint: lem-sc-open-restriction-support-triangle).
+Derived Categories of Schemes, Lemma 36.4.1 and Definition 36.6.1.
 -/
 
 @[expose] public section
@@ -42,7 +41,7 @@ namespace AlgebraicGeometry
 vertices. Its third vertex has cohomology supported on the closed complement and is
 bounded below whenever the first vertex is bounded below.
 Source: Stacks Project, Tag 0E4G, proof of Lemma 48.4.3; Lemma 36.4.1 and
-Definition 36.6.1 (blueprint: lem-sc-open-restriction-support-triangle).
+Definition 36.6.1.
 
 Proof:
 1. Transport the open-immersion restriction/direct-image adjunction along the

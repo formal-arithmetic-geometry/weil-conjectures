@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ProjTwistBasicOpenFractions
 # Basic-open fractions for finite coproducts of Proj twists
 
 Source: Stacks Project, Constructions, Tags 01M6 (3), 01M7 (2),(3), 01MN (1).
-(blueprint: lem-sc-proj-finite-twist-coproduct-fractions)
 -/
 
 @[expose] public section
@@ -82,7 +81,6 @@ private theorem coproductCoordinates_bijective {X : AlgebraicGeometry.Scheme.{v}
 /-- For any graded commutative ring, the finite coproduct of its twists is the
 associated sheaf of the finite sum of shifts, with scalar-compatible fraction maps.
 Source: Stacks Project, Constructions, Tags 01M6 (3), 01M7 (2),(3), 01MN (1).
-(blueprint: lem-sc-proj-finite-twist-coproduct-fractions)
 
 Proof: identify the sections of each twist on D₊(f) with degree-zero fractions
 of A(a i), by 01MN (1) and 01M7 (2). Finite coproducts of modules are finite

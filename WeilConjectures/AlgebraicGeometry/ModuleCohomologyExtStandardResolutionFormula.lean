@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtSectionsFactorizatio
 /-! # The fixed comparison on the chosen standard resolution
 
 Source: Stacks Project, Tags 015E and 03FD.
-(blueprint: new-module-cohomology-ext-standard-resolution-formula)
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ set_option Elab.async false
 /-- Computation only on Mathlib's fixed standard injective resolution, with no
 change-of-resolution assertion.
 Source: Stacks Project, Tag 015E (acyclic resolution computation) and Tag 03FD.
-(blueprint: new-module-cohomology-ext-standard-resolution-formula)
 
 Proof: Write s for the common-resolution sections comparison, c for the
 acyclic-resolution comparison, and t for terminal-source precomposition followed

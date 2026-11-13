@@ -18,11 +18,10 @@ universe u v
 namespace AlgebraicGeometry.Scheme
 /-- Category equivalence induced by a morphism of geometric points.
 Source: Stacks Project, Étale Cohomology, Remark 59.29.8, Tag 04FN.
-(blueprint: new-geometric-point-morphism-category-equivalence)
 
-Proof: Spec.homEquiv writes a as Spec of a field homomorphism i : k' → k, which is
+Proof: Spec.homEquiv writes a as Spec of a field homomorphism i: k' → k, which is
 injective. SpecToEquivOfField writes any map from a field spectrum to a scheme X as
-(x, j), where j : κ(x) → K. Naturality of fromSpecResidueField shows that
+(x, j), where j: κ(x) → K. Naturality of fromSpecResidueField shows that
 precomposition with a sends (x, j) to (x, i ∘ j). Thus it is injective on maps to X.
 For an étale U → S, a lift of s to U is (x, j) with x above the image of s and j
 compatible with the residue-field map. The étale residue extension κ(x)/κ(s) is

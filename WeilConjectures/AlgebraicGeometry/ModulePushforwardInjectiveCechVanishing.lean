@@ -51,7 +51,6 @@ private def inverseImageCech {X S : Scheme.{u}} (h : X ⟶ S)
 /-- Positive Čech cohomology of a direct image of an injective module vanishes.
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 01EX (1), using Tag 01EP.
-(blueprint: lem-weil-pbc-module-pushforward-injective-cech-vanishing).
 
 Proof: Fix an open U, a covering (V_i), and a choice C of its iterated fibre products.
 Pull back the opens along h. Inverse image preserves their union, so they cover h⁻¹U.

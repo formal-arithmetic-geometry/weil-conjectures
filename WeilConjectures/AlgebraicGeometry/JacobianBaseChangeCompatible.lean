@@ -13,7 +13,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 
 /-!
 # Compatibility of Jacobian identifications with base change
-Source: blueprint `lem-sc-genus-invariant`, proof step 3.
 -/
 
 @[expose] public section
@@ -27,7 +26,7 @@ namespace AlgebraicGeometry
 -- The original instance binder is used through typeclass inference.
 set_option linter.unusedVariables false in
 /-- The compatibility square for two Jacobian representing objects after base change.
-Source: blueprint `lem-sc-genus-invariant`, proof step 3 (Picard base-change and Yoneda).
+
 Proof: on each test scheme T over K, the iterated-pullback isomorphism identifies
 C_K ×_K T with C ×_k T. Pullback of invertible modules along this isomorphism preserves
 fibrewise degree, because the two fibres and their Euler characteristics agree. Thus it
@@ -37,13 +36,12 @@ compose this comparison with the sheafification of the presheaf isomorphism to g
 The units of sheafification commute with E, so E sends the class of L to the class of its
 specified pullback. The adjunction Over.map b ⊣ Over.pullback b transports e to a
 representation r of the restricted sheaf by J_K. Transport r along E, and compare it with
-eK using uniqueness of representing objects (Yoneda). This gives i : JK ≅ J_K with
+eK using uniqueness of representing objects (Yoneda). This gives i: JK ≅ J_K with
 r.homEquiv (a ≫ i.hom) = eK.homEquiv a. Apply this to the classifying map of the
 pullback of L, use the unit compatibility, and invert e.homEquiv. The inverse adjunction
 sends a map to J_K to its composite with pullback.fst J.hom b, giving exactly the square.
 This construction applies to arbitrary representing identifications, hence also to those
-respecting the group laws. Identity extensions and genus-zero curves are included.
-(blueprint: lem-sc-jacobian-base-change-compatible) -/
+respecting the group laws. Identity extensions and genus-zero curves are included. -/
 theorem jacobian_compatibility
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

@@ -13,7 +13,6 @@ public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 /-! # The ordinary degree-zero structure class
 
 Source: Stacks Project, Tag 06Z0.
-(blueprint: lem-sc-open-sections-ordinary-structure-class).
 -/
 
 @[expose] public section
@@ -312,7 +311,6 @@ set_option maxHeartbeats 900000 in
 -- The nested single-complex and scalar-forgetting comparisons need extra heartbeats.
 /-- The restricted ordinary class of one agrees with the tilde/sections unit class.
 Source: Stacks Project, Tag 06Z0, the tilde/sections unit, and its restriction to U.
-(blueprint: lem-sc-open-sections-ordinary-structure-class).
 
 Proof: Use the extension comparison to identify L with A[0]. The extension homology
 isomorphism followed by the single homology isomorphism sends its degree-zero cycle

@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleAffineContractibleExtension
 # Sheafification on weakly contractible affine objects
 
 Source: Bhatt–Scholze, Section 4.2, Lemma 4.2.13(1); RefactorInstruction,
-proof of Lemma point-eval
-(auxiliary; not a blueprint node).
+proof of Lemma point-eval.
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ The compatibility equation specifies the Kan-induced map associated to a coeffic
 sheaf morphism. All equations are in the coefficient category, so they respect its
 operations. This is a packaging of the conclusion, not an additional hypothesis.
 
-Source: Bhatt–Scholze, Lemma 4.2.13(1); RefactorInstruction, proof of Lemma point-eval
-(auxiliary; not a blueprint node). -/
+Source: Bhatt–Scholze, Lemma 4.2.13(1); RefactorInstruction, proof of Lemma point-eval. -/
 def PointLanSheafificationProperty (X : Scheme.{u}) (C : Type w) [Category.{v} C]
     [HasWeakSheafify (Scheme.ProEt.topology X) C] : Prop :=
   ∀ (F : Sheaf (coherentTopology Profinite.{u}) C) (P : X.ProEtᵒᵖ ⥤ C)
@@ -319,8 +317,7 @@ contractible affine, for sets, abelian groups and commutative rings. The canonic
 isomorphisms are natural in both variables and preserve the coefficient operations.
 
 Source: Bhatt–Scholze, Section 4.2, Lemma 4.2.13(1); RefactorInstruction,
-proof of Lemma point-eval
-(auxiliary; not a blueprint node).
+proof of Lemma point-eval.
 
 Proof (repair of the finite-refinement argument):
 1. The point Kan evaluation lemma gives the finite restriction-product comparison
@@ -330,7 +327,7 @@ Proof (repair of the finite-refinement argument):
    arrows V_i → U refining it. Put V = coproduct V_i. Finite-coproduct evaluation
    and subcanonicity identify h_V with the coproduct of the h_{V_i}. The cover makes
    h_V → h_U epi by sheaf uniqueness. Weak contractibility lifts id_U to a section
-   sigma : U → V. Put W_i = sigma^{-1}(V_i). These are disjoint clopen subschemes
+   sigma: U → V. Put W_i = sigma^{-1}(V_i). These are disjoint clopen subschemes
    with coproduct U; each maps to V_i over U and is affine because U is affine.
    Each W_i is weakly contractible: for a set-sheaf epi A → B and b in B(W_i),
    write U = W_i disjoint-union Z and use finite-coproduct evaluation to glue b

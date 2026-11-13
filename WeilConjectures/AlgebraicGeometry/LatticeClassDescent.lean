@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.LatticePairEffectiveDescent
 /-!
 # Descent of integral lattice classes
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59--60
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59--60.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- Integral lattice pairs admit an exact sheaf presentation by embedded images.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of lattice pairs
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of lattice pairs.
 Proof: use the presheaf of image families represented by actual integral lattice pairs.
 The slice tensor comparison restricts pairs and their images. Equality of these image
 families is equivalent to intertwining integral isomorphism by image classification.

@@ -21,8 +21,7 @@ import Mathlib.CategoryTheory.Comma.Over.Pullback
 # A finite presentation stage for a cover of the closed fibre
 
 Source: Stacks Project, Fundamental Groups, proof of Lemma 0GS2, Noetherian G-ring
-paragraph, completion and descent steps
-(blueprint: lem-weil-pbc-finite-etale-completion-stage).
+paragraph, completion and descent steps.
 -/
 
 @[expose] public section
@@ -35,8 +34,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A closed-fibre cover has a finite étale model over a finitely presented algebra mapping
 into the completion. No G-ring or henselian assumption is needed for this descent step.
-Source: Stacks Project, proof of Lemma 0GS2, lines 1815–1829
-(blueprint: lem-weil-pbc-finite-etale-completion-stage).
+Source: Stacks Project, proof of Lemma 0GS2, lines 1815–1829.
 
 Proof: put B = the I-adic completion and J = IB. Noetherianity of A makes I finitely
 generated, so B is J-adically complete, Noetherian, and B/J is canonically A/I.

@@ -26,7 +26,6 @@ namespace AlgebraicGeometry.Scheme
 /-- Lift the generic generators of a module subsheaf to a finite local subsystem.
 Source: Stacks Project, Tag 09BH, proof of Proposition 59.74.1 (3), generator-lifting
 paragraph; component isolation uses finiteness of the components of a Noetherian scheme.
-(blueprint: lem-weil-pbc-module-generic-generators).
 
 Proof: Delete the components other than the component with generic point eta.
 Choose a pointed etale trivialization of G and delete the other components of its

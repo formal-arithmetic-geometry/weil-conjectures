@@ -15,9 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 /-!
 # Canonical arrows for the ordinary finite projective-line calculation
 
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-decomposition.md and
-thm-amb-p1-adjunction.md; Stacks Project, Tags 03PL and 03FD
-(auxiliary; not a blueprint node).
+Source:; Stacks Project, Tags 03PL and 03FD.
 
 ## Main definitions
 
@@ -48,16 +46,14 @@ attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategory
 
 /-- Reuse the existing colimits of module sheaves once when elaborating unbounded
 derived inverse images. This is the library's colimit structure, with no new assumption.
-Source: the ordinary module derived categories in blueprint thm-amb-p1-adjunction
-(auxiliary; not a blueprint node). -/
+Source: the ordinary module derived categories in -/
 instance ordinaryFiniteColimitsOfShapeInt (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) : HasColimitsOfShape ℤ
       (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
   inferInstance
 
 /-- The recorded derived inverse image, with its instances elaborated once.
-Source: blueprint thm-amb-p1-adjunction
-(auxiliary; not a blueprint node). -/
+Source: -/
 @[implicit_reducible]
 def ordinaryFinitePullback (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -65,8 +61,7 @@ def ordinaryFinitePullback (A : Type (u + 1)) [CommRing A]
   (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor
 
 /-- The recorded unbounded derived direct image, with its instances elaborated once.
-Source: blueprint thm-amb-p1-adjunction
-(auxiliary; not a blueprint node). -/
+Source: -/
 @[implicit_reducible]
 def ordinaryFinitePushforward (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -74,8 +69,7 @@ def ordinaryFinitePushforward (A : Type (u + 1)) [CommRing A]
   (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctor
 
 /-- The existing derived tensor, with its coefficient instances elaborated once.
-Source: blueprint thm-amb-p1-adjunction
-(auxiliary; not a blueprint node). -/
+Source: -/
 @[implicit_reducible]
 def ordinaryFiniteTensor (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     DerivedCategoryModule A T ⥤ DerivedCategoryModule A T ⥤ DerivedCategoryModule A T :=
@@ -85,8 +79,7 @@ def ordinaryFiniteTensor (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
 comparison is characterized by the inclusion into the units sheaf; the coefficient
 comparison is characterized on pure tensors. Hence these are the canonical comparisons,
 not an arbitrary system of twist isomorphisms.
-Source: Stacks, Tags 03PK and 03Q1
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tags 03PK and 03Q1. -/
 structure OrdinaryFiniteTwistTransport (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) where
   roots : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), IsUnit (N : Γ(Y, ⊤)) →
@@ -109,8 +102,7 @@ structure OrdinaryFiniteTwistTransport (A : Type (u + 1)) [CommRing A] (N : ℕ)
         (roots f hY).hom).hom.app W z)
 
 /-- The exact derived single-degree comparison, with the same cached embeddings.
-Source: the exact inverse-image comparison with degree zero
-(auxiliary; not a blueprint node). -/
+Source: the exact inverse-image comparison with degree zero. -/
 def ordinaryFiniteSingleExactPullbackIso (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ordinaryFiniteSingleFunctor A Y ⋙
@@ -119,16 +111,14 @@ def ordinaryFiniteSingleExactPullbackIso (A : Type (u + 1)) [CommRing A]
   (upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategorySingleFunctor 0
 
 /-- The cached comparison is the canonical exact-derived single-degree comparison.
-Source: the exact inverse-image comparison, blueprint thm-amb-p1-adjunction
-(auxiliary; not a blueprint node). -/
+Source: the exact inverse-image comparison. -/
 theorem ordinaryFiniteSingleExactPullbackIso_eq (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ordinaryFiniteSingleExactPullbackIso A f =
       (upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategorySingleFunctor 0 := rfl
 
 /-- The canonical single-degree comparison, transported along the cached embeddings.
-Source: the exact inverse-image comparison with degree zero
-(auxiliary; not a blueprint node). -/
+Source: the exact inverse-image comparison with degree zero. -/
 def ordinaryFiniteSinglePullbackIso (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ordinaryFiniteSingleFunctor A Y ⋙ ordinaryFinitePullback A f ≅
@@ -138,8 +128,7 @@ def ordinaryFiniteSinglePullbackIso (A : Type (u + 1)) [CommRing A]
     ordinaryFiniteSingleExactPullbackIso A f
 
 /-- The canonical derived comparison on the shifted twist.
-Source: blueprint thm-amb-p1-decomposition
-(auxiliary; not a blueprint node). -/
+Source: -/
 def ordinaryFiniteShiftedLinePullback (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (hY : IsUnit (N : Γ(Y, ⊤))) :
@@ -153,8 +142,7 @@ def ordinaryFiniteShiftedLinePullback (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (t.line f hY) 2
 
 /-- The canonical comparison on the constant complex, with no chosen orientation.
-Source: blueprint thm-amb-p1-adjunction
-(auxiliary; not a blueprint node). -/
+Source: -/
 def ordinaryFiniteUnitPullback (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (ordinaryFinitePullback A f).obj (ordinaryFiniteUnit A Y) ≅
@@ -164,8 +152,7 @@ def ordinaryFiniteUnitPullback (A : Type (u + 1)) [CommRing A]
       ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) f).app (ModuleCat.of A A))
 
 /-- The unit comparison factors through the cached single-degree comparison.
-Source: the canonical inverse-image comparison, blueprint thm-amb-p1-adjunction
-(auxiliary; not a blueprint node). -/
+Source: the canonical inverse-image comparison. -/
 theorem ordinaryFiniteUnitPullback_eq (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ordinaryFiniteUnitPullback A f =
@@ -175,8 +162,7 @@ theorem ordinaryFiniteUnitPullback_eq (A : Type (u + 1)) [CommRing A]
             (ModuleCat.of A A)) := rfl
 
 /-- The shifted-line comparison uses the cached single-degree comparison and shift.
-Source: the canonical shifted inverse-image comparison, blueprint thm-amb-p1-decomposition
-(auxiliary; not a blueprint node). -/
+Source: the canonical shifted inverse-image comparison. -/
 theorem ordinaryFiniteShiftedLinePullback_eq
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA) {X Y : Scheme.{u}}
@@ -191,8 +177,7 @@ theorem ordinaryFiniteShiftedLinePullback_eq
             (ordinaryFiniteSingleFunctor A X).mapIso (t.line f hY)) := rfl
 
 /-- The shifted twisted unit, the first component of the projective-line decomposition.
-Source: blueprint thm-amb-p1-decomposition
-(auxiliary; not a blueprint node). -/
+Source: -/
 def ordinaryFiniteP1Unit (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) :
@@ -205,8 +190,7 @@ def ordinaryFiniteP1Unit (A : Type (u + 1)) [CommRing A] (N : ℕ)
       (ordinaryFiniteShiftedLinePullback A N hA t (ProjectiveLine S ↘ S) hS).hom
 
 /-- Push forward a degree-two Chern class using the actual inverse-image adjunction.
-Source: blueprint thm-amb-p1-decomposition
-(auxiliary; not a blueprint node). -/
+Source: -/
 def ordinaryFiniteP1ChernPushforward (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u})
     (c : ordinaryFiniteUnit A (ProjectiveLine S) ⟶
@@ -220,8 +204,7 @@ def ordinaryFiniteP1ChernPushforward (A : Type (u + 1)) [CommRing A] (N : ℕ)
 
 /-- The ordered projection map with the base coefficient first, exactly the
 symmetry-conjugate of the adjoint-of-counit map used by the projection theorem.
-Source: blueprint lem-amb-proper-coproducts-projection
-(auxiliary; not a blueprint node). -/
+Source: -/
 def ordinaryFiniteProjection (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (L : DerivedCategoryModule A X)
     (K : DerivedCategoryModule A Y) :
@@ -236,16 +219,14 @@ def ordinaryFiniteProjection (A : Type (u + 1)) [CommRing A]
         (((derivedTensorSymmetry (ModuleCat.{u + 1} A) X).hom.app L).app _)
 
 /-- Compose the recorded inverse image with tensoring by a specified source complex.
-Source: blueprint thm-amb-p1-adjunction
-(auxiliary; not a blueprint node). -/
+Source: -/
 def ordinaryFiniteTwistedPullback (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (q : X ⟶ Y) (L : DerivedCategoryModule A X) :
     DerivedCategoryModule A Y ⥤ DerivedCategoryModule A X :=
   ordinaryFinitePullback A q ⋙ derivedTensorRight (ModuleCat.{u + 1} A) X L
 
 /-- The proposed right adjoint on the entire derived category.
-Source: blueprint thm-amb-p1-adjunction
-(auxiliary; not a blueprint node). -/
+Source: -/
 def ordinaryFiniteP1Right (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u}) :
     DerivedCategoryModule A S ⥤ DerivedCategoryModule A (ProjectiveLine S) :=
@@ -254,7 +235,7 @@ def ordinaryFiniteP1Right (A : Type (u + 1)) [CommRing A] (N : ℕ)
 
 /-- Canonical proper exchange, expressed with the equivalent left-derived inverse images.
 The middle arrow is exactly `exactDerivedBaseChangeMap` from the recorded dependency.
-Source: Stacks, Tag 07A7 (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 07A7. -/
 def ordinaryFiniteP1Exchange (A : Type (u + 1)) [CommRing A]
     {S' S : Scheme.{u}} (f : S' ⟶ S) (M : DerivedCategoryModule A (ProjectiveLine S)) :
     (ordinaryFinitePullback A f).obj
@@ -272,9 +253,7 @@ end AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- Inverse-image composition around the projective-line base-change square.
-Source: blueprint thm-amb-p1-adjunction, base-change normalization
-(auxiliary; not a blueprint node). -/
+/-- Inverse-image composition around the projective-line base-change square. -/
 def ordinaryFiniteP1PullbackSquare (A : Type (u + 1)) [CommRing A]
     {S' S : Scheme.{u}} (f : S' ⟶ S) (K : DerivedCategoryModule A S) :
     (ordinaryFinitePullback A (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)).obj
@@ -287,9 +266,7 @@ def ordinaryFiniteP1PullbackSquare (A : Type (u + 1)) [CommRing A]
       ((ProjectiveSpace.map (ULift.{u} (Fin 2)) f) ≫ (ProjectiveLine S ↘ S))
       (ProjectiveSpace.map_over (ULift.{u} (Fin 2)) f)).app K
 
-/-- The tensor pullback comparison with its two input objects explicit.
-Source: blueprint thm-amb-p1-adjunction, base-change normalization
-(auxiliary; not a blueprint node). -/
+/-- The tensor pullback comparison with its two input objects explicit. -/
 def ordinaryFiniteTensorPullback (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (K L : DerivedCategoryModule A Y) :
     (ordinaryFinitePullback A f).obj ((derivedTensorRight (ModuleCat.{u + 1} A) Y L).obj K) ≅
@@ -297,9 +274,7 @@ def ordinaryFiniteTensorPullback (A : Type (u + 1)) [CommRing A]
         ((ordinaryFinitePullback A f).obj L)).obj ((ordinaryFinitePullback A f).obj K) :=
   (derivedTensorRightCompLeftDerivedUpperStarIso (ModuleCat.{u + 1} A) f L).app K
 
-/-- Apply the canonical tensor bifunctor to an isomorphism in each factor.
-Source: blueprint thm-amb-p1-adjunction, base-change normalization
-(auxiliary; not a blueprint node). -/
+/-- Apply the canonical tensor bifunctor to an isomorphism in each factor. -/
 def ordinaryFiniteTensorRightMapIso (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     {K K' L L' : DerivedCategoryModule A T} (e : K ≅ K') (c : L ≅ L') :
     (derivedTensorRight (ModuleCat.{u + 1} A) T L).obj K ≅
@@ -308,9 +283,7 @@ def ordinaryFiniteTensorRightMapIso (A : Type (u + 1)) [CommRing A] (T : Scheme.
     ((derivedTensorRightFunctor (ModuleCat.{u + 1} A) T).mapIso c).app K'
 
 /-- Tensor pullback followed by specified comparisons of the two factors.
-This constructs the comparison before specializing its schemes to projective lines.
-Source: blueprint thm-amb-p1-adjunction, base-change normalization
-(auxiliary; not a blueprint node). -/
+This constructs the comparison before specializing its schemes to projective lines. -/
 def ordinaryFiniteTwistedPullbackComparison (A : Type (u + 1)) [CommRing A]
     {X Y X' Y' : Scheme.{u}} (q : X ⟶ Y) (q' : X' ⟶ Y') (f : Y' ⟶ Y) (g : X' ⟶ X)
     (L : DerivedCategoryModule A X) (L' : DerivedCategoryModule A X')
@@ -324,9 +297,7 @@ def ordinaryFiniteTwistedPullbackComparison (A : Type (u + 1)) [CommRing A]
     ordinaryFiniteTensorRightMapIso A X' e c
 
 /-- The canonical comparison `f_P⁻¹ G_q K ≅ G_q' f⁻¹ K`: tensor pullback, the
-inverse-image square comparison, and the normalized finite-line comparison.
-Source: blueprint thm-amb-p1-adjunction, base-change normalization
-(auxiliary; not a blueprint node). -/
+inverse-image square comparison, and the normalized finite-line comparison. -/
 def ordinaryFiniteP1RightBaseChange (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     {S' S : Scheme.{u}} (f : S' ⟶ S)

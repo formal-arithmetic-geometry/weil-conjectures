@@ -12,8 +12,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # The inverse open-site dual comparison on product projections
 
-Source: Stacks Project, Tags 0A8X and 08DL; Hom-complex product projections.
-(blueprint: lem-pc-ordinary-evaluation-over-dual-projection). -/
+Source: Stacks Project, Tags 0A8X and 08DL; Hom-complex product projections. -/
 
 @[expose] public section
 
@@ -52,7 +51,6 @@ set_option maxHeartbeats 600000 in
 set_option linter.unusedVariables false in
 /-- The inverse transported dual comparison recovers the unit-valued projection.
 Source: Stacks Project, Tags 0A8X and 08DL, product projections and open restriction.
-(blueprint: lem-pc-ordinary-evaluation-over-dual-projection).
 
 Proof: apply the functorial projection equation of homComplex_projections_exists
 with identity in the first variable and a.hom in the second variable. Compose

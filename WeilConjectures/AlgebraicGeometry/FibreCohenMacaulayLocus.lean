@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.AffineFibreCohenMacaulayLocus
 /-! # Openness of the fibre Cohen-Macaulay locus
 
 Source: Stacks Project, Tag 045U (1), (2).
-(blueprint: lem-sbc-fibre-cohen-macaulay-locus-open)
 -/
 
 @[expose] public section
@@ -171,8 +170,7 @@ Cohen-Macaulay as a module over itself means that its depth equals its dimension
 the regular-sequence definition of depth and ring Krull dimension used here give
 exactly this condition. The chartwise open sets agree on overlaps, since both
 conditions depend only on the fibre local ring, and their union is the displayed
-locus. An empty source has empty locus, so requires no exception.
-(blueprint: lem-sbc-fibre-cohen-macaulay-locus-open) -/
+locus. An empty source has empty locus, so requires no exception. -/
 theorem isOpen_fibre_depth_eq_ringKrullDim
     {X T : Scheme.{u}} (f : X ⟶ T) [Flat f] [LocallyOfFinitePresentation f] :
     IsOpen {y : X |

@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 
 /-! # Joint kernel of restrictions in a principal two-open cover
 
-Source: Stacks Project, Tags 0GY0 and 0A50.
-(blueprint: lem-weil-pbc-principal-open-cohomology-joint-kernel) -/
+Source: Stacks Project, Tags 0GY0 and 0A50. -/
 
 @[expose] public section
 
@@ -43,7 +42,6 @@ when the preceding cohomology group of their intersection vanishes.
 
 Source: Stacks Project, Tag 0GY0, the displayed Mayer--Vietoris exact segment;
 Tag 0A50, Mayer--Vietoris for etale cohomology.
-(blueprint: lem-weil-pbc-principal-open-cohomology-joint-kernel)
 
 Proof: Put W = D(a+b), U = W ∩ D(a), and V = W ∩ D(b). A prime avoiding
  a+b cannot contain both a and b, so U and V cover W. Their intersection is

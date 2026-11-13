@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.MixedAffineSectionsChartModelFactorizat
 /-! # Invertibility of the mixed affine comparison on K-flat models
 
 Source: Stacks Project, Tags 08DW(2), 06Z0, 08HY and 0D5T.
-(blueprint: lem-sc-mixed-affine-sections-kflat-comparison-isIso).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace AlgebraicGeometry
 /-- The canonical affine comparison is invertible on K-flat module models.
 Source: Stacks Project, perfect.tex, Tags 06Z0 and 08DW(2);
 cohomology.tex, Tags 08HY and 0D5T; duality.tex, Tag 0AA8.
-(blueprint: lem-sc-mixed-affine-sections-kflat-comparison-isIso).
 
 Proof: Identify the affine schemes with spectra of their global rings. Use the given
 K-flat module complex P and its termwise tilde, restricted through the spectrum chart of S.

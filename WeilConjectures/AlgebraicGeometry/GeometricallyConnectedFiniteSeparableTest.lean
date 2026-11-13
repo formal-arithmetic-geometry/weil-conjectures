@@ -17,8 +17,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 /-!
 # Testing geometric connectedness by finite separable extensions
 
-Source: Stacks Project, Varieties, Lemma Tag 0389
-(blueprint: lem-weil-pbc-geometrically-connected-finite-separable-test).
+Source: Stacks Project, Varieties, Lemma Tag 0389.
 -/
 
 @[expose] public section
@@ -71,26 +70,23 @@ private theorem invariant_clopen_eq_empty_or_univ
 
 /-- A scheme over a field is geometrically connected precisely when its base change to
  every finite separable field extension is connected.
-Source: Stacks Project, Varieties, Lemma Tag 0389
-(blueprint: lem-weil-pbc-geometrically-connected-finite-separable-test).
+Source: Stacks Project, Varieties, Lemma Tag 0389.
 
 Proof:
 1. Geometric connectedness gives connectedness after every field extension, hence every
-   finite separable extension (def-pc-geometrically-irreducible).
+   finite separable extension.
 2. Conversely, assume the finite separable tests hold. Choose a separable closure `ks/k`,
-   Galois over `k` and every intermediate field
-   (lem-weil-pbc-separable-closure-exists-galois). The automorphisms of `ks/k` act on `Y_ks`
-   by base change (def-pc-base-change), contravariantly, and fix its projection `p` to `Y`.
-   This projection is surjective (lem-weil-pbc-surjective-base-change).
-3. The degree-one test `k/k` makes `Y` nonempty, so `Y_ks` is nonempty too
-   (def-weil-connected-scheme, def-weil-pbc-separable-algebraic-extension).
+   Galois over `k` and every intermediate field. The automorphisms of `ks/k` act on `Y_ks`
+   by base change, contravariantly, and fix its projection `p` to `Y`.
+   This projection is surjective.
+3. The degree-one test `k/k` makes `Y` nonempty, so `Y_ks` is nonempty too.
 4. If `Y` were not geometrically connected, `Y_ks` would be disconnected: otherwise
    lem-weil-separably-closed-geometrically-connected and
    lem-weil-geometrically-connected-check-after-extension imply geometric connectedness of `Y`.
    Thus write `Y_ks` as the disjoint union of nonempty clopen subsets `Ubar` and `Vbar`.
 5. For every quasi-compact open `W` of `Y`, its inverse image `W_ks` is quasi-compact:
    the projection is quasi-compact by lem-weil-pbc-qcqs-morphism-permanence, and `W` is a
-   finite union of affine opens (def-weil-finite-type-morphism). Its intersections with
+   finite union of affine opens. Its intersections with
    `Ubar` and `Vbar` are quasi-compact by lem-weil-pbc-closed-in-quasi-compact. By
    lem-weil-pbc-galois-base-change-qc-open-descends they are invariant under automorphisms
    fixing some finite intermediate field `k_W`.
@@ -115,11 +111,9 @@ Proof:
     gives a complementary open, hence clopen, partition of `Y_ks`, since affine opens
     cover `Y`. Both pieces are `H`-invariant. The first contains `U_W0`; the second
     contains every point of `Vbar` by choosing an affine neighbourhood of its image.
-11. Pullback pasting identifies `Y_ks` with the base change of `Y_k'` to `ks`
-    (lem-weil-pbc-cartesian-square-pasting, def-pc-fibre-product), with the same `H`-action.
+11. Pullback pasting identifies `Y_ks` with the base change of `Y_k'` to `ks`, with the same `H`-action.
     By lem-weil-pbc-galois-invariant-closed-subset-descends the two pieces descend to closed
-    subsets of `Y_k'`. Surjectivity of `Y_ks` to `Y_k'`
-    (lem-weil-pbc-surjective-base-change) makes these subsets complementary and nonempty.
+    subsets of `Y_k'`. Surjectivity of `Y_ks` to `Y_k'` makes these subsets complementary and nonempty.
     This contradicts the connectedness test for the finite separable extension `k'/k`.
 -/
 theorem GeometricallyConnected.iff_connectedSpace_finite_separable

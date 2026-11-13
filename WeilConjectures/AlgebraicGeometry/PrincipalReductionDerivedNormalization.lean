@@ -9,8 +9,7 @@ import WeilConjectures.AlgebraicGeometry.PrincipalConeTensorNormalization
 import WeilConjectures.AlgebraicGeometry.PrincipalTensorScalarExtension
 
 /-! # Normalized derived principal quotient cones
-
-(auxiliary; not a blueprint node).
+.
 -/
 
 @[expose] public noncomputable section
@@ -31,16 +30,13 @@ attribute [local irreducible] upperStarFromPoint
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
-/-- The canonical extension followed by restriction, with positive level n+1.
-Source: blueprint Cones paragraph
-(auxiliary; not a blueprint node). -/
+/-- The canonical extension followed by restriction, with positive level n+1. -/
 abbrev reduction (n : ℕ) :=
   AdicCompletion.derivedReduction l E X n ⋙ AdicCompletion.restrict l E X n
 
 /-- The scalar principal cone computes the canonical derived quotient functor,
 with the quotient maps and adjunction units, and with its standard signed shifts.
-
-(auxiliary; not a blueprint node).
+.
 
 Proof: the scalar formula identifies d with multiplication by the uniformizer.
 The resolution theorem gives the short exact sequence R --d^(n+1)--> R --> B_n.

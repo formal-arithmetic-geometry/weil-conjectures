@@ -26,7 +26,6 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A stalk factorization from a finite free constant module extends to an open.
 Source: Stacks Project, Tag 09BH, Proposition 59.74.1 (3), generator lifting and descent.
-(blueprint: lem-weil-pbc-finite-free-constant-map-open-factorization).
 
 Proof: For each standard basis vector, represent its image under l by a section of F
 on a pointed etale neighbourhood. Refine finitely many times so that all representatives

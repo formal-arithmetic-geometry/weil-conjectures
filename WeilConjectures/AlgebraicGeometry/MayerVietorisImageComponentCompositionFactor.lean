@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainData
 /-! # Factoring the complex image component
 
 Source: Stacks Project, Tags 08FE and 0D5T.
-(blueprint: lem-pc-mayer-vietoris-image-component-composition-factor).
 -/
 
 @[expose] public section
@@ -56,8 +55,7 @@ Source: Stacks Project, Tag 08FE.
 Proof: expand the associators and whiskering defining the image isomorphism.
 Equality induction identifies pushforwardCongr with eqToIso. The remaining two
 restriction factors cancel by functoriality and the inverse-hom identity.
-No cover or nonempty-open assumption is involved.
-(blueprint: lem-pc-mayer-vietoris-image-component-composition-factor). -/
+No cover or nonempty-open assumption is involved. -/
 theorem schemeMVImageIso_composition_factor
     {X Y : Scheme.{u}} (h : X ⟶ Y) (W : Y.Opens)
     (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) :

@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.AffineBirationalOfFractionRingEquiv
 
 Source: Stacks Project, Tag 0559, first proof, field generators and polynomial numerator;
 Tag 0552, the function-field criterion for birationality.
-(blueprint: lem-sbc-generic-fibre-birational-hypersurface-model)
 -/
 
 @[expose] public section
@@ -36,8 +35,8 @@ point of the generic fibre and ending with the polynomial quotient; Tag 0552.
 Proof: Put A = Gamma(S, O_S) and K = kappa(eta) = Frac(A). The affine generic fibre
 has a finitely generated geometrically integral K-algebra B. Its fraction field L
 is separably generated over K and remains a domain after extension to an algebraic
-closure of K. A separating transcendence basis t_1,...,t_r and a primitive element z
-present L as the fraction field of K[t_1,...,t_r,T]/(Q), where Q is the primitive
+closure of K. A separating transcendence basis t_1..,t_r and a primitive element z
+present L as the fraction field of K[t_1..,t_r,T]/(Q), where Q is the primitive
 numerator of the minimal polynomial of z. Gauss's lemma and geometric integrality
 of L show that Q stays irreducible over an algebraic closure, and the resulting
 hypersurface is geometrically integral. Clear the finitely many coefficient
@@ -48,9 +47,7 @@ express the finite sets of algebra generators as fractions in L and invert their
 nonzero denominators to obtain isomorphic dense opens over K (Tag 0552).
 These opens give the required generic-fibre partial isomorphism. The case of a
 purely transcendental L uses Q = T in one additional variable, including L = K.
-No flatness or reducedness away from the generic fibre is required.
-
-(blueprint: lem-sbc-generic-fibre-birational-hypersurface-model) -/
+No flatness or reducedness away from the generic fibre is required. -/
 theorem exists_generic_fibre_birational_hypersurface_model
     {X S : Scheme.{u}} [IsAffine X] [IsAffine S] [IsIntegral S]
     (f : X ⟶ S) [LocallyOfFinitePresentation f]

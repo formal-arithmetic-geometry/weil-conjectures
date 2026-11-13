@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.StalkImageRange
 /-! # Range of ideal multiplication on module stalks
 
 Source: Stacks Project, Modules, Lemmas 01AG and 01CB.
-(blueprint: lem-weil-pbc-ideal-multiplication-stalk-range).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ noncomputable section
 
 /-- The image of the stalk multiplication map is the ideal times the module.
 Source: Stacks Project, Modules, Lemmas 01AG and 01CB, used in the proof of 0CYV.
-(blueprint: lem-weil-pbc-ideal-multiplication-stalk-range).
 
 Proof: 01CB identifies the stalk of J tensor F with J_x tensor F_x and sends a
 pure tensor germ to the tensor of the germs. The stalk of the map induced by

@@ -37,7 +37,7 @@ Proof:
    it is finitely presented because `Q^{-1}` and `Q^0` are finite free. Hence `M` is
    finite projective, and is free on an open neighbourhood of the chosen point.
 3. Replace the negative tail and degree zero by `M` in degree zero and keep degrees
-   `1,...,d`. This quotient complex is quasi-isomorphic to `Q`. On the chosen smaller
+   `1..,d`. This quotient complex is quasi-isomorphic to `Q`. On the chosen smaller
    open its degree-zero term and all higher terms are finite free, and it is zero
    outside `[0,d]`. Thus it gives `P` with the stated three structural properties.
 4. Both `C` and `P` are bounded flat complexes. Their quasi-isomorphism in the derived
@@ -45,8 +45,7 @@ Proof:
    such complexes. Taking cohomology gives the isomorphisms for every `g` and `q`.
    Express the smaller neighbourhood as `V <= U` in the ambient scheme to use
    `T.homOfLE hVU` as its open inclusion. No global triviality is claimed.
-
-(blueprint: lem-pc-flat-model-finite-free-shortening). -/
+. -/
 theorem exists_local_finiteFree_shortening {T : Scheme.{u}} (U : T.Opens)
     (C Q : CochainComplex U.toScheme.Modules ℤ) (d : ℕ)
     (hCge : C.IsStrictlyGE 0) (hCle : C.IsStrictlyLE d)

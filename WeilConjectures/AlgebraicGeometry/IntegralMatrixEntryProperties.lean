@@ -47,7 +47,6 @@ integrally divides every entry of its row.
 
 Source: Bhatt--Scholze, Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1);
 continuous-function pivot argument, division and cancellation step.
-(auxiliary; not a blueprint node)
 
 Proof: conjugate each regular-module endomorphism by the supplied ring realization.
 Linearity on sections makes it multiplication by its value on 1; naturality makes this

@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomOpenStagePresentation
 
 Source: Stacks Project, perfect.tex Tag 09RE, the open-local comparison in the
 Mayer--Vietoris induction; cohomology.tex Tag 08BW.
-(blueprint: lem-pc-perfect-hom-open-colimit-local-comparison).
 -/
 
 @[expose] public section
@@ -34,11 +33,10 @@ of a Mayer--Vietoris family, a biproduct, or continuity on that open.
 
 Source: Stacks Project, perfect.tex Tag 09RE, the open-local Hom comparison;
 cohomology.tex Tag 08BW.
-(blueprint: lem-pc-perfect-hom-open-colimit-local-comparison).
 
 Proof:
 1. Apply perfect_hom_open_stage_presentation to W with shift zero. It constructs
-an open immersion k : Z -> X with image W, a locally finitely presented qcqs
+an open immersion k: Z -> X with image W, a locally finitely presented qcqs
 structural map s', and perfect objects P',Q'. It supplies equivalences e_j from
 Hom(P,H(F_j)[0]) to the base-changed Hom sets on Z, an apex equivalence b, and
 exact compatibility with perfectStageMap and perfectLimitMap. The construction

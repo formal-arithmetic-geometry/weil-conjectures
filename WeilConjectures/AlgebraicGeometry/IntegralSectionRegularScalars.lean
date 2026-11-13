@@ -11,7 +11,6 @@ import all WeilConjectures.AlgebraicGeometry.ContinuousScalarFinitePresentation
 /-! # The scalar-compatible rank-one section comparison
 
 Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +28,7 @@ attribute [local irreducible] upperStarFromPoint CondensedRing.upperStar
   Scheme.proEtaleModuleInverseImage Scheme.integralConstantModule continuousScalarFunctor
 
 /-- The specified continuous-scalar, point-pullback and section-action composite.
-Source: Bhatt--Scholze, Proposition 6.8.11(3), integral scalar models
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.8.11(3), integral scalar models. -/
 @[irreducible] def sectionRealization (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :
@@ -44,8 +42,7 @@ Source: Bhatt--Scholze, Proposition 6.8.11(3), integral scalar models
       (Scheme.integralDetailedCoefficientComparison X l E).hom
 
 /-- The specified completed-constant realization with the recorded scalar universe change.
-Source: Bhatt--Scholze, Proposition 6.8.11(3), integral scalar models
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.8.11(3), integral scalar models. -/
 @[irreducible] def completedRealization (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :
@@ -58,8 +55,7 @@ Source: Bhatt--Scholze, Proposition 6.8.11(3), integral scalar models
 
 /-- Both realizations preserve finite colimits.
 Source: Bhatt--Scholze, Proposition 6.8.11(3); scalar extension and inverse image are
-left adjoints and section action and coefficient restriction are equivalences
-(auxiliary; not a blueprint node). -/
+left adjoints and section action and coefficient restriction are equivalences. -/
 private theorem finiteColimits (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :
@@ -127,8 +123,7 @@ with every scalar endomorphism. This is a rank-one coefficient calculation; no f
 presentation, cokernel or arbitrary module is involved.
 
 Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), the regular scalar
-calculation in the integral constructibility bridge
-(auxiliary; not a blueprint node).
+calculation in the integral constructibility bridge.
 
 Proof: constant sheafification sends the regular scalar module to the regular constant
 coefficient module. Scalar extension sends it to the regular continuous coefficient

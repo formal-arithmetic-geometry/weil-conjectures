@@ -16,7 +16,6 @@ import WeilConjectures.CategoryTheory.InternalSectionModuleFlat
 /-! # Flat module objects under pro-étale inverse image
 
 Source: Stacks Project, Tag 05VD, inverse image of flat module sheaves.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ set_option backward.isDefEq.respectTransparency false in
 rings preserves flat module objects.
 
 Source: Stacks Project, Tag 05VD, lemma-pullback-flat.
-(auxiliary; not a blueprint node)
 
 Proof. The explicit balanced tensor comparison transports internal flatness to
 site-flatness of section modules. Construct the set-valued inverse image as left

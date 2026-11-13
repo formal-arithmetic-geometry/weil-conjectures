@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.IntegralIdealAffineSections
 /-!
 # Nonzero ideals on integral schemes and their generic stalks
 
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 01YL
-(blueprint: lem-weil-pbc-integral-scheme-ideal-generic-stalk).
+Source: Stacks Project, Cohomology of Schemes, proof of Lemma 01YL.
 -/
 
 @[expose] public section
@@ -37,8 +36,7 @@ stalk is the whole generic local ring, which is a field. The stalk map of the in
 local ring is surjectivity of this map (independent of the identification of the stalk of
 `𝒪_X` as a module with `𝒪_{X,η}`).
 
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 01YL
-(blueprint: lem-weil-pbc-integral-scheme-ideal-generic-stalk).
+Source: Stacks Project, Cohomology of Schemes, proof of Lemma 01YL.
 
 Proof:
 1. Every nonempty open contains the generic point. On a nonempty affine open the section

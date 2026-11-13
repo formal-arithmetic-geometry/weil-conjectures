@@ -25,7 +25,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- The stalk of a finite free module sheaf has the same finite coordinate set.
 
 Source: Stacks Project, Modules, Tag 01C6, finite local trivializations.
-(blueprint: lem-weil-pbc-finite-free-module-stalk-equiv)
 
 Proof: Restriction to the top open identifies the free sheaf with the free sheaf
 on the same set. Apply the already proved local coordinate construction

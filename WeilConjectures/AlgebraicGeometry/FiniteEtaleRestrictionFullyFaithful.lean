@@ -18,9 +18,8 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleGraphBaseChange
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleClopenRestrictionRank
 
 /-! # Full faithfulness of finite étale restriction
-Source: corrected blueprint thm-weil-pbc-finite-etale-lifting, proof steps 1–6;
+Source: corrected, proof steps 1–6;
 Stacks Project, Tags 0GS2 (the result) and 0A0B (clopen restriction).
-(blueprint: lem-weil-pbc-finite-etale-restriction-fully-faithful)
 -/
 
 @[expose] public section
@@ -62,9 +61,8 @@ private theorem rank_one_of_clopen_injective
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Finite étale restriction is fully faithful over a proper henselian pair.
-Source: corrected blueprint thm-weil-pbc-finite-etale-lifting, proof steps 1–6;
+Source: corrected, proof steps 1–6;
 Stacks Project, Tags 0GS2 (the result) and 0A0B (clopen restriction).
-(blueprint: lem-weil-pbc-finite-etale-restriction-fully-faithful)
 
 Proof: For finite étale U,V over Y, morphisms U → V over Y correspond to sections of
 P = V ×[Y] U → U. A section of this finite étale separated morphism is an open and

@@ -19,8 +19,7 @@ import Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-! # Derived quasi-coherent equivalence for an affine morphism
 
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.5.4, Tag 0AVW
-(blueprint: lem-sc-finite-affine-derived-equivalence).
+Source: Stacks Project, Derived Categories of Schemes, Lemma 36.5.4, Tag 0AVW.
 -/
 
 @[expose] public section
@@ -42,18 +41,17 @@ private lemma finite_affine_moduleDirectImage_restrictScalars_eq
 
 /-- An affine morphism gives an equivalence with quasi-coherent derived modules over
 its direct-image algebra. Its functor is induced by `Rg_*` for the canonical morphism
-`g : (X, O_X) → (Y, f_* O_X)`. Restricting scalars recovers `Rf_*`.
-Source: Stacks Project, Tag 0AVW
-(blueprint: lem-sc-finite-affine-derived-equivalence).
+`g: (X, O_X) → (Y, f_* O_X)`. Restricting scalars recovers `Rf_*`.
+Source: Stacks Project, Tag 0AVW.
 
 Proof:
-1. The affine module correspondence (`lem-weil-pbc-affine-module-correspondence`)
+1. The affine module correspondence
    identifies quasi-coherent modules on X with quasi-coherent direct-image-algebra modules.
 2. On affine stalks g is a localization map, hence flat. Its pullback is exact, and
    cohomology of its derived pullback is pullback of cohomology. The ringed-space derived
-   adjunction (`lem-pc-ringed-spaces-derived-adjoint-general`) gives Lg-star left adjoint
+   adjunction gives Lg-star left adjoint
    to Rg-star. First use Step 4 to identify scalar restriction of Rg-star with Rf-star.
-   The affine cohomology formula (`lem-sc-affine-derived-cohomology`) then shows Rg-star
+   The affine cohomology formula then shows Rg-star
    has quasi-coherent cohomology over the direct-image algebra.
 3. Lg-star also preserves quasi-coherent cohomology. Its underived functor agrees with
    the affine correspondence's two tensor operations by tensor associativity. Exactness
@@ -62,8 +60,7 @@ Proof:
    give mutually inverse equivalences.
 4. Scalar restriction is exact: the underlying sheaves, kernels and cokernels are
    unchanged. Choose a K-injective representative I of K. Rg-star and Rf-star are the
-   same complex f-star I with different scalar structures
-   (`def-pc-ringed-spaces-derived-direct-image`, `def-pc-derived-direct-image`). Hence
+   same complex f-star I with different scalar structures. Hence
    scalar restriction of the equivalence is naturally isomorphic to Rf-star. -/
 theorem finite_affine_derived_equivalence {X Y : Scheme.{v}} (f : X ⟶ Y)
     [IsAffineHom f]

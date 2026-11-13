@@ -32,7 +32,7 @@ open Scheme
 
 /-- The comparison counit is invertible for finite locally constant stratified sheaves.
 Source: Stacks Project, Tag 09AK, lemma-compare-constructible, proof of essential image
-membership (auxiliary; not a blueprint node).
+membership.
 
 Proof: on each stratum, transport the finite constant models to slice sites and
 use their finite geometric stalks to obtain a lisse pro-etale sheaf. The lisse-origin

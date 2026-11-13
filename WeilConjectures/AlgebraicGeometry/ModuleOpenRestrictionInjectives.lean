@@ -17,8 +17,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 /-!
 # Exact restriction of module sheaves and injective objects
 
-Source: Stacks Project, Cohomology, Tags 01E1 and 02N5; Modules, Tags 01AJ and 01AK
-(blueprint: lem-weil-pbc-module-open-restriction-injectives).
+Source: Stacks Project, Cohomology, Tags 01E1 and 02N5; Modules, Tags 01AJ and 01AK.
 -/
 
 @[expose] public section
@@ -68,8 +67,7 @@ to its termwise restriction with restricted augmentation. Direct image along the
 inclusion (`SheafOfModules.pushforward (SheafOfModules.pushforwardOver U)`, sections
 `𝒥(W ∩ U)`, Mathlib's right adjoint of restriction) also preserves injective objects.
 
-Source: Stacks Project, Cohomology, Tags 01E1 and 02N5; Modules, Tags 01AJ and 01AK
-(blueprint: lem-weil-pbc-module-open-restriction-injectives).
+Source: Stacks Project, Cohomology, Tags 01E1 and 02N5; Modules, Tags 01AJ and 01AK.
 
 Proof: (1) Restriction is sectionwise additive by `def-weil-sheaf-of-modules-category`.
 Its stalk at a point of the open is naturally the original stalk: restrict a representative

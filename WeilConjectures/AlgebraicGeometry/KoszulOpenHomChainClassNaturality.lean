@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.KoszulOpenHomChainRepresentative
 /-! # Naturality of the explicit Koszul stage class
 
 Source: Stacks Project, Tags 08DC, 08DD, 08D1 and 09M1.
-(blueprint: lem-sc-koszul-open-hom-chain-class-naturality).
 -/
 
 @[expose] public section
@@ -313,7 +312,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The explicit stage-to-derived-sections class commutes with postcomposition.
 Source: Stacks Project, Tag 08D1, functoriality in the coefficient complex;
 Tag 08DC, Equation 36.9.4.1, and Tag 08DD.
-(blueprint: lem-sc-koszul-open-hom-chain-class-naturality).
 Proof: The tilde/sections adjunction transpose of s followed by t is the transpose
 of s postcomposed with the top-sections chain map of t. The Hom cycle of that
 composite is postcomposition of the Hom cycle of s. Postcomposition commutes

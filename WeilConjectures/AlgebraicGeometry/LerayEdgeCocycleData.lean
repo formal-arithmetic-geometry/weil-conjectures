@@ -44,7 +44,6 @@ set_option maxHeartbeats 800000 in
 -- Resolution comparison unfolds both module-valued derived functors and forgetful maps.
 set_option backward.isDefEq.respectTransparency false in
 /-- Construction of the cocycle Leray edge.
-(blueprint: lem-pc-leray-edge-cocycle-data)
 
 Source: Stacks Project, Cohomology, Tags 01F4 (2), 01F2, and 01EX.
 

@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.NormalLocusAssociatedPrime
 /-! # Openness of the normal locus
 
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 0332
-(blueprint: lem-weil-pbc-normal-locus-open)
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry
 /-- The normal locus of a Noetherian domain with a normal principal localization is open.
 
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 0332
-(blueprint: lem-weil-pbc-normal-locus-open)
 Proof (following the nine steps of the node and Stacks Tag 0332):
 1. The prime localizations of `R` and its localization away from the nonzero `f` are
    Noetherian domains. Use `lem-weil-pbc-localization-noetherian`; injectivity follows
@@ -55,7 +53,7 @@ Proof (following the nine steps of the node and Stacks Tag 0332):
 7. By `lem-weil-pbc-depth-drops-by-one`, `B/fB` is nonzero of depth zero. Its maximal
    ideal is associated: otherwise `lem-weil-pbc-nonzerodivisor-if-maximal-not-associated`
    gives a nonzerodivisor in that ideal, a regular sequence of length one, contradicting
-   depth zero (`def-weil-pbc-regular-sequence`, `def-weil-pbc-depth`).
+   depth zero.
 8. Identify the localization of `R/fR` at `q` with `B/fB`. Then
    `lem-weil-pbc-noetherian-associated-prime-from-localization` implies that `q` is an
    associated prime of `R/fR`.

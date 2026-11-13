@@ -11,7 +11,6 @@ import Mathlib.CategoryTheory.Limits.Types.Colimits
 
 /-! # The filtered system of stage Hom sets
 Source: Stacks Project, Tags 09RE and 0D5S.
-(blueprint: lem-pc-perfect-hom-stage-colimit).
 -/
 
 @[expose] public section
@@ -45,7 +44,6 @@ private theorem homMap_identity
 No geometric finiteness, perfectness, or local continuity is needed.
 
 Source: Stacks Project, Tag 09RE, filtered Hom system; Tag 0D5S, composition coherence.
-(blueprint: lem-pc-perfect-hom-stage-colimit).
 
 Proof: At j take the Hom set between the pullbacks of P and Q, using ULift if
 needed to put it in Type (max u w). Transport along j ≤ k is perfectStageMap.

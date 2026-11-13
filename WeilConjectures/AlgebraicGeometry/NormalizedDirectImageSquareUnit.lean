@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.NormalizedDirectImageSquarePaste
 /-! # Right-derived unit normalization of direct-image squares
 
 Source: Stacks Project, Cohomology, Tag 0D5T.
-(blueprint: lem-pc-normalized-direct-image-square-unit).
 -/
 
 @[expose] public section
@@ -49,7 +48,6 @@ attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFu
 units of its two ordinary direct-image paths.
 Source: Stacks Project, Cohomology, Tag 0D5T; the determining equation in
 `RingedSpace.exists_derivedModuleDirectImageComposition`.
-(blueprint: lem-pc-normalized-direct-image-square-unit).
 
 Proof: The inverse composition comparison for each path is specified by its
 right-derived unit equation. Postcompose that equation with the forward comparison

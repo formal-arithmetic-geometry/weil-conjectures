@@ -17,8 +17,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- A finite reduced stratification whose support is a specified closed subset
-(blueprint: lem-a1-finite-etale-noetherian-clopen-assembly-append).
+/-- A finite reduced stratification whose support is a specified closed subset.
 
 Proof data records the finite partition, its actual scheme immersions, reduced domains,
 the property P, and the support and subset equations needed for appending a stratum. -/
@@ -40,8 +39,7 @@ structure ReducedFiniteLocallyClosedStratificationOn
   subset : ∀ a, stratum a ⊆ (T : Set Y)
 
 /-- Append an immersed reduced piece to a finite reduced stratification of its closed
-complement. This is the finite-index and range bookkeeping step of the induction
-(blueprint: lem-a1-finite-etale-noetherian-clopen-assembly-append).
+complement. This is the finite-index and range bookkeeping step of the induction.
 
 Proof: index by `Fin (n + 1)` via `Fin.cons`: stratum `0` is the range of `j` with domain
 `U`, stratum `i + 1` is the old stratum `i` with its domain and arrow unchanged. The range of

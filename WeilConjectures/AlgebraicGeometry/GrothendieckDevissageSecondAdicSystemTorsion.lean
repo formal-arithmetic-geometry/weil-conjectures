@@ -31,11 +31,10 @@ namespace AlgebraicGeometry
 /-- A fixed compatible algebraization has the uniform exponent 4t.
 There is no existence conclusion: N, δ and σ are supplied, and no projection
 characterization of θ is needed for this estimate.
-Source: Stacks Project, Tag 088A (lemma-existence-tricky), the two applications
-of Remark 0888 (remark-inverse-systems-kernel-cokernel-annihilated-by).
+Source: Stacks Project, Tag 088A, the two applications
+of Remark 0888.
 https://stacks.math.columbia.edu/tag/088A
-https://stacks.math.columbia.edu/tag/0888
-(blueprint: lem-weil-pbc-devissage-second-adic-system-torsion).
+https://stacks.math.columbia.edu/tag/0888.
 
 Proof: On an affine open, the kernel and cokernel of α_n are the ordinary
 module kernel and cokernel and are killed by K^t. For a,b in K^t, define the

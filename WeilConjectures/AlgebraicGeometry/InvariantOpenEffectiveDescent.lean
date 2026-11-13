@@ -17,7 +17,6 @@ import Mathlib.AlgebraicGeometry.Gluing
 # Gluing effective descent on invariant open subschemes
 
 Source: Stacks Project, Descent, Lemma 35.35.13, Tag 0AP4.
-(blueprint: lem-pd-effective-invariant-open-cover).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace CategoryTheory.Over.DescentDatum
 
 /-- Effective compatible data on an open covering glue to an effective datum.
 Source: Stacks Project, Descent, Lemma 35.35.13, Tag 0AP4.
-(blueprint: lem-pd-effective-invariant-open-cover).
 
 Proof: First select one covering open for each point of V if the index universe is
 larger than that of V. Choose effective models W_i over Y for the selected data E_i.

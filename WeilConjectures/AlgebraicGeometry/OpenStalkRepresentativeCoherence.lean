@@ -13,7 +13,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 /-! # Representative coherence for exact open stalk restriction
 
 Source: Stacks Project, Tags 0098, 08DW and 015F; exact localization factorization.
-(blueprint: lem-pc-open-stalk-representative-coherence).
 -/
 
 @[expose] public section
@@ -264,8 +263,7 @@ identities, so zero complexes and zero homology require no extra hypotheses;
 for the top open this specializes to the identity restriction comparison.
 An empty open has no point z.
 Source: Stacks Project, Tags 0098, 08DW and 015F; the exact functor factorization
-identities named above.
-(blueprint: lem-pc-open-stalk-representative-coherence). -/
+identities named above. -/
 theorem openStalk_representative_coherence
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

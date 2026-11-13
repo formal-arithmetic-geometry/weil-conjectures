@@ -22,7 +22,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 /-! # Properly supported coherent tensor powers
 
 Source: Stacks Project, Tags 0CYS, 01I8 and 01XZ, applied in Tag 09ZT.
-(blueprint: lem-weil-pbc-finite-structure-tensor-powers-supported).
 -/
 
 @[expose] public section
@@ -123,8 +122,7 @@ sections of their factors (01I8). Tensor products of finite modules are finite, 
 square and cube are of finite type by the affine criterion. Hence both are coherent by
 01XZ. The annihilating proper closed subscheme and 0CYS then show that both supports are
 proper over the base. No completion, multiplication, or unit is used. This includes the
-zero module and empty scheme without any nonempty assumption.
-(blueprint: lem-weil-pbc-finite-structure-tensor-powers-supported). -/
+zero module and empty scheme without any nonempty assumption. -/
 theorem finite_structure_tensor_powers_supported
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (X : Scheme.{u}) (f : X ⟶ Spec (.of A)) [LocallyOfFiniteType f]

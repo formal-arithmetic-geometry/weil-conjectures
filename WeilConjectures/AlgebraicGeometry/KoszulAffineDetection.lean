@@ -18,7 +18,7 @@ import Mathlib.CategoryTheory.Localization.HomEquiv
 /-! # Koszul powers detect supported objects on an affine scheme
 
 Source: Stacks Project, Derived Categories of Schemes, Tag 09IR, proof via
-Lemma 36.9.6 and Tag 06Z0 (blueprint: lem-pc-koszul-affine-detection).
+Lemma 36.9.6 and Tag 06Z0.
 -/
 
 @[expose] public section
@@ -161,7 +161,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Koszul powers detect an object of `D_QCoh` supported on the common zero locus.
 The Koszul complexes are sheafified termwise and placed in nonpositive cochain degrees;
 they are the bounded finite-free, hence perfect, complexes of Stacks Tag 09IR.
-Source: Stacks Project, Tag 09IR (blueprint: lem-pc-koszul-affine-detection).
+Source: Stacks Project, Tag 09IR.
 
 Proof:
 1. For each map from a shift of the structure object to E, restriction to U is zero.

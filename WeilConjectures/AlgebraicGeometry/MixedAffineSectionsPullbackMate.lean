@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.AffineDerivedPullbackModuleModel
 /-! # Affine sections transport the pullback adjunction mate
 
 Source: Stacks Project, Tags 08DW(2), 06Z0, 08HY and 0D5T.
-(blueprint: lem-sc-mixed-affine-sections-pullback-mate).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace AlgebraicGeometry
 No perfectness, flatness, or invertibility of the input morphism is assumed.
 Source: Stacks Project, perfect.tex, Tags 06Z0 and 08DW(2); cohomology.tex,
 Tags 08HY and 0D5T; duality.tex, Tag 0AA8, identification of the map beta.
-(blueprint: lem-sc-mixed-affine-sections-pullback-mate).
 
 Proof: Identify S and T with spectra of their global rings via isoSpec. The affine
 quasi-coherent derived equivalence identifies E with a module complex. Resolve it

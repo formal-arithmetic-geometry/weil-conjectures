@@ -150,7 +150,6 @@ private theorem affine_restriction_span {X : Scheme.{u}} (G : X.Modules)
 finitely generated in degree zero.
 Source: Stacks Project, Lemma 087Z, affine finite-generation argument via Lemma 087W;
 https://stacks.math.columbia.edu/tag/087Z and https://stacks.math.columbia.edu/tag/087W.
-(blueprint: lem-weil-pbc-formal-kernel-graded-action-local-generators).
 
 Proof: Choose an affine neighbourhood U of the given point. Restrict the coherent
 formal system to U, and apply coherentFormalModules_affine to obtain its finite

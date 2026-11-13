@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 # Finite pushforward preserves constructibility over a Noetherian scheme
 
 Source: smooth purity blueprint, unit `sk-prop-sf-cbc`, order 1579;
-Stacks Project, Lemma 59.73.9 (Tag 095R)
-(blueprint: lem-weil-pbc-finite-pushforward-constructible-noetherian).
+Stacks Project, Lemma 59.73.9 (Tag 095R).
 -/
 
 @[expose] public section
@@ -55,8 +54,7 @@ with Noetherian target is constructible. Constructibility is that of the underly
 set sheaf, with finite geometric stalks on constructible locally closed strata.
 
 Source: smooth purity blueprint, unit `sk-prop-sf-cbc`, order 1579;
-Stacks Project, Tag 095R
-(blueprint: lem-weil-pbc-finite-pushforward-constructible-noetherian).
+Stacks Project, Tag 095R.
 
 Proof: Apply `isConstructibleEtaleSheafOfSets_of_generic_lisse`, which packages the
 Noetherian induction of steps 2 and 3. For each integral Noetherian affine subscheme S,

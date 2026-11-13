@@ -13,7 +13,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 /-! # The strict singleton Koszul dual and principal cone towers
 
 Source: Stacks Project, algebraization.tex, proof of Tag 0A0E.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -168,7 +167,6 @@ including its degree-zero augmentation, before applying inverse limit or localiz
 
 Source: Stacks Project, algebraization.tex, proof of Tag 0A0E, the identification
 of the dual positive Koszul complex with the negative Koszul complex.
-(auxiliary; not a blueprint node).
 
 Proof: remove the right tensor unit in the singleton positive Koszul diagram.
 In degree q the internal Hom into R[0] has only the component with source degree -q;

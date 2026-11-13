@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisCanonicalDat
 /-! # Unshifted restriction of a representing pullback Hom cocone
 
 Source: Stacks Project, Cohomology, Tags 079W and 08FE; perfect.tex, Tag 09RE.
-(blueprint: def-pc-perfect-hom-open-restriction-map).
 -/
 
 @[expose] public section
@@ -30,13 +29,13 @@ variable {S Y T : Scheme.{u}} (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S)
     HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
 /-- The cartesian map induced by the open inclusion, constructed by pullback.map.
-Source: Stacks Tag 09RE (blueprint: def-pc-perfect-hom-open-restriction-map). -/
+Source: Stacks Tag 09RE. -/
 def perfectHomOpenBaseChangeMap : pullback (B.ι ≫ s) r ⟶ pullback s r :=
   pullback.map (B.ι ≫ s) r s r B.ι (𝟙 T) (𝟙 S) (by simp) (by simp)
 
 /-- The pullback comparison on the cartesian open square, fixed by the supplied
 open pullback adjunction and the existing counit-pinned composition comparisons.
-Source: Stacks Tags 079W and 09RE (blueprint: def-pc-perfect-hom-open-restriction-map). -/
+Source: Stacks Tags 079W and 09RE. -/
 def perfectHomOpenPullbackComparison
     (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι) :
     derivedPullback (pullback.fst s r) ⋙ derivedPullback (perfectHomOpenBaseChangeMap s B r) ≅
@@ -53,7 +52,7 @@ def perfectHomOpenPullbackComparison
 
 /-- Restrict a pullback Hom along the explicit cartesian map and conjugate it by
 perfectHomOpenPullbackComparison. No existence witness is selected here.
-Source: Stacks Tag 09RE (blueprint: def-pc-perfect-hom-open-restriction-map). -/
+Source: Stacks Tag 09RE. -/
 def perfectHomOpenRestrictionMap
     (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι)
     {M Q : schemeDerivedCategory Y}

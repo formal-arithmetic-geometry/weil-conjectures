@@ -20,15 +20,14 @@ namespace AlgebraicGeometry.Etale
 /-- Uniqueness of a finite étale trace family satisfying the three displayed properties.
 Source: Stacks Project, Section 03SH, paragraph after Definition 03SE; SGA 4,
 Exposé IX, 5.1 (uniqueness from localization and the split formula).
-(blueprint: lem-weil-pbc-finite-etale-trace-exists-uniqueness)
 
 Proof. Fix two such families, a finite étale `f`, and a sheaf `F`. Transport their
 components through the restriction isomorphism to morphisms `P_F → F`, where
 `P_F(W) = F(W ×_X Y)`. For any object `W` choose a jointly surjective étale covering
-`h_a : W_a → W` such that `W_a ×_X Y → W_a` splits into finitely many clopen pieces.
+`h_a: W_a → W` such that `W_a ×_X Y → W_a` splits into finitely many clopen pieces.
 Such a covering follows from Stacks 04HN and covering base change.
 
-Apply each family's localization identity to `g_a : W_a → X` and the terminal
+Apply each family's localization identity to `g_a: W_a → X` and the terminal
 object of `W_a.Etale`. Pullback pasting identifies its double fibre product with
 `W_a ×_X Y`. Apply the split formula to the pullback of `f` over `W_a`: its sections
 are exactly the transported sections of the chosen splitting. Naturality of the

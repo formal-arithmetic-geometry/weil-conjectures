@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.HorizontalRectangleInverseMateFixedTran
 /-! # Equality of horizontal duality mates with fixed endpoint comparisons
 
 Source: Stacks Project, Tag 0ATR, proof of Lemma 48.5.2; Tag 0ATM.
-(blueprint: lem-sc-horizontal-duality-mate-commutativity).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry
 /-- The unit/counit equality for the two horizontal duality mates, with the source
 and target comparison maps explicitly constructed, rather than existentially chosen.
 Source: Stacks Project, Tag 0ATR, proof of Lemma 48.5.2; Tag 0ATM.
-(blueprint: lem-sc-horizontal-duality-mate-commutativity).
 
 Proof: Expand the three dualityEquationBaseChangeMap terms. Use the pinned
 pullback composition isomorphisms for both horizontal edges and their conjugates

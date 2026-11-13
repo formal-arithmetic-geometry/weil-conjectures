@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageResolutionNaturality
 /-! # Coefficient-natural comparison with resolution section cohomology
 
 Source: Stacks Project, Cohomology, Tags 01E1 and 01E4.
-(blueprint: lem-pc-higher-direct-image-coefficient-comparison).
 -/
 
 @[expose] public section
@@ -63,7 +62,6 @@ is natural in coefficients. Its component is the resolution comparison followed 
 canonical theta. This asserts no detection of morphisms on an affine basis.
 
 Source: Stacks Project, Cohomology, Lemmas 20.7.1 and 20.7.3, Tags 01E1 and 01E4.
-(blueprint: lem-pc-higher-direct-image-coefficient-comparison).
 
 Proof: Restrict an injective resolution I to U = f inverse image V using exact open
 restriction and its exact left adjoint. Transport through overEquiv to the module

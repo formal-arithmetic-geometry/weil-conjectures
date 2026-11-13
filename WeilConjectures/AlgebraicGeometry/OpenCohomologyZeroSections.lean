@@ -12,7 +12,6 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 /-! # The degree-zero comparison for sections on an open
 
 Source: Stacks Project, Tag 01DZ, the definition of zeroth derived sections.
-(blueprint: lem-sc-open-cohomology-zero-sections).
 -/
 
 @[expose] public section
@@ -22,16 +21,14 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry.RingedSpace
 
 /-- Sections on an open preserve finite limits.
-Source: Stacks Project, Tag 01DZ.
-(blueprint: lem-sc-open-cohomology-zero-sections). -/
+Source: Stacks Project, Tag 01DZ. -/
 instance openModuleSections_preservesFiniteLimits (X : RingedSpace.{u}) (U : Opens X) :
     PreservesFiniteLimits (openModuleSections X U) := by
   unfold openModuleSections
   infer_instance
 
 /-- The canonical comparison from zeroth derived sections to sections.
-Source: Stacks Project, Tag 01DZ.
-(blueprint: lem-sc-open-cohomology-zero-sections). -/
+Source: Stacks Project, Tag 01DZ. -/
 noncomputable def openCohomologyZeroSectionsIso (X : RingedSpace.{u}) (U : Opens X) :
     openModuleCohomology X 0 U ≅ openModuleSections X U :=
   letI : EnoughInjectives (SheafOfModules.{u} (moduleRings X)) :=
@@ -40,7 +37,6 @@ noncomputable def openCohomologyZeroSectionsIso (X : RingedSpace.{u}) (U : Opens
 
 /-- The section comparison intertwines coefficient morphisms.
 Source: Stacks Project, Tag 01DZ.
-(blueprint: lem-sc-open-cohomology-zero-sections).
 
 Proof: This is the naturality square of rightDerivedZeroIsoSelf. -/
 theorem openCohomologyZeroSectionsIso_naturality (X : RingedSpace.{u}) (U : Opens X)

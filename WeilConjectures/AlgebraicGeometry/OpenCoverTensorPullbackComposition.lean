@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComparison
 
 /-! # Composition square for restriction and tensor pullback
-Source: Stacks Project, Sheaves on Spaces, Tags 0095 and 0096.
-(blueprint: lem-pc-open-cover-tensor-pullback-composition). -/
+Source: Stacks Project, Sheaves on Spaces, Tags 0095 and 0096. -/
 
 @[expose] public section
 set_option backward.isDefEq.respectTransparency false
@@ -93,7 +92,6 @@ private lemma mate_openCoverComparison {A B : Scheme.{u}}
 
 /-- Restriction comparisons commute with two successive tensor pullbacks.
 Source: Stacks Project, Tags 0095 and 0096, pullback and its adjunction.
-(blueprint: lem-pc-open-cover-tensor-pullback-composition).
 Proof: The hypotheses identify the two projections of the supplied chart
 isomorphism with those of the iterated pullback chart. Expand the three
 restriction comparisons into ordinary pullback composition and the unique

@@ -17,8 +17,7 @@ import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvr
 # Ordinary Künneth at a finite coefficient ring
 
 Source: Weil blueprint (snapshot slopmaster2-20261029-2300), sec-smooth-purity/sk-prop-an,
-node lem-pur-ordinary-kunneth-finite-ring, order 3254; Stacks Project, Tag 0F1P
-(blueprint: lem-pur-ordinary-kunneth-finite-ring).
+node lem-pur-ordinary-kunneth-finite-ring, order 3254; Stacks Project, Tag 0F1P.
 
 The exterior-product map is the recorded canonical Künneth map
 `kunnethGlobalSectionsMap` of def-kun-kunneth-map, on the unbounded derived categories
@@ -52,25 +51,23 @@ field of the finite-field datum `D`, let `X, Y` be separated finite-type `k`-sch
 `K ∈ D(X_ét, A)` and `M ∈ D(Y_ét, A)`, the exterior-product map
 `RΓ(X, K) ⊗ᴸ_A RΓ(Y, M) ⟶ RΓ(X ×_k Y, p_X^* K ⊗ᴸ_A p_Y^* M)` is an isomorphism.
 
-Source: blueprint order 3254, node lem-pur-ordinary-kunneth-finite-ring
-(sec-smooth-purity/sk-prop-an); Stacks Project, Tag 0F1P
-(blueprint: lem-pur-ordinary-kunneth-finite-ring).
+Source: blueprint order 3254, node lem-pur-ordinary-kunneth-finite-ring; Stacks Project, Tag 0F1P.
 
 The separable closedness of `D.k` used to form the map comes from its specified algebraic
 closure structure (a proposition; any proof gives the same map).
 
 Proof:
-1. (def-weil-l-adic-coefficient-extension) The coefficient ring `Λ = 𝒪_E / ϖ_E ^ n` is
+1. The coefficient ring `Λ = 𝒪_E / ϖ_E ^ n` is
    finite since `n ≥ 1`.
-2. (lem-weil-l-adic-extension-integers-dvr) In the DVR `𝒪_E` the maximal ideal is generated
+2. In the DVR `𝒪_E` the maximal ideal is generated
    by the uniformizer `ϖ_E`, and `|l|_E = |l|_l = l⁻¹ < 1`, so `l ∈ (ϖ_E)`. Hence
    `l ^ n ∈ (ϖ_E) ^ n` and `l ^ n` annihilates `Λ`. As `l ≠ char k`, `l ^ n` is a unit in
    `k` and in `Γ(Spec k)`. So `Λ` has an exponent invertible on `Spec k`.
-3. (lem-sf-finite-ring-native-kunneth) `k` is separably closed (algebraically closed) and
+3. `k` is separably closed (algebraically closed) and
    `X, Y` are of finite type over `k`, so for the finite ring `Λ` the native relative Künneth
    map `Ra_* K ⊗ᴸ_Λ Rb_* M ⟶ R(a ∘ p_X)_*(p_X^* K ⊗ᴸ_Λ p_Y^* M)` over the point is an
    isomorphism, for arbitrary unbounded `K, M`.
-4. (def-kun-kunneth-map) By definition the exterior-product map is the composite of the
+4. By definition the exterior-product map is the composite of the
    inverses of the comparisons `RΓ(Spec k, Ra_* -) ≅ RΓ(X, -)` (and for `b`), the point
    tensor comparison `RΓ(Spec k, -) ⊗ RΓ(Spec k, -) ≅ RΓ(Spec k, - ⊗ᴸ -)`, `RΓ(Spec k, -)`
    applied to the map of step 3, and the comparison for `a ∘ p_X`. Every factor is an

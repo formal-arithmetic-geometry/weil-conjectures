@@ -32,7 +32,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 
-/-- Blueprint: lem-weil-pbc-hypercover-refinement. -/
+/-- -/
 theorem exists_and_cofiltered (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] :
     Nonempty (FiniteSplitEtaleHypercover X) ∧
       (∀ U V : FiniteSplitEtaleHypercover X,
@@ -57,7 +57,7 @@ theorem exists_and_cofiltered (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedS
     refine ⟨W, d ≫ c, Relation.EqvGen.rel _ _ ?_⟩
     exact ⟨by simpa only [Category.assoc] using H.precomp d⟩
 
-/-- Blueprint: lem-weil-pbc-hypercover-refinement. -/
+/-- -/
 theorem exists_refinement_solving_local_requirements
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (U : FiniteSplitEtaleHypercover X) (r k : ℕ) (degree : Fin k → Fin (r + 1))
@@ -129,7 +129,7 @@ theorem exists_refinement_solving_local_requirements
   rw [U.simplicial.map_id, Category.comp_id] at hh
   simpa only [eqToHom_refl, Category.comp_id] using hh
 
-/-- Blueprint: lem-weil-pbc-hypercover-refinement. -/
+/-- -/
 theorem exists_truncated_refinement
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale)

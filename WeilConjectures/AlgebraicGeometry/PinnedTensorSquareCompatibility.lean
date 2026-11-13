@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.PinnedTensorSquareComponent
 /-! # Stalk compatibility of a specified tensor pullback chain map
 
 Source: Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: lem-pc-pinned-tensor-square-compatibility).
 -/
 
 @[expose] public section
@@ -63,8 +62,7 @@ comparisons makes sigma and rho chain isomorphisms, including the differential
 signs. Arbitrary direct sums, zero rings, zero factors and unbounded complexes
 are included; no derived-category morphisms or K-flatness are used.
 Source: Stacks Project, perfect.tex, Tag 0DJA(1), Tag 0BYJ and
-equation-bc before Tag 0DJ8; Cohomology, Tags 079R and 06YB.
-(blueprint: lem-pc-pinned-tensor-square-compatibility). -/
+equation-bc before Tag 0DJ8; Cohomology, Tags 079R and 06YB. -/
 theorem pinned_tensor_pullback_stalk_compatibility
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -28,7 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A scalar comparison is the canonical module comparison after forgetting scalars.
 The two explicit Cech comparisons use the same underlying additive presheaf.
-Source: Stacks, Tag 01EQ (blueprint: lem-sc-picard-scalar-cech-comparison). -/
+Source: Stacks, Tag 01EQ. -/
 def IsPicardScalarCechComparison
     {k : Type w} [Field k] {X : Scheme.{w}}
     (f : X ⟶ Spec (CommRingCat.of k)) {ι : Type w} (U : ι → X.Opens)
@@ -43,8 +43,7 @@ def IsPicardScalarCechComparison
           e a
 
 /-- Affine-intersection covers have canonical scalar Cech comparisons.
-Source: Stacks, Tags 01EQ, 01XD
-(blueprint: lem-sc-picard-scalar-cech-comparison).
+Source: Stacks, Tags 01EQ, 01XD.
 
 Proof: Fix an injective resolution. The beta augmentation is a quasi-isomorphism
 by affine acyclicity, and alpha is a quasi-isomorphism by the sheaf gluing theorem.

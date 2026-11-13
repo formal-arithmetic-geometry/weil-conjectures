@@ -19,8 +19,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
 /-- The actual point pullback on modules, with its codomain category fixed.
-Source: Stacks Tag 00YV and the integral-models local-model step
-(auxiliary; not a blueprint node).
+Source: Stacks Tag 00YV and the integral-models local-model step.
 The functor is the existing mapMod of upperStarFromPoint; both its object and morphism
 maps are those of that functor. No equivalence or preservation property is assumed here. -/
 def pointModelPullbackFunctor

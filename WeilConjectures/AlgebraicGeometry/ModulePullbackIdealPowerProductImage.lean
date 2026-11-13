@@ -20,7 +20,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 /-! # Pullback images of products by recursive ideal powers
 
 Source: Stacks Project, Tag 0887, the quotient computation in the proof.
-(blueprint: lem-weil-pbc-module-pullback-ideal-power-product-image).
 -/
 
 @[expose] public section
@@ -103,7 +102,6 @@ private theorem product_iso {X : Scheme.{u}} {P Q : X.Modules}
 /-- The image of the pulled-back inclusion of `J^n G` is `(J O_X)^n f^*G`, using
 module-subobject powers on both sides.
 Source: Stacks Project, Tag 0887, the displayed computation in its proof.
-(blueprint: lem-weil-pbc-module-pullback-ideal-power-product-image).
 
 Proof: on affine opens V in Y and U in X contained in the inverse image of V, put
 A = O_Y(V), B = O_X(U), a = J(V), and M = G(V). Induction on the recursive ideal

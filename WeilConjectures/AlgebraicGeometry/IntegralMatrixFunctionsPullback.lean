@@ -86,7 +86,6 @@ theorem matrix_coefficient_pullback (ℓ : ℕ) [Fact ℓ.Prime]
 
 Source: Bhatt--Scholze, Section 6.8, continuous coefficient realization;
 functoriality of the specified inverse image and its finite biproduct comparison.
-(auxiliary; not a blueprint node)
 
 Proof: express each matrix entry as inclusion, the matrix morphism, then projection.
 Naturality of the biproduct comparison commutes these inclusions and projections

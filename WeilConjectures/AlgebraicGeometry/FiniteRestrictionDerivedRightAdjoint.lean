@@ -16,8 +16,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Right adjoint to derived restriction along the direct-image algebra
 
-Source: Stacks Project, Duality for Schemes, Tags 0BV0, 0BV1 and 0AX3
-(blueprint: lem-sc-finite-restriction-derived-right-adjoint). -/
+Source: Stacks Project, Duality for Schemes, Tags 0BV0, 0BV1 and 0AX3. -/
 
 @[expose] public section
 
@@ -31,8 +30,7 @@ namespace AlgebraicGeometry
 only an adjoint to derived restriction of algebra scalars; it makes no assertion about
 f's right adjoint, its degree-zero representative, or its counit.
 
-Source: Stacks Project, Duality for Schemes, Tags 0BV0, 0BV1 and 0AX3
-(blueprint: lem-sc-finite-restriction-derived-right-adjoint).
+Source: Stacks Project, Duality for Schemes, Tags 0BV0, 0BV1 and 0AX3.
 
 Proof:
 1. Apply `exists_affine_derivedSheafHom_adjunction` to f. This supplies the derived

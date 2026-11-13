@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 /-! # Stalk finrank of a finite locally free module
 
 Source: Stacks Project, Tag 01C6, Definition 17.14.1 (3), and Tag 02G1.
-(blueprint: lem-sc-finite-locally-free-stalk-finrank).
 -/
 
 @[expose] public section
@@ -243,8 +242,7 @@ private noncomputable def localStalkEquiv {I : Type u} [Fintype I] [DecidableEq 
 
 /-- A finite locally free module of fixed rank has that finrank at each stalk.
 Source: Stacks Project, Tag 01C6, Definition 17.14.1 (3); the stalk calculation used
-in Tag 02G1 (lemma-smooth-omega-finite-locally-free).
-(blueprint: lem-sc-finite-locally-free-stalk-finrank).
+in Tag 02G1.
 
 Proof: take an open neighbourhood U of x on which M is a direct sum of r copies
 of the structure sheaf. The coordinate projections and inclusions commute with

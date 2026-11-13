@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.MLCohomologyPowersIdealImageStabilizati
 
 /-! # Mittag-Leffler and Artin-Rees bounds for cohomology of ideal-power quotients
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 02OB, parts (1) and (3)
-(blueprint: lem-weil-pbc-ml-cohomology-powers-ideal).
+Source: Stacks Project, Cohomology of Schemes, Lemma 02OB, parts (1) and (3).
 -/
 
 @[expose] public section
@@ -39,13 +38,11 @@ The kernel bound uses restriction of scalars along A ≅ Γ(Spec A) → Γ(X, O_
 so its submodules and the ideal power act over the specified ring A.
 The index op n of formalCompletionSystem denotes the positive level n + 1.
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 02OB, parts (1) and (3)
-(blueprint: lem-weil-pbc-ml-cohomology-powers-ideal).
+Source: Stacks Project, Cohomology of Schemes, Lemma 02OB, parts (1) and (3).
 
 Proof:
 1. Form 0 → I^n F → F → F/I^n F → 0 and the morphisms between them for k ≥ n,
-   using def-weil-pbc-coherent-formal-module. The category has enough injectives
-   (lem-weil-pbc-scheme-modules-enough-injectives). By pqf-def-cohomology and
+   using def-weil-pbc-coherent-formal-module. The category has enough injectives. By pqf-def-cohomology and
    lem-weil-pbc-horseshoe-delta-functor, their long exact sequences are natural:
    H^p(I^n F) → H → M_n → H^(p+1)(I^n F) → H^(p+1)(F).
    Write iota_n, rho_n, delta_n, beta_n for these maps, and alpha_(k,n) for the

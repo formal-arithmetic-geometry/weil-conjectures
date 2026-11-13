@@ -118,7 +118,6 @@ private theorem localModel_iff {X Y : Scheme.{u}} (f : X ⟶ Y)
 This is a statement about ordinary module sheaves, for any adic coefficient datum.
 Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), and the
 finite-projection construction of pbcCompletedComparison.
-(auxiliary; not a blueprint node).
 
 Proof: restriction along pbcCompletedComparison and its inverse gives inverse
 module equivalences. Both round trips are identity on sections. The equivalences

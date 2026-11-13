@@ -17,7 +17,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Local representatives through an epimorphism of module sheaves
 
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`).
+Source: Stacks Project, Modules, Lemma 01CP.
 -/
 
 @[expose] public section
@@ -30,9 +30,8 @@ namespace AlgebraicGeometry.RingedSpace
 /-- A section germ lifts through an epimorphism of module sheaves on a local site.
 This has no finite-generation or finite-presentation hypothesis.
 
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`),
+Source: Stacks Project, Modules, Lemma 01CP,
 third paragraph, right exactness on stalks of the presentation.
-(blueprint: lem-weil-pbc-local-module-epi-germ-lift)
 
 Proof: The cokernel of f is zero because f is an epimorphism. Its underlying
 abelian sheaf cokernel is the sheafification of the sectionwise cokernel.

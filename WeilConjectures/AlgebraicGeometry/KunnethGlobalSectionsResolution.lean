@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.SupportedExteriorProductForgetSu
 /-!
 # The Künneth map on global sections computed on K-flat representatives
 
-Source: Stacks Project, Tag 0F1E; blueprint sec-smooth-purity
-(blueprint: def-kun-kunneth-map).
+Source: Stacks Project, Tag 0F1E.
 
 The canonical external product `kunnethGlobalSectionsMap` is defined through adjunctions,
 the Leray isomorphisms and the constant-sheaf equivalence over a separably closed point.
@@ -24,8 +23,7 @@ construction through relative cup products (Stacks, Tag 0B6C), computed on resol
 This compatibility is recorded here as an input (`sorry`): it requires chain-level
 descriptions of the derived adjunction `Lc^* ⊣ Rc_*`, of the monoidal structure of the
 derived pullbacks, of the Leray isomorphisms and of the point tensor comparison, none of
-which are formalized yet. It belongs to the chapter of the Künneth map
-(blueprint: def-kun-kunneth-map).
+which are formalized yet. It belongs to the chapter of the Künneth map.
 
 ## Main statements
 
@@ -48,7 +46,7 @@ with the derived external product.
 This input is not proved in the project: it is the compatibility of the adjoint
 construction of the Künneth map (Stacks, Remark 0F1E) with its construction by pullback and
 cup product of sections (Stacks, Tag 0B6C), computed on K-flat representatives. It belongs to
-the chapter of the Künneth map (blueprint: def-kun-kunneth-map). -/
+the chapter of the Künneth map. -/
 theorem kunnethGlobalSectionsMap_resolution
     (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] [IsSepClosed k]
     {X Y : Scheme.{u}} (f : X ⟶ Spec (.of k)) (g : Y ⟶ Spec (.of k))

@@ -17,7 +17,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Killing the differential defects of a degreewise family
 
 Source: Stacks Project, Tags 09RE and 01CP.
-(blueprint: lem-sc-perfect-open-stalk-degreewise-shrink).
 -/
 
 @[expose] public section
@@ -73,7 +72,6 @@ stalks of the restricted components in the original comparison coordinates.
 
 Source: Stacks Project, Tag 09RE, finite-presentation shrinking calculation, and
 Tag 01CP, injectivity of the internal-Hom stalk comparison.
-(blueprint: lem-sc-perfect-open-stalk-degreewise-shrink).
 
 Proof: For each adjacent degree form the difference of g n followed by d_Q and
 of d_P followed by g (n+1). The hypothesis says its stalk is zero. Finite

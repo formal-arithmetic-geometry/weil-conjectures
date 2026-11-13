@@ -29,8 +29,7 @@ variable (X : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction to the vertices, with scalars restricted from the augmentation object.
-Source: Stacks Project, Tag 09A2.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 09A2. -/
 noncomputable def abelianHypercoverRestrictionZero
     (I : Sheaf (topology X) AddCommGrpCat.{u + 1}) :
     ((sheafSections (topology X) AddCommGrpCat.{u + 1}).obj (op W)).obj I ⟶
@@ -38,8 +37,7 @@ noncomputable def abelianHypercoverRestrictionZero
   I.obj.map (U _⦋0⦌).hom.op
 
 /-- Restriction to vertices agrees with ordinary sheaf restriction.
-Source: Stacks Project, Tag 09A2.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 09A2. -/
 @[simp]
 lemma abelianHypercoverRestrictionZero_apply
     (I : Sheaf (topology X) AddCommGrpCat.{u + 1})
@@ -59,8 +57,7 @@ private theorem abelianHypercoverRestrictionZero_naturality
   exact ConcreteCategory.congr_hom (f.hom.naturality (U _⦋0⦌).hom.op).symm x
 
 /-- The restriction to vertices is killed by the alternating face differential.
-Source: Stacks Project, Tag 01GE.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 01GE. -/
 theorem abelianHypercoverRestrictionZero_d
     (I : Sheaf (topology X) AddCommGrpCat.{u + 1}) :
     abelianHypercoverRestrictionZero X W U I ≫
@@ -83,8 +80,7 @@ theorem abelianHypercoverRestrictionZero_d
   rw [h]
 
 /-- Restriction into degree zero of the alternating section complex.
-Source: Stacks Project, Tag 09A2.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 09A2. -/
 noncomputable def abelianHypercoverRowAugmentation
     (I : Sheaf (topology X) AddCommGrpCat.{u + 1}) :
     ((sheafSections (topology X) AddCommGrpCat.{u + 1}).obj (op W)).obj I ⟶
@@ -96,8 +92,7 @@ noncomputable def abelianHypercoverRowAugmentation
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction into the extended section row is natural in the module sheaf.
-Source: Stacks Project, Tag 09A2.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 09A2. -/
 @[reassoc]
 lemma abelianHypercoverRowAugmentation_naturality
     {I J : Sheaf (topology X) AddCommGrpCat.{u + 1}}
@@ -114,8 +109,7 @@ lemma abelianHypercoverRowAugmentation_naturality
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The extended section-row differential kills the augmentation.
-Source: Stacks Project, Tag 01GE.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 01GE. -/
 @[reassoc (attr := simp)]
 lemma abelianHypercoverRowAugmentation_d
     (I : Sheaf (topology X) AddCommGrpCat.{u + 1}) :
@@ -127,8 +121,7 @@ lemma abelianHypercoverRowAugmentation_d
   rw [← Category.assoc, abelianHypercoverRestrictionZero_d, zero_comp]
 
 /-- The augmented row, with the augmentation object placed in degree zero.
-Source: Stacks Project, Tags 09A2 and 01GE.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 09A2 and 01GE. -/
 noncomputable def abelianHypercoverRowAugmentationComplex
     (I : Sheaf (topology X) AddCommGrpCat.{u + 1}) :
     (HomologicalComplex.single _ (.up ℤ) 0).obj
@@ -143,8 +136,7 @@ noncomputable def abelianHypercoverRowAugmentationComplex
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical augmentation of a coefficient complex into total hypercover sections.
 Its degree-n component is restriction into the (0,n) summand.
-Source: Stacks Project, Tag 09A2.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 09A2. -/
 noncomputable def abelianHypercoverAugmentation :
     ((sheafSections (topology X) AddCommGrpCat.{u + 1}).obj (op W)).mapHomologicalComplex
           (ComplexShape.up ℤ) ⟶ abelianHypercoverTotal X W U where

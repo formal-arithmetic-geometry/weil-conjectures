@@ -85,7 +85,6 @@ private theorem binarySubmodule_on_W
 
 /-- The explicit pullback is the prescribed submodule on V and the ambient module on W.
 Source: Stacks Project, Properties, Lemma 01PF (lemma-extend), binary gluing step.
-(blueprint: lem-weil-pbc-module-submodule-binary-gluing-restrictions).
 
 Proof: On an open T contained in V the unit from H(T) to H(T intersect V) is the
 identity after the canonical restriction identifications. The pullback of this

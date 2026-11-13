@@ -87,7 +87,6 @@ private lemma total_hzero (F G : C) (P : CochainComplex C ℤ)
 
 /-- H-zero of the canonical derived-to-ordinary tensor comparison is invertible.
 Source: Stacks Project, Tag 06YH, flat construction of derived tensor.
-(blueprint: lem-sc-module-cup-canonical-hzero-identification)
 Here F₀ and G₀ are the actual single complexes. Their total tensor is canonically
 (F tensor G)[0], so the first assertion identifies H-zero of the derived tensor
 with F tensor G. The second assertion specifies the transport for every strictly

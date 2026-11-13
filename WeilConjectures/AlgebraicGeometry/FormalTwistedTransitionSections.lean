@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 
 /-! # Surjectivity of twisted formal transition sections
 
-Source: Stacks Project, proof of Lemma 0885 (lemma-existence-projective).
-(blueprint: lem-weil-pbc-formal-twisted-transition-sections).
+Source: Stacks Project, proof of Lemma 0885.
 -/
 
 @[expose] public section
@@ -32,9 +31,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Vanishing of first cohomology of the twisted transition kernel makes sections
 of that transition surjective.
 
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0885
-(lemma-existence-projective), the surjectivity of the displayed H^0 transition maps.
-(blueprint: lem-weil-pbc-formal-twisted-transition-sections).
+Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0885, the surjectivity of the displayed H^0 transition maps.
 
 Proof: The formal quotient isomorphism expresses the transition as a cokernel
 projection followed by an isomorphism, hence it is epi. Tensoring by L^d is an

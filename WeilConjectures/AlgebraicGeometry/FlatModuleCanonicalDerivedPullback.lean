@@ -31,7 +31,6 @@ identity expresses intrinsic flatness, independently of any family morphism.
 
 Source: Stacks Project, Tags 06YD and 06YJ;
 `lem-pc-flat-complex-derived-pullback`, Steps 1--2.
-(blueprint: lem-pc-flat-module-canonical-derived-pullback).
 
 Proof: On an affine open, intrinsic flatness says that the section module is flat
 over the coordinate ring. Localizing proves stalkwise flatness, which for a

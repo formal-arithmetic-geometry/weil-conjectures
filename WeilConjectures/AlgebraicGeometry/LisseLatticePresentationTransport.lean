@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 # Small locally constant sheaves from lattice-class presentations
 
 Source: Bhatt--Scholze, Proposition 6.8.4(6), passage from lattice pairs to classes.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -227,7 +226,6 @@ private theorem small_latticeClass_local_properties {X : Scheme.{u}}
 gives a small locally constant, locally inhabited sheaf with lattice representatives,
 after an isomorphism of its coefficient rings.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), lattice-class sheaf construction.
-(auxiliary; not a blueprint node)
 
 Proof: choose class representatives only inside this proof, and send each class to
 its family of embedded integral submodules on every object of its slice. The exact

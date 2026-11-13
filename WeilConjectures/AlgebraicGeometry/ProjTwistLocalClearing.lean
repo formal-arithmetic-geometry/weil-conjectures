@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 # Local clearing of denominators for twist sections
 
 Source: Stacks Project, Section 27.8, construction preceding Lemma 27.8.4, Tag 01M7.
-(blueprint: lem-sc-proj-twist-local-clearing)
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ namespace AlgebraicGeometry.Proj
 point of the affine chart.
 Source: Stacks Project, Section 27.8, Lemma 27.8.1 and the construction preceding
 Lemma 27.8.4, Tag 01M7, specialized to the shift A(k).
-(blueprint: lem-sc-proj-twist-local-clearing)
 
 Proof: transport x to D₊(f) under its canonical affine chart. The locally-fraction
 predicate gives a homogeneous fraction a/d on a neighborhood V of that point. Choose

@@ -14,7 +14,6 @@ public import Mathlib.Algebra.Category.Grp.AB
 
 Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
 SGA 4, Exposé IX, 5.1.
-(blueprint: def-weil-pbc-finite-etale-trace-local-sums)
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry.Etale
 of `Y` is a finite clopen coproduct of copies of `W`, its transported component is the
 sum of restrictions along the sections. The index type may be empty.
 Source: Stacks Project, Section 03SH, after Definition 03SE; SGA 4, Exposé IX, 5.1.
-(blueprint: def-weil-pbc-finite-etale-trace-local-sums)
 
 This is the local characterization used in the descent construction, not a choice of
 trace: it is a predicate on an already given sheaf morphism. -/

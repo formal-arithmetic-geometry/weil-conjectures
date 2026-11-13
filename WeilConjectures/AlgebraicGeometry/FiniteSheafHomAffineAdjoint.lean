@@ -26,8 +26,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure
 
 /-! # The affine derived sheaf-Hom adjunction
 
-Source: Stacks Project, Duality for Schemes, Tags 0BV0, 0BUZ and 0AX3
-(blueprint: lem-sc-finite-sheafhom-affine-adjoint).
+Source: Stacks Project, Duality for Schemes, Tags 0BV0, 0BUZ and 0AX3.
 -/
 
 @[expose] public section
@@ -56,13 +55,12 @@ set_option backward.isDefEq.respectTransparency false in
 `directImageAlgebraSpace f`) has right adjoint the derived sheaf-Hom out of `A`:
 there are an underived right adjoint `H` of restriction, valued in `A`-modules, whose
 underlying `O_X`-module functor is `homObj A (-)` and whose counit is evaluation at
-`1 ∈ A`; a right derived functor `R : D(O_X) ⥤ D(A)` of `H` (with its comparison `β`);
+`1 ∈ A`; a right derived functor `R: D(O_X) ⥤ D(A)` of `H` (with its comparison `β`);
 the derived restriction `L` (with its comparison `t`); and an adjunction `L ⊣ R` whose
 `O_X`-module right adjoint `R ⋙ L` is `RHom_{O_X}(A, -)` and whose counit is the
 morphism induced by the underived evaluation counit (`Adjunction.derivedε_fac_app`).
 
-Source: Stacks Project, Duality for Schemes, Tags 0BV0, 0BUZ and 0AX3
-(blueprint: lem-sc-finite-sheafhom-affine-adjoint).
+Source: Stacks Project, Duality for Schemes, Tags 0BV0, 0BUZ and 0AX3.
 
 Proof:
 1. Use the underived affine sheaf-Hom adjunction of lem-sc-finite-sheafhom-affine.
@@ -70,8 +68,7 @@ Proof:
    multiplication. The underived counit evaluates a local homomorphism at one.
 2. Restriction of scalars is exact, hence its termwise functor descends through Q to an
    absolute left derived functor `L`. The right derived functor `R` of `H` is computed on
-   K-injective resolutions; it is absolute, and `R ⋙ L` computes `RHom_{O_X}(A, -)`
-   (def-pur-derived-internal-hom). Apply lem-sc-derived-adjunction-from-underived.
+   K-injective resolutions; it is absolute, and `R ⋙ L` computes `RHom_{O_X}(A, -)`. Apply lem-sc-derived-adjunction-from-underived.
 3. The counit clause of lem-sc-derived-adjunction-from-underived (Mathlib
    `Adjunction.derivedε_fac_app`) identifies the derived counit with the morphism induced
    by the underived counit, i.e. by evaluation at one. -/

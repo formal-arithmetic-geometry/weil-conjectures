@@ -24,7 +24,6 @@ namespace AlgebraicGeometry.ProEtale
 
 Source: Stacks Project, Tag 097D, and the private Hom equivalence in
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic`.
-(auxiliary; not a blueprint node)
 
 Proof: The existing Hom equivalence identifies maps from the connected components
 of the prime spectrum of R to S with ring maps from locally constant integer

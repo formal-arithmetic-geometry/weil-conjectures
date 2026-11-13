@@ -24,8 +24,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-! # Higher direct image as a sheafified cohomology presheaf
-Source: literature/stacks-project/cohomology.tex, Lemma 01E4
-(blueprint: lem-weil-pbc-higher-direct-image-presheaf).
+Source: literature/stacks-project/cohomology.tex, Lemma 01E4.
 -/
 
 set_option backward.isDefEq.respectTransparency false in
@@ -44,8 +43,7 @@ through theta;
 resolution and exact evaluation), and under these identifications the restriction
 maps of P_p are the cohomology restriction maps;
 (5) the canonical map f_*F → R^0 f_*F is an isomorphism.
-Source: literature/stacks-project/cohomology.tex, Lemma 01E4
-(blueprint: lem-weil-pbc-higher-direct-image-presheaf).
+Source: literature/stacks-project/cohomology.tex, Lemma 01E4.
 
 Proof: (1) f_*I computes R^p f_*F; module sheafification is exact and commutes with
 homology, and its counit on sheaves is invertible, so the comparison is invertible.

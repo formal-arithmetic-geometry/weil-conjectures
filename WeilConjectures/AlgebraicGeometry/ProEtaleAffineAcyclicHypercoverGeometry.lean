@@ -22,7 +22,7 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 This theorem packages the finite-basis construction, its degreewise coproduct realization,
 and the component evaluation comparisons.  The componentwise lifting theorem then supplies
-weak contractibility. (auxiliary; not a blueprint node)
+weak contractibility.
 -/
 
 @[expose] public section
@@ -286,8 +286,7 @@ also preserves limits. The resulting composite preserves coproducts and agrees
 with sheaf Yoneda on singleton families. Since every formal family is the
 coproduct of its singleton families, the coproduct universal property gives a
 natural isomorphism from this composite to `sheafRealization`. Transporting
-finite-limit preservation along that isomorphism completes the proof.
-(auxiliary; not a blueprint node). -/
+finite-limit preservation along that isomorphism completes the proof. -/
 private theorem sheafRealization_preservesFiniteLimits {C : Type (u + 1)} [Category.{u} C]
     [HasPullbacks C] (J : GrothendieckTopology C) [J.Subcanonical] (T : C) :
     PreservesFiniteLimits (sheafRealization J T) := by
@@ -355,8 +354,7 @@ Proof: test cancellation on each representable summand of the target. The coveri
 hypothesis and separatedness of the testing sheaf reduce equality there to equality on
 all summands mapping to that component. These equalities follow by precomposing the
 assumed equality with the corresponding source coproduct inclusions. Empty covering
-families are allowed: separatedness gives the same conclusion in this case.
-(auxiliary; not a blueprint node). -/
+families are allowed: separatedness gives the same conclusion in this case. -/
 private theorem sheafRealization_map_epi {C : Type (u + 1)} [Category.{u} C]
     (J : Precoverage C) [J.toGrothendieck.Subcanonical] {T : C}
     {X Y : FormalCoproduct.{u + 1} (Over T)} (f : X ⟶ Y)
@@ -476,8 +474,7 @@ private theorem yoneda_epi_of_ulift
 
 /-- Finite-basis geometry produces affine terms, component evaluation comparisons, and
 epimorphic matching arrows. Source: Stacks Project, proetale.tex, Tag 09A1 (2), and
-hypercovering.tex, Tags 0DAV, 0DB1, 0DB2
-(auxiliary; not a blueprint node).
+hypercovering.tex, Tags 0DAV, 0DB1, 0DB2.
 Proof: apply the finite-basis hypercover theorem in the qcqs subsite, then realize finite formal
 coproducts in the full slice. Transport matching epimorphisms and component evaluation
 bijections.

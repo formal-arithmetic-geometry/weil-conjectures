@@ -30,11 +30,6 @@ open scoped TensorProduct
 
 /-- One scalar makes every generically nilpotent element nilpotent.
 
-Source: smooth purity blueprint, `sk-prop-sf-cbc`,
-`lem-weil-pbc-finite-pushforward-generic-constructible`, proof steps 4--9;
-the finite torsion-kernel argument in `lem-weil-pbc-generic-product-kernel-bound`.
-(blueprint: lem-weil-pbc-generic-tensor-nilpotence-annihilator)
-
 Proof: Let C be the quotient of B tensor_A R0 by its nilradical. This is finite
 as an R0-module, since base extension and quotients preserve module finiteness.
 Its map to the reduction of B tensor_A F is localization at the nonzero elements

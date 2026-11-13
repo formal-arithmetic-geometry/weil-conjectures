@@ -14,7 +14,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Lifting images of a finite free local source
 
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`).
+Source: Stacks Project, Modules, Lemma 01CP.
 -/
 
 @[expose] public section
@@ -30,9 +30,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- A stalk-linear map composed with a finite free local-source morphism lifts
 on a smaller neighborhood. No relations or descent to the quotient are asserted.
 
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`),
+Source: Stacks Project, Modules, Lemma 01CP,
 third paragraph, finite-coordinate lifting.
-(blueprint: lem-weil-pbc-finite-free-local-stalk-map-lift)
 
 Proof: Evaluate f on the finitely many basis sections at U, take their germs at
 x, and apply χ. Choose actual section representatives of these germs in G.

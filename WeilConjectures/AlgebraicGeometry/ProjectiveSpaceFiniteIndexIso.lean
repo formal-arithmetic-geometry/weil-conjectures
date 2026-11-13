@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpaceReindexIsIso
 /-! # Reindexing finite projective space and its twisting module
 
 Source: Stacks Project, Constructions, Definition 01NF and Lemma 01NE.
-(blueprint: lem-weil-pbc-projective-space-finite-index-iso).
 -/
 
 @[expose] public section
@@ -27,11 +26,10 @@ namespace AlgebraicGeometry.ProjectiveSpace
 compatibly with the structure map and the twisting module.
 
 Source: Stacks Project, Constructions, Definition 01NF and Lemma 01NE.
-(blueprint: lem-weil-pbc-projective-space-finite-index-iso).
 
 Proof:
 1. Write the positive cardinality of the finite nonempty type as n + 1, and choose
-   b : ULift (Fin (n + 1)) ≃ β using Fintype.equivFinOfCardEq and Equiv.ulift.
+   b: ULift (Fin (n + 1)) ≃ β using Fintype.equivFinOfCardEq and Equiv.ulift.
 2. Reorder the coordinate sections of the identity pullback of O(1) by b. They are
    free generators on the reordered standard opens, which cover by Equiv.iSup_comp.
    Apply homOfIsFreeGenerator and the reindexing invertibility lemma to get e.

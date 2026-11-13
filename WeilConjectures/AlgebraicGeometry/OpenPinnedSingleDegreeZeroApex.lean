@@ -10,8 +10,7 @@ import WeilConjectures.AlgebraicGeometry.IsomorphicSingleTensorCounit
 import WeilConjectures.AlgebraicGeometry.DerivedBaseChangePasting
 
 /-! # Invariance of the pinned single comparison under an isomorphic apex
-Source: Stacks Project, Tags 08HY and 08IB.
-(blueprint: lem-pc-open-pinned-single-degree-zero-apex). -/
+Source: Stacks Project, Tags 08HY and 08IB. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -39,7 +38,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Changing only the apex of a commutative square by an isomorphism preserves the
 pinned single-complex comparison. This statement has no open-restriction data.
 Source: Stacks Project, Tags 08HY and 08IB.
-(blueprint: lem-pc-open-pinned-single-degree-zero-apex).
 Proof: transport tensor pullback along the apex isomorphism, using uniqueness of
 left adjoints to the composite pushforward. Tensor pullback along an isomorphism
 is an exact equivalence. Its single-complex comparison is therefore invertible.

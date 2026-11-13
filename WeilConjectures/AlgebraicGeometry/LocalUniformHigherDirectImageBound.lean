@@ -23,7 +23,6 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageAffineBasisVanishing
 /-! # Local bounds uniform in the quasi-coherent coefficient module
 
 Source: Stacks Project, Tag 01XJ, finite-cover argument over an affine base.
-(blueprint: lem-pc-local-uniform-higher-direct-image-bound).
 -/
 
 @[expose] public section
@@ -61,7 +60,6 @@ private theorem isZero_openCohomology_union
 /-- Every point has a neighbourhood with a higher-direct-image bound independent of
 its quasi-coherent coefficient module. The target need not be quasi-compact.
 Source: Stacks Project, Tag 01XJ, proof of (3), affine-base finite-cover argument.
-(blueprint: lem-pc-local-uniform-higher-direct-image-bound).
 
 Proof: Choose an affine neighbourhood U of s and put Y=f^{-1}U, T=U and g=f|_U.
 The scheme Y is quasi-compact and quasi-separated. Apply quasi-compact-open induction

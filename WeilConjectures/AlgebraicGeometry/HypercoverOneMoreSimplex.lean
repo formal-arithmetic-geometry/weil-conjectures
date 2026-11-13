@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicTopology.GlueSimplex
 /-!
 # Adding one simplex to a hypercover Hom object
 
-Source: Stacks Project, Tag 01GM, Lemma `lemma-one-more-simplex`
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 01GM, Lemma `lemma-one-more-simplex`.
 -/
 
 @[expose] public section
@@ -225,8 +224,7 @@ private theorem zero_case
   exact covering_pullback (IsPullback.of_is_product' hprod ht) (hK 0)
 
 /-- Restriction along the addition of one simplex is a covering of semi-representable
-objects. Source: Stacks Project, Tag 01GM, Lemma `lemma-one-more-simplex`
-(auxiliary; not a blueprint node).
+objects. Source: Stacks Project, Tag 01GM, Lemma `lemma-one-more-simplex`.
 
 Proof:
 1. By lem-weil-pbc-simplicial-set-glue-simplex, the hypotheses exhibit `V` as the

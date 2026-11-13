@@ -25,7 +25,6 @@ namespace AlgebraicGeometry
 /-- Effectivity over all affine bases implies effectivity over arbitrary bases
 for a class stable under the chosen pullbacks.
 Source: Stacks Project, Descent, Tag 02W3, final general-base part of the proof.
-(blueprint: lem-galois-fpqc-effectivity-affine-base-gluing)
 
 For each affine open A of S, base change f and D to A. Base-change stability of
 fpqc covers and hbase preserve the hypotheses, and hlocal gives an effective

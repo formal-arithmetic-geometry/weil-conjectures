@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.FlatBaseChangeModuleLerayComparison
 /-! # Target Leray comparison normalized against a natural source comparison
 
 Source: Stacks Project, Tags 01XK, 01E4, 03FD and the affine dictionary in 02KH.
-(blueprint: new-flat-base-change-target-leray-comparison)
 -/
 
 @[expose] public section
@@ -38,7 +37,6 @@ Leray equivalence, compatibly with the cohomological pullback. This does not con
 or assume a source tensor comparison, nor assert invertibility of base change.
 
 Source: Stacks Project, Tags 03FD, 01XK, 01E4 and 02KH, first paragraph of the proof.
-(blueprint: new-flat-base-change-target-leray-comparison)
 
 Proof: For every module on U = f inverse V, compare module derived sections and abelian
 Ext cohomology using the section complex of a module injective resolution. Forgotten

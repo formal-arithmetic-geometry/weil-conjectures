@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteOrderedFlasqueCechComparisonBeta
 # Finite ordered Čech comparison for flasque resolutions
 
 Source: Stacks Project, Cohomology, Tags 09SZ, 01ET, 01EQ, 01FJ and 01FM.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -31,12 +30,11 @@ namespace AlgebraicGeometry
 
 /-- The finite ordered Čech comparison, including componentwise naturality.
 Source: Stacks Project, Cohomology, Tags 09SZ, 01ET, 01EQ, 01FJ and 01FM.
-(auxiliary; not a blueprint node)
 
 Proof: The flasque row augmentation follows from the source library's full Čech
 exactness theorem, the ordered/usual restriction homotopy equivalence, and degree-zero
 sheaf gluing. Negative coefficient rows vanish. Only the finitely many Čech columns
-0,...,r-1 can be nonzero, so finite-strip row augmentation gives alpha.
+0..,r-1 can be nonzero, so finite-strip row augmentation gives alpha.
 Construct beta with its prescribed resolution-degree-zero components. The cochain
 identity for e kills its vertical differential, and restriction naturality supplies
 its horizontal cochain identity. Each vertical column is a finite product of section

@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.RestrictionResolutionLiftSections
 /-! # The section formula for the restricted lift
 
 Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
-(blueprint: lem-weil-pbc-restricted-lift-section-formula).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ set_option maxHeartbeats 500000 in
 -- Elaborating the nested restriction-adjunction lift needs additional fuel.
 /-- The section identity for the explicit restriction-adjunction lift.
 Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
-(blueprint: lem-weil-pbc-restricted-lift-section-formula).
 Proof: Check the equality in every degree. Expand the restriction-adjunction lift
 using its counit formula. Evaluate that counit and both pushforward composition
 comparisons on the top open. These maps are restrictions along equal inverse-image

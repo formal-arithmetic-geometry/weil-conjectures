@@ -28,7 +28,6 @@ variable {X Y : Scheme.{u}}
   [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 /-- Local isomorphisms of the projection map imply its global isomorphism.
 Source: Stacks Project, perfect.tex, Lemma 36.22.1 (Tag 08EU).
-(blueprint: lem-pc-projection-locality-local-to-global)
 The proof identifies restrictions with maps for restricted morphisms and uses
 cohomology sheaf locality on an open cover. -/
 theorem projectionFormula_local_to_global

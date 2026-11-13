@@ -11,8 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 /-! # Integral quotient scalar comparison for unbounded direct image
 
 (1), (3);
-Stacks Project, Tags 093M, 0D6D, 0D6E, 07A6 and 0944
-(auxiliary; not a blueprint node).
+Stacks Project, Tags 093M, 0D6D, 0D6E, 07A6 and 0944.
 
 Positive quotient levels are indexed by n + 1. All categories are ordinary unbounded
 derived categories of the recorded internal module objects. No completion is applied.
@@ -37,26 +36,25 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
 
 /-- The existing internal module category, with its canonical derived localization.
-Source: Stacks 00YV, 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks 00YV, 06YY. -/
 abbrev Modules (Λ₀ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ₀]
     (T : Scheme.{u}) :=
   Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ₀ T)
 
 /-- The ordinary extension whose total left derived functor is scalar extension.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks 06YY. -/
 abbrev extension (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
     Modules Λ T ⥤ Modules Λ' T :=
   Mod.extendScalars (coefficientMap a T)
 
 /-- The existing total left derived scalar extension, without a flatness restriction.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks 06YY. -/
 @[irreducible] def D (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
     DerivedCategory (Modules Λ T) ⥤ DerivedCategory (Modules Λ' T) :=
   by
     exact (extension a T).leftDerivedFunctor
 
 /-- The existing total derived module pullback.
-Source: blueprint derived push-pull (auxiliary; not a blueprint node).
 -/
 @[irreducible] def L (Λ₀ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ₀] [IsCommMonObj Λ₀] {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -64,7 +62,6 @@ Source: blueprint derived push-pull (auxiliary; not a blueprint node).
   CondensedRing.moduleObjectDerivedPullback Λ₀ f
 
 /-- The existing total derived module direct image.
-Source: blueprint derived push-pull (auxiliary; not a blueprint node).
 -/
 @[irreducible] def F (Λ₀ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ₀] [IsCommMonObj Λ₀] {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -72,7 +69,7 @@ Source: blueprint derived push-pull (auxiliary; not a blueprint node).
   CondensedRing.moduleObjectDerivedPushforward Λ₀ f
 
 /-- The given geometric derived adjunction, including its specified counit.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 @[irreducible] def adj (Λ₀ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ₀] [IsCommMonObj Λ₀] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     L Λ₀ f ⊣ F Λ₀ f :=
@@ -81,7 +78,7 @@ Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
     exact CondensedRing.derivedUpperStarLowerStarAdjunction Λ₀ f
 
 /-- The computation counit with its scalar interface exposed.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks 06YY. -/
 def scalarCounit (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
     DerivedCategory.Qh ⋙ D a T ⟶
       (extension a T).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh := by
@@ -89,7 +86,7 @@ def scalarCounit (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
   exact (extension a T).leftDerivedFunctorCounit
 
 /-- The computation counit with its geometric interface exposed.
-Source: Stacks 0G7E (auxiliary; not a blueprint node). -/
+Source: Stacks 0G7E. -/
 def pullCounit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategory.Qh ⋙ L Λ f ⟶
       (CondensedRing.upperStar Λ f).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh := by
@@ -97,7 +94,7 @@ def pullCounit {X Y : Scheme.{u}} (f : X ⟶ Y) :
   exact (CondensedRing.upperStar Λ f).leftDerivedFunctorCounit
 
 /-- The existing scalar adjunction with typed interfaces.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 def scalarAdj (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
     D a T ⊣ (Mod.comap (C := Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (coefficientMap a T)).mapDerivedCategory := by
@@ -108,7 +105,7 @@ def scalarAdj (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
 composed with the universal computation counits, so this also specifies the comparison
 on flat-term K-flat representatives, where those counits are invertible. The ordinary
 comparison is the fixed pure-tensor balancing map, not a choice of an isomorphism.
-Source: Stacks 0D6D, 0G7E (auxiliary; not a blueprint node). -/
+Source: Stacks 0D6D, 0G7E. -/
 def PullNormalized (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (b : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) : Prop :=
   ∀ P : HomotopyCategory (Modules Λ Y) (.up ℤ),
@@ -126,7 +123,7 @@ def PullNormalized (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y
 
 /-- The actual direct-image mate. Its adjunct is balancing followed by the image
 of the integral counit, exactly as specified in the node.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 def rho (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (b : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) :
     F Λ f ⋙ D a Y ⟶ D a X ⋙ F Λ' f :=
@@ -140,28 +137,28 @@ variable {Λ Λ' Λ'' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ''] [IsCommMonObj Λ'']
 
 /-- Ordinary scalar restriction.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 abbrev V₀ (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
     Modules Λ' T ⥤ Modules Λ T := Mod.comap (coefficientMap a T)
 
 /-- Exact scalar restriction on the ordinary unbounded derived category.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 abbrev V (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
     DerivedCategory (Modules Λ' T) ⥤ DerivedCategory (Modules Λ T) :=
   (V₀ a T).mapDerivedCategory
 
 /-- The quotient coefficient as a module over the source ring.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks 06YY. -/
 abbrev B₀ (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) : Modules Λ T :=
   (V₀ a T).obj (Mod.regular (condensedRingObj Λ' T))
 
 /-- The quotient coefficient in degree zero.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks 06YY. -/
 abbrev B (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :=
   DerivedCategory.Q.obj ((CochainComplex.singleFunctor (Modules Λ T) 0).obj (B₀ a T))
 
 /-- The actual universal scalar computation map at a cochain complex.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks 06YY. -/
 def compute (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (P : CochainComplex (Modules Λ T) ℤ) :
     (D a T).obj (DerivedCategory.Q.obj P) ⟶
@@ -176,7 +173,7 @@ def compute (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
 
 -- Total tensor colimit search needs the same bound as the upstream module-object API.
 /-- Total tensor with the actual degree-zero coefficient is termwise tensor.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks 06YY. -/
 def singleTensor (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (P : CochainComplex (Modules Λ T) ℤ) :
     CochainComplex.mapBifunctor P ((CochainComplex.singleFunctor _ 0).obj (B₀ a T))
@@ -189,7 +186,7 @@ The ordinary isomorphism is fixed on underlying sheaves by the existing balanced
 coequalizer comparison and symmetry. The derived isomorphism is fixed by its universal
 computation map and the single-factor total tensor comparison, so no arbitrary tensor
 identification is admitted.
-Source: Stacks 06YY, 0G7E (auxiliary; not a blueprint node). -/
+Source: Stacks 06YY, 0G7E. -/
 structure TensorNormalization (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) where
   ordinary : extension a T ⋙ V₀ a T ≅ tensorRight (B₀ a T)
   ordinary_hom : ∀ M : Modules Λ T,
@@ -199,7 +196,7 @@ structure TensorNormalization (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) whe
   derived : D a T ⋙ V a T ≅ tensorRight (B a T)
 /-- The derived tensor identification has the same universal computation map as ordinary
 balanced extension. This equation uniquely normalizes the identification on K-flat inputs.
-Source: Stacks 06YY, 0G7E (auxiliary; not a blueprint node). -/
+Source: Stacks 06YY, 0G7E. -/
 def TensorNormalized (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (t : TensorNormalization a T) : Prop :=
   ∀ P : CochainComplex (Modules Λ T) ℤ,
@@ -215,7 +212,7 @@ def TensorNormalized (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
 
 /-- The canonical restriction/direct-image comparison, conjugate to balancing between
 composite left adjoints. Its definition uses the specified adjunctions and counits.
-Source: Stacks 0D6E, 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 0D6E, 07A6. -/
 def restrictPush (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (b : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) :
     F Λ' f ⋙ V a Y ≅ V a X ⋙ F Λ f :=

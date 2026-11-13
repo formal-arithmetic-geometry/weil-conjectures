@@ -12,9 +12,6 @@ import WeilConjectures.AlgebraicGeometry.IrreducibleLisseRefinement
 
 /-!
 # Irreducible lisse strata
-
-Source: the Weil conjectures blueprint, chapter `sec-smooth-purity`, unit `sk-prop-sf-cbc`,
-order 1602 (blueprint: lem-weil-pbc-irreducible-lisse-strata).
 -/
 
 @[expose] public section
@@ -29,8 +26,6 @@ namespace AlgebraicGeometry.Scheme
 into nonempty irreducible locally closed subschemes with finite locally constant restrictions.
 Constructibility and finite local constancy are those of `def-weil-pbc-etale-sheaves`
 (finite geometric stalks), applied to the underlying sheaf of sets.
-Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc`, order 1602
-(blueprint: lem-weil-pbc-irreducible-lisse-strata).
 
 Proof:
 1. By `def-weil-pbc-etale-sheaves`, choose a finite lisse stratification and discard empty

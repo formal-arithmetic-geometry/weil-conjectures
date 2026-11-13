@@ -16,8 +16,6 @@ import Mathlib.RingTheory.SimpleModule.InjectiveProjective
 import WeilConjectures.CategoryTheory.SplitCategoryNullHomotopy
 
 /-! # Contraction of a field complex onto its single cohomology
-
-Source: blueprint lem-pc-perfect-locus, proof step 4, vector-space splitting argument.
 -/
 
 @[expose] public section
@@ -46,16 +44,12 @@ private theorem injective_of_field {R : CommRingCat.{u}} (hR : IsField R)
 
 /-- A complex of module sheaves on a field spectrum contracts onto its sole cohomology.
 
-Source: blueprint lem-pc-perfect-locus, proof step 4, as recorded in
-`lem-pc-finite-free-single-field-fibre`, proof step 2.
-(blueprint: new-field-complex-single-cohomology).
-
 Proof: The additive global-sections equivalence with R-vector spaces reflects
 projective and injective objects. All vector spaces are projective and injective,
 so all module sheaves on Spec R are as well. Split the homology quotient by
-s : H^j(P) → Z^j(P), and extend its quotient map across the cycles inclusion
-to r : P^j → H^j(P). The identities s π = id and inclusion r = π give
-chain maps a : P → H^j(P)[-j] and b : H^j(P)[-j] → P.
+s: H^j(P) → Z^j(P), and extend its quotient map across the cycles inclusion
+to r: P^j → H^j(P). The identities s π = id and inclusion r = π give
+chain maps a: P → H^j(P)[-j] and b: H^j(P)[-j] → P.
 The reverse composite b a is the identity. The composite a b induces identity
 on degree-j homology, by cancelling the epimorphism π and the monomorphism
 inclusion, and on all other homology, because those objects are zero.

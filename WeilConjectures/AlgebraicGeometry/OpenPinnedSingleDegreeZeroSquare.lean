@@ -13,8 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.PinnedSingleBaseChangeShift
 import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroTarget
 
 /-! # Degree-zero geometric open restriction square for pinned tensor counits
-Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.
-(blueprint: lem-pc-open-pinned-single-degree-zero-square). -/
+Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -25,7 +24,6 @@ namespace AlgebraicGeometry
 
 /-- Open restriction square in degree zero for the composition-pinned counits.
 Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.
-(blueprint: lem-pc-open-pinned-single-degree-zero-square).
 Proof: identify the inverse image of W in X' with the pullback of the restricted
 square by the universal property. Restriction preserves K-injectives because
 extension by zero is an exact left adjoint. It preserves K-flat complexes by

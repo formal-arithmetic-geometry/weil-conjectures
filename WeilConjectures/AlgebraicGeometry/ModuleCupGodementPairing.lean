@@ -33,7 +33,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Flasque augmented resolutions admit a tensor chain pairing over the augmentations.
 Source: Godement, Topologie algébrique et théorie des faisceaux, II §6,
 canonical flasque resolutions and their Alexander–Whitney product.
-(blueprint: lem-sc-module-cup-godement-aw)
 Proof: form the augmented cosimplicial Godement resolution from products of stalks.
 Its augmentation is exact on stalks. The cosimplicial terms are flasque because
 restrictions forget coordinates, and its nonnegative unnormalized cochain complex

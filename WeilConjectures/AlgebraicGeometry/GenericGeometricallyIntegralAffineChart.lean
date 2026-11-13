@@ -35,12 +35,12 @@ Proof: write the integral affine base as Spec A and the reduced affine source as
 Spec B. Flatness makes B embed in its generic fibre, which is a geometrically
 integral domain. The fraction field L of that domain is a regular finitely
 generated extension of K=Frac A. A separating transcendence basis and a primitive
-element give L=K(x_1,...,x_r)[x_(r+1)] with an absolutely irreducible minimal
+element give L=K(x_1..,x_r)[x_(r+1)] with an absolutely irreducible minimal
 polynomial. Take its primitive numerator over K and clear base denominators
 to obtain P over A. After a base localization and the monic change of variables
 described below, the hypersurface ring embeds in its generic fibre and is a
 domain. After shrinking the base,
-the hypersurface Spec(A[x_1,...,x_(r+1)]/(P)) and Spec B have isomorphic nonempty
+the hypersurface Spec(A[x_1..,x_(r+1)]/(P)) and Spec B have isomorphic nonempty
 affine opens over A: write the finitely many generators of each algebra as
 fractions in their common function field and invert their denominators. Spread
 absolute irreducibility of P by Tag 0557: a triangular substitution by separated
@@ -58,9 +58,7 @@ nonemptiness of every fibre. Choose a further affine base neighbourhood and
 view W as an affine open in the original source. All shrinkings contain the
 generic point. Relative dimension zero uses a linear polynomial, so the set of
 positive factor-degree pairs is empty. Empty source is excluded by the generic
-irreducibility hypothesis.
-
-(blueprint: lem-sbc-generic-geometrically-integral-affine-chart) -/
+irreducibility hypothesis. -/
 theorem exists_generic_geometrically_integral_affine_chart
     {X S : Scheme.{u}} [IsAffine X] [IsReduced X] [IsAffine S] [IsIntegral S]
     (f : X ⟶ S) [Flat f] [LocallyOfFinitePresentation f]

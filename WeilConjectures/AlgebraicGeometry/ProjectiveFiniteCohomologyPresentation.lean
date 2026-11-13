@@ -23,7 +23,6 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveTwistFiniteCohomology
 
 Source: Stacks Project, Tag 01YS, proof of Lemma 30.14.1 (1) and (3),
 Tag 01Y6, Lemma 30.9.9, and Tag 01XT, Lemma 30.8.1.
-(blueprint: lem-pc-u3-projective-finite-cohomology-presentation)
 -/
 
 @[expose] public section
@@ -82,7 +81,6 @@ private theorem finite_sections_pushforward_of_surjective {X Y : Scheme.{u}}
 /-- Closed pushforward preserves coherent modules on a locally Noetherian target.
 
 Source: Stacks Project, Tag 01Y6, Lemma 30.9.9.
-(blueprint: lem-pc-closed-immersion-coherent-cohomology)
 
 Proof: On an affine open Spec R of the target, the inverse image under the closed
 immersion is Spec(R/I). The restriction of F is associated to a finitely presented
@@ -241,7 +239,6 @@ finite cohomology over the affine base, with coherent kernel.
 
 Source: Stacks Project, Tag 01YS, proof of Lemma 30.14.1 (1) and (3),
 Tag 01Y6, Lemma 30.9.9, and Tag 01XT, Lemma 30.8.1.
-(blueprint: lem-pc-u3-projective-finite-cohomology-presentation)
 
 Proof: put A = Gamma(T,O). The canonical affine isomorphism T -> Spec A
 induces an isomorphism of projective spaces compatible with their projections.

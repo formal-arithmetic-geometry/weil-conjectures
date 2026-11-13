@@ -15,7 +15,6 @@ import all WeilConjectures.AlgebraicGeometry.ThickeningSystemPushforwardAdic
 /-! # Formal quotients by a second ideal
 
 Source: Stacks Project, Tag 088A, the systems F_n/K^e F_n.
-(blueprint: lem-weil-pbc-formal-second-ideal-quotient-supported).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- The second-ideal quotient system is annihilated by the closed thickening's ideal.
 Source: Stacks Project, Tag 088A, construction of G_e.
-(blueprint: lem-weil-pbc-formal-second-ideal-quotient-supported).
 
 Proof: At I-level n the system is M_n/K^(e+1)M_n, so the cokernel quotient
 construction makes multiplication by the recursively defined K-power zero.

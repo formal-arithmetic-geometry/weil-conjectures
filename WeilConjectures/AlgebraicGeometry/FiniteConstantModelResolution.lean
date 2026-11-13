@@ -21,7 +21,7 @@ import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 # Two-term resolutions of finite constant scalar models
 
 Source: Bhatt--Scholze, Proposition 6.8.11(3), Lemma 6.8.2(1); Stacks Tags 093J,
-093M (auxiliary; not a blueprint node).
+093M.
 
 The model functor first forms discrete constant modules, extends scalars by the map
 sending a scalar to the constant continuous function, and applies the monoidal inverse
@@ -43,8 +43,7 @@ namespace AlgebraicGeometry.ProEtale.FiniteConstantModel
 variable (A : Type u) [CommRing A]
 
 /-- The ordinary scalar action, as an integer-bilinear map on the lifted scalar ring.
-Source: Stacks Tag 093J, constant modules
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tag 093J, constant modules. -/
 def scalarAction (P : ModuleCat.{u + 1} A) :
     AddCommGrpCat.of (ULift.{u + 1} A) ⊗ AddCommGrpCat.of P ⟶ AddCommGrpCat.of P :=
   AddCommGrpCat.ofHom (TensorProduct.lift (LinearMap.mk₂ ℤ
@@ -55,8 +54,7 @@ def scalarAction (P : ModuleCat.{u + 1} A) :
     (fun n a p ↦ by simp [smul_comm n a.down p]))).toAddMonoidHom
 
 /-- The specified scalar action satisfies the internal module axioms.
-Source: Stacks Tag 093J, constant modules
-(auxiliary; not a blueprint node).
+Source: Stacks Tag 093J, constant modules.
 Proof: evaluate the unit equation on n tensor p and the associativity equation on
 (a tensor b) tensor p. They become one_smul and mul_smul, respectively; integer
 bilinearity extends these equalities to the whole tensor products. -/
@@ -80,15 +78,13 @@ theorem scalarAction_laws (P : ModuleCat.{u + 1} A) :
     exact mul_smul _ _ _
 
 /-- The ordinary module, with its actual scalar action, as an internal abelian-group module.
-Source: Stacks Tag 093J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tag 093J. -/
 instance scalarModule (P : ModuleCat.{u + 1} A) :
     ModObj (AddCommGrpCat.of (ULift.{u + 1} A)) (AddCommGrpCat.of P) :=
   ModObj.mk' _ (scalarAction A P) (scalarAction_laws A P).1 (scalarAction_laws A P).2
 
 /-- Linearity is exactly compatibility with the specified internal action.
-Source: Stacks Tag 093J
-(auxiliary; not a blueprint node).
+Source: Stacks Tag 093J.
 Proof: evaluate on a tensor p. Both sides are a times f(p), by f.map_smul;
 the tensor universal property proves equality. -/
 theorem scalarMap_linear {P Q : ModuleCat.{u + 1} A} (f : P ⟶ Q) :
@@ -102,8 +98,7 @@ theorem scalarMap_linear {P Q : ModuleCat.{u + 1} A} (f : P ⟶ Q) :
   exact f.hom.map_smul _ _
 
 /-- The scalar module functor retains the underlying additive maps.
-Source: Stacks Tag 093J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tag 093J. -/
 def scalarModules : ModuleCat.{u + 1} A ⥤ Mod Ab.{u + 1}
     (AddCommGrpCat.of (ULift.{u + 1} A)) where
   obj P := ⟨AddCommGrpCat.of P⟩
@@ -114,8 +109,7 @@ def scalarModules : ModuleCat.{u + 1} A ⥤ Mod Ab.{u + 1}
 variable [TopologicalSpace A] [IsTopologicalRing A]
 
 /-- Constant scalar functions, before sheafification.
-Source: Bhatt--Scholze, Definition 6.8.1
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Definition 6.8.1. -/
 def constantFunctions :
     (Functor.const Profinite.{u}ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} A)) ⟶
       (Profinite.continuousCoefficientRingObj A).obj where
@@ -126,8 +120,7 @@ def constantFunctions :
   naturality _ _ _ := rfl
 
 /-- The canonical discrete-constant-to-continuous coefficient map, by sheafification.
-Source: Bhatt--Scholze, Definition 6.8.1; Stacks Tag 093J
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Definition 6.8.1; Stacks Tag 093J. -/
 def scalarToContinuous :
     (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).obj
         (AddCommGrpCat.of (ULift.{u + 1} A)) ⟶ Profinite.continuousCoefficientRingObj A :=
@@ -135,8 +128,7 @@ def scalarToContinuous :
     (constantFunctions A)
 
 /-- The constant scalar map preserves the ring operations.
-Source: Bhatt--Scholze, Definition 6.8.1
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Definition 6.8.1.
 Proof: constant functions preserve one and multiplication sectionwise. The monoidal
 sheafification adjunction transports these two equations to scalarToContinuous. -/
 theorem scalarToContinuous_isMonHom : IsMonHom (scalarToContinuous A) := by
@@ -172,8 +164,7 @@ attribute [instance] scalarToContinuous_isMonHom
 
 set_option linter.unusedSectionVars false in
 /-- The constant scalar ring is commutative for the transported monoidal structure.
-Source: Stacks Tag 093J
-(auxiliary; not a blueprint node).
+Source: Stacks Tag 093J.
 Proof: multiplication before sheafification is commutative, since A is commutative.
 Sheafification is symmetric monoidal, so it transports that equality. -/
 theorem constantScalars_commutative :
@@ -194,8 +185,7 @@ attribute [instance] constantScalars_commutative
 
 /-- The canonical local model B_T tensor over discrete constant A with constant P.
 The displayed composite also fixes its value on every scalar linear map.
-Source: Bhatt--Scholze, Proposition 6.8.11(3), scalar extension construction
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.8.11(3), scalar extension construction. -/
 def modelFunctor (T : Scheme.{u}) : ModuleCat.{u + 1} A ⥤
     Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousCoefficientRingObj A) T) :=
@@ -206,8 +196,7 @@ def modelFunctor (T : Scheme.{u}) : ModuleCat.{u + 1} A ⥤
     (upperStarFromPoint T).mapMod (Profinite.continuousCoefficientRingObj A)
 
 /-- The finite scalar free module, with a harmless universe lift of its coordinates.
-Source: Bhatt--Scholze, Proposition 6.8.11(3)
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.8.11(3). -/
 def freeScalars (n : ℕ) : ModuleCat.{u + 1} A :=
   ModuleCat.of A (Fin n → ULift.{u + 1} A)
 

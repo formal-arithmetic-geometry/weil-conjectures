@@ -11,8 +11,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinarySupportedUnitComparison
 /-! # Base change of the ordinary constant-object unit
 
 The equation holds for every commutative square; exchange need not be invertible.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the substitution of
-canonical pullback counits (auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -83,10 +81,6 @@ private theorem mate_constant_unit
 
 /-- Exchange carries the constant-object adjunction unit to the constant-object
 unit on the other side of any commutative square.
-
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, substitution of canonical
-pullback counits; the source-library constant-sheaf and single-object composition lemmas.
-(auxiliary; not a blueprint node).
 
 Proof: the ordinary constant-sheaf pullback comparison respects composition.
 The derived single-object comparison takes this equality to the derived

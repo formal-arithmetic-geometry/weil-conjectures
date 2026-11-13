@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedSectionsLeftExactBottom
 /-! # Identifying section cohomology with the quotient of section cycles
 
 Source: Stacks Project, Tags 0AVW and 08D4, canonical comparison calculation.
-(blueprint: lem-sc-kinjective-section-cycle-comparison).
 -/
 
 @[expose] public section
@@ -77,7 +76,6 @@ private theorem section_cycles_cokernel_iso
 /-- The canonical quotient of section cycles computes the homology sheaf sections
 when the derived lower truncation projection is invertible in degree n.
 Source: Stacks Project, Tag 0AVW, omitted cohomology calculation, and Tag 08D4(1).
-(blueprint: lem-sc-kinjective-section-cycle-comparison).
 
 Proof: Put A = truncLE n I and B = truncGE n A. Since F preserves kernels,
 H^n(F(A)) maps isomorphically to H^n(F(I)). The natural comparison F(I) to

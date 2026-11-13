@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.PicardExternalCoefficientsPushforwardTe
 /-! # Affine-basis comparison for the presheaf coproduct
 
 Source: Stacks Project, Varieties, Tag 0BED, lemma-kunneth.
-(blueprint: lem-sc-picard-external-coefficients-pushforward-coproduct-comparison).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- On the affine basis, the presheaf coproduct indexed by a basis of sections of F
 is naturally isomorphic to the underlying presheaf of the external direct image.
 Source: Stacks Project, Varieties, Tag 0BED, lemma-kunneth, degree-zero calculation.
-(blueprint: lem-sc-picard-external-coefficients-pushforward-coproduct-comparison).
 
 Proof: On an affine open V of Y, identify pr2 inverse-image V with X times V.
 Restriction along the open immersion identifies the coefficients with F external

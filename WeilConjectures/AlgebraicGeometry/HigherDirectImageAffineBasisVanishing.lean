@@ -20,7 +20,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Vanishing of higher direct image on an affine neighbourhood basis
 
 Source: Stacks Project, Tags 01E4 and 01E1.
-(blueprint: lem-pc-higher-direct-image-affine-basis-vanishing).
 -/
 
 @[expose] public section
@@ -94,7 +93,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 of the p-th higher direct image restricted to U. No quasi-coherence is required.
 Source: Stacks Project, Tag 01E4 (sheafified cohomology presheaf) and Tag 01E1
 (restriction of injective resolutions).
-(blueprint: lem-pc-higher-direct-image-affine-basis-vanishing).
 
 Proof: Restrict an injective resolution of F to f^{-1}U. It remains injective and
 computes the open cohomology of the restricted coefficient module. Higher direct

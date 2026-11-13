@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.PicardOrdinaryRawCoordinates
 /-! # Scalar coordinates for ordinary pulled-back cycles
 
 Source: Stacks Project, Tag 0BF2, degree-zero calculation; Tags 06Z0 and 0096.
-(blueprint: lem-sc-picard-ordinary-scalar-coordinates)
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ field. The residue differential vanishes, and every annihilating scalar on a sma
 open is an ordinary cycle with the prescribed evaluated coordinate. There is no
 derived object or derived morphism in the conclusion.
 Source: Stacks Project, Tag 0BF2, degree-zero calculation; Tags 06Z0 and 0096.
-(blueprint: lem-sc-picard-ordinary-scalar-coordinates)
 
 Proof: The terms of K are retracts of finite free modules, hence quasi-coherent on
 affine U. Under the affine tilde/Gamma equivalence the section bases e0 and e1

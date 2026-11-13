@@ -27,7 +27,6 @@ namespace AlgebraicGeometry
 
 /-- Galois transitivity on fibres is local on the original scheme.
 Source: Stacks, Tag 038A; affine reduction as in Tag 038B.
-(blueprint: lem-weil-pbc-galois-base-change-fiber-transitivity).
 
 Proof: choose an affine cover member containing the common projection. Both points
 lift to its base change, since the pullback of the open immersion has precisely the

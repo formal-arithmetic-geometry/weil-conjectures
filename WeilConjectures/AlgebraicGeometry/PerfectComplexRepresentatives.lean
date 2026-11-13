@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenInduction
 /-! # A set of representatives for perfect complexes
 
 Source: Stacks Project, Derived Categories of Schemes,
-Theorem perfect-theorem-bondal-van-den-Bergh, set-of-representatives input
-(blueprint: lem-pc-perfect-complexes-compact-set).
+Theorem perfect-theorem-bondal-van-den-Bergh, set-of-representatives input.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ namespace AlgebraicGeometry.Scheme
 /-- On a quasi-compact quasi-separated scheme, the perfect objects of `D_QCoh(𝒪_X)`
 have a set of representatives up to isomorphism.
 Source: Stacks Project, Derived Categories of Schemes,
-Theorem perfect-theorem-bondal-van-den-Bergh, set-of-representatives input
-(blueprint: lem-pc-perfect-complexes-compact-set).
+Theorem perfect-theorem-bondal-van-den-Bergh, set-of-representatives input.
 
 Proof:
 1. On an affine open `W = Spec A`, `lem-pc-perfect-affine-bounded-projective` (Tag 08EB)

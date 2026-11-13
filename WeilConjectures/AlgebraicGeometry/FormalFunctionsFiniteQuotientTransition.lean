@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 /-! # Adjacent-level naturality of the finite quotient comparison
 
 Source: Stacks Project, Tag 02OD, finite-level identifications, and Tags 01F7 and 01FB.
-(blueprint: lem-weil-pbc-formal-functions-finite-quotient-transition)
 -/
 
 @[expose] public section
@@ -149,7 +148,6 @@ quotient transitions after applying the cohomology h-maps. The maps are not assu
 invertible, and the statement makes no assertion of linearity over the local ring.
 
 Source: Stacks Project, Tag 02OD, finite-level identifications; Tags 01F7 and 01FB.
-(blueprint: lem-weil-pbc-formal-functions-finite-quotient-transition)
 Proof: Write j_n for the finite fibre immersion into the local base change and t_n for
 the transition from fibre n to fibre n+1. Pullback uniqueness gives t_n followed by
 j_(n+1) = j_n. The adjunction equations defining formalFunctionsFiniteFMap and

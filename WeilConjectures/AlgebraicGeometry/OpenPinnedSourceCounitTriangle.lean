@@ -44,8 +44,7 @@ variable [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
   [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]
 
 /-- Termwise comparison for restricting the source before tensor pullback.
-Source: Stacks Project, Tags 08DW and 0D5S.
-(blueprint: lem-pc-open-pinned-source-counit-triangle). -/
+Source: Stacks Project, Tags 08DW and 0D5S. -/
 def openPinnedHomotopySourceCompositionIso
     {X : Scheme.{u}} (U : X.Opens) {Y : Scheme.{u}} (j : Y ⟶ U.toScheme) :
     (Scheme.Modules.tensorPullback (j ≫ U.ι)).mapHomotopyCategory (.up ℤ) ≅
@@ -196,7 +195,6 @@ attribute [local irreducible] singleComplexOpenPullbackIso openPinnedTensorOpenI
 -- Elaborating the four equations compares several selected localization functors.
 /-- The source-open leg of the derived counit composition calculation.
 Source: Stacks Project, Tags 08DW and 0D5S.
-(blueprint: lem-pc-open-pinned-source-counit-triangle).
 Proof: factor the selected composition comparison followed by the composite
 counit into the counit of U inclusion, then the counit of j, then the
 underived composition comparison. Cancel that last comparison against its

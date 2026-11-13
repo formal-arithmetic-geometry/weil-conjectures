@@ -39,8 +39,7 @@ set_option backward.isDefEq.respectTransparency false in
 algebraization. Source: Stacks Project, Tags 088A and 0888.
 Proof: use the scalar reverse maps from Remark 0888 on affine sections,
 transport them through the comparison square, and pass to inverse limits;
-then use the closed-immersion equivalence and completion reflection.
-(blueprint: lem-weil-pbc-devissage-second-adic-system-torsion-kernel) -/
+then use the closed-immersion equivalence and completion reflection. -/
 theorem grothendieckDevissage_secondAdicSystem_torsion_kernel
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (M : CoherentFormalModule X I)

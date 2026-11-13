@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkHomLift
 /-! # One unit-source open-site stalk map lifts on one neighbourhood
 
 Source: Stacks Project, Modules Tag 01CP, and Sheaves Tag 00A0 (3).
-(blueprint: lem-sc-open-stalk-unit-map-one-lift).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ noncomputable section
 
 Source: Stacks Project, Modules Tag 01CP, `lemma-stalk-internal-hom`,
 rank-one case; Sheaves Tag 00A0 (3), `lemma-restrict`.
-(blueprint: lem-sc-open-stalk-unit-map-one-lift).
 
 Proof: Via the open-subspace equivalence, the unit module is the structure
 module on U. Its stalk is the ring O_U,x, and restriction of scalars along

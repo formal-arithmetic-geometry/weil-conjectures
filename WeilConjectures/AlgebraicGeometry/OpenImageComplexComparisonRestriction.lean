@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.OpenImageComplexComparisonUnit
 /-! # Nested-open compatibility for the explicit comparison
 
 Source: Stacks Project, Cohomology, Tags 08BS and 08BV.
-(blueprint: lem-pc-open-image-complex-comparison-restriction).
 -/
 
 @[expose] public section
@@ -103,7 +102,7 @@ private theorem cancel_into_right_adjoint
 set_option backward.isDefEq.respectTransparency false in
 /-- The constructed comparisons intertwine the fixed termwise restriction with
 its derived adjunction mate, for one inclusion of opens.
-Source: Stacks Project, Cohomology, Tag 08BV (lemma-exact-sequence-j-star),
+Source: Stacks Project, Cohomology, Tag 08BV,
 first paragraph of the proof and the restriction arrow in its displayed sequence.
 
 Proof: Write L_A for exact restriction and R_A for underived open direct image.
@@ -126,8 +125,7 @@ naturality of beta_W give beta_A rho_supplied = rho_canonical beta_W, exactly th
 asserted equation after normalization. This uses no covering or termwise injectivity
 hypothesis. For W=A the canonical identification is transported through the two
 supplied adjunction comparisons; these adjunctions need not coincide. For W empty
-both target objects vanish.
-(blueprint: lem-pc-open-image-complex-comparison-restriction). -/
+both target objects vanish. -/
 theorem schemeOpenModuleImageComplexComparison_restriction
     (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

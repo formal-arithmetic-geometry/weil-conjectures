@@ -11,7 +11,7 @@ import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # Coefficient extension maps, the field colimit and signed Tate twists
 
-Source: blueprint `sk-def-sp-tate-twist`. The finite levels and integral and
+ The finite levels and integral and
 rational objects are re-exported from `ProEtaleTateTwistLevels`.
 -/
 
@@ -38,7 +38,7 @@ attribute [local irreducible] spEllPointReduction spEllPointTransition
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The integral coefficient inclusion is the unique ring map over E_X -> F_X.
-Source: blueprint field-extension transitions (blueprint: sk-def-sp-tate-twist).
+
 Proof: the inclusion E -> F preserves the extending valuation, so restrict it to
 O_E -> O_F and apply continuous-function condensation and p_X^*. The square
 commutes before pullback and hence afterwards. The inclusion O_F,X -> F_X is
@@ -101,8 +101,7 @@ theorem spIntegersMap_existsUnique {E F : PadicAlgCl.FiniteIntermediateField ℓ
       ((congrArg (upperStarFromPoint X).map hb.symm).trans
         ((upperStarFromPoint X).map_comp _ _)))
 
-/-- Pullback of the continuous inclusion O_E -> O_F, uniquely fixed by E -> F.
-Source: blueprint field-extension transitions (blueprint: sk-def-sp-tate-twist). -/
+/-- Pullback of the continuous inclusion O_E -> O_F, uniquely fixed by E -> F. -/
 def spIntegersMap {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) :
     condensedRingObj.{u} (Profinite.padicIntegersRingObj.{u} ℓ E.1) X ⟶
       condensedRingObj.{u} (Profinite.padicIntegersRingObj.{u} ℓ F.1) X :=
@@ -158,7 +157,7 @@ private theorem spEllReduction_epi (E : PadicAlgCl.FiniteIntermediateField ℓ) 
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The induced quotient inclusion is characterized by the two integral reductions.
-Source: blueprint field-extension transitions (blueprint: sk-def-sp-tate-twist).
+
 Proof: the integral ring inclusion sends ell^(n+1) to ell^(n+1), so descends to
 the finite quotients. Condense and pull back that quotient map. The quotient
 reduction is an epimorphism, so its commuting square determines the map uniquely. -/
@@ -226,8 +225,7 @@ theorem spEllMap_existsUnique {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h 
   intro g hg
   exact (cancel_epi (spEllReduction X ℓ E n)).mp (hg.trans he.symm)
 
-/-- The finite quotient inclusion along E -> F, fixed by the integral reductions.
-Source: blueprint field-extension transitions (blueprint: sk-def-sp-tate-twist). -/
+/-- The finite quotient inclusion along E -> F, fixed by the integral reductions. -/
 def spEllMap {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) (n : ℕ) :
     condensedRingObj.{u} (spEllPointRingObj ℓ E n) X ⟶
       condensedRingObj.{u} (spEllPointRingObj ℓ F n) X :=
@@ -243,7 +241,7 @@ attribute [local irreducible] spEllMap
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The integral transition is uniquely specified on every positive quotient twist.
-Source: blueprint field-extension transitions (blueprint: sk-def-sp-tate-twist).
+
 Proof: tensor each finite quotient inclusion with the identity on the root sheaf.
 These maps commute with reduction and Kummer transition. The forgetful functor
 creates limits, so the compatible finite-level maps give a unique map of limits. -/
@@ -301,8 +299,7 @@ theorem spIntegralTwistMap_existsUnique {E F : PadicAlgCl.FiniteIntermediateFiel
     intro n
     exact (hg n.unop).trans (hc.fac c n).symm
 
-/-- Integral extension transition: the coefficient inclusion on every root level.
-Source: blueprint field-extension transitions (blueprint: sk-def-sp-tate-twist). -/
+/-- Integral extension transition: the coefficient inclusion on every root level. -/
 def spIntegralTwistMap {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) :
     (spIntegralTwist X ℓ E).X ⟶ (spIntegralTwist X ℓ F).X :=
   (spIntegralTwistMap_existsUnique X ℓ h).exists.choose
@@ -472,7 +469,7 @@ private theorem spExtend_map_existsUnique
   rw [hf, Mod.extendπ_extendDescHom]
 
 /-- Localization gives the unique rational transition with the prescribed tensor formula.
-Source: blueprint rational field-extension transitions (blueprint: sk-def-sp-tate-twist).
+
 Proof: tensor the maps E_X -> F_X and O_E,X(1) -> O_F,X(1). The integral map is
 semilinear because its projections are tensor maps linear in the scalar factor.
 The coefficient square makes the tensor map balanced. Descend through the defining
@@ -492,8 +489,7 @@ theorem spRationalTwistMap_existsUnique {E F : PadicAlgCl.FiniteIntermediateFiel
     (spIntegralTwist X ℓ E) (spIntegralTwist X ℓ F)
     (spIntegralTwistMap X ℓ h) (spIntegralTwistMap_semilinear X ℓ h)
 
-/-- The rational field-extension transition, with its specified localization normalization.
-Source: blueprint field-extension transitions (blueprint: sk-def-sp-tate-twist). -/
+/-- The rational field-extension transition, with its specified localization normalization. -/
 def spRationalTwistMap {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) :
     (spRationalTwist X ℓ E).X ⟶ (spRationalTwist X ℓ F).X :=
   (spRationalTwistMap_existsUnique X ℓ h).exists.choose

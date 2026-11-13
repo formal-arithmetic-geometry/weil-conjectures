@@ -12,8 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Small endpoint families for perfect gluing
 
-Source: Step 2 of lem-pc-perfect-complexes-compact-set; Stacks Project, Tags 08BV and 08DR
-(blueprint: lem-perfect-gluing-endpoints-small).
+Source: Step 2 of lem-pc-perfect-complexes-compact-set; Stacks Project, Tags 08BV and 08DR.
 -/
 
 @[expose] public section
@@ -39,8 +38,7 @@ private theorem small_skeleton_of_family {C : Type v} [Category.{z} C]
 
 namespace AlgebraicGeometry.Scheme
 /-- The middle and overlap terms form small families of isomorphism classes.
-Source: Step 2 of lem-pc-perfect-complexes-compact-set, Stacks Project, Tags 08BV and 08DR
-(blueprint: lem-perfect-gluing-endpoints-small).
+Source: Step 2 of lem-pc-perfect-complexes-compact-set, Stacks Project, Tags 08BV and 08DR.
 
 Proof: Put A = f⁻¹U and B = f⁻¹V. The open immersions A.toScheme → Y → X,
 B.toScheme → Y → X and (A ∩ B).toScheme → Y → X have images U, V and U ∩ V,

@@ -19,8 +19,6 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The normalized scalar restriction carries a fixed-stratum local model from either
 outer finite coefficient term to the corresponding outer vertex of the triangle.
-Source: blueprint latest, integral-finite-levels, first paragraph.
-(blueprint: lem-pe-finite-constructibility-outer-local-transfer).
 
 Proof: apply normalized finite scalar restriction on the specified stratum for a
 consecutive coefficient transition. For the canonical residue map, induct on the number

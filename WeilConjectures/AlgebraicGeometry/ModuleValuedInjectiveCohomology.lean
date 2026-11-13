@@ -16,7 +16,6 @@ import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 # Comparison of the two encodings of injective module sheaves
 
 Source: Stacks Project, Cohomology on Sites, Tag 03FD.
-(blueprint: new-module-valued-injective-cohomology-comparison)
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace AlgebraicGeometry.Etale
 with the same underlying abelian sheaf, whose right-derived abelian evaluation computes the same
 cohomology.
 Source: Stacks Project, Tag 03FD, proof, second paragraph.
-(blueprint: new-module-valued-injective-cohomology-comparison)
 
 Proof: Regard a module-valued sheaf as a module over the constant ring sheaf.
 On each object, its scalar action is initially an action of the constant ring

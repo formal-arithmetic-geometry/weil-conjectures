@@ -28,7 +28,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 when positive cohomology vanishes on all the intersections. No totalization or
 quasi-coherence assumption occurs in this statement.
 Source: Stacks Project, Tags 01EQ and 01ET.
-(blueprint: lem-sc-module-cech-resolution-columns).
 
 Proof: evaluate the prescribed injective resolution on each finite intersection.
 Restriction preserves injectivity and exactness, so this computes cohomology on

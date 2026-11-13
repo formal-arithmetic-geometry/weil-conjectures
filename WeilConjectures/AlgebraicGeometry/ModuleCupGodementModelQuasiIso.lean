@@ -72,7 +72,6 @@ private theorem quasiIsoOfStalk {X : Scheme.{u}}
 
 /-- The actual Godement cofaces and germ augmentation give a quasi-isomorphism.
 Source: Stacks Project, Tag 0FKR, Lemma 20.30.1 (Tag 0FKS).
-(blueprint: lem-sc-module-cup-godement-model-quasi-iso)
 Proof: fix a point x and apply the module stalk functor. Evaluation on the
 x-coordinate of T(H), followed by evaluation of the skyscraper stalk, defines
 an extra codegeneracy from (T(H))_x to H_x. Its composite with the germ unit

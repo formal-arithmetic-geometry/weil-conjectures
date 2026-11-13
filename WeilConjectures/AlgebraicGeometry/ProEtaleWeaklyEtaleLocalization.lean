@@ -19,8 +19,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 /-!
 # Localization of the small pro-etale site at a weakly etale object
 
-Source: Stacks Project, Tags 098K, 094T, 0951, 00XZ, 04IX and 09AE
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 098K, 094T, 0951, 00XZ, 04IX and 09AE.
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- A morphism in a pro-etale slice is weakly etale by cancellation.
-Source: Stacks Project, Tags 094T, 0951 and 00XZ.
-(auxiliary; not a blueprint node) -/
+Source: Stacks Project, Tags 094T, 0951 and 00XZ. -/
 theorem weaklyEtale_slice (X : Scheme.{u}) (W : X.ProEt) (T : Over W) :
     WeaklyEtale T.hom.left := by
   have hcomp : T.hom.left ≫ W.hom = T.left.hom := by simp
@@ -41,8 +39,7 @@ theorem weaklyEtale_slice (X : Scheme.{u}) (W : X.ProEt) (T : Over W) :
   exact WeaklyEtale.of_comp T.hom.left W.hom
 
 /-- The functor from the slice at W to the small pro-etale site of its scheme.
-Source: Stacks Project, Tags 094T, 0951 and 00XZ.
-(auxiliary; not a blueprint node) -/
+Source: Stacks Project, Tags 094T, 0951 and 00XZ. -/
 def sliceTo (X : Scheme.{u}) (W : X.ProEt) : Over W ⥤ W.left.ProEt where
   obj T := by
     have := weaklyEtale_slice X W T
@@ -52,8 +49,7 @@ def sliceTo (X : Scheme.{u}) (W : X.ProEt) : Over W ⥤ W.left.ProEt where
     exact h)
 
 /-- The functor to the slice defined by composition with W.hom.
-Source: Stacks Project, Tags 094T, 0951 and 00XZ.
-(auxiliary; not a blueprint node) -/
+Source: Stacks Project, Tags 094T, 0951 and 00XZ. -/
 def sliceFrom (X : Scheme.{u}) (W : X.ProEt) : W.left.ProEt ⥤ Over W where
   obj V := Over.mk (Y := ProEt.mk (V.hom ≫ W.hom))
     (MorphismProperty.Over.homMk V.hom rfl)
@@ -65,8 +61,7 @@ def sliceFrom (X : Scheme.{u}) (W : X.ProEt) : W.left.ProEt ⥤ Over W where
         exact MorphismProperty.Over.w f)
 
 /-- The concrete equivalence from the slice to the small pro-etale site.
-Source: Stacks Project, Tags 094T, 0951 and 00XZ.
-(auxiliary; not a blueprint node) -/
+Source: Stacks Project, Tags 094T, 0951 and 00XZ. -/
 def sliceEquiv (X : Scheme.{u}) (W : X.ProEt) : Over W ≌ W.left.ProEt where
   functor := sliceTo X W
   inverse := sliceFrom X W
@@ -79,8 +74,7 @@ def sliceEquiv (X : Scheme.{u}) (W : X.ProEt) : Over W ≌ W.left.ProEt where
     MorphismProperty.Over.isoMk (Iso.refl _) (by simp [sliceTo, sliceFrom]))
 
 /-- Composition into the slice preserves the pro-etale coverings.
-Source: Stacks Project, Tags 094T, 0951 and 00XZ.
-(auxiliary; not a blueprint node) -/
+Source: Stacks Project, Tags 094T, 0951 and 00XZ. -/
 theorem sliceFrom_cover (X : Scheme.{u}) (W : X.ProEt) :
     CoverPreserving (topology W.left) ((topology X).over W) (sliceFrom X W) where
   cover_preserve {V S} hS := by
@@ -90,8 +84,7 @@ theorem sliceFrom_cover (X : Scheme.{u}) (W : X.ProEt) :
     exact (coverPreserving_overMap (inferInstance : WeaklyEtale W.hom)).cover_preserve hS
 
 /-- Composition into the slice is cocontinuous for the pro-etale topologies.
-Source: Stacks Project, Tags 094T, 0951 and 00XZ.
-(auxiliary; not a blueprint node) -/
+Source: Stacks Project, Tags 094T, 0951 and 00XZ. -/
 theorem sliceFrom_cocont (X : Scheme.{u}) (W : X.ProEt) :
     (sliceFrom X W).IsCocontinuous (topology W.left) ((topology X).over W) where
   cover_lift {V S} hS := by
@@ -126,8 +119,7 @@ theorem sliceFrom_cocont (X : Scheme.{u}) (W : X.ProEt) :
       exact S.downward_closed ((Sieve.overEquiv_iff _ _).mp (hle _ _ ⟨i⟩)) a
 
 /-- The inverse slice equivalence is a dense subsite for the pro-etale topologies.
-Source: Stacks Project, Tags 094T, 0951 and 00XZ.
-(auxiliary; not a blueprint node) -/
+Source: Stacks Project, Tags 094T, 0951 and 00XZ. -/
 theorem sliceDense (X : Scheme.{u}) (W : X.ProEt) :
     (sliceEquiv X W).inverse.IsDenseSubsite (topology W.left) ((topology X).over W) where
   functorPushforward_mem_iff {V S} := by
@@ -235,32 +227,23 @@ is uniquely specified by its composites with the constant-presheaf units. The fi
 functor equality specifies both the sectionwise action and the components of morphisms;
 composing its functor with `SheafOfModules.overFunctor` gives ambient restriction.
 
-Source: Stacks Project, Tags 098K, 094T, 0951, 00XZ, 04IX, 09AE, 01L7 and 01HI
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 098K, 094T, 0951, 00XZ, 04IX, 09AE, 01L7 and 01HI.
 
 Proof plan:
 1. Compose weakly etale maps using 094T. Conversely cancel the weakly etale structure
    map using 0951 (`WeaklyEtale.of_comp`). The two assignments leave schemes and arrows
-   unchanged, giving mutually inverse concrete categories and an equivalence of skeleta
-   (`def-weil-size-convention`, `lem-weil-pbc-weakly-etale-composition-base-change`,
-   `lem-trf-weakly-etale-between-objects`).
+   unchanged, giving mutually inverse concrete categories and an equivalence of skeleta.
 2. The fpqc finite-affine-cover condition depends only on the arrows to the covered scheme,
-   not on the base. Thus the coverings agree and precomposition identifies sheaves
-   (`def-weil-pbc-proetale-site`, `def-pur-localized-ringed-site`).
+   not on the base. Thus the coverings agree and precomposition identifies sheaves.
 3. Restrict the constant ring presheaf. Ring-valued sheafification commutes with localization
    (`Functor.pushforwardContinuousSheafificationCompatibility`, Tag 00XZ). Its unit identity
-   identifies constant sections, and the sheafification universal property gives uniqueness
-   (`def-weil-pbc-constant-sheaf`, `def-weil-pbc-sheafification`,
-   `lem-pur-ring-presheaf-sheafification-localization`).
+   identifies constant sections, and the sheafification universal property gives uniqueness.
 4. Restrict modules using `SheafOfModules.overFunctor`, then pull their actions back along
    the ring comparison. Naturality gives semilinearity; the inverse ring map reverses this
-   operation. Both operations leave section groups and morphism components unchanged
-   (`def-pur-localized-ringed-site`, `def-weil-sheaf-of-modules-category`).
+   operation. Both operations leave section groups and morphism components unchanged.
 5. For an open immersion use its monomorphism property (01L7) for uniqueness. A factorization
    has image in the open; conversely `IsOpenImmersion.lift` (01HI) supplies the factorization
-   whenever this image containment holds (`def-weil-open-immersion`,
-   `lem-weil-pbc-open-immersion-monomorphism`,
-   `lem-weil-pbc-morphism-factors-through-open-subscheme`). -/
+   whenever this image containment holds. -/
 theorem weaklyEtale_localization (X : Scheme.{u}) (W : X.ProEt)
     (A : CommRingCat.{u + 1}) :
     (∀ V : W.left.ProEt, WeaklyEtale (V.hom ≫ W.hom)) ∧

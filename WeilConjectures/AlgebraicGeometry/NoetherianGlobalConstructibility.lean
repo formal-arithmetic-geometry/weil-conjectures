@@ -15,8 +15,7 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 
 Source: Stacks Project, etale-cohomology.tex, Tag 095E,
 lemma-constructible-quasi-compact-quasi-separated; proetale.tex, Tag 09AJ,
-definition-constructible; topology.tex, Tag 005L
-(auxiliary; not a blueprint node).
+definition-constructible; topology.tex, Tag 005L.
 
 The two statements treat the small etale and small pro-etale sites separately. Equivalent
 coefficient-sized site models keep the coefficient universe independent of the scheme
@@ -281,19 +280,17 @@ private theorem affine_local_stratification_iff
 finite constructible locally closed immersed stratification with locally constant
 finitely presented module values. Finite generation in the existing local-constancy
 predicate is equivalent to finite presentation over `R`.
-Source: Stacks Project, Tag 095E, Noetherian module version; Tags 03RW(3) and 005L
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 095E, Noetherian module version; Tags 03RW(3) and 005L.
 
 Proof plan:
 1. Choose a finite affine Noetherian cover of X. The underlying spaces of its members
-are Noetherian (lem-sc-affine-noetherian-underlying-space), so their finite union is
-Noetherian (lem-kun-finite-union-noetherian). Every subset is quasi-compact, including
-X and every open (lem-sfb-noetherian-space-compact-subsets); this includes the empty cover.
-2. The same cover makes X locally Noetherian (pqf-def-locnoeth), hence quasi-separated
-(lem-weil-pbc-locally-noetherian-quasi-separated). Every open in any open subspace is
-retrocompact, so every locally closed part is constructible (def-weil-constructible-subset).
+are Noetherian, so their finite union is
+Noetherian. Every subset is quasi-compact, including
+X and every open; this includes the empty cover.
+2. The same cover makes X locally Noetherian, hence quasi-separated. Every open in any open subspace is
+retrocompact, so every locally closed part is constructible.
 3. Pull back trivializing etale coverings using lem-weil-pbc-etale-covering-base-change.
-Finite limits of site base change (lem-weil-pbc-etale-base-change-finite-limits) and
+Finite limits of site base change and
 lem-weil-pbc-left-exact-site-inverse-image-tensor give geometric inverse image and its
 composition comparisons. Equivalences to the coefficient-sized sites preserve these data.
 4. The scalar identifications and localized composition are
@@ -342,17 +339,14 @@ theorem etale_noetherian_global_constructibility
 /-- On the small pro-etale site, the same affine-local/global equivalence holds with
 finitely presented constant module values, without finiteness of the coefficient set.
 Source: Stacks Project, Tag 095E, finite-refinement proof; proetale.tex,
-Tag 09AJ, definition-constructible; topology.tex, Tag 005L
-(auxiliary; not a blueprint node).
+Tag 09AJ, definition-constructible; topology.tex, Tag 005L.
 
 Proof plan:
-1. A finite affine cover by Noetherian rings has Noetherian members
-(lem-sc-affine-noetherian-underlying-space), hence Noetherian union
-(lem-kun-finite-union-noetherian). By lem-sfb-noetherian-space-compact-subsets every
+1. A finite affine cover by Noetherian rings has Noetherian members, hence Noetherian union. By lem-sfb-noetherian-space-compact-subsets every
 subset is quasi-compact, also for the empty scheme and the empty cover.
-2. The scheme is locally Noetherian (pqf-def-locnoeth), hence quasi-separated by
+2. The scheme is locally Noetherian, hence quasi-separated by
 lem-weil-pbc-locally-noetherian-quasi-separated. Every open of every open subspace is
-retrocompact, so locally closed parts are constructible (def-weil-constructible-subset).
+retrocompact, so locally closed parts are constructible.
 3. det-pe-topos-functoriality-inverse-image supplies preservation of pro-etale covers,
 finite limits and composition comparisons for inverse image. Transporting by the
 coefficient-sized site equivalences preserves all these operations and coverings.

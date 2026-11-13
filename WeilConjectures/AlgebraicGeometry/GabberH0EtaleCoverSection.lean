@@ -19,7 +19,6 @@ import WeilConjectures.Topology.ClosedPushforwardConstantStalks
 
 Source: Stacks Project, Tag 09ZF, fourth proof paragraph, through surjectivity
 of the union of the local representing étale schemes.
-(blueprint: lem-weil-pbc-gabber-h0-etale-cover-section).
 -/
 
 @[expose] public section
@@ -103,7 +102,6 @@ private theorem gabber_open_detection
 
 /-- A global inverse-image section has a representative on a surjective étale cover.
 Source: Stacks Project, Tag 09ZF, fourth proof paragraph, before finite refinement.
-(blueprint: lem-weil-pbc-gabber-h0-etale-cover-section).
 
 Proof:
 1. Every nonempty closed subset of X meets i(Z). Otherwise the two constant

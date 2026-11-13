@@ -17,7 +17,6 @@ import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 # Finite constant values for cyclic module sheaves
 
 Source: Stacks Project, Tags 03RU and 03RW(2),(3), with cyclic coefficients.
-(blueprint: lem-weil-pbc-finite-local-cyclic-module-forget).
 -/
 
 @[expose] public section
@@ -75,7 +74,6 @@ private noncomputable def forgetConstantValueIso {Y : Scheme.{u}}
 admitting trivializations with finite constant values.
 Source: Stacks Project, Definitions 03RU and 03RW(2),(3); the constant-stalk argument in
 lem-weil-pbc-constructible-torsion-modules-agree, proof steps 4--6.
-(blueprint: lem-weil-pbc-finite-local-cyclic-module-forget)
 
 Proof: In the forward direction forget every finite module trivialization. Constants commute
 with forgetting. Lift any geometric point through the etale cover and identify its stalk

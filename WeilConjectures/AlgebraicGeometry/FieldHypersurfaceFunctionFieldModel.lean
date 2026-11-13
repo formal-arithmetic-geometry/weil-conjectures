@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.FieldFractionRingGeometricIntegrality
 /-! # Hypersurface function-field presentation over a field
 
 Source: Stacks Project, Tag 0559, first proof, separating generators and minimal polynomial.
-(blueprint: lem-sbc-field-hypersurface-function-field-model)
 -/
 
 @[expose] public section
@@ -43,9 +42,7 @@ geometrically irreducible and reduced, and both schemes are integral. A finite p
 algebra and its principal quotient are finitely presented, giving local finite type.
 The two inclusions in L induce the fraction-ring equivalence, and both fix K; composing
 with the canonical global-section identification of Spec K gives the displayed equality.
-When L is purely transcendental use one extra variable with equation T; this includes L=K.
-
-(blueprint: lem-sbc-field-hypersurface-function-field-model) -/
+When L is purely transcendental use one extra variable with equation T; this includes L=K. -/
 theorem exists_field_hypersurface_function_field_model
     {K : Type u} [Field K] {Y : Scheme.{u}} [IsAffine Y]
     (p : Y ⟶ Spec (.of K)) [LocallyOfFiniteType p]

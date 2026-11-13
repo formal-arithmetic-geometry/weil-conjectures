@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 /-! # Nonvanishing loci under restriction along an open immersion
 
 Source: Stacks Project, Properties, Lemma 01PV, the translation to the affine algebra
-problem; Modules, Lemma 01CY, the stalk criterion for nonvanishing
-(blueprint: lem-sc-nonvanishing-locus-restrict).
+problem; Modules, Lemma 01CY, the stalk criterion for nonvanishing.
 -/
 
 @[expose] public section
@@ -114,8 +113,7 @@ private theorem restrict_stalk_membership (x : X) (M : Y.Modules)
 No invertibility or affineness hypothesis is needed for this compatibility.
 
 Source: Stacks Project, Properties, Lemma 01PV, proof, first sentence, and Modules,
-Lemma 01CY, the definition of the nonvanishing locus
-(blueprint: lem-sc-nonvanishing-locus-restrict).
+Lemma 01CY, the definition of the nonvanishing locus.
 
 Proof: Fix a point x of the source. The open immersion induces an isomorphism from the
 structure-sheaf stalk at f(x) to the stalk at x. Restriction of the module induces an

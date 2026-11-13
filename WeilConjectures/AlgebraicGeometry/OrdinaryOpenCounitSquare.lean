@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryOpenCounitSquareSection
 /-! # The ordinary open counit square
 
 Source: Stacks Project, Cohomology, Tags 08FE and 08BV.
-(blueprint: lem-pc-mayer-vietoris-ordinary-open-counit-square).
 -/
 
 @[expose] public section
@@ -52,8 +51,7 @@ Transport back through overFunctorEquiv proves the displayed equation. This hold
 also for empty and full opens, with the same preimage equalities, and requires no
 injectivity or derived hypothesis. This statement concerns ordinary modules only;
 applying it in each degree and then applying the homotopy quotient is proved in
-the importing module, rather than assumed here.
-(blueprint: lem-pc-mayer-vietoris-ordinary-open-counit-square). -/
+the importing module, rather than assumed here. -/
 theorem schemeMVOrdinaryOpenCounit_square
     (X Y : Scheme.{u}) (h : X ⟶ Y) (U : Y.Opens)
     (M : SheafOfModules.{u} (moduleRings (h ⁻¹ᵁ U).toScheme.toRingedSpace)) :

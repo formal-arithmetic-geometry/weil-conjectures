@@ -28,7 +28,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The affine section comparison is bijective by the formal functions theorem.
 Source: Stacks Project, Theorem 02OC and Lemma 088B.
-(blueprint: lem-weil-pbc-formal-completion-pushforward-limit-app-bijective)
 
 Proof: Write U = Spec A and I = J(U), transporting along the affine chart.
 The ring A is Noetherian because Y is Noetherian. Base change f to U; the restricted

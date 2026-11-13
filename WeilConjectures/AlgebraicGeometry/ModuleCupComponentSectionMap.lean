@@ -85,7 +85,6 @@ private def pairingSummand {F G : X.Modules} (D : CupResolutionPairing F G)
 
 /-- Sheaf tensor linearization and coproduct assembly provide the component maps and their
 section formula. Source: Stacks Project, Tag 0FKU, construction before Lemma 20.31.3.
-(blueprint: lem-sc-module-cup-resolution-section-map).
 Proof: for each nonnegative bidegree, linearize D.pair on each open using the ordinary
 module tensor universal property. D.restriction makes these linear maps a presheaf morphism.
 Descend it through the sheafification adjunction, obtaining a morphism from the sheaf tensor

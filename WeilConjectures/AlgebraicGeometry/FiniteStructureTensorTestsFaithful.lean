@@ -22,8 +22,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Faithful elementary tensor tests for finite structure adjoints
 
-Source: Stacks Project, Tag 09ZT
-(blueprint: lem-weil-pbc-finite-structure-tensor-tests-faithful).
+Source: Stacks Project, Tag 09ZT.
 -/
 
 @[expose] public section
@@ -135,8 +134,7 @@ covered by the same morphism argument. For the faithfulness invocation choose th
 comparison required by grothendieck_existence independently of psi. Naturality makes
 the reductions of w a compatible family for that comparison. The unique lift property
 then equates v and w when their reductions coincide; no equality between this auxiliary
-comparison and the pinned tensorPullbackCompositionIso is asserted.
-(blueprint: lem-weil-pbc-finite-structure-tensor-tests-faithful). -/
+comparison and the pinned tensorPullbackCompositionIso is asserted. -/
 theorem finite_structure_tensor_tests_faithful
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]

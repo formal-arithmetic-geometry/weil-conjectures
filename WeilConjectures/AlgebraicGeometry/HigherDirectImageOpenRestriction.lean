@@ -17,7 +17,6 @@ import WeilConjectures.Topology.RingedSpaceModuleEnoughInjectives
 /-! # Ordinary higher direct images commute with open restriction
 
 Source: Stacks Project, Cohomology, Tags 01E1 and 01E5.
-(blueprint: lem-pc-higher-direct-image-open-restriction).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Restricting the higher direct image to an open of the target agrees with the
 higher direct image of the restricted module along the restricted morphism.
 Source: Stacks Project, Cohomology, Tags 01E1 and 01E5.
-(blueprint: lem-pc-higher-direct-image-open-restriction).
 
 Proof: Apply the existing ordinary higher-direct-image restriction theorem to the
 cartesian square of the two open inclusions and the restricted morphism. Its

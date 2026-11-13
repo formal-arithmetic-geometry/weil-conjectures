@@ -22,8 +22,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 
 /-! # Restriction of morphisms on a common proper closed support
 
-Source: Stacks Project, Tags 088E and 088F
-(blueprint: lem-weil-pbc-grothendieck-existence-supported-hom).
+Source: Stacks Project, Tags 088E and 088F.
 -/
 
 @[expose] public section
@@ -138,7 +137,6 @@ private theorem supported_formalCompletionMap_bijective
 subscheme. This is the proper-case reduction, before using the support characterization.
 Source: Stacks, Theorem 088E, first paragraph; Lemmas 087T and 0883,
 with the thickening formulation of Remark 088F.
-(blueprint: lem-weil-pbc-grothendieck-existence-supported-hom).
 
 Proof:
 1. The given closed subscheme Z is proper over A and its ideal kills both modules.

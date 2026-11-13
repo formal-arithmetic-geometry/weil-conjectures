@@ -34,8 +34,7 @@ the local-lifting assumptions one member of the finite cover at a time. For each
 the local-image detection lemma applies to its restriction and the same composite.
 Precomposition preserves all remaining local lifts. Finite induction removes every
 assumption. The vanishing of the cokernel composite gives the desired factorization.
-The empty covering is included: the initial step already has no lifting assumptions.
-(auxiliary; not a blueprint node). -/
+The empty covering is included: the initial step already has no lifting assumptions. -/
 theorem localImage_factors_of_finite_cover
     {F G : Sheaf X.smallEtaleTopology A} (p : F ⟶ G)
     (W : X.Etale) (B : A) (x : B ⟶ G.obj.obj (op W))

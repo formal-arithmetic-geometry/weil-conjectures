@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetHorizontalFaceCo
 /-! # Ordered horizontal faces of a single principal-open subset
 
 Source: Stacks Project, Tags 08C1, 08C0, and 01FG.
-(blueprint: lem-sc-principal-open-cech-subset-horizontal-faces).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ attribute [local instance] Classical.propDecidable
 
 Source: Stacks Project, Tag 08C1, equation (20.40.0.1) (Tag 08C0), and
 Tag 01FG, ordered-complex differential preceding Definition 20.23.2.
-(blueprint: lem-sc-principal-open-cech-subset-horizontal-faces).
 
 Proof: At a target increasing tuple t, expand alternatingCechDifferential as the
 sum of restrictions from faces obtained by deleting each position k. The supported

@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # Affine-open base case for continuity of perfect Hom
 Source: Stacks Project, perfect.tex, Tag 09RE, affine case of lemma-descend-homomorphisms.
-(blueprint: lem-pc-perfect-hom-continuity-affine).
 -/
 
 @[expose] public section
@@ -121,9 +120,8 @@ private theorem affine_perfect_hom_continuity_pair
 
 /-- The open-local continuity condition holds on affine opens.
 Source: Stacks Project, perfect.tex, Tag 09RE, affine case.
-(blueprint: lem-pc-perfect-hom-continuity-affine).
 
-Proof: Let t : Y → X present the affine open U. The open immersion identifies Y
+Proof: Let t: Y → X present the affine open U. The open immersion identifies Y
 with U, so Y is affine. Write Y = Spec B_i. Its base changes have rings
 B_j = B_i ⊗_{R_i} R_j and B = B_i ⊗_{R_i} c.pt; tensor extension preserves the
 ring colimit. Perfect complexes have quasi-coherent cohomology. Apply

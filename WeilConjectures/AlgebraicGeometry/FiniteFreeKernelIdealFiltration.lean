@@ -16,7 +16,7 @@ import Mathlib.Data.Fintype.Option
 # Ideal quotients of a finite free kernel
 
 Source: Stacks Project, Tag 01XF, the coordinate-filtration paragraph of the proof
-of Lemma 30.3.1 (blueprint: lem-pqf-finite-free-kernel-ideal-filtration).
+of Lemma 30.3.1.
 -/
 
 @[expose] public section
@@ -31,7 +31,7 @@ namespace AlgebraicGeometry
 successive quotients are quasi-coherent ideal sheaves. There is no cohomology hypothesis.
 
 Source: Stacks Project, Tag 01XF, label lemma-quasi-compact-h1-zero-covering,
-coordinate-filtration paragraph (blueprint: lem-pqf-finite-free-kernel-ideal-filtration).
+coordinate-filtration paragraph.
 
 Proof: Enumerate the finite index set by n coordinates. Let F_j, for j ≤ n, be the
 kernel of p restricted to the first j summands. Extend the chain constantly after n.

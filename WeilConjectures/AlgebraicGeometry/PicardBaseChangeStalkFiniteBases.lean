@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 /-! # Finite bases for the Picard base-change stalks
 
 Source: Stacks Project, Tags 0BDP, 01C6 and 0097.
-(blueprint: lem-sc-picard-base-change-stalk-finite-bases).
 -/
 
 @[expose] public section
@@ -361,8 +360,7 @@ image occurring in hR. Choose a trivializing open inside the resulting
 neighbourhood and take germs of its frame to obtain a finite basis of Q_t.
 The two bases can have unrelated cardinalities at this stage. No proper-image
 or fibre-rank comparison is needed. A zero-rank frame gives an empty basis;
-there is no point t when T' is empty.
-(blueprint: lem-sc-picard-base-change-stalk-finite-bases) -/
+there is no point t when T' is empty. -/
 theorem picardRankMatch_baseChange_stalk_finite_bases {X S T : Scheme.{u}} (f : X ⟶ S)
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]
     (E : X.Modules) [E.IsFiniteLocallyFree] (g : T ⟶ S)

@@ -13,7 +13,6 @@ public import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
 /-! # Resolution homology square for the identity scheme morphism
 
 Source: Stacks Project, Cohomology of Sheaves, Remark 01FB; Derived Categories, Tag 013S.
-(blueprint: lem-weil-pbc-module-cohomology-fmap-identity-resolution-homology).
 -/
 
 @[expose] public section
@@ -31,12 +30,11 @@ set_option backward.isDefEq.respectTransparency.types false in
 through the ordinary resolution descent and the vertical comparison. No derived-functor
 resolution transports are part of this conclusion.
 Source: Stacks Project, Cohomology of Sheaves, Remark 01FB; Derived Categories, Tag 013S.
-(blueprint: lem-weil-pbc-module-cohomology-fmap-identity-resolution-homology).
 
 Proof:
 1. Let alpha be the ordinary resolution descent of psi from D.J to D.I. The inverse
    pushforward-identity comparison, applied degreewise, identifies D.I with its identity
-   pushforward. Follow it by D.lambda to obtain l : D.I.cocomplex ⟶ D.K.
+   pushforward. Follow it by D.lambda to obtain l: D.I.cocomplex ⟶ D.K.
 2. The descent augmentation equation and D.compatible imply that D.beta and alpha
    followed by l have equal composites with the augmentation of D.J. The latter is a
    quasi-isomorphism; D.K has injective terms and is bounded below. Extend by zero to

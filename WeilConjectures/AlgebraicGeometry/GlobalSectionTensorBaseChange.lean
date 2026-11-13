@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.GlobalSectionLocalizationFactor
 
 Source: Stacks Project, algebraization.tex, Tags 0996 and 099E, final paragraph;
 algebra.tex, Tag 00DK (localization commutes with base change).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -99,7 +98,6 @@ This assertion involves only the actual tensor complexes, not an arbitrary compl
 or any ordered coordinate identifications.
 Source: Stacks Project, algebraization.tex, Tags 0996, 099E, final paragraph;
 algebra.tex, Tag 00DK.
-(auxiliary; not a blueprint node).
 
 Proof: use the normalized strong monoidal structure on module scalar extension and
 its preservation of the small coproducts defining total tensors. The existing additive

@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 
 /-! # Maps on module cohomology induced by scheme maps
 
-Source: Stacks Project, Cohomology of Sheaves, Tags 01F7, 01F8, 01FA, 01FB, 01EZ
-(blueprint: def-weil-pbc-module-cohomology-fmap).
+Source: Stacks Project, Cohomology of Sheaves, Tags 01F7, 01F8, 01FA, 01FB, 01EZ.
 
 Nonnegative complexes are encoded by Mathlib's natural-number indexed complexes.
 The choices in the resolution construction are bundled below, and their existence is
@@ -171,7 +170,7 @@ private def pushforward_sections_iso {X Y : Scheme.{u}} (h : X ⟶ Y)
 /-- Choices for the construction of the cohomology map of an `h`-map. The comparison `a`
 is the identity on sections, using `h⁻¹(Y) = X`. The component formula pins it to this
 canonical comparison, rather than an arbitrary isomorphism.
-Source: Stacks Project, Tag 01FB (blueprint: def-weil-pbc-module-cohomology-fmap). -/
+Source: Stacks Project, Tag 01FB. -/
 structure ModuleCohomologyFMapData {X Y : Scheme.{u}} (h : X ⟶ Y)
     (G : SheafOfModules.{u} Y.ringCatSheaf) (F : SheafOfModules.{u} X.ringCatSheaf)
     (φ : G ⟶ (pushforward h).obj F) where
@@ -197,7 +196,7 @@ structure ModuleCohomologyFMapData {X Y : Scheme.{u}} (h : X ⟶ Y)
         forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).map lambda))
 
 /-- The resolution choices needed for the construction exist.
-Source: Stacks Project, Tags 01FB, 01EZ (blueprint: def-weil-pbc-module-cohomology-fmap).
+Source: Stacks Project, Tags 01FB, 01EZ.
 
 Proof: (1) Enough injectives gives resolutions I and J of F and G, respectively.
 (2) Extend h_*I by zero to integer indices and apply Mathlib's
@@ -266,8 +265,7 @@ theorem moduleCohomologyFMapData_nonempty {X Y : Scheme.{u}} (h : X ⟶ Y)
 /-- The map of cohomology groups computed from a system of choices `D`:
 H(Γβ) followed by H(μ) inverse, with `μ = a ≫ Γ(Y, λ)`, transported through the
 resolution comparisons `isoRightDerivedObj` and the forgetful homology comparisons.
-Source: Stacks Project, Equation 01FA and Remark 01FB
-(blueprint: def-weil-pbc-module-cohomology-fmap). -/
+Source: Stacks Project, Equation 01FA and Remark 01FB. -/
 def ModuleCohomologyFMapData.map {X Y : Scheme.{u}} {h : X ⟶ Y}
     {G : SheafOfModules.{u} Y.ringCatSheaf} {F : SheafOfModules.{u} X.ringCatSheaf}
     {φ : G ⟶ (pushforward h).obj F} (D : ModuleCohomologyFMapData h G F φ) (p : ℕ) :
@@ -293,8 +291,7 @@ def ModuleCohomologyFMapData.map {X Y : Scheme.{u}} {h : X ⟶ Y}
 
 /-- The map of cohomology groups of an `h`-map: H(Γβ) followed by H(μ) inverse, for a
 system of choices whose existence is `moduleCohomologyFMapData_nonempty`.
-Source: Stacks Project, Equation 01FA and Remark 01FB
-(blueprint: def-weil-pbc-module-cohomology-fmap). -/
+Source: Stacks Project, Equation 01FA and Remark 01FB. -/
 def moduleCohomologyFMap {X Y : Scheme.{u}} (h : X ⟶ Y)
     {G : SheafOfModules.{u} Y.ringCatSheaf} {F : SheafOfModules.{u} X.ringCatSheaf}
     (φ : G ⟶ (pushforward h).obj F) (p : ℕ) :
@@ -304,7 +301,7 @@ def moduleCohomologyFMap {X Y : Scheme.{u}} (h : X ⟶ Y)
   (Classical.choice (moduleCohomologyFMapData_nonempty h G F φ)).map p
 
 /-- Pullback on module cohomology is the map of the tensor-pullback adjunction unit.
-Source: Stacks Project, Tag 01F7 (blueprint: def-weil-pbc-module-cohomology-fmap). -/
+Source: Stacks Project, Tag 01F7. -/
 def moduleCohomologyPullback {X Y : Scheme.{u}} (h : X ⟶ Y)
     (G : SheafOfModules.{u} Y.ringCatSheaf) (p : ℕ) :=
   moduleCohomologyFMap h
@@ -312,14 +309,13 @@ def moduleCohomologyPullback {X Y : Scheme.{u}} (h : X ⟶ Y)
 
 /-- Restriction on module cohomology is the map of the restriction-adjunction unit.
 Its components are precisely restriction from V to V ∩ U.
-Source: Stacks Project, Tag 01F7; Sheaves, Tag 00A1
-(blueprint: def-weil-pbc-module-cohomology-fmap). -/
+Source: Stacks Project, Tag 01F7; Sheaves, Tag 00A1. -/
 def moduleCohomologyRestriction {Y : Scheme.{u}} (U : Y.Opens)
     (G : SheafOfModules.{u} Y.ringCatSheaf) (p : ℕ) :=
   moduleCohomologyFMap U.ι ((restrictAdjunction U.ι).unit.app G) p
 
 /-- The edge map is the cohomology map of the identity on the direct image.
-Source: Stacks Project, Tag 01F7 (blueprint: def-weil-pbc-module-cohomology-fmap). -/
+Source: Stacks Project, Tag 01F7. -/
 def moduleCohomologyEdgeMap {X Y : Scheme.{u}} (h : X ⟶ Y)
     (F : SheafOfModules.{u} X.ringCatSheaf) (p : ℕ) :=
   moduleCohomologyFMap h (𝟙 ((pushforward h).obj F)) p

@@ -30,9 +30,8 @@ import WeilConjectures.CategoryTheory.Sites.WeaklyContractibleMittagLeffler
 /-!
 # The Milnor theorem for arbitrary ring sheaves on the pro-etale site
 
-Source: literature/blueprint/latest/blueprint/sec-proetale-coefficients/
-sk-prop-pe-milnor/_section.md; Stacks Tags 0940, 0941, 0947 and 07KW
-(blueprint: sk-prop-pe-milnor).
+Source:
+sk-prop-pe-milnor/_section.md; Stacks Tags 0940, 0941, 0947 and 07KW.
 
 The strict cone functor and all module/cohomology towers are the existing constructions
 of `IntegralOperationsWellDefined` and `MilnorTower`. No cone is chosen in a bare
@@ -56,8 +55,7 @@ namespace AlgebraicGeometry.Scheme.ProEt
 The universal pair is asserted to exist, with its unit invertible on K-injectives;
 the displayed natural isomorphism uses the positive `1-T` cone, not its negative.
 
-Source: latest blueprint, sk-prop-pe-milnor; Stacks Tags 0940 and 0941
-(blueprint: sk-prop-pe-milnor).
+Source: latest; Stacks Tags 0940 and 0941.
 
 Proof:
 1. Module sheaves over the small site form a Grothendieck abelian category, as does
@@ -155,8 +153,7 @@ Here e₁ identifies R¹lim with the cokernel. The left endpoint of the exact se
 is the actual degree-one derived limit of the cohomology sheaves. The final implication
 is tested only on affine weakly contractible objects.
 
-Source: latest blueprint, sk-prop-pe-milnor; Stacks Tag 0947 (6),(7), Tag 07KW
-(blueprint: sk-prop-pe-milnor).
+Source: latest; Stacks Tag 0947 (6),(7), Tag 07KW.
 
 Proof:
 1. Apply det-pe-milnor-sequence to the strict cone. The long exact cohomology sequence
@@ -289,8 +286,7 @@ theorem milnor (X : Scheme.{t})
 The existential product witness asserts product existence rather than assuming it;
 the following use of IsDerivedLimit uses precisely that product structure.
 
-Source: latest blueprint, sk-prop-pe-milnor; Stacks Tags 08TC and 0941
-(blueprint: sk-prop-pe-milnor).
+Source: latest; Stacks Tags 08TC and 0941.
 
 Proof: exact products make Q preserve the termwise product of the representative
 complexes. Rotate the mapping-cone triangle and shift it by -1. Its middle map is

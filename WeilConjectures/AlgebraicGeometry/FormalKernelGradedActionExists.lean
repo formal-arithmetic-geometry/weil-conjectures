@@ -30,7 +30,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The associated graded ideal algebra acts on the successive formal-system kernels.
 Source: Stacks Project, Lemma 087Z, the graded module construction in its affine proof,
 and Section 0EHN; https://stacks.math.columbia.edu/tag/087Z.
-(blueprint: lem-weil-pbc-formal-kernel-graded-action-exists).
 
 Proof: Iterate the defining reductions to identify the quotient of F_l by I^r F_l
 with F_r for l >= r >= 1. Thus all transitions are epimorphisms. Locally lift a

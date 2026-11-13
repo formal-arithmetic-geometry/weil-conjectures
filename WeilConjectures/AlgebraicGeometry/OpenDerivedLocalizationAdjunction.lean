@@ -16,7 +16,6 @@ import Mathlib.CategoryTheory.Localization.LocallySmall
 /-! # Derived localizations and the adjunction for open restriction
 
 Source: Stacks Project, Tag 079W, Lemma cohomology-lemma-adjoint.
-(blueprint: lem-pc-open-derived-localization-adjunction).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 /-- The module category of an open subscheme `U` has a derived category with Hom types in
 universe `w`, transported from the localization over the open `U` of `X`.
 Source: Stacks Project, Tag 079W.
-(blueprint: lem-pc-open-derived-localization-adjunction).
 
 Proof: form the standard derived category on `U`. The exact canonical module equivalence
 `Modules.overEquiv U` induces a derived equivalence with the given localization on the
@@ -56,7 +54,6 @@ theorem nonempty_hasDerivedCategory_openSubscheme
 No support or detector assertion is made.
 Source: Stacks Project, Tag 079W, Lemma cohomology-lemma-adjoint, used for the open
 inclusion in Tag 0A9A, Lemma perfect-lemma-supported-generator.
-(blueprint: lem-pc-open-derived-localization-adjunction).
 
 Proof: the localized restriction functor has its explicit underived right adjoint. The
 localized module category is Grothendieck abelian by

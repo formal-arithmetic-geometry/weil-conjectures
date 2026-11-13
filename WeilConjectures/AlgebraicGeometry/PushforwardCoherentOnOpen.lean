@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
 
 /-! # Coherent pushforward from an open with closed ambient support
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.9.11 (Tag 0CYJ)
-(blueprint: lem-weil-pbc-pushforward-coherent-on-open).
+Source: Stacks Project, Cohomology of Schemes, Lemma 30.9.11 (Tag 0CYJ).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ of the ambient scheme lying inside that open, its direct image is coherent. Its 
 back to the open is isomorphic to the original module, and its restriction to the complement
 of the closed subset is zero. Support is the nonzero-stalk locus, as in
 `def-weil-pbc-closed-subset-proper-over-base`; no properness assumption is needed here.
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.9.11 (Tag 0CYJ)
-(blueprint: lem-weil-pbc-pushforward-coherent-on-open).
+Source: Stacks Project, Cohomology of Schemes, Lemma 30.9.11 (Tag 0CYJ).
 
 Proof:
 1. Mathlib's `restrictFunctorAdjCounitIso` identifies the restriction back to `U` with `F`.

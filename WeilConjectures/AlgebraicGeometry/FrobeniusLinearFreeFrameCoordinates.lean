@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.TensorFreeFrameCoordinates
 # Natural coordinates from a specified tensor-pullback frame
 
 Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb.
-(blueprint: lem-fd-frobenius-linear-free-frame-coordinates).
 -/
 
 @[expose] public section
@@ -106,7 +105,6 @@ private theorem frobenius_coordinates_of_linear_coordinates
 
 Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb,
 first paragraph (the matrix description after choosing a frame).
-(blueprint: lem-fd-frobenius-linear-free-frame-coordinates).
 
 Proof: for h:W -> V, use the inverse unit-normalized tensor-pullback composition
 comparison, the tensor-to-abstract pullback comparison, the pullback of the given

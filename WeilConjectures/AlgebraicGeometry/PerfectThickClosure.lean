@@ -14,8 +14,8 @@ import Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
 
 /-! # Perfect complexes form a thick subcategory
 
-Source: literature/stacks-project/cohomology.tex, Tags 08CR (lemma-two-out-of-three-perfect)
-and 08CS (lemma-summands-perfect), and Definition 08CM (blueprint: lem-pc-perfect-thick-closure).
+Source: literature/stacks-project/cohomology.tex, Tags 08CR
+and 08CS, and Definition 08CM.
 -/
 
 @[expose] public section
@@ -28,8 +28,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Perfect complexes are closed under distinguished triangles, direct summands, shifts, and
 finite direct sums.
-Source: Stacks Project, Cohomology of Sheaves, Tags 08CR and 08CS and Definition 08CM
-(blueprint: lem-pc-perfect-thick-closure).
+Source: Stacks Project, Cohomology of Sheaves, Tags 08CR and 08CS and Definition 08CM.
 
 Proof: Apply `lem-pc-perfect-two-out-of-three` (Tag 08CR) to each pair of perfect terms
 of a distinguished triangle. Apply `lem-pc-perfect-summand` (Tag 08CS) to the decomposition

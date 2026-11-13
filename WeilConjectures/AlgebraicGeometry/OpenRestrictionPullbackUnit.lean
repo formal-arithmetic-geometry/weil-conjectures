@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleRestrictionPullbackUnit
 
 Source: Stacks Project, Cohomology on Sites, Tag 03F3, localization and restriction;
 agent-identified compatibility gap in the étale Mayer–Vietoris argument.
-(blueprint: lem-weil-pbc-open-restriction-pullback-unit)
 -/
 
 @[expose] public section
@@ -30,9 +29,8 @@ namespace AlgebraicGeometry
 back along the original morphism, under the canonical restriction comparisons.
 Source: Stacks Project, Cohomology on Sites, Tag 03F3, localization and restriction;
 agent-identified gap, with the following proof from adjunction unit equations.
-(blueprint: lem-weil-pbc-open-restriction-pullback-unit)
 
-1. Identify the seven fibre products P₀,...,P₆ of the node's proof with W or W'.
+1. Identify the seven fibre products P₀..,P₆ of the node's proof with W or W'.
    The projections are isomorphisms by the universal property and the monomorphism
    property of open immersions. All comparison maps over Y agree by uniqueness.
    Use def-pc-fibre-product, lem-weil-pbc-open-immersion-monomorphism,

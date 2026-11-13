@@ -19,7 +19,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0881, via Lemmas
 087W and 087X (3), and Algebra, Lemma 00MB (2).
-(blueprint: lem-weil-pbc-formal-completion-affine-kernel).
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ only the kernel universal property, not that the completed second arrow is epimo
 
 Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0881, affine reduction
 and equivalence 087W; Algebra, Lemma 00MB (2).
-(blueprint: lem-weil-pbc-formal-completion-affine-kernel).
 
 Proof:
 1. Apply formalCompletion_affine_comparison. It supplies a Noetherian ring A, an ideal J,

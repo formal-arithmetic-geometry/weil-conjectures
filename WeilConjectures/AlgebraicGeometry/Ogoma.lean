@@ -12,7 +12,6 @@ import WeilConjectures.RingTheory.ExistsAnnihilatorOfSubsingletonLocalizedModule
 
 /-! # Ogoma's lemma
 Source: literature/stacks-project/smoothing.tex, Smoothing Ring Maps, Lemma Tag 07FC
-(blueprint: lem-weil-pbc-ogoma)
 -/
 
 @[expose] public section
@@ -21,8 +20,7 @@ universe u v
 
 open scoped Pointwise
 
-/-- Ogoma's lemma, following Stacks Project, Smoothing Ring Maps, Lemma Tag 07FC
-(blueprint: lem-weil-pbc-ogoma). The proof follows the five steps in the node:
+/-- Ogoma's lemma, following Stacks Project, Smoothing Ring Maps, Lemma Tag 07FC. The proof follows the five steps in the node:
 form the quotient of the two kernel submodules, show its localization vanishes,
 use finite generation over a Noetherian ring to obtain a uniform annihilator, and
 then verify the kernel equality for every positive power. -/

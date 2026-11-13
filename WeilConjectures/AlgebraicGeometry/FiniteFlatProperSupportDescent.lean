@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.ChosenComplexFlatProperRefinement
 # Descent of bounded flat complexes with proper support
 
 Source: Stacks Project, Limits of Schemes, Tags 01ZR, 05LY and 081G;
-Cohomology of Schemes, Lemma 30.26.7 (Tag 0CYS)
-(blueprint: lem-pc-finite-flat-proper-support-descent).
+Cohomology of Schemes, Lemma 30.26.7 (Tag 0CYS).
 -/
 
 @[expose] public section
@@ -56,8 +55,7 @@ private theorem supportProper_of_iso {X S : Scheme.{u}} (f : X ⟶ S)
 
 /-- A bounded complex of finitely presented modules flat over the limit base and with
 termwise proper support descends with all these properties to a later stage.
-Source: Stacks Project, Tags 01ZR, 05LY, 081G and 0CYS
-(blueprint: lem-pc-finite-flat-proper-support-descent).
+Source: Stacks Project, Tags 01ZR, 05LY, 081G and 0CYS.
 
 The ring diagram gives the affine inverse system contravariantly. Its limit is the cone
 point `c.pt`, with `IsAffine c.pt` expressing `S = Spec R` without fixing coordinates.
@@ -65,7 +63,7 @@ Affine stages are quasi-compact and quasi-separated; their transition maps are a
 Finite presentation of `f` comprises local finite presentation, quasi-compactness and
 quasi-separatedness. Finite presentation of each module implies quasi-coherence.
 The family of isomorphisms in the conclusion commutes with every differential, hence
-is an isomorphism of complexes after tensor base change (`def-pc-base-change`).
+is an isomorphism of complexes after tensor base change.
 
 Proof:
 1. Apply `lem-pc-fp-complex-descent` (Tag 01ZR) to descend the bounded finitely

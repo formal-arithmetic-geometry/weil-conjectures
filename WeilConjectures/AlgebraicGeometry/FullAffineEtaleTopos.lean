@@ -20,7 +20,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 # Affine étale restriction and cohomology
 
 Source: Stacks Project, Topologies 04HR, Definitions 0219 and 021B(4), and
-Cohomology on Sites 03YU (blueprint: lem-weil-pbc-affine-etale-site-topos).
+Cohomology on Sites 03YU.
 -/
 
 @[expose] public section
@@ -47,8 +47,7 @@ private theorem fullAffineEtale_preservesPullbacks (S : Scheme.{u}) :
 /-- Source: Stacks 04HR, 021E. Proof: affine pullbacks are preserved by the full inclusion.
 A finite jointly surjective affine cover is an etale cover in the small site. Apply
 the target sheaf condition and the preserved-pullback comparison to every such cover.
-The pretopology/coverage comparison then gives the sheaf condition for the topology.
-(blueprint: lem-weil-pbc-affine-etale-inclusion-continuity_sheaf_condition) -/
+The pretopology/coverage comparison then gives the sheaf condition for the topology. -/
 theorem fullAffineEtaleInclusion_continuity_sheaf_condition (S : Scheme.{u}) :
     ∀ G : Sheaf S.smallEtaleTopology (Type (u + 1)),
       Presieve.IsSheaf
@@ -74,7 +73,7 @@ theorem fullAffineEtaleInclusion_continuity_sheaf_condition (S : Scheme.{u}) :
   simp only [Set.mem_iUnion, Set.mem_range, Set.mem_univ, iff_true]
   exact hsurj x
 
-/-- Source: Stacks 04HR (blueprint: lem-weil-pbc-affine-etale-site-topos). -/
+/-- Source: Stacks 04HR. -/
 theorem fullAffineEtaleInclusion_isContinuous (S : Scheme.{u}) :
     (fullAffineEtaleInclusion S).IsContinuous
       (fullAffineEtaleTopology S) S.smallEtaleTopology := by
@@ -225,8 +224,7 @@ the source topology with the induced topology. The dense-subsite comparison give
 cocontinuity. Cover preservation follows from joint surjectivity, and affine pullbacks
 are preserved. Faithfulness gives local equality on identity covers; fullness gives
 local lifts on identity covers. Small affine image covers, reindexed by ULift, give
-the final covering condition.
-(blueprint: lem-weil-pbc-affine-etale-special_cocontinuity) -/
+the final covering condition. -/
 theorem fullAffineEtale_special_cocontinuity (S : Scheme.{u}) :
     (fullAffineEtaleInclusion S).IsSpecialCocontinuousForCoverings
       (fullAffineEtalePrecoverage S) S.smallEtalePretopology.toPrecoverage := by
@@ -298,8 +296,7 @@ theorem fullAffineEtale_special_cocontinuity (S : Scheme.{u}) :
 /-- Source: Stacks 04HR. Proof: the full inclusion is a dense subsite for the finite
 affine topology, by finite affine refinement. Small affine image covers make it
 one-hypercover dense in universe u. Apply Mathlib
-`Functor.isEquivalence_of_isOneHypercoverDense` with coefficients Type u.
-(blueprint: lem-weil-pbc-affine-etale-sets_equivalence) -/
+`Functor.isEquivalence_of_isOneHypercoverDense` with coefficients Type u. -/
 theorem fullAffineEtale_sets_equivalence (S : Scheme.{u}) :
     ((fullAffineEtaleInclusion S).sheafPushforwardContinuous (Type u)
       (fullAffineEtaleTopology S) S.smallEtaleTopology).IsEquivalence := by
@@ -309,8 +306,7 @@ theorem fullAffineEtale_sets_equivalence (S : Scheme.{u}) :
 
 /-- Source: Stacks 04HR. Proof: use the same dense subsite and small affine hypercovers
 as for sets, and apply Mathlib `Functor.isEquivalence_of_isOneHypercoverDense`
-with coefficients AddCommGrpCat in universe u.
-(blueprint: lem-weil-pbc-affine-etale-ab_equivalence) -/
+with coefficients AddCommGrpCat in universe u. -/
 theorem fullAffineEtale_ab_equivalence (S : Scheme.{u}) :
     ((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
       (fullAffineEtaleTopology S) S.smallEtaleTopology).IsEquivalence := by
@@ -318,7 +314,7 @@ theorem fullAffineEtale_ab_equivalence (S : Scheme.{u}) :
   have := fullAffineEtale_dense_subsite S
   exact Functor.isEquivalence_of_isOneHypercoverDense _ _ _ _
 
-/-- Source: Stacks 04HR (blueprint: lem-weil-pbc-affine-etale-site-topos).
+/-- Source: Stacks 04HR.
 Proof: combine the proved special cocontinuity and the two restriction equivalences.
 Finite affine refinements identify the finite-cover topology with the induced topology;
 affine image covers and preserved affine pullbacks give one-hypercover density.
@@ -432,7 +428,6 @@ private theorem affineEtale_free_restriction (S : Scheme.{u}) (U : S.FullAffineE
 set_option linter.unusedVariables false in
 /-- Source: Stacks Project, Cohomology on Sites, Lemma 03YU, specialized to the
 restriction equivalence of Topologies Lemma 04HR.
-(blueprint: lem-weil-pbc-affine-etale-cohomology_comparison_data)
 
 Proof: restriction is the additive equivalence proved by
 `fullAffineEtale_ab_equivalence`. It preserves injective objects and exact sequences,
@@ -502,8 +497,7 @@ identifications, naturally in the sheaf. Applying the small-site sections
 identification to this composite cancels its inverse, proving the displayed formula.
 The empty object and the zero sheaf are covered by the same adjunctions.
 
-This asserts existence of a normalized degree-zero comparison.
-(blueprint: lem-weil-pbc-affine-etale-cohomology_comparison_point) -/
+This asserts existence of a normalized degree-zero comparison. -/
 theorem fullAffineEtale_cohomology_comparison_point (S : Scheme.{u})
     [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
     [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})]
@@ -556,8 +550,7 @@ theorem fullAffineEtale_cohomology_comparison_point (S : Scheme.{u})
   change b G ((b G).symm (a G x)) = a G x
   exact AddEquiv.apply_symm_apply _ _
 
-/-- Source: Stacks 03YU, applied to the equivalence of 04HR
-(blueprint: lem-weil-pbc-affine-etale-site-topos).
+/-- Source: Stacks 03YU, applied to the equivalence of 04HR.
 Proof: obtain degreewise natural comparisons from the comparison-data obligation.
 Independently identify Ext-zero with sections using sheafification, the free-abelian
 adjunction and Yoneda. Restriction evaluates identically on corresponding objects,
@@ -604,8 +597,7 @@ theorem fullAffineEtale_cohomology_comparison (S : Scheme.{u})
 sheaf on the final representable and the constant integer sheaf both represent
 sections at the terminal identity etale object. The two natural Hom equivalences
 give an isomorphism of representing objects by fully faithful coyoneda. Applying
-the Ext bifunctor gives the displayed natural isomorphism in every degree.
-(blueprint: lem-weil-pbc-affine-etale-cohomology_base_left) -/
+the Ext bifunctor gives the displayed natural isomorphism in every degree. -/
 theorem fullAffineEtale_cohomology_base_left (S : Scheme.{u}) [IsAffine S]
     [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
     [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})] (p : ℕ) :
@@ -644,8 +636,7 @@ theorem fullAffineEtale_cohomology_base_left (S : Scheme.{u}) [IsAffine S]
 
 /-- Source: Stacks 03YU and 04HR. Proof: specialize the objectwise cohomology
 comparison to the affine identity object, then compose with the proved comparison
-between cohomology at the final small-site object and global Ext cohomology.
-(blueprint: lem-weil-pbc-affine-etale-cohomology_base_right) -/
+between cohomology at the final small-site object and global Ext cohomology. -/
 theorem fullAffineEtale_cohomology_base_right (S : Scheme.{u}) [IsAffine S]
     [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
     [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})] (p : ℕ) :
@@ -659,7 +650,7 @@ theorem fullAffineEtale_cohomology_base_right (S : Scheme.{u}) [IsAffine S]
   obtain ⟨b⟩ := fullAffineEtale_cohomology_base_left S p
   exact ⟨e p ≪≫ b⟩
 
-/-- Source: Stacks 03YU and 04HR (blueprint: lem-weil-pbc-affine-etale-site-topos).
+/-- Source: Stacks 03YU and 04HR.
 Proof: cohomology over the terminal identity etale object is global Ext cohomology,
 by the representing-object isomorphism in `fullAffineEtale_cohomology_base_left`.
 For the affine identity object, compose this isomorphism with objectwise restriction

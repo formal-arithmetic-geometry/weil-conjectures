@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectionFormulaLocalityGlobalToLocal
 /-! # Locality of the projection-formula isomorphism
 
 Source: literature/stacks-project/cohomology.tex, Equation 20.54.2.1,
-and perfect.tex, Lemma 36.22.1 (Tag 08EU)
-(blueprint: lem-pc-projection-locality).
+and perfect.tex, Lemma 36.22.1 (Tag 08EU).
 
 The map `φ` below is the canonical projection-formula map for `f`, `E`, and
 `K`; the statement records that its being an isomorphism is local on an open
@@ -45,8 +44,7 @@ variable {X Y : Scheme.{u}}
 
 /-- Isomorphy of the projection-formula map can be checked on an open cover.
 Source: literature/stacks-project/cohomology.tex, Equation 20.54.2.1, and
-perfect.tex, Lemma 36.22.1 (Tag 08EU)
-(blueprint: lem-pc-projection-locality).
+perfect.tex, Lemma 36.22.1 (Tag 08EU).
 Proof: identify the restriction of the canonical map with the canonical map
 for the restricted morphism using restriction compatibility of derived pullback,
 derived tensor, and derived direct image.  A morphism in a derived category is

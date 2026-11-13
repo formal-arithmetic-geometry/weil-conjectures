@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.ProperFinitePresentationClosedLimitEnve
 
 /-! # Proper schemes as limits of proper finitely presented schemes
 
-Source: Stacks Project, Limits, Lemma 09ZR
-(blueprint: lem-weil-pbc-proper-closed-in-proper-fp).
+Source: Stacks Project, Limits, Lemma 09ZR.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ namespace AlgebraicGeometry
 presented schemes over that base, with closed immersions as transitions and projections.
 In particular it embeds as a closed subscheme of a proper finitely presented scheme.
 
-Source: Stacks Project, Limits, Lemma 09ZR
-(blueprint: lem-weil-pbc-proper-closed-in-proper-fp).
+Source: Stacks Project, Limits, Lemma 09ZR.
 
 Proof:
 1. Properness gives finite type and separatedness. By

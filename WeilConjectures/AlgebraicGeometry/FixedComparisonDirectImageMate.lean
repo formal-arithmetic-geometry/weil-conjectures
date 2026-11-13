@@ -12,9 +12,8 @@ import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonCounit
 /-!
 # Canonical direct-image mate in fixed coefficients
 
-Source: blueprint, prop-weil-pbc-comparison-direct-image, first proof paragraph;
-Stacks Project, Tags 099R and 0B65
-(auxiliary; not a blueprint node).
+Source:, first proof paragraph;
+Stacks Project, Tags 099R and 0B65.
 
 ## Main definitions and statements
 
@@ -41,8 +40,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The pullback comparison, induced termwise from the specified sheaf comparison.
 Exact pro-etale pullback is its own left derived functor.
-Source: Stacks Tags 099R and 0B65; blueprint comparison-direct-image proof
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 099R and 0B65; blueprint comparison-direct-image proof. -/
 noncomputable def fixedComparisonPullbackPlus (Λ : Type (u + 1)) [CommRing Λ]
     {U V : Scheme.{u}} (f : U ⟶ V) :
     (Etale.upperStar (ModuleCat.{u + 1} Λ) f).mapDerivedCategoryPlus ⋙
@@ -61,8 +59,7 @@ noncomputable def fixedComparisonPullbackPlus (Λ : Type (u + 1)) [CommRing Λ]
 /-- The canonical derived direct-image mate of the underived counit comparison.
 Its data is the existing right-derived base-change transformation, with its universal
 property normalization, not a chosen isomorphism between the endpoints.
-Source: Stacks Tags 099R and 0B65; blueprint comparison-direct-image proof
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 099R and 0B65; blueprint comparison-direct-image proof. -/
 noncomputable def fixedComparisonDirectImageMatePlus (Λ : Type (u + 1)) [CommRing Λ]
     {U V : Scheme.{u}} (f : U ⟶ V) :
     Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f ⋙
@@ -73,8 +70,7 @@ noncomputable def fixedComparisonDirectImageMatePlus (Λ : Type (u + 1)) [CommRi
     (lowerStarComparisonUpperStarBaseChange f (ModuleCat.{u + 1} Λ))
 
 /-- Invertibility of the specified mate for a qcqs morphism.
-Source: Stacks Tag 099R; blueprint comparison-direct-image proof
-(auxiliary; not a blueprint node).
+Source: Stacks Tag 099R; blueprint comparison-direct-image proof.
 
 Proof: the canonical underived comparison is invertible for qcqs f by
 `isIso_lowerStarComparisonUpperStarBaseChange`. The comparison pullback of every
@@ -95,8 +91,7 @@ theorem isIso_fixedComparisonDirectImageMatePlus (Λ : Type (u + 1)) [CommRing �
 
 /-- The specified counit-mate normalization. It also characterizes the named component
 as the adjoint transpose of the pulled-back etale counit after inverse pullback comparison.
-Source: Stacks Tag 0B65; blueprint comparison-direct-image proof, first paragraph
-(auxiliary; not a blueprint node).
+Source: Stacks Tag 0B65; blueprint comparison-direct-image proof, first paragraph.
 
 Proof: the iterated-mate identity identifies the underived direct-image comparison
 as the mate of the specified pullback comparison. On bounded-below homotopy categories,

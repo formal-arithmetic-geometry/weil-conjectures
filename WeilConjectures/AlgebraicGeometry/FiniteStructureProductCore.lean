@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteStructureTensorComparisonComposit
 
 /-! # Core existence statement for a lifted finite-structure product
 
-Source: Stacks Project, Tag 09ZT
-(blueprint: lem-weil-pbc-finite-structure-product-exists).
+Source: Stacks Project, Tag 09ZT.
 -/
 
 @[expose] public section
@@ -297,8 +296,7 @@ reduction equation after the tensor-adjunction unit: the tensor comparison takes
 x tensor y to the tensor of the unit images. Applying psi and pushforward
 composition gives precisely the adjoint multiplicativity formula below. This
 construction imposes no unit, associativity or symmetry. The argument also applies
-to zero modules, empty schemes, and I equal to the zero or unit ideal.
-(blueprint: lem-weil-pbc-finite-structure-product-core). -/
+to zero modules, empty schemes, and I equal to the zero or unit ideal. -/
 theorem finite_structure_product_exists_core
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]
@@ -387,8 +385,7 @@ theorem finite_structure_product_exists_core
 -- The preserved legacy endomorphism family is irrelevant to multiplication existence.
 set_option linter.unusedVariables false in
 /- A compatible finite-level family algebraizes to a product map whose sections multiply.
-This is the algebraization and evaluation part of Tags 09ZT and 088F.
-(blueprint: lem-weil-pbc-finite-structure-section-identity). -/
+This is the algebraization and evaluation part of Tags 09ZT and 088F. -/
 theorem finite_structure_product_section_identity
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]

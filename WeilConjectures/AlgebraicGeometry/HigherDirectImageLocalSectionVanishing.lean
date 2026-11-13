@@ -14,7 +14,7 @@ import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 /-! # Local eventual vanishing for higher direct image sections
 
 Source: Stacks Project, Tag 09Z1, proof of lemma-relative-colimit,
-and Tag 03Q8 (blueprint: lem-sbc-higher-direct-image-local-section-vanishing).
+and Tag 03Q8.
 -/
 
 @[expose] public section
@@ -28,7 +28,6 @@ namespace AlgebraicGeometry.Etale
 /-- A higher direct image section killed at the limit is locally killed at later stages.
 Source: Stacks Project, Tag 09Z1, proof of lemma-relative-colimit;
 Tag 03Q8, lemma-higher-direct-images; Tag 0EZM, lemma-colimit-variant-complexes.
-(blueprint: lem-sbc-higher-direct-image-local-section-vanishing).
 
 Proof:
 1. Use the natural higher direct image cohomology-presheaf comparison of Tag 03Q8

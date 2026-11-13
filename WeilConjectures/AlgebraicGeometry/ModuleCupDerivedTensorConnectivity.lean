@@ -29,7 +29,6 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]
 
 /-- The tensor of degree-zero objects has no positive cohomology.
 Source: Stacks Project, Tag 06YH, derived tensor using flat resolutions.
-(blueprint: lem-sc-module-cup-derived-tensor-connectivity)
 Proof: degree-zero objects are in D≤0. The upstream flat-resolution tensor
 connectivity theorem gives D≤(0+0), which is D≤0. The result applies to module
 sheaves by their recorded closed monoidal Grothendieck structure and functorial

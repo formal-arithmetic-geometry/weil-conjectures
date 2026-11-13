@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.PinnedBaseChangeMateShifts
 import WeilConjectures.AlgebraicGeometry.PinnedSingleTensorShifts
 
 /-! # Shift covariance of the pinned single-complex base-change composite
-Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.
-(blueprint: lem-pc-pinned-single-base-change-shift). -/
+Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -27,7 +26,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The source functor of the base-change comparison on single complexes.
-Source: Stacks Project, Tag 08HY (blueprint: lem-pc-pinned-single-base-change-shift). -/
+Source: Stacks Project, Tag 08HY. -/
 def singleDegreeBaseChangeSource
     {X S S' : Scheme.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -40,7 +39,7 @@ def singleDegreeBaseChangeSource
     schemeDerivedDirectImage.{u, w, w} f) ⋙ derivedPullback.{u, w} g)
 
 /-- The target functor after applying the single-complex tensor counit.
-Source: Stacks Project, Tag 08HY (blueprint: lem-pc-pinned-single-base-change-shift). -/
+Source: Stacks Project, Tag 08HY. -/
 def singleDegreeBaseChangeTarget
     {X X' S' : Scheme.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X'.toRingedSpace))]
@@ -52,7 +51,7 @@ def singleDegreeBaseChangeTarget
 
 /-- The base-change comparison followed by the composition-pinned tensor counit.
 This uses the same composition-pinned left-derived counit as the original comparison.
-Source: Stacks Project, Tag 08HY (blueprint: lem-pc-pinned-single-base-change-shift). -/
+Source: Stacks Project, Tag 08HY. -/
 def singleDegreeBaseChangeComposite
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

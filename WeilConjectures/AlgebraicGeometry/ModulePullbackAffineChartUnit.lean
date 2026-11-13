@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 # Compatibility of affine-chart pullback comparisons with units
 
 Source: Stacks Project, Sheaves, Tags 00A0 and 0097.
-(blueprint: lem-weil-pbc-module-pullback-affine-chart-unit).
 -/
 
 @[expose] public section
@@ -31,10 +30,9 @@ set_option backward.isDefEq.respectTransparency.types false
 /-- The comparison between the two pullback routes through the affine-chart square
 carries the unit on the source chart to the restriction of the unit of `f`.
 Source: Stacks Project, Sheaves, Tags 00A0 and 0097.
-(blueprint: lem-weil-pbc-module-pullback-affine-chart-unit).
 
 Proof: compose the restriction adjunction for the source chart with the pullback
-adjunction for `Spec.map (f.appLE ...)`. Compose the pullback adjunction for `f` with
+adjunction for `Spec.map (f.appLE ..)`. Compose the pullback adjunction for `f` with
 restriction along the target chart. The chart square identifies their right adjoints.
 The unit equation for uniqueness of left adjoints says that the comparison takes the
 first composite unit to the second composite unit. The restriction-adjunction units

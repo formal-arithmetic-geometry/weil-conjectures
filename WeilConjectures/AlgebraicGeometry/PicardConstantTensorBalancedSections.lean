@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.PicardConstantScalarExtensionSections
 /-! # Balanced sections of scalar-extended constant tensor coefficients
 
 Source: Stacks Project, Varieties, Tag 0BED, degree-zero tensor calculation.
-(blueprint: lem-sc-picard-constant-tensor-balanced-sections).
 -/
 
 public section
@@ -26,7 +25,6 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Scalar extension followed by tensoring with `G` has the usual balanced sections.
 Source: Stacks Project, Varieties, Tag 0BED, degree-zero tensor calculation.
-(blueprint: lem-sc-picard-constant-tensor-balanced-sections).
 
 Proof: First construct the presheaf E with E(V) = O_Y(V) tensor_k M and
 restriction a tensor s mapping to res(a) tensor s. For every O_Y-module
@@ -83,8 +81,7 @@ private theorem picardConstantTensorBalancedSections_tmul
   simp [picardConstantTensorBalancedSections]
   rfl
 
-/-- The balanced identification is linear for the action of `O_Y(V)` on the second factor.
-(blueprint: lem-sc-picard-constant-tensor-balanced-sections). -/
+/-- The balanced identification is linear for the action of `O_Y(V)` on the second factor. -/
 theorem picardConstantTensorBalancedSections_smul
     (k : Type w) [Field k] (Y : Scheme.{w})
     (g : Y ⟶ Spec (CommRingCat.of k)) (M : ModuleCat.{w} k) (G : Y.Modules)
@@ -112,8 +109,7 @@ theorem picardConstantTensorBalancedSections_smul
   rw [← TensorProduct.tmul_smul]
   simpa only [one_smul] using he V 1 s (a • (show G.val.obj (op V) from t))
 
-/-- The balanced identification commutes with restriction.
-(blueprint: lem-sc-picard-constant-tensor-balanced-sections). -/
+/-- The balanced identification commutes with restriction. -/
 theorem picardConstantTensorBalancedSections_map
     (k : Type w) [Field k] (Y : Scheme.{w})
     (g : Y ⟶ Spec (CommRingCat.of k)) (M : ModuleCat.{w} k) (G : Y.Modules)

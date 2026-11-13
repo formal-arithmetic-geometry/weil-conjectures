@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 /-!
 # Finite flat pushforwards are locally free of locally constant rank
 
-Source: Stacks Project, Morphisms of Schemes, Tags 02KB and 04MH
-(blueprint: lem-sc-finite-pushforward-locally-free).
+Source: Stacks Project, Morphisms of Schemes, Tags 02KB and 04MH.
 -/
 
 @[expose] public section
@@ -30,15 +29,14 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- A finite, flat, locally finitely presented morphism `f : X ⟶ Y` has a structure-sheaf
+/-- A finite, flat, locally finitely presented morphism `f: X ⟶ Y` has a structure-sheaf
 pushforward `f_* 𝒪_X` which is a finite locally free `𝒪_Y`-module
 (`SheafOfModules.IsFiniteLocallyFree`, Stacks 01C6), with locally constant rank: there is a
-locally constant `d : Y → ℕ` such that on every open `U` on which `d` is constant equal to `n`
+locally constant `d: Y → ℕ` such that on every open `U` on which `d` is constant equal to `n`
 the restriction `(f_* 𝒪_X)|_U` is finite locally free of rank `n`. The fibres of `d` are the
 disjoint open and closed pieces of constant rank.
 
 Source: Stacks Project, Morphisms of Schemes, Tags 02KB and 04MH.
-(blueprint: lem-sc-finite-pushforward-locally-free)
 
 Proof: First, `def-pc-finite-locally-free` identifies the three hypotheses with finite local
 freeness of the morphism. Apply `lem-weil-pbc-finite-locally-free-degree-locally-constant` to

@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Localization.Monoidal.Functor
 /-! # Tensor comparison for the localized open-site equivalence
 
 Source: Stacks Project, Modules, Tag 01CD.
-(blueprint: lem-sc-localized-open-tensor-equivalence).
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ set_option backward.isDefEq.respectTransparency.types false
 /-- The equivalence from the localized open site to the open subscheme preserves
 sheaf tensor products, naturally in both factors.
 Source: Stacks Project, Modules, Tag 01CD, applied to the equivalence of open sites.
-(blueprint: lem-sc-localized-open-tensor-equivalence).
 
 Proof: an object of the localized site is an open V contained in U, and corresponds
 under the open-site equivalence to the same open V of U.toScheme. The coefficient

@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # Mayer--Vietoris gluing for continuity of perfect Hom
 Source: Stacks Project, perfect.tex, Tag 09RE, quasi-compact-open induction step.
-(blueprint: lem-pc-perfect-hom-continuity-union).
 -/
 
 @[expose] public section
@@ -26,9 +25,8 @@ namespace AlgebraicGeometry
 on the intersection. The hypotheses are continuity for all perfect pairs, hence
 supply the adjacent shifts in the long exact Hom sequence.
 Source: Stacks Project, perfect.tex, Tag 09RE, Mayer--Vietoris step.
-(blueprint: lem-pc-perfect-hom-continuity-union).
 
-Proof: Let t : Y → X present U ∪ V. The preimages of U and V cover Y and their
+Proof: Let t: Y → X present U ∪ V. The preimages of U and V cover Y and their
 intersection presents U ∩ V. Quasi-compactness of U and affineness of V make
 both preimages quasi-compact; quasi-separatedness makes their intersection
 quasi-compact. At every ring stage and at the colimit apply the derived

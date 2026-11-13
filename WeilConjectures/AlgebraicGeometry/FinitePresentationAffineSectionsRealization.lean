@@ -28,7 +28,6 @@ open Scheme.Modules
 
 /-- Realize an algebraic finite-presentation model of sections as an affine sheaf.
 Source: Stacks Project, Modules on Schemes Tag 01I6; Limits Tag 01ZR, affine proof.
-(blueprint: lem-pc-fp-affine-sections-realization).
 
 Proof: Transport Q to Spec of the global-section ring of X and take its associated
 quasi-coherent sheaf; pull it back along the canonical isomorphism X to that

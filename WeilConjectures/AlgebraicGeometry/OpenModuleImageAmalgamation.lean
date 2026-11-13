@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.OpenModuleImageSectionRestriction
 /-! # OpenModuleImageAmalgamation
 
 Source: Stacks Project, Cohomology, Tags 08BV and 01EB.
-(blueprint: lem-pc-open-module-image-gluing-existence).
 -/
 
 @[expose] public section
@@ -58,8 +57,8 @@ private theorem unit_sections_injective
   · exact unit_eq V hv
 
 /-- Compatible sections of the two direct images have an amalgamation.
-Source: Stacks Project, Cohomology, Tag 01EB (lemma-mayer-vietoris), first
-sentence of proof, and Tag 08BV (lemma-exact-sequence-j-star).
+Source: Stacks Project, Cohomology, Tag 01EB, first
+sentence of proof, and Tag 08BV.
 Proof: Use overFunctorEquiv to identify the sections of the image at T with
 M(T ∩ U) and M(T ∩ V). Under this comparison the transported unit is ordinary
 restriction, by restrictAdjunction_unit_app_app. Expanding the overlap mate,
@@ -166,7 +165,6 @@ private theorem section_amalgamation
 
 /-- Existence half of the sheaf gluing universal property.
 Source: Stacks Project, Cohomology, Tags 08BV and 01EB.
-(blueprint: lem-pc-open-module-image-gluing-existence)
 Proof: At each test open T and each section z of Z(T), identify the two image
 objects' sections with M(T ∩ U) and M(T ∩ V) via overFunctorEquiv. The ordinary
 restriction unit is the restriction map by restrictAdjunction_unit_app_app.

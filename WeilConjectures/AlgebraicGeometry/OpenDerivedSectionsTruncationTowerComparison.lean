@@ -17,8 +17,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Comparison of open derived sections and the canonical truncation tower
-Source: Stacks Project, Tags 08BS and 08U1.
-(blueprint: lem-sc-open-derived-sections-truncation-tower-comparison). -/
+Source: Stacks Project, Tags 08BS and 08U1. -/
 
 @[expose] public section
 universe u wC wV wA
@@ -43,7 +42,6 @@ set_option maxHeartbeats 400000 in
 /-- Derived evaluation on an open agrees with sections after exact restriction,
 including the canonical lower-truncation projection and transition maps.
 Source: Stacks Project, Tag 08BS, and the uniqueness of standard truncations.
-(blueprint: lem-sc-open-derived-sections-truncation-tower-comparison).
 
 Proof: Restriction to V is exact and preserves K-injective complexes by its exact
 extension-by-zero left adjoint; transport this through Modules.overEquiv V. On a

@@ -10,9 +10,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
 import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
 
 /-! # Homology of a direct image to a geometric point
-
-Source: blueprint thm-amb-p1-decomposition, geometric-fibre calculation.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -38,8 +35,6 @@ private def kummer_homology_shift_iso
 
 /-- The canonical comparison between sections of a homology sheaf over a
 separably closed point and shifted cohomology on the source.
-Source: blueprint thm-amb-p1-decomposition, the geometric-fibre calculation.
-(auxiliary; not a blueprint node).
 
 Construction: commute derived direct image with the shift, apply the homology
 shift comparison, commute exact sections over the separably closed point with

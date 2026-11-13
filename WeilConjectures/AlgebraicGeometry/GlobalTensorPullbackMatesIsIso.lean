@@ -102,7 +102,6 @@ private theorem unitMate_isIso
 
 /-- The unit and tensor mates for global sections are isomorphisms.
 Source: Stacks, Modules Lemma 17.16.4 (Tag 01CA), and Sheaves Tags 008A and 008Y.
-(blueprint: lem-sc-global-tensor-pullback-mates-isiso)
 Proof: let A be the global section ring and p the ringed-space map from X to the
 one-point ringed space with ring A. Point evaluation identifies its module category
 with A-modules, and the inverse-image/change-of-rings adjunction identifies the left

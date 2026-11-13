@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleDescentEssentiallySurjective
 # Effective etale descent for finite etale schemes
 
 Source: Stacks Project, Descent, Tags 023V, 0245, 02LA, 02VN, and the
-blueprint's `lem-galois-descent` (blueprint: lem-galois-descent).
+blueprint's `lem-galois-descent`.
 -/
 
 @[expose] public section
@@ -26,9 +26,9 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 set_option linter.unusedVariables false in
-/-- For a surjective etale map `g : Y' ⟶ Y`, the base-change functor from
+/-- For a surjective etale map `g: Y' ⟶ Y`, the base-change functor from
 finite etale schemes over `Y` to finite etale schemes over `Y'` with descent
-data is an equivalence (blueprint: lem-galois-descent).
+data is an equivalence.
 
 The pullback square identifies each image with `P ×_Y Y'`; the transport
 equation says its datum is the canonical comparison of the two pullbacks,
@@ -39,16 +39,14 @@ Proof plan from the node, following Stacks:
 1. The singleton etale surjection is an etale covering and hence an fpqc
    covering by `lem-weil-pbc-fpqc-finer-than-etale` (Topologies, Tag 022C).
    This requires a quasi-compact covering family, not a quasi-compact `g`.
-2. Base change preserves finite etale morphisms
-   (`def-weil-pbc-finite-etale-category`). Identify both iterated pullbacks
+2. Base change preserves finite etale morphisms. Identify both iterated pullbacks
    with `P ×_Y Y''` by `def-pc-fibre-product`. Over the triple product the
    comparisons satisfy the cocycle; the same identifications show every
-   base-changed morphism is compatible (`def-pd-descent-datum`).
+   base-changed morphism is compatible.
 3. Apply `lem-galois-fpqc-morphisms-descend` (Descent, Tag 02W0) to the
    covering in Step 1. Compatible maps between the canonical objects
    descend uniquely, giving full faithfulness.
-4. A finite morphism is affine (`def-weil-finite-integral-morphism` and
-   `pqf-def-affine-morphism`). Apply
+4. A finite morphism is affine. Apply
    `lem-galois-fpqc-affine-descent-effective` (Descent, Tag 0245) to obtain
    `P` over `Y` and an isomorphism of its canonical datum with the given one.
 5. Its base change is finite etale since it is isomorphic to the given

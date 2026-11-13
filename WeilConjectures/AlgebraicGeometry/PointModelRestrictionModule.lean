@@ -19,8 +19,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
 /-- Restriction of the given internal module along a composite scheme morphism.
-Source: Stacks Tag 00YV and the integral-models local-model step
-(auxiliary; not a blueprint node).
+Source: Stacks Tag 00YV and the integral-models local-model step.
 This is the existing inverse image evaluated on N. Its codomain is recorded explicitly,
 so its consumers need not unfold the inverse-image construction to recover that category. -/
 def pointModelRestriction

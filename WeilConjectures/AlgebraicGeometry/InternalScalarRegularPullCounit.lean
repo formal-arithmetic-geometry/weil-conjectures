@@ -188,7 +188,6 @@ end NativeUnit
 
 Source: Stacks 07A6, 06YY; integral proper-base-change proof (1), (3),
 the restricted regular coefficient in the scalar tensor-model normalization.
-(auxiliary; not a blueprint node).
 
 Proof. Express scalarTensorRegularRestriction as the exact restriction functor's
 singleFunctor comparison. Expand scalarTensorRegularPullIso, replacing each exact

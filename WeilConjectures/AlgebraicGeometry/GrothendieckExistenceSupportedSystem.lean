@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
 
 /-! # Algebraization of a system on a fixed proper closed subscheme
 
-Source: Stacks Project, Tags 088E and 088F
-(blueprint: lem-weil-pbc-grothendieck-existence-supported-system).
+Source: Stacks Project, Tags 088E and 088F.
 -/
 
 @[expose] public section
@@ -39,7 +38,6 @@ namespace AlgebraicGeometry
 No properness assumption on the first term is needed separately.
 Source: Stacks, Theorem 088E, first paragraph, using Proposition 088C and Lemma 087T;
 Remark 088F gives the displayed thickening form.
-(blueprint: lem-weil-pbc-grothendieck-existence-supported-system).
 
 Proof:
 1. Use the thickening-systems dictionary to push the coherent terms to a coherent formal

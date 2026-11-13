@@ -36,7 +36,6 @@ with `R_P / I R_P`. Since `I` is contained in `P`, its extension lies in the max
 ideal of `R_P`. Apply the strictly henselian quotient theorem (05WS) and transfer
 strict henselianity along the displayed ring isomorphism. If `I` is the unit ideal,
 there are no primes of `R/I`, so the assertion is vacuous.
-(blueprint: lem-weil-pbc-gabber-quotient-localizations)
 -/
 theorem gabber_quotient_localizations
     (R : Type u) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]

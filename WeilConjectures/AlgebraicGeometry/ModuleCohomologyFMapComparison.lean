@@ -14,8 +14,7 @@ public import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
 /-! # Homotopy comparison of the auxiliary injective complexes
 
 Source: Stacks Project, Derived Categories, Tags 013P and 013S, and Cohomology
-of Sheaves, Remark 01FB
-(blueprint: lem-weil-pbc-module-cohomology-fmap-comparison).
+of Sheaves, Remark 01FB.
 -/
 
 @[expose] public section
@@ -83,7 +82,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The two auxiliary injective complexes admit a comparison morphism intertwining
 both the pushforward comparison and the lifted module map, up to homotopy.
 Source: Stacks Project, Derived Categories, Tags 013P and 013S; Cohomology of Sheaves,
-Remark 01FB (blueprint: lem-weil-pbc-module-cohomology-fmap-comparison).
+Remark 01FB.
 
 Proof: take the identity descents between the two resolutions of F and of G.
 Extend all complexes by zero to integer indices. The auxiliary target K' is bounded

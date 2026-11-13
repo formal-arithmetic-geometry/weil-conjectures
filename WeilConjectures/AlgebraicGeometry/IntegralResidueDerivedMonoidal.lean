@@ -15,7 +15,6 @@ public import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 
 Source: derivation of the tensor comparison on flat resolutions; compare the proved
 Etale.Derived.UpperStarMonoidal construction in the source library.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -75,8 +74,7 @@ strong monoidal comparison. All coherence laws are descended on flat resolutions
     toOplaxMonoidal := residueDerivedOplax F }
 
 /-- The derived tensorator satisfies the defining tensor/counit square.
-Source: the defining comparison equation of the exact left derived tensor functor.
-(auxiliary; not a blueprint node) -/
+Source: the defining comparison equation of the exact left derived tensor functor. -/
 theorem residueDerivedMonoidal_counit (P Q : HomotopyCategory C (.up ℤ)) :
     letI := residueDerivedMonoidal F
     OplaxMonoidal.δ F.leftDerivedFunctor (DerivedCategory.Qh.obj P)

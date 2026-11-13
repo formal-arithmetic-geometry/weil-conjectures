@@ -86,12 +86,10 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-!
 # Completed integral constant models
-
-(auxiliary; not a blueprint node).
+.
 
 Definitions and exact realization for the integral stratified-perfect characterization.
-Source: Bhatt--Scholze, Propositions 6.6.11 and 6.8.11(3)
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Propositions 6.6.11 and 6.8.11(3).
 -/
 
 @[expose] public noncomputable section
@@ -111,8 +109,7 @@ attribute [-instance] WeilConjectures.integralCoefficientAbSheafify
 namespace AlgebraicGeometry.Scheme
 
 /-- The ordinary realization N ↦ A_T ⊗_A N, using the normalized coefficient comparison.
-Source: Bhatt--Scholze, Proposition 6.6.11
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.6.11. -/
 def integralConstantModule (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) : ModuleCat.{u + 1} A ⥤
       pbcModules T (pbcAdicCompletion T d) :=
@@ -122,8 +119,7 @@ def integralConstantModule (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     pbcRestrict (pbcCompletedComparison T d).inv
 
 /-- Exactness of the ordinary completed-constant realization.
-Source: Bhatt--Scholze, Lemma 6.5.8 and Proposition 6.6.11
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Lemma 6.5.8 and Proposition 6.6.11.
 Proof: constant module sheafification is exact. The completed ring is flat over
 constant A by lem-weil-pbc-completed-constant-sheaf-reduction, since d is Noetherian.
 Thus tensoring with it preserves finite limits and colimits. Restriction along the
@@ -183,8 +179,7 @@ theorem integralConstantModule_exact (T : Scheme.{u}) {A : Type (u + 1)} [CommRi
     comp_preservesFiniteColimits (K ⋙ E) R⟩
 
 /-- Additivity of completed-constant realization, inherited from its two factors.
-Source: Bhatt--Scholze, Proposition 6.6.11
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.6.11. -/
 instance integralConstantModule_additive (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) : (integralConstantModule T d).Additive :=
   letI := (integralConstantModule_exact T d).1
@@ -193,8 +188,7 @@ instance integralConstantModule_additive (T : Scheme.{u}) {A : Type (u + 1)} [Co
 /-- The derived realization P ↦ A_T ⊗^L_A P, obtained by localizing the exact
 ordinary constant-module realization. On bounded finite projective complexes this
 is its termwise tensor realization.
-Source: Bhatt--Scholze, Proposition 6.6.11
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.6.11. -/
 def integralConstantDerived (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) : completedConstantDerived (ModuleCat.{u + 1} A) ⥤
       DerivedCategory (pbcModules T (pbcAdicCompletion T d)) :=
@@ -205,8 +199,7 @@ def integralConstantDerived (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
 
 /-- Restrict a derived object first to a stratum and then to a covering site object.
 The slice coefficient sheaf is the restriction of the actual inverse-image ring.
-Source: Bhatt--Scholze, Proposition 6.6.11; Stacks Tags 0997 and 0998
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.6.11; Stacks Tags 0997 and 0998. -/
 def integralLocalDerived {T S : Scheme.{u}} (g : S ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (U : S.ProEt)
     (K : DerivedCategory (pbcModules T R)) :
@@ -219,8 +212,7 @@ def integralLocalDerived {T S : Scheme.{u}} (g : S ⟶ T)
 /-- Condition (ii): finite strata, on each a pro-etale covering sieve, and on each
 cover member an actual perfect A-complex whose completed realization is K there.
 IsPerfectRingComplex is the recorded bounded finite-projective notion.
-Source: Bhatt--Scholze, Proposition 6.6.11
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.6.11. -/
 def IsIntegralStratifiedPerfect (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A)
     (K : DerivedCategory (pbcModules T (pbcAdicCompletion T d))) : Prop :=
@@ -237,8 +229,7 @@ def IsIntegralStratifiedPerfect (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
 
 /-- The constructible integral sheaf condition: finite strata and locally the ordinary
 completed realization of a finitely presented A-module, including the zero module.
-Source: Bhatt--Scholze, Definition 6.8.10
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Definition 6.8.10. -/
 def IsIntegralStratifiedFinitelyPresented (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (F : pbcModules T (pbcAdicCompletion T d)) : Prop :=
   ∃ s : Stratification T, ∀ i : Fin s.n,

@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.MayerVietorisOpenCompositionComplexLoca
 /-! # Open composition units on a restricted source complex
 
 Source: Stacks Project, Tags 08FE and 0D5T.
-(blueprint: lem-pc-mayer-vietoris-open-composition-restricted-source-unit).
 -/
 
 @[expose] public section
@@ -37,8 +36,7 @@ schemeMVOpenComposition_complex_localization to beta, its canonicality equation 
 All three maps on each side are exactly the maps in that theorem.
 No inverse exact restriction factor or derived restriction comparison enters this
 argument. Empty opens, full opens, identity morphisms and arbitrary complexes satisfy
-the same termwise identities; no injectivity or cover hypothesis is needed.
-(blueprint: lem-pc-mayer-vietoris-open-composition-restricted-source-unit). -/
+the same termwise identities; no injectivity or cover hypothesis is needed. -/
 theorem schemeMVOpenComposition_restricted_source_unit
     (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

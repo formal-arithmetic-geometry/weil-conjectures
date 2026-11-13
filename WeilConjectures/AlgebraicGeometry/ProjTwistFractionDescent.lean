@@ -26,7 +26,6 @@ namespace AlgebraicGeometry.Proj
 
 /-- A twist section on a positive-degree basic open descends to a homogeneous fraction.
 Source: Stacks Project, Definition 27.10.1, Tag 01MN, and Lemma 27.8.4, Tag 01M7.
-(blueprint: lem-sc-proj-twist-fraction-descent)
 
 Proof: express the section locally as a fraction of homogeneous elements with degree
  difference k. Refine its neighborhoods to homogeneous basic opens inside D₊(f).

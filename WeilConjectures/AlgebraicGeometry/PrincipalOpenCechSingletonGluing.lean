@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 /-! # Sheaf gluing for singleton-supported subset Čech cochains
 
 Source: Stacks Project, Cohomology, Tag 08C1.
-(blueprint: lem-sc-principal-open-cech-singleton-gluing).
 -/
 
 @[expose] public section
@@ -47,7 +46,6 @@ set_option maxHeartbeats 500000 in
 
 Source: Stacks Project, Cohomology, Tag 08C1, initial exactness of the
 augmented Čech row, and the sheaf gluing axiom.
-(blueprint: lem-sc-principal-open-cech-singleton-gluing).
 
 Proof: Transport each singleton coordinate of t to J.X n using hes, and
 identify D({i}) with D(f i). On a two-element subset, the vertical term

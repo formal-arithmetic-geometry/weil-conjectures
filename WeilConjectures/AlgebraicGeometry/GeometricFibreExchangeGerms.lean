@@ -151,7 +151,6 @@ of exchange, and has no integral or proper hypothesis.
 
 Source: Stacks Project, Tag 0EYP, definition of the base change map, and Tags 03Q1
 and 03QO for inverse-image stalks and sections on the spectrum of a closed field.
-(blueprint: lem-sbc-geometric-fibre-exchange-germs).
 
 Proof: identify the source by the inverse-image stalk isomorphism. On Spec Omega,
 every pointed etale neighbourhood of the identity has a section through its marked

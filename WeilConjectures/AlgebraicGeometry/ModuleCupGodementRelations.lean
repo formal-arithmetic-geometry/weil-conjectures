@@ -356,8 +356,7 @@ private theorem insert_collapse_gt (X : Scheme.{u}) (F : X.Modules) (n : ℕ)
           congrArg (moduleCup_godementMap X) (ih i j hij)
 
 /-- The concrete Godement operators define a prefunctor from the simplex quiver.
-Source: Stacks Project, Tags 0FKR and 08N8.
-(blueprint: lem-sc-module-cup-godement-relations) -/
+Source: Stacks Project, Tags 0FKR and 08N8. -/
 def moduleCup_godementQuiver (X : Scheme.{u}) (F : X.Modules) :
     FreeSimplexQuiver ⥤q X.Modules where
   obj n := moduleCup_godementIterate X F (n.len + 1)
@@ -367,7 +366,6 @@ def moduleCup_godementQuiver (X : Scheme.{u}) (F : X.Modules) :
 
 /-- The Godement operators respect the relations in the simplex presentation.
 Source: Stacks Project, Tags 0FKR and 08N8, Lemma 14.34.2 (dual).
-(blueprint: lem-sc-module-cup-godement-relations)
 Proof: project each equation to every skyscraper factor. The stalk-skyscraper
 adjunction identifies the projection with its linear stalk map followed by
 stalk evaluation. Evaluation after the unit is the identity; evaluation after

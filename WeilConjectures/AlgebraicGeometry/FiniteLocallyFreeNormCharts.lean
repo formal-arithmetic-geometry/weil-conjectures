@@ -185,8 +185,7 @@ chart is the prescribed norm. The chart algebra is finite because s is finite.
 There is no fixed rank assumption: the construction is local and determinants agree
 on overlaps of every rank. If W is empty its section ring has a unique element and the
 chart condition is vacuous. A chart with empty inverse image has the rank-zero algebra
-and determinant 1, so it satisfies the same gluing condition.
-(blueprint: lem-pd-finite-locally-free-norm-charts). -/
+and determinant 1, so it satisfies the same gluing condition. -/
 theorem exists_finiteLocallyFree_norm_charts
     {X Y : Scheme.{u}} (s : Y ⟶ X)
     [IsFinite s] [Flat s] [LocallyOfFinitePresentation s]

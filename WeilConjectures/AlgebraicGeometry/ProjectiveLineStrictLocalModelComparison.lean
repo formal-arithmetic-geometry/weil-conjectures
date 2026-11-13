@@ -43,7 +43,6 @@ no strict-local exchange hypothesis is assumed.
 
 Source: Stacks Project, proof of Theorem Tag 095T, paragraphs 3--4, together with
 Tag 03Q9 (strict-henselization stalk formula) and topological invariance Tag 04DY.
-(blueprint: lem-weil-pbc-p1-strict-local-model-comparison).
 
 Proof: choose compatible algebraic closures for the two geometric points. Take A
 and B to be their strict henselization rings. Functoriality supplies the local map

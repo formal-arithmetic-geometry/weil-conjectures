@@ -28,7 +28,6 @@ attribute [local instance] Scheme.Modules.enoughInjectives
 
 /-- The canonical cohomology-to-stalk class map, before proving it invertible.
 Source: Stacks Project, Tags 01E4 and 02OD.
-(blueprint: def-weil-pbc-local-direct-image-stalk-class-map)
 
 Use Mathlib's injective resolution of F', identify its global section complex with
 the top sections of its direct-image complex, apply the canonical section class

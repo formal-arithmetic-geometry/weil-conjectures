@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 Source: Stacks Project, Tags 0BDL and 0EWY, the local matrix argument and the rank
 inequality for an injective free map.
-(blueprint: lem-sc-free-kernel-maximal-rank-criterion).
 -/
 
 @[expose] public section
@@ -125,7 +124,6 @@ or finite-presentation assertion.
 
 Source: Stacks Project, Tag 0BDL, local matrix calculation using Tag 0EWY;
 the strict-rank case uses the rank inequality for an injective free-module map.
-(blueprint: lem-sc-free-kernel-maximal-rank-criterion).
 
 Proof: Trivialize the rank-r kernel on an open cover, restrict the supplied
 domain and target frames there, and take sections of its monomorphic inclusion.

@@ -18,7 +18,6 @@ import all WeilConjectures.AlgebraicGeometry.NormalizedGenericDataCore
 # Normalized generic data retaining the residue-field square
 
 Source: Stacks Project, Tag 09Z6, generic trivialization and normalization.
-(blueprint: new-normalized-generic-data-with-factorization).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- Normalized generic data with its finite residue-field factorization.
 Source: Stacks Project, Tag 09Z6, normalization and generic trivialization.
-(blueprint: new-normalized-generic-data-with-factorization).
 The construction pulls back to the residue field, trivializes after a finite
 separable extension, and normalizes that extension over the reduced closure. -/
 theorem exists_constructible_module_normalized_generic_data_with_factorization

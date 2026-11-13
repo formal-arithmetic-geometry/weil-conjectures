@@ -51,7 +51,6 @@ set_option maxHeartbeats 500000 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Every derived section on the principal-open union comes from a finite Koszul stage.
 Source: Stacks Project, Tag 08DD, proof of Proposition 36.9.5.
-(blueprint: lem-sc-koszul-open-hom-restriction-surjective)
 
 Proof: By the affine derived equivalence (Tag 06Z0), represent E by a complex F of
 quasi-coherent sheaves, with corresponding A-module complex M. The tails I_e are

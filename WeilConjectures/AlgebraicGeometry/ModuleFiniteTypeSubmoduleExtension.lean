@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleFiniteTypeApproximation
 # Extension of finite-type quasi-coherent submodules
 
 Source: Stacks Project, Properties, Lemma 01PF.
-(blueprint: lem-weil-pbc-module-finite-type-submodule-extension).
 -/
 
 @[expose] public section
@@ -40,7 +39,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A finite-type quasi-coherent submodule on a quasi-compact open extends to the scheme.
 
 Source: Stacks Project, Properties, Lemma 01PF.
-(blueprint: lem-weil-pbc-module-finite-type-submodule-extension).
 
 Proof:
 1. Extend the prescribed inclusion using the quasi-coherent extension theorem 01PE(3),

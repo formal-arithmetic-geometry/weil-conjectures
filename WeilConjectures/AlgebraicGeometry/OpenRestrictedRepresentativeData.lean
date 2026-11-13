@@ -18,7 +18,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.SingleComplexBaseChange
 /-- Literal open restriction represents derived open pullback and has invertible
 pullback counit along any morphism. Source: Stacks Project, Tags 06YB and 0D5U.
-(blueprint: lem-pc-open-restricted-representative-data).
 
 Proof: open restriction preserves K-flatness by the stalk criterion. Transport
 the K-flat counit isomorphism from derivedPullback_spec to the specified counit

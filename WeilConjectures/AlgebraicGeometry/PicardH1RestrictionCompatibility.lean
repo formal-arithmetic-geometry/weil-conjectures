@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.UnitsTorsorClosedRestriction
 /-!
 # Picard restriction and first cohomology of units
 
-Source: Stacks Project, Tag 09NY, final sentence of the proof, with Tags 02UV and 09NU
-(blueprint: lem-sc-picard-h1-restriction-compatibility).
+Source: Stacks Project, Tag 09NY, final sentence of the proof, with Tags 02UV and 09NU.
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ namespace AlgebraicGeometry.Scheme
 of its cohomology class. The existential witness asserts invertibility of the tensor pullback
 and makes its Picard class typeable without imposing an additional hypothesis.
 
-Source: Stacks Project, Tag 09NY, final sentence, with Tags 02UV and 09NU
-(blueprint: lem-sc-picard-h1-restriction-compatibility).
+Source: Stacks Project, Tag 09NY, final sentence, with Tags 02UV and 09NU.
 
 Proof:
 1. By thm-sc-hilbert-90, the class of `L` corresponds to the Zariski units torsor

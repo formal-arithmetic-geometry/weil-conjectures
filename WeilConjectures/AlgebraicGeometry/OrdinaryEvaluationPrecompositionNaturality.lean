@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationComponentFactorizatio
 /-! # Ordinary evaluation and one part of the differential
 
 Source: Stacks Project, Tag 08DQ, and Section 20.41.
-(blueprint: lem-pc-ordinary-evaluation-precomposition-naturality).
 -/
 
 @[expose] public section
@@ -100,7 +99,6 @@ private theorem evaluation_scaled {C : Type u} [Category.{u} C] {J : Grothendiec
 /-- Projected evaluation respects arbitrary precomposition maps and scalars.
 Source: Stacks Project, Tag 08DQ, proof of lemma-dual-perfect-complex;
 Tag 03EO, tensor-Hom adjunction.
-(blueprint: lem-pc-ordinary-evaluation-precomposition-naturality).
 Proof: expand both nonzero component formulas. Naturality of tensor-Hom
 moves the source map a through currying and through the braiding and
 associator. The assumed projection identity then replaces a followed by

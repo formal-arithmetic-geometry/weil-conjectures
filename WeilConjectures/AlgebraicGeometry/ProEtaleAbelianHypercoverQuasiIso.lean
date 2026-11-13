@@ -86,7 +86,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Weakly contractible terms suffice for bounded-below quasi-isomorphism invariance;
 no covering or matching-map hypotheses are needed for this comparison.
 Source: Stacks Project, Tags 09A2 and 0946 (1).
-(auxiliary; not a blueprint node).
 
 Proof: choose a common lower bound N. In each nonnegative simplicial degree p,
 evaluation at U_p preserves homology by weak contractibility. Thus the vertical

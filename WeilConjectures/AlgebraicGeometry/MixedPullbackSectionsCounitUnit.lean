@@ -13,7 +13,6 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Sections of the pullback counit and the normalized Leray unit
 Source: Stacks Project, Tags 079W and 0D5T.
-(blueprint: lem-sc-mixed-pullback-sections-counit-unit).
 -/
 
 @[expose] public section
@@ -155,7 +154,6 @@ private theorem normalizationRestriction_factors_inv
 
 /-- Apply sections to a pullback counit satisfying the underived unit factorization.
 Source: Stacks Project, Tags 079W (derived adjunction) and 0D5T (Leray composition).
-(blueprint: lem-sc-mixed-pullback-sections-counit-unit).
 
 Proof: On the homotopy category write alpha for the ordinary pullback adjunction unit,
  beta for the right-derived direct-image unit, and s for the sections right-derived unit.

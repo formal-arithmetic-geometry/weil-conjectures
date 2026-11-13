@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 /-! # Local linear expressions in finite generating sections
 
 Source: Stacks Project, Modules on Sites, finite type modules, and algebraization Tag 099E.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -31,7 +30,6 @@ namespace SheafOfModules
 /-- A finite family of local sections is locally a linear combination of any finite family
 of global generating sections, on one common covering sieve.
 Source: Stacks Project, Tag 099E, equality of the section ideals after refinement.
-(auxiliary; not a blueprint node).
 
 Proof: lift the chosen sections simultaneously through the epimorphism from the finite
 free module sheaf. Express each lifted free section in its finite coordinate basis and

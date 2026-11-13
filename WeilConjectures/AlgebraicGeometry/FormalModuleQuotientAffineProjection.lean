@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.FormalModuleQuotientAffineProjectionKer
 # Affine sections of the explicit formal quotient projection
 
 Source: Stacks Project, Tags 01I8, 01IC and 087W, affine module correspondence.
-(blueprint: lem-weil-pbc-formal-module-quotient-affine-projection).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry
 /-- On an affine spectrum the actual sheaf quotient projection is surjective and has
 kernel the ideal power times the original module. No completeness or finiteness is needed.
 Source: Stacks Project, Tags 01I8, 01IC and 087W, affine module correspondence.
-(blueprint: lem-weil-pbc-formal-module-quotient-affine-projection).
 
 Proof: The tilde unit identifies M with the global sections of its associated sheaf.
 The ideal sheaf associated with I has global ideal I after transport by ΓSpecIso.

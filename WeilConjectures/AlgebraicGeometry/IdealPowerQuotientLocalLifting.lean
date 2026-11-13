@@ -31,7 +31,7 @@ quotients by ideal-power annihilators. These are stagewise criteria, not stateme
 about a colimit or a choice of diagram.
 
 Proof: On an affine open, identify F with the sheaf of M, I with a finitely generated
-ideal J, and A_n with the sheaf of M_n = {x : J^n x = 0}. The specified annihilator
+ideal J, and A_n with the sheaf of M_n = {x: J^n x = 0}. The specified annihilator
 condition determines this identification. The cokernel is the sheaf of M/M_n.
 For eventual vanishing, the denominator calculation of 01PM applied to the map
 J^n -> M/M_n gives a higher power on which the map is zero, and it remains zero
@@ -39,7 +39,7 @@ after the quotient transition. Choose a finite affine cover, take the maximum of
 these powers, and use sheaf uniqueness for the global map.
 For lifting, represent a section on the principal opens D(f_i) of the complement
 by fractions x_i/f_i^k. Clearing denominators on the overlaps yields
-f_j^k x_i = f_i^k x_j after enlarging k. Put K = {x : f_i^k x = 0 for every i}.
+f_j^k x_i = f_i^k x_j after enlarging k. Put K = {x: f_i^k x = 0 for every i}.
 A monomial of sufficiently large degree d has an exponent at least k; send it to
 the corresponding monomial with that exponent reduced by k, multiplied by x_i.
 Relations between monomials map into K, because multiplying by each f_j^k turns
@@ -54,8 +54,7 @@ value equals the desired section by sheaf uniqueness and injectivity of the
 quotient projection on U. The empty scheme and empty complement use zero maps;
 the unit ideal has zero annihilators and evaluation is ordinary sections.
 
-Source: Stacks Project, Properties, Lemma 01PQ and its reduction to Lemma 01PM.
-(blueprint: lem-weil-pbc-ideal-power-quotient-local-lifting). -/
+Source: Stacks Project, Properties, Lemma 01PQ and its reduction to Lemma 01PM. -/
 theorem ideal_power_quotient_local_lifting
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]

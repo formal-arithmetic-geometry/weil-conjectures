@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.OpenUnionRestrictionComparisonCoherence
 /-! # Canonical comparison diagram on inverse image opens of an open union
 
 Source: Stacks Project, Tag 08BW, restriction to the union before applying exactness.
-(blueprint: lem-sc-open-union-restriction-comparison-diagram).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ set_option backward.isDefEq.respectTransparency false in
 Source: Stacks Project Tag 08BW, canonical restriction diagram; Mathlib
 `Modules.overMapCompOverEquiv`, `overFunctorEquiv`, `restrictFunctorComp`, and
 `restrictFunctorCongr`.
-(blueprint: lem-sc-open-union-restriction-comparison-diagram).
 
 Proof: Identify the inverse images U, T, and their intersection under the union
 inclusion with W, V, and their intersection by the canonical image isomorphisms.

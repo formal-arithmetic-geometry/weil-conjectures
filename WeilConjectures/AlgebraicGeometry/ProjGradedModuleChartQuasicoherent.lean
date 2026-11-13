@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ProjGradedModuleChartTildeComparison
 # Quasi-coherence from graded-module charts
 
 Source: Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-quasicoherent)
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
 localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-quasicoherent) -/
+Source: Stacks, Algebra, Section 00JM. -/
 local instance localizedModuleHomogeneousScalarsChartQuasicoherent (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -81,7 +79,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- A sheaf with the degree-zero localization charts is quasi-coherent.
 Source: Stacks Project, Constructions, Lemmas 01M4, 01M7 (2) and 01MB;
 Schemes, Lemma 01IA.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-quasicoherent)
 
 Proof:
 1. Fix f. Identify its affine standard open with Spec R[f] using basicOpenIsoSpec.

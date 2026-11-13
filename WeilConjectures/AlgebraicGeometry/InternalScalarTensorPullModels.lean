@@ -12,8 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.ModuleObjectProjectionMap
 
 /-! # Common models for the normalized scalar and tensor pullback routes
 
-Source: Stacks 06YY, 0G7E, 07A6; the integral proper-base-change proof (1), (3).
-(auxiliary; not a blueprint node). -/
+Source: Stacks 06YY, 0G7E, 07A6; the integral proper-base-change proof (1), (3). -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -31,7 +30,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
 
 /-- Exact restriction/pullback with the specified localization comparisons.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 def scalarTensorRestrictPullIso (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     V a Y ⋙ L Λ f ≅ L Λ' f ⋙ V a X := by
@@ -43,7 +42,7 @@ def scalarTensorRestrictPullIso (a : Λ ⟶ Λ') [IsMonHom a]
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ f).symm |>.symm
 
 /-- The exact restriction/single comparison for the regular coefficient.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks 06YY. -/
 def scalarTensorRegularRestriction (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}) :
     (V a T).obj (𝟙_ (DerivedCategory (Modules Λ' T))) ≅ B a T :=
   cast (by rfl) <| (V₀ a T).mapDerivedCategoryFactors.app
@@ -54,7 +53,7 @@ def scalarTensorRegularRestriction (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}
         (Mod.regular (condensedRingObj Λ' T)))
 
 /-- Pullback of the restricted regular coefficient, including its unit comparison.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 def scalarTensorRegularPullIso (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) : (L Λ f).obj (B a Y) ≅ B a X := by
   unfold L CondensedRing.moduleObjectDerivedPullback
@@ -66,7 +65,7 @@ def scalarTensorRegularPullIso (a : Λ ⟶ Λ') [IsMonHom a]
 
 /-- Compare the target of the scalar square to its ordinary homotopy tensor model.
 Only the pulled-back variable needs to be K-flat for this map to be invertible.
-Source: Stacks 06YY, 0G7E (auxiliary; not a blueprint node). -/
+Source: Stacks 06YY, 0G7E. -/
 @[irreducible] def scalarTensorPullModelTarget (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (P : HomotopyCategory (Modules Λ Y) (.up ℤ)) :=
   (L Λ f).obj (DerivedCategory.Qh.obj P) ◁ (scalarTensorRegularPullIso a f).inv ≫
@@ -75,7 +74,7 @@ Source: Stacks 06YY, 0G7E (auxiliary; not a blueprint node). -/
 
 /-- The common map: restricted scalar counit, pullback counit, and ordinary tensorator.
 Every map is constructed, including for nonflat coefficient maps.
-Source: Stacks 06YY, 0G7E (auxiliary; not a blueprint node). -/
+Source: Stacks 06YY, 0G7E. -/
 @[irreducible] def scalarTensorPullModelMap (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (P : HomotopyCategory (Modules Λ Y) (.up ℤ)) :=
   Functor.tensorModelMapWith (CondensedRing.upperStar Λ f) (L Λ f)

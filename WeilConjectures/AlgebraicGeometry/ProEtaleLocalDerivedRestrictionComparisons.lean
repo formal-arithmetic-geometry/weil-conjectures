@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageComparison
 
 Source: Stacks Project, derived.tex, Tag 015F; sites-modules.tex, Tags 03D2, 03DA,
 04IX; Bhatt--Scholze, Proposition 6.8.11(3).
-(auxiliary; not a blueprint node).
 
 ## Main declarations
 
@@ -37,25 +36,24 @@ namespace AlgebraicGeometry.Scheme.ProEtaleLocalRestriction
 
 /-- Underlying ring sheaf of the specified commutative coefficient sheaf.
 This is only a transparent notation for sheafCompose with forget₂, not a new ring.
-Source: Stacks, Tag 03DA (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03DA. -/
 abbrev ring {T : Scheme.{u}} (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :=
   (sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
 
 /-- The actual inverse-image coefficient ring, with commutativity forgotten.
-Source: Stacks, Tag 03D2 (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03D2. -/
 abbrev inverseRing {S T : Scheme.{u}} (g : S ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :=
   ring ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj R)
 
 /-- Module restriction to the slice, with its actual restricted coefficient ring.
-Source: Stacks, Tag 04IX (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 04IX. -/
 abbrev restriction {S T : Scheme.{u}} (g : S ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (U : S.ProEt) :=
   SheafOfModules.overFunctor.{u + 1} (inverseRing g R) U
 
 /-- Actual-ring inverse image is additive and exact for every scheme morphism.
-Source: Stacks, Tags 03D2, 03DA and 010N
-(auxiliary; not a blueprint node).
+Source: Stacks, Tags 03D2, 03DA and 010N.
 Proof: the module inverse-image comparison identifies its underlying abelian sheaf
 with abelian inverse image, preserving the scalar action. Site inverse image is exact.
 The faithful exact module forgetful functors reflect zero homology: a module with zero
@@ -102,42 +100,42 @@ theorem inverseImage_exact {S T : Scheme.{u}} (g : S ⟶ T)
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
 /-- Additivity supplied by the actual-ring exactness assertion.
-Source: Stacks, Tag 03DA (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03DA. -/
 instance inverseImage_additive {S T : Scheme.{u}} (g : S ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :
     (proEtaleModuleInverseImage g R).Additive :=
   (inverseImage_exact g R).1
 
 /-- Preservation of finite limits supplied by actual-ring exactness.
-Source: Stacks, Tag 03DA (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03DA. -/
 instance inverseImage_preservesFiniteLimits {S T : Scheme.{u}} (g : S ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :
     PreservesFiniteLimits (proEtaleModuleInverseImage g R) :=
   (inverseImage_exact g R).2.1
 
 /-- Preservation of finite colimits supplied by actual-ring exactness.
-Source: Stacks, Tag 03DA (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03DA. -/
 instance inverseImage_preservesFiniteColimits {S T : Scheme.{u}} (g : S ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :
     PreservesFiniteColimits (proEtaleModuleInverseImage g R) :=
   (inverseImage_exact g R).2.2
 
 /-- Additivity of the existing slice restriction, without a site-size identification.
-Source: Stacks, Tag 04IX (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 04IX. -/
 instance restriction_additive {S T : Scheme.{u}} (g : S ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (U : S.ProEt) :
     (restriction g R U).Additive :=
   (ringedOverFunctor_exactGeneral (inverseRing g R) U).1
 
 /-- Left exactness of existing slice restriction.
-Source: Stacks, Tag 04IX (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 04IX. -/
 instance restriction_preservesFiniteLimits {S T : Scheme.{u}} (g : S ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (U : S.ProEt) :
     PreservesFiniteLimits (restriction g R U) :=
   (ringedOverFunctor_exactGeneral (inverseRing g R) U).2.1
 
 /-- Right exactness of existing slice restriction.
-Source: Stacks, Tag 04IX (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 04IX. -/
 instance restriction_preservesFiniteColimits {S T : Scheme.{u}} (g : S ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (U : S.ProEt) :
     PreservesFiniteColimits (restriction g R U) :=

@@ -69,7 +69,6 @@ private theorem section_a0_map (U : FiniteSplitEtaleHypercover X)
 
 /-- Injective hypercover rows are acyclic with arbitrary Grothendieck abelian coefficients.
 Source: Stacks Project, Hypercoverings, Tag 01GW, and Gabriel--Popescu.
-(auxiliary; not a blueprint node).
 
 Proof: embed the coefficient category by Hom from a separator into modules over
 its opposite endomorphism ring. The exact tensor left adjoint induces a

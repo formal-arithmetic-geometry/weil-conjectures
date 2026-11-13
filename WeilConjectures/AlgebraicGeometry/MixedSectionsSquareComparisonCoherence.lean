@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.MixedSectionsCompositionCoherence
 
 /-! # Coherence of mixed sections comparisons
 Source: Stacks Project, cohomology.tex, Tags 08HY, 0D5T and 0D5W.
-(blueprint: lem-sc-mixed-sections-square-comparison-coherence).
 -/
 
 @[expose] public section
@@ -136,7 +135,6 @@ set_option backward.defeqAttrib.useBackward true in
 composition comparison. No pullback unit or base-change map occurs in this statement.
 Source: Stacks Project, cohomology.tex, Tags 0D5T and 08HY, with the normalized
 sections comparison of Tag 0D5W.
-(blueprint: lem-sc-mixed-sections-square-comparison-coherence).
 
 Proof: Choose a K-injective representative J of F. Transpose the fixed left-derived
 pullback composition comparisons under the pinned derived adjunctions. Their

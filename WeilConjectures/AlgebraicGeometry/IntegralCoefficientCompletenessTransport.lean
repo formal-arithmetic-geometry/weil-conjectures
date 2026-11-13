@@ -79,8 +79,7 @@ import Mathlib.Data.Nat.Prime.Infinite
 
 These coefficient equivalences and completeness comparisons are independent of
 bounded constructibility and the stratified-perfect characterization.
-Source: Stacks 099N; Bhatt--Scholze, Section 6.5
-(auxiliary; not a blueprint node).
+Source: Stacks 099N; Bhatt--Scholze, Section 6.5.
 -/
 
 @[expose] public noncomputable section
@@ -99,8 +98,7 @@ variable (W : Scheme.{u})
 
 /-- Lift the landed Ring-level coefficient comparison to commutative ring sheaves.
 Its image under forgetting commutativity is the existing normalized comparison.
-Source: Stacks 099N and Bhatt--Scholze 6.8.2(1)
-(auxiliary; not a blueprint node).
+Source: Stacks 099N and Bhatt--Scholze 6.8.2(1).
 Proof: a morphism between commutative rings is exactly a ring morphism. Thus the
 forgetful functor on ring sheaves is fully faithful. Lift the existing comparison
 and its inverse. Faithfulness gives their inverse identities and uniqueness. The
@@ -121,8 +119,7 @@ theorem purCoefficientIso_existsUnique :
     exact (congrArg Iso.hom he).trans (hF.map_preimage _).symm
 
 /-- The CommRing lift of integralDetailedCoefficientComparison, with no new choice
-of normalization. Source: Stacks 099N
-(auxiliary; not a blueprint node). -/
+of normalization. Source: Stacks 099N. -/
 def purCoefficientIso := (purCoefficientIso_existsUnique l E W).exists.choose
 
 end CoefficientPresentation

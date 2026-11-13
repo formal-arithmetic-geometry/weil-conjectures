@@ -15,7 +15,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Finite affine sections generating on a compact open
 
 Source: Stacks Project, Properties, Lemma 01PF, finite-numerator step.
-(blueprint: lem-weil-pbc-module-finite-type-affine-generators).
 -/
 
 @[expose] public section
@@ -46,8 +45,7 @@ compact open where it is of finite type.
 
 Source: Stacks Project, Properties, Lemma 01PF (label lemma-extend), final paragraph,
 and Lemma 01PB (label lemma-finite-type-module).
-https://stacks.math.columbia.edu/tag/01PF
-(blueprint: lem-weil-pbc-module-finite-type-affine-generators).
+https://stacks.math.columbia.edu/tag/01PF.
 
 Proof: Identify H on V with the associated sheaf of M = H(V) using the affine
 counit isomorphism. Refine a finite-type generating cover on K by principal opens

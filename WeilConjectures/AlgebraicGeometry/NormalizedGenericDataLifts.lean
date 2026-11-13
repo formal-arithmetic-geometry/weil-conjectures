@@ -14,7 +14,6 @@ import Mathlib.FieldTheory.IsAlgClosed.Basic
 # Geometric points lift through normalized residue-field extensions
 
 Source: Stacks Project, Tag 09Z6, algebraically closed extension argument.
-(blueprint: new-normalized-generic-data-lifts).
 -/
 
 @[expose] public section
@@ -23,7 +22,6 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 /-- Geometric points lift through normalized generic data.
 Source: Stacks Project, Tag 09Z6, algebraically closed extension argument.
-(blueprint: new-normalized-generic-data-lifts).
 The supplied finite residue-field algebra and factorization retain the normalization square.
 Extend the residue-field map along the finite algebraic extension K and use
 functoriality of Spec and the normalization factorization. -/

@@ -22,8 +22,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
 /-!
 # Gabber's degree-zero criterion for etale sheaves of sets
 
-Source: Stacks Project, Lemma 59.82.2 (Tag 09ZF)
-(blueprint: lem-weil-pbc-gabber-h0-etale-criterion).
+Source: Stacks Project, Lemma 59.82.2 (Tag 09ZF).
 -/
 
 @[expose] public section
@@ -111,7 +110,7 @@ private theorem unit_transport {X W : Scheme.{u}} (a b : W ⟶ X) (e : a = b)
 /-- If Zariski restriction to a closed subscheme is bijective on sections for every
 set-valued sheaf, and remains so after every finite base change, then etale restriction
 is bijective on sections for every set-valued sheaf. Source: Stacks Project, Lemma 59.82.2
-(Tag 09ZF) (blueprint: lem-weil-pbc-gabber-h0-etale-criterion).
+(Tag 09ZF).
 
 Proof:
 0. Use the inverse-image units and their composition isomorphisms from

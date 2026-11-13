@@ -24,7 +24,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The inverse tensor comparison respects pullback composition.
 Source: Stacks Project, Definition 6.26.1(2), Tag 0095; Lemma 6.26.2, Tag 0096.
-(blueprint: lem-sc-picard-tensor-composition)
 
 Proof: Expand picardTensorObjIso and picardTensorCompIso into the ordinary
 pullback tensorator and the comparisons picardTensorComparison. Combine the

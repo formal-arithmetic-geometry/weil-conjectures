@@ -18,7 +18,6 @@ import Mathlib.RingTheory.Etale.Kaehler
 # The cotangent dimension at a closed point over an algebraically closed field
 
 Source: Stacks Project, Algebra, Lemma 00TR and localization of the cotangent space.
-(blueprint: lem-weil-pbc-maximal-ideal-differential-cotangent-dimension).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace Algebra
 
 /-- The differential fibre has the dimension of the cotangent space of the local ring.
 Source: Stacks Project, Algebra, Lemma 00TR; Lemma 00RT for localization.
-(blueprint: lem-weil-pbc-maximal-ideal-differential-cotangent-dimension).
 
 Proof: The residue field K at m is a finite type k-algebra because S -> K is
 surjective at a maximal ideal. Zariski's lemma makes K finite over k, so algebraic

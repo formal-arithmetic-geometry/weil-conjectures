@@ -21,7 +21,6 @@ import Mathlib.CategoryTheory.Comma.Over.Pullback
 # Lifting to the adic completion
 
 Source: Stacks Project, Tag 0GS2, proof.
-(blueprint: lem-weil-pbc-finite-etale-completion-lift).
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Lift a closed-fibre finite étale cover to the base change over the adic completion.
-Source: Stacks Project, Tag 0GS2, proof, lines 1815–1820
-(blueprint: lem-weil-pbc-finite-etale-completion-lift).
+Source: Stacks Project, Tag 0GS2, proof, lines 1815–1820.
 
 Proof: Let B be the I-adic completion and J the extension of I to B. Since A is
 Noetherian, I is finitely generated. B is Noetherian and J-adically complete, and

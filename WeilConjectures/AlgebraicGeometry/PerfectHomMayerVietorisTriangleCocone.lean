@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisFunctorial
 /-! # Coherent Mayer--Vietoris triangle cocones before forming Hom rows
 
 Source: Stacks Project, Tags 09RE and 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-triangle-cocone).
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ No abelian-group row, zero-composite witness, or short-complex presentation is
 supplied by this statement.
 
 Source: Stacks Project, Tags 09RE and 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-triangle-cocone).
 
 Proof:
 1. The maps s and s₀ are qcqs over affine schemes. Thus Y is compact and

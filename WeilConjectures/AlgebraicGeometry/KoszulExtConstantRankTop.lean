@@ -38,7 +38,6 @@ namespace AlgebraicGeometry
 /-- The top scalar Ext on a constant conormal-rank open is its dual determinant.
 
 Source: Stacks Project, Tag 0BQZ, proof of lemma-regular-immersion-ext.
-(blueprint: lem-sc-koszul-ext-constant-rank-top).
 
 Proof: Fix z in V and choose an affine Koszul chart of length m. The conormal
 basis and affine conormal frame compute its stalk finrank as m; hVrank gives

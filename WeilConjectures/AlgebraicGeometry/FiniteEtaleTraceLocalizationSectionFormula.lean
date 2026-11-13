@@ -34,7 +34,6 @@ set_option maxRecDepth 2048 in
 object over `W`. This lemma concerns only the trace on `X`; no trace on `X'` is used.
 Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
 SGA 4, Exposé IX, 5.1.
-(blueprint: lem-weil-pbc-finite-etale-trace-localization-section-formula)
 
 Proof. Write `rho` for the restriction isomorphism for `g`. Naturality of `rho`
 and the trace on `X` identifies the restriction of the displayed section to `T`

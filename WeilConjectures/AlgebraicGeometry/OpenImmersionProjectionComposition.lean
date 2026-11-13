@@ -458,8 +458,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.leftDerivedFunc
 
 omit [HasSmallSiteSheafify B] in
 /-- The inverse open projection formulas compose through the specified open compositor.
-Source: Stacks Project, sites-cohomology Tag 0GL1 and sites-modules Tag 0E8I
-(auxiliary; not a blueprint node).
+Source: Stacks Project, sites-cohomology Tag 0GL1 and sites-modules Tag 0E8I.
 
 Proof: the sheaf tensor comparison for extension by zero restricts to the identity on
 its open and is zero off that open. For two nested opens both compositions therefore

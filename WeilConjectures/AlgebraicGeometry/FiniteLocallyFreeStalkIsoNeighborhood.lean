@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkHomEquality
 /-! # A stalk inverse extends to a vector bundle neighbourhood
 
 Source: Stacks Project, Tags 05GF and 00O0, Lemmas 10.79.2 and 10.79.4(3).
-(blueprint: lem-sc-finite-locally-free-stalk-iso-neighborhood)
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- A finite locally free map invertible at one stalk is invertible on an open
 neighbourhood of that point.
 Source: Stacks Project, Tags 05GF and 00O0, Lemmas 10.79.2 and 10.79.4(3).
-(blueprint: lem-sc-finite-locally-free-stalk-iso-neighborhood)
 
 Proof: Intersect finite free trivializing neighbourhoods for M and N at x. In
 these frames φ is a finite rectangular matrix of sections. Its stalk inverse

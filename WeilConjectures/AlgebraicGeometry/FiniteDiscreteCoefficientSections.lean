@@ -54,7 +54,6 @@ private theorem terminal_map_exists (T : Scheme.{u}) (V : T.ProEt) :
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The constant coefficients give the same map before and after direct image.
 Source: Bhatt--Scholze, Proposition 5.3.2; the canonical constant-ring comparison.
-(auxiliary; not a blueprint node)
 
 Proof in words. Use the coefficient comparison at the pullback of the terminal
 object over Spec Z. For an arbitrary V, the unique map from V to this terminal

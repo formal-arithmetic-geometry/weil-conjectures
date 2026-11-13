@@ -9,9 +9,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassScalarFaithfulness
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
 
 /-! # Scalar faithfulness after the ordinary inverse-image adjunction
-
-Source: the two components of blueprint thm-amb-p1-decomposition.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -89,8 +86,6 @@ private theorem kummer_unit_scalar_naturality
 
 /-- Scalar faithfulness of the actual Kummer class implies scalar faithfulness
 of its specified Chern pushforward under the canonical derived adjunction.
-Source: blueprint thm-amb-p1-decomposition, the geometric Chern component.
-(auxiliary; not a blueprint node).
 
 Proof: linearity of inverse image and of the single functors makes the constant
 comparison commute with scalar multiplication. Transpose an annihilated scalar

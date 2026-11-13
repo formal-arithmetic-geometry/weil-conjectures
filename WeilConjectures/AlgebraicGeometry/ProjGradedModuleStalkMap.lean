@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 # ProjGradedModuleStalkMap
 
 Source: Stacks Project, Constructions, Section 01M3, stalk computation before
-Definition 01M6 (blueprint: lem-weil-pbc-proj-graded-module-stalk-map).
+Definition 01M6.
 -/
 
 @[expose] public section
@@ -74,8 +74,7 @@ variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
 localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM.
-(blueprint: lem-weil-pbc-proj-graded-module-sheaf-stalks) -/
+Source: Stacks, Algebra, Section 00JM. -/
 local instance localizedScalarsProjGradedModuleStalkMap (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -167,8 +166,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The canonical additive map from chart germs to equal-degree prime-localized fractions.
 No injectivity or surjectivity is asserted here.
 Source: Stacks Project, Constructions, Section 01M3, stalk computation before
-Definition 01M6 (definition-structure-sheaf-proj).
-(blueprint: lem-weil-pbc-proj-graded-module-stalk-map)
+Definition 01M6.
 
 Proof:
 1. On a positive homogeneous chart containing x, include powers of its denominator into

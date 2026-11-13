@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.DerivedDirectImageSquareMate
 
 /-! # Left path of the normalized mixed Leray unit diagram
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W.
-(blueprint: lem-sc-mixed-sections-left-unit-normalization).
 -/
 
 @[expose] public section
@@ -158,7 +157,6 @@ set_option maxHeartbeats 700000 in
 /-- The left path becomes the iterated scalar-factor path before any unit cancellation.
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W; the pinned-unit calculation
 in lem-sc-mixed-sections-composition-kinjective.
-(blueprint: lem-sc-mixed-sections-left-unit-normalization).
 
 Proof: Expand p using the normalized direct-image composition equation:
 unit_Dfg followed by e.inv equals unit_Dg at Df(K), followed by RDg(unit_Df).

@@ -38,9 +38,7 @@ neighbourhood on which every fibre meets C. Transfer it back to T along the
 reduction homeomorphism. Fibres over corresponding points have the same underlying
 sets, so the resulting open has the stated property. C cannot be empty by the
 hypothesis; P need not be reduced or separated, and no assumption of noetherianity
-on T is needed.
-
-(blueprint: lem-sbc-generic-closed-subset-fibre-nonempty) -/
+on T is needed. -/
 theorem exists_open_closed_subset_fibre_nonempty {P T : Scheme.{u}} (h : P ⟶ T)
     [LocallyOfFiniteType h] [QuasiCompact h] (η : T)
     (hη : IsGenericPoint η Set.univ) (C : Set P) (hC : IsClosed C)

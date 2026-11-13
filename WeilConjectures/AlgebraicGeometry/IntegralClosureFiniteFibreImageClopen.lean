@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.QuotientFirstFactorIso
 /-! # The finite fibre component has a clopen image in the integral closure
 
 Source: literature/stacks-project/more-algebra.tex:2529-2541, proof of Lemma Tag 09XH
-(blueprint: lem-weil-pbc-integral-closure-finite-fibre-image-clopen)
 -/
 
 @[expose] public section
@@ -27,15 +26,14 @@ namespace AlgebraicGeometry
 
 /-- The finite fibre component has a clopen image in the integral closure.
 
-Source: literature/stacks-project/more-algebra.tex:2529-2541, proof of Lemma Tag 09XH
-(blueprint: lem-weil-pbc-integral-closure-finite-fibre-image-clopen).
+Source: literature/stacks-project/more-algebra.tex:2529-2541, proof of Lemma Tag 09XH.
 
 1. For a lift of the component idempotent, identify `T` with `V(IB) ∩ D(ε)` using
    lem-weil-pbc-spec-quotient-homeomorphism-zero-locus.
 2. The inclusion carries `IB'` into `IB`, and the image of `I` generates both ideals;
    consequently the inverse image of `V(IB')` is `V(IB)`.
 3. The isomorphism over `U` carries the principal open piece to an open piece, showing
-   that the image of `T` is open in `V(IB')` (def-weil-affine-spectrum).
+   that the image of `T` is open in `V(IB')`.
 4. Finiteness of `C₁` over `A/I` gives integrality over `B'`, so the spectrum image is
    closed by lem-weil-pbc-finite-algebra-is-integral and lem-weil-pbc-integral-spec-closed-map.
 5. Pull back along the quotient-spectrum homeomorphism and apply
@@ -46,8 +44,7 @@ Source: literature/stacks-project/more-algebra.tex:2529-2541, proof of Lemma Tag
 8. Use lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact to choose a lift `g` of `ε'`
    with `D(g) ⊆ U`, by separating the closed complement of `U` from the first factor.
 9. On `D(g)` the isomorphism of locally ringed spaces identifies the section rings,
-   hence the localizations `B'_g` and `B_g` (lem-weil-pbc-morphism-into-affine-scheme,
-   lem-weil-pbc-affine-ideals-closed-subscheme, def-weil-ring-localization-away).
+   hence the localizations `B'_g` and `B_g`.
 10. Quotient this localization isomorphism by the corresponding ideals `(I, 1-g)`;
     these quotient rings are the first factors, and the induced first-factor map is
     therefore a ring isomorphism. -/

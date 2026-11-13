@@ -12,7 +12,6 @@ import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 # Restriction of integral lattice pairs
 
 Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59–60.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ open scoped ChangeOfRings
 namespace AlgebraicGeometry.ProEtale
 /-- Cache the existing strong additive sheafification instance on a slice.
 Source: Mathlib, sheafification on small sites.
-(auxiliary; not a blueprint node).
 Proof: specialize the existing instance. -/
 local instance restrictionStrongSheafifyOver (X : Scheme.{u}) (U : X.ProEt) :
     HasSheafify ((Scheme.ProEt.topology X).over U) AddCommGrpCat.{u + 1} := by
@@ -33,7 +31,6 @@ local instance restrictionStrongSheafifyOver (X : Scheme.{u}) (U : X.ProEt) :
 
 /-- Cache additive sheafification on an iterated slice.
 Source: Mathlib, sheafification on small sites.
-(auxiliary; not a blueprint node).
 Proof: specialize the existing instance. -/
 local instance restrictionWeakSheafifyOverOver (X : Scheme.{u}) (U : X.ProEt) (T : Over U) :
     HasWeakSheafify (((Scheme.ProEt.topology X).over U).over T) AddCommGrpCat.{u + 1} := by
@@ -41,7 +38,6 @@ local instance restrictionWeakSheafifyOverOver (X : Scheme.{u}) (U : X.ProEt) (T
 
 /-- Cache the local bijectivity criterion on an iterated slice.
 Source: Mathlib, sheafification on small sites.
-(auxiliary; not a blueprint node).
 Proof: specialize the existing instance. -/
 local instance restrictionWEqualsOverOver (X : Scheme.{u}) (U : X.ProEt) (T : Over U) :
     (((Scheme.ProEt.topology X).over U).over T).WEqualsLocallyBijective
@@ -50,7 +46,6 @@ local instance restrictionWEqualsOverOver (X : Scheme.{u}) (U : X.ProEt) (T : Ov
 
 /-- Cache strong additive sheafification on an iterated slice.
 Source: Mathlib, sheafification on small sites.
-(auxiliary; not a blueprint node).
 Proof: specialize the existing instance. -/
 local instance restrictionStrongSheafifyOverOver (X : Scheme.{u}) (U : X.ProEt) (T : Over U) :
     HasSheafify (((Scheme.ProEt.topology X).over U).over T) AddCommGrpCat.{u + 1} := by
@@ -275,7 +270,6 @@ noncomputable def IntegralLatticePair.restrict
 
 /-- Images of restricted pairs are the original images on the smaller slice.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of embedded lattices.
-(auxiliary; not a blueprint node).
 Proof: the slice tensor comparison sends each sheafified unit tensor to the
 same unit tensor on the original slice. Applying the original rationalization
 therefore gives the same section, so the two maps have equal ranges. -/

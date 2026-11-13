@@ -27,7 +27,6 @@ finite locally free module.
 
 Source: Stacks Project, Tag 0FNV, finite free dual bases; Tag 01C8,
 base change of locally free sheaves.
-(blueprint: lem-sc-picard-tensor-dual-comparison-iso)
 
 Proof: The finite-locally-free dual-tensor-Hom isomorphism agrees with the
 closed-category comparison. Thus the comparison at M is invertible, and

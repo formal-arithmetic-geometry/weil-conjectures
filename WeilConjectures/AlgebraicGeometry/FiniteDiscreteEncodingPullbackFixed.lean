@@ -172,8 +172,7 @@ private theorem normalizedPushforward_action (T U : Scheme.{u}) (f : U ⟶ T)
 attribute [local irreducible] canonicalAbelianMap
 
 /-- The common underlying direct-image sections have the same constant scalar action.
-Source: normalized constant-section action and coefficient naturality
-(auxiliary; not a blueprint node). -/
+Source: normalized constant-section action and coefficient naturality. -/
 theorem sectionPushforward_smul (T U : Scheme.{u}) (f : U ⟶ T)
     (eT : Encoding A T) (eU : Encoding A U) (M : Internal A U)
     (V : T.ProEtᵒᵖ) (a : ULift.{u + 1} A)
@@ -190,8 +189,7 @@ theorem sectionPushforward_smul (T U : Scheme.{u}) (f : U ⟶ T)
       (fixedPushforward_action A T U f eU M V a m).symm)
 
 /-- The identity on additive direct-image sections, as an isomorphism of module sheaves.
-Source: normalized constant-section action and coefficient naturality
-(auxiliary; not a blueprint node). -/
+Source: normalized constant-section action and coefficient naturality. -/
 def sectionPushforwardIso (T U : Scheme.{u}) (f : U ⟶ T)
     (eT : Encoding A T) (eU : Encoding A U) (M : Internal A U) :
     (sectionEncoding A T eT.ringIso ⋙ fixedRestriction A T).obj
@@ -215,8 +213,7 @@ def sectionPushforwardIso (T U : Scheme.{u}) (f : U ⟶ T)
     rfl
 
 /-- The normalized encoding comparison for the complete direct-image functors.
-Source: normalized constant-section action and coefficient naturality
-(auxiliary; not a blueprint node). -/
+Source: normalized constant-section action and coefficient naturality. -/
 def encodingPushforwardNatIso (T U : Scheme.{u}) (f : U ⟶ T)
     (eT : Encoding A T) (eU : Encoding A U) :
     CondensedRing.lowerStar (coefficient A) f ⋙ eT.ordinary.functor ⋙ eT.fixed.functor ≅
@@ -231,7 +228,6 @@ def encodingPushforwardNatIso (T U : Scheme.{u}) (f : U ⟶ T)
 
 /-- Normalized finite-discrete encoding commutes with inverse image.
 Source: Stacks Tags 03D6 and 03D7.
-(auxiliary; not a blueprint node).
 
 Proof: normalization identifies the scalar action with the internal action of canonical
 constant sections. Those sections commute with direct image, so the identity on sections

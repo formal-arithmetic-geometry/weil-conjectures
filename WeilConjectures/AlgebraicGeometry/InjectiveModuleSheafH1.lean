@@ -14,8 +14,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 /-!
 # Degree-one abelian cohomology of injective module sheaves
 
-Source: Stacks Project, Lemma 03FD
-(blueprint: lem-weil-pbc-henselian-finite-pushforward-h1-injective-vanishing).
+Source: Stacks Project, Lemma 03FD.
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry.Etale
 /-- An injective module sheaf has zero degree-one cohomology after forgetting scalars.
 
 Source: Stacks Project, Lemma 03FD, especially the second paragraph of its proof.
-(blueprint: lem-weil-pbc-henselian-finite-pushforward-h1-injective-vanishing)
 
 Proof: Regard a sheaf of Λ-modules as a module over the constant ring sheaf Λ on the
 small etale site. This equivalence preserves injectivity and the underlying abelian

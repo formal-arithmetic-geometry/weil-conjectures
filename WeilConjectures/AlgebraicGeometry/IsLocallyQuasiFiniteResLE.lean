@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.QuasiFiniteAtPointIsolated
 # Restriction of locally quasi-finite morphisms to open subschemes
 
 Source: Stacks Project, Morphisms of Schemes, Tags 01TD and 01TH (4), as invoked in
-Tag 03JA (blueprint: lem-weil-pbc-lqf-restriction-to-opens).
+Tag 03JA.
 -/
 
 @[expose] public section
@@ -29,8 +29,7 @@ namespace AlgebraicGeometry.Scheme.Hom
 
 /-- Restricting a locally quasi-finite morphism to open subschemes preserves local
 quasi-finiteness in the Stacks sense, including the finite-type requirement.
-Source: Stacks Project, Morphisms of Schemes, Tags 01TD and 01TH (4), as used in Tag 03JA
-(blueprint: lem-weil-pbc-lqf-restriction-to-opens).
+Source: Stacks Project, Morphisms of Schemes, Tags 01TD and 01TH (4), as used in Tag 03JA.
 
 The open immersions are `U.ι` and `V.ι`. The canonical restriction `f.resLE V U e` satisfies
 `f.resLE V U e ≫ V.ι = U.ι ≫ f` by `resLE_comp_ι`; uniqueness follows since `V.ι` is mono.

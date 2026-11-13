@@ -27,7 +27,6 @@ namespace AlgebraicGeometry
 /-- Positive-degree exactness with one fixed coefficient module.
 
 Source: Stacks Project, Cohomology, Tags 01EP and 01FM; Tag 08C1, first paragraph.
-(blueprint: lem-sc-principal-open-injective-subset-exact).
 
 Proof: Construct the full Čech complex with the actual finite intersections
 inside X and apply injective module open-cover Čech acyclicity to the cover of

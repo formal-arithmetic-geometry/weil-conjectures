@@ -26,8 +26,7 @@ of the source stalk; the factorization identifies this with the composite tower.
 The closed-fibre module comparison supplies the fibre hypothesis. Apply the
 local criterion with the source stalk as its own finitely presented nonzero module;
 its second conclusion is chart flatness. Scheme stalk maps are automatically local.
-Source: Stacks Project, Tags 00R7 and 00RH.
-(blueprint: lem-sbc-polynomial-chart-stalk-flat-comparison-reverse-aux-ring-bridge) -/
+Source: Stacks Project, Tags 00R7 and 00RH. -/
 theorem polynomial_chart_stalk_flat_comparison_reverse_ring_bridge
     {X T : Scheme.{u}} [IsAffine T] (f : X ⟶ T)
     [Flat f] [LocallyOfFinitePresentation f]
@@ -74,8 +73,7 @@ theorem polynomial_chart_stalk_flat_comparison_reverse_ring_bridge
 The proof is the Stacks Project local flatness criterion (Tags 00R7 and 00RH):
 write the relevant stalks as essentially finitely presented local algebras over
 the base stalk, use flatness over the base and flatness of the closed fibre,
-and transport flatness through the canonical fibre-stalk identification.
-(blueprint: lem-sbc-polynomial-chart-stalk-flat-comparison-reverse-aux) -/
+and transport flatness through the canonical fibre-stalk identification. -/
 theorem polynomial_chart_stalk_flat_comparison_reverse_aux
     {X T : Scheme.{u}} [IsAffine T] (f : X ⟶ T)
     [Flat f] [LocallyOfFinitePresentation f]

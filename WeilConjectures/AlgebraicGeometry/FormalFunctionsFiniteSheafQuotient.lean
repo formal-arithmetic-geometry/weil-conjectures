@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.FormalFunctionsFiniteSheafQuotientCore
 /-! # Sheaf quotients on the finite fibres
 
 Source: Stacks Project, Tag 02OD, finite-level identifications, and Tag 04CJ (1).
-(blueprint: lem-weil-pbc-formal-functions-finite-sheaf-quotient)
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ The quotient equation specifies the isomorphism uniquely, since the quotient pro
 is an epimorphism. No cohomology or transition compatibility is asserted here.
 
 Source: Stacks Project, Tag 02OD, finite-level identifications; Tag 04CJ (1).
-(blueprint: lem-weil-pbc-formal-functions-finite-sheaf-quotient)
 Proof: Paste the two base-change squares to identify the finite fibre over the local
 base change with the pullback of Spec(A/m^(n+1)) into Spec(A). This is a closed immersion.
 The quotient-base-change ideal computation identifies its kernel with the extension of

@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetInsertion
 /-! # The singleton component of subset insertion
 
 Source: Stacks Project, Tags 08C1 and 01FM.
-(blueprint: lem-sc-principal-open-cech-singleton-augmentation-component).
 -/
 
 @[expose] public section
@@ -97,7 +96,6 @@ private theorem insertOne_reindex
 open Classical in
 /-- A singleton restriction inserts exactly its degree-zero tuple coordinate.
 Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
-(blueprint: lem-sc-principal-open-cech-singleton-augmentation-component).
 
 Proof: Write S={i} using card S=1. Its increasing enumeration is the one-tuple
 with value i. Its principal open is D(f_i), and its intersection in V is the

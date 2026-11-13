@@ -16,7 +16,6 @@ import Mathlib.Algebra.Category.Grp.Zero
 /-! # Comparison of the two derived restrictions to an open subscheme
 
 Source: Stacks Project, Tags 079W and 0A9A.
-(blueprint: lem-pc-open-derived-restriction-comparison).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 identifies quasi-coherent cohomology, support, shifted orthogonality and zero objects.
 Source: Stacks Project, Tag 079W, Lemma cohomology-lemma-adjoint, and Tag 0A9A,
 Lemma perfect-lemma-supported-generator, induction paragraph.
-(blueprint: lem-pc-open-derived-restriction-comparison).
 
 Proof: Obtain the localizations from `nonempty_hasDerivedCategory_openSubscheme` and
 `nonempty_derivedOpenLocalization`, and the adjunction from

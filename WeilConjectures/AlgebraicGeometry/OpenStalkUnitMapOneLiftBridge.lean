@@ -12,7 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.OpenModuleStalkRestrictionCompariso
 /-! # Transporting a supplied subscheme morphism to the open slice site
 
 Source: Stacks Project, Sheaves Tag 00A0 (3).
-(blueprint: new-lem-sc-open-stalk-unit-map-one-lift-bridge).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Transport a subscheme morphism to the slice site, with its canonical germ formula.
 
 Source: Stacks Project, Sheaves, Lemma 6.31.1, Tag 00A0 (2)-(3), including modules.
-(blueprint: new-lem-sc-open-stalk-unit-map-one-lift-bridge).
 
 Proof: Set V = U.ι ''ᵁ A, with hxV supplied by hxA and hVU by Opens.ι_image_le.
 The isomorphism U.ι.isoImage A identifies A.toScheme with V.toScheme over U.
@@ -213,7 +211,6 @@ private theorem exists_slice_hom_with_subscheme_germ_formula
 /-- Transport an already constructed local morphism from the open subscheme to the slice site.
 
 Source: Stacks Project, Sheaves Tag 00A0 (3), restriction to an open subspace.
-(blueprint: new-lem-sc-open-stalk-unit-map-one-lift-bridge).
 
 Proof: Put V = U.ι ''ᵁ A, so x belongs to V and V is contained in U. The open subscheme
 V is canonically isomorphic to A.toScheme over U.toScheme. Restrict f along this isomorphism.

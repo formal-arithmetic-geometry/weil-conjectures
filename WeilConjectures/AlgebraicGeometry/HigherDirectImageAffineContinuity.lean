@@ -14,7 +14,6 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 /-! # Affine sections of higher images under inverse limits
 
 Source: Stacks Project, Tag 09Z1 and Tag 03Q8.
-(blueprint: sbc-lem-higher-image-affine-continuity).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace AlgebraicGeometry.Etale
 of modules. Object isomorphisms and the equations on maps and legs present exactly
 the canonical diagram; they impose no extra geometric assumption.
 Source: Stacks Project, Tags 03Q8 and 09Z1, proof using cohomology continuity 09YQ.
-(blueprint: sbc-lem-higher-image-affine-continuity).
 
 Proof: Express higher images as sheafifications of restricted cohomology presheaves
 (Tag 03Q8). For an affine etale V over S, base change of the inverse system has qcqs

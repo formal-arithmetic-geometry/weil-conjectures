@@ -22,8 +22,7 @@ one-dimensional residue-field fibre is nonzero if and only if that coefficient
 is outside the corresponding prime of the degree-zero localization. By the
 standard-open dictionary this means the homogeneous prime does not contain f,
 exactly membership in D_+(f). The equality on all charts gives equality of sets.
-For f=0 both sets are empty, including for positive d.
-(blueprint: lem-sc-p1-homogeneous-section-tensor-powers-locus) -/
+For f=0 both sets are empty, including for positive d. -/
 theorem proj_homogeneous_section_tensor_powers_locus (k : Type u) [Field k]
     {d : ℕ} (hd : 0 < d) {f : MvPolynomial (Fin 2) k}
     (hf : f ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k d) :

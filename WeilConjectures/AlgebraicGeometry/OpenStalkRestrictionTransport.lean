@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkRestrictionCompar
 /-! # Transport of open-site stalk comparisons through further restriction
 
 Source: Stacks Project, Sheaves Tag 00A0 (3), (5), and Tag 0096.
-(blueprint: lem-sc-open-stalk-restriction-transport).
 -/
 
 @[expose] public section
@@ -87,7 +86,6 @@ restriction to the canonical comparison `openModuleStalkRestrictionComparison`.
 
 Source: Stacks Project, Sheaves Tag 00A0 (3), (5), `lemma-restrict`, and Tag 0096,
 `lemma-adjoint-pullback-pushforward-modules` (open-immersion pushforward).
-(blueprint: lem-sc-open-stalk-restriction-transport).
 
 Proof: Use the slice/open-subspace equivalences. The final functor of neighbourhoods
 inside W gives the additive restriction-stalk isomorphism. Its germ formula,
@@ -101,7 +99,7 @@ both sides take a section germ to that same germ on U.
 
 For an arbitrary comparison a on V, put R = restriction from U to V. Transport
 open-immersion module pushforward back to the slice sites to obtain its right
-adjoint P, with unit eta and invertible counit epsilon : R P --> Id. Define an
+adjoint P, with unit eta and invertible counit epsilon: R P --> Id. Define an
 automorphism b of the V-stalk functor S by the composite
 S(epsilon) inverse, e0 whiskered by P, a inverse whiskered by P, S(epsilon).
 Naturality makes b a natural automorphism. Naturality of e0 and a at eta_F,

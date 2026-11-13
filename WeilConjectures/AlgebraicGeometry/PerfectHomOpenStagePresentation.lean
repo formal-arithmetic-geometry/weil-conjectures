@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomOpenStageMaps
 /-! # Local presentations of shifted open Hom systems
 
 Source: Stacks Project, Tags 09RE, 079W, 08FE and 0D5S.
-(blueprint: lem-pc-perfect-hom-open-stage-presentation).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ it makes no assertion about group colimits, Mayer--Vietoris families or continui
 
 Source: Stacks Project, perfect.tex Tag 09RE (open-local Hom comparison),
 cohomology.tex Tags 079W, 08FE and 0D5S.
-(blueprint: lem-pc-perfect-hom-open-stage-presentation).
 
 Proof:
 1. Put B = t inverse-image W and Z = B.toScheme, k = B.ι followed by t,

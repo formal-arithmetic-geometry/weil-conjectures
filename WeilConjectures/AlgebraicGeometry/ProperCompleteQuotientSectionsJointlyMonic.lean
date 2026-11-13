@@ -33,7 +33,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Over a complete Noetherian base, sections of a coherent module on a proper
 scheme are separated by all positive infinitesimal quotient projections.
 Source: Stacks Project, Tag 087U, degree zero.
-(blueprint: lem-weil-pbc-proper-complete-quotient-sections-jointly-monic)
 
 Proof: Degree-zero formal functions over a complete base identifies the A-module
 of sections of F with the inverse limit of the sections of F/I^(n+1) F, via the

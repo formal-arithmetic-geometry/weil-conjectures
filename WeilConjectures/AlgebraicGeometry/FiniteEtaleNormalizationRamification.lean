@@ -16,9 +16,9 @@ public import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 /-!
 # Normalizing a finite étale cover of a punctured curve: a ramification index prime to `ℓ`
 
-Covering step of blueprint `det-tf-restriction-zero-covers` ("normalizing gives covers of degree
+Covering step of ("normalizing gives covers of degree
 prime to `ℓ`"). Let `X` be a smooth curve over an algebraically closed field `k`, `y` a
-`k`-point of `X` lying in an irreducible affine open `U`, `U' ⊆ U` an open and `v : V ⟶ U'` a
+`k`-point of `X` lying in an irreducible affine open `U`, `U' ⊆ U` an open and `v: V ⟶ U'` a
 connected finite étale cover all of whose geometric fibres have `d` points, `ℓ ∤ d`. The
 normalization `C` of `U` in `V` is a smooth curve, finite over `U`, containing `V` as the preimage
 of `U'`, and some `k`-point `c` of `C` over `y` has ramification index `e` prime to `ℓ`: a
@@ -95,15 +95,14 @@ lemma Scheme.stalkSpecializes_bijective_of_eq {X : Scheme.{u}} {x x' : X} (h : x
   exact Function.bijective_id
 
 attribute [local instance] Scheme.Hom.affineAlgebra in
-/-- **Normalizing a prime-to-`ℓ` finite étale cover of a punctured curve** (blueprint
-`det-tf-restriction-zero-covers`). Let `X` be smooth of relative dimension one over an
+/-- **Normalizing a prime-to-`ℓ` finite étale cover of a punctured curve**. Let `X` be smooth of relative dimension one over an
 algebraically closed field `k`, `y` a `k`-point of `X` in an irreducible affine open `U`, `U' ≤ U`
-an open, and `v : V ⟶ U'` a finite étale morphism with `V` connected all of whose geometric fibres
-have `d` points, `ℓ ∤ d`. Then there are a scheme `C` with a finite morphism `p : C ⟶ U`, smooth
+an open, and `v: V ⟶ U'` a finite étale morphism with `V` connected all of whose geometric fibres
+have `d` points, `ℓ ∤ d`. Then there are a scheme `C` with a finite morphism `p: C ⟶ U`, smooth
 of relative dimension one over `k`, a `k`-point `c` of `C` over `y` and an integer `e ≥ 1` prime
 to `ℓ` (the ramification index of `p` at `c`) such that every generator `u` of the maximal ideal of
 `𝒪_{X,y}` becomes `w * ξ ^ e` in `𝒪_{C,c}` for a unit `w` and a generator `ξ` of the maximal ideal;
-moreover `p` restricts over `U'` to `v`: there is an open immersion `j : V ⟶ C` with
+moreover `p` restricts over `U'` to `v`: there is an open immersion `j: V ⟶ C` with
 `j ≫ p = v ≫ (U' ⟶ U)` whose image is `p⁻¹(U')`. -/
 theorem exists_finite_smooth_cover_not_dvd_ramificationIdx {k : Type u} [Field k]
     [IsAlgClosed k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [SmoothOfRelativeDimension 1 f]

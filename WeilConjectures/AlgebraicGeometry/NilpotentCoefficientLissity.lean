@@ -65,7 +65,6 @@ private theorem lisse_iso {D : Type w} [SmallCategory D]
 
 /-- A nilpotent surjection of constant coefficient rings reflects lissity of a bounded-above
 complex. Source: Stacks Project, Cohomology on Sites, Tag 094I.
-(auxiliary; not a blueprint node).
 
 Proof: factor f through B/ker(f) and the canonical quotient isomorphism to R. Both
 presentations of derived scalar extension are computed by the same K-flat model.

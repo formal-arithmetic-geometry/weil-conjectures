@@ -15,8 +15,7 @@ import WeilConjectures.RingTheory.FrobeniusPolynomialSurjective
 /-!
 # Local surjectivity of a Frobenius-linear difference
 
-Source: Stacks Project, `more-etale.tex`, Tag 0GKU, lines 4213--4270
-(blueprint: lem-fd-frobenius-linear-vector-bundle-locally-surjective).
+Source: Stacks Project, `more-etale.tex`, Tag 0GKU, lines 4213--4270.
 
 This is the local lifting step of the Frobenius-linear vector-bundle theorem. Its
 proof is the local Artin--Schreier lifting argument on finite locally free charts,
@@ -181,8 +180,7 @@ private theorem locally_surjective_of_pointwise_lifts
 /-- The map `F - 1` admits local lifts on the small étale site.
 
 Source: Stacks Project, `more-etale.tex`, Tag 0GKU, lemma-frobenius-linear-on-vb,
-proof steps 1--4 and the local-lifting assertion of step 5
-(blueprint: lem-fd-frobenius-linear-vector-bundle-locally-surjective).
+proof steps 1--4 and the local-lifting assertion of step 5.
 
 Proof: trivialize the finite locally free module on affine opens.  The equations
 `F(x)-x=b` are represented by the polynomial schemes whose Jacobian is the identity.

@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.LocalOverlapTransitions
 
 /-! # Canonical comparisons on pairwise base-change overlaps
 
-Source: Stacks Project, Tags 01ZR and 05N7.
-(blueprint: def-pc-overlap-pair-canonical-comparisons). -/
+Source: Stacks Project, Tags 01ZR and 05N7. -/
 
 @[expose] public section
 
@@ -25,8 +24,7 @@ namespace CategoryTheory.Pseudofunctor
 open LocallyDiscreteOpToCat
 
 /-- Pull a universal pair map across a commutative base-change diagram.
-This generic formula keeps the composition comparisons independent of concrete sheaf pullbacks.
-(blueprint: def-pc-overlap-pair-canonical-comparisons). -/
+This generic formula keeps the composition comparisons independent of concrete sheaf pullbacks. -/
 noncomputable def overlapPairBaseChangeHom
     {C : Type (u + 1)} [Category.{u} C] [HasPullbacks C]
     (F : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat.{u, u + 1})
@@ -53,8 +51,7 @@ noncomputable def overlapPairBaseChangeHom
         (pullback.lift_fst _ _ _) (pullback.lift_snd _ _ _) ≫
     (F.mapComp p₂.op.toLoc r₂.op.toLoc).hom.toNatTrans.app N₂
 
-/-- The base-change square for one pair, expressed for an arbitrary pseudofunctor.
-(blueprint: def-pc-overlap-pair-canonical-comparisons). -/
+/-- The base-change square for one pair, expressed for an arbitrary pseudofunctor. -/
 def overlapPairBaseChangeSquare
     {C : Type (u + 1)} [Category.{u} C] [HasPullbacks C]
     {ι : Type u} {S S' : C} {X X' : ι → C}
@@ -80,8 +77,7 @@ end CategoryTheory.Pseudofunctor
 namespace AlgebraicGeometry
 
 /-- The map from an iterated pullback chart to the original limit chart.
-It is constructed by the universal property, without choosing a descent witness.
-(blueprint: def-pc-overlap-pair-canonical-comparisons). -/
+It is constructed by the universal property, without choosing a descent witness. -/
 noncomputable def overlapIteratedChartHom {X Y Z : Scheme.{u}} (U : X.OpenCover.{u})
     (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t) (a : U.I₀) :
     ((U.pullback₁ q).pullback₁ p).X a ⟶ (U.pullback₁ t).X a :=
@@ -91,8 +87,7 @@ noncomputable def overlapIteratedChartHom {X Y Z : Scheme.{u}} (U : X.OpenCover.
         Scheme.Cover.pullbackHom_map_assoc])
 
 /-- The canonical component comparison on an iterated limit chart.
-Source: Stacks Project, Tag 01ZR, first proof, successive restrictions.
-(blueprint: def-pc-overlap-pair-canonical-comparisons). -/
+Source: Stacks Project, Tag 01ZR, first proof, successive restrictions. -/
 noncomputable def overlapIteratedComparison {X Y Z : Scheme.{u}} (U : X.OpenCover.{u})
     (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t)
     (N : (a : U.I₀) → (U.X a).Modules) (M : Z.Modules)
@@ -116,8 +111,7 @@ noncomputable def overlapIteratedComparison {X Y Z : Scheme.{u}} (U : X.OpenCove
     (Scheme.Modules.pullbackCongr hdf).app M
 
 /-- The compatibility square on one universal limit overlap.
-Its generic formula avoids expanding concrete module pullbacks during elaboration.
-(blueprint: def-pc-overlap-pair-canonical-comparisons). -/
+Its generic formula avoids expanding concrete module pullbacks during elaboration. -/
 def overlapPairSquare {X Y : Scheme.{u}} (U : X.OpenCover.{u})
     (N : (a : U.I₀) → (U.X a).Modules) (p : Y ⟶ X)
     (D : modulesPseudofunctor.DescentData (U.pullback₁ p).f)

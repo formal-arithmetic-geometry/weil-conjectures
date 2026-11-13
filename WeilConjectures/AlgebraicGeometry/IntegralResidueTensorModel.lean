@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 /-! # A common homotopy-level model for the residue tensor square
 
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -43,22 +42,19 @@ local instance instBraidedCategoryDerivedCategory_sheaf :
 attribute [local instance] CategoryTheory.derivedTensorPresentationBraiding
 
 /-- The existing homotopy monoidal structure, with its base-category data fixed.
-Source: the homotopy tensor construction used by `tensorModelTarget` below.
-(auxiliary; not a blueprint node) -/
+Source: the homotopy tensor construction used by `tensorModelTarget` below. -/
 noncomputable abbrev tensorModelHomotopyMonoidal :
     MonoidalCategory (HomotopyCategory D (.up ℤ)) :=
   inferInstance
 
 /-- The fixed coefficient concentrated in degree zero in the homotopy category.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons.
-(auxiliary; not a blueprint node) -/
+Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons. -/
 noncomputable abbrev tensorModelCoefficient (B : C) :=
   (HomotopyCategory.quotient C (.up ℤ)).obj
     ((HomologicalComplex.single C (.up ℤ) 0).obj B)
 
 /-- The standard comparison between the two degree-zero presentations.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons.
-(auxiliary; not a blueprint node) -/
+Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons. -/
 noncomputable def tensorModelCoefficientIso (B : C) :
     (DerivedCategory.singleFunctor C 0).obj B ≅
       DerivedCategory.Qh.obj (tensorModelCoefficient B) :=
@@ -73,8 +69,7 @@ Expand the exact single comparison, use the counit factorization through the
 map on derived categories, and apply naturality of the single/quotient comparisons.
 The inverse coefficient isomorphism is the resulting homotopy comparison.
 
-Source: Bhatt--Scholze, Remark 6.8.15; exact-functor single comparison.
-(auxiliary; not a blueprint node) -/
+Source: Bhatt--Scholze, Remark 6.8.15; exact-functor single comparison. -/
 theorem tensorModelCoefficientIso_counit (F : C ⥤ D) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F] (B : C) (B' : D)
     (e : F.obj B ≅ B') :
@@ -111,8 +106,7 @@ theorem tensorModelCoefficientIso_counit (F : C ⥤ D) [F.Additive]
 
 /-- The ordinary tensor model built from a functor on derived categories and
 its counit to the homotopy image of F. The definition uses those named data directly.
-Source: Bhatt--Scholze, Remark 6.8.15; the standard tensor/counit comparison.
-(auxiliary; not a blueprint node) -/
+Source: Bhatt--Scholze, Remark 6.8.15; the standard tensor/counit comparison. -/
 @[irreducible] noncomputable def tensorModelTargetWith
     (G : DerivedCategory C ⥤ DerivedCategory D)
     (γ : DerivedCategory.Qh ⋙ G ⟶
@@ -133,8 +127,7 @@ Source: Bhatt--Scholze, Remark 6.8.15; the standard tensor/counit comparison.
 
 /-- Compare the derived target with the ordinary tensor after applying F.
 The final tensor factor is K-flat on the representatives used below.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons.
-(auxiliary; not a blueprint node) -/
+Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons. -/
 @[irreducible] noncomputable def tensorModelTarget (B : C) (P : HomotopyCategory C (.up ℤ)) :
     F.leftDerivedFunctor.obj (DerivedCategory.Qh.obj P) ⊗
         F.leftDerivedFunctor.obj ((DerivedCategory.singleFunctor C 0).obj B) ⟶
@@ -144,8 +137,7 @@ Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor compariso
   tensorModelTargetWith F F.leftDerivedFunctor F.leftDerivedFunctorCounit B P
 
 /-- The target comparison is invertible on representatives with K-flat image.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons.
-(auxiliary; not a blueprint node) -/
+Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons. -/
 theorem tensorModelTarget_isIso (B : C) (P : HomotopyCategory C (.up ℤ))
     (hP : F.kFlatMap P) : IsIso (tensorModelTarget F B P) := by
   have := isIso_μNatTrans_Qh_app_app_of_kFlat
@@ -163,8 +155,7 @@ variable [F.IsLeftAdjoint] [F.Monoidal]
 
 /-- The common map: the tensor counit, the exact-F counit, then the ordinary
 comonoidal comparison.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons.
-(auxiliary; not a blueprint node) -/
+Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons. -/
 @[irreducible] noncomputable def tensorModelMapWith
     (G : DerivedCategory C ⥤ DerivedCategory D)
     (γ : DerivedCategory.Qh ⋙ G ⟶
@@ -223,8 +214,7 @@ moves the coefficient to the first factor. The tensor/counit square then replace
 comparison by the ordinary tensor map. The tensor presentation's defining equation and
 naturality of the counit give the displayed model map.
 
-Source: Bhatt--Scholze, Remark 6.8.15; the canonical derived tensor/counit equations.
-(auxiliary; not a blueprint node) -/
+Source: Bhatt--Scholze, Remark 6.8.15; the canonical derived tensor/counit equations. -/
 theorem CategoryTheory.Functor.tensorModelRoute_fac (F : C ⥤ D) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [F.IsLeftAdjoint] [F.Monoidal]

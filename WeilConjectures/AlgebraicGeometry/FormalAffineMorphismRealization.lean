@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 /-! # Realization of affine formal morphisms over the completed base
 
 Source: Stacks Project, Tag 087W (affine equivalence), Tag 01XZ (finite modules).
-(blueprint: lem-weil-pbc-formal-affine-morphism-realization)
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ namespace AlgebraicGeometry
 
 /-- Every formal morphism has a coherent realization over the completed affine base.
 Source: Stacks Project, Tags 087W and 01XZ.
-(blueprint: lem-weil-pbc-formal-affine-morphism-realization)
 
 Proof: Restrict both formal systems to the affine open U, identifying U with Spec B
 by its canonical affine isomorphism. Restriction commutes with ideal quotients, so

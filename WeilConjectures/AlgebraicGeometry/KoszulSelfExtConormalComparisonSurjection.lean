@@ -97,7 +97,6 @@ set_option backward.isDefEq.respectTransparency false in
 
 Source: Stacks Project, Tag 0BQY, the local Hom computation; Modules on Sites,
 Tag 03EM, gluing linear morphisms.
-(blueprint: lem-sc-koszul-self-ext-conormal-comparison-surjection).
 
 Proof: Obtain a neighborhood of each point and the compatible maps supplied by the
 local comparison theorem. These neighborhoods generate a covering sieve of the top

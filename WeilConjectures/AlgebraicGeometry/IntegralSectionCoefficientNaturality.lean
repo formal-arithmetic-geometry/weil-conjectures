@@ -248,8 +248,7 @@ private theorem reconstructedCoefficientPullback
 
 /-- Compare the detailed completed ring directly with the reconstructed internal ring.
 Both factors are the prescribed, projection-normalized comparisons.
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3). -/
 def integralDetailedSectionRingComparison (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :
@@ -267,7 +266,6 @@ or local isomorphism classes.
 
 Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), the coefficient
 square in the integral constructibility comparison; Stacks, Tags 00YV and 03D2.
-(auxiliary; not a blueprint node).
 
 Proof: forget commutative ring sheaves to ring sheaves and lift the fixed source
 comparison through this fully faithful functor. For the reconstructed coefficient

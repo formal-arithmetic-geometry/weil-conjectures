@@ -13,7 +13,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Recovering local perfect models from an open restriction
 
 Source: Stacks Project, Definition 08CM and the locality argument in Tag 08DP.
-(blueprint: lem-pc-open-restriction-perfect-local-models).
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A perfect restriction to U supplies ambient strictly perfect models at points of U.
 Source: Stacks Project, Definition 08CM, used in the proof of Tag 08DP.
-(blueprint: lem-pc-open-restriction-perfect-local-models).
 
 Proof: At x in U, choose the strictly perfect model on an open W of U given by
 perfectness of the restriction. The image of W under the open inclusion is an open

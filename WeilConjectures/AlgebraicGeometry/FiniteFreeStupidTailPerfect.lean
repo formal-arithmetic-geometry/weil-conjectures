@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Homology.Embedding.StupidTrunc
 /-! # Perfectness of finite-free stupid tails
 
 Source: Stacks Project, Tag 08EG, finite-free tail in the proof of Lemma 36.13.6;
-Definition 08C4 (blueprint: lem-sc-finite-free-stupid-tail-perfect).
+Definition 08C4.
 -/
 
 @[expose] public section
@@ -30,7 +30,6 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 /-- Cutting off a bounded-above finite-free sheaf complex below any integer gives a
 perfect derived object. Affineness is unnecessary for this part of the construction.
 Source: Stacks Project, Tag 08EG, bounded finite-free tail; Definition 08C4.
-(blueprint: lem-sc-finite-free-stupid-tail-perfect).
 
 Proof: The stupid tail is zero below r, and above the supplied upper bound by the
 termwise truncation isomorphisms. Its nonzero terms remain finite free. On the top

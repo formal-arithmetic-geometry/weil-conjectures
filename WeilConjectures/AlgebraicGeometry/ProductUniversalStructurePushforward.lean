@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 # Universal structure pushforward for a product family
 
 Source: Stacks Project, Tag 0BF3, the hypotheses for applying Tag 0BF2 to the product.
-(blueprint: lem-sc-product-universal-structure-pushforward).
 -/
 
 @[expose] public section
@@ -71,7 +70,6 @@ private theorem isIso_tensorUnit_iff_app {A B : Scheme.{u}} (a : A ⟶ B) :
 
 /-- Universal structure pushforward is preserved by fibre products of families.
 Source: Stacks Project, Tags 0BDP and 0BF3, product-family application of Tag 0BF2.
-(blueprint: lem-sc-product-universal-structure-pushforward).
 
 Proof: first compare the tensor-pullback unit with the ordinary pullback unit by
 uniqueness of left adjoints. Compose it with the direct image of the canonical

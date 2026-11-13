@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.QCohAcyclicDerivedSectionsComparison
 /-! # Čech totalization of a quasi-coherent resolution
 
 Source: Stacks Project, Cohomology, Lemma 08C2.
-(blueprint: lem-sc-qcoh-alternating-cech-resolution-quasi-iso)
 -/
 
 @[expose] public section
@@ -223,7 +222,6 @@ private theorem alternatingCechDouble_strictlyLE
 quasi-isomorphism, without boundedness of the coefficient complex.
 
 Source: Stacks Project, Cohomology, Lemma 08C2, affine-basis application using Tag 01XB.
-(blueprint: lem-sc-qcoh-alternating-cech-resolution-quasi-iso).
 
 Proof: Apply the affine-open section comparison to every increasing tuple
 intersection. Project the actual extended column to its tuple section complexes;

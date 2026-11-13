@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.PointLanFiniteProducts
 # Affine evaluation of the point left Kan extension
 
 Source: Bhatt–Scholze, Lemma 4.2.13(1), proof; RefactorInstruction, Section 4,
-Lemma point-eval, first paragraph of proof
-(auxiliary; not a blueprint node).
+Lemma point-eval, first paragraph of proof.
 -/
 
 @[expose] public section
@@ -30,16 +29,14 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- Weak contractibility, expressed by sections of epimorphisms of set sheaves.
-Source: Bhatt–Scholze, Section 4.2; RefactorInstruction, Lemma point-eval
-(auxiliary; not a blueprint node). -/
+Source: Bhatt–Scholze, Section 4.2; RefactorInstruction, Lemma point-eval. -/
 def PointLanWeaklyContractible (X : Scheme.{u}) (U : X.ProEt) : Prop :=
   ∀ (F G : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))) (f : F ⟶ G),
     Epi f → Function.Surjective (f.hom.app (op U))
 
 /-- The actual connected-component quotient, with its quotient topology, bundled as profinite.
 The topological structure proofs are the recorded component-map theorem.
-Source: Bhatt–Scholze, Lemma 4.2.13(1); RefactorInstruction, Lemma point-eval
-(auxiliary; not a blueprint node). -/
+Source: Bhatt–Scholze, Lemma 4.2.13(1); RefactorInstruction, Lemma point-eval. -/
 def pointLanComponents (X : Scheme.{u}) (U : X.ProEt) (hU : IsAffine U.left)
     (wU : PointLanWeaklyContractible X U) : Profinite.{u} :=
   @Profinite.of (ConnectedComponents U.left) _
@@ -53,8 +50,7 @@ The normalization on every Kan cocone map specifies the evaluation comparison.
 Naturality is simultaneous in coefficient sheaves and in weakly contractible affine objects.
 The last clause says exactly that the restriction cone for every finite coproduct is a
 product cone, also for an empty index type.
-Source: Bhatt–Scholze, Lemma 4.2.13(1); RefactorInstruction, Lemma point-eval
-(auxiliary; not a blueprint node). -/
+Source: Bhatt–Scholze, Lemma 4.2.13(1); RefactorInstruction, Lemma point-eval. -/
 def PointLanAffineEvaluationProperty (X : Scheme.{u}) (C : Type w) [Category.{v} C] :
     Prop :=
   ∃ b : ∀ (U : X.ProEt) (hU : IsAffine U.left) (wU : PointLanWeaklyContractible X U)
@@ -112,8 +108,7 @@ def PointLanAffineEvaluationProperty (X : Scheme.{u}) (C : Type w) [Category.{v}
         Nonempty (IsLimit (Fan.mk (P.obj (op c.pt)) (fun i ↦ P.map (c.inj i).op))))
 
 /-- The connected-component equivalence supplies the comparison maps and their two naturalities.
-Source: Bhatt–Scholze, Lemma 4.2.13(1), first paragraph.
-(auxiliary; not a blueprint node). -/
+Source: Bhatt–Scholze, Lemma 4.2.13(1), first paragraph. -/
 private theorem point_lan_affine_evaluation_b (X : Scheme.{u}) :
     ∃ b : ∀ (U : X.ProEt) (hU : IsAffine U.left) (wU : PointLanWeaklyContractible X U)
       (S : Profinite.{u}),
@@ -255,8 +250,7 @@ both arguments, preserve the coefficient operations, and send finite disjoint un
 (including the empty one) to products.
 
 Source: Bhatt–Scholze, Lemma 4.2.13(1), proof, first two sentences;
-RefactorInstruction, Section 4, Lemma point-eval, proof, first paragraph
-(auxiliary; not a blueprint node).
+RefactorInstruction, Section 4, Lemma point-eval, proof, first paragraph.
 
 Proof:
 1. Use lem-weil-pbc-proetale-point-components-maps to obtain the profinite component

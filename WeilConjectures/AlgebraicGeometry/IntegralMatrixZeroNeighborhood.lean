@@ -70,7 +70,6 @@ after refining the supplied free rational-cokernel cover.
 
 Source: Bhatt--Scholze, Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1),
 and exact geometric-field evaluation (Example 4.1.10).
-(auxiliary; not a blueprint node)
 
 Proof: choose the cover supplied by the hypothesis and a free basis of the rational
 cokernel on each member, of rank q. Pull the rational cokernel presentation and this

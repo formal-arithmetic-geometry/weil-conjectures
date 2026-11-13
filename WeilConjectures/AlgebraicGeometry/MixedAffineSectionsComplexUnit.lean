@@ -49,7 +49,6 @@ noncomputable def mixedSectionsComplexUnit (S : Scheme.{u})
 
 /-- Affine chart complexes are acyclic for the unbounded sections comparison.
 Source: Stacks Project, Tag 06Z0; affineTildeDerivedSectionsUnit_isIso.
-(blueprint: lem-sc-mixed-affine-chart-sections-complex-unit-isIso).
 
 Proof: Apply affineTildeDerivedSectionsUnit_isIso over the global ring of S.
 Transport its comparison along the exact restriction equivalence induced by S.toSpecΓ.

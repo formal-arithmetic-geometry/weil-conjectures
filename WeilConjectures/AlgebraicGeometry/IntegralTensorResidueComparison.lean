@@ -12,11 +12,6 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsFlat
 
 /-!
 # Monoidal first-residue reduction
-
-Source: literature/blueprint/latest/blueprint/part-six-operations/sec-constructibility-upper-shriek/
-sec-ladic-summary/sec-i-heart/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md,
-“The stratum”, displayed residue tensor isomorphism
-(blueprint: lem-sfb-integral-tensor-residue-comparison).
 -/
 
 @[expose] public section
@@ -33,9 +28,6 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Derived reduction of an ordinary tensor is the tensor of the two reductions
 over the residue coefficient ring, rather than over the integral coefficient ring.
-
-Source: det-lem-int-tensor-product.proof.md, “The stratum”, displayed formula.
-(blueprint: lem-sfb-integral-tensor-residue-comparison).
 
 Proof: compute the two derived objects on K-flat representatives P and Q. Ordinary
 extension of scalars along the fixed quotient O_E -> O_E/pi_E is strong monoidal:

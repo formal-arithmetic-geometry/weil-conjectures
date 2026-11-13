@@ -17,7 +17,6 @@ import Mathlib.Algebra.Category.Grp.EpiMono
 /-! # Local finite free lifting
 
 Source: Stacks Project, Modules, Tags 01B5 and 01B8.
-(blueprint: lem-weil-pbc-module-finite-free-local-lift).
 -/
 
 @[expose] public section
@@ -193,7 +192,6 @@ set_option backward.isDefEq.respectTransparency false in
 map to the source whose composite is still an epimorphism.
 
 Source: Stacks Project, Modules, Definition 01B5 and Lemma 01B8.
-(blueprint: lem-weil-pbc-module-finite-free-local-lift).
 
 Proof: On K choose finite local generators for H using its finite type hypothesis.
 Each generator lifts locally through p, since an epimorphism of module sheaves

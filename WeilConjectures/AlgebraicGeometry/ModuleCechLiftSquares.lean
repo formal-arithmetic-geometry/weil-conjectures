@@ -28,7 +28,7 @@ local instance localInst_ModuleCechLiftSquares_1 (R : Type u) [Ring R] (J : Type
 /-- Applying the Cech functor and totalization to a lift of a module morphism gives
 commuting squares with both comparison augmentations.
 Source: Stacks Project, Cohomology of Sheaves, Tag 01EQ, proof and final functoriality
-assertion (blueprint: lem-sc-module-cech-lift-squares).
+assertion.
 
 Proof: In total degree n, alpha lands in the (n,0) summand. The total map on this
 summand is the Cech map of the nth component of the lift. Restriction of a global

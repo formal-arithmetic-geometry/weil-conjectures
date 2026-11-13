@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryExceptionalScalarCoefficientPul
 import WeilConjectures.AlgebraicGeometry.OrdinaryExceptionalScalarTensorData
 
 /-! Ordered constant-tensor normalization of the inverse coefficient comparison.
-Source: Zheng, Construction 2.26; the normalized proper coefficient projection formula
-(blueprint: lem-sfb-ordinary-exceptional-tensor-projection-normalization). -/
+Source: Zheng, Construction 2.26; the normalized proper coefficient projection formula. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -26,8 +25,7 @@ compatible with the two pullback identifications, then the scalar-coefficient or
 projection map, followed by these identifications, is the ordered constant projection
 isomorphism `properConstantProjectionIso` for the constant complex `B[0]`.
 Source: the projection clause of properFiniteCoefficientExtension and Zheng,
-Construction 2.26
-(blueprint: lem-sfb-ordinary-exceptional-tensor-projection-normalization).
+Construction 2.26.
 
 Proof: naturality of the signed derived symmetry and of the projection map in the
 coefficient, followed by the assumed compatibility of the pullback identifications. -/
@@ -83,8 +81,7 @@ theorem ordinaryExceptional_orderedProjection_transport
 proper coefficient comparison is the inverse ordered constant projection.
 
 Source: the projection clause of properFiniteCoefficientExtension and Zheng,
-Construction 2.26
-(blueprint: lem-sfb-ordinary-exceptional-tensor-projection-normalization).
+Construction 2.26.
 
 Proof: apply the projection equation for scalarMate, and cancel its two tensor symmetry
 isomorphisms. Express the coefficient object B as the constant sheaf of its restricted

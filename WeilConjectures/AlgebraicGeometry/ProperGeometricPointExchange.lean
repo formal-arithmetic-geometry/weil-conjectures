@@ -23,8 +23,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- On an algebraically closed field the identity neighbourhood computes the stalk.
-Source: Stacks Project, Tag 03QO.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 03QO. -/
 private theorem isIso_geometricPointGlobalGerm
     (Λ : Type (u + 1)) [CommRing Λ] (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
     (G : Sheaf (Spec (.of Ω)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -69,7 +68,6 @@ private theorem isIso_geometricPointGlobalGerm
 /-- Proper exchange for base change to an algebraically closed field.
 
 Source: Stacks Project, Tags 0A3T and 0A3U, degree-zero stalk calculation.
-(auxiliary; not a blueprint node).
 
 Proof: forget the module structure and compute the stalk of the direct image as the
 filtered colimit of sections on pointed affine etale neighbourhoods. Continuity of

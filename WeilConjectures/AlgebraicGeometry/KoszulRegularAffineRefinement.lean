@@ -15,8 +15,7 @@ import Mathlib.RingTheory.Flat.Localization
 
 /-! # Refining regular affine charts
 
-Source: Stacks Project, Tags 062H and 01I1.
-(blueprint: new-s3-koszul-regular-affine-refinement). -/
+Source: Stacks Project, Tags 062H and 01I1. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry
 
 Source: Stacks Project, Tag 062H, flat base change of Koszul regularity;
 Tag 01I1, distinguished opens form a basis.
-(blueprint: new-s3-koszul-regular-affine-refinement).
 
 Proof: Choose a distinguished open D(s) of U containing i(z) and contained in
 U'. The ring of its sections is the localization of Gamma(Y,U) at s. Restrict

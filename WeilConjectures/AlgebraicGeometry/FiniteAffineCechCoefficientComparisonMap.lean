@@ -27,8 +27,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Sections of an open-restricted direct image are sections on the corresponding
-intersection. Source: Stacks Project, Tag 0097 (restriction and direct image). 
-(blueprint: lem-pc-finite-affine-cech-coefficient-comparison-map)
+intersection. Source: Stacks Project, Tag 0097 (restriction and direct image).
 -/
 def coefficientSupportIso {X S : Scheme.{u}} (f : X ⟶ S) (M : X.Modules)
     (W : X.Opens) (B : S.Opens) :
@@ -40,8 +39,7 @@ def coefficientSupportIso {X S : Scheme.{u}} (f : X ⟶ S) (M : X.Modules)
         Scheme.Opens.opensRange_ι])).op
 
 /-- The support identification commutes with restrictions of the base open.
-Source: Stacks Project, Tag 0097. 
-(blueprint: lem-pc-finite-affine-cech-coefficient-comparison-map)
+Source: Stacks Project, Tag 0097.
 -/
 theorem coefficientSupportIso_naturality {X S : Scheme.{u}} (f : X ⟶ S)
     (M : X.Modules) (W : X.Opens) {B C : S.Opens} (i : B ⟶ C)
@@ -65,8 +63,7 @@ theorem coefficientSupportIso_naturality {X S : Scheme.{u}} (f : X ⟶ S)
   rfl
 
 /-- The support identification transports the structural scalar action.
-Source: Stacks Project, Tag 0097. 
-(blueprint: lem-pc-finite-affine-cech-coefficient-comparison-map)
+Source: Stacks Project, Tag 0097.
 -/
 theorem coefficientSupportIso_smul {X S : Scheme.{u}} (f : X ⟶ S)
     (M : X.Modules) (W : X.Opens) (B : S.Opens) (b : Γ(S, B))
@@ -91,8 +88,7 @@ theorem coefficientSupportIso_smul {X S : Scheme.{u}} (f : X ⟶ S)
   rfl
 
 /-- The generator section of the pullback of an associated module.
-Source: Stacks Project, Tags 01I9 and 01IA, adjunction units. 
-(blueprint: lem-pc-finite-affine-cech-coefficient-comparison-map)
+Source: Stacks Project, Tags 01I9 and 01IA, adjunction units.
 -/
 def coefficientGenerator {S S' : Scheme.{u}} (g : S' ⟶ S)
     (N : ModuleCat.{u} Γ(S, ⊤)) (s : N) :
@@ -107,8 +103,7 @@ def coefficientGenerator {S S' : Scheme.{u}} (g : S' ⟶ S)
         ((pullback S.toSpecΓ).obj (tilde N))).app ⊤ e'')
 
 /-- The generator obtained by pulling a section back to an inverse-image open.
-Source: Stacks Project, Tag 0097, the pullback adjunction unit. 
-(blueprint: lem-pc-finite-affine-cech-coefficient-comparison-map)
+Source: Stacks Project, Tag 0097, the pullback adjunction unit.
 -/
 def coefficientPullbackGenerator {X X' : Scheme.{u}} (F : X.Modules)
     (U : X.Opens) (Z : U.toScheme.Opens) (g' : X' ⟶ X)
@@ -119,8 +114,7 @@ def coefficientPullbackGenerator {X X' : Scheme.{u}} (F : X.Modules)
       ((F.restrictAppIso U.ι Z).hom s))
 
 /-- Inverse image commutes with the nonempty intersections indexing coefficients.
-Source: Stacks Project, Tag 02KE, the intersection calculation. 
-(blueprint: lem-pc-finite-affine-cech-coefficient-comparison-map)
+Source: Stacks Project, Tag 02KE, the intersection calculation.
 -/
 theorem coefficientIntersection_preimage {X X' : Scheme.{u}} (U : X.Opens)
     {r : ℕ} (V : Fin r → U.toScheme.Opens) (g' : X' ⟶ X)
@@ -154,7 +148,6 @@ theorem coefficientIntersection_preimage {X X' : Scheme.{u}} (U : X.Opens)
 No invertibility is asserted, and no affine or quasi-coherence hypothesis is required.
 Source: Stacks Project, Tag 02KE, the termwise map in Lemma 30.5.2; Tags 01I9,
 01IA and 0097 for its construction from adjunction units.
-(blueprint: lem-pc-finite-affine-cech-coefficient-comparison-map).
 
 Proof: Put Y = f inverse image U and A = Gamma(U,O). For each open Z of Y,
 form the module sheaf P_Z = (Z -> U)_*(F|Z). Restriction between opens gives

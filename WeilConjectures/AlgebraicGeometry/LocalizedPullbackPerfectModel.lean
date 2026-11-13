@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Computing derived pullback on a local strictly perfect model
 
 Source: Stacks Project, Tags 09UA, 08DW and 06YJ.
-(blueprint: lem-pc-localized-pullback-perfect-model).
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Ordinary pullback between the localized module sites, constructed by transporting
 scheme-module pullback across the open-site equivalences.
-Source: Stacks Project, Tags 0095 and 08DW
-(blueprint: lem-pc-localized-pullback-perfect-model). -/
+Source: Stacks Project, Tags 0095 and 08DW. -/
 noncomputable def Scheme.Modules.localizedPullback {T X : Scheme.{u}} (g : T ⟶ X)
     (U : X.Opens) :
     SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ⥤
@@ -102,7 +100,6 @@ open. This only identifies the derived object; preservation of strict perfectnes
 ordinary pulled complex is a separate, elementary argument.
 Source: Stacks Project, Tag 09UA, the alternative proof via Tag 09U7;
 Tag 08DW (restriction comparison), and Tags 06YD and 06YJ (flat computation).
-(blueprint: lem-pc-localized-pullback-perfect-model).
 
 Proof: put V = g inverse-image U and transport K through Modules.overEquiv U to a
 complex on U.toScheme. This equivalence identifies the unit sheaves and preserves

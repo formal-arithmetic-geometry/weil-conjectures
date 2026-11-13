@@ -19,8 +19,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # The geometric dictionary for stalkwise formal functions
 
-Source: Stacks Project, Tag 02OD, proof before applying Theorem 02OC
-(blueprint: lem-weil-pbc-formal-functions-local-dictionary).
+Source: Stacks Project, Tag 02OD, proof before applying Theorem 02OC.
 
 This identifies uncompleted cohomology and the finite quotient systems. It does not
 assert a comparison of completed cohomology with an inverse limit.
@@ -37,8 +36,7 @@ open CategoryTheory CategoryTheory.Limits Opposite IsLocalRing
 namespace AlgebraicGeometry
 
 /-- The geometric identifications used before applying the theorem on formal functions.
-Source: Stacks Project, Tag 02OD, proof, together with Tags 02KH, 01E4, 089W and 01FB
-(blueprint: lem-weil-pbc-formal-functions-local-dictionary).
+Source: Stacks Project, Tag 02OD, proof, together with Tags 02KH, 01E4, 089W and 01FB.
 
 Proof: Put A = O_(Y,y), and base change f along the flat canonical map Spec A → Y.
 A is Noetherian, the base-changed map is proper, and the pulled-back module is coherent:

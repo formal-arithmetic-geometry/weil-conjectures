@@ -22,8 +22,7 @@ import WeilConjectures.AlgebraicGeometry.KoszulRegularImmersionExtSheafNonnegati
 
 /-! # Cohomology sheaves of a Koszul-regular immersion
 
-Source: Stacks Project, Tag 0BQZ, proof of Lemma 48.15.5
-(blueprint: lem-sc-koszul-regular-immersion-ext-sheaf).
+Source: Stacks Project, Tag 0BQZ, proof of Lemma 48.15.5.
 -/
 
 @[expose] public section
@@ -37,8 +36,7 @@ namespace AlgebraicGeometry
 /-- The scalar Ext sheaf is the direct image of the determinant on the degree-q
 rank stratum. This identifies sheaves, without reconstructing a derived object.
 
-Source: Stacks Project, Tag 0BQZ, proof of Lemma 48.15.5
-(blueprint: lem-sc-koszul-regular-immersion-ext-sheaf).
+Source: Stacks Project, Tag 0BQZ, proof of Lemma 48.15.5.
 
 Proof:
 1. Near each point of Z choose an affine chart with a Koszul-regular sequence

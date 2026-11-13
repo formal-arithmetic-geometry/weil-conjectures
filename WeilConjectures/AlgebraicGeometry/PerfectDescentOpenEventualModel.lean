@@ -102,7 +102,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Descent on one original open supplies models on its inverse image at every later stage.
 Source: Stacks Project, Tag 09RF, choice and subsequent base change of each local model.
-(blueprint: lem-pc-perfect-descent-open-eventual-model).
 
 Proof: Put O = f inverse W and restrict the limit perfect object to the inverse image of O.
 The presentation O.toScheme → Xi is an open immersion with image W, because W is contained

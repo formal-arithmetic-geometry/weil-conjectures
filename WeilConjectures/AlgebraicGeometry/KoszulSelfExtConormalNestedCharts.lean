@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.SelfExtTorDualChart
 
 /-! # Naturality of the regular affine Koszul comparisons
 
-Source: Stacks Project, Tags 0BQY and 062I.
-(blueprint: new-s3-koszul-conormal-nested-charts). -/
+Source: Stacks Project, Tags 0BQY and 062I. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -67,7 +66,6 @@ private theorem compatible_inverse_family
 
 Source: Stacks Project, Tag 0BQY, the zero-differential Hom calculation,
 and Tag 062I, the conormal basis.
-(blueprint: new-s3-koszul-conormal-nested-charts).
 
 Proof: Factor the comparison through the actual self-Tor sheaf
 Q = i*H^{-n}(B[0] tensor^L B[0]), using the fixed derived tensor on Y.

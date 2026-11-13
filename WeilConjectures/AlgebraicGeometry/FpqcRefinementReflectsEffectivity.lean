@@ -47,7 +47,6 @@ private noncomputable def pullbackDatum {Y Y' : Scheme.{u}} (g : Y' ⟶ Y)
 
 /-- Effectivity descends through a refinement of singleton fpqc coverings.
 Source: Stacks Project, Descent, Tag 02W3, affine-base proof, using Tag 02W0.
-(blueprint: lem-galois-fpqc-refinement-reflects-effectivity)
 
 Choose an effective object W over S for E. The canonical datum on W ×_S X has
 pullback to X' canonically identified with E through the effective pullback square.

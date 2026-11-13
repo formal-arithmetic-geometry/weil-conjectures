@@ -37,7 +37,6 @@ attribute [local irreducible] resolutionSectionClass moduleCohomologyFMap
 /-- The normalized target edge is bijective and respects scalars and smaller opens.
 Source: Stacks Project, Tag 01XK, Lemma 30.4.6; Tag 01E4, Lemma 20.7.3;
 Tag 01FB, Remark 20.14.2.
-(blueprint: new-flat-base-change-target-open-edge)
 
 Proof: Put f' = pullback.fst g f and G = tensorPullback(g') F. Restrict J to
 L = f' inverse W termwise. Restriction is exact and preserves injectives, so its

@@ -34,7 +34,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Transport degree-zero formal functions to an arbitrary affine open of the base.
 Source: Stacks Project, Theorem 02OC and Lemma 088B.
-(blueprint: lem-weil-pbc-formal-functions-affine-pushforward-sections)
 
 Proof: Write U as Spec A using its affine chart. Since Y is Noetherian, A is Noetherian.
 Base change f along U -> Y; the resulting morphism to U is proper. Restrict F to the

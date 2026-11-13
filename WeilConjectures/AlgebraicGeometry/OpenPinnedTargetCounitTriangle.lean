@@ -78,8 +78,7 @@ variable [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
   [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]
 
 /-- Termwise comparison for restricting the target of a composite tensor pullback.
-Source: Stacks Project, Tags 08DW and 0D5S.
-(blueprint: lem-pc-open-pinned-target-counit-triangle). -/
+Source: Stacks Project, Tags 08DW and 0D5S. -/
 def openPinnedHomotopyTargetCompositionIso
     {X X' : Scheme.{u}} (k : X' ⟶ X) (U' : X'.Opens) :
     (Scheme.Modules.tensorPullback (U'.ι ≫ k)).mapHomotopyCategory (.up ℤ) ≅
@@ -102,7 +101,6 @@ attribute [local irreducible] singleComplexOpenPullbackIso openPinnedTensorOpenI
 -- The four factorization equations compare several selected localization functors.
 /-- The target-open leg of the derived counit composition calculation.
 Source: Stacks Project, Tags 08DW and 0D5S.
-(blueprint: lem-pc-open-pinned-target-counit-triangle).
 Proof: naturality of the open-pullback comparison moves the counit for k
 past its component. The factorization equation of leftDerivedUnique identifies
 that comparison followed by the exact restriction factor with the counit for

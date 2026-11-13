@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleModuleOfFiniteCoefficientS
 
 Source: Stacks Project, Tag 095R, and the module refinement argument in the
 normalization exact-sequence blueprint, unit `sk-thm-p1`.
-(blueprint: lem-weil-pbc-finite-pushforward-finite-stalk-module)
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ namespace AlgebraicGeometry.Scheme
 
 Source: Stacks Project, Tag 095R, together with the module refinement argument in
 `sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md`.
-(blueprint: lem-weil-pbc-finite-pushforward-finite-stalk-module)
 
 Proof: The source is Noetherian since it is finite over the Noetherian target.
 On every stratum of a module constructible stratification, discard empty members of

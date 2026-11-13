@@ -118,7 +118,6 @@ private theorem local_germ_smul {Y : Scheme.{u}} (y : Y)
 /-- Scalar compatibility of the specified additive cohomology-to-stalk map.
 Source: Stacks Project, Tag 01E4, Lemma 20.7.3, the section-complex comparison;
 Tag 02OD, Lemma 30.20.7, the displayed local-stalk/global-cohomology equality.
-(blueprint: lem-weil-pbc-local-direct-image-stalk-class-smul)
 
 Proof: Put A = O_{Y,y}, c = fromSpecStalk y, f' = pullback.fst c f, and
 F' = (tensorPullback (pullback.snd c f)).obj F. Represent r by a structure-sheaf

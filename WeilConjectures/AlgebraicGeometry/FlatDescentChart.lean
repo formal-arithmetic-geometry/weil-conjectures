@@ -15,7 +15,6 @@ public import Mathlib.RingTheory.RingHom.Flat
 # Ring data for affine charts in flatness descent
 
 Source: Stacks Project, Limits, proof of Tag 04AI, first paragraph.
-(blueprint: def-weil-pbc-flat-descent-chart).
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- The ring data of one affine triple in the proof of Stacks Tag 04AI.
-(blueprint: def-weil-pbc-flat-descent-chart). -/
+/-- The ring data of one affine triple in the proof of Stacks Tag 04AI. -/
 structure FlatDescentChart (J : Type u) [Preorder J] (j₀ : J) where
   rings : J ⥤ CommRingCat.{u}
   source : CommRingCat.{u}
@@ -39,8 +37,7 @@ structure FlatDescentChart (J : Type u) [Preorder J] (j₀ : J) where
 
 namespace FlatDescentChart
 
-/-- Flatness of the chart's tensor-product map after an arbitrary base-ring map. 
-(blueprint: def-weil-pbc-flat-descent-chart)
+/-- Flatness of the chart's tensor-product map after an arbitrary base-ring map.
 -/
 def baseFlat {J : Type u} [Preorder J] {j₀ : J} (a : FlatDescentChart J j₀)
     {R : CommRingCat.{u}} (q : a.rings.obj j₀ ⟶ R) : Prop :=
@@ -49,15 +46,13 @@ def baseFlat {J : Type u} [Preorder J] {j₀ : J} (a : FlatDescentChart J j₀)
   letI := q.hom.toAlgebra
   (Algebra.TensorProduct.map (Algebra.ofId R R) a.map).toRingHom.Flat
 
-/-- Flatness of a chart at a stage above its initial stage. 
-(blueprint: def-weil-pbc-flat-descent-chart)
+/-- Flatness of a chart at a stage above its initial stage.
 -/
 def stageFlat {J : Type u} [Preorder J] {j₀ : J} (a : FlatDescentChart J j₀)
     (j : J) (h : j₀ ≤ j) : Prop :=
   a.baseFlat (a.rings.map (homOfLE h))
 
-/-- Flatness of the chart over the colimit of its base rings. 
-(blueprint: def-weil-pbc-flat-descent-chart)
+/-- Flatness of the chart over the colimit of its base rings.
 -/
 def limitFlat {J : Type u} [Preorder J] {j₀ : J} (a : FlatDescentChart J j₀) : Prop :=
   a.baseFlat (colimit.ι a.rings j₀)

@@ -20,8 +20,7 @@ import Mathlib.LinearAlgebra.Dual.Lemmas
 /-!
 # Tensor decomposition of a finite Galois field extension
 
-Source: Stacks Project, Fundamental Groups, Tag 03SF
-(blueprint: lem-exc-finite-galois-tensor-decomposition).
+Source: Stacks Project, Fundamental Groups, Tag 03SF.
 -/
 
 @[expose] public section
@@ -83,8 +82,7 @@ and finite-Galois fixed-field nodes). The distinct-linear-factor Chinese remaind
 then gives the displayed tensor isomorphism and its formula on pure tensors. The affine
 tensor/pullback consequence identifies the components and both projection maps. Finally,
 the finite-separable-spectrum etale lemma supplies the site objects, and the finite-coproduct
-sheaf-sections theorem gives the bijection and both restriction formulas (Stacks, Tag 03SF).
-(blueprint: lem-exc-finite-galois-tensor-decomposition) -/
+sheaf-sections theorem gives the bijection and both restriction formulas (Stacks, Tag 03SF). -/
 theorem finiteGaloisTensorDecomposition
     (L E : Type u) [Field L] [Field E] [Algebra L E]
     [FiniteDimensional L E] [IsGalois L E]

@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageC
 /-! # Coefficient forgetting and underived exchange
 
 Source: Stacks Project, Remark 07A7, adjunction-mate construction of exchange.
-(blueprint: lem-weil-pbc-module-abelian-underived-exchange)
 -/
 
 @[expose] public section
@@ -41,7 +40,6 @@ private theorem moduleAbelianUpperStarIso_unit
 /-- The fixed inverse-image mates and direct-image evaluation identities respect exchange.
 
 Source: Stacks Project, Remark 07A7, and Tags 03D2 and 03D3.
-(blueprint: lem-weil-pbc-module-abelian-underived-exchange)
 
 Proof: First use the forward inverse-image comparisons. Apply the adjunction
 bijection for g on abelian sheaves to both sides of the asserted forward

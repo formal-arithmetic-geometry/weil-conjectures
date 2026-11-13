@@ -11,7 +11,6 @@ import WeilConjectures.CategoryTheory.ModuleInverseImageAdjunction
 # Underlying abelian sheaf of the small-model module inverse image
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3,
 `sites-modules.tex`, labels `lemma-pullback-module` and `lemma-adjoint-push-pull-modules`.
-(auxiliary; not a blueprint node).
 -/
 @[expose] public section
 universe u
@@ -20,7 +19,6 @@ namespace AlgebraicGeometry.Scheme
 /-- Forgetting the action on the model-site module pullback gives model-site abelian inverse image.
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3,
 `sites-modules.tex`, labels `lemma-pullback-module` and `lemma-adjoint-push-pull-modules`.
-(auxiliary; not a blueprint node).
 Proof:
 1. Transport the original commutative-ring adjunction through the strict AsSmall
    equivalences and compare its left adjoint with model-site commutative-ring pullback.

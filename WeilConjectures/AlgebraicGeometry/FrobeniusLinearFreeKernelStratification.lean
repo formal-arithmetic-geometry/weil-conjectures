@@ -21,7 +21,6 @@ import WeilConjectures.RingTheory.FrobeniusPolynomialEtale
 # Frobenius-linear fixed points in an affine free frame
 
 Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb.
-(blueprint: lem-fd-frobenius-linear-free-kernel-stratification).
 -/
 
 @[expose] public section
@@ -38,7 +37,6 @@ namespace AlgebraicGeometry.Scheme
 
 Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb,
 polynomial fixed-point representation and application of Tag 03S0.
-(blueprint: lem-fd-frobenius-linear-free-kernel-stratification).
 
 Proof: the supplied frame and its dual give coordinates on every étale test object.
 Naturality of the tensor/abstract pullback comparison makes these coordinates commute

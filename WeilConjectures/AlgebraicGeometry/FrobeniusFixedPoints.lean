@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 # Frobenius-fixed geometric points
 
 Let `X` be a quasi-compact scheme, locally of finite type over a finite field `K` with `q`
-elements. The arithmetic Frobenius `σ : x ↦ x ^ q` of `K̄` acts on the geometric points
+elements. The arithmetic Frobenius `σ: x ↦ x ^ q` of `K̄` acts on the geometric points
 `Spec K̄ → X` by coordinates, and its fixed points are the `K`-rational points. We show that
 there are only finitely many of them: on an affine chart `Spec R` with `R` of finite type over
 `K`, a fixed point is a `K`-algebra map `R → K̄` with values in the fixed field `K` of `σ`, so
@@ -29,8 +29,7 @@ it is determined by its values on finitely many generators of `R`.
 
 ## Blueprint
 
-These are the finiteness step `A^σ = A₀(k₀)` finite of blueprint
-`prop-av-tate-no-frobenius-fixed`.
+These are the finiteness step `A^σ = A₀(k₀)` finite of
 -/
 
 @[expose] public section
@@ -49,7 +48,7 @@ points lie in `K`. Then only finitely many `Ω`-points of `X` over `K` lying in 
 `Spec R` are fixed by `σ`: such a point is a `K`-algebra map `R → Ω` with values in `K`, so it
 is determined by its values in `K` on finitely many generators of `R`.
 
-This is the chart computation of blueprint `prop-av-tate-no-frobenius-fixed`. -/
+This is the chart computation of -/
 theorem finite_setOf_spec_map_comp_eq_self_of_isOpenImmersion [Finite K] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of K)) {R : CommRingCat.{u}} (ι : Spec R ⟶ X) [IsOpenImmersion ι]
     [LocallyOfFiniteType (ι ≫ f)] (σ : Ω →+* Ω)
@@ -147,9 +146,9 @@ theorem finite_setOf_spec_map_comp_eq_self [Finite K] {X : Scheme.{u}} (f : X �
   rw [Subsingleton.elim y x, Scheme.Opens.range_ι]
   exact hxV
 
-/-- Blueprint `prop-av-tate-no-frobenius-fixed` (finiteness step): the geometric points of a
+/-- the geometric points of a
 quasi-compact scheme `X` locally of finite type over a finite field `K` that are fixed by the
-arithmetic Frobenius `σ : x ↦ x ^ #K` of `K̄` form a finite set (they are the `K`-rational
+arithmetic Frobenius `σ: x ↦ x ^ #K` of `K̄` form a finite set (they are the `K`-rational
 points of `X`). -/
 theorem Scheme.finite_setOf_specAlgebraicClosureMap_frobenius_comp_eq_self [Fintype K]
     (X : Over (Spec (.of K))) [CompactSpace X.left] [LocallyOfFiniteType X.hom] :

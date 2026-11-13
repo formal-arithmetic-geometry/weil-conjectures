@@ -24,8 +24,7 @@ set_option linter.unusedVariables false in
 sheaf of derived direct image.
 
 Source: Stacks Project, Cohomology, Tag 0D5X (the unbounded higher-direct-image
-presheaf description), with Tag 0BKJ (sheafification of cohomology)
-(blueprint: new-qcoh-acyclic-sheafification-component).
+presheaf description), with Tag 0BKJ (sheafification of cohomology).
 
 Proof:
 1. Resolve a complex representing E functorially by a K-injective complex I.

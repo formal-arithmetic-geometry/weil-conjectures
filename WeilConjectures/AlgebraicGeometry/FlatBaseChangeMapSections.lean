@@ -35,8 +35,7 @@ and augmented lifts. Its adjoint sends the canonical image of a class on f⁻¹V
 canonical image of its pullback along g' restricted to g'⁻¹(f⁻¹V).
 The local pullback is written as the recorded cohomology h-map of the restricted unit;
 the unit square identifies its target with the restriction of g'^*F.
-Source: Stacks, Tags 02N7, 01E4, 01FB
-(blueprint: lem-weil-pbc-flat-base-change-map-sections).
+Source: Stacks, Tags 02N7, 01E4, 01FB.
 
 Proof: (1) Injective resolutions exist by lem-weil-pbc-scheme-modules-enough-injectives.
 Flat pushforward preserves injectives by

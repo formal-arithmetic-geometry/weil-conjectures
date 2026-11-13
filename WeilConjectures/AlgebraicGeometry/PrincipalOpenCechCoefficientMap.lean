@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 /-! # PrincipalOpenCechCoefficientMap
 
 Source: Stacks Project, Cohomology, Tag 08C1.
-(blueprint: lem-sc-principal-open-cech-coefficient-map).
 -/
 
 @[expose] public section
@@ -39,7 +38,6 @@ private theorem coordinateMap_transport
 
 /-- A separate construction step for the finite subset Čech argument.
 Source: Stacks Project, Cohomology, Tag 08C1, equation (20.40.0.1).
-(blueprint: lem-sc-principal-open-cech-coefficient-map).
 
 Proof: Define the degree-n linear map by τ, coordinatewise section evaluation of
  g in degree n+1-card(S), and τ₁ inverse. To prove the chain equation, transport

@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.GlobalSectionScalarKFlatQuasiIso
 /-! # The localization tensor model after scalar extension from global sections
 
 Source: Stacks Project, algebraization.tex, Tags 0996, 099D(d), 099E.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -196,7 +195,6 @@ family, its transition maps, or the Godement construction.
 
 Source: Stacks Project, algebraization.tex, Tags 0996, 099D(d) and the final paragraph
 of Tag 099E.
-(auxiliary; not a blueprint node).
 
 Proof: write A for the global ring and choose the ordered localization complex C supplied
 by hP for the specified list. Its degree-zero module is A; degree q > 0 is the finite sum

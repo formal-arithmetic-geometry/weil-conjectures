@@ -25,7 +25,6 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 # Degree-one Čech acyclicity of injective étale module sheaves
 
 Source: Stacks Project, Cohomology on Sites, Lemma 03FC, used in Lemma 03FD.
-(blueprint: lem-weil-pbc-injective-etale-module-cech-h1).
 -/
 
 @[expose] public section
@@ -41,9 +40,7 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 /-- The underlying abelian presheaf of an injective module sheaf has vanishing Čech H¹
 on every étale covering, including coverings with an infinite index set.
 
-Source: Stacks Project, Cohomology on Sites, Lemma 03FC
-(lemma-injective-module-trivial-cech), proof, and Lemma 03FD, second paragraph.
-(blueprint: lem-weil-pbc-injective-etale-module-cech-h1)
+Source: Stacks Project, Cohomology on Sites, Lemma 03FC, proof, and Lemma 03FD, second paragraph.
 
 Proof: Let O be the constant ring sheaf associated to Λ. Extend the constant Λ-action
 on J to O locally and glue; this identifies sheaves valued in Λ-modules with sheaves

@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtEdgeComparison
 /-! # Module and Ext cohomology comparisons compatible with scheme maps
 
 Source: Stacks Project, Tags 03FD, 01FB and 01F7.
-(blueprint: new-module-cohomology-ext-pullback-comparison)
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ it intertwines the base-change unit h-map with exact abelian inverse image on Ex
 
 Source: Stacks Project, Tag 03FD, Lemma 21.12.4; Tag 01FB, Remark 20.14.2;
 Tag 01F7, Section 20.14.
-(blueprint: new-module-cohomology-ext-pullback-comparison)
 
 Proof: On each scheme use the comparison of universal cohomological delta functors
 normalized in degree zero by evaluation of a section at the integer 1. Forgotten

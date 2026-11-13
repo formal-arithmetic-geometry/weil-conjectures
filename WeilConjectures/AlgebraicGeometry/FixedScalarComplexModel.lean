@@ -10,7 +10,6 @@ public import WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
 /-! # Fixed-scalar complexes on the coefficient-sized pro-etale site
 
 Source: Stacks Tags 03CY and 09A5. Both changes of presentation are exact equivalences.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +23,7 @@ namespace AlgebraicGeometry.Scheme
 coefficient-sized site. First precompose with the site equivalence, then apply the
 inverse of the specified constant-scalar restriction equivalence. No mathematical
 object is selected from a mere existence statement.
-Source: Stacks Tags 03CY and 09A5
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 03CY and 09A5. -/
 @[irreducible] def fixedScalarComplexToModel (X : Scheme.{u}) (k : Type (u + 1)) [CommRing k] :
     CochainComplex (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} k)) ℤ ⥤
       ConstantCompletion.Cx
@@ -41,8 +39,7 @@ Source: Stacks Tags 03CY and 09A5
   (F ⋙ G).mapHomologicalComplex (.up ℤ)
 
 /-- Localize the same fixed-scalar complex after the two exact changes of presentation.
-Source: Stacks Tags 03CY, 09A5 and 05RU
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 03CY, 09A5 and 05RU. -/
 @[irreducible] def fixedScalarDerivedModel (X : Scheme.{u}) (k : Type (u + 1)) [CommRing k]
     (T : CochainComplex (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} k)) ℤ) :
     ConstantCompletion.D

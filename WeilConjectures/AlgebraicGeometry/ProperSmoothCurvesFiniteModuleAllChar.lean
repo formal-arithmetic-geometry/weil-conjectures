@@ -27,7 +27,6 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 Source: Stacks Project, more-etale.tex, Tag 0GKW,
 lemma-proper-smooth-family-curves-modules; Tag 0GKV for prime coefficients and
 morphisms.tex, Tag 02G1 for the open-and-closed fibre-dimension decomposition.
-(blueprint: lem-fd-proper-smooth-curves-finite-module-all-char)
 -/
 
 @[expose] public section
@@ -48,13 +47,11 @@ each residue-field fibre and includes nonemptiness of those fibres.
 Source: Stacks Project, more-etale.tex, Tag 0GKW,
 lemma-proper-smooth-family-curves-modules; Tag 0GKV for the prime-field case and
 morphisms.tex, Tag 02G1 for the dimension-zero/one decomposition.
-(blueprint: lem-fd-proper-smooth-curves-finite-module-all-char)
 
 Proof (Stacks 0GKW: prime coefficients, then dévissage of the coefficients):
 1. For every prime `ℓ`, the derived direct image of the constant sheaf `ℤ/ℓ` has
    constructible homology in every degree
-   (`properSmoothCurves_prime_higherDirectImage_constructible_homology_all_char`,
-   blueprint lem-fd-proper-smooth-curves-prime-homology-all-char, which rests on the
+   (`properSmoothCurves_prime_higherDirectImage_constructible_homology_all_char`, which rests on the
    prime-coefficient theorem lem-fd-proper-smooth-curves-prime-all-char: Stacks 0GKV on
    the locus where `ℓ` is invertible, Artin--Schreier and the Frobenius-linear
    vector-bundle argument on the characteristic-`ℓ` locus).

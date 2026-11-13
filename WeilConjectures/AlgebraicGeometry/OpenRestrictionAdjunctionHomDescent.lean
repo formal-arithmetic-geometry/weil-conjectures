@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 /-! # Coherent descent through open restriction
 
 Source: Stacks Project, Tags 08EU and 08FE.
-(blueprint: lem-pc-open-restriction-adjunction-hom-descent).
 -/
 
 @[expose] public section
@@ -74,8 +73,7 @@ followed by direct image of the argument. The localization_unit_app formula expr
 q's unit on a restricted object. Cancel alpha with its inverse under the local direct
 image functor; naturality of beta then gives the displayed identity for every v.
 This argument is independent of tensor products, quasi-coherence, and projection mates.
-Empty opens are covered by the same localization construction.
-(blueprint: lem-pc-open-restriction-adjunction-hom-descent). -/
+Empty opens are covered by the same localization construction. -/
 theorem exists_openRestriction_adjunction_hom_descent
     (p : derivedPullback f ⊣ schemeDerivedDirectImage f) :
     let rX := (schemeOpenRestriction X (f ⁻¹ᵁ U)).mapDerivedCategory

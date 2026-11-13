@@ -23,8 +23,7 @@ import WeilConjectures.AlgebraicGeometry.VanishingProjective
 /-!
 # Grothendieck existence for closed subschemes of projective space
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 0885
-(blueprint: lem-weil-pbc-grothendieck-existence-projective).
+Source: Stacks Project, Cohomology of Schemes, Lemma 0885.
 -/
 
 @[expose] public section
@@ -100,8 +99,7 @@ of its embedding with the projective-space projection. The ideal is the pullback
 kernel ideal of Spec(A/I) → Spec(A), hence precisely I O_X. Noetherianity of X is supplied
 by the finite-type and quasi-compact structural map, rather than assumed separately.
 
-Source: Stacks Project, Lemma 0885, and Morphisms Lemma 01W9
-(blueprint: lem-weil-pbc-grothendieck-existence-projective).
+Source: Stacks Project, Lemma 0885, and Morphisms Lemma 01W9.
 
 Proof:
 1. The closed immersion supplies an ample invertible module by

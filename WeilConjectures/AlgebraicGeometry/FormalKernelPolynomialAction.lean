@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.FormalAssociatedGradedPolynomialCover
 /-! # A polynomial algebra acting on the successive formal kernels
 
 Source: Stacks Project, Cohomology of Schemes, proofs of Lemmas 0884 and 087Z.
-(blueprint: lem-weil-pbc-formal-kernel-polynomial-action).
 -/
 
 @[expose] public section
@@ -77,7 +76,7 @@ private theorem act_heq {X : Scheme.{u}} {B K : ℕ → X.Modules}
 in finitely many degree-one variables over the base ring. This is the algebraic input to
 graded Serre vanishing; it asserts no cohomological vanishing and needs no ample module.
 Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0884, first paragraph,
-and Lemma 087Z (blueprint: lem-weil-pbc-formal-kernel-polynomial-action).
+and Lemma 087Z.
 
 Proof:
 1. Apply formalSystems_kernel_rees_finite to obtain the associated graded algebra and

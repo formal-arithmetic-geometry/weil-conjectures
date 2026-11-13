@@ -8,20 +8,16 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-/-! # NonzeroGermWitness
-
-Source: blueprint `lem-weil-pbc-lisse-generic-kernel`, first proof step.
-(blueprint: lem-weil-pbc-nonzero-germ-witness) -/
+/-! # NonzeroGermWitness -/
 
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 /-- The first, stalkwise part of the locally constant nonzero-germ argument.
-Source: blueprint `lem-weil-pbc-locally-constant-nonzero-germs`, proof step 1.
+
 The geometric stalks are jointly faithful, so a nonzero map has a nonzero value
 on some pointed etale neighbourhood.
-(blueprint: lem-weil-pbc-nonzero-germ-witness)
 
 Proof:
 1. Suppose every image of every section has zero germ. For the algebraic closure

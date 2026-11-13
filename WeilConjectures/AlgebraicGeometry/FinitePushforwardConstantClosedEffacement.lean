@@ -25,7 +25,6 @@ import Mathlib.CategoryTheory.Sites.PreservesSheafification
 /-! # Killing one finite-pushforward component by a finite-cover unit
 
 Source: Stacks Project, Tag 09ZE, proof, second paragraph, using Tag 09ZD (2).
-(blueprint: lem-weil-pbc-finite-pushforward-constant-closed-unit-killing)
 -/
 
 @[expose] public section
@@ -49,7 +48,6 @@ set_option backward.isDefEq.respectTransparency false in
 under the pushforward of the unit of a finite surjective cover of the source.
 
 Source: Stacks Project, Tag 09ZE, proof, second paragraph, using Tags 0959 and 09ZD (2).
-(blueprint: lem-weil-pbc-finite-pushforward-constant-closed-unit-killing)
 
 Proof:
 1. Since `f` is finite and `X` affine, `Y` is affine. Form `YZ = Y ×_X Z`; its
@@ -62,7 +60,7 @@ Proof:
    group of `M`. Apply the finite-pushforward edge isomorphism, followed by the
    constant inverse-image comparison, to obtain a constant-coefficient class on `YZ`.
 3. Apply `exists_isFinite_surjective_constant_cohomology_eq_zero` to the closed
-   immersion `YZ ⟶ Y`. This gives a finite surjective finitely presented `π : Y' ⟶ Y`
+   immersion `YZ ⟶ Y`. This gives a finite surjective finitely presented `π: Y' ⟶ Y`
    whose base change to `YZ` kills that class. Here the underlying abelian group of
    `M` is finite and `q > 0`.
 4. Apply `cohomology_baseChange_unit_edge_compatibility` to `f`, `π`, and `i`

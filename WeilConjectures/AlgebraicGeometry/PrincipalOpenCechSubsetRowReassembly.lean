@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetInsertion
 /-! # Reassembly of one ordered Čech row
 
 Source: Stacks Project, Tags 08C1, 08C0, and 01FG.
-(blueprint: lem-sc-principal-open-cech-subset-row-reassembly).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ private theorem sum_apply {M N : AddCommGrpCat.{u}} {ι : Type*}
 /-- Reassemble a family supported on one row from its tuple coordinates.
 
 Source: Stacks Project, Tags 01FM and 08C1, ordered Čech totalization.
-(blueprint: lem-sc-principal-open-cech-subset-row-reassembly).
 
 Proof: Expand subset insertion as the sum of its single-subset insertions.
 The support hypothesis kills subsets whose cardinality is not p+1.

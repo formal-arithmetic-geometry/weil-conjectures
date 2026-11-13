@@ -26,7 +26,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 coordinates. No products of coefficients, extended complexes, or differentials occur.
 Source: Stacks Project, Tag 02KE, Lemma 30.5.1 and the termwise calculation in
 Lemma 30.5.2; Tags 01I9 and 01IA for affine quasi-coherent sections.
-(blueprint: lem-pc-finite-affine-cech-coefficient-base-change).
 
 Proof: Separatedness over the affine U makes each nonempty finite intersection Z of
 the V_i affine. The cartesian square identifies the intersection of the W_i with the

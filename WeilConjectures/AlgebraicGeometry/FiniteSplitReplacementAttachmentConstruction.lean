@@ -12,7 +12,6 @@ import Mathlib.AlgebraicGeometry.LimitsOver
 Source: Stacks, Hypercoverings, 0DAV and 01GJ. The epi--mono identities adapt
 `SiteHypercoverAttachmentOperators` and `SiteHypercoverAttachmentComposition`,
 using actual splitting cofans in place of formal-family component choices.
-(auxiliary; not a blueprint node)
 -/
 @[expose] public section
 noncomputable section
@@ -532,8 +531,7 @@ theorem attachmentMap_comp
             (attachEnd_comp U V Q b α β)
 
 /-- The explicit new truncated functor, with all composition cases proved above.
-Source: Stacks 0DAV.
-(auxiliary; not a blueprint node) -/
+Source: Stacks 0DAV. -/
 noncomputable def attachedSimplicial (U : TruncatedFiniteSplitEtaleHypercover X n)
     (V : X.Etale)
     (Q : ReplacementBoundary U) (b : V ⟶ Q.M) :
@@ -704,8 +702,7 @@ theorem refinement_naturality {K : SimplicialObject X.Etale}
           (attachEnd_refinement A V Q b g hcomp α)
 
 /-- The refinement determined by g and the old refinement on degenerate summands.
-Source: Stacks 01GJ.
-(auxiliary; not a blueprint node) -/
+Source: Stacks 01GJ. -/
 noncomputable def attachedRefinement {K : SimplicialObject X.Etale}
     (A : FiniteSplitReplacementStage K n) (V : X.Etale)
     (Q : ReplacementBoundary A.U) (b : V ⟶ Q.M)

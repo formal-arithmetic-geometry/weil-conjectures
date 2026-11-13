@@ -16,7 +16,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 A property of quasi-compact schemes over a base `S` that holds for affine schemes and that
 holds for `X` as soon as it holds for an open subscheme `U` and the complementary closed
 subscheme `Z` holds for every quasi-compact scheme over `S`. This is the localization step
-(Step 5) of the proof of blueprint `thm-trf-coefficient-morphism-trace-formula`: covering `X`
+(Step 5) of the proof of: covering `X`
 by affine opens `U_1, …, U_N`, the closed complement of `U_1 ∪ ⋯ ∪ U_{i-1}` in
 `U_1 ∪ ⋯ ∪ U_i` is closed in the affine `U_i`, hence affine.
 

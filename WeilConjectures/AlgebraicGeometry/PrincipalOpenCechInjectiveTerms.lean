@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSingletonGluing
 /-! # principal-open Čech augmentation for injective terms
 
 Source: Stacks Project, Cohomology, Tag 08C1, finite augmented Čech argument.
-(blueprint: lem-sc-principal-open-cech-injective-terms).
 -/
 
 @[expose] public section
@@ -120,7 +119,6 @@ private theorem homology_mono_of_boundary_lift
 induces monomorphisms on homology, without any boundedness or K-injectivity assumption.
 
 Source: Stacks Project, Cohomology, Tag 08C1, finite exact augmented row argument.
-(blueprint: lem-sc-principal-open-cech-injective-terms).
 
 Proof: Each I.X n is injective as a sheaf of modules and hence flasque. The augmented
 Čech row for the finite cover of V is exact: sheaf separation gives injectivity at

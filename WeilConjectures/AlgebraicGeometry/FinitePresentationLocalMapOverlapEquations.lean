@@ -19,8 +19,7 @@ import Mathlib.Data.Finset.Order
 
 /-! # Eventual overlap equations
 
-Source: Stacks Project, Tags 01ZR and 05N7.
-(blueprint: lem-pc-fp-local-map-overlap-equations). -/
+Source: Stacks Project, Tags 01ZR and 05N7. -/
 
 @[expose] public section
 
@@ -91,7 +90,6 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- The local family eventually descends, including after composition with global maps.
 Source: Stacks Project, Limits, Tag 01ZR, first proof, agreement on overlaps;
 Algebra, Tag 05N7 (3).
-(blueprint: lem-pc-fp-local-map-overlap-equations).
 
 Proof: First substitute the equality identifying A₀ with module base change.
 At stage k take the difference of the two restrictions of r₀ on each pairwise

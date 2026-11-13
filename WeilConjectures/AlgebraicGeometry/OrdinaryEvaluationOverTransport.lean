@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Transport of ordinary evaluation across the open-site equivalence
 Source: Stacks Project, Tags 08DL, 08DJ and 08DQ; Mathlib `Modules.overEquiv`.
-(blueprint: lem-pc-ordinary-evaluation-over-transport).
 This is a statement about actual complexes only. It mentions neither RHom nor
 canonical derived evaluation nor an arbitrary derived representative.
 -/
@@ -139,7 +138,6 @@ set_option maxHeartbeats 600000 in
 -- Comparing the site carriers and the chosen Hom functors needs extra elaboration steps.
 /-- Transport the ordinary tensor and Hom models, and their component equation.
 Source: Stacks Project, Tags 08DL, 08DJ and 08DQ, ordinary complex constructions.
-(blueprint: lem-pc-ordinary-evaluation-over-transport).
 
 Proof: use the functor of Modules.overEquiv U degreewise. Reindexing the sheaves
 preserves unit action and module tensor: on local sections the map takes a pure

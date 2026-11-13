@@ -24,8 +24,7 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Directed colimits and module cohomology on quasi-compact opens
 
-Source: Stacks Project, Cohomology, Lemma 20.19.1, Tag 01FF
-(blueprint: lem-weil-pbc-qs-scheme-cohomology-directed-colimit).
+Source: Stacks Project, Cohomology, Lemma 20.19.1, Tag 01FF.
 -/
 
 @[expose] public section
@@ -41,8 +40,7 @@ every cohomology class on a quasi-compact open comes from a stage of a directed 
 and a stage class with zero image vanishes at a later stage. Equivalently, the canonical
 map from the directed colimit of cohomology groups is bijective.
 
-Source: Stacks Project, Cohomology, Lemma 20.19.1, Tag 01FF
-(blueprint: lem-weil-pbc-qs-scheme-cohomology-directed-colimit).
+Source: Stacks Project, Cohomology, Lemma 20.19.1, Tag 01FF.
 
 Proof:
 1. Translate the compact-open basis and quasi-separatedness into the hypotheses of

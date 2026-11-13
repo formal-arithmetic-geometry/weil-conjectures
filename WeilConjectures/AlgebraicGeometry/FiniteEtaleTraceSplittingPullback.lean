@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceSplitting
 # Pulling back an explicit finite splitting
 
 Source: Stacks Project, Section 03SH, paragraph after Definition 03SE.
-(blueprint: lem-weil-pbc-finite-etale-trace-splitting-pullback)
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false in
 /-- Pullback preserves an explicit splitting and its sheet sections.
 Source: Stacks Project, Section 03SH, paragraph after Definition 03SE.
-(blueprint: lem-weil-pbc-finite-etale-trace-splitting-pullback)
 
 Proof. Pull each inclusion back along the induced map of ambient pullbacks.
 Finite coproducts of schemes are universal, so the pulled-back inclusions still

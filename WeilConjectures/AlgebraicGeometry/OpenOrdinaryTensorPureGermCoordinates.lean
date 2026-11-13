@@ -46,8 +46,7 @@ by equality induction. This is a generator calculation only: it neither construc
 ring equivalences nor input or tensor-complex isomorphisms. Empty opens have no z;
 zero rings, zero complexes and negative degrees require no additional hypothesis.
 Source: Stacks Project, Tags 0098 and 0096; the pinned pullback composition mate
-and Mathlib's germ_restrictStalkNatIso_hom_app formula.
-(blueprint: lem-pc-open-ordinary-tensor-pure-germ-coordinates). -/
+and Mathlib's germ_restrictStalkNatIso_hom_app formula. -/
 theorem exists_openOrdinaryTensor_pure_germ_coordinates
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

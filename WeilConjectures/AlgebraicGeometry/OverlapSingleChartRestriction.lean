@@ -9,8 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.OverlapPairCanonicalComparisons
 
 /-! # A canonical restriction equation for a single chart
-Source: Stacks Project, Tag 01ZR (2), first proof, and Tag 0095.
-(blueprint: lem-pc-overlap-single-chart-restriction). -/
+Source: Stacks Project, Tag 01ZR (2), first proof, and Tag 0095. -/
 
 @[expose] public section
 universe u
@@ -89,8 +88,7 @@ private theorem restriction_calc {B W H K Z : Scheme.{u}}
   rw [compOfEq_assoc z hd f (r ≫ δ) ν k hz hν hk hzk M]
 
 /-- The part of the iterated comparison preceding the component isomorphism.
-Source: Stacks Project, Tag 0095.
-(blueprint: lem-pc-overlap-single-chart-restriction). -/
+Source: Stacks Project, Tag 0095. -/
 def overlapCanonicalChartComparison {X Y Z : Scheme.{u}} (U : X.OpenCover.{u})
     (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t)
     (N : (d : U.I₀) → (U.X d).Modules) (d : U.I₀) :
@@ -109,8 +107,7 @@ by
     ((Scheme.Modules.pullbackComp d' (U.pullbackHom t d)).app (N d)).symm
 
 /-- Canonical restriction comparison with abstract chart schemes.
-Source: Stacks Project, Tag 0095, composition of inverse images.
-(blueprint: lem-pc-overlap-single-chart-restriction). -/
+Source: Stacks Project, Tag 0095, composition of inverse images. -/
 def overlapRestrictionIso {B W K H : Scheme.{u}}
     (d : W ⟶ B) (z : K ⟶ H) (ha : H ⟶ B) (r : K ⟶ W)
     (hz : z ≫ ha = r ≫ d) (A : B.Modules) (L : W.Modules) (S : H.Modules)
@@ -169,7 +166,6 @@ private theorem restriction_six_factors {B W H K Z : Scheme.{u}}
 
 /-- A single chart comparison commutes with restriction to an arbitrary scheme.
 Source: Stacks Project, Tag 01ZR (2), first proof, and Tag 0095.
-(blueprint: lem-pc-overlap-single-chart-restriction).
 
 Proof: Factor the iterated comparison into C, the pullback of e, and the
 composition comparison along the direct chart structure map. Expand xi and

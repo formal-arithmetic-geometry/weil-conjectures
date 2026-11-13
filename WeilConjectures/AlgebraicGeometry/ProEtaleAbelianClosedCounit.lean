@@ -14,8 +14,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 /-!
 # The closed counit on abelian pro-etale sheaves
 
-Source: Stacks Project, Tags 09AA, 09BL and 09BK
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 09AA, 09BL and 09BK.
 -/
 
 @[expose] public section
@@ -276,8 +275,7 @@ end Localization
 /-- Closed direct image on abelian pro-etale sheaves is fully faithful, expressed by the
 invertibility of the actual inverse-image/direct-image adjunction counit.
 
-Source: Stacks Project, Tags 09AA, 09BL and 09BK
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 09AA, 09BL and 09BK.
 
 Proof:
 1. For a quotient immersion Spec(A/I) → Spec A, take the opposite of the closed-site

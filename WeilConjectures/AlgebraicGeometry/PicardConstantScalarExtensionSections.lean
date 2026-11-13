@@ -162,7 +162,6 @@ private def extensionCorepresentableBy :
 /-- Extension of a constant module to the structure presheaf is pointwise base change.
 Source: Stacks Project, Varieties, Tag 0BED, degree-zero tensor calculation;
 representing-object argument of lem-sc-picard-constant-tensor-balanced-sections.
-(blueprint: lem-sc-picard-constant-scalar-extension-sections).
 
 Proof: Construct E(V) = O_Y(V) tensor_k M, with restriction sending a tensor s
  to res(a) tensor s. Identity, composition, and semilinearity follow on pure tensors.
@@ -189,8 +188,7 @@ def picardConstantScalarExtensionSections
           (picardConstantVector k Y M)))).toLinearEquiv
 
 /-- The identifications `picardConstantScalarExtensionSections` commute with restriction:
-restriction of the pullback corresponds to restricting the ring coefficient.
-(blueprint: lem-sc-picard-constant-scalar-extension-sections). -/
+restriction of the pullback corresponds to restricting the ring coefficient. -/
 theorem picardConstantScalarExtensionSections_map
     (k : Type w) [Field k] (Y : Scheme.{w})
     (g : Y ⟶ Spec (CommRingCat.of k)) (M : ModuleCat.{w} k)

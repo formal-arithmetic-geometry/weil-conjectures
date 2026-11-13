@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 
 /-! # Evaluation mates of normalized derived internal Hom
 Source: Stacks, Tags 08I3, 08DJ and 079U.
-(blueprint: lem-pc-normalized-internal-hom-pullback-comparison).
 -/
 
 @[expose] public section
@@ -112,8 +111,7 @@ set_option maxHeartbeats 800000 in
 -- Comparing the normalized adjunctions unfolds their canonical tensor-Hom data.
 /-- The natural evaluation mate for fixed pullback and tensor-Hom adjunctions.
 This statement concerns only sheaf internal Hom, with no global sections or base rings.
-Source: Stacks, Remark 08I3, Lemmas 08DJ and 079U
-(blueprint: lem-pc-normalized-internal-hom-pullback-comparison).
+Source: Stacks, Remark 08I3, Lemmas 08DJ and 079U.
 Proof: use K-flat resolutions of both tensor inputs and the canonical degreewise
 pullback tensor isomorphism. The left-derived counits and localization tensor maps
 transport this to an invertible comparison on derived objects. Comparisons between

@@ -160,9 +160,8 @@ private theorem map_presentation_finitePresentation
 -- Scalar transport and the slice equivalence unfold several nested stalk instances.
 /-- A supplied finite presentation on a neighborhood makes the stalk finitely presented.
 
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`), third
+Source: Stacks Project, Modules, Lemma 01CP, third
 paragraph, the right exact source-stalk sequence; Definition 01BN.
-(blueprint: lem-weil-pbc-stalk-finite-presentation-of-local-presentation)
 
 Proof: The presentation P expresses F.over U as the cokernel of the map from
 free P.relations.I to free P.generators.I, given by the relation sections and

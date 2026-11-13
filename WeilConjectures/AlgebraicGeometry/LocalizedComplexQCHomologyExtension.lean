@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 /-! # Quasi-coherent cohomology is closed under extensions of complexes
 
 Source: Stacks Project, Tags 0117 and 01IE.
-(blueprint: lem-sc-localized-complex-qc-homology-extension)
 -/
 
 @[expose] public section
@@ -81,8 +80,7 @@ on its open site with those on the localized site over U. Quasi-coherence is
 preserved in both directions because local free presentations correspond.
 Kernel and cokernel closure make the two end terms quasi-coherent, and extension
 closure makes the middle term quasi-coherent. Transport back. This argument works
-for every integer n and imposes no boundedness on any of the complexes.
-(blueprint: lem-sc-localized-complex-qc-homology-extension). -/
+for every integer n and imposes no boundedness on any of the complexes. -/
 theorem localized_complex_qc_homology_extension
     (X : Scheme.{u}) (U : X.Opens)
     (S : ShortComplex (CochainComplex

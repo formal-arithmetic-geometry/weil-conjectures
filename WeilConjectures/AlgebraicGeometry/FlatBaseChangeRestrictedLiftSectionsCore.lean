@@ -12,7 +12,6 @@ public import Mathlib.CategoryTheory.Adjunction.Additive
 /-! # The explicit restriction-adjunction lift
 
 Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
-(blueprint: def-weil-pbc-flat-base-change-restricted-lift).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 pushforward square through its canonical composition and congruence isomorphisms.
 Conjugate by the two specified restricted resolution comparisons. This is an
 explicit construction; no existence theorem or unproved choice supplies data.
-Source: Stacks, Tags 01FB and 01E4.
-(blueprint: def-weil-pbc-flat-base-change-restricted-lift) -/
+Source: Stacks, Tags 01FB and 01E4. -/
 def flatBaseChangeRestrictedLift {X S S' : Scheme.{uBC}}
     (f : X ⟶ S) (g : S' ⟶ S)
     {F : X.Modules}

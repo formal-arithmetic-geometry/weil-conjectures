@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.LatticeGluedRationalizationIso
 /-!
 # Effective descent of embedded lattice pairs
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of embedded lattices
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of embedded lattices.
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- A matching family of embedded lattice classes has a global lattice representative.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59–60; descent of embedded lattices.
-(auxiliary; not a blueprint node).
 Proof: choose integral representatives of the given local image families. On every
 common slice, compatibility identifies their image families. The image-classification
 lemma gives an intertwining integral isomorphism, unique by injectivity of the

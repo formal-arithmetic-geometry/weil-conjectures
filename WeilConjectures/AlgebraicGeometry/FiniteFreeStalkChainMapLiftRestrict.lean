@@ -8,10 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.StalkRestrictionComplexIso
 
 /-! # Restriction stability of a local chain map
-
-Source: lem-pc-perfect-locus, finite matrix extension argument, expanded in
-lem-pc-finite-free-stalk-chain-map-lift.
-(blueprint: lem-pc-finite-free-stalk-chain-map-lift-restrict)
 -/
 
 @[expose] public section
@@ -134,19 +130,18 @@ private theorem restrict_triangle {A B C D : Scheme.{u}}
 
 /-- Restriction stability of a local chain map.
 
-Source: lem-pc-finite-free-stalk-chain-map-lift, proof step 4, expanding
-lem-pc-perfect-locus's extension of the finite calculation. The comparison uses
+ The comparison uses
 Mathlib's restrictFunctorComp, restrictFunctorIsoPullback, pullbackComp, and
 pseudofunctor_associativity.
 
-Proof: Fix V <= U containing y and let j : V.toScheme -> U.toScheme be the open
+Proof: Fix V <= U containing y and let j: V.toScheme -> U.toScheme be the open
 inclusion. Let R_U, R_V and R_j denote termwise restriction. The identity
 j >> U.ι = V.ι and restrictFunctorComp give a natural isomorphism
-C : R_V ~= R_U >> R_j. Define
+C: R_V ~= R_U >> R_j. Define
 fV = C(P).hom >> R_j.map fU >> C(Q).inv.
 Write S_U and S_V for the corresponding termwise stalk pullbacks. Since the
 map Spec O_{Y,y} -> U factors through V, restriction followed by stalk pullback
-gives a natural isomorphism D : R_j >> S_V ~= S_U (with the same source Spec).
+gives a natural isomorphism D: R_j >> S_V ~= S_U (with the same source Spec).
 The composite S_V.mapIso C(M) followed by D(R_U M) equals E_V(M) followed by
 E_U(M).symm. Indeed replace each restriction by pullback using
 restrictFunctorIsoPullback, use pullback composition, and apply
@@ -159,8 +154,7 @@ S_V.map fV = E_V(P).hom >> E_U(P).inv >> S_U.map fU >>
   E_U(Q).hom >> E_V(Q).inv.
 Substitute the hypothesis h and cancel the E_U inverse/hom pairs to obtain the
 required equation. For V = U this is the same cancellation; zero complexes need
-no additional hypotheses. No boundedness or finite freeness is used.
-(blueprint: lem-pc-finite-free-stalk-chain-map-lift-restrict) -/
+no additional hypotheses. No boundedness or finite freeness is used. -/
 theorem restrict_chainMap_of_stalk_local
     {Y : Scheme.{u}} (P Q : CochainComplex Y.Modules ℤ) (y : Y) (U : Y.Opens)
     (hyU : y ∈ U)

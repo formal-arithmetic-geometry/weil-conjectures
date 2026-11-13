@@ -169,7 +169,6 @@ namespace AlgebraicGeometry.Etale
 /-- The derived mate calculation identifies the open injective coefficient map with the
 ordinary base-change map on the coefficient `j_*J`. Source: Stacks Project, Tag 0F07,
 closed-open lower comparison.
-(blueprint: lem-sbc-open-injective-coefficient-lower-comparison-factorization)
 
 Proof: rewrite `Etale.baseChange` by
 `Etale.baseChange_eq_derivedBaseChangeMapPlus`, and then use the mate computation

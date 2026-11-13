@@ -41,9 +41,7 @@ fibre onto the set-theoretic fibre. Tag 054W gives a nonempty open of `Z` over w
 Represent this open as `V ∩ closure {y}` with `V` ambient open in `T`; then `y ∈ V`.
 The base-change projection is a homeomorphism onto the inverse image of the closure
 of `y`, so emptiness of `W` there is exactly the asserted disjointness. If `C` is
-empty the conclusion holds with `V = Set.univ`.
-
-(blueprint: lem-sbc-generic-fibre-closed-avoidance) -/
+empty the conclusion holds with `V = Set.univ`. -/
 theorem exists_open_generic_fibre_closed_avoidance {P T : Scheme.{u}} (g : P ⟶ T)
     [LocallyOfFiniteType g] [QuasiCompact g] (y : T) (C : Set P)
     (hC : IsClosed C) (hempty : g ⁻¹' {y} ∩ C = ∅) :

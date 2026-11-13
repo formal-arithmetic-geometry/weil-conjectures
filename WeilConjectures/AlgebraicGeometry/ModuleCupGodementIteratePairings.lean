@@ -23,7 +23,6 @@ noncomputable section
 /-- The canonical iterates admit pairings compatible with unit and multiplication insertions.
 Source: Banerjee, arXiv:1004.1491, §1.1.4, pp. 15–16; Stacks, Tag 0FKR,
 the construction of the Godement resolution.
-(blueprint: lem-sc-module-cup-godement-iterate-pairings)
 Proof: write T for the product of stalk skyscrapers. For each point x, project
 T(F) and T(G) to the x-coordinate, take their tensor, and use the stalk tensor
 map to the skyscraper of the stalk of F tensor G. The bilinear maps on opens

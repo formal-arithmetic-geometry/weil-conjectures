@@ -1074,8 +1074,7 @@ the change of coefficient base to the affine object U itself. Finally reindex by
 coinitial directed preorder and use the affine global-section continuity
 statement. Thus the qcqs gluing, arbitrary-index reindexing, and all normalization
 calculations are proved here; the directed affine continuity core is the remaining
-named obligation. No cohomology or resolution is used.
-(auxiliary; not a blueprint node) -/
+named obligation. No cohomology or resolution is used. -/
 theorem relativeSectionCocone_isColimit
     {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Scheme.{u})
     [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)]

@@ -18,7 +18,6 @@ import Mathlib.Topology.Sheaves.SheafCondition.Sites
 # Tilde comparison on a single graded-module chart
 
 Source: Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-tilde-comparison)
 -/
 
 @[expose] public section
@@ -35,8 +34,7 @@ variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
 localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-tilde-comparison) -/
+Source: Stacks, Algebra, Section 00JM. -/
 local instance localizedModuleHomogeneousScalarsChartComparison (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -109,7 +107,6 @@ private theorem chart_iso_of_basis
 module, transported along the canonical affine chart isomorphism.
 Source: Stacks Project, Constructions, Section 01M3, Lemmas 01M4, 01M7 (2), and 01MB;
 Schemes, Lemma 01HV and Section 01I6.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-tilde-comparison)
 
 Proof:
 Fix a chart f of degree d > 0. For r in S_(f), choose a homogeneous presentation

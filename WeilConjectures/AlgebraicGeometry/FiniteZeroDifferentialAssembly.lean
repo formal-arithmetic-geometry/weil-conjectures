@@ -52,7 +52,6 @@ and the target has no homology outside the finite support.
 
 Source: finite-sum assembly, step 3 of clopen rank-stratum formality; Stacks,
 Derived Categories, Tag 05RU (quasi-isomorphisms inverted).
-(blueprint: lem-sc-finite-zero-differential-assembly)
 
 Proof: Project the complex onto each single term. Compose these projections
 in the derived category with the given maps and sum over the finite support.

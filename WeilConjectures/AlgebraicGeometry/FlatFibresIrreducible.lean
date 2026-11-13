@@ -15,7 +15,6 @@ import Mathlib.RingTheory.Spectrum.Prime.Chevalley
 /-! # Flat finite-presentation maps with dense irreducible fibres
 
 Source: Stacks Project, Algebra, Lemma 00I6 (algebra-lemma-flat-fibres-irreducible)
-(blueprint: lem-weil-pbc-flat-fibres-irreducible)
 -/
 
 @[expose] public section
@@ -23,8 +22,7 @@ Source: Stacks Project, Algebra, Lemma 00I6 (algebra-lemma-flat-fibres-irreducib
 /--
 For a flat finitely presented algebra over an irreducible ring, irreducibility of
 fibres over a dense set of primes implies irreducibility of the total spectrum.
-Source: Stacks Project, Algebra, Lemma 00I6 (algebra-lemma-flat-fibres-irreducible)
-(blueprint: lem-weil-pbc-flat-fibres-irreducible).
+Source: Stacks Project, Algebra, Lemma 00I6 (algebra-lemma-flat-fibres-irreducible).
 Proof: flatness and finite presentation make the induced map
 `PrimeSpectrum T → PrimeSpectrum R` open by
 `lem-weil-pbc-flat-finite-presentation-open` (Stacks Tag 00I1).

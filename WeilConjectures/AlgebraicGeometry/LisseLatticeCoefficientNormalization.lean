@@ -16,7 +16,6 @@ public import WeilConjectures.AlgebraicGeometry.Lisse.LisseLatticeCoefficientsSu
 # Normalization of continuous lisse coefficients
 
 Source: Bhatt--Scholze, Definition 6.8.1 and Proposition 6.8.4(6).
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -147,8 +146,7 @@ private noncomputable def coefficientUnitIso
 /-- Restricting scalars along an isomorphism of coefficient sheaves preserves finite local
 freeness. The same local cover and finite generating sets give the transported free
 presentations.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), identification of lattice coefficients.
-(auxiliary; not a blueprint node) -/
+Source: Bhatt--Scholze, Proposition 6.8.4(6), identification of lattice coefficients. -/
 theorem finiteLocallyFree_restrict {C : Type (u + 1)} [Category.{u} C]
     (J : GrothendieckTopology C)
     [∀ V, HasSheafify (J.over V) AddCommGrpCat.{u + 1}]
@@ -222,7 +220,6 @@ private theorem coefficientNormalizedModule_finiteLocallyFree (l : ℕ) [Fact l.
 spectral-norm presentation. Its coefficient square commutes, and transporting modules
 along the rational isomorphism preserves finite local freeness.
 Source: Bhatt--Scholze, Definition 6.8.1 and Proposition 6.8.4(6).
-(auxiliary; not a blueprint node)
 
 Proof: the lift algebra equivalence preserves minimal polynomials, hence the spectral
 absolute value. It gives an isometric ring equivalence from the `WithAbs` lift to E.

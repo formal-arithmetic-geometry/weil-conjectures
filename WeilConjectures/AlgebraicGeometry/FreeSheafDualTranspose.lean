@@ -12,7 +12,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 /-! # Matrix entries of the dual of a free sheaf
 
 Source: Stacks Project, duality.tex, Tag 0BQZ, finite free Hom calculation.
-(blueprint: lem-sc-free-sheaf-dual-transpose).
 -/
 
 @[expose] public section
@@ -55,7 +54,6 @@ private lemma unit_dual_conjugation {X : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical finite free dual comparison transposes matrix components.
 Source: Stacks Project, duality.tex, Tag 0BQZ, the finite free Hom calculation.
-(blueprint: lem-sc-free-sheaf-dual-transpose).
 
 Proof: The free sheaf is the finite coproduct of copies of the unit. Its internal
 Hom is the product of the internal Homs of those copies. The canonical

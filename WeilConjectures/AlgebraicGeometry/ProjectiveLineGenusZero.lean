@@ -17,8 +17,7 @@ import WeilConjectures.Compactification.Defs
 /-! # The projective line is a genus-zero smooth proper connected curve
 
 Source: Stacks Project, varieties.tex, Tag 0B2P, lemma-projective-space-smooth;
-curves.tex, Tag 0C6U, proposition-projective-line, (1) implies (2) and (7)
-(auxiliary; not a blueprint node).
+curves.tex, Tag 0C6U, proposition-projective-line, (1) implies (2) and (7).
 -/
 
 @[expose] public section
@@ -32,14 +31,13 @@ namespace AlgebraicGeometry.ProjectiveSpace
 /-- The base-change projective line is a smooth proper connected curve, has genus zero,
 and has vanishing first cohomology of its structure sheaf.
 Source: Stacks Project, Tag 0B2P, lemma-projective-space-smooth, and Tag 0C6U,
-proposition-projective-line, (1) implies (2) and (7)
-(auxiliary; not a blueprint node).
+proposition-projective-line, (1) implies (2) and (7).
 
 Proof plan:
 1. Identify the two degree-zero localization charts of the integral Proj with Z[t]
-   and Z[s] by homogeneous monomial fractions (def-nagata-affine-proj). Base change
-   gives k[t] and k[s] (lem-weil-pbc-fibre-product-affine-spectra), with overlap
-   s = t inverse. They give the standard projective-line model (def-sc-p1-standard).
+   and Z[s] by homogeneous monomial fractions. Base change
+   gives k[t] and k[s], with overlap
+   s = t inverse. They give the standard projective-line model.
 2. Each chart is affine one-space. Apply sbc-lem-affine-space-smooth and the
    affine-local criterion of def-sbc-smooth-morphisms to obtain smoothness of
    relative dimension one.
@@ -47,7 +45,7 @@ Proof plan:
    Their overlap contains t = 1, so their union is nonempty and connected.
    lem-sbc-smooth-fixed-dimension-over-field gives dimension one.
 4. lemma-nagata-projective-space-base-change-proper gives properness, including
-   separatedness and finite type (def-weil-proper-morphism). Together with steps
+   separatedness and finite type. Together with steps
    2 and 3 this gives the connected-curve clauses of def-sc-curves.
 5. Apply lem-sc-p1-monomial(ii) at twist zero. The two local generators of O(0)
    have identity transition, identifying it with the structure sheaf. Transport

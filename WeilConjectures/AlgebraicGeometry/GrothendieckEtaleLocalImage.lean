@@ -28,22 +28,19 @@ variable {X : Scheme.{u}} {A : Type u'} [Category.{u + 1} A] [Abelian A]
 variable {F G : Sheaf X.smallEtaleTopology A} (p : F ⟶ G)
 
 /-- A map into a sheaf value lifts through `p` on a covering sieve. No compatibility
-between the lifts is imposed. Source: Stacks Project, Tag 00WL.
-(auxiliary; not a blueprint node). -/
+between the lifts is imposed. Source: Stacks Project, Tag 00WL. -/
 def LocallyLifts (W : X.Etale) {B : A} (x : B ⟶ G.obj.obj (op W)) : Prop :=
   ∃ (R : Sieve W), R ∈ X.smallEtaleTopology W ∧
     ∀ (Z : X.Etale) (f : Z ⟶ W), R f →
       ∃ l : B ⟶ F.obj.obj (op Z), l ≫ p.hom.app (op Z) = x ≫ G.obj.map f.op
 
 /-- A subobject belongs to the local image if its inclusion lifts locally after an
-epimorphism onto its source. Source: Stacks Project, Tag 00WL, categorical image argument.
-(auxiliary; not a blueprint node). -/
+epimorphism onto its source. Source: Stacks Project, Tag 00WL, categorical image argument. -/
 def LocalImageMember (W : X.Etale) (S : Subobject (G.obj.obj (op W))) : Prop :=
   ∃ (P : A) (e : P ⟶ (S : A)), Epi e ∧ LocallyLifts p W (e ≫ S.arrow)
 
 /-- The union of local-image subobjects, constructed as a supremum in the complete
-subobject lattice. Source: Stacks Project, Tag 00WL, categorical image argument.
-(auxiliary; not a blueprint node). -/
+subobject lattice. Source: Stacks Project, Tag 00WL, categorical image argument. -/
 noncomputable def localImage (W : X.Etale) : Subobject (G.obj.obj (op W)) :=
   sSup {S | LocalImageMember p W S}
 
@@ -139,13 +136,11 @@ lemma localImageMember_sup {W : X.Etale} {S T : Subobject (G.obj.obj (op W))}
 
 /-- The local-image subobjects form a small directed family. Using distinct subobjects
 avoids imposing filteredness on a category of covering maps.
-Source: Stacks Project, Tag 00WL; AB5 categorical image argument.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 00WL; AB5 categorical image argument. -/
 abbrev LocalImageIndex (W : X.Etale) :=
   Shrink.{u + 1} {S : Subobject (G.obj.obj (op W)) // LocalImageMember p W S}
 
-/-- The subobject indexed by a member of the small local-image family.
-(auxiliary; not a blueprint node). -/
+/-- The subobject indexed by a member of the small local-image family. -/
 noncomputable def localImageFamily (W : X.Etale) (i : LocalImageIndex p W) :
     Subobject (G.obj.obj (op W)) :=
   ((equivShrink _).symm i).val
@@ -178,8 +173,7 @@ lemma iSup_localImageFamily (W : X.Etale) :
 
 /-- Extend the local image from the qcqs basis by testing all restrictions to qcqs objects.
 It is an actual construction in the subobject lattice, independent of any existence theorem.
-Source: Stacks Project, Tag 00WL, image subsheaf argument and restriction to a basis.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 00WL, image subsheaf argument and restriction to a basis. -/
 noncomputable def qcqsLocalImage (W : X.Etale) : Subobject (G.obj.obj (op W)) :=
   ⨅ (Z : X.Etale) (_ : CompactSpace Z.left) (_ : QuasiSeparatedSpace Z.left)
     (f : Z ⟶ W), (Subobject.pullback (G.obj.map f.op)).obj (localImage p Z)
@@ -216,8 +210,7 @@ lemma qcqsLocalImage_eq (W : X.Etale) [CompactSpace W.left] [QuasiSeparatedSpace
         (Subobject.pullback (G.obj.map f.op)).obj (localImage p W)) (𝟙 W))))
   simpa [Subobject.pullback_id] using h
 
-/-- The presheaf extending the local image from the qcqs basis.
-(auxiliary; not a blueprint node). -/
+/-- The presheaf extending the local image from the qcqs basis. -/
 noncomputable def qcqsLocalImagePresheaf : X.Etaleᵒᵖ ⥤ A where
   obj W := qcqsLocalImage p W.unop
   map {W V} f := (qcqsLocalImage p V.unop).factorThru
@@ -230,8 +223,7 @@ noncomputable def qcqsLocalImagePresheaf : X.Etaleᵒᵖ ⥤ A where
     apply (cancel_mono (qcqsLocalImage p _).arrow).1
     simp [Category.assoc]
 
-/-- The inclusion of the presheaf extending the local image from the qcqs basis.
-(auxiliary; not a blueprint node). -/
+/-- The inclusion of the presheaf extending the local image from the qcqs basis. -/
 noncomputable def qcqsLocalImageι : qcqsLocalImagePresheaf p ⟶ G.obj where
   app W := (qcqsLocalImage p W.unop).arrow
   naturality W V f := by simp [qcqsLocalImagePresheaf]
@@ -242,8 +234,7 @@ lemma qcqsLocalImage_contains_p (W : X.Etale) :
   exact (Subobject.imageSubobject_le_iff _ _).1
     (le_sSup (localImageMember_image p (locallyLifts_p p W)))
 
-/-- The given sheaf morphism factors through its qcqs local-image presheaf.
-(auxiliary; not a blueprint node). -/
+/-- The given sheaf morphism factors through its qcqs local-image presheaf. -/
 noncomputable def toQcqsLocalImage : F.obj ⟶ qcqsLocalImagePresheaf p where
   app W := (qcqsLocalImage p W.unop).factorThru (p.hom.app W)
     (qcqsLocalImage_contains_p p W.unop)

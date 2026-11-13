@@ -28,7 +28,6 @@ namespace AlgebraicGeometry.Scheme
 set_option linter.unusedVariables false in
 /-- Fibre descent and universal structure pushforward give a generator on the marked fibre.
 Source: Stacks Project, Tag 0BF2, the reduction to a trivial bundle on the marked fibre.
-(blueprint: lem-sc-picard-h1-base-descent-fibre-generator)
 
 Proof: The immersion k identifies κ(w) with κ(s). Transport hLs across this identification.
 The descended module N over Spec κ(s) is finite free. Its rank is one: the fibre

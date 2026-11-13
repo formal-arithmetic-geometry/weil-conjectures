@@ -8,8 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.ProperSupportedKunnethRoute
 import WeilConjectures.AlgebraicGeometry.ProperShriekCompSupportsCanonical
 
 /-! # Proper forget supports and the specified compact-support compositor
-
-Source: blueprint latest, first triangle of thm-amb-p1-adjunction.proof.md.
 -/
 
 @[expose] public noncomputable section
@@ -23,9 +21,8 @@ namespace AlgebraicGeometry.Etale
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The specified compact-support compositor transports to the ordinary compositor.
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, proper comparison in the first triangle;
-Stacks Tags 07A7 and 0D6E (auxiliary; not a blueprint node).
+Source:, proper comparison in the first triangle;
+Stacks Tags 07A7 and 0D6E.
 
 Proof: unfold properRouteCompIso and substitute h=p;f.
 Expand rightDerivedLowerShriekCompIso into the compactification of f, the

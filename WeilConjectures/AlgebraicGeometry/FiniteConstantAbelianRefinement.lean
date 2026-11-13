@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteConstantAbelianNeighborhood
 
 Source: Stacks Project, Tag 03RU, and the finite-operation argument in
 `lem-weil-pbc-finite-local-abelian-forget`, step 2.
-(blueprint: lem-weil-pbc-finite-constant-abelian-refinement).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry.Scheme
 admits abelian constant trivializations after an etale refinement of that member.
 Source: Stacks Project, Tag 03RU; the finite-operation refinement in step 2 of
 `lem-weil-pbc-finite-local-abelian-forget`.
-(blueprint: lem-weil-pbc-finite-constant-abelian-refinement)
 
 Proof: identify the localized site at `U` with the small etale site of `U.left`.
 The given isomorphism supplies one global section for each element of `S`.

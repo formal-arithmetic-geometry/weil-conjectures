@@ -70,9 +70,7 @@ first and third legs quasi-isomorphisms on both charts. The exact-restriction
 homology comparison carries the four squares to homology; cancel the two pairs
 of backward isomorphisms using tensorResolution_homology_zigzag. Finally use the
 explicit defining equation of tensorResolutionComparison to identify the result.
-No boundedness or invertibility of the five vertical chain maps is required.
-
-(blueprint: new-h4-qcoh-tensor-comparison-restriction-naturality) -/
+No boundedness or invertibility of the five vertical chain maps is required. -/
 theorem tensorResolutionComparison_restriction {X Y : Scheme.{u}}
     (j : X ⟶ Y) [IsOpenImmersion j]
     (E K M F N : CochainComplex Y.Modules ℤ)

@@ -24,7 +24,6 @@ import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 /-! # Descending a bounded principal-open cover to a finite coefficient ring
 
 Source: Stacks Project, Algebra, proof of Tag 00SU, final paragraph.
-(blueprint: lem-weil-pbc-noetherian-bounded-principal-cover-descent).
 -/
 
 @[expose] public section
@@ -160,7 +159,6 @@ set_option backward.isDefEq.respectTransparency false in
 to a finite type coefficient ring. A nonzero descended fibre also ensures the indexing
 type of the original covering family is inhabited; this handles an empty spectrum.
 Source: Stacks Project, Algebra, proof of Tag 00SU, final paragraph.
-(blueprint: lem-weil-pbc-noetherian-bounded-principal-cover-descent).
 
 Proof:
 1. Put S₀ = R₀[x]/(f₀) and S = R[x]/(f). The displayed principal opens cover

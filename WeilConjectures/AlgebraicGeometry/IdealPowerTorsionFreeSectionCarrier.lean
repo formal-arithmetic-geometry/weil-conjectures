@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.CoherentIdealPowerTorsionFreeProduct
 /-! # An ideal-power-torsion-free carrier of an open section
 
 Source: Stacks Project, Tag 01YB, first two paragraphs of the proof.
-(blueprint: lem-pc-ideal-power-torsion-free-section-carrier)
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ noncomputable local instance {X : Scheme.{u}} (F : X.Modules) {V W : X.Opens} (h
 inside the original module with zero ideal-power annihilators.
 
 Source: Stacks Project, Tag 01YB, first two paragraphs of the proof.
-(blueprint: lem-pc-ideal-power-torsion-free-section-carrier)
 
 Proof: The section defines a map from the structure module on U. Its image is
 quasi-coherent and finite type. Extend this image to a finite-type quasi-coherent

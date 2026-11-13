@@ -87,7 +87,6 @@ private theorem kanMap_commShift
 
 /-- The selected pullback composition comparison commutes with the counit-compatible shifts.
 Source: Stacks Project, Tag 0D5S, canonical derived pullback composition.
-(blueprint: lem-pc-pinned-pullback-composition-shifts).
 Proof: precompose both proposed shift equations with the localization functor Qh
 and then postcompose with the selected counit of the composite pullback. The
 factorization of the selected left-derived lift identifies each side with the

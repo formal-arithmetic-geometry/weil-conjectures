@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.ProperLimitNoetherianCore
 
 /-! # Proper morphisms as limits of proper finite-type models
 
-Source: Stacks limits.tex, Tag 0A0P (proper-limit-of-proper-finite-presentation-noetherian)
-(blueprint: lem-weil-pbc-proper-limit-noetherian).
+Source: Stacks limits.tex, Tag 0A0P (proper-limit-of-proper-finite-presentation-noetherian).
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ namespace AlgebraicGeometry
 
 /-- A proper morphism over a quasi-compact and quasi-separated scheme is a limit of
 proper morphisms over schemes of finite type over `ℤ`, with affine transitions.
-Source: Stacks limits.tex, Tag 0A0P (proper-limit-of-proper-finite-presentation-noetherian)
-(blueprint: lem-weil-pbc-proper-limit-noetherian).
+Source: Stacks limits.tex, Tag 0A0P (proper-limit-of-proper-finite-presentation-noetherian).
 Proof:
 1. Use lem-weil-pbc-proper-closed-in-proper-fp (09ZR) to choose a closed immersion
    X → Y over S with Y → S proper and finitely presented.
@@ -61,7 +59,7 @@ Proof:
    f with the limiting morphism, and all the required properties hold.
 9. For affine S = Spec A, the chosen base stages are spectra of finitely generated
    subrings. Their directed union is A; restricting to the cofinal tail preserves this
-   colimit (def-weil-pbc-category-colimit). The global-section maps induced by the
+   colimit. The global-section maps induced by the
    base cone form the colimit cocone, whose vertex is Γ(S) ≅ A. -/
 theorem exists_proper_limit_noetherian
     {X S : Scheme.{u}} (f : X ⟶ S)

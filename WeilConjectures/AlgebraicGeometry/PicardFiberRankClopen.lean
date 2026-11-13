@@ -20,7 +20,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 /-! # Clopen fibre-rank and empty-fibre loci
 
 Source: Stacks Project, Tag 0BDP, first proof paragraph (rank decomposition).
-(blueprint: lem-sc-picard-fiber-rank-clopen).
 -/
 
 @[expose] public section
@@ -144,7 +143,6 @@ private theorem tensorPullback_rank_iff {X Y : Scheme.{u}} (g : Y ⟶ X)
 Empty fibres belong to every fixed-rank locus.
 Source: Stacks Project, Tag 0BDP, first proof paragraph; the open-and-closed rank
 argument applied without connectedness or surjectivity.
-(blueprint: lem-sc-picard-fiber-rank-clopen).
 
 Proof:
 1. Finite local freeness gives a locally constant stalk-rank function on X. Its

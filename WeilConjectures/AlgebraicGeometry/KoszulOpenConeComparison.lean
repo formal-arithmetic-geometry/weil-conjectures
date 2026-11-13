@@ -11,8 +11,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 
 /-! # The cone of the negative Koszul tail augmentation
 
-Source: Stacks Project, Section 36.9, Tag 08CX, opening construction
-(blueprint: lem-sc-koszul-open-cone-comparison).
+Source: Stacks Project, Section 36.9, Tag 08CX, opening construction.
 -/
 
 @[expose] public section
@@ -214,8 +213,7 @@ private theorem coneTermIso_comm
 
 /-- The cone of the tail augmentation is the full Koszul complex, compatibly
 with the inclusion of its degree-zero term.
-Source: Stacks Project, Section 36.9, Tag 08CX, opening construction
-(blueprint: lem-sc-koszul-open-cone-comparison).
+Source: Stacks Project, Section 36.9, Tag 08CX, opening construction.
 
 Proof: Let u be the extended tail augmentation. The cone in degree n is
 I^(n+1) ⊕ A[0]^n. For n < 0 the second summand is zero and the first is

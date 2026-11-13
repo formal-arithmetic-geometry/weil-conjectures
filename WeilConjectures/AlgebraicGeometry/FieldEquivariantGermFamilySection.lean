@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.FieldEquivariantGermsOnePoint
 /-! # Realizing equivariant families of geometric germs as sections
 
 Source: Stacks Project, Tags 04JM and 03QW, direct invariant-section argument.
-(blueprint: lem-exc-field-equivariant-germ-family-section).
 -/
 
 @[expose] public section
@@ -65,7 +64,6 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Source: Stacks Project, Tag 04JM, direct proof of lemma-global-sections-point,
 and Tag 03QW, section-galois-action-stalks.
-(blueprint: lem-exc-field-equivariant-germ-family-section).
 
 Proof: By quasi-finiteness, the inverse image of the unique point of Spec K is
 discrete; that inverse image is all of X. Cover X by its singleton open subschemes.

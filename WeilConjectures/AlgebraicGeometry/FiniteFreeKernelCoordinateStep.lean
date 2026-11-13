@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.QuasiCoherentSubmoduleIdeal
 /-!
 # Removing one coordinate from a finite free kernel
 
-Source: Stacks Project, Tag 01XF, coordinate-filtration paragraph
-(blueprint: lem-pqf-finite-free-kernel-coordinate-step).
+Source: Stacks Project, Tag 01XF, coordinate-filtration paragraph.
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ set_option maxHeartbeats 700000 in
 /-- Removing the distinguished coordinate gives a short exact sequence of kernels
 with a quasi-coherent ideal quotient.
 
-Source: Stacks Project, Tag 01XF, coordinate-filtration paragraph
-(blueprint: lem-pqf-finite-free-kernel-coordinate-step).
+Source: Stacks Project, Tag 01XF, coordinate-filtration paragraph.
 
 Proof: Let q be the restriction of p to the coordinates indexed by I. The inclusion
 of these coordinates induces a monomorphism kernel q → kernel p. Project kernel p

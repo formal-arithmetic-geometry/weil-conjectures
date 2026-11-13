@@ -13,9 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.InternalModuleAbEquivalence
 
 /-! # Specified finite coefficient realization and generator predicates
 
-Source: blueprint finite comparison, coefficient paragraph
-(auxiliary; not a blueprint node).
-
 The constructions are kept separately so their coefficient-presentation lemmas can be
 used by the localizing proof without a cyclic import.
 -/
@@ -29,9 +26,7 @@ open CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.Obj TensorProduct ZeroObject
 namespace AlgebraicGeometry.ProEtale
 
-/-- View fixed-scalar module presheaves as internal modules before sheafification.
-Source: blueprint finite comparison, coefficient identification in proof step 1
-(auxiliary; not a blueprint node). -/
+/-- View fixed-scalar module presheaves as internal modules before sheafification. -/
 def finiteComparisonPresheaf (X : Scheme.{u}) (B : Type) [CommRing B] :
     (X.ProEtᵒᵖ ⥤ ModuleCat.{u + 1} (ULift.{u + 1} B)) ⥤
       Mod (X.ProEtᵒᵖ ⥤ Ab.{u + 1})
@@ -75,9 +70,7 @@ def finiteComparisonPresheaf (X : Scheme.{u}) (B : Type) [CommRing B] :
   map_id F := by apply Mod.hom_ext; rfl
   map_comp f g := by apply Mod.hom_ext; rfl
 
-/-- Sheafify the ordinary fixed-scalar action as an internal constant-ring action.
-Source: blueprint finite comparison, proof step 1
-(auxiliary; not a blueprint node). -/
+/-- Sheafify the ordinary fixed-scalar action as an internal constant-ring action. -/
 def finiteComparisonConstantRealization (X : Scheme.{u}) (B : Type) [CommRing B] :
     Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} B)) ⥤
       Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -140,9 +133,7 @@ variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
   [DiscreteTopology B] [Finite B]
 
 /-- Transport the sheafified scalar action along the specified coefficient ring isomorphism.
-The isomorphism is exactly the pullback of the finite-discrete point identification.
-Source: blueprint finite comparison, proof step 1
-(auxiliary; not a blueprint node). -/
+The isomorphism is exactly the pullback of the finite-discrete point identification. -/
 def finiteComparisonRealization (X : Scheme.{u})
     (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (coherentTopology Profinite.{u})
       ((Functor.const Profinite.{u}ᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅
@@ -154,8 +145,6 @@ def finiteComparisonRealization (X : Scheme.{u})
     Mod.comap (finiteDiscreteSchemeRingIso B X eR).inv
 
 /-- The specified coefficient transport is an exact equivalence.
-Source: blueprint finite comparison, coefficient paragraph and proof step 1
-(auxiliary; not a blueprint node).
 
 Proof: an internal presheaf action is precisely the sectionwise scalar action.
 Monoidal sheafification extends it uniquely to the associated constant ring sheaf.
@@ -192,20 +181,17 @@ variable (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (coherentTopology Pr
   ((Functor.const Profinite.{u}ᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅
     Profinite.continuousMapRingObj.{u} B) [IsMonHom eR.hom]
 
-/-- Additivity of the specified coefficient transport, from the coefficient paragraph.
-Source: blueprint finite comparison (auxiliary; not a blueprint node). -/
+/-- Additivity of the specified coefficient transport, from the coefficient paragraph. -/
 instance finiteComparisonRealization_additive (X : Scheme.{u}) :
     (finiteComparisonRealization B X eR).Additive :=
   (finiteComparisonRealization_exact B X eR).2.1
 
-/-- Left exactness of the coefficient transport, from the coefficient paragraph.
-Source: blueprint finite comparison (auxiliary; not a blueprint node). -/
+/-- Left exactness of the coefficient transport, from the coefficient paragraph. -/
 instance finiteComparisonRealization_limits (X : Scheme.{u}) :
     PreservesFiniteLimits (finiteComparisonRealization B X eR) :=
   (finiteComparisonRealization_exact B X eR).2.2.1
 
-/-- Right exactness of the coefficient transport, from the coefficient paragraph.
-Source: blueprint finite comparison (auxiliary; not a blueprint node). -/
+/-- Right exactness of the coefficient transport, from the coefficient paragraph. -/
 instance finiteComparisonRealization_colimits (X : Scheme.{u}) :
     PreservesFiniteColimits (finiteComparisonRealization B X eR) :=
   (finiteComparisonRealization_exact B X eR).2.2.2

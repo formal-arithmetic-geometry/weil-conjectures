@@ -16,7 +16,6 @@ import WeilConjectures.RingTheory.CoverModuleExact
 # Finite gluing of graded-module charts
 
 Source: Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-gluing)
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
 localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-gluing) -/
+Source: Stacks, Algebra, Section 00JM. -/
 local instance localizedModuleHomogeneousScalarsChartGluing (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -50,7 +48,6 @@ local notation "D[" f "]" => basicOpen 𝒜 (f).val.1
 /-- Finite unique gluing for a graded-module chart system, including the empty cover.
 Source: Stacks Project, Constructions, Lemma 01M4 (1)(c)--(h) and the construction
 before Definition 01M6; Algebra, Lemma 00EK.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-gluing)
 
 Proof:
 1. Use standardOpenProperties to obtain the unit-ideal generators

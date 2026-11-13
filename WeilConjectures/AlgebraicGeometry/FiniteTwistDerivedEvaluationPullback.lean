@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDerivedRightUnitPullback
 /-! # Pullback of the normalized shifted finite-line evaluation
 
 Source: Stacks Tags 03PK and 03Q1, and the evaluation identification in
-thm-amb-p1-decomposition.proof.md
-(auxiliary; not a blueprint node).
+thm-amb-p1-decomposition.proof.md.
 -/
 
 @[expose] public noncomputable section
@@ -56,9 +55,6 @@ private theorem evaluation_def
 The first equation is the evaluation-pairing square; the second is its tensor-unit
 normalization. These concern any scheme morphism and do not involve a projective-line
 splitting, direct image, properness, or finite coefficients.
-Source: etaleFiniteTwistPullback, negative evaluation and derived tensor clauses;
-main-20261015, thm-amb-p1-decomposition.proof.md, evaluation identifications
-(auxiliary; not a blueprint node).
 
 Proof: in degree zero use the negative-normalization equation of the normalized
 finite-twist transport, with n=0. Its degree-zero comparison is compatible with the

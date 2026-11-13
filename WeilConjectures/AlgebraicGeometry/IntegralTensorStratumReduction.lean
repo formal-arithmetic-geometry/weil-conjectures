@@ -24,11 +24,6 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 
 /-!
 # The shriek-stratum reduction for integral tensor constructibility
-
-Source: literature/blueprint/latest/blueprint/part-six-operations/sec-constructibility-upper-shriek/
-sec-ladic-summary/sec-i-heart/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md,
-paragraphs “Reduction to a stratum” and the first sentence of “The stratum”
-(blueprint: lem-sfb-integral-tensor-stratum-reduction).
 -/
 
 @[expose] public section
@@ -45,10 +40,6 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- To prove integral tensor closure it suffices to tensor bounded constructible
 objects with the bounded finite free scalar local models on the strata.
-
-Source: det-lem-int-tensor-product.proof.md, “Reduction to a stratum” and the
-pullback assertion at the start of “The stratum”.
-(blueprint: lem-sfb-integral-tensor-stratum-reduction).
 
 Proof: fix L and let P be the class of K for which K tensor L is bounded constructible.
 Native K-flat tensor is exact, and the integral bounded constructible subcategory is

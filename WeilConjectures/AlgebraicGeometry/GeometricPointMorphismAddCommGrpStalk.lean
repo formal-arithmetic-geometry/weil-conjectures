@@ -17,7 +17,6 @@ universe u v
 namespace AlgebraicGeometry.Scheme
 /-- The representative-preserving additive stalk isomorphism.
 Source: Stacks Project, Étale Cohomology, Remark 59.29.8, Tag 04FN.
-(blueprint: new-geometric-point-morphism-addcommgrp-stalk)
 
 Proof: The category-equivalence component gives an equivalence of pointed étale
 neighbourhoods which preserves the underlying étale object. The source stalk

@@ -294,7 +294,6 @@ set_option backward.isDefEq.respectTransparency false in
 Its degree-zero component is specified, so the map is uniquely determined.
 
 Source: Stacks Project, Tags 01EP and 01FM; Tag 08C1, first paragraph.
-(blueprint: lem-sc-injective-alternating-cech-row-augmentation)
 
 Proof: Restriction of a global section to each increasing one-tuple has zero
 Čech differential, because the two restrictions to every pair agree. Construct

@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.ZariskiEtaleInclusionMorphismOfSites
 
 /-! # Injectivity of étale restriction from Zariski restriction
 
-Source: Stacks Project, Tag 09ZF, first two proof paragraphs
-(blueprint: lem-weil-pbc-gabber-h0-etale-injective).
+Source: Stacks Project, Tag 09ZF, first two proof paragraphs.
 -/
 
 @[expose] public section
@@ -44,8 +43,7 @@ private theorem zarEtale_continuous (X : Scheme.{u}) :
 
 
 /-- Zariski bijectivity implies injectivity of the étale unit on global sections.
-Source: Stacks Project, Tag 09ZF, first two proof paragraphs
-(blueprint: lem-weil-pbc-gabber-h0-etale-injective).
+Source: Stacks Project, Tag 09ZF, first two proof paragraphs.
 
 Proof:
 1. Restrict F and its inverse image to open subschemes, obtaining Zariski sheaves.

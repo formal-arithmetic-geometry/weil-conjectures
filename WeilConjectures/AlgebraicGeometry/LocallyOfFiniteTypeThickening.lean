@@ -14,8 +14,7 @@ import WeilConjectures.Algebra.FiniteTypeLiftNilpotent
 /-!
 # Local finite type across a finite order thickening
 
-Source: Stacks Project, More on Morphisms, Lemma 37.3.3 (Tag 09ZW), part (2)
-(blueprint: lem-weil-pbc-thickening-lft-cartesian).
+Source: Stacks Project, More on Morphisms, Lemma 37.3.3 (Tag 09ZW), part (2).
 -/
 
 @[expose] public section
@@ -99,18 +98,14 @@ private theorem finiteType_quotient_appLE_of_closed_baseChange
 
 /-- A morphism is locally of finite type exactly when its base change along a finite order
 thickening is locally of finite type.
-Source: Stacks Project, Tag 09ZW, part (2)
-(blueprint: lem-weil-pbc-thickening-lft-cartesian).
+Source: Stacks Project, Tag 09ZW, part (2).
 
 Proof:
 1. Local finite type passes from `f'` to its base change
    (def-pc-base-change, lem-weil-pbc-lft-base-change; Stacks Tag 01T4).
 2. For affine opens `U' = Spec A'` and `V' = Spec B'` with `f'(V') ⊆ U'`, the
-   defining ideal `I` of `S` on `U'` is nilpotent (def-sbc-first-order-thickening,
-   def-sbc-closed-immersion-ideal-sheaf, def-sbc-ideal-sheaf-powers). The inverse image of
-   `V'` in the pullback is the affine open `Spec (B'/IB')` over `Spec (A'/I)`
-   (lem-weil-pbc-open-fibre-product, lem-weil-pbc-fibre-product-affine-spectra,
-   def-pc-fibre-product). This follows from the affine fibre product and the tensor
+   defining ideal `I` of `S` on `U'` is nilpotent. The inverse image of
+   `V'` in the pullback is the affine open `Spec (B'/IB')` over `Spec (A'/I)`. This follows from the affine fibre product and the tensor
    description of the quotient by the extended ideal.
 3. If the base change is locally of finite type, each `A'/I → B'/IB'` is of finite type
    (lem-weil-pbc-lft-affine-pairs, Stacks Tag 01T2). Lift its generators to `B'`.

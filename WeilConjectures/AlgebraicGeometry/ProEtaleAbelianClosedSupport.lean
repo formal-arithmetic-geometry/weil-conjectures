@@ -16,8 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 /-!
 # Closed support for abelian pro-etale sheaves
 
-Source: Stacks Project, Tags 09AA and 09AH
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 09AA and 09AH.
 -/
 
 @[expose] public section
@@ -74,8 +73,7 @@ private theorem abDetectIso {X U Z : Scheme.{u}}
 complement vanishes. This is the `Ab` counterpart of base
 `ProEtale.isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl` (stated for modules).
 
-Source: Stacks, Tags 09AA and 09AH
-(auxiliary; not a blueprint node).
+Source: Stacks, Tags 09AA and 09AH.
 
 Proof: the counit of `i^* ⊣ i_*` is invertible (`isIso_upperStarLowerStarAdjunction_counit`), so
 the closed restriction of the unit is invertible by the adjunction triangle identity. Its open

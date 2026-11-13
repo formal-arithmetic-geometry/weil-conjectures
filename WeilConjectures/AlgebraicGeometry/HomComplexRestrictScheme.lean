@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.InternalHomOverEquiv
 
 /-! # Ordinary internal Hom complexes on an open subscheme
 
-Source: Stacks Project, Cohomology, Tag 08DL, construction of internal Hom.
-(blueprint: lem-sc-hom-complex-restrict-scheme). -/
+Source: Stacks Project, Cohomology, Tag 08DL, construction of internal Hom. -/
 
 @[expose] public section
 
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry
 
 Source: Stacks Project, Cohomology, Tag 08DL, construction of internal Hom;
 Mathlib's `Scheme.Modules.overFunctorEquiv` and `Scheme.Modules.overEquiv`.
-(blueprint: lem-sc-hom-complex-restrict-scheme).
 
 Proof: First restrict both complexes to the over-U site. The isomorphism
 `homComplex_restrict_open` identifies the Hom complex there with the restriction

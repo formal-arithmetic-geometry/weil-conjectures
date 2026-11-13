@@ -8,9 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalTraceCoord
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteSingleUnitNormalization
 /-!
 # The second normalized coordinate exchange
-
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -37,8 +34,7 @@ attribute [local irreducible] derivedBaseChangeMap CoordinateTrace.exchange1
   singleFunctorObjUnitIso derivedTensorRightUnitor
 
 /-- Normalize scalar chart exchange to the second common-base coordinate.
-Source: blueprint thm-amb-p1-adjunction.proof.md, the coordinate trace calculations.
-(auxiliary; not a blueprint node).
+
 Proof: First combine the pushed coordinate and coefficient maps and apply their square
 identity. Specialize scalar chart exchange to the second projection, rewrite the
 canonical single-object unit comparison through its typed cache, and reassociate. -/

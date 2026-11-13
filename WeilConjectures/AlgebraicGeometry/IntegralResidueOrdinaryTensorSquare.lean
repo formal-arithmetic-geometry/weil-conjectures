@@ -11,7 +11,6 @@ import all WeilConjectures.AlgebraicGeometry.IntegralResiduePullOrdinaryUnit
 /-! # The ordinary balanced scalar tensor square
 
 Source: Bhatt--Scholze, Remark 6.8.15 and Lemma 6.5.9(5), p. 51.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -215,7 +214,7 @@ and the inverse monoidal unit of residue pullback. Naming this construction befo
 specializing the coefficients avoids expanding the concrete integral ring instances.
 
 Source: Bhatt--Scholze, Remark 6.8.15; the fixed coefficient identification in the
-proof of Lemma 6.5.9(5). (auxiliary; not a blueprint node) -/
+proof of Lemma 6.5.9(5). -/
 @[irreducible] noncomputable def residueOrdinaryRestrictedRegularPullIso
     (Λ A : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] [MonObj A] [IsCommMonObj A]
@@ -257,7 +256,6 @@ attribute [local irreducible] Mod.monoidalCategoryStruct
 /-- The ordinary scalar pull square is the balanced tensor comparison.
 Source: Bhatt--Scholze, Remark 6.8.15 and the ordinary tensor-pullback identity
 in the proof of Lemma 6.5.9(5), p. 51; explicit comparison of the canonical maps.
-(auxiliary; not a blueprint node)
 
 Proof. Write TX, TY for extension, SX, SY for restriction, F for integral
 pullback and G for pullback after the coefficient change. The inverse scalar

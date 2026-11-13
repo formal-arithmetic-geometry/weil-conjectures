@@ -24,7 +24,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 
 Source: Stacks Project, Duality for Schemes, Tag 0A9U, hypothesis translation
 in lem-sc-smooth-proper-diagonal-tensor-formula step 1.
-(blueprint: lem-sc-perfect-immersion-stalkwise-tor-bounds).
 -/
 
 @[expose] public section
@@ -63,7 +62,6 @@ namespace AlgebraicGeometry
 Tor bounds in both tensor variables on the actual stalk restriction of scalars.
 Source: Stacks Project, Tag 0A9U, hypothesis translation in step 1 of
 lem-sc-smooth-proper-diagonal-tensor-formula.
-(blueprint: lem-sc-perfect-immersion-stalkwise-tor-bounds).
 
 Proof. Fix z in Z and put y = i(z). Direct image along a closed immersion is exact
 on modules: its stalk is the source stalk at points of Z and zero outside Z.

@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.HomComplexProjections
 /-! # The ordinary evaluation differential on one tensor summand
 
 Source: Stacks Project, Tag 08DQ, and Section 20.41.
-(blueprint: lem-pc-ordinary-evaluation-differential-summand).
 -/
 
 @[expose] public section
@@ -48,7 +47,6 @@ set_option backward.isDefEq.respectTransparency true in
 /-- On a single tensor summand, evaluation satisfies the projected differential equation.
 Source: Stacks Project, Tag 08DQ, ordinary complex comparison; Section 20.41,
 Hom-complex differential.
-(blueprint: lem-pc-ordinary-evaluation-differential-summand).
 
 Proof: Use the specified component formula for the graded maps e. On the summand
 F^p tensor D^q, the total differential is d_F tensor 1 plus (-1)^p times

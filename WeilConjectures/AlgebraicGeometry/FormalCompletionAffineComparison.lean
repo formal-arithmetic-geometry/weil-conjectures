@@ -25,7 +25,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 /-! # Affine comparison of the completed arrows
 
 Source: Stacks Project, Lemma 0881, affine identification in its proof, and Lemma 087W.
-(blueprint: lem-weil-pbc-formal-completion-affine-comparison).
 -/
 
 @[expose] public section
@@ -106,7 +105,6 @@ injectivity nor exactness of the completed maps.
 
 Source: Stacks Project, Lemma 0881, the affine identification in its proof;
 Lemma 087W; Algebra, Lemma 00MB (2) supplies the subsequent exactness argument.
-(blueprint: lem-weil-pbc-formal-completion-affine-comparison).
 
 Proof:
 1. Take A to be the ring of sections on U, and J the sections of I on U. The affine

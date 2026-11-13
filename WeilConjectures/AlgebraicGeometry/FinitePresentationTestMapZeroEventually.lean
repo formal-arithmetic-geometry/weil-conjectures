@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Eventual vanishing on a quasi-compact test scheme
 
-Source: Stacks Project, Tag 01ZR (3), affine vanishing and Zariski gluing.
-(blueprint: lem-pc-fp-test-map-zero-eventually). -/
+Source: Stacks Project, Tag 01ZR (3), affine vanishing and Zariski gluing. -/
 
 @[expose] public section
 
@@ -68,7 +67,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A module map on a quasi-compact test scheme over a stage vanishes at a later stage
 if its pullback to the limit is zero. Both modules are finitely presented and quasi-coherent.
 Source: Stacks Project, Tag 01ZR (3), affine vanishing and Zariski gluing.
-(blueprint: lem-pc-fp-test-map-zero-eventually).
 
 Proof: Put b = t followed by the structural map to Spec(R_k). Apply
 finitePresentation_zero_map_descent to b, with both initial indices equal to k.

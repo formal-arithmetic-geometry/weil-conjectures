@@ -21,8 +21,7 @@ Source: Stacks Project, Tag 08DW.
 Proof: apply `schemeDerivedQCoh_openRestriction_iff` to each stage and to the
 apex. For every cohomological degree, the corresponding cohomology sheaf of the
 given QCoh object restricts to a quasi-coherent over-module by
-`SheafOfModules.isQuasicoherent_over`.
-(blueprint: new-perfect-hom-open-restricted-qcoh). -/
+`SheafOfModules.isQuasicoherent_over`. -/
 theorem perfect_hom_open_restricted_qcoh
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))

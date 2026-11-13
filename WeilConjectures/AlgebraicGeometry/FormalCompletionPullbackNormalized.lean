@@ -14,7 +14,6 @@ import all WeilConjectures.AlgebraicGeometry.FormalSystemsPullback
 /-! # Pullback of completion with normalized quotient projections
 
 Source: Stacks Project, Tag 0887 and the completion identity in Tag 088B.
-(blueprint: lem-weil-pbc-formal-completion-pullback-normalized).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace AlgebraicGeometry
 /-- The completion-pullback isomorphism carries the pulled quotient projection to
 its new quotient projection, including specified transports of the ideal and module.
 Source: Stacks Project, Tag 0887 and the completion identity in the proof of 088B.
-(blueprint: lem-weil-pbc-formal-completion-pullback-normalized).
 
 Proof: Eliminate the equalities of the ideal and underlying module. Take the inverse
 of the completionPullbackIso component at F. At level n it is the inverse of

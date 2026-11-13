@@ -22,7 +22,6 @@ import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
 
 Source: Stacks Project, Derived Categories of Schemes, Lemma jump-loci, Tag 0BDI,
 `literature/stacks-project/perfect.tex` (affine finite-free specialization).
-(blueprint: lem-sc-finite-free-complex-homology-upper-semicontinuous).
 -/
 
 @[expose] public section
@@ -98,7 +97,6 @@ whose residue-field ranks compute the dimension of fibre homology.
 
 Source: Stacks Project, Tag 0BDI, proof of Lemma jump-loci in
 `literature/stacks-project/perfect.tex`, affine finite-free specialization.
-(blueprint: lem-sc-finite-free-complex-homology-upper-semicontinuous).
 
 Proof: Choose finite bases in degrees `i - 1`, `i`, `i + 1`, with cardinalities
 `a`, `c`, `b`, respectively. Let `M` be the matrix of the outgoing differential and
@@ -242,16 +240,15 @@ strict sublevel set is a finite union of principal opens, hence open and quasi-c
 
 Source: Stacks Project, Derived Categories of Schemes, Lemma jump-loci, Tag 0BDI,
 `literature/stacks-project/perfect.tex` (affine finite-free specialization).
-(blueprint: lem-sc-finite-free-complex-homology-upper-semicontinuous).
 
 Proof (the three steps of the node):
 1. Choose finite bases in degrees `i - 1`, `i`, and `i + 1`. Write the adjacent
-   differentials as matrices, with fibre ranks `r₀` and `r₁` (def-weil-matrix-rank).
+   differentials as matrices, with fibre ranks `r₀` and `r₁`.
    Rank-nullity for the outgoing differential, and then for the quotient of its kernel
-   by the incoming image (lem-weil-pbc-idempotent-charpoly-rank-nullity), gives the fibre
+   by the incoming image, gives the fibre
    homology dimension `c - r₁ - r₀`, where `c` is the rank of the middle term.
 2. The locus where a matrix has fibre rank at least `s` is the finite union of `D(Δ)`
-   for its `s` by `s` minors (def-weil-matrix-rank). Laplace expansion gives the criterion
+   for its `s` by `s` minors. Laplace expansion gives the criterion
    using minors of exactly size `s`; the size-zero minor is `1`. Determinants commute
    with reduction to the residue field, and their reductions are nonzero exactly outside
    the prime. Intersections remain finite unions because `D(f) ∩ D(g) = D(fg)`.

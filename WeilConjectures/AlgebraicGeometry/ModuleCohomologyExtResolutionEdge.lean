@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtSectionDiagram
 /-! # Edge compatibility for the resolution-normalized comparison
 
 Source: Stacks Project, Tags 03FD, 01FB and 01F7.
-(blueprint: new-module-cohomology-ext-resolution-edge)
 -/
 
 @[expose] public section
@@ -46,7 +45,6 @@ This asserts an equality for the constructed `moduleCohomologyExtResolutionEquiv
 not for arbitrary natural equivalences.
 Source: Stacks Project, Tag 03FD, Lemma 21.12.4; Tag 01FB, Remark 20.14.2;
 Tag 01F7, Section 20.14.
-(blueprint: new-module-cohomology-ext-resolution-edge)
 
 Proof: Let D be the choices defining moduleCohomologyFMap f (identity).
 Its resolutions I of F and J of f_*F, injective replacement K of f_*I,

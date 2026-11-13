@@ -25,9 +25,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Representative-level successor counit naturality.
 
-Source: the counit naturality step of `def-pe-internal-perfect-reduction-hom-equiv`.
-(blueprint: lem-pe-internal-perfect-ordinary-step-counit-chain).
-
 Proof: apply `internalPerfectOrdinaryStepCounit_naturality` (naturality of the derived
 extension counit, conjugated by ordinary balancing) to the homotopy class of `g`, then
 expand the ordinary balancing step of that class as the conjugated chain map

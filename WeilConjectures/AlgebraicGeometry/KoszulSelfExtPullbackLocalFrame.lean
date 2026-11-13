@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionQuotientFramePullback
 
 /-! # A finite free chart for self Ext after tensor pullback
 
-Source: Stacks Project, Tag 0BQY, Lemma 48.15.4, zero-differential Hom calculation.
-(blueprint: lem-sc-koszul-self-ext-pullback-local-frame). -/
+Source: Stacks Project, Tag 0BQY, Lemma 48.15.4, zero-differential Hom calculation. -/
 
 @[expose] public section
 
@@ -39,7 +38,6 @@ no stalk, auxiliary open restriction, or conormal dual is involved.
 
 Source: Stacks Project, Tag 0BQY, Lemma 48.15.4, proof through the displayed
 identification of self Ext with Hom from the degree minus n Koszul term.
-(blueprint: lem-sc-koszul-self-ext-pullback-local-frame).
 
 Proof: Put A = Gamma(Y,U), I = ker(i)(U), and B = A/I. The closed immersion on
 this affine chart identifies its inverse image with Spec B over Spec A. Use

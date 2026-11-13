@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackPerfect
 
 /-! # Affine pullback of a perfect generator
 
-Source: Stacks Project, Derived Categories of Schemes, Remark 36.16.4, Tag 0BQT
-(blueprint: lem-pc-perfect-generator-pullback).
+Source: Stacks Project, Derived Categories of Schemes, Remark 36.16.4, Tag 0BQT.
 
 The weak generator condition is expressed by the shifted-Hom vanishing criterion,
 just as in `AlgebraicGeometry.exists_perfect_generator`. All test objects belong to
@@ -35,7 +34,7 @@ namespace AlgebraicGeometry
 
 /-- The derived pullback of a perfect generator along an affine morphism of qcqs schemes
 is a perfect generator of the quasi-coherent derived category of the source.
-Source: Stacks Project, Tag 0BQT (blueprint: lem-pc-perfect-generator-pullback).
+Source: Stacks Project, Tag 0BQT.
 
 Proof:
 1. By `lem-pc-derived-pullback-tensor-qcoh`, derived pullback preserves quasi-coherent

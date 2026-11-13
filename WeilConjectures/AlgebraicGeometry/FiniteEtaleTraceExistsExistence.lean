@@ -22,39 +22,38 @@ namespace AlgebraicGeometry.Etale
 and the sum formula for every finite clopen splitting, including the empty splitting.
 Source: Stacks Project, Section 03SH, paragraph after Definition 03SE, and the descent
 argument in SGA 4, Exposé IX, 5.1.
-(blueprint: lem-weil-pbc-finite-etale-trace-exists-existence)
 
 Proof. Put `W_Y = W ×_X Y` and use the restriction isomorphism to identify
 `f_* f⁻¹ F` with the sheaf `P_F(W) = F(W_Y)`. For a splitting `D` of `T_Y` with
 sections `σ_j`, define the homomorphism `Σ_D(t) = ∑ j, F(σ_j)(t)`. These sums commute
-with restriction: pulling `D` back along `h : T' → T` pulls its sections back, and the
+with restriction: pulling `D` back along `h: T' → T` pulls its sections back, and the
 pullback universal property gives `h_Y ∘ σ'_j = σ_j ∘ h`.
 
 The sums are independent of the splitting. For splittings indexed by finite sets `J`
 and `K`, intersect their clopen pieces. The images `T_jk` of the intersections in `T`
 are clopen, partition `T` for each fixed `j` and for each fixed `k`, and on `T_jk`
 the two sections agree, since both invert the same isomorphism. At each point they
-therefore determine a bijection `π : J ≃ K`. The opens `⋂ j, T_j(π j)` cover `T`;
+therefore determine a bijection `π: J ≃ K`. The opens `⋂ j, T_j(π j)` cover `T`;
 on each such open reindexing the finite sum proves equality. Sheaf separatedness
 proves equality on `T`. If the cardinalities differ, `T` is empty and its group of
 sections is zero; thus the empty splitting causes no exception.
 
 Finite étale local splitting (Stacks 04HN) and covering base change provide every `W`
-with a covering `h_a : W_a → W` on which `W_a ×_X Y` splits. For `t ∈ F(W_Y)` form
+with a covering `h_a: W_a → W` on which `W_a ×_X Y` splits. For `t ∈ F(W_Y)` form
 `u_a = Σ_Da(F((h_a)_Y)(t))`. On overlaps restriction compatibility and independence
 of splittings make the `u_a` agree. Glue them by the sheaf condition to `u ∈ F(W)`.
 This `u` is uniquely characterized by
-`F(h)(u) = Σ_D(F(h_Y)(t))` for every `h : T → W` and every splitting `D` of `T_Y`:
+`F(h)(u) = Σ_D(F(h_Y)(t))` for every `h: T → W` and every splitting `D` of `T_Y`:
 to check the identity pull the chosen covering back to `T`, compare both local sums,
 and apply separatedness. Uniqueness follows on the original splitting covering.
 
 Define `τ_W(t) = u`. The characterization proves additivity, compatibility with all
 restrictions, and naturality in `F`, since each local sum has these properties. Hence
-`τ : P_F → F` is a sheaf morphism. Transport it across the restriction isomorphism to
+`τ: P_F → F` is a sheaf morphism. Transport it across the restriction isomorphism to
 obtain `tr`. For a splitting of `Y` over `X`, pull its pieces and sections back to `W`
 and apply the characterization with `h = id_W`; this gives the required sum formula.
 
-For étale `g : X' → X`, the canonical pullback-pasting isomorphism `κ_W` carries
+For étale `g: X' → X`, the canonical pullback-pasting isomorphism `κ_W` carries
 splittings for the pullback of `f` to splittings for `f` at the corresponding object
 of `X.Etale`. The two induced restrictions of sections commute with `κ`, by equality
 of their two pullback projections. Thus the characterization identifies the trace

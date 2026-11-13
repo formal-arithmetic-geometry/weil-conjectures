@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationComponentFactorizatio
 /-! # Ordinary evaluation postcomposition
 
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
-(blueprint: lem-pc-ordinary-evaluation-postcomposition).
 -/
 
 @[expose] public section
@@ -117,9 +116,8 @@ private theorem ordinaryEvaluation_component_postcomposition (X : Scheme.{u}) (U
       zero_comp]
 
 /-- Ordinary evaluation is natural in the coefficient complex.
-Source: Stacks Project, cohomology.tex, Tag 08DJ (lemma-internal-hom) and
-Tag 08DQ (lemma-dual-perfect-complex), component calculation.
-(blueprint: lem-pc-ordinary-evaluation-postcomposition).
+Source: Stacks Project, cohomology.tex, Tag 08DJ and
+Tag 08DQ, component calculation.
 
 Proof: Use chain-map extensionality, total tensor coproduct inclusions in degrees
 (p,q), and the Hom product projections indexed by r. Naturality of tensor inclusions

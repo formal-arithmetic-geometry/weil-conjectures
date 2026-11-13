@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.BoundedOrdinaryEvaluationAssembl
 /-! # Ordinary evaluation and one part of the differential
 
 Source: Stacks Project, Tag 08DQ, and Section 20.41.
-(blueprint: lem-pc-ordinary-evaluation-post-differential).
 -/
 
 @[expose] public section
@@ -38,7 +37,6 @@ set_option maxHeartbeats 800000 in
 -- Naturality rewrites involve the expanded sheaf tensor and internal Hom instances.
 /-- Evaluation commutes with the differential in the output complex.
 Source: Stacks Project, Tag 08DQ, ordinary evaluation calculation, and Section 20.41.
-(blueprint: lem-pc-ordinary-evaluation-post-differential).
 
 Proof: If r+q is nonzero, both evaluation components vanish. Otherwise p=r+n
 and p+1=r+m. Expand the component definition, and move d_F across the

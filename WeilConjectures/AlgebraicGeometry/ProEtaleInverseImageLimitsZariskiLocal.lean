@@ -11,7 +11,6 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
 # Zariski locality of preservation of pro-etale inverse-image limits
 
 Source: Stacks Project, Tag 09AA, proof of lemma-closed-immersion.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -63,7 +62,6 @@ private noncomputable def inverseImageCompIso {X Y Z : Scheme.{u}}
 /-- Preservation of small limits by inverse image is local on affine opens of the target.
 
 Source: Stacks Project, Tag 09AA, proof of lemma-closed-immersion.
-(auxiliary; not a blueprint node)
 
 Proof: for every affine open U in X, the Cartesian square with Y restricted over U
 identifies the two composites of inverse images by uniqueness of adjoints.  Restriction

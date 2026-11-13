@@ -26,8 +26,7 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 /-! # Profinite free modules and unbounded derived slice Hom
 
 Source: Stacks Project, Cohomology on Sites, Tags 08FI and 08J7;
-Hemo--Richarz--Scholbach, Section 3, Example 3.1 and equation (4.1)
-(auxiliary; not a blueprint node).
+Hemo--Richarz--Scholbach, Section 3, Example 3.1 and equation (4.1).
 
 The normalized comparison retains the universal free generators, an actual chain
 isomorphism on K-injective representatives, and its derived localization square.
@@ -50,8 +49,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) (P : Profinite.{u})
 
 /-- The existing strong monoidal inverse image lifted to internal coefficient modules.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(auxiliary; not a blueprint node). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 def pointModulePullback : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ ⥤
     Internal Λ X := (upperStarFromPoint X).mapMod Λ
 end AlgebraicGeometry.ProEtale.ProfiniteFreeSlice

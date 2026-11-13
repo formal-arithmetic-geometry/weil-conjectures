@@ -38,8 +38,7 @@ attribute [local instance] cupRealizationMonoidalCategory cupRealizationSymmetri
 
 /-- Component maps and the signed chain equation obtained by sheafifying the pairing.
 This is the assembly statement before packaging the components as a morphism of complexes.
-Source: Stacks Project, Tag 0FKU, construction before Lemma 20.31.3.
-(blueprint: lem-sc-module-cup-resolution-components) -/
+Source: Stacks Project, Tag 0FKU, construction before Lemma 20.31.3. -/
 def CupResolutionPairing.ComponentData {F G : X.Modules} (D : CupResolutionPairing F G) :=
   ∃ l : ∀ n : ℤ, (D.left.integerComplex ⊗ D.right.integerComplex).X n ⟶
       D.target.integerComplex.X n,
@@ -58,7 +57,6 @@ def CupResolutionPairing.ComponentData {F G : X.Modules} (D : CupResolutionPairi
 
 /-- The component assembly from restriction-compatible bilinear maps and Leibniz.
 Source: Stacks Project, Tag 0FKU, construction before Lemma 20.31.3.
-(blueprint: lem-sc-module-cup-resolution-components)
 Proof: in each bidegree apply the sheaf tensor universal property to the section pairing,
 then use the coproduct universal property of the total tensor. The Leibniz identity gives
 the displayed chain equation; negative summands are zero by extension. -/
@@ -73,8 +71,7 @@ Proof: use the sheaf tensor universal property to descend the restriction-compat
 bilinear section maps in each nonnegative bidegree. Assemble these maps on the coproduct
 terms of the total tensor. The Leibniz identity gives the differential compatibility.
 Negative-degree factors are zero, so extend those summands by zero. The coproduct
-inclusion formula is exactly the section formula in Realizes.
-(blueprint: lem-sc-module-cup-resolution-existence) -/
+inclusion formula is exactly the section formula in Realizes. -/
 theorem moduleCup_resolution_realization_exists {F G : X.Modules} (D : CupResolutionPairing F G) :
     ∃ t : D.left.integerComplex ⊗ D.right.integerComplex ⟶ D.target.integerComplex,
       D.Realizes t := by

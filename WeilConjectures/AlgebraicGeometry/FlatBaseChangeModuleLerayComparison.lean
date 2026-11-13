@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.FlatBaseChangeChartCohomologyTransport
 /-! # Affine target Leray comparison in module cohomology
 
 Source: Stacks Project, Tags 01XK, 01E4 and 01FB.
-(blueprint: new-flat-base-change-module-leray-comparison)
 -/
 
 @[expose] public section
@@ -66,7 +65,6 @@ comparison on the source and no Ext pullback compatibility are assumed.
 
 Source: Stacks Project, Tag 01XK, Lemma 30.4.6; Tag 01E4, Lemma 20.7.3;
 Tag 01FB, Remark 20.14.2; the affine chart dictionary in Tag 02KH.
-(blueprint: new-flat-base-change-module-leray-comparison)
 
 Proof: The affine chart fibre product is the inverse image of W under f prime.
 Pullback composition identifies its coefficient with the restriction of g prime

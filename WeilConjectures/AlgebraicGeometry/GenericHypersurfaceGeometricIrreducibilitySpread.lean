@@ -43,7 +43,7 @@ irreducible fibres on a neighbourhood of the generic point.
 
 Source: Stacks Project, Tag 0557, lemma-irreducible-polynomial.
 Proof: put A = Gamma(S, top), a domain, and K = Frac(A). Identify the generic
-fibre ring with K[t_1,...,t_n]/(P_K). If P_K is zero, all coefficients of P vanish
+fibre ring with K[t_1..,t_n]/(P_K). If P_K is zero, all coefficients of P vanish
 by injectivity of A into K, so P is zero; all fibres are affine spaces and the
 whole base works. Otherwise geometric reducedness and irreducibility say that
 over an algebraic closure of K the principal ideal (P_K) is prime. Thus P_K is
@@ -67,9 +67,7 @@ field, pass to its algebraic closure and descend irreducibility and nonemptiness
 along the surjective field-extension base change. This gives exactly geometric
 irreducibility of the fibre morphism. The resulting principal base open contains
 eta. If d = 1 the product of factor obstructions is empty and equals 1. If n = 0,
-the generic hypotheses force P = 0, handled in the first case.
-
-(blueprint: lem-sbc-generic-hypersurface-geometric-irreducibility-spread) -/
+the generic hypotheses force P = 0, handled in the first case. -/
 theorem exists_open_generic_hypersurface_geometric_irreducibility
     {S : Scheme.{u}} [IsAffine S] [IsIntegral S]
     (n : ℕ) (P : MvPolynomial (Fin n) Γ(S, ⊤))

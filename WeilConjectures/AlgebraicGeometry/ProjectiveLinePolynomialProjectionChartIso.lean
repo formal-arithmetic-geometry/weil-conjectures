@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection
 # Polynomial projective-line projection on standard charts
 
 Source: Stacks Project, Constructions, Tag 01NG and its base change to Spec k.
-(blueprint: lem-sc-p1-polynomial-projection-chart-iso)
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical linear projection of polynomial Proj is an isomorphism when
 restricted to either standard affine chart of the projective line.
 Source: Stacks Project, Constructions, Tag 01NG, base changed to Spec k.
-(blueprint: lem-sc-p1-polynomial-projection-chart-iso)
 
 Proof: by linearProjection_preimage_standardOpen, the source of the restriction
 is D₊(xᵢ). Identify it with Spec of the homogeneous localization at xᵢ, and

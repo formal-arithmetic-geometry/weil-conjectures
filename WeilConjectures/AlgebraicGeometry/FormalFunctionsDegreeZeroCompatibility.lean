@@ -19,8 +19,7 @@ Source: Stacks Project, Tags 01E4 and 01FB, degree-zero augmentation constructio
 Proof: Take the stalk of the direct-image augmentation. Left exactness makes it
 an isomorphism, so its underlying linear map gives a linear equivalence a.
 The augmentation compatibility lemma supplies b and the germ equation for this
-fixed map; the linear equivalence has that map as its underlying function.
-(blueprint: lem-weil-pbc-formal-functions-degree-zero-compatibility) -/
+fixed map; the linear equivalence has that map as its underlying function. -/
 theorem formalFunctions_degreeZero_compatibility {X Y : Scheme.{u}}
     (f : X ⟶ Y) (y : Y) :
     ∃ a : ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).obj

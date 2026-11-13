@@ -18,7 +18,6 @@ import all WeilConjectures.AlgebraicGeometry.OpenRestrictedCounitCompatibility
 /-! # Comparison square on literal restrictions
 
 Source: Stacks Project, Tags 0DJ8 and 0DJ9 (locality of the stalk comparison).
-(blueprint: lem-pc-open-restricted-canonical-square).
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -55,7 +54,6 @@ set_option linter.unusedVariables false in
 only the constructed derived-stalk isomorphism and representing isomorphism.
 Source: Stacks Project, Tag 0DJ8, locality of equation-bc; Tag 0DJ9,
 source-open induction paragraph; Tag 0D5U, exact open restriction.
-(blueprint: lem-pc-open-restricted-canonical-square).
 
 Proof: put j = U.ι, p = pullback.fst g′ j and q = pullback.snd g′ j.
 Both j and p are open immersions, so their stalk ring maps are isomorphisms.

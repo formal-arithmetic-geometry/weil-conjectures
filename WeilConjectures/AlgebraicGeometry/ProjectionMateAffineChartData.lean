@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 /-! # The geometric affine chart square
 
 Source: Stacks Project, Tag 08EU.
-(blueprint: lem-pc-projection-mate-affine-chart-data).
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ namespace AlgebraicGeometry
 
 /-- The geometric square of an affine chart, independently of derived categories.
 Source: Stacks Project, Tag 08EU, first sentence of the proof.
-(blueprint: lem-pc-projection-mate-affine-chart-data).
 
 Proof: take the section ring A on V and the inverse-image open Z. Affineness makes
 V compact and quasi-separated. Quasi-compactness of f makes Z compact, and the

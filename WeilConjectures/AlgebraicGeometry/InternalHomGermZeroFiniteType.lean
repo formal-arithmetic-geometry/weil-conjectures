@@ -95,9 +95,8 @@ private theorem zero_on_generators (X : RingedSpace.{u}) (F G : Modules X)
 /-- A local morphism from a finite type sheaf whose induced stalk map is zero
 has zero germ in internal Hom.
 
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`), second
+Source: Stacks Project, Modules, Lemma 01CP, second
 paragraph (finite type case).
-(blueprint: lem-weil-pbc-internal-hom-germ-zero-finite-type)
 
 Proof: Restrict to a neighborhood of x where F has finitely many generating
 sections. Intersect it with U. The images of these generators have zero germs

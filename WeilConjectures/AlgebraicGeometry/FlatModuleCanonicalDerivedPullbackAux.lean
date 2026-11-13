@@ -23,7 +23,6 @@ namespace AlgebraicGeometry
 /-- Every left-derived counit for tensor pullback is invertible at a flat module
 placed in degree zero.
 Source: Stacks Project, Tags 06YD and 06YJ.
-(blueprint: lem-pc-flat-single-derived-counit).
 
 Proof: The single complex on G is bounded above by zero. Its term in degree zero
 is isomorphic to G and is flat; the other terms are zero, hence flat. Apply

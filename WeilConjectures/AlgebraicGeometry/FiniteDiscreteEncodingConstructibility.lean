@@ -95,7 +95,6 @@ private theorem constructible_comparison [Finite A] [DiscreteTopology A]
 
 /-- Finite local models and bounded constructibility under coefficient encoding.
 Source: blueprint coefficient-identification proof, steps 8--9; Stacks Tags 03DA and 099R.
-(auxiliary; not a blueprint node).
 
 Proof: the coefficient-sections equation identifies the canonical ring maps after every
 scheme inverse image. The section-action equivalence thus commutes with these inverse

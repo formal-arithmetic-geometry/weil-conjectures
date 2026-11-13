@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisDegreewise
 
 Source: Stacks Project, Cohomology, Tag 08BV, proof of Lemma 20.33.2,
 using Tag 01EB and Tag 01EA.
-(blueprint: lem-pc-kinjective-mayer-vietoris-exact).
 -/
 
 @[expose] public section
@@ -31,9 +30,8 @@ namespace AlgebraicGeometry
 
 /-- The concrete restriction/direct-image diagram is short exact for a cover and
 an arbitrary complex with injective terms. K-injectivity is not needed here.
-Source: Stacks Project, Cohomology, Tag 08BV (lemma-exact-sequence-j-star),
-last paragraph; Tag 01EB (lemma-mayer-vietoris), first paragraph of its proof.
-(blueprint: lem-pc-kinjective-mayer-vietoris-exact).
+Source: Stacks Project, Cohomology, Tag 08BV,
+last paragraph; Tag 01EB, first paragraph of its proof.
 
 Proof: The transported underived adjunction is the restriction/direct-image
 adjunction. On sections over a test open T its unit is restriction from T to

@@ -16,7 +16,7 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 /-! # Affine basic neighbourhoods of closed points
 
 Source: Stacks Project, Tag 01XF, label lemma-quasi-compact-h1-zero-covering,
-first paragraph of the proof (blueprint: lem-pqf-h1-closed-point-affine-basic-open).
+first paragraph of the proof.
 -/
 
 @[expose] public section
@@ -51,7 +51,7 @@ private theorem surjective_globalSections_of_h1_zero (X : Scheme.{u})
 /-- Ideal H¹ vanishing gives an affine basic neighbourhood of each closed point.
 
 Source: Stacks Project, Tag 01XF, label lemma-quasi-compact-h1-zero-covering,
-first paragraph of the proof (blueprint: lem-pqf-h1-closed-point-affine-basic-open).
+first paragraph of the proof.
 
 Proof: Choose an affine neighbourhood U = Spec A of x and let m be its maximal
 ideal. Put Z = X \ U and Z' = Z ∪ {x}. The reduced induced closed subschemes give

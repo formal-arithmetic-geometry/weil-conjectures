@@ -15,8 +15,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 /-! # Forgetting module coefficients in canonical pullback section comparisons
 
 Source: Stacks Project, Sites, Tags 00X6, 00YV, 03CB, and 03CC, and module inverse
-image, Tags 03D3 and 03D7.
-(blueprint: lem-weil-pbc-module-pullback-section-comparison). -/
+image, Tags 03D3 and 03D7. -/
 
 @[expose] public section
 
@@ -189,7 +188,6 @@ scheme limit, directed index, or colimit assertion in this comparison.
 
 Source: Stacks Project, Sites, Tags 00X6, 00YV, 03CB, and 03CC; module inverse image,
 Tags 03D3 and 03D7.
-(blueprint: lem-weil-pbc-module-pullback-section-comparison)
 
 Proof: Start with the abelian inverse image and its unit-compatible underlying-set
 comparison. For a module sheaf G, let λ_r be its scalar-r endomorphism. Give the

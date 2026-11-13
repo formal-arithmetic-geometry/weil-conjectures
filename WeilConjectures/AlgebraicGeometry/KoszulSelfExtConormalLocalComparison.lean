@@ -40,7 +40,6 @@ on sections over every smaller open. The chosen neighborhoods cover V.
 
 Source: Stacks Project, Tag 0BQY, the zero-differential Hom calculation and its
 compatibility under changes of regular generators; Tag 062I for the conormal basis.
-(blueprint: lem-sc-koszul-self-ext-conormal-local-comparison).
 
 Proof: On each supplied affine chart let A be its section ring, I its immersion ideal,
 and B=A/I. Sheafify the normalized augmented Koszul projective resolution of B.

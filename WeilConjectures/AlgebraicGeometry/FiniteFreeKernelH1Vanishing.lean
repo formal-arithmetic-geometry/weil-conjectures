@@ -24,7 +24,7 @@ namespace AlgebraicGeometry
 to the structure sheaf.
 
 Source: Stacks Project, Tag 01XF, label lemma-quasi-compact-h1-zero-covering,
-last two paragraphs (blueprint: lem-pqf-finite-free-kernel-h1-vanishing).
+last two paragraphs.
 
 Proof: Enumerate the finite index type. The kernel F is quasi-coherent, since both
 finite free modules and the structure sheaf are quasi-coherent and kernels of maps

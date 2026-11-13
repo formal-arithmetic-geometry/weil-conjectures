@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ExternalCupUnitCoefficientIdentities
 
 Source: Stacks Project, Varieties, Tag 0BED; Cohomology on Sites, Tag 03FD;
 Cohomology, Tag 01F7.
-(blueprint: lem-sc-picard-external-cup-unit-comparison).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ open Modules
 projection pullbacks. There is no assumption on the global structure ring maps.
 Source: Stacks Project, Varieties, Tag 0BED, maps preceding the Cech Kunneth equation;
 Cohomology on Sites, Tag 03FD; Cohomology, Tag 01F7.
-(blueprint: lem-sc-picard-external-cup-unit-comparison).
 
 Proof: For X and Y use the comparison computed on injective module resolutions after
 forgetting to abelian sheaves. Forgotten injective modules are acyclic for abelian

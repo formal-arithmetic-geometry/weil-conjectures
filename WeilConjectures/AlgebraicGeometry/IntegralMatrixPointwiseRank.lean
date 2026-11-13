@@ -239,7 +239,6 @@ cover member.
 
 Source: Bhatt--Scholze, Section 6.8, continuous integral coefficient framework,
 and Example 4.1.10, exact geometric-field evaluation.
-(auxiliary; not a blueprint node)
 
 Proof: choose the supplied rational-cokernel cover and choose its finite free basis
 on each member, of rank q. Pull the cokernel presentation and this basis to an

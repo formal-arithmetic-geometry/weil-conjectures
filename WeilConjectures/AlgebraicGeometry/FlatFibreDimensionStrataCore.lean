@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.FlatFibreDimensionNearZeroDimensionalSt
 /-! # Fibrewise dense constant dimension opens
 
 Source: Stacks Project, Tag 054T.
-(blueprint: lem-sbc-flat-fibre-dimension-strata-core)
 -/
 
 @[expose] public section
@@ -52,8 +51,7 @@ Thus the inverse-image union contains every component generic point of the
 fibre. Generic points are dense in any sober space, so the union is dense.
 Membership in V n implies membership in the dimension level set, giving the
 second conclusion. No family of opens is chosen from an unproved existence
-theorem: V is constructed using interiors. Empty fibres satisfy density.
-(blueprint: lem-sbc-flat-fibre-dimension-strata-core) -/
+theorem: V is constructed using interiors. Empty fibres satisfy density. -/
 theorem exists_fibre_dimension_opens_of_flat_restrict
     {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)] :

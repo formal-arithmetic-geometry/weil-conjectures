@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.PicardTermwiseModels
 /-! # Core counit composition calculation
 
 Source: Stacks Project, Tags 06YJ and 0D5S.
-(blueprint: lem-sc-picard-termwise-composite-counit-core)
 
 This is the two-morphism counit factorization on a complex. The general
 compatibility equation additionally uses naturality at the fixed morphism
@@ -94,7 +93,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Composition of the termwise counits on a complex.
 
 Source: Stacks Project, Tags 06YJ and 0D5S.
-(blueprint: lem-sc-picard-termwise-composite-counit-core)
 
 Proof: evaluate the defining left-derived-lift equation for the pinned comparison
 at the homotopy class of P = overEquiv(U)(K). Whisker it with the quotient from

@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationData
 /-! # Invertible evaluation diagonal
 
 Source: Stacks Project, Tags 08DQ and 08DM.
-(blueprint: lem-pc-ordinary-evaluation-diagonal-block).
 -/
 
 @[expose] public section
@@ -86,7 +85,6 @@ set_option maxHeartbeats 600000 in
 /-- The diagonal component is invertible whenever its module evaluation is.
 Source: Stacks Project, Tag 08DQ, proof of `lemma-dual-perfect-complex`,
 termwise evaluation; Tag 08DM, degree of the dual complex.
-(blueprint: lem-pc-ordinary-evaluation-diagonal-block).
 
 Proof: in degree -r of Hom(P,O[0]), every product factor except the r-th
 vanishes, since O[0] is zero in all other degrees. The product universal property

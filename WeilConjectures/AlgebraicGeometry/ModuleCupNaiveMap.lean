@@ -51,7 +51,7 @@ local instance : MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRinged
 local instance : MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).2.1
 /-- Tensor sections, as a morphism of global-section modules.
-Source: Stacks, Tag 0FKU (blueprint: lem-sc-module-cup-naive-map-chain). -/
+Source: Stacks, Tag 0FKU. -/
 def moduleCup_sectionTensorMap (M N : SheafOfModules.{u} (moduleRings X.toRingedSpace)) :
     (RingedSpace.globalSectionsFunctor X.toRingedSpace).obj M ⊗
         (RingedSpace.globalSectionsFunctor X.toRingedSpace).obj N ⟶
@@ -59,8 +59,7 @@ def moduleCup_sectionTensorMap (M N : SheafOfModules.{u} (moduleRings X.toRinged
   ModuleCat.ofHom (tensorSectionsMap M N ⊤)
 
 /-- The section tensor map in degree n, constructed by the total tensor coproduct.
-Source: Stacks, Tag 0FKU, the naive product before Lemma 20.31.3.
-(blueprint: lem-sc-module-cup-naive-map-chain) -/
+Source: Stacks, Tag 0FKU, the naive product before Lemma 20.31.3. -/
 def moduleCup_naiveMapComponent
     (K L : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (n : ℤ) :
@@ -117,7 +116,6 @@ set_option maxHeartbeats 600000 in
 -- Rewriting tensor summands unfolds the two induced monoidal structures.
 /-- The summandwise section tensor maps commute with the total differentials.
 Source: Stacks, Tag 0FKU, the naive product before Lemma 20.31.3.
-(blueprint: lem-sc-module-cup-naive-map-chain)
 Proof: precompose both sides with every (i,j)-summand inclusion. The total
  differential is the sum of the differential in the first factor and the signed
  differential in the second factor. Tensor sections commute with each factor's
@@ -162,8 +160,7 @@ theorem moduleCup_naiveMap_comm
 
 
 /-- The actual naive section tensor cochain map.
-Source: Stacks, Tag 0FKU, the naive product before Lemma 20.31.3.
-(blueprint: lem-sc-module-cup-naive-map-chain) -/
+Source: Stacks, Tag 0FKU, the naive product before Lemma 20.31.3. -/
 def moduleCup_naiveMap
     (K L : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
     let T := (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex

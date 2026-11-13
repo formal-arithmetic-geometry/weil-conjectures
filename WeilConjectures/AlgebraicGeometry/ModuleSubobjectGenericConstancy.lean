@@ -22,8 +22,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A module subsheaf of a constructible sheaf is finite locally constant on a dense open.
-Source: Stacks Project, Tag 09BH, proof of (3), generic-neighbourhood argument
-(blueprint: lem-weil-pbc-module-subobject-generic-constancy).
+Source: Stacks Project, Tag 09BH, proof of (3), generic-neighbourhood argument.
 
 Proof: On a dense open the target is finite locally constant. At each of the finitely
 many component generic points, choose an etale trivialization and remove the other

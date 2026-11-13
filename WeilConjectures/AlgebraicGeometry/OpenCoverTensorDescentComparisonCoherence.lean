@@ -30,7 +30,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 and the canonical datum of tensor pullback with the prescribed chart maps.
 Source: Stacks Project, Tags 0095 and 0096; Mathlib
 `DescentData.toDescentDataCompPullFunctorIso` and pseudofunctor composition.
-(blueprint: lem-pc-open-cover-tensor-descent-comparison-coherence).
 
 Proof: Compose toDescentDataCompPullFunctorIso with the image, under the
 canonical descent functor, of the unique left-adjoint comparison between

@@ -61,7 +61,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Tensor extension followed by sheafification is left adjoint to scalar restriction.
 
 Source: Stacks Project, Sheaves on Spaces, Tags 0095 and 0096.
-(blueprint: lem-sc-field-scalar-extension-adjunction).
 
 Proof: regard a k-module-valued presheaf as modules over the constant presheaf k.
 Apply the presheaf pullback/pushforward adjunction for the map k -> R and then

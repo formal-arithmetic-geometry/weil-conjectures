@@ -11,9 +11,6 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 import Mathlib.CategoryTheory.Abelian.Exact
 
 /-! # Homology of locally constant module-valued cochains
-
-Source: blueprint `sk-prop-integral-local-structure`, Compatible isomorphisms,
-identification of constant quotient cohomology and its sections.
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +21,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
 /-- Locally constant module-valued functions, with scalar maps acting by postcomposition.
-Source: Stacks Tag 093J; blueprint Compatible isomorphisms.
-(blueprint: lem-pe-locally-constant-module-homology). -/
+Source: Stacks Tag 093J; blueprint Compatible isomorphisms. -/
 def locallyConstantModuleFunctor (T : Type v) [TopologicalSpace T]
     (R : Type r) [Ring R] : ModuleCat.{u} R ⥤ ModuleCat.{max u v} R where
   obj M := ModuleCat.of R (LocallyConstant T M)

@@ -172,7 +172,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The regular module of the pushout algebra is the tensor pullback of the direct
 image of the regular structure module, compatibly with the pullback unit.
 Source: Stacks Project, Morphisms, Tag 01SB, construction of h; Modules, Tag 008A.
-(blueprint: stage3-pushout-regular-module-comparison).
 
 Proof: Write A = f_*O_U and restrict its regular module along O_X → A. This is
 literally the module pushforward of O_U. Apply affine_module_tensor_baseChange

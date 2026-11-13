@@ -115,7 +115,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-! # Completed pullback on the published completed-coefficient categories
 
 Source: Stacks proetale.tex, Tag 099N (2),(5), blueprint order 1261.
-(auxiliary; not a blueprint node)
 The coefficient structure is fixed on all quotient projections. Ordinary pullback
 is its total derived sheafified tensor inverse image. Completion is characterized
 by its reflection universal property on the actual intrinsic complete subcategory.
@@ -131,13 +130,12 @@ namespace AlgebraicGeometry.Scheme
 variable {X Y : Scheme.{u}} (g : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
 variable (d : AdicCoefficientDatum A)
 
-/-- The original ring-valued presentation of the actual coefficient limit.
-Source: blueprint order 1261 (auxiliary; not a blueprint node). -/
+/-- The original ring-valued presentation of the actual coefficient limit. -/
 abbrev pbcActualCompletedRing (T : Scheme.{u}) :=
   (adicLisseForget T).obj (pbcAdicCompletion T d)
 
 /-- The recorded coefficient structure map, after forgetting commutativity.
-Source: Stacks 099N (auxiliary; not a blueprint node). -/
+Source: Stacks 099N. -/
 abbrev pbcActualStructureMap : pbcActualCompletedRing d Y ⟶
     (proEtaleSheafDirectImage g RingCat.{u + 1}).obj (pbcActualCompletedRing d X) :=
   ⟨Functor.whiskerRight (completedCoefficientDirectImageMap g d).hom

@@ -111,7 +111,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Collapse compatibility for the canonical recursively generated pairing.
 Source: Banerjee, arXiv:1004.1491, §1.1.4, pp. 15–16; Stacks, Tag 0FKR.
-(blueprint: new-module-cup-godement-iterate-pairings-canonical-collapse)
 Proof: Induct on n. At n=0 substitute the recursion twice and p0=id; beta.multiply is exactly the
 asserted equality after functoriality simplifies T(id). For n+1 split the insertion position into
 zero and successor. Position zero uses beta.multiply on T^(n+1)F and T^(n+1)G followed by

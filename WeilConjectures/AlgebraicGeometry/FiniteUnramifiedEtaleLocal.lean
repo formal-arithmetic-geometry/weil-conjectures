@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteUnramifiedEtaleLocalReduction
 /-!
 # Étale-local decomposition of finite unramified morphisms
 
-Source: Stacks Project, Étale Morphisms, Lemma 04HJ
-(blueprint: lem-weil-pbc-finite-unramified-etale-local).
+Source: Stacks Project, Étale Morphisms, Lemma 04HJ.
 -/
 
 @[expose] public section
@@ -27,20 +26,18 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Stacks Project, Étale Morphisms, Lemma 04HJ
-(blueprint: lem-weil-pbc-finite-unramified-etale-local).
-A finite unramified morphism `f : Y ⟶ X` (finite, locally of finite type, open-immersion
+/-- Stacks Project, Étale Morphisms, Lemma 04HJ.
+A finite unramified morphism `f: Y ⟶ X` (finite, locally of finite type, open-immersion
 diagonal: def-weil-unramified-morphism) becomes a finite disjoint union of closed immersions
 after passing to an étale neighbourhood of any point of its target: there are an étale
-`g : U ⟶ X`, a point `u` over `x`, a finite `J` and open-and-closed pieces
-`ι j : V j ⟶ Y ×_X U` exhibiting `Y ×_X U` as their coproduct (`IsColimit (Cofan.mk _ ι)`,
+`g: U ⟶ X`, a point `u` over `x`, a finite `J` and open-and-closed pieces
+`ι j: V j ⟶ Y ×_X U` exhibiting `Y ×_X U` as their coproduct (`IsColimit (Cofan.mk _ ι)`,
 the spelling of the sibling lem-weil-pbc-finite-etale-etale-local-split; the pieces are then
 pairwise disjoint and cover), each `ι j ≫ pullback.snd f g` a closed immersion. The
 neighbourhood need not induce an isomorphism on residue fields.
 
 Proof:
-1. The fibre over `x` is finite and `f` is separated
-   (`lem-weil-pbc-finite-closed-map-finite-fibres`). Enumerate its points, including the
+1. The fibre over `x` is finite and `f` is separated. Enumerate its points, including the
    possibility that there are none; `f` is unramified at every one of them.
 2. Apply `lem-weil-pbc-unramified-etale-local-decomposition` to those points. It gives an
    étale neighbourhood `(U, u)` and a disjoint open-and-closed decomposition of the pullback
@@ -55,8 +52,7 @@ Proof:
    `lem-weil-pbc-open-fibre-product` and the universal property `def-pc-fibre-product`.
 5. Intersect the finitely many pieces with this open. They remain open and closed, disjoint,
    and cover because the remainder has disappeared, so the new pullback is their coproduct.
-   Their maps to the new neighbourhood are base changes of the old closed immersions
-   (`lem-weil-pbc-open-fibre-product`), hence
+   Their maps to the new neighbourhood are base changes of the old closed immersions, hence
    closed immersions by `lem-weil-pbc-closed-immersion-base-change`. An empty fibre allows
    the empty family. -/
 theorem exists_etale_closed_immersion_decomposition_of_finite_unramified

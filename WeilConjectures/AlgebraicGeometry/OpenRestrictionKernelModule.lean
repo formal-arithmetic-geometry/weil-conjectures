@@ -15,7 +15,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 Source: Stacks Project, Sheaves, Lemma 00A0; More on Morphisms, Lemma 09ZU;
 and Morphisms, Section 01R1 preceding Definition 01R2.
-(blueprint: lem-weil-pbc-open-restriction-kernel-module).
 -/
 
 @[expose] public section
@@ -54,7 +53,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 module of its restriction to an ambient open subscheme.
 Source: Stacks Project, Sheaves, Lemma 00A0; More on Morphisms, Lemma 09ZU;
 and Morphisms, Section 01R1 preceding Definition 01R2.
-(blueprint: lem-weil-pbc-open-restriction-kernel-module).
 Proof: The preimage equality and commuting square identify `iV` with the base
 change of `i` along `V'.ι`. On every open of `V'`, its functions are the functions
 on the corresponding ambient open, and the functions on its inverse image in

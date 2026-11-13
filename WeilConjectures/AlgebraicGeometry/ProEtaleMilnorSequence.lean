@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.RoosCohomologySequence
 /-!
 # The Milnor sequence on the small pro-etale site
 
-Source: Weil conjectures blueprint, main-20261015, sec-proetale-coefficients,
-sk-prop-pe-milnor/det-pe-milnor-sequence.md (blueprint: det-pe-milnor-sequence).
-
 The existing strict Roos construction `WeilConjectures.integralOperationsRoos` is
 exactly Cone(1-T)[-1], including its diagonal map on strict tower morphisms.
 -/
@@ -211,12 +208,11 @@ The chosen isomorphisms e₀ and e₁ compute the cohomology of the degree-zero 
 complex. The final short exact complex is the first one with its left endpoint
 rewritten by e₁; in particular it uses the same maps, not unrelated exact sequences.
 
-md (blueprint: det-pe-milnor-sequence).
+md.
 
 Proof:
 1. In the abelian category of ringedSiteModules, apply the cone long exact
-cohomology sequence (lem-sf-derived-homology-long-exact and
- def-weil-abstract-derived-category) to 1-T on the termwise product. Exactness
+cohomology sequence to 1-T on the termwise product. Exactness
 identifies the cokernel in degree q-1 with the kernel of the outgoing map, and
 its image with the kernel in degree q. By det-pe-products-derived, using exact
 products from det-pe-products-exact, the projection-induced product/cohomology

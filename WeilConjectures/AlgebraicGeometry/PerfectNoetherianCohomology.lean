@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 /-! # Bounded coherent cohomology of perfect complexes
 
 Source: Stacks Project, Derived Categories of Schemes, Tag 0FXU, part (1).
-(blueprint: lem-pc-perfect-noetherian-cohomology).
 -/
 
 @[expose] public section
@@ -159,8 +158,7 @@ Coherence is local, so all cohomology sheaves of E are coherent. Each bounded lo
 model has zero cohomology outside its term bounds. Quasi-compactness selects a finite
 subcover; take the minimum of its lower bounds and maximum of its upper bounds.
 Outside that interval every restriction of the cohomology sheaf is zero, so the sheaf
-itself is zero. On the empty scheme all sheaves are zero; use bounds 0 and 0.
-(blueprint: lem-pc-perfect-noetherian-cohomology). -/
+itself is zero. On the empty scheme all sheaves are zero; use bounds 0 and 0. -/
 theorem perfect_bounded_coherent_cohomology (X : Scheme.{u}) [IsNoetherian X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,

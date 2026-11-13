@@ -110,7 +110,6 @@ private theorem principal_localization_zero
 
 /-- Pointwise overlap equality for two fixed chart indices.
 Source: Stacks Project, Tag 01M7, the local fraction comparison on a basic overlap.
-(blueprint: lem-sc-proj-twist-local-overlap-pointwise)
 
 Clear powers of the two chart denominators to write d*t_i=x/1 and e*t_j=y/1.
 At each prime where g_i*g_j is invertible, scalar compatibility and the common
@@ -218,8 +217,7 @@ theorem twist_localOverlap_pointwise
   exact ((Module.End.isUnit_iff _).mp he).1 (((Module.End.isUnit_iff _).mp hd).1 hcross)
 
 /-- Local fractions `t i` over the principal opens `D(g i)` of the chart of `D₊(f)` that
-evaluate to a twist section `s` at every point agree on each overlap `D(g i * g j)`.
-(blueprint: lem-sc-proj-twist-local-overlap-compatibility) -/
+evaluate to a twist section `s` at every point agree on each overlap `D(g i * g j)`. -/
 theorem twist_localOverlap_compatibility
     {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]
     (𝒜 : ℕ → σ) [GradedRing 𝒜] (k : ℤ) (f : A) (b : ℕ)

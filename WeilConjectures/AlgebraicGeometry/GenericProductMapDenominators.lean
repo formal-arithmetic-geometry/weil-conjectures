@@ -62,10 +62,6 @@ private theorem clear_denominator_of_span
 clearing and a specified value on the image of every element of the original algebra.
 Neither finiteness nor Noetherianity is needed for this assertion.
 
-Source: smooth purity blueprint, `sk-prop-sf-cbc`,
-`lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9.
-(blueprint: lem-weil-pbc-generic-product-map-denominators)
-
 Proof: Tensor associativity and commutation identify B tensor_A K' with
 (K tensor_A B) tensor_K K'. The map B tensor_A R to this generic algebra followed
 by the quotient and e kills every nilpotent, because a product of fields is reduced.

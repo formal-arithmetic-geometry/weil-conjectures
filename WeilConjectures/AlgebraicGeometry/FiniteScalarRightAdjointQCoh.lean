@@ -21,8 +21,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Quasi-coherence of a specified finite scalar right adjoint
 
-Source: Stacks Project, Tag 0AX2, comparison of right adjoints
-(blueprint: lem-sc-finite-scalar-right-adjoint-qcoh).
+Source: Stacks Project, Tag 0AX2, comparison of right adjoints.
 -/
 
 @[expose] public section
@@ -78,8 +77,7 @@ private theorem openModuleLocallySmall (Y : Scheme.{u})
 
 /-- Any specified right adjoint of derived scalar restriction has quasi-coherent
 cohomology at a bounded-below quasi-coherent input.
-Source: Stacks Project, Tag 0AX2, with Tags 0BV0 and 0AX3
-(blueprint: lem-sc-finite-scalar-right-adjoint-qcoh).
+Source: Stacks Project, Tag 0AX2, with Tags 0BV0 and 0AX3.
 
 Proof: Construct the direct-image algebra B with structure map f.c. On each open U,
 local module pushforward is faithful, since an open V contained in U is isomorphic

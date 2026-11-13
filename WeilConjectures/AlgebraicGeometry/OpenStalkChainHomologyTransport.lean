@@ -90,8 +90,7 @@ comparisons at each endpoint. This yields exactly the displayed equality.
 No tensor complex or normalized input coordinate is involved. No injectivity,
 surjectivity or nonzero condition on the complexes or their homology is used.
 Source: Stacks Project, Tags 0098 and 0D5U; Mathlib exact-functor homology
-naturality and the localization factorization of exact functors.
-(blueprint: lem-pc-open-stalk-chain-homology-transport). -/
+naturality and the localization factorization of exact functors. -/
 theorem openStalk_chain_homology_transport
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

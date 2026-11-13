@@ -25,7 +25,6 @@ namespace AlgebraicGeometry.RingedSpace
 
 /-- A finite presentation and two comparison maps generate the kernel of a second
 finite free map. Source: Stacks Project, Modules, Lemma 01BP(1), displayed map.
-(blueprint: lem-weil-pbc-finite-presentation-kernel-comparison)
 
 Proof: Put phi = P.generators.pi. The map beta sends kernel(phi) to kernel(psi).
 The map 1 - beta composed with alpha also lands in kernel(psi). Their coproduct map is split

@@ -26,7 +26,6 @@ namespace AlgebraicGeometry.Scheme
 
 Source: Stacks Project, Properties, Tag 01PG, applied to ideal sheaves; the ideal-lattice
 union is `IdealSheafData.sSup_ofFiniteType_le_eq`.
-(blueprint: lem-pqf-finite-type-ideal-module-diagram).
 
 Proof: Use the displayed subtype of finite-type subideals, ordered by inclusion. Its
 zero member gives nonemptiness, and sums give upper bounds by

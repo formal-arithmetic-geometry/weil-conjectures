@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 /-! # Local data for gluing a perfect pullback comparison
 
 Source: Stacks Project, Tag 09RF, the local data a, b, c before Tag 08DG.
-(blueprint: def-pc-perfect-open-gluing-data).
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ set_option synthInstance.maxHeartbeats 10000 in
 /-- Two local perfect objects with compatible maps into Rg_*E whose local adjoints
 are invertible. This is only local data: it contains no global object on Y.
 The comparisons γ are part of the data and all morphisms are fixed explicitly.
-Source: Stacks Project, Tag 09RF, the construction of a, b and c before gluing.
-(blueprint: def-pc-perfect-open-gluing-data). -/
+Source: Stacks Project, Tag 09RF, the construction of a, b and c before gluing. -/
 def PerfectOpenGluingData {X Y : Scheme.{u}} (g : X ⟶ Y)
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

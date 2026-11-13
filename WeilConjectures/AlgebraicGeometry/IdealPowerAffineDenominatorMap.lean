@@ -22,7 +22,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 Source: Stacks Project, Properties, Lemma 01PM, surjectivity calculation;
 Lemma 01PQ, identification of affine annihilator modules.
-(blueprint: lem-weil-pbc-ideal-power-affine-denominator-map).
 -/
 
 @[expose] public section
@@ -86,7 +85,6 @@ of the specified annihilator, with the multiplication formula on affine sections
 
 Source: Stacks Project, Properties, Lemma 01PM, last four paragraphs; Lemma 01PQ,
 first two paragraphs of the proof.
-(blueprint: lem-weil-pbc-ideal-power-affine-denominator-map).
 
 Proof: On V choose finite ideal generators g_i whose basic opens cover U
 intersect V. Localization and clearing the finitely many overlap denominators

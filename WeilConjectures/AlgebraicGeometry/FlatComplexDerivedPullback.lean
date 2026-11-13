@@ -13,8 +13,7 @@ import WeilConjectures.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 /-!
 # Termwise derived pullback of a bounded-above flat complex
 
-Source: Stacks Project, Cohomology, Tags 06YD and 06YJ
-(blueprint: lem-pc-flat-complex-derived-pullback).
+Source: Stacks Project, Cohomology, Tags 06YD and 06YJ.
 -/
 
 @[expose] public section
@@ -35,8 +34,7 @@ left-derived universal property. The isomorphism `e` in the ordinary-to-derived 
 has inverse exactly `ε` at `K`, rather than being an unrelated isomorphism.
 The localization `Qh` after the homotopy quotient represents complexes in the derived
 category; invertibility there expresses the quasi-isomorphism comparison of the node.
-Source: Stacks Project, Cohomology, Tags 06YD and 06YJ
-(blueprint: lem-pc-flat-complex-derived-pullback).
+Source: Stacks Project, Cohomology, Tags 06YD and 06YJ.
 
 Proof:
 1. By lem-pc-bounded-above-flat-kflat (Stacks 06YD), the bounded-above flat complex

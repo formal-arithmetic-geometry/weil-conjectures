@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 /-! # Composition of the restricted single-complex coefficient maps
 
 Source: Stacks Project, Tags 03CB and 09Z1, canonical comparison maps.
-(blueprint: lem-sbc-restricted-single-coefficient-composition).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry.Etale
 
 Source: Stacks Project, Tags 03CB and 09Z1; the coefficient factor of
 lem-sbc-higher-image-raw-pullback-composition-formula, step 2.
-(blueprint: lem-sbc-restricted-single-coefficient-composition).
 
 Proof: Expand each coefficient map as the single-functor comparison followed by
 single of the inverse underived composition comparison. Functoriality distributes

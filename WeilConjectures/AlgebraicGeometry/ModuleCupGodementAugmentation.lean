@@ -37,7 +37,6 @@ private theorem unit_naturality (X : Scheme.{u}) {F G : X.Modules} (f : F ⟶ G)
 
 /-- The germ in degree zero extends to the required cochain augmentation.
 Source: Stacks Project, Tag 0FKR; Banerjee, arXiv:1004.1491, §1.1.4.
-(blueprint: lem-sc-module-cup-godement-augmentation-exists)
 Proof: the two degree-zero cofaces are the two composites of the unit with
 itself and with the endofunctorial image of the unit. Naturality of the unit
 makes them equal, so the germ has zero composite with the first alternating

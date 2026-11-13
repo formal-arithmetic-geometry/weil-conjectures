@@ -30,7 +30,7 @@ namespace AlgebraicGeometry.ProEtale
 open Scheme
 
 /-- The open-closed localization sequence is short exact.
-Source: Stacks Project, Tag 09AH (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 09AH.
 
 Proof: restriction to the open identifies the sequence with the split sequence
 `F|U → F|U → 0`, using full faithfulness of extension by zero. Restriction to the

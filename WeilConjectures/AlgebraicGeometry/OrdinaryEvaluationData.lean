@@ -17,7 +17,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteProjectiveI
 /-! # Ordinary evaluation data
 
 Source: Stacks Project, Tags 08DQ and 08DM, finite total-complex calculation.
-(blueprint: def-pc-ordinary-evaluation-data).
 
 The evaluation constructions are moved here without changing their definitions,
 so the assembly theorem can be imported without a cycle. The original module
@@ -49,45 +48,35 @@ local instance localEvaluationPreadditive {C : Type u} [Category.{u} C]
 
 /-- The existing module category on the localized site, written in the carrier form
 used by internal Hom. This is an abbreviation, not a different module category.
-Source: Stacks Project, Tag 08DL
-(blueprint: lem-pc-strictly-perfect-ordinary-evaluation). 
-(blueprint: def-pc-ordinary-evaluation-data)
+Source: Stacks Project, Tag 08DL.
 -/
 abbrev localEvaluationModules (X : Scheme.{u}) (U : X.Opens) :=
   SheafOfModules.{u} ((sheafCompose ((Opens.grothendieckTopology X).over U)
     (forget₂ CommRingCat RingCat)).obj (X.sheaf.over U))
 
 /-- The structure sheaf in degree zero on the localized site.
-Source: Stacks Project, Tag 08DQ
-(blueprint: lem-pc-strictly-perfect-ordinary-evaluation). 
-(blueprint: def-pc-ordinary-evaluation-data)
+Source: Stacks Project, Tag 08DQ.
 -/
 def localEvaluationUnit (X : Scheme.{u}) (U : X.Opens) :
     CochainComplex (localEvaluationModules X U) ℤ :=
   (HomologicalComplex.single _ (.up ℤ) 0).obj (𝟙_ (localEvaluationModules X U))
 
 /-- The ordinary Hom dual, with its actual Hom-complex differential.
-Source: Stacks Project, Tag 08DM
-(blueprint: lem-pc-strictly-perfect-ordinary-evaluation). 
-(blueprint: def-pc-ordinary-evaluation-data)
+Source: Stacks Project, Tag 08DM.
 -/
 def localEvaluationDual (X : Scheme.{u}) (U : X.Opens)
     (P : CochainComplex (localEvaluationModules X U) ℤ) :=
   homComplex (R := X.sheaf.over U) P (localEvaluationUnit X U)
 
 /-- The total tensor with the ordinary Hom dual.
-Source: Stacks Project, Tag 08DQ
-(blueprint: lem-pc-strictly-perfect-ordinary-evaluation). 
-(blueprint: def-pc-ordinary-evaluation-data)
+Source: Stacks Project, Tag 08DQ.
 -/
 def localEvaluationTensor (X : Scheme.{u}) (U : X.Opens)
     (P F : CochainComplex (localEvaluationModules X U) ℤ) :=
   CochainComplex.mapBifunctor F (localEvaluationDual X U P) (curriedTensor _)
 
 /-- The specified product projection of the recorded Hom complex.
-Source: Stacks Project, Tag 08DM
-(blueprint: lem-pc-strictly-perfect-ordinary-evaluation). 
-(blueprint: def-pc-ordinary-evaluation-data)
+Source: Stacks Project, Tag 08DM.
 -/
 def localEvaluationProjection (X : Scheme.{u}) (U : X.Opens)
     (P F : CochainComplex (localEvaluationModules X U) ℤ)
@@ -99,9 +88,7 @@ def localEvaluationProjection (X : Scheme.{u}) (U : X.Opens)
 /-- The ordinary evaluation on a tensor summand, followed by a Hom projection.
 It is zero unless the dual degree cancels the input degree; otherwise it sends
 `y tensor phi` to `x ↦ y * phi(x)`, using the unit action on the second module.
-Source: Stacks Project, Tag 08DQ
-(blueprint: lem-pc-strictly-perfect-ordinary-evaluation). 
-(blueprint: def-pc-ordinary-evaluation-data)
+Source: Stacks Project, Tag 08DQ.
 -/
 def localEvaluationComponent (X : Scheme.{u}) (U : X.Opens)
     (P F : CochainComplex (localEvaluationModules X U) ℤ)
@@ -124,9 +111,7 @@ def localEvaluationComponent (X : Scheme.{u}) (U : X.Opens)
 
 /-- A chain map has the actual ordinary evaluation formula, with the tensor ordered
 as `F tensor Hom(P,O[0])`. This predicate specifies maps, not just objects.
-Source: Stacks Project, Tag 08DQ
-(blueprint: lem-pc-strictly-perfect-ordinary-evaluation). 
-(blueprint: def-pc-ordinary-evaluation-data)
+Source: Stacks Project, Tag 08DQ.
 -/
 def IsLocalOrdinaryEvaluation (X : Scheme.{u}) (U : X.Opens)
     (P F : CochainComplex (localEvaluationModules X U) ℤ)

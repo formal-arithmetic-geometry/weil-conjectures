@@ -13,8 +13,7 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 /-!
 # Local invertibility of the glued rationalization
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of embedded lattices
-(blueprint: lem-weil-pbc-lattice-glued-rationalization-isIso).
+Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of embedded lattices.
 -/
 
 @[expose] public section
@@ -176,8 +175,7 @@ private theorem rationalizeEmbedding_restrict_eq
 
 /-- The scalar extension of the explicitly constructed glued embedding is invertible.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59–60, descent of lattices.
-(blueprint: lem-weil-pbc-lattice-glued-rationalization-isIso).
-Proof: over the covering object indexed by f : V → U, use the compatible-tuple
+Proof: over the covering object indexed by f: V → U, use the compatible-tuple
 projection to identify the glued integral module with its chosen local lattice.
 The slice tensor comparison is invertible. On tensors 1 ⊗ m, the restriction of
 the glued rationalization equals the given local rationalization: the formula for

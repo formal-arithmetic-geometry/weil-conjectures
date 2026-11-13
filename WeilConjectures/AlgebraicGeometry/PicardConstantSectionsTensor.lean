@@ -31,8 +31,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- The constant ring map induced by the structure morphism.
 Source: Stacks Project, Varieties, Tag 0BED, scalar coefficients in the ordinary
-pushforward tensor formula.
-(blueprint: lem-sc-picard-constant-sections-tensor-basis). -/
+pushforward tensor formula. -/
 def picardConstantRingMap (k : Type w) [Field k] (Y : Scheme.{w})
     (g : Y ⟶ Spec (CommRingCat.of k)) :
     (Functor.const Y.Opensᵒᵖ).obj (RingCat.of k) ⟶
@@ -48,8 +47,7 @@ def picardConstantRingMap (k : Type w) [Field k] (Y : Scheme.{w})
     rfl
 
 /-- The constant presheaf of vector spaces as modules over the constant ring.
-Source: Stacks Project, Varieties, Tag 0BED, constant Gamma(X,F) coefficients.
-(blueprint: lem-sc-picard-constant-sections-tensor-basis). -/
+Source: Stacks Project, Varieties, Tag 0BED, constant Gamma(X,F) coefficients. -/
 def picardConstantVector (k : Type w) [Field k] (Y : Scheme.{w}) (M : ModuleCat.{w} k) :
     _root_.PresheafOfModules ((Functor.const Y.Opensᵒᵖ).obj (RingCat.of k)) where
   obj _ := M
@@ -58,8 +56,7 @@ def picardConstantVector (k : Type w) [Field k] (Y : Scheme.{w}) (M : ModuleCat.
   map_comp _ _ := by ext; rfl
 
 /-- Extend the constant vector space to O_Y, then tensor it with G, pointwise.
-Source: Stacks Project, Varieties, Tag 0BED, ordinary pushforward tensor coefficients.
-(blueprint: lem-sc-picard-constant-sections-tensor-basis). -/
+Source: Stacks Project, Varieties, Tag 0BED, ordinary pushforward tensor coefficients. -/
 def picardConstantSectionsTensor (k : Type w) [Field k] (Y : Scheme.{w})
     (g : Y ⟶ Spec (CommRingCat.of k)) (M : ModuleCat.{w} k) (G : Y.Modules) :
     _root_.PresheafOfModules Y.ringCatSheaf.obj :=
@@ -143,7 +140,6 @@ private def freeConstantIsColimit {C : Type w} [SmallCategory C]
 /-- A prescribed basis identifies the tensor coefficient presheaf with a coproduct.
 Source: Stacks Project, Varieties, Tag 0BED, the second isomorphism in the
 ordinary direct-image calculation.
-(blueprint: lem-sc-picard-constant-sections-tensor-basis).
 
 Proof: The constant vector presheaf sends each open to M with identity restriction.
 The basis identifies it with the coproduct of I copies of the constant k-module k:

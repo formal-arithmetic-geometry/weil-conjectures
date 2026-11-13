@@ -16,8 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 # Inverse image along an object of the small pro-etale site
 
 Source: Stacks Project, Sites and Sheaves, Tags 03CE, 00VC, 00XZ, 00WH and 0H7J;
-Modules on Sites, Tags 03D2 and 03EK; pro-etale functoriality, Tag 09A5
-(auxiliary; not a blueprint node).
+Modules on Sites, Tags 03D2 and 03EK; pro-etale functoriality, Tag 09A5.
 
 The comparison data below spell out the canonical presheaf coprojections and
 sheafification unit. The theorem applies to an arbitrary site object, with no
@@ -38,8 +37,7 @@ namespace AlgebraicGeometry.Scheme
 The chosen pullback puts the variable factor first. Its arrow is the unit of
 composition left adjoint to base change, hence is exactly the pair of the identity
 and the structure map, rather than an arbitrary arrow to the fibre product.
-Source: Stacks, Tags 03CE and 00VC
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tags 03CE and 00VC. -/
 noncomputable def proEtaleObjectInverseImageIndexPoint {X : Scheme.{u}} (W : X.ProEt)
     (U : W.left.ProEt) : proEtaleInverseImageIndex W.hom U :=
   StructuredArrow.mk
@@ -52,8 +50,7 @@ The final equation identifies the inverse of `sheafIso` with those coprojections
 followed by the actual sheafification unit. Both isomorphisms are natural in the
 sheaf, and their components are presheaf/sheaf morphisms, hence natural in site objects.
 This structure only packages the assertions; it does not choose any comparison.
-Source: Stacks, Tags 03CE, 00VC and 00WH
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tags 03CE, 00VC and 00WH. -/
 structure ProEtaleObjectRestrictionComparison {X : Scheme.{u}} (W : X.ProEt)
     (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
     [HasWeakSheafify (ProEt.topology W.left) D] where

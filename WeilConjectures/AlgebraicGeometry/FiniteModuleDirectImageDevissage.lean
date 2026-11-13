@@ -14,8 +14,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CoefficientDevissage
 # Finite module dévissage for direct images
 
 Source: Stacks Project, `more-etale.tex`, Tag 0GKW, proof of
-`lemma-proper-smooth-family-curves-modules`, lines 4379--4395
-(blueprint: lem-fd-finite-module-direct-image-devissage).
+`lemma-proper-smooth-family-curves-modules`, lines 4379--4395.
 
 The theorem states that constructibility of all cohomology sheaves of the derived
 étale direct image for the successive quotients of a finite module filtration
@@ -39,20 +38,17 @@ namespace AlgebraicGeometry
 /-- Constructibility is preserved by finite coefficient-module dévissage.
 
 Source: Stacks Project, `more-etale.tex`, Tag 0GKW, proof of
-`lemma-proper-smooth-family-curves-modules`, lines 4379--4395
-(blueprint: lem-fd-finite-module-direct-image-devissage).
+`lemma-proper-smooth-family-curves-modules`, lines 4379--4395.
 
 Proof: first compare the displayed bounded-below formulation with the unbounded one:
-`isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf`
-(`lem-weil-pbc-constructible-etale-module-sheaf-comparison`) and `H^q` of
+`isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf` and `H^q` of
 `rightDerivedFunctorPlusCompatibility` (`src-right-derived-functor-plus-compatibility`)
 identify both sides, in every integer degree.  Then induct over `Fin (r + 1)` on the
 property `constructibleHomology` of `Rf_*(underline(F i))`.  At `i = 0` the module `F 0 = ⊥`
 is zero, so its derived direct image is zero.  For the step, the inclusion
 `F i.castSucc → F i.succ` and the quotient map onto `F i.succ ⧸ (F i.castSucc).comap _` form a
 short exact sequence of finite modules, and
-`Etale.constructibleHomology_rightDerivedLowerStar_constantSheaf_of_shortExact`
-(`lem-fd-constant-module-direct-image-extension`) gives the middle term from the induction
+`Etale.constructibleHomology_rightDerivedLowerStar_constantSheaf_of_shortExact` gives the middle term from the induction
 hypothesis and `hgraded i`.  At `Fin.last r`, `hwhole` identifies `F (Fin.last r)` with `M`.
 -/
 theorem finiteModule_directImage_devissage

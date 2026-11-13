@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.FinitePresentationOverlapTripleTranspor
 
 /-! # Persistent eventual triple overlap equation
 
-Source: Stacks Project, Tags 01ZR and 05N7.
-(blueprint: lem-pc-fp-overlap-triple-eventually). -/
+Source: Stacks Project, Tags 01ZR and 05N7. -/
 
 @[expose] public section
 
@@ -32,7 +31,6 @@ set_option linter.unusedVariables false in
 /-- The composition defect of a single triple overlap vanishes eventually, and remains
 zero at every later stage.
 Source: Stacks Project, Tag 01ZR (3), finite-type zero-map descent.
-(blueprint: lem-pc-fp-overlap-triple-eventually).
 
 Proof: On the universal threefold overlap at k subtract T13 from T12 composed with T23. Choose the
 usual iterated pullback at k. The source and target are pullbacks of the prescribed finitely

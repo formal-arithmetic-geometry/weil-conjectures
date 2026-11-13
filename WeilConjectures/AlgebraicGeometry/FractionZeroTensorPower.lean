@@ -11,8 +11,7 @@ import WeilConjectures.Topology.ModuleCohomologyTopComparison
 
 /-! # Tensor-power annihilation from zero cohomology fractions
 
-Source: Stacks Project, Cohomology of Schemes, Tags 01XR and 09MR
-(blueprint: lem-sc-section-affine-open-kills-cohomology-localization-step).
+Source: Stacks Project, Cohomology of Schemes, Tags 01XR and 09MR.
 -/
 
 @[expose] public section
@@ -183,7 +182,6 @@ step; it assumes neither an affine nonvanishing open nor a localization comparis
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 01XR, conclusion from the
 localization of Lemma 09MR (https://stacks.math.columbia.edu/tag/01XR).
-(blueprint: lem-sc-section-affine-open-kills-cohomology-localization-step).
 
 Proof: Forget the scalar action on module cohomology. Global module sections with
 scalars forgotten are sections on the top open. Forgetting scalars is exact, so it

@@ -36,7 +36,6 @@ open Scheme
 zero becomes zero on a pointed etale refinement of that neighbourhood.
 
 Source: Stacks Project, Tag 0EYP, degree zero, via Tags 03Q9, 09XK, 09ZH and 0A3I.
-(blueprint: lem-sbc-integral-fibre-section-local-zero).
 
 Proof: write the integral pullback over the strict henselization Spec A as Spec B.
 The section z restricts to a section z_sh there, by the inverse-image unit. With

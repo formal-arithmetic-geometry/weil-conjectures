@@ -43,9 +43,7 @@ extension, the base-change projection is an open surjection, so the inverse imag
 of the dense open is still dense. The displayed map is the base change of the open
 immersion from the open fibre to the full fibre and has exactly this inverse image
 as its range. Thus it has dense range, as claimed. Reduction of the base in Tag
-054X preserves fibre spaces, so nilpotents do not require extra hypotheses.
-
-(blueprint: lem-sbc-generic-open-geometric-fibre-density) -/
+054X preserves fibre spaces, so nilpotents do not require extra hypotheses. -/
 theorem exists_open_geometric_fibre_dense_of_open {X T : Scheme.{u}}
     (f : X ⟶ T) [LocallyOfFiniteType f] [QuasiCompact f]
     (W : X.Opens) (η : T) (hη : IsGenericPoint η Set.univ)

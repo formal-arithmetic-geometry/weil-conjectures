@@ -24,7 +24,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Open restriction and comparison of K-flat tensor homology
 
 Source: Stacks Project, Tags 06YH, 08CG and 06YB.
-(blueprint: lem-pc-open-kflat-tensor-homology-comparison).
 -/
 
 @[expose] public section
@@ -226,8 +225,7 @@ commutative square and two-of-three prove the claim for F[0]. Taking homology of
 the zigzag gives an isomorphism to the tensor with T. Compose it with the open
 restriction homology and total-tensor comparisons. The construction is valid for
 unbounded complexes,
-empty opens, and arbitrary coefficient sheaves; it needs no degree bounds.
-(blueprint: lem-pc-open-kflat-tensor-homology-comparison). -/
+empty opens, and arbitrary coefficient sheaves; it needs no degree bounds. -/
 theorem open_kFlat_tensor_homology_comparison
     {X : TopCat.{u}} (R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})
     (U : TopologicalSpace.Opens X)

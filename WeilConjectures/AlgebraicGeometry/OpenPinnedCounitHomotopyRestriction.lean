@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.PinnedPullbackCounitShifts
 import WeilConjectures.AlgebraicGeometry.OpenPinnedTensorCounitTransport
 
 /-! # Pinned counit restriction on homotopy complexes
-Source: Stacks Project, Tags 08DW, 08HY and 0D5S.
-(blueprint: lem-pc-open-pinned-counit-homotopy-restriction). -/
+Source: Stacks Project, Tags 08DW, 08HY and 0D5S. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -39,7 +38,6 @@ private theorem counit_path_glue {C : Type*} [Category C]
 
 /-- The pinned counit restriction equation for an arbitrary homotopy complex.
 Source: Stacks Project, Tags 08DW, 08HY and 0D5S.
-(blueprint: lem-pc-open-pinned-counit-homotopy-restriction).
 Proof: expand the two composition comparisons in the restricted coefficient.
 Their left-derived factorization equations identify their composites with the
 pinned counits with the localized underived tensor composition comparisons.

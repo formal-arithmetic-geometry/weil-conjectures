@@ -105,8 +105,7 @@ set_option backward.defeqAttrib.useBackward true in
 Source: Stacks Project, Tags 03Q9 and 03S2; this is the pointwise
 comparison after evaluation at the identity étale object.
 Proof: expand the two comparison maps, use adjunction-unit naturality and
-pullback hom_ext for the defining square.
-(blueprint: lem-weil-pbc-object-sections-naturality) -/
+pullback hom_ext for the defining square. -/
 theorem objectSections_naturality {X : Scheme.{v}} {U V : X.Etale}
     (b : U ⟶ V) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) :
     F.obj.map b.op ≫ (etaleObjectSectionsIso U).hom.app F ≫

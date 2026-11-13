@@ -15,7 +15,6 @@ import Mathlib.LinearAlgebra.TensorProduct.Pi
 /-! # Normalized affine-right Cech term comparisons
 
 Source: Stacks Project, Tag 0BED, lemma-kunneth, affine-open paragraph.
-(blueprint: lem-sc-picard-external-coefficients-affine-cech-terms).
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ variable (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
 variable (F : X.Modules) (G : Y.Modules) {ι : Type w} (U : ι → X.Opens) (V : Y.Opens)
 
 /-- The additive-group complex on the inverse image of V.
-Source: Stacks Project, Tag 0BED, affine-open paragraph.
-(blueprint: lem-sc-picard-external-coefficients-affine-cech-terms). -/
+Source: Stacks Project, Tag 0BED, affine-open paragraph. -/
 abbrev picardAffineCechLeft : CochainComplex AddCommGrpCat.{w} ℕ :=
   let W := (pullback.snd f g) ⁻¹ᵁ V
   let E := (externalCupCoefficients f g F G).restrict W.ι
@@ -42,21 +40,18 @@ abbrev picardAffineCechLeft : CochainComplex AddCommGrpCat.{w} ℕ :=
     (.up ℕ)).obj ((cechComplexFunctor U').obj E.presheafModuleCat)
 
 /-- The field-linear Cech complex with scalars restricted along f.
-Source: Stacks Project, Tag 0BED, affine-open paragraph.
-(blueprint: lem-sc-picard-external-coefficients-affine-cech-terms). -/
+Source: Stacks Project, Tag 0BED, affine-open paragraph. -/
 abbrev picardAffineCechBase : CochainComplex (ModuleCat.{w} k) ℕ :=
   ((ModuleCat.restrictScalars (scalarMap f ⊤)).mapHomologicalComplex (.up ℕ)).obj
     ((cechComplexFunctor U).obj F.presheafModuleCat)
 
 /-- The fixed right tensor factor.
-Source: Stacks Project, Tag 0BED, affine-open paragraph.
-(blueprint: lem-sc-picard-external-coefficients-affine-cech-terms). -/
+Source: Stacks Project, Tag 0BED, affine-open paragraph. -/
 abbrev picardAffineCechFactor : ModuleCat.{w} k :=
   scalarObj (V.ι ≫ g) (G.restrict V.ι) (op ⊤)
 
 /-- The additive-group complex obtained by termwise tensoring with G(V).
-Source: Stacks Project, Tag 0BED, affine-open paragraph.
-(blueprint: lem-sc-picard-external-coefficients-affine-cech-terms). -/
+Source: Stacks Project, Tag 0BED, affine-open paragraph. -/
 abbrev picardAffineCechRight : CochainComplex AddCommGrpCat.{w} ℕ :=
   ((forget₂ (ModuleCat.{w} k) AddCommGrpCat.{w}).mapHomologicalComplex (.up ℕ)).obj
     (((tensorRight (picardAffineCechFactor g G V)).mapHomologicalComplex (.up ℕ)).obj
@@ -64,8 +59,7 @@ abbrev picardAffineCechRight : CochainComplex AddCommGrpCat.{w} ℕ :=
 
 /-- The pure external section on one intersection, constructed from the two
 pullback units and the tensor section operation. No affine hypothesis is needed.
-Source: Stacks Project, Tag 0BED, maps preceding equation-kunneth-on-cech.
-(blueprint: lem-sc-picard-external-coefficients-affine-cech-terms). -/
+Source: Stacks Project, Tag 0BED, maps preceding equation-kunneth-on-cech. -/
 def picardAffineCechPureSection (n : ℕ) (y : Fin (n + 1) → ι)
     (a : (picardAffineCechBase f F U).X n) (t : picardAffineCechFactor g G V) :
     let W := (pullback.snd f g) ⁻¹ᵁ V
@@ -103,8 +97,7 @@ def picardAffineCechPureSection (n : ℕ) (y : Fin (n + 1) → ι)
   exact (E.restrictAppIso W.ι J).inv (tmulSection s' t'')
 
 /-- Normalization of degreewise maps on pure tensors, coordinate by coordinate.
-Source: Stacks Project, Tag 0BED, affine-open paragraph.
-(blueprint: lem-sc-picard-external-coefficients-affine-cech-terms). -/
+Source: Stacks Project, Tag 0BED, affine-open paragraph. -/
 def PicardAffineCechNormalized
     (e : ∀ n, (picardAffineCechRight f g F G U V).X n ≅
       (picardAffineCechLeft f g F G U V).X n) : Prop :=
@@ -137,7 +130,6 @@ private def cechScalarCoordinates {R : Type w} [Ring R] (r : k →+* R)
 in each degree. This assertion has no differential or cohomology condition.
 Source: Stacks Project, Tag 0BED, lemma-kunneth, affine-open paragraph;
 Tags 01I9 and 01CD for affine pullback and tensor sections.
-(blueprint: lem-sc-picard-external-coefficients-affine-cech-terms).
 
 Proof: Commute the two inverse-image maps with the finite intersections.
 For each tuple, apply externalTensor_affine_open_sections to the affine

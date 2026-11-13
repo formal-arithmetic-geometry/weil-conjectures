@@ -22,7 +22,6 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 The coefficient constructions used by the etale-local lattice theorem.
 Source: Bhatt--Scholze, Definitions 6.8.1 and 6.8.3.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- The continuous coefficient sheaf, with the canonical extension of the p-adic norm.
-Source: Bhatt--Scholze, Definition 6.8.1
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Definition 6.8.1. -/
 noncomputable def lisseFieldSheaf (l : ℕ) [Fact l.Prime] (E : Type) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) :
     Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
@@ -43,8 +41,7 @@ noncomputable def lisseFieldSheaf (l : ℕ) [Fact l.Prime] (E : Type) [Field E]
   latticeCoefficientSheaf X E
 
 /-- The integral coefficient sheaf, with the topology induced from the coefficient field.
-Source: Bhatt--Scholze, Definition 6.8.1
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Definition 6.8.1. -/
 noncomputable def lisseIntegerSheaf (l : ℕ) [Fact l.Prime] (E : Type) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) :
     Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
@@ -52,8 +49,7 @@ noncomputable def lisseIntegerSheaf (l : ℕ) [Fact l.Prime] (E : Type) [Field E
   latticeCoefficientSheaf X (Padic.coefficientExtensionIntegers l E)
 
 /-- Postcomposition with the valuation-ring inclusion is the scalar extension map.
-Source: Bhatt--Scholze, Proposition 6.8.4(6)
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.8.4(6). -/
 noncomputable def lisseIntegerToField (l : ℕ) [Fact l.Prime] (E : Type) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) :
     lisseIntegerSheaf l E X ⟶ lisseFieldSheaf l E X :=
@@ -64,8 +60,7 @@ noncomputable def lisseIntegerToField (l : ℕ) [Fact l.Prime] (E : Type) [Field
      naturality := fun _ _ _ ↦ rfl }⟩
 
 /-- Composition with an etale arrow embeds its small pro-etale site into the ambient site.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), slice-site restriction
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.8.4(6), slice-site restriction. -/
 noncomputable def lisseEtaleSiteInclusion {X Y : Scheme.{u}} (f : Y ⟶ X) [Etale f] :
     Y.ProEt ⥤ X.ProEt where
   obj V := Scheme.ProEt.mk (V.hom ≫ f)
@@ -74,8 +69,7 @@ noncomputable def lisseEtaleSiteInclusion {X Y : Scheme.{u}} (f : Y ⟶ X) [Etal
       (congrArg (fun b : V.left ⟶ Y ↦ b ≫ f) a.w))
 
 /-- The slice coefficient identification is the identity on continuous functions.
-Source: Bhatt--Scholze, Proposition 6.8.4(6)
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.8.4(6). -/
 noncomputable def lisseEtaleCoefficientIdentification (l : ℕ) [Fact l.Prime]
     (E : Type) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {X Y : Scheme.{u}} (f : Y ⟶ X) [Etale f] :

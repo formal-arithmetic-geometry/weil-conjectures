@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-! # Lifting an affine open from a generic fibre
 
 Source: Stacks Project, Tags 01Z4 and 01Z6, descending quasi-compact opens and affineness.
-(blueprint: lem-sbc-generic-fibre-affine-open-lift)
 -/
 
 @[expose] public section
@@ -102,9 +101,7 @@ V = q(O) is affine. Since q is injective and the limit projection followed by
 q is the fibre inclusion, the inverse image of V in the generic fibre is U.
 Paste the open-restriction pullback square with the fibre square. The resulting
 pullback is the generic fibre of V, and its canonical comparison isomorphism
-gives e and the two required projection equations. Empty U causes no problem.
-
-(blueprint: lem-sbc-generic-fibre-affine-open-lift) -/
+gives e and the two required projection equations. Empty U causes no problem. -/
 theorem exists_affine_open_lift_of_generic_fibre
     {X S : Scheme.{u}} [IsAffine X] [IsAffine S] [IsIntegral S]
     (f : X ⟶ S) (η : S) (hη : IsGenericPoint η Set.univ)

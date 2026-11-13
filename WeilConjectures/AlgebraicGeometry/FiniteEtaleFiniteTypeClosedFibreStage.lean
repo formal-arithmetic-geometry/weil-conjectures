@@ -33,7 +33,6 @@ namespace AlgebraicGeometry.Scheme
 No henselian hypothesis or henselization is used in this statement.
 
 Source: Stacks Project, Tag 0GS2, proof, General case, before henselizing the stages.
-(blueprint: lem-weil-pbc-finite-etale-finite-type-closed-fibre-stage).
 
 Proof:
 1. Apply proper Noetherian approximation (Tag 0A0P) with affine bases. Write their

@@ -15,7 +15,6 @@ import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 /-! # Realizing a resolution pairing in the derived category
 
 Source: Stacks Project, Section 20.31, Tags 0FKU and 0FKV.
-(blueprint: lem-sc-module-cup-resolution-realization)
 -/
 
 @[expose] public section
@@ -67,14 +66,12 @@ local instance cupRealizationDerivedMonoidal :
   inferInstance
 
 /-- Extend a nonnegative resolution to integer degrees by zero.
-Source: Stacks Project, Tag 0FKU.
-(blueprint: def-sc-module-cup-realization-complex-data) -/
+Source: Stacks Project, Tag 0FKU. -/
 abbrev CupAcyclicResolution.integerComplex {F : X.Modules} (D : CupAcyclicResolution F) :
     CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ :=
   D.K.extend ComplexShape.embeddingUpNat
 
 /-- The localized augmentation, with the extended single complex identified with F[0].
-(blueprint: def-sc-module-cup-realization-complex-data)
 -/
 def CupAcyclicResolution.derivedAugmentation {F : X.Modules} (D : CupAcyclicResolution F) :
     DerivedCategory.Q.obj ((CochainComplex.singleFunctor
@@ -85,7 +82,6 @@ def CupAcyclicResolution.derivedAugmentation {F : X.Modules} (D : CupAcyclicReso
       HomologicalComplex.extendMap D.augmentation ComplexShape.embeddingUpNat)
 
 /-- An augmentation is inverted by the derived localization.
-(blueprint: def-sc-module-cup-realization-complex-data)
 -/
 instance CupAcyclicResolution.derivedAugmentation_isIso
     {F : X.Modules} (D : CupAcyclicResolution F) : IsIso D.derivedAugmentation := by
@@ -96,7 +92,6 @@ instance CupAcyclicResolution.derivedAugmentation_isIso
 
 /-- The section formula for the cochain morphism realizing the bilinear pairing.
 It specifies all nonzero tensor summands; extension by zero supplies the others.
-(blueprint: def-sc-module-cup-realization-complex-data)
 -/
 def CupResolutionPairing.Realizes {F G : X.Modules} (D : CupResolutionPairing F G)
     (t : D.left.integerComplex ⊗ D.right.integerComplex ⟶ D.target.integerComplex) : Prop :=
@@ -111,7 +106,6 @@ def CupResolutionPairing.Realizes {F G : X.Modules} (D : CupResolutionPairing F 
 
 /-- The derived morphism attached to a cochain realization. This is an explicit
 composite of localized augmentations and the canonical tensor comparison.
-(blueprint: def-sc-module-cup-realization-complex-data)
 -/
 def CupResolutionPairing.derivedMap {F G : X.Modules} (D : CupResolutionPairing F G)
     (t : D.left.integerComplex ⊗ D.right.integerComplex ⟶ D.target.integerComplex) :

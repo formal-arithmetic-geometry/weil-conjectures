@@ -32,7 +32,6 @@ No regularity or rank hypothesis is needed for this vanishing statement.
 
 Source: Stacks Project, Cohomology on Sites, Section 08J7 (derived sheaf Hom),
 and Duality for Schemes, Tag 0BQZ (negative degrees of the comparison).
-(blueprint: lem-sc-koszul-regular-immersion-ext-sheaf-negative).
 
 Proof: resolve the target structure sheaf by its ordinary injective resolution,
 extended by zero to integer degrees. This complex is zero in negative degrees

@@ -31,7 +31,6 @@ no augmentation, no acyclicity hypothesis and no assertion about derived direct 
 Source: Stacks Project, Tag 02KE, affine termwise section calculation; Tag 01FK,
 ordered versus alternating Čech cochains; Tag 01FM for the homotopy equivalence
 with usual Čech cochains.
-(blueprint: lem-pc-finite-affine-cech-section-base-change).
 
 Proof: On each affine open B of T', the cartesian square identifies the inverse images
 of the V_i with the base changes along B -> U. Separatedness makes every nonempty

@@ -36,7 +36,6 @@ original integral geometric points. The residue maps are universal homeomorphism
 
 Source: Stacks Project, Tags 04HX and 03PS, functoriality Tag 04GU, and the last two
 paragraphs of the proof of Tag 095T; topological invariance Tag 04DY.
-(blueprint: lem-weil-pbc-p1-compatible-strict-henselization-residues).
 
 Proof: take the coordinate-ring colimits of the affine pointed neighbourhoods at
 s and t, and use their spectra for eA and eB. Tag 04HX identifies each as a strictly

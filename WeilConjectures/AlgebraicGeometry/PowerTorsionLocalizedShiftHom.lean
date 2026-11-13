@@ -109,7 +109,6 @@ private theorem localization_isZero (A : CommRingCat.{u}) (s : A)
 to a module on which that element acts bijectively. This does not assume a Cech model.
 Source: Stacks Project, dualizing.tex, Tag 0A6R, lemma-local-cohomology-adjoint,
 the exact localization/restriction adjunction used in the proof.
-(auxiliary; not a blueprint node)
 
 Proof: evaluate at the unique object to work with ordinary A-modules. Extension
 of scalars to A[1/s] is exact by flatness and hence its termwise functor computes

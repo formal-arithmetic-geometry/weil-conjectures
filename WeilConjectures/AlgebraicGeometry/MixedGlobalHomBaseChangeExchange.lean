@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.MixedGlobalSectionsBaseChangeMate
 # The exchange square for global Hom comparisons
 
 Source: Stacks Project, duality.tex, Tag 0AA8, final commutative diagrams.
-(blueprint: lem-sc-mixed-global-hom-base-change-exchange).
 -/
 
 @[expose] public section
@@ -67,7 +66,6 @@ counit equation, or additional morphisms are assumed.
 
 Source: Stacks Project, duality.tex, Tag 0AA8, final commutative diagrams;
 cohomology.tex, Tag 08I3, and duality.tex, Tag 0B6I, evaluation-mate comparisons.
-(blueprint: lem-sc-mixed-global-hom-base-change-exchange).
 
 Proof: expand both comparison maps as the transposes of evaluation under the
 fixed tensor-Hom bijections and pullback/direct-image adjunctions. Transpose the

@@ -9,8 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DecompositionMap
 
 /-! # The degree-zero finite-twist evaluation as a flat single-object pairing
 
-Source: the evaluation identification of the projective-line decomposition
-(auxiliary; not a blueprint node).
+Source: the evaluation identification of the projective-line decomposition.
 -/
 
 @[expose] public noncomputable section
@@ -22,8 +21,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Express the fixed degree-zero evaluation using the flat single-object pairing.
 
-Source: Stacks Tag 06YQ and the evaluation step of thm-amb-p1-decomposition.proof.md
-(auxiliary; not a blueprint node).
+Source: Stacks Tag 06YQ and the evaluation step of thm-amb-p1-decomposition.proof.md.
 
 Proof: unfold the degree-zero evaluation and its flat tensor comparison. Use the
 actual internal-Hom evaluation appearing in that definition. The positive Tate sheaf

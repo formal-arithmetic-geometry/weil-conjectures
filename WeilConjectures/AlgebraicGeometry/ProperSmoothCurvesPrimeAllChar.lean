@@ -33,7 +33,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 This is the prime-coefficient part of Stacks Project, Tag 0GKW.  It is separated
 from the finite-module dévissage so that the characteristic-p argument is explicit.
-(blueprint: lem-fd-proper-smooth-curves-prime-all-char)
 -/
 
 @[expose] public section
@@ -253,7 +252,6 @@ private theorem dimension_one_prime_homology_constructible
 /-- Prime coefficients for proper smooth geometrically connected relative curves.
 
 Source: Stacks Project, more-etale.tex, Tags 0GKV and 0GKW.
-(blueprint: lem-fd-proper-smooth-curves-prime-all-char)
 
 Proof: use the clopen dimension-zero/dimension-one decomposition.  On the
 dimension-zero locus, proper plus quasi-finite is finite and finite direct image

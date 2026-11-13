@@ -17,7 +17,6 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YS and 06YT; algebraization.tex,
 Tag 099E, final paragraph.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -273,7 +272,6 @@ end TensorPresheaf
 between K-flat complexes. No Čech models or augmentations are involved.
 Source: Stacks Project, Cohomology on Sites, Tags 06YS and 06YT; algebraization.tex,
 Tag 099E, final paragraph.
-(auxiliary; not a blueprint node).
 
 Proof: form the sectionwise tensor-presheaf functor along the global evaluation map.
 Its explicit extension/restriction adjunction identifies it naturally with the chosen

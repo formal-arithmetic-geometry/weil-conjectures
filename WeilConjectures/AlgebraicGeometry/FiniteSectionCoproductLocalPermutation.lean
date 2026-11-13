@@ -13,7 +13,6 @@ public import Mathlib.AlgebraicGeometry.Limits
 
 Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
 SGA 4, Exposé IX, 5.1.
-(blueprint: lem-weil-pbc-finite-section-coproduct-local-permutation)
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Two finite coproduct presentations by sections agree near each point up to a permutation.
 Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
 SGA 4, Exposé IX, 5.1.
-(blueprint: lem-weil-pbc-finite-section-coproduct-local-permutation)
 
 Proof. A coproduct presentation of a scheme induces a disjoint open partition of its
 underlying space. In the fibre of `p` over `z`, the first presentation identifies the

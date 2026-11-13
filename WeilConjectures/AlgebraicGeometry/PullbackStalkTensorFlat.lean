@@ -13,7 +13,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 /-! # Flatness of the fibre-product stalk over the tensor product of stalks
 
 Source: Stacks Project, Examples, Tag 0FLS; Schemes, Tag 01I4; Algebra, Tag 00HT.
-(blueprint: lem-pc-pullback-stalk-tensor-flat).
 -/
 
 @[expose] public section
@@ -40,7 +39,6 @@ private theorem preimmersion_pullback_map
 
 /-- The canonical tensor-product map to a fibre-product stalk is flat.
 Source: Stacks Project, Examples, Tag 0FLS, the paragraph on the canonical stalk map.
-(blueprint: lem-pc-pullback-stalk-tensor-flat).
 
 Proof: Choose affine neighbourhoods Spec R₀ of the common image and Spec A₀, Spec B₀
 of the two projected points lying over it. Their fibre product is Spec(A₀ ⊗[R₀] B₀).

@@ -17,7 +17,6 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 /-! # Open restriction comparison before residue global sections
 
 Source: Stacks Project, Tags 08DW and 0D5S.
-(blueprint: lem-sc-localized-residue-homology-sheaf-restriction).
 -/
 
 @[expose] public section
@@ -220,7 +219,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The residue homology sheaf of a restriction is the tensor pullback of the original
 residue homology sheaf, before applying global sections or changing their scalars.
 Source: Stacks Project, Tags 08DW and 0D5S.
-(blueprint: lem-sc-localized-residue-homology-sheaf-restriction).
 
 Proof: exact over-site restriction followed by overEquiv is tensor pullback along
 U.ι, and its derived functor factors as the composite of the two exact derived

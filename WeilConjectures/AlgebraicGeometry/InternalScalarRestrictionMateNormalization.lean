@@ -10,8 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.IntegralResiduePullOrdinaryUnit
 
 /-! # Normalized geometric restriction mate agrees with the composite right-adjoint comparison
 
-Source: Stacks Tags 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -280,7 +279,6 @@ private theorem normalized_inverse (a : Λ ⟶ Λ') [IsMonHom a]
 
 Source: Stacks Tags 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP;
 blueprint integral proper-base-change proof, paragraphs (1) and (3).
-(auxiliary; not a blueprint node).
 
 Proof:
 1. Apply CondensedRing.comapUpperStarIso_mate, which identifies the ordinary geometric restriction

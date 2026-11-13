@@ -117,7 +117,6 @@ set_option backward.isDefEq.respectTransparency true in
 /-- The canonical lax structure has the concrete unit and tensor maps.
 Source: Stacks, Section 17.16 (Tag 01CA), the sheaf tensor construction;
 WeilConjectures.AlgebraicGeometry.Modules.TensorSection, the section tensor identities.
-(blueprint: lem-sc-global-sections-lax-monoidal-data)
 Proof: choose the unit map induced by unitSectionsEquiv and the tensorator induced
 by the bilinear pairing tmulSection. Naturality in either argument follows by applying
 whiskerRight_app_tmulSection and whiskerLeft_app_tmulSection to pure tensors.

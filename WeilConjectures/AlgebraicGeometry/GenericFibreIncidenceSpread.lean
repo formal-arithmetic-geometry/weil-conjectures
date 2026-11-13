@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.GeometricGenericCoverSpread
 # Spreading the incidence data of geometric generic components
 
 Source: Stacks Project, Tag 055G, proof before the connected-graph argument.
-(blueprint: lem-sbc-generic-fibre-incidence-spread)
 -/
 
 @[expose] public section
@@ -57,9 +56,7 @@ Faithful flatness of a field extension makes p surjective. The base changed
 closures give the nonempty irreducible subsets B covering Z; every generic
 intersection edge remains nonempty. No connectedness of any whole fibre is used.
 If the generic fibre is empty, Tag 054W removes the entire total space over an open;
-use an empty I, and both covers are empty covers of empty spaces.
-
-(blueprint: lem-sbc-generic-fibre-incidence-spread) -/
+use an empty I, and both covers are empty covers of empty spaces. -/
 theorem exists_open_generic_fibre_incidence_spread {X S : Scheme.{u}}
     [IrreducibleSpace S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] :
     ∃ (L : Type u) (_ : Field L)

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.MixedAffineSectionsPullbackMate
 
 /-! # Affine extension and sections with independent localization universes
 Source: Stacks Project, Tags 06Z0, 08DV, 08DW and 0AA7.
-(blueprint: lem-sc-mixed-extension-sections-unit).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ with the comparison pinned by its adjunction unit. This statement involves only 
 and a quasi-coherent object Q, with no f or base-change square.
 Source: Stacks Project, perfect.tex, Tags 06Z0, 08DV, 08DW; Tag 0AA7,
 construction of the canonical scalar-extension adjunct.
-(blueprint: lem-sc-mixed-extension-sections-unit).
 
 Proof:
 1. Identify Y and Y' with spectra of their global rings using isoSpec. Transport Q

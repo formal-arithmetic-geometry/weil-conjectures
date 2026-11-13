@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapZeroAugmentation
 import WeilConjectures.AlgebraicGeometry.SchemeModulesEnoughInjectives
 /-! # Degree-zero comparison of the formal fibre systems
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 02OD
-(blueprint: lem-weil-pbc-formal-functions-degree-zero-system-iso).
+Source: Stacks Project, Cohomology of Schemes, Lemma 02OD.
 -/
 
 @[expose] public section
@@ -220,8 +219,7 @@ The adjunction characterization of the structure-sheaf map makes the transition
 h-maps commute with these unit isomorphisms. The canonical augmentation square for
 cohomology h-maps then proves compatibility with section pullback. Construct the
 natural transformation with NatTrans.ofOpSequence; its components are isomorphisms,
-so it is a natural isomorphism.
-(blueprint: lem-weil-pbc-formal-functions-degree-zero-system-iso) -/
+so it is a natural isomorphism. -/
 theorem formalFunctions_degreeZero_systemIso {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) :
     ∃ b : formalFibreCohomologySystem f y (SheafOfModules.unit X.ringCatSheaf) 0 ≅
           formalFibreSectionsSystem f y, True := by

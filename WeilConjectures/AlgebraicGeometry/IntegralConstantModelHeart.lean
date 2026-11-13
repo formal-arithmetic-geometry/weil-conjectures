@@ -30,10 +30,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructib
 /-!
 # The integral constant-model constructible category and its heart
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-int-integral-heart/
-sk-lem-int-integral-heart-triangulated.md, assertions 1--2
-(blueprint: det-lem-int-integral-heart-triangulated).
-
 Coefficients are pulled-back condensed continuous functions into the valuation ring,
 and the derived category is the ordinary unbounded category of internal modules.
 -/
@@ -53,9 +49,7 @@ namespace AlgebraicGeometry.ProEtale
 spectral norm. A finite extension of the small field of p-adic numbers is small by
 `Module.Finite.small`. Its `Shrink` is used only to fit the existing continuous-function
 API; `Shrink.algEquiv` identifies it with the given extension. Thus no coefficient
-embedding or equality of universes is assumed. Source: blueprint integral-heart setting
-and def-weil-l-adic-coefficient-extension
-(blueprint: det-lem-int-integral-heart-triangulated). -/
+embedding or equality of universes is assumed. -/
 noncomputable abbrev integralHeartCoefficientRingObj
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type v) [Field E] [Algebra (Padic ℓ) E]
     [FiniteDimensional (Padic ℓ) E] :

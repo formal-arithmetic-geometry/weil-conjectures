@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleLiftingApproximation
 /-!
 # Essential surjectivity of finite étale lifting over a henselian pair
 
-Source: Stacks Project, Fundamental Groups, Lemma 0GS2, essential-surjectivity paragraphs
-(blueprint: lem-weil-pbc-finite-etale-lifting-essential-surjectivity).
+Source: Stacks Project, Fundamental Groups, Lemma 0GS2, essential-surjectivity paragraphs.
 -/
 
 @[expose] public section
@@ -32,26 +31,24 @@ namespace AlgebraicGeometry
 
 /-- Every finite étale cover of the closed fibre of a proper scheme over a henselian pair
 lifts to a finite étale cover of the scheme, with an isomorphism over the closed fibre.
-Source: Stacks Project, Fundamental Groups, Lemma 0GS2
-(blueprint: lem-weil-pbc-finite-etale-lifting-essential-surjectivity).
+Source: Stacks Project, Fundamental Groups, Lemma 0GS2.
 
 Proof:
 1. If `A` is Noetherian and `I`-adically complete, lift the cover uniquely to the nilpotent
    thickenings by formal étaleness. These lifts remain finite. Grothendieck algebraization
    gives a finite cover of `Y`; its étale locus contains the closed fibre. Properness and
    the Jacobson-radical condition on `I` imply that every point specializes into that fibre,
-   so the cover is étale everywhere (lem-weil-pbc-finite-etale-lifting-complete).
+   so the cover is étale everywhere.
 2. For a Noetherian henselian G-ring, apply the complete case after completion. Descend
    the cover's finite presentation data, overlap maps and cocycle equations to a finite
    type algebra. Henselian G-ring approximation gives an algebra map back to `A` agreeing
-   modulo `I`, and hence the desired lift (lem-weil-pbc-finite-etale-lifting-approximation).
+   modulo `I`, and hence the desired lift.
 3. In general, descend the proper scheme and its closed-fibre cover to finite type
    Noetherian models. Henselize the corresponding pairs; their rings are Noetherian
    G-rings and their filtered colimit is `A`. Apply the preceding case and base change
-   back (lem-weil-pbc-finite-etale-lifting-limit-descent and
-   lem-weil-pbc-finite-etale-lifting-approximation).
+   back.
 4. The constructed lift has the prescribed closed-fibre isomorphism. By the definition
-   of the finite étale category (def-weil-pbc-finite-etale-category), this is exactly
+   of the finite étale category, this is exactly
    essential surjectivity. The closed fibre is `pullback f (Spec.map (Quotient.mk I))` with
    closed immersion `pullback.fst`, and the isomorphism is one of `Y₀`-schemes. -/
 theorem Scheme.essSurj_pullback_finiteEtale_of_henselianRing

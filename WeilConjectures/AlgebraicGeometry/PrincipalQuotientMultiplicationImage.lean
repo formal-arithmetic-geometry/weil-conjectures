@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 
 Source: Stacks Project, More on Morphisms, Tag 0EX8, divisibility step;
 Modules, Tag 08KS, ideal-multiplication description.
-(blueprint: lem-sc-principal-quotient-multiplication-image)
 -/
 
 @[expose] public section
@@ -219,7 +218,6 @@ is the image of the corresponding scalar endomorphism.
 
 Source: Stacks Project, Tag 0EX8, divisibility step, and Tag 08KS,
 ideal-multiplication description of the closed-immersion restriction kernel.
-(blueprint: lem-sc-principal-quotient-multiplication-image)
 
 Proof: On an affine open Spec B of X, base change of A -> A/(pi) is
 B -> B/(pi B), by the pushout universal property of the quotient. Its kernel is

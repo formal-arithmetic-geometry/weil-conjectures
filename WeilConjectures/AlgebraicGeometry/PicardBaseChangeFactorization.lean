@@ -47,7 +47,6 @@ private def structuralEquality : Nat → Lean.Expr → Lean.Expr → Bool → Le
 
 /-- Canonical base change postcomposes the square mate with the coefficient comparison.
 Source: Stacks Project, Tag 08HY, base-change construction; Tag 0097, composition.
-(blueprint: lem-sc-picard-base-change-factorization)
 
 Proof: Substitute the assumed equality for I. The hom of a composite isomorphism is
 its two homs composed. The first is the tensor-pullback composition comparison;

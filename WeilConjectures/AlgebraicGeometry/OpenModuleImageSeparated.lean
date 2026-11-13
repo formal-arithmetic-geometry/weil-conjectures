@@ -12,7 +12,6 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 /-! # OpenModuleImageSeparated
 
 Source: Stacks Project, Cohomology, Tags 08BV and 01EB.
-(blueprint: lem-pc-open-module-image-gluing-uniqueness).
 -/
 
 @[expose] public section
@@ -24,7 +23,6 @@ namespace AlgebraicGeometry
 
 /-- Uniqueness half of the sheaf gluing universal property.
 Source: Stacks Project, Cohomology, Tags 08BV and 01EB.
-(blueprint: lem-pc-open-module-image-gluing-uniqueness)
 Proof: For every test open T and section z of Z(T), the two hypotheses say
 l(z) and l'(z) have equal restrictions to T ∩ U and T ∩ V. To see this, write
 the transported unit as the ordinary restriction unit followed by pushforward

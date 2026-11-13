@@ -34,7 +34,6 @@ private theorem product_quasicoherent {X : Scheme.{u}} {K : X.Modules}
 
 /-- The affine formal quotient projection is surjective.
 Source: Stacks Project, Tags 01I8, 01IC and 087W, affine module correspondence.
-(blueprint: lem-weil-pbc-formal-module-quotient-affine-projection-surj).
 
 Proof: The associated sheaf of M is quasi-coherent, as is the positive ideal power
 by the ideal-times affine-sections theorem. Its product with the associated sheaf

@@ -28,8 +28,7 @@ variable [∀ (Z : Scheme.{u}) (U : Z.Opens),
   HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
 
 /-- The site counit followed by the nested-square, local composition and stage-object maps.
-Source: Stacks Project, Tags 08DW and 0D5S. Each factor is explicitly constructed.
-(blueprint: def-pc-perfect-overlap-composite-stage-map). -/
+Source: Stacks Project, Tags 08DW and 0D5S. Each factor is explicitly constructed. -/
 @[irreducible] noncomputable def perfectOverlapCompositeStageMapAt
     {X Y K C S : Scheme.{u}}
     (f : K ⟶ Y) (gk : X ⟶ K) (g : X ⟶ Y) (hgf : gk ≫ f = g)
@@ -67,8 +66,7 @@ Source: Stacks Project, Tags 08DW and 0D5S. Each factor is explicitly constructe
 
 /-- The site counit, nested restricted-square map, local composition comparison,
 and fixed stage-object comparison, in that order. This is a real construction.
-Source: Stacks Project, Tags 08DW and 0D5S.
-(blueprint: def-pc-perfect-overlap-composite-stage-map). -/
+Source: Stacks Project, Tags 08DW and 0D5S. -/
 @[no_expose] noncomputable def perfectOverlapCompositeStageMap
     {X Y K C S : Scheme.{u}}
     (f : K ⟶ Y) (gk : X ⟶ K) (g : X ⟶ Y) (hgf : gk ≫ f = g)
@@ -110,8 +108,7 @@ Source: Stacks Project, Tags 08DW and 0D5S.
   · exact perfectOverlapCompositeStageMapAt f gk g hgf pX pY b hg U V V inf_le_right B
 
 /-- The site counit followed by the nested-square, local composition and stage-object maps.
-Source: Stacks Project, Tags 08DW and 0D5S. Each factor is explicitly constructed.
-(blueprint: def-pc-perfect-overlap-composite-stage-map). -/
+Source: Stacks Project, Tags 08DW and 0D5S. Each factor is explicitly constructed. -/
 theorem perfectOverlapCompositeStageMap_false
     {X Y K C S : Scheme.{u}}
     (f : K ⟶ Y) (gk : X ⟶ K) (g : X ⟶ Y) (hgf : gk ≫ f = g)
@@ -132,8 +129,7 @@ theorem perfectOverlapCompositeStageMap_false
   rfl
 
 /-- The site counit followed by the nested-square, local composition and stage-object maps.
-Source: Stacks Project, Tags 08DW and 0D5S. Each factor is explicitly constructed.
-(blueprint: def-pc-perfect-overlap-composite-stage-map). -/
+Source: Stacks Project, Tags 08DW and 0D5S. Each factor is explicitly constructed. -/
 theorem perfectOverlapCompositeStageMap_true
     {X Y K C S : Scheme.{u}}
     (f : K ⟶ Y) (gk : X ⟶ K) (g : X ⟶ Y) (hgf : gk ≫ f = g)

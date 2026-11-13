@@ -14,7 +14,7 @@ import Mathlib.Tactic.NoncommRing
 # Existence, uniqueness, degree and formula of the Koszul differential
 
 Source: literature/stacks-project/more-algebra.tex, More on Algebra, Definition
-Tag 0622 and the paragraph after it (blueprint: lem-weil-pbc-koszul-differential).
+Tag 0622 and the paragraph after it.
 -/
 
 @[expose] public section
@@ -142,8 +142,7 @@ private theorem contraction_formula
 /--
 The Koszul differential associated to a linear form exists uniquely and has the
 stated degree, explicit formula, and graded derivation property. Source:
-Stacks Project, More on Algebra, Definition Tag 0622 and the paragraph after it
-(blueprint: lem-weil-pbc-koszul-differential).
+Stacks Project, More on Algebra, Definition Tag 0622 and the paragraph after it.
 
 Proof, following the six steps of the node:
 1. By `lem-weil-pbc-koszul-differential-existence`, take the Mathlib left

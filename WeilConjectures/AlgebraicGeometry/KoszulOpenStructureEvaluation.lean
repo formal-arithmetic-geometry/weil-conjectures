@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.KoszulOpenExponentOneUnit
 /-! # Structure evaluation with a single Koszul normalization
 
 Source: Stacks Project, Tags 08DC, 08DD, 08D1 and 09M1.
-(blueprint: lem-sc-koszul-open-structure-evaluation).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 /-- Natural evaluation, normalized on the structure object by the exponent-one class.
 Source: Stacks Project, Tag 09M1 (evaluation at one); Tag 08DC, equation 36.9.4.1;
 Tag 08D1 (signed fraction comparison).
-(blueprint: lem-sc-koszul-open-structure-evaluation).
 
 Proof: Identify the extended tilde of A[0], after restriction and the over-equivalence,
 with the degree-zero structure sheaf on U. Apply the structure-sheaf Hom/global-sections

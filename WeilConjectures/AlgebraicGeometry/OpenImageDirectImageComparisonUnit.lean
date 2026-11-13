@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisUnderivedOpenCounit
 /-! # The ordinary open-image comparison and its unit
 
 Source: Stacks Project, Cohomology, Tags 08FE and 08BV.
-(blueprint: lem-pc-open-image-direct-image-comparison-unit).
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ namespace AlgebraicGeometry
 
 /-- The ordinary open-image comparison, assembled from the fixed restriction
 and direct-image composition identifications.
-Source: Stacks Project, Tag 08FE.
-(blueprint: lem-pc-open-image-direct-image-comparison-unit). -/
+Source: Stacks Project, Tag 08FE. -/
 @[irreducible]
 def schemeOpenImageDirectImageComparison {X Y : Scheme.{u}} (h : X ⟶ Y)
     (U : Y.Opens) :
@@ -144,7 +142,6 @@ private theorem unit_of_homotopy_counit
 
 /-- The ordinary comparison carries the inverse-image-open unit to the open unit.
 Source: Stacks Project, Tags 08FE and 08BV.
-(blueprint: lem-pc-open-image-direct-image-comparison-unit).
 Proof: The existing underived open counit square is stated on homotopy
 categories. The generic unit_of_counit calculation applies the open adjunction
 Hom equivalences, counit naturality, and the two triangle identities to give

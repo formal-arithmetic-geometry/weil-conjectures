@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 # Basis, inclusions and finite coverings of standard opens of Proj
 
 Source: Stacks Project, Constructions, Section 01M3 and Lemma 01M4;
-Algebra, Lemma 00JP (blueprint: lem-weil-pbc-proj-standard-open-inclusion).
+Algebra, Lemma 00JP.
 -/
 
 @[expose] public section
@@ -164,7 +164,7 @@ private theorem finiteRefinement
 /-- Standard opens of positive homogeneous degree form a basis, intersect by multiplication,
 and satisfy the power-divisibility inclusion and degree-zero unit-ideal covering criteria.
 Source: Stacks Project, Constructions, Section 01M3 and Lemma 01M4 (1)(a),(b), (2), (3);
-Algebra, Lemma 00JP (blueprint: lem-weil-pbc-proj-standard-open-inclusion).
+Algebra, Lemma 00JP.
 
 Proof:
 1. By `lem-weil-pbc-projective-spectrum-basic-opens-basis`, basic opens are open and

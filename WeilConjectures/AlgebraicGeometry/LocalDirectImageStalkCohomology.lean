@@ -34,9 +34,8 @@ image equals total cohomology. The equivalence inverts every compatible restrict
 resolution section-class map, followed by restriction to the corresponding open.
 Source: Stacks Project, Tag 02OD, proof of Lemma 30.20.7; Tag 01E4 for the section
 class map and Tag 01FB for the cohomology restriction map.
-(blueprint: lem-weil-pbc-local-direct-image-stalk-cohomology)
 
-Proof: Put A = O_y and c : Spec A → Y. Every neighborhood V of y pulls back to
+Proof: Put A = O_y and c: Spec A → Y. Every neighborhood V of y pulls back to
 all of Spec A. Consequently the germ maps identify the stalk at y of c_*N with
 Gamma(Spec A,N), for every module N on Spec A. Every neighborhood of its closed
 point is the whole spectrum, so this evaluation is exact: it is the closed-point

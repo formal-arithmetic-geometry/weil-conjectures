@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationData
 /-! # Factorization of ordinary evaluation components
 
 Source: Stacks Project, Tag 08DQ, and Section 20.41.
-(blueprint: lem-pc-ordinary-evaluation-component-factorization).
 -/
 
 @[expose] public section
@@ -68,7 +67,6 @@ private theorem evaluation_factorization {C : Type u} [Category.{u} C]
 /-- Factorization of a nonzero ordinary evaluation component through module evaluation.
 Source: Stacks Project, Tag 08DQ, ordinary evaluation map; Tag 03EO, tensor-Hom
 adjunction naturality.
-(blueprint: lem-pc-ordinary-evaluation-component-factorization).
 Proof: Since r+q=0, the positive branch of localEvaluationComponent applies. Write b
 for its dual projection followed by the degree-zero unit identification, and g for
 its output degree transport. Naturality of tensorHomEquiv in the tensor argument

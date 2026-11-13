@@ -26,7 +26,6 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]
 
 /-- Tensoring a nonpositive flat resolution preserves its degree-zero augmentation class.
 Source: Stacks Project, Tag 06YH; right exactness of tensor.
-(blueprint: lem-sc-module-cup-hzero-identification)
 Proof: since P is zero in positive degrees, H-zero of its tensor with G is the
 cokernel of P^{-1} tensor G to P^0 tensor G. The augmentation identifies the
 cokernel of P^{-1} to P^0 with F. Tensoring with G preserves this cokernel,

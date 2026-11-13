@@ -33,7 +33,7 @@ universe u
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
+/-- Purity conventions and the rank-one datum
 
 The coefficient ring `Λ` *has invertible exponent on `X`* if some positive integer `n` with
 `n • Λ = 0` becomes a unit in `Γ(X, ⊤)`. For `Λ = A_{E,n}` this is the standing hypothesis

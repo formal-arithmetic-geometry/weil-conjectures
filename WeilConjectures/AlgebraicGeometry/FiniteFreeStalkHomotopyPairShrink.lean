@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkHomotopyPShrink
 import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkHomotopyQShrink
 
 /-! # Shrinking to spread two specified stalk homotopies
-
-Source: lem-pc-finite-free-stalk-homotopy-spread, proof steps 2 and 3.
-(blueprint: lem-pc-finite-free-stalk-homotopy-pair-shrink)
 -/
 
 @[expose] public section
@@ -53,10 +50,6 @@ private theorem restrict_homotopy_P_to_subopen
   exact homotopy_of_natIso c a b ((restrictFunctor (Y.homOfLE hWU)).mapHomotopy h)
 
 /-- Two specified pairs of endomorphisms become homotopic after shrinking.
-
-Source: blueprint lem-pc-perfect-locus, finite matrix extension argument, as expanded
-in lem-pc-finite-free-stalk-homotopy-spread, steps 2 and 3.
-(blueprint: lem-pc-finite-free-stalk-homotopy-pair-shrink).
 
 Proof: Work on an affine neighbourhood of y inside V, with finite bases in the
 terms. Choose the two given stalk homotopies. Each has finitely many nonzero

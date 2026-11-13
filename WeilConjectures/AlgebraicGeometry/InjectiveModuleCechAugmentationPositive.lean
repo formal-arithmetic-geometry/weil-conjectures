@@ -26,7 +26,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Positive-degree part of the augmented Čech quasi-isomorphism.
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 01EP.
-(blueprint: lem-sc-injective-module-cech-augmentation-positive)
 
 Proof: write n = q + 1. The underlying abelian sheaf of an injective module is
 flasque, so its explicit intersection Čech complex is exact at q + 1. The proved

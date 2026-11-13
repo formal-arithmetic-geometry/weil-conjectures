@@ -73,7 +73,6 @@ private instance renameProjectiveSpace_isIso {σ τ : Type u} (E : σ ≃ τ)
 
 /-- Reindexing a finite nonempty family of homogeneous coordinates by a finite ordinal
 preserves an immersion and its structure morphism identity.
-(blueprint: new-projective-reindex-immersion)
 
 Source: the projective-space construction and Mathlib's `MvPolynomial.renameEquiv`,
 `MvPolynomial.IsHomogeneous.rename_isHomogeneous`, `Proj.map_comp` and `Proj.map_id`.

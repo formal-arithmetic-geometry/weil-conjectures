@@ -15,7 +15,6 @@ public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 /-! # Constructed derived stalk comparison for open immersions
 
 Source: Stacks Project, Tags 0098 and 0D5U: exact open restriction and stalks.
-(blueprint: def-pc-open-derived-stalk-iso).
 -/
 
 @[expose] public section
@@ -27,13 +26,13 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.SingleComplexBaseChange
 
 /-- The existing exact restriction functor with the shared module-category spelling.
-Source: Stacks Project, Tag 0D5U. (blueprint: def-pc-open-derived-stalk-iso). -/
+Source: Stacks Project, Tag 0D5U. -/
 noncomputable abbrev openRestrictionFunctor {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
     SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤
       SheafOfModules.{u} (moduleRings X.toRingedSpace) := Scheme.Modules.restrictFunctor j
 
 /-- Finite-limit preservation of the existing open restriction, from sectionwise limits.
-Source: Stacks Project, Tag 0D5U. (blueprint: def-pc-open-derived-stalk-iso). -/
+Source: Stacks Project, Tag 0D5U. -/
 instance openRestrictionFunctor_limits {X Y : Scheme.{u}} (j : X ⟶ Y)
     [IsOpenImmersion j] : PreservesFiniteLimits (openRestrictionFunctor j) := by
   have : PreservesLimitsOfSize.{u, u} (openRestrictionFunctor j) :=
@@ -41,7 +40,7 @@ instance openRestrictionFunctor_limits {X Y : Scheme.{u}} (j : X ⟶ Y)
   infer_instance
 
 /-- Finite-colimit preservation of open restriction, from its adjunction to pushforward.
-Source: Stacks Project, Tag 0D5U. (blueprint: def-pc-open-derived-stalk-iso). -/
+Source: Stacks Project, Tag 0D5U. -/
 instance openRestrictionFunctor_colimits {X Y : Scheme.{u}} (j : X ⟶ Y)
     [IsOpenImmersion j] : PreservesFiniteColimits (openRestrictionFunctor j) := by
   have : (openRestrictionFunctor j).IsLeftAdjoint :=
@@ -49,7 +48,7 @@ instance openRestrictionFunctor_colimits {X Y : Scheme.{u}} (j : X ⟶ Y)
   infer_instance
 
 /-- Additivity of open restriction, from its sectionwise action on module morphisms.
-Source: Stacks Project, Tag 0D5U. (blueprint: def-pc-open-derived-stalk-iso). -/
+Source: Stacks Project, Tag 0D5U. -/
 instance openRestrictionFunctor_additive {X Y : Scheme.{u}} (j : X ⟶ Y)
     [IsOpenImmersion j] : (openRestrictionFunctor j).Additive where
   map_add := by
@@ -60,7 +59,7 @@ instance openRestrictionFunctor_additive {X Y : Scheme.{u}} (j : X ⟶ Y)
 /-- Identify derived tensor pullback along an open immersion with exact restriction.
 The two underived left adjoints are identified by their adjunctions to pushforward;
 the left-derived universal property then determines the derived identification.
-Source: Stacks Project, Tag 0D5U. (blueprint: def-pc-open-derived-stalk-iso). -/
+Source: Stacks Project, Tag 0D5U. -/
 noncomputable def openDerivedRestrictionIso
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -93,7 +92,7 @@ noncomputable def openDerivedRestrictionIso
 /-- Canonical representing isomorphism for the literal restriction of a complex.
 Its factors are the exact-restriction localization comparison and the inverse of
 `openDerivedRestrictionIso`; no representative is selected by an existence proof.
-Source: Stacks Project, Tag 0D5U. (blueprint: def-pc-open-derived-stalk-iso). -/
+Source: Stacks Project, Tag 0D5U. -/
 noncomputable def openRestrictionRepresentativeIso
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -111,8 +110,7 @@ noncomputable def openRestrictionRepresentativeIso
 /-- Forgetting scalars in derived stalk cohomology agrees with taking the additive
 stalk of the sheaf homology. This is the exact-stalk homology comparison, not a choice
 of an isomorphism from an existence statement.
-Source: Stacks Project, Tags 01AF and 01AG.
-(blueprint: def-pc-open-derived-stalk-iso). -/
+Source: Stacks Project, Tags 01AF and 01AG. -/
 noncomputable def additiveStalkCohomologyIso
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -131,8 +129,7 @@ noncomputable def additiveStalkCohomologyIso
 It is constructed from exact-stalk homology, the restriction-stalk isomorphism,
 exact-restriction homology, and the universal comparison with derived pullback.
 It is independent of any complex or representing isomorphism.
-Source: Stacks Project, Tags 0098 and 0D5U.
-(blueprint: def-pc-open-derived-stalk-iso). -/
+Source: Stacks Project, Tags 0098 and 0D5U. -/
 noncomputable def openDerivedStalkIso
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

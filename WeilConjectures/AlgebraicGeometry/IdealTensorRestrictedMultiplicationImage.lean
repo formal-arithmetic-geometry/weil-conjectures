@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 /-! # Image of multiplication restricted to an ideal multiple of a tensor product
 
 Source: Stacks Project, Tag 01YB, last displayed map in the proof.
-(blueprint: lem-pc-ideal-tensor-restricted-multiplication-image)
 -/
 
 @[expose] public section
@@ -153,8 +152,7 @@ private theorem restricted_powers_affine {X : Scheme.{u}} {K : X.Modules}
 
 open Opposite in
 /-- Transfer the affine range formula to any isomorphic image presentation.
-Source: Stacks Project, proof of Lemma 01YP
-(blueprint: lem-weil-pbc-closed-immersion-ideal-power-image). -/
+Source: Stacks Project, proof of Lemma 01YP. -/
 private theorem restricted_image_range_affine {X : Scheme.{u}} {M N P : X.Modules}
     (φ : M ⟶ N) [M.IsQuasicoherent] [N.IsQuasicoherent]
     (j : P ⟶ N) (e₀ : P ≅ image φ) (hj : e₀.hom ≫ image.ι φ = j)
@@ -183,8 +181,7 @@ private theorem restricted_image_range_affine {X : Scheme.{u}} {M N P : X.Module
 
 open Opposite in
 /-- Sheaf separatedness detects a zero morphism on any topological basis.
-Source: Stacks Project, proof of Lemma 01YP
-(blueprint: lem-weil-pbc-closed-immersion-ideal-power-image). -/
+Source: Stacks Project, proof of Lemma 01YP. -/
 private theorem restricted_hom_zero_of_basis {X : Scheme.{u}} {M N : X.Modules}
     (B : Set X.Opens) (hB : TopologicalSpace.IsTopologicalBasis
       ((fun V : X.Opens ↦ (V : Set X)) '' B))
@@ -207,8 +204,7 @@ private theorem restricted_hom_zero_of_basis {X : Scheme.{u}} {M N : X.Modules}
 
 open Opposite in
 /-- Factor an inclusion through a monomorphism by vanishing of its cokernel projection.
-Source: Stacks Project, proof of Lemma 01YP
-(blueprint: lem-weil-pbc-closed-immersion-ideal-power-image). -/
+Source: Stacks Project, proof of Lemma 01YP. -/
 private theorem restricted_subobject_le_of_basis_range {X : Scheme.{u}} {M N P : X.Modules}
     (B : Set X.Opens) (hB : TopologicalSpace.IsTopologicalBasis
       ((fun V : X.Opens ↦ (V : Set X)) '' B))
@@ -239,7 +235,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The image of I^m times tensor multiplication is the higher ideal product.
 Source: Stacks Project, Tag 01YB, last displayed map; affine product and tensor
 comparisons in Tags 01I8 and 01AH.
-(blueprint: lem-pc-ideal-tensor-restricted-multiplication-image)
 
 Proof: Put T = I^n tensor H and let μ be multiplication. On each affine open U,
 the tensor comparison identifies its sections with I(U)^n tensor H(U).

@@ -10,10 +10,6 @@ import WeilConjectures.AlgebraicGeometry.AffinePresentationSectionColimit
 import WeilConjectures.AlgebraicGeometry.ProEtaleComparisonSections
 
 /-! # The essential image of the comparison inverse image
-
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
-`sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-image.md`
-(blueprint: det-pe-classical-sheaves-image).
 -/
 
 @[expose] public section
@@ -61,9 +57,9 @@ private theorem relativeContinuity_of_classical (X : Scheme.{u})
 
 /-- A pro-étale sheaf of sets is classical exactly when it comes from the étale site,
 and exactly when the comparison counit is invertible.
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
+Source:
 `sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-image.md`,
-following Bhatt--Scholze, Lemma 5.1.2 (blueprint: det-pe-classical-sheaves-image).
+following Bhatt--Scholze, Lemma 5.1.2.
 
 Proof:
 1. For (1) implies (2), choose an isomorphism from G to the inverse image of F.

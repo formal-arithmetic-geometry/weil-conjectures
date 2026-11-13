@@ -60,8 +60,7 @@ transitions give zero at all higher levels. At lower levels cancel the epimorphi
 transition of M from n to that level. All components of the factor vanish, hence
 f - g = 0. The bound hker is unnecessary once hsep is given, but its original
 binder is retained. For J=0 the quotients are the original modules; for the unit
-ideal hsep forces T=0. No termwise preservation of kernels is asserted.
-(blueprint: lem-weil-pbc-formal-map-torsion-finite-detection). -/
+ideal hsep forces T=0. No termwise preservation of kernels is asserted. -/
 theorem formalMap_torsion_finite_detection
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     (Q R : CoherentModules X) (b : Q ⟶ R)

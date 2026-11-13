@@ -21,7 +21,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 /-! # Algebraization after a projective modification
 
 Source: Stacks Project, Proposition 088C, last paragraph, using Tags 0200, 0887 and 0885.
-(blueprint: lem-weil-pbc-proper-existence-projective-pullback).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ namespace AlgebraicGeometry
 /-- A coherent formal system on a proper scheme algebraizes after a proper modification
 which is an isomorphism over a dense open. Only the pulled-back system is algebraized.
 Source: Stacks Project, Proposition 088C, last paragraph, using Tags 0200, 0887 and 0885.
-(blueprint: lem-weil-pbc-proper-existence-projective-pullback).
 
 Proof:
 1. Apply Chow's lemma to f to obtain q:Y -> X proper and surjective, an isomorphism over

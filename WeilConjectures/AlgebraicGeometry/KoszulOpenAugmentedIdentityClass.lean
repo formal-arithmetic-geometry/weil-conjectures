@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.KoszulOpenHomChainClassNaturality
 /-! # The augmented Koszul identity class is independent of the exponent
 
 Source: Stacks Project, Tags 08DC, 08DD, 08D1 and 09M1.
-(blueprint: lem-sc-koszul-open-augmented-identity-class).
 -/
 
 @[expose] public section
@@ -174,7 +173,6 @@ private theorem augmentation_transition
 set_option backward.isDefEq.respectTransparency false in
 /-- Augmentation sends every explicit identity class to the same structure section.
 Source: Stacks Project, Tag 08D1 (Koszul-to-Cech cocone); Tag 08DC, equation 36.9.4.1.
-(blueprint: lem-sc-koszul-open-augmented-identity-class).
 
 Proof: Use postcomposition naturality of the explicit stage-to-derived-sections
 class to rewrite augmentation of the identity class as the class of the augmentation

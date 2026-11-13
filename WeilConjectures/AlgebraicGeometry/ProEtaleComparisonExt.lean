@@ -60,10 +60,9 @@ variable (A : Type v) [Category.{u + 1} A] [Abelian A]
 
 /-- For a scheme Z, a Grothendieck abelian coefficient category A in the stated size universes,
 etale A-sheaves X,Y and n≥0, exact etale-to-pro-etale comparison induces a bijection
-Ext^n(X,Y)→Ext^n(ν*X,ν*Y) [def-weil-pbc-site-comparison-morphism,
-def-weil-abstract-derived-category].
+Ext^n(X,Y)→Ext^n(ν*X,ν*Y).
 Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (auxiliary; not a blueprint node).
+06YY and 0GLZ.
 Proof: The bounded-below derived comparison is fully faithful: discrete injectives are acyclic for
 comparison direct image and the comparison adjunction unit is invertible. Its fully faithful map on
 Hom groups is bijective. The exact-functor Ext realization in the bounded-below derived category

@@ -10,7 +10,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 
 /-! # Explicit exact equivalences for fixed scalar site models
 
-Source: Stacks Tags 03CY and 09A5 (auxiliary; not a blueprint node).
+Source: Stacks Tags 03CY and 09A5.
 -/
 
 @[expose] public noncomputable section
@@ -21,7 +21,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Precomposition by the site equivalence followed by the inverse constant scalar
 restriction equivalence. All data is constructed from the specified equivalences.
-Source: Stacks Tags 03CY and 09A5 (auxiliary; not a blueprint node). -/
+Source: Stacks Tags 03CY and 09A5. -/
 def fixedScalarEtaleSheafEquivalence (X : Scheme.{u}) (k : Type (u + 1)) [CommRing k] :
     Sheaf (X.smallEtaleTopology) (ModuleCat.{u + 1} k) ≌
       ConstantCompletion.Mod
@@ -46,7 +46,7 @@ instance fixedScalarEtaleSheafEquivalence_additive (X : Scheme.{u})
 
 /-- Precomposition by the site equivalence followed by the inverse constant scalar
 restriction equivalence. All data is constructed from the specified equivalences.
-Source: Stacks Tags 03CY and 09A5 (auxiliary; not a blueprint node). -/
+Source: Stacks Tags 03CY and 09A5. -/
 def fixedScalarProEtaleSheafEquivalence (X : Scheme.{u}) (k : Type (u + 1)) [CommRing k] :
     Sheaf (ProEt.topology X) (ModuleCat.{u + 1} k) ≌
       ConstantCompletion.Mod
@@ -70,12 +70,12 @@ instance fixedScalarProEtaleSheafEquivalence_additive (X : Scheme.{u})
   Functor.additive_of_preserves_binary_products _
 
 /-- The termwise etale presentation, with no chosen representative.
-Source: Stacks Tag 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03CY. -/
 def fixedScalarEtaleComplexToModel (X : Scheme.{u}) (k : Type (u + 1)) [CommRing k] :=
   (fixedScalarEtaleSheafEquivalence X k).functor.mapHomologicalComplex (.up ℤ)
 
 /-- The pro-etale equivalence is precisely the already prescribed termwise functor.
-Source: Stacks Tags 03CY and 09A5 (auxiliary; not a blueprint node). -/
+Source: Stacks Tags 03CY and 09A5. -/
 theorem fixedScalarComplexToModel_eq (X : Scheme.{u}) (k : Type (u + 1)) [CommRing k] :
     fixedScalarComplexToModel X k =
       (fixedScalarProEtaleSheafEquivalence X k).functor.mapHomologicalComplex (.up ℤ) := by
@@ -93,7 +93,7 @@ instance fixedScalarEtaleComplexToModel_isEquivalence (X : Scheme.{u})
   ((fixedScalarEtaleSheafEquivalence X k).mapHomologicalComplex (.up ℤ)).isEquivalence_functor
 
 /-- The prescribed pro-etale functor descends to the standard derived localizations.
-Source: Stacks Tags 03CY and 05RT (auxiliary; not a blueprint node). -/
+Source: Stacks Tags 03CY and 05RT. -/
 def fixedScalarProEtaleDerivedFunctor (X : Scheme.{u}) (k : Type (u + 1)) [CommRing k] :
     DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} k)) ⥤
       ConstantCompletion.D
@@ -109,7 +109,7 @@ instance fixedScalarProEtaleDerivedFunctor_isEquivalence (X : Scheme.{u})
   infer_instance
 
 /-- Localization of the explicit termwise equivalence agrees with the derived functor.
-Source: Stacks Tags 03CY and 05RT (auxiliary; not a blueprint node). -/
+Source: Stacks Tags 03CY and 05RT. -/
 def fixedScalarProEtaleDerivedFactors (X : Scheme.{u}) (k : Type (u + 1)) [CommRing k]
     (T : CochainComplex (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} k)) ℤ) :
     (fixedScalarProEtaleDerivedFunctor X k).obj (DerivedCategory.Q.obj T) ≅

@@ -25,7 +25,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 /-! # Eventual vanishing for a coherent module with proper support
 
 Source: Stacks Project, Tags 08E2, 0CYS and 01XJ.
-(blueprint: lem-pc-proper-support-module-higher-direct-image-bound).
 -/
 
 @[expose] public section
@@ -38,7 +37,6 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Higher direct images of one coherent module with proper support eventually vanish.
 Source: Stacks Project, Tag 08E2, boundedness-above paragraph, using Tags 0CYS and 01XJ.
-(blueprint: lem-pc-proper-support-module-higher-direct-image-bound).
 
 Proof:
 1. Local finite type over S makes X locally Noetherian. Coherence of M implies

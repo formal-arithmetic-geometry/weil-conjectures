@@ -19,8 +19,7 @@ import WeilConjectures.RingTheory.SyntomicAtPrimeRelativeGlobalCompleteIntersect
 /-!
 # Flat with smooth fibre implies smooth at a prime
 
-Source: Stacks Project, Algebra, Lemma 00TF (lemma-flat-fibre-smooth)
-(blueprint: lem-weil-pbc-flat-smooth-fibre-smooth-at-prime).
+Source: Stacks Project, Algebra, Lemma 00TF.
 -/
 
 @[expose] public section
@@ -114,8 +113,7 @@ presented `R`-algebra for some `g ∉ q`, the local map `R_p → S_q` is flat, a
 `κ(p) ⊗[R] S` (`p.Fiber S`) is smooth over `κ(p)` at the prime `Q` corresponding to `q`
 (`PrimeSpectrum.preimageEquivFiber`, the kernel of `κ(p) ⊗[R] S → κ(q)`), then `R → S` is
 smooth at `q`. Smoothness at a prime is `Algebra.IsSmoothAtPrime` (`∃ g ∉ q, S_g` smooth).
-Source: Stacks Project, Algebra, Lemma 00TF (lemma-flat-fibre-smooth).
-(blueprint: lem-weil-pbc-flat-smooth-fibre-smooth-at-prime)
+Source: Stacks Project, Algebra, Lemma 00TF.
 
 Proof, following the node:
 1. By (3) some `F_h`, `h ∉ Q`, is smooth over `κ(p)`, hence a local complete intersection;

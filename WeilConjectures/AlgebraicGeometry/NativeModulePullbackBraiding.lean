@@ -10,8 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.M
 
 Source: the balanced coequalizer calculation of the ordinary pullback tensorator;
 Stacks 03EL. The private calculations are the ordinary braiding helpers of the trace base change,
-specialized below to its native tensorator.
-(auxiliary; not a blueprint node). -/
+specialized below to its native tensorator. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -100,7 +99,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 /-- The native composite module pullback preserves the braiding in oplax form.
 
 Source: Stacks 03EL; the ordinary coequalizer calculations of the trace base change.
-(auxiliary; not a blueprint node).
 
 Proof. Precompose the mapMod tensorator with the relative tensor coequalizer
 map. Its defining equation reduces the braided square to the ambient sheaf

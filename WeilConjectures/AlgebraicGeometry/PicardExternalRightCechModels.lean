@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 /-! # Explicit Cech complexes in the right coefficient
 
 Source: Stacks Project, Varieties, Tag 0BED, equation-kunneth-on-cech.
-(blueprint: def-sc-picard-external-right-cech-models).
 -/
 
 @[expose] public section
@@ -30,14 +29,14 @@ noncomputable section
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
 /-- Scalar Cech complexes as a functor of the coefficient.
-Source: Stacks, Tag 0BED (blueprint: def-sc-picard-external-right-cech-models). -/
+Source: Stacks, Tag 0BED. -/
 def picardCechFunctor (f : X ⟶ Spec (CommRingCat.of k))
     {ι : Type w} (U : ι → X.Opens) :
     X.Modules ⥤ CochainComplex (ModuleCat.{w} k) ℕ :=
   scalarFunctor f ⋙ sheafToPresheaf _ _ ⋙ cechComplexFunctor U
 
 /-- Tensor totals of the factor Cech complexes, extended by zero to integers.
-Source: Stacks, Tag 0BED (blueprint: def-sc-picard-external-right-cech-models). -/
+Source: Stacks, Tag 0BED. -/
 def picardRightTensorCechFunctor
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     {ι κ : Type w} (U : ι → X.Opens) (V : κ → Y.Opens) (F : X.Modules) :
@@ -49,7 +48,7 @@ def picardRightTensorCechFunctor
     ComplexShape.embeddingUpNat.extendFunctor (ModuleCat.{w} k)
 
 /-- Product-cover Cech complexes of external coefficients, extended by zero.
-Source: Stacks, Tag 0BED (blueprint: def-sc-picard-external-right-cech-models). -/
+Source: Stacks, Tag 0BED. -/
 def picardRightProductCechFunctor
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     {ι κ : Type w} (U : ι → X.Opens) (V : κ → Y.Opens) (F : X.Modules) :
@@ -61,8 +60,7 @@ def picardRightProductCechFunctor
     ComplexShape.embeddingUpNat.extendFunctor (ModuleCat.{w} k)
 
 /-- Scalar Cech preserves zero maps.
-Source: the termwise formulas, Stacks Tag 0BED
-(blueprint: def-sc-picard-external-right-cech-models). -/
+Source: the termwise formulas, Stacks Tag 0BED. -/
 instance picardCechFunctor_zero (f : X ⟶ Spec (CommRingCat.of k))
     {ι : Type w} (U : ι → X.Opens) : (picardCechFunctor f U).PreservesZeroMorphisms := by
   constructor
@@ -81,8 +79,7 @@ instance picardCechFunctor_zero (f : X ⟶ Spec (CommRingCat.of k))
 
 
 /-- The tensor Cech functor preserves zero maps.
-Source: the termwise tensor formula, Stacks Tag 0BED
-(blueprint: def-sc-picard-external-right-cech-models). -/
+Source: the termwise tensor formula, Stacks Tag 0BED. -/
 instance picardRightTensorCechFunctor_zero
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     {ι κ : Type w} (U : ι → X.Opens) (V : κ → Y.Opens) (F : X.Modules) :
@@ -106,8 +103,7 @@ instance picardRightTensorCechFunctor_zero
 
 
 /-- The product Cech functor preserves zero maps.
-Source: the coefficient tensor formula, Stacks Tag 0BED
-(blueprint: def-sc-picard-external-right-cech-models). -/
+Source: the coefficient tensor formula, Stacks Tag 0BED. -/
 instance picardRightProductCechFunctor_zero
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     {ι κ : Type w} (U : ι → X.Opens) (V : κ → Y.Opens) (F : X.Modules) :

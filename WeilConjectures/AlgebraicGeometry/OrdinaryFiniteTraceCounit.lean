@@ -8,9 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Data
 
 /-!
 # The counit defined by an ordinary finite trace
-
-Source: blueprint def-amb-p1-trace, the displayed inverse-projection formula.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +24,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] derivedTensor singleFunctorObjUnitIso
 
 /-- Naturality of the ordered projection in its base coefficient.
-Source: blueprint lem-amb-proper-coproducts-projection.
-(auxiliary; not a blueprint node).
+
 Proof: compose naturality of the two tensor symmetries with naturality of the
 adjoint-of-counit projection. Direct image preserves the resulting composition. -/
 theorem ordinaryFiniteProjection_naturality
@@ -63,9 +59,7 @@ theorem ordinaryFiniteProjection_naturality
       ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) q).app L).app K ≫
         (ordinaryFinitePushforward A q).map g) ht
 
-/-- The ordered proper projection, natural in the base coefficient.
-Source: blueprint def-amb-p1-trace.
-(auxiliary; not a blueprint node). -/
+/-- The ordered proper projection, natural in the base coefficient. -/
 def ordinaryFiniteProjectionNatTrans
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (q : X ⟶ Y)
     (L : DerivedCategoryModule A X) :
@@ -75,9 +69,7 @@ def ordinaryFiniteProjectionNatTrans
   app K := ordinaryFiniteProjection A q L K
   naturality := fun {_ _} f ↦ ordinaryFiniteProjection_naturality A q L f
 
-/-- The right tensor unitor, formed with the same derived monoidal structure as tensor.
-Source: blueprint def-amb-p1-trace.
-(auxiliary; not a blueprint node). -/
+/-- The right tensor unitor, formed with the same derived monoidal structure as tensor. -/
 def ordinaryDerivedTensorRightUnitorNatIso
     (C : Type v) [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
@@ -88,9 +80,7 @@ def ordinaryDerivedTensorRightUnitorNatIso
     unfold derivedTensorRight derivedTensor
     exact rightUnitorNatIso _
 
-/-- Tensoring a morphism to the constant unit, followed by the right unitor.
-Source: blueprint def-amb-p1-trace.
-(auxiliary; not a blueprint node). -/
+/-- Tensoring a morphism to the constant unit, followed by the right unitor. -/
 def ordinaryDerivedTensorTrace
     (C : Type v) [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
@@ -102,17 +92,14 @@ def ordinaryDerivedTensorTrace
   (derivedTensorRightFunctor C Y).map (τ ≫ (singleFunctorObjUnitIso C Y).hom) ≫
     (ordinaryDerivedTensorRightUnitorNatIso C Y).hom
 
-/-- Tensoring a finite-coefficient trace, followed by the tensor unit.
-Source: blueprint def-amb-p1-trace.
-(auxiliary; not a blueprint node). -/
+/-- Tensoring a finite-coefficient trace, followed by the tensor unit. -/
 def ordinaryFiniteTensorTrace (A : Type (u + 1)) [CommRing A] (Y : Scheme.{u})
     {B : DerivedCategoryModule A Y} (τ : B ⟶ ordinaryFiniteUnit A Y) :
     derivedTensorRight (ModuleCat.{u + 1} A) Y B ⟶ 𝟭 (DerivedCategoryModule A Y) :=
   ordinaryDerivedTensorTrace (ModuleCat.{u + 1} A) Y τ
 
 /-- The tensor-trace component is exactly tensor with the trace and the prescribed unitor.
-Source: blueprint def-amb-p1-trace.
-(auxiliary; not a blueprint node).
+
 Proof: expand the natural transformation and use preservation of composition by tensor. -/
 theorem ordinaryFiniteTensorTrace_app (A : Type (u + 1)) [CommRing A] (Y : Scheme.{u})
     {B : DerivedCategoryModule A Y} (τ : B ⟶ ordinaryFiniteUnit A Y)
@@ -125,9 +112,7 @@ theorem ordinaryFiniteTensorTrace_app (A : Type (u + 1)) [CommRing A] (Y : Schem
   rw [Functor.map_comp, Category.assoc]
   rfl
 
-/-- The inverse ordered proper projection followed by the tensor trace, on all complexes.
-Source: blueprint def-amb-p1-trace.
-(auxiliary; not a blueprint node). -/
+/-- The inverse ordered proper projection followed by the tensor trace, on all complexes. -/
 @[irreducible]
 def ordinaryFiniteTraceCounit
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -145,8 +130,7 @@ def ordinaryFiniteTraceCounit
   inv (ordinaryFiniteProjectionNatTrans A q L) ≫ ordinaryFiniteTensorTrace A Y τ
 
 /-- The trace counit satisfies the actual ordered projection equation.
-Source: blueprint def-amb-p1-trace.
-(auxiliary; not a blueprint node).
+
 Proof: cancel the ordered projection with its inverse and apply the tensor-trace formula. -/
 theorem ordinaryFiniteTraceCounit_projection
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -168,9 +152,7 @@ theorem ordinaryFiniteTraceCounit_projection
   rw [← Category.assoc, ← NatTrans.comp_app, IsIso.hom_inv_id, NatTrans.id_app,
     Category.id_comp, ordinaryFiniteTensorTrace_app]
 
-/-- The canonical natural counit obtained from a projective-line splitting.
-Source: blueprint def-amb-p1-trace.
-(auxiliary; not a blueprint node). -/
+/-- The canonical natural counit obtained from a projective-line splitting. -/
 @[irreducible]
 def ordinaryFiniteP1TraceCounit (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S]
@@ -187,8 +169,7 @@ def ordinaryFiniteP1TraceCounit (A : Type (u + 1)) [CommRing A] [Finite A]
     ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) (b.inv ≫ biprod.snd)
 
 /-- The projective-line counit uses exactly the item's ordered projection and unitor.
-Source: blueprint def-amb-p1-trace.
-(auxiliary; not a blueprint node).
+
 Proof: apply the general inverse-projection equation to q, its shifted line, and the trace. -/
 theorem ordinaryFiniteP1TraceCounit_projection (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S]

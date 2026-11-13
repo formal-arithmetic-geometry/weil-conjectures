@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.GabberAbsolutelyAlgebraicallyClosed
 # Integral covers with trivial étale cohomology
 
 Source: Stacks Project, Lemma 09ZD (label `lemma-integral-cover-trivial-cohomology`),
-part (1), etale-cohomology.tex line 14467
-(blueprint: lem-weil-pbc-integral-cover-trivial-cohomology).
+part (1), etale-cohomology.tex line 14467.
 -/
 
 @[expose] public section
@@ -31,7 +30,7 @@ namespace AlgebraicGeometry
 vanishing positive-degree étale cohomology with finite constant coefficients.  The
 proof follows Stacks Lemma 09ZD(1): construct the cover from the integral closure of a
 polynomial presentation in an algebraic closure of its fraction field, then apply
-Lemma 09ZC to closed subschemes. (blueprint: lem-weil-pbc-integral-cover-trivial-cohomology)
+Lemma 09ZC to closed subschemes.
 
 Proof steps: the polynomial presentation and integral-closure construction use
 `def-weil-affine-spectrum`, `lem-weil-pbc-polynomial-ring-domain`,

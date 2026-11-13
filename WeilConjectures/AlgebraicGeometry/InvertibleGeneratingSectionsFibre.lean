@@ -15,8 +15,7 @@ import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 /-!
 # The fibre criterion for generating an invertible module
 
-Source: Stacks Project, Modules, Definition 01AM and Lemma 01CY; Sheaves, Lemma 0H7H(2)
-(blueprint: lem-weil-pbc-invertible-generating-sections-fibre).
+Source: Stacks Project, Modules, Definition 01AM and Lemma 01CY; Sheaves, Lemma 0H7H(2).
 -/
 
 @[expose] public section
@@ -72,8 +71,7 @@ The value is nonzero exactly when the germ lies outside the maximal ideal times 
 which is the definition of `nonvanishingLocus`. Compatible sections in `L.sections` are
 identified with global sections by evaluation at the terminal open `⊤`.
 
-Source: Stacks Project, Modules, Definition 01AM and Lemma 01CY; Sheaves, Lemma 0H7H(2)
-(blueprint: lem-weil-pbc-invertible-generating-sections-fibre).
+Source: Stacks Project, Modules, Definition 01AM and Lemma 01CY; Sheaves, Lemma 0H7H(2).
 
 Proof:
 1. `generating_sections_iff_stalk_span` identifies epimorphy of the free-sheaf map

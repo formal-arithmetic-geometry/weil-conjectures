@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetInsertion
 /-! # Vertical differential of explicit subset insertion
 
 Source: Stacks Project, Tag 08C1 and equation (20.40.0.1) (Tag 08C0).
-(blueprint: lem-sc-principal-open-cech-subset-insertion-vertical).
 -/
 
 @[expose] public section
@@ -65,7 +64,6 @@ set_option maxHeartbeats 400000 in
 
 Source: Stacks Project, Tag 08C1, equation (20.40.0.1), with the total differential
 convention in `alternatingCechTotalFunctor`.
-(blueprint: lem-sc-principal-open-cech-subset-insertion-vertical).
 
 Proof: Expand the finite sum defining insertion. For a subset S put p=|S|-1 and
 q=n+1-|S|. Apply Mathlib's `ι_D₂` and `d₂_eq` to its total summand inclusion.
@@ -76,7 +74,7 @@ S to the same single tuple with its coefficient differentiated. Naturality of th
 three factors of principalSubsetSectionTransport (open equality transport,
 restrictAppIso inverse, and overFunctorEquiv inverse) moves that coefficient map
 before section transport. Each factor is natural in the module morphism J.d.
-Since p is nonnegative, its sign acts as (-1 : A)^(|S|-1). The equation
+Since p is nonnegative, its sign acts as (-1: A)^(|S|-1). The equation
 q+1=n+2-|S| identifies the coefficient degrees. Distribute the finite sum and
 reassemble it as insertion of the vertical coordinate function. For an empty
 index family the sum is zero; singletons have sign one. -/

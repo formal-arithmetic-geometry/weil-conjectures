@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
 
 /-!
 # Integral pulled-back coefficients as the limit of finite constant coefficients
-
-(blueprint: det-prop-sfb-qlbar-colimit-x-integral-limit).
+.
 
 Finite representability is natural in the finite label set. The integral comparison is
 normalized by its adjunction mate on every profinite test object and every continuous
@@ -547,8 +546,7 @@ private theorem completedIntegralRepresentation_inv_projection
 
 /-- Finite constants and integral pulled-back coefficients have the stated representations;
 the ring comparison is the unique one with the prescribed reduction projections.
-
-(blueprint: det-prop-sfb-qlbar-colimit-x-integral-limit).
+.
 
 Proof: (1) A map into the finite coproduct of copies of X is a clopen labelled partition.
 The summands cover it in the pro-etale topology. Glue constant sections on these pieces;

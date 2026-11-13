@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 /-! # Ordinary cycles of the pulled-back local model
 
 Source: Stacks Project, Tags 06YJ and 0D5S.
-(blueprint: def-sc-picard-ordinary-model-cycles)
 -/
 
 @[expose] public section
@@ -24,8 +23,7 @@ noncomputable section
 
 /-- Ordinary degree-zero cycles, with the source also pulled back from W.
 The equivalence of the localized site with U is the existing `Modules.overEquiv`.
-Source: Stacks Project, Tag 06YJ.
-(blueprint: def-sc-picard-ordinary-model-cycles) -/
+Source: Stacks Project, Tag 06YJ. -/
 def picardOrdinaryModelCycles (W : Scheme.{v}) (U : W.Opens)
     (K : CochainComplex
       (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)
@@ -42,8 +40,7 @@ def picardOrdinaryModelCycles (W : Scheme.{v}) (U : W.Opens)
 /-- Pullback of a raw degree-zero morphism, conjugated by the two canonical
 underived composition comparisons. Membership in the cycles subgroup is not
 needed to define this map.
-Source: Stacks Project, Tags 0096 and 0D5S.
-(blueprint: def-sc-picard-ordinary-model-cycles) -/
+Source: Stacks Project, Tags 0096 and 0D5S. -/
 def picardOrdinaryModelRestriction (W : Scheme.{v}) (U : W.Opens)
     (K : CochainComplex
       (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)

@@ -10,8 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 
 /-! # Module inverse image and underlying abelian sheaves
 
-Source: Stacks Project, Modules on Sites, Lemmas 03D2 and 03D3.
-(blueprint: lem-weil-pbc-module-abelian-inverse-image-comparison) -/
+Source: Stacks Project, Modules on Sites, Lemmas 03D2 and 03D3. -/
 
 @[expose] public section
 
@@ -25,7 +24,6 @@ set_option backward.defeqAttrib.useBackward true in
 /-- The mate of the underlying module adjunction unit is an isomorphism.
 
 Source: Stacks Project, Modules on Sites, Lemmas 03D2 and 03D3.
-(blueprint: lem-weil-pbc-module-abelian-inverse-image-comparison)
 
 Proof:
 1. The forgetful functor from modules to abelian groups preserves colimits and

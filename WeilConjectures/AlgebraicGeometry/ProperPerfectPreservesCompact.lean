@@ -23,7 +23,6 @@ import WeilConjectures.AlgebraicGeometry.ProperPerfectTransportCompact
 /-! # Compactness preserved by proper perfect pushforward
 
 Source: Stacks Project, Tags 09M1 and 0B6G; first paragraph of Tag 0A9R.
-(blueprint: lem-sc-proper-perfect-preserves-compact).
 -/
 
 @[expose] public section
@@ -36,7 +35,6 @@ namespace AlgebraicGeometry
 
 /-- Proper perfect pushforward preserves compact quasi-coherent derived objects.
 Source: Stacks Project, Tags 09M1, 0B6G, and the first paragraph of Tag 0A9R.
-(blueprint: lem-sc-proper-perfect-preserves-compact).
 
 Proof: Noetherian schemes are quasi-compact and quasi-separated. Use K-injective
 resolutions and the uniqueness of localization to work in small-Hom derived

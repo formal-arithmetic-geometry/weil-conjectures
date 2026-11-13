@@ -21,7 +21,7 @@ public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 For a scheme `Y` we define `AlgebraicGeometry.Scheme.Pic Y`, the set of isomorphism classes of
 invertible sheaves of `𝒪_Y`-modules, as the invertible classes inside the skeleton of
 `Y.Modules`, and the contravariant functoriality `AlgebraicGeometry.Scheme.Pic.map` given by
-pulling back invertible modules.  For a morphism of schemes `f : X ⟶ S` this assembles into the
+pulling back invertible modules.  For a morphism of schemes `f: X ⟶ S` this assembles into the
 `Set`-valued Picard presheaf `T ↦ Pic (X ×[S] T)` on the category of schemes over `S`.
 
 The auxiliary isomorphisms in the `AlgebraicGeometry.Scheme.Modules` namespace identify, via
@@ -38,17 +38,14 @@ law, which comes from the tensor product of invertible modules, is defined in
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.Pic`: the Picard group of a scheme, as a set
-  (blueprint `def:sc-picard-group`).
-- `AlgebraicGeometry.Scheme.Pic.map`: the pullback map on Picard groups
-  (blueprint `lem:pc-pic-presheaf-functorial`).
-- `AlgebraicGeometry.picardPresheaf`: the Picard presheaf of `f : X ⟶ S`
-  (blueprint `def:pc-picard-presheaf`).
+- `AlgebraicGeometry.Scheme.Pic`: the Picard group of a scheme, as a set.
+- `AlgebraicGeometry.Scheme.Pic.map`: the pullback map on Picard groups.
+- `AlgebraicGeometry.picardPresheaf`: the Picard presheaf of `f: X ⟶ S`.
 
 ## Main results
 
 - `SheafOfModules.IsInvertible.pullback`: the pullback of an invertible sheaf of modules along
-  a morphism of schemes is invertible (blueprint `lem:pc-pic-presheaf-functorial`).
+  a morphism of schemes is invertible.
 -/
 
 @[expose] public section
@@ -160,8 +157,6 @@ variable (Y) in
 of `𝒪_Y`-modules, realized as the invertible classes inside the skeleton of `Y.Modules`.
 Its group law, induced by the tensor product with the dual as inverse, is
 `AlgebraicGeometry.Scheme.Pic.instCommGroup`.
-
-(blueprint: `def-sc-picard-group`)
 
 This lives in `Type (u + 1)` rather than `Type u`; see the implementation notes of this
 module. -/
@@ -329,15 +324,12 @@ lemma isPullback_baseChangeMap_of_isPullback (f : X ⟶ S) {T₁ T₂ T₃ T₄ 
     congr 1
     exact Over.OverMorphism.ext h.w
 
-/-- The Picard presheaf of a morphism of schemes `f : X ⟶ S`: it sends a scheme `T` over `S`
+/-- The Picard presheaf of a morphism of schemes `f: X ⟶ S`: it sends a scheme `T` over `S`
 to the Picard group of the fibre product `X_T = X ×[S] T`, and a morphism over `S` to the
 corresponding pullback map on Picard groups. Functoriality: pulling back along `X_{T'} ⟶ X_T`
 sends invertible modules to invertible modules and respects isomorphisms
 (`AlgebraicGeometry.Scheme.Pic.map`), and `(g₁ ∘ g₂)^* = g₂^* g₁^*`, `id^* = id`
-(`AlgebraicGeometry.Scheme.Pic.map_comp`, `AlgebraicGeometry.Scheme.Pic.map_id`).
-
-(blueprint: `def-pc-picard-presheaf`,
-`rem-ptr-pc-picard-presheaf-6`) -/
+(`AlgebraicGeometry.Scheme.Pic.map_comp`, `AlgebraicGeometry.Scheme.Pic.map_id`). -/
 noncomputable def picardPresheaf (f : X ⟶ S) : (Over S)ᵒᵖ ⥤ Type (u + 1) where
   obj T := (Limits.pullback f T.unop.hom).Pic
   map φ := TypeCat.ofHom (Pic.map (baseChangeMap f φ.unop))

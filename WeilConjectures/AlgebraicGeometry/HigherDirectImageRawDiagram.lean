@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawPullbackComposition
 /-! # The raw cohomology diagram
 
 Source: Stacks Project, Tag 09Z1, the canonical cohomology comparison maps.
-(blueprint: lem-sbc-higher-image-raw-pullback-functorial).
 -/
 
 @[expose] public section
@@ -46,7 +45,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The explicit raw pullbacks satisfy identity and composition, independently of any
 limit, affineness, or quasi-compactness assumption.
 Source: Stacks Project, Tag 09Z1, canonical comparison maps in lemma-relative-colimit.
-(blueprint: lem-sbc-higher-image-raw-pullback-functorial).
 
 Proof: The derived inverse-image functor is additive, and composition with fixed
 morphisms is additive in each argument. Thus the five-factor formula preserves zero
@@ -97,8 +95,7 @@ theorem higherDirectImageRawOverPullback_functorial
   · intro A B C f g z
     exact higherDirectImageRawOverPullback_comp Λ k G q f g U z
 
-/-- The additive map on raw cohomology; its data are the explicit five-factor formula. 
-(blueprint: def-sbc-higher-image-raw-diagram)
+/-- The additive map on raw cohomology; its data are the explicit five-factor formula.
 -/
 noncomputable def higherDirectImageRawOverPullbackHom
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
@@ -111,8 +108,7 @@ noncomputable def higherDirectImageRawOverPullbackHom
       map_zero' := (higherDirectImageRawOverPullback_functorial Λ k G q U).1 A B f
       map_add' := (higherDirectImageRawOverPullback_functorial Λ k G q U).2.1 A B f }
 
-/-- The bundled additive map is exactly the prescribed raw pullback. 
-(blueprint: def-sbc-higher-image-raw-diagram)
+/-- The bundled additive map is exactly the prescribed raw pullback.
 -/
 theorem higherDirectImageRawOverPullbackHom_apply
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
@@ -123,8 +119,7 @@ theorem higherDirectImageRawOverPullbackHom_apply
       higherDirectImageRawOverPullback Λ k G q f U z := rfl
 
 /-- The contravariant raw cohomology functor on Over W. No data are chosen from an
-existence theorem: objects and maps are the fixed raw presheaves and explicit pullbacks. 
-(blueprint: def-sbc-higher-image-raw-diagram)
+existence theorem: objects and maps are the fixed raw presheaves and explicit pullbacks.
 -/
 noncomputable def higherDirectImageRawOverFunctor
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
@@ -148,8 +143,7 @@ noncomputable def higherDirectImageRawOverFunctor
     exact (higherDirectImageRawOverPullback_functorial Λ k G q U).2.2.2
       _ _ _ g.unop f.unop z
 
-/-- The raw cohomology diagram of an inverse system. 
-(blueprint: def-sbc-higher-image-raw-diagram)
+/-- The raw cohomology diagram of an inverse system.
 -/
 noncomputable abbrev higherDirectImageRawDiagram
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
@@ -157,8 +151,7 @@ noncomputable abbrev higherDirectImageRawDiagram
     {I : Type u} [Category.{u} I] (D : I ⥤ Over W) (U : S.Etale) :=
   D.op ⋙ higherDirectImageRawOverFunctor Λ k G q U
 
-/-- The raw cohomology cocone of a scheme cone, before any assertion of continuity. 
-(blueprint: def-sbc-higher-image-raw-diagram)
+/-- The raw cohomology cocone of a scheme cone, before any assertion of continuity.
 -/
 noncomputable def higherDirectImageRawCocone
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)

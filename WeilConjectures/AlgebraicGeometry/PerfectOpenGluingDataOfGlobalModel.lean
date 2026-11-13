@@ -14,8 +14,7 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Gluing data from a global perfect pullback model
 
-Source: Stacks Project, Tag 09RF, construction of adjoint maps.
-(blueprint: lem-pc-perfect-open-gluing-data-global-model). -/
+Source: Stacks Project, Tag 09RF, construction of adjoint maps. -/
 
 @[expose] public section
 universe u w
@@ -99,7 +98,6 @@ private theorem isIso_restricted_adjoint
 
 /-- A global perfect model and its limit comparison provide local gluing data.
 Source: Stacks Project, Tag 09RF, adjunction construction of local maps.
-(blueprint: lem-pc-perfect-open-gluing-data-global-model).
 The proof chooses the top open twice, the derived pullback/direct image
 adjunction, and obtains the local maps by adjunction from the comparison
 isomorphism. Both local maps are the restriction of the same global adjoint,

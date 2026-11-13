@@ -11,13 +11,13 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-! # Perfect complexes on schemes
 
-Source: literature/blueprint/master/blueprint/sec-picard-framework/det-thm-picard-semicon/
+Source:
 def-pc-perfect-complex.md, node def-pc-perfect-complex, order 664; Stacks Project,
-Cohomology of Sheaves, Definitions 08C4 and 08CM, Tag 0BDH (blueprint: def-pc-perfect-complex).
+Cohomology of Sheaves, Definitions 08C4 and 08CM, Tag 0BDH.
 
 Restriction to an open is `SheafOfModules.overFunctor` on the localized site, with the same
 module category and derived category as `schemeDerivedCategory`, in the shape of
-`AlgebraicGeometry.Scheme.IsPseudoCoherent` (blueprint: def-pur-pseudo-coherent-complex).
+`AlgebraicGeometry.Scheme.IsPseudoCoherent`.
 -/
 
 @[expose] public section
@@ -30,9 +30,8 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A complex of `𝒪_U`-modules on an open `U` of `X` is strictly perfect if all but finitely
 many of its terms are zero and each term is a direct summand of a finite free `𝒪_U`-module:
-there are `ι : K.X n ⟶ 𝒪_U^m` and `π : 𝒪_U^m ⟶ K.X n` with `ι ≫ π = 𝟙 (K.X n)`.
-Source: Stacks Project, Cohomology of Sheaves, Definition 08C4
-(blueprint: def-pc-perfect-complex). -/
+there are `ι: K.X n ⟶ 𝒪_U^m` and `π: 𝒪_U^m ⟶ K.X n` with `ι ≫ π = 𝟙 (K.X n)`.
+Source: Stacks Project, Cohomology of Sheaves, Definition 08C4. -/
 def IsStrictlyPerfect (X : Scheme.{u}) (U : X.Opens)
     (K : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ) :
     Prop :=
@@ -50,8 +49,7 @@ is, there is an open covering of `X`) on which the restriction of `E` is isomorp
 `AlgebraicGeometry.schemeDerivedCategoryEquiv X` this is
 `AlgebraicGeometry.Scheme.Modules.IsPerfectComplex`
 (`AlgebraicGeometry.Scheme.isPerfect_iff_isPerfectComplex`).
-Source: Stacks Project, Cohomology of Sheaves, Definition 08CM
-(blueprint: def-pc-perfect-complex). -/
+Source: Stacks Project, Cohomology of Sheaves, Definition 08CM. -/
 def IsPerfect (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,
@@ -65,8 +63,7 @@ def IsPerfect (X : Scheme.{u})
         (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj K)
 
 /-- The full subcategory `D_perf(𝒪_X)` of `D(𝒪_X)` of perfect objects.
-Source: Stacks Project, Cohomology of Sheaves, Definition 08CM
-(blueprint: def-pc-perfect-complex). -/
+Source: Stacks Project, Cohomology of Sheaves, Definition 08CM. -/
 def perfectSubcategory (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,

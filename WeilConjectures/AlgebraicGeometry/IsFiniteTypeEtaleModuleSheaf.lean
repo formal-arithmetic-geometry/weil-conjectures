@@ -12,8 +12,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoeffic
 /-!
 # Finite type sheaves of modules on the small etale site
 
-Source: Stacks Project, Tags 03DE(4), 03DL(5), and 03DF
-(blueprint: def-weil-pbc-etale-module-finite-type).
+Source: Stacks Project, Tags 03DE(4), 03DL(5), and 03DF.
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ an epimorphism from the constant sheaf of a finite free module. The constant she
 to the restriction correspond to `n` global sections by the constant-sheaf adjunction.
 The terminal-object covering formulation is equivalent to the all-objects formulation
 by base change of covers. No local constancy is required in this definition.
-Source: Stacks Project, Tags 03DE(4), 03DL(5), and 03DF
-(blueprint: def-weil-pbc-etale-module-finite-type). -/
+Source: Stacks Project, Tags 03DE(4), 03DL(5), and 03DF. -/
 def IsFiniteTypeEtaleModuleSheaf {Y : Scheme.{v}} {Λ : Type (v + 1)} [CommRing Λ]
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{v + 1} Λ)) : Prop :=
   ∃ 𝒰 : Cover.{v} etalePrecoverage Y, ∀ i : 𝒰.I₀, ∃ n : ℕ,

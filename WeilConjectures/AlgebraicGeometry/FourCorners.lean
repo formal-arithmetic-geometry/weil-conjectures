@@ -12,8 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedPullbackCompositi
 /-!
 # The four finite-coefficient corners
 
-Source: blueprint, proper base change, four corners; Stacks Project Tags 07A7 and 099M
-(blueprint: def-weil-pbc-four-corners).
+Source: blueprint, proper base change, four corners; Stacks Project Tags 07A7 and 099M.
 
 ## Main definitions
 
@@ -38,17 +37,16 @@ attribute [instance] proEtaleRingRestrictScalars_preservesFiniteLimits
 variable {T : Scheme.{u}} {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : R ⟶ S)
 
 /-- Ordinary scalar extension, with objects and maps fixed by the tensor construction.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-four-corners). -/
+Source: Stacks Tag 06YY. -/
 noncomputable def proEtaleRingExtension : proEtaleRingModules T R ⥤ proEtaleRingModules T S :=
   reductionChange T a
 
-/-- The fixed scalar extension is additive. Source: Stacks Tag 06YY
-(blueprint: def-weil-pbc-four-corners). -/
+/-- The fixed scalar extension is additive. Source: Stacks Tag 06YY. -/
 noncomputable instance proEtaleRingExtension_additive : (proEtaleRingExtension a).Additive :=
   reductionChangeAdditive T a
 
 /-- Reuse the published tensor-unit normalized ordinary scalar adjunction.
-Source: Stacks 03D3, 06YY (blueprint: def-weil-pbc-four-corners). -/
+Source: Stacks 03D3, 06YY. -/
 noncomputable abbrev proEtaleRingExtensionAdjunction :
     proEtaleRingExtension a ⊣ proEtaleRingRestrictScalars a := pbcScalarAdjunction a
 

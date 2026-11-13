@@ -13,7 +13,6 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 # Principal-open section comparison for a graded-module chart
 
 Source: Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-basis-comparison-fixed-generators)
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
 localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-basis-comparison-fixed-generators) -/
+Source: Stacks, Algebra, Section 00JM. -/
 local instance localizedModuleHomogeneousScalarsBasisComparisonFixedGenerators (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -115,7 +113,6 @@ private theorem principalOpen_chart (f : Fidx) (r : R[f]) :
 /-- Restrictions of whole-chart sections generate the sections on each principal open.
 
 Source: Stacks Project, Constructions, Lemma 01M7, and Schemes, Lemma 01HV.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-basis-comparison-fixed-generators)
 
 Proof:
 For a principal open D(r) of Spec R[f], write r=b/f^n with b homogeneous of

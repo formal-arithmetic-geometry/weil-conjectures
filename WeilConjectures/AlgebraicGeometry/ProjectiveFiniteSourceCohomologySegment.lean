@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.PQFCohomology
 /-! # A finite-source cohomology segment for a projective embedding
 
 Source: Stacks Project, Tags 01YS (Lemma 30.14.1 (3)) and 01Y6 (Lemma 30.9.9).
-(blueprint: lem-pc-p2-projective-finite-source-cohomology-segment)
 -/
 
 @[expose] public section
@@ -58,7 +57,6 @@ private theorem pushforward_cohomology_linearEquiv
 /-- The descending-induction segment, without assuming finiteness of its last term.
 
 Source: Stacks Project, Tags 01YS (Lemma 30.14.1 (3)) and 01Y6 (Lemma 30.9.9).
-(blueprint: lem-pc-p2-projective-finite-source-cohomology-segment)
 
 Proof: identify the affine base T with Spec Gamma(T,O), and transport the specified
 closed embedding to projective space over that ring. Push F forward along the embedding;

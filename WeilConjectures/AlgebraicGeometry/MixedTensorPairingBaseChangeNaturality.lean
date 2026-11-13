@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 /-! # Base change preserves the direct-image tensor pairing
 Source: Stacks Project, cohomology.tex Tag 08I3 and Remark 08HY;
 duality.tex Tag 0AA8, final comparison diagrams.
-(blueprint: lem-sc-mixed-tensor-pairing-base-change-naturality).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ variable [∀ Z : Scheme.{u},
 
 /-- Naturality in the object of the canonical derived base-change map.
 Source: Stacks Project, cohomology.tex, Remark 08HY.
-(blueprint: lem-sc-mixed-tensor-pairing-base-change-naturality).
 
 Proof: express the map as the adjoint transpose of the pullback-composition square
 comparison followed by the pulled-back counit. Naturality of the composition

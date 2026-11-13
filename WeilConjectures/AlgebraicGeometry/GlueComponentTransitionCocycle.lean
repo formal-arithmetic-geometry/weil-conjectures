@@ -13,9 +13,8 @@ import WeilConjectures.Topology.GlueSheavesOfModules
 /-!
 # Čech transition functions glue local trivial line bundles
 
-Source: Stacks Project, Sheaves Lemma 00AM (lemma-glue-sheaves-structures),
-with uniqueness from Lemma 04TN (lemma-glue-maps).
-(blueprint: lem-sc-glue-component-transition-cocycle)
+Source: Stacks Project, Sheaves Lemma 00AM,
+with uniqueness from Lemma 04TN.
 -/
 
 @[expose] public section
@@ -113,22 +112,20 @@ set_option backward.isDefEq.respectTransparency false in
 modules to an invertible module with chosen frames, uniquely up to the unique
 isomorphism preserving those frames. All overlap comparisons use restriction maps.
 
-Source: Stacks Project, Sheaves Lemma 00AM (lemma-glue-sheaves-structures),
-with uniqueness from Lemma 04TN (lemma-glue-maps).
-(blueprint: lem-sc-glue-component-transition-cocycle).
+Source: Stacks Project, Sheaves Lemma 00AM,
+with uniqueness from Lemma 04TN.
 
 Step 1: take the local modules `O_{U a}` and multiplication by `g a b` as the
-transition isomorphisms; the inverse units give their inverses
-(`def-sc-invertible-module`). Step 2: multiplication by a unit and its inverse
+transition isomorphisms; the inverse units give their inverses. Step 2: multiplication by a unit and its inverse
 are inverse maps; after restriction to any triple overlap, `hcoc` says their
 composites equal the direct transition. The gluing theorem requires only this
 cocycle condition; the identity and inverse relations follow from it. Step 3: apply
 `lem-weil-pbc-glue-sheaves-of-modules` to obtain a module and compatible
 trivializations. Their inverse images of 1 are the frames `e`, and compatibility
 reads `e a = g a b • e b` on the overlap. Step 4: these frames make the module
-locally free of rank one, hence invertible (`def-sc-invertible-module`). For any
+locally free of rank one, hence invertible. For any
 other glued module, the local maps sending its frames to `e` agree on overlaps;
-the fully faithful gluing theorem (`lem-weil-pbc-glue-sheaves-of-modules`)
+the fully faithful gluing theorem
 glues them and their inverses to the unique global isomorphism. In Lean the
 source library's `glueHom` performs this morphism gluing; equality of morphisms
 is checked on the free generators using the gluing theorem's locality clause. -/

@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 /-! Consecutive levels of a coherent formal module have equal support.
 
 Source: Stacks Project, Cohomology of Schemes, proof of Lemma 30.26.11 (Tag 0CYV).
-(blueprint: lem-weil-pbc-formal-system-support-succ)
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ The proof identifies the stalk at level `n` with the quotient of the stalk at le
 this quotient vanishes exactly when the original stalk vanishes. This is the
 consecutive-level step in the proof of the constant-support theorem.
 Source: Stacks Project, Cohomology of Schemes, proof of Lemma 30.26.11 (Tag 0CYV),
-first sentence of the proof of (1).
-(blueprint: lem-weil-pbc-formal-system-support-succ). -/
+first sentence of the proof of (1). -/
 theorem formalModule_support_succ {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentFormalModule X I) (n : ℕ) :
     {x : X | ¬ Subsingleton ((F.obj.obj (op (n + 1))).presheaf.stalk x)} =

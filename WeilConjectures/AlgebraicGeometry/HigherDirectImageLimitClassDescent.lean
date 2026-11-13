@@ -27,8 +27,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- Every class in the limit higher direct image fiber comes from a stage.
-Source: Stacks Project, Lemma 59.51.7, Tag 09Z1, proof
-(blueprint: sbc-lem-higher-direct-image-limit-class-descent).
+Source: Stacks Project, Lemma 59.51.7, Tag 09Z1, proof.
 
 Proof:
 1. Represent the fiber class on an affine etale neighborhood of the chosen point.

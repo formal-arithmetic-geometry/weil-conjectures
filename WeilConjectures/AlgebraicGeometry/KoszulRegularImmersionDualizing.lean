@@ -24,8 +24,7 @@ import WeilConjectures.AlgebraicGeometry.AffineDerivedHomEvaluationCounit
 
 /-! # Dualizing object of a Koszul-regular closed immersion
 
-Source: Stacks Project, Duality for Schemes, Tag 0BR0, with Tag 0BQZ
-(blueprint: lem-sc-smooth-proper-diagonal-koszul-dual).
+Source: Stacks Project, Duality for Schemes, Tag 0BR0, with Tag 0BQZ.
 -/
 
 @[expose] public section
@@ -43,9 +42,9 @@ identifies its underlying derived object. The preservation witness `hpres` defin
 restriction of derived direct image, and `adj` says precisely that `a` is its right adjoint.
 An isomorphism of underlying objects is an isomorphism in the full subcategory.
 
-Source: Stacks, Tag 0BR0 (blueprint: lem-sc-smooth-proper-diagonal-koszul-dual).
+Source: Stacks, Tag 0BR0.
 Proof, following the node:
-1. A closed immersion is finite (lem-weil-pbc-closed-immersion-finite), and Z is
+1. A closed immersion is finite, and Z is
 Noetherian since Y is. Finite duality (lem-sc-finite-duality-derived-hom, Tags 035C,
 0AX2) identifies Ri_* a(OY) with RHom(i_* OZ, OY).
 2. The local Koszul Ext calculation (lem-sc-koszul-regular-immersion-derived-hom,

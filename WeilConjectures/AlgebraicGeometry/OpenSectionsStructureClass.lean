@@ -104,7 +104,6 @@ set_option maxHeartbeats 700000 in
 image of the ordinary tilde class of one under the restricted ordinary-to-derived unit.
 Source: Stacks Project, Tag 06Z0, the tilde/sections unit, and Tag 079V, the definition
 of derived global sections on an ordinary complex.
-(blueprint: lem-sc-open-sections-structure-class).
 
 Proof: The extended single complex is identified with the integer single complex by
 extendSingleIso. Its homology identification is extendHomologyIso followed by

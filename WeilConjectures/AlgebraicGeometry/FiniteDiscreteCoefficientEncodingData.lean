@@ -44,8 +44,7 @@ local instance instHasLimitsOfSizeFiniteDiscreteCoefficientEncodingData :
   ModuleCat.hasLimitsOfSize.{u, u + 1, u + 1, u + 1}
 
 /-- Encode coefficient sheaves using a single sectionwise encoding and point ring.
-Source: Bhatt--Scholze, Proposition 5.3.2; the constructive constant-ring encoding
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Proposition 5.3.2; the constructive constant-ring encoding.
 
 Construction. Invert the sectionwise sheafEncoding for the fixed G, then invert
 restriction of scalars along the ring isomorphism pulled back from eR at the point.

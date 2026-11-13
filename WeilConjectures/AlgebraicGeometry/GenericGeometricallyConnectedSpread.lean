@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.GenericFibreIncidenceSpread
 /-!
 # Spreading geometric connectedness of a generic fibre
 
-Source: Stacks Project, Tag 055G (lemma-geometrically-connected-generic-fibre).
-(blueprint: lem-sbc-generic-geometrically-connected-spread)
+Source: Stacks Project, Tag 055G.
 -/
 
 @[expose] public section
@@ -77,9 +76,7 @@ is connected because the generic fibre is connected. On the resulting open, afte
 any separably closed field extension each component is irreducible and this same
 connected graph of intersections persists. Their union is therefore connected.
 Descent returns a nonempty open in the original base, which contains its generic
-point by irreducibility. The argument also covers a single generic component.
-
-(blueprint: lem-sbc-generic-geometrically-connected-spread) -/
+point by irreducibility. The argument also covers a single generic component. -/
 theorem exists_open_geometricallyConnected_fibres_of_generic {X S : Scheme.{u}}
     [IrreducibleSpace S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f]
     (hη : GeometricallyConnected (f.fiberToSpecResidueField (genericPoint S))) :

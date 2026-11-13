@@ -65,7 +65,6 @@ private theorem refinement_comp_square {A B C D E : Scheme.{u}}
 /-- Ordinary pullbacks of two refined three-step paths agree.
 Source: Stacks Project, Tags 0095 and 0096; ordinary-pullback portion of step 2
 of lem-pc-open-cover-tensor-comparison-coherence.
-(blueprint: lem-pc-ordinary-pullback-refinement-coherence).
 Proof: Expand rhoK and rhoL. Apply pseudofunctor_associativity to reassociate each
 three-step path to the pullback of its composite. Naturality of pullbackComp moves
 the first comparison through pullback z. The equations Hz, Hd identify the composite

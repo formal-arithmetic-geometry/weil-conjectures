@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.OpenImageComplexComparisonRestriction
 
 Source: Stacks Project, Cohomology, Tag 08BV, K-injective computation of
 open direct image; Tag 08BS, preservation of K-injectivity by restriction.
-(blueprint: lem-pc-kinjective-mayer-vietoris-comparisons).
 -/
 
 @[expose] public section
@@ -52,9 +51,8 @@ set_option backward.isDefEq.respectTransparency true in
 -- Elaborating the three computed comparisons checks the transported scheme functors.
 /-- The three canonical direct-image complexes compute the derived direct images,
 compatibly with the U and V units and both nested restriction maps.
-Source: Stacks Project, Cohomology, Tag 08BV (lemma-exact-sequence-j-star),
+Source: Stacks Project, Cohomology, Tag 08BV,
 first paragraph of the proof; Tag 08BS (lemma-restrict-K-injective-to-open).
-(blueprint: lem-pc-kinjective-mayer-vietoris-comparisons).
 
 Proof: For A = U, V, U ∩ V, apply kInjective_of_restrict_open to I.
 Transport the restricted complex by Scheme.Modules.overEquiv A; an additive

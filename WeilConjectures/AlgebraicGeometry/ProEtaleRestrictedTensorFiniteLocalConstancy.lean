@@ -39,7 +39,6 @@ set_option linter.privateModule false
 # Finite local constancy of a restricted derived tensor
 
 Source: Stacks Project, Cohomology on Sites, Tags 094H and 07A4.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section

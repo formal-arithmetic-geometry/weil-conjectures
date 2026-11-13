@@ -307,8 +307,7 @@ private lemma linePullbackMap_identity
 and composition compatibility. The scalar-extension adjunction carries the roots comparison
 to this map; its Hom equivalences prove invertibility. Naturality of adjunction units gives
 composition and the unit law then gives the identity.
-Source: Stacks Project, Tags 03PK and 03Q1.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 03PK and 03Q1. -/
 theorem finiteEtaleTateLine_pullback_normalized
     (A : Type (u + 1)) [CommRing A] (m : ℕ) (hm : 0 < m) (hA : (m : A) = 0) :
     ∃ c : ∀ {T T' : Scheme.{u}} (v : T' ⟶ T), IsUnit (m : Γ(T, ⊤)) →

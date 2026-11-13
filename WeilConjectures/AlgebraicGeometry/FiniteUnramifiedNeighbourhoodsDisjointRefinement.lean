@@ -40,7 +40,6 @@ private theorem closedImmersion_restrict_of_le
   exact MorphismProperty.of_isPullback H hA
 
 /-- Source: Stacks Project, Tag 04DG followed by the shrinking argument of Tag 04HI.
-(blueprint: lem-weil-pbc-finite-unramified-neighbourhoods-disjoint-refinement)
 
 Proof: apply `finite_unramified_one_point_closed` to each piece, using its unique fibre
 point and purely inseparable residue extension. Intersect the finitely many neighbourhoods

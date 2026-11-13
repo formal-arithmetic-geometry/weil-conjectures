@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.PrincipalCechTotalRegrouping
 
 /-! # Naturality of the explicit principal Čech regrouping
 
-Source: Stacks, Tag 08D1, coefficient maps of total cochains
-(blueprint: lem-sc-principal-cech-regroup-naturality).
+Source: Stacks, Tag 08D1, coefficient maps of total cochains.
 -/
 
 @[expose] public section
@@ -75,7 +74,7 @@ private theorem principalCechRowToTerms_naturality
       exact map_zero _
 
 /-- Graded regrouping commutes with maps acting columnwise on sections.
-Source: Stacks, Tag 08D1 (blueprint: lem-sc-principal-cech-regroup-naturality).
+Source: Stacks, Tag 08D1.
 
 Proof: precompose with a diagonal coproduct inclusion. The total-map inclusion
 formula changes this to the corresponding column map, and the hypothesis he

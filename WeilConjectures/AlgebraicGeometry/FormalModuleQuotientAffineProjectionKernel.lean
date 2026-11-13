@@ -98,7 +98,6 @@ private theorem quotient_kernel_multiplication_range {X : Scheme.{u}} {K : X.Mod
 set_option backward.isDefEq.respectTransparency false in
 /-- The affine formal quotient projection has kernel I^m M.
 Source: Stacks Project, Tags 01I8, 01IC and 087W, affine module correspondence.
-(blueprint: lem-weil-pbc-formal-module-quotient-affine-projection-ker).
 
 Proof: Write F for the associated sheaf of M and U for the whole spectrum.
 The ideal-times affine-sections theorem gives quasi-coherence of the positive

@@ -32,7 +32,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A higher direct image section vanishing on a principal open is power torsion.
 Source: Stacks Project, Tag 01XJ (1), via localization in Tag 09MR and Tag 01E4.
-(blueprint: lem-pc-higher-direct-image-section-torsion).
 
 Proof:
 Work on an affine open W = Spec A of the base. The inverse image Y = f⁻¹W is

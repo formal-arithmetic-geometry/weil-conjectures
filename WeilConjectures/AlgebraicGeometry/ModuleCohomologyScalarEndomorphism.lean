@@ -12,8 +12,7 @@ import Mathlib.Algebra.Homology.ShortComplex.Linear
 
 /-! # Scalar endomorphisms on module cohomology
 
-Source: Stacks Project, Cohomology, Section 20.11, Tag 01DZ
-(blueprint: lem-weil-pbc-module-cohomology-scalar-endomorphism).
+Source: Stacks Project, Cohomology, Section 20.11, Tag 01DZ.
 -/
 
 @[expose] public section
@@ -65,7 +64,6 @@ module cohomology.
 
 Source: Stacks Project, Cohomology, Section 20.11, Tag 01DZ, construction by injective
 resolutions; also coherent.tex, paragraph preceding Lemma 02O8.
-(blueprint: lem-weil-pbc-module-cohomology-scalar-endomorphism).
 
 Proof: Multiplication by the global section r acts on every term of an injective
 resolution of G, using its restriction to each open. This commutes with differentials

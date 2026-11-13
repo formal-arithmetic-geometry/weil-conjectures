@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.GaloisBaseChangeQCOpenDescends
 
 Source: Stacks Project, Varieties, Tag 0389, proof, paragraphs 2--5, and the
 pullback identification in its last paragraph.
-(blueprint: lem-weil-pbc-galois-finite-invariant-clopen-partition).
 -/
 
 @[expose] public section
@@ -111,10 +110,9 @@ private theorem orbit_intersection
 nontrivial partition invariant under the automorphisms over a finite intermediate field.
 The partition is expressed on the iterated base change over that intermediate field.
 
-Source: Stacks Project, Varieties, Lemma Tag 0389
-(blueprint: lem-weil-pbc-galois-finite-invariant-clopen-partition).
+Source: Stacks Project, Varieties, Lemma Tag 0389.
 
-Proof: Write p : X_L → X and let U and its complement be the given partition.
+Proof: Write p: X_L → X and let U and its complement be the given partition.
 For every quasi-compact open W of X, p⁻¹(W) is quasi-compact because p is the base
 change of a morphism of affine schemes. Its intersections with U and Uᶜ are
 quasi-compact opens, since they are closed in p⁻¹(W). Apply Tag 04KU to descend

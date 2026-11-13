@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 /-! # Restriction comparison for tensor pullback on an open cover
 
 Source: Stacks Project, Sheaves of Modules, Tags 0095 and 0096.
-(blueprint: def-pc-open-cover-tensor-pullback-comparison).
 -/
 
 @[expose] public section
@@ -23,8 +22,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Restricting then pulling back agrees with pulling back then restricting.
 The comparison is constructed from ordinary pullback composition and the unique
 comparison between the tensor and ordinary left adjoints to pushforward.
-Source: Stacks Project, Tags 0095 and 0096.
-(blueprint: def-pc-open-cover-tensor-pullback-comparison). -/
+Source: Stacks Project, Tags 0095 and 0096. -/
 noncomputable def openCoverTensorPullbackComparison
     {X Y : Scheme.{u}} (p : Y ⟶ X) (U : X.OpenCover.{u}) (a : U.I₀) :
     pullback (U.f a) ⋙ pullback (U.pullbackHom p a) ≅

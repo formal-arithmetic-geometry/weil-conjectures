@@ -29,7 +29,6 @@ noncomputable section
 
 /-- The canonical restriction isomorphism for the extended structure complex.
 Source: Stacks Project, Tag 08CX, the structure complex; Tag 06Z0, tilde of A.
-(blueprint: lem-sc-open-sections-cohomology-unit-comparison).
 
 Construction: Extend the single complex using `extendSingleIso`, apply tilde
 and `singleMapHomologicalComplex`, then use the definitional identification
@@ -88,7 +87,6 @@ including their canonical classes of one. This statement compares cohomology onl
 it contains no equivalence of derived Hom sets.
 Source: Stacks Project, Tag 08BS, preservation of K-injectives under open restriction;
 Tag 079V, derived global sections; Tag 06Z0, the tilde/sections adjunction.
-(blueprint: lem-sc-open-sections-cohomology-unit-comparison).
 
 Proof: Identify the extended A[0] with the integer single complex, apply tilde,
 and use tildeSelf to identify its degree-zero sheaf with the structure module.

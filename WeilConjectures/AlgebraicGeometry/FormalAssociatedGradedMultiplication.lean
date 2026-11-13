@@ -68,7 +68,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Multiplication descends to successive ideal-power quotients and commutes with
 restriction. No associativity, commutativity or unit law is asserted here.
 Source: Stacks Project, Lemma 087Z and Schemes Lemmas 01I8, 01IC.
-(blueprint: lem-weil-pbc-formal-associated-graded-multiplication).
 
 Proof: On an affine open U, identify the power inclusions with I(U)^r and the
 quotient projection with I(U)^r / I(U)^(r+1). For degree zero use the identity

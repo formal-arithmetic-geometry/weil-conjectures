@@ -33,7 +33,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 
 Source: Stacks Project, Sheaves, Lemma 00A0, part (3); Modules, Tag 01CP,
 third paragraph, localization before taking the source-stalk exact sequence.
-(blueprint: lem-weil-pbc-module-restriction-stalk-iso)
 
 Proof: Let Y be the restriction of X to U and y the point (x,hxU). The
 neighborhood functor from Y to X is final after taking opposites: intersecting

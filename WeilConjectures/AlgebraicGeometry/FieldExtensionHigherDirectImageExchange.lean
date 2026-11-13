@@ -32,7 +32,6 @@ namespace AlgebraicGeometry.Etale
 /-- Relative exchange for a sheaf annihilated by an integer invertible in the base field.
 This compares higher direct images, without an injectivity or acyclicity hypothesis.
 Source: Stacks Project, Lemma 59.90.1, Tag 0F1C.
-(blueprint: lem-sc-field-extension-higher-direct-image-exchange)
 
 Proof: View F as a complex concentrated in degree zero. Its stalks are annihilated by n,
 which is invertible in k because its image in the field is nonzero. Apply relative

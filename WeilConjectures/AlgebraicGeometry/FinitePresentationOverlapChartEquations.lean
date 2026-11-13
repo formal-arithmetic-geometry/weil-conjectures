@@ -17,8 +17,7 @@ import Mathlib.Data.Finset.Order
 
 /-! # Eventual equations on diagonal and threefold overlap charts
 
-Source: Stacks Project, Tags 01ZR and 05N7.
-(blueprint: lem-pc-fp-overlap-eventual-chart-equations). -/
+Source: Stacks Project, Tags 01ZR and 05N7. -/
 
 @[expose] public section
 
@@ -91,7 +90,6 @@ set_option backward.isDefEq.respectTransparency true in
 /-- The diagonal and triple equations for the prescribed transitions hold on
 finite-stage universal test charts. No comparison with a global module is asserted.
 Source: Stacks Project, Tag 01ZR, first proof (Zariski gluing), and Tag 05N7 (3).
-(blueprint: lem-pc-fp-overlap-eventual-chart-equations).
 
 Proof: At stage k form the diagonal defect on each cover chart and the
 composition defect on each chosen threefold overlap. The latter is the difference

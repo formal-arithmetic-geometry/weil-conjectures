@@ -35,8 +35,7 @@ Use the original objects, maps and matching witnesses in the old degrees, so
 restriction is literally A (proof fields agree by proof irrelevance).
 This theorem performs only the simplicial attachment: the matching object and
 its finite covering lift into K are already supplied, and no hypercover
-hypothesis on K is used.
-(auxiliary; not a blueprint node) -/
+hypothesis on K is used. -/
 theorem exists_replacement_stage_of_boundary_cover
     {X : Scheme.{u}} (K : SimplicialObject X.Etale)
     {n : ℕ} (A : FiniteSplitReplacementStage K n) (Q : ReplacementBoundary A.U)

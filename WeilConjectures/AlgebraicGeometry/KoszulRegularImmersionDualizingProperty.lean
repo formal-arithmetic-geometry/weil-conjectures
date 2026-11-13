@@ -21,8 +21,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Quasi-coherence of the Koszul normal determinant
 
-Source: Stacks Project, Tag 0BQZ and Tag 0BR0
-(blueprint: lem-sc-koszul-normal-determinant-qcoherent).
+Source: Stacks Project, Tag 0BQZ and Tag 0BR0.
 -/
 
 @[expose] public section
@@ -35,8 +34,7 @@ namespace AlgebraicGeometry
 
 /-- The explicit rank-stratified normal determinant has quasi-coherent cohomology.
 
-Source: Stacks Project, Duality for Schemes, Tag 0BQZ and Tag 0BR0
-(blueprint: lem-sc-koszul-normal-determinant-qcoherent).
+Source: Stacks Project, Duality for Schemes, Tag 0BQZ and Tag 0BR0.
 
 Proof: Work on affine neighbourhoods of points of Z supplied by hregular. The
 conormal sheaf is the sheaf associated to I/I² over B = A/I. Koszul-regularity

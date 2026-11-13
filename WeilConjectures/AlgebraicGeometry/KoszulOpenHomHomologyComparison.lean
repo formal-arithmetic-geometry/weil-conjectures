@@ -15,7 +15,6 @@ import Mathlib.Algebra.Category.ModuleCat.Projective
 /-! # The stagewise derived Hom identification for the Koszul comparison
 
 Source: Stacks Project, Tags 06Z0, 08DC and 08DD.
-(blueprint: lem-sc-koszul-open-hom-homology-comparison).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ power transitions. The canonical comparison sends a restriction-zero arrow to ze
 This statement does not assert exactness of a filtered colimit, injectivity of the
 comparison on cohomology, or eventual vanishing.
 Source: Stacks Project, Tag 06Z0 and Equation 36.9.4.1, Tag 08DC; Tag 08DD.
-(blueprint: lem-sc-koszul-open-hom-homology-comparison)
 
 Proof: On the affine scheme, termwise quasi-coherence identifies F with the tilde
 of its global-sections complex M, naturally in the differentials. The affine

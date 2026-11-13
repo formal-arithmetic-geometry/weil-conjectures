@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.MixedSectionsBaseChangeUnitSquare
 /-! # Leray comparison and the base-change mate
 Source: Stacks Project, cohomology.tex, Remark 08HY; duality.tex, Tag 0AA8,
 lemma-more-base-change, final comparison diagrams.
-(blueprint: lem-sc-mixed-global-sections-base-change-mate).
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 This statement has no internal Hom or tensor-Hom input.
 Source: Stacks Project, cohomology.tex, Remark 08HY; duality.tex, Tag 0AA8,
 lemma-more-base-change, final comparison diagrams.
-(blueprint: lem-sc-mixed-global-sections-base-change-mate).
 
 Proof: apply mixedSectionsBaseChange_unit_square to E and precompose with
 inverse Leray for f. Cancel the adjacent inverse and forward Leray components.

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.OpenUnionModuleImagePullbackCore
 /-! # Sheaf gluing over an arbitrary open union
 
 Source: Stacks Project, Tags 01EB and 08BV.
-(blueprint: lem-pc-open-union-module-image-pullback).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry
 
 Source: Stacks Project, Tag 01EB, lemma-mayer-vietoris, first sentence of its proof;
 Tag 08BV, lemma-exact-sequence-j-star, displayed sequence.
-(blueprint: lem-pc-open-union-module-image-pullback).
 
 Proof: Fix a test open T. Conjugate each open image by the direct image of
 `overFunctorEquiv`, identifying its sections with M(A ∩ T). The comparison

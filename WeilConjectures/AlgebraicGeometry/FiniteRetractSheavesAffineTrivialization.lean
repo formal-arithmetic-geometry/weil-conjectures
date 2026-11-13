@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.SingleFiniteRetractSheafAffineTrivializ
 /-! # Simultaneous affine trivialization of finitely many finite free retracts
 
 Source: Stacks Project, Tags 00NX, 01IA and 01IB.
-(blueprint: lem-pc-finite-retract-sheaves-affine-trivialization).
 -/
 
 @[expose] public section
@@ -67,8 +66,7 @@ so is affine and contains x. Sections/localization and tilde identify the sheaf
 restrictions there with free sheaves of the respective finite ranks. Compose the
 nested-restriction comparisons to obtain the stated trivializations. For s empty
 use W itself. A zero summand has rank zero; no positive rank is required. If U
-is empty there is no x satisfying hx, so no existence claim is imposed.
-(blueprint: lem-pc-finite-retract-sheaves-affine-trivialization). -/
+is empty there is no x satisfying hx, so no existence claim is imposed. -/
 theorem exists_affine_trivialization_of_finite_retracts
     (X : Scheme.{u}) (U : X.Opens) (s : Finset ℤ)
     (M : ℤ → SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))

@@ -37,7 +37,6 @@ namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- A weakly contractible pro-etale object has weakly contractible final object on
 its own small site. Source: Stacks Tags 090M, 00Y1 and 094T.
-(blueprint: lem-pe-proetale-weakly-contractible-self).
 
 Proof: transport the site to its coefficient-sized model. Localizing at the given
 object preserves weak contractibility, by the fibre description of the slice topos.

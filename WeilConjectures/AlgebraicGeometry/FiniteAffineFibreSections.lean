@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberSections
 
 For a ring map `A → B` and a point `p` of `Spec A`, the global sections of the fibre of
 `Spec B ⟶ Spec A` over `p` are both `(f_* 𝒪_{Spec B})_p ⊗_{𝒪_{Spec A, p}} κ(p)` and
-`B ⊗_A κ(p)` (blueprint: lem-pc-finite-affine-fibre-sections).
+`B ⊗_A κ(p)`.
 -/
 
 @[expose] public section
@@ -23,12 +23,11 @@ open CategoryTheory CategoryTheory.Limits TensorProduct
 
 namespace AlgebraicGeometry
 
-/-- For an algebra `B` over `A` and `p ∈ Spec A`, write `f : Spec B ⟶ Spec A`. The stalk of
+/-- For an algebra `B` over `A` and `p ∈ Spec A`, write `f: Spec B ⟶ Spec A`. The stalk of
 the direct image of the structure sheaf, after tensoring with the residue field at `p`, has the
 same sections as the scheme-theoretic fibre `f⁻¹(p)`, and so has `B ⊗_A κ(p)`. Both
 identifications agree on elements of `B` and of the residue field.
 Source: Stacks Project, Morphisms, Tag 02KB, affine calculation in the proof of the lemma
-(blueprint: lem-pc-finite-affine-fibre-sections)
 
 Proof steps from the source: (1) identify the structure sheaf on `Spec B` with `˜B`,
 push it forward along `Spec.map (algebraMap A B)`, and identify its stalk at `p` with

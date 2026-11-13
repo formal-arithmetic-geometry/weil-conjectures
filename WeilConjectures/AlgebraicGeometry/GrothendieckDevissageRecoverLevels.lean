@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageCompletedCompariso
 
 /-! # Recovering the original levels after second-ideal algebraization
 
-Source: Stacks Project, Tag 088A, final paragraph
-(blueprint: lem-weil-pbc-devissage-recover-levels).
+Source: Stacks Project, Tag 088A, final paragraph.
 -/
 
 @[expose] public section
@@ -73,8 +72,7 @@ Here sigma is an isomorphism of doubly indexed diagrams, theta is the canonical 
 interchange, and the comparison square relates the maps to H. No completion equivalence
 on a thickening is assumed at this stage: that work is encoded in the supplied diagram.
 
-Source: Stacks Project, Tag 088A, final paragraph, and Tag 0889, part (1), uniqueness
-(blueprint: lem-weil-pbc-devissage-recover-levels).
+Source: Stacks Project, Tag 088A, final paragraph, and Tag 0889, part (1), uniqueness.
 
 Proof:
 Fix a positive I-level n. Evaluation of sigma identifies the K-completion of M_n with

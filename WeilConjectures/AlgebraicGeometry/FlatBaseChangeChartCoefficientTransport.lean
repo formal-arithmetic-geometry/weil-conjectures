@@ -103,7 +103,6 @@ set_option backward.isDefEq.respectTransparency false in
 -- Elaborating the coefficient comparisons uses several module functors.
 /-- The affine base-change chart and its coefficient h-maps, before taking cohomology.
 Source: Stacks Project, Tags 02KH (first paragraph), 0096 and 0097.
-(blueprint: new-flat-base-change-chart-coefficient-transport)
 
 Proof: Restrict the original fibre-product square using isPullback_resLE. The
 inequality L <= U identifies L with the intersection of the two inverse-image

@@ -113,7 +113,6 @@ private def iteratePairing (X : Scheme.{u}) (F G : X.Modules)
 
 /-- Recursive pairings from a compatible Godement tensor pairing.
 Source: Banerjee, arXiv:1004.1491, §1.1.4.
-(blueprint: new-module-cup-godement-iterate-pairings-from-beta)
 Define p₀ as the identity and pₙ₊₁ as b followed by T(pₙ). At n = 0 the only
 insertion is the unit, so the claim is the unit law and T(id) = id. For the induction
 step split the insertion index into zero and successor. Index zero uses the unit law

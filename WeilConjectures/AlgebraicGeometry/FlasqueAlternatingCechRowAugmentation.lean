@@ -13,7 +13,6 @@ import WeilConjectures.Topology.Sheaves.CechFlasque
 /-! # The increasing-tuple augmented Čech row of a flasque module
 
 Source: Stacks Project, Tags 09SZ, 01EQ and 01FM.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -111,7 +110,6 @@ set_option backward.isDefEq.respectTransparency false in
 Its degree-zero component is specified, so the map is uniquely determined.
 
 Source: Stacks Project, Tags 09SZ, 01EP and 01FM.
-(auxiliary; not a blueprint node)
 
 Proof: Restriction of a global section to each increasing one-tuple has zero
 Čech differential, because the two restrictions to every pair agree. Construct

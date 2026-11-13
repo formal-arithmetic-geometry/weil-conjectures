@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictionEvaluationMateIsIso
 /-! # Closed monoidal comparisons for open restriction
 
 Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DL.
-(blueprint: lem-pc-open-restriction-closed-monoidal).
 -/
 
 @[expose] public section
@@ -35,8 +34,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 /-- The standard localization is available on the open scheme independently of the
 specified localization universe of the over-site.
-Source: Stacks Project, Tag 05RU.
-(blueprint: lem-pc-open-restriction-closed-monoidal). -/
+Source: Stacks Project, Tag 05RU. -/
 local instance closedRestrictionStandardDerived (X : Scheme.{u}) (U : X.Opens) :
     HasDerivedCategory.{u + 1}
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
@@ -74,7 +72,6 @@ set_option linter.style.haveILetI false in
 /-- Exact restriction carries compatible strong tensor and internal-Hom comparisons.
 
 Source: Stacks Project, cohomology.tex, Tags 06YH, 08DJ and 08DL.
-(blueprint: lem-pc-open-restriction-closed-monoidal).
 
 Proof: choose K-flat representatives for both tensor inputs. Exact restriction
 preserves their K-flatness, and its termwise sheaf-tensor comparison, summed over

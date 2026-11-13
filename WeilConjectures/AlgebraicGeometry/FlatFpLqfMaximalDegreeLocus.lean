@@ -32,7 +32,6 @@ namespace AlgebraicGeometry.Scheme.Hom
 
 /-- The maximal fibre degree locus is open, and the restriction to it is finite.
 Source: Stacks Project, More on Morphisms, Tag 07RY, proof, second paragraph.
-(blueprint: lem-weil-pbc-flat-fp-lqf-maximal-degree-locus)
 
 Proof: fix a point of degree `m`. Its finite scheme-theoretic fibre has finitely many
 points. An elementary étale neighbourhood splits the pullback into complementary open

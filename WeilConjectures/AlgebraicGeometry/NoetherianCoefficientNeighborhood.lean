@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.DimensionPreservedFieldExtension
 /-! # Bounded principal neighbourhoods in a coefficient model
 
 Source: Stacks Project, Algebra, proof of Tag 00SU, first two paragraphs.
-(blueprint: lem-weil-pbc-noetherian-coefficient-model-principal-neighborhood).
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Each point upstairs lies in a principal open from the coefficient model on which all
 nonempty model fibres have dimension at most the expected dimension.
 Source: Stacks Project, Algebra, proof of Tag 00SU, first two paragraphs.
-(blueprint: lem-weil-pbc-noetherian-coefficient-model-principal-neighborhood).
 
 Proof:
 1. Put S₀ = R₀[x]/(f₀) and S = R[x]/(f). Polynomial scalar extension and tensoring

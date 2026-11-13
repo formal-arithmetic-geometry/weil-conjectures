@@ -118,8 +118,7 @@ Expand the tensor-stalk and pinned restriction maps on a section germ. Their
 units send the germ to `1 ⊗ s`, and `restrictStalkNatIso` identifies the
 restricted germ with the ambient germ. Point transport follows by equality
 induction. The linear extension theorem handles the remaining coefficients.
-Source: Stacks Project, Tags 0098 and 0096.
-(blueprint: lem-pc-open-ordinary-tensor-pure-germ-coordinates-canonical). -/
+Source: Stacks Project, Tags 0098 and 0096. -/
 theorem openOrdinaryTensor_pure_germ_coordinates_canonical
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -226,8 +225,7 @@ made available to this proof through `import all`.
 output ring equivalence. These identities transform the scalar multiple of the
 canonical equation into the displayed arbitrary-scalar equation. No additional
 hypothesis on the coefficient, degree or stalk element is needed.
-Source: Stacks Project, Tags 0098 and 0096.
-(blueprint: lem-pc-open-ordinary-tensor-pure-germ-coordinates-linear-extension). -/
+Source: Stacks Project, Tags 0098 and 0096. -/
 theorem openOrdinaryTensor_pure_germ_coordinates_linear_extension
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

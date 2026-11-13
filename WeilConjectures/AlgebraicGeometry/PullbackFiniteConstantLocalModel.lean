@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.CondensedConstantConstructibilit
 /-! # Pullback of a finite constant local model
 
 the base-changed covering argument.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -44,7 +43,6 @@ private noncomputable def pullback_point_iso
 /-- Pulling back the given pro-etale cover preserves its finite constant models.
 proof.md,
 "Constructible complexes".
-(auxiliary; not a blueprint node)
 
 Proof. Choose a witnessing cover U of Y. Its base change U.pullback₂ g covers X.
 On its i-th member W = U_i ×_Y X, the two inverse images of M are isomorphic by

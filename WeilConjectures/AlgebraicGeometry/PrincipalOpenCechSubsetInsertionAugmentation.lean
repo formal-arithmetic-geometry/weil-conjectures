@@ -68,7 +68,6 @@ set_option maxHeartbeats 800000 in
 /-- Explicit subset insertion agrees with the singleton augmentation.
 
 Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
-(blueprint: lem-sc-principal-open-cech-subset-insertion-augmentation).
 
 Proof: Expand the augmentation as restriction into the degree-zero tuple column
 followed by its total summand inclusion. In the finite subset insertion, all coordinates

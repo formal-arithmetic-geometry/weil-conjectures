@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.FinitePresentationLocalMapRecoveryTrans
 /-! # Eventual overlap compatibility of local lifts
 
 Source: Stacks Project, Limits, Tag 01ZR, first proof.
-(blueprint: lem-pc-fp-local-map-overlap-compatibility).
 -/
 
 @[expose] public section
@@ -50,7 +49,6 @@ of its cover. The conclusion provides a descent morphism with exactly these
 components. No new local maps are chosen.
 Source: Stacks Project, Limits, Tag 01ZR, first proof, agreement on overlaps;
 Algebra, Tag 05N7 (3).
-(blueprint: lem-pc-fp-local-map-overlap-compatibility).
 
 Proof: For each pair of members of U₀, cover their intersection by finitely many
 affine opens. Quasi-separatedness makes each intersection quasi-compact. On each

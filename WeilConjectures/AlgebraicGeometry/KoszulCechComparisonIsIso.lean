@@ -13,7 +13,7 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 
 /-! # Invertibility of the specified Koszul-to-Čech chain map
 
-Source: Stacks, Tag 08D1 (blueprint: lem-sc-koszul-cech-comparison-is-iso).
+Source: Stacks, Tag 08D1.
 -/
 
 @[expose] public section
@@ -25,7 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The explicit localization cocone induces an isomorphism of A-module complexes.
-Source: Stacks, Tag 08D1 (blueprint: lem-sc-koszul-cech-comparison-is-iso).
+Source: Stacks, Tag 08D1.
 
 Proof:
 1. Put M = Γ(Spec(A), F) degreewise. Affine quasi-coherence identifies the sections

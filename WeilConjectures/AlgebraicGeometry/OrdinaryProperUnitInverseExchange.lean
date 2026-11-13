@@ -8,9 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.SfP1IntegralTransportData
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantBaseChange
 
 /-! # Inverse transport of constant-object units
-
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, exchange of canonical
-pullback units (auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -53,8 +50,7 @@ private theorem inverse_comparison
     Iso.inv_hom_id_assoc] using h'.symm
 
 /-- Invertible proper exchange transports the two constant-object units in the
-inverse direction. Source: blueprint thm-amb-p1-adjunction.proof.md, substitution
-of the pullback counits (auxiliary; not a blueprint node).
+inverse direction.
 
 Proof: ordinary constant-object base change gives the forward square. Compose
 its exchange component with direct image of the constant pullback isomorphism.

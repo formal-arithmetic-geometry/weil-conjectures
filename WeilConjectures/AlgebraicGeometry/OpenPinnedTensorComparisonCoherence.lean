@@ -78,8 +78,7 @@ than trying to eliminate the equality of two fixed composites. Apply this at
 hj. Lifting additive functors to complexes and then to the homotopy quotient
 preserves composition, inverses, and equality transport, giving the displayed
 identity for every P. This argument uses only functor identities; it applies to
-empty and top opens and zero complexes without any extra hypothesis.
-(blueprint: lem-pc-open-pinned-tensor-counit-transport-coherence) -/
+empty and top opens and zero complexes without any extra hypothesis. -/
 theorem open_pinned_tensor_comparison_coherence
     {X X' : Scheme.{u}} (k : X' ⟶ X)
     (U : X.Opens) (U' : X'.Opens) (j : U'.toScheme ⟶ U.toScheme)

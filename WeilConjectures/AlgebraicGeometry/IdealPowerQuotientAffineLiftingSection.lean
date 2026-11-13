@@ -20,7 +20,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Affine lifting into ideal-power annihilator quotients
 
 Source: Stacks Project, Properties, Lemmas 01PM and 01PQ.
-(blueprint: lem-weil-pbc-ideal-power-quotient-affine-lifting-section).
 -/
 
 @[expose] public section
@@ -36,17 +35,16 @@ set_option backward.isDefEq.respectTransparency false in
 
 Source: Stacks Project, Properties, Lemma 01PM (affine denominator construction)
 and Lemma 01PQ (annihilator quotients).
-(blueprint: lem-weil-pbc-ideal-power-quotient-affine-lifting-section).
 
 Proof: Write V = Spec R, I|V = J~ with J finitely generated, and F|V = M~.
 Finite generation of J^n identifies A_n|V with Ann_M(J^n)~: clearing a common
 localization denominator for a finite set of generators proves this on principal
 opens, and hann identifies the subsheaf. Thus Q_n|V = (M/Ann_M(J^n))~.
-Choose J = (f_1,...,f_t). Its complement is the union of D(f_i). Represent s
+Choose J = (f_1..,f_t). Its complement is the union of D(f_i). Represent s
 there by x_i/f_i^k, with one positive k. Clear the finitely many overlap
 relations with one exponent e, and replace x_i by f_i^e x_i and k by k+e,
 so f_j^k x_i = f_i^k x_j in M. Put d = t*(k-1)+1 and
-K = {x in M : f_i^k x = 0 for all i}. Every degree-d monomial contains f_i^k;
+K = {x in M: f_i^k x = 0 for all i}. Every degree-d monomial contains f_i^k;
 send it to the remaining monomial times x_i modulo K. For any relation,
 multiplication of its image by f_j^k is the original relation times x_j,
 hence zero. This proves independence of the chosen factor and of all relations,

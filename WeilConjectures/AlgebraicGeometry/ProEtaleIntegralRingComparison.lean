@@ -9,8 +9,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleIntegralPointRingMap
 
 /-!
 # Lifting the integral representation comparison to rings
-
-(auxiliary; not a blueprint node).
+.
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Lift the normalized comparison on the point through the monoidal adjunction.
 
-proof.md`, Steps 3--4
-(auxiliary; not a blueprint node).
+proof.md`, Steps 3--4.
 
 Proof: the point ring-map lemma supplies the sectionwise ring map into the continuous
 direct image of the completion. Transpose it through the monoidal point adjunction.

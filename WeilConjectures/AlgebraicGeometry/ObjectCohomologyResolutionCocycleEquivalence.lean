@@ -14,7 +14,6 @@ import Mathlib.Algebra.Category.Grp.Ulift
 /-! # Object cohomology equivalences normalized on cocycles
 
 Source: Stacks Project, Section 01FT and Tag 06XR (1).
-(blueprint: lem-weil-pbc-object-resolution-cocycle-equivalence)
 -/
 
 @[expose] public section
@@ -317,7 +316,6 @@ private theorem sectionCycleClass_ulift
 
 Source: Stacks Project, Section 01FT, equation-cohomology-object-site;
 Tag 06XR (1), lemma-compute-ext-resolutions.
-(blueprint: lem-weil-pbc-object-resolution-cocycle-equivalence)
 
 Proof: Put P(V) equal to the sheafification of the free abelian presheaf on yoneda(V).
 The sheafification adjunction, the free abelian adjunction, and Yoneda identify

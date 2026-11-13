@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleBinaryLocalProperties
 /-! # Gluing a submodule with the ambient module on two opens
 
 Source: Stacks Project, Properties, Lemma 01PF, binary gluing step.
-(blueprint: lem-weil-pbc-module-submodule-binary-gluing).
 -/
 
 @[expose] public section
@@ -62,8 +61,7 @@ is an isomorphism on the overlap. No compactness or affineness is required.
 
 Source: Stacks Project, Properties, Lemma 01PF (label lemma-extend), reduction
 from a union to its affine member, gluing along the common value on the overlap.
-https://stacks.math.columbia.edu/tag/01PF
-(blueprint: lem-weil-pbc-module-submodule-binary-gluing).
+https://stacks.math.columbia.edu/tag/01PF.
 
 Proof: Construct G as the pullback of the direct image of Q along the restriction
 unit of H on W union V. The first projection φ is monic because direct image is a

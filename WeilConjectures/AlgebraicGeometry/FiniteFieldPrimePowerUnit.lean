@@ -13,7 +13,7 @@ import Mathlib.Algebra.CharP.Algebra
 
 A prime different from the characteristic is invertible on every scheme over the
 fixed algebraic closure. The statement needs no coefficient extension or purity setting.
-Source: finite coefficient conventions (blueprint: lem-sp-finite-field-prime-power-unit).
+Source: finite coefficient conventions.
 -/
 
 @[expose] public section
@@ -25,7 +25,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Every power of a prime different from the characteristic is a unit on a k-scheme.
 Source: finite coefficient conventions, the invertibility hypothesis in the reduction
-compatibilities proof (blueprint: lem-sp-finite-field-prime-power-unit).
+compatibilities proof.
 
 Proof: the cardinality of the finite base field determines its characteristic p.
 Its algebraic closure has characteristic p as well. The image of the other prime ell

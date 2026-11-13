@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.DerivedInternalHomShiftComparison
 
 /-! # Shift and global-section comparison for internal derived Hom
 Source: Stacks Project, Tags 08JA and 0B6A.
-(blueprint: lem-sc-global-hom-shifted-hypercohomology).
 -/
 
 @[expose] public section
@@ -118,7 +117,6 @@ private noncomputable def globalSectionsShiftIso (X : Scheme.{u})
 hypercohomology of the internal Hom of shifted arguments. This comparison concerns
 only cohomology, not the identification with derived morphisms.
 Source: Stacks Project, Tag 08JA, proof of Lemma 21.35.1; Tag 0B6A, Section 20.44.
-(blueprint: lem-sc-global-hom-shifted-hypercohomology).
 
 Proof: Represent P by a K-flat complex L and Q by a K-injective complex I. Their
 sheaf Hom complex is K-injective, so its termwise global sections compute RΓ.

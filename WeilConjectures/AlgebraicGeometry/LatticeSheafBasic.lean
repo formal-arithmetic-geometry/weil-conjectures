@@ -24,7 +24,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 # The sheaf of integral lattices
 
 Source: Bhatt--Scholze, The pro-etale topology for schemes, Proposition 6.8.4(6),
-pp. 59--60 (auxiliary; not a blueprint node).
+pp. 59--60.
 
 The presentation by a surjection from pairs with its exact kernel relation avoids choosing
 representatives of isomorphism classes. Restriction is characterized by the embedded images
@@ -43,15 +43,13 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Cache additive sheafification on each slice for the lattice calculations.
 Source: Mathlib, sheafification on small sites.
-(auxiliary; not a blueprint node).
 Proof: specialize the existing small-site sheafification instance. -/
 local instance latticeWeakSheafifyOver (X : Scheme.{u}) (U : X.ProEt) :
     HasWeakSheafify ((Scheme.ProEt.topology X).over U) AddCommGrpCat.{u + 1} := by
   infer_instance
 
 /-- Restriction of the scalar-extension ring map to the localized site.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), slice restrictions
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.8.4(6), slice restrictions. -/
 def latticeScalarMap {X : Scheme.{u}}
     {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S)
     (U : X.ProEt) : R.over U ⟶ S.over U :=
@@ -59,8 +57,7 @@ def latticeScalarMap {X : Scheme.{u}}
 
 /-- A lattice pair, including the rationalization isomorphism, over a slice object.
 Finite local freeness allows varying ranks and the zero module.
-Source: Bhatt--Scholze, Proposition 6.8.4(6)
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.8.4(6). -/
 structure IntegralLatticePair {X : Scheme.{u}}
     {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S)
     (L : SheafOfModules.{u + 1}
@@ -72,8 +69,7 @@ structure IntegralLatticePair {X : Scheme.{u}}
     SheafOfModules.changeOfRings.{u, u + 1, u + 1} (latticeScalarMap a U) module ≅ L.over U
 
 /-- The exact equivalence relation on pairs: an integral isomorphism intertwines their
-rationalizations. Source: Bhatt--Scholze, Proposition 6.8.4(6)
-(auxiliary; not a blueprint node). -/
+rationalizations. Source: Bhatt--Scholze, Proposition 6.8.4(6). -/
 def IntegralLatticePair.Equivalent {X : Scheme.{u}}
     {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}} {a : R ⟶ S}
     {L : SheafOfModules.{u + 1}
@@ -86,8 +82,7 @@ def IntegralLatticePair.Equivalent {X : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 /-- The embedded image of a pair on a test object of its slice: apply the rationalization
 map to the image of `1 ⊗ m` under the change-of-rings sheafification unit.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), proof, first local calculation
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.8.4(6), proof, first local calculation. -/
 noncomputable def IntegralLatticePair.image {X : Scheme.{u}}
     {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}} {a : R ⟶ S}
     {L : SheafOfModules.{u + 1}
@@ -107,8 +102,7 @@ noncomputable def IntegralLatticePair.image {X : Scheme.{u}}
 commutative-ring structure retained. Its sections and restriction maps are those of
 `continuousMapRingPresheaf X T`, and the sheaf condition is reflected from it along
 `forget₂ CommRingCat RingCat`.
-Source: Bhatt--Scholze, Definition 6.8.1 and Proposition 6.8.4(6)
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Definition 6.8.1 and Proposition 6.8.4(6). -/
 noncomputable def latticeCoefficientSheaf (X : Scheme.{u}) (T : Type w)
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     Sheaf (Scheme.ProEt.topology X) CommRingCat.{max (u + 1) w} :=
@@ -121,8 +115,7 @@ noncomputable def latticeCoefficientSheaf (X : Scheme.{u}) (T : Type w)
 
 /-- The coefficient map is postcomposition with the specified continuous ring map, i.e. base
 `continuousMapRingPresheafMap` on the commutative-ring lift.
-Source: Bhatt--Scholze, Definition 6.8.1 and Proposition 6.8.4(6)
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Definition 6.8.1 and Proposition 6.8.4(6). -/
 noncomputable def latticeCoefficientSheafMap (X : Scheme.{u}) {T T' : Type w}
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
     [TopologicalSpace T'] [CommRing T'] [IsTopologicalRing T']
@@ -133,8 +126,7 @@ noncomputable def latticeCoefficientSheafMap (X : Scheme.{u}) {T T' : Type w}
 
 /-- The given valuation subring in the field equipped with its canonical absolute value.
 `WithAbs.equiv` only changes the topology-bearing type synonym.
-Source: Bhatt--Scholze, Definition 6.8.1 and Proposition 6.8.4(6)
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Definition 6.8.1 and Proposition 6.8.4(6). -/
 noncomputable def latticeCoefficientIntegers (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     Subring (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) :=
@@ -143,29 +135,25 @@ noncomputable def latticeCoefficientIntegers (l : ℕ) [Fact l.Prime]
 
 /-- The integral matrix subgroup in the rational general linear group. Its cosets `gH`
 are the orbits of right multiplication, hence use Mathlib's `leftRel` quotient.
-Source: Bhatt--Scholze, Proposition 6.8.4(6)
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.8.4(6). -/
 def integralMatrixSubgroup {K : Type u} [Field K] (A : Subring K) (n : ℕ) :
     Subgroup (Matrix.GeneralLinearGroup (Fin n) K) :=
   (Matrix.GeneralLinearGroup.map A.subtype).range
 
 /-- The discrete set of lattices in a trivial rank `n` rational module, including `n = 0`.
-Source: Bhatt--Scholze, Proposition 6.8.4(6)
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.8.4(6). -/
 abbrev integralMatrixCosets {K : Type u} [Field K] (A : Subring K) (n : ℕ) :=
   Matrix.GeneralLinearGroup (Fin n) K ⧸ integralMatrixSubgroup A n
 
 /-- The underlying ring sheaf of continuous coefficients, retaining the universe lift.
-Source: Bhatt--Scholze, Definition 6.8.1
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Definition 6.8.1. -/
 noncomputable abbrev latticeModuleRing (X : Scheme.{u}) (T : Type u)
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :=
   (sheafCompose (Scheme.ProEt.topology X)
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (latticeCoefficientSheaf X T)
 
 /-- The canonical inclusion of continuous integral coefficients in rational coefficients.
-Source: Bhatt--Scholze, Definition 6.8.1 and Proposition 6.8.4(6)
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Definition 6.8.1 and Proposition 6.8.4(6). -/
 noncomputable def integralLatticeCoefficientMap (X : Scheme.{u})
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
@@ -176,8 +164,7 @@ noncomputable def integralLatticeCoefficientMap (X : Scheme.{u})
 /-- A sheaf presentation of isomorphism classes of lattice pairs. The first two clauses
 say exactly that its sections are the quotient by intertwining integral isomorphisms.
 The last clause specifies restriction by equality of embedded images on every slice object.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), proof, descent of embedded lattices
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.8.4(6), proof, descent of embedded lattices. -/
 def IsLatticeClassPresentation {X : Scheme.{u}}
     {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S)
     (L : SheafOfModules.{u + 1}
@@ -192,15 +179,13 @@ def IsLatticeClassPresentation {X : Scheme.{u}}
       ∀ T : Over V, P.image (op ((Over.map f).obj T)) = Q.image (op T))
 
 /-- The free rank `n` coefficient sheaf on the localized site, with a lifted finite index.
-Source: Bhatt--Scholze, Proposition 6.8.4(6)
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.8.4(6). -/
 noncomputable abbrev latticeFreeSheaf (X : Scheme.{u}) (K : Type u)
     [TopologicalSpace K] [CommRing K] [IsTopologicalRing K] (U : X.ProEt) (n : ℕ) :=
   SheafOfModules.free (R := (latticeModuleRing X K).over U) (ULift.{u + 1} (Fin n))
 
 /-- A constant rational coefficient as an actual section of the coefficient sheaf.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), constant matrix entries
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.8.4(6), constant matrix entries. -/
 noncomputable def latticeConstantCoefficient (X : Scheme.{u}) (K : Type u)
     [TopologicalSpace K] [CommRing K] [IsTopologicalRing K] (V : X.ProEt) (x : K) :
     (latticeCoefficientSheaf X K).obj.obj (op V) :=
@@ -209,8 +194,7 @@ noncomputable def latticeConstantCoefficient (X : Scheme.{u}) (K : Type u)
 set_option backward.isDefEq.respectTransparency false in
 /-- The embedded module `g A^n`: its sections are the integral linear combinations of the
 columns of `g`, in the standard coordinate basis of the rational free sheaf.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), the map `g ↦ g A^n`
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.8.4(6), the map `g ↦ g A^n`. -/
 noncomputable def matrixLatticeImage (X : Scheme.{u}) (K : Type u) [Field K]
     [TopologicalSpace K] [IsTopologicalRing K] (A : Subring K) (U : X.ProEt) (n : ℕ)
     (g : Matrix.GeneralLinearGroup (Fin n) K) (T : (Over U)ᵒᵖ) :
@@ -242,8 +226,7 @@ variable {X : Scheme.{u}}
 open scoped ChangeOfRings
 
 /-- The sheafification unit for the sectionwise scalar extension on a slice.
-Source: Mathlib's sheafification adjunction, used in Bhatt--Scholze, Proposition 6.8.4(6).
-(auxiliary; not a blueprint node). -/
+Source: Mathlib's sheafification adjunction, used in Bhatt--Scholze, Proposition 6.8.4(6). -/
 noncomputable def latticeTensorUnit
     (M : SheafOfModules.{u + 1}
       ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over U))) :=
@@ -254,7 +237,6 @@ noncomputable def latticeTensorUnit
 
 /-- Scalar extension of a morphism commutes with the tensor-unit sections.
 Source: naturality of Mathlib's sheafification adjunction unit.
-(auxiliary; not a blueprint node).
 Proof: evaluate unit naturality on the sectionwise extended morphism at a pure tensor
 1 ⊗ m, and use the scalar-extension formula for the image of a pure tensor. -/
 theorem latticeExtension_unit
@@ -560,7 +542,6 @@ private theorem pairEmbedding_injective
 
 /-- The lattice embedding is injective when the coefficient inclusion is injective.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), the integral basis calculation.
-(auxiliary; not a blueprint node).
 Proof: apply the tensor-unit injectivity calculation already used for image classification. -/
 theorem IntegralLatticePair.embedding_injective
     (ha : ∀ T, Function.Injective (((latticeScalarMap a U).hom.app T).hom))
@@ -570,7 +551,6 @@ theorem IntegralLatticePair.embedding_injective
 
 /-- Restriction maps preserve the embedded image of a lattice pair.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of embedded lattices.
-(auxiliary; not a blueprint node).
 Proof: restrict an integral lift and apply naturality of its embedding. -/
 theorem IntegralLatticePair.map_mem_image
     (P : IntegralLatticePair a L U) {T W : Over U} (f : W ⟶ T)
@@ -582,7 +562,6 @@ theorem IntegralLatticePair.map_mem_image
 
 /-- Membership in the embedded image is local for the slice topology.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of embedded lattices.
-(auxiliary; not a blueprint node).
 Proof: lift the restricted section uniquely through the injective lattice
 embedding. Uniqueness makes the lifts a matching family in the integral module
 sheaf. Glue them there and use separatedness in the rational module to check
@@ -645,7 +624,6 @@ private theorem coefficientMap_injective
 
 /-- Embedded images classify pairs over an injective coefficient map.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), proof, first local calculation.
-(auxiliary; not a blueprint node).
 Proof: the tensor unit is injective locally in an integral basis, since tensoring
 an injective scalar map with a free module is injective. Local injectivity of
 sheafification and separatedness descend this to every section of each pair.
@@ -665,7 +643,6 @@ theorem IntegralLatticePair.equivalent_iff_image_eq
 
 /-- The image criterion for the specified integral coefficient inclusion.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), proof, first local calculation.
-(auxiliary; not a blueprint node).
 Proof: postcomposition by the inclusion A → E is injective on continuous
 functions, including over empty objects. Apply the image classification for
 an injective map of coefficient sheaves. -/
@@ -691,8 +668,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- The ring homomorphism of constant coefficient sections.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), constant matrix coefficients
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.8.4(6), constant matrix coefficients. -/
 noncomputable def latticeConstantRingHom (X : Scheme.{u}) (K : Type u)
     [TopologicalSpace K] [CommRing K] [IsTopologicalRing K] (V : X.ProEt) :
     K →+* (latticeCoefficientSheaf X K).obj.obj (op V) where
@@ -761,7 +737,6 @@ private theorem matrixLatticeImage_integral_mul
 
 /-- Equal integral matrix cosets have the same embedded lattice on every test object.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), proof, construction of g A^n.
-(auxiliary; not a blueprint node).
 Proof: right multiplication by an integral matrix changes each integral coefficient
 vector by its integral matrix action. The matrix multiplication formula identifies
 its rational image with the original coordinate sum. The inverse integral matrix
@@ -867,8 +842,7 @@ private theorem matrixColumn_coordinates
   exact hh.symm
 
 /-- Evaluation of continuous coefficient sections at a point.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), evaluation of matrix coefficients
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.8.4(6), evaluation of matrix coefficients. -/
 noncomputable def latticeEvaluationRingHom (V : X.ProEt) (x : V.left) :
     (latticeCoefficientSheaf X K).obj.obj (op V) →+* K where
   toFun c := c.down x
@@ -923,8 +897,7 @@ private theorem integralMatrixSubgroup_mem_of_entries
 
 omit [TopologicalSpace K] [IsTopologicalRing K] in
 /-- An invertible rational matrix is integral exactly when it and its inverse have integral entries.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), integral changes of basis
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Proposition 6.8.4(6), integral changes of basis.
 Proof: an integral invertible lift supplies both sets of entries. Conversely lift the two
 matrices entrywise; injectivity of the integral inclusion proves their inverse equations. -/
 theorem integralMatrixSubgroup_mem_iff (g : Matrix.GeneralLinearGroup (Fin n) K) :
@@ -939,8 +912,7 @@ theorem integralMatrixSubgroup_mem_iff (g : Matrix.GeneralLinearGroup (Fin n) K)
     exact integralMatrixSubgroup_mem_of_entries K A n g hg hgi
 
 /-- Equality of constant lattice images at any nonempty slice object detects the coset.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), evaluation of constant lattices
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Proposition 6.8.4(6), evaluation of constant lattices.
 Proof: evaluate the integral coordinates of each column at a point of the test object.
 The change matrix and its inverse have integral entries, hence define an integral unit. -/
 theorem matrixLatticeImage_coset_eq_of_eq_at
@@ -1294,7 +1266,6 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- A constant matrix lattice is the embedded image of an actual finite free lattice pair.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), proof, the construction g A^n.
-(auxiliary; not a blueprint node).
 Proof: take the free integral coefficient-module sheaf. Its scalar extension is the
 free rational sheaf by the explicit finite-product tensor comparison. Compose that
 comparison with the constant matrix automorphism and the inverse trivialization.

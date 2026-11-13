@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
 # Lifting an equivariant finite étale scheme
 
 Source: Stacks Project Tag 0A5G, final paragraph.
-(blueprint: lem-weil-pbc-finite-etale-scheme-torsor-lift)
 -/
 
 @[expose] public section
@@ -327,8 +326,7 @@ end Representable
 
 /-- **Torsors with a representable underlying sheaf.** A torsor `P` under the constant sheaf `M`
 on the small étale site of `Y` whose underlying sheaf of sets is represented by a finite étale
-`Y`-scheme `Q` is the sheaf torsor of an `M`-torsor, with total space `Q`.
-(blueprint: `thm-galois-lc-etale`, simply transitive actions) -/
+`Y`-scheme `Q` is the sheaf torsor of an `M`-torsor, with total space `Q`. -/
 private theorem exists_toSheafTorsor_equiv_of_iso
     (P : Sheaf.Torsor ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
       (AddCommGrpCat.of M))) {Q : Scheme.{u}} (π : Q ⟶ Y) [IsFinite π] [Etale π]
@@ -643,7 +641,6 @@ private theorem isIso_sigmaDesc_of_equivariant_iso
 and has an invertible simple-transitivity morphism.
 
 Source: Stacks Project Tag 0A5G, final paragraph.
-(blueprint: lem-weil-pbc-finite-etale-scheme-torsor-lift)
 
 Proof: Finite coproducts and fibre products of finite étale schemes are finite étale.
 Base change identifies the morphism from the copies of P to P ×_Y P with the
@@ -794,7 +791,6 @@ private theorem finiteEtale_torsor_conditions_reflect
 
 /-- A finite étale base-change equivalence lifts a scheme torsor together with its action.
 Source: Stacks Project Tag 0A5G, final paragraph, categorical action-lifting argument.
-(blueprint: lem-weil-pbc-finite-etale-scheme-torsor-lift)
 
 Proof: A torsor R₀ under the finite constant group is locally the finite constant set M.
 Tag 03RV represents its underlying sheaf by a finite étale scheme. Yoneda lifts each

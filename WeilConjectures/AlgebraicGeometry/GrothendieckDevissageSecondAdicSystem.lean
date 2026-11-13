@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemCo
 
 /-! # The second adic system in Grothendieck devissage
 
-Source: Stacks Project, Tag 088A, construction of G_e and the uniform torsion bound
-(blueprint: lem-weil-pbc-devissage-second-adic-system).
+Source: Stacks Project, Tag 088A, construction of G_e and the uniform torsion bound.
 -/
 
 @[expose] public section
@@ -33,7 +32,7 @@ The isomorphism theta is the canonical interchange of the two quotient operation
 its equation with the two quotient projections specifies it uniquely.
 
 Source: Stacks Project, Tag 088A, proof from the closed-immersion identification through
- the K^(4t) bound (blueprint: lem-weil-pbc-devissage-second-adic-system).
+ the K^(4t) bound.
 
 Proof:
 1. For each positive e, use the closed-immersion coherent and formal equivalences of

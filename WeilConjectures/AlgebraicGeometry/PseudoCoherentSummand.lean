@@ -13,8 +13,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Pseudo-coherence is preserved by direct summands
 
-Source: literature/stacks-project/cohomology.tex, Tag 08CE
-(blueprint: lem-pc-pseudo-coherent-summand).
+Source: literature/stacks-project/cohomology.tex, Tag 08CE.
 -/
 
 @[expose] public section
@@ -108,7 +107,7 @@ private theorem summand_affine_finiteFree_model (S : Scheme.{u}) (U : S.Opens)
 
 /-- If a pseudo-coherent object of `D(𝒪_X)` is isomorphic to a binary biproduct,
 both summands are pseudo-coherent. Source: Stacks Project, Cohomology of Sheaves,
-Tag 08CE, with More on Algebra, Tag 064X (blueprint: lem-pc-pseudo-coherent-summand).
+Tag 08CE, with More on Algebra, Tag 064X.
 
 Proof:
 1. At each point choose the bounded-above finite-free witness from

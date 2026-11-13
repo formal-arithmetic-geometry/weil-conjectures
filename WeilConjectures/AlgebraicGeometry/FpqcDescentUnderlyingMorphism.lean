@@ -28,7 +28,6 @@ private theorem transport_left_of_eq {S X : Scheme.{u}} {a : X ⟶ S}
 
 /-- Underlying morphisms of pulled-back descent data descend uniquely over X.
 Source: Stacks Project, Descent, Lemma 0241, overlap argument and Lemma 02W0.
-(blueprint: lem-galois-fpqc-descent-underlying-morphism).
 
 Proof: Pull the fpqc singleton back along A.V.hom using its chosen cartesian square.
 Fpqc subcanonicality makes q A an effective epimorphism. For two test-scheme maps

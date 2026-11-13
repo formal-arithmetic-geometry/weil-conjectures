@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionChartComparisonIsoF
 /-! # K-flat chart comparison naturality
 
 Source: Stacks Project, Tags 08DX(2), 06YT and 01I9.
-(blueprint: new-t3-qcoh-tensor-resolution-chart-comparison-naturality).
 -/
 
 @[expose] public section
@@ -106,9 +105,7 @@ The normalized open-restriction homology isomorphism is itself natural by
 restriction square tensorResolutionChartRestriction_total. Compose its inverse
 square with the comparison square and cancel adjacent inverse isomorphisms to
 obtain the displayed formula. Neither b, k nor a coefficient presentation of N
-is involved. The argument allows arbitrary n, zero complexes and unbounded K.
-
-(blueprint: new-t3-qcoh-tensor-resolution-chart-comparison-naturality) -/
+is involved. The argument allows arbitrary n, zero complexes and unbounded K. -/
 theorem tensorResolutionChartComparisonIso_naturality
     (Y : Scheme.{u}) (M N : Y.Modules) [M.IsQuasicoherent]
     (MA : ∀ U : Y.affineOpens, ModuleCat.{u} (Γ(Y, U.1) : Type u))

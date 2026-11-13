@@ -19,7 +19,7 @@ set_option linter.style.haveILetI false
 
 
 /-- Epimorphic images of finite type sheaves are finite type.
-Source: Stacks Project, Modules, Lemma 01B7 (blueprint: lem-weil-pbc-sheaf-finite-type-epi-image).
+Source: Stacks Project, Modules, Lemma 01B7.
 The proof is the local-generator argument from Lemma 01B7. On each open neighbourhood
 where finitely many sections generate `A`, their images generate `B`: for a section of
 `B`, use the epimorphism to lift it locally to `A`, then express each lift locally as a

@@ -424,7 +424,6 @@ set_option linter.unusedVariables false in
 /-- Open-site transport of contraction by an arbitrary module-valued dual input.
 Source: Stacks Project, Tags 08DL and 08DQ (restriction and evaluation),
 and Tag 03EO (tensor-Hom adjunction).
-(blueprint: lem-pc-open-module-contraction-transport).
 
 Proof: on the thin localized open site, sheafify the free module on each
 representable. Sending its generator to 1 embeds it in the tensor unit, since

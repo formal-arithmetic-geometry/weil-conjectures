@@ -54,7 +54,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The unit comparison respects pullback composition.
 Source: Stacks Project, Definition 6.26.1(2), Tag 0095; Lemma 6.26.2, Tag 0096.
-(blueprint: lem-sc-picard-unit-composition)
 
 Proof: First prove the inverse ordinary unit-composition equation. Both maps
 start at O_Z, so unit_hom_ext reduces it to evaluation at 1 on the top open.

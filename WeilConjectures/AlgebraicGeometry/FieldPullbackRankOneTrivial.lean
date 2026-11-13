@@ -34,7 +34,6 @@ private noncomputable def tensorIsoPullback {A B : Scheme.{u}} (g : A ⟶ B) :
 along a morphism from a nonempty scheme is invertible.
 
 Source: Stacks Project, Tag 0BF0, the generic-field step of its use of Tag 0BDP.
-(blueprint: lem-sc-field-pullback-rank-one-trivial).
 
 Proof: On the one-point affine scheme Spec K, finite local freeness gives a global
 finite free presentation N ≅ O_K^I for a finite type I. Pullback preserves this free

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.PerfectDescentOpenEventualModel
 /-! # Two local perfect models at a common stage
 
 Source: Stacks Project, Tag 09RF, the choice of E_{U,i} and E_{V,i}.
-(blueprint: lem-pc-perfect-descent-common-local-models).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ private theorem of_common_upper_bound
 /-- Descend the two restrictions separately and move them to a common stage.
 This supplies no overlap isomorphism and no map into a derived direct image.
 Source: Stacks Project, Tag 09RF, first sentence of the two-open induction.
-(blueprint: lem-pc-perfect-descent-common-local-models).
 
 Proof: Pull W and V back along f, and then along the projection of the limit
 base change. Restriction of E is perfect by Tag 09UA and the derived open

@@ -32,7 +32,6 @@ henselian Zariski comparison, local vanishing, the degree-one kernel hypothesis,
 and Mayer--Vietoris.  This intermediate statement is split from the parent theorem
 so that the induction argument can be developed independently.
 Source: Stacks Project, Etale Cohomology, Lemma 0GY0.
-(blueprint: lem-weil-pbc-gabber-criterion-degree)
 
 Proof: perform the simultaneous induction on principal opens from Lemma 0GY0;
 strict henselian comparison gives local Zariski vanishing, the degree-one kernel

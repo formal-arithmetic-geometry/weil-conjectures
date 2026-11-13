@@ -86,7 +86,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The restriction/composition comparison is compatible with a chart refinement.
 Source: Stacks Project, Tags 0095 and 0096; the canonical-comparison step in
 lem-pc-open-cover-map-lift-transport.
-(blueprint: lem-pc-open-cover-tensor-comparison-coherence).
 
 Proof: For every scheme map b, let c_b be the unique comparison from its
 fixed tensor left adjoint to its ordinary pullback left adjoint. Transposing

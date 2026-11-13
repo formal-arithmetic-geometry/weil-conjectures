@@ -19,7 +19,6 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 /-! # Tensor flatness of the associated sheaf of a flat module
 
 Source: Stacks Project, Tags 01HV and 05NE.
-(blueprint: lem-pc-flat-module-tilde).
 -/
 
 @[expose] public section
@@ -64,7 +63,6 @@ private theorem isFlat_of_flat_stalk (X : RingedSpace.{u})
 /-- The associated sheaf of a flat module on an affine scheme is tensor-flat.
 Source: Stacks Project, Tags 01HV (stalks of associated sheaves) and 05NE
 (flat stalks imply flatness of a sheaf of modules).
-(blueprint: lem-pc-flat-module-tilde).
 
 Proof: At every prime p of A, the stalk of the associated sheaf of M is M_p,
 by the stalk-localization description of associated sheaves. Localization of

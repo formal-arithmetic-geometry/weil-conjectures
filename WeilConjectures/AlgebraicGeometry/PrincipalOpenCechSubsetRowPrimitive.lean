@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.PrincipalOpenInjectiveSubsetExact
 /-! # Positive-degree exactness of a subset Čech row
 
 Source: Stacks Project, Cohomology, Tags 01EP, 01FM and 08C1.
-(blueprint: lem-sc-principal-open-cech-subset-row-primitive).
 -/
 
 @[expose] public section
@@ -78,7 +77,6 @@ private theorem rowCast_comp (A : Type u) [CommRing A]
 /-- Positive-degree exactness of the subset Čech row, with integer transports.
 
 Source: Stacks Project, Cohomology, Tags 01EP, 01FM and 08C1 (first paragraph).
-(blueprint: lem-sc-principal-open-cech-subset-row-primitive).
 
 Proof: Put q=n+1-k. Cast the coefficients on subsets of size k+1 to the
 fixed module J.X q and set all other coefficients to zero. Apply the cast on

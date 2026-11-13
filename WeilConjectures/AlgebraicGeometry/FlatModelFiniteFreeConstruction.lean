@@ -22,7 +22,6 @@ of `lem-pc-flat-model-finite-free-shortening`.
 Proof: restrict to an affine neighbourhood, form the degree-zero opcycle, use the
 flat opcycles Tor criterion and finite-projective standard-free cover, then truncate
 the bounded-above free resolution.
-(blueprint: lem-pc-flat-model-finite-free-shortening-construction).
 Proof: The construction argument supplies the stated local data and its induced
 quasi-isomorphism. Pulling it back along any scheme map preserves it for these
 finite-free and flat complexes; taking homology gives the displayed isomorphism.

@@ -150,8 +150,7 @@ purely inseparable power in A: choose a common characteristic power for its fini
 coefficients and generators. Thus Spec A' -> Spec A is integral and universally injective;
 lying over makes it surjective, hence a universal homeomorphism. The point over eta is
 its zero prime. Its residue field is Frac A', giving the displayed ring equivalence and
-compatibility. In characteristic zero the extension is trivial and one can take S itself.
-(blueprint: lem-sbc-purely-inseparable-generic-base-spread) -/
+compatibility. In characteristic zero the extension is trivial and one can take S itself. -/
 theorem exists_purely_inseparable_generic_base_spread
     {S : Scheme.{u}} [IsAffine S] [IsIntegral S]
     (η : S) (hη : IsGenericPoint η Set.univ)

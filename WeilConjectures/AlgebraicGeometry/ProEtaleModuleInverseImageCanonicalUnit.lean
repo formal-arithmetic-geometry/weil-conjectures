@@ -11,7 +11,6 @@ import WeilConjectures.CategoryTheory.ModuleInverseImageAdjunction
 # Unit comparison for the canonical pro-etale module adjunction
 
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -255,8 +254,7 @@ namespace AlgebraicGeometry.Scheme
 This isolates the strict `AsSmall` transport and the module-action comparison from the
 uniqueness argument for arbitrary adjunctions.  Its proof follows Tags 03D2 and 03D3:
 transport the module pullback adjunction through the two site equivalences and use the
-unit-compatible underlying comparison supplied by the model presentation.
-(auxiliary; not a blueprint node) -/
+unit-compatible underlying comparison supplied by the model presentation. -/
 theorem proEtaleModuleInverseImage_canonicalUnitComparison {X Z : Scheme.{u}} (i : Z ⟶ X)
     (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     ∃ (adj₀ : (proEtaleModuleInverseImage i A ⊣

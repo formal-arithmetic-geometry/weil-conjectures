@@ -15,9 +15,6 @@ public import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 public import WeilConjectures.CategoryTheory.RingedToposDerivedPushforwardComposition
 
 /-! # Invertibility of the diagonal source comparison
-
-Source: blueprint lem-amb-p1-diagonal-integrals, standard-chart Cartier calculation;
-lem-sp-tower-p1-arbitrary-base-integrals, steps 2 and 6.
 -/
 
 @[expose] public noncomputable section
@@ -102,8 +99,6 @@ attribute [local irreducible] projectiveLineDiagonalAlpha ordinaryFiniteUnitPull
   derivedUpperStarLowerStarAdjunction
 
 /-- The canonical source comparison for the diagonal is an isomorphism over every base.
-Source: blueprint lem-amb-p1-diagonal-integrals, derived-composition identification alpha.
-(auxiliary; not a blueprint node)
 
 Proof: each projection composed with the diagonal is identity. The corresponding
 composite inverse-image functor is therefore naturally isomorphic to identity,

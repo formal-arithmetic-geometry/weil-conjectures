@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 # HomogeneousVectorAnnihilator
 
 Source: Stacks Project, Constructions, Section 01M3, stalk computation before
-Definition 01M6 (blueprint: lem-weil-pbc-homogeneous-vector-annihilator).
+Definition 01M6.
 -/
 
 @[expose] public section
@@ -31,7 +31,6 @@ variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 one homogeneous scalar outside that prime.
 Source: Stacks Project, Constructions, Section 01M3, stalk computation before
 Definition 01M6; the homogeneous-component argument underlying injectivity.
-(blueprint: lem-weil-pbc-homogeneous-vector-annihilator)
 
 Proof:
 Decompose c into its finitely many homogeneous components c_k. Since the prime is

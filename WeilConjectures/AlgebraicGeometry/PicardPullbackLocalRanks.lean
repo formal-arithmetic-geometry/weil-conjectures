@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 /-! # Common local ranks for a pulled-back module
 
 Source: Stacks Project, Tags 0BDP and 01E8.
-(blueprint: lem-sc-picard-pullback-local-ranks)
 -/
 
 @[expose] public section
@@ -99,9 +98,8 @@ private noncomputable def presentation_baseChange {X S T : Scheme.{u}}
 /-- A pulled-back finite locally free module and its two direct images have one
 common finite rank locally after every change of base.
 Source: Stacks Project, Tag 0BDP, projection-formula paragraph, using Tag 01E8.
-(blueprint: lem-sc-picard-pullback-local-ranks)
 
-Proof: For h : T' → T, form the canonical map X_{T'} → X_T by the pullback
+Proof: For h: T' → T, form the canonical map X_{T'} → X_T by the pullback
 universal property. The composition isomorphisms of tensor pullback and the
 commutative projection squares transport e to q'^*E ≅ p'^*h^*N. Finite locally
 free modules remain finite locally free under pullback: pull back their finite

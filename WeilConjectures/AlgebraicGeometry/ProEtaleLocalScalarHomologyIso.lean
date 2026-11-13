@@ -581,7 +581,6 @@ object is assumed bounded, perfect, or complete.
 Source: Stacks Project, Cohomology on Sites, lemma-pullback-K-flat,
 lemma-pullback-tensor-product and lemma-restriction-K-flat (Tag 0E8K);
 Bhatt--Scholze, Proposition 6.6.11, local residue calculation.
-(auxiliary; not a blueprint node).
 
 Proof: write R'=i^{-1}R and S'=i^{-1}S. Module inverse image over the actual
 inverse-image ring and restriction to U are exact. Resolve an arbitrary R-complex

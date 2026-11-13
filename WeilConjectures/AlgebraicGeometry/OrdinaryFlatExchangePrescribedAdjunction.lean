@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.FlatBaseChangeResolutionIso
 /-! # Ordinary flat exchange with a prescribed adjunction
 
 Source: Stacks Project, Tags 02KH and 02N7.
-(blueprint: lem-weil-pbc-ordinary-flat-exchange-prescribed-adjunction).
 -/
 
 @[expose] public section
@@ -65,7 +64,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 -- The prescribed composite adjunction comparison requires additional elaboration.
 /-- Ordinary flat exchange, normalized for the supplied adjunction on f.
 Source: Stacks Project, Tags 02KH (part (1), degree zero) and 02N7 (mate construction).
-(blueprint: lem-weil-pbc-ordinary-flat-exchange-prescribed-adjunction).
 
 Proof: Choose tensor-pullback adjunctions on g, q and p. The sectionwise
 pushforward-composition isomorphisms and the cartesian-square equation give an

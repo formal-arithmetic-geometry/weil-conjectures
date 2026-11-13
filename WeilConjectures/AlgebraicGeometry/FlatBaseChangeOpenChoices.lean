@@ -17,8 +17,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # Restricted resolution choices for the section formula
 
-Source: Stacks Project, Cohomology, Tags 01FB and 01E4
-(blueprint: def-weil-pbc-flat-base-change-open-choices).
+Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
 -/
 
 @[expose] public section
@@ -34,7 +33,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 
 /-- Cohomology of the presheaf of section complexes: V ↦ H^p(K(V)).
-Source: Stacks, Tag 01E4 (blueprint: def-weil-pbc-flat-base-change-open-choices). -/
+Source: Stacks, Tag 01E4. -/
 def sectionCohomologyPresheaf {Y : Scheme.{uOpen}} (K : CochainComplex Y.Modules ℕ) (p : ℕ) :
     _root_.PresheafOfModules.{uOpen} Y.ringCatSheaf.obj :=
   ((SheafOfModules.forget Y.ringCatSheaf).mapHomologicalComplex
@@ -42,7 +41,7 @@ def sectionCohomologyPresheaf {Y : Scheme.{uOpen}} (K : CochainComplex Y.Modules
 
 /-- The canonical sheafification comparison: commute exact sheafification with homology,
 then apply the counit on the section complex.
-Source: Stacks, Tag 01E4 (blueprint: def-weil-pbc-flat-base-change-open-choices). -/
+Source: Stacks, Tag 01E4. -/
 def sectionCohomologyComparison {Y : Scheme.{uOpen}} (K : CochainComplex Y.Modules ℕ)
     (p : ℕ) :
     (PresheafOfModules.sheafification (𝟙 Y.ringCatSheaf.obj)).obj
@@ -57,7 +56,7 @@ def sectionCohomologyComparison {Y : Scheme.{uOpen}} (K : CochainComplex Y.Modul
 /-- The canonical cocycle-to-cohomology-sheaf map theta of Stacks 01E4, adjoint to the
 preceding comparison: a class of a cocycle s ∈ K^p(V) goes to the section of H^p(K)
 over V defined by s.
-Source: Stacks, Tag 01E4 (blueprint: def-weil-pbc-flat-base-change-open-choices). -/
+Source: Stacks, Tag 01E4. -/
 def sectionCohomologyTheta {Y : Scheme.{uOpen}} (K : CochainComplex Y.Modules ℕ) (p : ℕ) :
     sectionCohomologyPresheaf K p ⟶
       (SheafOfModules.forget Y.ringCatSheaf).obj (K.homology p) :=
@@ -66,8 +65,7 @@ def sectionCohomologyTheta {Y : Scheme.{uOpen}} (K : CochainComplex Y.Modules �
 
 /-- A resolution of the restriction, identified with the restricted original resolution
 by an augmentation-preserving isomorphism. Sections are identified by restrictAppIso.
-Source: Stacks, Tags 01E1 and 01E4
-(blueprint: def-weil-pbc-flat-base-change-open-choices). -/
+Source: Stacks, Tags 01E1 and 01E4. -/
 structure RestrictedResolutionSections {X : Scheme.{uOpen}} {F : X.Modules}
     (I : InjectiveResolution F) (U : X.Opens) where
   resolution : InjectiveResolution ((restrictFunctor U.ι).obj F)
@@ -89,8 +87,7 @@ structure RestrictedResolutionSections {X : Scheme.{uOpen}} {F : X.Modules}
 section complexes of the original resolutions. The restricted h-map is pinned by the
 restriction-unit square, and both resolution identifications preserve augmentations.
 The section identifications are pinned degreewise to restriction of sections.
-Source: Stacks, Tags 01FB, 01E4
-(blueprint: def-weil-pbc-flat-base-change-open-choices). -/
+Source: Stacks, Tags 01FB, 01E4. -/
 structure FlatBaseChangeOpenChoices {X S S' : Scheme.{uOpen}}
     (f : X ⟶ S) (g : S' ⟶ S) (F : X.Modules) (I : InjectiveResolution F)
     (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F)) (V : S.Opens) where
@@ -122,7 +119,7 @@ structure FlatBaseChangeOpenChoices {X S S' : Scheme.{uOpen}}
   target : RestrictedResolutionSections J ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V))
 
 /-- The equality of the two inverse-image opens, induced by the fibre-product square.
-Source: Stacks, Tag 01E4 (blueprint: def-weil-pbc-flat-base-change-open-choices).
+Source: Stacks, Tag 01E4.
 Proof: apply inverse image of V to the fibre-product projection identity, and use
 Scheme.Hom.comp_preimage to identify both composite inverse images. -/
 theorem flatBaseChangeOpenEquality {X S S' : Scheme.{uOpen}}
@@ -132,7 +129,7 @@ theorem flatBaseChangeOpenEquality {X S S' : Scheme.{uOpen}}
 
 /-- Transport a cohomology class of a restricted resolution to a section of its
 cohomology sheaf. Every arrow is a specified resolution/evaluation comparison or theta.
-Source: Stacks, Tag 01E4 (blueprint: def-weil-pbc-flat-base-change-open-choices). -/
+Source: Stacks, Tag 01E4. -/
 def resolutionSectionClass {Z Y : Scheme.{uOpen}} {G : Z.Modules}
     (R : InjectiveResolution G) (K : CochainComplex Y.Modules ℕ) (V : Y.Opens)
     (a : ((RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙

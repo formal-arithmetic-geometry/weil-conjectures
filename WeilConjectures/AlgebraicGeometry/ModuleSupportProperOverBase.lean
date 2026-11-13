@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.SchemeTheoreticSupport
 /-! # Support of a finite type module proper over a base
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 0CYS, together with
-Morphisms Lemmas 056J, 05JU, Definition 05JV, and Lemma 01QY
-(blueprint: lem-weil-pbc-module-support-proper-over-base).
+Morphisms Lemmas 056J, 05JU, Definition 05JV, and Lemma 01QY.
 
 ## Main statements
 
@@ -46,8 +45,7 @@ subscheme, equivalently a finite type quasi-coherent pushforward from that subsc
 The last conjunct permits taking the scheme-theoretic support: its ideal agrees on
 all affine opens with the annihilator, and its underlying set is exactly the support.
 Source: Stacks Project, Cohomology of Schemes, Lemma 0CYS, and Morphisms Lemmas
-056J, 05JU, Definition 05JV, and Lemma 01QY
-(blueprint: lem-weil-pbc-module-support-proper-over-base).
+056J, 05JU, Definition 05JV, and Lemma 01QY.
 Proof, following the node's five steps:
 1. By lem-weil-pbc-finite-type-module-support-closed (056J), support is closed;
 on affine opens it is the zero locus of the annihilator of the section module.
@@ -61,7 +59,7 @@ its image: on the complementary open the ideal contains 1, so all sections, and
 hence all stalks, vanish. That image is proper by the same properties lemma (1),
 and its closed subset Supp(F) is proper by part (2) of that lemma (0CYN).
 5. By lem-weil-pbc-closed-immersion-pushforward-annihilated (01QY), annihilation
-identifies F with the pushforward of its tensor pullback (def-pc-module-pullback),
+identifies F with the pushforward of its tensor pullback,
 which is quasi-coherent and of finite type. Conversely the ideal kills every
 pushforward and this passes along the module isomorphism. Apply this also to the
 scheme-theoretic support selected in step 2.

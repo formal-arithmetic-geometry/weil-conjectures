@@ -16,7 +16,6 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 /-! # Functoriality of higher-image transitions
 
 Source: Stacks Project, Tag 09Z1 and Tag 03Q8.
-(blueprint: sbc-lem-higher-image-over-transition-coherence).
 -/
 
 @[expose] public section
@@ -114,7 +113,6 @@ private theorem over_map_composition
 /-- Canonical higher-image transitions are contravariantly functorial on schemes over W.
 The maps are the canonical unit/composition/counit transitions of the source library.
 Source: Stacks Project, Tag 09Z1, canonical comparison maps; Tag 03Q8.
-(blueprint: sbc-lem-higher-image-over-transition-coherence).
 
 Proof: Use the triangle identities for derived inverse/direct-image adjunctions to
 cancel the unit and counit for an identity. For two composable arrows, expand both

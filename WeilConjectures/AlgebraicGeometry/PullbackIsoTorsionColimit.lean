@@ -24,7 +24,6 @@ Source: Stacks Project, Tag 0A4B, proof, filtered-colimit reduction, transposed 
 global cohomology using Tag 03Q5 (the constant-scheme case of Theorem 09YQ).
 See https://stacks.math.columbia.edu/tag/0A4B and
 https://stacks.math.columbia.edu/tag/03Q5.
-(blueprint: lem-weil-pbc-pullback-iso-torsion-colimit)
 
 Proof: Index the kernels F[n] of multiplication by positive n by divisibility.
 This is a nonempty filtered poset: 1 is an object and nm bounds n and m. The

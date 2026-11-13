@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 /-! # Coherent tensor powers of twists on the projective line
 
 Source: Stacks Project, Constructions, Tags 01MS and 01MU.
-(blueprint: lem-sc-p1-twist-coherent-powers).
 -/
 
 @[expose] public section
@@ -179,7 +178,6 @@ coherent identifications of positive and negative tensor powers with the twists.
 
 Source: Stacks Project, Constructions, Tags 01MS and 01MU; Step 2 of
 lem-sc-p1-twist-multiplication.
-(blueprint: lem-sc-p1-twist-coherent-powers).
 
 Proof: Start both families in degree zero with the canonical unit isomorphism,
 which sends 1 to 1. Define the positive successor by braiding O(1) past its

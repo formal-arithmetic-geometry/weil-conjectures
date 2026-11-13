@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoicesExist
 
 Source: Stacks Project, Tags 02KH and 02N7; Tags 01E4 and 03FD for the
 higher-direct-image and module/abelian cohomology identifications.
-(blueprint: lem-weil-pbc-flat-base-change-resolution-affine-sections)
 -/
 
 @[expose] public section
@@ -41,7 +40,6 @@ comparison for cohomology over the ring of sections of V.
 Source: Stacks Project, Tag 02KH, proof of Lemma 30.5.2, affine-local reduction;
 Tag 02N7 for the comparison map, Tag 01E4 for higher direct image sections,
 and Tag 03FD for agreement with abelian-sheaf cohomology.
-(blueprint: lem-weil-pbc-flat-base-change-resolution-affine-sections)
 
 Proof: Put A = Gamma(V,O_S), B = Gamma(W,O_S'), U = f inverse V and
 N = F restricted to U. Use the canonical affine isomorphisms V = Spec A and

@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 /-! # Nonvanishing and local generation of an invertible module
 
 Source: Stacks Project, Modules, Lemma 01CY, proof at a stalk.
-(blueprint: lem-sc-nonvanishing-iff-generates-at).
 -/
 
 @[expose] public section
@@ -68,7 +67,6 @@ private theorem stalk_generator_bijective {X : Scheme.{u}} (M : X.Modules)
 local free generator.
 
 Source: Stacks Project, Modules, Lemma 01CY, proof at a stalk.
-(blueprint: lem-sc-nonvanishing-iff-generates-at).
 
 Proof: choose a free generator `e` on a neighbourhood of `x`, and write `s = a • e` there.
 The induced stalk basis identifies the germ of `s` with the germ of `a` and identifies

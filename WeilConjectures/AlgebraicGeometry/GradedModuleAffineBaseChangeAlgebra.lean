@@ -30,7 +30,6 @@ module over the direct image algebra, before applying the affine correspondence.
 
 Source: Stacks Project, Tag 0897, realization and finite-type paragraphs;
 Morphisms, Tag 01SB; Properties, Tag 01PB.
-(blueprint: lem-weil-pbc-graded-module-affine-base-change-algebra)
 
 Proof in words:
 Let pi be the affine base change of Spec(A -> B). On an affine open Spec(R) of X,

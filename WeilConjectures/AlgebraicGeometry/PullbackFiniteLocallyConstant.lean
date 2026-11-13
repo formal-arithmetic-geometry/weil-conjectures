@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 /-!
 # Pullback of finite locally constant abelian etale sheaves
 
-Source: Stacks Project, Tags 095A, 03Q1 (3), and 03CB
-(blueprint: lem-weil-pbc-pullback-finite-locally-constant).
+Source: Stacks Project, Tags 095A, 03Q1 (3), and 03CB.
 -/
 
 @[expose] public section
@@ -120,7 +119,7 @@ private theorem finiteLocallyConstant_of_iso {X : Scheme.{u}}
 
 /-- Pullback along a composite agrees with iterated pullback, and preserves finite local
 constancy of the underlying sheaf of sets. Source: Stacks Project, Tags 095A, 03Q1 (3),
-and 03CB (blueprint: lem-weil-pbc-pullback-finite-locally-constant).
+and 03CB.
 
 Proof:
 1. `Etale.upperStarComp` identifies composite and iterated inverse images.

@@ -37,7 +37,6 @@ namespace AlgebraicGeometry
 /-- On the affine chart, the two Ext sheaves and their coefficient map are the
 sheafifications of the dual Koszul cohomology modules and their reduction map.
 Source: Stacks Project, Tag 0BQZ, lemma-regular-immersion-ext.
-(blueprint: new-k1-koszul-ext-coefficient-affine-model).
 
 Proof: The closed immersion on the chart is the quotient spectrum for the kernel
 ideal. Augment the Koszul complex by its degree-zero quotient map. Koszul

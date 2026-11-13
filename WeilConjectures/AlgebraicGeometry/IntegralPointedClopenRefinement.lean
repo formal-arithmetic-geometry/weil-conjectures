@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.IntegralPointedEtaleFiniteModel
 /-!
 # Pointed clopen refinements for integral morphisms
 
-Source: the conservativity argument in the proof of blueprint `sbc-lem-bc-integral-base`.
-(blueprint: lem-sbc-integral-pointed-clopen-refinement)
+Source: the conservativity argument in the proof of
 -/
 
 @[expose] public section
@@ -28,10 +27,6 @@ namespace AlgebraicGeometry.Scheme.Hom.Nbhd
 set_option backward.isDefEq.respectTransparency.types false in
 /-- An étale neighbourhood of a point over an integral morphism is refined by a clopen
 piece of a base-changed neighbourhood of its image.
-
-Source: blueprint `sbc-lem-bc-integral-base`, proof, the integral algebra over the strict
-henselisation and its finite subalgebras.
-(blueprint: lem-sbc-integral-pointed-clopen-refinement)
 
 Proof: Shrink the base to an affine neighbourhood. Over its strict henselisation, write the
 integral algebra as the filtered union of its finite subalgebras. Shrink the given étale

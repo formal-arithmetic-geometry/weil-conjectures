@@ -240,7 +240,6 @@ variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
 /-- The coefficient comparison commutes with direct image at the base change of the
 terminal object of the pro-etale site of Spec Z.
 Source: Bhatt--Scholze, Proposition 5.3.2; the inverse-image composition adjunction.
-(blueprint: lem-weil-pbc-finite-discrete-coefficient-terminal)
 
 Proof in words. Put W = proEtTerminal Spec Z and W_X = pi_X^* W. The conjugation
 unit law for constantPullbackMonoidalIso identifies the sheafification unit followed

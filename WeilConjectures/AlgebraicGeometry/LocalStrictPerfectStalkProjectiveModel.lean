@@ -18,7 +18,6 @@ import Mathlib.Algebra.Category.ModuleCat.Biproducts
 /-! # Bounded finite-projective models of locally strictly perfect stalks
 
 Source: Stacks Project, Tags 08C4, 08CM, 01AG and 00A0.
-(blueprint: lem-sc-local-strict-perfect-stalk-projective-model).
 -/
 
 @[expose] public section
@@ -71,7 +70,6 @@ representative of the termwise stalk of any complex representing the same derive
 
 Source: Stacks Project, Cohomology of Sheaves, Tags 08C4 and 08CM;
 Modules, Tag 01AG; Sheaves, Tag 00A0 (restriction to an open neighbourhood).
-(blueprint: lem-sc-local-strict-perfect-stalk-projective-model).
 
 Proof:
 1. Choose V, P and its derived comparison from hlocal. The category of opens over V

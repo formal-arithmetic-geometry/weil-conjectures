@@ -44,8 +44,7 @@ noncomputable def binarySubmoduleMap (X : Scheme.{u}) (W V : X.Opens)
 
 /-- Pull back the direct image of Q along the restriction unit of H on the union.
 This constructs the submodule without choosing any witness of an existence theorem.
-Source: Stacks Project, Properties, Lemma 01PF, binary gluing step.
-(blueprint: def-weil-pbc-module-binary-submodule-pullback) -/
+Source: Stacks Project, Properties, Lemma 01PF, binary gluing step. -/
 noncomputable def binarySubmodule (X : Scheme.{u}) (W V : X.Opens)
     (H : SheafOfModules.{u} (moduleRings X.toRingedSpace))
     (Q : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))
@@ -63,8 +62,7 @@ noncomputable def binarySubmoduleInclusion (X : Scheme.{u}) (W V : X.Opens)
 
 /-- The pullback inclusion is monic: direct image, a right adjoint, preserves the
 monomorphism Q to H on V, and pullback preserves monomorphisms.
-Source: Stacks Project, Properties, Lemma 01PF, submodule gluing.
-(blueprint: lem-weil-pbc-module-binary-submodule-mono) -/
+Source: Stacks Project, Properties, Lemma 01PF, submodule gluing. -/
 instance binarySubmoduleInclusion_mono (X : Scheme.{u}) (W V : X.Opens)
     (H : SheafOfModules.{u} (moduleRings X.toRingedSpace))
     (Q : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))

@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.AffineGenericFlatness
 /-! # Generic flatness for finite type morphisms
 
 Source: Stacks Project, Tag 052A.
-(blueprint: lem-sbc-generic-flatness)
 -/
 
 @[expose] public section
@@ -96,9 +95,7 @@ cover the inverse image, and flatness is local on the source, so the restricted
 morphism is flat. Finally use the canonical isomorphism between a restriction
 of a restriction and the restriction to its image in the original base.
 For an empty inverse image the intersection is the whole affine base and source
-locality is vacuous. No Noetherian or finite-presentation hypothesis is used.
-
-(blueprint: lem-sbc-generic-flatness) -/
+locality is vacuous. No Noetherian or finite-presentation hypothesis is used. -/
 theorem exists_nonempty_open_flat_restrict {X S : Scheme.{u}} [IsIntegral S]
     (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] :
     ∃ U : S.Opens, (U : Set S).Nonempty ∧ Flat (f ∣_ U) := by

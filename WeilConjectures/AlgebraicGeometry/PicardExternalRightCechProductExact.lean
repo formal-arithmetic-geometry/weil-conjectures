@@ -129,7 +129,6 @@ private theorem affine_tuple {k : Type w} [Field k] {X : Scheme.{w}}
 /-- The product-cover Cech sequence is short exact in the right coefficient.
 Source: Stacks Project, Varieties, Tag 0BED, the coefficient diagram following
 equation-kunneth-on-cech, applied in the right variable.
-(blueprint: lem-sc-picard-external-right-cech-exact-product).
 
 Proof: A tuple of pairs in degree n specifies a nonempty finite intersection A
 of the U opens and B of the V opens. Both are affine by the affine diagonal

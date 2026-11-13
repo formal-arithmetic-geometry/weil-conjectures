@@ -173,7 +173,6 @@ attribute [irreducible] constantMonoidal
 multiplication morphism.  This is the sectionwise tensor calculation used by the
 main monoidal theorem.
 Source: Stacks Project, algebraization.tex, Tags 0996 and 099E.
-(auxiliary; not a blueprint node).
 -/
 theorem ringFamilyGlobalExtension_oplax_normalized
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}

@@ -218,8 +218,7 @@ into restriction of scalars along eA. It is bijective; its naturality for each
 differential gives q. Its construction gives the last, degreewise normalization.
 The empty open has no z0; zero stalk rings and the zero complex use the same maps.
 This lemma constructs no tensor-complex transport and asserts no homology square.
-Source: Stacks Project, Tag 0098, Lemma 6.26.4; Mathlib restriction-stalk germ formulas.
-(blueprint: lem-pc-open-restricted-stalk-coordinates). -/
+Source: Stacks Project, Tag 0098, Lemma 6.26.4; Mathlib restriction-stalk germ formulas. -/
 theorem exists_openRestricted_stalk_coordinates
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

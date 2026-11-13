@@ -17,8 +17,7 @@ import WeilConjectures.Topology.RingedModuleSkyscraper
 /-!
 # Stalks of flat sheaves of modules
 
-Source: Stacks Project, Modules, Lemma 17.17.2 (Tag 05NE), flat sheaf implies flat stalks
-(blueprint: lem-pc-flat-sheaf-stalk-flat).
+Source: Stacks Project, Modules, Lemma 17.17.2 (Tag 05NE), flat sheaf implies flat stalks.
 -/
 
 @[expose] public section
@@ -108,13 +107,12 @@ private theorem constantGerm_naturality (X : RingedSpace.{u}) (x : X)
   rfl
 
 /-- Every stalk of a flat sheaf of modules on a ringed space is flat over the stalk ring.
-Source: Stacks Project, Modules, Lemma 17.17.2 (Tag 05NE), implication from sheaf flatness
-(blueprint: lem-pc-flat-sheaf-stalk-flat).
+Source: Stacks Project, Modules, Lemma 17.17.2 (Tag 05NE), implication from sheaf flatness.
 
 Proof:
 1. Use Mathlib's injectivity criterion for `Module.Flat`: fix an injective linear map
-   `f : M →ₗ N` of stalk modules. The skyscraper map is monic, by pointwise injectivity
-   on sections (`def-pc-ringed-module-skyscraper`).
+   `f: M →ₗ N` of stalk modules. The skyscraper map is monic, by pointwise injectivity
+   on sections.
 2. By `def-pc-flat-sheaf-modules`, right tensoring with `F` preserves finite limits,
    hence preserves this monomorphism.
 3. Apply `lem-weil-pbc-module-stalk-exact` to the exact short complex with first map

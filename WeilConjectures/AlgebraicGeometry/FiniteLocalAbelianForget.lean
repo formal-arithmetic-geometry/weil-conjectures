@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 # Finite local constancy after forgetting an abelian structure
 
 Source: Stacks Project, Tags 03RU and 03RW(1),(2).
-(blueprint: lem-weil-pbc-finite-local-abelian-forget).
 -/
 
 @[expose] public section
@@ -71,7 +70,6 @@ private theorem finite_constant_value {Y : Scheme.{u}}
 
 /-- Finite local constancy of an abelian sheaf can be tested on its underlying set sheaf.
 Source: Stacks Project, Definitions 03RU and 03RW(1),(2), the finite-value comparison.
-(blueprint: lem-weil-pbc-finite-local-abelian-forget)
 
 Proof: Forget an abelian trivialization to obtain a set trivialization; the stalk functor
 commutes with forgetting because filtered colimits of abelian groups are computed on sets.

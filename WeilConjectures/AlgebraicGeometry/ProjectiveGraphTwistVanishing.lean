@@ -19,7 +19,6 @@ import all WeilConjectures.AlgebraicGeometry.ProjectiveAmpleInvertible
 /-! # Relative vanishing for the specified graph twist
 
 Source: Stacks Project, Tags 02O5 and 02O1.
-(blueprint: lem-pc-m1-projective-graph-twist-vanishing)
 -/
 
 @[expose] public section
@@ -174,7 +173,6 @@ private theorem graph_twist_isInvertible_and_affine_ample
 /-- Relative Serre vanishing for the integral twist pulled back along a projective graph.
 
 Source: Stacks Project, Tag 02O5, the graph construction of L, and Tag 02O1.
-(blueprint: lem-pc-m1-projective-graph-twist-vanishing)
 
 Proof: because g is separated, the lift of j to projective space over S is a closed
 immersion. Compatibility with the integral projection identifies its pulled-back O(1)

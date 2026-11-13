@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleAbelianZariskiCohomology
 
 /-! # Open module cohomology and cohomology of the restricted abelian sheaf
 
-Source: Stacks Project, Tags 01E1 and 03FD
-(blueprint: lem-pqf-open-module-cohomology-comparison).
+Source: Stacks Project, Tags 01E1 and 03FD.
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ namespace AlgebraicGeometry
 restricted module on its induced open subscheme. No affine or quasi-coherence
 hypothesis is needed, and degree zero is included.
 
-Source: Stacks Project, Cohomology, Tag 01E1 (2), and Cohomology on Sites, Tag 03FD
-(blueprint: lem-pqf-open-module-cohomology-comparison).
+Source: Stacks Project, Cohomology, Tag 01E1 (2), and Cohomology on Sites, Tag 03FD.
 
 Proof:
 1. Choose an injective module resolution I of F. By

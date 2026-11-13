@@ -14,7 +14,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 /-! # Exactness of the fixed right-coefficient Cech sequences
 
 Source: Stacks Project, Varieties, Tag 0BED, short exact sequence paragraph.
-(blueprint: lem-sc-picard-external-right-cech-exact).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 No cover condition or cohomology comparison is needed.
 Source: Stacks Project, Varieties, Tag 0BED, short exact sequence paragraph;
 Modules, Tags 01CD and 01CE; Cohomology, Tag 01XD.
-(blueprint: lem-sc-picard-external-right-cech-exact).
 
 Proof: Affine diagonal makes every nonempty finite intersection of U and V affine.
 On an affine the sections of the quasi-coherent sequence S are short exact,

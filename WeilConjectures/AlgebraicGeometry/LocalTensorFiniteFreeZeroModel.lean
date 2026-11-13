@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Local zero-differential tensor models
 
-Source: Stacks Project, Tags 0BQY and 068C.
-(blueprint: split-local-tensor-finite-free). -/
+Source: Stacks Project, Tags 0BQY and 068C. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -33,7 +32,6 @@ namespace AlgebraicGeometry
 
 Source: Stacks Project, Tags 0BQY (Koszul computation) and 068C (finite free
 resolution of a Koszul-regular quotient).
-(blueprint: split-local-tensor-finite-free).
 
 Proof: Write A = Gamma(Y,U) and I = ker(i)(U), and choose m and f from hU.
 The Koszul complex of f resolves A/I by `exists_koszul_projective_resolution`.

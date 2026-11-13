@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleLocalQuotientVanishing
 /-! # Effectivity of the kernel construction for compatible local subobjects
 
 Source: Stacks Project, Sites, Tag 04TR.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -24,7 +23,6 @@ namespace AlgebraicGeometry.ProEtale
 isomorphism when the local subobjects agree on overlaps.
 
 Source: Stacks Project, Sites, Tag 04TR.
-(auxiliary; not a blueprint node).
 
 Proof: the overlap calculation shows that q_i has zero composite with the
 restriction of the simultaneous quotient map. Inverse image along U_i preserves

@@ -19,7 +19,6 @@ public import Mathlib.Algebra.Category.Grp.Zero
 /-! # Finite cohomology of a single projective twist over an affine base
 
 Source: Stacks Project, Tag 01XT, Lemma 30.8.1.
-(blueprint: lem-pc-m4-projective-twist-finite-cohomology)
 -/
 
 @[expose] public section
@@ -433,7 +432,6 @@ private theorem finite_monomial_homology_top (N : Type u) [Fintype N]
 /-- Every twist has finite cohomology over the ring of an affine Noetherian base.
 
 Source: Stacks Project, Tag 01XT, Lemma 30.8.1.
-(blueprint: lem-pc-m4-projective-twist-finite-cohomology)
 
 Proof: Set A = Gamma(T,O). The affine isomorphism T ≅ Spec A induces an
 isomorphism of projective spaces, carrying the twist to the twist by its base-change

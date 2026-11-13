@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.GabberH0ZariskiTopUnitEquation
 /-! # Local data for Zariski gluing
 
 Source: Stacks Project, Tag 09ZF, fourth proof paragraph.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-local-data).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ private theorem sectionIso_apply_inv {A B : Type (u + 1)} (e : A ≅ B) (x : B) 
 /-- Restrict the pulled-back etale sheaves to opens and transport the representative
 and unit equations to these restrictions. This gives local lifts, before gluing.
 Source: Stacks Project, Tag 09ZF, fourth proof paragraph.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-local-data).
 
 Proof: Put F' = h^*F and i' = pullback.snd i h. Restrict F' and (i')^*F'
 along the open-subscheme inclusions to obtain G and H; continuity of these

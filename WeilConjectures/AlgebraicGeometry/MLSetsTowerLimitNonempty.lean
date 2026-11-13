@@ -12,8 +12,7 @@ import Mathlib.CategoryTheory.Limits.Types.Images
 /-!
 # Nonempty limit of a Mittag-Leffler tower of sets
 
-Source: Stacks Project, Algebra, Lemma 0597, with Definition 0595 and Example 0596
-(blueprint: lem-weil-pbc-ml-sets-tower-limit-nonempty).
+Source: Stacks Project, Algebra, Lemma 0597, with Definition 0595 and Example 0596.
 -/
 
 @[expose] public section
@@ -26,8 +25,8 @@ namespace CategoryTheory.Functor
 
 /-- A tower of nonempty sets satisfying the Mittag-Leffler condition has a nonempty limit
 (Stacks Project, Algebra, Lemma 0597, with Definition 0595 and Example 0596).
-The tower `(E_i, f_i)_{i ≥ 1}` (def-weil-inverse-system) is a functor `F : ℕᵒᵖ ⥤ Type u`,
-the index `n : ℕ` denoting the positive index `n + 1`, so that `F.map` of `m ≥ n` is the
+The tower `(E_i, f_i)_{i ≥ 1}` is a functor `F: ℕᵒᵖ ⥤ Type u`,
+the index `n: ℕ` denoting the positive index `n + 1`, so that `F.map` of `m ≥ n` is the
 composite `φ_{m+1,n+1}`; the Mittag-Leffler condition is Mathlib's
 `Functor.IsMittagLeffler` (for `ℕᵒᵖ` it says: for every `i` some `c ≥ i` has
 `Im(E_c → E_i) ⊆ Im(E_k → E_i)` for all `k ≥ i`, i.e. `Im(E_k → E_i) = Im(E_c → E_i)` for
@@ -42,8 +41,7 @@ Proof (following the node):
 `(B_i)` is a tower of nonempty sets with surjective transitions, and its compatible
 sequences are those of `(E_i)` (a compatible `(e_i)` has `e_i = φ_{k,i}(e_k) ∈ B_i`).
 3. Choose `b_1 ∈ B_1` and successive preimages `b_{i+1} ∈ B_{i+1}` of `b_i` by dependent
-choice; the sequence is compatible, so lies in the limit of `(E_i)`.
-(blueprint: lem-weil-pbc-ml-sets-tower-limit-nonempty) -/
+choice; the sequence is compatible, so lies in the limit of `(E_i)`. -/
 theorem nonempty_sections_of_isMittagLeffler (F : ℕᵒᵖ ⥤ Type u)
     [∀ n : ℕᵒᵖ, Nonempty (F.obj n)] (hF : F.IsMittagLeffler) :
     F.sections.Nonempty := by

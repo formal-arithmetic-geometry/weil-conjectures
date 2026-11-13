@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.LisseLatticeSliceTransport
 /-!
 # Etale-local integral lattices in lisse coefficient sheaves
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6) and Definition 6.8.3
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Proposition 6.8.4(6) and Definition 6.8.3.
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ of these module presheaves is an isomorphism of module sheaves, since the forget
 functor from module sheaves is fully faithful. Finite local freeness allows variable
 ranks and rank zero. The empty scheme permits the empty etale covering.
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), Definition 6.8.3
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Proposition 6.8.4(6), Definition 6.8.3.
 
 Proof plan:
 1. Apply `lem-weil-pbc-lattice-sheaf-locally-constant` to the isomorphism classes of

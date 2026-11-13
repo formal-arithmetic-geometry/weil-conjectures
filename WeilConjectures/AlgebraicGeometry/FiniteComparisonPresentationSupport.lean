@@ -20,7 +20,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCate
 These are the completed general coefficient, site-equivalence and constant-model
 arguments of `FiniteComparisonPresentation`, separated to bound elaboration time.
 Source: blueprint finite comparison, coefficient paragraph, Stacks Tags 03CY, 09AJ
-and 09AL (auxiliary; not a blueprint node).
+and 09AL.
 -/
 
 @[expose] public noncomputable section
@@ -70,8 +70,7 @@ attribute [local irreducible] monoidalOfOplaxIsos
 open InternalAbelianSheafModule in
 /-- The section-module equivalence is strong monoidal.
 
-Source: the normalized section tensor and unit comparison with coherence
-(auxiliary; not a blueprint node).
+Source: the normalized section tensor and unit comparison with coherence.
 
 Proof: take the tensor and unit isomorphisms and their naturality, associativity,
 and unit identities from `internal_section_tensor_comparison`. Feed the inverse

@@ -28,7 +28,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Source affine dictionary, with its specified pure-tensor normalization.
 Source: Stacks Project, Tags 02KH (first paragraph), 01XJ, 01E4 and 03FD.
-(blueprint: new-flat-base-change-affine-source)
 
 Proof: Put A = Gamma(V), B = Gamma(W), U = f inverse V, and N = F restricted to U.
 Identify pullback along U's open immersion with restriction by the unique

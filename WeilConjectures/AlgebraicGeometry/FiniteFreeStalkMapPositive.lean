@@ -88,8 +88,7 @@ private lemma free_comparison_intertwines {X Z : Scheme.{u}}
 
 set_option maxRecDepth 2048 in
 /-- Positive-rank finite-free stalk maps admit local representatives.
-Source: lem-pc-perfect-locus, finite matrix calculation, expanded in
-lem-pc-finite-free-stalk-chain-map-lift-local, steps 1--2.
+
 Proof: Restrict first to the top open V and identify the restricted standard
 free sheaves with standard free sheaves on V. Transport t by these free
 isomorphisms and the restriction-stalk comparison. Apply
@@ -103,8 +102,7 @@ on the free inclusions shows its normalized free components act on each
 summand by the same endomorphism of the unit sheaf. Unit endomorphisms act
 by multiplication by global functions, so this scalar commutes with every
 finite matrix. Thus its conjugation fixes t. Cancel E' to identify the two
-conjugations and obtain the equation for exactly the comparison in the statement.
-(blueprint: lem-pc-finite-free-stalk-map-local-positive) -/
+conjugations and obtain the equation for exactly the comparison in the statement. -/
 theorem exists_local_free_stalk_map_of_nonempty
     {Y : Scheme.{u}} (r s : ℕ) (y : Y)
     (hr : Nonempty (Fin r)) (hs : Nonempty (Fin s))

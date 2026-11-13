@@ -24,7 +24,6 @@ namespace AlgebraicGeometry.Proj
 set_option backward.isDefEq.respectTransparency false in
 /-- A homogeneous shifted fraction defines a section of the twist.
 Source: Stacks Project, Definition 27.10.1, Tag 01MN.
-(blueprint: lem-sc-proj-twist-fraction-realization)
 
 Proof: choose a homogeneous numerator y and homogeneous denominator d in powers of f
 of equal shifted degree from the definition of degreeZeroFractions. If the shifted degree

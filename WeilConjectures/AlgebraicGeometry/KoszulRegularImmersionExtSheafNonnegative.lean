@@ -54,8 +54,7 @@ private theorem closedImmersion_unit_isIso_of_idealAction_eq_zero
 /-- In nonnegative degree, the scalar Ext sheaf is the direct image of the determinant
 on the degree-q rank stratum. This identifies sheaves, without reconstructing a derived object.
 
-Source: Stacks Project, Tag 0BQZ, proof of Lemma 48.15.5
-(blueprint: lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative).
+Source: Stacks Project, Tag 0BQZ, proof of Lemma 48.15.5.
 
 Proof:
 1. Near each point of Z choose an affine chart with a Koszul-regular sequence

@@ -9,7 +9,6 @@ public import WeilConjectures.CategoryTheory.SheafPullbackUnitPresentation
 import WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
 /-! # The model ring unit presents the inverse-image ring
 Source: Stacks Project, Tags 09A5, 00YV and 03D2.
-(auxiliary; not a blueprint node).
 -/
 @[expose] public section
 universe u
@@ -48,7 +47,6 @@ private theorem modelRingAdjunction_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   rfl
 /-- The actual transported ring unit is a set inverse-image unit.
 Source: Stacks Project, Tags 09A5, 00YV and 03D2.
-(auxiliary; not a blueprint node).
 Proof: transport the original commutative-ring adjunction through the strict
 AsSmall equivalences. Its unit is the stated ring unit on sections. Compare this
 left adjoint with the model commutative-ring pullback, respecting units. Forgetting

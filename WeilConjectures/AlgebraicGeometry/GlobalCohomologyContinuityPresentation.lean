@@ -24,8 +24,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- A source colimit and a projection-pullback presentation of its comparison map.
 The target is not assumed to be a colimit, and the comparison is not assumed invertible.
-Source: Stacks Project, Tags 03Q9 and 0GIT
-(blueprint: def-weil-pbc-global-cohomology-continuity-presentation). -/
+Source: Stacks Project, Tags 03Q9 and 0GIT. -/
 structure GlobalCohomologyContinuityPresentation
     (T : Scheme.{v})
     (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{v + 1}))

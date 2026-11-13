@@ -10,8 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.IntegralReductionTowerUnrestricted
 /-! # Semilinearity of the canonical finite reduction transitions
 
 The explicit change-of-rings map retains its finite scalar action after restriction
-to completed coefficients. Source: Stacks Tag 03EK
-(auxiliary; not a blueprint node).
+to completed coefficients. Source: Stacks Tag 03EK.
 -/
 
 @[expose] public section
@@ -65,7 +64,7 @@ attribute [local irreducible] SheafOfModules.UnrestrictedTowerProof.sheafMap
   completedIntegralCoefficientSheafUnrestricted
 
 /-- Finite reduction transitions are semilinear for the finite coefficient reduction.
-Source: Stacks Tag 03EK (auxiliary; not a blueprint node).
+Source: Stacks Tag 03EK.
 Proof: identify the selected natural transformation with the termwise construction
 by its unique pure-tensor characterization. The construction is restriction of an
 actually linear map from the higher finite coefficient ring to the lower one. -/

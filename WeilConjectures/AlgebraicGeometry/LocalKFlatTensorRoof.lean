@@ -16,8 +16,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 /-! # Local tensor comparison of augmented K-flat resolutions
 
 Source: Stacks Project, Tag 06YJ, independence of K-flat representatives;
-Tag 06YI, derived pullback and its compatibility with restriction.
-(blueprint: new-s1-local-kflat-tensor-roof). -/
+Tag 06YI, derived pullback and its compatibility with restriction. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -43,7 +42,6 @@ roof after tensor pullback and restriction to V intersect i^{-1}(U).
 
 Source: Stacks Project, Tag 06YJ, proof of independence of K-flat representatives,
 and Tag 06YI, composition of derived pullbacks, applied to open restriction.
-(blueprint: new-s1-local-kflat-tensor-roof).
 
 Proof: Write F for restriction to U. The supplied augmentations a and b identify
 F(P) and F(K) with the same object F(S) in D(U), and both sources are K-flat.

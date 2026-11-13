@@ -27,7 +27,6 @@ namespace AlgebraicGeometry.Etale
 /-- Derived exchange for an abelian sheaf passes from the stages to their inverse limit.
 No smoothness or invertibility hypothesis enters this continuity step.
 Source: Stacks Project, Lemma 59.86.3, Tag 0EZT, second assertion, and Tag 0EYM.
-(blueprint: lem-sc-limit-derived-direct-image-exchange)
 
 Proof: Replace the small cofiltered category by a cofinal directed inverse system;
 this preserves its limit and the corresponding filtered colimits of sheaves.

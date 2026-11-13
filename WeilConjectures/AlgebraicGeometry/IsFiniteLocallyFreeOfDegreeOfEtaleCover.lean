@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.LocallyOfFinitePresentationFpqcDescent
 /-!
 # Descent of finite local freeness of fixed degree along an étale covering
 
-Source: Stacks Project, Descent, Lemma 02VO, and Topologies, Lemma 022C
-(blueprint: lem-weil-pbc-finite-locally-free-degree-etale-descent).
+Source: Stacks Project, Descent, Lemma 02VO, and Topologies, Lemma 022C.
 -/
 
 @[expose] public section
@@ -28,25 +27,20 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Hom
 
 /-- Finite local freeness of degree `d` descends along a jointly surjective étale family.
-Source: Stacks Project, Descent, Lemma 02VO, using Topologies, Lemma 022C
-(blueprint: lem-weil-pbc-finite-locally-free-degree-etale-descent).
+Source: Stacks Project, Descent, Lemma 02VO, using Topologies, Lemma 022C.
 
 Proof:
-1. The family is an fpqc covering (`def-weil-pbc-fpqc-covering`). Each member is flat
-   (`def-weil-etale-morphism`). For an affine open of the target, cover its inverse images
-   by affine opens (`def-pc-scheme`). Their images are open
-   (`lem-weil-pbc-etale-morphism-open-map`), cover that affine open by joint surjectivity,
-   and admit a finite subcover (`lem-weil-pbc-affine-scheme-qcqs`). This is the proof of 022C.
-2. Each second projection (`def-pc-fibre-product`) is finite by the hypothesis
-   (`def-pc-finite-locally-free`). Thus `h` is finite by
+1. The family is an fpqc covering. Each member is flat. For an affine open of the target, cover its inverse images
+   by affine opens. Their images are open, cover that affine open by joint surjectivity,
+   and admit a finite subcover. This is the proof of 022C.
+2. Each second projection is finite by the hypothesis. Thus `h` is finite by
    `lem-weil-pbc-fpqc-descend-finite` applied to the fpqc covering from step 1.
 3. Each second projection is flat, so `h` is flat by `lem-weil-pbc-fpqc-descend-flat`.
 4. Each second projection is locally of finite presentation, so `h` is locally of finite
    presentation by `lem-weil-pbc-fpqc-descend-locally-finite-presentation`. With steps 2 and 3
-   this gives finite local freeness (`def-pc-finite-locally-free`).
-5. For any target point `t`, its fibre over its residue field (`def-weil-residue-field`,
-   `def-pc-scheme-fibre`) is finite by `lem-weil-pbc-finite-morphism-permanence`. Let its
-   degree be `e` (`def-weil-pbc-fibre-degree-bound`). Choose a point over `t` in a member
+   this gives finite local freeness.
+5. For any target point `t`, its fibre over its residue field is finite by `lem-weil-pbc-finite-morphism-permanence`. Let its
+   degree be `e`. Choose a point over `t` in a member
    of the cover. By `lem-weil-pbc-fibre-degree-base-change` the corresponding fibre of the
    second projection has the same degree `e`; its degree is `d` by hypothesis. Hence `e = d`
    at every target point, as required by `def-pc-finite-locally-free`. -/

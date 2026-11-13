@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.ContinuousRingUniverseRealizatio
 
 Source: HRS, Example 3.1, and the finite-biproduct matrix calculus in the existing
 continuous field sheaf normal-form proof. No division in the coefficient ring occurs.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -30,22 +29,19 @@ attribute [local instance] Profinite.isCommMonObj_continuousMapRingObjOfUniverse
 namespace AlgebraicGeometry.ProEtale.ContinuousRingUniverse
 
 /-- Continuous condensed coefficients in the scheme universe.
-Source: HRS Example 3.1.
-(auxiliary; not a blueprint node) -/
+Source: HRS Example 3.1. -/
 noncomputable abbrev baseRing (T : Type u) [CommRing T] [TopologicalSpace T]
     [IsTopologicalRing T] : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
   Profinite.continuousMapRingObjOfUniverse T
 
 /-- Pullback of continuous condensed coefficients to a scheme.
-Source: HRS Example 3.1; Cartesian coefficients.
-(auxiliary; not a blueprint node) -/
+Source: HRS Example 3.1; Cartesian coefficients. -/
 noncomputable abbrev baseCoeff (T : Type u) [CommRing T] [TopologicalSpace T]
     [IsTopologicalRing T] (X : Scheme.{u}) :=
   condensedRingObj (baseRing T) X
 
 /-- Continuous coefficient matrix calculus. Source: HRS, Example 3.1;
-the finite-biproduct calculation in ContinuousFieldMatrixSheafNormalForm.
-(auxiliary; not a blueprint node) -/
+the finite-biproduct calculation in ContinuousFieldMatrixSheafNormalForm. -/
 noncomputable abbrev coeff (E : Type u) [CommRing E]
     [TopologicalSpace E] [IsTopologicalRing E]
     (V : Scheme.{u}) :=
@@ -54,8 +50,7 @@ noncomputable abbrev coeff (E : Type u) [CommRing E]
       (continuousCoefficientRingSheaf V E)
 
 /-- Continuous coefficient matrix calculus. Source: HRS, Example 3.1;
-the finite-biproduct calculation in ContinuousFieldMatrixSheafNormalForm.
-(auxiliary; not a blueprint node) -/
+the finite-biproduct calculation in ContinuousFieldMatrixSheafNormalForm. -/
 noncomputable def coeffEndFun {E : Type u} [CommRing E]
     [TopologicalSpace E] [IsTopologicalRing E]
     {V : Scheme.{u}}
@@ -75,8 +70,7 @@ variable {E : Type u} [CommRing E]
 variable {ι κ : Type} [Fintype ι] [Fintype κ]
 
 /-- The matrix of a map of finite free modules in canonical continuous coordinates.
-Source: HRS Example 3.1, finite biproduct coordinates.
-(auxiliary; not a blueprint node) -/
+Source: HRS Example 3.1, finite biproduct coordinates. -/
 @[irreducible] noncomputable def freeMatrix
     (f : (⨁ fun _ : ι ↦ Mod.regular R) ⟶ ⨁ fun _ : κ ↦ Mod.regular R) :
     Matrix κ ι C(V, E) :=
@@ -85,8 +79,7 @@ Source: HRS Example 3.1, finite biproduct coordinates.
       biproduct.π (fun _ : κ ↦ Mod.regular R) i).hom ≫ e)
 
 /-- Entrywise formula for the continuous matrix, without unfolding the coefficient functors.
-Source: finite biproduct coordinates, HRS Example 3.1.
-(auxiliary; not a blueprint node) -/
+Source: finite biproduct coordinates, HRS Example 3.1. -/
 theorem freeMatrix_apply
     (f : (⨁ fun _ : ι ↦ Mod.regular R) ⟶ ⨁ fun _ : κ ↦ Mod.regular R)
     (i : κ) (j : ι) :
@@ -99,16 +92,14 @@ theorem freeMatrix_apply
 end Matrix
 
 /-- Canonical coefficient pullback with its construction kept folded.
-Source: Cartesian coefficients, HRS Example 3.1.
-(auxiliary; not a blueprint node) -/
+Source: Cartesian coefficients, HRS Example 3.1. -/
 @[irreducible] noncomputable def coefficientComparison (T : Type u) [CommRing T]
     [TopologicalSpace T] [IsTopologicalRing T] {X Y : Scheme.{u}} (f : Y ⟶ X) :
     (upperStar Ab.{u + 1} f).obj (baseCoeff T X) ⟶ baseCoeff T Y :=
   condensedPullbackHom (baseRing T) f
 
 /-- Equation for canonical coefficient pullback.
-Source: Cartesian coefficients, HRS Example 3.1.
-(auxiliary; not a blueprint node) -/
+Source: Cartesian coefficients, HRS Example 3.1. -/
 theorem coefficientComparison_eq (T : Type u) [CommRing T]
     [TopologicalSpace T] [IsTopologicalRing T] {X Y : Scheme.{u}} (f : Y ⟶ X) :
     coefficientComparison T f = condensedPullbackHom (baseRing T) f := by
@@ -116,16 +107,14 @@ theorem coefficientComparison_eq (T : Type u) [CommRing T]
   rfl
 
 /-- The canonical coefficient pullback is invertible.
-Source: Cartesian coefficients, HRS Example 3.1.
-(auxiliary; not a blueprint node) -/
+Source: Cartesian coefficients, HRS Example 3.1. -/
 instance coefficientComparison_isIso (T : Type u) [CommRing T]
     [TopologicalSpace T] [IsTopologicalRing T] {X Y : Scheme.{u}} (f : Y ⟶ X) :
     IsIso (coefficientComparison T f) := by
   rw [coefficientComparison_eq]
   infer_instance
 
-/-- Canonical continuous realization after scheme pullback. Source: HRS Example 3.1.
-(auxiliary; not a blueprint node) -/
+/-- Canonical continuous realization after scheme pullback. Source: HRS Example 3.1. -/
 @[irreducible] noncomputable def pullbackComparison (T : Type u) [CommRing T] [TopologicalSpace T]
     [IsTopologicalRing T] {X Y : Scheme.{u}} (f : Y ⟶ X) :
     (upperStar Ab.{u + 1} f).obj
@@ -133,8 +122,7 @@ instance coefficientComparison_isIso (T : Type u) [CommRing T]
   coefficientComparison T f ≫ comparison Y T
 
 /-- Defining equation for the canonical comparison, keeping inverse image folded.
-Source: HRS Example 3.1; coefficient functoriality.
-(auxiliary; not a blueprint node) -/
+Source: HRS Example 3.1; coefficient functoriality. -/
 theorem pullbackComparison_eq (T : Type u) [CommRing T] [TopologicalSpace T]
     [IsTopologicalRing T] {X Y : Scheme.{u}} (f : Y ⟶ X) :
     pullbackComparison T f =
@@ -143,8 +131,7 @@ theorem pullbackComparison_eq (T : Type u) [CommRing T] [TopologicalSpace T]
   rfl
 
 /-- Canonical pullback realization preserves the coefficient structure.
-Source: HRS Example 3.1; coefficient functoriality.
-(auxiliary; not a blueprint node) -/
+Source: HRS Example 3.1; coefficient functoriality. -/
 theorem pullbackComparison_isIso (T : Type u) [CommRing T] [TopologicalSpace T]
     [IsTopologicalRing T] [TotallyDisconnectedSpace T]
     {X Y : Scheme.{u}} (f : Y ⟶ X) : IsIso (pullbackComparison T f) := by
@@ -155,8 +142,7 @@ theorem pullbackComparison_isIso (T : Type u) [CommRing T] [TopologicalSpace T]
 attribute [instance] pullbackComparison_isIso
 
 /-- The full scalar cokernel class of the evaluated continuous presentation matrix.
-This retains torsion. Source: HRS Example 3.1 and the item, steps 2--4.
-(auxiliary; not a blueprint node) -/
+This retains torsion. Source: HRS Example 3.1 and the item, steps 2--4. -/
 noncomputable def presentationFiberType (T : Type u) [CommRing T] [TopologicalSpace T]
     [IsTopologicalRing T] [TotallyDisconnectedSpace T]
     {X Y : Scheme.{u}} (f : Y ⟶ X) {m n : ℕ}
@@ -169,8 +155,7 @@ noncomputable def presentationFiberType (T : Type u) [CommRing T] [TopologicalSp
     (((freeMatrix (pullbackComparison T f) g).map (fun a ↦ a y)).mulVecLin)))
 
 /-- Continuous entries agree at comparable points, so their cokernels have the same class.
-Source: HRS Example 3.1 and the item, step 2.
-(auxiliary; not a blueprint node) -/
+Source: HRS Example 3.1 and the item, step 2. -/
 theorem presentationFiberType_specializes (T : Type u) [CommRing T] [TopologicalSpace T]
     [IsTopologicalRing T] [TotallyDisconnectedSpace T] [T2Space T]
     {X Y : Scheme.{u}} (f : Y ⟶ X) {m n : ℕ}
@@ -189,8 +174,7 @@ theorem presentationFiberType_specializes (T : Type u) [CommRing T] [Topological
 
 /-- Local constancy of the full scalar cokernel class gives precisely the local
 isomorphisms required by continuous Smith reduction. Source: the quotient construction of
-`Skeleton`, HRS Example 3.1 and the parent comparison, step 5.
-(auxiliary; not a blueprint node) -/
+`Skeleton`, HRS Example 3.1 and the parent comparison, step 5. -/
 theorem presentationFiberType_local_cokernel_iso
     (T : Type u) [CommRing T] [TopologicalSpace T]
     [IsTopologicalRing T] [TotallyDisconnectedSpace T]

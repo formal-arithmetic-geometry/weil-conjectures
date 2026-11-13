@@ -22,7 +22,6 @@ namespace AlgebraicGeometry.Etale
 /-- Prime-torsion dévissage for a sheaf annihilated by one positive integer.
 Source: Stacks Project, Tag 0A4B, proof, bounded-torsion reduction, transposed to
 cohomology of qcqs schemes (https://stacks.math.columbia.edu/tag/0A4B).
-(blueprint: lem-weil-pbc-pullback-iso-nsmul-devissage)
 
 Proof: Let P(G) mean bijectivity of pullback in every nonnegative degree. For a
 short exact sequence with P on its outer terms, the pullback cohomology ladder

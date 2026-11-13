@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 Source: Stacks Project, Tag 09ZF, pullback-functoriality paragraph and fourth proof paragraph;
 Sites, Tags 03CB and 03CC.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-section-unit-equation).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ private theorem sheafIso_apply {C : Type*} [Category* C]
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Core section-isomorphism/unit identity used by the top-open comparison.
 Source: Stacks Project, Tag 09ZF, fourth proof paragraph.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-section-unit-equation).
 Proof: Write f = pullback.snd i h, B for base change along f, K = f*h*F,
 p = gabberPreimageEtaleIso f top, b = gabberTopPullbackIso h, and a for the
 first étale-object isomorphism in gabberZariskiSectionIso. Then

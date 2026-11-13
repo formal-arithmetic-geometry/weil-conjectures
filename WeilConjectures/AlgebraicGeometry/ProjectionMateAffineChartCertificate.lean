@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.ProjectionMateAffineChartTransport
 /-! # A local affine comparison certificate for a supplied projection mate
 
 Source: Stacks Project, Tag 08EU, affine-local reduction of the projection formula.
-(blueprint: lem-pc-projection-mate-affine-chart-certificate).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ invertibility of the original mate on the cohomology sheaves restricted to that 
 There is no affine projection-formula hypothesis in this comparison theorem.
 Source: Stacks Project, Tag 08EU, first sentence of the proof; the localization
 transport argument in lem-pc-qcqs-projection-mate-affine-descent, steps 1--3.
-(blueprint: lem-pc-projection-mate-affine-chart-certificate).
 
 Proof: let A be the ring of sections of V and Z the inverse-image open in X.
 Quasi-compactness of f makes Z quasi-compact; open restriction preserves

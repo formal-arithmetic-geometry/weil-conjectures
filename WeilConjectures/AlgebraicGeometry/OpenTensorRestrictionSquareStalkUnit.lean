@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictionStalkSquare
 /-! # Open restriction of the tensor-pullback adjunction unit
 
 Source: Stacks Project, Tags 0096 and 0098.
-(blueprint: lem-pc-open-tensor-restriction-square-stalk-unit).
 -/
 
 @[expose] public section
@@ -181,9 +180,8 @@ on these representatives gives equality of the additive maps below.
 This statement uses no base-change square, tensor coordinates, complexes or
 homology. Empty opens have no z0; identity opens and zero modules satisfy the
 same unit and germ equations.
-Source: Stacks Project, Tag 0096 (lemma-adjoint-pullback-pushforward-modules),
-Tag 0098 (lemma-stalk-pullback-modules); Mathlib adjunction mate unit identities.
-(blueprint: lem-pc-open-tensor-restriction-square-stalk-unit). -/
+Source: Stacks Project, Tag 0096,
+Tag 0098; Mathlib adjunction mate unit identities. -/
 theorem openTensorRestrictionSquare_stalk_unit
     {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
     (M : X.Modules) (z0 : (pullback k U.ι : Scheme.{u})) :

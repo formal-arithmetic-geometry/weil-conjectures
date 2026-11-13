@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleModuleTraceData
 /-!
 # Coefficient-linear finite étale trace with prescribed degree
 
-Source: Stacks Project, Section 03SH (section-trace-method), Definition 03SE
-(definition-trace-map) and the restriction/trace composite following it.
+Source: Stacks Project, Section 03SH (section-trace-method), Definition 03SE and the restriction/trace composite following it.
 -/
 
 @[expose] public section
@@ -37,9 +36,7 @@ namespace AlgebraicGeometry.Etale
 trace whose composite with restriction is `d` times the identity. No invertibility of `d`
 is assumed, and the coefficients may be any commutative ring.
 
-Source: Stacks Project, Section 03SH (section-trace-method), Definition 03SE
-(definition-trace-map), its characterization, and the following degree formula.
-(blueprint: lem-weil-pbc-finite-etale-module-trace-degree)
+Source: Stacks Project, Section 03SH (section-trace-method), Definition 03SE, its characterization, and the following degree formula.
 
 Proof: Choose jointly surjective étale neighbourhoods splitting the finite étale map into
 finitely many copies of the neighbourhood (Stacks 04HN). A geometric point of each

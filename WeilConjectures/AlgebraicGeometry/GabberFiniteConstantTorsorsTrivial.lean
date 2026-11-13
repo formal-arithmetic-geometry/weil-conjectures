@@ -26,7 +26,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Source: Stacks Project, Tags 09ZB, 03RV and 09ZA (the geometric step).
-(blueprint: lem-weil-pbc-gabber-h1-torsors-trivial).
 
 Proof: Local trivializations identify the underlying sheaf of each torsor with the
 finite constant sheaf M. Hence it is finite locally constant. By Tag 03RV it is the

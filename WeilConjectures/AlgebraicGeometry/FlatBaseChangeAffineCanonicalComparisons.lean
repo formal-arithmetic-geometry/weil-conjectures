@@ -19,7 +19,7 @@ import WeilConjectures.AlgebraicGeometry.FlatBaseChangeTargetLerayComparison
 /-! # Canonical affine section comparisons before flat base change
 
 Source: Stacks Project, Tags 02KH (affine dictionary paragraph), 01XJ, 01XK,
-01E4 and 03FD. (blueprint: new-flat-base-change-affine-canonical-comparisons)
+01E4 and 03FD.
 -/
 
 @[expose] public section
@@ -41,7 +41,7 @@ no flatness of either projection. The additive comparison is existential here; i
 not an arbitrary additive change of coordinates.
 
 Source: Stacks Project, Tag 02KH, first paragraph of the proof; Tags 01XJ, 01XK,
-01E4 and 03FD. (blueprint: new-flat-base-change-affine-canonical-comparisons)
+01E4 and 03FD.
 
 Proof: Identify open-immersion pullback with restriction via their adjunctions. Forget
 an injective module resolution to abelian sheaves; forgotten injectives are acyclic

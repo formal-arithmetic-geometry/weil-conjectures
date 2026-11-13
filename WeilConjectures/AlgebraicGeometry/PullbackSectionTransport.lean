@@ -21,8 +21,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Global sections transport along inverse-image composition and a specified sheaf
-isomorphism on the intermediate scheme. 
-(blueprint: lem-weil-pbc-pullback-section-transport)
+isomorphism on the intermediate scheme.
 -/
 noncomputable def pullbackSectionTransportEquiv
     {X Y L : Scheme.{u}} (a : L ⟶ Y) (b : Y ⟶ X)
@@ -84,7 +83,6 @@ set_option backward.isDefEq.respectTransparency false in
 sections along a morphism over that scheme.
 
 Source: Stacks Project, Tags 03S2 and 00XZ, functorial inverse image and its unit.
-(blueprint: lem-weil-pbc-pullback-section-transport).
 
 Proof: Expand transport as the global-sections functor applied to upperStarComp,
 followed by upperStar applied to i. Naturality of the inverse-image adjunction unit,

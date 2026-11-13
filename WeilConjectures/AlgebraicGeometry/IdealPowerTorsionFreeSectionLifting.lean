@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 /-! # Lifting a section into an ideal-power-torsion-free module
 
 Source: Stacks Project, Properties, Tags 01PM and 01PQ, torsion-free case.
-(blueprint: lem-pc-ideal-power-torsion-free-section-lifting)
 -/
 
 @[expose] public section
@@ -58,7 +57,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A section of an ideal-power-torsion-free module is evaluated by an ideal-power map.
 
 Source: Stacks Project, Properties, Tags 01PM and 01PQ.
-(blueprint: lem-pc-ideal-power-torsion-free-section-lifting)
 
 Proof: Construct the zero module as the free module on the empty type. Its zero
 map into F is monic and quasi-coherent, and htf identifies its section image

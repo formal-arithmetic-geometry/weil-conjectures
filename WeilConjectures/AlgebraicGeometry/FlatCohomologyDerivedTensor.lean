@@ -21,8 +21,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
 
 /-! # Flat cohomology and derived tensor coefficients
 
-Source: Stacks Project, more-algebra.tex, Tag 0H7Z, lemma-kunneth-spectral-sequence;
-blueprint: lem-pur-flat-cohomology-derived-tensor.
+Source: Stacks Project, more-algebra.tex, Tag 0H7Z, lemma-kunneth-spectral-sequence.
 
 This module states the canonical coefficient comparison obtained from the Kunneth spectral
 sequence.  The proof is deferred: the four proof steps are the specialization to `M[0]`,
@@ -39,8 +38,8 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace AlgebraicGeometry.Etale
 
-/-- The derived tensor map induced by a coefficient element `a : M`.
-Source: Stacks Project, Tag 0H7Z; blueprint: lem-pur-flat-cohomology-derived-tensor. -/
+/-- The derived tensor map induced by a coefficient element `a: M`.
+Source: Stacks Project, Tag 0H7Z. -/
 def coefficientAction (R : Type u) [CommRing R]
     [HasDerivedCategory.{w} (ModuleCat.{u} R)]
     (K : DerivedCategory (ModuleCat.{u} R)) (M : ModuleCat.{u} R) (q : ℤ) (a : M) :
@@ -57,7 +56,7 @@ def coefficientAction (R : Type u) [CommRing R]
 
 /-- The pure-tensor action function used to assemble the coefficient map: the value of
 `coefficientAction` at the coefficient `a` on the cohomology class `x`.
-Source: Stacks Project, Tag 0H7Z; blueprint: lem-pur-flat-cohomology-derived-tensor. -/
+Source: Stacks Project, Tag 0H7Z. -/
 def coefficientActionFunction (R : Type u) [CommRing R]
     [HasDerivedCategory.{w} (ModuleCat.{u} R)]
     (K : DerivedCategory (ModuleCat.{u} R)) (M : ModuleCat.{u} R) (q : ℤ)
@@ -69,7 +68,7 @@ def coefficientActionFunction (R : Type u) [CommRing R]
 
 /-- Bilinearity of the pure-tensor action; this is the postponed algebraic verification needed
 by `TensorProduct.lift`.
-Source: Stacks Project, Tag 0H7Z; blueprint: lem-pur-flat-cohomology-derived-tensor.
+Source: Stacks Project, Tag 0H7Z.
 Proof: in `x` the action is the underlying map of a morphism of `ModuleCat R`, hence
 additive and `R`-linear. In `a`, `a ↦ f_a = LinearMap.toSpanSingleton R M a` is `R`-linear,
 and `singleFunctor`, `K ⊗ᴸ -` and `H^q` are `R`-linear on morphisms, so
@@ -109,9 +108,9 @@ theorem coefficientActionFunction_bilinear
       Linear.comp_smul]
 
 
-/-- The canonical coefficient map `β^q_{K,M} : H^q(K) ⊗_R M → H^q(K ⊗ᴸ_R M[0])`, assembled from
+/-- The canonical coefficient map `β^q_{K,M}: H^q(K) ⊗_R M → H^q(K ⊗ᴸ_R M[0])`, assembled from
 the pure-tensor actions, so that `β^q_{K,M}(x ⊗ a) = H^q(1_K ⊗ᴸ f_a)(x)`.
-Source: Stacks Project, Tag 0H7Z; blueprint: lem-pur-flat-cohomology-derived-tensor. -/
+Source: Stacks Project, Tag 0H7Z. -/
 def canonicalCoefficientMap (R : Type u) [CommRing R]
     [HasDerivedCategory.{w} (ModuleCat.{u} R)]
     (K : DerivedCategory (ModuleCat.{u} R)) (M : ModuleCat.{u} R) (q : ℤ) :

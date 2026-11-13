@@ -15,8 +15,7 @@ set_option linter.privateModule false
 
 /-! # Flat comparison on torsion Koszul cohomology
 
-Source: Stacks Project, Tags 099H, 0GLY and 05E9
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 099H, 0GLY and 05E9.
 -/
 
 @[expose] public section

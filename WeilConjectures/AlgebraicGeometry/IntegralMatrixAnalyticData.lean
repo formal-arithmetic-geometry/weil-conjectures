@@ -23,8 +23,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- The continuous coefficient of an integral regular-module endomorphism.
-Source: the canonical coefficient realization, evaluated on the global unit.
-(auxiliary; not a blueprint node) -/
+Source: the canonical coefficient realization, evaluated on the global unit. -/
 noncomputable def integralRegularCoefficient (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] (X : Scheme.{u})
     (p : Mod.regular (condensedRingObj (integralCoeff ℓ E) X) ⟶
@@ -35,8 +34,7 @@ noncomputable def integralRegularCoefficient (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- Evaluate the regular-module coefficients of a finite free map at the unit section,
 after a supplied continuous-function realization of the coefficient ring.
-Source: Bhatt--Scholze, Section 6.8, continuous coefficient realization.
-(auxiliary; not a blueprint node) -/
+Source: Bhatt--Scholze, Section 6.8, continuous coefficient realization. -/
 noncomputable def integralMatrixFunctions (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] (X : Scheme.{u})
     (e : condensedRingObj (integralCoeff ℓ E) X ⟶
@@ -50,8 +48,7 @@ noncomputable def integralMatrixFunctions (ℓ : ℕ) [Fact ℓ.Prime]
   (((inv e ≫ p.hom ≫ e).hom.app (op (Scheme.ProEt.mk (𝟙 X)))) (ULift.up 1)).down
 
 /-- The inclusion of continuous integral functions into continuous field-valued functions.
-Source: the continuous coefficient inclusion O_E to E.
-(auxiliary; not a blueprint node) -/
+Source: the continuous coefficient inclusion O_E to E. -/
 noncomputable def integralFunctionInclusion (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] (X : Scheme.{u}) :=
   (sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
@@ -64,8 +61,7 @@ instance (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
   infer_instance
 
 /-- The regular-module isomorphism after normalized integral coefficient pullback.
-Source: the monoidal inverse image and the coefficient pullback comparison.
-(auxiliary; not a blueprint node) -/
+Source: the monoidal inverse image and the coefficient pullback comparison. -/
 @[irreducible] noncomputable def integralRegularPullbackIso (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     {X Y : Scheme.{u}} (f : Y ⟶ X) :
@@ -84,8 +80,7 @@ Source: the monoidal inverse image and the coefficient pullback comparison.
   exact Q.mapIso e₀ ≪≫ Mod.regularIsoOfIsIso α
 
 /-- The actual standard basis after normalized integral coefficient pullback.
-Source: preservation of finite biproducts and the coefficient pullback isomorphism.
-(auxiliary; not a blueprint node) -/
+Source: preservation of finite biproducts and the coefficient pullback isomorphism. -/
 noncomputable def integralFiniteFreePullbackIso (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     {X Y : Scheme.{u}} (f : Y ⟶ X) (n : ℕ) :
@@ -109,8 +104,7 @@ noncomputable def integralFiniteFreePullbackIso (ℓ : ℕ) [Fact ℓ.Prime]
     biproduct.mapIso (fun _ ↦ e₁)
 
 /-- Normalized pullback of the integral coefficient module category.
-Source: preservation of module objects and the coefficient pullback comparison.
-(auxiliary; not a blueprint node) -/
+Source: preservation of module objects and the coefficient pullback comparison. -/
 noncomputable abbrev integralMatrixPullback (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     {X Y : Scheme.{u}} (g : Y ⟶ X) :=
@@ -118,8 +112,7 @@ noncomputable abbrev integralMatrixPullback (ℓ : ℕ) [Fact ℓ.Prime]
     Mod.comap (inv (condensedPullbackHom (integralCoeff ℓ E) g))
 
 /-- The pulled-back matrix in the canonical finite-free bases.
-Source: preservation of finite biproducts by normalized coefficient pullback.
-(auxiliary; not a blueprint node) -/
+Source: preservation of finite biproducts by normalized coefficient pullback. -/
 noncomputable abbrev integralMatrixPullbackMap (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     {X Y : Scheme.{u}} (g : Y ⟶ X) {n t : ℕ}
@@ -129,8 +122,7 @@ noncomputable abbrev integralMatrixPullbackMap (ℓ : ℕ) [Fact ℓ.Prime]
     (integralMatrixPullback ℓ E g).map a ≫ (integralFiniteFreePullbackIso ℓ E g t).hom
 
 /-- The continuous coefficients of the canonical pulled-back matrix.
-Source: continuous coefficient realization evaluated on the unit section.
-(auxiliary; not a blueprint node) -/
+Source: continuous coefficient realization evaluated on the unit section. -/
 @[irreducible] noncomputable def integralMatrixPullbackFunctions (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     {X Y : Scheme.{u}} (g : Y ⟶ X) {n t : ℕ}
@@ -143,8 +135,7 @@ Source: continuous coefficient realization evaluated on the unit section.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The sectionwise continuous-function map to scheme direct image.
-Source: precomposition with the first projection of a scheme pullback.
-(auxiliary; not a blueprint node) -/
+Source: precomposition with the first projection of a scheme pullback. -/
 @[irreducible] noncomputable def continuousFunctionPushforward {X Y : Scheme.{u}} (f : Y ⟶ X)
     (O : Type) [TopologicalSpace O] [Ring O] [IsTopologicalRing O] :
     (sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
@@ -173,8 +164,7 @@ Source: precomposition with the first projection of a scheme pullback.
        exact congrArg (fun h : pullback V.unop.hom f ⟶ U.unop.left ↦ s.down (h x)) h.symm }⟩
 
 /-- Sections of continuous direct image are precomposed with the pullback projection.
-Source: the defining section formula for continuousFunctionPushforward.
-(auxiliary; not a blueprint node) -/
+Source: the defining section formula for continuousFunctionPushforward. -/
 theorem continuousFunctionPushforward_app {X Y : Scheme.{u}} (f : Y ⟶ X)
     (O : Type) [TopologicalSpace O] [Ring O] [IsTopologicalRing O]
     (U : X.ProEt) (s : ULift.{u + 1} C(U.left, O)) :
@@ -184,8 +174,7 @@ theorem continuousFunctionPushforward_app {X Y : Scheme.{u}} (f : Y ⟶ X)
   rfl
 
 /-- The sectionwise continuous direct image preserves the unit section.
-Source: the defining section formula for continuousFunctionPushforward.
-(auxiliary; not a blueprint node) -/
+Source: the defining section formula for continuousFunctionPushforward. -/
 theorem continuousFunctionPushforward_app_one {X Y : Scheme.{u}} (f : Y ⟶ X)
     (O : Type) [TopologicalSpace O] [Ring O] [IsTopologicalRing O] (U : X.ProEt) :
     ((continuousFunctionPushforward f O).hom.app (op U)) (ULift.up 1) =

@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 /-! # Existence of a computing tensor-paired resolution
 
 Source: Stacks Project, Cohomology of Sheaves, Section 20.31, Tags 0FKU and 0FKV.
-(blueprint: lem-sc-module-cup-pairing-exists)
 -/
 
 @[expose] public section
@@ -228,7 +227,6 @@ private theorem tensorChain_leibniz {X : Scheme.{uM}} [MonoidalPreadditive X.Mod
 /-- Module sheaves admit computing resolutions with a sectionwise tensor pairing.
 Source: Stacks Project, Section 20.31 (0FKU), naive cup product and the
 flasque/Godement proof of Lemma 20.31.4 (0FKV).
-(blueprint: lem-sc-module-cup-pairing-exists)
 Proof: take the existential strictly nonnegative flasque integer complexes,
 quasi-isomorphic augmentations and tensor cochain map supplied by
 moduleCup_godement_pairing. Restrict to natural degrees. On each tensor summand,

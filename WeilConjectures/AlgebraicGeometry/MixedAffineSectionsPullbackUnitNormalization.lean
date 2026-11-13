@@ -119,7 +119,6 @@ private theorem mixedSectionsComplexUnit_isIso_of_iso (X : Scheme.{u})
 -- The affine chart and localization factors require larger definitional-equality searches.
 /-- The pullback counit and affine sections comparison normalize the target unit.
 Source: Stacks Project, Tags 06Z0, 08DW(2), 0D5T.
-(blueprint: lem-sc-mixed-affine-pullback-unit-normalization).
 
 Proof: Tilde preserves K-flatness, and exact restriction through the spectrum chart
 preserves it, so C=F(P) is K-flat. Its derived pullback counit is invertible.

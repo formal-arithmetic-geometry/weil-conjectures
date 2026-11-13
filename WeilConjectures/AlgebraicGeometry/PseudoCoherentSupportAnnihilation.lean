@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.SupportedPerfectFactorization
 
 /-! # Perfect annihilator for a map to a supported complex
 
-Source: Stacks Project, perfect.tex, Tag 0A9C
-(blueprint: lem-sc-pseudo-coherent-support-annihilation).
+Source: Stacks Project, perfect.tex, Tag 0A9C.
 -/
 
 @[expose] public section
@@ -75,18 +74,17 @@ private theorem module_restriction_zero
     TopCat.Presheaf.germ M.val.presheaf _ x hx _
   exact (hM x (leOfHom U.unop.hom hx)).elim _ _
 
-/-- A map `α : P → Q` in D_QCoh(Y), from a perfect complex, or from a pseudo-coherent
+/-- A map `α: P → Q` in D_QCoh(Y), from a perfect complex, or from a pseudo-coherent
 complex into a bounded below one, with `Q` supported on `T = Y \ V`, is killed by the tensor
 action of a perfect `I → 𝒪_Y[0]` that is an isomorphism over `V`. The tensor is the derived
-tensor `schemeDerivedTensorMonoidal` (def-pc-scheme-derived-tensor-structure), with unit
+tensor `schemeDerivedTensorMonoidal`, with unit
 `𝒪_Y[0]`; support on `T` means every cohomology sheaf of `Q` has zero stalks at the points
-of `V`. Source: Stacks Project, Tag 0A9C
-(blueprint: lem-sc-pseudo-coherent-support-annihilation).
+of `V`. Source: Stacks Project, Tag 0A9C.
 
 Proof, following the five steps of the node:
 1. Set K = RHom(P,Q). It is quasi-coherent, supported outside V, and in case (ii)
    bounded below, by lem-sc-rhom-supported-qcoherent. Tensor-Hom adjunction takes α
-   to a map a : 𝒪_Y[0] → K.
+   to a map a: 𝒪_Y[0] → K.
 2. Use lem-sc-supported-derived-generated-perfect to express K as the sequential
    homotopy colimit of Kₙ, starting with zero, with successive cones sums of shifts
    of a supported perfect generator E. The unit is compact by

@@ -16,8 +16,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Coherence of finite direct images
 
-Source: Stacks Project, Cohomology of Schemes, Tags 01Y6 and 01XZ
-(blueprint: lem-weil-pbc-finite-pushforward-coherent).
+Source: Stacks Project, Cohomology of Schemes, Tags 01Y6 and 01XZ.
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ set_option backward.defeqAttrib.useBackward true in
 /-- Restriction preserves finite type: pull the local generating cover back along
 `Over.forget U`; its local maps preserve colimits and the unit, hence carry each finite
 family of generators to a finite family. Source: Stacks Project, Modules, Tag 01B5,
-the locality of finite type used in the finite-pushforward argument
-(blueprint: lem-weil-pbc-finite-pushforward-coherent). -/
+the locality of finite type used in the finite-pushforward argument. -/
 private theorem isFiniteType_over (X : Scheme.{u}) (F : X.Modules)
     [F.IsFiniteType] (U : X.Opens) : (F.over U).IsFiniteType := by
   classical
@@ -72,8 +70,7 @@ private theorem isFiniteType_over (X : Scheme.{u}) (F : X.Modules)
   infer_instance
 
 /-- A finite direct image of a coherent module is coherent, with finite sections on every
- affine open. Source: Stacks Project, Tags 01Y6 and 01XZ
-(blueprint: lem-weil-pbc-finite-pushforward-coherent).
+ affine open. Source: Stacks Project, Tags 01Y6 and 01XZ.
 
 Proof:
 1. A finite morphism is locally of finite type. Mathlib's
@@ -125,8 +122,7 @@ theorem isCoherent_pushforward_of_isFinite {X Y : Scheme.{u}} (f : Y ⟶ X)
     fun U hU ↦ ⟨rfl, hs U hU⟩⟩
 
 /-- The structure sheaf in the finite-direct-image statement satisfies its coherence
-hypothesis. Source: Stacks Project, Tags 01Y6, 01XZ and 01T6
-(blueprint: lem-weil-pbc-finite-pushforward-coherent).
+hypothesis. Source: Stacks Project, Tags 01Y6, 01XZ and 01T6.
 
 Proof (the structure-sheaf step of the node): Mathlib's
 `LocallyOfFiniteType.isLocallyNoetherian` makes Y locally Noetherian. The structure

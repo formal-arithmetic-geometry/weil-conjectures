@@ -71,7 +71,6 @@ private theorem restrictedResolutionSections_nonempty {X : Scheme.{uBC}} {F : X.
 
 /-- Compatible restricted resolutions and the restricted adjunction unit exist.
 Source: Stacks, Cohomology, Tags 01E1, 01FB, 01E4; Modules, Tag 01AJ.
-(blueprint: lem-weil-pbc-flat-base-change-open-choices-exist).
 
 Proof: Restrict I and J termwise to U = f⁻¹V and W = g'⁻¹U. Restriction is exact
  and preserves injectives: transport the overFunctor results across

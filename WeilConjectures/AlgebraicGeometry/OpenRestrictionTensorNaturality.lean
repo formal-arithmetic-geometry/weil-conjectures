@@ -39,8 +39,7 @@ naturally with Scheme.Modules.pullback U.ι. The source library gives this pullb
 its monoidal structure. Transport that structure along the inverse natural
 isomorphism using Functor.Monoidal.transport. Choose the inverse tensorators of
 the transported structure; Functor.OplaxMonoidal.δ_natural gives the displayed
-square. This construction applies to every open, including the empty open.
-(blueprint: lem-pc-open-restriction-tensor-natural). -/
+square. This construction applies to every open, including the empty open. -/
 theorem exists_openRestriction_tensor_natural (X : Scheme.{u}) (U : X.Opens) :
     let R :=
       SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙

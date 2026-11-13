@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageUnderlying
 # Underlying sheaves and scalar action of pro-etale module inverse image
 
 Source: Stacks Project, Tags 03D2, 03D3 and 04JC.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -109,7 +108,6 @@ private theorem underlying {X Y : Scheme.{u}} (f : Y ⟶ X)
 sheaves and on the scalar-action graph, for every morphism of schemes.
 
 Source: Stacks Project, Tags 03D2, 03D3 and 04JC.
-(auxiliary; not a blueprint node)
 
 Proof: apply finite-product-preserving set inverse image to the module addition and action.
 Functoriality carries the identities expressing the module laws to the same identities in

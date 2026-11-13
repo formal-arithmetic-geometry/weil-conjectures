@@ -25,7 +25,6 @@ namespace AlgebraicGeometry.Scheme.IdealSheafData
 
 Source: Stacks Project, Properties, Tag 01PG, and Sheaves of Modules,
 Tag 01B4 (the local finite-generator definition).
-(blueprint: lem-pqf-finite-type-ideal-module).
 
 Proof: Cover X by affine opens U. By hI, choose a finite family generating I.ideal U.
 The range equality for I.toModulesι on U lifts these generators to sections of the

@@ -21,8 +21,7 @@ import WeilConjectures.Algebra.Homology.KFlat
 
 /-! # Graded sheaf data for powers of an extended ideal
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 02O8 and its preceding paragraph
-(blueprint: lem-weil-pbc-ideal-powers-rees-graded-data).
+Source: Stacks Project, Cohomology of Schemes, Lemma 02O8 and its preceding paragraph.
 -/
 
 @[expose] public section
@@ -80,7 +79,6 @@ sheaf, locally generated in degree zero over the Rees algebra.
 
 Source: Stacks Project, coherent.tex, Lemma 02O8 (lemma-cohomology-powers-ideal-times-F),
 proof and preceding paragraph (lines 5330--5400).
-(blueprint: lem-weil-pbc-ideal-powers-rees-graded-data).
 
 Proof: A proper scheme over a Noetherian affine base is Noetherian, so coherence implies
 quasi-coherence and finite type. On every affine open U, pullback of the base ideal has

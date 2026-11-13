@@ -20,7 +20,6 @@ namespace TopCat
 
 /-- Two inverse-image stalk elements are unit germs on a common neighbourhood.
 Source: Stacks Project, Sheaves, Tags 008H, 008G and 007Z.
-(blueprint: lem-weil-pbc-inverse-image-stalk-pair-representatives).
 
 Proof: every stalk element is a colimit coprojection of a section of the
 inverse-image sheaf on a neighbourhood N. The sheafification unit is locally

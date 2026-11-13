@@ -11,8 +11,7 @@ import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.IsomorphicSingleTensorCounitTransport
 import WeilConjectures.AlgebraicGeometry.PinnedPullbackCompositionShifts
 /-! # Counit equation for canonical transport
-Source: Stacks Project, Tags 08HY, 0096 and 0D5S.
-(blueprint: lem-pc-isomorphic-single-tensor-counit-equation). -/
+Source: Stacks Project, Tags 08HY, 0096 and 0D5S. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -266,7 +265,6 @@ private theorem single_tensor_transport_equation
 
 /-- The canonical transported isomorphism satisfies the counit equation.
 Source: Stacks Project, Tags 0D5S and 08HY.
-(blueprint: lem-pc-isomorphic-single-tensor-counit-equation).
 Proof: transpose the composition-pinned counit through the adjunction of the
 isomorphism. Use the inverse-component formula in the transport theorem:
 it is the unit at (p^*M)[0] followed by direct image of the single tensor

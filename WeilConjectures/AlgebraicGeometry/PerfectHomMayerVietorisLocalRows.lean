@@ -15,7 +15,6 @@ public import WeilConjectures.AlgebraicGeometry.PerfectHomLocalComparison
 
 /-! # Exact geometric rows for the perfect Hom comparison
 Source: Stacks Project, Tag 09RE, Mayer--Vietoris step, and Tag 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-local-rows).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry
 This construction has no continuity hypotheses and asserts no isomorphisms.
 
 Source: Stacks Project, Tag 09RE, Mayer--Vietoris induction step; Tag 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-local-rows).
 
 Proof: Pull U,V back along the open immersion t. Their union is Y, each is
 quasi-compact, and their intersection is quasi-compact by quasi-separatedness.

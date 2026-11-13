@@ -66,7 +66,6 @@ private theorem flatOver_postcomp_iso
 
 /-- The explicitly restricted module remains flat over the spectrum chart of the base.
 Source: Stacks Project, Lemma 29.26.2, Tag 01U4, final assertion.
-(blueprint: lem-pc-flat-over-affine-open-restriction).
 
 Proof: take an affine open V0 of Spec Gamma(S,V) and an affine open U0 of f^{-1}(V)
 whose image lies in V0. The inverse chart V.isoSpec.inv maps V0 isomorphically onto

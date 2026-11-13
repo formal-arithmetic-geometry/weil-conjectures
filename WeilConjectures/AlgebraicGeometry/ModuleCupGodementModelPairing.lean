@@ -28,7 +28,6 @@ noncomputable section
 flasqueness or exactness.
 Source: Stacks Project, Section 20.30, Tag 0FKR; Banerjee,
 arXiv:1004.1491, §1.1.4, pp. 15--16.
-(blueprint: lem-sc-module-cup-godement-model-pairing)
 Proof: the product of module stalk skyscrapers is the right adjoint of the
 functor taking all stalks. Its unit is the product of the germ maps. Its monad
 multiplication is the product of evaluation on the corresponding stalks.

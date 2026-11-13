@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 /-! # comparison to injective terms for principal-open Čech coordinates
 
 Source: Stacks Project, Cohomology, Tag 08C1, finite augmented Čech argument.
-(blueprint: lem-sc-principal-open-cech-injective-comparison).
 -/
 
 @[expose] public section
@@ -63,7 +62,6 @@ quasi-isomorphism; no homology assertion about either augmentation is assumed.
 
 Source: Stacks Project, Cohomology, Tag 08C1, finite Čech comparison, and Tag 079P,
 functorial K-injective resolutions.
-(blueprint: lem-sc-principal-open-cech-injective-comparison).
 
 Proof: Choose a functorial K-injective resolution J → I with injective terms.
 Since J and I are K-injective, its quasi-isomorphism is a homotopy equivalence.

@@ -25,11 +25,6 @@ open scoped TensorProduct
 
 /-- Inverting an annihilator descends generic nilpotence.
 
-Source: smooth purity blueprint, `sk-prop-sf-cbc`,
-`lem-weil-pbc-finite-pushforward-generic-constructible`, proof steps 4--9;
-localization descent in `lem-weil-pbc-generic-product-kernel-bound`.
-(blueprint: lem-weil-pbc-generic-tensor-nilpotence-descent)
-
 Proof: B tensor_A R is the localization of B tensor_A R0 at the powers of
 1 tensor s. Hence each x has the form y/(1 tensor s)^n. If its generic image
 is nilpotent, the generic image of y is nilpotent, since the denominator is

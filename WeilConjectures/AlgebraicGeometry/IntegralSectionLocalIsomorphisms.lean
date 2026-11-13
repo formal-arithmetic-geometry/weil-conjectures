@@ -210,7 +210,6 @@ isomorphisms after inverse image and localization at a pro-etale member.
 
 Source: Bhatt--Scholze, Proposition 6.8.11(3), the inverse-image and slice-site
 comparison in the integral constructibility bridge.
-(auxiliary; not a blueprint node).
 
 Proof: the section equivalence identifies internal direct image with ringed direct
 image. The coefficient naturality square transports this identification through

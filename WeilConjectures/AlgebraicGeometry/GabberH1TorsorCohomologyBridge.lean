@@ -24,7 +24,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Source: Stacks Project, Tags 03AJ and 09ZB (the cohomological step).
-(blueprint: lem-weil-pbc-gabber-h1-torsor-cohomology-bridge).
 
 Proof: Let F be the constant abelian sheaf. Tag 03AJ identifies H^1(F), defined
 as Ext from the constant integer sheaf, with the quotient of F-torsors by equivariant

@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.Sites.InverseImageRepresentable
 /-! # Hom sets between finite constant torsor sheaves
 
 Source: Stacks Project Tags 0A5G and 03RV.
-(blueprint: lem-weil-pbc-finite-torsor-pullback-hom-bijective)
 -/
 
 @[expose] public section
@@ -126,7 +125,6 @@ end
 
 /-- Finite étale full faithfulness gives bijections on maps of underlying torsor sheaves.
 Source: Stacks Project Tag 0A5G, final paragraph, and Tag 03RV.
-(blueprint: lem-weil-pbc-finite-torsor-pullback-hom-bijective)
 
 Proof: Each torsor under finite constant M is finite locally constant:
 over an étale object with a section, translation identifies it with M;

@@ -27,7 +27,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- If a pulled-back vector bundle map is invertible, its topological image lies in
 the explicitly constructed locally invertible open.
 Source: Stacks Project, Tags 00O0, 05GF and 0098.
-(blueprint: lem-sc-finite-locally-free-map-iso-locus-pullback)
 
 Proof: Take a point t of T whose image is the point in the range. The stalk
 functor takes the pulled-back map to an isomorphism. The natural tensor-pullback

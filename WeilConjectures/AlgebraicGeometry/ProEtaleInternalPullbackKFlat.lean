@@ -28,7 +28,6 @@ import WeilConjectures.Algebra.Homology.AlgebraicInverseImageKFlat
 # K-flatness of pro-étale pullback of internal modules
 
 Source: Stacks Project, Tags 0DEN and 0DEP.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -45,20 +44,17 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Base change on the small pro-étale sites. Source: Stacks, Tag 09A5
-(auxiliary; not a blueprint node). -/
+/-- Base change on the small pro-étale sites. Source: Stacks, Tag 09A5. -/
 private noncomputable abbrev proEtaleBaseChange {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Y.ProEt ⥤ X.ProEt :=
   MorphismProperty.Over.pullback @WeaklyEtale ⊤ f
 
-/-- Continuity of the canonical base-change functor. Source: Stacks, Tag 09A5
-(auxiliary; not a blueprint node). -/
+/-- Continuity of the canonical base-change functor. Source: Stacks, Tag 09A5. -/
 private instance proEtaleBaseChange_isContinuous {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (proEtaleBaseChange f).IsContinuous (ProEt.topology Y) (ProEt.topology X) :=
   ProEt.isContinuous_overPullback f
 
-/-- Base change preserves finite limits. Source: Stacks, Tags 09A5 and 00X6
-(auxiliary; not a blueprint node). -/
+/-- Base change preserves finite limits. Source: Stacks, Tags 09A5 and 00X6. -/
 private instance proEtaleBaseChange_preservesFiniteLimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteLimits (proEtaleBaseChange f) :=
   inferInstanceAs (PreservesFiniteLimits (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f))
@@ -136,8 +132,7 @@ private theorem section_kflat_iff (T : Scheme.{u})
 
 
 /-- Pullback preserves K-flat internal module complexes over every commutative
-ring object. Source: Stacks Project, Tags 0DEN and 0DEP
-(auxiliary; not a blueprint node).
+ring object. Source: Stacks Project, Tags 0DEN and 0DEP.
 Proof: compare internal modules with section modules, present inverse image by its
 algebraic lift, and use stalkwise K-flatness at the enough family of pro-étale points.
 The algebraic stalk functor at a point of the source is a stalk at the composite point

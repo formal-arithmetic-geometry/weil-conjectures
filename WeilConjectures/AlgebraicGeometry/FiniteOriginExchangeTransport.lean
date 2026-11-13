@@ -11,11 +11,6 @@ public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 
 /-!
 # Finite-origin transport of proper exchange
-
-Source: literature/blueprint/latest/blueprint/part-six-operations/sec-proper-base-change/
-`sec-pbc-reduction/sk-lem-pbc-finite/sk-cor-pbc-proet-finite/`
-`thm-weil-pbc-finite-level-proetale.proof.md`,
-the single proof paragraph (blueprint: lem-weil-pbc-finite-origin-exchange-transport).
 -/
 
 @[expose] public section
@@ -35,14 +30,11 @@ Finite discrete coefficients transport an isomorphic étale exchange to the corr
 pro-étale exchange.  The comparison identity is recorded together with invertibility of the
 exchange at `ν_X^* L`, and every retained étale-origin witness of `K` whose antecedent is
 (isomorphic to) the same `L` gives invertibility of the exchange at `K`.
-Source: literature/blueprint/latest/blueprint/part-six-operations/sec-proper-base-change/
-`sec-pbc-reduction/sk-lem-pbc-finite/sk-cor-pbc-proet-finite/`
-`thm-weil-pbc-finite-level-proetale.proof.md`,
-the single proof paragraph (blueprint: lem-weil-pbc-finite-origin-exchange-transport).
+
 Proof:
-1. Since `f` is proper it is quasi-compact and quasi-separated (blueprint pqf-lem-proper-basic);
+1. Since `f` is proper it is quasi-compact and quasi-separated;
    `f'` is quasi-compact and quasi-separated by hypothesis.  So the transport lemma
-   `comparison_derivedBaseChangeMap` (blueprint lem-weil-pbc-transport-identifies-exchange)
+   `comparison_derivedBaseChangeMap`
    applies to `L` and gives `T_L ∘ ν_{Y'}^*(Ex_L) = Ex^R_{ν_X^* L} ∘ S_L` with the comparison
    isomorphisms `S_L`, `T_L`; this is the second conjunct.  As `Ex_L` is an isomorphism, so is
    `ν_{Y'}^*(Ex_L)`, hence `Ex^R_{ν_X^* L} = T_L ∘ ν_{Y'}^*(Ex_L) ∘ S_L⁻¹` is an isomorphism.

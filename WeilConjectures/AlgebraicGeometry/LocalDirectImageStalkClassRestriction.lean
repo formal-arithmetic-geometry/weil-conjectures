@@ -31,7 +31,6 @@ attribute [local instance] Scheme.Modules.enoughInjectives
 /-- The canonical stalk class of a global class agrees with the class computed using
 an arbitrary supplied target resolution after restriction to the inverse-image open.
 Source: Stacks Project, Lemma 20.7.3 (Tag 01E4) and Remark 20.14.2 (Tag 01FB).
-(blueprint: lem-weil-pbc-local-direct-image-stalk-class-restriction)
 
 Proof: The top-comparison theorem identifies the defined class with the top-open
 germ computed with the supplied resolution K. The fixed-resolution restriction

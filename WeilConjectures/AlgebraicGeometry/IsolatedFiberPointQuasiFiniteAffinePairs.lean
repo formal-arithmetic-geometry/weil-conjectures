@@ -15,8 +15,7 @@ public import Mathlib.RingTheory.ZariskisMainTheorem
 /-!
 # Isolated fibre points and quasi-finiteness on affine pairs
 
-Source: Stacks Project, Morphisms, Tag 01TH, (2) implies (4), and Tag 01T2
-(blueprint: lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs).
+Source: Stacks Project, Morphisms, Tag 01TH, (2) implies (4), and Tag 01T2.
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ namespace AlgebraicGeometry
 
 /-- An isolated point of the fibre of a locally finite type morphism gives a finite-type
 ring map, quasi-finite at the corresponding prime, on every affine pair containing the
-point. Source: Stacks Project, Morphisms, Tag 01TH, (2) implies (4), and Tag 01T2
-(blueprint: lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs).
+point. Source: Stacks Project, Morphisms, Tag 01TH, (2) implies (4), and Tag 01T2.
 
 Proof:
 1. Apply `lem-weil-pbc-lft-affine-pairs` (Tag 01T2) to obtain finite type of the

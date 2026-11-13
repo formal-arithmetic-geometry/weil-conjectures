@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionAssociativity
 
 /-! # Transport of local recovery equations
 
-Source: Stacks Project, Tags 01ZR, 0095 and 0096.
-(blueprint: lem-pc-fp-local-map-recovery-transport). -/
+Source: Stacks Project, Tags 01ZR, 0095 and 0096. -/
 
 @[expose] public section
 
@@ -69,7 +68,6 @@ set_option linter.unusedVariables false in
 The three supplied comparisons are required to be the canonical ones.
 Source: Stacks Project, Limits, Tag 01ZR, first proof, base change of local lifts;
 Sheaves of Modules, Tags 0095 and 0096, composition of pullback.
-(blueprint: lem-pc-fp-local-map-recovery-transport).
 
 Proof: First substitute the equalities identifying A₀, A and B with their
 tensor pullbacks. The three HEq hypotheses then become ordinary equalities of

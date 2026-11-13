@@ -28,7 +28,6 @@ namespace AlgebraicGeometry
 
 /-- The adjoint of an invertible local tensor-pullback comparison is invertible
 on the original stalk. Source: Stacks, Tags 01J7 and 0098.
-(blueprint: lem-weil-pbc-local-pullback-adjoint-stalk-iso)
 
 Proof: At the closed point, the pullback-unit stalk followed by the direct-image
 stalk comparison is the canonical module-stalk isomorphism. The direct-image

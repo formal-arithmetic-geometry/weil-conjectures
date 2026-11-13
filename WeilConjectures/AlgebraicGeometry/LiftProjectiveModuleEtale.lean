@@ -25,8 +25,7 @@ namespace AlgebraicGeometry
 /-!
 # Finite projective modules lift over an etale neighbourhood
 
-Source: Stacks Project, More on Algebra, Lemma Tag 07M5
-(blueprint: lem-weil-pbc-lift-projective-module-etale).
+Source: Stacks Project, More on Algebra, Lemma Tag 07M5.
 -/
 
 private theorem finite_projective_projector
@@ -66,12 +65,10 @@ A finite projective module over `A/I` lifts to a finite projective module over a
 finite projective `A'`-module `P'` with `P'/IP' ≅ (A'/IA') ⊗_{A/I} P̄` as `A'/IA'`-modules,
 the tensor product formed via `α` (Mathlib's base-change order `B ⊗ M`).
 
-Source: Stacks Project, More on Algebra, Lemma Tag 07M5
-(blueprint: lem-weil-pbc-lift-projective-module-etale).
+Source: Stacks Project, More on Algebra, Lemma Tag 07M5.
 Proof: write `P̄` as the image of an idempotent projector on `(A/I)^n`, lift it to an
 endomorphism `p` of `A^n`, let `B = A[x]/(χ_p(x))` (Cayley–Hamilton), lift the idempotent of
-`B/IB` given by the projector over an étale `A → A'` inducing `A/I ≅ A'/IA'`
-(lem-weil-pbc-lift-idempotent-upstairs), and take `P'` the image of the resulting
+`B/IB` given by the projector over an étale `A → A'` inducing `A/I ≅ A'/IA'`, and take `P'` the image of the resulting
 idempotent endomorphism of `A'^n`.
 -/
 theorem lift_finite_projective_module_etale

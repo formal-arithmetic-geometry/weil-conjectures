@@ -13,7 +13,6 @@ public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 /-! # Explicit nonnegative scalar cohomology models
 
 Source: Stacks Project, Cohomology, Tag 01DZ; Varieties, Tag 0BED.
-(blueprint: lem-sc-picard-kunneth-resolution-model).
 -/
 
 @[expose] public section
@@ -26,27 +25,27 @@ noncomputable section
 variable {k : Type w} [Field k] {X : Scheme.{w}}
 
 /-- A fixed injective resolution, using the recorded enough-injectives structure.
-Source: Stacks, Tag 01DZ (blueprint: lem-sc-picard-kunneth-resolution-model). -/
+Source: Stacks, Tag 01DZ. -/
 def picardScalarResolution (F : X.Modules) : InjectiveResolution F :=
   letI : EnoughInjectives X.Modules :=
     (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
   injectiveResolution F
 
 /-- Global sections of the fixed resolution with scalars restricted to k.
-Source: Stacks, Tag 01DZ (blueprint: lem-sc-picard-kunneth-resolution-model). -/
+Source: Stacks, Tag 01DZ. -/
 def picardScalarResolutionComplex (f : X ⟶ Spec (CommRingCat.of k)) (F : X.Modules) :
     CochainComplex (ModuleCat.{w} k) ℕ :=
   ((ModuleCat.restrictScalars (scalarMap f ⊤)).mapHomologicalComplex
     (ComplexShape.up ℕ)).obj (RingedSpace.globalSectionsComplex (picardScalarResolution F))
 
 /-- Extend the actual sections complex by zero to negative degrees.
-Source: Stacks, Tag 01DZ (blueprint: lem-sc-picard-kunneth-resolution-model). -/
+Source: Stacks, Tag 01DZ. -/
 def picardScalarModel (f : X ⟶ Spec (CommRingCat.of k)) (F : X.Modules) :
     CochainComplex (ModuleCat.{w} k) ℤ :=
   (picardScalarResolutionComplex f F).extend ComplexShape.embeddingUpNat
 
 /-- The constructed model has zero terms in every negative degree.
-Source: Stacks, Tag 01DZ (blueprint: lem-sc-picard-kunneth-resolution-model).
+Source: Stacks, Tag 01DZ.
 Proof: no negative integer is the image of a natural number under the extension embedding. -/
 theorem picardScalarModel_negative (f : X ⟶ Spec (CommRingCat.of k)) (F : X.Modules)
     (p : ℤ) (hp : p < 0) : IsZero ((picardScalarModel f F).X p) := by
@@ -58,7 +57,7 @@ theorem picardScalarModel_negative (f : X ⟶ Spec (CommRingCat.of k)) (F : X.Mo
 /-- The canonical comparison from the homology of the constructed model to scalar cohomology.
 No data is selected from an unproved existence statement: all three isomorphisms below
 are Mathlib's explicit homology constructions.
-Source: Stacks, Tag 01DZ (blueprint: lem-sc-picard-kunneth-resolution-model). -/
+Source: Stacks, Tag 01DZ. -/
 def picardScalarModelEquiv (f : X ⟶ Spec (CommRingCat.of k)) (F : X.Modules) (p : ℕ) :
     (picardScalarModel f F).homology (p : ℤ) ≃ₗ[k] scalarCohomology f F p := by
   letI : EnoughInjectives X.Modules :=

@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.Birational.Composition
 # Inverse restrictions of partial maps
 
 Source: Stacks Project, Tag 0BAA (Lemma 29.50.12).
-(blueprint: lem-sbc-inverse-partial-map-restrictions)
 -/
 
 @[expose] public section
@@ -56,9 +55,7 @@ composites become the identity after composing with the open inclusions, so they
 are identity morphisms because open inclusions are monomorphisms. The lift of f
 has the required compatibility with its original restriction by construction.
 The hypothesis that both composites agree with the identities is essential;
-one-sided inverse maps do not suffice.
-
-(blueprint: lem-sbc-inverse-partial-map-restrictions) -/
+one-sided inverse maps do not suffice. -/
 theorem exists_inverse_restrictions_of_comp_equiv_id
     {X Y : Scheme.{u}} [IsIntegral X] [IsIntegral Y]
     (f : X.PartialMap Y) [IsDominant f.hom]

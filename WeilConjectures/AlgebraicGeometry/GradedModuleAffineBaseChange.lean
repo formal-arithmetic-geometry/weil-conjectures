@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.GradedModuleAffineBaseChangeAlgebra
 /-! # Realizing a finite graded module on the affine base change
 
 Source: Stacks Project, Tag 0897, proof, and Tag 01SB.
-(blueprint: lem-weil-pbc-graded-module-affine-base-change)
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ properness or Noetherian hypothesis is required for this realization.
 
 Source: Stacks Project, Tag 0897, proof (the realization and finite-type paragraphs),
 with Tags 01SB and 01PB.
-(blueprint: lem-weil-pbc-graded-module-affine-base-change)
 
 Proof:
 1. Set b = Spec(A → B), Y = X ×_Spec(A) Spec(B), and pi = Y → X. The morphism pi

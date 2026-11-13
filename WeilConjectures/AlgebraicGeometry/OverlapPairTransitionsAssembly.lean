@@ -11,8 +11,7 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.ChosenPullback
 
 /-! # Assemble natural transitions from maps on universal pairwise overlaps
 
-Source: Stacks Project, Tag 01ZR, first proof, Zariski gluing and pullback.
-(blueprint: lem-pc-overlap-pair-transitions-assembly). -/
+Source: Stacks Project, Tag 01ZR, first proof, Zariski gluing and pullback. -/
 
 @[expose] public section
 
@@ -25,8 +24,7 @@ namespace CategoryTheory.Pseudofunctor
 open LocallyDiscreteOpToCat
 
 /-- Extend maps on universal pairwise overlaps to all test objects.
-The construction uses only pullback lifts and pseudofunctor composition.
-(blueprint: lem-pc-overlap-pair-transitions-assembly). -/
+The construction uses only pullback lifts and pseudofunctor composition. -/
 private noncomputable def overlapTransitionsOfPairs
     {C : Type (u + 1)} [Category.{u} C] [HasPullbacks C]
     {ι : Type u} {S : C} {X : ι → C}
@@ -47,8 +45,7 @@ private noncomputable def overlapTransitionsOfPairs
       apply pullback.hom_ext <;> simp [Category.assoc, hgf₁, hgf₂]
     simp only [he]
 
-/-- The universal-overlap value of pulled pair transitions is the base-change formula.
-(blueprint: lem-pc-overlap-pair-transitions-assembly). -/
+/-- The universal-overlap value of pulled pair transitions is the base-change formula. -/
 private lemma overlapTransitionsOfPairs_pull_hom
     {C : Type (u + 1)} [Category.{u} C] [HasPullbacks C]
     {ι : Type u} {S S' : C} {X X' : ι → C}
@@ -138,7 +135,6 @@ namespace AlgebraicGeometry
 
 /-- Maps on universal overlaps and their limit squares assemble into a natural comparison.
 Source: Stacks Project, Tag 01ZR, first proof, after gluing the pairwise maps.
-(blueprint: lem-pc-overlap-pair-transitions-assembly).
 
 Proof: Set T.obj a = N a. For a test scheme Y with arrows f1 and f2 to the two
 charts over the same q, use the universal map Y -> U_a ×_X U_b. Pull phi a b back

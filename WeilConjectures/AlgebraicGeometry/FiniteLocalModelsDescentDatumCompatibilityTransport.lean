@@ -17,7 +17,6 @@ namespace AlgebraicGeometry.Scheme
 /-- Naturality and compatibility force the diagonal and cocycle identities.
 
 Source: Stacks Project, Tags 03RV and 02W5.
-(blueprint: lem-weil-pbc-finite-local-model-compatible-transport-transport)
 Proof: For the diagonal, test on the universal Q-point on Q itself, which is
 etale over T. The inverse of e sends that point to a section; compatibility
 with equal lifts fixes the point. Naturality pulls this identity back along

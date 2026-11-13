@@ -28,8 +28,7 @@ variable [∀ Z : Scheme.{u},
 /-- The fixed derived transport, with its endpoints expressed by the stage functors.
 Source: Stacks Project, Tags 08DW and 0D5S. The forward stage functor is derived
 pullback along the inverse cartesian isomorphism. Rewrite these two functors
-by their proved equations and use the explicitly constructed derived transport.
-(blueprint: def-pc-perfect-overlap-stage-transport). -/
+by their proved equations and use the explicitly constructed derived transport. -/
 @[irreducible] noncomputable def perfectOverlapStageTransport
     {X Y K C T S : Scheme.{u}}
     (g : X ⟶ Y) (f : K ⟶ Y)

@@ -12,7 +12,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 /-! # The structure-sheaf unit comparison around a square
 
 Source: Stacks Project, Tag 08HY; the ordinary pullback unit calculation.
-(blueprint: lem-sc-pullback-structure-unit-square)
 -/
 
 @[expose] public section
@@ -79,7 +78,6 @@ private theorem structureUnit_congr
 /-- Pullback of the structure-sheaf maps commutes with the ordinary square comparison.
 There is no coefficient module, derived category or Picard test section here.
 Source: Stacks Project, Tag 08HY; functoriality of pullback of the structure sheaf.
-(blueprint: lem-sc-pullback-structure-unit-square)
 
 Proof: Each pullbackObjUnitToUnit is the adjoint transpose of the ring-sheaf
  morphism sending 1 to 1. The inverse of pullbackComp is the conjugate of

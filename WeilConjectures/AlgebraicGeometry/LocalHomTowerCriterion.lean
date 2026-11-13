@@ -16,7 +16,7 @@ import WeilConjectures.RingTheory.ModuleLocalizationTowerVanishing
 # Localization internal Hom and the multiplication tower
 
 Source: Stacks Project, algebraization.tex, Tag 0997, lemma-hom-from-Af,
-equivalence of (1) and (3) (auxiliary; not a blueprint node).
+equivalence of (1) and (3).
 -/
 
 @[expose] public section
@@ -31,7 +31,7 @@ namespace CategoryTheory
 of the multiplication tower vanishes, on the slice site.
 
 Source: Stacks Project, algebraization.tex, Tag 0997, lemma-hom-from-Af,
-equivalence of (1) and (3) (auxiliary; not a blueprint node).
+equivalence of (1) and (3).
 
 Proof:
 1. The coefficient localization is the sequential colimit of repeated multiplication

@@ -20,8 +20,7 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Canonical single-complex transport of a derived scalar counit
 
-Source: Stacks Project, Tags 0AVW and 0AX3
-(blueprint: lem-sc-finite-exact-hom-single-counit-transport). -/
+Source: Stacks Project, Tags 0AVW and 0AX3. -/
 
 @[expose] public section
 
@@ -211,8 +210,7 @@ set_option backward.isDefEq.lazyWhnfCore false in
 -- Elaborating the canonical factorization unfolds the two ring-sheaf presentations.
 /-- Lift an algebra-valued derived isomorphism between single complexes, keeping
 track of the scalar adjunction counit through the canonical pushforward factorization.
-Source: Stacks Project, Tag 0AVW, canonical factorization; Tag 0AX3, counit comparison
-(blueprint: lem-sc-finite-exact-hom-single-counit-transport).
+Source: Stacks Project, Tag 0AVW, canonical factorization; Tag 0AX3, counit comparison.
 
 Proof: Let F be g_* and T scalar restriction. Form the canonical comparison from
 (F M)[0] to RF(M[0]) using the inverse termwise single comparison and the right-derived

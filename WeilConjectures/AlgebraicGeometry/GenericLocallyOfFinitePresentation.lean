@@ -176,8 +176,7 @@ torsion free, over A_{a_i}. Thus its torsion kernel vanishes and it equals
 finitely many nonempty basic opens. They all contain the generic point, and local
 finite presentation on the resulting chart cover implies it for the restricted
 map. If the inverse image is empty, the empty intersection is the whole base
-chart and source locality is vacuous. Transport the open back into S.
-(blueprint: lem-sbc-generic-flat-finite-presentation-lfp) -/
+chart and source locality is vacuous. Transport the open back into S. -/
 theorem exists_nonempty_open_locallyOfFinitePresentation_restrict {X S : Scheme.{u}}
     [IsIntegral S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] :
     ∃ U : S.Opens, (U : Set S).Nonempty ∧

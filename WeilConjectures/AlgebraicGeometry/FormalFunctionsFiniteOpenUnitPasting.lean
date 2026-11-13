@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.FormalFunctionsFinitePullback
 
 Source: Stacks Project, Tags 02OD, 01F7 and 01FB: factorization of finite
 neighbourhoods and restriction of the underlying sheaf maps.
-(blueprint: lem-weil-pbc-formal-functions-finite-open-unit-pasting)
 -/
 
 @[expose] public section
@@ -116,7 +115,6 @@ pullback units. This is an identity of module-sheaf morphisms, before applying
 cohomology, and uses no resolutions beyond the unit-square fields of E and D.
 Source: Stacks Project, Tag 02OD, factorization through the local spectrum;
 Tags 01F7 and 01FB, composition and restriction of h-maps.
-(blueprint: lem-weil-pbc-formal-functions-finite-open-unit-pasting)
 
 Proof: Let g be the local projection, j the finite map, and i the finite
 projection; j followed by g equals i. Transpose the definition of

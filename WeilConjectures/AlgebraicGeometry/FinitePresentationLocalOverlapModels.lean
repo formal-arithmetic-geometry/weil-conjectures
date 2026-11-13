@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.FinitePresentationOverlapCoherence
 
 /-! # Eventual compatibility of fixed local models
 
-Source: Stacks Project, Tags 01ZR and 05N7.
-(blueprint: lem-pc-fp-local-overlap-models). -/
+Source: Stacks Project, Tags 01ZR and 05N7. -/
 
 @[expose] public section
 
@@ -30,7 +29,6 @@ namespace AlgebraicGeometry
 /-- Overlap identifications between fixed local models become compatible at a later stage.
 Source: Stacks Project, Limits, Tag 01ZR, first proof (Zariski gluing); Algebra,
 Tag 05N7, map and equality clauses.
-(blueprint: lem-pc-fp-local-overlap-models).
 
 Proof: Conjugate the restriction identifications of M by the given component
 isomorphisms e. This gives comparisons between the two local models on each limit

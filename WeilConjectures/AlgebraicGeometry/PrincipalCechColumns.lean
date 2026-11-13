@@ -13,8 +13,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # Explicit principal Čech columns and horizontal maps
 
-Source: Stacks, Tag 08D1, alternating Čech double complex
-(blueprint: def-sc-principal-cech-columns).
+Source: Stacks, Tag 08D1, alternating Čech double complex.
 -/
 
 @[expose] public section
@@ -29,19 +28,16 @@ noncomputable section
 
 variable {A : Type u} [CommRing A] (r : ℕ) (f : Fin r → A)
 
-/-- Nonempty subsets in horizontal degree p. Source: Stacks, Tag 08D1
-(blueprint: def-sc-principal-cech-columns). -/
+/-- Nonempty subsets in horizontal degree p. Source: Stacks, Tag 08D1. -/
 def principalCechRowIndex (p : ℤ) :=
   {S : {S : Finset (Fin r) // S.Nonempty} // (S.val.card : ℤ) = p + 1}
 
-/-- Section complexes at a subset. Source: Stacks, Tag 08D1
-(blueprint: def-sc-principal-cech-columns). -/
+/-- Section complexes at a subset. Source: Stacks, Tag 08D1. -/
 def principalCechSectionFunctor (S : Finset (Fin r)) :=
   (affineOpenSections A (principalCechIntersection r f S)).mapHomologicalComplex
     (ComplexShape.up ℤ)
 
-/-- The product column functor. Source: Stacks, Tag 08D1
-(blueprint: def-sc-principal-cech-columns). -/
+/-- The product column functor. Source: Stacks, Tag 08D1. -/
 def principalCechColumnFunctor (p : ℤ) :
     CochainComplex (SheafOfModules.{u}
       (moduleRings (Spec (.of A)).toRingedSpace)) ℤ ⥤ CochainComplex (ModuleCat.{u} A) ℤ where
@@ -52,7 +48,7 @@ def principalCechColumnFunctor (p : ℤ) :
   map_comp i j := by simp [← Limits.Pi.map_comp_map]
 
 /-- Restriction from the erased intersection to the original one.
-Source: Stacks, Tag 08D1 (blueprint: def-sc-principal-cech-columns). -/
+Source: Stacks, Tag 08D1. -/
 def principalCechEraseRestriction (S : Finset (Fin r)) (j : Fin r) :
     principalCechSectionFunctor r f (S.erase j) ⟶ principalCechSectionFunctor r f S :=
   NatTrans.mapHomologicalComplex
@@ -65,8 +61,7 @@ def principalCechEraseRestriction (S : Finset (Fin r)) (j : Fin r) :
           exact ((modulesSpecToSheaf.map i).hom.naturality _).symm })
     (ComplexShape.up ℤ)
 
-/-- Deletion lowers the horizontal degree by one. Source: Stacks, Tag 08D1
-(blueprint: def-sc-principal-cech-columns).
+/-- Deletion lowers the horizontal degree by one. Source: Stacks, Tag 08D1.
 Proof: erasing a member lowers cardinality by one; use the row's cardinality equation. -/
 theorem principalCechRowIndex_erase_card (p : ℤ)
     (S : principalCechRowIndex r (p + 1)) (j : S.val.val) :
@@ -78,7 +73,7 @@ theorem principalCechRowIndex_erase_card (p : ℤ)
   omega
 
 /-- The alternating horizontal differential, with empty deletions omitted.
-Source: Stacks, Tag 08D1 (blueprint: def-sc-principal-cech-columns). -/
+Source: Stacks, Tag 08D1. -/
 def principalCechHorizontal (p : ℤ) :
     principalCechColumnFunctor r f p ⟶ principalCechColumnFunctor r f (p + 1) where
   app F := Limits.Pi.lift fun S ↦ ∑ j : S.val.val,
@@ -104,8 +99,7 @@ def principalCechHorizontal (p : ℤ) :
       rw [← NatTrans.naturality]
     · simp
 
-/-- A column outside the finite range is zero. Source: Stacks, Tag 08D1
-(blueprint: def-sc-principal-cech-columns).
+/-- A column outside the finite range is zero. Source: Stacks, Tag 08D1.
 Proof: a nonempty subset has cardinality between one and r, so the indexing type
 is empty outside the range. The empty categorical product is zero in an additive category. -/
 theorem principalCechColumn_isZero (p : ℤ) (hp : p < 0 ∨ (r : ℤ) - 1 < p)
@@ -124,7 +118,7 @@ theorem principalCechColumn_isZero (p : ℤ) (hp : p < 0 ∨ (r : ℤ) - 1 < p)
   exact (hnone S).elim
 
 /-- Finite products of section quasi-isomorphisms give a column quasi-isomorphism.
-Source: Stacks, Tag 08D1 (blueprint: def-sc-principal-cech-columns).
+Source: Stacks, Tag 08D1.
 Proof: the additive homology functor preserves finite products. The product comparison
 identifies the homology map with a product of isomorphisms. No horizontal differential
 or coefficient boundedness is used. -/

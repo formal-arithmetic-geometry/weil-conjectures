@@ -12,8 +12,7 @@ import WeilConjectures.CategoryTheory.LocalizedModuleAdjunctionExact
 
 /-! # Derived tensor preserves locally constant finite type cohomology
 
-Source: Stacks Project, Cohomology on Sites, Tag 094H
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Cohomology on Sites, Tag 094H.
 -/
 
 @[expose] public section
@@ -136,8 +135,7 @@ locally constant finite type cohomology again has locally constant finite type c
 `P` and `Q` are arbitrary K-flat representatives of the derived objects; the conclusion
 computes derived tensor by their total tensor, exactly as in the node's convention.
 
-Source: Stacks Project, Cohomology on Sites, Tag 094H
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Cohomology on Sites, Tag 094H.
 
 Proof:
 1. Transport homology bounds and local constancy along the representative isomorphisms.

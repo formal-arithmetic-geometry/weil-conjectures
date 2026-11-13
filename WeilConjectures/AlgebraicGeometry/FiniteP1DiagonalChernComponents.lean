@@ -15,9 +15,6 @@ public import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 public import WeilConjectures.CategoryTheory.RingedToposDerivedPushforwardComposition
 
 /-! # The two Chern components of the projective-line diagonal
-
-Source: blueprint lem-amb-p1-diagonal-integrals, standard-chart Cartier calculation;
-lem-sp-tower-p1-arbitrary-base-integrals, steps 2 and 6.
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +32,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] AlgebraicGeometry.ProjectiveSpace
   projectiveLineTraceTransport
 
-/-- The short relative-Cartier proof used by diagonalImmersion_cartier.
-Source: det-prop-diagonal-tower-system, Cartier clause; lem-pc-cartier-criterion. -/
+/-- The short relative-Cartier proof used by diagonalImmersion_cartier. -/
 private theorem finiteP1_diagonal_cartier (S : Scheme.{u}) :
     (pullback.diagonal (ProjectiveLine S ↘ S)).ker.IsInvertible := by
   let d := pullback.diagonal (ProjectiveLine S ↘ S)
@@ -54,9 +50,6 @@ private theorem finiteP1_diagonal_cartier (S : Scheme.{u}) :
     (J := d.ker) inferInstance inferInstance inferInstance
 
 /-- The Cartier diagonal has a supported Kummer boundary and its two Chern components.
-Source: blueprint lem-amb-p1-diagonal-integrals, standard-chart proof;
-lem-sp-tower-p1-arbitrary-base-integrals, steps 2 and 6.
-(auxiliary; not a blueprint node)
 
 Proof: the short relative-Cartier argument of diagonalImmersion_cartier proves the
 diagonal ideal invertible over any base

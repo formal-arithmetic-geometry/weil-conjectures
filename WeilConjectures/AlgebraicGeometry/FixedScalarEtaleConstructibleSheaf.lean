@@ -12,7 +12,7 @@ import all WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 
 /-! # Constructibility under the etale scalar presentation
 
-Source: Stacks Tags 03CY, 03RW and 095E (auxiliary; not a blueprint node).
+Source: Stacks Tags 03CY, 03RW and 095E.
 -/
 
 @[expose] public noncomputable section
@@ -160,8 +160,7 @@ private theorem coefficientConstructible_realization (X : Scheme.{u}) [IsNoether
 
 /-- The explicit scalar and small-site equivalence preserves and reflects the module
 constructibility condition. No finiteness of the underlying coefficient set is required.
-Source: Stacks Modules on Sites Tag 03CY; Etale Cohomology Tags 03RW and 095E
-(auxiliary; not a blueprint node).
+Source: Stacks Modules on Sites Tag 03CY; Etale Cohomology Tags 03RW and 095E.
 
 Proof: apply etale_noetherian_global_constructibility to the coefficient module. The
 resulting finite stratification is a stratification on the original scheme with exactly

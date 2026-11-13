@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawOverCoeffici
 /-! # The over-W transition as a single mapped coefficient composite
 
 Source: Stacks Project, Tags 03Q8 and 09Z1, canonical transition maps.
-(blueprint: sbc-lem-higher-image-over-map-coefficient).
 -/
 
 @[expose] public section
@@ -185,7 +184,7 @@ private meta def coefficientStructuralExact
 
 
 /-- Functoriality expands the mapped composite into the two mapped factors.
-Source: Tags 03Q8 and 09Z1. (blueprint: sbc-lem-higher-image-over-map-coefficient-factorization). -/
+Source: Tags 03Q8 and 09Z1. -/
 theorem higherDirectImageOverMap_coefficient_factorization
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
@@ -209,7 +208,7 @@ theorem higherDirectImageOverMap_coefficient_factorization
   exact Functor.map_comp _ _ _
 
 /-- Endpoint coherence identifies the factorized morphism with the canonical over-map.
-Source: Tags 03Q8 and 09Z1. (blueprint: sbc-lem-higher-image-over-map-coefficient-endpoint). -/
+Source: Tags 03Q8 and 09Z1. -/
 theorem higherDirectImageOverMap_coefficient_endpoint
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
@@ -249,7 +248,6 @@ theorem higherDirectImageOverMap_coefficient_endpoint
 /-- Identify the homology map of the combined derived coefficient morphism with
  the canonical transition for coefficients restricted from W.
 Source: Stacks Project, Tags 03Q8 and 09Z1, the canonical transition construction.
-(blueprint: sbc-lem-higher-image-over-map-coefficient).
 
 Proof: Let B₀=(B^*G)[0], A₀=(A^*G)[0], and M₀=(f^*B^*G)[0]. Write
 s:f^*B₀→M₀ for the single-complex comparison and c:M₀→A₀ for the image under

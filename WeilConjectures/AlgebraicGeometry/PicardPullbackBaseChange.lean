@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.PicardPullbackBaseChangeDual
 /-! # Canonical base change for a pulled-back module
 
 Source: Stacks Project, Tags 0BDP and 01E8.
-(blueprint: lem-sc-picard-pullback-base-change)
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace AlgebraicGeometry.Scheme
 pulled back from the base and its dual.
 Source: Stacks Project, Tag 0BDP, projection-formula paragraph, using Tag 01E8;
 Tag 08HY for the adjoint-defined canonical map.
-(blueprint: lem-sc-picard-pullback-base-change)
 
 Proof: Put p = X_T → T, v = X_T ×_T T' → X_T and p' = X_T ×_T T' → T'.
 Pullback composition transports v^*p^*N to p'^*h^*N. The iterated fibre product

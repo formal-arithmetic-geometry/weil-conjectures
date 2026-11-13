@@ -136,7 +136,6 @@ private theorem comparison_essImage_strata_pullback
 /-- A sheaf is classical if its restrictions to a finite constructible stratification
 are classical. Source: Stacks Project, Tag 09AK, proof of lemma-compare-constructible,
 after local constancy has supplied classicality on each stratum.
-(auxiliary; not a blueprint node).
 
 Proof: classicality is Zariski local by placing the sheaf in degree zero, applying
 the derived open-cover comparison theorem, and taking zeroth homology. Induct on the

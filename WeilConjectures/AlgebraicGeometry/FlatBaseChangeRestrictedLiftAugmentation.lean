@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeRestrictedLiftSect
 /-! # Augmentation of the restricted lift
 
 Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
-(blueprint: lem-weil-pbc-restricted-lift-augmentation).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 -- The nested restriction-adjunction calculation needs elaboration fuel.
 /-- The explicitly restricted lift preserves the augmentation.
 Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
-(blueprint: lem-weil-pbc-restricted-lift-augmentation).
 Proof: Take the degree-zero component of the restriction adjunction defining
 flatBaseChangeRestrictedLift. Use naturality of each composition/congruence
 comparison to move the target augmentation through it. The target comparison's

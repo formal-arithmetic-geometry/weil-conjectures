@@ -10,7 +10,6 @@ import WeilConjectures.SixFunctors.Finite.Stalk
 /-! # Finite direct image preserves ordinary scalar-extension units
 
 Source: Stacks Project, Tag 03QP, finite direct image and its finite stalk formula.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -223,7 +222,6 @@ private theorem finiteScalarMap_unit
 
 /-- Finite direct image carries an ordinary scalar-extension unit to an ordinary unit.
 Source: Stacks Project, Tag 03QP, together with the sheaf tensor universal property.
-(auxiliary; not a blueprint node).
 
 Proof: Write E_X for sheafified sectionwise extension of scalars on X. Its adjunction
 with restriction identifies η with an isomorphism E_D F → G, by the given ordinary

@@ -8,8 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleIntegralCoefficientData
 
 /-!
 # The integral comparison on profinite test objects
-
-(auxiliary; not a blueprint node).
+.
 -/
 
 @[expose] public section
@@ -405,8 +404,7 @@ attribute [local semireducible] profiniteToProEtOf finiteRingSection
 /-- The completed representation on continuous functions defines a morphism of the
 actual ring objects on the profinite point.
 
-proof.md`, Step 4
-(auxiliary; not a blueprint node).
+proof.md`, Step 4.
 
 Proof: send a continuous function f:S→O_E to d.inv(X[f]). Naturality follows from
 naturality of d.inv and functoriality of X[-]. After the nth finite projection, hd

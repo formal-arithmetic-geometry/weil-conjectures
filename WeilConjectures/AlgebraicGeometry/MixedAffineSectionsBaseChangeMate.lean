@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.MixedSectionsBaseChangeUnitSquare
 
 /-! # Affine sections transport the base-change mate with independent universes
 Source: Stacks Project, Tags 0AA7, 08HY and 0D5T.
-(blueprint: lem-sc-mixed-affine-sections-base-change-mate).
 -/
 
 @[expose] public section
@@ -36,7 +35,6 @@ This does not assume flatness, perfectness, or invertibility of sheaf base chang
 Only Rf_*E is required to have quasi-coherent cohomology.
 Source: Stacks Project, perfect.tex, Tag 0AA7, construction of the canonical map;
 cohomology.tex, Tags 08HY (counit description) and 0D5T (Leray).
-(blueprint: lem-sc-mixed-affine-sections-base-change-mate).
 
 Proof:
 1. Identify each affine base with the spectrum of its global ring by isoSpec.

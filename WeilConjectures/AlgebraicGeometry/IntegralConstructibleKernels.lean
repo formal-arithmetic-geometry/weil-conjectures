@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.LocallyFinitelyPresentedExtendScalars
 /-! # Kernels of integral constructible internal module objects
 
 Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(1).
-(auxiliary; not a blueprint node)
 
 The proof reduces to one local pivot and proves all repeated elimination and
 finite-presentation glue. It uses the existing field local-triviality theorem to control
@@ -733,7 +732,6 @@ private theorem integralConstructible_kernels_of_rational
 /-- Kernels of maps of integral constructible internal module objects are constructible.
 
 Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(1).
-(auxiliary; not a blueprint node)
 
 Proof:
 1. For a map between finite free integral modules whose rational cokernel is locally

@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 /-! # Realizing equivariant germs on a one-point etale scheme
 
 Source: Stacks Project, Tags 04JM and 03QW.
-(blueprint: lem-exc-field-equivariant-germs-one-point).
 -/
 
 @[expose] public section
@@ -267,7 +266,6 @@ private theorem onePoint_field_model
 set_option backward.isDefEq.respectTransparency false in
 /-- Source: Stacks Project, Tag 04JM, direct proof of lemma-global-sections-point,
 and Tag 03QW, section-galois-action-stalks.
-(blueprint: lem-exc-field-equivariant-germs-one-point).
 
 Proof: A nonempty one-point etale K-scheme is the spectrum of a finite separable
 extension of K: apply etale_fibre_discrete_separable_points to its fibre over the
@@ -294,7 +292,6 @@ components is asserted or used in this lemma. -/
 /- Source: Stacks Project, Tag 04JM.
 The invariant-section reconstruction
 for the selected geometric lift of a one-point etale scheme.
-(blueprint: lem-exc-field-equivariant-germs-one-point-selected-lift).
 The proof chooses the finite separable residue field of the unique point, applies
 `fieldSections_stalkInvariants`, and transports the resulting invariant section
 across the pointed isomorphism. -/
@@ -427,7 +424,6 @@ theorem onePoint_selected_lift_section
     ((congrArg e hzL).trans (e.apply_symm_apply (f x₀))))
 
 /-- Source: Stacks Project, Tags 02GL and 03QW.
-(blueprint: lem-exc-field-equivariant-germs-one-point-propagation).
 
 Proof: The residue-field point of the reduced one-point etale scheme X is an
 isomorphism; its residue field L is separable over K. The two lifts x₀ and x
@@ -476,7 +472,7 @@ theorem onePoint_propagate_from_selected_lift
     _ = ρ g (f x₀) := congrArg (ρ g) hz
     _ = f x := (hf g τ hτ x₀ x hx).symm
 
-/-- (blueprint: lem-exc-field-equivariant-germs-one-point) -/
+/-- -/
 theorem field_equivariant_germ_family_section_onePoint
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

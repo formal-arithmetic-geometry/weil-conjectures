@@ -42,8 +42,7 @@ cokernels, and the annihilator restricts to the zero module. Therefore its coker
 projection restricts to an isomorphism; evaluating on any W contained in U gives the
 asserted bijection.
 
-Source: Stacks Project, Properties, Lemma 01PQ and its reduction to Lemma 01PM.
-(blueprint: lem-weil-pbc-ideal-power-annihilator-system). -/
+Source: Stacks Project, Properties, Lemma 01PQ and its reduction to Lemma 01PM. -/
 theorem ideal_power_annihilator_system
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]

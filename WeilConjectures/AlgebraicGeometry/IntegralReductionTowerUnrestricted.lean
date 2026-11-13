@@ -9,8 +9,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Integral reduction towers without a finite-field datum
 
-Source: Bhatt--Scholze, Definition 3.5.2; Stacks Project, Tags 03EK and 06YY
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Definition 3.5.2; Stacks Project, Tags 03EK and 06YY.
 
 The completion and its projections already have unrestricted versions. This supplies
 the same reduction tower without the irrelevant global finite-field datum. The completed
@@ -291,8 +290,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})
 
 /-- Modules over the actual completed coefficient sheaf, with no finite-field datum.
-Source: Bhatt--Scholze, Definition 3.5.2
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Definition 3.5.2. -/
 noncomputable abbrev integralTowerModules :=
   SheafOfModules.{max u (t + 1)}
     (SheafOfModules.derivedChangeRingIndependentCoefficients
@@ -300,14 +298,14 @@ noncomputable abbrev integralTowerModules :=
       (completedIntegralCommRingSheafUnrestricted l E Y))
 
 /-- The standard localization for unrestricted completed coefficients.
-Source: Stacks Tag 05RU (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 05RU. -/
 noncomputable instance integralTowerHasDerivedCategory :
     HasDerivedCategory (integralTowerModules l E Y) :=
   HasDerivedCategory.standard _
 
 /-- Preserve the standard localization for the recorded completed-ring presentation.
 This is definitionally the same module category as integralTowerModules.
-Source: Stacks Tag 05RU (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 05RU. -/
 noncomputable instance integralCompletedRingHasDerivedCategory :
     HasDerivedCategory (SheafOfModules.{max u (t + 1)}
       (completedIntegralCoefficientSheafUnrestricted l E Y)) :=
@@ -315,32 +313,32 @@ noncomputable instance integralCompletedRingHasDerivedCategory :
 
 set_option linter.defProp false in
 /-- The canonical scalar-extension witness, with explicit standard localizations.
-Source: Stacks Tag 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 06YY. -/
 noncomputable def unrestrictedIntegralReductionExistence (n : ℕ) :=
   scalarReductionExistence l E Y n
 
 /-- Ordinary scalar extension along the actual coefficient projection, fixed on
 objects and maps by sectionwise tensor product followed by sheafification.
-Source: Stacks Tag 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 06YY. -/
 noncomputable def unrestrictedIntegralReductionFunctor (n : ℕ) :
     integralTowerModules l E Y ⥤
       SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n) :=
   scalarReductionExtension l E Y n
 
 /-- Additivity of ordinary reduction, from the scalar-extension witness.
-Source: Stacks Tag 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 06YY. -/
 noncomputable instance unrestrictedIntegralReductionFunctor_additive (n : ℕ) :
     (unrestrictedIntegralReductionFunctor l E Y n).Additive :=
   scalarReductionExtensionAdditive l E Y n
 
 /-- Termwise finite reduction, before restricting the coefficient action.
-Source: Stacks Tag 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 06YY. -/
 @[reducible]
 noncomputable def unrestrictedIntegralFiniteComplex (n : ℕ) :=
   (unrestrictedIntegralReductionFunctor l E Y n).mapHomologicalComplex (ComplexShape.up ℤ)
 
 /-- Finite reduction, read over the completion via its limit projection.
-Source: Stacks Tags 03DA and 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks Tags 03DA and 06YY. -/
 noncomputable def unrestrictedIntegralComplexFunctor (n : ℕ) :=
   unrestrictedIntegralFiniteComplex l E Y n ⋙
     (SheafOfModules.restrictScalars
@@ -350,7 +348,7 @@ noncomputable def unrestrictedIntegralComplexFunctor (n : ℕ) :=
 
 /-- The sheafified pure tensor s⊗x in ordinary reduction. The transport is the
 object equality of the scalar-extension witness, exactly as in integralTowerTensorSection.
-Source: Stacks Tag 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03EK. -/
 noncomputable def unrestrictedIntegralTensorSection (n : ℕ)
     (M : integralTowerModules l E Y)
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
@@ -479,8 +477,7 @@ attribute [local irreducible] unrestrictedModuleStep
 
 /-- There is a unique natural transformation between consecutive reductions sending
 s⊗x to ρ(s)⊗x in every degree. Thus it is the canonical transition, on all complexes.
-Source: Stacks Tag 03EK; Bhatt--Scholze, Definition 3.5.2
-(auxiliary; not a blueprint node).
+Source: Stacks Tag 03EK; Bhatt--Scholze, Definition 3.5.2.
 Proof: define the map on presheaf tensors by this formula. The identity π_n=ρ_nπ_(n+1)
 makes it balanced and linear over the completed sheaf. Restrictions and differentials
 commute with it, so sheafification gives chain maps. Applying a chain map before or
@@ -528,7 +525,7 @@ theorem unrestrictedIntegralTransition_existsUnique (n : ℕ) :
   exact (hτ' P i U s x).trans (hτ P i U s x).symm
 
 /-- The canonical natural transition, uniquely determined on sheafified pure tensors.
-Source: Stacks Tag 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03EK. -/
 noncomputable def unrestrictedIntegralTransition (n : ℕ) :
     unrestrictedIntegralComplexFunctor l E Y (n + 1) ⟶
       unrestrictedIntegralComplexFunctor l E Y n :=

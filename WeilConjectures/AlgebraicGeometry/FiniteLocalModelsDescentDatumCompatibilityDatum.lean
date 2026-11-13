@@ -17,7 +17,6 @@ namespace AlgebraicGeometry.Scheme
 /-- Natural transport compatible with the local representation, before imposing cocycles.
 
 Source: Stacks Project, Tags 03RV and 02W5.
-(blueprint: def-weil-pbc-finite-local-model-compatible-transport)
 The fields record transport of arbitrary scheme points, its naturality, and its
 identification of equal sections on the small etale site. No data is chosen here. -/
 structure FiniteLocalModelCompatibleTransport
@@ -56,7 +55,6 @@ private theorem finiteLocalModels_section_naturality
 /-- The comparison point on the universal pair consisting of a Q-point and a lift to U.
 
 Source: Stacks Project, Tags 03RV and 02W5, evaluated at the universal Q-point.
-(blueprint: def-weil-pbc-finite-local-model-comparison-point)
 On R = Q times_T U, turn the projection to Q into a section of E using the
 first map to U, then represent that same section using the second map to U. -/
 noncomputable def finiteLocalModels_comparison
@@ -86,7 +84,6 @@ noncomputable def finiteLocalModels_comparison
 /-- Transport by pulling back the fixed comparison morphism, with no witness choice.
 
 Source: Stacks Project, Tags 03RV and 02W5.
-(blueprint: def-weil-pbc-finite-local-model-canonical-transport)
 For x above a and a second lift b, the pair (x,b) maps to Q times_T U.
 Compose this map with the comparison point. The projection equation makes
 this a Q-point above b. -/
@@ -109,7 +106,6 @@ noncomputable def finiteLocalModels_transport
 
 /--
 Source: Stacks Project, Tags 03RV and 02W5.
-(blueprint: finite-local-models-transport-exists)
 The fiber-product Yoneda comparison of the two pullbacks of the finite etale
 scheme defines transport for arbitrary scheme maps with equal composites.
 Pulling this comparison back along the pair of maps gives the displayed map.
@@ -127,7 +123,6 @@ theorem finiteLocalModels_transport_exists
 
 /--
 Source: Stacks Project, Tags 03RV and 02W5.
-(blueprint: finite-local-models-transport-naturality)
 The transport is induced by pullback of the comparison on the fiber product.
 Functoriality of pullback, together with associativity of composition, proves
 the displayed naturality equation.
@@ -154,7 +149,6 @@ theorem finiteLocalModels_transport_naturality
 
 /--
 Source: Stacks Project, Tags 03RV and 02W5.
-(blueprint: finite-local-models-transport-compatibility)
 For an etale source, the comparison identifies the two points obtained from a
 common section under the representing isomorphism, yielding compatibility.
 -/
@@ -216,7 +210,7 @@ theorem finiteLocalModels_transport_compatibility
     ((e.hom.app (op (Over.mk b))) s).down.left at hn
   exact hn
 
-/-- (blueprint: lem-weil-pbc-finite-local-model-compatible-transport-datum) -/
+/-- -/
 theorem finiteLocalModels_descentDatum_compatibility_datum
     (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
     (U : T.Etale) (Q : U.left.FiniteEtale)

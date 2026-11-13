@@ -241,7 +241,6 @@ private theorem flat_unit_raw_sections_of_adjunction {S S' : Scheme.{uBC}}
 /-- Flat pullback's unit carries raw section classes to the mate of the inverse homology
 comparison. This is the unit case, before composition with a map into a target complex.
 Source: Stacks Project, Cohomology, Tags 02N7 and 01E4.
-(blueprint: lem-weil-pbc-flat-unit-raw-sections).
 
 Proof: Represent a section-complex homology class on V by a cycle. Apply the degreewise
 adjunction unit; naturality for the differential makes its image a cycle on g inverse V.

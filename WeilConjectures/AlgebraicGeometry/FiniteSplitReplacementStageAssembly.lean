@@ -105,8 +105,7 @@ Every object and every operator is read at a stage containing its degrees.
 The compatibility equalities show that this value is independent of the stage;
 all simplicial identities and the refinement naturality are checked at a common
 finite stage. Splitting, finiteness and the matching universal property in a fixed
-degree are the corresponding properties of that finite stage.
-(auxiliary; not a blueprint node) -/
+degree are the corresponding properties of that finite stage. -/
 theorem exists_replacement_of_stage_tower
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale)

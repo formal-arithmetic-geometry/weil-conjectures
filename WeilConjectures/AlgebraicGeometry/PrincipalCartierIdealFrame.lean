@@ -23,7 +23,6 @@ namespace AlgebraicGeometry.Scheme
 /-- Multiplication by the equation identifies the structure sheaf with the principal
 Cartier ideal, compatibly with its inclusion into the structure sheaf.
 Source: Stacks Tags 01WQ and 0A45, principal ideal trivialization.
-(blueprint: lem-pur-principal-cartier-ideal-frame).
 Proof: the equation vanishes on its zero subscheme, so it lifts to a global section
 of the ideal, which is the kernel of restriction. On every affine open its image
 generates the ideal. Invertibility therefore makes this section a free generator.

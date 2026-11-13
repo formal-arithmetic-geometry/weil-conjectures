@@ -103,9 +103,7 @@ private theorem flat_single_pullback_iso {T S : Scheme.{u}} (g : T ⟶ S)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Pullback to a field preserves the specified single cohomology condition.
-Source: blueprint lem-pc-perfect-locus, proof step 4.
-(blueprint: new-field-fibre-homology). -/
+/-- Pullback to a field preserves the specified single cohomology condition. -/
 theorem single_field_fibre_homology
     {Y : Scheme.{u}} (P : CochainComplex Y.Modules ℤ) (d : ℕ)
     (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE d)

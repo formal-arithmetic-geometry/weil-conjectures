@@ -15,9 +15,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 /-!
 # Descent of separatedness along a flat surjective quasi-compact morphism
 
-Source: Stacks Project, Descent, Lemma Tag 02KU (lemma-descending-property-separated),
-the descent direction for a one-member fpqc covering
-(blueprint: lem-weil-pbc-fpqc-descend-separated).
+Source: Stacks Project, Descent, Lemma Tag 02KU,
+the descent direction for a one-member fpqc covering.
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace AlgebraicGeometry
 
 /-- Separatedness descends along a flat surjective quasi-compact base change.
 Source: Stacks Project, Descent, Tag 02KU, with Topologies Tag 03L7 (2).
-(blueprint: lem-weil-pbc-fpqc-descend-separated)
 
 Proof:
 1. The diagonal of `pullback.snd f g` is a closed immersion by separatedness, hence

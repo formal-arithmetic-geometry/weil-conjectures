@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.PullbackModelFlatnessComparison
 /-! # Flat-module descent over a directed preorder
 
 Source: Stacks Project, Tags 05LY, 0032, 01U8, 01JX and 0097.
-(blueprint: lem-pc-flat-module-descent-preorder).
 -/
 
 @[expose] public section
@@ -30,10 +29,8 @@ namespace AlgebraicGeometry
 
 /-- Relative flatness of a fixed finitely presented module descends over a directed preorder.
 
-Source: Stacks Project, limits.tex, Tag 05LY (lemma-descend-module-flat-finite-presentation);
-categories.tex, Tag 0032 (lemma-directed-category-system); morphisms.tex, Tag 01U8
-(lemma-base-change-module-flat); schemes.tex, Tag 01JX; sheaves.tex, Tag 0097.
-(blueprint: lem-pc-flat-module-descent-preorder).
+Source: Stacks Project, limits.tex, Tag 05LY;
+categories.tex, Tag 0032; morphisms.tex, Tag 01U8; schemes.tex, Tag 01JX; sheaves.tex, Tag 0097.
 
 Proof: The object i makes the directed preorder nonempty, hence its thin category is
 filtered. Tag 0032 gives a final functor from a nonempty directed partial order J.

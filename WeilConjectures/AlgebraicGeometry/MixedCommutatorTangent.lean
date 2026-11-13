@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Closed
 # Mixed commutators of infinitesimal matrix points
 
 Source: Milne, Algebraic Groups (2017), Chapter 10, differential of multiplication and
-commutator (blueprint: `def-wf-lie-algebra-derivation`).
+commutator.
 
 An arbitrary finite basis identifies GL(V) with the general linear group scheme. The ring
 `DualNumber (DualNumber k)` is k[ε,δ]/(ε²,δ²), with coordinates 1, ε, δ, εδ.
@@ -112,7 +112,7 @@ k[ε,δ]/(ε²,δ²); their commutator is 1 + εδ(XY - YX), and the correspondi
 belongs to the subgroup. The finite basis `b` is arbitrary, including the empty basis.
 
 Source: Milne, Algebraic Groups (2017), Chapter 10, differential of multiplication and
-commutator (blueprint: `def-wf-lie-algebra-derivation`).
+commutator.
 
 Proof: base change the two points along the inner and outer dual-number inclusions. Their
 commutator remains a subgroup point by def-sc-group-scheme-subgroup. The inverses of 1 + εX

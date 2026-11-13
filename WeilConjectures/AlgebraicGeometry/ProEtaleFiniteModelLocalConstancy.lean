@@ -26,7 +26,6 @@ open Scheme
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite constant models expressed by scheme pullbacks give local constancy in slices.
 Source: Stacks Project, Tags 098K and 099Y.
-(auxiliary; not a blueprint node).
 
 Proof: view each weakly etale covering morphism as an object of the small site.
 Its slice site is equivalent to the small pro-etale site of its source. Under this

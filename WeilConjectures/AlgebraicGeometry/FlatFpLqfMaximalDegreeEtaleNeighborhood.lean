@@ -133,7 +133,6 @@ set_option linter.unusedVariables false in
 /-- A point of maximal degree has an étale neighbourhood on which the pullback is finite
 locally free of that degree.
 Source: Stacks Project, More on Morphisms, Tag 07RY, proof, second paragraph.
-(blueprint: lem-weil-pbc-flat-fp-lqf-maximal-degree-etale-neighborhood)
 
 Proof: the finite fibre over `s` has finitely many points. An elementary étale
 neighbourhood splits the pullback into complementary open parts `W` and `V`, with `V`

@@ -30,8 +30,7 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComple
 /-!
 # Theorem on formal functions over a complete Noetherian base ring
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087U
-(blueprint: lem-weil-pbc-formal-functions-complete-base).
+Source: Stacks Project, Cohomology of Schemes, Lemma 087U.
 
 The index n represents the positive level n+1. H^p and Γ are A-modules by restriction of
 scalars along (ΓSpecIso A).inv ≫ f.appTop, as in lem-weil-pbc-theorem-formal-functions.
@@ -112,12 +111,11 @@ private theorem finite_moduleCohomology
 
 /-- For a proper scheme over a complete Noetherian base, coherent cohomology is the
 inverse limit of the cohomology of the infinitesimal quotients, as A-modules.
-Source: Stacks Project, Cohomology of Schemes, Lemma 087U
-(blueprint: lem-weil-pbc-formal-functions-complete-base).
+Source: Stacks Project, Cohomology of Schemes, Lemma 087U.
 
 Proof: By lem-pc-coherent-hi (Lemma 02O6), the cohomology module H is finite over A.
 By lem-weil-pbc-finite-module-complete-over-complete-noetherian (Algebra, Lemma 00MA),
-the completion map c : H → H^ is bijective. By lem-weil-pbc-theorem-formal-functions
+the completion map c: H → H^ is bijective. By lem-weil-pbc-theorem-formal-functions
 (Theorem 02OC), the map θ identifies the
 resulting completion with the inverse limit of the cohomology of the quotients;
 the map in the statement is the composite of these two canonical isomorphisms:
@@ -177,8 +175,7 @@ theorem formalFunctions_complete_base
 
 /-- The degree-zero case: global sections are the inverse limit of the global sections of
 the infinitesimal quotients, as A-modules.
-Source: Stacks Project, Cohomology of Schemes, Lemma 087U, p = 0
-(blueprint: lem-weil-pbc-formal-functions-complete-base).
+Source: Stacks Project, Cohomology of Schemes, Lemma 087U, p = 0.
 
 Proof: H^0 is global sections (the zeroth right derived functor of the left-exact
 global-sections functor), naturally in the module; transport formalFunctions_complete_base

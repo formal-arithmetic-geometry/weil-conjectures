@@ -49,7 +49,6 @@ so an unrelated adjunction with the same functors cannot be substituted.
 The derived-functor instances under postcomposition express absoluteness; for
 p they follow from K-flat and K-injective resolutions, respectively.
 Source: Stacks, Tag 0FP1, Lemma 20.28.6.
-(blueprint: lem-sc-module-cup-global-counit-comparison)
 Proof: resolve K by a K-injective I and resolve Γ(I) by a K-flat Q. Choose a
 K-flat P0 resolving Γ(K) and a map P0 → Q so the square with Γ(K) → Γ(I)
 commutes in the homotopy category, using common refinements of roofs. Apply

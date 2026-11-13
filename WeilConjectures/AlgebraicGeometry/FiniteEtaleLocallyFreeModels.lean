@@ -339,7 +339,6 @@ private theorem locFree_unitCokernel_of_comparison
 
 Source: Stacks Project, Tag 095B, its split finite-cover computation, and
 Bhatt--Scholze, Section 6.8, finite etale descent of lisse coefficients.
-(auxiliary; not a blueprint node)
 
 Proof in words. Around every point split the finite etale map over an etale
 neighbourhood. Surjectivity makes the finite sheet set nonempty. Reindex it by

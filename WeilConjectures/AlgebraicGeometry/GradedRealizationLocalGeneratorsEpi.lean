@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 /-! # Local homogeneous generators of the algebra-module direct image
 
 Source: Stacks Project, Tag 0897, finite-type paragraph, with Tags 03DA and 01B4.
-(blueprint: lem-weil-pbc-graded-realization-local-generators-epi).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ on a fixed open. This is purely a local generation statement: the morphism need 
 
 Source: Stacks Project, Tag 0897, finite-type paragraph; Modules on Sites, Tag 03DA;
 Modules, Tag 01B4.
-(blueprint: lem-weil-pbc-graded-realization-local-generators-epi).
 
 Proof: Test epimorphy by comparing two algebra-linear maps p and q that agree after
 composition with the specified free map. Evaluating their free-Hom equivalence shows

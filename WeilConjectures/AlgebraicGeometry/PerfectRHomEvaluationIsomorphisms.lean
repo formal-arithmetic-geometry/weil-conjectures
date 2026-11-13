@@ -98,8 +98,7 @@ E^q and for its direct summands. These identifications respect differentials and
 adjunction. For any natural adjunction bijection in the statement, Yoneda changes
 its adjuncts by invertible natural transformations, so invertibility is unchanged.
 Finally test the globally defined maps on cohomology sheaves on the open cover;
-no morphisms are glued. This works for unbounded F and does not assume F is quasi-coherent.
-(blueprint: lem-pc-perfect-rhom-evaluation-isomorphisms) -/
+no morphisms are glued. This works for unbounded F and does not assume F is quasi-coherent. -/
 theorem perfect_rhom_evaluation_isomorphisms
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

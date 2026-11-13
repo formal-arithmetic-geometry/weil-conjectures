@@ -53,8 +53,7 @@ counit followed by the derived transport. Postcomposing eta with the inverse
 transport cancels the transport by the isomorphism identities. Associativity
 then gives precisely the displayed factorization. The two presentations of
 an inverse-image intersection agree by `Scheme.Hom.preimage_inf`; their
-inclusion proofs agree by proof irrelevance. No nonemptiness is used.
-(blueprint: lem-pc-perfect-overlap-composite-counit-factor). -/
+inclusion proofs agree by proof irrelevance. No nonemptiness is used. -/
 theorem perfectOverlapCompositeCounitFactor
     {X Y K C T S : Scheme.{u}}
     (f : K ⟶ Y) (gk : X ⟶ K) (g : X ⟶ Y) (hgf : gk ≫ f = g)

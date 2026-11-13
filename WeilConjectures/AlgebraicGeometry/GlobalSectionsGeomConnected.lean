@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.GlobalSectionsProper
 /-!
 # Global sections and geometric connectedness
 
-Source: Stacks Project, Varieties, Lemma 0FD2; blueprint
-`lem-pc-h0-geom-connected` (blueprint: lem-pc-h0-geom-connected).
+Source: Stacks Project, Varieties, Lemma 0FD2.
 -/
 
 @[expose] public section
@@ -24,7 +23,7 @@ namespace AlgebraicGeometry.Scheme
 /-- For a proper geometrically reduced scheme over a field, the structure map on global
 sections is bijective exactly when the scheme is geometrically connected. This is
 `AlgebraicGeometry.Scheme.globalSectionsBijective_iff_geometricallyConnected` with the class
-`GlobalSectionsBijective` unfolded (Stacks, Tag 0FD2; blueprint: lem-pc-h0-geom-connected). -/
+`GlobalSectionsBijective` unfolded (Stacks, Tag 0FD2). -/
 theorem globalSectionsRingHom_bijective_iff_geometricallyConnected
     (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] [GeometricallyReduced (X ↘ Spec (.of k))] :

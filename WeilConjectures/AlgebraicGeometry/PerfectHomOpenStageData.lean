@@ -125,7 +125,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The explicitly restricted objects are perfect on an open subscheme, including
 all shifts. Source: Stacks Project, Tags 09UA and 08CM.
-(blueprint: lem-pc-perfect-hom-open-stage-data).
 Proof: Transport each localized module category through `Modules.overEquiv`
 to the already supplied derived category on its open scheme. This constructs
 its localization as the composite of the exact equivalence on complexes with Q.

@@ -20,7 +20,6 @@ public import
 /-! # Raw pullback and the derived-Hom comparison
 
 Source: Stacks Project, Tags 03Q8 and 09Z1, canonical comparison maps.
-(blueprint: sbc-lem-higher-image-raw-transition-to-hom).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ namespace AlgebraicGeometry.Etale
 /-- Pullback of raw classes commutes with the comparison to morphisms from the free sheaf,
 before evaluating those morphisms on sections, with a specified coefficient morphism.
 Source: Stacks Project, Tags 03Q8 and 09Z1, canonical cohomology comparison maps.
-(blueprint: sbc-lem-higher-image-raw-transition-to-hom).
 
 Proof: Write the comparison as the derived adjunction on the class, preceded by the
 single-complex comparison, followed by degree-zero homology and the homology shift

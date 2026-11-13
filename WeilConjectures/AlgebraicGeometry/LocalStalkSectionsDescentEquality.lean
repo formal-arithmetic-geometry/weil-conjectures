@@ -22,7 +22,6 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry Topological
 
 /-- Descent of equality for local-scheme sections.
 Source: Stacks Project, Tag 03Q6, degree zero and proof steps (1)-(3).
-(blueprint: new-local-stalk-sections-descent-equality)
 
 Proof: Restrict the given sections to a common affine neighbourhood A of x.
 Principal opens of A containing x are cofinal among neighbourhoods, and their

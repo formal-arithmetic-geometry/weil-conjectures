@@ -16,7 +16,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCate
 /-! # First residue under the normalized integral coefficient comparison
 
 Source: Stacks Tags 099C, 099M and 09C1, and the projection-normalized integral comparison.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -52,8 +51,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 /-- The two integral presentations have the same constructible finite-Tor first residue
 in constant-ring coordinates. This is solely coefficient transport; no etale descent,
 completeness or etale-origin witness is asserted.
-Source: Stacks Tags 099C, 099M and 09C1; blueprint integral-models proof (1)--(2)
-(auxiliary; not a blueprint node).
+Source: Stacks Tags 099C, 099M and 09C1; blueprint integral-models proof (1)--(2).
 
 Proof: Let A be the lifted integer ring, I its lifted uniformizer ideal, and k=A/I.
 The scalar quotient map identifies k with the lift of the specified first quotient:

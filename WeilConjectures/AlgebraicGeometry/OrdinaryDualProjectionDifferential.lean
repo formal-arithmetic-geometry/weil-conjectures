@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationData
 /-! # Ordinary evaluation and one part of the differential
 
 Source: Stacks Project, Tag 08DQ, and Section 20.41.
-(blueprint: lem-pc-ordinary-dual-projection-differential).
 -/
 
 @[expose] public section
@@ -41,7 +40,6 @@ private theorem projectionHomMap_zero (X : Scheme.{u}) (U : X.Opens)
 
 /-- The dual differential after its degree-zero projection.
 Source: Stacks Project, Tag 0A8X, section-hom-complexes, differential formula.
-(blueprint: lem-pc-ordinary-dual-projection-differential).
 Proof: apply the differential clause of homComplex_projections_exists to
 P and the structure sheaf in degree zero, with output indices r+q and 0,
 and input indices r and r+1. The single complex has zero differential, so

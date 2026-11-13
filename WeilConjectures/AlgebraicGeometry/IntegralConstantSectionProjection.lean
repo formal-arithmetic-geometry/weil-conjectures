@@ -32,8 +32,7 @@ namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 attribute [local instance] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
 
 /-- The explicit universe instance for ordinary coefficient comparisons.
-Source: coefficient-site sheafification
-(auxiliary; not a blueprint node). -/
+Source: coefficient-site sheafification. -/
 local instance projectionAbLocallyBijective (X : Scheme.{u}) :
     (Scheme.ProEt.topology X).WEqualsLocallyBijective Ab.{u + 1} :=
   WeilConjectures.integralCoefficientAbLocallyBijective.{u, u} X
@@ -50,7 +49,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralReductionSiteEssentiallySmall
   WeilConjectures.integralOperationsSiteSmall in
 /-- A ring comparison is normalized by its specified map on constant additive sections.
-Source: Stacks Tags 03CY and 00YV (auxiliary; not a blueprint node).
+Source: Stacks Tags 03CY and 00YV.
 -/
 def DiscreteSectionRingNormalized (X : Scheme.{u}) (A : Type u) [CommRing A]
     (d : Scheme.adicLisseConstantRing X (ULift.{u + 1} A) ≅
@@ -72,7 +71,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralOperationsSiteSmall in
 /-- The ordinary normalized integral and first-residue ring comparisons, with the
 projection equations required for their canonical coefficient actions.
-Source: Stacks Tags 099L and 099M (auxiliary; not a blueprint node).
+Source: Stacks Tags 099L and 099M.
 -/
 structure IntegralSectionComparisons (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -372,7 +371,6 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 Their data is fixed by the constant sections, before any modules or complexes are considered.
 
 Source: Stacks Tags 099L and 099M, integral-models proof (1)--(2).
-(auxiliary; not a blueprint node).
 
 Proof: reconstruct the ring comparisons from the monoidal constant additive comparisons.
 Their naturality gives the ordinary first-residue square. The normalized integral section

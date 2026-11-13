@@ -39,7 +39,7 @@ private theorem absolute_iff (l : ℕ) [Fact l.Prime]
 
 /-- The fixed section-action realization identifies finite constant local models.
 Source: Bhatt--Scholze, Definition 6.8.10, and the coefficient comparison in
-Proposition 6.8.11(3) (auxiliary; not a blueprint node).
+Proposition 6.8.11(3).
 
 Proof: use `integralSectionLocalModels` for the absolute-value presentation. The
 point comparison identifies that presentation with the spectral-norm presentation,

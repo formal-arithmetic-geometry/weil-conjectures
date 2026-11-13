@@ -103,7 +103,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option maxRecDepth 2048 in
 /-- Normalized restriction applies the global-section ring map.
 Source: Stacks Project, Tag 0096.
-(blueprint: lem-sc-picard-tensor-frame-restriction-normalized)
 Proof: Apply the direct adjunction to the composition comparison on the unit.
 Its adjunct is the composite structure map by the mate unit equation. This
 proves compatibility of the comparison with the two pinned unit isomorphisms.

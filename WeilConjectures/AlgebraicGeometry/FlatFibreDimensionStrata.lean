@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.FlatFibreDimensionStrataCover
 /-! # Constant relative dimension opens for a flat finitely presented morphism
 
 Source: Stacks Project, Tags 054T and 054U.
-(blueprint: lem-sbc-flat-fibre-dimension-strata)
 -/
 
 @[expose] public section
@@ -41,8 +40,7 @@ restricted morphism is an open subscheme of X, so its dimension opens are also
 opens of X. Local dimension is unchanged by the open immersion of each
 restricted fibre into its original fibre. This gives both clauses below.
 Empty fibres contribute no generic points; n is always a natural number
-because the fibres are locally of finite type over a field.
-(blueprint: lem-sbc-flat-fibre-dimension-strata) -/
+because the fibres are locally of finite type over a field. -/
 theorem exists_fibre_dimension_strata_of_flat_restrict
     {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)] :

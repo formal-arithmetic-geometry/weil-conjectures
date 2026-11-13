@@ -13,7 +13,6 @@ public import Mathlib.Algebra.Category.Grp.Basic
 # Explicit finite étale splitting data and its sum
 
 Source: Stacks Project, Section 03SH, paragraph after Definition 03SE.
-(blueprint: def-weil-pbc-finite-etale-trace-splitting-data)
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- A finite clopen coproduct splitting of `T ×[X] Y`, with explicit inverse projections.
 The empty index type is allowed. All data are supplied by the constructor.
-Source: Stacks Project, Section 03SH, paragraph after Definition 03SE.
-(blueprint: def-weil-pbc-finite-etale-trace-splitting-data) -/
+Source: Stacks Project, Section 03SH, paragraph after Definition 03SE. -/
 structure FiniteEtaleTraceSplitting {X Y : Scheme.{u}} (f : Y ⟶ X) (T : X.Etale) where
   J : Type u
   finiteIndex : Fintype J
@@ -41,14 +39,12 @@ structure FiniteEtaleTraceSplitting {X Y : Scheme.{u}} (f : Y ⟶ X) (T : X.Etal
   closedImmersion : ∀ j, IsClosedImmersion (i j)
 
 /-- The presieve of arrows with split domain; membership records no chosen splitting.
-Source: Stacks Project, Section 03SH, paragraph after Definition 03SE.
-(blueprint: def-weil-pbc-finite-etale-trace-splitting-data) -/
+Source: Stacks Project, Section 03SH, paragraph after Definition 03SE. -/
 def finiteEtaleTraceSplitPresieve {X Y : Scheme.{u}} (f : Y ⟶ X) (W : X.Etale) :
     Presieve W := fun {T} _ ↦ Nonempty (FiniteEtaleTraceSplitting f T)
 
 /-- The section of the pullback associated to a sheet.
-Source: Stacks Project, Section 03SH, paragraph after Definition 03SE.
-(blueprint: def-weil-pbc-finite-etale-trace-splitting-data) -/
+Source: Stacks Project, Section 03SH, paragraph after Definition 03SE. -/
 noncomputable def FiniteEtaleTraceSplitting.sectionMap {X Y : Scheme.{u}} {f : Y ⟶ X}
     {T : X.Etale} (D : FiniteEtaleTraceSplitting f T) (hf : Etale f) (j : D.J) :
     T ⟶ (MorphismProperty.Over.pullback @Etale ⊤ f ⋙
@@ -60,8 +56,7 @@ noncomputable def FiniteEtaleTraceSplitting.sectionMap {X Y : Scheme.{u}} {f : Y
       congrArg (fun k ↦ k ≫ T.hom) (D.inv₁ j))
 
 /-- The sum of restrictions along the sections of an explicit splitting.
-Source: Stacks Project, Section 03SH, paragraph after Definition 03SE.
-(blueprint: def-weil-pbc-finite-etale-trace-splitting-data) -/
+Source: Stacks Project, Section 03SH, paragraph after Definition 03SE. -/
 noncomputable def FiniteEtaleTraceSplitting.sum {X Y : Scheme.{u}} {f : Y ⟶ X}
     {T : X.Etale} (D : FiniteEtaleTraceSplitting f T) (hf : Etale f)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

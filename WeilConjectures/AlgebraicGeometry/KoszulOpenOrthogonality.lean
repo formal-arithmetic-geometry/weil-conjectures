@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.KoszulRestrictionZero
 
 /-! # Koszul orthogonality detects extension from an open
 
-Source: Stacks Project, Lemma 36.15.2, Tag 09IR
-(blueprint: lem-pc-perfect-generation-koszul-orthogonal).
+Source: Stacks Project, Lemma 36.15.2, Tag 09IR.
 -/
 
 @[expose] public section
@@ -32,13 +31,12 @@ namespace AlgebraicGeometry
 
 /-- For an affine open `V = Spec A`, orthogonality to all shifts of its Koszul complex is
 exactly invertibility of the canonical derived open-restriction unit.
-Source: Stacks Project, Tag 09IR
-(blueprint: lem-pc-perfect-generation-koszul-orthogonal).
+Source: Stacks Project, Tag 09IR.
 
 Proof:
 1. Form the cone `C` of the canonical map. The Koszul complex restricts to zero on the
    complement of its zero locus: each `f i` acts null-homotopically and is a unit on `D(f i)`
-   (Tag 0663). Derived adjunction (lem-pc-ringed-spaces-derived-adjoint-general) therefore
+   (Tag 0663). Derived adjunction therefore
    makes all Hom groups from its shifts to the derived pushforward zero. The triangle
    identifies vanishing against `E` with vanishing against `C`. The unit is invertible
    exactly when `C` is zero.

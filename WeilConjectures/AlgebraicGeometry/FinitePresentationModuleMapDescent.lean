@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.ZariskiDescent
 /-!
 # Descent of finitely presented quasi-coherent modules and maps
 
-Source: Stacks Project, Limits, Lemma 32.10.2, Tag 01ZR
-(blueprint: lem-pc-fp-module-map-descent).
+Source: Stacks Project, Limits, Lemma 32.10.2, Tag 01ZR.
 -/
 
 @[expose] public section
@@ -68,15 +67,13 @@ private theorem nonempty_tensorPullback_iso_of_local_datum
   exact ⟨comparison.app N ≪≫ e⟩
 
 /-- Finite-presentation descent for modules and for maps between fixed models.
-Source: Stacks Project, Limits, Tag 01ZR, clauses (1) and (2)
-(blueprint: lem-pc-fp-module-map-descent).
+Source: Stacks Project, Limits, Tag 01ZR, clauses (1) and (2).
 
-The setting is that of `exists_finitelyPresented_complex_of_limit`
-(lem-pc-fp-complex-descent): the functor `R` presents the inverse system of affine schemes
+The setting is that of `exists_finitelyPresented_complex_of_limit`: the functor `R` presents the inverse system of affine schemes
 `S_k = Spec (R k)` contravariantly (affine, hence qcqs, with affine transition maps), `c` is
 its limit cone and `IsAffine c.pt` expresses `S = Spec R`. `X = pullback f (c.π.app (op i))`
 and `X_j = pullback f (Spec.map (R.map (homOfLE hij)))`. Module base change is
-`Scheme.Modules.moduleBaseChange` (def-pc-base-change) along the `Over (Spec (R i))`
+`Scheme.Modules.moduleBaseChange` along the `Over (Spec (R i))`
 morphisms `Over.homMk (c.π.app (op j))` (from `X` to `X_j`) and
 `Over.homMk (Spec.map (R.map (homOfLE hjj')))` (from `X_{j'}` to `X_j`). The identification
 `((F_j)_{j'})_X ≅ (F_j)_X` is the canonical one: the conjugate, under the canonical

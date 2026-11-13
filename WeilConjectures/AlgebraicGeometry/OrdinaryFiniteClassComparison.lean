@@ -12,7 +12,6 @@ import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBoundaryComparison
 
 Source: the constants adjunction and the universal Ext/cohomology comparison in
 WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBoundaryComparison.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -87,7 +86,6 @@ private theorem integralGenerator_bijective (A : Type (u + 1)) [CommRing A]
 
 /-- The actual class map identifies derived module morphisms with sheaf cohomology.
 Source: KummerBoundaryComparison.bijective_extToSheafHOf and the constants adjunction.
-(auxiliary; not a blueprint node).
 Proof: A map from the constant A-module sheaf is uniquely determined by its global value
 at one, by the constants/global-sections adjunction. The specified integral generator
 sends the integer one to this element, so precomposition with it corepresents those
@@ -106,7 +104,6 @@ theorem ordinaryFiniteClass_bijective (A : Type (u + 1)) [CommRing A]
 
 /-- The actual Kummer boundary has a unique derived module representative.
 Source: the preceding normalized class comparison and the specified Chern predicate.
-(auxiliary; not a blueprint node).
 Proof: surjectivity produces a representative of the fixed Kummer class. If a second
 arrow satisfies the same specification, their classes agree, so injectivity equates
 the arrows. Thus the construction chooses no unconstrained cohomology witness. -/

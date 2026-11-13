@@ -24,10 +24,6 @@ import all WeilConjectures.AlgebraicGeometry.PullbackFiniteConstantLocalModel
 
 /-! # Integral and rational constructible complexes have finite Tor amplitude
 
-Source: literature/blueprint/latest/blueprint/sec-proetale-coefficients/
-sk-prop-integral-criterion/lem-integral-ctf-equals-bc.md and its proof
-(blueprint: lem-integral-ctf-equals-bc).
-
 The categories are ordinary uncompleted internal-module derived categories. The scalar
 examples are stated on explicit helper definitions of this module.
 -/
@@ -44,9 +40,6 @@ namespace AlgebraicGeometry.ProEtale
 bounded constructible complexes inherit the indicated cohomological interval, enlarged
 by one only in the integral case. In particular Dctf and Dbc have identical object
 predicates, hence identical full subcategories and ambient morphisms.
-
-Source: latest blueprint lem-integral-ctf-equals-bc, clauses (1), (2) and their consequence
-(blueprint: lem-integral-ctf-equals-bc).
 
 Proof:
 1. The integral clauses come from det-def-localizing-closure-ctf-equals-bc

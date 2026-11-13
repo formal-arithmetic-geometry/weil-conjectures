@@ -62,7 +62,7 @@ private noncomputable instance constantPreservesColimits
 /-- The actual global scalar extension preserves small colimits.
 Source: Stacks Project, algebraization.tex, Tag 099E. Constant presheaves preserve
 colimits by evaluation on the one-point bottom site; the other two functors are left
-adjoints. (auxiliary; not a blueprint node). -/
+adjoints. -/
 theorem ringFamilyGlobalExtension_preservesColimits
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) (I : Type) [SmallCategory I] :
@@ -77,7 +77,6 @@ theorem ringFamilyGlobalExtension_preservesColimits
 as its inverse unit constraint. This statement concerns module sheaves, without complexes
 or localizations.
 Source: Stacks Project, algebraization.tex, Tags 0996 and 099E.
-(auxiliary; not a blueprint node).
 
 Proof: evaluate module sheaves on the one-point bottom-topology site to obtain A-modules.
 On each site object V the tensor constraint is

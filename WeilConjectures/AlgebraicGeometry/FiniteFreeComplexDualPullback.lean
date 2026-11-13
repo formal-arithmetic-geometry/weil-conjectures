@@ -33,7 +33,6 @@ import WeilConjectures.AlgebraicGeometry.RingComplexEndomorphismSelfDual
 
 Source: Stacks Project, sites-modules.tex, remark-pullback-internal-hom;
 algebraization.tex, Tag 0A0E, finite free dual calculation.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -344,7 +343,6 @@ comparison is contravariantly natural on the termwise finite free complexes.
 
 Source: Stacks Project, sites-modules.tex, remark-pullback-internal-hom and
 lemma-tensor-product-pullback; algebraization.tex, Tag 0A0E, dual calculation.
-(auxiliary; not a blueprint node).
 
 Proof in words: transpose pulled-back evaluation using the inverse ordinary tensor
 comparison, and use the existing signed Hom-complex construction to obtain a

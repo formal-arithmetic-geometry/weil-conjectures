@@ -14,8 +14,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 /-!
 # Finite-presentation section calculus on the qcqs pro-etale site
 
-Source: Stacks Project, Tags 0738 (4), 0GMZ, 0GN0 and 098D
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 0738 (4), 0GMZ, 0GN0 and 098D.
 -/
 
 @[expose] public section
@@ -316,8 +315,7 @@ private noncomputable def hom_section_iso
     ext x
     rfl)
 
-/-- Source: Stacks Project, Tags 0738 (4), 0GMZ, 0GN0 and 098D
-(auxiliary; not a blueprint node).
+/-- Source: Stacks Project, Tags 0738 (4), 0GMZ, 0GN0 and 098D.
 Sections over a qcqs scheme and Hom from a locally finitely presented module commute
 with filtered sheaf colimits. Both comparisons use the chosen colimit coprojections;
 equality of representatives is witnessed at a common stage.

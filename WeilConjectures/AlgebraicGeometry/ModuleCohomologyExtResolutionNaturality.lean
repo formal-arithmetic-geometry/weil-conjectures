@@ -24,7 +24,6 @@ public import Mathlib.Algebra.Category.Grp.Zero
 The comparisons below are constructed from section complexes, not selected from
 an existence assertion about natural equivalences.
 Source: Stacks Project, Tags 03FD, 01FT and 06XR.
-(blueprint: new-module-cohomology-ext-resolution-naturality)
 -/
 
 @[expose] public section
@@ -312,8 +311,7 @@ def siteSectionsObjIso
   (siteSectionsNatIso J U q).app F
 
 /-- Identify evaluated sheaf cohomology with its fixed Ext functor before specialization.
-Source: Stacks Project, Tag 06XR; this is the definition of sheaf cohomology.
-(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+Source: Stacks Project, Tag 06XR; this is the definition of sheaf cohomology. -/
 noncomputable def siteExtNatIso
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
@@ -326,8 +324,7 @@ noncomputable def siteExtNatIso
   Iso.refl _
 
 /-- Use the native H functor after identifying its constant Ext source.
-Source: Stacks Project, Tag 06XR; this is the definition of `Sheaf.functorH`.
-(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+Source: Stacks Project, Tag 06XR; this is the definition of `Sheaf.functorH`. -/
 noncomputable def siteHNatIso
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
@@ -339,8 +336,7 @@ noncomputable def siteHNatIso
 
 set_option backward.isDefEq.respectTransparency true in
 /-- The original additive Ext source-change equivalence, packaged naturally in coefficients.
-Source: Stacks Project, Tag 06XR; functoriality of Ext in its two arguments.
-(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+Source: Stacks Project, Tag 06XR; functoriality of Ext in its two arguments. -/
 noncomputable def extSourceNatIso
     {A : Type u₁} [Category.{u} A] [Abelian A] [HasExt.{u} A]
     {M N : A} (e : M ≅ N) (q : ℕ) :
@@ -395,8 +391,7 @@ theorem forgottenInjectiveAcyclic (X : Scheme.{u})
     (siteSectionsObjIso _ ⊤ _ (n + 1)).symm
 
 /-- Forgetting scalars in the standard derived-functor resolution comparison.
-Source: Stacks Project, Tag 03FD; exact forgetting commutes with homology.
-(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+Source: Stacks Project, Tag 03FD; exact forgetting commutes with homology. -/
 noncomputable def resolutionForgetObjIso
     {A B D : Type*} [Category A] [Category B] [Category D]
     [Abelian A] [HasInjectiveResolutions A] [Abelian B] [Abelian D]
@@ -411,8 +406,7 @@ noncomputable def resolutionForgetObjIso
 
 /-- The two ways of forming abelian section homology agree degreewise.
 This identification is checked before substituting an injective resolution.
-Source: Stacks Project, Tag 03FD, common section complex.
-(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+Source: Stacks Project, Tag 03FD, common section complex. -/
 noncomputable def sectionHomologyIso (X : Scheme.{u}) (q : ℕ) :
     ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
         (ComplexShape.up ℕ) ⋙
@@ -428,8 +422,7 @@ noncomputable def sectionHomologyIso (X : Scheme.{u}) (q : ℕ) :
   Iso.refl _
 
 /-- Common-resolution comparison for exact forgetting of scalars.
-Source: Stacks Project, Tags 03FD and 015E.
-(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+Source: Stacks Project, Tags 03FD and 015E. -/
 noncomputable def resolutionSectionsObjIso
     {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]
     [Abelian A] [HasInjectiveResolutions A] [Abelian B] [Abelian D]
@@ -456,8 +449,7 @@ noncomputable def resolutionSectionsObjIso
     (Γ.rightDerivedObjIsoOfResolution ι hI q).symm
 
 /-- Naturality packaged before substituting concrete chosen resolutions.
-Source: Stacks Project, Tags 03FD and 015E.
-(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+Source: Stacks Project, Tags 03FD and 015E. -/
 noncomputable def resolutionSectionsNatIso
     {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]
     [Abelian A] [HasInjectiveResolutions A] [Abelian B] [Abelian D]
@@ -537,8 +529,7 @@ noncomputable def resolutionSectionsNatIso
 
 
 /-- Convert a natural comparison to an additive equivalence before specializing its functors.
-Source: Stacks Project, Tags 03FD and 06XR; only categorical packaging is forgotten.
-(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+Source: Stacks Project, Tags 03FD and 06XR; only categorical packaging is forgotten. -/
 noncomputable def moduleComparisonEquiv
     {C : Type*} [Category C] {R : Type u} [Ring R]
     {K : C ⥤ ModuleCat.{u} R} {L : C ⥤ AddCommGrpCat.{u}}
@@ -558,8 +549,7 @@ private theorem moduleComparisonEquiv_naturality
 end ExtEdgeResolution
 
 /-- The coefficient comparison as a natural isomorphism of additive functors.
-Source: Stacks Project, Tags 03FD, 015E and 06XR; the same common resolution.
-(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+Source: Stacks Project, Tags 03FD, 015E and 06XR; the same common resolution. -/
 @[irreducible]
 noncomputable def moduleCohomologyExtResolutionNatIso (X : Scheme.{u}) (q : ℕ) :
     RingedSpace.moduleCohomology X.toRingedSpace q ⋙
@@ -587,8 +577,7 @@ noncomputable def moduleCohomologyExtResolutionNatIso (X : Scheme.{u}) (q : ℕ)
 
 /-- The same resolution-normalized module/Ext comparison, read from its natural square.
 Its terminal-source map is Ext precomposition by the inverse of `terminalSourceIso`.
-Source: Stacks Project, Tags 03FD, 015E and 06XR.
-(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+Source: Stacks Project, Tags 03FD, 015E and 06XR. -/
 @[irreducible]
 def moduleCohomologyExtResolutionEquiv (X : Scheme.{u}) (F : X.Modules) (q : ℕ) :
     ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F) ≃+ H F q :=
@@ -598,7 +587,6 @@ set_option backward.isDefEq.respectTransparency true in
 /-- The explicitly resolution-normalized comparisons are natural in coefficients.
 Source: Stacks Project, Tag 03FD; Tag 015E for acyclic-resolution naturality;
 Tag 06XR for Ext computed by injective resolutions.
-(blueprint: new-module-cohomology-ext-resolution-naturality)
 
 Proof: Lift the coefficient morphism to the two standard module resolutions.
 The module-derived comparison commutes with this lift by isoRightDerivedObj

@@ -107,7 +107,6 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 
 Source: Bhatt--Scholze, Remark 6.8.15 and Lemma 6.5.9(5); Stacks 06YY,
 0G7E; the ordinary tensor comparison in integral proper base change (1), (3).
-(auxiliary; not a blueprint node).
 
 Proof. Apply residueOrdinaryTensorPull_homotopy for the coefficient map a.
 Its transported ordinary monoidal structure agrees with native module pullback

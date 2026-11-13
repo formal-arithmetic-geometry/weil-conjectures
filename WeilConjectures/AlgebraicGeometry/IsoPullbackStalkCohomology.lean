@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 /-! # Additive derived stalk cohomology along a scheme isomorphism
 
 Source: Stacks Project, Tags 0098 and 0D5S.
-(blueprint: lem-pc-iso-pullback-stalk-cohomology).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The two left adjoints to module pushforward agree canonically.
-Source: Stacks Project, Tag 0096.
-(blueprint: lem-pc-iso-pullback-stalk-cohomology). -/
+Source: Stacks Project, Tag 0096. -/
 def tensorPullbackRestrictIso {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsOpenImmersion j] :
     Scheme.Modules.tensorPullback j ≅ Scheme.Modules.restrictFunctor j :=
   Adjunction.leftAdjointUniq
@@ -39,8 +37,7 @@ def tensorPullbackRestrictIso {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsOpenImmersion 
     (Scheme.Modules.restrictAdjunction j)
 
 /-- Tensor pullback along an isomorphism is an equivalence.
-Source: Stacks Project, Tag 0D5S.
-(blueprint: lem-pc-iso-pullback-stalk-cohomology). -/
+Source: Stacks Project, Tag 0D5S. -/
 instance tensorPullbackIsEquivalence {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j] :
     (Scheme.Modules.tensorPullback j).IsEquivalence := by
   let F := Scheme.Modules.restrictFunctor j
@@ -58,8 +55,7 @@ instance tensorPullbackIsEquivalence {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j] 
   exact Functor.isEquivalence_of_iso (tensorPullbackRestrictIso j).symm
 
 /-- Exact tensor pullback along an isomorphism has an invertible universal counit.
-Source: Stacks Project, Tags 0098 and 0D5S.
-(blueprint: lem-pc-iso-pullback-stalk-cohomology). -/
+Source: Stacks Project, Tags 0098 and 0D5S. -/
 instance isoPullbackCounitIsIso {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j] :
     IsIso (counit j) := by
   let : HasDerivedCategory.{w} Z.Modules := inferInstanceAs
@@ -87,8 +83,7 @@ instance isoPullbackCounitIsIso {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j] :
       infer_instance)
 
 /-- The additive stalk comparison before passing to complexes.
-Source: Stacks Project, Tag 0098.
-(blueprint: lem-pc-iso-pullback-stalk-cohomology). -/
+Source: Stacks Project, Tag 0098. -/
 def isoPullbackAdditiveStalkIso {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j] (y : Y) :
     RingedSpace.moduleStalkFunctor Z.toRingedSpace (j y) ⋙
         forget₂ (ModuleCat.{u} (Z.presheaf.stalk (j y))) AddCommGrpCat.{u} ≅
@@ -101,8 +96,7 @@ def isoPullbackAdditiveStalkIso {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j] (y : 
         forget₂ (ModuleCat.{u} (Y.presheaf.stalk y)) AddCommGrpCat.{u})
 
 /-- Exact forgetting of scalars commutes with homology.
-Source: Stacks Project, Tag 0098; exactness of restriction of scalars.
-(blueprint: lem-pc-iso-pullback-stalk-cohomology). -/
+Source: Stacks Project, Tag 0098; exactness of restriction of scalars. -/
 def complexForgetHomologyIso (R₀ : Type u) [CommRing R₀] (i : ℤ) :
     (forget₂ (ModuleCat.{u} R₀) AddCommGrpCat.{u}).mapHomologicalComplex (.up ℤ) ⋙
         HomologicalComplex.homologyFunctor _ (.up ℤ) i ≅
@@ -115,8 +109,7 @@ def complexForgetHomologyIso (R₀ : Type u) [CommRing R₀] (i : ℤ) :
       (forget₂ (ModuleCat.{u} R₀) AddCommGrpCat.{u}))
 
 /-- The additive derived stalk cohomology functor is induced by ordinary stalk homology.
-Source: Stacks Project, Tag 0098.
-(blueprint: lem-pc-iso-pullback-stalk-cohomology). -/
+Source: Stacks Project, Tag 0098. -/
 def additiveStalkCohomologyFactors (Y : Scheme.{u}) (y : Y) (i : ℤ) :
     DerivedCategory.Q ⋙ comparisonStalkCohomology Y y i ⋙
         forget₂ (ModuleCat.{u} (Y.presheaf.stalk y)) AddCommGrpCat.{u} ≅
@@ -137,8 +130,7 @@ def additiveStalkCohomologyFactors (Y : Scheme.{u}) (y : Y) (i : ℤ) :
       (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (.up ℤ) i)
 
 /-- The universal counit, including the quotient localization factors.
-Source: Stacks Project, Tag 0D5S.
-(blueprint: lem-pc-iso-pullback-stalk-cohomology). -/
+Source: Stacks Project, Tag 0D5S. -/
 def isoPullbackComplexCounitIso {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j] :
     DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ⋙
         derivedPullback j ≅
@@ -162,8 +154,7 @@ def isoPullbackComplexCounitIso {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j] :
 /-- Additive derived stalk cohomology commutes with pullback along a scheme isomorphism.
 The construction lifts the restriction-stalk isomorphism through localization using
 exactness and the specified universal pullback counit.
-Source: Stacks Project, Tags 0098 and 0D5S.
-(blueprint: lem-pc-iso-pullback-stalk-cohomology). -/
+Source: Stacks Project, Tags 0098 and 0D5S. -/
 def isoPullbackStalkCohomologyIso {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j]
     (y : Y) (i : ℤ) :
     comparisonStalkCohomology Z (j y) i ⋙

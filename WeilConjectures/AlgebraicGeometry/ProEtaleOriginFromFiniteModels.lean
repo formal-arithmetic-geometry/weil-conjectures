@@ -42,8 +42,7 @@ private noncomputable def lowerStarRestrictionIso
 /-- Finite constant pro-étale models descend to a finite locally constant étale origin.
 Source: Stacks Project, Tag 099Y, proof of `lemma-compare-locally-constant`.
 The comparison lower star is locally constant on the finite model cover, and its
-comparison counit is an isomorphism after restriction; these local inverses glue.
-(auxiliary; not a blueprint node) -/
+comparison counit is an isomorphism after restriction; these local inverses glue. -/
 theorem etale_origin_of_finite_models
     (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))

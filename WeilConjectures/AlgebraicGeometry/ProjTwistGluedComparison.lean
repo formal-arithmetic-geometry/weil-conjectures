@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineTwist
 # Comparing a Proj twist with a prescribed glued twist
 
 Source: Stacks Project, Constructions, Tags 01MN (1), 01M7 (2),(3).
-(blueprint: lem-sc-p1-proj-twist-glued-comparison)
 -/
 
 @[expose] public section
@@ -32,9 +31,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- For a fixed chart-compatible comparison, every module with the prescribed
 standard generators pulls back to the corresponding Proj twist.
-Source: Stacks Project, Constructions, Tags 01MN (1), 01M7 (2),(3), and
-blueprint lem-sc-p1-proj-shifted-free-twist, chart and overlap steps.
-(blueprint: lem-sc-p1-proj-twist-glued-comparison)
+Source: Stacks Project, Constructions, Tags 01MN (1), 01M7 (2),(3), and, chart and overlap steps.
 
 Proof: on D₊(xᵢ), the sections of the Proj twist are the degree-d fractions,
 and multiplication by xᵢ^(-d) identifies them with the degree-zero ring.

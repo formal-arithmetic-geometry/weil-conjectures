@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.PerfectStalkQuasiIsoDetection
 /-! # Extending a derived stalk isomorphism between existing local perfect models
 
 Source: Stacks Project, Tag 09RE, affine full faithfulness, and Tag 0BC7 (2).
-(blueprint: lem-sc-perfect-stalk-derived-iso-spread).
 -/
 
 @[expose] public section
@@ -72,7 +71,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Existing local perfect models with isomorphic derived stalks are isomorphic nearby.
 
 Source: Stacks Project, Tag 09RE, affine proof, and Tag 0BC7 (2), with Tags 00CR and 06Z0.
-(blueprint: lem-sc-perfect-stalk-derived-iso-spread).
 
 Proof:
 1. Intersect U with the neighbourhood V supplied for Q(G), and take an affine

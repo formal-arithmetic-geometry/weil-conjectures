@@ -15,9 +15,6 @@ import WeilConjectures.AlgebraicGeometry.FieldFibreHomology
 import WeilConjectures.AlgebraicGeometry.FieldComplexHomotopyNormalForm
 
 /-! # Homotopy normal form of a field fibre of single locally free cohomology
-
-Source: blueprint lem-pc-perfect-locus, proof step 4.
-(blueprint: lem-pc-finite-free-single-field-fibre)
 -/
 
 @[expose] public section
@@ -28,9 +25,6 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Homotopy normal form of a field fibre of single locally free cohomology.
-
-Source: blueprint lem-pc-perfect-locus, proof step 4.
-(blueprint: lem-pc-finite-free-single-field-fibre).
 
 Proof: The support bound makes negative cohomology zero. With the assumed
 nonnegative vanishing, truncation identifies P in the derived category with its

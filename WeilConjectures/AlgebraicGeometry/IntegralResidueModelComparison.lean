@@ -19,7 +19,6 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 /-! # The normalized common first residue in constant-ring coordinates
 
 Source: Stacks Tags 099L, 099M and 06YY, integral-models proof (1)--(2).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -351,8 +350,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralReductionSiteEssentiallySmall
   WeilConjectures.integralOperationsSiteSmall in
 /-- Tensoring internal modules preserves the small colimits used in totalization.
-Source: closedness of internal modules, Stacks Tag 03EK
-(auxiliary; not a blueprint node).
+Source: closedness of internal modules, Stacks Tag 03EK.
 Proof: closedness makes left tensor a left adjoint; symmetry identifies right tensor with it.
 -/
 theorem residueTensorColimits (X : Scheme.{u})
@@ -382,8 +380,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralReductionSiteEssentiallySmall
   WeilConjectures.integralOperationsSiteSmall in
 /-- Internal modules admit functorial flat resolutions with the specified scalar structure.
-Source: the free-module flat resolution, Stacks Tag 06YS
-(auxiliary; not a blueprint node).
+Source: the free-module flat resolution, Stacks Tag 06YS.
 Proof: apply the existing internal-module construction to flat resolutions of abelian sheaves.
 -/
 theorem residueFlatResolution (X : Scheme.{u})
@@ -398,8 +395,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralReductionSiteEssentiallySmall
   WeilConjectures.integralOperationsSiteSmall in
 /-- Scalar extension preserves quasi-isomorphisms between K-flat internal complexes.
-Source: derived scalar extension, Stacks Tag 06YY
-(auxiliary; not a blueprint node).
+Source: derived scalar extension, Stacks Tag 06YY.
 Proof: apply the existing internal-module scalar-extension theorem with these scalar objects.
 -/
 theorem residueExtensionKFlat (X : Scheme.{u})
@@ -420,8 +416,7 @@ theorem residueExtensionKFlat (X : Scheme.{u})
   exact ‹IsCommMonObj S›
 
 /-- The normalized quotient equivalence, oriented from the lifted original residue ring.
-Source: the existing integralCoefficientULift, normalized on quotient representatives
-(auxiliary; not a blueprint node). -/
+Source: the existing integralCoefficientULift, normalized on quotient representatives. -/
 def integralResidueScalarEquiv (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
     ULift.{u + 1} (Padic.coefficientExtensionRing l E 1) ≃+*
@@ -447,7 +442,6 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 model. No constructibility, Tor condition, completeness, or etale-origin hypothesis occurs.
 
 Source: Stacks Tags 099L, 099M and 06YY; integral-models proof (1)--(2).
-(auxiliary; not a blueprint node).
 
 Proof: the quotient ring equivalence integralResidueScalarEquiv sends the lifted class
 of x to the class of its lift. Its representative formula makes the first quotient square

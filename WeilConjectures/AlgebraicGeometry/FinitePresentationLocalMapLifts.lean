@@ -19,7 +19,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 /-! # Affine local lifts of fixed-model maps
 
 Source: Stacks Project, Limits, Tag 01ZR, first proof.
-(blueprint: lem-pc-fp-local-map-lifts).
 -/
 
 @[expose] public section
@@ -36,7 +35,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 This statement imposes no overlap equations on the lifted components.
 Source: Stacks Project, Limits, Tag 01ZR, first proof, affine map lifting;
 Algebra, Tag 05N7 (2).
-(blueprint: lem-pc-fp-local-map-lifts).
 
 Proof: Choose a finite affine cover of Xj, using quasi-compactness over Spec Rj.
 Its inverse images at later stages and at the limit are affine. On a chart,

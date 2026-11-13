@@ -14,8 +14,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteCompari
 
 /-! # The sectionwise image of extension by zero
 
-Source: Stacks Project, Tag 0F4Y
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 0F4Y.
 -/
 
 @[expose] public section
@@ -152,7 +151,6 @@ private theorem properSupport_stalk_outside_zero
 support is proper over the target.
 
 Source: Stacks Project, Tag 0F4Y, specialized to open immersions.
-(auxiliary; not a blueprint node)
 
 Proof:
 On an etale object factoring through the open, its fibre-product projection to that

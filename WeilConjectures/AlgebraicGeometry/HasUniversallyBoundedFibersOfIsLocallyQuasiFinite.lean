@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 /-!
 # Universally bounded fibres from a quasi-compact source
 
-Source: Stacks Project, Morphisms, Lemma Tag 03JA and Definition Tag 03J4
-(blueprint: lem-weil-pbc-lqf-qc-source-bounded-fibres).
+Source: Stacks Project, Morphisms, Lemma Tag 03JA and Definition Tag 03J4.
 -/
 
 @[expose] public section
@@ -96,8 +95,7 @@ private theorem bounds_of_open_cover {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- A locally quasi-finite morphism whose source is quasi-compact has a single nonnegative
 bound on the degrees of all its finite scheme-theoretic fibres.
-Source: Stacks Project, Morphisms, Lemma Tag 03JA and Definition Tag 03J4
-(blueprint: lem-weil-pbc-lqf-qc-source-bounded-fibres).
+Source: Stacks Project, Morphisms, Lemma Tag 03JA and Definition Tag 03J4.
 
 Proof outline, following the six steps of the node:
 1. Choose a finite affine open cover `Uᵢ` of `X` and affine opens `Vᵢ` of `Y` with

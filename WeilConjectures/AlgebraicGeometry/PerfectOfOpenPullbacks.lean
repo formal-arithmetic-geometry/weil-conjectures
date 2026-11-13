@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.OpenPerfectModelTransport
 
 /-! # Perfectness detected on open neighbourhoods
 
-Source: Stacks Project, Tag 08CM, definition-perfect
-(blueprint: lem-pc-perfect-of-open-pullbacks).
+Source: Stacks Project, Tag 08CM, definition-perfect.
 -/
 
 @[expose] public section
@@ -87,8 +86,7 @@ between module sheaves on open subschemes and on localized sites identify succes
 restrictions with restriction to V. They preserve finite free modules, their retract
 maps and zero terms. Transport the local representative and its isomorphism across
 these equivalences. This gives precisely the witness at x in S.IsPerfect K.
-The empty scheme is vacuous and no uniform bound or quasi-compactness is required.
-(blueprint: lem-pc-perfect-of-open-pullbacks). -/
+The empty scheme is vacuous and no uniform bound or quasi-compactness is required. -/
 theorem perfect_of_open_pullbacks
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

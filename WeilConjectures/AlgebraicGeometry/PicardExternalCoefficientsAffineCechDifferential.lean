@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.PicardExternalCoefficientsAffine
 /-! # Differential compatibility of normalized external Cech term maps
 
 Source: Stacks Project, Tag 0BED, lemma-kunneth, affine-open paragraph.
-(blueprint: lem-sc-picard-external-coefficients-affine-cech-differential).
 -/
 
 @[expose] public section
@@ -70,7 +69,6 @@ with the Cech differentials. This uses no affine or quasi-coherent hypotheses an
 asserts no existence or invertibility of a degreewise comparison.
 Source: Stacks Project, Tag 0BED, lemma-kunneth, affine-open Cech calculation;
 Tag 01CD, lemma-tensor-product-pullback, and pullback-unit naturality.
-(blueprint: lem-sc-picard-external-coefficients-affine-cech-differential).
 
 Proof: Project the proposed differential square to a tuple of length n+2.
 The native Cech differential is the finite alternating sum of face restrictions.

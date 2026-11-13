@@ -19,8 +19,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
 
 The projection-normalized coefficient constructions are independent of the
 stratified-perfect theorem and its geometric hypotheses.
-Source: Bhatt--Scholze, Section 6.5
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Section 6.5.
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +34,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The quotient coefficient identification induced by the canonical valuation-ring lift.
 The normalization on representatives determines the equivalence uniquely. The source
 uses the recorded valuation ring lifted to the small site's coefficient universe.
-Source: blueprint coefficient conventions, order 411; Bhatt--Scholze, Section 6.5
-(auxiliary; not a blueprint node).
+Source: blueprint coefficient conventions, order 411; Bhatt--Scholze, Section 6.5.
 Proof: ULift.down is a ring equivalence from the recorded lifted valuation ring to the
 original valuation ring. It sends the recorded lifted uniformizer to the original
 uniformizer, and hence identifies their principal ideals and every positive power.
@@ -73,8 +71,7 @@ theorem integralCoefficientULift_exists
       rfl)
 
 /-- The uniquely normalized quotient equivalence, not an arbitrary field identification.
-Source: blueprint coefficient conventions, order 411; Bhatt--Scholze, Section 6.5
-(auxiliary; not a blueprint node). -/
+Source: blueprint coefficient conventions, order 411; Bhatt--Scholze, Section 6.5. -/
 def integralCoefficientULift
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (n : ℕ) :=
@@ -82,8 +79,7 @@ def integralCoefficientULift
 
 /-- The finite-level coefficient isomorphism: undo the normalized functions-sheaf
 presentation, apply the quotient lift and forget commutativity.
-Source: Bhatt--Scholze, Definition 6.5.1
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Definition 6.5.1. -/
 def integralDetailedLevelComparison
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :
@@ -97,8 +93,7 @@ def integralDetailedLevelComparison
 
 /-- The unique completed coefficient comparison compatible with every finite projection.
 This keeps the detailed definition's actual ring and positive reduction functors.
-Source: Bhatt--Scholze, Definition 6.5.1
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Definition 6.5.1.
 Proof: the normalized finite-level comparisons commute with transitions, as can be
 checked on residue representatives. Apply the limit universal property. Forgetting
 commutativity preserves limits, so both rings are limits of the same quotient system.
@@ -188,16 +183,14 @@ theorem integralDetailedCoefficientComparison_exists
     rfl
 
 /-- Canonical ring comparison, chosen from its unique projection normalization.
-Source: Bhatt--Scholze, Definition 6.5.1
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Definition 6.5.1. -/
 def integralDetailedCoefficientComparison
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :=
   (integralDetailedCoefficientComparison_exists T l E).exists.choose
 
 /-- Scalar restriction along this canonical ring isomorphism is exact.
-Source: Bhatt--Scholze, Section 6.5; Stacks Tag 03DA
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Section 6.5; Stacks Tag 03DA.
 Proof: restriction changes only the scalar action. Restriction along the inverse
 is its inverse equivalence. Finite limits and colimits are unchanged on underlying
 additive sheaves, and therefore preserved. -/

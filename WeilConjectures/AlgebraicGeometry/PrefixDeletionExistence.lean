@@ -253,8 +253,7 @@ the two smaller permutations. The prefix lengths also recover each other.
 Thus the maps are inverse and define the required equivalence. By construction
 a=b+1 and τ(r)=j. For p=0 the smaller permutations are identities; the argument
 also includes b=0 and b=p. Equal t-values use the original label as tie breaker;
-an empty I admits no input tuple.
-(blueprint: new-prefix-deletion-existence) -/
+an empty I admits no input tuple. -/
 theorem prefixDeletionExistence {I : Type v} [LinearOrder I] (p : ℕ)
     (t : Fin (p + 2) → I) :
     ∃ e : ({x : Equiv.Perm (Fin (p + 2)) × Fin (p + 2) ×

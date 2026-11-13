@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedFunctorComparisons
 /-! # Projection mate transport along scheme isomorphisms
 
 Source: Stacks Project, Tag 08EU, affine-local reduction, expanded along scheme isomorphisms.
-(blueprint: lem-pc-projection-mate-scheme-iso-transport).
 -/
 
 @[expose] public section
@@ -311,14 +310,13 @@ set_option backward.isDefEq.respectTransparency.types false in
 isomorphisms, without any invertibility assumption on that mate.
 Source: Stacks Project, perfect.tex, Tag 08EU, first sentence of its proof;
 the scheme-isomorphism comparison part of the parent transport argument.
-(blueprint: lem-pc-projection-mate-scheme-iso-transport).
 
 Proof: Use exists_scheme_iso_derived_equivalence for eY and eX to obtain
 exact isomorphism pushforward equivalences a and b with their localization
 comparisons. The separate geometric theorem schemeIso_derived_functor_comparisons
 supplies binary tensor comparisons τa and τb and natural isomorphisms
-α : a followed by Lf* = Lg* followed by b and
-β : Rg* followed by a = b followed by Rf*.
+α: a followed by Lf* = Lg* followed by b and
+β: Rg* followed by a = b followed by Rf*.
 
 Construct q by transporting p's Hom equivalence through the fully faithful
 functors a and b: the image under a of q.homEquiv(k) is

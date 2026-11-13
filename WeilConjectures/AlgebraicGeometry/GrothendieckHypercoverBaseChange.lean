@@ -10,8 +10,6 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.AlgebraicGeometry.TruncatedFiniteSplitEtaleDiagram
 
 /-! # Base change of finite split étale hypercovers
-
-Source: the finite-cochain argument of the blueprint étale cohomology continuity lemma.
 -/
 
 @[expose] public section
@@ -23,14 +21,13 @@ namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Base change preserves the splitting, matching objects and matching covers.
-Source: blueprint étale cohomology continuity, detailed proof paragraph 2.
+
 Finite étale coproduct cofans remain colimiting under base change. Each finite-presentation qcqs
 constituent stays finite-presentation and qcqs over the qcqs new base. The map-pullback adjunction
 transfers the universal property of each matching object; naturality transfers its projection
 equations. Matching covers remain covers under base change. Apply the inverse-image unit to obtain
 the cosimplicial section map, alternating cochain map, and homology map. Unit naturality proves
-refinement compatibility.
-(auxiliary; not a blueprint node) -/
+refinement compatibility. -/
 noncomputable def baseChange {X Y : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
     (U : FiniteSplitEtaleHypercover Y) (f : X ⟶ Y) : FiniteSplitEtaleHypercover X where

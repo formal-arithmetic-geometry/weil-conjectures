@@ -63,8 +63,7 @@ natural isomorphisms; no scalar coordinates or arbitrary witness are chosen.
 Zero homology groups need no cancellation of elements. Empty opens have no z,
 and top opens specialize to ordinary naturality of these same factors.
 Source: Stacks Project, Tags 08HY and 08DW (exact localization); the exact functor
-factorization equations and Mathlib homology naturality.
-(blueprint: lem-pc-open-ordinary-tensor-germ-equation). -/
+factorization equations and Mathlib homology naturality. -/
 theorem openOrdinaryTensor_germ_transport_equation
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

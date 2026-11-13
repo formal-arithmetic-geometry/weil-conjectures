@@ -105,8 +105,7 @@ Its spectrum is the base change of Y to E and hence is integral. Every map from
 a field spectrum to Spec K is such a field extension. Thus q is geometrically
 integral, implying both geometric irreducibility and geometric reducedness.
 The integral hypotheses exclude empty spectra and ensure the fraction rings
-are fields. No normality, smoothness or perfection assumption is needed.
-(blueprint: lem-sbc-field-fraction-ring-geometric-integrality) -/
+are fields. No normality, smoothness or perfection assumption is needed. -/
 theorem geometrically_integral_of_fractionRing_equiv
     {K : Type u} [Field K] {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y]
     [IsIntegral X] [IsIntegral Y]

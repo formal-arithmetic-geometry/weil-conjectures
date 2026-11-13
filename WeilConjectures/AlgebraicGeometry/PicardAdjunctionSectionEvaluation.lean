@@ -12,7 +12,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 /-! # Evaluation of a pullback adjunction on the unit section
 
 Source: Stacks Project, Tags 08HY and 0D5S; the unit formula for adjunctions.
-(blueprint: lem-sc-picard-adjunction-section-evaluation)
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Evaluation of the transpose of a unit morphism agrees with restriction to top.
 Source: Stacks Project, Tags 08HY and 0D5S; the adjunction unit formula.
-(blueprint: lem-sc-picard-adjunction-section-evaluation)
 Proof: By right naturality of the Hom equivalence, the transpose of e followed by n
 is the structure-sheaf map followed by pushforward of n. The structure-sheaf map
 preserves 1. Naturality of n for the inclusion of top into the inverse image of top

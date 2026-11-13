@@ -13,8 +13,7 @@ public import Mathlib.CategoryTheory.Localization.Bifunctor
 
 /-! # Descent of bifunctor isomorphisms from K-flat models
 
-Source: Stacks Project, Cohomology, Tag 079U and Section 20.27
-(blueprint: lem-pc-kflat-bifunctor-iso-descent).
+Source: Stacks Project, Cohomology, Tag 079U and Section 20.27.
 -/
 
 @[expose] public section
@@ -57,7 +56,6 @@ local instance kFlatBifunctorDescentModuleResolutions (S : Scheme.{uModel}) :
 /-- A natural isomorphism on K-flat representatives extends to derived bifunctors.
 Source: Stacks Project, Cohomology, Tag 06YH and section-derived-pullback, the
 localization argument of Tag 079U; Mathlib localization of bifunctors.
-(blueprint: lem-pc-kflat-bifunctor-iso-descent).
 
 Proof: take the full subcategory of K-flat cochain complexes. Its inclusion followed
 by Q is a localization at quasi-isomorphisms: functorial flat resolutions give an

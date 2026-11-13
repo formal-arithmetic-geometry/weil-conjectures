@@ -12,8 +12,7 @@ import WeilConjectures.Algebra.Homology.DerivedOpenShriekAdjunction
 import Mathlib.CategoryTheory.Monad.Adjunction
 
 /-! # Invertibility of the transported derived open extension unit
-Source: Stacks Project, Tags 00A7, 08BS and 06YB.
-(blueprint: lem-pc-open-extension-derived-unit-isiso). -/
+Source: Stacks Project, Tags 00A7, 08BS and 06YB. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -46,8 +45,7 @@ left adjoint to the prescribed R. Its unit is invertible. The left-adjoint
 uniqueness isomorphism from J₀ to any J identifies the two units, so invertibility
 passes to the unit of the supplied adjunction. Empty and total opens are already
 covered by the ordinary unit theorem; the derived construction uses precisely the
-specified localization universes and the standard localization on U.toScheme.
-(blueprint: lem-pc-open-extension-derived-unit-isiso). -/
+specified localization universes and the standard localization on U.toScheme. -/
 theorem openExtension_derived_unit_isIso (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (U : X.Opens)

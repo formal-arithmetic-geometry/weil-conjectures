@@ -8,9 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerSystem
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantUnitComp
 
 /-! # The constant-object unit as an ordinary adjunction unit
-
-Source: blueprint thm-amb-p1-adjunction, canonical pullback counits.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -35,8 +32,6 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
 
 /-- The ordinary constant-object unit is the adjunction unit followed by direct
 image of the constant-object pullback comparison.
-Source: blueprint thm-amb-p1-adjunction, substitution of canonical pullback
-counits (auxiliary; not a blueprint node).
 
 Proof: apply the existing supportedDerivedUnit_eq for ordinaryFiniteAdjunction.
 Unfold only this recorded adjunction wrapper; its value is the specified etale

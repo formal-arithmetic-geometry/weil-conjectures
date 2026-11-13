@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.FieldScalarExtensionMono
 
 Source: Stacks Project, Cohomology, Tag 02N5; Modules, Tag 02N4;
 Homology, Tag 015Z.
-(blueprint: lem-sc-field-scalar-restriction-injectives).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace SheafOfModules
 
 Source: Stacks Project, Cohomology, Tag 02N5; Modules, Tag 02N4;
 Homology, Tag 015Z.
-(blueprint: lem-sc-field-scalar-restriction-injectives).
 
 Proof: construct the map from the constant ring presheaf k to R by restricting α
 from the terminal open. Regard vector-valued presheaves as modules over that

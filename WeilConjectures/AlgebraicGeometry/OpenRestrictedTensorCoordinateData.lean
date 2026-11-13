@@ -145,8 +145,7 @@ identified. This proves the final equation. No localizedComparison or source
 base-derived tensor cohomology is involved in this statement.
 For the empty open there is no z; top opens, zero rings and zero complexes use
 exactly the same germ and tensor identities.
-Source: Stacks Project, Tag 0098; Mathlib restrictStalkNatIso and its germ formulas.
-(blueprint: lem-pc-open-restricted-tensor-coordinate-data). -/
+Source: Stacks Project, Tag 0098; Mathlib restrictStalkNatIso and its germ formulas. -/
 theorem exists_openRestricted_tensor_coordinate_data
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

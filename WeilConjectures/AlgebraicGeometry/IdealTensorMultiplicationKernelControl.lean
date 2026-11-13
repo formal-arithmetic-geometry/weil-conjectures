@@ -23,7 +23,6 @@ import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 /-! # Coherence and annihilation of the ideal tensor multiplication kernel
 
 Source: Stacks Project, Tag 01YB, second Artin-Rees argument.
-(blueprint: lem-pc-ideal-tensor-multiplication-kernel-control)
 -/
 
 @[expose] public section
@@ -198,7 +197,6 @@ set_option backward.isDefEq.respectTransparency false in
 annihilated by the same ideal power.
 Source: Stacks Project, Tag 01YB, the short exact sequence preceding the second
 Artin-Rees application; Tags 01XZ and 01Y0 for coherence.
-(blueprint: lem-pc-ideal-tensor-multiplication-kernel-control)
 
 Proof: On an affine open, the ideal power is a finite module over a Noetherian ring,
 and the sections of H are finite. Their tensor product is finite. The affine tensor

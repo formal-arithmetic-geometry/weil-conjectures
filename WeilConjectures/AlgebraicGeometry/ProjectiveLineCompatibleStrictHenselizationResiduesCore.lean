@@ -38,7 +38,6 @@ original integral geometric points. The residue maps are universal homeomorphism
 
 Source: Stacks Project, Tags 04HX and 03PS, functoriality Tag 04GU, and the last two
 paragraphs of the proof of Tag 095T; topological invariance Tag 04DY.
-(blueprint: compatible-strict-henselization-residues-core).
 
 Proof: take the coordinate-ring colimits of the affine pointed neighbourhoods at
 s and t, and use their spectra for eA and eB. Tag 04HX identifies each as a strictly
@@ -102,7 +101,6 @@ theorem Etale.projectiveLine_compatibleStrictHenselizationResidues_core
 
 /-- A compatible local map can be chosen to induce the specified geometric residue square.
 Source: Stacks Project, Tags 04GU and 04HX.
-(blueprint: compatible-strict-henselization-residue-square).
 
 Proof: first use residue-image containment to construct the unique embedding r whose
 composite with the injective map κB → k' equals κA → k → k'. Prove its ring laws

@@ -13,7 +13,6 @@ public import Mathlib.RingTheory.RingHom.FinitePresentation
 /-! # Finite presentation models for affine morphism stalks
 
 Source: Stacks Project, Tags 00R7 and 00RH, the essentially finitely presented stalk algebras.
-(blueprint: lem-sbc-finite-presentation-stalk-localization-model)
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ localization transitivity makes S a localization of P at the image of B minus q.
 The localization universal property defines both algebra structures. Check their
 composite against the original stalk map on germs from A; localization extensionality
 and the germ-stalk-map equation give the required scalar tower.
-Source: Stacks Project, Tag 00RH, application of Tag 00R7 to localized affine algebras.
-(blueprint: lem-sbc-finite-presentation-stalk-localization-model) -/
+Source: Stacks Project, Tag 00RH, application of Tag 00R7 to localized affine algebras. -/
 theorem exists_finitePresentation_stalk_localization_model
     {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (g : X ⟶ Y)
     [LocallyOfFinitePresentation g] (x : X) :

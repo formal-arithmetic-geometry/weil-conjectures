@@ -17,7 +17,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 /-! # Pullback of coherent formal systems
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 0887 and the completion identity
-in the proof of Lemma 088B (blueprint: lem-weil-pbc-formal-systems-pullback).
+in the proof of Lemma 088B.
 -/
 
 @[expose] public section
@@ -181,16 +181,13 @@ private def completionPullbackIso {X Y : Scheme.{u}}
 commutes naturally with completion. On an open subscheme it is restriction, and restriction
 commutes naturally with completion with respect to the restricted ideal.
 
-Source: Stacks, Lemma 0887 and proof of Lemma 088B
-(blueprint: lem-weil-pbc-formal-systems-pullback).
+Source: Stacks, Lemma 0887 and proof of Lemma 088B.
 
 Proof (the seven steps of the node):
 1. The extended ideal is `J.comap f`. By lem-weil-pbc-module-pullback-ideal-quotient,
    extension commutes with powers and pullback of G/J^n G is f*G/I^n f*G, naturally in G.
 2. Each pulled-back term is quasi-coherent and of finite type, hence coherent on the
-   locally Noetherian source (pqf-lem-coherent-ft-locnoeth,
-   lem-weil-pbc-module-pullback-quasi-coherent,
-   lem-weil-pbc-support-pullback-finite-type).
+   locally Noetherian source.
 3. J^n G_n = 0 makes the quotient projection an isomorphism. Its pullback is an
    isomorphism whose kernel is I^n f*G_n, so that product is zero.
 4. Factor each transition through the quotient isomorphism in step 1 and the pullback
@@ -201,12 +198,9 @@ Proof (the seven steps of the node):
    the quotient projection, use the defining equations, and cancel the epimorphism.
    Their componentwise inverses give an isomorphism of systems. Naturality of the
    quotient comparisons makes this an isomorphism of completion functors.
-7. For an open immersion tensor pullback is naturally restriction
-   (lem-weil-pbc-open-immersion-module-pullback-restriction). The structure-sheaf
-   comparison identifies the extended ideal with the restricted ideal
-   (lem-weil-pbc-module-pullback-structure-sheaf, def-nagata-extended-ideal).
-   Restriction preserves cokernels and ideal products
-   (lem-weil-pbc-ideal-times-quasi-coherent-affine-sections), giving the final comparison.
+7. For an open immersion tensor pullback is naturally restriction. The structure-sheaf
+   comparison identifies the extended ideal with the restricted ideal.
+   Restriction preserves cokernels and ideal products, giving the final comparison.
 
 The equations with the full-subcategory inclusions specify both objects and morphisms
 of the two functors; thus the existential functors cannot be arbitrary functors.

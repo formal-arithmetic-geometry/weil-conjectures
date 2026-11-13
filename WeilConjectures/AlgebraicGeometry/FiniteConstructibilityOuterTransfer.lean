@@ -204,8 +204,6 @@ private theorem finite_bounded_triangle
 
 /-- The middle vertex of the native quotient-linear distinguished triangle is bounded
 constructible when both original outer complexes are.
-Source: blueprint latest, integral-finite-levels, first paragraph.
-(blueprint: lem-pe-finite-constructibility-outer-transfer).
 
 Proof: positive native quotients are finite and discrete. Their consecutive transition
 maps commute with pointwise constant sections, so normalized finite scalar restriction

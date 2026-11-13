@@ -12,10 +12,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 /-!
 # Bounded constructibility of finite-type direct images
 
-Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/`
-`thm-dg-finite-type-constructibility.md`
-(blueprint: thm-dg-finite-type-constructibility).
-
 The ordinary derived direct image preserves bounded constructibility, without a
 separatedness hypothesis on the morphism.
 -/
@@ -30,9 +26,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- Direct image for a morphism of finite-type schemes over a field preserves bounded
 constructible complexes with finite allowable commutative coefficients.
-Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/`
-`thm-dg-finite-type-constructibility.md`
-(blueprint: thm-dg-finite-type-constructibility).
 
 Proof:
 1. Finite-type schemes over a field are Noetherian, using
@@ -51,8 +44,7 @@ clause (5) of `lem-weil-derived-direct-image-composition` to obtain bounded cons
 intersection direct images. Empty intersections give zero.
 3. Apply the finite alternating Cech resolution to the injective representative.
 Insertion of a cover index contracts each augmented row locally. Restriction preserves
-injectives and open direct image preserves them by its exact left adjoint
-(`def-weil-pbc-inverse-image`). Finite sums preserve injectivity. Splitting successive
+injectives and open direct image preserves them by its exact left adjoint. Finite sums preserve injectivity. Splitting successive
 monomorphisms makes each augmented row split exact, hence exact after direct image.
 The total augmentation is a quasi-isomorphism: eliminate successive lowest vertical
 components using horizontal exactness, terminating in the finite horizontal range.

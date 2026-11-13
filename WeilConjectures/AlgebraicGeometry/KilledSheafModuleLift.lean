@@ -26,7 +26,6 @@ namespace AlgebraicGeometry
 
 Source: Stacks Project, Tag 095T, passage to Z/ell-module sheaves, and the sectionwise
 construction implicit in Tag 03RW; Mathlib `AddCommGroup.zmodModule`.
-(blueprint: lem-weil-pbc-killed-sheaf-module-lift)
 
 Proof: evaluate `n • id = 0` at each object and section. The section groups therefore
 carry the canonical Z/n-action, with a lifted scalar acting by its underlying residue.

@@ -17,7 +17,6 @@ import Mathlib.AlgebraicGeometry.Modules.Tilde
 /-! # Affine comparison with the constant global-sections tensor presheaf
 
 Source: Stacks Project, Varieties, Tag 0BED, affine-open degree-zero calculation.
-(blueprint: lem-sc-picard-external-coefficients-pushforward-tensor-comparison).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ set_option autoImplicit false
 /-- Compare the external direct image with the tensor presheaf, without choosing a basis.
 Source: Stacks Project, Varieties, Tag 0BED, first isomorphism in the ordinary
 pushforward calculation, restricted to affine opens.
-(blueprint: lem-sc-picard-external-coefficients-pushforward-tensor-comparison).
 
 Proof: On an affine V, the identity-functor presheaf pullback defining scalar extension
 is computed sectionwise. Its value is O_Y(V) tensor_k Gamma(X,F). Tensoring this over

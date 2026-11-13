@@ -17,9 +17,7 @@ public import Mathlib.CategoryTheory.Sites.Sheafification
 /-!
 # Higher direct images as sheafified cohomology presheaves
 
-Source: Stacks Project, Lemma Tag 072W (lemma-higher-direct-images), and Section 21.2
-(equation-cohomology-object-site)
-(blueprint: lem-weil-pbc-higher-direct-image-sheafified-presheaf).
+Source: Stacks Project, Lemma Tag 072W, and Section 21.2.
 -/
 
 @[expose] public section
@@ -37,8 +35,7 @@ lem-weil-pbc-injective-module-abelian-acyclic), and the restriction along `U' �
 derived map `NatTrans.rightDerived` of evaluation restriction, i.e. the map induced on
 `H^q` by the restriction maps `I^•(U) ⟶ I^•(U')` of an injective resolution of `F`.
 
-Source: Stacks Project, Lemma Tag 072W and Section 21.2, equation-cohomology-object-site
-(blueprint: lem-weil-pbc-higher-direct-image-sheafified-presheaf).
+Source: Stacks Project, Lemma Tag 072W and Section 21.2, equation-cohomology-object-site.
 
 Proof:
 1. Choose an injective resolution `R` of `F`, using the Grothendieck property of

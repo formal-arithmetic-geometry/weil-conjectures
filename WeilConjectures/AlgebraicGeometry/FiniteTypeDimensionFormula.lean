@@ -26,7 +26,7 @@ of `X` at `x` is the dimension of the stalk plus the transcendence degree of the
 ## Main results
 
 - `AlgebraicGeometry.topologicalKrullDimAt_eq_stalk_dimension_add_residue_trdeg`: the dimension
-  formula (blueprint `lem-kun-dimension-formula`). It is deduced from the affine case
+  formula. It is deduced from the affine case
   `AlgebraicGeometry.topologicalKrullDimAt_eq_ringKrullDim_add_trdeg`.
 -/
 
@@ -38,7 +38,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- **The dimension formula** (Stacks Project, Tag 02FX; blueprint `lem-kun-dimension-formula`):
+/-- **The dimension formula** (Stacks Project, Tag 02FX):
 for a finite type `K`-scheme, the local topological dimension at `x` equals the dimension
 of its stalk plus the transcendence degree of its residue field. The residue-field algebra
 is the canonical one induced by the structure morphism. `Cardinal.toENat` preserves each

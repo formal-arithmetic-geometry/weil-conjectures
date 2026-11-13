@@ -13,8 +13,7 @@ import Mathlib.LinearAlgebra.Matrix.Nonsingular
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Vanishing of a bottom differential with full-rank kernel
-Source: Stacks Project, Tags 0BDL and 0EWY.
-(blueprint: lem-sc-finite-free-bottom-differential-zero). -/
+Source: Stacks Project, Tags 0BDL and 0EWY. -/
 
 @[expose] public section
 
@@ -94,7 +93,6 @@ private theorem free_zero_of_square_mono {X : Scheme.{u}} (r n : ℕ)
 /-- A finite-free bottom term and locally free bottom homology of the same rank
 force the outgoing differential to vanish.
 Source: Stacks Project, Tag 0BDL, matrix-chart proof; Tag 0EWY.
-(blueprint: lem-sc-finite-free-bottom-differential-zero).
 
 Proof: The term in degree a-1 is zero, so homology in degree a is the kernel
 of d^a. Cover X by opens trivializing this locally free kernel. On each such

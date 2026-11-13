@@ -18,7 +18,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 # Regular sections and transverse direct sums
 
 Source: Stacks Project, Tags 067M, 01WY, 01M2, 01LW and 01LX; purity blueprint,
-localized top Chern class, statement and (L3) (blueprint: def-pur-regular-section).
+localized top Chern class, statement and (L3).
 
 The module starts with an actual global section of F. Its evaluation on the ordinary sheaf
 dual defines the map to Spec Sym(F dual). The affine characterization determines this map
@@ -40,7 +40,7 @@ noncomputable section
 namespace AlgebraicGeometry
 
 /-- Evaluation at a global section, using the ordinary sheaf-Hom bidual map.
-Source: Stacks Tag 01M2; purity section convention (blueprint: def-pur-regular-section). -/
+Source: Stacks Tag 01M2; purity section convention. -/
 def regularSectionEvaluation {T : Scheme.{u}} (F : T.Modules) (s : F.sections) :
     Scheme.Modules.dual F ⟶ SheafOfModules.unit T.ringCatSheaf :=
   SheafOfModules.homObjSectionsEquiv (Scheme.Modules.dual F)
@@ -202,7 +202,7 @@ variable (P : WeilConjectures.PurityFiniteSetting.{u})
   [IsSeparated hT] [LocallyOfFiniteType hT] [QuasiCompact hT]
 
 /-- E(F) is the canonical relative spectrum of Sym(F dual), with its canonical zero section.
-Source: Stacks Tag 01M2 (blueprint: def-pur-regular-section). -/
+Source: Stacks Tag 01M2. -/
 def regularSectionBundle (F : T.Modules) (r : ℕ) [F.IsFiniteLocallyFreeOfRank r] :
     PurityVectorBundle P T hT r where
   E := @VectorBundleZeroSection.scheme T (isNoetherian_of_locallyOfFiniteType hT) r
@@ -216,8 +216,7 @@ def regularSectionBundle (F : T.Modules) (r : ℕ) [F.IsFiniteLocallyFreeOfRank 
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical map into E(F) exists uniquely and has the evaluation ring map on every
-relative-Spec affine chart. Source: Stacks Tags 01LW and 01LX
-(blueprint: def-pur-regular-section).
+relative-Spec affine chart. Source: Stacks Tags 01LW and 01LX.
 Proof: extend evaluation by the symmetric-algebra universal property. The relative-Spec
 anti-equivalence sends this algebra morphism to a morphism over T. Its affine-chart clause
 identifies the restriction with Spec of SymmetricAlgebra.lift of evaluation, using the affine
@@ -243,28 +242,28 @@ theorem regularSectionGeometric_existsUnique (F : T.Modules) (r : ℕ)
 
 /-- The geometric section determined by dual evaluation, chosen from its unique affine
 characterization, not from an unconstrained existence statement.
-Source: Stacks Tags 01M2 and 01LX (blueprint: def-pur-regular-section). -/
+Source: Stacks Tags 01M2 and 01LX. -/
 def regularSectionGeometric (F : T.Modules) (r : ℕ) [F.IsFiniteLocallyFreeOfRank r]
     (s : F.sections) : {f : T ⟶ (regularSectionBundle P T hT F r).E //
       f ≫ (regularSectionBundle P T hT F r).p = 𝟙 T} :=
   (regularSectionGeometric_existsUnique P T hT F r s).exists.choose
 
 /-- The zero scheme is the fibre product of the evaluation section with the zero section.
-Source: Stacks Tag 067M (blueprint: def-pur-regular-section). -/
+Source: Stacks Tag 067M. -/
 def regularSectionZeroScheme (F : T.Modules) (r : ℕ) [F.IsFiniteLocallyFreeOfRank r]
     (s : F.sections) : Scheme.{u} :=
   pullback (regularSectionGeometric P T hT F r s).val
     (regularSectionBundle P T hT F r).zeroSection
 
 /-- The zero-scheme projection to the base.
-Source: Stacks Tag 067M (blueprint: def-pur-regular-section). -/
+Source: Stacks Tag 067M. -/
 def regularSectionZeroProjection (F : T.Modules) (r : ℕ) [F.IsFiniteLocallyFreeOfRank r]
     (s : F.sections) : regularSectionZeroScheme P T hT F r s ⟶ T :=
   pullback.fst _ _
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Regularity is regularity of the component germs in an actual local frame of F.
-Source: Stacks Tags 067M and 01WY (blueprint: def-pur-regular-section). -/
+Source: Stacks Tags 067M and 01WY. -/
 def IsRegularSection (F : T.Modules) (r : ℕ) [F.IsFiniteLocallyFreeOfRank r]
     (s : F.sections) : Prop :=
   ∀ x : regularSectionZeroScheme P T hT F r s,
@@ -278,7 +277,7 @@ def IsRegularSection (F : T.Modules) (r : ℕ) [F.IsFiniteLocallyFreeOfRank r]
             (b.repr (s.val (op U.1)) i)))
 
 /-- The scheme-theoretic intersection is the pullback of the zero-scheme inclusions.
-Source: Stacks Tag 067M; purity (L3) (blueprint: def-pur-regular-section). -/
+Source: Stacks Tag 067M; purity (L3). -/
 def regularSectionIntersectionScheme (F G : T.Modules) (r e : ℕ)
     [F.IsFiniteLocallyFreeOfRank r] [G.IsFiniteLocallyFreeOfRank e]
     (s : F.sections) (t : G.sections) : Scheme.{u} :=
@@ -286,7 +285,7 @@ def regularSectionIntersectionScheme (F G : T.Modules) (r e : ℕ)
     (regularSectionZeroProjection P T hT G e t)
 
 /-- The intersection projection.
-Source: Stacks Tag 067M; purity (L3) (blueprint: def-pur-regular-section). -/
+Source: Stacks Tag 067M; purity (L3). -/
 def regularSectionIntersectionProjection (F G : T.Modules) (r e : ℕ)
     [F.IsFiniteLocallyFreeOfRank r] [G.IsFiniteLocallyFreeOfRank e]
     (s : F.sections) (t : G.sections) :
@@ -296,7 +295,7 @@ def regularSectionIntersectionProjection (F G : T.Modules) (r e : ℕ)
 set_option backward.isDefEq.respectTransparency false in
 /-- Transversality requires both sections regular and the concatenated actual components
 regular in simultaneous frames at every intersection point.
-Source: Stacks Tag 067M; purity (L3) (blueprint: def-pur-regular-section). -/
+Source: Stacks Tag 067M; purity (L3). -/
 def IsTransverseDirectSum (F G : T.Modules) (r e : ℕ)
     [F.IsFiniteLocallyFreeOfRank r] [G.IsFiniteLocallyFreeOfRank e]
     (s : F.sections) (t : G.sections) : Prop :=
@@ -317,13 +316,13 @@ def IsTransverseDirectSum (F G : T.Modules) (r e : ℕ)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The finite direct sum is the product module sheaf, whose section is the pair (s,t).
-Source: purity (L3) (blueprint: def-pur-regular-section). -/
+Source: purity (L3). -/
 def regularSectionSum {X : Scheme.{u}} (F G : X.Modules)
     (s : F.sections) (t : G.sections) : (F ⨯ G).sections :=
   (F ⨯ G).unitHomEquiv (prod.lift (F.unitHomEquiv.symm s) (G.unitHomEquiv.symm t))
 
 /-- The direct sum of ranks r and e has rank r+e.
-Source: purity (L3) (blueprint: def-pur-regular-section).
+Source: purity (L3).
 Proof: take simultaneous local frames and concatenate their bases. Their inverses are the
 two coordinate projections. These simultaneous frame opens cover the base. -/
 theorem regularSectionSum_rank {X : Scheme.{u}} (F G : X.Modules) (r e : ℕ)
@@ -586,7 +585,7 @@ theorem existsUnique_iso_of_mono_of_forall_exists_comp {C : Type*} [Category C] 
     rw [← cancel_mono b, hi, hf]
 
 /-- The zero scheme of the actual paired section of the direct sum module.
-Source: purity (L3) (blueprint: def-pur-regular-section). -/
+Source: purity (L3). -/
 def regularSectionSumZeroScheme (F G : T.Modules) (r e : ℕ)
     [F.IsFiniteLocallyFreeOfRank r] [G.IsFiniteLocallyFreeOfRank e]
     (s : F.sections) (t : G.sections) : Scheme.{u} :=
@@ -594,7 +593,7 @@ def regularSectionSumZeroScheme (F G : T.Modules) (r e : ℕ)
     (regularSectionSum_rank F G r e) (regularSectionSum F G s t)
 
 /-- The paired zero-scheme projection.
-Source: purity (L3) (blueprint: def-pur-regular-section). -/
+Source: purity (L3). -/
 def regularSectionSumZeroProjection (F G : T.Modules) (r e : ℕ)
     [F.IsFiniteLocallyFreeOfRank r] [G.IsFiniteLocallyFreeOfRank e]
     (s : F.sections) (t : G.sections) : regularSectionSumZeroScheme P T hT F G r e s t ⟶ T :=
@@ -602,7 +601,7 @@ def regularSectionSumZeroProjection (F G : T.Modules) (r e : ℕ)
     (regularSectionSum_rank F G r e) (regularSectionSum F G s t)
 
 /-- The paired zero scheme is canonically the scheme-theoretic intersection, over the base.
-Source: purity (L3), affine fibre products (blueprint: def-pur-regular-section).
+Source: purity (L3), affine fibre products.
 Proof: in simultaneous frames both closed subschemes have quotient ring A/(a_i,b_j).
 The intersection tensor product A/(a_i) tensor_A A/(b_j) maps to this quotient by
 multiplication; a-bar maps inversely to a-bar tensor 1. These maps commute with projections.
@@ -640,7 +639,7 @@ theorem regularSectionSumZeroComparison_existsUnique (F G : T.Modules) (r e : �
       rfl
 
 /-- The canonical comparison, determined by its commutation with the zero-scheme projections.
-Source: purity (L3) (blueprint: def-pur-regular-section). -/
+Source: purity (L3). -/
 def regularSectionSumZeroComparison (F G : T.Modules) (r e : ℕ)
     [F.IsFiniteLocallyFreeOfRank r] [G.IsFiniteLocallyFreeOfRank e]
     (s : F.sections) (t : G.sections) :

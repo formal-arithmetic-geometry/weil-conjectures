@@ -37,9 +37,7 @@ K-flat comparison square uses ha and naturality of open restriction. Compose
 them by functoriality and associativity. The factorization formula identifies
 their composite with the canonical coordinate sheaf isomorphism. Apply the
 naturality of the affine sections unit, in tensorResolutionSection_naturality,
-to obtain the displayed equality of sections.
-
-(blueprint: new-g2-existing-qcoh-tensor-resolution-coordinate-naturality) -/
+to obtain the displayed equality of sections. -/
 theorem tensorResolutionCoordinateSections_naturality
     (Y : Scheme.{u}) (M N : Y.Modules) [M.IsQuasicoherent] [N.IsQuasicoherent]
     (MA NA : ∀ U : Y.affineOpens, ModuleCat.{u} (Γ(Y, U.1) : Type u))

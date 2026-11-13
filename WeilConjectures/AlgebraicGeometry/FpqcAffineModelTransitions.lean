@@ -17,7 +17,6 @@ public import Mathlib.CategoryTheory.Sites.EffectiveEpimorphic
 # Transition maps between effective affine models
 
 Source: Stacks Project, Descent, Tag 02W3, general-base proof (nested affine opens).
-(blueprint: lem-galois-fpqc-affine-model-transitions)
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Two effective affine models admit a Cartesian transition over an inclusion.
 Source: Stacks Project, Descent, Tag 02W3, general-base proof; Tag 02W0.
-(blueprint: lem-galois-fpqc-affine-model-transitions)
 
 Proof: Restrict the model over B to U for an inclusion U into B. Its pullback
 along X_U -> U and the U-model both identify with V_U. The compatibility with D

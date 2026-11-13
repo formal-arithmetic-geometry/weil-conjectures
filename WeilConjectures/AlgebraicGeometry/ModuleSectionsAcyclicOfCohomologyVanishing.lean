@@ -26,7 +26,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Module-cohomology vanishing on all opens implies acyclicity for sections on all opens.
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 01E1 (2), and the final clause of 01EX.
-(blueprint: lem-weil-pbc-module-sections-acyclic-of-cohomology-vanishing).
 
 Proof: Fix V and choose an injective resolution F → J• in S.Modules, which has enough
 injectives. Restriction to V is exact and preserves injectives by Tag 01E1 (2), so the

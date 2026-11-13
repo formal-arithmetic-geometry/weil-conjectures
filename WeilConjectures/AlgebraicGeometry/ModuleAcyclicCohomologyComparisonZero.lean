@@ -18,7 +18,6 @@ open Scheme Etale
 
 /-- Degree-zero comparison needs only the global sections hypothesis.
 Source: Stacks Project, Tags 095T and 01FA.
-(blueprint: new-module-acyclic-comparison-zero)
 
 Proof: Forgetting coefficients makes the section restriction bijective. Conjugate
 it by the canonical degree-zero cohomology/sections equivalences on X and Y.

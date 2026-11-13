@@ -18,8 +18,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The normalized comparison for finite constant sections commutes with a ring map.
-Source: blueprint Compatible isomorphisms, reduction of finite coefficient entries.
-(blueprint: lem-pe-finite-constant-section-coefficient-naturality).
+
 Proof: assemble the normalized section comparisons into morphisms of ring presheaves,
 using their restriction naturality. The two composites to continuous B-valued functions
 agree on the constant presheaf, by normalization and the sheafification unit's naturality.
@@ -87,8 +86,7 @@ namespace ProEtale.FiniteDiscreteOrdinary
 
 /-- The canonical constant-to-continuous coefficient map respects a morphism whose
 constant functions have the specified images.
-Source: blueprint Compatible isomorphisms, coefficient reduction of scalar sections.
-(blueprint: lem-pe-finite-constant-section-coefficient-naturality).
+
 Proof: the point comparison is the adjoint transpose of pointConstants, so its
 naturality follows from the two Hom-equivalence naturality identities. Apply inverse
 image and move the constant map across constantSchemeIso by naturality. -/

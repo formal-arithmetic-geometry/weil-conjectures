@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.OpenExtensionProjectionFormulaAux
 
 /-! # Projection formula for open extension by zero
 Source: Stacks Project, Tags 08BS, 01AK and 06YB.
-(blueprint: lem-pc-open-extension-projection-formula).
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 /-- Use the standard localization on the open scheme.
-Source: Stacks Project, Tag 05RU.
-(blueprint: lem-pc-open-extension-projection-formula). -/
+Source: Stacks Project, Tag 05RU. -/
 local instance openExtensionProjectionStandardDerived (X : Scheme.{u}) (U : X.Opens) :
     HasDerivedCategory.{u + 1}
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
@@ -47,7 +45,6 @@ strong monoidal structure on the specified derived restriction functor.
 
 Source: Stacks Project, cohomology.tex, Tag 08BS (exact extension by zero),
 modules.tex, Tag 01AK; Tags 06YB and 06YH for the stalkwise tensor computation.
-(blueprint: lem-pc-open-extension-projection-formula).
 
 Proof: compose the inverse over-site equivalence with ordinary extension by zero
 (the extension presheaf followed by sheafification) to construct J. Both factors

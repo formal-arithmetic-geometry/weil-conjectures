@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 /-!
 # Normalized ordinary finite projective-line duality data
 
-Source: blueprint thm-amb-p1-adjunction, thm-amb-p1-decomposition and def-amb-p1-trace
-(auxiliary; not a blueprint node).
-
 ## Main definitions
 
 * `OrdinaryFiniteP1CounitNormalization`: the prescribed actual counit equation.
@@ -33,8 +30,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The actual counit equation with the specified ordered projection map and trace.
 Naming this predicate keeps the normalized datum's dependent projections compact.
-Source: blueprint def-amb-p1-trace and thm-amb-p1-adjunction
-(auxiliary; not a blueprint node). -/
+Source: -/
 def OrdinaryFiniteP1CounitNormalization (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u})
     (b : ((ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧ ⊞ ordinaryFiniteUnit A S) ≅
@@ -53,8 +49,7 @@ def OrdinaryFiniteP1CounitNormalization (A : Type (u + 1)) [CommRing A] (N : ℕ
 this record is constrained: the Chern class by the actual scalar Kummer boundary,
 the decomposition by its two components, and the adjunction by its actual counit.
 Trace is always `decomposition.inv ≫ biprod.snd`, not an independent chosen map.
-Source: blueprint thm-amb-p1-decomposition, def-amb-p1-trace, thm-amb-p1-adjunction
-(auxiliary; not a blueprint node). -/
+Source: -/
 structure OrdinaryFiniteP1Datum (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) where
@@ -77,7 +72,7 @@ structure OrdinaryFiniteP1Datum (A : Type (u + 1)) [CommRing A] (N : ℕ)
     decomposition adjunction
 
 /-- The trace is projection onto the second summand of the specified decomposition.
-Source: blueprint def-amb-p1-trace (auxiliary; not a blueprint node). -/
+Source: -/
 def OrdinaryFiniteP1Datum.trace {A : Type (u + 1)} [CommRing A] {N : ℕ}
     {hA : (N : A) = 0} {t : OrdinaryFiniteTwistTransport A N hA}
     {S : Scheme.{u}} {hS : IsUnit (N : Γ(S, ⊤))}
@@ -88,9 +83,7 @@ def OrdinaryFiniteP1Datum.trace {A : Type (u + 1)} [CommRing A] {N : ℕ}
 
 /-- The canonical comparison on the two summands of the decomposition under inverse image.
 It is the biproduct map assembled from the images of its projections and the normalized
-shifted-line and constant-object comparisons.
-Source: blueprint thm-amb-p1-decomposition, base-change assertion
-(auxiliary; not a blueprint node). -/
+shifted-line and constant-object comparisons. -/
 def ordinaryFiniteP1DecompositionSourceMap (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     {S' S : Scheme.{u}} (f : S' ⟶ S) (hS : IsUnit (N : Γ(S, ⊤))) :
@@ -104,9 +97,7 @@ def ordinaryFiniteP1DecompositionSourceMap (A : Type (u + 1)) [CommRing A] (N : 
       (ordinaryFiniteUnitPullback A f).hom)
 
 /-- Base-change compatibility of the normalized decomposition, its trace, and the
-actual adjunction counit, using the specified exchange and tensor comparisons.
-Source: blueprint thm-amb-p1-adjunction, final paragraph
-(auxiliary; not a blueprint node). -/
+actual adjunction counit, using the specified exchange and tensor comparisons. -/
 def OrdinaryFiniteP1BaseChange (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (d : ∀ (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))),

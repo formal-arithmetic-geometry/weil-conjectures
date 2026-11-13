@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationCol
 # Exact countable products of pro-etale module sheaves
 
 Source: Bhatt--Scholze, The pro-etale topology for schemes, Propositions 3.1.9,
-3.2.3 (1), and 4.2.8; Stacks Project, Tags 03DB and 0947 (4)
-(auxiliary; not a blueprint node).
+3.2.3 (1), and 4.2.8; Stacks Project, Tags 03DB and 0947 (4).
 -/
 
 @[expose] public section
@@ -151,8 +150,7 @@ and restriction maps are coordinatewise. Surjectivity here is sheaf surjectivity
 expressed categorically by `Epi`, not surjectivity on every object's sections.
 
 Source: Bhatt--Scholze, Propositions 3.1.9, 3.2.3 (1), 4.2.8;
-Stacks Project, Tags 03DB and 0947 (4)
-(auxiliary; not a blueprint node).
+Stacks Project, Tags 03DB and 0947 (4).
 
 Proof:
 1. Apply lem-weil-pbc-module-sheaves-limits-sectionwise to discrete countable

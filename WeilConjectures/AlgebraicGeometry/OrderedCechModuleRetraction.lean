@@ -26,7 +26,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Ordered restriction and signed extension give a split retraction of complexes.
 This statement supplies no homotopy on the usual complex.
 Source: Stacks Project, Tags 01FJ and 01FK.
-(blueprint: lem-pc-ordered-cech-module-retraction).
 
 Proof: Evaluate e on the inverse image of B and use the canonical product maps
 in orderedCechTupleOpenMap to identify the chosen products with intersections.

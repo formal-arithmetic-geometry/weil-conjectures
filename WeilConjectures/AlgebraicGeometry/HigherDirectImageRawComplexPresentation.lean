@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleComplexCohomologyLimit
 /-! # Presenting raw module cohomology by abelian etale complexes
 
 Source: Stacks Project, Tags 09Z1, 0EZM and 03FD.
-(blueprint: lem-sbc-higher-image-raw-complex-presentation).
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency true in
 /-- The precise hypotheses of complex continuity, as an existential proposition.
 No object or map is chosen by this definition, and no continuity conclusion is a field.
-Source: Stacks Project, Tag 0EZM, lemma-colimit-variant-complexes.
-(blueprint: def-sbc-etale-complex-cohomology-presentation). -/
+Source: Stacks Project, Tag 0EZM, lemma-colimit-variant-complexes. -/
 abbrev EtaleComplexCohomologyPresentation
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (H : Iᵒᵖ ⥤ AddCommGrpCat.{u + 1}) (B : Cocone H) : Prop :=
@@ -37,8 +35,7 @@ abbrev EtaleComplexCohomologyPresentation
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency true in
 /-- Complex continuity applied to a presentation. The witnesses are eliminated only
-inside this proof; no library definition selects data from an existence statement. 
-(blueprint: def-sbc-etale-complex-cohomology-presentation)
+inside this proof; no library definition selects data from an existence statement.
 -/
 theorem EtaleComplexCohomologyPresentation.isColimit
     {I : Type u} [SmallCategory I] [IsCofiltered I]
@@ -60,7 +57,6 @@ continuity or any eventual equality of classes.
 Source: Stacks Project, Tag 09Z1 (lemma-relative-colimit, the affine-object reduction),
 Tag 0EZM (lemma-colimit-variant-complexes, the coefficient system), and Tag 03FD
 (lemma-cohomology-modules-abelian, comparison after forgetting scalars).
-(blueprint: lem-sbc-higher-image-raw-complex-presentation).
 
 Proof: Use the diagram of schemes D(i) times_S U and the cone c.pt times_S U, obtained
 by applying Over.map k, Over.pullback U.hom, and Over.forget U.left. Pullback preserves

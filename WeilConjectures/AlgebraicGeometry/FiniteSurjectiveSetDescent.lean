@@ -13,8 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 
 /-! # Finite surjective descent of global sections for étale sheaves of sets
 
-Source: literature/stacks-project/etale-cohomology.tex, Remark 09Z3
-(blueprint: lem-weil-pbc-sets-finite-surjective-descent).
+Source: literature/stacks-project/etale-cohomology.tex, Remark 09Z3.
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.defeqAttrib.useBackward true
 
 /-- Source: Stacks Project, Étale Cohomology, Remark 09Z3, following Lemma 09Z2.
-(blueprint: lem-weil-pbc-sets-finite-surjective-descent)
 The unit on global sections is injective with image exactly the equalizer of the
 projection pullbacks, composed with the inverse-image composition comparisons.
 

@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 
 /-! # Ordinary affine chart extension and sections comparison
 Source: Stacks Project, Tags 01I9, 0AA7 and 08DW(2).
-(blueprint: lem-sc-mixed-affine-sections-underived-chart-model).
 -/
 
 @[expose] public section
@@ -84,7 +83,6 @@ private theorem chart_tilde_unit_isIso (X : Scheme.{u}) [IsAffine X] :
 /-- The unit-normalized comparison between ordinary scalar extension of sections
 and sections of tensor pullback, on the canonical affine chart sheafification.
 Source: Stacks Project, Tags 01I9 and 0AA7, the affine computation in Tag 08DW(2).
-(blueprint: lem-sc-mixed-affine-sections-underived-chart-model).
 
 Proof: Put F_X = tilde followed by restriction along X.toSpecΓ. Since X is affine,
 restriction is an equivalence. Transport the tilde/sections adjunction through this

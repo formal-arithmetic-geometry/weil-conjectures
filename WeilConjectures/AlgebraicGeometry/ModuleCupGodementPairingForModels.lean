@@ -25,7 +25,6 @@ noncomputable section
 /-- Tensor multiplication for models with the canonical Godement codegeneracies.
 Source: Banerjee, arXiv:1004.1491, §1.1.4, pp. 15–16; the coordinatewise
 construction is applied to sheaves of modules over the structure sheaf.
-(blueprint: lem-sc-module-cup-godement-model-pairing-pairing)
 Proof: over an open U, send sections s of T(F) and t of T(G) to the family
 whose x-coordinate is s(x) tensor t(x), mapped to the stalk of F tensor G.
 This is O(U)-bilinear and commutes with restrictions; sheafifying the presheaf

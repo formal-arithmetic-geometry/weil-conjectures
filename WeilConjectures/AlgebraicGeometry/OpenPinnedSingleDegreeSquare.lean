@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroSquare
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # The geometric restriction square for the pinned single-complex counits
-Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.
-(blueprint: lem-pc-open-pinned-single-degree-square). -/
+Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -30,8 +29,7 @@ namespace AlgebraicGeometry
 This is constructed from the counit fixed by the composition structure; its
 universal property determines that counit up to the natural isomorphism used
 in downstream comparisons. No arbitrary module or complex is chosen.
-Source: Stacks Project, Tag 08HY
-(blueprint: lem-pc-open-pinned-single-degree-square). -/
+Source: Stacks Project, Tag 08HY. -/
 def pinnedSingleDegreeTensorComparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -75,7 +73,6 @@ of open compatibility: neither arbitrary witnessing counits nor truncation or
 comparison automorphisms occur in this statement.
 Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U; Steps 1, 2 and the
 reference-counit part of Step 3 of stage3-open-fixed-counits-compatibility.
-(blueprint: lem-pc-open-pinned-single-degree-square).
 
 Proof: Write Z = f' inverse-image W. A cone over U and W composes to a cone
 over X and S'. The original pullback property gives its unique lift to X',

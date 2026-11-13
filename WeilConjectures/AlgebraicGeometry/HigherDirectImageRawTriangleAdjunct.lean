@@ -72,8 +72,7 @@ adjunction equivalence reduces the equality to naturality and the counit identit
 This calculation precedes applying any homology functor, so it is only the
 adjunction part of the raw-transition/toHom comparison.
 Source: Stacks Project Tags 03Q8 and 09Z1; upperStarPlusComp_single and Mathlib
-Adjunction.homEquiv_naturality_left_symm.
-(blueprint: sbc-lem-module-raw-triangle-adjunct). -/
+Adjunction.homEquiv_naturality_left_symm. -/
 theorem higherDirectImageRawTrianglePullback_adjunct
     (Λ : Type (u + 1)) [CommRing Λ] {Y Y' S : Scheme.{u}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (q : ℤ)

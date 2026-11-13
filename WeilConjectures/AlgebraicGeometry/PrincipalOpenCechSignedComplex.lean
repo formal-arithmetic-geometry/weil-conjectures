@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 /-! # PrincipalOpenCechSignedComplex
 
 Source: Stacks Project, Cohomology, Tag 08C1.
-(blueprint: lem-sc-principal-open-cech-signed-complex).
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ noncomputable section
 variable (A : Type u) [CommRing A]
 
 /-- Sections on an affine scheme, with the A-action supplied by Mathlib's
-`modulesSpecToSheaf`. Source: Stacks, Tag 08D2
-(blueprint: def-sc-principal-open-alternating-total). -/
+`modulesSpecToSheaf`. Source: Stacks, Tag 08D2. -/
 private def affineOpenSections (U : (Spec (.of A)).Opens) :
     SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) ⥤ ModuleCat.{u} A where
   obj F := (modulesSpecToSheaf.obj F).obj.obj (op U)
@@ -39,7 +37,7 @@ private def affineOpenSections (U : (Spec (.of A)).Opens) :
   map_comp g h := congrArg (fun g ↦ g.hom.app (op U)) (modulesSpecToSheaf.map_comp g h)
 
 /-- Sections are additive, including after restriction of scalars from Γ(U,O).
-Source: Stacks, Tag 08D2 (blueprint: def-sc-principal-open-alternating-total).
+Source: Stacks, Tag 08D2.
 Proof: sheaf-module morphisms add sectionwise, and evaluation and restriction of scalars
 preserve their addition. -/
 private theorem affineOpenSections_additive_proof (U : (Spec (.of A)).Opens) :
@@ -49,19 +47,19 @@ private theorem affineOpenSections_additive_proof (U : (Spec (.of A)).Opens) :
   rfl
 
 /-- The additive instance for A-module sections.
-Source: Stacks, Tag 08D2 (blueprint: def-sc-principal-open-alternating-total). -/
+Source: Stacks, Tag 08D2. -/
 private instance affineOpenSections_additive (U : (Spec (.of A)).Opens) :
     (affineOpenSections A U).Additive := affineOpenSections_additive_proof A U
 
 variable {A} (r : ℕ) (f : Fin r → A)
 
 /-- The intersection belonging to a finite subset of cover indices.
-Source: Stacks, Tag 08D1 (blueprint: def-sc-principal-open-alternating-total). -/
+Source: Stacks, Tag 08D1. -/
 private def principalCechIntersection (J : Finset (Fin r)) : (Spec (.of A)).Opens :=
   PrimeSpectrum.basicOpen (∏ j ∈ J, f j)
 
 /-- Erasing an index enlarges a principal intersection.
-Source: Stacks, Tag 08D1 (blueprint: def-sc-principal-open-alternating-total).
+Source: Stacks, Tag 08D1.
 Proof: the product for J is the erased product times f_j. Its basic open is their
 intersection, hence contained in the erased basic open. -/
 private theorem principalCechIntersection_erase_le (J : Finset (Fin r)) (j : Fin r) :
@@ -74,7 +72,7 @@ private theorem principalCechIntersection_erase_le (J : Finset (Fin r)) (j : Fin
   · simp [Finset.erase_eq_of_notMem hj]
 
 /-- Deleting an index gives the same vertical degree in the incoming horizontal row.
-Source: Stacks, Tag 08D1 (blueprint: def-sc-principal-open-alternating-total).
+Source: Stacks, Tag 08D1.
 Proof: card(J.erase j) = card(J)-1 when j belongs to J; subtract this identity in ℤ. -/
 private theorem principalCech_erase_degree (J : Finset (Fin r)) (j : Fin r) (hj : j ∈ J) (n : ℤ) :
     n + 1 - ((J.erase j).card : ℤ) = (n + 1) + 1 - (J.card : ℤ) := by
@@ -85,7 +83,7 @@ variable (F : CochainComplex
   (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)
 
 /-- Total Čech cochains, with row p = card(J)-1 and vertical degree n-p.
-Source: Stacks, Tag 08D1 (blueprint: def-sc-principal-open-alternating-total). -/
+Source: Stacks, Tag 08D1. -/
 private def principalCechTerms (n : ℤ) : ModuleCat.{u} A :=
   ModuleCat.of A (∀ J : {J : Finset (Fin r) // J.Nonempty},
     (affineOpenSections A (principalCechIntersection r f J.val)).obj
@@ -93,7 +91,7 @@ private def principalCechTerms (n : ℤ) : ModuleCat.{u} A :=
 
 /-- The signed total differential: alternating horizontal restriction and
 `(-1)^p d_F` in row p. Empty erased subsets contribute zero.
-Source: Stacks, Tag 08D1 (blueprint: def-sc-principal-open-alternating-total). -/
+Source: Stacks, Tag 08D1. -/
 private def principalCechDifferentialValue (n : ℤ) (s : principalCechTerms r f F n) :
     principalCechTerms r f F (n + 1) :=
   fun J ↦
@@ -112,7 +110,7 @@ private def principalCechDifferentialValue (n : ℤ) (s : principalCechTerms r f
     else 0)
 
 /-- Existence of the linear total differential, with exactly the displayed value.
-Source: Stacks, Tag 08D1 (blueprint: def-sc-principal-open-alternating-total).
+Source: Stacks, Tag 08D1.
 Proof: every restriction and coefficient differential is A-linear; multiplication by a
 sign and finite sums preserve linearity. -/
 private theorem principalCechDifferential_exists (n : ℤ) :
@@ -145,7 +143,7 @@ private theorem principalCechDifferential_exists (n : ℤ) :
       · exact (smul_zero a).symm
 
 /-- The A-linear total differential, selected from its fully specified formula.
-Source: Stacks, Tag 08D1 (blueprint: def-sc-principal-open-alternating-total). -/
+Source: Stacks, Tag 08D1. -/
 private def principalCechDifferential (n : ℤ) :
     principalCechTerms r f F n ⟶ principalCechTerms r f F (n + 1) :=
   (principalCechDifferential_exists r f F n).choose
@@ -271,7 +269,6 @@ private noncomputable def doubleTerm {A : Type u} [CommRing A]
 
 /-- Horizontal square-zero, the two-deletion part of the total calculation.
 Source: Stacks Project, Cohomology, Tag 08D1.
-(blueprint: def-sc-principal-open-alternating-total).
 
 Proof: Expand the two finite signed sums. Terms with an empty twice-erased subset
 vanish. Pair the surviving deletion orders (a,b) and (b,a). Their restrictions
@@ -363,7 +360,6 @@ private theorem transport_restriction_d {A : Type u} [CommRing A]
 
 /-- The mixed horizontal and vertical terms cancel.
 Source: Stacks Project, Cohomology, Tag 08D1.
-(blueprint: def-sc-principal-open-alternating-total).
 
 Proof: Distribute the vertical map across the finite horizontal sum, using its
 linearity. For each deletion of j, restriction commutes with the coefficient
@@ -435,7 +431,7 @@ private theorem principalCechValue_mixed_cancel {A : Type u} [CommRing A] (r : �
       exact neg_add_cancel _
   next => simp
 /-- Consecutive total Čech differentials compose to zero.
-Source: Stacks, Tag 08D1 (blueprint: def-sc-principal-open-alternating-total).
+Source: Stacks, Tag 08D1.
 Proof: two horizontal deletions cancel with opposite signs; vertical squares are zero;
 the mixed terms cancel because the vertical sign changes between adjacent rows.
 Restrictions commute with the coefficient differential. -/
@@ -463,7 +459,7 @@ private theorem principalCechDifferential_square (n : ℤ) :
   exact (add_comm _ _).trans (principalCechValue_mixed_cancel r f F n s)
 
 /-- The alternating Čech total complex, including unbounded coefficient complexes.
-Source: Stacks, Tag 08D1 (blueprint: def-sc-principal-open-alternating-total). -/
+Source: Stacks, Tag 08D1. -/
 private def principalCechTotal : CochainComplex (ModuleCat.{u} A) ℤ :=
   CochainComplex.of (principalCechTerms r f F) (principalCechDifferential r f F)
     (principalCechDifferential_square r f F)
@@ -473,7 +469,6 @@ end CoordinateConstruction
 
 /-- A separate construction step for the finite subset Čech argument.
 Source: Stacks Project, Cohomology, Tag 08C1, equation (20.40.0.1).
-(blueprint: lem-sc-principal-open-cech-signed-complex).
 
 Proof: Construct degree n as the product of sections in degree n+1-card(S). Each vertical
 and restriction summand is A-linear, so the displayed formula defines a linear map.

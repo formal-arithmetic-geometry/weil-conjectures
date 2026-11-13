@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Flat bottom homology and its truncation arrow
-Source: Stacks Project, Tag 0BDL, zero-matrix chart argument.
-(blueprint: lem-sc-local-zero-bottom-truncation). -/
+Source: Stacks Project, Tag 0BDL, zero-matrix chart argument. -/
 
 @[expose] public section
 
@@ -30,7 +29,6 @@ set_option backward.isDefEq.respectTransparency.types false
 /-- The bottom homology of local zero-differential models is flat and admits a
 bottom truncation arrow inducing an isomorphism on bottom homology.
 Source: Stacks Project, Tag 0BDL, zero-matrix chart argument, and standard truncation.
-(blueprint: lem-sc-local-zero-bottom-truncation).
 
 Proof: Exact restriction identifies H^i(D)|U with H^i(K). For i<a this is zero.
 At a, both adjacent differentials vanish, so H^a(K) is canonically K.X a.

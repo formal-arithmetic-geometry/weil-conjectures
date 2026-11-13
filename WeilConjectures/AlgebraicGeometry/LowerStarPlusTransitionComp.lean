@@ -14,7 +14,6 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 /-! # Composition of derived direct-image transitions
 
 Source: Stacks Tag 09Z1, canonical restriction maps, and Mathlib's mate calculus.
-(blueprint: lem-sbc-lower-star-plus-transition-comp)
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 Source: Stacks Tag 09Z1, restriction maps for higher direct images; the mate calculation
 is Mathlib `mateEquiv_vcomp`, specialized to identity functors on the common base.
-(blueprint: lem-sbc-lower-star-plus-transition-comp)
 
 Proof: the transition for a triangle is the adjunct of its pullback comparison followed
 by pullback of the counit. Apply the inverse hom-set equivalence for the adjunction

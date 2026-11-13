@@ -33,8 +33,7 @@ private theorem range_affine_quotient
 /-- The degree sublevel locus restricted to an affine open is the zero locus of a finitely
     generated ideal.
 
-Source: Stacks Project, More on Morphisms, Tag 07RZ, proof, second paragraph
-(blueprint: lem-weil-pbc-finite-equations-of-isClosed-inter-affine).
+Source: Stacks Project, More on Morphisms, Tag 07RZ, proof, second paragraph.
 
 Proof: identify the affine open with the spectrum of its coordinate ring. The closed sublevel
 locus is represented by an ideal. Express that ideal as a filtered union of finitely generated
@@ -90,8 +89,7 @@ theorem exists_finitely_generated_zeroLocus_ideal_degree_sublevel_inter_affine
 
 /-- A finitely generated ideal on an affine open has finitely many principal equations.
 
-Source: Stacks Project, More on Morphisms, Tag 07RZ, proof, second paragraph
-(blueprint: lem-weil-pbc-finite-equations-of-finitely-generated-zeroLocus).
+Source: Stacks Project, More on Morphisms, Tag 07RZ, proof, second paragraph.
 
 Proof: choose a finite generating set for the ideal; membership in its zero locus is equivalent
 to avoiding every corresponding basic open.

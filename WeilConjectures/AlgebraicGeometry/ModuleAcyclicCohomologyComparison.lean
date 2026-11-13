@@ -20,7 +20,6 @@ open Scheme Etale
 /-- Acyclic module resolutions give comparison for underlying abelian sheaves.
 
 Source: Stacks Project, Tag 095T, second paragraph, and Tag 03FD.
-(blueprint: lem-weil-pbc-module-acyclic-cohomology-comparison)
 
 Proof: take an injective resolution of M in sheaves of modules over the constant
 prime ring. Forgetting coefficients is exact. By 03FD, its underlying abelian

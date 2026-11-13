@@ -16,7 +16,6 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 /-! # Exactness of rows presented by distinguished triangles
 
 Source: Stacks Project, Tag 08BW; Mathlib homological coyoneda and pointwise exactness.
-(blueprint: lem-pc-perfect-hom-triangle-presented-rows-exact).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry
 
 /-- Hom-triangle presentations imply exactness, pointwise and at the limit.
 Source: Stacks Project, Tag 08BW; Mathlib's homological coyoneda theorem.
-(blueprint: lem-pc-perfect-hom-triangle-presented-rows-exact).
 
 Proof: Covariant additive Hom sends distinguished triangles to exact short
 complexes. Transport exactness through each given short-complex isomorphism.

@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 /-! # NowhereDenseClosedFibreDimension
 
 Source: Stacks Project, Tag 054X, final dimension contradiction; Tags 00OT and 00OS.
-(blueprint: lem-sbc-nowhere-dense-closed-fibre-dimension)
 -/
 
 @[expose] public section
@@ -119,8 +118,7 @@ dimension less than n + 1. Restrict the closed embedding to this neighbourhood;
 its range is still nowhere dense, so the chain-extension inequality bounds its
 dimension strictly by n. The source's local dimension is at most the dimension of
 this restricted source. Apply this topological argument to the base change of i
-on the fibre and identify its distinguished point with f.asFiber (i z).
-(blueprint: lem-sbc-nowhere-dense-closed-fibre-dimension) -/
+on the fibre and identify its distinguished point with f.asFiber (i z). -/
 theorem fibre_dimension_lt_of_closed_interior_eq_empty
     {Z X T : Scheme.{u}} (f : X ⟶ T) [LocallyOfFiniteType f] [QuasiCompact f]
     (i : Z ⟶ X) [IsClosedImmersion i] (t : T)

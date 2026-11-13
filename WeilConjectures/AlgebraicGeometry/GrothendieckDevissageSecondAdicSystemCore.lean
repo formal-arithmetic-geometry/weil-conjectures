@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemTo
 
 /-! # Algebraization after a supplied quotient interchange
 
-Source: Stacks Project, Tags 088A and 0888
-(blueprint: lem-weil-pbc-devissage-second-adic-system-core).
+Source: Stacks Project, Tags 088A and 0888.
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ namespace AlgebraicGeometry
 /-- Algebraize the K-power quotients, with compatible maps and a uniform torsion bound.
 The supplied θ is characterized by its projection equation; N and δ are constructed
 jointly with σ, rather than being arbitrary objects.
-Source: Stacks Project, Tags 088A and 0888
-(blueprint: lem-weil-pbc-devissage-second-adic-system-core).
+Source: Stacks Project, Tags 088A and 0888.
 
 Proof: identify coherent modules and formal systems killed by K^e with the
 corresponding categories on V(K^e), using the closed-immersion equivalences.

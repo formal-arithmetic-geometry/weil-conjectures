@@ -81,7 +81,6 @@ This statement does not involve stalks or the derived exchange morphism.
 
 Source: Stacks Project, topological invariance Tags 04DY and 03SI, functoriality
 Tag 01F8, applied to the residue square in the proof of Tag 095T.
-(blueprint: lem-weil-pbc-p1-residue-cohomology-comparison).
 
 Proof: base change ρA and ρB to the projective lines. They remain universal
 homeomorphisms, so their cohomology pullbacks are additive equivalences by

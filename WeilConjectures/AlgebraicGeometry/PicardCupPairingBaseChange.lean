@@ -71,7 +71,6 @@ assert any dual-pullback comparison is invertible.
 
 Source: Stacks Project, Tag 0BDP, compatibility with arbitrary change of base
 and the evaluation formula for the cup product in the final two paragraphs.
-(blueprint: lem-sc-picard-cup-pairing-base-change)
 
 Proof: Expand picardCupProductMap and uncurry its defining transpose, obtaining
 the pushed-forward evaluation pairing. Apply the tensor comparison for h. Take

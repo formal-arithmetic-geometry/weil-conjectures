@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.SchemeClopenIdempotent
 # Idempotents under nilpotent base change
 
 Source: Stacks Project, More on Morphisms, Tags 09ZU and 04EX; Derived Categories of Schemes,
-proof of Tag 0G7X, using Algebra, Tag 00EE
-(blueprint: lem-weil-pbc-base-change-nilpotent-thickening-idempotents).
+proof of Tag 0G7X, using Algebra, Tag 00EE.
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace AlgebraicGeometry
 of global sections uniquely lifts idempotents.
 Source: Stacks Project, Tags 09ZU, 04EX, and the equal-topological-spaces step of the proof
 of Tag 0G7X, with Tag 00EE.
-(blueprint: lem-weil-pbc-base-change-nilpotent-thickening-idempotents).
 
 Proof plan:
 1. Apply `lem-weil-pbc-quotient-base-change-closed-immersion-ideal` to `g` and `J`.

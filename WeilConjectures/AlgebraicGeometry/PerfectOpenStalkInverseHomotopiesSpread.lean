@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.StalkInternalHomFinitePresentation
 /-! # Spreading two inverse homotopies
 
 Source: Stacks Project, Tag 09RE, affine proof, and Tag 0BC7 (2).
-(blueprint: lem-sc-perfect-open-stalk-inverse-homotopies-spread).
 -/
 
 @[expose] public section
@@ -69,7 +68,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Two given inverse homotopies at a stalk spread after shrinking a lifted map.
 Source: Stacks Project, Tag 09RE, affine proof's equality in the homotopy category;
 Tag 0BC7 (2), finite-component homotopy calculation, and Tag 00CR.
-(blueprint: lem-sc-perfect-open-stalk-inverse-homotopies-spread).
 
 Proof: Work on V. Restriction preserves the finite-free retractions
 and the support bounds. For each of the two stalk homotopies only finitely many

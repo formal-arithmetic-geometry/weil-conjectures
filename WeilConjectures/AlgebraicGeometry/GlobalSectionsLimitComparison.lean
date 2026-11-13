@@ -16,7 +16,6 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 /-! # Global sections of pullbacks at cofiltered limits
 
 Source: Stacks Project, Tag 09YQ, degree zero.
-(blueprint: lem-weil-pbc-global-sections-limit-comparison)
 -/
 
 @[expose] public section
@@ -109,7 +108,6 @@ set_option backward.isDefEq.respectTransparency true in
 /-- Global sections of pullbacks of a fixed abelian sheaf commute with a qcqs inverse
 limit with affine transition maps. No assumption on the base scheme is needed.
 Source: Stacks Project, Tag 09YQ, degree zero.
-(blueprint: lem-weil-pbc-global-sections-limit-comparison)
 
 Proof: Replace the cofiltered category by a coinitial directed preorder and restrict
 both the limit cone and the system along that functor. Set F_j = π_j^* G. The inverse-image

@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.FinitePresentationKernelComparison
 /-!
 # Finite type of kernels of finite free surjections
 
-Source: Stacks Project, Modules, Lemma 01BP(1)
-(blueprint: lem-weil-pbc-finite-presentation-kernel-surjection-finite-type).
+Source: Stacks Project, Modules, Lemma 01BP(1).
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace AlgebraicGeometry.RingedSpace
 
 /-- If a module has a local finite presentation, the kernel of a finite free
 surjection onto it is locally of finite type.
-Source: Stacks Project, Modules, Lemma 01BP(1)
-(blueprint: lem-weil-pbc-finite-presentation-kernel-surjection-finite-type).
+Source: Stacks Project, Modules, Lemma 01BP(1).
 
 Proof:
 1. For each point, `finitePresentation_local_comparison` supplies a neighborhood,

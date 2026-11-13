@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.FpqcSingletonFullyFaithful
 # Full faithfulness of refinement for fpqc descent data
 
 Source: Stacks Project, Descent, Lemma 35.35.11 (Tag 02W0), specialized to singleton
-fpqc coverings (blueprint: lem-galois-fpqc-refinement-fully-faithful).
+fpqc coverings.
 -/
 
 @[expose] public section
@@ -149,9 +149,7 @@ along `h` followed by the projection to `X'`. Given a morphism between the data 
 back along `h`, fullness for the projection to `X` lifts its further pullback to a
 morphism of the original data. Faithfulness for the projection to `X'` shows that this
 lift pulls back to the given morphism. Faithfulness for the projection to `X` makes the
-lift unique.
-
-(blueprint: lem-galois-fpqc-refinement-fully-faithful) -/
+lift unique. -/
 theorem fpqcRefinementFullyFaithful {S X X' : Scheme.{u}}
     (f : X ⟶ S) (g : X' ⟶ S) (h : X' ⟶ X)
     (hf : Presieve.singleton f ∈ Scheme.fpqcPrecoverage S)

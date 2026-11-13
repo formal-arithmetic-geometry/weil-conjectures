@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 /-! # Factor a reduced finite structure unit through a supporting quotient
 
 Source: Stacks Project, Tag 09ZT, algebra structure paragraph, using Tags 01BG and 0096.
-(blueprint: lem-weil-pbc-finite-structure-supported-unit-kernel).
 -/
 
 @[expose] public section
@@ -136,8 +135,7 @@ acting on y, multiplied by bc; this vanishes by hkill. Tensor induction extends
 the calculation to arbitrary pairs of sections. Paired affine opens form a basis;
 restriction naturality and sheaf separatedness extend annihilation to every open.
 The argument applies to empty opens, the zero module, and the zero or unit ideal.
-This theorem does not mention any algebra, finite morphism, or isomorphism to one.
-(blueprint: lem-weil-pbc-finite-structure-supported-unit-kernel). -/
+This theorem does not mention any algebra, finite morphism, or isomorphism to one. -/
 private theorem supported_kernel_scalar_annihilation
     {X Z S : Scheme.{u}} (k : Z ⟶ X) [IsClosedImmersion k]
     (j : S ⟶ X) (G : X.Modules) [G.IsQuasicoherent]
@@ -207,8 +205,7 @@ separatedness makes the composite zero globally. This is the displayed kernel
 inclusion equation. No map O_X to G is constructed. For G zero, the algebra
 p_*O_Y is zero and the same argument applies. If J is zero its source kernel
 is zero; if J is the unit ideal the reduced algebra is zero. Empty schemes
-and empty opens are covered by the same identities.
-(blueprint: lem-weil-pbc-finite-structure-supported-unit-kernel). -/
+and empty opens are covered by the same identities. -/
 theorem finiteStructure_supported_unit_kernel_zero
     {X Z S Y : Scheme.{u}} (k : Z ⟶ X) [IsClosedImmersion k]
     (j : S ⟶ X) (p : Y ⟶ S) [IsFinite p]

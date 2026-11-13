@@ -129,9 +129,8 @@ private theorem sectionComparison_comp_named {R X Y Z : Scheme.{u}}
 section diagram and a cocone on any tail of an inverse system. No affineness or
 continuity assertion is needed for this coherence statement.
 
-Source: Stacks Project, Etale Cohomology, Lemma 09YU (lemma-category-is-colimit),
+Source: Stacks Project, Etale Cohomology, Lemma 09YU,
 proof, Fully faithful; the coherence argument is steps 2, 5 and 6 of the parent node.
-(blueprint: lem-weil-pbc-pullback-sections-diagram)
 
 Proof: Take the section module S_i at each stage and the displayed map mu_f on arrows.
 The unit equation characterizing the inverse-image composition isomorphism identifies

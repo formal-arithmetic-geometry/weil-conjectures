@@ -46,7 +46,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
 sequential colimits. The lifted indexing category is equivalent to the ordinary natural numbers.
 Source: Bhatt--Scholze, Definition 6.8.10, Proposition 6.8.11(3),
 Lemma 6.8.12 and the proof of Lemma 6.3.14.
-(auxiliary; not a blueprint node)
 
 Proof. Apply the good-truncation comparison theorem at the common cohomological
 lower bound. Exact filtered colimits preserve the truncation quasi-isomorphisms,

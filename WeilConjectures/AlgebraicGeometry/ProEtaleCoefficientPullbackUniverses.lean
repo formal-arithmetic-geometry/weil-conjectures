@@ -9,8 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
 
 /-! # Constant-coefficient pullback in an independent coefficient universe
 
-Source: Stacks Project, Tags 09A5, 00VC and 03D2
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 09A5, 00VC and 03D2.
 
 The small model enlarges only Hom sizes. The module pullback is Mathlib's sheafified
 module Kan extension along the constant-section ring map, hence the tensor-formula
@@ -28,23 +27,23 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The same small pro-etale site in a universe containing the coefficient ring.
-Source: Stacks Tag 09A5 (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 09A5. -/
 abbrev coefficientProEtaleSiteModel (X : Scheme.{t}) := AsSmall.{max r (t + 1)} X.ProEt
 
 /-- The topology transported to the coefficient-sized model.
-Source: Stacks Tag 09A5 (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 09A5. -/
 noncomputable abbrev coefficientProEtaleModelTopology (X : Scheme.{t}) :=
   (AsSmall.down : coefficientProEtaleSiteModel.{t, r} X ⥤ X.ProEt).inducedTopology
     (ProEt.topology X)
 
 /-- Base change transported to these models.
-Source: Stacks Tag 09A5 (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 09A5. -/
 noncomputable abbrev coefficientProEtaleModelBaseChange {X Y : Scheme.{t}} (f : X ⟶ Y) :
     coefficientProEtaleSiteModel.{t, r} Y ⥤ coefficientProEtaleSiteModel.{t, r} X :=
   AsSmall.down ⋙ proEtaleBaseChange f ⋙ AsSmall.up
 
 /-- The equivalence to the coefficient-sized model preserves covering sieves.
-Source: Stacks Tag 09A5 (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 09A5. -/
 instance coefficientProEtaleModelUp_isContinuous (X : Scheme.{t}) :
     (AsSmall.up : X.ProEt ⥤ coefficientProEtaleSiteModel.{t, r} X).IsContinuous
       (ProEt.topology X) (coefficientProEtaleModelTopology.{t, r} X) :=
@@ -54,7 +53,7 @@ instance coefficientProEtaleModelUp_isContinuous (X : Scheme.{t}) :
         (ProEt.topology X)))
 
 /-- Continuity of transported base change.
-Source: Stacks Tag 09A5 (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 09A5. -/
 instance coefficientProEtaleModelBaseChange_isContinuous {X Y : Scheme.{t}} (f : X ⟶ Y) :
     (coefficientProEtaleModelBaseChange.{t, r} f).IsContinuous
       (coefficientProEtaleModelTopology.{t, r} Y)
@@ -67,7 +66,7 @@ instance coefficientProEtaleModelBaseChange_isContinuous {X Y : Scheme.{t}} (f :
 
 /-- The constant-section map A_Y → f_* A_X. It is the extension by sheafification
 of the map sending a coefficient to its constant section.
-Source: Stacks Tag 0H7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0H7J. -/
 noncomputable def coefficientProEtaleDirectRingMap {X Y : Scheme.{t}} (f : X ⟶ Y)
     (A : CommRingCat.{max r (t + 1)}) :
     (constantSheaf (ProEt.topology Y) CommRingCat.{max r (t + 1)}).obj A ⟶
@@ -80,7 +79,7 @@ noncomputable def coefficientProEtaleDirectRingMap {X Y : Scheme.{t}} (f : X ⟶
 
 /-- The ring morphism on the coefficient-sized models, obtained by precomposition
 from the canonical constant-section map.
-Source: Stacks Tags 0H7J and 03D2 (auxiliary; not a blueprint node). -/
+Source: Stacks Tags 0H7J and 03D2. -/
 noncomputable def coefficientProEtaleModelRingMap {X Y : Scheme.{t}} (f : X ⟶ Y)
     (A : CommRingCat.{max r (t + 1)}) :
     ((AsSmall.down : coefficientProEtaleSiteModel.{t, r} Y ⥤ Y.ProEt).sheafPushforwardContinuous
@@ -101,7 +100,7 @@ noncomputable def coefficientProEtaleModelRingMap {X Y : Scheme.{t}} (f : X ⟶ 
       (forget₂ CommRingCat.{max r (t + 1)} RingCat.{max r (t + 1)}))⟩
 
 /-- Constant-coefficient module direct image through the constant-section map.
-Source: Stacks Tag 03D1 (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03D1. -/
 noncomputable def coefficientProEtaleModuleDirectImage {X Y : Scheme.{t}} (f : X ⟶ Y)
     (A : CommRingCat.{max r (t + 1)}) :=
   SheafOfModules.pushforward.{max r (t + 1)} (F := proEtaleBaseChange f)
@@ -118,7 +117,7 @@ noncomputable def coefficientProEtaleModuleDirectImage {X Y : Scheme.{t}} (f : X
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The module Kan extension and sheafification supply the left adjoint in the
 independent coefficient universe.
-Source: Stacks Tags 00VC and 03D2 (auxiliary; not a blueprint node).
+Source: Stacks Tags 00VC and 03D2.
 Proof: transport modules to the coefficient-sized models. There the ring map is
 coefficientProEtaleModelRingMap. Presheaf module pullback exists by the free-Yoneda
 presentation, and module sheafification gives its sheaf pullback adjunction. Transport
@@ -171,13 +170,13 @@ theorem coefficientProEtaleModuleDirectImage_isRightAdjoint {X Y : Scheme.{t}} (
 /-- The canonical module inverse image, defined by the usual pullback adjunction.
 Its Kan-extension construction is f⁻¹(-) ⊗_(f⁻¹ A_Y) A_X. The adjunction unit
 fixes its canonical generator map, so no arbitrary map is supplied.
-Source: Stacks Tag 03D2 (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03D2. -/
 noncomputable def coefficientProEtaleModulePullback {X Y : Scheme.{t}} (f : X ⟶ Y)
     (A : CommRingCat.{max r (t + 1)}) :=
   (coefficientProEtaleModuleDirectImage f A).leftAdjoint
 
 /-- The defining pullback/direct-image adjunction and its normalized unit.
-Source: Stacks Tag 03D2 (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03D2. -/
 noncomputable def coefficientProEtaleModuleAdjunction {X Y : Scheme.{t}} (f : X ⟶ Y)
     (A : CommRingCat.{max r (t + 1)}) :
     coefficientProEtaleModulePullback f A ⊣ coefficientProEtaleModuleDirectImage f A :=

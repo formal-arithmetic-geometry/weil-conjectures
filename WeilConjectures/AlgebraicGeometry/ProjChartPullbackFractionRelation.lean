@@ -11,7 +11,6 @@ public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 /-! # Pulling back a relation between fractions on two projective charts
 
 Source: Stacks Project, Constructions, Tags 01N8 and 01NK.
-(blueprint: lem-sc-proj-chart-pullback-fraction-relation).
 -/
 
 @[expose] public section
@@ -59,7 +58,6 @@ private lemma away_top
   simpa only [Category.assoc, Iso.hom_inv_id] using hi
 /-- A homogeneous numerator relation gives the corresponding scalar relation after pullback.
 Source: Stacks Project, Constructions, Tags 01N8 and 01NK, comparison on overlapping charts.
-(blueprint: lem-sc-proj-chart-pullback-fraction-relation).
 
 Proof: Use the common chart D_+(ts). The two localization maps send xi/t^n
 and p/s^N to xi*s^n/(ts)^n and p*t^N/(ts)^N. Their product equals

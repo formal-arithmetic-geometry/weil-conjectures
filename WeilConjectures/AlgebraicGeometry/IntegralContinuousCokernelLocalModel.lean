@@ -929,8 +929,7 @@ preserves this cokernel and identifies its presentation with D. Extension of sca
 along the canonical pullback comparison preserves cokernels too. These identifications
 give the required local models. Open-immersion covers are pro-etale covers. For zero
 rows or columns the diagonal is empty; empty schemes use the empty cover. No choice
-of arbitrary module data from an unproved existence assertion is required.
-(auxiliary; not a blueprint node) -/
+of arbitrary module data from an unproved existence assertion is required. -/
 theorem integral_cokernel_hasFiniteConstantLocalModel
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

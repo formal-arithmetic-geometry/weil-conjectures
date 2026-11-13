@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.OpenOrdinaryTensorGermEquation
 /-! # Germ coordinates for ordinary tensor restriction
 
 Source: Stacks Project, Tags 0098, 08HY and 08DW.
-(blueprint: lem-pc-open-ordinary-tensor-germ-transport).
 -/
 
 @[expose] public section
@@ -57,8 +56,7 @@ factors and comparisonStalkHomologyIso then gives the displayed equation.
 Empty opens have no z, while top opens, zero complexes, and zero rings use the
 same formulas. No K-flatness, Tor-independence, or derived pullback counit is used.
 Source: Stacks Project, Tag 0098, stalks of pullback; Tags 08HY and 08DW,
-exact localization and restriction.
-(blueprint: lem-pc-open-ordinary-tensor-germ-transport). -/
+exact localization and restriction. -/
 theorem exists_openOrdinaryTensor_germ_transport
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

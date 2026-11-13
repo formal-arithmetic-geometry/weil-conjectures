@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Finite-stage local module models
 
-Source: Stacks Project, Tags 01ZR and 05N7.
-(blueprint: lem-pc-fp-local-object-models). -/
+Source: Stacks Project, Tags 01ZR and 05N7. -/
 
 @[expose] public section
 
@@ -72,7 +71,6 @@ private theorem transport_chart_model
 
 /-- Local finitely presented modules lift on a finite affine cover, without any overlap maps.
 Source: Stacks Project, Limits, Tag 01ZR, first proof; Algebra, Tag 05N7, object clause.
-(blueprint: lem-pc-fp-local-object-models).
 
 Proof: Quasi-compactness of f over the affine base makes Xi quasi-compact. Take a finite
 subcover of its affine cover. On each chart the stage coordinate rings are base changes

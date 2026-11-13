@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 /-! # Transport of a module pullback comparison across a scheme isomorphism
 
 Source: Stacks Project, Tags 06YJ, 08HY and 0D5S.
-(blueprint: lem-pc-module-pullback-comparison-iso-transport).
 -/
 
 @[expose] public section
@@ -49,7 +48,6 @@ private theorem postcompose_rightKanExtension
 /-- A comparison on a module transports through an isomorphism over its base.
 Source: Stacks Project, Tag 06YJ, left-derived pullback; Tag 0D5S, composition;
 Tag 08HY, counit construction.
-(blueprint: lem-pc-module-pullback-comparison-iso-transport).
 
 Proof: Direct image along e.hom is an exact equivalence, inverse to tensor
 pullback along e.hom. Tensor pullback composition and e.hom followed by p = a

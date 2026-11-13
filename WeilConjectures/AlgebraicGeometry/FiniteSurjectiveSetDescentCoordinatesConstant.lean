@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 /-! # Constancy of compatible finite-descent stalk coordinates
 
 Source: Stacks Project, Étale Cohomology, Lemma 09Z2 and Remark 09Z3.
-(blueprint: lem-weil-pbc-sets-finite-descent-coordinates-constant).
 -/
 
 @[expose] public section
@@ -428,7 +427,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Compatible comparison pullbacks give equal coordinates at any two geometric lifts.
 Source: Stacks Project, Étale Cohomology, Lemma 09Z2, last paragraph, and Remark 09Z3.
-(blueprint: lem-weil-pbc-sets-finite-descent-coordinates-constant).
 
 Proof: The inverse-image stalk bijection identifies the restriction of the stalk unit
 at every lift with the identity. Hence any bijective coordinate identification satisfying

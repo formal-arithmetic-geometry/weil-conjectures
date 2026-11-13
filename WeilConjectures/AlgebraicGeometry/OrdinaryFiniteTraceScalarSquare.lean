@@ -11,8 +11,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceCounitComparisons
 /-!
 # Tensoring the ordinary scalar trace square
 
-Source: blueprint thm-amb-p1-adjunction.proof.md, counit base change.
-(auxiliary; not a blueprint node).
 The ordered projection mate square converts the scalar trace square into the
 trace-counit square. The proof is compiled separately from its projective-line
 specialization to keep the derived-functor kernel checks below the file limit.
@@ -58,7 +56,7 @@ private theorem twistedPullbackComparison_hom
   rfl
 
 /-- A scalar trace square and the tensor-unit square give the full trace-counit square.
-Source: blueprint thm-amb-p1-adjunction.proof.md, inverse projection followed by scalar trace.
+
 The tensor projection square is the adjunction mate of the pullback tensor square;
 invert its proper projections, insert the scalar trace square and apply the unit square. -/
 theorem ordinaryFiniteTraceCounit_of_scalar_square

@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.KoszulOpenSectionsUnit
 /-! # The ordinary augmented Koszul cycle is the Cech unit
 
 Source: Stacks Project, Tag 08D1, the signed fraction formula.
-(blueprint: lem-sc-koszul-open-augmentation-cech-unit).
 -/
 
 @[expose] public section
@@ -64,7 +63,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The singleton comparison value of the augmentation cochain is restriction of one.
 Source: Stacks Project, Tag 08D1, signed fraction formula; Tag 08D0, singleton formula.
-(blueprint: lem-sc-koszul-open-augmentation-cech-unit).
 
 Proof: Transpose the tilde augmentation using the tilde/sections adjunction unit.
 Its value on the singleton wedge e_j is f_j times the top-open image of one:
@@ -197,7 +195,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The augmentation cycle and restriction of one have the same ordinary Cech class.
 Source: Stacks Project, Tag 08D1, proof, the isomorphisms psi^{p,q} and the sign
 (-1)^(pq+p(p-1)/2); Tag 08D0, singleton fraction formula.
-(blueprint: lem-sc-koszul-open-augmentation-cech-unit).
 
 Proof: Transpose the exponent-one augmentation through the tilde/sections
 adjunction. On each singleton wedge e_j it gives f_j times the global unit.

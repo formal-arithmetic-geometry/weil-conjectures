@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleLocalSubsheafGluing
 # Gluing compatible local submodules on the pro-etale site
 
 Source: Stacks Project, Sites, Tag 04TR, gluing sheaves, and Modules on Sites,
-Tag 03EL (auxiliary; not a blueprint node).
+Tag 03EL.
 -/
 
 @[expose] public section
@@ -39,7 +39,6 @@ end ActionLift
 /-- Compatible local submodules of a fixed internal module glue.
 
 Source: Stacks Project, Sites, Tag 04TR; Modules on Sites, Tag 03EL.
-(auxiliary; not a blueprint node).
 
 Proof: glue the underlying abelian subobjects using their commuting overlap
 comparisons. The local factorization property of the glued subobject lifts the

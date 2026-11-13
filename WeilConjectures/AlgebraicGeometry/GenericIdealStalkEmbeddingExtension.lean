@@ -130,7 +130,6 @@ set_option backward.isDefEq.respectTransparency false in
 structure module extends after restricting its source to a nonzero ideal.
 Source: Stacks Project, Tags 01Y4, 01YB and 01YE, extending stalk maps and
 clearing denominators in the ideal-lattice construction.
-(blueprint: new-generic-ideal-stalk-embedding-extension)
 
 Proof: the closed pushforward of the structure module is coherent because the
 closed immersion is finite and X is Noetherian. Extend the prescribed stalk map

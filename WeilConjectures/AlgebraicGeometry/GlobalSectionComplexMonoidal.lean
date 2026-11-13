@@ -24,8 +24,7 @@ namespace CategoryTheory
 attribute [local instance] ringFamilyGlobalExtension_additive
 /-- The usual total-tensor monoidal structure, with small colimit instances cached.
 This is the existing `HomologicalComplex.monoidalCategory`, without any changed tensor data.
-Source: Stacks Project, Tags 0996 and 099E, total tensor complexes.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0996 and 099E, total tensor complexes. -/
 noncomputable abbrev smallClosedCochainMonoidal
     (D : Type w) [Category.{v} D] [Preadditive D] [HasZeroObject D]
     [MonoidalCategory D] [SymmetricCategory D] [MonoidalPreadditive D]
@@ -51,7 +50,6 @@ set_option maxHeartbeats 800000 in
 /-- The scalar-extension functor on complexes is strong monoidal with its prescribed
 multiplication as the inverse unit constraint.
 Source: Stacks Project, algebraization.tex, Tags 0996 and 099E.
-(auxiliary; not a blueprint node).
 
 Proof: use the module-level normalized strong monoidal structure and the proved small
 colimit preservation. Apply the source library's additive monoidal lift to cochain

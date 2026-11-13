@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetRowPrimitive
 /-! # Single-column cancellation in subset Čech coordinates
 
 Source: Stacks Project, Cohomology, Tag 08C1.
-(blueprint: lem-sc-principal-open-cech-column-step).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry
 
 Source: Stacks Project, Cohomology, Tag 08C1, first paragraph, using the
 finite-row argument of Homology Lemma 12.25.4.
-(blueprint: lem-sc-principal-open-cech-column-step).
 
 Proof: Put q = n - k. The coordinates of t of cardinality k+1 form a
 horizontal Čech k-cochain with coefficients J.X q. At every subset of

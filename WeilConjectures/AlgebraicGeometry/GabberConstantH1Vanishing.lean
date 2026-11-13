@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.GabberFiniteConstantTorsorsTrivial
 /-!
 # Gabber's vanishing of first constant étale cohomology
 
-Source: Stacks Project, Étale Cohomology, Lemma 09ZB
-(blueprint: lem-weil-pbc-gabber-h1-absolutely-algebraically-closed).
+Source: Stacks Project, Étale Cohomology, Lemma 09ZB.
 -/
 
 @[expose] public section
@@ -29,15 +28,14 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- Source: Stacks Project, Étale Cohomology, Lemma 09ZB
-(blueprint: lem-weil-pbc-gabber-h1-absolutely-algebraically-closed).
+/-- Source: Stacks Project, Étale Cohomology, Lemma 09ZB.
 For a normal domain with separably closed fraction field, first étale cohomology of any
 finite constant abelian sheaf on any closed subscheme of its spectrum vanishes.
 
 Proof outline:
 1. By `thm-galois-torsor-h1` (Stacks 03AJ), a degree-one cohomology class corresponds
    to a torsor under the constant sheaf. It suffices to trivialize this torsor.
-2. The torsor is finite locally constant (`def-weil-pbc-finite-torsors`), so
+2. The torsor is finite locally constant, so
    `thm-galois-lc-etale` (Stacks 03RV) represents it by a finite étale scheme over `Z`.
    The representing morphism is surjective because the torsor is locally trivial.
 3. `lem-weil-pbc-gabber-finite-etale-section` (Stacks 09ZA) gives a section of that

@@ -15,8 +15,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 /-! # Pseudo-coherence is closed under distinguished triangles
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 08CD,
-`lemma-cone-pseudo-coherent`, part (2) for every integer m
-(blueprint: lem-pc-pseudo-coherent-distinguished-triangle).
+`lemma-cone-pseudo-coherent`, part (2) for every integer m.
 -/
 
 @[expose] public section
@@ -248,8 +247,7 @@ private theorem affine_finiteFree_map_representative (X : Scheme.{u}) (U : X.Ope
 /-- In a distinguished triangle in `D(𝒪_Y)`, pseudo-coherence of the first and third
 objects implies pseudo-coherence of the second.
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 08CD, part (2) for every m
-(blueprint: lem-pc-pseudo-coherent-distinguished-triangle).
+Source: Stacks Project, Cohomology of Sheaves, Tag 08CD, part (2) for every m.
 
 Proof:
 1. Intersect the two neighbourhoods supplied by pseudo-coherence and choose an affine
@@ -264,7 +262,7 @@ Proof:
 3. Restrict the triangle and inverse-rotate it. Conjugate its first arrow by the models
    of C[-1] and A. Full affine derived sheafification lifts this arrow to modules;
    K-projectivity represents it by a chain map. Sheafify and use the factorization
-   isomorphism's naturality to obtain a chain map g : P_C[-1] → P_A representing it.
+   isomorphism's naturality to obtain a chain map g: P_C[-1] → P_A representing it.
 4. Compare the cone triangle with the inverse-rotated triangle using the isomorphism
    of their first arrows. The third component of the resulting triangle isomorphism
    identifies B with Q(cone(g)). The cone has terms P_C^i ⊕ P_A^i: they vanish above

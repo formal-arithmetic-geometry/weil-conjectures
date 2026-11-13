@@ -20,8 +20,7 @@ import all WeilConjectures.AlgebraicGeometry.AffinePushforwardIdealProduct
 /-! # Image of the pullback of an ideal-module product
 
 Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0887,
-using Modules Lemma 01BG and Algebra Lemma 00DF
-(blueprint: lem-weil-pbc-module-pullback-ideal-product-image).
+using Modules Lemma 01BG and Algebra Lemma 00DF.
 -/
 
 @[expose] public section
@@ -204,7 +203,6 @@ private theorem modulePullbackIdealProductImage_affine_range {X Y : Scheme.{v}} 
 
 /-- Pulling back the inclusion of an ideal-module product has image the product by the
 extended ideal. Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0887.
-(blueprint: lem-weil-pbc-module-pullback-ideal-product-image).
 
 Proof: choose affine opens V in Y and U in X with U contained in the inverse image of V.
 Write A = O_Y(V), B = O_X(U), a = J(V), and M = G(V). Quasi-coherent affine sections

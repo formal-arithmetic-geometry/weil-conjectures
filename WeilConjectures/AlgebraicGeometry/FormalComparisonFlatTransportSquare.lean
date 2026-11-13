@@ -33,14 +33,13 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Transport the quotient comparison and adjunction diagram under flat base change.
 This statement does not take or construct a map from G to the completed direct image.
 Source: Stacks Project, Tag 088B, completed-base change paragraph; Tags 02KH and 0887.
-(blueprint: lem-weil-pbc-formal-comparison-flat-transport-square)
 
 Proof: Write q and p for the projections. The natural degree-zero base-change map
-b_M : g*f_*M to p_*q*M is invertible for quasi-coherent M, since f is proper and g
+b_M: g*f_*M to p_*q*M is invertible for quasi-coherent M, since f is proper and g
 flat (02KH). Identify F₀ with q*F. Pullback composition and the equality of extended
 ideals, together with the quotient-pullback isomorphisms of 0887, transport beta to
 beta₀. Apply the same quotient-pullback comparison to H = f_*F and complete b_F
-inverse to obtain delta : (p_*F₀)^ to g*H^. Termwise base change followed by the
+inverse to obtain delta: (p_*F₀)^ to g*H^. Termwise base change followed by the
 completion-pullback isomorphism for F gives the natural transformation t on the
 completed system. Define kappa₀ to be delta followed by g*kappa followed by t.
 Naturality of b at each quotient projection, and the quotient-projection equations

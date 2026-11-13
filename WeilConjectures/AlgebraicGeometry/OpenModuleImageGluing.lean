@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.OpenModuleImageSeparated
 /-! # Gluing the concrete open restriction/direct-image units
 
 Source: Stacks Project, Cohomology, Tag 08BV, kernel of the displayed sequence.
-(blueprint: lem-pc-open-module-image-gluing).
 -/
 
 @[expose] public section
@@ -27,9 +26,8 @@ set_option autoImplicit false
 namespace AlgebraicGeometry
 
 /-- The restriction units for a two-open cover form a pullback, for every module sheaf.
-Source: Stacks Project, Cohomology, Tag 08BV (lemma-exact-sequence-j-star),
-and the sheaf gluing argument of Tag 01EB (lemma-mayer-vietoris).
-(blueprint: lem-pc-open-module-image-gluing).
+Source: Stacks Project, Cohomology, Tag 08BV,
+and the sheaf gluing argument of Tag 01EB.
 
 Proof: Evaluate the underlying presheaves of abelian groups at any test open T.
 Transport the restriction/direct-image objects along overFunctorEquiv to the

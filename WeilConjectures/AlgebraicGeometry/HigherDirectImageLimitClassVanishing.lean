@@ -26,8 +26,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- A stage class vanishing in the limit fiber vanishes at a later stage.
-Source: Stacks Project, Lemma 59.51.7, Tag 09Z1, proof
-(blueprint: sbc-lem-higher-direct-image-limit-class-vanishing).
+Source: Stacks Project, Lemma 59.51.7, Tag 09Z1, proof.
 
 Proof:
 1. Represent the given stage fiber class on an affine etale neighborhood of the
@@ -39,7 +38,7 @@ Proof:
    inverse image preserves the sheaf colimit and degree-zero complexes.
 3. Apply injectivity of the complex cohomology continuity comparison. A class of
    a filtered colimit represented at a stage is zero exactly when it becomes zero
-   at some later stage. Thus there exist `j` and `f : i ⟶ j` killing the restricted
+   at some later stage. Thus there exist `j` and `f: i ⟶ j` killing the restricted
    class. Naturality of the higher direct image presheaf identification and `hK`
    identify this map with the fiber of `K.map f`. Passing back to germs proves
    the desired vanishing. The compatibility equation `hη` is used in step 1. -/

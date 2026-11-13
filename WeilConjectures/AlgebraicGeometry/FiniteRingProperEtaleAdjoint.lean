@@ -16,9 +16,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 
 /-! # Proper étale pushforward with finite ring coefficients
 
-Source: latest blueprint, sec-six-functors-basics, sk-prop-sf-existence, order 2549;
-Stacks Project, Tags 0F0D and 0F5Y
-(blueprint: thm-sfb-finite-proper-pushforward-left-adjoint).
+Source: latest, order 2549;
+Stacks Project, Tags 0F0D and 0F5Y.
 
 The coefficient ring need not be commutative. The recorded upstream instance requires
 `CommRing`, so it cannot supply the noncommutative instances of this node.
@@ -51,8 +50,7 @@ private theorem finiteRing_brown
 
 /-- Proper pushforward on unbounded derived categories of étale sheaves of modules over
 any finite ring has a right adjoint.
-Source: latest blueprint, order 2549, Stacks Tags 0F0D and 0F5Y
-(blueprint: thm-sfb-finite-proper-pushforward-left-adjoint).
+Source: latest blueprint, order 2549, Stacks Tags 0F0D and 0F5Y.
 
 Proof plan:
 1. A finite ring is killed by a positive integer. Exact conservative coefficient forgetting,
@@ -60,9 +58,8 @@ Proof plan:
    dimension shifting prove preservation of arbitrary coproducts by the unbounded derived
    direct image (lem-sfb-finite-proper-derived-coproducts, Stacks 0F0D). Commutativity is
    unnecessary; the underlying abelian higher direct images control all coefficients.
-2. Module sheaves form a Grothendieck abelian category
-   (lem-sfb-arbitrary-coefficient-etale-sheaves-grothendieck). The K-injective total derived
-   pushforward is triangulated (lem-pc-right-derived-functor-triangulated).
+2. Module sheaves form a Grothendieck abelian category. The K-injective total derived
+   pushforward is triangulated.
 3. Apply Brown representability (lem-grothendieck-derived-brown-right-adjoint, Stacks 0F5Y).
    It supplies a right adjoint without any condition on the source or target schemes.
 The separate pro-étale warning is the existing abelian-variety counterexample in

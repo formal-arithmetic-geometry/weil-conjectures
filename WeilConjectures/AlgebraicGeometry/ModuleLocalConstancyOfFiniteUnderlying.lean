@@ -16,7 +16,6 @@ import WeilConjectures.ConstructibleSheaf.Defs
 # Local constancy of module operations on finite locally constant sets
 
 Source: Stacks Project, Tags 0DV5 and 093S (1).
-(blueprint: lem-pod-module-local-constancy-of-finite-underlying)
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace AlgebraicGeometry.Scheme
 /-- A module sheaf whose underlying sets are finite locally constant is locally constant
 as a module sheaf. This conclusion does not assert finiteness of its constant models.
 Source: Stacks Project, Tag 0DV5, proof of (2)--(3), using Tag 093S (1).
-(blueprint: lem-pod-module-local-constancy-of-finite-underlying)
 
 Proof: first trivialize the underlying sheaf on an etale cover. Its constant values may
 be taken finite: on a nonempty covering member evaluate at a geometric point, where the

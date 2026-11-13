@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageSheafifiedPresheaf
 /-! # Bounded direct image and arbitrary ring coefficients
 
 Source: Stacks Project, Tags 03FD and 072W.
-(blueprint: lem-sfb-ring-bounded-derived-forget-comparison)
 -/
 
 @[expose] public section
@@ -34,19 +33,19 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- Forget the scalar action on an etale sheaf.
-Source: Stacks 03FD (blueprint: lem-sfb-ring-bounded-derived-forget-comparison). -/
+Source: Stacks 03FD. -/
 abbrev ringAbelianForget (Λ : Type (u + 1)) [Ring Λ] (X : Scheme.{u}) :=
   sheafCompose X.smallEtaleTopology
     (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
 
 /-- Scalar forgetting preserves addition on morphisms, sectionwise.
-Source: Stacks 03FD (blueprint: lem-sfb-ring-bounded-derived-forget-comparison). -/
+Source: Stacks 03FD. -/
 instance ringAbelianForget_additive (Λ : Type (u + 1)) [Ring Λ] (X : Scheme.{u}) :
     (ringAbelianForget Λ X).Additive where
   map_add := by intro F G α β; ext W; rfl
 
 /-- Scalar forgetting preserves finite limits, since presheaf inclusion reflects them.
-Source: Stacks 03DA (blueprint: lem-sfb-ring-bounded-derived-forget-comparison). -/
+Source: Stacks 03DA. -/
 instance ringAbelianForget_preservesFiniteLimits
     (Λ : Type (u + 1)) [Ring Λ] (X : Scheme.{u}) :
     PreservesFiniteLimits (ringAbelianForget Λ X) := by
@@ -60,7 +59,7 @@ instance ringAbelianForget_preservesFiniteLimits
     (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})⟩
 
 /-- Scalar forgetting preserves colimits via its coefficient coextension right adjoint.
-Source: Stacks 03DB (blueprint: lem-sfb-ring-bounded-derived-forget-comparison). -/
+Source: Stacks 03DB. -/
 instance ringAbelianForget_preservesColimits
     (Λ : Type (u + 1)) [Ring Λ] (X : Scheme.{u}) :
     PreservesColimitsOfSize.{u + 1, u + 1} (ringAbelianForget Λ X) := by
@@ -85,14 +84,14 @@ instance ringAbelianForget_preservesColimits
 set_option backward.defeqAttrib.useBackward true
 
 /-- Direct image commutes definitionally with forgetting coefficients.
-Source: Stacks 072W (blueprint: lem-sfb-ring-bounded-derived-forget-comparison). -/
+Source: Stacks 072W. -/
 noncomputable def ringAbelianLowerStarIso
     (Λ : Type (u + 1)) [Ring Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (f)_*[ModuleCat.{u + 1} Λ] ⋙ ringAbelianForget Λ Y ≅
       ringAbelianForget Λ X ⋙ (f)_*[AddCommGrpCat.{u + 1}] := Iso.refl _
 
 /-- The canonical comparison determined by the units of right derived direct image.
-Source: Stacks 03FD (blueprint: lem-sfb-ring-bounded-derived-forget-comparison). -/
+Source: Stacks 03FD. -/
 noncomputable def ringAbelianDerivedLowerStarComparison
     (Λ : Type (u + 1)) [Ring Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     R+((f)_*[ModuleCat.{u + 1} Λ]) ⋙ D+(ringAbelianForget Λ Y) ⟶
@@ -101,7 +100,6 @@ noncomputable def ringAbelianDerivedLowerStarComparison
 
 /-- The Cech criterion on all etale objects gives abelian evaluation acyclicity.
 Source: Stacks 03FD, second proof paragraph, via 03FC and 03F9.
-(blueprint: lem-sfb-ring-bounded-derived-forget-comparison)
 -/
 private theorem ringAbelianForget_injective_evaluation_acyclic
     (Λ : Type (u + 1)) [Ring Λ] (X : Scheme.{u})
@@ -168,7 +166,6 @@ private theorem ringAbelianForget_injective_evaluation_acyclic
 /-- The canonical derived direct-image coefficient comparison is invertible.
 
 Source: Stacks Project, Tag 03FD, second paragraph of its proof, and Tag 072W.
-(blueprint: lem-sfb-ring-bounded-derived-forget-comparison)
 
 Proof: Identify a ModuleCat-valued sheaf with a module over the constant ring
 sheaf, preserving its underlying abelian sheaf and injectivity. Tag 03FD gives
@@ -217,7 +214,6 @@ attribute [instance] isIso_ringAbelianDerivedLowerStarComparison
 
 /-- Classical higher direct images commute with forgetting the scalar action.
 Source: Stacks 03FD and 072W.
-(blueprint: lem-sfb-ring-bounded-derived-forget-comparison)
 
 Proof: apply homology to the proved bounded derived comparison, using exactness of
 forgetting and its compatibility with single complexes. -/

@@ -34,7 +34,6 @@ realization equivalence, or reflection of limits is asserted here.
 
 Source: Stacks Project, Lemma 0881, proof, affine identification of the quotient system;
 Lemma 01IB for the affine sections/tilde equivalence.
-(blueprint: lem-weil-pbc-formal-completion-affine-quotients).
 
 Proof: Restriction to the open subscheme preserves ideal products, their powers,
 and cokernels. Use the equality hρ to identify the underlying system with the

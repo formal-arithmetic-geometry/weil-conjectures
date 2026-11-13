@@ -17,8 +17,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 
 /-! # GabberPrincipalClassLocallyZero
 
-Source: Stacks Project, Tag 0GY0.
-(blueprint: lem-weil-pbc-gabber-principal-class-locally-zero) -/
+Source: Stacks Project, Tag 0GY0. -/
 
 @[expose] public section
 
@@ -47,7 +46,6 @@ set_option backward.isDefEq.respectTransparency false in
 Source: Stacks Project, Etale Cohomology, Lemma 0GY0, label lemma-gabber-criterion,
 proof's local triviality paragraph; Lemma 03QO and the local-ring continuity
 argument in Lemma 09AX (using Tags 03Q6, 09YQ and 03F3).
-(blueprint: lem-weil-pbc-gabber-principal-class-locally-zero)
 
 Proof: identify the stalk on D(h) at p with the prime localization R_p.
 Transport strict henselianity along this isomorphism. Positive-degree etale

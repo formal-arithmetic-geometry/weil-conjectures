@@ -40,7 +40,6 @@ attribute [local irreducible] Scheme.Modules.overEquiv Scheme.Modules.restrictFu
 naturally in every coefficient sheaf.
 Source: Stacks Project, Tag 08DL (restriction of derived internal Hom), and
 Tag 08DM (finite locally free computation of derived internal Hom).
-(blueprint: lem-sc-local-finite-free-homology-natural).
 
 Proof: Use the functorial K-injective resolution of each coefficient single
 complex. The localization comparison for derived internal Hom is natural in

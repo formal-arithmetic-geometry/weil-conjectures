@@ -12,8 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.LocalMapPullbackFamily
 import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComposition
 
 /-! # Recovery on an iterated pulled-back cover
-Source: Stacks Project, Tags 01ZR, 0095 and 0096.
-(blueprint: lem-pc-local-map-recovery-composition). -/
+Source: Stacks Project, Tags 01ZR, 0095 and 0096. -/
 
 @[expose] public section
 set_option backward.isDefEq.respectTransparency false
@@ -69,7 +68,6 @@ private theorem conjugate_transport {C D : Type*} [Category C] [Category D]
 /-- Recovery for two successive base changes, without an earlier base scheme.
 Source: Stacks Project, Tag 01ZR, first proof, base change of local lifts;
 Tags 0095 and 0096, functoriality of module pullback.
-(blueprint: lem-pc-local-map-recovery-composition).
 Proof: For each index of U₀, construct the isomorphism from the iterated chart
 (U₀.pullback₁ q).pullback₁ p to the direct chart U₀.pullback₁ b as
 pullbackRightPullbackFstIso followed by pullback.congrHom wpq. Both projection

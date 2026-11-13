@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.ProperSupportSectionLocality
 
 /-! # The image of the composite proper-support inclusion
 
-Source: Stacks Project, Tag 0F50
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 0F50.
 -/
 
 @[expose] public section
@@ -159,7 +158,6 @@ private theorem iterated_support_iff
 /-- The composite support inclusion has exactly the properly supported sections as image.
 
 Source: Stacks Project, Tag 0F50.
-(auxiliary; not a blueprint node)
 
 Proof:
 Let T be the support of an underlying section on X_W. If it is proper over Y_W,

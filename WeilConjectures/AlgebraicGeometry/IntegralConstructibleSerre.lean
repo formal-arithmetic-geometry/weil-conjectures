@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleCokernelsExtensions
 
 Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(1),(3), with the
 integral finite-presentation comparison spelled out below.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 /-- Integral constructible module objects form a weak Serre class.
 Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(1),(3), with the
 integral finite-presentation comparison spelled out below.
-(auxiliary; not a blueprint node)
 
 Proof: the coefficient-dependent kernel closure is combined with generic cokernel
 and extension closure for locally finitely presented internal module sheaves. The latter

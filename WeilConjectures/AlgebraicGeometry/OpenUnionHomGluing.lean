@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.OpenUnionRestrictionTransport
 /-! # Gluing morphisms between fixed objects on an open union
 
 Source: Stacks Project, Tag 08BW.
-(blueprint: lem-sc-open-union-hom-gluing).
 -/
 
 @[expose] public section
@@ -45,7 +44,6 @@ set_option backward.isDefEq.respectTransparency false in
 an open union. The conclusion constructs a map, and does not construct objects
 or local isomorphisms. No lift to a morphism on all of X is asserted.
 Source: Stacks Project, Tag 08BW, exactness at the local Hom pair, on W union V.
-(blueprint: lem-sc-open-union-hom-gluing).
 
 Proof: Set Y = W union V and pull W and V back to covering opens of Y. Restrict
 G and E to Y. Transport the local morphisms a and b through the canonical derived

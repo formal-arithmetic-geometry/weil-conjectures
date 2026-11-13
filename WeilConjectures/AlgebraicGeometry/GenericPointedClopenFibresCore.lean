@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 /-! Core geometric spreading statement for pointed clopen fibres.
 
 Source: Stacks Project, Tag 055N, using Tags 04KV and 055G.
-(blueprint: new-lem-sbc-generic-pointed-clopen-fibres-core)
 -/
 
 @[expose] public section
@@ -35,9 +34,7 @@ fibres, using Tags 04KV and 055G.
 Proof: pass to the reduced closure of `y`, form the open and closed subscheme represented by
 `A`, and apply generic connectedness of fibres to its geometrically connected generic fibre.
 Transport the resulting open back to `T`; fibre homeomorphisms identify its fibres with
-`g ⁻¹' {t} ∩ A`.
-
-(blueprint: new-lem-sbc-generic-pointed-clopen-fibres-core) -/
+`g ⁻¹' {t} ∩ A`. -/
 theorem exists_open_preconnected_fibres_of_pointed_clopen_core {P T : Scheme.{u}}
     (g : P ⟶ T) [LocallyOfFiniteType g] [QuasiCompact g]
     (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) (y : T) (V : Set T) (A : Set P)

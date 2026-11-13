@@ -16,7 +16,6 @@ import Mathlib.RingTheory.Finiteness.Ideal
 /-! # Restriction of ideal-power-torsion-free sections
 
 Source: Stacks Project, Properties, Tag 01PM, localization and injectivity argument.
-(blueprint: lem-pc-ideal-power-torsion-free-section-restriction)
 -/
 
 @[expose] public section
@@ -71,7 +70,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Restriction to the ideal complement is injective for an ideal-power-torsion-free module.
 
 Source: Stacks Project, Properties, Tag 01PM, localization and injectivity argument.
-(blueprint: lem-pc-ideal-power-torsion-free-section-restriction)
 
 Proof: Subtract two sections with equal restriction to W intersect U. Cover W by
 all its affine subopens A. Let z be the restricted difference on A and J the

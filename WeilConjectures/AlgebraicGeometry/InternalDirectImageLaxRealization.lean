@@ -11,8 +11,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCohe
 
 /-! # Section realization of the actual internal direct-image pairing
 
-Source: Stacks Project, Modules on Sites, Tags 03D6, 03D7 and 03EK
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 03D6, 03D7 and 03EK.
 
 All functors, adjunctions, balancing projections and pure-tensor comparisons below
 are the existing specified constructions. Evaluation is used only after the canonical
@@ -257,8 +256,7 @@ private theorem projection_pairing {X Y : Scheme.{u}} (f : X ⟶ Y)
 -- The two specified adjunctions involve large coefficient types.
 -- Comparisons of reconstructed module structures involve large coefficient types.
 /-- The fixed section comparisons identify the actual adjunction and lax direct image.
-Source: Stacks Project, Modules on Sites, Tags 03D6, 03D7 and 03EK
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 03D6, 03D7 and 03EK.
 
 Proof:
 1. The existing internal-module operations transport theorem gives the mate equation

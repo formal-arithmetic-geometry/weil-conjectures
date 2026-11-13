@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.MayerVietorisCompositionRightNormalizat
 /-! # Complex localization of the open composition square
 
 Source: Stacks Project, Tags 08FE and 08BV.
-(blueprint: lem-pc-mayer-vietoris-image-composition-localization).
 -/
 
 @[expose] public section
@@ -35,8 +34,7 @@ restricted complex, transport the units through the quotient comparison isomorph
 and expand the image component. Naturality and associativity identify the resulting
 four-map composite with the explicit restriction-localization chain and the inverse
 restriction comparison.
-(source: Stacks Project, Tags 08FE and 0D5T)
-(blueprint: lem-pc-mayer-vietoris-image-composition-localization-core) -/
+(source: Stacks Project, Tags 08FE and 0D5T) -/
 theorem schemeMV_image_composition_localization_core
     (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -82,8 +80,7 @@ the final two maps on the right; the definition of schemeMVOpenComparison identi
 the left side. This postcomposition uses no unit normalization property of that
 restriction comparison, which is the separate restriction-localization obligation.
 No K-injectivity is used here.
-Empty and full opens and identity morphisms are included by the same unit equations.
-(blueprint: lem-pc-mayer-vietoris-image-composition-localization). -/
+Empty and full opens and identity morphisms are included by the same unit equations. -/
 theorem schemeMV_image_composition_localization
     (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

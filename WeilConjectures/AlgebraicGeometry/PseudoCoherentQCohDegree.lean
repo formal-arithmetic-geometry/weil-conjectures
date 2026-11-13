@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 /-! A single-degree reduction of quasi-coherent cohomology for pseudo-coherent complexes.
 
 This is the degreewise local-model argument from Stacks Project, Tag 08E5.
-(blueprint: lem-sc-pseudo-coherent-qcoh-degree)
 -/
 
 @[expose] public section
@@ -85,7 +84,6 @@ quasi-coherent by the kernel and cokernel closure results.  The local identifica
 of cohomology sheaves then glue, since quasi-coherence is local on a scheme.  This
 degreewise statement is the strictly smaller component from which the all-degrees
 property is obtained.
-(blueprint: lem-sc-pseudo-coherent-qcoh-degree)
 -/
 theorem schemeDerivedQCohProperty_of_isPseudoCoherent_degree
     (Y : Scheme.{u})

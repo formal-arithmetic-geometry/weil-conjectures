@@ -36,7 +36,6 @@ namespace AlgebraicGeometry
 allow stage flatness to be glued. This comparison asserts no eventual flatness.
 Source: Stacks Project, Limits, Tag 05LY, affine-local reduction with Y_i = S_i;
 Properties, Tag 01PC; Morphisms, Tag 01U4.
-(blueprint: lem-pc-flat-module-descent-affine-charts).
 
 Proof: Since the base Spec(R_i) is affine and f is quasi-compact, X_i is
 quasi-compact. Choose a finite affine open cover U_b of X_i, and put B_b = O(U_b)

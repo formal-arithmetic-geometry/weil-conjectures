@@ -177,9 +177,8 @@ private theorem local_resolution_class_bijective {X Y : Scheme.{u}} (f : X ⟶ Y
 /-- The canonical class map is an A-linear equivalence.
 Source: Stacks Project, Tag 02OD, the local-stalk/global-cohomology identification;
 Tag 01E4, the cocycle-to-cohomology-sheaf comparison.
-(blueprint: lem-weil-pbc-local-direct-image-stalk-cohomology-equiv)
 
-Proof: Set A = O_{Y,y}, c : Spec A → Y, f' : X' → Spec A, F' = g'^*F.
+Proof: Set A = O_{Y,y}, c: Spec A → Y, f': X' → Spec A, F' = g'^*F.
 For every neighborhood V of y, c^{-1}V is top. Thus taking the germ identifies
 Gamma(Spec A,N) with (c_*N)_y. Every open of Spec A containing its closed point
 is top, so Gamma(Spec A,-) is closed-point stalk evaluation and is exact.

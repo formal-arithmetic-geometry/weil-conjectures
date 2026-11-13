@@ -33,7 +33,6 @@ private theorem constantModules_preservesMonomorphisms
 /-- Scalar extension preserves monomorphisms over a field.
 
 Source: Stacks Project, Modules, Tag 02N4.
-(blueprint: lem-sc-field-scalar-extension-mono).
 
 Proof: the inclusion of sheaves into presheaves preserves monomorphisms, the
 conversion to modules over the constant ring presheaf preserves pointwise

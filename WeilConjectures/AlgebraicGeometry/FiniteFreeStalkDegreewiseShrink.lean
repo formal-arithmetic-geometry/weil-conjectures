@@ -13,9 +13,6 @@ import WeilConjectures.AlgebraicGeometry.StalkRestrictionSubopenCompatibility
 import Mathlib.Data.Int.Interval
 
 /-! # Shrinking differential-commutativity defects
-
-Source: lem-pc-finite-free-stalk-chain-map-lift-local, the zero-germ shrinking step.
-(blueprint: lem-pc-finite-free-stalk-degreewise-shrink)
 -/
 
 @[expose] public section
@@ -26,10 +23,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- An already defined degreewise family whose stalk commutes with differentials
 can be restricted to a smaller neighbourhood where it commutes.
-
-Source: lem-pc-finite-free-stalk-chain-map-lift-local, step 2 (vanishing of the
-commutativity defects) and step 3 (compatibility of stalk restriction), expanding
-lem-pc-perfect-locus's extension of the finite calculation.
 
 Proof: In the restricted finite bases form, for every adjacent degree, the matrix
 of g n followed by d_Q minus d_P followed by g (n+1). Its pullback to the stalk
@@ -48,8 +41,7 @@ The compatibility follows by the associativity of pullback composition and the
 identity of the composite maps from Spec O_{Y,y}. For an empty support interval,
 rank-zero terms, or an already commuting family, the same construction works
 with no equations or no further shrinking. The lemma extends no prescribed map:
-it starts with the family g already defined on U.
-(blueprint: lem-pc-finite-free-stalk-degreewise-shrink) -/
+it starts with the family g already defined on U. -/
 theorem exists_shrink_degreewise_comm_of_stalk
     {Y : Scheme.{u}} (P Q : CochainComplex Y.Modules ℤ)
     (a b c e : ℤ)

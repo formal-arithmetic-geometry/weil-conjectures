@@ -28,7 +28,6 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 set_option backward.isDefEq.respectTransparency false in
 /-- A derived morphism killed by restriction vanishes after a Koszul power transition.
 Source: Stacks Project, Tag 08DD, proof of Proposition 36.9.5.
-(blueprint: lem-sc-koszul-open-hom-restriction-eventually-zero)
 
 Proof: Use the affine derived equivalence (Tag 06Z0) to represent E by a termwise
 quasi-coherent complex F, corresponding to an A-module complex M. Since each tail is

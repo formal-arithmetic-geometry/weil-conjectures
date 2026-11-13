@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.FinitePresentationZeroMapDescent
 /-!
 # Descent of finite relations among module maps
 
-Source: Stacks Project, Limits, Lemma 32.10.2 (Tag 01ZR)
-(blueprint: lem-pc-fp-relation-descent).
+Source: Stacks Project, Limits, Lemma 32.10.2 (Tag 01ZR).
 -/
 
 @[expose] public section
@@ -52,7 +51,7 @@ private theorem moduleBaseChange_map_eq_comp {X S : Scheme.{u}} (f : X ⟶ S)
   exact congrArg (fun t ↦ e'.hom.app F ≫ (Scheme.Modules.moduleBaseChange f h).map t) hab
 
 /-- Finite relations between descended module maps hold at a later stage.
-Source: Stacks Project, Limits, Tag 01ZR (blueprint: lem-pc-fp-relation-descent).
+Source: Stacks Project, Limits, Tag 01ZR.
 
 The modules are the given models on `X_j`; the modules on `X` are their canonical
 base changes. Transport through the specified model isomorphisms preserves equality.

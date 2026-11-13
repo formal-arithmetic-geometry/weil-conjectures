@@ -29,7 +29,6 @@ namespace AlgebraicGeometry.Proj
 /-- The locally-fraction construction of one twist has its usual homogeneous fraction chart.
 Source: Stacks Project, Constructions, Definition 27.10.1 (1), Tag 01MN, and
 Lemma 27.8.4 (2),(3), Tag 01M7.
-(blueprint: lem-sc-proj-single-twist-basic-open-fractions)
 
 Proof: map a homogeneous fraction y/f^m of degree k to the section that at a homogeneous
 prime p in D₊(f) is the image of that fraction in the degree-k part of A_p. Equality in the

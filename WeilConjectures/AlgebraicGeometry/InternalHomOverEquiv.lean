@@ -12,8 +12,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 /-! # Internal Hom under the open-subscheme equivalence
 
 Source: Stacks Project, Cohomology, Tag 08DL, construction of internal Hom;
-Mathlib AlgebraicGeometry/Modules/Sheaf.lean, `overEquiv`.
-(blueprint: lem-sc-internal-hom-over-equiv). -/
+Mathlib AlgebraicGeometry/Modules/Sheaf.lean, `overEquiv`. -/
 
 @[expose] public section
 
@@ -127,7 +126,6 @@ Hom, naturally in both module arguments.
 
 Source: Stacks Project, Cohomology, Tag 08DL, construction of internal Hom;
 Mathlib AlgebraicGeometry/Modules/Sheaf.lean, `overEquiv`.
-(blueprint: lem-sc-internal-hom-over-equiv).
 
 Proof: An open V of U corresponds to its image open in Y equipped with the inclusion
 into U. The slice over V is equivalent to the slice over that image object in the

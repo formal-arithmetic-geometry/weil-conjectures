@@ -14,7 +14,6 @@ public import
 /-! # Raw pullback for a commutative triangle
 
 Source: Stacks Project, Tags 03Q8 and 09Z1, canonical comparison maps.
-(blueprint: sbc-lem-higher-image-raw-triangle-restriction).
 -/
 
 @[expose] public section
@@ -90,7 +89,6 @@ private theorem trianglePullback_naturality
 set_option backward.isDefEq.respectTransparency true in
 /-- Restriction naturality of the raw pullback.
 Source: Stacks Project, Tags 03Q8 and 09Z1.
-(blueprint: sbc-lem-higher-image-raw-triangle-restriction).
 Proof: Naturality of restriction through each displayed pullback factor, followed by
 functoriality and associativity. -/
 theorem higherDirectImageRawTrianglePullback_restriction

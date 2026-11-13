@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Adjunction.Restrict
 /-! # Localized-site comparisons for the concrete open-image complexes
 
 Source: Stacks Project, Tags 08BV, 08BS, and 079W.
-(blueprint: lem-pc-localized-open-image-complex-comparisons).
 -/
 
 @[expose] public section
@@ -168,7 +167,6 @@ localized-site restriction, compatibly with every nested restriction.
 
 Source: Stacks Project, Tag 08BV, lemma-exact-sequence-j-star, first paragraph;
 Tag 08BS, lemma-restrict-K-injective-to-open; Tag 079W, lemma-adjoint.
-(blueprint: lem-pc-localized-open-image-complex-comparisons).
 
 Proof: For each open T, obtain the open-scheme derived localization in the
 prescribed Hom universe. Use the constructed K-injective open-image comparison

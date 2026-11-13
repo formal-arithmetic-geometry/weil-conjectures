@@ -15,8 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 
 Source: Stacks Project, Cohomology, Remark 08HY; Sheaves, Tags 0093, 0095, 0096;
 Modules, Tag 01CD. The algebra compatibility is the explicit argument in the node,
-not a separately stated Stacks lemma
-(blueprint: lem-weil-pbc-module-base-change-map-algebra).
+not a separately stated Stacks lemma.
 -/
 
 @[expose] public section
@@ -154,8 +153,7 @@ and preserves multiplication and units. The multiplications are characterized on
 section tensors, so they are the actual ring multiplications, not arbitrary algebra data.
 
 Source: Stacks Project, Cohomology, Remark 08HY; Sheaves, Tags 0093, 0095, 0096;
-Modules, Tag 01CD; algebra compatibility is explicit
-(blueprint: lem-weil-pbc-module-base-change-map-algebra).
+Modules, Tag 01CD; algebra compatibility is explicit.
 Proof:
 (1) Use the Hom bijection of def-pc-module-pullback and its natural unit. Identify
 `f_* g'_*` with `g_* f'_*` through the pushforward composition and square comparisons;
@@ -168,7 +166,7 @@ using def-pur-sheaf-tensor-product and def-weil-presheaf-modules-sheafification.
 Compare the adjoints of the two multiplication composites. Uniqueness of sheafification
 reduces equality to pure tensors. Naturality of eta gives g'^sharp(ab) on the first side;
 lem-weil-pbc-module-pullback-tensor gives g'^sharp(a) g'^sharp(b) on the second.
-These agree because g'^sharp is a ring homomorphism (def-pc-scheme).
+These agree because g'^sharp is a ring homomorphism.
 (4) Compare adjoints of the unit composites. Naturality and step (2) give
 (f composed with g')^sharp; the epsilon characterization gives (g composed with f')^sharp.
 They agree by the square and 0093. Thus gamma is an O_S'-algebra morphism. -/

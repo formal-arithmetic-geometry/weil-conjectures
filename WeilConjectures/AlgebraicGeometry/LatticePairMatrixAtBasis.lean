@@ -14,8 +14,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 /-!
 # Continuous matrices for locally free integral lattice pairs
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), local bases
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Proposition 6.8.4(6), local bases.
 -/
 
 @[expose] public section
@@ -218,8 +217,7 @@ private theorem pairVector_naturality {X : Scheme.{u}} {K : Type u} [Field K]
 
 /-- A specified finite local integral basis determines an invertible matrix in a
 rational frame, with its embedded-image formula after arbitrary restriction.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), local integral bases
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Proposition 6.8.4(6), local integral bases.
 Proof: on the specified finite free neighborhood, the tensor sheafification unit
 is an isomorphism. Transport the integral section basis through scalar extension,
 P's rationalization and the rational frame. When W is nonempty, evaluation at a point

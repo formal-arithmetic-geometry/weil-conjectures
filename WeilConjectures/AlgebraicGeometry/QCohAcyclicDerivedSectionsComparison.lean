@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.QCohAcyclicDerivedSectionsComparisonShe
 /-! # Derived sections for acyclic quasi-coherent pushforward
 
 Source: Stacks Project, Perfect Complexes, Tags 08D4, 08D5 and 0AVW, and
-Cohomology, Tag 0D5X (blueprint: lem-sc-qcoh-acyclic-derived-sections-comparison).
+Cohomology, Tag 0D5X.
 -/
 
 @[expose] public section
@@ -31,14 +31,11 @@ namespace AlgebraicGeometry
 cohomology, naturally in the derived object and compatibly with restriction. The
 full section cohomology presheaf sheafifies to the cohomology of derived direct image.
 
-Source: Stacks Project, Tags 08D4, 08D5, 0AVW and 0D5X
-(blueprint: lem-sc-qcoh-acyclic-derived-sections-comparison).
+Source: Stacks Project, Tags 08D4, 08D5, 0AVW and 0D5X.
 
 Proof: (1) For an affine open V, restrict the injective resolution and derived direct
 image to f⁻¹V and V, using lem-sc-ringed-space-restrict-injective-resolution and
-lem-pc-restrict-derived-direct-image-open. Higher direct images are quasi-coherent
-(lem-pc-finite-support-hi); affine vanishing (pqf-lem-affine-vanishing) and Leray
-(lem-pc-leray-degenerate-sections) imply that sections on f⁻¹V are acyclic on every
+lem-pc-restrict-derived-direct-image-open. Higher direct images are quasi-coherent; affine vanishing and Leray imply that sections on f⁻¹V are acyclic on every
 quasi-coherent module. Sections preserve countable products.
 (2) Shift to degree zero. Apply lem-pc-unbounded-derived-functor-cohomological-bound
 with N = 1 to the negative truncation: its derived sections vanish in degrees ≥ 0.

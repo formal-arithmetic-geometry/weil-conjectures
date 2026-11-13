@@ -17,7 +17,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 # Bijectivity of the affine tensor-sections map
 
 Source: Stacks Project, Schemes, Tags 01I9, 01IA, 01HV; Sheaves, Tags 0097, 00A0.
-(blueprint: lem-weil-pbc-module-pullback-affine-sections-bijective).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ set_option backward.isDefEq.respectTransparency.types false
 -- Elaboration compares native tensor products with ModuleCat extension of scalars.
 /-- Bijectivity of an A-linear map with the canonical affine pure-tensor formula.
 Source: Stacks Project, Schemes, Tags 01I9, 01IA and 01HV; Sheaves, Tags 0097 and 00A0.
-(blueprint: lem-weil-pbc-module-pullback-affine-sections-bijective).
 
 Proof: restrict G along Spec A → Y, and identify its global sections with G(V).
 The affine tilde-Gamma counit and the tilde pullback comparison give the B-linear

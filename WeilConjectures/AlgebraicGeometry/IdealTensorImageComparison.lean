@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 Source: Stacks Project, Varieties Remark 09NW and Lemma 09NX, displayed conductor equality;
 Modules Tag 01CD. The general image identification below is the representation step.
-(blueprint: lem-sc-ideal-tensor-image-comparison).
 -/
 
 @[expose] public section
@@ -36,7 +35,6 @@ ambient modules and any change of pullback adjunction.
 
 Source: Stacks Project, Varieties Remark 09NW and Lemma 09NX, displayed conductor equality;
 Modules Tag 01CD, pullback of tensor products.
-(blueprint: lem-sc-ideal-tensor-image-comparison).
 
 Proof: write a₀ for the canonical adjunction and c for its comparison with adj.
 For the canonical adjoint ideal map φ₀, on affine opens U = Spec B contained in the

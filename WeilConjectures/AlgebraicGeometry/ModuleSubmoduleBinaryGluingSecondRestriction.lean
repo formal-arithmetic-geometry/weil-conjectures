@@ -39,7 +39,6 @@ set_option maxHeartbeats 500000 in
 set_option backward.isDefEq.respectTransparency false in
 /-- The concrete pullback restricts to Q on V.
 Source: Stacks Project, Properties, Lemma 01PF, binary gluing step.
-(blueprint: lem-weil-pbc-module-submodule-binary-gluing-second-restriction)
 Proof: On an open contained in V the unit is restriction along an isomorphism.
 The second projection of its pullback is therefore an isomorphism. Compose it
 with the counit, which is also an isomorphism on V, obtaining the stated iso. -/

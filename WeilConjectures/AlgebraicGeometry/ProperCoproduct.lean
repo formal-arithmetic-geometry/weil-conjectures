@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 # Properness of a coproduct of two schemes
 
 Source: literature/stacks-project/coherent.tex, proof of Lemma 0CYR; Schemes,
-Section 01JA (blueprint: lem-weil-pbc-proper-coproduct).
+Section 01JA.
 -/
 
 @[expose] public section
@@ -25,11 +25,9 @@ namespace AlgebraicGeometry
 universe u
 
 /--
-(blueprint: lem-weil-pbc-proper-coproduct)
-For morphisms `p₁ : W₁ ⟶ S` and `p₂ : W₂ ⟶ S`, their coproduct morphism
+For morphisms `p₁: W₁ ⟶ S` and `p₂: W₂ ⟶ S`, their coproduct morphism
 has the stated open coproduct pieces and is proper when both components are
-proper. Source: Stacks, Cohomology of Schemes, proof of Lemma 0CYR
-(`lemma-union-closed-proper-over-base`); Schemes, Section 01JA.
+proper. Source: Stacks, Cohomology of Schemes, proof of Lemma 0CYR; Schemes, Section 01JA.
 
 Proof, following the four steps of the node:
 
@@ -39,7 +37,7 @@ Proof, following the four steps of the node:
    Each coprojection identifies its source with its open image over `S`.
 2. Assume both component maps proper. For every affine open `V` of `S`, choose
    finite affine covers of `p₁ ⁻¹ V` and `p₂ ⁻¹ V` with finitely generated
-   coordinate algebras (`def-weil-finite-type-morphism`). Transport these covers
+   coordinate algebras. Transport these covers
    through the open immersions. Their union covers `p ⁻¹ V`, and the algebra
    structures agree because the component composites equal `p₁` and `p₂`.
    This proves finite type, including quasi-compactness of each inverse image.
@@ -48,15 +46,15 @@ Proof, following the four steps of the node:
    of the coproduct. For a closed subset `Z` of that base change, its image in
    `T` is the union of the images of its closed inverse images in the two
    components. Each image is closed by universal closedness of the component
-   maps (`def-weil-proper-morphism`); their finite union is closed. Thus `p` is
+   maps; their finite union is closed. Thus `p` is
    universally closed.
 4. The four pieces `pr₁ ⁻¹ Uₖ ∩ pr₂ ⁻¹ Uₗ` partition `W ×[S] W` into clopen
    subsets. By `lem-weil-pbc-open-fibre-product`, the two equal-index pieces are
    the component self-products. The image of the diagonal of `p` is the union
    of the component diagonal images in these pieces. Each is closed because
    the component map is separated and the piece is closed. The diagonal is an
-   immersion (`lem-weil-pbc-diagonal-immersion`), so its closed image makes it a
-   closed immersion (`lem-weil-pbc-immersion-closed-image-closed-immersion`).
+   immersion, so its closed image makes it a
+   closed immersion.
    Thus `p` is separated; together with steps 2 and 3, this is properness by
    `def-weil-proper-morphism` (Stacks, Morphisms, Definition 01W1).
 -/

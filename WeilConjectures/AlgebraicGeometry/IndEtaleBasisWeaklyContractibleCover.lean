@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 # Weakly contractible covers in the affine ind-etale basis
 
 Source: Stacks Project, proetale.tex, Tag 0990, affine `S_app` clause;
-sites.tex, Tags 090L and 090K (2)
-(auxiliary; not a blueprint node).
+sites.tex, Tags 090L and 090K (2).
 -/
 
 @[expose] public section
@@ -51,8 +50,7 @@ private theorem surjective_evaluation_of_full_site (S : Scheme.{u}) (V : S.Affin
 
 /-- Every object of the affine ind-etale basis of an affine scheme admits a covering
 by objects that are weakly contractible in this same basis site.
-Source: Stacks Project, Tag 0990, affine `S_app` clause, and Tags 090L, 090K (2)
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 0990, affine `S_app` clause, and Tags 090L, 090K (2).
 
 Proof:
 1. Apply `exists_isWContractibleRing` to the global sections of `U.left`, obtaining

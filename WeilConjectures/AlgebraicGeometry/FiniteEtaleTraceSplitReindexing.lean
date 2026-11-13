@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteSectionCoproductLocalPermutation
 
 Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
 SGA 4, Exposé IX, 5.1.
-(blueprint: lem-weil-pbc-finite-etale-trace-split-reindexing)
 -/
 
 @[expose] public section
@@ -55,7 +54,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Two finite splittings of the same pullback admit a local correspondence of sheets.
 Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
 SGA 4, Exposé IX, 5.1.
-(blueprint: lem-weil-pbc-finite-etale-trace-split-reindexing)
 
 Proof. Pull both coproducts back along `g₁` and `g₂`. Pullback pasting identifies their
 ambient schemes with `Z ×[X] Y`. Pullbacks preserve the clopen coproduct decompositions

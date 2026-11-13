@@ -29,8 +29,7 @@ import Mathlib.Algebra.Category.ModuleCat.EpiMono
 # Restriction transport at a geometric point
 
 Source: Deligne, Weil II, (1.1.3) and (1.1.7), pp. 150--151; the explicit
-pro-etale restriction and completed-coefficient argument is agent-written
-(blueprint: lem-weil-point-automorphism-restriction-natural).
+pro-etale restriction and completed-coefficient argument is agent-written.
 
 The inverse image is expressed in the canonical sectionwise coordinates of
 `isoSectionwiseInverseImage`. Its distinguished coprojection is the identity in
@@ -51,8 +50,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The two allowed scalar rings, lifted only to accommodate the site universe.
-Source: Deligne (1.1.3); the coefficient convention of the node
-(blueprint: lem-weil-point-automorphism-restriction-natural). -/
+Source: Deligne (1.1.3); the coefficient convention of the node. -/
 def pointRestrictionScalars (a : Option ℕ) : RingCat.{max u (t + 1)} :=
   match a with
   | none => RingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E))

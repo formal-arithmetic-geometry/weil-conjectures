@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.HorizontalOrdinaryInverseFixedPasting
 /-! # Ordinary inverse-square pasting with the fixed upper transport
 
 Source: Stacks Project, Tags 0ATM and 0ATR.
-(blueprint: lem-sc-horizontal-inverse-square-fixed-pasting).
 -/
 
 @[expose] public section
@@ -160,7 +159,6 @@ private theorem horizontalOrdinaryBaseComparison_eq
 after changing its upper projection and base pullback by the pinned comparisons.
 This statement involves no right adjoint to the bottom direct image.
 Source: Stacks Project, Remark 20.28.5 (Tag 0ATM), and Lemma 48.5.2 (Tag 0ATR).
-(blueprint: lem-sc-horizontal-inverse-square-fixed-pasting).
 
 Proof: Transpose the rectangle ordinary square and the horizontal composite under
 pullback along the outer upper projection. Expand schemeDerivedBaseChangeMap as

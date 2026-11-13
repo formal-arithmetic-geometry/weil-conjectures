@@ -39,7 +39,6 @@ private theorem ordinary_gluing_pullback
 /-- Sectionwise amalgamation of direct-image restrictions.
 
 Source: Stacks Project, Tags 01EB and 08BV.
-(blueprint: lem-pc-open-union-module-image-pullback-core-sectionwise)
 The two-open sheaf axiom, after the section-restriction comparison, gives the
 existence and uniqueness of the amalgamated section at each test open. -/
 theorem schemeOpenUnionModuleImage_sectionwise_gluing
@@ -129,7 +128,6 @@ private theorem imageRestriction_comp
 /-- Sectionwise amalgamations assemble into the categorical pullback.
 
 Source: Stacks Project, Tags 01EB and 08BV.
-(blueprint: lem-pc-open-union-module-image-pullback-core-assembly)
 The sectionwise existence and uniqueness data is natural in the test open and
 therefore assembles to a morphism of module sheaves.  Its two composites are
 the prescribed restrictions, and sectionwise uniqueness gives the pullback

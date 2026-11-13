@@ -10,7 +10,6 @@ import all WeilConjectures.Algebra.Homology.RingedSiteBoundedDualComponents
 /-! # The nonzero singleton dual differential
 
 Source: Stacks Project, algebraization.tex, Tag 0A0E.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -185,7 +184,6 @@ private theorem dualDifferential (m : ℕ) :
 /-- The explicit rank-one dual identification respects the sole nonzero differential.
 
 Source: Stacks Project, algebraization.tex, Tag 0A0E, dual positive Koszul complex.
-(auxiliary; not a blueprint node).
 
 Proof: remove the right tensor unit by its chain isomorphism. Project Hom into R[0]
 to source degrees 1 and 0. The product differential formula leaves

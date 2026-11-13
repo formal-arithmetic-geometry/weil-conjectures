@@ -24,7 +24,6 @@ set_option backward.isDefEq.respectTransparency false in
 
 Source: Bhatt–Scholze, Lemma 4.2.13(1), proof, component-factorization and sheaf
 argument; RefactorInstruction, Section 4, Lemma point-eval, finite coproduct clause.
-(auxiliary; not a blueprint node).
 
 Proof in words:
 1. Let W be the scheme coproduct of the U i, with structure map to X induced by
@@ -39,11 +38,11 @@ Proof in words:
    maps W → X[S] and maps T → S: the latter is the unique map whose composites
    with j_i are b_i(S)(c.inj i ≫ f). Consequently b_W(S)(f) restricts along j_i
    to b_i(S)(c.inj i ≫ f).
-3. For either V = U i or V = W, let q_V : V → X[T_V] correspond to the identity
-   under its equivalence. A map f : V → X[S] factors uniquely as q_V followed
+3. For either V = U i or V = W, let q_V: V → X[T_V] correspond to the identity
+   under its equivalence. A map f: V → X[S] factors uniquely as q_V followed
    by X[b_V(S)(f)]. Thus (T_V,q_V) is terminal in the costructured-arrow index
    for left Kan extension along X[-].op. Its cocone leg is an isomorphism by
-   the pointwise Kan hypothesis. Its inverse gives e_V : P(V) ≅ F(T_V), with
+   the pointwise Kan hypothesis. Its inverse gives e_V: P(V) ≅ F(T_V), with
    normalization eta_S ≫ P(f.op) ≫ e_V.hom = F(b_V(S)(f).op). To compare a
    summand inclusion, precompose with every Kan cocone leg at W. The displayed
    restriction formula for b_W and the normalization identify both composites,

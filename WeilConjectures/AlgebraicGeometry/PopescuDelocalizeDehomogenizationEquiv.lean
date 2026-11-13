@@ -14,7 +14,6 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 # Dehomogenization equivalence for weak Popescu delocalization
 
 Source: Stacks Project, proof of Tag 07F9, the final displayed isomorphism.
-(blueprint: lem-weil-pbc-popescu-delocalize-dehomogenization-equiv)
 -/
 
 @[expose] public section
@@ -82,7 +81,6 @@ private theorem quotientAway_ext
 
 /-- Source: Stacks Project, proof of Tag 07F9, the isomorphism following the
 construction of B and b.
-(blueprint: lem-weil-pbc-popescu-delocalize-dehomogenization-equiv)
 
 Proof: Denote the right-hand quotient by D and its localization by C. Both
 localizations invert the class of x₀*w*∏sⱼ, hence x₀, w and all sⱼ are units.

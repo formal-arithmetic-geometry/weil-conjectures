@@ -26,12 +26,11 @@ namespace AlgebraicGeometry
 basis identifications intertwine its differentials. No exactness assertion is involved.
 Source: Stacks Project, Tag 03AT, the decomposition preceding the contracting homotopy;
 Tag 03F5, first proof, for coefficients in `O(W)`.
-https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5
-(blueprint: lem-weil-pbc-free-cech-block-equiv).
+https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5.
 Proof: Evaluation preserves the coproduct of free representable presheaf modules. In
 simplicial degree n its basis consists of tuples of indices and maps from W to their
 fibre product over U₀. Project such a map onto its n+1 factors. Their common composite
-is a map φ : W ⟶ U₀, and the projections give an n+1-tuple of elements of S φ. Conversely,
+is a map φ: W ⟶ U₀, and the projections give an n+1-tuple of elements of S φ. Conversely,
 the limit property of the fibre product gives a unique map from any such compatible
 tuple. These operations are inverse. Extend the resulting bijection of bases linearly,
 and collect the basis elements with the same φ into a dependent finitely supported

@@ -44,9 +44,7 @@ The base change by the reduced closed immersion is a homeomorphism onto the inve
 image of the closure of y. Represent the open of that closure by an ambient open V,
 and represent the chosen closure by a subset A of P under this homeomorphism. The
 generic point belongs to V, and the trace of A on its fibre is exactly the component
-of x. Empty complements cause no problem: the same closure argument applies.
-
-(blueprint: lem-sbc-generic-fibre-component-spread) -/
+of x. Empty complements cause no problem: the same closure argument applies. -/
 theorem exists_open_generic_fibre_component_spread {P T : Scheme.{u}} (g : P ⟶ T)
     [LocallyOfFiniteType g] [QuasiCompact g] (y : T) (x : P) (hx : g x = y) :
     ∃ (V : Set T) (A : Set P), IsOpen V ∧ y ∈ V ∧

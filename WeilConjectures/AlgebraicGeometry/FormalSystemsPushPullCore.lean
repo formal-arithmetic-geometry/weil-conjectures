@@ -54,7 +54,6 @@ private theorem formalPushforward_coherent {X Y : Scheme.{u}} [IsNoetherian Y]
 
 /-- Core comparison and termwise annihilation needed for the formal push-pull theorem.
 Source: Stacks Project, Cohomology of Schemes, Lemma 088B and Remark 0888.
-(blueprint: lem-weil-pbc-formal-systems-push-pull-core)
 The construction of the comparison morphism, coherence of the pushforward, and the
 uniform termwise annihilation are the affine formal-functions and completion argument
 of Lemma 088B. -/

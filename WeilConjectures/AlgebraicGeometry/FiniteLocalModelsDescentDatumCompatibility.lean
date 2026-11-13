@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibil
 # Compatible transport on an etale local representative
 
 Source: Stacks Project, Tag 03RV and Descent Tag 02W5.
-(blueprint: lem-weil-pbc-finite-local-models-descent-datum-compatibility)
 -/
 
 @[expose] public section
@@ -24,7 +23,6 @@ namespace AlgebraicGeometry.Scheme
 
 Source: Stacks Project, Tag 03RV, construction of the overlap datum from representations;
 Descent Tag 02W5, Yoneda comparison of representations.
-(blueprint: lem-weil-pbc-finite-local-models-descent-datum-compatibility)
 
 Proof: Let q be the structure map of Q and g the structure map of U. Over U times_T U, the
 two pullbacks of Q both represent the restriction of E: pull back e along the two

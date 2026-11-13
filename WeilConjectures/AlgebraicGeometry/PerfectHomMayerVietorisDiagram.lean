@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisCanonicalDat
 /-! # Building triangle diagrams from natural Mayer--Vietoris families
 
 Source: Stacks Project, Tag 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-diagram).
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ variable (Y : Scheme.{u})
   (U V : Y.Opens)
 
 /-- The geometric triangle, with adjunctions and boundary supplied explicitly.
-Source: Stacks Project, Tag 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-diagram). -/
+Source: Stacks Project, Tag 08BW. -/
 noncomputable def perfectHomMVTriangle
     (adjU : (schemeMVDerivedRestriction Y U) ⊣ schemeDerivedDirectImage U.ι)
     (adjV : (schemeMVDerivedRestriction Y V) ⊣ schemeDerivedDirectImage V.ι)
@@ -50,8 +48,7 @@ noncomputable def perfectHomMVTriangle
 
 /-- Data of a natural geometric Mayer--Vietoris family on quasi-coherent objects.
 The three components determine each triangle morphism uniquely.
-Source: Stacks Project, Tag 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-diagram). -/
+Source: Stacks Project, Tag 08BW. -/
 structure PerfectHomMVFamily where
   adjU : (schemeMVDerivedRestriction Y U) ⊣ schemeDerivedDirectImage U.ι
   adjV : (schemeMVDerivedRestriction Y V) ⊣ schemeDerivedDirectImage V.ι
@@ -79,32 +76,28 @@ namespace PerfectHomMVFamily
 variable {Y U V} (A : PerfectHomMVFamily Y U V)
 
 /-- The geometric triangle of the family, with first object exactly E.
-Source: Stacks Project, Tag 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-diagram). -/
+Source: Stacks Project, Tag 08BW. -/
 noncomputable def triangle (E : schemeDerivedCategory Y) :
     Triangle (schemeDerivedCategory Y) :=
   perfectHomMVTriangle Y U V A.adjU A.adjV A.adjUV A.boundary E
 
 /-- The unique triangle map with the three geometric components.
 The witness is unique by Triangle.hom_ext, so choosing it introduces no unpinned data.
-Source: Stacks Project, Tag 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-diagram). -/
+Source: Stacks Project, Tag 08BW. -/
 noncomputable def map {E F : schemeDerivedCategory Y}
     (hE : schemeDerivedQCohProperty Y E) (hF : schemeDerivedQCohProperty Y F)
     (φ : E ⟶ F) : A.triangle E ⟶ A.triangle F :=
   Classical.choose (A.naturality E F hE hF φ)
 
 /-- The first component is the prescribed original morphism.
-Source: Stacks Project, Tag 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-diagram). -/
+Source: Stacks Project, Tag 08BW. -/
 @[simp] theorem map_hom₁ {E F : schemeDerivedCategory Y}
     (hE : schemeDerivedQCohProperty Y E) (hF : schemeDerivedQCohProperty Y F)
     (φ : E ⟶ F) : (A.map hE hF φ).hom₁ = φ :=
   (Classical.choose_spec (A.naturality E F hE hF φ)).1
 
 /-- The second component is the prescribed pair of restricted direct images.
-Source: Stacks Project, Tag 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-diagram). -/
+Source: Stacks Project, Tag 08BW. -/
 @[simp] theorem map_hom₂ {E F : schemeDerivedCategory Y}
     (hE : schemeDerivedQCohProperty Y E) (hF : schemeDerivedQCohProperty Y F)
     (φ : E ⟶ F) : (A.map hE hF φ).hom₂ = biprod.map
@@ -113,8 +106,7 @@ Source: Stacks Project, Tag 08BW.
   (Classical.choose_spec (A.naturality E F hE hF φ)).2.1
 
 /-- The third component is the prescribed intersection restriction.
-Source: Stacks Project, Tag 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-diagram). -/
+Source: Stacks Project, Tag 08BW. -/
 @[simp] theorem map_hom₃ {E F : schemeDerivedCategory Y}
     (hE : schemeDerivedQCohProperty Y E) (hF : schemeDerivedQCohProperty Y F)
     (φ : E ⟶ F) : (A.map hE hF φ).hom₃ =
@@ -136,8 +128,7 @@ private theorem binary_map_comp {C : Type*} [Category C] [HasZeroMorphisms C]
     Category.assoc, biprod.map_fst_assoc, biprod.map_snd_assoc]
 
 /-- All three components are identities; Triangle.hom_ext gives equality.
-Source: Stacks Project, Tag 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-diagram). -/
+Source: Stacks Project, Tag 08BW. -/
 @[simp] theorem map_id (E : schemeDerivedCategory Y) (hE : schemeDerivedQCohProperty Y E) :
     A.map hE hE (𝟙 E) = 𝟙 (A.triangle E) := by
   apply Triangle.hom_ext
@@ -153,8 +144,7 @@ Source: Stacks Project, Tag 08BW.
     rw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
 
 /-- Each component respects composition; Triangle.hom_ext gives equality.
-Source: Stacks Project, Tag 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-diagram). -/
+Source: Stacks Project, Tag 08BW. -/
 @[simp] theorem map_comp {E F G : schemeDerivedCategory Y}
     (hE : schemeDerivedQCohProperty Y E) (hF : schemeDerivedQCohProperty Y F)
     (hG : schemeDerivedQCohProperty Y G) (φ : E ⟶ F) (ψ : F ⟶ G) :
@@ -168,8 +158,7 @@ Source: Stacks Project, Tag 08BW.
 variable {J : Type v} [Category J]
 
 /-- Apply the natural family to a diagram of quasi-coherent objects.
-Source: Stacks Project, Tag 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-diagram). -/
+Source: Stacks Project, Tag 08BW. -/
 noncomputable def diagram (F : J ⥤ schemeDerivedCategory Y)
     (hF : ∀ j, schemeDerivedQCohProperty Y (F.obj j)) :
     J ⥤ Triangle (schemeDerivedCategory Y) where
@@ -179,8 +168,7 @@ noncomputable def diagram (F : J ⥤ schemeDerivedCategory Y)
   map_comp f g := by rw [F.map_comp, A.map_comp]
 
 /-- Apply the same natural family to every leg and the apex of a cocone.
-Source: Stacks Project, Tag 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-diagram). -/
+Source: Stacks Project, Tag 08BW. -/
 noncomputable def cocone (F : J ⥤ schemeDerivedCategory Y) (d : Cocone F)
     (hF : ∀ j, schemeDerivedQCohProperty Y (F.obj j))
     (hd : schemeDerivedQCohProperty Y d.pt) : Cocone (A.diagram F hF) where

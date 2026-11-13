@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleSupportRestrictionEnlargement
 /-! # Finite support of finite free maps
 
 Source: Stacks Project, Modules, Tags 01BB and 01AH.
-(blueprint: lem-weil-pbc-module-finite-free-local-support).
 -/
 
 @[expose] public section
@@ -122,7 +121,6 @@ set_option backward.isDefEq.respectTransparency false in
 support on a neighbourhood of any given point.
 
 Source: Stacks Project, Modules, proof of Lemma 01BB and Lemma 01AH.
-(blueprint: lem-weil-pbc-module-finite-free-local-support).
 
 Proof: Evaluate the images of the finitely many basis sections at the point.
 The free sheaf is the filtered colimit of its finite sub-coproducts, and taking

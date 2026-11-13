@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenInduction
 
 /-! # Localization of graded cohomology at a section
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MR
-(blueprint: lem-sc-invert-s-cohomology).
+Source: Stacks Project, Cohomology of Schemes, Lemma 09MR.
 -/
 
 @[expose] public section
@@ -32,17 +31,15 @@ The displayed equation specifies the canonical map: multiplying the image of ξ/
 by the trivializing section s^n gives the restriction of ξ. Since s trivializes L
 on U, this equation determines the map uniquely; an arbitrary isomorphism does not suffice.
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MR
-(blueprint: lem-sc-invert-s-cohomology).
+Source: Stacks Project, Cohomology of Schemes, Lemma 09MR.
 
 1. On an affine open, positive cohomology vanishes on both sides and degree zero is
-   localization of sections (lem-sc-invert-s-cohomology-affine-case).
+   localization of sections.
 2. The restriction-and-division maps form a map of Mayer--Vietoris exact sequences.
    Principal opens commute with intersections and unions; localization and passage to
-   degree zero are exact. The five-lemma proves gluing from U, V and U ∩ V
-   (lem-sc-invert-s-cohomology-gluing).
+   degree zero are exact. The five-lemma proves gluing from U, V and U ∩ V.
 3. Apply induction over quasi-compact opens to the property that all these comparisons
-   are isomorphisms (lem-sc-invert-s-cohomology-induction), and take the whole space.
+   are isomorphisms, and take the whole space.
 -/
 theorem invertS_cohomology
     (X : Scheme.{u}) (L F : X.Modules) [L.IsInvertible]

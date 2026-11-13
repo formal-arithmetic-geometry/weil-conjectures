@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationLocalization
 
 /-! # Evaluation with actual models on one scheme site
 Source: Stacks Project, Tags 08DJ, 08DM and 08DQ.
-(blueprint: lem-pc-kinjective-scheme-evaluation-models).
 There is no site equivalence in this statement: Q is the one localization used
 by both ordinary models and the canonical tensor-Hom family.
 -/
@@ -92,7 +91,6 @@ set_option maxHeartbeats 400000 in
 -- The canonical sheaf tensor and Hom comparisons require extra instance-reconciliation work.
 /-- Compute derived evaluation using ordinary complexes on the same scheme site.
 Source: Stacks Project, Tags 08DJ, 08DM and 08DQ, representative calculation.
-(blueprint: lem-pc-kinjective-scheme-evaluation-models).
 
 Proof: resolve the degree-zero unit by the fixed functorial K-injective resolution.
 Apply hhom to its resolution map: Hom(P,eta_unit) is a quasi-isomorphism. Compose

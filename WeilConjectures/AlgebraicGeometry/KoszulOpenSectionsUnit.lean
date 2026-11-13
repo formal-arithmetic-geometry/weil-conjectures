@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.OpenSectionsCohomologyComparison
 /-! # The canonical unit in derived open sections
 
 Source: Stacks Project, Tag 09M1, evaluation at one.
-(blueprint: lem-sc-derived-open-structure-sections-unit).
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 noncomputable section
 
 /-- The ordinary tilde-to-open-sections unit.
-Source: Stacks Project, Tag 06Z0, tilde and sections adjunction.
-(blueprint: lem-sc-derived-open-structure-sections-unit). -/
+Source: Stacks Project, Tag 06Z0, tilde and sections adjunction. -/
 def affineOpenTildeSectionsUnit (A : Type u) [CommRing A]
     (U : (Spec (.of A)).Opens) :
     𝟭 (ModuleCat.{u} A) ⟶ koszulOpenTilde A ⋙ affineOpenSections A U where
@@ -37,8 +35,7 @@ def affineOpenTildeSectionsUnit (A : Type u) [CommRing A]
   naturality _ _ g := (tilde.toOpen_map_app g U).symm
 
 /-- The natural comparison from ordinary sections of complexes to derived sections.
-Source: Stacks Project, Tag 09M1, K-injective computation of derived sections.
-(blueprint: lem-sc-derived-open-structure-sections-unit). -/
+Source: Stacks Project, Tag 09M1, K-injective computation of derived sections. -/
 def affineOpenSectionsDerivedUnit (A : Type u) [CommRing A]
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]
@@ -56,8 +53,7 @@ def affineOpenSectionsDerivedUnit (A : Type u) [CommRing A]
       S.rightDerivedFunctor).hom
 
 /-- Component of the natural ordinary-to-derived sections comparison.
-Source: Stacks Project, Tag 09M1, K-injective computation of derived sections.
-(blueprint: lem-sc-derived-open-structure-sections-unit). -/
+Source: Stacks Project, Tag 09M1, K-injective computation of derived sections. -/
 def affineOpenSectionsToDerived (A : Type u) [CommRing A]
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]
@@ -70,24 +66,21 @@ def affineOpenSectionsToDerived (A : Type u) [CommRing A]
   (affineOpenSectionsDerivedUnit A U).app C
 
 /-- The extended single free rank-one module complex used for the structure object.
-Source: Stacks Project, Tag 08CX, the structure complex A[0].
-(blueprint: lem-sc-derived-open-structure-sections-unit). -/
+Source: Stacks Project, Tag 08CX, the structure complex A[0]. -/
 def openStructureModuleComplex (A : Type u) [CommRing A] :
     CochainComplex (ModuleCat.{u} A) ℤ :=
   ((ChainComplex.single₀ (ModuleCat.{u} A)).obj (ModuleCat.of A A)).extend
     ComplexShape.embeddingDownNat
 
 /-- The concrete sheaf complex representing the structure object.
-Source: Stacks Project, Tag 08CX, tilde of A[0].
-(blueprint: lem-sc-derived-open-structure-sections-unit). -/
+Source: Stacks Project, Tag 08CX, tilde of A[0]. -/
 def openStructureSheafComplex (A : Type u) [CommRing A] :
     CochainComplex
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ :=
   ((koszulOpenTilde A).mapHomologicalComplex (.up ℤ)).obj (openStructureModuleComplex A)
 
 /-- The ordinary open-sections homology class of one.
-Source: Stacks Project, Tag 09M1, evaluation at one.
-(blueprint: lem-sc-derived-open-structure-sections-unit). -/
+Source: Stacks Project, Tag 09M1, evaluation at one. -/
 def openStructureUnitClass (A : Type u) [CommRing A]
     (U : (Spec (.of A)).Opens) :
     (((affineOpenSections A U).mapHomologicalComplex (.up ℤ)).obj
@@ -105,8 +98,7 @@ def openStructureUnitClass (A : Type u) [CommRing A]
 
 /-- Restriction of one, mapped through the ordinary-to-derived sections comparison.
 This is a real construction, independent of any Koszul exponent or chosen equivalence.
-Source: Stacks Project, Tag 09M1, evaluation at one.
-(blueprint: lem-sc-derived-open-structure-sections-unit). -/
+Source: Stacks Project, Tag 09M1, evaluation at one. -/
 def derivedOpenStructureUnit (A : Type u) [CommRing A]
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]
@@ -125,7 +117,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Evaluation on a general open, with its ordinary sections unit normalization.
 Source: Stacks Project, Tag 09M1, first paragraph, specialized to the structure
 sheaf; Tag 06Z0, the sections adjunction and its unit.
-(blueprint: lem-sc-derived-open-structure-sections-unit).
 
 Proof: Identify the restricted tilde of A[0] with O_U[0]. Compute derived
 sections on a K-injective representative J of the restricted object. Maps from

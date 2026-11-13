@@ -162,7 +162,6 @@ private theorem modulePullbackComparison_homology_zero_isIso
 ordinary pullback. There is no cover, direct image or base-change square in this lemma.
 Source: Stacks Project, Tags 06YJ and 08HY; Step 4 of the affine alternating model
 factorization proof (the truncation argument is written out here).
-(blueprint: lem-pc-module-pullback-comparison-target-automorphism).
 
 Proof: Right Kan extension uniqueness gives an automorphism of the derived pullback
 functor relating the two witnessing counits. Derived tensor of a degree-zero module

@@ -31,8 +31,7 @@ namespace AlgebraicGeometry.ProEtale
 open Scheme
 
 /-- Finite local constancy is reflected by the etale comparison pullback.
-Source: Stacks Project, Tag 099Y, lemma-compare-locally-constant
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 099Y, lemma-compare-locally-constant.
 
 Proof: the given finite constant models make the pro-etale pullback lisse. The finite
 locally constant comparison descends it to a finite locally constant etale sheaf H.

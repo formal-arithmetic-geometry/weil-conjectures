@@ -54,7 +54,6 @@ and its termwise comparison respects the quotient projections before completion 
 pushforward. No completed pushforward or comparison map kappa is involved.
 Source: Stacks Project, Tags 088B (completed-base-change paragraph), 0887 and 02KH;
 Tag 02N7 for the adjunction mate of the base-change map.
-(blueprint: lem-weil-pbc-formal-flat-quotient-mate-data)
 
 Proof: Write q and p for the projections. Choose the tensor-pullback adjunction on p.
 The composition comparisons identify g* followed by p* with f* followed by q*;

@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.LeraySectionsResolutionComparison
 
 /-! # Comparison of the cocycle Leray edge with the Grothendieck edge
 
-Source: Stacks Project, Cohomology, Tags 01F4 (2), 01F2, and 01EX
-(blueprint: lem-pc-leray-edge-grothendieck-comparison).
+Source: Stacks Project, Cohomology, Tags 01F4 (2), 01F2, and 01EX.
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ There is no vanishing assumption: this is only the resolution comparison and
 identification of the edge, not the degeneration assertion.
 
 Source: Stacks Project, Cohomology, Tags 01F4 (2), 01F2, and 01EX.
-(blueprint: lem-pc-leray-edge-grothendieck-comparison)
 
 Proof: For the supplied acyclicity witness `hFG`, use the canonical Grothendieck
 edge of direct image followed by global sections. Sections of the direct image

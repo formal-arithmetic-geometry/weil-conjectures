@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 /-! # Differential compatibility of the free Čech tuple map
 
 Source: Stacks Project, Tags 03AT and 03F5.
-(blueprint: lem-weil-pbc-free-cech-differential-compatibility)
 -/
 
 @[expose] public section
@@ -80,8 +79,7 @@ same generator with the same sign on both sides. The block index φ is preserved
 The integer sign action agrees with multiplication by the corresponding power
 of -1 in O(W), including for noncommutative rings. Extend the equality by the
 Finsupp and DFinsupp universal properties. Empty families and the zero ring
-are included, since no basis element or nonzero scalar is required.
-(blueprint: lem-weil-pbc-free-cech-differential-compatibility) -/
+are included, since no basis element or nonzero scalar is required. -/
 theorem freeCechDifferential_compatibility (X : Scheme.{u}) (ι : Type u) (U₀ : X.Etale)
     (U : ι → X.Etale) (f : ∀ i : ι, U i ⟶ U₀) (O : X.Etaleᵒᵖ ⥤ RingCat.{u})
     (W : X.Etale) :

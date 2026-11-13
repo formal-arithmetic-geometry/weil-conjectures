@@ -1575,13 +1575,12 @@ namespace AlgebraicGeometry
 /-!
 # Generic local constancy of proper étale cohomology
 
-Source: Stacks Project, `more-etale.tex`, Tag 0GL0 (theorem-constructible-shriek),
+Source: Stacks Project, `more-etale.tex`, Tag 0GL0,
 generic-stratum consequence for a proper morphism over an integral affine Noetherian base,
 with Tags 0GKY and 0GKZ for its proof, and `etale-cohomology.tex`, Tag 03RW, for finite
-locally constant constructible sheaves
-(blueprint: lem-fd-proper-cohomology-generic-local-constancy).
+locally constant constructible sheaves.
 
-For a proper morphism `f : X ⟶ S` to an integral affine Noetherian scheme, a constructible
+For a proper morphism `f: X ⟶ S` to an integral affine Noetherian scheme, a constructible
 sheaf `F` of modules over a finite field `A` of characteristic `ℓ` and `q ≥ 0`, some nonempty
 open of `S` carries `R^q f_* F` as a finite locally constant sheaf. No invertibility of `ℓ`
 is assumed.
@@ -1589,20 +1588,20 @@ is assumed.
 
 /-- **Generic local constancy of one proper higher direct image.** Source: Stacks Project,
 `more-etale.tex`, Tag 0GL0 (identity open compactification), with `etale-cohomology.tex`,
-Tag 03RW (blueprint: lem-fd-proper-cohomology-generic-local-constancy).
+Tag 03RW.
 
 Let `A` be a finite field of characteristic the prime `ℓ`, `S` an integral affine Noetherian
-scheme, `f : X ⟶ S` proper, `F` a constructible sheaf of `A`-modules on `X_ét` and `q ≥ 0`.
-Then there is a nonempty open immersion `j : U ⟶ S` such that `j^{-1} R^q f_* F`, with
+scheme, `f: X ⟶ S` proper, `F` a constructible sheaf of `A`-modules on `X_ét` and `q ≥ 0`.
+Then there is a nonempty open immersion `j: U ⟶ S` such that `j^{-1} R^q f_* F`, with
 `R^q f_* F = H^q(Rf_*(F[0]))`, is finite locally constant. No invertibility of `ℓ` is assumed.
 
-Proof (blueprint steps):
+Proof:
 1. For a compactification `(j, p)`, exact extension by zero and the right derived direct image
    make `Rp_* j_!` additive and triangulated; it preserves lower cohomological bounds, and
    complexes with constructible cohomology form a triangulated subcategory (Serre class).
 2. Over an affine base `Y` of finite type over `ℤ` and an affine open `W` of `𝔸¹_Y` with a
    finite locally constant `L`, the finite-étale filtration theorem gives a finite étale
-   `g : T → W` of degree prime to `ℓ`; the trace identity makes `L` a retract of `g_* g^* L`,
+   `g: T → W` of degree prime to `ℓ`; the trace identity makes `L` a retract of `g_* g^* L`,
    and finite direct image is exact.
 3. The pieces `T_a → Y` are smooth affine curves; the constant smooth-affine-curve result
    (Tag 0GKX, no invertibility), finite-filtration dévissage, disjoint-open extension and

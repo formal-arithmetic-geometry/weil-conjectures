@@ -18,8 +18,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Local finite free computation of scalar derived Hom cohomology
 
-Source: Stacks Project, Tag 08DL; Tag 08DM for bounded truncations.
-(blueprint: lem-sc-local-finite-free-scalar-homology). -/
+Source: Stacks Project, Tag 08DL; Tag 08DM for bounded truncations. -/
 
 @[expose] public section
 
@@ -37,7 +36,6 @@ of the supplied universe of the ambient derived category.
 
 Source: Stacks Project, Tag 08DL, restriction; Tag 08DM, strictly perfect Hom
 applied to bounded truncations of the bounded-above finite free model.
-(blueprint: lem-sc-local-finite-free-scalar-homology).
 
 Proof: Choose a bounded-below injective resolution I of the degree-zero structure
 sheaf on Y. It is K-injective; its restriction remains bounded below and K-injective.

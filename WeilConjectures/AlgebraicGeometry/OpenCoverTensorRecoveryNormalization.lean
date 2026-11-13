@@ -135,7 +135,6 @@ is ordinary pullback along the total chart path preceded by the unique compariso
 of left adjoints for the total base map.
 Source: Stacks Project, Tags 0095 and 0096; step 1 of
 lem-pc-open-cover-tensor-comparison-coherence.
-(blueprint: lem-pc-open-cover-tensor-recovery-normalization).
 Proof: Expand the recovery comparison as a composite of natural transformations
 and compare its composite with the inverse base-chart comparison to the proposed
 normal form before evaluating at M. Apply injectivity of the mate correspondence

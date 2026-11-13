@@ -27,8 +27,7 @@ finite disjoint union N and its two maps b to M(A) and g to K_(n+1). The pullbac
 equation and K's matching projection equations prove compatibility with every
 lower face. The chosen pieces are affine, hence qcqs; their etale structure maps
 to the qcqs base X are locally of finite presentation, quasi-compact and
-quasi-separated. This uses no compactness hypothesis on any term of K.
-(auxiliary; not a blueprint node) -/
+quasi-separated. This uses no compactness hypothesis on any term of K. -/
 theorem exists_finite_relative_boundary_cover
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale) (hK : IsEtaleHypercover K)

@@ -14,7 +14,6 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 /-! # Local finite support for one section
 
 Source: Stacks Project, Modules, Tags 01BB (first paragraph of the proof) and 01AH (2).
-(blueprint: lem-weil-pbc-module-unit-local-support).
 -/
 
 @[expose] public section
@@ -194,7 +193,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A single section of a restricted free module sheaf locally has finite support.
 
 Source: Stacks Project, Modules, Tags 01BB (first paragraph of the proof) and 01AH (2).
-(blueprint: lem-weil-pbc-module-unit-local-support).
 
 Proof: The finite subsets of I, viewed as types with inclusion maps, have I as
 colimit: send i through its singleton stage, and use cocone naturality for the

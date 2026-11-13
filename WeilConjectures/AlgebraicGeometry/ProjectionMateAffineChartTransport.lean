@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Derived transport on a fixed affine chart
 
 Source: Stacks Project, Tag 08EU, affine-local reduction.
-(blueprint: lem-pc-projection-mate-affine-chart-transport).
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 The chart geometry is input; the affine adjunction, comparison and objects are
 constructed together, rather than asserting an implication for arbitrary objects.
 Source: Stacks Project, Tag 08EU, first sentence; the parent node steps 2--3.
-(blueprint: lem-pc-projection-mate-affine-chart-transport).
 
 Proof: first apply exists_derivedProjectionMate_openRestriction_comparison to
 the actual inverse-image open and restricted morphism. It constructs a local

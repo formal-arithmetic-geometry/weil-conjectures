@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.AffineFiniteFreeResolutionPerfectModel
 /-!
 # Koszul-regular closed immersions are perfect
 
-Source: Stacks Project, More on Morphisms, Lemma 37.61.7, Tag 068C
-(blueprint: lem-sc-koszul-regular-closed-immersion-perfect).
+Source: Stacks Project, More on Morphisms, Lemma 37.61.7, Tag 068C.
 -/
 
 @[expose] public section
@@ -36,8 +35,7 @@ namespace AlgebraicGeometry
 /-- A closed immersion locally cut out by finite Koszul-regular sequences has a local
 Koszul resolution by finite free modules, is a perfect closed immersion, and its
 pushed-forward structure sheaf is perfect in `D(𝒪_Y)`.
-Source: Stacks Project, Tag 068C, Lemma 37.61.7
-(blueprint: lem-sc-koszul-regular-closed-immersion-perfect).
+Source: Stacks Project, Tag 068C, Lemma 37.61.7.
 
 Proof: (1) On an affine open `U`, the quotient-spectrum identification of
 `def-weil-closed-immersion` identifies the restricted pushforward with the sheaf

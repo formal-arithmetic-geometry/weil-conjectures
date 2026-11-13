@@ -107,7 +107,6 @@ Hom cohomology, with the formula for ordinary successor reduction. This statemen
 concerns ordinary complexes only and makes no assertion about derived reductions.
 
 Source: Stacks Tags 09C5, 09C6 and 0A8H; blueprint Compatible isomorphisms.
-(blueprint: lem-pe-internal-perfect-ordinary-hom-cohomology).
 
 Proof: identify maps modulo homotopy with degree-zero homology of the signed Hom
 complex. Fix finite integral bases in every degree and extend these same bases to

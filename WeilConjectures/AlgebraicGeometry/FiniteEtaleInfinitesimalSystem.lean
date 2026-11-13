@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.InfinitesimalTransitionThickening
 # Compatible finite étale covers of the infinitesimal fibres
 
 Source: Stacks Project, Fundamental Groups, Tag 0GS2, complete Noetherian
-essential-surjectivity paragraph, construction before algebraization
-(blueprint: lem-weil-pbc-finite-etale-infinitesimal-system).
+essential-surjectivity paragraph, construction before algebraization.
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ finite étale covers of all finite infinitesimal fibres. No completeness,
 Noetherianity, or properness is needed for this construction.
 Source: Stacks Project, Tag 0GS2, complete Noetherian essential-surjectivity
 paragraph, using Tags 039R and 09ZW(8).
-(blueprint: lem-weil-pbc-finite-etale-infinitesimal-system).
 
 Proof:
 1. Write X_n = X ×_A Spec(A/I^(n+1)). The transition X_n → X_(n+1)

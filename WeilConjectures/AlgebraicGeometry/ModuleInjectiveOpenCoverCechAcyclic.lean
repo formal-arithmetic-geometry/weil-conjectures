@@ -23,7 +23,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-! # Injective modules are Čech-acyclic on open covers
 
 Source: literature/stacks-project/cohomology.tex, Lemma 01EP.
-(blueprint: lem-weil-pbc-module-injective-open-cover-cech-acyclic)
 -/
 
 set_option linter.unusedVariables false in
@@ -31,7 +30,6 @@ set_option linter.unusedVariables false in
 any open covering of any open subscheme.
 
 Source: Stacks Project, Cohomology of Sheaves, Lemma 01EP.
-(blueprint: lem-weil-pbc-module-injective-open-cover-cech-acyclic)
 -/
 theorem module_injective_open_cover_cech_acyclic {X : Scheme.{u}}
     (I : X.Modules) [Injective I] (U : X.Opens) (ι : Type w)

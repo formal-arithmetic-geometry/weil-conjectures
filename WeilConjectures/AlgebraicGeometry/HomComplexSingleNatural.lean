@@ -124,7 +124,6 @@ private lemma homComplex_spec
 set_option backward.isDefEq.respectTransparency true in
 /-- The single-source Hom-complex projection is a natural chain isomorphism.
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X, product and map formulas.
-(blueprint: lem-sc-hom-complex-single-natural).
 
 Proof: Project in degree n onto the factor with source degree zero. All other
 factors are zero, so the product universal property gives an inverse. The

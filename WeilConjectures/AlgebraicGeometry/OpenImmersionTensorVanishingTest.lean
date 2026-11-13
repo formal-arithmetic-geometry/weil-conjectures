@@ -16,7 +16,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 /-! # A direct-image test for tensor vanishing under an open immersion
 
 Source: Stacks Project, Tags 08CG and 08DX.
-(blueprint: lem-pc-open-immersion-tensor-vanishing-test).
 -/
 
 @[expose] public section
@@ -40,7 +39,7 @@ private noncomputable local instance (X : Scheme.{u}) :
 
 /-- A single tensor-cohomology vanishing test descends along an open immersion.
 Source: Stacks Project, Tags 08CG and 08DX, exact restriction and the open-immersion
-counit. (blueprint: lem-pc-open-immersion-tensor-vanishing-test).
+counit.
 
 Proof: Choose the K-flat representative C and representing isomorphism in h.
 The tensor pullback preserves K-flatness (Tag 06YC); the uniqueness of left

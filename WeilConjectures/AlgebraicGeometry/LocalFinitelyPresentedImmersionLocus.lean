@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.LocalImmersionLocus
 /-! # Gluing locally finitely presented immersion loci
 
 Source: Stacks Project, Tag 0BDL, final proof paragraph (gluing characterized loci).
-(blueprint: lem-sc-local-finitely-presented-immersion-locus).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace AlgebraicGeometry.Scheme
 /-- A base-change-stable, source-local predicate represented locally by locally
 finitely presented immersions is represented by such an immersion over the entire base.
 Source: Stacks Project, Tag 0BDL, final proof paragraph, spelling out the gluing.
-(blueprint: lem-sc-local-finitely-presented-immersion-locus).
 
 Proof:
 1. Forget local finite presentation in hlocal and apply the existing

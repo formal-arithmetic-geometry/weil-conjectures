@@ -76,7 +76,6 @@ exterior conormal, before using any exterior power of the internal dual.
 
 Source: Stacks Project, Tag 0BQY, the displayed identification of Ext with
 Hom of the negative-degree Koszul term, and Tag 062I for the conormal basis.
-(blueprint: lem-sc-koszul-self-ext-dual-exterior-conormal).
 
 Proof: On a regular affine chart write A = O_Y(U), I = ker(i)(U), and B = A/I.
 Use the augmented Koszul projective resolution and sheafify it. Restriction of

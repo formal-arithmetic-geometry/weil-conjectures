@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceSectionDescent
 
 Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
 SGA 4, Exposé IX, 5.1.
-(blueprint: lem-weil-pbc-finite-etale-trace-descent)
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace AlgebraicGeometry.Etale
 transformation from pushforward of inverse image to the identity, with the local sum
 characterization on every object of the small étale site.
 Source: Stacks Project, Section 03SH, after Definition 03SE; SGA 4, Exposé IX, 5.1.
-(blueprint: lem-weil-pbc-finite-etale-trace-descent)
 
 Proof. Write `P_F(W) = F(W ×_X Y)`. The restriction isomorphism identifies this
 sheaf with `f_* f⁻¹ F`, naturally in `F`. For a finite clopen splitting of `W ×_X Y`

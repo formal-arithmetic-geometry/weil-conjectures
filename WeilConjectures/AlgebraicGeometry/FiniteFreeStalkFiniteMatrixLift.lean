@@ -11,9 +11,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Simultaneous lifting of finitely many matrices of free sheaf morphisms
-
-Source: lem-pc-perfect-locus, finite matrix extension near a point.
-(blueprint: lem-pc-finite-free-stalk-finite-matrix-lift)
 -/
 
 @[expose] public section
@@ -263,9 +260,6 @@ private lemma stalk_appTop_eq_germ {Y : Scheme.{u}}
 
 /-- A finite family of maps between standard finite free sheaves lifts to one open.
 
-Source: lem-pc-perfect-locus, extension of the finite calculation near a point;
-lem-pc-finite-free-reverse-components-lift, proof steps 2 and 3.
-
 Proof: PullbackFreeIso identifies the source and target of each f q with
 standard free sheaves over Spec O_{Y,y}. Express f q as a matrix in these
 standard bases, using freeMatrix. Its entries are global functions on
@@ -286,8 +280,7 @@ commutes with every finite matrix, so conjugation by e gives the same
 normalized map. Cancel the free isomorphisms to obtain the required equalities.
 Empty index types and zero ranks have no coefficients; take U=V
 when the coefficient list is empty. There is no change of arbitrary bases,
-complex, boundedness condition, or reverse-degree support in this lemma.
-(blueprint: lem-pc-finite-free-stalk-finite-matrix-lift) -/
+complex, boundedness condition, or reverse-degree support in this lemma. -/
 theorem exists_finite_free_matrices_of_stalk_local
     {Y : Scheme.{u}} {ι : Type v} [Finite ι]
     (y : Y) (V : Y.Opens) (hyV : y ∈ V)

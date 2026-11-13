@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.FieldSpecTensorPullbackGlobalSections
 /-! # Restriction of derived residue homology to an open subscheme
 
 Source: Stacks Project, Tags 0D5S and 0098.
-(blueprint: lem-sc-localized-residue-homology-restriction).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace AlgebraicGeometry
 /-- Derived residue homology is unchanged by restriction to an open containing the point,
 with the residue fields identified by the open immersion's residue map.
 Source: Stacks Project, Tags 0D5S and 0098.
-(blueprint: lem-sc-localized-residue-homology-restriction).
 
 Proof: The over-site equivalence identifies exact restriction with tensor pullback
 along the open immersion. The induced derived equivalence therefore identifies the

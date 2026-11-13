@@ -22,7 +22,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-! # Canonical free-parameter evaluation data and coherence.
-Source: Stacks 08J7, 07A6, 07A7 (auxiliary; not a blueprint node). -/
+Source: Stacks 08J7, 07A6, 07A7. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -38,8 +38,7 @@ namespace Profinite.CondensedAction.InternalBar
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
 /-- The actual free-forgetful adjunction, determining the generator inclusion.
-Source: step 1, the universal property of the free internal module
-(auxiliary; not a blueprint node). -/
+Source: step 1, the universal property of the free internal module. -/
 def freeAdjunction : free R ⊣
     Mod.forget R.X ⋙ sheafCompose (coherentTopology Profinite.{u})
       (forget AddCommGrpCat.{u + 1}) :=
@@ -51,7 +50,7 @@ end Profinite.CondensedAction.InternalBar
 namespace AlgebraicGeometry.ProEtale.ProfiniteFreeSlice
 
 /-- The representable condensed set of a profinite parameter.
-Source: Stacks 08FI, 08J7; HRS Section 3 (auxiliary; not a blueprint node). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 abbrev parameter (P : Profinite.{u}) :=
   ((coherentTopology Profinite.{u}).uliftYoneda.{u + 1}).obj P
 
@@ -99,7 +98,7 @@ attribute [local instance] pointFour pointGood12 pointGood23 pointLeft pointRigh
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
 /-- The recorded free module on h_P.
-Source: Stacks 08J7 (auxiliary; not a blueprint node). -/
+Source: Stacks 08J7. -/
 abbrev freeParameter (P : Profinite.{u}) :=
   (Profinite.CondensedAction.InternalBar.free (Mon.mk R.X)).obj (ProfiniteFreeSlice.parameter P)
 
@@ -116,18 +115,18 @@ variable (S : Profinite.CondensedRing.{u}) [IsCommMonObj S.X]
   (φ : R.X ⟶ S.X) [IsMonHom φ]
 
 /-- Exact coefficient restriction at the condensed point.
-Source: Stacks 03D2 (auxiliary; not a blueprint node). -/
+Source: Stacks 03D2. -/
 abbrev restrictPoint : PointModules S ⥤ PointModules R := Mod.comap φ
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Exact coefficient restriction on the small pro-etale site.
-Source: Stacks 03D2 (auxiliary; not a blueprint node). -/
+Source: Stacks 03D2. -/
 abbrev restrictScheme (X : Scheme.{u}) : Modules S X ⥤ Modules R X :=
   Mod.comap (coefficientMap φ X)
 
 /-- The action identification for point pullback and restriction of scalars.
-Source: Stacks 03D2 (auxiliary; not a blueprint node). -/
+Source: Stacks 03D2. -/
 def restrictPointPullD (X : Scheme.{u}) :
     (restrictPoint R S φ).mapDerivedCategory ⋙ pointPullD R X ≅
       pointPullD S X ⋙ (restrictScheme R S φ X).mapDerivedCategory :=
@@ -136,7 +135,7 @@ def restrictPointPullD (X : Scheme.{u}) :
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The ordinary free-generator coefficient arrow, literally [t] ↦ [t].
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 def freeGeneratorScalar (P : Profinite.{u}) :
     freeParameter R P ⟶ (restrictPoint R S φ).obj (freeParameter S P) :=
   ((Profinite.CondensedAction.InternalBar.freeAdjunction (Mon.mk R.X)).homEquiv _ _).symm
@@ -156,7 +155,7 @@ attribute [local irreducible] restrictPointPullD
 
 /-- Canonical scalar/pullback comparison: transpose pullback of the scalar unit
 through the action identification. This definition precedes its isomorphism claim.
-Source: Stacks 07A6 and 0D6D (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6 and 0D6D. -/
 def scalarPullComparison {Y X : Scheme.{u}} (f : Y ⟶ X)
     (M : DerivedCategory (Modules R X)) :
     (Mod.extendScalars (coefficientMap φ Y)).leftDerivedFunctor.obj
@@ -171,8 +170,7 @@ def scalarPullComparison {Y X : Scheme.{u}} (f : Y ⟶ X)
 attribute [local irreducible] scalarPullComparison
 
 /-- Scalar extension commutes with exact geometric inverse image in this normalized form.
-Source: Stacks 07A4 and 0D6D, node proof step 9
-(auxiliary; not a blueprint node).
+Source: Stacks 07A4 and 0D6D, node proof step 9.
 Proof: choose a K-flat resolution of M. Geometric inverse image is exact, strong
 monoidal and preserves flat objects, so its termwise image computes the pulled
 K-flat tensor. The balanced scalar tensor comparison is an isomorphism on each

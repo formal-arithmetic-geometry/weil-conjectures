@@ -13,8 +13,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 /-! # Finite free stalk lifts on an étale neighbourhood
-Source: Stacks Project, Tag 09BH, Proposition 59.74.1 (3), finite generator lifting.
-(blueprint: lem-weil-pbc-finite-free-constant-map-etale-factorization). -/
+Source: Stacks Project, Tag 09BH, Proposition 59.74.1 (3), finite generator lifting. -/
 
 @[expose] public section
 
@@ -234,7 +233,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The finite free étale-local lifting step used by the open factorization theorem.
 Source: Stacks Project, Tag 09BH, Proposition 59.74.1 (3), finite generator lifting.
-(blueprint: lem-weil-pbc-finite-free-constant-map-etale-factorization).
 
 Proof: If n = 0, take the identity etale neighbourhood and the unique zero map.
 For n > 0, write the standard basis of Λ^(Fin n).  The definition of the geometric

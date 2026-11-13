@@ -11,7 +11,6 @@ public import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 /-! # Formal coherence of the etale internal-Hom comparison
 
 Source: Bhatt--Scholze, Lemma 6.3.16, with the closed monoidal mate calculus.
-(blueprint: lem-weil-pbc-ind-etale-internal-hom-coherence).
 
 The clauses are proved for a general coefficient category in
 `WeilConjectures.AlgebraicGeometry.IndEtaleInternalHomComparisonFormal`.
@@ -39,8 +38,7 @@ inverse shift determined by the shift adjunction triangle. Finally the tensor-Ho
 adjunction estimate and exact inverse image give both lower bounds.
 
 Source: Bhatt--Scholze, Lemma 6.3.16, pp. 47--48, small-etale analogue; the closed
-monoidal mate calculus proves these formal clauses without ind-etale assumptions.
-(blueprint: lem-weil-pbc-ind-etale-internal-hom-coherence). -/
+monoidal mate calculus proves these formal clauses without ind-etale assumptions. -/
 theorem indEtaleInternalHomComparison_coherence_and_bounds
     (A : Type (u + 1)) [CommRing A]
     {X U : Scheme.{u}} (f : U ⟶ X)

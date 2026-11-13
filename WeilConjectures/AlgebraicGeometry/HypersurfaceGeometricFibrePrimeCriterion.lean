@@ -88,9 +88,9 @@ integrality is geometric reducedness and geometric irreducibility).
 Proof: For a ring map phi from kappa(s) to a field K, paste the pullback defining
 H_s with Spec K -> Spec kappa(s). The canonical affine identification of S with
 Spec Gamma(S, top) identifies this iterated pullback with
-Spec(K tensor_A (A[t_1,...,t_n]/(P))), where A acts on K by phi composed with
-evaluation at s. Tensoring a polynomial ring with K gives K[t_1,...,t_n], and
-right exactness of tensor identifies the quotient with K[t_1,...,t_n]/(P_K).
+Spec(K tensor_A (A[t_1..,t_n]/(P))), where A acts on K by phi composed with
+evaluation at s. Tensoring a polynomial ring with K gives K[t_1..,t_n], and
+right exactness of tensor identifies the quotient with K[t_1..,t_n]/(P_K).
 These identifications respect the maps to Spec K. An affine scheme is integral
 exactly when its ring is a domain, and this quotient is a domain exactly when
 (P_K) is prime, including properness. Conversely every morphism Spec K to
@@ -100,8 +100,7 @@ integral iff it is reduced and irreducible; distribute the quantifier over this
 conjunction to obtain the displayed equivalence. If P = 0 the quotient is the
 polynomial ring, so the criterion still holds. If P is a nonzero constant after
 a specialization both sides fail, since the quotient is zero and the spectrum
-is empty. No integrality or finiteness assumption on S is used.
-(blueprint: lem-sbc-hypersurface-geometric-fibre-prime-criterion) -/
+is empty. No integrality or finiteness assumption on S is used. -/
 theorem hypersurface_geometric_fibre_prime_criterion
     {S : Scheme.{u}} [IsAffine S]
     (n : ℕ) (P : MvPolynomial (Fin n) Γ(S, ⊤)) (s : S) :

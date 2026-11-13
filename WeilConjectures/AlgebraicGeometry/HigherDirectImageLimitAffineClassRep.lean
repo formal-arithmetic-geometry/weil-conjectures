@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawAffineClassRep
 
 /-! # Affine representatives of raw limit cohomology classes
 
-Source: Stacks Project, Tag 09Z1
-(blueprint: lem-sbc-higher-direct-image-limit-affine-class-rep).
+Source: Stacks Project, Tag 09Z1.
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- On an affine etale object, a raw limit cohomology class is represented at a stage.
-Source: Stacks Project, Tag 09Z1, proof, and Tag 03Q8
-(blueprint: lem-sbc-higher-direct-image-limit-affine-class-rep).
+Source: Stacks Project, Tag 09Z1, proof, and Tag 03Q8.
 
 Proof:
 1. Use the natural sheafification comparison of Tag 03Q8, obtained from derived

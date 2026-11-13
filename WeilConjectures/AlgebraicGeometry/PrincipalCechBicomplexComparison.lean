@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.PrincipalCechRegroupNaturality
 
 /-! # The explicit Čech bicomplex and its total comparison
 
-Source: Stacks, Tag 08D1, total differential of the alternating Čech double complex
-(blueprint: lem-sc-principal-cech-bicomplex-comparison).
+Source: Stacks, Tag 08D1, total differential of the alternating Čech double complex.
 -/
 
 @[expose] public section
@@ -28,7 +27,7 @@ noncomputable section
 variable {A : Type u} [CommRing A] (r : ℕ) (f : Fin r → A)
 
 /-- The Čech bicomplex constructed from product columns and alternating restrictions.
-Source: Stacks, Tag 08D1 (blueprint: lem-sc-principal-cech-bicomplex-comparison). -/
+Source: Stacks, Tag 08D1. -/
 def principalCechBicomplex
     (F : CochainComplex (SheafOfModules.{u}
       (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) :
@@ -38,7 +37,7 @@ def principalCechBicomplex
     (by exact principalCechHorizontal_square A r f F)
 
 /-- Coefficient maps act on every product column.
-Source: Stacks, Tag 08D1 (blueprint: lem-sc-principal-cech-bicomplex-comparison). -/
+Source: Stacks, Tag 08D1. -/
 def principalCechBicomplexFunctor :
     CochainComplex (SheafOfModules.{u}
       (moduleRings (Spec (.of A)).toRingedSpace)) ℤ ⥤
@@ -55,13 +54,12 @@ def principalCechBicomplexFunctor :
   map_comp i j := by ext p : 1; exact (principalCechColumnFunctor r f p).map_comp i j
 
 /-- Regrouping subset coordinates identifies the two total functors naturally.
-Source: Stacks, Tag 08D1, total signs, and finite filtration in Tag 08C2
-(blueprint: lem-sc-principal-cech-bicomplex-comparison).
+Source: Stacks, Tag 08D1, total signs, and finite filtration in Tag 08C2.
 
 Proof: in degree n, evaluate the categorical product columns degreewise. Column p
 is the product of sections on subsets S with card(S)=p+1, in vertical degree n-p.
 Identify the diagonal coproduct with the finite product of these coordinates:
-only p=0,...,r-1 can contribute. Map each subset coordinate to its column summand;
+only p=0..,r-1 can contribute. Map each subset coordinate to its column summand;
 the inverse reads that coordinate from the summand. These maps are inverse since
 products and coproducts of finite module families agree, and all other summands
 are zero. The horizontal differential is the displayed alternating restriction

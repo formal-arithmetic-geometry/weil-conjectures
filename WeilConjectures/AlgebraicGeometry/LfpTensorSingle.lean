@@ -25,7 +25,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructib
 /-! # Local tensor calculations over ell-adic coefficients
 
 Source: Bhatt--Scholze, Proposition 6.8.11(3), using locally finite free resolutions.
-(a step of blueprint `lem-sfb-dc-tensor-preserves`)
+(a step of)
 -/
 
 @[expose] public section
@@ -106,7 +106,7 @@ of `ℚ_ℓ`, has no cohomology below degree -1, and its cohomology is locally f
 Source: Bhatt--Scholze, Proposition 6.8.11(3).
 Proof: local triviality makes the first factor locally finite free, so the finite free tensor
 calculation gives the assertion (and a stronger lower bound 0).
-(a step of blueprint `lem-sfb-dc-tensor-preserves`) -/
+(a step of) -/
 theorem lfp_tensor_single_continuousMapRingObj
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
     (F G : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -154,7 +154,7 @@ degree -1, and its cohomology is locally finitely presented.
 Source: Bhatt--Scholze, Proposition 6.8.11(3).
 Proof: local triviality makes the first factor locally finite free, so the finite free tensor
 calculation gives the assertion (and a stronger lower bound 0).
-(a step of blueprint `lem-sfb-dc-tensor-preserves`) -/
+(a step of) -/
 theorem lfp_tensor_single_padicAlgClRingObj
     (F G : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))
@@ -182,7 +182,7 @@ The rotated triangle gives the lower bound -1. The upper bound 0 is the general
 right t-exactness of derived tensor. Locally finitely presented integral module sheaves
 are closed under kernels, cokernels and extensions; hence their homology property is
 triangulated and the third term has locally finitely presented cohomology.
-(a step of blueprint `lem-sfb-dc-tensor-preserves`) -/
+(a step of) -/
 theorem lfp_tensor_single_padicIntegersRingObj
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
     [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]

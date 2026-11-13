@@ -15,8 +15,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Derived pushforward through the direct-image algebra
 
-Source: Stacks Project, Tag 0AVW, final pushforward identification
-(blueprint: lem-sc-finite-affine-derived-factorization).
+Source: Stacks Project, Tag 0AVW, final pushforward identification.
 -/
 
 @[expose] public section
@@ -36,8 +35,7 @@ private lemma moduleDirectImage_restrictScalars_eq {X Y : Scheme.{u}} (f : X ⟶
       RingedSpace.moduleDirectImage f.toLRSHom.toShHom := rfl
 
 /-- Scalar restriction of the algebra-valued derived pushforward is the scheme pushforward.
-Source: Stacks Project, Tag 0AVW, final pushforward identification
-(blueprint: lem-sc-finite-affine-derived-factorization).
+Source: Stacks Project, Tag 0AVW, final pushforward identification.
 
 Proof: Restriction of scalars is exact, since the underlying abelian sheaf, kernels,
 images, and cokernels are unchanged. Its right derived functor therefore agrees with

@@ -22,8 +22,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! Per-degree quasi-coherence for the Koszul normal determinant.
-Source: Stacks Project, Duality for Schemes, Tags 0BQZ and 0BR0
-(blueprint: lem-sc-koszul-normal-determinant-term-qcoherent). -/
+Source: Stacks Project, Duality for Schemes, Tags 0BQZ and 0BR0. -/
 
 @[expose] public section
 
@@ -35,8 +34,7 @@ namespace AlgebraicGeometry
 
 /-- Each nonnegative term of the normal determinant complex is quasi-coherent.
 
-Source: Stacks Project, Duality for Schemes, Tags 0BQZ and 0BR0
-(blueprint: lem-sc-koszul-normal-determinant-term-qcoherent).
+Source: Stacks Project, Duality for Schemes, Tags 0BQZ and 0BR0.
 
 Proof: Around a point of Z choose the affine neighbourhood in hregular and write
 A for its ring, I for the ideal and B for A/I. The pulled-back ideal sheaf is

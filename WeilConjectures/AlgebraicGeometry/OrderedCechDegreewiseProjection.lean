@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 /-! # Degreewise signed projection of module Čech cochains
 
 Source: Stacks Project, Tags 01FK and 01FM.
-(blueprint: lem-pc-ordered-cech-degreewise-projection)
 -/
 
 @[expose] public section
@@ -24,7 +23,7 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Full tuple coordinate before pushforward and extension.
-Source: Stacks 01FK. (blueprint: lem-pc-ordered-cech-degreewise-projection). -/
+Source: Stacks 01FK. -/
 noncomputable def orderedCechNaturalCoordinate {X' : Scheme.{u}}
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)
@@ -42,7 +41,7 @@ noncomputable def orderedCechNaturalCoordinate {X' : Scheme.{u}}
         (op (∏ᶜ fun l ↦ W₀ (z l)))) y).app (op B) s
 
 /-- The signed finite sum in one degree on an open of the source scheme.
-Source: Stacks 01FK. (blueprint: lem-pc-ordered-cech-degreewise-projection). -/
+Source: Stacks 01FK. -/
 noncomputable def orderedCechNaturalProjectionValue {X' : Scheme.{u}}
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)
@@ -66,7 +65,7 @@ noncomputable def orderedCechNaturalProjectionValue {X' : Scheme.{u}}
     else 0
 
 /-- Coordinate condition for degreewise module maps; no differential condition is imposed.
-Source: Stacks 01FK. (blueprint: lem-pc-ordered-cech-degreewise-projection). -/
+Source: Stacks 01FK. -/
 def IsOrderedCechNaturalProjection {X' : Scheme.{u}}
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)
@@ -85,7 +84,6 @@ def IsOrderedCechNaturalProjection {X' : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 /-- The finite signed formula assembles into degreewise module-sheaf maps.
 Source: Stacks 01FK, signed extension, and 01FM, the termwise map cπ.
-(blueprint: lem-pc-ordered-cech-degreewise-projection).
 
 Proof: In degree p project to each sorted tuple using e, restrict to its ordered
 intersection, and then restrict back to the full tuple intersection, multiplying

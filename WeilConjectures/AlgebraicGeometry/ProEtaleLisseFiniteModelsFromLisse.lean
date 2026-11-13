@@ -29,8 +29,7 @@ namespace AlgebraicGeometry.Scheme
 /-- A fixed-coefficient lisse pro-étale sheaf admits finite constant models.
 Source: Stacks Project, Tag 099Y, proof of `lemma-compare-locally-constant`.
 On each member of a trivializing cover, the constant model is identified with a
-geometric stalk; the stalk finiteness therefore makes the model finite.
-(auxiliary; not a blueprint node) -/
+geometric stalk; the stalk finiteness therefore makes the model finite. -/
 theorem finite_models_of_fixed_lisse
     (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))

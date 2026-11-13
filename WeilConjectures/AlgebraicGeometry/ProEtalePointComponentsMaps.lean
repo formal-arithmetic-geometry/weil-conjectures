@@ -15,8 +15,7 @@ import WeilConjectures.Topology.SpectralSpace.ConnectedComponent
 # Maps to relative profinite test schemes
 
 Source: Bhatt–Scholze, Section 4.2, Lemma 4.2.13(1), finite-quotient argument;
-RefactorInstruction, Section 4, proof of Lemma point-eval
-(auxiliary; not a blueprint node).
+RefactorInstruction, Section 4, proof of Lemma point-eval.
 -/
 
 @[expose] public section
@@ -196,8 +195,7 @@ the sheaf values live in the larger universe of the small-site convention.
 The single family `e` is covariant in profinite targets and contravariant in these objects.
 
 Source: Bhatt–Scholze, Section 4.2, Lemma 4.2.13(1), with the finite-quotient argument;
-RefactorInstruction, Section 4, proof of Lemma point-eval
-(auxiliary; not a blueprint node).
+RefactorInstruction, Section 4, proof of Lemma point-eval.
 
 Proof:
 1. An affine scheme is compact and quasi-separated, hence spectral by

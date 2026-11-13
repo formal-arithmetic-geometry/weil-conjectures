@@ -36,8 +36,7 @@ variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
 
 /-- A constructible internal module has a constructible ordinary module sheaf
 under the sectionwise finite-coefficient encoding.
-Source: Bhatt--Scholze, Proposition 5.3.2 and Lemma 5.4.1
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Proposition 5.3.2 and Lemma 5.4.1.
 
 Proof in words. Retain the finite stratification in the internal constructibility
 hypothesis. On each stratum, normalize the coefficient pullbacks and choose its

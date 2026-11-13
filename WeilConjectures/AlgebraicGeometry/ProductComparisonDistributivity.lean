@@ -10,8 +10,7 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 
 /-! # Transport of a distributivity diagram
 
-Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module.
-(blueprint: lem-weil-pbc-product-comparison-distributivity). -/
+Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module. -/
 
 @[expose] public section
 
@@ -20,7 +19,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.Limits
 
 /-- Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module.
-(blueprint: lem-weil-pbc-product-comparison-distributivity).
 
 Proof: Write P = R times (X times X). Compare its image with
 R' times (X' times X') by the inverse outer product comparison, followed

@@ -19,7 +19,6 @@ import Mathlib.Topology.Connected.Clopen
 /-! # A reference bundle has fixed rank near a base point
 
 Source: Stacks Project, Tag 0BDP, first proof paragraph.
-(blueprint: lem-sc-picard-reference-rank-neighbourhood).
 -/
 
 @[expose] public section
@@ -76,7 +75,6 @@ private theorem fibre_connected {X S : Scheme.{u}} (f : X ⟶ S)
 all base changes of the reference bundle have one rank. No direct image of a second
 bundle and no derived complex occurs in this statement.
 Source: Stacks Project, Tag 0BDP, first proof paragraph.
-(blueprint: lem-sc-picard-reference-rank-neighbourhood).
 
 Proof: Apply the structure-sheaf unit to Spec of each residue field and take global
 sections. Its target is the field, so the fibre cannot be empty. A disconnected fibre

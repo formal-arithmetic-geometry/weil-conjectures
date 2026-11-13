@@ -27,7 +27,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The explicit integral realization of a bounded finite-free complex is K-flat.
 Source: Stacks Tag 06YY.
-(blueprint: lem-pe-internal-perfect-integral-kflat).
 
 Proof: a lifted finite basis identifies every term with a finite biproduct of the
 regular integral module, the tensor unit. Tensoring with this unit is exact, and

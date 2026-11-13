@@ -14,7 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 /-! # Five-term additive Hom rows and their triangle presentations
 
 Source: Stacks Project, Tags 0149 and 08BW.
-(blueprint: lem-pc-perfect-hom-triangle-row-presentations).
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ namespace AlgebraicGeometry
 
 /-- The five terms from Hom(M,T₂[-1]) through Hom(M,T₃), with the canonical
 connecting map. This is a construction from the supplied triangle, without choices.
-Source: Stacks Project, Tags 0149 and 08BW.
-(blueprint: lem-pc-perfect-hom-triangle-row-presentations). -/
+Source: Stacks Project, Tags 0149 and 08BW. -/
 noncomputable def perfectHomTriangleRow (Z : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     (M : schemeDerivedCategory Z) (T : Triangle (schemeDerivedCategory Z)) :
@@ -40,8 +38,7 @@ noncomputable def perfectHomTriangleRow (Z : Scheme.{u})
 
 /-- Additive Hom rows are functorial in the supplied triangle. The boundary square
 is the naturality square of the canonical homology-sequence boundary.
-Source: Stacks Project, Tags 0149 and 08BW.
-(blueprint: lem-pc-perfect-hom-triangle-row-presentations). -/
+Source: Stacks Project, Tags 0149 and 08BW. -/
 noncomputable def perfectHomTriangleRowFunctor (Z : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     (M : schemeDerivedCategory Z) :
@@ -104,8 +101,7 @@ noncomputable def perfectHomTriangleRowFunctor (Z : Scheme.{u})
 
 /-- A cocone of triangles gives a morphism from the diagram of Hom rows to its
 constant limit row. This uses only whiskering and exchange of the two indices.
-Source: Stacks Project, Tag 08BW.
-(blueprint: lem-pc-perfect-hom-triangle-row-presentations). -/
+Source: Stacks Project, Tag 08BW. -/
 noncomputable def perfectHomTriangleRowCoconeMap (Z : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     (M : schemeDerivedCategory Z) {J : Type*} [Category J]
@@ -167,7 +163,6 @@ end
 presented by additive Hom of a distinguished triangle.
 
 Source: Stacks Project, Tags 0149 and 08BW.
-(blueprint: lem-pc-perfect-hom-triangle-row-presentations).
 
 Proof: The three zero composites are respectively the second map followed by the
 boundary, the boundary followed by the first map, and the first map followed by

@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 /-! # Comparing open module stalks under restriction
 
 Source: Stacks Project, Tag 00A0(3), stalks of restrictions to open subspaces.
-(blueprint: lem-sc-open-module-stalk-restriction-comparison).
 -/
 
 public section
@@ -141,7 +140,6 @@ with both stalks regarded as modules over the ambient scheme's stalk ring.
 
 Source: Stacks Project, Tag 00A0(3) (restriction to an open subspace),
 also for sheaves of modules as specified there.
-(blueprint: lem-sc-open-module-stalk-restriction-comparison).
 
 Proof: Apply Scheme.Modules.overMapCompOverEquiv to identify restriction on
 slice sites with restriction along the open immersion V.toScheme to W.toScheme.

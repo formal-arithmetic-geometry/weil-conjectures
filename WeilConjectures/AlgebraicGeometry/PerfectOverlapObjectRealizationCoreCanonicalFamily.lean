@@ -24,7 +24,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
 /-! # Core object comparison data (without the final Hom pin).
 
 Source: Stacks Project, Tags 09RE, 08DW and 0D5S.
-(blueprint: lem-pc-perfect-overlap-object-realization-core-data).
 -/
 
 @[expose] public section
@@ -99,7 +98,6 @@ attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverMo
 /-- Comparison data for one fixed later stage of the overlap construction.
 The construction is the single-stage restriction and pullback comparison from
 Tags 09RE and 08DW; the family theorem only packages these independent choices.
-(blueprint: lem-pc-perfect-overlap-object-realization-core-data-at).
 -/
 theorem perfect_overlap_object_realization_core_data_at
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
@@ -142,7 +140,6 @@ For each later index, identify the inverse-image intersection with the cartesian
 base change of `U ⊓ V`, pull back along this identification, and apply the inverse
 open-site equivalence. Restriction and derived-pullback composition comparisons
 provide the transport data and theta equations.
-(blueprint: lem-pc-perfect-overlap-object-realization-core-data-family).
 -/
 theorem perfect_overlap_object_realization_core_data_family
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]

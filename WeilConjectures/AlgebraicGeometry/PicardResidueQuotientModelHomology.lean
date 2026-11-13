@@ -19,8 +19,7 @@ namespace AlgebraicGeometry.Scheme
 set_option linter.unusedVariables false in
 /-- The explicit residue cycle quotient is additively the degree-one homology
 of the scalar extension of sections.  This is the algebraic quotient step of
-Tag 010V, independent of the geometric derived comparison.
-(blueprint: new-picard-residue-quotient-model-homology) -/
+Tag 010V, independent of the geometric derived comparison. -/
 theorem picard_residue_quotient_model_homology
     [∀ Y : Scheme.{v}, HasDerivedCategory.{v + 1}
       (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

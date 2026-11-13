@@ -16,8 +16,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Finite relative Tor dimension of a perfect tensor
 
-Source: Stacks Project, Tags 0DJQ, 08CI and 08CG
-(blueprint: lem-pc-perfect-tensor-finite-relative-tor).
+Source: Stacks Project, Tags 0DJQ, 08CI and 08CG.
 -/
 
 @[expose] public section
@@ -69,8 +68,7 @@ Proof:
 4. Represent the global derived object by a complex K, and choose a K-flat resolution
    of its restriction of scalars. It computes the same relative derived tensors. The
    uniform bound from step 3 provides the witnesses in HasFiniteTorDimensionOver.
-   Only a proposition of existence is asserted; no arbitrary witness defines new data.
-(blueprint: lem-pc-perfect-tensor-finite-relative-tor). -/
+   Only a proposition of existence is asserted; no arbitrary witness defines new data. -/
 theorem perfect_tensor_hasFiniteTorDimensionOver
     {X S : Scheme.{u}} [CompactSpace X] (f : X ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

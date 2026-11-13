@@ -18,7 +18,6 @@ import Mathlib.Tactic.NoncommRing
 # An integral commutative model of a quotient projector
 
 Source: Stacks Project, More on Algebra, proof of Lemma Tag 07M5, first matrix construction.
-(blueprint: lem-weil-pbc-integral-model-finite-free-projector).
 -/
 
 @[expose] public section
@@ -58,11 +57,10 @@ commutative algebra, where that element is idempotent modulo the extended ideal.
 
 Source: Stacks Project, More on Algebra, proof of Lemma Tag 07M5, from the choice
 of the lifted matrix through the construction of the idempotent `ebar`.
-(blueprint: lem-weil-pbc-integral-model-finite-free-projector).
 
 Proof: Lift the entries of `toMatrix' pbar` to a matrix `X` over `A`. Put
 `f = charpoly X` and `B = A[x]/(f)`. Monicity makes `B` finite free and integral.
-Cayley--Hamilton gives `ψ : B →ₐ[A] Mat_n(A)` sending the class `x` to `X`.
+Cayley--Hamilton gives `ψ: B →ₐ[A] Mat_n(A)` sending the class `x` to `X`.
 For any idempotent matrix `M` over any commutative ring, put `S = t*1` and
 `N = C(M)` over its polynomial ring. Since `SN = NS` and `N^2 = N`, expansion
 gives `(S-N)*(1-S-N) = (t-t^2)*1`. Taking determinants shows that

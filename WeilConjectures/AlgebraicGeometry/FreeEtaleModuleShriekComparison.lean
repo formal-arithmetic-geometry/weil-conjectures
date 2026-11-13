@@ -16,7 +16,6 @@ import Mathlib.CategoryTheory.Adjunction.Whiskering
 # Free etale module sheaves as extensions by zero
 
 Source: Stacks Project, Modules on Sites, Tag 03DI and the equation following it.
-(blueprint: lem-weil-pbc-free-etale-module-shriek-comparison).
 -/
 
 @[expose] public section
@@ -107,7 +106,6 @@ its constant rank-one module sheaf.
 
 Source: Stacks Project, Modules on Sites, Tag 03DI, and
 `equation-map-lower-shriek-OU-into-module` immediately following it.
-(blueprint: lem-weil-pbc-free-etale-module-shriek-comparison).
 
 Proof: The free-module adjunction followed by Yoneda identifies maps from the
 presheaf `uliftYoneda.obj W` composed with `ModuleCat.free` to the underlying

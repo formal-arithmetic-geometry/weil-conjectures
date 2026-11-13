@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.GeometricallyConnectedFiniteSeparableTe
 /-!
 # Geometric connectedness of a fibre tested on étale neighbourhoods
 
-Source: Stacks Project, More on Morphisms, Tag 03GZ
-(blueprint: lem-weil-pbc-stein-geometric-fibre-etale-criterion).
+Source: Stacks Project, More on Morphisms, Tag 03GZ.
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- A fibre is geometrically connected exactly when the fibre over every étale neighbourhood
-of its base point is connected. Source: Stacks Project, More on Morphisms, Tag 03GZ
-(blueprint: lem-weil-pbc-stein-geometric-fibre-etale-criterion).
+of its base point is connected. Source: Stacks Project, More on Morphisms, Tag 03GZ.
 
 Proof:
 1. Mathlib's `isPullback_fiberToSpecResidueField_of_isPullback` identifies the

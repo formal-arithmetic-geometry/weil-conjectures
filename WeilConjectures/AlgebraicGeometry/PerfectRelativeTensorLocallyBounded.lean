@@ -21,7 +21,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Local relative Tor bounds for perfect complexes
 
 Source: Stacks Project, Tags 069C and 0B6G, verification of condition (3).
-(blueprint: lem-pc-perfect-relative-tensor-locally-bounded).
 -/
 
 @[expose] public section
@@ -54,8 +53,7 @@ that P computes the same derived tensor. Taking stalks is exact and commutes wit
 tensor and its total complex,
 so this amplitude means that every indicated stalk of its tensor homology vanishes.
 The interval and neighbourhood are chosen before the test module F, hence work for
-all F. A zero local model admits [0,0]; there is no point to consider on an empty X.
-(blueprint: lem-pc-perfect-relative-tensor-locally-bounded). -/
+all F. A zero local model admits [0,0]; there is no point to consider on an empty X. -/
 theorem perfect_relativeTensor_locally_bounded
     {X Y : Scheme.{u}} [IsNoetherian Y]
     (f : X ⟶ Y) [LocallyOfFiniteType f]

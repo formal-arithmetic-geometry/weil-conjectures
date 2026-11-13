@@ -11,11 +11,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
 
 /-! # Proper self-product exchange and forget supports
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md, first triangle, the exchange
-obtained from the same pullback counits on the Cartesian square.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -348,15 +343,12 @@ The ordinary exchange is `CoordinateTrace.exchange1`, the canonical derived adju
 mate in the left-derived presentation of exact inverse image, as specified in
 `def-kun-unbounded-exchange`. Its inverse is justified by torsion-ring proper base change.
 
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, first triangle, the common
-pullback counits (auxiliary; not a blueprint node).
-
 Proof in words:
 1. Exact module inverse images and their right adjoints have the sheaf composition
 normalization of prop-weil-pbc-inverse-image-modules-exact and
 lem-weil-pbc-inverse-image-composition-module-linear. Apply
 lem-sfb-derived-composition-adjunction-normalization in the Grothendieck abelian module
-sheaf categories (lem-weil-pbc-module-sheaves-grothendieck-abelian). Thus the K-injective
+sheaf categories. Thus the K-injective
 compositors of lem-weil-derived-direct-image-composition are conjugate to the canonical
 pullback compositors. The ordinary exchange mates obey vertical pasting by
 lem-weil-pbc-mate-pasting and lem-kun-derived-pullback-composition-monoidal.
@@ -370,7 +362,7 @@ lem-sf-proper-refinement-forget-supports.
 identity lem-asd-open-base-change-unit-mate identifies the transpose of b;t_j' with
 that of F_a(t_j);E_j. Indeed, t_j is the adjunct of the inverse open unit; naturality
 of the pullback square and the counit give the same inverse-unit composite on both
-sides. The adjunction hom bijection (def-weil-pbc-adjunction-mate) gives equality.
+sides. The adjunction hom bijection gives equality.
 4. Substitute that equality in beta^c;gamma_c'. Naturality of E_r moves t_j past E_r;
 vertical mate pasting then identifies E_r;R_r'(E_j);kappa_r',j' with
 F_f(kappa_r,j);E_f. Consequently beta^c;gamma_c'=F_f(gamma_c);E_f.

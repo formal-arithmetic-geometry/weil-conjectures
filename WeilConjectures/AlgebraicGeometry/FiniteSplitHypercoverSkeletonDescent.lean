@@ -21,8 +21,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 finite split hypercover at a stage. Source: blueprint finite hypercover descent,
 followed by the split extension construction of Stacks 0DAV. Truncate the given
 hypercover, descend that finite data, and extend the descended skeleton. Forgetting
-matching and splitting choices gives the asserted isomorphism of simplicial diagrams.
-(auxiliary; not a blueprint node) -/
+matching and splitting choices gives the asserted isomorphism of simplicial diagrams. -/
 theorem exists_stage_hypercover_truncation
     {I : Type u} [SmallCategory I] [IsFiltered I] (D : Iᵒᵖ ⥤ Scheme.{u})
     [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)]

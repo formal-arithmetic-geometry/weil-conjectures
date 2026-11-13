@@ -27,7 +27,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 above its original nonvanishing locus.
 
 Source: Stacks Project, Sheaves Tag 0098 and Properties Section 01PR.
-(blueprint: lem-sc-nonvanishing-tensor-pullback).
 
 Proof: the tensor-pullback stalk is the original stalk extended along the local ring
 map, and the canonical unit sends the germ to one tensor the original germ. Passing to

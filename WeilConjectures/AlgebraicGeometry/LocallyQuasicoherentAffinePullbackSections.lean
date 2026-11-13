@@ -15,8 +15,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Affine pullback sections from local quasi-coherence
 
-Source: Stacks Project, Tags 01I7, 01HV, 01I9, 0096 and 0097.
-(blueprint: new-p4-locally-quasicoherent-affine-pullback-sections). -/
+Source: Stacks Project, Tags 01I7, 01HV, 01I9, 0096 and 0097. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -127,7 +126,6 @@ end Scheme.Modules
 /-- Tensor pullback sections need quasi-coherence only on the affine target open.
 Source: Stacks Project, Tag 01I9(1), lemma-widetilde-pullback; Tag 0096,
 lemma-adjoint-pullback-pushforward-modules; Tag 0097, lemma-push-pull-composition-modules.
-(blueprint: new-p4-locally-quasicoherent-affine-pullback-sections).
 Proof: Put V=i inverse-image U, which is affine because i is affine. Restrict
 G to Spec A through the canonical chart of U. Quasi-coherence of G on U and
 restriction along the chart isomorphism make this restricted module N

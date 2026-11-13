@@ -13,10 +13,6 @@ import WeilConjectures.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 
 /-!
 # Sections over weakly contractible affine pro-étale objects
-
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
-sk-cor-pe-sections/det-pe-sections-limits-colimits.md
-(blueprint: det-pe-sections-limits-colimits).
 -/
 
 @[expose] public section
@@ -29,8 +25,7 @@ open AlgebraicGeometry
 namespace CategoryTheory
 
 /-- The site is small in every common module universe containing its objects and arrows.
-Source: the fixed size convention, realized by Mathlib's small-category transport.
-(blueprint: det-pe-sections-limits-colimits). -/
+Source: the fixed size convention, realized by Mathlib's small-category transport. -/
 private local instance pe_essentiallySmall (X : Scheme.{u})
     [UnivLE.{u + 1, v}] : EssentiallySmall.{v} X.ProEt := by
   have : Small.{v} X.ProEt := inferInstance
@@ -41,8 +36,7 @@ private local instance pe_essentiallySmall (X : Scheme.{u})
 /-- A colimit of module sheaves is the sheafification of the presheaf colimit.
 The comparison is the sheafification unit followed by an isomorphism, so is locally
 surjective on underlying sections.
-Source: Stacks Project, Tag 03DB, module-colimit construction and Tag 03CY.
-(blueprint: det-pe-sections-limits-colimits). -/
+Source: Stacks Project, Tag 03DB, module-colimit construction and Tag 03CY. -/
 private theorem colimit_comparison_locally_surjective
     {C : Type*} [Category C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{r}) [HasSheafify J AddCommGrpCat.{v}]
@@ -88,8 +82,7 @@ private theorem colimit_comparison_locally_surjective
 View the coproduct as the filtered colimit of finite subcoproducts. Local representatives
 and a finite covering refinement give a common finite support. The projection onto that
 support fixes the section locally, hence globally by separatedness.
-Source: Stacks Project, Tag 0935 (2); the finite-support paragraph of the blueprint proof.
-(blueprint: det-pe-sections-limits-colimits). -/
+Source: Stacks Project, Tag 0935 (2); the finite-support paragraph of the blueprint proof. -/
 private theorem pe_coproduct_section_finite_support
     (X : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology X) RingCat.{r})
     (W : X.ProEt) [IsAffine W.left]
@@ -161,9 +154,7 @@ private theorem pe_coproduct_section_finite_support
 
 /-- The coproduct comparison is bijective: finite-support sections lift through a finite
 comparison isomorphism. A kernel element likewise comes from a finite subcoproduct,
-whose split inclusion and invertible comparison force the element to vanish.
-Source: the direct-sum injectivity and surjectivity paragraphs of the blueprint proof.
-(blueprint: det-pe-sections-limits-colimits). -/
+whose split inclusion and invertible comparison force the element to vanish. -/
 private theorem pe_evaluation_coproduct_isIso
     (X : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology X) RingCat.{r})
     (W : X.ProEt) [IsAffine W.left]
@@ -231,8 +222,7 @@ private theorem pe_evaluation_coproduct_isIso
     exact ht
 
 /-- Evaluation on an affine pro-etale object preserves coproducts of section-universe size.
-Source: Stacks Project, Tag 0935 (2), and the blueprint direct-sum argument above.
-(blueprint: det-pe-sections-limits-colimits). -/
+Source: Stacks Project, Tag 0935 (2), and the blueprint direct-sum argument above. -/
 private theorem pe_evaluation_preserves_coproducts
     (X : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology X) RingCat.{r})
     (W : X.ProEt) [IsAffine W.left] (K : Type (max (u + 1) r v)) :
@@ -245,9 +235,6 @@ private theorem pe_evaluation_preserves_coproducts
   exact preservesColimitsOfShape_of_discrete ev
 
 /--
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
-sk-cor-pe-sections/det-pe-sections-limits-colimits.proof.md
-(blueprint: det-pe-sections-limits-colimits).
 
 First compute limits sectionwise in the common module universe. For coproducts, write
 the sum as the filtered colimit of its finite subsums. The comparison from the presheaf

@@ -368,7 +368,6 @@ include ℓ k
 /-- Integral single-sheaf case of finite-type finiteness.
 
 Source: Bhatt--Scholze, Lemmas 6.5.9 and 6.7.2, Proposition 6.8.11(3).
-(auxiliary; not a blueprint node)
 
 Proof: identify the given closed unit ball with the spectral integer ring after
 universe lifting. The ring equivalence is an isometry by uniqueness of the extended

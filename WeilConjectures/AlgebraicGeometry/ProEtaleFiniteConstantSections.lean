@@ -18,7 +18,7 @@ import Mathlib.CategoryTheory.Sites.LocallyBijective
 # Sections of a finite constant pro-etale sheaf
 
 Source: Bhatt--Scholze, *The pro-etale topology for schemes*, Lemma 4.2.12,
-printed p. 30 (blueprint: lem-pur-proetale-finite-constant-sections).
+printed p. 30.
 
 For a finite commutative ring with its discrete topology, sections of the constant
 ring sheaf on the small pro-etale site are continuous functions on the underlying
@@ -111,7 +111,7 @@ private theorem constantToContinuous_locallySurjective
 /-- Sections of a finite constant pro-etale ring sheaf are continuous functions.
 
 Source: Bhatt--Scholze, *The pro-etale topology for schemes*, Lemma 4.2.12,
-printed p. 30 (blueprint: lem-pur-proetale-finite-constant-sections).
+printed p. 30.
 The proof constructs the sheaf of continuous functions, proves that the map from
 the constant presheaf is locally bijective using the finite discrete fibres, and
 then applies sheafification. Pointwise ring operations give ring equivalences;

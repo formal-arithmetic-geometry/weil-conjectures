@@ -44,7 +44,6 @@ scalar extension. The levelwise bijections themselves are already constructed an
 No scalar Hom cohomology or locally constant functions enter this assertion.
 
 Source: Stacks Tags 06YY and 064B; blueprint Compatible isomorphisms.
-(blueprint: lem-pe-internal-perfect-reduction-homotopy-comparison).
 
 Proof: use the derived counit comparison fixed in internalPerfectReductionOrdinaryIso.
 The ordinary and derived balancing isomorphisms are mates of the same restriction

@@ -12,11 +12,6 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 /-!
 # Constructibility of all reductions from the first
 
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-  sk-thm-sfb-proper-base-change/sk-prop-integral-criterion-reductions.md,
-  statement, conditions (1) and (2), and final integral-criterion assertion
-  (blueprint: det-prop-integral-criterion-reductions).
-
 The integral category `D(X_proet, O_E)` is `AdicCompletion.Modules l E X`, internal
 modules over the pulled-back condensed integer ring `DerivedNakayama.integerRing l E`;
 `AdicCompletion.derivedReduction l E X n` is the derived reduction `K_{n+1}` modulo
@@ -40,10 +35,6 @@ first reduction `K_1` is bounded constructible if and only if every reduction `K
 is bounded constructible with cohomology in one interval `[r,s]` independent of `n`
 (first conjunct); and `K` itself lies in `D_bc(X, O_E)` if and only if this second
 condition holds (second conjunct, the final assertion of the source).
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-  sk-thm-sfb-proper-base-change/sk-prop-integral-criterion-reductions.md,
-  conditions (1), (2), and final sentence
-  (blueprint: det-prop-integral-criterion-reductions).
 
 Proof (node steps 1-4).
 1. (2) ⇒ (1): the case `n = 1` of (2).
@@ -57,14 +48,14 @@ Proof (node steps 1-4).
    By lem-pe-finite-scalar-restriction-constructible, `Res K_{n-1}` and `Res K_1` lie
    in `D_bc(X, Λ_n)` with `H^q(Res L) = Res H^q(L)`, vanishing outside `[r,s]`;
    lem-weil-proetale-dbc-triangulated gives `K_n ∈ D_bc(X, Λ_n)`, and the long exact
-   sequence (lem-sf-derived-homology-long-exact) gives `H^q(K_n) = 0` off `[r,s]`.
+   sequence gives `H^q(K_n) = 0` off `[r,s]`.
 4. Final assertion. def-pe-derived-complete and sk-def-pe-derived-completion use the
    same completion map. If (2) holds, then (1) holds by step 1 and
    lem-sfb-internal-integral-criterion-reverse gives `K ∈ D_bc(X, O_E)`. Conversely,
    for `K ∈ D_bc(X, O_E)` apply lem-sfb-degreewise-bounded-devissage with the property
    `Q(L)`: `L ⊗^L Λ_1 ∈ D_bc(X, Λ_1)`, which is extension-closed since derived
-   extension of scalars is exact (lem-pur-derived-change-of-rings) and `D_bc(X, Λ_1)`
-   is triangulated (lem-weil-proetale-dbc-triangulated); for constructible `M`,
+   extension of scalars is exact and `D_bc(X, Λ_1)`
+   is triangulated; for constructible `M`,
    lem-sfb-finite-model-sheaf-quotient-constructible with `n = 1` gives `Q(M[-q])`.
    Hence (1), and (2) by steps 2-3. -/
 theorem integralCriterionReductions (l : ℕ) [Fact l.Prime]

@@ -27,7 +27,6 @@ namespace AlgebraicGeometry.Scheme
 /-- A map from a finitely generated constant module sheaf that factors through a
 subsheaf at one geometric stalk factors on a Zariski neighbourhood of that point.
 Source: Stacks Project, Tag 09BH, Proposition 59.74.1 (3), generator lifting and descent.
-(blueprint: lem-weil-pbc-finite-constant-map-open-factorization).
 
 Proof: Choose finitely many generators of N. Represent the images of these generators
 under the stalk factorization by sections of F on a common pointed etale neighbourhood.

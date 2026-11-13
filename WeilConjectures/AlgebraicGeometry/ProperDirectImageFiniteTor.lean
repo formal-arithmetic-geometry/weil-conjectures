@@ -22,8 +22,7 @@ import WeilConjectures.AlgebraicGeometry.TorAmplitudeQCohTest
 /-! # Proper-support direct image of a finite-Tor complex
 
 Source: Stacks Project, Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV),
-proof from “Hence it suffices to show that Rf_*E has finite tor dimension” to the end
-(blueprint: lem-pc-proper-direct-image-finite-tor).
+proof from “Hence it suffices to show that Rf_*E has finite tor dimension” to the end.
 -/
 
 @[expose] public section
@@ -38,7 +37,6 @@ namespace AlgebraicGeometry.Scheme
 /-- A bounded coherent complex with proper cohomological support and finite Tor dimension
 over the inverse-image structure sheaf has a derived direct image of finite Tor dimension.
 Source: Stacks Project, Tag 08EV, finite-Tor paragraph.
-(blueprint: lem-pc-proper-direct-image-finite-tor)
 
 Proof:
 1. Proper-support direct image preserves bounded coherent cohomology. Coherence on the

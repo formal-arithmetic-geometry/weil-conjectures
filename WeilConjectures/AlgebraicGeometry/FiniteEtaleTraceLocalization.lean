@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceLocalizationSectionForm
 
 Source: Stacks Project, Section 03SH, paragraph after Definition 03SE;
 SGA 4, Exposé IX, 5.1.
-(blueprint: lem-weil-pbc-finite-etale-trace-localization)
 -/
 
 @[expose] public section
@@ -83,7 +82,6 @@ set_option maxRecDepth 2048 in
 No compatibility between the choices of the two morphisms is assumed.
 Source: Stacks Project, Section 03SH, after Definition 03SE, localization property;
 SGA 4, Exposé IX, 5.1.
-(blueprint: lem-weil-pbc-finite-etale-trace-localization)
 
 Proof. Work at `W` over `X'`. A splitting cover of `W` for the finite étale pullback
 of `f` exists by Stacks 04HN and covering base change. The canonical pasting

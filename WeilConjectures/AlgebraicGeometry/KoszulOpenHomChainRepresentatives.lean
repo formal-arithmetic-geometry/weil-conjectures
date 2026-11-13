@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
 /-! # Normalized chain representatives for Koszul derived Hom
 
 Source: Stacks Project, Tags 06Z0 and 08DD.
-(blueprint: lem-sc-koszul-open-hom-chain-representatives).
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ namespace AlgebraicGeometry
 noncomputable section
 
 /-- The class of a chain map in the module-valued Hom complex.
-Source: Stacks Project, Tag 0A8H; cycles are chain maps and boundaries are homotopies.
-(blueprint: lem-sc-koszul-open-hom-chain-representatives). -/
+Source: Stacks Project, Tag 0A8H; cycles are chain maps and boundaries are homotopies. -/
 def koszulHomChainClass {A : Type u} [CommRing A]
     {L M : CochainComplex (ModuleCat.{u} A) ℤ} (t : L ⟶ M) :
     (CochainComplex.moduleHomComplex L M).homology 0 :=
@@ -44,8 +42,7 @@ def koszulHomChainClass {A : Type u} [CommRing A]
       exact CochainComplex.HomComplex.δ_ofHom t⟩
 
 /-- Transpose a sheaf chain map through the ordinary affine tilde/sections adjunction.
-Source: Stacks Project, Tag 06Z0.
-(blueprint: lem-sc-koszul-open-hom-chain-representatives). -/
+Source: Stacks Project, Tag 06Z0. -/
 def koszulOpenHomTranspose (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (F : CochainComplex
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)
@@ -60,8 +57,7 @@ def koszulOpenHomTranspose (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
 
 /-- The chain-map class in the specified stage of the derived Hom diagram.
 This is constructed from the cycle, the homology projection, and the specified object iso.
-Source: Stacks Project, Tags 0A8H and 08D1.
-(blueprint: lem-sc-koszul-open-hom-chain-representatives). -/
+Source: Stacks Project, Tags 0A8H and 08D1. -/
 def koszulOpenHomStageClass (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{v} (ModuleCat.{u} A)]
     (F : CochainComplex
@@ -81,7 +77,6 @@ def koszulOpenHomStageClass (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A
 set_option backward.isDefEq.respectTransparency false in
 /-- The affine derived equivalence agrees with ordinary transposition on chain maps.
 Source: Stacks Project, Tag 06Z0, Lemma on the affine derived equivalence.
-(blueprint: lem-sc-koszul-open-hom-chain-representatives).
 
 Proof: The exact tilde functor induces the affine derived equivalence. On the full
 subcategory of quasi-coherent sheaves, ordinary sections is its exact inverse:
@@ -247,7 +242,6 @@ open CochainComplex.HomComplex in
 set_option backward.isDefEq.respectTransparency false in
 /-- Degree-zero module Hom homology computes maps out of a K-projective complex.
 Source: Stacks Project, Tag 0A8H (Hom complexes), and More on Algebra, Lemma 15.75.2.
-(blueprint: lem-sc-koszul-open-hom-chain-representatives).
 
 Proof: A degree-zero Hom cocycle is exactly a chain map, by the identity
 δ(z)=d_M z-z d_L. Degree-zero boundaries are exactly differences of homotopic
@@ -310,7 +304,6 @@ private theorem moduleHomDerived_class
 /-- Normalized stage identifications and chain representability, before restriction to U.
 Source: Stacks Project, Proposition 36.9.5, Tag 08DD, the derived-Hom identification;
 Lemma 36.3.5, Tag 06Z0, and More on Algebra, Lemma 15.75.2.
-(blueprint: lem-sc-koszul-open-hom-chain-representatives).
 
 Proof: Let L be the extended module Koszul tail and M the top-sections complex of F.
 Each term of L is a finite free exterior power, or zero outside the negative tail.

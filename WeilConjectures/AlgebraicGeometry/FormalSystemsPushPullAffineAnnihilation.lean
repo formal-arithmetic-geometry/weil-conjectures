@@ -20,7 +20,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 /-! # Affine annihilation of the canonical formal push-pull comparison
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 088B, second half of the proof.
-(blueprint: lem-weil-pbc-formal-systems-push-pull-affine-annihilation)
 -/
 
 @[expose] public section
@@ -82,7 +81,6 @@ has affine limit kernel and cokernel killed by a positive power of K.
 
 Source: Stacks Project, Lemma 088B, proof from the base change to Spec(B-completion)
 to its last paragraph; Remark 0888, condition (2).
-(blueprint: lem-weil-pbc-formal-systems-push-pull-affine-annihilation)
 
 Proof: Restrict to an affine open U = Spec B. The quotient equation determines
 κ uniquely because the quotient projections are epimorphisms. Formal functions

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.OpenStalkRestrictionTransport
 /-! # Local lifting from a finite free open-site stalk
 
 Source: Stacks Project, Tag 01CP, and Sheaves Tag 00A0 (3).
-(blueprint: lem-sc-open-stalk-free-map-local-lift).
 -/
 
 @[expose] public section
@@ -55,7 +54,6 @@ in the coordinates of the canonical comparisons `openModuleStalkRestrictionCompa
 
 Source: Stacks Project, Modules Tag 01CP, finite-generator lifting in
 `lemma-stalk-internal-hom`; Sheaves Tag 00A0 (3), `lemma-restrict`, restriction and stalks.
-(blueprint: lem-sc-open-stalk-free-map-local-lift).
 
 Proof: Identify the slice site over U with the open subscheme U. For each W inside
 U containing x, send a germ on W to the same germ on U, transporting scalars along

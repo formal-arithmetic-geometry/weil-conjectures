@@ -24,7 +24,6 @@ import WeilConjectures.AlgebraicGeometry.PerfectOverlapSiteCancellationAbstract
 /-! # Core object comparison data (without the final Hom pin).
 
 Source: Stacks Project, Tags 09RE, 08DW and 0D5S.
-(blueprint: lem-pc-perfect-overlap-object-realization-core-data).
 -/
 
 @[expose] public section

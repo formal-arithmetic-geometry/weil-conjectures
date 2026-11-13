@@ -18,7 +18,6 @@ import all WeilConjectures.SixFunctors.ProEtale.IntegralNormalizedRestrictionSqu
 /-! The scalar-endomorphism part of the regular integral comparison.
 
 Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -655,7 +654,6 @@ restriction unit maps. For a scalar `a`, naturality of each unit map identifies 
 image with multiplication by the corresponding constant section. The fixed
 projection formulas agree at every positive quotient, hence the completion
 projections identify the two maps. The zero scalar and empty scheme are included.
-(auxiliary; not a blueprint node).
 -/
 theorem scalarComparison (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

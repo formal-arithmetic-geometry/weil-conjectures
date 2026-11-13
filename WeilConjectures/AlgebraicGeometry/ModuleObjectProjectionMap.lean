@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 /-!
 # The canonical projection map for condensed module objects
 
-Stacks Project, Tags 03EL and 0943 (auxiliary; not a blueprint node).
+Stacks Project, Tags 03EL and 0943.
 
 The published module-object pullback tensor comparison is constructed on signed
 K-flat total tensors and characterized by its derived counits. Its existing
@@ -33,7 +33,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- A morphism together with its category and endpoints, used to keep the projection
 map interface compact. All fields below are filled by the existing canonical construction.
-Source: the canonical-map convention (auxiliary; not a blueprint node). -/
+Source: the canonical-map convention. -/
 structure ProjectionMorphismData where
   carrier : Type (v + 1)
   [category : Category.{v} carrier]
@@ -44,8 +44,7 @@ structure ProjectionMorphismData where
 attribute [instance 20000] ProjectionMorphismData.category
 
 /-- The existing canonical projection construction, together with its exact category
-and endpoints. Source: the canonical-map convention
-(auxiliary; not a blueprint node). -/
+and endpoints. Source: the canonical-map convention. -/
 def moduleObjectProjectionData
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)))
@@ -61,8 +60,7 @@ def moduleObjectProjectionData
 
 /-- The canonical projection map: the adjoint transpose of the generic K-flat
 pullback tensor comparison followed by counit tensor identity.
-Source: blueprint sk-thm-sf-pf-adic-projection; Stacks 0943
-(auxiliary; not a blueprint node). -/
+Source:; Stacks 0943. -/
 def moduleObjectProjectionMap
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)))

@@ -30,7 +30,6 @@ and the bundle have the same local rank. Neither properness nor flatness nor uni
 base-change compatibility is an assumption of this local calculation.
 
 Source: Stacks Project, Tag 0BDP, final paragraph, the two displayed dual bases.
-(blueprint: lem-sc-picard-cup-product-local-dual-bases)
 
 Proof: Put p = X_W → W, q = X_W → X, M = q^*E and N = p_*M.
 If the cup transpose is invertible, the pushed pairing is perfect. Since N is

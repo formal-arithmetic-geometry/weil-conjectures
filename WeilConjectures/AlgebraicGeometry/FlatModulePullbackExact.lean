@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 /-! # Flat module pullback is exact and direct image preserves injectives
 
 Source: literature/stacks-project/modules.tex; literature/stacks-project/cohomology.tex,
-Modules 02N4 and Cohomology 02N5
-(blueprint: lem-weil-pbc-flat-module-pullback-exact-pushforward-injective).
+Modules 02N4 and Cohomology 02N5.
 -/
 
 @[expose] public section
@@ -52,11 +51,9 @@ Proof (the three steps of the node):
    on pure tensors, hence after sheafification. It sends zero to zero. Apply steps 1
    and 2 also at the ends of short exact sequences to get exactness, equivalently
    preservation of finite limits and finite colimits in these abelian categories.
-   The same dependency gives the adjunction to module pushforward. For injective I
-   (def-sp-injective-resolutions), a map M → h_*I corresponds to h^*M → I.
+   The same dependency gives the adjunction to module pushforward. For injective I, a map M → h_*I corresponds to h^*M → I.
    A monomorphism M → N pulls back to a monomorphism, so injectivity extends this
-   map to h^*N → I. Its adjoint N → h_*I extends the original map by naturality.
-(blueprint: lem-weil-pbc-flat-module-pullback-exact-pushforward-injective) -/
+   map to h^*N → I. Its adjoint N → h_*I extends the original map by naturality. -/
 theorem flat_module_pullback_exact_pushforward_injective
     {X Y : Scheme.{u}} (h : X ⟶ Y) [Flat h] :
     (PreservesFiniteLimits (Scheme.Modules.tensorPullback h) ∧

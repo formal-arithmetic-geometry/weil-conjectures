@@ -17,9 +17,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeResidueLocalHomotopy
 import WeilConjectures.AlgebraicGeometry.FiniteFreeSingleFieldFibre
 
 /-! # Residue detection of pulled-back single cohomology
-
-Source: blueprint lem-pc-perfect-locus, proof step 4.
-(blueprint: lem-pc-finite-free-pullback-residue-criterion)
 -/
 
 @[expose] public section
@@ -84,9 +81,6 @@ private theorem single_cohomology_of_homotopyEquiv {Y : Scheme.{u}}
 /-- Single finite locally free cohomology of a pulled-back bounded nonnegative finite
 free complex is detected by the residue cohomology at all image points.
 
-Source: blueprint lem-pc-perfect-locus, proof step 4.
-(blueprint: lem-pc-finite-free-pullback-residue-criterion).
-
 Proof: at any image point satisfying the residue condition, split unit entries over
 its local ring as in lem-weil-pbc-free-complex-unit-entry-splits. The resulting minimal
 complex has rank r in degree i and rank zero elsewhere. Spread the finite sequence
@@ -101,7 +95,7 @@ is thus the residue field to the r-th power in degree i. The terms of the origin
 complex are free, so termwise pullback computes both derived fibres. At a source
 point z over y this fibre is the scalar extension from κ(y) to κ(z) of the fibre at y.
 A field extension is faithfully flat and preserves finite-dimensional cohomology
-ranks (lem-pc-finrank-field-base-change); hence the fibre at y has the same vanishing
+ranks; hence the fibre at y has the same vanishing
 and rank. This proves the criterion, also for the empty source and rank zero. -/
 theorem finiteFree_pullback_single_iff_residue
     {Y : Scheme.{u}} (P : CochainComplex Y.Modules ℤ) (d : ℕ)

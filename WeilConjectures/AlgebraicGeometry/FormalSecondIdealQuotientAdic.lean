@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemCo
 /-! # Quotients of formal systems remain adic
 
 Source: Stacks Project, Tag 088A, the systems F_n/K^e F_n.
-(blueprint: lem-weil-pbc-formal-second-ideal-quotient-adic).
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Termwise K-quotients of an I-adic coherent system are I-adic.
 Source: Stacks Project, Tag 088A, construction of G_e.
-(blueprint: lem-weil-pbc-formal-second-ideal-quotient-adic).
 
 Proof: Each term is a coherent quotient by the coherent completion construction.
 The I-power product of the quotient is zero: precomposing its multiplication with

@@ -7,9 +7,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Kummer
 
 /-! # Scalar faithfulness of a specified ordinary cohomology class
-
-Source: the normalized Kummer-class comparison in thm-amb-p1-decomposition.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -96,9 +93,6 @@ private theorem kummer_core_class_scalar_faithful
 
 /-- An injective scalar orbit of a normalized cohomology class detects scalar
 annihilators of its specified derived representative.
-Source: the Ext construction of ordinaryFiniteClass and blueprint
-thm-amb-p1-decomposition, geometric-fibre Kummer-class calculation.
-(auxiliary; not a blueprint node).
 
 Proof: precomposing the derived representative by a scalar equals postcomposing
 its Ext class by that scalar. The exact forgetful functor preserves this identity,

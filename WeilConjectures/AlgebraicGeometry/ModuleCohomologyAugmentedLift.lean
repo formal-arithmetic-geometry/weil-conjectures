@@ -114,7 +114,6 @@ private theorem augmentedLift_sections_quasiIso
 
 /-- A fixed augmented lift computes the cohomology map without changing resolutions.
 Source: Stacks Project, Cohomology, Tags 01FB and 01EZ.
-(blueprint: lem-weil-pbc-module-cohomology-augmented-lift).
 
 Proof: Extend h_*I by zero and resolve it by a quasi-isomorphism lambda into a
 bounded below injective complex; truncate back to natural indices. Take beta

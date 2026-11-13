@@ -20,7 +20,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 /-! # Construction of the formal push-pull comparison
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 088B, first half of the proof.
-(blueprint: lem-weil-pbc-formal-systems-push-pull-comparison)
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ identity characterizes the quotient comparison `κ`, and the second characterize
 There is no exceptional ideal or annihilation assertion in this construction.
 
 Source: Stacks Project, Lemma 088B, proof up to the definition of the limit comparison.
-(blueprint: lem-weil-pbc-formal-systems-push-pull-comparison)
 
 Proof: The coherence hypothesis makes its completion a coherent formal module. At level n+1,
 the pushforward of the quotient projection kills J^(n+1), since this ideal acts

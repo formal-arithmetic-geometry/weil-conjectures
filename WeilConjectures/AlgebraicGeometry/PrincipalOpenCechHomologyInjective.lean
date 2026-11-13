@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechInjectiveTerms
 /-! # injective on cohomology for the principal-open Čech augmentation
 
 Source: Stacks Project, Cohomology, Tag 08C1, finite augmented Čech argument.
-(blueprint: lem-sc-principal-open-cech-homology-injective).
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ namespace AlgebraicGeometry
 The source and target are specified by degree isomorphisms and the actual differential
 and augmentation formulas; no choice of unspecified Čech data occurs.
 
-Source: Stacks Project, Cohomology, Tag 08C1 (lemma-alternating-cech-complex-complex).
-(blueprint: lem-sc-principal-open-cech-homology-injective).
+Source: Stacks Project, Cohomology, Tag 08C1.
 
 Proof: Take a functorial K-injective resolution I of J with injective terms.
 The comparison J → I is a homotopy equivalence, since both complexes are K-injective.

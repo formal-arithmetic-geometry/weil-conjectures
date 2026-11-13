@@ -34,10 +34,6 @@ open scoped TensorProduct
 /-- After one principal localization, every reduced generic product map compatible
 with the fixed generic splitting is injective, including after further localization.
 
-Source: smooth purity blueprint, `sk-prop-sf-cbc`,
-`lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9.
-(blueprint: lem-weil-pbc-generic-product-kernel-bound)
-
 Proof: Put C = (B tensor_A R0)_red. It is a finite R0-module. Tensor
 associativity identifies its generic localization with the source of e: reduction
 commutes with localization, since a fraction is nilpotent if and only if a denominator

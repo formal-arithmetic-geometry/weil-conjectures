@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.OpenCoverTensorComparisonCoherence
 
 Source: Stacks Project, Sheaves of Modules, Tags 0095 and 0096,
 and Limits Tag 01ZR, persistence under further base change.
-(blueprint: lem-pc-open-cover-map-lift-transport).
 -/
 
 set_option cleanup.letToHave false
@@ -197,7 +196,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 functorial transport only: no finite-presentation, affine-chart, directedness,
 affine-limit or limit-universal-property hypothesis is assumed.
 Source: Stacks Project, Tags 0095, 0096 and 01ZR, first proof.
-(blueprint: lem-pc-open-cover-map-lift-transport).
 
 Proof: Fix a later stage l with j ≤ l and k ≤ l. In the category over Spec R(i),
 form q:Tk → Tj, s:Tl → Tk and v:Tl → Tj from the ring-system maps. The ring

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.PicardExternalRectangleSections
 /-! # Affine rectangle comparison for external coefficients
 
 Source: Stacks Project, Tag 0BED, equation-kunneth-on-cech.
-(blueprint: lem-sc-picard-external-affine-rectangle-comparison).
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
 set_option backward.isDefEq.respectTransparency.types true in
 /-- External pullback and tensoring preserve zero maps.
-Source: additive adjunctions
-(blueprint: lem-sc-picard-external-affine-rectangle-comparison). -/
+Source: additive adjunctions. -/
 instance picardExternalRectangleComparison_zero
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (G : Y.Modules) :
@@ -42,7 +40,6 @@ instance picardExternalRectangleComparison_zero
 This statement does not assume exactness of the complex.
 Source: Stacks Project, Tag 0BED, equation-kunneth-on-cech; Schemes, Tags 01I4,
 01JQ, 01IA, and Modules, Tag 01BG.
-(blueprint: lem-sc-picard-external-affine-rectangle-comparison).
 
 Proof: For each quasi-coherent term of S, the explicitly constructed map
 picardExternalRectangleSectionsMap is bijective by the affine rectangle section

@@ -433,8 +433,7 @@ private theorem generic_factor_full
 
 /-- The identity-top specialization of the proper/open projection square.
 
-Source: Stacks Project, Tags 0F7B, 0GL1 and 0B56
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 0F7B, 0GL1 and 0B56.
 
 Proof in words. The square with arrows h', identity, u, h is Cartesian, since u
 is a monomorphism and h' u = h. Apply the proper/open tensor square to it.

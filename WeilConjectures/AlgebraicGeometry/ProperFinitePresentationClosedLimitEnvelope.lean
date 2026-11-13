@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.EventuallyClosedImmersion
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! The proper finitely presented closed envelope clause of Lemma 09ZR.
-(blueprint: lem-weil-pbc-proper-closed-in-proper-fp-envelope-part)
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace AlgebraicGeometry
 /-- A proper scheme over a qcqs base embeds as a closed subscheme of a proper
 finitely presented scheme over that base.
 
-Source: Stacks Project, Limits, Lemma 09ZR
-(blueprint: lem-weil-pbc-proper-closed-in-proper-fp-envelope-part).
+Source: Stacks Project, Limits, Lemma 09ZR.
 
 Proof:
 1. Properness gives finite type and separatedness. By

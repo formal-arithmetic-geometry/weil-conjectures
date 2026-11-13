@@ -52,9 +52,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- The actual internal endomorphism tower has the scalar quotient cohomology model,
 including all its quotient arrows.
 
-Source: current blueprint, `sk-prop-integral-local-structure`, Compatible isomorphisms,
+Source: current, Compatible isomorphisms,
 paragraph beginning These Hom groups can be infinite; Stacks Tag 09C5.
-(blueprint: lem-pe-internal-perfect-endomorphism-quotient-comparison).
 
 Proof: apply the actual internal endomorphism/Hom comparison to obtain natural
 bijections with locally constant H^0 of the quotient of moduleHomComplex(P,P).

@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.PicardCanonicalBaseChange
 /-! # Tensor pullback square and conjugation
 
 Source: Stacks Project, Tags 0095, 0096, 0097 and 08HY.
-(blueprint: lem-sc-picard-tensor-square-conjugacy)
 -/
 
 @[expose] public section
@@ -142,7 +141,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 Source: Stacks Project, Tags 0095, 0096 and 0097 (tensor formula, adjunction,
 and composition), and
 08HY (the pushforward square used to define base change).
-(blueprint: lem-sc-picard-tensor-square-conjugacy)
 
 Proof: Transport each tensor pullback to ordinary pullback by
 `picardTensorComparison`. The conjugate of each comparison is the identity,

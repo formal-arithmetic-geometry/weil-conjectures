@@ -25,8 +25,7 @@ variable {k : Type u} [Ring k] (X : TopCat.{u})
   (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})
   (α : k →+* R.obj.obj (op ⊤))
 
-/-- The structural map from the constant presheaf of rings.
-(blueprint: def-sc-field-scalar-presheaf-ring-map). -/
+/-- The structural map from the constant presheaf of rings. -/
 noncomputable def fieldScalarPresheafRingMap :
     (Functor.const (Opens X)ᵒᵖ).obj (RingCat.of k) ⟶ (𝟭 (Opens X)).op ⋙ R.obj where
   app U := RingCat.ofHom ((R.obj.map (isTerminalTop.op.to U)).hom.comp α)
@@ -37,8 +36,7 @@ noncomputable def fieldScalarPresheafRingMap :
     rw [← RingCat.comp_apply, ← R.obj.map_comp]
     congr 2
 
-/-- Regard a module-valued presheaf as modules over the constant ring presheaf.
-(blueprint: def-sc-module-presheaf-constant-modules). -/
+/-- Regard a module-valued presheaf as modules over the constant ring presheaf. -/
 noncomputable def modulePresheafToConstantModules :
     ((Opens X)ᵒᵖ ⥤ ModuleCat.{max u v} k) ⥤
       PresheafOfModules.{max u v} ((Functor.const (Opens X)ᵒᵖ).obj (RingCat.of k)) where

@@ -43,7 +43,6 @@ private theorem isIso_of_isIso_derivedRestrictScalars_map
 /-- Transfer an invertible Z/nZ exchange to coefficients in a ring killed by n.
 Source: coefficient restriction as in Stacks Project, Tag 0D6J, together with the
 canonical unbounded mate comparison of lem-kun-unbounded-abelian-exchange-comparison.
-(auxiliary; not a blueprint node)
 
 Proof in words: the equation n times 1 = 0 defines a ring map Z/nZ to Λ by sending
 an integer class to its scalar multiple of 1. Replacing an integer by a multiple of

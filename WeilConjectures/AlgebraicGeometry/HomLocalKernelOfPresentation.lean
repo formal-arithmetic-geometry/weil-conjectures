@@ -32,7 +32,6 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- A specified presentation on V gives a finite-sum Hom kernel on that same open.
 Source: Stacks Project, Modules, Lemmas 01CO (1), 01CQ, and the proof of 01CP;
 Sites, Modules, Lemma 0E8H for restriction of internal Hom.
-(blueprint: lem-weil-pbc-coherent-hom-local-kernel-from-presentation).
 
 Proof:
 On the slice site, let H be internal Hom into F.over V, contravariant in its source.

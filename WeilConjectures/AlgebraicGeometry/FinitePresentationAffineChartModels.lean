@@ -14,8 +14,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 /-! # Object models on one fixed affine chart
 
 Source: Stacks Project, Limits, Tag 01ZR, first proof, affine case;
-Algebra, Tag 05N7, object clause.
-(blueprint: lem-pc-fp-affine-chart-object-models). -/
+Algebra, Tag 05N7, object clause. -/
 
 @[expose] public section
 
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry
 No finiteness of the cover or of the ambient morphism is needed.
 Source: Stacks Project, Limits, Tag 01ZR, first proof, affine case;
 Algebra, Tag 05N7, object clause.
-(blueprint: lem-pc-fp-affine-chart-object-models).
 
 Proof: Work on the upper tail above i, replacing its directed preorder by its
 partial-order quotient. This tail is nonempty because it contains i. For the

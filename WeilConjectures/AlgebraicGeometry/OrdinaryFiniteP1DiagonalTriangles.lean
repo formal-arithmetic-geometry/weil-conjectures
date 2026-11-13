@@ -12,12 +12,10 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalFirstCoordinateEx
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalSecondCoordinateExchange
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalIntegral
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # The supported diagonal unit and its two triangles
 
-Source: blueprint thm-amb-p1-adjunction.proof.md.
+Source:
 -/
 
 @[expose] public section

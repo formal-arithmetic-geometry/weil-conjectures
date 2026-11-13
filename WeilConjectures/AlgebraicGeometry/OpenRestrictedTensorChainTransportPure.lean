@@ -43,8 +43,7 @@ formula. Every input stalk element is represented by a section germ. This proves
 all x and d without making any auxiliary coordinate choices. Empty opens have
 no z0; zero rings, zero complexes, and negative degrees need no extra assumption.
 Source: Stacks Project, Tag 0098, restriction of stalk germs; Tag 0D5U,
-restriction of modules; the unit identities of the specified composition mates.
-(blueprint: lem-pc-open-restricted-tensor-chain-transport-pure). -/
+restriction of modules; the unit identities of the specified composition mates. -/
 theorem openRestricted_tensor_chain_transport_pure
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

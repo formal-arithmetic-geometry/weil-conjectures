@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
 # Standard generators of the transported polynomial Proj twist
 
 Source: Stacks Project, Constructions, Lemma 01M7 (2),(3), and the chart and
-transition steps of blueprint lem-sc-p1-proj-shifted-free-twist.
-(blueprint: lem-sc-p1-proj-twist-transported-data)
+transition steps of
 -/
 
 @[expose] public section
@@ -245,7 +244,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The overlap relation for the pulled-back polynomial twist generators.
 Source: Stacks Project, Constructions, Lemma 01M7 (2),(3).
-(blueprint: lem-sc-p1-proj-twist-transported-data).
 This is the chart and integer-power calculation: transport the identity
 `x₀^d = (x₀/x₁)^d x₁^d` through the inverse chart isomorphism and identify
 `x₀/x₁` with the projective-line transition unit using `C.chart_eq`.
@@ -312,9 +310,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Transporting the polynomial Proj twist to the glued line gives the prescribed
 local generators and transition relation; no comparison with another module is asserted.
-Source: Stacks Project, Constructions, Lemma 01M7 (2),(3), and blueprint
-lem-sc-p1-proj-shifted-free-twist, chart and overlap steps.
-(blueprint: lem-sc-p1-proj-twist-transported-data)
+Source: Stacks Project, Constructions, Lemma 01M7 (2),(3), and, chart and overlap steps.
 
 Proof: write P = Proj k[x₀,x₁], Q = P¹_k, and M = O_P(d). On D₊(xᵢ), a section
 of M is locally a homogeneous fraction of degree d. The element xᵢ is a unit in

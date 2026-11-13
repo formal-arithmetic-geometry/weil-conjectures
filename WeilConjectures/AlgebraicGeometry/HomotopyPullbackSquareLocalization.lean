@@ -25,8 +25,7 @@ noncomputable section
 
 /-- The canonical pullback square, descended termwise to homotopy categories.
 Its composition comparisons are conjugate to the recorded pushforward comparisons.
-Source: Stacks Project, Tag 0D5S.
-(blueprint: lem-pc-homotopy-pullback-square-localization). -/
+Source: Stacks Project, Tag 0D5S. -/
 def moduleHomotopyPullbackSquare
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (p : X' ⟶ X)
@@ -332,7 +331,6 @@ including the left-derived counits and any map out of the ordinary pullback.
 There are no pushforward units, derived adjunctions or acyclicity hypotheses here.
 Source: Stacks Project, Tag 0D5S, compatibility of composite derived pullbacks;
 Tag 0DVC, compatibility with localization.
-(blueprint: lem-pc-homotopy-pullback-square-localization).
 
 Proof: The defining left-derived lift factorization for c(f',g) identifies its
 composite with the counit for f' g with Lf'(delta_g) followed by delta_f' and

@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteCoproductLfpQcqs
 # Joint surjectivity of a finite family descends to a stage
 
 Source: Stacks Project, Limits, Tag 07RR in Situation 081D.
-(blueprint: lem-weil-pbc-finite-family-joint-surjectivity-stage).
 -/
 
 @[expose] public section
@@ -47,11 +46,10 @@ isomorphisms, and étaleness of the arrows.
 
 Source: Stacks Project, Limits, Tag 07RR in Situation 081D;
 steps 5--6 of lem-weil-pbc-etale-finite-data-descent.
-(blueprint: lem-weil-pbc-finite-family-joint-surjectivity-stage).
 
 Proof:
 1. Form the finite coproduct W of the sources, with its induced structure morphism
-   to the stage. Construct l_b : U_b ⟶ W and g : W ⟶ V using coprojections and
+   to the stage. Construct l_b: U_b ⟶ W and g: W ⟶ V using coprojections and
    Sigma.desc; l_b ≫ g = f_b. Finite presentation of the structure morphisms makes
    each U_b and V qcqs. finite_coproduct_lfp_qcqs makes W qcqs and g locally of
    finite presentation.

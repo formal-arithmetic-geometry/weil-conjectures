@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.KoszulRegularImmersionAlgebraDualHomolo
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionRankedCohomologyReconstruction
 /-! # Algebra-linear Koszul duality
 
-Source: Stacks Project, Tag 0BQZ, Tag 0AX3 and Tag 0AVW
-(blueprint: lem-sc-koszul-regular-immersion-algebra-dual).
+Source: Stacks Project, Tag 0BQZ, Tag 0AX3 and Tag 0AVW.
 -/
 
 @[expose] public section
@@ -37,8 +36,7 @@ namespace AlgebraicGeometry
 statement concerns the ambient scalar right adjoint, not a geometric right adjoint
 on quasi-coherent complexes.
 
-Source: Stacks Project, Duality for Schemes, Tag 0BQZ, Tag 0AX3; Tag 0AVW
-(blueprint: lem-sc-koszul-regular-immersion-algebra-dual).
+Source: Stacks Project, Duality for Schemes, Tag 0BQZ, Tag 0AX3; Tag 0AVW.
 
 Proof: By uniqueness of right adjoints, replace H by the algebra-valued derived
 sheaf Hom right adjoint computed in exists_affine_derivedHom_evaluation_counit.

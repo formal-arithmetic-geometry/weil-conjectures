@@ -36,7 +36,6 @@ open Scheme Etale
 Only stalks of higher direct images are compared, not closed-fibre cohomology.
 
 Source: Stacks Project, Tag 03Q9 and the last two paragraphs of the proof of Tag 095T.
-(blueprint: lem-weil-pbc-p1-strict-local-stalk-exchange-comparison).
 
 Proof: the pullback square and the projective-line projection are qcqs by
 properness. Use the inverse-image stalk formula to identify the source stalk with

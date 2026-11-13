@@ -14,8 +14,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalTensorC
 
 /-! # The normalized restricted scalar pullback square is the canonical tensor square
 
-Source: Stacks Tags 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -49,7 +48,6 @@ private theorem modelTarget_isIso (a : Λ ⟶ Λ') [IsMonHom a]
 
 Source: Stacks Tags 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP;
 blueprint integral proper-base-change proof, paragraphs (1) and (3).
-(auxiliary; not a blueprint node).
 
 Proof:
 1. Choose flat-term K-flat P resolving M and Q resolving the restricted regular coefficient in

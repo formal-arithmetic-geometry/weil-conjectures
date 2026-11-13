@@ -14,7 +14,6 @@ import WeilConjectures.Algebra.Homology.HomTensorDifferential
 /-! # Normalized tensor-Hom comparison on ordinary cochains
 
 Source: Stacks Project, Cohomology on Sites, Tags 0A90 and 0A8Z.
-(blueprint: lem-pc-normalized-tensor-hom-cochains).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ open CochainComplex.HomComplex
 namespace AlgebraicGeometry
 
 /-- The explicitly constructed uncurrying equivalence on ordinary cochains.
-Source: Stacks Project, sites-cohomology.tex, Tag 0A90 (lemma-compose).
-(blueprint: lem-pc-normalized-tensor-hom-cochains). -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0A90 (lemma-compose). -/
 def normalizedTensorHomCochains (X : Scheme.{u})
     (P L I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (k : ℤ) :
@@ -59,7 +57,6 @@ set_option maxHeartbeats 400000 in
 -- Elaborating the composite sheaf and tensor comparisons exceeds the default heartbeat limit.
 /-- The uncurrying equivalence commutes with the ordinary cochain differential.
 Source: Stacks Project, sites-cohomology.tex, Tag 0A90 (lemma-compose).
-(blueprint: lem-pc-normalized-tensor-hom-cochains).
 Proof: the explicit global-cochain comparisons commute with the differential.
 Between them, postcomposition by the degreewise uncurrying map commutes with
 the differential by `homTensorDegreewiseMap_comm`. Apply the global comparison

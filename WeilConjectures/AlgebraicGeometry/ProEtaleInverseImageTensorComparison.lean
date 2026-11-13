@@ -19,8 +19,7 @@ import WeilConjectures.SecSmoothPurity.CochainTensoratorExistence
 /-!
 # Normalized tensor comparison for pro-etale inverse image
 
-Source: Stacks Project, Tags 03EK, 03EL and 09A5
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 03EK, 03EL and 09A5.
 -/
 
 @[expose] public section
@@ -35,30 +34,28 @@ open AlgebraicGeometry.Scheme SheafOfModules
 namespace AlgebraicGeometry.ProEtaleTensorComparison
 
 /-- The original small pro-etale ring sheaves, without changing either site universe.
-Source: Stacks, Tag 09A5 (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 09A5. -/
 abbrev Rings (X : Scheme.{u}) := Sheaf (ProEt.topology X) CommRingCat.{u + 1}
 
 /-- The recorded category of modules over the underlying ring sheaf.
-Source: Stacks, Section 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks, Section 03EK. -/
 abbrev Modules {X : Scheme.{u}} (R : Rings X) :=
   ringedSiteModules.{u + 1} ((sheafCompose (ProEt.topology X)
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)
 
 /-- The recorded inverse-image ring, computed by Kan extension and sheafification.
-Source: Stacks, Tags 09A5 and 03D2
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tags 09A5 and 03D2. -/
 noncomputable abbrev inverseRing {X Y : Scheme.{u}} (f : X ⟶ Y) (R : Rings Y) : Rings X :=
   (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R
 
 /-- The recorded inverse image on module sheaves; no new module data are chosen.
-Source: Stacks, Tag 03D2 (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03D2. -/
 noncomputable abbrev inverse {X Y : Scheme.{u}} (f : X ⟶ Y) (R : Rings Y) :=
   proEtaleModuleInverseImage f R
 
 /-- The actual adjunction-unit image of a module section. The small model is used only
 inside the already recorded construction; evaluation returns to the original small site.
-Source: Stacks, Tags 00VE and 03D2
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tags 00VE and 03D2. -/
 noncomputable def inverseSection {X Y : Scheme.{u}} (f : X ⟶ Y) {R : Rings Y}
     (M : Modules R) (V : Y.ProEt) (s : M.val.obj (op V)) :
     ((inverse f R).obj M).val.obj (op ((proEtaleBaseChange f).obj V)) :=
@@ -77,19 +74,18 @@ private theorem inverseSection_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
 attribute [local irreducible] proEtaleModuleInverseImage inverseSection
 
 /-- The underlying set sheaf of a commutative ring sheaf.
-Source: Stacks, Tag 00YV (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 00YV. -/
 noncomputable abbrev ringSets {X : Scheme.{u}} (R : Rings X) :=
   (sheafCompose (ProEt.topology X) (CategoryTheory.forget CommRingCat.{u + 1})).obj R
 
 /-- The underlying set sheaf of a module sheaf, using the existing forgetful functors.
-Source: Stacks, Tag 03D2 (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03D2. -/
 noncomputable abbrev moduleSets {X : Scheme.{u}} {R : Rings X} (M : Modules R) :=
   ((toSheaf _ ⋙ sheafCompose (ProEt.topology X)
     (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj M)
 
 /-- The underlying-set identification of ring inverse image is uniquely unit-normalized.
-Source: Stacks, Tag 00YV; the operation transport in clause 3
-(auxiliary; not a blueprint node).
+Source: Stacks, Tag 00YV; the operation transport in clause 3.
 Proof: lift the finite-product-preserving set inverse image to commutative ring objects.
 The original operation maps give the ring identities after applying this functor.
 The lifted adjunction identifies the ring unit with the set unit. Uniqueness follows
@@ -137,15 +133,14 @@ theorem ringSetsIdentification_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (R : Ring
   exact (he V.unop r).trans (hp V.unop r).symm
 
 /-- The determined underlying-set identification for inverse-image rings.
-Source: Stacks, Tag 00YV (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 00YV. -/
 noncomputable def ringSetsIdentification {X Y : Scheme.{u}} (f : X ⟶ Y) (R : Rings Y) :
     (AlgebraicGeometry.ProEtale.setPullback f).obj (ringSets R) ≅
       ringSets (inverseRing f R) :=
   Classical.choose (ringSetsIdentification_exists f R)
 
 /-- The underlying-set identification of module inverse image is uniquely unit-normalized.
-Source: Stacks, Tag 03D2; the operation transport in clause 3
-(auxiliary; not a blueprint node).
+Source: Stacks, Tag 03D2; the operation transport in clause 3.
 Proof: addition and the scalar action are transported through finite-product comparisons.
 They define the same module inverse image as the recorded small-model construction.
 Its adjunction identifies its unit with the set unit. Any second identification has the
@@ -211,7 +206,7 @@ theorem moduleSetsIdentification_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact (he' V.unop s).trans (he V.unop s).symm
 
 /-- The determined underlying-set identification for inverse-image modules.
-Source: Stacks, Tag 03D2 (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03D2. -/
 noncomputable def moduleSetsIdentification {X Y : Scheme.{u}} (f : X ⟶ Y)
     {R : Rings Y} (M : Modules R) :
     (AlgebraicGeometry.ProEtale.setPullback f).obj (moduleSets M) ≅
@@ -244,7 +239,7 @@ attribute [local irreducible] Functor.sheafPullbackConstruction.sheafPullback
   AlgebraicGeometry.ProEtale.setPullbackComp
 
 /-- Forget a module morphism to its actual underlying sheaf map.
-Source: Stacks, Tag 03D2 (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03D2. -/
 noncomputable abbrev moduleMapSets {X : Scheme.{u}} {R : Rings X}
     {M N : Modules R} (a : M ⟶ N) :=
   (toSheaf _ ⋙ sheafCompose (ProEt.topology X)

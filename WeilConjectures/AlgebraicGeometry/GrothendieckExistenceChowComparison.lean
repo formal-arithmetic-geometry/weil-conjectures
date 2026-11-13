@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.FormalSystemsPushPull
 /-! # The Chow comparison on a closed quotient
 
 Source: Stacks Project, Cohomology of Schemes, Theorem 088E, paragraphs 2--4.
-(blueprint: lem-weil-pbc-grothendieck-existence-chow-comparison).
 -/
 
 @[expose] public section
@@ -39,7 +38,6 @@ by a strictly larger ideal. This is the geometric part of the Noetherian inducti
 it does not assume or conclude proper scheme-theoretic support for that kernel.
 
 Source: Stacks Project, Cohomology of Schemes, Theorem 088E, paragraphs 2--4.
-(blueprint: lem-weil-pbc-grothendieck-existence-chow-comparison).
 
 Proof:
 1. Replace X by V(K). The closed-immersion coherent-formal equivalence identifies M

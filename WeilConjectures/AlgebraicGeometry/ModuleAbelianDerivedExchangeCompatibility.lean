@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.RightDerivedPlusCube
 /-! # Compatibility of canonical coefficient comparisons with derived exchange
 
 Source: Stacks Project, Tag 0736 and Remark 07A7, together with Tag 03FD.
-(blueprint: lem-weil-pbc-module-abelian-derived-exchange-compatibility)
 -/
 
 @[expose] public section
@@ -73,7 +72,6 @@ The maps in this equation are fixed by their units; no isomorphisms are chosen h
 
 Source: Stacks Project, Tag 0736 (construction and homotopy uniqueness),
 Remark 07A7 (adjunction mate), and Tag 03FD (acyclic comparison).
-(blueprint: lem-weil-pbc-module-abelian-derived-exchange-compatibility)
 
 Proof: On a bounded below module complex P, precompose both sides with the
 forgotten g^* image of the unit f_*P → Rf_*P. The defining factorization of the

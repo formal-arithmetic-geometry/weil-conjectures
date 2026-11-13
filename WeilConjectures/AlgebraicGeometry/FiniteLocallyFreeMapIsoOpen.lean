@@ -30,7 +30,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- The locus where a map of finite locally free modules becomes invertible is a
 quasi-compact open immersion, with its universal property on arbitrary test schemes.
 Source: Stacks Project, Tag 0BDP, final determinant sentence, and Tag 05GD.
-(blueprint: lem-sc-finite-locally-free-map-iso-open)
 
 Proof: Choose simultaneous local frames for M and N on affine opens. If their ranks
 are equal, the isomorphism locus on such an open is the principal open of the matrix

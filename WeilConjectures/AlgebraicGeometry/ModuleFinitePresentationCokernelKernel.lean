@@ -168,8 +168,7 @@ set_option maxHeartbeats 700000 in
 set_option synthInstance.maxHeartbeats 200000 in
 set_option backward.isDefEq.respectTransparency false in
 /-- The relations of the quotient presentation are of finite type.
-Source: Stacks Project, Modules, Lemma 0H96, proof, lines 1440-1454
-(blueprint: lem-weil-pbc-module-finite-presentation-cokernel-kernel).
+Source: Stacks Project, Modules, Lemma 0H96, proof, lines 1440-1454.
 
 Proof: Set c = cokernel.π f and π = P.generators.π on U. The kernel of π is
 finite type since P has finitely many relations and their map onto that kernel is epi.

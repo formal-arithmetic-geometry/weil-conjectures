@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.OverlapPairCanonicalComparisons
 
 /-! # Coherence of canonical iterated comparisons
 
-Source: Stacks Project, Tag 01ZR, first proof; Mathlib pseudofunctor coherence.
-(blueprint: lem-pc-overlap-iterated-comparison-refinement). -/
+Source: Stacks Project, Tag 01ZR, first proof; Mathlib pseudofunctor coherence. -/
 
 @[expose] public section
 
@@ -223,7 +222,6 @@ private theorem overlap_comparison_normal {X Y Z : Scheme.{u}} (U : X.OpenCover.
 /-- The canonical iterated component comparisons commute with a stage refinement.
 Source: Stacks Project, Tag 01ZR, first proof, successive restriction; pseudofunctor
 mapComp pentagon and naturality.
-(blueprint: lem-pc-overlap-iterated-comparison-refinement).
 
 Proof: Expand the six factors in overlapIteratedComparison for both stages. The universal
 property of the direct pullback chart shows that the later iterated chart map followed

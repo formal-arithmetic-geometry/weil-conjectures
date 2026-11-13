@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 /-! # Open-local continuity predicate for canonical perfect Hom transport
 Source: Stacks Project, perfect.tex, Tag 09RE, the condition P on quasi-compact opens.
-(blueprint: def-pc-perfect-hom-continuity-on).
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ all perfect pairs. Using all pairs also includes every shift required in the
 Mayer--Vietoris argument. The structure map is required to be the composite with s.
 The range condition lets the top open be presented by X itself, avoiding a choice
 of a top-open isomorphism or of a different derived-category model.
-Source: Stacks Project, perfect.tex, Tag 09RE, condition P in the proof.
-(blueprint: def-pc-perfect-hom-continuity-on). -/
+Source: Stacks Project, perfect.tex, Tag 09RE, condition P in the proof. -/
 def PerfectHomContinuityOn
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     (i : I) (X : Scheme.{u}) (s₀ : X ⟶ Spec (R.obj i))

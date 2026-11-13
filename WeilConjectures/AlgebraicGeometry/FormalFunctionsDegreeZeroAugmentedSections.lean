@@ -24,7 +24,6 @@ import WeilConjectures.Topology.PresheafModuleStalkFunctor
 /-! # Canonical theta on augmented sections
 
 Source: Stacks Project, Cohomology, Tags 01E4 and 01FB, degree-zero formulas.
-(blueprint: lem-weil-pbc-formal-functions-degree-zero-augmented-sections).
 -/
 
 @[expose] public section
@@ -163,7 +162,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- A canonical theta sends the fixed direct-image augmentation of a germ of a section
 of any module to the global-sections augmentation of its tensor-pullback unit image.
 Source: Stacks Project, Cohomology, Tags 01E4 and 01FB (degree zero).
-(blueprint: lem-weil-pbc-formal-functions-degree-zero-augmented-sections).
 
 Proof: Choose an injective resolution I of F and a resolution J of its tensor
 pullback F'. Restrict these termwise to U = f inverse V and W = i_n inverse U.

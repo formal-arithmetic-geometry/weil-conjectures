@@ -19,7 +19,6 @@ namespace AlgebraicGeometry
 
 /-- Perfect complexes have quasi-coherent cohomology.
 Source: Stacks Project, Cohomology of Sheaves, Tags 08C4 and 08CM.
-(blueprint: lem-sc-perfect-qcoherent).
 
 Proof: restrict to a neighbourhood where the perfect complex is represented by a
 strictly perfect complex. Its terms are direct summands of finite free sheaves,

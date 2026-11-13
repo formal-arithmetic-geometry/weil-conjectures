@@ -42,7 +42,6 @@ set_option maxRecDepth 2048 in
 followed by the canonical global-section and terminal-germ maps.
 Source: Stacks Project, Tag 03Q1 (3) and Tag 0A3U, the degree-zero compatibility
 calculation in step 3 of `lem-weil-pbc-qcqs-geometric-exchange-factorization`.
-(blueprint: lem-weil-pbc-exchange-pointed-representative).
 
 Proof: the inverse-image stalk unit-germ identity rewrites the source germ followed
 by the inverse stalk comparison as the unit section and its pulled-back germ.

@@ -16,7 +16,6 @@ public import WeilConjectures.AlgebraicGeometry.PinnedStalkTensor
 /-! # Stalk compatibility of a specified tensor pullback chain map
 
 Source: Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: lem-pc-pinned-tensor-square-right-summand).
 -/
 
 @[expose] public section
@@ -84,8 +83,7 @@ Identity whiskerings cancel. This gives the stated module tensorator, followed b
 κ_P,p tensor κ_Q,q, identity tensor S(a)_q, the stalk-complex tensor injection, and the
 inverse pinned target comparison. No hypothesis on χ is used. Empty and infinite
 coproducts and zero modules require no special case: the equation is on one summand.
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), local tensor comparison calculation.
-(blueprint: lem-pc-pinned-tensor-square-right-summand). -/
+Source: Stacks Project, perfect.tex, Tag 0DJA(1), local tensor comparison calculation. -/
 theorem pinned_tensor_square_right_summand
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

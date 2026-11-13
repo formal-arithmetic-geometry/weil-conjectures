@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationPrecompositionNatural
 /-! # Ordinary evaluation and one part of the differential
 
 Source: Stacks Project, Tag 08DQ, and Section 20.41.
-(blueprint: lem-pc-ordinary-evaluation-pre-differential).
 -/
 
 @[expose] public section
@@ -43,7 +42,6 @@ private theorem evaluation_sign {A : Type*} [AddCommGroup A]
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The signed dual differential gives precomposition in the input complex.
 Source: Stacks Project, Tag 08DQ, ordinary evaluation calculation, and Section 20.41.
-(blueprint: lem-pc-ordinary-evaluation-pre-differential).
 
 Proof: Both sides vanish unless r+q=-1. Expand the dual differential after
 its projection to Hom(P^r,O[0]^(r+q+1)). The postcomposition term is zero

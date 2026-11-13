@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.OpenImageDirectImageComparisonRestricti
 /-! # Explicit restriction-induced comparison maps
 
 Source: Stacks Project, Tags 08FE and 08BV.
-(blueprint: def-pc-mayer-vietoris-image-chain-data).
 -/
 
 @[expose] public section
@@ -136,7 +135,6 @@ private theorem map_biprod_desc_square
 
 /-- The explicit image components commute with the pair of units and the
 restriction difference. Source: Stacks Tags 08FE and 08BV.
-(blueprint: lem-pc-mayer-vietoris-image-chain-squares).
 
 Proof: On a test open A, the comparison is the identity identifying
 I(h⁻¹(A ∩ W)) with I(h⁻¹(A) ∩ h⁻¹(W)); scalar actions agree by the

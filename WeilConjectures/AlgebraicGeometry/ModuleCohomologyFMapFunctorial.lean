@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 /-! # Functoriality of cohomology maps induced by scheme maps
 
-Source: Stacks Project, Cohomology of Sheaves, Section 01F7, Lemma 01F8 and Remark 01FB
-(blueprint: lem-weil-pbc-module-cohomology-fmap-functorial).
+Source: Stacks Project, Cohomology of Sheaves, Section 01F7, Lemma 01F8 and Remark 01FB.
 
 The comparison maps below account for the canonical identifications of successive
 pushforwards. The unit equations specify the pullback comparison and the restricted
@@ -120,8 +119,7 @@ private theorem sectionsComparison_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
 
 -- Resolution transports cross module-valued and additive-group-valued homology.
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Source: Stacks Project, Tags 01F8 and 01FB
-(blueprint: lem-weil-pbc-module-cohomology-fmap-functorial).
+/-- Source: Stacks Project, Tags 01F8 and 01FB.
 
 Proof: lifts with the same augmentation are homotopic by
 lem-weil-pbc-lift-to-injective-unique-up-to-homotopy, hence give equal maps on cohomology
@@ -131,7 +129,7 @@ across it by lem-weil-pbc-lift-along-injective-quasi-iso. The augmentation equat
 homotopy uniqueness compare beta, and invertibility from
 lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso cancels the comparison.
 Changing J uses a lift of the identity from lem-weil-pbc-injective-resolution-lift-exists
-and isoRightDerivedObj naturality (lem-weil-pbc-derived-functor-map-via-lift). Changing I
+and isoRightDerivedObj naturality. Changing I
 uses the same identity lift, then a comparison between the target complexes, cancelling
 its sections map and the resolution isomorphisms. This proves independence.
 For composition identify k_*h_* with (h followed by k)_* sectionwise. Choose compatible
@@ -292,8 +290,7 @@ private theorem moduleCohomologyFMap_comp_aux {X Y Z : Scheme.{u}}
 
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Source: Stacks Project, Tags 01F8 and 01FB
-(blueprint: lem-weil-pbc-module-cohomology-fmap-functorial).
+/-- Source: Stacks Project, Tags 01F8 and 01FB.
 
 Proof: lifts with the same augmentation are homotopic by
 lem-weil-pbc-lift-to-injective-unique-up-to-homotopy, hence give equal maps on cohomology
@@ -303,7 +300,7 @@ across it by lem-weil-pbc-lift-along-injective-quasi-iso. The augmentation equat
 homotopy uniqueness compare beta, and invertibility from
 lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso cancels the comparison.
 Changing J uses a lift of the identity from lem-weil-pbc-injective-resolution-lift-exists
-and isoRightDerivedObj naturality (lem-weil-pbc-derived-functor-map-via-lift). Changing I
+and isoRightDerivedObj naturality. Changing I
 uses the same identity lift, then a comparison between the target complexes, cancelling
 its sections map and the resolution isomorphisms. This proves independence.
 For composition identify k_*h_* with (h followed by k)_* sectionwise. Choose compatible
@@ -329,8 +326,7 @@ theorem moduleCohomologyFMap_comp {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y ⟶ 
     (Classical.choice (moduleCohomologyFMapData_nonempty (h ≫ k) H F
       (ψ ≫ (pushforward k).map φ ≫ (pushforwardComp h k).hom.app F))) p
 
-/-- Source: Stacks Project, Tags 01F8 and 01FB
-(blueprint: lem-weil-pbc-module-cohomology-fmap-functorial).
+/-- Source: Stacks Project, Tags 01F8 and 01FB.
 
 Proof: lifts with the same augmentation are homotopic by
 lem-weil-pbc-lift-to-injective-unique-up-to-homotopy, hence give equal maps on cohomology
@@ -340,7 +336,7 @@ across it by lem-weil-pbc-lift-along-injective-quasi-iso. The augmentation equat
 homotopy uniqueness compare beta, and invertibility from
 lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso cancels the comparison.
 Changing J uses a lift of the identity from lem-weil-pbc-injective-resolution-lift-exists
-and isoRightDerivedObj naturality (lem-weil-pbc-derived-functor-map-via-lift). Changing I
+and isoRightDerivedObj naturality. Changing I
 uses the same identity lift, then a comparison between the target complexes, cancelling
 its sections map and the resolution isomorphisms. This proves independence.
 For composition identify k_*h_* with (h followed by k)_* sectionwise. Choose compatible
@@ -370,8 +366,7 @@ theorem moduleCohomologyFMap_source_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
   rw [he] at hh
   exact hh.symm
 
-/-- Source: Stacks Project, Tags 01F8 and 01FB
-(blueprint: lem-weil-pbc-module-cohomology-fmap-functorial).
+/-- Source: Stacks Project, Tags 01F8 and 01FB.
 
 Proof: lifts with the same augmentation are homotopic by
 lem-weil-pbc-lift-to-injective-unique-up-to-homotopy, hence give equal maps on cohomology
@@ -381,7 +376,7 @@ across it by lem-weil-pbc-lift-along-injective-quasi-iso. The augmentation equat
 homotopy uniqueness compare beta, and invertibility from
 lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso cancels the comparison.
 Changing J uses a lift of the identity from lem-weil-pbc-injective-resolution-lift-exists
-and isoRightDerivedObj naturality (lem-weil-pbc-derived-functor-map-via-lift). Changing I
+and isoRightDerivedObj naturality. Changing I
 uses the same identity lift, then a comparison between the target complexes, cancelling
 its sections map and the resolution isomorphisms. This proves independence.
 For composition identify k_*h_* with (h followed by k)_* sectionwise. Choose compatible
@@ -411,8 +406,7 @@ theorem moduleCohomologyFMap_target_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
   rw [he] at hh
   exact hh.symm
 
-/-- Source: Stacks Project, Tags 01F8 and 01FB
-(blueprint: lem-weil-pbc-module-cohomology-fmap-functorial).
+/-- Source: Stacks Project, Tags 01F8 and 01FB.
 
 Proof: lifts with the same augmentation are homotopic by
 lem-weil-pbc-lift-to-injective-unique-up-to-homotopy, hence give equal maps on cohomology
@@ -422,7 +416,7 @@ across it by lem-weil-pbc-lift-along-injective-quasi-iso. The augmentation equat
 homotopy uniqueness compare beta, and invertibility from
 lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso cancels the comparison.
 Changing J uses a lift of the identity from lem-weil-pbc-injective-resolution-lift-exists
-and isoRightDerivedObj naturality (lem-weil-pbc-derived-functor-map-via-lift). Changing I
+and isoRightDerivedObj naturality. Changing I
 uses the same identity lift, then a comparison between the target complexes, cancelling
 its sections map and the resolution isomorphisms. This proves independence.
 For composition identify k_*h_* with (h followed by k)_* sectionwise. Choose compatible
@@ -471,8 +465,7 @@ private theorem moduleCohomologyFMap_congr {X Y : Scheme.{u}}
     simp
   rw [hc, Category.comp_id]
 
-/-- Source: Stacks Project, Tags 01F8 and 01FB
-(blueprint: lem-weil-pbc-module-cohomology-fmap-functorial).
+/-- Source: Stacks Project, Tags 01F8 and 01FB.
 
 Proof: lifts with the same augmentation are homotopic by
 lem-weil-pbc-lift-to-injective-unique-up-to-homotopy, hence give equal maps on cohomology
@@ -482,7 +475,7 @@ across it by lem-weil-pbc-lift-along-injective-quasi-iso. The augmentation equat
 homotopy uniqueness compare beta, and invertibility from
 lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso cancels the comparison.
 Changing J uses a lift of the identity from lem-weil-pbc-injective-resolution-lift-exists
-and isoRightDerivedObj naturality (lem-weil-pbc-derived-functor-map-via-lift). Changing I
+and isoRightDerivedObj naturality. Changing I
 uses the same identity lift, then a comparison between the target complexes, cancelling
 its sections map and the resolution isomorphisms. This proves independence.
 For composition identify k_*h_* with (h followed by k)_* sectionwise. Choose compatible

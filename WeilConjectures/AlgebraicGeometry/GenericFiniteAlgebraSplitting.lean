@@ -21,10 +21,6 @@ import WeilConjectures.AlgebraicGeometry.RefineFiniteDomainSplitting
 
 /-!
 # Generic splitting of a finite algebra after an étale base change
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, proof of
-`lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9
-(blueprint: lem-weil-pbc-generic-finite-algebra-splitting).
 -/
 
 @[expose] public section
@@ -42,8 +38,6 @@ A finite algebra `B` over a Noetherian domain `A` splits generically: after inve
 finite product of finite `A'`-domains `D j`, each `Spec (D j) → Spec A'` finite, surjective and a
 universal homeomorphism (every base change a homeomorphism). The fraction field `K` of the node
 is only named there; it is not a datum of the statement.
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, proof steps 4--9
-(blueprint: lem-weil-pbc-generic-finite-algebra-splitting).
 
 Proof: pass to the generic fibre `C = B ⊗[A] K`, a finite-dimensional `K`-algebra, and apply
 `lem-weil-pbc-generic-separable-algebra-splitting`: after a finite separable `K'/K` the

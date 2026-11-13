@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTwistTransportUniqueness
 /-! # The shifted finite-twist factor comparisons
 
 Source: Stacks Tags 03PK and 06YQ; the comparison of the two evaluation factors in
-thm-amb-p1-decomposition.proof.md
-(auxiliary; not a blueprint node).
+thm-amb-p1-decomposition.proof.md.
 -/
 
 @[expose] public noncomputable section
@@ -81,8 +80,7 @@ private theorem generic_shifted_pullback_hom
 
 /-- The canonical shifted factor arrows are the shift comparisons of their degree-zero maps.
 
-Source: Stacks Tags 03PK and 06YQ; the factor-comparison step of finite-twist evaluation
-(auxiliary; not a blueprint node).
+Source: Stacks Tags 03PK and 06YQ; the factor-comparison step of finite-twist evaluation.
 
 Proof: restrict the canonical signed transport to its positive line and roots.
 Its root and line normalizations make it a normalized positive transport, so transport

@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.PerfectTensorHomDuality
 
 /-! # Compactness of perfect complexes
 
-Source: Stacks Project, Proposition perfect-proposition-compact-is-perfect (Tag 09M1)
-(blueprint: lem-pc-perfect-object-compact).
+Source: Stacks Project, Proposition perfect-proposition-compact-is-perfect (Tag 09M1).
 -/
 
 @[expose] public section
@@ -62,8 +61,7 @@ private theorem compact_of_homEquiv
 
 /-- Every perfect object of the quasi-coherent derived category of a quasi-compact,
 quasi-separated scheme is compact.
-Source: Stacks Project, Proposition perfect-proposition-compact-is-perfect (Tag 09M1)
-(blueprint: lem-pc-perfect-object-compact).
+Source: Stacks Project, Proposition perfect-proposition-compact-is-perfect (Tag 09M1).
 Proof: (1) use `lem-pc-perfect-tensor-hom-duality` with the perfect dual of `P` to
 identify `Hom(P, M)` naturally with `Hom(𝒪_X, P⁻¹ ⊗ᴸ M)`; (2) use
 `lem-pc-kflat-resolution`, `lem-pc-derived-qcoh-direct-sums`,

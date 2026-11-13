@@ -31,7 +31,6 @@ No proper morphism, coherent algebraization, or inverse limit occurs here.
 
 Source: Stacks Project, Tag 088B, completed-base change and power-torsion paragraphs;
 Tag 05GG, positive-power quotient formula; Tag 01I9, affine pullback sections.
-(blueprint: lem-weil-pbc-formal-system-completed-affine-sections)
 
 Proof: Put B = O_Y(U), K = J(U), and R = the K-adic completion of B. Coherence
 makes every G_n quasi-coherent, so affine pullback sections identify sections over

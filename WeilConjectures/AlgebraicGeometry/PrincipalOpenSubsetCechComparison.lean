@@ -324,7 +324,6 @@ private theorem orderedD_subset_formula (A : Type u) [CommRing A]
 /-- Subset-coordinate comparison for any module presheaf, without acyclicity assumptions.
 
 Source: Stacks Project, Cohomology, Tags 01FJ, 01FK and 01FM.
-(blueprint: lem-sc-principal-open-subset-cech-comparison).
 
 Proof: Construct the ordered complex for the family D(f_i), with cochains the
 products over strictly increasing tuples and the usual signed deletion maps.

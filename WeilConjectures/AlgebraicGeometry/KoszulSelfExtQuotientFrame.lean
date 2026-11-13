@@ -27,7 +27,6 @@ namespace AlgebraicGeometry
 
 /-- Self Ext before pullback is a finite coproduct of the quotient structure module.
 Source: Stacks Project, Tag 0BQY, Lemma 48.15.4.
-(blueprint: lem-u1-koszul-self-ext-quotient-frame).
 
 Proof: Resolve the quotient A/I by the augmented Koszul complex of f. Its terms
 are finite free on increasing subsets. Sheafify the resolution on U and use the

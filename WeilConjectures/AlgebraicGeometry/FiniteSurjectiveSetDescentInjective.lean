@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 /-! # Injectivity of finite surjective descent
 
 Source: Stacks Project, Étale Cohomology, Remark 09Z3 and Lemma 09Z2.
-(blueprint: lem-weil-pbc-sets-finite-surjective-descent-injective).
 -/
 
 @[expose] public section
@@ -25,9 +24,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Section pullback along the adjunction unit. Source: Stacks, Remark 09Z3
-(blueprint: lem-weil-pbc-sets-finite-surjective-descent). 
-(blueprint: lem-weil-pbc-sets-finite-surjective-descent-injective)
+/-- Section pullback along the adjunction unit. Source: Stacks, Remark 09Z3.
 -/
 noncomputable def etaleSetDescentUnit {S T : Scheme.{u}} (e : T ⟶ S)
     (G : Sheaf S.smallEtaleTopology (Type (u + 1))) (U : S.Etale) :=
@@ -38,8 +35,7 @@ noncomputable def etaleSetDescentUnit {S T : Scheme.{u}} (e : T ⟶ S)
 
 /-- Pull back a section and apply the unit-compatible composition comparison, then
 identify the iterated fibre product with the composite fibre product.
-Source: Stacks, Remark 09Z3 (blueprint: lem-weil-pbc-sets-finite-surjective-descent). 
-(blueprint: lem-weil-pbc-sets-finite-surjective-descent-injective)
+Source: Stacks, Remark 09Z3.
 -/
 noncomputable def etaleSetDescentComparison {X Y W : Scheme.{u}}
     (f : Y ⟶ X) (g : W ⟶ Y)
@@ -55,7 +51,6 @@ noncomputable def etaleSetDescentComparison {X Y W : Scheme.{u}}
         ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U) s))
 
 /-- Source: Stacks Project, Étale Cohomology, Remark 09Z3 and Lemma 09Z2.
-(blueprint: lem-weil-pbc-sets-finite-surjective-descent-injective).
 
 Proof: Let two sections have equal pullbacks. For a geometric point of X,
 surjectivity supplies a point of X' over its image, and finite geometric-point

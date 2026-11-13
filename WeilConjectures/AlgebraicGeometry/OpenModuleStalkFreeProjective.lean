@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 /-! # Projectivity of the stalk of a finite free module sheaf
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 08C4; Modules, Tag 01AG.
-(blueprint: lem-sc-open-module-stalk-free-projective).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The stalk of a finite free module sheaf on the localized site is projective.
 Source: Stacks Project, Cohomology of Sheaves, Tag 08C4, stalk argument step 2;
 Modules, Tag 01AG.
-(blueprint: lem-sc-open-module-stalk-free-projective).
 
 Proof: the equivalence from the slice site to the open-subspace site takes the
 unit to the unit and preserves finite coproducts. The stalk of the unit is the

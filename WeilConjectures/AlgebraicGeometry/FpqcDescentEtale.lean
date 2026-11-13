@@ -14,8 +14,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 /-!
 # Etale descent along fpqc coverings
 
-Source: Stacks Project, Descent, Lemma Tag 02VN
-(blueprint: lem-galois-fpqc-descend-etale).
+Source: Stacks Project, Descent, Lemma Tag 02VN.
 -/
 
 @[expose] public section
@@ -26,7 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- (blueprint: lem-galois-fpqc-descend-etale) Stacks Project, Descent, Lemma 02VN,
+/-- Stacks Project, Descent, Lemma 02VN,
 descent direction: if every base change of `f` along an fpqc covering is etale, then
 `f` is etale. Each base change is etale, i.e. locally of finite presentation, flat and
 unramified (Morphisms 02GV). Flatness descends along the covering (Descent 02L2), local

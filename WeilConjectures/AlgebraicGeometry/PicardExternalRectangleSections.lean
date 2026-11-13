@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 /-! # The canonical external section map on a rectangle
 
 Source: Stacks Project, Tag 0BED, equation-kunneth-on-cech.
-(blueprint: lem-sc-picard-external-rectangle-sections-bijective).
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ set_option backward.isDefEq.respectTransparency.types false
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
 /-- Pull a section back and restrict it to an open lying above its domain.
-Source: Stacks Project, Tag 0096
-(blueprint: lem-sc-picard-external-rectangle-sections-bijective). -/
+Source: Stacks Project, Tag 0096. -/
 def picardPullbackScalarSection
     (f : X ⟶ Spec (CommRingCat.of k)) (a : Y ⟶ X) (F : X.Modules)
     (U : X.Opens) (W : Y.Opens) (hWU : W ≤ a ⁻¹ᵁ U) :
@@ -41,8 +39,7 @@ def picardPullbackScalarSection
     (homOfLE hWU).op).hom.comp (scalarUnitSection f a F U)
 
 /-- Tensor the two projection pullbacks of sections, restricted to their rectangle.
-Source: Stacks Project, Tag 0BED
-(blueprint: lem-sc-picard-external-rectangle-sections-bijective). -/
+Source: Stacks Project, Tag 0BED. -/
 def picardExternalRectangleBilinear
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (U : X.Opens) (V : Y.Opens) (F : X.Modules) (G : Y.Modules) :
@@ -71,8 +68,7 @@ def picardExternalRectangleBilinear
       exact tmulSection_smul _ _ _)
 
 /-- The explicit external product map from tensor products of scalar section modules.
-Source: Stacks Project, Tag 0BED
-(blueprint: lem-sc-picard-external-rectangle-sections-bijective). -/
+Source: Stacks Project, Tag 0BED. -/
 def picardExternalRectangleSectionsMap
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (U : X.Opens) (V : Y.Opens) (F : X.Modules) (G : Y.Modules) :
@@ -91,8 +87,7 @@ def picardExternalRectangleSectionsMap
     (TensorProduct.lift (picardExternalRectangleBilinear f g U V F G))
 
 /-- The canonical rectangle map commutes with coefficient morphisms on the first factor.
-Source: Stacks Project, Tag 0BED
-(blueprint: lem-sc-picard-external-rectangle-sections-bijective).
+Source: Stacks Project, Tag 0BED.
 
 Proof: On pure tensors the left projection unit is natural in F, its restriction
 commutes with the pulled-back morphism, and tensoring sections is natural. These
@@ -141,7 +136,6 @@ theorem picardExternalRectangleSectionsMap_naturality
 /-- On an affine rectangle the canonical external section map is bijective.
 Source: Stacks Project, Tag 0BED, equation-kunneth-on-cech; Schemes, Tags 01I4,
 01JQ, 01IA; Modules, Tag 01BG.
-(blueprint: lem-sc-picard-external-rectangle-sections-bijective).
 
 Proof: Set A = Gamma(X,U), B = Gamma(Y,V), M = Gamma(F,U), N = Gamma(G,V).
 The rectangle is affine, with ring C = A tensor_k B, by the affine fibre-product

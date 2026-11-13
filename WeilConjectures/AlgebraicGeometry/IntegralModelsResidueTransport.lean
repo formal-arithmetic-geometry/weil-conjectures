@@ -28,8 +28,7 @@ namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 /-- Constructible finite-Tor residue complexes are precisely the bounded constructible
 etale residue complexes in the fixed completed coefficient presentation. The given
 completeness witness only supplies the first conjunct of the adic predicate.
-Source: Stacks Tags 09C2 (2),(4) and 09AL
-(auxiliary; not a blueprint node).
+Source: Stacks Tags 09C2 (2),(4) and 09AL.
 
 Proof: the normalized coefficient comparisons identify both derived first reductions
 with the same complex over the constant residue field. Compute on a flat-term K-flat

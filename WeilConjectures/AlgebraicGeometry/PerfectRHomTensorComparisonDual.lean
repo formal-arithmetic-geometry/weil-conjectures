@@ -36,8 +36,7 @@ actual object RHom(K,O) is perfect: each finite free identification gives a retr
 by its inverse. The same models are bounded above finite free, so the actual dual is
 pseudo-coherent. Apply schemeDerivedQCohProperty_of_isPseudoCoherent to obtain its
 quasi-coherent cohomology. Equip this actual object with that proof in the full
-subcategory; the required equality of underlying objects is reflexivity.
-(blueprint: lem-pc-perfect-rhom-tensor-comparison-dual) -/
+subcategory; the required equality of underlying objects is reflexivity. -/
 theorem exists_perfect_rhom_dual
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

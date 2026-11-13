@@ -14,10 +14,6 @@ import WeilConjectures.AlgebraicGeometry.DetIndHeartIIVanishing
 /-!
 # Ext from constructible sheaves into ind-constructible sheaves
 
-Source: blueprint latest, `part-six-operations/sec-six-functors-basics/sec-compactness/`
-`sec-ind-constructible-sheaves/sk-cor-ind-heart-ii/_section.md` and
-`sk-cor-ind-heart-ii.proof.md` in the same directory (blueprint: sk-cor-ind-heart-ii).
-
 The supplied nonnegative cutoff retains its value on passing from constructible to
 ind-constructible targets. In every integer degree the canonical direct-sum comparison
 is bijective. Ext is written as Hom between degree-zero sheaves in the ordinary derived
@@ -40,10 +36,6 @@ sheaves, and Ext in every integer degree preserves small sums of such sheaves.
 The cutoff is supplied with precisely the property of sk-lem-uniform-constructible-ext;
 its existence is not an additional conclusion of this corollary. The coefficient equality
 is equality of bundled monoid objects, so it includes the ring multiplication.
-
-Source: blueprint latest, `part-six-operations/sec-six-functors-basics/sec-compactness/`
-`sec-ind-constructible-sheaves/sk-cor-ind-heart-ii/_section.md` and
-`sk-cor-ind-heart-ii.proof.md` in the same directory (blueprint: sk-cor-ind-heart-ii).
 
 Proof plan, following the two DAG steps:
 1. By sk-prop-ind-heart, each ind-constructible sheaf is an actual small filtered

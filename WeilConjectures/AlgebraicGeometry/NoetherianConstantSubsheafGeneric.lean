@@ -26,7 +26,6 @@ namespace AlgebraicGeometry.Scheme
 locally constant subsystem on an open neighbourhood of the generic point.
 Source: Stacks Project, Tag 09BH, Proposition 59.74.1 (3), generator lifting and descent
 on the irreducible constant base, before the final equality of sheaves.
-(blueprint: lem-weil-pbc-noetherian-constant-subsheaf-generic).
 
 Proof: Write G as the constant sheaf with value M. Its geometric stalk at the generic
 point is M, so M is a finitely generated module by finiteness of G. Exactness of geometric

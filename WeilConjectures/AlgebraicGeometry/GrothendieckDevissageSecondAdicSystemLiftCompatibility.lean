@@ -120,10 +120,9 @@ private theorem torsion_completion_bijective
     F G (hsupp F hFs) (hsupp G hGs)
 
 /-- Construct a comparison map for an already algebraized second-ideal system.
-Source: Stacks Project, Tag 088A (lemma-existence-tricky), construction of
+Source: Stacks Project, Tag 088A, construction of
 G_e → H/K^e H, using the closed-immersion equivalence of Tag 087T.
-https://stacks.math.columbia.edu/tag/088A
-(blueprint: lem-weil-pbc-devissage-second-adic-system-lift-compatibility).
+https://stacks.math.columbia.edu/tag/088A.
 
 Proof: Coherent modules killed by powers of K descend to a common closed thickening.
 Closed pushforward is fully faithful and commutes naturally with I-completion.

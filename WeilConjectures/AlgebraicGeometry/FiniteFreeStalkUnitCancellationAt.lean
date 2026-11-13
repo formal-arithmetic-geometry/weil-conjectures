@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.AffineFreeComplexUnitCancellation
 
 /-! # Unit cancellation at a specified degree
 
-Source: Stacks Project, Tag 00MT, and blueprint lem-pc-perfect-locus, proof step 4.
-(blueprint: lem-pc-finite-free-stalk-unit-cancellation-at)
+Source: Stacks Project, Tag 00MT, and, proof step 4.
 -/
 
 @[expose] public section
@@ -67,9 +66,7 @@ private lemma freeMatrix_ne_zero {X : Scheme.{u}} {I J : Type u}
 set_option backward.isDefEq.respectTransparency false in
 /-- Cancel the specified nonzero residue differential, retaining every rank equation.
 
-Source: Stacks Project, Tag 00MT (`lemma-add-trivial-complex`), applied once;
-blueprint lem-pc-perfect-locus, proof step 4.
-(blueprint: lem-pc-finite-free-stalk-unit-cancellation-at)
+Source: Stacks Project, Tag 00MT, applied once, proof step 4.
 
 Proof: Choose the given free-sheaf identifications. On the affine scheme Spec of
 O_{Y,y}, free sheaves are the associated sheaves of their finite free modules.

@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionIn
 
 /-! # Localized Mayer--Vietoris presentation of perfect objects
 
-Source: Stacks Project, Tag 08BV
-(blueprint: lem-perfect-gluing-triangle-presentation).
+Source: Stacks Project, Tag 08BV.
 -/
 
 @[expose] public section
@@ -77,7 +76,7 @@ private theorem compare (W : Y.Opens)
 /-- Every perfect object has a triangle with the stated middle and overlap terms.
 The endpoint families live in the ambient derived category; direct image need not
 preserve quasi-coherence for this statement.
-Source: Stacks Project, Tag 08BV (blueprint: lem-perfect-gluing-triangle-presentation).
+Source: Stacks Project, Tag 08BV.
 
 Proof: Represent E by its functorial K-injective resolution with injective terms.
 Restriction to the localized site of each open is restriction of sheaves to that

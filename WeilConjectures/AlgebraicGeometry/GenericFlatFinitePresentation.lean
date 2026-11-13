@@ -39,9 +39,7 @@ many a_i. This product is nonzero, so its basic open is nonempty. Flatness and
 local finite presentation hold on the resulting affine cover of the inverse
 image, hence hold for the restricted map by locality on the source. If the
 inverse image is empty, use the empty product 1; both properties are vacuous.
-No noetherianity or separatedness hypothesis is needed.
-
-(blueprint: lem-sbc-generic-flat-finite-presentation) -/
+No noetherianity or separatedness hypothesis is needed. -/
 theorem exists_nonempty_open_flat_finitePresentation_restrict {X S : Scheme.{u}}
     [IsIntegral S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] :
     ∃ U : S.Opens, (U : Set S).Nonempty ∧ Flat (f ∣_ U) ∧

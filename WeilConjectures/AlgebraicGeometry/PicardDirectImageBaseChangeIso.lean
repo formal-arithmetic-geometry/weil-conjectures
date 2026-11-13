@@ -54,7 +54,6 @@ of the canonical map to the non-iterated fibre product.
 
 Source: Stacks Project, Tag 08HY (canonical base change) and Tag 0BDP
 (compatibility with arbitrary change of base).
-(blueprint: lem-sc-picard-direct-image-base-change-iso)
 
 Proof: Paste the pullback squares for f and j with the square for p_W and h.
 The resulting pullback cone is canonically isomorphic to X_T. The top projection

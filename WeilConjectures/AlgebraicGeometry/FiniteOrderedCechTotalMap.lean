@@ -11,7 +11,6 @@ import all WeilConjectures.AlgebraicGeometry.QCohAlternatingCechResolutionQuasiI
 /-! # Sectionwise quasi-isomorphisms of ordered Čech totals
 
 Source: Stacks Project, Tags 01ET and 01EQ, finite-column comparison.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -101,10 +100,9 @@ private theorem alternatingCechColumn_quasiIso
 /-- A sectionwise quasi-isomorphism on every ordered intersection induces a
 quasi-isomorphism of the total complexes.
 Source: Stacks Project, Tag 01ET and Homology, Tag 0133.
-(auxiliary; not a blueprint node)
 Proof: Each column is the finite product of section complexes, with the
 canonical product isomorphism given by evaluation on increasing tuples.
-Homology commutes with these products. Outside columns 0,...,r-1 all terms
+Homology commutes with these products. Outside columns 0..,r-1 all terms
 vanish. The finite-column total comparison proves the assertion. -/
 theorem orderedCechTotalMap_quasiIso
     (X : Scheme.{u}) (r : ℕ) (U : Fin r → X.Opens)

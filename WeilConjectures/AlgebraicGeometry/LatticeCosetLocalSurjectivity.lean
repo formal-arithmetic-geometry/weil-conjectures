@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.LatticeMatrixNeighborhoods
 /-!
 # Local representatives by constant matrix lattices
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59--60
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59--60.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Every lattice class is locally a constant matrix lattice in a rational trivialization.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), local integral bases and lattice stabilizers
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Proposition 6.8.4(6), local integral bases and lattice stabilizers.
 Proof: represent a section by a pair using surjectivity of the class presentation.
 Choose a covering trivializing its integral module. On every nonempty member, the
 rationalized basis and the fixed rational trivialization give mutually inverse matrices

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionEdge
 /-! # Module/Ext comparisons compatible with the direct-image edge map
 
 Source: Stacks Project, Tags 03FD, 01FB and 01F7.
-(blueprint: new-module-cohomology-ext-edge-comparison)
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ for the direct-image edge map.
 
 Source: Stacks Project, Tag 03FD, Lemma 21.12.4; Tag 01FB, Remark 20.14.2;
 Tag 01F7, Section 20.14.
-(blueprint: new-module-cohomology-ext-edge-comparison)
 
 Proof: Construct the comparisons on X and Y from forgotten injective module
 resolutions. Their terms are acyclic for abelian sections (03FD), so taking

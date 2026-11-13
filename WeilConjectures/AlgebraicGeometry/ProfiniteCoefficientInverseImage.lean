@@ -15,8 +15,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 /-!
 # Inverse image of profinite coefficient rings
 
-Source: Stacks Project, Tags 098T (2), 097N, 04D3 and 01YW
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 098T (2), 097N, 04D3 and 01YW.
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Naturality of the constant-section adjunct. Source: Stacks, Tags 098T (2) and 04D3
-(auxiliary; not a blueprint node).
+/-- Naturality of the constant-section adjunct. Source: Stacks, Tags 098T (2) and 04D3.
 Proof: the presheaf constant-section maps commute with every ring homomorphism.
 Sheafification and the inverse-image adjunction preserve this equality by naturality.
 This is the finite-level naturality used in the node's final proof step. -/
@@ -59,8 +57,7 @@ theorem proEtaleConstantInverseImageMap_naturality {X Y : Scheme.{u}} (f : X ⟶
       ((Functor.const X.ProEtᵒᵖ).map a))
 
 /-- The canonical comparison on constant coefficient rings, as a natural transformation.
-Source: Stacks, Tags 098T (2) and 04D3
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tags 098T (2) and 04D3. -/
 noncomputable def proEtaleConstantComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     constantSheaf (ProEt.topology Y) CommRingCat.{u + 1} ⋙
         proEtaleSheafInverseImage f CommRingCat.{u + 1} ⟶
@@ -69,8 +66,7 @@ noncomputable def proEtaleConstantComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
   naturality _ _ a := proEtaleConstantInverseImageMap_naturality f a
 
 /-- The identity comparison of inverse images, obtained as the mate of base change by
-an identity. Source: Stacks, Tags 098T (2) and 04D3
-(auxiliary; not a blueprint node). -/
+an identity. Source: Stacks, Tags 098T (2) and 04D3. -/
 noncomputable def proEtaleRingInverseImageId (X : Scheme.{u}) :
     proEtaleSheafInverseImage (𝟙 X) CommRingCat.{u + 1} ≅ 𝟭 _ :=
   (conjugateIsoEquiv Adjunction.id
@@ -80,8 +76,7 @@ noncomputable def proEtaleRingInverseImageId (X : Scheme.{u}) :
           (ProEt.topology X)).symm
 
 /-- The composite comparison of inverse images is the mate of pullback pasting.
-Source: Stacks, Tags 098T (2) and 04D3
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tags 098T (2) and 04D3. -/
 noncomputable def proEtaleRingInverseImageComp {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
     proEtaleSheafInverseImage (f ≫ g) CommRingCat.{u + 1} ≅

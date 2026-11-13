@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.ProEtaleFiniteCoproductEva
 /-!
 # Geometry of the qcqs finite-cover pro-etale subsite
 
-Source: Stacks Project, Tags 09A1, 098M, 098Z, 0F4P, and Hypercoverings Tag 0DB1
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 09A1, 098M, 098Z, 0F4P, and Hypercoverings Tag 0DB1.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ carry these unions to coproducts, and sections of every sheaf carry them to prod
 naturally in the sheaf, including the empty family.
 
 Source: Stacks Project, Tags 09A1 (qcqs subsite paragraph), 098M, 098Z, 0F4P,
-and Hypercoverings Tag 0DB1
-(auxiliary; not a blueprint node).
+and Hypercoverings Tag 0DB1.
 
 Proof:
 1. Apply lem-weil-pbc-proetale-qcqs-site-limits for the finite-cover site axioms,

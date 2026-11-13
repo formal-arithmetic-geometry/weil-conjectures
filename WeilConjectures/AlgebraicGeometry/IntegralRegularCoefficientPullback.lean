@@ -167,7 +167,6 @@ private theorem coefficient_conjugation_naturality (ℓ : ℕ) [Fact ℓ.Prime]
 
 Source: Bhatt--Scholze, Section 6.8, continuous coefficient realization, and its
 canonical inverse-image comparison.
-(auxiliary; not a blueprint node)
 
 Proof: the underlying regular-module pullback is conjugation of the inverse image
 of p by the coefficient pullback isomorphism. Naturality of the inverse-image

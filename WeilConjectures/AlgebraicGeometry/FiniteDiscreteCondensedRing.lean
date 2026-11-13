@@ -83,8 +83,7 @@ private instance locallyInjective_constantToContinuousAb :
 /-- Continuous finite discrete coefficients are the sheafified constant ring, as ring
 objects in condensed abelian groups.
 
-Source: Bhatt--Scholze, Section 5.3
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Section 5.3.
 
 Proof. The constant-function map is locally surjective on the finite covering of each
 profinite set by the clopen fibres of a section. It is locally injective: distinct

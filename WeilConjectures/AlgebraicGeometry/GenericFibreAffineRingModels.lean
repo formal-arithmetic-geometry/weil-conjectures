@@ -30,7 +30,7 @@ namespace AlgebraicGeometry
 restriction, and the reduced closed fibre makes the uniformizer quotient reduced.
 
 Source: Stacks Project, Tag 055J, proof, the identifications of the affine fibre rings.
-Proof: Put A = Γ(X,U) and let ρ : R → A be induced by f. The affine fibre-product
+Proof: Put A = Γ(X,U) and let ρ: R → A be induced by f. The affine fibre-product
 formula identifies the preimage of U in each scheme-theoretic fibre with
 Spec(κ(p) ⊗[R] A), compatibly with the map a ↦ 1 ⊗ a. For the zero prime of a DVR,
 κ(0) is its fraction field. Every nonzero r ∈ R is a unit times a power of the
@@ -41,8 +41,7 @@ displayed equation. For the closed point, κ(m) = R/m = R/(π). Tensoring this
 quotient with A gives A/ρ(π)A. The corresponding affine fibre is an open subscheme
 of the assumed reduced closed fibre, hence its ring of sections, and therefore
 A/ρ(π)A, is reduced. No flatness, connectedness, nonemptiness or finiteness is
-needed for these ring identifications. If U is empty, all three rings are zero.
-(blueprint: lem-sbc-generic-fibre-affine-ring-models) -/
+needed for these ring identifications. If U is empty, all three rings are zero. -/
 theorem generic_fibre_affine_ring_models {R : Type u} [CommRing R] [IsDomain R]
     [IsDiscreteValuationRing R] {X : Scheme.{u}} (f : X ⟶ Spec (.of R))
     [IsReduced (f.fiber (closedPoint R))] (U : X.affineOpens)

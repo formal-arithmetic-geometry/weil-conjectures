@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.PullbackCarrier
 /-! # Affine constructible pieces of an immersed scheme
 
 Source: literature/stacks-project/etale-cohomology.tex, Etale Cohomology, Lemma Tag 03S0,
-proof, line 12049 (blueprint: lem-weil-pbc-immersion-affine-constructible-pieces).
+proof, line 12049.
 -/
 
 @[expose] public section
@@ -26,7 +26,7 @@ namespace AlgebraicGeometry
 
 /-- Realize a basic constructible set by the spectrum of a localized quotient.
 Source: Stacks Project, Algebra, proof of Tag 00F8, lines 5467–5471, with Tags 00E4
-and 00E5 (blueprint: lem-weil-pbc-basic-subset-immersion-image).
+and 00E5.
 The quotient spectrum is a closed immersion, the localization spectrum is an open
 immersion, and the range calculation is the image of a basic open under the quotient map. -/
 private theorem basic_constructible_affine_immersion
@@ -60,35 +60,31 @@ An immersion into an affine scheme whose image is constructible admits a finite
 partition by affine schemes mapping by immersions to pairwise disjoint locally
 closed constructible pieces.
 Source: literature/stacks-project/etale-cohomology.tex, Etale Cohomology, Lemma Tag 03S0,
-proof, line 12049 (blueprint: lem-weil-pbc-immersion-affine-constructible-pieces).
+proof, line 12049.
 
 Proof (the six steps of the node):
 1. Choose an isomorphism `X ≅ Spec A` using `def-pc-scheme` and
-   `def-weil-affine-spectrum`. It and its inverse are open immersions
-   (`def-weil-open-immersion`), hence immersions (`def-weil-closed-immersion`).
+   `def-weil-affine-spectrum`. It and its inverse are open immersions, hence immersions.
    Composition preserves immersions (`lem-weil-pbc-proper-fp-permanence`, clause (e)).
    The underlying homeomorphism preserves constructibility, local closedness,
-   disjointness and unions (`def-weil-constructible-subset`,
-   `def-weil-locally-closed-subset`), so it suffices to treat `X = Spec A`.
-2. Write `E` as a finite union of basic sets `D(f) ∩ V(g₁, ..., gₙ)` using
+   disjointness and unions, so it suffices to treat `X = Spec A`.
+2. Write `E` as a finite union of basic sets `D(f) ∩ V(g₁, .., gₙ)` using
    `lem-weil-pbc-affine-constructible-basic-union`. Refine to finitely many pairwise
    disjoint basic sets `Eₖ` using `lem-weil-pbc-affine-basic-sets-disjoint-refinement`.
    The index set may be empty.
-3. For each piece put `Jₖ = (g₁, ..., gₙ)`, `Rₖ = (A/Jₖ)[1/f]`, and `Wₖ = Spec Rₖ`.
-   The induced map `wₖ : Wₖ ⟶ X` is an immersion with image `Eₖ` by
+3. For each piece put `Jₖ = (g₁, .., gₙ)`, `Rₖ = (A/Jₖ)[1/f]`, and `Wₖ = Spec Rₖ`.
+   The induced map `wₖ: Wₖ ⟶ X` is an immersion with image `Eₖ` by
    `lem-weil-pbc-basic-subset-immersion-image`.
-4. Set `Zₖ = Z ×_X Wₖ` (`def-pc-fibre-product`) with projections `κₖ : Zₖ ⟶ Z`
-   and `qₖ : Zₖ ⟶ Wₖ`. Both are immersions, being base changes of `wₖ` and `ι`
+4. Set `Zₖ = Z ×_X Wₖ` with projections `κₖ: Zₖ ⟶ Z`
+   and `qₖ: Zₖ ⟶ Wₖ`. Both are immersions, being base changes of `wₖ` and `ι`
    (`lem-weil-pbc-immersion-base-change-lft`, clause (1)), and `κₖ ≫ ι = qₖ ≫ wₖ`.
 5. By `lem-weil-pbc-base-change-image`, the image of `qₖ` is `wₖ⁻¹(E) = Wₖ`,
    since `Eₖ ⊆ E`. Thus `qₖ` is a closed immersion by
-   `lem-weil-pbc-immersion-closed-image-closed-immersion`. Its target is affine
-   (`def-weil-affine-spectrum`), so `Zₖ` is affine by
+   `lem-weil-pbc-immersion-closed-image-closed-immersion`. Its target is affine, so `Zₖ` is affine by
    `lem-weil-pbc-closed-immersion-affine-cover-criterion`, clause (1).
 6. The composite `κₖ ≫ ι = qₖ ≫ wₖ` is an immersion by
    `lem-weil-pbc-proper-fp-permanence`, clause (e), with image `wₖ(Wₖ) = Eₖ`.
-   Each basic set is locally closed (`def-weil-locally-closed-subset`) and constructible
-   (`lem-weil-pbc-affine-constructible-basic-union`). Step 2 gives disjointness and
+   Each basic set is locally closed and constructible. Step 2 gives disjointness and
    union `E`, and step 5 gives affineness, as required.
 -/
 theorem exists_finite_affine_immersion_constructible_pieces

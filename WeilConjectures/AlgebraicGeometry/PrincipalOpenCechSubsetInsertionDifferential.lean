@@ -28,7 +28,6 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 /-- Totalization has the displayed differential on the explicit subset insertion.
 
 Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
-(blueprint: lem-sc-principal-open-cech-subset-insertion-differential).
 
 Proof: Expand the insertion as a finite sum and distribute the total differential.
 On the column p=card S-1 its vertical part is (-1)^p times the coefficient differential.

@@ -20,8 +20,7 @@ import WeilConjectures.Algebra.Homology.KFlatResolution
 
 /-! # Affine ordinary tensor coordinates for quasi-coherent coefficients
 
-Source: Stacks Project, Tags 08DX(2), 08DV, 06YT and 01I9.
-(blueprint: new-j1-qcoh-ordinary-tensor-resolution-coordinates). -/
+Source: Stacks Project, Tags 08DX(2), 08DV, 06YT and 01I9. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -40,7 +39,6 @@ This statement concerns only complexes and ordinary homology. It neither constru
 algebraic lifts nor compares any derived tensor objects.
 
 Source: Stacks Project, Tags 08DX(2), 08DV, 06YB, 06YT and 01I9.
-(blueprint: new-j1-qcoh-ordinary-tensor-resolution-coordinates).
 
 Proof: Choose a K-flat resolution F -> N[0] using
 CochainComplex.exists_isKFlatResolution. For each affine open U, take the explicitly

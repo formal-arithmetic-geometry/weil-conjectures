@@ -20,7 +20,6 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry Topological
 set_option backward.isDefEq.respectTransparency false in
 /-- Degree-zero continuity for a cofiltered system of affine open subschemes.
 Source: Stacks Project, Tag 03Q6, degree zero of Lemma 59.51.5.
-(blueprint: new-local-stalk-sections-cocone-colimit)
 
 Proof: Fix one stage. Its upper tail is cofinal in the cofiltered index category.
 Every stage of this tail is affine and maps to the fixed affine stage by an open

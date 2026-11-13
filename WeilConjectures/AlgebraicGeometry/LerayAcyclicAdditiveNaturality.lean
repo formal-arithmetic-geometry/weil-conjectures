@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatu
 /-! # Natural additive comparison for acyclic module direct image
 
 Source: Stacks Project, Tags 01F4 (1), 01EY and 03FD.
-(blueprint: lem-pc-k2-leray-acyclic-additive-naturality)
 -/
 
 @[expose] public section
@@ -96,7 +95,6 @@ set_option backward.isDefEq.respectTransparency false in
 
 Source: Stacks Project, cohomology.tex, Tags 01F4 (1) and 01EY;
 sites-cohomology.tex, Tag 03FD.
-(blueprint: lem-pc-k2-leray-acyclic-additive-naturality)
 
 Proof: Put A = p_* and B = Γ(X, -). The vanishing hypothesis says that F is
 A-right-acyclic. For an injective resolution I of F, the augmentation

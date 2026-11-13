@@ -22,8 +22,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTo
 
 /-! # Direct summands of perfect complexes
 
-Source: literature/stacks-project/cohomology.tex, Tag 08CS (lemma-summands-perfect)
-(blueprint: lem-pc-perfect-summand).
+Source: literature/stacks-project/cohomology.tex, Tag 08CS.
 -/
 
 @[expose] public section
@@ -220,8 +219,7 @@ homology preserve these retracts. The proved
 to both summands (Tag 08CK). Finally,
 `lem-pc-pseudo-coherent-locally-finite-tor-perfect` constructs perfect models
 on affine subopens of the Tor neighbourhoods and gives perfectness on X.
-Source: literature/stacks-project/cohomology.tex, Tag 08CS (lemma-summands-perfect)
-(blueprint: lem-pc-perfect-summand). -/
+Source: literature/stacks-project/cohomology.tex, Tag 08CS. -/
 theorem perfect_of_directSum
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

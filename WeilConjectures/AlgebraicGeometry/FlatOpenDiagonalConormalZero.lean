@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.OpenIsoConormalZero
 # Vanishing of the conormal sheaf for a flat morphism with open diagonal
 
 Source: Stacks Project, Tag 04FF, the conormal calculation.
-(blueprint: lem-weil-pbc-flat-open-diagonal-conormal-zero).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace AlgebraicGeometry
 morphism is flat and its diagonal is an open immersion. No finite type assumption
 is needed in this calculation.
 Source: Stacks Project, Tag 04FF, proof, using Tags 04F9 and 04FA.
-(blueprint: lem-weil-pbc-flat-open-diagonal-conormal-zero).
 Proof: write p and q for the projections from X ×[S] X. The open diagonal makes f
 formally unramified, and base change makes q formally unramified. Flat base change
 of a universal thickening identifies p* C_f with C_q (04F9). On the open image D
