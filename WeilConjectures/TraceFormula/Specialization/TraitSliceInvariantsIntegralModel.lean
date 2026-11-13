@@ -49,9 +49,11 @@ open Scheme PadicAlgCl
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-private noncomputable def integralModelLeftDerivedUpperStar
+private abbrev integralModelLeftDerivedUpperStar
     {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
-    {Z W : Scheme.{u}} (w : Z ⟶ W) :=
+    {Z W : Scheme.{u}} (w : Z ⟶ W) :
+    DerivedCategory (Mod (Sheaf (ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W)) ⥤
+      DerivedCategory (Mod (Sheaf (ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :=
   L((w)^*⟦Λ⟧)
 
 -- the derived extensions of scalars and pullbacks of module objects are large terms
