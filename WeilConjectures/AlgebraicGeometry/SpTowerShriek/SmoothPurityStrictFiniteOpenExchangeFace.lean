@@ -561,14 +561,10 @@ private theorem inverse_pull_square (b : Base l E)
     (by
       have HC := strictFinitePullbackSquareCoherence l E b sq n M
       simp only [Iso.app, Functor.mapIso_hom, Iso.symm_hom, Iso.symm_inv]
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
-        exactByConversion h)
+      exact HC)
   simp only [Iso.app, Functor.mapIso_inv,
     Iso.symm_hom, Iso.symm_inv] at he
-  run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `he) none
-        exactByConversion h
+  exact he
 
 -- Explicit comparison congruences are checked within this declaration.
 private theorem open_scalar_from_comparisons
@@ -645,41 +641,29 @@ private theorem open_exchange_inverse (b : Base l E)
       intro M
       have HU := strict_finite_open_unit l E b j n M
       simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
-        exactByConversion h) (by
+      exact HU) (by
       intro M
       have HU := strict_finite_open_unit l E b j' n M
       simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
-        exactByConversion h)
+      exact HU)
     (by
       intro M
       have HU := native_open_unit_mate (R l E n) sq M
       simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
-        exactByConversion h)
+      exact HU)
     (fun K ↦ by
       have he := levels.openExchange_mate h j' j g sq n K
       simp only [Adjunction.homEquiv_unit, Iso.symm_hom, Iso.trans_inv,
         Iso.symm_inv, NatTrans.comp_app, Category.assoc,
         eqToIso.inv] at he ⊢
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `he) none
-        exactByConversion h)
+      exact he)
     (by
       intro M
       have HC := inverse_pull_square l E b sq n M
       simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
-        exactByConversion h) N
+      exact HC) N
   simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj] at H
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
-    exactByConversion h
+  exact H
 
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the normalized open exchange.
