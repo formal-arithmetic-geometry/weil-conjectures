@@ -85,6 +85,7 @@ private theorem scalar_composition_paste
     reassoc_of% CE', mix, ← reassoc_of% IIIhk, Na, ← reassoc_of% CL]
 
 set_option maxHeartbeats 2000000 in
+set_option trace.profiler true in
 -- The defeq checks identify two presentations of the same reduction systems.
 /-- Scalar extension carries the integral pullback compositor at E to the one at L.
 Source: Stacks 06YY, 07A4, 0941, 0D6D; Bhatt--Scholze, Lemma 3.5.7
