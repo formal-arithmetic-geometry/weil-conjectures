@@ -234,6 +234,7 @@ lemma kummerBoundary_eq (f : Γ(U, ⊤)) :
   rw [kummerBoundary, Adjunction.homEquiv_unit]
   simp only [Category.assoc]
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1600000 in
 -- the composites of derived functors between the derived categories of the two bases are large
 -- and their instance arguments are expensive to unify
