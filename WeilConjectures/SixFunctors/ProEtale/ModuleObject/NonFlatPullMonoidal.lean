@@ -103,9 +103,9 @@ private lemma comparisonCompatible_symm_of_composite_eq
   intro K M
   simp only [Iso.symm_inv, Iso.symm_hom, curriedTensor_obj_obj,
     curriedTensor_map_app, curriedTensor_obj_map]
-  rw [reassoc_of% (h K M), Iso.hom_inv_id_app_assoc, ← tensorHom_def,
-    tensorHom_comp_tensorHom, Iso.hom_inv_id_app, Iso.hom_inv_id_app,
-    id_tensorHom_id, Category.comp_id]
+  rw [reassoc_of% (h K M), Iso.hom_inv_id_app_assoc, ← MonoidalCategory.tensorHom_def,
+    MonoidalCategory.tensorHom_comp_tensorHom, Iso.hom_inv_id_app, Iso.hom_inv_id_app,
+    MonoidalCategory.id_tensorHom_id, Category.comp_id]
 
 end Adjunction
 
@@ -171,8 +171,9 @@ theorem comparisonCompatible_derivedUpperStarExtendScalarsIso :
     (Mod.extendScalars (coefficientMap a Y)) (f)^*⟦Λ'⟧ (f)^*⟦Λ⟧
     (Mod.extendScalars (coefficientMap a X)) (pullIso a f)
     (derivedUpperStarExtendScalarsIso a f) (leftDerivedExtendScalarsUpperStarCompIso a f).inv
-    (fun X ↦ (derivedUpperStarExtendScalarsIsoFac a f X).trans (by
-      rw [Functor.mapHomotopyCategoryCommIsoHom_app]))
+    (fun K ↦ (derivedUpperStarExtendScalarsIsoFac a f K).trans
+      (congrArg (fun t ↦ _ ≫ _ ≫ DerivedCategory.Qh.map t)
+        (Functor.mapHomotopyCategoryCommIsoHom_app (.up ℤ) (pullIso a f) K)))
     (leftDerivedExtendScalarsUpperStarCompIso_inv_app_comp_counit a f) K M
 
 end AlgebraicGeometry.ProEtale.CondensedRing
