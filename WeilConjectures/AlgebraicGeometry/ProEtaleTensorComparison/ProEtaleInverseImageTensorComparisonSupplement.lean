@@ -181,7 +181,6 @@ private noncomputable def restrictedTensorPairing {A B : Type u} [CommRing A] [C
     (fun x y z ↦ (b x).map_add y z)
     (fun r x y ↦ (b x).map_smul (c r) y)
 
-set_option profiler true in
 /-- The coefficient quotient is uniquely fixed by local pure tensors.
 Source: Stacks, Section 03EK; clause 2
 (blueprint: lem-pur-proetale-inverse-image-tensor-comparison).
@@ -356,7 +355,6 @@ section TensorPairing
 
 universe uC vC uD vD r
 
-set_option profiler true in
 /-- Pair two maps into module pushforwards, then use the sectionwise tensor universal
 property and module sheafification. The uniqueness is the same universal property.
 Source: Stacks Project, Modules on Sites, Section 03EK and Tag 03D7. -/
