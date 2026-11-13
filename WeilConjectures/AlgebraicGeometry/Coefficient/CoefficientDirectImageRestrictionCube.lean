@@ -55,6 +55,22 @@ private theorem coefficientComparison_apply
   (proEtaleRingRestrictionDirectImage_existsUnique
     f RV SV RU SU aV aU cR cS hc).choose_spec.1 M U x
 
+private theorem coefficientRestriction_map_apply {T : Scheme.{u}}
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S)
+    {M N : pbcModules T S} (g : M ⟶ N) (U : T.ProEtᵒᵖ)
+    (x : ((pbcRestrict φ).obj M).val.obj U) :
+    (((pbcRestrict φ).map g).val.app U).hom x = g.val.app U x := rfl
+
+private theorem coefficientDirectImage_map_apply
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
+    {M N : pbcModules X S} (g : M ⟶ N) (U : Y.ProEtᵒᵖ)
+    (x : ((proEtaleRingModuleDirectImage f R S c).obj M).val.obj U) :
+    (((proEtaleRingModuleDirectImage f R S c).map g).val.app U).hom x =
+      g.val.app ((proEtaleBaseChange f).op.obj U) x := rfl
+
 attribute [local irreducible] proEtaleRingRestrictionDirectImage
 
 /-- The ordinary coefficient comparisons satisfy the restriction cube on module sheaves.
@@ -140,7 +156,9 @@ theorem coefficientDirectImageRestrictionCube
   apply PresheafOfModules.hom_ext
   intro U
   ext x
-  rw [restrictionComp_apply, restrictionComp_inv_apply, czApp, cdApp,
-    hiInv, cpApp, restrictionComp_apply, restrictionComp_inv_apply]
+  simp only [a, d, H, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
+    coefficientRestriction_map_apply, coefficientDirectImage_map_apply,
+    restrictionComp_apply, restrictionComp_inv_apply, czApp, cdApp, hiInv, cpApp]
 
 end AlgebraicGeometry.Scheme
