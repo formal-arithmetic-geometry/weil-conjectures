@@ -95,6 +95,7 @@ instance schemeOpenOverlapRestriction_preservesFiniteColimits
   comp_preservesFiniteColimits _ _
 
 set_option synthInstance.maxHeartbeats 400000 in
+set_option trace.profiler true in
 -- Zero preservation of the three-fold transported restriction needs more instance search.
 /-- Additivity structure of canonical open restriction.
 Source: Stacks Project, Tag 08BV (blueprint: def-pc-derived-open-restriction-maps). -/
