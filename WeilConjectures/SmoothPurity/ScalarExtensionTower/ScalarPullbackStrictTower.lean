@@ -51,7 +51,6 @@ private theorem section_cast_cancel {A B : AddCommGrpCat.{u + 1}} (h : A = B) (x
   subst h
   rfl
 
-set_option maxHeartbeats 800000 in
 set_option profiler true in
 -- The strict square contains several nested sheaf scalar-change functors.
 /-- The strict scalar/pullback quotient square on every level and transition.
@@ -149,7 +148,10 @@ theorem scalarPullbackStrictTower {X Y : Scheme.{u}} (f : X ⟶ Y)
   with_unfolding_all
     apply scalar_pullback_hom_ext l E L ι f n.unop n.unop
       (scalarFiniteRingMap l E L ι X n.unop) (scalarProjectionRingSquare l E L ι X n.unop)
-      (P.obj.X i) _
+      (P.obj.X i)
+      ((integralOperationsLevelPullback l L f n.unop).obj
+        ((unrestrictedIntegralReductionFunctor l L Y n.unop).obj
+          ((integralOrdinaryScalar l E L ι Y).obj (P.obj.X i))))
   intro U x
   let z := integralComparisonSequenceSection l E Y (C.X i) n.unop (op U)
     (((κ n.unop).inv.f i).val.app (op U)
