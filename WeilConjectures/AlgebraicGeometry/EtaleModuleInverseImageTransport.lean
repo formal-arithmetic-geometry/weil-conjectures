@@ -56,8 +56,6 @@ private theorem adjunctionForgetUnitCounit
     simpa using congrArg (fun t ↦ e.hom.app (R.obj F) ≫ t) h'.symm
 
 set_option trace.profiler true in
-set_option maxHeartbeats 500000 in
--- Specializing the abstract adjunction identities to this dependent package exceeds the default.
 /-- Transport the module inverse image and its adjunction along a ring comparison.
 Source: Stacks Project, Modules on Sites, Lemmas 03D2, 03D3, 03D7 and Definition 03D6.
 (blueprint: lem-weil-pbc-etale-module-inverse-image-transport).
@@ -286,20 +284,6 @@ theorem etaleModuleInverseImageTransport (U V : Scheme.{u}) (f : U ⟶ V)
   let FU := SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RU)
   let a := Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f
-  let RM := SheafOfModules.pushforward.{u + 1}
-    (S := (sheafCompose V.smallEtaleTopology
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)
-    (R := (sheafCompose U.smallEtaleTopology
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RU)
-    (J := V.smallGrothendieckTopology @Etale) (K := U.smallGrothendieckTopology @Etale)
-    (F := MorphismProperty.Over.pullback @Etale ⊤ f)
-    ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
-      gamma)
-  let d : RM ⋙ FV ≅ FU ⋙ Etale.lowerStar AddCommGrpCat.{u + 1} f := Iso.refl _
-  obtain ⟨hu, hcu⟩ := adjunctionForgetUnitCounit LM RM
-    (Etale.upperStar AddCommGrpCat.{u + 1} f)
-    (Etale.lowerStar AddCommGrpCat.{u + 1} f) FV FU am a e d
-    (fun G F h ↦ (Category.comp_id _).symm.trans (hm G F h))
   have hd := etaleModuleRingIsoTensor U V f RV RU Lr c L0 LM t
   refine ⟨L0, LM, e0, e, t, am, ht, ?_, hd, hm, ?_, ?_⟩
   · intro G
@@ -313,14 +297,14 @@ theorem etaleModuleInverseImageTransport (U V : Scheme.{u}) (f : U ⟶ V)
       ext W x
       exact (eq_of_heq (hnu.1 W x)).trans (hu W x).symm
   · intro G
-    exact (Category.comp_id _).symm.trans (hu G)
+    simpa only [Adjunction.homEquiv_id, Adjunction.homEquiv_unit, FU.map_id,
+      Category.comp_id] using hm G (LM.obj G) (𝟙 _)
   · intro F
-    have he : e.hom.app (RM.obj F) ≫
-        (Etale.upperStar AddCommGrpCat.{u + 1} f).map (d.hom.app F) ≫
-          a.counit.app (FU.obj F) = e.hom.app (RM.obj F) ≫ a.counit.app (FU.obj F) :=
-      (congrArg (fun k ↦ e.hom.app (RM.obj F) ≫ k ≫ a.counit.app (FU.obj F))
-        ((Etale.upperStar AddCommGrpCat.{u + 1} f).map_id _)).trans
-          (congrArg (fun k ↦ e.hom.app (RM.obj F) ≫ k) (Category.id_comp _))
-    exact (hcu F).trans he
+    have h := hm _ F (am.counit.app F)
+    rw [← am.homEquiv_symm_id F, Equiv.apply_symm_apply, FV.map_id] at h
+    have h' := congrArg (fun t ↦ (a.homEquiv _ (FU.obj F)).symm t) h
+    simp only [Adjunction.homEquiv_symm_id, Equiv.symm_apply_apply] at h'
+    simpa only [Category.assoc, Iso.hom_inv_id_app_assoc] using
+      congrArg (fun t ↦ e.hom.app _ ≫ t) h'.symm
 
 end AlgebraicGeometry

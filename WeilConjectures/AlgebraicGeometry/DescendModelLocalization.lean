@@ -47,8 +47,6 @@ private theorem shrink_scalarTower
 
 set_option backward.isDefEq.respectTransparency false in
 set_option trace.profiler true in
-set_option maxHeartbeats 700000 in
--- The successive localization and shrink structures require additional elaboration heartbeats.
 /-- Core construction of a nonzero localization of a finite étale model.
 
 The proof follows the denominator-clearing and localization argument in the
@@ -82,9 +80,21 @@ private theorem exists_base_element_model_localization
           Surjective (Spec.map (CommRingCat.ofHom (algebraMap (Localization.Away c) A')))
     := by
   classical
+  let : CommRing S0 := inferInstance
+  let : CommRing A0 := inferInstance
+  let : Algebra S0 A0 := inferInstance
+  let : Algebra S0 K' := inferInstance
+  let : Algebra A0 K' := inferInstance
   let s := algebraMap S0 A0 a
   let S := Localization.Away a
   let T := Localization.Away s
+  let : CommRing S := inferInstance
+  let : CommRing T := inferInstance
+  let : Algebra S0 S := inferInstance
+  let : Algebra A0 T := inferInstance
+  let : Algebra S0 T := inferInstance
+  let : Algebra A T := inferInstance
+  let : Algebra A S := inferInstance
   have hs : s ≠ 0 := by
     intro h
     apply ha
@@ -128,6 +138,8 @@ private theorem exists_base_element_model_localization
     IsLocalization.Away.mul_of_associated c0 b a
       (IsLocalization.Away.associated_sec_fst c0 a)
   let R := Localization.Away c
+  let : CommRing R := inferInstance
+  let : Algebra A R := inferInstance
   let e := IsLocalization.algEquiv (Submonoid.powers c) S R
   let : Algebra R T := ((algebraMap S T).comp e.symm.toRingHom).toAlgebra
   have : IsScalarTower A S0 T := by
@@ -158,6 +170,10 @@ private theorem exists_base_element_model_localization
   have : Algebra.Etale R T := Algebra.Etale.of_restrictScalars A R T
   have : Small.{u} T := Module.Finite.small R T
   let A' := Shrink.{u} T
+  let : CommRing A' := inferInstance
+  let : Algebra R A' := inferInstance
+  let : Algebra A A' := inferInstance
+  let : Algebra A0 A' := inferInstance
   let : Algebra A' K' :=
     ((algebraMap T K').comp (Shrink.ringEquiv T).toRingHom).toAlgebra
   have : IsScalarTower A R A' := shrink_scalarTower A R T
