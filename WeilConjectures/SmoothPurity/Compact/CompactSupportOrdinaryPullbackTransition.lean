@@ -121,40 +121,31 @@ theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y
         ((compactSupportOrdinaryCoefficientTransition l E Y h).app N) ≫
       (compactSupportScalarPullback f (compactSupportLevelQuotient l E m n h)).app
         ((coefficientSequenceEvaluation l E Y n).obj N) := by
+  let R := compactSupportSystemLevel l E
+  let q := compactSupportSystemQuotient l E
   refine horizontalLeftMate
-    (S := coefficientSequenceModules.{u, u} l E Y)
-    (T := coefficientSequenceModules.{u, u} l E X)
-    (A := normalizedDVRModules l E Y m) (B := normalizedDVRModules l E X m)
-    (C := normalizedDVRModules l E Y n) (D := normalizedDVRModules l E X n)
-    (Lm := ProEtale.StrictTower.modulePullback (compactSupportSystemLevel l E m) f)
-    (Rm := ProEtale.StrictTower.moduleDirectImage (compactSupportSystemLevel l E m) f)
-    (Ln := ProEtale.StrictTower.modulePullback (compactSupportSystemLevel l E n) f)
-    (Rn := ProEtale.StrictTower.moduleDirectImage (compactSupportSystemLevel l E n) f)
-    (ProEtale.VaryingRing.moduleAdj (compactSupportSystemLevel l E)
-      (compactSupportSystemQuotient l E) f)
-    (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (m + 1)) f)
-    (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (n + 1)) f)
-    (coefficientSequenceEvaluation l E Y m) (coefficientSequenceEvaluation l E Y n)
-    (coefficientSequenceEvaluation l E X m) (coefficientSequenceEvaluation l E X n)
+    (Lm := ProEtale.StrictTower.modulePullback (R m) f)
+    (Rm := ProEtale.StrictTower.moduleDirectImage (R m) f)
+    (Ln := ProEtale.StrictTower.modulePullback (R n) f)
+    (Rn := ProEtale.StrictTower.moduleDirectImage (R n) f)
+    (ProEtale.VaryingRing.moduleAdj R q f)
+    (proEtaleRingModuleAdjunction f (ProEtale.VaryingRing.coefficients R Y m)
+      (ProEtale.VaryingRing.coefficients R X m) (ProEtale.StrictTower.constantRingIso (R m) f))
+    (proEtaleRingModuleAdjunction f (ProEtale.VaryingRing.coefficients R Y n)
+      (ProEtale.VaryingRing.coefficients R X n) (ProEtale.StrictTower.constantRingIso (R n) f))
+    (ProEtale.VaryingRing.eval R q Y m) (ProEtale.VaryingRing.eval R q Y n)
+    (ProEtale.VaryingRing.eval R q X m) (ProEtale.VaryingRing.eval R q X n)
     (proEtaleCoefficientRestrictScalars Y (compactSupportLevelQuotient l E m n h))
     (proEtaleCoefficientRestrictScalars X (compactSupportLevelQuotient l E m n h))
-    (ProEtale.VaryingRing.moduleEvalP (compactSupportSystemLevel l E)
-      (compactSupportSystemQuotient l E) f m)
-    (ProEtale.VaryingRing.moduleEvalP (compactSupportSystemLevel l E)
-      (compactSupportSystemQuotient l E) f n)
-    (ProEtale.VaryingRing.moduleEvalG (compactSupportSystemLevel l E)
-      (compactSupportSystemQuotient l E) f m)
-    (ProEtale.VaryingRing.moduleEvalG (compactSupportSystemLevel l E)
-      (compactSupportSystemQuotient l E) f n)
+    (ProEtale.VaryingRing.moduleEvalP R q f m) (ProEtale.VaryingRing.moduleEvalP R q f n)
+    (ProEtale.VaryingRing.moduleEvalG R q f m) (ProEtale.VaryingRing.moduleEvalG R q f n)
     (compactSupportOrdinaryCoefficientTransition l E Y h)
     (compactSupportOrdinaryCoefficientTransition l E X h)
     (compactSupportScalarDirectImage f (compactSupportLevelQuotient l E m n h)).hom
     (compactSupportScalarPullback f (compactSupportLevelQuotient l E m n h))
     ?_ ?_ ?_ ?_ N
-  · intro Q
-    exact compactSupportOrdinaryPullbackUnit l E f m Q
-  · intro Q
-    exact compactSupportOrdinaryPullbackUnit l E f n Q
+  · exact (ProEtale.VaryingRing.moduleEvalG_existsUnique R q f m).choose_spec.1
+  · exact (ProEtale.VaryingRing.moduleEvalG_existsUnique R q f n).choose_spec.1
   · exact compactSupportOrdinaryDirectImageTransition l E f h
   · intro M
     exact (unit_mateEquiv_symm
