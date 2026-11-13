@@ -110,6 +110,7 @@ private theorem strictPullModel_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
       (pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app P ≫
         DerivedCategory.Q.map ((pullBridge l E f).hom.app P) := rfl
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The normalization square compares several large functor models.
 private theorem strict_system_square {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -233,6 +234,7 @@ private theorem pull_reduction {V W : Scheme.{u}} (g : V ⟶ W)
   simpa only [v, strictPullModel_hom, Functor.comp_map, Functor.id_map,
     ← L.map_comp, R, L, pullbackTensorReferencePullback, Functor.comp_obj] using hn
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- Keep counit cancellation explicit across the derived operation models.
 /-- Source: Stacks 07A4, 0941; the integral comparison counit construction.
