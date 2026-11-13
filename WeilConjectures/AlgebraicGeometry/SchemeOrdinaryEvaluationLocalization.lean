@@ -236,6 +236,7 @@ theorem schemeOrdinaryEvaluation_localization (Y : Scheme.{u})
     (pullbackTensorModelMap Y V P ≫
       DerivedCategory.Q.map (schemeTensorHomUncurry Y V P O phiO) ≫
       schemeHomResolutionInverse Y O ≫ z) hc
-  exact hn.trans (hleft.trans ((by simpa only [Category.assoc] using ht).trans hright.symm))
+  refine hn.trans (hleft.trans (Eq.trans ?_ hright.symm))
+  simpa only [Category.assoc] using ht
 
 end AlgebraicGeometry
