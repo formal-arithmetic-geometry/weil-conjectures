@@ -27,6 +27,7 @@ universe u w
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
+/-- Combine naturality and a transported comparison, then cancel the target automorphism. -/
 private theorem coordinate_comparison_square
     {C D E B : Type*} [Category* C] [Category* D] [Category* E] [Category* B]
     (U : C ⥤ D) (R : D ⥤ B) (T : B ⥤ E) (F : C ⥤ E)
@@ -59,7 +60,6 @@ private theorem coordinate_comparison_square
   rw [← Category.assoc, hcompat]
   simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
 
-set_option profiler true in
 /-- Coordinate-change isomorphisms identify the canonical module base-change maps.
 Source: Stacks Project, Tag 08HY, counit construction and coordinate transport;
 Tag 0D5T, composition of derived functors.

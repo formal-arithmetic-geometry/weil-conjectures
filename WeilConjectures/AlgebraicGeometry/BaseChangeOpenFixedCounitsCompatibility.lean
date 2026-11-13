@@ -20,6 +20,7 @@ universe u w
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
+/-- Transport a comparison square along automorphisms of its module targets. -/
 private theorem comparison_square_of_target_automorphisms
     {A A₀ C C₀ D E : Type*} [Category* A] [Category* A₀]
     [Category* C] [Category* C₀] [Category* D] [Category* E]
@@ -61,7 +62,6 @@ private theorem pinned_comparison_isComparison
 
 set_option linter.unusedVariables false in
 -- Keep the original comparison-proof binder hc0; it is introduced again after the lets.
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Open restriction compatibility for single modules in every integer degree.
