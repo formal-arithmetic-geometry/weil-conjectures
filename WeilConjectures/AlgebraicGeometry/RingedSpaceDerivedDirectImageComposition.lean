@@ -80,15 +80,33 @@ private theorem derivedCompositionOfAcyclic
     exact CategoryTheory.Functor.map_id _ _
   erw [hcomp, CategoryTheory.Functor.map_id, Category.id_comp]
 
+private theorem derivedCompositionOfAcyclic_comp
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    [CategoryTheory.Abelian.HasKInjectiveResolutions C]
+    [CategoryTheory.Abelian.HasKInjectiveResolutions D]
+    (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
+    (h : ∀ (I : CochainComplex C ℤ) [I.IsKInjective],
+      IsIso (G.rightDerivedFunctorUnit.app
+        ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj
+          ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj I)))) :
+    ∃ e : F.rightDerivedFunctor ⋙ G.rightDerivedFunctor ≅ (F ⋙ G).rightDerivedFunctor,
+      ∀ K : HomotopyCategory C (ComplexShape.up ℤ),
+        (F ⋙ G).rightDerivedFunctorUnit.app K ≫ e.inv.app (DerivedCategory.Qh.obj K) =
+          G.rightDerivedFunctorUnit.app
+              ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≫
+            G.rightDerivedFunctor.map (F.rightDerivedFunctorUnit.app K) := by
+  obtain ⟨e, he⟩ := derivedCompositionOfAcyclic F G (F ⋙ G) rfl h
+  exact ⟨e, fun K ↦ eq_of_heq (he K)⟩
+
 namespace AlgebraicGeometry.RingedSpace
 
 private theorem moduleDirectImage_comp_eq {X Y Z : RingedSpace.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
     moduleDirectImage (f ≫ g) = moduleDirectImage f ⋙ moduleDirectImage g := rfl
 
-set_option trace.profiler true in
-set_option maxHeartbeats 800000 in
--- The sectionwise composition equality expands scalar restrictions and localization data.
+set_option profiler true in
 /-- Derived direct images compose canonically. The inverse of the comparison is
 characterized by compatibility with the right-derived units: its composite with the
 unit for `(g ∘ f)_*` is the composite of the units for `g_*` and `f_*`. The underived
@@ -121,23 +139,8 @@ theorem exists_derivedModuleDirectImageComposition
               (((moduleDirectImage f).mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≫
             (derivedModuleDirectImage g).map
               ((moduleDirectImage f).rightDerivedFunctorUnit.app K) := by
-  have h : ∀ (I : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ)
-      [I.IsKInjective], IsIso ((moduleDirectImage g).rightDerivedFunctorUnit.app
-        (((moduleDirectImage f).mapHomotopyCategory (ComplexShape.up ℤ)).obj
-          ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj I))) :=
-    isIso_moduleDirectImage_unit_on_kInjective f g
-  obtain ⟨e, he⟩ := @derivedCompositionOfAcyclic
-    (SheafOfModules.{u} (moduleRings X))
-    (SheafOfModules.{u} (moduleRings Y))
-    (SheafOfModules.{u} (moduleRings Z))
-    inferInstance inferInstance inferInstance inferInstance inferInstance inferInstance
-    ‹HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X))›
-    ‹HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y))›
-    ‹HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings Z))›
-    inferInstance inferInstance
-    (moduleDirectImage f) (moduleDirectImage g) (moduleDirectImage (f ≫ g))
-    inferInstance inferInstance inferInstance
-    (moduleDirectImage_comp_eq f g) h
-  exact ⟨e, fun K ↦ eq_of_heq (he K)⟩
+  simpa only [derivedModuleDirectImage, moduleDirectImage_comp_eq] using
+    derivedCompositionOfAcyclic_comp (moduleDirectImage f) (moduleDirectImage g)
+      (isIso_moduleDirectImage_unit_on_kInjective f g)
 
 end AlgebraicGeometry.RingedSpace
