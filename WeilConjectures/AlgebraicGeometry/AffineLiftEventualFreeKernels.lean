@@ -179,7 +179,6 @@ private theorem tensor_exactAt_of_vanishes (Y : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
 /-- The restricted finite-free lift is exact in all sufficiently low degrees, and
 its outgoing kernels in those degrees are finite locally free.
 Source: Stacks Project, Tag 08EG, first two paragraphs of the proof of Lemma 36.13.6.
