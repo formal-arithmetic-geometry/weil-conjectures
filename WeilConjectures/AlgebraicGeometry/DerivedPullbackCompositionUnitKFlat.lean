@@ -47,7 +47,8 @@ private theorem mapHomotopyCategory_leftAdjointCompIso_comp_id
   obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective H
   apply congrArg ((HomotopyCategory.quotient D c).map)
   ext n
-  rfl
+  change (Adjunction.leftAdjointIdIso ai ri).hom.app ((L i).obj (P.X n)) ≫ 𝟙 _ = _
+  exact Category.comp_id _
 
 private theorem mapHomotopyCategory_leftAdjointCompIso_id_comp
     {K C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive D]
@@ -72,7 +73,8 @@ private theorem mapHomotopyCategory_leftAdjointCompIso_id_comp
   obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective H
   apply congrArg ((HomotopyCategory.quotient D c).map)
   ext n
-  rfl
+  change (L i).map ((Adjunction.leftAdjointIdIso ai ri).hom.app (P.X n)) ≫ 𝟙 _ = _
+  exact Category.comp_id _
 
 set_option profiler true in
 /-- Tensor composition mates satisfy both unit laws on the homotopy category.

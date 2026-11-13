@@ -66,6 +66,10 @@ private theorem mapHomotopyCategory_leftAdjointCompIso_assoc
   apply congrArg q.map
   ext i : 1
   have hh := congrArg (fun e ↦ e.hom.app (P.X i)) hi
+  change F₂₃.map ((Adjunction.leftAdjointCompIso a₀₁ a₁₂ a₀₂ e₀₁₂).hom.app (P.X i)) ≫
+      (Adjunction.leftAdjointCompIso a₀₂ a₂₃ a₀₃ e₀₂₃).hom.app (P.X i) =
+    (Adjunction.leftAdjointCompIso a₁₂ a₂₃ a₁₃ e₁₂₃).hom.app (F₀₁.obj (P.X i)) ≫
+      (Adjunction.leftAdjointCompIso a₀₁ a₁₃ a₀₃ e₀₁₃).hom.app (P.X i)
   simpa only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_inv_app, Category.id_comp] using hh.symm
