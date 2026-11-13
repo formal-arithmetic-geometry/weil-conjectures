@@ -60,6 +60,7 @@ private theorem pure_right_unitor
   have ht := congrArg (fun f ↦ f.app W (r • m)) (adj.right_triangle_components M)
   exact h.trans ((congrArg ((adj.counit.app M).val.app W) hh.symm).trans ht)
 
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- Check the transported rank-one action and its sectionwise linear equivalences.
 private theorem inverseImage_unit_iso :
@@ -201,6 +202,7 @@ private theorem comparison_q_hom_ext
   simpa only [comparison_q_eq R S RI uInv I c L hobj k M,
     Functor.map_comp, Category.assoc] using h
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- Transport scalar extension and evaluate the comparison on generalized unit tensors.
 /--
