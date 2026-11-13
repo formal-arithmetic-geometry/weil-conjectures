@@ -269,14 +269,10 @@ private theorem normalized_forget_comparison_apply
     let Q := forget₂ (ModuleCat.{u} S) AddCommGrpCat
     let aH := (HomologicalComplex.homologyFunctor _ (.up ℤ) 0).mapIso a ≪≫
       HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 M
-    let bH := (HomologicalComplex.homologyFunctor _ (.up ℤ) 0).mapIso b ≪≫
-      HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 N
     let cH := (HomologicalComplex.homologyFunctor _ (.up ℤ) 0).mapIso c ≪≫
       HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 E
     let a₀ := (HomologicalComplex.eval _ (.up ℤ) 0).mapIso a ≪≫
       HomologicalComplex.singleObjXSelf (.up ℤ) 0 M
-    let b₀ := (HomologicalComplex.eval _ (.up ℤ) 0).mapIso b ≪≫
-      HomologicalComplex.singleObjXSelf (.up ℤ) 0 N
     let c₀ := (HomologicalComplex.eval _ (.up ℤ) 0).mapIso c ≪≫
       HomologicalComplex.singleObjXSelf (.up ℤ) 0 E
     let i := ((X.sc 0).mapHomologyIso P).symm ≪≫
@@ -284,7 +280,11 @@ private theorem normalized_forget_comparison_apply
       (Y.sc 0).mapHomologyIso Q
     z.hom.f 0 (a₀.inv x) = f.f 0 (c₀.inv y) →
       aH.inv x = i.inv (HomologicalComplex.homologyMap f 0 (cH.inv y)) := by
-  intro P Q aH bH cH a₀ b₀ c₀ i h
+  intro P Q aH cH a₀ c₀ i h
+  let bH := (HomologicalComplex.homologyFunctor _ (.up ℤ) 0).mapIso b ≪≫
+    HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 N
+  let b₀ := (HomologicalComplex.eval _ (.up ℤ) 0).mapIso b ≪≫
+    HomologicalComplex.singleObjXSelf (.up ℤ) 0 N
   have hcmp : i.hom ≫ Q.map bH.hom =
       P.map aH.hom ≫ P.map a₀.inv ≫ z.hom.f 0 ≫ Q.map b₀.hom :=
     normalized_forget_comparison a b z
@@ -297,7 +297,7 @@ private theorem normalized_forget_comparison_apply
   change b₀.hom (z.hom.f 0 (a₀.inv (aH.hom (aH.inv x)))) =
     (HomologicalComplex.homologyMap f 0 ≫ bH.hom) (cH.inv y)
   rw [Iso.inv_hom_id_apply, hf]
-  simp only [ConcreteCategory.comp_apply, Iso.inv_hom_id_apply]
+  simp only [ConcreteCategory.comp_apply]
   have hc : cH.hom (cH.inv y) = y :=
     congrArg (fun k : E ⟶ E ↦ k.hom y) cH.inv_hom_id
   erw [hc]
