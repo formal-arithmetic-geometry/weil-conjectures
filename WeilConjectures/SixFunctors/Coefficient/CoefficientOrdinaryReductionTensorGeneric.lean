@@ -478,15 +478,30 @@ theorem tensorPresentation_transition
     apply CategoryTheory.ScalarHomTensor.total_pure_hom_ext.{c, v, r} P Q k
     intro p p' hpq V x y
     apply restrictionSection_injective pm _ V
-    erw [unit_comp_section, unit_comp_section]
+    change
+      (((evTm ≪≫ (coefficientTotalTensor.{r, c, v} J Bm).mapIso (κPm.prod κQm) ≪≫
+          sm.symm).inv.f k) ≫
+        τ.app (((coefficientTotalTensor.{r, c, v} (coefficientSequenceTopology J) R).obj
+          (CP, CQ)).X k) ≫ (SheafOfModules.restrictScalars q).map
+          ((evTn ≪≫ (coefficientTotalTensor.{r, c, v} J Bn).mapIso (κPn.prod κQn) ≪≫
+            sn.symm).hom.f k)).val.app V
+        (coefficientRestrictionSection pm _ V ((am.unit.app _).val.app V
+          (coefficientTensorGenerator.{r, c, v} J A P Q p p' k hpq V x y))) =
+      (quot.app _).val.app V
+        (coefficientRestrictionSection pm _ V ((am.unit.app _).val.app V
+          (coefficientTensorGenerator.{r, c, v} J A P Q p p' k hpq V x y)))
     apply restrictionSection_injective q _ V
     refine Eq.trans ?_ (hq
       (((coefficientTotalTensor.{r, c, v} J A).obj (P, Q)).X k) V
       (coefficientTensorGenerator.{r, c, v} J A P Q p p' k hpq V x y)).symm
-    obtain ⟨x0, hx0⟩ := hσm (CP.X p) V ((κPm.inv.f p).val.app V
+    have hx := hσm (CP.X p) V ((κPm.inv.f p).val.app V
       (coefficientRestrictionSection pm (Em.obj (P.X p)) V ((am.unit.app (P.X p)).val.app V x)))
-    obtain ⟨y0, hy0⟩ := hσm (CQ.X p') V ((κQm.inv.f p').val.app V
+    have hy := hσm (CQ.X p') V ((κQm.inv.f p').val.app V
       (coefficientRestrictionSection pm (Em.obj (Q.X p')) V ((am.unit.app (Q.X p')).val.app V y)))
+    let x0 := hx.choose
+    let y0 := hy.choose
+    have hx0 : σm (CP.X p) V x0 = _ := hx.choose_spec
+    have hy0 : σm (CQ.X p') V y0 = _ := hy.choose_spec
     refine comp_restrict_section q _ _ _ V _
       (σm _ V (coefficientTensorGenerator.{r, c, v} (coefficientSequenceTopology J) R CP CQ
         p p' k hpq (op (m, V.unop)) x0 y0))
