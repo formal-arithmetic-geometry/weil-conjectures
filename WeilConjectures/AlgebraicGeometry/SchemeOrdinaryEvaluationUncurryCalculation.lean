@@ -108,7 +108,8 @@ theorem schemeOrdinaryEvaluation_uncurry_calculation (Y : Scheme.{u})
   dsimp only [O] at hrO
   convert hc using 1
   · simp only [hF, Functor.map_comp, Category.assoc, hres F, Category.comp_id]
-  · simp only [hO, Functor.map_comp, Category.assoc]
+  · trace_state
+    simp only [hO, Functor.map_comp, Category.assoc]
     rw [reassoc_of% hrO]
 
 end AlgebraicGeometry
