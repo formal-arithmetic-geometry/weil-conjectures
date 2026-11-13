@@ -130,10 +130,9 @@ private theorem tensorConstruction_of_pushout [IsAffineHom f]
     affine_module_tensor_baseChange (U := U) (X := X) f B b t hp
   obtain ⟨H, hobj, γ, hmapH, hunitH⟩ :=
     affine_module_tensor_extensionUnit (U := U) (X := X) f B b t ε hb P pobj κ
-  obtain ⟨hqc, α, β, hα, hβ⟩ :=
-    affine_module_tensor_coherenceComparisons (U := U) (X := X) f B b t ε
-      hp hb ht P pobj κ H hobj γ ⟨hmapP, hunitP⟩ ⟨hmapH, hunitH⟩
-  exact ⟨P, pobj, κ, hmapP, hunitP, H, hobj, γ, hmapH, hunitH, hqc, α, β, hα, hβ⟩
+  refine ⟨P, pobj, κ, hmapP, hunitP, H, hobj, γ, hmapH, hunitH, ?_⟩
+  exact affine_module_tensor_coherenceComparisons (U := U) (X := X) f B b t ε
+    hp hb ht P pobj κ H hobj γ ⟨hmapP, hunitP⟩ ⟨hmapH, hunitH⟩
 
 set_option profiler true in
 /-- The tensor pushout, its extension-of-scalars functors, and the canonical comparison maps.
