@@ -37,7 +37,6 @@ private theorem section_of_comparison_square {C : Type*} [Category* C]
   rw [h]
   simp
 
-set_option profiler true in
 set_option synthInstance.maxSize 2048 in
 -- The localized carriers and canonical tensor-Hom expression need extra elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
