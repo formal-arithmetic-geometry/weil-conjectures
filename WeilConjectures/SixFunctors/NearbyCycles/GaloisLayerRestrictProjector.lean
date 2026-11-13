@@ -182,6 +182,7 @@ lemma pullbackExchange_galoisLayerHom_galoisLayerTower_app
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀]
 
+set_option trace.profiler true in
 /-- **Stabilization of the nearby cycles of a Galois layer from the triviality of the Galois
 action on cohomology** (torsion coefficients in which the degrees of the finite subextensions
 of `Ω/L` are invertible). Let `L ⊆ L' ⊆ Ω` with `L'/L` finite and `Lε^* C` bounded below of étale
@@ -204,7 +205,6 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_of_homology [IsGalois L Ω]
     IsIso (((N.galoisLayerRestrict h Ω L').pullbackExchange
       (Profinite.continuousMapRingObj T₀)).app
         (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) := by
-  let Λ₀ := Profinite.continuousMapRingObj T₀
   -- the finite layer `N_{L'}` satisfies the hypotheses of the projector theorem over `L'`
   have : QuasiCompact (N.galoisLayer h L').j := by
     dsimp [galoisLayer]
@@ -222,9 +222,9 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_of_homology [IsGalois L Ω]
     exact isUnit_of_mul_isUnit_right hM
   have hC₁ := ObjectProperty.prop_of_iso _
     ((finiteCoefficientDerivedEquivalence _ T₀).functor.mapIso
-      ((leftDerivedUpperStarComp Λ₀ (pullback.fst h
+      ((leftDerivedUpperStarComp (Profinite.continuousMapRingObj T₀) (pullback.fst h
         (Spec.map (CommRingCat.ofHom (algebraMap L L')))) N.ε).symm.app C ≪≫
-      (leftDerivedUpperStarCompOfEq Λ₀
+      (leftDerivedUpperStarCompOfEq (Profinite.continuousMapRingObj T₀)
         (Category.comp_id (pullback.fst h
           (Spec.map (CommRingCat.ofHom (algebraMap L L'))) ≫ N.ε))).app C))
     (plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj T₀
@@ -233,13 +233,13 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_of_homology [IsGalois L Ω]
     exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_projector
       (N.galoisLayer h L') (pullback.snd _ _) Ω T₀ hp₁ _ hC₁
   -- the identification `(N_{L'})_Ω ≅ N_Ω` has an invertible exchange intertwining the actions
-  have : IsIso ((N.galoisLayerTower h Ω L').pullbackExchange Λ₀) :=
+  have : IsIso ((N.galoisLayerTower h Ω L').pullbackExchange (Profinite.continuousMapRingObj T₀)) :=
     Hom.isIso_pullbackExchange_of_isIso _ _
   have hact (σ : Ω ≃ₐ[L'] Ω) (q : ℤ) :=
-    map_map_eq_id_of_iso_id (leftDerivedUpperStarId Λ₀ X') (DerivedCategory.homologyFunctor _ q)
+    map_map_eq_id_of_iso_id (leftDerivedUpperStarId (Profinite.continuousMapRingObj T₀) X') (DerivedCategory.homologyFunctor _ q)
       (map_eq_id_of_comp_eq_comp (DerivedCategory.homologyFunctor _ q) _
-        (N.pullbackExchange_galoisLayerTower_app_comp_galoisLayerAction h Ω L' Λ₀ σ _)
-        (map_map_eq_id_of_iso_id (leftDerivedUpperStarId Λ₀ X') _
+        (N.pullbackExchange_galoisLayerTower_app_comp_galoisLayerAction h Ω L' (Profinite.continuousMapRingObj T₀) σ _)
+        (map_map_eq_id_of_iso_id (leftDerivedUpperStarId (Profinite.continuousMapRingObj T₀) X') _
           (htriv q _ ((IntermediateField.mem_fixingSubgroup_iff L' _).2 fun x hx ↦
             σ.commutes ⟨x, hx⟩))))
   -- the exchange of the projection `(N_{L'})_Ω ⟶ N_{L'}` is invertible: its idempotent is the
@@ -247,7 +247,7 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_of_homology [IsGalois L Ω]
   have hfix (q : ℤ) := hproj (𝟙 X') q (𝟙 _) (fun σ : Ω ≃ₐ[L'] Ω ↦ σ)
     (fun M a ↦ ⟨a.liftNormal Ω, fun x ↦ a.liftNormal_commutes Ω x⟩)
     (fun σ ↦ (Category.comp_id _).trans (hact σ q))
-  have := isIso_of_split_of_homology_map_comp_eq_id (leftDerivedUpperStarId Λ₀ X') hr hfix
+  have := isIso_of_split_of_homology_map_comp_eq_id (leftDerivedUpperStarId (Profinite.continuousMapRingObj T₀) X') hr hfix
   -- composition law for `(N_{L'})_Ω ⟶ N_Ω ⟶ N_{L'}`
   exact isIso_of_comp_eq_comp_map_comp (leftDerivedUpperStarId _ X')
     (N.pullbackExchange_galoisLayerHom_galoisLayerTower_app h Ω L' _ _)
