@@ -91,6 +91,13 @@ private theorem normalizedTensorComposite
   rw [reassoc_of% hr, ← H.map_comp, hq]
   exact hf
 
+private theorem normalizedTensorComposite_transport
+    {𝒜 : Type*} [Category 𝒜] {A B C D E F : 𝒜}
+    {a a' : A ⟶ B} {b : B ⟶ C} {c : C ⟶ D} {d : D ⟶ E} {e : E ⟶ F}
+    {f : A ⟶ F} (ha : a = a') (h : a' ≫ b ≫ c ≫ d ≫ e = f) :
+    FiveStepEquation a b c d e f :=
+  heq_of_eq ((congrArg (fun k ↦ k ≫ b ≫ c ≫ d ≫ e) ha).trans h)
+
 /-- Transport the uniquely strict-Roos-normalized tensor to the specified calculus.
 The comparison of reductions is fixed by their adjunctions to the same limit;
 the comparison of tensors preserves their common tensor-Hom transpose.
@@ -244,8 +251,8 @@ theorem tensorModelRealization_normalized (W : Scheme.{u})
     exact hr.trans (congrArg (fun f ↦ f ≫ H.map (U.map t.hom))
       (congrArg Iso.hom (roosBridge_eq l E W ρ
         ((tensor l E W).obj (R.obj P.obj, R.obj Q.obj)))).symm)
-  apply heq_of_eq
-  rw [tensorModelRealization_hom]
+  refine normalizedTensorComposite_transport (tensorModelRealization_hom l E W S
+    (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj)) ?_
   refine normalizedTensorComposite L H
     ((pullbackTensorIntegralTensorModel l E W).hom.app
       (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj))
