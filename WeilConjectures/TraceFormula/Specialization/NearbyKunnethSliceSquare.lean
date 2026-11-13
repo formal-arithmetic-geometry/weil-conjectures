@@ -52,10 +52,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {gM : M.generic ⟶ Spec (.of (traitGenericField k'))} {qN : N.total ⟶ trait k'}
   {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
-set_option maxHeartbeats 800000 in
--- the statement involves the Künneth maps of the product and of its slice, whose instances
--- on module objects over the slice need a long search
-set_option synthInstance.maxHeartbeats 200000 in
 set_option profiler true in
 /-- **The Künneth map on a slice** (blueprint `lemma-kunneth-map-slice`): for the product `P`
 over the trait `S = Spec k'⟦t⟧` of models `M`, `N` of finite type and a coordinate `b` of `M`,
