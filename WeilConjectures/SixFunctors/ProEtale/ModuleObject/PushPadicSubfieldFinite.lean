@@ -70,6 +70,7 @@ noncomputable abbrev padicSubfieldConstSection (Z : Scheme.{u}) (t : F) :
   ε (upperStarFromPoint Z) ≫
     (upperStarFromPoint Z).map (Profinite.continuousMapConstRingHom F t).hom
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1000000 in
 -- Identifying the various forms of the module objects `F_X ⊗_{E_X} M` is slow to elaborate.
 /-- **(Push) for `E ⟶ F` is an isomorphism**: for finite subextensions `E ≤ F` and every
