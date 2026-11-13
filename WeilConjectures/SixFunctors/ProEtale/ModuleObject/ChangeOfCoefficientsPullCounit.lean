@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.CounitFac
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsCompCounit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPull
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullFac
 
 /-!
 
@@ -109,70 +110,20 @@ lemma derivedUpperStarExtendScalarsIso_hom_app_comp_counit
           ((NatTrans.mapHomotopyCategory (pullIso a f).hom (ComplexShape.up ℤ)).app K) :
         (L((f)^*⟦Λ⟧) ⋙ L(Mod.extendScalars (coefficientMap a X))).obj
           (DerivedCategory.Qh.obj K) ⟶ _) := by
-  -- Reuse the tensor instances when specializing the generic counit lemmas.
-  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
-      [MonObj R] [IsCommMonObj R]
-      (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
-      PreservesColimitsOfShape ℤ ((curriedTensor _).obj M) := inferInstance
-  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
-      [MonObj R] [IsCommMonObj R]
-      (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
-      PreservesColimitsOfShape ℤ ((curriedTensor _).flip.obj M) := inferInstance
-  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
-      [MonObj R] [IsCommMonObj R]
-      (P Q S U : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
-      GradedObject.HasTensor₄ObjExt P Q S U := inferInstance
-  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
-      [MonObj R] [IsCommMonObj R]
-      (P Q S : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
-      GradedObject.HasGoodTensor₁₂Tensor P Q S := inferInstance
-  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
-      [MonObj R] [IsCommMonObj R]
-      (P Q S : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
-      GradedObject.HasGoodTensorTensor₂₃ P Q S := inferInstance
-  simp only [derivedUpperStarExtendScalarsIso, Iso.trans_hom, NatTrans.comp_app,
-    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app,
-    Functor.whiskerLeft_app, Iso.symm_hom, Functor.associator_hom_app, Category.id_comp,
-    Category.assoc]
-  have t1 := (leftDerivedUpperStarIsoMapDerivedCategory Λ' f).inv.naturality
-    ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit.app K)
-  have t2 := leftDerivedUpperStarIsoMapDerivedCategory_inv_app_comp_counit f Λ'
-    (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K)
-  dsimp only [Functor.comp_obj, Functor.comp_map] at t1 t2 ⊢
-  simp only [← reassoc_of% t1]
-  simp only [reassoc_of% t2]
-  have t3 := Functor.leftDerivedFunctorCompMapDerivedCategoryRightIso_hom_app_comp_counit
-    (Mod.extendScalars (coefficientMap a Y)) (f)^*⟦Λ'⟧ K
-  have t4 := Functor.leftDerivedFunctorIsoOfIso_hom_app_comp_counit
-    (mapModUpperStarExtendScalarsIso a f) K
-  have t5 := Functor.leftDerivedFunctorCompMapDerivedCategoryIso_inv_app_comp_counit
-    ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y))
-    (Mod.extendScalars (condensedPullbackHom Λ f ≫ coefficientMap a X)) K
-  dsimp only [Functor.comp_obj, Functor.comp_map] at t3 t4 t5
-  simp only [t3, t4, reassoc_of% t5]
-  have t6 := (Mod.derivedExtendScalarsCompIso (condensedPullbackHom Λ f) (coefficientMap a X)
-    (condensedPullbackHom Λ f ≫ coefficientMap a X) rfl).inv.naturality
-      (((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).mapDerivedCategoryFactorsh.hom.app K)
-  have t7 := Mod.derivedExtendScalarsCompIso_inv_app_comp_counit (condensedPullbackHom Λ f)
-    (coefficientMap a X)
-    ((((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).mapHomotopyCategory
-      (ComplexShape.up ℤ)).obj K)
-  have t8 := Functor.leftDerivedFunctorCompMapDerivedCategoryIso_hom_app_comp_counit
-    ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y))
-    (Mod.extendScalars (condensedPullbackHom Λ f)) K
-  dsimp only [Functor.comp_obj, Functor.comp_map] at t6 t7 t8
-  simp only [← reassoc_of% t6, reassoc_of% t7]
-  simp only [Functor.mapHomotopyCategoryCompIso_refl_hom_app,
-    CategoryTheory.Functor.map_id, Category.comp_id] at t8
-  have t9 := congrArg (L(Mod.extendScalars (coefficientMap a X))).map t8
-  simp only [Functor.map_comp] at t9
-  simp only [leftDerivedUpperStarIso, reassoc_of% t9,
-    Functor.mapHomotopyCategoryCompIso_refl_hom_app]
-  erw [DerivedCategory.Qh.map_id, DerivedCategory.Qh.map_id, Category.id_comp,
-    Category.id_comp]
-  have t10 :=
-    mapHomotopyCategoryCompIso_extendScalarsComp_comp_mapModUpperStarExtendScalarsIso a f K
-  simp only [← DerivedCategory.Qh.map_comp, t10]
-  rfl
+  have hPull : (pullIsoHomotopy a f).app K =
+      (NatTrans.mapHomotopyCategory (pullIso a f).hom (ComplexShape.up ℤ)).app K := by
+    obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
+    rw [pullIsoHomotopy, Functor.mapHomotopyCategoryCommIsoHom, NatTrans.comp_app,
+      Functor.mapHomotopyCategoryCompIso_hom_app_quotient_obj,
+      Functor.mapHomotopyCategoryCompIso_inv_app_quotient_obj, ← Functor.map_comp]
+    refine congrArg _ ?_
+    ext n
+    simp only [HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex_app_f,
+      Functor.mapHomologicalComplexCompIso_hom_app_f,
+      Functor.mapHomologicalComplexCompIso_inv_app_f, Iso.refl_inv,
+      NatTrans.id_app, Category.comp_id]
+  simpa only [DerivedUpperStarExtendScalarsIsoFac, hPull,
+    Functor.mapHomotopyCategoryCompIso_refl_hom_app, DerivedCategory.Qh.map_id,
+    Category.comp_id, Category.id_comp] using derivedUpperStarExtendScalarsIsoFac a f K
 
 end AlgebraicGeometry.ProEtale.CondensedRing
