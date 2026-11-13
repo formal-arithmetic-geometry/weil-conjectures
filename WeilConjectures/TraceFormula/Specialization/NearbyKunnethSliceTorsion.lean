@@ -132,7 +132,34 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_change
     (sliceFst_special_comp_coordinateSliceTraitChangeSpecial D)
     (sliceSnd_generic_comp_baseChangeHom_generic hN hpb hP hgen hb D)
     (sliceSnd_special_comp_baseChangeSpecialMap hN hpb hP hb D)
-    A B hτM hτN (by cast_proofs hτP) (𝟭 _)
+    A B hτM hτN ?productExchange (𝟭 _)
+  case productExchange =>
+    run_tac do
+      let ctx ← Lean.getLCtx
+      let some decl := ctx.findFromUserName? `hτP | Lean.throwError "missing local"
+      let target ← (← Lean.Elab.Tactic.getMainGoal).getType
+      let head (e : Lean.Expr) : String :=
+        match e.getAppFn with
+        | .const n _ => n.toString
+        | .fvar f => s!"fvar {f.name}"
+        | .lam .. => "lambda"
+        | .forallE .. => "forall"
+        | .proj n i _ => s!"proj {n} {i}"
+        | _ => "other"
+      let rec walk (fuel : Nat) (path : String) (a b : Lean.Expr) : Lean.MetaM Unit := do
+        if a == b then return
+        if fuel == 0 || a.getAppFn != b.getAppFn || a.getAppNumArgs != b.getAppNumArgs then
+          IO.FS.withFile "/tmp/PH468-exchange" .append fun out ↦
+            out.putStrLn s!"{path}: {head a}({a.getAppNumArgs}) / {head b}({b.getAppNumArgs})"
+        else
+          let aa := a.getAppArgs
+          let bb := b.getAppArgs
+          for i in [:aa.size] do
+            walk (fuel - 1) s!"{path}.{i}" aa[i]! bb[i]!
+      IO.FS.writeFile "/tmp/PH468-exchange" "diff\n"
+      walk 10 "root" decl.type target
+    exact hτP
+
   refine isIso_of_isIso_map_coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D 𝔽 _ ?_
   exact sq.2 h
 
@@ -181,7 +208,31 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
   have result := isIso_kunnethMap_of_iso 𝔽
     (sliceFst hM hP hb).toGeneric (sliceSnd hN hpb hP hgen hb).toGeneric
     (eA.app A) (eB.app B) h₀
-  cast_proofs result
+  run_tac do
+    let ctx ← Lean.getLCtx
+    let some decl := ctx.findFromUserName? `result | Lean.throwError "missing local"
+    let target ← (← Lean.Elab.Tactic.getMainGoal).getType
+    let head (e : Lean.Expr) : String :=
+      match e.getAppFn with
+      | .const n _ => n.toString
+      | .fvar f => s!"fvar {f.name}"
+      | .lam .. => "lambda"
+      | .forallE .. => "forall"
+      | .proj n i _ => s!"proj {n} {i}"
+      | _ => "other"
+    let rec walk (fuel : Nat) (path : String) (a b : Lean.Expr) : Lean.MetaM Unit := do
+      if a == b then return
+      if fuel == 0 || a.getAppFn != b.getAppFn || a.getAppNumArgs != b.getAppNumArgs then
+        IO.FS.withFile "/tmp/PH468-transport" .append fun out ↦
+          out.putStrLn s!"{path}: {head a}({a.getAppNumArgs}) / {head b}({b.getAppNumArgs})"
+      else
+        let aa := a.getAppArgs
+        let bb := b.getAppArgs
+        for i in [:aa.size] do
+          walk (fuel - 1) s!"{path}.{i}" aa[i]! bb[i]!
+    IO.FS.writeFile "/tmp/PH468-transport" "diff\n"
+    walk 10 "root" decl.type target
+  exact result
 -- the statement and the transport along `τ_s ≫ σ_s` involve large derived pullbacks
 /-- **The generic-slicing step modulo `ϖ`** (blueprint `sk-prop-tf-nearby-external-kunneth`,
 identification (2) and projection formula (3), coefficients `𝔽_E`): if the Künneth map of the
