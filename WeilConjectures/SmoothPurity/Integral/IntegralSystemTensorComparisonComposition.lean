@@ -372,22 +372,25 @@ theorem integralSystemTensorComparison_comp {X Y Z : Scheme.{u}} (h : Z ⟶ X) (
   · intro P Q hP hQ
     have hs := integralSystemTensorComparison_square l E f P Q hP hQ
     dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
-    trace_state
-    with_reducible exact hs
+    dsimp only [Functor.comp_obj, Functor.prod_obj] at hs ⊢
+    exact hs
   · intro P Q hP hQ
     have hs := integralSystemTensorComparison_square l E h P Q hP hQ
     dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
-    with_reducible exact hs
+    dsimp only [Functor.comp_obj, Functor.prod_obj] at hs ⊢
+    exact hs
   · intro P Q hP hQ
     have hs := integralSystemTensorComparison_square l E (h ≫ f) P Q hP hQ
     dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
-    with_reducible exact hs
+    dsimp only [Functor.comp_obj, Functor.prod_obj] at hs ⊢
+    exact hs
   · intro P
     dsimp only [integralComparisonSystemComposition, integralComparisonDerivedSequencePullback]
     rw [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom, Category.assoc,
       Functor.mapDerivedCategoryCompIso_hom_app_factors, Functor.mapDerivedCategoryNatIso_fac]
     rfl
-  · exact hm
+  · dsimp only [Functor.comp_obj, Functor.prod_obj] at hm ⊢
+    exact hm
   · intro P _
     infer_instance
   · intro P _
