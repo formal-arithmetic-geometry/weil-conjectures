@@ -138,22 +138,27 @@ theorem exists_scheme_iso_nested_open_finite_free_model
     let GY := R ⋙ G
     let H := SheafOfModules.overFunctor.{u} (moduleRings U.toScheme.toRingedSpace) V
     let L := SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) W
-    have : G.PreservesZeroMorphisms := ⟨fun _ _ ↦ rfl⟩
-    have : R.PreservesZeroMorphisms := ⟨fun _ _ ↦ rfl⟩
-    have : GY.PreservesZeroMorphisms := inferInstance
-    have : H.PreservesZeroMorphisms := ⟨fun _ _ ↦ rfl⟩
-    have : L.PreservesZeroMorphisms := ⟨fun _ _ ↦ rfl⟩
-    have : Abelian (SheafOfModules.{u}
-        ((moduleRings U.toScheme.toRingedSpace).over V)) := inferInstance
-    have : Abelian (SheafOfModules.{u}
-        ((moduleRings Y.toRingedSpace).over W)) := inferInstance
-    have : G.Additive := Functor.additive_of_preserves_binary_products G
     let ER := CategoryTheory.Equivalence.mk R (Modules.restrictFunctor s.inv)
       ((Modules.restrictFunctorComp s.inv s.hom).symm ≪≫
         Modules.restrictFunctorCongr s.inv_hom_id ≪≫ Modules.restrictFunctorId).symm
       ((Modules.restrictFunctorComp s.hom s.inv).symm ≪≫
         Modules.restrictFunctorCongr s.hom_inv_id ≪≫ Modules.restrictFunctorId)
     have : R.IsEquivalence := ER.isEquivalence_functor
+    -- Reuse zero preservation when deriving additivity and mapping complexes.
+    have : (SheafOfModules.overFunctor.{u}
+        (moduleRings X.toRingedSpace) U).PreservesZeroMorphisms := ⟨fun _ _ ↦ rfl⟩
+    have : (Modules.overEquiv U).functor.PreservesZeroMorphisms :=
+      Functor.preservesZeroMorphisms_of_full _
+    have : G.PreservesZeroMorphisms := inferInstance
+    have : R.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_full _
+    have : GY.PreservesZeroMorphisms := inferInstance
+    have : H.PreservesZeroMorphisms := ⟨fun _ _ ↦ rfl⟩
+    have : L.PreservesZeroMorphisms := ⟨fun _ _ ↦ rfl⟩
+    let : Abelian (SheafOfModules.{u}
+        ((moduleRings U.toScheme.toRingedSpace).over V)) := inferInstance
+    let : Abelian (SheafOfModules.{u}
+        ((moduleRings Y.toRingedSpace).over W)) := inferInstance
+    have : G.Additive := Functor.additive_of_preserves_binary_products G
     have : R.Additive := Functor.additive_of_preserves_binary_products R
     have : GY.Additive := inferInstance
     have : H.Additive := Functor.additive_of_preserves_binary_products H

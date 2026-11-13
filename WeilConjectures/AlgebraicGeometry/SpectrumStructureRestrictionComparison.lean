@@ -106,13 +106,14 @@ theorem exists_spectrum_structure_restriction_comparison
   let V := s.hom ⁻¹ᵁ U
   let EV : SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V) ≌
       SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace) := Modules.overEquiv V
-  have : Abelian (SheafOfModules.{u}
+  -- Reuse the site instances throughout the derived equivalence comparisons.
+  let : Abelian (SheafOfModules.{u}
       ((moduleRings (Spec (.of A)).toRingedSpace).over V)) := inferInstance
-  have : Abelian (SheafOfModules.{u}
+  let : Abelian (SheafOfModules.{u}
       (moduleRings V.toScheme.toRingedSpace)) := inferInstance
-  have : Abelian (SheafOfModules.{u}
+  let : Abelian (SheafOfModules.{u}
       ((moduleRings X.toRingedSpace).over U)) := inferInstance
-  have : Abelian (SheafOfModules.{u}
+  let : Abelian (SheafOfModules.{u}
       (moduleRings U.toScheme.toRingedSpace)) := inferInstance
   obtain ⟨hLoc⟩ := hasDerivedCategory_of_equivalence EV.symm
   let := hLoc
