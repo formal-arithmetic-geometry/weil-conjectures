@@ -85,24 +85,16 @@ theorem exists_condensed_coefficient_complex_presentation
                         (g ≫ (ei i).hom)) ≫
                   (derivedExtendScalarsCompIso X ℓ (hf i)).hom.app L) =
               g ≫ DerivedCategory.Q.map (c.ι.app i) ≫ eΩ.hom := by
-  let a := Classical.choose hL
-  have ha : L.IsGE a := Classical.choose_spec hL
-  let hrep := DerivedCategory.exists_iso_Q_obj_of_isGE L a
-  let C := Classical.choose hrep
-  have hC : C.IsStrictlyGE a := Classical.choose (Classical.choose_spec hrep)
-  let e : L ≅ DerivedCategory.Q.obj C :=
-    Classical.choice (Classical.choose_spec (Classical.choose_spec hrep))
-  have hmodel := exists_condensed_coefficient_complex_model X ℓ E F C H he hf
-  let N := hmodel.choose
-  have hmodelN := hmodel.choose_spec
-  let c := hmodelN.choose
-  have hmodelc := hmodelN.choose_spec
-  have hc := hmodelc.1
-  have hN := hmodelc.2.1
-  let eΩ := hmodelc.2.2.choose
-  have hmodelΩ := hmodelc.2.2.choose_spec
-  let ei := hmodelΩ.choose
-  have hcomp := hmodelΩ.choose_spec
+  refine hL.elim fun a ha ↦ ?_
+  have : L.IsGE a := ha
+  refine (DerivedCategory.exists_iso_Q_obj_of_isGE L a).elim fun C hC ↦ ?_
+  refine hC.elim fun hC heC ↦ ?_
+  refine heC.elim fun e ↦ ?_
+  refine (exists_condensed_coefficient_complex_model X ℓ E F C H he hf).elim fun N hN ↦ ?_
+  refine hN.elim fun c hc ↦ ?_
+  rcases hc with ⟨hc, hN, hrest⟩
+  refine hrest.elim fun eΩ hrest ↦ ?_
+  refine hrest.elim fun ei hcomp ↦ ?_
   have hbound : ∀ (i : I) (r : ℤ), r < a → IsZero ((N.obj i).X r) := by
     intro i r hr
     rw [hN i]
