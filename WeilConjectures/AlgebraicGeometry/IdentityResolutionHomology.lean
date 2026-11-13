@@ -64,7 +64,7 @@ private theorem resolution_homology_factorization {C A : Type*}
     [Category* C] [Abelian C] [Category* A] [Abelian A]
     (Γ : C ⥤ A) [Γ.Additive] {G F : C} (ψ : G ⟶ F)
     (I : InjectiveResolution F) (J : InjectiveResolution G)
-    (P : C ⥤ C) [P.Additive] (η : 𝟭 C ⟶ P)
+    (P : C ⥤ C) [P.PreservesZeroMorphisms] (η : 𝟭 C ⟶ P)
     (φ : G ⟶ P.obj F) (hφ : φ = ψ ≫ η.app F)
     {K : CochainComplex C ℕ} (hK : ∀ n, Injective (K.X n))
     (l : (P.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex ⟶ K)
@@ -83,7 +83,7 @@ private theorem resolution_homology_factorization {C A : Type*}
     (η.mapHomologicalComplex (ComplexShape.up ℕ)).app I.cocomplex
   have haug' : J.ι.f 0 ≫ β.f 0 = ψ ≫ I.ι.f 0 ≫ (c ≫ l).f 0 := by
     rw [haug, hφ]
-    dsimp only [c, HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex_app_f]
+    dsimp only [c, HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex]
     simpa only [Category.assoc, Functor.id_map] using
       congrArg (fun f ↦ ψ ≫ f ≫ l.f 0) (η.naturality (I.ι.f 0)).symm
   have hc' := complex_hom_eq_of_inv_f_comp a
