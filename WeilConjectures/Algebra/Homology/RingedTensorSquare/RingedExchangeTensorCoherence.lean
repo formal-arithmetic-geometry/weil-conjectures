@@ -366,8 +366,13 @@ private theorem square_condition_transport
       (edge_composite_epsilon g k).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
         DerivedCategory.Qh.map ((square_homotopy_comparison s).hom.app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := by
+  have hsquare : DerivedCategory.Qh.map
+      ((square_homotopy_comparison s).hom.app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
+      DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
+        (s.complexComparison.hom.app P)) := rfl
   -- Normalize and cancel in an abstract diagram, avoiding rewrites over the complex types.
-  simpa only [Category.assoc] using
+  simpa only [Category.assoc, hsquare, Functor.comp_obj] using
     (square_transport_cancel_iff
       (composite_complex_epsilon f h P) (composite_complex_epsilon g k P)
       (theta.hom.naturality ((DerivedCategory.quotientCompQhIso (CornerModules Y)).inv.app P))
