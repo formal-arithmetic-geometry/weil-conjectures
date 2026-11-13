@@ -79,7 +79,7 @@ attribute [local irreducible] coefficientEvaluationTensorIso
   coefficientSequenceCommRingPresheaf coefficientSequenceCommRingSystem
   coefficientSequenceTopology SheafOfModules.monoidalCategory
 
-set_option maxHeartbeats 400000 in
+set_option profiler true in
 /-- The prescribed evaluation tensor isomorphisms are natural in both complexes.
 Source: Stacks Project, Cohomology on Sites, Tag 07A4, and Modules on Sites, Tag 03EK
 (blueprint: lem-coef-evaluation-total-tensor-naturality).
