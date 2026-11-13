@@ -114,8 +114,9 @@ theorem compactSupportDirectImageOrdinaryEvaluation
     intro N V x
     simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
       SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
-      SheafOfModules.pushforwardCongr_hom_app_val_app]
-    rfl
-  exact Classical.axiomOfChoice level
+      SheafOfModules.pushforwardCongr_hom_app_val_app,
+      SheafOfModules.pushforwardComp_hom_app_val_app,
+      SheafOfModules.pushforwardComp_inv_app_val_app]
+  exact ⟨fun n ↦ (level n).choose, fun n ↦ (level n).choose_spec⟩
 
 end WeilConjectures
