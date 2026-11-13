@@ -667,7 +667,9 @@ private theorem open_exchange_inverse (b : Base l E)
       simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       exact HC) N
   simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj] at H
-  exact H
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
+    exactByConversion h
 
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the normalized open exchange.
