@@ -247,8 +247,6 @@ private theorem recover_from_inverse {A B : Type*} [Category A] [Category B]
   rw [h]
   exact (F.mapIso em).hom_inv_id_assoc _
 
-set_option maxHeartbeats 600000 in
--- The sectionwise tensor calculation elaborates several normalized functor compositions.
 private theorem ordinary_tensor {W : Scheme.{t}} (P Q : Complex l E W)
     (S : CoefficientDerivedSystemTensors l E W)
     (D : CoefficientFiniteQuotientCalculus l E W S) {m n : ℕ} (hmn : n ≤ m)
@@ -297,8 +295,11 @@ private theorem ordinary_tensor {W : Scheme.{t}} (P Q : Complex l E W)
     -- Compare sections after the explicit scalar-restriction transport.
     apply restriction_section_injective (normalizedDVRQuotient l E W hmn)
       (((finiteTensor l E W n).obj (level l E P n, level l E Q n)).X k) U
-    obtain ⟨x0, rfl⟩ := evaluation_section_surjective l E (P.X p) m U x
-    obtain ⟨y0, rfl⟩ := evaluation_section_surjective l E (Q.X q) m U y
+    revert x y
+    refine (evaluation_section_surjective l E (P.X p) m U).forall.mpr ?_
+    intro x0
+    refine (evaluation_section_surjective l E (Q.X q) m U).forall.mpr ?_
+    intro y0
     let x := coefficientEvaluationSection l E W (P.X p) m U x0
     let y := coefficientEvaluationSection l E W (Q.X q) m U y0
     change (((finiteTensor l E W n).map (Prod.mkHom f g)).f k).val.app U
@@ -308,17 +309,21 @@ private theorem ordinary_tensor {W : Scheme.{t}} (P Q : Complex l E W)
           (coefficientTensorGenerator.{u, t + 1, t} (Scheme.ProEt.topology W)
             (integralCoefficientCommRingSheaf l E W m)
             (level l E P m) (level l E Q m) p q k hpq U x y)))) = _
-    erw [tensor_generators_on_unit.{t + 1, t, u}
-      (R := integralCoefficientCommRingSheaf l E W m)
-      (S := integralCoefficientCommRingSheaf l E W n) (normalizedDVRQuotient l E W hmn)
-      (coefficientFiniteQuotientExtension l E W hmn) (D.ordinaryAdjunction hmn)
-      (coefficientFiniteQuotientUnitSection l E W hmn) (D.ordinary_unit hmn)
-      (level l E P m) (level l E Q m) e he p q k hpq U x y,
-      CategoryTheory.ScalarHomTensor.tensor_generator_map.{t + 1, t, u}
-        (R := integralCoefficientCommRingSheaf l E W n) f g p q k hpq U]
-    dsimp only [f, g]
-    erw [ordinary_on_unit l E P S D hmn p U x,
-      ordinary_on_unit l E Q S D hmn q U y]
+    refine (congrArg ((((finiteTensor l E W n).map (Prod.mkHom f g)).f k).val.app U)
+      (tensor_generators_on_unit.{t + 1, t, u}
+        (R := integralCoefficientCommRingSheaf l E W m)
+        (S := integralCoefficientCommRingSheaf l E W n) (normalizedDVRQuotient l E W hmn)
+        (coefficientFiniteQuotientExtension l E W hmn) (D.ordinaryAdjunction hmn)
+        (coefficientFiniteQuotientUnitSection l E W hmn) (D.ordinary_unit hmn)
+        (level l E P m) (level l E Q m) e he p q k hpq U x y)).trans ?_
+    refine (CategoryTheory.ScalarHomTensor.tensor_generator_map.{t + 1, t, u}
+      (R := integralCoefficientCommRingSheaf l E W n) f g p q k hpq U _ _).trans ?_
+    refine (congrArg₂
+      (coefficientTensorGenerator.{u, t + 1, t} (Scheme.ProEt.topology W)
+        (integralCoefficientCommRingSheaf l E W n)
+        (level l E P n) (level l E Q n) p q k hpq U)
+      (ordinary_on_unit l E P S D hmn p U x)
+      (ordinary_on_unit l E Q S D hmn q U y)).trans ?_
     have hem := evaluation_generator l E P Q m p q k hpq U x0 y0
     have hei : (em.inv.f k).val.app U
         (coefficientTensorGenerator.{u, t + 1, t} (Scheme.ProEt.topology W)
@@ -329,17 +334,30 @@ private theorem ordinary_tensor {W : Scheme.{t}} (P Q : Complex l E W)
             (coefficientSequenceTopology (Scheme.ProEt.topology W))
             (coefficientSequenceCommRingSheaf l E W) P Q p q k hpq
             (op (m, U.unop)) x0 y0) := by
-      erw [← hem]
-      exact iso_inv_section em k U _
+      exact (congrArg ((em.inv.f k).val.app U) hem.symm).trans
+        (iso_inv_section em k U _)
     change _ = (en.hom.f k).val.app U
       (coefficientRestrictionSection (normalizedDVRQuotient l E W hmn)
         ((level l E (total l E P Q) n).X k) U
         (((transition l E (total l E P Q) hmn).f k).val.app U
           ((em.inv.f k).val.app U _)))
-    erw [hei, transition_section l E (total l E P Q) hmn,
-      tensorTransitions l E P Q hmn p q k hpq,
-      evaluation_generator l E P Q n p q k hpq U,
-      transition_section l E P hmn, transition_section l E Q hmn]
+    symm
+    refine (congrArg (fun v ↦ (en.hom.f k).val.app U
+      (coefficientRestrictionSection (normalizedDVRQuotient l E W hmn)
+        ((level l E (total l E P Q) n).X k) U
+        (((transition l E (total l E P Q) hmn).f k).val.app U v))) hei).trans ?_
+    refine (congrArg ((en.hom.f k).val.app U)
+      (transition_section l E (total l E P Q) hmn k U _)).trans ?_
+    refine (congrArg (fun v ↦ (en.hom.f k).val.app U
+      (coefficientEvaluationSection l E W _ n U v))
+      (tensorTransitions l E P Q hmn p q k hpq U.unop x0 y0)).trans ?_
+    refine (evaluation_generator l E P Q n p q k hpq U _ _).trans ?_
+    exact congrArg₂
+      (coefficientTensorGenerator.{u, t + 1, t} (Scheme.ProEt.topology W)
+        (integralCoefficientCommRingSheaf l E W n)
+        (level l E P n) (level l E Q n) p q k hpq U)
+      (transition_section l E P hmn p U x0).symm
+      (transition_section l E Q hmn q U y0).symm
   exact recover_from_inverse F em e en
     ((finiteTensor l E W n).map (Prod.mkHom f g)) z hh
 
