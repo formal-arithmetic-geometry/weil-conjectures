@@ -291,8 +291,11 @@ private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSh
     (hf₁ : f₁ ≫ (V i₁).hom = q) (hf₂ : f₂ ≫ (V i₂).hom = q) :
     smulMor ((modulesPseudofunctor.map q.op.toLoc).toFunctor.obj (Modules.unitObj X))
         (transitionAt T V t f₁ f₂ (hf₁.trans hf₂.symm)) ≫
-        pullHom (F := modulesPseudofunctor) (φ.hom i₂) f₂ q q hf₂ hf₂ =
-      pullHom (F := modulesPseudofunctor) (φ.hom i₁) f₁ q q hf₁ hf₁ := by
+        pullHom (F := modulesPseudofunctor) (M₁ := Modules.unitObj X) (M₂ := M)
+          (f₁ := (V i₂).hom) (f₂ := (V i₂).hom) (φ.hom i₂) f₂ q q hf₂ hf₂ =
+      pullHom (F := modulesPseudofunctor) (M₁ := Modules.unitObj X) (M₂ := M)
+        (f₁ := (V i₁).hom) (f₂ := (V i₁).hom) (φ.hom i₁) f₁ q q hf₁ hf₁ := by
+  dsimp only [pullHom]
   let mc₁ := modulesPseudofunctor.mapComp' (V i₁).hom.op.toLoc f₁.op.toLoc q.op.toLoc
     (by rw [← Quiver.Hom.comp_toLoc, ← op_comp, hf₁])
   let mc₂ := modulesPseudofunctor.mapComp' (V i₂).hom.op.toLoc f₂.op.toLoc q.op.toLoc
@@ -314,7 +317,8 @@ private lemma etaleIsoTorsorVal_map_eq {X : Scheme.{u}}
     [SheafOfModules.IsInvertible.{u, u, u} (M : X.Modules)]
     {V Z : X.Etale} (a : Z ⟶ V) (x : (Modules.etaleIsoTorsor M).sheaf.obj.obj (op V)) :
     Modules.etaleIsoTorsorVal M ((Modules.etaleIsoTorsor M).sheaf.obj.map a.op x) =
-      pullHom (F := modulesPseudofunctor) (Modules.etaleIsoTorsorVal M x) a.left Z.hom Z.hom
+      pullHom (F := modulesPseudofunctor) (M₁ := Modules.unitObj X) (M₂ := M)
+        (f₁ := V.hom) (f₂ := V.hom) (Modules.etaleIsoTorsorVal M x) a.left Z.hom Z.hom
         (MorphismProperty.Over.w a) (MorphismProperty.Over.w a) := rfl
 
 variable {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf)
@@ -371,7 +375,8 @@ theorem exists_etaleIsoTorsor_equiv :
     e1.symm
   erw [e2]
   simp only [etaleIsoTorsorVal_map_eq, Modules.etaleIsoTorsorVal_mk]
-  exact descentData_pullHom_comm T V t M e.inv Z.hom b.left a.left
+  exact descentData_pullHom_comm T V t M e.inv Z.hom
+    (i₁ := ⟨V₂, h₂⟩) (i₂ := ⟨V₁, h₁⟩) b.left a.left
     (MorphismProperty.Over.w b) (MorphismProperty.Over.w a)
 
 end AlgebraicGeometry.Scheme.Torsor

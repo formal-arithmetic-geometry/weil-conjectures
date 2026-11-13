@@ -42,7 +42,8 @@ private lemma etaleIsoTorsorVal_map_mk {V Z : X.Etale} (a : Z ⟶ V)
     (φ : (modulesPseudofunctor.map V.hom.op.toLoc).toFunctor.obj (unitObj X) ⟶
       (modulesPseudofunctor.map V.hom.op.toLoc).toFunctor.obj A) (hφ : IsIso φ) :
     etaleIsoTorsorVal A ((etaleIsoTorsor A).sheaf.obj.map a.op (etaleIsoTorsorMk A φ hφ)) =
-      pullHom (F := modulesPseudofunctor) φ a.left Z.hom Z.hom
+      pullHom (F := modulesPseudofunctor) (M₁ := unitObj X) (M₂ := A)
+        (f₁ := V.hom) (f₂ := V.hom) φ a.left Z.hom Z.hom
         (MorphismProperty.Over.w a) (MorphismProperty.Over.w a) := rfl
 
 private lemma homSection_eq_scalar_of_generators {Y : Scheme.{u}} (f : Y ⟶ X)
