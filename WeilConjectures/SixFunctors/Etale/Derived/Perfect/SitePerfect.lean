@@ -257,6 +257,14 @@ variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u 
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [HasSmallSiteSheafify A]
 
+/-- Transposing a projection map gives the tensor comparison preceded by the unit. -/
+private theorem unit_app_map_projectionMap
+    {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [MonoidalCategory D]
+    {L : D ⥤ C} {R : C ⥤ D} [R.Monoidal] (adj : L ⊣ R) (K : C) (T : D) :
+    adj.unit.app (R.obj K ⊗ T) ≫ R.map ((Functor.Monoidal.projectionMap adj K).app T) =
+      R.obj K ◁ adj.unit.app T ≫ Functor.LaxMonoidal.μ R K (L.obj T) :=
+  (adj.homEquiv _ _).apply_symm_apply _
+
 /-- Projection maps commute with a lax monoidal square whose adjunction units agree. -/
 private theorem projectionMap_laxSquare
     {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
@@ -278,11 +286,7 @@ private theorem projectionMap_laxSquare
         ν.app (R.obj K ⊗ T) ≫ QC.map p =
       (Functor.Monoidal.projectionMap adj' (QC.obj K)).app (QD.obj T) ≫
         QC.obj K ◁ ν.app T ≫ Functor.LaxMonoidal.μ QC K (L.obj T) := by
-  have hπ' : adj'.unit.app _ ≫
-      R'.map ((Functor.Monoidal.projectionMap adj' (QC.obj K)).app (QD.obj T)) =
-      R'.obj (QC.obj K) ◁ adj'.unit.app (QD.obj T) ≫
-        Functor.LaxMonoidal.μ R' (QC.obj K) (L'.obj (QD.obj T)) :=
-    (adj'.homEquiv _ _).apply_symm_apply _
+  have hπ' := unit_app_map_projectionMap adj' (QC.obj K) (QD.obj T)
   have hn : R'.map (QC.map p) ≫ e.hom.app (K ⊗ L.obj T) =
       e.hom.app (L.obj (R.obj K ⊗ T)) ≫ QD.map (R.map p) := e.hom.naturality p
   apply (adj'.homEquiv _ _).injective
@@ -292,11 +296,13 @@ private theorem projectionMap_laxSquare
     reassoc_of% (hunit (R.obj K ⊗ T)), ← QD.map_comp, hπ, QD.map_comp,
     ← Functor.LaxMonoidal.μ_natural_right_assoc]
   erw [reassoc_of% hπ']
-  rw [← Functor.LaxMonoidal.μ_natural_right_assoc, hμ]
+  rw [← Functor.LaxMonoidal.μ_natural_right_assoc]
+  erw [hμ]
   simp only [tensorHom_def, Category.assoc]
   rw [whisker_exchange_assoc, whisker_exchange_assoc,
     ← MonoidalCategory.whiskerLeft_comp_assoc,
-    ← MonoidalCategory.whiskerLeft_comp_assoc, hunit]
+    ← MonoidalCategory.whiskerLeft_comp_assoc]
+  erw [hunit]
 
 /-- The derived adjunction `D(u_!) ⊣ Lu^*` for an étale morphism `u`, with the right adjoint
 the left derived functor `Lu^*` (isomorphic to the levelwise `D(u^*)`, `u^*` being exact). -/
@@ -391,20 +397,9 @@ lemma projectionMap_derivedEtaleLowerShriek_app_Qh {U : Scheme.{u}} (f : U ⟶ X
     simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
     erw [CategoryTheory.Functor.map_id]
     rw [Category.id_comp, NatIso.isIso_inv_app, IsIso.inv_hom_id, Category.comp_id]
-  have hc :
-      ((Etale.etaleLowerShriekUpperStarAdjunction A f inferInstance).mapHomologicalComplex
-        (.up ℤ)).unit.app ((((f)^*[A]).mapHomologicalComplex (.up ℤ)).obj K₁ ⊗ T₁) ≫
-        (((f)^*[A]).mapHomologicalComplex (.up ℤ)).map
-          ((Functor.Monoidal.projectionMap
-            ((Etale.etaleLowerShriekUpperStarAdjunction A f inferInstance).mapHomologicalComplex
-              (.up ℤ)) K₁).app T₁) =
-      (((f)^*[A]).mapHomologicalComplex (.up ℤ)).obj K₁ ◁
-          ((Etale.etaleLowerShriekUpperStarAdjunction A f inferInstance).mapHomologicalComplex
-            (.up ℤ)).unit.app T₁ ≫
-        Functor.LaxMonoidal.μ (((f)^*[A]).mapHomologicalComplex (.up ℤ)) K₁
-          (((Etale.etaleLowerShriek A f inferInstance).mapHomologicalComplex (.up ℤ)).obj T₁) :=
-    (((Etale.etaleLowerShriekUpperStarAdjunction A f inferInstance).mapHomologicalComplex
-      (.up ℤ)).homEquiv _ _).apply_symm_apply _
+  have hc := unit_app_map_projectionMap
+    ((Etale.etaleLowerShriekUpperStarAdjunction A f inferInstance).mapHomologicalComplex (.up ℤ))
+    K₁ T₁
   apply Eq.symm
   refine projectionMap_laxSquare
     ((Etale.etaleLowerShriekUpperStarAdjunction A f inferInstance).mapHomotopyCategory (.up ℤ))
