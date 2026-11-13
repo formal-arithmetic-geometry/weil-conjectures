@@ -32,7 +32,6 @@ open CategoryTheory Opposite
 
 namespace CategoryTheory
 
-set_option profiler true in
 -- The comparison expands several derived-functor and full-subcategory composites.
 set_option backward.isDefEq.respectTransparency false in
 /-- Zeroth hypercohomology of the Hom complex is the homotopy-category Hom bifunctor.
