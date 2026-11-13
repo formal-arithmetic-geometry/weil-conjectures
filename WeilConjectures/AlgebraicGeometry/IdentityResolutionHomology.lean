@@ -25,21 +25,29 @@ open CategoryTheory AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 
 private theorem identity_resolution_homotopy {C : Type*} [Category* C] [Abelian C]
-    {K L I : CochainComplex C ℕ} (hI : ∀ n, Injective (I.X n))
-    (α : K ⟶ L) [QuasiIso α] (β γ : L ⟶ I) (h : α ≫ β = α ≫ γ) :
-    Nonempty (Homotopy β γ) := by
-  let : ∀ n, Injective (I.X n) := hI
+    {G F : C} (ψ : G ⟶ F) (I : InjectiveResolution F) (J : InjectiveResolution G)
+    {K : CochainComplex C ℕ} (hK : ∀ n, Injective (K.X n))
+    (β : J.cocomplex ⟶ K) (l : I.cocomplex ⟶ K)
+    (h : J.ι.f 0 ≫ β.f 0 = ψ ≫ I.ι.f 0 ≫ l.f 0) :
+    Nonempty (Homotopy β (InjectiveResolution.desc ψ I J ≫ l)) := by
+  let γ := InjectiveResolution.desc ψ I J ≫ l
+  have haug : J.ι ≫ β = J.ι ≫ γ := by
+    apply HomologicalComplex.from_single_hom_ext
+    dsimp only [γ, HomologicalComplex.comp_f]
+    rw [← Category.assoc, InjectiveResolution.desc_commutes_zero, Category.assoc]
+    exact h
+  let : ∀ n, Injective (K.X n) := hK
   let e := ComplexShape.embeddingUpNat
   let E := e.extendFunctor C
-  have : QuasiIso (E.map α) :=
-    (HomologicalComplex.quasiIso_extendMap_iff α e).2 inferInstance
-  have he : Nonempty (Homotopy (E.map α ≫ E.map β) (E.map α ≫ E.map γ)) := by
+  have : QuasiIso (E.map J.ι) :=
+    (HomologicalComplex.quasiIso_extendMap_iff J.ι e).2 inferInstance
+  have he : Nonempty (Homotopy (E.map J.ι ≫ E.map β) (E.map J.ι ≫ E.map γ)) := by
     rw [← E.map_comp, ← E.map_comp]
-    exact ⟨(Homotopy.ofEq h).extend e⟩
+    exact ⟨(Homotopy.ofEq haug).extend e⟩
   obtain ⟨hh⟩ := CochainComplex.homotopy_of_comp_quasiIso_of_injective
-    (I := I.extend e)
+    (I := K.extend e)
     ⟨0, fun n hn ↦ CochainComplex.isZero_of_isStrictlyGE _ 0 n hn⟩
-    (E.map α) (E.map β) (E.map γ) he
+    (E.map J.ι) (E.map β) (E.map γ) he
   exact ⟨hh.ofExtend⟩
 
 set_option profiler true in
@@ -81,10 +89,7 @@ theorem moduleCohomologyFMap_identity_resolution_homology {Z : Scheme.{u}}
   let Γc := Γ.mapHomologicalComplex (ComplexShape.up ℕ)
   let c : D.I.cocomplex ⟶
       ((pushforward (𝟙 Z)).mapHomologicalComplex (ComplexShape.up ℕ)).obj D.I.cocomplex :=
-    { f := fun n ↦ (pushforwardId Z).inv.app (D.I.cocomplex.X n)
-      comm' := by
-        intro n m _
-        exact (pushforwardId Z).inv.naturality (D.I.cocomplex.d n m) }
+    ((pushforwardId Z).inv.mapHomologicalComplex (ComplexShape.up ℕ)).app D.I.cocomplex
   let α := InjectiveResolution.desc ψ D.I D.J
   have hc : Γc.map c = D.a.hom := by
     rw [← cancel_epi D.a.inv, Iso.inv_hom_id]
@@ -94,22 +99,14 @@ theorem moduleCohomologyFMap_identity_resolution_homology {Z : Scheme.{u}}
     change (presheaf (D.I.cocomplex.X n)).map _ ≫
       ((pushforwardId Z).inv.app (D.I.cocomplex.X n)).app ⊤ = 𝟙 _
     simp
-  have haug : D.J.ι ≫ D.β = D.J.ι ≫ (α ≫ c ≫ D.lambda) := by
-    apply HomologicalComplex.from_single_hom_ext
-    simp only [HomologicalComplex.comp_f]
-    rw [D.compatible]
-    dsimp only [α, c]
-    rw [← Category.assoc, ← Category.assoc, InjectiveResolution.desc_commutes_zero]
+  have haug : D.J.ι.f 0 ≫ D.β.f 0 = ψ ≫ D.I.ι.f 0 ≫ (c ≫ D.lambda).f 0 := by
+    rw [D.compatible, HomologicalComplex.comp_f, ← Category.assoc (D.I.ι.f 0)]
     congr 1
-  obtain ⟨hh⟩ := identity_resolution_homotopy D.injective D.J.ι D.β
-    (α ≫ c ≫ D.lambda) haug
-  have hm := Γ.mapHomotopy hh
-  change Homotopy (Γc.map D.β) (Γc.map (α ≫ c ≫ D.lambda)) at hm
-  have hsec : Homotopy (Γc.map D.β) (Γc.map α ≫ D.a.hom ≫ Γc.map D.lambda) := by
-    simpa only [Functor.map_comp, hc] using hm
+  obtain ⟨hh⟩ := identity_resolution_homotopy ψ D.I D.J D.injective D.β
+    (c ≫ D.lambda) haug
   let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p
-  have hhom := hsec.homologyMap_eq p
-  change H.map (Γc.map D.β) = H.map (Γc.map α ≫ D.a.hom ≫ Γc.map D.lambda) at hhom
-  simpa only [Functor.map_comp, Category.assoc] using hhom
+  have hhom := (Γ.mapHomotopy hh).homologyMap_eq p
+  change H.map (Γc.map D.β) = H.map (Γc.map (α ≫ c ≫ D.lambda)) at hhom
+  simpa only [Functor.map_comp, hc, Category.assoc] using hhom
 
 end AlgebraicGeometry.Scheme.Modules

@@ -85,7 +85,6 @@ private theorem augmentation_diagram_cancel {C : Type*} [Category* C]
   apply (cancel_mono m).1
   simpa only [Category.assoc, IsIso.inv_hom_id, Category.comp_id] using h
 
-set_option profiler true in
 -- Comparing the module and abelian-group homology models needs extra elaboration work.
 set_option backward.isDefEq.respectTransparency false in
 /-- The degree-zero resolution formula commutes with the canonical augmentations.
