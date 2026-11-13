@@ -117,6 +117,7 @@ instance preservesColimitsOfShape_weaklyEtaleLowerShriek_discrete_π (j : ℤ) :
   inferInstance
 
 set_option synthInstance.maxHeartbeats 400000 in
+set_option profiler true in
 -- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology X) Ab) _`
 /-- The pullback of module objects is monoidal on cochain complexes. -/
 noncomputable instance monoidal_upperStar_mapHomologicalComplex :
@@ -124,6 +125,7 @@ noncomputable instance monoidal_upperStar_mapHomologicalComplex :
   Functor.mapCochainComplexMonoidal _
 
 set_option maxHeartbeats 3200000 in
+set_option profiler true in
 -- the chase unfolds the derived unit, counit and tensor comparison on complexes of module objects
 open HomotopyCategory DerivedCategory in
 /-- On objects coming from cochain complexes, the derived projection map of `Dg_! ⊣ Lg^*` is
