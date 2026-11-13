@@ -78,7 +78,7 @@ lemma residueFieldDerivedUpperStarIso_symm_eq :
     CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory,
     ProEtale.leftDerivedUpperStarIsoMapDerivedCategory, Functor.mapDerivedCategoryNatIso_symm]
 
-set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- rewriting the tensor comparison of the derived pullback unfolds the derived categories of module
 -- objects
 /-- **`D(G)` is monoidal, compatibly with the derived pullbacks**: there are isomorphisms
