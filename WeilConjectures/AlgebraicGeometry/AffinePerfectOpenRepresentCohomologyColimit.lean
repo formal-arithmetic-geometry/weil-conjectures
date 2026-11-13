@@ -21,6 +21,18 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+/-- Inverses of compatible augmentations are compatible with the transition maps. -/
+private theorem koszulOpenHom_inverse_naturality
+    {C D : Type*} [Category C] [Category D] (R : C ⥤ D)
+    {X Y S : C} (m : Y ⟶ X) (u : X ⟶ S) (u' : Y ⟶ S)
+    (v : R.obj S ⟶ R.obj X) (v' : R.obj S ⟶ R.obj Y)
+    (hu : R.map u ≫ v = 𝟙 _) (hu' : v' ≫ R.map u' = 𝟙 _)
+    (hm : m ≫ u = u') : v' ≫ R.map m = v := by
+  calc
+    v' ≫ R.map m = v' ≫ R.map m ≫ R.map u ≫ v := by rw [hu, Category.comp_id]
+    _ = v' ≫ R.map u' ≫ v := by rw [← Category.assoc (R.map m), ← R.map_comp, hm]
+    _ = v := by rw [← Category.assoc, hu', Category.id_comp]
+
 set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Intermediate representability and colimit assertion; source Tags 08DC and 08DD.
@@ -135,7 +147,8 @@ theorem affine_perfect_open_represent_cohomology_colimit
       (affine_perfect_koszul_principal_unit A r f (e + 1) (Nat.le_add_left 1 e)).2
   have hiso (e : ℕ) : IsIso (R.map (koszulOpenUnit A r f e)) := by
     have := hi e
-    apply (NatIso.isIso_map_iff (Functor.mapDerivedCategoryCompIso F G) _).1
+    apply (NatIso.isIso_map_iff (Functor.mapDerivedCategoryCompIso F G)
+      (koszulOpenUnit A r f e)).1
     change IsIso (G.mapDerivedCategory.map
       (F.mapDerivedCategory.map (koszulOpenUnit A r f e)))
     infer_instance
@@ -145,21 +158,16 @@ theorem affine_perfect_open_represent_cohomology_colimit
     infer_instance
   have hv₁ (e : ℕ) : R.map (koszulOpenUnit A r f e) ≫ v e = 𝟙 _ := by
     have := hiso e
-    exact IsIso.hom_inv_id _
+    exact IsIso.hom_inv_id (R.map (koszulOpenUnit A r f e))
   have hv₂ (e : ℕ) : v e ≫ R.map (koszulOpenUnit A r f e) = 𝟙 _ := by
     have := hiso e
-    exact IsIso.inv_hom_id _
+    exact IsIso.inv_hom_id (R.map (koszulOpenUnit A r f e))
   have hmap := (affine_perfect_open_represent_cohomology_core A r f).2.2
   have hvmap (a b : ℕ) (h : a ≤ b) :
       v b ≫ R.map (koszulOpenMap A r f a b h) = v a := by
-    calc
-      v b ≫ R.map (koszulOpenMap A r f a b h) =
-          v b ≫ R.map (koszulOpenMap A r f a b h) ≫
-            R.map (koszulOpenUnit A r f a) ≫ v a := by
-        rw [hv₁ a, Category.comp_id]
-      _ = v b ≫ R.map (koszulOpenUnit A r f b) ≫ v a := by
-        rw [← Category.assoc (R.map _) (R.map _) (v a), ← R.map_comp, hmap a b h]
-      _ = v a := by rw [← Category.assoc, hv₂ b, Category.id_comp]
+    exact koszulOpenHom_inverse_naturality R (koszulOpenMap A r f a b h)
+      (koszulOpenUnit A r f a) (koszulOpenUnit A r f b) (v a) (v b)
+      (hv₁ a) (hv₂ b) (hmap a b h)
   let ι : koszulOpenHomDiagram A r f E.1 ⟶
       (Functor.const ℕ).obj (R.obj (koszulOpenStructure A) ⟶ R.obj E.1) :=
     { app := fun e ↦ TypeCat.ofHom (fun φ ↦ v e ≫ R.map φ)
