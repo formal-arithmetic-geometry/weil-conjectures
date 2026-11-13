@@ -62,7 +62,6 @@ set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
 
 set_option profiler true in
--- Tensor instance reduction in the explicit unit construction needs additional heartbeats.
 /-- Extension along ε supplies a functor and its canonical tensor unit after κ.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h.
 Proof: Use change of rings along ε on P objects and sheafify id tensor P(a) on morphisms.
@@ -144,10 +143,8 @@ theorem affine_module_tensor_extensionUnit
       symm
       change SheafOfModules.changeOfRingsMap ε M i
         ((1 : U.sheaf.obj.obj V) ⊗ₜ[B.obj.obj V, (ε.hom.app V).hom] m) = _
-      rw [show SheafOfModules.changeOfRingsMap ε M i _ = _ from
-        Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap ε M i) 1 m]
-      simp only [map_one]
-      rfl
+      simpa only [map_one] using
+        Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap ε M i) 1 m
   let δ : P ⋙ SheafOfModules.restrictScalars (𝓻 b) ⟶ H :=
     { app := fun G ↦ ⟨q (P.obj G) ≫
         (PresheafOfModules.sheafificationAdjunction (𝟙 U.ringCatSheaf.obj)).unit.app

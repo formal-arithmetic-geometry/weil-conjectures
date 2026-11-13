@@ -186,7 +186,6 @@ private theorem comparisons_from_objectwise
   exact ⟨α, β, ha, hc⟩
 
 set_option profiler true in
--- Converting scheme pushforward to the composite right adjoint needs extra heartbeats.
 private theorem tensorComparisons_from_objectwise
     (H : SheafOfModules.{u} (𝓡 A) ⥤ U.Modules) (γ : S ⋙ tensorPullback f ⟶ H)
     (hf : ∀ F : U.Modules, (∃ a : H.obj ((R).obj F) ⟶ F,
@@ -199,10 +198,25 @@ private theorem tensorComparisons_from_objectwise
         (S).map (β.app G) = ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G)) := by
   set_option backward.isDefEq.respectTransparency true in
   set_option backward.isDefEq.respectTransparency.types true in
-    exact comparisons_from_objectwise S R (tensorPullback f) (adj₀) H γ
-      (scalarRestriction_injective f) hf hβ
+    let δ : R ⋙ (S ⋙ tensorPullback f) ⟶ 𝟭 U.Modules :=
+      { app := fun F ↦ (adj₀).counit.app F
+        naturality := by
+          intro F F' k
+          exact (adj₀).counit.naturality k }
+    obtain ⟨α, ha⟩ := naturalFactor (R ⋙ (S ⋙ tensorPullback f)) (R ⋙ H)
+      (Functor.whiskerLeft R γ) δ hf
+    let τ : S ⟶ (H ⋙ R) ⋙ S :=
+      { app := fun G ↦ ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G)
+        naturality := by
+          intro G G' k
+          rw [← (adj₀).homEquiv_naturality_left]
+          have hn : (tensorPullback f).map ((S).map k) ≫ γ.app G' =
+              γ.app G ≫ H.map k := γ.naturality k
+          rw [hn, (adj₀).homEquiv_naturality_right]
+          rfl }
+    obtain ⟨β, hc⟩ := liftNatural S (H ⋙ R) τ (scalarRestriction_injective f) hβ
+    exact ⟨α, β, ha, hc⟩
 
--- Elaborating the nested tensor transports requires additional heartbeats.
 /-- The tensor extension is quasi-coherent and carries the canonical comparison maps.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
 Proof: The affine direct-image algebra A is quasi-coherent by affine relative Spec.

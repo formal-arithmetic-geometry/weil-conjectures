@@ -81,7 +81,6 @@ set_option hygiene false in
 local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 
 set_option profiler true in
--- The deeply nested functor and transport equalities require additional elaboration steps.
 /-- The tensor pushout, its extension-of-scalars functors, and the canonical comparison maps.
 This assertion constructs the maps; it does not assert that they are isomorphisms.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
