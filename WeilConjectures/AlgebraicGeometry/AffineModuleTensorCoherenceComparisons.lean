@@ -185,7 +185,7 @@ private theorem comparisons_from_objectwise
   obtain ⟨β, hc⟩ := liftNatural Q (H ⋙ J) τ hinj hβ
   exact ⟨α, β, ha, hc⟩
 
-set_option profiler true in
+-- Identify the composite right adjoint with the left adjoint still abstract.
 private theorem tensorComparisons_from_adjunction
     (L : X.Modules ⥤ U.Modules) (adj : L ⊣ pushforward f)
     (H : SheafOfModules.{u} (𝓡 A) ⥤ U.Modules) (γ : S ⋙ L ⟶ H)
@@ -197,25 +197,10 @@ private theorem tensorComparisons_from_adjunction
       (∀ F : U.Modules, γ.app ((R).obj F) ≫ α.app F = adj.counit.app F) ∧
       (∀ G : SheafOfModules.{u} (𝓡 A),
         (S).map (β.app G) = (adj.homEquiv ((S).obj G) (H.obj G)) (γ.app G)) := by
-  let δ : R ⋙ (S ⋙ L) ⟶ 𝟭 U.Modules :=
-    { app := fun F ↦ adj.counit.app F
-      naturality := by
-        intro F F' k
-        exact adj.counit.naturality k }
-  obtain ⟨α, ha⟩ := naturalFactor (R ⋙ (S ⋙ L)) (R ⋙ H)
-    (Functor.whiskerLeft R γ) δ hf
-  let τ : S ⟶ (H ⋙ R) ⋙ S :=
-    { app := fun G ↦ (adj.homEquiv ((S).obj G) (H.obj G)) (γ.app G)
-      naturality := by
-        intro G G' k
-        rw [← adj.homEquiv_naturality_left]
-        have hn : L.map ((S).map k) ≫ γ.app G' = γ.app G ≫ H.map k := γ.naturality k
-        rw [hn, adj.homEquiv_naturality_right]
-        rfl }
-  obtain ⟨β, hc⟩ := liftNatural S (H ⋙ R) τ (scalarRestriction_injective f) hβ
-  exact ⟨α, β, ha, hc⟩
+  exact comparisons_from_objectwise
+    (C := SheafOfModules.{u} (𝓡 A)) (D := X.Modules) (E := U.Modules)
+    S R L adj H γ (scalarRestriction_injective f) hf hβ
 
-set_option profiler true in
 private theorem tensorComparisons_from_objectwise
     (H : SheafOfModules.{u} (𝓡 A) ⥤ U.Modules) (γ : S ⋙ tensorPullback f ⟶ H)
     (hf : ∀ F : U.Modules, (∃ a : H.obj ((R).obj F) ⟶ F,
