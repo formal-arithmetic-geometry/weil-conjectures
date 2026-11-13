@@ -371,44 +371,26 @@ theorem integralSystemTensorComparison_comp {X Y Z : Scheme.{u}} (h : Z ⟶ X) (
   · exact ff.faithful
   · intro P Q hP hQ
     have hs := integralSystemTensorComparison_square l E f P Q hP hQ
-    dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
-    run_tac Lean.Elab.Tactic.withMainContext do
-      let hs ← Lean.Elab.Tactic.getFVarId (Lean.mkIdent `hs)
-      let actual ← Lean.instantiateMVars (← Lean.Meta.inferType (.fvar hs))
-      let expected ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
-      let mut todo := #[(actual, expected)]
-      let mut differences : List String := []
-      for _ in [0:10000] do
-        if todo.isEmpty then break
-        let (a, b) := todo.back!
-        todo := todo.pop
-        let a := a.consumeMData
-        let b := b.consumeMData
-        if a != b then
-          if a.isApp && b.isApp then
-            todo := todo.push (a.appArg!, b.appArg!) |>.push (a.appFn!, b.appFn!)
-          else
-            let d := s!"actual: {a.getAppFn.constName?.getD .anonymous} ({a.getAppNumArgs}); \
-              expected: {b.getAppFn.constName?.getD .anonymous} ({b.getAppNumArgs})"
-            if !differences.contains d then
-              differences := differences ++ [d]
-              Lean.logInfo d
-              if differences.length == 12 then break
-    with_reducible exact hs
+    dsimp +instances only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom,
+      coefficientSequenceDerived, Functor.comp_obj, Functor.prod_obj] at hs ⊢
+    exact hs
   · intro P Q hP hQ
     have hs := integralSystemTensorComparison_square l E h P Q hP hQ
-    dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
-    with_reducible exact hs
+    dsimp +instances only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom,
+      coefficientSequenceDerived, Functor.comp_obj, Functor.prod_obj] at hs ⊢
+    exact hs
   · intro P Q hP hQ
     have hs := integralSystemTensorComparison_square l E (h ≫ f) P Q hP hQ
-    dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
-    with_reducible exact hs
+    dsimp +instances only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom,
+      coefficientSequenceDerived, Functor.comp_obj, Functor.prod_obj] at hs ⊢
+    exact hs
   · intro P
     dsimp only [integralComparisonSystemComposition, integralComparisonDerivedSequencePullback]
     rw [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom, Category.assoc,
       Functor.mapDerivedCategoryCompIso_hom_app_factors, Functor.mapDerivedCategoryNatIso_fac]
     rfl
-  · with_reducible exact hm
+  · dsimp +instances only [coefficientSequenceDerived, Functor.comp_obj, Functor.prod_obj] at hm ⊢
+    exact hm
   · intro P _
     infer_instance
   · intro P _
