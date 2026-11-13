@@ -30,6 +30,7 @@ section Closedness
 variable {A : Type u} [CommRing A] {I : Ideal A}
 variable {X : Scheme.{u}}
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- Unifying the `HomogeneousLocalization` chart rings exceeds the default heartbeat limit.
 /-- **Closedness of the graph of the glued extension.** -/

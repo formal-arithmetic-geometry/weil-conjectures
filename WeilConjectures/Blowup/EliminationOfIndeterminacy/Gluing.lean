@@ -105,6 +105,7 @@ lemma Scheme.IdealSheafData.homOfVector_awaySlope_compat {X : Scheme.{u}}
   · rw [← Category.assoc, ← Category.assoc, K.specMap_awayMap_blowupChart V ha ha']
   · exact AffineBlowup.awayMap_awaySlope_eq ha ha' (hb j) (hb' j) (hrel j)
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- Unifying the `HomogeneousLocalization` chart rings exceeds the default heartbeat limit.
 /-- **Gluing the chart-local extensions.** Let `a i` and `b i j` be sections of the centre
