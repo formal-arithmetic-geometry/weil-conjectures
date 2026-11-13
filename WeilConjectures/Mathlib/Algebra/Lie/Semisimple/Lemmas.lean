@@ -42,6 +42,8 @@ characteristic-zero Lie algebra with central radical.
   semisimple finite-dimensional representation has central radical.
 * `LieAlgebra.center_sup_derivedSeries_eq_top`: a finite-dimensional characteristic-zero Lie
   algebra with central radical is the sum of its centre and its derived subalgebra.
+* `LieAlgebra.radical_eq_center_and_center_sup_derivedSeries_eq_top`: both conclusions for a
+  Lie algebra with a faithful semisimple finite-dimensional representation.
 
 ## Blueprint
 
@@ -184,5 +186,16 @@ theorem center_sup_derivedSeries_eq_top (k L : Type*) [Field k] [CharZero k]
       mkCenter k L x ∈ (derivedSeries k L 1).map (mkCenter k L))
   refine ⟨x - y, mkCenter_eq_zero_iff.mp ?_, y, hy, sub_add_cancel x y⟩
   rw [map_sub, hxy, sub_self]
+
+/-- If a finite-dimensional Lie algebra `L` over a field of characteristic zero has a faithful
+semisimple finite-dimensional representation `M` on which it acts triangularizably, then
+`rad L = Z(L)` and `L = Z(L) + [L, L]`. -/
+theorem radical_eq_center_and_center_sup_derivedSeries_eq_top (k L M : Type*) [Field k]
+    [CharZero k] [LieRing L] [LieAlgebra k L] [Module.Finite k L]
+    [AddCommGroup M] [Module k M] [LieRingModule L M] [LieModule k L M] [Module.Finite k M]
+    [IsFaithful k L M] [IsTriangularizable k L M] [LieModule.IsSemisimple k L M] :
+    radical k L = center k L ∧ center k L ⊔ derivedSeries k L 1 = ⊤ := by
+  have := hasCentralRadical_of_isFaithful k L M
+  exact ⟨HasCentralRadical.radical_eq_center, center_sup_derivedSeries_eq_top k L⟩
 
 end LieAlgebra
