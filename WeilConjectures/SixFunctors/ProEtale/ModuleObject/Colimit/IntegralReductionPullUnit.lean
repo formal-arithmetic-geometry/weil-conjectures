@@ -117,7 +117,6 @@ private lemma pullUnit_comp_counit_diagram
   simp only [Category.assoc]
   rw [reassoc_of% h₁, h₂, h₃, reassoc_of% h₄, ← reassoc_of% h₅, reassoc_of% h₆]
 
-set_option trace.profiler true in
 
 /-- The commutation `ι` of the restriction of scalars with the derived pullbacks, on the image of
 an object of the homotopy category, is the underived commutation `comapUpperStarIso` modulo
@@ -149,7 +148,8 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_app_Qh_comp
     ((Mod.comap (coefficientMap a Y)).mapDerivedCategoryFactorsh.hom.app Z)
   have s6 := (((leftDerivedUpperStarIsoMapDerivedCategory Λ f).app
     (DerivedCategory.Qh.obj
-      (((Mod.comap (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj Z))).inv_comp_eq.mp
+      (((Mod.comap (coefficientMap a Y)).mapHomotopyCategory
+        (ComplexShape.up ℤ)).obj Z))).inv_comp_eq.mp
     (leftDerivedUpperStarIsoMapDerivedCategory_inv_app_comp_counit f Λ
       (((Mod.comap (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj Z))).symm
   simp only [Functor.map_comp] at s1
@@ -255,9 +255,11 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
       (Iso.refl (Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧))
         (ComplexShape.up ℤ)).hom.app K)
   have : IsIso c := by dsimp only [c]; infer_instance
-  refine (cancel_mono ((D(Mod.comap (coefficientMap a X))).map c)).1 ?_
-  dsimp only [c]
-  refine (cancel_mono ((Mod.comap (coefficientMap a X)).mapDerivedCategoryFactorsh.hom.app
+  refine (Iso.cancel_iso_hom_right _ _
+    ((D(Mod.comap (coefficientMap a X))).mapIso (asIso c))).1 ?_
+  dsimp only [Functor.mapIso_hom, asIso_hom, c]
+  refine (Iso.cancel_iso_hom_right _ _
+    ((Mod.comap (coefficientMap a X)).mapDerivedCategoryFactorsh.app
       (((Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧).mapHomotopyCategory
         (ComplexShape.up ℤ)).obj K))).1 ?_
   have r1 := derivedUpperStarExtendScalarsIso_hom_app_comp_counit a f K
@@ -299,7 +301,6 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
   simp only [← DerivedCategory.Qh.map_comp, Category.assoc]
   rw [upperStar_mapHomotopyCategory_unit_comp_comapUpperStarIso_inv]
 
-set_option trace.profiler true in
 /-- **(Pull) is compatible with the units of `Ext ⊣ Res`**: for `M ∈ D(Y_proét, Λ)`, the
 pullback of the unit `M ⟶ Res (Ext M)`, followed by the commutation `ι` of `Res` with `Lf^*`, is
 the unit at `Lf^* M` followed by `Res` of (Pull). -/
@@ -336,7 +337,7 @@ theorem upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app
     Functor.whiskerRight (derivedUpperStarExtendScalarsIso a f).hom
       D(Mod.comap (coefficientMap a X))
   change lhs.app M = rhs.app M
-  apply (cancel_epi (L((f)^*⟦Λ⟧).map e.hom)).1
+  apply (Iso.cancel_iso_hom_left ((L((f)^*⟦Λ⟧)).mapIso e) _ _).1
   have hl := lhs.naturality e.hom
   have hr := rhs.naturality e.hom
   dsimp only [Functor.comp_map, Functor.id_map] at hl hr
