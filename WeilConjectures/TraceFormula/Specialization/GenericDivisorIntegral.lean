@@ -157,9 +157,8 @@ of `X` whose inclusion `j` of the geometric generic fibre is quasi-compact and q
 scalars, `Rj_*` on bounded below complexes. -/
 theorem isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicAlgCl_of_padicIntegers
     [QuasiCompact M.j] [QuasiSeparated M.j]
-    (K₀ : @DerivedCategory (Mod (Sheaf (ProEt.topology U) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) U)) _ _
-      (HasDerivedCategory.standard _))
+    (K₀ : DerivedCategory (Mod (Sheaf (ProEt.topology U) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) U)))
     (n : ℤ) (hn : ((L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj
       (D((o)_!open⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj K₀)).IsGE n)
     (h : IsZero ((L((ι)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj
@@ -175,15 +174,10 @@ theorem isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicAlgCl_of_padicI
               ((L(Mod.extendScalars
                 (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E) U))).obj
                 K₀)))))) := by
-  let K₀' := (D((o)_!open⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj K₀)
-  let K := (L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀'
-  let K₁ := (L(Mod.extendScalars
-    (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E) U))).obj K₀
-  let K₂ := (D((o)_!open⟦Profinite.continuousMapRingObj E.1⟧).obj K₁)
-  let K₃ := (L((M.ε)^*⟦Profinite.continuousMapRingObj E.1⟧)).obj K₂
   -- from `𝒪_E` to `E`
   have hφ₁ := isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E M.j
-    K n
+    ((L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj
+      (D((o)_!open⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj K₀)) n
   have k₁ := isZero_upperStar_upperStar_nearbyCycles_lowerShriek_extendScalars
     (padicIntegersRingObjToContinuousMapRingObj ℓ E) M o e ι K₀
     (derivedPushHom _ M.j)
@@ -192,25 +186,33 @@ theorem isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicAlgCl_of_padicI
   -- from `E` to `ℚ̄_ℓ`
   have hn₁ : ((L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧) ⋙ L(Mod.extendScalars
       (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E) M.generic))).obj
-      K₀').IsGE n :=
+      (D((o)_!open⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj K₀)).IsGE n :=
     isGE_leftDerivedFunctor_extendScalars_obj (padicIntegersRingObjToContinuousMapRingObj ℓ E)
-      K n
+      ((L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj
+        (D((o)_!open⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj K₀)) n
   have hn₂ := DerivedCategory.TStructure.t.isGE_of_iso
     ((derivedUpperStarExtendScalarsIso (padicIntegersRingObjToContinuousMapRingObj ℓ E) M.ε).app
-        K₀' ≪≫
+        (D((o)_!open⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj K₀) ≪≫
       (L((M.ε)^*⟦Profinite.continuousMapRingObj E.1⟧)).mapIso
         ((derivedOpenImmersionShriekIso (padicIntegersRingObjToContinuousMapRingObj ℓ E) o).app
           K₀)) n
   have hn₃ : DerivedCategory.TStructure.t.IsGE
-      K₃ n :=
+      ((L((M.ε)^*⟦Profinite.continuousMapRingObj E.1⟧)).obj
+      (D((o)_!open⟦Profinite.continuousMapRingObj E.1⟧).obj
+        ((L(Mod.extendScalars
+          (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E) U))).obj K₀))) n :=
     by
     dsimp only [Functor.comp_obj, Iso.trans_hom] at hn₂
     transport_mod_proofs hn₂
   have hφ₂ := isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E M.j
-    (n := n) (K := K₃)
+    (n := n) (K := (L((M.ε)^*⟦Profinite.continuousMapRingObj E.1⟧)).obj
+      (D((o)_!open⟦Profinite.continuousMapRingObj E.1⟧).obj
+        ((L(Mod.extendScalars
+          (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E) U))).obj K₀)))
   have k₂ := isZero_upperStar_upperStar_nearbyCycles_lowerShriek_extendScalars
     (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) M o e ι
-    K₁
+    ((L(Mod.extendScalars
+      (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E) U))).obj K₀)
     (derivedPushHom _ M.j)
   have h₂ := k₂ (by transport_mod_proofs hφ₂) (by transport_mod_proofs h₁)
   transport_mod_proofs h₂
