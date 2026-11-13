@@ -452,7 +452,7 @@ theorem ringedSlice_scalar_unit :
   let F := ringedSliceComplexRestriction.{c, v, r} J R U
   let O := ringedTensorUnitComplex.{c, v, r} J R
   let OU := ringedTensorUnitComplex.{max c v, v, r} (J.over U) (R.over U)
-  obtain ⟨e, he_unit⟩ := scalar_restriction_unit_exists J R U
+  obtain ⟨e, he_unit⟩ := scalar_restriction_unit_exists.{c, v, r} J R U
   let o := α₀.app O ≪≫
     DerivedCategory.Q.mapIso e
   let r := r₀
