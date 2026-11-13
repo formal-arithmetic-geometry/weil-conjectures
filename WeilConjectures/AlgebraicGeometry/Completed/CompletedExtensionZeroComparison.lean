@@ -1038,8 +1038,7 @@ private def openSliceAdjunction {U T : Scheme.{t}}
     exact ringAdj_second e φ ψ H₁.symm
   exact SheafOfModules.pushforwardPushforwardAdj e.toAdjunction φ ψ H₁ H₂
 
-set_option maxHeartbeats 1000000 in
--- Unfolding the concrete composite adjunction and its generator formula needs more heartbeats.
+set_option profiler true in
 open Classical in
 /-- The extension/restriction adjunction is fixed by the direct-sum generator formula.
 Source: Tag 03DI (blueprint: lem-cbc-completed-extension-zero-comparison).
