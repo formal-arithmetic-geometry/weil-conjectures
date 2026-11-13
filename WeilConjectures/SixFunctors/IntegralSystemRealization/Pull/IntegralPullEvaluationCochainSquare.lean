@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemOperations
 public import Mathlib.CategoryTheory.Adjunction.Mates
-public import WeilConjectures.SixFunctors.IntegralSystemRealization.Pull.IntegralPullEvaluationCochainSquareComponent
+import WeilConjectures.SixFunctors.IntegralSystemRealization.Pull.IntegralPullEvaluationCochainSquareComponent
 
 /-! # The cochain pullback evaluation transition square
 
@@ -25,11 +25,22 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
+private theorem cochain_comp_eq_comp_comp_of_components
+    {ι : Type*} {c : ComplexShape ι} {V : Type*} [Category* V] [HasZeroMorphisms V]
+    {A B C D F : HomologicalComplex V c}
+    (a : A ⟶ B) (b : B ⟶ F) (c : A ⟶ C) (d : C ⟶ D) (e : D ⟶ F)
+    (h : ∀ i, a.f i ≫ b.f i = c.f i ≫ d.f i ≫ e.f i) :
+    a ≫ b = c ≫ d ≫ e :=
+  HomologicalComplex.hom_ext _ _ h
+
 /-- The actual comparison of exact cochain functors, before localization.
 Source: Stacks 03D2 and 0941
 (blueprint: lem-sf-integral-pull-evaluation-cochain-square). -/
 def integralPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
-  ordinaryPullEvaluationComplex l E f n
+  (pullbackTensorInverseEvaluationComplex l E f n).symm ≪≫
+    Functor.isoWhiskerLeft
+      ((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ))
+      (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n) (.up ℤ))
 
 set_option profiler true in
 /-- The pullback transition square already commutes as a square of cochain maps.
@@ -75,8 +86,8 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm
           (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
-  apply HomologicalComplex.hom_ext
-  intro i
-  exact integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
+  have h := cochain_comp_eq_comp_comp_of_components _ _ _ _ _
+    (integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P)
+  exact h
 
 end WeilConjectures.IntegralSystemRealization
