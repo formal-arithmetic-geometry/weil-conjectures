@@ -131,7 +131,6 @@ section KernelFactor
 attribute [local irreducible] tensorGradedAlgebraMap tensorGradedUnit
   commAlgebraSheafModule tensorPullback
 
-set_option profiler true in
 private theorem gradedKernelFactor {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) (A : TensorGradedAlgebraData j L) :
     let M : X.Modules := commAlgebraSheafModule X.sheaf A.B
@@ -145,6 +144,7 @@ private theorem gradedKernelFactor {X Z : Scheme.{u}} (j : Z ⟶ X)
     j.ker.toModulesι ▷ F ≫ (λ_ F).hom
   let adj := Classical.choice (nonempty_tensorPullbackAdjunction j)
   let adj' := Classical.choose (exists_tensorPullbackAdjunction j)
+  -- Direct choice avoids dependent elimination through the surrounding local definitions.
   let D := Classical.choice (tensorGradedDegreeData_exists j L A)
   have factors (d : ℕ) : ∃ f : kernel (tensorGradedUnit j (L.tensorPow d)) ⟶
       image (μ M), f ≫ image.ι (μ M) =
