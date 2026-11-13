@@ -53,7 +53,7 @@ private theorem completion_congr_eval {A M N : Type*} [CommRing A]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 500000 in
+set_option profiler true in
 -- Comparing scalar actions on restricted cohomology modules needs extra elaboration.
 private theorem completion_map_linear {X Y : Scheme.{uS}} (f : X ⟶ Y) (y : Y)
     (F : X.Modules) (p : ℕ)
@@ -97,7 +97,7 @@ private theorem completion_map_linear {X Y : Scheme.{uS}} (f : X ⟶ Y) (y : Y)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 700000 in
+set_option profiler true in
 -- Transport through limits and restriction of scalars needs extra elaboration.
 /-- The canonical maps theta_n : M → H^p(X_n, F_n) are compatible with the transitions,
 kill m^(n+1) M, and induce an isomorphism over the completed local ring from the
