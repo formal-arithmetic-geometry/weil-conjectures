@@ -194,7 +194,7 @@ theorem perfect_rhom_tensor_comparison
                       m.εIso.inv ∧
                 IsIso bc := by
   classical
-  letI : MonoidalCategory (schemeDerivedCategory X) := schemeDerivedTensorMonoidal X
+  let : MonoidalCategory (schemeDerivedCategory X) := schemeDerivedTensorMonoidal X
   have hdual := exists_perfect_rhom_dual X K hK
   let D := hdual.choose
   have hD := hdual.choose_spec.1
