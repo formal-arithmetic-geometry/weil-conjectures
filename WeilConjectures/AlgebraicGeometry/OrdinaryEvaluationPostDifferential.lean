@@ -34,7 +34,7 @@ local instance ordinaryPostMonoidalPreadditive (X : Scheme.{u}) (U : X.Opens) :
   Classical.choice (SheafOfModules.tensorClosed (X.sheaf.over U)).1
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Naturality rewrites involve the expanded sheaf tensor and internal Hom instances.
 /-- Evaluation commutes with the differential in the output complex.
 Source: Stacks Project, Tag 08DQ, ordinary evaluation calculation, and Section 20.41.
