@@ -706,14 +706,6 @@ private theorem native_restriction_goal_proof
         DerivedCategory.Q.map (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀).hom := by
   let := hL
   intro hR sr hsr rho c _hc dU dZ P T hP hT
-  let : MonoidalCategory (CochainComplex
-      (ProEtale.AdicSheaf l (U ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) := inferInstance
-  let : MonoidalCategory (CochainComplex
-      (ProEtale.AdicSheaf l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) := inferInstance
-  let : MonoidalCategory (DerivedCategory
-      (ProEtale.AdicSheaf l (U ↘ Spec (CommRingCat.of k₀)).geometricFiber)) := inferInstance
-  let : MonoidalCategory (DerivedCategory
-      (ProEtale.AdicSheaf l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber)) := inferInstance
   have hdata := native_restriction_data k₀ l (Lα)
     hR sr rho c _hc
   let totalRestriction := hdata.choose
@@ -775,11 +767,17 @@ private theorem native_restriction_goal_proof
         HomologicalComplex.ιTensorObj
           ((R.mapHomologicalComplex (.up ℤ)).obj P₀)
           ((R.mapHomologicalComplex (.up ℤ)).obj T₀) p q n hpq := by
-    change HomologicalComplex.ιMapBifunctor _ _ _ _ p q n hpq ≫
-      (HomologicalComplex.mapBifunctorMap (a.hom.app P) (a.hom.app T) _ _).f n = _
-    rw [HomologicalComplex.ι_mapBifunctorMap, ha, ha]
-    simp only [CategoryTheory.Functor.map_id, NatTrans.id_app, Category.id_comp]
-    rfl
+    have ha' (K : CochainComplex (ProEtaleWeilSheaf k₀ l Z) ℤ) :
+        a.hom.app K = 𝟙 _ := by
+      ext i
+      exact ha K i
+    have hb' : b.hom = 𝟙 _ := by
+      change (MonoidalCategory.tensor _).map
+        (Prod.mkHom (a.hom.app P) (a.hom.app T)) = _
+      rw [ha', ha']
+      exact (MonoidalCategory.tensor _).map_id _
+    rw [hb']
+    exact Category.comp_id _
   let ztotal := (((nativeTensorTotal k₀ l Z).obj P).obj T)
   let utotal := (((nativeTensorTotal k₀ l U).obj RP).obj RT)
   let source := (FU.mapHomologicalComplex (.up ℤ)).obj
