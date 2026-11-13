@@ -41,8 +41,6 @@ attribute [local instance]
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
 
 set_option backward.isDefEq.respectTransparency false in
-set_option profiler true in
-set_option maxHeartbeats 400000 in
 -- Tensor comparison naturality unfolds the sheafification localization interface.
 private theorem tensorRight_additive_reconstruction (N : 𝒜) :
     (MonoidalCategory.tensorRight N).Additive := by
