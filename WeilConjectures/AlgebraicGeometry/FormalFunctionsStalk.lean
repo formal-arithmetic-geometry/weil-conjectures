@@ -70,30 +70,36 @@ private theorem completion_map_linear {X Y : Scheme.{uS}} (f : X ⟶ Y) (y : Y)
     (x : AdicCompletion (maximalIdeal (Y.presheaf.stalk y))
       (formalFunctionsStalk f y F p)) : φ (r • x) = r • φ x := by
   let I := maximalIdeal (Y.presheaf.stalk y)
-  obtain ⟨a, rfl⟩ := AdicCompletion.mk_surjective I (Y.presheaf.stalk y) r
-  obtain ⟨z, rfl⟩ := AdicCompletion.mk_surjective I (formalFunctionsStalk f y F p) x
   apply Concrete.limit_ext (formalFibreCohomologySystem f y F p)
   intro j
   obtain ⟨n⟩ := j
-  have hx : AdicCompletion.eval I (formalFunctionsStalk f y F p) (n + 1)
-      (AdicCompletion.mk I (Y.presheaf.stalk y) a •
-        AdicCompletion.mk I (formalFunctionsStalk f y F p) z) =
-      Submodule.Quotient.mk (a.val (n + 1) • z.val (n + 1)) := by
-    change (AdicCompletion.mk I (Y.presheaf.stalk y) a).val (n + 1) •
-      (AdicCompletion.mk I (formalFunctionsStalk f y F p) z).val (n + 1) = _
-    rw [AdicCompletion.val_smul_eq_evalₐ_smul, AdicCompletion.evalₐ_mk]
+  obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective (AdicCompletion.evalₐ I (n + 1) r)
+  obtain ⟨z, hz⟩ := Submodule.Quotient.mk_surjective
+    (I ^ (n + 1) • (⊤ : Submodule (Y.presheaf.stalk y) (formalFunctionsStalk f y F p)))
+    (AdicCompletion.eval I (formalFunctionsStalk f y F p) (n + 1) x)
+  have hx : AdicCompletion.eval I (formalFunctionsStalk f y F p) (n + 1) (r • x) =
+      Submodule.Quotient.mk (a • z) := by
+    change r.val (n + 1) • x.val (n + 1) = _
+    rw [AdicCompletion.val_smul_eq_evalₐ_smul]
+    change AdicCompletion.evalₐ I (n + 1) r •
+      AdicCompletion.eval I (formalFunctionsStalk f y F p) (n + 1) x = _
+    rw [← ha, ← hz]
     rfl
-  rw [hφ n _ _ hx, map_smul]
-  change _ = (limit.π (formalFibreCohomologySystem f y F p) (op n)).hom
-    (AdicCompletion.mk I (Y.presheaf.stalk y) a • φ _)
-  rw [LinearMap.map_smul, hφ n _ (z.val (n + 1)) rfl]
-  let t : (RingedSpace.moduleCohomology (formalFibre f y n).toRingedSpace p).obj
-      ((Scheme.Modules.tensorPullback (formalFibreι f y n)).obj F) := θ n (z.val (n + 1))
-  change (formalFibreScalarMap f y n
-      (Ideal.Quotient.mk (formalFibreIdeal Y y n) (a.val (n + 1)))) • t =
-    (formalFibreScalarMap f y n
-      (AdicCompletion.evalₐ I (n + 1) (AdicCompletion.mk I (Y.presheaf.stalk y) a))) • t
-  rw [AdicCompletion.evalₐ_mk]
+  have hs : a • θ n z = r • (θ n z : formalFibreCohomology f y F p n) := by
+    let t : (RingedSpace.moduleCohomology (formalFibre f y n).toRingedSpace p).obj
+        ((Scheme.Modules.tensorPullback (formalFibreι f y n)).obj F) := θ n z
+    change (formalFibreScalarMap f y n (Ideal.Quotient.mk (formalFibreIdeal Y y n) a)) • t =
+      (formalFibreScalarMap f y n (AdicCompletion.evalₐ I (n + 1) r)) • t
+    exact congrArg (fun c ↦ formalFibreScalarMap f y n c • t) ha
+  calc
+    (limit.π (formalFibreCohomologySystem f y F p) (op n)) (φ (r • x)) =
+        θ n (a • z) := hφ n _ _ hx
+    _ = a • θ n z := (θ n).map_smul a z
+    _ = r • (θ n z : formalFibreCohomology f y F p n) := hs
+    _ = r • (limit.π (formalFibreCohomologySystem f y F p) (op n)) (φ x) :=
+      congrArg (fun t : formalFibreCohomology f y F p n ↦ r • t) (hφ n x z hz.symm).symm
+    _ = (limit.π (formalFibreCohomologySystem f y F p) (op n)) (r • φ x) :=
+      ((limit.π (formalFibreCohomologySystem f y F p) (op n)).hom.map_smul r (φ x)).symm
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
