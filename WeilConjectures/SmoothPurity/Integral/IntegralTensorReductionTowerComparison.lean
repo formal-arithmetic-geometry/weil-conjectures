@@ -138,7 +138,8 @@ private theorem scalarTensorAdjunctionComparison
     letI := SheafOfModules.isMonoidal_W_independentCoefficients S
     letI := SheafOfModules.monoidalCategory R
     letI := SheafOfModules.monoidalCategory S
-    ∃ (am : F ⊣ SheafOfModules.scalarRestriction a)
+    ∃ (am : F ⊣ SheafOfModules.restrictScalars.{max c v r}
+        ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).map a))
       (e : ∀ M N : ScalarMod.{c, v, r} R, F.obj (M ⊗ N) ≅ F.obj M ⊗ F.obj N),
       (∀ {M M' N N' : ScalarMod.{c, v, r} R} (f : M ⟶ M') (g : N ⟶ N'),
         F.map (f ⊗ₘ g) ≫ (e M' N').hom =
