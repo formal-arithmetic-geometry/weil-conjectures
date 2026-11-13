@@ -49,7 +49,7 @@ private theorem coordinate_comparison_square
         dsimp only [b₀, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
         simp only [Functor.map_comp, Category.assoc]
         rw [← Category.assoc (F.map c), k.hom.naturality c]
-        rfl
+        simp only [Functor.comp_map, Category.assoc]
       _ = β ≫ k.hom.app X ≫ T.map (R.map (j ≫ cT)) := by rw [hm]
       _ = (β ≫ k.hom.app X ≫ T.map (R.map j)) ≫ T.map (R.map cT) := by
         simp only [Functor.map_comp, Category.assoc]
@@ -136,9 +136,6 @@ theorem canonicalModuleBaseChange_iso_comparison_ab
   intro fA gA E T
   let p := pullback.fst fA gA
   let q := pullback.snd fA gA
-  let M := (DerivedCategory.singleFunctor
-    (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) 0).obj
-      ((Scheme.Modules.tensorPullback g').obj G)
   let S0 := DerivedCategory.singleFunctor
     (SheafOfModules.{u} (moduleRings (pullback fA gA).toRingedSpace)) 0
   let R := schemeDerivedDirectImage q

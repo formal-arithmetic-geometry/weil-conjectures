@@ -42,7 +42,8 @@ private theorem comparison_square_of_target_automorphisms
   have hh : (R.map (β ≫ F.map c₁) ≫ A.hom) ≫ (A.symm ≪≫ b ≪≫ B).hom =
       a.hom ≫ ((β₀ ≫ F₀.map c₂) ≫ B.hom) := by
     simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc, Iso.hom_inv_id_assoc]
-    rw [← Category.assoc, h, Category.assoc]
+    rw [← Category.assoc, h]
+    simp only [Category.assoc]
   simpa only [A, B, Functor.map_comp, Functor.mapIso_hom, Category.assoc] using hh
 
 private theorem pinned_comparison_isComparison
