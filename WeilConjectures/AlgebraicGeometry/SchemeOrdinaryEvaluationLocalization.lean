@@ -66,7 +66,6 @@ theorem schemeDerivedTensorHomEquiv_naturality (Y : Scheme.{u})
     (Classical.choose_spec (exists_canonicalDerivedTensorHom Y)).1
       K K' L L' M M' a b c g
 
-set_option profiler true in
 private theorem uncurry_representative (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (A P M : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
@@ -134,7 +133,6 @@ private theorem evaluation_transport {C : Type*} [Category* C] [MonoidalCategory
   simp only [Category.assoc]
   simp only [Iso.inv_hom_id, Category.comp_id]
 
-set_option profiler true in
 /-- Localizing the componentwise ordinary evaluation gives its uncurried derived map.
 No Hom-exactness, K-flatness, or invertibility of the comparison maps is asserted.
 Source: Stacks Project, Tags 08DJ, 08DM and 08DQ; representative calculation.
