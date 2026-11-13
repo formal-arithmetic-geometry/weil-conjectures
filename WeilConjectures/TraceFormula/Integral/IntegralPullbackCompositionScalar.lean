@@ -137,21 +137,21 @@ private theorem scalar_composition_paste_mapped
     {ghk : E5 ⟶ F1} {aL2 : F1 ⟶ M3}
     {y1 : O0 ⟶ O4} {bLhk : O4 ⟶ F0} {q : F0 ⟶ F1} {aL1 : F0 ⟶ M2}
     {y2 : O4 ⟶ O3}
-    (N1 : x3 ≫ t1 = b1 ≫ sk)
-    (IIIk : sk ≫ bLk ≫ pVk = pW ≫ HWbEk ≫ gk)
-    (IIIh : x2 ≫ b1 ≫ pW = pZ1 ≫ bEh ≫ g1)
-    (Ng : UEhbEk ≫ g2 = g1 ≫ HWbEk)
-    (Np : x1 ≫ pZ1 = pZ0 ≫ cEr)
-    (CE : cEr ≫ bEh ≫ UEhbEk = bEhk ≫ aE)
+    (hN1 : x3 ≫ t1 = b1 ≫ sk)
+    (hIIIk : sk ≫ bLk ≫ pVk = pW ≫ HWbEk ≫ gk)
+    (hIIIh : x2 ≫ b1 ≫ pW = pZ1 ≫ bEh ≫ g1)
+    (hNg : UEhbEk ≫ g2 = g1 ≫ HWbEk)
+    (hNp : x1 ≫ pZ1 = pZ0 ≫ cEr)
+    (hCE : cEr ≫ bEh ≫ UEhbEk = bEhk ≫ aE)
     {aE' : E5 ⟶ E4} {aL2' : F1 ⟶ M3}
-    (mix : aE' ≫ g2 ≫ gk = ghk ≫ aL2') (eE : aE = aE') (eL : aL2 = aL2')
-    (IIIhk : y1 ≫ bLhk ≫ q = pZ0 ≫ bEhk ≫ ghk)
-    (Na : q ≫ aL2 = aL1 ≫ pVk)
-    (CL : y2 ≫ t1 ≫ bLk = bLhk ≫ aL1) :
+    (hMix : aE' ≫ g2 ≫ gk = ghk ≫ aL2') (hE : aE = aE') (hL : aL2 = aL2')
+    (hIIIhk : y1 ≫ bLhk ≫ q = pZ0 ≫ bEhk ≫ ghk)
+    (hNa : q ≫ aL2 = aL1 ≫ pVk)
+    (hCL : y2 ≫ t1 ≫ bLk = bLhk ≫ aL1) :
     x1 ≫ x2 ≫ x3 ≫ t1 ≫ bLk ≫ pVk = y1 ≫ y2 ≫ t1 ≫ bLk ≫ pVk := by
-  subst eE eL
-  rw [reassoc_of% N1, IIIk, reassoc_of% IIIh, ← reassoc_of% Ng, reassoc_of% Np,
-    reassoc_of% CE, mix, ← reassoc_of% IIIhk, Na, ← reassoc_of% CL]
+  subst hE hL
+  rw [reassoc_of% hN1, hIIIk, reassoc_of% hIIIh, ← reassoc_of% hNg, reassoc_of% hNp,
+    reassoc_of% hCE, hMix, ← reassoc_of% hIIIhk, hNa, ← reassoc_of% hCL]
 
 /-- The pasting calculation behind integralPullbackComposition_scalar, with all
 morphisms abstract. Source: elementary category theory. -/
@@ -309,9 +309,9 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
   have eE' := congrArg (integralCompositionFiniteScalar l E L ι Z).map eE
   exact scalar_composition_paste_mapped
     (D := finiteSystemDerived (integralSystemRings l L) (integralSystemTransition l L) Z)
-    (N1 := N1) (IIIk := IIIk') (IIIh := IIIh)
-    (Ng := Ng) (Np := Np) (CE := CE') (mix := mix) (eE := eE') (eL := eL)
-    (IIIhk := IIIhk) (Na := Na) (CL := CL)
+    (hN1 := N1) (hIIIk := IIIk') (hIIIh := IIIh)
+    (hNg := Ng) (hNp := Np) (hCE := CE') (hMix := mix) (hE := eE') (hL := eL)
+    (hIIIhk := IIIhk) (hNa := Na) (hCL := CL)
 
 end SystemScalar
 
