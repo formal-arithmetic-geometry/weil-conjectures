@@ -41,6 +41,28 @@ open CategoryTheory Limits MonoidalCategory MonObj
 
 open scoped CategoryTheory.Obj
 
+/-- A compatibility of units determines a factorization of the mate. -/
+private lemma pushHom_fac_of_unit_compatibility
+    {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
+    {F : A ⥤ C} {U : C ⥤ A} {G : B ⥤ D} {V : D ⥤ B}
+    (adjX : F ⊣ U) (adjY : G ⊣ V) (P : A ⥤ B) (P' : C ⥤ D)
+    (β : U ⋙ P ⟶ P' ⋙ V) {Z : A} {ZY : B} {W : C} {DY DE : D}
+    (u : ZY ⟶ P.obj Z) (cX : F.obj Z ⟶ W) (cY : G.obj ZY ⟶ DY)
+    (b : DY ⟶ DE) (r : DE ⟶ P'.obj W)
+    (h : u ≫ P.map (adjX.unit.app Z ≫ U.map cX) ≫ β.app W =
+      adjY.unit.app ZY ≫ V.map cY ≫ V.map b ≫ V.map r) :
+    G.map u ≫ ((mateEquiv adjX adjY).symm β).app Z ≫ P'.map cX = cY ≫ b ≫ r := by
+  apply (adjY.homEquiv _ _).injective
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  dsimp only [Functor.comp_obj]
+  rw [adjY.unit_naturality_assoc]
+  have hm := (unit_mateEquiv_symm adjX adjY (TwoSquare.mk _ _ _ _ β) Z).symm
+  rw [reassoc_of% hm]
+  have hn := β.naturality cX
+  dsimp only [Functor.comp_map] at hn
+  rw [← hn, ← Functor.map_comp_assoc]
+  exact h
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme DerivedCategory
@@ -138,36 +160,14 @@ lemma derivedPushHom_app_Qh_fac
       ((f)_*⟦Λ'⟧).rightDerivedFunctorUnit.app
         (((Mod.extendScalars (coefficientMap a X)).mapHomotopyCategory _).obj
           ((HomotopyCategory.quotient _ _).obj I)) := by
-  apply ((Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).homEquiv _ _
-    ).injective
-  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
-  dsimp only [Functor.comp_obj]
-  erw [(Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).unit_naturality_assoc
-    (((f)_*⟦Λ⟧).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj I))]
-  have hm : (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).unit.app
-        (((f)_*⟦Λ⟧).rightDerivedFunctor.obj (Qh.obj ((HomotopyCategory.quotient _ _).obj I))) ≫
-      (Mod.comap (coefficientMap a Y)).mapDerivedCategory.map
-        ((derivedPushHom a f).app (Qh.obj ((HomotopyCategory.quotient _ _).obj I))) =
-      ((f)_*⟦Λ⟧).rightDerivedFunctor.map
-        ((Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).unit.app
-          (Qh.obj ((HomotopyCategory.quotient _ _).obj I))) ≫
-        (derivedComapLowerStarIso a f).inv.app _ :=
-    (unit_mateEquiv_symm (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X))
-      (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y))
-      (TwoSquare.mk _ _ _ _ (derivedComapLowerStarIso a f).inv) _).symm
-  dsimp only [Functor.comp_obj]
-  have hm2 := reassoc_of% hm
-  rw [hm2]
-  have hn := (derivedComapLowerStarIso a f).inv.naturality
-    ((Mod.extendScalars (coefficientMap a X)).leftDerivedFunctorCounit.app
-      ((HomotopyCategory.quotient _ _).obj I))
-  dsimp only [Functor.comp_map] at hn
-  erw [← hn]
-  rw [← Functor.map_comp_assoc]
+  refine pushHom_fac_of_unit_compatibility
+    (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X))
+    (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y))
+    ((f)_*⟦Λ⟧).rightDerivedFunctor ((f)_*⟦Λ'⟧).rightDerivedFunctor
+    (derivedComapLowerStarIso a f).inv _ _ _ _ _ ?_
   erw [Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_Qh (coefficientMap a X)
     ((HomotopyCategory.quotient _ _).obj I)]
   rw [Functor.map_comp, Category.assoc]
-  clear hm hm2 hn
   erw [← ((f)_*⟦Λ⟧).rightDerivedFunctorUnit.naturality_assoc
     (((Mod.extendRestrictAdjunction (coefficientMap a X)).mapHomotopyCategory
       (ComplexShape.up ℤ)).unit.app ((HomotopyCategory.quotient _ _).obj I))]
