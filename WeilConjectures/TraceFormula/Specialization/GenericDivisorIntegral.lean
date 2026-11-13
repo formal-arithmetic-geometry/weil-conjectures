@@ -198,6 +198,29 @@ theorem isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicIntegers_of_res
     transport_mod_proofs k'
 
 set_option profiler true in
+omit [IsOpenImmersion ι] in
+/-- Specialize the two coefficient changes to the integral and rational coefficient rings. -/
+private lemma isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padic_transfer
+    [QuasiCompact M.j] [QuasiSeparated M.j]
+    (K₀ : DerivedCategory (Mod (Sheaf (ProEt.topology U) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) U)))
+    (n : ℤ) (hn : ((L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj
+      (D((o)_!open⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj K₀)).IsGE n)
+    (h : IsZero ((L((ι)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj
+      (L((e)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj
+        ((M.nearbyCycles (Profinite.padicIntegersRingObj ℓ E.1)).obj
+          (D((o)_!open⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj K₀))))) :
+    _ :=
+  isZero_upperStar_upperStar_nearbyCycles_lowerShriek_flat_composite
+    (padicIntegersRingObjToContinuousMapRingObj ℓ E)
+    (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) M o e ι K₀ n (by transport_mod_proofs hn)
+    (fun K n hn ↦ by
+      exact_mod_proofs isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E M.j K n)
+    (fun K n hn ↦ by
+      exact_mod_proofs isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE
+        ℓ E M.j K n) (by transport_mod_proofs h)
+
+set_option profiler true in
 -- Elaborating the statement compares the derived categories of the coefficient rings.
 omit [IsOpenImmersion ι] in
 /-- **Restricted nearby cycles of extensions by zero, from `𝒪_E` to `ℚ̄_ℓ`**: let `M` be a model
@@ -225,14 +248,8 @@ theorem isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicAlgCl_of_padicI
               ((L(Mod.extendScalars
                 (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E) U))).obj
                 K₀)))))) := by
-  have key := isZero_upperStar_upperStar_nearbyCycles_lowerShriek_flat_composite
-    (padicIntegersRingObjToContinuousMapRingObj ℓ E)
-    (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) M o e ι K₀ n hn
-    (fun K n hn ↦ by
-      exact_mod_proofs isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E M.j K n)
-    (fun K n hn ↦ by
-      exact_mod_proofs isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE
-        ℓ E M.j K n) h
+  have key := isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padic_transfer
+    E M o e ι K₀ n hn h
   transport_mod_proofs key
 
 end NearbyCyclesModel
@@ -298,9 +315,8 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_padicAlgCl
       (coefficientMap (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
         (overRestrict X I.support.compl).left))).obj N₀.obj) :=
     boundedConstructible_derivedExtendScalars_residueField _ ℓ E N₀.obj hN₀
-  have hcore := core hF'
-  have hU := hcore.choose_spec
-  refine ⟨hcore.choose, hU.1, ?_⟩
+  refine (core hF').elim fun U hU ↦ ?_
+  refine ⟨U, hU.1, ?_⟩
   have hU := hU.2
   -- the integral case, by derived Nakayama
   have hK := boundedConstructible_openImmersionLowerShriek_obj _ ℓ
@@ -313,15 +329,15 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_padicAlgCl
   have h₀ := isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicIntegers_of_residueField
     E (deformationModel X I k') (overRestrictι X I.support.compl).left
     (zeroSectionSpecialFibreMap X I k').left
-    (((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ hcore.choose).ι) N₀.obj
+    (((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ U).ι) N₀.obj
     (derivedCompleteIntegers_of_boundedConstructible hK) n hn' (by transport_mod_proofs hU)
   -- from `𝒪_E` to `ℚ̄_ℓ`
   have h₁ := isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicAlgCl_of_padicIntegers
     E (deformationModel X I k') (overRestrictι X I.support.compl).left
     (zeroSectionSpecialFibreMap X I k').left
-    (((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ hcore.choose).ι) N₀.obj n hn' h₀
+    (((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ U).ι) N₀.obj n hn' h₀
   refine h₁.of_iso ?_
-  exact (L((((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ hcore.choose).ι)^*⟦
+  exact (L((((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ U).ι)^*⟦
     Profinite.padicAlgClRingObj ℓ⟧)).mapIso
     ((L(((zeroSectionSpecialFibreMap X I k').left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).mapIso
       (((deformationModel X I k').nearbyCycles (Profinite.padicAlgClRingObj ℓ)).mapIso
