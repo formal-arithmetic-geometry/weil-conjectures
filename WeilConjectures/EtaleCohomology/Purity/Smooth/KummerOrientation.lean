@@ -380,7 +380,7 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_cohomology
   have hγ : shiftSupportedClass Λ ι 2 (kummerBoundary Λ t) =
       (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) jU).homEquiv _ _ α ≫ cs ≫
         w⟦(1 : ℤ)⟧' ≫ sa ≫ ss := by
-    simp only [shiftSupportedClass, kummerBoundary, α, cs, w, sa, ss, θj, κU, tU, L,
+    simp only [shiftSupportedClass, kummerBoundary, α, cs, w, sa, ss, θj, κU, tU, L, jU, U, ι,
       Category.assoc]
   let Rp := R((p)_*[ModuleCat.{u + 1} Λ])
   let H := _root_.DerivedCategory.homologyFunctor (Sheaf Y.smallEtaleTopology
