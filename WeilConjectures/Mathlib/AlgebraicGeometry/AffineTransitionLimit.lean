@@ -695,6 +695,7 @@ lemma exists_pow_mul_eq_zero_of_sV_eq_zero (l : Fin E.n) {y : Γ(E.X, E.V)}
   rw [map_zero, ← CommRingCat.comp_apply, E.res_app_eq_sV_res l, CommRingCat.comp_apply, hy,
     map_zero]
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- The defeq checks between `algebraMap`s of the two `Algebra` structures in scope and the
 -- structure sheaf restriction maps are expensive on the opens diagram of the approximation.
