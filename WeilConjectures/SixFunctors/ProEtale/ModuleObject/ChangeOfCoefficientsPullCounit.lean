@@ -84,7 +84,6 @@ lemma mapHomotopyCategoryCompIso_extendScalarsComp_comp_mapModUpperStarExtendSca
   erw [Mod.id_hom', Category.id_comp, Category.id_comp]
 
 set_option profiler true in
-set_option maxHeartbeats 4000000 in -- large composites of derived functors on sheaf categories
 /-- **(Pull) is the underived (Pull) modulo the counits**: on the image `Qh K` of an object of the
 homotopy category, `derivedUpperStarExtendScalarsIso a f` followed by the counits of `L(Ext_{a_Y})`
 and `Lf^*_Λ'` is the counit of `Lf^*_Λ`, followed by the counit of `L(Ext_{a_X})` and the
@@ -119,7 +118,7 @@ lemma derivedUpperStarExtendScalarsIso_hom_app_comp_counit
   have t2 := leftDerivedUpperStarIsoMapDerivedCategory_inv_app_comp_counit f Λ'
     (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K)
   dsimp only [Functor.comp_obj, Functor.comp_map] at t1 t2 ⊢
-  rw [← reassoc_of% t1]
+  simp only [← reassoc_of% t1]
   simp only [reassoc_of% t2]
   have t3 := Functor.leftDerivedFunctorCompMapDerivedCategoryRightIso_hom_app_comp_counit
     (Mod.extendScalars (coefficientMap a Y)) (f)^*⟦Λ'⟧ K
@@ -142,14 +141,13 @@ lemma derivedUpperStarExtendScalarsIso_hom_app_comp_counit
     (Mod.extendScalars (condensedPullbackHom Λ f)) K
   dsimp only [Functor.comp_obj, Functor.comp_map] at t6 t7 t8
   simp only [← reassoc_of% t6, reassoc_of% t7]
-  rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app] at t8
-  erw [CategoryTheory.Functor.map_id, Category.comp_id] at t8
+  simp only [Functor.mapHomotopyCategoryCompIso_refl_hom_app,
+    CategoryTheory.Functor.map_id, Category.comp_id] at t8
   have t9 := congrArg (L(Mod.extendScalars (coefficientMap a X))).map t8
   simp only [Functor.map_comp] at t9
   simp only [leftDerivedUpperStarIso, reassoc_of% t9,
     Functor.mapHomotopyCategoryCompIso_refl_hom_app]
-  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.id_comp,
-    Category.id_comp]
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
   have t10 :=
     mapHomotopyCategoryCompIso_extendScalarsComp_comp_mapModUpperStarExtendScalarsIso a f K
   simp only [← DerivedCategory.Qh.map_comp, t10]
