@@ -167,19 +167,31 @@ lemma upperStar_mapHomotopyCategory_unit_comp_comapUpperStarIso_inv
   exact h
 
 set_option trace.profiler true in
-/-- **(Pull) is compatible with the units of `Ext ⊣ Res`**, on the image of a K-flat complex. -/
-lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
-    (P : CochainComplex (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ)
-    (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P) :
-    L((f)^*⟦Λ⟧).map ((Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).unit.app
-        (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) ≫
+/-- The unit compatibility after the counit comparison, without a K-flatness assumption. -/
+private lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh_counit
+    (K : HomotopyCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+      (ComplexShape.up ℤ)) :
+    let c := L((f)^*⟦Λ'⟧).map
+      ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit.app K) ≫
+      ((f)^*⟦Λ'⟧).leftDerivedFunctorCounit.app
+        (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≫
+      DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
+        (Iso.refl (Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧))
+          (ComplexShape.up ℤ)).hom.app K)
+    let d := (Mod.comap (coefficientMap a X)).mapDerivedCategoryFactorsh.hom.app
+      (((Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧).mapHomotopyCategory
+        (ComplexShape.up ℤ)).obj K)
+    (L((f)^*⟦Λ⟧).map
+        ((Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).unit.app
+          (DerivedCategory.Qh.obj K)) ≫
       (derivedComapLeftDerivedUpperStarIso a f).hom.app
-        (L(Mod.extendScalars (coefficientMap a Y)).obj
-          (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) =
-    (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).unit.app
-        (L((f)^*⟦Λ⟧).obj (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) ≫
-      D(Mod.comap (coefficientMap a X)).map ((derivedUpperStarExtendScalarsIso a f).hom.app
-        (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) := by
+        (L(Mod.extendScalars (coefficientMap a Y)).obj (DerivedCategory.Qh.obj K))) ≫
+      D(Mod.comap (coefficientMap a X)).map c ≫ d =
+    ((Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).unit.app
+        (L((f)^*⟦Λ⟧).obj (DerivedCategory.Qh.obj K)) ≫
+      D(Mod.comap (coefficientMap a X)).map
+        ((derivedUpperStarExtendScalarsIso a f).hom.app (DerivedCategory.Qh.obj K))) ≫
+      D(Mod.comap (coefficientMap a X)).map c ≫ d := by
   have := hasTensor₄ObjExt_mod Y (condensedRingObj Λ Y)
   have := hasGoodTensor₁₂Tensor_mod Y (condensedRingObj Λ Y)
   have := hasGoodTensorTensor₂₃_mod Y (condensedRingObj Λ Y)
@@ -198,35 +210,7 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
   have := hasColimitsOfShape_int_mod X (condensedRingObj Λ X)
   have := preservesColimitsOfShape_int_curriedTensor_obj_mod X (condensedRingObj Λ X)
   have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod X (condensedRingObj Λ X)
-  let K := (HomotopyCategory.quotient
-    (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (.up ℤ)).obj P
-  have := (Mod.extendScalars (coefficientMap a Y)).isIso_leftDerivedFunctorCounit_app_of_kFlat P hP
-  have : IsIso ((f)^*⟦Λ'⟧.leftDerivedFunctorCounit) := inferInstance
-  have i1 : IsIso (L((f)^*⟦Λ'⟧).map
-      ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit.app K)) := inferInstance
-  have i2 : IsIso (((f)^*⟦Λ'⟧).leftDerivedFunctorCounit.app
-      (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K)) :=
-    inferInstance
-  have i3 : IsIso (DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
-      (Iso.refl (Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧))
-        (ComplexShape.up ℤ)).hom.app K)) := inferInstance
-  have i4 : IsIso (L((f)^*⟦Λ'⟧).map
-      ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit.app K) ≫
-      ((f)^*⟦Λ'⟧).leftDerivedFunctorCounit.app
-        (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≫
-      DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
-        (Iso.refl (Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧))
-          (ComplexShape.up ℤ)).hom.app K)) := inferInstance
-  refine (cancel_mono (D(Mod.comap (coefficientMap a X)).map
-    (L((f)^*⟦Λ'⟧).map ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit.app K) ≫
-      ((f)^*⟦Λ'⟧).leftDerivedFunctorCounit.app
-        (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≫
-      DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
-        (Iso.refl (Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧))
-          (ComplexShape.up ℤ)).hom.app K)))).1 ?_
-  refine (cancel_mono ((Mod.comap (coefficientMap a X)).mapDerivedCategoryFactorsh.hom.app
-      (((Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧).mapHomotopyCategory
-        (ComplexShape.up ℤ)).obj K))).1 ?_
+  dsimp only
   have r1 := derivedUpperStarExtendScalarsIso_hom_app_comp_counit a f K
   have r2 := (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).unit.naturality
     (((f)^*⟦Λ⟧).leftDerivedFunctorCounit.app K)
@@ -265,6 +249,56 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
   simp only [← Functor.map_comp_assoc, Category.assoc, r5, reassoc_of% e1]
   simp only [← DerivedCategory.Qh.map_comp, Category.assoc]
   simp only [upperStar_mapHomotopyCategory_unit_comp_comapUpperStarIso_inv]
+
+set_option trace.profiler true in
+/-- **(Pull) is compatible with the units of `Ext ⊣ Res`**, on the image of a K-flat complex. -/
+lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
+    (P : CochainComplex (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ)
+    (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P) :
+    L((f)^*⟦Λ⟧).map ((Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).unit.app
+        (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) ≫
+      (derivedComapLeftDerivedUpperStarIso a f).hom.app
+        (L(Mod.extendScalars (coefficientMap a Y)).obj
+          (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) =
+    (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).unit.app
+        (L((f)^*⟦Λ⟧).obj (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) ≫
+      D(Mod.comap (coefficientMap a X)).map ((derivedUpperStarExtendScalarsIso a f).hom.app
+        (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) := by
+  have := hasTensor₄ObjExt_mod Y (condensedRingObj Λ Y)
+  have := hasGoodTensor₁₂Tensor_mod Y (condensedRingObj Λ Y)
+  have := hasGoodTensorTensor₂₃_mod Y (condensedRingObj Λ Y)
+  have := hasColimitsOfShape_int_mod Y (condensedRingObj Λ Y)
+  have := preservesColimitsOfShape_int_curriedTensor_obj_mod Y (condensedRingObj Λ Y)
+  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod Y (condensedRingObj Λ Y)
+  have := hasTensor₄ObjExt_mod Y (condensedRingObj Λ' Y)
+  have := hasGoodTensor₁₂Tensor_mod Y (condensedRingObj Λ' Y)
+  have := hasGoodTensorTensor₂₃_mod Y (condensedRingObj Λ' Y)
+  have := hasColimitsOfShape_int_mod Y (condensedRingObj Λ' Y)
+  have := preservesColimitsOfShape_int_curriedTensor_obj_mod Y (condensedRingObj Λ' Y)
+  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod Y (condensedRingObj Λ' Y)
+  have := hasTensor₄ObjExt_mod X (condensedRingObj Λ X)
+  have := hasGoodTensor₁₂Tensor_mod X (condensedRingObj Λ X)
+  have := hasGoodTensorTensor₂₃_mod X (condensedRingObj Λ X)
+  have := hasColimitsOfShape_int_mod X (condensedRingObj Λ X)
+  have := preservesColimitsOfShape_int_curriedTensor_obj_mod X (condensedRingObj Λ X)
+  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod X (condensedRingObj Λ X)
+  let K := (HomotopyCategory.quotient
+    (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (.up ℤ)).obj P
+  have := (Mod.extendScalars (coefficientMap a Y)).isIso_leftDerivedFunctorCounit_app_of_kFlat P hP
+  have : IsIso ((f)^*⟦Λ'⟧.leftDerivedFunctorCounit) := inferInstance
+  let c := (L((f)^*⟦Λ'⟧)).mapIso
+      (asIso ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit.app K)) ≪≫
+    (asIso ((f)^*⟦Λ'⟧.leftDerivedFunctorCounit)).app
+      (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≪≫
+    DerivedCategory.Qh.mapIso ((Functor.mapHomotopyCategoryCompIso
+      (Iso.refl (Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧))
+        (ComplexShape.up ℤ)).app K)
+  apply (cancel_iso_hom_right _ _ ((D(Mod.comap (coefficientMap a X))).mapIso c)).1
+  apply (cancel_iso_hom_right _ _ ((Mod.comap (coefficientMap a X)).mapDerivedCategoryFactorsh.app
+    (((Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧).mapHomotopyCategory
+      (ComplexShape.up ℤ)).obj K))).1
+  simpa only [Category.assoc] using
+    upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh_counit a f K
 
 set_option trace.profiler true in
 /-- **(Pull) is compatible with the units of `Ext ⊣ Res`**: for `M ∈ D(Y_proét, Λ)`, the
