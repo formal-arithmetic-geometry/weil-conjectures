@@ -110,6 +110,28 @@ private theorem scalarPower_quotientProjection (a : A) (ha : a ∈ J) (n : ℕ) 
     (((ringedKoszulScalar O b) ^ (n + 1)).asHom.val.app V x) * 1 = 0
   rw [hp, map_mul, completedScalar_quotient_zero X J U a ha n V, mul_zero, zero_mul]
 
+/-- Normalized maps to single complexes are natural when the unit is invertible in degree zero. -/
+private theorem single_naturality_of_normalized_unit
+    {C : Type*} [Category C] [HasZeroMorphisms C] [HasZeroObject C]
+    {K L : CochainComplex C ℤ} {M N₁ N₂ : C}
+    (u : (HomologicalComplex.single C (.up ℤ) 0).obj M ⟶ K)
+    (v : (HomologicalComplex.single C (.up ℤ) 0).obj M ⟶ L)
+    (i : ((HomologicalComplex.single C (.up ℤ) 0).obj M).X 0 ≅ K.X 0)
+    (hi : i.hom = u.f 0) (f : K ⟶ L)
+    (p : L ⟶ (HomologicalComplex.single C (.up ℤ) 0).obj N₂)
+    (q : K ⟶ (HomologicalComplex.single C (.up ℤ) 0).obj N₁)
+    (g : N₁ ⟶ N₂) (a₁ : M ⟶ N₁) (a₂ : M ⟶ N₂)
+    (hf : u ≫ f = v)
+    (hp : v ≫ p = (HomologicalComplex.single C (.up ℤ) 0).map a₂)
+    (hq : u ≫ q = (HomologicalComplex.single C (.up ℤ) 0).map a₁)
+    (ha : a₁ ≫ g = a₂) :
+    f ≫ p = q ≫ (HomologicalComplex.single C (.up ℤ) 0).map g := by
+  apply HomologicalComplex.to_single_hom_ext
+  apply (Iso.cancel_iso_hom_left i _ _).1
+  rw [hi]
+  simp only [← HomologicalComplex.comp_f]
+  rw [← Category.assoc, hf, hp, ← Category.assoc, hq, ← Functor.map_comp, ha]
+
 attribute [local irreducible] completed homComplexFunctor
 
 set_option profiler true in
@@ -219,21 +241,15 @@ theorem adicResidue_koszul_coefficient_augmentation
           (adicResidueQuotientModuleStep X J U n) := by
       simp only [adicResidueQuotientCoefficientTower, Functor.ofOpSequence_map_homOfLE_succ, O]
     rw [hmap]
-    apply HomologicalComplex.to_single_hom_ext
     let u := HomologicalComplex.singleObjXSelf (.up ℤ) 0 _ ≪≫
       (z (n + 1)).symm ≪≫ (HomologicalComplex.eval (Mod O) (.up ℤ) 0).mapIso
         (d (n + 1))
-    apply (Iso.cancel_iso_hom_left u _ _).1
-    rw [show u.hom = (ringedKoszulDualUnit O r b (n + 1)).f 0 from
-      (hunit0 (n + 1)).symm]
-    simp only [← HomologicalComplex.comp_f]
-    rw [← Category.assoc, hunit_naturality, hnorm, ← Category.assoc, hnorm]
-    congr 1
-    change _ = (HomologicalComplex.single _ (.up ℤ) 0).map
-        (quotientProjection X J U (n + 1)) ≫
-      (HomologicalComplex.single _ (.up ℤ) 0).map (adicResidueQuotientModuleStep X J U n)
-    rw [← Functor.map_comp, quotientProjection_step]
-    rfl
+    exact single_naturality_of_normalized_unit (C := Mod O)
+      (ringedKoszulDualUnit O r b (n + 1)) (ringedKoszulDualUnit O r b n)
+      u (hunit0 (n + 1)).symm (T.map (homOfLE (Nat.le_succ n)).op) (e n) (e (n + 1))
+      (adicResidueQuotientModuleStep X J U n)
+      (quotientProjection X J U (n + 1)) (quotientProjection X J U n)
+      (hunit_naturality n) (hnorm n) (hnorm (n + 1)) (quotientProjection_step X J U n)
   exact ⟨NatTrans.ofOpSequence e hstep, hnorm⟩
 
 set_option hygiene false in
