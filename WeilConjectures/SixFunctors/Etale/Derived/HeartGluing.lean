@@ -401,6 +401,67 @@ lemma Etale.leftDerivedUpperStarComp_conj_comp {W P Y Z : Scheme.{u}} (f : W ⟶
   rw [a₂']
 
 set_option profiler true in
+/-- The comparison with degree-zero sheaves transports conjugation along a composite pullback. -/
+lemma Etale.leftDerivedUpperStarComp_map_conj {T S R : Scheme.{u}}
+    (g₁ : T ⟶ S) (g₂ : S ⟶ R) (g₁₂ : T ⟶ R) (hg : g₁₂ = g₁ ≫ g₂)
+    {K M : DerivedCategory (Sheaf R.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {F G : Sheaf R.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (k : (DerivedCategory.singleFunctor _ 0).obj F ⟶ K)
+    (m : M ⟶ (DerivedCategory.singleFunctor _ 0).obj G)
+    (δ : (L((g₂)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ (L((g₂)^*[_])).obj M)
+    (φ : (g₂)^*[ModuleCat.{u + 1} Λ].obj F ⟶ (g₂)^*[_].obj G)
+    (hφ : (DerivedCategory.singleFunctor _ 0).map φ =
+      ((g₂)^*[_]).singleFunctorCompLeftDerivedFunctorIso.inv.app F ≫
+        (L((g₂)^*[_])).map k ≫ δ ≫ (L((g₂)^*[_])).map m ≫
+          ((g₂)^*[_]).singleFunctorCompLeftDerivedFunctorIso.hom.app G) :
+    (DerivedCategory.singleFunctor _ 0).map
+      ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) g₁ g₂ g₁₂ hg).hom.app F ≫
+        (g₁)^*[_].map φ ≫ (Etale.upperStarComp _ g₁ g₂ g₁₂ hg).inv.app G) =
+      ((g₁₂)^*[_]).singleFunctorCompLeftDerivedFunctorIso.inv.app F ≫
+        (L((g₁₂)^*[_])).map k ≫
+          ((leftDerivedUpperStarComp _ g₁ g₂ g₁₂ hg).hom.app K ≫
+            (L((g₁)^*[_])).map δ ≫ (leftDerivedUpperStarComp _ g₁ g₂ g₁₂ hg).inv.app M) ≫
+          (L((g₁₂)^*[_])).map m ≫
+            ((g₁₂)^*[_]).singleFunctorCompLeftDerivedFunctorIso.hom.app G := by
+  let s := fun {Y Z : Scheme.{u}} (g : Y ⟶ Z) ↦
+    ((g)^*[ModuleCat.{u + 1} Λ]).singleFunctorCompLeftDerivedFunctorIso
+  have nK := (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) g₁ g₂ g₁₂ hg).hom.naturality k
+  have nM := (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) g₁ g₂ g₁₂ hg).inv.naturality m
+  have hg' : (DerivedCategory.singleFunctor _ 0).map ((g₁)^*[ModuleCat.{u + 1} Λ].map φ) =
+      (s g₁).inv.app _ ≫ (L((g₁)^*[ModuleCat.{u + 1} Λ])).map
+        ((DerivedCategory.singleFunctor _ 0).map φ) ≫ (s g₁).hom.app _ :=
+    (NatIso.naturality_1 (s g₁) φ).symm
+  have h₁ : ∀ Y, (DerivedCategory.singleFunctor _ 0).map
+      ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) g₁ g₂ g₁₂ hg).hom.app Y) =
+      (s g₁₂).inv.app Y ≫
+        (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) g₁ g₂ g₁₂ hg).hom.app _ ≫
+        (L((g₁)^*[ModuleCat.{u + 1} Λ])).map ((s g₂).hom.app Y) ≫ (s g₁).hom.app _ :=
+    fun Y ↦ by
+      rw [Etale.leftDerivedUpperStarComp_hom_app_singleFunctor_obj g₁ g₂ g₁₂ hg Y]
+      exact (Iso.inv_hom_id_app_assoc (s g₁₂) Y _).symm
+  have h₂ : (DerivedCategory.singleFunctor _ 0).map
+      ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) g₁ g₂ g₁₂ hg).inv.app G) =
+      (s g₁).inv.app _ ≫ (L((g₁)^*[ModuleCat.{u + 1} Λ])).map ((s g₂).inv.app G) ≫
+        (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) g₁ g₂ g₁₂ hg).inv.app _ ≫
+          (s g₁₂).hom.app G := by
+    rw [← cancel_epi ((DerivedCategory.singleFunctor _ 0).map
+      ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) g₁ g₂ g₁₂ hg).hom.app G)),
+      ← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, h₁ G]
+    simp [← Functor.map_comp_assoc]
+  rw [Functor.map_comp, Functor.map_comp, h₁ F, hg', h₂]
+  simp only [Functor.comp_map] at nK nM
+  have M₁ : (s g₂).hom.app F ≫ (DerivedCategory.singleFunctor _ 0).map φ ≫
+      (s g₂).inv.app G = (L(g₂^*[ModuleCat.{u + 1} Λ])).map k ≫ δ ≫
+        (L(g₂^*[ModuleCat.{u + 1} Λ])).map m := by
+    rw [hφ]
+    simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app,
+      Category.comp_id]
+  have M₂ := congrArg (L((g₁)^*[ModuleCat.{u + 1} Λ])).map M₁
+  simp only [Functor.map_comp] at M₂
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+  rw [reassoc_of% M₂, ← reassoc_of% nK, reassoc_of% nM]
+
+set_option profiler true in
 -- the gluing manipulates long composites of derived and sheaf-level isomorphisms
 theorem Etale.exists_hom_of_isOpenImmersion_cover {X : Scheme.{u}}
     {K M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -424,11 +485,7 @@ theorem Etale.exists_hom_of_isOpenImmersion_cover {X : Scheme.{u}}
       (f : A ⟶ B),
       (L((g)^*[ModuleCat.{u + 1} Λ])).map ((DerivedCategory.singleFunctor _ 0).map f) =
         (s g).hom.app A ≫ (DerivedCategory.singleFunctor _ 0).map ((g)^*[_].map f) ≫
-          (s g).inv.app B := fun {Y Z} g {A B} f ↦ by
-    rw [← cancel_mono ((s g).hom.app B), Category.assoc, Category.assoc, Iso.inv_hom_id_app,
-      ]
-    erw [Category.comp_id]
-    exact (s g).hom.naturality f
+          (s g).inv.app B := fun {Y Z} g {A B} f ↦ (NatIso.naturality_2 (s g) f).symm
   let φ := fun j ↦ (DerivedCategory.singleFunctor (Sheaf (V j).smallEtaleTopology
     (ModuleCat.{u + 1} Λ)) 0).preimage ((s (e j)).inv.app F ≫ (L((e j)^*[_])).map eK.inv ≫ δ j ≫
       (L((e j)^*[_])).map eM.hom ≫ (s (e j)).hom.app G)
@@ -452,41 +509,8 @@ theorem Etale.exists_hom_of_isOpenImmersion_cover {X : Scheme.{u}}
             (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) c (e i) w hc).inv.app M) ≫
           (L((w)^*[ModuleCat.{u + 1} Λ])).map eM.hom ≫ (s w).hom.app G := by
       intro i c hc
-      have nK := (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) c (e i) w hc).hom.naturality eK.inv
-      have nM := (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) c (e i) w hc).inv.naturality eM.hom
-      have hc' : (DerivedCategory.singleFunctor _ 0).map ((c)^*[ModuleCat.{u + 1} Λ].map (φ i)) =
-          (s c).inv.app _ ≫ (L((c)^*[ModuleCat.{u + 1} Λ])).map
-            ((DerivedCategory.singleFunctor _ 0).map (φ i)) ≫ (s c).hom.app _ := by
-        rw [hs]
-        simp only [Category.assoc, Iso.inv_hom_id_app, Iso.inv_hom_id_app_assoc]
-        erw [Category.comp_id]
-      have h₁ : ∀ Y, (DerivedCategory.singleFunctor _ 0).map
-          ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) c (e i) w hc).hom.app Y) =
-          (s w).inv.app Y ≫
-            (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) c (e i) w hc).hom.app _ ≫
-            (L((c)^*[ModuleCat.{u + 1} Λ])).map ((s (e i)).hom.app Y) ≫ (s c).hom.app _ :=
-        fun Y ↦ by
-          rw [Etale.leftDerivedUpperStarComp_hom_app_singleFunctor_obj c (e i) w hc Y]
-          exact (Iso.inv_hom_id_app_assoc (s w) Y _).symm
-      have h₂ : (DerivedCategory.singleFunctor _ 0).map
-          ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) c (e i) w hc).inv.app G) =
-          (s c).inv.app _ ≫ (L((c)^*[ModuleCat.{u + 1} Λ])).map ((s (e i)).inv.app G) ≫
-            (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) c (e i) w hc).inv.app _ ≫
-              (s w).hom.app G := by
-        rw [← cancel_epi ((DerivedCategory.singleFunctor _ 0).map
-          ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) c (e i) w hc).hom.app G)),
-          ← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, h₁ G]
-        simp [← Functor.map_comp_assoc]
-      rw [Functor.map_comp, Functor.map_comp, h₁ F, hc', h₂]
-      simp only [Functor.comp_map] at nK nM
-      have M₁ : (s (e i)).hom.app F ≫ (DerivedCategory.singleFunctor _ 0).map (φ i) ≫
-          (s (e i)).inv.app G = (L((e i)^*[ModuleCat.{u + 1} Λ])).map eK.inv ≫ δ i ≫
-            (L((e i)^*[ModuleCat.{u + 1} Λ])).map eM.hom := by
-        rw [hφ i]; simp
-      have M₂ := congrArg (L((c)^*[ModuleCat.{u + 1} Λ])).map M₁
-      simp only [Functor.map_comp] at M₂
-      simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
-      rw [reassoc_of% M₂, ← reassoc_of% nK, reassoc_of% nM]
+      exact Etale.leftDerivedUpperStarComp_map_conj c (e i) w hc eK.inv eM.hom
+        (δ i) (φ i) (hφ i)
     rw [key j a ha, key k b hb]
     have hab : a ≫ e j = b ≫ e k := ha.symm.trans hb
     let ℓ := pullback.lift a b hab
