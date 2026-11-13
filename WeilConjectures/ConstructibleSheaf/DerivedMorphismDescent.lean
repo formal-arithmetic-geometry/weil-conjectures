@@ -72,17 +72,16 @@ private theorem map_conjugate_of_commutative_square
   have h₂ : S₂.map (e.inv.app G) =
       b.inv.app _ ≫ Q.map (a.inv.app G) ≫ E.inv.app _ ≫ d.hom.app G := by
     rw [← cancel_epi (S₂.map (e.hom.app G)), ← Functor.map_comp,
-      Iso.hom_inv_id_app, Functor.map_id, h₁ G]
-    simp only [Category.assoc, Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc,
-      Iso.hom_inv_id_app, Functor.map_id, Category.id_comp]
+      Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, h₁ G]
+    simp [← Functor.map_comp_assoc]
   have nK := E.hom.naturality eK.inv
   have nM := E.inv.naturality eM.hom
   simp only [Functor.comp_map] at nK nM
   have hφ' : a.hom.app F ≫ S₁.map φ ≫ a.inv.app G =
       P.map eK.inv ≫ δ ≫ P.map eM.hom := by
     rw [hφ]
-    simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app,
-      Category.comp_id]
+    simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app]
+    erw [Category.comp_id]
   have hQ := congrArg Q.map hφ'
   simp only [Functor.map_comp] at hQ
   rw [Functor.map_comp, Functor.map_comp, h₁ F, hb, h₂]
