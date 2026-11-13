@@ -50,15 +50,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
 
-/-- Compose three derived pullbacks when the first two scheme maps have a specified composite. -/
-private noncomputable def leftDerivedUpperStarTripleCompOfEq
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {U V W T : Scheme.{u}} {p : U ⟶ V} {q : V ⟶ W} {r : U ⟶ W}
-    (h : p ≫ q = r) (s : W ⟶ T) :
-    L((s)^*⟦Λ⟧) ⋙ (L((q)^*⟦Λ⟧) ⋙ L((p)^*⟦Λ⟧)) ≅ L((r ≫ s)^*⟦Λ⟧) :=
-  Functor.isoWhiskerLeft L((s)^*⟦Λ⟧) (leftDerivedUpperStarCompOfEq Λ h).symm ≪≫
-    (leftDerivedUpperStarCompOfEq Λ (p := r) (q := s) rfl).symm
-
 variable {ℓ : ℕ} [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {k' : Type u}
   [Field k'] [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
   {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
@@ -72,97 +63,7 @@ set_option hygiene false in
 /-- The condensed field `𝔽̲_E`. -/
 local notation "𝔽" => Profinite.continuousMapRingObj (PadicAlgCl.integersResidueField ℓ E.1)
 
-omit [Fact (ringChar k').Prime] in
-/-- Descend a Künneth isomorphism along the change of trait, for arbitrary complexes on the
-coordinate slice and on the generic fibre of the second model. -/
-private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_change
-    (hM : M.IsTraitModelOver qM gM)
-    (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
-    (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
-    (hgen : φ₂.generic ≫ gN = φ₁.generic ≫ gM) {b : M.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
-    (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = qM) (D : GenericSliceTrait k')
-    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology
-      (pullback (pullback.snd b D.toAffineLine) (Spec.map (CommRingCat.ofHom D.a)))) Ab.{u + 1})
-      (condensedRingObj 𝔽
-        (pullback (pullback.snd b D.toAffineLine) (Spec.map (CommRingCat.ofHom D.a)))))}
-    (hA : DerivedCategory.plusEtaleOrigin
-      (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl.integersResidueField ℓ E.1)))
-      (pullback (pullback.snd b D.toAffineLine) (Spec.map (CommRingCat.ofHom D.a)))
-      ((finiteCoefficientDerivedEquivalence
-        (pullback (pullback.snd b D.toAffineLine) (Spec.map (CommRingCat.ofHom D.a)))
-        (PadicAlgCl.integersResidueField ℓ E.1)).functor.obj A))
-    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology N.generic) Ab.{u + 1})
-      (condensedRingObj 𝔽 N.generic))}
-    (hB : DerivedCategory.plusEtaleOrigin
-      (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl.integersResidueField ℓ E.1))) N.generic
-      ((finiteCoefficientDerivedEquivalence N.generic
-        (PadicAlgCl.integersResidueField ℓ E.1)).functor.obj B))
-    (h : IsIso (kunnethMap 𝔽 (sliceFst hM hP hb).toGeneric
-      (sliceSnd hN hpb hP hgen hb).toGeneric
-      (L((coordinateSliceTraitChangeGeneric b D)^*⟦𝔽⟧).obj A)
-      (L(((baseChangeHom hN qN (Category.comp_id qN) (traitMap k' (traitSliceField k'))
-        (Category.comp_id _)).generic)^*⟦𝔽⟧).obj B))) :
-    IsIso (kunnethMap 𝔽 (coordinateSliceTraitMap φ₁ b D)
-      (coordinateSliceTraitSnd hP hb D (φ₂ := φ₂)) A B) := by
-  have hτM :=
-    isIso_pullbackExchange_coordinateSliceTraitChangeHom_residueField hM b hb D E hA
-  have hBP :=
-    ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_tensorObj_leftDerivedUpperStar
-      _ (Field.toIsField _) (coordinateSliceTraitMapGeneric φ₁ b D)
-      (coordinateSliceTraitGeneric hP (φ₁.total ≫ b) (comp_coordinate_fst hb) D ≫ φ₂.generic)
-      hA hB
-  have hτP :=
-    isIso_pullbackExchange_coordinateSliceTraitChangeHom_residueField hP (φ₁.total ≫ b)
-      (comp_coordinate_fst hb) D E hBP
-  have hτN := isIso_pullbackExchange_toGeneric_baseChangeHom_traitMap_residueField
-    (K := traitSliceField k') hN E hB
-  -- the square of Künneth maps along the changes of trait
-  have sq := isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange 𝔽
-    (coordinateSliceTraitMap φ₁ b D) (coordinateSliceTraitSnd hP hb D (φ₂ := φ₂))
-    (sliceFst hM hP hb).toGeneric (sliceSnd hN hpb hP hgen hb).toGeneric
-    (coordinateSliceTraitChangeHom hM b hb D)
-    ((baseChangeHom hN qN (Category.comp_id qN) (traitMap k' (traitSliceField k'))
-      (Category.comp_id _)).toGeneric)
-    (coordinateSliceTraitChangeHom hP (φ₁.total ≫ b) (comp_coordinate_fst hb) D)
-    (sliceFst_total_comp_coordinateSliceTraitChangeTotal hM hP hb D)
-    (sliceFst_toGeneric_generic_comp_coordinateSliceTraitChangeHom_generic hM hP hb D)
-    (sliceSnd_total_comp_baseChangeHom_total hN hpb hP hgen hb D)
-    (sliceSnd_toGeneric_generic_comp_baseChangeHom_generic hN hpb hP hgen hb D)
-    (sliceFst_generic_comp_coordinateSliceTraitChangeGeneric hM hP hb D)
-    (sliceFst_special_comp_coordinateSliceTraitChangeSpecial D)
-    (sliceSnd_generic_comp_baseChangeHom_generic hN hpb hP hgen hb D)
-    (sliceSnd_special_comp_baseChangeSpecialMap hN hpb hP hb D)
-    A B hτM hτN ?productExchange (𝟭 _)
-  case productExchange =>
-    run_tac do
-      let ctx ← Lean.getLCtx
-      let some decl := ctx.findFromUserName? `hτP | Lean.throwError "missing local"
-      let target ← (← Lean.Elab.Tactic.getMainGoal).getType
-      let head (e : Lean.Expr) : String :=
-        match e.getAppFn with
-        | .const n _ => n.toString
-        | .fvar f => s!"fvar {f.name}"
-        | .lam .. => "lambda"
-        | .forallE .. => "forall"
-        | .proj n i _ => s!"proj {n} {i}"
-        | _ => "other"
-      let rec walk (fuel : Nat) (path : String) (a b : Lean.Expr) : Lean.MetaM Unit := do
-        if a == b then return
-        if fuel == 0 || a.getAppFn != b.getAppFn || a.getAppNumArgs != b.getAppNumArgs then
-          IO.FS.withFile "/tmp/PH468-exchange" .append fun out ↦
-            out.putStrLn s!"{path}: {head a}({a.getAppNumArgs}) / {head b}({b.getAppNumArgs})"
-        else
-          let aa := a.getAppArgs
-          let bb := b.getAppArgs
-          for i in [:aa.size] do
-            walk (fuel - 1) s!"{path}.{i}" aa[i]! bb[i]!
-      IO.FS.writeFile "/tmp/PH468-exchange" "diff\n"
-      walk 10 "root" decl.type target
-    exact hτP
-
-  refine isIso_of_isIso_map_coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D 𝔽 _ ?_
-  exact sq.2 h
-
+set_option maxHeartbeats 4000000 in
 -- the Künneth maps of the two product configurations are large terms
 omit [Fact (ringChar k').Prime] in
 /-- **From the geometric slice to the slice over a generic slice trait** (SGA 4½,
@@ -192,47 +93,71 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
       (coordinateSliceTraitSnd hP hb D (φ₂ := φ₂))
       ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A))
       ((L((N.ε)^*⟦𝔽⟧)).obj B)) := by
-  -- Infer the complex from its étale-origin proof to reuse the derived-functor instances.
-  have hAS :=
+  have hAS : DerivedCategory.plusEtaleOrigin
+      (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl.integersResidueField ℓ E.1)))
+      (pullback (pullback.snd b D.toAffineLine) (Spec.map (CommRingCat.ofHom D.a)))
+      ((finiteCoefficientDerivedEquivalence
+        (pullback (pullback.snd b D.toAffineLine) (Spec.map (CommRingCat.ofHom D.a)))
+        (PadicAlgCl.integersResidueField ℓ E.1)).functor.obj
+          ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A))) :=
     ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
       _ (coordinateSliceTraitGeneric hM b hb D) hA
-  refine isIso_kunnethMap_coordinateSliceTrait_of_isIso_change E hM hN hpb hP hgen hb D
-    hAS hB ?_
-  have h₀ := (isIso_kunnethMap_iff_toGeneric 𝔽
-    (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb) A B).1 h
-  -- Compose the natural isomorphisms before evaluating them at `A`.
-  have eA := leftDerivedUpperStarTripleCompOfEq 𝔽
-    (coordinateSliceTraitChangeGeneric_comp hM b hb D) M.ε
-  have eB := (leftDerivedUpperStarCompOfEq 𝔽 (p := (baseChangeHom hN qN (Category.comp_id qN)
-    (traitMap k' (traitSliceField k')) (Category.comp_id _)).generic) (q := N.ε) rfl).symm
-  have result := isIso_kunnethMap_of_iso 𝔽
+  have hτM : IsIso (((coordinateSliceTraitChangeHom hM b hb D).pullbackExchange 𝔽).app
+      ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A))) :=
+    isIso_pullbackExchange_coordinateSliceTraitChangeHom_residueField hM b hb D E hAS
+  have hBP : DerivedCategory.plusEtaleOrigin
+      (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl.integersResidueField ℓ E.1)))
+      (pullback (pullback.snd (φ₁.total ≫ b) D.toAffineLine) (Spec.map (CommRingCat.ofHom D.a)))
+      ((finiteCoefficientDerivedEquivalence
+        (pullback (pullback.snd (φ₁.total ≫ b) D.toAffineLine) (Spec.map (CommRingCat.ofHom D.a)))
+        (PadicAlgCl.integersResidueField ℓ E.1)).functor.obj
+          ((L((coordinateSliceTraitMapGeneric φ₁ b D)^*⟦𝔽⟧)).obj
+            ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A)) ⊗
+          (L((coordinateSliceTraitGeneric hP (φ₁.total ≫ b) (comp_coordinate_fst hb) D ≫
+            φ₂.generic)^*⟦𝔽⟧)).obj ((L((N.ε)^*⟦𝔽⟧)).obj B))) :=
+    ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_tensorObj_leftDerivedUpperStar
+      _ (Field.toIsField _) _ _ hAS hB
+  have hτP : IsIso (((coordinateSliceTraitChangeHom hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
+      D).pullbackExchange 𝔽).app
+        ((L((coordinateSliceTraitMapGeneric φ₁ b D)^*⟦𝔽⟧)).obj
+            ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A)) ⊗
+          (L((coordinateSliceTraitGeneric hP (φ₁.total ≫ b) (comp_coordinate_fst hb) D ≫
+            φ₂.generic)^*⟦𝔽⟧)).obj ((L((N.ε)^*⟦𝔽⟧)).obj B))) :=
+    isIso_pullbackExchange_coordinateSliceTraitChangeHom_residueField hP (φ₁.total ≫ b)
+      (comp_coordinate_fst hb) D E hBP
+  have hτN : IsIso ((((baseChangeHom hN qN (Category.comp_id qN) (traitMap k' (traitSliceField k'))
+      (Category.comp_id _)).toGeneric).pullbackExchange 𝔽).app ((L((N.ε)^*⟦𝔽⟧)).obj B)) :=
+    isIso_pullbackExchange_toGeneric_baseChangeHom_traitMap_residueField hN E hB
+  -- the square of Künneth maps along the changes of trait
+  have sq := isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange 𝔽
+    (coordinateSliceTraitMap φ₁ b D) (coordinateSliceTraitSnd hP hb D (φ₂ := φ₂))
     (sliceFst hM hP hb).toGeneric (sliceSnd hN hpb hP hgen hb).toGeneric
-    (eA.app A) (eB.app B) h₀
-  run_tac do
-    let ctx ← Lean.getLCtx
-    let some decl := ctx.findFromUserName? `result | Lean.throwError "missing local"
-    let target ← (← Lean.Elab.Tactic.getMainGoal).getType
-    let head (e : Lean.Expr) : String :=
-      match e.getAppFn with
-      | .const n _ => n.toString
-      | .fvar f => s!"fvar {f.name}"
-      | .lam .. => "lambda"
-      | .forallE .. => "forall"
-      | .proj n i _ => s!"proj {n} {i}"
-      | _ => "other"
-    let rec walk (fuel : Nat) (path : String) (a b : Lean.Expr) : Lean.MetaM Unit := do
-      if a == b then return
-      if fuel == 0 || a.getAppFn != b.getAppFn || a.getAppNumArgs != b.getAppNumArgs then
-        IO.FS.withFile "/tmp/PH468-transport" .append fun out ↦
-          out.putStrLn s!"{path}: {head a}({a.getAppNumArgs}) / {head b}({b.getAppNumArgs})"
-      else
-        let aa := a.getAppArgs
-        let bb := b.getAppArgs
-        for i in [:aa.size] do
-          walk (fuel - 1) s!"{path}.{i}" aa[i]! bb[i]!
-    IO.FS.writeFile "/tmp/PH468-transport" "diff\n"
-    walk 10 "root" decl.type target
-  exact result
+    (coordinateSliceTraitChangeHom hM b hb D)
+    ((baseChangeHom hN qN (Category.comp_id qN) (traitMap k' (traitSliceField k'))
+      (Category.comp_id _)).toGeneric)
+    (coordinateSliceTraitChangeHom hP (φ₁.total ≫ b) (comp_coordinate_fst hb) D)
+    (sliceFst_total_comp_coordinateSliceTraitChangeTotal hM hP hb D)
+    (sliceFst_toGeneric_generic_comp_coordinateSliceTraitChangeHom_generic hM hP hb D)
+    (sliceSnd_total_comp_baseChangeHom_total hN hpb hP hgen hb D)
+    (sliceSnd_toGeneric_generic_comp_baseChangeHom_generic hN hpb hP hgen hb D)
+    (sliceFst_generic_comp_coordinateSliceTraitChangeGeneric hM hP hb D)
+    (sliceFst_special_comp_coordinateSliceTraitChangeSpecial D)
+    (sliceSnd_generic_comp_baseChangeHom_generic hN hpb hP hgen hb D)
+    (sliceSnd_special_comp_baseChangeSpecialMap hN hpb hP hb D)
+    ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A))
+    ((L((N.ε)^*⟦𝔽⟧)).obj B) hτM hτN hτP (𝟭 _)
+  refine isIso_of_isIso_map_coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D 𝔽 _ ?_
+  refine sq.2 ?_
+  have h₀ := (isIso_kunnethMap_iff_toGeneric 𝔽 _ _ A B).1 h
+  exact isIso_kunnethMap_of_iso 𝔽 _ _
+    (((leftDerivedUpperStarCompOfEq 𝔽 (coordinateSliceTraitChangeGeneric_comp hM b hb D)).app
+      ((L((M.ε)^*⟦𝔽⟧)).obj A)).symm ≪≫
+      ((leftDerivedUpperStarCompOfEq 𝔽
+        (p := (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
+          (traitSlice_over (traitSliceCoord k'))).generic) (q := M.ε) rfl).app A).symm)
+    ((leftDerivedUpperStarCompOfEq 𝔽 (p := (baseChangeHom hN qN (Category.comp_id qN)
+      (traitMap k' (traitSliceField k')) (Category.comp_id _)).generic) (q := N.ε) rfl).app B).symm
+    h₀
 -- the statement and the transport along `τ_s ≫ σ_s` involve large derived pullbacks
 /-- **The generic-slicing step modulo `ϖ`** (blueprint `sk-prop-tf-nearby-external-kunneth`,
 identification (2) and projection formula (3), coefficients `𝔽_E`): if the Künneth map of the
