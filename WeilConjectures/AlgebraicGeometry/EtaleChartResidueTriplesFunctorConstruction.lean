@@ -100,6 +100,7 @@ private lemma affine_triple_properties (A : CommRingCat.{v}) (p : Spec A)
     simpa only [Spec.map_comp, Category.assoc] using
       (congrArg (fun f ↦ f ≫ Spec.map ((ΓSpecIso A).inv ≫ g.appTop)) hp).trans hy'
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- The two nested full subcategories and induced triple category require substantial
 -- definitional equality checking when assembling the functor and its ring isomorphism.

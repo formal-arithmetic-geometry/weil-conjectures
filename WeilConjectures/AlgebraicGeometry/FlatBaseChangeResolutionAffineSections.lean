@@ -32,6 +32,7 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 
+set_option trace.profiler true in
 set_option maxHeartbeats 500000 in
 -- Comparing the resolution and tensor cohomology interfaces needs extra elaboration steps.
 /-- On affine opens W and V with g(W) contained in V, bijectivity of the actual
