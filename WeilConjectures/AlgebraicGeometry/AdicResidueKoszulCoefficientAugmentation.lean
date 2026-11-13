@@ -135,7 +135,8 @@ private theorem single_naturality_of_normalized_unit
 attribute [local irreducible] completed homComplexFunctor
 
 set_option profiler true in
-/-- Quotient maps annihilating the Koszul powers give a normalized augmentation of the dual tower. -/
+/-- Quotient maps annihilating the Koszul powers give a normalized augmentation
+of the dual tower. -/
 private theorem ringedKoszulDualTower_quotient_augmentation
     {C : Type u} [SmallCategory C] {S : GrothendieckTopology C}
     (O : Sheaf S CommRingCat.{u}) (r : ℕ)
@@ -194,8 +195,6 @@ private theorem ringedKoszulDualTower_quotient_augmentation
         (hu n).symm
   have hnorm (n : ℕ) : ringedKoszulDualUnit O r b n ≫ e n =
       (HomologicalComplex.single (Mod O) (.up ℤ) 0).map (q n) := by
-    change ringedKoszulDualUnit O r b n ≫ e n =
-      (HomologicalComplex.single (Mod O) (.up ℤ) 0).map (q n)
     apply HomologicalComplex.from_single_hom_ext
     dsimp only [HomologicalComplex.comp_f, e]
     rw [HomologicalComplex.mkHomToSingle_f, hunit0]
@@ -233,6 +232,7 @@ private theorem ringedKoszulDualTower_quotient_augmentation
       (hunit_naturality n) (hnorm n) (hnorm (n + 1)) (hq n)
   exact ⟨NatTrans.ofOpSequence e hstep, hnorm⟩
 
+set_option profiler true in
 /-- The coefficient augmentation exists before tensoring with any complex.
 In particular neither K-flatness nor Noetherianity is needed for this construction.
 
@@ -267,7 +267,7 @@ theorem adicResidue_koszul_coefficient_augmentation
     (completed (coefficientProEtaleModelTopology.{u, v} X) A J)
     (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A J)
       (a i)) U
-  refine @ringedKoszulDualTower_quotient_augmentation _ _ _ _ O r b
+  refine ringedKoszulDualTower_quotient_augmentation O r b
     (adicResidueQuotientModule X J U) (adicResidueQuotientModuleStep X J U)
     (quotientProjection X J U) (quotientProjection_step X J U) ?_
   intro n i
