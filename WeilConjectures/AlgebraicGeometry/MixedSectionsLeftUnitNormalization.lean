@@ -107,6 +107,18 @@ private theorem generic_first_layer
   simpa only [Category.assoc] using hfinish
 
 
+-- Paste the component equations without comparing entire derived functors.
+private theorem mixedSections_firstLayerPaste {C D : Type*} [Category C] [Category D]
+    (H : C ⥤ D) {A B C₀ E : C} {T V W : D}
+    (s : T ⟶ H.obj A) (a : A ⟶ B) (b : B ⟶ C₀) (v : A ⟶ E) (w : E ⟶ C₀)
+    (c : H.obj C₀ ⟶ V) (c₀ : H.obj E ⟶ W) (t : W ⟶ V) (d : T ⟶ W)
+    (he : a ≫ b = v ≫ w) (hn : H.map w ≫ c = c₀ ≫ t)
+    (hg : s ≫ H.map v ≫ c₀ = d) :
+    (s ≫ H.map a ≫ H.map b) ≫ c = d ≫ t := by
+  simp only [Category.assoc]
+  rw [← H.map_comp_assoc, he, H.map_comp, Category.assoc, hn]
+  simpa only [Category.assoc] using congrArg (fun z ↦ z ≫ t) hg
+
 private theorem finish_unit_paste {C D : Type*} [Category C] [Category D]
     (S : C ⥤ D) {A : D} {B E F G J : C} {T : D}
     (p : A ⟶ T) (c : T ⟶ S.obj F) (b : A ⟶ S.obj B)
@@ -153,7 +165,7 @@ private theorem mixedSections_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   erw [Iso.refl_symm, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at h
   exact h
 
-set_option trace.profiler true in
+set_option profiler true in
 -- The statement expands sheaf, scalar, and localization instances.
 /-- The left path becomes the iterated scalar-factor path before any unit cancellation.
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W; the pinned-unit calculation
@@ -214,13 +226,9 @@ theorem mixedSections_left_unit_normalization
         (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› Z)
       f.toLRSHom.toShHom g.toLRSHom.toShHom)) K
   have hg₀ := mixedSections_unit g ((Df.mapHomotopyCategory (.up ℤ)).obj K)
-  have hA : DerivedCategory.Qh.obj ((HZ.mapHomotopyCategory (.up ℤ)).obj
-        ((Dg.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K))) =
-      (Sg.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).obj
-        ((HY.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K)) := by
-    rfl
-  have hp := generic_first_layer Df Dg Dfg HY HZ Sg (by rfl) e
-    (mixedGlobalSectionsDirectImageIso g) K (heq_of_eq he) hA (heq_of_eq hg₀)
+  have hn := (mixedGlobalSectionsDirectImageIso g).hom.naturality
+    (Df.rightDerivedFunctorUnit.app K)
+  dsimp only [Functor.comp_map] at hn
   have hg : p ≫ (mixedGlobalSectionsDirectImageIso g).hom.app
         ((schemeDerivedDirectImage f).obj F) =
       Sg.mapDerivedCategoryFactorsh.inv.app
@@ -229,10 +237,12 @@ theorem mixedSections_left_unit_normalization
         (HY.rightDerivedFunctorUnit.app ((Df.mapHomotopyCategory (.up ℤ)).obj K)) ≫
       (schemeGlobalScalarRestriction g).map
         ((schemeDerivedGlobalSections Y).map (Df.rightDerivedFunctorUnit.app K)) := by
-    apply eq_of_heq
-    dsimp only [p, F, HY, HZ, Df, Dfg, Sg, schemeDerivedGlobalSections,
-      schemeGlobalScalarRestriction, schemeDerivedDirectImage,
-      RingedSpace.derivedModuleDirectImage] at hp ⊢
+    have hp := mixedSections_firstLayerPaste (schemeDerivedGlobalSections Z)
+      (HZ.rightDerivedFunctorUnit.app ((Dfg.mapHomotopyCategory (.up ℤ)).obj K))
+      (Dfg.rightDerivedFunctorUnit.app K) (e.inv.app F)
+      (Dg.rightDerivedFunctorUnit.app ((Df.mapHomotopyCategory (.up ℤ)).obj K))
+      ((schemeDerivedDirectImage g).map (Df.rightDerivedFunctorUnit.app K))
+      _ _ _ _ he hn hg₀
     simpa only [Category.assoc] using hp
   have hf := mixedSections_unit f K
   exact finish_unit_paste (schemeGlobalScalarRestriction g) p

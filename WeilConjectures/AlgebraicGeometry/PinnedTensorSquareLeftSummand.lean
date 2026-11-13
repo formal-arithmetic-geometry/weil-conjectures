@@ -50,11 +50,6 @@ local instance pinnedTensorSquareLeftSummandInstance4 (Y : Scheme.{u}) (M : Y.Mo
     ((curriedTensor Y.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj Y.sheaf M
 
-private local instance pinnedTensorSquareLeftSummandHasMapBifunctor (Y : Scheme.{u})
-    (P Q : CochainComplex Y.Modules ℤ) :
-    HomologicalComplex.HasMapBifunctor P Q (curriedTensor Y.Modules) (.up ℤ) :=
-  inferInstance
-
 -- Keep the categorical chase independent of the stalk and total-complex definitions.
 private theorem summand_chase {C : Type*} [Category C]
     {A B C₀ D E F K B₀ D₀ E₀ F₀ H I J : C}
@@ -82,7 +77,7 @@ private theorem summand_chase {C : Type*} [Category C]
   simp only [Category.assoc]
   simpa only [Category.assoc] using congrArg (fun z ↦ z ≫ l ≫ j) hm
 
-set_option trace.profiler true in
+set_option profiler true in
 -- The component transports elaborate several nested tensor functors.
 /-- Pullback route on one tensor summand, in explicit stalk coordinates.
 
@@ -175,6 +170,12 @@ theorem pinned_tensor_square_left_summand
     pinnedTensorSquareLeftSummandInstance3 X'
   let : ∀ M : X'.Modules, ((curriedTensor X'.Modules).obj M).PreservesZeroMorphisms :=
     pinnedTensorSquareLeftSummandInstance4 X'
+  let : ∀ (P Q : CochainComplex X.Modules ℤ),
+      HomologicalComplex.HasMapBifunctor P Q (curriedTensor X.Modules) (.up ℤ) :=
+    fun P Q ↦ inferInstance
+  let : ∀ (P Q : CochainComplex X'.Modules ℤ),
+      HomologicalComplex.HasMapBifunctor P Q (curriedTensor X'.Modules) (.up ℤ) :=
+    fun P Q ↦ inferInstance
   let T := RingedSpace.moduleStalkFunctor X.toRingedSpace (g' z)
   let D := RingedSpace.moduleStalkFunctor X'.toRingedSpace z
   let H := Scheme.Modules.tensorPullback g'

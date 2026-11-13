@@ -168,9 +168,11 @@ theorem exists_mixedAffineSections_extension_unit_normalization
   let adj := ModuleCat.extendRestrictScalarsAdj g.appTop.hom
   let t := DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).unit.app X) ≫
     R.mapDerivedCategoryFactors.inv.app ((E.mapHomologicalComplex (.up ℤ)).obj X)
-  have : IsIso ((lAdj.homEquiv _ _).symm t) :=
+  let k := (lAdj.homEquiv (DerivedCategory.Q.obj X)
+    (DerivedCategory.Q.obj ((E.mapHomologicalComplex (.up ℤ)).obj X))).symm t
+  have : IsIso k :=
     Adjunction.isIso_cochainTranspose_of_kFlat E R adj lAdj X hX
-  let a := (mixedGlobalExtension g).mapIso s ≪≫ asIso ((lAdj.homEquiv _ _).symm t)
+  let a := (mixedGlobalExtension g).mapIso s ≪≫ asIso k
   have ha : lAdj.unit.app Y ≫ R.mapDerivedCategory.map a.hom = s.hom ≫ t := by
     change lAdj.homEquiv _ _
       ((mixedGlobalExtension g).map s.hom ≫ (lAdj.homEquiv _ _).symm t) = _
@@ -187,6 +189,7 @@ theorem exists_mixedAffineSections_extension_unit_normalization
   erw [reassoc_of% ha]
   simp only [Iso.inv_hom_id_assoc]
   dsimp only [t]
+  rw [Category.assoc]
   erw [← R.mapDerivedCategoryFactors.inv.naturality]
   simp only [Functor.comp_map, Functor.map_comp, Category.assoc]
 
