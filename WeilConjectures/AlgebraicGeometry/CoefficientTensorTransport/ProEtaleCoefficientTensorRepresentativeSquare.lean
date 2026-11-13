@@ -31,8 +31,34 @@ attribute [local irreducible] Functor.mapDerivedCategory
   pullback SheafOfModules.monoidalCategory proEtaleCanonicalTensorComparison
   proEtaleTensorPullbackTotalIso
 
-set_option maxHeartbeats 800000 in
--- Conversion between the specified tensor totalizations uses a large elaboration budget.
+-- Paste the representative equations before specializing to derived tensor totalizations.
+private theorem map_tensor_representative_paste
+    {D E J K : Type*} [Category* D] [Category* E] [Category* J] [Category* K]
+    (U : D ⥤ E) (B : J ⥤ D) (Z : K ⥤ E) (V : J ⥤ K)
+    (γ : B ⋙ U ⟶ V ⋙ Z)
+    {W X Y T : D} {p₀ p₁ : J} {q₀ q₁ q₂ : K} {u₀ u₁ u₂ i₀ i₁ : E}
+    (r : W ⟶ X) (a : X ⟶ B.obj p₀) (e : W ⟶ Y)
+    (m : Y ⟶ T) (s : T ⟶ B.obj p₁) (d : p₀ ⟶ p₁)
+    (b : V.obj p₀ ⟶ q₀) (i : q₀ ⟶ q₁) (v : V.obj p₁ ⟶ q₂) (t : q₂ ⟶ q₁)
+    (e₀ : U.obj Y ⟶ u₀) (e₁ : U.obj T ⟶ u₁) (n : u₀ ⟶ u₁)
+    (σ : u₁ ⟶ u₂) (sU : u₂ ⟶ Z.obj q₂) (β : u₀ ⟶ i₀)
+    (mI : i₀ ⟶ i₁) (tI : u₂ ⟶ i₁) (sI : i₁ ⟶ Z.obj q₁)
+    (hc : r ≫ a ≫ B.map d = e ≫ m ≫ s)
+    (hpair : b ≫ i = V.map d ≫ v ≫ t)
+    (hu : U.map s ≫ γ.app p₁ ≫ Z.map v = e₁ ≫ σ ≫ sU)
+    (hm : U.map m ≫ e₁ = e₀ ≫ n)
+    (hrep : sU ≫ Z.map t = tI ≫ sI)
+    (hchain : β ≫ mI = n ≫ σ ≫ tI) :
+    U.map r ≫ (U.map a ≫ γ.app p₀ ≫ Z.map b) ≫ Z.map i =
+      U.map e ≫ e₀ ≫ β ≫ mI ≫ sI := by
+  simp only [Category.assoc]
+  rw [← Z.map_comp, hpair, Z.map_comp, Z.map_comp]
+  rw [← reassoc_of% (γ.naturality d)]
+  rw [← U.map_comp_assoc, ← U.map_comp_assoc, Category.assoc, hc,
+    U.map_comp, U.map_comp]
+  simp only [Category.assoc]
+  rw [reassoc_of% hu, reassoc_of% hm, hrep, ← reassoc_of% hchain]
+
 /-- Compatibility for a flat K-flat pair, given the normalized restriction comparison.
 
 Source: Stacks Tags 03EL, 07A4 and 07A6.
@@ -182,18 +208,15 @@ theorem representative_square {X Y : Scheme.{u}} (f : X ⟶ Y)
       right ≫ z.tensor.map di =
       UD.map (eC.app T) ≫ eU.app (C.obj T) ≫
         DerivedCategory.Q.map (beta.app T) ≫ mi ≫ ri := by
-    dsimp only [right]
-    simp only [Category.assoc]
-    change UD.map (CD.map r) ≫
-      UD.map (ac.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫
-        gamma.hom.app (CD.obj (DerivedCategory.Q.obj P), CD.obj (DerivedCategory.Q.obj Q)) ≫
-          z.tensor.map db ≫ z.tensor.map di = _
-    rw [← z.tensor.map_comp, hpair, z.tensor.map_comp, z.tensor.map_comp]
-    rw [← reassoc_of% (gamma.hom.naturality dc)]
-    rw [← UD.map_comp_assoc, ← UD.map_comp_assoc, Category.assoc, hc,
-      UD.map_comp, UD.map_comp]
-    simp only [Category.assoc]
-    rw [reassoc_of% hu, reassoc_of% hm, hrep, ← reassoc_of% hchain]
+    exact map_tensor_representative_paste UD aX.tensor z.tensor (UD.prod UD) gamma.hom
+      (CD.map r) (ac.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q))
+      (eC.app T) mc rc dc db di du dt (eU.app (C.obj T))
+      (eU.app ((CoefficientTensorChain.total X S).obj (C.obj P, C.obj Q)))
+      (DerivedCategory.Q.map (U.map (proEtaleTensorPullbackTotalIso f R S c P Q).inv))
+      (DerivedCategory.Q.map (sigma.hom.app (C.obj P, C.obj Q))) ru
+      (DerivedCategory.Q.map (beta.app T)) mi
+      (DerivedCategory.Q.map ((CoefficientTensorChain.total X A).map
+        (Prod.mkHom (beta.app P) (beta.app Q)))) ri hc hpair hu hm hrep hchain
   have hdi : IsIso di :=
     show IsIso ((Iso.prod ((proEtaleRingDerivedPullbackFactors f R A (Iso.refl _)).app P)
       ((proEtaleRingDerivedPullbackFactors f R A (Iso.refl _)).app Q)).hom) from inferInstance
