@@ -31,7 +31,21 @@ attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoida
   CategoryTheory.Functor.leftAdjoint CategoryTheory.Functor.mapDerivedCategory
 attribute [local implicit_reducible] coefficientSequenceInternalHom
 
-set_option maxHeartbeats 600000 in
+private theorem coefficientTensorModelComparison_of_normalize
+    {V : Type*} [Category V] {H : Vᵒᵖ × V ⥤ V}
+    (S T : CoefficientClosedStructure H) (A P Q : V)
+    (f : S.tensor.obj (A, P) ⟶ Q) (g : T.tensor.obj (A, P) ⟶ Q)
+    (h : A ⟶ H.obj (Opposite.op P, Q)) (e : Q ⟶ Q) (he : e = 𝟙 Q)
+    (hs : (S.transpose A P Q).symm h = f ≫ e)
+    (ht : (T.transpose A P Q).symm h = g ≫ e) :
+    (CoefficientClosedStructure.comparison T S).hom.app (A, P) ≫ f = g := by
+  subst e
+  rw [Category.comp_id] at hs ht
+  apply (T.transpose A P Q).injective
+  rw [CoefficientClosedStructure.comparison_transpose, ← hs, ← ht]
+  exact ((S.transpose A P Q).apply_symm_apply h).trans
+    ((T.transpose A P Q).apply_symm_apply h).symm
+
 -- The identity total tensor has to be compared across the two site universe parameters.
 /-- The representative tensor models commute with the canonical closed-tensor comparison.
 Source: Stacks 0A90, 0A95 and 08J9
@@ -68,10 +82,7 @@ theorem coefficientTensorModelComparison (W : Scheme.{u})
   have ht := coefficientTensorCurry_normalize.{u, u + 1, u, u + 2} J R
     T.systemClosed T.systemTensorModel C D I hC hD (𝟙 I) g hg
   have hid := (DerivedCategory.Q (C := coefficientSequenceModules.{u, u} l E W)).map_id I
-  erw [hid, Category.comp_id] at hs ht
-  apply (T.systemClosed.transpose _ _ _).injective
-  rw [CoefficientClosedStructure.comparison_transpose, ← hs, ← ht]
-  exact ((S.systemClosed.transpose _ _ _).apply_symm_apply _).trans
-    ((T.systemClosed.transpose _ _ _).apply_symm_apply _).symm
+  exact coefficientTensorModelComparison_of_normalize
+    S.systemClosed T.systemClosed _ _ _ _ _ _ _ hid hs ht
 
 end WeilConjectures
