@@ -294,9 +294,9 @@ private theorem normalized_forget_comparison_apply
   apply (ConcreteCategory.bijective_of_isIso (i.hom ≫ Q.map bH.hom)).1
   conv_lhs => rw [hcmp]
   simp only [ConcreteCategory.comp_apply, Iso.inv_hom_id_apply]
-  change b₀.hom (z.hom.f 0 (a₀.inv x)) =
+  change b₀.hom (z.hom.f 0 (a₀.inv (aH.hom (aH.inv x)))) =
     (HomologicalComplex.homologyMap f 0 ≫ bH.hom) (cH.inv y)
-  rw [hf]
+  rw [Iso.inv_hom_id_apply, hf]
   simp only [ConcreteCategory.comp_apply, Iso.inv_hom_id_apply]
   exact congrArg b₀.hom h
 
@@ -471,7 +471,7 @@ theorem openComparison_ordinary_structure_class (A : Type u) [CommRing A]
   change (((HomologicalComplex.homologyFunctor _ (.up ℤ) 0).mapIso a ≪≫
       HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 (ModuleCat.of B B)).inv
         (1 : B)) = _ at h
-  rw [mapped_single_homology_inv S e, ← hj] at h
+  erw [mapped_single_homology_inv S e, ← hj] at h
   exact h
 
 end
