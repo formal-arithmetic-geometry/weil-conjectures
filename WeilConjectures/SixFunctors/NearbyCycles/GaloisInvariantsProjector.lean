@@ -343,12 +343,31 @@ private theorem projector_hasGoodTensorTensor₂₃ (S : Scheme.{u})
       GradedObject.HasGoodTensorTensor₂₃ P Q R₁ := by
   infer_instance
 
-attribute [local instance] projector_hasTensor₄ObjExt projector_hasGoodTensor₁₂Tensor
-  projector_hasGoodTensorTensor₂₃
-
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω]
+
+/-- Factor the Galois layer exchange through the image of the derived unit. -/
+private lemma pullbackExchange_galoisLayerHom_projector_factorization
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C =
+      ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C)).hom ≫
+        (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧)).map
+          ((derivedUpperStarLowerStarAdjunction Λ
+            (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
+              (L((N.ε)^*⟦Λ⟧).obj C)) ≫ (N.galoisLayerExchangeIso h Ω Λ C).hom := by
+  have := projector_hasTensor₄ObjExt N.total (condensedRingObj Λ N.total)
+  have := projector_hasGoodTensor₁₂Tensor N.total (condensedRingObj Λ N.total)
+  have := projector_hasGoodTensorTensor₂₃ N.total (condensedRingObj Λ N.total)
+  have hα := Hom.pullbackExchange_app_of_total_eq_id Λ N
+    (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
+    (N.galoisLayerHom h Ω) rfl rfl C
+  simp only [eqToHom_refl, Category.id_comp] at hα
+  rw [Functor.map_comp] at hα
+  dsimp only [Functor.comp_map, galoisLayerExchangeIso, Functor.mapIso, Iso.trans,
+    Iso.symm, Iso.app]
+  exact hα
 
 set_option profiler true in
 -- matching the objects of the Galois layer with the unfolded composite of derived functors
@@ -382,24 +401,11 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant_eq
             (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
               (L((N.ε)^*⟦Λ⟧).obj C))) ≫
           (N.galoisLayerExchangeIso h Ω Λ C).hom := by
-  have hα := Hom.pullbackExchange_app_of_total_eq_id Λ N
-    (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
-    (N.galoisLayerHom h Ω) rfl rfl C
-  simp only [eqToHom_refl, Category.id_comp] at hα
-  rw [Functor.map_comp] at hα
-  have hα' : ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C =
-      ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C)).hom ≫
-        (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧)).map
-          ((derivedUpperStarLowerStarAdjunction Λ
-            (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
-              (L((N.ε)^*⟦Λ⟧).obj C)) ≫ (N.galoisLayerExchangeIso h Ω Λ C).hom := by
-    dsimp only [Functor.comp_map, galoisLayerExchangeIso, Functor.mapIso, Iso.trans,
-      Iso.symm, Iso.app]
-    exact hα
   exact exists_invariant_retraction_of_conjugate_eq (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧))
     (((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) R _ hR
     ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C))
-    (N.galoisLayerExchangeIso h Ω Λ C) hα' _ hinv
+    (N.galoisLayerExchangeIso h Ω Λ C)
+    (pullbackExchange_galoisLayerHom_projector_factorization Λ N h Ω C) _ hinv
     (fun σ ↦ N.galoisLayerAction Λ h Ω σ (L((𝟙 X)^*⟦Λ⟧).obj C))
     (fun σ ↦ pullbackExchange_galoisLayerHom_app_comp_galoisLayerAction Λ N h Ω σ C)
     (fun σ ↦ galoisLayerAut_autAction Λ N h Ω σ C)
@@ -431,6 +437,7 @@ theorem nonempty_isColimit_homology_leftDerivedUpperStar_nearbyCycles_galoisTowe
     (homologyLeftDerivedUpperStarIso f' (Profinite.continuousMapRingObj T₀) q).symm) hc'⟩
 
 set_option profiler true in
+set_option trace.profiler true in
 -- matching the derived functors of the Galois layer with those of the field tower
 /-- **The nearby cycles of `N` are the `Gal(Ω/L)`-invariants of those of the Galois layer `N_Ω`,
 with a projector onto all the invariants** (torsion coefficients in which the degrees of the
@@ -480,6 +487,12 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_pro
           (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C)) ≫ φ = φ := by
+  have := projector_hasTensor₄ObjExt N.total
+    (condensedRingObj (Profinite.continuousMapRingObj T₀) N.total)
+  have := projector_hasGoodTensor₁₂Tensor N.total
+    (condensedRingObj (Profinite.continuousMapRingObj T₀) N.total)
+  have := projector_hasGoodTensorTensor₂₃ N.total
+    (condensedRingObj (Profinite.continuousMapRingObj T₀) N.total)
   have hcomplex := exists_complex_of_plusEtaleOrigin (X := N.generic) T₀
     (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) hC
   obtain ⟨K, a, hKa, hterms, ⟨e⟩⟩ := hcomplex
