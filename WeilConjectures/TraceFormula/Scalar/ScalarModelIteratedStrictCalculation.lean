@@ -30,6 +30,19 @@ namespace WeilConjectures
 
 attribute [local irreducible] HasDerivedCategory.standard
 
+/-- Remove the two normalization isomorphisms from a comparison formula. -/
+private theorem iteratedScalar_normalized_counit
+    {V : Type*} [Category V] {K P N D R S U H : V}
+    {α : K ⟶ P} {r : P ⟶ N} {u : N ⟶ D} {v : D ⟶ R}
+    (b : R ≅ S) (q : S ≅ U) {d : P ⟶ U} {c : K ⟶ H} {f : H ⟶ U}
+    (hn : r ≫ u ≫ v ≫ b.hom ≫ q.hom = d) (hc : α ≫ d = c ≫ f) :
+    α ≫ r ≫ u ≫ v = c ≫ f ≫ q.inv ≫ b.inv := by
+  calc
+    α ≫ r ≫ u ≫ v = α ≫ d ≫ q.inv ≫ b.inv := by
+      rw [← hn]
+      simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
+    _ = c ≫ f ≫ q.inv ≫ b.inv := by rw [reassoc_of% hc]
+
 /-- Move a presentation map through the composite comparison and counit. -/
 private theorem iteratedScalar_move_naturality
     {V W S : Type*} [Category V] [Category W] [Category S]
@@ -92,7 +105,7 @@ variable (l : ℕ) [Fact l.Prime]
   (ι : E →ₐ[ℚ_[l]] L) (j : L →ₐ[ℚ_[l]] F)
   (X : Scheme.{u})
 
-set_option profiler true in
+set_option trace.profiler true in
 /-- The iterated route, on one simultaneous presentation, is the localized ordinary
 scalar counits followed by the strict tensor associator and quotient augmentation.
 It does not involve a direct scalar realization model or a derived associator.
@@ -227,17 +240,9 @@ theorem scalarModelIteratedStrictCalculation
     have hc := (completedScalarComparison_existsUnique l E L ι X).exists.choose_spec P
     change (completedScalarComparison l E L ι X).app K ≫
       (integralScalarExtensionComparisonOfUniverses l E L ι X).hom.app P = _ at hc
-    have hn := congrArg (fun z ↦ (completedScalarComparison l E L ι X).app K ≫ z ≫
-      DerivedCategory.Q.map (integralOperationsRoosFunctor.map qEL.inv) ≫
-      (integralComparisonRoosBridge l L X ρL D).inv) hnEL
-    rw [reassoc_of% hc] at hn
-    have hcancel := Iso.hom_inv_id_map qEL
-      (integralOperationsRoosFunctor ⋙ DerivedCategory.Q)
-    simp only [Functor.comp_map] at hcancel
-    simp only [Category.assoc] at hn
-    erw [reassoc_of% hcancel] at hn
-    erw [Iso.hom_inv_id, Category.comp_id] at hn
-    simpa only [v, f, M, TL, Functor.map_comp, Category.assoc] using hn
+    simpa only [v, f, Functor.map_comp, Category.assoc] using
+      iteratedScalar_normalized_counit (integralComparisonRoosBridge l L X ρL D)
+        ((integralOperationsRoosFunctor ⋙ DerivedCategory.Q).mapIso qEL) hnEL hc
   have hK := scalarPresentationKFlat l E X P C κ
   have ha :=
     (integralComparisonSystemScalarComposition_existsUnique l E L F ι j X).exists.choose_spec
