@@ -179,7 +179,6 @@ lemma boundedConstructibleBaseChange_ofIsOpenImmersion :
   rw [boundedConstructibleBaseChange_ofIsOpenImmersion_eq]
   exact boundedConstructibleBaseChange_id ℓ
 
-set_option profiler true in
 /-- **`Ex_!` for open immersions**, on the trivial compactifications: the compact-support exchange
 map of `X ⟶[f] Y ⟶[𝟙] Y` and `X' ⟶[f'] Y' ⟶[𝟙] Y'`, followed by `R(𝟙)_* ≅ 𝟭` and the
 extension-by-zero exchange morphism, is `R(𝟙)_* ≅ 𝟭`. -/
