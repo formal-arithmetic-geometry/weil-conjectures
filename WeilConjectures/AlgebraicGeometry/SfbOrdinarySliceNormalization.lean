@@ -147,11 +147,17 @@ theorem sfbOrdinarySliceNormalization
           hom_inv_id := ?_
           inv_hom_id := ?_ }
       · exact ModuleCat.ofHom
+          (X := ((ConstantCompletion.res (asIso c).inv).obj (F.obj M)).val.obj V)
+          (Y := (G.obj ((SheafOfModules.overFunctor ((adicLisseForget S).obj R) U).obj
+            M)).val.obj V)
           { toFun := fun x ↦ x
             map_add' := fun _ _ ↦ rfl
             map_smul' := fun _ _ ↦ rfl }
       · intros; ext; rfl
       · exact ModuleCat.ofHom
+          (X := (G.obj ((SheafOfModules.overFunctor ((adicLisseForget S).obj R) U).obj
+            M)).val.obj V)
+          (Y := ((ConstantCompletion.res (asIso c).inv).obj (F.obj M)).val.obj V)
           { toFun := fun x ↦ x
             map_add' := fun _ _ ↦ rfl
             map_smul' := fun _ _ ↦ rfl }
