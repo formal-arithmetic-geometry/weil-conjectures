@@ -184,6 +184,7 @@ private theorem tensor_associativity_of_whiskers
         (𝟙 (F.obj X) ⊗ₘ μ.hom.app (Y, Z)) =
       μ.hom.app (X ⊗ Y, Z) ≫ (μ.hom.app (X, Y) ⊗ₘ 𝟙 (F.obj Z)) ≫
         (α_ (F.obj X) (F.obj Y) (F.obj Z)).hom := by
+  dsimp only [Functor.comp_obj, Functor.prod_obj] at *
   simpa only [id_tensorHom, tensorHom_id] using h
 
 variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
@@ -425,12 +426,16 @@ theorem ringed_forget_tensor_associator_representatives
   have hL := left_model_square U.mapDerivedCategory μ bPQ.hom bL.hom
     (e.hom.app P) (e.hom.app Q) (e.hom.app N) (e.hom.app PQ)
     (e.hom.app (B.obj (PQ, N))) tPQ tL
-    (DerivedCategory.Q.map (A.map (chain.hom.app (P, Q), 𝟙 (V.obj N))))
+    (DerivedCategory.Q.map (A.map (X := (V.obj PQ, V.obj N))
+      (Y := (A.obj (V.obj P, V.obj Q), V.obj N))
+      (chain.hom.app (P, Q), 𝟙 (V.obj N))))
     aPQ.hom aL₀.hom aL.hom hmPQ hmL hnL
   have hR := right_model_square U.mapDerivedCategory μ bQN.hom bR.hom
     (e.hom.app P) (e.hom.app Q) (e.hom.app N) (e.hom.app QN)
     (e.hom.app (B.obj (P, QN))) tQN tR
-    (DerivedCategory.Q.map (A.map (𝟙 (V.obj P), chain.hom.app (Q, N))))
+    (DerivedCategory.Q.map (A.map (X := (V.obj P, V.obj QN))
+      (Y := (V.obj P, A.obj (V.obj Q, V.obj N)))
+      (𝟙 (V.obj P), chain.hom.app (Q, N))))
     aQN.hom aR₀.hom aR.hom hmQN hmR hnR
   have hC : U.mapDerivedCategory.map (DerivedCategory.Q.map aB.hom) ≫ eR =
       eL ≫ DerivedCategory.Q.map aA.hom := by
