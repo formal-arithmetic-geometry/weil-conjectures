@@ -103,7 +103,9 @@ theorem isSheaf_etaleStructurePresheaf_aux :
   ext a
   dsimp only [types_comp_apply, Equiv.toIso_hom_hom_apply, eqv, Equiv.ofBijective_apply,
     etaleHom, Functor.comp_map, Functor.op_map, Pseudofunctor.presheafHom_map,
-    TypeCat.ofHom_apply, Quiver.Hom.unop_op]
+    TypeCat.ofHom_apply, Quiver.Hom.unop_op, CommRingCat.forget_map_apply, Scheme.Γ_map,
+    Over.forget_map, G]
+  trace_state
   exact (pullHom_smulHom (unitObj X) V.unop.hom f.unop.left W.unop.hom
     (MorphismProperty.Over.w f.unop) a).symm
 
