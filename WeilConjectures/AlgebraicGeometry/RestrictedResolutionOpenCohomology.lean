@@ -264,8 +264,8 @@ theorem restrictedResolution_open_cohomology {Z : Scheme.{u}} {F : Z.Modules}
     iR iR' (moduleCohomologyFMap j φ p)
     ((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).map β) a
     R'.sections.hom R.sections.hom r hmap hc
-  simpa only [iR, iR', Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc]
-    using hfinal
+  simpa only [iR, iR', H, r, φ, P, c, j, Iso.trans_hom, Iso.symm_hom,
+    Iso.app_hom, NatTrans.comp_app, Functor.mapIso_hom, Category.assoc] using hfinal
 
 
 end AlgebraicGeometry.Scheme.Modules
