@@ -27,6 +27,7 @@ universe u w
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
+set_option profiler true in
 /-- Restriction identifies the module base-change arrow with the arrow of the
 chosen pullback of the restricted maps. No affine chart is used.
 Source: Stacks Project, Tag 08FE, proof; Tag 08HY, counit construction;
@@ -105,9 +106,9 @@ theorem exists_canonicalModuleBaseChange_open_comparison
             (schemeDerivedBaseChangeMap fA (pullback.snd fA gA) gA (pullback.fst fA gA)
               pullback.condition E0 ≫ (schemeDerivedDirectImage (pullback.snd fA gA)).map c0)
       := by
-  dsimp only
+  intro U fA gA H E E0 R
   obtain ⟨c0, hc0⟩ := exists_isDerivedModulePullbackComparison.{u, w}
-    (pullback.fst (f ∣_ V) (g.resLE V W hWV)) ((schemeOpenRestriction X (f ⁻¹ᵁ V)).obj G)
+    (pullback.fst fA gA) H
   exact ⟨c0, hc0,
     restricted_base_change_compatibility.{u, w} f g g' f' sq G c hc V W hWV c0 hc0⟩
 

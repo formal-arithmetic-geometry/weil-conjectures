@@ -50,6 +50,7 @@ private theorem moduleComparisonEquiv_apply_of_component
   rw [h]
   rfl
 
+set_option profiler true in
 private theorem siteSectionsSourceChange_app
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
@@ -62,9 +63,10 @@ private theorem siteSectionsSourceChange_app
       (siteSectionsObjIso J U F p).symm ≪≫
         (Abelian.Ext.precompAddEquiv e F p).symm.toAddCommGrpIso := by
   simp only [siteExtNatIso, siteHNatIso, Iso.refl_trans, Iso.trans_refl,
-    NatIso.trans_app, NatIso.symm_app, siteSectionsObjIso]
+    NatIso.trans_app, siteSectionsObjIso]
   rfl
 
+set_option profiler true in
 /-- The fixed module-to-Ext comparison factors through abelian derived sections.
 Source: Stacks Project, Tags 015E and 03FD; the Ext-to-sections half of the defining
 composite in ModuleCohomologyExtResolutionNaturality.
