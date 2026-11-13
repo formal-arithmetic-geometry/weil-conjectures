@@ -143,8 +143,10 @@ theorem ordinaryEvaluation_over_dual_projection (X : Scheme.{u}) (U : X.Opens)
             (𝟙_ (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)))).hom := by
   classical
   intro L T e he b hπ a d q r h
-  let := SheafOfModules.monoidalCategory (X.sheaf.over U)
-  let := SheafOfModules.monoidalCategory U.toScheme.sheaf
+  let : MonoidalCategory (localEvaluationModules X U) :=
+    SheafOfModules.monoidalCategory (X.sheaf.over U)
+  let : MonoidalCategory (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
+    SheafOfModules.monoidalCategory U.toScheme.sheaf
   let : HasZeroObject (localEvaluationModules X U) := inferInstance
   let : HasZeroObject (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
     inferInstance
@@ -198,12 +200,8 @@ theorem ordinaryEvaluation_over_dual_projection (X : Scheme.{u}) (U : X.Opens)
         (he _ _ _ _ (𝟙 (P.X r)) s.hom)).trans (Category.assoc _ _ _))
     · simp only [SheafOfModules.homObjMap_comp_homObjMap,
         CategoryTheory.Functor.map_id, Category.id_comp, ha]
-  change d.inv.f q ≫ _ = π (T.obj P) O q r 0 h ≫
-    SheafOfModules.homObjMap (R := U.toScheme.sheaf) (𝟙 ((T.obj P).X r)) t.hom
-  rw [← hd, ← Category.assoc, ← Category.assoc]
-  have hi := congrArg (fun f ↦ f.f q) d.inv_hom_id
-  simp only [HomologicalComplex.comp_f, HomologicalComplex.id_f] at hi
-  rw [hi, Category.id_comp]
+      rfl
+  exact (Iso.inv_comp_eq ((HomologicalComplex.eval _ _ q).mapIso d)).2 hd.symm
 
 
 end AlgebraicGeometry
