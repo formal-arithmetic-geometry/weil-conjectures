@@ -410,14 +410,14 @@ private theorem nativeReductionMonoidal
       trace "PH805: target comparison proved"
       have hcan := reduction_map_inverse_cancel hbκ DerivedCategory.Q
       trace "PH805: cancellation proved"
+      have hr := m.target.representative.inv_hom_id_app (⟨_, hEP⟩, ⟨_, hEQ⟩)
       trace "PH805: transport square"
       dsimp only [D', finiteCochainModel, reductionExtension_eq_scalarExtension,
         cS, J, R, S, completedIntegralCommRingSheaf, coefficientTotalTensor, totalTensor,
-        ordinaryTensor, CategoryTheory.Functor.uncurry_obj_obj] at hnorm hcan hcs
+        ordinaryTensor, CategoryTheory.Functor.uncurry_obj_obj] at hnorm hcan hcs hr
       have hn := by
         with_unfolding_all
-          exact reduction_normalized_comparison hcs hnorm hcan
-            (m.target.representative.inv_hom_id_app (⟨_, hEP⟩, ⟨_, hEQ⟩))
+          exact reduction_normalized_comparison hcs hnorm hcan hr
       trace "PH805: normalization transported"
       rw [hcr]
       with_unfolding_all
