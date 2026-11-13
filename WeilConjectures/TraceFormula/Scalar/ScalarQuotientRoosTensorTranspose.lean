@@ -83,9 +83,9 @@ private theorem quotientRoosMap_fst
   rw [reassoc_of% (scalarRoosTowerCoordinates q).1]
   simp only [Category.assoc, Limits.Pi.map_π]
   rw [reassoc_of% (scalarRoosTowerCoordinates a).1]
-  simp only [Category.assoc, Limits.Pi.map_π]
+  rw [Limits.Pi.map_π_assoc]
   rw [reassoc_of% (scalarRoosCoordinates F C).1]
-  simp only [Category.assoc, piComparison_comp_π, Functor.map_comp]
+  simp only [Category.assoc, piComparison_comp_π_assoc, Functor.map_comp]
 
 private theorem quotientRoosMap_snd_zero
     {A B : Type*} [Category A] [Abelian A] [HasCountableProducts A]
@@ -184,7 +184,7 @@ private theorem quotientScalarChainComparison
         Pi.π (fun n : ℕ ↦ CL.asFunctor.obj (op n)) n) =
         G.map (u ≫ (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app CL) := by
       rw [Category.assoc, hi]
-    rw [hfirst]
+    erw [hfirst]
     apply HomologicalComplex.Hom.ext
     funext i
     apply completedScalar_tensor_ext l L F j X
