@@ -84,11 +84,9 @@ private theorem transport_roos_triangle
   · change δ' ≫ (shiftFunctor C (1 : ℤ)).map e.inv = b.inv ≫ δ
     simp [δ', ← Functor.map_comp]
 
-set_option profiler true in
+set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 500000 in
--- Transport between the two module-category presentations needs additional elaboration.
 /-- Derived abelian sections reconstruct the lower tail from its canonical lower
 truncations. This is only the reconstruction step, with no homology conclusion.
 Source: Stacks Project, Tag 0D64 (lemma-is-limit-dimension), Tag 071B
