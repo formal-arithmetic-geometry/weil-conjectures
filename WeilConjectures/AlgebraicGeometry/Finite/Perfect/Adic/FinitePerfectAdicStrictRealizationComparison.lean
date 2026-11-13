@@ -379,6 +379,22 @@ def finitePerfectAdicRealizationIso :
 
 end Realization
 
+private theorem finitePerfectAdic_unit_square {C : Type*} [Category* C]
+    {A B A' B' B'' D E : C} (u : A ⟶ A') [Epi u]
+    {v : B ⟶ B'} {w : B ⟶ B''} {a : A' ⟶ B'} {c : B' ⟶ B''}
+    {b : B'' ⟶ E} {d : A' ⟶ D} {e : D ⟶ E} {m : A ⟶ B}
+    {r : A ⟶ D} {s : B ⟶ E}
+    (hR : u ≫ a = m ≫ v) (hC : v ≫ c = w) (h₀ : w ≫ b = s)
+    (h₁ : u ≫ d = r) (h : m ≫ s = r ≫ e) : a ≫ c ≫ b = d ≫ e := by
+  apply (cancel_epi u).1
+  calc
+    u ≫ a ≫ c ≫ b = m ≫ v ≫ c ≫ b := by
+      rw [← Category.assoc u a, hR, Category.assoc]
+    _ = m ≫ w ≫ b := by rw [← Category.assoc v c, hC]
+    _ = m ≫ s := by rw [h₀]
+    _ = r ≫ e := h
+    _ = u ≫ d ≫ e := by rw [← h₁, Category.assoc]
+
 section Square
 
 set_option hygiene false in
@@ -459,11 +475,9 @@ theorem finitePerfectAdicRealization_square_explicit :
   have h₁ := finitePerfectAdicChartAssociated_unit X V U W f Rc₁ φ₁ αW₁ hα₁ M₁
   apply (SheafOfModules.forget _).map_injective
   apply (PresheafOfModules.toPresheaf _).map_injective
-  apply (cancel_epi (toSheafify _ _)).1
   simp only [Functor.map_comp]
   rw [hcoh]
-  erw [reassoc_of% hR]
-  erw [reassoc_of% hC, h₀, reassoc_of% h₁]
+  refine finitePerfectAdic_unit_square (toSheafify _ _) hR hC h₀ h₁ ?_
   ext Z x
   change M₀.val.map (finitePerfectAdicChartPoint X V U W f Z.unop).op
       (δ.hom.app (op ((MorphismProperty.Over.map ⊤ U.prop).obj
