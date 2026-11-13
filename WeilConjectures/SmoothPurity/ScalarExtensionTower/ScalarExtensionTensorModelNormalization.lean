@@ -290,9 +290,7 @@ theorem tensorModelRealization_normalized (W : Scheme.{u})
     (U.map t.hom) q.hom (pullbackTensorTensorTower l E W P.obj Q.obj).hom
     ((integralCompletedTensorComparison l E W).hom.app (P, Q))
     ((Category.assoc _ _ _).trans hm) hr' hq hreference
-  have hnormalized := normalizedTensorComposite_transport
-    (tensorModelRealization_hom l E W S
-      (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj)) hfinal
-  exact hnormalized
+  apply heq_of_eq
+  simpa only [tensorModelRealization_hom] using hfinal
 
 end WeilConjectures.ScalarExtensionTower
