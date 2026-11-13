@@ -209,7 +209,7 @@ private theorem signed_power_scalar {A : Type z} [CommRing A] (ρ : A →+* S) (
   rw [zsmul_eq_mul]
   simp only [map_mul, map_pow, map_neg, map_one, Int.cast_pow, Int.cast_neg, Int.cast_one]
 
-set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- The transport compares the canonical sheaf tensor and Hom scalar instances.
 private theorem signed_scalar_degree_transport
     {A : Type z} [CommRing A]
