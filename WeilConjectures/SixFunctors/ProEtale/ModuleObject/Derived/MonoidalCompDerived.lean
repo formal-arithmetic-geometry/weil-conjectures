@@ -119,13 +119,17 @@ lemma leftDerivedUpperStarTensor_comp_eq :
   refine Functor.leftDerived₂_ext (leftDerivedUpperStarTensorRight Λ (f ≫ g))
     (leftDerivedUpperStarTensorRightCounit Λ (f ≫ g)) (HomotopyCategory.quasiIso _ _)
     (HomotopyCategory.quasiIso _ _) _ _ _ ?_
-  ext P Q
-  obtain ⟨A, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
-  obtain ⟨B, rfl⟩ := HomotopyCategory.quotient_obj_surjective Q
-  simp only [NatTrans.comp_app]
+  apply NatTrans.ext
+  intro P
+  apply NatTrans.ext
+  intro Q
+  change ((leftDerivedUpperStarTensor Λ (f ≫ g)).app (Qh.obj P)).app (Qh.obj Q) ≫
+      ((leftDerivedUpperStarTensorRightCounit Λ (f ≫ g)).app P).app Q =
+    ((leftDerivedUpperStarTensorComp Λ f g).app (Qh.obj P)).app (Qh.obj Q) ≫
+      ((leftDerivedUpperStarTensorRightCounit Λ (f ≫ g)).app P).app Q
   rw [leftDerivedUpperStarTensorRightCounit_app_app_eq_tensorHom]
-  erw [leftDerivedUpperStarTensorComp_app_app]
-  exact leftDerivedUpperStarTensor_comp_aux Λ f g A B
+  rw [leftDerivedUpperStarTensorComp_app_app]
+  exact leftDerivedUpperStarTensor_comp_aux Λ f g P.as Q.as
 
 /-- **The composition isomorphism of the derived pullbacks of module objects is monoidal**: it
 commutes with the tensor comparisons `m : Lh^* (K ⊗ᴸ M) ⟶ Lh^* K ⊗ᴸ Lh^* M`. -/
@@ -231,13 +235,17 @@ lemma leftDerivedUpperStarTensor_id_eq :
   refine Functor.leftDerived₂_ext (leftDerivedUpperStarTensorRight Λ (𝟙 W))
     (leftDerivedUpperStarTensorRightCounit Λ (𝟙 W)) (HomotopyCategory.quasiIso _ _)
     (HomotopyCategory.quasiIso _ _) _ _ _ ?_
-  ext P Q
-  obtain ⟨A, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
-  obtain ⟨B, rfl⟩ := HomotopyCategory.quotient_obj_surjective Q
-  simp only [NatTrans.comp_app]
+  apply NatTrans.ext
+  intro P
+  apply NatTrans.ext
+  intro Q
+  change ((leftDerivedUpperStarTensor Λ (𝟙 W)).app (Qh.obj P)).app (Qh.obj Q) ≫
+      ((leftDerivedUpperStarTensorRightCounit Λ (𝟙 W)).app P).app Q =
+    ((leftDerivedUpperStarTensorId Λ W).app (Qh.obj P)).app (Qh.obj Q) ≫
+      ((leftDerivedUpperStarTensorRightCounit Λ (𝟙 W)).app P).app Q
   rw [leftDerivedUpperStarTensorRightCounit_app_app_eq_tensorHom]
-  erw [leftDerivedUpperStarTensorId_app_app, leftDerivedUpperStarTensor_id_aux,
-    leftDerivedUpperStarTensor_app_app_comp]
+  rw [leftDerivedUpperStarTensorId_app_app, leftDerivedUpperStarTensor_app_app_comp]
+  exact (leftDerivedUpperStarTensor_id_aux Λ W P.as Q.as).symm
 
 /-- **The identity isomorphism of the derived pullbacks of module objects is monoidal**:
 `L(𝟙 W)^*(K ⊗ᴸ M) ⟶ L(𝟙 W)^* K ⊗ᴸ L(𝟙 W)^* M ⟶ K ⊗ᴸ M` is the identity isomorphism. -/
