@@ -135,6 +135,10 @@ theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y
   let R := compactSupportSystemLevel l E
   let q := compactSupportSystemQuotient l E
   refine horizontalLeftMate (systemAdj l E f)
+    (Lm := ProEtale.StrictTower.modulePullback (R m) f)
+    (Rm := ProEtale.StrictTower.moduleDirectImage (R m) f)
+    (Ln := ProEtale.StrictTower.modulePullback (R n) f)
+    (Rn := ProEtale.StrictTower.moduleDirectImage (R n) f)
     (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (m + 1)) f)
     (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (n + 1)) f)
     (coefficientSequenceEvaluation l E Y m) (coefficientSequenceEvaluation l E Y n)
@@ -147,11 +151,12 @@ theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y
     (compactSupportOrdinaryCoefficientTransition l E X h)
     (compactSupportScalarDirectImage f (compactSupportLevelQuotient l E m n h)).hom
     (compactSupportScalarPullback f (compactSupportLevelQuotient l E m n h))
-    ?_ ?_ (compactSupportOrdinaryDirectImageTransition l E f h) ?_ N
+    ?_ ?_ ?_ ?_ N
   · intro Q
     exact systemEval_unit l E f m Q
   · intro Q
     exact systemEval_unit l E f n Q
+  · exact compactSupportOrdinaryDirectImageTransition l E f h
   · intro M
     exact (unit_mateEquiv_symm
       (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (n + 1)) f)
