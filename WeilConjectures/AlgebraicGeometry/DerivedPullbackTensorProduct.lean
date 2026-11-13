@@ -125,6 +125,17 @@ theorem derivedPullback_tensorProduct
               DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
                 (φ P N).hom)) := by
   classical
+  -- Reuse the coproduct instances for all total tensor complexes in the proof.
+  have : ∀ P N : CochainComplex
+      (SheafOfModules.{uPull} (moduleRings S.toRingedSpace)) ℤ,
+      HomologicalComplex.HasMapBifunctor P N (curriedTensor _) (.up ℤ) :=
+    fun P N n ↦ ((CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, uPull, uPull}
+      (SheafOfModules.{uPull} (moduleRings S.toRingedSpace))).has_colimits_of_shape _).has_colimit _
+  have : ∀ P N : CochainComplex
+      (SheafOfModules.{uPull} (moduleRings T.toRingedSpace)) ℤ,
+      HomologicalComplex.HasMapBifunctor P N (curriedTensor _) (.up ℤ) :=
+    fun P N n ↦ ((CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, uPull, uPull}
+      (SheafOfModules.{uPull} (moduleRings T.toRingedSpace))).has_colimits_of_shape _).has_colimit _
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     F, hF, hmap, hadd, ε, hder, htri, hε⟩ :=
       (derivedPullback_spec g)
