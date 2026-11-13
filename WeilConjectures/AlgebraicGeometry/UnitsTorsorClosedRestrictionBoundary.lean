@@ -45,7 +45,7 @@ private lemma equiv_zero_one (Y : Scheme.{u}) :
 
 
 set_option backward.defeqAttrib.useBackward true in
-set_option profiler true in
+set_option trace.profiler true in
 -- The comparison elaborates several sheaf adjunctions and Ext functors.
 /-- The inverse-image/counit comparison carries the boundary of one in the pullback
 of a direct-image extension to the boundary of one in the original extension.
@@ -116,6 +116,8 @@ theorem units_extension_pullback_boundary_comparison
   let : PreservesFiniteLimits L :=
     Functor.sheafPullbackConstruction.preservesFiniteLimits _ _ _ _
   let : PreservesColimitsOfSize.{u, u} L := adj.leftAdjoint_preservesColimits
+  have : PreservesFiniteColimits L := inferInstance
+  have : L.PreservesZeroMorphisms := inferInstance
   let := preservesBinaryBiproducts_of_preservesBinaryProducts L
   let := Functor.additive_of_preservesBinaryBiproducts L
   let S := ShortComplex.mk a p w
