@@ -48,6 +48,7 @@ private theorem compatible_composites
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
+set_option profiler true in
 /-- Derived complexes and compatible morphisms glue across a two-open cover of a scheme.
 D(O_X), D(O_U), D(O_V), D(O_(U ∩ V)) are `schemeDerivedCategory` of `X`, `U.toScheme`,
 `V.toScheme`, `(U ⊓ V).toScheme`. Restriction from X to an open W is restriction to the
