@@ -86,8 +86,8 @@ private theorem scalar_composition_paste
 
 private theorem finiteSystemDerivedPullback_eq_integralComparison {X Y : Scheme.{u}}
     (f : X ⟶ Y) :
-    finiteSystemDerivedPullback (integralSystemRings l E) (integralSystemTransition l E) f =
-      integralComparisonDerivedSequencePullback l E f := by
+    integralComparisonDerivedSequencePullback l E f =
+      finiteSystemDerivedPullback (integralSystemRings l E) (integralSystemTransition l E) f := by
   rfl
 
 set_option profiler true in
@@ -157,7 +157,7 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
         ((integralSystemReduction l E V).obj K))
   dsimp only [Functor.comp_map, Functor.comp_obj, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.whiskerLeft_app] at N1 Ng Np mix Na
-  simp only [← finiteSystemDerivedPullback_eq_integralComparison] at Ng mix
+  simp only [finiteSystemDerivedPullback_eq_integralComparison] at Ng mix
   simp only [T, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
     Category.assoc]
   exact scalar_composition_paste (UL h) (integralComparisonDerivedSequenceScalar l E L ι Z)
