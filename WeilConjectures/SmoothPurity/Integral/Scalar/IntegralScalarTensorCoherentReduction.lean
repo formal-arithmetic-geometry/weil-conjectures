@@ -48,8 +48,7 @@ attribute [local implicit_reducible] integralScalarExtension integralScalarExten
   integralComparisonDerivedSequenceScalar
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
 
-set_option maxHeartbeats 800000 in
-set_option trace.profiler true in
+set_option profiler true in
 -- The proof compares the completed and entire-system derived normalizations.
 /-- The prescribed scalar tensor comparison respects the coherent tensor reductions.
 This assertion contains no braiding or signed-swap equation.
@@ -164,8 +163,7 @@ theorem integralScalarTensorCoherentReduction
     a.app ((constructibleIntegralTensor l E W).obj (M, N)) ≫
       H.map (ScalarExtensionTower.tensorReduction l E W SE ρE TE M.obj N.obj) ≫ _ at h'
   change Q.map _ ≫ _ ≫ _ = a.app _ ≫ _ ≫ _
-  rw [ht] at h'
-  rw [ht] at h'
+  rw [ht L ρL (F.obj M) (F.obj N), ht E ρE M N] at h'
   exact h'
 
 end WeilConjectures
