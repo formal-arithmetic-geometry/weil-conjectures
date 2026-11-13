@@ -98,8 +98,8 @@ private theorem derivedPullback_chosen_counit_precomp
       (ComplexShape.up ℤ))
     {M : DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))}
     (p : M ⟶ (derivedPullback s).obj
-      (DerivedCategory.Qh.obj (((Scheme.Modules.pushforward s).mapHomotopyCategory
-        (ComplexShape.up ℤ)).obj K)))
+      (((RingedSpace.moduleDirectImage s.toLRSHom.toShHom).mapHomotopyCategory
+        (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).obj K))
     (t : M ⟶ DerivedCategory.Qh.obj K)
     (h : let ε := (Classical.choose
           (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) s
@@ -144,7 +144,7 @@ theorem derivedPullbackComposition_counit_normalization
       (schemeHomPullbackAdjunction (f ≫ g)).counit.app (DerivedCategory.Qh.obj K) =
       derivedCompositionCounitApex f g K
     := by
-  exact derivedPullback_chosen_counit_precomp.{u, w} (f ≫ g) K _ _
-    (derivedPullbackComposition_localized_counit.{u, w} f g K)
+  apply derivedPullback_chosen_counit_precomp.{u, w} (f ≫ g) K
+  exact derivedPullbackComposition_localized_counit.{u, w} f g K
 
 end AlgebraicGeometry
