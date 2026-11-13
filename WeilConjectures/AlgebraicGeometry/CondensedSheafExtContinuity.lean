@@ -32,6 +32,17 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
+/-- Compose the functor mapping a cocone before specializing the ambient categories. -/
+private theorem homColimitProperty_mapCocone_comp
+    {A : Type*} [Category A] {B : Type*} [Category.{u + 1} B]
+    [Preadditive B] [HasShift B ℤ]
+    {I : Type (u + 1)} [SmallCategory I]
+    (N : I ⥤ A) (c : Cocone N) (F : A ⥤ B) (K : B)
+    (h : homColimitProperty (N ⋙ F) (F.mapCocone c) K) (n : ℤ) :
+    IsIso (colimit.desc _
+      ((F ⋙ shiftFunctor B n ⋙ preadditiveCoyoneda.obj (op K)).mapCocone c)) :=
+  h n
+
 noncomputable local instance localInst_CondensedSheafExtContinuity_1
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] (X : Scheme.{u}) :
@@ -49,8 +60,6 @@ local instance localInst_CondensedSheafExtContinuity_2
     HasColimitsOfShape.has_colimit _
   exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval N⟩⟩⟩
 
-set_option maxHeartbeats 800000 in
--- Elaborating the derived-module cocone needs extra typeclass and definitional equality work.
 /-- Derived Hom from a constructible condensed `E`-module sheaf commutes with a small
 filtered colimit of complexes with a common termwise lower bound, in every integer shift.
 Source: upstream ModuleObject/Colimit/TwoColimit.lean, Sorried input (Hom), sheaf base case;
@@ -168,20 +177,13 @@ theorem isIso_constructible_condensed_sheaf_hom_colimit
       ((DerivedCategory.Q ⋙ shiftFunctor _ n ⋙
         preadditiveCoyoneda.obj (op ((DerivedCategory.singleFunctor _ 0).obj M))).mapCocone
           (colimit.cocone N))) := by
-  obtain ⟨r, hr⟩ := exists_condensedConstructible_extension_tower T ℓ E M hM
+  have hM' := exists_condensedConstructible_extension_tower T ℓ E M hM
   let D := N ⋙ DerivedCategory.Q
   let c := DerivedCategory.Q.mapCocone (colimit.cocone N)
   have hP : condensedConstructiblePiece T ℓ E ≤ homColimitProperty D c :=
     condensed_local_piece_hom_continuity T ℓ E N hN
-  have h : ∀ r : ℕ, (condensedConstructiblePiece T ℓ E).extensionProductIter r ≤
-      homColimitProperty D c := by
-    intro r
-    induction r with
-    | zero => exact hP
-    | succ r ih =>
-      rw [ObjectProperty.extensionProductIter_succ]
-      rintro K ⟨A, B, f, g, k, hdist, hA, hB⟩
-      exact homColimitProperty_extensions D c _ hdist (hP _ hA) (ih _ hB)
-  exact h r _ hr n
+  exact homColimitProperty_mapCocone_comp N (colimit.cocone N) DerivedCategory.Q _
+    ((condensedConstructiblePiece T ℓ E).extensionProductIter_le_of_isTriangulatedClosed₂
+      hP hM'.choose _ hM'.choose_spec) n
 
 end AlgebraicGeometry.ProEtale
