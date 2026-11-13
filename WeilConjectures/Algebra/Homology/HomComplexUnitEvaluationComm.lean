@@ -30,6 +30,7 @@ private lemma homMap_zero_left
     SheafOfModules.homObjMap (R := R) (0 : A' ⟶ A) g = 0 :=
   SheafOfModules.hom_ext (PresheafOfModules.homObjMap_zero_left g.val)
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Dependent projection and sheaf types require extra elaboration steps.
 /-- Evaluation at one commutes with the Hom-complex differential.
