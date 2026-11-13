@@ -82,6 +82,200 @@ theorem reindex_first_page_comparison
   rw [heq]
   infer_instance
 
+set_option profiler true in
+/-- Quotient presentations of a finite filtration, transported along abutment isomorphisms.
+This is an argument in abelian groups, independent of how the cohomology objects are constructed. -/
+private theorem exists_quotient_presentations_of_filtrations
+    {I : Type u} [SmallCategory I] {J : Type (u + 1)} [SmallCategory J]
+    (A : I → AddCommGrpCat.{u + 1}) (A' : AddCommGrpCat.{u + 1})
+    (H : Iᵒᵖ ⥤ AddCommGrpCat.{u + 1}) (B : Cocone H)
+    (eH : ∀ i : I, H.obj (op i) ≅ A i) (eB : B.pt ≅ A')
+    (β : ∀ i : I, A i ⟶ A')
+    (hB : ∀ i : I, B.ι.app (op i) ≫ eB.hom = (eH i).hom ≫ β i)
+    (V : ∀ i : I, DecreasingFiltration (A i)) (W : DecreasingFiltration A')
+    (a p : ℤ) (htop : W.step a = ⊤) (hbot : W.step (max a (p + 1)) = ⊥)
+    (E0 : Iᵒᵖ ⥤ SpectralSequence AddCommGrpCat.{u + 1}
+      (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1)
+    (E' : SpectralSequence AddCommGrpCat.{u + 1}
+      (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1)
+    (v0 : ∀ i : Iᵒᵖ, E0.obj i ⟶ E')
+    (hstable : ∀ q : ℤ, ∃ (r : ℤ) (hr : 1 ≤ r)
+      (e : ∀ i : I, ((E0.obj (op i)).page r hr).X ⟨p - q, q⟩ ≅ (V i).gradedPiece q)
+      (e' : (E'.page r hr).X ⟨p - q, q⟩ ≅ W.gradedPiece q),
+      ∀ i : I, ∃ (k : ∀ z : ℤ, ((V i).step z : AddCommGrpCat.{u + 1}) ⟶
+          (W.step z : AddCommGrpCat.{u + 1}))
+        (hk : ∀ z : ℤ, k z ≫ (W.step z).arrow = ((V i).step z).arrow ≫ β i)
+        (hc : ∀ z : ℤ,
+          Subobject.ofLE ((V i).step (z + 1)) ((V i).step z)
+              ((V i).antitone_step (Int.le_add_one (le_refl z))) ≫ k z =
+            k (z + 1) ≫ Subobject.ofLE (W.step (z + 1)) (W.step z)
+              (W.antitone_step (Int.le_add_one (le_refl z)))),
+        ((v0 (op i)).hom r hr).f ⟨p - q, q⟩ ≫ e'.hom =
+          (e i).hom ≫ cokernel.map _ _ (k (q + 1)) (k q) (hc q))
+    (R : J ⥤ Iᵒᵖ) :
+    ∃ S : ℕ → AddSubgroup B.pt,
+      S 0 = ⊤ ∧ S (p + 1 - a).toNat = ⊥ ∧ Antitone S ∧
+      ∀ n : ℕ, n < (p + 1 - a).toNat →
+        ∃ (r : ℤ) (hr : 1 ≤ r) (T : ∀ j : J, AddSubgroup (H.obj (R.obj j)))
+          (q : S n →+ (E'.page r hr).X ⟨p - a - n, a + n⟩)
+          (t : ∀ j : J, T j →+ ((E0.obj (R.obj j)).page r hr).X ⟨p - a - n, a + n⟩),
+          (∀ x : S n, q x = 0 ↔ (x : B.pt) ∈ S (n + 1)) ∧
+          (∀ j : J, Function.Surjective (t j)) ∧
+          ∀ (j : J) (y : T j),
+            ∃ hy : B.ι.app (R.obj j) (y : H.obj (R.obj j)) ∈ S n,
+              q ⟨B.ι.app (R.obj j) (y : H.obj (R.obj j)), hy⟩ =
+                ((v0 (R.obj j)).hom r hr).f ⟨p - a - n, a + n⟩ (t j y) := by
+  classical
+  have hstep : ∀ {A : AddCommGrpCat.{u + 1}}
+      (B : DecreasingFiltration A) (q : ℤ)
+      (y : (B.step q : AddCommGrpCat.{u + 1})),
+      cokernel.π (Subobject.ofLE (B.step (q + 1)) (B.step q)
+        (B.antitone_step (Int.le_add_one (le_refl _)))) y = 0 ↔
+        ∃ z : (B.step (q + 1) : AddCommGrpCat.{u + 1}),
+          (B.step (q + 1)).arrow z = (B.step q).arrow y := by
+    intro A B q y
+    let j := Subobject.ofLE (B.step (q + 1)) (B.step q)
+      (B.antitone_step (Int.le_add_one (le_refl _)))
+    constructor
+    · intro h
+      obtain ⟨z, hz⟩ := (ShortComplex.ab_exact_iff _).mp
+        (ShortComplex.exact_cokernel j) y h
+      refine ⟨z, ?_⟩
+      calc
+        (B.step (q + 1)).arrow z = (B.step q).arrow (j z) := by
+          exact (ConcreteCategory.congr_hom (Subobject.ofLE_arrow _) z).symm
+        _ = (B.step q).arrow y := congrArg _ hz
+    · rintro ⟨z, hz⟩
+      have hy : j z = y := (AddCommGrpCat.mono_iff_injective (B.step q).arrow).mp
+        inferInstance (by
+          simpa only [← ConcreteCategory.comp_apply, j, Subobject.ofLE_arrow] using hz)
+      rw [← hy]
+      exact ConcreteCategory.congr_hom (cokernel.condition j) z
+  have hmap : ∀ {A B A' B' : AddCommGrpCat.{u + 1}} (f : A ⟶ B) (g : A' ⟶ B')
+      (a : A ⟶ A') (b : B ⟶ B') (h : f ≫ b = a ≫ g) (x : B),
+      (cokernel.map f g a b h) (cokernel.π f x) = cokernel.π g (b x) := by
+    intro A B A' B' f g a b h x
+    exact ConcreteCategory.congr_hom (cokernel.π_desc f (b ≫ cokernel.π g) _) x
+  let f (z : ℤ) := (W.step z).arrow ≫ eB.inv
+  have hf (z : ℤ) : Function.Injective (f z) :=
+    (AddCommGrpCat.mono_iff_injective (f z)).mp inferInstance
+  let b (z : ℤ) := AddMonoidHom.ofInjective (f := (f z).hom) (hf z)
+  let S : ℕ → AddSubgroup B.pt := fun n ↦ (f (a + n)).hom.range
+  have hS0 : S 0 = ⊤ := by
+    change (f (a + 0)).hom.range = ⊤
+    rw [add_zero]
+    have hw : IsIso (W.step a).arrow := by rw [htop]; infer_instance
+    let := hw
+    exact (AddCommGrpCat.epi_iff_range_eq_top (f a)).mp inferInstance
+  have hSN : S (p + 1 - a).toNat = ⊥ := by
+    have heq : a + ((p + 1 - a).toNat : ℤ) = max a (p + 1) := by omega
+    change (f (a + ((p + 1 - a).toNat : ℤ))).hom.range = ⊥
+    have hz : f (max a (p + 1)) = 0 := by
+      dsimp [f]
+      have hzero : (W.step (max a (p + 1))).arrow = 0 := by
+        exact zero_of_source_iso_zero _
+          (Subobject.isoOfEq _ _ hbot ≪≫ Subobject.botCoeIsoZero)
+      simp only [hzero, zero_comp]
+    rw [heq, hz]
+    exact AddMonoidHom.range_zero
+  have hanti : Antitone S := by
+    intro m n hmn
+    rintro x ⟨y, rfl⟩
+    let j := Subobject.ofLE (W.step (a + n)) (W.step (a + m))
+      (W.antitone_step (by omega))
+    refine ⟨j y, ?_⟩
+    exact ConcreteCategory.congr_hom
+      (show j ≫ f (a + m) = f (a + n) by
+        dsimp [f, j]
+        rw [← Category.assoc, Subobject.ofLE_arrow]) y
+  refine ⟨S, hS0, hSN, hanti, ?_⟩
+  intro n hn
+  rw [show p - a - (n : ℤ) = p - (a + n) by omega]
+  obtain ⟨r, hr, e, e', ht⟩ := hstable (a + n)
+  clear hstable
+  let g (i : I) := ((V i).step (a + n)).arrow ≫ (eH i).inv
+  have hg (i : I) : Function.Injective (g i) :=
+    (AddCommGrpCat.mono_iff_injective (g i)).mp inferInstance
+  let d (i : I) := AddMonoidHom.ofInjective (f := (g i).hom) (hg i)
+  let T : ∀ j : J, AddSubgroup (H.obj (R.obj j)) :=
+    fun j ↦ (g (unop (R.obj j))).hom.range
+  let π := cokernel.π (Subobject.ofLE (W.step (a + n + 1)) (W.step (a + n))
+    (W.antitone_step (Int.le_add_one (le_refl _))))
+  let q : S n →+ (E'.page r hr).X ⟨p - (a + n), a + n⟩ :=
+    e'.inv.hom.comp (π.hom.comp (b (a + n)).symm.toAddMonoidHom)
+  let πi (i : I) := cokernel.π
+    (Subobject.ofLE ((V i).step (a + n + 1)) ((V i).step (a + n))
+      ((V i).antitone_step (Int.le_add_one (le_refl _))))
+  let ei (i : I) := (e i).symm
+  let el := e'.symm
+  let t : ∀ j : J, T j →+
+      ((E0.obj (R.obj j)).page r hr).X ⟨p - (a + n), a + n⟩ :=
+    fun j ↦ (ei (unop (R.obj j))).hom.hom.comp
+      ((πi (unop (R.obj j))).hom.comp (d (unop (R.obj j))).symm.toAddMonoidHom)
+  refine ⟨r, hr, T, q, t, ?_, ?_, ?_⟩
+  · intro x
+    have hzero : q x = 0 ↔ π ((b (a + n)).symm x) = 0 := by
+      exact map_eq_zero_iff el.hom.hom
+        ((AddCommGrpCat.mono_iff_injective el.hom).mp inferInstance)
+    rw [hzero, hstep]
+    have hx := AddMonoidHom.apply_ofInjective_symm (hf (a + n)) x
+    have hnext : S (n + 1) = (f (a + n + 1)).hom.range := by
+      change (f (a + ((n + 1 : ℕ) : ℤ))).hom.range = _
+      exact congrArg (fun z ↦ (f z).hom.range) (by omega)
+    rw [hnext]
+    constructor
+    · rintro ⟨z, hz⟩
+      refine ⟨z, ?_⟩
+      exact (congrArg eB.inv hz).trans hx
+    · rintro ⟨z, hz⟩
+      refine ⟨z, ?_⟩
+      apply (AddCommGrpCat.mono_iff_injective eB.inv).mp inferInstance
+      exact hz.trans hx.symm
+  · intro j
+    exact ((AddCommGrpCat.epi_iff_surjective (ei (unop (R.obj j))).hom).mp
+      inferInstance).comp
+        (((AddCommGrpCat.epi_iff_surjective (πi (unop (R.obj j)))).mp
+          inferInstance).comp (d (unop (R.obj j))).symm.surjective)
+  · intro j y
+    let i := unop (R.obj j)
+    let z := (d i).symm y
+    obtain ⟨k, hk, hc, hs⟩ := ht i
+    have hz : g i z = (y : H.obj (R.obj j)) :=
+      AddMonoidHom.apply_ofInjective_symm (hg i) y
+    have hb : B.ι.app (R.obj j) (y : H.obj (R.obj j)) = f (a + n) (k (a + n) z) := by
+      apply (AddCommGrpCat.mono_iff_injective eB.hom).mp inferInstance
+      have hh := ConcreteCategory.congr_hom (hk (a + n)) z
+      simp only [ConcreteCategory.comp_apply] at hh
+      have hb' := ConcreteCategory.congr_hom (hB i) (y : H.obj (R.obj j))
+      simp only [ConcreteCategory.comp_apply] at hb'
+      have hz' : (eH i).hom (y : H.obj (R.obj j)) = ((V i).step (a + n)).arrow z := by
+        rw [← hz]
+        simp only [g, ConcreteCategory.comp_apply, Iso.inv_hom_id_apply]
+      rw [hz'] at hb'
+      change eB.hom (B.ι.app (op i) (y : H.obj (R.obj j))) =
+        eB.hom (eB.inv ((W.step (a + n)).arrow (k (a + n) z)))
+      rw [Iso.inv_hom_id_apply]
+      exact hb'.trans hh.symm
+    have hy : B.ι.app (R.obj j) (y : H.obj (R.obj j)) ∈ S n :=
+      ⟨k (a + n) z, hb.symm⟩
+    refine ⟨hy, ?_⟩
+    have hrep : (b (a + n)).symm
+        ⟨B.ι.app (R.obj j) (y : H.obj (R.obj j)), hy⟩ = k (a + n) z := by
+      apply hf (a + n)
+      rw [AddMonoidHom.apply_ofInjective_symm]
+      exact hb
+    have hsq := ConcreteCategory.congr_hom hs ((ei i).hom (πi i z))
+    have hmap' := hmap _ _ (k (a + n + 1)) (k (a + n)) (hc (a + n)) z
+    apply (AddCommGrpCat.mono_iff_injective e'.hom).mp inferInstance
+    change e'.hom (e'.inv (π ((b (a + n)).symm
+      ⟨B.ι.app (R.obj j) (y : H.obj (R.obj j)), hy⟩))) =
+      e'.hom (((v0 (op i)).hom r hr).f ⟨p - (a + n), a + n⟩
+        ((e i).inv (πi i z)))
+    rw [Iso.inv_hom_id_apply, hrep]
+    simp only [ei, Iso.symm_hom, ConcreteCategory.comp_apply,
+      Iso.inv_hom_id_apply] at hsq
+    exact (hsq.trans hmap').symm
+
 set_option backward.isDefEq.respectTransparency true in
 set_option linter.unusedVariables false in
 set_option profiler true in
@@ -223,36 +417,6 @@ theorem exists_etale_complex_abutment_presentations
                 ((v0 (R.obj j)).hom r hr).f ⟨p - a - n, a + n⟩ (t j y) := by
   set_option backward.isDefEq.respectTransparency false in
     classical
-    have hstep : ∀ {A : AddCommGrpCat.{u + 1}}
-        (B : DecreasingFiltration A) (q : ℤ)
-        (y : (B.step q : AddCommGrpCat.{u + 1})),
-        cokernel.π (Subobject.ofLE (B.step (q + 1)) (B.step q)
-          (B.antitone_step (Int.le_add_one (le_refl _)))) y = 0 ↔
-          ∃ z : (B.step (q + 1) : AddCommGrpCat.{u + 1}),
-            (B.step (q + 1)).arrow z = (B.step q).arrow y := by
-      intro A B q y
-      let j := Subobject.ofLE (B.step (q + 1)) (B.step q)
-        (B.antitone_step (Int.le_add_one (le_refl _)))
-      constructor
-      · intro h
-        obtain ⟨z, hz⟩ := (ShortComplex.ab_exact_iff _).mp
-          (ShortComplex.exact_cokernel j) y h
-        refine ⟨z, ?_⟩
-        calc
-          (B.step (q + 1)).arrow z = (B.step q).arrow (j z) := by
-            exact (ConcreteCategory.congr_hom (Subobject.ofLE_arrow _) z).symm
-          _ = (B.step q).arrow y := congrArg _ hz
-      · rintro ⟨z, hz⟩
-        have hy : j z = y := (AddCommGrpCat.mono_iff_injective (B.step q).arrow).mp
-          inferInstance (by
-            simpa only [← ConcreteCategory.comp_apply, j, Subobject.ofLE_arrow] using hz)
-        rw [← hy]
-        exact ConcreteCategory.congr_hom (cokernel.condition j) z
-    have hmap : ∀ {A B A' B' : AddCommGrpCat.{u + 1}} (f : A ⟶ B) (g : A' ⟶ B')
-        (a : A ⟶ A') (b : B ⟶ B') (h : f ≫ b = a ≫ g) (x : B),
-        (cokernel.map f g a b h) (cokernel.π f x) = cokernel.π g (b x) := by
-      intro A B A' B' f g a b h x
-      exact ConcreteCategory.congr_hom (cokernel.π_desc f (b ≫ cokernel.π g) _) x
     obtain ⟨E0, E', v0, compatible, firstIso, firstIsoLimit, first_transition,
       first_comparison, negative, negativeLimit, V, W, htop, hbot, hstable⟩ :=
       exists_etale_complex_coherent_filtrations D c F φ hidentity hcomposition a hbelow
@@ -268,128 +432,13 @@ theorem exists_etale_complex_abutment_presentations
     have hR : R.Final := by
       dsimp [R]
       infer_instance
-    let f (z : ℤ) := (W.step z).arrow ≫ eB.inv
-    have hf (z : ℤ) : Function.Injective (f z) :=
-      (AddCommGrpCat.mono_iff_injective (f z)).mp inferInstance
-    let b (z : ℤ) := AddMonoidHom.ofInjective (f := (f z).hom) (hf z)
-    let S : ℕ → AddSubgroup B.pt := fun n ↦ (f (a + n)).hom.range
-    have hS0 : S 0 = ⊤ := by
-      change (f (a + 0)).hom.range = ⊤
-      rw [add_zero]
-      have hw : IsIso (W.step a).arrow := by rw [htop]; infer_instance
-      let := hw
-      exact (AddCommGrpCat.epi_iff_range_eq_top (f a)).mp inferInstance
-    have hSN : S (p + 1 - a).toNat = ⊥ := by
-      have heq : a + ((p + 1 - a).toNat : ℤ) = max a (p + 1) := by omega
-      change (f (a + ((p + 1 - a).toNat : ℤ))).hom.range = ⊥
-      have hz : f (max a (p + 1)) = 0 := by
-        dsimp [f]
-        have hzero : (W.step (max a (p + 1))).arrow = 0 := by
-          exact zero_of_source_iso_zero _
-            (Subobject.isoOfEq _ _ hbot ≪≫ Subobject.botCoeIsoZero)
-        simp only [hzero, zero_comp]
-      rw [heq, hz]
-      exact AddMonoidHom.range_zero
-    have hanti : Antitone S := by
-      intro m n hmn
-      rintro x ⟨y, rfl⟩
-      let j := Subobject.ofLE (W.step (a + n)) (W.step (a + m))
-        (W.antitone_step (by omega))
-      refine ⟨j y, ?_⟩
-      exact ConcreteCategory.congr_hom
-        (show j ≫ f (a + m) = f (a + n) by
-          dsimp [f, j]
-          rw [← Category.assoc, Subobject.ofLE_arrow]) y
-    refine ⟨J, horder.toPreorder, hdirected, hnonempty, R, hR, E0, E', v0,
+    obtain ⟨S, hS0, hSN, hanti, hquot⟩ := exists_quotient_presentations_of_filtrations
+      _ _ H B eH eB
+      (fun i ↦ P (c.π.app i) (F i) ≫ (cohomology AddCommGrpCat.{u + 1} c.pt p).map
+        (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i))))
+      hB V W a p htop hbot E0 E' v0 hstable R
+    exact ⟨J, horder.toPreorder, hdirected, hnonempty, R, hR, E0, E', v0,
       compatible, firstIso, firstIsoLimit, first_transition, first_comparison,
-      negative, negativeLimit, S, hS0, hSN, hanti, ?_⟩
-    intro n hn
-    clear compatible firstIso firstIsoLimit first_transition first_comparison
-      negative negativeLimit
-    rw [show p - a - (n : ℤ) = p - (a + n) by omega]
-    obtain ⟨r, hr, e, e', ht⟩ := hstable (a + n)
-    clear hstable
-    let g (i : I) := ((V i).step (a + n)).arrow ≫ (eH i).inv
-    have hg (i : I) : Function.Injective (g i) :=
-      (AddCommGrpCat.mono_iff_injective (g i)).mp inferInstance
-    let d (i : I) := AddMonoidHom.ofInjective (f := (g i).hom) (hg i)
-    let T : ∀ j : J, AddSubgroup (H.obj (R.obj j)) :=
-      fun j ↦ (g (unop (R.obj j))).hom.range
-    let π := cokernel.π (Subobject.ofLE (W.step (a + n + 1)) (W.step (a + n))
-      (W.antitone_step (Int.le_add_one (le_refl _))))
-    let q : S n →+ (E'.page r hr).X ⟨p - (a + n), a + n⟩ :=
-      e'.inv.hom.comp (π.hom.comp (b (a + n)).symm.toAddMonoidHom)
-    let πi (i : I) := cokernel.π
-      (Subobject.ofLE ((V i).step (a + n + 1)) ((V i).step (a + n))
-        ((V i).antitone_step (Int.le_add_one (le_refl _))))
-    let ei (i : I) := (e i).symm
-    let el := e'.symm
-    let t : ∀ j : J, T j →+
-        ((E0.obj (R.obj j)).page r hr).X ⟨p - (a + n), a + n⟩ :=
-      fun j ↦ (ei (unop (R.obj j))).hom.hom.comp
-        ((πi (unop (R.obj j))).hom.comp (d (unop (R.obj j))).symm.toAddMonoidHom)
-    refine ⟨r, hr, T, q, t, ?_, ?_, ?_⟩
-    · intro x
-      have hzero : q x = 0 ↔ π ((b (a + n)).symm x) = 0 := by
-        exact map_eq_zero_iff el.hom.hom
-          ((AddCommGrpCat.mono_iff_injective el.hom).mp inferInstance)
-      rw [hzero, hstep]
-      have hx := AddMonoidHom.apply_ofInjective_symm (hf (a + n)) x
-      have hnext : S (n + 1) = (f (a + n + 1)).hom.range := by
-        change (f (a + ((n + 1 : ℕ) : ℤ))).hom.range = _
-        exact congrArg (fun z ↦ (f z).hom.range) (by omega)
-      rw [hnext]
-      constructor
-      · rintro ⟨z, hz⟩
-        refine ⟨z, ?_⟩
-        exact (congrArg eB.inv hz).trans hx
-      · rintro ⟨z, hz⟩
-        refine ⟨z, ?_⟩
-        apply (AddCommGrpCat.mono_iff_injective eB.inv).mp inferInstance
-        exact hz.trans hx.symm
-    · intro j
-      exact ((AddCommGrpCat.epi_iff_surjective (ei (unop (R.obj j))).hom).mp
-        inferInstance).comp
-          (((AddCommGrpCat.epi_iff_surjective (πi (unop (R.obj j)))).mp
-            inferInstance).comp (d (unop (R.obj j))).symm.surjective)
-    · intro j y
-      let i := unop (R.obj j)
-      let z := (d i).symm y
-      obtain ⟨k, hk, hc, hs⟩ := ht i
-      have hz : g i z = (y : H.obj (R.obj j)) :=
-        AddMonoidHom.apply_ofInjective_symm (hg i) y
-      have hb : B.ι.app (R.obj j) (y : H.obj (R.obj j)) = f (a + n) (k (a + n) z) := by
-        apply (AddCommGrpCat.mono_iff_injective eB.hom).mp inferInstance
-        have hh := ConcreteCategory.congr_hom (hk (a + n)) z
-        simp only [ConcreteCategory.comp_apply] at hh
-        have hb' := ConcreteCategory.congr_hom (hB i) (y : H.obj (R.obj j))
-        simp only [ConcreteCategory.comp_apply] at hb'
-        have hz' : (eH i).hom (y : H.obj (R.obj j)) = ((V i).step (a + n)).arrow z := by
-          rw [← hz]
-          simp only [g, ConcreteCategory.comp_apply, Iso.inv_hom_id_apply]
-        rw [hz'] at hb'
-        change eB.hom (B.ι.app (op i) (y : H.obj (R.obj j))) =
-          eB.hom (eB.inv ((W.step (a + n)).arrow (k (a + n) z)))
-        rw [Iso.inv_hom_id_apply]
-        exact hb'.trans hh.symm
-      have hy : B.ι.app (R.obj j) (y : H.obj (R.obj j)) ∈ S n :=
-        ⟨k (a + n) z, hb.symm⟩
-      refine ⟨hy, ?_⟩
-      have hrep : (b (a + n)).symm
-          ⟨B.ι.app (R.obj j) (y : H.obj (R.obj j)), hy⟩ = k (a + n) z := by
-        apply hf (a + n)
-        rw [AddMonoidHom.apply_ofInjective_symm]
-        exact hb
-      have hsq := ConcreteCategory.congr_hom hs ((ei i).hom (πi i z))
-      have hmap' := hmap _ _ (k (a + n + 1)) (k (a + n)) (hc (a + n)) z
-      apply (AddCommGrpCat.mono_iff_injective e'.hom).mp inferInstance
-      change e'.hom (e'.inv (π ((b (a + n)).symm
-        ⟨B.ι.app (R.obj j) (y : H.obj (R.obj j)), hy⟩))) =
-        e'.hom (((v0 (op i)).hom r hr).f ⟨p - (a + n), a + n⟩
-          ((e i).inv (πi i z)))
-      rw [Iso.inv_hom_id_apply, hrep]
-      simp only [ei, Iso.symm_hom, ConcreteCategory.comp_apply,
-        Iso.inv_hom_id_apply] at hsq
-      exact (hsq.trans hmap').symm
+      negative, negativeLimit, S, hS0, hSN, hanti, hquot⟩
 
 end AlgebraicGeometry.Etale

@@ -170,7 +170,9 @@ private lemma coeff_eq_of_pullback_compatibility {A B C T : Scheme.{u}}
     (hg₂ : g₂ • Scheme.Modules.pullbackSection g ℓ =
       ((Scheme.Modules.pullback g).obj L).presheaf.map (homOfLE le_top).op ey) :
     i.app _ g₁ = T.presheaf.map (homOfLE (congrArg (· ⁻¹ᵁ O) h).le).op (j.app _ g₂) := by
-  let e := (Scheme.Modules.pullbackComp i f).app L ≪≫
+  let e : (Scheme.Modules.pullback i).obj ((Scheme.Modules.pullback f).obj L) ≅
+      (Scheme.Modules.pullback j).obj ((Scheme.Modules.pullback g).obj L) :=
+    (Scheme.Modules.pullbackComp i f).app L ≪≫
     (Scheme.Modules.pullbackCongr h).app L ≪≫
     ((Scheme.Modules.pullbackComp j g).app L).symm
   have hW : (i ≫ f) ⁻¹ᵁ O = (j ≫ g) ⁻¹ᵁ O :=

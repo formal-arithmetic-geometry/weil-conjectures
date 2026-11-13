@@ -42,6 +42,7 @@ namespace TheoremOfCube
 
 variable {K : Type u} [Field K] (X Y Z : Over (Spec (.of K)))
 
+set_option profiler true in
 /-- Glue affine local sections modulo a quasi-coherent module with vanishing first cohomology.
 Keeping the cover and its restriction maps over arbitrary schemes avoids unfolding the products
 used to construct the local sections. -/
