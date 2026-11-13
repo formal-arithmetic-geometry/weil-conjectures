@@ -17,6 +17,7 @@ universe u v r w
 open CategoryTheory Opposite
 namespace CategoryTheory
 
+set_option trace.profiler true in
 set_option maxHeartbeats 400000 in
 -- Elaborating both shifted sheaf Hom comparisons and localization equivalences needs extra fuel.
 /-- The shifted comparison is natural for arbitrary maps of the two arguments.

@@ -193,6 +193,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 
 attribute [local instance] monoidalCategory symmetricCategory
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1000000 in
 -- The tensor localization comparison has dependent sheafification instances.
 /-- The tensor comparison is natural in the second factor. -/

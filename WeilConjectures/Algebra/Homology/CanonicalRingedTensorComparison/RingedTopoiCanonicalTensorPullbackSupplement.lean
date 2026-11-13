@@ -402,6 +402,7 @@ private theorem tensorPullbackTotal_naturality
 end CanonicalTensorPullbackProof
 
 set_option synthInstance.maxSize 2048 in
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- Elaborate the full two-variable representative square.
 set_option linter.style.longLine false in
