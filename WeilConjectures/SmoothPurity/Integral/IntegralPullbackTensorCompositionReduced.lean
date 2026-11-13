@@ -159,14 +159,16 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
               (integralSystemTransition l E) h f).hom.app
                 (((sfIntegralConstructible l E Y).ι ⋙
                   (pullbackTensorCalculus l E Y).reduction).obj K) := hc K
-        _ = _ := congrArg
-          (fun a : integralComparisonDerivedSequencePullback l E (h ≫ f) ≅
-              integralComparisonDerivedSequencePullback l E f ⋙
-                integralComparisonDerivedSequencePullback l E h ↦
-            (integralPullbackSystemComparison_sequence l E (h ≫ f)).hom.app K ≫
-              a.hom.app (((sfIntegralConstructible l E Y).ι ⋙
-                (pullbackTensorCalculus l E Y).reduction).obj K))
-          (finiteSystemDerivedComposition_eq_sequence l E h f))
+        _ = _ := by
+          have e := congrArg
+            (fun a : integralComparisonDerivedSequencePullback l E (h ≫ f) ≅
+                integralComparisonDerivedSequencePullback l E f ⋙
+                  integralComparisonDerivedSequencePullback l E h ↦
+              (integralPullbackSystemComparison_sequence l E (h ≫ f)).hom.app K ≫
+                a.hom.app (((sfIntegralConstructible l E Y).ι ⋙
+                  (pullbackTensorCalculus l E Y).reduction).obj K))
+            (finiteSystemDerivedComposition_eq_sequence l E h f)
+          exact e)
     (canonicalIntegralPullbackTensor l E f) (canonicalIntegralPullbackTensor l E h)
     (canonicalIntegralPullbackTensor l E (h ≫ f))
     (canonicalIntegralPullbackTensor_systemReduction_sequence l E f)
