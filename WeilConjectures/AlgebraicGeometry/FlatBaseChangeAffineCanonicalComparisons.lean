@@ -31,7 +31,7 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 
-set_option trace.profiler true in
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Canonical source and target affine comparisons, compatible with the cohomological
@@ -118,8 +118,12 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_canonical_comparisons
   let : ∀ G : S.Modules, Module Γ(S, V)
       Γ((Scheme.Modules.tensorPullback g).obj G, W) :=
     fun G ↦ Module.compHom _ (g.appLE V W eVW).hom
-  obtain ⟨c, hc, hs, ht, _⟩ :=
+  have sections :=
     Scheme.Modules.exists_tensorPullback_affine_sections g ⟨V, hV⟩ ⟨W, hW⟩ eVW
+  let c := sections.choose
+  have hc := sections.choose_spec.1
+  have hs := sections.choose_spec.2.1
+  have ht := sections.choose_spec.2.2.1
   have target :=
     Scheme.Modules.exists_flatBaseChange_target_leray_comparison
       f g F I J p V W hV hW eVW D
@@ -130,8 +134,7 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_canonical_comparisons
   have edge :=
     Scheme.Modules.exists_affine_cohomology_section_equiv f F I p V hV D.source E hE
   obtain ⟨e, he⟩ := edge
-  have hP : P.IsQuasicoherent := by
-    exact ordinaryHigherImage_isQuasicoherent f F inferInstance p
+  have hP := ordinaryHigherImage_isQuasicoherent f F inferInstance p
   let k : (Γ(S', W) ⊗[Γ(S, V)] Γ(P, V)) →ₗ[Γ(S', W)]
       Γ((Scheme.Modules.tensorPullback g).obj P, W) :=
     { toFun := fun t ↦ c P hP ((TensorProduct.comm Γ(S, V) Γ(P, V) Γ(S', W)).symm t)
@@ -151,6 +154,7 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_canonical_comparisons
     change c P hP (e xi ⊗ₜ[Γ(S, V)] s) = _
     have he' : e xi = D.sourceClass p (eH.symm xi) := by
       rw [heH]
+      dsimp only [Scheme.Modules.FlatBaseChangeOpenChoices.sourceClass]
       exact he xi
     exact (ht P hP (e xi) s).trans (congrArg (fun z ↦ s •
       ((Scheme.Modules.tensorPullback g).obj P).presheaf.map (homOfLE eVW).op

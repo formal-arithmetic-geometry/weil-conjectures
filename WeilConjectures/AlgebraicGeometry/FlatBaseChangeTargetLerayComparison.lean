@@ -40,7 +40,7 @@ private theorem equiv_transport_commutative_square
 
 set_option linter.style.haveILetI false in
 -- Inline the canonical algebra to match the letI in the fixed statement.
-set_option trace.profiler true in
+set_option profiler true in
 /-- Choose the natural source module/Ext comparison together with the target affine
 Leray equivalence, compatibly with the cohomological pullback. This does not construct
 or assume a source tensor comparison, nor assert invertibility of base change.
