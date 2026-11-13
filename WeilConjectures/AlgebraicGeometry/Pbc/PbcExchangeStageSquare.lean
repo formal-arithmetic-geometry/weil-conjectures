@@ -583,6 +583,7 @@ theorem pbcExchangeStageSquare_integral
     Category.assoc, eqToHom_trans, eqToHom_trans_assoc]
   set_option backward.isDefEq.respectTransparency false in
   simp only [pbcDescentPullback_map_homMk, pbcDescentDirectImage_map_homMk]
+  trace_state
   set_option backward.isDefEq.respectTransparency false in
   simp only [localization_map_eqToHom_map_assoc]
   set_option backward.isDefEq.respectTransparency false in
