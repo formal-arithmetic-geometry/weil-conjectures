@@ -85,6 +85,12 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
           (canonicalIntegralPullbackTensor l E h
             ((constructibleIntegralPullback l E f).obj M)
             ((constructibleIntegralPullback l E f).obj N)).hom) := by
+  let β {U V : Scheme.{u}}
+      [∀ x : U, Invertible (l : U.residueField x)]
+      [∀ y : V, Invertible (l : V.residueField y)] (g : U ⟶ V) :
+      constructibleIntegralPullback l E g ⋙ integralSystemReduction l E U ≅
+        integralSystemReduction l E V ⋙ integralComparisonDerivedSequencePullback l E g :=
+    (integralPullbackSystemComparison l E).choose g
   have key := reducedPullbackTensorComposition_of_systemLaw
     (integralSystemReduction l E Y) (integralSystemReduction l E X)
     (integralSystemReduction l E Z)
@@ -98,15 +104,13 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
     (pullbackTensorCalculus l E Y).systemClosed.tensor
     (pullbackTensorCalculus l E X).systemClosed.tensor
     (pullbackTensorCalculus l E Z).systemClosed.tensor
-    ((integralPullbackSystemComparison l E).choose f)
-    ((integralPullbackSystemComparison l E).choose h)
-    ((integralPullbackSystemComparison l E).choose (h ≫ f))
+    (β f) (β h) (β (h ≫ f))
     (integralSystemTensorReduction l E Y) (integralSystemTensorReduction l E X)
     (integralSystemTensorReduction l E Z)
     (integralSystemTensorComparison l E f) (integralSystemTensorComparison l E h)
     (integralSystemTensorComparison l E (h ≫ f))
     (integralComparisonSystemComposition l E h f) c
-    (fun K ↦ by simpa only [finiteSystemDerivedComposition_eq] using hc K)
+    (fun K ↦ by simpa only [β, finiteSystemDerivedComposition_eq] using hc K)
     (canonicalIntegralPullbackTensor l E f) (canonicalIntegralPullbackTensor l E h)
     (canonicalIntegralPullbackTensor l E (h ≫ f))
     (canonicalIntegralPullbackTensor_systemReduction l E f)
