@@ -333,11 +333,19 @@ private theorem composite_complex_epsilon
     Functor.comp_obj, HomotopyCategory.quotient, CategoryTheory.Quotient.functor]
   simp only [Category.id_comp, Category.comp_id]
 
+private theorem derivedPullbackComplexComparison_eq_epsilon
+    {A B : RingedTensorCorner.{u, w}} (e : RingedTensorEdge A B)
+    (P : CochainComplex (CornerModules A) ℤ) :
+    derivedPullbackComplexComparison e.pullback e.left e.epsilon P =
+      e.epsilon.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) := by
+  change e.left.map (𝟙 _) ≫
+    e.epsilon.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
+      DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _
+  simp only [Functor.map_id, Category.comp_id, Category.id_comp]
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
 set_option trace.profiler true in
--- Elaborate the nested quotient-to-derived transports before cancelling their isomorphisms.
 private theorem square_condition_transport
     (s : RingedTensorSquare Y X Y' X' f g h k)
     (theta : g.left ⋙ k.left ≅ f.left ⋙ h.left)
@@ -356,40 +364,10 @@ private theorem square_condition_transport
       (edge_composite_epsilon g k).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
         DerivedCategory.Qh.map ((square_homotopy_comparison s).hom.app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := by
-  have hsquare : DerivedCategory.Qh.map
-      ((square_homotopy_comparison s).hom.app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
-      DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
-        (s.complexComparison.hom.app P)) := rfl
-  rw [hsquare]
-  rw [composite_complex_epsilon f h P,
-    reassoc_of% (composite_complex_epsilon g k P)]
-  have hn := theta.hom.naturality
-    ((DerivedCategory.quotientCompQhIso (CornerModules Y)).inv.app P)
-  dsimp only [Functor.comp_map] at hn
-  simp only [Functor.comp_map]
-  rw [← reassoc_of% hn]
-  have hm := DerivedCategory.quotientCompQhIso_hom_naturality
-    (s.complexComparison.hom.app P)
-  dsimp only [Functor.comp_obj] at hm
-  erw [← hm]
-  dsimp only [Functor.comp_obj, Functor.mapHomotopyCategory, CategoryTheory.Quotient.lift,
-    HomotopyCategory.quotient, CategoryTheory.Quotient.functor]
-  let q := (DerivedCategory.quotientCompQhIso (CornerModules X')).hom.app
-    ((h.pullback.mapHomologicalComplex (.up ℤ)).obj
-      ((f.pullback.mapHomologicalComplex (.up ℤ)).obj P))
-  let i := k.left.map (g.left.map
-    ((DerivedCategory.quotientCompQhIso (CornerModules Y)).inv.app P))
-  have : IsIso q := by dsimp [q]; infer_instance
-  have : IsIso i := by dsimp [i]; infer_instance
-  constructor
-  · intro he
-    apply (cancel_epi i).1
-    apply (cancel_mono q).1
-    simpa only [Category.assoc] using he
-  · intro he
-    have := congrArg (fun z ↦ i ≫ z ≫ q) he
-    simpa only [Category.assoc] using this
+  -- The quotient comparison and the homotopy factorization have identity components.
+  simp only [derivedPullbackComplexComparison_eq_epsilon, edge_composite_epsilon,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.assoc]
+  rfl
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
