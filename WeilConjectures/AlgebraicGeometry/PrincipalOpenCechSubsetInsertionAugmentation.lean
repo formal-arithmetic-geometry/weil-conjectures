@@ -88,6 +88,12 @@ private theorem principalSubsetInsertion_hom_apply
   change (∑ S, principalSubsetInsertOne A r f J n S (c S)) = _
   rfl
 
+private theorem map_iso_cancel_apply
+    {C : Type*} [Category C] (H : C ⥤ AddCommGrpCat.{u})
+    {X Y Z W : C} (a : X ⟶ Y) (e : Y ≅ Z) (t : Y ⟶ W) (x : H.obj X) :
+    (H.map (a ≫ e.hom) ≫ (H.map e.inv ≫ H.map t)) x = H.map (a ≫ t) x := by
+  rw [← H.map_comp, ← H.map_comp, Category.assoc, Iso.hom_inv_id_assoc]
+
 /-- Explicit subset insertion agrees with the singleton augmentation.
 
 Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
@@ -166,11 +172,11 @@ theorem principalSubsetInsertion_augmentation
         (map_zero (principalSubsetInsertOne A r f J n S).hom).trans (map_zero b.hom).symm
   change (∑ S, principalSubsetInsertOne A r f J n S (c S)) = _
   simp_rw [hc]
-  rw [map_sum_singleton_subsets r _ b.hom z]
+  refine (map_sum_singleton_subsets r _ b.hom z).trans ?_
   change (H.map (alternatingCechZero U (J'.X n) ≫ e.hom) ≫ b).hom
     ((principalOpenSectionTransport A V (J.X n)).hom s) = _
-  dsimp only [b]
-  rw [← H.map_comp, ← H.map_comp, Category.assoc, Iso.hom_inv_id_assoc]
-  rfl
+  exact map_iso_cancel_apply H (alternatingCechZero U (J'.X n)) e
+    (K.ιTotal (ComplexShape.up ℤ) 0 n n (Int.zero_add n))
+    ((principalOpenSectionTransport A V (J.X n)).hom s)
 
 end AlgebraicGeometry
