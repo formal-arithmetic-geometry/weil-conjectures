@@ -53,6 +53,39 @@ private lemma rightUnitor_shift_tensor_hom (P : CochainComplex.KFlat C) (n : ℤ
   erw [Functor.commShiftIso_comp_hom_app, Functor.commShiftIso_comp_hom_app]
   rfl
 
+open DerivedCategory.TensorCommShift₂ in
+private lemma rightUnitor_shift_lifting_square (P : CochainComplex.KFlat C) (n : ℤ) :
+    let a := ((CochainComplex.ιKFlat C).commShiftIso n).hom.app P
+    let η := Functor.CommShift₂OfLocalization.liftingIsoApp (L C) (LKFlat C)
+      (HomologicalComplex.quasiIso C (.up ℤ)) (HomologicalComplex.quasiIso C (.up ℤ)).WKFlat
+      (F C).flip (curriedTensor (DerivedCategory C)).flip (𝟙_ _)
+    ((curriedTensor (DerivedCategory C)).flip.obj (𝟙_ _)).map
+        ((L C).map a ≫ ((L C).commShiftIso n).hom.app P.obj) ≫
+      (((curriedTensor (DerivedCategory C)).flip.obj (𝟙_ _)).commShiftIso n).hom.app
+        ((LKFlat C).obj P) ≫ (η.app P)⟦n⟧' =
+      η.app (P⟦n⟧) ≫
+        (L C).map (a ▷ 𝟙_ _ ≫
+          (CochainComplex.mapBifunctorShift₁Iso P.obj (𝟙_ _) (curriedTensor C) n).hom) ≫
+        ((L C).commShiftIso n).hom.app _ := by
+  let : MonoidalCategory (CochainComplex C ℤ) := inferInstance
+  let : MonoidalCategory (HomotopyCategory C (.up ℤ)) := inferInstance
+  let : MonoidalCategory (DerivedCategory C) := inferInstance
+  let a := ((CochainComplex.ιKFlat C).commShiftIso n).hom.app P
+  have := Functor.CommShift₂OfLocalization.commShift_liftingIsoApp (M := ℤ) (L C) (LKFlat C)
+    (HomologicalComplex.quasiIso C (.up ℤ)) (HomologicalComplex.quasiIso C (.up ℤ)).WKFlat
+    (F C).flip (curriedTensor (DerivedCategory C)).flip (𝟙_ _)
+  have h₁ := NatTrans.shift_app_comm (Functor.CommShift₂OfLocalization.liftingIsoApp (L C)
+    (LKFlat C) (HomologicalComplex.quasiIso C (.up ℤ))
+    (HomologicalComplex.quasiIso C (.up ℤ)).WKFlat
+    (F C).flip (curriedTensor (DerivedCategory C)).flip (𝟙_ _)) n P
+  rw [Functor.commShiftIso_comp_hom_app] at h₁
+  have h₂ := rightUnitor_shift_tensor_hom C P n
+  have h₃ : ((LKFlat C).commShiftIso n).hom.app P =
+      (L C).map a ≫ ((L C).commShiftIso n).hom.app P.obj :=
+    Functor.commShiftIso_comp_hom_app _ _ _ _
+  rw [h₂, h₃] at h₁
+  simpa only [assoc] using h₁
+
 set_option profiler true in
 open DerivedCategory.TensorCommShift₂ in
 private lemma rightUnitor_shift (P : CochainComplex.KFlat C) (n : ℤ) :
@@ -67,22 +100,8 @@ private lemma rightUnitor_shift (P : CochainComplex.KFlat C) (n : ℤ) :
   let : MonoidalCategoryStruct (HomotopyCategory C (.up ℤ)) := inferInstance
   let : MonoidalCategoryStruct (DerivedCategory C) := inferInstance
   let a := ((CochainComplex.ιKFlat C).commShiftIso n).hom.app P
-  have := Functor.CommShift₂OfLocalization.commShift_liftingIsoApp (M := ℤ) (L C) (LKFlat C)
-    (HomologicalComplex.quasiIso C (.up ℤ)) (HomologicalComplex.quasiIso C (.up ℤ)).WKFlat
-    (F C).flip (curriedTensor (DerivedCategory C)).flip (𝟙_ _)
-  have h₁ := NatTrans.shift_app_comm (Functor.CommShift₂OfLocalization.liftingIsoApp (L C)
-    (LKFlat C) (HomologicalComplex.quasiIso C (.up ℤ))
-    (HomologicalComplex.quasiIso C (.up ℤ)).WKFlat
-    (F C).flip (curriedTensor (DerivedCategory C)).flip (𝟙_ _)) n P
-  rw [Functor.commShiftIso_comp_hom_app] at h₁
+  have h₁ := rightUnitor_shift_lifting_square C P n
   have hr := rightUnitor_liftingIsoApp_hom C
-  have h₂ := rightUnitor_shift_tensor_hom C P n
-  have h₃ : ((LKFlat C).commShiftIso n).hom.app P =
-      (L C).map (a) ≫
-      ((L C).commShiftIso n).hom.app P.obj :=
-    Functor.commShiftIso_comp_hom_app _ _ _ _
-  rw [h₂, h₃] at h₁
-  simp only [assoc] at h₁
   have hA : ((curriedTensor (DerivedCategory C)).flip.obj (𝟙_ _)).map
       ((L C).map (a) ≫
         ((L C).commShiftIso n).hom.app P.obj) ≫ (ρ_ (((LKFlat C).obj P)⟦n⟧)).hom =

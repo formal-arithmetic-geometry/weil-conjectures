@@ -49,7 +49,8 @@ private theorem tensorTotal_solve_chain
   apply (cancel_epi b.hom).1
   apply (cancel_epi (F.map a.hom)).1
   simpa only [Category.assoc, Iso.hom_inv_id_assoc, ← F.map_comp_assoc,
-    Iso.hom_inv_id, Functor.map_id, Category.id_comp] using h
+    Iso.hom_inv_id, Functor.map_id, Category.id_comp,
+    show F.map (𝟙 A) = 𝟙 _ from F.map_id _] using h
 
 private abbrev tensorAdj {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)
@@ -114,6 +115,17 @@ set_option profiler true in
 private theorem pullback_tensor_total_composition_chain
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)
+    (e : Scheme.Modules.tensorPullback g ⋙ Scheme.Modules.tensorPullback f ≅
+      Scheme.Modules.tensorPullback (f ≫ g))
+    (he : ∀ M N : Z.Modules,
+      (Scheme.Modules.tensorPullback f).map
+          ((Classical.choose (Scheme.Modules.module_pullback_tensor g)) M N).hom ≫
+        ((Classical.choose (Scheme.Modules.module_pullback_tensor f))
+          ((Scheme.Modules.tensorPullback g).obj M)
+          ((Scheme.Modules.tensorPullback g).obj N)).hom ≫
+        (e.hom.app M ⊗ₘ e.hom.app N) =
+      e.hom.app (M ⊗ N) ≫
+        ((Classical.choose (Scheme.Modules.module_pullback_tensor (f ≫ g))) M N).hom)
     (ψ : ((Scheme.Modules.tensorPullback (g)).mapHomologicalComplex (.up ℤ)).obj
         (pullbackTensorTotal Z P N) ≅
       pullbackTensorTotal Y
@@ -197,7 +209,7 @@ private theorem pullback_tensor_total_composition_chain
     letI := SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
     letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf
     let Fc := (Scheme.Modules.tensorPullback f).mapHomologicalComplex (.up ℤ)
-    let b := Functor.mapHomologicalComplexCompIso (tensorCompMate f g) (.up ℤ)
+    let b := Functor.mapHomologicalComplexCompIso e (.up ℤ)
     Fc.map ψ.hom ≫ θ.hom ≫ HomologicalComplex.mapBifunctorMap
         (b.hom.app P) (b.hom.app N) (curriedTensor _) (.up ℤ) =
       b.hom.app (pullbackTensorTotal Z P N) ≫ φ.hom := by
@@ -269,7 +281,7 @@ private theorem pullback_tensor_total_composition_chain
   let G := Scheme.Modules.tensorPullback g
   let Fc := F.mapHomologicalComplex (.up ℤ)
   let Gc := G.mapHomologicalComplex (.up ℤ)
-  let b := Functor.mapHomologicalComplexCompIso (tensorCompMate f g) (.up ℤ)
+  let b := Functor.mapHomologicalComplexCompIso e (.up ℤ)
   have : F.IsLeftAdjoint := ⟨_, ⟨tensorAdj f⟩⟩
   have : G.IsLeftAdjoint := ⟨_, ⟨tensorAdj g⟩⟩
   have hchain : Fc.map ψ.hom ≫ θ.hom ≫
@@ -303,18 +315,18 @@ private theorem pullback_tensor_total_composition_chain
       (G.obj (P.X p)) (G.obj (N.X q))).hom
     let ed := ((Classical.choose (Scheme.Modules.module_pullback_tensor (f ≫ g)))
       (P.X p) (N.X q)).hom
-    let bP := (tensorCompMate f g).hom.app (P.X p)
-    let bN := (tensorCompMate f g).hom.app (N.X q)
-    let bT := (tensorCompMate f g).hom.app ((pullbackTensorTotal Z P N).X n)
-    let bS := (tensorCompMate f g).hom.app (P.X p ⊗ N.X q)
+    let bP := e.hom.app (P.X p)
+    let bN := e.hom.app (N.X q)
+    let bT := e.hom.app ((pullbackTensorTotal Z P N).X n)
+    let bS := e.hom.app (P.X p ⊗ N.X q)
     have hψ' : G.map iZ ≫ ψ.hom.f n = eg ≫ iY := hψ p q n h
     have hθ' : F.map iY ≫ θ.hom.f n = ef ≫ iX := hθ p q n h
     have hφ' : H.map iZ ≫ φ.hom.f n = ed ≫ iD := hφ p q n h
     clear hψ hθ hφ
     have hb : F.map (G.map iZ) ≫ bT = bS ≫ H.map iZ :=
-      (tensorCompMate f g).hom.naturality iZ
+      e.hom.naturality iZ
     have hm : F.map eg ≫ ef ≫ (bP ⊗ₘ bN) = bS ≫ ed :=
-      tensorCompMate_tensor f g (P.X p) (N.X q)
+      he (P.X p) (N.X q)
     have hi : iX ≫ (HomologicalComplex.mapBifunctorMap (b.hom.app P)
         (b.hom.app N) (curriedTensor X.Modules) (.up ℤ)).f n =
         (bP ⊗ₘ bN) ≫ iD := by
@@ -334,6 +346,8 @@ set_option profiler true in
 private theorem pullback_tensor_total_composition_localized_of_chain
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)
+    (e : Scheme.Modules.tensorPullback g ⋙ Scheme.Modules.tensorPullback f ≅
+      Scheme.Modules.tensorPullback (f ≫ g))
     (ψ : ((Scheme.Modules.tensorPullback (g)).mapHomologicalComplex (.up ℤ)).obj
         (pullbackTensorTotal Z P N) ≅
       pullbackTensorTotal Y
@@ -357,16 +371,11 @@ private theorem pullback_tensor_total_composition_localized_of_chain
       letI := SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
       letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf
       let Fc := (Scheme.Modules.tensorPullback f).mapHomologicalComplex (.up ℤ)
-      let b := Functor.mapHomologicalComplexCompIso (tensorCompMate f g) (.up ℤ)
+      let b := Functor.mapHomologicalComplexCompIso e (.up ℤ)
       Fc.map ψ.hom ≫ θ.hom ≫ HomologicalComplex.mapBifunctorMap
           (b.hom.app P) (b.hom.app N) (curriedTensor _) (.up ℤ) =
         b.hom.app (pullbackTensorTotal Z P N) ≫ φ.hom) :
-    let β := Functor.mapHomotopyCategoryCompIso
-      ((conjugateIsoEquiv
-        (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ≫ g)))
-        ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).comp
-          (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)))).symm
-        (Scheme.Modules.pushforwardComp f g).symm) (.up ℤ)
+    let β := Functor.mapHomotopyCategoryCompIso e (.up ℤ)
     cast (by rfl)
       (((DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).map (β.hom.app
         ((HomotopyCategory.quotient
@@ -405,7 +414,7 @@ private theorem pullback_tensor_total_composition_localized_of_chain
   let G := Scheme.Modules.tensorPullback g
   let Fc := F.mapHomologicalComplex (.up ℤ)
   let Gc := G.mapHomologicalComplex (.up ℤ)
-  let b := Functor.mapHomologicalComplexCompIso (tensorCompMate f g) (.up ℤ)
+  let b := Functor.mapHomologicalComplexCompIso e (.up ℤ)
   have hsol : HomologicalComplex.mapBifunctorMap (b.hom.app P) (b.hom.app N)
       (curriedTensor _) (.up ℤ) =
       θ.inv ≫ Fc.map ψ.inv ≫ b.hom.app (pullbackTensorTotal Z P N) ≫ φ.hom :=
@@ -559,7 +568,8 @@ theorem pullback_tensor_total_composition_localized
           (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (.up ℤ)).obj
           (pullbackTensorTotal Z P N)))) ≫
       DerivedCategory.Q.map φ.hom := by
-  exact pullback_tensor_total_composition_localized_of_chain f g P N ψ θ φ
-    (pullback_tensor_total_composition_chain f g P N ψ hψ θ hθ φ hφ)
+  exact pullback_tensor_total_composition_localized_of_chain f g P N (tensorCompMate f g) ψ θ φ
+    (pullback_tensor_total_composition_chain f g P N (tensorCompMate f g)
+      (tensorCompMate_tensor f g) ψ hψ θ hθ φ hφ)
 
 end AlgebraicGeometry
