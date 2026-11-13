@@ -628,6 +628,7 @@ private theorem integral_tensor_mem_range
   exact ⟨z, (eA.commutes z).symm.trans ((congrArg eA hz).trans ha)⟩
 
 set_option maxHeartbeats 400000 in
+set_option trace.profiler true in
 -- Elaborating the finite-type subalgebra's localization instances exceeds the default budget.
 private theorem normal_domain_case_common
     {k : Type u} {A B : Type (max u v)} [Field k] [CommRing A] [CommRing B]
