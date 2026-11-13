@@ -168,7 +168,6 @@ private theorem fp_free_slice {X : Scheme.{u}} (U : X.Opens) (n : ℕ) :
       ⟨inferInstanceAs (Finite PEmpty.{u + 1})⟩⟩
   exact P.isFinitePresentation
 
-set_option profiler true in
 private theorem fp_cokernel_slice {X : Scheme.{u}} (U : X.Opens)
     {Q F : SheafOfModules.{u} (X.ringCatSheaf.over U)}
     [Q.IsFiniteType] [F.IsFinitePresentation] (a : Q ⟶ F) :
@@ -187,7 +186,6 @@ private theorem fp_cokernel_slice {X : Scheme.{u}} (U : X.Opens)
     (B.unitIso.app (cokernel a)).symm hb
 
 -- The cokernel comparison only needs the categorical exactness of restriction.
-set_option profiler true in
 private theorem isIso_map_cokernel_desc_of_epi_kernel
     {C D : Type*} [Category* C] [Category* D] [HasZeroMorphisms C]
     [HasKernels C] [HasCokernels C] [Abelian D]
@@ -228,7 +226,6 @@ private theorem isIso_map_cokernel_desc_of_epi_kernel
   rw [hj]
   infer_instance
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Replace a quasi-coherent module on an affine open by a finitely presented module,
 with a map which is an isomorphism on the overlap with the previous open.
@@ -266,6 +263,7 @@ theorem exists_finitePresentation_affine_replacement
   let R := moduleRings X.toRingedSpace
   let K : X.Opens := W ⊓ V.1
   let f : K ⟶ V.1 := homOfLE inf_le_right
+  -- Reuse the slice category structures throughout the kernel and cokernel comparisons.
   let : Abelian (SheafOfModules.{u} (R.over V.1)) := inferInstance
   let : Abelian (SheafOfModules.{u} (R.over K)) := inferInstance
   have : HasEqualizers (SheafOfModules.{u} (R.over V.1)) := inferInstance
