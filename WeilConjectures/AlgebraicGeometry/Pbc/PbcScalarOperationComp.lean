@@ -451,9 +451,11 @@ private theorem scalarDerivedCoefficients
       (complexCounit (pbcExtend (χ X)) (pbcDerivedExtend (χ X)) (pbcExtensionCounit (χ X)))
       χEF.hom χFG.hom aY.symm aX.symm aY₁.symm aX₁.symm
       cEF.hom cFG.hom cEG.hom P
-      (by simpa only [LE, LF, scalarExtensionComplexCounit_app, scalarPullComplexCounit_app]
+      (by simpa only [χEF, cEF, LE, LF, pbcActualScalarDerivedPullIso,
+        scalarExtensionComplexCounit_app, scalarPullComplexCounit_app]
         using nEF)
-      (by simpa only [LF, LG, scalarExtensionComplexCounit_app, scalarPullComplexCounit_app]
+      (by simpa only [χFG, cFG, LF, LG, EY, pbcActualScalarDerivedPullIso,
+        scalarExtensionComplexCounit_app, scalarPullComplexCounit_app]
         using nFG)
       (by simpa only [scalarExtensionComplexCounit_app, Category.assoc,
         Functor.mapIso_inv, Iso.app_inv, Iso.symm_hom] using nY')
@@ -463,7 +465,7 @@ private theorem scalarDerivedCoefficients
         Functor.associator_hom_app, Functor.associator_inv_app,
         Category.id_comp, Category.comp_id, Category.assoc, Iso.symm_inv,
         EY, PE, PG, FX, LE, LG, cEG,
-        scalarComplexCounit_app, pbcComplexCounit, pbcActualPullComplexCounit,
+        scalarExtensionComplexCounit_app, scalarPullComplexCounit_app,
         NatTrans.comp_app, whiskerLeft_app, whiskerRight_app] using hcalc
   have he := congrArg (fun e ↦ LG.map (aY.hom.app K) ≫ e.hom.app K) hv
   simp only [v, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
