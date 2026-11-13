@@ -323,8 +323,6 @@ private theorem localizedAugmentation
       rw [← Category.assoc, hn, Category.assoc, ← Q'.map_comp, hb]
       simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
 
-set_option profiler true in
--- The statement contains simultaneous universe-polymorphic cone comparisons.
 /-- Triangle and augmentation compatibility of a prescribed Roos square.
 
 Source: Stacks Project, Tags 0940 and 0941, and the final paragraph of
