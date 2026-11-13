@@ -88,6 +88,21 @@ private theorem scalarRoos_composite_naturality
     reassoc_of% (scalarRoosNaturality F a)]
   simp only [integralOperationsRoosMap_comp, Category.assoc]
 
+private theorem map_coordinate_composite
+    {𝒜 ℬ 𝒞 : Type*} [Category* 𝒜] [Category* ℬ] [Category* 𝒞]
+    (A : 𝒜 ⥤ ℬ) (T : ℬ ⥤ 𝒞)
+    {X₀ X₁ X₂ X₃ X₄ : 𝒜} {Y Z : ℬ} {V W U : 𝒞}
+    (r : X₀ ⟶ X₁) (s : X₁ ⟶ X₂) (v : X₂ ⟶ X₃) (w : X₃ ⟶ X₄)
+    (p : X₀ ⟶ X₄) (ε : A.obj X₄ ⟶ Y) (σ : Y ⟶ Z)
+    (b : T.obj Y ⟶ V) (b' : T.obj Z ⟶ W) (τ : V ⟶ W) (q : W ⟶ U)
+    (hp : p = r ≫ s ≫ (v ≫ w)) (hσ : T.map σ ≫ b' = b ≫ τ) :
+    T.map (A.map (r ≫ s)) ≫
+        (T.map (A.map v ≫ A.map w ≫ ε ≫ σ) ≫ b' ≫ q) =
+      T.map (A.map p) ≫ T.map ε ≫ b ≫ τ ≫ q := by
+  rw [hp]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hσ]
+
 -- Keep the nested derived comparison functors folded during the calculation.
 /-- The scalar completion augmentation respects the pulled coherent quotient tower.
 Source: Stacks 06YY, 07A4 and 0941; the quotient calculation in step 1 of
@@ -303,18 +318,15 @@ theorem scalarPullbackCompletionRoos (W : Bool → Scheme.{u})
         (integralComparisonRoosBridge l L X ρ SH).hom ≫
         DerivedCategory.Q.map (integralOperationsRoosMap τ) ≫
         DerivedCategory.Q.map (integralOperationsRoosMap q.hom) := by
-    dsimp only [c, scalarPullbackRoosCoordinate]
-    simp only [Functor.map_comp, Category.assoc]
-    have hσa := reassoc_of% hσ
-    dsimp only [σ] at hσa
-    rw [hσa]
-    have hadj := congrArg (fun g ↦ T.map (A.map g)) hAdj
-    simp only [Functor.map_comp] at hadj
-    dsimp only [z] at hadj
-    simp only [Functor.map_comp] at hadj
-    simp only [Category.assoc] at hadj
-    rw [← reassoc_of% hadj]
-    rw [Functor.map_comp]
+    exact map_coordinate_composite A T
+      (S.reduction.map eR.hom) (pullbackReduction l E W ME f K)
+      (B.map ((ME.calculus false).reduction.map eP.inv ≫ eC.hom)) cp
+      (S.reduction.map γ ≫ ε)
+      ((integralComparisonSequenceScalarModel l E L ι X).ε.app H)
+      (DerivedCategory.Q.map σ)
+      (integralComparisonRoosBridge l L X ρ SH).hom _
+      (DerivedCategory.Q.map (integralOperationsRoosMap τ))
+      (DerivedCategory.Q.map (integralOperationsRoosMap q.hom)) hAdj hσ
   change χ.app _ ≫ SX.realization.hom.app _ ≫ _ ≫ c = _
   rw [hCoord]
   have hNat := SX.realization.hom.naturality γ
