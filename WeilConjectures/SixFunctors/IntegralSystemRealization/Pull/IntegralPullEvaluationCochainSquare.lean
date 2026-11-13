@@ -82,9 +82,10 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm
           (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
+  have h := integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P
   apply HomologicalComplex.hom_ext
   intro i
   simp only [integralPullEvaluationComplex_eq_ordinary, HomologicalComplex.comp_f]
-  exact integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
+  exact h i
 
 end WeilConjectures.IntegralSystemRealization
