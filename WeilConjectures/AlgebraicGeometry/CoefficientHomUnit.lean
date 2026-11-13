@@ -711,6 +711,7 @@ private theorem unitProducts
   intro K
   apply SheafOfModules.hasLimitsOfShape
 
+set_option trace.profiler true in
 -- The statement and its normalization compare several chosen Hom-complex constructions.
 /-- The coefficient-Hom bifunctor has a unit at the coefficient ring, normalized by
 restriction and evaluation at one.
