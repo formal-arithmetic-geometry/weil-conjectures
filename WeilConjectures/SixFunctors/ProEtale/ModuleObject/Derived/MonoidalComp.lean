@@ -25,19 +25,27 @@ open Scheme Functor
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
 
-@[reassoc]
-private lemma upperStarTensorComplexHom_ιTensorObj
+private lemma upperStarTensorComplexHom_eq_μ
     (A B : CochainComplex
-      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ)
-    (p q n : ℤ) (h : p + q = n) :
-      HomologicalComplex.ιTensorObj
-          (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).obj A)
-          (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).obj B) p q n h ≫
-        (upperStarTensorComplexHom Λ f A B).f n =
-      Functor.LaxMonoidal.μ (f)^*⟦Λ⟧ (A.X p) (B.X q) ≫
-        (f)^*⟦Λ⟧.map (HomologicalComplex.ιTensorObj A B p q n h) := by
-  dsimp only [upperStarTensorComplexHom, upperStarTensorComplexHomX]
-  erw [HomologicalComplex.ι_mapBifunctorDesc]
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ) :
+    upperStarTensorComplexHom Λ f A B =
+      Functor.LaxMonoidal.μ ((f)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)) A B := by
+  apply (cancel_mono (Functor.OplaxMonoidal.δ
+    ((f)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)) A B)).1
+  rw [Functor.Monoidal.μ_δ, upperStarTensorComplexHom_eq_inv,
+    Functor.mapCochainComplex_δ,
+    Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans_app_app, IsIso.inv_hom_id]
+
+private lemma upperStarComp_mapHomologicalComplexCompHom
+    (A : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) ℤ) :
+    Functor.mapHomologicalComplexCompHom (g)^*⟦Λ⟧ (f)^*⟦Λ⟧ (f ≫ g)^*⟦Λ⟧
+        (upperStarComp Λ f g) A =
+      (NatTrans.mapHomologicalComplex (upperStarComp Λ f g).hom (.up ℤ)).app A := by
+  ext n
+  simp only [Functor.mapHomologicalComplexCompHom, HomologicalComplex.comp_f,
+    NatTrans.mapHomologicalComplex_app_f, Functor.mapHomologicalComplexCompIso_inv_app_f,
+    Iso.refl_inv, NatTrans.id_app, Category.comp_id]
 
 set_option profiler true in
 /-- On complexes, the comparison `f^* A ⊗ f^* B ⟶ f^* (A ⊗ B)` is compatible with the
@@ -53,23 +61,15 @@ lemma upperStarTensorComplexHom_comp
         ((f)^*⟦Λ⟧.mapHomologicalComplex _).map (upperStarTensorComplexHom Λ g A B) =
       upperStarTensorComplexHom Λ (f ≫ g) A B ≫
         (NatTrans.mapHomologicalComplex (upperStarComp Λ f g).hom _).app (A ⊗ B) := by
-  ext n : 1
-  apply HomologicalComplex.mapBifunctor.hom_ext
-  intro p q h
-  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
-  erw [CochainComplex.ιTensorObj_tensorHom_f_assoc
-    ((NatTrans.mapHomologicalComplex (upperStarComp Λ f g).hom (.up ℤ)).app A)
-    ((NatTrans.mapHomologicalComplex (upperStarComp Λ f g).hom (.up ℤ)).app B) p q n h]
-  rw [upperStarTensorComplexHom_ιTensorObj_assoc Λ f
-      (((g)^*⟦Λ⟧.mapHomologicalComplex _).obj A)
-      (((g)^*⟦Λ⟧.mapHomologicalComplex _).obj B) p q n h,
-    upperStarTensorComplexHom_ιTensorObj_assoc Λ (f ≫ g) A B p q n h]
-  rw [Category.assoc, ← Functor.map_comp]
-  rw [upperStarTensorComplexHom_ιTensorObj]
-  simp only [NatTrans.mapHomologicalComplex_app_f, Category.assoc]
-  rw [(upperStarComp Λ f g).hom.naturality, Functor.map_comp]
-  exact upperStarComp_hom_app_tensor_μ_assoc Λ f g (A.X p) (B.X q)
-    ((f)^*⟦Λ⟧.map ((g)^*⟦Λ⟧.map (HomologicalComplex.ιTensorObj A B p q n h)))
+  rw [upperStarTensorComplexHom_eq_μ, upperStarTensorComplexHom_eq_μ,
+    upperStarTensorComplexHom_eq_μ]
+  have hδ := Functor.mapCochainComplex_δ_comp_tensorHom
+    (upperStarComp_hom_app_tensor_δ Λ f g) A B
+  simp only [upperStarComp_mapHomologicalComplexCompHom] at hδ
+  rw [← cancel_epi (Functor.OplaxMonoidal.δ
+      ((f ≫ g)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)) A B), reassoc_of% hδ,
+    Functor.Monoidal.δ_μ_assoc, Functor.Monoidal.δ_μ_assoc, ← Functor.map_comp,
+    Functor.Monoidal.δ_μ, Functor.map_id, Category.comp_id]
 
 open DerivedCategory Functor.LaxMonoidal
 
