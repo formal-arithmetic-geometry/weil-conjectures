@@ -68,14 +68,14 @@ noncomputable def integralModelPullbackIso {Z W : Scheme.{u}} (w : Z ⟶ W)
             (L((w)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀)) ≅
       L((w)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B :=
   by
-    letI integralModelTensorLeftPreservesColimit
+    letI (priority := 2000) integralModelTensorLeftPreservesColimit
         {J : Type} [SmallCategory J] (T : Scheme.{u})
         (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
         (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
         (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
         PreservesColimit F (MonoidalCategory.tensorLeft P) := by
       infer_instance
-    letI integralModelTensorRightPreservesColimit
+    letI (priority := 2000) integralModelTensorRightPreservesColimit
         {J : Type} [SmallCategory J] (T : Scheme.{u})
         (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
         (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
