@@ -55,6 +55,7 @@ def normalizedTensorHomCochains (X : Scheme.{u})
   exact (normalizedHomGlobalCochains X.sheaf P H k).symm.trans
     (b.trans (normalizedHomGlobalCochains X.sheaf T I k))
 
+set_option trace.profiler true in
 set_option maxHeartbeats 400000 in
 -- Elaborating the composite sheaf and tensor comparisons exceeds the default heartbeat limit.
 /-- The uncurrying equivalence commutes with the ordinary cochain differential.
