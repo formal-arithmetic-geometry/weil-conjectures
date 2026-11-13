@@ -68,6 +68,7 @@ private theorem scalarCompletionIso_hom (Y : Scheme.{u})
 attribute [local irreducible] integralScalarExtension
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- The coefficient-functor comparisons exceed the default elaboration budget.
 /-- Compute the route using scalar normalization at Y and pullback normalization
 with coefficients L. There is no scalar model at X or pullback model for E here.
