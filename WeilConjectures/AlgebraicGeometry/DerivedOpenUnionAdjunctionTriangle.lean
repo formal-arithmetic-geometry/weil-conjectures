@@ -41,7 +41,6 @@ private theorem transport_triangle
     simp only [Iso.hom_inv_id_assoc]
 
 set_option profiler true in
--- Comparing localized right adjoints and their composite shift isomorphism.
 /-- The inverse rotation of the direct-image Mayer--Vietoris triangle, expressed using
 any right adjoints to localized derived restrictions. Its second arrow is constructed by transposing
 the two canonical restrictions of the union counit. This is geometric triangle data only: neither
@@ -99,13 +98,17 @@ theorem derived_open_union_adjunction_triangle
     ∃ (d : N ⟶ A) (c : B ⟶ N⟦(1 : ℤ)⟧),
       Triangle.mk d b c ∈ distTriang (schemeDerivedCategory X) := by
   classical
+  let _ : Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
+  let _ (W : X.Opens) :
+      Abelian (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W)) := inferInstance
   dsimp only
   let R := fun W : X.Opens ↦
     (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory
   let H := R (U ⊓ V) ⋙ G (U ⊓ V)
   let := (adj (U ⊓ V)).rightAdjointCommShift ℤ
-  obtain ⟨S, eA, eB, eC, hS, hf⟩ :=
-    derived_open_union_ses_presentation X U V G adj (E'⟦k⟧)
+  have hs := derived_open_union_ses_presentation X U V G adj (E'⟦k⟧)
+  dsimp only at hs
+  obtain ⟨S, eA, eB, eC, hS, hf⟩ := hs
   let T := (DerivedCategory.triangleOfSES hS).invRotate
   let eN : T.obj₁ ≅ H.obj (E'⟦k - 1⟧) :=
     (shiftFunctor (schemeDerivedCategory X) (-1 : ℤ)).mapIso eC ≪≫

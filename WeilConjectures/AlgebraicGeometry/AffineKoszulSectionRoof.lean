@@ -67,7 +67,6 @@ private theorem kflat_augmentation_realization
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
 set_option profiler true in
--- Comparing chosen restriction functors and their localization instances needs extra heartbeats.
 /-- A section of an arbitrary quasi-coherent derived object on a compact open of an affine scheme
 is represented by a map from a K-flat perfect complex with a chain augmentation.
 There is no perfect source, tensor product, or lifted morphism in this statement.
@@ -114,6 +113,14 @@ theorem affine_koszul_section_roof
           IsIso (R.map (DerivedCategory.Q.map u)) ∧
           R.map (DerivedCategory.Q.map u) ≫ s = R.map ξ := by
   classical
+  let _ : Abelian (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) := inferInstance
+  let _ (V : X.Opens) :
+      Abelian (SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over V)) := inferInstance
+  let _ : Abelian (SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace)) :=
+    inferInstance
+  have _ (V : X.Opens) :
+      (SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) V).Additive :=
+    Functor.additive_of_preserves_binary_products _
   let := SheafOfModules.monoidalCategory X.sheaf
   let := (SheafOfModules.tensorClosed X.sheaf).1.some
   let C := SheafOfModules.{uX} (moduleRings X.toRingedSpace)
@@ -124,8 +131,9 @@ theorem affine_koszul_section_roof
   let R := (LX ⋙ EX.functor).mapDerivedCategory
   change ∀ s : R.obj (DerivedCategory.Q.obj T) ⟶ R.obj E.obj, _
   intro s
-  obtain ⟨P, a, hP, v, hav, hva, D, hD, ι, hι, ⟨hc⟩⟩ :=
-    affine_koszul_section_colimit X U hU E
+  have hcol := affine_koszul_section_colimit X U hU E
+  dsimp only at hcol
+  obtain ⟨P, a, hP, v, hav, hva, D, hD, ι, hι, ⟨hc⟩⟩ := hcol
   obtain ⟨n, z, hz⟩ := Types.jointly_surjective D hc s
   let ξ : P n ⟶ E.obj := cast (hD n) z
   have hξ : ι.app n (cast (hD n).symm ξ) = s := by

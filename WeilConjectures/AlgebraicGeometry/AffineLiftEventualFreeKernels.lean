@@ -180,7 +180,6 @@ private theorem tensor_exactAt_of_vanishes (Y : Scheme.{u})
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option profiler true in
--- Tensor and over-site equivalence comparisons require additional elaboration heartbeats.
 /-- The restricted finite-free lift is exact in all sufficiently low degrees, and
 its outgoing kernels in those degrees are finite locally free.
 Source: Stacks Project, Tag 08EG, first two paragraphs of the proof of Lemma 36.13.6.
@@ -230,11 +229,17 @@ theorem affine_lift_eventual_free_kernels
       (∀ i : ℤ, i ≤ r → ((R.mapHomologicalComplex (.up ℤ)).obj K).ExactAt i) ∧
       (kernel (R.map (K.d r (r + 1)))).IsFiniteLocallyFree := by
   classical
+  let _ : Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
+  let _ (V : X.Opens) :
+      Abelian (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)) := inferInstance
+  let _ : Abelian (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
+    inferInstance
   let R := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙
     Equivalence.functor
       (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
       (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
       (Modules.overEquiv U)
+  have : R.Additive := Functor.additive_of_preserves_binary_products _
   let openDerived (V : U.toScheme.Opens) :
       HasDerivedCategory.{w}
         (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) :=
