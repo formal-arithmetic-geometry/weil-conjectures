@@ -183,7 +183,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 attribute [local irreducible] residueOrdinaryUpperStarMonoidal
 
 set_option profiler true in
-set_option maxHeartbeats 900000 in
 -- The degreewise calculation compares several concrete module-functor composites.
 /-- The scalar tensor square agrees with ordinary pullback's comonoidal map.
 Source: Bhatt--Scholze, Remark 6.8.15 and Lemma 6.5.9(5), p. 51.
@@ -265,7 +264,7 @@ theorem residueOrdinaryTensorPull_homotopy
     dsimp only [Mod.tensorPresentationHomotopyIso]
     simp only [NatTrans.mapHomotopyCategory_app, Functor.mapHomotopyCategory_map,
       ← Functor.map_comp]
-    congr 1
+    apply (HomotopyCategory.quotient _ (.up ℤ)).congr_map
     ext n : 1
     simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
       NatTrans.mapHomologicalComplex_app_f]
@@ -274,8 +273,12 @@ theorem residueOrdinaryTensorPull_homotopy
     exact residueOrdinaryTensorPull_module Λ A φ f (K.X n)
   have ht := tensor_single_homotopy_iso_inv F B B' e P
   dsimp only at ht
-  erw [reassoc_of% hm, ht]
-  simp only [Functor.map_comp, Category.assoc]
-  rfl
+  calc
+    _ = _ := (Category.assoc _ _ _).symm
+    _ = _ := congrArg (fun k ↦ k ≫ _ ≫ _) hm
+    _ = _ := Category.assoc _ _ _
+    _ = _ := congrArg (fun k ↦ _ ≫ k) ht
+    _ = _ := (Category.assoc _ _ _).symm
+    _ = _ := congrArg (fun k ↦ k ≫ _) ((F.mapHomotopyCategory (.up ℤ)).map_comp _ _).symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing
