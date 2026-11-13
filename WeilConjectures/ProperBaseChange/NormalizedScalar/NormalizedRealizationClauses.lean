@@ -62,28 +62,7 @@ theorem scalar_adjunction_data : ScalarAdjunctionData l E T := by
   intro M
   exact Mod.extendRestrictAdjunction_unit_app_hom (inclusion l E T) M
 
--- Cache the ordinary functors' exactness proofs for the repeated derived constructions.
-private theorem ordinaryExtensionAdditive : (ordinaryExtension l E T).Additive := inferInstance
-
-private theorem ordinaryRestrictionAdditive : (ordinaryRestriction l E T).Additive := inferInstance
-
-private theorem ordinaryExtensionPreservesFiniteLimits :
-    PreservesFiniteLimits (ordinaryExtension l E T) := inferInstance
-
-private theorem ordinaryExtensionPreservesFiniteColimits :
-    PreservesFiniteColimits (ordinaryExtension l E T) := inferInstance
-
-private theorem ordinaryRestrictionPreservesFiniteLimits :
-    PreservesFiniteLimits (ordinaryRestriction l E T) := inferInstance
-
-private theorem ordinaryRestrictionPreservesFiniteColimits :
-    PreservesFiniteColimits (ordinaryRestriction l E T) := inferInstance
-
-attribute [local instance] ordinaryExtensionAdditive ordinaryRestrictionAdditive
-  ordinaryExtensionPreservesFiniteLimits ordinaryExtensionPreservesFiniteColimits
-  ordinaryRestrictionPreservesFiniteLimits ordinaryRestrictionPreservesFiniteColimits
-
-set_option profiler true in
+set_option maxHeartbeats 1000000 in
 -- The derived scalar square unfolds the exact derived extension and restriction.
 /-- The derived functors have coherent integer shifts, preserve triangles, compute
 termwise on every complex, and their adjunction unit is the localized termwise unit.
