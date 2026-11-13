@@ -118,7 +118,6 @@ private lemma exactFunctor_truncationTower_comparison
       ((t.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app E)
       (c (-((n + 1 : ℕ) : ℤ))) (c (-(n : ℤ))) (ht _ _ (by omega))
 
-set_option profiler true in
 /-- Derived evaluation on an open agrees with sections after exact restriction,
 including the canonical lower-truncation projection and transition maps.
 Source: Stacks Project, Tag 08BS, and the uniqueness of standard truncations.

@@ -98,7 +98,6 @@ private theorem transport_roos_triangle
   · change δ' ≫ (shiftFunctor C (1 : ℤ)).map e.inv = b.inv ≫ δ
     simp [δ', ← Functor.map_comp]
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived abelian sections reconstruct the lower tail from its canonical lower
