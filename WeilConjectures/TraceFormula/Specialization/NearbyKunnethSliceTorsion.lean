@@ -92,7 +92,9 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
       (coordinateSliceTraitSnd hP hb D (φ₂ := φ₂))
       ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A))
       ((L((N.ε)^*⟦𝔽⟧)).obj B)) := by
-  run_tac do dbg_trace "PH468: body"
+  run_tac do
+    IO.println "PH468: body"
+    (← IO.getStdout).flush
   -- Infer the complexes from their étale-origin proofs to reuse the derived-functor instances.
   have hAS :=
     ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
@@ -110,9 +112,13 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
   have hτN := isIso_pullbackExchange_toGeneric_baseChangeHom_traitMap_residueField
     (K := traitSliceField k') hN E hB
   -- the square of Künneth maps along the changes of trait
-  run_tac do dbg_trace "PH468: exchanges"
+  run_tac do
+    IO.println "PH468: exchanges"
+    (← IO.getStdout).flush
   refine isIso_of_isIso_map_coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D 𝔽 _ ?_
-  run_tac do dbg_trace "PH468: reflection"
+  run_tac do
+    IO.println "PH468: reflection"
+    (← IO.getStdout).flush
   refine (isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange 𝔽
     (coordinateSliceTraitMap φ₁ b D) (coordinateSliceTraitSnd hP hb D (φ₂ := φ₂))
     (sliceFst hM hP hb).toGeneric (sliceSnd hN hpb hP hgen hb).toGeneric
@@ -129,10 +135,14 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
     (sliceSnd_generic_comp_baseChangeHom_generic hN hpb hP hgen hb D)
     (sliceSnd_special_comp_baseChangeSpecialMap hN hpb hP hb D)
     _ _ hτM hτN hτP (𝟭 _)).2 ?_
-  run_tac do dbg_trace "PH468: square"
+  run_tac do
+    IO.println "PH468: square"
+    (← IO.getStdout).flush
   have h₀ := (isIso_kunnethMap_iff_toGeneric 𝔽
     (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb) A B).1 h
-  run_tac do dbg_trace "PH468: generic"
+  run_tac do
+    IO.println "PH468: generic"
+    (← IO.getStdout).flush
   exact isIso_kunnethMap_of_iso 𝔽
     (sliceFst hM hP hb).toGeneric (sliceSnd hN hpb hP hgen hb).toGeneric
     (((leftDerivedUpperStarCompOfEq 𝔽 (coordinateSliceTraitChangeGeneric_comp hM b hb D)).app _).symm ≪≫
