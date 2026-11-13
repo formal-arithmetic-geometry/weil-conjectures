@@ -258,7 +258,7 @@ private theorem ordinary_coherence_of_inverse_associativity
       Preadditive.zsmul_comp, Category.assoc, ht, ← Category.assoc, hd]
     rfl
   · intro P Q N
-    exact ordinary_chain_associativity_comparison l Y J E.functor ν τ ht ha P Q N
+    exact ordinary_chain_associativity_comparison l Y J R E.functor ν τ ht ha P Q N
 
 attribute [local irreducible] ProEtale.NativeFrobenius.equivalence
 
