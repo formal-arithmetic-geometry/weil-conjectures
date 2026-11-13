@@ -107,23 +107,20 @@ theorem changeOfRings_tensor_relation_presentation (Y : Scheme.{u})
           (cokernel.π δ).app W (tmulSection (M := C.toModule) (N := P₀) c p)) := by
   classical
   intro P₀ S
-  obtain ⟨a, d, g, hactions⟩ :=
-    exists_changeOfRings_tensor_action_maps Y B C φ P
+  refine (exists_changeOfRings_tensor_action_maps Y B C φ P).elim fun a ha ↦ ?_
+  refine ha.elim fun d hd ↦ ?_
+  refine hd.elim fun g hactions ↦ ?_
   have hu := changeOfRings_tensor_balancing_universal
     Y B C φ P a d g hactions.1 hactions.2.1 hactions.2.2.1
   have hag := hactions.2.2.2
   let δ : tensorObj B.toModule S ⟶ S := a - d
-  obtain ⟨e, hh⟩ := exists_cokernelIso_of_equalizing_universal a d g hag hu
+  refine (exists_cokernelIso_of_equalizing_universal a d g hag hu).elim fun e hh ↦ ?_
   refine ⟨δ, e, ?_, ?_⟩
   · intro W b c p
-    change (a - d).app W _ = _
-    rw [Hom.sub_app]
-    change a.app W _ - d.app W _ = _
-    rw [hactions.1 W b c p, hactions.2.1 W b c p]
+    exact congrArg₂ (· - ·) (hactions.1 W b c p) (hactions.2.1 W b c p)
   · intro W c p
-    change e.hom.val.app (op W) _ = _
-    rw [← hactions.2.2.1 W c p]
-    exact congrArg (fun f : S ⟶ cokernel δ ↦
-      f.app W (tmulSection (M := C.toModule) (N := P₀) c p)) hh
+    exact (congrArg (e.hom.val.app (op W)) (hactions.2.2.1 W c p).symm).trans
+      (congrArg (fun f : S ⟶ cokernel δ ↦
+        f.app W (tmulSection (M := C.toModule) (N := P₀) c p)) hh)
 
 end AlgebraicGeometry.Scheme.Modules
