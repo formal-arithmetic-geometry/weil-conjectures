@@ -65,7 +65,6 @@ lemma smoothOfRelativeDimension_of_isPullback {Y S P : Scheme.{u}} [IrreducibleS
     rwa [zero_add] at this
   exact smoothOfRelativeDimension_of_pullback_snd g j hj d
 
-set_option profiler true in
 /-- **Assembling the generic curve model over an open of the base.** Let `S₀` be integral and
 locally noetherian, `F₀ : X₀ ⟶ S₀` proper, `pₐ : Yₐ ⟶ X₀` finitely many finite morphisms whose
 base changes `gₐ` along a morphism `j : Spec L ⟶ S₀` to the generic point are smooth of relative
@@ -100,52 +99,37 @@ theorem isGenericCurveModel_morphismRestrict {S₀ X₀ : Scheme.{u}} [IsIntegra
     apply V.ι.isOpenEmbedding.injective
     rw [genericPoint_eq_of_isOpenImmersion V.ι, ← Scheme.Hom.comp_apply, hj'V, hj]
   -- the restricted objects
-  trace "before line 103"
   let X' : X₀.Opens := F₀ ⁻¹ᵁ V
-  trace "before line 104"
   let F' : X'.toScheme ⟶ V.toScheme := F₀ ∣_ V
-  trace "before line 105"
   let Y' (a : ι) : Scheme.{u} := (p a ⁻¹ᵁ X').toScheme
-  trace "before line 106"
   let p' (a : ι) : Y' a ⟶ X'.toScheme := p a ∣_ X'
-  trace "before line 107"
   let ν₀ := Sigma.desc p
-  trace "before line 108"
   let ν' : ∐ Y' ⟶ X'.toScheme := Sigma.desc p'
-  trace "before line 109"
   have Hσ : IsPullback (Limits.Sigma.map fun a ↦ (p a ⁻¹ᵁ X').ι) ν' ν₀ X'.ι :=
     isPullback_sigmaDesc p p' (fun a ↦ (p a ⁻¹ᵁ X').ι) X'.ι
       fun a ↦ (isPullback_morphismRestrict (p a) X').flip
-  trace "before line 112"
-  have hcomp (a : ι) : p' a ≫ F' = (p a ≫ F₀) ∣_ V := (morphismRestrict_comp _ _ _).symm
+  have hcomp (a : ι) : p' a ≫ F' = (p a ≫ F₀) ∣_ V :=
+    (morphismRestrict_comp (p a) F₀ V).symm
   -- smoothness and relative dimension of the pieces over `V`
-  trace "before line 114"
   have hrel (a : ι) : SmoothOfRelativeDimension (d a) (p' a ≫ F') := by
     rw [hcomp]
     have := hsm a
     have := hg a
     obtain ⟨q, hq⟩ := isPullback_morphismRestrict_lift (π := j') (by rw [hj'V]; exact H a)
     exact smoothOfRelativeDimension_of_isPullback hj' hq (d a)
-  trace "before line 120"
   have hred (a : ι) : IsReduced (Y' a) := by
     have := SmoothOfRelativeDimension.smooth (d a) (p' a ≫ F')
     have := Smooth.geometricallyReduced (p' a ≫ F')
     exact GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian (p' a ≫ F')
-  trace "before line 124"
   have : ∀ i, IsReduced ((sigmaOpenCover Y').X i) := fun i ↦ hred i
-  trace "before line 125"
   have : IsReduced (∐ Y') := IsReduced.of_openCover (𝒰 := sigmaOpenCover Y')
   -- the reduction `T` of `X'` and the comparison map `ν`
-  trace "before line 127"
   let T := X'.toScheme.nilradical.subscheme
-  trace "before line 128"
   let t : T ⟶ X'.toScheme := X'.toScheme.nilradical.subschemeι
   obtain ⟨hTred, htci, htsurj, -⟩ :=
     reduction_isReduced_isClosedImmersion_isSurjective_isUniversalHomeomorphism X'.toScheme
   obtain ⟨ν, hν⟩ := exists_comp_nilradical_subschemeι ν'
-  trace "before line 132"
   have hν'fin : IsFinite ν' := inferInstance
-  trace "before line 133"
   have hνfin : IsFinite ν := by
     have : IsFinite (ν ≫ t) := by rw [hν]; exact hν'fin
     exact IsFinite.of_comp ν t
@@ -185,9 +169,9 @@ theorem isGenericCurveModel_morphismRestrict {S₀ X₀ : Scheme.{u}} [IsIntegra
     have : IsProper F' := inferInstance
     have : IsProper (dd ≫ t ≫ F') := inferInstance
     have : LocallyQuasiFinite (dd ≫ t ≫ F') := by
-      refine LocallyQuasiFinite.of_finite_preimage_singleton (dd ≫ t ≫ F') fun s ↦ ?_
+      refine LocallyQuasiFinite.of_finite_preimage_singleton _ fun s ↦ ?_
       refine ((hfin (V.ι s) s.2).preimage
-        (f := fun y : D ↦ X'.ι (t (dd y))) ?_).subset ?_
+        (f := fun y ↦ X'.ι (t (dd y))) ?_).subset ?_
       · intro y₁ _ y₂ _ hy
         exact dd.isClosedEmbedding.injective (t.isClosedEmbedding.injective
           (X'.ι.isOpenEmbedding.injective hy))

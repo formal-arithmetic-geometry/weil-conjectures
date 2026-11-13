@@ -375,7 +375,6 @@ private theorem map_towerTransitionEndomorphism_comp_comparison
 
 -- Preserve the original name of the product-instance binder, used only by typeclass search.
 set_option linter.unusedVariables false in
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- A surjective tower of module sheaves has its ordinary limit as a derived limit,
 with its canonical projections and the triangle of its short exact Roos sequence.
