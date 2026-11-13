@@ -38,7 +38,51 @@ private lemma transport_comparison_naturality
   rw [← H.map_comp_assoc, h, H.map_comp_assoc]
   exact congrArg (fun z ↦ H.map c₁.hom ≫ z) (e.hom.naturality f)
 
-set_option trace.profiler true in
+private lemma transport_comparison_projection
+    {C D A : Type*} [Category C] [Category D] [Category A]
+    (R : C ⥤ D) (H : D ⥤ A) (G : C ⥤ A) (e : R ⋙ H ≅ G)
+    {E₁ E₂ : C} {Y : D} (a : R.obj E₁ ⟶ Y) (f : E₁ ⟶ E₂)
+    (c : Y ≅ R.obj E₂) (h : a ≫ c.hom = R.map f) :
+    H.map a ≫ (H.mapIso c ≪≫ e.app E₂).hom =
+      (e.app E₁).hom ≫ G.map f := by
+  simp only [Functor.mapIso_hom, Iso.trans_hom]
+  rw [← H.map_comp_assoc, h]
+  exact e.hom.naturality f
+
+private lemma exactFunctor_truncation_comparison
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [Limits.PreservesFiniteLimits F]
+    [Limits.PreservesFiniteColimits F] (E : DerivedCategory C) :
+    let R := F.mapDerivedCategory
+    let t := DerivedCategory.TStructure.t (C := C)
+    let s := DerivedCategory.TStructure.t (C := D)
+    ∃ c : ∀ b : ℤ, (s.truncGE b).obj (R.obj E) ≅ R.obj ((t.truncGE b).obj E),
+      (∀ b, (s.truncGEπ b).app (R.obj E) ≫ (c b).hom =
+        R.map ((t.truncGEπ b).app E)) ∧
+      (∀ b₁ b₂ (h : b₁ ≤ b₂),
+        (s.natTransTruncGEOfLE b₁ b₂ h).app (R.obj E) ≫ (c b₂).hom =
+          (c b₁).hom ≫ R.map ((t.natTransTruncGEOfLE b₁ b₂ h).app E)) := by
+  let R := F.mapDerivedCategory
+  let t := DerivedCategory.TStructure.t (C := C)
+  let s := DerivedCategory.TStructure.t (C := D)
+  let c (b : ℤ) := (F.mapDerivedCategoryTruncGEIso b).symm.app E
+  have hc (b : ℤ) : (s.truncGEπ b).app (R.obj E) ≫ (c b).hom =
+      R.map ((t.truncGEπ b).app E) := by
+    have : s.IsGE (R.obj ((t.truncGE b).obj E)) b :=
+      F.isGE_mapDerivedCategory_obj ((t.truncGE b).obj E) b
+    change _ ≫ s.descTruncGE _ b = _
+    exact s.π_descTruncGE _ _
+  refine ⟨c, hc, ?_⟩
+  intro b₁ b₂ h
+  have : s.IsGE (R.obj ((t.truncGE b₂).obj E)) b₂ :=
+    F.isGE_mapDerivedCategory_obj ((t.truncGE b₂).obj E) b₂
+  have : s.IsGE (R.obj ((t.truncGE b₂).obj E)) b₁ := s.isGE_of_ge _ _ b₂ h
+  apply s.from_truncGE_obj_ext
+  rw [← Category.assoc, s.π_natTransTruncGEOfLE_app, hc,
+    ← Category.assoc, hc, ← R.map_comp, t.π_natTransTruncGEOfLE_app]
+
+set_option profiler true in
 /-- Derived evaluation on an open agrees with sections after exact restriction,
 including the canonical lower-truncation projection and transition maps.
 Source: Stacks Project, Tag 08BS, and the uniqueness of standard truncations.
@@ -122,38 +166,19 @@ theorem openDerivedSections_truncationTower_comparison
   let eD : R ⋙ H.rightDerivedFunctor ≅ G.rightDerivedFunctor :=
     Functor.isoWhiskerRight F.rightDerivedFunctorIsoMapDerivedCategory.symm
       H.rightDerivedFunctor ≪≫ Functor.rightDerivedFunctorCompIso' F H under
-  let c (b : ℤ) := (F.mapDerivedCategoryTruncGEIso b).symm.app E
-  have hc (b : ℤ) : (s.truncGEπ b).app (R.obj E) ≫ (c b).hom =
-      R.map ((t.truncGEπ b).app E) := by
-    have hge : s.IsGE ((t.truncGE b ⋙ R).obj E) b :=
-      F.isGE_mapDerivedCategory_obj ((t.truncGE b).obj E) b
-    change _ ≫ DerivedCategory.TStructure.t.descTruncGE _ b = _
-    exact DerivedCategory.TStructure.t.π_descTruncGE _ _
+  obtain ⟨c, hc, ht⟩ := exactFunctor_truncation_comparison F E
   let en (n : ℕ) := H.rightDerivedFunctor.mapIso (c (-(n : ℤ))) ≪≫
     eD.app ((t.truncGE (-(n : ℤ))).obj E)
   refine ⟨eD.app E, en, ?_, ?_⟩
   · intro n
-    simp only [en, Functor.mapIso_hom, Iso.trans_hom]
-    rw [← H.rightDerivedFunctor.map_comp_assoc, hc]
-    exact eD.hom.naturality ((t.truncGEπ (-(n : ℤ))).app E)
+    exact transport_comparison_projection R H.rightDerivedFunctor G.rightDerivedFunctor eD
+      ((s.truncGEπ (-(n : ℤ))).app (R.obj E)) ((t.truncGEπ (-(n : ℤ))).app E)
+      (c (-(n : ℤ))) (hc _)
   · intro n
-    have ht : (s.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ))
-        (by omega)).app (R.obj E) ≫ (c (-(n : ℤ))).hom =
-        (c (-((n + 1 : ℕ) : ℤ))).hom ≫
-          R.map ((t.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ))
-            (by omega)).app E) := by
-      have hge : s.IsGE ((t.truncGE (-(n : ℤ)) ⋙ R).obj E) (-(n : ℤ)) :=
-        F.isGE_mapDerivedCategory_obj ((t.truncGE (-(n : ℤ))).obj E) (-(n : ℤ))
-      have hge' : s.IsGE ((t.truncGE (-(n : ℤ)) ⋙ R).obj E)
-          (-((n + 1 : ℕ) : ℤ)) :=
-        s.isGE_of_ge _ _ (-(n : ℤ)) (by omega)
-      apply DerivedCategory.TStructure.t.from_truncGE_obj_ext
-      rw [← Category.assoc, s.π_natTransTruncGEOfLE_app, hc,
-        ← Category.assoc, hc, ← R.map_comp, t.π_natTransTruncGEOfLE_app]
     exact transport_comparison_naturality R H.rightDerivedFunctor G.rightDerivedFunctor eD
       ((s.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ))
         (by omega)).app (R.obj E))
       ((t.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app E)
-      (c (-((n + 1 : ℕ) : ℤ))) (c (-(n : ℤ))) ht
+      (c (-((n + 1 : ℕ) : ℤ))) (c (-(n : ℤ))) (ht _ _ (by omega))
 
 end AlgebraicGeometry
