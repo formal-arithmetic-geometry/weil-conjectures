@@ -463,7 +463,7 @@ theorem finitePerfectAdicRealization_square_explicit :
   simp only [Functor.map_comp]
   rw [hcoh]
   erw [reassoc_of% hR]
-  rw [reassoc_of% hC, h₀, reassoc_of% h₁]
+  erw [reassoc_of% hC, h₀, reassoc_of% h₁]
   ext Z x
   change M₀.val.map (finitePerfectAdicChartPoint X V U W f Z.unop).op
       (δ.hom.app (op ((MorphismProperty.Over.map ⊤ U.prop).obj
