@@ -158,7 +158,7 @@ theorem coefficientDirectImageRestrictionCube
       restrictionComp_apply, restrictionComp_inv_apply]
   ext x
   simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
-  rw [hd, hcz, cdApp, hi, cpApp, ha]
+  erw [hd, hcz, cdApp, hi, cpApp, ha]
 
 
 end AlgebraicGeometry.Scheme
