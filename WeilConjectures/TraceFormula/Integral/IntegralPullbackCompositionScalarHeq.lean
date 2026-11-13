@@ -211,8 +211,10 @@ private theorem derivedCompositor_hom_heq {C C' : Type w₁} {D D' : Type w₂} 
     [H'.Additive] [Limits.PreservesFiniteLimits H'] [Limits.PreservesFiniteColimits H']
     (eF : HEq F F') (eG : HEq G G') (eH : HEq H H')
     (a : H ≅ F ⋙ G) (a' : H' ≅ F' ⋙ G') (ha : HEq a a') :
-    HEq (Functor.mapDerivedCategoryNatIso a ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm).hom
-      (Functor.mapDerivedCategoryNatIso a' ≪≫ (Functor.mapDerivedCategoryCompIso F' G').symm).hom := by
+    HEq (Functor.mapDerivedCategoryNatIso a ≪≫
+      (Functor.mapDerivedCategoryCompIso F G).symm).hom
+      (Functor.mapDerivedCategoryNatIso a' ≪≫
+        (Functor.mapDerivedCategoryCompIso F' G').symm).hom := by
   have he := derivedCompositor_heq hC hD hE hiC hiD hiE haC haD haE hdC hdD hdE
     F F' G G' H H' eF eG eH a a' ha
   subst hC hD hE
@@ -291,8 +293,7 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
       set_option backward.isDefEq.respectTransparency.types false in
       exact finiteSystemPullback_heq_integralComparison l E (h ≫ k))
     (finiteSystemComposition_heq_integralComparison l E h k)
-  apply Iso.ext
-  exact eq_of_heq hh
+  with_unfolding_all exact Iso.ext (eq_of_heq hh)
 
 end Composition
 
