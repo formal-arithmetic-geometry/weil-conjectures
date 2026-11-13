@@ -687,9 +687,6 @@ namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency true
 
--- Reuse the compact proof instead of rebuilding the sheaf-composition instance.
-attribute [local instance 20000] ringedCompletionHasSheafCompose
-
 attribute [local irreducible] homComplexFunctor homComplexIsLimit
 attribute [local irreducible] sheafCompose SheafOfModules.restrictScalars
   SheafOfModules.coefficientHomObjComparisonHom SheafOfModules.genericUnitComponent
@@ -714,7 +711,6 @@ private theorem unitProducts
   intro K
   apply SheafOfModules.hasLimitsOfShape
 
-set_option trace.profiler true in
 -- The statement and its normalization compare several chosen Hom-complex constructions.
 /-- The coefficient-Hom bifunctor has a unit at the coefficient ring, normalized by
 restriction and evaluation at one.
@@ -758,6 +754,9 @@ theorem exists_coefficientHom_unit
                 change rc.obj M ⟶ ((homComplexFunctor (R := R)).obj
                   (op (ringedSiteRingComplex R))).obj (rc.obj M)
                 exact (ringedHomUnitEvaluationIso R (rc.obj M)).inv) := by
+  -- Reuse the compact instance proof throughout the construction.
+  have : J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) :=
+    ringedCompletionHasSheafCompose J
   intro r rc σ
   let : HasProducts.{0} (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)) :=
