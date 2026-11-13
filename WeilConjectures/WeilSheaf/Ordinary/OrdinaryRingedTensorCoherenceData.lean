@@ -28,17 +28,6 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   (H : Functor.uncurry.obj (ordinaryIhomBifunctor l Y) ⋙ E.functor ≅
     E.functor.op.prod E.functor ⋙ Functor.uncurry.obj (SheafOfModules.homFunctor (R := R)))
 
--- Share the concrete instance terms across the tensor equations and structure fields.
-private abbrev ordinaryRingedSourceCochainMonoidal :
-    MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l Y) ℤ) :=
-  Mod.monoidalCategoryCochainComplex
-
-private abbrev ordinaryRingedTargetCochainMonoidal :
-    MonoidalCategory (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} J R) ℤ) :=
-  inferInstance
-
-attribute [local instance] ordinaryRingedSourceCochainMonoidal ordinaryRingedTargetCochainMonoidal
-
 /-- A binary comparison fixed uniquely by its tensor--Hom mate.
 Source: Stacks 06YS, 06YU (blueprint: new-sf-ordinary-ringed-tensor-coherence-data). -/
 structure OrdinaryRingedTensorUnderivedData where
@@ -59,7 +48,6 @@ structure OrdinaryRingedTensorUnderivedData where
           (E.functor.obj Q) (E.functor.obj I)).symm
             (E.functor.map f ≫ H.hom.app (op P, I))
 
-set_option profiler true in
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- A normalized comparison on the existing ordinary and ringed cochain tensors.
@@ -85,9 +73,15 @@ structure OrdinaryRingedTensorChainComparison
       E.functor.map ((κ P Q).hom.f n) ≫
         (tensor.hom.app (Q, P)).f n =
       (p * q).negOnePow • ((d.underived (P.X p) (Q.X q)).hom ≫
-        RingedForgetTensorTransposition.tensorSummand J R
-          ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q)
-          ((E.functor.mapHomologicalComplex (.up ℤ)).obj P) q p n hqp)
+        (show _ ⟶ (((E.functor.mapHomologicalComplex (.up ℤ)).obj Q) ⊗
+            ((E.functor.mapHomologicalComplex (.up ℤ)).obj P)).X n by
+          -- Identify the two presentations of the total tensor before elaborating the equality.
+          change _ ⟶ ((coefficientTotalTensor J R).obj
+            ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q,
+              (E.functor.mapHomologicalComplex (.up ℤ)).obj P)).X n
+          exact RingedForgetTensorTransposition.tensorSummand J R
+            ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q)
+            ((E.functor.mapHomologicalComplex (.up ℤ)).obj P) q p n hqp))
   associativity (P Q N : CochainComplex (ProEtale.AdicSheaf l
       Y) ℤ) :
     let G := E.functor.mapHomologicalComplex (.up ℤ)
@@ -96,7 +90,6 @@ structure OrdinaryRingedTensorChainComparison
       tensor.hom.app (P ⊗ Q, N) ≫ (tensor.hom.app (P, Q) ▷ G.obj N) ≫
         (α_ (G.obj P) (G.obj Q) (G.obj N)).hom
 
-set_option profiler true in
 /-- The Hom comparison is the one arising from a coherent ordinary tensor comparison.
 The normalization equations fix every tensorator uniquely. The first clause retains
 symmetry relative to the actual ordinary balanced tensor. This is a property of
