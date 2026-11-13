@@ -61,7 +61,7 @@ local notation "e₀" =>
 set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
 
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Tensor instance reduction in the explicit unit construction needs additional heartbeats.
 /-- Extension along ε supplies a functor and its canonical tensor unit after κ.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h.

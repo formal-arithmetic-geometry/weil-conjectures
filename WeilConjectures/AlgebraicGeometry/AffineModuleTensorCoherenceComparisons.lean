@@ -185,7 +185,7 @@ private theorem comparisons_from_objectwise
   obtain ⟨β, hc⟩ := liftNatural Q (H ⋙ J) τ hinj hβ
   exact ⟨α, β, ha, hc⟩
 
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Converting scheme pushforward to the composite right adjoint needs extra heartbeats.
 private theorem tensorComparisons_from_objectwise
     (H : SheafOfModules.{u} (𝓡 A) ⥤ U.Modules) (γ : S ⋙ tensorPullback f ⟶ H)
