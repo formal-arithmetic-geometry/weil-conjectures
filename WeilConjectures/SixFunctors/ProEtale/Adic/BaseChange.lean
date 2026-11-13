@@ -69,10 +69,18 @@ private lemma adicSquareLowerStarIso_hom_app_hom (sq : CommSq g' j' j g'')
     (M : AdicSheaf l U') :
     ((adicSquareLowerStarIso l sq).hom.app M).hom =
       (ProEtale.squareLowerStarIso (WeilCoefficients.{u} l) sq).hom.app M.X := by
-  simp (config := { dsimp := false }) only [adicSquareLowerStarIso,
-    ProEtale.squareLowerStarIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    Mod.comp_hom', adicLowerStarComp_hom_app_hom, adicLowerStarComp_inv_app_hom,
-    adicLowerStarCongr_hom_app_hom]
+  ext V : 3
+  simp only [adicSquareLowerStarIso, ProEtale.squareLowerStarIso, Iso.trans_hom,
+    Iso.symm_hom, Mod.comp_hom', ObjectProperty.FullSubcategory.comp_hom,
+    NatTrans.comp_app, adicLowerStarComp_hom_app_hom_hom_app,
+    adicLowerStarCongr_hom_app_hom_hom_app, adicLowerStarComp_inv_app_hom_hom_app,
+    lowerStarComp_hom_app_hom_app, lowerStarCongr_hom_app_hom_app,
+    lowerStarComp_inv_app_hom_app]
+  simp only [← Functor.map_comp, ← op_comp]
+  congr 2
+  ext : 1
+  simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
+    MorphismProperty.Over.mk]
 
 set_option profiler true in
 private lemma adicBaseChange_unit_app_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
