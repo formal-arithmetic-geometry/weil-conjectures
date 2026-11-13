@@ -104,10 +104,7 @@ lemma injective_of_isIntegral {T : Type*} [CommRing T] [IsDomain T] [Algebra R T
   have : x ∈ RingHom.ker ψ.toRingHom := hx
   rwa [hker, Ideal.mem_bot] at this
 
-set_option maxHeartbeats 1000000 in
--- the instance search through integral closures and quotients is slow
-set_option synthInstance.maxHeartbeats 400000 in
--- the instance search through integral closures and quotients is slow
+set_option profiler true in
 /-- **Primes of a cover fixed by inertia are unramified.** Let `T` be a Dedekind domain finite
 over `R`, with an `R`-algebra map `ψ : T → Ω`, and `Q` a maximal ideal of the integral closure of
 `R` in `Ω` over a maximal ideal `m` of `R` with perfect residue field. If the inertia group of `Q`
