@@ -241,7 +241,8 @@ change of `g : S' ⟶ S`. The pullback along `g` of the auxiliary decomposition 
 `(1, -h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])`
 (`AlgebraicGeometry.Etale.projectiveLineDecompositionMapAux`, with `-h = c₁(𝒪(-∞))`), followed by
 the proper base change map `Lg^* Rq_* ⟶ Rq'_* Lg'^*` and `Lg'^*(Λ(1)[2]) ≅ Λ(1)[2]`, is the
-decomposition map of `ℙ¹_{S'}`, preceded by the identification `Lg^*(Λ_S(1)[2] ⊕ Λ_S) ≅ Λ_{S'}(1)[2] ⊕ Λ_{S'}`. -/
+decomposition map of `ℙ¹_{S'}`, preceded by the identification
+`Lg^*(Λ_S(1)[2] ⊕ Λ_S) ≅ Λ_{S'}(1)[2] ⊕ Λ_{S'}`. -/
 theorem projectiveLineDecompositionMapAux_baseChange :
     (L((g)^*[ModuleCat.{u + 1} Λ])).map (projectiveLineDecompositionMapAux Λ S) ≫
         (derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
