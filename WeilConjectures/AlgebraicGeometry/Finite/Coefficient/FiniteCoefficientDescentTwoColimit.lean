@@ -404,9 +404,6 @@ attribute [local irreducible] finiteCoefficientDerivedHomEquiv finiteCoefficient
   finiteDescentDerivedHomToAlgCl finiteDescentDerivedHomTransition
   coefficientDescentHomToAlgCl coefficientDescentHomTransition
 
-set_option maxHeartbeats 400000 in
--- The four-clause assembly elaborates several derived functor and zero-shift interfaces.
-
 /-- Clause (4) of `finiteCoefficientDescentTwoColimit` on its own (blueprint
 `definition-constructible-sheaves`): for a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a
 noetherian qcqs scheme `X`, the constant-model bounded constructible complexes with `E`-coefficients
@@ -454,6 +451,9 @@ theorem constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl_of_
     LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
   let : IsNoetherian X := {}
   exact constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl ℓ X
+
+set_option maxHeartbeats 400000 in
+-- The four-clause assembly elaborates several derived functor and zero-shift interfaces.
 
 /-- All four finite coefficient descent assertions, including the rational identification
 and the ordinary-category filtered two-colimit.
