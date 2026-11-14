@@ -59,6 +59,12 @@ open Scheme
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
 
+/-- The composite of two proper morphisms of `Over (Spec (.of k))` is proper (on the underlying
+morphisms of schemes). -/
+instance isProper_left_comp {X Y Z : Over (Spec (.of k))} (p : X ⟶ Y) (q : Y ⟶ Z)
+    [IsProper p.left] [IsProper q.left] : IsProper (p ≫ q).left :=
+  inferInstanceAs (IsProper (p.left ≫ q.left))
+
 /-! ### The coefficient ring `ℚ̲̄_ℓ` -/
 
 section LowerStarOfIsProper
@@ -131,7 +137,6 @@ noncomputable def boundedConstructibleLowerStarOfIsProperComp {Z : Over (Spec (.
     [IsProper q.left] :
     boundedConstructibleLowerStarOfIsProper ℓ p ⋙ boundedConstructibleLowerStarOfIsProper ℓ q ≅
       boundedConstructibleLowerStarOfIsProper ℓ (p ≫ q) :=
-  haveI : IsProper (p ≫ q).left := inferInstanceAs (IsProper (p.left ≫ q.left))
   (conjugateIsoEquiv (boundedConstructibleUpperStarLowerStarAdjunctionOfIsProper ℓ (p ≫ q))
     ((boundedConstructibleUpperStarLowerStarAdjunctionOfIsProper ℓ q).comp
       (boundedConstructibleUpperStarLowerStarAdjunctionOfIsProper ℓ p))
@@ -219,7 +224,6 @@ noncomputable def boundedConstructibleLowerStarOfIsProperComp {Z : Over (Spec (.
     [IsProper q.left] :
     boundedConstructibleLowerStarOfIsProper ℓ E p ⋙ boundedConstructibleLowerStarOfIsProper ℓ E q ≅
       boundedConstructibleLowerStarOfIsProper ℓ E (p ≫ q) :=
-  haveI : IsProper (p ≫ q).left := inferInstanceAs (IsProper (p.left ≫ q.left))
   (conjugateIsoEquiv (boundedConstructibleUpperStarLowerStarAdjunctionOfIsProper ℓ E (p ≫ q))
     ((boundedConstructibleUpperStarLowerStarAdjunctionOfIsProper ℓ E q).comp
       (boundedConstructibleUpperStarLowerStarAdjunctionOfIsProper ℓ E p))
@@ -305,7 +309,6 @@ noncomputable def boundedConstructibleLowerStarOfIsProperComp {Z : Over (Spec (.
     [IsProper q.left] :
     boundedConstructibleLowerStarOfIsProper ℓ E p ⋙ boundedConstructibleLowerStarOfIsProper ℓ E q ≅
       boundedConstructibleLowerStarOfIsProper ℓ E (p ≫ q) :=
-  haveI : IsProper (p ≫ q).left := inferInstanceAs (IsProper (p.left ≫ q.left))
   (conjugateIsoEquiv (boundedConstructibleUpperStarLowerStarAdjunctionOfIsProper ℓ E (p ≫ q))
     ((boundedConstructibleUpperStarLowerStarAdjunctionOfIsProper ℓ E q).comp
       (boundedConstructibleUpperStarLowerStarAdjunctionOfIsProper ℓ E p))
