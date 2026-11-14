@@ -35,6 +35,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLow
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStarOfIsProper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Bounded.BoundedConstructibleBaseChange
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.Algebra.Homology.RingedTensorCorner.ProjectionMateExact
@@ -232,11 +233,12 @@ theorem isIso_algClCoefficientPushHom_boundedBelow
 Source: blueprint rational proper direct image, clause 2
 (blueprint: proposition-proper-direct-image-constructible-complexes).
 
-Proof: the existing general bounded-constructible pushforward theorem applies to
-standing morphisms and both rational coefficient rings. The named preservation wrapper
-selects its finite-subextension or Qlbar case using the bundled coefficient-ring equality.
-Apply this wrapper to the bounded-constructible object ⟨K, _hK⟩; it gives the desired
-predicate for the actual derived pushforward. Properness is an allowed specialization.
+Proof: `p` is proper, so this is the proper-only finiteness of chapter 4
+(`boundedConstructible_rightDerivedLowerStar_obj_of_isProper` for `ℚ̄_ℓ` and for the finite
+subextensions `E`, from
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdicFiniteness`),
+selected by the bundled coefficient-ring equality; the general finiteness theorem for every `f`
+(`boundedConstructible_rightDerivedLowerStar_obj`, chapter 7) is not used, as in the notes.
 -/
 theorem properPushforward_boundedConstructible_rational
     (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}))
@@ -249,6 +251,11 @@ theorem properPushforward_boundedConstructible_rational
     (_hK : boundedConstructible (condensedRingObj Λ.X X.left) K) :
     boundedConstructible (condensedRingObj Λ.X Y.left)
       ((lowerStar Λ.X p.left).rightDerivedFunctor.obj K) := by
-  exact rationalCoefficientPushforwardPreservation ℓ Λ _hΛ p ⟨K, _hK⟩
+  rcases _hΛ with ⟨E, hE⟩ | hQ
+  · subst hE
+    exact ContinuousMapRingObj.boundedConstructible_rightDerivedLowerStar_obj_of_isProper ℓ E p
+      ⟨K, _hK⟩
+  · subst hQ
+    exact boundedConstructible_rightDerivedLowerStar_obj_of_isProper ℓ p ⟨K, _hK⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
