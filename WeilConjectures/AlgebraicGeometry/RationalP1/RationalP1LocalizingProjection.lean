@@ -75,7 +75,8 @@ private theorem selected_projection_isIso
       [IsSeparated (T ↘ Spec (.of k))] :
       constantModelBoundedConstructible Λ T = boundedConstructible (condensedRingObj Λ T) := by
     cases c with
-    | none => exact constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl_of_finiteType k l T
+    | none =>
+      exact constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl_of_finiteType k l T
     | some E =>
       exact constantModelBoundedConstructible_eq_boundedConstructible_subfield_of_finiteType k l E T
   have hctf (T : Scheme.{u}) [T.Over (Spec (.of k))]
