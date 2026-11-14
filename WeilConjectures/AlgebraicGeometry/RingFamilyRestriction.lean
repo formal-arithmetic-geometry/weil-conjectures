@@ -36,8 +36,6 @@ def ringFamilyRestrictedSections : Fin r →
       forget CommRingCat).sections :=
   fun i ↦ ⟨fun X ↦ (f i).val (F.op.obj X), fun a ↦ (f i).property (F.op.map a)⟩
 
-set_option maxHeartbeats 400000 in
--- The unit formula compares two composite module functors; the wall limit stays unchanged.
 /-- Ring-family complexes commute with restriction and module sheafification.
 Source: Stacks Project, Tag 099E, K_{V,I O(V)} = K_{U,I}|_V.
 (auxiliary; not a blueprint node).
@@ -110,6 +108,8 @@ theorem exists_ringFamilySheafModel_restrictionIso :
       (((PresheafOfModules.sheafificationAdjunction
         (𝟙 ((F.sheafPushforwardContinuous RingCat.{u} J L).obj R).obj)).unit.app
           (N.X n)).app X x) at hh
+  dsimp only [HomologicalComplex.Hom.isoOfComponents_hom_f, e, Iso.trans_hom,
+    Functor.mapIso_hom, Iso.symm_hom]
   change (z.app (M.X n)).hom.val.app X
     ((S'.map (c n).inv).val.app X _) = _
   exact (congrArg ((z.app (M.X n)).hom.val.app X) hh.symm).trans (hz (M.X n) X x)

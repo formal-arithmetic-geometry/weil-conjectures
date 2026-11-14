@@ -59,8 +59,6 @@ private lemma augmentedHomotopy {C : Type*} [Category C] [Abelian C]
     refine ⟨(I.exact_succ (n + 1)).descToInjective _ hz, ?_⟩
     rw [(I.exact_succ (n + 1)).comp_descToInjective, add_sub_cancel]
 
-set_option maxHeartbeats 600000 in
--- Comparing the nested module-sheaf functors and four homology transports needs this budget.
 /-- Resolution comparison and homotopy invariance of the flat base-change morphism.
 (Stacks, Tag 02N7; Derived Categories, Tags 013P, 013S.) -/
 theorem flatBaseChangeResolutionBeta_independent {X S S' : Scheme.{uBC}} (f : X ⟶ S) (g : S' ⟶ S)
@@ -105,7 +103,7 @@ theorem flatBaseChangeResolutionBeta_independent {X S S' : Scheme.{uBC}} (f : X 
   let T := (pushforward (pullback.fst g f)).mapHomologicalComplex (ComplexShape.up ℕ)
   let G := (pushforward g).mapHomologicalComplex (ComplexShape.up ℕ)
   let L := (tensorPullback g).mapHomologicalComplex (ComplexShape.up ℕ)
-  let e := NatIso.mapHomologicalComplex (flatBaseChangePushforwardSquare f g)
+  let e : R ⋙ P ≅ T ⋙ G := NatIso.mapHomologicalComplex (flatBaseChangePushforwardSquare f g)
     (ComplexShape.up ℕ)
   have hq : Homotopy
       (flatBaseChangeResolutionQ f g I J t ≫ G.map (T.map b))
@@ -165,14 +163,6 @@ theorem flatBaseChangeResolutionBeta_independent {X S S' : Scheme.{uBC}} (f : X 
     rw [← Functor.map_comp, ← Functor.map_comp]
     exact hc.homologyMap_eq p
   unfold flatBaseChangeResolutionBeta
-  change (tensorPullback g).map (I.isoRightDerivedObj (pushforward f) p).hom ≫
-      (((P.obj I.cocomplex).sc p).mapHomologyIso (tensorPullback g)).inv ≫
-      H.map (flatBaseChangeResolutionC f g I J t) ≫
-      (J.isoRightDerivedObj (pushforward (pullback.fst g f)) p).inv =
-    (tensorPullback g).map (I₁.isoRightDerivedObj (pushforward f) p).hom ≫
-      (((P.obj I₁.cocomplex).sc p).mapHomologyIso (tensorPullback g)).inv ≫
-      H.map (flatBaseChangeResolutionC f g I₁ J₁ t₁) ≫
-      (J₁.isoRightDerivedObj (pushforward (pullback.fst g f)) p).inv
   rw [hi, Functor.map_comp]
   simp only [Category.assoc]
   rw [← Category.assoc ((tensorPullback g).map (H₀.map (P.map a))), hn]

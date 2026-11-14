@@ -43,7 +43,6 @@ private theorem transport_restriction
   simp only [eqToHom_refl]
   rfl
 
-set_option maxHeartbeats 500000 in
 -- The pair calculation compares dependent section modules across degree and open transports.
 /-- Singleton-supported cochains with no higher differential glue to sections
 (Stacks, Tag 08C1). -/
@@ -114,7 +113,8 @@ theorem principalOpenCech_singleton_gluing
     let S : {S : Finset (Fin r) // S.Nonempty} := ⟨{i, j}, by simp⟩
     have hcard : S.val.card = 2 := Finset.card_pair (ne_of_lt hij)
     have hzero := hT n t S
-    rw [ht S (by omega), map_zero, smul_zero, zero_add,
+    -- Simplify the dependent sum without constructing a rewrite motive for each step.
+    simp only [ht S (by omega), map_zero, smul_zero, zero_add,
       hdt S (by omega)] at hzero
     have hsum (g : S.val → F.obj.obj
         (op (PrimeSpectrum.basicOpen (∏ j ∈ S.val, f j)))) :
@@ -136,7 +136,7 @@ theorem principalOpenCech_singleton_gluing
     have hz := congrArg (fun z ↦ (e.hom.app
       (op (PrimeSpectrum.basicOpen (∏ j ∈ S.val, f j)))) z) hzero
     simp only [map_zero, map_sum] at hz
-    rw [hsum] at hz
+    simp only [hsum] at hz
     have hna : (S.val.erase i).Nonempty := by simp [S, hij.ne]
     have hnb : (S.val.erase j).Nonempty := by
       have hdel : S.val.erase j = {i} := by
@@ -144,12 +144,12 @@ theorem principalOpenCech_singleton_gluing
         rw [Finset.pair_comm]
         simp [hij.ne']
       simp [hdel]
-    rw [dite_eq_left hna, dite_eq_left hnb] at hz
+    simp only [dite_eq_left hna, dite_eq_left hnb] at hz
     have hpa : (S.val.filter (fun x ↦ x < i)).card = 0 := by
       simp [S, Finset.filter_insert, Finset.filter_singleton, hij.not_gt]
     have hpb : (S.val.filter (fun x ↦ x < j)).card = 1 := by
       simp [S, Finset.filter_insert, Finset.filter_singleton, hij]
-    rw [hpa, hpb, pow_zero, pow_one, one_smul, neg_one_smul, map_neg] at hz
+    simp only [hpa, hpb, pow_zero, pow_one, one_smul, neg_one_smul, map_neg] at hz
     have hca : (S.val.erase i).card = 1 := by simp [S, hij.ne]
     have hcb : (S.val.erase j).card = 1 := by
       rw [show S.val.erase j = {i} by
@@ -196,7 +196,7 @@ theorem principalOpenCech_singleton_gluing
       rw [Finset.pair_comm]
       simp [hij.ne']
     have hh := congrArg (fun z ↦ F.obj.map (eqToHom hD).op z) hz'
-    rw [hr _ hca j hj' _ inf_le_right, hr _ hcb i hi' _ inf_le_left] at hh
+    simp only [hr _ hca j hj' _ inf_le_right, hr _ hcb i hi' _ inf_le_left] at hh
     exact hh.symm
   have hcompat : TopCat.Presheaf.IsCompatible F.obj U sf := by
     intro i j
