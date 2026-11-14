@@ -183,7 +183,7 @@ private theorem localizingClosure_map
     (S : ObjectProperty C) (T : ObjectProperty D) (F : C ⥤ D)
     [F.CommShift ℤ] [F.IsTriangulated]
     (hS : ∀ K, S K → T (F.obj K))
-    (hF : ∀ (I : Type u) (G : Discrete I ⥤ (localizingClosure S).FullSubcategory),
+    (hF : ∀ (I : Type (max u v)) (G : Discrete I ⥤ (localizingClosure S).FullSubcategory),
       PreservesColimit (G ⋙ (localizingClosure S).ι) F) :
     ∀ K, localizingClosure S K → localizingClosure T (F.obj K) := by
   let L := localizingClosure S
@@ -202,7 +202,10 @@ private theorem localizingClosure_map
     have hLG : L (colimit G) := hL.2.2 G hG (fun i ↦ (h i).1)
     refine ⟨hLG, ?_⟩
     let G' := L.lift G (fun i ↦ (h i.as).1)
-    have : PreservesColimit G F := hF I G'
+    -- the sum is indexed by the morphism universe: lift its index to the universe of `hF`
+    let e := Discrete.equivalence (Equiv.ulift : ULift.{max u v} I ≃ I)
+    have h' : PreservesColimit (e.functor ⋙ G) F := hF (ULift.{max u v} I) (e.functor ⋙ G')
+    have : PreservesColimit G F := Functor.Final.preservesColimit_of_comp (F := e.functor)
     have hMG : M (colimit (G ⋙ F)) :=
       hM.prop_colimit (G ⋙ F) inferInstance (fun i ↦ (h i).2)
     exact M.prop_of_iso (preservesColimitIso F G).symm hMG
