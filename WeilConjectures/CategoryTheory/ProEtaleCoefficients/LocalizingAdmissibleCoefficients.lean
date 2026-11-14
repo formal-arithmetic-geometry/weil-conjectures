@@ -39,7 +39,7 @@ namespace CategoryTheory
 
 /-- A property describes a full replete triangulated subcategory closed under all
 coproducts indexed by types in the universe `w` that exist in the ambient category.
-At `w = u` this is `IsLocalizingSubcategory`.
+At `w = v` (the morphism universe) this is `IsLocalizingSubcategory`.
 
 Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
 first paragraph, sums indexed in the fixed indexing universe
@@ -55,7 +55,8 @@ def IsLocalizingSubcategoryOfSize {C : Type u} [Category.{v, u} C]
         P (colimit F)
 
 /-- The intersection of all full replete triangulated subcategories containing `S` and
-closed under the existing `w`-indexed coproducts. At `w = u` this is `localizingClosure`.
+closed under the existing `w`-indexed coproducts. At `w = v` (the morphism universe) this is
+`localizingClosure`.
 
 Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
 first paragraph, sums indexed in the fixed indexing universe
