@@ -29,9 +29,9 @@ Frobenius of quasi-finite direct images in
   `AlgebraicGeometry.WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg`: vanishing in
   negative degrees.
 - `AlgebraicGeometry.WeilSheaf.isZero_higherLowerStar_of_isFinite`: blueprint
-  `lemma-weil-pbc-finite-direct-image-exact`.
+  `lemma-finite-direct-images--2`.
 - `AlgebraicGeometry.isZero_higherLowerShriek_of_quasiFinite`: blueprint
-  `sk-l-dl-general-quasifinite`, `lem-zl-quasi-finite`, part 1.
+  `lemma-finite-quasi-finite-direct-images`, part 1.
 -/
 
 @[expose] public section
@@ -106,7 +106,7 @@ theorem WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg (G : WeilSheaf 
 
 end LowerShriek
 
-/-- **Finite direct images are exact** (blueprint: `lemma-weil-pbc-finite-direct-image-exact`,
+/-- **Finite direct images are exact** (blueprint: `lemma-finite-direct-images--2`,
 with the passage to `ℚ̄_ℓ`-coefficients): for a finite morphism
 `p : T ⟶ Y` of `k₀`-schemes, the higher direct images `Rʳp₀*G` of a Weil sheaf vanish for
 `r > 0`: the pushforward `p₀*` is exact
@@ -145,8 +145,8 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
 /-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the higher direct images
-with compact support `Rʳf₀!` vanish for `r > 0` (blueprint: `sk-l-dl-general-quasifinite`,
-`lem-zl-quasi-finite`, part 1).
+with compact support `Rʳf₀!` vanish for `r > 0` (blueprint:
+`lemma-finite-quasi-finite-direct-images`, `lemma-finite-quasi-finite-direct-images`, part 1).
 
 Zariski's main theorem factors `f` as a quasi-compact open immersion `j : X ⟶ T` followed by a
 finite morphism `p : T ⟶ Y`, so that `Rf₀! ≅ Rp₀! ∘ Rj₀! ≅ Rp₀* ∘ j₀!`; the extension by zero

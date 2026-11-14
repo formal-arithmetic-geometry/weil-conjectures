@@ -31,7 +31,7 @@ functors `F.mapCommGrp`, `G.mapCommGrp` between the categories of commutative (a
 objects, commuting with the forgetful functors, and `F.mapCommGrp ⊣ G.mapCommGrp`
 (`Adjunction.mapCommGrp`) with unit and counit whose underlying morphisms are the unit and
 counit of `F ⊣ G`; in particular these are morphisms of group objects.
-(blueprint: `lem-weil-pbc-adjunction-lifts-abelian-group-objects`) -/
+(blueprint: `situation-conventions`) -/
 theorem mapCommGrp_unit_counit :
     (∀ X : CommGrp C, (CommGrp.forget C).map (adj.mapCommGrp.unit.app X) = adj.unit.app X.X) ∧
     ∀ Y : CommGrp D, (CommGrp.forget D).map (adj.mapCommGrp.counit.app Y) =

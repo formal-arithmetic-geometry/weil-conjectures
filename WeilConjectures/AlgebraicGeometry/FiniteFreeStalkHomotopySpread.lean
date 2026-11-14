@@ -15,8 +15,8 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkHomotopyPairShrink
 
 /-! # Spreading a finite free homotopy normal form from a stalk
 
-Source: blueprint lem-pc-perfect-locus, proof step 4 (finite matrix identities).
-(blueprint: lem-pc-finite-free-stalk-homotopy-spread)
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, proof step 4 (finite matrix
+identities). (blueprint: lem-pc-finite-free-stalk-homotopy-spread)
 -/
 
 @[expose] public section
@@ -28,8 +28,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A homotopy equivalence with a single free complex over a local ring spreads.
 
-Source: blueprint lem-pc-perfect-locus, proof step 4, finite matrix extension argument.
-(blueprint: lem-pc-finite-free-stalk-homotopy-spread).
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, proof step 4, finite matrix
+extension argument. (blueprint: lem-pc-finite-free-stalk-homotopy-spread).
 
 Proof: Work on an affine neighbourhood of y and choose finite bases of P's terms.
 Both complexes have finite support. Under the affine quasicoherent module-sheaf

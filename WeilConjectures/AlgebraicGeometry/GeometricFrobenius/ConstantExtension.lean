@@ -19,7 +19,8 @@ geometric fibers `Ȳ₁ = Y ×_{k₁} k̄₁` and `Ȳ₀ = Y ×_{k₀} k̄₀` a
 If `k₁` is finite of degree `m` over the finite field `k₀`, then `ι` intertwines the geometric
 Galois Frobenius `Fr₁` of `Ȳ₁` with the `m`-th power of the geometric Galois Frobenius `Fr₀` of
 `Ȳ₀`: `ι ≫ Fr₀ᵐ = Fr₁ ≫ ι`. This is the scheme-theoretic input for restricting Weil sheaves
-along a finite constant field extension (blueprint: `lem-wf-weil-group-constant-extension`).
+along a finite constant field extension (blueprint:
+`lemma-geometric-constituents-after-constant-extension`).
 
 ## Main definitions
 
@@ -80,7 +81,7 @@ variable {Y : Scheme.{u}} (f₁ : Y ⟶ Spec (.of k₁)) (f₀ : Y ⟶ Spec (.of
 
 /-- The morphism `ι = 𝟙 Y × Spec θ : Y ×_{k₁} k̄₁ ⟶ Y ×_{k₀} k̄₀` between the geometric fibers of a
 `k₁`-scheme `Y` over `k₁` and over `k₀`, for a `k₀`-embedding `θ : k̄₀ ↪ k̄₁`.
-(blueprint: `lem-wf-weil-group-constant-extension`) -/
+(blueprint: `lemma-geometric-constituents-after-constant-extension`) -/
 def geometricFiberExtensionMap : f₁.geometricFiber ⟶ f₀.geometricFiber :=
   pullback.map f₁ (Scheme.specAlgebraicClosure k₁).hom f₀ (Scheme.specAlgebraicClosure k₀).hom
     (𝟙 Y) (Spec.map (CommRingCat.ofHom θ.toRingHom))
@@ -170,7 +171,7 @@ variable {Y : Scheme.{u}} (f₁ : Y ⟶ Spec (.of k₁)) (f₀ : Y ⟶ Spec (.of
 
 /-- The morphism `ι : Ȳ₁ ⟶ Ȳ₀` intertwines the powers of the geometric Galois Frobenii:
 `ι ≫ Fr₀^{m n} = Fr₁ⁿ ≫ ι`, with `m = [k₁ : k₀]`.
-(blueprint: `lem-wf-weil-group-constant-extension`) -/
+(blueprint: `lemma-geometric-constituents-after-constant-extension`) -/
 @[reassoc]
 theorem geometricFiberExtensionMap_comp_geometricGaloisFrobenius_pow (n : ℕ) :
     geometricFiberExtensionMap f₁ f₀ hf θ ≫

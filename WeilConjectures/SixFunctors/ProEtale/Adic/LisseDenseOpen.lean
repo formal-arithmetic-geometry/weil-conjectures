@@ -24,7 +24,7 @@ generizations; a continuous function to the Hausdorff space `ℚ̄_ℓ` is const
 specializations. The lisse case reduces to this one on a trivialising cover.
 
 On a smooth curve this is the fact that a lisse sheaf has no nonzero punctual subsheaf, used for
-the curve perverse t-structure (blueprint `thm-a1-curve-perverse-heart`, Step 0).
+the curve perverse t-structure (blueprint `lemma-perverse-sheaves-curve`, Step 0).
 -/
 
 @[expose] public section

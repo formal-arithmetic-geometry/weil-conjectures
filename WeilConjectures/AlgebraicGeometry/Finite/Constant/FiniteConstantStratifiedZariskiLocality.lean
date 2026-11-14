@@ -15,8 +15,8 @@ import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
 # Zariski locality of finite constant stratified constructibility
 
 Source: Stacks Project, Topology, Tags 005J, 09YD and 053W; Etale Cohomology,
-Tag 095E, finite-affine-cover argument; blueprint sec-proetale-coefficients,
-sk-def-sfb-constructible, clause 2 (blueprint: lem-sfb-constructible-zariski-locality).
+Tag 095E, finite-affine-cover argument; blueprint chap-The-pro-etale-site,
+definition-constructible-sheaves, clause 2 (blueprint: lem-sfb-constructible-zariski-locality).
 
 The three clauses state restriction to quasi-compact opens, assembly over a finite
 quasi-compact open cover, and the equivalent affine-local criterion on qcqs schemes.
@@ -158,7 +158,7 @@ qcqs schemes, glues over finite quasi-compact open covers of qcqs opens, and is
 therefore equivalent to the affine-local condition on a qcqs scheme.
 
 Source: Stacks Project, Topology, Tags 005J, 09YD and 053W; Etale Cohomology,
-Tag 095E, proof of (2) implies (3); blueprint sk-def-sfb-constructible, clause 2
+Tag 095E, proof of (2) implies (3); blueprint definition-constructible-sheaves, clause 2
 (blueprint: lem-sfb-constructible-zariski-locality).
 
 Proof:
@@ -173,22 +173,22 @@ Proof:
    new-unbounded-pullback-finite-constant-local-model. The composition isomorphisms of
    sk-def-sfb-module-pushforward-pullback identify its restriction with the restriction
    of M to the new stratum. Compose the witnessing model isomorphisms to transfer the
-   property det-def-sfb-constructible-local-model, proving the restriction clause.
+   property definition-constructible-sheaves--1, proving the restriction clause.
 4. Refine the finite open cover by affine neighborhoods and extract a finite subcover
    using lem-weil-pbc-affine-opens-basis and def-weil-pbc-quasi-compact-scheme. Each chart
    is qcqs by lem-weil-pbc-affine-scheme-qcqs. Apply the restriction clause on its given
    covering member; successive module restrictions agree by upperStarComp.
-5. Apply lem-weil-pbc-etale-stratification-local-gluing-core to these finite affine-local
+5. Apply theorem-comparison-constructible-sheaves to these finite affine-local
    stratifications. Each global stratum factors by an actual scheme morphism through
    one local stratum. Pull back its finite constant model by
    new-unbounded-pullback-finite-constant-local-model and use upperStarComp to obtain
    the required restriction of M. This proves assembly without any Noetherian condition.
 6. Restriction gives the forward affine-local implication; a finite affine subcover
-   and assembly give the reverse. These are the two readings of sk-def-sfb-constructible.
+   and assembly give the reverse. These are the two readings of definition-constructible-sheaves.
    Empty schemes and the empty cover use the zero-stratum stratification of
-   def-constructible-stratification. Empty strata may remain. The zero module has the
+   definition-constructible-sheaves--2. Empty strata may remain. The zero module has the
    identity stratum and cover, with the zero scalar module and its rank-zero finite
-   presentation in det-def-sfb-constructible-local-model. -/
+   presentation in definition-constructible-sheaves--1. -/
 theorem finiteConstantStratified_zariski_locality
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})

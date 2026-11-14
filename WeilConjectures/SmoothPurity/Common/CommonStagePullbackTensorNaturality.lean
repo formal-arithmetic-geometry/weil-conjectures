@@ -10,7 +10,7 @@ public import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorComp
 /-! # Naturality of the prescribed common-stage pullback tensor comparison
 
 Source: recorded blueprint coefficient conventions, the common-stage paragraph of
-`def-weil-derived-pullback-tensor-hom`; Stacks 07A4.
+`prose-03-02`; Stacks 07A4.
 -/
 
 @[expose] public noncomputable section

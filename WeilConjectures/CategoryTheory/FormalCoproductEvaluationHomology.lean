@@ -13,7 +13,8 @@ import Mathlib.Algebra.Category.Grp.AB
 /-!
 # Homology preservation by formal coproduct evaluation
 
-Source: blueprint det-thm-picard-cech, Step 2, exactness of products of abelian groups.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 2, exactness of products of
+abelian groups.
 -/
 
 @[expose] public section
@@ -37,7 +38,7 @@ instance formalCoproductEval_preservesZero
 /-- Evaluation on a formal coproduct preserves homology of short complexes of
 abelian presheaves.
 
-Source: blueprint det-thm-picard-cech, Step 2, exactness of products.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 2, exactness of products.
 Proof: restriction to the discrete family of constituent objects preserves finite
 limits and colimits, since both are computed objectwise in functor categories.
 Evaluation on the formal coproduct is naturally isomorphic to this restriction

@@ -37,7 +37,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 section OtherSections
 
-/-- Blueprint `prop-weil-operations`: Six operations on Weil complexes (the projection
+/-- Blueprint `sec-Weil-complexes`: Six operations on Weil complexes (the projection
 formula). For a separated quasi-compact morphism `f : X ⟶ Y` locally of finite type of
 `k₀`-schemes of finite type and a lisse Weil sheaf `G` on `Y`, `Rf₀!(f^* G ⊗ K) ≅ G ⊗ Rf₀! K`
 naturally in the Weil complex `K` (`G`, lisse, is in particular of finite Tor-amplitude). -/
@@ -54,9 +54,9 @@ theorem WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse {X Y : Scheme.{u
         WeilComplex.derivedLowerShriek k₀ l f) :=
   ⟨WeilComplex.derivedLowerShriekCompTensorLisseIso f G hG⟩
 
-/-- Blueprint `def-weil-open-closed-recollement` and
-`prop-weil-open-closed-recollement-adjunctions` (open–closed recollement), for Weil complexes.
-Let `i : Z ⟶ X` be a closed immersion of `k₀`-schemes of finite type and `j : U ⟶ X` the
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--8` and
+`proposition-extension-zero-restriction-closed-subscheme` (open–closed recollement), for Weil
+complexes. Let `i : Z ⟶ X` be a closed immersion of `k₀`-schemes of finite type and `j : U ⟶ X` the
 complementary open immersion. There is a natural transformation `K ⟶ Ri_* i^* K` (the closed
 unit) which is an isomorphism at every `K` with `j^* K = 0`: in the recollement triangle
 `j_! j^* K ⟶ K ⟶ Ri_* i^* K ⟶`, the first term vanishes. -/
@@ -88,12 +88,13 @@ theorem WeilComplex.exists_isIso_app_of_isZero_upperStar {X Z U : Scheme.{u}}
   obtain ⟨M, ⟨e⟩⟩ := WeilComplex.derivedLowerStar_essImage_of_isZero i j hc K hK
   exact (WeilComplex.upperStarDerivedLowerStarAdjunction i).isIso_unit_app_of_iso e.symm
 
-/-- Blueprint `thm-pur-rank-one-thom` (and its vector-bundle form `thm-pur-vector-bundle-thom`),
-combined with the projection formula of `prop-weil-operations` for the constant sheaf: for the
-trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, `Rπ₀! π^* P ≅ P(-1)[-2]` naturally in the Weil
-complex `P` on `X`. The trivial line bundle is given by a cartesian square
-`Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`. Only the existence of a natural isomorphism is stated: the
-proof, by uniqueness of adjoints, does not produce the canonical map `τ_E = Rπ_! thom(E)`. -/
+/-- Blueprint `lemma-integral-linear-character--1` (and its vector-bundle form
+`lemma-integral-linear-character--1`), combined with the projection formula of `sec-Weil-complexes`
+for the constant sheaf: for the trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`,
+`Rπ₀! π^* P ≅ P(-1)[-2]` naturally in the Weil complex `P` on `X`. The trivial line bundle is given
+by a cartesian square `Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`. Only the existence of a natural isomorphism
+is stated: the proof, by uniqueness of adjoints, does not produce the canonical map
+`τ_E = Rπ_! thom(E)`. -/
 theorem WeilComplex.nonempty_iso_upperStar_comp_derivedLowerShriek_of_isPullback
     {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     (π : Y ⟶ X) (s : Y ⟶ affineLine k₀) [π.IsOver (Spec (CommRingCat.of k₀))]

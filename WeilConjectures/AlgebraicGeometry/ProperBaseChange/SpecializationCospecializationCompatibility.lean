@@ -144,14 +144,14 @@ Proof:
    Uniqueness of comparison homotopy classes into K-injectives makes these equalities
    hold in the derived category itself (lemma-weil-pbc-derived-exchange-coherence,
    lem-weil-pbc-underived-global-germ-exchange,
-   lem-weil-pbc-derived-exchange-termwise, lem-weil-pbc-kinjective-hom-derived,
+   prose-04-06, lem-weil-pbc-kinjective-hom-derived,
    lem-weil-pbc-cohomology-pullback-derived-unit).
 4. Write `β : K' ⟶ Rh_*h⁻¹K'`. The derived-unit formula gives
    `h^* = RΓ(β) ≫ Leray`. Local acyclicity makes `δ = i⁻¹β` invertible, without
    properness or torsion (lem-weil-pbc-local-acyclicity-closed-fibre-unit).
 5. Naturality of the derived adjunction unit gives
    `RΓ(β) ≫ i_B^* = i_K'^* ≫ RΓ(δ)`, also for the derived object `B = Rh_*h⁻¹K'`
-   (prop-weil-pbc-derived-inverse-image-adjunction,
+   (prose-04-06,
    lem-weil-pbc-cohomology-pullback-derived-unit).
 6. Expand cospecialization as inverse Leray, restriction, and `RΓ(δ⁻¹)`. Cancel
    Leray with inverse Leray, use step 5, and cancel `RΓ(δ)` with its inverse.

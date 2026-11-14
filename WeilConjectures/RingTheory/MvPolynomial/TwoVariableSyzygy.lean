@@ -12,8 +12,8 @@ import Mathlib.Algebra.MvPolynomial.Division
 /-!
 # The syzygies of two polynomial variables
 
-Source: the Weil conjectures blueprint, `lem-sc-p1-graded-resolution`, expanded calculation
-of exactness at the middle term of the Koszul resolution on `x₀, x₁`
+Source: the Weil conjectures blueprint, `theorem-riemann-roch-coherent-serre-duality`, expanded
+calculation of exactness at the middle term of the Koszul resolution on `x₀, x₁`
 (blueprint: lem-sc-p1-linear-syzygy).
 -/
 
@@ -24,8 +24,8 @@ universe u
 namespace MvPolynomial
 
 /-- Every relation between the two variables of `k[x₀, x₁]` is a multiple of `(x₁, -x₀)`.
-Source: the Weil conjectures blueprint, `lem-sc-p1-graded-resolution`, Koszul middle exactness
-(blueprint: lem-sc-p1-linear-syzygy).
+Source: the Weil conjectures blueprint, `theorem-riemann-roch-coherent-serre-duality`, Koszul middle
+exactness (blueprint: lem-sc-p1-linear-syzygy).
 
 Proof: Regard the ring as `k[x₁][x₀]` and write `b = b₀ + x₀ b₁`, with `b₀` in `k[x₁]`
 and `b₁` in the whole ring `k[x₁][x₀]`.

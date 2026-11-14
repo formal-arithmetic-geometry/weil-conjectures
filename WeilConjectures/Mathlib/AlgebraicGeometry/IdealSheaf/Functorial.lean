@@ -261,7 +261,7 @@ pullbacks to every `W k ×_V W l` agree. Then the pullback of `⨅ k, (I k).map 
 each `q l` is `I l`.
 
 This is the effectivity step "descending the quotients" of the proof of
-`lem-pc-descent-finite-flat-closed-subschemes`, in the form of an explicit formula: it uses
+`theorem-hilbert-schemes-points-smooth-curve--1`, in the form of an explicit formula: it uses
 flat base change (`map_comap_of_isPullback`) and that flat pullback commutes with finite
 intersections (`comap_iInf_of_flat`). -/
 theorem comap_iInf_map_of_flat {V : Scheme.{u}} {κ : Type*} [Finite κ] {W : κ → Scheme.{u}}

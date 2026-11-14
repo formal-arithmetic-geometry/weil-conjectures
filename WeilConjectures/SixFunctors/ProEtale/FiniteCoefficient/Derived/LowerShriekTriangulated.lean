@@ -15,7 +15,7 @@ candidate `Rf^c_! = Rf̄_* j_! : D(X_proét) ⥤ D(Y_proét)`
 (`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification`) is a triangulated
 functor: the functor `D(j_!)` induced by the exact extension by zero is triangulated, and so is
 the total right derived functor `Rf̄_*` (blueprint
-`lem-compact-support-direct-image-triangulated`). For the chosen compactification this is the
+`proposition-construction-independence-rf-shriek--1`). For the chosen compactification this is the
 commutation with shifts `AlgebraicGeometry.ProEtale.commShiftRightDerivedLowerShriek`.
 
 ## Main statements
@@ -47,7 +47,7 @@ noncomputable instance commShiftRightDerivedLowerShriekOfCompactification
     (ProEtale.rightDerivedLowerShriekOfCompactification A c).CommShift ℤ :=
   inferInstanceAs ((D((c.i)_!open[A]) ⋙ R((c.g)_*[A])).CommShift ℤ)
 
-/-- Blueprint `lem-compact-support-direct-image-triangulated`: Triangulatedness of the
+/-- Blueprint `proposition-construction-independence-rf-shriek--1`: Triangulatedness of the
 finite-level compact-support direct image. For every compactification `c = (j, f̄)` of `f`, the
 functor `Rf^c_! = Rf̄_* j_! : D(X_proét) ⥤ D(Y_proét)` preserves shifts
 (`commShiftRightDerivedLowerShriekOfCompactification`) and distinguished triangles: the

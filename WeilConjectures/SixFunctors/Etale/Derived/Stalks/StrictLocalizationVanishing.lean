@@ -25,7 +25,7 @@ projection. For a sheaf `F` of `Λ`-modules on `U_ét`, the stalk formula
 `AlgebraicGeometry.Etale.strictHenselizationStalkFormula`), applied to the underlying abelian
 sheaf, shows: if the abelian cohomology `H^q(U ×_Z S, p^* F)` vanishes in every degree, then the
 geometric stalk `(Rf_* F)_s = Ls^* Rf_* F` vanishes in `D(Λ)`
-(blueprint `det-tf-transverse-corner-vanishing`, stalk formula and forgetting `Λ`).
+(blueprint `lemma-cohomology-near-two-transverse-divisors--1`, stalk formula and forgetting `Λ`).
 
 ## Main statements
 
@@ -79,8 +79,8 @@ theorem isZero_sheafFiber_higherDirectImage_of_subsingleton_sheafH
   rw [AddCommGrpCat.isZero_iff_subsingleton] at h
   exact ModuleCat.isZero_of_subsingleton _
 
-/-- Blueprint `det-tf-transverse-corner-vanishing` (stalk formula): if the abelian étale
-cohomology of the pullback `p^* F` of a sheaf of `Λ`-modules to `U ×_Z S`, `S` the strict
+/-- Blueprint `lemma-cohomology-near-two-transverse-divisors--1` (stalk formula): if the abelian
+étale cohomology of the pullback `p^* F` of a sheaf of `Λ`-modules to `U ×_Z S`, `S` the strict
 localization of `Z` at `s`, vanishes in every degree, then the geometric stalk at `s` of
 `Rf_* F` vanishes. -/
 theorem isZero_leftDerivedUpperStar_rightDerivedLowerStar_of_subsingleton_sheafH

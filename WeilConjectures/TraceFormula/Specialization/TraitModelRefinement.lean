@@ -29,7 +29,7 @@ A *refinement* `C₃ ⟶ C₁` of compactifications
 over which `N` is cartesian: `N = P₃ ×_{P₁} N` on the total spaces, the geometric generic fibres
 and the special fibres, and `Y = X₃ ×_{X₁} Y`. Any two compactifications have a common refinement
 (`NearbyCyclesModel.IsTraitModelOfBase.Compactification.exists_refinement`). This is the common
-refinement of the proof of blueprint `det-nearby-exchange-maps` ("two compactifications have a
+refinement of the proof of blueprint `prose-E-15` ("two compactifications have a
 common proper refinement"), used to show that the compact-support exchange, and hence the
 dualizing map of nearby cycles, does not depend on the compactification.
 
@@ -394,7 +394,7 @@ lemma Compactification.isPullback_traitGenericSpec (C : h.Compactification)
   simpa using htop.paste_vert hbot
 
 /-- **Common refinement of two compactifications** (the first step of the proof of blueprint
-`det-nearby-exchange-maps`): any two compactifications `C₁`, `C₂` of a trait model over the base
+`prose-E-15`): any two compactifications `C₁`, `C₂` of a trait model over the base
 have a common refinement `C₃`.
 
 Construction: with `X₃` a dense compactification of `(ι₁, ι₂) : Y ⟶ X₁ ×_k X₂` (so that

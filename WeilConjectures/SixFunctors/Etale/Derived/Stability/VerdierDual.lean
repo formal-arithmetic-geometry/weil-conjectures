@@ -19,7 +19,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 # The Tor amplitude of the Verdier dual
 
 This file proves the auxiliary statements used for the Tor bound of the Verdier dual
-(`lem-weil-verdier-preservation-strata`):
+(`lemma-verdier-duality-preserves-constructibility--1`):
 
 - `AlgebraicGeometry.Etale.nonempty_iso_derivedHom_rightDerivedLowerStar`: the internal hom into
   a direct image, `RHom(K, Rf_* M) ≅ Rf_* RHom(Lf^* K, M)`;

@@ -347,16 +347,16 @@ blueprint exceptional reduction, Locality paragraph
 
 Proof (the node's eight steps):
 1. Etale and pro-etale extension by zero and comparison inverse image are exact
-   (lem-weil-pbc-extension-by-zero-exact, lem-cbc-proetale-extension-zero,
+   (lem-weil-pbc-extension-by-zero-exact, proposition-extension-zero-restriction-closed-subscheme,
    lem-sf-comparison-pullback-exact). The exact-functor cohomology comparison
-   (lem-weil-pbc-exact-functor-bounded-below) preserves every specified lower bound.
+   (situation-conventions) preserves every specified lower bound.
 2. Use enough injectives and an injective representative vanishing below the chosen
    bound (lem-weil-pbc-module-sheaves-enough-injectives,
    lem-weil-pbc-dplus-injective-representative). Direct image computes its right
    derived functor on that representative (lem-weil-pbc-right-derived-plus-injective),
    so every intermediate etale direct image remains bounded below.
 3. Apply the canonical sheaf open comparison and its composition law in every degree
-   (lem-cbc-proetale-extension-zero-comparison, lem-cbc-extension-zero-composition).
+   (proposition-comparison-immersions--1, proposition-composition-base-change-rf-shriek--1).
    Naturality makes chain maps; exactness preserves quasi-isomorphisms. Localization
    (lem-weil-pbc-localization-universal-property) descends the maps and equations.
 4. Finite affine covers give quasi-compactness; local Noetherianness gives
@@ -365,10 +365,10 @@ Proof (the node's eight steps):
    (lem-weil-pbc-qcqs-morphism-permanence) gives qcqs proper maps. The specified mate
    is invertible (lem-weil-pbc-comparison-direct-image-canonical-mate), hence so is B.
    Its domain is exactly the comparison of the bounded-below etale word, the witness.
-5. The coherent pullback comparisons (lem-weil-pbc-comparison-pullback) descend
-   termwise by exactness (prop-weil-pbc-inverse-image-modules-exact,
+5. The coherent pullback comparisons (proposition-comparison-etale-derived-category--5) descend
+   termwise by exactness (situation-conventions,
    prop-weil-pbc-proetale-constant-exact,
-   lem-weil-pbc-exact-functor-derived-factorization). Mate pasting
+   situation-conventions). Mate pasting
    (lem-weil-pbc-mate-pasting, parts 2 and 3) gives the compositor equation for the
    specified counit mates; adjunction conjugation fixes the canonical compositors.
 6. The identity pullback comparison and identity mate law give the proper unit law.

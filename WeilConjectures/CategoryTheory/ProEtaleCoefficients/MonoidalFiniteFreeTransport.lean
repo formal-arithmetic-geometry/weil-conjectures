@@ -17,7 +17,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 /-!
 # Additive monoidal transport of a finite free internal module
 
-Source: blueprint main-20261015, sec-proetale-coefficients,
+Source: blueprint main-20261015, chap-The-pro-etale-site,
 sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md, third sentence.
 (blueprint: lem-sfb-monoidal-finite-free-transport)
 
@@ -42,7 +42,7 @@ namespace CategoryTheory.Functor
 /-- An additive strong monoidal functor transports a specified finite free basis,
 including its coordinate maps and the Kronecker and finite-sum identities.
 
-Source: blueprint main-20261015, sec-proetale-coefficients,
+Source: blueprint main-20261015, chap-The-pro-etale-site,
 sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md, third sentence.
 (blueprint: lem-sfb-monoidal-finite-free-transport)
 

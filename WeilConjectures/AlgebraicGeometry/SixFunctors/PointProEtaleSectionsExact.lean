@@ -85,7 +85,7 @@ Proof (the seven steps of the node):
 6. Apply `lem-sp-exact-functor-preserves-homology` to three consecutive complex terms.
    Evaluation preserves cycles, boundaries and their quotient, naturally in complex maps.
    Thus it preserves quasi-isomorphisms in every integer degree, without boundedness.
-7. Apply `lem-weil-pbc-exact-functor-derived-factorization` to this exact additive functor.
+7. Apply `situation-conventions` to this exact additive functor.
    `mapDerivedCategory` is its termwise descent, with the standard shift and triangle
    structures. Its localization comparison identifies every representative with the
    section complex; step 6 descends naturally, giving the stated cohomology isomorphism.

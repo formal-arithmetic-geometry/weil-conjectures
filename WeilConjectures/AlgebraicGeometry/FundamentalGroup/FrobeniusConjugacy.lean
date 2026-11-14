@@ -15,7 +15,8 @@ Let `X₀` be a connected scheme over a finite field `k₀`, `s` a geometric poi
 conjugate in `G`, since the paths from `x̄` to `s` form a torsor under `G`. They are even conjugate
 by an element of the Weil group `W(X₀, s)`
 (`AlgebraicGeometry.Scheme.FiniteEtale.IsFrobeniusElement.exists_mem_weilGroup_conj`), so the
-Frobenius conjugacy class at `x` is a conjugacy class of `W(X₀, s)` (blueprint `sk-d-real-weil`).
+Frobenius conjugacy class at `x` is a conjugacy class of `W(X₀, s)` (blueprint
+`definition-weil-representation--1`).
 
 ## Proof
 

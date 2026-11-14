@@ -140,9 +140,9 @@ public import WeilConjectures.SixFunctors.IntegralModelsGenerators
 /-!
 # Comparison with completed condensed coefficients
 
-Source: blueprint main-20261015, sec-proetale-coefficients,
-sk-prop-sfb-qlbar-colimit-x, the three comparisons and inverse-image compatibility
-(blueprint: sk-prop-sfb-qlbar-colimit-x).
+Source: blueprint main-20261015, chap-The-pro-etale-site,
+lemma-comparison-completed-coefficients, the three comparisons and inverse-image compatibility
+(blueprint: lemma-comparison-completed-coefficients).
 
 The comparisons are expressed by universal properties of the specified reduction maps
 and localization cocone. Thus no choice of an unrelated isomorphism is involved.
@@ -182,7 +182,7 @@ private theorem completedRingComparisonNaturality
 
 /-- Pull back an actual condensed ring homomorphism, including all its ring structure.
 Source: blueprint comparison with completed coefficients, its canonical maps
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
+(blueprint: lemma-comparison-completed-coefficients). -/
 noncomputable def completedCoefficientMap (X : Scheme.{u})
     {R S : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}} (f : R ⟶ S) :
     completedCoefficient X R ⟶ completedCoefficient X S :=
@@ -191,7 +191,7 @@ noncomputable def completedCoefficientMap (X : Scheme.{u})
 
 /-- The usual constant ring sheaf, expressed in the existing ring-object encoding.
 Source: blueprint comparison with completed coefficients, its finite constant coefficients
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
+(blueprint: lemma-comparison-completed-coefficients). -/
 noncomputable abbrev completedConstantRing (X : Scheme.{u}) (R : Type) [Ring R] :=
   Mon.mk ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
     ((constantSheaf (Scheme.ProEt.topology X) RingCat.{u + 1}).obj
@@ -199,7 +199,7 @@ noncomputable abbrev completedConstantRing (X : Scheme.{u}) (R : Type) [Ring R] 
 
 /-- The map of constant ring sheaves induced by an actual ring homomorphism.
 Source: blueprint comparison with completed coefficients, finite reduction transitions
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
+(blueprint: lemma-comparison-completed-coefficients). -/
 noncomputable def completedConstantMap (X : Scheme.{u}) {R S : Type} [Ring R] [Ring S]
     (f : R →+* S) : completedConstantRing X R ⟶ completedConstantRing X S :=
   Mon.Hom.mk ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
@@ -209,14 +209,14 @@ noncomputable def completedConstantMap (X : Scheme.{u}) {R S : Type} [Ring R] [R
 
 /-- The finite quotient, with its quotient topology; level `n` means exponent `n+1`.
 Source: blueprint comparison with completed coefficients, first comparison
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
+(blueprint: lemma-comparison-completed-coefficients). -/
 abbrev completedResidue (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     (π : PadicAlgCl.integers l E) (n : ℕ) :=
   PadicAlgCl.integers l E ⧸ (Ideal.span {π}) ^ (n + 1)
 
 /-- The actual reduction of continuous integer-valued functions modulo `π^(n+1)`.
 Source: blueprint comparison with completed coefficients, first comparison
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
+(blueprint: lemma-comparison-completed-coefficients). -/
 noncomputable def completedReduction (l : ℕ) [Fact l.Prime]
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ) :
     Profinite.padicIntegersCondensedRing.{u} l E ⟶
@@ -225,7 +225,7 @@ noncomputable def completedReduction (l : ℕ) [Fact l.Prime]
 
 /-- Transition between consecutive quotient rings, applied to continuous functions.
 Source: blueprint comparison with completed coefficients, first comparison
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
+(blueprint: lemma-comparison-completed-coefficients). -/
 noncomputable def completedResidueTransition (l : ℕ) [Fact l.Prime]
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ) :
     Profinite.continuousMapRingSheaf.{u} (completedResidue l E π (n + 1)) ⟶
@@ -237,7 +237,7 @@ noncomputable def completedResidueTransition (l : ℕ) [Fact l.Prime]
 
 /-- The regular integral module maps to the rational ring, restricted along its inclusion.
 Source: blueprint comparison with completed coefficients, localization comparison
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
+(blueprint: lemma-comparison-completed-coefficients). -/
 noncomputable def completedRationalModule (X : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : PadicAlgCl.FiniteIntermediateField l) :=
   (Mod.comap (completedCoefficientMap X
@@ -246,7 +246,7 @@ noncomputable def completedRationalModule (X : Scheme.{u}) (l : ℕ) [Fact l.Pri
 
 /-- The existing finite-field diagram, bundled with its ring homomorphisms.
 Source: blueprint comparison with completed coefficients, third comparison
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
+(blueprint: lemma-comparison-completed-coefficients). -/
 noncomputable def completedPointSubfieldDiagram (l : ℕ) [Fact l.Prime] :
     PadicAlgCl.FiniteIntermediateField l ⥤
       Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) where
@@ -258,7 +258,7 @@ noncomputable def completedPointSubfieldDiagram (l : ℕ) [Fact l.Prime] :
 
 /-- The existing canonical algebraic-closure cocone, bundled in ring objects.
 Source: blueprint comparison with completed coefficients, third comparison
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
+(blueprint: lemma-comparison-completed-coefficients). -/
 noncomputable def completedPointSubfieldCocone (l : ℕ) [Fact l.Prime] :
     Cocone (completedPointSubfieldDiagram.{u} l) where
   pt := Mon.mk (Profinite.padicAlgClRingObj l)
@@ -270,7 +270,7 @@ noncomputable def completedPointSubfieldCocone (l : ℕ) [Fact l.Prime] :
 
 /-- The canonical ring cocone on a scheme is the image of the point cocone under p_X^*.
 Source: blueprint comparison with completed coefficients, third comparison
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
+(blueprint: lemma-comparison-completed-coefficients). -/
 noncomputable def completedSubfieldCocone (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] :=
   (sfbPullbackFromPoint X).mapMon.mapCocone (completedPointSubfieldCocone l)
 
@@ -1217,10 +1217,10 @@ private theorem completedFiniteIso_naturality (X : Scheme.{u})
 A uniformizer is specified by generating the maximal ideal. Each pulled-back quotient
 is identified as the constant sheaf with that finite quotient ring as value.
 Source: blueprint comparison with completed coefficients, first display
-(blueprint: sk-prop-sfb-qlbar-colimit-x).
+(blueprint: lemma-comparison-completed-coefficients).
 
 Proof: Reuse the underlying-set and representable pullback comparisons of
-det-prop-sfb-qlbar-colimit-x-integral-limit. Compactness and adic separatedness
+lemma-comparison-completed-coefficients--1. Compactness and adic separatedness
 identify the integer ring with the tower of the specified positive quotient rings.
 Finite constant sheaves are represented by the disjoint unions of copies of X.
 The profinite test scheme
@@ -1386,9 +1386,9 @@ private theorem completedRationalOfTelescope (l : ℕ)
 ring structure inherited from the specified rational ring. The zero-th leg is the integral
 inclusion, and the recurrence fixes the `l^(-m)` legs because `l` is invertible on the vertex.
 Source: blueprint comparison with completed coefficients, second display
-(blueprint: sk-prop-sfb-qlbar-colimit-x).
+(blueprint: lemma-comparison-completed-coefficients).
 
-Proof: Apply det-prop-sfb-qlbar-colimit-x-invert-ell to the inclusion of condensed
+Proof: Apply lemma-comparison-completed-coefficients--2 to the inclusion of condensed
 integers into E and pull it back from the point. Multiplication by l is invertible
 on E_X. The m-th leg is l^(-m) times the inclusion. A section of E is locally a
 fraction with integral numerator and l-power denominator, so these maps give the
@@ -1435,7 +1435,7 @@ theorem completedCondensedRational (l : ℕ) [Fact l.Prime]
 
 /-- The canonical finite-subextension cocone is a colimit in ring objects.
 Source: blueprint comparison with completed coefficients, third display
-(blueprint: sk-prop-sfb-qlbar-colimit-x).
+(blueprint: lemma-comparison-completed-coefficients).
 
 Proof: A section of the condensed algebraic closure belongs to some finite subfield.
 A compatible family of additive maps therefore glues uniquely, independently of the
@@ -1455,14 +1455,14 @@ theorem completedCondensedAlgebraicClosure (X : Scheme.{u}) (l : ℕ) [Fact l.Pr
 
 /-- The usual continuous reduction of p-adic integers to Z/l^(n+1).
 Source: blueprint comparison with completed coefficients, final paragraph
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
+(blueprint: lemma-comparison-completed-coefficients). -/
 noncomputable def completedPadicReduction (l : ℕ) [Fact l.Prime] (n : ℕ) :=
   Profinite.continuousMapRingSheafMap.{u} (PadicInt.toZModPow (p := l) (n + 1))
     (PadicInt.continuous_toZModPow (n + 1))
 
 /-- The specified p-adic rational ring as a module over the p-adic integral ring.
 Source: blueprint comparison with completed coefficients, final paragraph
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
+(blueprint: lemma-comparison-completed-coefficients). -/
 noncomputable def completedPadicRationalModule (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] :=
   (Mod.comap (completedCoefficientMap X
     (Profinite.padicIntCondensedRingToPadicCondensedRing l)).hom).obj
@@ -1471,7 +1471,7 @@ noncomputable def completedPadicRationalModule (X : Scheme.{u}) (l : ℕ) [Fact 
 /-- The base-field rationalization formula Q_l,X = Z_l,X[1/l], including its
 canonical module-colimit legs and their inverse-image compatibility.
 Source: blueprint comparison with completed coefficients, final paragraph
-(blueprint: sk-prop-sfb-qlbar-colimit-x).
+(blueprint: lemma-comparison-completed-coefficients).
 
 Proof: Specialize the rational comparison to E = Q_l and use the canonical
 identification of its integers with Z_l. The inclusion is the usual Z_l to Q_l

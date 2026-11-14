@@ -18,8 +18,8 @@ Let `j : U ⟶ X` be an open immersion and `x` a rational point of `X` not in th
 For `B` on `U` and `A` on the point, the open and closed pieces `K' = j_! B` and `K'' = Rx_* A`
 (for instance `K' = j_! Lj^* K` and `K'' = Rx_* Lx^* K`) have disjoint supports. This file proves
 the vanishing of the morphism groups on `X ⨯ X` used by the additivity of trace classes along the
-open–closed triangle `K' ⟶ K ⟶ K'' ⟶` (blueprint `lem-trf-trace-triangle-compatibility`,
-`sk-i-additivity`):
+open–closed triangle `K' ⟶ K ⟶ K'' ⟶` (blueprint `proposition-additivity-trace-classes--2`,
+`proposition-additivity-trace-classes`):
 
 * `K' ⊗ D_X K'' = 0`, so the corner `K' ⊠ D_X K''` (supported on `U ⨯ {x}`) has no morphism to
   `RΔ_* ω_X` in any degree (`ProEtale.CondensedRing.eq_zero_of_externalProduct_shift_to_diag`);

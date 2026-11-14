@@ -130,7 +130,8 @@ Proof (the five steps of the node):
    and regular-ring-smooth-ascent. Extend D coefficientwise, with D(z) = 0. It sends
    z^p-f to the unit -D(f), so hypersurface-derivation-regular gives regularity of
    R[z]/(z^p-f), and hence the fibre over L.
-5. All finite purely inseparable base changes are regular. By def-weil-pbc-g-ring this
+5. All finite purely inseparable base changes are regular. By
+theorem-finite-etale-covers-proper-henselian--2 this
    proves geometric regularity; Noetherianity was obtained in step 1.
 
 The base-change tensor product is the source's completion tensor_A L, by tensor

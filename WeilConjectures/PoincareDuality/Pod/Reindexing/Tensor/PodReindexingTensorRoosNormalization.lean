@@ -36,7 +36,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The canonical derived comparison realizes the normalized strict Roos map.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4 and 0941 (blueprint: lem-pod-reindexing-tensor-roos-normalization).
 
 Proof: take simultaneous flat-term K-flat P,Q. Their finite tensor reductions

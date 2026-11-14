@@ -13,8 +13,8 @@ public import WeilConjectures.TraceFormula.SourceExchangeProjection
 
 # The kernel pushforward and the Künneth–Verdier isomorphisms
 
-Identity (a) of the trace-class source exchange (blueprint `lem-trf-trace-source-exchange`,
-Step 3): `κ_Y ∘ ρ_f = Φ ∘ Rq_* κ_X`
+Identity (a) of the trace-class source exchange (blueprint
+`theorem-proper-pushforward-lefschetz-verdier--1`, Step 3): `κ_Y ∘ ρ_f = Φ ∘ Rq_* κ_X`
 (`ProEtale.CondensedRing.kernelPushforward_comp_kunnethVerdierMap`). Both sides are compared
 through their test maps (`classTest`). The test map of `κ` is the evaluation followed by the
 adjoint of the exceptional Künneth map (`ProEtale.CondensedRing.classTest_kunnethVerdierMap`);
@@ -186,11 +186,11 @@ variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X
 
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- The base-change core of the exceptional Künneth part of identity (a) (blueprint
-`lem-trf-trace-source-exchange`, Step 3): the projection formula for `p₁'`, compact-support base
-change in the product square of `Y` and the pasted counit of `a_X = f ≫ a_Y` agree, through
-`Π_f`, `Rq_* ≅ Rq_!`, the composition law of `q ≫ p₁' = p₁ ≫ f` and `Rf_! ≅ Rf_*`, with `Rf_!`
-of the projection formula for `p₁`, base change in the product square of `X` and the counit of
-`a_X`. -/
+`theorem-proper-pushforward-lefschetz-verdier--1`, Step 3): the projection formula for `p₁'`,
+compact-support base change in the product square of `Y` and the pasted counit of `a_X = f ≫ a_Y`
+agree, through `Π_f`, `Rq_* ≅ Rq_!`, the composition law of `q ≫ p₁' = p₁ ≫ f` and `Rf_! ≅ Rf_*`,
+with `Rf_!` of the projection formula for `p₁`, base change in the product square of `X` and the
+counit of `a_X`. -/
 theorem lowerShriek_exceptionalKunneth_baseChange :
     (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map (β_ _ _).hom ≫
       inv (((boundedConstructibleExceptionalProjection ℓ (prod.fst : Y ⨯ Y ⟶ Y)).app
@@ -240,9 +240,9 @@ theorem lowerShriek_exceptionalKunneth_baseChange :
   · rfl
 
 /-- **The exceptional Künneth adjoint commutes with a proper pushforward** (blueprint
-`lem-trf-trace-source-exchange`, Step 3): through `Π_f`, `Rq_* ≅ Rq_!`, the composition law of
-the square `q ≫ p₁' = p₁ ≫ f` and `Rf_! ≅ Rf_*`, the adjoint of the exceptional Künneth map of
-`Rf_* K` precomposed with the trace `τ_f` is `Rf_*` of that of `K`. -/
+`theorem-proper-pushforward-lefschetz-verdier--1`, Step 3): through `Π_f`, `Rq_* ≅ Rq_!`, the
+composition law of the square `q ≫ p₁' = p₁ ≫ f` and `Rf_! ≅ Rf_*`, the adjoint of the exceptional
+Künneth map of `Rf_* K` precomposed with the trace `τ_f` is `Rf_*` of that of `K`. -/
 theorem lowerShriek_map_trace_comp_exceptionalKunnethAdjoint :
     (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
         ((boundedConstructibleUpperStar _ ℓ (prod.fst : Y ⨯ Y ⟶ Y)).obj
@@ -306,8 +306,9 @@ theorem upperStar_map_tensorMap_comp_prodUpperStarCounit
       exact upperStarComp_square_tensor_δ ℓ (prod.map_snd f f) M₁ M₂) _
     (fun B ↦ by simp only [prodUpperStarCounit, Category.assoc]) B₁ B₂ B e
 
-/-- The evaluation part of identity (a) (blueprint `lem-trf-trace-source-exchange`, Step 3):
-`Π_f` and `μ_f` are adjoint to the counits of `f`. -/
+/-- The evaluation part of identity (a) (blueprint
+`theorem-proper-pushforward-lefschetz-verdier--1`, Step 3): `Π_f` and `μ_f` are adjoint to the
+counits of `f`. -/
 theorem evaluation_comp_prodLowerStarExternalProduct :
     (α_ _ _ _).inv ≫ ((β_ ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj
           ((boundedConstructibleLowerStar ℓ f).obj K))

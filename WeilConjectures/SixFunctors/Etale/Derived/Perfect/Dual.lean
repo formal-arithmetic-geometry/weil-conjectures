@@ -20,10 +20,10 @@ dualizability; see `WeilConjectures.SixFunctors.Etale.Derived.Perfect` for the c
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.DerivedCategory.coefficientDual` (`def-pod-coefficient-dual-on-x`):
+- `AlgebraicGeometry.Etale.DerivedCategory.coefficientDual` (`theorem-poincare-duality--3`):
   `K ↦ K^∨ = RHom(K, Λ_X)`.
 - `AlgebraicGeometry.Etale.DerivedCategory.coefficientEvaluation`
-  (`def-pod-coefficient-dual-on-x`): the evaluation `K ⊗ᴸ K^∨ ⟶ Λ_X`.
+  (`theorem-poincare-duality--3`): the evaluation `K ⊗ᴸ K^∨ ⟶ Λ_X`.
 - `AlgebraicGeometry.Etale.DerivedCategory.coefficientDualIsoOfExactPairing`: `K^∨ ≅ L` for a
   left dual `L` of `K`.
 - `AlgebraicGeometry.Etale.DerivedCategory.derivedHomTensorMap`: the canonical map
@@ -38,18 +38,18 @@ dualizability; see `WeilConjectures.SixFunctors.Etale.Derived.Perfect` for the c
 ## Main statements
 
 - `AlgebraicGeometry.Etale.DerivedCategory.isDualizable_coefficientDual`
-  (`sk-prop-sf-dualizable-biduality`, `prop-sf-dualizable`)
+  (`theorem-poincare-duality--4`)
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_coefficientDual_coefficientDual`
-  (`sk-prop-sf-dualizable-biduality`)
+  (`theorem-poincare-duality--4`)
 - `AlgebraicGeometry.Etale.DerivedCategory.isIso_coefficientDualDoubleDual_app`
-  (`sk-prop-sf-dualizable-biduality`, `thm-sf-dual-perfect`): the biduality `K ⟶ K^∨∨` of a
+  (`theorem-poincare-duality--4`, `theorem-poincare-duality--2`): the biduality `K ⟶ K^∨∨` of a
   perfect `K` is an isomorphism.
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_coefficientDual_tensor`
-  (`sk-prop-sf-dualizable-biduality`, `prop-sf-dualizable-hom`)
+  (`theorem-poincare-duality--4`, `theorem-poincare-duality--5`)
 - `AlgebraicGeometry.Etale.DerivedCategory.isIso_derivedHomTensorMap`
-  (`sk-lem-sf-twist-interchange`)
+  (`theorem-poincare-duality--2`)
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_derivedHom_tensor`
-  (`sk-lem-sf-twist-interchange`)
+  (`theorem-poincare-duality--2`)
 -/
 
 @[expose] public section
@@ -72,9 +72,10 @@ variable (X : Scheme.{u})
 
 namespace Etale.DerivedCategory
 
-/-- Blueprint `def-pod-coefficient-dual-on-x` (Coefficient dual on `X`) and `def-sf-pf`: the
-coefficient dual `K^∨ = RHom(K, Λ_X)` of a complex of étale sheaves, where `Λ_X` is the monoidal
-unit of `D(X_ét)`. The Verdier dual of `def-sf-pf` is `AlgebraicGeometry.Etale.verdierDual`. -/
+/-- Blueprint `theorem-poincare-duality--3` (Coefficient dual on `X`) and
+`theorem-poincare-duality--3`: the coefficient dual `K^∨ = RHom(K, Λ_X)` of a complex of étale
+sheaves, where `Λ_X` is the monoidal unit of `D(X_ét)`. The Verdier dual of
+`theorem-poincare-duality--3` is `AlgebraicGeometry.Etale.verdierDual`. -/
 noncomputable def coefficientDual :
     (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A))ᵒᵖ ⥤
       _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) :=
@@ -82,7 +83,7 @@ noncomputable def coefficientDual :
 
 variable {A X}
 
-/-- Blueprint `def-pod-coefficient-dual-on-x`: Coefficient dual on `X`, the evaluation.
+/-- Blueprint `theorem-poincare-duality--3`: Coefficient dual on `X`, the evaluation.
 
 The *evaluation* `ev_K : K ⊗ᴸ K^∨ ⟶ Λ_X`: the counit at `Λ_X` of the adjunction
 `K ⊗ᴸ - ⊣ RHom(K, -)` (`AlgebraicGeometry.Etale.derivedTensorHomAdjunction`). -/
@@ -111,8 +112,8 @@ noncomputable def coefficientDualIsoOfExactPairing
     (coefficientDual A X).obj (op K) ≅ L :=
   MonoidalClosed.ihomObjUnitIso L K
 
-/-- Blueprint `sk-prop-sf-dualizable-biduality`: Biduality of a perfect complex.
-This is also blueprint `prop-sf-dualizable` (Perfect complexes are dualizable).
+/-- Blueprint `theorem-poincare-duality--4`: Biduality of a perfect complex.
+This is also blueprint `theorem-poincare-duality--4` (Perfect complexes are dualizable).
 
 The coefficient dual of a dualizable complex is again dualizable. The evaluation
 `K ⊗ᴸ K^∨ ⟶ Λ_X` is `AlgebraicGeometry.Etale.DerivedCategory.coefficientEvaluation`. -/
@@ -124,7 +125,7 @@ theorem isDualizable_coefficientDual
   exact ⟨{ rightDual := K
            exact := exactPairingCongrLeft (coefficientDualIsoOfExactPairing Kᘁ K) }⟩
 
-/-- Blueprint `sk-prop-sf-dualizable-biduality`: Biduality of a perfect complex.
+/-- Blueprint `theorem-poincare-duality--4`: Biduality of a perfect complex.
 
 For a dualizable `K` the biduality map `K ⟶ K^∨∨` into the double coefficient dual is an
 isomorphism. -/
@@ -136,8 +137,8 @@ theorem nonempty_iso_coefficientDual_coefficientDual
   exact ⟨(coefficientDualIsoOfExactPairing K Kᘁ).symm ≪≫
     (coefficientDual A X).mapIso (coefficientDualIsoOfExactPairing Kᘁ K).op⟩
 
-/-- Blueprint `sk-prop-sf-dualizable-biduality`: Biduality of a perfect complex.
-This is also blueprint `prop-sf-dualizable-hom` (Internal Hom through the coefficient dual).
+/-- Blueprint `theorem-poincare-duality--4`: Biduality of a perfect complex.
+This is also blueprint `theorem-poincare-duality--5` (Internal Hom through the coefficient dual).
 
 For a dualizable `K` and every `M` the canonical map `K^∨ ⊗ᴸ M ⟶ RHom(K, M)` is an
 isomorphism. -/
@@ -150,7 +151,7 @@ theorem nonempty_iso_coefficientDual_tensor
   exact ⟨whiskerRightIso (coefficientDualIsoOfExactPairing Kᘁ K) M ≪≫
     (MonoidalClosed.ihomObjIsoTensor Kᘁ K M).symm⟩
 
-/-- Blueprint `sk-lem-sf-twist-interchange`: Internal Hom with an invertible twist.
+/-- Blueprint `theorem-poincare-duality--2`: Internal Hom with an invertible twist.
 
 For a dualizable `K`, an invertible twist `T` — in the `ℓ`-adic formalism a Tate twist
 `Λ(m)_X` — and any `M`, the canonical map `RHom(K, M ⊗ᴸ T) ⟶ RHom(K, M) ⊗ᴸ T` is an
@@ -176,7 +177,7 @@ noncomputable def derivedHomTensorMap
       (RHom(X)[A].obj (op K)).obj (((derivedTensor A X).obj M).obj T) :=
   MonoidalClosed.ihomTensorToIhom K M T
 
-/-- Blueprint `sk-lem-sf-twist-interchange`: Internal Hom with an invertible twist.
+/-- Blueprint `theorem-poincare-duality--2`: Internal Hom with an invertible twist.
 
 For an invertible twist `T` and all `K`, `M`, the canonical map
 `RHom(K, M) ⊗ᴸ T ⟶ RHom(K, M ⊗ᴸ T)`, the transpose of `ev ⊗ 1_T`, is an isomorphism. The map
@@ -190,7 +191,7 @@ theorem isIso_derivedHomTensorMap
     IsIso (derivedHomTensorMap K M T) :=
   MonoidalClosed.isIso_ihomTensorToIhom K M hT
 
-/-- Blueprint `sk-lem-sf-twist-interchange`: Internal Hom with an invertible twist.
+/-- Blueprint `theorem-poincare-duality--2`: Internal Hom with an invertible twist.
 
 The canonical isomorphism `RHom(K, M ⊗ᴸ T) ≅ RHom(K, M) ⊗ᴸ T` for an invertible `T`: the
 inverse of the canonical map `RHom(K, M) ⊗ᴸ T ⟶ RHom(K, M ⊗ᴸ T)`
@@ -204,7 +205,7 @@ noncomputable def derivedHomTensorIso
   haveI := isIso_derivedHomTensorMap K hT M
   (asIso (derivedHomTensorMap K M T)).symm
 
-/-- Blueprint `sk-lem-sf-twist-interchange`: Internal Hom with an invertible twist.
+/-- Blueprint `theorem-poincare-duality--2`: Internal Hom with an invertible twist.
 
 The case `M = Λ_X` of the interchange: for an invertible `T` (in the `ℓ`-adic formalism
 `Λ_X(m)[n]`), `RHom(K, T) ≅ K^∨ ⊗ᴸ T`. -/
@@ -246,8 +247,8 @@ lemma coefficientDualDoubleDual_app (K : _root_.DerivedCategory (Sheaf X.smallEt
     (coefficientDualDoubleDual A X).app K = MonoidalClosed.toIhomIhomUnit K :=
   rfl
 
-/-- Blueprint `sk-prop-sf-dualizable-biduality`: Biduality of a perfect complex.
-This is also the biduality clause of blueprint `thm-sf-dual-perfect`.
+/-- Blueprint `theorem-poincare-duality--4`: Biduality of a perfect complex.
+This is also the biduality clause of blueprint `theorem-poincare-duality--2`.
 
 For a dualizable `K` the coefficient biduality `K ⟶ K^∨∨` is an isomorphism. -/
 theorem isIso_coefficientDualDoubleDual_app

@@ -91,7 +91,7 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-! # Site comparison for internal Hom from a flat lisse sheaf
 
-Source: blueprint, lem-weil-finite-duality-site-comparison, proof paragraphs 2--3;
+Source: blueprint, proposition-six-operations-dctf--15, proof paragraphs 2--3;
 Stacks Tags 00NZ, 08JI, 08JB, 03EO and 095I
 (blueprint: lem-sf-lisse-flat-hom-site-comparison).
 

@@ -110,7 +110,7 @@ import WeilConjectures.CategoryTheory.TowerComparisonOfUniversal
 /-!
 # Strict reduction of completed extension by zero
 
-Source: blueprint fix-lem-exchanges, integral open factor, Steps 1–2;
+Source: blueprint proposition-composition-base-change-rf-shriek, integral open factor, Steps 1–2;
 Stacks Project Tags 099M, 099N and 0941
 (blueprint: lem-sf-cbc-extension-zero-completion).
 -/

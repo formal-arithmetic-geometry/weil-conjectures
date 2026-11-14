@@ -79,9 +79,9 @@ the category of `𝒪`-modules on a scheme is Grothendieck abelian
   `T`.
 - `AlgebraicGeometry.isInvertible_zeroLocus_directImageCounit`: the zero scheme of the adjunction
   morphism is a relative effective Cartier divisor, finite locally free of degree `g` (blueprint
-  `lem-pc-zero-scheme-recd`).
+  `proposition-divisors-degree-g-open-chart--1`).
 - `AlgebraicGeometry.exists_isEffectiveCartierCenter_hilbertPresheaf`: the zero-scheme
-  dictionary (blueprint `det-lem-picard-zero-dictionary`);
+  dictionary (blueprint `proposition-divisors-degree-g-open-chart--1`);
   `AlgebraicGeometry.exists_isEffectiveCartierCenter_hilbertPresheaf_zeroLocus_adjointSection`
   states it with the zero scheme `Z(s)` of the adjoint section.
 - `AlgebraicGeometry.comap_zeroLocus_directImageCounit`: the dictionary is natural in `T`.
@@ -93,10 +93,10 @@ the category of `𝒪`-modules on a scheme is Grothendieck abelian
   a left inverse of the dictionary
   (`AlgebraicGeometry.hilbertToPicardNormalized_invertibleDirectImageToHilbert`).
 - `AlgebraicGeometry.zeroLocus_directImageCounit_eq_of_iso`: for `ℒ ≅ 𝒪(D) ⊗ f_T^* 𝒩` in `F(T)`
-  the dictionary returns `D` (blueprint `lem-pc-universal-adjoint-section`).
+  the dictionary returns `D` (blueprint `proposition-divisors-degree-g-open-chart--1`).
 - `AlgebraicGeometry.isRepresentable_picardFunctorInvertibleDirectImage`: `F` is representable
-  by an open subscheme of `Hilb^g_{X/k}` (blueprint `sk-thm-picard-f-representable`,
-  `thm-pc-f-representable`);
+  by an open subscheme of `Hilb^g_{X/k}` (blueprint `proposition-divisors-degree-g-open-chart`,
+  `proposition-divisors-degree-g-open-chart--1`);
   `AlgebraicGeometry.exists_representableBy_invertibleDirectImageToHilbert`
   adds that the representation is compatible with the zero-scheme dictionary.
 -/
@@ -299,9 +299,9 @@ omit [GeometricallyIntegral (X ↘ Spec (.of k))] in
 the zero scheme of the adjunction morphism `φ : f_T^* f_{T,*} ℒ ⟶ ℒ` does not contain the
 fibre `X_t`: the restriction of its ideal to `X_t` is nonzero.
 
-This is the step `s_t ≠ 0` of the blueprint proof of `lem-pc-zero-scheme-recd`: by cohomology
-and base change, `ℒ_t` lies in `F(κ(t))`, so `𝒩_t = f_{t,*} ℒ_t` is invertible, and the base
-change `φ_t` of `φ` is the adjunction morphism of `ℒ_t`
+This is the step `s_t ≠ 0` of the blueprint proof of `proposition-divisors-degree-g-open-chart--1`:
+by cohomology and base change, `ℒ_t` lies in `F(κ(t))`, so `𝒩_t = f_{t,*} ℒ_t` is invertible, and
+the base change `φ_t` of `φ` is the adjunction morphism of `ℒ_t`
 (`AlgebraicGeometry.comap_zeroLocus_directImageCounit`), whose adjoint is the identity of the
 nonzero module `𝒩_t` (`AlgebraicGeometry.Scheme.Pic.directImageCounit_ne_zero`); hence
 `Z(φ)|_{X_t} = Z(φ_t) ≠ X_t` (`lem-pc-zero-scheme-properties` (3)). -/
@@ -355,10 +355,11 @@ theorem comap_fiberι_zeroLocus_directImageCounit_ne_bot
 scheme `D = Z(φ) ⊆ X_T` of the adjunction morphism `φ : f_T^* f_{T,*} ℒ ⟶ ℒ` is an effective
 Cartier divisor which is finite locally free over `T`.
 
-This is the first half of the blueprint proof of `lem-pc-zero-scheme-recd`: `D` is locally
-principal, its fibres `D_t` are effective Cartier divisors on the integral curves `X_t` since
-`φ_t ≠ 0`, so `D` is a relative effective Cartier divisor (`lem-pc-recd-locally-principal`), and
-the Cartier criterion (`lem-pc-cartier-criterion`) makes it finite locally free over `T`. -/
+This is the first half of the blueprint proof of `proposition-divisors-degree-g-open-chart--1`: `D`
+is locally principal, its fibres `D_t` are effective Cartier divisors on the integral curves `X_t`
+since `φ_t ≠ 0`, so `D` is a relative effective Cartier divisor
+(`proposition-divisors-degree-g-open-chart--1`), and the Cartier criterion
+(`theorem-hilbert-schemes-points-smooth-curve--1`) makes it finite locally free over `T`. -/
 theorem isInvertible_zeroLocus_directImageCounit_and_isFiniteLocallyFree
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),
@@ -393,13 +394,15 @@ theorem isInvertible_zeroLocus_directImageCounit_and_isFiniteLocallyFree
 the rank at every point `t` of `T` of the projection `Z(φ) ⟶ T` from the zero scheme of the
 adjunction morphism `φ : f_T^* f_{T,*} ℒ ⟶ ℒ` is the genus `g` of `X`.
 
-This is the degree computation of the blueprint proof of `lem-pc-zero-scheme-recd`: the rank
-at `t` is `dim_{κ(t)} Γ(D_t, 𝒪_{D_t}) = deg D_t = deg 𝒪(D_t)`, and `ℒ_t ≅ 𝒪(D_t) ⊗ f_t^* 𝒩_t`
-with `f_t^* 𝒩_t` pulled back from the point `Spec κ(t)`, hence of degree `0`. Finally
-`deg ℒ_t = χ(ℒ_t) - χ(𝒪_{X_t}) = 1 - (1 - g) = g` as in `det-cor-picard-degree-g`: the fibre
-cohomology of `ℒ ∈ F(T)` is `h⁰(ℒ_t) = 1`, `h^q(ℒ_t) = 0` for `q > 0` (cohomology and base
-change, `Modules.range_subset_setOf_hFiber_eq_iff`), and `χ(𝒪_{X_t}) = χ(𝒪_X) = 1 - g` by
-invariance of the fibre Euler characteristic under base change and Riemann–Roch. -/
+This is the degree computation of the blueprint proof of
+`proposition-divisors-degree-g-open-chart--1`: the rank at `t` is
+`dim_{κ(t)} Γ(D_t, 𝒪_{D_t}) = deg D_t = deg 𝒪(D_t)`, and `ℒ_t ≅ 𝒪(D_t) ⊗ f_t^* 𝒩_t` with `f_t^* 𝒩_t`
+pulled back from the point `Spec κ(t)`, hence of degree `0`. Finally
+`deg ℒ_t = χ(ℒ_t) - χ(𝒪_{X_t}) = 1 - (1 - g) = g` as in
+`proposition-divisors-degree-g-open-chart--1`: the fibre cohomology of `ℒ ∈ F(T)` is `h⁰(ℒ_t) = 1`,
+`h^q(ℒ_t) = 0` for `q > 0` (cohomology and base change, `Modules.range_subset_setOf_hFiber_eq_iff`),
+and `χ(𝒪_{X_t}) = χ(𝒪_X) = 1 - g` by invariance of the fibre Euler characteristic under base change
+and Riemann–Roch. -/
 theorem finrank_zeroLocus_directImageCounit
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),
@@ -550,7 +553,7 @@ i.e. the section `s` of `ℒ ⊗ f_T^* 𝒩^{-1}` of the blueprint. Then the zer
 and `D ⟶ T` is flat) which is finite locally free of degree `g` over `T`: it lies in the
 Hilbert functor `Hilb^g_{X/k}(T)`.
 
-(blueprint: `lem-pc-zero-scheme-recd`, `det-lem-picard-zero-dictionary`) -/
+(blueprint: `proposition-divisors-degree-g-open-chart--1`) -/
 theorem isInvertible_zeroLocus_directImageCounit
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),
@@ -575,7 +578,7 @@ as: the zero scheme `Z(s)` of the adjunction morphism is the closed subscheme of
 the Hilbert functor `Hilb^g_{X/k}(T)`, and it is moreover an effective Cartier centre in `X_T`
 (`AlgebraicGeometry.isInvertible_zeroLocus_directImageCounit`).
 
-(blueprint: `det-lem-picard-zero-dictionary`) -/
+(blueprint: `proposition-divisors-degree-g-open-chart--1`) -/
 theorem exists_isEffectiveCartierCenter_hilbertPresheaf
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),
@@ -600,7 +603,7 @@ on `X_T/T`, finite locally free of degree `g` over `T`, and an effective Cartier
 (`AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_adjointSection_comp_whiskerLeft`), to which
 `AlgebraicGeometry.exists_isEffectiveCartierCenter_hilbertPresheaf` applies.
 
-(blueprint: `det-lem-picard-zero-dictionary`, `lem-pc-zero-scheme-recd`) -/
+(blueprint: `proposition-divisors-degree-g-open-chart--1`) -/
 theorem exists_isEffectiveCartierCenter_hilbertPresheaf_zeroLocus_adjointSection
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),
@@ -677,7 +680,7 @@ The canonical section `1` of `𝒪(D)`, twisted by `f_T^* 𝒩`, is a morphism
 `t : 𝒩 ⟶ f_{T,*} ℒ`, so `Z(φ) ⊆ Z(s) = D`. Both are points of `Hilb^g_{X/k}(T)`
 (`AlgebraicGeometry.isInvertible_zeroLocus_directImageCounit`), hence they are equal.
 
-(blueprint: `lem-pc-universal-adjoint-section`) -/
+(blueprint: `proposition-divisors-degree-g-open-chart--1`) -/
 theorem zeroLocus_directImageCounit_eq_of_iso
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),
@@ -895,7 +898,8 @@ The representation of `F` by `W` is compatible with the zero-scheme dictionary
 the class `R(a) ∈ F(T)` corresponding to `a` is sent by `Φ` to the point `e(j ∘ a)` of
 `Hilb^g_{X/k}(T)` corresponding to `j ∘ a : T ⟶ H`. That is, `W` represents `F` *through* `Φ`.
 
-(blueprint: `sk-thm-picard-f-representable`, `thm-pc-f-representable`,
+(blueprint: `proposition-divisors-degree-g-open-chart`,
+`proposition-divisors-degree-g-open-chart--1`,
 `sk-the-subsheaf-ff-and-its-representability--remark-1`) -/
 theorem exists_representableBy_invertibleDirectImageToHilbert [IsSepClosed k]
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
@@ -1025,7 +1029,8 @@ representing `Hilb^g_{X/k}`, there are a scheme `W` and an open immersion `j : W
 `AlgebraicGeometry.exists_representableBy_invertibleDirectImageToHilbert` for the compatibility
 of this representation with the zero-scheme dictionary `F ⟶ Hilb^g_{X/k}`.
 
-(blueprint: `sk-thm-picard-f-representable`, `thm-pc-f-representable`) -/
+(blueprint: `proposition-divisors-degree-g-open-chart`,
+`proposition-divisors-degree-g-open-chart--1`) -/
 theorem isRepresentable_picardFunctorInvertibleDirectImage [IsSepClosed k]
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),

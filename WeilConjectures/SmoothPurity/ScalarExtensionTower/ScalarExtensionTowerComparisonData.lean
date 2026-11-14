@@ -43,7 +43,7 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorIntegra
 
 /-! # Normalized comparisons on strict quotient models
 
-Source: main-20261015 blueprint, def-weil-derived-pullback-tensor-hom, integral operations;
+Source: main-20261015 blueprint, prose-03-02, integral operations;
 Stacks Tags 03EL and 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence).
 
 ## Main definitions

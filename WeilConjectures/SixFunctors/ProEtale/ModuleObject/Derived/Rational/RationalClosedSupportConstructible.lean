@@ -20,9 +20,9 @@ import WeilConjectures.AlgebraicGeometry.Rational.RationalOpenDirectImageConstru
 /-!
 # Rational closed support preserves finite constant constructibility
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 `sk-prop-closed-adjoint-constructible-support.md`, final assertion, interpreted with
-`sk-def-sfb-constructible` (blueprint: lem-sfb-rational-closed-support-constructible).
+`definition-constructible-sheaves` (blueprint: lem-sfb-rational-closed-support-constructible).
 -/
 
 @[expose] public section
@@ -118,7 +118,7 @@ models, both for finite subextensions E of Qbar and for the condensed algebraic 
 The auxiliary open immersion j presents the complement of the given closed immersion i;
 `formalClosedSupport` is the existing functor i* ker(id -> j*j*).
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 `sk-prop-closed-adjoint-constructible-support.md`, final assertion and its proof
 (blueprint: lem-sfb-rational-closed-support-constructible).
 
@@ -128,21 +128,21 @@ Proof:
    lem-weil-pbc-locally-noetherian-quasi-separated; the open complement is Noetherian
    and quasi-compact by lem-weil-pbc-noetherian-open-subscheme-noetherian. Thus j is
    quasi-compact by lem-weil-pbc-qcqs-morphism-permanence.
-2. For f = i or j, sk-prop-sfb-cartesian-coefficients identifies coefficients and
+2. For f = i or j, lemma-inverse-image-coefficient-sheaves identifies coefficients and
    gives exact inverse image. Pull back the finite stratification by
    lemma-constructible-pullback-stratification and its local covers. The finite scalar
-   matrices of det-def-sfb-constructible-local-model pull back to the same matrices;
+   matrices of definition-constructible-sheaves--1 pull back to the same matrices;
    exactness preserves their cokernels. By lem-weil-pbc-site-pullback-abelian-exact
    and sk-def-sfb-derived-categories, cohomology pulls back termwise, retaining the
    original finite cohomological interval. Hence i* and j* preserve this Dbc.
-3. Clause (4) of det-lem-formal-closed-support-adjunction gives the ambient distinguished
+3. Clause (4) of lemma-sections-support-closed-subscheme gives the ambient distinguished
    triangle i_* RΓ_Z K -> K -> Rj_* j* K -> (i_* RΓ_Z K)[1], with the canonical unit.
    Its first term F is the fiber of this unit, without a constructibility premise.
 4. Step 2 gives j* K in Dbc. Apply lem-sfb-rational-open-direct-image-constructible
    to the quasi-compact j: Rj_* j* K belongs to the same finite-model Dbc.
 5. Apply the two-out-of-three and isomorphism closure of
-   det-cor-coefficient-heart-ii-triangulated to obtain F in Dbc(X).
-6. The fiber formula of det-lem-formal-closed-support-adjunction identifies RΓ_Z K
+   corollary-coefficient-heart-b--1 to obtain F in Dbc(X).
+6. The fiber formula of lemma-sections-support-closed-subscheme identifies RΓ_Z K
    with i* F. Step 2 for i and isomorphism closure give membership in Dbc(Z).
    The argument applies to both coefficient choices separately. -/
 theorem rationalClosedSupportConstructible

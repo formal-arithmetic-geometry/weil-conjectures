@@ -18,7 +18,7 @@ public import Mathlib.Topology.Irreducible
 /-!
 # Generic neighborhoods in a finite scheme stratification
 
-Source: main-20261015 blueprint, `sk-lem-coefficient-heart`, final curve clause;
+Source: main-20261015 blueprint, `lemma-constructible-sheaves`, final curve clause;
 Stacks Project, Tags 0BA8, 01IS, 004V, 004W, 004X, 01JR, 01JY and 01IQ
 (blueprint: lem-sfb-coefficient-heart-curve-generic-neighborhood).
 -/
@@ -38,14 +38,14 @@ stratum images. The actual pullback retains the stratum's scheme structure: its 
 projection is a surjective closed immersion, and its second projection is an open immersion.
 The union of the neighborhoods is a dense open containing all component generic points.
 
-Source: main-20261015 blueprint, `sk-lem-coefficient-heart`, final curve clause;
+Source: main-20261015 blueprint, `lemma-constructible-sheaves`, final curve clause;
 Stacks Project, Tags 0BA8, 01IS, 004V, 004W, 004X, 01JR, 01JY and 01IQ
 (blueprint: lem-sfb-coefficient-heart-curve-generic-neighborhood).
 
 Proof:
 1. By `lem-weil-pbc-noetherian-finitely-many-components`, the components are finite.
    By `lem-sc-scheme-sober`, each component C has a unique generic point eta(C).
-2. The partition in `def-constructible-stratification` gives a unique stratum j(C).
+2. The partition in `definition-constructible-sheaves--2` gives a unique stratum j(C).
    Write its locally closed image as O intersect F, with O open and F closed.
    Since eta(C) belongs to F, `def-sc-generic-point` gives C contained in F.
 3. Remove all components other than C. Their finite union is closed, and maximality

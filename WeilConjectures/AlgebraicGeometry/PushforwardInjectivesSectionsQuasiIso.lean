@@ -48,13 +48,13 @@ Source: Stacks Project, Tags 01FB, 01EZ, 01F0, 01EX, 015E
 
 Proof: (1) In the abelian category of module sheaves, global sections is additive and
 left exact by sectionwise computation of limits
-(`lem-weil-pbc-module-sheaves-limits-sectionwise`). Enough injectives is supplied by
+(`situation-conventions`). Enough injectives is supplied by
 `lem-weil-pbc-scheme-modules-enough-injectives`.
 (2) Every term of the direct image of `I` is acyclic for global sections by
 `lem-weil-pbc-module-pushforward-injective-acyclic` (01EX, with the whole space as open).
 Additivity of pushforward preserves its zero terms in negative degrees.
 (3) Every term of `J` is acyclic by `lem-weil-pbc-derived-functor-injective-vanishing`.
-(4) Apply `lem-weil-pbc-leray-acyclicity-quasi-iso` (015E) to the given quasi-isomorphism
+(4) Apply `lemma-acyclic-resolutions--1` (015E) to the given quasi-isomorphism
 between these two nonnegative complexes of acyclic objects.
 (5) Identify sections of the direct image with sections on `X` by the formulas above.
 Forgetting scalars preserves kernels, images and cokernels, so the induced maps on

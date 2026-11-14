@@ -32,7 +32,7 @@ import WeilConjectures.SmoothPurity.Coefficient.CoefficientExtensionRepresentati
 /-! # Coherent finite reduction of completed coefficient extension
 
 Source: main-20261015 blueprint, sec-proetale-coefficients/sk-def-sf-operations,
-def-weil-derived-pullback-tensor-hom, integral operations; Stacks 06YS, 0G7E, 06YY.
+prose-03-02, integral operations; Stacks 06YS, 0G7E, 06YY.
 (blueprint: lem-pur-coefficient-extension-reduction-model).
 Positive exponent m is encoded by n=m-1. All derived categories are unbounded,
 and the small pro-etale site's object and morphism universes remain independent.

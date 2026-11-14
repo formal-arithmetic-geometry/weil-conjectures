@@ -10,7 +10,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 /-! # Exact-derived transport from sheaves to constant towers
 
-Source: blueprint sec-smooth-purity, classes proof (2), and exact-functor
+Source: blueprint chap-Smooth-purity, classes proof (2), and exact-functor
 compatibility of Ext with composite and isomorphic functors.
 -/
 

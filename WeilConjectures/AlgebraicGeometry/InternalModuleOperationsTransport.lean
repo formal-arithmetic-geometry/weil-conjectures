@@ -679,7 +679,7 @@ Source: Stacks 03D7, Categories 0B65
 (blueprint: lem-sfb-internal-module-operations-transport).
 Proof: Steps 3--4. Conjugate the specified internal adjunction by E. The two left
 adjoints of the identified direct image are uniquely isomorphic by the unit equation
-lem-weil-pbc-conjugate-iso-unit-equation. Undo the conjugation. The mate equation below
+situation-conventions. Undo the conjugation. The mate equation below
 is exactly the Hom-transposition identity; evaluating it on identities gives both unit
 and counit equations, by lem-weil-pbc-adjunction-of-natural-bijection. -/
 theorem upperComparison_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -992,11 +992,11 @@ Proof (the eight steps of the DAG node):
    det-def-sfb-sheaf-tensor-structure).
 2. Both direct images evaluate N on V times_T T'. The lax tensor map sends pure
    tensors to the same tensors there. Their actions are eta_f(r) times n, where
-   eta_f is f_* alpha_f after the abelian unit (def-sfb-finite-lower-star,
-   def-sfb-finite-lower-star-lax-monoidal, def-sfb-module-lower-star,
+   eta_f is f_* alpha_f after the abelian unit (proposition-topos-functoriality--2,
+   def-sfb-finite-lower-star-lax-monoidal, prose-03-02,
    sk-def-sfb-coefficient-morphisms). Thus lowerComparison is the identity on sections.
 3. Conjugate the specified internal adjunction by E, and use the unique unit-normalized
-   left-adjoint comparison (lem-weil-pbc-conjugate-iso-unit-equation), with the sectionwise
+   left-adjoint comparison (situation-conventions), with the sectionwise
    adjunction of lem-weil-pbc-ringed-topoi-module-adjunction.
 4. Naturality of the Hom bijections gives the mate equation, hence the displayed unit
    and counit equations (lem-weil-pbc-adjunction-of-natural-bijection).
@@ -1011,7 +1011,7 @@ Proof (the eight steps of the DAG node):
    apply the square comparison, then contract epsilon_j'. Steps 4--6 identify each
    factor, yielding the displayed transformation equation (def-weil-pbc-adjunction-mate).
 8. The additive equivalences and their inverses preserve finite limits and colimits
-   (lem-galois-equivalence-preserves-limits, def-weil-sheaf-of-modules-category).
+   (lem-galois-equivalence-preserves-limits, situation-conventions).
    They therefore preserve and reflect exact sequences and exactness of operations.
    The transformation equation conjugates base change by isomorphisms; equivalences
    reflect isomorphisms, so sectionwise invertibility implies internal invertibility.

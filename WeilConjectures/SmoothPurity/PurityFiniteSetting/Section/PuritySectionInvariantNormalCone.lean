@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Cohomological.CohomologicalSmoothnessFi
 The section invariant `C(g, s)` of the finite purity setting, with coefficients `O_E/ϖ^n` over a
 finite-type scheme over the finite field `k`, is the pro-étale section invariant
 `AlgebraicGeometry.ProEtale.sectionInvariant` at this coefficient ring. Hence the pro-étale
-deformation to the normal cone applies to it (blueprint `sk-thm-dnc`).
+deformation to the normal cone applies to it (blueprint `lemma-section-normal-bundle`).
 -/
 
 @[expose] public section
@@ -25,10 +25,10 @@ open CategoryTheory AlgebraicGeometry
 
 namespace WeilConjectures.PurityFiniteSetting
 
-/-- Blueprint `sk-thm-dnc`: DNC invariance of the section dualizing line, in the finite purity
-setting. For `g : V ⟶ B` separated, quasi-compact and smooth of pure relative dimension `d` with
-a closed section `s`, over `B` separated of finite type over `k`, the section invariant of
-`(g, s)` is isomorphic to that of the normal cone of `s` with its zero section. This is
+/-- Blueprint `lemma-section-normal-bundle`: DNC invariance of the section dualizing line, in the
+finite purity setting. For `g : V ⟶ B` separated, quasi-compact and smooth of pure relative
+dimension `d` with a closed section `s`, over `B` separated of finite type over `k`, the section
+invariant of `(g, s)` is isomorphic to that of the normal cone of `s` with its zero section. This is
 `AlgebraicGeometry.ProEtale.nonempty_iso_sectionInvariant_normalConeProj` at the coefficient
 ring `O_E/ϖ^n`, on which `ℓ ≠ p` is invertible. -/
 theorem nonempty_iso_sectionInvariant_normalConeProj (P : PurityFiniteSetting.{u}) (d : ℕ)

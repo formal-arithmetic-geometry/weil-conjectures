@@ -23,7 +23,7 @@ of (Pull) with the units and the connecting morphisms for an arbitrary coefficie
 (`ProEtale.CondensedRing.isIso_derivedLowerStarIntegersModPowReduction`), and with the pushforward
 of bounded constructible complexes along any morphism of separated `k`-schemes of finite type
 (`ProEtale.CondensedRing.isIso_boundedConstructibleLowerStarIntegersModPowReduction'`), in
-particular along proper ones (blueprint `det-prop-scalar-six-direct-image` for
+particular along proper ones (blueprint `lemma-change-coefficients-direct-image` for
 `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`).
 
 -/
@@ -78,7 +78,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgC
   [TopologicalSpace.NoetherianSpace Y.left] (d : Z ⟶ Y)
 
 /-- **Reduction modulo `ℓⁿ` commutes with the pushforward on bounded constructible complexes**
-(blueprint `det-prop-scalar-six-direct-image` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`), for every morphism `d` of
+(blueprint `lemma-change-coefficients-direct-image` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`), for every morphism `d` of
 separated `k`-schemes of finite type. -/
 theorem isIso_boundedConstructibleLowerStarIntegersModPowReduction' :
     IsIso (boundedConstructibleLowerStarIntegersModPowReduction ℓ E n d) :=
@@ -86,7 +86,7 @@ theorem isIso_boundedConstructibleLowerStarIntegersModPowReduction' :
     (integersModPowPullUnitCompatible ℓ E n d.left) (integersModPowPullδCompatible ℓ E n d.left)
 
 /-- **Reduction modulo `ℓⁿ` commutes with the proper pushforward on bounded constructible
-complexes** (blueprint `det-prop-scalar-six-direct-image` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`):
+complexes** (blueprint `lemma-change-coefficients-direct-image` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`):
 `Rg_* ⋙ red_Y ⟶ red_Z ⋙ Rg_*` is an isomorphism for a proper morphism `g`. -/
 theorem isIso_boundedConstructibleLowerStarIntegersModPowReduction_of_isProper
     (g : Z ⟶ Y) [IsProper g.left] :

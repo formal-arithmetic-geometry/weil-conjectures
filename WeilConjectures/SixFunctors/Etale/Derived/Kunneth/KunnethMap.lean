@@ -47,12 +47,13 @@ This file also introduces the constant complex functor `D(Λ) ⥤ D(X_ét, Λ)` 
 inputs of the Künneth formula which do not depend on the base change theorems of
 `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary` (Stacks, Section 0F0Y and
 following): global generation and cohomology over a separably closed point, and the tensor
-product with a constant complex (`lem-kun-0f12`).
+product with a constant complex (`proposition-open-direct-image-preserves-finite`).
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.kunnethMap` (`def-kun-kunneth-map`): the Künneth map.
-- `AlgebraicGeometry.Etale.constantFunctor` (`def-kun-constant-sheaf`): `K ↦ K_X`.
+- `AlgebraicGeometry.Etale.kunnethMap` (`definition-kunneth-map--1`): the Künneth map.
+- `AlgebraicGeometry.Etale.constantFunctor` (`proposition-open-direct-image-preserves-finite`):
+`K ↦ K_X`.
 -/
 
 @[expose] public section
@@ -77,7 +78,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 variable {S X Y W : Scheme.{u}}
 
-/-- Blueprint `def-kun-kunneth-map`: the Künneth map.
+/-- Blueprint `definition-kunneth-map--1`: the Künneth map.
 
 For a commutative square `p ≫ f = c = q ≫ g` (with `p : W ⟶ X`, `q : W ⟶ Y`, `f : X ⟶ S`,
 `g : Y ⟶ S`) and `E ∈ D(X_ét)`, `K ∈ D(Y_ét)`, the Künneth map
@@ -133,12 +134,12 @@ lemma map_rightDerivedLowerStarCompIsoOfComp_hom_app_comp_counit (p : W ⟶ X) (
     Adjunction.comp_counit_app]
   rfl
 
-/-- Blueprint `lem-kun-kunneth-via-0f1n`: the Künneth map `Rf_* E ⊗ᴸ Rg_* K ⟶ Rc_* (Lp^* E ⊗ᴸ
-Lq^* K)` is the composite of the projection map `Rf_* E ⊗ᴸ Rg_* K ⟶ Rf_*(E ⊗ᴸ Lf^* Rg_* K)`
-(`AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap`), of `Rf_*` applied to the base
-change map `E ⊗ᴸ Lf^* Rg_* K ⟶ Rp_*(Lp^* E ⊗ᴸ Lq^* K)` of
-`AlgebraicGeometry.Etale.tensorBaseChangeMap`, and of the composition isomorphism
-`Rf_* Rp_* ≅ Rc_*`. -/
+/-- Blueprint `proposition-ordinary-external-kunneth--1`: the Künneth map
+`Rf_* E ⊗ᴸ Rg_* K ⟶ Rc_* (Lp^* E ⊗ᴸ Lq^* K)` is the composite of the projection map
+`Rf_* E ⊗ᴸ Rg_* K ⟶ Rf_*(E ⊗ᴸ Lf^* Rg_* K)`
+(`AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap`), of `Rf_*` applied to the base change
+map `E ⊗ᴸ Lf^* Rg_* K ⟶ Rp_*(Lp^* E ⊗ᴸ Lq^* K)` of `AlgebraicGeometry.Etale.tensorBaseChangeMap`,
+and of the composition isomorphism `Rf_* Rp_* ≅ Rc_*`. -/
 lemma kunnethMap_eq (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y ⟶ S) (c : W ⟶ S)
     (hp : p ≫ f = c) (hq : q ≫ g = c)
     (E : DerivedCategory (Sheaf X.smallEtaleTopology A))
@@ -254,8 +255,8 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] {X : Scheme.{u}}
 
-/-- Blueprint `lem-kun-derived-tensor-direct-sums`: the derived tensor product `K ⊗ᴸ -` with a
-fixed complex commutes with direct sums, being left adjoint to `RHom(K, -)`
+/-- Blueprint `proposition-open-direct-image-preserves-finite`: the derived tensor product `K ⊗ᴸ -`
+with a fixed complex commutes with direct sums, being left adjoint to `RHom(K, -)`
 (`AlgebraicGeometry.Etale.derivedTensorHomAdjunction`). -/
 instance preservesColimitsOfShape_derivedTensor_obj
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) (J : Type*) :
@@ -289,7 +290,8 @@ section Constant
 
 variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
 
-/-- Blueprint `def-kun-constant-sheaf`: constant sheaves and constant complexes.
+/-- Blueprint `proposition-open-direct-image-preserves-finite`: constant sheaves and constant
+complexes.
 
 The constant complex functor `D(Λ) ⥤ D(X_ét, Λ)`, `K ↦ K_X`: the functor induced on derived
 categories by the exact constant sheaf functor `M ↦ M_X`. -/
@@ -355,8 +357,8 @@ noncomputable def globalSectionsEvaluation (X : Scheme.{u})
   Sigma.desc fun s ↦ ((constantSheafAdj _ _ (isTerminalEtaleTerminal X)).homEquiv _ _).symm
     (ModuleCat.ofHom (LinearMap.toSpanSingleton Λ _ s))
 
-/-- Blueprint `def-kun-global-generated` (for sheaves of `Λ`-modules): `F` is *globally
-generated* if its evaluation morphism `⊕_{s ∈ Γ(X, F)} Λ_X ⟶ F` is an epimorphism. -/
+/-- Blueprint `corollary-open-direct-image-over-field--2` (for sheaves of `Λ`-modules): `F`
+is *globally generated* if its evaluation morphism `⊕_{s ∈ Γ(X, F)} Λ_X ⟶ F` is an epimorphism. -/
 def IsGloballyGenerated (X : Scheme.{u}) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     Prop :=
   Epi (globalSectionsEvaluation Λ X F)
@@ -488,9 +490,9 @@ noncomputable def rightDerivedGlobalSectionsIsoOfIsSepClosed :
   Functor.rightDerivedFunctorNatIso (Sheaf.ΓNatIsoSheafSections _ _ isTerminalEtalePoint) ≪≫
     Functor.rightDerivedFunctorIsoMapDerivedCategory _
 
-/-- Blueprint `lem-kun-0ezp` (cohomology of a separably closed point, for sheaves of
-`Λ`-modules): over a separably closed field `k`, `H^q(Spec k, F) = 0` for every étale sheaf `F`
-of `Λ`-modules on `Spec k` and every `q ≠ 0`. -/
+/-- Blueprint `lemma-sheaves-finite-support-finite-morphisms--1` (cohomology of a separably closed
+point, for sheaves of `Λ`-modules): over a separably closed field `k`, `H^q(Spec k, F) = 0` for
+every étale sheaf `F` of `Λ`-modules on `Spec k` and every `q ≠ 0`. -/
 theorem isZero_cohomology_of_isSepClosed
     (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) {q : ℤ} (hq : q ≠ 0) :
     IsZero ((cohomology (ModuleCat.{u + 1} Λ) (Spec (.of k)) q).obj
@@ -517,8 +519,8 @@ theorem nonempty_iso_constantFunctor_rightDerivedGlobalSections_of_isSepClosed
   ⟨((constantSheafEquivalenceOfIsSepClosed Λ).mapDerivedCategory.counitIso.app C).symm ≪≫
     (constantFunctor Λ _).mapIso ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ).app C).symm⟩
 
-/-- Blueprint `lem-kun-03qu-global-generation` (for sheaves of `Λ`-modules): over a separably
-closed field `k`, every étale sheaf of `Λ`-modules on `Spec k` is globally generated. -/
+/-- Blueprint `corollary-open-direct-image-over-field--2` (for sheaves of `Λ`-modules): over a
+separably closed field `k`, every étale sheaf of `Λ`-modules on `Spec k` is globally generated. -/
 theorem isGloballyGenerated_of_isSepClosed
     (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsGloballyGenerated Λ (Spec (.of k)) F := by
@@ -590,7 +592,8 @@ theorem hasFiniteCohomologicalDimensionMorphism_of_isSepClosed {X : Scheme.{u}}
     rw [Γ.map_id, Γ.map_zero]
     exact hz.eq_of_src _ _))
 
-/-- Blueprint `lem-kun-0f12`: tensor product with a constant complex.
+/-- Blueprint `proposition-open-direct-image-preserves-finite`: tensor product with a constant
+complex.
 
 Let `k` be a separably closed field, `Λ` a torsion ring, and `a : X ⟶ Spec k` a morphism from a
 quasi-compact quasi-separated scheme `X` of finite cohomological dimension. For
@@ -605,7 +608,7 @@ is an isomorphism. Under the equivalence of étale sheaves on `Spec k` with `Λ`
 (`AlgebraicGeometry.Etale.constantFunctorCompLeftDerivedUpperStarIso`), and the projection map
 is the canonical map `RΓ(X, E) ⊗ᴸ C ⟶ RΓ(X, E ⊗ᴸ C_X)` of the blueprint: it is adjoint to
 `La^*(Ra_* E ⊗ᴸ C) ≅ La^* Ra_* E ⊗ᴸ La^* C ⟶ E ⊗ᴸ La^* C`, as in the proof of
-`lem-kun-kunneth-via-0f1n`. -/
+`proposition-ordinary-external-kunneth--1`. -/
 theorem isIso_rightDerivedLowerStarProjectionMap_of_isSepClosed {X : Scheme.{u}}
     (a : X ⟶ Spec (.of k)) [CompactSpace X] [QuasiSeparatedSpace X]
     (hX : HasFiniteCohomologicalDimension Λ X)
@@ -662,7 +665,8 @@ variable [Finite Λ] {k : Type u} [Field k] [IsSepClosed k]
 
 omit [HasInvertibleExponent Λ (Spec (.of k))] in
 /-- The projection map `Ra_{X*} E ⊗ᴸ C ⟶ Ra_{X*}(E ⊗ᴸ La_X^* C)` is an isomorphism for a
-finite-type scheme `X` over a separably closed field `k` (`lem-kun-0f12`, with `lem-kun-0f10`). -/
+finite-type scheme `X` over a separably closed field `k`
+(`proposition-open-direct-image-preserves-finite`, with `theorem-results-from-etale-theory--6`). -/
 instance isIso_rightDerivedLowerStarProjectionMap_app_app
     (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -675,8 +679,8 @@ instance isIso_rightDerivedLowerStarProjectionMap_app_app
 
 omit [HasInvertibleExponent Λ (Spec (.of k))] in
 /-- `RΓ(X, E) ⊗ᴸ RΓ(Spec k, C) ≅ RΓ(X, E ⊗ᴸ La_X^* C)` for a finite-type scheme `X` over a
-separably closed field `k`: the tensor product with a constant complex (`lem-kun-0f12`), read
-in `D(Λ)` through `RΓ(Spec k, -)`. -/
+separably closed field `k`: the tensor product with a constant complex
+(`proposition-open-direct-image-preserves-finite`), read in `D(Λ)` through `RΓ(Spec k, -)`. -/
 theorem nonempty_iso_rightDerivedGlobalSections_derivedTensor_leftDerivedUpperStar
     (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :

@@ -12,7 +12,7 @@ public import WeilConjectures.CategoryTheory.StageSystem.Functor
 /-! # Normalized finite-stage compact-support action
 
 Source: blueprint definition order 1490 and the coefficient comparisons in
-lem-fix-operation-reduction, compact-support paragraph
+proposition-six-operations-change-coefficients, compact-support paragraph
 (blueprint: def-weil-compact-support-coefficient-action).
 
 The finite action is fixed to the already normalized integral/Roos construction.
@@ -41,7 +41,7 @@ variable {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
 
 /-- The finite-coefficient comparison is the unique tensor-linear lift of compact
 support of the input tensor unit, followed by the fixed restriction comparison.
-Source: lem-fix-operation-reduction and lem-fix-compact-support-coefficient-change
+Source: proposition-six-operations-change-coefficients and lemma-sp-reduction--1
 (blueprint: def-weil-compact-support-coefficient-action). -/
 def sfCompactSupportFiniteMate
     (K : proEtaleDerivedCategory X A)
@@ -73,8 +73,8 @@ variable (l : ℕ) [Fact l.Prime]
 quotient. All units are the prescribed mixed tensor/diagonal Roos units. The output
 unit is transported through the fixed reduction isomorphism of the integral action.
 The existential variable is only a proof of a universal property, not comparison data.
-Source: lem-fix-operation-reduction, completed compact-support and associativity paragraphs
-(blueprint: def-weil-compact-support-coefficient-action). -/
+Source: proposition-six-operations-change-coefficients, completed compact-support and associativity
+paragraphs (blueprint: def-weil-compact-support-coefficient-action). -/
 def SfCompactSupportIntegralBetaSpec
     (E L : Type u) [Field E] [Field L]
     [Algebra (Padic l) E] [Algebra (Padic l) L]
@@ -123,7 +123,7 @@ variable (l : ℕ) [Fact l.Prime]
 compact-support construction. The finite equality retains the complete previously
 normalized strict-tower action, including all rational pure tensors. The integral
 beta is the tensor-unit mate above, and rational beta is its raw localization.
-Source: definition order 1490 and lem-fix-operation-reduction
+Source: definition order 1490 and proposition-six-operations-change-coefficients
 (blueprint: def-weil-compact-support-coefficient-action). -/
 structure SfCompactSupportCoefficientAction where
   /-- The compatible action on the recorded stage systems. -/

@@ -18,7 +18,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.
 
 Let `p : Z ⟶ Y` be a proper morphism of separated `k`-schemes of finite type, over any field `k`
 of characteristic `≠ ℓ`, and `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`. Following the blueprint
-proof of `lem-sfb-dc-proper-pushforward-left-adjoint-oe`, the right adjoint of
+proof of `theorem-exceptional-inverse-image--15`, the right adjoint of
 `Rp_* : Dᵇc(Z)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧` is the derived limit of the torsion-level exceptional inverse
 images:
 
@@ -168,7 +168,7 @@ theorem exists_bijective_boundedConstructibleLowerStar_padicIntegersRingObj
   rw [this]
   exact e₂.bijective.comp ((he _ A.2).comp e₁.bijective)
 
-/-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-oe`, for a finite subextension
+/-- Blueprint `theorem-exceptional-inverse-image--15`, for a finite subextension
 `E ⊆ ℚ̄_ℓ`: for a proper morphism `g : Z ⟶ Y`, the derived pushforward
 `Rg_* : Dᵇc(Z)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧` is a left adjoint, over any field `k`. -/
 theorem isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_isProper' :

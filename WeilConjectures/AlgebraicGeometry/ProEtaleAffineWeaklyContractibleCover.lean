@@ -39,18 +39,18 @@ Proof:
    lem-weil-pbc-wcontractible-ring-extension to get an ind-etale faithfully flat
    extension `A_j → D_j` with splitting property, explicit cardinal bound, and
    a singleton pro-etale cover `Spec D_j → T_j`.
-3. By def-weil-size-convention, closure under power sets and function sets makes
+3. By prose-01-10, closure under power sets and function sets makes
    the cardinal bound small. The spectrum is small too (def-weil-affine-spectrum).
    Replace by representatives in the chosen skeleton, conjugating the arrows.
 4. Open immersions are etale (lem-weil-pbc-open-immersion-etale), hence flat, and
    have isomorphic diagonals (def-weil-open-immersion, def-weil-etale-morphism).
-   They are weakly etale (def-weil-weakly-etale-morphism). Composition stability
-   (lem-weil-pbc-ind-etale-stability) makes `Spec D_j → X` full-site objects.
+   They are weakly etale (definition-ind-etale-pro-etale-weakly--3). Composition stability
+   (lemma-stability) makes `Spec D_j → X` full-site objects.
 5. For each affine open `W` of `U`, refine its intersections with the `T_j` by
    affine opens inside `W`. Affine quasi-compactness (lem-weil-pbc-affine-scheme-qcqs)
    selects finitely many. The singleton covering clause of the ring-extension lemma
    supplies finitely many affine opens upstairs with images exactly these opens.
-   Their images cover exactly `W`, proving def-weil-pbc-proetale-covering. For empty
+   Their images cover exactly `W`, proving definition-small-pro-etale-site--1. For empty
    `W`, take no witnesses.
 6. The splitting property and full-site membership allow
    lem-weil-pbc-wcontractible-affine-weakly-contractible to give surjectivity on

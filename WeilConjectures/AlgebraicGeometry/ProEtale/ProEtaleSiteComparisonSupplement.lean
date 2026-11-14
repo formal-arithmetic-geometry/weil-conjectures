@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleSiteComparison
 # The geometric comparison from the pro-etale to the etale site
 
 Source: Stacks Project, Tag 099R, opening paragraph; Sites, Tags 00WX, 00X6 and 00YV
-(blueprint: def-weil-pbc-site-comparison-morphism).
+(blueprint: proposition-comparison-morphism-inverse-image).
 
 The inclusion is the existing `Scheme.toProEt`, identity on schemes and arrows.
 Its continuity and finite-limit preservation are the existing instances
@@ -34,7 +34,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The inverse image in `proEtaleSiteComparison` preserves finite limits, so this
 adjunction is the geometric morphism from the pro-etale to the etale topos.
 Source: Stacks Project, Tags 099R, 00X6 and 00WJ
-(blueprint: def-weil-pbc-site-comparison-morphism).
+(blueprint: proposition-comparison-morphism-inverse-image).
 
 Proof: etale morphisms are weakly etale since they and their open diagonals are flat.
 The existing inclusion therefore retains the underlying schemes and arrows. The terminal
@@ -76,7 +76,7 @@ theorem preservesFiniteLimits_proEtaleSiteComparison (T : Scheme.{u}) :
 by the module-valued Kan extension and sheafification. In particular this is the fixed
 coefficient encoding of modules over the constant ring sheaf, not a structure-sheaf map.
 Source: Stacks Project, Tag 00YV, module paragraph
-(blueprint: def-weil-pbc-site-comparison-morphism). -/
+(blueprint: proposition-comparison-morphism-inverse-image). -/
 noncomputable def proEtaleSiteComparisonModules (T : Scheme.{u})
     (Λ : Type (u + 1)) [Ring Λ] [Finite Λ] :
     ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) T ⊣

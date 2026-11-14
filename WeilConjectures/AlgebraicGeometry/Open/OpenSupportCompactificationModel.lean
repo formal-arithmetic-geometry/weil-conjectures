@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Open.OpenRestrictionCompactSuppo
 
 /-! # Open-support comparisons with supplied compactifications
 
-Source: blueprint `prop-asd-smooth-base-change`, coherence (i).
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
 (blueprint: def-asd-open-support-compactification-model)
 -/
 
@@ -24,8 +24,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- The open-support comparison with both compactifications supplied explicitly.
 It uses the same graph, proper/open, and open-composition factors as the chosen
-comparison. Source: blueprint `prop-asd-smooth-base-change`, coherence (i).
-(blueprint: def-asd-open-support-compactification-model) -/
+comparison. Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence
+(i). (blueprint: def-asd-open-support-compactification-model) -/
 def openSupportCompactificationIso {X Y U V : Scheme.{u}}
     {f : X ⟶ Y} {j : U ⟶ Y} [IsOpenImmersion j]
     {a : V ⟶ X} [IsOpenImmersion a] {p : V ⟶ U}
@@ -50,7 +50,7 @@ def openSupportCompactificationIso {X Y U V : Scheme.{u}}
 
 /-- Base change before changing the output compactification. Proper base change
 makes the raw exchange invertible for finite coefficients.
-Source: blueprint `prop-asd-smooth-base-change`, coherence (i).
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
 (blueprint: def-asd-open-support-compactification-model) -/
 def compactificationSupportBaseChangeIso
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y}

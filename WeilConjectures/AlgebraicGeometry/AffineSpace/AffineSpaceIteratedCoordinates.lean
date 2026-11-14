@@ -10,7 +10,7 @@ import all Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # Ordered affine space and the iterated affine line
 
-Source: the coordinate-chart passage in sk-cor-trace, proof step 9.
+Source: the coordinate-chart passage in corollary-cup-product-pairing--1, proof step 9.
 (blueprint: lem-pd-affine-space-iterated-coordinates).
 -/
 
@@ -49,8 +49,8 @@ theorem iteratedAffineLine.hom_ext {S X : Scheme.{u}} :
       exact hc 0
 
 /-- Affine space and the ordered affine tower are canonically isomorphic with
-identical coordinates and base map. Source: sk-cor-trace, local smooth coordinates
-(blueprint: lem-pd-affine-space-iterated-coordinates).
+identical coordinates and base map. Source: corollary-cup-product-pairing--1, local smooth
+coordinates (blueprint: lem-pd-affine-space-iterated-coordinates).
 Proof: use their universal properties to define both maps by the same ordered
 coordinate functions. The two extensionality lemmas identify each composite with
 its identity, including the empty-coordinate case. -/

@@ -19,9 +19,10 @@ closed section `s`, over a base `B` separated and locally of finite type over a 
 the characteristic of `Λ` is invertible. The deformation to the normal cone `g̃ : 𝒟_s V ⟶ 𝔸¹_B`
 with its section `s̃` gives the pro-étale *family object* `F = Ls̃^* ω_{g̃}` on `𝔸¹_B`, whose fibres
 at `t = 1` and `t = 0` are the pro-étale section invariants `𝒞(g, s)` and `𝒞(π_N, 0_N)`
-(`lem-pur-dnc-section-geometry` (1)). The family is constant along `𝔸¹_B`,
-`κ : F ≅ La^* 𝒞(g, s)` (`prop-pur-dnc-family-constancy`), and restricting `κ` to `t = 0` gives the
-DNC isomorphism `𝒞(g, s) ≅ 𝒞(π_N, 0_N)` (blueprint `sk-thm-dnc`, `thm-pur-dnc-invariance`).
+(`prose-09-12` (1)). The family is constant along `𝔸¹_B`,
+`κ : F ≅ La^* 𝒞(g, s)` (`lemma-section-normal-bundle--1`), and restricting `κ` to `t = 0` gives the
+DNC isomorphism `𝒞(g, s) ≅ 𝒞(π_N, 0_N)` (blueprint `lemma-section-normal-bundle`,
+`lemma-section-normal-bundle--1`).
 
 ## Implementation notes
 
@@ -79,9 +80,9 @@ open _root_.AlgebraicGeometry.ProEtale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {V B : Scheme.{u}} {d : ℕ}
   {g : V ⟶ B} {s : B ⟶ V} {N : NormalConeData d s} (D : DeformationToNormalConeData d g s N)
 
-/-- Blueprint `def-pur-dnc-section-family`: the pro-étale *family object* `F = Ls̃^* ω_{g̃}` on
-`𝔸¹_B` of a deformation datum, the pro-étale section invariant of `g̃ : 𝒟_s V ⟶ 𝔸¹_B` and its
-section `s̃`. -/
+/-- Blueprint `definition-deformation-normal-bundle`: the pro-étale *family object*
+`F = Ls̃^* ω_{g̃}` on `𝔸¹_B` of a deformation datum, the pro-étale section invariant of
+`g̃ : 𝒟_s V ⟶ 𝔸¹_B` and its section `s̃`. -/
 noncomputable abbrev proEtaleFamilyObject :
     _root_.DerivedCategory
       (Sheaf (Scheme.ProEt.topology 𝔸(ULift.{u} (Fin 1); B)) (ModuleCat.{u + 1} Λ)) :=
@@ -89,7 +90,7 @@ noncomputable abbrev proEtaleFamilyObject :
 
 variable [HasInvertibleExponent Λ B] [QuasiSeparatedSpace B]
 
-/-- Blueprint `lem-pur-dnc-section-geometry` (1): the fibre of the pro-étale family object at
+/-- Blueprint `prose-09-12` (1): the fibre of the pro-étale family object at
 `t = 1` is the section invariant of `(g, s)`, `θ₁ : Li₁^* F ≅ 𝒞(g, s)`, by base change for the
 smooth `g̃` along the unit section. -/
 noncomputable def proEtaleOneFibreIso [HasCompactification g] [QuasiCompact g] :
@@ -99,7 +100,7 @@ noncomputable def proEtaleOneFibreIso [HasCompactification g] [QuasiCompact g] :
   have := D.isIso_dualizingComplexBaseChangeMap Λ D.isPullback_oneFibre
   sectionInvariantBaseChangeIso Λ D.isPullback_oneFibre D.sect s D.comp_oneFibre
 
-/-- Blueprint `lem-pur-dnc-section-geometry` (1): the fibre of the pro-étale family object at
+/-- Blueprint `prose-09-12` (1): the fibre of the pro-étale family object at
 `t = 0` is the section invariant of the normal cone, `θ₀ : Li₀^* F ≅ 𝒞(π_N, 0_N)`, by base change
 for the smooth `g̃` along the zero section. -/
 noncomputable def proEtaleZeroFibreIso [HasCompactification N.proj] [QuasiCompact N.proj] :
@@ -138,7 +139,7 @@ omit [QuasiSeparatedSpace B]
 variable [HasCompactification g] {k : Type u} [Field k] (aB : B ⟶ Spec (.of k)) [IsSeparated aB]
   [LocallyOfFiniteType aB] [QuasiCompact D.proj]
 
-/-- Blueprint `prop-pur-dnc-family-constancy` (2), (3): the constancy comparison
+/-- Blueprint `lemma-section-normal-bundle--1` (2), (3): the constancy comparison
 `κ : F ≅ La^* 𝒞(g, s)` of the pro-étale family object, the image under `ν^*` of the étale
 comparison normalized against the fibre identification at `t = 1`
 (`AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.familyObjectIso`). -/
@@ -159,8 +160,8 @@ noncomputable def proEtaleFamilyObjectIso :
 
 variable [HasCompactification N.proj]
 
-/-- Blueprint `sk-thm-dnc`, `pur9-dnc-def-iso`: the pro-étale DNC isomorphism
-`δ_{g,s} : 𝒞(g, s) ≅ 𝒞(π_N, 0_N)`, the image under `ν^*` of the étale DNC isomorphism
+/-- Blueprint `lemma-section-normal-bundle`, `lemma-section-normal-bundle--1`: the pro-étale DNC
+isomorphism `δ_{g,s} : 𝒞(g, s) ≅ 𝒞(π_N, 0_N)`, the image under `ν^*` of the étale DNC isomorphism
 `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.sectionInvariantIso`, that is, the
 restriction to `t = 0` of the constancy comparison normalized at `t = 1`. -/
 noncomputable def proEtaleSectionInvariantIso :
@@ -170,7 +171,7 @@ noncomputable def proEtaleSectionInvariantIso :
       (D.sectionInvariantIso Λ aB) ≪≫
     (ProEtale.sectionInvariantComparisonIso Λ N.proj N.zeroSection).symm
 
-/-- Blueprint `thm-pur-dnc-invariance`: *compatibility with base change.* Along every
+/-- Blueprint `lemma-section-normal-bundle--1`: *compatibility with base change.* Along every
 `u : B' ⟶ B` the pro-étale DNC isomorphism restricts to the image under `ν^*` of the restricted
 étale DNC isomorphism, through the identifications `Lu^* ν^* ≅ ν^* Lu^*` and
 `𝒞 ≅ ν^* 𝒞_ét`. The restricted étale DNC isomorphism is the identity of the standard object in
@@ -202,12 +203,12 @@ namespace ProEtale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {V B : Scheme.{u}}
 
-/-- Blueprint `sk-thm-dnc`: DNC invariance of the section dualizing line, pro-étale
+/-- Blueprint `lemma-section-normal-bundle`: DNC invariance of the section dualizing line, pro-étale
 
 Let `Λ` be a finite coefficient ring, `g : V ⟶ B` smooth of pure relative dimension `d` with a
 closed section `s`, over a base `B` separated and locally of finite type over a field `k` on
 which the characteristic of `Λ` is invertible, and let `g̃ : 𝒟_s V ⟶ 𝔸¹_B` be a deformation to the
-normal cone `N_s ⟶ B` (the situation of `sk-lem-geometry`). Then the pro-étale section
+normal cone `N_s ⟶ B` (the situation of `prose-09-12`). Then the pro-étale section
 invariants are isomorphic,
 
 `𝒞(g, s) ≅ 𝒞(π_N, 0_N)`,
@@ -223,8 +224,8 @@ theorem nonempty_iso_sectionInvariant_normalCone (d : ℕ)
     Nonempty (sectionInvariant Λ g s ≅ sectionInvariant Λ N.proj N.zeroSection) :=
   ⟨D.proEtaleSectionInvariantIso Λ aB⟩
 
-/-- Blueprint `sk-thm-dnc`: DNC invariance of the section dualizing line, pro-étale, for the
-normal cone of the section
+/-- Blueprint `lemma-section-normal-bundle`: DNC invariance of the section dualizing line,
+pro-étale, for the normal cone of the section
 
 Let `g : V ⟶ B` be separated, quasi-compact and smooth of pure relative dimension `d` with a
 closed section `s`, over a base `B` quasi-compact, separated and locally of finite type over a

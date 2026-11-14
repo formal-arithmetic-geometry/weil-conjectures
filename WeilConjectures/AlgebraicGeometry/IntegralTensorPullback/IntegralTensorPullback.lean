@@ -19,8 +19,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionMapSh
 
 /-! # Integral inverse image preserves constructibility and completed pullback
 
-Source: blueprint det-lem-int-tensor-pullback.
-(blueprint: det-lem-int-tensor-pullback).
+Source: blueprint lemma-inverse-image-tensor-product.
+(blueprint: lemma-inverse-image-tensor-product).
 -/
 
 @[expose] public noncomputable section

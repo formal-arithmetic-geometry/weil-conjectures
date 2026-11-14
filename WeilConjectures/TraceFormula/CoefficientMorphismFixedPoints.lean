@@ -15,7 +15,7 @@ For an open immersion `j : U ⟶ X` with closed complement `i : Z ⟶ X`, both s
 endomorphism `Φ` of `X`, the rational points of `X` fixed by `Φ` are the disjoint union of those
 of `U` fixed by `Φ_U` and those of `Z` fixed by `Φ_Z`
 (`ProEtale.CondensedRing.fixedRationalPointsSumEquiv`, the fixed-point side of blueprint
-`prop-trf-trace-additivity-open-closed`).
+`lemma-additivity-open-subscheme-complement`).
 
 -/
 
@@ -29,7 +29,7 @@ namespace AlgebraicGeometry
 
 /-- A morphism from a reduced scheme whose image lies in the image of a closed immersion factors
 through it: the base change of the closed immersion is a surjective closed immersion onto a
-reduced scheme, hence an isomorphism (used in blueprint `prop-trf-trace-additivity-open-closed`
+reduced scheme, hence an isomorphism (used in blueprint `lemma-additivity-open-subscheme-complement`
 for the rational points of the closed piece). -/
 lemma exists_comp_eq_of_isClosedImmersion_of_isReduced {T X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (g : T ⟶ X) [IsReduced T] (h : Set.range g ⊆ Set.range i) :
@@ -46,7 +46,8 @@ namespace ProEtale.CondensedRing
 variable {k : Type u} [Field k] {X U Z : Over (Spec (.of k))}
 
 /-- A rational point of `X` whose image lies in the image of `j.left` factors through `j`, for an
-open immersion or a closed immersion `j` (blueprint `prop-trf-trace-additivity-open-closed`). -/
+open immersion or a closed immersion `j` (blueprint
+`lemma-additivity-open-subscheme-complement`). -/
 lemma RationalPoint.exists_comp_eq_of_exists_lift (j : U ⟶ X) (x : RationalPoint X)
     (h : ∃ l : Spec (.of k) ⟶ U.left, l ≫ j.left = x.left) : ∃ y : RationalPoint U, y ≫ j = x := by
   obtain ⟨l, hl⟩ := h
@@ -86,7 +87,7 @@ noncomputable def fixedRationalPointsSumMap (hj : ΦU ≫ j = j ≫ Φ) (hi : Φ
   | .inr z => ⟨z.1 ≫ i, (RationalPoint.comp_eq_self_iff i hi z.1).2 z.2⟩
 
 /-- **The fixed rational points along an open–closed decomposition** (blueprint
-`prop-trf-trace-additivity-open-closed`, the fixed-point side): for an open immersion
+`lemma-additivity-open-subscheme-complement`, the fixed-point side): for an open immersion
 `j : U ⟶ X` with closed complement `i : Z ⟶ X`, both stable under `Φ`, the rational points of `X`
 fixed by `Φ` are the disjoint union of those of `U` fixed by `Φ_U` and those of `Z` fixed by
 `Φ_Z`, through `y ↦ y ≫ j` and `z ↦ z ≫ i`. -/

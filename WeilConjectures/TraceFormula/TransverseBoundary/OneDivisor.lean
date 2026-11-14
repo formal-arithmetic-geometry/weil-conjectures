@@ -15,7 +15,7 @@ Let `C` be a transverse corner (`AlgebraicGeometry.Scheme.TransverseCorner`). On
 subscheme `W = Z - X`, which contains `Y - z`, the immersion `i : Z - (X ∪ Y) ⟶ Z - Y` restricts
 to the identity of `W - Y`, so `i_! E` restricts to `E` and `M|_W = R j_{W*} E` for the open
 immersion `j_W : Z - (X ∪ Y) = W - Y ⟶ W`: only the regular divisor `Y` remains (blueprint
-`det-tf-transverse-tame-local-constancy`, *Reduction to one divisor*).
+`lemma-cohomology-near-two-transverse-divisors--1`, *Reduction to one divisor*).
 
 ## Main definitions
 

@@ -14,7 +14,7 @@ At the stage `Λ = E` of a subfield `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the Tate twi
 `E_X(m)` (`AlgebraicGeometry.FieldWeilSheaf.tateTwistConstant`) is the constant `E`-Weil sheaf
 `E_X` with its Weil structure multiplied by a scalar `c ∈ Eˣ` whose image in `ℚ̄_ℓ` is `q^{-m}`:
 geometric Frobenius acts on `E(1)` by `q⁻¹`, on `E(m)` by `q^{-m}` and on `E(-m)` by `q^m`
-(blueprint `def-weil-frobenius-coefficient-twists`). The scalar is the image of the twisting unit
+(blueprint `prose-10-21`). The scalar is the image of the twisting unit
 `χ_ℓ(σ)ᵐ ∈ 𝒪_Eˣ` of the integral stage, so the action commutes with finite reduction and with
 scalar extension to `ℚ̄_ℓ`.
 -/
@@ -30,7 +30,7 @@ namespace AlgebraicGeometry.FieldWeilSheaf
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
   {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] (E : IntermediateField ℚ_[l] (PadicAlgCl l))
 
-/-- Blueprint `def-weil-frobenius-coefficient-twists`: Frobenius on coefficient twists, stage
+/-- Blueprint `prose-10-21`: Frobenius on coefficient twists, stage
 `E`.
 
 Geometric Frobenius acts on the Tate twist `E(m)` by `q^{-m}`, for every `m ∈ ℤ`: as an `E`-Weil
@@ -49,7 +49,7 @@ theorem exists_tateTwistConstant_eq_constantTwist (m : ℤ) :
       ((ProEtaleIntegralWeilSheaf.cyclotomicUnit k₀ E : PadicAlgCl.integers l E) : E) ^ m = _
   rw [ProEtaleIntegralWeilSheaf.cyclotomicUnit_eq, inv_zpow', zpow_neg]
 
-/-- Blueprint `def-weil-frobenius-coefficient-twists`: in particular geometric Frobenius acts on
+/-- Blueprint `prose-10-21`: in particular geometric Frobenius acts on
 `E(-d)` by multiplication by `q^d`, for `d ∈ ℤ_{≥ 0}`. -/
 theorem exists_tateTwistConstant_neg_eq_constantTwist (d : ℕ) :
     ∃ c : (↥E)ˣ, algebraMap E (PadicAlgCl l) (c : E) = (Nat.card k₀ : PadicAlgCl l) ^ d ∧

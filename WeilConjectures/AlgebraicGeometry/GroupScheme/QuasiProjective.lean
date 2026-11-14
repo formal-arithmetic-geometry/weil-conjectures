@@ -93,7 +93,7 @@ an ample invertible module
 (`AlgebraicGeometry.GrpObj.exists_isAffineOpen_compl_support_zeroLocus`), whose sections give the
 immersion (`AlgebraicGeometry.exists_isImmersion_projectiveSpace_of_isAffineOpen`). It is the
 input of `AlgebraicGeometry.GrpObj.exists_isImmersion_projectiveSpace`, used for blueprint
-`lem-sc-abelian-variety-projective` and the subsection `lem-sc-abelian-variety-projective`. -/
+`lemma-symmetric-ample-sheaf--1` and the subsection `lemma-symmetric-ample-sheaf--1`. -/
 theorem GrpObj.exists_isImmersion_projectiveSpace_of_isAlgClosed [IsAlgClosed k]
     (G : Over (Spec (.of k))) [GrpObj G] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] :
     ∃ (α : Type u) (_ : Finite α) (j : G.left ⟶ ℙ(α; Spec (.of k))),
@@ -110,8 +110,8 @@ algebraically closed field, hence quasi-projective
 (`AlgebraicGeometry.GrpObj.exists_isImmersion_projectiveSpace_of_isAlgClosed`), and
 quasi-projectivity descends along field extensions (Stacks 0BDE).
 
-This is the input (Stacks 0BF7) used in the proof of blueprint `lem-sc-abelian-variety-projective`
-and of the subsection `lem-sc-abelian-variety-projective`. -/
+This is the input (Stacks 0BF7) used in the proof of blueprint `lemma-symmetric-ample-sheaf--1`
+and of the subsection `lemma-symmetric-ample-sheaf--1`. -/
 @[stacks 0BF7]
 theorem GrpObj.exists_isImmersion_projectiveSpace (G : Over (Spec (.of k))) [GrpObj G]
     [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] :

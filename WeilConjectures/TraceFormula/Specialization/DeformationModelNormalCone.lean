@@ -19,8 +19,8 @@ The coordinate `t` vanishes on the special fibre `𝒳_s` of the deformation mod
 `V(I) ⟶ N_I X` is the *zero section of the special fibre*
 (`AlgebraicGeometry.ProEtale.CondensedRing.deformationSpecialFibreZeroSection`), a closed
 subscheme of `𝒳_s`. If the morphism of normal cones induced by `f : X ⟶ Y` lands in the zero
-section (blueprint `det-tf-cone-zero-sections` (2)), so does the morphism of special fibres
-(`AlgebraicGeometry.ProEtale.CondensedRing.range_deformationSpecialFibreMap_subset`).
+section (blueprint `lemma-normal-cones-contracting-ideals` (2)), so does the morphism of special
+fibres (`AlgebraicGeometry.ProEtale.CondensedRing.range_deformationSpecialFibreMap_subset`).
 
 -/
 

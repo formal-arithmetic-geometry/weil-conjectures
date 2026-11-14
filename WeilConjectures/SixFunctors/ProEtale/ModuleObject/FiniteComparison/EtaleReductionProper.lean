@@ -26,10 +26,10 @@ This file shows that the property is stable under composition
 (`ProEtale.CondensedRing.HasEtaleReductionLowerShriekIso.comp`): with the composition
 isomorphisms `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on both sides, the stacked square of `γ_f` and `γ_g`
 has invertible transpose (`CategoryTheory.isIso_mateEquiv_vComp_whiskerLeft_whiskerRight`).
-This is the composition step of blueprint `det-prop-scalar-six-exceptional` ("compatibility
-with composition"), in the weak form of `exists_etaleReductionLowerShriekIso` (no identification
-of `γ` with the canonical comparison). Every proper morphism is a closed immersion followed
-by a projection `P ×_k Y ⟶ Y` (`exists_isClosedImmersion_comp_overProdSnd`).
+This is the composition step of blueprint `lemma-change-coefficients-exceptional-inverse-image`
+("compatibility with composition"), in the weak form of `exists_etaleReductionLowerShriekIso` (no
+identification of `γ` with the canonical comparison). Every proper morphism is a closed immersion
+followed by a projection `P ×_k Y ⟶ Y` (`exists_isClosedImmersion_comp_overProdSnd`).
 -/
 
 @[expose] public section

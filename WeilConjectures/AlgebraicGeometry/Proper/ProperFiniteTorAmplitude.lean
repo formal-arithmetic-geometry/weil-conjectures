@@ -20,7 +20,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 
 Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
 `sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-tor.md`
-(blueprint: det-ctf-finite-proper-tor); Stacks Project, Tags 0F0G and 0F12.
+(blueprint: proposition-proper-direct-image-finite-coefficients--1); Stacks Project, Tags 0F0G and
+0F12.
 
 Membership in `Dctf` with a specified Tor interval is expressed by bounded
 constructibility together with `hasTorAmplitudeIn` for that interval. This already
@@ -38,8 +39,8 @@ namespace AlgebraicGeometry.Etale
 /-- Proper direct image preserves bounded constructible complexes of finite Tor amplitude,
 with upper Tor bound increased by a bound for the geometric fibres' ℓ-cohomological dimensions.
 Source: blueprint `sec-six-functors-basics/sk-prop-ctf-finite-proper/`
-`sk-prop-ctf-finite-proper-tor.md` (blueprint: det-ctf-finite-proper-tor).
-Proof:
+`sk-prop-ctf-finite-proper-tor.md` (blueprint:
+proposition-proper-direct-image-finite-coefficients--1). Proof:
 1. The prime ℓ is nonzero in the characteristic-p field k. Thus ℓ^r is a unit
    on both schemes, and the coefficient convention for ℓ^r holds. Apply
    `isBoundedConstructible_rightDerivedLowerStar_of_proper` to C.

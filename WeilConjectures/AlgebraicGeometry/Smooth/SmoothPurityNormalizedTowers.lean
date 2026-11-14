@@ -13,13 +13,13 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleTorAmplitude
 /-!
 # Constructible and normalized coefficient towers
 
-Source: blueprint main-20261015, sec-smooth-purity,
-`sk-def-sp-normalized-towers/_section.md` (blueprint: sk-def-sp-normalized-towers).
+Source: blueprint main-20261015, chap-Smooth-purity,
+`sk-def-sp-normalized-towers/_section.md` (blueprint: prose-09-21).
 
 The natural index n denotes positive level n+1. The finite-level category and both
 tower categories are full subcategories of the ordinary derived categories. The
 parameter D is the sectionwise normalized coefficient-tower interface of
-`det-sp-coefficient-towers-abelian`, which supplies exact evaluation and the canonical
+`prose-09-21`, which supplies exact evaluation and the canonical
 reduction natural transformation, including its tensor-unitor normalization.
 -/
 
@@ -42,7 +42,7 @@ attribute [local instance 2000] WeilConjectures.sfAbBijective
 /-- The actual ell-power quotient is finite. This proof-valued instance is obtained
 from the recorded cofinality and finite uniformizer-power quotients by the surjective
 quotient map; it makes no new coefficient construction or choice of ring.
-Source: blueprint, finite ring A_n (blueprint: sk-def-sp-normalized-towers). -/
+Source: blueprint, finite ring A_n (blueprint: prose-09-21). -/
 instance spEllQuotientFinite (n : ℕ) :
     Finite (Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1)) :=
   let h := (sp_coefficient_ideals_cofinal l E).2 (n + 1)
@@ -58,7 +58,7 @@ instance spEllQuotientFinite (n : ℕ) :
 
 /-- Finite-level Dctf: bounded cohomology, constructible in every degree, and finite
 Tor amplitude. Bounds here may depend on the object.
-Source: blueprint, finite-level convention (blueprint: sk-def-sp-normalized-towers). -/
+Source: blueprint, finite-level convention (blueprint: prose-09-21). -/
 def spFiniteConstructibleTor (A : Type u) [CommRing A] [Finite A] :
     ObjectProperty (Scheme.proEtaleDerivedCategory T A) :=
   fun K ↦
@@ -73,19 +73,19 @@ def spFiniteConstructibleTor (A : Type u) [CommRing A] [Finite A] :
     Scheme.HasFiniteProEtaleTorAmplitude T A K
 
 /-- The full finite-level subcategory, with precisely the ambient derived morphisms.
-Source: blueprint, finite-level convention (blueprint: sk-def-sp-normalized-towers). -/
+Source: blueprint, finite-level convention (blueprint: prose-09-21). -/
 abbrev spFiniteConstructibleTorCategory (A : Type u) [CommRing A] [Finite A] :=
   (spFiniteConstructibleTor T A).FullSubcategory
 
 /-- The ordinary derived category of the recorded abelian category of coefficient
 towers, using the localization supplied by D. There is no normalization condition here.
-Source: blueprint, ambient category (blueprint: sk-def-sp-normalized-towers). -/
+Source: blueprint, ambient category (blueprint: prose-09-21). -/
 abbrev spDerivedCoefficientTowers (D : SpCoefficientTowersAbelian l E T) :=
   @DerivedCategory (spCoefficientTowers l E T) _ _ D.hasDerived
 
 /-- Exact level evaluation on the ordinary derived tower category; n means n+1.
 Source: blueprint, levels C_n; coefficient-tower lemma clause (2)
-(blueprint: sk-def-sp-normalized-towers). -/
+(blueprint: prose-09-21). -/
 def spDerivedCoefficientEvaluation (D : SpCoefficientTowersAbelian l E T) (n : ℕ) :
     spDerivedCoefficientTowers l E T D ⥤
       Scheme.proEtaleDerivedCategory T
@@ -104,7 +104,7 @@ def spDerivedCoefficientEvaluation (D : SpCoefficientTowersAbelian l E T) (n : �
 
 /-- Constructible finite-Tor towers with one common cohomological interval and one
 common Tor interval, independently chosen and uniform over all positive levels.
-Source: blueprint, first paragraph (blueprint: sk-def-sp-normalized-towers). -/
+Source: blueprint, first paragraph (blueprint: prose-09-21). -/
 def spConstructibleTorTowers (D : SpCoefficientTowersAbelian l E T) :
     ObjectProperty (spDerivedCoefficientTowers l E T D) :=
   fun C ↦
@@ -123,19 +123,19 @@ def spConstructibleTorTowers (D : SpCoefficientTowersAbelian l E T) :
         ((spDerivedCoefficientEvaluation l E T D n).obj C) c d
 
 /-- Dctf(T,O_E/ell^bullet), with all ambient derived morphisms.
-Source: blueprint, first paragraph (blueprint: sk-def-sp-normalized-towers). -/
+Source: blueprint, first paragraph (blueprint: prose-09-21). -/
 abbrev spConstructibleTorTowerCategory (D : SpCoefficientTowersAbelian l E T) :=
   (spConstructibleTorTowers l E T D).FullSubcategory
 
 /-- Normalization tests the specified canonical reduction for every m <= n.
 Equal indices are included, where the recorded reduction is the tensor unitor.
-Source: blueprint, second paragraph (blueprint: sk-def-sp-normalized-towers). -/
+Source: blueprint, second paragraph (blueprint: prose-09-21). -/
 def IsSpNormalizedTower (D : SpCoefficientTowersAbelian l E T)
     (C : spDerivedCoefficientTowers l E T D) : Prop :=
   ∀ (m n : ℕ) (h : m ≤ n), IsIso ((D.reduction h).app C)
 
 /-- The predicate for the normalized constructible finite-Tor full subcategory.
-Source: blueprint, final sentence (blueprint: sk-def-sp-normalized-towers). -/
+Source: blueprint, final sentence (blueprint: prose-09-21). -/
 def spNormalizedConstructibleTorTowers (D : SpCoefficientTowersAbelian l E T) :
     ObjectProperty (spDerivedCoefficientTowers l E T D) :=
   fun C ↦ spConstructibleTorTowers l E T D C ∧ IsSpNormalizedTower l E T D C

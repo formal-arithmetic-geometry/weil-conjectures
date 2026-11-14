@@ -46,7 +46,8 @@ Proof:
    `def-sc-topological-abelian-cohomology` makes `H¹(X, O_Xˣ) → H¹(X, i_* O_Zˣ)` surjective.
 3. Apply `lem-sc-cohomology-closed-immersion-pushforward` with degree one and `O_Zˣ` to
    identify the target with `H¹(Z, O_Zˣ)`.
-4. Apply `thm-sc-hilbert-90` to `X` and `Z` to identify these groups with their Picard groups.
+4. Apply `lemma-cohomology-multiplicative-group--3` to `X` and `Z` to identify these groups with
+their Picard groups.
    By `lem-sc-picard-h1-restriction-compatibility`, this map is pullback of invertible modules.
    Surjectivity therefore gives an invertible `L` with `i* L ≅ N` for every invertible `N`.
 -/

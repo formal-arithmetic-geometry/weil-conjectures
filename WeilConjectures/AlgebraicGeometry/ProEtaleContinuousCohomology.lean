@@ -14,9 +14,9 @@ public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
 /-!
 # Continuous pro-étale cohomology
 
-Source: Weil conjectures blueprint, latest, sec-proetale-coefficients,
-`sk-prop-pe-continuous-cohomology`; Stacks Project, Tags 0CQD and 07KY.
-(blueprint: sk-prop-pe-continuous-cohomology).
+Source: Weil conjectures blueprint, latest, chap-The-pro-etale-site,
+`proposition-continuous-cohomology-pro-etale-cohomology`; Stacks Project, Tags 0CQD and 07KY.
+(blueprint: proposition-continuous-cohomology-pro-etale-cohomology).
 
 The `milnorTowerCokernel` in the statement is the canonical cokernel model for
 `lim^1` of a tower of abelian groups.  The derived-limit predicate in the
@@ -60,7 +60,8 @@ noncomputable abbrev continuousCohomologySections (X : Scheme.{t}) :
 /-- Derived global sections `RΓ(X, -)` on the small pro-étale site, applied to an abelian
 sheaf placed in degree zero: the right derived functor of `continuousCohomologySections`
 composed with the single-degree embedding.
-Source: blueprint `sk-prop-pe-continuous-cohomology` (auxiliary; not a blueprint node). -/
+Source: blueprint `proposition-continuous-cohomology-pro-etale-cohomology` (auxiliary; not a
+blueprint node). -/
 noncomputable abbrev continuousCohomologyGlobalSections (X : Scheme.{t})
     [HasDerivedCategory.{w} (continuousCohomologyAbelianSheaves X)]
     [HasDerivedCategory.{w'} AddCommGrpCat.{t + 1}] :
@@ -84,7 +85,7 @@ Proof (source: blueprint `sk-prop-pe-continuous-cohomology.proof.md`):
 The sentence that the first term can be nonzero records that epimorphic sheaf
 transitions do not imply surjectivity on cohomology and imposes no extra
 hypothesis.
-(blueprint: sk-prop-pe-continuous-cohomology).
+(blueprint: proposition-continuous-cohomology-pro-etale-cohomology).
 -/
 theorem continuousCohomology
     (X : Scheme.{t})

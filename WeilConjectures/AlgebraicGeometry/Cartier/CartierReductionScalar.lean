@@ -41,7 +41,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- Reduction of the integral pole boundary commutes with an arbitrary finite
 coefficient homomorphism, including a nonflat one.
 Source: blueprint sk-lem-geo-cartier.proof.md, paragraph 4, finite coefficient extension;
-(blueprint: lem-sfb-cartier-reduction-scalar).
+(blueprint: lemma-cycle-class-cartier-divisor--2).
 Proof: the supported constant has integral stalk Z on D and zero off D. Its derived
 extension to A is therefore the supported A-constant, with unit sending one to one.
 The roots line is locally free of rank one over Z/n, so its further derived extension

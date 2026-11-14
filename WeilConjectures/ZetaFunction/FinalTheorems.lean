@@ -16,10 +16,11 @@ public import WeilConjectures.ZetaLinearAlgebra.WeilNumbers
 # The Weil conjectures for a smooth proper variety: the five assembled theorems
 
 This file states the five Weil conjectures for a variety over the finite field `k₀ = 𝔽_q` in the
-form of the blueprint (subsections `det-thm-weil1` to `thm-weil-final-functional-equation`, nodes
-`thm-weil-final-rationality`, `thm-weil-final-integrality`, `thm-weil-final-rh`,
-`thm-weil-final-betti`, `thm-weil-final-functional-equation`), and the Riemann hypothesis in
-its arithmetic form (`thm-weil-final-rh`, `prop-arithmetic-roots`).
+form of the blueprint (subsections `corollary-point-counting-zeta-function--7` to
+`theorem-weil-conjectures-smooth-proper-schemes`, nodes `corollary-point-counting-zeta-function--7`,
+`theorem-weil-conjectures-smooth-proper-schemes`, `theorem-weil-conjectures-smooth-proper-schemes`),
+and the Riemann hypothesis in its arithmetic form
+(`theorem-weil-conjectures-smooth-proper-schemes`).
 
 The inputs are the trace formula, Poincaré duality and the weight estimate; their output is
 `AlgebraicGeometry.Scheme.exists_isWeilFactorization_of_smoothProper`. The coefficients of the
@@ -31,7 +32,7 @@ integral factors (blueprint remarks `sk-the-five-assembled-theorems--remark-1`,
 `sk-rationality-the-criterion-and-the-descent--remark-1`: the trace-to-determinant identity is
 produced by one chosen `ℓ` and only exhibits `Z ∈ ℚ_ℓ(T)`; rationality over `ℚ` uses only that the
 coefficients are integers, while the independence of `ℓ` of the factors is the separate
-statement `prop-integral-recovery`).
+statement `lemma-reciprocal-roots-zeta`).
 
 As the blueprint remarks `audit-what-is-elementary-in-this-layer-and-what-is-not--remark-1` and
 `sk-audit-what-is-elementary-in-this-layer-and-what-is-not--remark-1` record, this layer is
@@ -43,13 +44,16 @@ integrality of the factors (`AlgebraicGeometry.Scheme.realization_independence`)
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.Hom.constantCoeff_zetaSeries_and_X_mul_derivative`: `det-def-zeta`.
-- `AlgebraicGeometry.Scheme.Hom.euler_product`: `det-prop-euler`, `prop-euler-product`.
-- `AlgebraicGeometry.Scheme.Hom.weil_rationality`: `det-thm-weil1`, `thm-weil-final-rationality`.
-- `AlgebraicGeometry.Scheme.weil_integral_factors`: `thm-weil-final-integrality`.
-- `AlgebraicGeometry.Scheme.riemann_hypothesis`: `thm-weil-final-rh`, `prop-arithmetic-roots`.
-- `AlgebraicGeometry.Scheme.weil_betti`: `thm-weil-final-betti`.
-- `AlgebraicGeometry.Scheme.weil_functional_equation`: `thm-weil-final-functional-equation`.
+- `AlgebraicGeometry.Scheme.Hom.constantCoeff_zetaSeries_and_X_mul_derivative`:
+`corollary-point-counting-zeta-function--3`.
+- `AlgebraicGeometry.Scheme.Hom.euler_product`: `corollary-point-counting-zeta-function--4`.
+- `AlgebraicGeometry.Scheme.Hom.weil_rationality`: `corollary-point-counting-zeta-function--7`.
+- `AlgebraicGeometry.Scheme.weil_integral_factors`:
+`theorem-weil-conjectures-smooth-proper-schemes`.
+- `AlgebraicGeometry.Scheme.riemann_hypothesis`: `theorem-weil-conjectures-smooth-proper-schemes`.
+- `AlgebraicGeometry.Scheme.weil_betti`: `theorem-weil-conjectures-smooth-proper-schemes`.
+- `AlgebraicGeometry.Scheme.weil_functional_equation`:
+`theorem-weil-conjectures-smooth-proper-schemes`.
 -/
 
 @[expose] public section
@@ -62,11 +66,11 @@ namespace AlgebraicGeometry
 
 namespace Scheme
 
-/-- Blueprint `det-def-zeta` (the point-count zeta series): for a scheme `X₀` over a field `k`,
-the zeta series `Z(X₀, T) = exp(∑_{n ≥ 1} Nₙ Tⁿ / n)` (`AlgebraicGeometry.Scheme.Hom.zetaSeries`,
-with `Nₙ = #X₀(𝔽_{qⁿ})` the point counts `AlgebraicGeometry.Scheme.Hom.pointCount`) lies in
-`1 + T ℚ⟦T⟧`, and the point counts are recovered from it by the logarithmic derivative
-`T Z' = (∑_{n ≥ 1} Nₙ Tⁿ) Z`. -/
+/-- Blueprint `corollary-point-counting-zeta-function--3` (the point-count zeta series): for a
+scheme `X₀` over a field `k`, the zeta series `Z(X₀, T) = exp(∑_{n ≥ 1} Nₙ Tⁿ / n)`
+(`AlgebraicGeometry.Scheme.Hom.zetaSeries`, with `Nₙ = #X₀(𝔽_{qⁿ})` the point counts
+`AlgebraicGeometry.Scheme.Hom.pointCount`) lies in `1 + T ℚ⟦T⟧`, and the point counts are recovered
+from it by the logarithmic derivative `T Z' = (∑_{n ≥ 1} Nₙ Tⁿ) Z`. -/
 theorem Hom.constantCoeff_zetaSeries_and_X_mul_derivative {k : Type u} [Field k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) :
     PowerSeries.constantCoeff f.zetaSeries = 1 ∧
@@ -75,9 +79,10 @@ theorem Hom.constantCoeff_zetaSeries_and_X_mul_derivative {k : Type u} [Field k]
   ⟨f.constantCoeff_zetaSeries, f.X_mul_derivative_zetaSeries⟩
 
 open scoped PowerSeries.WithPiTopology in
-/-- Blueprint `det-prop-euler` and `prop-euler-product` (closed-point Euler product and
-integrality): for a scheme `Y₀` of finite type over a finite field `k`, with `c_r` the number of
-closed points of degree `r`,
+/-- Blueprint `corollary-point-counting-zeta-function--4` and
+`corollary-point-counting-zeta-function--4` (closed-point Euler product and integrality): for a
+scheme `Y₀` of finite type over a finite field `k`, with `c_r` the number of closed points of degree
+`r`,
 
 * only finitely many closed points have degree at most `m`, for every `m`; in particular every
   `c_r` is finite;
@@ -121,8 +126,9 @@ theorem Hom.euler_product {k : Type u} [Field k] [Finite k] {X : Scheme.{u}}
     smul_eq_mul, mul_comm]
 
 open scoped PowerSeries.WithPiTopology in
-/-- Blueprint `det-thm-weil1` and `thm-weil-final-rationality` (Weil conjectures I: rationality
-and Euler product): for a scheme `X₀` of finite type over a finite field `k`,
+/-- Blueprint `corollary-point-counting-zeta-function--7` and
+`corollary-point-counting-zeta-function--7` (Weil conjectures I: rationality and Euler product): for
+a scheme `X₀` of finite type over a finite field `k`,
 
 * there are `A, B ∈ ℤ[T]` with `B(0) = 1` and `B(T) Z(X₀, T) = A(T)` in `ℚ⟦T⟧`;
 * `Z(X₀, T) ∈ 1 + T ℤ⟦T⟧`;
@@ -146,7 +152,7 @@ variable (k₀) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] (d : ℕ)
   [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
   [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `thm-weil-final-integrality` (Weil conjectures II: integral
+/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes` (Weil conjectures II: integral
 Frobenius factors): for `X₀` smooth, proper and geometrically connected of pure dimension `d`,
 for every `0 ≤ i ≤ 2d` there is a unique `Pᵢ ∈ ℤ[T]` with `Pᵢ(0) = 1` and
 `Pᵢ^{(ℓ)} = det(1 - T F | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))` for every prime `ℓ ≠ p`, and these satisfy
@@ -161,7 +167,7 @@ theorem weil_integral_factors :
   exact ⟨P, fun i ↦ ⟨hfact.coeff_zero_eq_one i, hP i⟩, fun i Q _ hQ ↦ hQ.unique k₀ X (hP i),
     hfact⟩
 
-/-- Blueprint `thm-weil-final-rh`, `prop-arithmetic-roots`
+/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes`
 (the Riemann hypothesis): for `X₀` smooth, proper and geometrically connected of pure
 dimension `d` and an integral Frobenius factor `P` in degree `i ≤ 2d`:
 
@@ -213,7 +219,7 @@ theorem riemann_hypothesis {i : ℕ} (hi : i ≤ 2 * d) {P : Polynomial ℤ}
         (LinearEquiv.isUnit_det' ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobenius)).1] at hα
     exact (Module.End.hasEigenvalue_iff_isRoot_charpoly _ _).2 (Polynomial.isRoot_of_mem_roots hα)
 
-/-- Blueprint `thm-weil-final-betti` (Weil conjectures IV: Betti
+/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes` (Weil conjectures IV: Betti
 symmetry): the integral Frobenius factors `Pᵢ` of `X₀` have degrees
 `bᵢ = dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for every `ℓ ≠ p`, `bᵢ = b_{2d-i}`, `b₀ = b_{2d} = 1`,
 `P₀ = 1 - T`, `P_{2d} = 1 - qᵈ T`, and the rational function
@@ -244,7 +250,7 @@ theorem weil_betti :
   obtain ⟨h1, h2, h3, h4, h5, h6, h7, h8⟩ := betti_symmetry k₀ X d hP
   exact ⟨P, hP, hfact, h1, h2, h3, h4, h5, h6, h7, h8⟩
 
-/-- Blueprint `thm-weil-final-functional-equation` (Weil conjectures V:
+/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes` (Weil conjectures V:
 functional equation): for the integral Frobenius factors `Pᵢ` of `X₀`, with
 `χ = ∑ᵢ (-1)ⁱ deg Pᵢ` and the determinant constants `Dᵢ = (-1)^{bᵢ} [T^{bᵢ}] Pᵢ`, the factors
 satisfy the degreewise reciprocity `P_{2d-i}(q^{-d} t⁻¹) = (-1)^{bᵢ} t^{-bᵢ} Dᵢ⁻¹ Pᵢ(t)` at every

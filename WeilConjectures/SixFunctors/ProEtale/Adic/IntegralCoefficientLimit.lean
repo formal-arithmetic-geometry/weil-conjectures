@@ -17,7 +17,7 @@ Let `X` be a scheme and `ℓ` a prime. On the small pro-étale site of `X`, the 
 `ℤ_ℓ,X = C(-, ℤ_ℓ)` (`AlgebraicGeometry.ProEtale.padicIntSheaf`) is the limit of the sheaves of
 rings `(ℤ/ℓⁿ)_X = C(-, ℤ/ℓⁿ)` of locally constant functions, along the reductions
 (`AlgebraicGeometry.ProEtale.isLimitPadicIntSheafCone`). This is
-`det-prop-sfb-qlbar-colimit-x-integral-limit` (3) for `E = ℚ_ℓ`; the limit is computed
+`lemma-comparison-completed-coefficients--1` (3) for `E = ℚ_ℓ`; the limit is computed
 sectionwise, where it is `C(U, ℤ_ℓ) = lim_n C(U, ℤ/ℓⁿ)`
 (`PadicInt.continuousMapRingEquivCompatibleLocallyConstant`).
 
@@ -98,7 +98,7 @@ lemma nonempty_isLimit_mapCone_padicIntSheafCone (U : X.ProEtᵒᵖ) :
       (PadicInt.compatibleLocallyConstantEval t a) n).symm
 
 /-- **`ℤ_ℓ,X = lim_n (ℤ/ℓⁿ)_X`** as sheaves of rings on `X_proét`
-(`det-prop-sfb-qlbar-colimit-x-integral-limit` (3), for `E = ℚ_ℓ`): the limit is computed
+(`lemma-comparison-completed-coefficients--1` (3), for `E = ℚ_ℓ`): the limit is computed
 sectionwise, where it is `C(U, ℤ_ℓ) = lim_n C(U, ℤ/ℓⁿ)`. -/
 noncomputable def isLimitPadicIntSheafCone : IsLimit (padicIntSheafCone X l) := by
   have : ReflectsLimitsOfSize.{0, 0} (forget RingCat.{u + 1}) :=

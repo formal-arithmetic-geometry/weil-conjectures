@@ -50,7 +50,7 @@ set_option linter.privateModule false
 
 /-! # Scalar-compatible open base change for condensed coefficients
 
-Source: blueprint main-20261015, det-sf-open-closed-sequence-ring-sheaf, proof (4),
+Source: blueprint main-20261015, proposition-extension-zero-restriction-closed-subscheme, proof (4),
 and sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-comp; exact localization uses
 Stacks Project, Tag 04VG, lemma-properties-left-localization.
 (blueprint: lem-sfb-condensed-open-square-scalar-comparison)

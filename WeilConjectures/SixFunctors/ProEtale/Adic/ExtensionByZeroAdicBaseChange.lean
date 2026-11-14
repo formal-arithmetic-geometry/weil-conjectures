@@ -26,7 +26,7 @@ This is the compactly supported counterpart of
 extension by zero is a left adjoint, so `j_! ℚ̄_ℓ,U` is the filtered colimit of the sheaves
 `j_! C(-, Λ)` over the compact lattices `Λ` of `ℚ̄_ℓ`, and `j_!` commutes with the decomposition
 of `C(-, Λ)` along a basis of `Λ`. It feeds the `ℚ̄_ℓ` stage of the compactly supported case
-of blueprint `thm-pod-degreewise-perfectness-over-a-field`.
+of blueprint `corollary-degreewise-duality-over-fields--1`.
 -/
 
 @[expose] public section
@@ -128,7 +128,7 @@ end Decomposition
 one.** For an open immersion `j : U ⟶ T` into a quasi-compact quasi-separated scheme, the map
 `ι : Hⁿ(T, j_! ℤ_ℓ) ⟶ Hⁿ(T, j_! ℚ̄_ℓ)` induced by `C(-, ℤ_ℓ) ⊆ ℚ̄_ℓ,U` identifies
 `Hⁿ(T, j_! ℚ̄_ℓ)` with `ℚ̄_ℓ ⊗_{ℤ_ℓ} Hⁿ(T, j_! ℤ_ℓ)`. This is the `ℚ̄_ℓ` stage of the compactly
-supported case of blueprint `thm-pod-degreewise-perfectness-over-a-field`. -/
+supported case of blueprint `corollary-degreewise-duality-over-fields--1`. -/
 theorem isBaseChange_integralToCompactAdicConstantH [CompactSpace T] [QuasiSeparatedSpace T]
     (n : ℕ) : IsBaseChange (PadicAlgCl l) (integralToCompactAdicConstantH l j n) := by
   classical

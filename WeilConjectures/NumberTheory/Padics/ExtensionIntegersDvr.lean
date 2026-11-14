@@ -14,9 +14,9 @@ import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUniq
 /-!
 # The ring of integers of a finite extension of the p-adic numbers
 
-Source: Weil conjectures blueprint, `sec-nagata-compactification`,
-`sk-prop-nagata-sketch-comp-category`, `def-weil-finite-field-fiber`, order 411;
-Serre, Local Fields, Chapter II, §2, Proposition 3 and Chapter I, §1, Proposition 1
+Source: Weil conjectures blueprint, `chap-Nagata-compactification-and-Chows-lemma`,
+`proposition-dense-compactifications-form-cofiltered-category`, `def-weil-finite-field-fiber`, order
+411; Serre, Local Fields, Chapter II, §2, Proposition 3 and Chapter I, §1, Proposition 1
 (auxiliary; not a blueprint node).
 -/
 

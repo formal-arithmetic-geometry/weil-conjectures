@@ -36,8 +36,10 @@ It does on complexes with cohomology sheaves of étale origin, when `p` is prope
   (`AlgebraicGeometry.ProEtale.isIso_sigmaComparison_rightDerivedLowerStar_of_etaleOriginHomology`,
   by `DerivedCategory.isIso_sigmaComparison_of_bounded`).
 
-This is the finite-coefficient direct-sum statement of blueprint `sk-prop-ctf-finite-proper`
-(`det-ctf-finite-proper-localizing`), in the form used by `det-sf-comp-coherence-single`.
+This is the finite-coefficient direct-sum statement of blueprint
+`proposition-proper-direct-image-finite-coefficients`
+(`corollary-proper-direct-image-finite-coefficients-localizing`), in the form used by
+`proposition-construction-independence-rf-shriek`.
 -/
 
 @[expose] public section

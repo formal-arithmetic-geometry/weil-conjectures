@@ -19,9 +19,10 @@ import WeilConjectures.CategoryTheory.TruncationCanonicalAbutment
 /-!
 # The truncation hypercohomology spectral sequence
 
-Source: Weil conjectures blueprint, sec-proper-base-change, sk-thm-properbasechange,
-node thm-sp-truncation-e2, order 1212; Stacks Project, Tags 015J, 05TC, 011Q,
-011R, 011T, 0BDU, 0BDV and 012U (blueprint: thm-sp-truncation-e2).
+Source: Weil conjectures blueprint, chap-Proper-base-change,
+theorem-proper-base-change-classical-pro, node lemma-uniform-bound-proper-direct-image--1, order
+1212; Stacks Project, Tags 015J, 05TC, 011Q, 011R, 011T, 0BDU, 0BDV and 012U (blueprint:
+lemma-uniform-bound-proper-direct-image--1).
 
 The integer `a` is a cohomological lower bound, not a bound on the terms of `K`.
 The natural index of `pageCouple` and of the cycle/boundary tower is the page minus two.
@@ -51,8 +52,8 @@ private noncomputable def singleComparison
 /-- The six assertions of the truncation hypercohomology theorem, including the
 canonical maps to the abutment, the natural second-page comparison, and the map
 on graded pieces induced by the iterated couple.
-Source: blueprint thm-sp-truncation-e2, order 1212; Stacks Tags 015J, 05TC,
-011Q, 011R, 011T, 0BDU, 0BDV, 012U (blueprint: thm-sp-truncation-e2).
+Source: blueprint lemma-uniform-bound-proper-direct-image--1, order 1212; Stacks Tags 015J, 05TC,
+011Q, 011R, 011T, 0BDU, 0BDV, 012U (blueprint: lemma-uniform-bound-proper-direct-image--1).
 
 Proof, following the seven steps of the node:
 1. `lem-sp-truncation-couple-exact` gives exactness of the three structure maps

@@ -43,12 +43,12 @@ points, which is what makes the residue degree `e_s` meaningful.
 
 ## Main definitions
 
-- `AlgebraicGeometry.BoundaryDatum` : the boundary extension datum of `d-real-boundary`.
+- `AlgebraicGeometry.BoundaryDatum` : the boundary extension datum of `lemma-boundary-stalk--1`.
 - `AlgebraicGeometry.BoundaryDatum.boundaryStalk` : the boundary stalk `V^{I_s}`.
 - `AlgebraicGeometry.BoundaryDatum.boundaryFrobenius` : the residue Frobenius acting on it.
 - `AlgebraicGeometry.BoundaryDatum.conj` : the boundary datum for another choice of path, and
   `AlgebraicGeometry.BoundaryDatum.boundaryStalkConjEquiv` : the Frobenius-equivariant
-  identification of the boundary stalks (`d-real-boundary`).
+  identification of the boundary stalks (`lemma-boundary-stalk--1`).
 - `AlgebraicGeometry.Etale.middleExtension` : the middle extension `j_* ℱ`.
 
 ## Main statements
@@ -68,7 +68,7 @@ are determined near one point (`WeilConjectures.ConstructibleSheaf.DenseOpenUnit
 `WeilConjectures.ConstructibleSheaf.LowerStarOpenStalk`). An arbitrary curve is reduced to this
 case through the finite cover by the normalizations of its irreducible components
 (`WeilConjectures.ConstructibleSheaf.LowerStarOpenStalkFinite`). The identification
-`lem-wf-boundary-stalk-invariants` of the boundary stalk of a lisse Weil sheaf with the inertia
+`lemma-boundary-stalk--1` of the boundary stalk of a lisse Weil sheaf with the inertia
 invariants `V^{I_s}` is
 `WeilGroup.exists_equivalence_isLisse_stalk_directImage_boundaryStalk_eq_invariants`.
 -/
@@ -86,7 +86,7 @@ open Scheme Etale
 variable {K : Type u} [Field K] [Finite K] {C U : Scheme.{u}}
   {p : C ⟶ Spec (.of K)} [IsCurve p] {pU : U ⟶ Spec (.of K)} [IsCurve pU]
 
-/-- Blueprint `d-real-boundary`: Boundary extension and inertia.
+/-- Blueprint `lemma-boundary-stalk--1`: Boundary extension and inertia.
 
 A *boundary datum* for a nonempty open `j : U₀ ↪ C₀` of a curve: a restriction
 `AlgebraicGeometry.WeilGroup.Restriction` of Weil groups along `j`, the finiteness of the
@@ -159,7 +159,7 @@ lemma _root_.Subgroup.normalClosure_image_conj {G : Type*} [Group G] (S : Set G)
       (Subgroup.subset_normalClosure ⟨x, hx, rfl⟩) w⁻¹
     simpa [MulAut.conj_apply, mul_assoc] using this
 
-/-- Blueprint `d-real-boundary`: Boundary extension and inertia, change of path.
+/-- Blueprint `lemma-boundary-stalk--1`: Boundary extension and inertia, change of path.
 
 Another choice of path from the geometric point over `Spec K_s` to the base point changes the
 decomposition-group homomorphism `Gal(K̄_s / K_s) → π₁(U₀)` by conjugation. For conjugation by an
@@ -204,7 +204,7 @@ def conj (w : WU.carrier) : BoundaryDatum j WU WC where
 variable (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
   [FiniteDimensional (PadicAlgCl l) V]
 
-/-- Blueprint `d-real-boundary`: Boundary extension and inertia.
+/-- Blueprint `lemma-boundary-stalk--1`: Boundary extension and inertia.
 
 The boundary stalk of `J = j_* ℱ` at a geometric point over a boundary point `s`: the inertia
 invariants `V^{I_s}` of the local generic stalk `V`. The residue Frobenius lift
@@ -228,7 +228,7 @@ theorem residueFrobenius_mem_boundaryStalk (ρ : Representation (PadicAlgCl l) W
   rw [← Module.End.mul_apply, ← map_mul, inv_mul_cancel_right, map_mul, Module.End.mul_apply]
   exact congrArg _ (hv ⟨h, hh⟩)
 
-/-- Blueprint `d-real-boundary`: Boundary extension and inertia.
+/-- Blueprint `lemma-boundary-stalk--1`: Boundary extension and inertia.
 
 The residue Frobenius `F_s` acting on the boundary stalk `V ^ (I_s)`, the Frobenius of the stalk
 of `j_* ℱ` at a geometric point over the boundary point `s`. -/
@@ -249,8 +249,8 @@ theorem apply_eq_boundaryFrobenius (ρ : Representation (PadicAlgCl l) WU.carrie
     _ = D.boundaryFrobenius l ρ s v := by rw [hv]; rfl
 
 omit [FiniteDimensional (PadicAlgCl l) V] in
-/-- Blueprint `d-real-boundary`: the boundary stalk is independent of the path. Conjugating the
-boundary datum by `w ∈ W(U₀)` (`AlgebraicGeometry.BoundaryDatum.conj`) moves the inertia
+/-- Blueprint `lemma-boundary-stalk--1`: the boundary stalk is independent of the path. Conjugating
+the boundary datum by `w ∈ W(U₀)` (`AlgebraicGeometry.BoundaryDatum.conj`) moves the inertia
 invariants `V ^ (I_s)` by `ρ w`. -/
 theorem boundaryStalk_conj (ρ : Representation (PadicAlgCl l) WU.carrier V) (w : WU.carrier)
     (s : ↥((Set.range j.base)ᶜ)) :
@@ -274,9 +274,9 @@ theorem boundaryStalk_conj (ρ : Representation (PadicAlgCl l) WU.carrier V) (w 
     rw [← Module.End.mul_apply, ← map_mul, inv_mul_cancel_right, map_mul, Module.End.mul_apply,
       hu ⟨h, hh⟩]
 
-/-- Blueprint `d-real-boundary`: the boundary stalk with its residue Frobenius is independent of
-the path up to Frobenius-equivariant isomorphism. The map `ρ w` identifies the boundary stalk
-`V ^ (I_s)` with that of the boundary datum conjugated by `w ∈ W(U₀)`. -/
+/-- Blueprint `lemma-boundary-stalk--1`: the boundary stalk with its residue Frobenius is
+independent of the path up to Frobenius-equivariant isomorphism. The map `ρ w` identifies the
+boundary stalk `V ^ (I_s)` with that of the boundary datum conjugated by `w ∈ W(U₀)`. -/
 noncomputable def boundaryStalkConjEquiv (ρ : Representation (PadicAlgCl l) WU.carrier V)
     (w : WU.carrier) (s : ↥((Set.range j.base)ᶜ)) :
     D.boundaryStalk l ρ s ≃ₗ[PadicAlgCl l] (D.conj w).boundaryStalk l ρ s :=
@@ -319,7 +319,7 @@ end BoundaryDatum
 
 namespace Etale
 
-/-- Blueprint `def-wf-middle-extension`: Middle extension on a curve.
+/-- Blueprint `definition-middle-extension`: Middle extension on a curve.
 
 The *sheaf-theoretic middle extension* of a sheaf `ℱ` on `U₀` along an open immersion
 `j : U₀ ↪ C₀` is the ordinary (underived) direct image `j_* ℱ`; the derived direct image
@@ -342,7 +342,7 @@ omit [Finite K] in
 middle extension `j_* ℱ` to the point `Spec k(s)` is finite locally constant.
 
 This is an auxiliary finiteness input, weaker than the blueprint lemma
-`lem-wf-boundary-stalk-invariants`, which identifies the stalk of `j_* ℱ` at a geometric point
+`lemma-boundary-stalk--1`, which identifies the stalk of `j_* ℱ` at a geometric point
 `s̄` over `s`, Frobenius-equivariantly, with the inertia invariants `ℱ_η̄ ^ I_s`. That
 identification implies this statement, since a sheaf on `Spec k(s)` is the continuous Galois
 module of its geometric stalk, and `ℱ_η̄ ^ I_s` is finite. For a smooth curve this is
@@ -381,10 +381,10 @@ omit [Finite K] in
 sheaf of `Λ`-modules on `U₀` and `s` a point of `C₀`. Then the restriction of the middle
 extension `j_* ℱ` to the point `Spec k(s)` is finite locally constant.
 
-This is the finiteness part of the blueprint lemma `lem-wf-boundary-stalk-invariants` (step 1 of
-the proof of `sk-i-real-boundary`) for a smooth curve: the geometric stalks of `j_* ℱ` are finite
-(`AlgebraicGeometry.Etale.finite_sheafFiber_lowerStar`), since a germ of `j_* ℱ` is a section of
-`ℱ` over the punctured part `V ×_{C₀} U₀` of an irreducible étale neighbourhood `V`, which is
+This is the finiteness part of the blueprint lemma `lemma-boundary-stalk--1` (step 1 of
+the proof of `lemma-boundary-stalk--2`) for a smooth curve: the geometric stalks of `j_* ℱ` are
+finite (`AlgebraicGeometry.Etale.finite_sheafFiber_lowerStar`), since a germ of `j_* ℱ` is a section
+of `ℱ` over the punctured part `V ×_{C₀} U₀` of an irreducible étale neighbourhood `V`, which is
 irreducible, and such sections inject into a stalk of `ℱ`. A sheaf on the one-point scheme
 `Spec k(s)` with finite stalks is finite locally constant
 (`AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_of_subsingleton`). -/
@@ -439,8 +439,8 @@ private theorem isConstructibleSheaf_lowerStar_of_upperStar (p : C ⟶ Spec (.of
     exact h _ (hcl _ hx) hx
 
 omit [Finite K] in
-/-- Blueprint `sk-i-real-boundary`: Boundary stalks and restriction to an open.
-Also `lem-wf-dense-open-pi1-surjective`, part (5).
+/-- Blueprint `lemma-boundary-stalk--2`: Boundary stalks and restriction to an open.
+Also `theorem-purity-real-sheaves-curves`, part (5).
 
 The direct image `j_* ℱ` of a finite locally constant sheaf along an open immersion into a
 curve `C₀` with finite complement is constructible. The complement consists of closed points,
@@ -457,7 +457,7 @@ theorem isConstructibleSheaf_lowerStar (p : C ⟶ Spec (.of K)) [IsCurve p]
     isFiniteLocallyConstantSheaf_upperStar_middleExtension p F s hs hsj
 
 omit [Finite K] in
-/-- Blueprint `sk-i-real-boundary` for a smooth curve: the direct image `j_* ℱ` of a finite
+/-- Blueprint `lemma-boundary-stalk--2` for a smooth curve: the direct image `j_* ℱ` of a finite
 locally constant sheaf along an open immersion into a smooth curve `C₀` with finite complement
 is constructible. This is `AlgebraicGeometry.Scheme.isConstructibleSheaf_lowerStar`, with the
 boundary input proved by
@@ -471,8 +471,8 @@ theorem isConstructibleSheaf_lowerStar_of_smooth (p : C ⟶ Spec (.of K)) [IsCur
     isFiniteLocallyConstantSheaf_upperStar_middleExtension_of_smooth p F s
 
 omit [Finite K] [Finite Λ] in
-/-- Blueprint `sk-i-real-boundary`: Boundary stalks and restriction to an open.
-Also `lem-a1-lisse-middle-extension` and `lem-wf-dense-open-pi1-surjective`, part (3).
+/-- Blueprint `lemma-boundary-stalk--2`: Boundary stalks and restriction to an open.
+Also `lemma-boundary-stalk--2` and `theorem-purity-real-sheaves-curves`, part (3).
 
 A finite locally constant sheaf `𝒢` on a smooth curve `C₀` is the direct image of its
 restriction to a dense open `U₀`: the unit of the adjunction `j^* ⊣ j_*` is an isomorphism
@@ -496,7 +496,7 @@ theorem isIso_unit_upperStarLowerStarAdjunction [SmoothOfRelativeDimension 1 p]
   exact Etale.isIso_unit_upperStarLowerStarAdjunction_of_isRegular j hdense G
 
 omit [Finite K] [Finite Λ] in
-/-- Blueprint `lem-a1-lisse-middle-extension`: Recovery from a dense lisse open, at a removed
+/-- Blueprint `lemma-boundary-stalk--2`: Recovery from a dense lisse open, at a removed
 point.
 
 Let `𝒢` be a finite locally constant sheaf on a smooth curve `C₀` and `j : U₀ ↪ C₀` a dense

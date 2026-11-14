@@ -28,9 +28,9 @@ blueprint `thm:0F3W`, `def:nagata-isomorphism-near-closure`,
   `U` acquires, after a `U`-admissible blow-up, a strict transform which is an
   isomorphism over a neighbourhood of the closure of `T`.
 - `AlgebraicGeometry.isoNearClosureBlowup`: the blow-up `IsoBl_{U,T}(q)` of blueprint
-  `def-nagata-isomorphism-near-closure`, assembled from its named steps (constructible
-  separation, separation blow-up, elimination over the separated region, extension of the
-  centre, composition), and
+  `lemma-extending-isomorphism-over-closure-closed--1`, assembled from its named steps
+  (constructible separation, separation blow-up, elimination over the separated region, extension of
+  the centre, composition), and
   `AlgebraicGeometry.exists_isIso_strictTransformMap_isoNearClosureBlowup`: it does the job.
 
 It is used for the improved comparison projection of the two-open compactification
@@ -50,11 +50,12 @@ namespace AlgebraicGeometry
 
 /-! ### The isomorphism-near-closure construction
 
-The named steps of blueprint `def-nagata-isomorphism-near-closure`, in the form used by the
-formal proof. Throughout, `q : Z ⟶ X` is proper, `U` is a quasi-compact open of the qcqs
+The named steps of blueprint `lemma-extending-isomorphism-over-closure-closed--1`, in the form used
+by the formal proof. Throughout, `q : Z ⟶ X` is proper, `U` is a quasi-compact open of the qcqs
 scheme `X`, `T ⊆ U` is closed in `U`, and `q` is an isomorphism over an open neighbourhood `N`
 of `T`; `M = q.maximalIsomorphismOpen` is the maximal open over which `q` is an isomorphism
-(`def-nagata-maximal-isomorphism-open`), so `E = U \ M` is the blueprint's exceptional set. -/
+(`lemma-extending-isomorphism-over-closure-closed--1`), so `E = U \ M` is the blueprint's
+exceptional set. -/
 
 section IsoNearClosureConstruction
 
@@ -87,9 +88,9 @@ variable {X Z : Scheme.{u}} {U : X.Opens} (hU : IsCompact (U : Set X)) (q : Z �
 /-- **Step 1 of the isomorphism-near-closure construction: constructible separation data**
 `(T_c, E_c)` in `U` of the closed subsets `T` and `E = U \ M`
 (`PrespectralSpace.constructibleSeparation`, blueprint
-`def-nagata-spectral-constructible-separation`). The two pieces are closed in `U`, have
+`lemma-extending-isomorphism-over-closure-closed--1`). The two pieces are closed in `U`, have
 quasi-compact complements, contain `T` resp. `E`, and are disjoint.
-(blueprint: `def-nagata-isomorphism-near-closure`) -/
+(blueprint: `lemma-extending-isomorphism-over-closure-closed--1`) -/
 noncomputable def isoNearClosureSeparation : Set U.toScheme × Set U.toScheme :=
   haveI : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
   PrespectralSpace.constructibleSeparation hT
@@ -162,8 +163,8 @@ variable [CompactSpace X] [QuasiSeparatedSpace X]
 
 /-- **Step 2 of the isomorphism-near-closure construction: the separation blow-up**
 `X₁ = CSepBl_U(T_c, E_c)` (`constructibleSeparationBlowup`, blueprint
-`def-nagata-separate-constructible-closed`), in which the closures of the inverse images of
-`T_c` and `E_c` are disjoint. (blueprint: `def-nagata-isomorphism-near-closure`) -/
+`lemma-separation-closures--1`), in which the closures of the inverse images of
+`T_c` and `E_c` are disjoint. (blueprint: `lemma-extending-isomorphism-over-closure-closed--1`) -/
 noncomputable def isoNearClosureSeparationBlowup : IsAdmissible X U :=
   constructibleSeparationBlowup hU (isClosed_isoNearClosureSeparation_fst hU q hT hTN hN)
     (isClosed_isoNearClosureSeparation_snd hU q hT hTN hN)
@@ -318,9 +319,9 @@ lemma isIso_isoNearClosureLift_restrict :
 
 /-- **Step 5 of the isomorphism-near-closure construction: elimination over the separated
 region**: the elimination-of-indeterminacy blow-up (`eliminationBlowup`, blueprint
-`def-nagata-elimination-indeterminacy`) of the canonical lift `lam₁` over the quasi-compact
+`theorem-elimination-indeterminacy--1`) of the canonical lift `lam₁` over the quasi-compact
 open of `X₁` above `V₂`, over which `lam₁` is an isomorphism.
-(blueprint: `def-nagata-isomorphism-near-closure`) -/
+(blueprint: `lemma-extending-isomorphism-over-closure-closed--1`) -/
 noncomputable def isoNearClosureElimination :
     IsAdmissible (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup
       ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap ⁻¹ᵁ
@@ -363,7 +364,7 @@ lemma disjoint_support_comap_isoNearClosureElimination :
     (mem_isoNearClosureIsoLocus_of_mem_isoNearClosureNbhd hU q hT hTN hN _ hyA hyU) hyJ
 
 /-- The extension step (Stacks Project Tag 080M, blueprint
-`def-nagata-extended-admissible-blowup`): a finite-type ideal on `X₁` restricting on `A` to
+`lemma-products-composites-u-admissible-blow--3`): a finite-type ideal on `X₁` restricting on `A` to
 the elimination centre and avoiding the locus above `U`. -/
 theorem exists_isoNearClosureExtendedCentre :
     ∃ D : (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup.IdealSheafData,
@@ -384,8 +385,9 @@ theorem exists_isoNearClosureExtendedCentre :
 
 /-- **Step 6 of the isomorphism-near-closure construction: the extended centre** on `X₁`,
 selected from `exists_isoNearClosureExtendedCentre`: the elimination blow-up of the open `A`
-extended to an admissible blow-up of `X₁` (blueprint `def-nagata-extended-admissible-blowup`).
-(blueprint: `def-nagata-isomorphism-near-closure`) -/
+extended to an admissible blow-up of `X₁` (blueprint
+`lemma-products-composites-u-admissible-blow--3`). (blueprint:
+`lemma-extending-isomorphism-over-closure-closed--1`) -/
 noncomputable def isoNearClosureExtendedCentre :
     (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup.IdealSheafData :=
   (exists_isoNearClosureExtendedCentre hU q hT hTN hN).choose
@@ -405,7 +407,7 @@ lemma isoNearClosureExtendedCentre_spec :
 selected from the composition theorem for blow-ups with base change
 (`Scheme.IdealSheafData.exists_blowup_comp_base_change`, Stacks Project Tag 080B) applied to
 the separation centre and the extended centre on `X₁`.
-(blueprint: `def-nagata-isomorphism-near-closure`) -/
+(blueprint: `lemma-extending-isomorphism-over-closure-closed--1`) -/
 noncomputable def isoNearClosureCentre : X.IdealSheafData :=
   (Scheme.IdealSheafData.exists_blowup_comp_base_change
     (isoNearClosureSeparationBlowup hU q hT hTN hN).I
@@ -477,7 +479,7 @@ extends from `X₀`. The formalization performs the elimination over the quasi-c
 `X₁` above `V₂` and extends from the quasi-compact open `A ⊆ X₀` produced by a second
 constructible separation (step 3), since the extension of admissible blow-ups (Tag 080M) needs a
 quasi-compact open; `A` still contains the closure of the inverse image of `T`, which is all
-that is used. (blueprint: `def-nagata-isomorphism-near-closure`) -/
+that is used. (blueprint: `lemma-extending-isomorphism-over-closure-closed--1`) -/
 noncomputable def isoNearClosureBlowup : IsAdmissible X U where
   I := isoNearClosureCentre hU q hT hTN hN
   finiteType := (isoNearClosureCentre_spec hU q hT hTN hN).1
@@ -707,7 +709,7 @@ theorem exists_isIso_strictTransformMap_of_isoNearClosureData {X Z : Scheme.{u}}
       exact ⟨w, by rw [hmdef] at hw ⊢; rw [Scheme.Hom.comp_apply, hw]⟩
 
 /-- **The isomorphism-near-closure blow-up does its job** (Stacks Project Tag 0F3W;
-blueprint: `lemma-nagata-isomorphism-near-closure`): after the blow-up `IsoBl_{U,T}(q)`
+blueprint: `lemma-extending-isomorphism-over-closure-closed`): after the blow-up `IsoBl_{U,T}(q)`
 (`isoNearClosureBlowup`), the strict transform of `q` is an isomorphism over an open
 neighbourhood of the closure of the inverse image of `T`. The proof feeds the named steps of
 the construction into `exists_isIso_strictTransformMap_of_isoNearClosureData`. -/

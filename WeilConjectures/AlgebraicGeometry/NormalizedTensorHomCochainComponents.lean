@@ -283,7 +283,7 @@ Source: Stacks Project, sites-cohomology.tex, Tag 0A90 (lemma-compose).
 
 Proof: put s equal to the inverse normalized global comparison applied to c.
 The global comparison component formula identifies c's p-component with the
-morphism corresponding to s followed by the p-product projection. On the
+morphism corresponding to s followed by the lemma-identity-component projection. On the
 output side, the same formula identifies the displayed component with the
 morphism corresponding to s followed by homTensorDegreewiseMap and the
 n-product projection. Apply homTensorDegreewiseMap_spec. Its localized

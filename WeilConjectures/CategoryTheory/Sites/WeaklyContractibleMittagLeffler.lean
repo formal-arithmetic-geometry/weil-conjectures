@@ -15,7 +15,7 @@ public import WeilConjectures.CategoryTheory.Sites.WeaklyContractibleProducts
 If every object of a site is covered by weakly contractible objects, then `R¹lim` vanishes for
 a tower `F` of sheaves of modules whose section modules over every weakly contractible object
 form a Mittag-Leffler tower, in the form that `1 - t` is an epimorphism on `∏ Fₙ` (blueprint
-`sk-prop-pe-milnor`, last paragraph; Stacks 0947, 07KW). This holds in particular when the
+`proposition-milnor-sequence`, last paragraph; Stacks 0947, 07KW). This holds in particular when the
 tower of sheaves itself is Mittag-Leffler in the sense that the image subobjects of the
 transition maps `Fₖ ⟶ Fₙ` stabilise: over a weakly contractible object, sections of the image
 of a morphism are the image of its sections.
@@ -50,7 +50,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} {R : Type w}
 
 include hP hPW in
 /-- **Mittag-Leffler on weakly contractible sections kills `R¹lim`** (blueprint
-`sk-prop-pe-milnor`, Stacks 0947, 07KW). If every object of the site is covered by weakly
+`proposition-milnor-sequence`, Stacks 0947, 07KW). If every object of the site is covered by weakly
 contractible objects satisfying `P`, and over every such `W` the tower of section modules
 `Fₙ(W)` is Mittag-Leffler, then the map `1 - t` on a product `∏ Fₙ` is an epimorphism, where
 `t` has components `∏ Fₘ ⟶ Fₙ₊₁ ⟶ Fₙ`. -/

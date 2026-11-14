@@ -26,17 +26,17 @@ Let `Z` be a smooth surface over an algebraically closed field `k` (or an étale
 `i : Z - (X ∪ Y) ⟶ Z - Y` the open immersions, and `E` a bounded complex of `Λ`-modules on
 `Z - (X ∪ Y)` with finite `ℓ`-group monodromy, `Λ` a finite `ℓ`-primary ring. Put
 `M = Rj_* i_! E`. The transverse boundary calculation (blueprint
-`sk-lem-tf-transverse-boundary`, stated here as
+`lemma-cohomology-near-two-transverse-divisors`, stated here as
 `AlgebraicGeometry.Etale.transverseBoundary`) gives `M_z = 0` and, for `Y` connected, that the
 restriction `RΓ(Y, M|_Y) ⟶ M_s` is zero at every closed point `s ≠ z` of `Y`.
 
-From this we deduce (blueprint `sk-lem-tf-punctured-restriction`) that for a closed curve
+From this we deduce (blueprint `lemma-restriction-punctured-curve`) that for a closed curve
 `C ⊆ Z` with `C ∩ Y = {s}` the restriction map
 ```
 RΓ(Z - Y, i_! E) ⟶ RΓ(C_(s) - s, (i_! E)|_{C_(s) - s})
 ```
 to the punctured strict localization of `C` at `s` is zero. Following the blueprint
-(`det-tf-punctured-restriction-factorization`), the restriction factors through the restriction
+(`lemma-restriction-punctured-curve--1`), the restriction factors through the restriction
 `RΓ(Y, M|_Y) ⟶ M_s` to the stalk at `s`; here the stalk `M_s` is computed on the strictly local
 scheme `C_(s)` itself rather than on the strict localization of `Z`. In fact only this is used of
 `C_(s) - s`: it maps to `Z - Y` through a strictly local scheme `S` over `Z` whose closed point
@@ -57,14 +57,15 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {ℓ : ℕ} [Fact ℓ.Prime]
   {UY UXY : Z.left.Opens}
 
 /-- The complex `M = Rj_* i_! E` on `Z` of the transverse boundary calculation (blueprint
-`sk-lem-tf-transverse-boundary`), for `j : Z - Y ⟶ Z` and `i : Z - (X ∪ Y) ⟶ Z - Y`. -/
+`lemma-cohomology-near-two-transverse-divisors`), for `j : Z - Y ⟶ Z` and
+`i : Z - (X ∪ Y) ⟶ Z - Y`. -/
 noncomputable abbrev transverseBoundaryComplex (hXY : UXY ≤ UY)
     (E : DerivedCategory (Sheaf UXY.toScheme.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     DerivedCategory (Sheaf Z.left.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   ((UY.ι)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctor.obj
     (((Z.left.homOfLE hXY)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj E)
 
-/-- **Transverse boundary calculation** (blueprint `sk-lem-tf-transverse-boundary`).
+/-- **Transverse boundary calculation** (blueprint `lemma-cohomology-near-two-transverse-divisors`).
 
 Let `Z` be a regular, locally noetherian scheme over the algebraically closed field `k` of
 characteristic `≠ ℓ` which is a smooth surface, or an étale limit with affine transition maps of
@@ -216,7 +217,7 @@ lemma globalSectionsRestriction_eq_zero_of_factor {A : Type*} [Category.{u + 1} 
   exact globalSectionsRestriction_eq_zero_of_lowerStar _ _ _ hjc
 
 /-- **Restriction to a strictly local scheme centred on the boundary vanishes** (blueprint
-`det-tf-punctured-restriction-factorization` and the proof of `sk-lem-tf-punctured-restriction`,
+`lemma-restriction-punctured-curve--1` and the proof of `lemma-restriction-punctured-curve`,
 with the stalk `M_s` computed on the strictly local scheme `S` instead of the strict localization
 of `Z`). In the situation of the transverse boundary calculation
 (`AlgebraicGeometry.Etale.transverseBoundary`) with `Y` connected, let `c : S = Spec R ⟶ Z` be a
@@ -346,7 +347,7 @@ noncomputable def puncturedStrictLocalizationMap (iC : C ⟶ Z.left) [IsClosedIm
   IsOpenImmersion.lift UY.ι _ (range_puncturedStrictLocalization_subset iC s hCY s' hs' hUY)
 
 /-- **Restriction to a transverse punctured curve**
-(blueprint `sk-lem-tf-punctured-restriction`). In the situation of the transverse boundary
+(blueprint `lemma-restriction-punctured-curve`). In the situation of the transverse boundary
 calculation (`AlgebraicGeometry.Etale.transverseBoundary`) with `Y` connected, let `C ⊆ Z` be a
 closed subscheme (in the blueprint a curve) with `C ∩ Y = {s}`, and let `C_(s)` be its strict
 localization at a geometric point over `s`. Then the restriction map

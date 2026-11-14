@@ -14,7 +14,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBa
 The dualizing map of a trait model over a generic base restricts, along the slice exchange, to a
 dualizing map of its generic slice which is the twist by `ℚ̄_ℓ(0)[2]` of the dualizing map of the
 slice model (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_genericSliceDualizingMap`,
-blueprint `det-tf-nearby-duality-slice`, "the twist (1)" and "the map `θ`"). It is deduced from
+blueprint `lemma-nearby-duality-slice--1`, "the twist (1)" and "the map `θ`"). It is deduced from
 the twist equation `p^* θ_M ≫ v = α ≫ Ψ_{M''}(u) ≫ κ ≫ θ_{M''} ▷ T`, taken as a hypothesis (proved
 for opens of compactified models embedded in an affine space over the trait in
 `TraceFormula.Specialization.NearbyDualityGenericBaseSliceImmersion`): the duality maps are
@@ -65,7 +65,7 @@ variable {F : Type u} [Field F] {k' : Type u} [Field k'] {X₁ : Over (Spec (.of
 namespace IsTraitModelOfGenericBase
 
 /-- **The twist equation** of the generic slice along a coordinate `b` (blueprint
-`det-tf-nearby-duality-slice`, the twist (1) and "the map `θ`"): there are identifications
+`lemma-nearby-duality-slice--1`, the twist (1) and "the map `θ`"): there are identifications
 `u : c^* ω_{X₁} ≅ ω_{X₂} ⊗ T` and `v : p^* ω_{X'} ≅ ω_{𝒳''_s} ⊗ T`, `T = ℚ̄_ℓ(0)[2]`, such that the
 restriction of `p^* θ_M` along the slice exchange `α` is the twist of the dualizing map
 `θ_{M''}` of the slice: `p^* θ_M ≫ v = α ≫ Ψ_{M''}(u) ≫ κ ≫ θ_{M''} ▷ T`. -/
@@ -85,7 +85,7 @@ def TwistEquation (D : NearbyDualizingDataOfGenericBase k' ℓ)
         DK.θ (isTraitModelOfGenericBase_genericSliceModel (traitSliceCoord k') hb
           h.isTraitModelOver) ▷ _
 
-/-- **The dualizing maps and generic slicing** (blueprint `det-tf-nearby-duality-slice`, "the
+/-- **The dualizing maps and generic slicing** (blueprint `lemma-nearby-duality-slice--1`, "the
 map `θ`"). There is a dualizing map `θ : Ψ_{M''} c^* ω_{X₁} ⟶ p^* ω_{X'}` of the generic slice
 model such that
 * `θ` restricts `p^* θ_M` along the slice exchange: `p^* θ_M = θ ∘ α_{ω_{X₁}}`;

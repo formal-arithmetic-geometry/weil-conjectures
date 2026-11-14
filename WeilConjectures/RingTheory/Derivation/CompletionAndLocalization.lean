@@ -15,7 +15,7 @@ import WeilConjectures.RingTheory.Derivation.Localization
 # Extension of derivations to completions and localizations
 
 Source: Stacks Project, More on Algebra, Lemma 07PE, parts (1) and (2)
-(blueprint: lem-weil-pbc-derivation-extends).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -228,8 +228,8 @@ private theorem localized_extension {R S : Type u} [CommRing R] [CommRing S]
   exact IsLocalization.extendDerivation_algebraMap W ψ δ hδ a
 
 /-- Stacks Project, More on Algebra, Lemma 07PE, parts (1) and (2)
-(blueprint: lem-weil-pbc-derivation-extends). An absolute derivation extends to every adic
-completion by the maps between successive quotients, and uniquely to every localization
+(blueprint: theorem-finite-etale-covers-proper-henselian--2). An absolute derivation extends to
+every adic completion by the maps between successive quotients, and uniquely to every localization
 by the quotient rule. Absolute derivations are represented as derivations over `ℤ`.
 
 Proof, following the node's eleven steps:

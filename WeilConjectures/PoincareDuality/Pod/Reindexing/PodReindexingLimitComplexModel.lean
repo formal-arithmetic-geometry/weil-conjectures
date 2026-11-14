@@ -41,7 +41,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Cancel the target model and localization factors in the specified comparison.
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Step 5. Expand the six
+Source: blueprint theorem-poincare-duality-frobenius--2, Step 5. Expand the six
 factors of the comparison. Compose with the target localization factor and the
 target Roos model. Their inverse pairs cancel, leaving the source Roos model,
 the integral reindexing localization map, and the two strict Roos and restricted

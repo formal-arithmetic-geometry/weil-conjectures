@@ -14,7 +14,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 
 /-!
 # The affine-line localization triangle in normalized projective coordinates
-Source: blueprint sk-prop-an, Step 5(b), detailed affine-space trace steps 2, 3 and 6.
+Source: blueprint proposition-purity-vector-bundles, Step 5(b), detailed affine-space trace steps 2,
+3 and 6.
 -/
 
 @[expose] public noncomputable section
@@ -58,7 +59,7 @@ private theorem normalize_closed_coordinate
 
 /-- Push the open-closed triangle along the projective-line projection, retaining both
 coordinates of the normalized projective-line decomposition.
-Source: blueprint lem-amb-affine-space-top-trace, steps 2, 3 and 6
+Source: blueprint lemma-integral-linear-character--1, steps 2, 3 and 6
 (blueprint: lem-amb-affine-trace-line-localization).
 
 Proof: retain the closed vertex B = Rq_* Ri_* i^* M of the open-closed triangle

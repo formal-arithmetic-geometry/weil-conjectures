@@ -21,7 +21,7 @@ Artin–Schreier covering `π : X' ⟶ X` of `(f₁, f₂)`, a `k₀²`-torsor
 through the character `a ↦ ψ(c₁ a₁ + c₂ a₂)`. The criterion
 `AlgebraicGeometry.ProEtaleWeilSheaf.nonempty_iso_ihom_of_isotypic` then identifies internal
 homs between them (`AlgebraicGeometry.nonempty_iso_ihom_artinSchreierPlane`). This gives
-(blueprint `lem-fd-as-characters`):
+(blueprint `lemma-artin-schreier-character-sheaf`):
 
 * `ℒ_{ψ,a} ⊗ ℒ_{ψ,b} ≅ ℒ_{ψ,a+b}` (`AlgebraicGeometry.nonempty_iso_tensorObj_artinSchreierOf`),
   where `ℒ_{ψ,a} ⊗ ℒ_{ψ,b} = 𝓗om(ℒ_{ψ,a}^∨, ℒ_{ψ,b})`, from `ℒ_{ψ,-a} ≅ ℒ_{ψ,a}^∨` and
@@ -47,19 +47,19 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] (f : planeIndex 
 
 variable (k₀) in
 /-- The coordinate `∑ᵢ cᵢ tᵢ : X' ⟶ 𝔸¹` of the Artin–Schreier covering `X'` of `(f₁, f₂)`
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 noncomputable abbrev artinSchreierPlaneCover.linearCoord (c : planeIndex → k₀) :
     artinSchreierPlaneCover k₀ f ⟶ affineLine k₀ :=
   artinSchreierPlaneCover.coord f ≫ affineLine.linearForm k₀ c
 
 variable (k₀) in
-/-- The function `∑ᵢ cᵢ fᵢ : X ⟶ 𝔸¹` (blueprint `lem-fd-as-characters`). -/
+/-- The function `∑ᵢ cᵢ fᵢ : X ⟶ 𝔸¹` (blueprint `lemma-artin-schreier-character-sheaf`). -/
 noncomputable abbrev planeLinearFunction (c : planeIndex → k₀) : X ⟶ affineLine k₀ :=
   planeSection k₀ f ≫ affineLine.linearForm k₀ c
 
 omit [Fact (ringChar k₀ ≠ l)] in
 /-- The coordinate `∑ᵢ cᵢ tᵢ` of the covering lifts `∑ᵢ cᵢ fᵢ` through the Artin–Schreier map
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma artinSchreierPlaneCover.linearCoord_comp_artinSchreierMap (c : planeIndex → k₀) :
     artinSchreierPlaneCover.linearCoord k₀ f c ≫ affineLine.artinSchreierMap k₀ =
       artinSchreierPlaneCover.π f ≫ planeLinearFunction k₀ f c := by
@@ -68,7 +68,7 @@ lemma artinSchreierPlaneCover.linearCoord_comp_artinSchreierMap (c : planeIndex 
 
 omit [Fact (ringChar k₀ ≠ l)] in
 /-- Translating the covering by `a ∈ k₀²` translates the coordinate `∑ᵢ cᵢ tᵢ` by `∑ᵢ cᵢ aᵢ`
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma artinSchreierPlaneCover.translation_comp_linearCoord (c a : planeIndex → k₀) :
     (artinSchreierPlaneCover.translation f a).hom ≫ artinSchreierPlaneCover.linearCoord k₀ f c =
       artinSchreierPlaneCover.linearCoord k₀ f c ≫
@@ -78,7 +78,7 @@ lemma artinSchreierPlaneCover.translation_comp_linearCoord (c a : planeIndex →
   rfl
 
 omit [Finite k₀] in
-/-- The linear form `a ↦ ∑ᵢ cᵢ aᵢ` on `k₀²` (blueprint `lem-fd-as-characters`). -/
+/-- The linear form `a ↦ ∑ᵢ cᵢ aᵢ` on `k₀²` (blueprint `lemma-artin-schreier-character-sheaf`). -/
 def planeLinearMap (c : planeIndex → k₀) : (planeIndex → k₀) →+ k₀ where
   toFun a := ∑ i, c i * a i
   map_zero' := by simp
@@ -87,13 +87,14 @@ def planeLinearMap (c : planeIndex → k₀) : (planeIndex → k₀) →+ k₀ w
 attribute [local instance high] WeilSheaf.hasImage_artinSchreierIdempotent
 
 omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
-/-- The character `a ↦ ψ(∑ᵢ cᵢ aᵢ)` of `k₀²` (blueprint `lem-fd-as-characters`). -/
+/-- The character `a ↦ ψ(∑ᵢ cᵢ aᵢ)` of `k₀²` (blueprint `lemma-artin-schreier-character-sheaf`). -/
 noncomputable def planeCharacter (ψ : AddChar k₀ (PadicAlgCl l)) (c : planeIndex → k₀) :
     AddChar (planeIndex → k₀) (PadicAlgCl l) :=
   ψ.compAddMonoidHom (planeLinearMap c)
 
 omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
-/-- Evaluation of `AlgebraicGeometry.planeCharacter` (blueprint `lem-fd-as-characters`). -/
+/-- Evaluation of `AlgebraicGeometry.planeCharacter` (blueprint
+`lemma-artin-schreier-character-sheaf`). -/
 lemma planeCharacter_apply (ψ : AddChar k₀ (PadicAlgCl l)) (c a : planeIndex → k₀) :
     planeCharacter ψ c a = ψ (∑ i, c i * a i) :=
   rfl
@@ -105,7 +106,7 @@ local notation "Φ[" ψ ", " c "]" => ProEtaleWeilSheaf.isotypicPullback
 
 omit [Fact (ringChar k₀ ≠ l)] in
 /-- If the adjoint `π^* M ⟶ ℚ̄_ℓ` of `φ : M ⟶ π_* ℚ̄_ℓ` is invertible, so is its underlying
-morphism on the geometric fibre (blueprint `lem-fd-as-characters`). -/
+morphism on the geometric fibre (blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma ProEtaleWeilSheaf.isIso_geometricFiberMap_adjoint {Z W : Scheme.{u}}
     [Z.Over (Spec (CommRingCat.of k₀))] [W.Over (Spec (CommRingCat.of k₀))] (π : W ⟶ Z)
     [π.IsOver (Spec (CommRingCat.of k₀))] {M : ProEtaleWeilSheaf k₀ l Z}
@@ -120,7 +121,7 @@ lemma ProEtaleWeilSheaf.isIso_geometricFiberMap_adjoint {Z W : Scheme.{u}}
   exact h
 
 /-- The translation by `a ∈ k₀²` acts on `(∑ᵢ cᵢ fᵢ)^* ℒ_ψ ⟶ π_* ℚ̄_ℓ` through `ψ(∑ᵢ cᵢ aᵢ)`
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma artinSchreierPlaneCover.isotypicPullback_comp_torsorTranslation
     (ψ : AddChar k₀ (PadicAlgCl l)) (c a : planeIndex → k₀) :
     Φ[ψ, c] ≫ ProEtaleWeilSheaf.torsorTranslation
@@ -134,7 +135,8 @@ lemma artinSchreierPlaneCover.isotypicPullback_comp_torsorTranslation
     (fun a ↦ artinSchreierPlaneCover.translation_comp_linearCoord f c a) a
 
 omit [Fact (ringChar k₀ ≠ l)] in
-/-- The order of `k₀²` is invertible in `ℚ̄_ℓ` (blueprint `lem-fd-as-characters`). -/
+/-- The order of `k₀²` is invertible in `ℚ̄_ℓ` (blueprint
+`lemma-artin-schreier-character-sheaf`). -/
 lemma natCard_planeIndex_ne_zero :
     (Nat.card (planeIndex → k₀) : PadicAlgCl l) ≠ 0 :=
   Nat.cast_ne_zero.2 Nat.card_pos.ne'
@@ -142,7 +144,7 @@ lemma natCard_planeIndex_ne_zero :
 /-- **Internal homs of Artin–Schreier sheaves of linear combinations.** If the characters
 `χᵢ(a) = ψᵢ(∑ⱼ cᵢⱼ aⱼ)` of `k₀²` satisfy `χ₁ χ₂ = χ₃`, then
 `(∑ⱼ c₁ⱼ fⱼ)^* ℒ_{ψ₁} ≅ 𝓗om((∑ⱼ c₂ⱼ fⱼ)^* ℒ_{ψ₂}, (∑ⱼ c₃ⱼ fⱼ)^* ℒ_{ψ₃})` as pro-étale Weil
-sheaves (blueprint `lem-fd-as-characters`). -/
+sheaves (blueprint `lemma-artin-schreier-character-sheaf`). -/
 theorem nonempty_iso_ihom_artinSchreierPlane (ψ₁ ψ₂ ψ₃ : AddChar k₀ (PadicAlgCl l))
     (c₁ c₂ c₃ : planeIndex → k₀) (h : ∀ g : planeIndex → k₀,
       ψ₁ (∑ i, c₁ i * g i) * ψ₂ (∑ i, c₂ i * g i) = ψ₃ (∑ i, c₃ i * g i)) :
@@ -178,7 +180,7 @@ theorem nonempty_iso_ihom_artinSchreierPlane (ψ₁ ψ₂ ψ₃ : AddChar k₀ (
 /-- **Duals of Artin–Schreier sheaves of linear combinations.** If the characters
 `χᵢ(a) = ψᵢ(∑ⱼ cᵢⱼ aⱼ)` of `k₀²` satisfy `χ₁ χ₂ = 1`, then
 `(∑ⱼ c₁ⱼ fⱼ)^* ℒ_{ψ₁} ≅ 𝓗om((∑ⱼ c₂ⱼ fⱼ)^* ℒ_{ψ₂}, ℚ̄_ℓ)` as pro-étale Weil sheaves
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 theorem nonempty_iso_ihom_adicConstant_artinSchreierPlane (ψ₁ ψ₂ : AddChar k₀ (PadicAlgCl l))
     (c₁ c₂ : planeIndex → k₀)
     (h : ∀ g : planeIndex → k₀, ψ₁ (∑ i, c₁ i * g i) * ψ₂ (∑ i, c₂ i * g i) = 1) :
@@ -214,14 +216,15 @@ end Plane
 section Assembly
 
 omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
-/-- A sum over the two coordinates of the plane (blueprint `lem-fd-as-characters`). -/
+/-- A sum over the two coordinates of the plane (blueprint
+`lemma-artin-schreier-character-sheaf`). -/
 lemma sum_planeIndex {M : Type*} [AddCommMonoid M] (F : planeIndex → M) :
     ∑ i, F i = F ⟨0⟩ + F ⟨1⟩ := by
   rw [← (Equiv.ulift (α := Fin 2)).symm.sum_comp, Fin.sum_univ_two]
   rfl
 
 /-- The underlying pro-étale Weil sheaf of a pullback, along a morphism equal to the given one
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma WeilSheaf.nonempty_iso_upperStar_obj_obj {Y Y' : Scheme.{u}}
     [Y.Over (Spec (CommRingCat.of k₀))] [Y'.Over (Spec (CommRingCat.of k₀))]
     (φ : Y ⟶ Y') [φ.IsOver (Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l Y')
@@ -232,7 +235,7 @@ lemma WeilSheaf.nonempty_iso_upperStar_obj_obj {Y Y' : Scheme.{u}}
   exact ⟨(ProEtaleWeilSheaf.upperStarCongrIso k₀ l hg).app F.obj⟩
 
 /-- The underlying pro-étale Weil sheaf of an iterated pullback is the pullback along the
-composite (blueprint `lem-fd-as-characters`). -/
+composite (blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma WeilSheaf.nonempty_iso_upperStar_obj_upperStar_obj_obj {Y Y' Y'' : Scheme.{u}}
     [Y.Over (Spec (CommRingCat.of k₀))] [Y'.Over (Spec (CommRingCat.of k₀))]
     [Y''.Over (Spec (CommRingCat.of k₀))]
@@ -249,7 +252,7 @@ attribute [local instance high] WeilSheaf.hasImage_artinSchreierIdempotent
 
 /-- Unfolding `AlgebraicGeometry.artinSchreier`, with the named instance
 `AlgebraicGeometry.WeilSheaf.hasImage_artinSchreierIdempotent` for the image
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma artinSchreier_eq_upperStar_image (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
     artinSchreier ψ a = (WeilSheaf.upperStar (affineLine.smul k₀ a)).obj
       (image (WeilSheaf.artinSchreierIdempotent ψ)) :=
@@ -257,7 +260,7 @@ lemma artinSchreier_eq_upperStar_image (ψ : AddChar k₀ (PadicAlgCl l)) (a : k
     (WeilSheaf.image_artinSchreierIdempotent_eq ψ)
 
 /-- The underlying pro-étale Weil sheaf of `ℒ_{ψ(a x)}` is the pullback of `ℒ_ψ` along any
-morphism equal to `x ↦ a x` (blueprint `lem-fd-as-characters`). -/
+morphism equal to `x ↦ a x` (blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma nonempty_iso_artinSchreier_obj (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀)
     {g : affineLine k₀ ⟶ affineLine k₀} [g.IsOver (Spec (CommRingCat.of k₀))]
     (hg : affineLine.smul k₀ a = g) :
@@ -269,7 +272,7 @@ lemma nonempty_iso_artinSchreier_obj (ψ : AddChar k₀ (PadicAlgCl l)) (a : k�
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- The underlying pro-étale Weil sheaf of `ℒ_{ψ,x}` is the pullback of `ℒ_ψ` along any
-morphism equal to the function `x` (blueprint `lem-fd-as-characters`). -/
+morphism equal to the function `x` (blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma nonempty_iso_artinSchreierOf_obj (ψ : AddChar k₀ (PadicAlgCl l)) (x : Γ(X, ⊤))
     {g : X ⟶ affineLine k₀} [g.IsOver (Spec (CommRingCat.of k₀))]
     (hg : affineLine.homOfSection k₀ x ≫ affineLine.smul k₀ 1 = g) :
@@ -279,13 +282,13 @@ lemma nonempty_iso_artinSchreierOf_obj (ψ : AddChar k₀ (PadicAlgCl l)) (x : �
   exact WeilSheaf.nonempty_iso_upperStar_obj_upperStar_obj_obj _ _ _ hg
 
 /-- The underlying pro-étale Weil sheaf of a tensor product `F ⊗ G = 𝓗om(F^∨, G)`
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma WeilSheaf.tensorObj_obj (F G : WeilSheaf k₀ l X) (hF : F.IsLisse) :
     (F.tensorObj G hF).obj = ProEtaleWeilSheaf.ihom k₀ l X (F.dual hF).obj G.obj :=
   rfl
 
 /-- The underlying pro-étale Weil sheaf of a dual `F^∨ = 𝓗om(F, ℚ̄_ℓ)`
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma WeilSheaf.dual_obj_eq_ihom (F : WeilSheaf k₀ l X) (hF : F.IsLisse) :
     (F.dual hF).obj =
       ProEtaleWeilSheaf.ihom k₀ l X F.obj (ProEtaleWeilSheaf.adicConstant k₀ l X) :=
@@ -293,7 +296,7 @@ lemma WeilSheaf.dual_obj_eq_ihom (F : WeilSheaf k₀ l X) (hF : F.IsLisse) :
 
 omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
 /-- For `f = (a, b)` and `c = (x, y)`, the function `∑ᵢ cᵢ fᵢ` is `x a + y b`
-(blueprint `lem-fd-as-characters`). -/
+(blueprint `lemma-artin-schreier-character-sheaf`). -/
 lemma planeLinearFunction_pair (a b : Γ(X, ⊤)) (x y : k₀) :
     planeLinearFunction k₀ (fun i : planeIndex ↦ ![a, b] i.down) (fun i ↦ ![x, y] i.down) =
       affineLine.homOfSection k₀
@@ -306,7 +309,7 @@ lemma planeLinearFunction_pair (a b : Γ(X, ⊤)) (x y : k₀) :
 global functions `a, b` on `X`. On the Artin–Schreier covering of `(a, b)`, a `k₀²`-torsor, the
 three sheaves and `ℒ_{ψ,-a}` are isotypic components of `π_* ℚ̄_ℓ`, which gives
 `ℒ_{ψ,-a} ≅ 𝓗om(ℒ_{ψ,a}, ℚ̄_ℓ) = ℒ_{ψ,a}^∨` and `ℒ_{ψ,a+b} ≅ 𝓗om(ℒ_{ψ,-a}, ℒ_{ψ,b})`.
-(blueprint: `lem-fd-as-characters`) -/
+(blueprint: `lemma-artin-schreier-character-sheaf`) -/
 theorem nonempty_iso_tensorObj_artinSchreierOf (ψ : AddChar k₀ (PadicAlgCl l))
     (a b : Γ(X, ⊤)) :
     Nonempty ((artinSchreierOf ψ a).tensorObj (artinSchreierOf ψ b)

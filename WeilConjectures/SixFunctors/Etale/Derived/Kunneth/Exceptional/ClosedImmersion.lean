@@ -17,7 +17,7 @@ Let `k` be a field, `Λ` a finite ring whose exponent is invertible in `k`, and 
 of finite type over `k`, with product `P = Y ×_k W` and projections `q : P ⟶ Y`, `r : P ⟶ W`.
 For a closed immersion `i : Z ⟶ Y`, with base change `i_W : Z ×_k W ⟶ P` and
 `q_Z : Z ×_k W ⟶ Z`, the two canonical maps of the exceptional inverse image entering the
-exceptional Künneth formula (`prop-trf-exceptional-kunneth`) are isomorphisms:
+exceptional Künneth formula (`proposition-exceptional-external-kunneth--1`) are isomorphisms:
 
 * the base change map `Lq_Z^* Ri^! N ⟶ Ri_W^! Lq^* N`
   (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`), for every `N`;
@@ -26,10 +26,10 @@ exceptional Künneth formula (`prop-trf-exceptional-kunneth`) are isomorphisms:
 
 This is the closed-immersion case of the blueprint proof: by the supported localization triangle
 `Ri_! Ri^! L ⟶ L ⟶ Rj_* Lj^* L ⟶` of the open complement `j : U ⟶ Y`
-(`sk-prop-sf-localization`), the cone of the transpose of either map is of the form
-`Rj_W*(-)`, by the base change formula for `Rj_*` tensored with a complex (`lem-kun-0f1n`,
-`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`); such objects receive no maps from objects
-supported on `Z ×_k W`, and `Ri_W!` is fully faithful.
+(`lemma-local-cohomology-right-adjoint--2`), the cone of the transpose of either map is of the form
+`Rj_W*(-)`, by the base change formula for `Rj_*` tensored with a complex
+(`lemma-kunneth-field-coefficients--1`, `AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`); such
+objects receive no maps from objects supported on `Z ×_k W`, and `Ri_W!` is fully faithful.
 
 ## Main statements
 
@@ -177,7 +177,7 @@ variable {Y W P U UW : Scheme.{u}} (b : Y ⟶ Spec (.of k)) (c : W ⟶ Spec (.of
 include sqP sqU
 
 /-- The base change formula for `Rj_*` along the projection `q : Y ×_k W ⟶ Y`, tensored with
-an object pulled back from `W` (`lem-kun-0f1n`):
+an object pulled back from `W` (`lemma-kunneth-field-coefficients--1`):
 `Lr^* M ⊗ᴸ Lq^* Rj_* F ≅ Rj_W*(Lj_W^* Lr^* M ⊗ᴸ Lq_U^* F)`. -/
 theorem nonempty_iso_derivedTensor_leftDerivedUpperStar_rightDerivedLowerStar
     (M : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -193,7 +193,7 @@ theorem nonempty_iso_derivedTensor_leftDerivedUpperStar_rightDerivedLowerStar
     ((L((r)^*[ModuleCat.{u + 1} Λ])).obj M) F)⟩
 
 /-- The base change formula for `Rj_*` along the projection `q : Y ×_k W ⟶ Y`:
-`Lq^* Rj_* F ≅ Rj_W* Lq_U^* F` (`lem-kun-0f1n` with `M = Λ_W`). -/
+`Lq^* Rj_* F ≅ Rj_W* Lq_U^* F` (`lemma-kunneth-field-coefficients--1` with `M = Λ_W`). -/
 theorem nonempty_iso_leftDerivedUpperStar_rightDerivedLowerStar
     (F : _root_.DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((L((q)^*[ModuleCat.{u + 1} Λ])).obj ((R((j)_*[ModuleCat.{u + 1} Λ])).obj F) ≅

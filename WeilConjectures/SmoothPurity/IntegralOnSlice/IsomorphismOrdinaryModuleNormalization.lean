@@ -12,7 +12,7 @@ import all WeilConjectures.SmoothPurity.Supporting.IsomorphismDerivedPullback
 /-! # Ordinary pullback and normalized sectionwise inverse image
 
 Source: Stacks Tags 03D2 and 03EL; expanded clause 4 of
-def-weil-frobenius-coefficient-twists.
+prose-10-21.
 (blueprint: lem-pur-isomorphism-ordinary-module-normalization).
 -/
 

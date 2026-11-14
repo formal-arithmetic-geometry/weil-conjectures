@@ -16,7 +16,7 @@ import Mathlib.RingTheory.Localization.Basic
 # Essential finite presentation over an intermediate algebra
 
 Source: Stacks Project, Algebra, proof of Tag 00R7, first paragraph; Definition 00QM and
-Lemma 00F4 (4) (blueprint: lem-weil-pbc-essentially-finite-presentation-over-intermediate).
+Lemma 00F4 (4) (blueprint: lemma-quasi-finite-coordinates--1).
 -/
 
 @[expose] public section
@@ -27,7 +27,7 @@ namespace RingHom
 
 /-- The finite equations identifying essential generators with their fractions and adjoining
 inverses of their denominators. Source: the localized construction in the proof of Tag 00F4 (4)
-(blueprint: lem-weil-pbc-essentially-finite-presentation-over-intermediate). -/
+(blueprint: lemma-quasi-finite-coordinates--1). -/
 private noncomputable def finiteCompatibilityIdeal
     {R : Type u} {S : Type v} {P : Type p}
     [CommRing R] [CommRing S] [CommRing P] [Algebra R S] [Algebra R P]
@@ -42,7 +42,7 @@ private noncomputable def finiteCompatibilityIdeal
 
 /-- The quotient by the finite compatibility equations. This is a concrete construction,
 independent of any existence theorem. Source: the localized proof of Tag 00F4 (4)
-(blueprint: lem-weil-pbc-essentially-finite-presentation-over-intermediate). -/
+(blueprint: lemma-quasi-finite-coordinates--1). -/
 private abbrev FiniteCompatibilityQuotient
     {R : Type u} {S : Type v} {P : Type p}
     [CommRing R] [CommRing S] [CommRing P] [Algebra R S] [Algebra R P]
@@ -55,7 +55,7 @@ No finite-presentation assumption on `P` is needed here.
 Source: Stacks Project, Algebra, the generator equations in the proof of Tag 00F4 (4),
 and Proposition Tag 00CP (localization universal property); this is steps 3 and 4 of the
 localized argument used in Tag 00R7
-(blueprint: lem-weil-pbc-essentially-finite-presentation-over-intermediate).
+(blueprint: lemma-quasi-finite-coordinates--1).
 
 Proof: Evaluate the tensor coefficients in `T` via `ψ` and `f`, and send each polynomial
 variable to the inverse of `f (d i)`. The compatibility assumption annihilates the second
@@ -252,7 +252,7 @@ presentation over `S` with its original structure map `ψ`.
 
 Source: Stacks Project, Algebra, proof of Tag 00R7, first paragraph, using Definition 00QM
 and the localized analogue of Lemma 00F4 (4)
-(blueprint: lem-weil-pbc-essentially-finite-presentation-over-intermediate).
+(blueprint: lemma-quasi-finite-coordinates--1).
 
 Proof:
 1. Choose `S = W⁻¹B` with `B` a finite type `R`-algebra, and generators `b₁, …, bₙ`

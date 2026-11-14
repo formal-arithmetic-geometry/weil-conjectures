@@ -21,9 +21,9 @@ For a commutative square `h ≫ f' = e ≫ g` and a finite morphism `π' : X'ᵢ
 is an isomorphism as soon as the derived base change maps `Lf'^* Rg_* F ⟶ Rh_* Le^* F` and
 `Lπ'^* Rh_* Le^* F ⟶ Rhᵢ_* Lρ^* Le^* F` are
 (`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_rightDerivedLowerStar_unit`). This is the
-computation of the finite pushforwards `πᵢ_* Λ` in the proof of blueprint `lem-kun-0f1j`: the
-projection formula and the base change theorem for the finite morphisms `π'` and `ρ` reduce it to
-the base change theorem along `X'ᵢ ⟶ S'`.
+computation of the finite pushforwards `πᵢ_* Λ` in the proof of blueprint
+`lemma-kunneth-field-coefficients--1`: the projection formula and the base change theorem for the
+finite morphisms `π'` and `ρ` reduce it to the base change theorem along `X'ᵢ ⟶ S'`.
 
 The proof compares the base change map with the Künneth maps over `X'`: by pasting with a
 degenerate square (`AlgebraicGeometry.Etale.tensorBaseChangeMap_paste`) it becomes the base

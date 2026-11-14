@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSuppor
 
 Let `x̄ : Spec Ω ⟶ X` be a geometric point (`Ω` separably closed). The derived geometric stalk
 of `K ∈ D(X_ét, Λ)` is `K_x̄ = RΓ(Spec Ω, Lx̄^* K) ∈ D(Λ)`. This file records
-`fix-lem-finite-tor-perfect`:
+`lemma-perfect-complexes-geometric-point--6`:
 
 * for a finite local coefficient ring `Λ` (such as `A_{E,n}`) and `K ∈ D^b_{ctf}(X, Λ)`, the
   stalk `K_x̄` is quasi-isomorphic to a bounded complex of finite free `Λ`-modules;
@@ -48,8 +48,8 @@ namespace AlgebraicGeometry.Etale
 
 variable {X : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω]
 
-/-- Blueprint `fix-lem-finite-tor-perfect`: Geometric-stalk perfectness at finite and field
-coefficients (finite coefficients).
+/-- Blueprint `lemma-perfect-complexes-geometric-point--6`: Geometric-stalk perfectness at finite
+and field coefficients (finite coefficients).
 
 Let `Λ` be a finite local ring (for instance `Λ = A_{E,n}`), `K ∈ D^b_{ctf}(X, Λ)` and
 `x̄ : Spec Ω ⟶ X` a geometric point. Then the derived geometric stalk
@@ -66,8 +66,8 @@ theorem exists_free_geometricStalk (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
         ((L((x)^*[ModuleCat.{u + 1} Λ])).obj K) ≅ _root_.DerivedCategory.Q.obj P) :=
   (isPerfect_geometricStalk Λ x K hK).exists_free
 
-/-- Blueprint `fix-lem-finite-tor-perfect`: Geometric-stalk perfectness at finite and field
-coefficients (field coefficients).
+/-- Blueprint `lemma-perfect-complexes-geometric-point--6`: Geometric-stalk perfectness at finite
+and field coefficients (field coefficients).
 
 Let `Λ` be a field (a field coefficient stage `E`, or `ℚ̄_ℓ`), `K` a bounded constructible
 complex of étale sheaves of `Λ`-vector spaces on `X` and `x̄ : Spec Ω ⟶ X` a geometric point.
@@ -88,8 +88,8 @@ theorem isPerfect_geometricStalk_of_field (Λ : Type (u + 1)) [Field Λ]
     moduleFinite_homology_rightDerivedGlobalSections_of_isSepClosed _ n
       (Scheme.IsConstructibleSheaf.isFiniteSheaf (hc n))⟩
 
-/-- Blueprint `fix-lem-finite-tor-perfect`: Geometric-stalk perfectness at finite and field
-coefficients (`ℚ̄_ℓ`-coefficients).
+/-- Blueprint `lemma-perfect-complexes-geometric-point--6`: Geometric-stalk perfectness at finite
+and field coefficients (`ℚ̄_ℓ`-coefficients).
 
 The case `Λ = ℚ̄_ℓ` of `AlgebraicGeometry.Etale.isPerfect_geometricStalk_of_field`, for the étale
 model `ULift ℚ̄_ℓ` of the common-stage `ℚ̄_ℓ`-coefficients. -/

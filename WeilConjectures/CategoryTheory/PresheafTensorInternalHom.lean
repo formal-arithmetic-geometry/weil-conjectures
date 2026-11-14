@@ -14,7 +14,7 @@ import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 /-!
 # Objectwise tensor product and internal hom of presheaves
 
-Source: the Weil conjectures blueprint, `sec-proetale-coefficients`,
+Source: the Weil conjectures blueprint, `chap-The-pro-etale-site`,
 `sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-presheaf.md`, clauses 1--2 and
 both Hom formulas (blueprint: det-def-sfb-sheaf-tensor-presheaf).
 
@@ -111,7 +111,7 @@ The first family supplies the enriched bifunctor used by the closed structure, a
 second supplies the end at every object of the site. Neither the object universe of the
 site nor either coefficient universe is identified with the smallness universe `w`.
 
-Source: the Weil conjectures blueprint, `sec-proetale-coefficients`,
+Source: the Weil conjectures blueprint, `chap-The-pro-etale-site`,
 `sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-presheaf.md`, clause 2 and both
 Hom formulas (blueprint: det-def-sfb-sheaf-tensor-presheaf).
 

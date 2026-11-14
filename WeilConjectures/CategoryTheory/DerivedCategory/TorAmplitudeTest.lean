@@ -17,8 +17,8 @@ modules over a ring, the sequences `0 ⟶ I ⟶ R ⟶ R/I ⟶ 0` for the ideals 
 `K` of `D(C)` concentrated in `[a, b]` has Tor amplitude in `[a, b]` as soon as every
 `K ⊗ᴸ S_i.X₃[0]` lies in degrees `≥ a` (`DerivedCategory.torAmplitudeIn_of_forall_isGE`).
 
-This is the form of the residue-field test (`lem-exc-residue-tor-test`) used for the direct
-image (`thm-sf-direct-image-tor-amplitude`): only finitely many test objects, all of them
+This is the form of the residue-field test (`theorem-f-shriek-finite-coefficients--1`) used for the
+direct image (`proposition-six-operations-dctf--2`): only finitely many test objects, all of them
 constant, need to be controlled.
 
 ## Main results

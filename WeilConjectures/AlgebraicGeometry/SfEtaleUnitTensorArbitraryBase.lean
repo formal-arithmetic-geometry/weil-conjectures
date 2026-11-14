@@ -174,9 +174,9 @@ Proof plan:
 1. Exact etale sum extension is left adjoint to exact inverse image. Apply the
    sum/evaluation adjunction termwise, then descend its unit, counit and triangles
    through homotopy localization to the entire unbounded derived categories
-   (lem-weil-pbc-etale-restriction-injectives,
-   prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-termwise-adjunction-homotopy,
-   lem-weil-pbc-exact-functor-derived-factorization,
+   (lemma-acyclicity-pulled-back-injectives,
+   situation-conventions, lem-weil-pbc-termwise-adjunction-homotopy,
+   situation-conventions,
    lem-weil-pbc-localization-universal-property). Transport the canonical strong
    monoidal structure of derived pullback to exact inverse image, retaining its unit
    comparison (lem-weil-pbc-ringed-topoi-derived-tensor-pullback,

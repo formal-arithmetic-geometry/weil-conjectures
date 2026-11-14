@@ -20,7 +20,7 @@ import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 /-!
 # The stalk map above a rational closed point under field extension
 
-Source: blueprint thm-sc-constant-invariance, affine-case unit quotient paragraph;
+Source: blueprint proposition-cohomology-smooth-affine-curve, affine-case unit quotient paragraph;
 Stacks Algebra, Tag 00E6, and Lemma 00PD.
 (blueprint: lem-sc-rational-point-base-change-stalk).
 -/
@@ -36,8 +36,8 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- At the point over a rational closed point, the scalar-extension stalk map preserves
-uniformizers. Source: blueprint thm-sc-constant-invariance, affine-case unit quotient
-paragraph; Stacks Algebra Tag 00E6 and Lemma 00PD
+uniformizers. Source: blueprint proposition-cohomology-smooth-affine-curve, affine-case unit
+quotient paragraph; Stacks Algebra Tag 00E6 and Lemma 00PD
 (blueprint: lem-sc-rational-point-base-change-stalk).
 
 Proof: choose an affine neighbourhood Spec A of P with maximal ideal m. The residue field

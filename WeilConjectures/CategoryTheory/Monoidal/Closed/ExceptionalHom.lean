@@ -130,7 +130,7 @@ lemma exceptionalHomMap_comp_eq {T : C} (M N : D) (u : T ⟶ (ihom (F.obj M)).ob
     uncurry_eq, Functor.map_comp, Category.assoc]
 
 /-- **The exceptional internal hom exchange is an isomorphism** (blueprint
-`lem-trf-exceptional-internal-hom-exchange`) as soon as the projection morphisms
+`lemma-external-duality-trace-morphism--2`) as soon as the projection morphisms
 `(pf.app T).app M` are, for every `T`: by the Yoneda lemma, composing with it is the chain of
 bijections
 ```
@@ -161,7 +161,7 @@ section CorrespondenceClass
 /-- The bijection `Hom(P 𝟙, RHom(M, N)) ≃ Hom(F M, S N)`, i.e.
 `Hom(Rc_! Λ_C, RHom(M, N)) ≃ Hom(Lc^* M, Rc^! N)`: the tensor–hom adjunction, the inverse of the
 projection morphism `M ⊗ P 𝟙 ≅ P (F M ⊗ 𝟙)`, the right unitor and the exceptional adjunction
-(blueprint `lem-trf-correspondence-class`). -/
+(blueprint `lemma-external-duality-trace-morphism--2`). -/
 noncomputable def correspondenceClassEquiv (M N : D) [IsIso ((pf.app (𝟙_ C)).app M)] :
     (P.obj (𝟙_ C) ⟶ (ihom M).obj N) ≃ (F.obj M ⟶ S.obj N) :=
   ((ihom.adjunction M).homEquiv _ _).symm.trans
@@ -214,7 +214,8 @@ lemma leftProjection_naturality_left {M M' : D} (a : M' ⟶ M) (T : C) :
     ← P.map_comp, BraidedCategory.braiding_naturality_right]
 
 omit [MonoidalClosed C] in
-/-- The class bijection is natural in the target `N` (blueprint `lem-trf-correspondence-class`). -/
+/-- The class bijection is natural in the target `N` (blueprint
+`lemma-external-duality-trace-morphism--2`). -/
 lemma correspondenceClassEquiv_naturality_right (M : D) {N N' : D}
     [IsIso ((pf.app (𝟙_ C)).app M)] (b : N ⟶ N') (g : P.obj (𝟙_ C) ⟶ (ihom M).obj N) :
     correspondenceClassEquiv adj' pf M N' (g ≫ (ihom M).map b) =
@@ -224,8 +225,9 @@ lemma correspondenceClassEquiv_naturality_right (M : D) {N N' : D}
   simp only [Category.assoc]
 
 omit [MonoidalClosed C] in
-/-- The class bijection is natural in the source `M` (blueprint `lem-trf-correspondence-class`):
-precomposing a class with `RHom(a, N)` corresponds to precomposing with `F a`. -/
+/-- The class bijection is natural in the source `M` (blueprint
+`lemma-external-duality-trace-morphism--2`): precomposing a class with `RHom(a, N)` corresponds to
+precomposing with `F a`. -/
 lemma correspondenceClassEquiv_naturality_left {M M' : D} (N : D)
     [IsIso ((pf.app (𝟙_ C)).app M)] [IsIso ((pf.app (𝟙_ C)).app M')] (a : M' ⟶ M)
     (g : P.obj (𝟙_ C) ⟶ (ihom M).obj N) :

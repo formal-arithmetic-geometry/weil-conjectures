@@ -38,8 +38,8 @@ scheme `A` over `K` and `σ ∈ Gal(K̄ / K)` (or any `K`-endomorphism of `K̄`)
 `σ_A = 𝟙 × Spec σ` of `A_{K̄} = A ×_K K̄` lies over `Spec σ` and satisfies
 `μ ∘ (σ_A ×_σ σ_A) = σ_A ∘ μ` for the base-changed group law `μ`. Applied to the Jacobian `J₀`
 of `AlgebraicGeometry.exists_jacobian_galoisAction`, this is the clause of
-`lem-wf-geometric-jacobian-galois-action` that `σ_J` preserves the group laws.
-(blueprint: `lem-wf-geometric-jacobian-galois-action`) -/
+`proposition-jacobian-over-ground-field--5` that `σ_J` preserves the group laws.
+(blueprint: `proposition-jacobian-over-ground-field--5`) -/
 noncomputable def geometricFiberGaloisGrpHom (σ : AlgebraicClosure K →ₐ[K] AlgebraicClosure K) :
     SemilinearGrpHom (S := Spec (.of (AlgebraicClosure K)))
       (Scheme.specAlgebraicClosureMap σ).left (baseChangeAlgebraicClosure A)

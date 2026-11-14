@@ -23,13 +23,13 @@ scheme of finite type over `K`, `W = X ×_K Y` and `V = U ×_X W`, with the cart
 ```
 
 and let `Λ` be a coefficient ring killed by an integer `n` invertible in `K`. This file proves
-blueprint `det-geo-open-finiteness-base-change` (section `sec-six-functors-basics`): the derived
-base-change map `q₁^* Rj_* L ⟶ Rh_* e^* L` is an isomorphism for every bounded constructible
+blueprint `corollary-open-direct-image-over-field--2` (section `chap-Construction-of-f`): the
+derived base-change map `q₁^* Rj_* L ⟶ Rh_* e^* L` is an isomorphism for every bounded constructible
 complex `L`,
 
 * on the small étale sites
   (`AlgebraicGeometry.Etale.isIso_baseChange_app_of_isOpenImmersion_of_field`),
-  from the case of sheaves, blueprint `lem-kun-0f1h`
+  from the case of sheaves, blueprint `corollary-open-direct-image-over-field--2`
   (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isOpenImmersion_of_field`), by the
   hypercohomology spectral sequence comparison
   (`AlgebraicGeometry.Etale.isIso_baseChange_app_of_isGE_of_isLE`);
@@ -59,7 +59,7 @@ variable {K : Type u} [Field K] {X U Y W V : Scheme.{u}} (aX : X ⟶ Spec (.of K
   (hW : IsPullback q₁ q₂ aX aY) {e : V ⟶ U} {h : V ⟶ W} (sq : IsPullback e h j q₁)
 
 include hW in
-/-- Blueprint `det-geo-open-finiteness-base-change` on the small étale sites: for an open
+/-- Blueprint `corollary-open-direct-image-over-field--2` on the small étale sites: for an open
 immersion `j : U ⟶ X` of schemes of finite type over a field `K`, its base change `h` along the
 projection `q₁ : X ×_K Y ⟶ X` and a coefficient ring `Λ` killed by an integer `n` invertible in
 `K`, the derived base-change map `q₁^* Rj_* L ⟶ Rh_* e^* L` is an isomorphism for every bounded
@@ -76,10 +76,10 @@ theorem Etale.isIso_baseChange_app_of_isOpenImmersion_of_field (n : ℕ) (hn : I
       hΛ i _
 
 include hW in
-/-- Blueprint `det-geo-open-finiteness-base-change` on the pro-étale sites, finite coefficients:
-for an open immersion `j : U ⟶ X` of schemes of finite type over a field `K`, its base change
-`h` along the projection `q₁ : X ×_K Y ⟶ X` and a coefficient ring `Λ` killed by an integer `n`
-invertible in `K`, the pro-étale derived base-change map `q₁^* Rj_* L ⟶ Rh_* e^* L` is an
+/-- Blueprint `corollary-open-direct-image-over-field--2` on the pro-étale sites, finite
+coefficients: for an open immersion `j : U ⟶ X` of schemes of finite type over a field `K`, its base
+change `h` along the projection `q₁ : X ×_K Y ⟶ X` and a coefficient ring `Λ` killed by an integer
+`n` invertible in `K`, the pro-étale derived base-change map `q₁^* Rj_* L ⟶ Rh_* e^* L` is an
 isomorphism for every bounded constructible pro-étale complex `L`, that is, one of étale origin.
 It is the étale statement `Etale.isIso_baseChange_app_of_isOpenImmersion_of_field` conjugated by
 the site comparison (`ProEtale.comparison_derivedBaseChangeMap`). -/

@@ -18,7 +18,7 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 # Pullback of the dual of a finite locally free module on a ringed site
 
 Source: Stacks Project, Modules on Sites, Tags 0GMX and 0FNY; the Powers and duals
-paragraph of `det-prop-sfb-cartesian-coefficients-twists`, main-20261015
+paragraph of `lemma-inverse-image-coefficient-sheaves--2`, main-20261015
 (blueprint: lem-pur-ringed-site-finite-free-dual-pullback).
 
 The coefficient morphism `a : R → u_* S` is the adjunct of the source's

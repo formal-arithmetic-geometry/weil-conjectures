@@ -29,7 +29,7 @@ can be restricted to a smaller neighbourhood where it commutes.
 
 Source: lem-pc-finite-free-stalk-chain-map-lift-local, step 2 (vanishing of the
 commutativity defects) and step 3 (compatibility of stalk restriction), expanding
-lem-pc-perfect-locus's extension of the finite calculation.
+lemma-coherent-base-change-invertible-sheaves--3's extension of the finite calculation.
 
 Proof: In the restricted finite bases form, for every adjacent degree, the matrix
 of g n followed by d_Q minus d_P followed by g (n+1). Its pullback to the stalk

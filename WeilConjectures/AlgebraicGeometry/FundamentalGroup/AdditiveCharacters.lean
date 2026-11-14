@@ -13,8 +13,8 @@ public import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
 # Continuous `ℤ_ℓ`-characters of the fundamental group and `lim_n H¹(Y, ℤ/ℓⁿ)`
 
 Let `Y` be a connected scheme with a geometric point `s`, `G = π₁(Y, s)` and `ℓ` a prime. The
-identifications `H¹(Y_ét, ℤ/ℓⁿ) ≃ Hom_cont(G, ℤ/ℓⁿ)` of blueprint `cor-galois-abelian-h1` are
-compatible with the reductions `ℤ/ℓⁿ⁺¹ → ℤ/ℓⁿ`
+identifications `H¹(Y_ét, ℤ/ℓⁿ) ≃ Hom_cont(G, ℤ/ℓⁿ)` of blueprint
+`lemma-invariant-additive-characters` are compatible with the reductions `ℤ/ℓⁿ⁺¹ → ℤ/ℓⁿ`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.sheafHEquivContinuousMonoidHom_map`), so they identify
 `Hom_cont(G, ℤ_ℓ)` with the inverse limit of the groups `H¹(Y_ét, ℤ/ℓⁿ)` under the maps induced
 by reduction (`AlgebraicGeometry.Scheme.EtaleTorsor.continuousMonoidHomPadicEquiv`). The
@@ -118,7 +118,7 @@ lemma map_constantZModPowReduction_eq_iff (n : ℕ) (y : Sheaf.H (constantZModPo
       (pow_dvd_pow l (Nat.le_add_right n 1)) (ZMod (l ^ n))).toAddMonoidHom.uliftMap y g)).trans
         (h g)
 
-/-- Blueprint `lem-wf-additive-characters-h1`: Continuous `ℤ_ℓ`-characters are compatible
+/-- Blueprint `lemma-invariant-additive-characters`: Continuous `ℤ_ℓ`-characters are compatible
 finite-level classes.
 
 For a connected scheme `Y` with geometric point `s`, `G = π₁(Y, s)` and a prime `ℓ`, the
@@ -170,7 +170,7 @@ lemma continuousMonoidHomPadicEquiv_mul (b b' : G →ₜ* Multiplicative ℤ_[l]
   rw [ContinuousMonoidHom.mul_apply, toAdd_mul, map_add]
   exact hadd.symm
 
-/-- Blueprint `lem-wf-additive-characters-h1`: Continuous `ℤ_ℓ`-characters are compatible
+/-- Blueprint `lemma-invariant-additive-characters`: Continuous `ℤ_ℓ`-characters are compatible
 finite-level classes.
 
 The group isomorphism `Hom_cont(π₁(Y, s), ℤ_ℓ) ≃+ lim_n H¹(Y_ét, ℤ/ℓⁿ)` underlying the
@@ -206,7 +206,7 @@ lemma mapIsoH1_classH1 {M : Type (u + 1)} [AddCommGroup M] [Finite M] (e : Y ≅
   rw [mapIsoH1, ← classH1Equiv_apply, Equiv.symm_apply_apply]
   rfl
 
-/-- Blueprint `lem-wf-additive-characters-h1`: Continuous `ℤ_ℓ`-characters are compatible
+/-- Blueprint `lemma-invariant-additive-characters`: Continuous `ℤ_ℓ`-characters are compatible
 finite-level classes, the Frobenius equivariance.
 
 Let `e` be an automorphism of `Y`, `τ : F_s ∘ e_* ≅ F_s` a transport of the fibre functor and

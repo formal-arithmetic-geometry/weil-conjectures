@@ -95,7 +95,7 @@ lemma natCast_pow_ne_zero (hl : (l : K) ≠ 0) (n : ℕ) :
   rw [Nat.cast_pow, ← map_natCast (algebraMap K (AlgebraicClosure K))]
   exact pow_ne_zero _ ((map_ne_zero _).2 hl)
 
-/-- Blueprint `lem-wf-curve-kummer-jacobian-tate-module`: Kummer identifies curve cohomology
+/-- Blueprint `proposition-h-1-curve-tate-module--1`: Kummer identifies curve cohomology
 with the Jacobian torsion.
 
 For a Jacobian torsion datum `d` of `C₀` and a prime `l` invertible in `K`, the isomorphism
@@ -116,7 +116,7 @@ lemma equivTorsion_kummerEquiv (d : JacobianTorsionDatum p l) (hl : (l : K) ≠ 
       Scheme.kummerTorsionEquiv (l ^ n) (natCast_pow_ne_zero hl n) x := by
   simp [kummerEquiv]
 
-/-- Blueprint `lem-wf-curve-kummer-jacobian-tate-module`: the isomorphism
+/-- Blueprint `proposition-h-1-curve-tate-module--1`: the isomorphism
 `H¹(C, μ_{lⁿ}) ≅ J₀(K̄)[lⁿ]` is Galois-equivariant: restriction along the automorphism
 `σ_C = 𝟙 × Spec σ` of `C` corresponds to the action of `σ` on geometric points by
 coordinates. -/
@@ -137,7 +137,7 @@ theorem kummerEquiv_restrictMuH (d : JacobianTorsionDatum p l) (hl : (l : K) ≠
     rfl
   rw [key]
 
-/-- Blueprint `lem-wf-curve-kummer-jacobian-tate-module`: the isomorphisms
+/-- Blueprint `proposition-h-1-curve-tate-module--1`: the isomorphisms
 `H¹(C, μ_{lⁿ}) ≅ J₀(K̄)[lⁿ]` are compatible with the transition maps: the map induced by
 `μ_{lⁿ⁺¹} ⟶ μ_{lⁿ}`, `z ↦ z ^ l`, corresponds to multiplication by `l`. Hence they form a
 compatible system identifying `lim_n H¹(C, μ_{lⁿ})` with the Tate module `T_l J`. -/
@@ -160,7 +160,7 @@ theorem kummerEquiv_map_rootsOfUnityPowMap (d : JacobianTorsionDatum p l) (hl : 
   rw [key, d.equivTorsion_symm_zsmul, AddEquiv.symm_apply_apply]
 
 variable (p l) in
-/-- Blueprint `lem-wf-curve-kummer-jacobian-tate-module`: Kummer identifies curve cohomology
+/-- Blueprint `proposition-h-1-curve-tate-module--1`: Kummer identifies curve cohomology
 with the Jacobian torsion, through the representing isomorphism of the Jacobian.
 
 There is a Jacobian torsion datum `d` and an injective homomorphism `φ : J₀(K̄) → Pic(C)`

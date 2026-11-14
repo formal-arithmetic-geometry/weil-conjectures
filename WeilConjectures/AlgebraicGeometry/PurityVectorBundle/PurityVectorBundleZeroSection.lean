@@ -16,7 +16,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 Source: blueprint, `sec-smooth-purity/sk-def-purity-conv`, definition at order 1895;
 Stacks Project, Constructions, Tags 01M2, 01LW and 01LX
-(blueprint: def-pur-vector-bundle-zero-section).
+(blueprint: proposition-purity-vector-bundles).
 
 The canonical relative spectrum, symmetric-algebra augmentation, and its zero section
 are reused from `VectorBundleZeroSection`. The additional data here are an arbitrary
@@ -40,7 +40,7 @@ namespace AlgebraicGeometry
 /-- A rank-`c` vector bundle over a separated finite-type scheme over the fixed purity
 field, including its chosen isomorphism `phi` to `Spec_Z Sym(𝓔)` over `Z`.
 Source: blueprint, `sk-def-purity-conv`, order 1895; Stacks Tag 01M2
-(blueprint: def-pur-vector-bundle-zero-section). -/
+(blueprint: proposition-purity-vector-bundles). -/
 structure PurityVectorBundle
     (P : WeilConjectures.PurityFiniteSetting.{u})
     (Z : Scheme.{u}) (hZ : Z ⟶ Spec (CommRingCat.of P.field.k))
@@ -65,7 +65,7 @@ followed by the inverse of the chosen `phi`. The augmentation is the existing un
 algebra morphism killing `SymmetricAlgebraSheaf.inclusion`; its sectionwise composite
 with `sectionMap` is `SymmetricAlgebra.algebraMapInv`.
 Source: blueprint, `sk-def-purity-conv`, order 1895; Stacks Tag 01M2
-(blueprint: def-pur-vector-bundle-zero-section). -/
+(blueprint: proposition-purity-vector-bundles). -/
 def zeroSection (V : PurityVectorBundle P Z hZ c) : Z ⟶ V.E :=
   @VectorBundleZeroSection.zero Z (isNoetherian_of_locallyOfFiniteType hZ)
     c V.𝓔 V.locallyFree ≫ V.phi.inv
@@ -74,7 +74,7 @@ def zeroSection (V : PurityVectorBundle P Z hZ c) : Z ⟶ V.E :=
 open `U` its restriction, transported through `phi`, is the spectrum of the augmentation
 `Sym(𝓔(U)) → 𝒪(U)` fixing constants and killing all degree-one generators.
 Source: blueprint, `sk-def-purity-conv`, order 1895; Stacks Tags 01M2 and 01LX
-(blueprint: def-pur-vector-bundle-zero-section).
+(blueprint: proposition-purity-vector-bundles).
 
 Proof (the node's proof steps):
 1. Install the Noetherian instance `isNoetherian_of_locallyOfFiniteType hZ` (finite type over

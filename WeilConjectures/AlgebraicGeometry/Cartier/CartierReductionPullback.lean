@@ -92,7 +92,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- Pullback of the integral pole extension commutes with its normalized reduction
 when the inverse-image divisor is Cartier.
 Source: blueprint sk-lem-geo-cartier.proof.md, paragraph 6 and opening comparison
-paragraph (blueprint: lem-sfb-cartier-reduction-pullback).
+paragraph (blueprint: lemma-cycle-class-cartier-divisor--2).
 Proof: choose regular equations t for D. Their pullbacks are regular because the
 inverse-image ideal is again Cartier. Sending u times t inverse to the pullback unit
 and pulled-back inverse equation gives a map of pole extensions, independent of the

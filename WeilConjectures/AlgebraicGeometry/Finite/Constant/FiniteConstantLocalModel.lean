@@ -153,7 +153,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteConstantLocalModel
 # Finite constant local models for condensed coefficients
 
 Source: blueprint main-20261015, `sk-def-sfb-constructible-local-model.md`
-(blueprint: det-def-sfb-constructible-local-model).
+(blueprint: definition-constructible-sheaves--1).
 
 Scalars are encoded as a ring object of abelian groups, and scalar modules as internal
 modules in abelian groups. These are precisely ordinary modules over the scalar ring.
@@ -479,7 +479,7 @@ over Λ_U. Transport along the canonical coefficient isomorphism α_u to the
 u^*Λ_X-module category used by IsLocallyFinitelyPresented. Restriction along α_u and
 its inverse preserve regular modules, finite sums and cokernel presentations, so the
 same cover witnesses local finite presentation.
-(blueprint: det-def-sfb-constructible-local-model). -/
+(blueprint: definition-constructible-sheaves--1). -/
 theorem HasFiniteConstantLocalModel.isLocallyFinitelyPresented {X : Scheme.{u}}
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (hM : HasFiniteConstantLocalModel Λ X M) :

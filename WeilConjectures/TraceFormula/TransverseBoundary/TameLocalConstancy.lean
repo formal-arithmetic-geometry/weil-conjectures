@@ -21,7 +21,7 @@ finite locally constant cohomology whose monodromy factors through a finite `ℓ
 `M = Rj_* i_! E` restricted to `Y - z` has finite locally constant cohomology sheaves: its
 stalks are the continuous cohomology of the tame inertia representation of `E` along `Y`, and
 the specialization maps between them are isomorphisms (blueprint
-`det-tf-transverse-tame-local-constancy`).
+`lemma-cohomology-near-two-transverse-divisors--1`).
 
 ## Main statements
 
@@ -43,9 +43,9 @@ variable {k : Type u} [Field k] [IsAlgClosed k] (C : TransverseCorner k) {ℓ : 
   (hℓ : (ℓ : k) ≠ 0) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (hΛ : ∃ n : ℕ, (ℓ : Λ) ^ n = 0)
 
 include hℓ in
-/-- Blueprint `det-tf-transverse-tame-local-constancy`, constant coefficients: for a finite
-`Λ`-module `N` killed by `ℓ`, the restriction of `R j_{W*} N` to the regular divisor `Y - z` of
-`W = Z - X` has finite locally constant cohomology sheaves. Near every point of `Y - z`, purity
+/-- Blueprint `lemma-cohomology-near-two-transverse-divisors--1`, constant coefficients: for a
+finite `Λ`-module `N` killed by `ℓ`, the restriction of `R j_{W*} N` to the regular divisor `Y - z`
+of `W = Z - X` has finite locally constant cohomology sheaves. Near every point of `Y - z`, purity
 for the regular divisor `Y` of the étale limit of smooth surfaces `Z`
 (`Scheme.TransverseCorner.hasFiniteLocallyConstantHomology_puncturedYι_jW_constantZModModule`)
 computes `R^q j_* 𝔽_ℓ` as `𝔽_ℓ`, `i_* 𝔽_ℓ(-1)` and `0`, and `N` is a finite direct sum of copies
@@ -61,8 +61,8 @@ theorem hasFiniteLocallyConstantHomology_puncturedYι_jW_constantSheaf
     (C.hasFiniteLocallyConstantHomology_puncturedYι_jW_constantZModModule hℓ) N hN
 
 include hℓ hΛ in
-/-- Blueprint `det-tf-transverse-tame-local-constancy`, after the reduction to one divisor: for
-`j_W : Z - (X ∪ Y) ⟶ W = Z - X`, the restriction of `R j_{W*} E` to the regular divisor
+/-- Blueprint `lemma-cohomology-near-two-transverse-divisors--1`, after the reduction to one
+divisor: for `j_W : Z - (X ∪ Y) ⟶ W = Z - X`, the restriction of `R j_{W*} E` to the regular divisor
 `Y - z ⊆ W` has finite locally constant cohomology sheaves (tameness along `Y` and Abhyankar's
 lemma, Stacks Tag 0EYG). -/
 theorem hasFiniteLocallyConstantHomology_puncturedYι_jW
@@ -75,7 +75,7 @@ theorem hasFiniteLocallyConstantHomology_puncturedYι_jW
     (fun N _ hN ↦ C.hasFiniteLocallyConstantHomology_puncturedYι_jW_constantSheaf hℓ Λ N hN) E hE
 
 include hℓ hΛ in
-/-- Blueprint `det-tf-transverse-tame-local-constancy`: Local constancy along the boundary
+/-- Blueprint `lemma-cohomology-near-two-transverse-divisors--1`: Local constancy along the boundary
 divisor. The restriction of `M = Rj_* i_! E` to the punctured divisor `Y - z` has finite locally
 constant cohomology sheaves. On `W = Z - X`, which contains `Y - z`, `M` is `R j_{W*} E`
 (`AlgebraicGeometry.Scheme.TransverseCorner.leftDerivedUpperStarPuncturedYBoundaryComplexIso`),

@@ -22,7 +22,7 @@ the inverse `γ` of `z ↦ z ^ q`. For a commutative ring `Λ` of characteristic
 `τ_r : Lh^* Λ_Y(r) ≅ Λ_Y(r)` (`AlgebraicGeometry.Etale.tateWeilDatum`) of the genuine Tate twist
 (`AlgebraicGeometry.Etale.hasTateTwist`) is the multiplication by `q^{-r}`
 (`AlgebraicGeometry.Etale.frobeniusOperator_tateWeilDatum`): this is the twist normalization of
-`def-weil-frobenius-coefficient-twists`.
+`prose-10-21`.
 
 By `WeilConjectures.EtaleCohomology.TateTwist.FrobeniusScalar` the Frobenius operator on
 `H⁰(Y, Λ(r))` is the multiplication by `c_1 ^ r` for a unit `c_1`, and it remains to show
@@ -306,11 +306,11 @@ theorem tateFrobeniusScalar_specGeometricFrobenius_mul_natCard :
 theorem isUnit_natCard_of_hasInvertibleExponent : IsUnit (Nat.card k : Λ) :=
   isUnit_iff_exists_inv'.2 ⟨_, tateFrobeniusScalar_specGeometricFrobenius_mul_natCard Λ k⟩
 
-/-- Blueprint `def-pur-tate-datum`: Strict Weil data and the Tate datum.
+/-- Blueprint `definition-weil-structure--1`: Strict Weil data and the Tate datum.
 
 The Tate datum `τ_r : Lg^* Λ(r) ≅ Λ(r)` (`AlgebraicGeometry.Etale.tateWeilDatum`) of the Tate
 twist, for `g` the geometric Frobenius of `Spec k̄` over the finite field `k` with `q` elements, is
-normalized as in `def-weil-frobenius-coefficient-twists`: geometric Frobenius acts on
+normalized as in `prose-10-21`: geometric Frobenius acts on
 `H⁰(Spec k̄, Λ(r))` by `q^{-r}` (hence by `q^r` on `Λ(-r)`). Here `Λ` is a commutative ring of
 characteristic `n ≠ 0` invertible on `Spec k̄`, so that `q` is a unit of `Λ`
 (`AlgebraicGeometry.Etale.isUnit_natCard_of_hasInvertibleExponent`). -/

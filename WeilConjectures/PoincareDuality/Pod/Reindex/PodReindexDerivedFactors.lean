@@ -11,7 +11,7 @@ import Mathlib.Tactic.CategoryTheory.Slice
 
 /-! # Exact derived-functor factors and the ordinary compositor
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4 and 0941 (blueprint: lem-pod-reindex-derived-factors).
 -/
 

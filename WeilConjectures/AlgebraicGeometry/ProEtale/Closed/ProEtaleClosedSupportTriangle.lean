@@ -48,7 +48,7 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 # The ambient pro-etale closed-support triangle for a finite ring
 
 Source: Weil conjectures blueprint, sec-smooth-purity/sk-prop-sf-localization,
-order 1866 (blueprint: lem-exc-proetale-support-triangle).
+order 1866 (blueprint: lemma-local-cohomology-right-adjoint--2).
 
 The categories are the recorded left-module categories over the sheafified
 continuous-function coefficient rings. No commutativity is assumed. The exact

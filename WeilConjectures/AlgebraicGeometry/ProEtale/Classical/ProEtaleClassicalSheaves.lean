@@ -47,7 +47,7 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 
 Source: Weil conjectures blueprint, main-20261015,
 `sec-proetale-coefficients/sk-thm-pe-classical-sheaves`, node statement;
-Stacks Project, Tag 099T (blueprint: sk-thm-pe-classical-sheaves).
+Stacks Project, Tag 099T (blueprint: theorem-classical-sheaves-essential-image--1).
 -/
 
 @[expose] public section
@@ -92,15 +92,16 @@ sheaves for every discrete commutative coefficient ring.
 
 Source: Weil conjectures blueprint, main-20261015,
 `sec-proetale-coefficients/sk-thm-pe-classical-sheaves`, node statement;
-Stacks Project, Tag 099T (blueprint: sk-thm-pe-classical-sheaves).
+Stacks Project, Tag 099T (blueprint: theorem-classical-sheaves-essential-image--1).
 
 Proof:
-1. Apply `det-pe-classical-sheaves-unit` to obtain the invertible comparison unit and
+1. Apply `theorem-classical-sheaves-essential-image--1` to obtain the invertible comparison unit and
    the induced bijection on Hom sets, giving full faithfulness.
-2. Apply `det-pe-classical-sheaves-image` and the definition `sk-def-pe-classical-definition`
-   (with `det-pe-classical-definition-continuity-map`) to identify the essential image
+2. Apply `theorem-classical-sheaves-essential-image--1` and the definition
+`definition-classical-pro-etale-sheaves`
+   (with `theorem-classical-sheaves-essential-image--1`) to identify the essential image
    with the continuity-map condition defining `IsClassical`.
-3. Apply `det-pe-classical-sheaves-modules` to the arbitrary discrete commutative ring.
+3. Apply `theorem-classical-sheaves-essential-image--1` to the arbitrary discrete commutative ring.
    Its module adjunction is an exact equivalence onto the full subcategory defined by
    the module continuity maps, the recorded `IsClassicalModuleFor`; the inverse image
    is additive and preserves finite limits and colimits, hence exact.

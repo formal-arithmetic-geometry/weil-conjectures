@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.PrimaryModuleFiltrationInverseIma
 /-!
 # Transport of an invariant primary module filtration to etale sheaves
 
-Source: the generic-filtration argument in blueprint `lem-sc-affine-generic-second`,
+Source: the generic-filtration argument in blueprint `theorem-cohomology-curves--2`,
 proof paragraphs 1--2; Stacks Project, Tags 04JQ, 03QT and 03SF.
 -/
 
@@ -35,7 +35,7 @@ namespace AlgebraicGeometry.Scheme
 set_option linter.unusedVariables false
 
 /-- Transport a supplied invariant subgroup chain, rather than construct a Sylow chain.
-Source: blueprint `lem-sc-affine-generic-second`, proof paragraphs 1--2;
+Source: blueprint `theorem-cohomology-curves--2`, proof paragraphs 1--2;
 Stacks Project, Tags 04JQ, 03QT and 03SF.
 (blueprint: lem-sc-primary-module-filtration-sheaf-transport)
 

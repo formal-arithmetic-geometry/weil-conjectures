@@ -23,7 +23,7 @@ maps are base changes (`AlgebraicGeometry.Proj.isPullback_map_of_isGradedBaseCha
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.GradedAlgebraData.relProj` — the relative `Proj` of `A`
-  (blueprint: `def-nagata-relative-proj`).
+  (blueprint: `definition-admissible-blow-up--1`).
 - `AlgebraicGeometry.Scheme.GradedAlgebraData.relProjHom` — its structure morphism to `X`.
 - `AlgebraicGeometry.Scheme.GradedAlgebraData.relProjι` — the chart `Proj (A(V)) ⟶ relProj A`
   over an affine open `V`.
@@ -32,10 +32,10 @@ maps are base changes (`AlgebraicGeometry.Proj.isPullback_map_of_isGradedBaseCha
 
 - `AlgebraicGeometry.Scheme.GradedAlgebraData.isPullback_relProjι` — over every affine open `V`
   the relative `Proj` restricts to `Proj (A(V))`
-  (blueprint: `lemma-nagata-relative-proj-exists`).
+  (blueprint: `definition-admissible-blow-up--1`).
 - `AlgebraicGeometry.Scheme.GradedAlgebraData.isPullback_relProjFunctor_map` and
   `AlgebraicGeometry.Scheme.GradedAlgebraData.relProjFunctor_map_relProjι` — compatibility with
-  iterated restriction (blueprint: `prop-nagata-relative-proj-functoriality`, item 1).
+  iterated restriction (blueprint: `definition-admissible-blow-up--1`, item 1).
 -/
 
 @[expose] public section
@@ -75,8 +75,8 @@ noncomputable def toOpen (U : X.affineOpens) : Proj (A.grading U) ⟶ U.1 :=
   Proj.toSpecOfAlgebra (A.grading U) ≫ U.2.isoSpec.inv
 
 /-- The restriction squares of the local `Proj`s are pullbacks: for affine opens `U ≤ V`,
-`Proj (A(U)) = U ×_V Proj (A(V))`. (blueprint: `prop-nagata-relative-proj-functoriality`, item 1;
-the overlap isomorphisms of `lemma-nagata-relative-proj-exists`) -/
+`Proj (A(U)) = U ×_V Proj (A(V))`. (blueprint: `definition-admissible-blow-up--1`, item 1;
+the overlap isomorphisms of `definition-admissible-blow-up--1`) -/
 lemma isPullback_relProjFunctor_map {U V : X.affineOpens} (h : U ≤ V) :
     IsPullback (A.relProjFunctor.map (homOfLE h)) (A.toOpen U) (A.toOpen V) (X.homOfLE h) := by
   have key := Proj.isPullback_map_of_isGradedBaseChangeAlong _ _ (A.isGradedBaseChangeAlong h)
@@ -116,17 +116,17 @@ instance {U V : X.affineOpens} (f : U ⟶ V) : IsOpenImmersion (A.relProjFunctor
 
 /-- The **relative `Proj`** `Proj_X(𝒜)` of a quasi-coherent graded `𝒪_X`-algebra, obtained by
 gluing the schemes `Proj (Γ(V, 𝒜))` over all affine opens `V` of `X`.
-(blueprint: `def-nagata-relative-proj`) -/
+(blueprint: `definition-admissible-blow-up--1`) -/
 noncomputable def relProj : Scheme.{u} :=
   A.relProjGluingData.glued
 
 /-- The structure morphism `Proj_X(𝒜) ⟶ X`, glued from the structure morphisms of the
-`Proj (Γ(V, 𝒜))`. (blueprint: `def-nagata-relative-proj`) -/
+`Proj (Γ(V, 𝒜))`. (blueprint: `definition-admissible-blow-up--1`) -/
 noncomputable def relProjHom : A.relProj ⟶ X :=
   A.relProjGluingData.toBase
 
 /-- The chart embedding `Proj (Γ(V, 𝒜)) ⟶ Proj_X(𝒜)` over an affine open `V`.
-(blueprint: `def-nagata-relative-proj`) -/
+(blueprint: `definition-admissible-blow-up--1`) -/
 noncomputable def relProjι (U : X.affineOpens) : Proj (A.grading U) ⟶ A.relProj :=
   colimit.ι A.relProjFunctor U
 
@@ -134,14 +134,14 @@ instance (U : X.affineOpens) : IsOpenImmersion (A.relProjι U) :=
   inferInstanceAs (IsOpenImmersion (colimit.ι A.relProjFunctor U))
 
 /-- The chart embeddings are compatible with the structure morphisms.
-(blueprint: `lemma-nagata-relative-proj-exists`) -/
+(blueprint: `definition-admissible-blow-up--1`) -/
 @[reassoc (attr := simp)]
 lemma relProjι_relProjHom (U : X.affineOpens) :
     A.relProjι U ≫ A.relProjHom = A.toOpen U ≫ U.1.ι :=
   A.relProjGluingData.ι_toBase U
 
 /-- The preimage of an affine open under the structure morphism is the corresponding chart.
-(blueprint: `lemma-nagata-relative-proj-exists`) -/
+(blueprint: `definition-admissible-blow-up--1`) -/
 lemma relProjHom_preimage (U : X.affineOpens) :
     A.relProjHom ⁻¹ᵁ U.1 = (A.relProjι U).opensRange := by
   have h := A.relProjGluingData.toBase_preimage_eq_opensRange_ι U
@@ -151,16 +151,16 @@ lemma relProjHom_preimage (U : X.affineOpens) :
 /-- **Affine restriction of the relative `Proj`**: over every affine open `V ⊆ X`, the relative
 `Proj` restricts to `Proj (Γ(V, 𝒜))`, i.e. `Proj (Γ(V, 𝒜)) = V ×_X Proj_X(𝒜)` via the chart
 embedding and the structure morphisms.
-(blueprint: `lemma-nagata-relative-proj-exists`,
-`prop-nagata-relative-proj-functoriality` item 1) -/
+(blueprint: `definition-admissible-blow-up--1`,
+`definition-admissible-blow-up--1` item 1) -/
 theorem isPullback_relProjι (U : X.affineOpens) :
     IsPullback (A.toOpen U) (A.relProjι U) U.1.ι A.relProjHom :=
   A.relProjGluingData.isPullback_natTrans_ι_toBase U
 
 /-- The chart embeddings are compatible with further restriction: for affine opens `U ≤ V`, the
 chart of `U` is the restriction morphism `Proj (A(U)) ⟶ Proj (A(V))` followed by the chart of
-`V`. (blueprint: `lemma-nagata-relative-proj-exists`,
-`prop-nagata-relative-proj-functoriality` item 1) -/
+`V`. (blueprint: `definition-admissible-blow-up--1`,
+`definition-admissible-blow-up--1` item 1) -/
 @[reassoc (attr := simp)]
 lemma relProjFunctor_map_relProjι {U V : X.affineOpens} (f : U ⟶ V) :
     A.relProjFunctor.map f ≫ A.relProjι V = A.relProjι U :=
@@ -178,7 +178,7 @@ lemma toOpen_eq (U : X.affineOpens) :
   rfl
 
 /-- The restriction isomorphism `Proj (Γ(V, 𝒜)) ≅ V ×_X Proj_X(𝒜)` over an affine open `V`.
-(blueprint: `lemma-nagata-relative-proj-exists`) -/
+(blueprint: `definition-admissible-blow-up--1`) -/
 noncomputable def relProjRestrictIso (U : X.affineOpens) :
     Proj (A.grading U) ≅ pullback U.1.ι A.relProjHom :=
   (A.isPullback_relProjι U).isoPullback
@@ -195,8 +195,8 @@ lemma relProjRestrictIso_hom_snd (U : X.affineOpens) :
 
 /-- The restriction isomorphisms commute with further restriction: for affine opens `U ≤ V`, the
 restriction morphism `Proj (A(U)) ⟶ Proj (A(V))` corresponds to the inclusion
-`U ×_X Proj_X(𝒜) ⟶ V ×_X Proj_X(𝒜)`. (blueprint: `lemma-nagata-relative-proj-exists`,
-`prop-nagata-relative-proj-functoriality` item 1) -/
+`U ×_X Proj_X(𝒜) ⟶ V ×_X Proj_X(𝒜)`. (blueprint: `definition-admissible-blow-up--1`,
+`definition-admissible-blow-up--1` item 1) -/
 @[reassoc]
 lemma relProjRestrictIso_hom_naturality {U V : X.affineOpens} (h : U ≤ V) :
     (A.relProjRestrictIso U).hom ≫

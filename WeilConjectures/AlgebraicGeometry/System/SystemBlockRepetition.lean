@@ -534,7 +534,7 @@ and transition is extended by the same j!. The summand identity respects gluing,
 so defines the system comparison, with the asserted section normalization after
 the dependency's level identifications. It is invertible by the reverse identity.
 Exactness descends this ordinary identity termwise by
-lem-weil-pbc-exact-functor-derived-factorization. A second repetition substitutes
+situation-conventions. A second repetition substitutes
 s(m) into the same component identity, so gives the identical comparison and
 commutes with the composition identifications; the identity map leaves it unchanged. -/
 theorem blockRepeat_extensionByZero

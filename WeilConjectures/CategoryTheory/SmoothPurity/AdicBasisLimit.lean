@@ -102,7 +102,7 @@ def adicBasisConstant (A : Type (max uC vC r)) [CommRing A] (t : A) (n : ℕ) (U
       (Ideal.Quotient.mk ((Ideal.span {t}) ^ (n + 1)) a)
 
 /-- A finite direct sum of the coefficient module, represented by its finite product.
-Source: DAG proof, step 5; def-weil-sheaf-of-modules-category
+Source: DAG proof, step 5; situation-conventions
 (blueprint: lem-pur-adic-basis-limit). -/
 abbrev adicBasisFree (R : Sheaf J RingCat.{max uC vC r}) (d : ℕ) :
     ringedSiteModules.{max uC vC r} R :=
@@ -684,7 +684,7 @@ Proof: (1) The basis map A^d -> B descends modulo t^n, with inverse given by
 reducing the coordinate maps. Both commute with reductions, including d=0.
 (2) Constant presheaves and sheafification carry these maps to quotient basis
 isomorphisms, since sheafification preserves finite products
-(lem-weil-pbc-sheafification-exact). The module-sheafification universal property
+(situation-conventions). The module-sheafification universal property
 (lem-pc-sites-module-sheafification-interface) and its underlying-set comparison
 (lem-pc-sites-sheafification-underlying-sets) identify the target with the ring sheaf.
 (3) The ideal identities t^n B=v^(en)B and inclusions t^m B ⊆ v^m B give

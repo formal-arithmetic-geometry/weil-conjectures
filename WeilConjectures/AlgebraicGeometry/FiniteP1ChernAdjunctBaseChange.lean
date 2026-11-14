@@ -10,7 +10,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteP1ChernMapBaseChange
 
 /-! # Exchange for the normalized projective-line Chern adjunct
 
-Source: blueprint thm-amb-p1-decomposition, arbitrary-base paragraph, and
+Source: blueprint lemma-cohomology-projective-line-trace, arbitrary-base paragraph, and
 lem-sp-finite-p1-kummer-naturality, steps 1--3.
 -/
 
@@ -27,7 +27,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] AlgebraicGeometry.ProjectiveSpace
 
 /-- The adjuncts of two specified Kummer classes commute with exchange.
-Source: blueprint thm-amb-p1-decomposition, arbitrary-base paragraph, and
+Source: blueprint lemma-cohomology-projective-line-trace, arbitrary-base paragraph, and
 lem-sp-finite-p1-kummer-naturality, steps 1--3.
 (auxiliary; not a blueprint node).
 

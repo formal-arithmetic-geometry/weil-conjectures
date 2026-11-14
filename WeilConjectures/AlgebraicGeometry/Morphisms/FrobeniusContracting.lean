@@ -27,7 +27,7 @@ The proof is a computation with points: the two morphisms
 ## Main statements
 
 - `AlgebraicGeometry.map_maximalIdeal_stalkMap_le_sq_of_isFrobenius`: the stalk map of `h` at a
-  fixed rational point sends `𝔪` into `𝔪 ^ 2` (blueprint `lem-trf-local-term-locality`,
+  fixed rational point sends `𝔪` into `𝔪 ^ 2` (blueprint `corollary-contracting-local-terms-point`,
   proof of item 3).
 -/
 
@@ -65,8 +65,8 @@ variable {k : Type u} [Field k] {S X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of
   {a : S ⟶ Spec (.of k)} {p : S ⟶ X₀} {σ : Spec (.of k) ⟶ Spec (.of k₀)}
 
 /-- **A lift of a Frobenius contracts the local ring at a fixed rational point** (blueprint
-`lem-trf-local-term-locality`, proof of item 3): let `S = X₀ ×_{k₀} k` with projections `p`,
-`a`, let `h` be a `k`-endomorphism of `S` with `h ≫ p = p ≫ G` for a `#k₀ ^ m`-power Frobenius
+`corollary-contracting-local-terms-point`, proof of item 3): let `S = X₀ ×_{k₀} k` with projections
+`p`, `a`, let `h` be a `k`-endomorphism of `S` with `h ≫ p = p ≫ G` for a `#k₀ ^ m`-power Frobenius
 `G` of `X₀`, `m ≥ 1`, and let `x` be a `k`-rational point of `S` fixed by `h`. Then the stalk map
 of `h` at `x` sends the maximal ideal of `𝒪_{S,x}` into its square. -/
 theorem map_maximalIdeal_stalkMap_le_sq_of_isFrobenius (hp : IsPullback p a f₀ σ)

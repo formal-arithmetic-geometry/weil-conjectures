@@ -49,7 +49,7 @@ variable {A : Type u} (B : Type u) [CommRing A] [CommRing B] [Algebra A B] (I : 
 
 /-- The coordinate ring `C_a(A, B, I) = B ⊗_A A[I/a]` of the chart at `a` of the base change of
 the blow-up of `Spec A` along `I` to `Spec B`.
-(blueprint: `def-nagata-strict-transform-basechange-chart-ring`) -/
+(blueprint: `definition-strict-transform--1`) -/
 noncomputable abbrev BaseChangeChart : Type u :=
   B ⊗[A] chartRing I a
 
@@ -60,7 +60,7 @@ noncomputable abbrev baseChangeChartTorsion : Ideal (BaseChangeChart B I a) :=
 
 /-- The coordinate ring `C_a^st(A, B, I) = C_a(A, B, I) / Γ_(a)(C_a(A, B, I))` of the chart at
 `a` of the strict transform of `Spec B` in the blow-up of `Spec A` along `I`.
-(blueprint: `def-nagata-strict-transform-chart-ring`) -/
+(blueprint: `definition-strict-transform--1`) -/
 noncomputable abbrev StrictChart : Type u :=
   BaseChangeChart B I a ⧸ baseChangeChartTorsion B I a
 
@@ -152,14 +152,14 @@ variable (a) in
 /-- The map `σ_a : C_a(A, B, I) → B[IB/b]`, `y ⊗ x/a ↦ y·x̄/b`, where `b` is the image of `a` in
 `B`. It is a well-defined homomorphism of `B`-algebras by the universal properties of
 `A[I/a] ⊆ A_a` and of the tensor product.
-(blueprint: `def-nagata-strict-chart-to-extended-blowup-chart`,
-`lemma-nagata-strict-chart-to-extended-blowup-chart`) -/
+(blueprint: `definition-strict-transform--1`,
+`definition-strict-transform--1`) -/
 noncomputable def strictChartMap (ha : a ∈ I) :
     BaseChangeChart B I a →ₐ[B] chartRing (I.map (algebraMap A B)) (algebraMap A B a) :=
   (baseChangeChartToAway B I a).codRestrict _ (baseChangeChartToAway_mem_chartRing B I a ha)
 
 /-- The defining formula of `σ_a` on pure tensors of chart generators: `σ_a(y ⊗ x/a) = y·x̄/b`.
-(blueprint: `def-nagata-strict-chart-to-extended-blowup-chart`) -/
+(blueprint: `definition-strict-transform--1`) -/
 lemma coe_strictChartMap_tmul (ha : a ∈ I) (y : B) (x : A)
     (hx : chartFraction a 1 x ∈ chartRing I a) :
     (strictChartMap B I a ha (y ⊗ₜ ⟨chartFraction a 1 x, hx⟩) :
@@ -175,7 +175,7 @@ lemma coe_strictChartMap (ha : a ∈ I) (z : BaseChangeChart B I a) :
 
 /-- **`σ_a` is surjective**: the chart ring `B[IB/b]` is generated over `B` by the fractions
 `ȳ/b`, `y ∈ IB`, all of which lie in the image of `σ_a`.
-(blueprint: `lemma-nagata-strict-chart-map-surjective`) -/
+(blueprint: `definition-strict-transform--1`) -/
 theorem strictChartMap_surjective (ha : a ∈ I) :
     Function.Surjective (strictChartMap B I a ha) := by
   rw [← AlgHom.range_eq_top, eq_top_iff]
@@ -214,7 +214,7 @@ theorem strictChartMap_surjective (ha : a ∈ I) :
 /-- **The kernel of `σ_a` is the `a`-power torsion** of `C_a(A, B, I)`: an element killed by
 `σ_a` becomes an element `w ∈ B` after multiplication by a power of `a`, and `w/1 = 0` in `B_b`
 means that `w` is killed by a power of `b`.
-(blueprint: `lemma-nagata-strict-chart-map-kernel`) -/
+(blueprint: `definition-strict-transform--1`) -/
 theorem ker_strictChartMap (ha : a ∈ I) :
     RingHom.ker (strictChartMap B I a ha) = baseChangeChartTorsion B I a := by
   ext z
@@ -244,7 +244,7 @@ theorem ker_strictChartMap (ha : a ∈ I) :
     exact (hu.mul_right_eq_zero).mp h1.symm
 
 /-- The comparison `σ̄_a : C_a^st(A, B, I) → B[IB/b]` induced by `σ_a` on the quotient by the
-`a`-power torsion. (blueprint: `def-nagata-strict-transform-chart-comparison`) -/
+`a`-power torsion. (blueprint: `definition-strict-transform--1`) -/
 noncomputable def strictChartComparison (ha : a ∈ I) :
     StrictChart B I a →ₐ[B] chartRing (I.map (algebraMap A B)) (algebraMap A B a) :=
   Ideal.Quotient.liftₐ _ (strictChartMap B I a ha) fun z hz ↦ by
@@ -258,7 +258,7 @@ lemma strictChartComparison_mk (ha : a ∈ I) (z : BaseChangeChart B I a) :
 
 /-- **The strict-transform chart comparison is a ring isomorphism**
 `σ̄_a : C_a^st(A, B, I) ≃ B[IB/b]`: `σ_a` is surjective and its kernel is exactly the ideal
-by which `C_a(A, B, I)` is divided. (blueprint: `prop-nagata-strict-transform-chart-iso`) -/
+by which `C_a(A, B, I)` is divided. (blueprint: `definition-strict-transform--1`) -/
 theorem strictChartComparison_bijective (ha : a ∈ I) :
     Function.Bijective (strictChartComparison B I ha) := by
   refine ⟨?_, ?_⟩
@@ -272,7 +272,7 @@ theorem strictChartComparison_bijective (ha : a ∈ I) :
     exact ⟨_, strictChartComparison_mk B I ha z⟩
 
 /-- The strict-transform chart comparison `σ̄_a` as an isomorphism of `B`-algebras
-`C_a^st(A, B, I) ≃ B[IB/b]`. (blueprint: `prop-nagata-strict-transform-chart-iso`) -/
+`C_a^st(A, B, I) ≃ B[IB/b]`. (blueprint: `definition-strict-transform--1`) -/
 noncomputable def strictChartEquiv (ha : a ∈ I) :
     StrictChart B I a ≃ₐ[B] chartRing (I.map (algebraMap A B)) (algebraMap A B a) :=
   AlgEquiv.ofBijective (strictChartComparison B I ha) (strictChartComparison_bijective B I ha)
@@ -385,7 +385,7 @@ lemma StrictChart.map_id : StrictChart.map I a (AlgHom.id A B) = AlgHom.id A _ :
 variable (a) in
 /-- **Compatibility of the strict-transform chart maps with composition**: for localizations
 this says that localizing successively at `s` and `t` agrees with localizing at the composite.
-(blueprint: `lemma-nagata-strict-transform-chart-localization-data`, compatibility clause) -/
+(blueprint: `definition-strict-transform--1`, compatibility clause) -/
 lemma StrictChart.map_comp :
     StrictChart.map I a (ψ.comp φ) = (StrictChart.map I a ψ).comp (StrictChart.map I a φ) := by
   ext z
@@ -400,7 +400,7 @@ lemma StrictChart.map_comp :
 composed with the chart map `C_a^st(A, B, I) → C_a^st(A, B', I)` is the comparison `σ̄_a` for `B`
 followed by `B_b → B'_{b'}`. For a localization `B → B_s` this says that the comparison constructed
 from the localized data is the localization of `σ̄_a`.
-(blueprint: `lemma-nagata-strict-transform-chart-localization`) -/
+(blueprint: `definition-strict-transform--1`) -/
 theorem strictChartComparison_map (ha : a ∈ I) (z : StrictChart B I a) :
     (strictChartComparison B' I ha (StrictChart.map I a φ z) :
       Localization.Away (algebraMap A B' a)) =
@@ -503,7 +503,7 @@ lemma exists_pow_mul_eq_zero_of_strictChartAwayMap_eq_zero (ha : a ∈ I) {z : S
 /-- **Localization of the strict-transform chart** at `s ∈ B`: the chart map
 `C_a^st(A, B, I) → C_a^st(A, B_s, I)` is a localization away from `s`, i.e. the canonical map
 `(C_a^st(A, B, I))_s → C_a^st(A, B_s, I)` is an isomorphism.
-(blueprint: `lemma-nagata-strict-transform-chart-localization-data`) -/
+(blueprint: `definition-strict-transform--1`) -/
 theorem StrictChart.isLocalization_away (ha : a ∈ I) :
     letI := (strictChartAwayMap I a s).toRingHom.toAlgebra
     IsLocalization.Away (algebraMap B (StrictChart B I a) s)
@@ -536,7 +536,7 @@ theorem StrictChart.isLocalization_away (ha : a ∈ I) :
 
 /-- The canonical isomorphism `(C_a^st(A, B, I))_s ≅ C_a^st(A, B_s, I)` between the localization
 of the strict-transform chart ring and the strict-transform chart ring of the localized data.
-(blueprint: `lemma-nagata-strict-transform-chart-localization-data`) -/
+(blueprint: `definition-strict-transform--1`) -/
 noncomputable def strictChartLocalizationEquiv (ha : a ∈ I) :
     Localization.Away (algebraMap B (StrictChart B I a) s) ≃+*
       StrictChart (Localization.Away s) I a :=
@@ -555,7 +555,7 @@ lemma strictChartLocalizationEquiv_algebraMap (ha : a ∈ I) (z : StrictChart B 
 
 /-- The localized strict-transform chart comparison `(σ̄_a)_s`: the localization at `s` of the
 comparison `σ̄_a : C_a^st(A, B, I) → B_b`, with values in `(B_s)_{b'}`.
-(blueprint: `def-nagata-strict-transform-chart-comparison-localized`) -/
+(blueprint: `definition-strict-transform--1`) -/
 noncomputable def strictChartComparisonAway (ha : a ∈ I) :
     Localization.Away (algebraMap B (StrictChart B I a) s) →+*
       Localization.Away (algebraMap A (Localization.Away s) a) :=
@@ -571,7 +571,7 @@ noncomputable def strictChartComparisonAway (ha : a ∈ I) :
 /-- **The localized comparison is the comparison of the localized data**: `(σ̄_a)_s` agrees with
 the strict-transform chart comparison `σ̄_a` constructed directly from `A → B_s`, transported along
 `(C_a^st(A, B, I))_s ≅ C_a^st(A, B_s, I)`.
-(blueprint: `lemma-nagata-strict-transform-chart-localization`) -/
+(blueprint: `definition-strict-transform--1`) -/
 theorem strictChartComparisonAway_eq (ha : a ∈ I) :
     strictChartComparisonAway I s ha =
       ((chartRing _ _).val.toRingHom.comp

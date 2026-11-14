@@ -17,7 +17,7 @@ A bounded constructible `ℚ̄_ℓ`-complex `C` on `X` whose restriction to the 
 `X ∖ S` (`ProEtale.CondensedRing.pointsCompl`) vanishes is detected by its global sections: if
 `RΓ(X, C) = 0`, then `C = 0`
 (`ProEtale.CondensedRing.isZero_of_isZero_upperStar_pointsComplι_of_isZero_lowerStar`, blueprint
-`det-nearby-kunneth-finite-support`).
+`lemma-finite-support-global-sections--1`).
 
 The proof is by induction on `S`. For `S = S' ∪ {x}`, the open–closed triangle
 `j_! Lj^* C ⟶ C ⟶ Rx_* Lx^* C ⟶` of the complement `j` of `x` splits: its connecting morphism
@@ -389,7 +389,7 @@ theorem isZero_upperStar_pointsComplι_of_insert [DecidableEq (RationalPoint X)]
 
 variable (ℓ) in
 /-- **Global sections detect complexes supported at finitely many rational points** (blueprint
-`det-nearby-kunneth-finite-support`, the finite-support step of Gabber's Künneth formula for
+`lemma-finite-support-global-sections--1`, the finite-support step of Gabber's Künneth formula for
 nearby cycles, Illusie, *Around the Thom–Sebastiani theorem*, 4.7): let `S` be a finite set of
 rational points of a separated `k`-scheme of finite type `X`. If the restriction of
 `C ∈ Dᵇc(X, ℚ̄_ℓ)` to the open complement `X ∖ S` vanishes, and `RΓ(X, C) = 0`, then `C = 0`.

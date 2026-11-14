@@ -25,8 +25,9 @@ finite type with structure morphism `a_X : X ⟶ s = Spec k`. The *dualizing com
 (`ProEtale.CondensedRing.dualizingComplex'`), for the exceptional inverse image
 `boundedConstructibleUpperShriek` of the chosen compactification. It is transported along
 morphisms by the composition isomorphism `Rf^! ω_Y ≅ ω_X`
-(`ProEtale.CondensedRing.dualizingComplexComp`, blueprint `thm-trf-dualizing-complex-composition`),
-the conjugate of the composition isomorphism of the lower shriek.
+(`ProEtale.CondensedRing.dualizingComplexComp`, blueprint
+`proposition-composition-open-restriction-compactifications-f--1`), the conjugate of the composition
+isomorphism of the lower shriek.
 
 ## Smooth purity
 
@@ -51,8 +52,8 @@ For the base point no purity is needed: `a_s` is the identity of `s`, and
 ## Borel–Moore sections and integration
 
 A *Borel–Moore section* of `X` is a morphism `α : ℚ̄_ℓ,X ⟶ ω_X`
-(`ProEtale.CondensedRing.BorelMooreSection`, blueprint `sk-d-integral`). Along an open immersion
-`j : U ⟶ X` it restricts to
+(`ProEtale.CondensedRing.BorelMooreSection`, blueprint `definition-trace-class-local-terms--2`).
+Along an open immersion `j : U ⟶ X` it restricts to
 ```
 j^* α : ℚ̄_ℓ,U ≅ Rj^! ℚ̄_ℓ,X --Rj^! α--> Rj^! ω_X ≅ ω_U
 ```
@@ -63,16 +64,18 @@ its *integral* is
 ∫_X α : ℚ̄_ℓ,s ⟶ Ra_{X*} La_X^* ℚ̄_ℓ,s ≅ Ra_{X*} ℚ̄_ℓ,X ≅ Ra_{X!} ℚ̄_ℓ,X --α^♭--> ℚ̄_ℓ,s,
 ```
 an element of `End (ℚ̄_ℓ,s)`, where `α^♭` is the adjoint of `α` for `Ra_{X!} ⊣ Ra_X^!`
-(`ProEtale.CondensedRing.BorelMooreSection.integral`, blueprint `def-trf-integration`). The
+(`ProEtale.CondensedRing.BorelMooreSection.integral`, blueprint
+`definition-trace-class-local-terms--2`). The
 *local term* of `α` along an open and closed subscheme `j : B ⟶ X` proper over `s` is the
 integral of its restriction, `LT_B(α) = ∫_B j^* α`
-(`ProEtale.CondensedRing.BorelMooreSection.localTerm`, blueprint `def-trf-local-term`), and the
-integral over a finite disjoint union of open and closed pieces is the sum of the local terms
+(`ProEtale.CondensedRing.BorelMooreSection.localTerm`, blueprint
+`definition-trace-class-local-terms--3`), and the integral over a finite disjoint union of open and
+closed pieces is the sum of the local terms
 (`ProEtale.CondensedRing.BorelMooreSection.integral_eq_sum_localTerm`, blueprint
-`lem-trf-integration-component-sum`). Over the base point the integral of `α` is `α` itself,
-read through `ω_s ≅ ℚ̄_ℓ,s` (`ProEtale.CondensedRing.BorelMooreSection.integral_point`): the
-identity isomorphisms of the six functors for `𝟙 s` are compatible with the unit comparison of
-the monoidal pullback `L(𝟙 s)^*`
+`theorem-proper-pushforward-lefschetz-verdier--3`). Over the base point the integral of `α` is `α`
+itself, read through `ω_s ≅ ℚ̄_ℓ,s` (`ProEtale.CondensedRing.BorelMooreSection.integral_point`): the
+identity isomorphisms of the six functors for `𝟙 s` are compatible with the unit comparison of the
+monoidal pullback `L(𝟙 s)^*`
 (`ProEtale.CondensedRing.boundedConstructibleLowerStarId_inv_app_unit`).
 
 ## Main definitions
@@ -137,7 +140,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)]
 
 /-- The *dualizing complex* `ω_X = Ra_X^! ℚ̄_ℓ` of a separated `k`-scheme of finite type
-(blueprint `def-trf-dualizing-complex`). -/
+(blueprint `definition-verdier-dual-evaluation`). -/
 noncomputable abbrev dualizingComplex' (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
     [QuasiCompact X.hom] [IsSeparated X.hom] : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   (boundedConstructibleUpperShriek ℓ (toPoint X)).obj (𝟙_ _)
@@ -147,7 +150,7 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
 /-- The composition isomorphism `Rf^! ω_Y ≅ ω_X` of the dualizing complexes (blueprint
-`thm-trf-dualizing-complex-composition`). -/
+`proposition-composition-open-restriction-compactifications-f--1`). -/
 noncomputable def dualizingComplexComp (f : X ⟶ Y) :
     (boundedConstructibleUpperShriek ℓ f).obj
         (dualizingComplex' ℓ Y) ≅ dualizingComplex' ℓ X :=
@@ -178,7 +181,8 @@ section BorelMoore
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
 
-/-- The *Borel–Moore sections* of `X`: the morphisms `ℚ̄_ℓ,X ⟶ ω_X` (blueprint `sk-d-integral`). -/
+/-- The *Borel–Moore sections* of `X`: the morphisms `ℚ̄_ℓ,X ⟶ ω_X` (blueprint
+`definition-trace-class-local-terms--2`). -/
 abbrev BorelMooreSection (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
     [QuasiCompact X.hom] [IsSeparated X.hom] : Type _ :=
   𝟙_ (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶ dualizingComplex' ℓ X
@@ -196,7 +200,7 @@ j^* α : ℚ̄_ℓ,U ≅ Rj^! ℚ̄_ℓ,X --Rj^! α--> Rj^! ω_X ≅ ω_U,
 ```
 through the canonical identification `Rj^! ℚ̄_ℓ,X ≅ j^* ℚ̄_ℓ,X ≅ ℚ̄_ℓ,U`
 (`boundedConstructibleUpperShriekUnitIso_padicAlgCl`) and `dualizingComplexComp` (blueprint
-`def-trf-local-term`, restricted sections). -/
+`definition-trace-class-local-terms--3`, restricted sections). -/
 noncomputable def restrict (j : U ⟶ X) [IsOpenImmersion j.left]
     (α : BorelMooreSection ℓ X) : BorelMooreSection ℓ U :=
   (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv ≫
@@ -209,7 +213,7 @@ noncomputable def restrict (j : U ⟶ X) [IsOpenImmersion j.left]
 ```
 the unit of `La_X^* ⊣ Ra_{X*}`, the unit isomorphism of the monoidal functor `La_X^*`, the
 identification `Ra_{X!} ≅ Ra_{X*}` for the proper `a_X`, and the adjoint `α^♭` of `α` for
-`Ra_{X!} ⊣ Ra_X^!` (blueprint `def-trf-integration`). -/
+`Ra_{X!} ⊣ Ra_X^!` (blueprint `definition-trace-class-local-terms--2`). -/
 noncomputable def integral [IsProper X.hom] (α : BorelMooreSection ℓ X) :
     End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
   haveI : IsProper (toPoint X).left := by
@@ -225,7 +229,7 @@ noncomputable def integral [IsProper X.hom] (α : BorelMooreSection ℓ X) :
     ((boundedConstructibleUpperShriekAdjunction ℓ
       (toPoint X)).homEquiv _ _).symm α)
 
-/-- The integral is additive (blueprint `lem-trf-integration-linear`). -/
+/-- The integral is additive (blueprint `theorem-proper-pushforward-lefschetz-verdier--3`). -/
 lemma integral_add [IsProper X.hom] (α β : BorelMooreSection ℓ X) :
     (α + β).integral = α.integral + β.integral :=
   by
@@ -235,7 +239,7 @@ lemma integral_add [IsProper X.hom] (α β : BorelMooreSection ℓ X) :
 
 variable [LocallyOfFiniteType X.hom] [IsSeparated X.hom] in
 /-- The *local term* `LT_B(α) = ∫_B j^* α` of a Borel–Moore section along an open and closed
-subscheme `j : B ⟶ X` proper over `s` (blueprint `def-trf-local-term`). -/
+subscheme `j : B ⟶ X` proper over `s` (blueprint `definition-trace-class-local-terms--3`). -/
 noncomputable def localTerm (j : U ⟶ X) [IsOpenImmersion j.left] [IsClosedImmersion j.left]
     [IsProper U.hom] (α : BorelMooreSection ℓ X) :
     End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=

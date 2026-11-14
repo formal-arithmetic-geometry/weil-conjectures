@@ -17,7 +17,7 @@ colimit of the members of `𝒜`.
 This is the form in which the strict henselization at a boundary point `z` of a curve, the
 inertia invariants of `B_Q`, is ind-étale: it is the union of the localizations of the integral
 closures in the finite subextensions fixed by inertia, which are étale at the point over `z`
-(blueprint `lem-wf-boundary-stalk-invariants`).
+(blueprint `lemma-boundary-stalk--1`).
 -/
 
 @[expose] public section

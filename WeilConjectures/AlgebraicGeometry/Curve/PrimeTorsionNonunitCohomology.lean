@@ -24,7 +24,7 @@ namespace AlgebraicGeometry.IsCurve
 /-- A sheaf killed by a noninvertible prime and having invertible-order torsion has
 zero cohomology, as does its inverse image along any scheme morphism.
 Source: Stacks Project, Tag 0GJA, proof (remark (c), positive-characteristic case).
-(blueprint: lem-pbc-x2-prime-torsion-nonunit-cohomology)
+(blueprint: lemma-removing-finitely-many-points--1)
 
 Proof: For each geometric stalk element x the invertible-order condition gives n > 0
 with n invertible on Spec k and n*x = 0. The identity-annihilation hypothesis gives

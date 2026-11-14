@@ -29,8 +29,8 @@ finitely many sections over `U` come from one stage `F(V)` where they already ho
 (`CategoryTheory.Sheaf.hasLocallyTrivialRelations_of_flat`), and pulling the covering back to
 `U` along `G` makes them trivial locally on `U`.
 
-This is the argument of blueprint `lem-exc-constant-inverse-image-flat` (the relation criterion
-for flatness transported by an exact inverse image), at the level of an arbitrary flat
+This is the argument of blueprint `corollary-finite-tor-amplitude-under-comparison` (the relation
+criterion for flatness transported by an exact inverse image), at the level of an arbitrary flat
 cover-preserving functor.
 
 ## Main results
@@ -104,7 +104,7 @@ theorem Sheaf.hasLocallyTrivialRelations_lan (hG : CoverPreserving J K G)
 variable [K.HasSheafCompose (forget (ModuleCat.{u + 1} R))]
   [K.WEqualsLocallyBijective (ModuleCat.{u + 1} R)]
 
-/-- Blueprint `lem-exc-constant-inverse-image-flat`, for an arbitrary site morphism:
+/-- Blueprint `corollary-finite-tor-amplitude-under-comparison`, for an arbitrary site morphism:
 **pullback along a flat functor preserves flat sheaves of modules.** Let `G : C ⥤ D` be a
 representably flat, cover-preserving functor and `R` a Noetherian commutative ring. The pullback
 `G^* F = (Lan_G F)^#` of a flat sheaf `F` of `R`-modules on `C` is flat.

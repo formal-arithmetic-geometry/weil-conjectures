@@ -43,10 +43,11 @@ where `ψ`, `ψ''` are the structure morphisms to the traits
 ```
 Lσ_s^*(χ_ψ) ∘ bc_s ∘ Rq''_{s*}(α_φ) = α_τ(Rq_{η*}) ∘ Ψ_{S'}(bc_η) ∘ χ_{ψ''}.
 ```
-* `χ_ψ`, `χ_{ψ''}` are the proper exchanges (blueprint `det-sp-nearby-cycles-exchanges` (2),
+* `χ_ψ`, `χ_{ψ''}` are the proper exchanges (blueprint `prose-E-03` (2),
   `NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper`);
 * `bc_s`, `bc_η` are the base change morphisms of the cartesian squares of special and of generic
-  fibres, invertible by proper base change (blueprint `sk-thm-sfb-proper-base-change`,
+  fibres, invertible by proper base change (blueprint
+  `proposition-proper-direct-image-constructible-complexes`,
   `ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`);
 * `α_τ` is the change of trait for the trait itself, invertible on bounded constructible complexes
   (`NearbyCyclesModel.isIso_pullbackExchange_traitGenericModelMap_app`), and `Rq_{η*}` preserves

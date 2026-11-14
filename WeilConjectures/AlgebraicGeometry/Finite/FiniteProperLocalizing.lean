@@ -37,9 +37,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarC
 /-!
 # Finite-coefficient proper direct image on the localizing categories
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.md
-(blueprint: det-ctf-finite-proper-localizing).
+(blueprint: corollary-proper-direct-image-finite-coefficients-localizing).
 
 The finite ring is represented canonically by its finite discrete condensed ring.
 All subcategories in the statements are the recorded constant-model constructible
@@ -292,9 +292,9 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- The condensed ring of a finite discrete commutative ring: the continuous-map
 condensed ring `S ↦ C(S, A)` for the discrete topology on `A`.
-Source: blueprint det-ctf-finite-proper-localizing, statement, coefficient
-identification of lem-weil-pbc-finite-discrete-condensed-ring-constant
-(blueprint: det-ctf-finite-proper-localizing). -/
+Source: blueprint corollary-proper-direct-image-finite-coefficients-localizing, statement,
+coefficient identification of lem-weil-pbc-finite-discrete-condensed-ring-constant
+(blueprint: corollary-proper-direct-image-finite-coefficients-localizing). -/
 noncomputable def finiteDiscreteCondensedCoefficient (A : Type u) [CommRing A] [Finite A] :
     Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} := by
   letI : TopologicalSpace A := ⊥
@@ -304,8 +304,9 @@ noncomputable def finiteDiscreteCondensedCoefficient (A : Type u) [CommRing A] [
 
 /-- The canonical monoid structure on the finite discrete condensed coefficient, the
 published pointwise ring-object structure of the continuous-map condensed ring.
-Source: blueprint det-ctf-finite-proper-localizing, statement, coefficient
-identification (blueprint: det-ctf-finite-proper-localizing). -/
+Source: blueprint corollary-proper-direct-image-finite-coefficients-localizing, statement,
+coefficient identification (blueprint:
+corollary-proper-direct-image-finite-coefficients-localizing). -/
 noncomputable instance finiteDiscreteCondensedCoefficient_monObj
     (A : Type u) [CommRing A] [Finite A] :
     MonObj (finiteDiscreteCondensedCoefficient A) := by
@@ -316,8 +317,9 @@ noncomputable instance finiteDiscreteCondensedCoefficient_monObj
   exact Profinite.continuousMapRingObjOfUniverseMonObj.{u, u} A
 
 /-- Commutativity of the canonical finite discrete condensed coefficient.
-Source: blueprint det-ctf-finite-proper-localizing, statement, coefficient
-identification (blueprint: det-ctf-finite-proper-localizing). -/
+Source: blueprint corollary-proper-direct-image-finite-coefficients-localizing, statement,
+coefficient identification (blueprint:
+corollary-proper-direct-image-finite-coefficients-localizing). -/
 noncomputable instance finiteDiscreteCondensedCoefficient_isCommMonObj
     (A : Type u) [CommRing A] [Finite A] :
     IsCommMonObj (finiteDiscreteCondensedCoefficient A) := by
@@ -335,8 +337,8 @@ finite Tor amplitude), maps `Loc(Dctf(X))` into `Loc(Dctf(Y))` (the recorded
 `localizingClosureProEtale`), sends distinguished triangles of the source closure to
 distinguished triangles (exactness of the restriction), and preserves every small
 coproduct of objects of the source closure (the empty one included).
-Source: blueprint det-ctf-finite-proper-localizing, statement, clauses (1) and (3)
-(blueprint: det-ctf-finite-proper-localizing). -/
+Source: blueprint corollary-proper-direct-image-finite-coefficients-localizing, statement, clauses
+(1) and (3) (blueprint: corollary-proper-direct-image-finite-coefficients-localizing). -/
 def finiteCoefficientLocalizingProperties
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -426,7 +428,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- Clause (1): proper pushforward preserves the recorded finite-coefficient Dctf and
 restricts to an exact sum-preserving functor of the localizing closures.
 Source: blueprint sk-prop-ctf-finite-proper-localizing, clause (1)
-(blueprint: det-ctf-finite-proper-localizing).
+(blueprint: corollary-proper-direct-image-finite-coefficients-localizing).
 
 Proof:
 1. Use the normalized section-action equivalence for the finite discrete ring. Its

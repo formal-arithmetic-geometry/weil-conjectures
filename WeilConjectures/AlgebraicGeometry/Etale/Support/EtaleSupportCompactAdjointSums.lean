@@ -79,9 +79,10 @@ Source: Bhatt--Scholze, Section 6.4, Example 6.4.1 and Proposition 6.4.8, Defini
 (blueprint: lem-pur-etale-support-compact-adjoint-sums).
 
 Proof plan:
-1. Apply `sbc-thm-finiteness-finite-type` to each nonzero cohomology sheaf. Reconstruct
-   the input by the successive good-truncation triangles of `def-kun-truncations`.
-   Exactness and `thm-constructible-serre` give bounded constructibility of its image.
+1. Apply `theorem-results-from-etale-theory` to each nonzero cohomology sheaf. Reconstruct
+   the input by the successive good-truncation triangles of
+   `proposition-open-direct-image-preserves-finite`. Exactness and `thm-constructible-serre` give
+   bounded constructibility of its image.
 2. For a sheaf Q on Y use exact inverse image and the assumed projection formula,
    together with `lem-kun-tensor-sym`, to identify FE tensor Q with F(E tensor f*Q).
    The assumed interval bound gives Tor amplitude [a,b+N], including nonregular C.
@@ -99,8 +100,9 @@ Proof plan:
    functor theorem. Module and module-sheaf Grothendieck abelianness and
    `lem-kun-grothendieck-derived-coproducts` identify derived sums termwise.
 7. Compose these constant functors with tensor by GM or M, and then G where appropriate.
-   `lem-kun-derived-tensor-triangulated` and `lem-kun-derived-tensor-direct-sums` give
-   exactness and preservation of arbitrary sums with the composite shift comparisons.
+   `proposition-open-direct-image-preserves-finite` and
+   `proposition-open-direct-image-preserves-finite` give exactness and preservation of arbitrary
+   sums with the composite shift comparisons.
 -/
 theorem support_compactImages_adjoint_sums
     {k : Type u} [Field k] [IsAlgClosed k]

@@ -39,7 +39,7 @@ The extension argument works also when V is zero, where no extension is needed.
 
 Source: Stacks Project, Etale Cohomology, Lemma 0GIZ (lemma-action-l-group), and
 Lemma 0GJ0 (lemma-pullback-filtered-modules), the finite-module filtration part of the
-proof of lem-sc-sylow-module-filtration
+proof of theorem-cohomology-curves
 (blueprint: lem-sc-primary-pgroup-filtration). -/
 theorem exists_primary_filtration_of_isPGroup
     (Q : Type u) [Group Q] (ℓ : ℕ) (hℓ : ℓ.Prime) (hQ : IsPGroup ℓ Q)

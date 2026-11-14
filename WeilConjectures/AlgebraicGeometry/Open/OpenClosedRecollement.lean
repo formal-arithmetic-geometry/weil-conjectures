@@ -15,8 +15,9 @@ import WeilConjectures.SixFunctors.OpenClosed.Exact
 # Functorial open-closed recollement
 
 Source: blueprint, sec-smooth-purity/sk-prop-sf-open-closed-triangle,
-lemma Open-closed recollement (blueprint: lem-cbc-open-closed-recollement).
-Stacks Project, Tags 095L, 0152 and 015F.
+lemma Open-closed recollement (blueprint:
+proposition-extension-zero-restriction-closed-subscheme--8). Stacks Project, Tags 095L, 0152 and
+015F.
 -/
 
 @[expose] public section
@@ -28,7 +29,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace AlgebraicGeometry.Etale
 
 /-- The natural open-closed triangle on the bounded below derived category, with its
-specified counit and unit (blueprint: lem-cbc-open-closed-recollement).
+specified counit and unit (blueprint: proposition-extension-zero-restriction-closed-subscheme--8).
 Source: blueprint sec-smooth-purity/sk-prop-sf-open-closed-triangle, Open-closed recollement;
 Stacks Project, Tags 095L, 0152 and 015F.
 

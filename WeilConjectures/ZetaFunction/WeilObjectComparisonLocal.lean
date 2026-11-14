@@ -22,7 +22,7 @@ conversely.
 - `AlgebraicGeometry.WeilComplex.HasLocalWeilObjectComparison`: the trace function of `K` is the
   local trace function of a Weil object, through `ι`.
 - `AlgebraicGeometry.WeilComplex.SatisfiesLefschetz`: `K` satisfies the Grothendieck–Lefschetz
-  formula (blueprint `det-thm-tf-uniform-formula-weil`).
+  formula (blueprint `theorem-grothendieck-lefschetz-trace-formula--8`).
 
 ## Main results
 
@@ -70,7 +70,7 @@ def HasLocalWeilObjectComparison
 
 /-- A Weil complex `K` on `X₀` *satisfies the Grothendieck–Lefschetz formula* if, for every `n`,
 `∑ᵢ (-1)ⁱ Tr(F^{n+1} | H_cⁱ(X, K)) = ∑_{y ∈ X₀(𝔽_{q^{n+1}})} t_K(y)`
-(blueprint `det-thm-tf-uniform-formula-weil`). -/
+(blueprint `theorem-grothendieck-lefschetz-trace-formula--8`). -/
 def SatisfiesLefschetz (K : WeilComplex k₀ l X) : Prop :=
   ∀ n : ℕ, ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
       ((K.compactlySupportedCohomology i).frobeniusEnd ^ (n + 1)) =

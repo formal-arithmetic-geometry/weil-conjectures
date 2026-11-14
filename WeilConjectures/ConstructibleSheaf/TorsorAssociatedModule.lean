@@ -18,7 +18,7 @@ public import Mathlib.Topology.LocallyConstant.Algebra
 # Equivariant sections on a finite torsor
 
 Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS.
-(blueprint: def-weil-pbc-torsor-associated-module)
+(blueprint: lemma-reduction-unipotent-local-system--1)
 -/
 
 @[expose] public section
@@ -137,7 +137,7 @@ instance equivariantModulePresheafFunctor_additive :
 sections on the total space of the torsor above each etale object. Scalars are restricted
 along the ring equivalence from the lifted coefficient ring to the coefficient ring.
 Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS.
-(blueprint: def-weil-pbc-torsor-associated-module) -/
+(blueprint: lemma-reduction-unipotent-local-system--1) -/
 noncomputable def associatedModuleFunctor :
     Rep.{u + 1} (ZMod ℓ) P ⥤
       Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) :=

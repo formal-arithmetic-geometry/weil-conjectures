@@ -53,7 +53,7 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
 
 /-- The coefficient object is bounded constructible and is the tensor unit. This is the unit
 clause needed to form the monoidal bounded-constructible subcategory.
-Source: the unit clause of `lem-sfb-dc-tensor-preserves` in the blueprint.
+Source: the unit clause of `proposition-six-operations-dctf--14` in the blueprint.
 (blueprint: lem-sfb-dc-tensor-unit) -/
 theorem boundedConstructible_tensor_unit :
     boundedConstructible (condensedRingObj Λ X.left)
@@ -101,8 +101,8 @@ theorem boundedConstructible_tensor_unit :
 /-- The derived tensor of two bounded constructible module-object complexes is bounded
 constructible, for any coefficient ring whose bounded constructible category is triangulated
 and satisfies the degree-zero tensor calculation `hsingle` (`boundedConstructible_tensor_single`).
-Source: `lem-sfb-dc-tensor-preserves` in the blueprint.
-(blueprint: lem-sfb-dc-tensor-preserves) -/
+Source: `proposition-six-operations-dctf--14` in the blueprint.
+(blueprint: proposition-six-operations-dctf--14) -/
 private theorem boundedConstructible_tensor_closure_of
     (htri : (boundedConstructible (condensedRingObj Λ X.left)).IsTriangulated)
     (hsingle : ∀ F G : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
@@ -136,8 +136,8 @@ private theorem isNoetherian_left : IsNoetherian X.left :=
 
 /-- The derived tensor of two bounded constructible complexes is bounded constructible,
 `ℚ̄_ℓ` coefficients. This is the tensor-closure clause of the ell-adic finiteness theorem.
-Source: `lem-sfb-dc-tensor-preserves` in the blueprint.
-(blueprint: lem-sfb-dc-tensor-preserves) -/
+Source: `proposition-six-operations-dctf--14` in the blueprint.
+(blueprint: proposition-six-operations-dctf--14) -/
 theorem boundedConstructible_tensor_closure
     (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k ≠ ℓ)]
     (K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
@@ -155,7 +155,7 @@ namespace ContinuousMapRingObj
 
 /-- The derived tensor of two bounded constructible complexes is bounded constructible,
 `E̲` coefficients for `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`.
-(blueprint: lem-sfb-dc-tensor-preserves) -/
+(blueprint: proposition-six-operations-dctf--14) -/
 theorem boundedConstructible_tensor_closure
     (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k ≠ ℓ)] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
@@ -177,7 +177,7 @@ namespace PadicIntegersRingObj
 
 /-- The derived tensor of two bounded constructible complexes is bounded constructible,
 `𝒪̲_E` coefficients for `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`.
-(blueprint: lem-sfb-dc-tensor-preserves) -/
+(blueprint: proposition-six-operations-dctf--14) -/
 theorem boundedConstructible_tensor_closure
     (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k ≠ ℓ)] (E : Type) [Field E]
     [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
@@ -201,7 +201,7 @@ namespace UnitBallRingObj
 
 /-- The derived tensor of two bounded constructible complexes is bounded constructible,
 `O̲` coefficients for `O` the closed unit ball of a finite normed extension `E` of `ℚ_ℓ`.
-(blueprint: lem-sfb-dc-tensor-preserves) -/
+(blueprint: proposition-six-operations-dctf--14) -/
 theorem boundedConstructible_tensor_closure
     (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k ≠ ℓ)] {E : Type} [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]

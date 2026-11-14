@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.ReductionUnitsPowerKernel
 
 /-! # Inclusion of consecutive nilpotent-units kernels
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-reduction-units-power-inclusion)
 -/
 
@@ -21,7 +21,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Consecutive ideal powers decrease, checked on every affine open.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-reduction-units-power-inclusion) -/
 theorem reduction_nilradical_power_le (X : Scheme.{u}) (j : ℕ) :
     X.nilradical ^ (j + 1 + 1) ≤ X.nilradical ^ (j + 1) := by
@@ -34,7 +34,7 @@ Proof: the inclusion of the closed subschemes induces a map of their base change
 over each étale object. Its composite with the first projection is the first
 projection. Functoriality of global sections and of the units functor therefore
 transports the thicker kernel's zero equation to the thinner restriction map.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-reduction-units-power-inclusion) -/
 theorem reductionUnitsPowerKernel_ι_comp (X : Scheme.{u}) (j : ℕ) :
     kernel.ι (gmSheafToLowerStarGmSheaf (X.nilradical ^ (j + 1 + 1)).subschemeι) ≫
@@ -72,14 +72,14 @@ theorem reductionUnitsPowerKernel_ι_comp (X : Scheme.{u}) (j : ℕ) :
 
 /-- The inclusion `1+N^(j+2) → 1+N^(j+1)`, obtained by factoring the kernel
 inclusion into Gm through the preceding kernel.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-reduction-units-power-inclusion) -/
 noncomputable def reductionUnitsPowerInclusion (X : Scheme.{u}) (j : ℕ) :
     X.reductionUnitsPowerKernel (j + 1) ⟶ X.reductionUnitsPowerKernel j :=
   kernel.lift _ (kernel.ι _) (reductionUnitsPowerKernel_ι_comp X j)
 
 /-- The kernel lift defining the inclusion commutes with the inclusions into Gm.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-reduction-units-power-inclusion) -/
 @[reassoc (attr := simp)]
 theorem reductionUnitsPowerInclusion_ι (X : Scheme.{u}) (j : ℕ) :
@@ -91,7 +91,7 @@ theorem reductionUnitsPowerInclusion_ι (X : Scheme.{u}) (j : ℕ) :
 
 /-- The constructed inclusion is monic: its composite with a kernel inclusion
 is a kernel inclusion and hence monic.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-reduction-units-power-inclusion) -/
 instance mono_reductionUnitsPowerInclusion (X : Scheme.{u}) (j : ℕ) :
     Mono (X.reductionUnitsPowerInclusion j) :=

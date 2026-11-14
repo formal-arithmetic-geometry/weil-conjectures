@@ -19,7 +19,7 @@ universe u
 namespace CommRingCat
 
 /-- The coefficient-change square of polynomial root quotients is a pushout.
-Source: blueprint lem-fd-as-cover, affine-chart construction.
+Source: blueprint lemma-artin-schreier-character-sheaf, affine-chart construction.
 (blueprint: new-m1-adjoin-root-pushout)
 
 Proof: a compatible pair of ring maps out of S and R[T]/F supplies a root of the image of F.

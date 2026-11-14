@@ -25,7 +25,7 @@ and K-injective resolutions. If `E ∈ D(C)` has no homology in degrees `< i`, t
 - `CategoryTheory.Functor.nonempty_homology_rightDerivedFunctor_obj_iso_of_isGE`: the
   statement above.
 - `AlgebraicGeometry.Etale.nonempty_homology_rightDerivedGlobalSections_obj_iso_of_isGE`
-  (`lem-kun-minimal-cohomology`): `H^i(X_ét, E) ≅ H^0(X_ét, ℋ^i(E))` for
+  (`corollary-open-direct-image-over-field--2`): `H^i(X_ét, E) ≅ H^0(X_ét, ℋ^i(E))` for
   `E ∈ D^{≥ i}(X_ét)`.
 -/
 
@@ -99,8 +99,8 @@ namespace AlgebraicGeometry.Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `lem-kun-minimal-cohomology`: **first cohomology of a bounded below complex.**
-Let `X` be a scheme and `E ∈ D(X_ét, Λ)` with `ℋ^q(E) = 0` for `q < i` (for instance `i`
+/-- Blueprint `corollary-open-direct-image-over-field--2`: **first cohomology of a bounded below
+complex.** Let `X` be a scheme and `E ∈ D(X_ét, Λ)` with `ℋ^q(E) = 0` for `q < i` (for instance `i`
 minimal with `ℋ^i(E) ≠ 0`). Then `H^i(X_ét, E) ≅ H^0(X_ét, ℋ^i(E)) = Γ(X, ℋ^i(E))`. The
 blueprint uses the hypercohomology spectral sequence; here the truncation triangle
 `τ_{≤ i} E ⟶ E ⟶ τ_{> i} E` is used directly

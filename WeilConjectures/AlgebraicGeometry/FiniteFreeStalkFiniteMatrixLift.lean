@@ -12,7 +12,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Simultaneous lifting of finitely many matrices of free sheaf morphisms
 
-Source: lem-pc-perfect-locus, finite matrix extension near a point.
+Source: lemma-coherent-base-change-invertible-sheaves--3, finite matrix extension near a point.
 (blueprint: lem-pc-finite-free-stalk-finite-matrix-lift)
 -/
 
@@ -263,8 +263,8 @@ private lemma stalk_appTop_eq_germ {Y : Scheme.{u}}
 
 /-- A finite family of maps between standard finite free sheaves lifts to one open.
 
-Source: lem-pc-perfect-locus, extension of the finite calculation near a point;
-lem-pc-finite-free-reverse-components-lift, proof steps 2 and 3.
+Source: lemma-coherent-base-change-invertible-sheaves--3, extension of the finite calculation near a
+point; lem-pc-finite-free-reverse-components-lift, proof steps 2 and 3.
 
 Proof: PullbackFreeIso identifies the source and target of each f q with
 standard free sheaves over Spec O_{Y,y}. Express f q as a matrix in these

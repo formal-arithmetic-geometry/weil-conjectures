@@ -113,8 +113,8 @@ the sum running over the points `x̄` of `X` of degree `n` with `x̄ ≫ f = ȳ`
 supported base change of the Weil lower shriek to `ȳ`, this is the trace formula for the fiber of
 `f` over `ȳ`.
 
-This is the relative, twisted variant of blueprint `thm-trf-grothendieck-lefschetz-finite-ring`,
-which is stated for the model Frobenius. -/
+This is the relative, twisted variant of blueprint
+`theorem-grothendieck-lefschetz-trace-formula--1`, which is stated for the model Frobenius. -/
 theorem weilShriekTraceFunction {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
@@ -132,9 +132,9 @@ theorem weilShriekTraceFunction {X Y : Over (Spec (.of k))}
 
 /-- **Curves**: the sheaf–function compatibility holds along a smooth morphism `f` of relative
 dimension one. By compactly supported base change to `ȳ`, it is the trace formula for the smooth
-curve `X_ȳ` over a finite field (blueprint `thm-trf-grothendieck-lefschetz-finite-ring`, the case
-of curves). It is a special case of `weilShriekTraceFunction`, whose proof only uses the relative
-affine line among the curves (`shriekTraceFunctionAt_overProdMap_polyAffineProj`). -/
+curve `X_ȳ` over a finite field (blueprint `theorem-grothendieck-lefschetz-trace-formula--1`, the
+case of curves). It is a special case of `weilShriekTraceFunction`, whose proof only uses the
+relative affine line among the curves (`shriekTraceFunctionAt_overProdMap_polyAffineProj`). -/
 theorem shriekTraceFunctionAt_of_smoothOfRelativeDimension_one {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
@@ -156,7 +156,7 @@ finite type over `𝔽_q`, an automorphism `e` of `X` over `𝔽_q` of finite or
 ```
 the left side being the local trace of `RΓ_c(X, K)` at the geometric point `s` of the base. It is
 the case `Y = Spec k` of `weilShriekTraceFunction`. This is a variant of blueprint
-`thm-trf-grothendieck-lefschetz-finite-ring` for the Frobenius twisted by `e`. -/
+`theorem-grothendieck-lefschetz-trace-formula--1` for the Frobenius twisted by `e`. -/
 theorem weilTraceFormula (he : ∃ m > 0, e.pow m = Iso.refl X)
     (K : WeilBoundedConstructible ℓ e.hom) (n : ℕ) [NeZero n] :
     weilStalkTraceAlternatingSum ℓ n (specAlgebraicClosure k) (specAlgebraicClosure_comp_pow n)
@@ -172,7 +172,8 @@ is the number of points of degree `n`, that is `#X(𝔽_{qⁿ})` for `e = 𝟙`:
 ```
 ∑ᵢ (-1)ⁱ Tr(Fr_{c,n} | Hⁱ_c(X_k̄, ℚ̄_ℓ)) = #X(𝔽_{qⁿ}).
 ```
-This is a variant of blueprint `cor-trf-point-counting` for the Frobenius twisted by `e`. -/
+This is a variant of blueprint `corollary-point-counting-zeta-function--2` for the Frobenius twisted
+by `e`. -/
 theorem weilPointCount (he : ∃ m > 0, e.pow m = Iso.refl X) (n : ℕ) [NeZero n] :
     weilStalkTraceAlternatingSum ℓ n (specAlgebraicClosure k) (specAlgebraicClosure_comp_pow n)
         ((weilCompactSupportCohomology ℓ e).obj (weilUnit ℓ e)) =

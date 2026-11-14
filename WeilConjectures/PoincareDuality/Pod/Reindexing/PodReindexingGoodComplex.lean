@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.IsomorphismScalarTensor.IsomorphismScal
 
 /-! # Preservation of good complexes under coefficient-normalized reindexing
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL, 07A4, 0941 (blueprint: lem-pod-reindexing-good-complex).
 -/
 

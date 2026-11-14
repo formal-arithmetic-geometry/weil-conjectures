@@ -15,7 +15,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.EtaleDuali
 For an étale morphism `e : X ⟶ Y` admitting a compactification, `Re^! ≅ Le^*` and the canonical
 tensor map `θ_{e,K} : ω_e ⊗ᴸ Le^* K ⟶ Re^! K` is an isomorphism for every `K`, with `ω_e ≅ Λ_X`
 (`AlgebraicGeometry.Etale.etaleSmoothDuality`): the étale case of the proof of blueprint
-`thm-asd-smooth-tensor`, from `lem-amb-etale-adjoint-locality`.
+`proposition-exceptional-inverse-image-smooth-morphism`, from
+`lemma-affine-space-etale-localization--4`.
 
 The compactly supported direct image `R(e)_!` is left adjoint to `Le^*`
 (`AlgebraicGeometry.Etale.compactificationEtaleAdjunction`), so `ω_e ≅ Le^* Λ_Y ≅ Λ_X`. The
@@ -245,8 +246,9 @@ theorem isIso_rightDerivedUpperShriekTensorMap_of_etale {X Y : Scheme.{u}} (e : 
 
 variable {Λ} in
 /-- **Smooth duality for étale morphisms** (the étale case of the proof of blueprint
-`thm-asd-smooth-tensor`): for every étale `e` admitting a compactification, the canonical tensor
-map `θ_{e,K} : ω_e ⊗ᴸ Le^* K ⟶ Re^! K` is an isomorphism for every `K`, and `ω_e ≅ Λ`. -/
+`proposition-exceptional-inverse-image-smooth-morphism`): for every étale `e` admitting a
+compactification, the canonical tensor map `θ_{e,K} : ω_e ⊗ᴸ Le^* K ⟶ Re^! K` is an isomorphism for
+every `K`, and `ω_e ≅ Λ`. -/
 theorem etaleSmoothDuality : EtaleSmoothDuality Λ := by
   intro V W e _ _
   exact ⟨isIso_dualizingComplexTensorMap_of_etale Λ e, ⟨dualizingComplexIsoOfEtale Λ e⟩⟩

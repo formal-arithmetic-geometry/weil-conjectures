@@ -15,7 +15,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # Kernel and image of a constant rank map on a reduced scheme
 
-Source: `thm-pc-semicontinuity-base-change`, proof (3), reduced-ring normal form.
+Source: `lemma-triviality-fibres--2`, proof (3), reduced-ring normal form.
 (blueprint: lem-pc-constant-rank-map-kernel-image)
 -/
 
@@ -54,7 +54,7 @@ private theorem kernel_image_of_block_form
 /-- A constant rank map between finite free sheaves has a finite locally free kernel
 and image, and its image inclusion admits retractions locally on the open subscheme.
 
-Source: `thm-pc-semicontinuity-base-change`, proof (3), normal-form claim.
+Source: `lemma-triviality-fibres--2`, proof (3), normal-form claim.
 (blueprint: lem-pc-constant-rank-map-kernel-image)
 
 Proof: Restrict to affine neighbourhoods inside the open subscheme. Its affine rings are

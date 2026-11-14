@@ -20,15 +20,15 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.W
 Let `Λ` be a commutative condensed ring, flat over `ℤ`, and `f : X ⟶ Y` a quasi-compact
 quasi-separated morphism of schemes. We show that the derived direct image `Rf_*` of module
 objects over `Λ` commutes with direct sums of module objects placed in degree `0` (blueprint
-`sk-cor-pe-bounded-continuity`), and that a bound `Rf_*(N[0]) ∈ D^{≤ d}` for the objects `N` of a
+`corollary-continuity-cohomology`), and that a bound `Rf_*(N[0]) ∈ D^{≤ d}` for the objects `N` of a
 class `P` extends to filtered colimits of objects of `P`. Both follow from the continuity of the
 higher direct images of abelian sheaves
 (`AlgebraicGeometry.ProEtale.preservesColimitsOfShape_rightDerived_lowerStar`), the higher direct
 images of module objects being computed on the underlying abelian sheaves.
 
 We deduce the hypotheses `ProperLowerStarHeartHypotheses` from the ind-constructible heart and a
-uniform bound on constructible module objects (blueprints `sk-lem-proper-heart-bound`,
-`det-prop-int-compactness-direct-sums` (1), formal part).
+uniform bound on constructible module objects (blueprints `lemma-uniform-bound-proper-direct-image`,
+`proposition-compactness-proper-direct-image--2` (1), formal part).
 
 ## Main results
 
@@ -136,7 +136,7 @@ lemma preservesColimitsOfShape_discrete_rightDerived_lowerStar_ab (B : Type (u +
 
 omit [IsCommMonObj Λ] in
 /-- For a quasi-compact quasi-separated morphism `f`, `Rf_*` commutes with direct sums of module
-objects placed in degree `0` (blueprint `sk-cor-pe-bounded-continuity`). -/
+objects placed in degree `0` (blueprint `corollary-continuity-cohomology`). -/
 theorem isIso_sigmaComparison_rightDerivedLowerStar_singleFunctor (J : Type (u + 1))
     (N : J → Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
     IsIso (sigmaComparison R((f)_*⟦Λ⟧) fun j ↦ (DerivedCategory.singleFunctor _ 0).obj (N j)) :=
@@ -174,9 +174,10 @@ theorem isLE_rightDerivedLowerStar_singleFunctor_of_ind
 end Forget
 
 omit [IsCommMonObj Λ] in
-/-- Blueprints `sk-lem-proper-heart-bound` / `det-prop-int-compactness-direct-sums` (1), formal
-part: if `Λ_Z` is flat, the heart hypotheses for a quasi-compact quasi-separated `p` follow from
-the ind-constructible heart and a uniform bound on constructible module objects. -/
+/-- Blueprints `lemma-uniform-bound-proper-direct-image` /
+`proposition-compactness-proper-direct-image--2` (1), formal part: if `Λ_Z` is flat, the heart
+hypotheses for a quasi-compact quasi-separated `p` follow from the ind-constructible heart and a
+uniform bound on constructible module objects. -/
 theorem properLowerStarHeartHypotheses_of_isIndConstructibleHeart {Z Y : Scheme.{u}} (p : Z ⟶ Y)
     [QuasiCompact p] [QuasiSeparated p] [PreservesFiniteLimits (tensorLeft (condensedRingObj Λ Z))]
     (hR : IsIndConstructibleHeart (condensedRingObj Λ Z)) (d : ℤ)

@@ -73,7 +73,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 field `k`, the function field `k(C)` is quasi-algebraically closed: every homogeneous form of
 degree `d` in `N > d` variables over `k(C)` has a nontrivial zero. Neither smoothness nor
 properness of `C` is assumed.
-(blueprint: `lem-sc-tsen`) -/
+(blueprint: `lemma-cohomology-multiplicative-group--7`) -/
 theorem isQuasiAlgClosed_functionField (f : C ⟶ Spec (.of k)) [IsCurve f] [IsIntegral C] :
     IsQuasiAlgClosed C.functionField := by
   -- `k(C)` is the fraction field of `A = Γ(C, U)` for a nonempty affine open `U`, a finitely
@@ -121,7 +121,7 @@ theorem isQuasiAlgClosed_functionField (f : C ⟶ Spec (.of k)) [IsCurve f] [IsI
 
 /-- The Brauer group of the function field of an integral curve over an algebraically closed
 field vanishes, `Br(k(C)) = H²(k(C), 𝔾ₘ) = 0`.
-(blueprint: `lem-sc-tsen`) -/
+(blueprint: `lemma-cohomology-multiplicative-group--7`) -/
 theorem subsingleton_cohomologicalBrauerGroup_functionField (f : C ⟶ Spec (.of k)) [IsCurve f]
     [IsIntegral C] : Subsingleton (Spec C.functionField).CohomologicalBrauerGroup :=
   have := isQuasiAlgClosed_functionField f
@@ -132,8 +132,8 @@ theorem subsingleton_cohomologicalBrauerGroup_functionField (f : C ⟶ Spec (.of
 integral, noetherian and regular, so `Br(C)` injects into `Br(k(C))`
 (`AlgebraicGeometry.Scheme.injective_cohomologyMap_gmSheaf_two`), and `Br(k(C)) = 0` by Tsen's
 theorem. Properness is not needed, so no compactification is used.
-(blueprint: `lem-sc-brauer-zero`) 
-(blueprint: lem-sc-brauer-zero)
+(blueprint: `lemma-cohomology-multiplicative-group--6`) 
+(blueprint: lemma-cohomology-multiplicative-group--6)
 -/
 theorem subsingleton_cohomologicalBrauerGroup_of_connectedSpace (f : C ⟶ Spec (.of k))
     [IsCurve f] [Smooth f] [ConnectedSpace C] : Subsingleton C.CohomologicalBrauerGroup := by
@@ -162,7 +162,7 @@ The finitely many connected components of `C` are clopen, so `Br(C)` vanishes as
 Brauer group of every component does
 (`AlgebraicGeometry.Etale.subsingleton_H_of_isClopen`), and each component is a smooth
 connected curve, to which `subsingleton_cohomologicalBrauerGroup_of_connectedSpace` applies.
-(blueprint: `sk-thm-br`) -/
+(blueprint: `lemma-cohomology-multiplicative-group`) -/
 theorem subsingleton_cohomologicalBrauerGroup_of_smooth (f : C ⟶ Spec (.of k)) [IsCurve f]
     [Smooth f] : Subsingleton C.CohomologicalBrauerGroup := by
   have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
@@ -194,8 +194,8 @@ theorem subsingleton_cohomologicalBrauerGroup_of_smooth (f : C ⟶ Spec (.of k))
 
 /-- **The Brauer group of a curve vanishes.** For a curve `C` over an algebraically closed
 field `k`, `Br(C) = H²(C_ét, 𝔾ₘ) = 0`. Neither smoothness nor properness is assumed.
-(blueprint: `lem-sc-brauer-zero-all-curves`) 
-(blueprint: lem-sc-brauer-zero-all-curves)
+(blueprint: `lemma-cohomology-multiplicative-group--6`) 
+(blueprint: lemma-cohomology-multiplicative-group--6)
 -/
 theorem subsingleton_cohomologicalBrauerGroup (f : C ⟶ Spec (.of k)) [IsCurve f] :
     Subsingleton C.CohomologicalBrauerGroup := by

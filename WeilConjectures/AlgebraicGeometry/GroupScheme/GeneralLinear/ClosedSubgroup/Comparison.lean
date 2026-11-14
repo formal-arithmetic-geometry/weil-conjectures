@@ -34,8 +34,8 @@ rational representation `r` is read on tangent points the same way
 
 ## Blueprint
 
-- `sk-p-comparison`: the group–Lie comparison.
-- `lem-ag-lie-centre`: the centre.
+- `lemma-stable-subspaces-center`: the group–Lie comparison.
+- `lemma-stable-subspaces-center--2`: the centre.
 -/
 
 @[expose] public section
@@ -177,7 +177,8 @@ theorem mem_center_iff_commute {x : GrpObj.Lie (subgroupScheme I)} :
 
 /-- The Lie algebra of the reduced centre of a reduced `G = V(I)` over an algebraically closed
 field is contained in the centre of the Lie algebra of `G`: its tangent vectors commute with
-`G(k)`, hence with `Lie G` (`commute_of_mem_lieSubalgebra_center`). (blueprint: `sk-p-comparison`)
+`G(k)`, hence with `Lie G` (`commute_of_mem_lieSubalgebra_center`). (blueprint:
+`lemma-stable-subspaces-center`)
 -/
 theorem range_lieAlgebraMap_center_le [IsAlgClosed k] (hI : I.IsRadical) :
     (lieAlgebraMap (le_center I)).range ≤
@@ -190,7 +191,8 @@ theorem range_lieAlgebraMap_center_le [IsAlgClosed k] (hI : I.IsRadical) :
 
 /-- In characteristic zero, the centre of the Lie algebra of a connected group `G = V(I)` is
 contained in the Lie algebra of the reduced centre `V(center I)`: a matrix commuting with `Lie G`
-commutes with the connected `G(k)` (`mem_lieSubalgebra_center_iff`). (blueprint: `sk-p-comparison`)
+commutes with the connected `G(k)` (`mem_lieSubalgebra_center_iff`). (blueprint:
+`lemma-stable-subspaces-center`)
 -/
 theorem le_range_lieAlgebraMap_center [IsAlgClosed k] [CharZero k] (hconn : IsConnected I) :
     (LieAlgebra.center k (GrpObj.Lie (subgroupScheme I)) : LieSubalgebra k _) ≤
@@ -204,7 +206,7 @@ theorem le_range_lieAlgebraMap_center [IsAlgClosed k] [CharZero k] (hconn : IsCo
 
 /-- The group–Lie comparison for the centre: over an algebraically closed field of characteristic
 zero, the Lie algebra of the centre of a connected algebraic group is the centre of its Lie
-algebra. (blueprint: `sk-p-comparison`, `lem-ag-lie-centre`) -/
+algebra. (blueprint: `lemma-stable-subspaces-center`, `lemma-stable-subspaces-center--2`) -/
 theorem range_lieAlgebraMap_center [IsAlgClosed k] [CharZero k] (hconn : IsConnected I) :
     (lieAlgebraMap (le_center I)).range =
       (LieAlgebra.center k (GrpObj.Lie (subgroupScheme I)) : LieSubalgebra k _) :=
@@ -213,7 +215,7 @@ theorem range_lieAlgebraMap_center [IsAlgClosed k] [CharZero k] (hconn : IsConne
 /-- The Lie algebra of the identity component of the centre of a connected algebraic group is the
 centre of its Lie algebra, in characteristic zero: the differential of `Z(G)° ⟶ G` has as range the
 centre of `Lie(G)`. In matrices, `Lie Z(G)° = Lie Z(G)` (`lieSubalgebra_identityComponent`).
-(blueprint: `sk-p-comparison`, `lem-ag-lie-centre`) -/
+(blueprint: `lemma-stable-subspaces-center`, `lemma-stable-subspaces-center--2`) -/
 theorem range_lieAlgebraMap_identityComponent_center [IsAlgClosed k] [CharZero k]
     (hconn : IsConnected I) :
     (lieAlgebraMap ((le_center I).trans (le_identityComponent (center I)))).range =

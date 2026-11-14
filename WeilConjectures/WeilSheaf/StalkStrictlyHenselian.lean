@@ -21,7 +21,7 @@ identifies the sections of `F` over the pro-étale `Ū`-scheme `Spec A ×_C̄ Ū
 
 For a boundary point `x` of a curve, `Spec A ×_C̄ Ū` is the spectrum of the fraction field of
 the strict henselization, whose absolute Galois group is the inertia group at `x`: this is the
-first step of blueprint `lem-wf-boundary-stalk-invariants`.
+first step of blueprint `lemma-boundary-stalk--1`.
 -/
 
 @[expose] public section
@@ -40,7 +40,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 `h : Spec A ⟶ C̄` be weakly étale, `A` strictly henselian local, with a lift `t` of the geometric
 point `x̄` of a closed point `x` through the closed point of `Spec A`. Then the germ map from the
 sections of `F` over `Spec A ×_C̄ Ū` to the stalk `(j_* F)_x̄` is bijective.
-(blueprint: `lem-wf-boundary-stalk-invariants`, first step) -/
+(blueprint: `lemma-boundary-stalk--1`, first step) -/
 theorem bijective_germ_stalk_directImage {U C : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
     [C.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))]
     (j : U ⟶ C) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]

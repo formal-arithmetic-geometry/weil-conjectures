@@ -18,7 +18,8 @@ of `LΔ^* ⊣ RΔ_!` (`Correspondence.pointTau_comp_counit`). The fixed square o
 correspondence has identities as horizontal maps, and compact-support base change in such a
 square is the counit of `LΔ^* ⊣ RΔ_!` followed by the unit of `L(𝟙)^* ⊣ R(𝟙)_!`
 (`boundedConstructibleLowerShriekBaseChange_padicAlgCl_app_unit_of_id`), by its description as a
-mate of the composition isomorphisms (blueprint `fix-lem-exchanges`, clause (4)).
+mate of the composition isomorphisms (blueprint `proposition-composition-base-change-rf-shriek`,
+clause (4)).
 
 -/
 

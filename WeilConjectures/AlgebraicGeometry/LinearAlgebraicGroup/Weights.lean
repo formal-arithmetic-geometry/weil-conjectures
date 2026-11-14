@@ -102,21 +102,23 @@ degree.
 ## Blueprint
 
 `Representation.RealCharacter`, `Representation.HasFiniteGeometricDet`,
-`Representation.detWeight` and `Representation.detWeight_mul_of_mem_ker` implement `sk-d-weights`;
-`RepresentedDegreeDatum.detWeight_eq_of_isPositiveCentralPair` implements `sk-p-readout`, and
-together with `RepresentedDegreeDatum.detWeight_eq_of_isPositiveCentralPair_of_basis` and
+`Representation.detWeight` and `Representation.detWeight_mul_of_mem_ker` implement
+`definition-determinant-weight--1`; `RepresentedDegreeDatum.detWeight_eq_of_isPositiveCentralPair`
+implements `lemma-determinant-weight-from-central-scalar--1`, and together with
+`RepresentedDegreeDatum.detWeight_eq_of_isPositiveCentralPair_of_basis` and
 `RepresentedDegreeDatum.exists_detWeight_eq_of_isPositiveCentralPair_of_isIrreducible` the
-degree-datum form of `cor-mg-central-determinant-weight`; `DegreeDatum.norm_apply_eq_zpow`
-implements `lem-wf-rank-one-component-modulus`, and `DegreeDatum.forall_norm_eq_rpow_iff_exists`
-and `DegreeDatum.forall_norm_eq_rpow_iff_forall` implement `cor-mg-rankone-weight-from-element`
-for a character along a family of Frobenius elements;
+degree-datum form of `lemma-determinant-weight-from-central-scalar`;
+`DegreeDatum.norm_apply_eq_zpow` implements `corollary-rank-one-weights`, and
+`DegreeDatum.forall_norm_eq_rpow_iff_exists` and `DegreeDatum.forall_norm_eq_rpow_iff_forall`
+implement `corollary-rank-one-weights` for a character along a family of Frobenius elements;
 `Representation.exists_detWeight_eq_add_of_subquotient_tprod` implements `sk-p-tensor`, and together
 with its converse `Representation.exists_isIrreducible_subquotient_tprod_detWeight_eq_add` the node
-`prop-ag-det-weight-two-factor-tensor`;
+`proposition-determinant-weights-tensor-operations--1`;
 `Representation.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower` implements
 `sk-p-exterior`; `Representation.CompositionSeries.exteriorPower_detWeight` implements
-`prop-ag-det-weight-exterior`, for a non-semisimple `V` and with the converse.
-`Representation.CompositionSeries.weightMultiset` is the list of constituent weights of `d-weights`.
+`proposition-determinant-weights-tensor-operations--2`, for a non-semisimple `V` and with the
+converse. `Representation.CompositionSeries.weightMultiset` is the list of constituent weights of
+`definition-determinant-weight--1`.
 -/
 
 @[expose] public section
@@ -132,12 +134,12 @@ variable {V : Type*} [AddCommGroup V] [Module k V]
 of `k` to the reals under addition, `λ(ab) = λ(a) + λ(b)`. The weights of this file are read off
 through such a character, from the determinants of representations (`detWeight`); for
 `k = ℚ̄_ℓ` the relevant one is `log |ι(·)|` for a field embedding `ι : k → ℂ`.
-(blueprint: `sk-d-weights`) -/
+(blueprint: `definition-determinant-weight--1`) -/
 abbrev RealCharacter (k : Type*) [Field k] := kˣ →* Multiplicative ℝ
 
 /-- A representation has *finite geometric determinant* for a degree homomorphism `deg` when its
 determinant character takes only finitely many values on the degree-zero subgroup `P = ker deg`.
-(blueprint: `sk-d-weights`) -/
+(blueprint: `definition-determinant-weight--1`) -/
 def HasFiniteGeometricDet (deg : W →* Multiplicative ℤ) (ρ : Representation k W V) : Prop :=
   (Set.range fun w : deg.ker ↦ ρ.detCharacter w).Finite
 
@@ -147,13 +149,13 @@ a degree-one element `γ` is `dw_χ(ρ) = χ(δ(γ)) / dim V`.
 The blueprint only defines it for `V ≠ 0`. For `V = 0` the division by `dim V = 0` makes it the
 junk value `0`; the same happens when `V` is infinite-dimensional, as `Module.finrank` is then
 `0`. Statements about `detWeight` assume `V` nonzero and finite-dimensional where it matters.
-(blueprint: `sk-d-weights`) -/
+(blueprint: `definition-determinant-weight--1`) -/
 noncomputable def detWeight (χ : RealCharacter k) (γ : W) (ρ : Representation k W V) : ℝ :=
   Multiplicative.toAdd (χ (ρ.detCharacter γ)) / Module.finrank k V
 
 /-- A real character kills the determinant of a degree-zero element when the geometric
 determinant is finite: `δ(u)` has finite order `e`, so `e λ(δ(u)) = λ(δ(u) ^ e) = 0` in the
-torsion-free group `ℝ`. (blueprint: `sk-p-readout`) -/
+torsion-free group `ℝ`. (blueprint: `lemma-determinant-weight-from-central-scalar--1`) -/
 theorem toAdd_apply_detCharacter_eq_zero {deg : W →* Multiplicative ℤ}
     (ρ : Representation k W V) (hdet : ρ.HasFiniteGeometricDet deg) (χ : RealCharacter k)
     {u : W} (hu : u ∈ deg.ker) : Multiplicative.toAdd (χ (ρ.detCharacter u)) = 0 := by
@@ -169,7 +171,7 @@ theorem toAdd_apply_detCharacter_eq_zero {deg : W →* Multiplicative ℤ}
 /-- The determinant weight does not depend on the chosen degree-one element: replacing `γ` by
 `u γ` for a degree-zero element `u` leaves it unchanged, because the determinant character takes
 finitely many values on the degree-zero subgroup and `ℝ` is torsion-free.
-(blueprint: `sk-d-weights`) -/
+(blueprint: `definition-determinant-weight--1`) -/
 theorem detWeight_mul_of_mem_ker {deg : W →* Multiplicative ℤ} (ρ : Representation k W V)
     (hdet : ρ.HasFiniteGeometricDet deg) (χ : RealCharacter k) (γ : W) {u : W}
     (hu : u ∈ deg.ker) : ρ.detWeight χ (u * γ) = ρ.detWeight χ γ := by
@@ -250,7 +252,7 @@ variable {W : Type*} [Group W] {n : Type*} [Fintype n] [DecidableEq n] {k : Type
 datum.  If a nonzero `W`-subquotient `Q = S / U` of the defining representation has finite
 geometric determinant and `z` acts on `Q` as the scalar `c`, then `dw_χ(Q) = χ(c) / N`.  The
 scalar hypothesis is automatic when `Q` is simple, by Schur's lemma.
-(blueprint: `sk-p-readout`) -/
+(blueprint: `lemma-determinant-weight-from-central-scalar--1`) -/
 theorem detWeight_eq_of_isPositiveCentralPair (D : RepresentedDegreeDatum W n k)
     (χ : Representation.RealCharacter k) {N : ℕ} {z : GL n k}
     (hz : D.IsPositiveCentralPair N z) {U S : Subrepresentation D.asRepresentation} (hUS : U < S)
@@ -313,7 +315,8 @@ theorem detWeight_eq_of_isPositiveCentralPair (D : RepresentedDegreeDatum W n k)
 /-- The weight readout for an irreducible subquotient, over an algebraically closed field: by
 Schur's lemma the central element `z` acts on a nonzero irreducible subquotient `Q = S / U` as a
 scalar `c`, nonzero because `z` is invertible, and then `dw_χ(Q) = χ(c) / N`.
-(blueprint: `sk-p-readout`, `cor-mg-central-determinant-weight`) -/
+(blueprint: `lemma-determinant-weight-from-central-scalar--1`,
+`lemma-determinant-weight-from-central-scalar`) -/
 theorem exists_detWeight_eq_of_isPositiveCentralPair_of_isIrreducible [IsAlgClosed k]
     (D : RepresentedDegreeDatum W n k) (χ : Representation.RealCharacter k) {N : ℕ} {z : GL n k}
     (hz : D.IsPositiveCentralPair N z) {U S : Subrepresentation D.asRepresentation} (hUS : U < S)
@@ -354,7 +357,7 @@ noncomputable def basisEquiv (D : RepresentedDegreeDatum W n k) (b : Basis n k V
 
 /-- The `k`-points of the arithmetic monodromy group preserve every subrepresentation of a
 representation `ρ` whose matrices in a basis `b` are those of the datum.
-(blueprint: `sk-i-restriction`) -/
+(blueprint: `lemma-restriction-normal-subgroup`) -/
 theorem toLin_apply_mem_of_mem_zeroLocus_arithmeticMonodromy (D : RepresentedDegreeDatum W n k)
     (b : Basis n k V) (hρ : ∀ w, LinearMap.toMatrix b b (ρ w) = (D.rep w : Matrix n n k))
     {g : GL n k}
@@ -368,7 +371,7 @@ theorem toLin_apply_mem_of_mem_zeroLocus_arithmeticMonodromy (D : RepresentedDeg
 
 /-- The weight readout `dw_χ(Q) = χ(c) / N` for a subquotient `Q = S / U` of any representation
 `ρ` whose matrices in a basis `b` are those of the datum.
-(blueprint: `sk-p-readout`) -/
+(blueprint: `lemma-determinant-weight-from-central-scalar--1`) -/
 theorem detWeight_eq_of_isPositiveCentralPair_of_basis (D : RepresentedDegreeDatum W n k)
     (χ : Representation.RealCharacter k) {N : ℕ} {z : GL n k}
     (hz : D.IsPositiveCentralPair N z) (b : Basis n k V)
@@ -397,7 +400,8 @@ theorem detWeight_eq_of_isPositiveCentralPair_of_basis (D : RepresentedDegreeDat
 /-- The weight readout for an irreducible quotient `r₁` of a representation `ρ` whose matrices in a
 basis `b` are those of the datum, over an algebraically closed field: by Schur's lemma the central
 element `z` acts on `r₁` by a nonzero scalar `c`, and then `dw_χ(r₁) = χ(c) / N`.
-(blueprint: `sk-p-readout`, `cor-mg-central-determinant-weight`) -/
+(blueprint: `lemma-determinant-weight-from-central-scalar--1`,
+`lemma-determinant-weight-from-central-scalar`) -/
 theorem exists_detWeight_eq_of_isPositiveCentralPair_of_surjective [IsAlgClosed k]
     [FiniteDimensional k V] (D : RepresentedDegreeDatum W n k)
     (χ : Representation.RealCharacter k) {N : ℕ} {z : GL n k}
@@ -627,7 +631,7 @@ simple constituents of `⋀^s V` have finite geometric determinant, every sub-mu
 `Q` of `⋀^s V`.  Following the blueprint: `T` is the list of weights of an `s`-element set `I` of
 basis vectors adapted to the decomposition, the central element acts on the wedge `e_I` by
 `∏_{i ∈ I} c_i`, and a simple constituent of the corresponding eigenspace has the weight
-`∑_{i ∈ I} χ(c_i) / N`. (blueprint: `prop-ag-det-weight-exterior`) -/
+`∑_{i ∈ I} χ(c_i) / N`. (blueprint: `proposition-determinant-weights-tensor-operations--2`) -/
 theorem DegreeDatum.exists_detWeight_eq_sum_of_exteriorPower
     {k : Type u} [Field k] [IsAlgClosed k] [CharZero k] {W : Type*} [Group W] (D₀ : DegreeDatum W)
     (χ : RealCharacter k)
@@ -954,7 +958,8 @@ determinant. If all simple constituents of `⋀^s V` have finite geometric deter
 sub-multiset `T` of size `s` of the rank-counted weight multiset is the determinant weight
 `dw_χ(Q) = T.sum` of some simple constituent `Q = S / U` of `⋀^s V`. As in
 `exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower`, the degree map need not be surjective
-and `γ` need not have degree one. (blueprint: `prop-ag-det-weight-exterior`) -/
+and `γ` need not have degree one. (blueprint:
+`proposition-determinant-weights-tensor-operations--2`) -/
 theorem exists_detWeight_eq_sum_of_exteriorPower [IsAlgClosed k] [CharZero k]
     (χ : RealCharacter k) (deg : W →* Multiplicative ℤ) (γ : W)
     {V : Type*} [AddCommGroup V] [Module k V] [FiniteDimensional k V]
@@ -1058,7 +1063,7 @@ The proof follows the blueprint: `Q` is a subquotient of some `V_i ⊗ E_j`
 semisimple representation `V_i ⊕ E_j` acts by the product of its scalars on `V_i` and on `E_j`
 (`detWeight_subquotient_tprod_eq_add`).  The converse is
 `exists_isIrreducible_subquotient_tprod_detWeight_eq_add`.
-(blueprint: `sk-p-tensor`, `prop-ag-det-weight-two-factor-tensor`) -/
+(blueprint: `proposition-determinant-weights-tensor-operations--1`) -/
 theorem exists_detWeight_eq_add_of_subquotient_tprod [IsAlgClosed k] [CharZero k]
     (χ : RealCharacter k) (deg : W →* Multiplicative ℤ) (γ : W)
     {V E : Type*} [AddCommGroup V] [Module k V] [FiniteDimensional k V]
@@ -1092,7 +1097,7 @@ theorem exists_detWeight_eq_add_of_subquotient_tprod [IsAlgClosed k] [CharZero k
 `V_i = SV / UV` of `V` and `E_j = SE / UE` of `E` with finite geometric determinant, if all simple
 constituents of `V ⊗ E` have finite geometric determinant, then some simple constituent `Q` of
 `V ⊗ E` has `dw_χ(Q) = dw_χ(V_i) + dw_χ(E_j)`: any simple constituent of `V_i ⊗ E_j` is one.
-(blueprint: `prop-ag-det-weight-two-factor-tensor`) -/
+(blueprint: `proposition-determinant-weights-tensor-operations--1`) -/
 theorem exists_isIrreducible_subquotient_tprod_detWeight_eq_add [IsAlgClosed k] [CharZero k]
     (χ : RealCharacter k) (deg : W →* Multiplicative ℤ) (γ : W)
     {V E : Type*} [AddCommGroup V] [Module k V] [FiniteDimensional k V]
@@ -1171,7 +1176,7 @@ variable {W : Type*} [Group W] {k : Type*} [Field k]
 character of a degree datum with finite image on the degree-zero subgroup `P`, and `ι : k → ℂ` a
 field embedding.  Every `w` of degree `m` satisfies `|ι(χ(w))| = |ι(χ(γ))| ^ m`: writing
 `w = u γ ^ m` with `u ∈ P`, the value `χ(u)` is a root of unity.
-(blueprint: `lem-wf-rank-one-component-modulus`) -/
+(blueprint: `corollary-rank-one-weights`) -/
 theorem norm_apply_eq_zpow (D : DegreeDatum W) (χ : W →* kˣ)
     (hχ : (Set.range fun u : D.deg.ker ↦ χ u).Finite) (ι : k →+* ℂ) {w : W} {m : ℤ}
     (hw : D.deg w = Multiplicative.ofAdd m) :
@@ -1194,7 +1199,7 @@ theorem norm_apply_eq_zpow (D : DegreeDatum W) (χ : W →* kˣ)
 
 /-- For an element `σ` of positive degree `e` and a character `χ` with finite image on `P`,
 `|ι(χ(σ))| = q ^ (e w / 2)` if and only if `|ι(χ(γ))| = q ^ (w / 2)`.
-(blueprint: `cor-mg-rankone-weight-from-element`) -/
+(blueprint: `corollary-rank-one-weights`) -/
 theorem norm_apply_eq_rpow_iff (D : DegreeDatum W) (χ : W →* kˣ)
     (hχ : (Set.range fun u : D.deg.ker ↦ χ u).Finite) (ι : k →+* ℂ) {q : ℝ} (hq : 0 < q)
     (t : ℝ) {σ : W} {e : ℕ} (he : 0 < e) (hσ : D.deg σ = Multiplicative.ofAdd (e : ℤ)) :
@@ -1209,7 +1214,7 @@ family of elements of positive degrees `d x`, such as the geometric Frobenius el
 closed points of a curve over `𝔽_q`, of degree `[κ(x) : 𝔽_q]`.  Then `χ` is pure of weight `t`
 along this family, `|ι(χ(F x))| = q ^ (d x t / 2)` for all `x`, if and only if one element `σ`
 of positive degree `e` satisfies `|ι(χ(σ))| = q ^ (e t / 2)`.
-(blueprint: `cor-mg-rankone-weight-from-element`) -/
+(blueprint: `corollary-rank-one-weights`) -/
 theorem forall_norm_eq_rpow_iff_exists (D : DegreeDatum W) (χ : W →* kˣ)
     (hχ : (Set.range fun u : D.deg.ker ↦ χ u).Finite) (ι : k →+* ℂ) {q : ℝ} (hq : 0 < q)
     (t : ℝ) {X : Type*} [Nonempty X] (F : X → W) (d : X → ℕ) (hd : ∀ x, 0 < d x)
@@ -1226,7 +1231,7 @@ theorem forall_norm_eq_rpow_iff_exists (D : DegreeDatum W) (χ : W →* kˣ)
 /-- **Rank-one weight from a positive-degree element**, the version for every element: under the
 hypotheses of `forall_norm_eq_rpow_iff_exists`, `χ` is pure of weight `t` along the family `F` if
 and only if every element `σ` of positive degree `e` satisfies `|ι(χ(σ))| = q ^ (e t / 2)`.
-(blueprint: `cor-mg-rankone-weight-from-element`) -/
+(blueprint: `corollary-rank-one-weights`) -/
 theorem forall_norm_eq_rpow_iff_forall (D : DegreeDatum W) (χ : W →* kˣ)
     (hχ : (Set.range fun u : D.deg.ker ↦ χ u).Finite) (ι : k →+* ℂ) {q : ℝ} (hq : 0 < q)
     (t : ℝ) {X : Type*} [Nonempty X] (F : X → W) (d : X → ℕ) (hd : ∀ x, 0 < d x)
@@ -1250,7 +1255,8 @@ variable {k : Type*} [Field k] {W : Type*} [Group W] {V : Type*} [AddCommGroup V
   {ρ : Representation k W V}
 
 /-- The *rank-counted constituent weights* of a composition series: the determinant weight of each
-composition factor `A_i`, repeated `dim A_i` times. (blueprint: `d-weights`) -/
+composition factor `A_i`, repeated `dim A_i` times. (blueprint:
+`definition-determinant-weight--1`) -/
 noncomputable def weightMultiset (χ : RealCharacter k) (γ : W) (s : ρ.CompositionSeries) :
     Multiset ℝ :=
   ∑ i, Multiset.replicate (Module.finrank k ((s.series i.succ).toSubmodule ⧸
@@ -1328,7 +1334,8 @@ Grouping equal weights, a sub-multiset `T` of size `r` is a tuple `(n_γ)` index
 weights `γ`, with `0 ≤ n_γ ≤ r(γ)` and `∑ n_γ = r`, of weight `∑ n_γ γ`: this is the formulation of
 the blueprint. Neither `V` nor `⋀^r V` is assumed semisimple: both directions are reduced to the
 semisimplification `V^ss = ⨁ A_i`, whose exterior powers have the same constituents
-(`constituentsLE_exteriorPower_semisimplification`). (blueprint: `prop-ag-det-weight-exterior`) -/
+(`constituentsLE_exteriorPower_semisimplification`). (blueprint:
+`proposition-determinant-weights-tensor-operations--2`) -/
 theorem exteriorPower_detWeight [IsAlgClosed k] [CharZero k] [FiniteDimensional k V]
     [Nontrivial V] (χ : RealCharacter k) (deg : W →* Multiplicative ℤ) (γ : W)
     (s : ρ.CompositionSeries) (r : ℕ) (hdetA : ∀ i, (s.factor i).HasFiniteGeometricDet deg)

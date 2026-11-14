@@ -20,19 +20,19 @@ Let `(K, φ)` be a Weil object on `X` for the model Frobenius `Φ`, `m ≥ 1`, a
 rational point fixed by `Φ_m`. For an open and closed subscheme `B` of the fixed locus of the
 graph correspondence `c_m = (𝟙, Φ_m)` with underlying set `{x}`, the local term of the trace
 class of `φ_m` along `B` is the trace of the local Frobenius `F_{x,m}` (blueprint
-`thm-trf-frobenius-local-term`, `sk-p-frob`). The graph of the Frobenius is contracting at `x`,
-so by Varshavsky's theorem for contracting correspondences the local term is the trace of the
-stalk map of `φ_m` at `x`
+`proposition-frobenius-local-term-curve--1`, `proposition-frobenius-local-term-curve`). The graph of
+the Frobenius is contracting at `x`, so by Varshavsky's theorem for contracting correspondences the
+local term is the trace of the stalk map of `φ_m` at `x`
 (`Correspondence.localTerm_traceClass_ofGraph_eq_trace_of_isContractingAt`), which is the local
 Frobenius (`WeilBoundedConstructible.stalkFrobenius_eq_graphStalkMap`, in
 `WeilConjectures.TraceFormula.StalkFrobeniusGraph`). The main trace formula does not use this
 file: on curves it takes the Frobenius local term from the SGA 5 III B curve route (blueprint
-`lem-trf-local-term-locality`, item 3,
+`corollary-contracting-local-terms-point`, item 3,
 `Correspondence.localTerm_traceClass_frobeniusGraph_eq_trace_of_smooth`).
 
 With `j : U = X ∖ {x} ⟶ X` the open complement of `x`, the local terms are then additive along
 the curve pieces `K^U = j_! Lj^* K` and `K^Z = Rx_* Lx^* K` (blueprint
-`prop-trf-trace-class-additivity`, item 2, at an isolated fixed point): the open piece
+`proposition-additivity-trace-classes--2`, item 2, at an isolated fixed point): the open piece
 contributes zero, its stalk at `x` vanishing
 (`WeilBoundedConstructible.localTerm_traceClassWithCoeff_openPieceCoeff_eq_zero`), and the trace
 class of the closed piece is the Borel–Moore pushforward of the trace class of the local
@@ -72,12 +72,13 @@ namespace WeilBoundedConstructible
 
 variable {Φ : X ⟶ X}
 
-/-- **The closed piece of the Frobenius local term** (blueprint `thm-trf-frobenius-local-term`,
-Step 3): the local term along `B` of the trace class of the closed piece coefficient
-`u^Z = [x, x]_! F_{x,m}` is the trace of the local Frobenius `F_{x,m}`. The trace class of `u^Z`
-is the pushforward `h_* Tr(F_{x,m})` along the inclusion `h : s ⟶ Fix(c_m)` of the point `x`
-(`Correspondence.ProperPushforwardDiagram.traceClassPushforward_eq`), whose local term along
-`B ∋ x` is `∫_s Tr(F_{x,m}) = tr(F_{x,m})` (`Correspondence.integral_traceClass_ofEnd`). -/
+/-- **The closed piece of the Frobenius local term** (blueprint
+`proposition-frobenius-local-term-curve--1`, Step 3): the local term along `B` of the trace class of
+the closed piece coefficient `u^Z = [x, x]_! F_{x,m}` is the trace of the local Frobenius `F_{x,m}`.
+The trace class of `u^Z` is the pushforward `h_* Tr(F_{x,m})` along the inclusion `h : s ⟶ Fix(c_m)`
+of the point `x` (`Correspondence.ProperPushforwardDiagram.traceClassPushforward_eq`), whose local
+term along `B ∋ x` is `∫_s Tr(F_{x,m}) = tr(F_{x,m})`
+(`Correspondence.integral_traceClass_ofEnd`). -/
 theorem localTerm_traceClassWithCoeff_closedPieceCoeff (K : WeilBoundedConstructible ℓ Φ)
     (m : ℕ) (F : (K.graph m).FixedLocus) [IsProper F.F.hom] (x : RationalPoint X)
     (hx : x ≫ frobeniusIterate Φ m = x) {B : Over (Spec (.of k))} [QuasiCompact B.hom]
@@ -108,8 +109,8 @@ theorem localTerm_traceClassWithCoeff_closedPieceCoeff (K : WeilBoundedConstruct
   exact Correspondence.integral_traceClass_ofEnd _
 
 /-- **The open piece of the Frobenius local term vanishes** (blueprint
-`thm-trf-frobenius-local-term`, Step 2): the stalk of `K^U = j_! Lj^* K` at the point `x ∉ U`
-vanishes, so the local term along `B` of the trace class of the open piece coefficient `u^U`
+`proposition-frobenius-local-term-curve--1`, Step 2): the stalk of `K^U = j_! Lj^* K` at the point
+`x ∉ U` vanishes, so the local term along `B` of the trace class of the open piece coefficient `u^U`
 is zero by the zero-stalk vanishing for the Frobenius graph
 (`Correspondence.localTerm_traceClass_frobeniusGraph_eq_zero`). -/
 theorem localTerm_traceClassWithCoeff_openPieceCoeff_eq_zero {k₀ : Type u} [Field k₀]
@@ -131,8 +132,8 @@ theorem localTerm_traceClassWithCoeff_openPieceCoeff_eq_zero {k₀ : Type u} [Fi
     (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ jU x hxU _)
 
 /-- **The local term of the Frobenius correspondence** (blueprint
-`thm-trf-frobenius-local-term`): let `Φ` be the model Frobenius of a model `X₀` over a finite
-field, let `x` be a rational point fixed by `Φ_m`, `m ≥ 1`, and let `j : B ⟶ Fix(c_m)` be an
+`proposition-frobenius-local-term-curve--1`): let `Φ` be the model Frobenius of a model `X₀` over a
+finite field, let `x` be a rational point fixed by `Φ_m`, `m ≥ 1`, and let `j : B ⟶ Fix(c_m)` be an
 open and closed subscheme of the fixed locus of the graph correspondence, proper over `s`, whose
 underlying set is the point `x`. Then the local term of the trace class of `φ_m` along `B` is the
 trace of the local Frobenius `F_{x,m}` on the geometric stalk `K_x̄`. No local constancy of `K`
@@ -162,8 +163,8 @@ theorem localTerm_traceClass_graph_eq_trace {k₀ : Type u} [Field k₀] [Finite
     (frobeniusIterate Φ m) (K.iterateStr m).hom F x hc j hB
 
 /-- **Additivity of the Frobenius local term at an isolated fixed point** (blueprint
-`prop-trf-trace-class-additivity`, item 2, local terms, the case of the component `β = {x}`; the
-statement for every component is `localTerm_traceClass_graph_eq_add`): let
+`proposition-additivity-trace-classes--2`, item 2, local terms, the case of the component `β = {x}`;
+the statement for every component is `localTerm_traceClass_graph_eq_add`): let
 `Φ` be the model Frobenius of a model over a finite field, `m ≥ 1`, `x` a rational point fixed
 by `Φ_m` with open complement `jU : U ⟶ X` (with `Φ_{m,U} ≫ jU = jU ≫ Φ_m` cartesian), and
 `j : B ⟶ Fix(c_m)` an open and closed subscheme of the fixed locus, proper over `s`, with

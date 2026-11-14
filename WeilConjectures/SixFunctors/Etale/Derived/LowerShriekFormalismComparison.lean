@@ -20,7 +20,7 @@ it is the comparison
 the base change isomorphism of the extension by zero on étale sheaves. Hence the
 comparison isomorphism `CompactSupportFormalism.shriekIso` of the formalism is
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusIso`, and the coherences of
-blueprint `sk-prop-sf-comp-coherence` proved for one hold for the other.
+blueprint `proposition-construction-independence-rf-shriek` proved for one hold for the other.
 
 The two base change maps are compared through their transposes under the derived adjunction
 `D(c.i)_! ⊣ D(c.i)^*`: both are the unit of `D(d.i)_! ⊣ D(d.i)^*` followed by the composition

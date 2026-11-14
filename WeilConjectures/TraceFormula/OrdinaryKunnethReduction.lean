@@ -24,13 +24,13 @@ file supplies the two properties of `red` that, together with its compatibility 
 finite to integral coefficients:
 
 * `ProEtale.CondensedRing.etaleReductionLowerStarIso`: `red` commutes with the pushforward
-  along any morphism (blueprint `det-prop-scalar-six-direct-image` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on
-  the étale site): the condensed reduction commutes with `Rf_*`
+  along any morphism (blueprint `lemma-change-coefficients-direct-image` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read
+  on the étale site): the condensed reduction commutes with `Rf_*`
   (`ProEtale.CondensedRing.isIso_boundedConstructibleLowerStarIntegersModPowReduction'`), and so
   does its étale reading (`ProEtale.CondensedRing.finiteEtaleReadingLowerStarIso`);
 * `ProEtale.CondensedRing.isZero_of_isZero_etaleReduction`: `red` detects zero objects (for
-  `n ≠ 0`; derived Nakayama, blueprint `sk-lem-pe-derived-nakayama`). The étale reading is fully
-  faithful (`ProEtale.CondensedRing.finiteEtaleReadingFullyFaithful`), and if the condensed
+  `n ≠ 0`; derived Nakayama, blueprint `lemma-reduction-derived-nakayama`). The étale reading is
+  fully faithful (`ProEtale.CondensedRing.finiteEtaleReadingFullyFaithful`), and if the condensed
   reduction of `K` vanishes then `ℓⁿ` acts invertibly on `K` by the reduction triangle
   `K --ℓⁿ--> K ⟶ K ⊗ᴸ 𝒪_E ⧸ ℓⁿ ⟶ K[1]`
   (`ProEtale.exists_distinguished_integersModPowReduction`), so that the first derived reduction
@@ -62,7 +62,7 @@ variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
 
 /-- **Reduction modulo `ℓⁿ`, read on the étale site, commutes with the pushforward** along any
 morphism `d : Z ⟶ Y` of separated `k`-schemes of finite type:
-`Rd_* ⋙ red_Y ≅ red_Z ⋙ Rd_*` (blueprint `det-prop-scalar-six-direct-image` for
+`Rd_* ⋙ red_Y ≅ red_Z ⋙ Rd_*` (blueprint `lemma-change-coefficients-direct-image` for
 `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`). It chains the commutation of the condensed reduction with `Rd_*`
 (`isIso_boundedConstructibleLowerStarIntegersModPowReduction'`) and of its étale reading
 (`finiteEtaleReadingLowerStarIso`). -/
@@ -94,7 +94,7 @@ constructible `𝒪_E`-complex `K` whose reduction `red_X K` vanishes is zero. T
 fully faithful, so the condensed reduction `K ⊗ᴸ 𝒪_E ⧸ ℓⁿ` vanishes; by the reduction triangle
 `ℓⁿ` acts invertibly on `K`, hence on its first derived reduction, where `ℓ` acts by zero; so the
 first derived reduction vanishes and `K = 0` by derived Nakayama (blueprint
-`sk-lem-pe-derived-nakayama`). -/
+`lemma-reduction-derived-nakayama`). -/
 theorem isZero_of_isZero_etaleReduction (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
     [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] {n : ℕ}
     (hn : n ≠ 0) {K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧}

@@ -12,7 +12,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.C
 /-! # Finite-open descent for integral restriction
 
 Source: blueprint main-20261015, sk-thm-int-restriction-glue.proof.md,
-expanded by det-thm-int-restriction-glue.
+expanded by theorem-f-shriek-ell-adic-coefficients.
 -/
 
 @[expose] public noncomputable section
@@ -65,7 +65,7 @@ private theorem zero_of_open_restrictions
   simpa using hsheaf.eq_of_src (𝟙 M.X) 0
 
 /-- Boundedness descends along a finite open cover.
-Source: det-thm-int-restriction-glue, proof steps 1--2; blueprint
+Source: theorem-f-shriek-ell-adic-coefficients, proof steps 1--2; blueprint
 sk-thm-int-restriction-glue.proof.md, paragraph (1).
 (blueprint: lem-int-restriction-bounded-descent).
 

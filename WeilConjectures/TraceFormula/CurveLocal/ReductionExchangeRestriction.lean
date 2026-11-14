@@ -22,8 +22,8 @@ proper, the reduction modulo `ℓⁿ`, read on the small étale site
 the reduction, up to an isomorphism on the target and a map on the source
 (`ProEtale.CondensedRing.exists_etaleReduction_map_exchangeRestriction_comp_eq`). The étale
 square may moreover be transported along an isomorphism `φ : W ≅ X × X` of the ambient scheme.
-This uses the coefficient comparisons of blueprint `sk-prop-scalar-six` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`
-(`ProEtale.CondensedRing.exists_etaleReductionLowerShriekIso`,
+This uses the coefficient comparisons of blueprint `proposition-six-operations-change-coefficients`
+for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ` (`ProEtale.CondensedRing.exists_etaleReductionLowerShriekIso`,
 `ProEtale.CondensedRing.etaleReductionUpperStarIso`) and
 `CategoryTheory.Adjunction.exists_map_mateEquiv_app_comp_eq`.
 

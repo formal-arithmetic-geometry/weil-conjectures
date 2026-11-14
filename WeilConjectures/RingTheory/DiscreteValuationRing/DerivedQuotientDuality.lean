@@ -150,7 +150,8 @@ duality kills `T`, `T^* = Hom_R(T, R) = 0`, whereas the resolution `0 ⟶ R ─�
 gives `RHom_R(T, R) ≅ T[-1]` and `RHom_R(RHom_R(T, R), R) ≅ T` in `D(R)`. These
 identifications depend on the chosen `ϖ`, whence the mere existence of isomorphisms; the
 canonical derived evaluation `T ⟶ RHom_R(RHom_R(T, R), R)` is an isomorphism because `T` is
-perfect (`DerivedCategory.IsPerfect.isIso_toIhomIhomUnit`, `lem-weil-coefficient-frobenius`). -/
+perfect (`DerivedCategory.IsPerfect.isIso_toIhomIhomUnit`,
+`lemma-perfect-complexes-geometric-point--8`). -/
 theorem quotient_dual_derivedDual (hϖ : ϖ ≠ 0) :
     (∀ φ : Module.Dual R (R ⧸ Ideal.span {ϖ}), φ = 0) ∧
       Nonempty ((ihom (quotientObj ϖ)).obj (𝟙_ _) ≅ (quotientObj ϖ)⟦(-1 : ℤ)⟧) ∧

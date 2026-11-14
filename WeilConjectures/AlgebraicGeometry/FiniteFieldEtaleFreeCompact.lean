@@ -34,7 +34,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 Source: Bhatt--Scholze, The pro-étale topology for schemes, Lemma 6.3.11,
 Section 6.4, Lemma 6.4.5(1), Proposition 6.4.8; the finite-field bound is
-`sk-lem-base-field-cd` (blueprint: lem-sfb-finite-field-etale-free-compact).
+`lemma-cohomological-dimension-base-field` (blueprint: lem-sfb-finite-field-etale-free-compact).
 
 The indexing and Hom universe is `u + 1`; the ordinary derived category has
 object universe `u + 2`. A chosen small skeleton of the affine étale basis is

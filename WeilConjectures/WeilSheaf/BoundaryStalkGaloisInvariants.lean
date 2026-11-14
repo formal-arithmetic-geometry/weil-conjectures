@@ -24,7 +24,7 @@ This combines the computation of stalks over strictly henselian neighbourhoods
 (`AlgebraicGeometry.WeilSheaf.bijective_germ_stalk_directImage`) with Galois descent for
 sections of lisse sheaves over fields
 (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.exists_map_fieldExtHom_eq`). It is the displayed
-identification `(j_* F)_x̄ ≅ F_η̄^{I_x}` of blueprint `lem-wf-boundary-stalk-invariants`, given the
+identification `(j_* F)_x̄ ≅ F_η̄^{I_x}` of blueprint `lemma-boundary-stalk--1`, given the
 strictly henselian neighbourhood; the Frobenius equivariance and the comparison of `F(Spec Ω)`
 with the Weil fundamental representation are not treated here.
 -/
@@ -47,7 +47,7 @@ strictly henselian `Spec A`, whose punctured part `Spec A ×_C̄ Ū` is identifi
 `Ū`-scheme, with `k : Spec K' ⟶ Ū`, and let `Ω / K'` be a Galois extension. For a lisse Weil
 sheaf `F` on `U₀` there is an injective `ℚ̄_ℓ`-linear map `(j_* F)_x̄ ⟶ F(Spec Ω)` whose image
 is the module of `Gal(Ω / K')`-invariants.
-(blueprint: `lem-wf-boundary-stalk-invariants`, the displayed identification) -/
+(blueprint: `lemma-boundary-stalk--1`, the displayed identification) -/
 theorem exists_injective_stalk_directImage_range_eq_invariants {U C : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))]

@@ -47,7 +47,7 @@ namespace Etale
 
 open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
-/-- The open-complement condition (`def-exc-open-complement-bound`) is a theorem, not an
+/-- The open-complement condition (`theorem-f-shriek-finite-coefficients--1`) is a theorem, not an
 assumption: for a field `k`, a `k`-scheme `T` of finite type and of dimension at most `d` and a
 quasi-compact open immersion `j : V ⟶ T`, every finite ring `Λ` whose exponent is invertible in
 `k` satisfies the open-complement condition for `j` with the constant `c = 2d`, which does not
@@ -55,10 +55,10 @@ depend on `Λ` (the first half of `rem-pur-assembly-status`, see
 `AlgebraicGeometry.Etale.preservationClauses_assembly`).
 
 This is `AlgebraicGeometry.Etale.openComplementCondition_two_mul`
-(`lem-exc-open-complement-known`), derived from the two clauses of the direct-image finiteness
-input (`thm-exc-direct-image-input-holds`): the finite-type constructibility theorem
-`thm-dg-finite-type-constructibility` and the cohomological dimension bound
-`thm-sc-finite-type-torsion-cd`. -/
+(`theorem-f-shriek-finite-coefficients--1`), derived from the two clauses of the direct-image
+finiteness input (`theorem-results-from-etale-theory`): the finite-type constructibility theorem
+`proposition-six-operations-dctf--2` and the cohomological dimension bound
+`lemma-uniform-bounds-pro-etale-affines`. -/
 theorem openComplementCondition_two_mul_of_finite {k : Type u} [Field k] {V T : Scheme.{u}}
     (aT : T ⟶ Spec (.of k)) [LocallyOfFiniteType aT] [QuasiCompact aT] (j : V ⟶ T)
     [IsOpenImmersion j] [QuasiCompact j] (d : ℕ)
@@ -75,15 +75,16 @@ closed immersion with open complement `j : U ⟶ T`, and `Λ` a finite ring whos
 invertible in `k`. Then, without any further hypothesis:
 
 1. (the ambient datum) `Ri_!` is a left adjoint on the unbounded derived categories, so that the
-   exceptional inverse image `Ri^!` exists (`thm-amb-etale-exceptional-adjoint`);
+   exceptional inverse image `Ri^!` exists (`theorem-existence-exceptional-inverse-image--1`);
 2. (the constructibility clause) `Ri^!` carries `D_c^{[a, b]}(T, Λ)` into
-   `D_c^{[a, b + 2d + 1]}(Z, Λ)` (`lem-exc-closed-amplitude`);
+   `D_c^{[a, b + 2d + 1]}(Z, Λ)` (`theorem-f-shriek-finite-coefficients--1`);
 3. (the finite-Tor clause) `Ri^!` carries bounded constructible complexes of Tor amplitude in
    `[a, b]` to bounded constructible complexes of Tor amplitude in `[a, b + 2d + 1]`
-   (`prop-exc-closed-tor`).
+   (`theorem-f-shriek-finite-coefficients--1`).
 
 The open-complement condition used by clauses (2) and (3) is supplied by
-`AlgebraicGeometry.Etale.openComplementCondition_two_mul` (`lem-exc-open-complement-known`). -/
+`AlgebraicGeometry.Etale.openComplementCondition_two_mul`
+(`theorem-f-shriek-finite-coefficients--1`). -/
 theorem isLeftAdjoint_and_constructibleIn_and_torAmplitudeIn_of_isClosedImmersion {k : Type u}
     [Field k] {Z T U : Scheme.{u}}
     (aT : T ⟶ Spec (.of k)) [LocallyOfFiniteType aT] [QuasiCompact aT] (d : ℕ)
@@ -120,29 +121,31 @@ exceptional right adjoint datum is not a hypothesis, and the two preservation cl
 (constructibility and finite Tor amplitude) are derived:
 
 1. (the ambient datum) for every compactifiable `f`, `Rf_!` is a left adjoint on the unbounded
-   derived categories, so that `Rf^!` exists (`thm-amb-etale-exceptional-adjoint`); and, when
-   `k` is separably closed, the vanishing half of the ambient datum holds on the coefficients of
-   étale origin (`lem-sf-proetale-constructible-origin`): for `p : X ⟶ Y` proper between
-   finite-type `k`-schemes with `dim X ≤ d`, the class-restricted full cohomological-dimension
-   condition holds with the bound `2d` (`thm-sf-fullcd-class`,
+   derived categories, so that `Rf^!` exists (`theorem-existence-exceptional-inverse-image--1`);
+   and, when `k` is separably closed, the vanishing half of the ambient datum holds on the
+   coefficients of étale origin (`theorem-comparison-constructible-sheaves`): for `p : X ⟶ Y` proper
+   between finite-type `k`-schemes with `dim X ≤ d`, the class-restricted full
+   cohomological-dimension condition holds with the bound `2d`
+   (`lemma-uniform-bounds-pro-etale-affines--2`,
    `AlgebraicGeometry.ProEtale.hasCohomologicalDimensionLEOnEtaleOrigin`);
-2. (smooth morphisms, `cor-pur-smooth-admissibility`) for `f` smooth of pure relative dimension
+2. (smooth morphisms, `theorem-f-shriek-finite-coefficients`) for `f` smooth of pure relative
+dimension
    `d` over a `k`-scheme, `Rf^!` carries `D_c^[a, b]` into `D_c^[a - 2d, b - 2d]` and Tor
    amplitude `[a, b]` to `[a - 2d, b - 2d]`
    (`AlgebraicGeometry.Etale.smooth_preservationClauses`);
-3. (closed immersions, without purity input: `lem-exc-closed-ambient`,
-   `lem-exc-closed-amplitude`, `prop-exc-closed-tor`) for a closed immersion `i` into a
+3. (closed immersions, without purity input: `lemma-local-cohomology-right-adjoint--1`,
+   `theorem-f-shriek-finite-coefficients--1`) for a closed immersion `i` into a
    finite-type `k`-scheme of dimension `≤ d`, `Ri^!` carries `[a, b]` to `[a, b + 2d + 1]` in
    both clauses
    (`Etale.isLeftAdjoint_and_constructibleIn_and_torAmplitudeIn_of_isClosedImmersion`);
-4. (separated finite-type morphisms, `thm-pur-general-admissibility`,
-   `cor-pur-general-admissibility-datum`) for `f` separated of finite type over a finite-type
+4. (separated finite-type morphisms, `theorem-f-shriek-finite-coefficients`,
+   `theorem-f-shriek-finite-coefficients--1`) for `f` separated of finite type over a finite-type
    `k`-scheme `Y`, there is `D` such that `Rf^!` carries `[a, b]` to `[a - 2D, b + 2d_Y + 1]` in
    both clauses whenever `dim Y ≤ d_Y`, the open-complement condition being supplied by
-   `lem-exc-open-complement-known` (`AlgebraicGeometry.Etale.exists_preservationClauses`).
+   `theorem-f-shriek-finite-coefficients--1` (`AlgebraicGeometry.Etale.exists_preservationClauses`).
 
 The remaining text of the remark (the independence of the chapters and the pointer to the
-separate biduality theorem `thm-fix-general-biduality`) makes no further formal claim.
+separate biduality theorem `theorem-verdier-biduality--1`) makes no further formal claim.
 
 In particular, the preservation clauses (2) and (3) of the purity conventions `def-pur-conventions`
 are not assumed in the purity chapter; they are the conclusions proved here. -/
@@ -218,14 +221,14 @@ Let `k` be a field, `Λ` a finite ring whose exponent is invertible in `k`, and 
 separated of finite type (compactifiable and quasi-compact) over a finite-type `k`-scheme `Y`
 with `dim Y ≤ d_Y`.
 
-1. The only hypothesis of `thm-pur-general-admissibility`
+1. The only hypothesis of `theorem-f-shriek-finite-coefficients`
    (`AlgebraicGeometry.Etale.preservationClauses_of_charts`), the open-complement condition
-   (`def-exc-open-complement-bound`) for the open complements `W ⊆ 𝔸ⁿ_V` of the affine charts
-   over affine opens `V ⊆ Y`, is a theorem: it holds with the constant `2(d_Y + n)`, which is
-   independent of the coefficient ring `Λ` (`lem-exc-open-complement-known`, derived from the
-   direct-image finiteness input `thm-exc-direct-image-input-holds`).
+   (`theorem-f-shriek-finite-coefficients--1`) for the open complements `W ⊆ 𝔸ⁿ_V` of the affine
+   charts over affine opens `V ⊆ Y`, is a theorem: it holds with the constant `2(d_Y + n)`, which is
+   independent of the coefficient ring `Λ` (`theorem-f-shriek-finite-coefficients--1`, derived from
+   the direct-image finiteness input `theorem-results-from-etale-theory`).
 2. Consequently both preservation clauses hold for `f` without further hypotheses and without
-   affineness of `Y` (`cor-pur-general-admissibility-datum`,
+   affineness of `Y` (`theorem-f-shriek-finite-coefficients--1`,
    `AlgebraicGeometry.Etale.exists_preservationClauses`): there is `D` such that `Rf^!` carries
    `D_c^[a, b]` into `D_c^[a - 2D, b + 2d_Y + 1]`, and Tor amplitude `[a, b]` (on bounded
    constructible complexes) to `[a - 2D, b + 2d_Y + 1]`. -/

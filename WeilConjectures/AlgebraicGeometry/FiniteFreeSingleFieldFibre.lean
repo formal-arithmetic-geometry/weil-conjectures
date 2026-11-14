@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.FieldComplexHomotopyNormalForm
 
 /-! # Homotopy normal form of a field fibre of single locally free cohomology
 
-Source: blueprint lem-pc-perfect-locus, proof step 4.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, proof step 4.
 (blueprint: lem-pc-finite-free-single-field-fibre)
 -/
 
@@ -29,7 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Homotopy normal form of a field fibre of single locally free cohomology.
 
-Source: blueprint lem-pc-perfect-locus, proof step 4.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, proof step 4.
 (blueprint: lem-pc-finite-free-single-field-fibre).
 
 Proof: The support bound makes negative cohomology zero. With the assumed

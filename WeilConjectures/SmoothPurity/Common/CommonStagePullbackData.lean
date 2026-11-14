@@ -54,7 +54,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 /-- Common-stage pullback retains the literal coefficient stage.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 def commonStagePullbackObject {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -64,7 +64,7 @@ def commonStagePullbackObject {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The canonical pullback comparison includes the recorded transition identifications.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 def commonStagePullbackComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

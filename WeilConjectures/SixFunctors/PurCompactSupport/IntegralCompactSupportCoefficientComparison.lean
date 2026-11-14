@@ -215,7 +215,7 @@ import WeilConjectures.CategoryTheory.Constant.ConstantSpecifiedBasis
 
 /-! # Integral compact-support coefficient comparison
 
-Source: Weil blueprint, sk-thm-purity-transport, Step 3; Bhatt--Scholze,
+Source: Weil blueprint, theorem-smooth-purity-all-admissible-coefficients, Step 3; Bhatt--Scholze,
 Definition 6.7.6 and Lemmas 6.7.7, 6.8.2(1)
 (blueprint: lem-pur-compact-support-integral-coefficient-comparison).
 
@@ -1041,7 +1041,7 @@ def tensorSquare {W : Scheme.{u}}
   tensorComposition a s (a ≫ s) rfl ≪≫ (tensorComposition r b (a ≫ s) h.symm).symm
 
 /-- Source of the specified finite coefficient comparison, at the positive exponent n+1.
-Source: blueprint sk-thm-purity-transport Step 3
+Source: blueprint theorem-smooth-purity-all-admissible-coefficients Step 3
 (blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
 def finiteTensorSource (e : ℕ) (he : Ramification l E F i e) (hepos : 1 ≤ e)
     (n : ℕ) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -1052,7 +1052,7 @@ def finiteTensorSource (e : ℕ) (he : Ramification l E F i e) (hepos : 1 ≤ e)
         ((pbcDerivedExtend (projection l E (n + 1) (Nat.le_add_left 1 n) X)).obj M))
 
 /-- Target of the same finite comparison, before any total inverse limit.
-Source: blueprint sk-thm-purity-transport Step 3
+Source: blueprint theorem-smooth-purity-all-admissible-coefficients Step 3
 (blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
 def finiteTensorTarget (e : ℕ) (he : Ramification l E F i e) (hepos : 1 ≤ e)
     (n : ℕ) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -1064,8 +1064,8 @@ def finiteTensorTarget (e : ℕ) (he : Ramification l E F i e) (hepos : 1 ≤ e)
 
 /-- The finite map itself is the ordered proper mate followed by proper image of the
 open coefficient identification. This definition contains both arrows explicitly.
-Source: Stacks Tags 07A6, 0B56, 0E8I; blueprint sk-thm-purity-transport Step 3
-(blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
+Source: Stacks Tags 07A6, 0B56, 0E8I; blueprint theorem-smooth-purity-all-admissible-coefficients
+Step 3 (blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
 def finiteTensorMap (e : ℕ) (he : Ramification l E F i e) (hepos : 1 ≤ e)
     (n : ℕ) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (M : DerivedCategory (scalarReductionSource l E X)) :
@@ -1249,7 +1249,7 @@ is invertible, and its actual source and target are constructible complete objec
 The map is ordinary derived tensor, defined above by the normalized scalar adjunction.
 The last clause identifies the ambient proper/open realization with the recorded
 integral compact-support value, without selecting a new arbitrary limit vertex.
-Source: blueprint sk-thm-purity-transport, Step 3; Bhatt--Scholze,
+Source: blueprint theorem-smooth-purity-all-admissible-coefficients, Step 3; Bhatt--Scholze,
 Definition 6.7.6 and Lemmas 6.7.7, 6.8.2(1)
 (blueprint: lem-pur-compact-support-integral-coefficient-comparison).
 

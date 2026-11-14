@@ -16,7 +16,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 /-- Degreewise local representatives before taking a finite common intersection.
 Source: lem-pc-finite-free-stalk-chain-map-lift-local, steps 1--2, expanding
-lem-pc-perfect-locus (sk-thm-picard-perfect).
+lemma-coherent-base-change-invertible-sheaves--3 (lemma-coherent-base-change-invertible-sheaves).
 
 Proof: Fix a degree n. If either term is zero, restriction and pullback preserve
 zero objects, so the unique zero map represents t n on the whole scheme. Otherwise

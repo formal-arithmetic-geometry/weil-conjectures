@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 /-!
 # Blueprint statements
 
-thm-weil-pbc-hypercover-cohomology.
+corollary-cohomology-pro-etale-affine.
 -/
 
 @[expose] public section
@@ -24,7 +24,7 @@ namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 variable {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
 variable (A : Type w) [Category.{v} A] [Abelian A]
 
-/-- Required definitions for thm-weil-pbc-hypercover-cohomology. -/
+/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
 noncomputable def cohomologyFunctor (U : FiniteSplitEtaleHypercover X) (q : ℕ) :
     Sheaf X.smallEtaleTopology A ⥤ A :=
   sheafToPresheaf X.smallEtaleTopology A ⋙
@@ -32,7 +32,7 @@ noncomputable def cohomologyFunctor (U : FiniteSplitEtaleHypercover X) (q : ℕ)
     AlgebraicTopology.alternatingCofaceMapComplex A ⋙
     HomologicalComplex.homologyFunctor A (ComplexShape.up ℕ) q
 
-/-- Required definitions for thm-weil-pbc-hypercover-cohomology. -/
+/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
 noncomputable def cohomologyRefinement {U V : FiniteSplitEtaleHypercover X}
     (f : U.Refinement V) (q : ℕ) : cohomologyFunctor A V q ⟶ cohomologyFunctor A U q :=
   whiskerRight
@@ -41,7 +41,7 @@ noncomputable def cohomologyRefinement {U V : FiniteSplitEtaleHypercover X}
     (AlgebraicTopology.alternatingCofaceMapComplex A ⋙
       HomologicalComplex.homologyFunctor A (ComplexShape.up ℕ) q)
 
-/-- Required definitions for thm-weil-pbc-hypercover-cohomology. -/
+/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
 def IsCohomologyColimit (q : ℕ) (H : Sheaf X.smallEtaleTopology A ⥤ A) : Prop :=
   (∀ (U V : FiniteSplitEtaleHypercover X) (f g : U.Refinement V),
     isRefinementHomotopic f g → cohomologyRefinement A f q = cohomologyRefinement A g q) ∧

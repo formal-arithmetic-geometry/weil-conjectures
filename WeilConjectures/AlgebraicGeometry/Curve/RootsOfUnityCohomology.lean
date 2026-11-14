@@ -116,8 +116,8 @@ namespace IsConnectedCurve
 
 variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 
-/-- Blueprint `det-curveestimate-canonical-mu`, parts 1–4: the canonical identifications of the
-cohomology of `μₙ` on a smooth proper curve.
+/-- Blueprint `proposition-smooth-proper-curves-torsion-prime`, parts 1–4: the canonical
+identifications of the cohomology of `μₙ` on a smooth proper curve.
 
 Let `C` be a smooth proper connected curve of genus `g` over an algebraically closed field `k`
 and `n ≥ 1` prime to `char k`. Write `δ² : Pic(C) = H¹(C, 𝔾ₘ) → H²(C, μₙ)` for the Kummer
@@ -251,8 +251,8 @@ theorem sheafH_rootsOfUnitySheaf_of_isProper (f : C ⟶ Spec (.of k)) [IsConnect
   · intro q hq
     exact IsCurve.subsingleton_sheafH_of_three_le f _ (C.isTorsion_rootsOfUnitySheaf hn0) q hq
 
-/-- Blueprint `det-curveestimate-canonical-mu`, part 5: invariance under extension of
-algebraically closed fields.
+/-- Blueprint `proposition-smooth-proper-curves-torsion-prime`, part 5: invariance under extension
+of algebraically closed fields.
 
 Let `C` be a smooth proper connected curve over an algebraically closed field `k`, let
 `k ⊆ k'` be an extension of algebraically closed fields, `π : C_{k'} ⟶ C` the projection and
@@ -347,7 +347,8 @@ lemma _root_.AlgebraicGeometry.Scheme.Pic.toCohomologicalPicardGroup_pow (X : Sc
   map_nsmul (Scheme.Pic.toCohomologicalPicardGroupAddEquiv X) n (Additive.ofMul L)
 
 open MonoidalCategory MonObj in
-/-- Blueprint `sk-thm-curveestimate`, the identification `H¹(C, μₙ) = J[n](k)`.
+/-- Blueprint `proposition-smooth-proper-curves-torsion-prime`, the identification
+`H¹(C, μₙ) = J[n](k)`.
 
 Let `C` be a smooth proper connected curve of genus `g` over an algebraically closed field `k`
 and `n ≥ 1` prime to `char k`. The Jacobian `J` of `C` is an abelian variety of dimension `g`
@@ -456,7 +457,8 @@ theorem exists_addEquiv_sheafH_rootsOfUnitySheaf_one_jacobian (f : C ⟶ Spec (.
 
 
 open MonoidalCategory MonObj in
-/-- Blueprint `sk-thm-curveestimate`: smooth proper curves with invertible torsion.
+/-- Blueprint `proposition-smooth-proper-curves-torsion-prime`: smooth proper curves with invertible
+torsion.
 
 Let `C` be a smooth, proper and connected curve of genus `g` over an algebraically closed field
 `k`, let `n ≥ 1` be invertible in `k` and let `J` be the Jacobian of `C`. There are canonical
@@ -467,7 +469,7 @@ identifications
 The degree-two isomorphism sends the Kummer boundary of a line bundle `L` to `deg L mod n`, and
 these identifications commute with extension of algebraically closed fields. Precisely:
 
-1. parts 1–4 of blueprint `det-curveestimate-canonical-mu`
+1. parts 1–4 of blueprint `proposition-smooth-proper-curves-torsion-prime`
    (`AlgebraicGeometry.IsConnectedCurve.sheafH_rootsOfUnitySheaf_of_isProper`): the maps
    `H⁰(C, μₙ) → 𝒪(C)ˣ` and `H¹(C, μₙ) → Pic(C)` of the Kummer sequence are injective, the
    first with image `μₙ(k)` and the second with image `Pic(C)[n]`, of order `n^{2g}`; the
@@ -475,15 +477,16 @@ these identifications commute with extension of algebraically closed fields. Pre
    `degₙ (δ² [L]) = deg L mod n`; and `Hᵠ(C, μₙ) = 0` for `q > 2`;
 2. `H¹(C, μₙ) ≅ J[n](k)` compatibly with `Pic⁰(C) = J(k)`
    (`AlgebraicGeometry.IsConnectedCurve.exists_addEquiv_sheafH_rootsOfUnitySheaf_one_jacobian`);
-3. part 5 of blueprint `det-curveestimate-canonical-mu`
+3. part 5 of blueprint `proposition-smooth-proper-curves-torsion-prime`
    (`AlgebraicGeometry.IsConnectedCurve.rootsOfUnityCohomologyMap_baseChangeField`): for every
    extension `k ⊆ k'` of algebraically closed fields the pullback maps are bijective and are the
    inclusion `μₙ(k) ⟶ μₙ(k')`, the base change of line bundles and the identity of `ℤ/n`.
 
 These are statements about the small étale site; the comparison with the pro-étale site
-(blueprint `sk-prop-sf-comparison`) identifies them with the pro-étale cohomology of `ν^* μₙ`.
-(In the split chapter of the sketch blueprint this statement is labelled
-`sk-thm-curveestimate`, blueprint `sk-the-final-theorem-the-curve-estimate--remark-2`.) -/
+(blueprint `theorem-bounded-below-cohomology-comparison`) identifies them with the pro-étale
+cohomology of `ν^* μₙ`. (In the split chapter of the sketch blueprint this statement is labelled
+`proposition-smooth-proper-curves-torsion-prime`, blueprint
+`sk-the-final-theorem-the-curve-estimate--remark-2`.) -/
 theorem sheafH_rootsOfUnitySheaf_canonical_of_isProper (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     ((Function.Injective (Sheaf.H.map (C.rootsOfUnitySheafι n) 0) ∧

@@ -42,8 +42,8 @@ Proof:
 cohomology. The adjunction `lem-pc-ringed-spaces-derived-adjoint` applies to the chosen
 scheme functors. The comparison in `lem-sc-finite-affine-derived-equivalence` transports
 quasi-coherence to the derived pushforward of E. The shift compatibility supplied by
-`def-pc-derived-pullback` and the adjunction identify Hom from the shifted pullback of M
-to E with Hom from the shifted M to the derived pushforward of E.
+`lemma-coherent-base-change-invertible-sheaves--2` and the adjunction identify Hom from the shifted
+pullback of M to E with Hom from the shifted M to the derived pushforward of E.
 2. If all the former Hom groups are subsingletons, so are the latter. The hypothesis
 `hgen` gives that the derived pushforward of E is zero.
 3. By `lem-sc-affine-derived-pushforward-conservative`, affine derived pushforward reflects

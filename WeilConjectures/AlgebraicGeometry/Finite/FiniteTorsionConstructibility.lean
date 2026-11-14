@@ -25,7 +25,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstru
 Source: Weil conjectures blueprint,
 `literature/blueprint/master/blueprint/sec-smooth-purity/`
 `sk-def-sf-operations/def-weil-finite-torsion-constructibility.md`,
-node order 1454 (blueprint: def-weil-finite-torsion-constructibility).
+node order 1454 (blueprint: definition-constructible-sheaves).
 -/
 
 @[expose] public section
@@ -39,8 +39,8 @@ namespace AlgebraicGeometry.Scheme
 /-- The bounded constructible finite-torsion subcategory of the derived category of
 sheaves of `A_{E,n}`-modules on the small pro-etale site of `Y`.
 
-Source: Weil conjectures blueprint, node `def-weil-finite-torsion-constructibility`,
-order 1454 (blueprint: def-weil-finite-torsion-constructibility). The predicate is
+Source: Weil conjectures blueprint, node `definition-constructible-sheaves`,
+order 1454 (blueprint: definition-constructible-sheaves). The predicate is
 finite support of cohomology degrees and constructibility of every cohomology sheaf;
 the cited triangulated-closure theorem supplies the full triangulated structure.
 -/
@@ -64,7 +64,7 @@ noncomputable def finiteTorsionConstructible
 
 /-- The finite-torsion predicate is closed under isomorphisms.
 Source: Weil blueprint, node order 1454
-(blueprint: def-weil-finite-torsion-constructibility). -/
+(blueprint: definition-constructible-sheaves). -/
 noncomputable instance finiteTorsionConstructible_isClosedUnderIsomorphisms
     (D : WeilConjectures.FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)

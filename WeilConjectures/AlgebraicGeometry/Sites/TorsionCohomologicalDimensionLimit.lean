@@ -20,7 +20,7 @@ public import WeilConjectures.SixFunctors.BaseChange.Sections
 A uniform bound `cd_tor(Xᵢ) ≤ c` on a cofiltered system of quasi-compact quasi-separated schemes
 with affine transition maps passes to the limit `X = lim Xᵢ`
 (`AlgebraicGeometry.Scheme.HasTorsionCohomologicalDimensionLE.of_isLimit`, blueprint
-`lem-sc-cd-affine-limit`).
+`lemma-uniform-bounds-pro-etale-affines`).
 
 ## Main definitions and statements
 
@@ -31,7 +31,7 @@ with affine transition maps passes to the limit `X = lim Xᵢ`
 - `AlgebraicGeometry.Etale.isColimitPushPullCocone`: every abelian étale sheaf `F` on
   `X = lim Dᵢ` is the colimit of the `pᵢ^* pᵢ_* F`.
 - `AlgebraicGeometry.Scheme.HasTorsionCohomologicalDimensionLE.of_isLimit`: blueprint
-  `lem-sc-cd-affine-limit`.
+  `lemma-uniform-bounds-pro-etale-affines`.
 
 ## Implementation notes
 
@@ -42,7 +42,7 @@ section `φ^* g` of `pᵢ^* pᵢ_* F` vanishing in `F` vanishes in `pⱼ^* pⱼ_
 morphism `φ` descends to the stage `Dⱼ` (`AlgebraicGeometry.Etale.exists_hasStageModel`).
 The cohomology of `pᵢ^* pᵢ_* F` is computed by the continuity of étale cohomology
 (`AlgebraicGeometry.Etale.isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit_addCommGrpCat`,
-blueprint `lemma-weil-pbc-etale-cohomology-continuity`).
+blueprint `corollary-cohomology-pro-etale-affine`).
 -/
 
 @[expose] public section
@@ -576,7 +576,8 @@ end
 
 
 
-/-- Blueprint `lem-sc-cd-affine-limit`: Passing a uniform torsion bound to an affine limit.
+/-- Blueprint `lemma-uniform-bounds-pro-etale-affines`: Passing a uniform torsion bound to an affine
+limit.
 
 Let `X = lim Xᵢ` be the limit of a cofiltered system `D` of quasi-compact quasi-separated
 schemes with affine transition maps. If `cd_tor(Xᵢ) ≤ c` for every `i`, then `cd_tor(X) ≤ c`.

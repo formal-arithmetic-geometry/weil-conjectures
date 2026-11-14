@@ -60,19 +60,20 @@ discharges it over a Noetherian base whenever the unit `Λ_S` lies in `Dctf(S, A
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso` (`lem-sf-tensor-hom`): the
+- `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso`
+(`lemma-internal-adjunction-two-exchange-formulas--1`): the
   natural isomorphism `Rf_* RHom_X(M, Rf^! N) ≅ RHom_Y(Rf_! M, N)`, given the projection formula.
 - `AlgebraicGeometry.Etale.commShift_derivedHomRightDerivedLowerShriekIso_app_hom`
-  (`lem-sf-tensor-hom`): it commutes with shifts.
+  (`lemma-internal-adjunction-two-exchange-formulas--1`): it commutes with shifts.
 - `AlgebraicGeometry.Etale.derivedHomLowerShriekIsoOfAdjunction_hom_app_comp_mateEquiv`
-  (`lem-sf-tensor-hom`): it is compatible with changes of coefficients, such as finite
-  reduction and scalar extension.
+  (`lemma-internal-adjunction-two-exchange-formulas--1`): it is compatible with changes of
+  coefficients, such as finite reduction and scalar extension.
 - `AlgebraicGeometry.Etale.nonempty_iso_derivedHom_rightDerivedLowerShriek`
-  (`sk-thm-sf-tensor-hom`): `Rf_* RHom_X(M, Rf^! N) ≅ RHom_Y(Rf_! M, N)`.
+  (`lemma-internal-adjunction-two-exchange-formulas`): `Rf_* RHom_X(M, Rf^! N) ≅ RHom_Y(Rf_! M, N)`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_dualizingComplex`
-  (`sk-thm-sf-verdier-exchange`): `Rf^! ω_Y ≅ ω_X`.
+  (`corollary-verdier-exchange-formulas--1`): `Rf^! ω_Y ≅ ω_X`.
 - `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_rightDerivedLowerShriek`
-  (`sk-thm-sf-verdier-exchange`): `𝔻_Y (Rf_! M) ≅ Rf_* 𝔻_X M`.
+  (`corollary-verdier-exchange-formulas--1`): `𝔻_Y (Rf_! M) ≅ Rf_* 𝔻_X M`.
 - `AlgebraicGeometry.Etale.constructibleFiniteTor_dualizingComplex`: `ω_Y` lies in `Dctf`
   when `Λ_S` does and `S` is Noetherian.
 
@@ -109,8 +110,8 @@ variable [Etale.UpperStarPreservesFlat A]
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
   {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
-/-- Blueprint `lem-sf-tensor-hom`: Tensor–Hom form of the exchange, for an arbitrary right
-adjoint `G` of `Rf_!` (for a finite coefficient ring, `G = Rf^!`:
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--1`: Tensor–Hom form of the exchange,
+for an arbitrary right adjoint `G` of `Rf_!` (for a finite coefficient ring, `G = Rf^!`:
 `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso`).
 
 Assume the projection formula for `f` (axiom (A3) of the six-functor datum `def-sf-datum`):
@@ -130,7 +131,7 @@ noncomputable def derivedHomLowerShriekIsoOfAdjunction
       adj).conjugateIso
     ((derivedTensorHomAdjunction₂ A Y).precomp R(f)_![A]) (asIso (projectionMap A f))
 
-/-- Blueprint `lem-sf-tensor-hom`: Tensor–Hom form of the exchange.
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--1`: Tensor–Hom form of the exchange.
 
 Let `f : X ⟶ Y` admit a compactification, and assume the projection formula for `f`
 (axiom (A3) of the six-functor datum `def-sf-datum`): the projection map
@@ -158,7 +159,8 @@ noncomputable def derivedHomRightDerivedLowerShriekIso
   derivedHomLowerShriekIsoOfAdjunction (ModuleCat.{u + 1} Λ) f
     (rightDerivedUpperShriekAdjunction Λ f)
 
-/-- Blueprint `lem-sf-tensor-hom`: Tensor–Hom form of the exchange, compatibility with shifts.
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--1`: Tensor–Hom form of the exchange,
+compatibility with shifts.
 
 The isomorphism `Rf_* RHom_X(M, Rf^! N) ≅ RHom_Y(Rf_! M, N)` of
 `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso` commutes with the shifts in
@@ -202,8 +204,8 @@ variable (A' : Type u'') [Category.{u + 1} A'] [Abelian A'] [IsGrothendieckAbeli
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A')]
 
 omit [HasSmallSiteSheafify A] in
-/-- Blueprint `lem-sf-tensor-hom`: Tensor–Hom form of the exchange, compatibility with
-finite reduction and scalar extension, as an identity of 2-squares.
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--1`: Tensor–Hom form of the exchange,
+compatibility with finite reduction and scalar extension, as an identity of 2-squares.
 
 This is `derivedHomLowerShriekIsoOfAdjunction_hom_app_comp_mateEquiv`
 before evaluation at an object `N`: the isomorphism over `A` followed by the comparison map
@@ -250,8 +252,8 @@ theorem whiskerTop_derivedHomLowerShriekIsoOfAdjunction_hom
     ((projectionMap A f).app M) ((projectionMap A' f).app M') _ ν h
 
 omit [HasSmallSiteSheafify A] in
-/-- Blueprint `lem-sf-tensor-hom`: Tensor–Hom form of the exchange, compatibility with
-finite reduction and scalar extension.
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--1`: Tensor–Hom form of the exchange,
+compatibility with finite reduction and scalar extension.
 
 A change of coefficients, such as the finite reduction `A_{E,n} → A_{E,m}` or the scalar
 extension `A_{E,n} → A_{E',n}`, is given by functors `T_X : D(X_ét, A) ⥤ D(X_ét, A')` and
@@ -334,7 +336,7 @@ section TensorHom
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
   [HasCompactification f]
 
-/-- Blueprint `sk-thm-sf-tensor-hom`: Tensor–Hom form of the exchange.
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas`: Tensor–Hom form of the exchange.
 
 For a morphism `f : X ⟶ Y` admitting a compactification and torsion coefficients `Λ`, the direct
 image of the internal hom from `M` into `Rf^! N` agrees with the internal hom on `Y` from
@@ -345,11 +347,11 @@ image of the internal hom from `M` into `Rf^! N` agrees with the internal hom on
 As in the blueprint this is obtained from the chain of adjunctions `Rf_! ⊣ Rf^!`,
 `Lf^* ⊣ Rf_*` and `- ⊗ᴸ - ⊣ RHom`, together with the projection formula: it is the component
 at `(M, N)` of the natural isomorphism
-`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso` (`lem-sf-tensor-hom`), the
-projection formula holding at finite coefficients
-(`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`). For torsion coefficients no
+`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso`
+(`lemma-internal-adjunction-two-exchange-formulas--1`), the projection formula holding at finite
+coefficients (`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`). For torsion coefficients no
 finiteness hypothesis on `M` and `N` is needed. This is also blueprint
-`fix-lem-tensor-adjunction`.
+`lemma-internal-adjunction-two-exchange-formulas--1`.
 
 The naturality in `M` and `N` and the compatibilities of the blueprint are those of
 `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso` at `A = ModuleCat Λ`: it commutes
@@ -367,18 +369,19 @@ theorem nonempty_iso_derivedHom_rightDerivedLowerShriek
   have := isIso_projectionMap_of_finite Λ f
   exact ⟨((derivedHomRightDerivedLowerShriekIso _ f).app (op M)).app N⟩
 
-/-- Blueprint `sk-thm-sf-tensor-hom`: Tensor–Hom form of the exchange, natural in `M` and `N`
-and compatible with shifts.
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas`: Tensor–Hom form of the exchange,
+natural in `M` and `N` and compatible with shifts.
 
 For a morphism `f : X ⟶ Y` admitting a compactification and torsion coefficients `Λ`, there is
 an isomorphism `Rf_* RHom_X(M, Rf^! N) ≅ RHom_Y(Rf_! M, N)` of bifunctors
 `D(X_ét, Λ)ᵒᵖ ⥤ D(Y_ét, Λ) ⥤ D(Y_ét, Λ)`, so natural in `M` and `N`, which commutes with the
 shifts in `N`. It is `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso`
-(`lem-sf-tensor-hom`) at `A = ModuleCat Λ`, the projection formula holding at finite
-coefficients (`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`); its compatibility with
-shifts is `AlgebraicGeometry.Etale.commShift_derivedHomRightDerivedLowerShriekIso_app_hom`. Its
-compatibility with changes of coefficients `Λ → Λ'` compatible with the projection map, such as
-finite reduction and scalar extension, is
+(`lemma-internal-adjunction-two-exchange-formulas--1`) at `A = ModuleCat Λ`, the projection formula
+holding at finite coefficients (`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`); its
+compatibility with shifts is
+`AlgebraicGeometry.Etale.commShift_derivedHomRightDerivedLowerShriekIso_app_hom`. Its compatibility
+with changes of coefficients `Λ → Λ'` compatible with the projection map, such as finite reduction
+and scalar extension, is
 `AlgebraicGeometry.Etale.derivedHomLowerShriekIsoOfAdjunction_hom_app_comp_mateEquiv` at
 `A = ModuleCat Λ` and `A' = ModuleCat Λ'`, with the adjunctions `Rf_! ⊣ Rf^!`. -/
 theorem exists_iso_derivedHom_rightDerivedLowerShriek_commShift :
@@ -396,7 +399,7 @@ theorem exists_iso_derivedHom_rightDerivedLowerShriek_commShift :
   ⟨derivedHomRightDerivedLowerShriekIso _ f,
     fun M ↦ commShift_derivedHomRightDerivedLowerShriekIso_app_hom _ f M⟩
 
-/-- Blueprint `prop-asd-internal-adjunction`: Internal ambient adjunction.
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--1`: Internal ambient adjunction.
 
 For a morphism `f : X ⟶ Y` admitting a compactification and a finite coefficient ring `Λ`,
 there is a canonical isomorphism, natural in `M ∈ D(X_ét, Λ)` and `K ∈ D(Y_ét, Λ)`,
@@ -405,7 +408,7 @@ there is a canonical isomorphism, natural in `M ∈ D(X_ét, Λ)` and `K ∈ D(Y
 
 It is the Yoneda transpose of the chain of adjunctions `Lf^* ⊣ Rf_*`, `- ⊗ᴸ - ⊣ RHom`,
 `Rf_! ⊣ Rf^!` and of the projection formula `Rf_!(M ⊗ᴸ Lf^* Q) ≅ Rf_! M ⊗ᴸ Q`
-(`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`, `lem-amb-proper-coproducts-projection`),
+(`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`, `lemma-cohomology-projective-line-trace`),
 that is `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso` at `A = ModuleCat Λ`. The
 blueprint assumes Noetherian schemes; this is not needed here. -/
 noncomputable def derivedHomRightDerivedLowerShriekIsoOfFinite :
@@ -423,7 +426,7 @@ section VerdierExchange
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y S : Scheme.{u}} (f : X ⟶ Y)
   (aY : Y ⟶ S) [HasCompactification f] [HasCompactification aY] [HasCompactification (f ≫ aY)]
 
-/-- Blueprint `sk-thm-sf-verdier-exchange`: Verdier-duality exchange.
+/-- Blueprint `corollary-verdier-exchange-formulas--1`: Verdier-duality exchange.
 
 First half. If `f : X ⟶ Y`, the structure morphism `a_Y : Y ⟶ S` and `a_X = f ≫ a_Y` all
 admit a compactification (the last is assumed separately, there being no composition instance
@@ -442,7 +445,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_dualizingComplex :
     ((rightDerivedUpperShriekAdjunction _ f).comp
       (rightDerivedUpperShriekAdjunction _ aY))).app (𝟙_ _)).symm⟩
 
-/-- Blueprint `sk-thm-sf-verdier-exchange`: Verdier-duality exchange.
+/-- Blueprint `corollary-verdier-exchange-formulas--1`: Verdier-duality exchange.
 
 Second half. With `a_Y : Y ⟶ S` the structure morphism of `Y` and `a_X = f ≫ a_Y` that of
 `X`, the Verdier duals `𝔻_Y = RHom_Y(-, ω_Y)` and `𝔻_X = RHom_X(-, ω_X)` exchange the
@@ -452,7 +455,7 @@ extraordinary and the ordinary direct image: for torsion coefficients and every 
 
 As in the blueprint this is the tensor–Hom exchange
 `nonempty_iso_derivedHom_rightDerivedLowerShriek` at `N = ω_Y`, combined with
-`Rf^! ω_Y ≅ ω_X`. This is also blueprint `fix-cor-verdier-exchange`. -/
+`Rf^! ω_Y ≅ ω_X`. This is also blueprint `lemma-internal-adjunction-two-exchange-formulas--2`. -/
 theorem nonempty_iso_verdierDual_rightDerivedLowerShriek
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((verdierDual _ aY).obj (op ((R(f)_![ModuleCat.{u + 1} Λ]).obj M)) ≅
@@ -462,7 +465,7 @@ theorem nonempty_iso_verdierDual_rightDerivedLowerShriek
   exact ⟨e₁.symm ≪≫ (R((f)_*[ModuleCat.{u + 1} Λ])).mapIso
     ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op M)).mapIso e₂)⟩
 
-/-- Blueprint `thm-sf-verdier-exchange`: Verdier-duality exchange.
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--2`: Verdier-duality exchange.
 
 With `a_Y : Y ⟶ S` the structure morphism of `Y` and `a_X = f ≫ a_Y` that of `X`, for torsion
 coefficients there is an isomorphism

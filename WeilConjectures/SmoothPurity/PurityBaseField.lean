@@ -14,10 +14,10 @@ public import Mathlib.Algebra.CharP.Algebra
 # Base fields for purity
 
 Source: blueprint sk-def-purity-conv, def-pur-conventions (ℓ distinct from the
-characteristic); def-sf-setting and lem-fd-first-formula (a base field finite or algebraically
-closed); Houyi #1396 (blueprint: def-pur-base-field). The Fourier nodes
-lem-fd-character-integral, lem-fd-convolution-kernel and lem-fd-inversion are stated over
-`k₀`-schemes.
+characteristic); definition-constructible-sheaves--6 and lemma-fourier-transform-constant-sheaf (a
+base field finite or algebraically closed); Houyi #1396 (blueprint: def-pur-base-field). The Fourier
+nodes lemma-integral-linear-character, proposition-fourier-inversion and
+proposition-fourier-inversion are stated over `k₀`-schemes.
 
 Lead decision (Houyi #1396): the purity constructions (Kummer classes, frame gluing, Chern
 and Thom classes, the trace) are stated over a general base field. Proofs may reduce to
@@ -54,8 +54,8 @@ namespace WeilConjectures
 /-- A base field for purity at the coefficient prime `ell`. Its characteristic is a prime
 different from `ell`, and the field is finite or algebraically closed. This is exactly the
 scope of the existing field-general six-functor data `CurrentCompactKunneth.operationsOver`.
-Source: blueprint def-pur-conventions (ℓ ≠ p) and sk-thm-sf-comp-composition (finite or
-algebraically closed base) (blueprint: def-pur-base-field). -/
+Source: blueprint def-pur-conventions (ℓ ≠ p) and proposition-composition-base-change-rf-shriek--1
+(finite or algebraically closed base) (blueprint: def-pur-base-field). -/
 structure PurityBaseField (ell : ℕ) where
   K : Type u
   [field : Field K]

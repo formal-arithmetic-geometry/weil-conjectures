@@ -61,7 +61,7 @@ monomorphisms and cokernels. This is independent of the existence of a Sylow cov
 
 Source: Stacks Project, `etale-cohomology.tex`, Lemma 0A3R
 (`lemma-pullback-filtered`), the representation-filtration step.
-(blueprint: lem-weil-pbc-invariant-flag-categorical-filtration)
+(blueprint: lemma-reduction-unipotent-local-system--1)
 
 Proof: Put n = dim M and replace F i by F (min i n). These spaces are stable,
 since their indices are at most n. Equip each with the restricted representation.

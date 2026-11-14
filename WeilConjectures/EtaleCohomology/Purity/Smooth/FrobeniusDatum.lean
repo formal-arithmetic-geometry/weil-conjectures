@@ -31,7 +31,7 @@ models and such comparisons.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.PurityFrobeniusDatum` (`def-pur-scheme-geometric-frobenius`).
+- `AlgebraicGeometry.Etale.PurityFrobeniusDatum` (`sec-Weil-complexes`).
 - `AlgebraicGeometry.Etale.PurityFrobeniusDatum.schemeFrobeniusX`,
   `AlgebraicGeometry.Etale.PurityFrobeniusDatum.schemeFrobeniusY`: `Φ_X` and `Φ_Y`.
 
@@ -47,10 +47,10 @@ The construction of the `#k₀`-power Frobenius endomorphism of a scheme is not 
 enters, as elsewhere in the repository, through the predicate
 `AlgebraicGeometry.Scheme.Hom.IsFrobenius`, which determines it.
 
-The comparisons `κ_X`, `κ_Y` are those of blueprint `prop-trf-scheme-galois-comparison`, built
-from the canonical trivialization `LF_X^* ≅ id` of the absolute Frobenius pullback
-(`lem-trf-absolute-frobenius-site`). Neither is formalised, so the comparisons are fields of the
-datum, subject to their compatibility with `f`.
+The comparisons `κ_X`, `κ_Y` are those of blueprint `lemma-scheme-frobenius-geometric-frobenius--1`,
+built from the canonical trivialization `LF_X^* ≅ id` of the absolute Frobenius pullback
+(`lemma-scheme-frobenius-geometric-frobenius--1`). Neither is formalised, so the comparisons are
+fields of the datum, subject to their compatibility with `f`.
 -/
 
 @[expose] public section
@@ -70,7 +70,7 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] {k₀ : Type u} [Field k₀] [Finite k₀] {X₀ Y₀ : Scheme.{u}}
   {aX : X₀ ⟶ Spec (.of k₀)} {aY : Y₀ ⟶ Spec (.of k₀)}
 
-/-- Blueprint `def-pur-scheme-geometric-frobenius`: Scheme and geometric Frobenius of the
+/-- Blueprint `sec-Weil-complexes`: Scheme and geometric Frobenius of the
 purity datum.
 
 For a morphism `f₀ : X₀ ⟶ Y₀` of schemes over a finite field `k₀` (`f₀ ≫ a_Y = a_X`), with base
@@ -89,7 +89,7 @@ change `f : X ⟶ Y` to the algebraic closure `k̄`, a *purity Frobenius datum* 
 The square formed by `f` with `g_γ` is Cartesian
 (`AlgebraicGeometry.Scheme.Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap`), the one
 formed with `Φ` commutes (`AlgebraicGeometry.Etale.PurityFrobeniusDatum.commSq_schemeFrobenius`).
-In the blueprint the comparisons are those of `prop-trf-scheme-galois-comparison`. -/
+In the blueprint the comparisons are those of `lemma-scheme-frobenius-geometric-frobenius--1`. -/
 structure PurityFrobeniusDatum (f₀ : X₀ ⟶ Y₀) (hf₀ : f₀ ≫ aY = aX) where
   /-- The `#k₀`-power Frobenius endomorphism of `X₀`. -/
   frobX : X₀ ⟶ X₀
@@ -134,7 +134,7 @@ noncomputable abbrev schemeFrobeniusX : aX.geometricFiber ⟶ aX.geometricFiber 
 noncomputable abbrev schemeFrobeniusY : aY.geometricFiber ⟶ aY.geometricFiber :=
   Hom.geometricFiberMap D.frobY (D.isFrobenius_frobY.comp_eq aY)
 
-/-- Blueprint `def-pur-scheme-geometric-frobenius`: the square formed by `f` and the scheme
+/-- Blueprint `sec-Weil-complexes`: the square formed by `f` and the scheme
 Frobenii commutes, `f ∘ Φ_X = Φ_Y ∘ f`; it is not Cartesian in general. (The square formed by
 `f` and the geometric-Galois automorphisms is Cartesian:
 `AlgebraicGeometry.Scheme.Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap`.) -/

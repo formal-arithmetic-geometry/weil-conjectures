@@ -229,7 +229,7 @@ variable [FiniteDimensional k X] [FiniteDimensional k Y]
 
 /-- **The exterior powers of a direct sum of two representations**:
 `⋀ᴺ (X ⊕ Y) ≃ ⨁_{j ≤ N} ⋀ʲ X ⊗ ⋀ᴺ⁻ʲ Y`, through `u ⊗ y ↦ u ∧ y`.
-(blueprint: `lem-mg-exterior-direct-sum`) -/
+(blueprint: `lemma-tensor-exterior-powers-filtered-representations--3`) -/
 noncomputable def exteriorPowerProdEquiv (N : ℕ) :
     ((ρ.prod σ).exteriorPower N).Equiv
       (directSum fun j : Fin (N + 1) ↦ (ρ.exteriorPower j).tprod (σ.exteriorPower (N - j))) :=
@@ -349,7 +349,8 @@ variable {k : Type u} [Field k] {W : Type w} [Group W]
 /-- **The exterior powers of a direct sum.** For finite-dimensional representations
 `V₁, …, V_s`, there is a canonical equivariant decomposition
 `⋀ᴺ (⨁ᵢ Vᵢ) ≃ ⨁_{n₁ + ⋯ + n_s = N} ⨂ᵢ ⋀^{nᵢ} Vᵢ`; the terms with `nᵢ > dim Vᵢ` are zero
-(`nontrivial_piTensorProduct_exteriorPower_iff`). (blueprint: `lem-mg-exterior-direct-sum`) -/
+(`nontrivial_piTensorProduct_exteriorPower_iff`). (blueprint:
+`lemma-tensor-exterior-powers-filtered-representations--3`) -/
 noncomputable def exteriorPowerDirectSumEquiv : ∀ {s : ℕ} {V : Fin s → Type v}
     [∀ i, AddCommGroup (V i)] [∀ i, Module k (V i)] [∀ i, FiniteDimensional k (V i)]
     (ρs : ∀ i, Representation k W (V i)) (N : ℕ),

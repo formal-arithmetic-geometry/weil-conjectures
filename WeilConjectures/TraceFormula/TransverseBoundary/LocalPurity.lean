@@ -21,7 +21,7 @@ divisor with `D` regular, `j : U ⟶ Z` its open complement, `ℓ` a prime inver
 
 `H^q(P, ℤ/ℓ) = 0` for `q ≥ 2`, and `H⁰(P, ℤ/ℓ) ≅ H¹(P, ℤ/ℓ) ≅ ℤ/ℓ`
 
-(blueprint `det-tf-transverse-corner-constant`, *the surface*).
+(blueprint `lemma-punctured-surface-punctured-curve--1`, *the surface*).
 
 *Proof.* By the stalk formula (Stacks 03Q9,
 `AlgebraicGeometry.Etale.nonempty_addEquiv_sheafH_constantZMod_sheafFiber`),
@@ -57,8 +57,8 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {Z D U : Scheme.{u}} (aZ : Z ⟶
   (hy : Set.range ybar ⊆ Set.range iD)
 
 include hZ hj hℓ hy in
-/-- Blueprint `det-tf-transverse-corner-constant`: for a geometric point `ybar` on a regular
-divisor `D` of an étale limit of smooth surfaces, the cohomology `H^q(S - D_S, ℤ/ℓ)` of the
+/-- Blueprint `lemma-punctured-surface-punctured-curve--1`: for a geometric point `ybar` on a
+regular divisor `D` of an étale limit of smooth surfaces, the cohomology `H^q(S - D_S, ℤ/ℓ)` of the
 punctured strict localization is the stalk at `ybar` of `R^q j_* ℤ/ℓ`, and there is an open
 neighbourhood of the image of `ybar` over which `j` has the higher direct images of the
 complement of a divisor through which `ybar` factors. -/
@@ -111,8 +111,8 @@ theorem exists_hasDivisorComplementDirectImages_addEquiv_sheafH :
   exact ⟨e₁.trans e₃⟩
 
 include hZ hj hℓ hy in
-/-- Blueprint `det-tf-transverse-corner-constant`: for a geometric point `ybar` on a regular
-divisor `D` of an étale limit of smooth surfaces, `H^q(S - D_S, ℤ/ℓ) = 0` for `q ≥ 2`, where
+/-- Blueprint `lemma-punctured-surface-punctured-curve--1`: for a geometric point `ybar` on a
+regular divisor `D` of an étale limit of smooth surfaces, `H^q(S - D_S, ℤ/ℓ) = 0` for `q ≥ 2`, where
 `S = Z_(ybar)`. -/
 theorem subsingleton_sheafH_pullback_strictLocalizationToBase (q : ℕ) (hq : 2 ≤ q) :
     Subsingleton (Sheaf.H ((pullback j (strictLocalizationToBase ybar)).constantZMod ℓ) q) := by
@@ -123,8 +123,8 @@ theorem subsingleton_sheafH_pullback_strictLocalizationToBase (q : ℕ) (hq : 2 
   exact e.injective.subsingleton
 
 include hZ hj hℓ hy in
-/-- Blueprint `det-tf-transverse-corner-constant`: for a geometric point `ybar` on a regular
-divisor `D` of an étale limit of smooth surfaces, `H⁰(S - D_S, ℤ/ℓ)` and
+/-- Blueprint `lemma-punctured-surface-punctured-curve--1`: for a geometric point `ybar` on a
+regular divisor `D` of an étale limit of smooth surfaces, `H⁰(S - D_S, ℤ/ℓ)` and
 `H¹(S - D_S, ℤ/ℓ) ≅ 𝔽_ℓ(-1)` are free of rank one over `𝔽_ℓ`, where `S = Z_(ybar)`. -/
 theorem nonempty_addEquiv_sheafH_pullback_strictLocalizationToBase (q : ℕ) (hq : q ≤ 1) :
     Nonempty (Sheaf.H ((pullback j (strictLocalizationToBase ybar)).constantZMod ℓ) q ≃+

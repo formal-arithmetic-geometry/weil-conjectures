@@ -24,8 +24,9 @@ functors `CategoryTheory.Pseudofunctor.DescentData.pullFunctor`.
 For a morphism `f : X ⟶ S` such that `Γ(Y, 𝒪_Y) ⟶ Γ(X_Y, 𝒪_{X_Y})` is bijective for every `Y`
 over `S`, a cocycle relative to a family `X_{T i} ⟶ X_T` descends to a cocycle relative to the
 family `T i ⟶ T` (`AlgebraicGeometry.DescentCocycle.ofBaseChange`). This is the step of the proof
-of the exactness of `Pic T → Pic (X_T) → Pic_{X/S}(T)` (blueprint `lem-pc-pic-exact`) in which the
-transition functions of a trivialised invertible module on `X_T` are seen to come from `T`.
+of the exactness of `Pic T → Pic (X_T) → Pic_{X/S}(T)` (blueprint
+`lemma-rigidification-along-section--3`) in which the transition functions of a trivialised
+invertible module on `X_T` are seen to come from `T`.
 
 ## Main definitions
 

@@ -19,25 +19,26 @@ Let `Λ` be a finite ring whose exponent is invertible on a field `k` (the finit
 reduction `K ↦ K ⊗ᴸ (Λ/J)_X` (`AlgebraicGeometry.Etale.reductionModIdeal`) is the coefficient change
 `K ↦ K_B` read after restriction of scalars to `Λ`. This file shows that on the constructible
 complexes of finite Tor amplitude it commutes with the six operations: this is clause (vii) of
-`thm-sf-ctf-stability` at the finite stage
+`proposition-six-operations-dctf` at the finite stage
 (`AlgebraicGeometry.Etale.constructibleFiniteTor_stability_reductionModIdeal`).
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarReductionModIdealMap_app`
-  (`lem-coef-finite-direct-image`): the canonical map `(Rf_* K)_B ⟶ Rf_*(K_B)` is an isomorphism
-  for `K ∈ Dctf`.
+  (`lemma-change-coefficients-direct-image--1`): the canonical map `(Rf_* K)_B ⟶ Rf_*(K_B)` is an
+  isomorphism for `K ∈ Dctf`.
 - `AlgebraicGeometry.Etale.isIso_derivedHomTensorMap_reductionModIdeal`
-  (`thm-coef-finite-hom`): the evaluation-defined map `RHom(K, M)_B ⟶ RHom(K, M_B)` is an
-  isomorphism for `K, M ∈ Dctf`.
+  (`lemma-change-coefficients-internal-hom--1`): the evaluation-defined map
+  `RHom(K, M)_B ⟶ RHom(K, M_B)` is an isomorphism for `K, M ∈ Dctf`.
 - `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_dualizingComplex`
-  (`lem-coef-finite-dualizing`): `(ω_X)_B ≅ Ra_X^! B`.
+  (`lemma-change-coefficients-exceptional-inverse-image--1`): `(ω_X)_B ≅ Ra_X^! B`.
 - `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_verdierDual`
-  (`cor-coef-finite-verdier`): `(𝔻_X K)_B ≅ RHom(K, Ra_X^! B)`.
+  (`theorem-verdier-biduality--2`): `(𝔻_X K)_B ≅ RHom(K, Ra_X^! B)`.
 - `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedUpperShriek`
-  (`lem-coef-finite-exceptional`, the coefficient comparison): `(Rf^! L)_B ≅ Rf^!(L_B)`.
+  (`lemma-change-coefficients-exceptional-inverse-image--1`, the coefficient comparison):
+  `(Rf^! L)_B ≅ Rf^!(L_B)`.
 - `AlgebraicGeometry.Etale.constructibleFiniteTor_stability_reductionModIdeal`
-  (`thm-sf-ctf-stability` (vii), finite stage).
+  (`proposition-six-operations-dctf` (vii), finite stage).
 
 ## Implementation notes
 
@@ -48,10 +49,11 @@ to `RHom_A(K, M ⊗ᴸ B)`, `𝔻_{X,B}(K_B) = RHom_B(K_B, ω_{X,B})` to `RHom_A
 evaluation, units and counits asserted by the blueprint are not recorded.
 
 The integral and rational parts of clause (vii) are the results of the coefficient chapter:
-`AlgebraicGeometry.Etale.preservationMatrix_integral` (`cor-coef-integral-internal-hom`,
-`lem-coef-integral-hom-reduction`, and the integral exceptional adjoint); the integral category
-`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral` is defined with a uniform
-Tor bound on the reductions, so `Dᵇc(X, 𝒪_E) = Dctf(X, 𝒪_E)` holds by definition there.
+`AlgebraicGeometry.Etale.preservationMatrix_integral` (`proposition-six-operations-dctf--15`,
+`proposition-six-operations-change-coefficients--7`, and the integral exceptional adjoint); the
+integral category `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral` is defined
+with a uniform Tor bound on the reductions, so `Dᵇc(X, 𝒪_E) = Dctf(X, 𝒪_E)` holds by definition
+there.
 -/
 
 @[expose] public section
@@ -79,7 +81,8 @@ noncomputable def reductionModIdealDerivedTensorIso {X : Scheme.{u}}
       ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj ((reductionModIdeal Λ X J).obj M) :=
   derivedTensorAssociator _ X K M _
 
-/-- Blueprint `lem-coef-finite-direct-image`: Finite coefficient change for direct image.
+/-- Blueprint `lemma-change-coefficients-direct-image--1`: Finite coefficient change for direct
+image.
 
 Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes and `K` a bounded above complex (for
 instance `K ∈ Dctf(X, Λ)`, as in the blueprint). The canonical
@@ -89,7 +92,7 @@ projection map `(Rf_* K) ⊗ᴸ (Λ/J)_Y ⟶ Rf_*(K ⊗ᴸ (Λ/J)_X)`
 `K` by construction.
 
 `K` is bounded above, and the projection formula holds for `Rf_*` and a finitely generated
-constant coefficient (`lem-sf-projection-finite-constant`,
+constant coefficient (`proposition-open-direct-image-preserves-finite--1`,
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle`). -/
 theorem isIso_rightDerivedLowerStarReductionModIdealMap_app {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
@@ -108,7 +111,8 @@ theorem isIso_rightDerivedLowerStarReductionModIdealMap_app {X Y : Scheme.{u}}
       (leftDerivedUpperStarSingleConstantSheafIso (ModuleCat.{u + 1} Λ) f
         (ModuleCat.of Λ (Λ ⧸ J))))).isIso_hom
 
-/-- Blueprint `thm-coef-finite-hom`: Finite coefficient change for internal Hom.
+/-- Blueprint `lemma-change-coefficients-internal-hom--1`: Finite coefficient change for internal
+Hom.
 
 Let `X` be of finite type over `k`, `Λ` a finite ring whose exponent is invertible on `X` and
 `B = Λ ⧸ J`. For `K, M ∈ Dctf(X, Λ)` the evaluation-defined map
@@ -126,7 +130,8 @@ theorem isIso_derivedHomTensorMap_reductionModIdeal {X : Scheme.{u}} (aX : X ⟶
 
 /-- The internal hom commutes with finite coefficient reduction in its second variable on
 `Dctf`: `RHom(K, M)_B ≅ RHom(K, M_B)`
-(`AlgebraicGeometry.Etale.isIso_derivedHomTensorMap_reductionModIdeal`, `thm-coef-finite-hom`). -/
+(`AlgebraicGeometry.Etale.isIso_derivedHomTensorMap_reductionModIdeal`,
+`lemma-change-coefficients-internal-hom--1`). -/
 theorem nonempty_iso_reductionModIdeal_derivedHom_of_constructibleFiniteTor {X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [HasInvertibleExponent Λ X]
@@ -138,7 +143,8 @@ theorem nonempty_iso_reductionModIdeal_derivedHom_of_constructibleFiniteTor {X :
   have := isIso_derivedHomTensorMap_reductionModIdeal Λ J aX hK hM
   ⟨@asIso _ _ _ _ _ this⟩
 
-/-- Blueprint `lem-coef-finite-dualizing`: Finite coefficient change for the dualizing object.
+/-- Blueprint `lemma-change-coefficients-exceptional-inverse-image--1`: Finite coefficient change
+for the dualizing object.
 
 For `a_X : X ⟶ Spec k` separated of finite type and `B = Λ ⧸ J`, there is an isomorphism
 `ω_{X,Λ} ⊗ᴸ B ≅ ω_{X,B}`. Read after restriction of scalars to `Λ`, under which
@@ -167,13 +173,14 @@ lemma constructibleFiniteTor_tensorUnit (X : Scheme.{u}) :
 
 variable [HasInvertibleExponent Λ (Spec (.of k))]
 
-/-- Blueprint `cor-coef-finite-verdier`: Finite coefficient change for Verdier duality, the
+/-- Blueprint `theorem-verdier-biduality--2`: Finite coefficient change for Verdier duality, the
 comparison isomorphism.
 
 For `X` separated of finite type over `k`, `K ∈ Dctf(X, Λ)` and `B = Λ ⧸ J`, there is an
 isomorphism `(𝔻_{X,Λ} K) ⊗ᴸ B ≅ 𝔻_{X,B}(K_B)`; after restriction of scalars to `Λ`,
-`(𝔻_X K)_B ≅ RHom(K, Ra_X^! B)`. As in the blueprint, it is `thm-coef-finite-hom` with second
-argument `ω_X` followed by `lem-coef-finite-dualizing`. -/
+`(𝔻_X K)_B ≅ RHom(K, Ra_X^! B)`. As in the blueprint, it is
+`lemma-change-coefficients-internal-hom--1` with second argument `ω_X` followed by
+`lemma-change-coefficients-exceptional-inverse-image--1`. -/
 theorem nonempty_iso_reductionModIdeal_verdierDual {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
     [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -190,18 +197,18 @@ theorem nonempty_iso_reductionModIdeal_verdierDual {X : Scheme.{u}} (aX : X ⟶ 
 
 variable [IsAlgClosed k]
 
-/-- Blueprint `lem-coef-finite-exceptional`: the finite coefficient comparison for the exceptional
-inverse image.
+/-- Blueprint `lemma-change-coefficients-exceptional-inverse-image--1`: the finite coefficient
+comparison for the exceptional inverse image.
 
 For a morphism `f : X ⟶ Y` of separated finite-type `k`-schemes, `L ∈ Dctf(Y, Λ)` and
 `B = Λ ⧸ J`, there is an isomorphism `(Rf^! L) ⊗ᴸ B ≅ Rf_B^!(L ⊗ᴸ B)`, which after restriction of
 scalars to `Λ` reads `(Rf^! L)_B ≅ Rf^!(L_B)`.
 
-As in the blueprint, `Rf^! L ≅ 𝔻_X Lf^* 𝔻_Y L` (`thm-sf-ctf-stability` (v)), and the duality
-comparisons (`cor-coef-finite-verdier`) move the reduction through both duals:
+As in the blueprint, `Rf^! L ≅ 𝔻_X Lf^* 𝔻_Y L` (`proposition-six-operations-dctf` (v)), and the
+duality comparisons (`theorem-verdier-biduality--2`) move the reduction through both duals:
 `(𝔻_X Lf^* 𝔻_Y L)_B ≅ RHom(Lf^* 𝔻_Y L, Ra_X^! B) ≅ RHom(Lf^* 𝔻_Y L, Rf^! Ra_Y^! B)
 ≅ Rf^! RHom(𝔻_Y L, Ra_Y^! B) ≅ Rf^! (𝔻_Y 𝔻_Y L)_B ≅ Rf^!(L_B)`, the middle step being duality
-against pullback (`cor-sf-duality-pullback`). -/
+against pullback (`lemma-internal-adjunction-two-exchange-formulas--3`). -/
 theorem nonempty_iso_reductionModIdeal_rightDerivedUpperShriek {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
     [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX]
@@ -236,7 +243,7 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedUpperShriek {X Y : Scheme.{u}
       ((RHom(Y)[ModuleCat.{u + 1} Λ].obj (op DL)).mapIso e₄.symm ≪≫ e₃.symm ≪≫
         (reductionModIdeal Λ Y J).mapIso b.symm)⟩
 
-/-- Blueprint `thm-sf-ctf-stability`, clause (vii), at the finite stage.
+/-- Blueprint `proposition-six-operations-dctf`, clause (vii), at the finite stage.
 
 Let `k` be algebraically closed, `Λ` a finite ring whose exponent is invertible on `k` (the
 finite stage `A = A_{E,n}`), `B = Λ ⧸ J` a finite coefficient quotient and `f : X ⟶ Y` a morphism
@@ -245,15 +252,16 @@ reduction `K ↦ K_B = K ⊗ᴸ (Λ/J)_X` (read after restriction of scalars to 
 pullback, tensor product, both direct images, general internal Hom, Verdier duality and the
 exceptional inverse image:
 
-1. `(Lf^* K)_B ≅ Lf^*(K_B)` (`lem-fix-operation-reduction`);
+1. `(Lf^* K)_B ≅ Lf^*(K_B)` (`proposition-six-operations-change-coefficients`);
 2. `(K ⊗ᴸ M)_B ≅ K ⊗ᴸ M_B`, the restriction of `K_B ⊗ᴸ_B M_B`;
-3. `(Rf_* K)_B ≅ Rf_*(K_B)` for `K ∈ Dctf` (`lem-coef-finite-direct-image`);
-4. `(Rf_! K)_B ≅ Rf_!(K_B)` (`lem-fix-operation-reduction`);
+3. `(Rf_* K)_B ≅ Rf_*(K_B)` for `K ∈ Dctf` (`lemma-change-coefficients-direct-image--1`);
+4. `(Rf_! K)_B ≅ Rf_!(K_B)` (`proposition-six-operations-change-coefficients`);
 5. `RHom(K, M)_B ≅ RHom(K, M_B)`, the restriction of `RHom_B(K_B, M_B)`, for `K, M ∈ Dctf`
-   (`thm-coef-finite-hom`);
+   (`lemma-change-coefficients-internal-hom--1`);
 6. `(𝔻_X K)_B ≅ RHom(K, Ra_X^! B)`, the restriction of `𝔻_{X,B}(K_B)`, for `K ∈ Dctf`
-   (`cor-coef-finite-verdier`);
-7. `(Rf^! L)_B ≅ Rf^!(L_B)` for `L ∈ Dctf` (`lem-coef-finite-exceptional`).
+   (`theorem-verdier-biduality--2`);
+7. `(Rf^! L)_B ≅ Rf^!(L_B)` for `L ∈ Dctf`
+(`lemma-change-coefficients-exceptional-inverse-image--1`).
 
 The compatibility of these comparisons with evaluation and adjunction maps is not recorded. For
 the integral and rational stages of clause (vii) see the module documentation. -/
@@ -307,12 +315,13 @@ theorem constructibleFiniteTor_stability_reductionModIdeal {X Y : Scheme.{u}}
     fun K hK ↦ nonempty_iso_reductionModIdeal_verdierDual Λ J aX hK,
     fun L hL ↦ nonempty_iso_reductionModIdeal_rightDerivedUpperShriek Λ J aX aY f hf hL⟩
 
-/-- Blueprint `lem-coef-finite-exceptional`: Finite exceptional adjoints and coefficient change.
+/-- Blueprint `lemma-change-coefficients-exceptional-inverse-image--1`: Finite exceptional adjoints
+and coefficient change.
 
 For a morphism `f : X ⟶ Y` of separated finite-type `k`-schemes, `k` algebraically closed, and
 `L ∈ Dctf(Y, Λ)` at a finite stage `Λ`:
 
-1. `Rf^! L ≅ 𝔻_X Lf^* 𝔻_Y L`, the case of clause (v) of `thm-sf-ctf-stability`
+1. `Rf^! L ≅ 𝔻_X Lf^* 𝔻_Y L`, the case of clause (v) of `proposition-six-operations-dctf`
    (`nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar`);
 2. for a quotient `B = Λ ⧸ J`, `(Rf^! L) ⊗ᴸ B ≅ Rf_B^!(L ⊗ᴸ B)`, read after restriction of scalars
    to `Λ` as `(Rf^! L)_B ≅ Rf^!(L_B)`

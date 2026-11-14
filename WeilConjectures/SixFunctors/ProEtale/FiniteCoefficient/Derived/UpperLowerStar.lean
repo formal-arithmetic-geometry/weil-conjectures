@@ -334,8 +334,8 @@ variable [Abelian.HasFunctorialFlatResolution A]
 
 namespace ProEtale
 
-/-- Blueprint `def-weil-derived-direct-image`: Derived direct image; and blueprint
-`def-weil-derived-pullback-tensor-hom`, the derived pullback. The derived direct image
+/-- Blueprint `prose-03-02`: Derived direct image; and blueprint
+`prose-03-02`, the derived pullback. The derived direct image
 `Rg_* = R((g)_*[A])` (the generic total right derived functor, computed by K-injective
 resolutions) and the derived pullback `Lg^* = L((g)^*[A])` (computed by K-flat resolutions,
 isomorphic to `D((g)^*[A])` by `leftDerivedUpperStarIsoMapDerivedCategory`) have no
@@ -369,8 +369,8 @@ noncomputable def leftDerivedUpperStarSquareIso (sq : CommSq g' f' f g) :
   (leftDerivedUpperStarComp A f' g).symm ≪≫ leftDerivedUpperStarCongr A sq.w.symm ≪≫
     leftDerivedUpperStarComp A g' f
 
-/-- Blueprint `def-exchange-projection`: Exchange and projection transformations, the
-direct-image exchange `Ex_*`.
+/-- Blueprint `definition-pro-etale-base-change-map--1`: Exchange and projection transformations,
+the direct-image exchange `Ex_*`.
 
 The derived base change map `Lg^* Rf_* ⟶ Rf'_* Lg'^*` of a commutative square
 `g' ≫ f = f' ≫ g` of schemes,

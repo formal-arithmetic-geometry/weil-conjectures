@@ -39,8 +39,8 @@ are written multiplicatively. The ambient smooth connected curve has relative di
 Proof, step 1 (lem-sc-pic-restriction-exact): the divisor-class restriction argument gives
 surjectivity and the boundary-generated kernel. This geometric step is isolated in its own
 module; it identifies divisor restriction with the specified Picard pullback.
-Step 2 (def-sc-pic0): use the degree homomorphism `d`, whose kernel is Pic⁰, and the
-existing `picDegreeHom_ofClosedPoint` to see that every boundary generator has degree one.
+Step 2 (corollary-degree-jacobian--1): use the degree homomorphism `d`, whose kernel is Pic⁰, and
+the existing `picDegreeHom_ofClosedPoint` to see that every boundary generator has degree one.
 For `p = [P₀]` put `σ(n) = p^n` and `q(x) = x / σ(d(x))`. Then `d(q(x)) = 1`, `q` is the
 identity on the degree-zero subgroup, and restriction sends `q(x)` to the restriction of
 `x` because `p` is in its kernel. Thus restriction from Pic⁰ is still surjective.

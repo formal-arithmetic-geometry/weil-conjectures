@@ -75,10 +75,10 @@ change of coefficient category, and imposes no extra structure on the abelian sh
 Proof (the node's eight steps):
 1. The finite stalk formula (lemma-weil-pbc-finite-stalk-formula) expresses a stalk of the
 pushforward as a finite product of torsion stalks. The torsion characterizations
-(lem-weil-pbc-torsion-sheaf-characterizations) then give torsion of the pushforward.
+(definition-torsion-sheaves--3) then give torsion of the pushforward.
 2. Each source stalk is a direct factor of the pushforward stalk over its image. Thus
 p-primary torsion and torsion prime to the characteristic descend from the pushforward.
-3. The finite cohomology edge map (lem-weil-pbc-finite-pushforward-cohomology) is an
+3. The finite cohomology edge map (lemma-finite-morphisms-cohomology--2) is an
 isomorphism in every degree, identifying vanishing and finiteness on the two schemes.
 4. Transfer C1 by this identification. For C2, affineness of Y implies affineness of X;
 for C3 use step 2. These use lem-weil-pbc-finite-morphism-permanence.
@@ -89,7 +89,7 @@ for C4; for C5 also use that finite over proper is proper.
 Finite exchange (lemma-weil-pbc-finite-exchange) and the finite edge maps are isomorphisms.
 Their compatibility (lem-weil-pbc-edge-map-base-change) identifies the two pullback maps.
 Pasting identifies the source base change with its field extension; composition
-(lem-weil-pbc-cohomology-pullback-functorial and lem-weil-pbc-inverse-image-composition)
+(proposition-cohomology-p-1-over-henselian--1 and lem-weil-pbc-inverse-image-composition)
 transfers bijectivity. Apply step 2 for C6 and properness permanence for C7.
 7. For an open immersion into Y, its pullback into X is open and the induced finite
 morphism has the same exchange and edge isomorphisms. Compatibility gives a commuting
@@ -97,7 +97,7 @@ restriction square; lift the corresponding class by C8 on X and transport it bac
 the inverse edge map. Injectivity of the comparison proves that it restricts to the
 given class on the open of Y.
 8. The eight separate implications give the implication between their conjunctions,
-using def-weil-pbc-eight-curve-assertions. Together with step 1 this proves both clauses. -/
+using theorem-cohomology-curves. Together with step 1 this proves both clauses. -/
 theorem IsCurve.finite_pushforward_assertions {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k) {Y : Scheme.{u}}
     (g : Y ⟶ Spec (.of k)) [IsCurve g] (f : P.C ⟶ Y) [IsFinite f]

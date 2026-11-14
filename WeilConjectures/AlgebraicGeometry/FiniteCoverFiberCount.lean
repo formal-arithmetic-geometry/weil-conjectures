@@ -17,7 +17,7 @@ number of geometric points of `C` over `y` is the rank of `B` over `A`
 (`AlgebraicGeometry.Scheme.Hom.natCard_geometricFiber_eq_finrank`): the sum of the products of
 ramification indices and inertia degrees over `y` equals the rank, and both are `1`.
 
-This is used in the covering step of blueprint `det-tf-restriction-zero-covers` to identify the
+This is used in the covering step of blueprint `lemma-tangent-cones-on-cover` to identify the
 degree of a finite étale cover with the rank of its normalization.
 -/
 
@@ -111,7 +111,7 @@ lemma primeIdealOf_geometricFiberEquivPointsOver_symm (p : C ⟶ Y) [IsAffineHom
 rank.** Let `p : C ⟶ Y` be finite, `Y₀ ⊆ Y` an affine open with `Γ(Y, Y₀)` a domain over which
 `Γ(C, p⁻¹ Y₀)` is flat, and `y` a `k`-rational point of `Y₀` (`k` algebraically closed) such that
 `𝔪_{Y,y} 𝒪_{C,c} = 𝔪_{C,c}` at every point `c` over `y`. Then the geometric fibre of `p` over
-`y` has `rank_{Γ(Y, Y₀)} Γ(C, p⁻¹ Y₀)` points (blueprint `det-tf-restriction-zero-covers`). -/
+`y` has `rank_{Γ(Y, Y₀)} Γ(C, p⁻¹ Y₀)` points (blueprint `lemma-tangent-cones-on-cover`). -/
 theorem natCard_geometricFiber_eq_finrank [IsAlgClosed k] (p : C ⟶ Y) [IsFinite p]
     (hY₀ : IsAffineOpen Y₀) (y : Spec (.of k) ⟶ Y) (hy : y default ∈ Y₀)
     (sY : Y ⟶ Spec (.of k)) (hys : y ≫ sY = 𝟙 _) [IsDomain Γ(Y, Y₀)]

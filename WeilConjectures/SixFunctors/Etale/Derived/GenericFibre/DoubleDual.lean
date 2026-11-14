@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.InternalHom
 /-!
 # The double dual along a monoidal functor, up to an invertible twist
 
-This file contains the formal part of blueprint `lem-weil-geometric-generic-duality`: a
+This file contains the formal part of blueprint `lemma-double-dual-geometric-generic-fibre--1`: a
 comparison `g^* ω_X ≅ ω_{X'} ⊗ L` with `L` invertible identifies `g^* δ_K` with `δ_{g^* K}`,
 as soon as the internal-hom comparisons of `g^*` at `(K, ω_X)` and at `(𝔻_X K, ω_X)` are
 isomorphisms; the invertible twist cancels after dualising twice.
@@ -54,8 +54,8 @@ namespace CategoryTheory.MonoidalClosed
 
 variable {C : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C] [MonoidalClosed C]
 
-/-- Blueprint `lem-weil-geometric-generic-duality` (formal core): biduality is invariant under
-twisting the dualizing object by an invertible object. For `L` invertible, the double-dual map
+/-- Blueprint `lemma-double-dual-geometric-generic-fibre--1` (formal core): biduality is invariant
+under twisting the dualizing object by an invertible object. For `L` invertible, the double-dual map
 `X ⟶ [[X, W ⊗ L], W ⊗ L]` is an isomorphism if and only if `X ⟶ [[X, W], W]` is.
 
 The canonical isomorphisms `[X, W] ⊗ L ≅ [X, W ⊗ L]`
@@ -81,7 +81,7 @@ theorem isIso_toIhomIhom_tensor_right_iff (W X : C) {L : C} (hL : IsInvertible L
 
 variable {D : Type*} [Category* D] [MonoidalCategory D] [BraidedCategory D] [MonoidalClosed D]
 
-/-- Blueprint `lem-weil-geometric-generic-duality` (formal core): let `G` be a lax braided
+/-- Blueprint `lemma-double-dual-geometric-generic-fibre--1` (formal core): let `G` be a lax braided
 functor between braided monoidal closed categories, and let `G W ≅ W' ⊗ L` with `L` invertible.
 If the internal-hom comparisons `G [X, W] ⟶ [G X, G W]` and `G [[X, W], W] ⟶ [G [X, W], G W]`
 of `G` are isomorphisms, then `G δ_X` is an isomorphism if and only if the double-dual map
@@ -160,7 +160,7 @@ theorem isIso_leftDerivedUpperStar_map_derivedHomToIhomIhomNatTrans_app_iff
   let := leftDerivedUpperStarLaxBraided A g hbr
   exact isIso_map_toIhomIhom_iff_of_iso_tensor L((g)^*[A]) hL e K h₁ h₂
 
-/-- Blueprint `lem-weil-geometric-generic-duality`, formal part: **the double dual along a
+/-- Blueprint `lemma-double-dual-geometric-generic-fibre--1`, formal part: **the double dual along a
 derived pullback, up to an invertible twist.**
 
 Let `g : X' ⟶ X`, let `a : X ⟶ S` and `a' : X' ⟶ S'` admit compactifications, with dualizing

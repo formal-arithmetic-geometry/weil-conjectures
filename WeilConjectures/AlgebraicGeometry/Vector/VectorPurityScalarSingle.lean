@@ -135,7 +135,8 @@ def purityAdjunctionSingleMap
 
 /-- Transport a scalar-unit arrow along the specified single/unit identifications.
 The generic endpoints keep kernel checking from expanding the derived monoidal data.
-Source: sk-prop-an, Step 6 (blueprint: def-pur-vector-purity-scalar-single). -/
+Source: proposition-purity-vector-bundles, Step 6 (blueprint:
+def-pur-vector-purity-scalar-single). -/
 def purityTransportUnitMap {C : Type v₁} {D : Type v₂}
     [Category.{w₁} C] [Category.{w₂} D] (Q : C ⥤ D)
     {U U' : C} {V V' : D} (e : U ≅ U') (f : V ≅ V')
@@ -265,7 +266,7 @@ def purityScalarSingleMap {A A' : Type (u + 1)} [CommRing A] [CommRing A']
 normalized scalar unit identification `ExceptionalCoefficients.unitIso` (uniquely
 fixed by the ordinary multiplication B tensor_A A -> B on the K-flat unit complex),
 transported along both single/unit identifications.
-Source: sk-prop-an, unit normalization in Step 6; Stacks 07A4
+Source: proposition-purity-vector-bundles, unit normalization in Step 6; Stacks 07A4
 (blueprint: def-pur-vector-purity-scalar-single). -/
 def purityScalarUnitMap {A A' : Type (u + 1)} [CommRing A] [CommRing A']
     (φ : A →+* A') (T : Scheme.{u}) :

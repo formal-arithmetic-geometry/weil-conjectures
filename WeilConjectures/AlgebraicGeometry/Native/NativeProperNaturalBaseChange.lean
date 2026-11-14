@@ -105,7 +105,7 @@ Apply the same square theorem to the exact encoding equivalences $E_S,E_H$: thei
 comparisons respect adjuncts by the ordinary-operations encoding statement, and equivalences
 preserve the K-injective computation. Consequently $V_S=D(E_S)D(U_S)$ carries the native derived
 adjunction maps to the condensed module ones, without asserting faithfulness of $D(U_S)$.
-Dependencies: lem-sfb-grothendieck-k-injective, lem-weil-pbc-kinjective-total-derived, lem-pc-
+Dependencies: prose-03-02, lem-weil-pbc-kinjective-total-derived, lem-pc-
 derived-adjoint-functors, lem-kun-derived-adjoint-square-comparison, lem-sf-right-derived-from-
 adapted-complexes, lem-sf-fixed-pair-derived-forget-comparison, lem-sf-native-adic-encoding-
 ordinary-operations, lem-weil-pbc-kinjective-hom-derived.
@@ -148,7 +148,7 @@ pbc-qcqs-over-affine] applied to its separated finite-type map to $\operatorname
 global ones. The encoding comparison [lem-sf-weil-verdier-module-constructibility-comparison]
 now shows that $D(E)N$ belongs to the condensed $D^b_c(\overline{Z_A},\Omega)$. Its local models
 $B_V^{\oplus r}$ are finite constant local models, hence locally finitely presented over the
-restricted coefficient ring by [det-def-sfb-constructible-local-model]; so on each finite
+restricted coefficient ring by [definition-constructible-sheaves--1]; so on each finite
 stratum the cohomology is constructible also in the locally finitely presented sense used by the
 bounded constructible category of the rational theorem. This verifies the input predicate for
 proper base change for the actual native coefficients; merely forgetting Frobenius, without this
@@ -156,13 +156,13 @@ coefficient and constructibility comparison, would not suffice.
 Dependencies: def-sf-native-weil-derived-framework, lem-sf-fixed-pair-derived-forget-comparison,
 lem-sf-native-adic-pullback-exact-lisse, lem-sf-native-adic-constructible-pullback, lem-weil-
 pbc-qcqs-over-affine, lem-sf-native-adic-qcqs-stratification, lem-sf-weil-verdier-module-
-constructibility-comparison, det-def-sfb-constructible-local-model.
+constructibility-comparison, definition-constructible-sheaves--1.
 
 7. On a chart square, [lem-sf-finite-span-module-derived-comparison] identifies the native
 ringed adjunction mate with the condensed module-object mate: its hypotheses hold by step 5, and
 its comparison is an equality of the specified derived morphisms, including units, counits and
-pullback composition. Apply clause (3) of [det-thm-sfb-proper-base-change-rational] with
-$\Lambda=\Omega$ to the input verified in step 6. This proves the native geometric exchange
+pullback composition. Apply clause (3) of [proposition-proper-direct-image-constructible-complexes]
+with $\Lambda=\Omega$ to the input verified in step 6. This proves the native geometric exchange
 invertible on that chart. To relate this to the global morphism, use [lem-sf-ringed-restriction-
 exchange-open-descent] for restriction from $T$ to $A$. For the further restriction from
 $u^{-1}A$ to $A'$, use [lem-sbc-ringed-topos-sheaf-slice-derived-comparison] on $p'$:

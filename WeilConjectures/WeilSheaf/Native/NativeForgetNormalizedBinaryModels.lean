@@ -289,7 +289,7 @@ Proof:
 1. The native category is Grothendieck abelian by
 lem-sf-native-weil-constructible-abelian. Its countable products exist by
 lem-coef-grothendieck-small-limits. Choose a K-injective resolution j of the actual
-native total using lem-sfb-grothendieck-k-injective. Both forgotten inputs are K-flat
+native total using prose-03-02. Both forgotten inputs are K-flat
 by lem-sf-native-two-sided-kflat-forget, without any termwise-flatness hypothesis.
 2. The parametrized adjunction in def-sf-native-derived-tensor-layer and the chain-map
 bijection of lem-sf-kflat-bifunctor-kinjective-currying curry j into the fixed product
@@ -306,7 +306,7 @@ The underived adjunction agrees under forgetting by lem-sf-native-weil-underived
 fixed nativeDerivedClosedComparison, which is Compatible by native_closed_forgetful.
 Its product projections identify forgotten currying with ordinary currying, and its
 representative square identifies the corresponding localized Hom arrows. The exact
-factors of lem-weil-pbc-exact-functor-derived-factorization supply their naturality.
+factors of situation-conventions supply their naturality.
 5. Unsigned NativeAdjunctionNormalization in d.models supplies the ordinary uncurry
 psi on O. On each left-first (p,q) summand, both u(j) and v followed by psi have the
 same sign (-1)^(pq). The Hom projections and the underlying counits agree, so the

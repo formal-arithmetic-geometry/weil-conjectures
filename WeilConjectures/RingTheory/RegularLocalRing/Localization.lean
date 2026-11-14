@@ -19,7 +19,7 @@ A localization of a regular ring is regular.
 
 /-- A localization `R'` of a regular ring `R` at a multiplicative subset `M` is regular: it is
 Noetherian, and its localization at a prime `q` is the localization of `R` at the contraction
-of `q`. (blueprint: `lem-weil-pbc-localization-of-regular-ring`) -/
+of `q`. (blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
 theorem IsRegularRing.of_isLocalization {R R' : Type*} [CommRing R] [CommRing R']
     [Algebra R R'] (M : Submonoid R) [IsLocalization M R'] [IsRegularRing R] :
     IsRegularRing R' := by

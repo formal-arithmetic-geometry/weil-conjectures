@@ -139,8 +139,9 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChan
 # Constant strict towers and normalized direct image
 
 Source: Stacks, Tags 08BJ, 070K, 0940, 0941, 0A07, 06YS, 07A4 and 0B56;
-agent-supplied constant-tower normalization supporting fix-lem-exchanges, Step 5
-(blueprint: lem-sf-cbc-constant-tower-direct-image-normalization).
+agent-supplied constant-tower normalization supporting
+proposition-composition-base-change-rf-shriek, Step 5 (blueprint:
+lem-sf-cbc-constant-tower-direct-image-normalization).
 
 The index n denotes positive exponent n+1. Quotients need not be finite sets.
 All tower derived categories localize strict diagrams before evaluation.

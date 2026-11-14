@@ -11,7 +11,7 @@ public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 /-!
 # Direct images on the pieces of a generic curve model
 
-Two formal inputs of the proof of `thm-fin-projective-curve-constant`:
+Two formal inputs of the proof of `proposition-proper-direct-image-finite-coefficients`:
 
 - a surjective closed immersion `t : T ⟶ P` does not change direct images: the unit
   `F ⟶ t_* t^* F` is an isomorphism

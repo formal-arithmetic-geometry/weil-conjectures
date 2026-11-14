@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.FilteredColimitLocalizationAtPrimeData
 # Localization at a prime commutes with filtered colimits
 
 Source: Stacks Project, Algebra, proof of Lemma Tag 037D (blueprint:
-lem-weil-pbc-filtered-colimit-localization-at-prime).
+lemma-quasi-finite-coordinates--1).
 -/
 
 @[expose] public section
@@ -29,7 +29,7 @@ namespace AlgebraicGeometry
 
 
 /-- Stacks Project, Algebra, proof of Tag 037D (`lemma-colimit-normal-ring`),
-(blueprint: lem-weil-pbc-filtered-colimit-localization-at-prime).
+(blueprint: lemma-quasi-finite-coordinates--1).
 Localization at a prime of a filtered colimit is the colimit of the localizations
 at the contracted primes, with the canonical maps.
 

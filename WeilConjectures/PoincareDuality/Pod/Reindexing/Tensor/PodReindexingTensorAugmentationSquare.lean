@@ -11,7 +11,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensor
 
 /-! # Tensor augmentation under normalized reindexing
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 2 and 4;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 2 and 4;
 Stacks 07A4, 08J9, 099B and 099M (blueprint: lem-pod-reindexing-tensor-augmentation-square).
 -/
 

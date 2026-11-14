@@ -19,7 +19,7 @@ import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension
 # Distinguished triangle for canonical truncations
 
 Source: literature/stacks-project/derived.tex, Remark 08J5 (line 4076)
-(blueprint: lem-weil-pbc-truncation-triangle).
+(blueprint: theorem-pbc-injective-acyclicity).
 -/
 
 @[expose] public section
@@ -116,15 +116,15 @@ The first two arrows are the canonical maps of complexes: the inclusion i_q
 degree-q component is the quotient Ker d^q -> H^q(K). The connecting arrow k_q
 exists and is unique; the triangle is functorial for every morphism of D(A), the
 three truncation functors acting on D(A) through their descent along Q (the
-localization lift; lem-weil-pbc-truncation-descends); and the three terms are
+localization lift; theorem-pbc-injective-acyclicity); and the three terms are
 bounded below when K is (strictly, or in cohomology).
 Source: Stacks Project, Remark 08J5; BBD, Proposition 1.1.9 and Corollaire 1.1.10 (ii)
-(blueprint: lem-weil-pbc-truncation-triangle).
+(blueprint: theorem-pbc-injective-acyclicity).
 
 Proof:
 1. The short exact sequence 0 -> tau_{<=q-1}K -> tau_{<=q}K -> M_q(K) -> 0, with
    j_q factoring through a quasi-isomorphism M_q(K) -> H^q(K)[-q]
-   (lem-weil-pbc-truncation-step-ses).
+   (theorem-pbc-injective-acyclicity).
 2. Its distinguished triangle in D(A) (lem-weil-pbc-complex-ses-triangle).
 3. Transport along the quasi-isomorphism gives k_q (TR1).
 4. Hom((tau_{<=q-1}K)[1], H^q(L)[-q]) = 0 (standard t-structure).

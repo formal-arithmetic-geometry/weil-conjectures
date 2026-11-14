@@ -16,7 +16,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A square map of finite free sheaves with unit determinant is invertible.
 
-Source: `thm-pc-semicontinuity-base-change`, proof (3), the adjugate argument
+Source: `lemma-triviality-fibres--2`, proof (3), the adjugate argument
 in the pivot-minor step, retained in `exists_local_invertible_minor_block`.
 (blueprint: lem-pc-local-invertible-minor-block-iso)
 

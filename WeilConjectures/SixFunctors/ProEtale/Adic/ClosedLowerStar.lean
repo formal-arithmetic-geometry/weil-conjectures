@@ -26,7 +26,7 @@ finiteness theorem for `ℓ`-adic direct images, that `Ri_*` carries `Dᵇc(Z, �
 
 This gives the functor `i_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)`
 (`AlgebraicGeometry.ProEtale.boundedConstructibleAdicClosedLowerStar`), and we prove the
-stage `ℚ̄_ℓ` of blueprint `prop-sf-closed-unit-all-stages` for it: it is fully faithful
+stage `ℚ̄_ℓ` of blueprint `lemma-local-cohomology-right-adjoint--1` for it: it is fully faithful
 (`AlgebraicGeometry.ProEtale.fullyFaithfulBoundedConstructibleAdicClosedLowerStar`), and for any
 right adjoint the unit is an isomorphism
 (`AlgebraicGeometry.ProEtale.isIso_unit_boundedConstructibleAdicClosedLowerStar`).
@@ -55,9 +55,10 @@ lemma isCompl_range_closedImmersionComplement :
 
 variable [IsLocallyNoetherian X]
 
-/-- Blueprint `lem-exc-proetale-closed-exact` for `ℓ`-adic sheaves over a locally noetherian
-scheme: the pushforward along a closed immersion is exact, its open complement being
-quasi-compact (`AlgebraicGeometry.ProEtale.preservesFiniteColimits_adicLowerStar_of_isCompl`). -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--4` for `ℓ`-adic sheaves over
+a locally noetherian scheme: the pushforward along a closed immersion is exact, its open complement
+being quasi-compact
+(`AlgebraicGeometry.ProEtale.preservesFiniteColimits_adicLowerStar_of_isCompl`). -/
 theorem preservesFiniteColimits_adicLowerStar_of_isClosedImmersion :
     PreservesFiniteColimits (i)_*ᵃ[l] :=
   preservesFiniteColimits_adicLowerStar_of_isCompl i (closedImmersionComplement i).ι
@@ -129,7 +130,7 @@ noncomputable abbrev boundedConstructibleAdicClosedLowerStar :
     fun _ hK ↦ boundedConstructibleAdic_rightDerivedFunctor_adicLowerStar_obj_of_isClosedImmersion
       i hK
 
-/-- Blueprint `prop-sf-closed-unit-all-stages`, stage `ℚ̄_ℓ`: the direct image
+/-- Blueprint `lemma-local-cohomology-right-adjoint--1`, stage `ℚ̄_ℓ`: the direct image
 `i_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)` along a closed immersion is fully faithful, being the
 restriction of the fully faithful `Ri_*`
 (`AlgebraicGeometry.ProEtale.full_boundedConstructibleAdic_ι_comp_rightDerivedLowerStar`). -/
@@ -137,7 +138,7 @@ noncomputable def fullyFaithfulBoundedConstructibleAdicClosedLowerStar :
     (boundedConstructibleAdicClosedLowerStar l i).FullyFaithful :=
   .ofFullyFaithful _
 
-/-- Blueprint `prop-sf-closed-unit-all-stages`, the unit at the stage `ℚ̄_ℓ`: for any right
+/-- Blueprint `lemma-local-cohomology-right-adjoint--1`, the unit at the stage `ℚ̄_ℓ`: for any right
 adjoint `Ri^!` of `i_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)`, the unit `Q ⟶ Ri^! i_* Q` is an
 isomorphism, `i_*` being fully faithful
 (`AlgebraicGeometry.ProEtale.fullyFaithfulBoundedConstructibleAdicClosedLowerStar`). -/

@@ -32,7 +32,8 @@ complement of `S`. The sheaves `F_S` are globally generated
 
 - `AlgebraicGeometry.Etale.exists_finite_forall_mem_sectionVanishingLocus`: a section over a
   quasi-compact étale `X`-scheme is supported over finitely many closed points.
-- `AlgebraicGeometry.Etale.isGloballyGenerated_of_isZero_sheafFiber` (`lem-kun-0f1f-gen`):
+- `AlgebraicGeometry.Etale.isGloballyGenerated_of_isZero_sheafFiber`
+(`corollary-open-direct-image-over-field--2`):
   `F` is globally generated.
 - `AlgebraicGeometry.Etale.isZero_of_isZero_sheafFiber_of_subsingleton`: if moreover `F` has
   no nonzero global sections, then `F = 0`.
@@ -298,9 +299,9 @@ theorem exists_supportedSectionsι_app_eq_map (p : X ⟶ Spec (.of K)) [LocallyO
     (F.obj.map g.op s) fun v hv ↦ hS v hv
   exact ⟨V, g, ⟨⟨w, hwO⟩, rfl⟩, S, hSf, hSc, z, hz⟩
 
-/-- Blueprint `lem-kun-0f1f-gen`: **global generation for sheaves supported on closed
-points.** Let `K` be a separably closed field, `X` a scheme locally of finite type over `K` and
-`F` an étale sheaf of `Λ`-modules on `X` whose stalks at the geometric points over the
+/-- Blueprint `corollary-open-direct-image-over-field--2`: **global generation for sheaves supported
+on closed points.** Let `K` be a separably closed field, `X` a scheme locally of finite type over
+`K` and `F` an étale sheaf of `Λ`-modules on `X` whose stalks at the geometric points over the
 non-closed points of `X` vanish. Then `F` is globally generated.
 
 For a finite set `S` of closed points (whose residue fields are separably closed,
@@ -345,7 +346,7 @@ theorem isGloballyGenerated_of_isZero_sheafFiber (p : X ⟶ Spec (.of K)) [Local
 
 /-- An étale sheaf of `Λ`-modules on a scheme locally of finite type over a separably closed
 field, with vanishing stalks at the non-closed points and without nonzero global sections, is
-zero: it is globally generated (`lem-kun-0f1f-gen`). -/
+zero: it is globally generated (`corollary-open-direct-image-over-field--2`). -/
 theorem isZero_of_isZero_sheafFiber_of_subsingleton (p : X ⟶ Spec (.of K)) [LocallyOfFiniteType p]
     (hF : ∀ x ∉ closedPoints X,
       IsZero ((pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj F))

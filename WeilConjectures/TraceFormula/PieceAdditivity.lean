@@ -19,7 +19,7 @@ Let `h : X ⟶ X` be an endomorphism, `x` a rational point fixed by `h` and `j :
 complement of `x`. A coefficient map `v : Lh^* K ⟶ K` of the graph correspondence `(𝟙, h)`
 induces coefficient maps `u^U` on `K^U = j_! Lj^* K` and `u^Z` on `K^Z = Rx_* Lx^* K` which form,
 with `v`, a morphism of the open–closed triangle `K^U ⟶ K ⟶ K^Z ⟶`, and the trace classes are
-additive (blueprint `prop-trf-trace-class-additivity`, `lem-trf-trace-triangle-compatibility`):
+additive (blueprint `proposition-additivity-trace-classes--2`):
 ```
 Tr_{(𝟙, h)}(v) = Tr_{(𝟙, h)}(u^Z) + Tr_{(𝟙, h)}(u^U).
 ```
@@ -30,7 +30,7 @@ morphism groups vanish by `WeilConjectures.TraceFormula.PieceVanishing` since `x
 ## Main statements
 
 - `ProEtale.CondensedRing.Correspondence.traceClass_ofGraph_eq_add`: item 1 of
-  `prop-trf-trace-class-additivity` for the graph of `h` and `Z = {x}`.
+  `proposition-additivity-trace-classes--2` for the graph of `h` and `Z = {x}`.
 
 The curve pieces of a Weil object (item 2) are in
 `WeilConjectures.TraceFormula.CurvePiecesAdditivity`.
@@ -90,8 +90,8 @@ variable (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) {h : X ⟶ X}
   {x : RationalPoint X} (hx : x ≫ h = x)
 
 /-- **Additivity of trace classes along the pieces of a fixed point** (blueprint
-`prop-trf-trace-class-additivity`, item 1, and `lem-trf-trace-triangle-compatibility`, for the
-graph correspondence `(𝟙, h)` and the `c`-invariant closed subscheme `Z = {x}` of a rational
+`proposition-additivity-trace-classes--2`, item 1, and `proposition-additivity-trace-classes--2`,
+for the graph correspondence `(𝟙, h)` and the `c`-invariant closed subscheme `Z = {x}` of a rational
 point fixed by `h`; Varshavsky, Prop. 1.5.10 after SGA 5, III 4.13): the trace class of
 `v : Lh^* K ⟶ K` is the sum of the trace classes of the induced coefficient maps
 `u^Z = [x, x]_! v_x` on `K^Z = Rx_* Lx^* K` and `u^U = [j]_! (v|_U)` on `K^U = j_! Lj^* K`.

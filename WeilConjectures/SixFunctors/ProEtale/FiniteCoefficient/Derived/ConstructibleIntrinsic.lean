@@ -11,15 +11,15 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Con
 /-!
 # Intrinsic bounded constructible complexes on the pro-étale site
 
-Blueprint `def-weil-finite-torsion-constructibility` defines `Dᵇc(Y, A_{E,n})` intrinsically:
+Blueprint `definition-constructible-sheaves` defines `Dᵇc(Y, A_{E,n})` intrinsically:
 the complexes on `Y_proét` with finitely many nonzero cohomology sheaves, all constructible in
 the sense of `AlgebraicGeometry.ProEtale.IsConstructible` (on the strata of a finite partition by
 locally closed constructible subschemes, locally constant with finitely generated stalks). The
 repository works with the étale-origin reading
 `AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible` (blueprint
-`def-weil-pbc-proetale-modules`). This file states the intrinsic property and shows that the
+`definition-small-pro-etale-site--1`). This file states the intrinsic property and shows that the
 étale-origin objects satisfy it; the converse is blueprint
-`lem-sf-proetale-constructible-origin`.
+`theorem-comparison-constructible-sheaves`.
 
 ## Main definitions
 
@@ -46,7 +46,7 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
 
-/-- Blueprint `def-weil-finite-torsion-constructibility`: Finite-torsion constructibility.
+/-- Blueprint `definition-constructible-sheaves`: Finite-torsion constructibility.
 
 The intrinsic `Dᵇc(Y, A)`: an object of `D(Y_proét, Λ)` with finitely many nonzero cohomology
 sheaves (bounded for the canonical t-structure), all of which are constructible

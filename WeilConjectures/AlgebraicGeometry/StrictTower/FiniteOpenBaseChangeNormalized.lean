@@ -15,7 +15,8 @@ import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 # Normalized finite constant-coefficient open base change
 
 Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE, and the explicit
-strict-tower refinement in the blueprint (blueprint: lem-cbc-proetale-extension-zero-base-change).
+strict-tower refinement in the blueprint (blueprint:
+proposition-extension-zero-restriction-closed-subscheme--11).
 
 The index `n : ℕ` denotes positive level `n+1`. All derived categories below localize
 complexes of strict towers, rather than forming towers in separate derived categories.
@@ -49,7 +50,7 @@ theorem moduleSquareG_existsUnique {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V �
 
 /-- The canonical single-level pullback-square identification.
 Source: Stacks, Tag 09AE
-(blueprint: lem-cbc-proetale-extension-zero-base-change). -/
+(blueprint: proposition-extension-zero-restriction-closed-subscheme--11). -/
 noncomputable def moduleSquareG {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     modulePullback B i ⋙ modulePullback B r ≅ modulePullback B p ⋙ modulePullback B k :=
@@ -68,7 +69,7 @@ theorem moduleSquareG_eq {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
 
 /-- The inverse open-base-change component, specified by the original open-unit transpose.
 Source: Stacks, Tag 09AE
-(blueprint: lem-cbc-proetale-extension-zero-base-change). -/
+(blueprint: proposition-extension-zero-restriction-closed-subscheme--11). -/
 noncomputable def singleBetaInvApp {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g) (M : Modules B U) :
@@ -80,7 +81,7 @@ noncomputable def singleBetaInvApp {U' U X' X : Scheme.{u}}
 
 /-- Naturality follows from the same open-unit transpose.
 Source: Stacks, Tag 09AE
-(blueprint: lem-cbc-proetale-extension-zero-base-change).
+(blueprint: proposition-extension-zero-restriction-closed-subscheme--11).
 Proof: transpose each naturality square under the open adjunction. Naturality of
 the open unit and of the pullback-square comparison makes their transposes equal. -/
 theorem singleBetaInvApp_naturality {U' U X' X : Scheme.{u}}
@@ -104,7 +105,7 @@ theorem singleBetaInvApp_naturality {U' U X' X : Scheme.{u}}
 
 /-- The specified inverse comparison, as a natural transformation.
 Source: Stacks, Tag 09AE
-(blueprint: lem-cbc-proetale-extension-zero-base-change). -/
+(blueprint: proposition-extension-zero-restriction-closed-subscheme--11). -/
 noncomputable def singleBetaInv {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g) :
@@ -271,7 +272,7 @@ end
 
 /-- The finite-coefficient canonical comparison is invertible for a cartesian square.
 Source: Stacks, Tag 09AE
-(blueprint: lem-cbc-proetale-extension-zero-base-change).
+(blueprint: proposition-extension-zero-restriction-closed-subscheme--11).
 Proof: open localization identifies the right adjoints by restriction on the same
 pulled-back test objects. Their left adjoints have the unique unit-preserving
 isomorphism. Its inverse has exactly the displayed open-unit transpose, hence is
@@ -301,7 +302,7 @@ theorem singleBetaInv_isIso [Finite B] {U' U X' X : Scheme.{u}}
 /-- The existing finite open-base-change comparison, in constant-ring module coordinates.
 Its inverse has the prescribed open-unit transpose; no new map is chosen.
 Source: Stacks, Tag 09AE
-(blueprint: lem-cbc-proetale-extension-zero-base-change). -/
+(blueprint: proposition-extension-zero-restriction-closed-subscheme--11). -/
 noncomputable def singleBeta [Finite B] {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)

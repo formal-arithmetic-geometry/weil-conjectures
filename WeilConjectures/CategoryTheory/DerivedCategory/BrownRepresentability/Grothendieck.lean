@@ -29,7 +29,8 @@ right adjoint by Brown representability for `D(R)`
 (`DerivedCategory.isLeftAdjoint_of_preservesCoproducts_moduleCat`), and then so does `F`
 (`CategoryTheory.Functor.isLeftAdjoint_of_isLeftAdjoint_comp`).
 
-This is the homological input of the blueprint node `thm-amb-etale-exceptional-adjoint`.
+This is the homological input of the blueprint node
+`theorem-existence-exceptional-inverse-image--1`.
 -/
 
 @[expose] public section
@@ -44,8 +45,8 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [HasDerivedCategory.{v} A]
 
 /-- **Brown representability for the derived category of a Grothendieck abelian category**
-(Stacks Proposition 19.15.2, Tag 0F5Y; blueprint `thm-amb-etale-exceptional-adjoint`): a
-triangulated functor `F : D(A) ⥤ T` which preserves coproducts is a left adjoint. -/
+(Stacks Proposition 19.15.2, Tag 0F5Y; blueprint `theorem-existence-exceptional-inverse-image--1`):
+a triangulated functor `F : D(A) ⥤ T` which preserves coproducts is a left adjoint. -/
 theorem isLeftAdjoint_of_preservesCoproducts {T : Type u'} [Category.{v} T] [Preadditive T]
     [HasZeroObject T] [HasShift T ℤ] [∀ n : ℤ, (shiftFunctor T n).Additive] [Pretriangulated T]
     (F : DerivedCategory A ⥤ T) [F.CommShift ℤ] [F.IsTriangulated]

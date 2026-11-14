@@ -28,7 +28,7 @@ of `x`, the punctured part `Spec A ×_C̄ Ū` is the spectrum of the fixed field
 (`Ideal.fixingSubgroup_fixedField_inertia`). These are the data required by
 `AlgebraicGeometry.WeilSheaf.exists_injective_stalk_directImage_range_eq_invariants`, which
 computes the boundary stalk of `j_* F` for a lisse Weil sheaf `F` as Galois invariants
-(blueprint `lem-wf-boundary-stalk-invariants`).
+(blueprint `lemma-boundary-stalk--1`).
 -/
 
 @[expose] public section

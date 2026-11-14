@@ -22,10 +22,10 @@ and `ν_{p₁}` of the first projection, this file defines the specializations
 
 `𝔥_c S_C(λ_{c_η,K}) = λ_{c_s,K'} c_s^! ρ β_c(P_X)`
 
-of blueprint `det-tf-sp-kernel-pullback`
+of blueprint `lemma-section-specialized-correspondence`
 (`IsContractingAt.map_exceptionalHomIso_inv_comp_supportHomSpecialization`), from the first identity
-of blueprint `det-tf-sp-universal-kernel` and the compatibility of `β_c` with the projection formula
-(blueprint `det-nearby-exceptional-tensor` (2)), taken as hypotheses.
+of blueprint `lemma-nearby-cycles-universal-kernel` and the compatibility of `β_c` with the
+projection formula (blueprint `lemma-compatibilities-base-change-maps` (2)), taken as hypotheses.
 It also identifies the unit of the lax monoidal structure of nearby cycles with the
 specialization unit (`NearbyCyclesModel.nearbyCyclesLaxMonoidal_ε`,
 `IsContractingAt.laxMonoidal_ε_specialization`), the form in which `σ_C` enters the section of the
@@ -200,8 +200,8 @@ abbrev ProdFstCompactSupportExchange :=
 variable {k' x}
 
 /-- The specialization `𝔥 : Ψ_{X×X} RHom(p₂^* K, p₁^! K) ⟶ RHom(p₂'^* K', p₁'^! K')` of the
-internal hom (blueprint `det-tf-sp-universal-kernel`): the mate of `Ψ(ev) ∘ μ`, precomposed with
-`α_{p₂}` and postcomposed with the exceptional exchange `β_{p₁}` of `ν_{p₁}`. -/
+internal hom (blueprint `lemma-nearby-cycles-universal-kernel`): the mate of `Ψ(ev) ∘ μ`,
+precomposed with `α_{p₂}` and postcomposed with the exceptional exchange `β_{p₁}` of `ν_{p₁}`. -/
 noncomputable def homSpecialization (νp : ProdFstCompactSupportExchange (ℓ := ℓ) k' x)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (specializationProd k' x).obj
@@ -295,12 +295,13 @@ noncomputable def specialExceptionalHomInv :
 
 -- matching the abstract lemma against the concrete composites
 /-- **The specialized coefficient as a section of the kernel** (blueprint
-`det-tf-sp-kernel-pullback`, the displayed identity
+`lemma-section-specialized-correspondence`, the displayed identity
 `𝔥_c S_C(λ_{c_η,K}) = λ_{c_s,K'} c_s^! ρ β_c(P_X)`), for compact-support exchanges `ν_c` of the
 support and `ν_{p₁}` of the first projection and dualizing data `D`, given the first identity
-`𝔥 S(λ_K) = λ_{K'} ρ` of blueprint `det-tf-sp-universal-kernel` (`h₁`) and the compatibility of
-`β_c` with the projection formula (blueprint `det-nearby-exceptional-tensor` (2), `hβ`). Here
-`λ_c = τ_c ∘ c^! κ_{K,K}`, for `τ_c` the inverse of the exceptional internal hom exchange. -/
+`𝔥 S(λ_K) = λ_{K'} ρ` of blueprint `lemma-nearby-cycles-universal-kernel` (`h₁`) and the
+compatibility of `β_c` with the projection formula (blueprint
+`lemma-compatibilities-base-change-maps` (2), `hβ`). Here `λ_c = τ_c ∘ c^! κ_{K,K}`, for `τ_c` the
+inverse of the exceptional internal hom exchange. -/
 theorem map_exceptionalHomIso_inv_comp_supportHomSpecialization
     (νc : hc.SupportCompactSupportExchange (ℓ := ℓ) k')
     (νp : ProdFstCompactSupportExchange (ℓ := ℓ) k' (y ≫ c.c₁))
@@ -342,12 +343,13 @@ lemma laxMonoidal_ε_specialization :
   NearbyCyclesModel.boundedConstructibleNearbyCyclesLaxMonoidal_ε _
 
 -- matching the abstract lemma against the concrete composites
-/-- **The section of the specialized coefficient** (blueprint `det-tf-sp-kernel-pullback`, second
-part): if `u : c^* p₂^* K ⟶ c^! p₁^! K` corresponds to the section `k_u : ℚ̄_ℓ ⟶ c^! (K ⊠ D K)`,
-that is `λ_c ∘ k_u` is the name of `u`, then the specialized coefficient
-`u_s = β_{c₁} ∘ Ψ_C(u) ∘ α_{c₂}` corresponds to `c_s^! ρ ∘ β_c ∘ Ψ_C(k_u) ∘ σ_C`, under the same
-hypotheses as `map_exceptionalHomIso_inv_comp_supportHomSpecialization`. The specialization unit
-`σ_C` appears as the unit `ε` of the lax monoidal structure (`laxMonoidal_ε_specialization`). -/
+/-- **The section of the specialized coefficient** (blueprint
+`lemma-section-specialized-correspondence`, second part): if `u : c^* p₂^* K ⟶ c^! p₁^! K`
+corresponds to the section `k_u : ℚ̄_ℓ ⟶ c^! (K ⊠ D K)`, that is `λ_c ∘ k_u` is the name of `u`,
+then the specialized coefficient `u_s = β_{c₁} ∘ Ψ_C(u) ∘ α_{c₂}` corresponds to
+`c_s^! ρ ∘ β_c ∘ Ψ_C(k_u) ∘ σ_C`, under the same hypotheses as
+`map_exceptionalHomIso_inv_comp_supportHomSpecialization`. The specialization unit `σ_C` appears as
+the unit `ε` of the lax monoidal structure (`laxMonoidal_ε_specialization`). -/
 theorem curry_comp_eq_unit_comp_map_comp
     (νc : hc.SupportCompactSupportExchange (ℓ := ℓ) k')
     (νp : ProdFstCompactSupportExchange (ℓ := ℓ) k' (y ≫ c.c₁))

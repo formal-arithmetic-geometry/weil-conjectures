@@ -22,8 +22,8 @@ import WeilConjectures.LinearAlgebra.ExteriorTopDirectSum
 /-!
 # Local bijectivity of split determinant linear maps
 
-Source: blueprint `lem-sc-riemann-roch`, proof of (*), determinant paragraph.
-(blueprint: lem-sc-split-determinant-linear-bijective).
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality--1`, proof of (*), determinant
+paragraph. (blueprint: lem-sc-split-determinant-linear-bijective).
 -/
 
 @[expose] public section
@@ -131,8 +131,8 @@ private theorem split_wedge_bijective
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The wedge formula makes given linear maps bijective on common free charts.
-Source: blueprint `lem-sc-riemann-roch`, proof of (*), determinant paragraph,
-local direct-sum comparison (blueprint: lem-sc-split-determinant-linear-bijective).
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality--1`, proof of (*), determinant
+paragraph, local direct-sum comparison (blueprint: lem-sc-split-determinant-linear-bijective).
 
 Proof: Choose a common trivializing neighborhood V of X₁ and X₃ inside U.
 On every W contained in V the outside section modules are free of the stated

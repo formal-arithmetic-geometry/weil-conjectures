@@ -20,7 +20,8 @@ public import WeilConjectures.NumberTheory.Padics.Extension
 Let `G` be a compact topological group acting continuously on a finite-dimensional
 `ℚ̄_ℓ`-vector space `V`. This file shows that the action is defined over a finite extension
 `E/ℚ_ℓ` and preserves an `𝒪_E`-lattice in `V`. These are the two steps of the proof of
-`sk-p-real-integral` (`AlgebraicGeometry.WeilGroup.IsLisse.exists_lattice`).
+`proposition-lattices-representations-normal-scheme`
+(`AlgebraicGeometry.WeilGroup.IsLisse.exists_lattice`).
 
 ## Main statements
 
@@ -55,7 +56,7 @@ namespace PadicAlgCl
 
 variable (l : ℕ) [Fact l.Prime]
 
-/-- Blueprint `sk-p-real-integral`: the first step of the proof.
+/-- Blueprint `proposition-lattices-representations-normal-scheme`: the first step of the proof.
 
 The matrix coefficients of a continuous matrix representation `φ` of a compact group over
 `ℚ̄_ℓ` all lie in a single finite extension `E` of `ℚ_ℓ`. -/
@@ -127,7 +128,7 @@ theorem exists_finiteDimensional_forall_mem {G : Type*} [Group G] [TopologicalSp
       hXmono (Finset.union_subset_union_right Finset.subset_union_right)⟩)
   exact ⟨F (s ∪ t), hF _, fun g i j ↦ (ht (Set.mem_univ g) i j).1⟩
 
-/-- Blueprint `sk-p-real-integral`: the second step of the proof.
+/-- Blueprint `proposition-lattices-representations-normal-scheme`: the second step of the proof.
 
 Let `σ` be a representation of a group `G` on a `ℚ̄_ℓ`-vector space `V` with basis `b`, whose
 matrix coefficients lie in a finite extension `E` of `ℚ_ℓ` and are bounded. Then the

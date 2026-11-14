@@ -32,7 +32,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructib
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-int-integral-heart/
 sk-lem-int-integral-heart-triangulated.md, assertions 1--2
-(blueprint: det-lem-int-integral-heart-triangulated).
+(blueprint: lemma-structure-integral-constructible-complexes--1).
 
 Coefficients are pulled-back condensed continuous functions into the valuation ring,
 and the derived category is the ordinary unbounded category of internal modules.
@@ -55,7 +55,7 @@ spectral norm. A finite extension of the small field of p-adic numbers is small 
 API; `Shrink.algEquiv` identifies it with the given extension. Thus no coefficient
 embedding or equality of universes is assumed. Source: blueprint integral-heart setting
 and def-weil-l-adic-coefficient-extension
-(blueprint: det-lem-int-integral-heart-triangulated). -/
+(blueprint: lemma-structure-integral-constructible-complexes--1). -/
 noncomputable abbrev integralHeartCoefficientRingObj
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type v) [Field E] [Algebra (Padic ℓ) E]
     [FiniteDimensional (Padic ℓ) E] :

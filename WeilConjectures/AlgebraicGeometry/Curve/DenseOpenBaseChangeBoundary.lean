@@ -14,7 +14,7 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 /-! # The boundary of a dense open after field extension
 
 Source: Stacks Project, Tag 0GJA, proof and remark (c).
-(blueprint: lem-pbc-m2-dense-open-base-change-boundary)
+(blueprint: lemma-removing-finitely-many-points--1)
 -/
 
 @[expose] public section
@@ -81,7 +81,7 @@ private theorem dense_open_boundary
 /-- The inverse image of a dense open in a curve over an algebraically closed field has
 finite complement consisting of closed points with separably closed residue fields.
 Source: Stacks Project, Tag 0GJA, proof, first sentence and remark (c).
-(blueprint: lem-pbc-m2-dense-open-base-change-boundary)
+(blueprint: lemma-removing-finitely-many-points--1)
 
 Proof: The curve is Noetherian and has finitely many irreducible components. For each
 component Z, take the open O avoiding all the other components. Its generic point belongs

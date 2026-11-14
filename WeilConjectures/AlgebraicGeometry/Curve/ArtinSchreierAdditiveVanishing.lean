@@ -25,7 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Vanishing of derived additive cohomology above degree one.
-Source: blueprint `lem-sc-artin-schreier-dimension`, step 2; Stacks 03P2 and 02UZ.
+Source: blueprint `proposition-p-torsion-smooth-proper-curve--3`, step 2; Stacks 03P2 and 02UZ.
 (blueprint: lem-sc-artin-schreier-additive-derived-vanishing)
 
 Proof: The given isomorphism identifies G with the universe lift of the additive
@@ -36,7 +36,7 @@ quasi-compactness gives finite refinements in each degree needed to compute q.
 Universe lift identifies their cochains, cocycles and coboundaries sectionwise,
 since it preserves finite products and is exact. This does not assume
 that universe lift preserves injective sheaves. By
-lem-sc-ga-cohomology, ordinary additive etale cohomology agrees with Zariski
+proposition-p-torsion-smooth-proper-curve--3, ordinary additive etale cohomology agrees with Zariski
 structure-sheaf cohomology and vanishes in degrees at least two: the curve is
 Noetherian of dimension one, so use cohomology above dimension (Stacks 02UZ).
 Transport zero across these comparisons and the given sheaf isomorphism. -/

@@ -12,8 +12,8 @@ import WeilConjectures.AlgebraicGeometry.CechModuleSheafTerms
 
 /-! # Scalar-compatible construction of the augmented Čech sheaf complex
 
-Source: blueprint lem-pc-cech-resolution, displayed complex and proof paragraph 1;
-Stacks Project, Tag 02FU, construction before the exactness argument.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves, displayed complex and proof
+paragraph 1; Stacks Project, Tag 02FU, construction before the exactness argument.
 (blueprint: lem-pc-linear-cech-sheaf-construction).
 -/
 
@@ -162,8 +162,8 @@ private theorem cechModuleSheafDegreeIso_naturality {X : Scheme.{u}} {ι : Type 
 set_option backward.isDefEq.respectTransparency false in
 /-- The concrete module-sheaf Čech complex agrees with the Čech complex of its
 section presheaves, including the coordinates of the degree-zero restriction map.
-Source: blueprint `lem-pc-cech-resolution`, displayed complex and proof paragraph 1.
-(blueprint: lem-pc-cech-module-sheaf-comparison)
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves`, displayed complex and proof
+paragraph 1. (blueprint: lem-pc-cech-module-sheaf-comparison)
 
 Proof: write G for the forgetful functor from module sheaves to presheaves of global
 modules. For every W and V, the over-site definition of cechIntersectionSheaf has
@@ -266,8 +266,8 @@ private theorem linearCechComparison
 
 
 /-- A scalar-compatible augmented Čech complex exists for any family of opens.
-Source: blueprint lem-pc-cech-resolution, displayed complex and proof paragraph 1;
-Stacks Project, Tag 02FU, construction before the exactness argument.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves, displayed complex and proof
+paragraph 1; Stacks Project, Tag 02FU, construction before the exactness argument.
 (blueprint: lem-pc-linear-cech-sheaf-construction)
 
 Proof: For each open W use the module sheaf obtained by pushing F.over W along

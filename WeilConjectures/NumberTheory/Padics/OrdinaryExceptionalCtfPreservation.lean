@@ -24,7 +24,7 @@ Propositions 3.16(2) and 2.29(2); Bhatt--Scholze, The pro-etale topology for sch
 Lemma 6.7.18 (blueprint: lem-sfb-ordinary-exceptional-ctf-preservation).
 
 This is the finite-coefficient preservation step of the third proof sentence of
-`lem-sfb-dc-proper-pushforward-left-adjoint-e` in the current blueprint. The categories
+`theorem-exceptional-inverse-image--16` in the current blueprint. The categories
 are the ordinary unbounded small etale derived categories. Constructibility uses the
 existing finite-stratification predicate; on these Noetherian schemes it is the same
 notion as the affine-local predicate of `def-pe-etale-constructible-module`.

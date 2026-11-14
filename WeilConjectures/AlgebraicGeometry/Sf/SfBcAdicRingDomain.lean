@@ -44,7 +44,7 @@ Thus l = uniformizer times an integer of E. Raising to n shows that l^n kills th
 quotient; the nonzero first quotient has characteristic l.
 (3) Apply lem-weil-valued-dvr-finite-quotients for finiteness and surjectivity of the
 identity-induced quotient maps. Apply the finite-extension clause of
-lem-weil-pbc-standard-quotients-perfect for the normalized two-term resolution and
+lemma-reduction-derived-nakayama--1 for the normalized two-term resolution and
 perfectness. (4) The principal ideal is finitely generated, its first quotient is torsion,
 and the positive quotients are finite and perfect. These are exactly the fields of
 def-weil-pbc-adic-coefficient-datum. -/

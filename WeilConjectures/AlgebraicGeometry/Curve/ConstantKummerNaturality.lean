@@ -18,8 +18,8 @@ import WeilConjectures.AlgebraicGeometry.Curve.KummerBaseChangeCompatibility
 # Kummer naturality in primitive-root coordinates
 
 Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proof of thm-sc-constant-invariance, Kummer naturality in the proper and affine cases
-(blueprint: lem-sc-constant-kummer-naturality).
+proof of proposition-cohomology-smooth-affine-curve, Kummer naturality in the proper and affine
+cases (blueprint: lem-sc-constant-kummer-naturality).
 -/
 
 @[expose] public section
@@ -31,8 +31,8 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry
 
 /-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proof of thm-sc-constant-invariance, Kummer naturality in the proper and affine cases
-(blueprint: lem-sc-constant-kummer-naturality).
+proof of proposition-cohomology-smooth-affine-curve, Kummer naturality in the proper and affine
+cases (blueprint: lem-sc-constant-kummer-naturality).
 
 Proof: the primitive-root sheaf map sends an integer class a to the power ζ^a. Pulling this
 section back sends it to (algebraMap k K ζ)^a; thus the two trivializations commute with the

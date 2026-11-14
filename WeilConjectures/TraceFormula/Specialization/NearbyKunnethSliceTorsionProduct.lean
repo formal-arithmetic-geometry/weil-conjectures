@@ -31,7 +31,7 @@ file constructs the morphisms induced by `φ₁` between the constructions of
 
 These are the first projections of the product configurations through which the generic-slicing
 step of Gabber's Künneth formula descends along the Galois layer (blueprint
-`sk-prop-tf-nearby-external-kunneth`, projection formula (3)).
+`proposition-external-kunneth-formula-nearby-cycles`, projection formula (3)).
 
 -/
 
