@@ -126,8 +126,8 @@ theorem coproduct_small_nonzero_support {I : Type w} (K : I → C) (c : Cofan K)
 
 /-- A property closed under isomorphisms and under the `v`-small direct sums that exist is closed
 under every direct sum that exists, whatever the universe of its index: an existing direct sum
-has `v`-small nonzero support (`coproduct_small_nonzero_support`) and is the direct sum of its nonzero
-summands. -/
+has `v`-small nonzero support (`coproduct_small_nonzero_support`) and is the direct sum of its
+nonzero summands. -/
 theorem ObjectProperty.isClosedUnderColimitsOfShape_discrete_of_small
     (P : ObjectProperty C) [P.IsClosedUnderIsomorphisms]
     (hsmall : ∀ I : Type v, P.IsClosedUnderColimitsOfShape (Discrete I))
@@ -193,7 +193,7 @@ theorem IsLocalizingSubcategory.prop_colimit {P : ObjectProperty C}
     let _ := hF
     P (colimit F) := by
   have := hP.isClosedUnderColimitsOfShape_discrete I
-  letI := hF
+  let := hF
   exact P.prop_colimit F fun j ↦ h j.as
 
 end AnyIndex
