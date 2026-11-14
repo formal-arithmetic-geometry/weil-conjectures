@@ -205,14 +205,14 @@ theorem constructibleFiniteTor_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X 
   exact ⟨boundedConstructible_rightDerivedLowerStar_of_finite Λ aX aY f hf hbc, a, b + 2 * (d : ℤ),
     torAmplitudeIn_rightDerivedLowerStar _ aX aY f hf d hd a b N hN hNY hbc hta⟩
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients--1`, finite-Tor form: for a
+/-- **Proper direct image with finite coefficients**, finite-Tor form: for a
 proper morphism `f : X ⟶ Y` of finite-type `k`-schemes and a finite `Λ` whose exponent is
 invertible on `Y`, `Rf_*` carries `Dctf(X, Λ)` into `Dctf(Y, Λ)`. Bounded constructibility is
 proper finiteness
 (`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian`,
 SGA 4 XIV 1.1), not the finiteness theorem for arbitrary `f`; the Tor amplitude bound is
 `AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar`. This is the proper leg of
-`Rf_! = Rp_* ∘ j_!` in the notes' proof of `theorem-results-from-etale-theory--3`. -/
+`Rf_! = Rp_* ∘ j_!` in the notes' proof of the results from étale theory. -/
 theorem constructibleFiniteTor_rightDerivedLowerStar_of_isProper {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [IsProper f]

@@ -500,8 +500,8 @@ carries `D^b_c(X, Λ)` into `D^b_c(Y, Λ)`. For the chosen compactification `X �
 `Rf_! = Rg_* ∘ j_!`: extension by zero preserves constructibility, and `Rg_*` preserves bounded
 constructibility by proper finiteness
 (`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian`,
-blueprint `proposition-proper-direct-image-finite-coefficients--1`), as in the notes' proof of
-`theorem-results-from-etale-theory--3`; the finiteness theorem for arbitrary `f` is not used.
+SGA 4 XIV 1.1), as in the notes' proof of the results from étale theory; the finiteness theorem
+for arbitrary `f` is not used.
 
 As for `Rf_*`, some finiteness hypothesis on `Y` is needed. -/
 theorem boundedConstructible_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactification f]

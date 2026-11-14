@@ -404,10 +404,11 @@ attribute [local irreducible] finiteCoefficientDerivedHomEquiv finiteCoefficient
   finiteDescentDerivedHomToAlgCl finiteDescentDerivedHomTransition
   coefficientDescentHomToAlgCl coefficientDescentHomTransition
 
-/-- Clause (4) of `finiteCoefficientDescentTwoColimit` on its own (blueprint
-`definition-constructible-sheaves`): for a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a
-noetherian qcqs scheme `X`, the constant-model bounded constructible complexes with `E`-coefficients
-are the bounded constructible ones. Every user of the descent bundle needs only this equality. -/
+/-- The equality part of clause (4) of `finiteCoefficientDescentTwoColimit` on its own: for a
+finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a noetherian qcqs scheme `X`, the constant-model
+bounded constructible complexes with `E`-coefficients are the bounded constructible ones (the
+clause also carries the compatibilities under extension of scalars, which stay in the bundle).
+Every user of the descent bundle needs only this equality. -/
 theorem constantModelBoundedConstructible_eq_boundedConstructible_subfield
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X] [TopologicalSpace.NoetherianSpace X] :
@@ -415,9 +416,9 @@ theorem constantModelBoundedConstructible_eq_boundedConstructible_subfield
       boundedConstructible (padicSubfieldRingObj X ℓ E) :=
   constantModel_eq_of_localFree _ (finite_lf ℓ E) X
 
-/-- Clause (4) of `finiteCoefficientDescentTwoColimit` on its own (blueprint
-`definition-constructible-sheaves`): for a noetherian qcqs scheme `X`, the constant-model bounded
-constructible complexes with `ℚ̄_ℓ`-coefficients are the bounded constructible ones. -/
+/-- The equality part of clause (4) of `finiteCoefficientDescentTwoColimit` on its own: for a
+noetherian qcqs scheme `X`, the constant-model bounded constructible complexes with
+`ℚ̄_ℓ`-coefficients are the bounded constructible ones. -/
 theorem constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl
     (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X] [TopologicalSpace.NoetherianSpace X] :

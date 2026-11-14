@@ -158,10 +158,9 @@ variable {k : Type u} [Field k] {X} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteTy
   [QuasiCompact aX] [HasInvertibleExponent Λ X]
 
 /-- Blueprint `prose-10-20`: the derived internal hom `RHom(-, -)` of `Dctf(X, Λ)`, for
-`X` of finite type over an algebraically closed field on which the exponent of `Λ` is
-invertible: the restriction of the derived internal hom of `D(X_ét)`, which preserves the
-constructible complexes of finite Tor amplitude
-(`AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom`). -/
+`X` of finite type over a field on which the exponent of `Λ` is invertible: the restriction of
+the derived internal hom of `D(X_ét)`, which preserves the constructible complexes of finite Tor
+amplitude (`AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom`). -/
 noncomputable def derivedHom :
     (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X)ᵒᵖ ⥤
       DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X ⥤
