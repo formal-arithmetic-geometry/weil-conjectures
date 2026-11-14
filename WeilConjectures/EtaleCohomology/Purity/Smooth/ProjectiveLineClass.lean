@@ -20,12 +20,15 @@ chart `D₊(T₀) ≅ 𝔸¹_S` at infinity.
 
 *Sign.* Forgetting supports, the Kummer boundary `∂κ(f)` of a local equation `f` of a divisor
 `D` is `c₁(𝒪(-D)) = -c₁(𝒪(D))`, not `c₁(𝒪(D))`: the Kummer and the support connecting maps
-anticommute (blueprint `lemma-cycle-class-cartier-divisor` (b); the blueprint's class `c_D` of
-`lemma-cycle-class-cartier-divisor` is `-∂κ(f)`). Hence `h = -c₁(𝒪(1))`, and the trace
-`AlgebraicGeometry.Etale.projectiveLineTrace`, normalized by `Tr_q ∘ h♭ = 1`, is `-t_q` for
-the trace `t_q` of blueprint `lemma-cohomology-projective-line-trace`, normalized by
-`t_q(c₁(𝒪(1))) = 1`. The definitions here use `h` consistently, so nothing below depends on the
-sign; it matters only when comparing with the blueprint's normalization.
+anticommute (the notes' cycle class `c_D` of a Cartier divisor is `-∂κ(f)`). The auxiliary
+objects carry that sign: `AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux` is
+`c₁(𝒪(-∞)) = -c₁(𝒪(1))`, and the auxiliary trace `AlgebraicGeometry.Etale.projectiveLineTraceAux`,
+normalized by `Tr ∘ (-h)♭ = 1`, is `-t_q`. The main objects are their negatives, so that they match
+the notes: the hyperplane class `AlgebraicGeometry.Etale.projectiveLineHyperplaneClass` is
+`h = c₁(𝒪(1))`, and the trace `AlgebraicGeometry.Etale.projectiveLineTrace`, normalized by
+`Tr_q ∘ h♭ = 1`, is the trace `t_q` of the notes, normalized by `t_q(c₁(𝒪(1))) = 1`. The
+constructions below are carried out for the auxiliary class, which is used consistently; the sign
+enters only in the passage to the main objects.
 
 More precisely, let `V ⊆ X` be an open, `s` a function on `V` and `i : Z ⟶ V` the zero locus of
 `s`, and assume that `i' = i ≫ (V ⊆ X)` is a closed immersion (`Z` is closed in `X`). The Kummer
