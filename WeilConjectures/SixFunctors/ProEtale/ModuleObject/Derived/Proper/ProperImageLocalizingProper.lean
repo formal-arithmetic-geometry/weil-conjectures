@@ -413,9 +413,13 @@ private theorem properHypotheses_coefficientIso
   let HY := (H Y).mapDerivedCategory
   have hDEq (Z : Scheme.{u}) : (H Z).mapDerivedCategory.IsEquivalence := inferInstance
   have hcols (Z : Scheme.{u}) :
-      PreservesColimitsOfSize.{u + 1, u + 1} (H Z).mapDerivedCategory := inferInstance
-  have hHX {I : Type (u + 1)} (K : Discrete I ⥤ _) : PreservesColimit K HX :=
+      PreservesColimitsOfSize.{u + 2, u + 2} (H Z).mapDerivedCategory := inferInstance
+  have hHX {I : Type (u + 2)} (K : Discrete I ⥤ _) : PreservesColimit K HX :=
     (hcols X).preservesColimitsOfShape.preservesColimit
+  have hcolsSmall (Z : Scheme.{u}) :
+      PreservesColimitsOfSize.{u + 1, u + 1} (H Z).mapDerivedCategory := inferInstance
+  have hHXSmall {I : Type (u + 1)} (K : Discrete I ⥤ _) : PreservesColimit K HX :=
+    (hcolsSmall X).preservesColimitsOfShape.preservesColimit
   have : HY.IsEquivalence := hDEq Y
   have : (constantModelBoundedConstructible Λ' Y).IsClosedUnderIsomorphisms :=
     (constantModelConstructibleFiniteTor_wellDefined Λ' Y).2.1
@@ -425,7 +429,7 @@ private theorem properHypotheses_coefficientIso
       localizingClosureProEtale Λ' X (HX.obj K) :=
     localizingClosure_map _ _ HX
       (fun K hK ↦ constantModelCtf_coefficientIso e X ⟨K, hK⟩)
-      (fun _ K ↦ hHX (K ⋙ (localizingClosureProEtale Λ X).ι))
+      (fun _ K ↦ hHXSmall (K ⋙ (localizingClosureProEtale Λ X).ι))
   constructor
   · intro K
     have hK := constantModelCtf_coefficientIso e X K
