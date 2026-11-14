@@ -358,7 +358,8 @@ lemma projectiveLineTrace_eq_neg [HasKummerClass.IsNormalized Λ] (S : Scheme.{u
     rw [IsIso.inv_eq_of_hom_inv_id]
     ext <;> simp
   unfold projectiveLineTrace projectiveLineTraceAux projectiveLineDecompositionMap
-  rw [IsIso.inv_comp, hinv, Category.assoc, biprod.map_snd, Preadditive.comp_neg, Category.comp_id]
+  rw [IsIso.inv_comp, hinv, Category.assoc, biprod.map_snd]
+  simp only [Preadditive.comp_neg, Category.comp_id]
 
 end Etale
 
