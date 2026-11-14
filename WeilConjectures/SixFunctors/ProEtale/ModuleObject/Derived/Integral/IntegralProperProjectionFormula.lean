@@ -98,7 +98,7 @@ private theorem localizing_large.{v, w}
       intro ⟨i⟩
       exact (hm i).trans (colimit.ι_desc (c s) ⟨i⟩).symm
   let J := {i // ¬ IsZero (K i)}
-  have : Small.{v} J := coproduct_small_support K t ht
+  have : Small.{v} J := coproduct_small_support.{v, v, w, v} K t ht
   let : P.IsClosedUnderColimitsOfShape (Discrete J) :=
     ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
       (Discrete.equivalence (equivShrink J)).symm

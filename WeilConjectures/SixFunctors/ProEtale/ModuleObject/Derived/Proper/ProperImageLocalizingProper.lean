@@ -183,7 +183,7 @@ private theorem localizingClosure_map
     (S : ObjectProperty C) (T : ObjectProperty D) (F : C ⥤ D)
     [F.CommShift ℤ] [F.IsTriangulated]
     (hS : ∀ K, S K → T (F.obj K))
-    (hF : ∀ (I : Type (max u v)) (G : Discrete I ⥤ (localizingClosure S).FullSubcategory),
+    (hF : ∀ (I : Type v) (G : Discrete I ⥤ (localizingClosure S).FullSubcategory),
       PreservesColimit (G ⋙ (localizingClosure S).ι) F) :
     ∀ K, localizingClosure S K → localizingClosure T (F.obj K) := by
   let L := localizingClosure S
@@ -202,10 +202,7 @@ private theorem localizingClosure_map
     have hLG : L (colimit G) := hL.2.2 G hG (fun i ↦ (h i).1)
     refine ⟨hLG, ?_⟩
     let G' := L.lift G (fun i ↦ (h i.as).1)
-    -- the sum is indexed by the morphism universe: lift its index to the universe of `hF`
-    let e := Discrete.equivalence (Equiv.ulift : ULift.{max u v} I ≃ I)
-    have h' : PreservesColimit (e.functor ⋙ G) F := hF (ULift.{max u v} I) (e.functor ⋙ G')
-    have : PreservesColimit G F := Functor.Final.preservesColimit_of_comp (F := e.functor)
+    have : PreservesColimit G F := hF I G'
     have hMG : M (colimit (G ⋙ F)) :=
       hM.prop_colimit (G ⋙ F) inferInstance (fun i ↦ (h i).2)
     exact M.prop_of_iso (preservesColimitIso F G).symm hMG
@@ -246,6 +243,20 @@ def ProperLocalizingHypotheses
   ∀ (I : Type (u + 2)) (F : Discrete I ⥤ (localizingClosureProEtale Λ X).FullSubcategory),
     PreservesColimit (F ⋙ (localizingClosureProEtale Λ X).ι)
       (lowerStar Λ p).rightDerivedFunctor
+
+/-- The sum-preservation hypothesis of `ProperLocalizingHypotheses` for a sum indexed by the
+universe of the morphisms: lift the index along `ULift`, the index categories being equivalent. -/
+private theorem preservesColimit_of_properLocalizingHypotheses
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (p : X ⟶ Y)
+    (h : ProperLocalizingHypotheses Λ p) (I : Type (u + 1))
+    (G : Discrete I ⥤ (localizingClosureProEtale Λ X).FullSubcategory) :
+    PreservesColimit (G ⋙ (localizingClosureProEtale Λ X).ι)
+      (lowerStar Λ p).rightDerivedFunctor := by
+  let e := Discrete.equivalence (Equiv.ulift : ULift.{u + 2} I ≃ I)
+  have h' : PreservesColimit (e.functor ⋙ (G ⋙ (localizingClosureProEtale Λ X).ι))
+      (lowerStar Λ p).rightDerivedFunctor := h.2 (ULift.{u + 2} I) (e.functor ⋙ G)
+  exact Functor.Final.preservesColimit_of_comp (F := e.functor)
 
 /-- The canonical restriction of the total derived pushforward is triangulated
 and preserves every small coproduct. The subcategory structures are the induced
@@ -315,7 +326,8 @@ theorem proper_image_localizing_proper
   let := hL.2.1
   let := hM.2.1
   have hmap : ∀ K : L.FullSubcategory, M (F.obj K.obj) := fun K ↦
-    localizingClosure_map S T F (fun K hK ↦ h.1 ⟨K, hK⟩) h.2 K.obj K.property
+    localizingClosure_map S T F (fun K hK ↦ h.1 ⟨K, hK⟩)
+      (preservesColimit_of_properLocalizingHypotheses Λ.X p h) K.obj K.property
   refine ⟨hmap, inferInstance, ?_⟩
   let C := CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     (condensedRingObj Λ.X X)
@@ -401,8 +413,8 @@ private theorem properHypotheses_coefficientIso
   let HY := (H Y).mapDerivedCategory
   have hDEq (Z : Scheme.{u}) : (H Z).mapDerivedCategory.IsEquivalence := inferInstance
   have hcols (Z : Scheme.{u}) :
-      PreservesColimitsOfSize.{u + 2, u + 2} (H Z).mapDerivedCategory := inferInstance
-  have hHX {I : Type (u + 2)} (K : Discrete I ⥤ _) : PreservesColimit K HX :=
+      PreservesColimitsOfSize.{u + 1, u + 1} (H Z).mapDerivedCategory := inferInstance
+  have hHX {I : Type (u + 1)} (K : Discrete I ⥤ _) : PreservesColimit K HX :=
     (hcols X).preservesColimitsOfShape.preservesColimit
   have : HY.IsEquivalence := hDEq Y
   have : (constantModelBoundedConstructible Λ' Y).IsClosedUnderIsomorphisms :=
