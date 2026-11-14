@@ -96,7 +96,8 @@ theorem moduleCechComplexAlpha_comm {X : Scheme.{v}} {ι : Type v} (U : ι → X
   · rw [HomologicalComplex.shape _ _ _ hnm, HomologicalComplex.shape _ _ _ hnm]
     simp
 
-/-- The map alpha of Stacks 01EQ. -/
+/-- The map from global sections of a module complex to its Čech total complex
+(Stacks, Tag 01EQ). -/
 noncomputable def moduleCechComplexAlpha {X : Scheme.{v}} {ι : Type v} (U : ι → X.Opens)
     (K : CochainComplex X.Modules ℕ) :
     ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
@@ -151,7 +152,8 @@ theorem moduleCechComplexBeta_comm {X : Scheme.{v}} {ι : Type v} (U : ι → X.
   · rw [HomologicalComplex.shape _ _ _ h, HomologicalComplex.shape _ _ _ h]
     simp
 
-/-- The map beta of Stacks 01EQ. -/
+/-- The augmentation beta from the Čech complex of `F` to the Čech total complex of `K`,
+induced by `a : F ⟶ K.X 0` (Stacks, Tag 01EQ). -/
 noncomputable def moduleCechComplexBeta {X : Scheme.{v}} {ι : Type v} (U : ι → X.Opens)
     {F : X.Modules} (K : CochainComplex X.Modules ℕ)
     (a : F ⟶ K.X 0) (ha : a ≫ K.d 0 1 = 0) :

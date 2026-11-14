@@ -134,8 +134,8 @@ section ScalarChange
 variable {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
 
 /-- Local pure tensors in the actual sheafified extension, transported by the
-specified object identification of the additive scalar-extension witness.
-; Tag 03EK. -/
+specified object identification of the additive scalar-extension witness
+(Stacks, Tag 03EK). -/
 abbrev adicDatumTensorSection (M : completedConstantModules T R) (U : T.ProEtᵒᵖ)
     (s : S.obj.obj U) (m : M.val.obj U) :
     ((reductionChange T φ).obj M).val.obj U :=
@@ -154,8 +154,8 @@ private theorem adicDatumOrdinaryAdjunction_formula :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The ordinary tensor/restriction unit, fixed by its local pure-tensor formula.
-; Tag 03EK. -/
+/-- The ordinary tensor/restriction unit, fixed by its local pure-tensor formula
+(Stacks, Tag 03EK). -/
 theorem adicDatumOrdinaryUnit_exists (M : completedConstantModules T R) :
     ∃! u : M ⟶ (SheafOfModules.restrictScalars.{t + 1}
       ((adicLisseForget T).map φ)).obj ((reductionChange T φ).obj M),
@@ -180,8 +180,8 @@ def adicDatumOrdinaryUnit (M : completedConstantModules T R) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Tensor/restriction adjunction normalized by the ordinary unit on every module.
-; Tag 03EK. -/
+/-- Tensor/restriction adjunction normalized by the ordinary unit on every module
+(Stacks, Tag 03EK). -/
 theorem adicDatumOrdinaryAdjunction_exists :
     ∃ adj : reductionChange T φ ⊣
         SheafOfModules.restrictScalars.{t + 1} ((adicLisseForget T).map φ),

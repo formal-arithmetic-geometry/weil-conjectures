@@ -23,7 +23,8 @@ noncomputable section
 universe v
 open CategoryTheory
 namespace AlgebraicGeometry
-/-- The canonical affine algebra adjunction component (Stacks, Tags 0AVW and 01SB). -/
+/-- For an affine morphism `f : X ⟶ Y`, the left adjoint of pushforward to `f_* O_X`-modules
+preserves finite limits (Stacks, Tags 0AVW and 01SB). -/
 theorem affine_algebra_module_adjunction_preserves_finite_limits
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     [(RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)).IsRightAdjoint] :

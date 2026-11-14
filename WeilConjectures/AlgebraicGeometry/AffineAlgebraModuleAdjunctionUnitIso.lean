@@ -49,7 +49,9 @@ private theorem adjunction_of_unit_formula
   change e M (H.obj M) (𝟙 _) = _
   simp [he]
 
-/-- The canonical affine algebra adjunction component (Stacks, Tags 0AVW and 01SB). -/
+/-- For an affine morphism `f : X ⟶ Y`, the unit of the adjunction between pushforward to
+`f_* O_X`-modules and its left adjoint is an isomorphism on quasi-coherent `f_* O_X`-modules
+(Stacks, Tags 0AVW and 01SB). -/
 theorem affine_algebra_module_adjunction_unit_iso
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     [(RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)).IsRightAdjoint] :

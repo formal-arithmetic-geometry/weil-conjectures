@@ -97,7 +97,7 @@ noncomputable def integralCoefficientSheafSystem :
 
 /-- The completed coefficient sheaf without an auxiliary finite-field datum.
 This is the same inverse limit used below; the finite-field convention is irrelevant
-for its construction.; Stacks Tag 03CO. -/
+for its construction (Stacks, Tag 03CO). -/
 noncomputable def completedIntegralCoefficientSheafUnrestricted :
     Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) RingCat.{max u (t + 1)} :=
   limit (integralCoefficientSheafSystem l E Y)
@@ -167,8 +167,8 @@ noncomputable def integralCoefficientCommRingSheaf (n : ℕ) :
     (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))
 
 /-- The completed coefficient projection without the finite-field convention.
-It is the coordinate map of the same limit, with commutativity retained.
-; Stacks Tag 03CO. -/
+It is the coordinate map of the same limit, with commutativity retained
+(Stacks, Tag 03CO). -/
 noncomputable def completedIntegralCommRingProjectionUnrestricted (n : ℕ) :
     completedIntegralCommRingSheafUnrestricted l E Y ⟶
       integralCoefficientCommRingSheaf l E Y n where

@@ -48,6 +48,7 @@ private theorem baseChangeMap_naturality
 
 /-- Over affine bases, global derived Hom out of a perfect complex commutes with
 Tor-independent base change in D(R'). The comparison is the extension/restriction adjoint of
+restricted RΓ applied to internal-Hom pullback, followed by the unit-compatible
 sections/pushforward comparison (Stacks, Tag 0AA7). -/
 theorem affineMorphism_hom_out_of_perfect
     [∀ Z : Scheme.{uAH},

@@ -431,7 +431,7 @@ of pure relative dimension `d`, as data: the deformation space `𝒟_s V`, a smo
 `g̃ : 𝒟_s V ⟶ 𝔸¹_B` of relative dimension `d`, a section `s̃` of `g̃`, and the identification
 of the fibres over `1` and `0` with `V` and the normal cone `N`, by two cartesian squares.
 It is trivial away from `t = 0` and has étale-local coordinates. -/
--- TODO(unify): purity conventions
+-- TODO(unify): unify with the deformation to the normal bundle of the purity conventions.
 structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
     (N : NormalConeData d s) where
   /-- The deformation space `𝒟_s V`. -/

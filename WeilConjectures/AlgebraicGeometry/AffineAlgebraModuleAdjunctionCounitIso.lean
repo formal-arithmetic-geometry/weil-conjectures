@@ -59,7 +59,9 @@ private theorem adjunction_of_epi_comparison
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The canonical affine algebra adjunction component (Stacks, Tags 0AVW and 01SB). -/
+/-- For an affine morphism `f : X ⟶ Y`, the counit of the adjunction between pushforward to
+`f_* O_X`-modules and its left adjoint is an isomorphism on quasi-coherent `O_X`-modules
+(Stacks, Tags 0AVW and 01SB). -/
 theorem affine_algebra_module_adjunction_counit_iso
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     [(RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)).IsRightAdjoint] :

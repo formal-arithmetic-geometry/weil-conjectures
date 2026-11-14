@@ -389,8 +389,8 @@ noncomputable def pbcQuotientConstant (X : Scheme.{u}) {A : Type (u + 1)} [CommR
   @ContinuousMap.const (ConnectedComponents U.unop.left) (A ⧸ d.ideal ^ (n + 1))
     inferInstance τ b
 
-/-- The constant-section comparison with the recorded continuous-function coefficient.
-; Stacks Tags 03CY and 00W1. -/
+/-- The constant-section comparison with the recorded continuous-function coefficient
+(Stacks, Tags 03CY and 00W1). -/
 theorem pbcLevelConstantComparison_exists (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
     ∃! e : adicLisseConstantRing X (A ⧸ d.ideal ^ (n + 1)) ≅

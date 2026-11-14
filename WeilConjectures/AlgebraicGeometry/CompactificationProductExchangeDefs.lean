@@ -43,8 +43,8 @@ attribute [local instance 50000] proEtaleRingModules_hasDerivedCategory
 
 /-- The ambient unit--square--counit exchange for the product with `T`.
 The chosen square is the universal product square, forgotten from schemes over the base;
-all four scalar identifications are the published constant-section comparisons.
-, first displayed arrow; Stacks Tag 0E46. -/
+all four scalar identifications are the published constant-section comparisons
+(Stacks, Tag 0E46). -/
 def compactificationProductExchange (A : Type u) [CommRing A]
     {S : Scheme.{u}} {X Y : Over S} (f : X ⟶ Y) (T : Over S) :
     (proEtaleConstantRingPushforward A f.left).rightDerivedFunctor ⋙

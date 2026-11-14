@@ -212,7 +212,7 @@ end DerivedReductionModels
 set_option linter.defProp false in
 /-- The full normalized scalar-extension witness along a map of coefficient sheaves.
 Its object and map equalities fix ordinary tensor; its universal counit fixes the derived
-functor.; Stacks Tag 06YY. -/
+functor (Stacks, Tag 06YY). -/
 def completedAdicChangeData (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :=
   letI := HasDerivedCategory.standard (SheafOfModules.{t + 1}

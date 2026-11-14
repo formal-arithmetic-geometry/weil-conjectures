@@ -105,7 +105,12 @@ private theorem compatible_colimits
     simp only [Functor.Final.ι_colimitIso_inv_assoc,
       HasColimit.ι_isoOfNatIso_hom_assoc, Functor.Final.ι_colimitIso_hom]
 
-/-- Stacks, Tags 03PQ, 04HT and 04HX. -/
+/-- For a geometric point `x` of `Y` through an affine open chart `Spec A`, the affine pointed
+étale neighbourhoods of `x` form a cofiltered category in which those factoring through the
+chart are initial. Their residue fields embed into the separable closure `K` of `κ(p)` in `Ω`,
+and the neighbourhoods over the chart are anti-equivalent to the étale residue triples over
+`(A, p, K)`, compatibly with the ring diagrams and the colimits of their rings
+(Stacks, Tags 03PQ, 04HT and 04HX). -/
 theorem etale_local_ring_triples
     (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω]
     (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i]

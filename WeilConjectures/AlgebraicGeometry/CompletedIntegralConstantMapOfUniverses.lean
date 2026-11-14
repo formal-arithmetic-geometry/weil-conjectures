@@ -19,7 +19,9 @@ public import WeilConjectures.RingTheory.WContractibleGeometricCriterion
 /-!
 # Constant integral scalars with independent site and coefficient universes
 
-; Stacks Tag 03CO.
+## References
+
+* Stacks Project, Tag 03CO
 -/
 
 @[expose] public noncomputable section
