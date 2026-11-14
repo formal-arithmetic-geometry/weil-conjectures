@@ -281,9 +281,99 @@ private lemma comp_eq_of_comm {𝒞 : Type*} [Category 𝒞] {Oq O₁ O₂ Mq M�
   rw [this, ← Category.assoc, ← Category.assoc, ← Category.assoc, hs]
   simp
 
+private lemma descentData_conjugate_comm {C : Type*} [Category C]
+    {F : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat} {S Y : C}
+    {ι : Type*} {V : ι → C} {u : ∀ i, V i ⟶ S} {i₁ i₂ : ι}
+    {D₁ D₂ : F.DescentData u} (φ : D₁ ⟶ D₂)
+    (q : Y ⟶ S) (f₁ : Y ⟶ V i₁) (f₂ : Y ⟶ V i₂)
+    (h₁ : f₁ ≫ u i₁ = q) (h₂ : f₂ ≫ u i₂ = q)
+    {O M : F.obj (.mk (op Y))}
+    (α : O ≅ (F.map f₁.op.toLoc).toFunctor.obj (D₁.obj i₁))
+    (β : M ≅ (F.map f₁.op.toLoc).toFunctor.obj (D₂.obj i₁))
+    (γ : O ≅ (F.map f₂.op.toLoc).toFunctor.obj (D₁.obj i₂))
+    (δ : M ≅ (F.map f₂.op.toLoc).toFunctor.obj (D₂.obj i₂))
+    (s₁ : (F.map f₁.op.toLoc).toFunctor.obj (D₁.obj i₁) ⟶
+      (F.map f₁.op.toLoc).toFunctor.obj (D₁.obj i₁)) (s : O ⟶ O)
+    (hs : α.hom ≫ s₁ = s ≫ α.hom)
+    (hd₁ : D₁.hom q f₁ f₂ h₁ h₂ = s₁ ≫ α.inv ≫ γ.hom)
+    (hd₂ : D₂.hom q f₁ f₂ h₁ h₂ = β.inv ≫ δ.hom) :
+    s ≫ γ.hom ≫ (F.map f₂.op.toLoc).toFunctor.map (φ.hom i₂) ≫ δ.inv =
+      α.hom ≫ (F.map f₁.op.toLoc).toFunctor.map (φ.hom i₁) ≫ β.inv := by
+  have hc := φ.comm q f₁ f₂ h₁ h₂
+  rw [hd₁, hd₂] at hc
+  exact (comp_eq_of_comm α β γ δ
+    ((F.map f₁.op.toLoc).toFunctor.map (φ.hom i₁))
+    ((F.map f₂.op.toLoc).toFunctor.map (φ.hom i₂)) s₁ s hs hc).symm
+
+private lemma torsorDescentData_hom {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf)
+    {ι : Type*} (V : ι → X.Etale) (t : ∀ i, T.sheaf.obj.obj (op (V i)))
+    {Y : Scheme.{u}} (q : Y ⟶ X) {i₁ i₂ : ι}
+    (f₁ : Y ⟶ (V i₁).left) (f₂ : Y ⟶ (V i₂).left)
+    (hf₁ : f₁ ≫ (V i₁).hom = q) (hf₂ : f₂ ≫ (V i₂).hom = q) :
+    (descentData T V t).hom q (i₁ := i₁) (i₂ := i₂) f₁ f₂ hf₁ hf₂ =
+      smulMor ((modulesPseudofunctor.map f₁.op.toLoc).toFunctor.obj
+        ((modulesPseudofunctor.map (V i₁).hom.op.toLoc).toFunctor.obj (Modules.unitObj X)))
+          (transitionAt T V t f₁ f₂ (hf₁.trans hf₂.symm)) ≫
+        (unitDescentData V).hom q (i₁ := i₁) (i₂ := i₂) f₁ f₂ hf₁ hf₂ := rfl
+
+private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf)
+    {ι : Type*} (V : ι → X.Etale) (t : ∀ i, T.sheaf.obj.obj (op (V i)))
+    (M : modulesPseudofunctor.obj (.mk (op X)))
+    (φ : descentData T V t ⟶
+      (modulesPseudofunctor.toDescentData (X := fun i ↦ (V i).left)
+        (fun i ↦ (V i).hom)).obj M)
+    {Y : Scheme.{u}} (q : Y ⟶ X) {i₁ i₂ : ι}
+    (f₁ : Y ⟶ (V i₁).left) (f₂ : Y ⟶ (V i₂).left)
+    (hf₁ : f₁ ≫ (V i₁).hom = q) (hf₂ : f₂ ≫ (V i₂).hom = q) :
+    smulMor ((modulesPseudofunctor.map q.op.toLoc).toFunctor.obj (Modules.unitObj X))
+        (transitionAt T V t f₁ f₂ (hf₁.trans hf₂.symm)) ≫
+        pullHom (F := modulesPseudofunctor) (M₁ := Modules.unitObj X) (M₂ := M)
+          (f₁ := (V i₂).hom) (f₂ := (V i₂).hom) (φ.hom i₂) f₂ q q hf₂ hf₂ =
+      pullHom (F := modulesPseudofunctor) (M₁ := Modules.unitObj X) (M₂ := M)
+        (f₁ := (V i₁).hom) (f₂ := (V i₁).hom) (φ.hom i₁) f₁ q q hf₁ hf₁ := by
+  let e₁ := Cat.Hom.toNatIso
+    (modulesPseudofunctor.mapComp' (V i₁).hom.op.toLoc f₁.op.toLoc q.op.toLoc
+      (by rw [← hf₁]; rfl))
+  let e₂ := Cat.Hom.toNatIso
+    (modulesPseudofunctor.mapComp' (V i₂).hom.op.toLoc f₂.op.toLoc q.op.toLoc
+      (by rw [← hf₂]; rfl))
+  refine descentData_conjugate_comm (F := modulesPseudofunctor)
+    (V := fun i ↦ (V i).left) (u := fun i ↦ (V i).hom) (i₁ := i₁) (i₂ := i₂)
+    (O := (modulesPseudofunctor.map q.op.toLoc).toFunctor.obj (Modules.unitObj X))
+    (M := (modulesPseudofunctor.map q.op.toLoc).toFunctor.obj M) φ q f₁ f₂ hf₁ hf₂
+    (e₁.app (Modules.unitObj X)) (e₁.app M)
+    (e₂.app (Modules.unitObj X)) (e₂.app M)
+    (smulMor (Y := Y) ((modulesPseudofunctor.map f₁.op.toLoc).toFunctor.obj
+      ((modulesPseudofunctor.map (V i₁).hom.op.toLoc).toFunctor.obj (Modules.unitObj X)))
+      (transitionAt T V t f₁ f₂ (hf₁.trans hf₂.symm)))
+    (smulMor (Y := Y) ((modulesPseudofunctor.map q.op.toLoc).toFunctor.obj (Modules.unitObj X))
+      (transitionAt T V t f₁ f₂ (hf₁.trans hf₂.symm))) ?_ ?_ ?_
+  · exact (smulMor_naturality (Y := Y) (e₁.app (Modules.unitObj X)).hom
+      (transitionAt T V t f₁ f₂ (hf₁.trans hf₂.symm))).symm
+  · rw [torsorDescentData_hom]
+    simp only [unitDescentData, Pseudofunctor.DescentData.ofObj_hom, e₁, e₂,
+      Iso.app_inv, Iso.app_hom, Cat.Hom.toNatIso_inv, Cat.Hom.toNatIso_hom]
+  · simp only [e₁, e₂, Iso.app_inv, Iso.app_hom, Cat.Hom.toNatIso_inv, Cat.Hom.toNatIso_hom]
+    dsimp only [Pseudofunctor.toDescentData, Pseudofunctor.DescentData.ofObj]
+
+private lemma etaleIsoTorsorVal_map_eq {X : Scheme.{u}}
+    (M : modulesPseudofunctor.obj (.mk (op X)))
+    [SheafOfModules.IsInvertible.{u, u, u} (M : X.Modules)]
+    {V Z : X.Etale} (a : Z ⟶ V)
+    (ψ : (modulesPseudofunctor.map V.hom.op.toLoc).toFunctor.obj (Modules.unitObj X) ⟶
+      (modulesPseudofunctor.map V.hom.op.toLoc).toFunctor.obj M) (hψ : IsIso ψ) :
+    Modules.etaleIsoTorsorVal M
+        ((Modules.etaleIsoTorsor M).sheaf.obj.map a.op (Modules.etaleIsoTorsorMk M ψ hψ)) =
+      pullHom (F := modulesPseudofunctor) (M₁ := Modules.unitObj X) (M₂ := M)
+        (f₁ := V.hom) (f₂ := V.hom) ψ a.left Z.hom Z.hom
+        (MorphismProperty.Over.w a) (MorphismProperty.Over.w a) := by
+  change (modulesPseudofunctor.presheafHom (Modules.unitObj X) M).map
+    ((toProEt X ⋙ ProEt.forget X).map a).op ψ = _
+  simp only [Pseudofunctor.presheafHom_map, TypeCat.ofHom_apply, Quiver.Hom.unop_op]
+  rfl
+
 variable {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf)
 
-set_option maxHeartbeats 4000000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
 set_option backward.isDefEq.respectTransparency.types false in
 /-- **Every `𝔾ₘ`-torsor is the torsor of trivialisations of an invertible module.** The descent
@@ -321,8 +411,6 @@ theorem exists_etaleIsoTorsor_equiv :
         congrArg (fun φ ↦ Pseudofunctor.DescentData.Hom.hom φ ⟨V, hV⟩) e.inv_hom_id,
         congrArg (fun φ ↦ Pseudofunctor.DescentData.Hom.hom φ ⟨V, hV⟩) e.hom_inv_id⟩) ?_)⟩
   intro V₁ V₂ Z h₁ h₂ a b
-  have hc := e.inv.comm Z.hom (i₁ := ⟨V₂, h₂⟩) (i₂ := ⟨V₁, h₁⟩) b.left a.left
-    (MorphismProperty.Over.w b) (MorphismProperty.Over.w a)
   have e1 := transitionAt_eq T V t (𝟙 Z.left) (i := ⟨V₂, h₂⟩) (j := ⟨V₁, h₁⟩) b a b.left a.left
     (by rw [MorphismProperty.Over.w a, MorphismProperty.Over.w b]) (Category.id_comp _)
     (Category.id_comp _)
@@ -336,29 +424,9 @@ theorem exists_etaleIsoTorsor_equiv :
         (by rw [MorphismProperty.Over.w a, MorphismProperty.Over.w b]) :=
     e1.symm
   erw [e2]
-  change smulMor _ _ ≫ (modulesPseudofunctor.presheafHom (Modules.unitObj X) M).map
-      ((toProEt X ⋙ ProEt.forget X).map a).op (e.inv.hom ⟨V₁, h₁⟩) =
-    (modulesPseudofunctor.presheafHom (Modules.unitObj X) M).map
-      ((toProEt X ⋙ ProEt.forget X).map b).op (e.inv.hom ⟨V₂, h₂⟩)
-  simp only [Pseudofunctor.presheafHom_map, TypeCat.ofHom_apply, Quiver.Hom.unop_op]
-  dsimp only [pullHom]
-  let G := toProEt X ⋙ ProEt.forget X
-  let mcB := modulesPseudofunctor.mapComp' (G.obj V₂).hom.op.toLoc (G.map b).left.op.toLoc
-    (G.obj Z).hom.op.toLoc (by
-      rw [← Quiver.Hom.comp_toLoc, ← op_comp, Over.w (G.map b)])
-  let mcA := modulesPseudofunctor.mapComp' (G.obj V₁).hom.op.toLoc (G.map a).left.op.toLoc
-    (G.obj Z).hom.op.toLoc (by
-      rw [← Quiver.Hom.comp_toLoc, ← op_comp, Over.w (G.map a)])
-  have key := comp_eq_of_comm ((Cat.Hom.toNatIso mcB).app (Modules.unitObj X))
-    ((Cat.Hom.toNatIso mcB).app M) ((Cat.Hom.toNatIso mcA).app (Modules.unitObj X))
-    ((Cat.Hom.toNatIso mcA).app M)
-    ((modulesPseudofunctor.map (G.map b).left.op.toLoc).toFunctor.map (e.inv.hom ⟨V₂, h₂⟩))
-    ((modulesPseudofunctor.map (G.map a).left.op.toLoc).toFunctor.map (e.inv.hom ⟨V₁, h₁⟩))
-    _ _ (smulMor_naturality ((Cat.Hom.toNatIso mcB).app (Modules.unitObj X)).hom
-      (transitionAt T V t (i₁ := ⟨V₂, h₂⟩) (i₂ := ⟨V₁, h₁⟩) b.left a.left
-        ((MorphismProperty.Over.w b).trans (MorphismProperty.Over.w a).symm))).symm hc
-  simp only [Iso.app_hom, Iso.app_inv, Cat.Hom.toNatIso_hom, Cat.Hom.toNatIso_inv, mcA,
-    mcB] at key
-  exact key.symm
+  simp only [etaleIsoTorsorVal_map_eq]
+  exact descentData_pullHom_comm T V t M e.inv Z.hom
+    (i₁ := ⟨V₂, h₂⟩) (i₂ := ⟨V₁, h₁⟩) b.left a.left
+    (MorphismProperty.Over.w b) (MorphismProperty.Over.w a)
 
 end AlgebraicGeometry.Scheme.Torsor
