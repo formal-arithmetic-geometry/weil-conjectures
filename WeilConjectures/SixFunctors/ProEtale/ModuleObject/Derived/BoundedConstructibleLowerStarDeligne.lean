@@ -31,7 +31,7 @@ for `Rf_*`, for each of the three `ℓ`-adic coefficient rings `ℚ̲̄_ℓ`, `E
 
 The derived lower shriek `Rf_! = i_! ⋙ Rp_*` on `Dᵇc` and the monoidal closed structure are in
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar`; as in
-the notes (`proposition-proper-direct-image-constructible-complexes`), the proper leg `Rp_*` of
+the notes (proper direct image of constructible complexes), the proper leg `Rp_*` of
 `Rf_!` is the proper-only functor
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStarOfIsProper`,
 not the general one of this file (route alignment, LEAN-EDIT-REQUEST U1a).
@@ -123,8 +123,8 @@ variable {X Y : Over (Spec (.of k))}
   (f : X ⟶ Y)
 
 omit [Fact (ringChar k).Prime] in
-/-- **Deligne's finiteness theorem** for `Rf_*` (blueprint `proposition-six-operations-dctf--5`;
-part of blueprint `sk-def-sfb-dc-restricted-functors`): for `ℓ` invertible in `k`, the
+/-- **Deligne's finiteness theorem** for `Rf_*` (the `Rf_*` clause of the six operations on
+`Dᵇc`): for `ℓ` invertible in `k`, the
 derived pushforward along a morphism of separated `k`-schemes of finite type carries bounded
 constructible complexes of `ℚ̄_ℓ`-sheaves to bounded constructible complexes (SGA 4½ [Th. finitude]
 for torsion coefficients; Bhatt–Scholze, Section 6.8, for `ℚ̲̄_ℓ`). It is false for a general

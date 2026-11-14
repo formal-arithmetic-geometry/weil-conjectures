@@ -86,7 +86,7 @@ The same statements for the proper-only functor `boundedConstructibleLowerStarOf
 is the general one restricted to proper morphisms (`boundedConstructibleLowerStarOfIsProper_eq`).
 -/
 
-/-- Blueprint `theorem-exceptional-inverse-image--15` for the proper-only functor
+/-- `Rg_*` is a left adjoint, for the proper-only functor
 `Rg_* : Dᵇc(Z)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧`. -/
 instance isLeftAdjoint_boundedConstructibleLowerStarOfIsProper_padicIntegersRingObj
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
@@ -95,7 +95,7 @@ instance isLeftAdjoint_boundedConstructibleLowerStarOfIsProper_padicIntegersRing
   rw [PadicIntegersRingObj.boundedConstructibleLowerStarOfIsProper_eq]
   infer_instance
 
-/-- Blueprint `theorem-exceptional-inverse-image--16` for the proper-only functor
+/-- `Rg_*` is a left adjoint, for the proper-only functor
 `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧`. -/
 instance isLeftAdjoint_boundedConstructibleLowerStarOfIsProper_continuousMapRingObj
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :
@@ -103,7 +103,7 @@ instance isLeftAdjoint_boundedConstructibleLowerStarOfIsProper_continuousMapRing
   rw [ContinuousMapRingObj.boundedConstructibleLowerStarOfIsProper_eq]
   infer_instance
 
-/-- Blueprint `theorem-exceptional-inverse-image--17` for the proper-only functor
+/-- `Rg_*` is a left adjoint, for the proper-only functor
 `Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧`. -/
 instance isLeftAdjoint_boundedConstructibleLowerStarOfIsProper_padicAlgClRingObj :
     (boundedConstructibleLowerStarOfIsProper ℓ g).IsLeftAdjoint := by

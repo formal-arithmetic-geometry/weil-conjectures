@@ -12,7 +12,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStar
 
 # The derived pushforward along a proper morphism on bounded constructible complexes
 
-Blueprint `proposition-proper-direct-image-constructible-complexes`: for a proper morphism
+The notes' proper direct image of constructible complexes: for a proper morphism
 `p : X ⟶ Y` of `k`-schemes of finite type, `ℓ` invertible in `k`, the derived pushforward `Rp_*`
 carries bounded constructible complexes to bounded constructible complexes, for each of the three
 `ℓ`-adic coefficient rings `ℚ̲̄_ℓ`, `E̲` and `𝒪̲_E`. The notes prove this (chapter 4) from integral
@@ -78,7 +78,7 @@ variable {X Y : Over (Spec (.of k))}
 
 omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [IsSeparated Y.hom] in
-/-- Blueprint `proposition-proper-direct-image-constructible-complexes`: for `p` proper, `Rp_*`
+/-- Proper direct image of constructible complexes: for `p` proper, `Rp_*`
 carries bounded constructible complexes of `ℚ̄_ℓ`-sheaves to bounded constructible complexes
 (the proper-only finiteness
 `boundedConstructible_rightDerivedLowerStar_of_isProper_padicAlgClRingObj_of_finiteType`). -/
@@ -163,7 +163,7 @@ variable {X Y : Over (Spec (.of k))}
 
 omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [IsSeparated Y.hom] in
-/-- Blueprint `proposition-proper-direct-image-constructible-complexes` (1): for `p` proper, `Rp_*`
+/-- Proper direct image of constructible complexes, clause (1): for `p` proper, `Rp_*`
 carries bounded constructible complexes of `E`-sheaves to bounded constructible complexes
 (the proper-only finiteness
 `boundedConstructible_rightDerivedLowerStar_of_isProper_continuousMapRingObj_of_finiteType`). -/
@@ -254,7 +254,7 @@ variable {X Y : Over (Spec (.of k))}
 
 omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [IsSeparated Y.hom] in
-/-- Blueprint `proposition-proper-direct-image-constructible-complexes` (1): for `p` proper, `Rp_*`
+/-- Proper direct image of constructible complexes, clause (1): for `p` proper, `Rp_*`
 carries bounded constructible complexes of `𝒪_E`-sheaves to bounded constructible complexes
 (the proper-only finiteness
 `boundedConstructible_rightDerivedLowerStar_of_isProper_padicIntegersRingObj_of_finiteType`). -/
