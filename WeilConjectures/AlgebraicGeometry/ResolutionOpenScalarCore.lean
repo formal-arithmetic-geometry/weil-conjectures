@@ -26,8 +26,9 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
 
-set_option maxHeartbeats 800000 in
--- Comparing the two exact homology calculations needs additional elaboration.
+private lemma moduleCat_smul_asHom_apply {R : Type u} [Ring R]
+    (M : ModuleCat.{u} R) (r : R) (x : M) : (M.smul r).asHom x = r • x := rfl
+
 /-- The fixed comparison intertwines the scalar endomorphisms.
 Source: Stacks Project, Tags 01E1 and 01E4.
 (blueprint: lem-pc-resolution-open-scalar-core).
@@ -59,18 +60,15 @@ theorem resolution_open_scalar_core {X T : Scheme.{u}}
   dsimp only
   intro n x
   let Y := (f ⁻¹ᵁ W).toScheme
-  let : CommRing (Y.ringCatSheaf.obj.obj (op ⊤)) :=
-    inferInstanceAs (CommRing Γ(Y, ⊤))
   let G := (restrictFunctor (f ⁻¹ᵁ W).ι).obj F
   let b := ((f.app W) ≫ (f ⁻¹ᵁ W).topIso.inv).hom a
   let K := ((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex
   let A := RingedSpace.globalSectionsComplex R.resolution
   let B := ((SheafOfModules.forget T.ringCatSheaf).mapHomologicalComplex (.up ℕ)).obj K
-  let Q := forget₂ (ModuleCat.{u} (Y.ringCatSheaf.obj.obj (op ⊤))) AddCommGrpCat.{u}
   let E := PresheafOfModules.toPresheaf T.ringCatSheaf.obj ⋙
     (evaluation T.Opensᵒᵖ AddCommGrpCat.{u}).obj (op W)
   let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (.up ℕ) q
-  let eA := (A.sc q).mapHomologyIso Q
+  let eA := (A.sc q).mapHomologyIso (forget₂ _ AddCommGrpCat.{u})
   let eB := (B.sc q).mapHomologyIso E
   let S := RingedSpace.openModuleSections Y.toRingedSpace ⊤
   let : S.Additive := RingedSpace.openModuleSections_additive Y.toRingedSpace ⊤
@@ -101,50 +99,35 @@ theorem resolution_open_scalar_core {X T : Scheme.{u}}
         f.app W ≫ (f ⁻¹ᵁ W).topIso.inv := by
       rw [← hb]
       simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
-    change (eA.inv ≫ raw) ((((Scheme.ΓSpecIso Γ(T, W)).inv ≫ h.appTop).hom
-      (a ^ n)) • y) = a ^ n • (show (sectionCohomologyPresheaf K q).obj (op W) from
-        (eA.inv ≫ raw) y) at hs
-    rw [hb', map_pow] at hs
-    exact hs
+    dsimp only at hs
+    dsimp only [h] at hb'
+    simp only [hb', map_pow] at hs
+    simpa only [eA, A, raw, H, eB, B, E, K, b, ConcreteCategory.comp_apply] using hs
   have hh (y : (H.obj ((S.mapHomologicalComplex (.up ℕ)).obj
       R.resolution.cocomplex))) :
       raw ((S.mapHomologicalComplex (.up ℕ) ⋙ H).map phi y) =
         a ^ n • (show (sectionCohomologyPresheaf K q).obj (op W) from raw y) := by
-    let GS := RingedSpace.globalSectionsFunctor Y.toRingedSpace
-    let : GS.Additive := RingedSpace.globalSectionsFunctor_additive Y.toRingedSpace
-    let phiA := (GS.mapHomologicalComplex (.up ℕ)).map phi
-    have hphiA : phiA = (show Y.ringCatSheaf.obj.obj (op ⊤) from b ^ n) • 𝟙 A := by
-      ext i z
-      exact smulHom_app_top_apply (R.resolution.cocomplex.X i) (b ^ n) z
-    have hphiH : (HomologicalComplex.homologyFunctor
-        (ModuleCat (Y.ringCatSheaf.obj.obj (op ⊤))) (.up ℕ) q).map phiA =
-        (show Y.ringCatSheaf.obj.obj (op ⊤) from b ^ n) • 𝟙 _ := by
-      rw [hphiA]
-      change ShortComplex.homologyMap _ = _
-      have hsc : (HomologicalComplex.shortComplexFunctor
-          (ModuleCat (Y.ringCatSheaf.obj.obj (op ⊤))) (.up ℕ) q).map
-          ((show Y.ringCatSheaf.obj.obj (op ⊤) from b ^ n) • 𝟙 A) =
-          (show Y.ringCatSheaf.obj.obj (op ⊤) from b ^ n) • 𝟙 (A.sc q) := by
-        ext <;> rfl
-      rw [hsc, ShortComplex.homologyMap_smul]
-      erw [ShortComplex.homologyMap_id]
-      rfl
-    have hhA := ShortComplex.mapHomologyIso_hom_naturality
-      ((HomologicalComplex.shortComplexFunctor _ (.up ℕ) q).map phiA) Q
-    change (S.mapHomologicalComplex (.up ℕ) ⋙ H).map phi ≫ eA.hom =
-      eA.hom ≫ Q.map
-        ((HomologicalComplex.homologyFunctor _ (.up ℕ) q).map phiA) at hhA
-    rw [hphiH] at hhA
-    have hy := ConcreteCategory.congr_hom hhA y
-    change eA.hom ((S.mapHomologicalComplex (.up ℕ) ⋙ H).map phi y) =
-      (b ^ n) • (show A.homology q from eA.hom y) at hy
+    have hphiSC :
+        (HomologicalComplex.shortComplexFunctor AddCommGrpCat.{u} (.up ℕ) q).map
+          ((S.mapHomologicalComplex (.up ℕ)).map phi) =
+        (A.sc q).mapNatTrans (ModuleCat.smulNatTrans _ (b ^ n)).asHom := by
+      apply ShortComplex.hom_ext <;> ext z <;>
+        exact smulHom_app_top_apply _ (b ^ n) z
+    have hphiH : (S.mapHomologicalComplex (.up ℕ) ⋙ H).map phi =
+        eA.hom ≫ ((A.homology q).smul (b ^ n)).asHom ≫ eA.inv := by
+      exact (congrArg (fun g ↦ ShortComplex.homologyMap g) hphiSC).trans
+        (ShortComplex.homologyMap_mapNatTrans (A.sc q)
+          (ModuleCat.smulNatTrans _ (b ^ n)).asHom)
+    have hy := ConcreteCategory.congr_hom hphiH y
+    simp only [ConcreteCategory.comp_apply] at hy
+    have hy' := hy.trans (congrArg eA.inv
+      (moduleCat_smul_asHom_apply (A.homology q) (b ^ n) (eA.hom y)))
     calc
       raw ((S.mapHomologicalComplex (.up ℕ) ⋙ H).map phi y) =
-          (eA.inv ≫ raw) (eA.hom ((S.mapHomologicalComplex (.up ℕ) ⋙ H).map phi y)) := by
-            simp
-            rfl
+          (eA.inv ≫ raw) ((b ^ n) • (show A.homology q from eA.hom y)) := by
+        exact congrArg raw hy'
       _ = a ^ n • (show (sectionCohomologyPresheaf K q).obj (op W) from
-          (eA.inv ≫ raw) (eA.hom y)) := by rw [hy, ht]
+          (eA.inv ≫ raw) (eA.hom y)) := ht _
       _ = a ^ n • (show (sectionCohomologyPresheaf K q).obj (op W) from raw y) := by
         simp
         rfl

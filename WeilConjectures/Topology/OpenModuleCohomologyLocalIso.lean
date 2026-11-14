@@ -24,8 +24,6 @@ universe u
 open CategoryTheory TopologicalSpace
 namespace AlgebraicGeometry.RingedSpace
 
-set_option maxHeartbeats 800000 in
--- Comparing the section functors unfolds two composed functors and their complex maps.
 /-- Open cohomology depends only on the restriction of a module morphism.
 Source: Stacks Project, Cohomology, Tag 01E1, restriction of injective resolutions.
 Proof: Choose injective resolutions of M and N and a comparison map lifting f.
@@ -92,7 +90,11 @@ theorem openModuleCohomology_map_isIso_of_overFunctor (X : RingedSpace.{u})
       rw [← NatIso.isIso_map_iff
         (HomotopyCategory.homologyFunctorFactors AddCommGrpCat (ComplexShape.up ℕ) p)]
       exact hi'
-    exact hT
+    -- Compare the section functors before passing to complexes and homology.
+    let e : R ⋙ T ≅ openModuleSections X U := Iso.refl _
+    exact (NatIso.isIso_map_iff (Functor.isoWhiskerRight
+      (Functor.mapHomologicalComplexCompIso e (ComplexShape.up ℕ))
+      (HomologicalComplex.homologyFunctor AddCommGrpCat (ComplexShape.up ℕ) p)) φ).mp hT
   have : IsIso (((openModuleSections X U).rightDerived p).map f ≫
       (J.isoRightDerivedObj (openModuleSections X U) p).hom) := by
     rw [hn']

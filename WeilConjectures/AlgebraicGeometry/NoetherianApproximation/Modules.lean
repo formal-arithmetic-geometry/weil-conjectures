@@ -58,6 +58,21 @@ lemma modulesPseudofunctor_pullHom_eq' {X₁ X₂ Y Y' : Scheme.{u}} {M₁ : X�
   rw [modulesPseudofunctor_pullHom_eq]
   simp [pullbackCompOfEq, pullbackCongr]
 
+private lemma pullHom_eq_pullHom_of_factorization {W₁ W₂ Z Z' Z'' : Scheme.{u}}
+    {N₁ : W₁.Modules} {N₂ : W₂.Modules} {f₁ : Z ⟶ W₁} {f₂ : Z ⟶ W₂}
+    {φ ψ : (modulesPseudofunctor.map f₁.op.toLoc).toFunctor.obj N₁ ⟶
+      (modulesPseudofunctor.map f₂.op.toLoc).toFunctor.obj N₂}
+    (g : Z' ⟶ Z) (g' : Z'' ⟶ Z') (g'' : Z'' ⟶ Z) (hcomp : g' ≫ g = g'')
+    (y₁ : Z'' ⟶ W₁) (y₂ : Z'' ⟶ W₂) (hy₁ : g'' ≫ f₁ = y₁) (hy₂ : g'' ≫ f₂ = y₂)
+    (h : pullHom φ g (g ≫ f₁) (g ≫ f₂) rfl rfl =
+      pullHom ψ g (g ≫ f₁) (g ≫ f₂) rfl rfl) :
+    pullHom φ g'' y₁ y₂ hy₁ hy₂ = pullHom ψ g'' y₁ y₂ hy₁ hy₂ := by
+  subst hcomp
+  have hy₁' : g' ≫ g ≫ f₁ = y₁ := by simpa only [Category.assoc] using hy₁
+  have hy₂' : g' ≫ g ≫ f₂ = y₂ := by simpa only [Category.assoc] using hy₂
+  rw [← pullHom_pullHom φ g (g ≫ f₁) (g ≫ f₂) g' y₁ y₂ rfl rfl hy₁' hy₂',
+    ← pullHom_pullHom ψ g (g ≫ f₁) (g ≫ f₂) g' y₁ y₂ rfl rfl hy₁' hy₂', h]
+
 section PullHom
 
 variable {J : Type u} [Category.{u} J] [IsCofiltered J] {E : J ⥤ Scheme.{u}} {c : Cone E}
@@ -131,6 +146,117 @@ theorem exists_pullHom_eq_pullHom_of_isLimit_of_isAffine' (hc : IsLimit c) {j : 
 
 end PullHom
 
+section PreimagePullGlue
+
+variable {S Z Z' : Scheme.{u}} {ι : Type u} (U : ι → S.Opens)
+  {g : Z ⟶ S} {g' : Z' ⟶ S} (r : Z' ⟶ Z) (hr : r ≫ g = g')
+  {W : ι → Scheme.{u}} {N : ∀ a, (W a).Modules}
+  {μ : ∀ a, (g ⁻¹ᵁ U a).toScheme ⟶ W a}
+  {μ' : ∀ a, (g' ⁻¹ᵁ U a).toScheme ⟶ W a}
+  (hμ : ∀ a, resTo r hr (le_refl (U a)) ≫ μ a = μ' a)
+  (H : ∀ a b,
+    (modulesPseudofunctor.map ((preimageChosenPullback U g a b).p₁ ≫ μ a).op.toLoc).toFunctor.obj
+        (N a) ⟶
+      (modulesPseudofunctor.map ((preimageChosenPullback U g a b).p₂ ≫ μ b).op.toLoc).toFunctor.obj
+        (N b))
+
+private lemma pullHom_glueSelfLHS_preimage (a : ι) :
+    pullHom (DescentData'.glueSelfLHS H (preimageDiag U g) (preimageDiag_p₁ U g)
+        (preimageDiag_p₂ U g) a) (resTo r hr (le_refl (U a))) (μ' a) (μ' a) (hμ a) (hμ a) =
+      DescentData'.glueSelfLHS
+        (DescentData'.pullGlue (H := H) (sq' := preimageChosenPullback U g')
+          (fun a b ↦ resTo r hr (le_refl (U a ⊓ U b))) (resTo_p₁ U r hr) (resTo_p₂ U r hr) hμ)
+        (preimageDiag U g') (preimageDiag_p₁ U g') (preimageDiag_p₂ U g') a :=
+  DescentData'.pullHom_glueSelfLHS (H := H) (sq' := preimageChosenPullback U g')
+    (fun a b ↦ resTo r hr (le_refl (U a ⊓ U b))) (resTo_p₁ U r hr) (resTo_p₂ U r hr) hμ
+    (preimageDiag U g') (preimageDiag_p₁ U g') (preimageDiag_p₂ U g')
+    (preimageDiag_resTo U r hr) a
+
+private lemma pullHom_glueCocLHS_preimage (a b d : ι) :
+    pullHom (DescentData'.glueCocLHS (preimageChosenPullback₃ U g) H a b d)
+        (resTo r hr (le_refl (U a ⊓ U b ⊓ U d)))
+        ((preimageChosenPullback₃ U g' a b d).p₁ ≫ μ' a)
+        ((preimageChosenPullback₃ U g' a b d).p₃ ≫ μ' d)
+        (by rw [reassoc_of% (resTo_p₁' U r hr a b d), hμ])
+        (by rw [reassoc_of% (resTo_p₃' U r hr a b d), hμ]) =
+      DescentData'.glueCocLHS (preimageChosenPullback₃ U g')
+        (DescentData'.pullGlue (H := H) (sq' := preimageChosenPullback U g')
+          (fun a b ↦ resTo r hr (le_refl (U a ⊓ U b))) (resTo_p₁ U r hr) (resTo_p₂ U r hr) hμ)
+        a b d :=
+  DescentData'.pullHom_glueCocLHS (H := H) (sq' := preimageChosenPullback U g')
+    (sq₃ := preimageChosenPullback₃ U g) (sq₃' := preimageChosenPullback₃ U g')
+    (r₂ := fun a b ↦ resTo r hr (le_refl (U a ⊓ U b)))
+    (hr₂₁ := resTo_p₁ U r hr) (hr₂₂ := resTo_p₂ U r hr) (hμ := hμ)
+    (r₃ := fun a b d ↦ resTo r hr (le_refl (U a ⊓ U b ⊓ U d)))
+    (h₁₂ := resTo_p₁₂ U r hr) (h₂₃ := resTo_p₂₃ U r hr)
+    (hr₃₁ := resTo_p₁' U r hr) (hr₃₂ := resTo_p₂' U r hr) (hr₃₃ := resTo_p₃' U r hr) a b d
+
+private lemma pullHom_glueCocRHS_preimage (a b d : ι) :
+    pullHom (DescentData'.glueCocRHS (preimageChosenPullback₃ U g) H a b d)
+        (resTo r hr (le_refl (U a ⊓ U b ⊓ U d)))
+        ((preimageChosenPullback₃ U g' a b d).p₁ ≫ μ' a)
+        ((preimageChosenPullback₃ U g' a b d).p₃ ≫ μ' d)
+        (by rw [reassoc_of% (resTo_p₁' U r hr a b d), hμ])
+        (by rw [reassoc_of% (resTo_p₃' U r hr a b d), hμ]) =
+      DescentData'.glueCocRHS (preimageChosenPullback₃ U g')
+        (DescentData'.pullGlue (H := H) (sq' := preimageChosenPullback U g')
+          (fun a b ↦ resTo r hr (le_refl (U a ⊓ U b))) (resTo_p₁ U r hr) (resTo_p₂ U r hr) hμ)
+        a b d :=
+  DescentData'.pullHom_glueCocRHS (H := H) (sq' := preimageChosenPullback U g')
+    (sq₃ := preimageChosenPullback₃ U g) (sq₃' := preimageChosenPullback₃ U g')
+    (r₂ := fun a b ↦ resTo r hr (le_refl (U a ⊓ U b)))
+    (hr₂₁ := resTo_p₁ U r hr) (hr₂₂ := resTo_p₂ U r hr) (hμ := hμ)
+    (r₃ := fun a b d ↦ resTo r hr (le_refl (U a ⊓ U b ⊓ U d)))
+    (h₁₃ := resTo_p₁₃ U r hr) (hr₃₁ := resTo_p₁' U r hr) (hr₃₃ := resTo_p₃' U r hr) a b d
+
+/-- Glue finite presentation modules and identify their pullback from compatible local
+isomorphisms. -/
+private lemma exists_isFinitePresentation_pullback_iso_of_glue (hU : ⨆ a, U a = ⊤)
+    (hN : ∀ a, (N a).IsFinitePresentation)
+    (hself : DescentData'.GlueSelf (H := H) (preimageDiag U g) (preimageDiag_p₁ U g)
+      (preimageDiag_p₂ U g))
+    (hcoc : DescentData'.GlueCocycle (preimageChosenPullback₃ U g) H)
+    (ℱ : Z'.Modules)
+    (ε : ∀ a, (modulesPseudofunctor.map (μ' a).op.toLoc).toFunctor.obj (N a) ≅
+      (modulesPseudofunctor.map (g' ⁻¹ᵁ U a).ι.op.toLoc).toFunctor.obj ℱ)
+    (hε : ∀ a b, pullHom (H a b) (resTo r hr (le_refl (U a ⊓ U b)))
+      ((preimageChosenPullback U g' a b).p₁ ≫ μ' a)
+      ((preimageChosenPullback U g' a b).p₂ ≫ μ' b)
+      (by rw [reassoc_of% (resTo_p₁ U r hr a b), hμ])
+      (by rw [reassoc_of% (resTo_p₂ U r hr a b), hμ]) =
+        DescentData'.isoGlueHom (preimageChosenPullback U g') ε a b) :
+    ∃ 𝒢 : Z.Modules, 𝒢.IsFinitePresentation ∧ Nonempty ((pullback r).obj 𝒢 ≅ ℱ) := by
+  have hsup : ⨆ a, (g ⁻¹ᵁ U a).ι.opensRange = ⊤ := by
+    simp only [Scheme.Opens.opensRange_ι, ← Scheme.Hom.preimage_iSup, hU,
+      Scheme.Hom.preimage_top]
+  have hsup' : ⨆ a, (g' ⁻¹ᵁ U a).ι.opensRange = ⊤ := by
+    simp only [Scheme.Opens.opensRange_ι, ← Scheme.Hom.preimage_iSup, hU,
+      Scheme.Hom.preimage_top]
+  obtain ⟨𝒢, -, ⟨e⟩⟩ := exists_isQuasicoherent_toDescentData_iso_of_mem_fpqcTopology
+    (fun a ↦ (g ⁻¹ᵁ U a).ι) (ofArrows_mem_fpqcTopology_of_isOpenImmersion _ hsup)
+    (DescentData'.ofGlue (preimageChosenPullback₃ U g) μ N H hself hcoc).descentData
+    (fun a ↦ by
+      have := hN a
+      change ((pullback (μ a)).obj (N a)).IsQuasicoherent
+      infer_instance)
+  have h𝒢 : (𝒢 : Z.Modules).IsFinitePresentation := by
+    refine isFinitePresentation_of_isOpenImmersion _ (fun a ↦ (g ⁻¹ᵁ U a).ι) hsup fun a ↦ ?_
+    have := hN a
+    have ea : (pullback (g ⁻¹ᵁ U a).ι).obj (𝒢 : Z.Modules) ≅ (pullback (μ a)).obj (N a) :=
+      { hom := e.hom.hom a
+        inv := e.inv.hom a
+        hom_inv_id := by rw [← DescentData.comp_hom, e.hom_inv_id]; rfl
+        inv_hom_id := by rw [← DescentData.comp_hom, e.inv_hom_id]; rfl }
+    exact isFinitePresentation_of_iso ea.symm
+  obtain ⟨φ⟩ := DescentData'.nonempty_map_iso_of_ofGlue e (preimageChosenPullback U g')
+    (fun M N ↦ bijective_toDescentData_map_of_isOpenImmersion _ hsup' M N) r
+    (fun a ↦ resTo r hr (le_refl (U a))) (fun a ↦ resTo_ι _ _ _)
+    (fun a b ↦ resTo r hr (le_refl (U a ⊓ U b)))
+    (resTo_p₁ U r hr) (resTo_p₂ U r hr) μ' hμ ℱ ε hε
+  exact ⟨𝒢, h𝒢, ⟨φ⟩⟩
+
+end PreimagePullGlue
+
 end Scheme.Modules
 
 section Stages
@@ -154,8 +280,6 @@ end Stages
 
 variable {I : Type u} [Category.{u} I] {D : I ⥤ Scheme.{u}} {c : Cone D}
 
-set_option maxHeartbeats 800000 in
--- The proof glues data over a finite affine open cover in a single declaration.
 open Scheme.Modules in
 /-- **Modules of finite presentation descend to a finite stage** (Stacks, Tag 01ZR). Let `{Dⱼ}`
 be a cofiltered system of quasi-compact separated schemes with affine transition morphisms and
@@ -274,12 +398,7 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
       (by
         rw [pullHom_congr_left _ (opensCone_π_app_eq_resTo D c (U a) k₁),
           pullHom_congr_left (𝟙 _) (opensCone_π_app_eq_resTo D c (U a) k₁),
-          DescentData'.pullHom_glueSelfLHS (H := H₁) (sq' := preimageChosenPullback U gL)
-            (fun a b ↦ resTo (c.π.app k₁.left) (c.w k₁.hom) (le_refl (U a ⊓ U b)))
-            (resTo_p₁ U (c.π.app k₁.left) (c.w k₁.hom))
-            (resTo_p₂ U (c.π.app k₁.left) (c.w k₁.hom)) hμL₁ (preimageDiag U gL)
-            (preimageDiag_p₁ U gL) (preimageDiag_p₂ U gL)
-            (preimageDiag_resTo U (c.π.app k₁.left) (c.w k₁.hom)), hA, hselfL a,
+          pullHom_glueSelfLHS_preimage U (c.π.app k₁.left) (c.w k₁.hom) hμL₁ H₁, hA, hselfL a,
           pullHom_id_eq_id])
   choose kS tS htS using h₅
   have h₅' (q : s × s × s) := by
@@ -299,28 +418,8 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
       (DescentData'.glueCocLHS (preimageChosenPullback₃ U g₁) H₁ q.1 q.2.1 q.2.2)
       (DescentData'.glueCocRHS (preimageChosenPullback₃ U g₁) H₁ q.1 q.2.1 q.2.2)
       (by
-        rw [DescentData'.pullHom_glueCocLHS (H := H₁) (sq' := preimageChosenPullback U gL)
-            (sq₃ := preimageChosenPullback₃ U g₁) (sq₃' := preimageChosenPullback₃ U gL)
-            (r₂ := fun a b ↦ resTo (c.π.app k₁.left) (c.w k₁.hom) (le_refl (U a ⊓ U b)))
-            (hr₂₁ := resTo_p₁ U (c.π.app k₁.left) (c.w k₁.hom))
-            (hr₂₂ := resTo_p₂ U (c.π.app k₁.left) (c.w k₁.hom)) (hμ := hμL₁)
-            (r₃ := fun a b d ↦
-              resTo (c.π.app k₁.left) (c.w k₁.hom) (le_refl (U a ⊓ U b ⊓ U d)))
-            (h₁₂ := resTo_p₁₂ U (c.π.app k₁.left) (c.w k₁.hom))
-            (h₂₃ := resTo_p₂₃ U (c.π.app k₁.left) (c.w k₁.hom))
-            (hr₃₁ := resTo_p₁' U (c.π.app k₁.left) (c.w k₁.hom))
-            (hr₃₂ := resTo_p₂' U (c.π.app k₁.left) (c.w k₁.hom))
-            (hr₃₃ := resTo_p₃' U (c.π.app k₁.left) (c.w k₁.hom)),
-          DescentData'.pullHom_glueCocRHS (H := H₁) (sq' := preimageChosenPullback U gL)
-            (sq₃ := preimageChosenPullback₃ U g₁) (sq₃' := preimageChosenPullback₃ U gL)
-            (r₂ := fun a b ↦ resTo (c.π.app k₁.left) (c.w k₁.hom) (le_refl (U a ⊓ U b)))
-            (hr₂₁ := resTo_p₁ U (c.π.app k₁.left) (c.w k₁.hom))
-            (hr₂₂ := resTo_p₂ U (c.π.app k₁.left) (c.w k₁.hom)) (hμ := hμL₁)
-            (r₃ := fun a b d ↦
-              resTo (c.π.app k₁.left) (c.w k₁.hom) (le_refl (U a ⊓ U b ⊓ U d)))
-            (h₁₃ := resTo_p₁₃ U (c.π.app k₁.left) (c.w k₁.hom))
-            (hr₃₁ := resTo_p₁' U (c.π.app k₁.left) (c.w k₁.hom))
-            (hr₃₃ := resTo_p₃' U (c.π.app k₁.left) (c.w k₁.hom)), hA]
+        rw [pullHom_glueCocLHS_preimage U (c.π.app k₁.left) (c.w k₁.hom) hμL₁ H₁,
+          pullHom_glueCocRHS_preimage U (c.π.app k₁.left) (c.w k₁.hom) hμL₁ H₁, hA]
         exact hcocL q.1 q.2.1 q.2.2)
   choose kC tC htC using h₅'
   -- Step 6: a common stage `k₂` below the `kS a` and the `kC q`, over `k₁`, where the identity
@@ -341,11 +440,7 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
     (resTo_p₂ U _ hv₂) hμ₂₁
   have hself₂ : DescentData'.GlueSelf (H := H₂) (preimageDiag U g₂) (preimageDiag_p₁ U g₂)
       (preimageDiag_p₂ U g₂) := fun a ↦ by
-    rw [← DescentData'.pullHom_glueSelfLHS (H := H₁) (sq' := preimageChosenPullback U g₂)
-      (d := preimageDiag U g₁) (hd₁ := preimageDiag_p₁ U g₁) (hd₂ := preimageDiag_p₂ U g₁)
-      (fun a b ↦ resTo (D.map v₂.left) hv₂ (le_refl (U a ⊓ U b))) (resTo_p₁ U _ hv₂)
-      (resTo_p₂ U _ hv₂) hμ₂₁ (preimageDiag U g₂) (preimageDiag_p₁ U g₂) (preimageDiag_p₂ U g₂)
-      (preimageDiag_resTo U (D.map v₂.left) hv₂)]
+    rw [← pullHom_glueSelfLHS_preimage U (D.map v₂.left) hv₂ hμ₂₁ H₁]
     have hres : resTo (D.map v₂.left) hv₂ (le_refl (U a)) =
         resTo (D.map (w₂ (.inl a)).left)
           (by rw [← D.map_comp, Over.w (w₂ (.inl a))]) (le_refl (U a)) ≫
@@ -353,12 +448,11 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
       rw [opensDiagram_map_eq_resTo]
       exact (resTo_resTo _ _ _ _ (by rw [← D.map_comp, ← Over.comp_left, ← hw₂ (.inl a)])
         _ _ _ _).symm
-    rw [pullHom_congr_left _ hres, ← pullHom_pullHom (g := (opensDiagram D i₀ (U a)).map (tS a))
-      (gf₁ := (opensDiagram D i₀ (U a)).map (tS a) ≫ μ₁ a)
-      (gf₂ := (opensDiagram D i₀ (U a)).map (tS a) ≫ μ₁ a) (hgf₁ := rfl) (hgf₂ := rfl)
-      (g'f₁ := μ₂ a) (g'f₂ := μ₂ a) (hg'f₁ := by rw [← Category.assoc, ← hres, hμ₂₁])
-      (hg'f₂ := by rw [← Category.assoc, ← hres, hμ₂₁]), htS a,
-      pullHom_pullHom, pullHom_id_eq_id]
+    calc
+      _ = pullHom (𝟙 _) (resTo (D.map v₂.left) hv₂ (le_refl (U a)))
+          (μ₂ a) (μ₂ a) (hμ₂₁ a) (hμ₂₁ a) :=
+        pullHom_eq_pullHom_of_factorization _ _ _ hres.symm _ _ _ _ (htS a)
+      _ = _ := pullHom_id_eq_id _ _ _
   have hcoc₂ : DescentData'.GlueCocycle (preimageChosenPullback₃ U g₂) H₂ := fun a b d ↦ by
     have hres : resTo (D.map v₂.left) hv₂ (le_refl (U a ⊓ U b ⊓ U d)) =
         resTo (D.map (w₂ (.inr (a, b, d))).left)
@@ -369,65 +463,10 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
         (by rw [← D.map_comp, ← Over.comp_left, ← hw₂ (.inr (a, b, d))]) _ _ _ _).symm
     have h := htC (a, b, d)
     dsimp only at h
-    rw [← DescentData'.pullHom_glueCocLHS (H := H₁) (sq' := preimageChosenPullback U g₂)
-        (sq₃ := preimageChosenPullback₃ U g₁) (sq₃' := preimageChosenPullback₃ U g₂)
-        (r₂ := fun a b ↦ resTo (D.map v₂.left) hv₂ (le_refl (U a ⊓ U b)))
-        (hr₂₁ := resTo_p₁ U _ hv₂) (hr₂₂ := resTo_p₂ U _ hv₂) (hμ := hμ₂₁)
-        (r₃ := fun a b d ↦ resTo (D.map v₂.left) hv₂ (le_refl (U a ⊓ U b ⊓ U d)))
-        (h₁₂ := resTo_p₁₂ U _ hv₂) (h₂₃ := resTo_p₂₃ U _ hv₂) (hr₃₁ := resTo_p₁' U _ hv₂)
-        (hr₃₂ := resTo_p₂' U _ hv₂) (hr₃₃ := resTo_p₃' U _ hv₂),
-      ← DescentData'.pullHom_glueCocRHS (H := H₁) (sq' := preimageChosenPullback U g₂)
-        (sq₃ := preimageChosenPullback₃ U g₁) (sq₃' := preimageChosenPullback₃ U g₂)
-        (r₂ := fun a b ↦ resTo (D.map v₂.left) hv₂ (le_refl (U a ⊓ U b)))
-        (hr₂₁ := resTo_p₁ U _ hv₂) (hr₂₂ := resTo_p₂ U _ hv₂) (hμ := hμ₂₁)
-        (r₃ := fun a b d ↦ resTo (D.map v₂.left) hv₂ (le_refl (U a ⊓ U b ⊓ U d)))
-        (h₁₃ := resTo_p₁₃ U _ hv₂) (hr₃₁ := resTo_p₁' U _ hv₂) (hr₃₃ := resTo_p₃' U _ hv₂),
-      pullHom_congr_left _ hres, pullHom_congr_left _ hres]
-    have hy₁ : resTo (D.map (w₂ (.inr (a, b, d))).left)
-        (by rw [← D.map_comp, Over.w (w₂ (.inr (a, b, d)))]) (le_refl (U a ⊓ U b ⊓ U d)) ≫
-        ((opensDiagram D i₀ (U a ⊓ U b ⊓ U d)).map (tC (a, b, d)) ≫
-          (preimageChosenPullback₃ U g₁ a b d).p₁ ≫ μ₁ a) =
-        (preimageChosenPullback₃ U g₂ a b d).p₁ ≫ μ₂ a := by
-      rw [← Category.assoc, ← hres, ← hμ₂₁, ← Category.assoc, ← Category.assoc,
-        resTo_p₁' U _ hv₂]
-    have hy₃ : resTo (D.map (w₂ (.inr (a, b, d))).left)
-        (by rw [← D.map_comp, Over.w (w₂ (.inr (a, b, d)))]) (le_refl (U a ⊓ U b ⊓ U d)) ≫
-        ((opensDiagram D i₀ (U a ⊓ U b ⊓ U d)).map (tC (a, b, d)) ≫
-          (preimageChosenPullback₃ U g₁ a b d).p₃ ≫ μ₁ d) =
-        (preimageChosenPullback₃ U g₂ a b d).p₃ ≫ μ₂ d := by
-      rw [← Category.assoc, ← hres, ← hμ₂₁, ← Category.assoc, ← Category.assoc,
-        resTo_p₃' U _ hv₂]
-    rw [← pullHom_pullHom (g := (opensDiagram D i₀ (U a ⊓ U b ⊓ U d)).map (tC (a, b, d)))
-        (hgf₁ := rfl) (hgf₂ := rfl) (hg'f₁ := hy₁) (hg'f₂ := hy₃),
-      ← pullHom_pullHom (g := (opensDiagram D i₀ (U a ⊓ U b ⊓ U d)).map (tC (a, b, d)))
-        (hgf₁ := rfl) (hgf₂ := rfl) (hg'f₁ := hy₁) (hg'f₂ := hy₃), h]
-  -- Step 7: the descent datum at `k₂` is effective.
-  have hsup₂ : ⨆ a : s, (g₂ ⁻¹ᵁ U a).ι.opensRange = ⊤ := by
-    simp only [Scheme.Opens.opensRange_ι, ← Scheme.Hom.preimage_iSup, hUtop,
-      Scheme.Hom.preimage_top]
-  have hsupL : ⨆ a : s, (gL ⁻¹ᵁ U a).ι.opensRange = ⊤ := by
-    simp only [Scheme.Opens.opensRange_ι, ← Scheme.Hom.preimage_iSup, hUtop,
-      Scheme.Hom.preimage_top]
-  obtain ⟨𝒢, -, ⟨e₂⟩⟩ := exists_isQuasicoherent_toDescentData_iso_of_mem_fpqcTopology
-    (fun a : s ↦ (g₂ ⁻¹ᵁ U a).ι) (ofArrows_mem_fpqcTopology_of_isOpenImmersion _ hsup₂)
-    (DescentData'.ofGlue (preimageChosenPullback₃ U g₂) μ₂ N H₂ hself₂ hcoc₂).descentData
-    (fun a ↦ by
-      have := hN a
-      change ((Modules.pullback (μ₂ a)).obj (N a)).IsQuasicoherent
-      infer_instance)
-  -- Step 8: the glued module is of finite presentation.
-  have h𝒢 : (𝒢 : (D.obj k₂.left).Modules).IsFinitePresentation := by
-    refine isFinitePresentation_of_isOpenImmersion _ (fun a : s ↦ (g₂ ⁻¹ᵁ U a).ι) hsup₂
-      fun a ↦ ?_
-    have := hN a
-    have e₂a : (Modules.pullback (g₂ ⁻¹ᵁ U a).ι).obj (𝒢 : (D.obj k₂.left).Modules) ≅
-        (Modules.pullback (μ₂ a)).obj (N a) :=
-      { hom := e₂.hom.hom a
-        inv := e₂.inv.hom a
-        hom_inv_id := by rw [← DescentData.comp_hom, e₂.hom_inv_id]; rfl
-        inv_hom_id := by rw [← DescentData.comp_hom, e₂.inv_hom_id]; rfl }
-    exact isFinitePresentation_of_iso e₂a.symm
-  -- Step 9: the pullback of the glued module to the limit is `ℱ`.
+    rw [← pullHom_glueCocLHS_preimage U (D.map v₂.left) hv₂ hμ₂₁ H₁,
+      ← pullHom_glueCocRHS_preimage U (D.map v₂.left) hv₂ hμ₂₁ H₁]
+    exact pullHom_eq_pullHom_of_factorization _ _ _ hres.symm _ _ _ _ h
+  -- The descended gluing data are effective and recover `ℱ` after pullback.
   have hμL₂ (a : s) : resTo (c.π.app k₂.left) (c.w k₂.hom) (le_refl (U a)) ≫ μ₂ a = μL a :=
     resTo_resTo _ _ _ _ (c.w _) _ _ _ _
   have hε (a b : s) : pullHom (H₂ a b)
@@ -439,11 +478,8 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
     refine Eq.trans ?_ h
     simp only [H₂, DescentData'.pullGlue, pullHom_pullHom]
     exact pullHom_congr_left _ (resTo_resTo _ _ _ _ (c.w v₂.left) _ _ _ _) _ _ _ _
-  obtain ⟨φ⟩ := DescentData'.nonempty_map_iso_of_ofGlue e₂ (preimageChosenPullback U gL)
-    (fun M N ↦ bijective_toDescentData_map_of_isOpenImmersion _ hsupL M N) (c.π.app k₂.left)
-    (fun a ↦ resTo (c.π.app k₂.left) (c.w k₂.hom) (le_refl (U a))) (fun a ↦ resTo_ι _ _ _)
-    (fun a b ↦ resTo (c.π.app k₂.left) (c.w k₂.hom) (le_refl (U a ⊓ U b)))
-    (resTo_p₁ U _ (c.w k₂.hom)) (resTo_p₂ U _ (c.w k₂.hom)) μL hμL₂ ℱ ε hε
-  exact ⟨k₂.left, 𝒢, h𝒢, ⟨φ⟩⟩
+  obtain ⟨𝒢, h𝒢, e𝒢⟩ := exists_isFinitePresentation_pullback_iso_of_glue U
+    (c.π.app k₂.left) (c.w k₂.hom) hμL₂ H₂ hUtop hN hself₂ hcoc₂ ℱ ε hε
+  exact ⟨k₂.left, 𝒢, h𝒢, e𝒢⟩
 
 end AlgebraicGeometry
