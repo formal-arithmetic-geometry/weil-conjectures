@@ -112,7 +112,8 @@ lemma boundedConstructibleLowerStarOfIsProper_eq :
   rfl
 
 /-- The derived adjunction `Lp^* ⊣ Rp_*` on bounded constructible complexes for `p` proper
-(`ℚ̄_ℓ`-coefficient): the restriction of `ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction`
+(`ℚ̄_ℓ`-coefficient): the restriction of
+`ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction`
 along the fully faithful inclusions. -/
 noncomputable def boundedConstructibleUpperStarLowerStarAdjunctionOfIsProper :
     boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p ⊣
