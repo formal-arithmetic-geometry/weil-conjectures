@@ -25,7 +25,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
 /-- The specified compact-support compositor transports to the ordinary compositor.
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, proper comparison in the first triangle;
-Stacks Tags 07A7 and 0D6E (auxiliary; not a blueprint node).
+Stacks Tags 07A7 and 0D6E (blueprint `proposition-forgetting-supports-composition--3`).
 
 Proof: unfold properRouteCompIso and substitute h=p;f.
 Expand rightDerivedLowerShriekCompIso into the compactification of f, the

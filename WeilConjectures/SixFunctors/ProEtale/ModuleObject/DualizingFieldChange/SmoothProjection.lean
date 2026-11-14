@@ -66,7 +66,7 @@ morphism of points, every complex on a point being dualizable
 `πZ^* Rf^! N ≅ πZ^* (f^* N ⊗ ℚ̄_ℓ(d)[2d]) ≅ f'^* πP^* N ⊗ ℚ̄_ℓ(d)[2d] ≅ Rf'^! πP^* N`
 (`ProEtale.CondensedRing.upperShriekBaseChangeIsoOfSmooth`), by the purity tensor maps
 (`ProEtale.CondensedRing.isIso_upperShriekUnitTensorMap_of_smooth`), smooth purity
-(`ProEtale.CondensedRing.isIso_smoothPurityMap`, a sorried input of the smooth purity section) and
+(`ProEtale.CondensedRing.isIso_smoothPurityMap`, from the smooth purity section) and
 the pullback of the Tate twists.
 
 -/

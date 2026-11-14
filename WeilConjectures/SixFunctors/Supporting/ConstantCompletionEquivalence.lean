@@ -275,7 +275,7 @@ Mathlib's standard derived category. The extra names only specify the canonical 
 strict towers and representative normalizations in this node; they introduce no replacement
 
 The declarations live in the modules `Sheaf.Paper.ConstantCompletion*` imported above (split
-on 2026-10-27 so that each sorried theorem has its own module); this module re-exports them.
+on 2026-10-27 so that each theorem has its own module); this module re-exports them.
 Their private helpers are reached with `import all` of the part that defines them
 (`Sheaf.Paper.ConstantCompletionCore`, `...InverseImage`, `...DerivedPull`, `...FinitePull`).
 -/

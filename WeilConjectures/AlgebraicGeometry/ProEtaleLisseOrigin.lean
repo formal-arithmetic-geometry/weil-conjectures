@@ -69,7 +69,7 @@ noncomputable def IsLisseProEtaleFixedModuleSheaf (X : Scheme.{u})
 /-- Inverse image preserves lisse module sheaves, and every lisse pro-etale module sheaf
 is isomorphic to the inverse image of a lisse etale module sheaf.
 Source: Stacks Project, Tag 099Y, lemma-compare-locally-constant; Bhatt--Scholze,
-Corollary 5.1.5 (auxiliary; not a blueprint node).
+Corollary 5.1.5 (blueprint `proposition-locally-constant-sheaves-finite-presentation--3`).
 
 Proof:
 1. Choose finite etale constant models using finite_locally_constant_module_values_iff.

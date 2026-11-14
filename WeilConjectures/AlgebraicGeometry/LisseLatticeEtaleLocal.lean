@@ -33,7 +33,7 @@ functor from module sheaves is fully faithful. Finite local freeness allows vari
 ranks and rank zero. The empty scheme permits the empty etale covering.
 
 Source: Bhatt--Scholze, Proposition 6.8.4(6), Definition 6.8.3
-(auxiliary; not a blueprint node).
+(blueprint `lemma-lattices-lisse-e-sheaves--2`).
 
 Proof plan:
 1. Apply `lemma-lattices-lisse-e-sheaves--2` to the isomorphism classes of

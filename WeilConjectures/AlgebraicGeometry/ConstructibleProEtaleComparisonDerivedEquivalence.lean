@@ -25,7 +25,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 namespace AlgebraicGeometry.ProEtale
 /-- Restrict derived comparison to bounded constructible objects.
 Source: blueprint constructible-comparison-equivalence, part (2), Stacks Tag 09AL
-(auxiliary; not a blueprint node).
+(blueprint `theorem-comparison-constructible-sheaves--3`).
 
 Proof: the cohomology comparison and the module constructibility test show that
 derived inverse image preserves constructible cohomology. Its zero preservation

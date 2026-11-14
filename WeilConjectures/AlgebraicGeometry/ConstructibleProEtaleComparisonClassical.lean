@@ -22,7 +22,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 /-- An affine-locally constructible module has invertible continuity maps on a qcqs scheme.
 Source: blueprint constructible-comparison-classical, Stacks Tags 09AJ and 09AK
-(auxiliary; not a blueprint node).
+(blueprint `theorem-comparison-constructible-sheaves--1`).
 
 Proof: choose an affine neighborhood of each point and its constructibility
 stratification, regarding every finite-presentation model as a finite model.

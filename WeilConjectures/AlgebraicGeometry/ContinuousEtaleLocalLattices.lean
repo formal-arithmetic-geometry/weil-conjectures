@@ -97,7 +97,7 @@ private theorem exists_finite_affine_etale_cover_with_property
 
 /-- Integral lattices exist on a quasi-compact quasi-separated etale cover.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), and the first paragraph of Lemma 6.8.13.
-(auxiliary; not a blueprint node)
+(blueprint `lemma-lattices-lisse-e-sheaves--2`)
 
 Proof in words. Apply continuousLisse_affine_etale_lattice at every point x of X.
 It encodes the rational module explicitly, applies the existing sectionwise

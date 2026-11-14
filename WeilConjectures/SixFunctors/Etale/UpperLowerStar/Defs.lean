@@ -82,7 +82,7 @@ Its left adjoint `g^*` is the left Kan extension on presheaves followed by sheaf
   of base change both hold for every Grothendieck abelian `A`, so `Etale.upperStar` and the
   adjunction `g^* ⊣ g_*` carry no hypotheses either. Sheafification is
   `CategoryTheory.GrothendieckTopology.hasSheafify_smallEtaleTopology` of
-  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, still sorried through
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, provided through
   `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall` there, and it does
   use essential smallness of the site. The Kan extensions are proved and use no smallness
   of the site at all, only of the indexing comma categories, see
@@ -232,7 +232,7 @@ namespace Etale
 `CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize` of
 `WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise`, and the sheafification by
 `CategoryTheory.GrothendieckTopology.hasSheafify_smallEtaleTopology` of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, which is still sorried
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, which is proved
 through `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall`. For `g` étale
 the Kan extension hypothesis is automatic by
 `Etale.hasPointwiseLeftKanExtension_op_overPullback`, and `g^*` is computed by restriction,

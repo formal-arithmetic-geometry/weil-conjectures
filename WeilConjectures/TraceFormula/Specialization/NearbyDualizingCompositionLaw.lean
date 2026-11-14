@@ -30,7 +30,7 @@ generic base `(η, ℙ¹_η, 𝟙)` (`NearbyCyclesModel.projectiveLineModel`,
 model with a proper morphism of models to `ℙ¹_S` is determined by that of `ℙ¹_S`
 (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.θ_eq_of_projectiveLine`).
 
-The invertibility of the proper exchange rests on the sorried
+The invertibility of the proper exchange rests on
 `NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper` (proper base change for nearby
 cycles, blueprint `prose-E-03` (2)).
 

@@ -96,7 +96,7 @@ theorem isIso_fixedComparisonDirectImageMatePlus (Î› : Type (u + 1)) [CommRing Î
 /-- The specified counit-mate normalization. It also characterizes the named component
 as the adjoint transpose of the pulled-back etale counit after inverse pullback comparison.
 Source: Stacks Tag 0B65; blueprint comparison-direct-image proof, first paragraph
-(auxiliary; not a blueprint node).
+(blueprint `lemma-comparison-direct-images-compatibilities`).
 
 Proof: the iterated-mate identity identifies the underived direct-image comparison
 as the mate of the specified pullback comparison. On bounded-below homotopy categories,

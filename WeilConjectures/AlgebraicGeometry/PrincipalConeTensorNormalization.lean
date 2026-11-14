@@ -288,7 +288,7 @@ specified tensor unit and the signed shift. No change of coefficient category is
 
 Source: blueprint derived Nakayama resolution, On X paragraph, and first reduction,
 Cones paragraph; original normalization proof steps 1, 3 and 4.
-(auxiliary; not a blueprint node).
+(blueprint `lemma-reduction-derived-nakayama--1`).
 
 Proof: equality on profinite sections identifies d with the specified uniformizer.
 The exact coefficient sequence gives the augmentation from its two-term free

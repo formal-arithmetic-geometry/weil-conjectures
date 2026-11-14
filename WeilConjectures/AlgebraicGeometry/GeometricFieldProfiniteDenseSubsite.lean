@@ -479,7 +479,7 @@ private theorem testCoverPreserving (K : Type u) [Field K] :
 separably closed field.
 
 Source: Bhatt--Scholze, Examples 4.1.10 and 4.2.11; Stacks Tags 092Q, 096D, 096T
-(auxiliary; not a blueprint node).
+(blueprint `proposition-pro-etale-site-separably-closed--1`).
 
 Proof: Locally constant functions commute with extension of scalars from the integers,
 as follows by evaluating a ring map at each prime localization and using characteristic

@@ -31,7 +31,7 @@ set_option backward.isDefEq.respectTransparency false
 /-- Lattice classes form a locally constant, locally inhabited sheaf, and every
 section has a representative lattice on the localized pro-etale site.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), construction of the lattice sheaf.
-(auxiliary; not a blueprint node)
+(blueprint `lemma-lattices-lisse-e-sheaves--1`)
 
 Proof: identify the spectral-norm coefficient field with its `WithAbs` presentation
 and transport the module along the continuous coefficient-ring isomorphism. Apply

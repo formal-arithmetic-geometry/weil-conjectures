@@ -45,8 +45,8 @@ every `t ≠ 0` of `ℚ̄_ℓ`, which is the identity of rational functions over
   alternating product of polynomials whose roots are exchanged by `z ↦ (c z)⁻¹`.
 - `AlgebraicGeometry.Scheme.functional_equation_frobeniusCharpolyRev`: the functional equation in
   terms of the Frobenius on the cohomology (blueprint `corollary-functional-equation`), with the
-  duality inputs as hypotheses: the library's Poincaré duality
-  (`AlgebraicGeometry.WeilSheaf.poincareDuality`) is not yet sorry-free.
+  duality inputs as hypotheses, supplied by the library's Poincaré duality
+  (`AlgebraicGeometry.WeilSheaf.poincareDuality`, sorry-free).
 -/
 
 @[expose] public section

@@ -139,7 +139,7 @@ private lemma free_pullback_comp_iff {X Y Z : Scheme.{u}} (f : Z ‚ü∂ Y) (g : Y ‚
 
 /-- Local finite presentations over continuous field coefficients are locally finite free.
 Source: Hemo--Richarz--Scholbach, Example 3.1, with the agent rank/descent argument
-(auxiliary; not a blueprint node).
+(blueprint `lemma-constructible-sheaves--8`).
 Proof: use the preceding continuous-function realization. Pull a finite presentation to a
 geometric point; inverse image and evaluation preserve cokernels, and covers of a geometric
 point split. Its dimension is independent of the algebraically closed representative.

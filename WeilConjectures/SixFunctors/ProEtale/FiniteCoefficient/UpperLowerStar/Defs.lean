@@ -89,7 +89,7 @@ by sheafification.
   `ProEtale.upperStar` and the adjunction `g^* ⊣ g_*` carry no hypotheses either.
   Sheafification is
   `CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology` of
-  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, still sorried through
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, provided through
   `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall` there, and it does
   use essential smallness of the site. The Kan extensions are proved and use no smallness
   of the site at all, only of the indexing comma categories, see
@@ -216,7 +216,7 @@ to `ProEtale.lowerStar`. The Kan extensions are provided by
 `CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize` of
 `WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise`, and the sheafification by
 `CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology` of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, which is still sorried
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, which is proved
 through `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall`. For `g`
 weakly étale the Kan extension hypothesis is automatic by
 `ProEtale.hasPointwiseLeftKanExtension_op_overPullback`, and `g^*` is computed by

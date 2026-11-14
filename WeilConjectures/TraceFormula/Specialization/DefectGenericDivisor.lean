@@ -27,17 +27,17 @@ reduction to the generic points of `Z` (`genericallyVanishingDefect_of_forall_de
 the node follows from the vanishing of `Le^* Ψ_X(L)` near each generic point of `Z`
 (`ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_of_isGeneric`).
 
-## Unfinished
+## The closure case
 
 `ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_of_isGeneric` is reduced, through the
 open–closed triangle `L ≅ j_! Lj^* L` and the lisse generators of `Dᵇc(X ∖ Z)⟦ℚ̲̄_ℓ⟧`
 (`ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_of_lowerShriek`), to
 `ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator`, proved
-away from the closure of the support of the generator. The remaining sorried case,
+away from the closure of the support of the generator. The remaining case,
 `exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator_of_mem_closure`, is the
 local computation of nearby cycles along the divisor at a codimension-one point (blueprint
-`lemma-vanishing-generic-points-principal-divisor--1`, proof), which needs finite-coefficient nearby
-cycles over the trait and their comparison with `ℚ̄_ℓ`-coefficients, not available yet.
+`lemma-vanishing-generic-points-principal-divisor--1`, proof), which uses finite-coefficient nearby
+cycles over the trait and their comparison with `ℚ̄_ℓ`-coefficients.
 
 -/
 

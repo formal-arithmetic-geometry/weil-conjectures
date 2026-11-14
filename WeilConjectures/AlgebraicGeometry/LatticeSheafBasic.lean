@@ -59,8 +59,7 @@ def latticeScalarMap {X : Scheme.{u}}
 
 /-- A lattice pair, including the rationalization isomorphism, over a slice object.
 Finite local freeness allows varying ranks and the zero module.
-Source: Bhatt--Scholze, Proposition 6.8.4(6)
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.8.4(6) (blueprint `definition-lattice--1`). -/
 structure IntegralLatticePair {X : Scheme.{u}}
     {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S)
     (L : SheafOfModules.{u + 1}

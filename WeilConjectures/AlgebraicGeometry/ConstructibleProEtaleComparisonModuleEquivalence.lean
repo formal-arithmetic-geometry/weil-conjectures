@@ -19,7 +19,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 /-- Restrict canonical inverse image to the constructible module subcategories.
 Source: blueprint constructible-comparison-equivalence, part (1), Stacks Tag 09AK
-(auxiliary; not a blueprint node).
+(blueprint `theorem-comparison-constructible-sheaves--2`).
 
 Proof: the constructibility test lifts the canonical inverse image to the two full
 subcategories. Ambient full faithfulness gives fullness and faithfulness there.

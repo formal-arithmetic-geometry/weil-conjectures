@@ -68,7 +68,7 @@ private theorem continuousLisse_stratified_lattices_of_system
 
 /-- A locally finite free rational sheaf admits locally free integral lattices after a finite
 stratification. Source: Bhatt--Scholze, Lemma 6.8.13, first paragraph.
-(auxiliary; not a blueprint node)
+(blueprint `lemma-lattices-after-finite-stratification--1`)
 
 Proof in words. Proposition 6.8.4(6) supplies integral lattices on an etale cover.
 Refine its members by affine opens and take a finite subcover, possible because the
