@@ -27,7 +27,7 @@ intersection and imposes no derived-completeness condition.
 
 set_option autoImplicit false
 
-universe u v
+universe u v w
 
 open CategoryTheory CategoryTheory.Limits
 
@@ -97,6 +97,106 @@ theorem localizingClosure_eq_objectProperty (S : ObjectProperty C) :
     exact hK P hSP ((isLocalizingSubcategory_iff_isLocalizing P).1 hP)
 
 end Identification
+
+section LargeCoproducts
+
+variable {C : Type u} [Category.{v, u} C] [Preadditive C]
+
+/-- The nonzero summands of an existing direct sum inject into the endomorphisms of its vertex
+(the composite of the projection onto a summand and its inclusion): their index set is `v`-small,
+`v` the universe of the morphisms. -/
+theorem coproduct_small_support {I : Type w} (K : I → C) (c : Cofan K) (hc : IsColimit c) :
+    Small.{v} {i // ¬ IsZero (K i)} := by
+  classical
+  let p (i : I) : c.pt ⟶ K i := hc.desc (Cofan.mk (K i) (Pi.single i (𝟙 (K i))))
+  have hp (i j : I) : c.inj j ≫ p i =
+      Pi.single (M := fun j ↦ K j ⟶ K i) i (𝟙 (K i)) j :=
+    hc.fac (Cofan.mk (K i) (Pi.single i (𝟙 (K i)))) (Discrete.mk j)
+  apply small_of_injective.{v} (β := c.pt ⟶ c.pt)
+    (f := fun i : {i // ¬ IsZero (K i)} ↦ p i.val ≫ c.inj i.val)
+  intro i j hij
+  apply Subtype.ext
+  by_contra hne
+  have he := congrArg (fun f ↦ c.inj i.val ≫ f ≫ p i.val) hij
+  have hi : c.inj i.val ≫ p i.val = 𝟙 (K i.val) := by simp [hp]
+  have hj : c.inj i.val ≫ p j.val = 0 := by simp [hp, hne]
+  have hid : 𝟙 (K i.val) = 0 := by
+    simpa only [← Category.assoc, hi, hj, Category.id_comp, zero_comp] using he
+  exact i.property ((IsZero.iff_id_eq_zero _).mpr hid)
+
+/-- A property closed under isomorphisms and under the `v`-small direct sums that exist is closed
+under every direct sum that exists, whatever the universe of its index: an existing direct sum
+has `v`-small nonzero support (`coproduct_small_support`) and is the direct sum of its nonzero
+summands. -/
+theorem ObjectProperty.isClosedUnderColimitsOfShape_discrete_of_small
+    (P : ObjectProperty C) [P.IsClosedUnderIsomorphisms]
+    (hsmall : ∀ I : Type v, P.IsClosedUnderColimitsOfShape (Discrete I))
+    (I : Type w) : P.IsClosedUnderColimitsOfShape (Discrete I) := by
+  classical
+  apply ObjectProperty.IsClosedUnderColimitsOfShape.mk'
+  rintro _ ⟨F, hF⟩
+  let K : I → C := fun i ↦ F.obj ⟨i⟩
+  let c : Cofan K := Cofan.mk (colimit F) (fun i ↦ colimit.ι F ⟨i⟩)
+  have hc : IsColimit c := by
+    let e : Discrete.functor K ≅ F := Discrete.natIso (fun _ ↦ Iso.refl _)
+    apply IsColimit.ofIsoColimit
+      ((IsColimit.precomposeHomEquiv e (colimit.cocone F)).symm (colimit.isColimit F))
+    exact Cocone.ext (Iso.refl _) (fun i ↦ by simp [e, c])
+  have : Small.{v} {i // ¬ IsZero (K i)} := coproduct_small_support K c hc
+  let J := {i // ¬ IsZero (K i)}
+  let r : Cofan (fun i : J ↦ K i.val) := Cofan.mk c.pt (fun i ↦ c.inj i.val)
+  have hr : IsColimit r := by
+    refine Cofan.IsColimit.mk r (fun s ↦ hc.desc (Cofan.mk s.pt
+      (fun i ↦ if hi : ¬ IsZero (K i) then s.inj ⟨i, hi⟩ else 0))) ?_ ?_
+    · intro s i
+      obtain ⟨i, hi⟩ := i
+      change c.ι.app ⟨i⟩ ≫ _ = _
+      rw [hc.fac]
+      simp only [Cofan.mk_ι_app, dite_eq_left hi]
+    · intro s m hm
+      apply hc.hom_ext
+      intro ⟨i⟩
+      rw [hc.fac]
+      by_cases hi : ¬ IsZero (K i)
+      · simpa only [r, cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dite_eq_left hi]
+          using hm ⟨i, hi⟩
+      · exact (not_not.mp hi).eq_of_src _ _
+  let : P.IsClosedUnderColimitsOfShape (Discrete (Shrink.{v} J)) := hsmall _
+  let : P.IsClosedUnderColimitsOfShape (Discrete J) :=
+    ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
+      (Discrete.equivalence (equivShrink J)).symm
+  exact P.prop_of_isColimit (J := Discrete J) hr (fun i ↦ hF ⟨i.as.val⟩)
+
+end LargeCoproducts
+
+section AnyIndex
+
+variable {C : Type u} [Category.{v, u} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+  [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+
+/-- A localizing subcategory is closed under every direct sum that exists, whatever the universe
+of the index: its clause only asks for the `v`-small ones, and an existing direct sum has
+`v`-small nonzero support (`ObjectProperty.isClosedUnderColimitsOfShape_discrete_of_small`). -/
+theorem IsLocalizingSubcategory.isClosedUnderColimitsOfShape_discrete {P : ObjectProperty C}
+    (hP : IsLocalizingSubcategory P) (I : Type w) :
+    P.IsClosedUnderColimitsOfShape (Discrete I) := by
+  have := hP.2.1
+  refine ObjectProperty.isClosedUnderColimitsOfShape_discrete_of_small P (fun J ↦ ?_) I
+  apply ObjectProperty.IsClosedUnderColimitsOfShape.mk'
+  rintro _ ⟨F, hF⟩
+  exact hP.2.2 F inferInstance fun i ↦ hF ⟨i⟩
+
+/-- The direct-sum clause of `IsLocalizingSubcategory` for an index of any universe. -/
+theorem IsLocalizingSubcategory.prop_colimit {P : ObjectProperty C}
+    (hP : IsLocalizingSubcategory P) {I : Type w} (F : Discrete I ⥤ C) (hF : HasColimit F)
+    (h : ∀ i : I, P (F.obj (Discrete.mk i))) :
+    let _ := hF
+    P (colimit F) := by
+  have := hP.isClosedUnderColimitsOfShape_discrete I
+  letI := hF
+  exact P.prop_colimit F fun j ↦ h j.as
+
+end AnyIndex
 
 end CategoryTheory
 

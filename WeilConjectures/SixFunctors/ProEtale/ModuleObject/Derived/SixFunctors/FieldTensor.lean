@@ -48,7 +48,7 @@ private theorem localizing_inverseImage
   refine ⟨inferInstance, inferInstance, ?_⟩
   intro I G hG h
   let := hG
-  have hcol : P (colimit (G ⋙ F)) := hP.2.2 (G ⋙ F) inferInstance h
+  have hcol : P (colimit (G ⋙ F)) := hP.prop_colimit (G ⋙ F) inferInstance h
   exact P.prop_of_iso (preservesColimitIso F G).symm hcol
 
 private theorem localizing_tensor_closed

@@ -176,7 +176,7 @@ private theorem inverseImage_localizing
   have : PreservesColimitsOfShape (Discrete I) F :=
     F.asEquivalence.toAdjunction.leftAdjoint_preservesColimits.preservesColimitsOfShape
   have : HasColimit (D ⋙ F) := Adjunction.hasColimit_comp_equivalence D F
-  have hcol : P (colimit (D ⋙ F)) := hP.2.2 (I := I) (D ⋙ F) inferInstance hobj
+  have hcol : P (colimit (D ⋙ F)) := hP.prop_colimit (I := I) (D ⋙ F) inferInstance hobj
   exact P.prop_of_iso (preservesColimitIso F D).symm hcol
 
 -- Keep the open adjunction's large normalization clause outside the chart calculation.

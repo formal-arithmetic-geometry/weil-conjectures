@@ -204,7 +204,7 @@ private theorem localizingClosure_map
     let G' := L.lift G (fun i ↦ (h i.as).1)
     have : PreservesColimit G F := hF I G'
     have hMG : M (colimit (G ⋙ F)) :=
-      hM.2.2 (G ⋙ F) inferInstance (fun i ↦ (h i).2)
+      hM.prop_colimit (G ⋙ F) inferInstance (fun i ↦ (h i).2)
     exact M.prop_of_iso (preservesColimitIso F G).symm hMG
   intro K hK
   exact (hK P hP (fun K hK ↦ ⟨fun Q hQ hSQ ↦ hSQ K hK,
@@ -327,7 +327,7 @@ theorem proper_image_localizing_proper
     have hclosed : L.IsClosedUnderColimitsOfShape (Discrete (ULift.{u + 2} I)) :=
       .mk' (by
         rintro K ⟨G, hG⟩
-        exact hL.2.2 G inferInstance (fun i ↦ hG ⟨i⟩))
+        exact hL.prop_colimit G inferInstance (fun i ↦ hG ⟨i⟩))
     let := hclosed
     have : L.IsClosedUnderColimitsOfShape (Discrete I) :=
       ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence

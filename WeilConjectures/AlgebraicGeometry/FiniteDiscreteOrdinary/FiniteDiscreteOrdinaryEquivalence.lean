@@ -84,7 +84,7 @@ private theorem inverseImageLocalizing (P : ObjectProperty D) (F : C ⥤ D)
   let := hG
   let : HasColimit (G ⋙ F) := ⟨_, isColimitOfPreserves F (colimit.isColimit G)⟩
   exact P.prop_of_iso (preservesColimitIso F G).symm
-    (hP.2.2 (G ⋙ F) inferInstance hPG)
+    (hP.prop_colimit (G ⋙ F) inferInstance hPG)
 
 private theorem localizing_forward (S : ObjectProperty C) (T : ObjectProperty D)
     (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]

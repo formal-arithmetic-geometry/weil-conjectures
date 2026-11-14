@@ -286,10 +286,8 @@ theorem exists_localizingExceptionalAdjoint
   obtain ⟨hambientX, _, _, hlocalX, _, _, _, _⟩ := localizingClosure_exists Λ X SX
   let := hambientX
   have hclosedBig (I : Type (u + 2)) :
-      (localizingClosureProEtale Λ X).IsClosedUnderColimitsOfShape (Discrete I) := by
-    apply ObjectProperty.IsClosedUnderColimitsOfShape.mk'
-    rintro _ ⟨K, hK⟩
-    exact hlocalX.2.2 K inferInstance (fun i ↦ hK (Discrete.mk i))
+      (localizingClosureProEtale Λ X).IsClosedUnderColimitsOfShape (Discrete I) :=
+    hlocalX.isClosedUnderColimitsOfShape_discrete I
   have hFsums : ∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I) F := by
     intro I
     let eI := Discrete.equivalence (Equiv.ulift : ULift.{u + 2} I ≃ I)

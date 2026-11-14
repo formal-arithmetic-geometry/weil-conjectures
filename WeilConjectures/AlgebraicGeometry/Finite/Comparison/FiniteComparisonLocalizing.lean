@@ -514,7 +514,7 @@ private theorem imageLocalizing (P : ObjectProperty C) (F : C ⥤ D)
   have hPG (i : I) : P (G.obj (Discrete.mk i)) := by
     obtain ⟨K, hK, ⟨iK⟩⟩ := hPH i
     exact P.prop_of_iso (F.preimageIso (iK ≪≫ (e.app (Discrete.mk i)).symm)) hK
-  refine ⟨colimit G, hP.2.2 G inferInstance hPG, ⟨?_⟩⟩
+  refine ⟨colimit G, hP.prop_colimit G inferInstance hPG, ⟨?_⟩⟩
   exact (preservesColimitIso F G) ≪≫ HasColimit.isoOfNatIso e
 
 private theorem closureEquivalence (S : ObjectProperty C) (T : ObjectProperty D) (F : C ⥤ D)

@@ -133,7 +133,7 @@ private theorem localizing_small.{v}
   let : P.IsClosedUnderColimitsOfShape (Discrete (ULift.{v + 1} J)) :=
     ObjectProperty.IsClosedUnderColimitsOfShape.mk' (by
       rintro _ ⟨F, hF⟩
-      exact hP.2.2 F inferInstance (fun i ↦ hF ⟨i⟩))
+      exact hP.prop_colimit F inferInstance (fun i ↦ hF ⟨i⟩))
   exact ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
     (Discrete.equivalence Equiv.ulift)
 
@@ -163,7 +163,7 @@ private theorem localizing_inverseImage
   refine ⟨inferInstance, inferInstance, ?_⟩
   intro I G hG h
   let := hG
-  have hcol : P (colimit (G ⋙ F)) := hP.2.2 (G ⋙ F) inferInstance h
+  have hcol : P (colimit (G ⋙ F)) := hP.prop_colimit (G ⋙ F) inferInstance h
   exact P.prop_of_iso (preservesColimitIso F G).symm hcol
 
 private theorem localizing_tensor_closed

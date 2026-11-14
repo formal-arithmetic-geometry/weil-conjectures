@@ -245,7 +245,7 @@ theorem localizingClosure_exists
     let (I : Type (u + 1)) : P.IsClosedUnderColimitsOfShape (Discrete I) := by
       apply ObjectProperty.IsClosedUnderColimitsOfShape.mk'
       rintro _ ⟨F, hF⟩
-      exact hloc.2.2 F inferInstance (fun i ↦ hF ⟨i⟩)
+      exact hloc.prop_colimit F inferInstance (fun i ↦ hF ⟨i⟩)
     let : HasCoproducts.{u + 1} P.FullSubcategory := fun I ↦
       hasColimitsOfShape_of_closedUnderColimits (Discrete I) P
     let : IsIdempotentComplete P.FullSubcategory :=
