@@ -119,7 +119,8 @@ noncomputable def boundedConstructibleUpperShriekOfCompactificationAdjunction :
       boundedConstructibleUpperShriekOfCompactification ℓ c :=
   (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
     c.overI).comp
-    (Adjunction.ofIsLeftAdjoint _)
+    -- the chosen right adjoint of the general `Rg_*`, as in `boundedConstructibleUpperShriekOfCompactification`
+    (Adjunction.ofIsLeftAdjoint (boundedConstructibleLowerStar ℓ c.overG))
 
 /-- The lower shriek `Rf_!(c)` on bounded constructible complexes is a left adjoint, its right
 adjoint being `boundedConstructibleUpperShriekOfCompactification` (`ℚ̄_ℓ`-coefficient). -/
@@ -171,7 +172,8 @@ noncomputable def boundedConstructibleUpperShriekOfCompactificationAdjunction :
   (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
     (Profinite.continuousMapRingObj E) ℓ
     c.overI).comp
-    (Adjunction.ofIsLeftAdjoint _)
+    -- the chosen right adjoint of the general `Rg_*`, as in `boundedConstructibleUpperShriekOfCompactification`
+    (Adjunction.ofIsLeftAdjoint (boundedConstructibleLowerStar ℓ E c.overG))
 
 /-- The lower shriek `Rf_!(c)` on bounded constructible complexes is a left adjoint, its right
 adjoint being `boundedConstructibleUpperShriekOfCompactification` (`E`-coefficient). -/
@@ -227,7 +229,8 @@ noncomputable def boundedConstructibleUpperShriekOfCompactificationAdjunction :
   (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
     (Profinite.padicIntegersRingObj ℓ E) ℓ
     c.overI).comp
-    (Adjunction.ofIsLeftAdjoint _)
+    -- the chosen right adjoint of the general `Rg_*`, as in `boundedConstructibleUpperShriekOfCompactification`
+    (Adjunction.ofIsLeftAdjoint (boundedConstructibleLowerStar ℓ E c.overG))
 
 /-- The lower shriek `Rf_!(c)` on bounded constructible complexes is a left adjoint, its right
 adjoint being `boundedConstructibleUpperShriekOfCompactification` (`𝒪_E`-coefficient). -/
