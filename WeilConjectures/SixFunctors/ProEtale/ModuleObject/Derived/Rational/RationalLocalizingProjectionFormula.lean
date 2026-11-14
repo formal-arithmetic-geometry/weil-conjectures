@@ -623,7 +623,8 @@ private theorem projection_localizing_of_interfaces
     have h := localizingClosure_map
       (constantModelBoundedConstructible Λ X ⊓ _root_.DerivedCategory.finiteTorAmplitude _)
       (constantModelBoundedConstructible Λ Y ⊓ _root_.DerivedCategory.finiteTorAmplitude _)
-      (lowerStar Λ p).rightDerivedFunctor (fun K hK ↦ hp.1 ⟨K, hK⟩) hp.2
+      (lowerStar Λ p).rightDerivedFunctor (fun K hK ↦ hp.1 ⟨K, hK⟩)
+      (preservesColimit_of_properLocalizingHypotheses Λ p hp)
     rw [hctfX, hctfY] at h
     exact h K hK
   have hsum : (lowerStar Λ p).rightDerivedFunctor.PreservesCoproductsOn.{u + 1}
