@@ -205,9 +205,74 @@ private theorem fibre_pullback_pushforward {Z X : TopCat.{u}} (f : Z ⟶ X)
       inv_hom_id := by apply Sheaf.hom_ext; exact IsIso.inv_hom_id η }
   exact ⟨e, fun _ _ ↦ rfl⟩
 
+private theorem constant_integer_one_restrict (Y : TopCat.{u}) (U : Opens Y) :
+    ((constantSheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u}).obj
+      (AddCommGrpCat.of (ULift.{u} ℤ))).obj.map (homOfLE le_top).op
+        ((toSheafify (Opens.grothendieckTopology Y)
+          ((Functor.const (Opens Y)ᵒᵖ).obj
+            (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ⊤) ⟨1⟩) =
+      ((toSheafify (Opens.grothendieckTopology Y)
+        ((Functor.const (Opens Y)ᵒᵖ).obj
+          (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op U) ⟨1⟩) := by
+  have h := (toSheafify (Opens.grothendieckTopology Y)
+    ((Functor.const (Opens Y)ᵒᵖ).obj
+      (AddCommGrpCat.of (ULift.{u} ℤ)))).naturality (homOfLE (le_top : U ≤ ⊤)).op
+  simpa [constantSheaf] using (ConcreteCategory.congr_hom h ⟨1⟩).symm
 
-set_option maxHeartbeats 600000 in
--- The explicit pullback and lifting-torsor types require extra definitional reduction.
+private theorem pullback_fibre_pushforward_equivariant {Z X : TopCat.{u}} (f : Z ⟶ X)
+    {F E Q : Z.Sheaf AddCommGrpCat.{u}} {A : X.Sheaf AddCommGrpCat.{u}}
+    {a : F ⟶ E} {p : E ⟶ Q} {w : a ≫ p = 0}
+    (hS : (ShortComplex.mk a p w).ShortExact)
+    (hD : ((ShortComplex.mk a p w).map
+      (TopCat.Sheaf.pushforward AddCommGrpCat.{u} f)).ShortExact)
+    (r : A ⟶ (TopCat.Sheaf.pushforward AddCommGrpCat.{u} f).obj Q)
+    (s : A.obj.obj (op ⊤)) (q : Q.obj.obj (op ⊤))
+    (hr : ∀ U : Opens X,
+      r.hom.app (op U) (A.obj.map (homOfLE le_top).op s) =
+        Q.obj.map (homOfLE le_top).op q) :
+    ∃ k : (TopCat.Sheaf.pushforward AddCommGrpCat.{u} f).obj F ⟶
+        pullback ((TopCat.Sheaf.pushforward AddCommGrpCat.{u} f).map p) r,
+      k ≫ pullback.fst _ _ = (TopCat.Sheaf.pushforward AddCommGrpCat.{u} f).map a ∧
+      ∃ hk : k ≫ pullback.snd _ _ = 0,
+        ∃ hP : (ShortComplex.mk k (pullback.snd _ _) hk).ShortExact,
+          ∃ e : (lifts isTerminalTop hP s).sheaf ≅
+              (TopCat.Sheaf.pushforward (Type u) f).obj (lifts isTerminalTop hS q).sheaf,
+            (∀ (U : Opens X) (t : (lifts isTerminalTop hP s).sheaf.obj.obj (op U)),
+              (e.hom.hom.app (op U) t).val =
+                (pullback.fst ((TopCat.Sheaf.pushforward AddCommGrpCat.{u} f).map p) r).hom.app
+                  (op U) t.val) ∧
+            (∀ (U : Opens X)
+                (g : ((TopCat.Sheaf.pushforward AddCommGrpCat.{u} f).obj F).obj.obj (op U))
+                (t : (lifts isTerminalTop hP s).sheaf.obj.obj (op U)),
+              e.hom.hom.app (op U) ((lifts isTerminalTop hP s).vadd (op U) g t) =
+                (lifts isTerminalTop hS q).vadd (op ((Opens.map f).obj U)) g
+                  (e.hom.hom.app (op U) t)) := by
+  have (Y : TopCat.{u}) : HasSheafify (Opens.grothendieckTopology Y) AddCommGrpCat.{u} :=
+    inferInstance
+  have (Y : TopCat.{u}) :
+      (Opens.grothendieckTopology Y).WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
+  obtain ⟨k, hkfst, hk, hP⟩ := pullback_shortExact
+    ((TopCat.Sheaf.pushforward AddCommGrpCat.{u} f).map a)
+    ((TopCat.Sheaf.pushforward AddCommGrpCat.{u} f).map p)
+    (by simpa using ((ShortComplex.mk a p w).map
+      (TopCat.Sheaf.pushforward AddCommGrpCat.{u} f)).zero) hD r
+  refine ⟨k, hkfst, hk, hP, ?_⟩
+  obtain ⟨e, he⟩ := fibre_pullback_pushforward f hS r hP s q hr
+  refine ⟨e, he, ?_⟩
+  intro U g t
+  apply Subtype.ext
+  rw [he]
+  change (pullback.fst _ r).hom.app (op U)
+      ((show (pullback _ r).obj.obj (op U) from t.val) + k.hom.app (op U) g) =
+    (show E.obj.obj (op ((Opens.map f).obj U)) from
+      (e.hom.hom.app (op U) t).val) + a.hom.app (op ((Opens.map f).obj U)) g
+  erw [he U t]
+  rw [map_add]
+  congr 1
+  change ((k ≫ pullback.fst _ r).hom.app (op U)) g = _
+  rw [hkfst]
+  rfl
+
 /-- Direct image of an extension, pulled back along restriction of constant integer
 sections, has fibre torsor canonically equal to the direct image of the original fibre.
 The isomorphism is specified on sections by the first projection of the pullback, and it
@@ -292,56 +357,19 @@ theorem closedImmersion_extension_fibre_pushforward
                       ((Functor.const (Opens Z.carrier)ᵒᵖ).obj
                         (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ⊤) ⟨1⟩)).vadd
                           (op ((Opens.map i.base).obj U)) g (e.hom.hom.app (op U) t)) := by
+  -- Reuse sheafification instances while specializing the general pullback construction.
+  have (Y : TopCat.{u}) : HasSheafify (Opens.grothendieckTopology Y) AddCommGrpCat.{u} :=
+    inferInstance
+  have (Y : TopCat.{u}) :
+      (Opens.grothendieckTopology Y).WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
   have hD := shortExact_closedEmbedding i.base i.isClosedEmbedding
     (ShortComplex.mk a p w) hS
+  refine ⟨hD, ?_⟩
   obtain ⟨r, hr⟩ := constant_restriction Z.carrier X.carrier i.base
-  obtain ⟨k, hkfst, hk, hP⟩ := pullback_shortExact
-    ((TopCat.Sheaf.pushforward AddCommGrpCat.{u} i.base).map a)
-    ((TopCat.Sheaf.pushforward AddCommGrpCat.{u} i.base).map p)
-    (by simpa using (ShortComplex.map (ShortComplex.mk a p w)
-      (TopCat.Sheaf.pushforward AddCommGrpCat.{u} i.base)).zero) hD r
-  refine ⟨hD, r, hr, k, hkfst, hk, hP, ?_⟩
-  let s := ((toSheafify (Opens.grothendieckTopology X.carrier)
-    ((Functor.const (Opens X.carrier)ᵒᵖ).obj
-      (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ⊤) ⟨1⟩)
-  let q := ((toSheafify (Opens.grothendieckTopology Z.carrier)
-    ((Functor.const (Opens Z.carrier)ᵒᵖ).obj
-      (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ⊤) ⟨1⟩)
-  have res (Y : TopCat.{u}) (U : Opens Y) :
-      ((constantSheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u}).obj
-        (AddCommGrpCat.of (ULift.{u} ℤ))).obj.map (homOfLE le_top).op
-          ((toSheafify (Opens.grothendieckTopology Y)
-            ((Functor.const (Opens Y)ᵒᵖ).obj
-              (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ⊤) ⟨1⟩) =
-        ((toSheafify (Opens.grothendieckTopology Y)
-          ((Functor.const (Opens Y)ᵒᵖ).obj
-            (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op U) ⟨1⟩) := by
-    have h := (toSheafify (Opens.grothendieckTopology Y)
-      ((Functor.const (Opens Y)ᵒᵖ).obj
-        (AddCommGrpCat.of (ULift.{u} ℤ)))).naturality (homOfLE (le_top : U ≤ ⊤)).op
-    simpa [constantSheaf] using (ConcreteCategory.congr_hom h ⟨1⟩).symm
-  obtain ⟨e, he⟩ := fibre_pullback_pushforward i.base (F := F) (E := E)
-    (Q := (constantSheaf (Opens.grothendieckTopology Z.carrier) AddCommGrpCat.{u}).obj
-      (AddCommGrpCat.of (ULift.{u} ℤ)))
-    (A := (constantSheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u}).obj
-      (AddCommGrpCat.of (ULift.{u} ℤ)))
-    (a := a) (p := p) (w := w) hS r (k := k) (hk := hk) hP s q (fun U ↦ by
-    dsimp [s, q]
-    erw [res X.carrier U, hr U 1, res Z.carrier ((Opens.map i.base).obj U)])
-  refine ⟨e, he, ?_⟩
-  intro U g t
-  apply Subtype.ext
-  rw [he]
-  change (pullback.fst _ r).hom.app (op U)
-      ((show (pullback _ r).obj.obj (op U) from t.val) + k.hom.app (op U) g) =
-    (show E.obj.obj (op ((Opens.map i.base).obj U)) from
-      (e.hom.hom.app (op U) t).val) + a.hom.app
-      (op ((Opens.map i.base).obj U)) g
-  erw [he U t]
-  rw [map_add]
-  congr 1
-  change ((k ≫ pullback.fst _ r).hom.app (op U)) g = _
-  rw [hkfst]
-  rfl
+  refine ⟨r, hr, ?_⟩
+  refine pullback_fibre_pushforward_equivariant i.base hS hD r _ _ ?_
+  intro U
+  erw [constant_integer_one_restrict X.carrier U, hr U 1,
+    constant_integer_one_restrict Z.carrier ((Opens.map i.base).obj U)]
 
 end CategoryTheory.Sheaf.Torsor

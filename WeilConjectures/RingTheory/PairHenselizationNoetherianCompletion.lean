@@ -32,8 +32,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace RingTheory
 
-set_option maxHeartbeats 800000 in
--- Descent elaborates tensor products over the colimit vertex and its completion.
 /-- The henselization of a Noetherian pair is Noetherian and flat over the base, has the
 same adic completion, and maps faithfully flatly to the completion of the base.
 Source: Stacks Project, Tag 0AGV
@@ -90,9 +88,14 @@ theorem pair_henselization_noetherian_completion
         RingHom.FaithfullyFlat
           (θ.symm.toRingHom.comp
             (algebraMap c.pt.right (AdicCompletion (I.map c.pt.hom.hom) c.pt.right))) := by
-  obtain ⟨hflat, hquot⟩ := pair_henselization_flat_quotients A I c hc
-  obtain ⟨θ, hθeval, hθmap⟩ :=
-    pair_henselization_completion_data A c.pt.right I c.pt.hom.hom hquot
+  classical
+  -- Only the witness and projections are needed; keep the completion data intact.
+  have hflatquot := pair_henselization_flat_quotients A I c hc
+  have hcompletion :=
+    pair_henselization_completion_data A c.pt.right I c.pt.hom.hom hflatquot.2
+  let θ := hcompletion.choose
+  have hθeval := hcompletion.choose_spec.1
+  have hθmap := hcompletion.choose_spec.2
   have hfaith := pair_henselization_completion_faithfullyFlat A I c hc θ hθeval
   let γ := θ.symm.toRingHom.comp
     (algebraMap c.pt.right (AdicCompletion (I.map c.pt.hom.hom) c.pt.right))
@@ -105,6 +108,6 @@ theorem pair_henselization_noetherian_completion
       (isNoetherian_of_linearEquiv
         (Algebra.TensorProduct.rid c.pt.right (AdicCompletion I A)
           (AdicCompletion I A)).symm.toLinearEquiv)
-  exact ⟨hnoeth, hflat, θ, hθeval, hθmap, hfaith⟩
+  exact ⟨hnoeth, hflatquot.1, θ, hθeval, hθmap, hfaith⟩
 
 end RingTheory

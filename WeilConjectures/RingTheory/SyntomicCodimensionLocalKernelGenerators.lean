@@ -35,11 +35,35 @@ universe u v
 
 namespace Algebra
 
+/-- The local fibre equivalence commutes with the maps from the presenting ring. -/
+private theorem exists_localized_fibre_comparison
+    {R P T : Type*} [CommRing R] [CommRing P] [CommRing T] [Algebra R P]
+    (p : Ideal R) [p.IsPrime] (E : p.Fiber P ≃+* T)
+    (Qk : Ideal T) [Qk.IsPrime] (Q : Ideal P) [Q.IsPrime]
+    (hQ : Q = (Qk.comap E.toRingHom).comap
+      Algebra.TensorProduct.includeRight.toRingHom) :
+    ∃ e : (Localization.AtPrime Q ⧸ p.map (algebraMap R (Localization.AtPrime Q))) ≃+*
+        Localization.AtPrime Qk,
+      ∀ a : P, e (Ideal.Quotient.mk _ (algebraMap P (Localization.AtPrime Q) a)) =
+        algebraMap T (Localization.AtPrime Qk) (E (1 ⊗ₜ[R] a)) := by
+  subst Q
+  let U := Qk.comap E.toRingHom
+  let j : P →+* p.Fiber P := Algebra.TensorProduct.includeRight.toRingHom
+  let A := Localization.AtPrime (U.comap j)
+  let m := p.map (algebraMap R A)
+  obtain ⟨_, _, _, e₀, he₀⟩ := Ideal.Fiber.localRingHom_surjective_ker_quotientEquiv p U
+  have hm : m = (p.map (algebraMap R P)).map (algebraMap P A) := by
+    rw [Ideal.map_map, ← IsScalarTower.algebraMap_eq]
+  let e₁ := Localization.localRingEquiv U Qk E rfl
+  let e₂ := Ideal.quotientEquivAlgOfEq A hm
+  refine ⟨e₂.toRingEquiv.trans (e₀.trans e₁), fun a ↦ ?_⟩
+  change e₁ (e₀ (e₂ (Ideal.Quotient.mk m (algebraMap P A a)))) = _
+  rw [Ideal.quotientEquivAlgOfEq_mk, he₀]
+  change e₁ (Localization.localRingHom (U.comap j) U j rfl (algebraMap P A a)) = _
+  rw [Localization.localRingHom_to_map]
+  exact Localization.localRingHom_to_map U Qk E.toRingHom rfl (j a)
+
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
--- The three comparison equivalences involve several localization algebra towers;
--- the default heartbeat budget is exhausted elaborating their compatibility formulas.
--- so that the same homeomorphism also preserves its local dimension.
 private theorem exists_counted_polynomial_fibre_comparison
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     (q : PrimeSpectrum S) (n : ℕ) (φ : MvPolynomial (Fin n) R →ₐ[R] S)
@@ -117,32 +141,10 @@ private theorem exists_counted_polynomial_fibre_comparison
           rw [Submonoid.map_powers]
           exact congrArg Submonoid.powers (eF.symm_apply_apply h))
       exact completeIntersection_of_algEquiv EL hci
-  have model : ∀ (Q' : Ideal P) [Q'.IsPrime], Q' = U.comap j →
-      ∃ e : (Localization.AtPrime Q' ⧸
-          (p.map (algebraMap R P)).map (algebraMap P (Localization.AtPrime Q'))) ≃+*
-          Localization.AtPrime U,
-        ∀ a : P, e (Ideal.Quotient.mk _ (algebraMap P (Localization.AtPrime Q') a)) =
-          algebraMap F (Localization.AtPrime U) (j a) := by
-    intro Q' hQ' hQU
-    subst Q'
-    obtain ⟨_, _, _, e, he⟩ := Ideal.Fiber.localRingHom_surjective_ker_quotientEquiv p U
-    refine ⟨e, fun a ↦ ?_⟩
-    rw [he]
-    exact Localization.localRingHom_to_map _ _ _ rfl a
-  obtain ⟨e₀, he₀⟩ := model Q hcontract.symm
-  have hm : m = (p.map (algebraMap R P)).map (algebraMap P A) := by
-    rw [Ideal.map_map, ← IsScalarTower.algebraMap_eq]
-  let e₁ := Localization.localRingEquiv U Qk E.toRingEquiv rfl
-  let e₂ := Ideal.quotientEquivAlgOfEq A hm
-  let e := e₂.toRingEquiv.trans (e₀.trans e₁)
+  obtain ⟨e, he₀⟩ := exists_localized_fibre_comparison p E.toRingEquiv Qk Q hcontract.symm
   have he (a : P) : e (Ideal.Quotient.mk m (algebraMap P A a)) =
       algebraMap Pk (Localization.AtPrime Qk) (ρ a) := by
-    change e₁ (e₀ (e₂ (Ideal.Quotient.mk m (algebraMap P A a)))) = _
-    rw [Ideal.quotientEquivAlgOfEq_mk, he₀]
-    change Localization.localRingHom U Qk E.toRingHom rfl
-      (algebraMap F (Localization.AtPrime U) (j a)) = _
-    rw [Localization.localRingHom_to_map]
-    exact congrArg (algebraMap Pk (Localization.AtPrime Qk)) (hgj a)
+    exact (he₀ a).trans (congrArg (algebraMap Pk (Localization.AtPrime Qk)) (hgj a))
   have hdim : topologicalKrullDimAt t = topologicalKrullDimAt qb := by
     let H := PrimeSpectrum.homeomorphOfRingEquiv eF.toRingEquiv
     exact (dimAt_openEmbedding H.isOpenEmbedding qb).symm

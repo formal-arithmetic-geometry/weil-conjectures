@@ -274,9 +274,6 @@ theorem mapDerivedCategoryComposition_factors (F₁ : C ⥤ D) (F₂ : D ⥤ F) 
 
 end Factors
 
-set_option maxHeartbeats 3000000 in
--- Matching the strict law against the descent data unfolds instance paths of the
--- abelian categories of strict quotient systems.
 /-- The coherent system pullback/tensor comparisons satisfy the composition law with the
 derived adjunction-normalized compositor.
 Source: Stacks 07A4, 0D6D and 0941
@@ -313,30 +310,6 @@ theorem integralSystemTensorComparison_comp {X Y Z : Scheme.{u}} (h : Z ⟶ X) (
   let ff := Localization.fullyFaithfulWhiskeringLeft
     ((PY.ι ⋙ DerivedCategory.Q).prod (PY.ι ⋙ DerivedCategory.Q)) (V.prod V)
     (coefficientSequenceDerived l E Z)
-  have hm (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ) :
-      (strictTensorComparison l E (h ≫ f)).hom.app (P, Q) ≫
-        (coefficientTotalTensor.{u, u + 1, u}
-          (coefficientSequenceTopology (Scheme.ProEt.topology Z))
-          (coefficientSequenceCommRingSheaf l E Z)).map
-          (Prod.mkHom ((IntegralCoherence.compositor l E h f).hom.app P)
-            ((IntegralCoherence.compositor l E h f).hom.app Q)) =
-      (IntegralCoherence.compositor l E h f).hom.app
-          ((coefficientTotalTensor.{u, u + 1, u}
-            (coefficientSequenceTopology (Scheme.ProEt.topology Y))
-            (coefficientSequenceCommRingSheaf l E Y)).obj (P, Q)) ≫
-        ((integralComparisonSequencePullback l E h).mapHomologicalComplex (.up ℤ)).map
-          ((strictTensorComparison l E f).hom.app (P, Q)) ≫
-        (strictTensorComparison l E h).hom.app
-          (((integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ)).obj P,
-            ((integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ)).obj Q) := by
-    have e₁ := strictTensorComparison_app l E (h ≫ f) P Q
-    have e₂ := strictTensorComparison_app l E f P Q
-    have e₃ := strictTensorComparison_app l E h
-      (((integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ)).obj P)
-      (((integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ)).obj Q)
-    have hc := CompletedQuotient.comparison_composition l E h f P Q
-    rw [← e₁, ← e₂, ← e₃] at hc
-    exact hc
   refine tensorComparisonDescent_comp DerivedCategory.Q DerivedCategory.Q DerivedCategory.Q
     ((integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ))
     ((integralComparisonSequencePullback l E h).mapHomologicalComplex (.up ℤ))
@@ -369,18 +342,28 @@ theorem integralSystemTensorComparison_comp {X Y Z : Scheme.{u}} (h : Z ⟶ X) (
     (IntegralCoherence.compositor l E h f) (integralComparisonSystemComposition l E h f)
     ?_ ?_ ?_ ?_ A B
   · exact ff.faithful
+  -- Normalize model components so the descent hypotheses match at reducible transparency.
   · intro P Q hP hQ
-    exact integralSystemTensorComparison_square l E f P Q hP hQ
+    have hs := integralSystemTensorComparison_square l E f P Q hP hQ
+    dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
+    with_reducible exact hs
   · intro P Q hP hQ
-    exact integralSystemTensorComparison_square l E h P Q hP hQ
+    have hs := integralSystemTensorComparison_square l E h P Q hP hQ
+    dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
+    with_reducible exact hs
   · intro P Q hP hQ
-    exact integralSystemTensorComparison_square l E (h ≫ f) P Q hP hQ
+    have hs := integralSystemTensorComparison_square l E (h ≫ f) P Q hP hQ
+    dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
+    with_reducible exact hs
   · intro P
     dsimp only [integralComparisonSystemComposition, integralComparisonDerivedSequencePullback]
     rw [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom, Category.assoc,
       Functor.mapDerivedCategoryCompIso_hom_app_factors, Functor.mapDerivedCategoryNatIso_fac]
     rfl
-  · exact hm
+  · intro P Q
+    have hc := CompletedQuotient.comparison_composition l E h f P Q
+    simp only [← strictTensorComparison_app, Iso.app_hom] at hc
+    with_reducible exact hc
   · intro P _
     infer_instance
   · intro P _
