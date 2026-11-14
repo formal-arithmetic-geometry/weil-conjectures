@@ -386,23 +386,7 @@ theorem projectiveLineTrace_diagonal
             (ℙ(Option (ULift.{u} (Fin 1)); ℙ(Option (ULift.{u} (Fin 1)); S)) ↘
               ℙ(Option (ULift.{u} (Fin 1)); S))).hom ≫
           cartierKummerCycleClass Λ _ hP) ≫
-      projectiveLineTrace Λ ℙ(Option (ULift.{u} (Fin 1)); S) = 𝟙 _ :=
-  eq_of_leftDerivedUpperStar_lineInfinityι_map_eq Λ S (by
-    rw [leftDerivedUpperStar_lineInfinityι_map_diagonalIntegral Λ S hP,
-    CategoryTheory.Functor.map_id])
-
-/-- The exchange of the factors of `W = ℙ¹_P ≅ P ×_S P`
-(`AlgebraicGeometry.ProjectiveSpace.diagonalSwap`) fixes the cycle class of the diagonal. -/
-theorem cartierKummerCycleClass_diagonalSwap
-    [IsRegularImmersion 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)]
-    (hP : SupportedTatePure Λ 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)) :
-    (leftDerivedUpperStarConstantComplexIso Λ
-        (ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S)).inv ≫
-      (L((ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S)^*[ModuleCat.{u + 1} Λ])).map
-        (cartierKummerCycleClass Λ _ hP) ≫
-      (leftDerivedUpperStarTateTwoIso Λ
-        (ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S)).hom =
-    cartierKummerCycleClass Λ _ hP := by
+      projectiveLineTrace Λ ℙ(Option (ULift.{u} (Fin 1)); S) = 𝟙 _ := by
   have := projectiveLineTraceAux_diagonal Λ S hP
   simp only [cartierKummerCycleClass, projectiveLineTrace_eq_neg, Functor.map_neg, comp_neg,
     neg_comp, neg_neg] at this ⊢
