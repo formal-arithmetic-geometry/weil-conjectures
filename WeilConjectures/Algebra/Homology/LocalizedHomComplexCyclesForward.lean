@@ -20,8 +20,6 @@ open CategoryTheory Opposite
 namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 400000 in
--- Comparing evaluated projections unfolds several composed functors and restriction wrappers.
 /-- The projection components of a localized degree-zero cycle form a chain map.
 Source: Stacks Project, Tag 0A8X, construction preceding Equation 0A8Y.
 (blueprint: lem-pur-localized-hom-complex-cycles-forward)
@@ -93,12 +91,12 @@ theorem localizedHomComplex_cycles_forward
     have hzπ := (congrArg ((π L I 1 p q hpq).val.app (op U)) hz).trans
       ((π L I 1 p q hpq).val.app (op U)).hom.map_zero
     have hc := sub_eq_zero.mp (he.symm.trans hzπ)
-    change (PresheafOfModules.restrictOver R.obj U).map (𝟙 (L.X p).val) ≫
-      (a z p).val ≫ (PresheafOfModules.restrictOver R.obj U).map (I.d p q).val =
-      (PresheafOfModules.restrictOver R.obj U).map (L.d p q).val ≫ (a z q).val ≫
-        (PresheafOfModules.restrictOver R.obj U).map (𝟙 (I.X q).val) at hc
+    -- Compare components before unfolding the two restriction constructions.
     apply SheafOfModules.hom_ext
-    exact hc
+    apply PresheafOfModules.hom_ext
+    intro W
+    ext t
+    exact ConcreteCategory.congr_hom (congrArg (fun k ↦ k.app W) hc) t
   refine ⟨fun z ↦ { f := a z, comm' := ?_ }, ?_⟩
   · intro p q hpq
     exact ha z p q hpq

@@ -17,7 +17,41 @@ universe u
 noncomputable section
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 400000 in
+-- Check scalar compatibility on germs over one common neighborhood.  Keeping the
+-- presheaf abstract avoids unfolding restriction and colimit module structures here.
+private theorem stalkMap_smul_of_germ_smul {Y : TopCat.{u}}
+    {R : Y.Presheaf CommRingCat.{u}} (M : PresheafOfModules.{u} (R ⋙ forget₂ _ _))
+    (y : Y) {S : Type u} [CommRing S] {P : Type u} [AddCommGroup P] [Module S P]
+    (f : R.stalk y →+* S) (a : TopCat.Presheaf.stalk (C := Ab.{u}) (X := Y) M.presheaf y →+ P)
+    (h : ∀ (V : Opens Y) (hy : y ∈ V) (r : R.obj (op V)) (m : M.obj (op V)),
+      a (TopCat.Presheaf.germ M.presheaf V y hy (r • m)) =
+        f (R.germ V y hy r) • a (TopCat.Presheaf.germ M.presheaf V y hy m))
+    (r : R.stalk y) (m : TopCat.Presheaf.stalk (C := Ab.{u}) (X := Y) M.presheaf y) :
+    a (r • m) = f r • a m := by
+  obtain ⟨U, hyU, r, rfl⟩ := R.exists_germ_eq r
+  obtain ⟨V, hyV, m, rfl⟩ := TopCat.Presheaf.exists_germ_eq M.presheaf m
+  have hy : y ∈ U ⊓ V := ⟨hyU, hyV⟩
+  rw [← R.germ_res_apply (homOfLE inf_le_left : U ⊓ V ⟶ U) y hy r,
+    ← TopCat.Presheaf.germ_res_apply M.presheaf
+      (homOfLE inf_le_right : U ⊓ V ⟶ V) y hy m,
+    ← PresheafOfModules.germ_smul (R := R) M]
+  exact h (U ⊓ V) hy _ _
+
+-- Build the transported linear map with abstract modules, so checking linearity
+-- does not unfold the stalk module instances.
+private def restrictScalarsHomOfSemilinear {R S : CommRingCat.{u}} (e : R ≅ S)
+    (M : ModuleCat.{u} R) (P : ModuleCat.{u} S) (a : M →+ P)
+    (h : ∀ (r : R) (m : M), a (r • m) = e.hom r • a m) :
+    (ModuleCat.restrictScalars e.inv.hom).obj M ⟶ P :=
+  ModuleCat.ofHom
+    (X := (ModuleCat.restrictScalars e.inv.hom).obj M) (Y := P)
+    { toFun := a
+      map_add' := a.map_add
+      map_smul' := fun r m ↦ by
+        change a (e.inv r • m) = r • a m
+        exact (h (e.inv r) m).trans
+          (congrArg (fun t : S ↦ t • a m) (e.inv_hom_id_apply r)) }
+
 -- Comparing stalk module structures through restriction unfolds nested colimit instances.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -94,49 +128,23 @@ theorem exists_moduleRestrictionStalk_components (X : RingedSpace.{u}) (W : Open
       (r : Y.presheaf.stalk y)
       (m : TopCat.Presheaf.stalk (C := Ab.{u}) (X := Y.carrier) (N F).val.presheaf y) :
       a F (r • m) = eR.hom r • a F m := by
-    obtain ⟨U, hyU, r, rfl⟩ := Y.presheaf.exists_germ_eq r
-    obtain ⟨V, hyV, m, rfl⟩ := TopCat.Presheaf.exists_germ_eq
-      (C := Ab.{u}) (X := Y.carrier) (N F).val.presheaf m
-    have hy : y ∈ U ⊓ V := ⟨hyU, hyV⟩
-    rw [← Y.presheaf.germ_res_apply (homOfLE inf_le_left : U ⊓ V ⟶ U) y hy r,
-      ← TopCat.Presheaf.germ_res_apply (C := Ab.{u}) (X := Y.carrier) (N F).val.presheaf
-        (homOfLE inf_le_right : U ⊓ V ⟶ V) y hy m]
-    erw [← PresheafOfModules.germ_smul (R := Y.presheaf) (N F).val]
-    rw [hg F (U ⊓ V) hy, hg F (U ⊓ V) hy]
-    have hr := ConcreteCategory.congr_hom
-      (X.toPresheafedSpace.restrictStalkIso_hom_eq_germ W.isOpenEmbedding
-        (U ⊓ V) y hy) (Y.presheaf.map (homOfLE inf_le_left : U ⊓ V ⟶ U).op r)
-    simp only [ConcreteCategory.comp_apply] at hr
+    apply stalkMap_smul_of_germ_smul (R := Y.presheaf) (N F).val y eR.hom.hom (a F).hom
+    intro V hy r m
+    rw [hg F V hy, hg F V hy]
+    have hr := X.toPresheafedSpace.restrictStalkIso_hom_eq_germ_apply
+      W.isOpenEmbedding V y hy r
     exact (PresheafOfModules.germ_smul (R := X.presheaf) F.val x
-      (W.isOpenEmbedding.isOpenMap.functor.obj (U ⊓ V)) ⟨y, hy, rfl⟩
-      (Y.presheaf.map (homOfLE inf_le_left : U ⊓ V ⟶ U).op r)
-      ((N F).val.presheaf.map (homOfLE inf_le_right : U ⊓ V ⟶ V).op m)).trans
+      (W.isOpenEmbedding.isOpenMap.functor.obj V) ⟨y, hy, rfl⟩ r m).trans
         (congrArg (fun t : X.presheaf.stalk x ↦ t •
           TopCat.Presheaf.germ (C := Ab.{u}) (X := X.carrier) F.val.presheaf
-            (W.isOpenEmbedding.isOpenMap.functor.obj (U ⊓ V)) x ⟨y, hy, rfl⟩
-            ((N F).val.presheaf.map (homOfLE inf_le_right : U ⊓ V ⟶ V).op m)) hr.symm)
+            (W.isOpenEmbedding.isOpenMap.functor.obj V) x ⟨y, hy, rfl⟩ m) hr.symm)
   let c (F : SheafOfModules.{u} (moduleRings X)) :
       (ModuleCat.restrictScalars eR.inv.hom).obj
           ((RingedSpace.moduleStalkFunctor Y y).obj (N F)) ⟶
-        (RingedSpace.moduleStalkFunctor X x).obj F := by
-    letI : Module (X.presheaf.stalk x)
-        (TopCat.Presheaf.stalk (C := Ab.{u}) (X := Y.carrier) (N F).val.presheaf y) :=
-      Module.compHom _ eR.inv.hom
-    let ℓ :
-        TopCat.Presheaf.stalk (C := Ab.{u}) (X := Y.carrier) (N F).val.presheaf y →ₗ[
-          X.presheaf.stalk x]
-        TopCat.Presheaf.stalk (C := Ab.{u}) (X := X.carrier) F.val.presheaf x :=
-      { toFun := fun m ↦ a F m
-        map_add' := fun m n ↦ (a F).hom.map_add m n
-        map_smul' := by
-          intro r m
-          change a F (eR.inv r • m) = r • a F m
-          rw [hs]
-          exact congrArg (fun t ↦ t • a F m) (eR.inv_hom_id_apply r) }
-    exact ModuleCat.ofHom
-      (X := (ModuleCat.restrictScalars eR.inv.hom).obj
-        ((RingedSpace.moduleStalkFunctor Y y).obj (N F)))
-      (Y := (RingedSpace.moduleStalkFunctor X x).obj F) ℓ
+        (RingedSpace.moduleStalkFunctor X x).obj F :=
+    restrictScalarsHomOfSemilinear eR
+      ((RingedSpace.moduleStalkFunctor Y y).obj (N F))
+      ((RingedSpace.moduleStalkFunctor X x).obj F) (a F).hom (hs F)
   refine ⟨c, ?_⟩
   intro F V hV s
   exact hg F V hV s
