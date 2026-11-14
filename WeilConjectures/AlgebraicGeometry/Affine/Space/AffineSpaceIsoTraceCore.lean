@@ -324,7 +324,6 @@ private lemma pullback_auto
 
 /-- The geometric degree-one calculation for an arbitrary affine-space isomorphism makes
 the induced compact-support action the identity.
-
 -/
 theorem affineSpaceIsoTraceAction_eq_id (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)

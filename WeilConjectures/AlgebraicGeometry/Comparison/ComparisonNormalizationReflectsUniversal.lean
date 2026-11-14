@@ -98,7 +98,6 @@ private theorem comparison_coefficients_eq (Z : Scheme.{u})
     Sheaf.restrictScalars, Category.assoc]
 
 /-- Comparison reflects universality of a coefficient arrow between bounded complexes.
-
 -/
 theorem comparisonNormalization_reflects_universal (Z : Scheme.{u})
     {R S : Type (u + 1)} [CommRing R] [CommRing S] [Finite R] [Finite S]

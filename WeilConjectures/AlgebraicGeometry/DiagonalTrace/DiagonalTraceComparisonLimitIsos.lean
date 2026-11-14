@@ -78,7 +78,6 @@ private theorem lineComparison_isIso
   exact exactConeComparison_isIso _ _ _ _ _ _ hcone hlim
 
 /-- The two coefficient-cone maps in a partial presentation are invertible.
-
 -/
 theorem diagonalTraceComparisonLimitIsos
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}

@@ -25,7 +25,6 @@ open SpTowerClasses
 set_option linter.unusedVariables false in
 /-- Construct the ordinary scalar restrictions, normalized coefficient cones, and
 sectionwise direct-image squares, before any right derivation.
-
 -/
 theorem exists_diagonalTraceOrdinaryScalars (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}}

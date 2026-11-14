@@ -110,7 +110,6 @@ noncomputable def finiteDualityClosedComparisonDelta
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The transported canonical closed-comparison component is invertible.
-
 -/
 theorem isIso_finiteDualityClosedComparisonDelta_proof
     {A : Type (u + 1)} [CommRing A] [Finite A]

@@ -89,7 +89,6 @@ private def kummerData (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
   exact := kummerExact l T hT
 
 /-- Normalized simultaneous Kummer reduction admits the actual tensor/Hom line twist.
-
 -/
 theorem exists_diagonalTraceChernTwist (l : ℕ) [Fact l.Prime]
     (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (l : Γ(T, ⊤))) :

@@ -124,7 +124,6 @@ private theorem etaleNormalizationScalarMate_isIso (Z : Scheme.{u})
     Iso.symm_hom, Iso.symm_inv, hs, Category.assoc] using h
 
 /-- An initial coefficient arrow stays initial on every etale source.
-
 -/
 theorem etaleSourceNormalization_universal (Z : Scheme.{u})
     {R S : Type (u + 1)} [CommRing R] [CommRing S] (q : R →+* S)

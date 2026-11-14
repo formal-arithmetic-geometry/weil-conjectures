@@ -221,7 +221,6 @@ private theorem cartesianFiniteFreeAssertions_proof (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- Cartesian coefficient sheaves, Tate twists, finite-free coefficient extensions,
 and exact module pullback with its specified inverse-image lift.
-
 -/
 theorem cartesianCoefficients (ℓ : ℕ) [Fact ℓ.Prime] (f : X ⟶ Y) :
     CartesianUntwistedAssertions ℓ f ∧ CartesianTwistAssertions ℓ f ∧

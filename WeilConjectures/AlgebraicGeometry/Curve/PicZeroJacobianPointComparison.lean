@@ -27,7 +27,6 @@ namespace AlgebraicGeometry
 set_option autoImplicit false
 
 /-- The degree-zero Picard comparison is extension of points of one abelian variety.
-
 -/
 theorem pic_zero_jacobian_point_comparison
     {k k' : Type u} [Field k] [Field k'] [IsAlgClosed k] [IsAlgClosed k'] [Algebra k k']

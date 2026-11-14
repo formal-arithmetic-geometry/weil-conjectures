@@ -186,7 +186,6 @@ attribute [local irreducible] Padic.coefficientExtensionIntegers
 /-- A finite sum of full lattices has a continuous linear section; continuous
 functions preserve this sum, and on every small pro-etale site the resulting
 module sheaf is free of rank r and its actual inclusion rationalizes to an isomorphism.
-
 -/
 theorem continuous_lattice_sum
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type v) [NormedField E]

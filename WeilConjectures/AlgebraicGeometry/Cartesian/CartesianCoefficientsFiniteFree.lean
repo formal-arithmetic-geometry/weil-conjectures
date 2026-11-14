@@ -473,7 +473,6 @@ private theorem point_basis_naturality
 
 /-- Integral and rational coefficient sheaves are finite free, by the specified basis maps.
 All squares are stated on coproduct injections, which jointly determine the full square.
-
 -/
 theorem cartesianCoefficients_finiteFree
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) :

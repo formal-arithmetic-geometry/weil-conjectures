@@ -92,7 +92,6 @@ private lemma towerLinear_compat (S : Scheme.{u}) (d : ℕ)
 
 /-- Any polynomial automorphism is joined to its linear part by an affine-line family
 of polynomial automorphisms. The endpoints and the projection are the actual tower maps.
-
 -/
 theorem affineSpace_polynomial_deformation
     (k : Type u) [Field k] (d : ℕ)

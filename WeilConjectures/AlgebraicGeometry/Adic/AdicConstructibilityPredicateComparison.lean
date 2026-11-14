@@ -390,7 +390,6 @@ private theorem fieldCoefficientIso (E : Type) [NormedField E] :
 for the three certified adic coefficient rings, including integral torsion modules.
 Consequently their bounded constructible object properties in the same ordinary derived
 category agree. The two existentially quantified stratifications need not be identical.
-
 -/
 theorem adicConstructibilityPredicateComparison
     (ℓ : ℕ) [Fact ℓ.Prime]

@@ -232,7 +232,6 @@ private theorem completed_ordinary_unit_general
 
 -- Concrete coefficient instances are compared only at the generic lemma boundary.
 /-- The realized completed unit transport, with an arbitrary local arrow.
-
 -/
 theorem diagonalCompletedRealizedUnitTransport (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} [DiagonalTraceLocalizations l X]

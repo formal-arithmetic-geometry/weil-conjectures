@@ -40,7 +40,6 @@ set_option synthInstance.maxSize 2048 in
 /-- Tensoring a bounded constructible complex by a finite-Tor constructible complex
 preserves bounded constructibility. If both inputs have Tor intervals, the output
 is finite-Tor constructible with the sum interval.
-
 -/
 theorem finiteCoefficient_tensor_ctf
     (D : WeilConjectures.FiniteFieldDatum.{u})

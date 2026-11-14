@@ -270,7 +270,6 @@ private structure ConstructiblePresentationData where
 
 /-- Constructible module objects over a fixed sheaf of rings on a Noetherian scheme
 form an essentially small class in the sheaf morphism universe.
-
 -/
 theorem constructibleModuleObjects_essentiallySmall :
     ObjectProperty.EssentiallySmall.{u + 1} (IsConstructibleModuleObject R) := by

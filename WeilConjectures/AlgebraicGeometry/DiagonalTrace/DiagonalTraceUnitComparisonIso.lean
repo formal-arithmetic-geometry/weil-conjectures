@@ -136,7 +136,6 @@ attribute [local irreducible] diagonalCompletedRestriction
   Coefficients.unitMap exactConeComparison diagonalOrdinaryRlim
 
 /-- The completed coefficient-unit cone induces an invertible derived comparison.
-
 -/
 theorem diagonalUnitComparison_isIso
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

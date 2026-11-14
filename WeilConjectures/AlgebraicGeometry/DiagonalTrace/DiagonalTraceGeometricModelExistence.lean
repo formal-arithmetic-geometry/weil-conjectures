@@ -221,7 +221,6 @@ private theorem lineProjection_isIso
   infer_instance
 
 /-- The normalized line pullback and projection mate exist on the given model.
-
 -/
 theorem exists_diagonalTraceGeometricModel (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]

@@ -291,7 +291,6 @@ private theorem line_zero_detects
 
 /-- An automorphism over an algebraically closed field fixes the degree-zero homology
 of the shifted, twisted compact-support object of affine space.
-
 -/
 theorem affineSpaceIsoTraceAction_homology_zero
     (N : ℕ) (hN : 0 < N)

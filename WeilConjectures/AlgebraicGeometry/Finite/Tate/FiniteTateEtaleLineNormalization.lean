@@ -181,7 +181,6 @@ namespace AlgebraicGeometry.Etale
 /--
 The line normalization of an ordinary finite Tate transport is exactly the
 finite Tate etale pullback predicate in degree one.
-
 -/
 theorem ordinaryFiniteLineNormalization_finiteTateEtalePullback
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
