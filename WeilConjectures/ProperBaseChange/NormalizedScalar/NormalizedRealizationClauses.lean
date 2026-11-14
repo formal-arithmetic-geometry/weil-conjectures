@@ -91,8 +91,6 @@ def DerivedScalarData : Prop :=
         ((NatTrans.mapHomologicalComplex
           (Mod.extendRestrictAdjunction (inclusion l E T)).unit (.up ℤ)).app P)
 
-set_option maxHeartbeats 1000000 in
--- The derived scalar square unfolds the exact derived extension and restriction.
 /-- All-complex derived computation and the normalized derived unit.
 Source: exact derived functor comparisons and the exact derived adjunction unit.
 (blueprint: lem-weil-pbc-normalized-realization-clauses).
@@ -101,12 +99,22 @@ localization. The latter has its canonical shifts and preserves triangles.
 Its comparison components are isomorphisms on every complex. The unit formula
 is the component formula for the localization of the ordinary adjunction. -/
 theorem derived_scalar_data : DerivedScalarData l E T := by
-  refine ⟨⟨(ordinaryExtension l E T).leftDerivedFunctorIsoMapDerivedCategory⟩,
-    ⟨(ordinaryRestriction l E T).rightDerivedFunctorIsoMapDerivedCategory⟩,
+  let F := ordinaryExtension l E T
+  let G := ordinaryRestriction l E T
+  -- Reuse exactness proofs when elaborating the derived comparisons and unit.
+  have h := scalar_adjunction_data l E T
+  have : F.Additive := h.1
+  have : G.Additive := h.2.1
+  have : PreservesFiniteLimits F := h.2.2.1
+  have : PreservesFiniteColimits F := h.2.2.2.1
+  have : PreservesFiniteLimits G := h.2.2.2.2.1
+  have : PreservesFiniteColimits G := h.2.2.2.2.2.1
+  refine ⟨⟨F.leftDerivedFunctorIsoMapDerivedCategory⟩,
+    ⟨G.rightDerivedFunctorIsoMapDerivedCategory⟩,
     ⟨inferInstance⟩, ⟨inferInstance⟩, inferInstance, inferInstance,
     (fun P ↦ inferInstance), (fun P ↦ inferInstance), ?_⟩
   intro P
-  exact CategoryTheory.Adjunction.mapExactDerivedCategory_unit
+  exact CategoryTheory.Adjunction.mapExactDerivedCategory_unit (F := F) (G := G)
     (Mod.extendRestrictAdjunction (inclusion l E T)) P
 
 /-- The exact ordinary and derived scalar clauses together.
