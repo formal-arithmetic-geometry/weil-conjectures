@@ -521,6 +521,8 @@ theorem boundedConstructible_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactif
     let c := HasCompactification.compactification f
     have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
     have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian aY }
+    have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
+    have : IsNoetherian c.Z := { __ := LocallyOfFiniteType.isLocallyNoetherian (c.g ≫ aY) }
     have : TopologicalSpace.NoetherianSpace X := c.i.isOpenEmbedding.isInducing.noetherianSpace
     exact boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian aY c.g
       (boundedConstructible_mapDerivedCategory_openImmersionLowerShriek Λ c.i hK)
