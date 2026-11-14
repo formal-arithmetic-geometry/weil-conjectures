@@ -48,7 +48,6 @@ attribute [local implicit_reducible] integralScalarExtension integralScalarExten
   integralComparisonDerivedSequenceScalar
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
 
-set_option maxHeartbeats 800000 in
 -- The proof compares the completed and entire-system derived normalizations.
 /-- The prescribed scalar tensor comparison respects the coherent tensor reductions.
 This assertion contains no braiding or signed-swap equation.
@@ -95,10 +94,10 @@ theorem integralScalarTensorCoherentReduction
             (R.obj M, R.obj N) := by
   let SE := pullbackTensorCalculus l E W
   let SL := pullbackTensorCalculus l L W
-  obtain ⟨ρE⟩ := ambientRoos l E W SE
-  obtain ⟨ρL⟩ := ambientRoos l L W SL
-  obtain ⟨S⟩ := primitiveQuotientScalarModelExistence l E L ι W
-    (fun w ↦ isUnit_of_invertible (l : W.residueField w)) SE ρL
+  have ρE := Classical.choice (ambientRoos l E W SE)
+  have ρL := Classical.choice (ambientRoos l L W SL)
+  have S := Classical.choice (primitiveQuotientScalarModelExistence l E L ι W
+    (fun w ↦ isUnit_of_invertible (l : W.residueField w)) SE ρL)
   let TE : ScalarExtensionTower.TensorModel l E W SE ρE :=
     ⟨ScalarExtensionTower.tensorModelRealization l E W SE,
       ScalarExtensionTower.tensorModelRealization_normalized l E W SE ρE⟩
@@ -163,8 +162,7 @@ theorem integralScalarTensorCoherentReduction
     a.app ((constructibleIntegralTensor l E W).obj (M, N)) ≫
       H.map (ScalarExtensionTower.tensorReduction l E W SE ρE TE M.obj N.obj) ≫ _ at h'
   change Q.map _ ≫ _ ≫ _ = a.app _ ≫ _ ≫ _
-  rw [ht] at h'
-  rw [ht] at h'
+  rw [ht L ρL (F.obj M) (F.obj N), ht E ρE M N] at h'
   exact h'
 
 end WeilConjectures

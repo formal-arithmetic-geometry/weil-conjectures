@@ -594,7 +594,42 @@ private theorem derivedCoefficientHomFunctor
   let fF := Localization.fac (I ⋙ G ⋙ QB) hinv QR
   exact ⟨F, ⟨fF⟩⟩
 
-set_option maxHeartbeats 500000 in
+-- Check unit compatibility after transporting to a representative and a comparison object.
+-- Keeping the cancellation argument categorical avoids unfolding the concrete resolutions.
+private theorem unitCompatibility_of_representative
+    {A B : Type*} [Category A] [Category B]
+    (F : A ⥤ B) (r : B ⥤ A) (H : A ⥤ A)
+    (β : 𝟭 B ⟶ r ⋙ F) (θ : F ⋙ r ⟶ H) (η : 𝟭 A ⟶ H)
+    {X : B} {Y Z : A} {W : B}
+    (e : r.obj X ≅ Y) (a : F.obj Y ≅ W) (b : X ⟶ W)
+    (d : H.obj Y ≅ Z) (v : r.obj W ⟶ Z)
+    (hβ : β.app X = b ≫ a.inv ≫ F.map e.inv)
+    (hθ : θ.app Y ≫ d.hom = r.map a.hom ≫ v)
+    (hb : r.map b ≫ v = e.hom ≫ η.app Y ≫ d.hom) :
+    r.map (β.app X) ≫ θ.app (r.obj X) = η.app (r.obj X) := by
+  apply (cancel_mono (H.map e.hom)).mp
+  apply (cancel_mono d.hom).mp
+  have hn := θ.naturality e.hom
+  change r.map (F.map e.hom) ≫ θ.app Y = θ.app (r.obj X) ≫ H.map e.hom at hn
+  have hη := η.naturality e.hom
+  change e.hom ≫ η.app Y = η.app (r.obj X) ≫ H.map e.hom at hη
+  have hc : β.app X ≫ F.map e.hom = b ≫ a.inv := by
+    rw [hβ]
+    simp only [Category.assoc, ← F.map_comp, Iso.inv_hom_id, F.map_id, Category.comp_id]
+  calc
+    ((r.map (β.app X) ≫ θ.app (r.obj X)) ≫ H.map e.hom) ≫ d.hom =
+        r.map (β.app X ≫ F.map e.hom) ≫ (θ.app Y ≫ d.hom) := by
+      rw [r.map_comp]
+      simp only [Category.assoc]
+      rw [reassoc_of% hn]
+    _ = r.map b ≫ v := by
+      rw [hc, hθ]
+      simpa only [Functor.map_comp, Functor.mapIso_inv, Functor.mapIso_hom, Category.assoc] using
+        congrArg (fun z ↦ r.map b ≫ z) ((r.mapIso a).inv_hom_id_assoc v)
+    _ = e.hom ≫ η.app Y ≫ d.hom := hb
+    _ = (η.app (r.obj X) ≫ H.map e.hom) ≫ d.hom := by
+      rw [← Category.assoc, hη]
+
 -- The localization comparison involves three resolutions and several whiskered isomorphisms.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -761,69 +796,25 @@ theorem flat_ringed_ideal_complete_equivalence
         ((homComplexFunctor (R := R)).map ε.op).app (T.obj M)) ≫
           (dK M).inv at h
     exact (Iso.eq_comp_inv (dK M)).mp h
-  have hrep (M : ringedSiteComplex B) :
-      rD.map (β.app (QB.obj M)) ≫ Θ.hom.app (rD.obj (QB.obj M)) =
-        ringedCechCompletionUnit R K ε (rD.obj (QB.obj M)) := by
-    apply (cancel_mono ((ringedCechCompletionFunctor R K).map (eR.hom.app M))).mp
-    apply (cancel_mono ((dK (rc.obj M)).hom)).mp
-    have ha : rD.map (QB.map (b.app M) ≫ a.inv.app (rc.obj M)) ≫
-        rD.map (a.hom.app (rc.obj M)) = rD.map (QB.map (b.app M)) := by
-      rw [← rD.map_comp, Category.assoc, Iso.inv_hom_id_app]
-      apply congrArg rD.map
-      exact Category.comp_id _
-    have heR : rD.map (QB.map (b.app M)) ≫ eR.hom.app (G.obj (T.obj (rc.obj M))) =
-        eR.hom.app M ≫ QR.map (rc.map (b.app M)) :=
-      eR.hom.naturality (b.app M)
-    calc
-      ((rD.map (β.app (QB.obj M)) ≫ Θ.hom.app (rD.obj (QB.obj M))) ≫
-          (ringedCechCompletionFunctor R K).map (eR.hom.app M)) ≫
-          (dK (rc.obj M)).hom =
-        rD.map (β.app (QB.obj M) ≫ F.map (eR.hom.app M)) ≫
-          (Θ.hom.app (QR.obj (rc.obj M)) ≫ (dK (rc.obj M)).hom) := by
-            rw [rD.map_comp]
-            simp only [Category.assoc]
-            have hnΘ := Θ.hom.naturality (eR.hom.app M)
-            change rD.map (F.map (eR.hom.app M)) ≫ Θ.hom.app (QR.obj (rc.obj M)) =
-              Θ.hom.app (rD.obj (QB.obj M)) ≫
-                (ringedCechCompletionFunctor R K).map (eR.hom.app M) at hnΘ
-            rw [reassoc_of% hnΘ]
-      _ = rD.map (QB.map (b.app M) ≫ a.inv.app (rc.obj M)) ≫
-          (Θ.hom.app (QR.obj (rc.obj M)) ≫ (dK (rc.obj M)).hom) := by
-            rw [hβQ]
-            have hcanc := (F.mapIso (eR.app M)).inv_hom_id
-            change F.map (eR.inv.app M) ≫ F.map (eR.hom.app M) = 𝟙 _ at hcanc
-            simp only [Category.assoc, hcanc]
-            congr 2
-            rw [← Category.assoc]
-            exact Category.comp_id _
-      _ = rD.map (QB.map (b.app M)) ≫ eR.hom.app (G.obj (T.obj (rc.obj M))) ≫
-          QR.map (c.hom.app (T.obj (rc.obj M)) ≫
-            ((homComplexFunctor (R := R)).map u.op).app (T.obj (rc.obj M))) := by
-            rw [hΘ]
-            simpa only [← Category.assoc] using congrArg
-              (fun z ↦ z ≫ eR.hom.app (G.obj (T.obj (rc.obj M))) ≫
-                QR.map (c.hom.app (T.obj (rc.obj M)) ≫
-                  ((homComplexFunctor (R := R)).map u.op).app (T.obj (rc.obj M)))) ha
-      _ = eR.hom.app M ≫ QR.map (rc.map (b.app M) ≫
-          c.hom.app (T.obj (rc.obj M)) ≫
-            ((homComplexFunctor (R := R)).map u.op).app (T.obj (rc.obj M))) := by
-            rw [← Category.assoc, heR, Category.assoc, ← QR.map_comp]
-      _ = eR.hom.app M ≫ QR.map (η.app (rc.obj M) ≫
-          (ringedHomUnitEvaluationIso R (T.obj (rc.obj M))).inv ≫
-            ((homComplexFunctor (R := R)).map ε.op).app (T.obj (rc.obj M))) := by
-            rw [hb M]
-            rfl
-      _ = (ringedCechCompletionUnit R K ε (rD.obj (QB.obj M)) ≫
-          (ringedCechCompletionFunctor R K).map (eR.hom.app M)) ≫
-          (dK (rc.obj M)).hom := by
-            rw [← hunitQ (rc.obj M), ← Category.assoc]
-            have hn := hnatural (rD.obj (QB.obj M)) (QR.obj (rc.obj M)) (eR.hom.app M)
-            congr 1
-            exact hn.symm
-  -- Equality on complex representatives descends to all derived objects.
   let ηK : 𝟭 (ringedSiteDerived R) ⟶ ringedCechCompletionFunctor R K :=
     { app := ringedCechCompletionUnit R K ε
       naturality E E' f := (hnatural E E' f).symm }
+  have hrep (M : ringedSiteComplex B) :
+      rD.map (β.app (QB.obj M)) ≫ Θ.hom.app (rD.obj (QB.obj M)) =
+        ringedCechCompletionUnit R K ε (rD.obj (QB.obj M)) := by
+    refine unitCompatibility_of_representative F rD (ringedCechCompletionFunctor R K)
+      β Θ.hom ηK (eR.app M) (a.app (rc.obj M)) (QB.map (b.app M)) (dK (rc.obj M))
+      (eR.hom.app (G.obj (T.obj (rc.obj M))) ≫
+        QR.map (c.hom.app (T.obj (rc.obj M)) ≫
+          ((homComplexFunctor (R := R)).map u.op).app (T.obj (rc.obj M))))
+      (hβQ M) (hΘ (rc.obj M)) ?_
+    have heR : rD.map (QB.map (b.app M)) ≫ eR.hom.app (G.obj (T.obj (rc.obj M))) =
+        eR.hom.app M ≫ QR.map (rc.map (b.app M)) :=
+      eR.hom.naturality (b.app M)
+    rw [← Category.assoc, heR, Category.assoc, ← QR.map_comp]
+    rw [hb M]
+    exact congrArg (fun z ↦ eR.hom.app M ≫ z) (hunitQ (rc.obj M)).symm
+  -- Equality on complex representatives descends to all derived objects.
   have hβ : Functor.whiskerRight β rD ≫ Functor.whiskerLeft rD Θ.hom =
       Functor.whiskerLeft rD ηK := by
     apply Localization.natTrans_ext QB
