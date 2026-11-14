@@ -139,7 +139,7 @@ import WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackComposition
 The direct-image compositors are the universal right-derived comparisons computed
 on K-injective resolutions. The scalar/pullback comparisons are transported from
 left derived pullback to the exact termwise inverse image. The inverse composite
-Hom equivalence is precisely the two-counit formula for Adj_B in the node.
+Hom equivalence is precisely the two-counit formula for Adj_B.
 
 ## References
 

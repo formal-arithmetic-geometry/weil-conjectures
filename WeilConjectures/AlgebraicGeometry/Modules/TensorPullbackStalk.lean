@@ -16,8 +16,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.InverseImageStalkScalarTranspor
 
 Stalks of module sheaves are taken with the recorded stalk functor
 `RingedSpace.moduleStalkFunctor`. Mathlib writes extension of
-scalars as `O_{X,x} ⊗ G_{f(x)}`. This is the tensor product in the node via its canonical
-symmetry; the corresponding pure tensor is `1 ⊗ s_{f(x)}`.
+scalars as `O_{X,x} ⊗ G_{f(x)}`. This is the tensor product `G_{f(x)} ⊗ O_{X,x}` via its
+canonical symmetry; the corresponding pure tensor is `1 ⊗ s_{f(x)}`.
 
 ## References
 

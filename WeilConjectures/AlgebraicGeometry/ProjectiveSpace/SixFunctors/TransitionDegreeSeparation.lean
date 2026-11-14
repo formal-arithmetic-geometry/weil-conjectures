@@ -13,8 +13,8 @@ import Mathlib.Algebra.Polynomial.FieldDivision
 
 ## References
 
-* Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD
-* Stacks Project, Tag 0BXJ, divisors-lemma-Pic-projective-space-UFD, uniqueness in its Picard
+* Stacks Project, Tag 0BXJ, proof
+* Stacks Project, Tag 0BXJ, uniqueness in its Picard
   classification, specialized to dimension one over a field
 -/
 

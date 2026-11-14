@@ -21,7 +21,7 @@ import WeilConjectures.CategoryTheory.Abelian.HorseshoeResolutions
 
 ## References
 
-* Stacks Project, Cohomology on Sites, Tag 03AJ, relative refinement in the DAG proof
+* Stacks Project, Cohomology on Sites, Tag 03AJ
 * compare Cohomology Tags 0G71 and 0G78
 * Stacks Project, Tag 03AJ, relative refinement
 * Tag 0G78

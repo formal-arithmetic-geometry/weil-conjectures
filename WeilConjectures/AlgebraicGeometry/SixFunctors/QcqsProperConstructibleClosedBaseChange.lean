@@ -23,7 +23,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 /-! # Closed proper base change on bounded constructible finite-Tor inputs
 
 The exchange is the actual unit--square--counit mate on ordinary unbounded internal module
-objects. The coefficient predicate retains exactly the node's norm-topological convention.
+objects. The coefficient predicate uses the norm-topological convention.
 -/
 
 @[expose] public noncomputable section

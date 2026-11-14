@@ -19,7 +19,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModul
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.EtaleOriginWitness`:
-  the recorded construction or statement of this node.
+  the data witnessing an étale origin.
 
 ## References
 

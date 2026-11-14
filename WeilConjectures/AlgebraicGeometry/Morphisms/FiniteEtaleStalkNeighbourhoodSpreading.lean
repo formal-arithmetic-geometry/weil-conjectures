@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleStalkComparisonDes
 ## References
 
 * Stacks Project, Tags 0BQ5 and 0EY3
-* Stacks Project, Tags 0BQ5 (limits-lemma-glueing-near-point) and 0EY3
-  (limits-lemma-glueing-near-point-properties), applied relative to C
+* Stacks Project, Tags 0BQ5 and 0EY3, applied relative to C
 -/
 
 @[expose] public section

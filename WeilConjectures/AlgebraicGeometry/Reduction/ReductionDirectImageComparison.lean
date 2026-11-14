@@ -30,7 +30,7 @@ Its source and proof are in the published declaration's docstring (Stacks 03D3, 
 The unique normalized object, rather than a choice from bare existence, supplies the
 change of coordinates used below. No existing definition is duplicated or renamed.
 
-The four definitions below belong to this node: the open coordinate identification,
+The four definitions below are: the open coordinate identification,
 the transported open scalar isomorphism, Rp_* j_!, and its actual scalar comparison.
 
 ## References

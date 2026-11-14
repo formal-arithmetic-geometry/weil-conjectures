@@ -34,7 +34,7 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1PositiveLineConstr
 
 The proposition records all geometry, coefficient, intermediate-functor and exactness
 checks, as well as the final preservation pair. Its auxiliary propositions only group
-clauses of this node; the categories, operations and full-subcategory lifts are existing
+its clauses; the categories, operations and full-subcategory lifts are existing
 constructions. In particular no new derived functor or coefficient line is chosen.
 
 ## Main definitions

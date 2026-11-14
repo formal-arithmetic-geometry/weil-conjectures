@@ -20,9 +20,9 @@ for the integer degree; the isomorphism of module sheaves is merely inhabited.
 
 ## References
 
-* Stacks Project, Tag 0BXJ, `divisors-lemma-Pic-projective-space-UFD`, specialized to dimension one
+* Stacks Project, Tag 0BXJ, specialized to dimension one
   over a field
-* Stacks Project, Tag 0BXJ, `divisors-lemma-Pic-projective-space-UFD`, for `n = 1` and `R = k`
+* Stacks Project, Tag 0BXJ, for `n = 1` and `R = k`
 -/
 
 @[expose] public section

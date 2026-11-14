@@ -19,8 +19,8 @@ import WeilConjectures.AlgebraicGeometry.Proper.Flat.ProperFlatStructureSheafSta
 
 ## References
 
-* Stacks Project, Tag 0E62, proof of `perfect-lemma-proper-flat-h0`, localized at one point
-* Stacks Project, Tag 0E62, proof of `perfect-lemma-proper-flat-h0`
+* Stacks Project, Tag 0E62, proof, localized at one point
+* Stacks Project, Tag 0E62, proof
 * the local finite free model used in that proof is Tag 0BCD, `lift-perfect-from-residue-field`
 -/
 

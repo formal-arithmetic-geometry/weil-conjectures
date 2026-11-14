@@ -15,7 +15,7 @@ The positive level m is indexed by n = m - 1. All tensors are the existing
 sheafified balanced scalar extension, with the scalar first. Termwise extension
 is the degreewise model of the direct-sum total tensor with coefficients in degree zero.
 Inverse image uses its canonical corresponding-object model. The auxiliary structures
-only collect the coefficient data and equations in this node's hypotheses.
+only collect the coefficient data and equations appearing in the hypotheses.
 
 ## References
 

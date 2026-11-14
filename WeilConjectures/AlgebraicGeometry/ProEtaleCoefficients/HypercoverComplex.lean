@@ -94,7 +94,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Hypercover.ProEtaleHypercoverC
 /-!
 # Derived abelian sections from a weakly contractible hypercover
 
-The helpers realize this node's alternating section total for arbitrary ring sheaves.
+The helpers realize the alternating section total for arbitrary ring sheaves.
 The existing `hypercoverTotal` has commutative coefficients and a module-valued target.
 Here all values and derived categories use the common larger coefficient universe;
 the pro-etale site's object and morphism universes stay different.

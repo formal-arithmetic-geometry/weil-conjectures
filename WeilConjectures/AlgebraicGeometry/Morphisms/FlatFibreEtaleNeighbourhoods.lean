@@ -19,7 +19,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension
 ## References
 
 * Stacks Project, Tags 02GM, 02G8, and 02GK, and their pointwise algebra arguments
-* Stacks Project, Tag 02GM, morphisms-lemma-etale-flat-etale-fibres, together with Tags 02G8 and
+* Stacks Project, Tag 02GM, together with Tags 02G8 and
   02GK for unramifiedness and the pointwise etale criterion
 -/
 

@@ -21,7 +21,7 @@ import Mathlib.CategoryTheory.Sites.LocallySurjective
 
 ## References
 
-* Stacks Project, Tags 0981, 098F and 098H, with the small-site adaptation in the DAG proof
+* Stacks Project, Tags 0981, 098F and 098H
 * Sites, Tags 090K and 090L
 * Stacks Project, Tag 098H, disjoint-cover gluing argument
 * Stacks Project, Tags 0981 and 098H, implication (1) to (2), adapted to the small site over `X`

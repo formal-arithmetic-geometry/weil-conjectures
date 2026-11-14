@@ -22,8 +22,8 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 ## References
 
 * Stacks Project, Tags 0BQ5 and 0EY3, object descent in their proofs
-* Stacks Project, Tag 0BQ5 (limits-lemma-glueing-near-point), the paragraph expressing the stalk
-  spectrum as a limit, and Tag 0EY3 (limits-lemma-glueing-near-point-properties), property descent,
+* Stacks Project, Tag 0BQ5, the paragraph expressing the stalk
+  spectrum as a limit, and Tag 0EY3, property descent,
   relative to `C`
 -/
 

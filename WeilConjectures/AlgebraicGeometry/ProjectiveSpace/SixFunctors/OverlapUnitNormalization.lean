@@ -13,8 +13,8 @@ import WeilConjectures.AlgebraicGeometry.AffinePuncturedLine.AffinePuncturedLine
 
 ## References
 
-* Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD
-* Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD, Laurent-unit
+* Stacks Project, Tag 0BXJ, proof
+* Stacks Project, Tag 0BXJ, proof, Laurent-unit
   computation and removal of the constant boundary, for n=1
 -/
 

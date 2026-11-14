@@ -20,7 +20,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 ## References
 
 * Stacks Project, Tag 0BQ5, comparison descent in its proof
-* Stacks Project, Tag 0BQ5 (limits-lemma-glueing-near-point), the last paragraph of the proof, using
+* Stacks Project, Tag 0BQ5, the last paragraph of the proof, using
   the morphism and equality parts of Tag 01ZM
 -/
 

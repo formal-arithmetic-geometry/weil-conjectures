@@ -19,7 +19,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 ## References
 
 * Stacks Project, Tags 02LK and 0BJH
-* Stacks Project, Tag 02LK (more-morphisms-lemma-etale-makes-quasi-finite-finite), first proof
+* Stacks Project, Tag 02LK, first proof
   paragraph
 -/
 

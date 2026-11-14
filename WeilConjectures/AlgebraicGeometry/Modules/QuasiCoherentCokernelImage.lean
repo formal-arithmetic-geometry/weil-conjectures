@@ -20,7 +20,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 The categorical cokernel is the sheafified presheaf quotient (Mathlib's module
 sheafification adjunction and colimit construction). The abelian image is its kernel;
-the local-image formula below identifies it with the subsheaf in the node.
+the local-image formula below identifies it with the subsheaf of local images.
 
 ## References
 

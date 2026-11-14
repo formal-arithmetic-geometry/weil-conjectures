@@ -17,8 +17,8 @@ import Mathlib.RingTheory.PicardGroup
 
 ## References
 
-* Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD
-* Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD, first paragraph,
+* Stacks Project, Tag 0BXJ, proof
+* Stacks Project, Tag 0BXJ, proof, first paragraph,
   specialized to the projective line over a field
 -/
 

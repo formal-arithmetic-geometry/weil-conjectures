@@ -18,7 +18,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 /-!
 # Coefficient naturality of the proper/open refinement
 
-The auxiliary maps implement exactly the normalizations in the node. Scalar extension
+The auxiliary maps implement the coefficient normalizations. Scalar extension
 and the K-flat-normalized scalar/pullback comparison are existing constructions.
 
 ## References

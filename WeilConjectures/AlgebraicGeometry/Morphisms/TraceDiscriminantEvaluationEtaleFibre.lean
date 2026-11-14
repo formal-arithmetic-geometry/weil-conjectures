@@ -18,7 +18,7 @@ import WeilConjectures.RingTheory.TraceFormEtaleField
 
 ## References
 
-* Stacks Project, Tag 0BJF, discriminant-lemma-discriminant, fibre-algebra argument
+* Stacks Project, Tag 0BJF, fibre-algebra argument
 -/
 
 @[expose] public section

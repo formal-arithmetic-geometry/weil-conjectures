@@ -13,8 +13,8 @@ public import Mathlib.Algebra.Polynomial.Laurent
 
 ## References
 
-* Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD
-* Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD, the displayed
+* Stacks Project, Tag 0BXJ, proof
+* Stacks Project, Tag 0BXJ, proof, the displayed
   computation of the units on D_+(T_i T_j)
 * also Constructions, Tag 01M7
 -/
