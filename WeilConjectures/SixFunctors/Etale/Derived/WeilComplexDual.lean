@@ -13,8 +13,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.WeilDual
 
 Let `Λ` be a finite coefficient ring, `X` of finite type over a field `k` on which the
 exponent of `Λ` is invertible, and `g` an automorphism of `X` (the geometric Frobenius `g_γ`).
-For a strict Weil complex `(K, φ_K)` (`AlgebraicGeometry.Etale.WeilComplex`) this file packages the clauses of blueprint `theorem-poincare-duality-frobenius--2` as
-statements about strict Weil complexes:
+For a strict Weil complex `(K, φ_K)` (`AlgebraicGeometry.Etale.WeilComplex`) this file packages
+the clauses of blueprint `theorem-poincare-duality-frobenius--2` as statements about strict Weil
+complexes:
 
 * `(K^∨, φ_{K^∨})` is a strict Weil complex
   (`AlgebraicGeometry.Etale.WeilComplex.coefficientDual`): `K^∨ = RHom(K, Λ_X)` lies in
