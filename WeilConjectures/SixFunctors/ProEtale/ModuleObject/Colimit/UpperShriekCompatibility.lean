@@ -140,14 +140,14 @@ lemma boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl_eq :
     boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl ℓ E c =
       TwoSquare.hComp (boundedConstructibleProperUpperShriekToPadicAlgCl ℓ E c)
         (boundedConstructibleOpenImmersionUpperStarToPadicAlgCl ℓ E c.overI) := by
-  -- the vertical composite is spelled on the general `Rg_*` (its implicit functors as in `mateEquiv_hcomp`)
+  -- the vertical composite spelled on the general `Rg_*` (implicit functors as in `mateEquiv_hcomp`)
   have h : (boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso ℓ E c).inv =
       (TwoSquare.vComp
         (boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso ℓ E c.overI).inv
         (boundedConstructibleLowerStarToPadicAlgClIso ℓ E c.overG).inv :
         boundedConstructibleToPadicAlgCl X.left ℓ E ⋙
-            (boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.overI ⋙
-              boundedConstructibleLowerStar ℓ c.overG) ⟶
+            (boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+              c.overI ⋙ boundedConstructibleLowerStar ℓ c.overG) ⟶
           (boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ
               c.overI ⋙ ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E c.overG) ⋙
             boundedConstructibleToPadicAlgCl Y.left ℓ E) := by
