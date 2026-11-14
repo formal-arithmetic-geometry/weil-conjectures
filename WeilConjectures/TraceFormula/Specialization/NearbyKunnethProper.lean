@@ -193,7 +193,71 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap [TopologicalSpace.Noetheria
       (fun C₀ hC₀ ↦ boundedConstructible_geometricNearbyCycles_obj P hP.isTraitModel hC₀)
       heM heN hA hB)
 
-set_option maxHeartbeats 1600000 in
+private lemma finiteSupport_and_lowerStar_kunnethMap [TopologicalSpace.NoetherianSpace X]
+    [TopologicalSpace.NoetherianSpace Y] [TopologicalSpace.NoetherianSpace Z]
+    (hM : M.IsTraitModelOver qM gM)
+    (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
+    (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
+    (hgen : φ₂.generic ≫ gN = φ₁.generic ≫ gM) [IsProper qM] [IsProper qN]
+    {m m' : ℕ} (hm : qM.LocallyEmbedsInAffineSpace m) (hm' : qN.LocallyEmbedsInAffineSpace m')
+    (hslice : 0 < m + m' → SliceKunnethFormula (Profinite.padicAlgClRingObj ℓ) k' (m + m' - 1))
+    {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
+    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
+    (hA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) A)
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
+    (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) B)
+    (hΨA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X'.left)
+        ((M.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj A))
+    (hΨB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y'.left)
+        ((N.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj B))
+    (hT : IsIso (kunnethMap (Profinite.padicAlgClRingObj ℓ) (Hom.id (traitGenericModel k'))
+      (Hom.id (traitGenericModel k'))
+      (R((gM)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+        (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A))
+      (R((gN)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+        (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)))) :
+    ∃ (S : Finset Z'.left) (hS : ∀ x ∈ S, IsClosed {x}),
+      IsIso (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map
+        (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B)) ∧
+      IsIso (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
+        (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B)) := by
+  obtain ⟨S, hS, hU⟩ := exists_finite_isIso_upperStar_map_kunnethMap
+    hM hN hpb hP hgen hm hm' hslice heM heN hA hB
+  have hR := isIso_lowerStar_kunnethMap hM hN hpb hP hgen heM heN hA hB hΨA hΨB hT
+  exact ⟨S, hS, hR, hU⟩
+
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
+private lemma isIso_of_isIso_upperStar_and_lowerStar
+    [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom]
+    {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z'.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left))}
+    (f : K ⟶ L)
+    (hsrc : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left) K)
+    (htgt : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left) L)
+    (hdetect : ∀ (S : Finset Z'.left) (hS : ∀ x ∈ S, IsClosed {x})
+      (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z'.left) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left))),
+      boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left) C →
+        IsZero (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) →
+          IsZero (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) → IsZero C)
+    (S : Finset Z'.left) (hS : ∀ x ∈ S, IsClosed {x})
+    (hU : IsIso (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map f))
+    (hR : IsIso (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map f)) : IsIso f := by
+  obtain ⟨C, g, δ, hT⟩ := distinguished_cocone_triangle f
+  have : IsLocallyNoetherian Z'.left := LocallyOfFiniteType.isLocallyNoetherian Z'.hom
+  have : CompactSpace Z'.left := QuasiCompact.compactSpace_of_compactSpace Z'.hom
+  have : IsNoetherian Z'.left := ⟨⟩
+  have hC := (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+      Z'.left)).ext_of_isTriangulatedClosed₃ _ hT hsrc htgt
+  have h₁ := Triangle.isZero₃_of_isIso₁ _
+    (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map_distinguished _ hT) hR
+  have h₂ := Triangle.isZero₃_of_isIso₁ _
+    (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map_distinguished _ hT) hU
+  exact (Triangle.isZero₃_iff_isIso₁ _ hT).1
+    (hdetect S hS C hC h₂ h₁)
+
 -- the triangle of the Künneth map has large terms
 /-- **Gabber's Künneth formula for proper models** (Illusie, *Autour du théorème de monodromie
 locale*, Thm. 4.7; blueprint `proposition-external-kunneth-formula-nearby-cycles`): for the product
@@ -245,28 +309,14 @@ theorem isIso_kunnethMap_of_isProper [TopologicalSpace.NoetherianSpace X]
       IsZero (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) →
         IsZero (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) → IsZero C) :
     IsIso (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B) := by
-  obtain ⟨S, hS, hU⟩ := exists_finite_isIso_upperStar_map_kunnethMap
-      hM hN hpb hP hgen hm hm' hslice heM heN hA hB
-  have hR := isIso_lowerStar_kunnethMap hM hN hpb hP hgen heM heN hA
-      hB hΨA hΨB hT
-  obtain ⟨C, g, δ, hT⟩ := distinguished_cocone_triangle (kunnethMap (Profinite.padicAlgClRingObj ℓ)
-      φ₁ φ₂ A B)
+  obtain ⟨S, hS, hR, hU⟩ := finiteSupport_and_lowerStar_kunnethMap
+    hM hN hpb hP hgen hm hm' hslice heM heN hA hB hΨA hΨB hT
   have : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
     hP.locallyOfFiniteType
   have : QuasiCompact Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.quasiCompact
   have : IsSeparated Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.isSeparated
-  have : IsLocallyNoetherian Z'.left := LocallyOfFiniteType.isLocallyNoetherian Z'.hom
-  have : CompactSpace Z'.left := QuasiCompact.compactSpace_of_compactSpace Z'.hom
-  have : IsNoetherian Z'.left := ⟨⟩
-  have hC := (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
-      Z'.left)).ext_of_isTriangulatedClosed₃ _
-    hT hsrc htgt
-  have h₁ := Triangle.isZero₃_of_isIso₁ _ (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj
-      ℓ⟧).map_distinguished _ hT) hR
-  have h₂ := Triangle.isZero₃_of_isIso₁ _
-    (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map_distinguished _ hT) hU
-  exact (Triangle.isZero₃_iff_isIso₁ _ hT).1
-    (hdetect S hS C hC h₂ h₁)
+  exact isIso_of_isIso_upperStar_and_lowerStar
+    (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B) hsrc htgt hdetect S hS hU hR
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
 /-- **Projective closures over the trait**: an affine scheme of finite type over the trait

@@ -174,6 +174,15 @@ noncomputable def dualizingComplexPointIso :
 
 end Dualizing
 
+private lemma integral_conjugate_id {C : Type*} [Category C] {L R : C ⥤ C}
+    (adj : L ⊣ R) (e : L ≅ 𝟭 C) {M N : C} (α : M ⟶ R.obj N) :
+    e.inv.app M ≫ (adj.homEquiv M N).symm α =
+      α ≫ (conjugateIsoEquiv adj Adjunction.id e.symm).hom.app N := by
+  have h := homEquiv_comp_conjugateEquiv_app adj Adjunction.id e.inv
+    ((adj.homEquiv M N).symm α)
+  simpa only [Equiv.apply_symm_apply, Adjunction.id_homEquiv_apply,
+    conjugateIsoEquiv_apply_hom, Iso.symm_hom] using h.symm
+
 /-! ### Borel–Moore sections -/
 
 section BorelMoore
@@ -248,8 +257,6 @@ noncomputable def localTerm (j : U ⟶ X) [IsOpenImmersion j.left] [IsClosedImme
 instance : IsProper (point k).hom :=
   inferInstanceAs (IsProper (𝟙 (Spec (.of k))))
 
-set_option maxHeartbeats 1000000 in
--- the `erw` step unfolds the restricted `ℚ̲̄_ℓ`-functors, which is expensive
 /-- The integral over the base point, for an endomorphism `a = 𝟙` of the base point in place of
 its structure morphism. -/
 private lemma integral_point_aux (a : point k ⟶ point k) (ha : a = 𝟙 (point k))
@@ -264,28 +271,13 @@ private lemma integral_point_aux (a : point k ⟶ point k) (ha : a = 𝟙 (point
         ((boundedConstructibleUpperShriekAdjunction ℓ a).homEquiv _ _).symm α =
       α ≫ (upperShriekUnitIsoOfEqId ℓ a ha).hom := by
   subst ha
-  have h := homEquiv_comp_conjugateEquiv_app
+  simp only [upperShriekUnitIsoOfEqId, eqToIso_refl, Iso.refl_trans, Iso.app_hom]
+  refine Eq.trans ?_ (integral_conjugate_id
     (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 (point k)))
-    Adjunction.id (boundedConstructibleLowerShriekId ℓ (point k)).inv
-    (((boundedConstructibleUpperShriekAdjunction ℓ
-      (𝟙 (point k))).homEquiv _ _).symm α)
-  rw [Equiv.apply_symm_apply, Adjunction.id_homEquiv_apply, ← Iso.symm_hom,
-    ← conjugateIsoEquiv_apply_hom] at h
-  rw [upperShriekUnitIsoOfEqId, eqToIso_refl, Iso.refl_trans, Iso.app_hom,
-    boundedConstructibleUpperShriekId]
-  erw [h]
-  have hL : (boundedConstructibleLowerShriekId ℓ (point k)).inv.app (𝟙_ _) =
-      (boundedConstructibleUpperStarLowerStarAdjunction ℓ
-        (𝟙 (point k))).unit.app (𝟙_ _) ≫
-        (boundedConstructibleLowerStar ℓ (𝟙 (point k))).map
-          (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-            (𝟙 (point k)))).inv ≫
-        (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 (point k))).inv.app
-          (𝟙_ _) := by
-    rw [boundedConstructibleLowerShriekId, Iso.trans_inv, NatTrans.comp_app,
-      boundedConstructibleLowerStarId_inv_app_unit, Category.assoc]
-  refine Eq.trans ?_ (congrArg (· ≫ ((boundedConstructibleUpperShriekAdjunction
-    ℓ (𝟙 (point k))).homEquiv _ _).symm α) hL).symm
+    (boundedConstructibleLowerShriekId ℓ (point k)) α)
+  change _ = ((boundedConstructibleLowerStarId ℓ (point k)).inv.app (𝟙_ _) ≫
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 (point k))).inv.app (𝟙_ _)) ≫ _
+  rw [boundedConstructibleLowerStarId_inv_app_unit]
   simp only [Category.assoc]
 
 /-- **Point normalization of the integral**: over the base point, where `ω_s ≅ ℚ̄_ℓ,s`
