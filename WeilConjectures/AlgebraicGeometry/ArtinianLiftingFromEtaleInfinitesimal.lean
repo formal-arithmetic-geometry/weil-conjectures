@@ -18,7 +18,9 @@ public import Mathlib.RingTheory.Noetherian.Nilpotent
 
 /-! # Artinian test-diagram lifting from infinitesimal étaleness
 
-Source: Stacks Project, Tag 0A43, proof of part (1).
+## References
+
+* Stacks Project, Tag 0A43
 -/
 
 @[expose] public section
@@ -27,8 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- A proper length-one ideal in a local ring is annihilated by the maximal ideal.
-In particular, the kernel below has square zero. Source: Stacks 0A43, the small
-extension in its proof, and the simple-module characterization of length one. -/
+In particular, the kernel below has square zero. -/
 private theorem kernel_sq_zero {R B : Type*} [CommRing R] [CommRing B]
     [IsLocalRing R] [Nontrivial B] (φ : R →+* B)
     (h : Module.length R ↥(RingHom.ker φ) = 1) : RingHom.ker φ ^ 2 = ⊥ := by
@@ -45,9 +46,8 @@ private theorem kernel_sq_zero {R B : Type*} [CommRing R] [CommRing B]
   have hz := Module.mem_annihilator.mp ha' (⟨b, hb⟩ : RingHom.ker φ)
   simpa using congrArg Subtype.val hz
 
-/-- The square-zero ring kernel gives a square-zero defining ideal sheaf on Spec.
-Source: Stacks 04EX, first-order thickenings; naturality of the global sections
-isomorphisms identifies the two kernels. -/
+/-- The square-zero ring kernel gives a square-zero defining ideal sheaf on Spec
+(Stacks, Tag 04EX). -/
 private theorem spec_first_order {R B : Type u} [CommRing R] [CommRing B]
     [IsLocalRing R] [Nontrivial B] (φ : R →+* B) (hs : Function.Surjective φ)
     (h : Module.length R ↥(RingHom.ker φ) = 1) :
@@ -75,11 +75,7 @@ private theorem spec_first_order {R B : Type u} [CommRing R] [CommRing B]
   exact (Scheme.ΓSpecIso (.of R)).commRingCatIsoToRingEquiv.injective
 
 /-- An Artinian local test map whose closed point lies in the support of an ideal
-factors through a positive power of that ideal. Source: Stacks 0A43, proof of (1).
-Pull back the ideal to the test scheme; its support is the whole space, so its
-ideal of global sections lies in the nilradical. Noetherianity makes this ideal
-nilpotent. Pullback commutes with powers, and the resulting closed immersion
-with zero kernel is an isomorphism, giving the factorization. -/
+factors through a positive power of that ideal (Stacks, Tag 0A43). -/
 private theorem artinian_factor {S : Scheme.{u}} (J : S.IdealSheafData)
     (R : Type u) [CommRing R] [IsArtinianRing R] [IsLocalRing R]
     (β : Spec (.of R) ⟶ S) (hx : β (IsLocalRing.closedPoint R) ∈ J.support) :
@@ -125,24 +121,8 @@ private theorem artinian_factor {S : Scheme.{u}} (J : S.IdealSheafData)
   rw [Category.assoc, ← pullback.condition, ← Category.assoc,
     IsIso.inv_hom_id, Category.id_comp]
 
-/-- Every small Artinian test diagram at a point over the closed subscheme lifts.
-Source: Stacks Project, More on Morphisms, Lemma 0A43, proof of part (1).
-(blueprint: lem-weil-pbc-etale-infinitesimal-artinian-tests)
-
-Proof: The Artinian local spectra have a single point. The test square puts
-β's closed point in the support of J. Pull back J to Spec B'; this ideal sheaf
-has full support. Its global sections form an ideal in a Noetherian ring and
-lie in the nilradical, so some positive power vanishes. Pullback commutes with
-powers. The pullback projection along J^(n+1) is therefore a closed immersion
-with zero kernel and hence an isomorphism; its inverse gives β's factorization
-through Z_n. The test square then gives α's factorization through X_n.
-The length-one kernel of φ is a simple module. Its annihilator is the local
-ring's maximal ideal, which contains the proper kernel; hence the kernel has
-square zero. Naturality of Γ(Spec R) ≅ R gives the corresponding first-order
-thickening of affine schemes. Etaleness of X_n → Z_n supplies flatness and an
-open immersion diagonal. Apply the formal smoothness half of
-flat_unramified_formally_etale to lift to X_n, and compose with X_n → X.
-The pullback projection equations give both required equalities. -/
+/-- Every small Artinian test diagram at a point over the closed subscheme lifts
+(Stacks, Tag 0A43). -/
 theorem artinian_lifting_tests_of_etale_infinitesimal
     {X S Z : Scheme.{u}} (g : X ⟶ S) (i : Z ⟶ S)
     [IsClosedImmersion i] (J : S.IdealSheafData) (hJ : J = i.ker)

@@ -18,8 +18,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleComplexPageDiagram
 import WeilConjectures.AlgebraicGeometry.EtaleComplexColimitBelow
 /-! # Uniform stable pages for a diagram of étale complexes
 
-Source: Stacks Project, Tags 015J and 0EZM.
-(blueprint: lem-weil-pbc-etale-complex-uniform-pages).
+## References
+
+* Stacks Project, Tags 015J and 0EZM
 -/
 
 @[expose] public section
@@ -34,25 +35,7 @@ set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent presentation family and its naturality equations.
 set_option linter.unusedVariables false in
 /-- Uniform pages and natural graded comparisons, before choosing any class representatives.
-Source: Stacks Project, Tags 015J and 0EZM, proof of Lemma 59.52.1.
-
-Proof: Use the functorial Cartan--Eilenberg presentations of
-`exists_etaleHypercohomology_pullback_functorial`. Give each F_i its bounded-below
-structure with bound a. Inverse image is exact, and colimits of complexes are degreewise,
-so L.pt has the same lower bound. The identity and composition equations for φ make
-its page maps a functor; the equations for G and the cocone make the limit maps compatible.
-Swap the two bidegree coordinates to put the resolution degree first. The first-page
-identifications and their two naturality equations are the corresponding equations of
-the pullback presentations. Their negative resolution degrees vanish. In bidegree
-(p-q,q), incoming and outgoing differentials vanish once the page exceeds both the
-resolution degree and the distance q-a to the bottom row. This bound depends only on
-p,q,a, and therefore works simultaneously for all stages and the limit. Functorial
-convergence identifies this page with the q-th graded piece of each presentation's
-canonical image filtration. The filtered total maps restrict to all filtration steps;
-their inclusion equations identify the abutment maps with P followed by the coefficient
-map. Monicity gives the square for successive steps. Naturality of the stable-page
-identification gives precisely cokernel.map on the associated graded pieces.
-(blueprint: lem-weil-pbc-etale-complex-uniform-pages). -/
+(Stacks, Tags 015J and 0EZM). -/
 theorem exists_etaleComplex_uniform_pages
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D)

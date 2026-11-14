@@ -14,9 +14,9 @@ public import Mathlib.GroupTheory.QuotientGroup.Defs
 
 /-! # The explicit quotient of affine residue cycles by residue boundaries
 
-Source: Stacks Project, Section 12.13, Tag 010V; Mathlib's additive quotient API.
-(blueprint: lem-sc-affine-residue-cycle-class-quotient)
-(blueprint: lem-sc-affine-residue-cycle-homology-map)
+## References
+
+* Stacks Project, Tag 010V
 -/
 
 @[expose] public section
@@ -31,7 +31,6 @@ noncomputable section
 variable (W : Scheme.{v}) (U : W.Opens) (p : Ideal Γ(W, U)) [p.IsPrime]
 
 /-- Evaluation at the top of the localized site, followed by residue extension.
-(blueprint: lem-sc-affine-residue-cycle-class-quotient)
 -/
 abbrev affineResidueTerm
     (K : CochainComplex
@@ -39,7 +38,6 @@ abbrev affineResidueTerm
   p.ResidueField ⊗[Γ(W, U)] (K.X j).val.obj (.op (Over.mk (𝟙 U)))
 
 /-- The actual residue differential; no model or witness is chosen.
-(blueprint: lem-sc-affine-residue-cycle-class-quotient)
 -/
 abbrev affineResidueDifferential
     (K : CochainComplex
@@ -50,7 +48,6 @@ abbrev affineResidueDifferential
       ((K.d i j).val.app (.op (Over.mk (𝟙 U)))).hom).baseChange p.ResidueField
 
 /-- Degree-one residue cycles.
-(blueprint: lem-sc-affine-residue-cycle-class-quotient)
 -/
 abbrev affineResidueCycles
     (K : CochainComplex
@@ -58,7 +55,6 @@ abbrev affineResidueCycles
   LinearMap.ker (affineResidueDifferential W U p K 1 2)
 
 /-- Incoming residue boundaries, viewed as an additive subgroup of cycles.
-(blueprint: lem-sc-affine-residue-cycle-class-quotient)
 -/
 def affineResidueBoundaries
     (K : CochainComplex
@@ -68,7 +64,6 @@ def affineResidueBoundaries
     (affineResidueCycles W U p K).subtype.toAddMonoidHom
 
 /-- The concrete degree-one homology quotient.
-(blueprint: lem-sc-affine-residue-cycle-class-quotient)
 -/
 abbrev affineResidueCycleHomology
     (K : CochainComplex
@@ -76,7 +71,6 @@ abbrev affineResidueCycleHomology
   affineResidueCycles W U p K ⧸ affineResidueBoundaries W U p K
 
 /-- The canonical cycle-class map.
-(blueprint: lem-sc-affine-residue-cycle-class-quotient)
 -/
 def affineResidueCycleClass
     (K : CochainComplex
@@ -84,17 +78,8 @@ def affineResidueCycleClass
     affineResidueCycles W U p K →+ affineResidueCycleHomology W U p K :=
   QuotientAddGroup.mk' (affineResidueBoundaries W U p K)
 
-/-- The residue cycle-class map is onto and its kernel is precisely incoming boundaries.
-Source: Mathlib `QuotientAddGroup.mk'_surjective` and `QuotientAddGroup.eq_zero_iff`;
-Stacks Project, Section 12.13, Tag 010V (homology as cycles modulo boundaries).
-(blueprint: lem-sc-affine-residue-cycle-class-quotient)
-
-Proof: The homology group is constructed as the additive quotient of the kernel
-of the outgoing differential by the inverse image of the range of the incoming
-differential under the cycle inclusion. The quotient projection is surjective.
-Its class is zero exactly when the included cycle belongs to that range, which
-means exactly that it is the incoming differential of some degree-zero element.
-This construction retains nonzero boundaries and also handles the zero complex. -/
+/-- The residue cycle-class map is onto and its kernel is precisely incoming boundaries
+(Stacks, Tag 010V). -/
 theorem affineResidueCycleClass_surjective_kernel
     (K : CochainComplex
       (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) :
@@ -109,7 +94,6 @@ theorem affineResidueCycleClass_surjective_kernel
 variable {W U p}
 
 /-- A chain map evaluated and extended to the residue field.
-(blueprint: lem-sc-affine-residue-cycle-homology-map)
 -/
 abbrev affineResidueComponent
     {K C : CochainComplex
@@ -121,7 +105,6 @@ abbrev affineResidueComponent
       ((φ.f j).val.app (.op (Over.mk (𝟙 U)))).hom).baseChange p.ResidueField
 
 /-- Evaluation and scalar extension preserve the chain-map commutation equations.
-(blueprint: lem-sc-affine-residue-cycle-homology-map)
 -/
 theorem affineResidueComponent_comm
     {K C : CochainComplex
@@ -138,7 +121,6 @@ theorem affineResidueComponent_comm
       (LinearMap.baseChange_comp _ _))
 
 /-- The degree-one cycle map of a chain map.
-(blueprint: lem-sc-affine-residue-cycle-homology-map)
 -/
 def affineResidueCycleMap
     {K C : CochainComplex
@@ -152,7 +134,6 @@ def affineResidueCycleMap
   map_add' x y := by ext; exact map_add _ _ _
 
 /-- The homology map induced by a chain map on the explicit residue quotient.
-(blueprint: lem-sc-affine-residue-cycle-homology-map)
 -/
 def affineResidueCycleHomologyMap
     {K C : CochainComplex
@@ -170,17 +151,7 @@ def affineResidueCycleHomologyMap
       rw [← LinearMap.comp_apply, affineResidueComponent_comm, LinearMap.comp_apply, hy]
       rfl)
 
-/-- Chain maps commute with the cycle-class projections, including nonzero boundaries.
-Source: Stacks Project, Section 12.13, Tag 010V; Mathlib `QuotientAddGroup.lift_mk`.
-(blueprint: lem-sc-affine-residue-cycle-homology-map)
-
-Proof: Evaluation and residue scalar extension preserve the chain-map squares.
-The square in degrees 1,2 sends cycles to cycles. The square in degrees 0,1
-sends the differential of y to the differential of the image of y. Thus the
-cycle map descends to the quotient by incoming boundaries. The construction
-is QuotientAddGroup.lift, whose value on a cycle class is the class of its
-image, by definition. The property of being a cycle is a proposition, so the
-result does not depend on which proof of cycle membership is supplied. -/
+/-- Chain maps commute with the cycle-class projections (Stacks, Tag 010V). -/
 theorem affineResidueCycleHomologyMap_class
     {K C : CochainComplex
       (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ}

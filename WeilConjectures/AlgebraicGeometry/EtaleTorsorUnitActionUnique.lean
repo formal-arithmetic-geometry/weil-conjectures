@@ -16,8 +16,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 /-!
 # Uniqueness of the inverse-image torsor action
 
-Source: Stacks Project Tag 03Q1 (2), with the adjunction description of inverse image.
-(blueprint: lem-weil-pbc-etale-torsor-unit-action-unique)
+## References
+
+* Stacks Project, Tag 03Q1
 -/
 
 @[expose] public section
@@ -52,22 +53,8 @@ private noncomputable def torsorAction {Z : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Two inverse-image actions specified on the adjunction units agree via their sheaf iso.
-Source: Stacks Project Tag 03Q1 (2), and Tag 0A5G action-transport argument.
-(blueprint: lem-weil-pbc-etale-torsor-unit-action-unique)
-
-Proof: Regard each action as a morphism from the product of the underlying coefficient
-sheaf and the underlying torsor sheaf. The set inverse image preserves binary products,
-and its comparison with abelian inverse image is compatible with the adjunction units.
-Conjugate the two downstairs action maps through E₁ and E₂ to maps with common source
-the inverse image of that product and common target the inverse image of T.sheaf.
-Apply the adjunction hom-set bijection. Its unit on the product is the pair of the
-units on its factors. The two stated equations imply equality of the adjoints at
-every section (g,t) over every W. Therefore the adjoints are equal as sheaf morphisms,
-and injectivity of the adjunction bijection gives equality of the two action maps.
-Conjugating back proves the displayed equivariance for every downstairs section,
-including those that are only locally in the image of a unit. No finiteness,
-representability, or equivalence of scheme categories is used. -/
+/-- Two inverse-image actions specified on the adjunction units agree via their sheaf iso
+(Stacks, Tags 03Q1 and 0A5G). -/
 theorem etale_torsor_unit_action_unique
     {Y Y₀ : Scheme.{u}} (i : Y₀ ⟶ Y)
     (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (T : Sheaf.Torsor G)

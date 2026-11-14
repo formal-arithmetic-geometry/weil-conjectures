@@ -20,8 +20,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-! # Affine tensor comparison isomorphisms
 
-Source: Stacks Project, Morphisms, Lemma 01SB.
-(blueprint: lem-weil-pbc-affine-module-tensor-comparison-isIso).
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section
@@ -88,30 +89,8 @@ set_option maxHeartbeats 400000 in
 -- The adjunction identity compares two definitionally equal scalar-restricted pushforwards.
 /-- The canonical affine tensor comparisons are isomorphisms on quasi-coherent modules.
 The construction data and the formulas on units are hypotheses, so this statement only
-performs the affine inverse calculation and the passage from affine opens to sheaves.
-Source: Stacks Project, Morphisms, Lemma 01SB, last two paragraphs and key algebra observation.
-(blueprint: lem-weil-pbc-affine-module-tensor-comparison-isIso).
-
-Proof:
-1. On an affine open V of X, W = f⁻¹(V) is affine. Write R = O_X(V), C = O_U(W),
-   and N = G(V). The affine-section pullback formula identifies the first tensor
-   operation with C tensor_R N; the change-of-rings affine-section formula identifies
-   the second with C tensor_(C tensor_R C) (C tensor_R N).
-2. The balanced map c tensor (b tensor n) ↦ cb n is linear for the C-action on the
-   first factor. Its inverse is n ↦ 1 tensor (1 tensor n). Balancing moves b to c,
-   and then moves cb to n, proving the inverse identity on generators; additivity
-   extends the identity to every tensor. These formulas also prove C-linearity.
-3. The formula for κ on the pullback unit and the formula for γ show that β on V
-   is exactly this inverse. Hence β is bijective on the affine basis. For arbitrary
-   opens its algebra-linearity follows by restriction to this basis and sheaf separation.
-4. The counit triangle identity and the factorization equation for α show that α on W
-   is the balanced map of step 2, for N = F(W). Hence α is bijective on these W.
-5. H preserves quasi-coherence by hH; pushforward does so by affine pushforward and
-   scalar restriction. Both source and target of the comparisons are quasi-coherent.
-   Detect α on the affine cover of U pulled back from an affine cover of X, and detect
-   the underlying structure-sheaf map of β on the affine cover of X. An inverse to an
-   invertible algebra-linear map is algebra-linear, so β is invertible as an A-module map.
--/
+performs the affine inverse calculation and the passage from affine opens to sheaves
+(Stacks, Tag 01SB). -/
 theorem affine_module_tensor_comparison_isIso [IsAffineHom f]
      (B : U.toTopCat.Sheaf CommRingCat.{u})
       (b : U.sheaf ⟶ B) (t : IA ⟶ B) (ε : B ⟶ U.sheaf)

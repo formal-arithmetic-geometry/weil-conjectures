@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenIntersectionMateIso
 
 /-! # Invertible cross components of the open difference map
 
-Source: Stacks Project, Tags 08DG and 08FE, restriction of the overlap counit.
-(blueprint: lem-sc-derived-open-cross-components-iso).
+## References
+
+* Stacks Project, Tags 08DG and 08FE
 -/
 
 @[expose] public section
@@ -33,20 +34,8 @@ set_option synthInstance.maxSize 2048 in
 -- Threefold transported overlap restrictions require additional instance search.
 -- Transported threefold restrictions require the same instance budget as the parent theorem.
 /-- The adjoint overlap counits are invertible on the opposite open. This concerns
-only the individual summands, without choosing a difference diagram or a gluing object.
-Source: Stacks Project, Cohomology, Tag 08DG (lemma-glue), the restriction of the
-second arrow to U and V; Tag 08FE (lemma-restrict-direct-image).
-(blueprint: lem-sc-derived-open-cross-components-iso).
-
-Proof: apply `derived_open_intersection_mate_isIso` with O = U, P = V,
-and W = U ∩ V to obtain invertibility of rU(b). For the other component let
-f be the adjW-adjoint of eU.inv followed by sU of the U counit, with target
-RjW_*(sU A). The same theorem with O = V and P = U proves invertibility
-of rV(f), using commutativity of intersection. Naturality of adjW.homEquiv
-in its target identifies a with f followed by RjW_*(c.hom). Restriction
-preserves this composition and both factors are isomorphisms, so rV(a)
-is invertible. The single-mate theorem accepts arbitrary adjunctions and
-empty opens; no covering hypothesis or separate adjunction comparison is needed. -/
+only the individual summands, without choosing a difference diagram or a gluing object
+(Stacks, Tags 08DG and 08FE). -/
 theorem derived_open_cross_components_isIso
     (X : Scheme.{u}) (U V : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

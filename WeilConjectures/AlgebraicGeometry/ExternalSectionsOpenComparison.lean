@@ -12,9 +12,9 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-! # External section components on open subschemes
 
-Source: Stacks Project, Tag 0BED, omitted degree-zero canonical-cup verification;
-Tags 0096, 0097 and 01CD.
-(blueprint: lem-sc-external-sections-open-comparison).
+## References
+
+* Stacks Project, Tags 0BED, 0096, 0097 and 01CD
 -/
 
 @[expose] public section
@@ -63,32 +63,8 @@ private def scalarRestrictIso {A B : Scheme.{w}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The explicit external section component agrees with the external product on X times V.
-Source: Stacks Project, Tag 0BED, degree-zero cup product and omitted canonical-map
-verification; Tags 0096, 0097 and 01CD.
-(blueprint: lem-sc-external-sections-open-comparison).
-
-Proof: Let j : X times V -> X times Y be the base change of V -> Y. It is an
-open immersion with image pr_2 inverse-image V. The section isomorphism for restriction
-along V -> Y identifies G(V) with the global sections of G restricted to V; its scalar
-action is unchanged because both structure maps to Spec(k) are composites with g.
-Tensoring this isomorphism with Gamma(X,F) gives eS. Restriction of the external
-coefficient to the image of j identifies its sections with global sections of its
-restriction along j. Compare restriction with tensor pullback by the unique isomorphism
-of the two left adjoints to j_*, normalized by the adjunction-unit equation. Apply the
-module-pullback-tensor comparison, then the pullback-composition comparisons for
-j followed by the two projections. The first composite is the projection to X;
-the second is the projection to V followed by V -> Y. Finally identify the pullback
-of G along V -> Y with its restriction by the same normalized open-immersion
-comparison. These isomorphisms of coefficients and sections give eT, and are linear
-over k by compatibility of their structure maps. On a pure tensor s tensor t the
-unit equations send the restricted pr_1 pullback of s to its pullback on X times V,
-and send the pr_2 pullback of t to the pullback of its restricted section on V.
-The tensor comparison sends the tensor section to the tensor of these images.
-Thus the displayed equality holds on pure tensors, and tensor induction proves it
-on all tensors. For V empty, restriction and all these adjunction comparisons are
-still isomorphisms, so the same proof applies without a nonemptiness assumption.
--/
+/-- The explicit external section component agrees with the external product on X times V
+(Stacks, Tags 0BED, 0096, 0097 and 01CD). -/
 theorem externalSectionsComponent_openComparison
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) (V : Y.Opens) :

@@ -11,9 +11,11 @@ import WeilConjectures.AlgebraicGeometry.ContinuousConstructibleIntegralDenomina
 
 /-! # Triangulated closure of the integral scalar-extension image
 
-Source: Bhatt--Scholze, Lemma 6.8.12 and the full-faithfulness argument after localization
-in Proposition 6.8.14(2). No full faithfulness of the integral functor is asserted.
-(auxiliary; not a blueprint node)
+No full faithfulness of the integral functor is asserted.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14 (2)
 -/
 
 @[expose] public section
@@ -96,11 +98,7 @@ private theorem point_nsmul_isIso :
   exact isIso_of_reflects_iso _
     (sheafToPresheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
-/-- Multiplication by ℓ is invertible on every continuous E-module.
-Source: Bhatt--Scholze, Lemma 6.8.2.
-(auxiliary; not a blueprint node).
-Proof. Transport division by ℓ from the point to the regular coefficient module,
-then tensor with the given module and conjugate by the left unitor. -/
+/-- Multiplication by ℓ is invertible on every continuous E-module (Bhatt–Scholze, Lemma 6.8.2). -/
 theorem module_nsmul_isIso (X : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E) X)) :
@@ -125,11 +123,8 @@ theorem module_nsmul_isIso (X : Scheme.{u})
     exact isIso_of_reflects_iso _ (Mod.forget R)
   exact nsmul_isIso_of_unit ℓ (by assumption) M
 
-/-- Multiplication by ℓ is invertible on every derived continuous E-module.
-Source: Bhatt--Scholze, Lemma 6.8.2.
-(auxiliary; not a blueprint node).
-Proof. Additive cohomology carries the map to scalar multiplication on each
-cohomology module; the module result and detection by cohomology conclude. -/
+/-- Multiplication by ℓ is invertible on every derived continuous E-module (Bhatt–Scholze, Lemma
+6.8.2). -/
 theorem derived_nsmul_isIso (X : Scheme.{u})
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E) X))) :
@@ -156,27 +151,7 @@ private theorem derived_pow_nsmul_isIso (X : Scheme.{u})
 variable [FiniteDimensional ℚ_[ℓ] E]
 
 /-- The essential image of integral constructible scalar extension is triangulated.
-Source: Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2).
-(auxiliary; not a blueprint node)
-
-Proof in words. Integral constructible modules form a weak Serre class by Proposition
-6.8.11, so their bounded derived subcategory is closed under shifts and cones. Derived
-coefficient extension is triangulated and sends zero to zero, giving zero and shift
-closure of its essential image. For cone closure, take a morphism between scalar
-extensions of two integral bounded constructible complexes. The localization telescope
-and the bounded-below coproduct compactness of Lemma 6.8.12 identify the rational derived
-Hom group with integral Hom after inverting ℓ. Thus a power of ℓ times the given morphism
-is the scalar extension of an integral morphism. Complete that integral morphism to a
-triangle; its cone is bounded integral constructible. Scalar extension gives a cone for
-the multiplied morphism. Multiplication by that power of ℓ on the rational source is an
-isomorphism, so the original morphism has an isomorphic cone. This proves cone closure,
-and rotation gives the two-out-of-three formulation of triangulated closure. Transport
-along the chosen endpoint isomorphisms handles every triangle whose endpoints lie in
-the essential image. The coefficient telescope is the actual integralScalarExtension:
-on compact profinite tests every continuous function has a single bounded denominator,
-and exact pullback from the profinite point preserves that localization calculation.
-This proves closure only; it does not assert that every rational object is in the image.
--/
+(Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14 (2)) -/
 theorem continuousConstructible_integral_image_triangulated (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X] :
     (((ProEtale.boundedConstructible (condensedRingObj (integralCoeff ℓ E) X)).ι ⋙

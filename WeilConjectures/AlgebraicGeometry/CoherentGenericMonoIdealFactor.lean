@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSe
 
 /-! # Factoring an ideal multiple through a generic coherent inclusion
 
-Source: Stacks Project, Tag 01YL, third proof paragraph.
+Stacks Project, Tag 01YL.
 -/
 
 @[expose] public section
@@ -29,19 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A coherent inclusion which is an isomorphism at a point contains an ideal multiple
 of its target, for a quasi-coherent ideal with full stalk at that point.
-
-Source: Stacks Project, Tag 01YL, third proof paragraph: the ideal annihilating the
-cokernel puts the ideal multiple of the target inside the source.
-(blueprint: lem-weil-pbc-coherent-generic-mono-ideal-factor)
-
-Proof: form the coherent cokernel Q of a. Exactness of stalks and surjectivity of a at
-ξ make Q_ξ zero. The annihilator ideal J of Q is quasi-coherent on a locally Noetherian
-scheme, and its closed zero set is the support of Q. Thus J has full ξ-stalk. Since J
-annihilates Q, the composite JG → G → Q vanishes. The kernel universal property and the
-canonical isomorphism of the image of the mono a with K give a factor ψ : JG → K whose
-composite with a is the product inclusion. For zero Q take the unit annihilator; zero
-K and zero G are included. No integral subscheme, finite sum, or generic rank enters
-this factorization. -/
+(Stacks, Tag 01YL). -/
 theorem coherent_generic_mono_ideal_factor
     (X : Scheme.{u}) [IsLocallyNoetherian X]
     {K G : X.Modules}

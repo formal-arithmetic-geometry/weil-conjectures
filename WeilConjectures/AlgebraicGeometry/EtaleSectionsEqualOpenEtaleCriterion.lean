@@ -11,8 +11,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsEqualOpen
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 
 /-! # Agreement opens tested by ordinary étale restriction
-Source: Stacks Project, Tag 09XM, and Tag 03S2.
-(blueprint: lem-weil-pbc-etale-sections-equal-open-etale-criterion). -/
+
+## References
+
+* Stacks Project, Tags 09XM and 03S2
+-/
 
 @[expose] public section
 
@@ -47,18 +50,8 @@ private theorem canonicalSection_eq_iff {S T : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Tag 09XM (lemma-where-sections-are-equal),
-with Tag 03S2 identifying inverse image along an étale map with restriction.
-(blueprint: lem-weil-pbc-etale-sections-equal-open-etale-criterion).
-
-Proof: Apply the largest agreement-open theorem to F, Q, s and t. For an étale
-object A and m : A → Q, the composite m.left ≫ Q.hom equals A.hom. The inverse
-image restriction isomorphism for A.hom identifies canonical pullback along
-(m.left,id) with F.map m.op, by unit naturality and the counit formula of the
-restriction isomorphism. Its component is injective, so it reflects equality.
-Factorization through the open is equivalent to range containment: evaluate a
-factorization on points for one implication and use the open immersion lift for
-the other. Empty A imposes no condition; equal sections give the top open. -/
+/-- There is an open `E` such that an étale morphism into `Q` factors through `E` if and only if
+the two sections have equal restrictions along it (Stacks, Tags 09XM and 03S2). -/
 theorem exists_etaleSections_equal_open_etale_criterion
     (S : Scheme.{u}) (F : Sheaf S.smallEtaleTopology (Type (u + 1)))
     (Q : S.Etale) (s t : F.obj.obj (op Q)) :

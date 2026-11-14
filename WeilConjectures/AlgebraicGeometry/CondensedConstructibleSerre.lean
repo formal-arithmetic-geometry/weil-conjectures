@@ -18,9 +18,9 @@ import WeilConjectures.AlgebraicGeometry.CondensedQbarLfpLocalTriviality
 /-!
 # Serre closure for constructible condensed field module sheaves
 
-Source: upstream `ConstructibleSheaf/ProEtaleModule/DerivedCategory.lean`, Sorried input;
-Bhatt--Scholze, Section 6.8, Lemma 6.8.7 and Corollary 6.8.9
-(auxiliary; not a blueprint node).
+## References
+
+* Bhatt--Scholze, Lemma 6.8.7 and Corollary 6.8.9
 
 The coefficients are pulled back from condensed abelian groups. Algebraic-closure sections
 have image in a single finite intermediate field, as in `Profinite.padicAlgClRingObj`.
@@ -913,31 +913,7 @@ private lemma algcl_lf (ℓ : ℕ) [Fact ℓ.Prime]
   exact free_of_comap (inv φ) h
 
 /-- Kernels, cokernels and extensions of constructible modules over the finite intermediate field
-coefficient sheaf are constructible.
-Source: upstream ProEtaleModule/DerivedCategory.lean, Sorried input; Bhatt--Scholze 6.8.7,
-6.8.9 (auxiliary; not a blueprint node).
-
-Proof: coefficient pullback comparisons identify restriction with inverse image with an
-invertible coefficient map. Exact abelian inverse image and exact forgetfulness therefore
-make restriction exact and preserve finite presentations and free modules. Base change
-preserves weakly etale arrows and fpqc coverings, so presentation covers restrict along
-arbitrary stratum immersions. Refine the two finite stratifications by their scheme fibre
-products; the images are intersections (affine locally Spec of the quotient by the sum of
-the two ideals), and their spaces remain noetherian. On each stratum, local finite
-presentation implies pro-etale local finite freeness, using the finite-field and
-algebraic-closure local-triviality lemmas respectively. Combine finitely many covers.
-For a matrix between finite free modules its cokernel has a finite presentation; trivialize
-this globally defined cokernel and lift its finitely many basis sections locally. This
-splits the quotient of the target, and its image is presented as the cokernel of the
-complement of the resulting idempotent. Trivialize that globally defined image and lift
-its basis into the source. If t splits the source-to-image map p, the kernel is the
-cokernel of tp on the finite free source, so is locally finitely presented. For an extension,
-trivialize the outer terms and lift the quotient basis locally; this splits the extension
-as their direct sum. Exact restriction identifies these constructions with the global
-kernel, cokernel and middle term on each stratum. Thus the refined stratification proves
-all three conclusions. Local triviality is applied only on the noetherian strata, never
-on arbitrary covering schemes. Empty schemes, empty strata and rank zero require no basis
-lifts and satisfy the same formulas. -/
+coefficient sheaf are constructible (Bhatt--Scholze, 6.8.7 and 6.8.9). -/
 theorem isConstructibleModuleObject_serre_padicSubfield
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T] (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) :
@@ -957,31 +933,7 @@ theorem isConstructibleModuleObject_serre_padicSubfield
     (Profinite.continuousMapRingObj E.val) (finite_lf ℓ E) T
 
 /-- Kernels, cokernels and extensions of constructible modules over the bounded-image
-algebraic-closure coefficient sheaf are constructible.
-Source: upstream ProEtaleModule/DerivedCategory.lean, Sorried input; Bhatt--Scholze 6.8.7,
-6.8.9 (auxiliary; not a blueprint node).
-
-Proof: coefficient pullback comparisons identify restriction with inverse image with an
-invertible coefficient map. Exact abelian inverse image and exact forgetfulness therefore
-make restriction exact and preserve finite presentations and free modules. Base change
-preserves weakly etale arrows and fpqc coverings, so presentation covers restrict along
-arbitrary stratum immersions. Refine the two finite stratifications by their scheme fibre
-products; the images are intersections (affine locally Spec of the quotient by the sum of
-the two ideals), and their spaces remain noetherian. On each stratum, local finite
-presentation implies pro-etale local finite freeness, using the finite-field and
-algebraic-closure local-triviality lemmas respectively. Combine finitely many covers.
-For a matrix between finite free modules its cokernel has a finite presentation; trivialize
-this globally defined cokernel and lift its finitely many basis sections locally. This
-splits the quotient of the target, and its image is presented as the cokernel of the
-complement of the resulting idempotent. Trivialize that globally defined image and lift
-its basis into the source. If t splits the source-to-image map p, the kernel is the
-cokernel of tp on the finite free source, so is locally finitely presented. For an extension,
-trivialize the outer terms and lift the quotient basis locally; this splits the extension
-as their direct sum. Exact restriction identifies these constructions with the global
-kernel, cokernel and middle term on each stratum. Thus the refined stratification proves
-all three conclusions. Local triviality is applied only on the noetherian strata, never
-on arbitrary covering schemes. Empty schemes, empty strata and rank zero require no basis
-lifts and satisfy the same formulas. -/
+algebraic-closure coefficient sheaf are constructible (Bhatt--Scholze, 6.8.7 and 6.8.9). -/
 theorem isConstructibleModuleObject_serre_padicAlgCl
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T] (ℓ : ℕ) [Fact ℓ.Prime] :
     (∀ (M N : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})

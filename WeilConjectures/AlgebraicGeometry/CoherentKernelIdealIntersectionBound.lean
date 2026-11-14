@@ -18,8 +18,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 
 /-! # Bounding an intersection with a coherent multiplication kernel
 
-Source: Stacks Project, Tag 01YA, applied to a quasi-coherent kernel.
-(blueprint: lem-pc-coherent-kernel-ideal-intersection-bound)
+## References
+
+* Stacks Project, Tag 01YA
 -/
 
 @[expose] public section
@@ -29,23 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A high ideal multiple of a coherent source intersects its kernel only inside
-any prescribed ideal multiple of the kernel.
-Source: Stacks Project, Tag 01YA, the inclusion clause of Artin-Rees, as applied
-in Tag 01YB to the kernel of tensor multiplication.
-(blueprint: lem-pc-coherent-kernel-ideal-intersection-bound)
-
-Proof: Coherence gives quasi-coherence and finite affine section modules. Apply
-module Artin-Rees to the image of the kernel inclusion on every affine open.
-Choose a finite affine subcover and let c be the maximum of its bounds. Set m=c+n.
-For a cover member with bound k<=c, Artin-Rees identifies I^m F intersect K with
-I^(m-k)(I^k F intersect K). Since m-k=n+(c-k), the latter is contained in I^n K.
-The affine inclusion comparison transports this algebraic inclusion to every
-subopen of a covering affine. For an arbitrary W, restrict a section in both
-ranges to the cover W intersect U. These restrictions have preimages in I^n K.
-The inclusion I^n K -> F is monic, so these preimages agree on overlaps by
-naturality and injectivity; the sheaf axiom glues them to a preimage over W.
-For the empty cover c=0 and the sheaf axiom handles the empty W. No coherence
-of H or annihilation hypothesis is used, and powers zero are included. -/
+any prescribed ideal multiple of the kernel (Stacks, Tags 01YA and 01YB). -/
 theorem coherent_kernel_ideal_intersection_bound
     {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)
     (F H : X.Modules) (μ : F ⟶ H)

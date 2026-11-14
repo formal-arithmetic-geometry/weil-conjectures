@@ -12,8 +12,9 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-! # Stratified descent of etale origin in the coefficient universe
 
-Source: Stacks Project, proetale.tex, lemma-compare-constructible (Tag 09AK),
-the finite-partition induction after classicality on each stratum is known.
+## References
+
+* Stacks Project, Tag 09AK
 -/
 
 @[expose] public noncomputable section
@@ -144,28 +145,7 @@ private def eraseEmptyStratum {X : Scheme.{u}} (S : Scheme.Stratification X)
 
 /-- Etale origin glues across a finite constructible locally closed stratification.
 The restrictions may be arbitrary etale inverse images; their models need not be finite.
-
-Source: Stacks Project, Tag 09AK, lemma-compare-constructible, induction step;
-blueprint constructible-comparison proof, finite-stratification paragraph
-(auxiliary; not a blueprint node).
-
-Proof: etale origin is Zariski local, since the comparison counit can be tested on
-an open cover. Induct on the number of strata, simultaneously for all schemes.
-Near a point shrink to an affine open where its stratum is closed and has
-quasi-compact open complement. Pull back the partition. On the complement the
-chosen stratum is empty; remove it and apply induction to the remaining strata.
-Comparison commutes with scheme pullback, so all their restricted sheaves still
-have etale origin. The chosen closed stratum has etale origin by hypothesis.
-The open-closed short exact sequence presents F as an extension of extension by
-zero from the complement by closed direct image from the chosen stratum.
-Comparison commutes with both operations, and its essential image is closed
-under extensions by derived full faithfulness (equivalently, apply the comparison
-counit to this sequence and use the short five lemma). Thus F has etale origin on
-the affine neighborhood and hence globally. For zero strata the scheme is empty.
-A full-image immersion is treated by the closed-immersion argument, without
-assuming it is an isomorphism. Transport this argument along the two AsSmall site
-equivalences: pullbacks are the stated Kan-extension/sheafification functors by
-uniqueness of left adjoints, and all coefficient actions and coverings are retained. -/
+(Stacks, Tag 09AK) -/
 theorem coefficientFixed_essImage_of_stratification (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (S : Scheme.Stratification X)

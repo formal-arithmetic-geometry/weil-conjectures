@@ -20,8 +20,9 @@ import WeilConjectures.AlgebraicGeometry.IdealTensorImageComparison
 
 /-! # Additive restriction on conductor tensor sections
 
-Source: Stacks Project, Varieties Remark 09NW and Lemma 09NX, displayed conductor equality.
-(blueprint: lem-sc-conductor-sections-restriction).
+## References
+
+* Stacks Project, Tags 09NW and 09NX
 -/
 
 @[expose] public section
@@ -38,23 +39,7 @@ private noncomputable def tensorPowCongr {X : Scheme.{u}} {A B : X.Modules} (e :
   | m + 1 => e ⊗ᵢ tensorPowCongr e m
 
 /-- Restriction on conductor tensor sections is an additive bijection compatible with
-inclusion into the ambient tensor power.
-
-Source: Stacks Project, Varieties Remark 09NW and the displayed equality in Lemma 09NX.
-(blueprint: lem-sc-conductor-sections-restriction).
-
-Proof: use conductorIdealZeroIntersection on the component cover. Identify the image of
-its adjoint ideal map with the module of the ideal comap using
-ideal_tensor_image_comparison. Compare tensorPullback with the source pullback by
-uniqueness of left adjoints, and use nonempty_pullback_tensorPow_iso and tensorPowCongr
-to obtain the tensor-power comparison. Transport the bijection of image sheaves through it. The
-ideal multiplication maps are monomorphisms because the tensor powers are invertible,
-so their corestrictions to their categorical images are isomorphisms. Evaluate these
-isomorphisms and the conductor restriction morphism on the top open. Their composite is
-an additive bijection between the ideal tensor sections. The commutative square in the
-zero-intersection theorem, transported through the comparisons, gives compatibility
-with the canonical unit of tensor pullback. The canonical unit is fixed by its explicit
-section formula, so the restriction used here is the stated one. -/
+inclusion into the ambient tensor power (Stacks, Tags 09NW and 09NX). -/
 theorem conductor_sections_restriction {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]
     (C : ι → Scheme.{u}) (i : ∀ b : ι, C b ⟶ Y)
     [∀ b : ι, IsReduced (C b)] [∀ b : ι, IsClosedImmersion (i b)]

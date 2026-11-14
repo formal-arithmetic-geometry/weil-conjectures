@@ -15,8 +15,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 
 /-! # The canonical closed-immersion comparison for units is bijective
 
-Source: Stacks Project, Cohomology, Lemma 02UV, and Varieties, Lemma 09NY
-(blueprint: lem-sc-closed-immersion-units-cohomology-comparison-bijective).
+## References
+
+* Stacks Project, Tags 02UV and 09NY
 -/
 
 @[expose] public section
@@ -76,22 +77,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option maxHeartbeats 400000 in
 -- Comparing the two concrete Ext maps unfolds the sheaf-adjunction construction.
 /-- The canonical comparison from cohomology of the direct image of units to cohomology
-of units is bijective in every degree.
-Source: Stacks Project, Cohomology, Lemma 02UV, and Varieties, Lemma 09NY, the sentence
-invoking Lemma 02UV
-(blueprint: lem-sc-closed-immersion-units-cohomology-comparison-bijective).
-
-Proof: A closed embedding has exact direct image on abelian sheaves. Direct image also
-preserves injectives, since its left adjoint, inverse image, is exact. An injective
-resolution of O_Zˣ therefore pushes forward to an injective resolution of i_* O_Zˣ.
-Their complexes of global sections are canonically identical, so the induced comparison
-is an isomorphism in every degree, as in Lemma 02UV. The map defined by exact inverse
-image on Ext, the constant-sheaf identification, and the counit is this comparison:
-in degree zero the adjunction triangle identifies it with the identity on sections;
-naturality with the connecting maps identifies it in all degrees by dimension shifting
-through injective resolutions. Thus the particular unitsPushforwardCohomologyComparison,
-not merely some abstract isomorphism, is bijective. This includes degree zero and the
-empty closed subscheme, where both sides are zero. -/
+of units is bijective in every degree (Stacks, Tags 02UV and 09NY). -/
 theorem bijective_unitsPushforwardCohomologyComparison_of_isClosedImmersion
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (p : ℕ) :
     Function.Bijective (unitsPushforwardCohomologyComparison i p) := by

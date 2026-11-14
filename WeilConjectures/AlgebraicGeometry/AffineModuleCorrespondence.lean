@@ -19,9 +19,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-! # Quasi-coherent modules along an affine morphism
 
-Source: Stacks Project, Morphisms, Lemma 01SB
-(blueprint: lem-weil-pbc-affine-module-correspondence).
-
 The algebra `B = u^* A` is specified by its tensor-product universal property: the pushout
 of `u⁻¹ O_X → O_U` and `u⁻¹ O_X → u⁻¹ A` in commutative ring sheaves. The functor `P`
 is extension of scalars from `u⁻¹ A` to `B`; `κ` identifies its underlying module with the
@@ -29,6 +26,10 @@ recorded tensor pullback. Its formula on the pullback unit fixes this identifica
 Thus the action is `(b ⊗ a)(b' ⊗ g) = bb' ⊗ ag`. The functor `H` is extension of
 scalars along the multiplication counit `ε : B → O_U`, with the target scalar first
 in the tensor notation. No alternative pullback or tensor product is defined here.
+
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section
@@ -120,35 +121,7 @@ set_option maxHeartbeats 400000 in
 /-- For an affine morphism, pushforward gives the equivalence of quasi-coherent modules
 with quasi-coherent modules over its direct-image algebra. Quasi-coherence is unchanged
 by restriction to the structure sheaf. The inverse is the two tensor operations in 01SB,
-and the canonical counit-induced `α` and adjoint `β` are isomorphisms.
-Source: Stacks Project, Morphisms, Lemma 01SB
-(blueprint: lem-weil-pbc-affine-module-correspondence).
-
-Proof:
-1. The direct-image algebra is quasi-coherent by affine relative Spec
-   (`lem-weil-pbc-affine-morphism-relative-spec`). Apply quasi-coherence under scalar
-   restriction (`lem-weil-pbc-quasi-coherence-scalar-restriction`) to obtain clause (1).
-2. Pushforward has the sectionwise algebra action and sends quasi-coherent modules to
-   quasi-coherent modules (`pqf-lem-pushforward-qcoh`), since an affine morphism is
-   quasi-compact and separated, hence quasi-separated.
-3. Form the pulled-back algebra by the tensor pushout, and the pulled-back module by
-   extension of scalars. Associativity of tensor products gives `κ`, with its stated
-   formula. The counit is multiplicative and induces `ε`, hence the second extension
-   of scalars `H`. Pullback and change of rings preserve quasi-coherence
-   (`lem-weil-pbc-module-pullback-quasi-coherent`,
-   `lem-weil-pbc-quasi-coherent-algebra-change-of-rings`). The tensor unit gives `γ`.
-   The ordinary counit factors uniquely through it to give `α`; its adjoint gives `β`.
-4. On an affine open `V` with inverse image `W`, the affine-sections pullback formula
-   (`lem-weil-pbc-module-pullback-affine-sections`) identifies `H(G)(W)` with
-   `(N ⊗_R B) ⊗_(B ⊗_R B) B`, where `N = G(V)`. The balanced map
-   `(n ⊗ b) ⊗ c ↦ bc n` has inverse `n ↦ (n ⊗ 1) ⊗ 1`: move `b` and `c`
-   through the balancing relation. Both are linear for the last-factor action.
-5. Under this identification `α` is the balanced map and `β` its inverse. Their
-   components are bijections on the affine covers. Apply
-   `lem-weil-pbc-quasi-coherent-iso-on-affine-cover` to get isomorphisms. The maps
-   are natural, and `β` is algebra-linear (check on affine opens, then glue).
-6. Restrict these functors and natural isomorphisms to the full quasi-coherent
-   subcategories, obtaining the asserted equivalence with inverse `H`. -/
+and the canonical counit-induced `α` and adjoint `β` are isomorphisms (Stacks, Tag 01SB). -/
 theorem affine_module_correspondence [IsAffineHom f] :
     (∀ G : SheafOfModules.{u} (𝓡 A), G.IsQuasicoherent ↔ ((S).obj G).IsQuasicoherent) ∧
     (∀ F : U.Modules, F.IsQuasicoherent → ((R).obj F).IsQuasicoherent) ∧

@@ -130,31 +130,8 @@ private theorem orbit_extension {C : Type*} [Category* C] [MonoidalCategory C]
 
 /-- Extend representative-normalized values to an isomorphism-compatible family.
 The new family agrees with the given one only on the specified chain inputs;
-the given family need not be compatible on arbitrary derived objects.
-Source: Stacks Project, cohomology.tex, Tag 08DJ (functoriality on representatives),
-and sites-cohomology.tex, Tags 0A90 and 0A96.
-(blueprint: lem-pc-tensor-hom-uncurry-descent-extension).
-
-Proof: Choose complex representatives of the three derived objects and K-flat
-resolutions of the first two. Maps into Hom(Lc,I(M)) lift to chain maps modulo
-homotopy because that Hom complex is K-injective. Evaluate t on these chain
-inputs and transport the answer along the chosen representative isomorphisms.
-The normalization hypothesis expresses every value used here as localized
-componentwise evaluation, so it supplies homotopy invariance and compatibility
-under changes of the chain lift. For changes of representatives, compute roofs
-on common K-flat resolutions and K-injective targets. On each tensor summand,
-the sheaf tensor-Hom adjunction and the Hom projections commute with pre- and
-postcomposition. The coproduct universal property gives the comparison identity
-for evaluation. Localize it, use the naturality of the tensor model map, Hom
-resolution comparison and resolution augmentation, and cancel the invertible
-quasi-isomorphisms. This proves independence of representatives and the asserted
-transport identity for arbitrary derived isomorphisms. If the input already has
-the form in the agreement clause, use its given K-flat P. Resolve its possibly
-non-K-flat L; both P tensor - and Hom(-,I(M)) invert this resolution and evaluation
-commutes with it. Cancellation and ht give precisely agreement with t on that
-input. The construction does not retain arbitrary values of t elsewhere. Identity
-isomorphisms, zero inputs and zero complexes satisfy the same comparison; no
-boundedness or naturality of the given t outside its normalized inputs is used. -/
+the given family need not be compatible on arbitrary derived objects
+(Stacks, Tags 08DJ, 0A90 and 0A96). -/
 theorem exists_tensorHomUncurry_descent_extension (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (t : ∀ K L M : schemeDerivedCategory X,

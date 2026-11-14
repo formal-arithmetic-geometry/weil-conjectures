@@ -8,8 +8,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 
 /-! # Restricting an étale section along a lift
 
-Source: Stacks Project, Tags 03D3, 03D7 and 03Q9.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 03D3, 03D7 and 03Q9
 -/
 
 @[expose] public section
@@ -18,9 +19,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-/-- The graph of a lift of an étale object along a scheme map.
-Source: Stacks Project, Tags 03D3 and 03D7.
-(auxiliary; not a blueprint node). -/
+/-- The graph of a lift of an étale object along a scheme map (Stacks, Tags 03D3 and 03D7). -/
 noncomputable def etaleSectionGraph {X Z : Scheme.{u}} (p : Z ⟶ X)
     (U : X.Etale) (v : Z ⟶ U.left) (hv : v ≫ U.hom = p) :
     Scheme.Etale.mk (𝟙 Z) ⟶ p.Etale.obj U :=
@@ -28,9 +27,8 @@ noncomputable def etaleSectionGraph {X Z : Scheme.{u}} (p : Z ⟶ X)
     (pullback.lift v (𝟙 Z) (hv.trans (Category.id_comp p).symm))
     (pullback.lift_snd _ _ _)
 
-/-- Restriction of a section along an arbitrary lift, using the inverse-image unit.
-Source: Stacks Project, Tags 03D3, 03D7 and 03Q9.
-(auxiliary; not a blueprint node). -/
+/-- Restriction of a section along an arbitrary lift, using the inverse-image unit
+(Stacks, Tags 03D3, 03D7 and 03Q9). -/
 noncomputable def unitSectionRestriction (Λ : Type (u + 1)) [CommRing Λ]
     {X Z : Scheme.{u}} (p : Z ⟶ X)
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -150,16 +148,8 @@ private theorem pre_composite_unit
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Unit restriction commutes with further pullback, including its composition comparison.
-Source: Stacks Project, Tags 03D3 and 03D7, functoriality of inverse image.
-(auxiliary; not a blueprint node).
-
-Proof: express global pullback by terminal evaluation, its adjunction unit and the
-terminal graph. Move restriction past the second unit by naturality. The composite
-adjunction-unit equation identifies the successive units with the unit for the composite.
-Naturality of the inverse-image composition isomorphism leaves the composite of graph
-maps; its two projections identify it with the graph of the composite lift. Terminal
-evaluation and its inverse cancel. No nonempty, finite or proper hypothesis is needed. -/
+/-- Unit restriction commutes with further pullback, including its composition comparison
+(Stacks, Tags 03D3 and 03D7). -/
 theorem unitSectionRestriction_comp
     (Λ : Type (u + 1)) [CommRing Λ] {X Z W : Scheme.{u}}
     (q : W ⟶ Z) (p : Z ⟶ X) (g : W ⟶ X) (hg : g = q ≫ p)

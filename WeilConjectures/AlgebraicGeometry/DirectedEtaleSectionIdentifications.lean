@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetTerminalCone
 
 /-! # Identification of the directed étale section comparisons
 
-Source: Stacks Project, Tags 03S2, 03CB and 03CC, in the degree-zero route of Tag 09YQ.
+## References
+
+* Stacks Project, Tags 03S2, 03CB, 03CC and 09YQ
 -/
 
 @[expose] public section
@@ -23,34 +25,7 @@ namespace AlgebraicGeometry
 
 /-- Identify the section sets and maps on the upper tail of a chosen stage. This
 comparison is independent of continuity: it requires neither qcqs stages, affine
-transitions, directedness, nor a limiting cone.
-
-Source: Stacks Project, Tag 03S2 (restriction along an étale morphism), Sites Tags
-03CB and 03CC (inverse-image composition and units); the comparison step in Tag 09YQ.
-(blueprint: lem-weil-pbc-directed-etale-section-identifications).
-
-Proof: Put G equal to the inverse image of H on stage i₀, and W₀ equal to its
-terminal étale object. For each j over i₀, the cone in the over-category gives
-D(j.hom) followed by the structure map at i₀ equal to the structure map at j.
-The unit-compatible composition isomorphism identifies the inverse image of G
-along D(j.hom) with the inverse image of H along the latter structure map.
-The base change of W₀ is canonically the terminal étale object at j: the
-projection from the pullback of an identity is an isomorphism, whose inverse has
-the identity and D(j.hom) as its projections. Evaluate the composition isomorphism
-at this terminal object, then apply the étale-restriction isomorphism. Invert this
-composite to obtain a_j. The same composition calculation for the cone leg at i₀,
-using h i₀, and the terminal-object pullback isomorphism gives l at the limit;
-no étale hypothesis on p or the limit leg is used here.
-For a transition k → j, expand the section comparison. Unit naturality and the
-composition unit equation move a pulled-back section through this composite.
-The restriction unit equation changes it to H on the opposite transition map.
-The two fibre-product pasting maps coincide because their first and second
-projections coincide. This proves the transition equation. Apply that calculation
-to a cone leg: the first projection is c_j and the second is the identity, so the
-resulting map is precisely the diagonal map stipulated in hν. This proves the
-component equation. A singleton diagram reduces to the restriction isomorphism;
-empty stage schemes cause no problem because all constructions are categorical
-isomorphisms and the sheaf axiom gives a singleton section set there. -/
+transitions, directedness, nor a limiting cone (Stacks, Tags 03S2, 03CB, 03CC and 09YQ). -/
 theorem directedEtaleSectionIdentifications
     {I : Type u} [Preorder I]
     {R : Scheme.{u}} (B : Iᵒᵖ ⥤ R.Etale)

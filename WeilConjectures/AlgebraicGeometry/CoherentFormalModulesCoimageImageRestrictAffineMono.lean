@@ -67,16 +67,7 @@ private theorem restriction_preservesCokernel {X : Scheme.{u}} [IsNoetherian X]
   exact preservesColimit_of_reflects_of_preserves R j
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The affine restriction of the coimage-image comparison is monic.
-Source: Stacks Project, Lemma 087X, affine calculation of Coim=Im.
-(blueprint: lem-weil-pbc-coherent-formal-coimage-image-affine-mono).
-
-Proof: On an affine open, the coherent formal module equivalence identifies the
-comparison with the map from a module modulo its kernel to its image. The first
-isomorphism theorem makes this map injective; restriction and associated sheaf
-preserve that injectivity. The argument is independent of the chosen kernel and
-cokernel structures because their universal comparison isomorphisms conjugate
-the map. -/
+/-- The affine restriction of the coimage-image comparison is monic (Stacks, Tag 087X). -/
 theorem coherentFormalModules_coimageImage_isMono_restrict_affine
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)
     [HasKernels (CoherentFormalModule X I)]

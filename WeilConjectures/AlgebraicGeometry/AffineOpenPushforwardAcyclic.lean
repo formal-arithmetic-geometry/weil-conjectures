@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 import WeilConjectures.AlgebraicGeometry.OpenPushforwardDerivedComparison
 
 /-! # Acyclic direct images from affine opens
-
-Source: blueprint lemma-coherent-base-change-invertible-sheaves, proof paragraphs 2 and 3.
-(blueprint: lem-pc-affine-open-pushforward-acyclic).
 -/
 
 @[expose] public section
@@ -27,22 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- An affine open direct image is acyclic for a separated map to an affine scheme.
-Source: blueprint lemma-coherent-base-change-invertible-sheaves, proof paragraphs 2 and 3.
-(blueprint: lem-pc-affine-open-pushforward-acyclic)
-
-Proof: X is separated over an affine base. Intersections of affine opens are affine,
-so the inclusion j : W → X is affine. The composite W → Spec A is affine as both
-its source and target are affine. Restriction of a quasi-coherent module to W is
-quasi-coherent. Affine higher-direct-image vanishing therefore gives R^q j_* F|W = 0
-and R^q (f j)_* F|W = 0 for q > 0. Restriction to W is an exact left adjoint of j_*,
-so j_* preserves injectives. Apply j_* to an injective resolution of F|W.
-Its augmentation is a quasi-isomorphism by j_*-acyclicity, giving an injective
-resolution of j_*F|W. Computing f_* on this resolution and using pushforward
-composition identifies R^p f_* (j_* F|W) with R^p (f j)_* F|W, which vanishes
-for p > 0. This directly proves the comparison that the spectral sequence supplies.
-This is precisely rightAcyclic for moduleDirectImage f. The empty affine open and
-the zero module have zero direct images and satisfy the same conclusion. -/
+/-- An affine open direct image is acyclic for a separated map to an affine scheme. -/
 theorem affine_open_pushforward_rightAcyclic
     {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A) [IsSeparated f]
     [HasInjectiveResolutions (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

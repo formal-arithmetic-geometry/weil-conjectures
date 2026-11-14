@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.AffinePerfectOpenRepresentCohomologyCol
 
 /-! # Koszul perfect objects represent cohomology classes on a principal open
 
-Source: Stacks Project, Section 36.9, Tags 08CX, 08DC, and 08DD
-(blueprint: lem-sc-affine-perfect-open-represent-cohomology).
+## References
+
+* Stacks Project, Tags 08CX, 08DC and 08DD
 -/
 
 @[expose] public section
@@ -35,29 +36,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 set_option backward.isDefEq.respectTransparency false in
 /-- Every Koszul tail is perfect, its augmentation is invertible on the finite
 principal open, and the restriction cocone represents the filtered colimit of Hom.
-The target is `Hom(O_U,E|_U)`, the degree-zero cohomology identification in Tag 08DC.
-Restriction to `U` is first to the localized site and then transported by the
-canonical equivalence `Scheme.Modules.overEquiv U`, so the target lives in `D(O_U)`.
-Indices `e : ℕ` here correspond to positive exponents `e+1` in the source.
-Source: Stacks, Tags 08CX, 08DC, and Proposition 08DD
-(blueprint: lem-sc-affine-perfect-open-represent-cohomology).
-
-Proof:
-1. The tail is bounded finite free, hence perfect. Inverting any `f_i` makes
-   the Koszul complex contractible, so the augmentation on the union is invertible
-   (`lem-sc-affine-perfect-koszul-principal-unit`).
-2. The exterior-power diagonal maps give the inverse system; the contraction formula
-   proves that the augmentation commutes with each transition.
-3. Represent `E` by a complex of quasi-coherent sheaves using
-   `lem-pc-affine-qcoh-derived-equivalence`. Apply
-   `lem-sc-affine-koszul-cech-derived-comparison` and take degree-zero cohomology,
-   which commutes with filtered colimits. The bounded finite free tail is K-projective
-   (`lem-sc-bounded-above-projective-kprojective`), so degree-zero Hom-complex
-   cohomology is derived Hom even for unbounded `E`. Full faithfulness of the affine
-   equivalence identifies these with the sheaf-derived Hom sets.
-4. The resulting comparison is restriction followed by the inverse augmentation.
-   Its compatibility makes it the displayed cocone; bijectivity identifies that
-   cocone as a colimit. The empty family and zero object both give zero Hom groups. -/
+The target is `Hom(O_U,E|_U)` (Stacks, Tags 08CX, 08DC, 08DD). -/
 theorem affine_perfect_open_represent_cohomology
     (A : Type uMain) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{wMain}

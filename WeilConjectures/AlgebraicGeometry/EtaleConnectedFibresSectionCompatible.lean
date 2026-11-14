@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
 
 /-! # Compatibility of sections on connected geometric fibres
 
-Source: Stacks Project, Etale Cohomology, Tag 0A3H, final paragraph.
-(blueprint: lem-weil-pbc-etale-connected-fibres-section-compatible).
+## References
+
+* Stacks Project, Tag 0A3H
 -/
 
 @[expose] public section
@@ -132,24 +133,7 @@ private theorem global_eq_of_jointly_surjective
 /-- Every section of an etale inverse image along a morphism with connected
 geometric fibres has equal pullbacks along the two Cech projections. The comparisons
 are the unit-compatible composition comparisons, evaluated at the terminal etale
-object. Flatness and quasi-compactness are not required for this assertion.
-
-Source: Stacks Project, Etale Cohomology, Tag 0A3H, final paragraph.
-(blueprint: lem-weil-pbc-etale-connected-fibres-section-compatible).
-
-Proof:
-1. For each point s of S choose the canonical geometric point q from the algebraic
-   closure of its residue field. The maps D ×_S Spec Ω → D jointly cover D:
-   the pullback range formula and the residue-field point show that the fibre
-   indexed by g(x) contains each x in D, where g = pr₁ ≫ f.
-2. Apply etaleSet_cech_sections_agree_on_connected_geometric_fibre at each q.
-   Its connectedness hypothesis is exactly hconn s. Thus the restrictions of the
-   two displayed sections agree on every member of this jointly surjective family.
-3. The agreement-open universal property factors all these maps through an open
-   W of D. Joint surjectivity implies W = top, hence the two sections have equal
-   identity pullbacks. Inverse-image stalk comparison and germ naturality recover
-   equality of their original germs; geometric-germ extensionality gives equality
-   of the sections. The argument also applies to empty D. -/
+object. Flatness and quasi-compactness are not required for this assertion (Stacks, Tag 0A3H). -/
 theorem etaleSet_section_compatible_of_connected_geometricFibres
     {S T : Scheme.{u}} (f : T ⟶ S)
     (hconn : ∀ s : S, ConnectedSpace

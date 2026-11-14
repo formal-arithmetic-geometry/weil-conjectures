@@ -6,10 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.EtaleCoordinateTraceData
 
-/-! # Identity derived self symmetry of an even shifted flat object
-
-Source: blueprint latest, second triangle even-shift computation.
-(auxiliary; not a blueprint node). -/
+/-! # Identity derived self symmetry of an even shifted flat object -/
 
 @[expose] public noncomputable section
 suppress_compilation
@@ -105,20 +102,7 @@ private def shifted_single_iso {C : Type*} [Category.{u + 1} C] [Abelian C]
     (by omega)).app J
 
 /-- Identity derived self symmetry of an even shifted flat object.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, second triangle.
-(auxiliary; not a blueprint node).
-
-Proof: For a single complex in even degree n, use total-tensor coproduct extensionality. Every
-summand except bidegree (n,n) has zero source. The explicit Koszul braiding on that summand is the
-ordinary braiding multiplied by (-1)^(n*n); evenness makes this sign one. Naturality along
-singleObjXSelf transports the assumed ordinary self braiding.
-The single complex is K-flat since J is flat. The quotient preserves its identity braiding.
-Compatibility braiding_hom_mu identifies the derived braiding followed by the Qh tensor comparison
-with the comparison followed by Qh of the homotopy braiding. The comparison is invertible for this
-K-flat object, so cancellation gives identity.
-The canonical singleFunctors.shiftIso identifies J[2d] with the single in degree -2d. This degree
-is even also for negative d. Braiding naturality along this isomorphism transports the preceding
-result. -/
+-/
 theorem evenShiftCanonicalSelfSymmetry
     {C : Type*} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C]

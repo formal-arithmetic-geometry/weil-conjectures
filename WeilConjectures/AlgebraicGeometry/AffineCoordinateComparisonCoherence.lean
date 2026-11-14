@@ -11,8 +11,11 @@ import WeilConjectures.AlgebraicGeometry.AffineCoordinateComparisonFamilyBase
 import WeilConjectures.AlgebraicGeometry.AffineCoordinateComparisonChartCocycle
 
 /-! # Composition of affine-coordinate comparisons
-Source: Stacks Project, Tags 08DW, 06Y1 and 0D5S.
-(blueprint: lem-pc-affine-coordinate-comparison-coherence). -/
+
+## References
+
+* Stacks Project, Tags 08DW, 06Y1 and 0D5S
+-/
 
 @[expose] public section
 universe u w
@@ -25,9 +28,8 @@ set_option backward.isDefEq.respectTransparency.types false
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
-/-- Naturality form of one object triangle: propagation of any supplied identification.
-Source: Stacks Project, Tag 0D5S, and naturality of the composition comparison.
-(blueprint: lem-pc-affine-coordinate-comparison-coherence). -/
+/-- Naturality form of one object triangle: propagation of any supplied identification
+(Stacks, Tag 0D5S). -/
 def AffineComparisonTransportTriangle
     {D T V : Type*} [Category D] [Category T] [Category V]
     (L : D ⥤ T) (B : T ⥤ V) (N : D ⥤ V) (κ : L ⋙ B ≅ N)
@@ -61,32 +63,8 @@ private theorem affineComparisonTransportTriangle_of_comp
   simpa only [Category.assoc] using
     congrArg (fun v ↦ v ≫ N.map a.hom ≫ e₂.inv) hd
 
-/-- Affine-coordinate comparisons can be made simultaneously and respect composition.
-Source: Stacks Project, Tag 08DW(2), Tag 06Y1 and Tag 0D5S.
-(blueprint: lem-pc-affine-coordinate-comparison-coherence).
-
-Proof: fix the counits used by perfectHomComposition. At a K-flat tilde complex
-these are invertible: the original derived-pullback counit is invertible by tilde
-K-flatness, and uniqueness of left-derived functors transfers this to the fixed
-counit. Compose its inverse with the natural tilde/scalar-extension comparison.
-For an affine coordinate isomorphism, pushforward is an exact equivalence with
-inverse tensor pullback. Localize that equivalence and use hd to identify d;
-transport the resulting comparison using hH at both ends. For each commuting
-square this gives the displayed natural isomorphism on all K-flat models, then
-restrict to the full induced category of the two labels. For a composable pair,
-scalar extension preserves K-flatness by Tag 06Y1, so both successive counits
-are invertible. The defining counit equation of perfectHomComposition identifies
-successive derived comparisons with the direct one. The underived equation is
-proved by taking adjunction mates: coordinate global-sections comparisons are
-identity maps on underlying sections and compose strictly. Pasting their mates
-identifies the scalar factor with ModuleCat.extendScalarsComp and the tensor
-factor with the pinned pushforward mate. Transport through the coordinate
-equivalences; their adjacent unit and counit factors cancel, and naturality
-cancels hH and its inverse. Equality
-of the composite ring and scheme maps gives the two eqToIso factors below.
-Thus the iso equation holds at each label, retaining every cross morphism.
-There is no boundedness or flatness assumption; coincident labels, identity maps,
-zero models and zero rings satisfy the same calculation. -/
+/-- Affine-coordinate comparisons can be made simultaneously and respect composition
+(Stacks, Tags 08DW, 06Y1 and 0D5S). -/
 theorem exists_affineCoordinateComparisonFamily :
     ∃ δ : AffineCoordinateComparisonFamily.{u, w},
       ∀ (a b c : AffineComparisonCoordinate.{u, w})
@@ -144,29 +122,8 @@ theorem exists_affineCoordinateComparisonFamily :
       affineCoordinateChartObjectComparison_cocycle a b c φ ψ χ hc p q r hr hp hq hs N hN
 
 
-/-- Affine-coordinate comparisons with the naturality form of their composition law.
-Source: Stacks Project, Tags 08DW(2), 06Y1 and 0D5S.
-(blueprint: lem-pc-affine-coordinate-comparison-coherence).
-
-Proof: fix the counits defining perfectHomComposition. On a K-flat tilde complex
-these are invertible, by the affine K-flat computation and uniqueness of left-derived
-functors. Compose the inverse counit with the natural tilde/scalar-extension comparison.
-For an affine coordinate, pushforward is an exact equivalence with inverse tensor
-pullback. Localize it, identify d by hd, and conjugate the comparisons by hH. Restrict
-this natural construction to the full induced category on the two labels; it retains
-cross morphisms even for coincident models. Scalar extension preserves K-flatness.
-For composable squares the defining composite-counit equation identifies successive
-comparisons with the direct comparison. Underived tensor reassociation sends a pure
-tensor c tensor (b tensor m) to cb tensor m, and the pinned adjunction identifies this
-with ModuleCat.extendScalarsComp. Adjacent coordinate units and counits and hH factors
-cancel by naturality. The equalities hc and hr insert the displayed equality transports.
-Consequently t followed by pullback of the first delta and the composition component
-is the direct delta, at each label. To obtain the stated transport predicate, let a
-be any supplied identification at the bottom. Expand functoriality of mapIso, use the
-supplied equation on e₁,e₂,e₁₂, and move a through κ by naturality. Substitute the
-composition identity just established. This proves the displayed equation without
-choosing any bottom object, diagram, cocone or target model. Zero complexes, identity
-maps, coincident labels, zero rings and empty spectra use the same equation. -/
+/-- Affine-coordinate comparisons with the naturality form of their composition law
+(Stacks, Tags 08DW, 06Y1 and 0D5S). -/
 theorem exists_affineCoordinateComparisonTransportFamily :
     ∃ δ : AffineCoordinateComparisonFamily.{u, w},
       ∀ (a b c : AffineComparisonCoordinate.{u, w})

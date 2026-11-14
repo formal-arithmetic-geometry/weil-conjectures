@@ -9,7 +9,9 @@ import WeilConjectures.AlgebraicGeometry.ConstantCoefficientLocalModelsCompariso
 
 /-! # Surjective coefficient restriction preserves finite local constant modules
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YY and 094I.
+## References
+
+* Stacks Project, Tags 06YY and 094I
 -/
 
 @[expose] public section
@@ -55,16 +57,7 @@ private noncomputable def constantRestrictionIso
       (constantRingMap T f) hsq P)
 
 /-- Restriction along a surjective coefficient homomorphism preserves local constant
-finite-module descriptions. Source: Stacks Project, Cohomology on Sites, Tag 094I,
-restriction of scalars in the filtration argument
-(auxiliary; not a blueprint node).
-
-Proof: coefficient restriction commutes with module sheafification, as shown by
-the sheafification adjunction; its comparison is the identity on the associated
-additive-group sheaves. It also commutes with restriction to each slice. Restrict
-each constant finite local model along f. A finite D-module is finite over B,
-since the surjection makes D a finite B-module. The same covering sieves and the
-transported local isomorphisms give the required descriptions. -/
+finite-module descriptions (Stacks, Tag 094I). -/
 theorem locallyConstantFiniteTypeModules_restrictScalars_surjective
     {C : Type u} [Category.{u} C] (T : GrothendieckTopology C)
     {B D : Type u} [CommRing B] [CommRing D] (f : B →+* D)

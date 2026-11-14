@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 /-!
 # Comparing constructibility of etale module sheaves
 
-Source: Stacks Project, Tags 095E (3), 03RU and 09XZ.
+## References
+
+* Stacks Project, Tags 095E, 03RU and 09XZ
 -/
 
 @[expose] public section
@@ -24,16 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The finite-constant-value and finite-stalk definitions of constructibility agree
-for module sheaves over a finite commutative ring.
-
-Source: Stacks Project, Tags 095E (3), 03RU and 09XZ, and the global stratification
-convention of `IsConstructibleEtaleModuleSheaf` and `IsConstructibleSheaf`.
-(blueprint: lem-weil-pbc-constructible-etale-module-sheaf-comparison).
-
-Proof: use the same stratification in both directions. On each stratum apply the first
-equivalence of `finite_locally_constant_module_values_iff` (blueprint dependency
-`lem-weil-pbc-finite-locally-constant-module-values`), which identifies the existence
-of finite constant-value trivializations with `IsFiniteLocallyConstantSheaf`. -/
+for module sheaves over a finite commutative ring (Stacks, Tags 095E, 03RU and 09XZ). -/
 theorem isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf
     {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :

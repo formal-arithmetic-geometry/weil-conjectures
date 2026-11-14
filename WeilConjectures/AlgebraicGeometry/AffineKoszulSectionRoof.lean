@@ -18,8 +18,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Koszul representatives of sections on an affine open
 
-Source: Stacks Project, Tags 08DC, 08DD and 08EH.
-(blueprint: lem-sc-affine-koszul-section-roof).
+## References
+
+* Stacks Project, Tags 08DC, 08DD and 08EH
 -/
 
 @[expose] public section
@@ -36,8 +37,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Realize a derived augmentation by a chain map after a K-flat replacement.
-Source: Stacks Project, Tag 06YS, and calculus of fractions in the derived category. -/
+/-- Realize a derived augmentation by a chain map after a K-flat replacement (Stacks, Tag 06YS). -/
 private theorem kflat_augmentation_realization
     (X : Scheme.{uX})
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]
@@ -70,27 +70,8 @@ set_option maxHeartbeats 600000 in
 -- Comparing chosen restriction functors and their localization instances needs extra heartbeats.
 /-- A section of an arbitrary quasi-coherent derived object on a compact open of an affine scheme
 is represented by a map from a K-flat perfect complex with a chain augmentation.
-There is no perfect source, tensor product, or lifted morphism in this statement.
-
-Source: Stacks Project, perfect.tex, Tags 08DC and 08DD, and the first paragraph of
-Tag 08EH; cohomology.tex, Tag 06YD.
-(blueprint: lem-sc-affine-koszul-section-roof).
-
-Proof:
-1. The transported Hom-colimit comparison `affine_koszul_section_colimit` supplies
-   perfect derived objects P_n, augmentations a_n to Q(T), and a colimit whose legs
-   are restriction followed by the inverse restricted augmentation.
-2. `Types.jointly_surjective` gives a finite index n and ξ : P_n → E representing s.
-3. Represent P_n by a complex and apply `DerivedCategory.right_fac` to its augmentation.
-   This gives K → T and a quasi-isomorphism K → P_n's representative. Apply
-   `exists_isKFlatResolution` to K and compose chain maps to obtain u : J → T,
-   an isomorphism c : Q(J) ≅ P_n, and Q(u) = c.hom followed by a_n.
-4. Transport each strictly perfect local model along c to prove Q(J) perfect.
-   Restriction of Q(u) is the composite of restriction of c.hom and a_n, so is
-   invertible. Multiply the cocone formula by the restricted augmentation and
-   cancel its inverse. Functoriality yields R(Q(u)) followed by s = R(c.hom followed by ξ).
-5. Empty U, zero E and the zero ring use the same colimit and realization arguments.
-   No boundedness or nonempty assumption is introduced. -/
+There is no perfect source, tensor product, or lifted morphism in this statement
+(Stacks, Tags 08DC, 08DD, 08EH and 06YD). -/
 theorem affine_koszul_section_roof
     (X : Scheme.{uX}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

@@ -15,9 +15,9 @@ import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 
 /-! # Unit laws for derived pullback tensor comparisons
 
-Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product,
-and section-derived-pullback; the parent descent proof, step 3.
-(blueprint: lem-pc-derived-pullback-tensor-unit).
+## References
+
+* Stacks Project, Tag 079U
 -/
 
 @[expose] public section
@@ -91,24 +91,7 @@ private theorem tensorUnit_right_of_iso
 
 /-- The extended natural tensor comparison admits a unit isomorphism satisfying
 both unit laws. The associativity law is not assumed or asserted here.
-Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product,
-and section-derived-pullback; parent descent proof, step 3 (unit).
-(blueprint: lem-pc-derived-pullback-tensor-unit).
-Proof: take the structure sheaf concentrated in degree zero, which is K-flat and
-represents the derived tensor unit with its recorded unit comparison. F sends the
-underived tensor unit to the target tensor unit by mF. Apply Q to the unit isomorphism
-of mF, then use the inverse of the supplied left-derived counit at this single complex;
-that counit is invertible by comparison with the recorded K-flat computation.
-Together with the source and target localization unit isomorphisms these maps give
-an isomorphism η from the target derived unit to L of the source derived unit.
-For a K-flat complex P, substitute the structure sheaf single complex and P into hμ.
-Postcompose the proposed left unit identity with the invertible counit and localization
-maps. On the summand of total degree n corresponding to (0,n), hφ reduces the identity
-to left unitality of mF at P.X n. All other summands are zero. Coproduct extensionality
-and cancellation give left unitality on Q(P). The same argument on summands (n,0),
-using right unitality of mF, proves the right unit identity. Both sides are natural in
-P, so K-flat resolutions transport these identities to every derived object.
-This proof does not use the derived associativity law. -/
+(Stacks, Tag 079U) -/
 theorem derivedPullback_tensor_unit {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]

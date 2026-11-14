@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.BaseChangeCurve
 
 /-!
 # Boundary principal divisors and algebraically closed base change
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-  affine-case proof, unit quotient paragraph (blueprint: lem-sc-affine-unit-divisor-base-change).
 -/
 
 @[expose] public section
@@ -30,31 +27,10 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- **Boundary principal divisors are unchanged by algebraically closed base change.**
-Let `k ⊆ k'` be algebraically closed, `C` a smooth affine connected curve over `k` with a
-smooth proper connected compactification `c : C ↪ X = c.Z`, boundary
-`S = {P ∈ X closed, P ∉ C}`, and `X' = X ×_k k'` the compactification `c.baseChange` of
-`C' = C ×_k k'`, with boundary `S'`. Then:
-* every `P ∈ S` has exactly one point `e P ∈ S'` above it and no other point of `X'` lies over
-  `P`, giving a bijection `e : S ≃ S'`, hence `ι = Finsupp.domCongr e`;
-* for every unit `u` of `𝒪_C(C)` with pullback `u'` along `C' ⟶ C`, the boundary part of
-  `div(u')` on `X'` is `ι` of the boundary part of `div(u)` on `X` (units are viewed in the
-  function fields through the restriction maps `φ`, `φ'`, tied to the germs at the points of
-  `C`, `C'`);
-* `ι` maps the set of boundary divisors of units on `C` onto that on `C'`.
-
-Proof: smooth connected curves and their base changes are integral and Noetherian.
-The geometric setup and forward order comparison are
-`affine_unit_divisor_base_change_core`: restriction to the generic point gives the
-compatible maps, rational boundary points have unique fibres, and local DVR base change
-preserves orders. Explicit pullback of a unit witnesses the forward inclusion of ranges.
-`affine_boundary_unit_divisor_descent` gives the reverse inclusion: a transported boundary
-divisor is principal after extension, its degree-zero Picard class vanishes by injectivity
-of the Jacobian point comparison, and the divisor exact sequence supplies a unit before
-extension. Set antisymmetry gives equality. The two cited intermediate geometric statements
-remain open; this is a decomposition of the blueprint argument.
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-  affine-case proof, unit quotient paragraph (blueprint: lem-sc-affine-unit-divisor-base-change). -/
+For `k ⊆ k'` algebraically closed and `C` a smooth affine connected curve over `k` with
+smooth proper compactification `X`, the boundary points of `X` and of its base change to `k'`
+correspond bijectively, and this bijection carries the boundary part of `div(u)` to that of
+`div(u')` for every unit `u` of `𝒪_C(C)` with pullback `u'`. -/
 theorem affine_unit_divisor_base_change
     (k k' : Type u) [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k']
     (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]

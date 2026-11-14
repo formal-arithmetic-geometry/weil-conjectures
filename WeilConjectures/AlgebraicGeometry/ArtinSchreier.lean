@@ -14,32 +14,16 @@ import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 /-!
 # Artin–Schreier map over an algebraically closed field
 
-Source: blueprint sec-abelian-varieties/lem-sc-lang-steinberg/lem-sc-artin-schreier-k.md
-(blueprint: proposition-p-torsion-smooth-proper-curve--2)
+## References
+
+* Stacks Project, Tag 0A3J
 -/
 
 @[expose] public section
 
 namespace IsAlgClosed
 
-/-- Artin–Schreier on an algebraically closed field.
-
-Source: blueprint sec-abelian-varieties/lem-sc-lang-steinberg/lem-sc-artin-schreier-k.md,
-Proof; Stacks Project, Tag 0A3J, opening Artin–Schreier sequence
-(blueprint: proposition-p-torsion-smooth-proper-curve--2).
-
-Proof:
-1. Positive field characteristic is prime: if `p = m * n` with both factors strictly between
-   `1` and `p`, their nonzero casts would multiply to zero in the field
-   (`def-pc-field-characteristic`). In particular `p ≥ 2`. Given `a : k`, the polynomial
-   `X ^ p - X - a` has degree `p`, hence is nonconstant. Algebraic closedness gives a root
-   (`def-weil-algebraic-closure`), which satisfies `x ^ p - x = a`, proving surjectivity.
-2. The equation `x ^ p - x = 0` is equivalent to `x ^ p = x`. The field kernel result
-   (`lem-sc-field-artin-schreier-kernel`) identifies these elements with the prime subfield:
-   use `Subfield.mem_bot_iff_pow_eq_self`, then `ZMod.fieldRange_castHom_eq_bot` to identify
-   that subfield with the range of the canonical `ZMod p` embedding. This is the stated
-   kernel `𝔽_p`.
--/
+/-- Artin–Schreier on an algebraically closed field (Stacks, Tag 0A3J). -/
 theorem artinSchreier_surjective_and_kernel {k : Type*} [Field k] [IsAlgClosed k]
     (p : ℕ) [Fact p.Prime] [CharP k p] :
     Function.Surjective (fun x : k => x ^ p - x) ∧

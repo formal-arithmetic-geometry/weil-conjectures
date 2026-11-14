@@ -10,8 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.SfExactExchangePasting
 
 /-! # Base change of a single explicit product-graph map
 
-Source: Stacks Project, Tag 0F7F, applied factor by factor to the graph formula.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 0F7F
 -/
 
 @[expose] public noncomputable section
@@ -469,33 +470,8 @@ private theorem pullbackMap_snd
         simp only [pullback.lift_snd_assoc]
     · simpa using hl₂
 
-/-- A single graph map commutes with the exchanges of its source and target words.
-Source: Stacks Project, Tag 0F7F and the explicit `B1`, `B12`, inverse `B2` formula
-(auxiliary; not a blueprint node).
-
-Proof:
-1. Pull back the product of the two proper ambient schemes and its two supporting opens.
-   The pullback universal property identifies it with the product for the two pulled-back
-   presentations. It also identifies the graph lifts and their intersection. This works
-   for every supplied Cartesian representative, not only the chosen fibre product.
-2. Give every word of proper direct images and open extensions its successive exchange:
-   the exact unbounded proper mate and the inverse unit-normalized open mate. For a
-   proper compositor, mate pasting and the canonical composite-adjunction comparison
-   give compatibility of this exchange with composition. For an open compositor, expand
-   the unit equation of open base change on both sides, use pullback associativity, and
-   apply injectivity of the open-adjunction Hom bijection. Exactness descends that
-   sheaf identity degreewise to unbounded complexes. The identity cases follow in the
-   same way using the identity adjunction.
-3. The Cartesian normalization in `etaleProperOpenExchangeCube` identifies each
-   interchange in `locallyClosedGraphSide1`, `locallyClosedGraphMiddle`, and
-   `locallyClosedGraphSide2` with its specified Gamma. Its cube equation is precisely
-   compatibility with the exchanges of the two words. Compatibility is preserved by
-   whiskering, composition, and inversion of the comparison: multiply the same equation
-   by its inverse on the two ends. This does not invert any proper exchange.
-4. Apply step 3 to B1, the intersection map B12, and inverse B2. Apply step 2 to the
-   proper/open compositors and the removal of R(id)_*. Their product is exactly the
-   normalized graph map written below, and the successive exchanges of its two endpoint
-   words are exactly the two `etaleGraphPresentationExchange` maps. -/
+/-- A single graph map commutes with the exchanges of its source and target words
+(Stacks, Tag 0F7F). -/
 theorem etaleGraphFromOpen_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}

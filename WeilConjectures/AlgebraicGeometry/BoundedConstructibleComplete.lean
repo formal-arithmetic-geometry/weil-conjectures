@@ -23,10 +23,8 @@ import Mathlib.GroupTheory.OrderOfElement
 /-!
 # Bounded constructible derived-complete objects
 
-Source: blueprint, proper base change, order 1300
-(blueprint: def-weil-pbc-bounded-constructible-complete).
-The coefficient ring is the actual inverse limit. The three defining conditions
-are properties; no origin, local model, or completion representative is retained.
+Bounded constructible derived-complete objects, over a coefficient ring that is the actual
+inverse limit. The three defining conditions are properties.
 -/
 
 @[expose] public noncomputable section
@@ -44,25 +42,14 @@ variable (d : AdicCoefficientDatum A)
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 variable [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The valuation ring in the small site's coefficient universe. ULift changes size
-only. Source: blueprint order 1300 (blueprint: def-weil-pbc-bounded-constructible-complete). -/
+/-- The valuation ring in the small site's coefficient universe. -/
 abbrev PbcIntegralRing := ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)
 
-/-- The recorded uniformizer, with the same harmless size lift.
-Source: blueprint order 1300 (blueprint: def-weil-pbc-bounded-constructible-complete). -/
+/-- The recorded uniformizer, lifted to the small site's coefficient universe. -/
 def pbcUniformizer : PbcIntegralRing l E := ULift.up (Padic.coefficientExtensionUniformizer l E)
 
-/-- The finite-extension integer ring satisfies the recorded coefficient hypotheses.
-This is proof data only; the ideal and quotient rings are the actual constructions.
-Source: blueprint order 1300, coefficient convention; Serre, Local Fields II.2
-(blueprint: def-weil-pbc-bounded-constructible-complete).
-Proof: the recorded integer ring is a DVR and its uniformizer generates its maximal
-ideal. It is Noetherian and that principal ideal is finitely generated. Its finite
-residue field has positive characteristic, hence every residue element has finite
-additive order. Multiplication by each positive uniformizer power is injective; its
-two-term finite-free resolution proves perfectness of the quotient. Positive quotients
-are finite by finite_coefficientExtensionRing. Transport through the ULift ring
-equivalence gives exactly the lifted ring, ideal powers and quotients displayed here. -/
+/-- The finite-extension integer ring satisfies the recorded coefficient hypotheses
+(Serre, Local Fields II.2). -/
 theorem pbcCoefficientDatumProperties :
     IsNoetherianRing (PbcIntegralRing l E) ∧
       (Ideal.span ({pbcUniformizer l E} : Set (PbcIntegralRing l E))).FG ∧
@@ -124,9 +111,7 @@ theorem pbcCoefficientDatumProperties :
     have := (hfree i).1
     exact ⟨inferInstance, (hfree i).2⟩
 
-/-- The actual uniformizer-adic coefficient datum. All choices here are proofs of
-properties of the already specified ring and ideal.
-Source: blueprint order 1300 (blueprint: def-weil-pbc-bounded-constructible-complete). -/
+/-- The uniformizer-adic coefficient datum on the valuation ring. -/
 def pbcIntegralDatum : AdicCoefficientDatum (PbcIntegralRing l E) where
   ideal := Ideal.span {pbcUniformizer l E}
   noetherian := (pbcCoefficientDatumProperties l E).1

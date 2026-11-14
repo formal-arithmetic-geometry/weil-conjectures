@@ -16,8 +16,9 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 
 /-! # The stage diagram of an étale injective replacement
 
-Source: Stacks Project, Tags 0EXZ and 04JC.
-(blueprint: lem-weil-pbc-etale-replacement-stage-diagram).
+## References
+
+* Stacks Project, Tags 0EXZ and 04JC
 -/
 
 @[expose] public section
@@ -29,32 +30,7 @@ namespace AlgebraicGeometry.Etale
 -- The existential proof binders in the unchanged interface are used by later witnesses.
 set_option linter.unusedVariables false in
 /-- Compatible injective and cokernel systems, assembled into a short exact diagram
-on the cone point, before taking any filtered colimit.
-Source: Stacks Project, Tag 0EXZ, its product-of-direct-images construction, and
-Tag 04JC for exact inverse image.
-(blueprint: lem-weil-pbc-etale-replacement-stage-diagram).
-
-Proof: At every k use Injective.under (F k) and its canonical monomorphism.
-At i form the product of their direct images over the arrows i to k. Transpose
-coefficient transitions through the inverse-image/direct-image adjunction to
-obtain the embedding. The identity component proves monicity. Exact inverse
-image implies that direct image preserves injectives, and products of injectives
-are injective. Reindexing the products defines the transition maps; adjunction
-naturality and the inverse-image associativity and unit comparisons prove the
-system laws and compatibility of the embeddings. Set FR i to the cokernel of
-the embedding. Preservation of cokernels by inverse image defines its transitions;
-cancel the epic cokernel projections to prove their identity and composition laws.
-Pull both systems to the cone point, using the cone equation and upperStarComp
-to define the functor arrows. The same unit and associativity equations prove
-the functor laws. Transport the pulled-back embedding and quotient through eG,
-eGI and eGR; compatibility makes them natural transformations α and β. Their
-composite is zero by stagewise exactness. Each transported sequence is short
-exact because inverse image is exact; kernels and cokernels in the functor
-category are evaluated objectwise, so their short complex is short exact.
-The inverse objectwise identifications define the displayed morphisms s; their
-commutation equations are the definitions of α and β. Their first and third
-components are eG.inv and eGR.inv. No colimit or exact limit sequence is asserted.
--/
+on the cone point, before taking any filtered colimit (Stacks, Tags 0EXZ and 04JC). -/
 theorem etale_replacement_stage_diagram
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

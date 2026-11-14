@@ -42,18 +42,8 @@ private theorem section_subsingleton (S : Scheme.{u})
   exact Function.Injective.subsingleton (f := E.map (terminal.from H))
     ((CategoryTheory.mono_iff_injective _).mp hm)
 
-/-- A subterminal étale sheaf has an open support with the section factorization property.
-Source: Stacks Project, Étale Cohomology, Tag 04HV, lemma-support-subsheaf-final.
-(blueprint: lem-weil-pbc-etale-subsheaf-final-open-parts-factorization)
-
-Proof: Monicity into the terminal sheaf makes each section set a subsingleton. Take the
-union of the images of all étale objects with a section. Étale maps are open, so the union
-is open. A section implies factorization through this union. Conversely, for an object
-factoring through it, the pullbacks of the objects used in the union form a jointly
-surjective étale covering. Pull back their sections. They agree on every overlap by
-subsingletonness; sheaf gluing gives a section on the object, unique by subsingletonness.
-If factorization fails, any section would imply factorization, so the section set is empty.
-This also handles empty objects: the empty covering supplies their unique section. -/
+/-- A subterminal étale sheaf has an open support with the section factorization property
+(Stacks, Tag 04HV). -/
 theorem exists_open_etale_subsheaf_final_factorization (S : Scheme.{u})
     (H : Sheaf S.smallEtaleTopology (Type (max u v)))
     [Mono (terminal.from H)] :

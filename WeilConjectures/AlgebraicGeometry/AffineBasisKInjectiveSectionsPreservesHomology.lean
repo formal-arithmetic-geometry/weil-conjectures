@@ -19,8 +19,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # K-injective section homology from affine-basis acyclicity
 
-Source: Stacks Project, Tag 08C2, singleton cover; Tag 071B, compatible resolution tower.
-(blueprint: lem-sc-affine-basis-kinjective-sections-preserves-homology).
+## References
+
+* Stacks Project, Tags 08C2 and 071B
 -/
 
 @[expose] public section
@@ -86,28 +87,7 @@ private theorem preservesLeftHomology_of_lowerComparison
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Sections preserve homology of a K-injective complex with acyclic homology
-on an affine basis of V.
-Source: Stacks Project, Tag 08C2, unbounded comparison via Tag 071B;
-Tag 08D4, its tower argument adapted using the basis hypothesis of Tag 071B.
-(blueprint: lem-sc-affine-basis-kinjective-sections-preserves-homology).
-
-Proof: The lower-tail vanishing theorem applied in degrees n and n+1, and
-the homology exact sequence of the derived truncation triangle, make degree-n
-derived sections of QF -> truncGE n QF invertible. The derived lower-truncation
-cycle formula identifies the actual image of the homology quotient: it is the
-cycle lift followed by the raw-to-derived unit, this truncation projection and
-the bottom comparison. The unit is invertible because F is K-injective.
-Left exactness gives mappedCyclesHomologyData: its homology object is the
-cokernel of the mapped boundary into the mapped cycle kernel. Its comparison
-with section homology identifies its cokernel projection with the same cycle
-lift. Compose these specified isomorphisms; the cycle formula says the composite
-sends that cokernel projection to S of the original homology quotient.
-Transport its cokernel universal property along this isomorphism. Together
-with preservation of the cycle kernel this preserves the chosen left homology
-data, hence all left homology data. The unbounded tower calculation remains
-in affineBasisDerivedSections_lowerTail_isZero; the original complex need
-not have injective terms, and no term or cokernel acyclicity is introduced.
-Empty V and every integer degree obey the same calculation. -/
+on an affine basis of V (Stacks, Tags 08C2, 071B and 08D4). -/
 theorem affineBasisKInjectiveSections_preservesLeftHomology
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     (F : CochainComplex X.Modules ℤ) [F.IsKInjective]

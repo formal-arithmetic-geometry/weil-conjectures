@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.DerivedStructureSheafGlobalSectionsHom
 import WeilConjectures.Algebra.Homology.DerivedFreeModuleHomology
 
 /-! # Hom from the derived structure sheaf
-Source: Stacks Project, Tag 09M1, proof of Proposition perfect-proposition-compact-is-perfect,
-first paragraph (blueprint: lem-pc-derived-structure-sheaf-hom-hypercohomology).
+
+## References
+
+* Stacks Project, Tag 09M1
 -/
 
 @[expose] public section
@@ -28,16 +30,8 @@ namespace AlgebraicGeometry
 set_option maxHeartbeats 400000 in
 -- The sheaf instances and nested derived functors require extra elaboration heartbeats.
 -- The sheaf instances and nested derived functors require extra elaboration heartbeats.
-/-- Hom from the degree-zero structure sheaf is naturally the zeroth derived global sections.
-Source: Stacks Project, Tag 09M1, proof of Proposition perfect-proposition-compact-is-perfect,
-first paragraph (blueprint: lem-pc-derived-structure-sheaf-hom-hypercohomology).
-Proof: Choose a K-injective representative J of E. Localization identifies maps from
-O_X[0] to E with homotopy classes of maps O_X[0] to J. A map of complexes is a degree-zero
-cycle in Γ(X,J); a homotopy changes this cycle by a boundary. Evaluation at 1 identifies
-module maps from O_X with sections, additively. Thus these homotopy classes are H^0(Γ(X,J)),
-which computes H^0(RΓ(X,E)). Comparison of K-injective representatives makes the result
-independent of the resolution, and postcomposition by a chain map induces exactly the
-map on cohomology. This proves the displayed naturality for every derived morphism. -/
+/-- Hom from the degree-zero structure sheaf is naturally the zeroth derived global sections
+(Stacks, Tag 09M1). -/
 theorem derivedStructureSheaf_hom_hypercohomology (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     letI := HasDerivedCategory.standard

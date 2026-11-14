@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.RingTheory.Etale.Field
 /-!
 # Etale coproducts of spectra of finite separable field extensions
 
-Source: Stacks Project, Morphisms, Lemma 02GL (blueprint: lem-exc-etale-coproduct-etale).
+## References
+
+* Stacks Project, Tag 02GL
 -/
 
 @[expose] public section
@@ -30,7 +32,7 @@ canonical map from their coproduct of spectra to `Spec K` is etale. The coproduc
 open, disjoint, covering inclusions are given by Schemes, Lemma 01JB. Each component map is
 etale by the finite separable case of Morphisms, Lemma 02GL. Etaleness is local on the source
 by Morphisms, Lemma 02GJ, so the coproduct map is etale. This includes an empty or singleton
-index type (blueprint: lem-exc-etale-coproduct-etale). -/
+index type. -/
 theorem etale_sigmaDesc_spec_of_finite_separable
     (K : Type u) [Field K] (I : Type u) (L : I → Type u)
     [∀ i, Field (L i)] [∀ i, Algebra K (L i)]

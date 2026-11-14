@@ -16,9 +16,6 @@ import WeilConjectures.AlgebraicGeometry.CondensedQbarFieldFiberExtension
 
 /-!
 # Scalar functions and geometric evaluation for bounded condensed coefficients
-
-Source: RefactorInstruction, Section 4, coefficient realization and geometric evaluation
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -28,9 +25,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
-/-- Geometric fiber data, separating the constructed functors from their naturality proofs.
-Source: RefactorInstruction, Section 4, geometric fibers
-(auxiliary; not a blueprint node). -/
+/-- Geometric fiber data: the fiber functors with their additivity and colimit properties. -/
 structure CondensedQbarFiberData (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) where
   /-- Geometric evaluation, after choosing an algebraic closure above the point. -/
   fiber (U : X.ProEt) (x : U.left) :
@@ -44,9 +39,7 @@ structure CondensedQbarFiberData (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) w
     (fiber U x).obj (Mod.regular
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) U.left)) ≃ₗ[PadicAlgCl ℓ] PadicAlgCl ℓ
 
-/-- The fiber data are actual algebraic-closure pullbacks and terminal evaluations.
-Source: RefactorInstruction, Section 4, geometric fibers
-(auxiliary; not a blueprint node). -/
+/-- The canonical fiber data given by algebraic-closure pullbacks and terminal evaluations. -/
 @[irreducible] noncomputable def condensedQbarCanonicalFiberData
     (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) : CondensedQbarFiberData ℓ X where
   fiber U x := CondensedQbarGeometricEvaluation.fiber ℓ U.left x
@@ -54,10 +47,7 @@ Source: RefactorInstruction, Section 4, geometric fibers
   fiber_colimits _ _ := inferInstance
   fiber_regular U x := CondensedQbarGeometricEvaluation.fiberRegularCoordinates ℓ U.left x
 
-/-- The remaining naturality and basis properties of the explicitly constructed
-coefficient action and geometric fibers. All data have already been constructed.
-Source: RefactorInstruction, Section 4, coefficient naturality and geometric comparison
-(auxiliary; not a blueprint node). -/
+/-- The naturality and basis properties of the coefficient action and geometric fibers. -/
 structure CondensedQbarCoefficientProperties (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
     (d : CondensedQbarFiberData ℓ X) : Prop where
   /-- On the affine weakly contractible basis every scalar endomorphism is a function. -/
@@ -88,18 +78,14 @@ structure CondensedQbarCoefficientProperties (ℓ : ℕ) [Fact ℓ.Prime] (X : S
         CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) V.hom ⋙
           d.fiber V y)
 
-/-- Naturality and basis properties for the fixed, explicitly constructed fiber data.
-Source: RefactorInstruction, Section 4, coefficient naturality and geometric fibers
-(auxiliary; not a blueprint node). -/
+/-- Naturality and basis properties for the fixed, explicitly constructed fiber data. -/
 abbrev CondensedQbarCanonicalCoefficientProperties
     (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) : Prop :=
   CondensedQbarCoefficientProperties ℓ X (condensedQbarCanonicalFiberData ℓ X)
 
 /-- Coefficient functions, their restriction, and their geometric evaluation.
 All data concern only regular modules and coefficient pullbacks; there is no
-presentation, chosen module, or matrix in this interface.
-Source: RefactorInstruction, Section 4, coefficient realization and geometric evaluation
-(auxiliary; not a blueprint node). -/
+presentation, chosen module, or matrix in this interface. -/
 structure CondensedQbarFunctionCoefficients (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) where
   /-- On the affine weakly contractible basis every scalar endomorphism is a function. -/
   scalar_surjective (U : X.ProEt) (hU : IsAffine U.left)
@@ -138,10 +124,7 @@ structure CondensedQbarFunctionCoefficients (ℓ : ℕ) [Fact ℓ.Prime] (X : Sc
       (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) U.hom ⋙ fiber U x ≅
         CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) V.hom ⋙ fiber V y)
 
-/-- Assemble coefficient properties over abstract fiber data, so dependent type
-comparisons do not unfold the geometric construction in downstream presentation proofs.
-Source: RefactorInstruction, Section 4, geometric fibers
-(auxiliary; not a blueprint node). -/
+/-- Assemble coefficient functions from abstract fiber data and the coefficient properties. -/
 noncomputable def CondensedQbarFunctionCoefficients.ofData
     {ℓ : ℕ} [Fact ℓ.Prime] {X : Scheme.{u}} (d : CondensedQbarFiberData ℓ X)
     (p : CondensedQbarCoefficientProperties ℓ X d) : CondensedQbarFunctionCoefficients ℓ X where
@@ -154,10 +137,7 @@ noncomputable def CondensedQbarFunctionCoefficients.ofData
   fiber_scalar := p.fiber_scalar
   fiber_compare := p.fiber_compare
 
-/-- The scalar action is constructed, by sheafifying multiplication and transporting
-through the explicit filtered-colimit ring realization.
-Source: RefactorInstruction, Section 4, coefficient realization
-(auxiliary; not a blueprint node). -/
+/-- The scalar action of the finite-extension-valued functions on the regular module. -/
 noncomputable abbrev CondensedQbarFunctionCoefficients.scalar
     {ℓ : ℕ} [Fact ℓ.Prime] {X : Scheme.{u}}
     (_q : CondensedQbarFunctionCoefficients ℓ X) (U : X.ProEt) :
@@ -166,9 +146,7 @@ noncomputable abbrev CondensedQbarFunctionCoefficients.scalar
   condensedQbarScalar ℓ U.left
 
 /-- A comparison stated directly for scheme morphisms, avoiding reduction of the
-site-object constructor inside a module inverse image.
-Source: RefactorInstruction, Section 4, geometric evaluation
-(auxiliary; not a blueprint node). -/
+site-object constructor inside a module inverse image. -/
 theorem CondensedQbarFunctionCoefficients.fiber_compare_mk
     {ℓ : ℕ} [Fact ℓ.Prime] {X Y Z : Scheme.{u}}
     (q : CondensedQbarFunctionCoefficients ℓ X)
@@ -185,9 +163,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Bounded functions on a finite disjoint union are tuples of bounded functions.
 Glue the underlying continuous functions, and bound them by the finite compositum of
 all bounds on the summands. The supremum over an empty family is the base field.
-Source: RefactorInstruction, Section 4, coefficient realization;
-Stacks Project, Tag 0F4P, finite disjoint unions
-(auxiliary; not a blueprint node). -/
+(Stacks Project, Tag 0F4P) -/
 private lemma bounded_coproduct_bijective (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
     (I : Type u) [Finite I] (V : I → X.ProEt) (W : X.ProEt)
     (ι : ∀ i, V i ⟶ W) (e : (∐ fun i ↦ (V i).left) ≅ W.left)
@@ -234,13 +210,8 @@ private lemma bounded_coproduct_bijective (ℓ : ℕ) [Fact ℓ.Prime] (X : Sche
     exact congrArg ULift.down (congrFun hs i)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The bounded-function presheaf has unchanged sections on a weakly contractible affine.
-Use finite-coproduct evaluation and the general unit-isomorphism implementation of the
-weakly contractible sheafification lemma. Its finite-product hypothesis follows from
-`bounded_coproduct_bijective`, without any component-quotient comparison.
-Source: Bhatt--Scholze, Section 4.2, Lemma 4.2.13(1), sheafification argument;
-RefactorInstruction, Section 4, coefficient realization
-(auxiliary; not a blueprint node). -/
+/-- The bounded-function presheaf has unchanged sections on a weakly contractible affine
+(Bhatt--Scholze, Section 4.2, Lemma 4.2.13(1)). -/
 private lemma bounded_unit_isIso (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
     (U : X.ProEt) [IsAffine U.left] (wU : PointLanWeaklyContractible X U) :
     IsIso ((toSheafify (Scheme.ProEt.topology X)
@@ -276,9 +247,7 @@ private lemma bounded_unit_isIso (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The ring unit of monoidal sheafification is the sheafified presheaf unit.
-This follows from the monoidal unit isomorphism and naturality of the adjunction unit.
-Source: RefactorInstruction, Section 4, monoidal coefficient realization
-(auxiliary; not a blueprint node). -/
+This follows from the monoidal unit isomorphism and naturality of the adjunction unit. -/
 private lemma sheafification_one (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :
     Functor.LaxMonoidal.ε (sheafToPresheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) ≫
       (MonObj.one (X := padicAlgClSheaf Y ℓ)).hom =
@@ -301,9 +270,7 @@ private lemma sheafification_one (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :
 set_option backward.isDefEq.respectTransparency false in
 /-- A map out of the constant integer presheaf is determined by one at the final object.
 Naturality transports that value to every object, and integer linearity determines
-all other values.
-Source: RefactorInstruction, Section 4, regular-module scalar realization
-(auxiliary; not a blueprint node). -/
+all other values. -/
 private lemma unit_presheaf_hom_ext (Y : Scheme.{u}) (P : Y.ProEtᵒᵖ ⥤ Ab.{u + 1})
     (f g : 𝟙_ (Y.ProEtᵒᵖ ⥤ Ab.{u + 1}) ⟶ P)
     (h : f.app (op (Scheme.ProEt.mk (𝟙 Y))) (ULift.up 1) =
@@ -328,9 +295,7 @@ set_option backward.isDefEq.respectTransparency false in
 Lift its value at the unit on the final object through the invertible sheafification
 unit. A regular-module map is determined by its composite with the ring unit. The
 monoidal adjunction and naturality reduce equality of those composites to the lifted
-value, since the source presheaf is the constant integer presheaf.
-Source: RefactorInstruction, Section 4, regular-module scalar realization
-(auxiliary; not a blueprint node). -/
+value, since the source presheaf is the constant integer presheaf. -/
 private lemma sheafScalar_surjective (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     [IsAffine Y] (wY : PointLanWeaklyContractible Y (Scheme.ProEt.mk (𝟙 Y))) :
     Function.Surjective (CondensedQbarScalarConstruction.sheafScalar ℓ Y) := by
@@ -590,44 +555,7 @@ private lemma fibers_compare (ℓ : ℕ) [Fact ℓ.Prime] {X : Scheme.{u}}
 attribute [local semireducible] condensedQbarCanonicalFiberData
 
 /-- Bounded condensed coefficients admit scalar realization and compatible geometric
-fiber functors, independently of any module or presentation.
-
-Source: RefactorInstruction, Section 4, coefficient realization and geometric-fiber
-comparison, steps 2--3 of the finite-matrix argument
-(auxiliary; not a blueprint node).
-
-Proof in words: the explicit construction above realizes the bounded coefficient ring
-on every scheme by the filtered colimit of its canonical finite-extension realizations.
-Its scalar action is multiplication on the bounded-function presheaf, followed by
-monoidal sheafification and transport through that constructed ring isomorphism. These
-constructions and their ring laws are already proved above. To finish the scalar
-properties, use the normalization of the finite-extension realizations on profinite
-test functions. Their uniqueness makes them compatible with localization along every
-small-site object U to X. The bounded-function presheaf unit and multiplication commute
-with restriction, giving scalar_restrict_mk after passage to the filtered colimit.
-For the bounded-function presheaf, finite disjoint unions give products: glue the
-underlying continuous functions and use the finite compositum of their field bounds.
-The general weakly contractible sheafification argument then shows that its unit is
-invertible on affine weakly contractible objects. Lift an endomorphism's image of one
-through this unit at the final object. The regular module is free on the monoidal
-unit, and naturality transports the lifted value to every object, so the endomorphism
-is sheafified multiplication by that bounded function. This proves scalar_surjective.
-
-For fiber U x choose an algebraic closure of the residue field of x, pull modules to
-its spectrum, and evaluate at the terminal object. The coefficient comparison there
-identifies coefficient sections with Qbar_l. Transport the action through this
-identification to obtain the stated module functor and fiber_regular. Inverse image
-preserves finite colimits; evaluation on an algebraically closed field does so because
-every pro-etale cover of the field splits. Colimits of module objects are created on
-the underlying abelian sheaves. These facts give fiber_additive and fiber_colimits.
-Naturality of coefficient realization identifies the action of a bounded function
-with its point value, proving fiber_scalar. If two points have the same image in X,
-choose a common algebraically closed overfield of their residue fields. The geometric
-field extension comparison identifies both evaluated pullbacks from X with evaluation
-at that common point, naturally in the module. This yields fiber_compare. No finite
-presentation, matrix, corank, local constancy, or freeness assertion is used. Empty
-objects have no point evaluations, and the scalar statement there uses the zero ring.
--/
+fiber functors, independently of any module or presentation. -/
 theorem condensedQbar_canonical_coefficient_properties
     (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] :
     CondensedQbarCanonicalCoefficientProperties ℓ X := by
@@ -649,9 +577,7 @@ theorem condensedQbar_canonical_coefficient_properties
   · exact fibers_compare ℓ
 
 /-- Assemble the constructed scalar action, geometric fibers, regular coordinates,
-and their proved additive and finite-colimit properties with coefficient naturality.
-Source: RefactorInstruction, Section 4, coefficient realization and geometric fibers
-(auxiliary; not a blueprint node). -/
+and their proved additive and finite-colimit properties with coefficient naturality. -/
 theorem exists_condensedQbar_function_coefficients
     (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (_hcoeff : Nonempty

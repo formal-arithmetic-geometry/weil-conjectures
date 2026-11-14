@@ -11,7 +11,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 /-! # Constant-sheaf adjuncts and pullback
 
-Source: Stacks Project, Tag 03F3; constant-sheaf and inverse-image adjunctions.
+## References
+
+* Stacks Project, Tag 03F3
 -/
 
 @[expose] public section
@@ -36,22 +38,8 @@ private theorem constantSection_adjunct_restrict {Z : Scheme.{u}}
   exact hn.symm
 
 /-- The constant-sheaf adjunct of a pulled-back map is the adjunct followed by the
-inverse-image unit, evaluated at the terminal pullback identification.
-Source: Stacks Project, Tag 03F3, localization and restriction; the first step of
-`lem-weil-pbc-etale-open-section-pullback`.
-(blueprint: lem-weil-pbc-constant-section-adjunct-pullback)
-
-Proof: Expand upperStarConstantSheafIso as leftAdjointUniq. Its inverse transports
-homEquiv to the composite of the constant-sheaf and inverse-image adjunctions.
-The ofNatIsoRight homEquiv formula inserts lowerStarCompSheafSectionsTerminalIso.
-Expand the inverse-image homEquiv into its unit and the pushforward of the map.
-Naturality of the unit moves the original map to the constant-sheaf adjunct.
-The right-adjoint comparison evaluates a pushforward on the terminal fibre product,
-then restricts along the unique map from the identity étale object into that product.
-The map below is that unique map: its second projection is the identity. Finally
-transport from the chosen categorical terminal objects to mk(id) by their unique
-terminal isomorphisms; naturality of evaluation gives the displayed formula. This
-argument needs no points or nonemptiness and applies to every coefficient object. -/
+inverse-image unit, evaluated at the terminal pullback identification
+(Stacks, Tag 03F3). -/
 theorem constantSection_adjunct_pullback {X Y : Scheme.{u}} (i : Y ⟶ X)
     (M : AddCommGrpCat.{u + 1})
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

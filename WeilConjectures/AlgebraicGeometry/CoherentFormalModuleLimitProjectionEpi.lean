@@ -17,7 +17,7 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Epimorphic projections from coherent formal-module limits
 
-Source: Stacks Project, Lemma 087W, proof of M/I^n M = M_n.
+Stacks Project, Tag 087W.
 -/
 
 @[expose] public section
@@ -45,27 +45,8 @@ private theorem affine_surjective_of_epi {Y : Scheme.{u}} {M N : Y.Modules}
   exact hy
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The projection from a coherent adic system's limit sheaf to any level is epic.
-Source: Stacks Project, Lemma 087W, proof of the surjectivity and quotient formula
-for the projections M -> M_n; Lemma 088B, local uniqueness of alpha.
-(blueprint: lem-weil-pbc-coherent-formal-module-limit-projection-epi)
-
-Proof: Coherence makes every level quasi-coherent. Its successor transition is
-the quotient projection followed by the defining quotient isomorphism, hence epic.
-For a morphism between quasi-coherent modules, the affine cokernel/image formula
-identifies the sectionwise image with the kernel of its cokernel projection. For
-an epimorphism that projection is zero; therefore every transition is surjective
-on sections of every affine open. Evaluation on such an open preserves inverse
-limits. To prove surjectivity at level n, restrict the evaluated limit cone to the
-cofinal tail k |-> n+k and apply the sequential-limit surjectivity theorem at its
-zeroth projection. This gives surjectivity of the sheaf limit projection on every
-affine open. The target level is quasi-coherent and all affine opens cover Y.
-Apply the source-library affine-cover surjectivity criterion
-to conclude that the projection is epic. No finite completed-module reconstruction or
-formal-functions theorem is needed. For J=0 projections of constant systems are
-isomorphisms; for J=1 the projection is between zero objects. Zero sheaves and the
-empty scheme cause no exception.
--/
+/-- The projection from a coherent adic system's limit sheaf to any level is epic
+(Stacks, Tags 087W and 088B). -/
 theorem coherentFormalModule_limit_projection_epi {Y : Scheme.{u}} [IsNoetherian Y]
     (J : Y.IdealSheafData) (G : CoherentFormalModule Y J) (n : ℕ) :
     Epi (limit.π G.obj (op n)) := by

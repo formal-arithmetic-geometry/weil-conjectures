@@ -11,8 +11,9 @@ import Mathlib.CategoryTheory.Localization.LocalizerMorphism
 
 /-! # Transport of derived sheaves to an affine localized site
 
-Source: Stacks Project, Tag 06Z0, and restriction along an isomorphism of ringed spaces.
-(blueprint: lem-pc-affine-localized-site-derived-transport).
+## References
+
+* Stacks Project, Tag 06Z0
 -/
 
 @[expose] public section
@@ -22,22 +23,8 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Restriction along the affine spectrum isomorphism and the over-site equivalence
-induce an equivalence of derived sheaf categories, compatible with termwise tilde.
-Source: Stacks Project, Tag 06Z0, affine identification, and Mathlib's overEquiv and
-restrictFunctorComp.
-(blueprint: lem-pc-affine-localized-site-derived-transport).
-
-Proof: Restriction along isoSpec.hom has inverse restriction along isoSpec.inv.
-The restriction-composition and restriction-identity isomorphisms give the unit and
-counit. Compose this equivalence with overEquiv.inverse. These additive equivalences
-preserve finite limits and colimits, hence quasi-isomorphisms of complexes. Localizing
-both functors gives inverse derived functors: their unit and counit descend by the
-universal property of localization, with triangle identities checked after Q.
-Whiskering the factorization isomorphism for this exact transport with termwise tilde,
-and using mapHomologicalComplexComp, identifies the transported Q(tilde(P)) naturally
-with Q of the explicit affinePerfectSheafification complex. This proves the comparison
-for every module complex, not just perfect ones. Empty opens pose no exception: the
-same isomorphism and over-site equivalence exist on the empty scheme. -/
+induce an equivalence of derived sheaf categories, compatible with termwise tilde
+(Stacks, Tag 06Z0). -/
 theorem affine_localized_site_derived_transport (X : Scheme.{u}) (U : X.Opens)
     (hU : IsAffineOpen U)
     [HasDerivedCategory.{wS} (SheafOfModules.{u}

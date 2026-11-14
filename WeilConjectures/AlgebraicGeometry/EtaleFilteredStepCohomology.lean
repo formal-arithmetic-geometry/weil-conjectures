@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleRestrictedSectionsComparisonMap
 
 /-! # Computing one filtered Cartan--Eilenberg step
 
-Source: Stacks Project, Tags 015J and 0133, applied to the columns in degrees at least q.
-(blueprint: lem-weil-pbc-etale-filtered-step-cohomology).
+## References
+
+* Stacks Project, Tags 015J and 0133
 -/
 
 @[expose] public section
@@ -30,9 +31,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The canonical filtered-step cohomology comparison. Its first factor is the
 inverse of the sections lift through the monic step inclusion; its second is
-cohomology of the specified restricted K-injective augmentation.
-Source: Stacks, Tag 015J, proof remark (3), and Tag 0133.
-(blueprint: def-weil-pbc-etale-filtered-step-cohomology-iso). -/
+cohomology of the specified restricted K-injective augmentation (Stacks, Tags 015J, 0133). -/
 noncomputable def etaleFilteredStepCohomologyIso
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -50,31 +49,8 @@ noncomputable def etaleFilteredStepCohomologyIso
         (etaleRestrictedTotal X K T q) (etaleRestrictedAugmentation X K T q) p
 
 /-- The cohomology of one filtered total step computes derived global sections of
-one fixed stupid truncation, compatibly with its inclusion in the full complex.
-Source: Stacks Project, Tag 015J, proof remark (3), and Tag 0133.
-
-Proof: Restrict the augmented bicomplex to complex degrees s >= q and extend by zero.
-Its rows remain injective resolutions of the corresponding terms of the stupid
-truncation; the other rows are zero. The row augmentations commute with the complex
-differential, so their degree-zero summand maps assemble into an augmentation of
-K.stupidTrunc(embeddingUpIntGE q) into the restricted total. In total degree n its
-only possibly nonzero summands have resolution degree r >= 0 and complex degree
-s >= q with r+s=n. There are finitely many, and none when n<q. The total therefore
-has injective terms and is bounded below, hence is K-injective. The exact augmented
-rows and the finite diagonal filtration give an acyclic augmentation cone (0133),
-so this augmentation is a quasi-isomorphism. Apply global sections termwise. Its
-restricted total identifies with (T.L.step q): T.filtration_formula identifies the
-subobjects degreewise, and their canonical inclusions commute with differentials.
-This gives the displayed cohomology isomorphism by the K-injective computation of
-RΓ. The inclusion of the restricted resolution into the full total, followed by
-T.comparison, is a resolution comparison for the stupid-truncation inclusion:
-T.aug_formula fixes the augmentation, and T.over_K makes its composite agree with
-T.ρ.map up to homotopy. Naturality of the K-injective derived-functor computation
-and T.w_formula then identify the induced map with the map of the truncation
-inclusion. Finally T.c_formula fixes the full-total identification, giving the
-stated commutative equation. Empty diagonals, the zero complex and negative q
-satisfy the same finite-diagonal calculation; no positivity of q is required.
-(blueprint: lem-weil-pbc-etale-filtered-step-cohomology-iso). -/
+one fixed stupid truncation, compatibly with its inclusion in the full complex
+(Stacks, Tags 015J and 0133). -/
 theorem etale_filtered_step_cohomology_iso
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -174,21 +150,8 @@ private theorem resolutionEtaleCohomologyIso_naturality
   rw [← H.map_comp_assoc, e.hom_inv_id, H.map_id, Category.id_comp]
   rfl
 
-/-- Compatibility of the canonical filtered-step isomorphism with truncation inclusion.
-Source: Stacks Project, Tags 015J and 0133; restricted augmented-total comparison.
-
-Proof: Use the explicit restricted augmentation and total from
-`etaleRestrictedAugmentation`. The diagonal description of the mapped total
-identifies its inclusion into the full mapped total with `(T.L.step q).arrow`.
-The named augmentation-inclusion equation and `T.over_K` give the homotopy
-between augmentation composites. Naturality of the derived unit on K-injectives
-and of the homology comparison proves resolutionEtaleCohomologyIso naturality
-(the two private helpers below). The named chain-level sections equation and
-`T.c_formula` then identify the full comparison. Precompose by homology of the
-canonical sections lift, use its inclusion equation, and cancel its inverse in
-the definition of etaleFilteredStepCohomologyIso to obtain the displayed equality. The argument is
-degreewise and also covers empty diagonals, zero terms, and arbitrary integers p,q.
-(blueprint: lem-weil-pbc-etale-filtered-step-cohomology-compatibility). -/
+/-- Compatibility of the canonical filtered-step isomorphism with truncation inclusion
+(Stacks, Tags 015J and 0133). -/
 theorem etale_filtered_step_cohomology_compatibility
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -227,7 +190,8 @@ theorem etale_filtered_step_cohomology_compatibility
   rw [← HomologicalComplex.homologyMap_comp_assoc]
   simp
 
-/-- (blueprint: lem-weil-pbc-etale-filtered-step-cohomology) -/
+/-- The cohomology of one filtered total step is isomorphic to derived global sections of the
+stupid truncation, compatibly with the inclusion in the full complex. -/
 theorem etale_filtered_step_cohomology
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

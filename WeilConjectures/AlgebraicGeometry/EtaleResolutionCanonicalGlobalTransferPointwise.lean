@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.ExactFunctorResolutionCocycle
 /-!
 # Pointwise canonical global transfer identity
 
-Source: Stacks Project, Tags 0A50, 03F3, 01F8 and 01FB.
+## References
+
+* Stacks Project, Tags 0A50, 03F3, 01F8 and 01FB
 -/
 
 @[expose] public section
@@ -103,19 +105,8 @@ private theorem section_adjunction_transfer {X Y : Scheme.{u}} (g : Y ⟶ X)
   exact congrArg (AddCommGrpCat.uliftZMultiplesAddEquiv _) hs
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical global transfer identity for one degree and one homology class.
-Source: Stacks Project, Tags 0A50 and 03F3; this is the pointwise cocycle calculation
-used in the global transfer theorem.
-(blueprint: lem-weil-pbc-etale-resolution-section-global-transfer-pointwise)
-
-Proof: Represent the chosen homology class by a cycle and identify its representative
-with a morphism from the constant lifted integer sheaf by the sections adjunction.
-Adjoint the augmentation-preserving chain map, apply inverse image to the cocycle,
-and use the derived-category `extMk_hom` identity. Exactness of inverse image and the
-augmentation equation identify the resulting Ext class with the explicit transfer;
-normalization of the two canonical comparisons then gives the displayed equality.
-The argument is valid in every degree, including degree zero and the zero sheaf.
--/
+/-- The canonical global transfer identity for one degree and one homology class
+(Stacks, Tags 0A50 and 03F3). -/
 theorem resolutionSection_canonical_transfer_global_pointwise
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

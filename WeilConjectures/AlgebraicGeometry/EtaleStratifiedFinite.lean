@@ -20,8 +20,9 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 /-!
 # Etale morphisms become finite etale on constructible strata
 
-Source: Stacks Project, Etale Cohomology, Lemma 59.72.1, Tag 03S0
-(blueprint: lem-weil-pbc-etale-stratified-finite).
+## References
+
+* Stacks Project, Tag 03S0
 -/
 
 @[expose] public section
@@ -84,22 +85,8 @@ private theorem exists_etale_stratified_finite_affine {X U : Scheme.{u}}
   exact finite_etale_pullback_comp j (ι i) ((T i).immersion b)
 
 /-- An etale morphism between quasi-compact quasi-separated schemes is finite etale
-after restriction to each member of a finite constructible locally closed stratification.
-Source: Stacks Project, Tag 03S0 (blueprint: lem-weil-pbc-etale-stratified-finite).
-
-Proof:
-1. Obtain finite affine open covers of both U and X using Mathlib's
-   `Scheme.OpenCover.finiteSubcover`, reindexing their finite types by Fin.
-2. On an affine base, `lem-weil-pbc-etale-affine-cover-gluing` gives a constructible
-   immersed affine partition on which the pullback of j is separated.
-3. Apply `lem-weil-pbc-etale-separated-stratified-finite` on each affine piece.
-   `lem-weil-pbc-constructible-stratification-assembly` assembles these local
-   stratifications using the composite immersion maps. Pullback pasting identifies
-   their finite etale morphisms with the pullbacks along those composite maps.
-4. Apply this affine result to the pullback of j to every member of the finite affine
-   open cover of X. Quasi-compactness and quasi-separatedness persist under these
-   pullbacks. Pullback pasting again gives the required composite stratum maps, and
-   `lem-weil-pbc-etale-stratification-local-gluing` provides the global partition. -/
+after restriction to each member of a finite constructible locally closed stratification
+(Stacks, Tag 03S0). -/
 theorem exists_etale_stratified_finite {X U : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace U] [QuasiSeparatedSpace U] (j : U ⟶ X) [Etale j] :

@@ -10,8 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorDegree
 
 /-! # Canonical evaluation of normalized pure tensors
 
-Source: Stacks Project, Tag 03P2, affine tensor calculation.
-(blueprint: new-etale-singleton-tensor-pure-image) -/
+## References
+
+* Stacks Project, Tag 03P2
+-/
 
 @[expose] public section
 
@@ -25,20 +27,8 @@ namespace AlgebraicGeometry.Scheme
 noncomputable section
 
 set_option linter.auxLemma false in
-/-- Canonical evaluation sends a lifted pure tensor to its normalized pure section.
-Source: Stacks Project, Tag 03P2, affine tensor calculation.
-(blueprint: new-etale-singleton-tensor-pure-image)
-
-Proof: unfold the normalization predicate. The finite scheme product and the outer
-additive-group product use the same diagrams as in that predicate. Their limit
-witnesses are proofs of the same propositions, hence agree by proof irrelevance.
-The composite q first projects onto the sole outer index and then applies ULift.down.
-Evaluating q.comp f.hom on the displayed lifted tensor therefore gives exactly the
-left side of the normalization equation. That equation gives the asserted product
-of projection pullbacks times the restricted coefficient. No affineness is used.
-For n=0 the diagram still has one factor; zero coefficients, zero functions and empty
-schemes require no division or nonzero hypothesis.
--/
+/-- Canonical evaluation sends a lifted pure tensor to its normalized pure section
+(Stacks, Tag 03P2). -/
 theorem singletonTensorDegreeComparisonHom_pure_image
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (n : ℕ)

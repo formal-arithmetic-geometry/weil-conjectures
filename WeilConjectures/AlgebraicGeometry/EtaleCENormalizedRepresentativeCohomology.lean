@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleCENormalizedRowRepresentatives
 
 /-! # Normalized CE cohomology on representatives
 
-Source: Stacks Project, Tags 015J, 015K and 012K.
-(blueprint: lem-weil-pbc-ce-normalized-representative-cohomology).
+## References
+
+* Stacks Project, Tags 015J, 015K and 012K
 -/
 
 @[expose] public section
@@ -26,32 +27,8 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent normalized page and CE comparison families together.
 /-- Prescribed normalized CE presentations compute pullback on individual cycle
-representatives. This does not identify any supplied first-page map.
-Source: Stacks Project, Tags 015J, 015K, 012K and 06XR.
-(blueprint: lem-weil-pbc-ce-normalized-representative-cohomology).
-
-Proof. Extend each nonnegative injective row by zero, flip the bicomplex and
-form its finite-diagonal sections total using the given individual lower bound.
-Use the second filtration. Construct each positive page as its actual boundary
-cokernel, with the unique representative differential, and choose the successor
-comparison uniquely by its action on successor cycles. Adjoin the graded page
-zero. The first-page row calculation identifies each quotient with the homology
-of sections of the corresponding injective row; multiply the row comparison by
-(-1)^(pq) to cancel the total differential sign. Compare the augmented row with
-the chosen injective resolution of K^q. Evaluation at 1 in the constant integer
-sheaf identifies its Hom complex with sections; the Ext comparison gives the
-ordinaryComparison, and coefficient naturality gives ordinary_naturality.
-Retain the augmentation, K-injective comparison, canonical abutment isomorphism
-and transported finite image filtration of exists_hypercohomology_firstPage.
-For the displayed local equation, the diagonal summand equation for u identifies
-the graded sections map with the sections pullback unit followed by the row map
-phi. The augmentation equation for phi identifies its row homology map with
-Ext pullback followed by the coefficient map v^q. Evaluation at 1 commutes with
-both maps. The two identical signed row factors commute with the additive map
-and cancel. Thus representatives related by b have the displayed cohomology
-classes. This calculation concerns individual representatives; it does not
-assert uniqueness or equality of maps on the quotient first page. Zero rows,
-p = 0, empty schemes and empty diagonals use the same cokernel calculation. -/
+representatives. This does not identify any supplied first-page map
+(Stacks, Tags 015J, 015K, 012K and 06XR). -/
 theorem exists_etaleCE_normalized_representative_cohomology
     (I : ∀ (X : Scheme.{uNatural})
       (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),

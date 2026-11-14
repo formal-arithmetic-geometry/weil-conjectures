@@ -14,8 +14,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 import Mathlib.CategoryTheory.Sites.EqualizerSheafCondition
 
 /-! # Finite affine restrictions detect equality after base change
-Source: Stacks Project, Tags 01IT, 03Q4 and 00VL.
-(blueprint: lem-weil-pbc-etale-finite-affine-restriction-detection). -/
+
+## References
+
+* Stacks Project, Tags 01IT, 03Q4 and 00VL
+-/
 
 @[expose] public section
 
@@ -25,18 +28,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Source: Stacks Project, Tag 03Q4, finite affine-cover reduction, with Tags 01IT
-and 00VL for affine covers and sheaf separatedness.
-(blueprint: lem-weil-pbc-etale-finite-affine-restriction-detection).
-Proof: W is qcqs because its structure map is qcqs and S is qcqs. Choose a finite
-affine open cover of W. Regard its members as étale objects V a over S and the open
-immersions as arrows v a to W. Each V a has qcqs structure map: its affine source is
-quasi-compact and quasi-separated and S is quasi-separated. For any h : T ⟶ S,
-base change preserves the covering, since open immersions and joint surjectivity are
-stable under base change. For a sheaf F on T, separatedness on this covering says that
-two sections of h*W with equal restrictions to every h*(V a) agree. If W is empty,
-choose the empty family; the empty covering gives the same uniqueness assertion.
-Only separatedness is asserted; no matching or gluing data are required. -/
+/-- A qcqs étale object over a qcqs scheme is covered by finitely many affine qcqs étale objects
+which detect equality of sections after any base change (Stacks, Tags 03Q4, 01IT and 00VL). -/
 theorem etale_finite_affine_restriction_detection
     {S : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S]
     (W : S.Etale) [QuasiCompact W.hom] [QuasiSeparated W.hom] :

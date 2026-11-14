@@ -14,8 +14,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Explicit standard basis germs on an affine open
 
-Source: Stacks Project, Tags 01HV, 01IB, 01C6 and 0098.
-(blueprint: def-sc-affine-free-basis-germs).
+## References
+
+* Stacks Project, Tags 01HV, 01IB, 01C6 and 0098
 -/
 
 @[expose] public section
@@ -158,7 +159,6 @@ def affineScalarEnd (X : Scheme.{u}) (U : X.Opens) (a : Γ(X, U)) :
       map_smul' := by intro r s; simp [mul_left_comm] }
 
 /-- The linear combination of the standard basis germs with stalk coefficients.
-(blueprint: def-sc-affine-free-basis-germs)
 -/
 noncomputable def affineFreeStalkComparison (X : Scheme.{u}) (x : X) (U : X.Opens)
     (hxU : x ∈ U) (hU : IsAffineOpen U) (n : ℕ) :

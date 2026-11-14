@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AffineChartSectionRingPresentationsIso
 
 /-! # Ring presentations of affine upper-tail charts
 
-Source: Stacks Project, Tag 01ZR, affine proof; Tags 0095 and 0096.
-(blueprint: lem-pc-affine-chart-section-ring-presentations).
+## References
+
+* Stacks Project, Tags 01ZR, 0095 and 0096
 -/
 
 @[expose] public section
@@ -29,31 +30,8 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The module-independent ring comparison for the direct and finite-stage charts.
-Source: Stacks Project, Tag 01ZR, affine proof; Tags 0095 and 0096.
-(blueprint: lem-pc-affine-chart-section-ring-presentations).
-
-Proof: The representative of the class of j is both above and below j.
-The two preorder arrows are inverse, hence Spec of the ring transition is an
-isomorphism. Its pullback s is an isomorphism as well. Restrict the limiting
-spectrum cone to the upper tail and pull back to U(a); upperTailChartCone_isLimit
-gives a limit cone. The representative functor from the antisymmetrization is
-an equivalence of preorder categories: its inverse is the quotient functor,
-and the two natural isomorphisms are the unique arrows between equivalent
-representatives. Reindex the cone along this equivalence. Each chart is a
-pullback of affine schemes over Spec R(j), and its vertex is a pullback of the
-affine cone vertex and U(a), so all are affine. The equivalence between affine
-schemes opposite and commutative rings sends this limit to a colimit of F.
-Compare this colimit with the chosen colimit to obtain the vertex ring
-isomorphism. Pullback pasting identifies the vertex with the direct cover
-chart and identifies each stage with its corresponding cover chart. Composing
-the section-ring isomorphisms of these pasting maps gives ρ₀ and ρₓ. Comparing
-the projections to U(a) gives the two equations on elements b of Γ(U(a)).
-The limiting-cone equation at x gives the equality on the iterated chart:
-compose both sides with the section maps of its projections; the projections
-of the two pasting isomorphisms agree by pullback uniqueness. This is the last
-displayed equation. The proof applies to empty affine charts and the zero ring.
-No module, quasi-coherence, or finite-presentation assertion is used. -/
+/-- The module-independent ring comparison for the direct and finite-stage charts (Stacks, Tags
+01ZR, 0095, 0096). -/
 theorem affine_chart_section_ring_presentations
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

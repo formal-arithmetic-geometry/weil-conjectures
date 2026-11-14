@@ -19,8 +19,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
 /-!
 # The sectionwise pushforward continuity comparison
 
-Source: Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1).
-(auxiliary; not a blueprint node).
+## References
+
+* Hemo–Richarz–Scholbach, Lemma 5.3(1)
 -/
 
 @[expose] public section
@@ -123,27 +124,7 @@ set_option synthInstance.maxHeartbeats 100000 in
 -- Colimit inference for internal module objects needs a larger search budget.
 set_option synthInstance.maxSize 4096 in
 /-- The canonical pushforward continuity comparison is invertible after evaluation
-at one affine weakly contractible target object.
-
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(1), sectionwise hypercover calculation.
-(auxiliary; not a blueprint node).
-
-Proof: the good truncation projection is a quasi-isomorphism because cohomology
-vanishes below the common bound a. Its target has zero terms below a. The inverse
-image W of V is qcqs: base change preserves quasi-compactness and quasi-separatedness
-of f, and V is affine. Choose an affine weakly contractible hypercover of W. On each
-term, evaluation of module sheaves is exact and commutes with filtered colimits.
-Form the alternating section bicomplex and its signed total. In degree r its
-nonzero diagonal has indices 0 through r-a, so only finite products occur. The
-hypercover resolution identifies this total with derived sections on W, naturally
-in the coefficient complex and its maps. Exact filtered colimits identify the
-homology of the total colimit with the colimit of total homology. On K-injective
-resolutions, pushforward evaluated at V is evaluation at W. Evaluation at the
-weakly contractible V is exact, so it commutes with pushforward cohomology. These
-identifications send each original cocone leg to its sectionwise hypercover leg;
-the colimit universal property therefore identifies the asserted map with the
-invertible hypercover comparison. The finite diagonal remains empty below a,
-and the argument also applies to an empty W. -/
+at one affine weakly contractible target object (Hemo–Richarz–Scholbach, Lemma 5.3(1)). -/
 theorem condensed_qcqs_pushforward_local_comparison
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

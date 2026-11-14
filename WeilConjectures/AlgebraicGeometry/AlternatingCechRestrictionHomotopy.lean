@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechKernelNullHomotopic
 /-!
 # Homotopy inverse for ordered Čech restriction
 
-Source: Stacks Project, Cohomology of Sheaves, Tags 01FJ, 01FK and 01FM.
+## References
+
+* Stacks Project, Tags 01FJ, 01FK and 01FM
 -/
 
 @[expose] public section
@@ -29,38 +31,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- A complex whose terms are identified with sections on increasing tuples, and a
-cochain map which is restriction in those identifications, has a homotopy inverse.
-No covering hypothesis is needed: this is a comparison of complexes for any family
-of opens and any presheaf of abelian groups.
-
-Source: Stacks Project, Cohomology of Sheaves, Lemmas 20.23.3, 20.23.4 and 20.23.6,
-Tags 01FJ, 01FK and 01FM (blueprint: lem-pc-alternating-cech-restriction-homotopy).
-
-Proof: The chosen products in the poset of opens are canonically the intersections.
-Consequently their maps are unchanged under permutations, after transport along the
-unique intersection isomorphisms. Extend a section on a strictly increasing tuple to
-any tuple with distinct entries by the sign of the sorting permutation, transporting
-along that isomorphism, and extend by zero on repeated tuples. The face sign identity
-shows this extension commutes with the differential. The differential of `A` has the
-usual face formula: lift an arbitrary section through the degreewise-surjective
-restriction map and apply its chain-map equation and the displayed restriction formula.
-Use `e` to transport the extension into a cochain map `i : A ⟶ S.complex F`.
-Restriction after extension is the identity, including in degree zero.
-
-For the other composite use the two homotopies of Tag 01FM. First stably sort a tuple:
-let σ be the stable sorting permutation and let σ_a agree with σ before a and list
-remaining positions in their original order. Sum the sections on the tuples
-σ(0), ..., σ(a), σ_a(a), ..., σ_a(p) with coefficient (-1)^a sign(σ_a), transporting
-between equal intersections. The adjacent terms cancel in dh + hd and leave the
-identity minus signed stable sorting. This retracts the full complex onto the
-semi-alternating complex, which restriction identifies with nondecreasing tuples.
-There the second homotopy is zero on increasing tuples; otherwise insert a duplicate
-at the first equality in position a, with sign (-1)^a. Adjacent faces cancel and leave
-the identity minus extension by zero from increasing tuples. Compose the retractions
-and their homotopies: i followed by r is the identity, and r followed by i is homotopic
-to the identity on the full complex. The zero homotopy supplies the identity
-on the increasing complex. Empty index types give zero complexes, so require no
-separate nonemptiness hypothesis. -/
+cochain map which is restriction in those identifications, has a homotopy inverse
+(Stacks, Tags 01FJ, 01FK and 01FM). -/
 theorem alternatingCechRestrictionHomotopy (X : Scheme.{u}) {I : Type v} [LinearOrder I]
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})
     (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)))

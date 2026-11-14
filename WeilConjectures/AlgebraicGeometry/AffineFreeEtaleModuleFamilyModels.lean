@@ -18,7 +18,9 @@ import Mathlib.Data.Finset.Order
 /-!
 # Common-stage models of finite affine etale free families
 
-Source: Stacks Project, Tags 09YU (3), 095N and 03S6.
+## References
+
+* Stacks Project, Tags 09YU, 095N and 03S6
 -/
 
 @[expose] public section
@@ -133,34 +135,8 @@ private noncomputable def freeModelIso (W : X.Etale) :
         freeYonedaEvalEquiv_comp, evalEquiv_comp])
 
 /-- Two finite affine etale families admit free-sum models at one stage.
-This statement descends objects only; it makes no assertion about arrows between them.
-
-Source: Stacks Project, Tag 09YU (3), essential surjectivity of the affine etale site
-using 095N, and Tag 03S6.
-(blueprint: lem-weil-pbc-affine-free-etale-family-models).
-
-Proof:
-1. Regard each U and V as an object of the full affine etale site. Apply the essential
-   object-descent clause of `affineEtale_descent_data` to each of these finitely
-   many objects. Nonemptiness and directedness give a common upper bound i, even
-   when both families are empty. Move every object to i by the site's transition
-   functors. The cartesian squares and composition comparisons identify its base
-   change to the limit with the original U or V. Affineness is preserved because
-   the scheme transitions and limit projections are affine.
-2. For an affine etale object W, its sheaf P(W) represents evaluation on W: compose
-   the sheafification adjunction, the free-module adjunction and ulift Yoneda.
-   The etale lower shriek of the constant rank-one module represents the same
-   evaluation, by the shriek/pullback and constant-sheaf adjunctions. The natural
-   equivalences of represented functors give their unique comparison isomorphism.
-   Inverse image of P(W) is P of the base-changed object: apply the upperStar/lowerStar
-   adjunction and use that lowerStar evaluates on the base-changed etale object.
-   This is also `Etale.upperStarFreeYonedaIso` after comparing the two free models.
-3. Inverse image preserves coproducts since it is a left adjoint. Combine its
-   coproduct comparison with the comparisons in step 2 to obtain eU and eV.
-   In these stage models use the lower shriek of the constant rank-one module.
-   This is the free sheaf by step 2. The witnesses WU and WV, their affine proofs,
-   and eU and eV give the asserted common-stage models. Empty sums are handled
-   by preservation of the initial object. -/
+This statement descends objects only; it makes no assertion about arrows between them
+(Stacks, Tags 09YU, 095N and 03S6). -/
 theorem exists_affine_free_etaleModule_family_models
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

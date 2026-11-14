@@ -250,23 +250,7 @@ set_option synthInstance.maxHeartbeats 100000 in
 set_option synthInstance.maxSize 4096 in
 /-- Transport the Hom cocone through j_! and i_* to a strict bounded-below diagram on U.
 This does not assert that either Hom cocone is a colimit, and makes no finite-presentation
-assumption on P.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), costalk and adjunction steps.
-(auxiliary; not a blueprint node)
-
-Proof: use the exceptional right adjoint of the closed pushforward and the exact
-restriction along j. On the bounded-below derived categories, the two adjunctions
-identify Hom(i_*j_!P[0],N[n]) with Hom(P[0],j^*Ri^!N[n]), naturally in N. Choose the
-functorial bounded injective resolution at the common bound supplied by recollement,
-apply the exceptional functor and j^* termwise, and use good truncation to obtain L.
-Its terms vanish below a common bound. The recollement triangle identifies i_*Ri^!N
-with Cone(N -> Rk_*k^*N)[-1], for the complementary quasi-compact open k.
-Qcqs pushforward continuity and exact filtered colimits identify the termwise colimit
-of these models with j^*Ri^! of the original colimit. Apply Hom(P[0],-[n]) to this
-identification to obtain the vertex isomorphism. Naturality of both adjunctions gives
-the diagram isomorphism and its leg equation. All isomorphisms use the original cocone
-legs. Include the bounded-below derived categories fully faithfully into the ordinary
-ones. The argument also applies to zero P and empty U or Z. -/
+assumption on P (Hemo–Richarz–Scholbach, Lemma 5.3(2)). -/
 theorem condensed_local_piece_costalk_model
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

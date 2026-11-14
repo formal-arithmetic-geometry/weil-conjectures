@@ -19,20 +19,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 open Scheme
 
-/-- Base extension from a separably closed field is injective on module sections.
-Source: Stacks Tag 0A3I and the canonical coefficient-forgetting comparison.
-
-Proof: Equip K with the k-algebra structure of Spec.preimage t. Apply
-etale_sections_base_field_extension to S with structure morphism p and to the
-underlying set sheaf of F. Its unit evaluated at the identity etale object is
-bijective. The canonical terminal-object isomorphism turns this into the map on
-global sections. isIso_upperStar_forget_comparison identifies the set inverse
-image with the underlying set sheaf of the module inverse image; the homEquiv
-formula for this comparison identifies their units. Thus the module restriction
-has bijective underlying function. The isomorphism from the given pullback square
-to the canonical pullback transports this statement to i. Empty S and the zero
-coefficient ring cause no exception, since all these comparisons are functorial.
-(blueprint: new-etale-module-sections-field-extension) -/
+/-- Base extension from a separably closed field is injective on module sections (Stacks, Tag 0A3I).
+-/
 theorem etaleModuleSectionsFieldExtension_injective
     (Λ : Type (u + 1)) [CommRing Λ]
     (k K : Type u) [Field k] [Field K] [IsSepClosed k]

@@ -11,8 +11,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-! # Affine module tensor ExtensionUnit
 
-Source: Stacks Project, Morphisms, Lemma 01SB.
-(blueprint: lem-weil-pbc-affine-module-tensor-extension-unit).
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section
@@ -63,16 +64,8 @@ local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
 
 set_option maxHeartbeats 800000 in
 -- Tensor instance reduction in the explicit unit construction needs additional heartbeats.
-/-- Extension along ε supplies a functor and its canonical tensor unit after κ.
-Source: Stacks Project, Morphisms, Lemma 01SB, construction of h.
-Proof: Use change of rings along ε on P objects and sheafify id tensor P(a) on morphisms.
-The maps preserve identities and composition because tensor extension and sheafification
-do. The scalar-extension adjunction unit sends p to the sheafification of 1 tensor p.
-Compose this unit, after P, with κ inverse to define γ. Its naturality follows from
-naturality of the unit and κ. Composing with κ cancels κ inverse, giving the section
-formula. The equation bε=1 makes the unit O_U-linear; no affineness or
-quasi-coherence is needed; the zero ring and zero module satisfy the same construction.
-(blueprint: lem-weil-pbc-affine-module-tensor-extension-unit). -/
+/-- Extension along ε supplies a functor and its canonical tensor unit after κ (Stacks, Tag 01SB).
+-/
 theorem affine_module_tensor_extensionUnit
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (ε : B ⟶ U.sheaf) (hb : b ≫ ε = 𝟙 U.sheaf)

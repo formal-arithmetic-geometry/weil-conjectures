@@ -15,14 +15,15 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 /-!
 # Etale origin of constructible complexes locally of finite Tor dimension
 
-Source: Stacks Project, proetale.tex, Tags 09C2 and 09AL
-(auxiliary; not a blueprint node).
+## Implementation details
 
 We use the recorded coefficient-sized small sites and their constant ring sheaves.
-The inverse image of a derived object C is expressed using a cochain representative P:
-Q(P) is isomorphic to C, and Q of its canonical termwise comparison pullback is isomorphic
-to M. Exactness makes this precisely the inverse image on derived categories, independent
-of the representative. No inverse-image functor or tensor product is chosen anew.
+The inverse image of a derived object C is expressed using a cochain representative P.
+No inverse-image functor or tensor product is chosen anew.
+
+## References
+
+* Stacks Project, Tags 09C2 and 09AL
 -/
 
 @[expose] public noncomputable section
@@ -78,32 +79,8 @@ private theorem boundedConstructible_iso (X : Scheme.{u})
 constructible cohomology and locally finite Tor dimension are equivalent to bounded
 constructible etale origin with finite Tor amplitude. The local condition tests every
 module sheaf on every covering slice, with a possibly different ordered interval on
-each covering member. The etale interval is uniform. The complex P only represents C;
-its image is the actual canonical termwise comparison pullback, not an arbitrary map.
-
-Source: Stacks Project, Tag 09C2, lemma-describe-constructible-complexes, (2) and (4)
-at n = 1, and Tag 09AL, lemma-compare-constructible-derived
-(auxiliary; not a blueprint node).
-
-Proof:
-1. Apply lem-sfb-proetale-tor-local-global to the local Tor condition. Quasi-compactness
-   gives one interval [a,b] for all global module tests, including when X is empty.
-2. Test against the constant ring module in degree zero. The K-flat tensor construction
-   of prose-03-02 identifies M tensor A_X with M. Thus M has cohomology only
-   in [a,b]. Together with the assumed constructibility this gives bounded constructibility.
-3. Apply theorem-comparison-constructible-sheaves: its bounded constructible equivalence is
-   essentially surjective, giving a bounded constructible etale object C and an isomorphism
-   from its derived comparison pullback to M. Choose a cochain representative P of C.
-   The localization factorization of the comparison identifies the image of P with M.
-4. Apply corollary-finite-tor-amplitude-under-comparison--1 to C and the global interval. Invariance
-   under the comparison isomorphism gives the same Tor interval for C. This is the small
-   argument omitted in the proof of Tag 09C2 (4).
-5. Conversely, the bounded constructible comparison sends C to an object with constructible
-   cohomology. The fixed-interval Noetherian Tor comparison sends its Tor bound to M.
-   The reverse implication of lem-sfb-proetale-tor-local-global gives the required coverings
-   and slice intervals. The termwise representative condition is exactly the comparison
-   isomorphism by its canonical localization factorization. No completeness, boundedness
-   or prior etale-origin assumption on M enters either direction. -/
+each covering member. The etale interval is uniform.
+(Stacks, Tags 09C2 and 09AL) -/
 theorem constructible_localTor_iff_etaleOrigin
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A]

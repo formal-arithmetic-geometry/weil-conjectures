@@ -13,8 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 /-!
 # Construction of the compatible affine chart functor
 
-Source: Stacks Project, proof of Tag 04HX and Remark Tag 04HT
-(blueprint: lem-weil-pbc-etale-chart-residue-triples-equivalence).
+## References
+
+* Stacks Project, Tags 04HX and 04HT
 -/
 
 @[expose] public section
@@ -104,25 +105,8 @@ set_option maxHeartbeats 800000 in
 -- The two nested full subcategories and induced triple category require substantial
 -- definitional equality checking when assembling the functor and its ring isomorphism.
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Source: Stacks Project, proof of Tag 04HX (lemma-describe-etale-local-ring),
-first paragraph, and Tag 04HT (remark-etale-neighbourhoods).
-(blueprint: lem-weil-pbc-etale-chart-functor-construction).
-
-Proof: For c = (V, v) choose the chart map g. It is unique because i is a monomorphism.
-Put B = Γ(V) and α = (ΓSpecIso A).inv followed by g.appTop. The affine isomorphism
-V ≅ Spec B identifies Spec α with g; cancellation of the étale open immersion i
-shows that g, hence Spec α, is étale. Transport v along V → Spec Γ(V), obtain its
-prime q and residue embedding into Ω, and restrict that embedding to K using the
-assumed image containment. Cancellation of i in v followed by the structure map
-shows that q lies over p and gives the required compatibility on A. This constructs
-the triple H(c); its underlying ring is Γ(V). On a reversed neighbourhood morphism
-use the map on global sections. Commutation with the structure maps gives A-linearity.
-Commutation with the points gives commutation of the maps to Ω; injectivity of K → Ω
-gives commutation of the maps to K. These are exactly the morphisms of triples.
-Functoriality follows from functoriality of global sections. The identity maps on
-Γ(V) give the natural isomorphism δ, the definition of α gives the first formula,
-and the residue-field factorization of the transported point gives the second.
-This statement constructs only a functor, without claiming fullness or surjectivity. -/
+/-- There is a functor from pointed affine chart neighbourhoods to residue-field triples
+compatible with the chart data (Stacks, Tags 04HX and 04HT). -/
 theorem etale_chart_residue_triples_functor_construction
     (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω]
     (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i]

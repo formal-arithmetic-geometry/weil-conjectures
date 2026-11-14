@@ -17,8 +17,9 @@ import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
 /-! # Tensor comparison on K-flat representatives
 
-Source: Stacks Project, Cohomology, Tag 079U and Section 20.27
-(blueprint: lem-pc-derived-pullback-kflat-tensor-model).
+## References
+
+* Stacks Project, Tag 079U
 -/
 
 @[expose] public section
@@ -243,23 +244,7 @@ private theorem counitModel_isIso {T X : Scheme.{uModel}} (g : T ⟶ X)
 set_option maxHeartbeats 400000 in
 -- Elaborating the representative comparison requires several concrete tensor structures.
 /-- The comparison on K-flat cochain representatives, before localization in either
-variable. Source: Stacks Project, Cohomology, Tags 079U, 06YC and 06YH; steps 1 and 2
-and the representative naturality calculation of the parent proof.
-(blueprint: lem-pc-derived-pullback-kflat-tensor-model).
-
-Proof: identify F with tensorPullback by functor extensionality. Uniqueness of the
-left-derived functor compares epsilon with the recorded K-flat counit; hence epsilon
-is invertible on K-flat complexes. Pullback preserves K-flatness (06YC). The derived
-localization tensorator is invertible when its first argument is K-flat (06YH), both
-on X and on T after F. For a K-flat pair let A=L(mu_Q), B=epsilon_tensor followed by
-Q(phi), and C=(epsilon_P tensor epsilon_N) followed by mu_Q(FP,FN). A and C are
-invertible by those computations and B by hiso. Set e=C followed by B inverse and
-A inverse. Cancellation gives e;A;B=C. Naturality of the lax tensorator, epsilon
-and phi gives u;A'B'=AB;z and v;C'=C;z for the induced source, target and model maps.
-Postcompose v;e' and e;u with the invertible A'B' and use these two equalities;
-cancellation proves simultaneous naturality. No localization of the K-flat full
-subcategory, or extension to arbitrary derived objects, occurs in this lemma.
-The construction includes the identity and empty scheme without a flatness hypothesis. -/
+variable (Stacks, Tags 079U, 06YC and 06YH). -/
 theorem derivedPullback_kFlat_tensor_model {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]

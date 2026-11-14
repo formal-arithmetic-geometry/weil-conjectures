@@ -172,14 +172,7 @@ private theorem rawTransition_comp {X S : Scheme.{u}} {I : Type u}
   apply pulled_cartesian_map_congr
   exact (congrArg (fun x ↦ x.left) (D.map_comp b a)).symm
 
-/-- Common-stage assembly for a finite family of raw cartesian classes.
-
-Given the individual eventual-zero witnesses for each member of a finite family,
-cofilteredness supplies a common stage. The proof uses the composition law for the
-displayed raw transition maps and the finite wide-cospan property of a cofiltered
-category. Postcomposition carries each zero to the common stage. This theorem contains
-only the assembly step; it does not construct individual witnesses.
--/
+/-- Common-stage assembly for a finite family of raw cartesian classes. -/
 theorem exists_cartesianHigherImage_finite_raw_assembly
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

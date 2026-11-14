@@ -14,8 +14,9 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 /-!
 # Pullback preserves finite-stalk constructibility
 
-Source: finite pushforward constructibility blueprint, step 1; Stacks Project, Tag 095A.
-(blueprint: lem-weil-pbc-constructible-etale-set-pullback).
+## References
+
+* Stacks Project, Tag 095A
 -/
 
 @[expose] public section
@@ -27,24 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Pullback of an abelian etale sheaf preserves constructibility of its underlying
-set sheaf, including the finiteness of its geometric stalks.
-
-Source: blueprint `lemma-detection-proper-direct-image--1`, step 1;
-Stacks Project, Tag 095A.
-(blueprint: lem-weil-pbc-constructible-etale-set-pullback).
-
-Proof: Choose a finite constructible lisse stratification of the underlying set sheaf.
-Pull back the strata along g using `Stratification.pullback`. Preimages of constructible
-subsets are constructible and preimages of locally closed subsets are locally closed;
-the strata still form a disjoint finite covering. On each pulled-back stratum, use the
-composition isomorphisms for set inverse image and the Cartesian square to identify the
-restriction with inverse image of the original lisse restriction. A trivializing etale
-cover pulls back to a trivializing etale cover, and inverse image of a constant sheaf is
-constant. At a geometric point the inverse-image stalk is the original stalk at the
-composite point, so it remains finite. Thus the pulled-back stratification is lisse.
-Finally `etaleInverseImageAlgebraicStructures` identifies set inverse image with the
-underlying set sheaf of abelian inverse image. Transport the lisse strata across this
-isomorphism. This uses finite stalks, not merely finitely generated abelian stalks. -/
+set sheaf, including the finiteness of its geometric stalks (Stacks, Tag 095A). -/
 theorem isConstructibleEtaleSheafOfSets_upperStar
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (E : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

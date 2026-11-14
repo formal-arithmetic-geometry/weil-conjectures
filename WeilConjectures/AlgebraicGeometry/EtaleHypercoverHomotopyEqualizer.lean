@@ -20,17 +20,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 
 set_option linter.unusedVariables false in
-/-- Source: Stacks Project, Hypercoverings, Tags 0DAV, 094K, 01GS.
-
-Proof: Use the ordered join of two copies of [n], namely [2n+1], as an explicit
-simplicial path object for V. The cut maps give its elementary endpoint homotopy.
-Pull the two endpoint maps back along (a,b). To check its matching covers, first
-pull back U's matching cover. The resulting endpoint and lower doubled-face data
-glue on a finite subcomplex of the standard (2n+1)-simplex. Finite-simplex lifting
-in V extends this family locally. The endpoint pullback universal property gives
-local lifts of the matching datum, proving the required surjectivity. The projection
-to U and the explicit cut homotopy then give the asserted witnesses.
-(auxiliary; not a blueprint node) -/
+/-- Two refinements of finite split étale hypercovers of a qcqs scheme are equalized up to
+homotopy by a further étale hypercover (Stacks, Tags 0DAV, 094K and 01GS). -/
 theorem exists_etale_hypercover_homotopy_equalizer
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (U V : FiniteSplitEtaleHypercover X) (a b : U.Refinement V) :

@@ -13,8 +13,9 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Finite-cover descent in the first factor
 
-Source: Stacks Project, Tag 0BED, lemma-kunneth, the degree-zero finite-cover argument.
-(blueprint: lem-sc-external-global-sections-tensor-finite-cover-left).
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section
@@ -45,33 +46,8 @@ private theorem isIso_app_of_pairwise_limits
   infer_instance
 
 /-- Bijectivity descends from a finite cover of the first factor and its overlaps.
-There are no quasi-coherence, compactness, or affine-diagonal assumptions in this lemma.
-Source: Stacks Project, Tag 0BED, degree-zero part of equation-kunneth-on-cech.
-(blueprint: lem-sc-external-global-sections-tensor-finite-cover-left).
-
-Proof: For an open V of X, the cartesian open-immersion square identifies V times Y
-with the inverse image of V under pr_1 : X times Y -> X. The canonical open-immersion
-pullback/restriction comparison and the composition comparisons for tensor pullback
-identify the external coefficient on V times Y with the restriction of the original
-external coefficient. The unit equations for these comparisons and the pure tensor
-formula for pullback of a tensor show that restricting an external product is the
-external product of the restricted first section and the same second section.
-Tensor induction gives this compatibility for all tensors and for every overlap.
-Put N = Gamma(Y,G), as a k-vector space. The sheaf equalizer for F on the finite cover U
-identifies Gamma(X,F) with the kernel of the difference of the two restriction maps
-from the product of F(U_i) to the product of F(U_i intersect U_j). Tensoring with N
-preserves this kernel because N is flat over the field. It also preserves the two
-products because their indexing sets are finite. The sheaf equalizer for the external
-coefficient on the inverse-image cover identifies its global sections with the
-corresponding kernel. The restriction compatibility above gives a commuting diagram
-of the two kernel diagrams. The hypotheses make the middle and right vertical maps
-bijective. The inverse middle map preserves the kernels, since the right vertical
-map is injective and the diagram commutes. Thus the middle map restricts to a
-bijection of kernels, whose forward map is the displayed canonical external map.
-If the indexing type is empty, hcover forces X to be empty; the section modules and
-both equalizers are zero. Empty overlaps, empty Y, and zero coefficients are also
-covered by the same kernel and finite-product argument. No infinite-product or
-positive-cohomology comparison is used. -/
+There are no quasi-coherence, compactness, or affine-diagonal assumptions in this lemma
+(Stacks, Tag 0BED). -/
 theorem externalGlobalSectionsTensor_bijective_of_finite_cover_left
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

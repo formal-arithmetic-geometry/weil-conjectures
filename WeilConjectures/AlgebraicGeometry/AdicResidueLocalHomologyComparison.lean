@@ -17,7 +17,9 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 
 /-! # Residue homology of a specified local completed model
 
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -212,29 +214,8 @@ private def modelGlobalResidueIso (X : Scheme.{u})
             (AdicPerfectModel.algebraicResidue I P)))
 
 /-- A specified local completed-model isomorphism identifies the derived residue on that
-localized stratum with the constant algebraic residue complex. This is only a local
-calculation; it asserts neither constructibility nor etale descent nor finiteness.
-
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication; Lemma 6.3.13;
-Stacks Tags 093M, 099Q and 09AK.
-(auxiliary; not a blueprint node).
-
-Proof: inverse image along the immersion is exact and preserves limits. Apply its
-canonical limit comparison to the completed coefficient sheaf and its finite projection.
-The resulting coefficient isomorphisms respect constant sections and hence the residue
-scalar action. Restriction to U is exact. Derived change of rings commutes with these
-restrictions by the canonical tensor base-change comparison; calculate it on a K-flat
-representative. Apply this comparison to the given local isomorphism. The bounded
-projective complex P has a K-flat completed constant realization. Its residue is therefore
-computed by ordinary tensor. The canonical associative tensor comparison identifies
-this tensor with the constant realization of k tensor_A P, including on the slice over U.
-This is precisely the residue and slice comparison of adicPerfectModel_complete_reduction.
-The constant module functor is exact, so this identification also identifies all
-cohomology sheaves. Exact fixed-scalar restriction and the equivalent small-site functors
-commute with this cohomology. Their constant-section units identify the result with the
-constant fixed-scalar module sheaf displayed below. No finite residue-field assumption is
-used. The same construction sends the zero complex to zero and remains valid on an empty
-slice. -/
+localized stratum with the constant algebraic residue complex (Bhatt--Scholze,
+Proposition 6.6.11 and Lemma 6.3.13; Stacks, Tags 093M, 099Q and 09AK). -/
 theorem adicResidue_localModelComparison
     {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]

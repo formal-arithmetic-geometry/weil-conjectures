@@ -17,7 +17,10 @@ import all WeilConjectures.SixFunctors.GeometricInverseImageConstantModule
 
 /-! # Completed constant modules under the normalized immersion pullback
 
-Source: Stacks Tags 03D2, 03EL and 099L; Bhatt--Scholze Lemma 6.5.8.
+## References
+
+* Stacks Project, Tags 03D2, 03EL and 099L
+* Bhatt--Scholze, Lemma 6.5.8
 -/
 
 @[expose] public noncomputable section
@@ -31,16 +34,12 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The module functor used termwise in sfbCompletedModel.
-Source: Stacks Tags 093J and 099L
-(auxiliary; not a blueprint node). -/
+/-- The module functor used termwise in sfbCompletedModel (Stacks, Tags 093J and 099L). -/
 def sfbImmersionActualConstants (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :=
   adicLisseConstantModules X A ⋙ completedAdicChange X (CompletedConstantReduction.base X I)
 
-/-- The module functor used termwise in adicResidueConstantPerfect.
-Source: Stacks Tags 093J and 099L
-(auxiliary; not a blueprint node). -/
+/-- The module functor used termwise in adicResidueConstantPerfect (Stacks, Tags 093J and 099L). -/
 def sfbImmersionModelConstants (S : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :=
   SheafOfModules.strictPerfectConstantSheaf (proEtaleModelTopology S) A ⋙
@@ -48,9 +47,7 @@ def sfbImmersionModelConstants (S : Scheme.{u})
       (constantModuleHomRingIso (proEtaleModelTopology S) A).inv ⋙
     ConstantCompletion.change (ConstantCompletion.coefficientMap (proEtaleModelTopology S) A I)
 
-/-- Additivity of the specified ordinary module functor.
-Source: Stacks Tags 03D2 and 099L
-(auxiliary; not a blueprint node). -/
+/-- Additivity of the specified ordinary module functor (Stacks, Tags 03D2 and 099L). -/
 instance sfbImmersionActualConstants_additive (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     (sfbImmersionActualConstants X I).Additive := by
@@ -58,9 +55,7 @@ instance sfbImmersionActualConstants_additive (X : Scheme.{u})
   unfold sfbImmersionActualConstants
   infer_instance
 
-/-- Additivity of the specified ordinary module functor.
-Source: Stacks Tags 03D2 and 099L
-(auxiliary; not a blueprint node). -/
+/-- Additivity of the specified ordinary module functor (Stacks, Tags 03D2 and 099L). -/
 instance sfbImmersionModelConstants_additive (S : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     (sfbImmersionModelConstants S I).Additive := by
@@ -344,27 +339,8 @@ private theorem transported_scalars
 
 end ConstantModules
 
-/-- Constant modules commute with the normalized completed immersion pullback.
-
-Source: Stacks Tags 03D2, 03EL and 099L; Bhatt--Scholze Lemma 6.5.8
-(auxiliary; not a blueprint node).
-
-Proof: constant sheafification on the original site and on the AsSmall model
-commutes with the site equivalence, naturally in the coefficient module. The
-canonical constant-ring comparison identifies the two scalar actions. Geometric
-inverse image preserves constant modules, since it preserves finite limits and
-is left adjoint; the algebraic inverse-image data identifies their addition and
-scalar multiplication on generalized sections. The normalization isomorphism
-for the completed rings respects all finite quotient projections. These
-projections identify the composite constant-to-completed coefficient map with
-the coefficientMap on S. Reassociate the two scalar extensions using the map
-s tensor (t tensor m) to st tensor m. Its inverse sends s tensor m to
-s tensor (1 tensor m). The balancing relations show that the two maps are
-inverse and natural in every A-linear map. Sheafification preserves these
-identities. This proves the displayed natural isomorphism of module functors,
-without a slice, a complex, or any perfectness or boundedness assumption.
-For I=A both target coefficient rings are zero; for I=0 the same maps are
-ordinary constant-module transport. -/
+/-- Constant modules commute with the normalized completed immersion pullback
+(Stacks, Tags 03D2, 03EL and 099L; Bhatt--Scholze, Lemma 6.5.8). -/
 theorem sfbImmersion_constantModuleComparison
     {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :

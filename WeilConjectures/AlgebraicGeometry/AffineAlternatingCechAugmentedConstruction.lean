@@ -15,10 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechSheafAffineComparison
 
 /-! # Augmented increasing-tuple complex of module sheaves
 
-Source: Stacks Project, Tags 01FM, 02KG, 02KH (only its Cech comparison),
-and the construction paragraph of
-`lem-pc-s3-affine-alternating-cech-resolution-core`.
-(blueprint: lem-pc-s3-affine-alternating-cech-augmented-construction).
+## References
+
+* Stacks Project, Tags 01FM, 02KG, 02KH
 -/
 
 @[expose] public section
@@ -30,30 +29,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-- Construct the augmented increasing-tuple sheaf complex and its affine section model.
-Source: Stacks Project, Tag 01FM (alternating complexes), Tag 02KG (affine base
-change), and Tag 02KH, proof of the separated case (comparison of Cech complexes
-before taking cohomology); parent resolution node, construction paragraph.
-(blueprint: lem-pc-s3-affine-alternating-cech-augmented-construction).
-
-Proof: In degree n take the finite product of j_* (G restricted to W), where W is
-an intersection indexed by a strictly increasing (n+1)-tuple in Fin r. On sections
-over V, each factor is G(V intersect W), with scalar action through restriction.
-The face maps are restrictions, with alternating signs. Functoriality of restriction
-and cancellation of the two orders of deleting two entries prove d squared zero.
-Augment by restricting sections from G to each cover member. On U_i, insert i into
-a tuple, sort with its permutation sign, and use zero when an index repeats. The
-signed face sum gives dh+hd=identity on the augmented complex. Thus the augmentation
-is locally a homotopy equivalence, hence a quasi-isomorphism. The same homotopy after
-any additive tensor pullback contracts the pulled-back augmented complex on the
-inverse-image cover; no flatness is used. Extending by zero preserves this assertion.
-Each W is affine since f is separated over an affine base. Enumerate the finite
-increasing-tuple type by Fin m; the empty type gives m=0. Pushforward preserves
-products. On an affine intersection the tilde-Gamma counit identifies its direct
-image on Spec A with tilde of its sections restricted to A. Naturality with respect
-to restriction identifies every signed face map, so these finite-product comparisons
-assemble into q. Negative degrees on both sides are zero. For an empty cover X is
-empty and the zero complex and unique augmentation satisfy all assertions.
-The complex is used only as an existential witness, never to define arbitrary data. -/
+(Stacks, Tags 01FM, 02KG and 02KH). -/
 theorem exists_affineAlternatingCech_augmented_construction
     {A B : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A)
     [IsSeparated f] (g : Spec B ⟶ Spec A)

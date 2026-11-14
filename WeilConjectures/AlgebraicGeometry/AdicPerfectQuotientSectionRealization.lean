@@ -10,8 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.AdicPerfectModelCompleteReduction
 
 /-! # Explicit section adjoints for the ordinary quotient realization
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03EK.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 03CY and 03EK
 -/
 
 @[expose] public noncomputable section
@@ -30,43 +31,39 @@ section Quotient
 variable (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A]
   (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X) (n : ℕ)
 
-/-- The quotient map after restriction to the slice. Source: Stacks 09C6
-(auxiliary; not a blueprint node). -/
+/-- The quotient map after restriction to the slice (Stacks, Tag 09C6). -/
 def quotientMap :
     (constant (coefficientProEtaleModelTopology.{u, v} X) A).over U ⟶
       (finite (coefficientProEtaleModelTopology.{u, v} X) A J n).over U :=
   ((coefficientProEtaleModelTopology.{u, v} X).overPullback CommRingCat U).map
     (ConstantCompletion.quotient (coefficientProEtaleModelTopology.{u, v} X) A J n)
 
-/-- Direct ordinary realization over the constant quotient ring on the slice.
-Source: Stacks 03CY, 03EK (auxiliary; not a blueprint node). -/
+/-- Direct ordinary realization over the constant quotient ring on the slice
+(Stacks, Tags 03CY and 03EK). -/
 def quotientRealization : ModuleCat.{max v (u + 1)} A ⥤
     Mod ((finite (coefficientProEtaleModelTopology.{u, v} X) A J n).over U) :=
   localConstant (coefficientProEtaleModelTopology.{u, v} X) A U ⋙
     change (quotientMap X J U n)
 
-/-- Algebraic terminal sections of a quotient-ring module sheaf.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- Algebraic terminal sections of a quotient-ring module sheaf (Stacks, Tag 03CY). -/
 def rawRightAdjoint :
     Mod ((finite (coefficientProEtaleModelTopology.{u, v} X) A J n).over U) ⥤
       ModuleCat.{max v (u + 1)} A :=
   res (quotientMap X J U n) ⋙
     localSections (coefficientProEtaleModelTopology.{u, v} X) A U
 
-/-- The direct quotient realization/sections rawAdjunction.
-Source: Stacks 03CY, 03EK (auxiliary; not a blueprint node). -/
+/-- The direct quotient realization/sections rawAdjunction (Stacks, Tags 03CY and 03EK). -/
 theorem quotientAdjunction_exists :
     Nonempty (quotientRealization X J U n ⊣ rawRightAdjoint X J U n) :=
   ⟨(localAdjunction (coefficientProEtaleModelTopology.{u, v} X) A U).comp
     (AdicPerfectModel.scalarAdjunction (quotientMap X J U n))⟩
 
-/-- Compose the constant-module and tensor adjunctions. Source: Stacks 03CY, 03EK
-(auxiliary; not a blueprint node). -/
+/-- Compose the constant-module and tensor adjunctions (Stacks, Tags 03CY and 03EK). -/
 def quotientAdjunction : quotientRealization X J U n ⊣ rawRightAdjoint X J U n :=
   Classical.choice (quotientAdjunction_exists X J U n)
 
-/-- Cancel completion in the ordinary realization, by the completion cone equation.
-Source: Stacks 03EK, 09C6 (auxiliary; not a blueprint node). -/
+/-- Cancel completion in the ordinary realization, by the completion cone equation
+(Stacks, Tags 03EK and 09C6). -/
 theorem realizationIso_exists : Nonempty (adicPerfectQuotientFunctor X J U n ≅
     quotientRealization X J U n) := by
   let T := coefficientProEtaleModelTopology.{u, v} X
@@ -88,21 +85,20 @@ theorem realizationIso_exists : Nonempty (adicPerfectQuotientFunctor X J U n ≅
     (Functor.isoWhiskerLeft K (changeOverIso T U q)).symm ≪≫
     Functor.isoWhiskerRight (localConstantIso T A U).symm (change (quotientMap X J U n))⟩
 
-/-- The explicit direct-quotient normalization. Source: Stacks 03EK, 09C6
-(auxiliary; not a blueprint node). -/
+/-- The explicit direct-quotient normalization (Stacks, Tags 03EK and 09C6). -/
 def realizationIso : adicPerfectQuotientFunctor X J U n ≅
     quotientRealization X J U n :=
   Classical.choice (realizationIso_exists X J U n)
 
-/-- Transport the constructed rawAdjunction to the actual completed quotient functor.
-Source: Stacks 03CY, 03EK (auxiliary; not a blueprint node). -/
+/-- Transport the constructed rawAdjunction to the actual completed quotient functor
+(Stacks, Tags 03CY and 03EK). -/
 theorem rawAdjunction_exists :
     Nonempty (adicPerfectQuotientFunctor X J U n ⊣ rawRightAdjoint X J U n) :=
   ⟨(quotientAdjunction X J U n).ofNatIsoLeft (realizationIso X J U n).symm⟩
 
 /-- A sections rawAdjunction for the actual completed quotient functor.
-The preceding theorem constructs one without any unproved existence result.
-Source: Stacks 03CY, 03EK (auxiliary; not a blueprint node). -/
+The preceding theorem constructs one without any unproved existence result
+(Stacks, Tags 03CY and 03EK). -/
 def rawAdjunction : adicPerfectQuotientFunctor X J U n ⊣ rawRightAdjoint X J U n :=
   Classical.choice (rawAdjunction_exists X J U n)
 

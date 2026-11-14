@@ -12,8 +12,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Reconstruction of an affine quasi-coherent complex from its sections
 
-Source: Stacks Project, Tag 01IB; Tag 06Z0, termwise associated sheaf construction.
-(blueprint: lem-pc-affine-sections-complex-counit).
+## References
+
+* Stacks Project, Tags 01IB and 06Z0
 -/
 
 @[expose] public section
@@ -46,25 +47,8 @@ private noncomputable def chartSectionsIso (Y : Scheme.{u}) [IsAffine Y] :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Pushing the associated sheaf of the ordinary section complex back through the
-canonical affine chart recovers a complex with quasi-coherent terms.
-Source: Stacks Project, Tag 01IB (schemes-lemma-spec-sheaves), and Tag 06Z0.
-(blueprint: lem-pc-affine-sections-complex-counit).
-
-Proof: For A = Gamma(Y,O), push D forward along Y.isoSpec.hom. This preserves
-quasi-coherence: inverse-chart restriction and chart pushforward are both left
-adjoint to inverse-chart pushforward, hence naturally isomorphic; Mathlib's
-restriction theorem preserves quasi-coherence. The global section comparison
-identifies its A-module of sections, with scalars restricted through GammaSpecIso,
-with the actual A-module D^n(Y). The identity
-Y.isoSpec.hom.appTop composed with GammaSpecIso.inv is the identity, ensuring
-agreement of the scalar actions.
-Apply the affine quasi-coherent counit tilde(Gamma(-)) -> (-) in every degree.
-Its naturality makes these maps commute with the differentials, and every component
-is an isomorphism by Tag 01IB. Thus they form a complex isomorphism. Push it back
-along Y.isoSpec.inv and compose with pushforwardComp, pushforwardCongr of the chart's
-hom_inv_id, and pushforwardId. This yields the displayed isomorphism. This argument
-works for unbounded complexes and the empty affine scheme; no projective replacement
-or arbitrary choice of model is involved. -/
+canonical affine chart recovers a complex with quasi-coherent terms
+(Stacks, Tags 01IB and 06Z0). -/
 theorem affine_sections_complex_counit (Y : Scheme.{u}) [IsAffine Y]
     (D : CochainComplex Y.Modules ℤ)
     (hDqc : ∀ n : ℤ, (D.X n).IsQuasicoherent) :

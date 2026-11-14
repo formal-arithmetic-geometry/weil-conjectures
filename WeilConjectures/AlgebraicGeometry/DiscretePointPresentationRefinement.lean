@@ -13,7 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.SiteFiniteConstantComplexDescent
 
 /-! # Refinement of one discrete point presentation
 
-Source: Stacks, Tags 03CY, 00YV and 09AJ.
+## References
+
+* Stacks Project, Tags 03CY, 00YV and 09AJ
 -/
 
 @[expose] public section
@@ -69,25 +71,7 @@ private theorem local_cokernel_of_slice_matrix
 /-- A single finite presentation on the condensed point gives constant finite presentations
 locally after section reconstruction and arbitrary coefficient relabelling. There is no
 local-model hypothesis on N: the displayed isomorphism is one specified finite-matrix cokernel.
-
-Source: Stacks, Modules on Sites, Tag 03CY; Sites, Tag 00YV;
-the forward finite-matrix argument in lem-sfb-discrete-coefficient-local-models, steps 1--2.
-(auxiliary; not a blueprint node).
-
-Proof: use the displayed matrix d between finite sums of the regular point module.
-The constant-sheaf pullback comparison identifies these free summands with constant free
-summands after scheme inverse image. Section reconstruction, the equivalent small site,
-and restriction along c preserve these finite sums and cokernels. Their localization and
-inverse-image comparisons identify the image of the displayed isomorphism on the slice U.
-The resulting finite matrix has entries in the constant ring sheaf k, although they need
-not be globally constant because c is arbitrary. The constant-presheaf sheafification unit
-is locally surjective. Apply local surjectivity successively to the finitely many entries
-and intersect the resulting covering sieves, so every entry is a constant scalar on each
-member. Sheafification and slice restriction preserve cokernels; hence each member is the
-constant sheaf of the ordinary cokernel of that finite scalar matrix. This ordinary module
-is finitely presented by its displayed finite presentation. The ranks stay m and n. Zero row
-or column counts use the same cokernel argument; an empty covering sieve requires no witnesses.
-No Noetherian hypothesis is needed for this direction. -/
+(Stacks, Tags 03CY and 00YV) -/
 theorem discrete_point_presentation_refinement
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type u) [CommRing A] (k : Type (u + 1)) [CommRing k]

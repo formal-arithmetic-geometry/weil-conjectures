@@ -11,13 +11,12 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphComparisonProperAmbient
 
 /-! # Pairwise product-graph normalization of étale presentation comparisons
 
-Source: Stacks Project, more-etale.tex, Tags 0F7B, 0F7C, 0F7D and 0F7J;
-`LowerShriekComposition.lean`, lines 193--268, product-graph formula, extended to two
-proper/open/proper presentations.
-(auxiliary; not a blueprint node).
-
 The auxiliary declarations construct the literal fibre products and the displayed lambda
 maps. Only their geometric properties and the final comparison equation are postponed.
+
+## References
+
+* Stacks Project, Tags 0F7B, 0F7C, 0F7D and 0F7J
 -/
 
 @[expose] public noncomputable section
@@ -35,69 +34,52 @@ namespace EtaleGraphPresentation.PairwiseProduct
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y} (s t : EtaleGraphPresentation f)
 
-/-- The proper ambient product. Source: Stacks Tag 0F7J, product diagrams
-(auxiliary; not a blueprint node). -/
+/-- The proper ambient product (Stacks, Tag 0F7J). -/
 abbrev P : Scheme.{u} := pullback s.p t.p
 
-/-- The product of the supporting opens over the base. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The product of the supporting opens over the base (Stacks, Tag 0F7J). -/
 abbrev U : Scheme.{u} := pullback (s.e ≫ s.p) (t.e ≫ t.p)
 
-/-- The graph of the two proper first factors. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The graph of the two proper first factors (Stacks, Tag 0F7J). -/
 def a : X ⟶ U s t := pullback.lift s.a t.a (s.fac.trans t.fac.symm)
 
-/-- The actual product of the open immersions, over the identity of the base.
-Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The actual product of the open immersions, over the identity of the base (Stacks, Tag 0F7J). -/
 def b : U s t ⟶ P s t :=
   pullback.map (s.e ≫ s.p) (t.e ≫ t.p) s.p t.p s.e t.e (𝟙 Y)
     (Category.comp_id _) (Category.comp_id _)
 
-/-- The structural map of the product. Its other expression is `pullback.condition`.
-Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The structural map of the product. Its other expression is `pullback.condition`
+(Stacks, Tag 0F7J). -/
 def p : P s t ⟶ Y := pullback.fst s.p t.p ≫ s.p
 
-/-- The first supporting neighborhood. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The first supporting neighborhood (Stacks, Tag 0F7J). -/
 abbrev O₁ : Scheme.{u} := pullback (pullback.fst s.p t.p) s.e
 
-/-- The second supporting neighborhood. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The second supporting neighborhood (Stacks, Tag 0F7J). -/
 abbrev O₂ : Scheme.{u} := pullback (pullback.snd s.p t.p) t.e
 
-/-- The projection equations defining the induced maps to both neighborhoods.
-Source: Stacks Tag 0F7J, product diagram
-(auxiliary; not a blueprint node).
-Proof: project the defining pullback map onto each factor. The two `pullback.map`
-projection equations identify these composites with the products of the open maps. -/
+/-- The projection equations defining the induced maps to both neighborhoods (Stacks, Tag 0F7J). -/
 theorem b_projections :
     b s t ≫ pullback.fst s.p t.p = pullback.fst (s.e ≫ s.p) (t.e ≫ t.p) ≫ s.e ∧
     b s t ≫ pullback.snd s.p t.p = pullback.snd (s.e ≫ s.p) (t.e ≫ t.p) ≫ t.e := by
   constructor <;> simp [b]
 
-/-- The canonical map to the first neighborhood. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The canonical map to the first neighborhood (Stacks, Tag 0F7J). -/
 def v₁ : U s t ⟶ O₁ s t :=
   pullback.lift (b s t) (pullback.fst (s.e ≫ s.p) (t.e ≫ t.p)) (b_projections s t).1
 
-/-- The canonical map to the second neighborhood. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The canonical map to the second neighborhood (Stacks, Tag 0F7J). -/
 def v₂ : U s t ⟶ O₂ s t :=
   pullback.lift (b s t) (pullback.snd (s.e ≫ s.p) (t.e ≫ t.p)) (b_projections s t).2
 
-/-- The first neighborhood graph. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The first neighborhood graph (Stacks, Tag 0F7J). -/
 def z₁ : X ⟶ O₁ s t := a s t ≫ v₁ s t
 
-/-- The second neighborhood graph. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The second neighborhood graph (Stacks, Tag 0F7J). -/
 def z₂ : X ⟶ O₂ s t := a s t ≫ v₂ s t
 
-/-- The geometric properties of the explicitly constructed product diagram.
-Source: Stacks Tags 01W3, 01W4 and 01W6 and the product diagrams of Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The geometric properties of the explicitly constructed product diagram
+(Stacks, Tags 01W3, 01W4, 01W6 and 0F7J). -/
 structure Geometry : Prop where
   properA : IsProper (a s t)
   openB : IsOpenImmersion (b s t)
@@ -112,20 +94,8 @@ structure Geometry : Prop where
   v₁_b : v₁ s t ≫ pullback.fst (pullback.fst s.p t.p) s.e = b s t
   v₂_b : v₂ s t ≫ pullback.fst (pullback.snd s.p t.p) t.e = b s t
 
-/-- The products form a proper/open/proper presentation, with both neighborhood graphs proper.
-Source: Stacks Tags 01W3 (composition), 01W4 (base change), 01W6 (proper to separated),
-and 0F7J, product diagrams
-(auxiliary; not a blueprint node).
-Proof: the ambient projections and the neighborhood projections are proper by base change;
-composition makes p proper. The map b is the product of the two open immersions, so is
-open by base change and composition. Each vν followed by the corresponding open
-neighborhood inclusion is b, so cancellation of open immersions makes vν open.
-The first projection U -> s.U is separated: it is a base change of t.e followed by t.p,
-a composite of separated maps. Its composite with a is s.a, so proper-to-separated
-makes a proper. Likewise zν followed by the proper neighborhood projection qν is aν,
-so proper-to-separated makes zν proper. All remaining equations follow by the pullback
-projection identities and s.fac, t.fac.
-This argument does not suppose f proper or either supporting open quasi-compact. -/
+/-- The products form a proper/open/proper presentation, with both neighborhood graphs proper
+(Stacks, Tags 01W3, 01W4, 01W6 and 0F7J). -/
 theorem geometry : Geometry s t := by
   have hb : IsOpenImmersion (b s t) := by
     exact MorphismProperty.pullbackMap (P := @IsOpenImmersion)
@@ -164,9 +134,7 @@ theorem geometry : Geometry s t := by
   · simp [v₁]
   · simp [v₂]
 
-/-- The product presentation with exactly the constructed maps; only its proofs use geometry.
-Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The product presentation with exactly the constructed maps (Stacks, Tag 0F7J). -/
 def presentation : EtaleGraphPresentation f where
   U := U s t
   P := P s t
@@ -183,9 +151,8 @@ end EtaleGraphPresentation.PairwiseProduct
 /-- The displayed lambda word for one projection of the product presentation.
 The first exchange is Gamma_D. The shrinking isomorphism is Gamma_E with its identity-open
 factor removed; its inverse has the orientation in lambda. Both squares are Cartesian, so
-these are exactly the normalized maps of lem-pur-etale-proper-open-exchange-cube.
-Source: Stacks Tags 0F7B--0F7D and 0F7J
-(auxiliary; not a blueprint node). -/
+these are exactly the normalized maps of the proper/open exchange cube
+(Stacks, Tags 0F7B, 0F7C, 0F7D and 0F7J). -/
 def etaleProductGraphLambda
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (s t : EtaleGraphPresentation f)
@@ -216,9 +183,8 @@ namespace EtaleGraphPresentation.PairwiseProduct
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y} (s t : EtaleGraphPresentation f)
 
-/-- Lambda₁, with the literal first product projection and its pullback neighborhood.
-Source: Stacks Tags 0F7B--0F7D and 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Lambda₁, with the literal first product projection and its pullback neighborhood
+(Stacks, Tags 0F7B, 0F7D and 0F7J). -/
 def lambda₁ (A : Type (u + 1)) [CommRing A] [Finite A] :
     s.functor A ≅ (presentation s t).functor A :=
   letI := (geometry s t).openV₁
@@ -229,9 +195,8 @@ def lambda₁ (A : Type (u + 1)) [CommRing A] [Finite A] :
     (IsPullback.of_hasPullback (pullback.fst s.p t.p) s.e).flip
     (geometry s t).z₁_q rfl rfl (geometry s t).v₁_b
 
-/-- Lambda₂, with the second product projection and the same product structural map.
-Source: Stacks Tags 0F7B--0F7D and 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Lambda₂, with the second product projection and the same product structural map
+(Stacks, Tags 0F7B, 0F7D and 0F7J). -/
 def lambda₂ (A : Type (u + 1)) [CommRing A] [Finite A] :
     t.functor A ≅ (presentation s t).functor A :=
   letI := (geometry s t).openV₂
@@ -298,41 +263,8 @@ private theorem comparisonFromOpen_productGraphLambda
       simp only [etaleProductGraphLambda, l, r, H, Iso.trans_assoc]
     _ = etaleGraphComparisonFromOpen A c t := by rw [hl, hr]
 
-/-- The specified pairwise graph comparison is lambda₂⁻¹ lambda₁.
-Source: Stacks Tags 0F7B, 0F7C, 0F7D and 0F7J; the explicit product-graph comparison in
-`LowerShriekComposition.lean`, lines 193--268, extended to two proper/open/proper
-presentations (auxiliary; not a blueprint node).
-
-Proof:
-1. The theorem PairwiseProduct.geometry checks the product presentation and the two proper
-neighborhood graphs, using proper base change, composition and proper-to-separated.
-2. Fix the supplied open-then-proper c, and form P₁ ×_Y P₂ ×_Y c.Z. The three supporting
-opens and all their intersections have proper graph lifts by the same argument.
-3. For nested supporting opens W inside V, horizontal pasting of normalized Gamma gives
-sigma(i,W) = sigma(i,V) sigma(V,W). Cancel the common invertible shrinking map to compute
-pair comparisons through the intersection of all three opens.
-4. Insert the direct-image compositors and the Cartesian Gamma maps to form A_i from each
-presentation to its supporting-neighborhood word. Shrink to the total intersection,
-obtaining E_i into a common functor H; E_0 for c is independent of the index 1 or 2.
-5. Project the triple product to Pν ×_Y c.Z. Let tau_i be the direct-image compositor
-followed by Gamma for this proper projection, and tau_W the analogous intersection map.
-6. Vertical pasting in the grid with rows X, W', W and horizontal pasting in the grid with
-rows W' -> N_i' -> T and W -> N_i -> Tν give tau_i sigma_i = Rz(sigma_i') tau_W.
-The interchange of the two Gamma factors is naturality. Vertical pasting in the successive
-projection squares likewise identifies the two A_i formulas, with their fixed compositors.
-7. Invert the shrinking maps and cancel. The same map Dν takes both E_0 downstairs and
-E_ν downstairs to their triple-product versions.
-8. Unpack the recorded graph-model B formula: its two side words are those A_i, and its
-middle word is sigma_ν sigma_0⁻¹. Cartesian normalization identifies its exchange maps
-with these Gamma maps. Therefore B_(ν,c) = E_ν⁻¹ E_0, and C_(2,1) = E_2⁻¹ E_1.
-9. Repeat the two projection-grid equations for the projection to P₁ ×_Y P₂. Downstairs
-the two A_ν followed by inverse shrinking are exactly lambda₁ and lambda₂ as defined here:
-the shrinking is Gamma_E⁻¹, followed by the canonical open compositor.
-10. Shrink once more to the total intersection. The same invertible map D then satisfies
-E_ν = D lambda_ν for both indices. Cancellation gives C_(2,1) = lambda₂⁻¹ lambda₁.
-All maps are the specified compositors and normalized Cartesian interchanges. Finite A is
-used only for unbounded interchange; neither quasi-compactness nor Noetherianity is used.
-This compares presentations of one map and states no compatibility of two scheme maps. -/
+/-- The specified pairwise graph comparison is `lambda₂⁻¹ lambda₁` (Stacks, Tags 0F7B, 0F7C,
+0F7D and 0F7J). -/
 theorem etalePairwiseProductGraphNormalization
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

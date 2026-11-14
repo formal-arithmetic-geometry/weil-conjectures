@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsFilteredColimit
 
 /-! # Scalar continuity for descended qcqs étale objects
 
-Source: Stacks Project, Tags 09YN and 09YQ.
+## References
+
+* Stacks Project, Tags 09YN and 09YQ
 -/
 
 @[expose] public section
@@ -61,32 +63,7 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- This helper is the representative half of scalar section continuity. The affine étale
-site colimit identifies sections on the limit with filtered stage sections, so every
-limit section has a stage representative. Source: Stacks Tags 09YN and 09YQ.
-Source: Stacks Project, Sites, Tag 09YN, proof of lemma-colimit; Étale Cohomology,
-Tag 09YQ, qcqs inverse-limit realization; Cohomology on Sites, Tag 09YP.
-(blueprint: lem-weil-pbc-etale-limit-scalar-section-representatives).
-
-Proof: Base change T₀ along the tail of D. Affine-transition base-change limits
-identify its limit with Tlim. The first-projection equations, together with the
-already fixed base projections, uniquely identify γ and δ with pullback pasting.
-On an affine piece, use the full affine étale site and its topos comparison to
-apply 09YM to each inverse image in G. Insert these filtered presentations into
-the sectionwise colimit of G. Objects, arrows and equalities in the affine site
-all descend, so simultaneous refinements are filtered and the diagonal is final.
-This identifies the iterated colimit with the stage section groups. Transposing
-through the inverse-image adjunction identifies its transitions with the units
-followed by φ and γ inverse, and its legs with the units followed by eG inverse,
-L.ι and δ inverse. For qcqs T₀, take a finite affine cover, and finite affine
-covers of its pairwise intersections; filtered colimits commute with the finite
-matching-family equalizers. Thus the same comparison holds for T₀ itself.
-The tail is final, so restricting G does not change the colimit supplied by hL.
-Every element of a filtered colimit of abelian groups has a stage representative.
-Equality of a representative with zero holds after one later transition. These
-are the two conclusions below, with the prescribed maps. The empty scheme and
-zero coefficients give zero groups; no nonempty-object hypothesis is needed.
-This statement concerns one object, with no products or cochain complexes. -/
+/-- Every section on the limit has a stage representative (Stacks, Tags 09YN and 09YQ). -/
 theorem etale_limit_scalar_sections_representatives
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

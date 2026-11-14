@@ -40,9 +40,7 @@ private theorem composite_pullback_square
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction of a composite base change is the pullback of the restricted arrow,
-when its target chart factors through the chosen base open.
-
-Source: Stacks Project, Schemes, Tag 01JR (open fibre products). -/
+when its target chart factors through the chosen base open (Stacks, Tag 01JR). -/
 theorem restricted_composite_base_change
     {S T : Scheme.{u}} (d : T ⟶ S)
     (X₀ Y₀ : Over S) (f₀ : X₀ ⟶ Y₀)

@@ -20,7 +20,9 @@ The stalk of the étale sheaf `𝔾ₘ` on `Spec K` at the Galois point
 group of units of `Ks`: a germ of a unit is sent to its value at the geometric point. This
 identification is equivariant for the natural actions of `Gal(Ks/K)`.
 
-Source: Stacks Project, Example 03QV (2), and Tag 03QU.
+## References
+
+* Stacks Project, Tags 03QV and 03QU
 -/
 
 @[expose] public section
@@ -37,14 +39,8 @@ variable (K : Type u) [Field K]
 group of units of the separable closure: the germ of a unit `z` on an étale neighbourhood
 `(X, x)` is sent to the value of `z` at the geometric point `x`
 (`AlgebraicGeometry.Scheme.gmSheafFiberGaloisPointAddEquiv_toPresheafFiber`). It intertwines
-the Galois actions (`AlgebraicGeometry.Scheme.gmSheafFiberGaloisPointAddEquiv_presheafFiberAct`).
-
-It is obtained from evaluation at the geometric point `Spec (AlgebraicClosure K) ⟶ Spec K`
-(`AlgebraicGeometry.Scheme.exists_etaleUnits_stalk_evaluation_overfield`), which is unique as
-the separable closure embeds into the algebraic closure, transported along
-`AlgebraicGeometry.Scheme.galoisPointSheafFiberIso`.
-
-Source: Stacks Project, Example 03QV (2), and Tag 03QU. -/
+the Galois actions (`AlgebraicGeometry.Scheme.gmSheafFiberGaloisPointAddEquiv_presheafFiberAct`)
+(Stacks, Tags 03QV, 03QU). -/
 noncomputable def gmSheafFiberGaloisPointAddEquiv :
     ((galoisPoint K (SeparableClosure K)).sheafFiber (A := AddCommGrpCat.{u + 1})).obj
         (Spec (.of K)).gmSheaf ≃+ Additive (SeparableClosure K)ˣ :=

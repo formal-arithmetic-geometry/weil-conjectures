@@ -13,7 +13,9 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 
 /-! # Construction of the annihilator subsheaf
 
-Source: Stacks Project, Tag 01PO, first sentence of the proof.
+## References
+
+* Stacks Project, Tag 01PO
 -/
 
 @[expose] public section
@@ -101,19 +103,7 @@ private theorem annihilatorPresheaf_isSheaf (X : Scheme.{u}) (J : X.IdealSheafDa
     intro i
     exact congrArg Subtype.val (ht i)
 
-/-- The local annihilation condition defines a subsheaf, without any finiteness
-or quasi-coherence hypothesis.
-Source: Stacks Project, Tag 01PO, proof, first sentence.
-(blueprint: lem-weil-pbc-annihilator-subsheaf-construction).
-
-Proof: local annihilation is closed under addition and scalar multiplication and
-under restriction, giving a submodule presheaf. Glue a compatible family in F.
-For a local ideal section on V, restrict its product with the glued section to
-V intersected with every member of the cover. Each restricted product is zero by
-local annihilation of that member. Separatedness of F makes the product zero on V.
-Uniqueness follows from uniqueness in F. The inclusion is sectionwise the subtype
-inclusion, hence a monomorphism, and its image is precisely the defining condition.
--/
+/-- The local annihilation condition defines a subsheaf (Stacks, Tag 01PO). -/
 theorem exists_annihilator_subsheaf (X : Scheme.{u}) (J : X.IdealSheafData)
     (F : X.Modules) :
     ∃ (G : X.Modules) (ι : G ⟶ F), Mono ι ∧

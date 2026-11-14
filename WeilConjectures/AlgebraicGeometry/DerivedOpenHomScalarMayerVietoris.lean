@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 
 /-! # Scalar compatible Mayer--Vietoris on an open union
 
-Source: Stacks Project, Tag 08BW, used in Tag 08EJ.
-(blueprint: lem-sc-derived-open-hom-scalar-mayer-vietoris).
+## References
+
+* Stacks Project, Tags 08BW and 08EJ
 -/
 
 @[expose] public section
@@ -129,21 +130,7 @@ set_option maxHeartbeats 1600000 in
 -- Instantiating the four derived adjunctions compares large localization functors.
 /-- The boundary for Hom on an open union commutes with global scalar endomorphisms.
 Its preceding term is Hom into the negative shift on the overlap. No compactness,
-perfectness, quasi-coherence or support hypothesis is required.
-Source: Stacks Project, Tag 08BW and the globalization paragraph of Tag 08EJ.
-(blueprint: lem-sc-derived-open-hom-scalar-mayer-vietoris).
-
-Proof: Apply the derived Hom Mayer--Vietoris sequence on W = U union V, using the
-localized sites over U, V and their intersection. Associativity of restriction gives
-the displayed restriction maps from the W term. The preceding negative Ext term is
-identified, by the canonical shift comparison and shift-addition isomorphisms, with
-Hom from E on the overlap into E'[k-1] there. Exactness at the W term gives the lift.
-The sequence is natural contravariantly in E: in the triangle construction the boundary
-is composition with the triangle's connecting morphism, and the extension/restriction
-adjunction is natural. Apply this naturality to r times identity on the global E.
-Restriction of this endomorphism is multiplication by the restricted r. This proves the
-last equation, for every r, with the same additive boundary. Empty opens and k=0 are
-included by the same triangle and shift identifications. -/
+perfectness, quasi-coherence or support hypothesis is required (Stacks, Tags 08BW and 08EJ). -/
 theorem derived_open_hom_scalar_mayer_vietoris
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

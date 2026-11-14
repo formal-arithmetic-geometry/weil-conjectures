@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleTensorUnitRestrictionEquation
 
 /-! # Natural structure-sheaf coordinates for tensor sections
 
-Source: Stacks Project, Tags 0096, 01CA and 03DR.
-(blueprint: lem-sc-etale-tensor-unit-sections-natural)
+## References
+
+* Stacks Project, Tags 0096, 01CA and 03DR
 -/
 
 @[expose] public section
@@ -60,22 +61,8 @@ private theorem unit_map_eval {A : Scheme.{u}} {M : A.Modules}
   exact he.trans (mul_comm _ _)
 
 /-- The unit module's tensor sections have their usual structure-sheaf coordinates,
-compatibly with restrictions and multiplication by global functions.
-Source: Stacks Project, Tags 0096 and 01CA (pullback of the unit), and Tag 03DR,
-equation (35.8.1) (normalized restrictions).
-(blueprint: lem-sc-etale-tensor-unit-sections-natural)
-
-Proof: For u:U -> X take the section map of the adjoint structure-sheaf morphism
-u^* O_X -> O_U. It is an isomorphism by tensorPullbackObjUnitToUnit_isIso.
-Its adjunction-unit equation identifies the image of a section r with u^*(r).
-The unit equation for normalized composition then identifies restriction along
-v:V -> U with the structure-sheaf restriction v^*. Hence the section isomorphisms
-are natural. For multiplication by r, naturality of the adjunction gives the
-commuting square between u^*(r times -) and multiplication by u^*(r) after the
-unit isomorphism. Equivalently, evaluate the square on the unit generator and use
-O_U-linearity: a section x maps to u^*(r) times its coordinate. Commutativity of
-O_U gives the displayed order of factors. These arguments also hold on the empty
-scheme and for r=0 or r=1; they impose no field or dimension hypothesis. -/
+compatibly with restrictions and multiplication by global functions
+(Stacks, Tags 0096, 01CA and 03DR). -/
 theorem exists_etaleTensorUnit_sections_natural (X : Scheme.{u}) :
     ∃ b : ∀ U : X.Etaleᵒᵖ,
         (etaleTensorSectionsSheaf (SheafOfModules.unit X.ringCatSheaf)).obj.obj U ≃+

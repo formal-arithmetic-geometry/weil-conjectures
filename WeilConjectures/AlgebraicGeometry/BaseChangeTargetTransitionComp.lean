@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.BaseChangePullbackComparisonComp
 
 /-! # Composition of target transitions
 
-Source: the transition argument in Stacks Tag 0F07, thickening step.
-(blueprint: lem-sbc-target-transition-comp)
+## References
+
+* Stacks Project, Tag 0F07
 -/
 
 @[expose] public section
@@ -92,17 +93,8 @@ private lemma target_transition_eq
         (Etale.lowerStarPlusTransition Λ a h h' wh _ ≫
           R+((h')_*[ModuleCat.{u + 1} Λ]).map c) := rfl
 
-/-- Target transitions compose, including the comparison of the coefficient pullbacks.
-
-Source: Stacks Tag 0F07, proof of condition (1), and the definition of the canonical
-restriction maps in Tag 09Z1. (blueprint: lem-sbc-target-transition-comp)
-
-Proof: expand the transitions as derived units and counits. Paste the two degenerate
-commutative squares using the generic mate-pasting law (which requires no cartesianness);
-the triangle identities identify their composite
-with the transition for the composite. The associativity of the pullback comparison
-identifies the final coefficient with `(π₁ ≫ π₂)^* F`. Apply degree-q homology.
--/
+/-- Target transitions compose, including the comparison of the coefficient pullbacks
+(Stacks, Tags 0F07, 09Z1). -/
 theorem Etale.baseChangeTargetTransition_comp
     {X T Y T₁ T₂ Y₁ Y₂ : Scheme.{u}} (e : Y ⟶ T) (h : Y ⟶ X) (q : ℤ)
     (π₂ : T₂ ⟶ T) (a₂ : Y₂ ⟶ Y) (e₂ : Y₂ ⟶ T₂) (h₂ : Y₂ ⟶ X)

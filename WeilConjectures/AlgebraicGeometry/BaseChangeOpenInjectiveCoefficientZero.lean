@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.BaseChangeTargetCoefficientNaturality
 
 /-! # Open injective coefficient comparison
 
-Source: Stacks Project, Tag 0F07, closed–open part of the proof.
-(blueprint: lem-sbc-open-injective-coefficient-zero)
+## References
+
+* Stacks Project, Tag 0F07
 -/
 
 @[expose] public section
@@ -232,23 +233,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 variable {X S T : Scheme.{u}} (p : X ⟶ S) (g : T ⟶ S)
 
 /-- A class that is a base-change image on V maps to zero after the open injective
-coefficient embedding. This is the Leray part of the closed–open argument.
-
-Source: Stacks Project, Tag 0F07, open summand in condition (3).
-(blueprint: lem-sbc-open-injective-coefficient-zero)
-
-Proof: put J = Injective.under (F restricted to V). The degree q source for J
-vanishes since J is injective and q is positive. Naturality therefore sends the
-assumed base-change image on V to zero in R^q(h composed with j')_* e_V^* J.
-Apply the universal lower-degree hypothesis after the preliminary base change to T,
-to the quasi-compact separated open immersion j:V -> T. In degree zero it identifies
-e^* j_* J with j'_* e_V^* J. In degrees 1 through q-1 it implies that R^a j'_*
-e_V^* J vanishes, since R^a j_* J vanishes by injectivity. The Leray edge map
-R^q h_* e^* j_* J -> R^q(h composed with j')_* e_V^* J is consequently injective.
-Compatibility of the edge map with the coefficient unit and target transition
-identifies the image of the class under this injection with the zero just obtained.
-Injectivity on stalks proves the asserted vanishing. The empty open causes no exception.
--/
+coefficient embedding. This is the Leray part of the closed–open argument (Stacks, Tag 0F07). -/
 theorem baseChange_open_injective_coefficient_eq_zero [IsAffine S]
     (q : ℤ) (hq : 1 ≤ q)
     (hprev : ∀ q' < q, UniversalBaseChangeProperty Λ p q')

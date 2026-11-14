@@ -20,8 +20,9 @@ import WeilConjectures.AlgebraicGeometry.AffineModuleTensorCounitFactor
 import WeilConjectures.AlgebraicGeometry.AffineModuleTensorUnitLift
 /-! # Affine module tensor CoherenceComparisons
 
-Source: Stacks Project, Morphisms, Lemma 01SB.
-(blueprint: lem-weil-pbc-affine-module-tensor-coherence-comparisons).
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section
@@ -203,24 +204,8 @@ private theorem tensorComparisons_from_objectwise
       (scalarRestriction_injective f) hf hβ
 
 -- Elaborating the nested tensor transports requires additional heartbeats.
-/-- The tensor extension is quasi-coherent and carries the canonical comparison maps.
-Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
-Proof: The affine direct-image algebra A is quasi-coherent by affine relative Spec.
-Scalar restriction makes a quasi-coherent A-module quasi-coherent over O_X. Pullback
-preserves this property, so κ identifies the underlying O_U-module of P(G) with a
-quasi-coherent module. Its algebra B is the pullback of A and is quasi-coherent by
-the same base-change tensor identification. Apply quasi-coherent algebra change of
-rings to B → O_U given by ε to deduce quasi-coherence of H(G).
-The pullback counit is linear over B after identifying via κ: on tensor generators
-(b tensor a)(b′ tensor s) is sent to bb′as, which is ε(b tensor a) times b′s.
-The scalar-extension universal property therefore factors it uniquely through H(RF),
-defining α. The inverse-image/direct-image unit followed by γ is A-linear: multiply
-a section g by a, apply the given κ unit formula, then the γ tensor-unit formula,
-and use the balanced relation and tε=e. It thus defines β. Uniqueness in the tensor
-universal property proves naturality of α and β and the first comparison equation.
-The canonical pullback Hom equivalence and its unit formula give the second equation.
-These arguments do not require faithful scalar restriction or a nonzero ring.
-(blueprint: lem-weil-pbc-affine-module-tensor-coherence-comparisons). -/
+/-- The tensor extension is quasi-coherent and carries the canonical comparison maps
+(Stacks, Tag 01SB). -/
 theorem affine_module_tensor_coherenceComparisons [IsAffineHom f]
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (ε : B ⟶ U.sheaf) (hpush : IsPushout r₀ t₀ b t)

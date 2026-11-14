@@ -20,24 +20,8 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [local irreducible] tensorPullback tensorPullbackObj
 
-/-- A lift on one Zariski open transports to a lift of the normalized tensor restriction.
-Source: Stacks Project, Tags 0096 and 03DR; restriction along an open immersion
-agrees with pullback, and equation (35.8.0.1) gives the normalized composition map.
-(blueprint: lem-sc-etale-tensor-sections-open-lift)
-
-Proof: Put M = u^*G and N = u^*H. Uniqueness of left adjoints identifies tensor
-pullback along the open immersion V.ι with Mathlib's restriction functor, using
-`restrictAdjunction V.ι` and the adjunction in `exists_tensorPullbackAdjunction`.
-The restriction functor identifies its global sections with sections on V, since
-V.ι maps its whole domain onto V. Transport t through this identification, then
-through `tensorSectionsComp V.ι U.hom` to obtain z. Naturality of both comparison
-isomorphisms identifies the image of z with the transported restriction of s.
-The unit equation for uniqueness of left adjoints says that restriction followed
-by the first comparison is `tensorSectionsUnit V.ι`; consequently the transported
-restriction of s is exactly `etaleTensorSectionsRestriction H` along V.ι over X.
-Thus the assumed local lifting equation gives the required equality. This uses
-no epimorphism, covering, or quasi-coherence assumption; on the empty open all
-section groups are zero and the same construction applies. -/
+/-- A lift on one Zariski open transports to a lift of the normalized tensor restriction
+(Stacks, Tags 0096 and 03DR). -/
 theorem etaleTensorSections_open_lift {X : Scheme.{u}} {G H : X.Modules}
     (ψ : G ⟶ H) (U : X.Etale) (V : U.left.Opens)
     (s : Γ((tensorPullback U.hom).obj H, ⊤))

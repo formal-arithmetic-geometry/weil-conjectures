@@ -12,8 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.AffinePullbackModelComparisonsIs
 
 /-! # Pullback unit on affine sections models
 
-Source: Stacks Project, perfect.tex, Tags 06Z0, 08DV, 08DW and 0AA7.
-(blueprint: new-affine-pullback-sections-model-unit).
+## References
+
+* Stacks Project, Tags 06Z0, 08DV, 08DW and 0AA7
 -/
 
 @[expose] public section
@@ -308,23 +309,7 @@ private theorem pinned_unit_fac
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
 /-- Before cancelling comparisons, the normalized derived pullback unit agrees with
-its ordinary model. This identity holds for every complex, without K-flatness.
-Source: Stacks Project, perfect.tex, Tag 0AA7, normalized derived unit calculation;
-Mathlib CategoryTheory.Adjunction.derivedη_fac_app.
-(blueprint: new-affine-pullback-sections-unit-uncancelled).
-Proof: evaluate the normalized Hom equivalence in exists_schemeDerivedAdjunction
-at the identity of termwise pullback of K. This factors the derived unit followed
-by derived direct image of the fixed left-derived counit as the localized ordinary
-unit followed by the direct-image right-derived unit. Apply derived R-sections and
-precompose with its comparison. Naturality moves this comparison past the ordinary
-unit. The factorization of rightDerivedFunctorCompUnit replaces the two successive
-right-derived units by the composition unit. Naturality of r moves the counit past
-r. Apply hr at the homotopy object of the termwise pullback. Naturality of the exact
-restriction localization factors and of the sections comparison gives the right
-side below. Finally Q/Qh transport naturality changes all homotopy maps into the
-shown complex maps. This proves an equality of fixed morphisms and assumes no
-comparison invertible; hence it also applies to zero complexes and arbitrary v
-satisfying hr. It does not assert compatibility for an arbitrary isomorphism b. -/
+its ordinary model, for every complex (Stacks, Tag 0AA7). -/
 theorem affinePullbackSections_unit_uncancelled
     {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)
     (v : RingedSpace.moduleDirectImage g.toLRSHom.toShHom ⋙

@@ -14,8 +14,6 @@ public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsOfUn
 
 /-! # Canonical Hom representative evaluation on a ringed site
 
-Source: Stacks Project, Tags 0A8X, 0A95 and 079P
-(auxiliary; not a blueprint node).
 The evaluation uses the actual Hom-product projections, the fixed functorial
 K-injective replacement and its localization factorization.
 
@@ -26,6 +24,10 @@ K-injective replacement and its localization factorization.
 - `coefficientHomResolutionIso`: the actual localization factorization.
 - `coefficientHomResolutionInverse`: the inverse localized augmentation.
 - `coefficientHomSectionEvaluation`: componentwise evaluation into that replacement.
+
+## References
+
+* Stacks Project, Tags 0A8X, 0A95 and 079P
 -/
 
 @[expose] public section
@@ -43,8 +45,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [J.HasSheafCompose (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})]
   (A : Sheaf J CommRingCat.{max c v u})
 
-/-- Actual projections. Source: Stacks 0A8X
-(auxiliary; not a blueprint node). -/
+/-- Actual projections (Stacks, Tag 0A8X). -/
 noncomputable def coefficientHomComponent
     (L M : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
@@ -80,8 +81,8 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}]
   (A : Sheaf J CommRingCat.{max c v u})
 
-/-- The fixed K-injective replacement already used in the recorded internal Hom.
-Source: Stacks 0A95 (auxiliary; not a blueprint node). -/
+/-- The fixed K-injective replacement already used in the recorded internal Hom (Stacks, Tag 0A95).
+-/
 noncomputable def coefficientHomResolution :
     CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ ⥤
@@ -92,8 +93,8 @@ noncomputable def coefficientHomResolution :
       J A).1
   CochainComplex.kInjectiveResolutionFunctor.{max c v u} _
 
-/-- The fixed internal-Hom localization factorization, with no choice of comparison map.
-Source: Stacks 0A95 (auxiliary; not a blueprint node). -/
+/-- The fixed internal-Hom localization factorization, with no choice of comparison map
+(Stacks, Tag 0A95). -/
 noncomputable def coefficientHomResolutionIso
     [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))]
@@ -117,8 +118,8 @@ noncomputable def coefficientHomResolutionIso
         CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{max c v u} _ M⟩))
     (DerivedCategory.Q.op.prod DerivedCategory.Q)).app (op L, M)
 
-/-- The inverse of the actual localized augmentation to the fixed K-injective resolution.
-Source: Stacks 079P (auxiliary; not a blueprint node). -/
+/-- The inverse of the actual localized augmentation to the fixed K-injective resolution
+(Stacks, Tag 079P). -/
 noncomputable def coefficientHomResolutionInverse
     [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))]
@@ -135,8 +136,8 @@ noncomputable def coefficientHomResolutionInverse
       (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{max c v u} _ M).2
   inv (DerivedCategory.Q.map ((CochainComplex.toKInjectiveResolution.{max c v u} _).app M))
 
-/-- Actual evaluation of a Hom-complex section in its (q,q+p)-product factor.
-Source: Stacks 0A8X, 08J9 (auxiliary; not a blueprint node). -/
+/-- Actual evaluation of a Hom-complex section in its (q,q+p)-product factor
+(Stacks, Tags 0A8X and 08J9). -/
 noncomputable def coefficientHomSectionEvaluation
     (P L M : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)

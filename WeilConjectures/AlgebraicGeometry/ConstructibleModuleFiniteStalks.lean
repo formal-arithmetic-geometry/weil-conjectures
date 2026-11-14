@@ -15,8 +15,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 /-!
 # Finite geometric stalks of constructible module sheaves
 
-Source: Stacks Project, proof of Lemma 095N (line 12412 ff.), using Definitions 03RU and
-03RW and Lemma 03Q1 (blueprint: lem-weil-pbc-constructible-module-finite-stalks).
+## References
+
+* Stacks Project, Tags 095N, 03RU, 03RW and 03Q1
 -/
 
 @[expose] public section
@@ -28,17 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- If a sheaf of modules on the small étale site is constructible, each geometric stalk is
-finite, and hence finitely generated as a module over the finite coefficient ring.
-
-Proof: choose the stratum containing the image of the geometric point and lift that point
-through its immersion. The finite-value trivialization makes the stratum pullback finite
-locally constant, so its stalk at the lifted point is finitely generated. The module-valued
-pullback-stalk isomorphism transfers finite generation to the original stalk. A finitely
-generated module over a finite ring is a finite set.
-
-Source: Stacks Project, proof of Lemma 095N (line 12412 ff.), using Definitions 03RU and
-03RW and Lemma 03Q1 (blueprint: lem-weil-pbc-constructible-module-finite-stalks).
--/
+finite, and hence finitely generated as a module over the finite coefficient ring. -/
 theorem constructibleModule_finite_geometric_stalk
     {T : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))

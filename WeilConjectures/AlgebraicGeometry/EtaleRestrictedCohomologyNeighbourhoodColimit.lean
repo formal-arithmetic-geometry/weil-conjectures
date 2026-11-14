@@ -16,7 +16,9 @@ import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 
 /-! # Continuity of restricted étale cohomology over neighbourhoods
 
-Source: Stacks Project, Étale Cohomology, Tags 09AX, 03Q6 and 09YQ.
+## References
+
+* Stacks Project, Tags 09AX, 03Q6 and 09YQ
 -/
 
 @[expose] public section
@@ -67,28 +69,8 @@ private noncomputable def affineNhdsCone (X : Scheme.{u}) (x : X)
 
 /-- The cohomology groups of the restricted sheaves have the canonical local-scheme
 pullbacks as a colimit cocone. This statement concerns global cohomology on the open
-schemes, and does not identify it with object cohomology on the original étale site.
-Source: Stacks Project, Étale Cohomology, Tags 09AX, 03Q6 and 09YQ;
-Limits of Schemes, Tag 0GWT.
-(blueprint: lem-weil-pbc-etale-restricted-cohomology-neighbourhood-colimit).
-
-Proof: The affine-open basis gives an affine neighbourhood inside every open
-neighbourhood. Apply the full-subcategory cofilteredness and initiality criteria to
-the inclusion of affine neighbourhoods. Taking opposites makes this inclusion final.
-The inclusions of the affine open subschemes form a diagram E over X. Its objects are
-qcqs and its transitions are affine by fromSpecStalk_limit_affine_neighbourhoods.
-The supplied g are compatible: cancel the open immersion into X and use hg. They
-therefore form a cone c with point Spec O_{X,x}. Cancel the same open immersions to
-identify these projections with Mathlib's fromSpecStalkOfMem. The universal property
-in fromSpecStalk_limit_affine_neighbourhoods then proves that c is a limit cone.
-Whisker D and B by the opposite inclusion. The equations hD and hB are precisely the
-transition and cocone equations of nonempty_isColimit_cofiltered_fixed_base_cohomology,
-after unfolding cohomologyTriangleMap. Apply that theorem, then transfer its colimit
-property back along the final inclusion. No quasi-compactness assumption on X or on
-arbitrary open neighbourhoods is needed; only the affine stages are used.
-
-Edge cases: q = 0 and F = 0 are included. There are no empty neighbourhoods of x;
-X itself may be non-quasi-separated. If X is empty the point hypothesis is empty. -/
+schemes, and does not identify it with object cohomology on the original étale site
+(Stacks, Tags 09AX, 03Q6, 09YQ and 0GWT). -/
 theorem etaleRestrictedCohomology_neighbourhood_colimit
     {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (x : X) (q : ℕ)

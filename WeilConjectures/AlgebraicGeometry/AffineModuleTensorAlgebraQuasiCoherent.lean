@@ -20,8 +20,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.CategoryTheory.Limits.Final.Type
 /-! # Quasi-coherence of the affine tensor pushout algebra
 
-Source: Stacks Project, Morphisms, Lemma 01SB.
-(blueprint: lem-weil-pbc-affine-module-tensor-algebra-quasi-coherent).
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section
@@ -140,18 +141,7 @@ private theorem inverseImage_unit_iso {T T' : TopCat.{u}} (g : T ⟶ T')
   intro V
   exact congrArg (fun z ↦ l.val.app ((Opens.map g).op.obj V) (z.val V)) hs.symm
 
-/-- The tensor pushout of the affine direct-image algebra is quasi-coherent.
-Source: Stacks Project, Morphisms, Lemma 01SB, construction of h.
-(blueprint: lem-weil-pbc-affine-module-tensor-algebra-quasi-coherent).
-
-Proof: The algebra f_* O_U is quasi-coherent since f is affine. On each affine
-open of X it is the tilde of its section algebra. Pulling this algebra to U gives
-O_U tensor over f^{-1} O_X with f^{-1}(f_* O_U); pullback of its underlying
-quasi-coherent module is quasi-coherent. The pushout universal property identifies
-B, with its b action, with this tensor algebra, on pure tensors and hence on the
-sheafification. Transfer quasi-coherence along the resulting O_U-module isomorphism.
-This uses arbitrary affine morphisms and remains valid for the empty scheme and
-zero section rings: the tensor and pushout universal properties hold there too. -/
+/-- The tensor pushout of the affine direct-image algebra is quasi-coherent (Stacks, Tag 01SB). -/
 theorem affine_module_tensor_algebra_quasiCoherent [IsAffineHom f]
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (hpush : IsPushout r₀ t₀ b t) :

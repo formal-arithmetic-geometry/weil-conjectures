@@ -208,11 +208,7 @@ lemma Scheme.Hom.finrankΓ_eq_finrank_appLE {Z : Scheme.{u}} {R : CommRingCat.{u
 /-- **Additivity of the degree over a field.** Let `Y` be a scheme over a field `K` and let
 `I, J` be invertible ideal sheaves on `Y` whose closed subschemes, and that of `I * J`, are finite
 over `K`. Then `dim_K Γ(V(I * J)) = dim_K Γ(V(I)) + dim_K Γ(V(J))`.
-
-The finitely many points of `V(I * J)` are closed and have affine neighbourhoods `W` which contain
-no other such point and on which `I = (a)`, `J = (b)` are principal; over `W` the three
-subschemes are `Γ(Y, W) ⧸ (a b)`, `Γ(Y, W) ⧸ (a)` and `Γ(Y, W) ⧸ (b)`, and the dimensions add up
-by `Ideal.Quotient.finrank_span_singleton_mul`. -/
+-/
 lemma Scheme.IdealSheafData.finrankΓ_subschemeι_mul_comp {Y : Scheme.{u}}
     (q : Y ⟶ Spec (.of K)) {I J : Y.IdealSheafData} (hI : I.IsInvertible) (hJ : J.IsInvertible)
     [IsFinite (I.subschemeι ≫ q)] [IsFinite (J.subschemeι ≫ q)]

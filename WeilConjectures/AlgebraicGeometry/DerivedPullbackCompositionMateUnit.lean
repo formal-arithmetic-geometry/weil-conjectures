@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedDirectImagePastedCounitNormaliza
 
 /-! # The unit equation for the mate of pullback composition
 
-Source: Stacks Project, Cohomology, Tags 079W, 0D5S and 0D5T.
-(blueprint: lem-sc-derived-pullback-composition-mate-unit).
+## References
+
+* Stacks Project, Tags 079W, 0D5S and 0D5T
 -/
 
 @[expose] public section
@@ -63,20 +64,8 @@ set_option linter.all false in
 -- Avoid repeating the expensive chosen-object type comparisons during linting.
 -- Matching the composition expands the sheaf and derived-functor instances.
 /-- The conjugate of the fixed pullback comparison satisfies the pasted direct-image
-unit equation, before identifying it with any direct-image composition isomorphism.
-Source: Stacks Project, Cohomology, Tags 079W, 0D5S and 0D5T.
-(blueprint: lem-sc-derived-pullback-composition-mate-unit).
-
-Proof: compute the two transposes under the composite pinned adjunction. The
-chosen-comparison counit normalization identifies the transpose of the composite
-unit followed by the mate with the explicit pasted underived counits. The proved
-pasted-unit counit normalization computes the other transpose as the same expression.
-Transitivity identifies them. Injectivity of the composite Hom equivalence and
-Mathlib conjugateEquiv_counit, together with naturality of the pullback comparison,
-give the displayed equation. No resolution, exactness or cancellation hypothesis is
-used in this formal combination. The remaining comparison calculation is the named
-statement derivedPullbackComposition_counit_normalization. Identity morphisms,
-zero complexes and empty schemes use the same equations. -/
+unit equation, before identifying it with any direct-image composition isomorphism
+(Stacks, Tags 079W, 0D5S and 0D5T). -/
 theorem derivedPullbackComposition_mate_unit
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))

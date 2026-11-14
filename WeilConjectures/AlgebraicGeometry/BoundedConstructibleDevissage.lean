@@ -9,8 +9,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 
 /-! # Finite truncation dévissage for constructible module objects
 
-This is the standard t-structure induction from blueprint
-`proposition-six-operations-dctf--14`, step 10. It is independent of coefficient finiteness:
+This is the standard t-structure induction. It is independent of coefficient finiteness:
 only the target property is required to be triangulated.
 -/
 
@@ -36,8 +35,7 @@ instance isClosedUnderIsomorphisms_boundedConstructibleModule
 /-- A bounded complex with constructible homology sheaves lies in every triangulated
 subcategory of the derived module-object category, closed under isomorphisms, containing
 the constructible sheaves placed in degree `0`. This is the generic derived-category
-truncation theorem specialized to constructible module objects.
-(auxiliary; not a blueprint node) -/
+truncation theorem specialized to constructible module objects. -/
 lemma prop_of_boundedConstructibleModule {X : Scheme.{u}}
     {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
     (P : ObjectProperty

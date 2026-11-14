@@ -27,8 +27,10 @@ import WeilConjectures.AlgebraicGeometry.QuotientResolutionTensorComparison
 
 /-! # Intrinsic affine self-Tor for one chosen augmented lift
 
-Source: Stacks Project, Tags 08DX(2), 06YH, 01I9 and 00LS.
-(blueprint: new-b3-derived-self-tor-chosen-affine-coordinates). -/
+## References
+
+* Stacks Project, Tags 08DX, 06YH, 01I9 and 00LS
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -67,44 +69,8 @@ set_option linter.unusedVariables false in
 /-- Intrinsic self-Tor has affine resolution coordinates compatible with one augmented
 lift of the canonical quotient restriction on each basic inclusion.
 This theorem only constructs one compatible augmented lift on each basic inclusion;
-compatibility with every supplied lift requires the separate homotopy argument.
-
-Source: Stacks Project, Tags 08DX(2), 06YH, 01I9 and 00LS(1).
-(blueprint: new-b3-derived-self-tor-chosen-affine-coordinates).
-
-Proof: On each affine U, put A = Gamma(Y,U), I = ker(i)(U), and B = i_*O_Z.
-The closed immersion gives a surjective section map A to Gamma(i inverse U,O_Z)
-with kernel I. Its induced quotient isomorphism fixes the identification of B|U
-with tilde(A/I); use this quotient section map to normalize the tilde adjunction
-counit, rather than choosing an arbitrary coefficient isomorphism.
-Sheafify the chosen projective resolution P of A/I and its augmentation. Exactness
-of tilde makes the augmentation a quasi-isomorphism. Extend chain degree j to
-cochain degree -j. Projective terms are flat and their associated sheaves are flat;
-the resulting nonpositive complex is K-flat. The natural derived open tensor
-comparison and the affine derived tensor chart calculation compute the restriction
-of Q(B[0]) tensor Q(B[0]) by this resolution tensored with the quotient single
-complex. Its total tensor has precisely P_j tensor A/I in degree -j, with
-differential d tensor id. Exact tilde homology comparison, extension homology,
-and the tilde section unit identify its degree -n homology with H_n(P tensor A/I).
-Compose the preceding isomorphisms to obtain the stated linear equivalence c_U.
-
-For V basic in U, ideal restriction defines the displayed canonical quotient map.
-The augmented comparison theorem constructs a and k: restrict the exact target
-resolution to A, lift the quotient map inductively from the projective source
-terms, and tensor the lift with the quotient map. The target restricted terms
-need not be projective. Sheafification of this augmentation equation gives a
-commutative square of resolutions, normalized by the quotient section maps.
-After derived localization, cancel their invertible augmentations. Naturality of
-the derived tensor comparison and affine tensor comparison gives the restriction
-square; the pure tensor formula identifies its lower map with k. Apply exact
-homology, extension comparison and the natural tilde section unit. This gives the
-displayed equation on the tensor-resolution homology.
-This proves compatibility for this one augmented comparison on each inclusion.
-Independence from arbitrary supplied comparisons is deliberately left to the
-separate, proved quotient tensor lift homotopy theorem. The construction works
-for n = 0, I = top, I = bot, the empty affine open and the empty basic open:
-all augmentations, units and exact homology comparisons exist over the zero ring.
--/
+compatibility with every supplied lift requires the separate homotopy argument
+(Stacks, Tags 08DX, 06YH, 01I9 and 00LS). -/
 theorem exists_derived_selfTor_chosen_affine_coordinates
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] (n : ℕ) :
     letI := HasDerivedCategory.standard

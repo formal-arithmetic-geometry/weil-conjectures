@@ -9,8 +9,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-! # Surjectivity of the second affine tensor unit
 
-Source: Stacks Project, Morphisms, Lemma 01SB.
-(blueprint: new-affine-module-tensor-extension-epi).
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section
@@ -42,26 +43,8 @@ local notation "ρ" => (show X.sheaf ⟶ A from ⟨f.c⟩)
 set_option hygiene false in
 local notation "S" => SheafOfModules.restrictScalars.{u} (𝓻 ρ)
 -- Object transports and sheafified tensor instances require additional elaboration steps.
-/-- The second tensor operation is a quotient of the underlying first operation.
-Source: Stacks Project, Tag 01SB, construction of h and the map p to p tensor 1;
-Tag 008A, sheafified extension of scalars.
-(blueprint: new-affine-module-tensor-extension-epi).
-
-Proof:
-1. For maps q,r out of H(G) with γ(G) followed by q equal to γ(G) followed by r,
-   transport their source to the stated sheafified tensor product by hobj(G).
-2. The sheafification Hom equivalence is injective, so it suffices to compare the
-   induced maps from the tensor presheaf. Compare their components on each open W.
-3. Tensor extension maps are structure-sheaf-linear; by the tensor universal property
-   they agree if they agree on 1 tensor p for every section p of P(G).
-4. The formula hunit identifies the sheafification of 1 tensor p with γ(G) applied
-   to κ(G)(p), after the object transport. Thus the hypothesized equality of composites
-   proves equality on these generators. The two equality transports cancel.
-5. Injectivity of the Hom equivalence and cancellation of the object isomorphism
-   give q=r, precisely the epimorphism assertion. No affineness, quasi-coherence,
-   or splitting of ε is needed once the stated linear map γ and its formula exist.
-   Zero modules and empty spaces satisfy the same Hom and tensor universal properties.
--/
+/-- The second tensor operation is a quotient of the underlying first operation
+(Stacks, Tags 01SB and 008A). -/
 theorem affine_module_tensor_extension_epi
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B)
     (ε : B ⟶ U.sheaf)

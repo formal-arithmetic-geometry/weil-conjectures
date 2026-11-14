@@ -30,11 +30,6 @@ Relative affine space `𝔸(n; S) = S ×_ℤ Spec ℤ[n]` is described locally o
   affine opens `V' ⊆ V`.
 - `AlgebraicGeometry.AffineSpace.pullbackIso`: the base change isomorphism
   `𝔸(n; S) ×_S T ≅ 𝔸(n; T)`.
-
-## Blueprint
-
-This file implements `lemma-nagata-relative-affine-space-charts`.
-
 -/
 
 @[expose] public section
@@ -48,7 +43,7 @@ namespace AlgebraicGeometry.AffineSpace
 variable (n : Type u) {S T : Scheme.{u}}
 
 /-- The affine chart `Spec Γ(S, V)[n] ⟶ 𝔸(n; S)` of relative affine space over an affine
-open `V` of `S`. (blueprint: `lemma-affine-covers-dense-intersection--2`) -/
+open `V` of `S`. -/
 noncomputable def chart {V : S.Opens} (hV : IsAffineOpen V) :
     Spec (.of (MvPolynomial n Γ(S, V))) ⟶ 𝔸(n; S) :=
   (SpecIso n Γ(S, V)).inv ≫ map n hV.fromSpec
@@ -92,10 +87,7 @@ noncomputable def chartTransition {V V' : S.Opens} (h : V' ≤ V) :
     Spec (.of (MvPolynomial n Γ(S, V'))) ⟶ Spec (.of (MvPolynomial n Γ(S, V))) :=
   Spec.map (CommRingCat.ofHom (MvPolynomial.map (S.presheaf.map (homOfLE h).op).hom))
 
-/-- Blueprint `lemma-affine-covers-dense-intersection--2`: Relative affine-space charts and
-base change (compatibility of the charts).
-
-For affine opens `V' ⊆ V` of `S`, the chart over `V'` is the chart over `V` precomposed with
+/-- For affine opens `V' ⊆ V` of `S`, the chart over `V'` is the chart over `V` precomposed with
 the map induced by the restriction `Γ(S, V)[n] → Γ(S, V')[n]`. -/
 @[reassoc]
 lemma chartTransition_chart {V V' : S.Opens} (hV : IsAffineOpen V) (hV' : IsAffineOpen V')
@@ -105,10 +97,7 @@ lemma chartTransition_chart {V V' : S.Opens} (hV : IsAffineOpen V) (hV' : IsAffi
     map_SpecMap]
   simp only [Category.assoc, Iso.inv_hom_id_assoc]
 
-/-- Blueprint `lemma-affine-covers-dense-intersection--2`: Relative affine-space charts and
-base change (cocycle condition).
-
-For opens `V'' ⊆ V' ⊆ V` of `S` (affine in the application to charts), the transition
+/-- For opens `V'' ⊆ V' ⊆ V` of `S` (affine in the application to charts), the transition
 maps of the charts compose. -/
 @[reassoc]
 lemma chartTransition_comp {V V' V'' : S.Opens} (h' : V' ≤ V) (h'' : V'' ≤ V') :
@@ -120,8 +109,7 @@ lemma chartTransition_comp {V V' V'' : S.Opens} (h' : V' ≤ V) (h'' : V'' ≤ V
   rw [RingHom.comp_apply, MvPolynomial.map_map, ← CommRingCat.hom_comp, ← Functor.map_comp]
   rfl
 
-/-- The base change isomorphism `𝔸(n; S) ×_S T ≅ 𝔸(n; T)` for `g : T ⟶ S`.
-(blueprint: `lemma-affine-covers-dense-intersection--2`) -/
+/-- The base change isomorphism `𝔸(n; S) ×_S T ≅ 𝔸(n; T)` for `g : T ⟶ S`. -/
 noncomputable def pullbackIso (g : T ⟶ S) : pullback (𝔸(n; S) ↘ S) g ≅ 𝔸(n; T) :=
   (isPullback_map (n := n) g).isoPullback.symm
 
@@ -145,10 +133,7 @@ lemma pullbackIso_inv_snd (g : T ⟶ S) :
     (pullbackIso n g).inv ≫ pullback.snd _ _ = 𝔸(n; T) ↘ T :=
   (isPullback_map (n := n) g).isoPullback_hom_snd
 
-/-- Blueprint `lemma-affine-covers-dense-intersection--2`: Relative affine-space charts and
-base change (base change of the charts).
-
-For `g : T ⟶ S` and affine opens `W ⊆ T`, `V ⊆ S` with `W ⊆ g⁻¹ V`, the chart of `𝔸(n; T)`
+/-- For `g : T ⟶ S` and affine opens `W ⊆ T`, `V ⊆ S` with `W ⊆ g⁻¹ V`, the chart of `𝔸(n; T)`
 over `W` followed by `𝔸(n; T) ⟶ 𝔸(n; S)` is the chart of `𝔸(n; S)` over `V` precomposed
 with the map induced by `g^♯ : Γ(S, V) → Γ(T, W)` on coefficients. -/
 @[reassoc]
@@ -160,10 +145,7 @@ lemma chart_map (g : T ⟶ S) {V : S.Opens} {W : T.Opens} (hV : IsAffineOpen V)
     map_comp, map_SpecMap]
   simp only [Category.assoc, Iso.inv_hom_id_assoc]
 
-/-- Blueprint `lemma-affine-covers-dense-intersection--2`: Relative affine-space charts and
-base change (the base change isomorphism is compatible with the charts).
-
-Under `𝔸(n; S) ×_S T ≅ 𝔸(n; T)`, the chart of `𝔸(n; T)` over an affine open `W ⊆ g⁻¹ V`
+/-- Under `𝔸(n; S) ×_S T ≅ 𝔸(n; T)`, the chart of `𝔸(n; T)` over an affine open `W ⊆ g⁻¹ V`
 maps to the pair consisting of the chart of `𝔸(n; S)` over `V` (after changing coefficients
 along `g^♯`) and the structure map `Spec Γ(T, W)[n] ⟶ Spec Γ(T, W) ⟶ T`. -/
 lemma chart_pullbackIso_inv (g : T ⟶ S) {V : S.Opens} {W : T.Opens} (hV : IsAffineOpen V)

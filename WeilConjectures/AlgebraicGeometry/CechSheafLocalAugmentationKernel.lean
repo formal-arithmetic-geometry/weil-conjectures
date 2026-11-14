@@ -10,11 +10,7 @@ public import Mathlib.Algebra.Homology.Single
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
-/-! # The degree-zero kernel of a locally restricted Cech augmentation
-
-Source: blueprint `lemma-coherent-base-change-invertible-sheaves`, proof paragraph 1.
-(blueprint: lem-pc-cech-local-augmentation-kernel).
--/
+/-! # The degree-zero kernel of a locally restricted Cech augmentation -/
 
 @[expose] public section
 
@@ -60,26 +56,7 @@ private theorem augmentation_injective_on_open
   simpa only [← ConcreteCategory.comp_apply, ← F.presheafModuleCat.map_comp,
     ← op_comp, hr, op_id, F.presheafModuleCat.map_id, ConcreteCategory.id_apply] using hh
 
-/-- A zero cocycle on an open inside a member of the family is a restriction family.
-Source: blueprint `lemma-coherent-base-change-invertible-sheaves`, proof paragraph 1.
-(blueprint: lem-pc-cech-local-augmentation-kernel)
-
-Proof: Put P(W)(V)=F(W x V), with the global structure-ring action. For the singleton
-constant tuple i, form r_i:V -> (product of the singleton U_i) x V using V <= U_i
-and the identity of V. Project z to this singleton and restrict along r_i; call the
-result x. For each singleton tuple y, put j=y(0) and project the equation d z=0
-onto the pair (i,j). The alternating sum has exactly two terms: the restriction
-of z_j minus the restriction of z_i. Pull this equality back along
-(product of the singleton U_j) x V -> (product of the pair (U_i,U_j)) x V,
-whose U_i component uses V <= U_i, whose U_j component is the singleton projection,
-and whose V component is the projection to V. The j composite is the identity
-on (product of the singleton U_j) x V; the i composite factors through r_i
-and the projection to V. Functoriality gives z_j=restriction(x). Since every
-Fin 1 tuple is constant, this is the required equation for every y. This uses
-only finite-product identities and the two-coface degree-zero differential;
-no cover condition, sheaf gluing, local-ring linearity, or positive-degree
-exactness is used. For the empty open the same morphism identities apply, and
-an empty index type supplies no i. -/
+/-- A zero cocycle on an open inside a member of the family is a restriction family. -/
 private theorem cech_local_zero_cocycle_reconstruction
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules)
     (i : ι) (V : X.Opens) (hV : V ≤ U i)
@@ -238,22 +215,7 @@ private theorem restricted_kernel_of_sectionwise
       change el.inv ≫ el.hom ≫ kernel.ι bb = kernel.ι bb
       exact el.inv_hom_id_assoc _))⟩
 
-/-- The restricted augmentation is the kernel of the first differential.
-Source: blueprint `lemma-coherent-base-change-invertible-sheaves`, proof paragraph 1.
-(blueprint: lem-pc-cech-local-augmentation-kernel)
-
-Proof: On an open V contained in U_i, identify the singleton i coordinate with F(V).
-Project a zero cocycle to that coordinate. The pair (i,j) coordinate of d^0 says that
-its j coordinate is the restriction of this section. Thus every zero cocycle is
-uniquely the restriction augmentation of a section of F(V). The specified augmentation
-formula identifies this map with the given augmentation, and hd in degree zero identifies
-zero cocycles through e. All these bijections commute with restriction. Their inverses
-are linear over the local structure ring: the augmentation is a module-sheaf morphism,
-and an inverse to a bijective linear map is linear. Consequently they define a kernel
-universal property in module sheaves on U_i. The single-complex degree-zero object is
-canonically F restricted to U_i. On the empty open all sections are zero, so the same
-argument applies. Neither a covering hypothesis nor any positive-degree exactness is
-used. -/
+/-- The restricted augmentation is the kernel of the first differential. -/
 theorem augmented_cech_sheaf_restrict_kernel
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules)
     (D : CochainComplex X.Modules ℕ)

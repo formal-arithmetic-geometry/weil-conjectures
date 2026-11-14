@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import WeilConjectures.AlgebraicGeometry.AffineSpectrumCanonicalTensorGeneratorFormula
 /-! # Affine spectrum stalk coordinates on tensor generators
 
-Source: Stacks Project, Tags 0098, 0096, and 0DJ8.
-(blueprint: lem-pc-affine-spectrum-tensor-generator-coordinates).
+## References
+
+* Stacks Project, Tags 0098, 0096 and 0DJ8
 -/
 
 @[expose] public section
@@ -27,10 +28,8 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The fixed additive chain isomorphism between the original and spectrum tensor
-complexes, obtained by the two tensor-stalk comparisons and pullback composition.
-Source: Stacks Project, sheaves.tex, lemma-stalk-pullback-modules (0098) and
-lemma-adjoint-pullback-pushforward-modules (0096).
-(blueprint: lem-pc-affine-spectrum-tensor-generator-coordinates). -/
+complexes, obtained by the two tensor-stalk comparisons and pullback composition
+(Stacks, Tags 0098 and 0096). -/
 @[irreducible]
 def affineSpectrumTensorAdditiveIso
     {X X' S S' : Scheme.{u}}
@@ -85,21 +84,7 @@ set_option maxHeartbeats 500000 in
 -- Comparing the fixed stalk complexes unfolds many colimit and scalar-transport types.
 set_option linter.unusedVariables false in
 /-- Affine stalk coordinates and the formula for the canonical additive comparison
-on pure tensors. This does not assert linearity or construct a tensor chain isomorphism.
-Source: Stacks Project, Tag 0098, lemma-stalk-pullback-modules; Tag 0096,
-pullback adjunction; Tag 0DJ8, affine reduction of equation-bc.
-(blueprint: lem-pc-affine-spectrum-tensor-generator-coordinates).
-Proof: use the stalk ring isomorphisms induced by the four isoSpec inverses.
-Naturality of isoSpec and the composition law for stalk maps identify the maps
-from R to A and B and the tensor-to-D map. The pullback-stalk comparison along
-X.isoSpec.inv, transported over the point equality from isoSpec naturality,
-gives q. For d tensor x, the tensorStalkIso sends this tensor to the germ d
-multiplying the pullback germ of x. The additive stalk comparison along j and
-the adjunction mate defining alpha send these germs to the same germs in the
-spectrum square. Applying the inverse spectrum tensorStalkIso gives exactly
-eD(d) tensor q(x). Naturality in the differential gives q as a chain isomorphism.
-No flatness, boundedness, or nonzero assumption is used; the zero complex and
-zero stalk rings satisfy the same formula. -/
+on pure tensors (Stacks, Tags 0098, 0096 and 0DJ8). -/
 theorem exists_affineSpectrum_tensor_generator_coordinates
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

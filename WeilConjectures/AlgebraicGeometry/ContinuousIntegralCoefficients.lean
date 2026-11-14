@@ -25,9 +25,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-/-- The bounded constructible category with integral continuous coefficients.
-Source: Bhatt--Scholze, Section 6.8
-(auxiliary; not a blueprint node). -/
+/-- The bounded constructible category with integral continuous coefficients (Bhatt–Scholze,
+Section 6.8). -/
 noncomputable abbrev integralConstructible (X : Scheme.{u}) :=
   ProEtale.BoundedConstructible (condensedRingObj (integralCoeff ℓ E) X)
 

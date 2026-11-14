@@ -16,8 +16,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Epi part of affine-basis section resolution comparison
 
-Source: Stacks Project, Tag 08C2, singleton cover; Tag 071B, compatible resolution tower.
-(blueprint: lem-sc-affine-basis-sections-resolution-homology-epi).
+## References
+
+* Stacks Project, Tags 08C2 and 071B
 -/
 
 @[expose] public section
@@ -28,32 +29,7 @@ namespace AlgebraicGeometry
 
 set_option linter.unusedVariables false in
 /-- The section resolution map induces a epimorphism on homology in each degree.
-Source: Stacks Project, Tag 08C2, lemma-alternating-cech-complex-complex-ss,
-and Tag 071B, lemma-K-injective.
-(blueprint: lem-sc-affine-basis-sections-resolution-homology-epi).
-
-Proof: Restrict to V, where affine opens form a basis including V itself. Restriction is
-exact and preserves K-injectives, so i restricts to a K-injective resolution. On the
-singleton cover of V the alternating Cech total complex is the ordinary section complex.
-For each good truncation tau_ge(-m) of F, the terms above -m are the original terms and
-the term in degree -m is a differential cokernel. The first two vanishing assumptions
-therefore give the bounded-below Cech comparison on every truncation. The homology-sheaf
-vanishing gives the compatible resolution tower of 071B with cohomological bound zero.
-Sections commute with the inverse limit of this tower. In degree n the section complexes
-of the good truncations eventually agree in degrees n-1, n and n+1; hence their degree-n
-homology is eventually constant. The resolution-tower transition maps are degreewise
-surjective, and the Milnor sequence with vanishing first derived limit identifies the
-homology of its section limit with this stable homology. Naturality identifies the map
-from F with the canonical resolution map. This proves the desired assertion for the
-special tower resolution. Compare that resolution with J over F: K-injectivity gives
-comparison maps whose compositions are homotopic to the identities, since both maps
-from F are quasi-isomorphisms. Additive evaluation preserves homotopies, so the induced
-homology maps agree with those of i. Injective module sheaves are flasque, so the
-abelian-sheaf computation in 08C2 computes module-valued section cohomology; the exact
-forgetful functor to abelian groups reflects the assertion. When V is empty all section
-modules are zero, and the assertion follows as well.
-Every cohomology class of the resolution section limit comes from the stable truncation
-homology, and hence has a representative in the ordinary section complex. -/
+(Stacks, Tags 08C2 and 071B). -/
 theorem affineBasisSections_resolution_homology_epi
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     (F J : CochainComplex X.Modules ℤ) [J.IsKInjective]

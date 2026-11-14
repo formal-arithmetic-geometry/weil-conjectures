@@ -14,8 +14,9 @@ public import Mathlib.CategoryTheory.Comma.Arrow
 
 /-! # Local descent of an internal matrix to the discrete condensed point
 
-Source: Stacks, Tags 03CY and 00YV; the finite-section argument in
-`lem-sfb-discrete-constant-presentation-lifting`, step 2.
+## References
+
+* Stacks Project, Tags 03CY and 00YV
 -/
 
 @[expose] public section
@@ -234,27 +235,7 @@ private theorem matrix_lifting_from_sections
 matrix on the condensed point, up to the finite-free comparison isomorphisms.
 This assertion concerns only morphisms between free modules: there is no arbitrary
 module, constant slice trivialization, cokernel or coefficient relabelling.
-
-Source: Stacks, Modules on Sites, Tag 03CY; Sites, Tag 00YV; the second step of
-`lem-sfb-discrete-constant-presentation-lifting`.
-(auxiliary; not a blueprint node).
-
-Proof: the entries of a are maps between regular modules, hence sections of the
-discrete coefficient ring on the terminal object of the pro-etale site of the
-underlying scheme of U. The monoidal constant-sheaf pullback comparison identifies
-this ring with the constant sheaf of ULift A, including its unit and multiplication.
-Apply finite_local_section_lifts to the constant-presheaf sheafification unit and
-the Fin m times Fin n tuple of coordinates directly on the coefficient-sized
-site of Y, giving a covering sieve S on U.
-For each member choose the simultaneous scalar lifts. Each scalar defines a
-regular point-module endomorphism by multiplication; the biproduct matrix of these
-endomorphisms is d. Pullback preserves the finite biproducts and their injections
-and projections. Its regular-module comparison carries the scalar endomorphisms
-to multiplication by the corresponding constant sections. The entrywise lifting
-equalities therefore give the square between the two pulled-back matrices.
-The finite-free comparison isomorphisms and this square give the asserted arrow
-isomorphism. An empty index set gives the maximal covering sieve and the unique
-zero matrix. An empty scheme allows the empty covering sieve. -/
+(Stacks, Tags 03CY and 00YV) -/
 theorem discrete_internal_matrix_local_lifting
     (A : Type u) [CommRing A] {Y : Scheme.{u}}
     (U : Scheme.coefficientProEtaleSiteModel.{u, u} Y) (m n : ℕ)

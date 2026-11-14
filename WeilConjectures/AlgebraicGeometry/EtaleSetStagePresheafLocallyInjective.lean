@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleAffineSectionSameStageEquality
 
 /-! # Local injective comparison with the stage presheaf colimit
 
-Source: Stacks Project, Sites Tag 0A35 and Étale Cohomology Tag 09YQ.
-(blueprint: lem-weil-pbc-sets-stage-presheaf-locally-injective).
+## References
+
+* Stacks Project, Tags 0A35 and 09YQ
 -/
 
 @[expose] public section
@@ -36,35 +37,7 @@ private theorem arrow_eq_kernel_iff
   rfl
 
 /-- The comparison from the presheaf colimit to the limit push-pull sheaf
-is locally injective.
-
-Source: Stacks Project, Sites Tag 0A35, equation-compute-pullback-to-limit,
-and Étale Cohomology Tag 09YQ, via the affine-site colimit presentation.
-(blueprint: lem-weil-pbc-sets-stage-presheaf-locally-injective).
-
-Proof: 1. Work on the cofinal upper tail of i₀. A section of the presheaf colimit
-   on W is represented by a section of a stage push-pull sheaf on W; two such
-   sections can be placed at one common stage by directedness. The supplied
-   object and component equalities identify these representatives and their
-   images with the canonical inverse-image section comparisons.
-2. Use the affine-site colimit presentation and transport across full-affine
-   restriction, preserving adjunction units. In the inverse-image description
-   of Sites 0A35, equality of the two limit images is witnessed locally by
-   equalities between representatives in the defining filtered colimits.
-   Each witness uses finitely many objects, arrows and equations. The object,
-   arrow and eventual-equality clauses of the site presentation descend these
-   data together to a common later stage.
-3. Coverings in the limit affine site have finite stage presentations. Descend
-   the coverings witnessing equality, moving all their finitely many data to
-   a common stage. The sheaf separatedness axiom there identifies the two
-   descended sections. The filtered-colimit equality criterion identifies
-   their images in the presheaf colimit. This is the equality part of 0A35's
-   displayed section formula; its unit equation identifies the maps with the
-   maps specified in the hypotheses.
-4. On each test object the two presheaf sections therefore agree (in
-   particular they agree on a covering sieve), which is local injectivity.
-   The empty-object case uses the empty covering and the uniqueness of a
-   sheaf section there; it requires no chosen section of G. -/
+is locally injective (Stacks, Tags 0A35 and 09YQ). -/
 theorem etaleSetStagePresheaf_locallyInjective
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

@@ -14,8 +14,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-! # Canonical derived global germs
 
-Source: Stacks Project, Tags 03QO, 01EZ and 095T.
-(blueprint: def-weil-pbc-derived-global-germ)
+## References
+
+* Stacks Project, Tags 03QO, 01EZ and 095T
 -/
 
 @[expose] public section
@@ -31,8 +32,7 @@ noncomputable local instance instAB5OfSizeAddCommGrpCat_derivedGlobalGerm
     : AB5OfSize.{u, u} AddCommGrpCat.{u + 1} :=
   AB5OfSize_shrink.{u, u, u + 1, u + 1} _
 
-/-- The global germ, using the terminal object of the small etale site. 
-(blueprint: def-weil-pbc-derived-global-germ)
+/-- The global germ, using the terminal object of the small etale site.
 -/
 noncomputable def globalGerm {Y : Scheme.{u}}
     {Ω : Type u} [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ Y) :
@@ -44,8 +44,7 @@ noncomputable def globalGerm {Y : Scheme.{u}}
       ((pointSmallEtale t).toPresheafFiberNatTrans (Scheme.Etale.mk (𝟙 Y))
         (Over.homMk t (Category.comp_id t)))
 
-/-- The germ at the image point, transported to the inverse-image stalk. 
-(blueprint: def-weil-pbc-derived-global-germ)
+/-- The germ at the image point, transported to the inverse-image stalk.
 -/
 noncomputable def pulledGlobalGerm {Y Y' : Scheme.{u}} (g : Y' ⟶ Y)
     {Ω : Type u} [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ Y') :
@@ -53,9 +52,8 @@ noncomputable def pulledGlobalGerm {Y Y' : Scheme.{u}} (g : Y' ⟶ Y)
       (g)^*[AddCommGrpCat.{u + 1}] ⋙ (pointSmallEtale t).sheafFiber :=
   globalGerm (t ≫ g) ≫ (upperStarCompSheafFiberIso AddCommGrpCat.{u + 1} g t).inv
 
-/-- Derive the global germ after Leray. Its construction has no strict-local hypothesis.
-Source: Stacks Project, Tags 03QO and 01EZ.
-(blueprint: def-weil-pbc-derived-global-germ) -/
+/-- Derive the global germ after Leray. Its construction has no strict-local hypothesis
+(Stacks, Tags 03QO and 01EZ). -/
 noncomputable def derivedPulledGlobalGerm {X Y Y' : Scheme.{u}}
     (f : X ⟶ Y) (g : Y' ⟶ Y)
     {Ω : Type u} [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ Y') :
@@ -73,8 +71,7 @@ noncomputable def derivedPulledGlobalGerm {X Y Y' : Scheme.{u}}
           (pointSmallEtale t).sheafFiber).rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.hom ≫
         (Functor.mapDerivedCategoryPlusCompIso _ _).hom)
 
-/-- Derive the global germ after Leray, without an intervening inverse image. 
-(blueprint: def-weil-pbc-derived-global-germ)
+/-- Derive the global germ after Leray, without an intervening inverse image.
 -/
 noncomputable def derivedGlobalGerm {X Y : Scheme.{u}} (f : X ⟶ Y)
     {Ω : Type u} [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ Y) :
@@ -89,8 +86,7 @@ noncomputable def derivedGlobalGerm {X Y : Scheme.{u}} (f : X ⟶ Y)
       (Functor.rightDerivedFunctorPlusNatTrans (globalGerm t) ≫
         (pointSmallEtale t).sheafFiber.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.hom)
 
-/-- If the underived pulled global germ is invertible, so is its derived comparison. 
-(blueprint: def-weil-pbc-derived-global-germ)
+/-- If the underived pulled global germ is invertible, so is its derived comparison.
 -/
 theorem isIso_derivedPulledGlobalGerm {X Y Y' : Scheme.{u}}
     (f : X ⟶ Y) (g : Y' ⟶ Y)
@@ -99,8 +95,7 @@ theorem isIso_derivedPulledGlobalGerm {X Y Y' : Scheme.{u}}
   unfold derivedPulledGlobalGerm
   infer_instance
 
-/-- If the underived global germ is invertible, so is its derived comparison. 
-(blueprint: def-weil-pbc-derived-global-germ)
+/-- If the underived global germ is invertible, so is its derived comparison.
 -/
 theorem isIso_derivedGlobalGerm {X Y : Scheme.{u}} (f : X ⟶ Y)
     {Ω : Type u} [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ Y)

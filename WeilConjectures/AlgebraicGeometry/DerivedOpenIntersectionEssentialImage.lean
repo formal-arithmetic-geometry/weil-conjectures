@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunc
 
 /-! # Essential image of a restricted open direct image
 
-Source: Stacks Project, Tags 08FE and 08DG.
-(blueprint: lem-sc-derived-open-intersection-essential-image).
+## References
+
+* Stacks Project, Tags 08FE and 08DG
 -/
 
 @[expose] public section
@@ -46,26 +47,7 @@ set_option synthInstance.maxSize 2048 in
 -- The nested derived-functor comparisons require a larger elaboration budget.
 
 /-- The restriction to O of an open direct image from P is in the essential image
-of the right adjoint to restriction from O to W = O ∩ P.
-Source: Stacks Project, Tag 08FE, used in the local calculation of Tag 08DG.
-(blueprint: lem-sc-derived-open-intersection-essential-image).
-
-Proof: Put V = jP⁻¹(O) in P. By Tag 08FE, restriction to O of RjP_* B is
-isomorphic to Rg_*(B|V), where g : V → O is the induced open immersion.
-The scheme V is canonically isomorphic to W because the image of V → X is
-P ∩ O = W; after that isomorphism g is the inclusion W → O. Direct image
-along this isomorphism is an equivalence and the composition isomorphism for
-derived direct image gives a presentation as a derived direct image from W.
-The exact transported overlap restriction is canonically isomorphic to
-restriction along W → O, by Scheme.Modules.overMapCompOverEquiv and the
-counit of Scheme.Modules.overEquiv O. Its canonical derived right adjoint is
-the derived direct image along W → O. Uniqueness of right adjoints identifies
-any S in the statement with this derived direct image. Transport the above
-presentation through that natural isomorphism to obtain membership in S's
-essential image. This is an existence statement used only in proofs, not to
-choose an arbitrary object for a definition. Empty intersections are included:
-the restricted direct image is zero and is the direct image of the zero object.
-If P = X or W = P, the same inverse-image and right-adjoint comparison applies. -/
+of the right adjoint to restriction from O to W = O ∩ P (Stacks, Tags 08FE and 08DG). -/
 theorem derived_open_intersection_mem_essImage
     (X : Scheme.{u}) (O P W : X.Opens) (hW : W = O ⊓ P) (iO : W ⟶ O)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

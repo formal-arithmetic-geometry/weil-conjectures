@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.AffineChartCanonicalHomNaturality
 
 /-! # Hom comparisons for the explicit affine chart ring diagram
 
-Source: Stacks Project, Tags 01ZR (affine proof), 01I6, 0095 and 0096.
+## References
+
+* Stacks Project, Tags 01ZR, 01I6, 0095 and 0096
 -/
 
 @[expose] public section
@@ -30,26 +32,22 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The partial-order quotient of the upper tail, with no selected descent object.
-(blueprint: lem-pc-affine-chart-ordinary-hom-comparison)
 -/
 abbrev OrdinaryChartTail (I : Type u) [Preorder I] (j : I) :=
   Antisymmetrization {k : I // j ≤ k} (· ≤ ·)
 
 /-- A representative in the upper tail; equivalent indices give isomorphic charts.
-(blueprint: lem-pc-affine-chart-ordinary-hom-comparison)
 -/
 noncomputable def ordinaryChartRep {I : Type u} [Preorder I] (j : I) :
     OrdinaryChartTail I j ⥤ {k : I // j ≤ k} :=
   (OrderEmbedding.ofAntisymmetrization (α := {k : I // j ≤ k})).monotone.functor
 
 /-- The starting class in the upper tail.
-(blueprint: lem-pc-affine-chart-ordinary-hom-comparison)
 -/
 def ordinaryChartStart {I : Type u} [Preorder I] (j : I) : OrdinaryChartTail I j :=
   toAntisymmetrization (· ≤ ·) (⟨j, le_rfl⟩ : {k : I // j ≤ k})
 
 /-- Global sections of the explicit pullback diagram, reindexed by the quotient.
-(blueprint: lem-pc-affine-chart-ordinary-hom-comparison)
 -/
 noncomputable def ordinaryChartRings {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (j : I) {A : Scheme.{u}} (g : A ⟶ Spec (R.obj j)) :
@@ -57,7 +55,6 @@ noncomputable def ordinaryChartRings {I : Type u} [Preorder I]
   ordinaryChartRep j ⋙ (upperTailChartDiagram R j g).rightOp ⋙ Scheme.Γ
 
 /-- Sections of the actual ordinary pullback of M at the starting representative.
-(blueprint: lem-pc-affine-chart-ordinary-hom-comparison)
 -/
 noncomputable def ordinaryChartBaseModule {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (j : I) {A : Scheme.{u}} (g : A ⟶ Spec (R.obj j))
@@ -70,31 +67,7 @@ noncomputable def ordinaryChartBaseModule {I : Type u} [Preorder I]
     exact ModuleCat.of _ Γ((Scheme.Modules.pullback (pullback.snd r g)).obj M, ⊤)
 
 /-- Ordinary affine Hom sets agree with scalar-extension Hom sets, including the
-composition comparison. This asserts comparisons only, not descent of any map.
-Source: Stacks Project, Tags 01ZR (affine proof), 01I6, 0095 and 0096.
-(blueprint: lem-pc-affine-chart-ordinary-hom-comparison).
-
-Proof: Put A = U.X a and g = U.f a followed by the projection to Spec R(j).
-The explicitly defined upperTailChartDiagram consists of the pullbacks of A
-along the tail spectra. Each chart is affine, by affine base change. The tail
-is nonempty and final, and its partial-order quotient is equivalent to it.
-The upperTailChartCone is limiting; applying affine global sections identifies
-its vertex ring with the colimit of ordinaryChartRings. Pullback pasting
-identifies this vertex with the direct limit chart and identifies each stage
-with U pulled back to that stage. The starting representative is equivalent
-to j, so its chart is canonically isomorphic to A. Under the affine
-quasi-coherent module equivalence the concrete ordinaryChartBaseModule is
-therefore the starting module, and its scalar extensions are the sections of
-all ordinary pullbacks. Fully faithfulness gives the two Hom equivalences.
-For the final assertion, the normalized eP,eQ equal the scalar-extension
-composition isomorphisms: both take 1 tensor m to 1 tensor (1 tensor m), and
-these elements generate after scalar extension. The algebraic square therefore
-transports to the ordinary pullback square. Pulling it back along the canonical
-lift from the iterated chart to the direct chart and using its second-projection
-equation gives exactly chartOrdinaryMapRecovery. The comparisons are all
-universal-property comparisons, so equivalent indices, zero rings, empty affine
-charts and zero modules require no extra hypotheses. No finite-presentation
-assumption or map-descent conclusion is used in this comparison lemma. -/
+composition comparison (Stacks, Tags 01ZR, 01I6, 0095, 0096). -/
 theorem affine_chart_ordinary_hom_comparison
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

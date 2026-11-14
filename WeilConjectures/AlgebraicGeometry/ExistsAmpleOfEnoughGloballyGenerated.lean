@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Enough globally generated invertible modules give an ample module
 
-Source: Stacks Project, Varieties, Lemma 09NC
-(blueprint: lem-sc-enough-globally-generated-ample).
+## References
+
+* Stacks Project, Tag 09NC
 -/
 
 @[expose] public section
@@ -56,24 +57,8 @@ private theorem positiveTensorFamily_invertible {X : Scheme.{u}} (n : ℕ)
     infer_instance
 
 /-- A quasi-compact scheme with an affine nonvanishing neighbourhood of each point supplied
-by a section of a globally generated invertible module has an ample invertible module.
-Source: Stacks Project, Varieties, Lemma 09NC
-(blueprint: lem-sc-enough-globally-generated-ample).
-
-Proof: quasi-compactness gives finitely many pairs `(Lᵢ, sᵢ)` whose affine loci cover
-(`def-weil-pbc-quasi-compact-scheme`). For each `Lᵢ`, choose finitely many sections whose
-nonvanishing loci cover, using `lem-sc-finite-sections-cover-qc`, and add `sᵢ` as index zero.
-Form the tensor product of the `Lᵢ` (`def-sc-positive-tensor-family`); it is invertible
-by induction using the proved `IsInvertible.tensorObj` instance (the tensor clause of
-`lem-pc-tensor-dual-invertible`). Tensor the chosen sections for every multi-index.
-If one index is zero, the tensor section has affine nonvanishing locus by
-`lem-sc-tensor-section-affine-open`. These loci cover: at any point choose nonvanishing
-sections in all factors, choosing index zero in a factor whose original affine locus
-contains the point. These degree-one sections witness `def-weil-pbc-ample-invertible-module`.
-Transport the sections to tensor power one with the inverse right unitor, which preserves
-nonvanishing loci. For the empty scheme use the structure sheaf (the empty tensor product).
-For nonempty `X`, append one input factor to the finite subcover to use the positive-family API.
--/
+by a section of a globally generated invertible module has an ample invertible module
+(Stacks, Tag 09NC). -/
 theorem exists_isAmple_of_enough_globallyGenerated (X : Scheme.{u}) [CompactSpace X]
     (h : ∀ x : X, ∃ L : X.Modules, L.IsInvertible ∧
       Nonempty (SheafOfModules.GeneratingSections L) ∧

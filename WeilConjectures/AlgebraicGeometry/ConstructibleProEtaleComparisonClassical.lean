@@ -21,16 +21,7 @@ universe u v
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 /-- An affine-locally constructible module has invertible continuity maps on a qcqs scheme.
-Source: blueprint constructible-comparison-classical, Stacks Tags 09AJ and 09AK
-(auxiliary; not a blueprint node).
-
-Proof: choose an affine neighborhood of each point and its constructibility
-stratification, regarding every finite-presentation model as a finite model.
-Quasi-compactness gives a finite subcover. The qcqs gluing lemma constructs one
-global finite stratification, together with factorizations of its immersions
-through the local strata. The inverse-image composition isomorphism and stability
-of finite local systems under inverse image provide models on its strata. Apply
-the single-stratification continuity lemma to this global partition. -/
+(Stacks, Tags 09AJ and 09AK) -/
 theorem constructibleComparison_classical (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] :
     ∀ [CompactSpace X] [QuasiSeparatedSpace X],

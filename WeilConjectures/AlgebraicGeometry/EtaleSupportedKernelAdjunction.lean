@@ -19,10 +19,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.ClosedImmersionUpperShriek
 /-!
 # The support kernel and the right adjoint of closed etale direct image
 
-Source: Stacks Project, Tag 09XQ, `lemma-sections-with-support-acyclic`, its proof and
-preceding definition of the supported subsheaf; Tag 04CA,
-`proposition-closed-immersion-pushforward`
-(blueprint: lem-pur-etale-supported-kernel-adjunction).
+## References
+
+* Stacks Project, Tags 09XQ, 04CA
 
 ## Main definitions
 
@@ -47,9 +46,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The functor `P_Z(F) = ker(F → j_*j⁻¹F)`, formed as the kernel of the adjunction unit
 in the functor category. Limits of functors are computed pointwise, so its value is the
-kernel in abelian etale sheaves, with its canonical action on morphisms.
-Source: Stacks Project, Tag 09XQ, the supported subsheaf preceding the lemma
-(blueprint: lem-pur-etale-supported-kernel-adjunction). -/
+kernel in abelian etale sheaves, with its canonical action on morphisms (Stacks, Tag 09XQ). -/
 noncomputable def supportedKernel {O X : Scheme.{u}} (j : O ⟶ X) :
     Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤
       Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=

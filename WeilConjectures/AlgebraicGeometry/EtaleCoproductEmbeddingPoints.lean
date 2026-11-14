@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleFieldPointFunctor
 /-!
 # Geometric points of a coproduct of field spectra
 
-Source: Stacks Project, Tags 03QR and 01JB.
+## References
+
+* Stacks Project, Tags 03QR and 01JB
 -/
 
 @[expose] public section
@@ -24,19 +26,8 @@ namespace AlgebraicGeometry
 
 attribute [local instance] etaleFieldDiscreteForget₂ etaleFieldActionForget₂
 
-/-- Geometric points of a prescribed coproduct of field spectra are the sum of embeddings.
-Source: Stacks Project, Tag 03QR, coproduct construction; Tag 01JB, scheme coproducts.
-(blueprint: lem-exc-etale-coproduct-embedding-points).
-
-Proof: A map from Spec Ksep into the coproduct has its unique topological point in a
-unique component. The coproduct inclusion of that component is an open immersion,
-so the map factors uniquely through it. The Spec anti-equivalence identifies maps
-from Spec Ksep to Spec (E i) over Spec K with K-algebra maps E i to Ksep. These two
-constructions are inverse, giving the displayed equivalence. Precomposition by the
-spectrum map of g corresponds under the anti-equivalence to postcomposition of the
-embedding by g, and does not change the component. This proves the equivariance
-formula. For empty I there is no map from the nonempty Spec Ksep to the empty scheme;
-for a singleton I the assertion is precisely the affine anti-equivalence. -/
+/-- Geometric points of a prescribed coproduct of field spectra are the sum of embeddings
+(Stacks, Tags 03QR and 01JB). -/
 theorem etaleCoproduct_embedding_points
     (K Ksep : Type u) [Field K] [Field Ksep] [Algebra K Ksep]
     [IsSepClosure K Ksep] (I : Type u) (E : I → IntermediateField K Ksep)

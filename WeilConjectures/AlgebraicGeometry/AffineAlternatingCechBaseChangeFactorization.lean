@@ -17,8 +17,9 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Identification of the canonical map on the explicit alternating Čech model
 
-Source: blueprint `lemma-coherent-base-change-invertible-sheaves--2`, Steps 2--5;
-Stacks Project, Tags 02KH, 08HY, and 0A1D.
+## References
+
+* Stacks Project, Tags 02KH, 08HY and 0A1D
 -/
 
 @[expose] public section
@@ -32,32 +33,8 @@ namespace AlgebraicGeometry
 
 /-- The module base-change composite factors through ordinary pullback of the
 explicit Čech model, via a left-derived counit. No relative flatness is assumed
-and no invertibility of that counit or of the composite is asserted.
-Source: blueprint `lemma-coherent-base-change-invertible-sheaves--2`, Steps 2--5;
-Stacks Project, Tags 02KH and 08HY.
-(blueprint: lem-pc-affine-alternating-cech-base-change-factorization).
-
-Proof: The increasing-tuple affine Čech resolution has a locally split augmented
-complex: on a cover member insert its index, reorder, and use the sign of the
-permutation, with repeated indices giving zero. Each intersection is affine and
-its open pushforward is f_*-acyclic. The acyclic resolution comparison therefore
-identifies Rf_*G with the sheafification of the A-section complex specified by
-K = affineAlternatingCechModel f U G. Apply the same construction on the pulled
-back cover. For every intersection the affine section-pullback formula gives
-B tensor_A Gamma(G,U_J) = Gamma(p*G,p^-1(U_J)); finite products commute with tensor.
-Its restriction-compatible pure-tensor formula intertwines the signed face maps,
-so it yields the target identification t for ordinary pullback of K. Choose the
-left-derived counit for g compatible with the derived adjunctions defining the
-canonical mate. Evaluating the adjunction unit and counit on the Čech augmentation
-shows that the canonical composite is Lg*(e) followed by this counit at K and t.
-This is an equation of maps, checked by transposition under Lf_B* adjoint Rf_B*;
-the triangle equations cancel the units and leave the ordinary section pullbacks.
-For the given comparison c, compare its witnessing counit for p with this chosen
-one using right Kan extension uniqueness. Derived tensor of G[0] is nonpositive
-and its H0 is p*G. Maps to (p*G)[0] therefore factor uniquely through H0. The counit
-automorphism induces an automorphism of p*G on H0; composing t with its derived
-direct image gives the displayed equation for c as well. None of these steps uses
-flatness over A or invertibility of the counit at K. Empty covers compute zero. -/
+and no invertibility of that counit or of the composite is asserted
+(Stacks, Tags 02KH and 08HY). -/
 theorem affineAlternatingCech_baseChange_factorization
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

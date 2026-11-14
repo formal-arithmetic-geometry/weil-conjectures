@@ -17,9 +17,9 @@ import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
 
 /-! # Affineness of a compatible component section locus
 
-Source: Stacks Project, Varieties Lemma 09NX, second paragraph;
-Limits Lemma 09NL and Properties Section 01PR.
-(blueprint: lem-sc-affine-locus-compatible-component-sections).
+## References
+
+* Stacks Project, Tags 09NX, 09NL and 01PR
 -/
 
 @[expose] public section
@@ -32,28 +32,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 
 /-- A fixed global section with affine component loci has affine locus, and contains
-any set whose inverse images lie in those loci.
-
-Source: Stacks Project, Varieties Lemma 09NX, second paragraph;
-Limits Lemma 09NL and Properties Section 01PR.
-(blueprint: lem-sc-affine-locus-compatible-component-sections).
-
-Proof: let W be the nonvanishing locus of t. It is open because L is invertible:
-in a local frame it is the basic open of the section coefficient. At a component
-point, the adjunction unit identifies the pulled-back fibre value with one tensor
-the value of t. The residue-field map is injective, so extension of this rank-one
-vector space preserves and reflects nonzero values. Each e a preserves nonvanishing,
-and the section compatibility identifies the inverse image of W with V a.
-For x in T choose a component point y over it by hcover. The containment hypothesis
-makes s a nonvanishing at y, and the fibre calculation puts x in W. The restricted
-closed immersions (V a).toScheme → W.toScheme form a finite closed cover. Their
-sources are affine by hVaff. Apply isAffine_of_finite_closed_cover, including its
-empty-cover case, to conclude that W is affine. Finally transport t along the inverse
-right unitor L ≅ L.tensorPow 1; a module isomorphism preserves the maximal ideal
-times each stalk and hence the nonvanishing locus. The transported section q has
-locus W, giving the stated witnesses. Neither reducedness nor finiteness or closedness
-of T is needed for this argument: all gluing is already supplied as input.
--/
+any set whose inverse images lie in those loci (Stacks, Tags 09NX, 09NL and 01PR). -/
 theorem affine_locus_of_compatible_component_sections
     (X : Scheme.{u}) (r : ℕ) (C : Fin r → Scheme.{u})
     (i : ∀ a, C a ⟶ X) [∀ a, IsClosedImmersion (i a)]

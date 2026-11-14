@@ -13,7 +13,9 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # CoherentFormalModulesAffineComplete
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W.
+## References
+
+* Stacks Project, Tag 087W
 -/
 
 @[expose] public section
@@ -26,24 +28,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Applying a completed-module limit functor to the canonical quotient system recovers
-any finite completed module. This is the finite-module half of the equivalence.
-Source: Stacks Project, Lemma 087W, implicit converse; Algebra 0316, 05GG and 00MA (3).
-(blueprint: lem-weil-pbc-coherent-formal-modules-affine-complete).
-
-Proof: Put B = completion and K = I B. The completion quotient formula identifies
-B/K^(n+1) with A/I^(n+1), and makes B K-adically complete. B is Noetherian by 0316.
-Every finite B-module N is K-adically complete by 00MA (3); K^m N and I^m N coincide
-as A-submodules. The affine ideal-product/cokernel comparison identifies the sections
-of Q(N) with N/I^(n+1)N, compatibly with their reductions. The canonical quotient
-maps therefore make restricted N a limit cone on these sections. Compare this cone
-with the assumed limit cone p(Q(N)) to obtain an A-linear isomorphism N -> L(Q(N)).
-It is B-linear: for any completed scalar and any coordinate, choose an A representative
-of its residue modulo I^(n+1). Both cone projections carry its action to multiplication
-by that representative, by hscalar and the quotient description. Limit projections
-jointly distinguish maps, so scalar compatibility at all coordinates proves B-linearity
-for this isomorphism and its inverse. Naturality follows by testing on the same
-projections, using hnatural and naturality of the quotient maps. These isomorphisms
-in the full finite-module subcategory form the asserted natural isomorphism. -/
+any finite completed module. This is the finite-module half of the equivalence
+(Stacks, Tags 087W, 0316, 05GG and 00MA). -/
 theorem coherentFormalModules_affine_complete (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)
     (hJ : J = Scheme.IdealSheafData.ofIdealTop

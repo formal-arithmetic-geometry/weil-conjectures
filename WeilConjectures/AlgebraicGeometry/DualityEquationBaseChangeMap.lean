@@ -12,14 +12,14 @@ public import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
 import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-!
-The construction is the mate of the inverse canonical base-change square, using only
-the supplied direct-image/right-adjoint adjunctions. No auxiliary pullback adjunction
-or derived-pullback counit is chosen by this definition.
-
 # Canonical base-change map for a right adjoint
 
-Source: literature/stacks-project/duality.tex, Tag 0AA8 (Lemma 48.6.2),
-equation-base-change-map (blueprint: def-sc-duality-equation-base-change-map).
+The construction is the mate of the inverse canonical base-change square, using only
+the supplied direct-image/right-adjoint adjunctions.
+
+## References
+
+* Stacks Project, Tag 0AA8
 -/
 
 @[expose] public section
@@ -32,26 +32,12 @@ set_option backward.isDefEq.respectTransparency.types false
 
 namespace AlgebraicGeometry
 
-/-- The canonical right-adjoint base-change morphism `Lg_X^* a(K) ⟶ a'(Lg^* K)` of a
-cartesian square of quasi-compact and quasi-separated schemes `X' = X ×_Y Y'`, with
-`g_X = pullback.fst f g : X' ⟶ X` and `f' = pullback.snd f g : X' ⟶ Y'`.
-
-`a` and `a'` are right adjoints (`adjf`, `adjf'`) of the derived direct images
-`Rf_*`, `Rf'_*` restricted to the quasi-coherent derived categories
-(`schemeDerivedDirectImage_qcqs_hasRightAdjoint` gives the preservation of `D_QCoh`).
-`β : Lg^* Rf_* ⟶ Rf'_* Lg_X^*` is the canonical base-change transformation
-`schemeDerivedBaseChangeMap` (def-pc-derived-base-change-map) on `D_QCoh(X)`, assumed to
-be an isomorphism (`hβ`). The adjunctions `Lg^* ⊣ Rg_*`, `Lg_X^* ⊣ Rg_{X,*}` are the
-canonical ones of `exists_schemeDerivedAdjunction` (the ones `β` is built from), restricted
-to `D_QCoh` (`derivedPullback_tensor_preserve_QCoh` and
-`schemeDerivedDirectImage_qcqs_hasRightAdjoint` give the preservation). The conjugate
-`θ : Rg_{X,*} a' ⟶ a Rg_*` of `β` for the composite adjunctions is an isomorphism, and
-the map is `Lg_X^* a(η'_K) ≫ Lg_X^* (θ_{Lg^* K})⁻¹ ≫ ε_{a'(Lg^* K)}`.
-We compute it directly as the mate of `β⁻¹` under `adjf` and `adjf'`. The iterated
-mates identity identifies this with the displayed composite for any auxiliary
-pullback/direct-image adjunctions. Thus no such auxiliary choice is part of the data.
-Source: Stacks Project, duality.tex, Tag 0AA8, equation-base-change-map
-(blueprint: def-sc-duality-equation-base-change-map). -/
+/-- The canonical right-adjoint base-change morphism `Lg_X^* a(K) ⟶ a'(Lg^* K)` of a cartesian
+square of quasi-compact and quasi-separated schemes `X' = X ×_Y Y'`, with `g_X = pullback.fst f
+g : X' ⟶ X` and `f' = pullback.snd f g : X' ⟶ Y'`. Here `a` and `a'` are the right adjoints
+(`adjf`, `adjf'`) of the derived direct images `Rf_*`, `Rf'_*` on quasi-coherent derived
+categories, and `β : Lg^* Rf_* ⟶ Rf'_* Lg_X^*` is the base-change isomorphism (`hβ`). The map is
+the mate of `β⁻¹` (Stacks, Tag 0AA8). -/
 noncomputable def dualityEquationBaseChangeMap
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

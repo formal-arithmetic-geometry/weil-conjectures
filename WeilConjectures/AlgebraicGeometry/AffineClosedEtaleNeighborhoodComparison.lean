@@ -18,7 +18,9 @@ import WeilConjectures.SixFunctors.Etale.Gabber
 
 /-! # Cohomology comparison with affine etale neighborhoods
 
-Source: Stacks Project, Tag 0A51, affine case of the proof.
+## References
+
+* Stacks Project, Tag 0A51
 -/
 
 @[expose] public section
@@ -162,31 +164,7 @@ private theorem neighborhood_comparison_of_presentation {X Z Z' T : Scheme.{u}}
 
 /-- Cohomology on a closed subscheme of an affine scheme is the filtered colimit of
 cohomology on its affine étale neighbourhoods, for a torsion sheaf of modules, with all maps
-the canonical pullback maps. There is no injectivity hypothesis and no restriction on the
-degree.
-
-Precisely: there is a directed system of étale maps `v a : Y a ⟶ X` with transition maps
-`w f`, together with factorizations `i = s a ≫ v a` compatible with the transitions, such that
-the diagram `H` of the groups `Hᵠ(Y a, (v a)^* G)` (with `G` the underlying abelian sheaf of
-`J`), whose transition maps are pullback along `w f`, has a colimit cocone whose legs, followed
-by an isomorphism `e` onto `Hᵠ(Z, i^* G)`, are pullback along `s a`.
-
-Source: Stacks Project, Tag 0A51, first paragraph of the proof; Tags 09YQ and 09ZI.
-(blueprint: lem-weil-pbc-affine-closed-etale-neighborhood-comparison)
-
-Proof: present X as Spec B and Z as Spec B/K. The pair henselization A = Bʰ is the
-filtered colimit of etale B-algebras C whose quotient by K is B/K; their spectra are the
-neighbourhoods, and Z → Spec(B/K) → Spec A → Spec C gives the factorizations s. Continuity
-(09YQ) identifies the colimit of the cohomology of the pullbacks of G to the spectra Spec C,
-with the pullback transition maps, with the cohomology on Spec A, the legs being pullback
-maps. Gabber's comparison (09ZI) says that pullback along Spec(A/K) → Spec A is bijective on
-the cohomology of the pullback of J, which is torsion; the underlying abelian sheaf of the
-module pullback is the abelian pullback of G. The composite of these bijections with the
-continuity cocone is the required comparison; by functoriality of pullback maps and the
-associativity of the pullback composition isomorphisms its legs are pullback along s.
-No acyclicity is used: the same argument applies in degree zero and to noninjective torsion
-sheaves.
--/
+the canonical pullback maps (Stacks, Tags 0A51, 09YQ, 09ZI). -/
 theorem Etale.affine_closed_etale_neighborhood_comparison
     (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}} [IsAffine X]
     (i : Z ⟶ X) [IsClosedImmersion i]

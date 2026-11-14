@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.NormalizedComponentSectionCover
 
 /-! # Normalized component frames and their Čech data
 
-Source: Stacks Project, Varieties Lemma 09NE (lemma-glue-invertible-sheaves).
-(blueprint: lem-sc-component-section-cech-data) -/
+Stacks Project, Varieties, Tag 09NE. -/
 
 @[expose] public section
 
@@ -197,24 +196,9 @@ private theorem exists_cech_of_component_frame_cover
         component_app_map (i a) (inf_le_right : U b ⊓ U c ≤ U c)]
       exact hsb.symm.trans hsc
 
-/-- Source: Stacks Project, Varieties Lemma 09NE, transition-function paragraphs and
-final paragraph.
-
-Proof: Take the normalized cover, component frames m, and scalar expressions f for s
-from exists_normalized_component_section_cover. On a distinct overlap the component
-structure-section map is bijective. Compare the two component frames by units. Lift
-both the ratios and their inverses to functions r and r' on Y. Injectivity of the
-comparison map proves r*r'=1, giving a unit g. Set every diagonal transition to 1.
-Restrict the component frame equations to smaller opens using naturality. Cancellation
-of a free generator proves the inverse and cocycle equations componentwise, and
-injectivity descends them to Y. For a triple overlap use any unequal pair of indices
-to obtain injectivity; when all three agree the equation follows from g_bb=1.
-Restrict both expressions for the prescribed component section to the overlap,
-substitute the frame transition, and cancel the second frame. Injectivity gives
-f_b*g_bc=f_c. For a repeated index this equation is reflexive. These arguments also
-work for empty overlaps, empty components, and the empty cover of an empty scheme.
-No global module or section is constructed by this theorem.
-(blueprint: lem-sc-component-section-cech-data) -/
+/-- Normalized component sections admit Čech data: an open cover of `Y` with transition units
+satisfying the cocycle conditions, and free generators of the pulled-back modules
+(Stacks, Tag 09NE). -/
 theorem exists_component_section_cech_data
     {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]
     (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ Y) [∀ a : ι, IsClosedImmersion (i a)]

@@ -10,9 +10,9 @@ import WeilConjectures.AlgebraicGeometry.AdicResidueQuotientTensorModel
 
 /-! # The strict Koszul augmentation on a coefficient slice
 
-Source: Stacks Project, proetale.tex, Tag 099M, proof of lemma-naive-completion;
-more-algebra.tex, lemma-sequence-Koszul-complexes; algebraization.tex, Tag 0A0E.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 099M and 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -68,38 +68,8 @@ private theorem tensor_augmentation_projection
 
 /-- The Koszul augmentation has a strict quotient target, a pro-zero cone, and the
 specified finite scalar units. This is a calculation of complexes and transitions;
-there is no total derived inverse limit or residue-projection assertion in its conclusion.
-
-Source: Stacks Project, proetale.tex, Tag 099M, proof of lemma-naive-completion;
-more-algebra.tex, lemma-sequence-Koszul-complexes; algebraization.tex, Tag 0A0E.
-(auxiliary; not a blueprint node).
-
-Proof: write R for the completed ring on the slice. Form T degreewise from
-P tensor_R (R tensor_A A/J^(n+1)), with the actual quotient transitions. Identify
-the finite free dual Koszul complex with the negative exterior-power model by the
-dual standard bases and the Hom-complex degree signs. Degree zero sends 1 to 1;
-diagonal power transitions agree under this identification. Augment the negative
-Koszul tensor tower by the degree-zero quotient maps. The exterior
-augmentation commutes strictly with the power transitions; its negative components
-are zero and its degree-zero component sends 1 to 1. Noetherian Artin--Rees makes
-its cone to the generator-power quotients pro-zero in D(A). The inclusion
-J^(r*n+1) ⊆ (a_i^(n+1)) follows by counting exponents in each monomial of that
-degree. Thus the generator-power quotients and J-power quotients are cofinal,
-and the augmentation to J^(n+1) has pro-zero cone as well. Exact constant
-realization on the slice and flat extension
-to R preserve these zero derived maps. The sectionwise quotient identification for
-the flat completed coefficient map identifies the target with P tensor_R B_n.
-Tensor with the fixed K-flat complex P; exactness of tensoring its flat terms gives
-the tensor-cone comparison: multiply the shifted source summand in tensor degree p
-by (-1)^p. Thus the
-strict cone transition maps are eventually zero in D(R), as asserted. The universal
-scalar-extension comparison identifies the localized target at n with G_n F_n M.
-On pure tensors, insertion of one gives its adjunction unit; the normalized scalar
-unit uniquely specifies the adjunction. Scalar balancing identifies the quotient
-successor with the counit-transpose successor, so the level isomorphisms form e.
-Transport by eP gives the displayed unit equation. For r=0 the augmentation is an
-isomorphism, for J=A both quotient systems vanish pro-eventually, and the zero ring
-is included. No tensor product with arbitrary infinite products is used. -/
+there is no total derived inverse limit or residue-projection assertion in its conclusion
+(Stacks, Tags 099M and 0A0E). -/
 theorem adicResidue_strict_koszul_augmentation
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

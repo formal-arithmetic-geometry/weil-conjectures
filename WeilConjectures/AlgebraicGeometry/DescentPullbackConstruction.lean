@@ -19,18 +19,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace CategoryTheory
 
-/-- Pullback of descent data exists for every morphism of schemes.
-Source: Stacks Project, Descent, Lemma 023Y (pullback), specialized to a fixed base.
-(blueprint: lem-galois-descent-pullback-construction).
-
-Proof: For each datum A, use V' = V ×_X X' with projections q and p. Given f₀,f₁
-with equal composites to S and a point z over f₀, compose z with q, apply A's
-transport to (f₀r,f₁r), and lift the resulting point together with f₁ to V'.
-The two projection equations prove naturality, the identity law and the cocycle law.
-For a compatible morphism, use its usual pullback map. Its compatibility follows
-by projecting to V and X' and applying the original compatibility equation.
-The functor laws follow from those of Over.pullback. The pullback square is the
-canonical one, and its first projection gives both IsBaseChange and naturality. -/
+/-- Pullback of descent data exists for every morphism of schemes (Stacks, Tag 023Y). -/
 theorem descent_pullback_construction
     {S X X' : Scheme.{u}} (a : X ⟶ S) (r : X' ⟶ X) :
     ∃ (F : Over.DescentDataCategory a ⥤ Over.DescentDataCategory (r ≫ a))

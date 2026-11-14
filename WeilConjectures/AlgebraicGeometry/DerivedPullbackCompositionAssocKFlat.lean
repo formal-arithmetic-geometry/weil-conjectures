@@ -21,27 +21,8 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 namespace AlgebraicGeometry
 
-/-- The two triple-composition paths have equal components on a K-flat complex.
-Source: Stacks Project, Cohomology, Tag 0D5S, Lemma 20.27.2;
-Mathlib `Adjunction.leftAdjointCompIso_assoc`.
-(blueprint: lem-pc-derived-pullback-assoc-kflat).
-Proof: let H be the homotopy image of P. Tensor pullback by g, and then by f,
-preserves K-flatness (lem-pc-kflat-pullback-preservation). Thus hK makes the
-successive counits invertible, both at H and at its tensor pullbacks. Evaluate
-hc for (f,g), (h,f), (h,f≫g), and (h≫f,g) and use leftDerived_fac_app.
-Postcompose each of the proposed paths with the counit of h≫f≫g at H.
-Naturality moves each counit past the preceding comparison; associators of
-functors have identity components. After these rewrites each side is the
-same ordered sequence: the counit of g at H, the counit of f at its tensor
-pullback, the counit of h at the second tensor pullback, and then the
-underived triple tensor comparison mapped by Qh. The two underived comparisons
-are equal by leftAdjointCompIso_assoc applied to the pinned adjunctions and
-the pushforward associativity law. Transport along Category.assoc carries
-the adjunction for the composite to the same pinned adjunction; thus the
-mate calculation includes precisely the eqToIso in the displayed formula.
-Cancel the invertible final counit hK (h≫f≫g) P hP. This gives the component
-equality, without resolving any other complex or asserting global coherence.
-The calculation works for zero complexes, empty schemes, and identity morphisms. -/
+/-- The two triple-composition paths have equal components on a K-flat complex (Stacks, Tag
+0D5S). -/
 theorem derivedPullbackComposition_assoc_kflat
     [d : ∀ X : Scheme.{u₁}, HasDerivedCategory.{w₁}
       (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]

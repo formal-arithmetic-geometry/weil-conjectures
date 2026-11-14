@@ -151,21 +151,8 @@ private lemma coefficient_generators
     congrArg (fun k ↦ k.app U) he
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Forgetting scalars respects the adjoint constant-sheaf transition.
-
-Source: Stacks Project, Tags 03DB and 03CO.
-(blueprint: lem-weil-pbc-constant-module-transition-coefficients).
-
-Proof: The adjoint constant comparison sends each sheafification generator to
-its base change with the same value. This follows from the unit equation for
-uniqueness of left adjoints to terminal evaluation, transported to every object
-by naturality. The constantCommuteCompose comparison also sends a generator to
-the generator of its underlying abelian group, by the defining equation for
-sheafifyComposeIso. Thus both composites agree on every constant-presheaf
-generator. Since forgetting scalars preserves sheafification, the source is
-canonically the sheafification of the constant underlying abelian presheaf;
-the universal property of sheafification proves equality. This argument applies
-to zero modules, empty schemes and arbitrary morphisms. -/
+/-- Forgetting scalars respects the adjoint constant-sheaf transition (Stacks, Tags 03DB and 03CO).
+-/
 theorem constantModuleTransition_coefficients
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)
     {Z W : Scheme.{u}} (g : W ⟶ Z)

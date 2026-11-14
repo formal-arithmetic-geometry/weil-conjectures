@@ -9,9 +9,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-! # Canonical exact pullback tensor comparison
 
-Source: Stacks Tag 0F1E (auxiliary; not a blueprint node).
-The foundational comparisons are separated from support localization to avoid a dependency
-through smooth duality. Their definitions and public signatures are unchanged.
+## References
+
+* Stacks Project, Tag 0F1E
 -/
 
 @[expose] public section
@@ -25,8 +25,8 @@ variable (E : Type v) [Category.{u + 1} E] [Abelian E]
   [SymmetricCategory E] [MonoidalClosed E] [Abelian.HasFunctorialFlatResolution E]
   [UpperStarPreservesFlat E]
 
-/-- Tensor an isomorphism in each variable using the recorded derived tensor bifunctor.
-Source: Tag 0F1E (auxiliary; not a blueprint node). -/
+/-- Tensor an isomorphism in each variable using the recorded derived tensor bifunctor
+(Stacks, Tag 0F1E). -/
 noncomputable def supportDerivedTensorIso
     (T : Scheme.{u}) {K K' L L' : DerivedCategory (Sheaf T.smallEtaleTopology E)}
     (e : K ≅ K') (d : L ≅ L') :
@@ -35,8 +35,8 @@ noncomputable def supportDerivedTensorIso
   ((derivedTensor E T).mapIso e).app L ≪≫
     ((derivedTensor E T).obj K').mapIso d
 
-/-- The exact inverse image tensor comparison uses the canonical K-flat comparison.
-Source: Tag 0F1E (auxiliary; not a blueprint node). -/
+/-- The exact inverse image tensor comparison uses the canonical K-flat comparison
+(Stacks, Tag 0F1E). -/
 noncomputable def supportExactPullbackTensorIso
     {S T : Scheme.{u}} (h : S ⟶ T) (K L : DerivedCategory (Sheaf T.smallEtaleTopology E)) :
     (upperStar E h).mapDerivedCategory.obj

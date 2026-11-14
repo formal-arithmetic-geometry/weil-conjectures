@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleComplexPullbackCoherence
 
 /-! # Complex presentation of canonical derived pullback cocones
 
-Source: Stacks Project, Étale Cohomology, Tag 0GIT, proof (termwise pullbacks).
-(blueprint: lem-weil-pbc-etale-complex-pullback-presentation).
+## References
+
+* Stacks Project, Tag 0GIT
 -/
 
 @[expose] public section
@@ -28,9 +29,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.defeqAttrib.useBackward true
 
 /-- Algebraic data for applying complex continuity to the pullbacks of `C`.
-The data record coherence and canonical maps, without any colimit assertion.
-Source: Stacks Project, Tag 0GIT, proof, termwise colimit identification
-(blueprint: lem-weil-pbc-etale-complex-pullback-presentation). -/
+(Stacks, Tag 0GIT). -/
 structure ComplexPullbackPresentation
     {I : Type u} [SmallCategory I] (T : Scheme.{u})
     (D : I ⥤ Scheme.{u}) (c : Cone D) (t : D ⟶ (Functor.const I).obj T)
@@ -86,29 +85,7 @@ structure ComplexPullbackPresentation
           (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i)))
 
 /-- Present a canonical derived cohomology cocone using termwise pullbacks of a
-complex representative. No limit universal property or qcqs/affineness hypothesis
-is required here, and no cohomology colimit is asserted.
-Source: Stacks Project, Étale Cohomology, Tag 0GIT, proof, lines 7869-7873;
-canonical-map identification in the proof of Tag 0EZM
-(blueprint: lem-weil-pbc-etale-complex-pullback-presentation).
-
-Proof: set `F i` to the termwise inverse image of `C` along `t.app i`.
-Take `φ f` to be the inverse of the complex comparison for composition of
-inverse images. The unit and associativity laws for `upperStarComp` give
-`hidentity` and `hcomposition`. On the site of `c.pt`, take `G` to be the
-constant diagram with value the termwise inverse image of `C` along `p`.
-The composition comparison and `hp` give `eG`; associativity and the cone
-identity give `hG`. Take `L` to be its identity cocone. The given equation `hP` specifies
-the canonical cohomology pullback map. For `eH`,
-compose `e i` with the cohomology image of the derived pullback of `q` and
-the exact-functor localization factorization `mapDerivedCategoryFactors`.
-Define `eB` similarly, using `eY`, `q`, and the factorization at `p`.
-Naturality of the adjunction unit, of the Leray comparison, and of the
-localization factorization identifies the formula `hm` with `hH`.
-The same naturality for each projection, followed by `hp`, identifies
-`hs` with `hB`. The right-derived composition isomorphism appearing in
-`hP` is exactly the one defining the Leray isomorphism in `hm` and `hs`.
-These identities provide all fields without using cohomology continuity. -/
+complex representative (Stacks, Tags 0GIT and 0EZM). -/
 theorem nonempty_complexPullbackPresentation
     {I : Type u}
     [SmallCategory I]

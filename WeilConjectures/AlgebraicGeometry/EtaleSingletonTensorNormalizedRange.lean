@@ -11,8 +11,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleSingletonTensorPureImage
 
 /-! # Pure sections in the normalized comparison range
 
-Source: Stacks Project, Tag 03P2, affine tensor calculation.
-(blueprint: new-etale-singleton-tensor-normalized-range) -/
+## References
+
+* Stacks Project, Tag 03P2
+-/
 
 @[expose] public section
 
@@ -25,17 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 noncomputable section
 
-/-- Every normalized pure section belongs to the evaluated comparison range.
-Source: Stacks Project, Tag 03P2, affine tensor calculation.
-(blueprint: new-etale-singleton-tensor-normalized-range)
-
-Proof: a generator has the form (product of projection pullbacks of b(k)) times
-restriction of m. Take ULift.up (m tensor tprod(b)) in the source. The normalization
-hypothesis identifies its image under f, followed by evaluation at the unique index
-and ULift.down, with the given generator. Hence the generator is in the range.
-This uses neither affineness nor quasi-coherence beyond that needed to state the
-complex; no assertion is made that these generators span all target sections.
--/
+/-- Every normalized pure section belongs to the evaluated comparison range (Stacks, Tag 03P2). -/
 theorem singletonTensorDegreeComparisonHom_normalized_range
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (n : ℕ)

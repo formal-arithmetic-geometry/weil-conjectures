@@ -15,21 +15,14 @@ import WeilConjectures.AlgebraicGeometry.CoherentIntegralGenericFreeNeighbourhoo
 import WeilConjectures.AlgebraicGeometry.CoherentIntegralGenericLatticeExtension
 import WeilConjectures.AlgebraicGeometry.CoherentIntegralGenericIdealSigma
 
-/-! Generic coherent ideal lattices. Source: Stacks Project, Tag 01YE. -/
+/-! Generic coherent ideal lattices (Stacks, Tag 01YE). -/
 
 @[expose] public section
 universe w
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The lattice construction before proving injectivity.
-
-Source: Stacks Project, Tag 01YE, first two paragraphs of the integral-case proof.
-(blueprint: lem-weil-pbc-coherent-integral-generic-ideal-map-construction).
-
-Extend a finite generic basis to an open neighbourhood. Extend that specific map
-from a coherent ideal lattice of the same rank. Its finite coproduct is coherent
-by the finite local generator argument, giving all the required witnesses. -/
+/-- The lattice construction before proving injectivity (Stacks, Tag 01YE). -/
 theorem coherent_integral_generic_ideal_construction (Z : Scheme.{w}) [IsNoetherian Z]
     [IsIntegral Z] (G : Z.Modules) (hG : RingedSpace.IsCoherent Z.toRingedSpace G) :
     ∃ (r : ℕ) (I : Z.IdealSheafData),

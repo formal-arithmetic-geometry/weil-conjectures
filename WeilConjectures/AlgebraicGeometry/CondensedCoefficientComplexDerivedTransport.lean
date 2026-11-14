@@ -265,27 +265,7 @@ private lemma tensorComp_complex_fac
     CategoryTheory.Functor.mapHomologicalComplexCompIso, NatIso.mapHomologicalComplex,
     Iso.trans_hom, Iso.app_hom, CategoryTheory.Functor.map_comp, Category.assoc] using hh
 
-/-- Exact localization preserves the coefficient tensor-comparison mate.
-
-Source: `Adjunction.mapDerivedCategoryAdjunction_unit_app_fac`,
-`Functor.mapDerivedCategoryCompIso_fac`, and `Functor.mapDerivedCategoryNatIso_fac`;
-the derived comparison definitions in the coefficient construction of archived
-`ModuleObject/Colimit/TwoColimit.lean`.
-(auxiliary; not a blueprint node)
-
-Proof: write the exact extension comparison as its left-derived-to-levelwise
-isomorphism followed by mapDerivedCategoryFactors. The localized ordinary unit
-is the derived unit followed by these factorizations for extension and
-restriction; this follows from the unit factorization on the homotopy category
-and naturality of quotientCompQhIso. Hence localizing an ordinary adjunction mate
-agrees with taking the derived mate after these comparisons. Expand the
-prescribed tensor comparison. Naturality cancels the exact-functor comparison
-isomorphisms; mapDerivedCategoryCompIso_fac and mapDerivedCategoryNatIso_fac
-identify its remaining factors with the localized ordinary tensor comparison.
-Apply these identities to the finite adjunction's counit at the extended complex,
-then to the algebraic-closure adjunction, and cancel inverse pairs. This yields
-Q of the ordinary transposed map followed by the explicit vertex comparison.
-The argument is for arbitrary complexes and uses no boundedness. -/
+/-- Exact localization preserves the coefficient tensor-comparison mate. -/
 theorem coefficientComplex_derived_mate_transport
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     {E F G : FiniteIntermediateField ℓ} (he : E ≤ G) (hf : F ≤ G)

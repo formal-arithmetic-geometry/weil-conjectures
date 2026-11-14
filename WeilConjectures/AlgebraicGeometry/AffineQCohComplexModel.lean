@@ -19,8 +19,9 @@ import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 
 /-! # K-flat module models on affine schemes
 
-Source: Stacks Project, perfect.tex, Tags 06Z0 and 08DV.
-(blueprint: lem-pc-affine-qcoh-complex-model).
+## References
+
+* Stacks Project, Tags 06Z0 and 08DV
 -/
 
 @[expose] public section
@@ -33,18 +34,8 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
-/-- Every quasi-coherent affine derived object has a K-flat module-complex model.
-Source: Stacks, perfect.tex, Tag 06Z0.
-(blueprint: lem-pc-affine-qcoh-complex-model).
-Proof: Apply the inverse of the affine quasi-coherent derived equivalence to Q.
-The localization functor from module complexes to their derived category is
-essentially surjective, so represent that inverse by a complex M. Apply the
-functor comparison with termwise tilde to this representative and then the
-counit of the equivalence. Resolve M by a K-flat module complex P. The
-localization and the equivalence invert its augmentation, and naturality of
-the tilde comparison identifies its image with Q of tilde of that augmentation.
-Compose with the inverse of this image to obtain the asserted isomorphism.
-This includes the zero complex and uses no boundedness condition. -/
+/-- Every quasi-coherent affine derived object has a K-flat module-complex model (Stacks, Tag 06Z0).
+-/
 theorem exists_affineQCohComplexModel
     {R : CommRingCat.{u}} (Q : schemeDerivedCategory (Spec R))
     (hQ : schemeDerivedQCohProperty (Spec R) Q) :

@@ -15,9 +15,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Unit laws on K-flat representatives
 
-Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product,
-and section-derived-pullback; the parent descent proof, step 3.
-(blueprint: lem-pc-derived-pullback-tensor-unit-kflat-coherence).
+## References
+
+* Stacks Project, Tag 079U
 -/
 
 @[expose] public section
@@ -300,24 +300,7 @@ set_option maxHeartbeats 600000 in
 -- The concrete sheaf tensor instances require extra elaboration heartbeats.
 /-- The explicitly constructed unit comparison satisfies both unit laws on Q(P)
 when P is K-flat. No statement about arbitrary derived objects is made here.
-Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product;
-parent unit proof, step 2, using the degree-zero unit computation of step 1.
-(blueprint: lem-pc-derived-pullback-tensor-unit-kflat-coherence).
-Proof: the unit complex U is the structure sheaf in degree zero and is K-flat.
-The supplied counit is invertible on K-flat representatives by uniqueness of
-left-derived functors and the recorded K-flat pullback computation. The source
-and target localization unit maps are invertible. For the left law substitute U
-and P into hμ; postcompose with the counit and localization tensorator. The
-normalization of η, namely the composite in derivedPullback_tensorUnitIso, removes
-the counit at U and leaves the image of the underived unit map mF.εIso. Check the
-remaining complex equality degree by degree and on each total-tensor summand.
-For p != 0 the U term is zero, so both maps vanish. For p = 0 and q = n,
-hφ and the single-complex comparison reduce the equality to mF.left_unitality
-on P.X n. Coproduct extensionality yields the complex equality; localization and
-cancellation yield the left law at Q(P). Repeat with P,U: summands with q != 0
-vanish, and the summand (n,0) reduces to mF.right_unitality on P.X n. This gives
-the right law. No associativity, braiding compatibility of μ, or boundedness of P
-is used. At the zero complex and on an empty scheme the same calculation applies. -/
+(Stacks, Tag 079U) -/
 theorem derivedPullback_tensor_unit_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]

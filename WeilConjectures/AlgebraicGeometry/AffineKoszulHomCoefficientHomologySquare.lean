@@ -18,7 +18,10 @@ import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 
 /-! # Homology transport for the finite free Koszul coefficient square
 
-Source: Stacks Project, Tags 0BQZ and 01HV. -/
+## References
+
+* Stacks Project, Tags 0BQZ and 01HV
+-/
 
 @[expose] public section
 
@@ -73,18 +76,8 @@ private theorem homology_coefficient_square
     (h₁.vert_comp h₂ |>.vert_comp h₃).w
 
 
-/-- The finite free coefficient square remains commutative on homology.
-Source: Stacks Project, Tag 0BQZ, displayed Hom coefficient square;
-Tag 01HV, exact associated sheafification.
-(blueprint: lem-sc-affine-koszul-hom-coefficient-homology-square).
-
-Proof: Apply the homology functor to the finite free complex coefficient square.
-The exact tilde and chart transport functors identify the homology of the
-mapped complex with the mapped homology. This comparison is natural in the
-coefficient reduction morphism. The natural extension homology isomorphisms
-then identify the integer-degree m homology with the natural-degree m homology.
-Compose the three commuting squares. No closed immersion or coefficient
-adjunction map is involved. -/
+/-- The finite free coefficient square remains commutative on homology (Stacks, Tags 0BQZ and 01HV).
+-/
 theorem affine_koszul_hom_coefficient_homology_square
     {Y : Scheme.{u}} (U : Y.affineOpens) (I : Ideal (Γ(Y, U.1)))
     (n m : ℕ) (f : Fin n → Γ(Y, U.1))

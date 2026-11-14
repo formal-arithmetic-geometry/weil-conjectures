@@ -55,26 +55,8 @@ private theorem singleAugmentation_quasiIso
 
 -- Transport through two module equivalences needs explicit sectionwise type comparison.
 set_option backward.isDefEq.respectTransparency false in
-/-- The augmented alternating section row of an injective internal module is exact.
-Source: Stacks Project, Tags 09A2, 01GE and 01GW; Hemo--Richarz--Scholbach,
-Lemma 5.3(1), the hypercover calculation.
-(auxiliary; not a blueprint node).
-Proof: reconstruct the section-ring sheaf and transport I through the proved
-internal/sectionwise module equivalence. Its forward functor leaves the underlying
-abelian sheaf and all restriction maps unchanged, and the equivalence preserves
-injectives. Lift the site morphism universe using ULiftHom and transport the
-ringed module along this site equivalence, preserving injectivity once more.
-The given represented matching-map epimorphisms imply local lifting of every
-finite compatible boundary. Apply the ringed hypercover injective augmentation
-exactness theorem: its augmented free-module resolution is locally exact, and
-Hom into the transported injective gives an injective augmentation, exactness at
-simplicial degree zero, and exactness in each positive degree. These are statements
-about functions on section groups. They identify definitionally with the underlying
-abelian section functions; expand the alternating differential to identify them
-with exactness of the abelian cochain row. The single-degree augmentation is
-therefore a quasi-isomorphism. Extension by zero preserves this quasi-isomorphism,
-and the canonical single-complex extension isomorphism identifies it with the
-augmentation asserted here. This also covers an empty W. -/
+/-- The augmented alternating section row of an injective internal module is exact (Stacks, Tags
+09A2, 01GE and 01GW; Hemo–Richarz–Scholbach, Lemma 5.3(1)). -/
 theorem condensedHypercoverInjectiveRow
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

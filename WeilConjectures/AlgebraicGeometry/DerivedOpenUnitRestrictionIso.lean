@@ -22,26 +22,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Restricting the unit of any right adjunction of open restriction is invertible.
-There are no compactness, quasi-coherence, closed support, or triangle hypotheses.
-Source: Stacks Project, Cohomology, Tags 08BS and 08FE (open restriction of direct image).
-(blueprint: lem-pc-derived-open-unit-restriction-iso).
-
-Proof: Let G be the concrete extension-by-zero functor (extension-by-zero presheaf
-followed by module sheafification), and F the over-site restriction. The theorem
-open_restriction_adjunction_exact supplies their exactness and an adjunction G to F.
-Localize the termwise complex adjunction at quasi-isomorphisms to obtain an adjunction
-between G.mapDerivedCategory and F.mapDerivedCategory. The existing theorem
-nonempty_openExtensionRestrictionIso gives G followed by F naturally isomorphic to
-the identity. Derive this isomorphism and use the derived composition and identity
-comparisons to identify G.mapDerivedCategory followed by F.mapDerivedCategory with
-the identity. Consequently the derived G is fully faithful. In the adjoint triple
-G.mapDerivedCategory to F.mapDerivedCategory to R, full faithfulness of the leftmost
-functor implies full faithfulness of R (Adjunction.Triple.fullyFaithfulEquiv).
-The supplied adjunction therefore has invertible counit, and its triangle identity
-makes F.mapDerivedCategory applied to its unit the inverse of that counit.
-This includes empty and entire opens and all unbounded complexes. No arbitrary
-existential witness is installed in a definition; adjunctions and isomorphisms are
-eliminated only inside this proof. -/
+There are no compactness, quasi-coherence, closed support, or triangle hypotheses
+(Stacks, Tags 08BS and 08FE). -/
 theorem derived_open_unit_restriction_isIso
     (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

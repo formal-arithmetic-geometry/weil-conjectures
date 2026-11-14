@@ -13,9 +13,9 @@ import WeilConjectures.AlgebraicGeometry.PrefixDeletionRestrictions
 /-!
 # The unsigned prefix-deletion correspondence
 
-Source: Stacks Project, Tag 01FM, equation-first-homotopy (Tag 01FN), omitted
-verification, prefix-deletion part.
-(blueprint: lem-pc-alternating-cech-prefix-deletion-bijection)
+## References
+
+* Stacks Project, Tags 01FM and 01FN
 -/
 
 @[expose] public section
@@ -26,9 +26,8 @@ universe v
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Valid outgoing prefix-deletion indices, with the original order of summation.
-Source: Stacks 01FM, equation-first-homotopy.
-(blueprint: lem-pc-alternating-cech-prefix-deletion-bijection) -/
+/-- Valid outgoing prefix-deletion indices, with the original order of summation (Stacks, Tag 01FM).
+-/
 abbrev CechPrefixOutgoing {I : Type v} [LinearOrder I] (p : ℕ)
     (t : Fin (p + 2) → I) :=
   {x : Equiv.Perm (Fin (p + 2)) × Fin (p + 2) ×
@@ -36,9 +35,7 @@ abbrev CechPrefixOutgoing {I : Type v} [LinearOrder I] (p : ℕ)
     (cechStableSort t x.1 ∧ cechPartialSort x.1 x.2.2.1 x.2.1) ∧
       x.2.2.2.val < x.2.1.val}
 
-/-- Valid incoming faces whose omitted label precedes the remaining junction.
-Source: Stacks 01FM, equation-first-homotopy.
-(blueprint: lem-pc-alternating-cech-prefix-deletion-bijection) -/
+/-- Valid incoming faces whose omitted label precedes the remaining junction (Stacks, Tag 01FM). -/
 abbrev CechPrefixIncoming {I : Type v} [LinearOrder I] (p : ℕ)
     (t : Fin (p + 2) → I) :=
   {y : Fin (p + 2) × Equiv.Perm (Fin (p + 1)) × Fin (p + 1) ×
@@ -50,27 +47,7 @@ abbrev CechPrefixIncoming {I : Type v} [LinearOrder I] (p : ℕ)
         y.1 < y.1.succAbove (y.2.1 y.2.2.1)))}
 
 /-- Prefix deletion is an unsigned bijection, identifying both smaller
-permutations with restrictions of the larger ones.
-
-Source: Stacks 01FM, equation-first-homotopy (01FN), omitted verification;
-the prefix labelled-deletion argument of the parent node.
-
-Proof: For an outgoing index (σ,a,τ,r), r<a implies r<p+2. Put j=σ(r)=τ(r).
-Delete position r and label j from σ and τ, renumbering all remaining labels by
-j.succAbove, and put b=a-1. Stable sorting is preserved because the increasing
-renumbering preserves the tie-breaking order on labels. The restricted τ agrees
-with the restricted σ before b and remains increasing from b onward, so it is the
-partial sort with prefix b. Since r<a, the omitted pair (t(j),j) precedes the
-remaining junction pair.
-Conversely, for an incoming (j,σ',b,τ'), insert j at its rank r in the stable order
-of the full label set. The before condition says r≤b, hence r<b+1. Insert j into
-both smaller permutations at position r and set a=b+1. Their prefixes agree,
-and increasing tails and stable sorting are preserved. Deletion and insertion
-are inverse, since the stable rank is unique and increasing renumbering is
-injective. This includes b=0 and b=p, and repeated t-values are resolved by the
-original labels; for an empty I there is no input t.
-No signs or sums occur in this correspondence.
-(blueprint: lem-pc-alternating-cech-prefix-deletion-bijection) -/
+permutations with restrictions of the larger ones (Stacks, Tags 01FM and 01FN). -/
 theorem cechPrefixDeletionBijection {I : Type v} [LinearOrder I] (p : ℕ)
     (t : Fin (p + 2) → I) :
     ∃ e : CechPrefixOutgoing p t ≃ CechPrefixIncoming p t, ∀ x,

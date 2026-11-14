@@ -13,8 +13,9 @@ import Mathlib.Topology.Sheaves.Abelian
 
 /-! # Local lifting of Zariski units along closed immersions
 
-Source: Stacks Project, Varieties, Lemma 09NY, opening short exact sequence
-(blueprint: lem-sc-closed-immersion-zariski-units-epi).
+## References
+
+* Stacks Project, Tag 09NY
 -/
 
 @[expose] public section
@@ -24,18 +25,8 @@ open CategoryTheory TopologicalSpace Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Restriction of units along a closed immersion is an epimorphism of abelian sheaves.
-Source: Stacks Project, Varieties, Lemma 09NY, opening short exact sequence
-(blueprint: lem-sc-closed-immersion-zariski-units-epi).
-
-Proof: At a point of Z, the map of local rings is surjective and local. Lift the germ
-of a unit; locality implies that its lift is a unit. Represent the lift on a neighbourhood
-in X, and shrink to its basic open to make the representative invertible. Equality of
-germs gives equality with the prescribed unit on a neighbourhood in Z. For a closed
-embedding, this neighbourhood contains the inverse image of a neighbourhood in X:
-remove the closed image of its complement. Outside Z, remove its closed image; the
-inverse-image open is empty and its units group is trivial. These local lifts prove
-epimorphy by the locally-surjective criterion. -/
+/-- Restriction of units along a closed immersion is an epimorphism of abelian sheaves
+(Stacks, Tag 09NY). -/
 theorem epi_unitsSheafToPushforward_of_isClosedImmersion
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
     Epi (unitsSheafToPushforward i) := by

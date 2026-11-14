@@ -19,8 +19,9 @@ import WeilConjectures.AlgebraicGeometry.SchemeIsoNestedOpenFiniteFreeModel
 
 /-! # Pointwise pseudo-coherent localization on an affine open
 
-Source: Stacks Project, Tags 08EE and 08E7
-(blueprint: lem-sc-affine-open-pseudo-coherent-localization-point).
+## References
+
+* Stacks Project, Tags 08EE and 08E7
 -/
 
 @[expose] public section
@@ -43,24 +44,7 @@ local instance instAdditiveModuleCatExtendScalars_affineOpenPseudoCoherentLocali
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Pseudo-coherence of a fixed associated-sheaf complex on an open supplies a
-pseudo-coherent localization near each point of that open.
-Source: Stacks Project, Tags 08EE and 08E7, local-model step
-(blueprint: lem-sc-affine-open-pseudo-coherent-localization-point).
-
-Proof: At x use the finite-free neighbourhood model in the definition of
-pseudo-coherence on U. Its image in X is an open neighbourhood W contained in U.
-The affine principal-open basis gives f with x in D(f) contained in W.
-Transport X and W along X.isoSpec, and transport the finite-free model along
-this isomorphism and the equivalence of the open scheme with its localized site.
-Exact restriction preserves the upper bound and every finite free term: its
-comparison with the unit sheaf and preservation of coproducts give the same ranks.
-The derived restriction composition comparison transports the model isomorphism.
-Use hT to identify the transported complex with termwise tilde of M on Spec A.
-Apply affine_pseudoCoherent_principal_model to W and D(f). This gives the
-pseudo-coherence of Q(M_f). No compactness or global finite cover is used.
-For empty U there is no point to consider; empty principal opens cause no issue,
-since their rings are zero and the principal-model theorem includes the zero ring.
--/
+pseudo-coherent localization near each point of that open (Stacks, Tags 08EE and 08E7). -/
 theorem affine_open_pseudoCoherent_localization_point
     (X : Scheme.{u}) [IsAffine X] (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

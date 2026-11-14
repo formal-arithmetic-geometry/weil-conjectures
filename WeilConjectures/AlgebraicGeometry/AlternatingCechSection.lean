@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.SignedCechExtension
 /-!
 # Ordered restriction admits a cochain section
 
-Source: Stacks Project, Cohomology of Sheaves, Tags 01FJ, 01FK and 01FM.
+## References
+
+* Stacks Project, Tags 01FJ, 01FK and 01FM
 -/
 
 @[expose] public section
@@ -26,20 +28,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Ordered restriction admits a cochain section.
-
-Source: Stacks Project, Cohomology of Sheaves, Tags 01FJ and 01FK.
-(blueprint: lem-pc-alternating-cech-section)
-
-Proof: Construct signed extension on ordered coordinates by sorting every injective
-tuple, multiplying by its sorting sign, and restricting along the corresponding
-index map; on repeated tuples use zero. This is additive and is the identity on
-increasing tuples. Composing with e gives degree maps f, and hr shows f_p followed
-by r_p is the identity. Apply the chain-map equation for r to f_p(a): the ordered
-coordinates of d(f_p(a)) are e_{p+1}(d_A(a)). The signed-extension differential
-lemma says d(f_p(a)) is the signed extension of these coordinates, which is exactly
-f_{p+1}(d_A(a)). The degree maps therefore assemble into a cochain map i, and their
-section identities imply i followed by r is the identity. -/
+/-- Ordered restriction admits a cochain section (Stacks, Tags 01FJ and 01FK). -/
 theorem alternatingCechRestrictionHomotopy_map (X : Scheme.{u}) {I : Type v} [LinearOrder I]
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})
     (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)))

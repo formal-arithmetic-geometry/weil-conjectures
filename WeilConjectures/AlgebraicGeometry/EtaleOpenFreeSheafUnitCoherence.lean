@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleOpenSectionPullback
 
 /-! # Identity-generator coherence for nested open subschemes
 
-Source: Stacks Project, Tag 03F3, and the open-restriction adjunction unit calculation.
+## References
+
+* Stacks Project, Tag 03F3
 -/
 
 @[expose] public section
@@ -22,25 +24,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- The identity generator restricts to the inclusion generator on a smaller open.
-Source: Stacks Project, Tag 03F3, localization restriction; the explicit adjunction
-unit calculation in open_restriction_pullback_unit.
-(blueprint: lem-weil-pbc-etale-open-free-sheaf-unit-coherence)
-
-Proof: Apply the constant-sheaf adjunction at the terminal object of V to both sides.
-On the left, etaleOpenFreeSheafUnit V is the identity generator of the free sheaf
-at V. The free-representable map sends this generator to the inclusion V to U.
-On the right, the constant pullback comparison sends 1 to 1, and pulling back the
-identity generator at U gives the same inclusion generator over V. To check this
-with the specified inverse-image comparisons, apply open_restriction_pullback_unit
-with g equal to U.ι and W equal to V. The fibre product V times_X U identifies
-with V, since V is contained in U and U.ι is a monomorphism. The identity unit
-cancels against the identity comparison. The inverse-image composition unit equation
-then identifies the two successive restriction comparisons with the direct one.
-Naturality of sheafification and of the free functor sends the generator associated
-to the identity of V to the generator associated to X.homOfLE h. Thus both sides
-classify the same section, and the adjunction bijection proves the equality.
-This calculation is valid for equal opens and for the empty open as well. -/
+/-- The identity generator restricts to the inclusion generator on a smaller open
+(Stacks, Tag 03F3). -/
 theorem etaleOpenFreeSheafUnit_coherence {X : Scheme.{u}}
     (U V : X.Opens) (h : V ≤ U) :
     etaleOpenFreeSheafUnit V ≫

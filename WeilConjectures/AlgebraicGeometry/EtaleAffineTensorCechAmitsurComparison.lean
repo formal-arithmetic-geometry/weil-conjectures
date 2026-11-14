@@ -16,8 +16,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleOverCoproductCechComparison
 import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorAmitsur
 
 /-! # Affine tensor-section Čech complexes as Amitsur complexes
-Source: Stacks Project, Tags 03OZ and 03P2, affine-case proof.
-(blueprint: new-etale-affine-tensor-cech-amitsur-comparison).
+
+## References
+
+* Stacks Project, Tags 03OZ and 03P2
 -/
 
 @[expose] public section
@@ -31,22 +33,7 @@ namespace AlgebraicGeometry.Scheme
 set_option autoImplicit false
 
 /-- The finite affine tensor-section Čech complex is a lifted Amitsur complex.
-Source: Stacks Project, Tag 03OZ and Tag 03P2, proof in the affine case.
-(blueprint: new-etale-affine-tensor-cech-amitsur-comparison)
-
-Proof: form W as the finite scheme coproduct of the V i, with its canonical map to U.
-The covering sieve makes this map surjective. It is étale by locality at the source,
-and W is affine since a finite coproduct of affine schemes is affine. The affine
-flat-and-surjective criterion makes g.appTop faithfully flat. Thus B = Γ(W, O_W)
-and a = g.appTop are explicit constructions, independent of any existence theorem.
-Apply nonempty_etale_over_coproduct_cech_iso to the lifted tensor-section sheaf,
-using the coproduct cone and the coprojection factorization equations. Apply
-nonempty_etale_affine_singleton_tensor_amitsur_iso to the affine map W → U and
-compose the resulting complex isomorphisms. The first comparison uses only the
-sheaf property and coproduct distribution; the second uses affine fibre products
-and the pure-tensor pullback formula, without faithful flatness. If I is empty,
-W is the empty coproduct; surjectivity then forces U empty. The same constructions
-and the two comparison theorems apply, without a separate choice of zero rings. -/
+(Stacks, Tags 03OZ and 03P2) -/
 theorem exists_etaleTensorSectionsSheaf_ulift_cech_amitsur_iso
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U : X.Etale) (I : Type (u + 1)) (V : I → X.Etale) (f : ∀ i : I, V i ⟶ U)

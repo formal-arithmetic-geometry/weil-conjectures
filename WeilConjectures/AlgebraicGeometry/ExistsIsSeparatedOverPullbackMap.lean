@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.OverPullbackDiagonalClosedImmersion
 /-!
 # Separatedness descends to a finite stage
 
-Source: Stacks Project, Limits, Lemma 01ZQ in Situation 081D
-(blueprint: lem-weil-pbc-descend-separated).
+## References
+
+* Stacks Project, Tags 01ZQ and 081D
 -/
 
 @[expose] public section
@@ -29,24 +30,8 @@ namespace AlgebraicGeometry
 
 /-- For a morphism between qcqs schemes over a qcqs stage of an inverse system with affine
 transitions, separatedness after base change to the limit implies separatedness after
-base change to some later stage. No finiteness assumption on the morphism is required.
-
-Source: Stacks Project, Limits, Lemma 01ZQ in Situation 081D
-(blueprint: lem-weil-pbc-descend-separated).
-
-Proof:
-1. The diagonal of the limit morphism is a closed immersion by separatedness
-   (def-weil-proper-morphism). The stage diagonal is an immersion
-   (lem-weil-pbc-diagonal-immersion, Schemes 01KJ), hence locally of finite type
-   (lem-weil-pbc-immersion-base-change-lft, Morphisms 01T5). Its source and target are qcqs:
-   a morphism between qcqs schemes is quasi-compact and quasi-separated, these properties
-   survive base change, and composing with the qcqs structure morphism gives the qcqs
-   fibre product (lem-weil-pbc-qcqs-morphism-permanence).
-2. Apply closed-immersion descent (lem-weil-pbc-descend-closed-immersion, Limits 01ZP) to
-   the stage diagonal. The canonical identifications between base changes of fibre products
-   and fibre products of base changes preserve both projections and the diagonal
-   (def-pc-fibre-product). Thus the diagonal at some later stage is a closed immersion,
-   and the base-changed morphism there is separated (def-weil-proper-morphism). -/
+base change to some later stage. No finiteness assumption on the morphism is required
+(Stacks, Tags 01ZQ and 081D). -/
 theorem Scheme.exists_isSeparated_overPullbackMap
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

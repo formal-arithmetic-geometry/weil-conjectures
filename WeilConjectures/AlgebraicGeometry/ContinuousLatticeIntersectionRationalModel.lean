@@ -24,18 +24,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- On compact covering schemes the canonical intersection has a rational
-finite-matrix kernel presentation.
-Source: Bhatt--Scholze, Lemma 6.8.13; the intersection argument is an agent variant.
-(auxiliary; not a blueprint node)
-
-Proof. Take the split-cover model. The integral localization unit is monic on
-its standard finite free module, so the image-pullback is the intersection of two
-subobjects. In an abelian category this intersection is the kernel of the second
-subobject's map to the first quotient. Restriction of scalars preserves cokernels;
-transport this quotient along the supplied rational finite free cokernel basis.
-The resulting kernel map is exactly the integral adjoint of the rational quotient
-projection. That projection is epi, being a cokernel map followed by an isomorphism.
-All maps are canonical categorical maps; no denominator clearing is used here. -/
+finite-matrix kernel presentation (Bhatt–Scholze, Lemma 6.8.13). -/
 theorem continuousLatticeIntersection_rationalModel
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u})

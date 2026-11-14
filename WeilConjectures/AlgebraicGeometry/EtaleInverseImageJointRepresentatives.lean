@@ -18,9 +18,9 @@ import Mathlib.CategoryTheory.Sites.LocallySurjective
 /-!
 # Simultaneous local representatives for étale inverse images
 
-Source: Stacks Project, Tag 09XN (description of inverse image) and Tag 00YV
-(inverse image commutes with algebraic structures).
-(blueprint: lem-sc-etale-inverse-image-joint-representatives)
+## References
+
+* Stacks Project, Tags 09XN and 00YV
 -/
 
 @[expose] public section
@@ -58,22 +58,7 @@ private theorem pair_section {C : Type*} [Category C] (E : C ⥤ Type (u + 1))
       _ = b := congrArg Prod.snd he
 
 /-- Any pair of sections of an abelian and a set inverse image is locally pulled back
-from a pair of sections on the same étale object.
-
-Source: Stacks Project, Tags 09XN and 00YV.
-(blueprint: lem-sc-etale-inverse-image-joint-representatives)
-
-Proof: Forget the abelian sheaf to sets. The abelian and set inverse images are
-identified by the comparison compatible with the adjunction units (00YV). Set inverse
-image preserves binary products. Regard the given pair as a section of the inverse
-image of the product of the two set sheaves. The sheafification unit is locally
-surjective, so on a covering sieve it has representatives in the left Kan extension.
-Each such representative comes from one object of the Kan indexing category (09XN).
-Project the representing product section to its two factors. Naturality of both
-projections and compatibility of the abelian comparison with units give the two
-identities. This argument works at every test object, not just the terminal one.
-Empty sections cause no exception: their pair exists only when both factors do;
-on an empty test scheme the empty sieve covers. -/
+from a pair of sections on the same étale object (Stacks, Tags 09XN and 00YV). -/
 theorem etaleInverseImage_joint_representatives
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

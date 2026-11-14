@@ -16,8 +16,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # External global sections on two affine factors
 
-Source: Stacks Project, Tag 0BED, affine charts of equation-kunneth-on-cech.
-(blueprint: lem-sc-external-global-sections-tensor-affine).
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section
@@ -60,26 +61,8 @@ private theorem externalTensorAlgebraEquiv_tmul
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Before taking the sheaf tensor product, the two projection-pullback section modules
-have tensor product equal to the tensor product of the original sections over the field.
-Source: Stacks Project, Tag 0BED, affine computation in lemma-kunneth.
-
-Proof: Put A = Gamma(X,O), B = Gamma(Y,O), M = Gamma(X,F), N = Gamma(Y,G),
-and C = Gamma(X times_k Y,O). The affine spectrum fibre-product formula identifies C
-with A tensor_k B, compatibly with both projection ring maps. Apply the affine pullback
-section comparison to each projection: its canonical formula takes m tensor c to
-c times the projection pullback of m. These comparisons are C-linear bijections,
-so tensoring them over C gives a bijection of tensor products of section modules.
-The algebraic identification (M tensor_A C) tensor_C (N tensor_B C) with M tensor_k N
-sends (m tensor (a tensor b)) tensor (n tensor (a' tensor b')) to
-(a*a') times m tensor (b*b') times n. Its inverse sends m tensor n to
-(m tensor 1) tensor (n tensor 1). Balance over A, B, and C makes these maps
-well-defined; induction on the ring tensors and module tensors proves both inverse
-identities. Compose the inverse with the two pullback-section comparisons and forget
-scalar linearity. The pure-tensor formula follows from the comparisons at c = 1.
-No sheaf tensor-section comparison is used here: the codomain is a tensor product
-of ordinary section modules. If either scheme is empty, its coordinate ring and
-section modules vanish, so the same formulas and inverse identities still apply.
-Zero coefficients are covered by these identities as well. -/
+have tensor product equal to the tensor product of the original sections over the field
+(Stacks, Tag 0BED). -/
 private theorem exists_affine_projection_sections_tensor
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
@@ -190,24 +173,8 @@ private theorem exists_affine_projection_sections_tensor
   rw [hd, TensorProduct.congr_tmul, hF, hG]
 
 
-/-- On two affine schemes the canonical external tensor comparison is bijective.
-Source: Stacks Project, Tag 0BED, affine computation in lemma-kunneth.
-(blueprint: lem-sc-external-global-sections-tensor-affine).
-
-Proof: Write A = Gamma(X,O), B = Gamma(Y,O), M = Gamma(X,F), N = Gamma(Y,G).
-The affine chart isomorphisms identify the product with Spec(A tensor_k B). The affine
-pullback-section comparisons identify the two pulled-back modules with the scalar
-extensions of M and N to A tensor_k B. The affine tensor-section comparison identifies
-the external coefficient sections with their tensor product over A tensor_k B.
-The algebraic isomorphism from this tensor product to M tensor_k N sends
-(m tensor b) tensor (a tensor n) to (a*m) tensor (b*n). Its inverse sends m tensor n
-to (m tensor 1) tensor (1 tensor n). The balance relations over A, B and A tensor_k B
-make these well-defined, and tensor induction proves the two inverse identities.
-The pure-tensor formulas for the pullback-section comparisons and tensor-section map
-show that the composite inverse is precisely the external section map: it takes
-s tensor t to the tensor of the two projection pullbacks. Tensor induction identifies
-these linear maps on all inputs. Thus the canonical map is bijective. Zero rings,
-empty affine schemes and zero coefficients satisfy the same algebraic identities. -/
+/-- On two affine schemes the canonical external tensor comparison is bijective (Stacks, Tag 0BED).
+-/
 theorem externalGlobalSectionsTensor_bijective_of_isAffine
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

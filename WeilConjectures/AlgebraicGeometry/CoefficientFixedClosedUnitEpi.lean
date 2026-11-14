@@ -10,8 +10,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Det
 
 /-! The canonical coefficient-sized closed localization unit.
 
-Source: Stacks Project, proetale.tex, Tags 09AH and 09AF.
-(auxiliary; not a blueprint node)
+## References
+
+* Stacks Project, Tags 09AH and 09AF
 -/
 
 @[expose] public noncomputable section
@@ -269,10 +270,7 @@ attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- **Restrictions along a quasi-compact jointly surjective family detect sections.** Let
 `g k : Z k ⟶ U` be finitely many quasi-compact morphisms jointly covering `U`. A section `s` of
 a pro-étale sheaf of modules `F` on `U` whose images under the units `F ⟶ (g k)_* (g k)^* F` all
-vanish is zero: `s` vanishes on weakly étale neighbourhoods of the points of every
-`V ×_U Z k` (`AlgebraicGeometry.ProEtale.rawLocalVanish`), and these
-neighbourhoods form a pro-étale cover of `V`
-(`AlgebraicGeometry.QuasiCompactCover.of_comp_factor`). -/
+vanish is zero. -/
 private theorem rawDetectSections
     (R : Type (max v (u + 1))) [CommRing R] {U : Scheme.{u}}
     {κ : Type*} [Finite κ] {Z : κ → Scheme.{u}}
@@ -417,25 +415,7 @@ private theorem rawUnitEpi (A : Type (max v (u + 1))) [CommRing A]
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The canonical inverse/direct-image unit of a closed immersion is epic.
-Source: Stacks Project, Tag 09AH, lemma-ses-associated-to-open, and Tag 09BK,
-lemma-closed-immersion-affines
-(auxiliary; not a blueprint node).
-
-Proof: work first on the original sites with modules in the independent coefficient
-universe. On affine pro-etale bases the closed-site adjunction has invertible unit,
-so presheaf precomposition and then sheaf direct image are fully faithful. An affine
-closed immersion is isomorphic to a quotient immersion; hence its sheaf counit is
-invertible. The closed pullback of the unit is therefore invertible by a triangle
-identity. Its target restricts to zero on the complementary open, since sections
-there are evaluated on empty fibre products. The closed and open restrictions
-jointly detect zero morphisms: local injectivity of sheafification and filtered
-module colimits turn vanishing inverse images into local vanishing, and the finite
-quasi-compact jointly surjective family combines these neighborhoods into a cover.
-Thus any morphism killed by precomposition with the unit is zero, proving it epic.
-Transport the adjunction through the two AsSmall sheaf equivalences. Uniqueness
-of left adjoints, with its unit identity, identifies its epic unit with the displayed
-canonical unit up to an invertible factor. No size bound on A, nonempty scheme,
-reducedness, or splitting of the closed immersion is used. -/
+(Stacks, Tags 09AH, 09BK) -/
 theorem coefficientFixed_closed_unit_epi
     (A : Type (max v (u + 1))) [CommRing A]
     {X Z U : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) (j : U ⟶ X)

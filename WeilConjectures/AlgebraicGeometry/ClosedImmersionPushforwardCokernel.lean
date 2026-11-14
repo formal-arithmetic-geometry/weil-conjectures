@@ -16,9 +16,9 @@ import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Closed pushforward preserves cokernels
 
-Source: Stacks Project, Sheaves, Lemma 00AE; Modules, Lemma 01AG; Modules on Sites,
-Lemma 03DA. This supplies the exactness used in the proof of Lemma 088A.
-(blueprint: lem-weil-pbc-closed-immersion-pushforward-cokernel).
+## References
+
+* Stacks Project, Tags 00AE, 01AG and 03DA
 -/
 
 @[expose] public section
@@ -30,21 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Closed pushforward preserves the cokernel of any module morphism.
-Source: Stacks Project, Sheaves, Lemma 00AE; Modules, Lemma 01AG; Modules on Sites,
-Lemma 03DA. The following stalk argument writes out closed-direct-image exactness,
-as used in Cohomology of Schemes, proof of Lemma 088A, lines 6961--6968.
-(blueprint: lem-weil-pbc-closed-immersion-pushforward-cokernel).
-
-Proof: The underlying map of a closed immersion is a closed embedding. At a point in
-its image the stalk of the direct image is the original stalk, with scalars restricted
-along the map of local rings. Away from the image the stalk is zero: the open complement
-is a neighbourhood disjoint from the source. Restriction of scalars is exact, and stalks
-of module sheaves are exact and detect exactness. Hence direct image carries the exact
-sequence A → B → cokernel f → 0 to an exact sequence. In an abelian category this says
-that the pushed quotient projection is a cokernel of the pushed f. Equivalently, the
-functor preserves the colimit of parallelPair f 0. This argument applies to all module
-sheaves and needs neither quasi-coherence nor finite generation. For the empty source
-all objects push forward to zero, so the assertion remains valid. -/
+(Stacks, Tags 00AE, 01AG, 03DA) -/
 theorem closedImmersion_pushforward_preservesCokernel
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     {A B : Z.Modules} (f : A ⟶ B) :

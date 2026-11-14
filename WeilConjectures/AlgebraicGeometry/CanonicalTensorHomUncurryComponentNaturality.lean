@@ -11,8 +11,9 @@ import WeilConjectures.Algebra.Homology.HomComplexProjections
 
 /-! # Naturality of one tensor-Hom evaluation component
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0A90.
-(blueprint: lem-pc-tensor-hom-uncurry-component-naturality).
+## References
+
+* Stacks Project, Tag 0A90
 -/
 
 @[expose] public section
@@ -98,27 +99,8 @@ private theorem hom_uncurry_natural {C : Type u} [Category.{u} C] {J : Grothendi
       (SheafOfModules.tensorHomEquiv (R := R) (L'.X q) (P'.X p) (N'.X n)).symm t) hp
   exact he.trans hu
 
-/-- Evaluation on a single degree pair commutes with simultaneous chain maps.
-Source: Stacks Project, sites-cohomology.tex, Tag 0A90, functoriality of the
-Hom-total-tensor comparison; cohomology.tex, Tag 08DJ, componentwise evaluation.
-(blueprint: lem-pc-tensor-hom-uncurry-component-naturality).
-
-Proof: Let π be the chosen product projections of homComplex_exists and set
-I = schemeHomKInjectiveResolution X. Its map specification gives
-Hom(b,I(c)).f p followed by π(L',I(M'),p,q,n) equal to
-π(L,I(M),p,q,n) followed by homObjMap(b.f q,I(c).f n).
-Precompose this equation by a.f p followed by φ.f p. Apply the inverse
-sheaf tensor-Hom equivalence. Naturality in its free variable precomposes
-uncurrying by L'^q tensor a.f p; naturality in its Hom source precomposes
-by b.f q tensor P^p; naturality in its target postcomposes by I(c).f n.
-The two whiskerings combine to b.f q tensor a.f p. Naturality of the
-braiding moves that tensor map past the symmetry and changes its order
-to a.f p tensor b.f q. The definition of schemeTensorHomUncurryComponent
-then identifies both sides with the displayed equality. No coproduct,
-differential, localization, or flatness argument enters this calculation.
-Identity maps give the original component; a zero map in any variable
-gives zero on both sides by the additivity of internal Hom and tensor.
-The argument uses only q+p=n, and applies in every integer degree. -/
+/-- Evaluation on a single degree pair commutes with simultaneous chain maps
+(Stacks, Tags 0A90 and 08DJ). -/
 theorem schemeTensorHomUncurryComponent_natural (X : Scheme.{u})
     (P P' L L' M M' : CochainComplex
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)

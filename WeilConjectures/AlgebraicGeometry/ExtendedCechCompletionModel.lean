@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.RingComplexGodementFunctorial
 /-!
 # Global extended Cech model and its derived completion unit
 
-Source: Stacks Project, algebraization.tex, Tags 099E and 099F
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 099E and 099F
 -/
 
 @[expose] public section
@@ -45,19 +46,7 @@ private theorem compose_three_squares {D : Type*} [Category D]
 -- Descending evaluation compares several expanded product-localization functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- The actual augmentation-induced completion unit is natural for every augmented
-complex, without a boundedness or completeness hypothesis.
-
-Source: Stacks Project, algebraization.tex, Tag 099F; sites-cohomology.tex, Section 08J7.
-(auxiliary; not a blueprint node).
-
-Proof: on complexes, compose the functorial K-injective replacement map with inverse
-evaluation at one and the localization factorization of derived internal Hom. Evaluation
-at one commutes with postcomposition, so this is a natural transformation on complexes.
-Fully faithful whiskering with localization descends it to the derived category. Its
-component on each chosen localization representative equals ringedDerivedHomUnit by
-naturality at that representative isomorphism. Precomposition with the augmentation
-commutes with every postcomposition map in the internal-Hom bifunctor. Composing the
-two squares proves the displayed equation for the actual completion unit. -/
+complex, without a boundedness or completeness hypothesis (Stacks, Tags 099F and 08J7). -/
 theorem completion_unit_natural
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})
@@ -170,17 +159,7 @@ private theorem unit_isIso_of_complete_universal
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The global augmented model exists.
-Source: Stacks Project, algebraization.tex, Tag 099E.
-(auxiliary; not a blueprint node).
-
-Proof: take the cover indexed by all specified finite generating lists. Sheafify the
-concrete Godement ring family on each slice. The independence-of-ideals descent theorem
-and effective gluing of augmented complexes give a global augmented complex. For any
-generating list, compose its derived Čech comparison with the inverse local gluing
-isomorphism and the comparison for derived restriction. Naturality of the latter and
-the two augmentation squares give the required augmented local description.
--/
+/-- The global augmented model exists (Stacks, Tag 099E). -/
 theorem exists_ringedExtendedCech_global_model
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (O : Sheaf J CommRingCat.{u})
@@ -236,15 +215,8 @@ theorem exists_ringedExtendedCech_global_model
           (fac.app K).inv ≫ z ≫ DerivedCategory.Q.map a.hom) hn
     _ = _ := by rw [hε]; exact hβ
 
-/-- The internal-Hom reflector properties of every local extended Cech model.
-Source: Stacks Project, algebraization.tex, Tags 099B and 099F.
-(auxiliary; not a blueprint node).
-
-Proof: on each finite-generator slice, contract the localized extended Cech complex, filter the
-augmentation cone by its positive localization terms, and use the internal-Hom tensor identity
-to prove orthogonality. Globalize by restriction and use zeroth derived global sections for the
-mapping bijection; the unit isomorphism follows from the resulting universal property.
--/
+/-- The internal-Hom reflector properties of every local extended Cech model
+(Stacks, Tags 099B and 099F). -/
 theorem ringedExtendedCech_reflector_properties
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (O : Sheaf J CommRingCat.{u})

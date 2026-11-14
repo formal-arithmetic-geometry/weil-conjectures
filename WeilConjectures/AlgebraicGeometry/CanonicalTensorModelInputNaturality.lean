@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorCompariso
 
 /-! # Naturality of the localization tensor model
 
-Source: Stacks Project, cohomology.tex, Tag 08DJ, and sites-cohomology.tex,
-Tags 0A90 and 0A96. (blueprint: lem-pc-tensor-model-input-naturality).
+## References
+
+* Stacks Project, Tags 08DJ, 0A90 and 0A96
 -/
 
 @[expose] public section
@@ -24,21 +25,8 @@ universe u w
 open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
-/-- The canonical tensor model map commutes with a chain map in its first variable.
-Source: Stacks Project, cohomology.tex, Tag 06YH (derived tensor construction), and
-Tag 08DJ (representative tensor-Hom comparison).
-(blueprint: lem-pc-tensor-model-input-naturality).
-
-Proof: The map pullbackTensorModelMap is the lax monoidal structure map μ of Q,
-using the shared sheaf tensor, total-complex tensor, and derived tensor instances.
-Apply Functor.LaxMonoidal.μ_natural to f and the identity of L. Q preserves the
-identity, and the tensor of chain maps is mapBifunctorMap f (identity L) by the
-definition of HomologicalComplex.tensorHom. These substitutions give exactly the
-stated equation. Match the local monoidal instances to the instances used in the
-definition of pullbackTensorModelMap; its auxiliary additivity, flat resolution,
-Grothendieck and colimit proofs are propositions, hence proof irrelevant. The
-statement requires no K-flatness: invertibility of μ is not used. It holds for zero
-maps, zero complexes and identity maps, directly by lax monoidal naturality. -/
+/-- The canonical tensor model map commutes with a chain map in its first variable
+(Stacks, Tags 06YH and 08DJ). -/
 theorem tensorModelMap_input_natural (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (P P' L : CochainComplex

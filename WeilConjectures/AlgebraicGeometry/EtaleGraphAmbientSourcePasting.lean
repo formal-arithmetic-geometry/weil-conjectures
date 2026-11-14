@@ -10,8 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.OpenExchangeTower
 
 /-! # Source-lift subgrid of ambient projection pasting
 
-Source: Stacks Tags 0F7C and 0F7J, the e-side part of the ambient product grid.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 0F7C and 0F7J
 -/
 
 @[expose] public noncomputable section
@@ -275,24 +276,8 @@ private theorem source_grid
     congrArg (fun m ↦ n.hom.app _ ≫ P.map m ≫ cT.hom.app _ ≫ cR.inv.app _) hc
 
 /-- The e-side lift agrees with the source ambient change followed by the inverse B
-exchange. This statement contains no exchange for the supplied k-square or for Q.
-
-Source: Stacks Tag 0F7C (vertical pasting), applied to step 2 of
-lem-pur-etale-graph-product-ambient-pasting; Tag 0F7J, A--F comparison.
-(auxiliary; not a blueprint node).
-
-Proof: paste B above the e-side square. Their proper left composite is BW qH=qF,
-and their proper right composite is BV qN=prF, by the two pullback projections.
-The outer square is the Cartesian f-side square. Replace its Cartesian exchange
-by the normalized exchange and expand vertical pasting. Multiply by the inverse
-B exchange to solve for the e-side exchange. Whisker by the proper initial graph
-and the final proper maps. Naturality moves each proper compositor past the
-adjacent exchange. Use zF BW=zH and zH qH=a to identify the initial proper
-compositors, and BV R=F.p zG and R qG=qN r to identify the final ones.
-Associativity of the fixed direct-image compositors gives the displayed words;
-the identity compositor at Y gives rightDerivedLowerStarIdIso. This calculation
-uses only the e/B grid, not the original square or any k-side exchange. Empty
-schemes cause no exception, as all steps are functorial identities. -/
+exchange. This statement contains no exchange for the supplied k-square or for Q
+(Stacks, Tags 0F7C and 0F7J). -/
 theorem etaleGraphAmbientSourcePasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}

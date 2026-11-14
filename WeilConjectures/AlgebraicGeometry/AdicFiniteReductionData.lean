@@ -22,13 +22,14 @@ import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 /-! # Canonical scalar maps for finite adic reductions
 
-Source: Stacks Project, proetale.tex, Tag 09C2, with Tag 09AL for compatible etale origins
-(auxiliary; not a blueprint node).
-
 The input and both reduction categories use ConstantCompletion.D on the equivalent
 coefficient-sized sites. The coefficient universe is independent of the scheme universe.
 Index n means positive exponent n+1. All scalar units and composition comparisons below
 are uniquely normalized by the ordinary scalar insertion and their K-flat computations.
+
+## References
+
+* Stacks Project, Tags 09C2 and 09AL
 -/
 
 @[expose] public noncomputable section
@@ -104,11 +105,7 @@ private theorem adicFinitePull_isIso
     (hK : AdicFiniteGood R K) : IsIso (pa.comparison.app K) :=
   pa.computation K hK.kflat hK.flat
 
-/-- The ordinary tensor unit is uniquely specified by insertion of 1 on sections.
-Proof: scalar insertion is linear over the source ring, natural and compatible with
-restrictions. Sheafification gives the map. The underlying-sheaf functor is faithful.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- The ordinary tensor unit is uniquely specified by insertion of 1 on sections. -/
 theorem adicFiniteOrdinaryUnit_existsUnique {R S : Sheaf T CommRingCat.{w}} (f : R ⟶ S) :
     ∃! e : 𝟭 (Mod R) ⟶ change f ⋙ res f,
       ∀ M : Mod R, (underlying R).map (e.app M) = insertion f M := by
@@ -124,16 +121,14 @@ theorem adicFiniteOrdinaryUnit_existsUnique {R S : Sheaf T CommRingCat.{w}} (f :
   apply (underlying R).map_injective
   exact (he' M).trans (he M).symm
 
-/-- The actual scalar insertion, retaining its unique sectionwise normalization.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- The actual scalar insertion, retaining its unique sectionwise normalization
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteOrdinaryUnit {R S : Sheaf T CommRingCat.{w}} (f : R ⟶ S) :
     𝟭 (Mod R) ⟶ change f ⋙ res f :=
   (adicFiniteOrdinaryUnit_existsUnique f).exists.choose
 
-/-- Apply scalar insertion termwise to a complex; all maps are those of the tensor unit.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- Apply scalar insertion termwise to a complex; all maps are those of the tensor unit
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteOrdinaryUnitComplex {R S : Sheaf T CommRingCat.{w}} (f : R ⟶ S)
     (P : Cx R) : P ⟶ ((res f).mapHomologicalComplex (ComplexShape.up ℤ)).obj
       (((change f).mapHomologicalComplex (ComplexShape.up ℤ)).obj P) where
@@ -141,8 +136,7 @@ def adicFiniteOrdinaryUnitComplex {R S : Sheaf T CommRingCat.{w}} (f : R ⟶ S)
   comm' i j _ := ((adicFiniteOrdinaryUnit f).naturality (P.d i j)).symm
 
 /-- Apply an ordinary comparison square termwise, retaining the explicit composite
-functors on complexes. This is exactly the usual termwise natural isomorphism.
-Source: Stacks Tag 06YY (auxiliary; not a blueprint node). -/
+functors on complexes. This is exactly the usual termwise natural isomorphism (Stacks, Tag 06YY). -/
 def adicFiniteComplexSquare
     {A B C E : Type*} [Category A] [Category B] [Category C] [Category E]
     [Preadditive A] [Preadditive B] [Preadditive C] [Preadditive E]
@@ -200,12 +194,7 @@ private theorem adicFiniteModuleSquare
     P hres hα hβ hδ hε
   exact ⟨e, he, hu⟩
 
-/-- Ordinary restriction composition is the identity on underlying sections.
-Proof: both actions precompose by the composite ring map, and the identity maps of
-additive sheaves are linear. Their inverses are the same identities; faithfulness
-of the underlying functor proves uniqueness.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- Ordinary restriction composition is the identity on underlying sections. -/
 theorem adicFiniteResComp_existsUnique {R S V : Sheaf T CommRingCat.{w}}
     (f : R ⟶ S) (g : S ⟶ V) :
     ∃! e : res g ⋙ res f ≅ res (f ≫ g),
@@ -222,16 +211,13 @@ theorem adicFiniteResComp_existsUnique {R S V : Sheaf T CommRingCat.{w}}
   apply (underlying R).map_injective
   exact (he M).trans (hi M).symm
 
-/-- The sectionwise restriction composition isomorphism.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- The sectionwise restriction composition isomorphism (Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteResComp {R S V : Sheaf T CommRingCat.{w}} (f : R ⟶ S) (g : S ⟶ V) :
     res g ⋙ res f ≅ res (f ≫ g) :=
   (adicFiniteResComp_existsUnique f g).exists.choose
 
-/-- Exact derived restriction composition, obtained from the sectionwise identity.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- Exact derived restriction composition, obtained from the sectionwise identity
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteDresComp {R S V : Sheaf T CommRingCat.{w}} (f : R ⟶ S) (g : S ⟶ V) :
     dres g ⋙ dres f ≅ dres (f ≫ g) :=
   letI := HasDerivedCategory.standard (Mod R)
@@ -367,9 +353,7 @@ section
 attribute [local irreducible] change pull
 
 /-- The explicit normalization predicate, kept as a named API so choosing its unique
-witness does not expand the cochain comparison formula.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+witness does not expand the cochain comparison formula (Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteUnitFormula {R S : Sheaf T CommRingCat.{w}} (f : R ⟶ S)
     (e : 𝟭 (ConstantCompletion.D R) ⟶ extend f ⋙ dres f) : Prop :=
   ∀ P : Cx R, CochainComplex.IsKFlatIndependentCoefficients (J := T) (R := R) P →
@@ -378,12 +362,7 @@ def adicFiniteUnitFormula {R S : Sheaf T CommRingCat.{w}} (f : R ⟶ S)
             (resFactors f).hom.app
               (((change f).mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
 
-/-- The derived quotient unit, uniquely specified on K-flat complexes.
-Proof: derive the ordinary tensor/restriction adjunction. Exact restriction has the
-resFactors comparison; on K-flat models the universal tensor comparison is invertible.
-The displayed formula therefore determines the unit there and hence on all derived objects.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- The derived quotient unit, uniquely specified on K-flat complexes. -/
 theorem adicFiniteUnit_existsUnique {R S : Sheaf T CommRingCat.{w}} (f : R ⟶ S) :
     ∃! e : 𝟭 (ConstantCompletion.D R) ⟶ extend f ⋙ dres f,
       adicFiniteUnitFormula f e := by
@@ -419,9 +398,8 @@ theorem adicFiniteUnit_existsUnique {R S : Sheaf T CommRingCat.{w}} (f : R ⟶ S
       simp only [Adjunction.mapHomologicalComplex_unit_app_f, adicFiniteAdjunction_unit]
       rfl)
 
-/-- The canonical derived tensor unit, with the K-flat normalization retained.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- The canonical derived tensor unit, with the K-flat normalization retained
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteUnit {R S : Sheaf T CommRingCat.{w}} (f : R ⟶ S) :
     𝟭 (ConstantCompletion.D R) ⟶ extend f ⋙ dres f :=
   (adicFiniteUnit_existsUnique f).exists.choose
@@ -460,12 +438,7 @@ private theorem adicFiniteHomEquiv_apply_tensor {R S : Sheaf T CommRingCat.{w}}
 
 attribute [local irreducible] adicFiniteCompositeAdjunction
 
-/-- Ordinary tensor associativity fixed by pure tensors.
-Proof: balancing sends v tensor (s tensor m) to v*g(s) tensor m, with inverse
-v tensor m mapped to v tensor (1 tensor m). The formulas respect restrictions
-and sheafification. Pure tensors generate locally, proving uniqueness.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- Ordinary tensor associativity fixed by pure tensors. -/
 theorem adicFiniteChangeComp_existsUnique {R S V : Sheaf T CommRingCat.{w}}
     (f : R ⟶ S) (g : S ⟶ V) :
     ∃! e : change f ⋙ change g ≅ change (f ≫ g),
@@ -522,9 +495,8 @@ theorem adicFiniteChangeComp_existsUnique {R S V : Sheaf T CommRingCat.{w}}
       (tensorSection g ((change f).obj M) U 1 (tensorSection f M U 1 m))
   rw [he', he0, map_one, mul_one]
 
-/-- The ordinary balancing isomorphism, uniquely fixed by its pure-tensor formula.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- The ordinary balancing isomorphism, uniquely fixed by its pure-tensor formula
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteChangeComp {R S V : Sheaf T CommRingCat.{w}} (f : R ⟶ S) (g : S ⟶ V) :
     change f ⋙ change g ≅ change (f ≫ g) :=
   (adicFiniteChangeComp_existsUnique f g).exists.choose
@@ -612,9 +584,7 @@ private theorem adicFiniteCompositionComparison
 attribute [local irreducible] Functor.mapHomologicalComplex
 
 /-- The explicit normalization predicate, kept as a named API so choosing its unique
-witness does not expand the cochain comparison formula.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+witness does not expand the cochain comparison formula (Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteExtendCompFormula {R S V : Sheaf T CommRingCat.{w}}
     (f : R ⟶ S) (g : S ⟶ V)
     (e : extend f ⋙ extend g ≅ extend (f ≫ g)) : Prop :=
@@ -626,13 +596,7 @@ def adicFiniteExtendCompFormula {R S V : Sheaf T CommRingCat.{w}}
             (Q V).map ((Functor.mapHomologicalComplexCompIso (adicFiniteChangeComp f g)
               (ComplexShape.up ℤ)).hom.app P)
 
-/-- Derived tensor associativity fixed by the ordinary balancing comparison.
-Proof: scalar extension preserves K-flatness by balancing against each acyclic test
-complex. Hence on K-flat models all three universal comparisons are invertible.
-The displayed composite descends uniquely through localization, and its inverse
-is the inverse ordinary balancing composite.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- Derived tensor associativity fixed by the ordinary balancing comparison. -/
 theorem adicFiniteExtendComp_existsUnique {R S V : Sheaf T CommRingCat.{w}}
     (f : R ⟶ S) (g : S ⟶ V) :
     ∃! e : extend f ⋙ extend g ≅ extend (f ≫ g),
@@ -668,9 +632,8 @@ theorem adicFiniteExtendComp_existsUnique {R S V : Sheaf T CommRingCat.{w}}
   intro K hK
   exact he' K ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat K).mpr hK.kflat)
 
-/-- Canonical derived balancing for a specified composite coefficient map.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- Canonical derived balancing for a specified composite coefficient map
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteExtendComp {R S V : Sheaf T CommRingCat.{w}}
     (f : R ⟶ S) (g : S ⟶ V) (h : R ⟶ V) (e : h = f ≫ g) :
     extend f ⋙ extend g ≅ extend h :=
@@ -680,9 +643,8 @@ def adicFiniteExtendComp {R S V : Sheaf T CommRingCat.{w}}
 end
 
 /-- The algebraic lift of the recorded geometric comparison. Its universal specification
-retains ring operations, module actions and the natural constant-coefficient isomorphisms.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+retains ring operations, module actions and the natural constant-coefficient isomorphisms
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteComparisonData (X : Scheme.{u}) :
     InverseImageData (smallModelComparisonPullback.{u, v} X) :=
   letI := smallModelComparisonPullback_preservesFiniteLimits.{u, v} X
@@ -692,18 +654,15 @@ def adicFiniteComparisonData (X : Scheme.{u}) :
 
 attribute [local irreducible] adicFiniteComparisonData
 
-/-- The ordinary comparison inverse image with its canonical constant-ring map.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- The ordinary comparison inverse image with its canonical constant-ring map
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteOrdinaryPullback (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] :
     Mod (constant (smallModelComparisonEtaleTopology.{u, v} X) A) ⥤
       Mod (constant (coefficientProEtaleModelTopology.{u, v} X) A) :=
   pull (adicFiniteComparisonData.{u, v} X) (constantMap (adicFiniteComparisonData.{u, v} X) A)
 
-/-- Additivity of the recorded module inverse image.
-Source: Stacks Tags 03D2 and 09C2
-(auxiliary; not a blueprint node). -/
+/-- Additivity of the recorded module inverse image (Stacks, Tags 03D2 and 09C2). -/
 instance adicFiniteOrdinaryPullbackAdditive (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] :
     (adicFiniteOrdinaryPullback.{u, v} X A).Additive :=
@@ -711,9 +670,8 @@ instance adicFiniteOrdinaryPullbackAdditive (X : Scheme.{u})
     (constantMap (adicFiniteComparisonData.{u, v} X) A)
 
 /-- The existing universal derived inverse image, shared by its functor and comparison.
-This is the same derivedPull construction with its specified K-flat computation.
-Source: Stacks Tags 06YY and 09C2
-(auxiliary; not a blueprint node). -/
+This is the same derivedPull construction with its specified K-flat computation
+(Stacks, Tags 06YY and 09C2). -/
 def adicFinitePullbackData (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] :
     DerivedPull (adicFiniteComparisonData.{u, v} X)
@@ -726,17 +684,15 @@ def adicFinitePullbackData (X : Scheme.{u})
 attribute [local irreducible] adicFinitePullbackData
 
 /-- The derived inverse image of the recorded geometric comparison, with its universal
-K-flat computation, on constant coefficients of arbitrary size.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+K-flat computation, on constant coefficients of arbitrary size (Stacks, Tags 06YY, 09C2 and 09AL).
+-/
 def adicFinitePullback (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] :
     ConstantCompletion.D (constant (smallModelComparisonEtaleTopology.{u, v} X) A) ⥤
       ConstantCompletion.D (constant (coefficientProEtaleModelTopology.{u, v} X) A) :=
   (adicFinitePullbackData.{u, v} X A).functor
 
-/-- The universally specified comparison on complexes for the derived inverse image.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- The universally specified comparison on complexes for the derived inverse image
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFinitePullbackComparison (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] :
     Q (constant (smallModelComparisonEtaleTopology.{u, v} X) A) ⋙ adicFinitePullback.{u, v} X A ⟶
@@ -744,9 +700,7 @@ def adicFinitePullbackComparison (X : Scheme.{u})
         Q (constant (coefficientProEtaleModelTopology.{u, v} X) A) :=
   (adicFinitePullbackData.{u, v} X A).comparison
 
-/-- The canonical map of constant coefficient sheaves.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- The canonical map of constant coefficient sheaves (Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteConstantMap {R S : Type w} [CommRing R] [CommRing S] (f : R →+* S)
     {D : Type w} [SmallCategory D] (T : GrothendieckTopology D) :
     constant T R ⟶ constant T S :=
@@ -1061,9 +1015,7 @@ private theorem adicFinitePullScalarSquare
 end
 
 /-- The explicit normalization predicate, kept as a named API so choosing its unique
-witness does not expand the cochain comparison formula.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+witness does not expand the cochain comparison formula (Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteOrdinaryComparisonFormula (X : Scheme.{u})
     {A B : Type (max v (u + 1))} [CommRing A] [CommRing B] (f : A →+* B)
     (e : adicFiniteOrdinaryPullback.{u, v} X A ⋙
@@ -1084,12 +1036,7 @@ def adicFiniteOrdinaryComparisonFormula (X : Scheme.{u})
           (underlying (constant (coefficientProEtaleModelTopology.{u, v} X) B)).map
             (e.hom.app M)
 
-/-- Ordinary comparison commutes with scalar extension, normalized by tensor insertion.
-Proof: inverse image preserves the tensor coequalizer. Both sides send a scalar and
-a module section to the same sheafified pure tensor. The displayed insertion equation
-determines the isomorphism on local generators; the inverse balancing map gives its inverse.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- Ordinary comparison commutes with scalar extension, normalized by tensor insertion. -/
 theorem adicFiniteOrdinaryComparison_existsUnique (X : Scheme.{u})
     {A B : Type (max v (u + 1))} [CommRing A] [CommRing B] (f : A →+* B) :
     ∃! e : adicFiniteOrdinaryPullback.{u, v} X A ⋙
@@ -1108,9 +1055,8 @@ theorem adicFiniteOrdinaryComparison_existsUnique (X : Scheme.{u})
     (constantMap (adicFiniteComparisonData.{u, v} X) B)
     ((adicFiniteComparisonData.{u, v} X).constants.hom.naturality (CommRingCat.ofHom f))
 
-/-- The ordinary scalar/pullback comparison with its insertion normalization.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- The ordinary scalar/pullback comparison with its insertion normalization
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteOrdinaryComparison (X : Scheme.{u})
     {A B : Type (max v (u + 1))} [CommRing A] [CommRing B] (f : A →+* B) :
     adicFiniteOrdinaryPullback.{u, v} X A ⋙
@@ -1180,9 +1126,7 @@ private theorem adicFinitePullChangeComparison
       P hres hpa hleft hf hpb
 
 /-- The explicit normalization predicate, kept as a named API so choosing its unique
-witness does not expand the cochain comparison formula.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+witness does not expand the cochain comparison formula (Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteComparisonFormula (X : Scheme.{u})
     {A B : Type (max v (u + 1))} [CommRing A] [CommRing B] (f : A →+* B)
     (e : adicFinitePullback.{u, v} X A ⋙
@@ -1210,14 +1154,7 @@ def adicFiniteComparisonFormula (X : Scheme.{u})
           (Q _).map ((adicFiniteComplexSquare
             (adicFiniteOrdinaryComparison.{u, v} X f)).hom.app P)
 
-/-- The derived scalar/pullback comparison is specified on flat-term K-flat models.
-Proof: exact geometric inverse image preserves flat terms and K-flatness. Scalar
-extension preserves K-flatness. All four universal comparisons in the displayed
-square are therefore invertible. Descend the uniquely normalized ordinary comparison
-through K-flat localization; the ordinary inverse descends too, and uniqueness follows
-from the universal localization property.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- The derived scalar/pullback comparison is specified on flat-term K-flat models. -/
 theorem adicFiniteComparison_existsUnique (X : Scheme.{u})
     {A B : Type (max v (u + 1))} [CommRing A] [CommRing B] (f : A →+* B) :
     ∃! e : adicFinitePullback.{u, v} X A ⋙
@@ -1238,9 +1175,8 @@ theorem adicFiniteComparison_existsUnique (X : Scheme.{u})
     (adicFinitePullbackData.{u, v} X B)
     (adicFiniteOrdinaryComparison.{u, v} X f)
 
-/-- The canonical derived scalar/pullback balancing comparison.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- The canonical derived scalar/pullback balancing comparison (Stacks, Tags 06YY, 09C2 and 09AL).
+-/
 def adicFiniteComparison (X : Scheme.{u})
     {A B : Type (max v (u + 1))} [CommRing A] [CommRing B] (f : A →+* B) :
     adicFinitePullback.{u, v} X A ⋙
@@ -1251,37 +1187,30 @@ def adicFiniteComparison (X : Scheme.{u})
 
 end
 
-/-- The existing positive-power quotient, with no change of coefficient ring.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- The existing positive-power quotient, with no change of coefficient ring
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 abbrev adicFiniteCoeff {A : Type w} [CommRing A] (J : Ideal A) (n : ℕ) :=
   A ⧸ J ^ (n + 1)
 
-/-- The quotient homomorphism at positive exponent n+1.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- The quotient homomorphism at positive exponent n+1 (Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteQuotient {A : Type w} [CommRing A] (J : Ideal A) (n : ℕ) :
     A →+* adicFiniteCoeff J n := Ideal.Quotient.mk _
 
-/-- The canonical quotient factor homomorphism.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- The canonical quotient factor homomorphism (Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteFactor {A : Type w} [CommRing A] (J : Ideal A)
     {m n : ℕ} (h : n ≤ m) : adicFiniteCoeff J m →+* adicFiniteCoeff J n :=
   Ideal.Quotient.factorPow J (Nat.add_le_add_right h 1)
 
-/-- The quotient-factor identity is the existing ideal quotient identity.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- The quotient-factor identity is the existing ideal quotient identity
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteQuotientComp {A : Type w} [CommRing A] (J : Ideal A)
     {m n : ℕ} (h : n ≤ m) :
     adicFiniteQuotient J n = (adicFiniteFactor J h).comp (adicFiniteQuotient J m) :=
   (Ideal.Quotient.factor_comp_mk
     (Ideal.pow_le_pow_right (Nat.add_le_add_right h 1))).symm
 
-/-- The quotient-factor cocycle is the existing factor composition identity.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- The quotient-factor cocycle is the existing factor composition identity
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteFactorComp {A : Type w} [CommRing A] (J : Ideal A)
     {r m n : ℕ} (hnm : n ≤ m) (hmr : m ≤ r) :
     adicFiniteFactor J (hnm.trans hmr) =
@@ -1290,17 +1219,15 @@ def adicFiniteFactorComp {A : Type w} [CommRing A] (J : Ideal A)
     (Ideal.pow_le_pow_right (Nat.add_le_add_right hmr 1))
     (Ideal.pow_le_pow_right (Nat.add_le_add_right hnm 1))).symm
 
-/-- Scalar extension in the existing standard localization of a small ringed site.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- Scalar extension in the existing standard localization of a small ringed site
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteExtension {A B : Type w} [CommRing A] [CommRing B]
     {D : Type w} [SmallCategory D] (T : GrothendieckTopology D) (f : A →+* B) :
     ConstantCompletion.D (constant T A) ⥤ ConstantCompletion.D (constant T B) :=
   extend (adicFiniteConstantMap f T)
 
-/-- Functoriality of the existing constant-sheaf construction on ring homomorphisms.
-Source: Stacks Tags 06YY and 09C2
-(auxiliary; not a blueprint node). -/
+/-- Functoriality of the existing constant-sheaf construction on ring homomorphisms
+(Stacks, Tags 06YY and 09C2). -/
 def adicFiniteConstantComp {A B C : Type w} [CommRing A] [CommRing B] [CommRing C]
     {D : Type w} [SmallCategory D] (T : GrothendieckTopology D)
     (f : A →+* B) (g : B →+* C) (h : A →+* C) (e : h = g.comp f) :
@@ -1309,9 +1236,8 @@ def adicFiniteConstantComp {A B C : Type w} [CommRing A] [CommRing B] [CommRing 
     ((constantSheaf T CommRingCat.{w}).map_comp
       (CommRingCat.ofHom f) (CommRingCat.ofHom g))
 
-/-- Canonical scalar reassociation for a specified equality of constant ring maps.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- Canonical scalar reassociation for a specified equality of constant ring maps
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteExtensionComp {A B C : Type w} [CommRing A] [CommRing B] [CommRing C]
     {D : Type w} [SmallCategory D] (T : GrothendieckTopology D)
     (f : A →+* B) (g : B →+* C) (h : A →+* C) (e : h = g.comp f) :
@@ -1321,40 +1247,33 @@ def adicFiniteExtensionComp {A B C : Type w} [CommRing A] [CommRing B] [CommRing
     (adicFiniteConstantComp T f g h e)
 
 /-- The standard derived category of the constant pro-etale coefficient ring on the
-equivalent coefficient-sized site.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+equivalent coefficient-sized site (Stacks, Tags 06YY, 09C2 and 09AL). -/
 abbrev adicFiniteAmbient (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] :=
   ConstantCompletion.D (constant (coefficientProEtaleModelTopology.{u, v} X) A)
 
-/-- Local derived completeness for the kernel of the actual residue quotient.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- Local derived completeness for the kernel of the actual residue quotient
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteComplete (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A]
     (J : Ideal A) (N : adicFiniteAmbient.{u, v} X A) : Prop :=
   IsComplete (quotient (coefficientProEtaleModelTopology.{u, v} X) A J 0) N
 
-/-- The existing etale derived category over a positive quotient on the equivalent model.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- The existing etale derived category over a positive quotient on the equivalent model
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 abbrev adicFiniteEtale (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A]
     (J : Ideal A) (n : ℕ) :=
   ConstantCompletion.D
     (finite (smallModelComparisonEtaleTopology.{u, v} X) A J n)
 
-/-- Derived tensor with the actual positive quotient, using the universal scalar extension.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- Derived tensor with the actual positive quotient, using the universal scalar extension
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteReduction (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A]
     (J : Ideal A) (N : adicFiniteAmbient.{u, v} X A) (n : ℕ) :
     adicFiniteAmbient.{u, v} X (adicFiniteCoeff J n) :=
   (adicFiniteExtension (coefficientProEtaleModelTopology.{u, v} X)
     (adicFiniteQuotient J n)).obj N
 
-/-- Canonical balancing after a repeated quotient reduction.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- Canonical balancing after a repeated quotient reduction (Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteRho (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A]
     (J : Ideal A) (N : adicFiniteAmbient.{u, v} X A) {m n : ℕ} (h : n ≤ m) :
     (adicFiniteExtension (coefficientProEtaleModelTopology.{u, v} X)
@@ -1364,18 +1283,16 @@ def adicFiniteRho (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A]
     (adicFiniteQuotient J m) (adicFiniteFactor J h) (adicFiniteQuotient J n)
     (adicFiniteQuotientComp J h)).app N
 
-/-- The quotient reduction with coefficients restricted to the original ring.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+/-- The quotient reduction with coefficients restricted to the original ring
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteUnderlying (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A]
     (J : Ideal A) (N : adicFiniteAmbient.{u, v} X A) (n : ℕ) : adicFiniteAmbient.{u, v} X A :=
   (dres (quotient (coefficientProEtaleModelTopology.{u, v} X) A J n)).obj
     (adicFiniteReduction.{u, v} X J N n)
 
 /-- The actual quotient transition, from the normalized derived tensor unit, balancing
-and exact restriction composition. No transition map is supplied as a parameter.
-Source: Stacks Tags 06YY, 09C2 and 09AL
-(auxiliary; not a blueprint node). -/
+and exact restriction composition. No transition map is supplied as a parameter
+(Stacks, Tags 06YY, 09C2 and 09AL). -/
 def adicFiniteTransition (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A]
     (J : Ideal A) (N : adicFiniteAmbient.{u, v} X A) (n : ℕ) :
     adicFiniteUnderlying.{u, v} X J N (n + 1) ⟶ adicFiniteUnderlying.{u, v} X J N n :=

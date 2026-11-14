@@ -19,7 +19,9 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 
 /-! # Chart lifts commute with stage transitions
 
-Source: Stacks Project, Tags 0EYM, 03CB and 03Q8.
+## References
+
+* Stacks Project, Tags 0EYM, 03CB and 03Q8
 -/
 
 @[expose] public section
@@ -230,23 +232,8 @@ private theorem chartPull_adj_naturality {S X B T T' : Scheme.{u}}
   simpa only [Category.assoc] using
     chartRawAdj_pullback f g a g' w b a' ha g'' w' wb l hl₁ hl₂ hw F n W z z' hz'
 
-/-- A chart lift intertwines the restricted cohomology map with cartesian exchange.
-
-Source: Stacks Project, Tag 0EYM, the canonical comparison square; Tags 03CB and 03Q8.
-(blueprint: lem-sc-cartesian-chart-lift-naturality).
-
-Proof: Apply raw restricted evaluation naturality to the chart arrow and the inverse
-composition comparison on its coefficients. Invert the evaluation comparison and
-transport the resulting equality through the chart source isomorphisms. Pullback
-uniqueness identifies the transported chart arrow with the cartesian projection.
-The coefficient compositions agree by upperStarComp associativity. Under the derived
-adjunction for the projection to the stage base, the exchanged class is the pullback
-of the original adjunct: expand exchange as its adjunction mate and cancel the unit
-and counit. The exact inverse-image single and shift comparisons commute with this
-calculation. Pull back to the cone point, using the cone equation to identify the
-free-sheaf sources. This proves the equality of the specified maps. No limit,
-cofilteredness, affineness, qcqs hypothesis, or invertibility of exchange is used.
--/
+/-- A chart lift intertwines the restricted cohomology map with cartesian exchange
+(Stacks, Tags 0EYM, 03CB and 03Q8). -/
 theorem cartesianChartCohomologyLift_naturality
     {S X : Scheme.{u}} (f : X ⟶ S)
     {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D)

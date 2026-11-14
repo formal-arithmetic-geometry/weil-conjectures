@@ -21,22 +21,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Closed pushforward identifies the underlying inverse system of a categorical
-formal kernel, without asserting that evaluation preserves kernels.
-
-Source: Stacks Project, Tags 087T, 088A and 0887.
-(blueprint: aux-closed-immersion-formal-kernel-comparison)
-
-Proof: The termwise closed-pushforward equivalence gives a functor R into coherent
-formal modules on X, with its specified underlying-system comparison. Termwise
-pullback along j sends coherent formal modules on X to those on Z (Tag 0887).
-Whisker the module pullback-pushforward adjunction with the inverse-system index,
-then restrict it along the fully faithful formal-system inclusions. This makes R
-a right adjoint, so it preserves limiting kernel forks. Lift e and d to the full
-subcategory and use naturality of the underlying-system comparison to obtain a
-commuting square between a and R.map alpha. The uniqueness isomorphism for the two
-limiting kernel forks, followed by the underlying-system comparison at k.pt, gives
-the required isomorphism. No evaluation functor is asserted to preserve kernels,
-and no particular choice of Abelian structure is used beyond existence of kernel a. -/
+formal kernel, without asserting that evaluation preserves kernels
+(Stacks, Tags 087T, 088A and 0887). -/
 theorem closedImmersion_formalKernel_comparison
     {X Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Z]
     (j : Z ⟶ X) [IsClosedImmersion j] (Q : X.IdealSheafData)

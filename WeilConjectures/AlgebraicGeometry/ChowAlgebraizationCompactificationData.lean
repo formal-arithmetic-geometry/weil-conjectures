@@ -28,8 +28,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Projective compactification algebraization before boundary removal
 
-Source: Stacks Project, Theorem 088E, from Chow compactification through the displayed
-support equation (blueprint: new-chow-algebraization-core-support-data).
+## References
+
+* Stacks Project, Tag 088E
 -/
 
 @[expose] public section
@@ -39,26 +40,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
 /-- Construct an algebraization by restricting from a proper compactification, retaining
-its degree-zero support on the adic closed fibre.
-Source: Stacks Project, Theorem 088E, the paragraphs from "Choose an open immersion"
-through the displayed equation for the support intersect V(I).
-(blueprint: new-chow-algebraization-core-support-data)
-
-Proof: Factor the supplied quasi-compact immersion into its scheme-theoretic image,
-a closed subscheme of the projective space, obtaining an open immersion j:Y -> P.
-The closed image P is projective, hence proper over A and Noetherian. Pull back G
-termwise. Finite-type pullback support and Nakayama for the successive nilpotent
-quotients identify every term's support with q inverse Supp(G_0). This set is proper
-over A because q is proper and G_0 has proper support. Its image under j is closed in P.
-Extend the terms by j_*: they are coherent by Stacks 0CYJ (coherent open pushforward
-on closed support). On j(Y) the quotient compatibility is unchanged; off that closed
-support the terms vanish, so the extended terms form a coherent formal system.
-Projective existence algebraizes this system to F'. Restrict F' along j to F.
-Restriction is coherent and commutes with the ideal-power quotients, yielding the
-completion isomorphism on Y. On the adic closed fibre Nakayama identifies Supp(F')
-with the support of its first quotient. That quotient is j_*q^*G_0 and has support
-inside j(Y), giving the stated containment. No assertion about support away from the
-closed fibre is made here; the separate support theorem proves boundary avoidance. -/
+its degree-zero support on the adic closed fibre (Stacks, Tag 088E). -/
 theorem exists_chow_algebraization_compactification_data
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

@@ -21,8 +21,9 @@ import WeilConjectures.AlgebraicGeometry.QuasiCoherentAlgebraChangeOfRings
 
 /-! # Affine tensor-unit section presentation
 
-Source: Stacks Project, Morphisms, Lemma 01SB, key algebra observation.
-(blueprint: lem-weil-pbc-affine-tensor-unit-section-presentation).
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section
@@ -193,29 +194,7 @@ private theorem scalar_tensor_presentation
 set_option maxHeartbeats 800000 in
 -- The affine comparisons unfold dependent section-module scalar restrictions.
 /-- Affine sections of the two tensor operations are the quotient of the first tensor
-product by the diagonal-action relations. The map on unit tensors is canonical.
-Source: Stacks Project, Morphisms, Tag 01SB, construction of h and key algebra observation.
-(blueprint: lem-weil-pbc-affine-tensor-unit-section-presentation).
-
-Proof: Put D = O_X(V), C = O_U(f⁻¹V), N = G(V), E = B(f⁻¹V), and
-M = P(G)(f⁻¹V). The affine first-tensor section lemma supplies p : C tensor_D N ≃ M,
-the second-factor ring map delta : C → E, additive generation of E by b(c)delta(d),
-and both E-actions on pure tensors, with p(1 tensor n)=kappa inverse of the unit.
-The affine pushout algebra is quasi-coherent by its existing theorem. Pushforward of
-the structure-sheaf unit makes A quasi-coherent; scalar restriction and preservation
-of quasi-coherence by pullback, transferred through kappa, make the underlying P(G)
-quasi-coherent. Apply the affine change-of-rings theorem to epsilon and transport by
-hobj to obtain an additive equivalence e : C tensor_E M ≃ H(G)(f⁻¹V).
-Define q as gamma followed after kappa and p. The hH equation gives
-q(z)=e(1 tensor p(z)). The private scalar_tensor_presentation proves its algebraic
-properties: the map a(c tensor n)=cn, transported by p inverse, is epsilon-balanced
-because b(c) and delta(c) both act on its values by c. Extend it to the outer tensor
-product to show that ker q is contained in ker a. Balancing by delta(c) kills each
-listed relation. Tensor induction shows z-1 tensor a(z) lies in their span, hence
-ker q equals that span. Balancing by b(c) moves every outer scalar into the first
-inner factor, so q is surjective. Finally p's unit formula and kappa hom-inv give
-the canonical gamma-unit formula. All arguments apply to zero rings, zero modules
-and the empty affine open. No beta or adjoint-comparison equation is used.
+product by the diagonal-action relations. The map on unit tensors is canonical (Stacks, Tag 01SB).
 -/
 theorem affine_tensor_unit_section_presentation [IsAffineHom f]
      (B : U.toTopCat.Sheaf CommRingCat.{u})

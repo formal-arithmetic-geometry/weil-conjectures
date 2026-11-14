@@ -19,8 +19,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 
 /-! # Normalized models for discrete constant coefficients
 
-Source: Stacks Tags 03CY, 00YV and 09AJ.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 03CY, 00YV and 09AJ
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +36,7 @@ attribute [local irreducible] AlgebraicGeometry.ProEtale.upperStarFromPoint
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
 /-- The constant additive sheaf comparison, before reconstructing scalar actions.
-Source: Stacks Tags 03CY and 00YV
-(auxiliary; not a blueprint node). -/
+(Stacks, Tags 03CY and 00YV) -/
 def discreteCoefficientAbelianIso (X : Scheme.{u}) (A : Type u) [CommRing A] :
     (constantSheaf (Scheme.ProEt.topology X) Ab.{u + 1}).obj
         (AddCommGrpCat.of (ULift.{u + 1} A)) ≅ condensedRingObj (discreteObj A) X :=
@@ -67,8 +67,7 @@ attribute [local irreducible] discreteCoefficientAbelianIso
 
 /-- Normalization fixes the reconstructed coefficient map on every constant section.
 The scalar relabelling is specified by e, rather than an arbitrary residue-field automorphism.
-Source: Stacks Tags 03CY and 00YV
-(auxiliary; not a blueprint node). -/
+(Stacks, Tags 03CY and 00YV) -/
 def DiscreteCoefficientNormalized (X : Scheme.{u}) (A : Type u) [CommRing A]
     (k : Type (u + 1)) [CommRing k] (e : ULift.{u + 1} A ≃+* k)
     (c : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅
@@ -135,13 +134,7 @@ private theorem coefficientRingIso_normalized (X : Scheme.{u}) (A : Type u) [Com
   delta discreteCoefficientAbelianIso
   rfl
 
-/-- Normalization uniquely determines the coefficient ring isomorphism.
-Source: the sheafification universal property, Stacks Tag 03CY
-(auxiliary; not a blueprint node).
-Proof: precompose both maps with the constant-presheaf sheafification unit. Their components
-agree on e(a) by normalization, and every scalar has this form because e is surjective.
-The sheafification universal property gives equality of the maps and hence of the isomorphisms.
--/
+/-- Normalization uniquely determines the coefficient ring isomorphism (Stacks, Tag 03CY). -/
 theorem discreteCoefficientNormalized_unique (X : Scheme.{u}) (A : Type u) [CommRing A]
     (k : Type (u + 1)) [CommRing k] (e : ULift.{u + 1} A ≃+* k)
     {c d : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅
@@ -158,8 +151,7 @@ theorem discreteCoefficientNormalized_unique (X : Scheme.{u}) (A : Type u) [Comm
 
 /-- Section-action transport, small-site precomposition, and the specified scalar restriction.
 All three functors are existing constructions; no object is selected from an existence theorem.
-Source: Stacks Tags 00YV, 09A5 and 03CY
-(auxiliary; not a blueprint node). -/
+(Stacks, Tags 00YV, 09A5 and 03CY) -/
 def discreteCoefficientModel (X : Scheme.{u}) (A : Type u) [CommRing A]
     (k : Type (u + 1)) [CommRing k]
     (c : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅
@@ -176,11 +168,7 @@ private theorem scalar_restriction_equivalence
     (ConstantScalarRestriction.restrictCancelIso J c.hom c.inv c.hom_inv_id)
   exact e.isEquivalence_functor
 
-/-- The specified discrete model is an equivalence for every coefficient ring isomorphism.
-Source: section reconstruction, site equivalence and restriction along a ring isomorphism
-(auxiliary; not a blueprint node).
-Proof: compose the existing section-action equivalence, the pushforward equivalence of the
-small and original sites, and the inverse scalar-restriction equivalence. -/
+/-- The specified discrete model is an equivalence for every coefficient ring isomorphism. -/
 instance discreteCoefficientModel_isEquivalence (X : Scheme.{u}) (A : Type u) [CommRing A]
     (k : Type (u + 1)) [CommRing k]
     (c : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅
@@ -194,11 +182,7 @@ instance discreteCoefficientModel_isEquivalence (X : Scheme.{u}) (A : Type u) [C
     (smallModules X (condensedRingObj (discreteObj A) X) ⋙
       ConstantCompletion.res c.hom).IsEquivalence
 
-/-- Discrete coefficient transport is additive, since all its maps retain the section maps.
-Source: section-action and scalar restriction
-(auxiliary; not a blueprint node).
-Proof: section reconstruction and site precomposition are additive sectionwise, and scalar
-restriction changes only the action, so their composite preserves sums of morphisms. -/
+/-- Discrete coefficient transport is additive, since all its maps retain the section maps. -/
 instance discreteCoefficientModel_additive (X : Scheme.{u}) (A : Type u) [CommRing A]
     (k : Type (u + 1)) [CommRing k]
     (c : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅
@@ -226,25 +210,7 @@ attribute [-instance] WeilConjectures.integralOperationsAbSheafify
 /-- Discrete coefficients admit a normalized exact monoidal section-action model, preserving
 finite constructible local models. This is a statement about module sheaves, with no complexes,
 integral completion, residue reduction, or Tor predicate.
-
-Source: Stacks Tags 03CY, 00YV, 09A5 and 09AJ; blueprint integral-models proof (1)--(2).
-(auxiliary; not a blueprint node).
-
-Proof: the monoidal constant-sheaf comparison identifies the pulled-back discrete ring with
-its constant sheaf on X. Reconstruct its section ring and precompose with AsSmall.down.
-The constant-sheaf precomposition comparison and e give c. Its map on constants is the
-formula in DiscreteCoefficientNormalized; local surjectivity of sheafification makes this
-formula determine c uniquely. Section reconstruction, precomposition along the site
-equivalence, and restriction along c are additive equivalences. The section tensor comparison
-and the pure-tensor isomorphisms for the other factors supply the strong monoidal structure.
-On each stratum a finite presentation is the cokernel of a finite scalar matrix. Each factor
-carries that matrix and its cokernel to the identical presentation, relabelled by e. The same
-cover therefore trivializes the model in either direction. Convert covering families to their
-generated covering sieves, and conversely refine a covering sieve by a covering family.
-The Noetherian global constructibility theorem identifies the resulting finite global
-stratification with the affine-local predicate. The inverse comparisons retain the same
-strata and finitely presented modules. Empty schemes and zero rings use the same constructions.
--/
+(Stacks, Tags 03CY, 00YV, 09A5 and 09AJ) -/
 theorem discrete_coefficient_model (X : Scheme.{u}) [IsNoetherian X]
     (A : Type u) [CommRing A] (k : Type (u + 1)) [CommRing k] [IsNoetherianRing k]
     (e : ULift.{u + 1} A ≃+* k) :

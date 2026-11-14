@@ -11,8 +11,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 /-!
 # Constant pullback identity coherence
 
-Source: Stacks Project, sites.tex, Tag 03CB; cohomology.tex, Tag 01F8.
-(blueprint: lem-weil-pbc-constant-pullback-identity-coherence)
+## References
+
+* Stacks Project, Tags 03CB and 01F8
 -/
 
 @[expose] public section
@@ -25,18 +26,8 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-/-- Constant-sheaf comparison for identity inverse image is the inverse of upperStarId.
-Source: Stacks Project, sites.tex, Tag 03CB, and cohomology.tex, Tag 01F8.
-
-Proof: constantSheaf followed by inverse image of the identity is left adjoint to
-sections composed with identity direct image. Transport along lowerStarId identifies
-this adjunction with constantSheaf adjoint to sections. The definition of upperStarId
-is the conjugate of the inverse of lowerStarId, while upperStarConstantSheafIso is
-uniqueness of the same left adjoint. Hence their composite is the identity comparison,
-by uniqueness of left-adjoint isomorphisms compatible with the adjunction units.
-Taking its component at M gives the displayed equality of sheaf morphisms.
-(blueprint: lem-weil-pbc-constant-pullback-identity-coherence)
--/
+/-- Constant-sheaf comparison for identity inverse image is the inverse of upperStarId
+(Stacks, Tags 03CB and 01F8). -/
 theorem constantPullbackIdentityCoherence (Z : Scheme.{u}) (M : AddCommGrpCat.{u + 1}) :
     (Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (𝟙 Z)).inv.app M ≫
         (upperStarId AddCommGrpCat.{u + 1} Z).hom.app

@@ -20,8 +20,9 @@ import WeilConjectures.AlgebraicGeometry.AffinePushoutModuleSectionPresentation
 
 /-! # Affine pushout ring and first tensor sections
 
-Source: Stacks Project, Morphisms, Lemma 01SB, key algebra observation.
-(blueprint: lem-weil-pbc-affine-pushout-first-tensor-sections).
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section
@@ -87,27 +88,8 @@ local notation "fV" V => (Opens.map f.base).op.obj V
 set_option maxHeartbeats 700000 in
 -- The categorical expressions in this theorem require extra elaboration time.
 /-- Affine identification of the pushout algebra and the first tensor pullback, with
-both actions and the canonical unit; no assertion about the final extension module.
-Source: Stacks Project, Morphisms, Tag 01SB, construction of h and affine reduction.
-(blueprint: lem-weil-pbc-affine-pushout-first-tensor-sections).
-
-Proof: Push forward the structure-sheaf unit along the affine qcqs morphism; its
-underlying structure-sheaf module is quasi-coherent. Restriction of scalars therefore
-makes G quasi-coherent over O_X. The affine pullback section theorem, followed by
-kappa inverse, identifies P(G)(W) with C tensor_D N, where W=f inverse V.
-It sends c tensor n to b(c) times the image of the pullback unit of n. Apply the same
-construction to the algebra A=f_*O_U. The ring pushout universal property identifies
-B with the sheafification of O_U tensor_{f inverse O_X} f inverse A, and on W the
-canonical affine ring comparison identifies B(W) with C tensor_D C. The map delta
-is the second tensor inclusion: on sections it is t after the inverse-image unit.
-The counit equation t followed by epsilon=e makes epsilon(delta(c))=c, while the
-other equation gives epsilon(b(c))=c. Pure tensors generate C tensor_D C additively,
-so every element of B(W) is a finite sum of b(c)delta(d). The two actions on P(G)(W)
-are b(c)(d tensor n)=cd tensor n and delta(c)(d tensor n)=d tensor cn.
-These formulas follow before sheafification from tensor balancing and remain true
-under its canonical map. The hP unit equation fixes the unit normalization. This argument
-involves no final extension H or gamma, and is valid for zero rings, zero modules and the
-empty affine open. -/
+both actions and the canonical unit; no assertion about the final extension module
+(Stacks, Tag 01SB). -/
 theorem affine_pushout_first_tensor_sections [IsAffineHom f]
      (B : U.toTopCat.Sheaf CommRingCat.{u})
       (b : U.sheaf ⟶ B) (t : IA ⟶ B) (ε : B ⟶ U.sheaf)

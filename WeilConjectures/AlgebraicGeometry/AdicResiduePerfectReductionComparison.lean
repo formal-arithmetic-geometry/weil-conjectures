@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 
 /-! # Finite reductions of completed constant perfect complexes
 
-Source: Stacks Project, proetale.tex, Tag 09C6; Cohomology on Sites, Tag 06YY.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 09C6 and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -32,25 +33,8 @@ attribute [local irreducible] CategoryTheory.ConstantCompletion.completed
 
 /-- Reduction of a completed constant perfect complex is the constant algebraic reduction.
 The algebraic extension is specified by its adjunction to actual restriction of scalars.
-There is no completeness or Noetherian hypothesis on the coefficient ring or scheme.
-Source: Stacks Project, Tags 06YY, 093J and 09C6.
-(auxiliary; not a blueprint node).
-
-Proof: A bounded complex of finite projective modules is K-flat. Exact constant
-realization preserves its differential and its finite projective splittings, hence
-produces a K-flat complex of flat sheaves. Scalar extension to the completed ring
-and then to the quotient is computed termwise. Scalar balancing identifies this
-with scalar extension directly to the constant quotient: the composite of the
-coefficient map and completed projection is the actual quotient map, by the limit
-cone equation. Constant module sheafification commutes with scalar extension;
-before sheafification the comparison is (p tensor b) tensor c mapped to
-p tensor bc, with inverse p tensor c mapped to (p tensor 1) tensor c. These maps
-are natural in the modules, so give chain isomorphisms. Exact restriction to a
-slice commutes with this tensor calculation. Finally any left adjoint L of actual
-algebraic scalar restriction is uniquely isomorphic, compatibly with its unit, to
-derived scalar extension. Apply this isomorphism to the bounded projective complex
-and then exact constant realization and restriction. Compose the resulting
-isomorphisms. This argument also covers the zero ring, zero complex and empty slice. -/
+There is no completeness or Noetherian hypothesis on the coefficient ring or scheme
+(Stacks, Tags 06YY, 093J and 09C6). -/
 theorem adicResidue_perfect_reduction_comparison
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X) (n : ℕ)

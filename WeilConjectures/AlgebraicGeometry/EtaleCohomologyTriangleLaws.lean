@@ -12,7 +12,9 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 
 /-! # Cohomology maps for commuting triangles over a fixed base
 
-Source: Stacks Project, Cohomology, Section 20.14 (Tag 01F7).
+## References
+
+* Stacks Project, Tag 01F7
 -/
 
 @[expose] public section
@@ -25,10 +27,8 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- Pullback along a commuting triangle, followed by the inverse-image comparison.
-Source: Stacks Project, Tag 01F7. 
-(blueprint: lem-weil-pbc-etale-cohomology-triangle-laws)
--/
+/-- Pullback along a commuting triangle, followed by the inverse-image comparison
+(Stacks, Tag 01F7). -/
 noncomputable def cohomologyTriangleMap {S X Y : Scheme.{u}}
     (f : X ⟶ Y) (a : Y ⟶ S) (b : X ⟶ S) (h : b = f ≫ a)
     (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
@@ -37,10 +37,8 @@ noncomputable def cohomologyTriangleMap {S X Y : Scheme.{u}}
   (Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} f a b h).inv.app G) q).comp
     (cohomologyMap f (((a)^*[AddCommGrpCat.{u + 1}]).obj G) q)
 
-/-- A triangle map carries restriction from the base to restriction from the base.
-Source: Stacks Project, Tag 01F7. 
-(blueprint: lem-weil-pbc-etale-cohomology-triangle-laws)
--/
+/-- A triangle map carries restriction from the base to restriction from the base
+(Stacks, Tag 01F7). -/
 theorem cohomologyTriangleMap_restriction {S X Y : Scheme.{u}}
     (f : X ⟶ Y) (a : Y ⟶ S) (b : X ⟶ S) (h : b = f ≫ a)
     (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)
@@ -59,24 +57,7 @@ theorem cohomologyTriangleMap_restriction {S X Y : Scheme.{u}}
           (cohomologyMap (f ≫ a) G q x)) := congrArg _ hcomp
     _ = _ := by rw [← Sheaf.H.map_comp_apply]; simp
 
-/-- Triangle maps are unital and compose contravariantly over a fixed base.
-Source: Stacks Project, Cohomology, Section 20.14 (Tag 01F7).
-(blueprint: lem-weil-pbc-etale-cohomology-triangle-laws)
-
-Proof:
-1. For the identity triangle, the inverse-image comparison is the identity comparison
-   whiskered with pullback along a. The identity part of cohomology pullback functoriality
-   therefore gives the identity map on H^q(a inverse image G).
-2. For X --f--> Y --g--> Z over S, apply naturality of cohomological pullback to the
-   inverse-image comparison for g and the structure map of Z. Apply composition of
-   cohomological pullback to f and g. The two resulting sheaf morphisms agree by the
-   associativity coherence of inverse-image composition: they are the same comparison
-   between left adjoints to the threefold direct-image composite, compatible with units.
-3. Functoriality of H^q on sheaf morphisms and cancellation of each composition
-   isomorphism with its inverse give the displayed equality. Equality proofs in the
-   triangle data do not affect the maps by proof irrelevance. This argument applies to
-   every scheme and sheaf, without compactness, torsion, or index assumptions.
--/
+/-- Triangle maps are unital and compose contravariantly over a fixed base (Stacks, Tag 01F7). -/
 theorem cohomologyTriangleMap_laws
     (S : Scheme.{u}) (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
     (∀ (X : Scheme.{u}) (a : X ⟶ S),

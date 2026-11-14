@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 
 /-! # Pullback on the Hom complexes of constant sheaves
 
-Source: Stacks Project, Tag 06XR and Tag 01F8, equations 01F9 and 01FA.
+## References
+
+* Stacks Project, Tags 06XR, 01F8, 01F9 and 01FA
 -/
 
 @[expose] public section
@@ -144,21 +146,8 @@ private theorem ext_homComplex_naturality
   rw [Cochain.fromSingleEquiv_fromSingleMk]
 
 
-/-- Ext pullback on the unevaluated Hom complex of a chosen injective resolution.
-Source: Stacks Project, Tag 06XR; Tag 01F8, equations 01F9 and 01FA.
-(blueprint: lem-weil-pbc-ext-pullback-hom-complex)
-
-Proof: Write a class as a cocycle into the chosen resolution, using the
-Ext/resolution equivalence. Its inverse sends it to the roof whose right arrow
-is the augmentation. Apply the exact inverse-image functor to the roof and
-precompose with the constant-sheaf comparison. The supplied augmentation
-homotopy makes the localized composite of the pulled-back augmentation and φ
-identical to the target augmentation. Cancel that invertible augmentation.
-The resulting roof is the class of the cochain obtained by applying inverse
-image degreewise and composing with φ. This is homPullbackMap by its explicit
-formula. Passing from cocycles modulo boundaries to the homology of the Hom
-complex gives the square below. The argument includes degree zero and zero
-objects; it uses no injectivity of the pulled-back resolution. -/
+/-- Ext pullback on the unevaluated Hom complex of a chosen injective resolution
+(Stacks, Tags 06XR, 01F8, 01F9 and 01FA). -/
 theorem extPullback_homComplex {X X' : Scheme.{u}} (g : X' ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)
     (φ : ((upperStar AddCommGrpCat.{u + 1} g).mapHomologicalComplex (.up ℤ)).obj

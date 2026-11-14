@@ -105,20 +105,7 @@ private theorem pushforward_toSpecΓ_isQuasicoherent
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
 /-- The associated-sheaf/global-sections counit is natural on any affine scheme,
-and invertible on quasi-coherent modules.
-Source: Stacks Project, Lemma 26.7.5 (Tag 01IB).
-(blueprint: lem-pc-affine-sheaf-resolution-from-ring-model), proof step 1.
-
-Proof: Push a module forward along X.toSpecΓ. Its global sections agree with the
-original sections as Γ(X,⊤)-modules: the scalar action uses ΓSpecIso.inv followed
-by X.toSpecΓ.appTop = ΓSpecIso.hom, whose composite is the identity. This gives a
-natural isomorphism of global-section functors. Apply tilde to that isomorphism,
-compose with the spectrum counit, and restrict back along X.toSpecΓ. The
-restriction adjunction counit identifies the result with the original module.
-Pushforward along this scheme isomorphism is naturally isomorphic to restriction
-along its inverse and therefore preserves quasi-coherence. The spectrum counit
-is invertible on a quasi-coherent module by Tag 01IB, so the composite is too.
-The empty affine scheme and zero module satisfy the same argument. -/
+and invertible on quasi-coherent modules (Stacks, Tag 01IB). -/
 private theorem exists_affineChart_counit (X : Scheme.{u}) [IsAffine X] :
     ∃ ε : SheafOfModules.evaluation.{u} X.ringCatSheaf (.op ⊤) ⋙
         (tilde.functor Γ(X, ⊤) ⋙ restrictFunctor X.toSpecΓ) ⟶ 𝟭 X.Modules,
@@ -190,8 +177,8 @@ end CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Global sections commute with homology of a termwise quasi-coherent complex
-on an affine scheme, via the exact associated-sheaf functor and its counit.
-Source: Stacks Project, Tags 01IB and 01HV. -/
+on an affine scheme, via the exact associated-sheaf functor and its counit
+(Stacks, Tags 01IB and 01HV). -/
 theorem nonempty_affineSectionsHomologyIso
     (X : Scheme.{u}) [IsAffine X] (K : CochainComplex X.Modules ℤ)
     (hqc : ∀ n : ℤ, (K.X n).IsQuasicoherent) (n : ℤ) :

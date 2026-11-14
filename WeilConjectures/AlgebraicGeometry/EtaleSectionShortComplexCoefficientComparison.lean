@@ -15,8 +15,9 @@ import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 
 /-! # A coefficient comparison of fixed normalized section complexes
 
-Source: Stacks Project, Tag 0A50, functorial resolution proof, and Tag 01F7.
-(blueprint: lem-weil-pbc-etale-section-short-complex-coefficient-comparison).
+## References
+
+* Stacks Project, Tags 0A50 and 01F7
 -/
 
 @[expose] public section
@@ -28,9 +29,8 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-/-- Extend the augmentation to a complex of injectives using successive exact images.
-Source: Stacks Tag 01F7, Remark 20.14.2; the construction follows the proved private
-helper in EtaleMayerVietorisSectionComparison and Mathlib's injective-resolution descent. -/
+/-- Extend the augmentation to a complex of injectives using successive exact images (Stacks,
+Tag 01F7). -/
 private theorem exists_lift_to_injective_complex
     {C : Type*} [Category* C] [Abelian C] {G : C} (I : InjectiveResolution G)
     (L : CochainComplex C ℕ) [∀ n, Injective (L.X n)]
@@ -56,10 +56,8 @@ private theorem exists_lift_to_injective_complex
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-/-- The open-section cocycle transfer, with the adjoint coefficient map retained.
-Source: Stacks Tags 01FB and 03F3. Generalizes the proved calculation in
-EtaleResolutionSectionTransferExtClass: exactFunctor_resolution_cocycle supplies
-transport followed by the coefficient map; sectionsEquiv identifies its representative. -/
+/-- The open-section cocycle transfer, with the adjoint coefficient map retained
+(Stacks, Tags 01FB and 03F3). -/
 private theorem coefficient_transfer_ext
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -145,9 +143,8 @@ private theorem coefficient_transfer_ext
   simp only [hfe]
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- A section cycle determines a closed Hom cocycle by the free-sheaf adjunction.
-Source: Stacks Tags 03F3 and 0A50; the calculation is the one in
-EtaleResolutionSectionCanonicalOpenTransfer. -/
+/-- A section cycle determines a closed Hom cocycle by the free-sheaf adjunction
+(Stacks, Tags 03F3 and 0A50). -/
 private theorem section_cocycle
     {S : Scheme.{u}}
     (K : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ)
@@ -170,8 +167,7 @@ private theorem section_cocycle
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-/-- The explicit open-object comparison respects coefficient morphisms.
-Source: Stacks Tag 03F3; exact-functor preservation of Ext composition and associativity. -/
+/-- The explicit open-object comparison respects coefficient morphisms (Stacks, Tag 03F3). -/
 private theorem openObject_coefficient {X : Scheme.{u}} (W : X.Opens)
     {F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : F ⟶ G) (q : ℕ)
     (x : Abelian.Ext ((etaleOpenFreeSheaf X).obj (Scheme.Etale.mk W.ι)) F q) :
@@ -189,10 +185,8 @@ private theorem openObject_coefficient {X : Scheme.{u}} (W : X.Opens)
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-/-- Transfer on one open with arbitrary target coefficients and fixed comparisons.
-Source: Stacks Tags 0A50, 01F7 and 03F3. Represent a class by a cycle, use the two
-open_cocycle normalizations, and apply coefficient_transfer_ext followed by the
-proved open-object pullback identity and coefficient naturality. -/
+/-- Transfer on one open with arbitrary target coefficients and fixed comparisons
+(Stacks, Tags 0A50, 01F7 and 03F3). -/
 private theorem coefficient_transfer_open
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -247,33 +241,8 @@ private theorem coefficient_transfer_open
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-/-- A coefficient morphism induces a comparison of fixed section complexes.
-Source: Stacks Project, Tag 0A50, resolution functoriality, and Tag 01F7.
-(blueprint: lem-weil-pbc-etale-section-short-complex-coefficient-comparison)
-
-Proof: Adjoint φ to F → f_*G. Inverse image is exact, so its right adjoint
-preserves injectives. Extend the adjoint coefficient map from the augmentation
-of I into f_*J in degree zero by injectivity. At each successor degree,
-exactness of I makes the composite to the next term factor through the next
-image, and injectivity extends this factor to the full resolution term.
-This constructs an augmentation-preserving chain map I → f_*J. Apply
-resolutionSectionShortComplexTransfer to it. Substitute hU and hV to identify
-the target section complex with the one on the displayed target opens.
-The equation hk and monicity of the source open inclusion identify k with
-the restricted morphism f on the intersection.
-
-For the whole-scheme homology map use the canonical coefficient transfer
-identity, whose cocycle formula is normalized by cI and cJ. For the
-intersection map represent a homology class by a cycle on U ∩ V. The
-free-abelian-representable sections adjunction turns it into a Hom cocycle
-into I. Exact inverse image followed by the adjoint chain map represents
-pullback of its Ext class followed by φ. Evaluating its restriction on the
-target intersection gives the transfer section. The two composition comparisons
-along the square hk are exactly the first two factors of openSquareCoefficient;
-restriction of φ gives its last factor. The open_cocycle fields of cI and cJ
-therefore give the second identity. Homotopic lifts induce the same maps.
-No covering hypothesis or connecting map is used. Zero coefficients, empty
-opens, coincident opens and degree zero are included. -/
+/-- A coefficient morphism induces a comparison of fixed section complexes
+(Stacks, Tags 0A50 and 01F7). -/
 theorem etaleSectionShortComplex_coefficient_comparison
     {X Y : Scheme.{u}} (f : Y ⟶ X) (U V : X.Opens) (U' V' : Y.Opens)
     (hU : U' = f ⁻¹ᵁ U) (hV : V' = f ⁻¹ᵁ V)

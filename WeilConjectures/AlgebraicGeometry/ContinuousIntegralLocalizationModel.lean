@@ -25,9 +25,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 
 /-- A strict complex representative together with the specified scalar-telescope
 colimit comparison. This record keeps its category abstract so that projections do
-not unfold the construction of continuous coefficient rings.
-Source: good truncation and the localization telescope of Bhatt--Scholze 6.8.2.
-(auxiliary; not a blueprint node). -/
+not unfold the construction of continuous coefficient rings (Bhatt–Scholze, Lemma 6.8.2). -/
 structure IntegralLocalizationComplexModel
     {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory A]
     [HasColimitsOfShape (ULift.{x} ℕ) A]
@@ -45,25 +43,8 @@ structure IntegralLocalizationComplexModel
       comparison.hom = representative.inv ≫ c.ι.app n.down
 
 /-- A bounded-below integral derived object admits a strict telescope model of its
-scalar-extension unit. Only coefficient algebra is asserted here; no pushforward occurs.
-Source: Bhatt--Scholze, Lemma 6.8.2; Hemo--Richarz--Scholbach, Lemma 5.3(1).
-(auxiliary; not a blueprint node).
-
-Proof. Choose a representative C zero below a by good truncation. The regular restricted
-E-module is the colimit of the regular integral module under multiplication by ℓ:
-on a compact profinite test the nth leg is division by ℓⁿ, and compactness gives a
-single denominator for every continuous E-valued function. Monoidal sheafification
-and inverse image from the point preserve this colimit. Tensoring with each term of
-C, and commuting colimits with the coequalizer defining balanced tensor, gives the
-termwise colimit as restriction of the termwise extension of C. The comparison on
-the nth leg is the extension unit followed by division by ℓⁿ, by the formula for the
-balanced tensor unit. Exactness of scalar extension identifies its left derived
-functor with this termwise construction and transports the unit to the specified
-derived adjunction. The diagram remains zero below a, so good truncation at a is an
-isomorphism of diagrams. Reindexing along ULift ℕ ≌ ℕ preserves the colimit. These
-identifications give v and the displayed leg equation. Zero complexes and empty
-schemes satisfy the same construction; no finite-dimensionality or constructibility
-of C is used. -/
+scalar-extension unit. Only coefficient algebra is asserted here; no pushforward occurs
+(Bhatt–Scholze, Lemma 6.8.2; Hemo–Richarz–Scholbach, Lemma 5.3(1)). -/
 theorem exists_integralLocalization_complex_model (X : Scheme.{u})
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) X)))

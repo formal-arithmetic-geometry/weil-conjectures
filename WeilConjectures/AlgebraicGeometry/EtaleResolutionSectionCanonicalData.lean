@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyComparison
 /-!
 # Existence of normalized resolution comparisons
 
-Source: Stacks Project, Tags 0A50 and 03F3.
+## References
+
+* Stacks Project, Tags 0A50 and 03F3
 -/
 
 @[expose] public section
@@ -162,28 +164,8 @@ private lemma represented_resolution {C : Type*} [Category.{v} C] [Abelian C]
   rw [K.cyclesIsoSc'_hom_iCycles]
   exact hz
 
-/-- Existence of comparisons normalized by the Hom-to-sections adjunction.
-Source: Stacks Project, Tag 0A50 (sections of resolutions), Tag 03F3 (localization).
-(blueprint: lem-weil-pbc-etale-resolution-section-canonical-data)
-
-Proof: For the constant integer sheaf on X, the constant-sheaf adjunction and
- evaluation at 1 identify Hom into each term of I with global sections. These
- additive equivalences commute with differentials. Thus the Hom-complex computation
- of Ext identifies its cocycle classes with homology of the global section complex.
- Map cycles by `I.extMk`; its kernel is the boundaries and it is surjective,
- so descent through the homology cokernel gives the global additive equivalence
- with the prescribed cocycle value. For every open W, replace
- the constant sheaf by the free abelian sheaf on the representable W. The
- sheafification/free/Yoneda adjunction gives `sectionsEquiv` in each degree,
- naturally in the resolution term, and hence again an equivalence of cocycle
- classes. Compose the resulting homology-to-Ext equivalence with the independently
- constructed `etaleOpenObjectCohomologyMap`, which is bijective by localization:
- inverse image along W preserves injectives, since exact extension by zero is
- its left adjoint. The composite has the stated open cocycle value. This
- constructs all opens from the same adjunction, with no compatibility claimed
- here. In degree zero use the kernel of the first differential; in positive
- degrees quotient cycles by boundaries. Empty opens and zero sheaves give zero
- groups and the same construction. -/
+/-- Existence of comparisons normalized by the Hom-to-sections adjunction
+(Stacks, Tags 0A50 and 03F3). -/
 theorem exists_resolutionSection_canonical_comparison {X : Scheme.{u}}
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G) :
     Nonempty (ResolutionSectionCanonicalComparison G I) := by

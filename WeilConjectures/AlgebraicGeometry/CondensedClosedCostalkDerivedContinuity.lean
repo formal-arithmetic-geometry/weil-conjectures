@@ -189,13 +189,8 @@ private noncomputable def localizationTriangleFunctor
   map_id K := by ext <;> simp [Triangle.mk]
   map_comp k l := by ext <;> simp
 
-/-- Colimits of complexes with a common strict lower bound retain that bound.
-Source: the degreewise colimit construction for homological complexes, used in
-Hemo--Richarz--Scholbach, Lemma 5.3(2).
-(auxiliary; not a blueprint node)
-
-Proof: evaluation at any degree below the bound preserves the colimit. Every
-object of that evaluated diagram is zero, hence its colimit is zero. -/
+/-- Colimits of complexes with a common strict lower bound retain that bound
+(Hemo--Richarz--Scholbach, Lemma 5.3(2)). -/
 theorem colimit_isStrictlyGE
     {C : Type*} [Category* C] [Abelian C]
     {I : Type*} [Category I] [HasColimitsOfShape I C]
@@ -256,25 +251,8 @@ set_option maxHeartbeats 400000 in
 set_option synthInstance.maxHeartbeats 100000 in
 -- Internal module colimits require a larger typeclass search budget.
 set_option synthInstance.maxSize 4096 in
-/-- Derived closed costalks commute with uniformly bounded-below filtered colimits.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), final paragraph, using (3.4)
-and Lemma 5.3(1).
-(auxiliary; not a blueprint node)
-
-Proof: let k be the complementary open immersion. It is quasi-compact because T
-is noetherian. Apply the functorial recollement triangle i_*Ri! -> id -> Rk_*k*
-to the diagram and its good-truncated colimit. All three functors preserve a
-common cohomological lower bound. Exact filtered colimits produce the colimit
-long exact sequence on cohomology. The middle comparison is invertible because
-cohomology commutes with filtered colimits; the third is invertible by Lemma
-5.3(1) applied to k, and the exact colimit-preserving restriction k*. The five
-lemma makes the first comparison invertible. The closed pushforward i_* is
-exact, fully faithful, and preserves colimits (its right adjoint is H), and thus
-reflects the resulting cohomology comparison on Z. Uniqueness of right adjoints
-identifies the H in the statement with the exceptional inverse image supplied
-by recollement, compatibly with units and counits. Naturality identifies the
-comparison with condensedContinuityComparison, including its good-truncation
-projection. Empty closed or open parts give the same argument with zero terms. -/
+/-- Derived closed costalks commute with uniformly bounded-below filtered colimits
+(Hemo--Richarz--Scholbach, Lemma 5.3). -/
 theorem condensed_closed_costalk_derived_continuity
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

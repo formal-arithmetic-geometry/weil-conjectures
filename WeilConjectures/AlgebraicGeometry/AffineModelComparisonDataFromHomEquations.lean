@@ -10,8 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.AffineModelComparisonData
 public import WeilConjectures.AlgebraicGeometry.AffineModelCoherentObjectComparisons
 
 /-! # Constructor interface for affine comparison data
-Source: the explicit comparison-data formula, Stacks Project, Tag 09RE.
-(blueprint: lem-pc-affine-model-comparison-data-from-hom-equations). -/
+
+## References
+
+* Stacks Project, Tag 09RE
+-/
 
 @[expose] public section
 universe u w
@@ -20,20 +23,8 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Constructor API for the original comparison predicate, with canonical functor maps.
-Source: the explicit defining formula of affineModelComparisonData.
-(blueprint: lem-pc-affine-model-comparison-data-from-hom-equations).
-
-Proof: Expand the explicit proposition affineModelComparisonData. Use the supplied
-coordinate equivalences d and dlim and the supplied object comparisons as its six
-existential witnesses. The two remaining goals are precisely hstage and hlim:
-the map equation for affineModelLocalizedTilde is d.functor.map applied to Q.map
-of termwise tilde, and affineModelTildeComplex is the original explicit termwise
-tilde functor. The scalarExtensionHom and perfectStageMap/perfectLimitMap terms
-are the same after expanding the named stage and limit arrows.
-Proof irrelevance identifies the generated preorder and HasPullback
-proof constants with the direct instances. No mathematical choice or new geometric
-assertion is needed. Identity arrows, zero models and zero rings are included. -/
+/-- Constructor for the comparison predicate `affineModelComparisonData`, with canonical
+functor maps. -/
 theorem affineModelComparisonData_of_hom_equations
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

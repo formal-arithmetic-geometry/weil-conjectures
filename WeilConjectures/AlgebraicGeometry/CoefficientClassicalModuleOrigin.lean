@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.CoefficientComparisonPresentationSheafi
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import Mathlib.CategoryTheory.Sites.Equivalence
 /-! # Classical intrinsic coefficient module descent
-Source: blueprint classical sheaves of modules, essential-image paragraph.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -378,22 +377,7 @@ private theorem fixedOrigin (X : Scheme.{u})
   exact ⟨G, ⟨asIso (adj.counit.app F)⟩⟩
 
 /-- A module with invertible affine continuity maps has an etale module antecedent.
-There is no constructibility or Noetherianity assumption.
-Source: blueprint theorem-classical-sheaves-essential-image--1, essential-image paragraph;
-Bhatt--Scholze, The pro-etale topology for schemes, Lemma 5.1.2
-(auxiliary; not a blueprint node).
-
-Proof: the constant-scalar equivalence identifies intrinsic constant-ring modules
-with sheaves of modules over the discrete coefficient ring. Transport the module
-and its continuity maps through the AsSmall site equivalence. Forgetting to sets
-preserves the filtered colimits in the continuity maps and reflects isomorphisms,
-so its underlying set sheaf is classical. The classical-sheaf counit criterion
-makes its set comparison counit invertible. Addition and every scalar action are
-natural, and the constant-section equation identifies this with the forgotten
-module counit. Forgetting modules reflects isomorphisms sectionwise. The intrinsic
-module counit is therefore invertible, and its source is the inverse image of the
-direct-image module, furnishing the desired antecedent. This proof also applies
-to the zero module, zero ring and empty scheme. -/
+(Bhatt--Scholze, The pro-etale topology for schemes, Lemma 5.1.2). -/
 theorem coefficientClassicalModule_origin (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (F : ConstantCompletion.Mod (ConstantCompletion.constant

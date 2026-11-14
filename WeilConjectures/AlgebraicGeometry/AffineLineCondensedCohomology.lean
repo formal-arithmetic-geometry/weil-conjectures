@@ -20,10 +20,6 @@ import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapGlobalS
 
 /-! # Ordinary cohomology of the affine line with condensed coefficients
 
-Source: literature/blueprint/latest/blueprint/sec-fourier-transform/
-sk-lem-wft-character-integral/lem-fd-affine-line-constant-cohomology.md and its proof.
-(blueprint: lemma-integral-linear-character--2).
-
 The coefficients are the recorded finite-subextension-valued condensed ring pulled
 back from the point. Cohomology means the right derived functors of evaluation at
 `X`, the terminal object of the small pro-etale site, on abelian sheaves.
@@ -40,11 +36,7 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The constant section with value `a` of the pulled-back condensed Qbar coefficient.
-This applies the existing monoidal inverse image to the existing constant global
-section and evaluates the resulting tensor-unit morphism at the integer generator.
-Source: the degree-zero normalization of the affine-line cohomology lemma
-(blueprint: lemma-integral-linear-character--2). -/
+/-- The constant section with value `a` of the pulled-back condensed Qbar coefficient. -/
 def condensedQbarConstantSection (X : Scheme.{v}) (ℓ : ℕ) [Fact ℓ.Prime]
     (a : PadicAlgCl ℓ) :
     (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X).obj.obj
@@ -244,38 +236,7 @@ private theorem condensedQbar_line_isZero
   exact @Equiv.subsingleton _ _ e.addCommGroupIsoToAddEquiv.toEquiv hz
 
 /-- Ordinary constant cohomology of the geometric affine line, including normalization
-by constant sections in degree zero.
-
-Source: literature/blueprint/latest/blueprint/sec-fourier-transform/
-sk-lem-wft-character-integral/lem-fd-affine-line-constant-cohomology.md and its proof.
-(blueprint: lemma-integral-linear-character--2).
-
-Proof: Put X = Spec K[t]. The source-library affine-line Kummer theorem gives
-vanishing for every finite constant group killed by a power of ell. Compare the
-finite quotients of Z_ell with Z/ell^m and transfer their cohomology from the
-etale site to the pro-etale site. In degree zero these groups are finite because
-X is connected; in positive degree they vanish. Integral cohomology classes are
-detected by these finite reductions, since the preceding finite-level groups
-are finite. Thus positive-degree Z_ell cohomology vanishes. The qcqs constant
-cohomology base-change theorem then gives the same vanishing with Qbar_ell.
-This argument works in every characteristic in which ell is invertible.
-
-To identify the coefficient models, apply the continuous-function comparison
-to each finite intermediate field. Its naturality and the two colimit universal
-properties identify the pulled-back condensed coefficient with the sheafification
-of finite-subextension-valued functions; the existing locally finite comparison
-identifies the latter with the adic constant sheaf. Transport cohomology along
-this isomorphism and use cohomology as right-derived terminal evaluation.
-
-For degree zero, global sections of the pulled-back condensed coefficient on
-qcqs X are continuous functions valued in a finite intermediate field. Every
-such function is constant on connected X. The monoidal point adjunction sends
-the given condensed constant to the corresponding continuous constant: evaluate
-the adjunction identity at the terminal profinite set. Naturality under finite
-field inclusions then gives precisely the constant map in the statement.
-This map is a bijection, hence an additive equivalence; compose its inverse with
-the inverse of the canonical map to the zeroth right derived functor. The
-normalization is the inverse-equivalence identity. -/
+by constant sections in degree zero. -/
 theorem affineLine_condensedQbar_cohomology
     (k : Type u) [Field k] (hk : Finite k ∨ IsAlgClosed k)
     (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : IsUnit (ℓ : k))

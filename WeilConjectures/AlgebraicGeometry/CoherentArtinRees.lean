@@ -15,13 +15,15 @@ import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 
 /-! # Artin-Rees for coherent modules on a Noetherian scheme
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YA (lemma-Artin-Rees)
-(blueprint: lem-weil-pbc-coherent-artin-rees).
+## Implementation details
 
 The pullback of the two inclusions represents their sectionwise intersection. Equalities
 and inclusions of subsheaves are expressed by their images in the sections of `F` on every
-open. Powers and multiplication images use the shared definitions from the formal-module
-node, including the zeroth power of the ideal.
+open.
+
+## References
+
+* Stacks Project, Tag 01YA
 -/
 
 @[expose] public section
@@ -65,27 +67,8 @@ private theorem range_of_locally_range {X : Scheme.{u}} {M N : X.Modules}
 
 /-- Artin-Rees for a quasi-coherent subsheaf `g : G ⟶ F` of a coherent module `F`.
 The constant `c` is uniform over all opens and all `n ≥ c`. The first clause is the equality
-I^(n-c)(I^c F ∩ G) = I^n F ∩ G; the second is its inclusion in I^(n-c) G, all inside F.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YA (lemma-Artin-Rees)
-(blueprint: lem-weil-pbc-coherent-artin-rees).
-
-Proof:
-1. Coherence gives quasi-coherence and finite type. Apply the existing coherent
-   affine-sections theorem to obtain finite sections on each affine open.
-2. Apply Mathlib's module Artin-Rees lemma to the image of g on each affine open.
-   Choose a finite affine subcover by quasi-compactness and take the maximum c of
-   its bounds, using zero for an empty cover. The formulas at c and n, together
-   with (n-c)+(c-k)=n-k and multiplication of ideal powers, show that c works
-   in the section modules of every member of this cover.
-3. Apply artin_rees_affine_comparison on each covering affine to obtain equality
-   on its subopens. For any W intersect the cover with W. Membership in the range
-   of a monomorphism is local: its local preimages agree by injectivity on overlaps
-   and glue by the sheaf axiom. Apply this to both inclusions and to their product
-   intersection inclusion to descend the equality to W.
-4. Use formalModuleQuotient_factor on the pullback's projection to G with equal
-   exponents n-c. The pullback identity shows that the left side factors through
-   I^(n-c) G → F. The equality from step 3 gives the asserted inclusion. -/
+I^(n-c)(I^c F ∩ G) = I^n F ∩ G; the second is its inclusion in I^(n-c) G, all inside F
+(Stacks, Tag 01YA). -/
 theorem coherent_artin_rees {X : Scheme.{u}} [IsNoetherian X]
     (F G : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F)
     (g : G ⟶ F) [Mono g] (hG : G.IsQuasicoherent) (I : X.IdealSheafData) :

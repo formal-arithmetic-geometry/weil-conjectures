@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleCoefficientInjectiveSystem
 
 /-! # Compatible injective coefficient systems
 
-Source: Stacks Project, Tags 0EXZ and 04JC.
-(blueprint: lem-weil-pbc-etale-coefficient-injective-cokernel-system).
+## References
+
+* Stacks Project, Tags 0EXZ and 04JC
 -/
 
 @[expose] public section
@@ -25,27 +26,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option linter.unusedVariables false in
 /-- A compatible coefficient system embeds in a stagewise injective system, with
-compatible cokernels. Source: Stacks Project, Tag 0EXZ, product-of-direct-images
-construction, and Tag 04JC for preservation of cokernels by inverse image.
-(blueprint: lem-weil-pbc-etale-coefficient-injective-cokernel-system).
-
-Proof: Choose the canonical monomorphism from F k to Injective.under (F k).
-For each i take the product of the direct images of these injectives indexed by
-pairs (k, f : i to k). The component of ai is adjoint to φ f followed by the
-chosen embedding at k. The identity component is monic, so ai is monic.
-Each factor is injective because its left adjoint is exact, and the product is
-injective. For f : i to j, the k-component of ψ f is obtained by projecting to
-the factor indexed by f followed by g : j to k, then applying the counit and the
-composition comparison of direct images. Compare product projections and
-transpose across the adjunction: the unit and associativity equations give the
-identity and composition laws and the displayed compatibility with ai.
-Put FR i equal to cokernel (ai i) and bi i equal to its projection. The sequence
-is short exact since ai i is mono. Since inverse image preserves cokernels,
-compatibility of ai induces φR f with the displayed compatibility with bi.
-Cancel the epic inverse images of bi to prove the identity and composition laws
-of φR; the equations reduce to those of ψ and naturality of the comparisons.
-All choices here occur in an existential proof; no object is defined by an
-arbitrary witness of an unproved existence theorem. -/
+compatible cokernels (Stacks, Tags 0EXZ and 04JC). -/
 theorem etale_coefficient_injective_cokernel_system
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

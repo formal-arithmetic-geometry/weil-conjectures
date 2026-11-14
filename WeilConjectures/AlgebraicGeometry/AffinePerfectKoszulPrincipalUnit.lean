@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.AffinePerfectKoszulPrincipalUnitIso
 
 /-! # Powers Koszul complexes are perfect on a principal-open cover
 
-Source: Stacks Project, Tag 08CX, Section 36.9
-(blueprint: lem-sc-affine-perfect-koszul-principal-unit).
+## References
+
+* Stacks Project, Tag 08CX
 -/
 
 @[expose] public section
@@ -27,23 +28,7 @@ namespace AlgebraicGeometry
 
 /-- The object associated to the shifted Koszul complex on powers of a finite
 sequence is perfect; its canonical augmentation restricts to an isomorphism on
-the union of the principal opens. Source: Stacks, Tag 08CX
-(blueprint: lem-sc-affine-perfect-koszul-principal-unit).
-
-Proof:
-1. The Koszul terms are finite free exterior powers and vanish above degree `r`
-   (`def-weil-pbc-koszul-complex`). Deleting degree zero and negating the
-   differential leaves a bounded finite free complex. Its associated sheaf is
-   strictly perfect, hence its derived object is perfect
-   (`lemma-coherent-base-change-invertible-sheaves--1`).
-2. On `D(f i)`, the element `(f i)^e` is invertible. Exterior multiplication by
-   `(f i)^(-e) e_i` contracts the localized Koszul complex: the differential's
-   formula gives `dh + hd = id` (Stacks, Tags 0626 and 0663). The Koszul triangle
-   therefore makes the augmentation a quasi-isomorphism on this open.
-3. These opens cover their union. Being an isomorphism in the derived category
-   is local, so the restricted augmentation is an isomorphism on the union.
-   The empty family gives the empty open; the one-element family gives the usual
-   two-term contracting homotopy. -/
+the union of the principal opens (Stacks, Tag 08CX). -/
 theorem affine_perfect_koszul_principal_unit
     (A : Type a) [CommRing A] (r : ℕ) (f : Fin r → A) (e : ℕ) (he : 1 ≤ e)
     [HasDerivedCategory.{b}

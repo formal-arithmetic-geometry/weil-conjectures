@@ -20,8 +20,9 @@ import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 /-!
 # Geometric components after a finite constant extension
 
-Source: Stacks Project, varieties.tex, Tags 038E and 0387; morphisms.tex, Tags 01VB and 02NK
-(blueprint: lem-zl-affine-geometric-components-finite-extension).
+## References
+
+* Stacks Project, Tags 038E, 0387, 01VB and 02NK
 -/
 
 @[expose] public section
@@ -34,9 +35,8 @@ namespace AlgebraicGeometry
 
 /-- The data expressing a finite-field decomposition into affine open-and-closed geometric
 components.  The maps `baseComponent` are characterized by their two pullback projections, so
-that they are the canonical base changes of the inclusions `inclusion`.
-Source: Stacks Project, varieties.tex, Tags 038E and 0387
-(blueprint: lem-zl-affine-geometric-components-finite-extension). -/
+that they are the canonical base changes of the inclusions `inclusion` (Stacks, Tags 038E and 0387).
+-/
 structure AffineGeometricComponentDecomposition
     (D : WeilConjectures.FiniteFieldDatum.{u}) {X₀ : Scheme.{u}}
     (f₀ : X₀ ⟶ Spec (CommRingCat.of D.k₀)) (e : ℕ) (he : 1 ≤ e) where

@@ -14,8 +14,7 @@ import all WeilConjectures.AlgebraicGeometry.CoherentSupportVanishingIdealNilpot
 
 /-! # Concentrating an ideal-power product on a closed subset
 
-Source: Stacks Project, Tags 01YD and 01Y9.
-(blueprint: lem-pc-s3-coherent-ideal-power-supported-on-closed)
+Stacks Project, Tags 01YD and 01Y9.
 -/
 
 @[expose] public section
@@ -25,29 +24,7 @@ universe u
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- An ideal-power product can be made to vanish away from a prescribed closed subset.
-
-Source: Stacks Project, Tag 01YD, proof of Lemma 30.12.1, applying Tag 01Y9,
-Lemma 30.10.2 (https://stacks.math.columbia.edu/tag/01YD).
-(blueprint: lem-pc-s3-coherent-ideal-power-supported-on-closed)
-
-Proof: Cover V = X minus C by finitely many affine opens of X. Coherence gives
-quasi-coherence and finite type; on each affine the nonzero-stalk locus is the zero
-locus of the annihilator of the section module. The hypothesis, restricted to an
-affine contained in V, places this locus in the zero locus of K's section ideal.
-Thus the section ideal lies in the radical of the annihilator. The affine section
-ring is Noetherian, so the ideal is finitely generated and some power annihilates
-the section module. Take the maximum of these finitely many powers; powers are
-decreasing, so this exponent kills the module on each member of the cover.
-The general helpers in CoherentSupportVanishingIdealNilpotence identify the
-sections of the recursively constructed ideal powers with algebraic ideal powers
-and prove quasi-coherence. Tensor and image quasi-coherence give quasi-coherence
-of the product. Its image inclusion is injective on sections, and its affine range
-is the ideal power times the section module, hence zero on the chosen cover.
-Quasi-coherence identifies each affine restriction with the sheaf associated to
-its zero section module. Restriction identifies its stalks with the ambient ones,
-so the product has zero stalk at every point outside C. The empty cover gives
-exponent zero. No restriction comparison for ideal powers, coherent product or
-quotient, exact sequence, or strict support containment is needed. -/
+(Stacks, Tags 01YD and 01Y9). -/
 theorem coherent_ideal_power_supported_on_closed
     (X : Scheme.{u}) [IsNoetherian X]
     (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F)

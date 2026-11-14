@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 
 /-! # Eventual vanishing in filtered etale sheaf colimits
 
-Source: Stacks Project, Sites, Lemma Tag 0738, and Etale Cohomology, Tag 03Q4.
+## References
+
+* Stacks Project, Tags 0738 and 03Q4
 -/
 
 @[expose] public section
@@ -29,22 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- A section on a quasi-compact etale object which vanishes in a filtered sheaf
-colimit vanishes at a later stage. Quasi-separatedness is not needed for this assertion.
-Source: Stacks Project, Sites, Lemma Tag 0738, proof of part (2), and Etale
-Cohomology, Section Tag 03Q4 (blueprint: lem-weil-pbc-etale-section-colimit-eventual-zero).
-
-Proof: Form the sectionwise presheaf colimit P of G and identify its sheafification
-with c.pt, including the coprojections, by the sheafification adjunction for modules.
-The image of s in P has zero image after sheafification, so local equality supplies
-an etale covering of U on which it is zero in P. The covering arrows are etale
-by etale cancellation, hence their images are open. Compactness of U gives a finite
-subfamily still covering U. On each member, the filtered-colimit equality criterion
-supplies an arrow out of i killing the restriction of s. Filteredness supplies one
-common target and equalizes the finitely many arrows from i. At that target, the
-transport of s restricts to zero on every member of the finite covering. Since that
-stage is a sheaf, separatedness implies that the transport of s is zero over U.
-For an empty covering the same conclusion follows from the sheaf condition, which
-makes the sections on the empty object a zero module. -/
+colimit vanishes at a later stage (Stacks, Tags 0738, 03Q4). -/
 theorem etale_section_colimit_eventual_zero
     (X : Scheme.{u}) (Λ : Type v) [CommRing Λ]
     (U : X.Etale) [CompactSpace U.left]

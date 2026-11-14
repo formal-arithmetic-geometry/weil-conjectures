@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAffineReconstructi
 
 /-! # Coherent formal modules on an affine scheme
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W and its proof
-(blueprint: lem-weil-pbc-coherent-formal-modules-affine).
+Stacks Project, Tag 087W.
 -/
 
 @[expose] public section
@@ -30,30 +29,8 @@ namespace AlgebraicGeometry
 
 /-- Coherent formal modules on Spec A are finite modules over the I-adic completion.
 The cones specify the underlying inverse limits and their maps, while the scalar equation
-specifies the componentwise action of the completion. Index `op n` means level `n + 1`.
-The inverse is naturally the sheaf quotient system of the tilde of the restricted module;
-on an affine scheme this is canonically the tilde of the module quotient N/I^(n+1)N,
-with the canonical reductions on objects and maps.
-
-Source: Stacks Project, Lemma 087W
-(blueprint: lem-weil-pbc-coherent-formal-modules-affine).
-Proof, following the seven steps of the node:
-1. Global sections identify coherent sheaves with finite A-modules (01XZ), and ideal
-products and quotients on an affine with the corresponding module products and quotients.
-Thus the formal object conditions become I^n M_n = 0 and M_(n+1)/I^n M_(n+1) = M_n.
-2. The tilde/global-sections adjunction (01I7, 01IA, 01IB) gives an equivalence on these
-systems, including their compatible families of morphisms.
-3. Surjective transitions make the limit project onto M_1. Lift finite generators of M_1;
-Nakayama for the nilpotent ideal I/I^n (00DV) makes (A/I^n)^t -> M_n surjective at each level.
-4. The kernels K_n have surjective transitions: adjust a lift by an element of I^n.
-Mittag-Leffler exactness (02N1) gives K -> (A-completion)^t -> M -> 0, so M is finite.
-5. By completeness of A-completion (05GG), the free-module projection has kernel I^n.
-Surjectivity K -> K_n then gives ker(M -> M_n) = I^n M and surjectivity of that projection.
-6. The completion is Noetherian (0316) and complete (05GG); finite modules over it are
-complete (00MA). Therefore N -> lim N/I^n N is a natural linear isomorphism.
-7. The projections give the other natural isomorphism of systems. Assemble both with
-the tilde/global-sections equivalence. Scalar multiplication and morphisms act componentwise.
--/
+specifies the componentwise action of the completion. Index `op n` means level `n + 1`
+(Stacks, Tag 087W). -/
 theorem coherentFormalModules_affine (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)
     (hJ : J = Scheme.IdealSheafData.ofIdealTop

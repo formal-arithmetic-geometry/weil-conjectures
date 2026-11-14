@@ -27,23 +27,7 @@ set_option maxHeartbeats 800000 in
 -- Elaborating the nested scalar restrictions and tensor components needs extra heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- The presheaf change-of-rings map exists with its section formula.
-Source: Stacks Project, Morphisms, proof of Lemma 01SB.
-(blueprint: lem-weil-pbc-change-of-rings-tensor-action-maps-map).
-
-Proof: on an open W send (c,p) to eta_W(c tensor_B p), where eta is
-the change-of-rings sheafification unit. Additivity in each variable follows
-from additivity of the pure tensor and linearity of eta. For a section r of
-O_Y, the second-factor relation gives c tensor_B (B.hom(r)p) =
-phi(B.hom(r))c tensor_B p = C.hom(r)c tensor_B p. Thus the pairing is
-O_Y-balanced, and linear in either factor for the restricted O_Y-action on
-the target. The sectionwise tensor universal property gives an O_Y-linear
-map C(W) tensor_O P(W) to T(W). Restrictions send c tensor_B p to the tensor
-of the restricted factors, and eta is natural; hence these maps commute
-with restrictions on pure tensors. Tensor induction extends this equality
-to every section. They therefore form the required presheaf morphism.
-There is no sheafification extension in this lemma. Empty opens and zero
-modules satisfy the same tensor universal properties.
--/
+(Stacks, Tag 01SB). -/
 theorem exists_changeOfRings_tensor_presheaf_map (Y : Scheme.{u})
     (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)
     (P : SheafOfModules.{u} (𝓡 B.right)) :

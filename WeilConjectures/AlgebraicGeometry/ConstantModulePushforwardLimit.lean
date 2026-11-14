@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardLimitSurjectiv
 /-!
 # Constant module direct images on an inverse limit
 
-Source: Stacks Project, Tag 09Z1 in degree zero.
-(blueprint: lem-weil-pbc-constant-module-pushforward-limit).
+## References
+
+* Stacks Project, Tag 09Z1
 -/
 
 @[expose] public section
@@ -65,28 +66,7 @@ noncomputable def constantModulePushforwardCocone :
       simpa using (π.naturality g.unop).symm }
 
 /-- The canonical cocone for an affine cofiltered inverse system with qcqs structure
-maps is a colimit of constant-module direct images.
-
-Source: Stacks Project, Tag 09Z1, degree zero, and Tag 09Z6, finite approximation paragraph.
-(blueprint: lem-weil-pbc-constant-module-pushforward-limit).
-
-Proof: Replace the small cofiltered category by a small coinitial directed preorder
-and pull the scheme limit and the sheaf diagrams along that functor. For each stage,
-the inverse image of its constant M-sheaf on the limit is canonically the constant
-M-sheaf. The transition maps under these comparisons are identities, by the defining
-pullback comparison. Their colimit is thus constant M, since a filtered category is
-nonempty and connected. All transition morphisms are affine and all structure maps
-are qcqs by hypothesis, so Tag 09Z1 in degree zero makes the canonical comparison
-from the colimit of stage direct images to the direct image on the limit an isomorphism
-on underlying abelian sheaves. Its components are precisely the maps defining the
-cocone here, by the inverse-image adjunction. The module structures are respected:
-every component is linear, and forgetting modules creates filtered colimits of
-sheaves (sheafify sectionwise filtered module colimits, whose underlying groups are
-the corresponding filtered group colimits). Thus the comparison is an isomorphism
-of module sheaves and the cocone is a colimit. Coinitiality of the inverse indexing
-functor becomes finality in the filtered direction and transfers the colimit back.
-No finiteness assumption on the ring or module is needed, and the zero module and
-empty limit scheme are covered by the same argument. -/
+maps is a colimit of constant-module direct images (Stacks, Tags 09Z1 and 09Z6). -/
 theorem isColimit_constantModulePushforwardCocone [IsCofiltered I]
     [∀ {i j : I} (g : i ⟶ j), IsAffineHom (D.map g)]
     [∀ i : I, QuasiCompact (p i)] [∀ i : I, QuasiSeparated (p i)]

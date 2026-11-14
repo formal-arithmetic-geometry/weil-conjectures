@@ -10,8 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.SfExactExchangePasting
 
 /-! # Shrinking the inverse B exchange
 
-Source: Stacks Project, Tags 0F7C, 0F7D and the A--F calculation of Tag 0F7J.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 0F7C, 0F7D and 0F7J
 -/
 
 @[expose] public noncomputable section
@@ -542,34 +543,8 @@ private theorem lift_core
     Category.comp_id, Category.assoc] using hc
 
 /-- The inverse B exchanges commute with the three supporting-open shrinkings,
-up to the explicit mixed-neighborhood boundary. This stops before either Q exchange.
-Source: Stacks Project, more-etale.tex, vertical pasting (Tag 0F7C), horizontal
-pasting (Tag 0F7D), and the graph-triangle cancellation in Tag 0F7J.
-(auxiliary; not a blueprint node).
-
-Proof: form the square with horizontal opens vf and vh and proper vertical maps
-productBW and the selected ambient BW. It commutes: compose with the monomorphism
-H.e, use BW_e and the equations vf F.e = productF.e and vh H.e = productH.e,
-and then the product B square. The identity-top triangle with proper edges
-productF.a and F.a pastes vertically above this square to the triangle with
-proper edges productH.a and H.a. Vertical exchange pasting and the proper
-compositor associativity compare their inverse exchanges. Next compare two horizontal
-pastings: the square (vf,productBW,BW,vh)
-followed by the ambient B square, and the product B square followed by the
-identity-top triangle (id,productBV,BV,n). Their outer squares agree, since
-vf F.e = productF.e, vh E = productE n and productBV n = BV.
-Horizontal pasting therefore compares the inverse B exchanges.
-Finally paste this comparison vertically with the mixed-neighborhood square
-(n,productR,R,vg). The relation productBV productR = productF.p productG.a
-and its ambient counterpart identify the outer proper edges. Vertical pasting
-moves the inverse middle-graph triangle across this rectangle. Substitute these
-three equations into liftBoundary, sourceShrink and middleShrink. Naturality
-moves factors meeting only at a vertex; the inner exchanges cancel in inverse
-pairs. The remaining mixed factors are exactly middleBoundary: the inverse
-composite graph triangle, openRectangle, the inverse mixed exchange, and the
-open compositor for vg. Open-compositor associativity gives its stated order.
-No Q exchange, productSquareInterchange or ambient squareInterchange is used.
-All arguments use morphism equalities and pasting, also for empty or identity opens. -/
+up to the explicit mixed-neighborhood boundary. This stops before either Q exchange
+(Stacks, Tags 0F7C, 0F7D and 0F7J). -/
 theorem etaleGraphProductShrinkLift
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}

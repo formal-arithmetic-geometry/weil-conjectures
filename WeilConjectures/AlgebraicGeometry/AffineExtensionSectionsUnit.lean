@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.AffineExtensionSectionsModelMate
 
 /-! # Unit compatibility of affine extension and sections
 
-Source: Stacks Project, cohomology.tex, Tags 0D5T and 08HY;
-perfect.tex, Tag 0AA7. (blueprint: lem-pc-affine-extension-sections-unit).
+## References
+
+* Stacks Project, Tags 0D5T, 08HY and 0AA7
 -/
 
 @[expose] public section
@@ -28,26 +29,7 @@ variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
 /-- The affine extension comparison respects the fixed adjunction units.
 Only Q on Spec R must have quasi-coherent cohomology. No f, base-change square,
-map m, or base-change morphism occurs in this statement.
-Source: Stacks, perfect.tex, Tag 06Z0 and Tags 08DV, 08DW;
-Tag 0AA7, extension/restriction adjunct construction.
-(blueprint: lem-pc-affine-extension-sections-unit).
-Proof:
-1. Use the affine quasi-coherent derived equivalence to represent Q by a
-complex of R-modules. Choose a K-flat resolution of this complex. Exact tilde
-sends its quasi-isomorphism to a quasi-isomorphism, and its source is K-flat.
-2. The derived tilde/pullback formula identifies Lg*Q with tilde of derived
-extension of this module complex. Apply derived sections on Spec B and the
-counit of the affine equivalence to obtain the required isomorphism.
-3. On these resolutions, extension/restriction is adjoint to the underived
-tensor pullback/direct image under tilde and sections. Their units agree.
-Descend this adjunction through localization. Uniqueness of left adjoints to
-the fixed derived restriction transports it to affineDerivedExtensionAdjunction.
-4. The right-derived-unit equation hr identifies
-its sections/direct-image comparison with the supplied r by right-derived
-uniqueness. Thus the transported isomorphism satisfies the displayed equation.
-The zero complex and identity ring map give the usual unit and impose no
-extra assumptions; extension need not be exact or the map flat. -/
+map m, or base-change morphism occurs in this statement (Stacks, Tags 06Z0, 08DV, 08DW and 0AA7). -/
 theorem exists_affineExtensionSectionsUnit
     {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)
     (v : RingedSpace.moduleDirectImage g.toLRSHom.toShHom ⋙

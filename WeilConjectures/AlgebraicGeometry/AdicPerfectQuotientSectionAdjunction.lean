@@ -10,8 +10,9 @@ import WeilConjectures.AlgebraicGeometry.AdicPerfectQuotientSectionComparison
 
 /-! # Quotient realization and its section adjunction
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03EK; Tag 09C6.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 03CY, 03EK and 09C6
 -/
 
 @[expose] public noncomputable section
@@ -30,37 +31,8 @@ attribute [local irreducible] derivedExtension extend change
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The ordinary quotient realization is left adjoint to sections with algebraic
 A-scalars. Its value followed by sections is constant-module sections of the algebraic
-quotient. These identifications respect the successor quotient and the adjunction units.
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03EK, and proetale.tex,
-Tag 09C6, the ordinary quotient calculation before the total-Hom calculation.
-(auxiliary; not a blueprint node).
-
-Proof: write T for the slice site and B_n for the restriction of the constant ring
-A/J^(n+1). Define R_n on a B_n-module sheaf by its sections at the terminal object,
-with A-action through A -> A/J^(n+1) -> B_n(terminal). A map out of the constant
-A-module sheaf is determined by the corresponding A-linear map on terminal sections:
-use the constant-presheaf adjunction followed by module sheafification. Tensor
-extension is left adjoint to restriction of scalars. The ordinary scalar balancing
-isomorphism and restriction to the slice therefore identify the given F_n with the
-left adjoint of R_n. The completion cone equation says that the composite of the
-coefficient map with the nth projection is the constant quotient map. Consequently
-F_n(M) is the constant sheaf of (A/J^(n+1)) tensor_A M, restricted to T. Identify this
-algebraic tensor with M/(J^(n+1) M). Constant module sheafification commutes with
-restriction to T and with forgetting the quotient-ring scalars. This gives the
-natural isomorphism e_n from H_n to F_n followed by R_n.
-
-For kappa_n take insertion s -> 1 tensor s into change of scalars from B_(n+1) to B_n,
-then terminal sections. It is A-linear because the two maps from A into B_n agree,
-and natural because insertion is natural. The adjunction unit sends m to the
-constant generator 1 tensor (1 tensor m). The fixed balancing isomorphism multiplies
-adjacent scalar factors, so kappa followed by that isomorphism sends the unit at
-level n+1 to the unit at level n. This is the first equation. For the second,
-e_n sends a locally constant quotient class of m to its same tensor generator.
-Both sides therefore send a constant class of m modulo J^(n+2) to its generator
-modulo J^(n+1). Sheafification uniqueness gives equality on all locally constant
-sections. These calculations also apply to zero modules, the zero ring, the unit
-ideal and a slice with zero coefficient sheaf. No finiteness or Noetherian
-hypothesis enters this ordinary tensor calculation. -/
+quotient. These identifications respect the successor quotient and the adjunction units
+(Stacks, Tags 03CY, 03EK and 09C6). -/
 theorem adicPerfectQuotientSectionAdjunction (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) :

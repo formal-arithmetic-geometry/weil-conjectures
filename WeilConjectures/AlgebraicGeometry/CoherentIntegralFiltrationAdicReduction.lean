@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.HilbertPolynomial
 
 /-! # Reducing an integral-support filtration to generic residue-field modules
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YF, ideal-power paragraph.
-(blueprint: lem-weil-pbc-coherent-integral-filtration-adic-reduction)
+Stacks Project, Tag 01YF.
 -/
 
 @[expose] public section
@@ -123,23 +122,8 @@ private theorem power_quasiCoherent {X : Scheme.{u}} (J : X.IdealSheafData) (n :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- For an irreducible closed support, it suffices to filter the coherent modules
-supported there whose generic stalk is killed by the ambient maximal ideal.
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YF, proof, third paragraph,
-using Lemma 01Y9 and the reduced induced closed subscheme of Schemes Lemma 01J3.
-(blueprint: lem-weil-pbc-coherent-integral-filtration-adic-reduction)
-
-Proof: let J be the vanishing ideal of T with its reduced induced scheme structure.
-Its zero locus is T and its stalk at ξ is the maximal ideal: a function vanishing at ξ
-vanishes throughout T on its domain, since its zero locus is closed and ξ is generic.
-By the support-power lemma some J^n kills F. Put A_t = J^t F for 0 <= t <= n, with
-A_0 = F, and Q_t = A_t/A_{t+1}. Ideal products and powers are quasi-coherent on affine
-opens, hence A_t and Q_t are coherent on the Noetherian scheme. Stalk exactness shows
-Supp Q_t is contained in T. The equality of ideal-product stalks with products of
-local modules shows J Q_t = 0, so the maximal ideal at ξ kills (Q_t)_ξ. Apply hgraded
-to every Q_t. A_n is zero, so has the length-zero filtration. Descending induction
-on t, using coherentIntegralFiltration_of_shortExact for A_{t+1} -> A_t -> Q_t,
-gives a filtration of A_0 = F. If n = 0, F itself is zero and the same base case applies.
-No assertion that all the Q_t have full support T is needed. -/
+supported there whose generic stalk is killed by the ambient maximal ideal
+(Stacks, Tags 01YF, 01Y9 and 01J3). -/
 theorem coherentIntegralFiltration_of_generic_annihilated
     (X : Scheme.{u}) [IsNoetherian X]
     (T : TopologicalSpace.Closeds X) (ξ : X)

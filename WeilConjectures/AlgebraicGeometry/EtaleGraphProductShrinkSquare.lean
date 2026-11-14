@@ -9,8 +9,9 @@ import all WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportCompari
 
 /-! # Shrinking the final Q exchange
 
-Source: Stacks Project, Tags 0F7C, 0F7D and the A--F calculation of Tag 0F7J.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 0F7C, 0F7D and 0F7J
 -/
 
 @[expose] public noncomputable section
@@ -256,27 +257,8 @@ private theorem square_component
     rfl
 
 /-- The final Q exchange commutes with the mixed-neighborhood support shrink.
-This assertion involves no source presentation or inverse B exchange.
-Source: Stacks Project, more-etale.tex, horizontal exchange pasting (Tag 0F7D),
-and the final A--F comparison of Tag 0F7J.
-(auxiliary; not a blueprint node).
-
-Proof: the square with top n, bottom vg and proper edges productR,R commutes
-by n_R. Paste it horizontally before the ambient Q square. The outer top is
-n K = productK, and the outer bottom is vg G.e = productG.e. Horizontal
-pasting for the normalized family therefore expresses the product Q exchange
-as the mixed exchange followed by the ambient Q exchange, with the canonical
-open compositors at both ends. In middleBoundary the mixed exchange occurs
-inversely, so these two factors cancel. Move the composite graph triangle
-past the ambient Q exchange by its naturality. The two routes through the
-three open maps vh,E,K are the same as those through productE,n,K by vh_E,
-and E K = H.e and productE productK = productH.e. Associativity of the open
-compositors identifies their composites with the open part of compositeShrink.
-The final proper compositor is the same in both paths, and its naturality moves
-it past the graph triangle. This gives squareInterchange followed by the
-composite shrink on one side, and middleBoundary followed by the product
-squareInterchange on the other. The source graph and B square never enter;
-the identity and empty-open cases use the very same pasting and unit equations. -/
+This assertion involves no source presentation or inverse B exchange (Stacks, Tags 0F7D and 0F7J).
+-/
 theorem etaleGraphProductShrinkSquare
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}

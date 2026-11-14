@@ -14,8 +14,9 @@ import WeilConjectures.CategoryTheory.BoundedBelowSecondFiltration
 
 /-! # Naturality of stationary CE page quotients
 
-Source: Stacks Project, Homology, Tags 012K, 012Q and 012W.
-(blueprint: lem-weil-pbc-ce-stationary-page-naturality).
+## References
+
+* Stacks Project, Tags 012K, 012Q and 012W
 -/
 
 @[expose] public section
@@ -26,9 +27,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- Identifications with the actual cycle/boundary cokernels, without making any choice.
-Source: Stacks Project, Tag 012K.
-(blueprint: lem-weil-pbc-ce-stationary-page-naturality). -/
+/-- Identifications with the actual cycle/boundary cokernels, without making any choice
+(Stacks, Tag 012K). -/
 abbrev EtaleCEQuotientRealization {X : Scheme.{uNatural}}
     {K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})}
     (D : EtaleTermwiseHypercohomology X K) :=
@@ -38,8 +38,7 @@ abbrev EtaleCEQuotientRealization {X : Scheme.{uNatural}}
 
 /-- A page map is induced by the sections-total map on graded cycle representatives.
 This is an equation of maps from arbitrary test objects, rather than an existence
-assertion about a spectral-sequence map. Source: Stacks Project, Tags 012K and 015K.
-(blueprint: lem-weil-pbc-ce-stationary-page-naturality). -/
+assertion about a spectral-sequence map (Stacks, Tags 012K and 015K). -/
 def EtaleCEPageMapOnRepresentatives {X Y : Scheme.{uNatural}}
     {K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})}
     {L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1})}
@@ -152,30 +151,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
 -- Elaborate the dependent simultaneous page and presentation families.
 /-- Choose the stationary comparisons naturally for all sections-total filtered maps.
-No augmentation, pullback, ordinary first-page identification or CE lift is asserted.
-Source: Stacks Project, Homology, Tags 012K, 012Q and 012W.
-(blueprint: lem-weil-pbc-ce-stationary-page-naturality).
-
-Proof. If b bounds the complex degree of D.I below, its extended flipped total has
-zero summands in negative resolution degree and in complex degrees below b.
-The filtration formula therefore makes D.L top at b and bottom at n+1 in degree n.
-For fixed q,n choose R at least 1 so that q+R is past the upper tail in degree n+1,
-and q-R+1 is below the lower tail in degree n-1. These inequalities persist for
-larger r. The definitions of cycles and boundaries then reduce to actual cycles
-in the q-th step and boundaries of the total intersected with that step, projected
-onto its graded complex. The abelian subquotient theorem identifies their cokernel
-canonically with the q-th graded piece of the homology-image filtration.
-Transport this comparison by D.c n, using D.H_formula to identify the transported
-steps with D.H n. Compose with e to define eInf; its bound uses only D,q,n.
-For a filtered chain map, homology of each step maps its image into the target
-image. Transport these restricted image maps by the two c-isomorphisms to obtain
-t and its inclusion equation. These restrictions commute with successive step
-inclusions by cancellation of the target step's monomorphism. The representative
-hypothesis states exactly the naturality of the source page cokernel map. Apply
-it to actual cycles in each filtration step; the canonical representative-to-image
-quotient projections are epimorphic. Cancellation proves the displayed square
-with cokernel.map. Changing its commutativity proof changes no map by proof
-irrelevance. Zero totals and empty diagonals obey the same universal properties. -/
+No augmentation, pullback, ordinary first-page identification or CE lift is asserted
+(Stacks, Tags 012K, 012Q and 012W). -/
 theorem exists_etaleCE_stationary_page_comparisons
     (D : ∀ (X : Scheme.{uNatural})
       (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),

@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeMayerVietorisMa
 
 /-! # Open component compatibility for derived base change
 
-Source: Stacks Project, Tags 08HY, 08BV and 0DJ9.
+## References
+
+* Stacks Project, Tags 08HY, 08BV and 0DJ9
 -/
 
 @[expose] public section
@@ -100,21 +102,8 @@ set_option backward.isDefEq.respectTransparency.types false
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- The canonical open base-change mate commutes with the exact-open unit.
-Source: Stacks Project, Cohomology, Remark 08HY and Lemma 08BV.
-(blueprint: lem-pc-rf-mv-open-base-change-unit).
-Proof: For e:P;L′≅L;Q and adjunctions L⊣R, L′⊣R′, write its mate as
-β_Y=homEquiv′(e_RY;Q(ε_Y)). Naturality gives P(R(k));β=β;R′(Q(k)).
-Transpose P(η_K);β_LK;R′(e_K inverse;L′(ψ)). Naturality of e and the triangle
-identity cancel the middle unit and counit, then e and its inverse cancel.
-The remaining transpose is L′(ψ), whose mate is ψ;η′. To pass to exact-open
-restriction, use d=leftAdjointUniq and d′=leftAdjointUniq: their unit equations
-replace η by η;R(d). Move d through β by mate naturality; in the inverse of
-b=P(d′ inverse);e;Q(d), d cancels with d inverse. Naturality of d′ and its
-unit equation give the exact-open target unit. For opens, e is precisely the
-composite of the two pinned pullback composition comparisons and the equality
-of restricted morphisms; b is the defined mvPullbackOpenRestrictionIso.
-No coherence for triple compositions or geometric finiteness is needed. -/
+/-- The canonical open base-change mate commutes with the exact-open unit
+(Stacks, Tags 08HY and 08BV). -/
 theorem mvOpenBaseChange_unit
     {X X' : Scheme.{u}} (q : X' ⟶ X)
     (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')

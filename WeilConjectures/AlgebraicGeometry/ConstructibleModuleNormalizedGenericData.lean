@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.NormalizedGenericDataLifts
 /-!
 # Normalized generic trivialization data
 
-Source: Stacks Project, Tag 09Z6, generic trivialization and normalization, using Tag 09Z5.
-(blueprint: lem-weil-pbc-constructible-module-normalized-generic-data).
+## References
+
+* Stacks Project, Tags 09Z6 and 09Z5
 -/
 
 @[expose] public section
@@ -27,32 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- Generic trivialization on an integral model, together with lifting of geometric points.
-
-Source: Stacks Project, Tag 09Z6 (lemma-constructible-maps-into-constant), proof
-of (1), the paragraph from the reduced closure through the generic inclusion, transferred
-to (3); Tag 09Z5 (lemma-push-constant-sheaf-from-open).
-(blueprint: lem-weil-pbc-constructible-module-normalized-generic-data).
-
-Proof: Restrict the constructible sheaf to the residue field at x. Constructibility is
-preserved by inverse image, using finite-value locally constant trivializations. Over this
-field choose a finite separable extension K and a finite module M trivializing the sheaf.
-Normalize the reduced closure of x in K to obtain an integral morphism nu from a normal
-integral Y, with generic inclusion g from Spec K. The inverse-image composition comparison
-and the pullback comparison for constant sheaves identify g^* nu^* F with g^* M_Y. The
-normal constant generic-point theorem 09Z5 identifies the unit at M_Y as an isomorphism.
-To apply its canonical-generic-inclusion formulation to g, factor g through the spectrum
-of the residue field of its image. The residue-field map is an isomorphism by the
-normalization theorem. At the generic point the local ring is a field, so its quotient
-map to the residue field is an isomorphism too. Thus g differs from the canonical
-Spec-of-the-generic-stalk inclusion by an isomorphism of source schemes. Inverse-image
-composition and the units of the composite adjunction transport the unit isomorphism
-along this source isomorphism.
-For each algebraically closed Omega and geometric point s above x, its residue-field map
-extends to K because K is algebraic over the residue field. Applying Spec gives w, and
-the residue-field description of s and contravariant functoriality of Spec give
-w followed by g and nu equal to s. The field extension used here is finite and therefore
-algebraic; no finiteness of the normalization over X is asserted. If the base is empty there is no
-x; the zero sheaf yields M = 0. No adjoint map out of F is constructed here. -/
+(Stacks, Tags 09Z6 and 09Z5) -/
 theorem exists_constructible_module_normalized_generic_data
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X : Scheme.{u}} [IsNoetherian X]

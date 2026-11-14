@@ -15,10 +15,7 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- The finite-sum reduction used in the repeated-tuple cancellation argument.
-Proof: expand the alternating differential; every face outside the repeated positions
-is zero by the repeated-tuple hypothesis, leaving exactly the displayed two-face sum.
-(blueprint: lem-pc-cech-differential-repeated-decomposition) -/
+/-- The finite-sum reduction used in the repeated-tuple cancellation argument. -/
 theorem cechDifferential_repeated_decomposition (X : Scheme.{u}) {I : Type v}
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})
     (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)))

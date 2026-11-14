@@ -26,9 +26,9 @@ import Mathlib.Topology.Sheaves.Abelian
 /-!
 # Quasi-compact reduction for a proper-support complex
 
-Source: literature/stacks-project/perfect.tex, Tag 08EV, label
-`perfect-lemma-perfect-direct-image`, proof from “Let T be the union...” through
-“Thus we may replace X by X'' (blueprint: lem-pc-direct-image-qc-support-reduction).
+## References
+
+* Stacks Project, Tag 08EV
 -/
 
 @[expose] public section
@@ -47,30 +47,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A quasi-compact open containing every cohomological support preserves the derived
  direct image via the adjunction unit and the canonical composition comparison.
-Source: Stacks Project, Tag 08EV, `perfect-lemma-perfect-direct-image`.
-(blueprint: lem-pc-direct-image-qc-support-reduction)
-
-Proof:
-1. Boundedness leaves only finitely many nonzero cohomology sheaves. Their closed supports
-   have proper union T by lem-weil-pbc-closed-subset-proper-over-base-union-preimage (1).
-2. The reduced induced closed subscheme on T is proper over the Noetherian base, hence
-   quasi-compact, by def-weil-pbc-closed-subset-proper-over-base and
-   lem-weil-pbc-qcqs-morphism-permanence (2). Apply
-   lemma-nagata-immersion-shrink-to-closed-exists to obtain a quasi-compact open U containing
-   T. By pqf-lem-locnoeth-lft, X and U are locally Noetherian. Thus U and S are
-   quasi-separated by lem-weil-pbc-locally-noetherian-quasi-separated, and U -> S is
-   quasi-compact and quasi-separated by lem-weil-pbc-qcqs-morphism-permanence (1).
-3. By lem-pc-supported-open-pushforward, the adjunction unit E -> Rj_*j^*E is invertible.
-   Applying Rf_* and the comparison of
-   lem-pc-ringed-spaces-derived-direct-image-composition gives the asserted canonical
-   isomorphism and its inverse.
-
-The open immersion is U.ι and j^* is the shared exact derived open restriction.
-The comparison c is characterized by compatibility with right-derived units. The
-additivity witness only transports the equivalence between the shared category instances.
-The adjunction is supplied as data: invertibility of its unit is independent of the choice
-of adjunction between these fixed functors, so it includes the canonical adjunction.
--/
+(Stacks, Tag 08EV) -/
 theorem directImage_qc_support_reduction
     {X S : Scheme.{u}}
     (f : X ⟶ S) [LocallyOfFiniteType f] [IsNoetherian S]

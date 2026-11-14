@@ -11,8 +11,11 @@ public import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 
 /-! # The explicit free-representable cohomology comparison map
-Source: Stacks Project, Tag 03Q8; the free-sheaf adjunction.
-(blueprint: def-sbc-abelian-representable-cohomology-map). -/
+
+## References
+
+* Stacks Project, Tag 03Q8
+-/
 
 @[expose] public section
 
@@ -21,29 +24,25 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Abelian Opposite
 open scoped AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
-/-- The free abelian sheaf on an étale representable. 
-(blueprint: def-sbc-abelian-representable-cohomology-map)
+/-- The free abelian sheaf on an étale representable.
 -/
 noncomputable abbrev abelianRepresentable (X : Scheme.{u}) :=
   AlgebraicGeometry.etaleOpenFreeSheaf X
 
-/-- The free/sheafification/Yoneda adjunction, evaluated at an étale object. 
-(blueprint: def-sbc-abelian-representable-cohomology-map)
+/-- The free/sheafification/Yoneda adjunction, evaluated at an étale object.
 -/
 noncomputable def abelianRepresentableHomEquiv {X : Scheme.{u}} (W : X.Etale)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     ((abelianRepresentable X).obj W ⟶ G) ≃ G.obj.obj (op W) :=
   (EtaleOpenComparison.sectionsEquiv X.smallEtaleTopology W G).toEquiv
 
-/-- The final object of the small étale site. 
-(blueprint: def-sbc-abelian-representable-cohomology-map)
+/-- The final object of the small étale site.
 -/
 noncomputable abbrev abelianEtaleFinal (T : Scheme.{u}) : T.Etale :=
   MorphismProperty.Over.mk ⊤ (𝟙 T) (inferInstance : AlgebraicGeometry.Etale (𝟙 T))
 
 /-- The universal section of `h^* Z[W]`, restricted to `Y ×_X W`, as a morphism
-from the constant integer sheaf. Constructed from the adjunction unit. 
-(blueprint: def-sbc-abelian-representable-cohomology-map)
+from the constant integer sheaf. Constructed from the adjunction unit.
 -/
 noncomputable def abelianRepresentableGenerator {X Y : Scheme.{u}}
     (h : Y ⟶ X) (W : X.Etale) :
@@ -73,8 +72,7 @@ noncomputable def abelianRepresentableGenerator {X Y : Scheme.{u}}
   exact Ext.addEquiv₀ ((Sheaf.H.equiv₀ _
     (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale T)).symm z')
 
-/-- Bounded below derived Hom between single objects is Ext. 
-(blueprint: def-sbc-abelian-representable-cohomology-map)
+/-- Bounded below derived Hom between single objects is Ext.
 -/
 noncomputable def abelianPlusHomExtEquiv {X : Scheme.{u}}
     (A F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
@@ -98,8 +96,7 @@ noncomputable def abelianPlusHomExtEquiv {X : Scheme.{u}}
       simp only [Iso.homCongr_apply, Preadditive.comp_add, Preadditive.add_comp])
   exact (E.trans E').trans (Ext.homAddEquiv (X := A) (Y := F) (n := q)).symm
 
-/-- Pull back a derived class and evaluate it at the universal section. 
-(blueprint: def-sbc-abelian-representable-cohomology-map)
+/-- Pull back a derived class and evaluate it at the universal section.
 -/
 noncomputable def abelianRepresentableCohomologyMap {X Y : Scheme.{u}}
     (h : Y ⟶ X) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -112,8 +109,7 @@ noncomputable def abelianRepresentableCohomologyMap {X Y : Scheme.{u}}
     (((upperStar AddCommGrpCat.{u + 1} (pullback.fst h W.hom)).mapExtAddHom _ _ q).comp
       (abelianPlusHomExtEquiv _ F q).toAddMonoidHom)
 
-/-- The canonical comparison with constant cyclic coefficients. 
-(blueprint: def-sbc-abelian-representable-cohomology-map)
+/-- The canonical comparison with constant cyclic coefficients.
 -/
 noncomputable def cyclicRepresentableCohomologyMap {X Y : Scheme.{u}}
     (h : Y ⟶ X) (e q : ℕ) (W : X.Etale) :

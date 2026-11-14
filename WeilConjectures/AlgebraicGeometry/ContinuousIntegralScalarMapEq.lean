@@ -23,7 +23,6 @@ The image of `B` is the colimit of the multiplications by `ℓ` on `B`, and `Hom
 with this sequential colimit since `K` is bounded constructible
 (`CondensedRing.integralConstructible_sheaf_hom_colimit`): two morphisms with the same image are
 equal at a finite stage, where the transition map is `ℓⁿ`.
-
 -/
 
 @[expose] public section
@@ -61,11 +60,7 @@ attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctor
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Two morphisms of bounded constructible `𝒪_{E,X}`-complexes with the same image under the
-derived extension of scalars to `E_X` agree after multiplication by a power of `ℓ`.
-
-Proof: the image of `B` is the sequential colimit of the multiplications by `ℓ` on `B`, which
-`Hom(K, -)` preserves because `K` is bounded constructible; two morphisms with the same image are
-equal at a finite stage of the colimit, where the transition map from the first stage is `ℓⁿ`. -/
+derived extension of scalars to `E_X` agree after multiplication by a power of `ℓ`. -/
 theorem integral_scalar_map_eq
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]

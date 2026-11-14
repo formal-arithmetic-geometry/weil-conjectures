@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.AffineChartTensorRecovery
 
 /-! # Canonical affine chart Hom naturality
 
-Source: Stacks Project, Tags 01ZR (affine proof), 01I6, 0095 and 0096.
+## References
+
+* Stacks Project, Tags 01ZR, 01I6, 0095 and 0096
 -/
 
 @[expose] public section
@@ -31,7 +33,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Extension of scalars along an explicitly identified composite ring map.
-(blueprint: lem-pc-affine-chart-canonical-hom-naturality)
 -/
 noncomputable def scalarExtensionCompOfEq
     {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
@@ -43,7 +44,6 @@ noncomputable def scalarExtensionCompOfEq
     (ModuleCat.extendScalarsComp r r₁).app P
 
 /-- The composition comparison sends each unit tensor to its iterated unit tensor.
-(blueprint: lem-pc-affine-chart-canonical-hom-naturality)
 -/
 theorem scalarExtensionCompOfEq_one_tmul
     {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
@@ -57,7 +57,6 @@ theorem scalarExtensionCompOfEq_one_tmul
     ModuleCat.extendScalarsComp_hom_app_one_tmul r r₁ P m
 
 /-- Scalar extension through a stage of a colimit, using its cocone equation.
-(blueprint: lem-pc-affine-chart-canonical-hom-naturality)
 -/
 noncomputable def colimitScalarExtensionComp
     {J : Type u} [Category J] (F : J ⥤ CommRingCat.{u})
@@ -69,7 +68,6 @@ noncomputable def colimitScalarExtensionComp
     (congrArg CommRingCat.Hom.hom (colimit.w F h).symm) P
 
 /-- The canonical colimit comparison is normalized on tensor generators.
-(blueprint: lem-pc-affine-chart-canonical-hom-naturality)
 -/
 theorem colimitScalarExtensionComp_one_tmul
     {J : Type u} [Category J] (F : J ⥤ CommRingCat.{u})
@@ -82,32 +80,8 @@ theorem colimitScalarExtensionComp_one_tmul
 
 set_option maxHeartbeats 600000 in
 -- The dependent chart and section-model witnesses require substantial elaboration.
-/-- Affine Hom comparisons commute with the canonical scalar-extension map.
-Source: Stacks Project, Tag 01ZR (first affine proof), Tag 01I6,
-and Tags 0095 and 0096 (pullback functoriality).
-(blueprint: lem-pc-affine-chart-canonical-hom-naturality).
-
-Proof: The upper-tail chart cone is limiting by upperTailChartCone_isLimit.
-Every chart and its vertex are affine: they are pullbacks of affine schemes
-along morphisms between affine schemes. The quotient of the upper tail is
-equivalent to that tail. Applying affine global sections to the cone identifies
-its vertex ring with the colimit of F. Pullback pasting identifies the vertex
-and stage charts with the direct and stage pullbacks of the original cover.
-The starting representative is equivalent to j; the associated spectrum map
-is an isomorphism, so its chart identifies with U.X a. The affine
-quasi-coherent equivalence identifies B(L) with L at this starting chart;
-its scalar extensions identify with the sections of the ordinary pullbacks.
-Fully faithfulness supplies alpha and beta. For a stage map s, the canonical
-composition comparison colimitScalarExtensionComp is induced by tensor
-associativity and the cocone equation. Naturality of the affine equivalence
-with respect to pullback sends its conjugated scalar extension to the ordinary
-pullback of beta(s). Pull back along the canonical lift from the iterated
-chart to the direct chart; its second-projection equation and pullback
-composition coherence give exactly chartOrdinaryMapRecovery. This statement
-concerns only the image of a stage map under the canonical scalar extension;
-it neither treats arbitrary composition isomorphisms nor an algebraic square.
-All comparisons are universal-property comparisons, including for empty
-charts, zero rings and zero modules; no finite presentation is required. -/
+/-- Affine Hom comparisons commute with the canonical scalar-extension map
+(Stacks, Tags 01ZR, 01I6, 0095 and 0096). -/
 theorem affine_chart_canonical_hom_naturality
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

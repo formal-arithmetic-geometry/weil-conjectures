@@ -17,8 +17,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Uniform truncation bound for derived direct image
 
-Source: Stacks Project, Tag 08D5, part (2) and the final truncation argument
-(blueprint: lem-pc-derived-direct-image-uniform-truncation-bound).
+## References
+
+* Stacks Project, Tag 08D5
 -/
 
 @[expose] public section
@@ -33,34 +34,8 @@ namespace AlgebraicGeometry
 unbounded derived direct image has a uniform upper cohomological bound on objects of
 `D_QCoh(𝒪_X)` with no positive cohomology. For every such derived object without the
 upper-bound restriction, the canonical map to its sufficiently low lower truncation
-induces an isomorphism on any fixed cohomology sheaf after derived direct image.
-Source: Stacks Project, Tag 08D5, part (2) and proof
-(blueprint: lem-pc-derived-direct-image-uniform-truncation-bound).
-
-Proof:
-1. By `lem-pc-finite-support-hi` (Tag 01XJ), choose a uniform bound on higher direct
-   images of quasi-coherent modules, valid after base change, and enlarge it to a
-   positive integer N. In particular it applies over every affine open U of S.
-2. The higher direct images over U are quasi-coherent and vanish in degrees at least
-   N. By `pqf-lem-affine-vanishing` and `lem-pc-leray-degenerate-sections`, the higher
-   derived functors of sections over f⁻¹(U) vanish in those degrees on quasi-coherent
-   modules. These are cohomology by `pqf-def-cohomology`. Sections commute with
-   countable products by the universal property of products, since sections are
-   Hom from the structure sheaf.
-3. Apply `lem-pc-unbounded-derived-functor-cohomological-bound` with upper bound zero
-   to derived sections over f⁻¹(U). By `lem-pc-derived-sections-pushforward-comparison`
-   these equal derived sections of Rf_*E over U. Restrictions are computed using a
-   K-injective representative, whose restriction stays K-injective by
-   `lem-sc-derived-k-injective-restrict-open`. Vanishing on the affine basis makes
-   the cohomology sheaf zero: it is the sheafification of the presheaf of cohomology
-   of sections of a K-injective representative. This gives the uniform bound.
-4. Use the standard truncation triangle from
-   `def-sbc-standard-tstructure-derived-category`, with first term
-   T = τ_{≤ -n-1}E. The shift T[-n-1] has no positive cohomology. By step 3 and shift
-   compatibility of `lemma-coherent-base-change-invertible-sheaves`, H^j(Rf_*T) vanishes whenever
-   j+n+1 ≥ N. For n ≥ N-q this kills both H^q(Rf_*T) and H^{q+1}(Rf_*T).
-   The long exact cohomology sequence therefore makes the displayed canonical
-   truncation map an isomorphism in degree q, for all sufficiently large n. -/
+induces an isomorphism on any fixed cohomology sheaf after derived direct image
+(Stacks, Tag 08D5). -/
 theorem exists_schemeDerivedDirectImage_uniform_truncation_bound
     {X S : Scheme.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

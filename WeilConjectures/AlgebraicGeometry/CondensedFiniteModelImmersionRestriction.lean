@@ -26,21 +26,7 @@ attribute [local irreducible] CondensedRing.upperStarComp CondensedRing.pullIso
 
 /-- A locally finitely presented model over condensed coefficients on an immersed subscheme
 induces a locally finitely presented model along every morphism with image in that
-subscheme.
-
-Source: `ModuleObject/Colimit/TwoColimit.lean`, open-stratum support step; Stacks
-Project Tags 09AA and 09AH.
-Proof: form the pullback of the immersion along `g`. Its second projection is a
-surjective immersion, hence a closed immersion. Pull the finite model back by the
-first projection, then push it forward by the second projection. Local finite
-presentation is preserved by these two operations. On the pullback, coefficient
-extension commutes with inverse image, the counit identifies the pulled-back
-pushforward with the original pulled-back model, and the pullback-square equation
-identifies the two restrictions of `M`. The inverse image along the surjective closed
-immersion is fully faithful, so this isomorphism lifts to the required scalar-extension
-isomorphism on `U`.
-(auxiliary; not a blueprint node)
--/
+subscheme (Stacks, Tags 09AA and 09AH). -/
 theorem finite_model_on_immersion_range
     (Λ Ω : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [MonObj Ω] [IsCommMonObj Λ] [IsCommMonObj Ω]

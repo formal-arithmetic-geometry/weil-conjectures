@@ -10,8 +10,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleClassicalSheavesImage
 
 /-! # Continuity of etale representables at affine presentations
 
-Source: Stacks Project, proetale.tex, Lemmas describe-pullback-from-etale and
-limit-pullback (Tag 099S).
+## References
+
+* Stacks Project, Tag 099S
 -/
 
 @[expose] public section
@@ -64,24 +65,7 @@ private noncomputable def pullbackEtaleRepresentableIso (X : Scheme.{u}) (V : X.
     (A.homEquiv_naturality_right_symm _ g)
 
 /-- Maps from an affine presentation to an etale object commute with its limit.
-
-Source: Stacks Project, proetale.tex, lemma-limit-pullback (Tag 099S), using
-Limits, Proposition 32.6.1 (locally finite presentation)
-(auxiliary; not a blueprint node).
-
-Proof: the sheaf-valued Yoneda lemma and the comparison adjunction identify the
-inverse image of an etale representable with the corresponding pro-etale
-representable. The essential-image characterization of classical sheaves then
-makes its continuity map bijective for the original index category of size u+1.
-Consequently the restriction cocone for the universe-lifted representable is a
-colimit. Its joint surjectivity and eventual-equality criterion transfer to the
-coefficient-sized hom sets by taking the underlying arrows of the two ULifts.
-This proves that the coyoneda image of the opposite presentation cone is a
-colimit. The original cone is limiting by reflection through the fully faithful
-forgetful functor; AsSmall.up preserves that limit. Preservation of this one
-colimit cocone gives the claimed PreservesColimit instance. No shrinking of the
-index category or identification of the independent coefficient universe is
-needed. -/
+(Stacks, Tag 099S) -/
 theorem coefficientComparison_representable_preservesColimit (X : Scheme.{u})
     {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]
     (P : AffinePresentation X I)

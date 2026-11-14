@@ -20,8 +20,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleSupportProperOverBase
 
 /-! # Finite affine realizations of coherent algebras with proper support
 
-Source: Stacks Project, Lemma 09ZT, last sentence, and Lemma 0CYS
-(blueprint: lem-weil-pbc-coherent-algebra-affine-finite-proper).
+## References
+
+* Stacks Project, Tags 09ZT and 0CYS
 -/
 
 @[expose] public section
@@ -48,18 +49,7 @@ set_option synthInstance.maxHeartbeats 200000 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- An affine realization of a coherent algebra is finite, and proper over the base
-when its underlying module has proper support.
-Source: Stacks Project, Lemma 09ZT, final sentence, and Lemma 0CYS (3).
-
-Proof: On an affine U = Spec R, coherence implies that B(U) is a finite R-module.
-The algebra isomorphism identifies g inverse U with Spec B(U), so g is finite.
-Proper support gives a closed subscheme Z of X proper over S whose ideal annihilates B.
-On every affine U with ideal J defining Z, the projection Y times_X Z to Y is Spec of
-B(U) to B(U)/J B(U), an isomorphism because J B(U) = 0. These local identifications
-show the projection is an isomorphism. Y times_X Z is finite over Z, hence proper over S,
-and transporting properness along the projection gives properness of g composed with f.
-The empty realization and zero algebra satisfy the same finite and quotient tests.
-(blueprint: lem-weil-pbc-coherent-algebra-affine-finite-proper). -/
+when its underlying module has proper support (Stacks, Tags 09ZT and 0CYS). -/
 theorem coherent_algebra_affine_finite_proper
     {X Y S : Scheme.{u}} [IsLocallyNoetherian X]
     (f : X ⟶ S) [LocallyOfFiniteType f] (g : Y ⟶ X) [IsAffineHom g]

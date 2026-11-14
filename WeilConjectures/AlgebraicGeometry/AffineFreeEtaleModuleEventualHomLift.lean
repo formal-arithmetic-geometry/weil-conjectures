@@ -16,7 +16,9 @@ import Mathlib.Data.Finset.Order
 /-!
 # Eventual lifting of morphisms from finite affine etale free sheaves
 
-Source: Stacks Project, Tags 09YU (3), 09YQ and 03S6.
+## References
+
+* Stacks Project, Tags 09YU, 09YQ and 03S6
 -/
 
 @[expose] public section
@@ -59,38 +61,8 @@ private lemma transpose_comp_pullback {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h�
 set_option maxRecDepth 4096 in
 /-- Maps from a fixed finite affine free family into a pulled-back sheaf lift later.
 The codomain is arbitrary, the family is already defined at i, and the comparison
-is the canonical upperStar composition isomorphism. No constructibility is claimed.
-
-Source: Stacks Project, Tag 09YU, fully faithful argument for (3), via Tag 09YQ
-in degree zero, and Tag 03S6.
-(blueprint: lem-weil-pbc-affine-free-etale-module-eventual-hom-lift).
-
-Proof:
-1. Write A for the finite sum of extensions by zero of the constant rank-one
-   module on W. By the etale shriek/pullback and constant-sheaf adjunctions, each
-   summand represents evaluation on W k; it is thus the sheaf P(W k) obtained by
-   the sheafification, free-module and Yoneda adjunctions. Using the
-   upperStar/lowerStar adjunction, a map from the inverse image
-   of P(W k) to the inverse image of G is a section of the latter on the base change
-   of W k; equivalently it is a section of lowerStar upperStar G on W k.
-2. Restrict f to each coprojection, after the inverse-image coproduct comparison,
-   and apply this section bijection. The surjectivity clause of
-   `Etale.limit_pullback_sections_colimit` represents each generating section at
-   some j_k greater than or equal to i. Directedness gives a common j and the
-   theorem's transition and cocone identities transport each section to j without
-   changing its image on the limit. For an empty family choose j = i.
-3. Apply the inverse of the section bijection to obtain maps from each stage-i
-   summand to the direct image of the stage-j pullback of G. Assemble these by
-   Sigma.desc, then transpose their sum through the transition-map adjunction to
-   obtain a. This avoids choosing a separate coproduct comparison.
-4. The section bijection is natural. The private transpose_comp_pullback lemma
-   proves its compatibility with pullback from the unit equation
-   upperStarComp_hom_app_unit_app and naturality of the unit and lowerStarComp.
-   Its resulting section map is exactly the map in the section-colimit theorem.
-   Consequently the equation of generating sections in step 2 is the requested
-   equation after precomposition with each pulled-back coprojection. The
-   coproduct universal property gives the equation of arrows. With no summands
-   both sides are the unique arrow from the pulled-back zero object. -/
+is the canonical upperStar composition isomorphism. No constructibility is claimed
+(Stacks, Tags 09YU, 09YQ and 03S6). -/
 theorem exists_affine_free_etaleModule_eventual_hom_lift
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.AffineModelStalkTensorTransport
 
 /-! # Natural stalk comparison for the pullback of an affine tilde model
 
-Source: Stacks Project, Tags 008H, 0098, 008B and 01BH. -/
+## References
+
+* Stacks Project, Tags 008H, 0098, 008B and 01BH
+-/
 
 @[expose] public section
 
@@ -28,25 +31,7 @@ namespace AlgebraicGeometry
 
 /-- A sheaf isomorphism to an affine tilde model induces a tensor stalk
 identification, naturally for morphisms respecting the affine identifications.
-There is no flatness or closed immersion hypothesis.
-Source: Stacks Project, Tags 008H and 0098 (inverse image stalks), 008B
-(change of rings), and 01BH (associated modules).
-(blueprint: new-k1-affine-model-tensor-pullback-stalk).
-
-Proof: Restriction identifies the stalk of F at i(z) with its chart stalk.
-Transport along e and the affine chart isomorphism, and identify the tilde stalk
-with localization of M at the corresponding prime. Inverse-image stalk
-comparison and extension-of-scalars stalk comparison, already assembled as the
-natural isomorphism exists_tensorPullback_stalk_iso, identify tensor pullback
-with O_Z,z tensor over O_Y,i(z) of the original stalk. Restriction to V transports
-the ring and module stalks by the open immersion isomorphisms. Tensor
-associativity then cancels the intermediate localization: R tensor over A of M
-is the result, with A acting on R by the displayed composite germ/stalk map.
-All maps are constructed from germs and pure tensors and are natural. Apply
-this naturality and the supplied affine square to get the last equality.
-Equality on pure tensors extends by additivity. The argument applies to all
-modules without finiteness hypotheses and to zero modules; the chosen point
-ensures its affine localization and neighborhoods exist. -/
+There is no flatness or closed immersion hypothesis (Stacks, Tags 008H, 0098, 008B and 01BH). -/
 theorem exists_affine_model_tensorPullback_stalk
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) (V : Z.Opens) (z : V.toScheme)
     (U : Y.affineOpens) (hzU : i z.1 ∈ U.1) :

@@ -12,8 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.DualNumbers
 # First-order restriction along the diagonal
 
 The diagonal of the dual-number thickening kills the mixed infinitesimal term.
-Source: the square-zero pushout calculation in Stacks Project, Tag 0B2B,
-proof of Lemma 33.16.2, applied locally over an arbitrary base ring.
+
+## References
+
+* Stacks Project, Tag 0B2B
 -/
 
 @[expose] public section
@@ -164,27 +166,7 @@ private theorem iterated_axes (S Y : Scheme.{u})
 
 /-- Maps out of the product of two dual-number thickenings which agree on both axes
 agree on the diagonal.
-Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2, square-zero pushout calculation.
-(blueprint: lem-ag-dual-numbers-diagonal)
-
-Proof: use the iterated thickening, whose sections are double dual numbers, and the
-comparison to the categorical product given by its two projections. On double dual
-numbers the map `x ↦ x.fst + TrivSqZeroExt.inr x.snd.fst` identifies the two infinitesimals. It is a
-natural ring homomorphism and induces a scheme morphism from the single to the double
-thickening; locality follows because units are detected by the constant coefficient.
-Its two projections are identities, so its composite with the comparison is the diagonal.
-The composites of the two standard axes with the comparison are the categorical axes.
-
-For maps from the iterated thickening, equality on the first axis identifies their base
-maps and their first dual-number coefficients; equality on the second identifies the
-remaining unmixed coefficient. Any ring map whose restrictions to the two inclusions
-are identities kills the mixed coefficient: `inr (inr r)` is the product of
-`inl (inr r)` and `inr (inl 1)`, which maps to the product of two square-zero terms.
-Its value on a section is therefore `x.fst + inr x.snd.fst`. Apply this on every open of
-the target, and use scheme-morphism extensionality. Pull the given maps back along the
-comparison, apply this sectionwise equality, and transfer it to the slice by extensionality.
-No affine cover, product isomorphism, or reducedness assumption is required.
--/
+(Stacks, Tag 0B2B) -/
 theorem dualNumbers_diagonal_comp_eq_of_axes (S : Scheme.{u}) (X : Over S)
     (f g : dualNumbersOver S ⊗ dualNumbersOver S ⟶ X)
     (h₁ : lift (𝟙 (dualNumbersOver S))

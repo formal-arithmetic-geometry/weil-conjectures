@@ -18,8 +18,9 @@ import all WeilConjectures.AlgebraicGeometry.FinitePushforwardCoherent
 
 /-! # Affine tensor dictionary for compatible internal-Hom sections
 
-Source: Stacks Project, Tags 0882, 087W and 00MA.
-(blueprint: lem-weil-pbc-completion-internal-hom-affine-tensor-dictionary).
+## References
+
+* Stacks Project, Tags 0882, 087W, 00MA
 -/
 
 @[expose] public section
@@ -47,33 +48,8 @@ private theorem finite_affine_coherent_sections {X : Scheme.{u}} [IsNoetherian X
 end Scheme.Modules
 
 /-- Affine quotient systems identify the evaluation map with a completed-ring-linear
-map on the tensor product of the module of linear maps. On `1 ⊗ h` it is base change of h.
-The last clause identifies each specified local evaluation equation with one equation
-in the tensor-product Hom module; it asserts no injectivity or surjectivity of beta.
-
-Source: Stacks Project, Cohomology of Schemes, Tag 0882, affine-local proof;
-Tag 087W and Algebra, Tag 00MA.
-(blueprint: lem-weil-pbc-completion-internal-hom-affine-tensor-dictionary).
-
-Proof:
-1. Set A = O_X(U), J = I(U), N = G(U), M = F(U), H = Hom_A(N,M).
-   Affine tilde and sections identify the internal Hom with H. Coherence makes
-   N, M, H finite. Ideal products and quotient sections identify each level with
-   P/J^(n+1)P for P = N, M, H, including the canonical transition maps.
-2. Surjectivity of the quotient on H-sections and unique factorization through
-   the quotient of G identify the given e_n with quotient evaluation, by he.
-   Thus it maps compatible H-section families to compatible local morphisms.
-3. The affine formal-module equivalence identifies the latter with Hom over
-   A-completion between N-completion and M-completion, acting componentwise.
-   The compatible H-sections are H-completion. Tensor-completion equivalences
-   c_H, c_N and c_M give rho to A-completion tensor H and conjugate the evaluation
-   to beta into Hom(A-completion tensor N, A-completion tensor M).
-4. Componentwise evaluation is A-completion-linear. On the image of h it is
-   its completed map, which conjugates to baseChange h by naturality of c_N,c_M.
-   This proves the generator equation. The compatible t, restricted to U, gives
-   an element v in the same Hom module. The faithful affine equivalence and
-   the quotient-section identifications give the last iff, in both directions.
-   This proof does not use flat base change for Hom. -/
+map on the tensor product of the module of linear maps. On `1 ⊗ h` it is base change of `h`
+(Stacks, Tags 0882, 087W). -/
 theorem completion_internal_hom_affine_tensor_dictionary {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F G : CoherentModules X)
     (e : ∀ n : ℕᵒᵖ,

@@ -17,10 +17,12 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-! # Derived tensor structure on O_X-modules
 
-Source: Stacks Project, Cohomology, Tags 06Y7, 06YH and 03EO
-(blueprint: def-pc-scheme-derived-tensor-structure).
 The tensor is the upstream K-flat derived monoidal construction, specialized to the
 shared category of O_X-modules, rather than an arbitrary monoidal structure.
+
+## References
+
+* Stacks Project, Tags 06Y7, 06YH and 03EO
 -/
 
 @[expose] public section
@@ -33,18 +35,12 @@ namespace AlgebraicGeometry
 
 variable (X : Scheme.{u})
 
-/-- The recorded sheaf tensor structure, specialized to O_X.
-Source: Stacks, 06Y7 (blueprint: def-pc-scheme-derived-tensor-structure). -/
+/-- The recorded sheaf tensor structure, specialized to O_X (Stacks, Tag 06Y7). -/
 noncomputable local instance moduleTensor :
     MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.monoidalCategory X.sheaf
 
-/-- O_X-modules admit functorial flat resolutions. Source: Stacks, 06Y7
-(blueprint: def-pc-scheme-derived-tensor-structure).
-Proof: take the sum of extension-by-zero free modules indexed by all local sections
-on all opens, with its evaluation epimorphism. These modules are flat on stalks.
-Iterate the construction on kernels. Maps of modules act on the section indices,
-so this resolution is functorial. -/
+/-- O_X-modules admit functorial flat resolutions (Stacks, Tag 06Y7). -/
 theorem schemeModule_hasFunctorialFlatResolution :
     Abelian.HasFunctorialFlatResolution
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := by
@@ -72,16 +68,8 @@ theorem schemeModule_hasFunctorialFlatResolution :
   exact preservesFiniteLimits_of_natIso
     (BraidedCategory.tensorLeftIsoTensorRight _).symm
 
-/-- The K-flat derived tensor monoidal structure on D(O_X): the upstream derived monoidal
-structure of the localization `Qh` of the homotopy category, for the recorded sheaf tensor
-`SheafOfModules.monoidalCategory X.sheaf` with its symmetry. The additivity and closedness
-of that tensor (the first two clauses of `SheafOfModules.tensorClosed`,
-lem-pc-sheaf-modules-tensor-closed), the Grothendieck structure and the functorial flat resolutions
-(`schemeModule_hasFunctorialFlatResolution`) enter only as propositions used by the
-construction; its tensor on objects and morphisms is the K-flat derived tensor.
-It is a global instance, so every statement about `schemeDerivedCategory X` uses this one
-monoidal structure.
-Source: Stacks, 06YH (blueprint: def-pc-scheme-derived-tensor-structure). -/
+/-- The K-flat derived tensor monoidal structure on `D(𝒪_X)`, for the sheaf tensor
+`SheafOfModules.monoidalCategory X.sheaf` with its symmetry (Stacks, Tag 06YH). -/
 @[instance_reducible]
 noncomputable def schemeDerivedTensorMonoidal
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :

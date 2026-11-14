@@ -15,8 +15,9 @@ import Mathlib.CategoryTheory.Filtered.Final
 /-!
 # Descent of a fixed Chow diagram
 
-Source: Stacks Project, Limits, Tag 081F, the base-changed Chow diagram and Tag 01ZP.
-(blueprint: lem-weil-pbc-closed-chow-stage).
+## References
+
+* Stacks Project, Tags 081F and 01ZP
 -/
 
 @[expose] public section
@@ -37,32 +38,7 @@ private theorem over_natIso_property
   exact Arrow.isoMk ex ey (congrArg (fun k ↦ k.left) (e.hom.naturality f).symm)
 
 /-- A given Chow immersion at a separated stage is closed at a later stage.
-The source at that later stage is the base change of the given Chow modification,
-not an arbitrary witness for properness of the original morphism.
-
-Source: Stacks Project, Limits, Tag 081F, proof after choosing the Chow diagram;
-Tag 01ZP for descent of the closed immersion.
-(blueprint: lem-weil-pbc-closed-chow-stage).
-
-Proof:
-1. Restrict the directed system to indices above i₁. This subsystem has the same limit:
-   every index has a common upper bound with i₁, so compatible cones extend uniquely.
-   Affine transitions make its base at i₁ and the base-changed X₀ and Y₀ qcqs.
-   Pasting pullback squares identifies the pullback of f₁ to the limit with that of f₀.
-2. Base change the given π₁ and j₁ to the limit. The former remains proper and surjective,
-   and the latter remains an immersion. The composite π ≫ f is proper by composition.
-   Projective space is proper, hence separated, over the limit target. The commutative
-   triangle therefore makes j proper (properness over a separated target), and a proper
-   immersion is a closed immersion.
-3. At i₁, T₁ is qcqs because it is proper over the qcqs source. Projective space is qcqs
-   because it is proper over the qcqs target. The immersion j₁ is locally of finite type.
-   Apply exists_isClosedImmersion_stage_of_locallyOfFiniteType to j₁ over Sᵢ₁ and the
-   restricted system. It yields an index i above i₁ with jᵢ a closed immersion.
-4. The pullback of T₁ over Sᵢ₁ is the source displayed below. Pasting squares and the
-   projective-space base-change isomorphism give π and j with the displayed triangle.
-   Surjectivity of π follows from base change and transport by the source comparison
-   isomorphism. Separatedness of fᵢ follows from that of f₁ by the same comparison.
-   The transition Sᵢ → Sᵢ₀ is Sᵢ → Sᵢ₁ → Sᵢ₀ by functoriality. -/
+(Stacks, Tags 081F, 01ZP). -/
 theorem exists_closed_chow_stage
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

@@ -13,8 +13,9 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Finite-cover descent for the external section comparison
 
-Source: Stacks Project, Tag 0BED, lemma-kunneth, the degree-zero finite-cover argument.
-(blueprint: lem-sc-external-global-sections-tensor-finite-cover).
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section
@@ -46,29 +47,8 @@ private theorem isIso_app_of_pairwise_limits
   infer_instance
 
 /-- Bijectivity descends from a finite cover of the second factor and its overlaps.
-There are no quasi-coherence, compactness, or affine-diagonal assumptions in this lemma.
-Source: Stacks Project, Varieties, Tag 0BED, lemma-kunneth, degree-zero cover argument.
-(blueprint: lem-sc-external-global-sections-tensor-finite-cover).
-
-Proof: Let M = Gamma(X,F), with its k-action. For each open V of Y, the open immersion
-V -> Y gives X times V as the inverse image of V under pr_2 : X times Y -> Y.
-The open-immersion pullback/restriction comparison and composition of pullback adjunctions
-identify the external coefficient restricted to this open with the external coefficient
-formed from F and G restricted to V. The unit equations and naturality of tensor sections
-show that these comparisons take the external product of sections to its restriction.
-This compatibility holds on pure tensors and then on all tensors by induction.
-Take the sheaf equalizer for G on the cover U and the equalizer for the external
-coefficient on the inverse-image cover. The first equalizer consists of tuples whose
-restrictions to every U_i intersect U_j agree. Tensoring the first equalizer with M
-preserves it: k-vector spaces are flat, and the cover and its pairs have finite index
-sets, so tensor commutes with both products. The local external comparisons therefore
-give a commuting diagram of these two equalizers. The hypotheses hU and hUU say its
-middle and right vertical arrows are bijective. Their inverses commute with the two
-restriction arrows. Restricting these inverses to the equalizers gives an inverse to
-the left vertical arrow, which is the displayed canonical external section map by the
-restriction compatibility. An empty cover forces Y empty, and the zero equalizers give
-the same result; empty overlaps and zero section modules cause no exception.
--/
+There are no quasi-coherence, compactness, or affine-diagonal assumptions in this lemma
+(Stacks, Tag 0BED). -/
 theorem externalGlobalSectionsTensor_bijective_of_finite_cover
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

@@ -25,8 +25,9 @@ import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedEquivalence
 
 /-! # Affine perfect models and geometric chain-map comparison
 
-Source: Stacks Project, perfect.tex, Tags 09RE, 08EB, 06Z0 and 08DW.
-(blueprint: lem-pc-affine-perfect-chain-geometric-models).
+## References
+
+* Stacks Project, Tags 09RE, 08EB, 06Z0 and 08DW
 -/
 
 @[expose] public section
@@ -37,33 +38,8 @@ namespace AlgebraicGeometry
 
 -- Elaborating the affine models and their chosen derived-category comparisons needs this budget.
 set_option backward.isDefEq.respectTransparency false in
-/-- Affine finite-projective models with scalar/geometric Hom equivalences.
-Source: Stacks Project, perfect.tex, Tag 09RE, affine calculation; Tags 08EB,
-06Z0 and 08DW.
-(blueprint: lem-pc-affine-perfect-chain-geometric-models).
-
-Proof: Put B = Gamma(Y, O_Y) and identify Y with Spec B by Y.isoSpec.
-The map s gives R(i) to B. On the tail define F(j) = B tensor over R(i)
-with R(j), with maps induced by R. Extension of scalars is a left adjoint,
-so colim F is B tensor over R(i) with c.pt. The tensor-product universal
-property identifies Spec F(j) and Spec(colim F) with the given pullbacks.
-Transport P and Q along Y.isoSpec. Scheme-isomorphism derived equivalence
-preserves perfectness and quasi-coherent homology, and transport of localized
-open sites supplies the chosen derived categories at the same Hom universe.
-Apply the affine bounded-projective criterion to both objects, and transport
-these complexes along F(i) iso B. This gives E and K and the stated bounds,
-finiteness and projectivity. Projective terms are flat, and the bounded
-complexes are K-flat, so affine derived pullback is termwise scalar extension.
-At every stage and at the limit apply the affine quasi-coherent derived
-equivalence, conjugating its Hom equivalence by these object comparisons;
-fullness of the quasi-coherent subcategory gives the displayed equivalences.
-Naturality of the tilde pullback comparison on chain maps says that extending
-a chain map and then taking tilde equals pulling back its tilde. Tensor
-associativity and the counit-pinned derived pullback composition comparison
-identify the conjugations with perfectStageMap and perfectLimitMap. This gives
-the two displayed equations. No Hom diagram or cocone is constructed here.
-All universal-property constructions work for the zero ring; the tail's
-initial object is i, so no choice of a nonempty point is used. -/
+/-- Affine finite-projective models with scalar/geometric Hom equivalences
+(Stacks, Tags 09RE, 08EB, 06Z0 and 08DW). -/
 theorem exists_affinePerfectChainGeometricModels
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

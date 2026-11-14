@@ -23,21 +23,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 /-- Derived global sections takes an ambient coproduct of quasi-coherent complexes
-on a qcqs scheme to a coproduct in the derived module category.
-Source: Stacks Project, Tag 09M1, first paragraph of the proof.
-(blueprint: lem-pc-derived-global-sections-preserves-coproducts)
-Proof: Put A = Γ(X,O_X), Y = Spec A, and a = X.toSpecΓ. Since X is qcqs,
-a is quasi-compact and quasi-separated. Quasi-coherent cohomology is closed
-under ambient coproducts, so the given apex S is quasi-coherent. Derived
-pushforward preserves the given coproduct and takes its summands and apex
-into D_QCoh(Y). The fully faithful inclusion reflects its colimit property,
-giving a colimiting cofan in D_QCoh(Y). The inverse of the affine derived
-equivalence preserves this coproduct; its natural comparison identifies the
-mapped cofan with derived global sections on Y, transported along ΓSpecIso.
-The affinization comparison identifies that composite with RΓ(X,-).
-Transporting the colimit across this natural isomorphism gives exactly the
-maps RΓ(X,ι_i) appearing in the conclusion. The argument includes the empty
-family and unbounded complexes; it needs no restriction to integer scalars. -/
+on a qcqs scheme to a coproduct in the derived module category (Stacks, Tag 09M1). -/
 theorem derivedGlobalSections_preserves_coproducts (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :

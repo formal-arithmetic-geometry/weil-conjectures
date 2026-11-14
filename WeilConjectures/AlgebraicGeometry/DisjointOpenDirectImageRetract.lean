@@ -12,9 +12,9 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
 
 /-! # A disjoint open component gives a direct-image retract
 
-Source: `lem-weil-pbc-finite-module-generic-reflection`, proof step 2,
-the finite product of sections on disjoint pieces.
-(blueprint: lem-weil-pbc-disjoint-open-direct-image-retract)
+## References
+
+* Stacks Project, Tag 0A5D
 -/
 
 @[expose] public section
@@ -27,22 +27,8 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The direct image of a component of a finite disjoint open partition is a retract
 of the full direct image. No finite-morphism or local-constancy hypothesis is needed.
-
-Source: `lem-weil-pbc-finite-module-generic-reflection`, proof step 2;
-Stacks Project Tag 0A5D, the direct-factor argument refined for module coefficients.
-(blueprint: lem-weil-pbc-disjoint-open-direct-image-retract)
-
-Proof: The complement of W i is the union of the other opens, so W i is closed.
-For its inclusion j, the comparison c from extension by zero j_! to direct image
-j_* is therefore invertible. Put H = j^* F. Let L be j_! adjoint to j^* and R be
-j^* adjoint to j_*. The comparison at H equals the composite of the counit of L
-at F and the unit of R at F: transpose both sides under the two adjunctions;
-the triangle identities and the comparison's characterization give the identity
-on H. Consequently c inverse followed by L's counit is a section of R's unit.
-This gives a retract of F onto j_* H. Apply f_* to the retract, and transport
-through the composition isomorphism f_* j_* H isomorphic to (j followed by f)_* H.
-If the ith piece is empty, the same adjunction argument applies to its zero sheaf.
-An empty partition has no index i, so the assertion is vacuous in that case. -/
+of the full direct image. No finite-morphism or local-constancy hypothesis is needed.
+(Stacks, Tag 0A5D) -/
 theorem nonempty_retract_lowerStar_of_disjoint_open_partition
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (n : ℕ) (W : Fin n → X.Opens) (hcover : (⨆ j, W j) = ⊤)

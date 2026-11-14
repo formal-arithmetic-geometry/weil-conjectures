@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 
 /-! # Derived pullback restriction with independent localization universes
 
-Source: Stacks Project, Tag 08DW, compatibility with restriction to opens.
-(blueprint: lem-pc-derived-pullback-open-restriction-universes).
+## References
+
+* Stacks Project, Tag 08DW
 -/
 
 @[expose] public section
@@ -152,16 +153,8 @@ private theorem exact_transport
       @Functor.mapDerivedCategoryFactorsh _ _ _ hA₂ _ _ _ hB₂ F _ _ _
   exact ⟨((Functor.whiskeringLeft _ _ _).obj qA₁).preimageIso (α ≪≫ β.symm)⟩
 
-/-- Restriction comparison with a possibly different localization universe on opens.
-Source: Stacks Project, Tag 08DW, proof of compatibility with restriction.
-Proof: choose K-flat resolutions on Y. Restriction preserves quasi-isomorphisms and
-K-flatness, and termwise tensor pullback commutes with restriction. The two composites
-are thus naturally identified on K-flat resolutions and descend through localization.
-Alternatively transport the existing same-universe comparison along the canonical
-equivalences between choices of localization; its naturality makes the transported
-comparison independent of the representatives. The comparison has no quasi-coherence
-or affineness hypothesis and works for the empty open and arbitrary unbounded objects.
-(blueprint: lem-pc-derived-pullback-open-restriction-universes). -/
+/-- Restriction comparison with a possibly different localization universe on opens
+(Stacks, Tag 08DW). -/
 theorem derivedPullback_openRestriction_iso_universes {X Y : Scheme.{u}} (f : X ⟶ Y)
     (U : X.Opens) (V : Y.Opens) (hUV : U ≤ f ⁻¹ᵁ V)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

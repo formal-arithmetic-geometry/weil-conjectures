@@ -9,9 +9,9 @@ import all WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportCompari
 
 /-! # The two projection boundaries of a proper refinement graph
 
-Source: Stacks Project, Tags 0F7C--0F7E, and steps 3--4 of
-`lem-pur-etale-graph-refinement-normalization`.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 0F7C and 0F7E
 -/
 
 @[expose] public noncomputable section
@@ -140,32 +140,8 @@ private theorem concrete_refinement_projection_boundary
   simpa only [unboundedFormalism, rightDerivedLowerStarIdIso,
     openImmersionLowerShriekLowerStarExchangeIso, asIso_hom] using h
 
-/-- The first transported side is the specified refinement map; the second removes R(1)_*.
-
-Source: Stacks Tags 0F7C--0F7E, projection pasting; the normalized refinement map in
-`LowerShriekIndependenceUnbounded.lean` and its open-unit normalization in
-`OpenImmersionLowerShriekProjectionBaseChange.lean`.
-(auxiliary; not a blueprint node).
-
-Proof: paste the square of square₁ horizontally with the proper/open square for
-pr₂:T -> s.Z and s.i. The composite upper proper arrow is s₁q₁ = 1_X,
-and the composite lower proper arrow is z pr₂ = rs.hom. Horizontal exchange
-pasting therefore identifies the transported first side with the exchange for
-the supplied refinement square. The exterior proper compositors agree by
-associativity of the normalized K-injective compositor, or equivalently by
-conjugating the associative exact inverse-image compositor. Removing R(1_X)_*
-uses its canonical identity isomorphism. Expand the resulting exchange as its
-adjunction unit, inverse open base change and identity counit. The unit mate
-equation identifies the open factor with refinementLowerShriekBaseChangeDerivedIso;
-the composite-adjunction normalization identifies the proper compositor with
-refinementLowerStarComp. These are the three factors of the stated refinement map.
-For the second side paste square₂ with the square for pr₁:T -> r.Z and r.i.
-Now the composite upper and lower proper arrows are both identities, since
-s₂q₂ = 1_X and z pr₁ = 1_{r.Z}. Horizontal exchange pasting and its identity
-normalization reduce this side to rightDerivedLowerStarIdIso on X, whiskered
-by Dr.i_! Rr.g_*. Its left unitor is exactly etaleGraphOpenNormalization.
-No intersection comparison is used in either side computation. The proof
-requires no quasi-compactness and applies to identity or empty opens. -/
+/-- The first transported side is the specified refinement map; the second removes `R(1)_*`
+(Stacks, Tags 0F7C--0F7E). -/
 theorem etaleRefinementGraphSideTransport
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (s r : Compactification f)

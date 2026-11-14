@@ -191,25 +191,7 @@ private theorem localizationModelTriangle
   · exact singleIsoTrans (CondensedRing.openModelIso a j P N eP) eOpen
   · exact singleIsoTrans (CondensedRing.closedModelIso b j k hjk Q N eQ) eClosed
 
-/-- Localization with the prescribed finite-coefficient images as its outer objects.
-
-Source: `ModuleObject/Colimit/TwoColimit.lean`, support induction; condensed open/closed
-recollement and change of coefficients.
-(auxiliary; not a blueprint node)
-
-Proof: apply condensed open/closed recollement to N in degree zero and include its first
-localization triangle from the bounded-below derived category into the unbounded one.
-Exactness of the open pullback and extension, and of the closed pullback and direct image,
-identifies the outer objects with the single complexes of j! j* N and k_* k* N. Replace
-j* N and k* N by the supplied scalar extensions. Scalar extension commutes with j! by
-openImmersionShriekIso. For k_*, the proved pushScalarSingleIso helper below the source
-imports gives the comparison: pullIso shows that the scalar extension is zero on U;
-abelian closed support and moduleUnitOfAbelian make its closed unit invertible; pullIso
-on Z and the closed counit identify its restriction with the scalar extension of PZ.
-Thus the specified two scalar extensions give the required outer isomorphisms.
-The middle object is N in degree zero, so its zeroth cohomology is N. No
-constructibility assumption is needed here, and either complementary piece may be empty.
--/
+/-- Localization with the prescribed finite-coefficient images as its outer objects. -/
 theorem exists_finiteCoefficient_localization_triangle
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (ℓ : ℕ) [Fact ℓ.Prime]

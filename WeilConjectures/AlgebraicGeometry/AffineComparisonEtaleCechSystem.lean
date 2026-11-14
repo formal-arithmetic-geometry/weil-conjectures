@@ -10,7 +10,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 /-!
 # Simultaneous affine étale presentations of a finite Čech nerve
 
-Source: Stacks Project, Tags 099U, 099T, 01ZM, 01ZN and 07RP.
+## References
+
+* Stacks Project, Tags 099U, 099T, 01ZM, 01ZN and 07RP
 -/
 
 @[expose] public section
@@ -24,9 +26,8 @@ namespace AlgebraicGeometry.ProEtale
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
 /-- Geometric presentation data, independent of a coefficient sheaf or cocycle.
-The transition maps and cone legs respect every repeated-intersection projection.
-Source: Stacks Project, Tag 099U, finite Čech approximations.
-(auxiliary; not a blueprint node). -/
+The transition maps and cone legs respect every repeated-intersection projection (Stacks, Tag 099U).
+-/
 structure AffineEtaleCechSystem (Y : Scheme.{u}) (V : Y.ProEt)
     {n : ℕ} (U : Fin n → Over V) (I : Type u) [SmallCategory I] where
   W : I → Y.Etale

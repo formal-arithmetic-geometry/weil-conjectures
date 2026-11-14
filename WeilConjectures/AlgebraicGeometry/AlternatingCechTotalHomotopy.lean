@@ -10,9 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 
 /-! # Čech totalization preserves coefficient homotopies
 
-Source: Stacks Project, Tag 08C1, functoriality verification; the explicit signed
-homotopy calculation in the parent node's proof Step 3.
-(blueprint: lem-sc-alternating-cech-total-homotopy)
+## References
+
+* Stacks Project, Tag 08C1
 -/
 
 @[expose] public section
@@ -134,25 +134,8 @@ private theorem additiveComplexFunctor_total_map_homotopy
     abel
 
 
-/-- A coefficient homotopy induces a homotopy of the actual Čech total maps.
-No covering hypothesis or injectivity is needed.
-
-Source: Stacks Project, Tag 08C1, functoriality verification; parent node
-lem-sc-kinjective-alternating-cech-augmentation-quasi-iso, proof Step 3
-(blueprint: lem-sc-alternating-cech-total-homotopy).
-
-Proof: Write h for the coefficient homotopy. In total degree n, on the summand
-with Čech degree p and coefficient degree q, p+q=n, define H by restricting
-h from coefficient degree q to q-1, multiplying by (-1)^p, and including the
-result in the (p,q-1) total summand. Use the coproduct universal property to
-assemble these maps; set the other degree components to zero. The restrictions
-are natural in each open set. Consequently the horizontal pieces in dH+Hd
-cancel: the two restrictions agree, while the signs at p and p+1 are opposite.
-The vertical differential has sign (-1)^p as well, so the vertical contributions
-are the restriction of dh+hd, hence the restriction of f-g. The total summand
-inclusions jointly detect equality, proving the homotopy equation. The construction
-works for arbitrary complexes and any finite family, including the empty family,
-where there are no summands. Negative Čech degrees vanish by extension by zero. -/
+/-- A coefficient homotopy induces a homotopy of the actual Čech total maps
+(Stacks, Tag 08C1). -/
 theorem alternatingCechTotal_map_homotopy
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens)
     {K L : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ}

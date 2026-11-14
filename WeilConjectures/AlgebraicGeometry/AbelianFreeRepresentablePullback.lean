@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCom
 
 /-! # Pullback of free abelian representable sheaves
 
-Source: Stacks Project, Tags 03CB and 03Q8, inverse-image and evaluation adjunctions.
+## References
+
+* Stacks Project, Tags 03CB and 03Q8
 -/
 
 @[expose] public section
@@ -39,9 +41,8 @@ theorem freeRepresentableHomEquiv_comp (S : Scheme.{u}) (U : S.Etale)
 scheme-theoretic pullback. Both objects corepresent sections on that pullback:
 apply inverse-image/direct-image adjunction, sheafification, the free abelian
 adjunction, and Yoneda. Naturality in the coefficient sheaf gives the unique
-representing isomorphism. Empty U is included in the same adjunction argument.
-Source: Stacks Project, Tags 03CB and 03Q8.
-(blueprint: def-sc-abelian-free-representable-pullback). -/
+representing isomorphism. Empty U is included in the same adjunction argument
+(Stacks, Tags 03CB and 03Q8). -/
 noncomputable def abelianFreeRepresentablePullbackIso {S T : Scheme.{u}}
     (a : T ⟶ S) (U : S.Etale) :
     ((a)^*[AddCommGrpCat.{u + 1}]).obj ((abelianComparisonFree S).obj U) ≅
@@ -64,9 +65,7 @@ noncomputable def abelianFreeRepresentablePullbackIso {S T : Scheme.{u}}
       rw [he, Equiv.apply_symm_apply, Equiv.apply_symm_apply])
 
 /-- The same free-sheaf comparison for a specified pullback square, with the
-free sheaf on its given apex rather than on a chosen fibre product.
-Source: Stacks Project, Tags 03CB and 03Q8.
-(blueprint: def-sc-abelian-free-representable-pullback). -/
+free sheaf on its given apex rather than on a chosen fibre product (Stacks, Tags 03CB and 03Q8). -/
 noncomputable def abelianFreeRepresentablePullbackSquareIso {S T : Scheme.{u}}
     (a : T ⟶ S) (V : S.Etale) (U : T.Etale) (r : U.left ⟶ V.left)
     (hr : IsPullback r U.hom V.hom a) :

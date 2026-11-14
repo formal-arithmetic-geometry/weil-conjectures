@@ -19,7 +19,9 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 
 /-! # Finite affine Čech complexes for intrinsic comparison
 
-Source: Stacks Project, Tag 099U, the two finite Čech limit reductions.
+## References
+
+* Stacks Project, Tag 099U
 -/
 
 @[expose] public section
@@ -437,35 +439,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
 /-- Finite coverings in the affine ind-etale basis have zero positive Čech cohomology
-with coefficients in the intrinsic comparison pullback of an injective etale module.
-Source: Stacks Project, Tag 099U, paragraphs beginning "To check condition (3)" and
-"Let U be an etale covering"; module coefficients use the augmented free-module
-Čech resolution (Cohomology on Sites, Tag 03FC).
-(auxiliary; not a blueprint node).
-
-Proof: transport the cover through AsSmall.down, retaining its covering sieve. Present its
-affine ind-etale objects by small cofiltered diagrams of affine etale X-schemes. First
-approximate the finitely many covering arrows by etale arrows over the covered object. Their
-finite disjoint union is surjective at each approximating stage. Next approximate the covered
-object by affine etale X-schemes. Finite presentation descends the finitely many covering
-objects and arrows to a common stage. Form their iterated intersections there and use base
-change to recover the original intersections; no infinite diagram is descended. Joint
-surjectivity holds on a cofinal tail. Thus each stage is an etale covering of an etale object of
-X. The augmented free-module Čech complex is exact. Applying Hom into the injective module I
-makes its positive cohomology zero. Constant-scalar restriction retains the abelian sheaf. The
-canonical constant-section ring map identifies intrinsic comparison pullback under scalar
-restriction with the fixed-scalar comparison pullback. The affine comparison-section formula
-expresses each nerve term as the filtered colimit of its etale stage sections. For each omitted-
-factor projection d, naturality says that the stage restriction followed by the continuity map
-equals the continuity map followed by restriction along the limit projection. Taking their
-signed sums identifies the Čech differentials. Repeated indices use the diagonal cofinal
-subsystem of their finitely many stage indices. Finite products commute with these exact
-filtered colimits of modules, so the alternating Čech complex has zero positive cohomology. The
-projection-characterized isomorphism between any two choices of iterated fibre products
-transfers this conclusion to the specified S. Transport back through AsSmall.up changes no
-section. The empty covering has zero terms in every positive degree, and the zero ring gives
-only zero modules; both cases are included. No derived evaluation or acyclicity criterion is
-used in this step. -/
+with coefficients in the intrinsic comparison pullback of an injective etale module
+(Stacks, Tags 099U and 03FC). -/
 theorem coefficientComparison_affineCech_vanishing (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     [HasSheafify (Scheme.smallModelComparisonEtaleTopology.{u, v} X)

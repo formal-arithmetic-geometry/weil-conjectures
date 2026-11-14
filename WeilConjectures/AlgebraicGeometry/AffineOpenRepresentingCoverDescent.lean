@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleFiniteCoverFactorizationDescent
 
 /-! # Descent of a representing etale cover in an affine open system
 
-Source: Stacks Project, Tags 0EYL and 03Q6, finite objects, maps and cover descent.
-(blueprint: lem-weil-pbc-affine-open-representing-cover-descent). -/
+## References
+
+* Stacks Project, Tags 0EYL and 03Q6
+-/
 
 @[expose] public section
 
@@ -81,36 +83,7 @@ private theorem pullbackComp_inv_fst
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Descend a specified finite affine cover and its representing arrows, retaining
-one source comparison for both families of arrows.
-
-Source: Stacks Project, Tag 0EYL (finite affine etale site descent), Tag 01ZM
-(object and arrow descent), Tag 01ZC(3) (maps to locally finitely presented targets).
-
-Proof: Choose one stage of the nonempty cofiltered diagram, restrict to its
-cofiltered tail, and replace that tail by a directed coinitial diagram. The
-whiskered cone remains limiting. Its stages are affine, so all its transitions
-are affine and all stages are quasi-compact and quasi-separated. Regard the
-terminal etale object of the chosen stage as a full affine etale object. Pull
-back each U_q to that stage. The structural equation hp and the canonical
-pullback-composition isomorphism identify its pullback to the limit with p*U_q.
-The pullback of the chosen terminal object is canonically the terminal object
-of c.pt. Transport t and b along these comparisons and apply
-etale_finiteCoverFactorizationDescent. It descends the affine sources, both
-families of arrows under a common source isomorphism, and the covering
-condition, to a common later stage. Its auxiliary targets need not be
-quasi-compact: maps into them descend by locally finite presentation using
-the qcqs base-change diagrams of the affine sources. Identify the later
-pullback of the fixed terminal object with the terminal object at that stage.
-Compose each stage source structure map with the open immersion of the stage
-into X to construct V_q. Compose the descended representing map with the
-projection from the pullback of U_q to U_q to construct w_q. Cartesian-square
-pasting identifies p*V_q with the limit source; compose this comparison with
-the common source isomorphism supplied by descent to obtain d_q. Pullback
-extensionality and the representing-arrow equation supplied by descent give
-the displayed equality. The stage covering condition is unchanged by the
-terminal-object comparison and passage to etale X-objects. If n=0, finite
-cover descent makes the terminal object at a later stage empty, yielding
-the same conclusion with empty arrow families. -/
+one source comparison for both families of arrows (Stacks, Tags 0EYL, 01ZM and 01ZC). -/
 private theorem affineOpen_finite_representing_models
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)
@@ -243,32 +216,7 @@ private theorem affineOpen_finite_representing_models
       exact (MorphismProperty.Over.w ((d x).hom ≫ b x)).symm
 
 /-- Refine a covering with representing maps and descend its geometric data.
-Source: Stacks Project, Tag 0EYL, finite diagram and finite cover descent;
-Tag 03Q6, proof steps (1)--(3); Tag 01ZM, morphism descent.
-(blueprint: lem-weil-pbc-affine-open-representing-cover-descent).
-
-Proof: Fix one affine open stage and reindex its cofiltered tail by a
-directed coinitial system. The limit is affine. Refine the Z-cover by a finite
-affine etale cover, retaining each source's map to a selected Z_i and hence
-its representing arrow to p^*W_i. Use the terminal etale object at the fixed
-stage as the fixed affine target. Pull back each W_i to that stage; these
-etale objects need not be quasi-compact. Canonical pullback comparisons and
-p = (limit projection) followed by (stage immersion) convert the finite
-covering maps and representing arrows into the input of
-etale_finiteCoverFactorizationDescent. It descends affine sources and both
-families of maps to a common later stage, makes the stage family covering,
-and retains the equations under one common source comparison. Its proof
-uses the base-change diagram of each affine source model and locally finite
-presentation of W_i to descend representing maps, so no quasi-compactness
-of W_i or X is imposed. Identify the stage pullback of the fixed terminal
-object with the stage terminal object. Compose model structure maps with
-the stage immersion to obtain the X-objects V_b. Compose representing maps
-with the pullback projections to obtain w_b, and the source comparisons
-with the original refinement maps to obtain e_b. Pullback hom_ext proves
-p^*(w_b)=e_b followed by a_{r(b)}. The composites with z_{r(b)} recover the
-refining limit cover, and the stage covering property survives terminal
-comparison and composition into X. For an empty limit the same finite
-cover descent makes an empty stage. No sheaves or sections are involved. -/
+(Stacks, Tags 0EYL, 03Q6, 01ZM). -/
 theorem affineOpen_representing_cover_descent
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)

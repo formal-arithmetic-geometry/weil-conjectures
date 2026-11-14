@@ -16,9 +16,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteDiagramLiftOfModels
 import WeilConjectures.AlgebraicGeometry.FiniteFamilyJointSurjectivityStage
 
 /-!
-# Blueprint statements
-
-lemma-acyclicity-pulled-back-injectives.
+# Descent of finite étale data along affine transition limits
 -/
 
 @[expose] public section
@@ -44,7 +42,8 @@ private theorem comparison_fst {X Y Z : Scheme.{u}}
   subst k
   simpa using pullbackComp_inv_fst f g W
 
-/-- Blueprint: lemma-acyclicity-pulled-back-injectives. -/
+/-- Quasi-compact, quasi-separated étale schemes of finite presentation over a limit of
+affine transition schemes, and morphisms between them, descend to a finite stage. -/
 theorem etale_finite_data_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

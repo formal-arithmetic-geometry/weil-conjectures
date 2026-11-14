@@ -18,8 +18,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 
 /-! # Open restriction comparison for derived projection mates
 
-Source: Stacks Project, Tag 08EU, first sentence of the proof, and Tag 08FE.
-(blueprint: lem-pc-derived-projection-mate-open-restriction-comparison).
+## References
+
+* Stacks Project, Tags 08EU and 08FE
 -/
 
 @[expose] public section
@@ -57,33 +58,7 @@ private theorem mate_square
 -- Keep the fixed localizations opaque during comparison of functor types.
 /-- Restriction of a projection mate to a target open is isomorphic, as an
 arrow, to a projection mate for the inverse-image source over that open, using the
-shared small localizations.
-This is a comparison statement; it does not assert that either mate is invertible.
-
-Source: Stacks Project, Tag 08EU, first sentence of the proof, and Tag 08FE.
-(blueprint: lem-pc-derived-projection-mate-open-restriction-comparison).
-
-Proof: use hZ and hg to identify Z with the inverse image of U and g with the
-restricted morphism. No compactness or quasi-separatedness is needed for this comparison.
-Restriction of quasi-coherent cohomology remains quasi-coherent. Use the exact open
-restriction functors and the direct-image/open-restriction comparison of Tag 08FE.
-Tensor and pullback commute with these restrictions. Open restriction on derived
-categories is a localization with fully faithful right adjoint. Evaluate the supplied
-tensor comparison on these right adjoints and use the localization counits to descend
-it to Z and U. Descend the adjunction in the same way. Naturality of the supplied
-tensor comparison and the formula for the adjunction Hom equivalence identify the
-restricted mate with the descended mate, conjugated by the object comparison maps.
-Change both local derived categories to their shared small localizations by uniqueness
-of localization; the K-flat tensor and derived-functor universal properties transport
-all the comparisons. Write rX and rY for the restrictions, N = rY(M), E = rX(L).
-The source comparison a identifies rY(M tensor Rf(L)) with N tensor Rg(E).
-The target comparison b identifies rY(Rf(F(M) tensor L)) with Rg(Fg(N) tensor E).
-Expand p.homEquiv(v) as p.unit followed by Rf(v); the restriction comparisons
-carry the unit and counit to those of q. Naturality of t at the localization
-units then gives rY(pi) followed by b = a followed by the local mate.
-Thus a and b define the required arrow isomorphism. The two object comparisons give
-an isomorphism in the arrow category. No invertibility of a projection mate is used.
-If U is empty, Z is empty and the same localization and restriction comparisons apply. -/
+shared small localizations (Stacks, Tags 08EU and 08FE). -/
 theorem exists_derivedProjectionMate_openRestriction_comparison
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -24,11 +24,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 open MonoidalCategory Scheme.Modules
 /-- Termwise part of the closed immersion coherent formal equivalence.
-Source: Stacks Project, Cohomology of Schemes, Tags 088A and 087T.
-The proof constructs the restricted pushforward equivalence level by level, using
-the annihilation, coherence, ideal-power, and full-faithfulness lemmas.
-(blueprint: lem-weil-pbc-closed-immersion-coherent-formal-equivalence-termwise)
--/
+(Stacks, Tags 088A, 087T). -/
 theorem closedImmersion_coherentFormal_equivalence_termwise {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] [IsNoetherian X] (I : X.IdealSheafData) :
     ∃ E : @CoherentFormalModule Z (isNoetherian_of_locallyOfFiniteType i) (I.comap i) ≌

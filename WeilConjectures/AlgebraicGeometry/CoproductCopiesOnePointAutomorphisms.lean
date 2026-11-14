@@ -21,16 +21,7 @@ noncomputable section
 
 namespace AlgebraicGeometry
 
-/-- Permuting the summands gives every automorphism of copies of a one-point base.
-Source: blueprint lemma-artin-schreier-character-sheaf, final split-cover example.
-(blueprint: new-d9-one-point-coproduct-aut)
-
-Proof: each map from the base into the coproduct lands in a single summand, since the
-base has one point. The coprojection is an open immersion, so the map factors through
-that summand. The map over the base forces the factor to be the identity. Thus an
-endomorphism over the base is determined by its map on points. Every permutation of
-the summands is induced by reindexing the coproduct, with inverse its inverse permutation.
-The action on points respects composition and therefore identifies the groups. -/
+/-- Permuting the summands gives every automorphism of copies of a one-point base. -/
 theorem coproductCopies_onePoint_aut (X : Scheme.{u}) [Subsingleton X] [Nonempty X]
     (I : Type u) :
     Nonempty (Aut (Over.mk (Sigma.desc (fun _ : I ↦ 𝟙 X))) ≃* Equiv.Perm I) := by

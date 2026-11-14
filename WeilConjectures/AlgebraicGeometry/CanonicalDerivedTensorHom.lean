@@ -14,8 +14,10 @@ import WeilConjectures.Algebra.Homology.KInjectiveHomComplex
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-! # Canonical derived tensor/internal-Hom bijections
-Source: Stacks Project, cohomology.tex, Tag 08DJ.
-(blueprint: def-pc-canonical-derived-tensor-hom-bijection).
+
+## References
+
+* Stacks Project, Tag 08DJ
 -/
 
 @[expose] public section
@@ -29,15 +31,7 @@ universe uCD wCD
 open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
-/-- Existence of the canonical tensor-Hom family.
-Source: Stacks, cohomology.tex, Tag 08DJ
-(blueprint: def-pc-canonical-derived-tensor-hom-bijection).
-Proof: resolve both tensor inputs by K-flat complexes and the target by the fixed
-K-injective functor. Curry the Hom-complex components using the sheaf tensor-Hom
-bijection. The Hom differential and total-tensor signs make the displayed ψ a chain
-map. Maps into a K-injective compute derived Hom; localization and the resolution
-map give the displayed equation. Common resolutions show independence of choices,
-and componentwise composition gives naturality in all three variables. -/
+/-- Existence of the canonical tensor-Hom family (Stacks, Tag 08DJ). -/
 theorem exists_canonicalDerivedTensorHom (X : Scheme.{uCD})
     [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))] :
     ∃ e : ∀ K L M : schemeDerivedCategory X,
@@ -57,13 +51,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 set_option linter.style.haveILetI false in
 set_option maxHeartbeats 1000000 in
 -- The representative predicate requires extra heartbeats to elaborate the sheaf tensor instances.
-/-- Uniqueness of the family specified on representatives.
-Source: Stacks, cohomology.tex, Tag 08DJ
-(blueprint: def-pc-canonical-derived-tensor-hom-bijection).
-Proof: on K-flat inputs, Hom(L,I(M)) is K-injective. Every derived morphism into
-it is represented by a chain map up to homotopy. Its uncurrying is determined on
-every tensor summand, so the representative equation determines the bijection.
-Every derived object has such a representative; naturality transports the equality. -/
+/-- Uniqueness of the family specified on representatives (Stacks, Tag 08DJ). -/
 theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
     [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))]
     {e e' : ∀ K L M : schemeDerivedCategory X,
@@ -150,9 +138,7 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
   exact (cancel_epi (a.hom ⊗ₘ b.hom)).1 ((cancel_mono c.inv).1
     (by simpa only [← Category.assoc] using heq))
 
-/-- Canonical family fixed by the representative equation.
-Source: Stacks, cohomology.tex, Tag 08DJ
-(blueprint: def-pc-canonical-derived-tensor-hom-bijection). -/
+/-- Canonical family fixed by the representative equation (Stacks, Tag 08DJ). -/
 def schemeDerivedTensorHomEquiv (X : Scheme.{uCD})
     [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))] :
     ∀ K L M : schemeDerivedCategory X,

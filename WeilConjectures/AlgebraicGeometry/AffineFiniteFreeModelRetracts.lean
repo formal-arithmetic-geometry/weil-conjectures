@@ -19,14 +19,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Every term of the explicit affine finite-free model is a retract of a finite
-free localized structure-sheaf module.
-Source: Stacks Project, Tag 068C and Definition 08C4, finite-basis argument
-(blueprint: lem-affine-finite-free-model-retracts).
-
-Choose a finite basis of the finite free module `K.X n`, identify its associated
-sheaf with `tildeFinsupp`, and transport the inclusion and projection through
-the affine-chart restriction and inverse localized-site equivalence. Additivity
-preserves the identity composite; rank zero handles zero terms. -/ 
+free localized structure-sheaf module (Stacks, Tags 068C, 08C4). -/
 theorem affine_finite_free_model_retracts {Y : Scheme.{u}}
     (U : Y.Opens) (hU : IsAffineOpen U)
     (K : ChainComplex (ModuleCat.{u} (Γ(Y, U) : Type u)) ℕ)

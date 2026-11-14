@@ -12,9 +12,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedTensorSymmetry
 
 /-! # Coproduct preservation by the shared derived tensor
 
-Source: Stacks Project, Duality for Schemes, Tag 0A9U, first two sentences of proof;
-Cohomology, Tags 06YH and 0FPB; Injectives, Tag 07D9.
-(blueprint: lem-sc-derived-tensor-right-coproducts).
+## References
+
+* Stacks Project, Tags 0A9U, 06YH, 0FPB and 07D9
 -/
 
 @[expose] public section
@@ -28,9 +28,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 
 /-- Derive the homotopy tensor-Hom adjunction using K-flat and K-injective
 resolutions. Unlike the bundled upstream closed instance, this argument needs
-Grothendieck abelianness only in the scheme universe.
-Source: the argument of `DerivedCategory.tensorHomAdjunctionQhObj` in
-WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed; Stacks, Tag 06YH. -/
+Grothendieck abelianness only in the scheme universe (Stacks, Tag 06YH). -/
 private theorem derivedTensorLeft_isLeftAdjoint (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (E : schemeDerivedCategory X) : (tensorLeft E).IsLeftAdjoint := by
@@ -87,25 +85,8 @@ private theorem derivedTensorLeft_isLeftAdjoint (X : Scheme.{u})
   let adj := (HomotopyCategory.tensorHomAdjunction P).derived W W ε η
   exact (adj.ofNatIsoLeft ((tensoringLeft _).mapIso (Q.objObjPreimageIso E))).isLeftAdjoint
 
-/-- Tensoring on the right by any derived object preserves scheme-universe coproducts.
-The localization universe w is independent of the scheme universe u.
-Source: Stacks Project, Tag 0A9U, first two sentences of proof;
-Cohomology, Tags 06YH and 0FPB; Injectives, Tag 07D9.
-(blueprint: lem-sc-derived-tensor-right-coproducts).
-
-Proof. Choose a K-flat representative P of E. The shared K-flat tensor comparison
-identifies tensoring with E with total tensoring by P on representatives. Module
-sheaf tensor preserves coproducts because it is a left adjoint in each variable.
-Coproducts of cochain complexes are degreewise. In total degree n, tensoring a
-coproduct complex by P therefore amounts to interchanging the coproduct of the
-input complexes with the coproduct over pairs of degrees adding to n. The canonical
-interchange isomorphisms commute with the tensor differential and assemble to a
-natural isomorphism of complexes. Termwise coproducts give coproducts in the derived
-category by derivedAmbientDirectSums, and the K-flat comparison is natural with
-respect to their coprojections. Thus the image of each coproduct cofan under
-tensorRight E is a colimit cofan. This proves preservation, including the empty
-family. Represent the objects in the chosen localization universe w throughout;
-no equality w = u and no Grothendieck instance in universe w is required. -/
+/-- Tensoring on the right by any derived object preserves scheme-universe coproducts
+(Stacks, Tags 0A9U, 06YH, 0FPB and 07D9). -/
 theorem derivedTensorRight_preservesCoproducts (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (E : schemeDerivedCategory X) (J : Type u) :

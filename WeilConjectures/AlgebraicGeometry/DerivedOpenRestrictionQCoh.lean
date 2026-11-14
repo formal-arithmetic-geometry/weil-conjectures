@@ -11,8 +11,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Quasi-coherence and derived restriction
 
-Source: Stacks Project, Tags 08DW and 06Z0; exact restriction to open subschemes.
-(blueprint: lem-pc-derived-open-restriction-qcoh-iff).
+## References
+
+* Stacks Project, Tags 08DW and 06Z0
 -/
 
 @[expose] public section
@@ -53,15 +54,8 @@ private theorem overEquiv_inverse_qcoh (X : Scheme.{u}) (U : X.Opens)
     (U.overEquivalence.symm.inverse) _
     (U.sheafOfModulesEquivOverInverseUnit (moduleRings X.toRingedSpace))
 
-/-- Exact restriction detects quasi-coherence of the restricted cohomology sheaves.
-Source: Stacks Project, Tag 08DW, proof of (1), and Tag 06Z0.
-Proof: represent K by a cochain complex. Restriction and the over equivalence are exact,
-so their homology is the restriction of its homology. Descend this comparison through Q.
-The over equivalence and its inverse preserve colimits and the structure module, hence
-transport local presentations in both directions. Thus a cohomology sheaf over U is
-quasi-coherent precisely when the corresponding sheaf on the open subscheme is.
-Apply this in each integer degree. Empty opens and unbounded complexes are allowed.
-(blueprint: lem-pc-derived-open-restriction-qcoh-iff). -/
+/-- Exact restriction detects quasi-coherence of the restricted cohomology sheaves
+(Stacks, Tags 08DW and 06Z0). -/
 theorem schemeDerivedQCoh_openRestriction_iff (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wO} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]

@@ -11,8 +11,11 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 
 /-! # Equality of unit sections on a cartesian étale object
-Source: Stacks Project, Tags 03S2, 00XZ, 03CB and 03CC.
-(blueprint: lem-weil-pbc-sets-cartesian-unit-equality). -/
+
+## References
+
+* Stacks Project, Tags 03S2, 00XZ, 03CB and 03CC
+-/
 
 @[expose] public section
 
@@ -51,22 +54,8 @@ private theorem sectionPullback_eq_iff {S T : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Tag 03S2, inverse image along an étale map is
-restriction; Sites Tags 00XZ, 03CB and 03CC, localization and composition units.
-(blueprint: lem-weil-pbc-sets-cartesian-unit-equality).
-
-Proof:
-Let B = Q ×[S] T and use e to identify A with B. The restriction isomorphism
-for the étale map A.hom identifies the value of h inverse image F at A with
-the terminal value of A.hom inverse image (h inverse image F). Naturality of
-the inverse-image unit in the site object, and its composition equation for
-A.hom followed by h, identify the unit at Q followed by this restriction
-isomorphism with the unit for p followed by Q.hom, restricted along (p,id).
-The equality hp identifies the first projection of this cartesian square.
-The composition and restriction maps are isomorphisms, as is the restriction
-along e. Thus these maps preserve and reflect equality of the two sections.
-No injectivity of the unit itself is asserted. The identity base change,
-identical sections and empty total spaces satisfy the same equation. -/
+/-- Two sections have equal images under the cartesian adjunction unit if and only if their
+pullbacks agree (Stacks, Tags 03S2, 00XZ, 03CB and 03CC). -/
 theorem etaleSetCartesianUnit_eq_iff
     {S T : Scheme.{u}} (h : T ⟶ S)
     (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (Q : S.Etale) (A : T.Etale)

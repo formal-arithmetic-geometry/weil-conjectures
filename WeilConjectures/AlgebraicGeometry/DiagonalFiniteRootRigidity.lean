@@ -122,15 +122,7 @@ private theorem ab_full_pullback
   exact adj.full_L_of_isSplitEpi_unit_app
 
 /-- The diagonal section detects maps between abelian etale-origin objects
-pulled back by the first projection of the product of projective lines.
-Source: diagonal coefficient proof (3), connected-fibre root-map rigidity.
-(blueprint: lem-diagonal-finite-root-rigidity).
-
-Proof: transfer section invariance from integer-module sheaves to abelian
-sheaves using their coefficient equivalence and the normalized inverse-image
-comparison. Thus the etale first-projection pullback is full. Comparison inverse
-image is fully faithful. The diagonal is a section, so the restriction of this
-full composite is faithful. Lift the two maps and cancel this faithful functor. -/
+pulled back by the first projection of the product of projective lines. -/
 private theorem diagonalAbRoot_restriction_injective
     (Y : Scheme.{u})
     (M N : Sheaf (ProjectiveLine Y).smallEtaleTopology Ab.{u + 1}) :
@@ -164,14 +156,7 @@ private theorem diagonalAbRoot_restriction_injective
   exact section_injective L R T e M N
 
 /-- Restriction to the diagonal detects endomorphisms of the ordinary roots
-sheaf on the product of projective lines.
-Source: diagonal coefficient changes (3), connected-fibre scalar rigidity.
-(blueprint: lem-diagonal-finite-root-rigidity).
-
-Proof: the roots sheaf is comparison inverse image of the etale roots sheaf,
-which is itself pulled back by the first projection. Conjugate by these
-canonical root isomorphisms. The abelian etale-origin restriction theorem
-then detects equality; conjugating back gives equality of root maps. -/
+sheaf on the product of projective lines. -/
 theorem diagonalFiniteRoot_restriction_injective (Y : Scheme.{u})
     (N : ℕ) (hN : 0 < N) (hY : IsUnit (N : Γ(Y, ⊤))) :
     let q := ProjectiveLine Y ↘ Y

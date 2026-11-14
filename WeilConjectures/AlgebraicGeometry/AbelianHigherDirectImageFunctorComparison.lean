@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
 
 /-! # Natural abelian higher-image comparison
 
-Source: Stacks Project, Tag 03Q8.
-(blueprint: lem-sbc-abelian-higher-image-sheafification-functor-iso)
+## References
+
+* Stacks Project, Tag 03Q8
 -/
 
 @[expose] public section
@@ -123,27 +124,8 @@ private noncomputable def yonedaRestrictionIso
       exact (Category.assoc _ _ _).symm)
 
 /-- The sheafified raw derived-Hom functor is naturally isomorphic to higher
- direct image, in the coefficient sheaf. No qcqs or continuity hypothesis is used.
-
-Source: Stacks Project, Tag 03Q8 (lemma-higher-direct-images), with Tags 072W
-and 0BKV for the sheafification calculation.
-
-Proof: Let B send an etale X-scheme U to the free abelian sheaf of U. Derived
-adjunction and the inverse-image single-functor comparison identify
-Hom((h^*B(U))[0], F[0][q]) with Hom(B(U)[0], Rh_*(F[0][q])). The identification
-commutes with maps of F by right naturality of the adjunction. Send a derived
-map to its zeroth homology and evaluate at the represented identity generator.
-This gives a presheaf map to H^0(Rh_*(F[0][q])). On an injective complex every
-homology section locally lifts to a cycle, giving a chain map from B(U)[0].
-A class whose section is zero locally lifts to a boundary, so that chain map
-is locally null-homotopic. The map is therefore locally bijective, and its
-sheafification is invertible. Adjunction naturality, functoriality of homology
-and evaluation at the same generator make this comparison natural in F.
-Finally use the natural shift comparison for Rh_* and the homology shift
-isomorphism to replace H^0(Rh_*(F[0][q])) by H^q(Rh_*F[0]). Compose the resulting
-natural isomorphisms. For q=0 this is the usual sections comparison; for empty
-schemes the same local-bijection proof applies. No arbitrary object is chosen.
-(blueprint: lem-sbc-abelian-higher-image-sheafification-functor-iso) -/
+ direct image, in the coefficient sheaf. No qcqs or continuity hypothesis is used
+(Stacks, Tags 03Q8, 072W and 0BKV). -/
 theorem nonempty_abelianHigherDirectImage_sheafificationFunctorIso
     {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℕ) :
     Nonempty

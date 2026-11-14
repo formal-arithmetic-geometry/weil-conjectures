@@ -13,10 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Bounded constructibility under an isomorphism of coefficient rings
-
-Source: latest blueprint, lem-fd-base-change.proof.md, coefficient-invariant
-use of compact-support base change
-(blueprint: lem-fd-coefficient-iso-bounded-constructible).
 -/
 
 @[expose] public noncomputable section
@@ -46,20 +42,7 @@ private theorem boundedConstructible_comap_iso_forward
       (_root_.constructible_comap φ (hcons n))
 
 /-- Restriction along an isomorphism of sheaf coefficient rings preserves and
-reflects bounded constructibility in the ordinary unbounded derived category.
-
-Source: latest blueprint, sec-fourier-transform/sk-thm-inversion/
-lem-fd-base-change.proof.md, the coefficient-invariant compact-support argument
-(blueprint: lem-fd-coefficient-iso-bounded-constructible).
-
-Proof: The restriction functor is exact and hence commutes with cohomology.
-It preserves zero objects and takes finite presentations to finite presentations:
-restrict the presentation matrix and identify each restricted regular module
-with the regular module of the new ring. The same pro-etale covers and finite
-stratification prove constructibility. Thus it preserves a cohomology bound and
-constructibility of each cohomology sheaf. Apply this also to the inverse ring
-isomorphism; the composition of the two restriction functors is canonically the
-identity, and bounded constructibility is invariant under isomorphism. -/
+reflects bounded constructibility in the ordinary unbounded derived category. -/
 theorem boundedConstructible_comap_iso_iff
     {X : Scheme.{u}} {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]

@@ -17,8 +17,10 @@ public import Mathlib.AlgebraicGeometry.Limits
 import WeilConjectures.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyclic
 
 /-! # Affine scalar actions in the derived sections/pushforward comparison
-Source: Stacks, Tags 0D5T, 08D5 and 0AA7.
-(blueprint: lem-pc-affine-sections-pushforward-normalization).
+
+## References
+
+* Stacks Project, Tags 0D5T, 08D5 and 0AA7
 -/
 
 @[expose] public section
@@ -100,26 +102,8 @@ variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
 set_option maxHeartbeats 500000 in
 -- Scalar-action comparisons unfold global-section and derived-functor identifications.
-/-- Sections of pushforward retain their affine scalar action before and after deriving.
-There are no internal-Hom, perfectness or quasi-coherence inputs in this statement.
-Source: Stacks, Tags 0D5T, 08D5 (proof of (2)), and 0AA7
-(blueprint: lem-pc-affine-sections-pushforward-normalization).
-Proof: the module direct image evaluates at the inverse image of the whole open,
-which is the whole open on the fibre product. Its sections therefore have exactly
-the same underlying elements. The identity identifies the two R-module structures:
-expand the section ring maps, cancel the GammaSpec isomorphisms and use
-pullback.condition and functoriality of appTop. This identity and its inverse give s;
-restriction maps and module morphisms act on the same elements, proving naturality.
-For c, use direct-image global-sections acyclicity on K-injectives. Exact restriction
-of scalars retains invertibility of the global-sections unit, by comparing its
-composite unit with the unit for derived global sections followed by exact restriction.
-The composite right-derived unit is therefore invertible on K-injectives, so it
-exhibits the composite as a right-derived functor. Uniqueness gives eD from the
-right derived underived composite to the composite of right derived functors.
-Define c by undoing uG, then eD, deriving s, and applying uH. The factorization
-identity for eD cancels its inverse. The factorization identity for the derived
-natural transformation of s gives exactly the asserted unit equation for c.
-No flatness, Tor independence, boundedness or quasi-coherence is required. -/
+/-- Sections of pushforward retain their affine scalar action before and after deriving
+(Stacks, Tags 0D5T, 08D5 and 0AA7). -/
 theorem exists_affineSectionsPushforwardNormalization
     {R B : CommRingCat.{u}} {X : Scheme.{u}}
     (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R) :

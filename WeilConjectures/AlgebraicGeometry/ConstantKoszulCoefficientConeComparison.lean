@@ -11,8 +11,10 @@ import WeilConjectures.CategoryTheory.AdditiveConeFamilyComparison
 import WeilConjectures.CategoryTheory.ExteriorKoszulScalarRealization
 
 /-! # Finite realization of constant Koszul augmentation cones
-Source: Stacks Project, Tags 099M, 093M and 0A0E.
-(auxiliary; not a blueprint node).
+
+## References
+
+* Stacks Project, Tags 099M, 093M and 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -189,21 +191,8 @@ attribute [local irreducible] homComplexFunctor ringedKoszulDualTower
 
 -- Finite tensor coordinates involve several nested sheaf and complex functors.
 /-- Exact realization identifies the finite algebraic augmentation cones, including
-all strict transition maps. No arbitrary complex, pro-zero or derived limit occurs.
-Source: Stacks Project, Tag 099M, with Tags 093M and 0A0E.
-(auxiliary; not a blueprint node).
-
-Proof: the supplied exact functor, regular module and quotient isomorphisms fix the
-coefficient realization. Exterior scalar realization identifies the realized
-exterior complex with the actual dual Koszul tower, naturally for the diagonals.
-Tensor the source with the coefficient complex and insert the left unitor. Identify
-the reduction of the coefficient complex with its finite quotient in degree zero.
-The unit equation for v, projected to level n and degree zero, says that this finite
-map is the realized quotient augmentation: precomposition by the degree-zero Koszul
-unit is invertible. All other target degrees are zero. The source comparisons are
-natural; epimorphy of each realized augmentation forces target naturality. Apply
-additiveConeFamilyComparison to obtain the strict cone isomorphisms. Empty lists,
-zero rings and the unit ideal require no change to these universal properties. -/
+all strict transition maps. No arbitrary complex, pro-zero or derived limit occurs
+(Stacks, Tags 099M, 093M and 0A0E). -/
 theorem constantKoszulCoefficientConeComparison
     (b : Bool)
     (E : ModuleCat.{u} A ⥤ Mod (coefficients J A I b)) [E.Additive]

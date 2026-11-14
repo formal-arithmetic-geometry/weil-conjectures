@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedDirectImageKInjectiveShiftCompar
 
 /-! # Shift compatibility of the identity-resolution comparison
 
-Source: Stacks Project, Tag 079V, construction of the total derived direct image.
-(blueprint: lem-pc-direct-image-kinjective-comparison-shift).
+## References
+
+* Stacks Project, Tag 079V
 -/
 
 @[expose] public section
@@ -82,23 +83,8 @@ private theorem canonical_unit_commShift
 
 
 -- Whiskered shift comparisons involve several localized functors.
-/-- The identity-resolution computation intertwines the actual derived shift comparison.
-Source: Stacks Project, Tag 079V, construction by the equivalence K(Inj) to D.
-(blueprint: lem-pc-direct-image-kinjective-comparison-shift).
-
-Proof: Restrict the right-derived unit to the homotopy category of K-injective
-complexes. Its components are invertible. The isomorphism from the right derived
-functor to the inverse K-injective equivalence followed by termwise direct image
-is constructed by this restricted unit and the equivalence counit. The shift
-structure of the right derived functor is transported along exactly this
-isomorphism. Thus the restricted unit commutes with shifts. Whisker with the
-homotopy quotient, then insert quotientCompQhIso and mapHomotopyCategoryFactors.
-Their shift compatibilities identify the termwise localized shift comparison
-with moduleDirectImageLocalizedShiftIso. Invert the K-injective computation
-components and cancel the localized inverse shift map; the resulting component
-equation is the displayed formula. This proof requires only K and K[1] to be
-K-injective and applies to every morphism of ringed spaces; there is no cover,
-short exact sequence or connecting map in the assertion. -/
+/-- The identity-resolution computation intertwines the actual derived shift comparison
+(Stacks, Tag 079V). -/
 theorem derivedModuleDirectImageKInjectiveIso_shift
     {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]

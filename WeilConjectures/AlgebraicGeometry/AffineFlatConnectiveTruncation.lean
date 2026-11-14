@@ -99,27 +99,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Canonical lower truncation retains finite presentation and flatness when
 negative homology vanishes universally. It preserves nonnegative homology after
-any base change. This statement has no proper morphism or coefficient sheaf.
-Source: Stacks Project, Tags 0653 and 0654 (flat opcycles and lower truncation).
-(blueprint: lem-pc-affine-flat-connective-truncation).
-
-Proof: Write S = Spec A and pass to global sections using the affine
-quasi-coherent equivalence. The terms of C become finitely presented flat, hence
-finite projective, A-modules. Let P be their complex. For an arbitrary A-module N,
-base change to the square-zero A-algebra A ⊕ N. The tensor complex is the direct
-sum of P and P tensor N. Universal negative vanishing therefore makes P tensor N
-exact in degree -1. The flat-opcycle criterion of Tag 0653 gives flatness of
-coker(d : P^(-1) -> P^0). This cokernel is finitely presented as the cokernel of a
-map between finitely presented modules. Sheafification identifies it with the
-zeroth term of C.truncGE 0. Terms above zero are unchanged and terms below zero
-are zero, proving all three termwise assertions. For any g, pullback is right
-exact and identifies the degree-zero term with the cokernel of the pulled-back
-differential. Thus g*(C.truncGE 0) is the canonical lower truncation of g*C up to
-a canonical complex isomorphism. The truncation projection induces isomorphisms
-on homology in degrees q >= 0 (in degree zero both are ker(d^0)/im(d^(-1))).
-Taking the inverse yields the displayed isomorphisms. This is global even for
-nonaffine S', since cokernels and these computations are sheaf-local. Empty S,
-b = 0 and C = 0 require no nontriviality assumption. -/
+any base change. This statement has no proper morphism or coefficient sheaf
+(Stacks, Tags 0653 and 0654). -/
 theorem affine_flat_connective_truncation (S : Scheme.{u}) (hS : IsAffine S)
     (C : CochainComplex S.Modules ℤ) (a : ℤ) (b : ℕ)
     (hCge : C.IsStrictlyGE a) (hCle : C.IsStrictlyLE b)

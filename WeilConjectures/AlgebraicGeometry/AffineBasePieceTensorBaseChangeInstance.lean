@@ -25,22 +25,7 @@ private theorem composite_pullback_square
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction of a composite base change is the pullback of the restricted arrow,
-when its target chart factors through the chosen base open.
-
-Source: Stacks Project, Schemes, Tag 01JR (open fibre products).
-
-Proof: Write Y_T = Y₀ ×_S T and X_T = X₀ ×_S T. Associativity of pullbacks
-identifies Y₀ ×_S L with Y_T ×_T L, and similarly for X₀. These identifications
-commute with the morphism induced by f₀, by checking the two projections.
-Pull back the target open V_T and its inverse image under f_T along these squares.
-The resulting open schemes are respectively V_T ×_T L and U_T ×_T L.
-The equation hq factors V_T through W_T. The source factors through W_T by
-f_T restricted to V_T followed by q. Since W_T → T is an open immersion, both
-pullbacks over T identify with the pullbacks over W_T along L ×_T W_T → W_T.
-These identifications commute with the restricted morphism, again by checking
-both projections. Their source and target isomorphisms give the asserted arrow
-isomorphism. The argument uses only pullback universal properties, so empty
-opens and empty schemes require no exceptions. -/
+when its target chart factors through the chosen base open (Stacks, Tag 01JR). -/
 private theorem restricted_composite_base_change
     {S T : Scheme.{u}} (d : T ⟶ S)
     (X₀ Y₀ : Over S) (f₀ : X₀ ⟶ Y₀)
@@ -270,14 +255,8 @@ private theorem tensor_pullback_arrow
     Category.comp_id] using hh
 
 set_option linter.unusedVariables false in
-/-- The fixed test-object affine tensor base-change construction used in the affine reduction.
-
-Source: Stacks Project, Schemes, Tags 01JR and 01I4; Limits, proof of Tag 01ZO.
-(blueprint: lem-weil-pbc-affine-base-piece-tensor-base-change).
-
-The proof pastes the two pullback squares with the open restriction squares, transports
-both restricted fibre products through the displayed affine charts, and applies the
-universal property of the tensor-product pullback. -/
+/-- The fixed test-object affine tensor base-change construction used in the affine reduction
+(Stacks, Tags 01JR, 01I4 and 01ZO). -/
 theorem affine_base_piece_tensor_base_change_instance
     {S T : Scheme.{u}} (d : T ⟶ S)
     (X₀ Y₀ : Over S) (f₀ : X₀ ⟶ Y₀)

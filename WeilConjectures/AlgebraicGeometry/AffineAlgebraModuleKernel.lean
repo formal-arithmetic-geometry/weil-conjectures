@@ -15,8 +15,10 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Underlying quasi-coherence of algebra-module kernels
 
-Source: EGA I, Proposition 9.6.1; Stacks Project, Schemes, Lemma 01IC.
-(blueprint: lem-weil-pbc-affine-algebra-module-kernel).
+## References
+
+* EGA I, Proposition 9.6.1
+* Stacks Project, Tag 01IC
 -/
 
 @[expose] public section
@@ -90,18 +92,8 @@ private theorem quasiCoherent_slice_iff_open {S : Scheme.{u}} (U : S.Opens)
     exact (SheafOfModules.isQuasicoherent (S.ringCatSheaf.over U)).prop_of_iso
       ((overEquiv U).unitIso.app M).symm hback
 
-/-- The underlying kernel of a map from a free algebra-module sheaf is quasi-coherent.
-Source: EGA I, Proposition 9.6.1; Stacks Project, Schemes, Lemma 01IC and Section 01LA(5).
-(blueprint: lem-weil-pbc-affine-algebra-module-kernel)
-
-Proof: restriction of scalars leaves the underlying abelian sheaf unchanged, so it
-preserves kernels and coproducts (both can be checked after forgetting to abelian
-sheaves). The underlying free A-module sheaf is therefore the coproduct of copies of
-A as an O-module, restricted to U. Quasi-coherence of A implies quasi-coherence of
-this coproduct. The underlying M is quasi-coherent by hypothesis. After identifying
-the slice with modules on the open subscheme, apply closure of quasi-coherent modules
-under kernels to the restricted-scalar morphism. Transport back and use preservation
-of kernels to obtain the assertion. No epimorphism or relation generators are asserted. -/
+/-- The underlying kernel of a map from a free algebra-module sheaf is quasi-coherent
+(EGA I, Proposition 9.6.1; Stacks, Tags 01IC and 01LA). -/
 theorem affine_algebraModule_kernel_isQuasicoherent
     (S : Scheme.{u}) (A : S.CommAlgebraSheaf) (U : S.Opens)
     (M : SheafOfModules.{u}

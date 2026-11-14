@@ -14,9 +14,9 @@ import WeilConjectures.AlgebraicGeometry.BoundedFreeStalkComplexLocalLift
 
 /-! # Lifting the differential matrices of a bounded free stalk complex
 
-Source: Stacks Project, Tags 0BCD and 0BC7, finite presentation argument;
-Tag 00CR and the definition of the module direct image.
-(blueprint: lem-sc-bounded-free-stalk-complex-lift).
+## References
+
+* Stacks Project, Tags 0BCD, 0BC7 and 00CR
 -/
 
 @[expose] public section
@@ -26,12 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 
-/-- Restriction of ordinary direct image from an open recovers the original module.
-Source: ordinary module direct image, whose sections on V are sections on V intersect U.
-For V contained in U, the projection U intersect V to V is an isomorphism. Applying
-M to this projection identifies the restriction of direct image with M. The counit
-of restriction/direct image has these maps as components, hence is an isomorphism.
-This is the direct-image step of lem-sc-bounded-free-stalk-complex-lift. -/
+/-- Restriction of ordinary direct image from an open recovers the original module. -/
 private theorem openModuleDirectImage_restrict_iso (X : Scheme.{u}) (U : X.Opens)
     (M : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) :
     Nonempty ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).obj
@@ -63,33 +58,8 @@ private theorem openModuleDirectImage_restrict_iso (X : Scheme.{u}) (U : X.Opens
     infer_instance
   exact ⟨asIso (adj.counit.app M)⟩
 
-/-- A bounded free stalk complex lifts as a complex, without a prescribed derived object.
-
-Source: Stacks Project, Tags 0BCD and 0BC7, descent of finite presentations and maps,
-and Tag 00CR. The final direct image is only an auxiliary global complex.
-(blueprint: lem-sc-bounded-free-stalk-complex-lift).
-
-Proof:
-1. Fix bounds a,b. The stalk ring is nonzero, since it is local. A zero free module
-   over it has rank zero, so hfree implies d i = 0 outside [a,b], including when b < a.
-   Choose bases using hfree, and express the differentials as finite matrices. There
-   are only finitely many entries and finitely many equations for the square to vanish.
-2. Choose an affine neighbourhood of x. Its stalk is the prime localization of its
-   section ring, the filtered colimit of principal localizations (Tag 00CR). Lift all
-   entries to one principal neighbourhood. Every entry of each differential composite
-   has zero germ; shrink to a common later principal neighbourhood where these finitely
-   many entries vanish. Equivalently use the maps and equality clauses of finite
-   presentation descent. The rank-d i free modules and these matrices now define a
-   bounded free sheaf complex L on this affine open U. Its stalk complex is isomorphic
-   to F, since the chosen bases conjugate the differentials to their lifted matrices.
-3. Define H by the termwise ordinary direct image along U into X: on an open V its
-   sections are the sections of L on V intersect U, with scalars restricted from V.
-   Direct image is additive and preserves zero objects, so H is bounded. Its restriction
-   to U is L. Neighbourhoods contained in U are cofinal at x, so its stalk complex is
-   the stalk complex of L. These identifications give the free-term and stalk isomorphisms.
-No comparison with another derived object is made. Empty spectra have no x; rank-zero
-terms and empty degree intervals require no entries or equations to lift.
--/
+/-- A bounded free stalk complex lifts as a complex, without a prescribed derived object
+(Stacks, Tags 0BCD, 0BC7 and 00CR). -/
 theorem exists_boundedFree_stalk_complex_lift
     (X : Scheme.{u}) (x : X) (d : ℤ → ℕ)
     (F : CochainComplex (ModuleCat.{u} (X.presheaf.stalk x)) ℤ)

@@ -20,9 +20,9 @@ import WeilConjectures.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 /-!
 # Constructible finite stratifications of flat quasi-finite morphisms
 
-Source: Stacks Project, More on Morphisms, Tags 07RY and 07RZ, using the bounded
-closed degree filtration and quasi-compactness of its successive differences
-(blueprint: lem-weil-pbc-etale-separated-stratified-finite-intermediate).
+## References
+
+* Stacks Project, Tags 07RY and 07RZ
 -/
 
 @[expose] public section
@@ -34,8 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Realize a locally closed set by the vanishing-ideal closed subscheme of an open
-subscheme. Source: Stacks Project, Schemes, Tag 01J3; Mathlib's `vanishingIdeal` and
-`range_subschemeι`. -/
+subscheme (Stacks, Tag 01J3). -/
 private theorem exists_immersion_of_locallyClosed {X : Scheme.{u}} {s : Set X}
     (hs : IsLocallyClosed s) :
     ∃ (T : Scheme.{u}) (g : T ⟶ X), IsImmersion g ∧ Set.range g = s := by
@@ -55,9 +54,7 @@ private theorem exists_immersion_of_locallyClosed {X : Scheme.{u}} {s : Set X}
 /-- A flat locally finitely presented separated quasi-finite morphism over a qcqs scheme
 admits a finite constructible locally closed stratification on whose strata it is finite.
 This packages the construction from the closed degree filtration, including the induced
-subscheme structures. Source: More on Morphisms, Lemma Tag 07RZ.
-(blueprint: lem-weil-pbc-etale-separated-stratified-finite-intermediate)
--/
+subscheme structures (Stacks, Tag 07RZ). -/
 theorem exists_constructible_stratified_finite
     {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (j : U ⟶ X) [Flat j] [LocallyOfFinitePresentation j] [IsSeparated j]

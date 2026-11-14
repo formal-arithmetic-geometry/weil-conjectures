@@ -9,8 +9,10 @@ import all WeilConjectures.AlgebraicGeometry.AdicFiniteReductionData
 
 /-! # Ordinary insertion coherence for scalar and geometric comparison
 
-Source: Stacks Project, Modules on Sites, `lemma-adjointness-tensor-restrict`
-and `lemma-adjoint-pullback-pushforward-modules`.
+## References
+
+* Stacks Project, Modules on Sites (adjointness of tensor and restriction, adjointness of
+  pullback and pushforward of modules)
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +32,7 @@ attribute [local irreducible] adicFiniteComparisonData adicFinitePullbackData
 attribute [local instance 10000] adicFiniteSectionModule
 
 /-- The ordinary balancing isomorphism for a specified composite sheaf ring map.
-Source: Stacks Project, Modules on Sites, `lemma-adjointness-tensor-restrict`.
-(auxiliary; not a blueprint node). -/
+(Stacks, Modules on Sites, adjointness of tensor and restriction). -/
 def adicOrdinaryChangeComp {D : Type w} [SmallCategory D]
     {T : GrothendieckTopology D} {R S V : Sheaf T CommRingCat.{w}}
     (f : R ⟶ S) (g : S ⟶ V) (h : R ⟶ V) (e : h = f ≫ g) :
@@ -184,19 +185,7 @@ private theorem ordinaryCandidate_normalized (X : Scheme.{u})
     ha hβ hf hg hn hp
 
 /-- The ordinary scalar/geometric comparisons commute with successive scalar extension.
-Source: Stacks Project, Modules on Sites, `lemma-adjointness-tensor-restrict`
-and `lemma-adjoint-pullback-pushforward-modules`; the tensor insertion calculation
-in proof step 2 of `lem-sfb-adic-comparison-composition`.
-(auxiliary; not a blueprint node).
-
-Proof: precompose both module maps with inverse-image insertion, followed by the
-insertions of one for the two coefficient extensions. Scalar reassociation carries
-these two insertions to insertion for the composite map. For the other route,
-naturality of insertion and the two ordinary comparison normalization equations
-carry them to the same inverse image of the composite insertion. Equality on these
-insertions determines a module map by the successive tensor/restriction adjunctions
-and the inverse-image/module-direct-image adjunction. This calculation is independent
-of the rings and includes identity maps and the zero ring. -/
+(Stacks, Modules on Sites). -/
 theorem adicOrdinaryComparison_composition (X : Scheme.{u})
     {A B C : Type (max v (u + 1))} [CommRing A] [CommRing B] [CommRing C]
     (f : A →+* B) (g : B →+* C) (h : A →+* C) (e : h = g.comp f)

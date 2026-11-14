@@ -25,7 +25,7 @@ import WeilConjectures.Algebra.Homology.ModuleStalkExact
 
 /-! # HOM ideal-power comparison over an open complement
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YB.
+Stacks Project, Tag 01YB.
 -/
 
 @[expose] public section
@@ -110,8 +110,8 @@ private theorem multiplication_range {X : Scheme.{u}} {K : X.Modules}
   exact congrArg (fun P : Submodule Γ(X, U.1) Γ(M, U.1) ↦ (P : Set Γ(M, U.1))) ha
 
 
-/-- Sheaf separatedness detects a zero morphism on the affine basis.
-Source: Stacks Project, proof of Lemma 01YB, affine-local detection of zero maps. -/
+/-- Sheaf separatedness detects a zero morphism on the affine basis
+(Stacks, Tag 01YB). -/
 private theorem hom_zero_of_affine {X : Scheme.{u}} {M N : X.Modules}
     (φ : M ⟶ N) (h : ∀ V : X.affineOpens, ∀ s : Γ(M, V.1), φ.app V.1 s = 0) :
     φ = 0 := by
@@ -191,21 +191,7 @@ private theorem stalk_map_zero_of_over {X : Scheme.{u}} {M N : X.Modules}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A map that vanishes on the complement vanishes on a sufficiently high ideal-power
-submodule. The conclusion is independent of the choice of transition factorization.
-
-Proof: The source I^n G is coherent on a Noetherian scheme. The image Q of χ is
-quasi-coherent and finite type on affines (images of finitely many generators suffice),
-hence coherent. Its restriction to U is zero, so its support lies in V(I).
-The support-power-ideal lemma supplies t with I^t Q = 0. Set m = n+t. On an affine
-open W the image of the inclusion of I^m G into G is I(W)^t I(W)^n G(W).
-Any factorization r through I^n G is uniquely determined by that inclusion, since the
-inclusion of I^n G is mono. By linearity χ sends this submodule into I(W)^t Q(W)=0.
-Thus r followed by χ is zero on every affine open, and sheaf separatedness implies
-it is zero globally. When U is empty this is the same support-power argument;
-when I is the unit ideal the hypothesis already forces χ to vanish.
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YB, omitted injectivity,
-expanded using Lemma 01Y9 (support-power annihilation).
-(blueprint: lem-weil-pbc-coherent-hom-ideal-power-eventually-zero). -/
+submodule. The conclusion is independent of the choice of transition factorization. -/
 theorem coherent_hom_ideal_power_eventually_zero {X : Scheme.{u}} [IsLocallyNoetherian X]
     [CompactSpace X] (I : X.IdealSheafData) (F G : X.Modules) [F.IsQuasicoherent]
     (hG : RingedSpace.IsCoherent X.toRingedSpace G) (U : X.Opens)

@@ -12,8 +12,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 /-! # The transported abelian counit lifts to a module map
 
-Source: Stacks Project, Tag 03D3
-(blueprint: lem-weil-pbc-inverse-image-module-counit-linear-lift). -/
+## References
+
+* Stacks Project, Tag 03D3
+-/
 
 @[expose] public section
 
@@ -119,30 +121,7 @@ private theorem product_sections.{uC, uT} {C : Type uC} [Category C] (J : Grothe
         Types.binaryProductIso_inv_comp_snd]
     exact types_congr_hom h (r, m)
 
-/-- The transported abelian counit admits a module lift.
-Source: Stacks Project, Tag 03D3 (lemma-adjoint-push-pull-modules).
-(blueprint: lem-weil-pbc-inverse-image-module-counit-linear-lift).
-
-Proof:
-1. Apply the transported-action hypothesis to RM(F). The ring and abelian
-hom-equivalence equations identify their units with the set unit through er
-and ea. Their inverse equations identify the counits with the set counit
-through the same comparisons. The action on RM(F) is the direct image of
-mu_F restricted along ar.unit_O, by the definition of pushforward.
-2. Forget to sets and conjugate by the displayed comparisons. Naturality of
-the set counit at mu_F reduces scalar compatibility to the identity
-L(eta_O times id) followed by epsilon_(L(O) times F)
-= lambda followed by (id times epsilon_F).
-Check the two product projections: the first is
-L(eta_O) followed by epsilon_(L(O)) followed by the scalar projection,
-which equals the scalar projection by the left triangle identity; the second
-is L of the module projection followed by epsilon_F, by counit naturality.
-Substituting this identity and the transported-action equation proves that
-e_(RM(F)) followed by the abelian counit is linear over Lr(O).
-3. This composite is already an additive natural map. Build its sectionwise
-linear maps with PresheafOfModules.homMk, using the scalar compatibility of
-step 2, and wrap in SheafOfModules.Hom. Forgetting this lift gives exactly
-the prescribed composite. -/
+/-- The transported abelian counit admits a module lift (Stacks, Tag 03D3). -/
 theorem etaleInverseImageModuleCounitLinearLift (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) :
     let L := Scheme.etaleSetPullback f

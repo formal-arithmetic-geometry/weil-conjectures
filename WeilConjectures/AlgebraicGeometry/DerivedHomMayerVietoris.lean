@@ -19,13 +19,14 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Mayer--Vietoris sequence for derived Hom
 
-Source: Stacks Project, Cohomology, Tag 08BW
-(blueprint: lem-sc-derived-hom-mayer-vietoris).
-
 ## Main statements
 
 - `derived_hom_mayer_vietoris`: exactness at global and local derived Hom.
 - `derivedOpenHomRestriction`: the canonical restriction to a smaller open.
+
+## References
+
+* Stacks Project, Tag 08BW
 -/
 
 @[expose] public section
@@ -38,8 +39,8 @@ noncomputable section
 
 namespace AlgebraicGeometry
 
-/-- The structure sheaf viewed as a sheaf of rings, as in the module-stalk siblings.
-Source: Stacks, Tag 08BW (blueprint: lem-sc-derived-hom-mayer-vietoris). -/
+/-- The structure sheaf viewed as a sheaf of rings, as in the module-stalk siblings
+(Stacks, Tag 08BW). -/
 abbrev moduleRings (X : RingedSpace.{u}) :=
   (sheafCompose (Opens.grothendieckTopology X)
     (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf
@@ -59,45 +60,39 @@ private theorem modulePushforward_limits
     infer_instance
   exact preservesFiniteLimits_of_reflects_of_preserves _ T
 
-/-- Additivity of open restriction; Stacks, Tag 08BW
-(blueprint: lem-sc-derived-hom-mayer-vietoris). -/
+/-- Additivity of open restriction; Stacks, Tag 08BW. -/
 instance moduleOverFunctor_additive (X : RingedSpace.{u}) (U : Opens X) :
     (SheafOfModules.overFunctor.{u} (moduleRings X) U).Additive := by
   exact Functor.Additive.mk (by intros; rfl)
 
-/-- Finite-limit preservation of open restriction; Stacks, Tag 08BW
-(blueprint: lem-sc-derived-hom-mayer-vietoris). -/
+/-- Finite-limit preservation of open restriction; Stacks, Tag 08BW. -/
 instance moduleOverFunctor_limits (X : RingedSpace.{u}) (U : Opens X) :
     PreservesFiniteLimits (SheafOfModules.overFunctor.{u} (moduleRings X) U) := by
   exact modulePushforward_limits (𝟙 _)
 
-/-- Finite-colimit preservation of open restriction; Stacks, Tag 08BW
-(blueprint: lem-sc-derived-hom-mayer-vietoris). -/
+/-- Finite-colimit preservation of open restriction; Stacks, Tag 08BW. -/
 instance moduleOverFunctor_colimits (X : RingedSpace.{u}) (U : Opens X) :
     PreservesFiniteColimits (SheafOfModules.overFunctor.{u} (moduleRings X) U) := by
   unfold SheafOfModules.overFunctor
   infer_instance
 
-/-- Additivity of restriction between opens; Stacks, Tag 08BW
-(blueprint: lem-sc-derived-hom-mayer-vietoris). -/
+/-- Additivity of restriction between opens; Stacks, Tag 08BW. -/
 instance moduleOverMap_additive (X : RingedSpace.{u}) {W U : Opens X} (i : W ⟶ U) :
     (SheafOfModules.overMap.{u} (moduleRings X) i).Additive := by
   exact Functor.Additive.mk (by intros; rfl)
 
-/-- Finite-limit preservation between opens; Stacks, Tag 08BW
-(blueprint: lem-sc-derived-hom-mayer-vietoris). -/
+/-- Finite-limit preservation between opens; Stacks, Tag 08BW. -/
 instance moduleOverMap_limits (X : RingedSpace.{u}) {W U : Opens X} (i : W ⟶ U) :
     PreservesFiniteLimits (SheafOfModules.overMap.{u} (moduleRings X) i) := by
   exact modulePushforward_limits (Sheaf.pushforwardOverMapIso (moduleRings X) i).inv
 
-/-- Finite-colimit preservation between opens; Stacks, Tag 08BW
-(blueprint: lem-sc-derived-hom-mayer-vietoris). -/
+/-- Finite-colimit preservation between opens; Stacks, Tag 08BW. -/
 instance moduleOverMap_colimits (X : RingedSpace.{u}) {W U : Opens X} (i : W ⟶ U) :
     PreservesFiniteColimits (SheafOfModules.overMap.{u} (moduleRings X) i) := by
   infer_instance
 
-/-- Restrict a morphism on `U` to `W`, transporting along the canonical restriction iso.
-Source: Stacks, Tag 08BW (blueprint: lem-sc-derived-hom-mayer-vietoris). -/
+/-- Restrict a morphism on `U` to `W`, transporting along the canonical restriction iso
+(Stacks, Tag 08BW). -/
 def derivedOpenHomRestriction (X : RingedSpace.{u}) {W U : Opens X} (i : W ⟶ U)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X).over U))]
@@ -184,18 +179,8 @@ private theorem hom_exact_of_open_triangle
 
 set_option maxHeartbeats 700000 in
 -- Specializing the triangle identifications compares three large derived restriction functors.
-/-- Mayer--Vietoris exactness at global Hom and at the pair of local Hom groups.
-Source: Stacks, Tag 08BW (blueprint: lem-sc-derived-hom-mayer-vietoris).
-
-Proof: apply the distinguished Mayer--Vietoris triangle
-(`lem-sc-derived-mayer-vietoris-triangle`) to `E`. Contravariant Hom into `F`
-gives the long exact sequence (`lem-weil-pbc-hom-out-of-triangle-exact`).
-The derived extension-by-zero/restriction adjunction
-(`lem-sc-derived-open-shriek-derived-adjunction`) identifies its terms with
-Hom on the three opens and global Hom. The preceding term is negative Ext on
-the overlap. The first arrow is the pair of restrictions; the next is their
-difference, because the triangle's first arrow is the difference of the two
-extension-by-zero maps. Thus the sequence is exact at both specified terms. -/
+/-- Mayer--Vietoris exactness at global Hom and at the pair of local Hom groups (Stacks, Tag 08BW).
+-/
 theorem derived_hom_mayer_vietoris
     (X : RingedSpace.{u}) (U V : Opens X) (hcover : U ⊔ V = ⊤)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]

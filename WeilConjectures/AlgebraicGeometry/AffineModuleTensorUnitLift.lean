@@ -13,8 +13,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
 /-! # Affine module tensor CoherenceComparisons
 
-Source: Stacks Project, Morphisms, Lemma 01SB.
-(blueprint: lem-weil-pbc-affine-module-tensor-unit-lift).
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section
@@ -74,24 +75,8 @@ local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 
 set_option maxHeartbeats 800000 in
 -- The two transported tensor adjunctions require extra definitional-equality checks.
-/-- The adjoint of γ is linear over the affine direct-image algebra, objectwise.
-Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
-(blueprint: lem-weil-pbc-affine-module-tensor-unit-lift).
-
-Proof: The adjoint of γ is the pullback unit followed by pushforward of γ.
-Its component on a section g over V is γ applied to the pullback-unit section.
-Apply κ inverse and the hP unit formula to identify this section with the
-sheafification of 1 tensor η(g). Apply the hH formula to obtain the second
-scalar-extension unit. For a section a of A(V), η(a g) is η(a) η(g), by
-linearity of inverse-image modules. The balanced relation first moves η(a)
-onto the B tensor factor through t, and then across the ε extension. Since
-t ε = e, and the inverse-image ring counit composed with its unit is the
-identity, the result is a times the section computed for g in R(HG).
-Additivity and compatibility with restrictions already hold for the adjoint.
-These equalities therefore equip the same component maps with A-linearity,
-producing the desired morphism a. Forgetting A scalars gives exactly the
-original adjoint. No affineness or quasi-coherence is used, and the calculation
-still holds for the zero ring, zero module and empty opens. -/
+/-- The adjoint of γ is linear over the affine direct-image algebra, objectwise (Stacks, Tag 01SB).
+-/
 theorem affine_module_tensor_unitLift
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (ε : B ⟶ U.sheaf) (hpush : IsPushout r₀ t₀ b t)

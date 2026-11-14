@@ -12,8 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.AffineSpectrumTensorCoherentCoor
 
 /-! # Affine coordinate transport of the localized tensor comparison
 
-Source: Stacks Project, Tag 0DJ8, equation-bc and affine reduction; Tag 0098.
-(blueprint: lem-pc-affine-spectrum-tensor-coordinate-transport).
+## References
+
+* Stacks Project, Tags 0DJ8 and 0098
 -/
 
 @[expose] public section
@@ -34,11 +35,7 @@ attribute [local irreducible] isoPullbackAdditiveStalkIso
   Scheme.Modules.tensorPullbackCompositionIso
 
 
-/-- Ordinary pullback transports additive stalk homology along an isomorphism.
-This is constructed from the restriction-stalk isomorphism on complexes and exact
-stalk homology factors; it uses no derived pullback or derived pullback counit.
-Source: Stacks Project, Tag 0098, lemma-stalk-pullback-modules.
-(blueprint: lem-pc-affine-spectrum-tensor-coordinate-transport). -/
+/-- Ordinary pullback transports additive stalk homology along an isomorphism (Stacks, Tag 0098). -/
 def ordinaryIsoPullbackStalkHomologyIso {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j]
     (y : Y) (i : ℤ)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ) :=
@@ -137,14 +134,7 @@ attribute [local irreducible] ordinaryIsoPullbackStalkComplexIso
 
 set_option maxHeartbeats 700000 in
 -- The two stalk-ring diagrams require a larger elaboration budget.
-/-- The homology transport equation for supplied affine coordinate data.
-Source: Stacks Project, Tag 0098.
-(blueprint: lem-pc-affine-spectrum-tensor-coordinate-homology-pointwise).
-Proof: apply homology to the supplied canonical chain coherence. Naturality of the
-exact forget-homology comparison moves each chain map across that comparison.
-Restriction followed by forgetting agrees with forgetting at the level of homology
-data. The ordinary pullback homology map is the conjugate of its chain comparison.
-Cancel the source comparison and evaluate on each class. -/
+/-- The homology transport equation for supplied affine coordinate data (Stacks, Tag 0098). -/
 theorem affineSpectrum_tensor_coordinate_homology_transport_pointwise
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
@@ -313,8 +303,7 @@ theorem affineSpectrum_tensor_coordinate_homology_transport_pointwise
   exact congrArg (fun k ↦ k.hom x) hh
 
 
-/-- (blueprint: lem-pc-affine-spectrum-tensor-coordinate-homology)
-(blueprint: lem-pc-affine-spectrum-tensor-coordinate-transport) -/
+/-- Affine coordinate transport of the stalk homology of the localized tensor comparison. -/
 theorem affineSpectrum_tensor_coordinate_homology_transport
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
@@ -407,9 +396,8 @@ theorem affineSpectrum_tensor_coordinate_homology_transport
     f f' g g' sq sq0 z0 i P eR eA eB eD q t h hc x
 
 
-/-- Affine spectrum tensor coordinate transport, assembled from the data and homology sublemmas.
-Source: Stacks Project, Tag 0098.
-(blueprint: lem-pc-affine-spectrum-tensor-coordinate-transport). -/
+/-- Affine spectrum tensor coordinate transport, assembled from the data and homology sublemmas
+(Stacks, Tag 0098). -/
 theorem exists_affineSpectrum_tensor_coordinates
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

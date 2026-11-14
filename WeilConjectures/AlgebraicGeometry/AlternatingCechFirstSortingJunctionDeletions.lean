@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechFirstSortingTailContribu
 /-!
 # Junction deletions in the first sorting homotopy
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equation 20.23.6.1.
-(blueprint: lem-pc-alternating-cech-first-sorting-junction-deletions)
+## References
+
+* Stacks Project, Tag 01FM
 -/
 
 @[expose] public section
@@ -28,31 +29,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 open Classical in
-/-- The outgoing junction deletions give the successive partial sorting differences.
-
-Source: Stacks 01FM, verification of equation 20.23.6.1 (the computation omitted
-in the source), junction terms of the labelled-deletion argument.
-
-Proof: A stable permutation exists uniquely by ordering the finite set of labels
-by (value, original position). For every prefix length, the partial permutation
-exists uniquely by keeping that prefix and enumerating the unused labels
-in their original increasing order. Thus both permutation filters pick one term.
-For each stable permutation σ and partial permutation τ with prefix a,
-σ a occurs exactly twice in the junction: at a, and at the unique tail position
-whose τ-label is σ a. All other labels occur once. Delete the prefix occurrence:
-the remaining tuple is t composed with τ, because τ agrees with σ below a.
-Its coefficient is sign τ, since the two powers of -1 at a cancel. Delete the
-tail occurrence: the remaining permutation fixes σ through a and has an
-increasing unused tail, hence is the partial permutation at a+1. If σ a occurs
-at position b of τ (junction position b+1), moving it from b to a contributes
-(-1)^(b-a); the deletion at b+1 therefore gives minus the sign of this next partial permutation.
-Index-map composites agree with the resulting permutation map by comparing
-all projections and applying the product universal property. This proves the
-difference at each a after summing over the unique partial permutation.
-For the final a, both partial permutations are σ, so the two terms cancel.
-Stable sorting orders pairs (value, original position), so repeated values do
-not change the argument. Empty index types have no tuple t.
-(blueprint: lem-pc-alternating-cech-first-sorting-junction-deletions) -/
+/-- The outgoing junction deletions give the successive partial sorting differences
+(Stacks, Tag 01FM). -/
 theorem cechFirstSortingJunctionDeletions (X : Scheme.{u}) {I : Type v} [LinearOrder I]
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})
     (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)))

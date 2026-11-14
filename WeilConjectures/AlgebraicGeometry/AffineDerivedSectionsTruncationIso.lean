@@ -23,8 +23,9 @@ import WeilConjectures.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBou
 
 /-! # Affine sections and the canonical lower truncation
 
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5, and Tag 08D4.
-(blueprint: new-affine-derived-sections-truncation-iso).
+## References
+
+* Stacks Project, Tags 06Z0 and 08D4
 -/
 
 @[expose] public section
@@ -34,23 +35,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The lower-truncation projection is invertible on derived affine sections
-in its cutoff degree.
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5; Tag 08D4 (3).
-(blueprint: new-affine-derived-sections-truncation-iso).
-
-Proof: Let S be global sections followed by scalar transport through ΓSpecIso.
-Sections is right adjoint to tilde and preserves products. Scalar transport along
-this ring isomorphism is exact and preserves products. Affine vanishing gives
-R^p S(M) = 0 for quasi-coherent M and p >= 1; after the exact conservative
-forgetful functor to abelian groups, apply the unbounded cohomological bound
-with N = 1 to the strictly lower truncation of K at n. Truncation preserves
-quasi-coherent cohomology. This truncation is supported in degrees <= n - 1,
-so its derived sections have zero cohomology in degrees n and n + 1.
-Apply derived sections to the canonical truncation triangle. The homology
-exact sequence now makes H^n of its projection K -> truncGE n K invertible.
-Conservativity of forgetting modules detects invertibility before forgetting.
-These are the canonical maps, so the conclusion concerns the stated projection.
-The zero ring and zero complex require no exception, and K is unbounded. -/
+in its cutoff degree (Stacks, Tags 06Z0, 08D4). -/
 theorem affineDerivedSections_truncGE_isIso (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

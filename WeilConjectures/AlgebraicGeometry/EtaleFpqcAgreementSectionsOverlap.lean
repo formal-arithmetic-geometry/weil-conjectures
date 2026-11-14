@@ -11,9 +11,11 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleFpqcMatchingSectionsPullback
 
 /-! # Equality of the two canonical section pairs on a double overlap
-Source: Stacks Project, Tag 09XN, paragraph beginning "Let V";
-Sites Tags 03CB and 03CC.
-(blueprint: lem-weil-pbc-etale-fpqc-agreement-sections-overlap). -/
+
+## References
+
+* Stacks Project, Tags 09XN, 03CB and 03CC
+-/
 
 @[expose] public section
 
@@ -121,24 +123,8 @@ private theorem secTo_cast {S Z : Scheme.{u}}
   subst g
   rfl
 
-/-- Source: Stacks Project, Tag 09XN, paragraph beginning "Let V";
-Sites Tags 03CB and 03CC for the inverse-image composition units.
-(blueprint: lem-weil-pbc-etale-fpqc-agreement-sections-overlap).
-
-Proof: Write D = (V ×_S T_j) ×_V (V ×_S T_k). For a : Z → D, its composites
-p and q to Q_j and Q_k have the same composite to V. Their composites to T_j
-and T_k therefore give a map Z → T_j ×_S T_k. Apply inverse image along this
-map to hcompat j k and restrict to the identity object of Z. Naturality of the
-units in the sheaf and in the site object, followed by the associativity of the
-chosen composition isomorphisms, identifies the resulting equality with equality
-of the canonical restrictions of s_j and s_k in the same inverse-image sheaf on Z.
-For the two unit images of t, apply the composition-unit equation instead:
-both are the unit image of t for the single composite Z → V → S, restricted
-along the map (Z → V,id_Z). All fibre-product pasting maps agree because their
-projections do. The comparison components are isomorphisms, so preserve and
-reflect equality. Replace the first and second members of each compared pair
-by these common sections to get the equivalence. This proof uses no agreement
-opens and no covering assumption. Empty Z and j = k obey the same equations. -/
+/-- On overlaps, the agreement sections of an fpqc family of compatible sections agree if and
+only if their images agree (Stacks, Tags 09XN, 03CB and 03CC). -/
 theorem etaleFpqcAgreementSections_overlap_eq_iff
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (F : Sheaf S.smallEtaleTopology (Type (u + 1)))

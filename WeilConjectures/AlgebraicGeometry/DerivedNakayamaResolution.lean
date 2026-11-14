@@ -21,9 +21,6 @@ import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntSheafLinear
 /-!
 # The two-term resolution of the finite coefficient sheaves
 
-md`
-(blueprint: lemma-reduction-derived-nakayama--1).
-
 All coefficients are continuous condensed rings pulled back from the point. A natural
 cone is expressed using the standard cone functor on complexes, with its standard maps.
 The comparison with a functor on the derived category also asserts its descent and naturality.
@@ -57,23 +54,17 @@ namespace AlgebraicGeometry.ProEtale.DerivedNakayama
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The continuous condensed integer ring with its spectral absolute-value topology.
-Source: blueprint resolution, On the point, step 1
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+/-- The continuous condensed integer ring with its spectral absolute-value topology. -/
 abbrev integerRingSheaf : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1} :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   Profinite.continuousCoefficientRingSheaf (Padic.coefficientExtensionIntegers l E)
 
-/-- The finite quotient with the quotient topology, not a constant replacement of the integers.
-Source: blueprint resolution, On the point, step 1
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+/-- The finite quotient with the quotient topology, not a constant replacement of the integers. -/
 abbrev quotientRingSheaf (n : ℕ) : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1} :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   Profinite.continuousCoefficientRingSheaf (Padic.coefficientExtensionRing l E n)
 
-/-- Continuous postcomposition with the actual quotient homomorphism.
-Source: blueprint resolution, On the point, step 2
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+/-- Continuous postcomposition with the actual quotient homomorphism. -/
 def reductionRingSheaf (n : ℕ) : integerRingSheaf l E ⟶ quotientRingSheaf l E n :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   ⟨{
@@ -84,90 +75,61 @@ def reductionRingSheaf (n : ℕ) : integerRingSheaf l E ⟶ quotientRingSheaf l 
             continuous_quot_mk).comp ULift.ringEquiv.toRingHom))
       naturality := fun _ _ _ ↦ rfl }⟩
 
-/-- The internal ring underlying the continuous condensed integer ring.
-Source: blueprint resolution, On X, step 3
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+/-- The internal ring underlying the continuous condensed integer ring. -/
 abbrev integerRing : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
   (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (integerRingSheaf l E)
 
-/-- Pointwise commutativity of the integer ring object.
-Source: blueprint resolution, On X, step 3
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+/-- Pointwise commutativity of the integer ring object. -/
 instance integerRing_isCommMonObj : IsCommMonObj (integerRing l E) :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   Profinite.isCommMonObj_continuousCoefficientRingObj _
 
-/-- The internal finite quotient ring.
-Source: blueprint resolution, On X, step 3
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+/-- The internal finite quotient ring. -/
 abbrev quotientRing (n : ℕ) : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
   (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (quotientRingSheaf l E n)
 
-/-- Reduction as a morphism of internal rings.
-Source: blueprint resolution, On X, step 3
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+/-- Reduction as a morphism of internal rings. -/
 abbrev reductionRing (n : ℕ) : integerRing l E ⟶ quotientRing l E n :=
   (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map (reductionRingSheaf l E n)
 
-/-- The quotient with its canonical restricted scalar action from the integers.
-Source: blueprint resolution, On X, step 3
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+/-- The quotient with its canonical restricted scalar action from the integers. -/
 abbrev quotientModule (n : ℕ) :
     CategoryTheory.Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) (integerRing l E) :=
   (Mod.comap (reductionRing l E n)).obj (Mod.regular (quotientRing l E n))
 
-/-- The exact inverse image on the internal integer-module objects.
-Source: blueprint resolution, On X, step 3
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+/-- The exact inverse image on the internal integer-module objects. -/
 abbrev pullback (X : Scheme.{u}) := (upperStarFromPoint X).mapMod (integerRing l E)
 
-/-- The unbounded derived category with the pulled-back condensed integer coefficients.
-Source: blueprint resolution, On X, step 5
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+/-- The unbounded derived category with the pulled-back condensed integer coefficients. -/
 abbrev Derived (X : Scheme.{u}) :=
   DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     (condensedRingObj (integerRing l E) X))
 
-/-- The actual derived reduction functor, with the finite quotient in degree zero.
-Source: blueprint resolution, On X, step 5
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+/-- The actual derived reduction functor, with the finite quotient in degree zero. -/
 abbrev reductionFunctor (X : Scheme.{u}) (n : ℕ) : Derived l E X ⥤ Derived l E X :=
   (CondensedRing.derivedTensor (integerRing l E) X).flip.obj
     ((DerivedCategory.singleFunctor _ 0).obj ((pullback l E X).obj (quotientModule l E n)))
 
-/-- Degree-zero realization of a coefficient morphism, followed by derived tensor with K.
-Source: blueprint resolution, Triangles, step 7
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+/-- Degree-zero realization of a coefficient morphism, followed by derived tensor with K. -/
 def reductionMap (X : Scheme.{u}) {m n : ℕ}
     (f : quotientModule l E m ⟶ quotientModule l E n) :
     reductionFunctor l E X m ⟶ reductionFunctor l E X n :=
   (CondensedRing.derivedTensor (integerRing l E) X).flip.map
     ((DerivedCategory.singleFunctor _ 0).map ((pullback l E X).map f))
 
-/-- Strong monoidal pullback takes the regular module to the regular module.
-Source: blueprint resolution, On X, step 3
-(blueprint: lemma-reduction-derived-nakayama--1).
-
-Proof: both underlying objects are p_X^* R. The transported regular action is the
-monoidal comparison followed by p_X^* of multiplication, exactly the multiplication
-of the transported ring. Extensionality for module objects and proof irrelevance give
-the equality. This is the scalar-action identification used in step 3 of the node. -/
+/-- Strong monoidal pullback takes the regular module to the regular module. -/
 theorem pullback_regular (X : Scheme.{u}) :
     (pullback l E X).obj (Mod.regular (integerRing l E)) =
       Mod.regular (condensedRingObj (integerRing l E) X) := by
   rfl
 
-/-- The regular-module comparison, with underlying identity, obtained from its named equality.
-Source: blueprint resolution, On X, step 3
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+/-- The regular-module comparison, with underlying identity, obtained from its named equality. -/
 def regularPullbackIso (X : Scheme.{u}) :
     (pullback l E X).obj (Mod.regular (integerRing l E)) ≅
       Mod.regular (condensedRingObj (integerRing l E) X) :=
   eqToIso (pullback_regular l E X)
 
-/-- The scalar action induced by an endomorphism of the regular module, using unitors.
-Source: blueprint resolution, On X, step 5
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+/-- The scalar action induced by an endomorphism of the regular module, using unitors. -/
 def scalarOnModules (X : Scheme.{u})
     (d : End (Mod.regular (integerRing l E))) :
     𝟭 (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -182,18 +144,14 @@ def scalarOnModules (X : Scheme.{u})
         (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
         (condensedRingObj (integerRing l E) X))).map dX.asHom ≫ (leftUnitorNatIso _).hom
 
-/-- Scalar multiplication as an actual chain map, degree by degree.
-Source: blueprint resolution, On X, step 5
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+/-- Scalar multiplication as an actual chain map, degree by degree. -/
 def scalarOnComplex (X : Scheme.{u}) (d : End (Mod.regular (integerRing l E)))
     (C : CochainComplex (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integerRing l E) X)) ℤ) : C ⟶ C :=
   (NatTrans.mapHomologicalComplex (scalarOnModules l E X d) (.up ℤ)).app C
 
 /-- The standard cone model, functorial on complexes and then localized.
-Its map is the standard cone map of the square with the same chain map on both sides.
-Source: blueprint resolution, On X, step 5
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+Its map is the standard cone map of the square with the same chain map on both sides. -/
 def coneFunctor (X : Scheme.{u}) (d : End (Mod.regular (integerRing l E))) :
     CochainComplex (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integerRing l E) X)) ℤ ⥤ Derived l E X where
@@ -709,36 +667,7 @@ private theorem naturalCone (X : Scheme.{u}) (n : ℕ) :
     ((pointResolution l E n).map_of_exact (pullback l E X))
     (regularPullbackIso l E X) r rfl τ hτ
 
-/-- The coefficient sequence, its natural cone interpretation, and the quotient-power triangles.
-(blueprint: lemma-reduction-derived-nakayama--1).
-
-Proof:
-1. The DVR theorem gives a nonzero uniformizer, continuous division on its image and finite
-   quotient rings. Its positive-power ideals are open, so their quotient topologies are discrete
-   (`lemma-reduction-derived-nakayama--1`).
-2. On each profinite S, division identifies the kernel and a lift chosen on each clopen fibre
-   proves surjectivity of continuous reduction. Kernels are sectionwise and cokernels sheafify
-   (`situation-conventions`); all maps are linear for pointwise actions.
-3. Exact monoidal inverse image from the point transports this sequence and its actions to X
-   (`lemma-reduction-derived-nakayama--1`, `proposition-topos-functoriality--2`).
-   The internal/section-module equivalence preserves underlying sheaves
-   (`lemma-reduction-derived-nakayama--1`,
-   `lemma-reduction-derived-nakayama--1`, `situation-conventions`).
-4. The complex [R -- pi^n --> R] in degrees -1,0 augments quasi-isomorphically to B_n[0].
-   Its rank-one free terms are flat and it is bounded above, hence K-flat
-   (`lemma-reduction-derived-nakayama--1`).
-5. Choose a K-flat representative for arbitrary unbounded K (`lemma-reduction-derived-nakayama--1`).
-   Tensor-model descent (`lemma-reduction-derived-nakayama--1`) and signed interchange
-   compute its reduction by the cone differential (dx + pi^n y, -dy). This is functorial in
-   chain maps. The displayed natural isomorphism identifies this standard cone model with
-   the reduction functor after localization; hence it descends naturally to the derived category.
-6. The maps [x] |-> [pi^n x] and [y] |-> [y] give the short exact quotient-power sequence:
-   cancellation proves injectivity, representatives give the kernel and surjectivity. Finite
-   discreteness gives continuous lifts on clopen fibres, and exact pullback gives the X sequence.
-7. Its short-exact-sequence triangle (`lemma-reduction-derived-nakayama--1`) stays distinguished
-   after derived tensor with K (`lemma-reduction-derived-nakayama--1`). The two arrows
-   are precisely the displayed derived images of the normalized quotient maps. Take m=1 for
-   the final triangle. No boundedness of K or invertibility of l on X is used. -/
+/-- The coefficient sequence, its natural cone interpretation, and the quotient-power triangles. -/
 theorem derived_nakayama_resolution :
     ∃ (d : End (Mod.regular (integerRing l E))),
       (∀ (S : Profinite.{u}ᵒᵖ) (f : (integerRing l E).obj.obj S) (s : S.unop),

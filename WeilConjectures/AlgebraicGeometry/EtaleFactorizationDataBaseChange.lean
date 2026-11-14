@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
 
 /-! # Transport of factorization data by a further base change
 
-Source: Stacks, Limits 01YZ; Categories, fibre products and their canonical comparisons.
+## References
+
+* Stacks Project, Tag 01YZ
 -/
 
 @[expose] public section
@@ -45,21 +47,7 @@ private theorem pullback_triangle_coherence
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Existing models and their two arrow equations transport to any later stage.
-This assertion constructs no descended model and asserts no covering.
-
-Source: Stacks, Limits 01YZ and the universal property of fibre products.
-(blueprint: lem-weil-pbc-etale-factorization-data-base-change).
-
-Proof: Put P equal to base change along D(t.left). Take the source models to
- be P(Vj). The comparison P(Fj(Z)) ≅ Fk(Z) is the inverse of the canonical
- pullback-composition isomorphism, using D.map_comp and t.w. Postcompose
- P(aj) and P(bj) with these comparisons to define ak and bk. The comparison
- Bk(P(Vj)) ≅ Bj(Vj), followed by d, defines dk. Naturality of pullback
- composition and its associativity give the two displayed limit equations:
- both composites into the triple fibre product have the same projections,
- so the universal property identifies them. The formula for ak is its
- definition. This works for empty families, arbitrary non-affine U_q, and
- identity stage arrows; no geometric descent or covering argument is used. -/
+This assertion constructs no descended model and asserts no covering (Stacks, Tag 01YZ). -/
 theorem etale_factorizationData_baseChange
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (i₀ : I)
     (W : (D.obj (op i₀)).FullAffineEtale)

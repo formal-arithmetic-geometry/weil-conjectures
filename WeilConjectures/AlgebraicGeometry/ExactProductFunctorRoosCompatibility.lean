@@ -10,9 +10,9 @@ public import WeilConjectures.CategoryTheory.StrictRoosComparison
 /-!
 # Triangle and augmentation compatibility of a prescribed Roos square
 
-Source: Stacks Project, Tags 0940 and 0941, and the final paragraph of
-literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md.
+## References
+
+* Stacks Project, Tags 0940, 0941
 -/
 
 @[expose] public noncomputable section
@@ -240,26 +240,8 @@ private theorem localizedAugmentation
 
 set_option maxHeartbeats 600000 in
 -- The statement contains simultaneous universe-polymorphic cone comparisons.
-/-- Triangle and augmentation compatibility of a prescribed Roos square.
-
-Source: Stacks Project, Tags 0940 and 0941, and the final paragraph of
-literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md.
-(auxiliary; not a blueprint node).
-
-Proof in words:
-In the signed shifted-cone coordinates construct p as first projection and
-delta as minus the second inclusion followed by the canonical shift. These are
-chain maps: the differential matrix is (dx,(1-s)x-dy). The two diagonal entries
-of kappa give kappa p' = F(p) psi and the corresponding shifted identity for
-delta, with F's canonical shift comparison. Apply Q and the commutative-shift
-identity for the exact-functor localization comparison; substitute the given
-Roos square and cancel the theta isomorphisms. This gives both derived triangle
-identities. For a compatible family gamma, the equality (1-s)gamma=0 constructs
-the chain map b=(gamma,0); construct b' in the same way from F gamma.
-The coordinate identities give F(b) kappa=b'. Applying Q, the same square,
-and naturality of the localization comparison proves the augmentation equation.
-This calculation needs no choice of resolutions or normalization of theta. -/
+/-- Triangle and augmentation compatibility of a prescribed Roos square
+(Stacks, Tags 0940, 0941). -/
 theorem exactProductFunctorRoosCompatibility
     {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max uC vC r}]

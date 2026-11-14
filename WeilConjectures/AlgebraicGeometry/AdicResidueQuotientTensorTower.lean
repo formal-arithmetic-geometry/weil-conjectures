@@ -8,8 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.AdicResidueAdjointTower
 
 /-! # The actual quotient coefficient tower and its tensor model
 
-Source: Stacks Project, proetale.tex, lemma-naive-completion (099M).
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 099M
 -/
 
 @[expose] public noncomputable section

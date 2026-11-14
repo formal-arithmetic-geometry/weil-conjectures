@@ -12,7 +12,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
 /-!
 # Constant coefficients and the inverse-image unit
 
-Source: Stacks Project, Tag 03Q1 (2), (4), and Tag 0A5G.
+## References
+
+* Stacks Project, Tags 03Q1 and 0A5G
 -/
 
 @[expose] public section
@@ -22,20 +24,8 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- The constant-sheaf pullback comparison sends the adjunction unit to composition
-with the first projection, in the description of constant sheaves by continuous maps.
-Source: Stacks Project Tags 03Q1 (2), (4), and 0A5G.
-(blueprint: theorem-finite-etale-covers-proper-henselian--3)
-
-Proof: Construct the natural transformation from the constant sheaf on Y to the
-pushforward of the continuous-map sheaf on Y₀ by composition with the first
-projection. Apply the constant-sheaf adjunction on Y and then the terminal-object
-comparison for pushforward. On a constant m, its value is the constant function m,
-by the unit identity for the continuous-map comparison. The same calculation on Y₀
-computes the adjunct of that comparison. Uniqueness of the left adjoint identifies
-the two adjuncts, and injectivity of the adjunction Hom equivalence gives equality
-of the sheaf morphisms. Evaluation at W and g gives the claimed formula. This uses
-no finiteness hypothesis on M. Empty objects and the trivial group are covered by
-the same constant-function calculation. -/
+with the first projection, in the description of constant sheaves by continuous maps
+(Stacks, Tags 03Q1 and 0A5G). -/
 theorem constant_pullback_unit_continuousMap
     {Y Y₀ : Scheme.{u}} (i : Y₀ ⟶ Y)
     (M : Type (u + 1)) [AddCommGroup M]

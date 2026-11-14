@@ -18,8 +18,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # A perfect model over the coordinate-ring colimit
 
-Source: Stacks Project, Tags 09RF and 08EB.
-(blueprint: lem-pc-affine-descent-colimit-model).
+## References
+
+* Stacks Project, Tags 09RF and 08EB
 -/
 
 @[expose] public section
@@ -35,19 +36,8 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- A perfect object on the limit affine base change has a bounded finite-projective
 model over the colimit of the actual coordinate-ring diagram. This is a representation
-statement, not a descent statement: no finite stage or descended object is asserted.
-Source: Stacks Project, Tag 09RF, affine case, and Tag 08EB
-(blueprint: lem-pc-affine-descent-colimit-model).
-
-Proof: The affine source and affine base imply every fibre product is affine.
-The canonical spectrum comparison is an isomorphism, by the affine tail diagram
-comparison: finality preserves the ring colimit, connected base-change limits give
-the limit scheme, and affine global sections give the colimit of its stage rings.
-Perfectness implies quasi-coherent cohomology. Transport E
-along this affine isomorphism and apply perfect_iff_affine_bounded_projective (08EB).
-Transport its model comparison back. The resulting associated-sheaf functor is exactly
-affineDescentRealization with the colimit-desc map. This proves the stated isomorphism.
-The argument applies to the zero ring, empty affine source, and zero object. -/
+statement, not a descent statement: no finite stage or descended object is asserted
+(Stacks, Tags 09RF and 08EB). -/
 theorem exists_affine_descent_colimit_model
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (i : I)

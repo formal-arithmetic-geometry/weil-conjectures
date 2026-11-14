@@ -22,20 +22,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Étale Cohomology 09YQ, Topologies 04HR;
-Sites 03CB and 03CC (blueprint: lem-weil-pbc-affine-etale-restriction-composition).
-Proof: full faithfulness of affine inclusion lifts the iterated-pullback isomorphism
-conjugated by t to gamma; its image is the displayed equation. The corresponding
-isomorphism of affine direct images conjugates the composite of the adjunctions a
-to the adjunction for the composite morphism. The unique isomorphism of their left
-adjoints is d, and its unit equation evaluated at V is the second formula below.
-For the final equation, let E be e_g followed by L_g applied to e_f. Precompose
-both sides with E inverse, so both are morphisms from L_g L_f rho_X G to
-L_(gf) rho_X G. Transpose these using the composed affine adjunction. Substitute
-the unit equations for e, for c, and for d, and use the equation defining gamma to
-identify the restrictions on base-change objects. The transposes agree on every
-affine V and section s. Injectivity of adjoint transposition and cancellation of
-E inverse give equality. -/
+/-- Compatibility of the affine étale inverse images with composition of affine morphisms
+(Stacks, Tags 09YQ, 04HR, 03CB and 03CC). -/
 theorem affineEtale_inverseImage_restriction_composition
     (U : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h],
         X.FullAffineEtale ⥤ Y.FullAffineEtale)

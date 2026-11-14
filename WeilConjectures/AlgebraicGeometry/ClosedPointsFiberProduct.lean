@@ -16,15 +16,14 @@ public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
 
 ## Main results
 
-- `AlgebraicGeometry.Etale.locallyOfFinitePresentation_and_finiteType_comp` (blueprint
-  `lem-kun-etale-lfp`): étale morphisms are locally of finite presentation, and a quasi-compact
-  étale scheme over a scheme of finite type over a field is of finite type over the field.
-- `AlgebraicGeometry.Scheme.Pullback.isClosed_singleton_iff` (blueprint
-  `corollary-open-direct-image-over-field--2`): a point of `X ×_K Y` is closed if and only if both
-  of its images are closed.
-- `AlgebraicGeometry.Scheme.finite_of_isClosed_of_forall_isClosed_singleton` (blueprint
-  `lem-kun-finite-closed-subscheme`): a closed subset of a scheme of finite type over a field
-  consisting of closed points is finite.
+- `AlgebraicGeometry.Etale.locallyOfFinitePresentation_and_finiteType_comp`:
+  étale morphisms are locally of finite presentation, and a quasi-compact étale scheme over a
+  scheme of finite type over a field is of finite type over the field.
+- `AlgebraicGeometry.Scheme.Pullback.isClosed_singleton_iff`:
+  a point of `X ×_K Y` is closed if and only if both of its images are closed.
+- `AlgebraicGeometry.Scheme.finite_of_isClosed_of_forall_isClosed_singleton`:
+  a closed subset of a scheme of finite type over a field consisting of closed points is
+  finite.
 -/
 
 @[expose] public section
@@ -35,10 +34,10 @@ open CategoryTheory Limits Topology
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `lem-kun-etale-lfp`: **étale morphisms are locally of finite presentation.** An
-étale morphism `f : U ⟶ X` is locally of finite presentation; if moreover `f` is quasi-compact
-and `X` is of finite type over a field `K` (via `a`), then `U` is of finite type over `K`, i.e.
-`f ≫ a` is locally of finite type and quasi-compact. -/
+/-- **Étale morphisms are locally of finite presentation.** An étale morphism `f : U ⟶ X` is
+locally of finite presentation; if moreover `f` is quasi-compact and `X` is of finite type over
+a field `K` (via `a`), then `U` is of finite type over `K`, i.e. `f ≫ a` is locally of finite
+type and quasi-compact. -/
 theorem Etale.locallyOfFinitePresentation_and_finiteType_comp {U X : Scheme.{u}} (f : U ⟶ X)
     [Etale f] {K : Type u} [Field K] (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a]
     [QuasiCompact a] [QuasiCompact f] :
@@ -54,12 +53,9 @@ theorem Scheme.discreteTopology_of_topologicalKrullDim_le_zero_of_field {K : Typ
   have := IsLocallyArtinian.of_topologicalKrullDim_le_zero h
   exact (IsLocallyArtinian.iff_isLocallyNoetherian_and_discreteTopology.1 this).2
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: **closed points of a product.** Let `X`
-and `Y` be schemes locally of finite type over a field `K` and `z ∈ X ×_K Y`. Then `z` is a closed
-point if and only if its images in `X` and `Y` are closed points. The projections are locally of
-finite type with Jacobson targets, so they preserve closed points. Conversely, if `x` and `y` are
-closed, then `Spec κ(x) ×_K Spec κ(y) ⟶ X ×_K Y` is a closed immersion whose image contains `z`, and
-its source is zero-dimensional (`κ(x)` being finite over `K`), hence discrete. -/
+/-- **Closed points of a product.** Let `X` and `Y` be schemes locally of finite type over a
+field `K` and `z ∈ X ×_K Y`. Then `z` is a closed point if and only if its images in `X` and `Y`
+are closed points. -/
 theorem Scheme.Pullback.isClosed_singleton_iff {K : Type u} [Field K] {X Y : Scheme.{u}}
     (f : X ⟶ Spec (.of K)) (g : Y ⟶ Spec (.of K)) [LocallyOfFiniteType f]
     [LocallyOfFiniteType g] (z : (pullback f g : Scheme.{u})) :
@@ -87,11 +83,8 @@ theorem Scheme.Pullback.isClosed_singleton_iff {K : Type u} [Field K] {X Y : Sch
   rw [← hw, ← Set.image_singleton]
   exact m.isClosedEmbedding.isClosedMap _ (isClosed_discrete _)
 
-/-- Blueprint `lem-kun-finite-closed-subscheme`: **closed subsets consisting of closed points are
-finite.** Let `X` be a scheme of finite type over a field `K`. A closed subset `Z ⊆ X` all of
-whose points are closed is finite: `X` is a noetherian space, so `Z` has finitely many generic
-points of irreducible components, and every point of `Z`, being closed, is such a generic
-point. -/
+/-- **Closed subsets consisting of closed points are finite.** Let `X` be a scheme of finite
+type over a field `K`. A closed subset `Z ⊆ X` all of whose points are closed is finite. -/
 theorem Scheme.finite_of_isClosed_of_forall_isClosed_singleton {K : Type u} [Field K]
     {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
     {Z : Set X} (hZ : IsClosed Z) (hcl : ∀ z ∈ Z, IsClosed {z}) : Z.Finite := by

@@ -47,32 +47,7 @@ private theorem adicBounded_of_iso
     ((coefficientModelCohomology R q).mapIso e)⟩
 
 /-- Arbitrarily marked bounded constructible finite-Tor etale origins inherit
-all normalized quotient isomorphisms and their cocycle.
-Source: Stacks Project, proetale.tex, Tag 09AL, full faithfulness, applied to
-the quotient balancing in Tag 09C2; parent proof steps 8-10.
-(auxiliary; not a blueprint node).
-
-Proof: For n <= m, scalar extension of Cn at m to A/J^(n+1) has the same
-Tor interval: on a flat-term K-flat representative the double tensor test
-balances to the original tensor test. It is bounded by testing against the
-unit. Refine the finite stratifications of its source cohomology on each
-affine open. On each stratum, bounded-above locally constant tensor preserves
-finite-type cohomology. The quotient scalar action makes the resulting local
-models modules of finite type over A/J^(n+1), so the extended complex is
-constructible. The comparison functor is fully faithful on these bounded
-constructible objects. Lift the isomorphism given by the inverse coefficient
-comparison followed by scalar extension of alpha m, then rho, then inverse
-alpha n. Lift its inverse as well; faithfulness proves that the lifts are
-mutual inverses, yielding beta and the compatibility equation. For a triple
-r >= m >= n apply comparison and postcompose with alpha n. Substitute the
-compatibility equations, use naturality of the scalar comparison and cancel
-alpha m with its inverse. Both composites are the same triple balanced tensor
-map. On pure tensors they multiply the three scalar factors in the same
-order; the ordinary normalizations and uniqueness on K-flat representatives
-identify them with the specified adicFiniteExtensionComp and adicFiniteRho.
-Faithfulness gives the cocycle. Repeated indices use scalar multiplication by
-one, so identity reductions are included. No normalization of alpha 0 is
-required, and no completeness assumption is used. -/
+all normalized quotient isomorphisms and their cocycle (Stacks, Tags 09AL and 09C2). -/
 theorem adicFiniteEtale_transitions
     (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A)

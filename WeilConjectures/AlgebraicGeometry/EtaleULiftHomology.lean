@@ -24,21 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Coefficient lift preserves homology of abelian sheaves on the small étale site.
-Source: step 3 of lem-sc-etale-ulift-injective-resolution; Mathlib
-`AddCommGrpCat.uliftFunctor`, `Sheaf.isLocallySurjective_iff_epi'`, and
-`Functor.preservesHomology_of_preservesEpis_and_kernels`.
-(blueprint: lem-sc-etale-ulift-homology)
-
-Proof: Coefficient lift is additive since it acts on morphisms objectwise by ULift.
-Kernels of abelian sheaves are computed objectwise, and the group lift functor preserves
-kernels. Epimorphisms of abelian sheaves are locally surjective. A local preimage of a
-section before lift gives a local preimage after lift by up, and conversely down gives
-the same local lifting condition. Thus coefficient lift preserves epimorphisms.
-An additive functor between abelian categories preserving kernels and epimorphisms
-preserves short exact sequences, hence is exact and preserves homology. Equivalently,
-apply Mathlib's preservation-of-homology criterion for exact additive functors. Zero
-objects and zero complexes are included; no affine or nonemptiness assumption is used. -/
+/-- Coefficient lift preserves homology of abelian sheaves on the small étale site. -/
 theorem etale_ulift_preservesHomology (X : Scheme.{u}) :
     (sheafCompose X.smallEtaleTopology
       AddCommGrpCat.uliftFunctor.{u + 1, u}).PreservesHomology := by

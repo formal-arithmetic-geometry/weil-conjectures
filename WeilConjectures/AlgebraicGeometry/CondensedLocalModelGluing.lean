@@ -13,9 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleLocalSubmoduleGluing
 
 /-!
 # Gluing local finite coefficient models after enlarging the field
-
-Source: upstream ModuleObject/Colimit/TwoColimit.lean, (Obj) descent paragraph,
-overlap and gluing steps (auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -213,24 +210,8 @@ private lemma exists_scalar_model_of_compatible_local_monomorphisms
   have : IsIso t := module_isIso_of_cover t U hlocal
   exact ⟨P, (fun i ↦ ⟨eP i⟩), ⟨asIso t⟩⟩
 
-/-- Finite affine local coefficient models glue after one finite enlargement.
-
-Source: upstream ModuleObject/Colimit/TwoColimit.lean, (Obj) descent paragraph;
-Stacks Tags 04TR, 04TQ and 03EL
-(auxiliary; not a blueprint node).
-
-Proof: descend the adjoints of the given local model isomorphisms to compatible
-local monomorphisms at one finite coefficient stage. Glue their underlying abelian
-subobjects by the kernel of the simultaneous local quotient map; lift the module
-action using its proved local factorization property. The resulting local module
-isomorphisms commute with the global inclusion into M restricted to the finite
-coefficient ring. Transpose this inclusion by extension/restriction adjunction.
-The pullback/scalar-extension comparison identifies its local adjoints with the
-supplied invertible maps. The resulting global extension map is an isomorphism
-because the pro-etale cover detects isomorphisms of sheaves, hence of modules.
-Thus the original conclusion follows without gluing scalar-extension inverses or
-imposing triple-overlap equations separately. The empty cover is included in the
-same cover-detection and kernel argument. -/
+/-- Finite affine local coefficient models glue after one finite enlargement (Stacks, Tags 04TR,
+04TQ and 03EL). -/
 theorem exists_finiteCoefficient_gluing_of_local_models
     (T X : Scheme.{u}) [QuasiSeparatedSpace X]
     (f : X ⟶ T) (ℓ : ℕ) [Fact ℓ.Prime]

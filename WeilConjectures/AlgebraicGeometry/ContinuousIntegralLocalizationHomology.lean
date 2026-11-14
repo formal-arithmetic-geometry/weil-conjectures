@@ -21,13 +21,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
 /-- Cohomology carries the localization-unit telescope of a bounded-below integral
-complex to a colimit.
-Source: Bhatt--Scholze, Lemma 6.8.2, and exactness of filtered colimits of module sheaves.
-(auxiliary; not a blueprint node).
-Proof. Use the strict coefficient telescope model. Its good truncation is already
-an isomorphism because every term is zero below the common bound. Filtered colimits
-are exact in module sheaves, so termwise cohomology preserves this colimit. The
-factorization of derived cohomology through complexes gives the claimed cocone. -/
+complex to a colimit (Bhatt–Scholze, Lemma 6.8.2). -/
 theorem integralLocalization_homology_isColimit (X : Scheme.{u})
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) X)))

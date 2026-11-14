@@ -19,8 +19,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import WeilConjectures.Algebra.Homology.KInjectiveResolution
 /-! # Quantitative stabilization for functorial hypercohomology
 
-Source: Stacks Project, Tags 015J and 0EZM.
-(blueprint: lem-weil-pbc-hypercohomology-uniform-bound).
+## References
+
+* Stacks Project, Tags 015J and 0EZM
 -/
 
 @[expose] public section
@@ -77,22 +78,8 @@ private theorem sections_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
 set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent page and presentation families.
 set_option linter.unusedVariables false in
-/-- Functorial termwise presentations can be chosen with a quantitative stabilization bound.
-Source: Stacks Project, Tags 015J, 015K and 0EZM.
-
-Proof: Choose the Cartan--Eilenberg resolutions and comparison maps as in
-`exists_etaleHypercohomology_pullback_functorial`. For a complex zero below a, choose
-its resolution zero in these rows. On the first page the support is q >= a and the
-resolution degree is nonnegative. In bidegree (q,n-q), an outgoing differential has
-negative resolution degree once r > n-q+1; an incoming differential originates
-below row a once r > q-a. Consequently both differentials vanish at and after
-max 1 (max (q-a+2) (n-q+2)). The finite filtered total-complex construction identifies
-this stationary term with its canonical abutment graded piece. Define R to be the
-least stabilization threshold at least 1, and use the canonical stationary identifications.
-The support estimate bounds R for every valid a. Filtered comparison maps commute
-with all these identifications, giving the first-page, abutment, identity and
-composition equations of the functorial presentation theorem unchanged.
-(blueprint: lem-weil-pbc-hypercohomology-uniform-bound). -/
+/-- Functorial termwise presentations can be chosen with a quantitative stabilization bound
+(Stacks, Tags 015J, 015K and 0EZM). -/
 theorem exists_etaleHypercohomology_uniform_bound
     (P : ∀ {X Y : Scheme.{u}} (f : Y ⟶ X)
       (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)

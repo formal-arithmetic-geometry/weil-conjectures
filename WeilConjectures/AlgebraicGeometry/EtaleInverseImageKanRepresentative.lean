@@ -17,16 +17,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Étale Cohomology, Tag 09XN, proof of lemma-describe-pullback.
-(blueprint: lem-weil-pbc-etale-inverse-image-section-description-representation).
-
-Proof:
-Compute the pointwise left Kan extension as the colimit over costructured
-arrows. Joint surjectivity of the colimit maps gives an object V, an arrow
-a : Z → g*V and a section t of F(V). Its colimit map is the Kan unit at V
-followed by restriction along a. Naturality of the sheafification unit moves
-restriction past sheafification. The composite-adjunction unit is the Kan
-unit followed by the sheafification unit, giving the required equality. -/
+/-- Description of the sections of an inverse image through representatives
+(Stacks, Tag 09XN). -/
 theorem etaleInverseImageSectionDescription_representation (S T : Scheme.{u}) (g : T ⟶ S)
     (F : Sheaf S.smallEtaleTopology (Type (u + 1)))
     (Z : T.Etale)

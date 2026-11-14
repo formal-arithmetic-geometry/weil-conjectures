@@ -14,8 +14,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.
 
 /-! # Descent of constant-module sections on affine etale test objects
 
-Source: Stacks Project, Tags 09Z1 and 09YQ, degree zero.
-(blueprint: lem-weil-pbc-constant-module-limit-affine-section-descent).
+## References
+
+* Stacks Project, Tags 09Z1, 09YQ
 -/
 
 @[expose] public section
@@ -33,32 +34,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Sections on an affine etale test object descend along an inverse limit.
 
-Source: Stacks Project, Tag 09Z1, proof on affine etale objects in degree zero,
-and Tag 09YQ, continuity of cohomology.
-(blueprint: lem-weil-pbc-constant-module-limit-affine-section-descent).
-
-Proof: Base change the diagram and its limit cone along U.hom, obtaining E_i =
-U times_X D_i and L = U times_X Y. Connected limits commute with these pullbacks.
-Each E_i is qcqs since its map to the affine scheme U is qcqs, and the transitions
-are affine by base change. Let G be the constant abelian sheaf on U with value
-M's underlying abelian group. The constant-sheaf pullback isomorphisms identify
-its inverse images on E_i and L with the underlying constant module sheaves.
-Forgetting coefficients commutes with constant sheafification: the coefficient
-forgetful functor is a left adjoint and preserves sheafification, giving the
-canonical constantCommuteCompose comparison. Direct image commutes with forgetting
-by its sectionwise definition. Evaluation of direct image on U is global sections
-on the corresponding pullback; restriction to this etale object gives this
-identification. Apply globalSections_limit_comparison to E over U, its limit L,
-and G, and take its surjectivity clause. Under these comparisons its legs are
-constantModulePushforwardMap evaluated on U: both are the inverse-image adjunction
-unit followed by the canonical constant pullback and direct-image composition
-comparisons. Naturality of the units and uniqueness of the constant-sheaf left
-adjoint comparison identify the maps. The underlying section sets of module
-sheaves and their abelian sheaves agree, so the representative and equality
-transfer back to module sections. The global-section theorem already handles
-arbitrary cofiltered categories. For an empty pullback or the zero module the
-only section is zero; a singleton system has an invertible comparison, and no
-finite generation of M is used. -/
+(Stacks Project, Tags 09Z1, 09YQ) -/
 theorem exists_constantModule_limit_affine_section_rep
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)
     {X : Scheme.{u}} {I : Type u} [SmallCategory I] [IsCofiltered I]

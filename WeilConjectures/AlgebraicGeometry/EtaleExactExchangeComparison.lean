@@ -10,9 +10,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.CategoryTheory.SectionProjectionUnit
 import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
-
 # The exact and resolution presentations of proper exchange -/
 @[expose] public noncomputable section
 set_option autoImplicit false

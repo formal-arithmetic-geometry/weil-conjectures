@@ -13,9 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 /-!
 # Explicit restriction and restricted pullback on étale cohomology
 
-Source: Stacks Project, Tag 01F7 and Tag 0A50.
-These abbreviations expand to the maps of etale_mayerVietoris_pullback.
-(blueprint: lem-weil-pbc-open-cohomology-whole-restriction-naturality).
+## References
+
+* Stacks Project, Tags 01F7 and 0A50
 -/
 
 @[expose] public section
@@ -24,8 +24,8 @@ universe u
 open CategoryTheory AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
-/-- Restriction from an open B to an open A contained in B, with the composition comparison.
-Source: Stacks Project, Tag 01F7. -/
+/-- Restriction from an open B to an open A contained in B, with the composition comparison
+(Stacks, Tag 01F7). -/
 noncomputable def openCohomologyRestriction {X : Scheme.{u}} {A B : X.Opens}
     (h : A ≤ B) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
     Sheaf.H ((upperStar AddCommGrpCat.{u + 1} B.ι).obj G) q →+
@@ -34,8 +34,8 @@ noncomputable def openCohomologyRestriction {X : Scheme.{u}} {A B : X.Opens}
     A.ι (X.homOfLE_ι h).symm).inv.app G) q).comp
       (cohomologyMap (X.homOfLE h) ((upperStar AddCommGrpCat.{u + 1} B.ι).obj G) q)
 
-/-- Pullback on an open, transported to the restriction of the pulled-back sheaf.
-Source: Stacks Project, Tag 01F7. -/
+/-- Pullback on an open, transported to the restriction of the pulled-back sheaf (Stacks, Tag 01F7).
+-/
 noncomputable def openCohomologyPullback {X Y : Scheme.{u}} (g : Y ⟶ X) (W : X.Opens)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
     Sheaf.H ((upperStar AddCommGrpCat.{u + 1} W.ι).obj G) q →+
@@ -57,10 +57,7 @@ private theorem cohomologyMap_comp_explicit {X Y Z : Scheme.{u}}
   exact (cohomologyPullbackFunctorial a b G q).2.1 x
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Restriction from the whole scheme commutes with pullback.
-Source: Stacks Project, Tag 01F7; this is composition functoriality twice, followed by
-cancellation of the inverse composition comparison.
-(blueprint: lem-weil-pbc-open-cohomology-whole-restriction-naturality) -/
+/-- Restriction from the whole scheme commutes with pullback (Stacks, Tag 01F7). -/
 theorem openCohomologyPullback_restrict {X Y : Scheme.{u}} (g : Y ⟶ X) (W : X.Opens)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (x : Sheaf.H G q) :
     cohomologyMap (g ⁻¹ᵁ W).ι ((upperStar AddCommGrpCat.{u + 1} g).obj G) q

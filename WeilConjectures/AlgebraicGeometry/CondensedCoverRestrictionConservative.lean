@@ -11,9 +11,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.C
 
 /-! # Conservativity of covering restrictions with condensed coefficients
 
-Source: Hemo--Richarz--Scholbach, Constructible sheaves on schemes, Section 3
-and the proof of Lemma 4.5 (auxiliary; not a blueprint node).
-
 The module-object presentation is the published category of modules over
 `coefficientRing X Λ`, whose underlying ring object is `condensedRingObj Λ.X X`.
 These are ordinary unbounded derived categories, with no completion.
@@ -22,6 +19,10 @@ These are ordinary unbounded derived categories, with no completion.
 left derived inverse image by `CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory`.
 For an object of the small pro-etale site, localization and the inverse-image
 comparison identify this functor with restriction, transporting the coefficient action.
+
+## References
+
+* Hemo--Richarz--Scholbach, Section 3, Lemma 4.5
 -/
 
 @[expose] public section
@@ -63,38 +64,8 @@ private theorem isIso_of_condensed_cover
   exact isIso_of_reflects_iso f (Mod.forget _)
 
 /-- Derived restrictions along any pro-etale covering family jointly detect isomorphisms
-and zero objects for arbitrary commutative condensed coefficients.
-Source: HRS Section 3 and Lemma 4.5, proof, conservativity of restriction
-(auxiliary; not a blueprint node).
-
-Proof plan:
-1. By lem-weil-proetale-weakly-etale-localization the site of each cover member is
-   the slice site. Clause 1 of lem-sfb-proetale-object-inverse-image-restriction
-   identifies inverse image of arbitrary ring and abelian sheaves with restriction.
-   Compose the coefficient comparison with alpha_u = condensedPullbackHom.
-   Scalar extension along this isomorphism just transports the action: the tensor
-   comparison sends m tensor r to alpha_u.inv(r)m, with inverse m to m tensor 1.
-   Thus the exact inverse image of prose-03-02 is restriction,
-   and its derived functor is exact termwise restriction. No constant-ring clause is used.
-2. For each site object V, proposition-topos-functoriality--1 gives the covering by
-   V times_X U_i. Every member maps to U_i. The sieve of objects admitting a map
-   to some U_i is therefore covering, the CoversTop hypothesis of
-   lem-sfb-sheaf-cover-local-isomorphism.
-3. Apply that criterion to the underlying abelian-sheaf map of a module map whose
-   restrictions are invertible. Its inverse is linear: applying the original map
-   to b(ry) and r b(y) gives ry in both cases, and injectivity cancels the map.
-   This is an inverse in the module category of situation-conventions.
-4. The natural cohomology comparison of lem-weil-pbc-exact-functor-complex-cohomology
-   descends through the localization of def-weil-abstract-derived-category:
-   naturality for chain maps also holds for inverses of quasi-isomorphisms, hence
-   for all derived morphisms. Thus H^n(u_i^* f) is the restriction of H^n(f).
-5. If all u_i^* f are invertible, step 4 and step 3 make every H^n(f) invertible.
-   Apply lem-weil-pbc-unbounded-derived-iso-cohomology to conclude IsIso f.
-   Conversely each restriction is a functor and preserves isomorphisms.
-6. If all restrictions of K are zero, apply step 5 to K to 0: additive exact
-   restriction preserves zero objects. This proves K is zero. The empty covering
-   of the empty scheme is included, since its sheaf condition forces zero modules.
-No boundedness, quasi-compactness, nonemptiness or finiteness condition is used. -/
+and zero objects for arbitrary commutative condensed coefficients (HRS, Section 3 and
+Lemma 4.5). -/
 theorem condensed_cover_restriction_conservative
     (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (X : Scheme.{u})
     (𝒰 : Scheme.Cover.{v} Scheme.proetalePrecoverage X) :

@@ -12,8 +12,10 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 
 /-! # Whole-scheme affine tensor sections
 
-Source: Stacks Project, Tags 01I9 and 01IA.
-(blueprint: lem-sc-affine-top-tensor-sections) -/
+## References
+
+* Stacks Project, Tags 01I9 and 01IA
+-/
 
 @[expose] public section
 universe u
@@ -30,18 +32,8 @@ attribute [local instance 2000]
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 -- Compare the affine-open algebra instance with the whole-scheme algebra instance.
-/-- The affine sections comparison specialized to the whole source and target schemes.
-Source: Stacks Project, Tags 01I9 and 01IA.
-(blueprint: lem-sc-affine-top-tensor-sections)
-
-Proof: apply exists_tensorPullback_affine_sections to the affine opens consisting of
-all of A and B. The inclusion into the inverse image of the whole scheme is automatic.
-The induced ring map appLE is appTop: its extra restriction is the identity presheaf
-map. Specialize the family of linear maps to G and forget its scalar structure to
-obtain an additive map. Bijectivity is the bijectivity clause of that comparison.
-The pure-tensor clause says that m tensor b maps to b times the adjunction unit of m,
-restricted from the inverse image of top to top. This is exactly tensorSectionsUnit.
-The proof uses no nonemptiness: the zero module and empty affine schemes are included. -/
+/-- The affine sections comparison specialized to the whole source and target schemes
+(Stacks, Tags 01I9 and 01IA). -/
 theorem exists_affineTopTensorSections {A B : Scheme.{u}} (f : B ⟶ A)
     (G : A.Modules) (hG : G.IsQuasicoherent) (hA : IsAffine A) (hB : IsAffine B) :
     letI : Algebra Γ(A, ⊤) Γ(B, ⊤) := f.appTop.hom.toAlgebra

@@ -12,9 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Ambient coproducts and quasi-coherent cohomology
 
-Source: Stacks Project, Lemma 08DT and Section 01LA, item (3).
-The proofs use the termwise ambient coproduct and its cohomology comparison, together
-with the source library's proved closure of quasi-coherent modules under arbitrary sums.
+## References
+
+* Stacks Project, Tags 08DT and 01LA
 -/
 
 @[expose] public section
@@ -33,15 +33,7 @@ local instance instHasColimitsOfShape_derivedQCohDirectSumsAux (X : Scheme.{u}) 
     HasColimitsOfShape.has_colimit _
   exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
 
-/-- The ambient derived category of sheaves of modules has coproducts
-(blueprint: lem-pc-derived-ambient-has-coproducts). The proof chooses representatives
-for each derived object, forms the termwise coproduct complex, and applies
-`derivedAmbientDirectSums`; the resulting coproduct cocone is transported along the
-chosen representative isomorphisms.
-Source: Stacks Project, Lemma 08DT. Proof: choose representatives for each derived
-object, form the termwise coproduct complex, and apply `derivedAmbientDirectSums` to
-obtain the coproduct cocone and its universal property; choice of representatives
-assembles these cocones for every small discrete diagram. -/
+/-- The ambient derived category of sheaves of modules has coproducts (Stacks, Tag 08DT). -/
 theorem derivedAmbientHasCoproducts (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     HasCoproducts.{u} (schemeDerivedCategory X) := by
@@ -55,15 +47,7 @@ theorem derivedAmbientHasCoproducts (X : Scheme.{u})
   exact hasCoproducts_of_colimit_cofans (fun E ↦ c E)
     (fun E ↦ (derivedAmbientDirectSums X _ E (K E) (e E)).1.some)
 
-/-- Quasi-coherent cohomology is closed under ambient derived coproducts
-(blueprint: lem-pc-derived-qcoh-closed-coproducts). The proof identifies cohomology of
-the ambient coproduct with direct sums, writes each direct sum as a filtered colimit of
-finite sums, and applies finite-sum and filtered-colimit quasi-coherence closure.
-Source: Stacks Project, Lemma 08DT. Proof: `derivedAmbientDirectSums` identifies each
-cohomology sheaf of the ambient coproduct with the direct sum of the input cohomology
-sheaves. Express that direct sum as the filtered colimit of finite partial sums;
-`isQuasicoherent_biprod` proves the finite case and
-`quasiCoherentModuleColimitAffineSections` proves closure under the filtered colimit. -/
+/-- Quasi-coherent cohomology is closed under ambient derived coproducts (Stacks, Tag 08DT). -/
 theorem schemeDerivedQCohClosedUnderCoproducts (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (I : Type u) :

@@ -13,8 +13,9 @@ import WeilConjectures.Algebra.Homology.KInjectiveHomComplex
 
 /-! # Naturality on localized chain maps
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0A90, and cohomology.tex, Tag 08DJ.
-(blueprint: lem-pc-tensor-hom-uncurry-chain-naturality).
+## References
+
+* Stacks Project, Tags 0A90 and 08DJ
 -/
 
 @[expose] public section
@@ -159,27 +160,8 @@ private theorem naturality_transport
 set_option maxHeartbeats 800000 in
 -- The resolution and localization instances need extra elaboration heartbeats.
 /-- Componentwise uncurrying is natural on the images of actual chain maps.
-The input `f` is an arbitrary derived morphism; the three variable maps are chain maps.
-Source: Stacks Project, cohomology.tex, Tag 08DJ, and sites-cohomology.tex,
-Tags 0A90 and 0A96.
-(blueprint: lem-pc-tensor-hom-uncurry-chain-naturality).
-
-Proof: Represent the derived images of a and b by chain maps between K-flat
-complexes, using right fractions followed by K-flat resolutions of their
-sources. The localized quasi-isomorphisms give commuting squares with the
-original maps. On these models the Hom complex from the K-flat L-model into
-I(M) is K-injective. The bijectivity of Qh on homotopy classes and fullness of
-the homotopy quotient lift the transported f to a chain map φ. Naturality of
-the fixed internal-Hom factorization identifies the transported input with
-the localization of a₀;φ;Hom(b₀,I(c)). Apply ht to this input and to φ, then
-use schemeTensorHomUncurry_localized_evaluation for the two explicit evaluation
-composites. Finally use hi to transport the equality along the replacement
-isomorphisms. Tensor functoriality identifies the source factors, and
-cancellation of the tensor of the replacement isomorphisms gives the result.
-Only the componentwise localized evaluation remains a separate theorem; the
-lifting, replacement squares, factorization naturality and cancellation are
-proved here. Identities, zero maps and unbounded complexes require no extra
-hypotheses. -/
+The input `f` is an arbitrary derived morphism; the three variable maps are chain maps
+(Stacks, Tags 08DJ, 0A90 and 0A96). -/
 theorem tensorHomUncurry_chain_natural (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (t : ∀ K L M : schemeDerivedCategory X,

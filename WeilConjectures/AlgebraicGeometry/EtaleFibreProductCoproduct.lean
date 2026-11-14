@@ -13,8 +13,9 @@ public import Mathlib.CategoryTheory.Limits.Over
 /-!
 # Iterated fibre products of a finite coproduct
 
-Source: Stacks Project, Schemes, Tags 01JB and 01JC, and Section 26.17
-(blueprint: lem-sc-etale-fibre-product-coproduct).
+## References
+
+* Stacks Project, Tags 01JB and 01JC
 -/
 
 @[expose] public section
@@ -126,22 +127,10 @@ private theorem powerCofan_isColimit {C : Type*} [Category C] [HasFiniteLimits C
         rw [Pi.lift_comp_π_assoc]
     exact ⟨(Cofan.isColimitEquivOfEquiv E.symm (powerCofan A c (n + 1))).symm hd.some⟩
 
-/-- Source: Stacks Project, Schemes, Tags 01JB and 01JC and Section 26.17
-(blueprint: lem-sc-etale-fibre-product-coproduct).
-Products in `Over X` are iterated fibre products over `X`. The canonical isomorphisms
-are oriented from the coproduct of indexed fibre products to the fibre product of the
-coproduct. Their component equations specify the canonical map, and the final equations
-specify compatibility with every omitted-factor projection.
-
-Proof: (1) Form the component maps from the coprojections using fibre-product universality
-(`def-pc-fibre-product`), then glue using `lem-weil-pbc-scheme-coproduct-family`.
-(2) For one factor the map is the identity by coproduct uniqueness.
-(3) Induct on the number of factors, using
-`lem-sc-etale-fibre-product-base-change-coproduct` first on the last factor and then on
-the preceding factors; exchange factors and flatten the resulting coproduct of coproducts.
-Fibre-product uniqueness identifies the composite with the component map from (1).
-(4) After omitting a factor, the two component maps have identical projections to all
-remaining factors, so fibre-product uniqueness proves their equality. -/
+/-- Products in `Over X` of the pieces of a finite coproduct are iterated fibre products over
+`X`: the canonical isomorphisms go from the coproduct of indexed fibre products to the fibre
+product of the coproduct, compatibly with the coproduct inclusions and every omitted-factor
+projection (Stacks, Tags 01JB and 01JC). -/
 theorem etale_fibre_product_coproduct (X : Scheme.{u}) (I : Type v) [Finite I]
     (U : I → Scheme.{u}) (u : ∀ i : I, U i ⟶ X) :
     let A : I → Over X := fun i => Over.mk (u i)

@@ -11,8 +11,11 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 
 /-! # The explicit ring diagram of an affine base change
-Source: Stacks Project, Tag 09RE, affine calculation, and Tag 01JO.
-(blueprint: def-pc-affine-base-change-ring-diagram). -/
+
+## References
+
+* Stacks Project, Tags 09RE and 01JO
+-/
 
 @[expose] public section
 
@@ -22,9 +25,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- The indexing functor from the order-theoretic tail to the categorical under category.
-Source: Stacks Project, Tag 09RE, affine calculation.
-(blueprint: def-pc-affine-base-change-ring-diagram). -/
+/-- The indexing functor from the order-theoretic tail to the categorical under category
+(Stacks, Tag 09RE). -/
 def affineBaseChangeTail {I : Type u} [Preorder I] (i : I) : Set.Ici i ⥤ Under i where
   obj j := Under.mk (homOfLE j.property)
   map {j k} f := Under.homMk (homOfLE (leOfHom f)) (by subsingleton)
@@ -32,9 +34,8 @@ def affineBaseChangeTail {I : Type u} [Preorder I] (i : I) : Set.Ici i ⥤ Under
 /-- Push out the tail of R along the ring map representing t.hom followed by s.
 Thus its value at j is the categorical realization of Gamma(Y) tensor over R(i) R(j).
 This abbreviates Mathlib's generic Under.post / Under.pushout construction at the
-order-theoretic tail and supplied structural map. No existence witness is used.
-Source: Stacks Project, Tags 09RE and 01JO.
-(blueprint: def-pc-affine-base-change-ring-diagram). -/
+order-theoretic tail and supplied structural map. No existence witness is used
+(Stacks, Tags 09RE and 01JO). -/
 noncomputable def affineBaseChangeRingDiagram {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (i : I) (Y : Scheme.{u})
     (s : Y ⟶ Spec (R.obj i)) (t : Spec (Scheme.Γ.obj (.op Y)) ≅ Y) :
@@ -42,9 +43,8 @@ noncomputable def affineBaseChangeRingDiagram {I : Type u} [Preorder I]
   affineBaseChangeTail i ⋙ Under.post R ⋙ Under.pushout (Spec.preimage (t.hom ≫ s)) ⋙
     Under.forget (Scheme.Γ.obj (.op Y))
 
-/-- The initial structural map from the global-section ring into its base change.
-Source: Stacks Project, Tags 09RE and 01JO.
-(blueprint: def-pc-affine-base-change-ring-diagram). -/
+/-- The initial structural map from the global-section ring into its base change
+(Stacks, Tags 09RE and 01JO). -/
 noncomputable def affineBaseChangeInitialMap {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (i : I) (Y : Scheme.{u})
     (s : Y ⟶ Spec (R.obj i)) (t : Spec (Scheme.Γ.obj (.op Y)) ≅ Y) :

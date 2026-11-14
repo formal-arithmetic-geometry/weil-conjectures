@@ -17,7 +17,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 /-!
 # The Galois action on geometric points of an étale scheme
 
-Source: Stacks Project, Tag 03QR.
+## References
+
+* Stacks Project, Tag 03QR
 -/
 
 @[expose] public section
@@ -106,19 +108,7 @@ private theorem finiteType_embedding_stabilizer_open [IsSepClosure K Ksep]
   intro a _
   exact stabilizer_isOpen_of_isIntegral (K := K) (L := Ksep) (σ a)
 
-/-- The geometric-point action is continuous for the discrete topology.
-Source: Stacks Project, Tag 03QR, first paragraph
-(blueprint: lem-exc-etale-field-geometric-action-continuous).
-
-Proof: Factor a geometric point through an affine open neighborhood Spec R. The map
-Spec R → Spec K is locally of finite type, so R is a finitely generated K-algebra.
-The geometric point corresponds to a K-algebra map R → Ksep. Choose finitely many
-algebra generators. A Galois automorphism fixes this map exactly when it fixes the
-images of all generators. Each such image has open stabilizer in the Krull topology,
-since Ksep/K is algebraic. Thus the map's stabilizer is a finite intersection of open
-sets. The open immersion Spec R → X is a monomorphism, so this is also the stabilizer
-of the original geometric point. An action on a discrete space is continuous exactly
-when every point stabilizer is open. The empty scheme has no points to check. -/
+/-- The geometric-point action is continuous for the discrete topology (Stacks, Tag 03QR). -/
 theorem etaleFieldGeometricAction_continuous [IsSepClosure K Ksep]
     (X : Scheme.Etale (Spec (CommRingCat.of K))) :
     (etaleFieldGeometricAction K Ksep X).IsContinuous := by

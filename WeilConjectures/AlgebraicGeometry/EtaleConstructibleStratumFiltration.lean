@@ -24,13 +24,14 @@ import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 
 /-! # Finite perfect-stratum devissage on the ordinary etale site
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Definition 6.3.1,
-Lemmas 6.3.3 and 6.3.9, pp. 45--47; Stacks Project, Tags 09BI and 095L
-(blueprint: lem-per-etale-constructible-stratum-filtration).
-
 Both the finite triangle tower and its replete triangulated generation formulation
 are stated. The published `immersionLowerShriek` is the exact closed direct image
 followed by exact open extension by zero, applied termwise on derived categories.
+
+## References
+
+* Bhatt–Scholze, Definition 6.3.1, Lemmas 6.3.3 and 6.3.9
+* Stacks Project, Tags 09BI and 095L
 -/
 
 @[expose] public noncomputable section
@@ -43,37 +44,9 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 namespace AlgebraicGeometry.Etale
 
-/-- A bounded constructible finite-Tor complex has a finite constructible
-stratification and a triangle tower with shifted perfect local-system quotients.
-Source: Bhatt--Scholze, Definition 6.3.1 and Lemma 6.3.3, pp. 45--46;
-Stacks Project, Tags 09BI, 095L, 09Y5 and 005L
-(blueprint: lem-per-etale-constructible-stratum-filtration).
-
-Proof:
-1. Choose stratifications making the finitely many possibly nonzero cohomology
-sheaves finite locally constant (via lem-weil-pbc-constructible-etale-module-sheaf-comparison)
-and refine their intersections by the ordered irreducible refinement underlying
-new-det-lem-coefficient-heart-common-stratification-refinement. Realize each stratum
-as the closed complement of its open prefix inside the next prefix. Irreducible images
-give connected strata; Noetherianity makes the locally closed images constructible
-(lem-weil-pbc-noetherian-scheme-closed-subsets-minimal). For empty X take no strata.
-2. Restrict K to each stratum. Exact inverse image commutes with cohomology by
-situation-conventions and
-lem-weil-pbc-exact-functor-complex-cohomology. Image containment gives finite lisse
-cohomology by lemma-constructible-immersion-independence. Pullback preserves the Tor
-interval, as in lem-coef-etale-domain-pullback-calculus.
-3. Apply lem-per-etale-lisse-ctf-perfect-local-model on every connected stratum.
-This gives the etale local bounded finite-projective coefficient models; it does
-not assert that the individual cohomology modules are projective.
-4. Apply the unbounded open-closed triangle lem-fin-module-open-closed-triangle inside
-each prefix open, then apply exact open extension by zero to X; exact derived functors
-preserve distinguished triangles by situation-conventions.
-The vertices are identified by lem-weil-pbc-inverse-image-composition and uniqueness of
-left adjoints for lem-weil-pbc-extension-by-zero-adjunction.
-5. The empty open gives the zero object; the total open gives K since the counit of
-extension by zero along an isomorphism is an isomorphism. These triangles form the
-tower. The quotients in this construction have shift zero, which is an allowed shift.
--/
+/-- A bounded constructible finite-Tor complex has a finite constructible stratification and a
+triangle tower with shifted perfect local-system quotients (Bhatt--Scholze, Definition 6.3.1 and
+Lemma 6.3.3; Stacks, Tags 09BI, 095L, 09Y5 and 005L). -/
 theorem exists_etaleConstructibleStratumFiltration
     (A : Type (u + 1)) [CommRing A] [Finite A] (X : Scheme.{u})
     [IsLocallyNoetherian X] [CompactSpace X] (K : DerivedCategoryModule A X)

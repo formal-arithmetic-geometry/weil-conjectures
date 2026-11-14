@@ -13,8 +13,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Naturality of derived tensor under exact open restriction
-Source: Stacks Project, Tag 079U, specialized to an open immersion.
-(blueprint: lem-sc-derived-restriction-tensor-naturality).
+
+## References
+
+* Stacks Project, Tag 079U
 -/
 
 @[expose] public section
@@ -34,21 +36,7 @@ set_option synthInstance.maxSize 2048
 set_option maxHeartbeats 600000 in
 -- Transporting the monoidal model unfolds the exact-functor localization data.
 /-- The objectwise tensor comparisons can be chosen bifunctorially.
-Source: Stacks Project, Tag 079U (proof), and Tag 08DX (1).
-(blueprint: lem-sc-derived-restriction-tensor-naturality).
-
-Proof: identify module tensor pullback along U.ι with exact over-site restriction
-followed by the canonical over equivalence. The usual pullback and restriction
-adjunctions give the first identification, and Modules.overFunctorEquiv gives the
-second. Exactness of restriction transports to module tensor pullback. Exactness
-exhibits its mapDerivedCategory as its left derived functor with the localization
-factorization as counit. Uniqueness of left derived functors identifies the recorded
-derivedPullback U.ι with this exact derived functor; derive the module identification
-to obtain a natural isomorphism to R. Take the already stated canonical monoidal
-model of derived pullback and transport its monoidal structure through that natural
-isomorphism. Its inverse tensorators are the required t, and oplax tensorator
-naturality is exactly the displayed equation. All constructions apply to the empty
-open and arbitrary unbounded objects. -/
+(Stacks, Tags 079U and 08DX) -/
 theorem exists_derivedRestriction_tensor_natural
     (X : Scheme.{uX}) (U : X.Opens)
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

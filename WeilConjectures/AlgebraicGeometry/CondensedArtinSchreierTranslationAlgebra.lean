@@ -68,17 +68,7 @@ private theorem translation_eq (a : k) :
 
 -- Explicit monoidal module comparisons need additional elaboration heartbeats.
 /-- The actual deck translation defining the character projector preserves multiplication
-and constant functions in the algebra of the Artin–Schreier pushforward.
-
-Source: latest blueprint `prop-kernel-lisse.proof.md`, multiplication of eigensections
-(blueprint: lem-kernel-condensed-translation-algebra).
-
-Proof. The translation map is pushforward of the lax monoidal unit for translation,
-followed by the pushforward composition comparison and equality transport. These comparisons
-are monoidal. The lax unit is a monoid homomorphism. Apply pushforward and the monoidal
-comparison's tensor equation to obtain multiplicativity. Its unit equation gives invariance
-of the constant-function map. This argument applies to arbitrary coefficients and needs
-no invertibility or nontrivial-character hypothesis. -/
+and constant functions in the algebra of the Artin–Schreier pushforward. -/
 theorem condensedArtinSchreierTranslation_algebra (a : k) :
     (μ G R R ≫ (CondensedRing.lowerStar Λ q).map
       (Mod.regularMul (condensedRingObj Λ A))) ≫

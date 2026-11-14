@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.SchemeDerivedHomGluing
 
 /-! # Gluing derived complexes and compatible morphisms on two opens
 
-Source: literature/stacks-project/cohomology.tex, Tag 08DG (Lemma 20.45.1)
-(blueprint: lem-sc-derived-open-gluing).
+## References
+
+* Stacks Project, Tag 08DG
 -/
 
 @[expose] public section
@@ -53,28 +54,8 @@ set_option synthInstance.maxHeartbeats 400000 in
 set_option maxHeartbeats 500000 in
 -- Elaborating the restriction functors and their comparison isomorphisms needs this budget.
 /-- Derived complexes and compatible morphisms glue across a two-open cover of a scheme.
-D(O_X), D(O_U), D(O_V), D(O_(U ∩ V)) are `schemeDerivedCategory` of `X`, `U.toScheme`,
-`V.toScheme`, `(U ⊓ V).toScheme`. Restriction from X to an open W is restriction to the
-localized site followed by the canonical equivalence `Scheme.Modules.overEquiv W` with the
-open subscheme's site; restriction from U (or V) to U ∩ V transports back along
-`overEquiv U`, restricts along `U ⊓ V ⟶ U` and transports along `overEquiv (U ⊓ V)`.
-The transition and compatibility equations use the canonical comparison of the iterated
-restriction X → U → U ∩ V with the direct one (unit of `overEquiv U` and
-`SheafOfModules.overFunctorMap`).
-Source: Stacks Project, Cohomology, Tag 08DG (Lemma 20.45.1)
-(blueprint: lem-sc-derived-open-gluing).
-Proof:
-1. Form the difference map from `Rj_U A ⊕ Rj_V B` to `Rj_W (B|W)`, using `c` on
-   the U component, where `W = U ∩ V`. Complete it to a distinguished triangle with
-   first term `F` (`def-weil-abstract-derived-category`).
-2. Restrict to U using `lem-pc-restrict-derived-direct-image-open` (Tag 08FE), with
-   the three open immersions j_U, j_V and j_W. The second arrow has an identity
-   component and a section, so the split-cone calculation identifies `F|U` with A.
-   Similarly `F|V` is B, and the two identifications induce exactly c on W.
-3. Compose these identifications with a and b. Their restrictions agree on W by
-   the transition equation and the assumed compatibility of a, b and c.
-4. Apply `lem-sc-derived-hom-mayer-vietoris` to F and E to lift this compatible
-   pair to a global morphism. Its two restrictions are the prescribed composites. -/
+The derived categories are `schemeDerivedCategory` of `X`, `U.toScheme`, `V.toScheme` and
+`(U ⊓ V).toScheme` (Stacks, Tag 08DG). -/
 theorem derived_open_gluing
     (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

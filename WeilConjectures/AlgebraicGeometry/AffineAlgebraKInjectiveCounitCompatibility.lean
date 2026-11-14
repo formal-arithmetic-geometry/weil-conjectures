@@ -17,9 +17,8 @@ namespace AlgebraicGeometry
 
 /-- The canonical homology comparison obtained as the adjoint mate of the homology
 of the termwise counit, after the exact left-adjoint comparison. This is a real
-construction, independent of any existence theorem for a cohomology isomorphism.
-Source: Stacks Project, Tag 0AVW, the affine counit calculation.
-(blueprint: def-sc-affine-algebra-counit-homology-comparison). -/
+construction, independent of any existence theorem for a cohomology isomorphism (Stacks, Tag 0AVW).
+-/
 noncomputable def affineAlgebraCounitHomologyComparison
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     (P : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)) ⥤
@@ -37,16 +36,8 @@ noncomputable def affineAlgebraCounitHomologyComparison
         (toDirectImageAlgebraSpace f)).mapHomologicalComplex (.up ℤ)).obj I) ≫
       HomologicalComplex.homologyMap ((a.mapHomologicalComplex (.up ℤ)).counit.app I) n)
 
-/-- The homology of the termwise counit factors through its canonical adjoint mate.
-Source: Stacks Project, Tag 0AVW, homology of the affine counit.
-(blueprint: new-affine-algebra-kinjective-counit-compatibility).
-
-Proof: Apply the inverse adjunction bijection to the defining mate. The counit
-formula gives P.map of the comparison followed by the ordinary counit. Cancel
-the inverse exact-functor homology comparison by its forward isomorphism.
-The canonical comparison is essential: even for
-the identity morphism, replacing the canonical comparison by minus itself on
-nonzero cohomology changes the right side but not the counit. -/
+/-- The homology of the termwise counit factors through its canonical adjoint mate
+(Stacks, Tag 0AVW). -/
 theorem affine_algebra_kinjective_counit_compatibility
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     (P : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)) ⥤

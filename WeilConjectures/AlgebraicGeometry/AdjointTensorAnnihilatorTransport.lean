@@ -19,8 +19,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additi
 
 /-! # Transporting a tensor annihilator across a direct-image adjunction
 
-Source: Stacks Project, Tag 0E4G, projection-formula paragraph.
-(blueprint: lem-sc-adjoint-tensor-annihilator-transport).
+## References
+
+* Stacks Project, Tag 0E4G
 -/
 
 @[expose] public section
@@ -32,24 +33,7 @@ open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry
 
 /-- A perfect tensor annihilator for the adjoint of beta gives a precomposition killing
-beta which becomes invertible over the inverse image open.
-Source: Stacks Project, Tag 0E4G, projection-formula paragraph.
-(blueprint: lem-sc-adjoint-tensor-annihilator-transport).
-
-Proof: Set R = Lf*I tensor P and j = (Lf*i tensor id) followed by the tensor unit
-isomorphism. Derived pullback and tensor preserve quasi-coherent cohomology, so R is
-an object of D_QCoh(X). The projection formula identifies Rf*R with I tensor Rf*P, compatibly
-with their maps to Rf*P: this is naturality of the projection formula in I applied to
-i : I -> O_Y and its unit compatibility. Transport this square through hF. Naturality
-of the adjunction Hom equivalence in its source identifies the adjoint of j followed
-by beta with i tensor id followed by the left unitor and the adjoint of beta. The
-latter is zero by hypothesis; the adjunction is additive, so j followed by beta is zero.
-On U = f^-1(V), restriction of Lf*i is the derived pullback of the restriction of i.
-It is invertible since restriction of i to V is invertible. Tensoring and applying the
-unit isomorphism preserve invertibility, giving the asserted property of j. The domain
-R is used only existentially in this theorem, not to define any chosen data. The proof
-works for zero P or beta and for the empty open; it assumes neither support of Q nor
-nonvanishing of beta. -/
+beta which becomes invertible over the inverse image open (Stacks, Tag 0E4G). -/
 theorem adjoint_tensor_annihilator_transport
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsProper f] [Flat f] [LocallyOfFinitePresentation f]

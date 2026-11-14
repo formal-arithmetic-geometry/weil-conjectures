@@ -32,8 +32,7 @@ attribute [local instance high] SymmetricCategory.toBraidedCategory
 attribute [local instance 20000] Etale.sheafBraidedCategory
 
 /-- The Cartesian compact-adjunction square, at generic coefficients, for arbitrary right
-adjoints `G`, `G'` of `Rf_!`, `Rf'_!` (for a finite ring `Λ`: `Rf^!`, `Rf'^!`).
-(auxiliary; not a blueprint node). -/
+adjoints `G`, `G'` of `Rf_!`, `Rf'_!` (for a finite ring `Λ`: `Rf^!`, `Rf'^!`). -/
 def compactInternalAdjunctionExchangeSquare
     (A : Type uA) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -72,8 +71,7 @@ def compactInternalAdjunctionExchangeSquare
         ((((derivedHomLowerShriekIsoOfAdjunction A f' adj').app
           (op ((L(upperStar A g')).obj N))).app ((L(upperStar A g)).obj Q)).hom)
 
-/-- Expand the canonical compact-adjunction square through its equality API.
-(auxiliary; not a blueprint node). -/
+/-- Expand the canonical compact-adjunction square through its equality API. -/
 theorem compactInternalAdjunctionExchangeSquare_iff
     (A : Type uA) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -222,22 +220,7 @@ private theorem compact_exchange_projection
 
 end MateCalculation
 
-/-- Internal compact adjunction commutes with Cartesian exchange.
-Source: blueprint lem-asd-smooth-generic-direct-image.proof.md, final paragraph;
-compact projection/exchange compatibility (auxiliary; not a blueprint node).
-
-Proof: Write the compact-adjunction isomorphism as the conjugate of the compact
-projection map through the ordinary, tensor--Hom and exceptional adjunctions. The
-canonical compact projection/exchange square is projectionMap_rightDerivedLowerShriekBaseChangeMap.
-Cancel its invertible compact exchange, tensor comparisons and inverse-image square
-comparison to express it as equality of squares between the composite left adjoints.
-Take mates of this equality. Compatibility of mates with horizontal and vertical
-composition identifies the ordinary component with derivedBaseChangeMap, the tensor
-components with derivedHomUpperStarComparison and precomposition by inverse compact
-exchange, and the exceptional component with rightDerivedUpperShriekBaseChangeMap.
-Conjugation of the two projection components gives exactly the displayed compact
-adjunction isomorphisms. Evaluate at Q. No finiteness or dualizability of N or Q is
-used, and empty schemes and zero complexes satisfy the same adjunction identities. -/
+/-- Internal compact adjunction commutes with Cartesian exchange. -/
 theorem compactInternalAdjunctionExchange
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X S X' S' : Scheme.{u}} {f : X ⟶ S} {f' : X' ⟶ S'}

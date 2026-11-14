@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineBasisSectionsResolutionHomologyEp
 
 /-! # Unbounded section comparison from affine-basis acyclicity
 
-Source: Stacks Project, Tag 08C2, singleton-cover case on an affine open.
-(blueprint: lem-sc-affine-basis-sections-derived-unit).
+## References
+
+* Stacks Project, Tag 08C2
 -/
 
 @[expose] public section
@@ -25,27 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The three affine-basis acyclicity conditions make the ordinary-to-derived
-section comparison invertible for an unbounded complex. No quasi-coherence is assumed.
-Source: Stacks Project, Tag 08C2, conditions (3)(a), (3)(b), (3)(c).
-(blueprint: lem-sc-affine-basis-sections-derived-unit).
-
-Proof: Restrict the complex to V. Affine opens W contained in V form a basis,
-and include V itself, so use the singleton covering of V by V in 08C2.
-The hypotheses give positive cohomology vanishing for the terms, differential
-cokernels and cohomology sheaves on every basis member. For a bounded-below
-complex, the acyclic Cech comparison computes derived sections. For an unbounded
-complex use the good truncations in degrees at least -m: cokernel vanishing
-makes each truncation satisfy the bounded-below hypothesis. Cohomology-sheaf
-vanishing provides the compatible K-injective resolution tower of Tag 071B.
-In each fixed degree the section cohomology of the singleton Cech complexes
-stabilizes. The Mittag-Leffler calculation identifies the cohomology of the
-inverse-limit section complex with that value. The comparison is the canonical
-ordinary-to-derived map, hence the displayed derived unit. Finally, restriction
-of a K-injective complex to V remains K-injective (08BS), identifying derived
-sections after restriction with the derived functor of evaluation on X. The
-module comparison is detected after forgetting scalars to abelian groups;
-injective module sheaves are flasque and hence section-acyclic as abelian sheaves.
-Empty V has zero section complexes, so its comparison is invertible as well. -/
+section comparison invertible for an unbounded complex. No quasi-coherence is assumed
+(Stacks, Tag 08C2). -/
 theorem affineBasisSections_isIso_derivedUnit
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     (F : CochainComplex X.Modules ℤ)

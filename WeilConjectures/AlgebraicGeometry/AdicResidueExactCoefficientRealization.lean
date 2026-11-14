@@ -11,9 +11,9 @@ import WeilConjectures.CategoryTheory.RingedDerivedRestrictionGeneral
 
 /-! # Exact realization of the coefficient ring and its finite quotients
 
-Source: Stacks Project, proetale.tex, lemma-naive-completion (099M), and
-Modules on Sites, Tags 03CY and 03EK.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 099M, 03CY and 03EK
 -/
 
 @[expose] public noncomputable section
@@ -314,31 +314,8 @@ private theorem quotientMap_isIso
 end Realization
 
 /-- Exact coefficient realization, with the regular-module and quotient normalizations.
-This statement contains no Koszul complexes, exterior powers, cones or derived categories.
-
-Source: Stacks Project, proetale.tex, proof of lemma-naive-completion (099M);
-Modules on Sites, Tags 03CY and 03EK.
-(auxiliary; not a blueprint node).
-
-Proof: write T for the coefficient model topology and phi for the completed
-coefficient map. Take E to be commutativeSiteConstantModuleFunctor T A, then
-ordinary extension of scalars along phi, then overFunctor at U. Constant module
-realization is exact. By flat_and_quotients, the completed regular module is flat
-over the constant ring, so extension of scalars is exact. Slice restriction is
-exact as well. The regular-module isomorphism c is inverse to multiplication, which sends
-a local tensor s tensor a to s phi(a). Multiplication commutes with
-the scalar endomorphism x, giving the first displayed identity. For the quotient,
-the same multiplication map sends s tensor [a] to pi_n(s) [a]. The kernel
-calculation in flat_and_quotients says exactly that this map is an isomorphism:
-both sides are the cokernel of the ideal J^(n+1) acting on the regular completed
-module. Before extension, exact constant sheafification identifies the same
-cokernel with the constant quotient module. Restrict these identifications to U.
-The image of 1 tensor [a] is [a], so the resulting isomorphism q has the displayed
-projection normalization. All maps descend from balanced tensor maps and hence
-are natural under restrictions; sheafification preserves their inverse equations.
-For the zero ring or J=A both quotient sides vanish. For J=0 multiplication is
-the usual constant-module comparison. Empty sites and empty slices are covered
-by the same sheafification and cokernel universal properties. -/
+This statement contains no Koszul complexes, exterior powers, cones or derived categories
+(Stacks, Tags 099M, 03CY and 03EK). -/
 theorem adicResidue_exact_coefficient_realization
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X) :

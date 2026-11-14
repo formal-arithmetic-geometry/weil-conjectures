@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AffineSpectrumCanonicalComparisonSquare
 
 /-! # Affine spectrum transport before the coefficient morphism
 
-Source: Stacks Project, Tags 0DJ8, 0098 and 0D5S.
-(blueprint: lem-pc-affine-spectrum-comparison-source-transport).
+## References
+
+* Stacks Project, Tags 0DJ8, 0098 and 0D5S
 -/
 
 @[expose] public section
@@ -78,27 +79,7 @@ set_option linter.unusedVariables false in
 set_option maxHeartbeats 1600000 in
 -- Elaborating the stalk tensor-model instances and their scalar extensions needs this budget.
 /-- Transport the localized tensor comparison into derived pullback, independently
-of any coefficient morphism or target representative.
-
-Proof: use isoPullbackStalkCohomologyIso along X'.isoSpec.inv for T.
-This is a concrete natural isomorphism obtained from restriction-stalks,
-exact homology factors and the invertible universal pullback counit.
-Apply exists_affineSpectrum_canonicalComparison_square to P and Q with the
-canonical isomorphism d from the spectrum pullback counit. For arbitrary e
-and e0, put a = e0 followed by pullback of e inverse followed by d inverse.
-This is an automorphism of the derived object represented by Q. The theorem
-exists_comparisonSourceIso lifts a to a tensor-algebra source automorphism;
-comparisonIntoPullback_naturality gives its commuting square. Extend scalars
-and forget to obtain b on the additive source. Set l = l0 followed by b inverse.
-The identity a;d;J(e)=e0 and cancellation of b first replace the canonical
-target identification by e0. Naturality of T and of the specified inverse
-composition comparison then give the displayed equation with e. The private
-transport_representatives lemma proves this categorical diagram calculation.
-No localized comparison is required to be invertible. Empty schemes, zero
-complexes and rings, arbitrary degrees and unbounded complexes are covered.
-Source: Stacks Project, Tag 0DJ8, equation-bc and affine reduction;
-Tag 0098, lemma-stalk-pullback; Tag 0D5S, lemma-pullback-composition.
-(blueprint: lem-pc-affine-spectrum-comparison-source-transport). -/
+of any coefficient morphism or target representative. -/
 theorem exists_affineSpectrum_comparisonIntoPullback_transport
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -11,7 +11,7 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 /-!
 # Bounded constructible objects with discrete coefficients on the small site models
 
-Stacks Project, Tags 09AJ and 09AL (blueprint: sk-def-sfb-bounded-constructible).
+Stacks Project, Tags 09AJ and 09AL.
 
 The existing general ring-object definition and its weak Serre triangulatedness statement
 remain publicly available. This supplies their discrete constant-ring module presentation
@@ -32,10 +32,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- On a qcqs scheme, the discrete-coefficient presentation of `Dbc`: bounded cohomology and
 the recorded
-finite constant local models on every affine open. This is a predicate on the ordinary
-standard derived localization, without any completeness condition.
-Source: blueprint definition-constructible-sheaves and theorem-comparison-constructible-sheaves;
-Stacks Tags 09AJ and 09AL (blueprint: sk-def-sfb-bounded-constructible). -/
+finite constant local models on every affine open (Stacks, Tags 09AJ and 09AL). -/
 def coefficientBoundedConstructibleProEtale (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] :

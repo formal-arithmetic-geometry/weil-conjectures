@@ -15,8 +15,9 @@ import Mathlib.CategoryTheory.Adjunction.Whiskering
 /-!
 # Degreewise exactness of injective section complexes
 
-Source: Stacks Project, Tag 0A50, proof.
-(blueprint: lem-weil-pbc-etale-mayer-vietoris-injective-sections-exact).
+## References
+
+* Stacks Project, Tag 0A50
 -/
 
 @[expose] public section
@@ -189,32 +190,7 @@ private noncomputable def degreeIso {X : Scheme.{u}} (U V : X.Opens)
     rw [biprod.mapBiprod_hom_desc]
 
 /-- The section short complex of an open cover is short exact in an injective degree.
-Source: Stacks Project, Tag 0A50, proof.
-(blueprint: lem-weil-pbc-etale-mayer-vietoris-injective-sections-exact)
-
-Proof: Evaluate the short complex in degree q. Its objects are I^q(X), the biproduct
-of I^q(U) and I^q(V), and I^q(U intersection V). Construct the square of the etale
-objects given by the two opens and their intersection. The intersection is their
-pullback, and the two inclusion maps form a covering by the cover hypothesis.
-For any abelian sheaf, forgetting to sets preserves its sheaf condition. Amalgamation
-of the two sections on this covering makes the square of sections a pullback.
-Its associated kernel fork therefore proves injectivity of the restriction pair
-and exactness at the middle term.
-
-For any monomorphism A to B of etale objects, lift Yoneda to the coefficient universe
-and take the free abelian sheaf. This functor preserves the monomorphism. Maps from
-these free sheaves to I^q correspond to sections on A and B by the sheafification,
-free-forgetful and lifted Yoneda adjunctions. Injectivity extends a map out of the free
-sheaf of A to the free sheaf of B. Naturality of those equivalences shows that this
-extension is a section restricting to the prescribed section on A. Apply this to
-the inclusion of the intersection into U. Surjectivity of this restriction makes
-the difference from the biproduct surjective by taking the second component zero.
-
-Finally evaluation of a complex preserves its biproduct. The canonical mapBiprod
-isomorphism identifies evaluation of the section short complex with the just proved
-short exact group sequence, including both arrows. Transport short exactness across
-this isomorphism. Empty opens give zero section groups and both opens equal to X
-give the split diagonal/difference sequence. -/
+(Stacks, Tag 0A50) -/
 theorem etaleSectionShortComplex_degreewise_shortExact
     {X : Scheme.{u}} (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     (I : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ)

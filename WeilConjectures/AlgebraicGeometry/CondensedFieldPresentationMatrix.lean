@@ -11,8 +11,9 @@ public import Mathlib.LinearAlgebra.Matrix.Rank
 /-!
 # Matrices of continuous functions for condensed field presentations
 
-Source: Hemo--Richarz--Scholbach, Example 3.1; the rank/descent argument of
-(auxiliary; not a blueprint node).
+## References
+
+* Hemo--Richarz--Scholbach, Example 3.1
 -/
 
 @[expose] public section
@@ -43,11 +44,8 @@ noncomputable def condensedFieldContinuousCoefficientMap
       condensedFieldContinuousCoefficientObj E V) : C(V, E) :=
   ((g.hom.app (op (Scheme.ProEt.mk (𝟙 V)))) (ULift.up 1)).down
 
-/-- The continuous-function matrix of a finite free morphism and a coefficient realization.
-Source: Hemo--Richarz--Scholbach, Example 3.1, and the presentation-matrix step of
-(auxiliary; not a blueprint node).
-Each entry is the image of the unit under the corresponding regular-module endomorphism,
-conjugated by the supplied ring-object isomorphism. -/
+/-- The continuous-function matrix of a finite free morphism and a coefficient realization
+(Hemo--Richarz--Scholbach, Example 3.1). -/
 noncomputable def continuousFieldPresentationMatrix
     (E : Type u) [NormedField E] (V : Scheme.{u})
     {R : Sheaf (Scheme.ProEt.topology V) AddCommGrpCat.{u + 1}} [MonObj R]
@@ -58,10 +56,8 @@ noncomputable def continuousFieldPresentationMatrix
     biproduct.π (fun _ : Fin n ↦ Mod.regular R) i
   condensedFieldContinuousCoefficientMap E V (inv e ≫ a.hom ≫ e)
 
-/-- The explicit composite uniquely determines the pullback realization.
-Source: Hemo--Richarz--Scholbach, Example 3.1
-(auxiliary; not a blueprint node).
-Proof: the displayed composite is a witness, and the defining equality proves uniqueness. -/
+/-- The explicit composite uniquely determines the pullback realization
+(Hemo--Richarz--Scholbach, Example 3.1). -/
 theorem existsUnique_condensedFieldPullbackRealization
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     {X V : Scheme.{u}} (g : V ⟶ X) :
@@ -73,10 +69,8 @@ theorem existsUnique_condensedFieldPullbackRealization
   exact ⟨_, rfl, fun _ h ↦ h⟩
 
 
-/-- The realization of coefficients pulled back along an arbitrary scheme map.
-Source: Hemo--Richarz--Scholbach, Example 3.1
-(auxiliary; not a blueprint node).
-Compose the monoidal coefficient pullback comparison with the canonical realization. -/
+/-- The realization of coefficients pulled back along an arbitrary scheme map
+(Hemo--Richarz--Scholbach, Example 3.1). -/
 noncomputable def condensedFieldPullbackRealization
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     {X V : Scheme.{u}} (g : V ⟶ X) :
@@ -86,11 +80,8 @@ noncomputable def condensedFieldPullbackRealization
   condensedPullbackHom (condensedFieldCoefficientRingObj E) g ≫
     (condensedFieldContinuousMapIso E V).hom.hom
 
-/-- The pullback realization equals its explicit defining composite.
-Source: Hemo--Richarz--Scholbach, Example 3.1
-(auxiliary; not a blueprint node).
-Proof: the chosen morphism satisfies its uniquely determining equality. This equation
-allows controlled rewriting without reducing the inverse-image construction at evaluation. -/
+/-- The pullback realization equals its explicit defining composite
+(Hemo--Richarz--Scholbach, Example 3.1). -/
 theorem condensedFieldPullbackRealization_eq
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     {X V : Scheme.{u}} (g : V ⟶ X) :

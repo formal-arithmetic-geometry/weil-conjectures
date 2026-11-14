@@ -14,9 +14,9 @@ import WeilConjectures.AlgebraicGeometry.RestrictedCohomologyColimit
 /-!
 # Representatives of restricted cohomology classes from a supplied filtered colimit
 
-Source: Stacks Project, Tag 03Q5 (lemma-colimit-cohomology), with the colimit
-preservation and module compatibility used in the proof of Tag 03SA(3).
-(blueprint: lem-weil-pbc-constructible-restriction-class-core).
+## References
+
+* Stacks Project, Tags 03Q5 and 03SA
 -/
 
 @[expose] public section
@@ -28,16 +28,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- A class in the restriction of a supplied filtered colimit of module sheaves is
-represented at one of its stages. The diagram objects need not be constructible.
-Source: Stacks Project, Tag 03Q5 (lemma-colimit-cohomology); used after Tag 03SA(3).
-(blueprint: lem-weil-pbc-constructible-restriction-class-core)
-
-Proof: `restrictedCohomology_isColimit` establishes the colimit universal property
-of the canonical cocone of restricted underlying abelian cohomology groups.
-The forgetful functor from abelian groups to types preserves filtered colimits,
-so `Concrete.isColimit_exists_rep` supplies a stage and a class mapping to c.
-The image cocone's leg is definitionally the displayed `Sheaf.H.map`.
-Filteredness supplies nonemptiness, including for zero classes and empty X₀. -/
+represented at one of its stages. The diagram objects need not be constructible
+(Stacks, Tags 03Q5 and 03SA). -/
 theorem exists_restriction_class_of_filtered_presentation
     {X X₀ : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace X₀] [QuasiSeparatedSpace X₀] (i : X₀ ⟶ X)

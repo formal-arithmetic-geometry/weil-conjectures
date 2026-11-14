@@ -14,20 +14,20 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 
-/-! Generic coherent ideal lattices. Source: Stacks Project, Tag 01YE. -/
+/-! Generic coherent ideal lattices.
+
+## References
+
+* Stacks Project, Tag 01YE
+-/
 
 @[expose] public section
 universe w
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Finite coproducts of a coherent ideal module remain coherent on a Noetherian scheme.
-
-Source: Stacks Project, Tag 01YE, the finite-sum coherence assertion. A coherent ideal is
-quasi-coherent and of finite type on a locally Noetherian scheme. Finite coproducts preserve
-quasi-coherence and finite type, hence are coherent by the local Noetherian criterion.
-(blueprint: lem-weil-pbc-coherent-integral-generic-ideal-sigma-coherent)
--/
+/-- Finite coproducts of a coherent ideal module remain coherent on a Noetherian scheme
+(Stacks, Tag 01YE). -/
 theorem coherent_sigma_of_coherent_ideal (Z : Scheme.{w}) [IsNoetherian Z]
     (r : ℕ) (I : Z.IdealSheafData)
     (hI : RingedSpace.IsCoherent Z.toRingedSpace I.toModules) :

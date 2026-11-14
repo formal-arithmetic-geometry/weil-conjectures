@@ -14,8 +14,9 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 /-!
 # Eventual covering for a finite affine étale family
 
-Source: Stacks Project, Étale Cohomology 0EYL and Limits 01ZM.
-(blueprint: lem-weil-pbc-affine-etale-covering-eventually).
+## References
+
+* Stacks Project, Tags 0EYL and 01ZM
 -/
 
 @[expose] public section
@@ -93,27 +94,8 @@ private theorem constructible_baseChange_eventually
     rw [Scheme.Hom.comp_apply] at heq
     exact heq ▸ hx
 
-/-- Source: Stacks Project, Étale Cohomology 0EYL, qcqs case; Limits 07RR,
-05F4, and 01YZ; Morphisms 054K.
-
-Proof:
-1. Let E be the finite union of the images of the stage arrows fi. Every fi is étale
-   between affine schemes, hence finitely presented. Chevalley's theorem makes E
-   constructible, also for n = 0 when E is empty.
-2. The q-pullback isomorphism for Ai and naturality of q show that the covering of
-   v_i(Ai) forces the canonical limit pullback projection to have image in E.
-3. Restrict the canonical base-change diagram of Ai to the directed upper tail.
-   Its stages are qcqs, its transitions affine, and its limit the pullback to c.pt.
-   Pull E back to the initial stage and apply the limit-contained-in-constructible
-   theorem. The cone and transition projection identities yield a later j whose
-   canonical projection to Ai has image in E.
-4. Transfer this containment along the p-pullback isomorphism for Ai. For a point
-   of U_ij(Ai), choose a stage arrow fi whose image contains its p-projection.
-   The source and target p-squares and naturality make the arrow square a pullback
-   by pullback cancellation. The point-lifting theorem for scheme pullbacks gives
-   a point in U_ij(Bi) mapping to the chosen point. Thus the U-image family covers.
-   For n = 0 the resulting containment in E = empty forces the target empty.
-(blueprint: lem-weil-pbc-affine-etale-covering-eventually). -/
+/-- Coverings of the limit by affine étale objects descend to coverings at a finite stage of a
+qcqs inverse system (Stacks, Tags 0EYL, 07RR, 05F4, 01YZ and 054K). -/
 theorem affineEtale_covering_eventually
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

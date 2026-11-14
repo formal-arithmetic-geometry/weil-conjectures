@@ -18,8 +18,9 @@ Let `Ks` be a separable closure of a field `K`. The étale cohomology of an abel
 discrete topological `Gal(Ks/K)`-module identified equivariantly with the stalk of `F` at the
 Galois point `AlgebraicGeometry.Scheme.galoisPoint K Ks`.
 
-Source: Stacks Project, Tags 04JQ, 03QU and Section 0DVG.
-(blueprint: lem-sc-etale-stalk-continuous-cohomology).
+## References
+
+* Stacks Project, Tags 04JQ, 03QU and 0DVG
 -/
 
 @[expose] public section
@@ -37,15 +38,8 @@ variable (K Ks : Type u) [Field K] [Field Ks] [Algebra K Ks] [IsSepClosed Ks]
 cohomology of its stalk at the Galois point: given an additive equivalence `c` from the stalk
 of `F` at `galoisPoint K Ks` to a discrete topological `Gal(Ks/K)`-module `M`, intertwining the
 Galois action on the stalk (`galoisPointAct`) with the action on `M`, this is the induced
-additive equivalence `Hⁿ(Spec K_ét, F) ≃+ Hⁿ_cont(Gal(Ks/K), M)`.
-
-It is the composite of the comparison `Hⁿ(Spec K_ét, F) ≃+ Extⁿ(ℤ, F_{Ks})` in discrete
-modules (`AlgebraicGeometry.Scheme.sheafHAddEquivGaloisH`) with the computation of `Ext` from
-`ℤ` by continuous cochains (`DiscreteModule.hAddEquivContinuousCohomology`), transported
-along `c`.
-
-Source: Stacks Project, Tags 04JQ and 03QU; Section 0DVG.
-(blueprint: lem-sc-etale-stalk-continuous-cohomology). -/
+additive equivalence `Hⁿ(Spec K_ét, F) ≃+ Hⁿ_cont(Gal(Ks/K), M)`
+(Stacks, Tags 04JQ, 03QU, 0DVG). -/
 noncomputable def sheafHAddEquivContinuousCohomology
     (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})
     (M : TopRep.{u} ℤ Gal(Ks/K)) [DiscreteTopology M.V]

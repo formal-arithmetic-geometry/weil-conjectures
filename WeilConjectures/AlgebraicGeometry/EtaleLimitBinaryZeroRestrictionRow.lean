@@ -16,7 +16,9 @@ import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # Native restricted cohomology rows
 
-Source: Stacks Project, Tags 09YQ and 0A50.
+## References
+
+* Stacks Project, Tags 09YQ and 0A50
 -/
 
 @[expose] public section
@@ -40,32 +42,7 @@ private theorem biprod_prod_snd (A B : AddCommGrpCat.{u + 1}) :
 set_option linter.unusedVariables false in
 -- The dependent scheme and sheaf identifications exhaust the default elaboration budget.
 set_option backward.isDefEq.respectTransparency false in
-/-- The degree-zero restriction row on a cofinal tail.
-
-Source: Stacks Project, Tag 09YQ, coherent-system construction, and Tag 0A50,
-initial injectivity and naturality of restriction.
-(blueprint: lem-weil-pbc-etale-limit-binary-zero-restriction-row).
-
-Proof: Take J to be the directed tail above i₀ and t its final inclusion. Transfer
-U and V to opens of D(i₀) along e and pull these opens back at every stage of J.
-Their union is the whole stage: e lands in U ∪ V. At the limit their inverse images
-are precisely WU and WV. Restrict the coefficient system using upperStarComp;
-the supplied identity and composition equations give the restricted coherence.
-Inverse image is a left adjoint, so the restrictions of L are sheaf colimits.
-The restricted scheme cones are limits by isLimitOpensCone. Their transitions
-and projections are affine. Compactness pulls back along affine maps, and open
-subschemes of quasi-separated stages are quasi-separated. Thus each restricted
-system meets the system certificate constructor, with initial stage isomorphic
-to U.toScheme or V.toScheme. Apply the canonical cohomology diagram construction
-in degree zero to each restricted system. Define K₄ as their product diagram and
-r as the pair of actual restrictions, conjugated by eH. Pullback and coefficient
-naturality prove r natural. Initial Mayer--Vietoris injectivity proves every r.app j
-injective. Finite-product preservation for filtered colimits identifies its colimit
-with the product of the two restricted colimits. Assemble their system certificates
-using prod, then transport by that identification using iso and comp, obtaining v₄.
-The canonical cocone equations and hB prove the stated equality on every stage leg.
-This constructs only the restriction row; no left zero terms or colimit square is
-asserted. Empty and coincident opens still cover, so injectivity remains valid. -/
+/-- The degree-zero restriction row on a cofinal tail (Stacks, Tags 09YQ and 0A50). -/
 theorem etale_limit_binary_zero_restriction_row
     (X : Scheme.{u}) (U V : X.Opens)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))

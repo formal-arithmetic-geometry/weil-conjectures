@@ -249,19 +249,7 @@ noncomputable def nerveFactorProjection (k : ℕ) (y : Fin (k + 1) → Fin n)
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Compatible presentations of a base and its covering members present every
-nonempty repeated intersection.
-Source: Stacks Project, Tag 099U, the finite Čech limit reduction, and the
-universal property of a wide pullback.
-(auxiliary; not a blueprint node).
-
-Proof: Postcompose any test cone with the base and factor projections. Their
-limit properties give a map to the original base and a map to each original
-factor. Compatibility follows after composing with every base projection, where
-it is precisely the cone equation. The wide-pullback universal property combines
-these maps into a map to the original nerve term. Its composites with all stage
-projections agree with the test cone because their base and factor projections
-agree. The same projection argument proves uniqueness. Every transition and
-face equation follows by projecting to the base and to each repeated factor. -/
+nonempty repeated intersection (Stacks, Tag 099U). -/
 noncomputable def presentedNerveIsLimit
     (hB : IsLimit ((Scheme.ProEt.forget Y ⋙ Over.forget Y).mapCone P.pres.cone))
     (hA : ∀ a, IsLimit

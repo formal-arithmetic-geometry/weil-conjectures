@@ -12,7 +12,9 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 /-!
 # Sections on an affine open of a scheme-theoretic fibre
 
-Source: Stacks Project, Tags 01I4 and 01JQ, affine fibre-product formula.
+## References
+
+* Stacks Project, Tags 01I4 and 01JQ
 -/
 
 @[expose] public section
@@ -23,19 +25,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Sections on the inverse image of an affine open in a fibre are its residue-field tensor.
-
-Source: Stacks Project, Tags 01I4 and 01JQ; Tag 055J, affine fibre identifications.
-Proof: Restrict the defining pullback square of the fibre to U. Pasting pullback squares
-identifies this restriction with the pullback of U.toScheme and Spec κ(p) over Spec R.
-The affine-open spectrum isomorphism identifies U.toScheme with Spec Γ(X,U), and the
-spectrum residue-field isomorphism identifies the second map with Spec of R → κ(p).
-The affine pullback isomorphism therefore identifies the restricted fibre with
-Spec(Γ(X,U) ⊗[R] κ(p)). Apply global sections and the spectrum global-sections
-isomorphism. The first-projection equation for the affine pullback isomorphism gives
-that restriction of a maps to a ⊗ 1. This also applies to the empty affine open:
-its section ring and its tensor product are zero rings.
-(blueprint: lem-sbc-affine-fibre-sections-tensor) -/
+/-- Sections on the inverse image of an affine open in a fibre are its residue-field tensor
+(Stacks, Tags 01I4, 01JQ and 055J). -/
 theorem affine_fibre_sections_tensor {R : Type u} [CommRing R] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of R)) (U : X.affineOpens) (p : PrimeSpectrum R) :
     let ρ := (Scheme.ΓSpecIso (.of R)).inv ≫ f.appLE ⊤ U.1 le_top

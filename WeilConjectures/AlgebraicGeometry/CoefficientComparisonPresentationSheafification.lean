@@ -10,8 +10,9 @@ import WeilConjectures.RingTheory.IndEtaleSmallIndex
 
 /-! # Sheafification on affine etale presentations
 
-Source: Stacks Project, proetale.tex, Lemmas describe-pullback-from-etale and
-limit-pullback (Tag 099S).
+## References
+
+* Stacks Project, Tag 099S
 -/
 
 @[expose] public section
@@ -293,30 +294,7 @@ private theorem presentationVertexProAffineEtale {X : Scheme.{u}}
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Sheafification of the coefficient-sized comparison Kan extension changes
-neither the vertex nor the stages of an affine etale presentation.
-
-Source: Stacks Project, proetale.tex, lemma-describe-pullback-from-etale and
-lemma-limit-pullback (Tag 099S)
-(auxiliary; not a blueprint node).
-
-Proof: the presheaf inverse image is the left Kan extension. On the affine
-ind-etale basis it is already a sheaf: present each object by affine etale
-objects, compute its sections by the filtered colimit formula, and descend a
-finite covering and its pairwise intersections to finite stages. The sheaf
-condition at those stages and exactness of filtered colimits of A-modules give
-the sheaf condition on the basis. The dense-subsite sheafification theorem
-therefore makes the unit invertible on the basis. Each stage is affine etale,
-hence belongs to this basis. For the vertex, fix a stage and restrict to the
-cofiltered category over that stage; the global-sections cocone of affine
-schemes is a ring colimit, by full faithfulness of Spec. It exhibits the vertex
-as ind-etale over the affine stage. Shrink this ring presentation using
-lem-pe-ind-etale-small-index. Composing with the stage's etale map to X gives
-an affine ind-etale presentation over X, so the vertex also belongs to the
-basis. This shrinking is used only for basis membership, not for identifying
-the original projection cocone. Transport basis sheaves, sheafification and
-its unit along the two AsSmall equivalences. Module colimits and finite limits
-exist at the displayed coefficient size, and filtered colimits are exact there.
-The zero module sheaf and the empty affine object are included in this argument. -/
+neither the vertex nor the stages of an affine etale presentation (Stacks, Tag 099S). -/
 theorem coefficientComparison_presentation_toSheafify_isIso (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (G : Sheaf (Scheme.smallModelComparisonEtaleTopology.{u, v} X)

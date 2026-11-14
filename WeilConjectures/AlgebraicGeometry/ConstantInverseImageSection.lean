@@ -27,8 +27,9 @@ public import WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData
 
 /-! # Transporting global coefficient sections
 
-Source: Stacks Project, Sites Tag 00YV and Modules on Sites Tag 03D2
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 00YV and 03D2
 -/
 
 @[expose] public noncomputable section
@@ -38,8 +39,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory.ConstantCompletion
 
-/-- A global section viewed as a constant-valued map on a test sheaf.
-Source: Stacks 00YV (auxiliary; not a blueprint node). -/
+/-- A global section viewed as a constant-valued map on a test sheaf (Stacks, Tag 00YV). -/
 def sectionMap
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) (a : (R.obj ⋙ forget CommRingCat).sections)
@@ -50,16 +50,15 @@ def sectionMap
        ext x
        exact (a.property f).symm }⟩
 
-/-- A constant coefficient as a map on any test sheaf.
-Source: Stacks 093M (auxiliary; not a blueprint node). -/
+/-- A constant coefficient as a map on any test sheaf (Stacks, Tag 093M). -/
 def constantSectionMap
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (A : Type u) [CommRing A] (a : A) (T : Sheaf J (Type u)) :
     T ⟶ (sheafCompose J (forget CommRingCat)).obj (constant J A) :=
   sectionMap (constant J A) (constantSection (J := J) a) T
 
-/-- Transport a global ring section using preservation of the terminal sheaf.
-Source: Stacks 00YV, 03D2 (auxiliary; not a blueprint node). -/
+/-- Transport a global ring section using preservation of the terminal sheaf
+(Stacks, Tags 00YV and 03D2). -/
 def inverseImageSection
     {C E : Type u} [SmallCategory C] [SmallCategory E]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology E}
@@ -73,10 +72,8 @@ def inverseImageSection
   let f := h.from T' ≫ L.map (sectionMap R a T) ≫ (F.algebra R).ringUnderlying.hom
   (((F.rings.obj R).obj ⋙ forget CommRingCat).sectionsEquivHom PUnit).symm f.hom
 
-/-- The transported global section computes inverse image on every test sheaf.
-Source: Stacks 00YV, 03D2 (auxiliary; not a blueprint node).
-Proof: factor the section map through the terminal sheaf. Both maps from L(T) to
-L(1) are equal because L preserves terminal objects. Evaluate this equality. -/
+/-- The transported global section computes inverse image on every test sheaf
+(Stacks, Tags 00YV and 03D2). -/
 theorem inverseImageSection_map
     {C E : Type u} [SmallCategory C] [SmallCategory E]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology E}
@@ -98,8 +95,7 @@ theorem inverseImageSection_map
   ext U x
   rfl
 
-/-- The structural image of a transported constant coefficient.
-Source: Stacks 03D2, 093M (auxiliary; not a blueprint node). -/
+/-- The structural image of a transported constant coefficient (Stacks, Tags 03D2 and 093M). -/
 def transportedConstantSection
     {C E : Type u} [SmallCategory C] [SmallCategory E]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology E}

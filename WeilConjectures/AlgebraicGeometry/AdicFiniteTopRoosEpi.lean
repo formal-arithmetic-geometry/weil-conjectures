@@ -130,25 +130,7 @@ private theorem top_transition_epi
   exact epi_of_epi (H.map e₂.hom) (H.map (adicFiniteTransition X J N n))
 
 /-- The degree-b Roos endomorphism of the normalized reduction product is epic.
-Source: Stacks Project, proetale.tex, Tag 09C2, proof of (1),
-and sites-cohomology.tex, Tag 0947.
-(auxiliary; not a blueprint node).
-
-Proof: Resolve N by one K-flat complex P with flat terms. Its quotient scalar
-extensions compute all reductions. Tensor the exact sequence
-0 -> J^(n+1)/J^(n+2) -> A/J^(n+2) -> A/J^(n+1) -> 0 with P.
-Flatness makes this a short exact sequence of complexes. The first term is,
-by scalar balancing, the tensor of the residue reduction with the displayed
-A/J-module sheaf. The residue Tor test makes its cohomology in degree b+1
-zero. The long exact sequence therefore makes each transition on H^b epic.
-The scalar-unit normalization identifies these maps with H^b(adicFiniteTransition).
-For the epimorphic module tower, one minus its shift on the product is epic:
-evaluate at affine weakly contractible objects, lift recursively, and detect
-epimorphy on this conservative family. Transport to the coefficient-sized site.
-Exact countable products imply that derived cohomology preserves this product.
-Its projection comparison conjugates H^b of the stated Roos endomorphism to
-one minus shift of the cohomology tower, proving the assertion. This uses no
-completeness of N. The argument also applies to J=0, J=A and empty schemes. -/
+(Stacks, Tags 09C2 and 0947). -/
 theorem adicFiniteTop_roos_epi
     (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A)

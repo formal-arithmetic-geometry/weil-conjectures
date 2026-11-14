@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Restriction inverts the derived open-adjunction unit
 
-Source: Stacks Project, Cohomology, Tags 08BS and 08FE.
+## References
+
+* Stacks Project, Tags 08BS and 08FE
 -/
 
 @[expose] public section
@@ -30,20 +32,8 @@ noncomputable section
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- Exact-open restriction makes the unit of its right adjunction invertible.
-Source: Stacks Project, Cohomology, Tags 08BS and 08FE.
-(blueprint: lem-pc-scheme-derived-open-unit-restriction-iso).
-Proof: Transport the concrete extension-by-zero adjunction across the equivalence
-between modules on the over-site and modules on the open subscheme. This gives
-an exact left adjoint G to exact-open restriction F. The underived composite
-G;F is the identity, using the existing extension-by-zero restriction isomorphism
-and the equivalence counit. Derive both exact functors and localize the termwise
-adjunction. The derived composition and identity comparisons give G_D;F_D≅id,
-so G_D is fully faithful. In the adjoint triple G_D⊣F_D⊣R, full faithfulness
-of G_D implies full faithfulness of R. Its adjunction counit is therefore
-invertible, and the triangle identity makes F_D of the unit its inverse.
-This applies to any supplied right adjunction, including empty opens, without
-adding a derived-category instance for the intermediate over-site category. -/
+/-- Exact-open restriction makes the unit of its right adjunction invertible
+(Stacks, Tags 08BS and 08FE). -/
 theorem schemeDerivedOpen_unit_isIso (X : Scheme.{u}) (U : X.Opens)
     (adj : (schemeOpenRestriction X U).mapDerivedCategory ⊣ schemeDerivedDirectImage U.ι)
     (K : schemeDerivedCategory X) :

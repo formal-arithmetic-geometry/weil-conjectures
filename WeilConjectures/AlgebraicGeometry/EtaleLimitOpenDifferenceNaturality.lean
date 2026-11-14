@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitConeRestrictionNaturality
 
 /-! # Difference of restrictions on the actual open cohomology groups
 
-Source: Stacks Project, Tags 0A50, 01F7 and 09YQ.
-(blueprint: lem-weil-pbc-etale-limit-open-difference-naturality).
+## References
+
+* Stacks Project, Tags 0A50, 01F7 and 09YQ
 -/
 
 @[expose] public section
@@ -51,27 +52,8 @@ private theorem differenceMap_natural {A B C A' B' C' : Type*}
 attribute [local irreducible] openCohomologyRestriction
 
 
-/-- Difference of restrictions commutes with canonical transitions and cone legs.
-
-Source: Stacks Project, Tag 0A50 (difference map), Tag 01F7 (pullback functoriality),
-Tag 09YQ (restricted coherent-system maps).
-(blueprint: lem-weil-pbc-etale-limit-open-difference-naturality).
-
-Proof: Construct the two additive maps by subtracting the restrictions composed
-with the two product projections. Their displayed value equations determine them
-uniquely by additive-map extensionality. Apply nested-open restriction naturality
-to the inclusions U∩V ≤ U and
-U∩V ≤ V after inverse image to each stage. The restricted transition squares
-commute by the definition of tailStageOpenMap; their coefficient maps are
-openSquareCoefficient. In each term compose pullback naturality with naturality
-of restriction in the coefficient morphism φ. The inverse-image composition
-comparisons cancel, giving restriction followed by tailOpenCohomologyMapDegree
-on the intersection. Subtract the two equalities and use additivity of that
-intersection map. For the cone legs repeat this calculation with c.π at j and
-the coefficient morphism (eG j).inv ≫ L.ι.app j; the cone equation identifies
-the inverse-image opens with the supplied limit opens. Subtraction gives the
-second formula. No cover or coefficient identity/composition laws are needed.
-If an open is empty or U=V, the same additive identities apply. -/
+/-- Difference of restrictions commutes with canonical transitions and cone legs
+(Stacks, Tags 0A50, 01F7 and 09YQ). -/
 theorem tailOpenDifference_naturality
     (X : Scheme.{u}) (U V : X.Opens)
     {I : Type u} [Preorder I]

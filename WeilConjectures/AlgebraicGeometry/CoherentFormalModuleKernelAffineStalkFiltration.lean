@@ -18,8 +18,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 
 /-! # Affine intersection-filtration models for stabilized kernel stalks
 
-Source: Stacks Project, Lemmas 087W and 087X, affine calculation for claim (a).
-(blueprint: lem-weil-pbc-formal-kernel-affine-stalk-filtration).
+## References
+
+* Stacks Project, Tags 087W and 087X
 -/
 
 @[expose] public section
@@ -28,33 +29,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- On an affine open, stabilized kernel stalks have the intersection filtration of
-one submodule of a finite completed module. No bound for this filtration is asserted.
-
-Source: Stacks Project, Lemmas 087W and 087X, affine calculation for claims (a) and (b),
-and Tags 01IB and 01IC for the affine module/sheaf correspondence.
-(blueprint: lem-weil-pbc-formal-kernel-affine-stalk-filtration).
-
-Proof: Put A = Gamma(U,O_X), R = its I(U)-adic completion, and K = I(U)R.
-The affine equivalence 087W identifies the restrictions of F and H with finite
-R-modules N and P and alpha with f : N -> P, with level m given by reduction
-modulo K^(m+1). Take L = ker(f). Artin--Rees applied to the image of f gives a
-bound a for images of reduced kernels. For fixed m compare the image at level
-m+c with that at l = max(m+c,m+a): hc identifies these images, while the
-reduced-kernel calculation identifies the latter with the image of L. Thus hS
-identifies S_m on U with L/(L intersect K^(m+1)N), compatibly with its inclusion
-in F_m. The inclusions are monic, so naturality of j makes these identifications
-compatible with every transition map, not only consecutive ones.
-For x in U restrict L's scalars to A and localize at the prime corresponding to
-x; call the resulting stalk module M. Exactness of localization gives the
-surjective quotient maps p_m and their displayed kernels. For a submodule Q of L,
-define phi(Q) to be the image of its scalar restriction after localization in M.
-Inclusions give an order homomorphism phi. Scalar restriction carries K^r L to
-I(U)^r L, since K is the extended ideal, including r = 0. Localization commutes
-with ideal products, so phi(K^r L) = J^r M: the ideal-product stalk theorem and
-the germ equation for e identify the localized ideal with J. The kernel formula
-is exactness applied to L intersect K^(m+1)N. Empty U has no stalk conditions;
-zero modules, zero ideals and unit ideals give the same quotient computations.
-This construction uses no Artin--Rees assertion for L inside N and no finite cover. -/
+one submodule of a finite completed module. No bound for this filtration is asserted
+(Stacks, Tags 087W, 087X, 01IB and 01IC). -/
 theorem coherentFormalModule_kernel_affine_stalk_filtration
     {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)

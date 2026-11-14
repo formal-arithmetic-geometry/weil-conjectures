@@ -13,7 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyComparison
 /-!
 # Canonical comparison specified on resolution cocycles
 
-Source: Stacks Project, Tags 0A50 and 03F3, and the Ext/injective-resolution comparison.
+## References
+
+* Stacks Project, Tags 0A50 and 03F3
 -/
 
 @[expose] public section
@@ -25,9 +27,8 @@ namespace AlgebraicGeometry.Etale
 
 /-- Comparison equivalences with their normalization on representing cocycles.
 The normalization uses the independently constructed `InjectiveResolution.extMk` and
-`etaleOpenObjectCohomologyMap`; it asserts no restriction or transfer identity.
-Source: Stacks Project, Tag 0A50 (resolution sections), Tag 03F3 (localization).
-(blueprint: def-weil-pbc-etale-resolution-section-canonical-comparison) -/
+`etaleOpenObjectCohomologyMap`; it asserts no restriction or transfer identity
+(Stacks, Tags 0A50 and 03F3). -/
 structure ResolutionSectionCanonicalComparison {X : Scheme.{u}}
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G) where
   globalEquiv : ∀ q : ℕ,

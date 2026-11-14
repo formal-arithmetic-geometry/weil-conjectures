@@ -22,8 +22,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Eventual finite locally free kernels of an affine lift
 
-Source: Stacks Project, Tag 08EG, the common Tor bound and kernel paragraphs.
-(blueprint: lem-sc-affine-lift-eventual-free-kernels).
+## References
+
+* Stacks Project, Tag 08EG
 -/
 
 @[expose] public section
@@ -182,25 +183,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 400000 in
 -- Tensor and over-site equivalence comparisons require additional elaboration heartbeats.
 /-- The restricted finite-free lift is exact in all sufficiently low degrees, and
-its outgoing kernels in those degrees are finite locally free.
-Source: Stacks Project, Tag 08EG, first two paragraphs of the proof of Lemma 36.13.6.
-(blueprint: lem-sc-affine-lift-eventual-free-kernels).
-
-Proof: Perfectness gives locally finite Tor dimension. Compactness of U gives a
-common Tor interval [a,b]. Let L be the termwise restricted complex. Exact
-restriction identifies Q(L) with F. Tensoring a K-flat representative with the
-unit computes ordinary homology, so L is exact below a. Restriction preserves
-finite free sheaves, and bounded-above finite free complexes are K-flat. Comparing
-K-flat tensor models transfers the Tor bound to ordinary L tensor G for every G.
-The categorical flat-opcycles criterion makes L.opcycles (r-1) flat for r < a.
-Its two finite free defining terms give a finite presentation. Flat stalks and
-the affine sections/stalk tensor presentation imply flat affine sections by the
-maximal-ideal localization criterion. Thus these opcycles are finite locally free.
-Exactness at r-1 makes the opcycles-to-cycles map monic; exactness at r makes it
-epic. Its isomorphism identifies the opcycles with the outgoing kernel. Choose
-N = a-1. Empty opens and rank-zero terms are included by the same arguments.
-No transport of the ambient affine scheme to a spectrum is required.
--/
+its outgoing kernels in those degrees are finite locally free (Stacks, Tag 08EG). -/
 theorem affine_lift_eventual_free_kernels
     (X : Scheme.{u}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

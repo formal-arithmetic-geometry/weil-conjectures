@@ -13,8 +13,9 @@ public import Mathlib.CategoryTheory.Subobject.Limits
 
 /-! # The finite coherent integral-ideal filtration predicate
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YF.
-(blueprint: def-weil-pbc-coherent-integral-filtration)
+## References
+
+* Stacks Project, Tag 01YF
 -/
 
 @[expose] public section
@@ -27,9 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The exact finite-subobject-chain conclusion of Stacks Lemma 01YF.
 This is a predicate on an existing module, with cokernels as successive quotients;
-no filtration or ideal is chosen.
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YF, statement.
-(blueprint: def-weil-pbc-coherent-integral-filtration) -/
+no filtration or ideal is chosen (Stacks, Tag 01YF). -/
 def HasCoherentIntegralFiltration {X : Scheme.{u}} (F : X.Modules) : Prop :=
     ∃ (m : ℕ) (c : Fin (m + 1) → Subobject F) (hc : Monotone c),
       c 0 = ⊥ ∧ c (Fin.last m) = ⊤ ∧

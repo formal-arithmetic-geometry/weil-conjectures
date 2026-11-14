@@ -15,7 +15,9 @@ import WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctor
 
 /-! # Natural comparison for cohomology over open étale objects
 
-Source: Stacks Project, Cohomology on Sites, Tag 03F3, and Étale Cohomology, Tag 09AX.
+## References
+
+* Stacks Project, Tags 03F3 and 09AX
 -/
 
 @[expose] public section
@@ -74,25 +76,7 @@ private lemma canonicalMap_naturality {X : Scheme.{u}}
   simp
 
 /-- Object cohomology over an open is the cohomology of its inverse-image sheaf,
-naturally for inclusions of opens.
-Source: Stacks Project, Cohomology on Sites, Tag 03F3; Étale Cohomology, Tag 09AX.
-(blueprint: lem-weil-pbc-etale-open-object-cohomology-natural).
-
-Proof: Take an injective resolution of F. Restriction along an open immersion preserves
-injectives, since extension by zero is an exact left adjoint. The natural isomorphism
-between inverse image and localization restriction identifies the section complex of
-the restricted resolution with the original resolution evaluated at that open. Taking
-cohomology gives e. For V contained in U, naturality of this isomorphism and the
-inverse-image adjunction unit identify evaluation restriction with pullback along V to U.
-More explicitly, evaluate open_restriction_pullback_unit for g equal to the inclusion
-of U into X and W equal to V. The fibre product V times_X U is V. The identity unit
-cancels with the identity inverse-image comparison. The unit for U followed by its
-restriction comparison is the identity on sections over V. Substitution identifies
-the direct comparison for V with the two successive restriction comparisons followed
-by inverse-image composition. Apply this identity in each degree of the resolution,
-then take cohomology. Ext via injective resolutions identifies the resulting maps with
-the Ext definitions of P and Sheaf.H and makes them resolution-independent. Thus the
-stated naturality identity holds, including degree zero and the empty open. -/
+naturally for inclusions of opens (Stacks, Tags 03F3 and 09AX). -/
 theorem etaleOpenObjectCohomology_natural
     {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (q : ℕ)

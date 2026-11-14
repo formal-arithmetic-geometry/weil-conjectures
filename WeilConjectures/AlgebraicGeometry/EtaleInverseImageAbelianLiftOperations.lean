@@ -59,36 +59,8 @@ private noncomputable def negOp (T : Scheme.{u})
         intro x
         exact (map_neg (G.obj.map k).hom (show G.obj.obj W from x)).symm }
 
-/-- Source: Stacks Project, Sites and Sheaves, Proposition 00YV.
-(blueprint: lem-weil-pbc-etale-inverse-image-abelian-lift-ops)
-
-Proof: Identify abelian sheaves with internal commutative group objects on each
-site, with the sectionwise operation formulas of
-`sheaves_algebraicStructures_objects`. Lift the set adjunction by
-`Adjunction.liftsGroupRingObjects`; finite-limit preservation supplies its
-finite-product hypothesis. Transport this lift back to abelian sheaves. Its right
-adjoint is the sectionwise abelian direct image, because precomposition preserves
-all the sectionwise operations and restriction maps. Uniqueness of left adjoints
-therefore gives an abelian comparison from La to this lifted left adjoint. After
-forgetting and composing with the lift's underlying comparison, call the resulting
-isomorphism e0. The lifted hom-set equation and the adjunction-compatible abelian
-comparison give the stated hom-set equation for e0.
-
-The assumed hom-set equation forces ea = e0: for each G take F to be the lifted
-left image of G and h to be the abelian comparison isomorphism. The hom-set
-equations for ea and e0 have the same left side. Injectivity of the set adjunction
-bijection and cancellation of the forgotten isomorphism h identify their inverse
-components. Thus ea is the operation-compatible comparison e0.
-
-Choose addV, zeroV, negV and addU, zeroU, negU from the internal-group
-identifications. Their section formulas are exactly those in the conclusion.
-The lifted addition equation, composed with the product comparison and transported
-by the abelian comparison, gives the displayed addition equation; naturality of
-the product comparison identifies its two factors with ea.inv. The lifted zero
-equation gives the zero equation, since any map to the chosen terminal object is
-terminal.from. The lifted inverse equation gives the negation equation after
-cancelling ea. These transports are valid because the abelian comparison is a
-group morphism. Substitute ea = e0 to conclude. -/
+/-- Compatibility of the abelian lift of the étale inverse image with the abelian group
+operations (Stacks, Tag 00YV). -/
 theorem etaleInverseImageAbelianLift_operations (U V : Scheme.{u}) (f : U ⟶ V)
     (hL : PreservesFiniteLimits (Scheme.etaleSetPullback f)) :
     let b := MorphismProperty.Over.pullback @Etale ⊤ f

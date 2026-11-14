@@ -17,15 +17,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.CurveCoefficientPair
-/-- Constructibility of the quotient in the six step dévissage argument.
-Use the canonical integral-module comparison to transport the short exact sequence.
-The curve is Noetherian because it is of finite type over a field. The Noetherian
-module subobject theorem makes the first term constructible, and the cokernel
-Serre property makes its cokernel constructible. Short exactness identifies this
-cokernel with the quotient. Transport across that isomorphism, then apply the
-integral comparison to the torsion quotient. Source: Stacks Project, Tag 09BH (2),
-with the integral coefficient comparison recorded in the imported library.
-(blueprint: lem-weil-pbc-curve-constructible-quot-part) -/
+/-- Constructibility of the quotient in the six step dévissage argument (Stacks, Tag 09BH). -/
 theorem constructible_quot_part {k : Type u} [Field k] [IsAlgClosed k]
     (P : AlgebraicGeometry.CurveCoefficientPair k)
     (F₁ F₂ : Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u + 1})

@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ChangeOfRingsTensorActionMapsBalancing
 
 /-! # Action and balancing maps for change of rings
 
-Source: Stacks Project, Morphisms, proof of Lemma 01SB; Sheaves, Lemma 0089.
-(blueprint: lem-weil-pbc-change-of-rings-tensor-action-maps).
+## References
+
+* Stacks Project, Tags 01SB and 0089
 -/
 
 @[expose] public section
@@ -32,26 +33,7 @@ set_option hygiene false in
 local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map a
 
 /-- The two algebra actions and the canonical balancing map exist on sheaf tensors.
-Source: Stacks Project, Morphisms, proof of Lemma 01SB (change of rings), and
-Sheaves, Lemma 0089 (sheafification universal property).
-(blueprint: lem-weil-pbc-change-of-rings-tensor-action-maps).
-
-Proof: let K be the presheaf C tensor_O P. On each open, the maps
-(b,c,p) ↦ c tensor bp and (b,c,p) ↦ φ(b)c tensor p are additive in all three
-arguments and O-balanced. The equality φ(B.hom(r)) = C.hom(r), supplied by the
-algebra morphism, proves balancing for the second map. Both commute with
-restriction. Give K the B-action on P, respectively the B-action through φ on C.
-Sheafify these B-module presheaves. Restriction of scalars preserves sheaves and
-identifies each resulting O-module sheaf with the sheafification of K, by the
-sheafification universal property. Thus both actions extend to S. Tensoring their
-bilinear action maps and sheafifying gives a and d, with the stated formulas.
-The sectionwise map C tensor_O P → C tensor_B P, c tensor p ↦ c tensor_B p,
-is O-linear and natural. Compose with the change-of-rings sheafification unit
-and extend to S to obtain g. The B-balanced tensor identity identifies the two
-composites with g on each (b,c,p). Tensor generation and uniqueness in the two
-successive sheafifications give a ≫ g = d ≫ g. No sections of a sheafification
-are assumed to be global pure tensors; equality is checked through its unit.
--/
+(Stacks, Tags 01SB and 0089). -/
 theorem exists_changeOfRings_tensor_action_maps (Y : Scheme.{u})
     (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)
     (P : SheafOfModules.{u} (𝓡 B.right)) :

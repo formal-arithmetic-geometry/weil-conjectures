@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.AffineRegularStalkComparisonBijective
 
 /-! # Bijectivity of the explicit finite free stalk comparison
 
-Source: Stacks Project, Tags 01HV, 01IB, 01C6 and 0098.
-(blueprint: lem-sc-affine-free-stalk-comparison-bijective).
+## References
+
+* Stacks Project, Tags 01HV, 01IB, 01C6 and 0098
 -/
 
 @[expose] public section
@@ -91,23 +92,8 @@ private theorem stalk_projection_comparison (X : Scheme.{u}) (x : X) (U : X.Open
     v.down p • affineRegularStalkGerm X x U hxU hU
   simp
 
-/-- The linear combination map of actual standard basis germs is bijective.
-
-Source: Stacks Project, Tag 01HV, Lemma 26.5.4 (7), and Tags 01IB, 01C6, 0098.
-(blueprint: lem-sc-affine-free-stalk-comparison-bijective).
-
-Proof: On Spec Gamma(X,U), the tilde stalk localization sends each standard basis
-vector to its germ. Localization of the finite coordinate module is the finite
-coordinate module over the localized ring: fractions are taken coordinatewise,
-and finitely many denominators admit a common product. Transport this identification
-along the affine chart and the inverse slice-site equivalence. The regular-module
-identification used in affineRegularSheafIso takes 1 to the unit section, so the
-transported basis vectors are precisely affineFreeBasisGerm. Neighbourhoods contained
-in U are cofinal among neighbourhoods of x. Ordinary open direct image consequently
-has the same stalk and scalar action. The resulting coordinate map is exactly
-sum_p v_p times the p-th basis germ, namely affineFreeStalkComparison. Projection
-germs provide its inverse, proving both injectivity and surjectivity. For n = 0,
-the source and target are zero modules and the empty sum is their unique map. -/
+/-- The linear combination map of actual standard basis germs is bijective
+(Stacks, Tags 01HV, 01IB, 01C6 and 0098). -/
 theorem affineFreeStalkComparison_bijective
     (X : Scheme.{u}) (x : X) (U : X.Opens) (hxU : x ∈ U) (hU : IsAffineOpen U)
     (n : ℕ) : Function.Bijective (affineFreeStalkComparison X x U hxU hU n)  := by

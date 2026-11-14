@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleRestrictedTotalResolution
 
 /-! # Augmentation and inclusion of the restricted total
 
-Source: Stacks Project, Tags 015J and 0133, restricted augmented total.
+## References
+
+* Stacks Project, Tags 015J and 0133
 -/
 
 @[expose] public section
@@ -21,9 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- Totalization of the column inclusion before applying global sections.
-Source: Stacks Project, Tag 015J, proof remark (3).
-(blueprint: lem-weil-pbc-etale-restricted-augmentation-inclusion). -/
+/-- Totalization of the column inclusion before applying global sections (Stacks, Tag 015J). -/
 noncomputable def etaleRestrictedTotalInclusion
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -37,19 +37,8 @@ noncomputable def etaleRestrictedTotalInclusion
             (T.I.ιStupidTrunc (ComplexShape.embeddingUpIntGE q)))) (ComplexShape.up ℤ)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The restricted augmentation commutes with the two truncation inclusions.
-Source: Stacks Project, Tag 015J, proof remark (3), and Tag 0133.
-
-Proof: Evaluate in total degree n and use the formula for a totalized map on
-its degree-zero resolution summand. Naturality of extension by zero transports
-that summand to the degree-zero summand of the full total. If n ≥ q, the
-stupid-truncation projection followed by its inclusion is the identity on
-T.I.X n. Cancel this pair in etaleRestrictedAugmentationComponent and apply
-T.aug_formula. If n < q, the source term of the truncated K is zero, so the
-two maps are equal. Chain-map extensionality now proves the equation. The
-calculation has no positivity condition on q, and also covers the zero complex
-and empty diagonals.
-(blueprint: lem-weil-pbc-etale-restricted-augmentation-inclusion). -/
+/-- The restricted augmentation commutes with the two truncation inclusions
+(Stacks, Tags 015J, 0133). -/
 theorem etaleRestrictedAugmentation_inclusion
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

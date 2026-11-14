@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitOpenBoundaryTransform
 
 /-! # Compatible Mayer--Vietoris maps on canonical open diagrams
 
-Source: Stacks Project, Tags 0A50 and 09YQ.
+## References
+
+* Stacks Project, Tags 0A50 and 09YQ
 -/
 
 @[expose] public section
@@ -74,33 +76,8 @@ set_option maxHeartbeats 200000 in
 -- The transported cohomology objects require extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency true in
 set_option linter.unusedVariables false in
-/-- Canonical restricted diagrams admit the compatible exact successor segment.
-
-Source: Stacks Project, Tag 0A50 (lemma-mayer-vietoris), its coefficient-natural
-long exact sequence; Tag 09YQ (theorem-colimit), canonical coherent-system maps.
-(blueprint: lem-weil-pbc-etale-limit-open-mayer-vietoris-maps).
-
-Proof: The inverse images of U,V cover each tail stage and the limit, by hcover
-and the cone equations. Choose the functorial Mayer--Vietoris sequence, as natural
-transformations of derived section functors, before evaluating on coefficients.
-Transport its restriction and difference maps to Sheaf.H, and its boundary to
-Sheaf.H in the next degree, using the restriction-to-derived-sections comparisons.
-Resolution independence identifies the transported pullbacks with cohomologyMap.
-Coefficient naturality and pullback naturality of this same sequence make the
-stage difference, boundary, and restriction maps natural in the tail index.
-Conjugate them by eKU,eKV,eKI and eH. Evaluation of a biproduct is a biproduct;
-its identification with the ordinary product transports the two exact stage pairs.
-At the limit take the same difference and boundary, conjugating the boundary by
-eB.inv. This gives the exact bottom pair. Pair the two supplied canonical cocone
-legs to construct ι₁ and ι₄; their two projection equations follow from the
-biproduct universal property. Naturality for the restricted projection followed
-by the coefficient leg gives the three stage-leg squares. In the middle and
-right squares use hB to replace the middle leg by its actual canonical formula.
-This uses no compactness, scheme limit, sheaf colimit, certificate, finality,
-or equality of maps out of a group colimit. For empty opens zero factors remain;
-for coincident opens the sequence has diagonal and difference maps and zero
-boundary. The statement concerns existential maps only, not a definition choosing
-an arbitrary boundary from an unproved existence assertion. -/
+/-- Canonical restricted diagrams admit the compatible exact successor segment
+(Stacks, Tags 0A50 and 09YQ). -/
 theorem etale_limit_open_mayerVietoris_maps
     (X : Scheme.{u}) (U V : X.Opens)
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]

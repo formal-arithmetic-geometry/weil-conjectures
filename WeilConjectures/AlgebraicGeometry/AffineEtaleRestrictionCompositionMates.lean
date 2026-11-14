@@ -23,16 +23,8 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Sites 03CB and 03CC, Categories 0B65.
-(blueprint: lem-weil-pbc-affine-etale-restriction-composition-mates)
-Proof: precomposition by gamma gives a right-adjoint isomorphism. Compose a_f and a_g,
-then take the mate of that isomorphism to construct d. The mate unit equation, evaluated
-at V and s, is the first conclusion. For coherence let E be e_g followed by L_g(e_f).
-Precompose both routes by E inverse and transpose with the composed affine adjunction.
-The equations he and hc turn the iterated units into the composite full-site unit;
-hgamma identifies the base-change restrictions and he for gf identifies the affine
-composite unit. Thus both transposes equal the transpose of d at every V and s.
-Injectivity of transposition and cancellation of E inverse give the second conclusion. -/
+/-- The composition isomorphisms of the affine étale base change functors induce compatible
+mates on sheaf inverse images (Stacks, Tags 03CB, 03CC and 0B65). -/
 theorem affineEtale_restriction_composition_mates
     (U : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h],
         X.FullAffineEtale ⥤ Y.FullAffineEtale)

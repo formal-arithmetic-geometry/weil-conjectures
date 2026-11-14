@@ -11,7 +11,6 @@ import all WeilConjectures.AlgebraicGeometry.ConstantCompletionOrdinaryFinitePul
 
 The completed pullback followed by target projection is identified with the canonical
 finite quotient model. This is the geometric part of the target transport.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -28,12 +27,8 @@ variable {C C' : Type u} [SmallCategory C] [SmallCategory C']
 variable {J : GrothendieckTopology C} {J' : GrothendieckTopology C'}
 variable {L : Sheaf J (Type u) ⥤ Sheaf J' (Type u)} (F : InverseImageData L)
 
-/-- The target projection model is the canonical finite quotient pullback model.
-Source: Stacks Project, sites-modules.tex, Tags 03EK, 03EL and 093M.
-Proof: use the second-site quotient identification, the projection equation for
-`completedMap`, and normalized scalar associativity for inverse-image pullback.
-(auxiliary; not a blueprint node).
--/
+/-- The target projection model is the canonical finite quotient pullback model
+(Stacks, Tags 03EK, 03EL and 093M). -/
 theorem ordinaryReducedPull_targetProjectionIso
     (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
     [PreservesFiniteLimits L] (A : Type u) [CommRing A] [IsNoetherianRing A]

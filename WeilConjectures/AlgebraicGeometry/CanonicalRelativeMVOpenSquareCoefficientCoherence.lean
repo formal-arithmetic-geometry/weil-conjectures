@@ -10,11 +10,14 @@ public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 import WeilConjectures.AlgebraicGeometry.CoefficientSquareCoordinateChange
 
 /-! Canonical coefficient coherence for a nested open square.
-Source: Stacks Project, Tag 0D5S.
-(blueprint: new-canonical-relative-mv-open-square-coefficient-coherence)
 
 The identity follows by applying the coordinate-change theorem to the two
-pullback squares and expanding the canonical comparison components. -/
+pullback squares and expanding the canonical comparison components.
+
+## References
+
+* Stacks Project, Tag 0D5S
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -30,14 +33,7 @@ private theorem comparison_inv_map_id
   exact CategoryTheory.Category.comp_id _
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Canonical coefficient coherence with all comparison maps expanded.
-Source: Stacks Project, Tag 0D5S.
-(blueprint: new-canonical-relative-mv-open-square-coefficient-coherence)
-
-Proof: instantiate `coefficient_square_coordinate_change` with the two open
-immersions and the relative Mayer--Vietoris lift, then expand the components
-of the three comparison isomorphisms. Naturality and proof irrelevance identify
-all equality transports. -/
+/-- Canonical coefficient coherence with all comparison maps expanded (Stacks, Tag 0D5S). -/
 theorem canonical_relativeMV_open_square_coefficient_coherence
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

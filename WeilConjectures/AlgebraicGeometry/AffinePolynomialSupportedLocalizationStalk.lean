@@ -13,8 +13,10 @@ public import Mathlib.RingTheory.MvPolynomial.Basic
 import Mathlib.Algebra.Module.LocalizedModule.IsLocalization
 
 /-! # The stalk represented by a supported polynomial prime
-Source: Stacks Project, Tag 069C, proof of (3) implies (1), affine localization.
-(blueprint: lem-pc-affine-polynomial-supported-localization-stalk).
+
+## References
+
+* Stacks Project, Tag 069C
 -/
 
 @[expose] public section
@@ -26,20 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- A supported prime of a surjective affine presentation gives a source stalk, compatibly
-with the affine base action. This statement has no Tor or perfectness hypothesis.
-Source: Stacks Project, Tag 069C, proof of (3) implies (1).
-Proof: The image q of p under g is prime because g is surjective and its kernel lies in p;
-its inverse image is p. The affine equivalence V ≅ Spec Γ(X,V) gives x corresponding to q.
-The germ Γ(X,V) → O(X,x) is localization at q. Surjectivity and g⁻¹(q) = p imply that the
-image of the complement of p is exactly the complement of q. Thus the germ, regarded as
-a map of polynomial-ring modules, exhibits the stalk as localization of Γ(X,V) at p.
-The universal property of module localization gives a polynomial-ring linear equivalence
-from the displayed localized module to the stalk. Restrict it to Γ(Y,U). The equation
-on g and naturality of germs identify this scalar action with the composite of the base
-germ and the actual stalk map of f. This constructs the required module isomorphism.
-For n = 0 the same argument applies. A zero quotient has no prime containing the kernel,
-so that case is vacuous; no Noetherian or finite type hypothesis is needed.
-(blueprint: lem-pc-affine-polynomial-supported-localization-stalk). -/
+with the affine base action (Stacks, Tag 069C). -/
 theorem affinePolynomial_supportedLocalization_stalk
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (U : Y.Opens) (V : X.Opens) (hV : IsAffineOpen V) (e : V ≤ f ⁻¹ᵁ U)

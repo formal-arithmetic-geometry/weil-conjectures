@@ -26,14 +26,7 @@ noncomputable local instance closedCostalkInjectiveContinuityHasZeroMorphisms
     HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)) := inferInstance
 
-/-- The K-injective comparison for a right derived functor is natural.
-Source: the right-derived unit and quotient comparison isomorphisms in
-`WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective`.
-(auxiliary; not a blueprint node)
-
-Proof: expand the comparison into its three isomorphisms. Naturality of the
-quotient comparison treats the outer factors. Naturality of the derived unit,
-cancelled against its invertible component at the source, treats the middle. -/
+/-- The K-injective comparison for a right derived functor is natural. -/
 theorem rightDerivedObjQIso_naturality
     {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
     [HasDerivedCategory A] [HasDerivedCategory B] [Abelian.HasKInjectiveResolutions A]
@@ -130,22 +123,7 @@ set_option synthInstance.maxHeartbeats 100000 in
 -- Internal module colimit inference needs a larger typeclass search budget.
 set_option synthInstance.maxSize 4096 in
 /-- A closed exceptional inverse image preserves a filtered quasi-colimit cocone
-of injective complexes with a common lower bound.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), closed costalk step, using (3.4)
-and Lemma 5.3(1).
-(auxiliary; not a blueprint node)
-
-Proof: bounded-below injective complexes are K-injective. The right-derived unit
-therefore gives natural isomorphisms RH(QJ_s) ≅ Q(HJ_s), and the same comparison
-at c.pt. The good-truncated cocone of J is colimiting because its truncation
-projections are invertible under the strict lower bound. Its universal map g to
-c.pt is a quasi-isomorphism: precomposition with the isomorphism from colim J
-identifies it with the assumed quasi-isomorphism. Apply derived closed-costalk
-continuity in every degree. Identify the vertex by RH(Qg) and the K-injective
-comparison at c.pt. Naturality gives exactly the cocone-leg equation required by
-the representative comparison theorem, which proves that the canonical colimit
-map of termwise H images is a quasi-isomorphism. This includes empty closed or
-open parts and zero complexes. -/
+of injective complexes with a common lower bound (Hemo--Richarz--Scholbach, Lemma 5.3). -/
 theorem condensed_closed_costalk_injective_continuity
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

@@ -12,8 +12,9 @@ public import Mathlib.AlgebraicGeometry.Properties
 
 /-! # Components of an open of constant local dimension
 
-Source: Stacks Project, Tags 0052 (2), (3), and 0055 (local dimension).
-(blueprint: lem-sbc-constant-local-dimension-components)
+## References
+
+* Stacks Project, Tags 0052 and 0055
 -/
 
 @[expose] public section
@@ -39,24 +40,8 @@ private theorem dimension_le_of_local_dimension_eq
     exact (le_iSup D ⟨E, ENat.WithBot.lt_add_one_iff.mp hEdim⟩) hxE
   exact topologicalKrullDim_le_of_iSup_eq_top D hcover _ (fun i ↦ i.2)
 
-/-- Constant finite local dimension on a locally noetherian open gives pure dimension.
-
-Source: Stacks Project, Tag 0052, Lemma 5.9.2 (2), (3), and Tag 0055.
-Proof: Replace Y by its open O; open inclusions preserve local dimension. At each
-point, the infimum defining local dimension is n. The dimensions of nonempty
-neighbourhoods are nonnegative integers or infinity, so this finite infimum is
-attained. Hence O has an open cover by opens of dimension n. Dimension is local
-on open covers (a finite chain of irreducible closed sets meets one cover member
-at its smallest set), so O has dimension at most n. Each component C consequently
-has dimension at most n. For the reverse inequality choose any point of C and
-an affine noetherian neighbourhood A of this point in O. The intersection of C
-with A is a component of A. It has a nonempty
-open part D of A disjoint from the other finitely many components (0052 (3)).
-Thus D is also open in O, lies in C, and contains a point x. Local dimension n
-at x is at most the dimension of D, which is at most the dimension of C.
-Both bounds give dimension C = n. If O is empty, it has no components. No global
-quasi-compactness or finite type over a field is used.
-(blueprint: lem-sbc-constant-local-dimension-components) -/
+/-- Constant finite local dimension on a locally noetherian open gives pure dimension
+(Stacks, Tags 0052 and 0055). -/
 theorem topologicalKrullDim_component_eq_of_constant_local_dimension
     {Y : Scheme.{u}} [IsLocallyNoetherian Y] (O : Y.Opens) (n : ℕ)
     (hdim : ∀ x ∈ O, topologicalKrullDimAt x = (n : WithBot ℕ∞))

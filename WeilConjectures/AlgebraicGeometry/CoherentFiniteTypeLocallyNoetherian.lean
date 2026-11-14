@@ -13,8 +13,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 
 /-! # Coherence on locally Noetherian schemes
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.9.1, Tag 01XZ
-(blueprint: pqf-lem-coherent-ft-locnoeth).
+## References
+
+* Stacks Project, Tag 01XZ
 -/
 
 @[expose] public section
@@ -191,24 +192,7 @@ private theorem isCoherent_of_isQuasicoherent_and_isFiniteType
   exact SheafOfModules.instIsFiniteTypeOfIsFinitePresentation (Limits.kernel f)
 
 /-- On a locally Noetherian scheme, an `𝒪_X`-module is coherent exactly when it is
-quasi-coherent and of finite type.
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.9.1, Tag 01XZ
-(blueprint: pqf-lem-coherent-ft-locnoeth).
-
-Proof:
-1. Choose finite local generators of a coherent module, reindexing their index sets by
-   `ULift (Fin n)`. The coherence clause makes the kernel of each generator epimorphism
-   finite type. Choose finite local generators of these kernels. Restriction preserves
-   cokernels and free modules, so the restricted generator maps and relation maps give
-   finite presentations on the refined cover. Glue them and use Mathlib's implication
-   from finite presentation to quasi-coherence. The finite-type clause is retained.
-2. For the converse, transport an arbitrary finite free map on `U` through `overEquiv U`
-   to modules on the open subscheme. Its source has the finite presentation with zero
-   relations and its target is quasi-coherent. The open subscheme is locally Noetherian,
-   so `isFinitePresentation_kernel` gives a finitely presented kernel. The equivalence
-   preserves kernels; transport the finite presentation back and use finite presentation
-   implies finite type. This proves the kernel clause in the definition of coherence.
--/
+quasi-coherent and of finite type (Stacks, Tag 01XZ). -/
 theorem isCoherent_iff_isQuasicoherent_and_isFiniteType
     (X : Scheme.{u}) [IsLocallyNoetherian X] (F : X.Modules) :
     RingedSpace.IsCoherent X.toRingedSpace F ↔

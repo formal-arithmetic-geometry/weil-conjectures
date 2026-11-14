@@ -15,9 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleComplexFirstPageContinuity
 
 /-! # First-page comparison and abutment quotient models
 
-Source: Stacks Project, Tag 0EZM, proof of lemma-colimit-variant-complexes,
-and Tags 015J and 015K.
-(blueprint: lem-weil-pbc-etale-complex-first-page-abutment).
+## References
+
+* Stacks Project, Tags 0EZM, 015J and 015K
 -/
 
 @[expose] public section
@@ -31,42 +31,7 @@ namespace AlgebraicGeometry.Etale
 /-- Assemble the termwise continuity comparison and its finite abutment quotient models.
 This statement asserts comparison only on page one, not on the pages modeling the quotients.
 The bidegrees here are (resolution degree, complex degree), matching the finite-page tool.
-Source: Stacks Project, Tag 0EZM (lemma-colimit-variant-complexes), proof;
-Tags 0032, 09YQ, 015J and 015K.
-(blueprint: lem-weil-pbc-etale-complex-first-page-abutment).
-
-Proof:
-1. Apply exists_directed_reindexing to Iᵒᵖ with index A in universe u. Whisker
-   the scheme limit and complex colimit with this same final functor. Evaluate
-   the complex colimit degreewise. Exact inverse image and termwise colimits
-   preserve the lower bound a. After the continuity calculation on A in step 2,
-   set J = ULift A in universe u+1 and transport the diagram along this equivalence.
-   This preserves its colimit cocones and selects the original stages k.
-2. Choose termwise Cartan--Eilenberg hypercohomology presentations and the maps of
-   exists_etaleHypercohomology_pullback_functorial for the stage transitions and limit legs.
-   Their identity and composition equations assemble E and v. Swap the two coordinates
-   from (complex,resolution) to (resolution,complex), yielding shape (1-r,r).
-   In nonnegative resolution degrees, nonempty_isColimit_etale_cohomology_of_isLimit
-   applied on A identifies the first-page comparison as an isomorphism. In negative
-   resolution degrees all terms vanish. Transport this colimit cocone from A to J;
-   the universal property proves the displayed page-one comparison on J.
-3. The support region is resolution degree >=0 and complex degree >=a. Each later
-   page is homology, so the region persists. At (t,s), both differentials vanish
-   once r>max(t+1,s-a), uniformly at all stages and at the limit. The canonical
-   subquotient descriptions of convergence therefore identify one common finite
-   page with all the abutment graded pieces, naturally for v.
-4. Transport the limit abutment filtration along eB and let S n be its step a+n.
-   Its whole and zero bounds give S 0=top and S (p+1-a).toNat=bottom. If p<a,
-   the degree-p abutment vanishes, so the length-zero case has both bounds at zero.
-   Monotonicity gives Antitone S. Let T j be the corresponding stage filtration step.
-5. For n below the length, choose the uniform page from step 3. The quotient
-   projection followed by the inverse convergence isomorphism gives q and t j.
-   The kernel of q is precisely S (n+1), and each t j is surjective because a
-   quotient projection is surjective. Filtered abutment functoriality preserves
-   the steps and commutes with these projections. The abutment comparison equations,
-   together with hP, hH and hB, identify its underlying map with B.ι.app (op (k j)).
-   This gives hy and the last equality. No page-r colimit comparison or choice of
-   a stage representative of a target class is used in this construction. -/
+(Stacks, Tags 0EZM, 0032, 09YQ, 015J and 015K). -/
 theorem exists_etale_complex_first_page_and_abutment
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

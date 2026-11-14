@@ -12,11 +12,12 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Cartan--Eilenberg presentations of termwise étale hypercohomology
 
-Source: Stacks Project, Tags 015H, 015J and 015K
-(blueprint: def-weil-pbc-termwise-hypercohomology-presentation).
-
 This packages witnesses of `Functor.exists_hypercohomology_firstPage`. Bidegrees are
 (filtration degree, resolution degree), so the paper's E₁^{p,q} is the term at (q,p).
+
+## References
+
+* Stacks Project, Tags 015H, 015J and 015K
 -/
 
 @[expose] public section
@@ -28,9 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- The canonical comparison from the cohomology of Γ of a K-injective resolution to the
-cohomology of RΓ (the computation of H^n(X,K) in def-weil-pbc-etale-cohomology).
-Source: Stacks, Tag 015J; the K-injective recipe
-(blueprint: def-weil-pbc-termwise-hypercohomology-presentation). -/
+cohomology of RΓ (Stacks, Tag 015J). -/
 noncomputable def resolutionEtaleCohomologyIso (X : Scheme.{uHyper})
     (K I : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uHyper + 1}) ℤ)
     (r : K ⟶ I) [QuasiIso r] [I.IsKInjective] (n : ℤ) :
@@ -50,9 +49,8 @@ noncomputable def resolutionEtaleCohomologyIso (X : Scheme.{uHyper})
 /-- A presentation of the first hypercohomology spectral sequence, its signed E₁
 identifications and its canonical finite abutment filtration. The bicomplex and all
 resolution properties are the witnesses of `Functor.exists_hypercohomology_firstPage`;
-the comparison to derived global sections is fixed by the resolution map.
-Source: Stacks, Tags 015H, 015J, 015K
-(blueprint: def-weil-pbc-termwise-hypercohomology-presentation). -/
+the comparison to derived global sections is fixed by the resolution map
+(Stacks, Tags 015H, 015J and 015K). -/
 structure EtaleTermwiseHypercohomology (X : Scheme.{uHyper})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uHyper + 1})) where
   I : HomologicalComplex₂ (Sheaf X.smallEtaleTopology AddCommGrpCat.{uHyper + 1})
@@ -150,9 +148,8 @@ structure EtaleTermwiseHypercohomology (X : Scheme.{uHyper})
 
 namespace EtaleTermwiseHypercohomology
 
-/-- Restrict the resolution spectral sequence to its intrinsic pages E₁ and later.
-Source: Stacks, Tags 015J and 015K
-(blueprint: def-weil-pbc-termwise-hypercohomology-presentation). -/
+/-- Restrict the resolution spectral sequence to its intrinsic pages E₁ and later
+(Stacks, Tags 015J and 015K). -/
 def sequence {X : Scheme.{uHyper}}
     {K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uHyper + 1})}
     (D : EtaleTermwiseHypercohomology X K) :
@@ -160,8 +157,7 @@ def sequence {X : Scheme.{uHyper}}
   page r hr := D.E.page r (le_trans (by decide : (0 : ℤ) ≤ 1) hr)
   iso r r' pq hrr' hr := D.E.iso r r' pq hrr' (le_trans (by decide : (0 : ℤ) ≤ 1) hr)
 
-/-- The signed identification of E₁^{p,q} with H^p(X,K^q).
-Source: Stacks, Tag 015J (blueprint: def-weil-pbc-termwise-hypercohomology-presentation). -/
+/-- The signed identification of E₁^{p,q} with H^p(X,K^q) (Stacks, Tag 015J). -/
 noncomputable def firstPageIso {X : Scheme.{uHyper}}
     {K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uHyper + 1})}
     (D : EtaleTermwiseHypercohomology X K) (p : ℕ) (q : ℤ) :

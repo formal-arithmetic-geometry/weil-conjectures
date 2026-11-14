@@ -15,9 +15,9 @@ import Mathlib.AlgebraicGeometry.Properties
 
 /-! # Local triviality of a descended invertible module
 
-Source: Stacks Project, Tag 0BF2, proof paragraph beginning with shrinking the base;
-Tag 0BF0, field rank calculation.
-(blueprint: lem-sc-descended-invertible-neighbourhood)
+## References
+
+* Stacks Project, Tags 0BF2 and 0BF0
 -/
 
 @[expose] public section
@@ -86,27 +86,8 @@ private theorem exists_local_unit_of_invertible_pullback
   exact ⟨V, hyV, ⟨eV ≪≫ coproductUniqueIso
     (fun _ : I ↦ SheafOfModules.unit V.toScheme.ringCatSheaf)⟩⟩
 
-/-- Descent to a vector bundle gives a rank-one trivialization near a base point.
-Source: Stacks Project, Tags 0BF2 and 0BF0, rank-one descent and local trivialization.
-(blueprint: lem-sc-descended-invertible-neighbourhood)
-
-Proof: Base change f along W.fromSpecResidueField w followed by k. The chosen
-structure adjunction unit is an isomorphism from the nonzero structure module on
-Spec kappa(w). Hence the fibre cannot be empty: on the empty scheme every module
-and its pushforward have zero sections. Choose a fibre point y. Choose a finite
-free presentation of N on an open V containing w. The descent isomorphism
-identifies its pullback to the inverse image of V with an invertible module.
-Choose an open H containing the chosen point on which this module is trivial.
-On H it is both free on the finite frame index I and the structure module.
-The ring of global sections of H is nonzero, since H contains a point. The strong
-rank condition, applied through the two sections isomorphisms, gives card I = 1.
-A coproduct indexed by the resulting unique type is the structure module, so N
-restricted to V is the structure module. For any U contained in V, restrict this isomorphism
-and pull it back to X times_S U. The cartesian projection square and pullback
-composition transport the original descent isomorphism to this base change.
-Pullback of the structure module is the structure module, giving the conclusion.
-This argument uses just one fibre point, not flatness or properness. A point w
-excludes an empty W. No choice of vector bundle data is used in a definition. -/
+/-- Descent to a vector bundle gives a rank-one trivialization near a base point
+(Stacks, Tags 0BF2 and 0BF0). -/
 theorem exists_descendedInvertible_neighbourhood
     {X S : Scheme.{v}} (f : X ⟶ S)
     (hO : ∀ {T : Scheme.{v}} (g : T ⟶ S),

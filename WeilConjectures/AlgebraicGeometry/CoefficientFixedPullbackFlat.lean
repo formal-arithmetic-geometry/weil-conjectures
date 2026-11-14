@@ -13,7 +13,9 @@ import WeilConjectures.CategoryTheory.ConstantScalarAlgebraicPullback
 
 /-! # Ordinary flat sheaves under coefficient-sized inverse image
 
-Source: Stacks Project, Modules on Sites, Tag 05VD, lemma-pullback-flat.
+## References
+
+* Stacks Project, Tag 05VD
 -/
 
 @[expose] public section
@@ -26,28 +28,7 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 namespace AlgebraicGeometry.Scheme
 
 /-- Exact coefficient-sized inverse image preserves ordinary flat module sheaves.
-
-Source: Stacks Project, Modules on Sites, Tag 05VD, lemma-pullback-flat;
-Tag 03CY identifies modules over a constant ring with fixed-scalar module sheaves.
-(auxiliary; not a blueprint node).
-
-Proof: present fixed-scalar sheaves on each coefficient-sized site as modules over
-its constant A-ring by the normalized constant-scalar monoidal equivalence. This
-preserves and reflects flatness, since tensor by the corresponding object is
-conjugate by exact equivalences. The given sheaf inverse image is the module
-inverse image of the geometric morphism whose set inverse image is base change
-followed by sheafification. Its structural ring comparison is the canonical
-isomorphism from inverse image of the constant A-ring to the constant A-ring.
-For a finite relation in the inverse-image module, left exactness and the
-local-generation property of inverse image lift its finitely many coefficients
-and sections locally to the source site. Left exactness also lifts the equality
-asserting that the relation vanishes. Apply the source flat module's local
-finite-relation criterion, and pull its covering family and factorization back.
-The result is a local factorization of the original relation on the target site.
-The local equational criterion proves target flatness. The structural ring map
-is an isomorphism, so its final scalar extension also preserves flatness. Transport
-back to fixed scalars. This uses no bounded complexes or derived tensors, and
-allows the zero ring, the zero sheaf and empty schemes. -/
+ (Stacks, Tag 05VD) -/
 theorem coefficientFixedPullback_preservesFlat
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type (max v (u + 1))) [CommRing A] :

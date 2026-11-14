@@ -10,7 +10,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 
 /-! # Transport of canonical pullback maps to complex representatives
 
-Source: Stacks Project, Tags 0GIT and 0EZM, termwise pullback argument.
+## References
+
+* Stacks Project, Tags 0GIT and 0EZM
 -/
 
 @[expose] public section
@@ -21,16 +23,14 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Termwise inverse image of a cochain complex. 
-(blueprint: lem-weil-pbc-etale-complex-pullback-transport)
+/-- Termwise inverse image of a cochain complex.
 -/
 noncomputable abbrev presentationPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (C : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) :=
   ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj C
 
 /-- The identity comparison, with its source and target explicit so that clients do not
-unfold inverse-image functors when checking the type of the identity law.
-(blueprint: lem-weil-pbc-etale-complex-pullback-transport) -/
+unfold inverse-image functors when checking the type of the identity law. -/
 noncomputable def presentationIdentityMap {I : Type u} [SmallCategory I]
     (D : I ⥤ Scheme.{u}) (i : I)
     (C : CochainComplex (Sheaf (D.obj i).smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) :
@@ -41,8 +41,7 @@ noncomputable def presentationIdentityMap {I : Type u} [SmallCategory I]
   (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{u + 1} (D.obj i))
     (ComplexShape.up ℤ)).hom.app C
 
-/-- The composition comparison evaluated termwise on a complex. 
-(blueprint: lem-weil-pbc-etale-complex-pullback-transport)
+/-- The composition comparison evaluated termwise on a complex.
 -/
 noncomputable def presentationCompIso {X Y T : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ T) (h : X ⟶ T) (hh : h = f ≫ g)
@@ -51,16 +50,14 @@ noncomputable def presentationCompIso {X Y T : Scheme.{u}}
   (NatIso.mapHomologicalComplex
     (upperStarComp AddCommGrpCat.{u + 1} f g h hh) (ComplexShape.up ℤ)).app C
 
-/-- The family of termwise pullbacks along a natural family of structure maps. 
-(blueprint: lem-weil-pbc-etale-complex-pullback-transport)
+/-- The family of termwise pullbacks along a natural family of structure maps.
 -/
 noncomputable def presentationFamily {I : Type u} [SmallCategory I]
     {T : Scheme.{u}} (D : I ⥤ Scheme.{u}) (t : D ⟶ (Functor.const I).obj T)
     (C : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
     (i : I) := presentationPullback (t.app i) C
 
-/-- Canonical transition between the pullbacks of a fixed complex. 
-(blueprint: lem-weil-pbc-etale-complex-pullback-transport)
+/-- Canonical transition between the pullbacks of a fixed complex.
 -/
 noncomputable def presentationTransition {I : Type u} [SmallCategory I]
     {T : Scheme.{u}} (D : I ⥤ Scheme.{u}) (t : D ⟶ (Functor.const I).obj T)
@@ -71,8 +68,7 @@ noncomputable def presentationTransition {I : Type u} [SmallCategory I]
   (presentationCompIso (D.map f) (t.app i) (t.app j)
     ((Category.comp_id (t.app j)).symm.trans (t.naturality f).symm) C).inv
 
-/-- The canonical comparison between a cone pullback and an iterated pullback. 
-(blueprint: lem-weil-pbc-etale-complex-pullback-transport)
+/-- The canonical comparison between a cone pullback and an iterated pullback.
 -/
 noncomputable def presentationConeIso {I : Type u} [SmallCategory I]
     {T : Scheme.{u}} (D : I ⥤ Scheme.{u}) (c : Cone D)
@@ -83,8 +79,7 @@ noncomputable def presentationConeIso {I : Type u} [SmallCategory I]
       presentationPullback (c.π.app i) (presentationFamily D t C i) :=
   presentationCompIso (c.π.app i) (t.app i) p (hp i).symm C
 
-/-- Identify derived pullback cohomology with cohomology of a termwise representative. 
-(blueprint: lem-weil-pbc-etale-complex-pullback-transport)
+/-- Identify derived pullback cohomology with cohomology of a termwise representative.
 -/
 noncomputable def presentationRepresentativeIso {X T : Scheme.{u}} (g : X ⟶ T)
     {K : DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})}
@@ -99,8 +94,7 @@ noncomputable def presentationRepresentativeIso {X T : Scheme.{u}} (g : X ⟶ T)
       (upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategoryFactors.app C)
 
 /-- Derived cohomology pullback along a triangle of scheme maps, followed by the
-inverse composition comparison. 
-(blueprint: lem-weil-pbc-etale-complex-pullback-transport)
+inverse composition comparison.
 -/
 noncomputable def presentationDerivedMap {X Y T : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ T) (h : X ⟶ T) (hh : h = f ≫ g)
@@ -198,21 +192,7 @@ private theorem pullback_naturality {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℤ)
   rw [← Category.assoc, ← Functor.map_comp, ← hu]
 
 /-- Canonical pullback along one triangle commutes with replacement by a complex.
-Source: Stacks Project, Tag 0GIT, proof (the pullbacks of a representative represent
-its derived pullbacks); Tag 0EZM, proof (canonical transition maps).
-(blueprint: lem-weil-pbc-etale-complex-pullback-transport)
-
-Proof: first use naturality of the derived adjunction unit and the Leray comparison
-with the image of q under the inverse image along g. This moves q from the source
-of the canonical derived map to its target. For QC, insert the exact-functor
-localization comparisons for g, f, and h. Naturality of the unit and Leray comparison
-moves the comparison for g to the source. The defining equation hP identifies the
-remaining unit, Leray, and comparison for f with P. The equations
-mapDerivedCategoryNatIso_fac and mapDerivedCategoryCompIso_fac identify the derived
-composition comparison with Q of its termwise counterpart, conjugated by these
-localization comparisons. Cancel the invertible comparisons and apply functoriality
-of cohomology. The resulting equality is the displayed commuting square. No limit,
-filteredness, boundedness, or continuity is used. -/
+(Stacks, Tags 0GIT and 0EZM). -/
 theorem presentation_pullback_transport {X Y T : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ T) (h : X ⟶ T) (hh : h = f ≫ g)
     (K : DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}))

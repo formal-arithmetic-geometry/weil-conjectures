@@ -18,8 +18,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 /-!
 # EtaleInverseImageAbelianLift
 
-Source: Stacks Project, Sites and Sheaves, Proposition 00YV.
-(blueprint: lem-weil-pbc-etale-inverse-image-abelian-lift).
+## References
+
+* Stacks Project, Tag 00YV
 -/
 
 @[expose] public section
@@ -28,27 +29,9 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Sites and Sheaves, Proposition 00YV and its preceding
-quadruple/sextuple descriptions; uniqueness of adjoints as in Example 00X2.
-(blueprint: lem-weil-pbc-etale-inverse-image-abelian-lift).
-
-Proof: Regard abelian sheaves on each site as commutative group objects by
-`sheaves_algebraicStructures_objects`. Lift the set adjunction using
-`Adjunction.liftsGroupRingObjects`, whose hypothesis follows from `hL`. Its right
-lift is the sectionwise direct image: both its operations and restriction maps are
-those obtained by evaluating the original sheaf at the base-changed object. Transport
-the lifted adjunction through the inverse functors between abelian sheaves and group
-objects. Compare its left adjoint with `Etale.upperStar` by uniqueness of left adjoints
-to this same sectionwise direct image. Choose the comparison determined by the
-adjunction bijections. After forgetting it gives `ea` and the displayed hom-set equation.
-The operations on the source and target are the sectionwise addition, zero and
-negation from the sheaf/group-object identification. Conjugating the lift's operation
-formulas by the left-adjoint comparison yields the three transport equations below:
-for addition use naturality of the product comparison and its two projections; for
-zero use uniqueness of the map to the terminal object; for negation use naturality
-and cancel the comparison isomorphism. The section formulas follow from the
-sectionwise construction. No unit equation is asserted here; it is deduced from the
-hom-set equation in the parent theorem. -/
+/-- If the étale inverse image `f⁻¹` preserves finite limits, it lifts to abelian sheaves, as a
+left adjoint to the pushforward compatible with the forgetful functors (Stacks, Tags 00YV and
+00X2). -/
 theorem etaleInverseImageAbelianLift (U V : Scheme.{u}) (f : U ⟶ V)
     (hL : PreservesFiniteLimits (Scheme.etaleSetPullback f)) :
     let b := MorphismProperty.Over.pullback @Etale ⊤ f

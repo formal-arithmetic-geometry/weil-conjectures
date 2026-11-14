@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleStratifiedFinite
 
 /-! # Lattices on finitely many strata of a continuous local system
 
-Source: Bhatt--Scholze, first paragraph of the proof of Lemma 6.8.13.
-(auxiliary; not a blueprint node)
+## References
+
+* Bhatt--Scholze, Lemma 6.8.13
 -/
 
 @[expose] public section
@@ -67,20 +68,7 @@ private theorem continuousLisse_stratified_lattices_of_system
     (Limits.pullback.condition (f := p) (g := j)) P hP M hM e
 
 /-- A locally finite free rational sheaf admits locally free integral lattices after a finite
-stratification. Source: Bhatt--Scholze, Lemma 6.8.13, first paragraph.
-(auxiliary; not a blueprint node)
-
-Proof in words. Proposition 6.8.4(6) supplies integral lattices on an etale cover.
-Refine its members by affine opens and take a finite subcover, possible because the
-base is topologically noetherian and etale maps are open. The finite disjoint union
-of these affines is quasi-compact and quasi-separated; its map to the base is etale
-and surjective. The local lattices assemble on that disjoint union. Stratify the
-base so this cover becomes finite etale. Pull back the lattice to each resulting
-cover, using the coefficient and inverse-image composition isomorphisms.
-Finite etale lattice descent gives a locally free integral model on each stratum,
-without requiring a descent datum on the supplied lattice. On empty strata or in rank
-zero use the zero module. This theorem supplies the stratum models only: reconstructing
-the original sheaf by extensions is the separate integral gluing theorem. -/
+stratification. (Bhatt--Scholze, Lemma 6.8.13) -/
 theorem continuousLisse_stratified_lattices
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]

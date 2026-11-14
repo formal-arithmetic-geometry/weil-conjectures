@@ -11,8 +11,9 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-! # Underived models for the open counit computation
 
-Source: Stacks Project, Cohomology, Tags 08FE and 08BV.
-(blueprint: def-pc-derived-mayer-vietoris-open-counit-model).
+## References
+
+* Stacks Project, Tags 08FE and 08BV
 -/
 
 @[expose] public section
@@ -25,9 +26,7 @@ set_option synthInstance.maxSize 2048
 noncomputable section
 namespace AlgebraicGeometry
 
-/-- The sectionwise open-composition identification, before derivation.
-Source: Stacks Tag 08FE
-(blueprint: def-pc-derived-mayer-vietoris-open-counit-model). -/
+/-- The sectionwise open-composition identification, before derivation (Stacks, Tag 08FE). -/
 def schemeMVUnderivedOpenComposition {X Y : Scheme.{u}} (h : X ⟶ Y) (U : Y.Opens) :
     RingedSpace.moduleDirectImage (h ⁻¹ᵁ U).ι.toLRSHom.toShHom ⋙
         RingedSpace.moduleDirectImage h.toLRSHom.toShHom ≅
@@ -37,9 +36,8 @@ def schemeMVUnderivedOpenComposition {X Y : Scheme.{u}} (h : X ⟶ Y) (U : Y.Ope
     Scheme.Modules.pushforwardCongr (morphismRestrict_ι h U).symm ≪≫
     (Scheme.Modules.pushforwardComp (h ∣_ U) U.ι).symm
 
-/-- The sectionwise open-restriction identification used by the canonical comparison.
-Source: Stacks Tag 08FE
-(blueprint: def-pc-derived-mayer-vietoris-open-counit-model). -/
+/-- The sectionwise open-restriction identification used by the canonical comparison
+(Stacks, Tag 08FE). -/
 def schemeMVUnderivedOpenRestriction {X Y : Scheme.{u}} (h : X ⟶ Y) (U : Y.Opens) :
     RingedSpace.moduleDirectImage h.toLRSHom.toShHom ⋙ schemeOpenRestriction Y U ≅
       schemeOpenRestriction X (h ⁻¹ᵁ U) ⋙
@@ -60,9 +58,8 @@ def schemeMVUnderivedOpenRestriction {X Y : Scheme.{u}} (h : X ⟶ Y) (U : Y.Ope
     dsimp
     exact congr($(morphismRestrict_app h U W.unop) x).symm
 
-/-- The open-composition model on homotopy categories, with explicit composition factors.
-Source: Stacks Tag 08FE
-(blueprint: def-pc-derived-mayer-vietoris-open-counit-model). -/
+/-- The open-composition model on homotopy categories, with explicit composition factors
+(Stacks, Tag 08FE). -/
 def schemeMVHomotopyOpenComposition {X Y : Scheme.{u}} (h : X ⟶ Y) (U : Y.Opens) :
     (RingedSpace.moduleDirectImage (h ⁻¹ᵁ U).ι.toLRSHom.toShHom).mapHomotopyCategory
         (ComplexShape.up ℤ) ⋙
@@ -78,9 +75,8 @@ def schemeMVHomotopyOpenComposition {X Y : Scheme.{u}} (h : X ⟶ Y) (U : Y.Open
       (RingedSpace.moduleDirectImage (h ∣_ U).toLRSHom.toShHom ⋙
         RingedSpace.moduleDirectImage U.ι.toLRSHom.toShHom)) (ComplexShape.up ℤ)).symm
 
-/-- The open-restriction model on homotopy categories, with explicit composition factors.
-Source: Stacks Tag 08FE
-(blueprint: def-pc-derived-mayer-vietoris-open-counit-model). -/
+/-- The open-restriction model on homotopy categories, with explicit composition factors
+(Stacks, Tag 08FE). -/
 def schemeMVHomotopyOpenRestriction {X Y : Scheme.{u}} (h : X ⟶ Y) (U : Y.Opens) :
     (RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomotopyCategory
         (ComplexShape.up ℤ) ⋙
@@ -94,9 +90,8 @@ def schemeMVHomotopyOpenRestriction {X Y : Scheme.{u}} (h : X ⟶ Y) (U : Y.Open
       (schemeOpenRestriction X (h ⁻¹ᵁ U) ⋙
         RingedSpace.moduleDirectImage (h ∣_ U).toLRSHom.toShHom)) (ComplexShape.up ℤ)).symm
 
-/-- The open adjunction on homotopy categories, with the right functor specialized once.
-Source: Stacks Tag 08BV
-(blueprint: def-pc-derived-mayer-vietoris-open-counit-model). -/
+/-- The open adjunction on homotopy categories, with the right functor specialized once
+(Stacks, Tag 08BV). -/
 def schemeMVHomotopyOpenAdjunction (X : Scheme.{u}) (U : X.Opens) :
     (schemeOpenRestriction X U).mapHomotopyCategory (ComplexShape.up ℤ) ⊣
       (RingedSpace.moduleDirectImage U.ι.toLRSHom.toShHom).mapHomotopyCategory

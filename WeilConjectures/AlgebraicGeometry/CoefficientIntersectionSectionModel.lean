@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 
 /-! # Affine coefficient intersection computation
 
-Source: Stacks Project, Tags 0097, 01I9, 01IA and 02KG.
+## References
+
+* Stacks Project, Tags 0097, 01I9, 01IA and 02KG
 -/
 
 @[expose] public section
@@ -28,22 +30,7 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Pullback composition and open restriction transport sections and their unit generators.
-No affineness or quasi-coherence is required.
-Source: Stacks Project, Tags 0096 and 0097.
-
-Proof: Uniqueness of left adjoints identifies tensorPullback k with pullback k.
-The open-immersion restriction adjunction identifies F restricted to U with
-pullback U.ι F. Pullback composition, followed by congruence for hk, identifies
-pullback k (F restricted to U) with pullback g' F. Evaluate the inverse composite
-on I. This is a linear isomorphism over Gamma(X',I), since each comparison is a
-morphism of O_X'-modules. For the generator equation, expand coefficientPullbackGenerator.
-The unit equation for restriction identifies the section s, after restrictAppIso,
-with its open-immersion pullback unit. The composition unit equation identifies
-its subsequent k-pullback unit with the g'-pullback unit. The tensorPullback
-left-adjoint uniqueness unit equation identifies the remaining unit. Naturality
-of all three module morphisms commutes with restriction to I. Restriction maps
-compose, and proof irrelevance identifies the two inclusion proofs. This gives
-the displayed equation, also for empty opens, without any affine argument. -/
+No affineness or quasi-coherence is required (Stacks, Tags 0096 and 0097). -/
 private theorem exists_coefficientPullback_section_transport
     {X X' : Scheme.{u}} (F : X.Modules) (U : X.Opens)
     (Z : U.toScheme.Opens) (g' : X' ⟶ X) (k : X' ⟶ U.toScheme)
@@ -170,20 +157,8 @@ private theorem exists_coefficientPullback_section_transport
   exact H.symm
 
 
-/-- Affine pullback sections, before the ring pushout and tensor contraction.
-Source: Stacks Project, Tags 0097, 01I9 and 01IA.
-(blueprint: aux-pc-coefficient-intersection-section-model).
-
-Proof: The intersection I = W intersect f' inverse image B is affine by the
-intersection base-change theorem. Restrict F to the affine open Z of f inverse
-image U. Apply the affine pullback sections theorem to the restricted lift
-X' -> f inverse image U on Z and I. Compare tensorPullback with pullback by
-uniqueness of left adjoints, and compare open-immersion pullback with
-restriction. Pullback composition identifies the resulting module with M|I.
-The conjugate-isomorphism unit equation and restriction naturality identify
-the image of the restricted pullback-unit generator with 1 tensor s.
-The inverse of the affine sections comparison is the required map, linear
-for the intersection ring. Empty intersections satisfy the same formula. -/
+/-- Affine pullback sections, before the ring pushout and tensor contraction
+(Stacks, Tags 0097, 01I9 and 01IA). -/
 theorem exists_coefficientIntersection_section_model
     {X T : Scheme.{u}} (f : X ⟶ T) [IsSeparated f]
     (F : X.Modules) [F.IsQuasicoherent]

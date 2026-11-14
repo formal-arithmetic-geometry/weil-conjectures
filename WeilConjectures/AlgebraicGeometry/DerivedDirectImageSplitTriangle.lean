@@ -12,8 +12,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 /-!
 # Derived direct image of a degreewise split sequence of K-injectives
 
-Source: Stacks Project, Tags 0152 and 079V
-(blueprint: lem-pc-derived-functor-termwise-split-ses-triangle).
+## References
+
+* Stacks Project, Tags 0152 and 079V
 -/
 
 @[expose] public section
@@ -31,9 +32,8 @@ variable {X Y : RingedSpace.{u}}
   [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y))]
 
 /-- The identification computed by the identity resolution of a K-injective complex.
-It is the inverse right-derived unit, with the quotient/localization identifications.
-Source: Stacks, Tag 079V
-(blueprint: lem-pc-derived-functor-termwise-split-ses-triangle). -/
+It is the inverse right-derived unit, with the quotient/localization identifications
+(Stacks, Tag 079V). -/
 def derivedModuleDirectImageKInjectiveIso (g : X ⟶ Y)
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ) [K.IsKInjective] :
     (derivedModuleDirectImage g).obj (DerivedCategory.Q.obj K) ≅
@@ -48,9 +48,8 @@ def derivedModuleDirectImageKInjectiveIso (g : X ⟶ Y)
     (DerivedCategory.quotientCompQhIso _).app _
 
 /-- The identification of the localized image of a shifted complex with the shifted
-localized image. Both complex shift comparison maps are degreewise identities.
-Source: Stacks, Tags 0152 and 079V
-(blueprint: lem-pc-derived-functor-termwise-split-ses-triangle). -/
+localized image. Both complex shift comparison maps are degreewise identities
+(Stacks, Tags 0152 and 079V). -/
 def moduleDirectImageLocalizedShiftIso (g : X ⟶ Y)
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ) :
     DerivedCategory.Q.obj
@@ -62,9 +61,8 @@ def moduleDirectImageLocalizedShiftIso (g : X ⟶ Y)
         (1 : ℤ)).app K) ≪≫
     (DerivedCategory.Q.commShiftIso (1 : ℤ)).app _
 
-/-- The triangle with the connecting map transported by the identity-resolution comparisons.
-Source: Stacks, Tags 0152 and 079V
-(blueprint: lem-pc-derived-functor-termwise-split-ses-triangle). -/
+/-- The triangle with the connecting map transported by the identity-resolution comparisons
+(Stacks, Tags 0152 and 079V). -/
 def derivedModuleDirectImageSplitTriangle (g : X ⟶ Y)
     (S : ShortComplex (CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ))
     (hS : S.ShortExact) [S.X₁.IsKInjective] [S.X₂.IsKInjective] [S.X₃.IsKInjective] :
@@ -146,31 +144,8 @@ set_option maxHeartbeats 700000 in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Degreewise split sequences of K-injectives have their canonical triangle carried to
-that of the direct-image sequence, including its connecting morphism.
-Source: Stacks, Tags 0152 and 079V
-(blueprint: lem-pc-derived-functor-termwise-split-ses-triangle).
-
-Proof:
-1. Apply additive module direct image to the degreewise retraction and section identities.
-This preserves split exactness. Additivity also preserves the negative differential in
-shift by one. The boundary is the chain map pi d s, with the cone sign convention, by
-lem-weil-pbc-degreewise-split-connecting-morphism and
-lem-weil-pbc-degreewise-split-derived-triangle. Its direct image is g-star(pi d s).
-2. Shifts of K-injectives are K-injective, since shifting preserves acyclicity and the
-Hom groups from acyclic objects vanish. The inverse right-derived unit on K-injectives
-is natural, by def-pc-ringed-spaces-derived-direct-image. Apply this to the first two
-maps and to pi d s. After localization this gives all three comparison identities.
-3. The image sequence has a distinguished triangle by lem-weil-pbc-complex-ses-triangle.
-The three comparison isomorphisms form an isomorphism from the displayed transported
-triangle to that triangle, including the third map by step 2. Closure under isomorphism
-in def-weil-triangulated-category proves distinguishedness.
-
-The node's clauses that I₁[1] is K-injective and that g-star(I₁[1]) = (g-star I₁)[1]
-are not separate conjuncts: the first is Mathlib's shift instance for
-`CochainComplex.IsKInjective` (used to form the comparison of `S.X₁⟦1⟧`), the second holds
-by `rfl` for termwise direct image, and its canonical `commShiftIso` (identity components,
-`Functor.mapHomologicalComplex_commShiftIso_hom_app_f`) is the identification used in
-`moduleDirectImageLocalizedShiftIso`. -/
+that of the direct-image sequence, including its connecting morphism (Stacks, Tags 0152 and 079V).
+-/
 theorem derivedModuleDirectImage_termwise_split_ses_triangle (g : X ⟶ Y)
     (S : ShortComplex (CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ))
     (hS : S.ShortExact)

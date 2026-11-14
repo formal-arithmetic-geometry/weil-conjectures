@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZeroAux
 /-!
 # Degree-zero étale cohomology and pullback
 
-Source: Stacks Project, Tags 05TD and 01FA
-(blueprint: lem-weil-pbc-cohomology-pullback-degree-zero).
+## References
+
+* Stacks Project, Tags 05TD and 01FA
 -/
 
 @[expose] public section
@@ -29,18 +30,8 @@ namespace AlgebraicGeometry.Etale
 
 /-- The augmentation of any K-injective resolution induces the canonical isomorphism
 from global sections to degree-zero cohomology. The factor `z` records well-definedness:
-its composite with the inclusion of cycles is precisely the augmentation on sections.
-Source: Stacks Tag 05TD (blueprint: lem-weil-pbc-cohomology-pullback-degree-zero).
-
-Proof:
-1. The chain-map identity for `s` makes its degree-zero component a cocycle, giving `z`.
-2. A homotopy between lifts of a sheaf map makes their difference a boundary; this gives
-   naturality and compatibility with comparisons (cohomology-pullback-functorial).
-3. Global sections preserve kernels. Choose a nonnegative injective resolution; then its
-   degree-zero cycles are the sections of `G`, with no boundaries (left-exact-injective-
-   resolution-degree-zero). It is K-injective (dplus-injective-representative).
-4. Transport that isomorphism to `I` by the homotopy equivalence between K-injective
-   resolutions (cohomology-resolution-independent). Negative terms of `I` are allowed. -/
+its composite with the inclusion of cycles is precisely the augmentation on sections
+(Stacks, Tag 05TD). -/
 theorem exists_degreeZeroCohomology_cycles_iso (T : Scheme.{u})
     (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
     (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
@@ -72,15 +63,8 @@ theorem exists_degreeZeroCohomology_cycles_iso (T : Scheme.{u})
   exact ⟨z, hz, isIso_degreeZeroCohomology_cycles_factor T G I s z hz⟩
 
 /-- Naturality of the augmentation-to-cohomology map for arbitrary K-injective resolutions.
-Taking `G' = G` and `φ = 𝟙 G` gives compatibility with resolution identifications.
-Source: Stacks Tag 05TD (blueprint: lem-weil-pbc-cohomology-pullback-degree-zero).
-
-Proof: Lift `φ` to `a` between the resolutions (cohomology-pullback-functorial).
-The given homotopy in degree zero says that `a⁰ s⁰ - s'⁰ φ` is `d⁻¹ h⁰`.
-After global sections it is a boundary, hence zero in homology. For the identity sheaf
-map, the lift induces the resolution comparison (cohomology-resolution-independent).
-The existence and bijectivity of the augmentation map are established by the preceding
-four-step argument using a nonnegative injective resolution and transport. -/
+Taking `G' = G` and `φ = 𝟙 G` gives compatibility with resolution identifications
+(Stacks, Tag 05TD). -/
 theorem degreeZeroCohomology_resolution_naturality (T : Scheme.{u})
     (G G' : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (φ : G ⟶ G')
     (I I' : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
@@ -146,16 +130,8 @@ theorem degreeZeroCohomology_resolution_naturality (T : Scheme.{u})
     _ = _ := by
       rw [homologyπ_naturality, ← Category.assoc, hs', Category.assoc]
 
-/-- The degree-zero pullback formula on the actual complexes computing cohomology.
-Source: Stacks Tag 01FA (blueprint: lem-weil-pbc-cohomology-pullback-degree-zero).
-
-Proof: The chain map on sections is the unit followed by the pushforward/global-sections
-identification and the comparison `r`. The chain-map identity makes `s(g)` a cycle.
-Naturality of the unit at `s⁰` gives `r(η(s(g))) = (r ∘ u⁻¹s)(η(g))`.
-Passing to homology proves the equality. The four-step bounded-below/transport argument
-above makes both augmentation maps isomorphisms; homotopy naturality proves compatibility
-with every choice of resolution (cohomology-pullback-functorial and
-cohomology-resolution-independent). No vanishing of negative terms is assumed. -/
+/-- The degree-zero pullback formula on the actual complexes computing cohomology
+(Stacks, Tag 01FA). -/
 theorem degreeZeroCohomology_resolution_pullback {X Y : Scheme.{u}} (u : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (I : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
@@ -248,16 +224,7 @@ private theorem homEquiv_comparison {C D : Type*} [Category* C] [Category* D]
     Adjunction.homEquiv_leftAdjointUniq_hom_app, adj.homEquiv_apply]
 
 /-- Under the canonical degree-zero identification, pullback on étale cohomology is
-pullback of a global section by the adjunction unit.
-Source: Stacks Tag 01FA (blueprint: lem-weil-pbc-cohomology-pullback-degree-zero).
-
-Proof: For resolutions `s : G[0] → I` and `r : u⁻¹I → J`, the pullback of `[s(g)]` is
-`[r(η(s(g)))]`. Naturality of the inverse-image unit gives
-`η(s(g)) = (u⁻¹s)(η(g))`, so this is `[t(η(g))]` for `t = r ∘ u⁻¹s`.
-The preceding naturality computation permits every choice of K-injective resolution,
-by cohomology-pullback-functorial and cohomology-resolution-independent. In the recorded
-Ext encoding of cohomology-pullback, the same identity follows by the degree-zero Ext/Hom
-identification and the constant-sheaf adjunction defining `Sheaf.H.equiv₀`. -/
+pullback of a global section by the adjunction unit (Stacks, Tag 01FA). -/
 theorem cohomologyMap_zero_eq_globalSectionsUpperStarMap {X Y : Scheme.{u}}
     (u : Y ⟶ X) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (g : (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj G) :

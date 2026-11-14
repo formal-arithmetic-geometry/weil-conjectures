@@ -13,8 +13,9 @@ import Mathlib.Topology.Sheaves.LocallySurjective
 import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-! # Conormal sheaves under flat base change
-Source: Stacks Project, Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat),
-case of closed immersions (blueprint: lem-weil-pbc-closed-immersion-conormal-flat-base-change).
+## References
+
+* Stacks Project, Tag 0473
 -/
 
 @[expose] public section
@@ -23,24 +24,7 @@ universe uc
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Modules
 /-- For a cartesian square of closed immersions, the canonical conormal map is an
- epimorphism; if the ambient morphism is flat, it is an isomorphism. The canonical map
- is the unique map supplied by `closedImmersion_conormal_functorial`.
-
-Source: Stacks Project, Morphisms, Lemma 0473 (lemma-conormal-functorial-flat),
-closed-immersion case; Schemes, Lemma 01JU (lemma-fibre-product-immersion), assertion (1)
-(blueprint: lem-weil-pbc-closed-immersion-conormal-flat-base-change).
-Proof:
-1. Compatible pairs of affine opens in X and X' form a basis of X. Since i is a
-   closed embedding, their inverse images form a basis of Z and an affine cover.
-2. The affine comparison lemma identifies each section map with
-   Ideal.tensorCotangentHom. Its surjectivity, transported through the two
-   equivalences, gives surjectivity on the basis. Restricting each section to
-   a basis neighbourhood proves local surjectivity. The underlying additive
-   sheaf map is therefore epi; the forgetful functor reflects epimorphisms.
-3. If g is flat, its affine ring maps are flat. The injectivity of
-   Ideal.tensorCotangentHom under flat base change gives bijectivity on this
-   basis. TopCat.Sheaf.isIso_iff_isIso_basis gives an isomorphism of the underlying
-   additive sheaves, and toPresheaf reflects isomorphisms of modules. -/
+ epimorphism; if the ambient morphism is flat, it is an isomorphism (Stacks, Tags 0473, 01JU). -/
 theorem closedImmersion_conormal_flat_base_change
     {X Z X' Z' : Scheme.{uc}} (i : Z ⟶ X) (i' : Z' ⟶ X')
     [IsClosedImmersion i] [IsClosedImmersion i']

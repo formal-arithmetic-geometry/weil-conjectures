@@ -23,23 +23,7 @@ namespace AlgebraicGeometry.ProEtale
 
 set_option linter.style.haveILetI false
 
-/-- Nonempty-support branch of the finite-coefficient support induction step.
-
-Proof: choose an irreducible component of the nonempty closed subscheme Y. The finite
-stratification gives a dense open piece contained in one stratum image. Base change that
-stratum to the open piece; the resulting map is a surjective closed immersion. The
-empty-complement case of pro-etale ringed open-closed localization identifies its module
-category, including slices, with the open piece and transports the supplied finite-field
-model. Choose a closed subscheme Z complementary to the open piece. Its image in T is
-strictly smaller than D, so the induction hypothesis supplies a constructible model on Z.
-After replacing the two finite coefficient fields by their finite compositum, localization
-expresses the pullback module as an extension of the closed direct image by the open
-extension by zero. Tensor-restriction adjunction and exactness identify the outer terms
-with scalar extensions. Ext-continuity represents the derived degree-one extension class at
-one finite coefficient stage. Extension classification realizes that class by a short exact
-sequence; Serre closure makes its middle term constructible, and injectivity of extension
-classification identifies its scalar extension with the original pullback.
-(auxiliary; not a blueprint node) -/
+/-- Nonempty-support branch of the finite-coefficient support induction step. -/
 theorem exists_finiteCoefficient_model_on_closed_support_step_nonempty
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (ℓ : ℕ) [Fact ℓ.Prime]

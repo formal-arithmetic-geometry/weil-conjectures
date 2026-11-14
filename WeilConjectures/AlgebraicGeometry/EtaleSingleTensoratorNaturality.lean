@@ -80,13 +80,8 @@ private noncomputable def singleIsoQh :
   DerivedCategory.singleFunctorIsoCompQ _ 0 ≪≫
     Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso _).symm
 
-/-- Naturality in both sheaves of the specified flat degree-zero tensor comparison.
-Source: the tensor localization construction of Stacks Tag 06YU.
-(auxiliary; not a blueprint node).
-Proof: the single-complex tensor comparison is natural on its sole nonzero summand.
-Compose its naturality with those of the homotopy quotient and Qh tensorators,
-and then with the natural single/quotient comparison. The flatness proofs only
-supply invertibility, and do not change the underlying morphisms. -/
+/-- Naturality in both sheaves of the specified flat degree-zero tensor comparison
+(Stacks, Tag 06YU). -/
 theorem singleFunctorObjTensorIso_hom_naturality
     {L L' M M' : Sheaf X.smallEtaleTopology B} (f : L ⟶ L') (g : M ⟶ M')
     (hL : ObjectProperty.flat L) (hL' : ObjectProperty.flat L') :

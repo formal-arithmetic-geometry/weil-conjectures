@@ -13,13 +13,14 @@ import WeilConjectures.CategoryTheory.ExactFunctorResolutionCocycle
 
 /-! # The injective-resolution cocycle calculation used by the abelian counit
 
-Source: Stacks Project, Tags 01F7 and 06XR.
-(blueprint: new-abelian-injective-counit-cocycle)
-
 The remaining calculation is the canonical representative computation for two
 actual abelian injective resolutions. It is separated from the parent theorem
 so that source replacement and arbitrary acyclic-resolution comparison remain
 independent arguments.
+
+## References
+
+* Stacks Project, Tags 01F7 and 06XR
 -/
 
 @[expose] public section
@@ -186,18 +187,8 @@ private theorem injective_resolution_constant_cocycle (X : Scheme.{u})
   rw [I.mk₀_comp_extMk]
   exact h
 
-/-- Inverse image and coefficients on Ext agree with the adjoint section chain map.
-Source: Stacks Project, Tags 01F7, 01F8, 01F9 and 06XR.
-(blueprint: new-abelian-injective-counit-cocycle)
-
-Proof: Lift a section-homology class to a cycle. The constant-sheaf adjunction
-and evaluation of its integer generator turn that cycle into a closed Hom
-cocycle. The fixed Ext-to-sections normalization identifies its Ext class.
-Apply exactFunctor_resolution_cocycle and precompose the constant-source
-isomorphism. The explicit Zariski constant-sheaf adjunction and the prescribed
-top-open restriction identify the transferred cocycle with the section chain
-map. The target normalization and naturality of the homology projection finish
-the calculation. The argument includes degree zero and empty schemes. -/
+/-- Inverse image and coefficients on Ext agree with the adjoint section chain map
+(Stacks, Tags 01F7, 01F8, 01F9 and 06XR). -/
 theorem abelian_injective_counit_cocycle_calculation
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : SheafOfModules.{u} (moduleRings Y.toRingedSpace))

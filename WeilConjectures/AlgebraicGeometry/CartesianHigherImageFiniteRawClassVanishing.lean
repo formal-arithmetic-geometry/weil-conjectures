@@ -13,7 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageFiniteRawAss
 
 /-! # Eventual vanishing of finitely many raw cartesian derived classes
 
-Source: Stacks Project, Tag 0EYM, second proof, injectivity of the cohomology comparison.
+## References
+
+* Stacks Project, Tag 0EYM
 -/
 
 @[expose] public section
@@ -32,28 +34,7 @@ noncomputable local instance cartesianHigherImageFiniteRawClassHasZeroMorphisms 
   inferInstance
 
 /-- Finitely many raw derived classes killed by cartesian exchange are killed at a
-common later stage. This is the cohomological part of affine-section injectivity;
-it does not concern arbitrary homology sections or the sheafification comparison.
-
-Source: Stacks Project, Tag 0EYM, second proof, part (2); Tags 0EYL and 0GIT.
-(blueprint: lem-sc-cartesian-higher-image-finite-raw-class-vanishing).
-
-Proof: Descend each affine etale test object and its derived class to an etale
-chart above a sufficiently late stage. The inverse-image site description and
-exact inverse-image/single/shift comparisons identify the class with restricted
-cohomology on the cartesian chart. Descend the finitely many objects, arrows and
-coefficient comparisons to one common stage. The pulled-back chart schemes form
-qcqs inverse systems with affine transitions, with coefficients pulled back from
-F. Derived cohomology continuity gives an injective colimit comparison. Under
-its canonical map the given classes have zero image by the hypothesis and
-exchange naturality. The filtered-colimit equality criterion therefore kills
-each class at a later stage. Cofiltered wide spans equalize the finitely many
-arrows from these stages to the initial stage. Functoriality of the cohomology
-pullbacks transports every zero to this common stage. The raw Hom/cohomology
-comparison and exchange pasting identify these maps with the displayed
-transitions. The argument includes an empty family, empty affine objects and
-q = 0. All complexes have the common lower bound zero; no preservation of
-injectives by inverse image is assumed. -/
+common later stage (Stacks, Tags 0EYM, 0EYL, 0GIT). -/
 theorem exists_cartesianHigherImage_finite_raw_classes_eq_zero
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

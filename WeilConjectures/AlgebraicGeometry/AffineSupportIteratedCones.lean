@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.BinomialShiftBiproduct
 
 /-! # Affine support from successive cones
 
-Source: Stacks Project, Tag 08EK (Lemma 36.13.10), proof, cone construction
-(blueprint: lem-sc-affine-support-iterated-cones).
+## References
+
+* Stacks Project, Tag 08EK
 -/
 
 @[expose] public section
@@ -36,25 +37,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 /-- Successive cones of multiplication by the functions `g` are perfect and supported on
 their common zero set. If the initial restriction to a quasi-compact open `U` is `F ⊕ F[1]`
 and every function acts by zero on `F`, the final restriction is the sum of the shifts of
-`F` with binomial multiplicities. Global functions are encoded as compatible families of
-local sections and act by `schemeDerivedScalar`; `g' i` is the restriction of `g i` to `U`
-(tied by its value on the top open). Restriction to `U` is the localized-site restriction
-followed by `Scheme.Modules.overEquiv U`.
-Source: Stacks Project, Tag 08EK (blueprint: lem-sc-affine-support-iterated-cones).
-
-Proof:
-1. Starting with the perfect object `C 0`, apply perfect two-out-of-three
-   (`lem-pc-perfect-two-out-of-three`) to each distinguished cone triangle.
-2. On `D(g i)`, the function `g i` is a unit. Its multiplication map is an
-   isomorphism, so its cone is zero (Stacks, Tag 05QR). Later cones are also zero
-   there, since they are cones of endomorphisms of zero. The union of these principal
-   opens is the complement of the common zero set, giving cohomology vanishing.
-3. On `U`, multiplication commutes with isomorphisms, shifts, and finite sums.
-   Inductively the restriction at step `i` is a sum of shifts of `F`, so every
-   generator acts by zero. A cone of zero on `K` is `K ⊕ K[1]`: take the sum of
-   the rotated identity triangles (Stacks, Tags 05QR and 05QS) and use uniqueness
-   of cones. Beginning with `F ⊕ F[1]`, Pascal's identity gives multiplicity
-   `Nat.choose (s + 1) j` after `s` cones. -/
+`F` with binomial multiplicities (Stacks, Tag 08EK). -/
 theorem affine_support_iterated_cones (X : Scheme.{u}) [IsAffine X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ V : X.Opens,

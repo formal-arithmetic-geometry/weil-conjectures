@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleChartResidueTriplesEssentiallySurj
 /-!
 # Equivalence between affine chart neighbourhoods and residue-field triples
 
-Source: Stacks Project, proof of Tag 04HX and Remark Tag 04HT
-(blueprint: lem-weil-pbc-etale-chart-residue-triples-equivalence).
+## References
+
+* Stacks Project, Tags 04HX and 04HT
 -/
 
 @[expose] public section
@@ -43,37 +44,13 @@ private theorem affine_global_sections_faithful
 
 -- The legacy statement has unused diagram lets; keep its signature unchanged.
 set_option linter.unusedVariables false in
-/-- Source: Stacks Project, proof of Tag 04HX, first paragraph, and Remark Tag 04HT.
-(blueprint: lem-weil-pbc-etale-chart-residue-triples-equivalence).
-
-Proof: For an affine pointed neighbourhood V over the chart, choose its unique map
-V → Spec A by cancellation of the open immersion. Identify V with Spec Γ(V).
-The map A → Γ(V) is étale by cancellation and the affine spectrum anti-equivalence.
-The point gives a prime q and a residue-field embedding into Ω. Restrict this
-embedding to the relative separable closure using the assumed image containment.
-The point-over-base equation implies that q lies over p and that the residue map
-is compatible on A. These data define the triple, with B = Γ(V); the natural ring
-identification gives δ and the two displayed compatibility equations.
-
-A map between neighbourhoods induces the reverse map on global sections. Its
-commutation with the geometric points is equivalent to commutation with B → K,
-since K → Ω is injective. Cancellation of the chart inclusion identifies maps over
-Y with maps over Spec A. The affine spectrum anti-equivalence consequently proves
-full faithfulness, including identities and composition.
-
-For a triple (B,q,φ), take V = Spec B with structure map Spec α followed by the
-chart inclusion, and point Spec(B → κ(q) → K → Ω). Compatibility on A puts this
-point over x. Its kernel is q, since both field embeddings are injective; uniqueness
-of residue-field factorization recovers φ. ΓSpecIso identifies the reconstructed
-ring with B, giving essential surjectivity. The fully faithful, essentially
-surjective functor is an equivalence, with δ and the stated formulas unchanged. 
-(blueprint: split-etale-chart-functor)
--/
+/-- The opposite of the category of pointed affine chart neighbourhoods is equivalent to the
+category of residue-field triples (Stacks, Tags 04HX and 04HT). -/
 /- The affine chart construction supplies an equivalence of the indexing categories.
 The construction follows affine-spectrum duality and residue-point factorization.
 The proof constructs object and morphism maps, proves full faithfulness by
 cancellation over the open immersion, and proves essential surjectivity from the
-spectrum of each triple. (blueprint: split-etale-chart-functor) -/
+spectrum of each triple. -/
 theorem etale_chart_residue_triples_equivalence_functor
     (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω]
     (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i]
@@ -113,12 +90,10 @@ theorem etale_chart_residue_triples_equivalence_functor
   exact ⟨H.asEquivalence⟩
 
 
-/- The unused arbitrary-equivalence ring-compatibility assertion was retired.
-Abstract equivalences need not preserve the pointed ring diagram.
-The source's compatible equivalence is constructed in the theorem below.
- -/
-/-- (blueprint: lem-weil-pbc-etale-chart-residue-triples-equivalence)
-(blueprint: split-etale-chart-ring-iso) -/
+/- Abstract equivalences need not preserve the pointed ring diagram; the compatible
+equivalence is constructed in the theorem below. -/
+/-- The opposite of the category of pointed affine chart neighbourhoods is equivalent to the
+category of residue-field triples, compatibly with the pointed ring diagrams. -/
 theorem etale_chart_residue_triples_equivalence
     (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω]
     (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i]

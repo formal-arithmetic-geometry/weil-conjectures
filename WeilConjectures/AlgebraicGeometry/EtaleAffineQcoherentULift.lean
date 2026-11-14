@@ -20,8 +20,9 @@ public import Mathlib.Algebra.Category.Grp.Zero
 /-!
 # Affine quasi-coherent acyclicity with lifted coefficients
 
-Source: Stacks Project, Tag 03P2, affine case
-(blueprint: lemma-p-torsion-affine-curve-characteristic--4).
+## References
+
+* Stacks Project, Tag 03P2
 -/
 
 @[expose] public section
@@ -33,22 +34,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- Affine acyclicity holds for the universe lift of the associated quasi-coherent sheaf.
-Source: Stacks Project, Tag 03P2, affine case, and its Čech proof using Tag 03F9
-(blueprint: lemma-p-torsion-affine-curve-characteristic--4).
-
-Proof: Use the affine basis of the small étale site. A covering of an affine admits a
-finite affine refinement; its finite disjoint union is a faithfully flat affine cover.
-The pullback module is quasi-coherent. On its iterated fibre products the associated
-sheaf's Čech complex is the Amitsur complex of the section module, hence is exact in
-positive degrees by faithfully flat descent. Applying `ULift` to each group and map
-preserves this exactness: a lifted cocycle has an underlying cocycle, choose an
-underlying preimage and lift it to obtain the required coboundary. The lifted Čech
-complex therefore has zero positive cohomology. The affine basis is stable under
-fibre products over an affine object, and finite affine covers refine every cover.
-The Čech vanishing criterion now gives vanishing of sheaf cohomology at the terminal
-affine object in every positive degree. This is the same proof as
-`etale_affine_qcoherent`, with coefficients in the larger universe; no assertion
-that universe lift preserves injective objects is required. -/
+(Stacks, Tags 03P2 and 03F9) -/
 theorem etale_affine_qcoherent_ulift (X : Scheme.{u}) [IsAffine X]
     (F : X.Modules) [F.IsQuasicoherent] (q : ℕ) (hq : 0 < q) :
     Subsingleton (Sheaf.H

@@ -13,8 +13,9 @@ import WeilConjectures.CategoryTheory.FilteredComplexDifferentialRepresentatives
 
 /-! # Prescribed normalized CE pages and their first-page computation
 
-Source: Stacks Project, Tags 015J, 015K and 012K.
-(blueprint: lem-weil-pbc-ce-prescribed-normalized-first-pages).
+## References
+
+* Stacks Project, Tags 015J, 015K and 012K
 -/
 
 @[expose] public section
@@ -132,33 +133,7 @@ set_option linter.unusedVariables false in
 /-- Assemble presentations on prescribed CE resolutions with normalized quotient pages,
 and compute a supplied map of the first page on ordinary sheaf cohomology.
 This statement constructs no spectral-sequence morphism.
-Source: Stacks Project, Tag 015J, lemma-two-ss-complex-functor;
-Tag 015K, remark-functorial-ss; Tag 012K, lemma-spectral-sequence-filtered-complex;
-Tag 06XR, cohomology through injective resolutions.
-(blueprint: lem-weil-pbc-ce-prescribed-normalized-first-pages).
-
-Proof. Use the prescribed lower bound and extension by zero to construct the flipped
-finite-diagonal sections total and second filtration. In positive degree use the actual
-boundary cokernels and their unique representative differential. Choose each successor
-comparison by its normalization on successor cycles; this determines it uniquely.
-Adjoin the graded page zero, using its canonical homology comparison to page one.
-Compute page one from the injective resolution in each complex degree. Multiply the
-row identification by (-1)^(pq) to absorb the total differential sign. Compare the
-prescribed row with the chosen injective resolution, and identify its sections homology
-with Ext by evaluation at 1 in the constant integer sheaf. Choose ordinaryComparison
-through this explicit Ext identification, which is natural in coefficient morphisms.
-Retain the augmentation, K-injective comparison, homology isomorphism and transported
-finite homology-image filtration from exists_hypercohomology_firstPage.
-For the first-page computation restrict the supplied filtered sections map to its
-steps. The diagonal equation identifies the induced graded map with the sections
-pullback unit followed by the supplied row comparison. The augmentation equation
-identifies the resulting homology map with Ext pullback followed by the coefficient
-map. The identical signs in the two row identifications commute with the additive
-map and cancel. An arbitrary M with the stated representative equation equals this
-row map: use an epic cover of graded cycles by filtered representatives, then cancel
-the boundary cokernel projection. This proves the first-page equation for M, without
-constructing or asserting any compatible maps on higher pages. Empty diagonals, zero
-rows and empty schemes use the same finite-limit and cokernel constructions. -/
+(Stacks, Tags 015J, 015K, 012K and 06XR) -/
 theorem exists_etaleCE_prescribed_normalized_first_pages
     (I : ∀ (X : Scheme.{uNatural})
       (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),

@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleUnitsStalkEvaluationOverfieldBijec
 /-!
 # Evaluation of geometric units germs in a separable closure
 
-Source: Stacks Project, Tag 03QV, Example sheaves-point (2), and Tag 02GL.
+## References
+
+* Stacks Project, Tags 03QV and 02GL
 -/
 
 @[expose] public section
@@ -99,27 +101,7 @@ private theorem evaluation_isSeparable_overfield
 
 /-- Evaluation identifies the additive units stalk with separable-closure units.
 The displayed formula fixes the equivalence on every germ, independently of any
-equivalence between sheaves and representations.
-
-Source: Stacks Project, Tag 03QV, Example sheaves-point (2), and Morphisms, Tag 02GL.
-(blueprint: lem-sc-etale-units-stalk-evaluation-overfield).
-
-Proof: Factor the geometric lift through the residue field of its image.
-The structural residue-field extension is etale, hence separable. Naturality of
-the global-sections isomorphism shows that evaluation of every function is
-separable over K. The given embedding of Ks into Omega corestricts to the relative
-separable closure of K in Omega. This is bijective because both fields are
-separable closures of K. Its inverse is determined by the given embedding.
-Compose the evaluation ring map into the relative separable closure with this
-inverse, then take units, write them additively, and use ULift. Injectivity of
-Ks -> Omega and compatibility of pullback of global functions prove that these
-maps form a compatible cocone on pointed etale neighbourhoods. The colimit
-descending map followed by ULift.down is the additive evaluation homomorphism.
-The cocone identities give its formula on every germ. Apply the independent
-bijectivity theorem to obtain the additive equivalence, with the same formula.
-No arbitrary data come from an unproved existence statement: the field equivalence
-and the colimit map are constructed from proved universal properties. The proof
-works for imperfect K and does not assume Omega/K algebraic. -/
+equivalence between sheaves and representations (Stacks, Tags 03QV and 02GL). -/
 theorem exists_etaleUnits_stalk_evaluation_overfield
     (K Ω : Type u) [Field K] [Field Ω]
     [Algebra (SeparableClosure K) Ω] [Algebra K Ω]

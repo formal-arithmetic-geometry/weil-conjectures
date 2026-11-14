@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleZariskiDerivedSectionsAcyclicLeray
 
 /-! # Natural acyclic Leray with two Ext models
 
-Source: Stacks Project, Tags 03DW, 03P2 and 0733.
+## References
+
+* Stacks Project, Tags 03DW, 03P2 and 0733
 -/
 
 @[expose] public section
@@ -34,26 +36,8 @@ set_option autoImplicit false
 
 set_option linter.unusedVariables false in
 /-- Natural mixed-universe Leray comparison on the subcategory of acyclic abelian
-sheaves. No quasi-coherent module or tensor-sections construction is assumed.
-Source: Stacks Project, Cohomology on Sites, Tag 0733(1), Tags 072Z and 0730;
-Ext via injective resolutions, Tag 06XP.
-(blueprint: lem-sc-etale-zariski-natural-acyclic-leray)
-
-Proof: inverse image along a continuous finite-limit-preserving inclusion of opens
-is exact, so its right adjoint T preserves injectives. If F is T-acyclic, pushing
-an injective resolution of F through T gives an injective resolution of TF:
-left exactness handles degree zero and the assumed vanishing handles positive
-exactness. Sections at the terminal open agree with sections of F at its terminal
-etale image. Compute both Ext models using these resolutions; the free abelian
-representable at the terminal open represents sections, as does the constant
-integer sheaf at the terminal etale object. Their Hom complexes are the same
-section complex. Thus the resulting comparison is additive and invertible.
-Comparison chain maps lifting any coefficient morphism commute with the section
-identification. Any two lifts are homotopic, and induce the same cohomology map.
-Hence the equivalences are simultaneous and natural, independently of resolution
-choices and of the proofs of acyclicity. The small enough-injectives Ext model
-and the standard large model have the same cocycle and coboundary computation.
-This argument works in positive degree on the empty scheme as well. -/
+sheaves. No quasi-coherent module or tensor-sections construction is assumed
+(Stacks, Tags 0733, 072Z, 0730 and 06XP). -/
 theorem etaleZariskiNaturalAcyclicLeray
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
     [i.IsContinuous (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology]

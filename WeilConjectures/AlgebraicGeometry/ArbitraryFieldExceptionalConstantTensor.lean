@@ -16,15 +16,15 @@ import WeilConjectures.CategoryTheory.DerivedCategory.SmoothPurity.DerivedTensor
 /-!
 # Ordered proper projection isomorphism for constant coefficients
 
-Source: Zheng, Construction 2.26, equation (2.26.1), printed p. 15, and
-Proposition 2.29(2), printed p. 16, with base `Spec k`
-(blueprint: lem-sfb-arbitrary-field-exceptional-constant-tensor).
-
 This file only defines `properConstantProjectionIso`: for a proper morphism `f : X ⟶ Y`,
 a finite coefficient ring `A` and a complex `V` of `A`-modules, the isomorphism
 `V_Y ⊗ᴸ Rf_*K ≅ Rf_*(V_X ⊗ᴸ K)`. It is built from the signed derived tensor symmetry,
 the proper projection map and the canonical pullback identification `Lf^*V_Y ≅ V_X` of
 constant complexes.
+
+## References
+
+* Zheng, Construction 2.26 and Proposition 2.29(2)
 -/
 
 @[expose] public section
@@ -40,12 +40,8 @@ namespace AlgebraicGeometry.Etale
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
   {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
 
-/-- The ordered proper projection isomorphism for a constant coefficient complex.
-Its hom is signed symmetry, the canonical proper projection map, direct image of
-signed symmetry, and the canonical pullback-of-constants identification.
-Source: Zheng, Theorem 2.18(2) and Construction 2.26, printed pp. 12 and 15;
-`lemma-cohomology-projective-line-trace`
-(blueprint: lem-sfb-arbitrary-field-exceptional-constant-tensor). -/
+/-- The ordered proper projection isomorphism for a constant coefficient complex
+(Zheng, Theorem 2.18(2) and Construction 2.26). -/
 noncomputable def properConstantProjectionIso
     (V : DerivedCategory (ModuleCat.{u + 1} A)) (K : DerivedCategoryModule A X) :
     ((derivedTensor (ModuleCat.{u + 1} A) Y).obj ((constantFunctor A Y).obj V)).obj

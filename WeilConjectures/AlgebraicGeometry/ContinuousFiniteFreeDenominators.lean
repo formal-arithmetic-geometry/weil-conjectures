@@ -23,16 +23,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- A rational regular-module endomorphism on a compact scheme has one integral
-numerator after multiplication by a power of ℓ.
-Source: Bhatt--Scholze, Section 6.8, continuous coefficient localization.
-(auxiliary; not a blueprint node)
-
-Proof. Evaluate the endomorphism on the global unit to obtain its continuous
-coefficient. Compactness bounds this function by one power of ℓ, so localization
-of continuous functions supplies an integral numerator. Multiplication by this
-numerator gives an integral regular endomorphism. The coefficient realizations
-and the regular-module extension isomorphism identify its extension with the
-specified multiple of the original morphism. This also works on the empty scheme. -/
+numerator after multiplication by a power of ℓ (Bhatt–Scholze, Section 6.8). -/
 theorem integralRegular_clear_denominators (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u}) [CompactSpace X]
@@ -171,15 +162,7 @@ private theorem finiteBiproduct_clear_denominators
   simpa only [Category.assoc, Preadditive.nsmul_comp, Preadditive.comp_nsmul, q] using heq
 
 /-- Every map between rationalizations of standard finite free integral modules
-on a compact scheme has an integral numerator.
-Source: Bhatt--Scholze, Section 6.8, continuous coefficient localization.
-(auxiliary; not a blueprint node)
-
-Proof. Apply the regular-module denominator lemma to each matrix coefficient.
-Take the maximum of the finitely many resulting exponents, multiply each integral
-numerator by the missing power, and assemble the integral matrix using finite
-biproducts. The biproduct comparison for scalar extension proves the asserted
-identity coefficient by coefficient. Empty matrices use exponent zero. -/
+on a compact scheme has an integral numerator (Bhatt–Scholze, Section 6.8). -/
 theorem integralFiniteFree_clear_denominators (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u}) [CompactSpace X] (n m : ℕ)

@@ -12,8 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.FractionZeroTensorPower
 
 /-! # Vanishing of a cohomology fraction
 
-Source: Stacks Project, Tag 09MR, degree-zero localization preceding the lemma.
-(blueprint: lem-sc-cohomology-fraction-eventually-zero)
+## References
+
+* Stacks Project, Tag 09MR
 -/
 
 @[expose] public section
@@ -25,22 +26,7 @@ open AlgebraicGeometry.RingedSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- A zero fraction has a numerator killed by a further power of the section.
-
-Source: Stacks Project, Tag 09MR, degree-zero localization preceding the lemma;
-this is the zero criterion for that localization.
-Proof: Tensor multiplication by powers of s has identity transition at exponent zero
-and associative transitions, after the canonical tensor-power identifications.
-Applying the cohomology functor therefore gives a directed system of additive groups.
-Map the direct sum of numerator groups to Mathlib's additive direct limit by its
-canonical component maps. Each generating fraction relation maps to zero by the
-transition identity, so this map descends to the fraction quotient. Apply it to
-the assumed zero fraction. Mathlib's AddCommGroup.DirectLimit.of.zero_exact gives
-a later index k where the numerator vanishes. Write k=n+b and identify that
-transition with multiplication by s^b. This also handles s=0, n=0, empty opens,
-and zero cohomology groups uniformly.
-No injectivity of transition maps, quasi-coherence, or compactness is used.
-(blueprint: lem-sc-cohomology-fraction-eventually-zero). -/
+/-- A zero fraction has a numerator killed by a further power of the section (Stacks, Tag 09MR). -/
 theorem cohomologyFraction_eventually_zero {X : Scheme.{u}} (L F : X.Modules)
     (s : Γ(L, ⊤)) (p : ℕ) (W : X.Opens) (n : ℕ)
     (ξ : (openModuleCohomology X.toRingedSpace p W).obj

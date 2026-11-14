@@ -11,9 +11,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 import all Mathlib.Logic.Small.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleTensorTraceBaseChange
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
-
 # Constant-unit normalization along sections -/
 @[expose] public noncomputable section
 set_option autoImplicit false

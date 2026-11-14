@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.CondensedQbarCoefficientConstruc
 import WeilConjectures.AlgebraicGeometry.CondensedQbarFieldEvaluationLinearity
 
 /-! # Compatibility of bounded coefficient constructions
-Source: RefactorInstruction, Section 4, coefficient realization and geometric fibers.
 -/
 
 @[expose] public section
@@ -82,18 +81,8 @@ private theorem whisker_comparison
   subst U
   exact ⟨e ≪≫ Functor.isoWhiskerRight (Functor.isoWhiskerLeft G h) T⟩
 
-/-- Algebraically closed field extension preserves the constructed module evaluation.
-
-Source: Bhatt--Scholze, Example 4.1.10; RefactorInstruction, Section 4, geometric
-fiber comparison in the finite-matrix refinement, steps 1--3
-(auxiliary; not a blueprint node).
-
-Proof: use the concrete scalar-linearity theorem for the canonical abelian
-comparison. The comparison is invertible by geometric field evaluation under
-extension. ModuleCat.isoMk lifts it to module isomorphisms; its sheaf naturality
-proves naturality on modules. Finally, extendScalarsIsoComapInv identifies the
-restriction-along-inverse formula with the actual module inverse image.
--/
+/-- Algebraically closed field extension preserves the constructed module evaluation
+(Bhatt–Scholze, Example 4.1.10). -/
 theorem condensedQbar_fieldFiber_extension (ℓ : ℕ) [Fact ℓ.Prime]
     (K K' : Type u) [Field K] [IsAlgClosed K] [Field K'] [IsAlgClosed K']
     (i : K →+* K') : Nonempty

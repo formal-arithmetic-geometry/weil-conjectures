@@ -23,21 +23,7 @@ namespace AlgebraicGeometry
 
 set_option maxHeartbeats 500000 in
 -- Both transported mate laws unfold the pinned sheaf adjunctions in this calculation.
-/-- Tensor composition mates satisfy both unit laws on the homotopy category.
-Source: Mathlib.CategoryTheory.Adjunction.CompositionIso,
-`Adjunction.leftAdjointCompIso_comp_id` and `Adjunction.leftAdjointCompIso_id_comp`;
-Stacks Project, Cohomology, Tag 0D5S, Lemma 20.27.2.
-(blueprint: lem-pc-derived-pullback-unit-kflat).
-Proof: transport the pinned adjunction of the composite along `id_comp f`
-and `comp_id f`, respectively. The pushforward comparison, followed by the same
-transport, is the appropriate whiskering of `pushforwardId`: this is checked
-on sections, where all comparison maps are identities. Apply the two Mathlib
-left-adjoint composition unit laws to these equalities. Map the resulting
-natural transformations termwise to complexes and then to the homotopy category.
-The complex comparison maps are termwise identities and the quotient functor
-preserves composition, giving exactly the two displayed identities. This argument
-uses no derived functor, K-flatness, or resolution, and also applies to the zero
-complex and to an identity morphism. -/
+/-- Tensor composition mates satisfy both unit laws on the homotopy category (Stacks, Tag 0D5S). -/
 private theorem tensorPullback_homotopy_unit
     (a : ∀ {X Y : Scheme.{u₁}} (f : X ⟶ Y), (Scheme.Modules.tensorPullback f).Additive)
     {X Y : Scheme.{u₁}} (f : X ⟶ Y)
@@ -177,29 +163,8 @@ private theorem tensorPullback_homotopy_unit
     rfl
 
 
-/-- The two unit comparisons agree on a K-flat representative, for identity
-isomorphisms normalized by the tensor identity mate.
-Source: Stacks Project, Cohomology, Tag 0D5S, Lemma 20.27.2;
-Mathlib `Adjunction.leftAdjointCompIso_comp_id` and
-`Adjunction.leftAdjointCompIso_id_comp`.
-(blueprint: lem-pc-derived-pullback-unit-kflat).
-Proof: write H for the homotopy image of P. Apply hc to the hom of each
-composition comparison and use leftDerived_fac_app at H. The resulting expression
-is the two successive counits followed by the homotopy image of the tensor
-composition mate. For c(id_X,f), naturality of the counit of id_X moves the
-counit of f past it. Substitute hi X evaluated at the tensor pullback of H;
-this replaces the identity counit followed by the tensor identity mate by
-Qh applied to i X. For c(f,id_Y), substitute hi Y at H and use naturality
-of the counit of f. The underived identities are respectively
-leftAdjointCompIso_comp_id and leftAdjointCompIso_id_comp, applied to the
-pinned adjunctions and pushforward identity laws. When rewriting id_comp or
-comp_id, transport the pinned adjunctions as well; conjugateIsoEquiv is natural
-under that transport. The homotopy images and Qh preserve these equalities.
-The two expressions now agree after postcomposition with the counit of f
-at H. This counit is invertible by hK f P hP, so cancel it. Functor unitors
-have identity components, giving the two displayed component equalities.
-No nonempty, flat-morphism, or boundedness hypothesis is used: the argument also
-applies to zero complexes, empty schemes, and f an identity. -/
+/-- The two unit comparisons agree on a K-flat representative, for identity isomorphisms
+normalized by the tensor identity mate (Stacks, Tag 0D5S). -/
 theorem derivedPullbackComposition_unit_kflat
     [d : ∀ X : Scheme.{u₁}, HasDerivedCategory.{w₁}
       (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]

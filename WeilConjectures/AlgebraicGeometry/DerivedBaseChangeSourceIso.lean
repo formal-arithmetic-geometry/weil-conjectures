@@ -12,8 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-! # Source-coordinate naturality of the derived comparison
 
-Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: lem-pc-derived-base-change-source-iso).
+## References
+
+* Stacks Project, Tags 08HY and 0D5S
 -/
 
 @[expose] public section
@@ -221,28 +222,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Changing both source coordinates, and transporting the coefficient arrow, conjugates
 its derived comparison by isomorphisms. This statement concerns arbitrary commutative
-squares, not open restrictions or the invertibility of the comparison.
-Source: Stacks Project, cohomology.tex, Tag 08HY (counit definition of base change)
-and Tag 0D5S (composition of derived pullback).
-(blueprint: lem-pc-derived-base-change-source-iso).
-
-Proof: Use the composition comparisons c selected by exists_derivedPullbackComposition
-and the adjunctions pinned to their derived counits by exists_schemeDerivedAdjunction.
-For a scheme isomorphism e, the comparisons for e.hom followed by e.inv, and conversely,
-together with the identity comparison, exhibit pullback as an equivalence. Its pinned
-adjunction therefore has invertible unit and counit. The right-adjoint mate of c e.hom f
-identifies R(e.hom f) with R(e.hom) followed by Rf. Insert the unit for e.hom to identify
-Rf E with R(e.hom f) L(e.hom) E, and then apply the image of alpha. Applying Lg gives
-the source isomorphism a. Perform the same construction for e' and beta to obtain b.
-Transpose the claimed equation under the adjunction for e'.hom followed by f'.
-Naturality of its counit identifies the right-hand transpose with the pullback of the
-original transpose, after the comparison c for the source-coordinate square. The
-associativity law for c identifies its square comparison with that for t; equality
-transports agree by ht and proof irrelevance. Substitute hphi to identify the final
-coefficient factors. The triangle identities cancel the units inserted in a and b.
-The Hom equivalence is injective, proving the equation. All these identities apply to
-zero coefficients, identity coordinates and empty schemes; no cartesian, affine or
-quasi-coherent hypothesis is used. -/
+squares, not open restrictions or the invertibility of the comparison (Stacks, Tags 08HY and 0D5S).
+-/
 theorem exists_derivedBaseChange_source_iso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.ClosedStructureTensorProjectionStalk
 
 /-! # The ordinary projection formula for a closed structure sheaf
 
-Source: Stacks Project, Modules, Tags 08KS and 01CB; Sheaves, Tag 0098.
-(blueprint: lem-pc-closed-structure-tensor-projection). -/
+## References
+
+* Stacks Project, Tags 08KS, 01CB and 0098
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -110,25 +112,8 @@ private theorem exists_projectionComponent {Z Y : Scheme.{u}} (i : Z ⟶ Y)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The closed-immersion ordinary projection formula, natural in the module.
-Source: Stacks Project, Modules, Tags 08KS and 01CB; Sheaves, Tag 0098 for pullback stalks.
-(blueprint: lem-pc-closed-structure-tensor-projection).
-
-Proof: use the canonical tensor-pullback adjunction. For an open V of Y, a section
-s of M over V, and a section r of O_Z over i^{-1}V, pair them by multiplying r
-with the pullback unit applied to s. This is bilinear over O_Y(V), with the
-pushforward scalar action, and commutes with restriction. It induces a map from
-the sectionwise tensor presheaf to i_*i^*M, and sheafification gives a map
-M tensor i_*O_Z -> i_*i^*M. At i(z), the tensor-stalk and closed-pushforward
-comparisons identify the source with M_{i(z)} tensor O_{Z,z}; the pullback-stalk
-and closed-pushforward comparisons identify the target with O_{Z,z} tensor M_{i(z)}.
-The germ formulas show that the map sends m tensor r to r tensor m, the scalar
-extension symmetry isomorphism. Off the closed image both stalks are zero,
-as witnessed by the open complement. Stalks jointly reflect isomorphisms, so
-all components are invertible. The section pairing is natural in M, giving a
-natural transformation; invert it componentwise to obtain a natural isomorphism.
-No quasi-coherence or flatness is required. The identity immersion recovers the
-right unitor, and the empty source gives the zero functor. -/
+/-- The closed-immersion ordinary projection formula, natural in the module
+(Stacks, Tags 08KS, 01CB and 0098). -/
 theorem nonempty_closedStructure_tensor_projection
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] :
     letI := SheafOfModules.monoidalCategory Y.sheaf

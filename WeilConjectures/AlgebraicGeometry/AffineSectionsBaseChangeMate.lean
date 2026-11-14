@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-! # Affine sections and the mate of sheaf base change
 
-Source: Stacks Project, perfect.tex, Tag 0AA7; cohomology.tex, Tags 08HY and 0D5T.
-(blueprint: lem-pc-affine-sections-base-change-mate).
+## References
+
+* Stacks Project, Tags 0AA7, 08HY and 0D5T
 -/
 
 @[expose] public section
@@ -29,42 +30,8 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The affine sections comparison intertwines the extension/restriction mate with
-sheaf base change, followed by the pullback/direct-image mate of any morphism.
-The supplied sections comparison is normalized on sheaves and right-derived units.
-Only the pushforward of E is required to have quasi-coherent cohomology; neither
-Tor independence nor invertibility of the morphism or of base change is required.
-
-Source: Stacks Project, perfect.tex, Tag 0AA7, construction of the canonical map;
-cohomology.tex, Tag 08HY, counit description of base change, and Tag 0D5T.
-(blueprint: lem-pc-affine-sections-base-change-mate).
-
-Proof:
-1. Derived direct-image composition and exact scalar restriction give a natural
-   isomorphism Rf'_* followed by RΓ over B with RΓ over f'. On sheaves it is the
-   identity on sections, and the composition of right-derived units specifies its
-   derived normalization. The same construction over R identifies RΓ over f with
-   RΓ over Spec R after Rf_*.
-2. For Q = Rf_*E, use the affine quasi-coherent derived equivalence on Spec R
-   and Spec B. Resolve its module model by a K-flat complex. The tilde/pullback
-   formula identifies Lg*Q with tilde of extension of scalars. The extension and
-   restriction adjunction on these complexes descends to localization. Compare
-   the descended adjunction with the fixed affineDerivedExtensionAdjunction by
-   uniqueness of left adjoints to the fixed derived restriction functor. This
-   yields the source isomorphism a commuting with the adjunction units. Compose
-   with extension of the inverse sections/pushforward isomorphism of step 1.
-3. Transpose the displayed right-hand composite under affine extension/restriction.
-   By the unit compatibility of a this is RΓ of the unit for Lg*, followed by
-   restriction of the sections of sheaf base change and of the mate of m.
-   Expand base change as the mate of pullback composition and the counit for f.
-   Naturality moves m past the counit; the triangle identities cancel the unit
-   and counit pairs. Direct-image composition identifies what remains with RΓ(m)
-   followed by the sections comparison for g_X. On K-injective models both
-   sections comparisons act as the identity on sections. The supplied underived
-   identity and right-derived-unit equation therefore identify this comparison
-   with c. Equality on all objects follows by the right-derived universal property.
-4. Apply injectivity of the affine adjunction Hom equivalence. The construction
-   of a and the target sections isomorphism does not depend on L or m, giving
-   the stated simultaneous equality. -/
+sheaf base change, followed by the pullback/direct-image mate of any morphism
+(Stacks, Tags 0AA7, 08HY and 0D5T). -/
 theorem exists_affineSectionsBaseChangeMate
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

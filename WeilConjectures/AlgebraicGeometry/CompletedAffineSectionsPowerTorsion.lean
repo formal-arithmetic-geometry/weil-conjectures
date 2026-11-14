@@ -54,10 +54,8 @@ private theorem tensor_ideal_range {A S T : Type u} [CommRing A]
       exact Submodule.add_mem _ hx hy
 
 open scoped TensorProduct in
-/-- The quotient equivalence is the tensor unit, without a finite-module hypothesis.
-Source: Stacks, Tag 05GG and right exactness of tensor, used in Tag 0889(1).
-Proof: quotient the completion evaluation by its kernel, tensor that equivalence,
-and use the tensor/quotient equivalence. Its value on 1 tensor x is the unit. -/
+/-- The quotient equivalence is the tensor unit, without a finite-module hypothesis
+(Stacks, Tags 05GG and 0889). -/
 private theorem adic_tensor_unit_quotient {A : Type u} [CommRing A]
     (I : Ideal A) (hI : I.FG) (T : ModuleCat.{u} A) (n : ℕ) :
     ∃ e : (T ⧸ (I ^ n • (⊤ : Submodule A T))) ≃ₗ[A]
@@ -141,22 +139,8 @@ private theorem adic_tensor_unit_bijective {A : Type u} [CommRing A]
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 open scoped TensorProduct in
-/-- The affine-chart pullback unit is naturally the tensor scalar-extension unit.
-Source: Stacks Project, Tags 01I9 and 01IA; Tag 088B, affine base-change paragraph.
-
-Proof: Let g be Spec of the algebra map followed by the inverse affine-chart
-isomorphism and the open immersion. The inverse image of U under g is top.
-Evaluate the tensor-pullback adjunction unit on U and restrict to top; transport
-its scalars along the canonical global-section isomorphism of Spec R. The chart
-square identifies its B action with the specified algebra map B to R, so this
-is a B-linear map for every module sheaf. Naturality follows from unit naturality
-and restriction naturality. For a quasi-coherent sheaf, apply the affine pullback
-sections comparison to U and the top affine open of Spec R. Transport the second
-factor through the Spec global-section isomorphism and swap the tensor factors.
-The resulting bijective B-linear map gives e; its pure-tensor formula at 1 says
-that e carries 1 tensor x to the component of the natural comparison.
-This uses no Noetherian or torsion assumption. It also applies to the empty affine
-chart and to the zero algebra, since the affine-section comparison includes them. -/
+/-- The affine-chart pullback unit is naturally the tensor scalar-extension unit
+(Stacks, Tags 01I9, 01IA and 088B). -/
 private theorem affineSpec_tensor_sections_comparison
     {Y : Scheme.{u}} (U : Y.affineOpens)
     (R : Type u) [CommRing R] [Algebra Γ(Y, U.1) R] :
@@ -266,25 +250,8 @@ private theorem affineSpec_tensor_sections_comparison
 
 /-- A natural comparison on all module sheaves is invertible on quasi-coherent
 sheaves whose affine sections are killed by a positive power of the completion ideal.
-This statement concerns one sheaf at a time, without formal systems or transitions.
-
-Source: Stacks Project, Tags 088B (completed base change), 05GG (completion quotient),
-and 01I9 (affine pullback).
-(blueprint: lem-weil-pbc-completed-affine-sections-power-torsion)
-
-Proof: Define the comparison by the unit of tensor pullback followed by restriction
-from the inverse image of U to the whole completed affine scheme. This inverse image
-is the whole scheme, since g factors through U. The structure-ring map on this chart
-is B to its K-adic completion R; the Spec global-section identification therefore
-makes the comparison B-linear. Naturality follows from the adjunction unit and
-restriction maps. For a quasi-coherent sheaf M, affine pullback sections identify
-this map with m mapping to 1 tensor m. If K^(n+1) kills M(U), its scalar action factors
-through B/K^(n+1). Since B is Noetherian, K is finitely generated, and the positive
-power completion quotient is R/K^(n+1)R = B/K^(n+1), compatibly with B to R. Tensoring
-M(U) over this quotient identifies the unit with the identity, hence it is bijective
-and gives an isomorphism of B-modules. The unit ideal forces M(U) = 0; the zero ideal
-makes completion the original ring. The zero ring and empty affine open are included.
--/
+This statement concerns one sheaf at a time, without formal systems or transitions
+(Stacks, Tags 088B, 05GG and 01I9). -/
 theorem completedAffineSections_powerTorsion
     {Y : Scheme.{u}} [IsNoetherian Y] (J : Y.IdealSheafData) (U : Y.affineOpens) :
     let B := Γ(Y, U.1)

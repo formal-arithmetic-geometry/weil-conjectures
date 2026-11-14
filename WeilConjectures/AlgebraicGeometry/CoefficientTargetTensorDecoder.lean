@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.CoefficientIntersectionSectionModel
 
 /-! # Injective of the coefficient tensor map
 
-Source: Stacks Project, Tags 02KG, 01I9, 01IA and 0097.
+## References
+
+* Stacks Project, Tags 02KG, 01I9, 01IA and 0097
 -/
 
 @[expose] public section
@@ -28,29 +30,8 @@ noncomputable section
 
 /-- The affine coefficient computation supplies a linear decoder on supported sections.
 This assertion does not quantify over a candidate coefficient map and does not assert
-injectivity. It specifies the decoder only on supported pullback-unit generators.
-Source: Stacks Project, Tags 02KG, 01I9, 01IA and 0097.
-(blueprint: aux-pc-coefficient-target-tensor-decoder).
-
-Proof: Set A = Gamma(U,O), D = Gamma(Z,O), R = Gamma(B,O), and let N be
-F(Z), with its given structural A-action. The affine intersection base-change
-lemma makes I = W intersect fprime inverse image B affine. The restricted
-cartesian square identifies I with Z times_U B. The affine ring computation
-identifies Gamma(I,O) with R tensor_A D. Restriction preserves quasi-coherence,
-so the affine pullback section theorem identifies sections of M on I with
-(R tensor_A D) tensor_D N. Compare tensorPullback and pullback using uniqueness
-of left adjoints and the conjugate-isomorphism unit equation; compare pullback
-along the open immersions with restriction using restrictFunctorIsoPullback.
-These comparisons take the restricted pullback-unit section of s to
-(1 tensor 1) tensor s. The A-action is the displayed one because the canonical
-chart followed by GammaSpecIso cancels. Compose coefficientSupportIso with
-these identifications, and then with the balanced R-linear map sending
-(r tensor d) tensor n to r tensor (d*n). This map is well-defined: balancing
-over D is associativity of the D-action on N, and balancing over A uses the
-structural A-action on D and N. On the specified generator its value is
-1 tensor (1*s) = 1 tensor s. This gives the asserted decoder and formula.
-If Z or B is empty all relevant modules vanish and the same formulas hold;
-no flatness, nonemptiness, or cover is used. -/
+injectivity. It specifies the decoder only on supported pullback-unit generators
+(Stacks, Tags 02KG, 01I9, 01IA and 0097). -/
 theorem exists_coefficientTarget_tensor_decoder
     {X T : Scheme.{u}} (f : X ⟶ T) [IsSeparated f]
     (F : X.Modules) [F.IsQuasicoherent]

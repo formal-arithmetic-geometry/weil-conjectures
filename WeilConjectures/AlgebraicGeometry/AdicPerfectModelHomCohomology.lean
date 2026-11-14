@@ -14,8 +14,9 @@ import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology
 
 /-! # Ordinary quotient-model Hom and algebraic Hom cohomology
 
-Source: Stacks Project, Tags 09C5, 09C6 and 0A8H.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 09C5, 09C6 and 0A8H
 -/
 
 @[expose] public noncomputable section
@@ -180,29 +181,8 @@ private theorem homologyHomEquiv_scalar
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Homotopy-category Hom between the ordinary quotient complexes is sections of
 algebraic quotient Hom cohomology. Naturality is stated on actual chain maps and
-ordinary scalar balancing, without derived localization or derived Hom.
-
-Source: Stacks Tag 09C6, the displayed formula for H_n; Tag 09C5, exact sections;
-More on Algebra, Tag 0A8H, the signed Hom differential.
-(auxiliary; not a blueprint node).
-
-Proof: adicPerfectHomCochains isolates the chain-level evaluation of ordinary
-quotient Hom: constant finite-free evaluation, finite-projective retracts, and the
-finite product over the bounded source degrees. Its successor equation uses the
-actual ordinary scalar-balancing isomorphisms. Construct the scalar-change map on
-Hom cochains by applying the additive functor and conjugating by those balancing
-maps; the signed differential identities prove that it is a chain map. Apply
-homology to the resulting commuting square of complexes. Sections of constant
-module sheaves preserve finite limits and finite colimits on any small site, so
-the exact-functor homology comparison identifies the realized degree-zero homology
-with constant sections of algebraic quotient cohomology. Mathlib identifies
-cohomology classes with homotopy-category maps into a shift; remove the zero shift
-using shiftFunctorZero. Its value on an actual chain map is that map's cocycle
-class. Naturality of cycles inclusions and homology projections proves that this
-class formula commutes with scalar change. Finally, naturality of the exact-functor
-homology comparison gives the required successor identity. The weakly contractible
-hypothesis and the bounds and projectivity of Q are preserved in the signature,
-although this proof only needs the bounded finite-projective source. -/
+ordinary scalar balancing, without derived localization or derived Hom
+(Stacks, Tags 09C6, 09C5 and 0A8H). -/
 theorem adicPerfectModelHomCohomology (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X)

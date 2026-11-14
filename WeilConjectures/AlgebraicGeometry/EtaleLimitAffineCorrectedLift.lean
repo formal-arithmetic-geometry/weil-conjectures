@@ -14,8 +14,9 @@ import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # Corrected lifts for the affine continuity kernel
 
-Source: Stacks Project, Tags 09YQ, 09YP, 09YN and 0739.
-(blueprint: lem-weil-pbc-etale-limit-affine-corrected-lift).
+## References
+
+* Stacks Project, Tags 09YQ, 09YP, 09YN and 0739
 -/
 
 @[expose] public section
@@ -27,43 +28,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A successor-degree zero-image class has a corrected preceding-degree lift.
-
-Source: Stacks Project, Tag 09YP via the injective-system construction 0EXZ,
-and the connecting-row argument of Tag 0739, transported by 0EYL and 04HR.
-(blueprint: lem-weil-pbc-etale-limit-affine-corrected-lift).
-
-Proof: Embed the compatible coefficient system F in an injective system E
-using 0EXZ: at stage i use the product of the direct images of injective
-embeddings of F_k over arrows i → k. The identity component is monic;
-exact inverse image implies that direct image preserves injectives. Take
-stage cokernels R. Exact inverse images and cancellation of cokernel epis
-give the identity and composition laws of ρ. Pull R to the limit to form T,
-with its canonical inverse-image comparisons, and take its sheaf colimit K.
-Filtered sheaf colimits are exact, giving the short exact limit sequence.
-The stage connecting homomorphisms δ map H^n(R_i) to H^(n+1)(F_i).
-Naturality of Ext connecting maps under exact inverse image and under
-coefficient maps gives the displayed transition square for every arrow.
-
-For x with zero limit image, stage injectivity of E_i makes the connecting
-map surjective, so lift x to z₀ in H^n(R_i). The limit image of z₀ is killed
-by the limit connecting map, hence is the image of a class w in H^n of the
-colimit of the pulled-back E system, by exactness of the limit long exact
-sequence. Apply degree-n class descent (etale_limit_cohomology_class_descent)
-to E. It uses existence only and does not depend on the eventual-zero theorem.
-It represents w at some stage k. Directedness gives a common stage j ≥ i,k.
-Transition z₀ and this representative to j and subtract the image of the
-E_j class from the R_j class, producing z. Cocone naturality and the equality
-representing w show that z has exactly zero limit image. The connecting map
-kills the E_j image by exactness, so δ_j(z) is the transition of x.
-This construction proves the final lifting assertion without detecting zero
-in degree n or assuming any successor-degree continuity.
-
-For n=0 the same argument uses the ordinary H⁰ connecting map. Zero systems
-and empty schemes give zero homomorphisms; a singleton index uses exactness
-of its two long exact sequences. The existential data are used only inside
-proofs: no object is defined by choosing an undetermined existence witness.
--/
+/-- A successor-degree zero-image class has a corrected preceding-degree lift
+(Stacks, Tags 09YP, 0EXZ, 0739, 0EYL and 04HR). -/
 theorem etale_limit_affine_corrected_lift
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

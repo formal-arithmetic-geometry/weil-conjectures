@@ -15,8 +15,7 @@ open CategoryTheory AlgebraicGeometry
 open AlgebraicGeometry Scheme
 namespace AlgebraicGeometry
 /-- Extraction of a finite trivializing datum over the spectrum of a field.
-Source: Stacks Project, Definition 03RU and the proof of Lemma 09Z6.
-(blueprint: lem-weil-pbc-constructible-field-finite-separable-constant-step1) -/
+(Stacks, Tags 03RU and 09Z6) -/
 theorem constructible_field_finite_separable_constant_datum
     (k : Type u) [Field k]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

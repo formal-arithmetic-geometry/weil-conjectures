@@ -12,8 +12,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
 /-! # Scalar compatibility of the affine tensor counit
 
-Source: Stacks Project, Morphisms, Lemma 01SB.
-(blueprint: lem-weil-pbc-affine-module-tensor-counit-smul).
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section
@@ -70,26 +71,7 @@ set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
 set_option maxHeartbeats 1000000 in
 -- The explicit inverse-image and tensor transports require additional elaboration fuel.
-/-- Scalar compatibility of the transported pullback counit.
-Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
-(blueprint: lem-weil-pbc-affine-module-tensor-counit-smul).
-
-Proof: Write q for κ followed by the canonical pullback counit, an O_U-linear map.
-The inverse-image module adjunction supplies an IA-linear counit v : I(RF) → F,
-where IA acts on F through e₀. The tensor evaluation c ⊗ s ↦ ε(c) • v(s) is balanced
-because t ≫ ε = e₀. Its sectionwise B-linear maps commute with restriction, so the
-sheafification universal property supplies a B-linear evaluation d on P(RF),
-using pobj. By the inverse-image triangle, d sends the sheafification of
-1 ⊗ η(g) to g. The hP unit formula and the tensor-pullback triangle show that
-q has the same value on these sections. On an arbitrary open, inverse-image
-sections are locally represented by sections g over opens of X. The pushout
-identifies the restriction of B ⊗_{IA} I(RF) with
-O_U ⊗_{f⁻¹O_X} I(RF); hence O_U multiples of these unit sections locally generate
-its sheafification. Restrict d along b. Its O_U-linearity follows from b ≫ ε = 1.
-Thus this restriction of d equals q, first on the generating local sections,
-then on every section by additivity and the sheaf separatedness axiom.
-The displayed identity follows from B-linearity of d. For c = 0 or p = 0 both
-sides vanish; zero rings and the empty open satisfy the same identities. -/
+/-- Scalar compatibility of the transported pullback counit (Stacks, Tag 01SB). -/
 theorem affine_module_tensor_counit_smul
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (ε : B ⟶ U.sheaf) (hpush : IsPushout r₀ t₀ b t)

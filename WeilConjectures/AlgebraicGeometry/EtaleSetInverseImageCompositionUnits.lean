@@ -13,9 +13,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Composition of inverse images of étale sheaves of sets, with units
 
-Source: Stacks Project, Sites, Tags 03CB and 03CC, and Étale Cohomology, Tag 09ZF,
-third paragraph of the proof
-(blueprint: lem-weil-pbc-sets-etale-inverse-image-composition-units).
+## References
+
+* Stacks Project, Tags 03CB, 03CC and 09ZF
 -/
 
 @[expose] public section
@@ -103,36 +103,10 @@ private lemma setPullComp_unit {X Y W : Scheme.{u}} (f : Y ⟶ X) (g : W ⟶ Y)
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Sites, Tags 03CB and 03CC; Étale Cohomology, Tag 09ZF,
-third paragraph of the proof
-(blueprint: lem-weil-pbc-sets-etale-inverse-image-composition-units).
-The inverse image `L e` is left Kan extension followed by sheafification, and `η[S, T] e`
-is the unit of its adjunction to restriction along base change. The isomorphisms
-are natural in the sheaf, preserve pulled-back sections, are unique even for a
-fixed sheaf, and satisfy associativity. The base-change comparison in the section
-formula is the canonical fibre-product pasting isomorphism.
-
-Proof:
-1. By situation-conventions, the unit sends a
-   section to its identity-indexed colimit representative followed by sheafification.
-   Naturality in site objects and in sheaves gives the two equations in clause (0),
-   using situation-conventions and def-weil-pbc-sheafification.
-2. By lem-weil-pbc-cartesian-square-pasting and def-pc-fibre-product, iterated base
-   change is canonically isomorphic to composite base change, naturally in objects.
-   Both triple comparisons have the same projections, hence agree.
-3. Apply def-weil-pbc-composite-adjunction to the two inverse-image adjunctions,
-   and situation-conventions to the direct-image comparison.
-   This gives the natural composition isomorphism and its unit equation.
-4. By lem-weil-pbc-site-sheafification-sections-local, applied twice, every section
-   of an iterated inverse image is locally a restriction of an iterated pulled-back
-   section. Pull back the intermediate covering using
-   situation-conventions. A morphism satisfying the unit equation
-   therefore agrees locally with the comparison, hence equals it by the sheaf axiom
-   of situation-conventions. This proves fixed-sheaf uniqueness.
-5. On locally generating triple pulled-back sections, unit naturality and the
-   composition equations identify both associative composites with the pullback
-   along the composite morphism. The triple fibre-product comparisons agree by
-   their projections. Local equality and the sheaf axiom give associativity. -/
+/-- The inverse image `L e` is left Kan extension followed by sheafification, and `η[S, T] e`
+is the unit of its adjunction to restriction along base change. The composition isomorphisms
+are natural, unique unit-compatible, and satisfy associativity
+(Stacks, Tags 03CB, 03CC, 09ZF). -/
 theorem etaleSetInverseImageCompositionUnits :
     (∀ (S T : Scheme.{u}) (e : T ⟶ S)
       (G : Sheaf S.smallEtaleTopology (Type (u + 1)))

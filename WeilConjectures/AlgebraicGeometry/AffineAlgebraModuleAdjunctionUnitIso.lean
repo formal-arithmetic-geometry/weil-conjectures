@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.AffineModuleCorrespondence
 import WeilConjectures.AlgebraicGeometry.AffineModuleTensorHomBijective
 /-! # Canonical affine algebra module adjunction component
 
-Source: Stacks Project, Tags 0AVW and 01SB. -/
+## References
+
+* Stacks Project, Tags 0AVW and 01SB
+-/
 
 @[expose] public section
 
@@ -46,17 +49,7 @@ private theorem adjunction_of_unit_formula
   change e M (H.obj M) (𝟙 _) = _
   simp [he]
 
-/-- The canonical affine algebra adjunction component.
-Source: Stacks Project, Tags 0AVW and 01SB.
-(blueprint: new-affine-algebra-module-unit-iso).
-
-Proof: Identify the canonical left adjoint with tensor pullback for g by its Hom adjunction.
-Associativity identifies this pullback with the two tensor operations in the affine module
-correspondence. Its unit is beta: both are adjoint to the tensor unit s mapped to s tensor 1.
-The correspondence proves beta invertible on quasi-coherent algebra modules. Transport the unit
-across the unique adjunction-compatible isomorphism of left adjoints; its image under G is
-invertible too. The same tensor calculation covers zero rings and modules.
--/
+/-- The canonical affine algebra adjunction component (Stacks, Tags 0AVW and 01SB). -/
 theorem affine_algebra_module_adjunction_unit_iso
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     [(RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)).IsRightAdjoint] :

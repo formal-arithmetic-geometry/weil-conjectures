@@ -24,7 +24,11 @@ import WeilConjectures.AlgebraicGeometry.OpenDerivedSectionsTruncationTowerCompa
 public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine-basis lower truncation tower inputs
-Source: Stacks Project, Tags 0BKT, 0D64, 071B and 08D4. -/
+
+## References
+
+* Stacks Project, Tags 0BKT, 0D64, 071B and 08D4
+-/
 
 @[expose] public section
 universe u wC wA
@@ -89,22 +93,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 500000 in
 -- Transport between the two module-category presentations needs additional elaboration.
 /-- Derived abelian sections reconstruct the lower tail from its canonical lower
-truncations. This is only the reconstruction step, with no homology conclusion.
-Source: Stacks Project, Tag 0D64 (lemma-is-limit-dimension), Tag 071B
-(lemma-K-injective) and Tag 0BKT (lemma-cohomology-over-U-trivial).
-(blueprint: lem-sc-affine-basis-lower-tail-sections-reconstruction).
-
-Proof: Restrict to V. Exact restriction identifies the homology of E with the
-restriction of H^r(F) for r < a and with zero for r >= a. Affine opens inside V
-form a basis of V. On each such open, the module-to-abelian cohomology comparison
-transfers hhomology to zero positive derived module sections. Thus Tag 0D64 applies
-on V with local bound zero and reconstructs E from its lower truncations. Restriction
-preserves K-injectives by the exact extension-by-zero adjoint, so derived sections
-of this restriction are the given derived evaluation, followed by exact forgetting.
-Sections and forgetting preserve products. Apply the derived-functor product
-comparison to the Roos triangle, identifying its first map by its product
-projections. This gives precisely the displayed triangle. The argument works for
-empty V, all integer a, arbitrary unbounded F and arbitrary derived universes. -/
+truncations. This is only the reconstruction step, with no homology conclusion
+(Stacks, Tags 0D64, 071B and 0BKT). -/
 theorem affineBasisLowerTail_sections_reconstruction
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

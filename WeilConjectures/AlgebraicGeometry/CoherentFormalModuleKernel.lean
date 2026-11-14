@@ -15,8 +15,7 @@ import Mathlib.CategoryTheory.Preadditive.FunctorCategory
 /-!
 # Kernels in coherent formal modules
 
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 087X
-(blueprint: lem-weil-pbc-coherent-formal-module-kernel).
+Stacks Project, Tag 087X.
 -/
 
 @[expose] public section
@@ -51,39 +50,7 @@ private theorem formalMono_of_kernel_transition_zero {X : Scheme.{u}} [IsNoether
   apply (cancel_epi (T.obj.map (homOfLE (Nat.le_add_right n c)).op)).mp
   simpa only [NatTrans.naturality, comp_zero] using hzero
 
-/--
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 087X, claims (a)--(d)
-(blueprint: lem-weil-pbc-coherent-formal-module-kernel).
-Proof:
-1. Transitions of a coherent formal module are epimorphisms and identify every lower
-   level with the appropriate quotient of a higher level. Choose a finite affine
-   Noetherian cover (pqf-def-locnoeth). On each affine, the tilde/Gamma adjunction and
-   lem-weil-pbc-coherent-formal-modules-affine identify the systems with M/I^n M and
-   N/I^n N for finite modules over the Noetherian adic completion, and alpha with f.
-2. Apply lem-weil-pbc-artin-rees to K = ker f inside M and to im f inside N; take the
-   maximum of the bounds on the finite cover. Then f⁻¹(I^l N) lies in K + I^(l-c) M,
-   so the image of the levelwise kernel in level m is (K + I^m M)/I^m M for l ≥ m+c.
-   Kernels and images are quasi-coherent by lem-weil-pbc-quasi-coherent-module-kernel
-   and lem-weil-pbc-quasi-coherent-module-cokernel-image; coherence follows from
-   lem-weil-pbc-coherent-kernel-cokernel-locnoeth. Equality on the cover gives (1).
-3. The transition restrictions on stabilized images give the inverse system S.
-   By lem-weil-pbc-ideal-times-quasi-coherent-affine-sections, its reductions have
-   affine sections K/(K ∩ I^m M + I^n K) = K/I^n K for m ≥ n+c. Thus the indicated
-   quotients are coherent, killed by I^n, and their reductions give the next lower
-   level: they form K in Coh(X,I), with the displayed induced transition maps.
-4. The inclusion of stabilized images followed by the transitions factors through
-   each quotient, giving iota. On affines it is K/I^n K → M/I^n M, hence alpha iota
-   vanishes. Any compatible gamma killed by alpha factors through each stabilized
-   image, since higher-level transitions of its source are epi. Reducing at level
-   n+c modulo I^n gives a compatible factorization through K (the affine adjunction
-   and the ideal-product section formula identify the maps).
-5. For uniqueness, ker(iota at level n+c) has affine sections
-   (K ∩ I^(n+c) M)/I^(n+c) K, contained in I^n K/I^(n+c) K by Artin--Rees. Its
-   transition to level n vanishes. A map to K killed by iota is therefore zero at
-   level n after precomposition with the epi transition from level n+c of its
-   source. Apply this to the difference of two factorizations. No termwise
-   injectivity of iota is asserted.
--/
+/-- Kernels of morphisms of coherent formal modules (Stacks, Tag 087X, claims (a)--(d)). -/
 theorem coherentFormalModule_kernel {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I)
     (α : F ⟶ H) :

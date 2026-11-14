@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.FinitePushforwardFiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! Coherence of an ideal pushforward.
-(blueprint: lem-pc-r2-coherent-pushforward-ideal)
 -/
 
 @[expose] public section
@@ -27,18 +26,8 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- A quasi-coherent ideal on a closed integral subscheme has coherent pushforward.
-Source: Stacks Project, Cohomology of Schemes, Tag 01YH, the paragraph beginning
-"Next, suppose"; this is the coherence subargument isolated for reuse.
-(blueprint: lem-pc-r2-coherent-pushforward-ideal)
-
-Proof: A closed immersion is finite, so W is locally Noetherian. The structure
-module on W is coherent. The closed immersion defined by I is finite too, and
-its pushed structure module is coherent. The module I.toModules is the kernel
-of the comparison from the structure module to that pushed structure module;
-coherent kernel closure makes it coherent. Finite pushforward along i preserves
-coherence. This also proves the result for the zero and unit ideals.
--/
+/-- A quasi-coherent ideal on a closed integral subscheme has coherent pushforward
+(Stacks, Tag 01YH). -/
 theorem coherent_pushforward_ideal {X W : Scheme.{u}} [IsLocallyNoetherian X]
     (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W]
     (I : W.IdealSheafData) :

@@ -16,8 +16,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Clo
 /-!
 # Assembling ordinary integral models along a finite stratification
 
-Source: Bhatt--Scholze, Lemma 6.8.13 and Proposition 6.8.14(2).
-(auxiliary; not a blueprint node)
+## References
+
+* Bhatt--Scholze, Lemma 6.8.13 and Proposition 6.8.14 (2)
 -/
 
 @[expose] public section
@@ -589,39 +590,7 @@ private theorem stratification_mem
 
 /-- Constructible ordinary integral models on the parts of a finite stratification
 suffice to construct an ordinary integral model of the whole rational sheaf.
-Source: Bhatt--Scholze, the filtration and Ext1 argument at the end of Lemma 6.8.13
-and the essential-surjectivity argument of Proposition 6.8.14(2).
-(auxiliary; not a blueprint node)
-
-Proof in words. Noetherian induction produces a finite increasing chain of opens from
-empty to X whose successive differences lie in individual strata. The counits
-j_! j^* F → F are monic: in the open site inclusion, the Kan-extension unit is
-invertible on its essential image and the other comma categories are empty.
-Composition of adjunctions makes their image subobjects increasing. Their initial
-term is zero, their final term is F, and each quotient is the outer open extension
-of the cokernel for the inclusion of two successive opens.
-
-For one difference, take its reduced closed complement Z inside the larger open.
-Its map to X factors through the given stratum immersion: first lift to the
-coborder open and then use reduced-source factorization through a closed immersion.
-Transport the supplied lattice across the coefficient isomorphism and pull it back
-to Z. Closed pushforward preserves constructibility by combining the given closed
-stratification and zero on the complementary open. Rationalization of this closed
-pushforward is supported on Z because scalar extension commutes with pullback.
-The closed counit identifies its closed restriction with the supplied rational
-lattice. The supported unit then identifies its rationalization with the desired
-cokernel. Extending along the outer open preserves constructibility and commutes
-with scalar extension. This constructs integral models for all graded pieces
-without requiring a closed-pushforward filtered-colimit comparison.
-
-The degree-zero complexes of these lattices are bounded integral constructible.
-Short exact sequences in the finite filtration give distinguished triangles.
-The triangulated integral-image theorem, which incorporates denominator clearing,
-therefore gives a bounded integral constructible K rationalizing to F[0]. Set
-N = H⁰(K). Constructibility follows from the definition of the bounded subcategory,
-and exact scalar extension identifies its rationalization with H⁰(F[0]) = F.
-Zero and empty pieces are included. The supplied lattices are only used to produce
-graded-piece models; they need not themselves glue unchanged. -/
+(Bhatt--Scholze, Lemma 6.8.13 and Proposition 6.8.14 (2)) -/
 theorem continuousConstructible_integral_gluing (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X]
     (F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

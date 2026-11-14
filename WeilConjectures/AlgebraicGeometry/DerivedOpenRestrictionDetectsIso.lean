@@ -12,8 +12,9 @@ import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 
 /-! # Open restrictions jointly detect derived isomorphisms
 
-Source: Stacks Project, Tag 0AAB, the locality step of its proof.
-(blueprint: lem-sc-derived-open-restriction-detects-iso)
+## References
+
+* Stacks Project, Tag 0AAB
 -/
 
 @[expose] public section
@@ -22,22 +23,8 @@ universe u w
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- An ambient derived morphism is invertible if it is invertible on an open
-neighbourhood of every point. No quasi-coherence or boundedness assumption is needed.
-Source: Stacks Project, duality.tex, Tag 0AAB (locality), and the cohomology criterion
-for derived isomorphisms in Mathlib, `DerivedCategory.isIso_iff`.
-(blueprint: lem-sc-derived-open-restriction-detects-iso)
-
-Proof: Exact open restriction commutes with every cohomology functor. Thus each
-cohomology morphism restricts to an isomorphism on every prescribed neighbourhood.
-A morphism of sheaves of modules locally invertible on such neighbourhoods is an
-isomorphism: its underlying abelian sheaf morphism is locally injective and locally
-surjective, and the local inverses glue uniquely. Hence every cohomology morphism
-is an isomorphism. The cohomology functors jointly reflect derived isomorphisms,
-so the original morphism is invertible. Degrees are treated separately, so there
-is no boundedness condition. On the empty scheme the locality hypothesis is vacuous
-and all sheaves, hence all derived objects, are zero, giving the same conclusion.
--/
+/-- An ambient derived morphism is invertible if it is invertible on an open neighbourhood of
+every point. No quasi-coherence or boundedness assumption is needed (Stacks, Tag 0AAB). -/
 theorem schemeDerived_isIso_of_openRestriction
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

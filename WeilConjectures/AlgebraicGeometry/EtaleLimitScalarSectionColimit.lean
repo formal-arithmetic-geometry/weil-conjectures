@@ -14,7 +14,10 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # Scalar section comparison along an inverse system
-Source: Stacks Project, Tags 09YN and 09YQ.
+
+## References
+
+* Stacks Project, Tags 09YN and 09YQ
 -/
 
 @[expose] public section
@@ -23,24 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- The canonical stage-section cocone is a colimit once its coherence is supplied.
-Source: Stacks Project, Sites, Tag 09YN, proof of lemma-colimit; Etale Cohomology,
-Tag 09YQ; Cohomology on Sites, Tag 09YP, degree-zero comparison.
-(blueprint: lem-weil-pbc-etale-limit-scalar-section-colimit).
-
-Proof: Base change T0 along the final directed tail. Affine-transition limits
-identify its limit with Tlim. On affine objects, present inverse-image sections
-using the full affine etale sites. Descent of objects, arrows and equalities makes
-the simultaneous refinement category filtered and its diagonal final. The finite
-covering section theorem identifies sections of the sheaf colimit with the
-iterated filtered colimit. Flattening that colimit gives the stage-section diagram
-A. Transposing by the inverse-image adjunction identifies its maps and cocone legs
-with rho and mu, using the prescribed projection equations. For qcqs T0 choose a
-finite affine cover and finite affine covers of its pairwise intersections.
-Matching-family equalizers compute sections, and filtered colimits of abelian
-groups commute with these finite limits. This extends the colimit comparison to
-T0. Finality of the tail identifies its sheaf colimit with L. This proves the
-universal property of C, without using any eventual-vanishing criterion. Empty
-schemes give zero section groups; the same equalizer argument covers this case. -/
+(Stacks, Tags 09YN, 09YQ and 09YP) -/
 theorem etale_limit_scalar_section_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

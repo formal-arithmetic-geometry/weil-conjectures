@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.FiniteFamilyJointSurjectivityStage
 
 /-! # Descent of a finite qcqs étale covering
 
-Source: Stacks Project, Tags 01ZM, 07RP, 07RR and 09YP. -/
+## References
+
+* Stacks Project, Tags 01ZM, 07RP, 07RR and 09YP
+-/
 
 @[expose] public section
 universe u
@@ -22,25 +25,8 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Descend just the finite geometric covering, with its arrow equations.
-Source: Stacks Project, Tags 01ZM, 07RP, 07RR and 09YQ.
-(blueprint: lem-weil-pbc-etale-limit-finite-cover-descent).
-
-Proof: The limit base is qcqs by affine-limit permanence. The qcqs sources of the
-étale structure maps give quasi-compact and quasi-separated structure maps, hence
-finite presentation. Use 01ZM(1) to spread out U and each V_k. Each model is qcqs
-because it is of finite presentation over a qcqs stage. Apply 07RP to its structure
-map to make it étale. Choose a common upper bound of these finitely many stages,
-retaining the isomorphisms to U and V_k by pullback composition. Use 01ZM(2) for
-the arrows, and take another common upper bound; this gives the displayed arrow
-identities with the same object isomorphisms. The finite disjoint union of the
-arrows is locally finitely presented and has qcqs source and target. Its limit
-base change is surjective because the original family covers. Apply 07RR to
-make it surjective at one later stage. This is a covering at that stage. Every
-subsequent family is its actual base change, hence is covering. All models
-remain qcqs under these affine base changes. For empty K the union is the empty
-scheme: 07RR makes the target empty at a stage, so the empty family covers.
-No sheaves, nerve products, or complex maps are involved. -/
+/-- Descend just the finite geometric covering, with its arrow equations
+(Stacks, Tags 01ZM, 07RP, 07RR and 09YQ). -/
 theorem exists_etale_limit_finite_cover_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

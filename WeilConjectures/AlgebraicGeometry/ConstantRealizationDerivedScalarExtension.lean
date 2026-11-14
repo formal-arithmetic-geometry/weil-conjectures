@@ -37,11 +37,9 @@ import Mathlib.Algebra.Category.ModuleCat.AB
 /-!
 # Derived constant realization and scalar extension
 
-Source: Stacks Project, Cohomology on Sites, Tags 0G7E and 0D6D; Modules on Sites,
-Tags 093J, 0GMW and 03CY (auxiliary; not a blueprint node).
-Scalar extension is the left adjoint to actual restriction; its universal property
-fixes the construction up to the unique unit-preserving isomorphism. The comparison
-below is its mate, not a choice of an unspecified natural isomorphism.
+## References
+
+* Stacks Project, Tags 0G7E, 0D6D, 093J, 0GMW and 03CY
 -/
 
 @[expose] public noncomputable section
@@ -60,26 +58,19 @@ attribute [local irreducible] Functor.leftAdjoint
 variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
 variable {R S : Type (max u v)} [CommRing R] [CommRing S] (q : R →+* S)
 
-/-- Actual restriction along the constant coefficient map.
-Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+/-- Actual restriction along the constant coefficient map (Stacks, Tag 03DA). -/
 def restriction : realizationModules J S ⥤ realizationModules J R :=
   SheafOfModules.restrictScalars ((sheafCompose J
     (forget₂ CommRingCat.{max u v} RingCat.{max u v})).map
       ((constantSheaf J CommRingCat.{max u v}).map (CommRingCat.ofHom q)))
 
-/-- Actual restriction is additive.
-Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+/-- Actual restriction is additive (Stacks, Tag 03DA). -/
 instance restriction_additive : (restriction J q).Additive := by
   unfold restriction
   infer_instance
 
-/-- Restriction is exact and has the ordinary sheafified tensor as left adjoint.
-Source: Stacks 03DA and 07A6
-(auxiliary; not a blueprint node).
-Proof: restriction retains the underlying abelian sheaf, so kernels and sheafified
-cokernels are unchanged. Its left adjoint is sectionwise scalar tensor followed by
-module sheafification; the tensor and sheafification universal properties give the
-adjunction. This is the identity-site specialization of derived change of rings. -/
+/-- Restriction is exact and has the ordinary sheafified tensor as left adjoint
+(Stacks, Tags 03DA and 07A6). -/
 theorem restriction_properties :
     PreservesFiniteLimits (restriction J q) ∧
       PreservesFiniteColimits (restriction J q) ∧ (restriction J q).IsRightAdjoint := by
@@ -94,42 +85,34 @@ theorem restriction_properties :
     preservesFiniteColimits_of_reflects_of_preserves _ (SheafOfModules.toSheaf _),
     (SheafOfModules.CoefficientOrdinaryProof.tensorAdjunction φ).isRightAdjoint⟩
 
-/-- Exactness of actual restriction.
-Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+/-- Exactness of actual restriction (Stacks, Tag 03DA). -/
 instance restriction_limits : PreservesFiniteLimits (restriction J q) :=
   (restriction_properties J q).1
 
-/-- Exactness of actual restriction.
-Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+/-- Exactness of actual restriction (Stacks, Tag 03DA). -/
 instance restriction_colimits : PreservesFiniteColimits (restriction J q) :=
   (restriction_properties J q).2.1
 
-/-- The ordinary scalar adjunction exists by its tensor universal property.
-Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+/-- The ordinary scalar adjunction exists by its tensor universal property (Stacks, Tag 03DA). -/
 instance restriction_rightAdjoint : (restriction J q).IsRightAdjoint :=
   (restriction_properties J q).2.2
 
-/-- Actual ordinary extension, determined by the tensor universal property.
-Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+/-- Actual ordinary extension, determined by the tensor universal property (Stacks, Tag 03DA). -/
 abbrev extension := (restriction J q).leftAdjoint
 
-/-- The scalar tensor/restriction adjunction.
-Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+/-- The scalar tensor/restriction adjunction (Stacks, Tag 03DA). -/
 def adjunction : extension J q ⊣ restriction J q := Adjunction.ofIsRightAdjoint _
 
-/-- Tensor extension is additive since restriction is additive.
-Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+/-- Tensor extension is additive since restriction is additive (Stacks, Tag 03DA). -/
 instance extension_additive : (extension J q).Additive :=
   (adjunction J q).left_adjoint_additive
 
-/-- Additivity of ordinary module scalar extension.
-Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+/-- Additivity of ordinary module scalar extension (Stacks, Tag 03DA). -/
 instance moduleExtension_additive {A B : Type r} [CommRing A] [CommRing B] (f : A →+* B) :
     (ModuleCat.extendScalars.{r, r, r} f).Additive :=
   (ModuleCat.extendRestrictScalarsAdj f).left_adjoint_additive
 
-/-- A constant section, from the module-sheafification unit.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- A constant section, from the module-sheafification unit (Stacks, Tag 03CY). -/
 def constantSection (M : ModuleCat.{max u v} R) (V : Cᵒᵖ) (x : M) :
     ((commutativeSiteConstantModuleFunctor J R).obj M).val.obj V :=
   letI := (realizationRingUnit_locallyBijective J R).1
@@ -291,12 +274,7 @@ private theorem restrictionComparison_constantSection (M : ModuleCat.{max u v} S
   exact h.trans (by unfold restrictionSeed; rfl)
 
 /-- Restricting constant realization commutes canonically with restricting modules.
-The equation fixes the comparison on constant presheaf sections.
-Source: Stacks 03CY (auxiliary; not a blueprint node).
-Proof: the two sheafifications have the same underlying abelian sheaf and the same
-restricted R-action on constant sections. The universal property of sheafification
-extends the identity to a unique linear isomorphism; the same uniqueness gives
-naturality in M. Constant sections locally generate, so the equation gives uniqueness. -/
+The equation fixes the comparison on constant presheaf sections (Stacks, Tag 03CY). -/
 theorem restrictionIso_existsUnique :
     ∃! e : commutativeSiteConstantModuleFunctor J S ⋙ restriction J q ≅
         ModuleCat.restrictScalars q ⋙ commutativeSiteConstantModuleFunctor J R,
@@ -345,15 +323,13 @@ theorem restrictionIso_existsUnique :
         (constantSection J ((ModuleCat.restrictScalars q).obj M) V x))
   rw [restrictionComparison_constantSection, he', he]
 
-/-- The identity-on-constant-sections restriction comparison.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- The identity-on-constant-sections restriction comparison (Stacks, Tag 03CY). -/
 def restrictionIso :
     commutativeSiteConstantModuleFunctor J S ⋙ restriction J q ≅
       ModuleCat.restrictScalars q ⋙ commutativeSiteConstantModuleFunctor J R :=
   Classical.choose (restrictionIso_existsUnique J q)
 
-/-- The ordinary comparison, defined by the scalar adjunction mate.
-Source: Stacks 0GMW (auxiliary; not a blueprint node). -/
+/-- The ordinary comparison, defined by the scalar adjunction mate (Stacks, Tag 0GMW). -/
 def moduleComparison (M : ModuleCat.{max u v} R) :
     (extension J q).obj ((commutativeSiteConstantModuleFunctor J R).obj M) ⟶
       (commutativeSiteConstantModuleFunctor J S).obj ((ModuleCat.extendScalars q).obj M) :=
@@ -362,10 +338,7 @@ def moduleComparison (M : ModuleCat.{max u v} R) :
       ((ModuleCat.extendRestrictScalarsAdj q).unit.app M) ≫
         (restrictionIso J q).inv.app ((ModuleCat.extendScalars q).obj M))
 
-/-- Naturality of the ordinary mate.
-Source: Stacks 0GMW (auxiliary; not a blueprint node).
-Proof: transpose both sides; naturality of the ordinary unit and of restrictionIso
-identifies their transposes, and the adjunction Hom equivalence is injective. -/
+/-- Naturality of the ordinary mate (Stacks, Tag 0GMW). -/
 theorem moduleComparison_naturality {M N : ModuleCat.{max u v} R} (f : M ⟶ N) :
     (extension J q).map ((commutativeSiteConstantModuleFunctor J R).map f) ≫
         moduleComparison J q N =
@@ -591,13 +564,8 @@ private theorem moduleComparison_isIso (M : ModuleCat.{max u v} R) :
   exact ⟨⟨g, h₁, h₂⟩⟩
 
 /-- The ordinary comparison is an isomorphism, with the identity-on-tensors formula.
-Scalar-first tensors in Lean are the paper's m tensor s with factors interchanged.
-Source: Stacks 0GMW and 03CY
-(auxiliary; not a blueprint node).
-Proof: sheafify the identity of constant presheaves with value S tensor_R M.
-The tensor and sheafification universal properties identify its map with the mate
-moduleComparison. The inverse is induced by the same pure tensors, so both composites
-are identities. The displayed equation is the value on each constant generator. -/
+Scalar-first tensors in Lean are the paper's m tensor s with factors interchanged
+(Stacks, Tags 0GMW and 03CY). -/
 theorem moduleComparison_tensor (M : ModuleCat.{max u v} R) :
     IsIso (moduleComparison J q M) ∧
       ∀ (V : Cᵒᵖ) (x : M) (s : S),
@@ -612,8 +580,7 @@ theorem moduleComparison_tensor (M : ModuleCat.{max u v} R) :
             (s ⊗ₜ[R, q] x) := by
   exact ⟨moduleComparison_isIso J q M, moduleComparison_formula J q M⟩
 
-/-- The genuine chain map of termwise constant tensor comparisons.
-Source: Stacks 0GMW (auxiliary; not a blueprint node). -/
+/-- The genuine chain map of termwise constant tensor comparisons (Stacks, Tag 0GMW). -/
 def complexComparison (P : CochainComplex (ModuleCat.{max u v} R) ℤ) :
     ((extension J q).mapHomologicalComplex (.up ℤ)).obj
         (((commutativeSiteConstantModuleFunctor J R).mapHomologicalComplex (.up ℤ)).obj P) ⟶
@@ -627,17 +594,11 @@ section SheafDerivedExistence
 variable [HasDerivedCategory.{dR} (realizationModules J R)]
   [HasDerivedCategory.{dS} (realizationModules J S)]
 
-/-- Exact derived restriction of module sheaves.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+/-- Exact derived restriction of module sheaves (Stacks, Tag 07A6). -/
 abbrev derivedRestriction := (restriction J q).mapDerivedCategory
 
-/-- Unbounded scalar extension is left adjoint to exact restriction on module sheaves.
-Source: Stacks 06YY and 07A6
-(auxiliary; not a blueprint node).
-Proof: derived change of rings supplies an everywhere defined left derived tensor
-functor computed by K-flat resolutions. The derived adjunction theorem identifies
-its right adjoint with exact restriction. Transport along the canonical equivalences
-of localization universes gives the independently sized source and target. -/
+/-- Unbounded scalar extension is left adjoint to exact restriction on module sheaves
+(Stacks, Tags 06YY and 07A6). -/
 @[instance] theorem derivedRestriction_isRightAdjoint :
     (derivedRestriction.{u, v, dR, dS} J q).IsRightAdjoint := by
   let Ft := derivedRestriction.{u, v, dR, dS} J q
@@ -695,20 +656,15 @@ variable [HasDerivedCategory.{wR} (ModuleCat.{max u v} R)]
   [HasDerivedCategory.{dR} (realizationModules J R)]
   [HasDerivedCategory.{dS} (realizationModules J S)]
 
-/-- Exact derived restriction of ordinary modules at independent localization sizes.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+/-- Exact derived restriction of ordinary modules at independent localization sizes
+(Stacks, Tag 07A6). -/
 abbrev moduleDerivedRestriction {A B : Type r} [CommRing A] [CommRing B] (f : A →+* B)
     [HasDerivedCategory.{wR} (ModuleCat.{r} A)]
     [HasDerivedCategory.{wS} (ModuleCat.{r} B)] :=
   (ModuleCat.restrictScalars.{r} f).mapDerivedCategory
 
-/-- Unbounded scalar extension is left adjoint to exact restriction on modules.
-Source: Stacks 06YY and 07A6
-(auxiliary; not a blueprint node).
-Proof: apply derived change of rings on the one-object identity-covering site,
-whose module category is ordinary modules. K-flat resolutions compute its everywhere
-defined left derived functor. The derived adjunction theorem identifies exact
-restriction as its right adjoint, for any independently chosen localization sizes. -/
+/-- Unbounded scalar extension is left adjoint to exact restriction on modules
+(Stacks, Tags 06YY and 07A6). -/
 instance moduleDerivedRestriction_rightAdjoint
     {A B : Type r} [CommRing A] [CommRing B] (f : A →+* B)
     [HasDerivedCategory.{wR} (ModuleCat.{r} A)]
@@ -752,36 +708,31 @@ instance moduleDerivedRestriction_rightAdjoint
     Localization.liftNatIso QBS WB (H ⋙ QAR) (H ⋙ QAR) Ft G (Iso.refl _)
   exact Functor.isRightAdjoint_of_iso i.symm
 
-/-- Derived scalar tensor of ordinary modules, fixed by its adjunction.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+/-- Derived scalar tensor of ordinary modules, fixed by its adjunction (Stacks, Tag 06YY). -/
 def moduleDerivedExtension {A B : Type r} [CommRing A] [CommRing B] (f : A →+* B)
     [HasDerivedCategory.{wR} (ModuleCat.{r} A)]
     [HasDerivedCategory.{wS} (ModuleCat.{r} B)] :
     DerivedCategory (ModuleCat.{r} A) ⥤ DerivedCategory (ModuleCat.{r} B) :=
   (moduleDerivedRestriction.{wR, wS, r} f).leftAdjoint
 
-/-- Derived scalar tensor of module sheaves, fixed by its adjunction.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+/-- Derived scalar tensor of module sheaves, fixed by its adjunction (Stacks, Tag 06YY). -/
 def derivedExtension :
     DerivedCategory (realizationModules J R) ⥤ DerivedCategory (realizationModules J S) :=
   (derivedRestriction.{u, v, dR, dS} J q).leftAdjoint
 
-/-- The unbounded scalar adjunction for ordinary modules.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+/-- The unbounded scalar adjunction for ordinary modules (Stacks, Tag 07A6). -/
 def moduleDerivedAdjunction {A B : Type r} [CommRing A] [CommRing B] (f : A →+* B)
     [HasDerivedCategory.{wR} (ModuleCat.{r} A)]
     [HasDerivedCategory.{wS} (ModuleCat.{r} B)] :
     moduleDerivedExtension.{wR, wS, r} f ⊣ moduleDerivedRestriction.{wR, wS, r} f :=
   Adjunction.ofIsRightAdjoint _
 
-/-- The unbounded scalar adjunction for sheaves.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+/-- The unbounded scalar adjunction for sheaves (Stacks, Tag 07A6). -/
 def derivedAdjunction : derivedExtension.{u, v, dR, dS} J q ⊣
     derivedRestriction.{u, v, dR, dS} J q := Adjunction.ofIsRightAdjoint _
 
-/-- Canonical ordinary-module representative map, the transpose of the localized unit.
-Source: Stacks 06YY and 07A6
-(auxiliary; not a blueprint node). -/
+/-- Canonical ordinary-module representative map, the transpose of the localized unit
+(Stacks, Tags 06YY and 07A6). -/
 def moduleRepresentative {A B : Type r} [CommRing A] [CommRing B] (f : A →+* B)
     [HasDerivedCategory.{wR} (ModuleCat.{r} A)]
     [HasDerivedCategory.{wS} (ModuleCat.{r} B)] (P : CochainComplex (ModuleCat.{r} A) ℤ) :

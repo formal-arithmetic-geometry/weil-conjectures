@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedPushforwardSquareMateUnit
 
 /-! # Unit formula for the affine sections mate path
 
-Source: Stacks Project, cohomology.tex, Tags 0D5T and 08HY;
-perfect.tex, Tag 0AA7. (blueprint: lem-pc-affine-sections-square-mate-path-unit).
+## References
+
+* Stacks Project, Tags 0D5T, 08HY and 0AA7
 -/
 
 @[expose] public section
@@ -432,25 +433,7 @@ set_option cleanup.letToHave false in
 -- The sections and exact-restriction comparisons require unfolding scalar actions.
 /-- The path through the square mate and the comparisons r,d, evaluated on the
 unit for p_* followed by affine sections. This formula does not involve the derived
-comparison c on the other path.
-Source: Stacks Project, cohomology.tex, Tags 08HY and 0D5T; perfect.tex, Tag 0AA7.
-(blueprint: lem-pc-affine-sections-square-mate-path-unit).
-Proof: transpose the fixed pullback composition comparisons under the pinned
-composite adjunctions. Their left-derived factorization and the normalized
-Hom-equivalence equations identify the resulting mate with the direct-image
-composition comparison, compatibly with the pasted right-derived units.
-Whisker this unit equation by affine sections. Substitute hb, hr and hd, and
-move the direct-image and sections units past the underived comparisons by
-naturality. Exact scalar restriction identifies its derived composite unit
-with the levelwise restriction comparison. The resulting underived path has
-components t^{-1}, the pushforward square comparison, v and z. Each acts as the
-identity on sections by ht, hv and hz; their scalar actions agree by the
-fibre-product condition. It therefore equals s, by hs and extensionality of
-module maps. Deriving this equality gives the displayed localization of s
-followed by the sections unit and the exact-restriction comparison. All of
-these factorization equations hold on arbitrary homotopy-category objects;
-no cancellation of a unit, and no K-injectivity assumption, is used here.
-For zero complexes both sides vanish; identity squares reduce to unit coherence. -/
+comparison c on the other path (Stacks, Tags 08HY, 0D5T and 0AA7). -/
 theorem affineSections_square_mate_path_unit
     {R B : CommRingCat.{u}} {X : Scheme.{u}}
     (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R) :

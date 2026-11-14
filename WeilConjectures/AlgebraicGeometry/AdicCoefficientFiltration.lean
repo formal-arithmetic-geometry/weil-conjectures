@@ -13,8 +13,9 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # The graded coefficient filtration triangle
 
-Source: Stacks Project, Tag 09BR, lemma-compare-truncations-constructible.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 09BR
 -/
 
 @[expose] public noncomputable section
@@ -27,15 +28,14 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] HasDerivedCategory.standard
 
 /-- The actual kernel of the successive quotient, as a module over the larger quotient.
-It is canonically J^(n+1)/J^(n+2), with no choice of a presentation or generators.
-Source: Stacks Tag 09BR (auxiliary; not a blueprint node). -/
+It is canonically J^(n+1)/J^(n+2), with no choice of a presentation or generators
+(Stacks, Tag 09BR). -/
 def adicFiniteGradedModule {A : Type w} [CommRing A] (J : Ideal A) (n : ℕ) :
     ModuleCat.{w} (adicFiniteCoeff J (n + 1)) :=
   ModuleCat.of _ (RingHom.ker (adicFiniteFactor J (Nat.le_succ n)))
 
-/-- The constant graded module placed in degree zero in the standard localization.
-Source: Stacks Tags 09BR and 093J
-(auxiliary; not a blueprint node). -/
+/-- The constant graded module placed in degree zero in the standard localization
+(Stacks, Tags 09BR and 093J). -/
 def adicFiniteGradedSingle (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A) (n : ℕ) :
     adicFiniteAmbient.{u, v} X (adicFiniteCoeff J (n + 1)) :=
@@ -46,8 +46,8 @@ def adicFiniteGradedSingle (X : Scheme.{u})
       (adicFiniteGradedModule J n)))
 
 /-- The derived tensor with the actual graded coefficient module. The K-flat tensor is
-computed over the larger quotient, so the layer retains that quotient's scalar action.
-Source: Stacks Tag 09BR (auxiliary; not a blueprint node). -/
+computed over the larger quotient, so the layer retains that quotient's scalar action
+(Stacks, Tag 09BR). -/
 def adicFiniteGradedLayer (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A) (n : ℕ) :
@@ -59,8 +59,7 @@ def adicFiniteGradedLayer (X : Scheme.{u})
     (adicFiniteReduction.{u, v} X J N (n + 1))).obj
       (adicFiniteGradedSingle.{u, v} X J n)
 
-/-- The lower reduction, retaining the larger quotient's scalar action.
-Source: Stacks Tag 09BR (auxiliary; not a blueprint node). -/
+/-- The lower reduction, retaining the larger quotient's scalar action (Stacks, Tag 09BR). -/
 def adicFiniteRestrictedReduction (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A) (n : ℕ) :
@@ -325,22 +324,8 @@ private theorem triangle_transport
   · simp [δ, ← CategoryTheory.Functor.map_comp]
 
 /-- The graded filtration gives a distinguished triangle with the two actual reductions.
-This assertion has no constructibility or boundedness hypothesis or conclusion.
-
-Source: Stacks Project, proetale.tex, Tag 09BR,
-lemma-compare-truncations-constructible, first displayed triangle.
-(auxiliary; not a blueprint node).
-
-Proof: Set B=A/J^(n+2), C=A/J^(n+1), and I=ker(B -> C). The quotient map is
-surjective, so 0 -> I -> B -> C -> 0 is short exact. Exact constant realization
-and degree-zero embedding give its standard distinguished triangle over the constant
-B-ring. Tensor this triangle with the actual reduction N tensor_A^L B, using the
-triangulated K-flat tensor. The first term is the displayed graded layer by its
-construction. The unit comparison identifies the middle term with N tensor_A^L B.
-Balancing identifies the last term with the restriction of N tensor_A^L C; its
-comparison is the canonical composition comparison adicFiniteRho. Transport the
-triangle along these isomorphisms. Surjectivity and exactness still apply to zero
-quotients, J=0, J=top, and the empty scheme; no flatness of C over B is used. -/
+This assertion has no constructibility or boundedness hypothesis or conclusion
+(Stacks, Tag 09BR). -/
 theorem adicFiniteGradedLayer_triangle (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A) (n : ℕ) :

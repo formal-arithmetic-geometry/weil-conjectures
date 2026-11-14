@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetConstantTransportGenerators
 
 /-! # Extending a constant trivialization by inverse image
 
-Source: Stacks Project, Tags 03CB, 03CC, and 0A3H, final proof paragraph.
-(blueprint: lem-weil-pbc-etale-constant-trivialization-pullback).
+## References
+
+* Stacks Project, Tags 03CB, 03CC and 0A3H
 -/
 
 @[expose] public section
@@ -23,37 +24,8 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
-/-- A constant trivialization over P extends coherently to every scheme over P.
-Source: Stacks Project, Tags 03CB and 03CC (composition of inverse images),
-and Tag 0A3H, final paragraph (pullback of a constant sheaf).
-(blueprint: lem-weil-pbc-etale-constant-trivialization-pullback).
-
-Proof:
-1. Transport beta along `𝟙 P ≫ s = s`. For h : U → P, compose the inverse
-   composition comparison, the pullback of beta, and the canonical comparison
-   from the inverse image of a constant sheaf to the constant sheaf on U.
-   The latter is obtained from the universal property of constant sheafification:
-   it carries the unit-pulled constant generator to the generator of the same
-   value. This universal property works for all sets in Type (u + 1), without
-   assuming that they are lifts of sets in Type u. The inverse comparison follows
-   by uniqueness of left adjoints: composing the inverse-image adjunction with
-   the constant-sheaf adjunction makes the pulled constant functor left adjoint
-   to evaluation of direct image at the terminal P-neighbourhood. Its pullback
-   is terminal on U, so this right adjoint is naturally global sections on U,
-   also the right adjoint of the constant sheaf functor on U. Each comparison is
-   natural in the coefficient set,
-   so whiskering with E gives a natural isomorphism in F.
-2. At h = identity, the unit-preserving composition comparison and the
-   constant-generator comparison have identity unit equations. Uniqueness of
-   these comparisons, or the adjunction triangle identities, therefore identifies
-   the composite with beta. This proves the normalization, including its casts.
-3. For v : V → U, use associativity of the composition comparisons to compare
-   the two iterated composites. Naturality of the inverse-image unit moves the
-   pullback of beta across that unit. Both constant-sheaf comparisons carry each
-   pulled generator to the generator of the same value on V; equality follows
-   from the universal property of sheafification and the inverse-image adjunction.
-   Evaluating this equality at the pulled-back W gives the displayed formula,
-   with the associativity cast in exactly the indicated direction. -/
+/-- A constant trivialization over P extends coherently to every scheme over P
+(Stacks, Tags 03CB, 03CC and 0A3H). -/
 theorem etaleConstantTrivializationPullback
     (S P : Scheme.{u}) (s : P ⟶ S)
     (E : Sheaf S.smallEtaleTopology (Type (u + 1)) ⥤ Type (u + 1))

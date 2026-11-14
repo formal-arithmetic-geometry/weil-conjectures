@@ -23,17 +23,10 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyP
 /-!
 # Triangulation and finite cone generation for field coefficients
 
-Source: blueprint latest,
-`part-six-operations/sec-reduction-finite-coefficients/`
-`sec-constructible-sheaves-with-field-coefficients/sk-cor-coefficient-heart-ii/_section.md`
-and `sk-cor-coefficient-heart-ii.proof.md` (blueprint: corollary-coefficient-heart-b).
-
 The standing setting is a separated finite-type scheme over a field of positive
 characteristic, with characteristic different from the coefficient prime.  The
 constructible property is the existing bounded constructible property for the
-pulled-back condensed coefficient ring.  The proof follows the blueprint: the long
-exact cohomology sequence with the closure clause of `lemma-constructible-sheaves`,
-then truncation induction and the finite filtration clause of that lemma.
+pulled-back condensed coefficient ring.
 -/
 
 @[expose] public noncomputable section
@@ -219,45 +212,8 @@ private theorem heartIIExtension_zero
   exact (CondensedRing.lowerStar Λ a.imageι).map_isZero
     ((CondensedRing.openImmersionLowerShriek Λ a.toImage).map_isZero (isZero_zero _))
 
-/-- In the standing coefficient setting, bounded constructible complexes form a
-triangulated subcategory and admit finite cone presentations by shifted locally
-closed extensions of lisse modules.
-
-Source: blueprint latest,
-`part-six-operations/sec-reduction-finite-coefficients/`
-`sec-constructible-sheaves-with-field-coefficients/sk-cor-coefficient-heart-ii/_section.md`
-and `sk-cor-coefficient-heart-ii.proof.md`, both paragraphs
-(blueprint: corollary-coefficient-heart-b).
-
-The first conjunct is the triangulated-subcategory assertion.  The second
-conjunct gives a finite sequence ending at the chosen complex; each term is
-an integer shift of a canonical locally closed extension of a lisse module,
-or is a shifted cone whose two inputs occur earlier in the sequence.  The
-Noetherian structure used by the canonical extension is constructed from the
-standing finite-type and quasi-compact hypotheses.
-
-Proof plan, following the node's three steps:
-1. For a distinguished triangle `K → K' → K'' → K[1]` with `K, K'` bounded
-   constructible, the long exact homology sequence
-   (lem-sf-derived-homology-long-exact) makes each `H^i K''` an extension of
-   `ker(H^{i+1} K → H^{i+1} K')` by `coker(H^i K → H^i K')`; both are constructible by
-   clause (1) of lemma-constructible-sheaves, hence so is `H^i K''`, and `K''` vanishes
-   outside `[a-1, b]` when `K, K'` live in `[a, b]`.  Zero and isomorphic objects stay
-   inside, `H^i(K[n]) = H^{i+n}(K)` gives shift stability, and rotation gives
-   two-out-of-three: the property is triangulated.
-2. Generation: induct on the number of nonzero `H^i K`.  If none, `K ≅ 0`, the cone of
-   the identity of `Λ_X[0]` (`a = id_X`, free rank-one lisse module).  Otherwise let
-   `i` be the top degree; the truncation triangle
-   (def-sbc-standard-tstructure-derived-category, theorem-pbc-injective-acyclicity)
-   `τ_{<i} K → K → H^i(K)[-i] →` rotated backwards exhibits `K` as a cone of
-   `H^i(K)[-i-1] → τ_{<i} K`, and `τ_{<i} K` has one fewer nonzero cohomology sheaf.
-3. For a constructible sheaf `F`, the filtration of clause (3) of
-   lemma-constructible-sheaves has quotients `a_{k!} L_k`; each short exact sequence
-   `0 → F_{k-1} → F_k → a_{k!} L_k → 0` is a distinguished triangle
-   (lem-sf-derived-ses-triangle), so backward rotation builds `F` (and all its shifts)
-   by finitely many cones from shifted generators.  Concatenating these finite
-   sequences with the cones of step 2 gives the finite sequence of the conclusion.
--/
+/-- Bounded constructible complexes form a triangulated subcategory and admit finite cone
+presentations by shifted locally closed extensions of lisse modules. -/
 theorem coefficientHeartIIStatement (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj Λ)]

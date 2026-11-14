@@ -15,7 +15,6 @@ import WeilConjectures.RingTheory.TorVanishingRestrictionFlatBase
 import Mathlib.RingTheory.Flat.Localization
 
 /-! Finite Tor dimension on primes containing the presentation kernel.
-(blueprint: lem-pc-affine-polynomial-localized-tor-of-stalkwise)
 -/
 
 @[expose] public section
@@ -26,29 +25,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Finite Tor dimension over the affine base for a supported prime localization.
-Source: Stacks Project, Tag 069C, proof of (3) implies (1).
-Proof: Put A = Γ(Y,U), B = Γ(X,V), R = A[t₁,...,tₙ]. Surjectivity and ker(g) ⊆ p identify p with the
-inverse image of a prime q of B. The affine correspondence for V gives a point x in V with prime q.
-Let r be its image prime in A. The localization of B as an R-module at p is canonically B_q:
-denominators outside p map outside q, and every B denominator outside q has a lift outside p by
-surjectivity.
-
-Affine germ maps identify B_q with O_{X,x} and A_r with O_{Y,f(x)}. The equation g.comp C = f.appLE
-makes the section-to-germ square commute, so the A-action on the localized module is scalar
-restriction of the actual stalkMap. Apply HasStalkwiseFiniteTorDimension at x to obtain a natural
-bound d over A_r.
-
-Localization A → A_r is flat. For each A-module N, extend a projective A-resolution
-of N to A_r. Flatness preserves exactness and extension preserves projective objects.
-Tensor associativity and exact restriction of scalars identify the resulting homology
-with Tor over A of the restricted source stalk and N. Tor symmetry permits this
-resolution of the second argument to compute the first-variable Tor used here.
-Apply the stalkwise bound to A_r ⊗_A N and transport across the compatible affine
-localization/stalk isomorphism. No uniform bound in p is used.
-The zero algebra has no prime containing the kernel of a surjection onto it. For n = 0,
-the same localization and flat scalar-restriction argument applies.
-(blueprint: lem-pc-affine-polynomial-localized-tor-of-stalkwise). -/
+/-- Finite Tor dimension over the affine base for a supported prime localization
+(Stacks, Tag 069C). -/
 theorem affinePolynomial_localized_finiteTorDimension_of_stalkwise_of_kernel_le
     {X Y : Scheme.{u}} [IsNoetherian Y]
     (f : X ⟶ Y) [LocallyOfFiniteType f]

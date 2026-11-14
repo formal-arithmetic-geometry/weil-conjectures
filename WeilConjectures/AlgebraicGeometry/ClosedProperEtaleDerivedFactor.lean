@@ -13,8 +13,7 @@ import Mathlib.CategoryTheory.Sites.Sheaf
 
 /-! # Clopen-factor normalization on the etale site
 
-Source: the ordered composition and comparison paragraphs of
-sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md.
+The canonical etale proper comparison for a closed immersion is the clopen direct-image model.
 -/
 
 @[expose] public noncomputable section
@@ -43,24 +42,7 @@ def properEtaleModelComparison (A : Type (u + 1)) [CommRing A] [Finite A]
       (lowerStarComp B c.i c.g f c.comm)
 
 /-- The canonical etale proper comparison is the clopen direct-image model.
-Source: blueprint latest, sec-smooth-purity/sk-prop-an/
-cor-pur-affine-space-zero-section-purity.proof.md, composition and comparison;
-parent proof Step 3 (blueprint: lem-pur-closed-proper-etale-derived-factor).
-
-Proof: write c=(j,p) for the chosen compactification of f. Properness makes j clopen,
-so j_!, j^* and j_* are exact and j_!→j_* is an isomorphism. At the sheaf level,
-the unit of j_!⊣j^*, followed by j^*(j_!→j_*) and the counit of j^*⊣j_*, is the
-identity. Apply the exact localization to this equality. The unit and counit
-factorization equations on homotopy representatives show that the resulting
-adjunctions are precisely the published derived adjunctions, with Rj_* identified
-with D(j_*). Therefore D(j_!→j_*) followed by the inverse exact comparison is the
-adjunct of the inverse open unit. This is the definition of the published derived
-open forget-supports map. Whisker by Rp_*. The adjunction-defined ordinary compositor
-is the generic derived compositor by its conjugate-unit formula; naturality in the
-underived equality c.comm identifies the final transport with the generic compositor
-for lowerStarComp B c.i c.g f c.comm. The resulting composite is
-properEtaleModelComparison. Empty clopen parts, identities and zero rings obey the
-same triangle identities, so no extra geometric hypothesis is required. -/
+-/
 theorem closedProperEtaleDerivedFactor (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] [HasCompactification f] :
     rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) f =

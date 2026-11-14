@@ -14,8 +14,10 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 
 /-! # Spreading vanishing from the local scheme
 
-Source: Stacks Project, Tags 09AX, 03Q6, 09YQ and 03F3.
-(blueprint: lem-weil-pbc-etale-class-vanishing-spreads) -/
+## References
+
+* Stacks Project, Tags 09AX, 03Q6, 09YQ and 03F3
+-/
 
 @[expose] public section
 
@@ -27,23 +29,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A class which dies over the local scheme dies on some Zariski neighborhood.
-
-Source: Stacks Project, Etale Cohomology, Lemma 09AX, proof, using continuity
-(Tags 03Q6 and 09YQ) and Cohomology on Sites, Tag 03F3.
-(blueprint: lem-weil-pbc-etale-class-vanishing-spreads)
-
-Proof: Present the object cohomology presheaf on the small etale site by Ext
-from the sheafified free abelian presheaves on representables. Restrict it to
-open neighborhoods of x. The local-ring colimit theorem identifies its value
-on each open with cohomology of the restricted sheaf, compatibly with pullback
-and inverse-image composition. Its colimit is cohomology over Spec O_X,x, with
-legs given by the canonical pullbacks. Represent the given global class at the
-top neighborhood. Its colimit image is zero by the hypothesis. The elementwise
-filtered-colimit criterion supplies a smaller neighborhood where its restriction
-is zero. The comparison identifies this restriction with pullback along the
-open immersion, followed by an isomorphism of coefficient sheaves. That induced
-map on cohomology is injective, so the untransported pullback is zero as well.
-No positive-degree or henselian hypothesis is used in this continuity step. -/
+(Stacks, Tags 09AX, 03Q6, 09YQ and 03F3) -/
 theorem etale_class_vanishing_spreads {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (q : ℕ) (ξ : Sheaf.H F q) (x : X)

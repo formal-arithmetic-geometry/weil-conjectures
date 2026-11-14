@@ -11,8 +11,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Algebra.Category.Grp.Zero
 /-! # Elementwise torsion for an affine model of a supported target
 
-Source: Stacks Project, Tag 08EJ, affine support paragraph, and Tag 06Z0.
-(blueprint: new-affine-restricted-homology-support).
+## References
+
+* Stacks Project, Tags 08EJ and 06Z0
 -/
 @[expose] public section
 universe u w
@@ -22,20 +23,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 set_option autoImplicit false
 /-- An ordinary affine module identified with restricted shifted cohomology has
-support disjoint from the scalar's basic open.
-Source: Stacks Project, Tag 08EJ, affine support paragraph, and Tag 06Z0.
-(blueprint: new-affine-restricted-homology-support).
-
-Proof: Exactness of over-site restriction and the canonical over equivalence
-identify its homology with open-subscheme restriction of the homology of E'[k].
-The homology shift isomorphism identifies the latter's stalk at x with the stalk
-of H^(i+k)(E') at x. Undo the over equivalence and affine chart in hN to identify
-the tilde of N with this restricted cohomology. The global section compatibility
-identifies D(f|U) with the points of U outside the global V(f). Hence tilde N has
-zero stalks on D(f|U). Tilde stalks are prime localizations of N; zero stalks are
-nonmembership in Module.support by Module.notMem_support_iff. This is the claimed
-disjointness. For f=0 the basic open is empty; for units all stalks vanish. Empty
-opens, zero rings and zero modules are included. No finite generation is used. -/
+support disjoint from the scalar's basic open (Stacks, Tags 08EJ and 06Z0). -/
 theorem affine_restricted_homology_support
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

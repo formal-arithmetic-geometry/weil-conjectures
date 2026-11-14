@@ -16,8 +16,10 @@ import WeilConjectures.AlgebraicGeometry.ConstantCompletionOrdinaryReducedPull
 The completed finite pullback comparison (`completedFinitePull_existsUnique`).
 
 Part of the split of `Sheaf.Paper.ConstantCompletionEquivalence`.
-Source: Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940
-(auxiliary; not a blueprint node).
+
+## References
+
+* Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940
 -/
 
 @[expose] public noncomputable section
@@ -179,14 +181,7 @@ private theorem reduced_derivedPullComparison_isIso
 
 /-- Completed pullback has the asserted finite comparison in D(A/I^(n+1)) on the second
 site. Its inverse is exactly the finite reduction of the unreduced scalar comparison,
-after the canonical constant-pullback tensor reassociation. Source: Stacks 099L, 06YY
-(auxiliary; not a blueprint node).
-Proof: choose one flat-term K-flat completed-coefficient model P. Both sides reduce to
-the same quotient u^(-1)P/I^(n+1)u^(-1)P, by finiteComparison and inverse image exactness.
-The scalar comparison sends p to 1 tensor p; finite reduction sends its image to the
-same quotient class, inverse to the displayed comparison. Every construction commutes
-with maps of models and with quotient transitions before localization, and therefore
-after descent. The inverse equation fixes the natural isomorphism uniquely. -/
+after the canonical constant-pullback tensor reassociation (Stacks, Tags 099L and 06YY). -/
 theorem completedFinitePull_existsUnique (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (n : ℕ) :
     ∃! e : (derivedPull F V adj (completedMap F A I)).functor ⋙

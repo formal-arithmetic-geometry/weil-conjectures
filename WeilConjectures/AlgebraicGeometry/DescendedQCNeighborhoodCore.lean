@@ -14,8 +14,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 /-- The canonical projection from the base change over `A` to that over `B`.
-Source: Stacks Project, Varieties, Tag 0388.
-(blueprint: lem-weil-pbc-descended-qc-neighborhood-core). -/
+(Stacks, Tag 0388) -/
 noncomputable def canonicalProjection (k : Type u) [Field k] (X : Scheme.{u})
     (f : X ⟶ Spec (CommRingCat.of k)) (A : Type u) [CommRing A] [Algebra k A]
     (B : Subalgebra k A) :
@@ -31,14 +30,7 @@ noncomputable def canonicalProjection (k : Type u) [Field k] (X : Scheme.{u})
       Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k A))) ⟶
         Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k B))))
 
-/-- Core finite-coefficient construction for one point and one open.
-Source: Stacks Project, Varieties, proof of Tag 0388, lines 811--848.
-(blueprint: lem-weil-pbc-descended-qc-neighborhood-core).
-The finitely generated subalgebras of `A` form a nonempty directed system with
-colimit `A`. Applying `Spec` and base changing by `f` expresses `X_A` as the
-inverse limit of the schemes `X_B`, with affine transition maps. Choose an affine
-open neighborhood of `x` inside `V`; compact-open descent for this limit gives a
-compact open at some stage whose inverse image is exactly that neighborhood. -/
+/-- Core finite-coefficient construction for one point and one open (Stacks, Tag 0388). -/
 theorem exists_descended_qc_neighborhood_core (k : Type u) [Field k] (X : Scheme.{u})
     (f : X ⟶ Spec (CommRingCat.of k)) (A : Type u) [CommRing A] [Algebra k A]
     (V : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k A)))).Opens)

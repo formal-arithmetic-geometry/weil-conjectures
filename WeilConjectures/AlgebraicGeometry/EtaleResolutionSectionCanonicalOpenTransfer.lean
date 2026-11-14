@@ -17,7 +17,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 /-!
 # Transfer of normalized resolution comparisons
 
-Source: Stacks Project, Tags 0A50 and 03F3.
+## References
+
+* Stacks Project, Tags 0A50 and 03F3
 -/
 
 @[expose] public section
@@ -46,25 +48,8 @@ private theorem section_cocycle
     (.up ℕ)).obj K)
   exact ConcreteCategory.congr_hom (L.iCycles_d q (q + 1)) z
 
-/-- The open component of augmentation-preserving canonical section transfer.
-Source: Stacks Project, Tags 01F8 and 01FB (resolution functoriality),
-Tag 03F3 (localization), and Tag 0A50 (section complexes).
-(blueprint: lem-weil-pbc-etale-resolution-section-open-transfer)
-
-Proof: Represent a homology class over W by a cycle z using surjectivity of homologyπ.
-The sheafification/free-abelian/Yoneda adjunction gives a unique morphism f from the free
-sheaf representing W with section equal to iCycles z; its naturality makes f a cocycle.
-Adjoint α to β : g*I → J. Exactness of g* and hα identify β as a comparison of the
-resolution g*I of g*G with J. The derived-category formula extMk_hom then computes
-pullback of the Ext class of f by applying β to g*f. Precompose with the identity
-section on g⁻¹W, pulled through the free-representable comparison. Naturality of the
-adjunction unit identifies its evaluation with α at W followed by openSectionPullback.
-Expand etaleOpenObjectCohomologyMap as inverse-image Ext followed by precomposition
-with etaleOpenFreeSheafUnit. Functoriality of inverse image for the commuting square
-(g restricted to W) ≫ W.ι = (g⁻¹W).ι ≫ g gives precisely the coefficient isomorphism
-in openCohomologyPullback. Apply cX.open_cocycle and cY.open_cocycle and naturality of
-homologyπ, first on z and then on all classes. Boundaries map to boundaries because α
-is a chain map. Empty opens, identity morphisms and degree zero need no extra hypothesis. -/
+/-- The open component of augmentation-preserving canonical section transfer
+(Stacks, Tags 01F8, 01FB, 03F3 and 0A50). -/
 theorem resolutionSection_canonical_transfer_open
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

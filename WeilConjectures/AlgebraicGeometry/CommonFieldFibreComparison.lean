@@ -10,8 +10,9 @@ public import Mathlib.AlgebraicGeometry.Fiber
 
 /-! # Comparing two field fibres over the same point
 
-Source: Stacks Project, Tag 055G, descent from the étale model;
-Mathlib's pullback carrier and iterated pullback isomorphisms.
+## References
+
+* Stacks Project, Tag 055G
 -/
 
 @[expose] public section
@@ -54,17 +55,7 @@ lemma commonFieldFibreIso_hom_snd {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ 
 
 /-- A field fibre of a pulled-back family surjects onto a prescribed field fibre, via the
 base-change projection along a surjection `Spec E → Spec K` composed with the comparison
-isomorphism `commonFieldFibreIso`.
-
-Source: Stacks Project, Tag 055G, descent from the model by common field extension.
-Proof: form the fibre product of Spec κ(t) and Spec K over S. Both field points
-map to s, so it is nonempty. The residue field E of any point of that product gives
-compatible maps to Spec κ(t) and Spec K. Associativity of pullbacks identifies the
-E-fibre of X ×_S T over t with the E-base change of the prescribed K-fibre of X.
-The projection to the K-fibre is surjective since the map Spec E → Spec K is
-surjective and surjectivity is preserved by base change.
-
-(blueprint: lem-sbc-common-field-fibre-comparison) -/
+isomorphism `commonFieldFibreIso` (Stacks, Tag 055G). -/
 theorem exists_common_field_fibre_comparison {X S T : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S) (t : T) (s : S) (ht : g t = s)
     (K : Type u) [Field K]

@@ -15,13 +15,14 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechRestrictionHomotopy
 /-!
 # The alternating Čech complex computes Čech cohomology
 
-Source: Stacks Project, Cohomology of Sheaves, Section 20.23, Lemma 20.23.5
-(Tags 01FJ, 01FK, 01FM) (blueprint: lem-pc-alternating-cech-computes).
-
 The full Čech complex and the complex indexed by strictly increasing tuples are
 related by restriction.  The signed extension from increasing tuples and the explicit
 repeated-index homotopies of Tags 01FJ, 01FK, and 01FM show that this restriction
 induces an isomorphism on every Čech cohomology group.
+
+## References
+
+* Stacks Project, Lemma 20.23.5 (Tags 01FJ, 01FK and 01FM)
 -/
 
 @[expose] public section
@@ -90,41 +91,9 @@ private theorem orderedDifferential_squared (X : Scheme.{u}) {I : Type v}
     orderedRestriction_comm, ← Category.assoc, S.differential_squared]
   simp
 
-/-- The alternating Čech comparison for a Zariski open covering.
-
-`S` is any choice of the intersections and their restriction maps, as in
-`def-weil-pbc-site-cech-complex`. Its product universal properties on the poset
-of opens identify `S.W p t` with the intersection of the `U (t i)`.
-The simultaneous degree identifications `e` identify `A` with the products
-on strictly increasing tuples. The first clause specifies its differential,
-the second specifies restriction, and the last says that this very map induces
-isomorphisms on cohomology. Nonnegative indexing represents zero negative terms.
-Source: Stacks Project, Cohomology of Sheaves, Section 20.23, Definitions
-20.23.2 and 20.23.4 and Lemmas 20.23.3, 20.23.5, 20.23.6 (Tags 01FJ, 01FK, 01FM)
-(blueprint: lem-pc-alternating-cech-computes).
-
-Proof:
-1. The Zariski site is a poset, so permuting intersections preserves their
-   restriction maps. Restriction to increasing tuples commutes with the signed
-   face sum (Tag 01FK; lemma-uniform-bounds-pro-etale-affines, def-weil-pbc-site-cech-complex).
-2. Extend an increasing-tuple cochain by the sign of the sorting permutation
-   on distinct tuples and by zero on repeated tuples. Deleting an entry gives
-   the same face sign on both sides, so this is a cochain map (Tags 01FJ, 01FK).
-   Restriction after extension is the identity.
-3. Use the first homotopy of Tag 01FM: for a tuple let `σ` stably sort its
-   indices, and let `σ_a` agree with `σ` before `a` and list the remaining
-   positions increasingly. Sum over `a` with coefficient `(-1)^a sign(σ_a)`
-   the component indexed by `σ(0), ..., σ(a), σ_a(a), ..., σ_a(p)`.
-   Adjacent terms cancel, giving `dh + hd = id - κ`, where `κ` is stable
-   sorting with its sign. This retracts onto the semi-alternating complex,
-   identified by restriction with the nondecreasing-tuple complex.
-   On this complex use the second homotopy of Tag 01FM: zero on increasing
-   tuples, and otherwise insert a repeat at the first equality in position
-   `a`, with sign `(-1)^a`. Adjacent terms cancel, giving zero on increasing
-   tuples and the original component otherwise. Extension by zero followed
-   by projection is therefore homotopic to the identity. Restriction is a
-   homotopy equivalence and its induced homology maps are isomorphisms.
--/
+/-- The alternating Čech comparison for a Zariski open covering: the complex of products over
+strictly increasing tuples, with the restriction map from the full Čech complex, computes
+Čech cohomology (Stacks, Tags 01FJ, 01FK and 01FM). -/
 theorem alternatingCechComputes
     (X : Scheme.{u}) {I : Type v} [LinearOrder I] (U : I → X.Opens)
     (hU : iSup U = ⊤)

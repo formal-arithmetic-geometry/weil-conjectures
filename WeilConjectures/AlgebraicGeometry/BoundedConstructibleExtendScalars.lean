@@ -44,17 +44,7 @@ private lemma constructible_extend
     ((pullbackExtendScalarsComparison (U.immersion i) R S φ).app M).symm
     (lfp_extend (F.obj R) (F.obj S) (F.map φ) (hU i))
 
-/-- Exact extension of scalars preserves bounded constructible complexes of module objects.
-(auxiliary; not a blueprint node)
-
-Proof: scalar extension preserves colimits and sends the regular module to the regular
-module, hence preserves finite free presentations. Monoidal pullback commutes with scalar
-extension: the two left adjoints have canonically isomorphic right adjoints, by naturality
-of the pullback adjunction unit. Thus the same presentation covers and stratification
-witness constructibility after scalar extension. Exact scalar extension commutes with
-derived cohomology. It preserves zero objects, so the old cohomological bounds remain
-valid; its preservation of constructible sheaves applies to each cohomology object.
-This also includes zero rings, rank-zero presentations, and the empty scheme. -/
+/-- Exact extension of scalars preserves bounded constructible complexes of module objects. -/
 theorem boundedConstructible_leftDerivedExtendScalars_obj
     [PreservesFiniteLimits (Mod.extendScalars φ)]
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R))

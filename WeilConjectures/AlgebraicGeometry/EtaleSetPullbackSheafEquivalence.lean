@@ -12,7 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 /-!
 # Comparison of the set-valued inverse image with the inverse sheaf equivalence
 
-Source: Stacks Project, Tags 04DZ and 03SI.
+## References
+
+* Stacks Project, Tags 04DZ and 03SI
 -/
 
 set_option linter.style.haveILetI false
@@ -21,12 +23,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
-/-- Source: Stacks Project, Tag 04DZ, inverse-image/topos equivalence.
-Proof: The constructed set-valued inverse image is left adjoint to lowerStar.
-The inverse of sheafEquivalence is also left adjoint to this same functor.
-Adjunction.leftAdjointUniq gives the comparison isomorphism; take its inverse
-for the displayed orientation.
-(blueprint: thm-weil-pbc-etaleSetPullback_eq_sheafEquivalence) -/
+/-- For a universal homeomorphism, the étale set-valued pullback is the inverse of the sheaf
+equivalence (Stacks, Tag 04DZ). -/
 theorem etaleSetPullback_eq_sheafEquivalence {X X' : Scheme.{u}} (u : X' ⟶ X)
     [IsUniversalHomeomorphism u] :
     Nonempty ((sheafEquivalence (Type (u + 1)) u).symm.functor ≅

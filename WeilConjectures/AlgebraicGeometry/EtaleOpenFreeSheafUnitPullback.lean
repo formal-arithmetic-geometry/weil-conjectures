@@ -12,8 +12,10 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictionPullbackUnit
 import all WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionCanonicalWholeToOpen
 
 /-! # Pullback of the open identity generator
-Source: Stacks Project, Tags 03F3, 01F8 and 01FB.
-(blueprint: lem-weil-pbc-etale-open-free-sheaf-unit-pullback)
+
+## References
+
+* Stacks Project, Tags 03F3, 01F8 and 01FB
 -/
 
 @[expose] public section
@@ -89,20 +91,7 @@ private lemma openGenerator_identity {X : Scheme.{u}} (U : X.Opens) :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxRecDepth 4096 in
-/-- The degree-zero identity generator commutes with pullback.
-Source: Stacks Project, Tag 03F3 (localization), Tags 01F8/01FB (functoriality).
-(blueprint: lem-weil-pbc-etale-open-free-sheaf-unit-pullback)
-
-Proof: Apply the constant-sheaf adjunction at the terminal object of the inverse-image
-open, then evaluate the homomorphism from the integers at 1. Naturality turns the left
-side into the section classified by etaleOpenFreeSheafPullback, transported by the
-localization comparison. By the free abelian Yoneda adjunction this is the inverse-image
-unit at the identity generator, restricted along openSectionPullback. The constant-sheaf
-pullback adjunct formula turns the right side into pullback of the original identity
-section along morphismRestrict. The open restriction pullback unit equation identifies
-these sections, including the displayed composition comparisons. The two adjunction
-bijections give the morphism equality. All constructions apply also to the empty open.
--/
+/-- The degree-zero identity generator commutes with pullback (Stacks, Tags 03F3, 01F8 and 01FB). -/
 theorem etaleOpenFreeSheafUnit_pullback {X Y : Scheme.{u}} (g : Y ⟶ X) (W : X.Opens) :
     etaleOpenFreeSheafUnit (g ⁻¹ᵁ W) ≫
       (upperStar AddCommGrpCat.{u + 1} (g ⁻¹ᵁ W).ι).map

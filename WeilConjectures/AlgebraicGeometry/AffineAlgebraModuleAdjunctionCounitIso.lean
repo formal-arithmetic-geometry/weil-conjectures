@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.AffineModuleTensorExtensionEpi
 import Mathlib.CategoryTheory.Adjunction.Unique
 /-! # Canonical affine algebra module adjunction component
 
-Source: Stacks Project, Tags 0AVW and 01SB. -/
+## References
+
+* Stacks Project, Tags 0AVW and 01SB
+-/
 
 @[expose] public section
 
@@ -56,17 +59,7 @@ private theorem adjunction_of_epi_comparison
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The canonical affine algebra adjunction component.
-Source: Stacks Project, Tags 0AVW and 01SB.
-(blueprint: new-affine-algebra-module-counit-iso).
-
-Proof: Identify the canonical left adjoint with tensor pullback for g by its Hom adjunction. Tensor
-associativity identifies it with the two operations in the affine module correspondence. Its
-counit is alpha: on pure tensors the evaluation sends a tensor s to a times s, uniquely by the
-tensor universal property. The correspondence proves alpha invertible on quasi-coherent O_X-
-modules. Transport it across the adjunction-compatible isomorphism of left adjoints. No
-surjectivity of f is used; empty schemes and zero modules satisfy the claim.
--/
+/-- The canonical affine algebra adjunction component (Stacks, Tags 0AVW and 01SB). -/
 theorem affine_algebra_module_adjunction_counit_iso
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     [(RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)).IsRightAdjoint] :

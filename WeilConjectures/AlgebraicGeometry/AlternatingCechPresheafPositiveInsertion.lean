@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.CechCapPresheafLocalIso
 
 /-! # Positive-degree signed insertion before sheafification
 
-Source: Stacks Project, Tags 02FU and 01FM.
-(blueprint: lem-pc-s3-alternating-cech-presheaf-positive-insertion).
+## References
+
+* Stacks Project, Tags 02FU and 01FM
 -/
 
 @[expose] public section
@@ -90,8 +91,8 @@ private theorem capIntoCap_unit {X : Scheme.{u}} (G : X.Modules) (W Z : X.Opens)
   ext V s
   rfl
 
-/- Insert an absent index into the finite ordered range of a tuple.
-Source: Stacks 01FM, ordered indices; 02FU, insertion. -/
+/- Insert an absent index into the finite ordered range of a tuple
+(Stacks, Tags 01FM and 02FU). -/
 open Limits Opposite in
 private def insertTuple {r n : ℕ} (a : Fin n ↪o Fin r) (i : Fin r)
     (hi : i ∉ Set.range a) : Fin (n + 1) ↪o Fin r :=
@@ -101,8 +102,8 @@ private def insertTuple {r n : ℕ} (a : Fin n ↪o Fin r) (i : Fin r)
       RelEmbedding.coe_toEmbedding, Set.mem_range]
       using hi)
 
-/- The sign exponent is the number of tuple entries strictly before the inserted index.
-Source: Stacks 01FM, ordered signs; 02FU, insertion. -/
+/- The sign exponent is the number of tuple entries strictly before the inserted index
+(Stacks, Tags 01FM and 02FU). -/
 open Limits Opposite in
 private def position {r n : ℕ} (a : Fin n ↪o Fin r) (i : Fin r) : ℕ :=
   (Finset.univ.filter fun j ↦ a j < i).card
@@ -174,8 +175,8 @@ private theorem position_face {r n : ℕ} (a : Fin (n + 1) ↪o Fin r) (b : Fin 
       exact hv ▸ Finset.mem_range.mp l.prop
   rw [he, Finset.card_map, Finset.card_attach, Finset.card_range]
 
-/- One signed insertion coordinate, zero if the inserted index is already present.
-Source: Stacks 02FU, increasing-tuple adaptation of 01FM. -/
+/- One signed insertion coordinate, zero if the inserted index is already present
+(Stacks, Tags 01FM and 02FU). -/
 open Limits Opposite in
 private def coordinate {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens)
     (G : X.Modules) (i : Fin r) (q : ℕ) (a : Fin (q + 1) ↪o Fin r) :
@@ -189,8 +190,8 @@ private def coordinate {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens)
           (alternatingCechIntersection U (insertTuple a i hi))
           (intersection_insert_le U a i hi))
 
-/- Assemble signed insertion coordinates by the finite product comparison.
-Source: Stacks 02FU, increasing-tuple adaptation of 01FM. -/
+/- Assemble signed insertion coordinates by the finite product comparison
+(Stacks, Tags 01FM and 02FU). -/
 open Limits Opposite in
 private def map {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens)
     (G : X.Modules) (i : Fin r) (q : ℕ) :
@@ -228,8 +229,8 @@ private theorem capIntoCap_map_comp {X : Scheme.{u}} (G : X.Modules)
   rw [← PresheafOfModules.map_comp_apply]
   rfl
 
-/- The coordinate of insertion followed by the differential: its signed face sum.
-Source: Stacks 02FU, ordered deletion calculation as in 01FM. -/
+/- The coordinate of insertion followed by the differential: its signed face sum
+(Stacks, Tags 01FM and 02FU). -/
 open Limits Opposite in
 private def boundaryCoordinate {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens)
     (G : X.Modules) (i : Fin r) (p : ℕ) (a : Fin (p + 2) ↪o Fin r) :
@@ -379,8 +380,8 @@ private theorem coordinate_of_face {X : Scheme.{u}} {r q : ℕ}
 end
 end CechInsertion
 
-/- For a tuple already containing the inserted index, exactly its deletion survives.
-Source: Stacks 02FU, insertion computation; increasing tuples as in 01FM.
+/- For a tuple already containing the inserted index, exactly its deletion survives
+(Stacks, Tags 01FM and 02FU).
 
 Proof: Write i=a b. Every face other than b still contains i, so its insertion
 coordinate is zero. The b face omits i; inserting it recovers a, in position b.
@@ -414,8 +415,8 @@ private theorem alternatingCechPresheaf_insertion_containing_coordinate
     rw [coordinate, dite_eq_left hmem, Limits.zero_comp, smul_zero]
   · simp
 
-/- Paired noncentral faces cancel on a tuple omitting the inserted index.
-Source: Stacks 02FU, the displayed dh+hd computation; increasing tuples as in 01FM.
+/- Paired noncentral faces cancel on a tuple omitting the inserted index
+(Stacks, Tags 01FM and 02FU).
 
 Proof: Enlarge a by inserting i in its unique position b. In d followed by
 insertion at a, the face deleting b is the restriction of the a-coordinate,
@@ -491,34 +492,8 @@ private theorem alternatingCechPresheaf_insertion_omitting_coordinate
   rw [hcancel]
   abel
 
-/-- The positive insertion identity valued in intersection presheaves.
-Source: Stacks Project, Tag 02FU, local insertion; Tag 01FM, increasing tuples.
-(blueprint: lem-pc-s3-alternating-cech-presheaf-positive-insertion).
-
-Proof: Write W=U i and K(P)(V)=P(V intersect W), with scalars restricted
-from V. For an increasing tuple a of length q+1, define the a-coordinate
-of the degree-q insertion map from P(q+1) to K(Pq) by zero if i occurs
-in a. Otherwise insert i in its unique increasing position b, project
-to that tuple, restrict to V intersect W intersect the intersection of a,
-and multiply by (-1)^b. These opens coincide with the inserted tuple's
-intersection with V; their equality provides a linear section map.
-The maps commute with restriction. The finite product comparison for K
-identifies these coordinate maps with a morphism to K(Pq). Use q=p for s
-and q=p+1 for t. To check the equation, project to a tuple a of length p+2
-and evaluate on V. If a omits i, in the face sum of the inserted tuple
-the face deleting i contributes restriction of the a-coordinate to W.
-Each other deletion pairs with inserting i after that deletion, with the
-same restriction and opposite sign. More precisely, if the inserted index
-has position b and a face deletes position j<b, the two exponents are
-j+b-1 and j+b. If j is at least b, they are j+b and j+b+1. The face
-omitting the inserted i has the product of two signs (-1)^b, hence sign
-one. If a contains i, insertion at a is
-zero, and among its faces only deleting i permits insertion; the two
-signs are (-1)^b and their product is one. Thus s K(d)+d t is exactly
-restriction to W in every coordinate. Product extensionality proves the
-presheaf equality. This argument needs no cover condition. Empty opens
-and empty tuple index sets are zero modules; if r=0 no index i exists.
-There is no sheafification or extension to integer degrees in this claim. -/
+/-- The positive insertion identity valued in intersection presheaves (Stacks, Tags 02FU and 01FM).
+-/
 theorem alternatingCechSheafPresheaf_positive_insertion
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r)
     (p : ℕ) :

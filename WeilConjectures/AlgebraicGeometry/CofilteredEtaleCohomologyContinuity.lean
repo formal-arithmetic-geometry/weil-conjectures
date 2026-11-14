@@ -14,8 +14,9 @@ import Mathlib.CategoryTheory.Presentable.Directed
 
 /-! # Ordinary etale continuity for cofiltered categories
 
-Source: Stacks Project, Tags 09YQ and 0032.
-(blueprint: lem-weil-pbc-cofiltered-etale-cohomology-continuity).
+## References
+
+* Stacks Project, Tags 09YQ and 0032
 -/
 
 @[expose] public section
@@ -45,21 +46,8 @@ private theorem eq_comp_inv_of_comp_hom_eq
   apply (cancel_mono e.hom).1
   simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using h
 
-/-- Ordinary continuity extends from directed orders to small cofiltered categories.
-Source: Stacks Project, Theorem 59.51.3 (Tag 09YQ) and Tag 0032.
-
-Proof: Choose a small nonempty directed partial order A and a final R : A to I.op
-using IsFiltered.exists_directed. The left opposite of R is initial, so whiskering
-c gives a limiting cone. Compactness, quasi-separatedness, and affine transitions
-are inherited. Reindex F and its transition maps along R. The identity law follows
-from R.map_id, the composition law from R.map_comp and reversal by unop; equality
-proof arguments agree by proof irrelevance. Reindex G, H, L, and B, together with
-their object isomorphisms. Finality preserves the colimit of L, and the supplied
-arrow and leg equations give those required for directed continuity. Apply
-nonempty_isColimit_etale_cohomology_of_isLimit and transport the resulting colimit
-of B.whisker R back by Functor.Final.isColimitWhiskerEquiv. Cofilteredness ensures
-nonemptiness; degree zero and zero sheaves are included without extra hypotheses.
-(blueprint: lem-weil-pbc-cofiltered-etale-cohomology-continuity). -/
+/-- Ordinary continuity extends from directed orders to small cofiltered categories
+(Stacks, Tags 09YQ and 0032). -/
 theorem nonempty_isColimit_etale_cohomology_of_cofiltered_isLimit
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

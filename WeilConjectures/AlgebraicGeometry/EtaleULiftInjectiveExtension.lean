@@ -51,22 +51,7 @@ private theorem small_sheaf_in_image (X : Scheme.{u})
   refine ⟨⟨P, hP⟩, ⟨?_⟩⟩
   exact (fullyFaithfulSheafToPresheaf _ _).preimageIso e
 
-/-- Small-valued extension problems descend through coefficient lift.
-Source: Stacks Project, Injectives, Lemma 19.7.3, Tag 01DO;
-universe descent step of `lem-sc-etale-ulift-injective`.
-(blueprint: lem-sc-etale-ulift-injective-extension)
-
-Proof: Since f is mono, each component is an injective homomorphism. Thus A is
-objectwise u-small whenever B is. Transport the groups on A and B along their
-shrink equivalences, and transport the restrictions by conjugation. This gives
-small-valued presheaves A0 and B0 and natural isomorphisms of their coefficient lifts
-with A and B. Full faithfulness of ULift reflects the sheaf condition, so A0 and B0
-are sheaves. Descend f and g through the fully faithful sheafCompose functor. The
-descended f is mono, since a faithful functor reflects monomorphisms. Injectivity
-of I extends the descended g across this descended f. Apply coefficient lift and
-conjugate with the natural isomorphisms to get h and its factorization identity.
-No arbitrary witness is used to define a public object. The empty site and zero
-groups are included: shrink and transport work on them in exactly the same way. -/
+/-- Small-valued extension problems descend through coefficient lift (Stacks, Tag 01DO). -/
 theorem etale_ulift_injective_extension (X : Scheme.{u})
     (I : Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) [Injective I]
     {A B : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}

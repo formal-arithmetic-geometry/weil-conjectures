@@ -8,9 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.ProperSupportedKunnethRoute
 import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperFactor.KunnethMapAgrees
 
 /-! # Tensor symmetry of the native etale Kunneth morphism
-
-Source: the common-counit computation in the first triangle of
-sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md.
 -/
 
 @[expose] public section
@@ -57,16 +54,7 @@ private theorem kunneth_transpose {S X Y W : Scheme.{u}}
   simp only [← whiskerLeft_comp, Iso.hom_inv_id_app_assoc]
 
 /-- Swapping the two external factors commutes with the canonical Kunneth morphism.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, common pullback counits;
-Stacks Tags 0B56 and 06YU (auxiliary; not a blueprint node).
-
-Proof: transpose both sides along the native pullback/direct-image adjunction for c.
-The pullback tensor comparison for c is followed by the tensor of the two maps
-c* Rf* E to p* E and c* Rg* K to q* K, each given by the pullback compositor
-and the corresponding original counit. The tensor comparison is braided and the
-braiding is natural with respect to these two maps. Their naturality square is
-exactly the transposed equality. Injectivity of the adjunction gives the result.
-No cartesianness, properness or invertibility of projection maps is used. -/
+(Stacks, Tags 0B56 and 06YU) -/
 theorem kunnethMap_tensorSymmetry {S X Y W : Scheme.{u}}
     (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y ⟶ S) (c : W ⟶ S)
     (hp : p ≫ f = c) (hq : q ≫ g = c)

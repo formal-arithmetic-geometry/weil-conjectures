@@ -18,7 +18,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # The canonical global cohomology class of one
 
-Source: Stacks Project, Tags 079V and 09M1.
+## References
+
+* Stacks Project, Tags 079V and 09M1
 -/
 
 @[expose] public section
@@ -292,9 +294,8 @@ private theorem evaluation_bijective_transport
   simp only [Category.assoc, e.hom_inv_id, Category.comp_id]
 
 /-- The class of one in derived global sections of the degree-zero structure sheaf.
-It is constructed before choosing a resolution, using the ordinary-to-derived unit.
-Source: Stacks Project, Tag 079V, K-injective computation of derived global sections.
-(blueprint: lem-sc-derived-structure-evaluation-one-bijective). -/
+It is constructed before choosing a resolution, using the ordinary-to-derived unit
+(Stacks, Tag 079V). -/
 def derivedStructureGlobalOne (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     letI := HasDerivedCategory.standard
@@ -327,23 +328,8 @@ def derivedStructureGlobalOne (X : Scheme.{u})
     (((DerivedCategory.homologyFunctorFactors (ModuleCat.{u} A) 0).app S).inv
       (ε.inv (1 : A)))
 
-/-- Canonical evaluation at one is bijective, without any open-restriction comparison.
-Source: Stacks Project, Tag 09M1, the structure-sheaf case of the first Hom formula;
-Tag 079V, computation by K-injective complexes.
-(blueprint: lem-sc-derived-structure-evaluation-one-bijective).
-
-Proof: Resolve E by a K-injective complex J. Localization identifies maps from
-O_X[0] to E with homotopy classes of maps O_X[0] to J. Such a map is determined
-by its value on one in degree zero: a global cycle. Conversely a global cycle
-z defines the map r ↦ r z, with z restricted to each open. These operations are
-inverse. A homotopy is exactly a degree minus one global section whose boundary
-is the difference of the cycles. Thus the quotient is H^0 of global sections
-of J. The ordinary-to-derived comparison is an isomorphism on J. Naturality
-of this comparison with the resolution identifies this cycle evaluation with
-H^0(RΓ(f)) applied to the displayed, explicitly constructed class of one.
-Changing representatives preserves both maps, and gives the asserted bijection
-on the specified derived category. The zero ring and empty scheme give zero
-modules and the same argument; no boundedness or quasi-coherence is used. -/
+/-- Canonical evaluation at one is bijective, without any open-restriction comparison
+(Stacks, Tags 09M1 and 079V). -/
 theorem derivedStructure_evaluation_one_bijective (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (E : schemeDerivedCategory X) :

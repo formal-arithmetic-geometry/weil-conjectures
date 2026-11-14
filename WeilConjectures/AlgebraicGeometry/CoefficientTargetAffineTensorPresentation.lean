@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.CoefficientTargetTensorSurjective
 
 /-! # Tensor presentation of inverse-image coefficient sections
 
-Source: Stacks Project, Tags 02KG, 01I9 and 01IA.
+## References
+
+* Stacks Project, Tags 02KG, 01I9 and 01IA
 -/
 
 @[expose] public section
@@ -33,27 +35,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 
 /-- Sections supported on the inverse image of an affine coefficient open have a
 unit-compatible tensor presentation. This assertion only describes the target sections;
-it does not mention an associated-module source or a comparison morphism.
-Source: Stacks Project, Tag 02KG (Lemma 30.5.1), and Tags 01I9, 01IA and 0097.
-(blueprint: lem-pc-coefficient-target-affine-tensor-presentation).
-
-Proof: Write Y = f inverse image U, A = Gamma(U,O), D = Gamma(Z,O),
-R = Gamma(B,O), and N = Gamma(Z,F|Y), regarded as an A-module using the scalar
-map displayed below. The restricted cartesian square identifies
-W intersect f' inverse image B with Z times_U B. The affine intersection
-base-change theorem makes this open affine. Its ring is R tensor_A D. The
-affine pullback section formula identifies its M-sections with
-(R tensor_A D) tensor_D N. Transport tensorPullback to the standard pullback
-by the unique unit-compatible isomorphism of left adjoints, and identify
-open-immersion pullback with restriction. Tensor reassociation gives the
-R-linear equivalence to R tensor_A N, sending (r tensor d) tensor n to
-r tensor (d*n), with inverse r tensor n mapping to (r tensor 1) tensor n.
-The GammaSpecIso and canonical chart identify the A-action with the displayed
-restriction-of-scalars map. Pullback unit compatibility sends the restriction
-of coefficientPullbackGenerator(s) to 1 tensor s. Finally use
-coefficientSupportIso to pass from intersection sections to pushforward
-sections. Empty Z or B gives zero modules and the same formulas; neither
-flatness nor any covering hypothesis is needed. -/
+it does not mention an associated-module source or a comparison morphism
+(Stacks, Tags 02KG, 01I9, 01IA and 0097). -/
 theorem exists_coefficientTarget_affine_tensor_presentation
     {X T : Scheme.{u}} (f : X ⟶ T) [IsSeparated f]
     (F : X.Modules) [F.IsQuasicoherent]

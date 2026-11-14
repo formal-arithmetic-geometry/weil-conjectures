@@ -13,8 +13,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyF
 
 /-! # Pullback systems for continuous lisse lattices
 
-Source: Bhatt--Scholze, first paragraph of the proof of Lemma 6.8.13.
-(auxiliary; not a blueprint node)
+## References
+
+* Bhatt–Scholze, Lemma 6.8.13
 -/
 
 @[expose] public section

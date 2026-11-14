@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Restricting a coherent sheaf system and its colimit to tail opens
 
-Source: Stacks Project, Tag 09YQ, coherent systems and their colimits.
+## References
+
+* Stacks Project, Tag 09YQ
 -/
 
 @[expose] public section
@@ -22,23 +24,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Coherent coefficients and their colimit restrict to the explicit tail opens.
-
-Source: Stacks Project, Tag 09YQ (theorem-colimit), coherent-system construction;
-Tag 01F7, functoriality of inverse image.
-(blueprint: lem-weil-pbc-etale-limit-tail-open-coefficients).
-
-Proof: Use the explicitly constructed restricted sheaves, coefficient maps and
-limit isomorphisms from tailOpenRestrictedSystem_coherence. Its first three
-clauses give the identity, composition and diagram-map equations. The tail
-inclusion is final: directedness supplies an upper bound of any index and i₀,
-and filteredness joins any two choices. Thus whiskering L with the inclusion
-preserves its colimit. Inverse image is a left adjoint and preserves that
-colimit. For the coefficient legs expand the inverse of tailOpenLimitIso;
-the inverse-of-composite formula and functoriality of inverse image give exactly
-openSquareCoefficient of the original coefficient leg. The construction also
-works for empty opens, zero coefficients and a singleton diagram; it asserts
-no geometric limit or cohomology continuity. -/
+/-- Coherent coefficients and their colimit restrict to the explicit tail opens
+(Stacks, Tags 09YQ and 01F7). -/
 theorem etale_limit_tail_open_coefficients
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

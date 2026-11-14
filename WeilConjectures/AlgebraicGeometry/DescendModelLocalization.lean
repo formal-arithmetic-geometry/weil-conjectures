@@ -20,9 +20,7 @@ import Mathlib.Algebra.Algebra.Shrink
 /-!
 # DescendModelLocalization
 
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
-`lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9.
-(blueprint: lem-weil-pbc-descend-model-localization)
+Descending a nonzero denominator of a finite étale domain model to a principal open of the base.
 -/
 
 @[expose] public section
@@ -48,20 +46,7 @@ private theorem shrink_scalarTower
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 700000 in
 -- The successive localization and shrink structures require additional elaboration heartbeats.
-/-- Core construction of a nonzero localization of a finite étale model.
-
-The proof follows the denominator-clearing and localization argument in the
-smooth purity blueprint, `lem-weil-pbc-finite-pushforward-generic-constructible`,
-steps 4--9. Write the base element as a fraction with numerator `b`. The
-localization at this element is also the localization of `A` at `c0 * b`.
-Localize `A0` at its image, use the finite-module localization theorem, and
-transport along the base localization equivalence. The localization remains
-étale by composition and restriction of scalars, and has fraction field `K'`.
-Its finite module structure over `A[1/(c0*b)]` proves smallness. Shrink the ring
-and transport the algebra maps and their scalar towers through the resulting
-ring equivalence. Finally apply integral lying over to the injective base map.
-(blueprint: lem-weil-pbc-descend-model-localization)
--/
+/-- Core construction of a nonzero localization of a finite étale model. -/
 private theorem exists_base_element_model_localization
     (A : Type u) [CommRing A] [IsNoetherianRing A] [IsDomain A]
     (K' : Type (max u v)) [Field K'] [Algebra A K']
@@ -203,26 +188,7 @@ private theorem exists_base_element_model_localization
 
 /-- Descend a specified nonzero denominator of a finite étale domain model to a
 principal open of the original base. The resulting small domain is a localization of
-that model at a multiple of the denominator. No finite algebra B or product of fields
-occurs in this statement.
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
-`lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9; steps 3--4 of
-`lem-weil-pbc-spread-generic-product-embedding`.
-(blueprint: lem-weil-pbc-descend-model-localization)
-
-Proof: The nonzero t is integral over S0 because A0 is finite over S0. Among its
-monic integral equations choose one of least degree. Its constant coefficient a is
-nonzero: otherwise cancel t in the domain and obtain a monic equation of smaller
-degree. Evaluating the equation shows that the image of a is divisible by t in A0.
-Write a = b/c0^n in S0 with b nonzero in A. Put c = c0*b and s = algebraMap S0 A0 a.
-Localizing S0 at a is the same as localizing A at c. Localizing A0 at s is consequently
-the base change of A0 along that localization of S0. Hence it remains finite étale
-and surjective on spectra. It remains a domain and has fraction field K', since s
-is nonzero. It is finite as a module over A[1/c], so it is small in the universe of A.
-Transport its ring, algebras, localization and fraction-ring structures to a small
-presentation. The algebra maps from A0, A and A[1/c], and the map to K', commute by
-construction; they give all the displayed scalar towers. -/
+that model at a multiple of the denominator. -/
 theorem exists_descend_model_localization
     (A : Type u) [CommRing A] [IsNoetherianRing A] [IsDomain A]
     (K' : Type (max u v)) [Field K'] [Algebra A K']

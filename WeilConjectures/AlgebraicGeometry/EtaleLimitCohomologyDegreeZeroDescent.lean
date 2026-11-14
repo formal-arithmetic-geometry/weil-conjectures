@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.FixedPullbackDegreeZeroDescent
 
 /-! # Degree reduction for etale limit cohomology
 
-Source: Stacks Project, Tags 09YQ, 09YP, 09YN and 0739.
+## References
+
+* Stacks Project, Tags 09YQ, 09YP, 09YN and 0739
 -/
 
 @[expose] public section
@@ -26,26 +28,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Degree-zero limit cohomology classes descend to a stage.
-
-Source: Stacks Project, Etale Cohomology, Tag 09YQ, the degree-zero part of
-Cohomology on Sites Tag 09YP, and Sites Tag 09YN.
-(blueprint: lem-weil-pbc-etale-limit-cohomology-degree-zero-descent).
-
-Proof: Projections of the scheme limit are affine, so the limit is qcqs.
-Sections of the filtered sheaf colimit on this fixed qcqs scheme form the
-filtered colimit of stage sections. Apply the existing filtered-cohomology
-colimit theorem in degree zero and transport its image cocone through the natural
-isomorphism with global sections. H.equiv₀ and its naturality represent the given class by
-some z in H^0(G_i). Transport z through eG_i and apply fixed-pullback degree-zero
-descent to obtain a class x of the pullback of F_i at a later stage j.
-Map x by φ_(i,j) to H^0(F_j), then by eH_j inverse to H_j. Naturality of
-cohomologyMap, the descent equation, hG and the cocone equation for L identify
-its image in H^0(L.pt) with the original class. Finally hB and injectivity of
-eB give the requested equation in B.pt. The coefficient coherence and H-arrow
-hypotheses are retained unchanged; the supplied functors already encode their
-coherence, so the representative argument uses hG and hB directly.
--/
+/-- Degree-zero limit cohomology classes descend to a stage (Stacks, Tags 09YQ, 09YP and 09YN). -/
 theorem etale_limit_cohomology_degree_zero_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

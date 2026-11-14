@@ -11,8 +11,9 @@ import WeilConjectures.Topology.Sheaves.CechComparison
 
 /-! # A correction cochain from local horseshoe lifts
 
-Source: Stacks Project, Cohomology, Tag 01EQ and Tag 0B8S.
-(blueprint: lem-sc-cech-horseshoe-correction-cochain).
+## References
+
+* Stacks Project, Tags 01EQ and 0B8S
 -/
 
 @[expose] public section
@@ -61,8 +62,8 @@ private theorem moduleCechZero_naturality {X : Scheme.{u}} {ι : Type u}
   simp only [ModuleCat.comp_apply]
   exact PresheafOfModules.naturality_apply f.val _ x
 
-/-- The two restrictions of a global section to each pairwise intersection agree.
-Source: Stacks 01EQ (blueprint: def-sc-module-cech-comparison). -/
+/-- The two restrictions of a global section to each pairwise intersection agree (Stacks, Tag 01EQ).
+-/
 private theorem moduleCechZero_d {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (F : X.Modules) :
     moduleCechZero U F ≫
@@ -120,24 +121,8 @@ private theorem cechZeroπ {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
 set_option maxHeartbeats 400000 in
 -- The sectionwise and two cochain calculations repeatedly compare categorical product modules.
 set_option backward.isDefEq.respectTransparency false in
-/-- A Cech zero cochain with prescribed resolution and Cech differentials.
-Source: Stacks Project, Cohomology, Tag 01EQ (double-complex proof) and Tag 0B8S.
-(blueprint: lem-sc-cech-horseshoe-correction-cochain).
-
-Proof. For each open U_i, the difference aug_B(x_i) - b|U_i lies in the
-kernel of beta^0 by the augmentation square, hx and hb. The short exact
-row identifies alpha^0 with this kernel, which is computed sectionwise.
-Take its unique preimage t_i. Applying alpha^0 shows that the Cech
-coboundary of these preimages is aug_A(z): the restrictions of b cancel,
-and hz and the first augmentation square identify the remaining terms.
-Cancel the sectionwise monomorphism alpha^0. Applying alpha^1 to the
-resolution differential of t_i gives -d(b)|U_i, since d aug_B = 0.
-Use ha and cancel alpha^1 to obtain -a|U_i. View the family t_i as a
-Cech zero cochain (the onefold intersection is canonically U_i), and
-use the product projections to express the two equations as identities
-in Cech cochain modules. These are precisely the displayed identities.
-This also covers empty index types and empty opens:
-products and sectionwise kernel identifications remain valid. -/
+/-- A Cech zero cochain with prescribed resolution and Cech differentials
+(Stacks, Tags 01EQ, 0B8S). -/
 theorem cech_horseshoe_correction_cochain (X : Scheme.{u})
     (S : ShortComplex X.Modules)
     (IA : InjectiveResolution S.X₁) (IB : InjectiveResolution S.X₂)

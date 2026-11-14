@@ -12,8 +12,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Descent of finite affine étale factorization data
 
-Source: Stacks Project, Étale Cohomology Tag 0EYL (lemma-colimit-affine-sites), and
-Limits Tags 01ZM and 01ZC, finite-presentation descent of objects and morphisms.
+## References
+
+* Stacks Project, Tags 0EYL, 01ZM and 01ZC
 -/
 
 @[expose] public section
@@ -80,23 +81,7 @@ private theorem finite_maps_from_models
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Descend finitely many affine étale sources and their two families of arrows.
-No covering assumption or conclusion is involved.
-
-Source: Stacks, Étale Cohomology 0EYL, qcqs proof; Limits 01ZM and 01ZC.
-(blueprint: lem-weil-pbc-etale-finite-factorization-data-descent).
-
-Proof: Restrict to the cofinal tail above i₀. By affine étale object and arrow
- descent, descend each affine V_q and its map to W. Choose a common stage for
- these finitely many models. For each model, its base-change diagram on the tail
- has affine transitions and affine terms, and limit V_q. Compose b_q with the
- projection to U_q. Since U_q is étale over D(i₀), its structure map is locally
- finitely presented. Limits 01ZC(3) descends this morphism from the qcqs source
- diagram without imposing quasi-compactness on U_q. Its structure equation and
- the pullback universal property give the required stage arrow into the pullback
- of U_q. Choose a common stage for the finitely many arrows and equations.
- Pullback pasting identifies the same source model with V_q for both arrows,
- giving both displayed equations. Affineness survives further base change.
- When n=0 take the identity stage and the empty families. -/
+No covering assumption or conclusion is involved (Stacks, Tags 0EYL, 01ZM and 01ZC). -/
 theorem etale_finiteFactorizationDataDescent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

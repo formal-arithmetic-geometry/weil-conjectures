@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.PrincipalCechResolutionQuasiIso
 
 /-! # Koszul Hom colimits compute derived sections on a principal-open union
 
-Source: Stacks Project, Tags 08D1 and 08D2
-(blueprint: lem-sc-affine-koszul-cech-derived-comparison).
+## References
+
+* Stacks Project, Tags 08D1 and 08D2
 -/
 
 @[expose] public section
@@ -27,25 +28,8 @@ namespace AlgebraicGeometry
 /-- For an unbounded complex of quasi-coherent modules on Spec(A), the canonical
 Koszul-to-alternating-Čech map followed by the Čech-to-derived-sections map is an
 isomorphism in D(A), equivalently a quasi-isomorphism of its complex representatives.
-The positive exponent e is indexed by e-1 in the natural-number diagram.
-
-Source: Stacks, Tags 08D1 and 08D2
-(blueprint: lem-sc-affine-koszul-cech-derived-comparison).
-
-Proof:
-1. Identify F with the termwise associated sheaf of its global-section complex M
-by affine quasi-coherence (Tags 01IA and 01HV). The tails I_e are bounded finite free,
-and precomposition with their power-transition maps gives koszulCechHomDiagram.
-The localization formula, including the sign (-1)^(pq+p(p-1)/2), identifies its
-colimit with the alternating Čech total complex (lem-sc-affine-koszul-hom-alternating-cech,
-Tag 08D1). The identification respects every face map and the vertical differential.
-2. Each intersection of the finite principal-open cover is affine (Tag 01HS).
-The unbounded alternating Čech derived-section comparison applies by affine vanishing
-(Tag 01XB): lem-sc-qcoh-complex-alternating-cech-derived-sections, Tag 08D2/08C2.
-It identifies the same total complex with RΓ(U,F), in D(A) by restriction of scalars.
-3. Compose these canonical comparisons and transport along the chosen representation
-of E by F. This is the map in the statement. For r=0 all alternating rows and the
-Koszul Hom colimit vanish and U is empty; for F=0 both sides are zero. -/
+The positive exponent e is indexed by e-1 in the natural-number diagram
+(Stacks, Tags 08D1 and 08D2). -/
 theorem affine_koszul_cech_derived_comparison
     (A : Type uT) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{wT}

@@ -35,9 +35,7 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Evaluation of a finite-extension-valued continuous function at a point.
-Source: RefactorInstruction.tex, Section 4, evaluation of coefficient functions
-(auxiliary; not a blueprint node). -/
+/-- Evaluation of a finite-extension-valued continuous function at a point. -/
 noncomputable def condensedQbarFunctionEval
     {ℓ : ℕ} [Fact ℓ.Prime] {T : Type u} [TopologicalSpace T] (t : T) :
     PadicAlgCl.finiteIntermediateFieldValued ℓ T →+* PadicAlgCl ℓ where
@@ -48,9 +46,7 @@ noncomputable def condensedQbarFunctionEval
   map_add' _ _ := rfl
 
 /-- Restriction of bounded continuous functions along a continuous map.
-The same finite extension contains all values after restriction.
-Source: RefactorInstruction.tex, Section 4, restriction of coefficient functions
-(auxiliary; not a blueprint node). -/
+The same finite extension contains all values after restriction. -/
 noncomputable def condensedQbarFunctionComp
     {ℓ : ℕ} [Fact ℓ.Prime] {T : Type u} [TopologicalSpace T]
     {T' : Type v} [TopologicalSpace T'] (g : C(T', T)) :
@@ -238,37 +234,7 @@ private theorem matrix_quotient_equiv_of_finrank_eq
 
 /-- A fixed presentation has matrices of bounded continuous functions on a refinement,
 whose evaluated linear cokernels agree on fibres of the original base, and whose
-open restrictions present the module.
-
-Source: RefactorInstruction.tex, Section 4, coefficient realization and geometric-fibre
-comparison, steps 1--3 of the finite-matrix refinement argument
-(auxiliary; not a blueprint node).
-Proof:
-1. Unpack the given finite presentation over the coefficient object on Y as the
-   cokernel of a map between free modules of fixed ranks m and n. Cover Y by affine
-   objects weakly contractible over X.
-   Pullback preserves the cokernel and identifies both free modules with their bases.
-2. Transport coefficients through the supplied ring-object isomorphism on the original
-   noetherian base X. The resulting coefficient sheaf is the sheafification of bounded
-   continuous functions. On each weakly contractible affine object, basis evaluation
-   identifies sections with bounded continuous functions on its profinite components,
-   hence on the scheme. A finite compositum contains all matrix entries. For an empty
-   matrix choose the ground field. This realizes B. On every open V the presheaf unit
-   gives a ring map from bounded functions to coefficient sections. Localization along
-   the weakly etale map V to X, followed by multiplication on the regular module, gives
-   the displayed ring homomorphism. The basis calculation and exactness give the
-   displayed cokernel isomorphism on V. No noetherianity of a covering object or open
-   is used; the global coefficient comparison is applied only on X.
-3. At a geometric representative above x in X, evaluate P. Geometric evaluation
-   preserves cokernels and finite free modules, so the evaluated presentation is the
-   ordinary linear cokernel of the value matrix. This cokernel depends only on x:
-   choose an algebraic closure of its residue field and embed it into each algebraically
-   closed geometric representative. The extension comparison identifies the evaluated
-   modules. Coefficient realization is natural and takes each function to its value
-   at the chosen point. Identify a linear cokernel with the quotient by the range to
-   obtain the asserted linear equivalence for any two points above x. No dimension or
-   rank calculation, local constancy, or local freeness is part of this assertion.
--/
+open restrictions present the module. -/
 theorem exists_condensedQbar_compatible_function_presentations
     (ℓ : ℕ) [Fact ℓ.Prime]
     (X Y : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]

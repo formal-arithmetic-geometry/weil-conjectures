@@ -15,19 +15,8 @@ universe u wC wD
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
-/-- The degree-zero lift and degree-one cycle in a global horseshoe resolution.
-Source: Stacks Project, Tags 0117, 013T and 015B.
-(blueprint: stage3-boundary-global-lift).
-
-Proof: Each row splits because IA in that degree is injective. Global sections,
-being additive, preserves the splitting, so the global rows are short exact.
-Lift the augmentation of q through the surjection in degree zero to b. Since beta
-is a chain map and the augmentation is a chain map from a complex concentrated
-in degree zero, beta(d b) = d(aug q) = 0. Exactness in degree one gives x with
-alpha(x) = d b. Apply alpha in degree two to d x; the chain map identity and
-square-zero differential give alpha(d x) = d(d b) = 0. Monicity of the degree-two
-row therefore gives d x = 0. Regard x as the cycle a. These arguments also apply
-to q = 0 and zero objects; choose b = 0 and a = 0 in those cases. -/
+/-- The degree-zero lift and degree-one cycle in a global horseshoe resolution
+(Stacks, Tags 0117, 013T and 015B). -/
 theorem boundary_horseshoe_global_lift (X : Scheme.{u})
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wD} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))]

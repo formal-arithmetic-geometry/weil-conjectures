@@ -23,7 +23,12 @@ import Mathlib.CategoryTheory.Preadditive.Biproducts
 import Mathlib.CategoryTheory.Monoidal.CoherenceLemmas
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 
-/-! Generic coherent ideal lattices. Source: Stacks Project, Tag 01YE. -/
+/-! Generic coherent ideal lattices.
+
+## References
+
+* Stacks Project, Tag 01YE
+-/
 
 @[expose] public section
 universe w
@@ -160,19 +165,8 @@ private theorem product_free_iso (Z : Scheme.{w}) {K : Z.Modules}
     infer_instance
   exact ⟨c ≪≫ (imageMonoIsoSource μ).symm⟩
 
-/-- An ideal power times a finite free module is a sum of copies of the power ideal.
-
-Source: Stacks Project, Tag 01YE, integral-case paragraph (the map from a sum of
-copies of a power ideal), the coordinate identity in its final paragraph.
-Proof: Construct the power ideal as the actual ideal-sheaf product `J ^ n`, whose
-sections on every affine W are `J(W) ^ n`. For n = 0 this is the unit ideal. The
-recursive module power has these same affine section ranges by the affine product
-formula, and hence is isomorphic, compatibly with its inclusion, to `(J ^ n).toModules`.
-Multiplication into the free module acts separately on each standard coordinate.
-Its image is therefore the direct sum of r copies of that power ideal on every affine
-open. These coordinate identifications commute with restriction and localization;
-sheaf gluing gives the displayed isomorphism. When r = 0 both modules
-are zero and the same coordinate construction is the unique isomorphism. -/
+/-- An ideal power times a finite free module is a sum of copies of the power ideal
+(Stacks, Tag 01YE). -/
 private theorem ideal_power_finite_free_lattice (Z : Scheme.{w})
     (J : Z.IdealSheafData) (n r : ℕ) :
     Nonempty ((∐ fun _ : Fin r ↦ (J ^ n).toModules) ≅
@@ -253,31 +247,8 @@ private theorem ideal_coherent (Z : Scheme.{w}) [IsLocallyNoetherian Z]
   exact ((isCoherent_kernel_cokernel_biprod_and_submodule Z).2 _ _
     I.toModulesι hu inferInstance hqc).1
 
-/-- A finite free map defined near the generic point extends from an ideal-sum lattice.
-
-Source: Stacks Project, Tag 01YE, extension over a power of the complement ideal.
-Proof: let J be the vanishing ideal of the closed subset Z ∖ U, with its
-reduced induced closed subscheme structure. Its affine radical-ideal description
-and the affine ideal-zero-set criterion show that J_x → O_{Z,x} is surjective
-exactly for x ∈ U. Thus the open supplied by coherent_homs_over_open for J is U.
-Let E be the finite free source. It is coherent by the locally Noetherian criterion;
-G is quasi-coherent by that criterion and hG. Identify restriction to the open scheme
-with restriction to the slice site, and apply the final surjectivity clause of
-coherent_homs_over_open to the given φ. Obtain n and a map J^n E → G whose restriction
-agrees with φ after the canonical inclusion J^n E → E.
-Construct I as the ideal sheaf with affine sections J(W)^n (the unit ideal if n = 0).
-The affine-sections formula for ideal products identifies J^n E with the finite sum
-of copies of I: in each coordinate multiplication has image J(W)^n, and these
-identifications commute with localization and glue on overlaps. Use this isomorphism
-to turn the extension into χ. The power ideal is quasi-coherent by the ideal-products
-lemma, and its inclusion into the coherent structure module is a monomorphism, so
-the quasi-coherent-submodule clause gives its coherence. On U its inclusion is an
-isomorphism, as is the inclusion J^n E → E. Take the stalk of the extension identity
-at ξ ∈ U and conjugate by the restriction-stalk isomorphisms. It expresses χ_ξ as
-φ_ξ composed with isomorphisms, so χ_ξ is invertible. For n = 0 this is the unit
-ideal and for r = 0 all coordinate statements are empty; the argument still applies.
-(blueprint: lem-weil-pbc-coherent-integral-generic-lattice-extension)
--/
+/-- A finite free map defined near the generic point extends from an ideal-sum lattice
+(Stacks, Tag 01YE). -/
 theorem exists_generic_ideal_extension (Z : Scheme.{w}) [IsNoetherian Z]
     [IsIntegral Z] (G : Z.Modules)
     (hG : RingedSpace.IsCoherent Z.toRingedSpace G)

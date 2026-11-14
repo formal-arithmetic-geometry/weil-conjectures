@@ -13,8 +13,9 @@ import WeilConjectures.Topology.ConstructibleInConstructible
 /-!
 # Assembling stratifications of the pieces of a partition
 
-Source: Stacks Project, Tag 03S0, final refinement in the proof, and Tag 09YJ
-(blueprint: lem-weil-pbc-constructible-stratification-assembly).
+## References
+
+* Stacks Project, Tags 03S0 and 09YJ
 -/
 
 @[expose] public section
@@ -27,27 +28,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Stratify every member of a finite constructible immersed partition, then compose its
 stratum immersions with the original immersion. Any predicate true of these composite
-maps holds on the assembled stratification.
-
-Source: Stacks Project, Tag 03S0, final refinement in the proof; constructibility is
-Stacks Tag 09YJ (blueprint: lem-weil-pbc-constructible-stratification-assembly).
-
-Proof:
-1. Index the new pieces by the finite dependent sum of the indices of the local
-   stratifications, and reindex this sum by `Fin` of its cardinality. Use exactly their
-   domain schemes, with immersion the composite of the two given immersions.
-2. Composition of immersions is an immersion. Its image is the image of the local
-   stratum under the outer immersion and is locally closed. An immersion identifies
-   its source homeomorphically with its image. Each local stratum is constructible in
-   that image, and the image is constructible in X; Tag 09YJ makes the composite image
-   constructible in X, whose affine opens form a basis of quasi-compact opens.
-3. These images cover X because the outer pieces cover X and each local stratification
-   covers its source. Two images in different outer pieces are disjoint by the outer
-   partition; in the same piece they are disjoint by injectivity of its immersion and
-   the local partition. These data define a Stratification of X.
-4. The predicate on every new immersion is precisely the corresponding given proof,
-   since we used the local domain and the composite immersion without replacement.
-   Empty outer partitions and empty local partitions use the empty dependent sum. -/
+maps holds on the assembled stratification (Stacks, Tags 03S0 and 09YJ). -/
 theorem exists_stratification_of_stratified_partition
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (n : ℕ) (Y : Fin n → Scheme.{u}) (ι : ∀ i, Y i ⟶ X)

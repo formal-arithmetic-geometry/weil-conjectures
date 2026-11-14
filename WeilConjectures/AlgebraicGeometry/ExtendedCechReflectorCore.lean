@@ -16,10 +16,11 @@ import WeilConjectures.CategoryTheory.RingedCechCompletionUnitIdempotence
 /-!
 # Core reflector properties for the extended Cech completion
 
-Source: Stacks Project, algebraization.tex, Tags 099B and 099F
-(auxiliary; not a blueprint node).
-
 The remaining finite localization-filtration and orthogonality argument is isolated here.
+
+## References
+
+* Stacks Project, Tags 099B and 099F
 -/
 
 @[expose] public noncomputable section
@@ -427,15 +428,8 @@ private theorem universal_of_idempotence
     change eta E ≫ (F.map f ≫ inv (eta L)) = f
     rw [← Category.assoc, hn, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
 
-/-- The completeness and universal mapping clauses of the extended Cech reflector.
-Source: Stacks Project, algebraization.tex, Tags 099B and 099F.
-(auxiliary; not a blueprint node).
-
-The proof contracts the localized extended Cech complex on each finite-generator slice,
-filters the augmentation cone by its positive localization terms, and globalizes the
-resulting orthogonality through restriction. The sequential-localization comparison
-needed by this finite filtration is the remaining admitted argument.
--/
+/-- The completeness and universal mapping clauses of the extended Cech reflector
+(Stacks, Tags 099B, 099F). -/
 theorem ringedExtendedCech_reflector_core
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (O : Sheaf J CommRingCat.{u})

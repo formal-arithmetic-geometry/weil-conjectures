@@ -7,7 +7,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.ConstantKoszulTensorIdentifications
 
 /-! # The normalized Koszul augmentation at one finite level
-Source: Stacks 099M and 06YN (auxiliary; not a blueprint node).
+
+## References
+
+* Stacks Project, Tags 099M and 06YN
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -63,13 +66,8 @@ private theorem augmentationModelUnitAt
   erw [Category.id_comp]
   exact h
 
-/-- The two normalized augmentation maps satisfy the native tensor square at a finite level.
-Source: Stacks 099M and 06YN (auxiliary; not a blueprint node).
-Proof: project the ordinary-limit normalization to this level and transport it through
-its ordinary tensor model. The negative Koszul degree-zero basis makes its unit
-invertible. On every nonzero Koszul summand the transported map vanishes by the
-augmentation law. Apply the proved normalization theorem to these three equations.
-This is an equality of chain maps at one level, before tower assembly or mapping cones. -/
+/-- The two normalized augmentation maps satisfy the native tensor square at a finite level
+(Stacks, Tags 099M and 06YN). -/
 theorem normalizedAugmentationTensorLevel
     (b : Bool) (r : ℕ) (a : Fin r → A)
     (α : ringedKoszulTensorTowerFunctor (coefficients J A I b) r

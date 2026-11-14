@@ -14,8 +14,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 
 /-! # Naturality of a finite-stage raw cartesian chart representative
 
-Source: Stacks Project, Tag 0EYM and the exchange comparison of Tags 03CB and 0GIT.
-(blueprint: lem-sc-cartesian-raw-class-chart-naturality).
+## References
+
+* Stacks Project, Tags 0EYM, 03CB and 0GIT
 -/
 
 @[expose] public section
@@ -179,14 +180,7 @@ attribute [local irreducible] restrictedOverCohomologyMap
 set_option backward.isDefEq.respectTransparency true
 
 /-- The finite-stage chart identity propagates to every arrow above the chosen stage.
-
-Source: Stacks Project, Tag 0EYM, with inverse-image composition and raw evaluation
-naturality from Tags 03CB and 03Q8. Factor the transition along a.left followed by b
-using exchange composition and functoriality of shift. Substitute the base-stage
-identity. Chart-lift naturality then identifies the resulting composite with the
-restricted-cohomology image of x. This is the transition part only.
-(blueprint: lem-sc-cartesian-raw-class-chart-naturality).
--/
+(Stacks, Tags 0EYM, 03CB, 03Q8). -/
 theorem cartesianRawClass_chart_naturality
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

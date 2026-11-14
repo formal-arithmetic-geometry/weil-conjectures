@@ -16,8 +16,10 @@ import Mathlib.CategoryTheory.Filtered.Connected
 
 /-! # Scheme identifications for the affine base-change diagram
 
-Source: Stacks Project, Tags 01JO and 09RE.
-(blueprint: lem-pc-affine-base-change-scheme-comparisons). -/
+## References
+
+* Stacks Project, Tags 01JO and 09RE
+-/
 
 @[expose] public section
 universe u
@@ -29,26 +31,8 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Identify the explicitly constructed pushout diagram with geometric base change,
 including its colimit and its transition arrows. This is entirely a statement
-about rings and schemes; it contains no complexes or derived categories.
-
-Source: Stacks Project, Tag 01JO (affine fibre products), and Tag 09RE,
-affine calculation (blueprint: lem-pc-affine-base-change-scheme-comparisons).
-
-Proof: Put B = Gamma(Y) and a = Spec.preimage(t.hom followed by s).
-At j the definition of F is the pushout of R(i) to R(j) and a. Apply
-isPullback_SpecMap_pushout, then transport its B vertex along t. The
-universal-property isomorphism gives σ(j); its first projection is the
-map from B obtained by composing r with the initial-to-j arrow of F.
-The upper tail is nonempty and final in the directed preorder. Restrict
-hc to that tail. Pushing out in the under category preserves the colimit,
-since Under.pushout is left adjoint, and Under.forget creates connected
-nonempty colimits. Hence C.pt is the pushout of a along c.ι(i). Applying
-Spec and transporting along t gives τ with the displayed first projection.
-For each transition, both sides of the claimed equality have the same
-first and second pullback projections: these are the naturality equations
-of the pushout system, and at the limit the cocone equations. Pullback
-hom-ext proves both arrow compatibilities. All arguments are universal
-properties, so zero rings and empty spectra require no exception. -/
+about rings and schemes; it contains no complexes or derived categories
+(Stacks, Tags 01JO and 09RE). -/
 theorem exists_affineBaseChangeSchemeComparisons
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

@@ -13,7 +13,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Algebra-module quasi-coherence from exact scalar restriction
 
-Source: Stacks Project, Tags 0BV0, 0BV1 and 0AX2.
+## References
+
+* Stacks Project, Tags 0BV0, 0BV1 and 0AX2
 -/
 
 @[expose] public section
@@ -25,17 +27,8 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- A bounded-below algebra-derived object whose underlying object has quasi-coherent
-cohomology belongs to the bounded-below quasi-coherent algebra-derived category.
-Source: Stacks Project, Tags 0BV0, 0BV1 and 0AX2.
-(blueprint: lem-sc-derived-algebra-qcoh-of-underlying).
-
-Proof: Restriction of scalars is exact and does not change underlying abelian sheaves,
-so it commutes with cohomology and reflects zero objects. Thus vanishing of the
-underlying cohomology below a bound implies vanishing of algebra cohomology below
-the same bound. The isomorphism between restricted algebra cohomology and underlying
-cohomology transports quasi-coherence in each degree. These are exactly the two
-clauses of sheafAlgebraDerivedQCohProperty. This works for zero algebras and empty
-schemes and does not use any pseudo-coherence assumption. -/
+cohomology belongs to the bounded-below quasi-coherent algebra-derived category
+(Stacks, Tags 0BV0, 0BV1 and 0AX2). -/
 theorem derivedAlgebraQCohOfUnderlying (Y : Scheme.{u})
     (A : Y.CommAlgebraSheaf) (hA : A.toModule.IsQuasicoherent)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

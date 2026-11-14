@@ -63,18 +63,7 @@ private theorem stratified_local {X : Scheme.{u}}
   simpa only [← Category.assoc, hq] using hp
 
 /-- Pointwise stratifications and the affine-local finite-presentation condition agree.
-Source: blueprint constructible-comparison-local, Stacks Tags 09AJ and 09AK
-(auxiliary; not a blueprint node).
-
-Proof: in the forward direction choose an affine open neighborhood of the point
-and forget finite presentation to finite generation. In the converse fix an affine
-open U. Intersect each supplied point neighborhood with U, refine to an affine
-open W, and pull back its stratification. Finite local models survive further
-inverse image and its composition isomorphism. Quasi-compactness of U gives a
-finite affine subcover. The global-stratification gluing lemma gives strata each
-factoring through one of these local strata. Pull back the local models along
-these factorizations. Finally Noetherianity upgrades their finite generation to
-finite presentation. The empty cover and empty partition are included. -/
+(Stacks, Tags 09AJ and 09AK) -/
 theorem constructibleComparison_local (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] :
     ∀ F : ConstantCompletion.Mod (ConstantCompletion.constant

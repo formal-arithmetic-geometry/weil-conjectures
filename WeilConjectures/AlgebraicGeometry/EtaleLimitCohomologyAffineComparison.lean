@@ -14,8 +14,9 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Affine-stage cohomology continuity
 
-Source: Stacks Project, Tags 09YQ, 0EYL, 09YP and 04HR.
-(blueprint: lem-weil-pbc-etale-limit-cohomology-affine-comparison).
+## References
+
+* Stacks Project, Tags 09YQ, 0EYL, 09YP and 04HR
 -/
 
 @[expose] public section
@@ -26,40 +27,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Affine-stage continuity for the specified cohomology comparison.
-
-Source: Stacks Project, Tags 09YQ (theorem-colimit), 0EYL
-(lemma-colimit-affine-sites), 09YP (lemma-colimit), and 04HR.
-(blueprint: lem-weil-pbc-etale-limit-cohomology-affine-comparison).
-
-Proof:
-1. Affine transition limits are affine. Present their affine etale sites as a
-   filtered colimit using exists_affineEtaleSite_colimit, including its strictification.
-2. Restriction along fullAffineEtaleInclusion is a sheaf equivalence. On an affine
-   etale object A, both direct images evaluate a sheaf at the base change of A.
-   This identifies the right adjoints under restriction. The induced isomorphism of
-   left adjoints is the unique one compatible with the adjunction units. The two
-   isomorphisms for a composite have the same unit, so uniqueness gives the
-   composition compatibility. Transport phi by these isomorphisms; its two coherence
-   equations therefore remain valid. Transport G and L using the same equivalences;
-   an equivalence preserves the colimit and its legs.
-3. Fix any index i and pass to the cofinal tail above i. The affine scheme D_i,
-   with its identity map, is a final object of its affine etale site. Its base changes
-   are the final objects D_j and X. Apply cohomology_colimit_of_sites to this object
-   of the strictified site. Object cohomology at the final object is global
-   cohomology. The sheaf equivalences identify these cohomology groups with the
-   original groups, naturally in the coefficients.
-4. The pullback comparisons agree: each is induced by the adjunction unit on
-   injective resolutions, and step 2 identifies the units. Naturality in the
-   coefficient sheaf identifies the transition maps with hH and the legs with hB.
-   Thus the transported colimit cocone is exactly B, including eH and eB.
-5. The tail inclusion is final, so its colimit is the colimit on I. Transport the
-   colimit structure back to B. This yields Nonempty (IsColimit B).
-
-Edge cases: nonemptiness gives the index chosen in the proof. Empty affine schemes
-have zero cohomology. Degree zero uses sections. A one-object system identifies its
-scheme limit and sheaf colimit with the single stage and its sheaf.
--/
+/-- Affine-stage continuity for the specified cohomology comparison
+(Stacks, Tags 09YQ, 0EYL, 09YP and 04HR). -/
 theorem etale_limit_cohomology_affine_comparison
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

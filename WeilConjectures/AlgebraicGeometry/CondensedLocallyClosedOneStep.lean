@@ -28,26 +28,8 @@ namespace AlgebraicGeometry.ProEtale
 set_option backward.isDefEq.respectTransparency true in
 -- Recollement carries several nested exact-functor instance witnesses.
 /-- A constructible sheaf is a single locally closed piece, or an extension by a
-constructible sheaf supported on a proper closed subscheme.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), open/closed induction step.
-(auxiliary; not a blueprint node)
-
-Proof: if T is nonempty, choose the finite stratification in constructibility.
-The union of the interiors of its locally closed strata is dense: each stratum
-minus its interior is nowhere dense, and a finite union of those is nowhere dense.
-Thus some stratum has nonempty interior U. Restrict that stratum's presentations
-to U, with the canonical coefficient comparisons, to obtain a locally finitely
-presented module there. More precisely, the base change of the stratum to U is
-a surjective closed immersion; empty-complement recollement gives a coefficient-
-compatible equivalence reflecting the presentations. This handles differing
-nilpotent structures without identifying schemes. The complementary closed
-immersion i : Z → T is proper because U is nonempty. The proved constructible
-pullback theorem makes i^*M constructible. Open/closed recollement supplies exact
-closed pushforward and the triangle j_!j^*M[0] → M[0] → i_*i^*M[0]. Its first
-term is a piece (use the identity closed immersion); the exact functor and single
-comparisons identify the third term with D(i_*) applied to MZ[0] in the ordinary
-derived category. If T is empty all its module sheaves are zero, so the identity
-immersions and rank-zero presentations give the first alternative. -/
+constructible sheaf supported on a proper closed subscheme (Hemo–Richarz–Scholbach, Lemma
+5.3(2)). -/
 theorem condensed_locallyClosed_one_step
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

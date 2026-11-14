@@ -7,10 +7,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.ConstantCompletionFiniteSystemModules
 import WeilConjectures.AlgebraicGeometry.ConstantCompletionFiniteSystemFlatAndReduction
 /-! Flatness and reduction data for the finite constant completion tower.
-Source: Stacks Project, Tags 093M and 0912
-(auxiliary; not a blueprint node).
 The module structures in this statement are the canonical quotient-section module
-structures induced by sheafification of the constant quotient presheaves. -/
+structures induced by sheafification of the constant quotient presheaves.
+
+## References
+
+* Stacks Project, Tags 093M and 0912
+-/
 @[expose] public noncomputable section
 set_option linter.style.haveILetI false
 set_option linter.style.longLine false
@@ -21,24 +24,15 @@ variable {C : Type u} [SmallCategory C]
 
 /-- The canonical `A ⧸ I^(n+1)`-module structure on the sections of the finite
 constant quotient sheaf, induced by the sheafification unit of the constant quotient
-presheaf (auxiliary; not a blueprint node). -/
+presheaf. -/
 @[instance_reducible] def finiteSystemModule (J : GrothendieckTopology C) (A : Type u)
     [CommRing A] (I : Ideal A) (n : ℕ) (U : Cᵒᵖ) :
     Module (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U) :=
   (((toSheafify J
     ((Functor.const Cᵒᵖ).obj (CommRingCat.of (A ⧸ I ^ (n + 1))))).app U).hom).toModule
 
-/--
-Source: Stacks Project, Tags 093M and 0912
-(auxiliary; not a blueprint node).
-Proof: with the canonical module structures `finiteSystemModule`, the scalar tower
-is the naturality of the sheafification unit for the quotient map `A → A ⧸ I^(n+1)`.
-Flatness and tensor reduction are
-`finiteSystem_flat_and_reduction`. The transition `n + 1 → n` is the constant sheaf
-of the surjective quotient ring map; on underlying sheaves of types it is the constant
-sheaf of a surjection of sets, which has a set-theoretic section, so the transition
-has a section on every object and is surjective.
--/
+/-- The finite system of constant quotient sections has compatible scalar towers, flat terms,
+surjective transitions and the tensor reduction identification (Stacks, Tags 093M and 0912). -/
 theorem finiteSystem_properties (J : GrothendieckTopology C) (A : Type u)
     [CommRing A] [IsNoetherianRing A] (I : Ideal A) :
     letI : ∀ (n : ℕ) (U : Cᵒᵖ), Module (A ⧸ I ^ (n + 1))

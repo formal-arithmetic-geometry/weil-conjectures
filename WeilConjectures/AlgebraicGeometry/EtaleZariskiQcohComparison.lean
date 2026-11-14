@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ZariskiModuleAbelianCohomologyAgree
 
 /-! # Étale and Zariski cohomology of quasi-coherent modules
 
-Source: Stacks Project, Descent, Proposition 03DW (2), and Étale Cohomology,
-Theorem 03P2 (blueprint: lem-sc-etale-zariski-qcoh-comparison).
+## References
+
+* Stacks Project, Tags 03DW and 03P2
 -/
 
 @[expose] public section
@@ -167,28 +168,7 @@ The morphisms `m` have exactly the prescribed components `Γ(U, u^*φ)`. The fam
 is chosen simultaneously for all quasi-coherent modules and all nonnegative degrees.
 In degree zero, its value on the canonical image of a global section is that section
 pulled back to the terminal étale object, i.e. the identity under `id_X^*F ≅ F`.
-We use the standard large Ext model of étale cohomology `Sheaf.H`; it computes the
-right-derived global sections of `def-weil-pbc-etale-cohomology`. This changes no sheaf
-or section group and places no smallness hypothesis on `X` or `F`.
-
-Source: Stacks Project, Descent, Proposition 03DW (2), and Étale Cohomology, Theorem 03P2
-(blueprint: lem-sc-etale-zariski-qcoh-comparison).
-
-Proof:
-1. Construct the sheaf map with components `Γ(U,u^*φ)`. The naturality of the
-   adjunction unit on sections, of the tensor composition isomorphism, and of
-   equality transport proves compatibility with all restrictions.
-2. In degree `n+1`, compose `zariskiModuleAbelianCohomologyAgree` with
-   `etaleZariskiAbelianPositiveComparison`. Evaluate the former natural
-   isomorphism's naturality equation and then use the latter's naturality equation.
-3. In degree zero, the left-exact global-sections functor identifies its zeroth
-   derived functor with sections. The chosen terminal étale object's structure
-   morphism is an isomorphism, by uniqueness of terminal objects. Pushforward along
-   it is an equivalence, so the tensor-pullback adjunction unit is an isomorphism.
-   Compose these two section equivalences with the inverse of `Sheaf.H.equiv₀`.
-   Their naturality proves the degree-zero square. Cancellation of the canonical
-   derived-zero map and of `Sheaf.H.equiv₀` gives precisely `tensorSectionsUnit`
-   on every section. Assemble degree zero and all positive degrees by `Nat.casesOn`. -/
+Étale cohomology is the large Ext model `Sheaf.H` (Stacks, Tags 03DW, 03P2). -/
 theorem etale_zariski_qcoh_comparison (X : Scheme.{u}) :
     ∃ m : ∀ (F G : X.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent],
         (F ⟶ G) → (etaleTensorSectionsSheaf F ⟶ etaleTensorSectionsSheaf G),

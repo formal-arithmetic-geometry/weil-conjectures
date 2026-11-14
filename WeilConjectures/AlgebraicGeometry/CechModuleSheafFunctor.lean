@@ -9,11 +9,7 @@ module
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
-/-! # The module sheaf of sections on intersections
-
-Source: blueprint `lemma-coherent-base-change-invertible-sheaves`, proof paragraph 1.
-(blueprint: def-pc-cech-module-sheaf-functor).
--/
+/-! # The module sheaf of sections on intersections -/
 
 @[expose] public section
 
@@ -24,8 +20,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Sections on intersections, constructed by restriction to the over site and its
-right adjoint. Its sections on V are F(W × V), with scalars restricted along prod.snd.
-(blueprint: def-pc-cech-module-sheaf-functor) -/
+right adjoint. Its sections on V are F(W × V), with scalars restricted along prod.snd. -/
 noncomputable def cechIntersectionSheaf {X : Scheme.{u}} (F : X.Modules)
     (W : X.Opens) : X.Modules :=
   (SheafOfModules.pushforward (SheafOfModules.pushforwardOver W)).obj (F.over W)
@@ -60,9 +55,7 @@ noncomputable def cechIntersectionSheafMap {X : Scheme.{u}} (F : X.Modules)
     simp only [← F.val.map_comp_apply, ← op_comp]
     congr 2
 
-/-- The genuine opposite-opens functor used to form the module-sheaf Čech complex.
-Identity and composition are the identities for restriction maps of F.
-(blueprint: def-pc-cech-module-sheaf-functor) -/
+/-- The genuine opposite-opens functor used to form the module-sheaf Čech complex. -/
 noncomputable def cechModuleSheafFunctor {X : Scheme.{u}} (F : X.Modules) :
     X.Opensᵒᵖ ⥤ X.Modules where
   obj W := cechIntersectionSheaf F W.unop

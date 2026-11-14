@@ -45,10 +45,7 @@ private noncomputable def final_quotient_iso {X : Scheme.{u}} {F G : X.Modules}
     (asIso (⊤ : Subobject G).arrow) (by simp)
 
 /-- A coherent filtration extends across a coherent split biproduct, with the
-new summand supplying the final integral-ideal quotient witness.
-Source: Stacks Project, Tag 01YF, final paragraph of `lemma-coherent-filter`.
-(blueprint: new-coherent-integral-filtration-biproduct-succ)
--/
+new summand supplying the final integral-ideal quotient witness (Stacks, Tag 01YF). -/
 theorem hasCoherentIntegralFiltration_of_biproduct
     {X : Scheme.{u}} (F A G : X.Modules)
     (hF : HasCoherentIntegralFiltration F)

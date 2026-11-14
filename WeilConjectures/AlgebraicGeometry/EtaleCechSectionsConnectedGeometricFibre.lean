@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleGeometricSectionTwoPullbacks
 
 /-! # Cech compatibility over one connected geometric fibre
 
-Source: Stacks Project, Tag 0A3H, final paragraph.
-(blueprint: lem-weil-pbc-etale-cech-sections-connected-geometric-fibre).
+## References
+
+* Stacks Project, Tag 0A3H
 -/
 
 @[expose] public section
@@ -44,25 +45,7 @@ local notation "R[" X "," Y "," e "," G "]" =>
 set_option backward.isDefEq.respectTransparency false in
 /-- The two Cech pullbacks agree after restriction to one connected geometric fibre.
 Only that fibre is assumed connected; no assertion of equality on the whole Cech
-scheme is made.
-
-Source: Stacks Project, Tag 0A3H, final paragraph.
-(blueprint: lem-weil-pbc-etale-cech-sections-connected-geometric-fibre).
-
-Proof:
-1. Put U = T ×_S Spec Ω, with projections p and h. Define the two maps
-   v_i : E → U as the pullback lifts of (d ≫ pr_i, w), where w : E → Spec Ω
-   is the second projection. The pullback equations give v_i ≫ p = d ≫ pr_i
-   and v_i ≫ h = w.
-2. Apply etaleSet_globalSection_square to each of these commutative squares.
-   It identifies each restricted Cech section, after applying the composition
-   isomorphism for g and d, with the pullback along v_i of the common section
-   obtained by restricting a along p and comparing p ≫ f with h ≫ q.
-3. Apply etaleSet_geometricSection_two_pullbacks on connected U to identify
-   these two pullbacks. It uses etaleGeometricFibreConstantSections and its
-   naturality, without any connectedness or nonemptiness assumption on E.
-4. The composition comparison for g and d is an isomorphism, so its component
-   on global sections is injective. Cancel it to obtain the displayed equality. -/
+scheme is made (Stacks, Tag 0A3H). -/
 theorem etaleSet_cech_sections_agree_on_connected_geometric_fibre
     {S T : Scheme.{u}} (f : T ⟶ S)
     (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (q : Spec (.of Ω) ⟶ S)

@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.AffineSectionsSquareComparisonCoherence
 
 /-! # Affine sections of the base-change unit square
 
-Source: Stacks Project, cohomology.tex, Tags 0D5T and 08HY;
-perfect.tex, Tag 0AA7. (blueprint: lem-pc-affine-sections-base-change-unit-square).
+## References
+
+* Stacks Project, Tags 0D5T, 08HY and 0AA7
 -/
 
 @[expose] public section
@@ -50,26 +51,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The right-adjoint base-change unit square after taking affine sections.
 This is an identity of maps over R, for arbitrary E. It constructs no extension
 isomorphism and requires no quasi-coherence. Only the canonical pullback unit
-is used: the passage to all L and m is a separate naturality argument.
-Source: Stacks, cohomology.tex, Tag 08HY (remark-base-change) and
-Tag 0D5T (lemma-derived-pushforward-composition); perfect.tex, Tag 0AA7.
-(blueprint: lem-pc-affine-sections-base-change-unit-square).
-Proof:
-1. Expand schemeDerivedBaseChangeMap as the adjunct of the canonical
-pullback-composition comparison followed by the pullback of the counit of f.
-Transpose through Lg* and through Lg_X*. Naturality of their units and the
-triangle identities cancel the units and counits of f and f'. The remaining
-identity is the unit description of base change in the commuting square.
-2. Apply sections. The normalized comparisons b, d, and r identify the
-composed direct images with their sections, without changing the underlying
-sections on sheaves. Their displayed right-derived-unit equations specify
-these identifications on the homotopy categories.
-3. Both maps now compute the same underived identity on K-injective models.
-The identity assumptions ht, hz, hv, hs identify the scalar actions. The
-normalizations hb, hd, hr, hc and right-derived uniqueness identify the two
-maps on the full derived categories, giving the displayed equation for E.
-No inverse of the base-change map is used, so flatness and Tor independence
-are unnecessary; the equation also holds for E=0 and identity base change. -/
+is used: the passage to all L and m is a separate naturality argument
+(Stacks, Tags 08HY, 0D5T and 0AA7). -/
 theorem affineSectionsBaseChange_unit_square
     {R B : CommRingCat.{u}} {X : Scheme.{u}}
     (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R)

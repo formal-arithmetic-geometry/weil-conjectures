@@ -16,8 +16,9 @@ import Mathlib.Algebra.Category.Ring.Constructions
 
 /-! # Tensor sections on the inverse-image affine chart
 
-Source: Stacks Project, Schemes Tags 01I4, 01IA, 01HV.
-(blueprint: lem-pc-affine-pullback-chart-tensor-sections).
+## References
+
+* Stacks Project, Tags 01I4, 01IA and 01HV
 -/
 
 @[expose] public section
@@ -30,23 +31,8 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The inverse image of an affine open under an affine base change is affine, and
-its actual pullback-module sections are the scalar extension of the original sections.
-Source: Stacks Project, Schemes Tags 01I4, 01IA, 01HV.
-(blueprint: lem-pc-affine-pullback-chart-tensor-sections).
-
-Proof: Put B = O_X(U), N = M(U). Restrict the cartesian square to U. Identifying U
-with Spec B and Y with Spec T by e identifies the inverse image W with
-Spec(B tensor_A T); he ensures that the second structure map is induced by q.
-Thus W is affine. The affine pullback sections comparison identifies G(W) with
-N tensor_B (B tensor_A T), with its ordinary section action. Swap the factors and
-reassociate to obtain T tensor_A N. On pure tensors the forward comparison sends
-t tensor n to t times the pulled-back section n. Its inverse sends
-n tensor (b tensor t) to t tensor (b*n). The balancing relations give well-defined
-maps and their two composites are identities by tensor induction. Compatibility
-with the second projection identifies the T-action with the composite of the
-canonical Spec-sections map, e.hom.appTop, and the second projection on sections.
-Empty U gives the zero ring and zero sections; the formulas remain valid for
-zero T and zero N. No flatness or finite presentation is used. -/
+its actual pullback-module sections are the scalar extension of the original sections
+(Stacks, Tags 01I4, 01IA and 01HV). -/
 theorem exists_affine_pullback_chart_tensor_sections
     (A T : CommRingCat.{u}) {X Y : Scheme.{u}} (f : X ⟶ Spec A)
     (M : X.Modules) [M.IsQuasicoherent] (U : X.affineOpens)

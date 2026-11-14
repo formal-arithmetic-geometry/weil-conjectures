@@ -11,7 +11,9 @@ import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 
 /-! # Local derived isomorphisms on a weakly contractible affine object
 
-Source: Stacks Project, Tags 090K and 09C6.
+## References
+
+* Stacks Project, Tags 090K and 09C6
 -/
 
 @[expose] public noncomputable section
@@ -153,21 +155,7 @@ private theorem coefficientFiniteDisjointRefinement
     simpa only [S', Sieve.functorPullback_functorPushforward_eq] using h
 
 /-- Local isomorphisms of two complexes globalize on a weakly contractible affine.
-Source: Stacks Project, Sites, Tag 090K; Pro-etale Cohomology, proof of Tag 09C6.
-(auxiliary; not a blueprint node).
-
-Proof: undo AsSmall and refine the covering sieve by finitely many affine
-pro-etale objects. Their finite coproduct covers U. On the coefficient-sized
-slice, its representable maps epimorphically to the representable of U. Apply
-the stated terminal-section surjectivity to the identity section; subcanonicity
-and Yoneda give a section of the coproduct cover. Pull back the coproduct
-components along this section to obtain a finite disjoint cover of U contained
-in the original sieve, and transport it through AsSmall. Apply the general
-ringed derived disjoint-cover gluing theorem to the supplied component
-isomorphisms. That theorem glues chain maps and inverse homotopies between
-K-injective representatives, so it works for arbitrary unbounded complexes and
-also for the empty cover. No coefficient finiteness or etale localization
-comparison is required. -/
+(Stacks, Tags 090K, 09C6) -/
 theorem coefficient_weaklyContractible_local_iso
     (X : Scheme.{u}) (B : Type (max v (u + 1))) [CommRing B]
     (U : coefficientProEtaleSiteModel.{u, v} X)

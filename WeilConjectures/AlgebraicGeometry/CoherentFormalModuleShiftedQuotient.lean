@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 
 /-! # Explicit shifted quotient systems
 
-Source: Stacks Project, Lemma 087X, claims (b)--(c).
-(blueprint: lem-weil-pbc-formal-shifted-quotient).
+## References
+
+* Stacks Project, Tag 087X
 -/
 
 @[expose] public section
@@ -21,9 +22,7 @@ set_option backward.isDefEq.respectTransparency false
 namespace AlgebraicGeometry
 noncomputable section
 
-/-- The explicit system with level n equal to S_(n+d)/I^(n+1) S_(n+d).
-Source: Stacks Project, Lemma 087X, claim (b).
-(blueprint: lem-weil-pbc-formal-shifted-quotient). -/
+/-- The explicit system with level n equal to S_(n+d)/I^(n+1) S_(n+d) (Stacks, Tag 087X). -/
 def formalShiftedQuotient {X : Scheme.{u}} (I : X.IdealSheafData)
     (S : ℕᵒᵖ ⥤ X.Modules) (d : ℕ) : ℕᵒᵖ ⥤ X.Modules where
   obj n := formalModuleQuotient I (n.unop + 1) (S.obj (op (n.unop + d)))
@@ -39,10 +38,7 @@ def formalShiftedQuotient {X : Scheme.{u}} (I : X.IdealSheafData)
     rw [← formalModuleQuotientMap_comp, ← S.map_comp]
     congr 2
 
-/-- Ideal multiplication vanishes after mapping to the annihilated target level.
-Proof: multiplication factors through the target ideal product, which is zero.
-Source: Stacks Project, Lemma 087X, claim (c).
-(blueprint: lem-weil-pbc-formal-shifted-quotient). -/
+/-- Ideal multiplication vanishes after mapping to the annihilated target level. -/
 theorem shiftedQuotient_kill {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentFormalModule X I)
     (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj) (d n : ℕ) :
@@ -56,9 +52,7 @@ theorem shiftedQuotient_kill {X : Scheme.{u}} [IsNoetherian X]
     (Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι (n + 1)).2
       (F.obj.obj (op n))), comp_zero]
 
-/-- The descended inclusion, constructed by the cokernel universal property.
-Source: Stacks Project, Lemma 087X, the map from the system of claim (c) to F.
-(blueprint: lem-weil-pbc-formal-shifted-quotient). -/
+/-- The descended inclusion, constructed by the cokernel universal property (Stacks, Tag 087X). -/
 def formalShiftedQuotientι {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentFormalModule X I)
     (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj) (d : ℕ) :
@@ -80,10 +74,7 @@ def formalShiftedQuotientι {X : Scheme.{u}} [IsNoetherian X]
       ← F.obj.map_comp]
     congr 1
 
-/-- The defining equation of the descended inclusion.
-Proof: this is the factorization equation for cokernel.desc.
-Source: Stacks Project, Lemma 087X, claim (c).
-(blueprint: lem-weil-pbc-formal-shifted-quotient). -/
+/-- The defining equation of the descended inclusion. -/
 theorem formalShiftedQuotientι_comp {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentFormalModule X I)
     (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj) (d n : ℕ) :

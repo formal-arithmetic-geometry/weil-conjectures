@@ -15,8 +15,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 /-!
 # The affine nonvanishing locus of a section of an invertible module
 
-Source: Stacks Project, Properties, Lemma 01PV (`properties-lemma-affine-cap-s-open`),
-algebra argument in the proof (blueprint: lem-sc-affine-cap-section-open-algebra).
+## References
+
+* Stacks Project, Tag 01PV
 -/
 
 @[expose] public section
@@ -281,27 +282,9 @@ private theorem section_mem_range (R : Type u) [CommRing R]
   rw [b.commutes]
   exact Ideal.algebraMap_residueField_eq_zero
 
-/-- Source: Stacks Project, Lemma 01PV, algebra argument in the proof
-(blueprint: lem-sc-affine-cap-section-open-algebra).
-For an invertible module `N`, the spectrum of `Sym_R(N)/(ι(s)-1)` identifies with the open
-locus of primes `p` where `s ∉ pN`. The base ring is lifted to the common universe
-by `ULift`; primes are transported along its canonical ring equivalence.
-
-Proof: (1) Finite projectivity gives finite presentation and freeness at each prime.
-Spread this freeness to a principal neighbourhood, preserving rank one, and choose a
-linear equivalence `R_f ≃ N_f` there.
-(2) Write `a` for the coefficient of `s/1`. The linear map from `N` to `B_f` sends `s`
-to one, so its value `b` on the basis vector satisfies `a * b = 1`. This constructs
-`(R_f)_a → B_f`. Conversely the functional `n ↦ a⁻¹ * e⁻¹(n/1)` gives a map
-`B_f → (R_f)_a` by the symmetric-algebra, quotient, and localization universal properties.
-Those same universal properties show that the maps are inverse.
-(3) Transport this principal-localization description to the restriction of the spectrum
-map using `SpecMapRestrictBasicOpenIso`. The Zariski-local criterion for open immersions
-then proves the assertion globally.
-(4) The quotient relation excludes primes where `s ∈ pN`. Conversely, a projective
-splitting gives a coordinate functional nonzero on `s` modulo any prime with `s ∉ pN`.
-Normalize it in the residue field to send `s` to one. The induced map from `B` to that
-field has prime kernel contracting to `p`, proving the reverse image inclusion. -/
+/-- For an invertible module `N`, the spectrum of `Sym_R(N)/(ι(s)-1)` identifies with the open
+locus of primes `p` where `s ∉ pN`, after lifting the base ring to the common universe by
+`ULift` (Stacks, Tag 01PV). -/
 theorem affine_cap_section_open_algebra (R : Type u) [CommRing R]
     (N : Type v) [AddCommGroup N] [Module R N] [Module.Finite R N] [Module.Projective R N]
     (_hN : ∀ p : PrimeSpectrum R, Module.rankAtStalk N p = 1) (s : N) :

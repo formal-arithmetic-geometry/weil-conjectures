@@ -115,24 +115,8 @@ private theorem compare_via_resolution_naturality
 -- Internal module categories require deeper colimit and derived-category instance search.
 set_option synthInstance.maxSize 4096 in
 /-- On bounded-below complexes, the cohomology of pushforward evaluated at a weakly
-contractible object is naturally the homology of its inverse-image hypercover total.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(1), hypercover computation, and Stacks
-Project, Tags 09A2 and 0946.
-(auxiliary; not a blueprint node).
-Proof: exact evaluation at the affine weakly contractible V identifies evaluated
-pushforward cohomology with the homology of the evaluated pushforward complex.
-The defining pushforward section formula evaluates this complex at W. The natural
-unit from a complex to its derived pushforward is invertible on K-injectives.
-Choose a bounded-below termwise-injective resolution for each bounded-below complex.
-The injective-row descent theorem and bounded-below row total comparison make its
-restriction augmentation into hypercover total sections a quasi-isomorphism.
-Weakly contractible term evaluation makes the total carry bounded-below coefficient
-quasi-isomorphisms to quasi-isomorphisms. Compose the resulting homology isomorphisms
-with the inverses of the two resolution maps. For a coefficient map, lift it between
-the K-injective resolutions up to homotopy. The natural derived unit and natural
-restriction augmentation commute with this lift. A bounded-below cylinder argument
-shows that any functor inverting bounded-below quasi-isomorphisms identifies homotopic
-maps, proving naturality of the comparison. No colimit assertion is used here -/
+contractible object is naturally the homology of its inverse-image hypercover total
+(Hemo–Richarz–Scholbach, Lemma 5.3(1); Stacks, Tags 09A2 and 0946). -/
 theorem condensedHypercover_comparison
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

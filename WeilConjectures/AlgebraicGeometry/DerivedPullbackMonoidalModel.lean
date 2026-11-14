@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackTensorCoherence
 
 /-! # The canonical monoidal model of derived pullback
 
-Source: Stacks Project, Cohomology, Tag 079U and Section 20.27
-(blueprint: def-pc-derived-pullback-monoidal-model).
+## References
+
+* Stacks Project, Tag 079U
 -/
 
 @[expose] public section
@@ -38,9 +39,7 @@ attribute [local instance] pullbackDescentModuleTensor moduleSymmetric modulePre
 /-- A monoidal structure on derived pullback is induced by the recorded module tensor
 comparison when its left-derived counit is compatible with the tensor comparisons.
 The module tensor comparison is pinned to `module_pullback_tensor`;
-the unit is then fixed by its unit laws.
-Source: Stacks Project, Cohomology, Tag 079U and Section 20.27
-(blueprint: def-pc-derived-pullback-monoidal-model). -/
+the unit is then fixed by its unit laws (Stacks, Tag 079U). -/
 def IsDerivedPullbackMonoidalModel {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]
@@ -114,15 +113,7 @@ private theorem reassoc_pinned {C : Type*} [Category C] {A B D E G : C}
 
 /-- The canonical module tensor comparison descends to a monoidal model of derived pullback.
 Statements that use the model quantify over every `m` with
-`IsDerivedPullbackMonoidalModel g m` rather than choosing one.
-Source: Stacks Project, Cohomology, Tag 079U and Section 20.27
-(blueprint: def-pc-derived-pullback-monoidal-model).
-Proof: resolve both arguments by K-flat complexes using lem-pc-kflat-resolution.
-Termwise pullback preserves K-flatness by lem-pc-kflat-pullback-preservation.
-Use the degreewise module comparison of lem-pc-derived-pullback-tensor-product.
-Its associativity and unit laws follow from the tensor formula for module pullback.
-The left-derived universal property descends these comparisons and laws, and makes the
-counit monoidal. The unit complex is K-flat, so its comparison is invertible too. -/
+`IsDerivedPullbackMonoidalModel g m` rather than choosing one (Stacks, Tag 079U). -/
 theorem exists_derivedPullbackMonoidalModel {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))] :

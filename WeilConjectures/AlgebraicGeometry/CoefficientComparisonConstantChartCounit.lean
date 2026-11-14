@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # The comparison counit on a constant etale chart
 
-Source: Stacks Project, Tags 099R, 099T and 099Y, comparison and localization.
+## References
+
+* Stacks Project, Tags 099R, 099T and 099Y
 -/
 
 @[expose] public section
@@ -361,22 +363,7 @@ namespace AlgebraicGeometry.ProEtale
 counit is invertible. There is no finite-presentation assumption, no covering
 family, and no assumption on F away from this single chart.
 
-Source: Stacks Project, Tags 099R, 099T and 099Y, comparison with etale localization
-and the constant model case of lemma-compare-locally-constant
-(auxiliary; not a blueprint node).
-
-Proof: restriction commutes with comparison direct image on sections. Its mate
-under the restriction/star adjunctions is induced by the product comparison
-isomorphism, since the inclusion preserves finite limits. Iterated mates and the
-mate counit identity identify the restricted global counit with the slice counit.
-On both slice sites the sheaf of continuous functions into discrete M is the
-constant sheaf: the constant-functions map is locally injective, including the
-empty scheme, and locally surjective by the open fibres of a continuous function.
-These properties descend through AsSmall and restriction to a slice. Consequently
-the canonical direct-image map between constant sheaves is invertible. Its adjoint
-is also invertible by uniqueness of left adjoints to evaluation at the terminal
-object. The adjunction formula then makes the slice counit invertible on constant
-M, and naturality transports this along the given chart isomorphism. -/
+(Stacks, Tags 099R, 099T and 099Y). -/
 theorem coefficientComparison_counit_isIso_of_constant_over (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (F : Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} X)

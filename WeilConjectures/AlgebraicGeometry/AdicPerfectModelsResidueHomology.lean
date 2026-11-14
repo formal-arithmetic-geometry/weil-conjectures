@@ -13,7 +13,9 @@ import WeilConjectures.ConstructibleSheaf.InternalHom
 
 /-! # Constructible etale origin of individual residue cohomology sheaves
 
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -375,26 +377,8 @@ private theorem etaleOrigin_of_stratifiedModels (X : Scheme.{u}) [IsNoetherian X
     constructible_of_coefficientModel X A G.obj G.property,
     ⟨(es.app G.obj).symm ≪≫ R.mapIso eg ≪≫ he⟩⟩
 
-/-- Each residue cohomology sheaf has a constructible etale antecedent.
-This is a statement about sheaves; it does not descend a derived object.
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication; Lemma 6.3.13;
-Stacks Tags 09AJ and 09AK.
-(auxiliary; not a blueprint node).
-
-Proof: restrict the canonical residue to the given covering slices of each stratum.
-The finite-projection scalar comparison and exact fixed-scalar restriction commute
-with cohomology. Apply adicPerfectModel_complete_reduction to the local perfect
-coefficient complex P. Its residue cohomology is the constant realization of
-H^q(P tensor_A A/I), which is a finite-dimensional A/I-vector space and therefore
-finitely presented. Transport that constant model along the local isomorphism for K.
-Thus the residue cohomology is intrinsically constructible on the given finite
-stratification. The Noetherian global-constructibility theorem identifies this with
-affine-local constructibility. The sheaf part of constructibleComparison then
-supplies a constructible etale module and its comparison isomorphism. Transport
-through the constant-scalar equivalence and the small-site equivalences; their
-units retain constant sections, giving exactly the displayed comparisonUpperStar.
-This argument allows infinite residue fields and varying finite module ranks.
-Empty schemes and zero cohomology sheaves give the zero etale module. -/
+/-- Each residue cohomology sheaf has a constructible etale antecedent
+(Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.3.13; Stacks, Tags 09AJ and 09AK). -/
 theorem adicPerfectModels_residueHomology (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (hI : I.IsMaximal ∧ ∀ J : Ideal A, J.IsMaximal → J = I)

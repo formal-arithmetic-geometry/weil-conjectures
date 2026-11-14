@@ -11,8 +11,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Extending bilinear operations from the affine basis
 
-Source: the affine-basis gluing argument in the construction of the associated
-graded algebra in Stacks Tag 087Z, with the sheaf axiom (Tag 0072).
+## References
+
+* Stacks Project, Tags 087Z and 0072
 -/
 
 @[expose] public section
@@ -26,10 +27,7 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry
 
-/-- Sections of a module sheaf agree if they agree on every affine subopen.
-Source: Stacks Tag 0072, sheaf separatedness, and the affine basis of a scheme.
-Proof: Cover U by all its affine subopens and apply sheaf separatedness. The
-basis property supplies a cover also when U is empty. -/
+/-- Sections of a module sheaf agree if they agree on every affine subopen (Stacks, Tag 0072). -/
 theorem sections_eq_of_affine {X : Scheme.{u}} (M : X.Modules)
     (U : X.Opens) (a b : Γ(M, U))
     (h : ∀ (V : X.affineOpens) (hVU : V.1 ≤ U),
@@ -43,22 +41,8 @@ theorem sections_eq_of_affine {X : Scheme.{u}} (M : X.Modules)
     X.isBasis_affineOpens.exists_subset_of_mem_open hx U.2
   exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨⟨V, hV⟩, hVU⟩, hxV⟩
 
-/-- Natural bilinear operations on the affine basis extend to all opens.
-Source: Stacks Tags 087Z and 0072, affine-basis descent.
-(blueprint: lem-weil-pbc-affine-bilinear-extension).
-
-Proof: For sections a and b on U, restrict to all affine opens V contained in U
-and apply beta V. On an overlap, restrict further to every affine open W in the
-overlap; naturality and the presheaf composition law show that both outputs
-restrict to beta W of the same inputs. Sheaf separatedness on the affine basis
-therefore proves compatibility on the whole overlap. Glue uniquely to U.
-Uniqueness shows restriction compatibility, by comparing on each affine open
-contained in the smaller open. It also proves additivity and scalar linearity
-in each input: compare the two sides on the affine basis, using bilinearity of
-beta and semilinearity of the restrictions. Package these four identities as
-curried linear maps. For affine U the glued section is beta U by uniqueness.
-The empty open is covered by the empty family and has a unique section; no
-separatedness or quasi-separatedness assumption on X is needed. -/
+/-- Natural bilinear operations on the affine basis extend to all opens
+(Stacks, Tags 087Z and 0072). -/
 theorem affineBilinear_extension {X : Scheme.{u}} (M N P : X.Modules)
     (beta : ∀ V : X.affineOpens,
       M.val.obj (op V.1) →ₗ[Γ(X, V.1)] N.val.obj (op V.1) →ₗ[Γ(X, V.1)]

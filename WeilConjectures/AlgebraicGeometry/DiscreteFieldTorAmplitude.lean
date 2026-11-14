@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.IntegralResidueModelComparison
 Over the pulled-back discrete ring of a field, every internal module is flat, so every bounded
 complex has finite Tor amplitude.
 
-Source: Stacks Project, Tags 03ER, 08FC and 0651; Bhatt--Scholze, Remark 6.3.2.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 03ER, 08FC and 0651
+* Bhatt–Scholze, Remark 6.3.2
 -/
 
 @[expose] public noncomputable section
@@ -27,14 +29,8 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
-/-- Over the pulled-back discrete ring of a field, every internal module is flat.
-Source: Stacks Project, Tags 03ER and 08FC (auxiliary; not a blueprint node).
-
-Proof: the discrete coefficient model `discrete_coefficient_model` is a monoidal equivalence
-onto module sheaves over a constant field sheaf, where every module is flat by
-`SheafOfModules.isFlat_constantFieldModule`. Right tensoring with `M` followed by the
-equivalence is right tensoring with the image of `M` after the equivalence, so it is exact, and
-the equivalence reflects exactness. -/
+/-- Over the pulled-back discrete ring of a field, every internal module is flat
+(Stacks, Tags 03ER and 08FC). -/
 theorem flat_of_discreteField (X : Scheme.{u}) [IsNoetherian X] (A : Type u) [Field A]
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (discreteObj A) X)) :
@@ -56,13 +52,8 @@ theorem flat_of_discreteField (X : Scheme.{u}) [IsNoetherian X] (A : Type u) [Fi
   exact (ObjectProperty.flat_iff_preservesFiniteLimits M).mpr
     (preservesFiniteLimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M).symm)
 
-/-- Over the pulled-back discrete ring of a field, a bounded complex has finite Tor amplitude.
-Source: Stacks Project, Tags 0651 and 08FC; Bhatt--Scholze, Remark 6.3.2
-(auxiliary; not a blueprint node).
-
-Proof: a complex with homology in `[a, b]` is represented by a complex concentrated in
-degrees `[a, b]`, whose terms are flat by `flat_of_discreteField`, so it has Tor amplitude in
-`[a, b]` by `DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat`. -/
+/-- Over the pulled-back discrete ring of a field, a bounded complex has finite Tor amplitude
+(Stacks, Tags 0651 and 08FC; Bhatt--Scholze, Remark 6.3.2). -/
 theorem finiteTorAmplitude_of_discreteField (X : Scheme.{u}) [IsNoetherian X]
     (A : Type u) [Field A]
     {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

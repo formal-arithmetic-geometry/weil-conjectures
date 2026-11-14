@@ -11,8 +11,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Identity law for coefficient restriction between two diagrams
 
-Source: Stacks Project, Tags 09YQ and 03CB.
-(blueprint: lem-weil-pbc-open-square-diagram-identity).
+## References
+
+* Stacks Project, Tags 09YQ and 03CB
 -/
 
 @[expose] public section
@@ -67,26 +68,8 @@ private theorem square_identity_heq {X Y : Scheme.{u}}
   exact heq_of_eq
     (openSquareCoefficient_identity_normalized a (a ≫ 𝟙 X) (Category.comp_id a) h rfl F)
 
-/-- Restricting an identity coefficient across the identity square gives the canonical unit.
-Source: Stacks Project, Tag 09YQ (coherent coefficient systems), and sites.tex,
-Tag 03CB (composition of inverse images), with the unit coherence of the chosen adjoints.
-(blueprint: lem-weil-pbc-open-square-diagram-identity).
-
-Proof: Fix j. Use hF' to identify the given restricted sheaf with a_j^*F_sigma(j)
-and hψ to identify its coefficient map with the explicit square coefficient.
-Substitute the original identity equation for the coefficient map.
-The equality D.map_id identifies the underlying transition with the scheme identity;
-E.map_id similarly identifies the restricted transition with its scheme identity.
-Transport along these two equalities, retaining the eqToIso factors in the statement.
-The square coefficient is now the inverse of the composition isomorphism for the
-identity on E_j and a_j, followed by the composition isomorphism for a_j and the
-identity on D_sigma(j), followed by a_j^* of the original unit. Apply the left unit
-law upperStarComp_id_left and the right unit law upperStarComp_id_right. Their
-components express the first factor as the restricted unit and the second as the
-inverse of a_j^* of the original unit. Functoriality cancels the latter with the
-last factor. The remaining map is the restricted unit, with the E.map_id transport
-restored. No injectivity, directedness, scheme limit, or nonempty open is used;
-the argument also covers zero coefficients and empty schemes. -/
+/-- Restricting an identity coefficient across the identity square gives the canonical unit
+(Stacks, Tags 09YQ and 03CB). -/
 theorem openSquareCoefficient_diagram_identity
     {I J : Type u} [Preorder I] [Preorder J]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (E : Jᵒᵖ ⥤ Scheme.{u}) (σ : J → I)

@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientLaws
 
 /-! # Canonical coefficient maps on descended Čech complexes
 
-Source: Stacks Project, Tags 01ZM, 07RP, 07RR and 09YP. -/
+## References
+
+* Stacks Project, Tags 01ZM, 07RP, 07RR and 09YP
+-/
 
 @[expose] public section
 universe u
@@ -26,29 +29,7 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 -- The fixed interface names geometric hypotheses outside their conclusion.
 set_option linter.unusedVariables false in
 /-- Fixed descended geometry gives a complex diagram and a compatible cocone.
-Source: Stacks Project, Tag 09YP, proof of lemma-colimit, canonical maps in its
-Čech comparison; Tag 09YQ for the étale realization.
-(blueprint: lem-weil-pbc-etale-limit-finite-cech-coefficient-data).
-
-Proof: Use the actual Čech complex at each stage as the object of A, and the
-Čech complex with coefficients L.pt as the cocone point. Thus eA and eK are
-identity isomorphisms. In each degree, use the product universal property to
-prescribe the tuple component of A(a) by the adjunction unit, φ_a, and γ_a inverse,
-conjugated by eNj at the source and target. Prescribe each cocone leg using the
-unit, eG inverse, L.ι, and δ inverse, conjugated by eNj and eNlim. The projection
-identities hNj and hNlim imply compatibility with every deletion-of-coordinate
-map of the nerve, by uniqueness of product maps. The equations hγ and hδ imply
-identity and composition of the geometric transport maps, by uniqueness of maps
-into pullbacks. Naturality of the adjunction unit and of φ, eG, and L.ι now shows
-that every tuple component commutes with each face map. Additivity yields
-commutation with the alternating differential, giving complex morphisms. Product
-extensionality, the coefficient identity/composition assumptions, unit coherence,
-and pullback uniqueness prove A.map_id and A.map_comp. For the cocone equation
-use hG and L.w, again checking each tuple component. These checks construct A
-and cA and give exactly the two displayed equations. No finite-cover descent,
-quasi-compactness, limit universal property, or colimit universal property is used.
-The construction works for empty K, when every positive-length tuple index is
-empty and each section product is the zero group. -/
+(Stacks, Tags 09YP and 09YQ) -/
 theorem exists_etale_limit_finite_cech_coefficient_data
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

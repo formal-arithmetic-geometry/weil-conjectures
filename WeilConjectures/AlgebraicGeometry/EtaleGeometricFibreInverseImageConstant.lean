@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 /-!
 # Inverse image over a geometric point is constant
 
-Source: Stacks Project, Étale Cohomology, Lemma 59.39.3 (Tag 0A3H), final paragraph
-(blueprint: lem-weil-pbc-etale-geometric-fibre-inverse-image-constant).
+## References
+
+* Stacks Project, Tag 0A3H
 -/
 
 @[expose] public section
@@ -29,34 +30,8 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Étale Cohomology, Lemma 59.39.3 (Tag 0A3H), final paragraph
-(blueprint: lem-weil-pbc-etale-geometric-fibre-inverse-image-constant).
-The inverse image along `h ≫ s` is naturally the constant sheaf of the geometric stalk.
-The isomorphism at `Spec Ω` sends each pulled-back pointed section to its germ,
-fixing the canonical identification. The family is compatible with every further
-morphism over `Ω`.
-This compatibility is expressed on constant-presheaf generators: pulling a generator
-back through the inverse-image unit and its composition comparison gives the generator
-with the same stalk value on the source. Sheafification makes this equivalent to the
-usual square with the canonical inverse-image comparison for constant sheaves.
-The composition comparison is the unit-preserving witness of
-`etaleSetInverseImageCompositionUnits`, whose uniqueness makes the choice immaterial.
-
-Proof:
-1. Put `G = s⁻¹F`. By lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant,
-   the constant sheaf of the global sections of `G` is canonically `G`.
-2. The same lemma identifies these sections with the stalk at the identity point.
-   By lem-weil-pbc-sets-etale-inverse-image-stalk-germ this is the stalk of `F` at `s`,
-   compatibly with germs of pulled-back sections.
-3. Pull this identification back along `h`. Use
-   lem-weil-pbc-sets-etale-inverse-image-composition-units to compare the iterated
-   inverse image with that along `h ≫ s`, and
-   lem-weil-pbc-sets-etale-inverse-image-constant-sheaf to pull back the constant sheaf.
-4. Naturality in `F` follows from the naturality of all three comparisons.
-   For `v : V → U`, associativity of the composition comparison and the fact that
-   the constant-sheaf comparison preserves constant generators give the displayed
-   equation. Its uniqueness extends the equality from generators to sheaf morphisms,
-   giving naturality in `U` and in every further `Ω`-morphism. -/
+/-- The inverse image along `h ≫ s` is naturally the constant sheaf of the geometric stalk,
+compatibly with every further morphism over `Ω` (Stacks, Tag 0A3H). -/
 theorem etaleGeometricFibreInverseImageConstant
     (S : Scheme.{u}) (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :

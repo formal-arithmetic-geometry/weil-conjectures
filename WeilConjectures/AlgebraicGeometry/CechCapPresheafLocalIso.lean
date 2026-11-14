@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.AlternatingCechSheafConstruction
 
 /-! # Intersection restriction becomes invertible on its open
 
-Source: Stacks Project, Tag 02FU, restriction to a member of the covering.
+## References
+
+* Stacks Project, Tag 02FU
 -/
 
 @[expose] public section
@@ -22,15 +24,14 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 noncomputable section
 
-/-- Restrict a module presheaf to intersections with W, retaining scalars on the test open.
-Source: Stacks Project, Tag 02FU, restriction on intersection sections. -/
+/-- Restrict a module presheaf to intersections with W, retaining scalars on the test open
+(Stacks, Tag 02FU). -/
 def cechCapPresheafFunctor {X : Scheme.{u}} (W : X.Opens) :
     PresheafOfModules.{u} X.ringCatSheaf.obj ⥤
       PresheafOfModules.{u} X.ringCatSheaf.obj :=
   PresheafOfModules.pushforward (cechCapRingMap W)
 
-/-- The natural restriction of a presheaf to intersections with W.
-Source: Stacks Project, Tag 02FU, restriction on intersection sections. -/
+/-- The natural restriction of a presheaf to intersections with W (Stacks, Tag 02FU). -/
 def cechCapPresheafUnit {X : Scheme.{u}} (W : X.Opens) :
     𝟭 (PresheafOfModules.{u} X.ringCatSheaf.obj) ⟶ cechCapPresheafFunctor W where
   app P :=
@@ -114,20 +115,8 @@ private theorem cap_precompose_bijective {X : Scheme.{u}} (W : X.Opens)
         exact congrArg (· ≫ inv (ν.app H)) (ν.naturality f).symm
       _ = f := by simp only [Category.assoc, IsIso.hom_inv_id, Category.comp_id]
 
-/-- Intersecting with W has no effect after sheafification and restriction to W.
-Source: Stacks Project, Tag 02FU, local restriction of the Čech resolution.
-(blueprint: lem-pc-s3-cech-cap-presheaf-local-iso).
-
-Proof: Intersecting twice with W equals intersecting once, so K maps the unit
-on every presheaf to an isomorphism. For a module sheaf M on W, the unit on the
-underlying presheaf of its direct image is invertible: the inverse images of V
-and V intersect W in W coincide. Thus precomposition with the unit on P bijects
-maps K(P) to that direct image with maps P to it. The inverse sends f to K(f)
-followed by the inverse target unit. For injectivity, apply K, cancel the image
-unit, and use naturality and the invertible target unit. The composite of the
-sheafification and open-restriction adjunctions transfers this bijection to maps
-out of the displayed morphism. The coyoneda criterion makes it an isomorphism.
-This works for empty W and arbitrary presheaves P. -/
+/-- Intersecting with W has no effect after sheafification and restriction to W (Stacks, Tag 02FU).
+-/
 theorem cechCapPresheafUnit_local_isIso {X : Scheme.{u}} (W : X.Opens)
     (P : PresheafOfModules.{u} X.ringCatSheaf.obj) :
     IsIso ((Scheme.Modules.restrictFunctor W.ι).map

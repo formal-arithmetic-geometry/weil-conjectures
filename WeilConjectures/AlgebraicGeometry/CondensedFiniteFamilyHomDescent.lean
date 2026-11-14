@@ -13,9 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.CondensedOverlapFactorTranspose
 
 /-!
 # One-way finite coefficient factorization on a finite family of qcqs schemes
-
-Source: archived ModuleObject/Colimit/TwoColimit.lean, (Obj) overlap descent paragraph.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -532,35 +529,7 @@ private lemma spanFactor (src dst : LocalData T X f ℓ E M)
 end Spans
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Finite-stage comparison maps in both directions on all pairwise pullbacks.
-
-Source: archived `TwoColimit.lean`, (Obj) overlap descent paragraph.
-(auxiliary; not a blueprint node).
-
-Proof: use the filtered category of finite coefficient fields above E. On each Y_i,
-form the diagram Res_EF(F tensor_E N_i). The coefficient-ring colimit is the pulled
-Omega ring: inverse images preserve colimits. Tensoring and then taking the defining
-scalar-extension coequalizers preserves this colimit. Extend its point through e_i
-and the inverse of mapModComapIso. The resulting cocone has point g_i*Res_EOmega(M),
-and its legs are exactly the underlying canonical finiteCoefficientLocalAdjoint;
-the scalar-unit and transitivity identities verify this formula.
-
-For an oriented overlap p:W -> Y_i, q:W -> Y_j, pull the j-th cocone along q and
-restrict along the monoidal E-ring comparison. Both functors preserve colimits:
-pullback is a left adjoint, and restriction along this ring isomorphism is an
-equivalence. Pullback preserves finite free cokernel presentations, so p*N_i is
-finitely presented. Its E-to-Omega adjoint, followed by the module comparison of
-the commutative square, is a map into this colimit.
-
-Index the oriented overlaps by I times I times Bool. Generic finitely presented Hom
-continuity gives a stage for each map, and filteredness supplies one common upper
-stage. This includes the empty family. At that field the fixed-field overlap
-transposition lemma converts each E-linear factor into the required underlying
-map between pulled finite local models. Its factorization equation is the given
-cocone equation, using the explicit leg formula. The false Boolean case gives s;
-the true case gives t. The comparison of the reversed square is the inverse of the
-original comparison, so these are exactly the two equations in the conclusion.
--/
+/-- Finite-stage comparison maps in both directions on all pairwise pullbacks. -/
 theorem exists_finiteCoefficient_family_hom_factorizations
     (T X : Scheme.{u}) (f : X ⟶ T) (ℓ : ℕ) [Fact ℓ.Prime]
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

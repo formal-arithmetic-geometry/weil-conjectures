@@ -10,8 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStruct
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 /-! # Transporting modules through the etale inverse image
 
-Source: Stacks Project, Tags 03D1 and 03D2
-(blueprint: lem-weil-pbc-inverse-image-module-map-linearity). -/
+## References
+
+* Stacks Project, Tags 03D1 and 03D2
+-/
 
 @[expose] public section
 
@@ -85,20 +87,7 @@ private theorem section_pair
   · exact CategoryTheory.congr_fun (BinaryFan.IsLimit.lift_snd l p q) PUnit.unit
 
 /-- Pullback of a linear map is linear for any objectwise transported scalar actions.
-Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module; the morphism part of
-lem-weil-pbc-inverse-image-module-construction, step 1(a).
-(blueprint: lem-weil-pbc-inverse-image-module-map-linearity).
-
-Proof: the original scalar-action morphisms satisfy the linearity square because
-phi is sectionwise linear. Apply the set pullback to this square. Substitute the
-two assumed transport equations. Naturality of prodComparison, of ea, and of the
-conjugation by the abelian comparisons d identifies the resulting square with the square
-for g. Cancel the invertible product comparison and the ring and group comparisons.
-This gives mu_G followed by g = (id times g) followed by mu_G'. Evaluate on sections;
-finite products of set sheaves are sectionwise, so apply this equality to the pair
-(r,m). The section formulas for mu_G and mu_G' give exactly the displayed scalar
-linearity equation. This statement asserts no module-object existence and no
-functoriality; its conclusion concerns only a given map and given objects. -/
+(Stacks, Tag 03D2). -/
 theorem etaleInverseImageModuleMapLinearity (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) :
     let L := Scheme.etaleSetPullback f

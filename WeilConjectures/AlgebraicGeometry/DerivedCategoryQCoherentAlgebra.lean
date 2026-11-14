@@ -14,18 +14,17 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Derived categories of modules over a quasi-coherent algebra
 
-Source: literature/stacks-project/duality.tex, Section section-duality-finite,
-Tags 0BV0 and 0AX2 (blueprint: def-pc-derived-category-qcoh-algebra).
-
 The quasi-coherent `𝒪_Y`-algebra is the shared form `B : Y.CommAlgebraSheaf`
-(`= Under Y.sheaf`) with `hB : B.toModule.IsQuasicoherent`
-(def-weil-pbc-comm-algebra-sheaf, def-weil-pbc-quasi-coherent-algebra). `B`-modules are
+(`= Under Y.sheaf`) with `hB : B.toModule.IsQuasicoherent`. `B`-modules are
 `SheafOfModules` over the underlying ring sheaf
-`(sheafCompose _ (forget₂ CommRingCat RingCat)).obj B.right`, the carrier of the
-`𝒜`-modules of lem-weil-pbc-affine-module-correspondence; their underlying `𝒪_Y`-module is
+`(sheafCompose _ (forget₂ CommRingCat RingCat)).obj B.right`; their underlying `𝒪_Y`-module is
 the restriction of scalars along `(sheafCompose _ (forget₂ CommRingCat RingCat)).map B.hom`,
 as in `Scheme.CommAlgebraSheaf.toModule`. The localization is the shared
 `[HasDerivedCategory.{w} (SheafOfModules.{u} _)]` binder, as for `schemeDerivedCategory`.
+
+## References
+
+* Stacks Project, Tags 0BV0, 0AX2
 -/
 
 @[expose] public section
@@ -39,9 +38,7 @@ namespace AlgebraicGeometry
 /-- The derived category `D(B)` of sheaves of `B`-modules over a quasi-coherent
 `𝒪_Y`-algebra `B`: Mathlib's `DerivedCategory` (localization of cochain complexes at the
 quasi-isomorphisms, morphisms in universe `w`) of the abelian category of sheaves of modules
-over the ring sheaf underlying `B`.
-Source: literature/stacks-project/duality.tex, Section section-duality-finite,
-Tags 0BV0 and 0AX2 (blueprint: def-pc-derived-category-qcoh-algebra). -/
+over the ring sheaf underlying `B` (Stacks, Tags 0BV0, 0AX2). -/
 abbrev sheafAlgebraDerivedCategory (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf)
     (_hB : B.toModule.IsQuasicoherent)
     [HasDerivedCategory.{w} (SheafOfModules.{u}
@@ -51,9 +48,8 @@ abbrev sheafAlgebraDerivedCategory (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf)
     ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).obj B.right))
 
 /-- A sheaf of `B`-modules is a quasi-coherent `B`-module when its underlying `𝒪_Y`-module
-(restriction of scalars along the structure morphism `𝒪_Y → B`) is quasi-coherent.
-Source: literature/stacks-project/duality.tex, Section section-duality-finite,
-Tags 0BV0 and 0AX2 (blueprint: def-pc-derived-category-qcoh-algebra). -/
+(restriction of scalars along the structure morphism `𝒪_Y → B`) is quasi-coherent. (Stacks, Tags
+0BV0 and 0AX2). -/
 def sheafAlgebraModuleIsQuasiCoherent (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf)
     (_hB : B.toModule.IsQuasicoherent)
     (M : SheafOfModules.{u}
@@ -64,9 +60,8 @@ def sheafAlgebraModuleIsQuasiCoherent (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf)
       B.hom)).obj M).IsQuasicoherent
 
 /-- An object `K` of `D(B)` lies in `D⁺_QCoh(B)`: its cohomology sheaves vanish below some
-integer `n`, and every cohomology sheaf is a quasi-coherent `B`-module.
-Source: literature/stacks-project/duality.tex, Section section-duality-finite,
-Tags 0BV0 and 0AX2 (blueprint: def-pc-derived-category-qcoh-algebra). -/
+integer `n`, and every cohomology sheaf is a quasi-coherent `B`-module. (Stacks, Tags 0BV0 and
+0AX2). -/
 def sheafAlgebraDerivedQCohProperty (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf)
     (hB : B.toModule.IsQuasicoherent)
     [HasDerivedCategory.{w} (SheafOfModules.{u}
@@ -84,9 +79,7 @@ def sheafAlgebraDerivedQCohProperty (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf)
             ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).obj
               B.right)) m).obj K)
 
-/-- The full subcategory `D⁺_QCoh(B)` of `D(B)`.
-Source: literature/stacks-project/duality.tex, Section section-duality-finite,
-Tags 0BV0 and 0AX2 (blueprint: def-pc-derived-category-qcoh-algebra). -/
+/-- The full subcategory `D⁺_QCoh(B)` of `D(B)`. (Stacks, Tags 0BV0 and 0AX2). -/
 abbrev sheafAlgebraDerivedQCohCategory (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf)
     (hB : B.toModule.IsQuasicoherent)
     [HasDerivedCategory.{w} (SheafOfModules.{u}

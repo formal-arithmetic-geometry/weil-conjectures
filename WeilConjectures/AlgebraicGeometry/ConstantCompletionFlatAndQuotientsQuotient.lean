@@ -7,10 +7,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.ConstantCompletionBasic
 import WeilConjectures.AlgebraicGeometry.ConstantCompletionQuotientKernel
 /-! Constant quotient component of constant coefficient completion.
-Source: Stacks Project, Tag 093M (auxiliary; not a blueprint node).
-(auxiliary; not a blueprint node)
-The finite constant quotient map is sectionwise surjective and has kernel generated
-by the constant sections of the corresponding power of the ideal. -/
+
+## References
+
+* Stacks Project, Tag 093M
+-/
 @[expose] public noncomputable section
 open CategoryTheory CategoryTheory.Limits Opposite
 universe u

@@ -11,8 +11,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetSectionPairMatchingEventually
 import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # Finite matching equations become effective at a stage
-Source: Stacks Project, Tags 03Q4 and 09YQ, finite overlap reduction.
-(blueprint: lem-weil-pbc-sets-section-finite-matching). -/
+
+## References
+
+* Stacks Project, Tags 03Q4 and 09YQ
+-/
 
 @[expose] public section
 
@@ -20,26 +23,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tags 03Q4 and 09YQ, finite overlap reduction, using
-section eventual equality on qcqs objects.
-(blueprint: lem-weil-pbc-sets-section-finite-matching).
-Proof: for each pair b,b', form the fibre product Z = V b ×_W V b' in the
-small etale category of the base. Its structure morphism is qcqs: the maps
-V b → W are qcqs by cancellation against the qcqs structure map of W, and
-quasi-compact and quasi-separated morphisms are stable under base change and
-composition. Restrict the two stage sections to Z. The hypothesis applied to
-its projections says that their limit images agree. Apply section eventual
-equality on Z to obtain a later stage at which they agree. The two arrows back
-to j agree because the indexing preorder is thin. Choose a common predecessor
-of j and the finitely many stages, using cofilteredness. Composition coherence
-preserves all equations there, and naturality identifies them with restrictions
-of the transported sections. Base change preserves each fibre product. Thus any
-two stage arrows with equal composites into W factor through its base changed
-fibre product. Restricting its equality along this factorization proves the
-claimed matching equation. If n = 0 there are no pairs: take l = j and its
-identity arrow, and the matching condition has no instances. This statement
-requires no covering, no affine lifting hypothesis, and no global limit section;
-it only makes finitely many given matching equations effective. -/
+/-- Finitely many sections that match on overlaps in the limit match at some stage (Stacks, Tags
+03Q4 and 09YQ). -/
 theorem etaleSetSection_finite_matching
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

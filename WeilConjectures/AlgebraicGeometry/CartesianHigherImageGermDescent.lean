@@ -14,7 +14,9 @@ import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 
 /-! # Descent of germs of relative higher direct images
 
-Source: Stacks Project, Tag 0EYM, second proof.
+## References
+
+* Stacks Project, Tag 0EYM
 -/
 
 @[expose] public section
@@ -26,24 +28,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Every germ of the limit higher image is the canonical image of a stage germ.
-This is surjectivity of the relative higher-image continuity comparison, without
-any invertibility hypothesis on stage exchanges.
-Source: Stacks Project, Tag 0EYM, second proof, part (1).
-(blueprint: lem-sc-cartesian-higher-image-germ-descent)
-
-Proof: represent the germ by a section on an affine etale neighbourhood of s.
-The higher-image sheaf is the sheafification of the pullback cohomology presheaf
-(Tag 03Q8), so locally that section is represented by a cohomology class.
-Descend the affine etale neighbourhood and the chosen point neighbourhood to a stage
-(Tag 0EYL). The cartesian pullbacks of the later neighbourhoods form an affine
-inverse system, with qcqs terms and limit the original pullback of f. The
-coefficients are pulled back from F on X. Cohomology continuity (Tag 09YQ) gives
-this class as the image of a class at some later stage. The presheaf-to-higher-image
-map sends that stage class to a stage section. Its germ, transported by the exact
-inverse-image/homology isomorphism, is the required element. Naturality of these
-maps and the resolution formula for exchange identify its canonical leg image
-with the starting germ. The argument includes q=0, zero coefficients, empty
-schemes, and a nonempty cofiltered index, reindexed by a directed set if needed. -/
+(Stacks, Tag 0EYM). -/
 theorem exists_cartesianHigherImage_germ_rep
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionU
 
 /-! # Comparison before evaluation at a base test object
 
-Source: Stacks Project, Sites Tags 03CB and 03CC, and Étale Cohomology Tag 09YQ.
-(blueprint: def-weil-pbc-sets-sheaf-comparison).
+## References
+
+* Stacks Project, Tags 03CB, 03CC and 09YQ
 -/
 
 @[expose] public section
@@ -22,10 +23,8 @@ namespace AlgebraicGeometry
 
 /-- The unit followed by the unit-compatible composition isomorphism, as a morphism
 of sheaves on the intermediate scheme. Unlike the section comparison, its evaluation
-has not yet been transported along the iterated-base-change isomorphism.
-
-Source: Stacks Project, Sites Tags 03CB and 03CC; Étale Cohomology Tag 09YQ.
-(blueprint: def-weil-pbc-sets-sheaf-comparison). -/
+has not yet been transported along the iterated-base-change isomorphism
+(Stacks, Tags 03CB, 03CC and 09YQ). -/
 noncomputable def etaleSetSheafComparison
     {R S T : Scheme.{u}} (h : T ⟶ S) (f : S ⟶ R) (k : T ⟶ R) (hk : h ≫ f = k)
     (G : Sheaf R.smallEtaleTopology (Type (u + 1))) :

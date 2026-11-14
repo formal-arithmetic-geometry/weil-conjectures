@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.NormalConstantGenericUnit
 
 /-! # General-ring integral stalk detectors
 
-Source: Stacks Project, Tag 09Z6 (3), generic trivialization and normalization.
+## References
+
+* Stacks Project, Tag 09Z6
 -/
 
 @[expose] public section
@@ -186,19 +188,7 @@ private theorem isIso_unit_constantSheaf_of_generic_residueFieldIso
           ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)))
 
 /-- A constructible module sheaf over a Noetherian ring admits an integral pushforward map
-which is injective on every geometric stalk over a prescribed point.
-
-Source: Stacks Project, Tag 09Z6 (3), proof, Steps 1--5.
-(blueprint: new-lem-weil-pbc-noetherian-integral-stalk-embedding).
-
-Proof: Pull back to the residue field of `x`, trivialize after a finite separable extension,
-normalize the reduced closure, and use the generic-point constant-sheaf unit. Adjunction
-produces the map to the integral pushforward. The lifting of every algebraically closed
-geometric point over `x`, together with the stalk comparison and triangle identities, shows
-that the map is injective on all stalks above `x`. The coefficient module is finitely
-presented because it is a finite module over the Noetherian coefficient ring. This theorem
-is the general-ring analogue of the finite-coefficient integral detector.
--/
+which is injective on every geometric stalk over a prescribed point. (Stacks, Tag 09Z6 (3)) -/
 theorem exists_integral_lowerStar_stalk_injective_noetherian
     (Λ : Type (u + 1)) [CommRing Λ] [IsNoetherianRing Λ]
     {X : Scheme.{u}} [IsNoetherian X]

@@ -120,22 +120,7 @@ end CategoryTheory.Mod
 namespace AlgebraicGeometry.ProEtale
 open Scheme PadicAlgCl
 
-/-- Ordinary tensor transitivity transposes to the explicit coefficient inclusion.
-
-Source: `Mod.extendScalarsComp`, `Mod.extendScalarsIsoOfEq`, and the Hom paragraph
-of archived `ModuleObject/Colimit/TwoColimit.lean`.
-(auxiliary; not a blueprint node)
-
-Proof: uniqueness of left adjoints defines both tensor transitivity comparisons.
-Their unit equations say that the successive units for E→G→Ω, followed by the
-comparison, give the unit for E→Ω; the same holds for F. Expand the outer mate
-using its unit, use the first equation and naturality of the G→Ω unit, and cancel
-the E→G unit against its counit by the triangle identity. The resulting map is
-that G→Ω unit followed by the F tensor comparison. Its composite with the F→G
-unit is exactly the F→Ω unit by the second equation. The extension adjunction's
-universal property identifies it with the morphism used in mixedScalarMap.
-Apply this calculation in each degree of C; complex morphisms are determined
-by their components. No exactness, boundedness, or filtered diagram is needed. -/
+/-- Ordinary tensor transitivity transposes to the explicit coefficient inclusion. -/
 theorem coefficientComplexToAlgCl_underived_compatibility
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     {E F G : FiniteIntermediateField ℓ} (he : E ≤ G) (hf : F ≤ G)

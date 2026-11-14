@@ -9,8 +9,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-! # Proper support of an individual etale section
 
-Source: Stacks Project, Tags 04FT and 0F76
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 04FT and 0F76
 -/
 
 @[expose] public section
@@ -22,9 +23,8 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- A section has proper support when its nonzero-geometric-germ locus is a closed
-subset whose reduced induced subscheme is proper over the specified base.
-Source: Stacks Project, Tags 04FT and 0F76
-(auxiliary; not a blueprint node). -/
+subset whose reduced induced subscheme is proper over the specified base
+(Stacks, Tags 04FT and 0F76). -/
 def SectionHasProperSupport
     (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (V : X.Etale)

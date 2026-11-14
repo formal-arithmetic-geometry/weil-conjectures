@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineModuleCorrespondence
 
 /-! # Realization of a balanced algebra action
 
-Source: Stacks Project, Tags 01LX and 01SB, as used in Tag 0897.
-(blueprint: lem-weil-pbc-balanced-action-quasicoherent-realization).
+## References
+
+* Stacks Project, Tags 01LX, 01SB and 0897
 -/
 
 @[expose] public section
@@ -26,27 +27,8 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace AlgebraicGeometry
 
 /-- A quasi-coherent module with a balanced action of `B` comes from the base change
-by `Spec B`, with an identification respecting every scalar in `B`.
-
-Source: Stacks Project, Tags 01LX and 01SB; Tag 0897, relative-spectrum paragraph.
-(blueprint: lem-weil-pbc-balanced-action-quasicoherent-realization).
-
-Proof: On an affine open U = Spec C, take N = M(U). The ring map rho gives a
-B-action on N. Each rho(b) is O_X-linear, so this action commutes with C. The
-scalar hypothesis identifies the two A-actions, and therefore defines a
-C tensor_A B-module by (c tensor b)n = c rho(b)n. Quasi-coherence of M identifies
-N localized at c with M(D(c)). Naturality of rho makes the B-actions on these
-localizations agree with restriction. These modules glue over affine overlaps
-(refined by basic affine opens) to a module over f^*(B tilde), with underlying
-O_X-module M. Relative-spectrum base change (01LX) identifies that algebra
-with pi_* O_Y and its relative spectrum with Y. The final assertion of 01SB
-identifies quasi-coherence over pi_* O_Y with quasi-coherence of the underlying
-O_X-module, so the constructed algebra module is quasi-coherent. The equivalence
-in 01SB then realizes it as pi_* F for a quasi-coherent F. Its
-algebra-linear unit is the required isomorphism e. Under the algebra identification,
-b is the section fB^sharp(b), so algebra-linearity gives the displayed equality.
-No finite generation or noetherian hypothesis is used. For M = 0 the construction
-gives F = 0; for empty X all modules and maps are the unique ones. -/
+by `Spec B`, with an identification respecting every scalar in `B`
+(Stacks, Tags 01LX, 01SB and 0897). -/
 theorem balancedAction_quasicoherent_realization
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of A))

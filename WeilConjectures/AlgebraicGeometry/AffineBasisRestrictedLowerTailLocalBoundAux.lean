@@ -30,11 +30,7 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency.types true in
 -- Comparing the transported injective resolution and its section complexes needs extra elaboration.
 /-- Local vanishing on each affine open; this is the cohomological core of the
-restricted lower-tail bound.
-Source: Stacks Project, Tags 0D64, 01E1 and 03FD.
-(blueprint: lem-sc-affine-basis-restricted-lower-tail-local-bound-aux).
-The proof follows the restriction, truncation, and module/abelian cohomology
-comparison argument in the parent node. -/
+restricted lower-tail bound (Stacks, Tags 0D64, 01E1 and 03FD). -/
 theorem affineBasisRestrictedLowerTail_local_vanishing
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -19,8 +19,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # Descent of finite locally free morphisms
 
-Source: Stacks Project, Limits, Lemma Tag 06AC, in Situation Tag 081D
-(blueprint: lem-weil-pbc-descend-finite-locally-free).
+## References
+
+* Stacks Project, Tags 06AC and 081D
 -/
 
 @[expose] public section
@@ -44,35 +45,7 @@ private theorem over_pullback_comparison_square {S T R : Scheme.{u}}
   simpa only [hx, hy] using over_pullback_square X Y f r
 
 /-- Finite locally freeness, and its degree, descend to a finite stage of an inverse limit
-of schemes with affine transition morphisms.
-
-Source: Stacks Project, Limits, Lemma Tag 06AC, in Situation Tag 081D
-(blueprint: lem-weil-pbc-descend-finite-locally-free).
-
-Proof:
-1. Locally finite presentation implies locally finite type by the finite generators in an
-   affine presentation (def-sbc-locally-finite-presentation, def-weil-finite-type-morphism).
-   Finite local freeness gives finiteness and flatness (def-pc-finite-locally-free).
-   Descend these separately (lem-weil-pbc-descend-finite,
-   lem-weil-pbc-descend-flat-finite-presentation), then choose a common later stage.
-   Cartesian-square pasting identifies the maps there as base changes; finiteness,
-   flatness and locally finite presentation persist (lem-weil-pbc-cartesian-square-pasting,
-   lem-weil-pbc-finite-morphism-permanence, lem-weil-pbc-flat-morphism-base-change,
-   lem-weil-pbc-qcqs-morphism-permanence). Thus that stage is finite locally free.
-2. If the limit map has degree d, take the clopen degree-d locus W in the stage target
-   (lem-weil-pbc-finite-locally-free-degree-locally-constant). Rank base change and pasting
-   show that the limit target maps into W (lem-weil-pbc-finite-flat-rank-iso,
-   lem-weil-pbc-cartesian-square-pasting).
-3. The limit target is the limit of the base-changed targets (lem-weil-pbc-scheme-over-limit).
-   Their affine transitions and the qcqs initial target make them qcqs
-   (lem-weil-pbc-affine-morphism-permanence, lem-weil-pbc-qcqs-morphism-permanence).
-   The clopen W is retrocompact, hence constructible (def-weil-constructible-subset).
-   A later target therefore maps into W (lem-weil-pbc-limit-contained-in-constructible).
-4. At that later stage finite local freeness persists by the same base-change permanence
-   and pasting as in Step 1. Rank base change identifies every fibre degree with the degree
-   at its image in W, which is d (lem-weil-pbc-finite-flat-rank-iso).
-   This is finite local freeness of degree d (def-pc-finite-locally-free).
--/
+of schemes with affine transition morphisms (Stacks, Tags 06AC and 081D). -/
 theorem descend_finite_locally_free
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

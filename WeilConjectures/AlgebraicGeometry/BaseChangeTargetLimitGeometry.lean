@@ -14,8 +14,9 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Geometry of the base-changed scheme limit
 
-Source: Stacks Project Tag 09Z1; Mathlib `AffineTransitionLimit`.
-(blueprint: lem-sbc-target-limit-geometry)
+## References
+
+* Stacks Project, Tag 09Z1
 -/
 
 @[expose] public section
@@ -25,25 +26,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Base change of a qcqs inverse system over an affine scheme satisfies the
-geometric hypotheses for continuity of higher direct images.
-
-Source: Stacks Project Tag 09Z1 (base-changed inverse systems), and Mathlib
-`AffineTransitionLimit`, lemma `isAffineHom_π_app`.
-(blueprint: lem-sbc-target-limit-geometry)
-
-Proof: Set W = T ×_S X and base change D along W → T. Pullback is right adjoint
-to composition in the over category, hence preserves limits. The forgetful
-functor from the over category preserves connected limits, and reflects the
-limit of the original cone; therefore the resulting underlying scheme cone is
-limiting. Each transition is a base change of the corresponding affine
-transition, hence affine. The maps D_i → S are quasi-compact and quasi-separated
-since D_i is qcqs and S is affine. The maps D_i ×_T W → X are, by pullback
-associativity, their base changes along X → S, and are consequently qcqs. For
-the limit, each projection to a stage is affine (`isAffineHom_π_app`). Composing any one
-projection with the qcqs map of that stage to S gives a qcqs map from the limit
-to S. Its base change to X is the required qcqs limit structure map. A stage
-exists since the indexing category is cofiltered.
--/
+geometric hypotheses for continuity of higher direct images (Stacks, Tag 09Z1). -/
 theorem baseChange_target_limit_geometry {X S T : Scheme.{u}} [IsAffine S]
     (p : X ⟶ S) (g : T ⟶ S) {I : Type u} [Category.{u} I] [IsCofiltered I]
     (D : I ⥤ Over T)

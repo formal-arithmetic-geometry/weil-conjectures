@@ -12,7 +12,10 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 import Mathlib.LinearAlgebra.Span.Basic
 
 /-! # The affine annihilation criterion
-Source: Stacks Project, Tag 01PO, proof of clause (2).
+
+## References
+
+* Stacks Project, Tag 01PO
 -/
 
 @[expose] public section
@@ -22,20 +25,8 @@ open CategoryTheory TopologicalSpace Opposite
 open scoped AlgebraicGeometry
 namespace AlgebraicGeometry
 
-/-- On an affine open, global ideal annihilation implies local ideal annihilation.
-Source: Stacks Project, Tag 01PO, proof of (2).
-(blueprint: lem-weil-pbc-annihilator-affine-criterion).
-
-Proof: for each smaller affine open W, quasi-coherent ideal data says J(W) is the
-extension of J(U) along restriction. The ideal of scalars annihilating s restricted
-to W contains the restrictions of J(U), hence contains J(W) by the map/comap
-adjunction for ideals. For an arbitrary subopen V, cover V by all affine opens
-contained in V. A section a of J on V restricts into J(W), by naturality of the
-ideal inclusion and its sectionwise image formula. Thus the product of a with s
-restricted to V vanishes on this affine cover. Separatedness of F makes it zero.
-The reverse implication uses V = U. No finite-type or quasi-coherence hypothesis
-on F is needed. Empty covers and the zero and unit ideals satisfy the same argument.
--/
+/-- On an affine open, global ideal annihilation implies local ideal annihilation
+(Stacks, Tag 01PO). -/
 theorem annihilator_affine_criterion (X : Scheme.{u}) (J : X.IdealSheafData)
     (F : X.Modules) (U : X.affineOpens) (s : Γ(F, U.1)) :
     (∀ (V : X.Opens) (h : V ≤ U.1), ∀ a ∈ J.idealOfOpens V,

@@ -6,9 +6,6 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.ConstructibleExtContinuityFinite
 /-! Algebraic-closure coefficient Ext continuity from finite coefficient continuity.
-Source: blueprint `lemma-continuity-ext-out-constructible-complex--1`, clause (1), using the
-finite-subextension presentation of the algebraic closure.
-(blueprint: lem-finite-window-ind-ext-bound-algcl-continuity)
 The coefficient descent and transport of filtered derived-Hom factorizations
 remain to be formalized.
 -/

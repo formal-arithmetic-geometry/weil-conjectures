@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.AlternatingCechSheafConstruction
 
 /-! # Increasing-tuple sheaf terms as products of open direct images
 
-Source: Stacks Project, Tag 01FM, intersection terms; the over-site restriction adjunction.
-(blueprint: lem-pc-s3-alternating-cech-sheaf-terms).
+## References
+
+* Stacks Project, Tag 01FM
 -/
 
 @[expose] public section
@@ -105,22 +106,8 @@ private noncomputable def capSheafificationIsoPushforward
   exact (asIso (PresheafOfModules.sheafificationAdjunction
     (𝟙 X.ringCatSheaf.obj)).counit).app H
 
-/-- Each increasing-tuple term is a product of direct images from its intersections.
-Source: Stacks Project, Tag 01FM, ordered intersection terms, and the construction
-paragraph of lem-pc-s3-affine-alternating-cech-augmented-construction.
-(blueprint: lem-pc-s3-alternating-cech-sheaf-terms).
-
-Proof: The intersection presheaf with sections G(V intersect W) is isomorphic to the
-underlying presheaf of the extension from the over site of W: categorical products of
-opens are their infima. These comparison maps are restrictions along the canonical
-intersection isomorphisms and are O(V)-linear. Sheafification of that presheaf is the
-extension sheaf, by the sheafification counit. The over-site equivalence identifies
-G.over W with G restricted to W.toScheme. Uniqueness of right adjoints identifies
-extension from the over site with scheme module pushforward. Finally module
-sheafification is additive and a left adjoint, so it preserves finite biproducts
-and hence finite products. Take the product of the preceding isomorphisms over the
-increasing tuples. Empty tuple types give empty products on both sides. No covering,
-affineness or quasi-coherence hypothesis is needed. -/
+/-- Each increasing-tuple term is a product of direct images from its intersections
+(Stacks, Tag 01FM). -/
 theorem alternatingCechSheafComplex_terms
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (k : ℕ) :
     Nonempty ((alternatingCechSheafComplex U G).X k ≅

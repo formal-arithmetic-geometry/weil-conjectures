@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineBasisRingActionGluing
 
 /-! # Extending a balanced action to the direct-image algebra
 
-Source: Stacks Project, Tags 01LX, 01SB and the relative-spectrum paragraph of 0897.
-(blueprint: lem-weil-pbc-balanced-action-direct-image-module).
+## References
+
+* Stacks Project, Tags 01LX, 01SB and 0897
 -/
 
 @[expose] public section
@@ -36,28 +37,7 @@ private theorem affine_section_ext {X : Scheme.{u}} (M : X.Modules)
   exact ⟨V, hVU, hzV, h ⟨V, hV⟩ (homOfLE hVU)⟩
 
 /-- Extend the balanced action to the direct-image structure algebra, without realizing
-its module on the base-changed scheme.
-
-Source: Stacks Project, Tags 01LX and 01SB; Tag 0897, relative-spectrum paragraph.
-(blueprint: lem-weil-pbc-balanced-action-direct-image-module).
-
-Proof: Use balancedAction_affine_sections to obtain the unique balanced tensor
-actions on all affine opens and their restriction compatibility. Extend them to
-all opens by affineBasis_ringAction_gluing. Sheaf separatedness, using the affine
-basis, extends the scalar and B-generator identities from affine opens to every
-open. For the scalar identity use naturality of pi-sharp and semilinearity of
-M's original restrictions. For the B identity use composition of structure-sheaf
-restrictions and naturality of rho(b). Each extended ring map to additive
-endomorphisms gives a module structure on the existing abelian sections of M.
-The naturality equation is exactly semilinearity for those module structures.
-PresheafOfModules.ofPresheaf therefore constructs the new module presheaf; its
-underlying abelian presheaf is M's, so its sheaf condition is the original one.
-The scalar identity makes the identity maps on sections linear in both
-directions after restriction of scalars. They form the isomorphism e, whose
-inverse identities are pointwise reflexivity. The B identity is the requested
-equation since e is identity on sections. All data is constructed explicitly
-from the unique action, rather than chosen from a bare module-existence claim.
-Empty opens and the zero module are included by the same sheaf argument. -/
+its module on the base-changed scheme (Stacks, Tags 01LX, 01SB and 0897). -/
 theorem balancedAction_directImage_module
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of A))

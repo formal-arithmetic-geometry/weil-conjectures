@@ -30,21 +30,8 @@ private lemma sectionsEquiv_naturality (X : Scheme.{u})
   rw [Adjunction.homEquiv_naturality_right]
   rfl
 
-/-- Ext pullback is the homology map of the unit section map followed by the lift.
-Source: Stacks Project, Tag 01F8, equations 01F9 and 01FA; site version Tag 08J6.
-(blueprint: lem-weil-pbc-ext-pullback-resolution-sections)
-
-Proof: Represent an Ext class by a cocycle from the constant integer sheaf into
-its chosen injective resolution. Apply exact inverse image, precompose with the
-constant-sheaf comparison, and postcompose with φ. The augmentation homotopy hφ
-identifies this cocycle with the Ext pullback, using localization on the K-injective
-target. Evaluation at 1 transforms the inverse-image cocycle into the section-unit
-map η; evaluation commutes with φ by naturality of the constant-sheaf adjunction.
-Thus the two maps of cocycles agree after evaluation. Coboundaries map to
-coboundaries, so this equality descends to homology. The explicit extSectionsIso
-is exactly the Ext/resolution equivalence followed by this evaluation map.
-Degree zero has no incoming boundaries in the chosen resolutions; the same
-argument works there, and for the zero sheaf and empty schemes. -/
+/-- Ext pullback is the homology map of the unit section map followed by the lift
+(Stacks, Tags 01F8, 01F9, 01FA and 08J6). -/
 theorem extPullback_resolution_sections
     {X X' : Scheme.{u}} (g' : X' ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)

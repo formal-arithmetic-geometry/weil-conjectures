@@ -12,8 +12,9 @@ import Mathlib.Data.Fin.Tuple.Sort
 /-!
 # The outer faces of a duplicated first repeat
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equation 20.23.6.2.
-(blueprint: lem-pc-alternating-cech-repeat-outer-faces)
+## References
+
+* Stacks Project, Tag 01FM
 -/
 
 @[expose] public section
@@ -209,20 +210,7 @@ private theorem outer_term_pair (X : Scheme.{u}) {I : Type v} [LinearOrder I]
     rw [hr, hb, ite_eq_right hja, pow_succ]
     ring
 
-/-- The faces outside the tripled value cancel the incoming homotopy boundary.
-
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equation 20.23.6.2
-and the verification omitted immediately after it.
-Proof: Write q for duplication at a. For each deletion j<a from the duplicated tuple,
-pair its term with deletion j from t followed by duplication at a-1. For each
-j>a+2, pair with deletion j-1 from t followed by duplication at a. The resulting
-tuples agree and their restriction composites agree, since Opens is a thin
-category. The sign products differ by a factor -1. In the incoming differential,
-the terms deleting a and a+1 have the same tuple and equal restrictions and
-opposite signs, so cancel, regardless of where that face's first repeat lies.
-Every other incoming term is one of the paired terms just described. Distribute
-the finite sums and cancel these pairs.
-(blueprint: lem-pc-alternating-cech-repeat-outer-faces) -/
+/-- The faces outside the tripled value cancel the incoming homotopy boundary (Stacks, Tag 01FM). -/
 theorem cechRepeatOuterFaces (X : Scheme.{u}) {I : Type v} [LinearOrder I]
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})
     (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤))) (p : ℕ) (hp : 0 < p)

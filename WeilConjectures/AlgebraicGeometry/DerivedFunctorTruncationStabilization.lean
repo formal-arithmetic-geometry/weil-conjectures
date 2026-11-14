@@ -18,8 +18,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 /-!
 # Stabilization of derived cohomology on the lower truncation tower
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 08D4, proof of (2)
-(blueprint: lem-pc-derived-functor-truncation-stabilization).
+## References
+
+* Stacks Project, Derived Categories of Schemes, Tag 08D4
 -/
 
 @[expose] public section
@@ -52,26 +53,7 @@ private theorem isZero_rightDerived_shifted_single
 
 /-- An additive functor with right derived functors vanishing in degrees at least `N`
 on quasi-coherent modules induces isomorphisms on degree-`i` cohomology between successive
-lower truncations whenever `n ≥ N - i`. The source truncation is `τ≥(-n) E` and the target
-is `τ≥(-n+1) E = τ≥(-(n-1)) E`; the map is the standard t-structure's canonical one.
-Source: Stacks Project, Tag 08D4, proof of (2)
-(blueprint: lem-pc-derived-functor-truncation-stabilization).
-
-Proof:
-1. Use the successive lower-truncation triangle
-`H^(-n)(E)[n] → E_n → E_(n-1) → H^(-n)(E)[n+1]`
-(`lem-pc-derived-lower-truncation-step-triangle`).
-2. Apply the unbounded triangulated right derived functor
-(`lem-pc-right-derived-functor-triangulated`). Its commutation with shifts, the cohomology
-shift isomorphism (`lem-sp-derived-cohomology-shift`), and the source library's comparison
-`homologyRightDerivedFunctorObjSingleFunctorIso` identify the endpoint in degree `j`
-with `R^(n+j)F(H^(-n)(E))` for `n+j ≥ 0`. The comparison uses the bounded-below single
-identification (`lem-sp-derived-functor-single-identification`) and the compatibility of
-bounded-below and unbounded right derived functors.
-3. The cohomology sheaf is quasi-coherent by `E.property`. For `j = i` and `j = i+1`,
-`n+j ≥ N ≥ 0`, so the endpoint objects vanish by `hvan`, including at equality.
-4. The long exact cohomology sequence (`lem-sf-derived-homology-long-exact`) makes the
-transition map monic and epic, hence an isomorphism. -/
+lower truncations whenever `n ≥ N - i` (Stacks, Tag 08D4). -/
 theorem isIso_rightDerivedFunctor_lowerTruncation_step
     (X : Scheme.{u})
     [HasDerivedCategory.{w₁} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

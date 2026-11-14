@@ -15,7 +15,6 @@ The construction follows the finite-support coefficient model: choose an algebra
 algebraic closure over the finite intermediate field, express each section through its finite
 subextension, and transport the resulting coproduct decomposition through pullback, tensor, and
 the derived category. The complete coordinate construction is left as this named stage-3 item.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -33,22 +32,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
-/-- Coherent coefficient sections whose scalar actions decompose the derived extension unit.
-Source: Compatibility.lean, scalar-action calculation, and FiniteSubextension.lean, the
-finite-field-valued section model.
-(auxiliary; not a blueprint node)
-
-Proof: choose an algebraic E-basis of Omega. Every finite-field-valued continuous function
-has finite coordinate support: its values span a finite-dimensional E-space after taking the
-compositum of its finite field with E. Coordinates are continuous by finite-dimensional
-linear topology over Q_ell. Thus the restricted regular condensed Omega-module is a coproduct
-of regular E-modules, with basis-vector summand maps. Pull the basis vectors to each scheme
-by the monoidal point inverse image. The monoidal composition comparison proves the displayed
-coherence equation. Tensor the coproduct decomposition with each module: the legs are the
-extension unit followed by scalar multiplication by these sections. Exactness of coproducts
-and scalar extension descends this natural decomposition termwise through the homotopy and
-unbounded derived localizations. Naturality transports it to arbitrary derived objects, and
-uniqueness of coproducts handles any chosen copower. No direct image enters this argument. -/
+/-- Coherent coefficient sections whose scalar actions decompose the derived extension unit. -/
 theorem exists_condensedQbar_scalar_basis_unit :
     ∃ (I : Type (u + 1))
       (b : ∀ Z : Scheme.{u}, I →

@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyF
 
 /-! # The restriction mate for the intersection of two opens
 
-Source: Stacks Project, Tags 08FE and 08DG.
-(blueprint: lem-sc-derived-open-intersection-mate-iso).
+## References
+
+* Stacks Project, Tags 08FE and 08DG
 -/
 
 @[expose] public section
@@ -51,25 +52,7 @@ set_option synthInstance.maxSize 2048 in
 -- The transported overlap restriction requires additional instance search.
 -- The derived composition comparison requires a larger elaboration budget.
 /-- Restricting the canonical mate from the direct image on P to the direct image
-on O ∩ P gives an isomorphism on O. This concerns a single direct-image summand;
-it does not construct a difference diagram or assert invertibility of a matrix.
-Source: Stacks Project, Cohomology, Tag 08FE and the split restriction calculation
-in the proof of Tag 08DG.
-(blueprint: lem-sc-derived-open-intersection-mate-iso).
-
-Proof: open direct image is fully faithful on the derived category, since its
-underived functor is fully faithful and preserves K-injective complexes as the
-right adjoint of exact restriction. Thus the counits of the supplied adjP and
-adjW are invertible, for any adjunctions on these fixed functors. Let f be the
-specified mate. The inverse law of adjW.homEquiv identifies rW.map(f) followed
-by the W counit with eP.inv followed by sP.map of the P counit. Both factors
-on the latter side are invertible; cancelling the W counit proves rW.map(f)
-invertible. Tag 08FE puts both source and target restricted to O in the
-essential image of derived direct image from W to O. Restriction to W reflects
-isomorphisms between these objects by full faithfulness and naturality of the
-adjunction unit, as proved by derived_open_intersection_isIso_of_restriction.
-Applying that theorem to f proves the stated conclusion. Empty opens and the
-empty intersection are included without a covering assumption. -/
+on O ∩ P gives an isomorphism on O (Stacks, Tags 08FE and 08DG). -/
 theorem derived_open_intersection_mate_isIso
     (X : Scheme.{u}) (O P W : X.Opens) (hW : W = O ⊓ P) (i : W ⟶ P)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

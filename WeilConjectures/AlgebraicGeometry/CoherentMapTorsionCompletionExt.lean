@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentMapTorsionCompletionExtZero
 
 /-! # Detecting maps using completion and a torsion-kernel comparison
 
-Source: Stacks Project, Tag 0889, uniqueness argument, and Tag 088A, final paragraph.
+## References
+
+* Stacks Project, Tags 0889 and 088A
 -/
 
 @[expose] public section
@@ -23,21 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Completion and composition with a map having power-torsion kernel detect maps.
-Only the kernel of b needs a bound; its cokernel plays no role.
-Source: Stacks Project, Tag 0889, uniqueness argument, and Tag 088A, final paragraph
-(blueprint: lem-weil-pbc-coherent-map-torsion-completion-ext).
-
-Proof: choose a positive exponent where the kernel of b embeds into the quotient
-of Q by that ideal power. This finite-level separation follows from Artin--Rees
-on a finite affine cover, since the kernel is annihilated by a power of K.
-The difference f-g factors through the kernel of b. Equality of completion maps
-implies equality of their components at the chosen exponent. Precomposing that
-component equality with the source quotient projection shows that f-g maps to
-zero in the quotient of Q. Cancel the monomorphic map from the kernel to that
-quotient: the factor is zero, so f-g is zero and f=g. For K the unit ideal,
-the kernel is zero; for K zero, the quotient is Q. The empty scheme has only
-zero maps.
--/
+Only the kernel of b needs a bound; its cokernel plays no role (Stacks, Tags 0889 and 088A). -/
 theorem coherentMap_torsion_completion_ext
     {X : Scheme.{u}} [IsNoetherian X] (K : X.IdealSheafData)
     (P Q R : CoherentModules X) (b : Q ⟶ R)

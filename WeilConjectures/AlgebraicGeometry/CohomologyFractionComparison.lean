@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.CohomologySectionDivision
 
 /-! # Comparison from cohomology fractions
 
-Source: Stacks Project, Tag 09MR, Mayer--Vietoris paragraph.
-(blueprint: lem-sc-cohomology-fraction-comparison)
+Stacks Project, Tag 09MR.
 -/
 
 @[expose] public section
@@ -27,19 +26,7 @@ namespace AlgebraicGeometry
 
 /-- Restriction to the nonvanishing open followed by division by the section descends
 through the explicit fraction relations, simultaneously on every open and in every degree.
-No assertion of exactness or bijectivity is made.
-
-Source: Stacks Project, Tag 09MR, canonical map preceding the proof.
-Proof: On S the section s is a free generator of L (Tag 01CY). Hence multiplication
-by its n-th tensor power identifies the restricted F with the restricted n-th twist.
-Restrict cohomology classes to W intersect S and apply the inverse of this identification.
-These additive maps from each summand extend to the direct sum. Multiplication by s^b
-followed by division by s^(n+b) is division by s^n, so each generating relation maps
-to zero. Their additive closure also maps to zero. The quotient universal property
-therefore gives c. Applying multiplication by s^n cancels its inverse and gives the
-asserted formula. This construction works without compactness or quasi-coherence;
-for an empty nonvanishing open the target is zero, and for n=0 it is restriction.
-(blueprint: lem-sc-cohomology-fraction-comparison). -/
+No assertion of exactness or bijectivity is made (Stacks, Tag 09MR). -/
 theorem exists_cohomologyFraction_comparison (X : Scheme.{uMV}) (L F : X.Modules) [L.IsInvertible]
     (s : Γ(L, ⊤))
     (S : X.Opens) (_hS : (S : Set X) = nonvanishingLocus L s) :

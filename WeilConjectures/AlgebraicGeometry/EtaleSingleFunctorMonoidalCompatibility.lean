@@ -14,8 +14,9 @@ import WeilConjectures.CategoryTheory.FlatPairingPullbackAssembly
 
 /-! # Monoidal compatibility of degree-zero etale sheaves
 
-Source: Stacks Project, Cohomology, Tags 06YQ and 06YU.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 06YQ and 06YU
 -/
 
 @[expose] public section
@@ -45,30 +46,8 @@ private theorem singleFunctorFlatPairing_eq
   unfold singleFunctorFlatPairing
   rfl
 
-/-- Canonical flat degree-zero pairings preserve associativity, symmetry and exact pullback.
-
-Source: Stacks Project, Cohomology, Tags 06YQ and 06YU; the canonical tensor/counit
-comparisons in `Derived.Invertible` and `Derived.UpperStarMonoidal.Comparison`.
-(auxiliary; not a blueprint node).
-
-Proof: the degree-zero cochain functor has the single/total-tensor comparison as its
-tensorator and the identity unit comparison. Naturality, associativity, units and braiding
-are checked on the sole nonzero summand in bidegree (0,0), respectively tridegree (0,0,0).
-Every other summand has a zero factor, and the Koszul sign on this summand is one.
-Compose with the strong braided homotopy quotient and lax braided localization Qh.
-The single/quotient comparison is the identity on objects and maps; its flat tensorator
-expands to exactly singleFunctorObjTensorIso.hom. The ordinary associativity or symmetry
-equality, functoriality and the corresponding lax braided coherence equation therefore
-give the first two fields for arbitrary pairings.
-For inverse image, the single/termwise-exact-functor comparison respects the same
-nonzero tensor summand and the unit. The tensor/counit equation for derived inverse
-image shows that its derived counit is monoidal, after cancelling the invertible oplax
-tensorators. Whisker the monoidal comparisons and identify their composite with
-singleFunctorCompLeftDerivedUpperStarIso.hom by the exact-functor counit factorization.
-Its tensor equation, naturality, and the ordinary pullback square imply the final field.
-All flat factors used in these computations are among the explicit flatness hypotheses;
-no flatness of arbitrary sheaves or of the right-hand factor is required. The argument
-also applies to zero objects, zero pairings and empty schemes. -/
+/-- Canonical flat degree-zero pairings preserve associativity, symmetry and exact pullback
+(Stacks, Tags 06YQ and 06YU). -/
 theorem etaleSingleFunctor_monoidalCompatibility
     (B : Type uB) [Category.{u + 1} B] [Abelian B]
     [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]

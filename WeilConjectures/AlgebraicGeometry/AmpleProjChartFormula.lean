@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Constructing a section-ring morphism with the fraction formula
 
-Source: Stacks Project, Properties, Tag 01PZ, and Constructions, Tag 01N8.
+## References
+
+* Stacks Project, Tags 01PZ and 01N8
 -/
 
 @[expose] public section
@@ -27,25 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The local quotient maps glue to a morphism with the homogeneous fraction formula.
-This states the construction and the algebraic formula, without its inverse-image clause.
-Source: Stacks Project, Properties, Tag 01PZ, proof; Constructions, Tag 01N8, construction
-of the local quotient maps (blueprint: lem-sc-ample-proj-canonical-map-chart-formula).
-
-Proof: For each positive-degree section s, trivialize its tensor power on X_s by
-nonvanishing_section_trivializes. Tensoring this trivialization constructs division by
-s^n, including on the empty open and for n = 0. Send a homogeneous fraction a/s^n to
-the coefficient of a in that basis. Equality of fractions can be checked after multiplying
-by a power of s; this becomes cancellation of a free generator, so the map is well-defined.
-The tensor multiplication laws give additivity, multiplicativity, and preservation of one.
-The affine morphism correspondence and the Proj chart isomorphism turn this ring map into
-a morphism X_s to D_+(s). For sections s and t of degrees d and e, the function t^d/s^e
-on D_+(s) pulls back to the same quotient of sections. Its unit locus is X_s intersect X_t,
-by the residue-field criterion for nonvanishing. On that intersection the two maps factor
-through D_+(st). A fraction a/(st)^n pulls back to division by (st)^n from either side,
-so the affine morphism correspondence proves their agreement. Glue over the assumed
-cover using Scheme.Cover.glueMorphisms. The chart pullbacks restrict on each covering open
-to the constructed quotient maps. Their fraction identities therefore agree locally and
-hence globally as sections of the relevant tensor power. -/
+(Stacks, Tags 01PZ and 01N8). -/
 theorem exists_sectionRing_proj_chart_formula (X : Scheme.{v}) (L : X.Modules)
     [L.IsInvertible]
     (hcover : ∀ x : X, ∃ (d : ℕ) (s : sectionRingGrade L d),

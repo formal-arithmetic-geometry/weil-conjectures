@@ -11,8 +11,10 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenTestObject
 import WeilConjectures.AlgebraicGeometry.DerivedOpenTensorHomBijective
 
 /-! # Tensor-stable test objects for derived open restriction
-Source: Stacks Project, Tags 00A7, 08BT and 06YB.
-(blueprint: lem-sc-derived-open-tensor-test-objects).
+
+## References
+
+* Stacks Project, Tags 00A7, 08BT and 06YB
 -/
 
 @[expose] public section
@@ -28,22 +30,8 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 set_option synthInstance.maxSize 2048
 
 /-- Every object on an open admits an extended test object on the ambient scheme,
-from which restriction is bijective on Hom sets, also after tensoring.
-Source: Stacks Project, Tags 00A7, 08BT and 06YB.
-(blueprint: lem-sc-derived-open-tensor-test-objects).
-
-Proof: let J be exact extension by zero, transported through Modules.overEquiv and
-then derived using the exact-functor localization adjunction. For A take B = J(A).
-The unit A → R(B) is invertible since restriction of extension by zero is the
-identity, including for the empty open. The adjunction and this unit identify
-restriction on Hom(B,E) with a bijection for every E. The counit J(R(C)) → C is an
-isomorphism whenever C has zero cohomology stalks outside U: inside U its restriction
-is invertible by the triangle identity, and outside U both stalk cohomologies vanish.
-This applies to B and B tensor L. Indeed represent L by a K-flat complex; B has zero
-stalk cohomology outside U, and the stalkwise K-flat tensor calculation gives the
-same vanishing for B tensor L. Thus B tensor L is also in the essential image of J,
-and the same adjunction proves bijectivity of restriction on Hom(B tensor L,E).
-No boundedness, finite presentation, or quasi-compactness is used. -/
+from which restriction is bijective on Hom sets, also after tensoring
+(Stacks, Tags 00A7, 08BT and 06YB). -/
 theorem exists_derivedOpen_tensorTestObject
     (X : Scheme.{uX}) (U : X.Opens)
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

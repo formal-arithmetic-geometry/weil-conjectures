@@ -14,9 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 
 /-! # Finite free evaluation over the direct-image algebra
 
-Source: Stacks Project, Morphisms, Tag 01SB; Properties, Tag 01PB;
-Cohomology of Schemes, Tag 0897, proof
-(blueprint: lem-weil-pbc-affine-pushforward-free-evaluation).
+## References
+
+* Stacks Project, Tags 01SB, 01PB and 0897
 -/
 
 @[expose] public section
@@ -64,23 +64,8 @@ private noncomputable def scalarOver (V : X.Opens) :=
 set_option maxHeartbeats 500000 in
 -- Transport through the over-site and scalar restriction unfolds several ring actions.
 /-- A finite free evaluation map into the algebra-valued direct image is epi on an
-   affine open exactly when its map on sections over that open is surjective.
-   Source: Stacks Project, Morphisms, Tag 01SB; Schemes, Tag 01IC
-   (blueprint: lem-weil-pbc-affine-pushforward-free-evaluation).
-
-Proof: Set W = f⁻¹ V and B = O_U(W). Both W and V are affine. The finite free
-A|V-module is the direct image of O_W^I: finite coproducts are finite products,
-and pushforward preserves products, compatibly with their basis sections.
-The given sections define a map O_W^I → F|W. By the affine tilde-Gamma
-correspondence, its image on W is the module image of B^I → F(W).
-If the direct-image evaluation is epi, every section on V lifts locally.
-Pulling the covering back to W puts its corresponding section in the sheaf
-image on W, hence in the module image by the affine-sections image formula.
-Conversely, surjectivity of B^I → F(W) makes O_W^I → F|W epi. On every affine
-V' contained in V, W' = f⁻¹ V' is affine. Exactness of affine sections makes
-O_U(W')^I → F(W') surjective. Thus the direct-image evaluation is surjective
-on sections on an affine basis of V, so it is locally surjective and epi.
-This uses only quasi-coherence of F and imposes no finite-type condition. -/
+   affine open exactly when its map on sections over that open is surjective
+(Stacks, Tags 01SB and 01IC). -/
 theorem affine_pushforward_free_evaluation [IsAffineHom f]
     (F : U.Modules) (hF : F.IsQuasicoherent) (V : X.Opens) (hV : IsAffineOpen V)
     (I : Type u) [Finite I]

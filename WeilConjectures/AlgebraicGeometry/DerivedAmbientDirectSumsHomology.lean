@@ -27,8 +27,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
 
-/-- Exact colimits commute with homology of short complexes. The proof follows the
-functor-category comparison used by `FiniteEtaleCechFilteredColimit`. -/
+/-- Exact colimits commute with homology of short complexes. -/
 private theorem shortComplexHomologyColimit
     (C : Type*) [Category* C] [Abelian C]
     (I : Type u) [SmallCategory I] [HasColimitsOfShape I C]
@@ -110,19 +109,7 @@ local instance instHasColimitsOfShape_derivedAmbientDirectSumsHomology
   exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
 
 /-- Cohomology of a termwise coproduct is the coproduct of the cohomologies, with the
-canonical map induced by the coprojections.
-Source: Stacks Project, Derived Categories of Schemes, proof of Lemma 08DT.
-(blueprint: lem-pc-derived-ambient-direct-sums-homology)
-
-Proof: Coproducts of module sheaves are exact. Apply the exact colimit functor to
-short complexes and use its homology comparison isomorphism; evaluation at the three
-terms shows this is the colimit of the diagram of short complexes. The short complex
-in degrees q-1, q, q+1 of a cochain complex is also computed termwise, so its homology
-functor preserves coproducts. The natural isomorphism identifying homology after Q
-with complex homology transfers this preservation to Q followed by derived homology.
-Thus the comparison map induced by Q of the coprojections is invertible. The map in
-the statement is its composite with the coproduct of homology of e(i).inv, which is
-also invertible. This applies to the empty family and to every integer degree. -/
+canonical map induced by the coprojections (Stacks, Tag 08DT). -/
 theorem derivedAmbientDirectSumsHomology (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (I : Type u) (E : I → schemeDerivedCategory X)

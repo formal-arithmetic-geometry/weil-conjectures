@@ -10,8 +10,9 @@ import WeilConjectures.CategoryTheory.RingedScalarTensorUnit
 
 /-! # The actual quotient coefficient tower and its tensor model
 
-Source: Stacks Project, proetale.tex, lemma-naive-completion (099M).
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 099M
 -/
 
 @[expose] public noncomputable section
@@ -60,24 +61,8 @@ private theorem quotientTensorLevel_unit
     ((adicFiniteUnit f).naturality eP.hom).symm
 
 /-- The strict quotient tensor model computes the normalized scalar-adjoint tower.
-No Koszul system, generating list, Noetherian hypothesis, or limit occurs here.
-
-Source: Stacks Project, proetale.tex, lemma-naive-completion (099M), and
-sites-cohomology.tex, derived change of rings (06YY).
-(auxiliary; not a blueprint node).
-
-Proof: the sheaf tensor symmetry and balancing identify P tensor_R B_n[0] with
-restriction of the termwise scalar extension of P to B_n. K-flatness of P makes
-its universal derived scalar comparison invertible. Compose its inverse with
-resFactors to obtain the level isomorphisms for Q(P). The ordinary map x to
-x tensor 1 is the scalar adjunction unit, by the normalization defining
-adicFiniteUnit and adicResidueScalarAdjunction. The quotient successor sends
-x tensor s to x tensor bar(s). Under scalar adjunction it is the reduction of
-the preceding counit: both send a balanced tensor to the product of its scalar
-factors. Thus the level isomorphisms commute with successors, and hence all tower
-maps. Finally apply naturality of the adjunction unit to eP. This gives e and the
-displayed equations. All formulas work for zero rings and zero complexes, and do
-not require the quotient to be flat or perfect over R. -/
+No Koszul system, generating list, Noetherian hypothesis, or limit occurs here
+(Stacks, Tags 099M and 06YY). -/
 theorem adicResidue_quotient_tensor_model
     (M : AdicResidueLocalDerived.{u, v} X J U)
     (P : Cx ((completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U))

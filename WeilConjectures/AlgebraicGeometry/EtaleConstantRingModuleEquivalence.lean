@@ -14,9 +14,9 @@ public import Mathlib.CategoryTheory.Sites.LocallyBijective
 /-!
 # Extending constant coefficients to the constant ring sheaf
 
-Source: Stacks Project, Modules on Sites, Sections 093I and 03CV;
-Sites Example 0H7J.
-(blueprint: proposition-unbounded-comparison-finite-coefficients--1)
+## References
+
+* Stacks Project, Tags 093I, 03CV and 0H7J
 -/
 
 @[expose] public noncomputable section
@@ -29,15 +29,13 @@ namespace AlgebraicGeometry.Scheme
 
 variable (Y : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- The sheafification of the constant ring presheaf. 
-(blueprint: proposition-unbounded-comparison-finite-coefficients--1)
+/-- The sheafification of the constant ring presheaf.
 -/
 abbrev etaleConstantModuleRing : Sheaf Y.smallEtaleTopology RingCat.{u + 1} :=
   (constantSheaf Y.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of Λ)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A module-valued presheaf, viewed as modules over the constant ring presheaf. 
-(blueprint: proposition-unbounded-comparison-finite-coefficients--1)
+/-- A module-valued presheaf, viewed as modules over the constant ring presheaf.
 -/
 def etaleConstantModulePresheaf (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     PresheafOfModules.{u + 1} ((Functor.const Y.Etaleᵒᵖ).obj (RingCat.of Λ)) :=
@@ -51,8 +49,7 @@ def etaleConstantModulePresheaf (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 
     (fun {_ _} f r m ↦ (J.obj.map f).hom.map_smul r m)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Extend the scalar action by gluing, keeping the underlying abelian sheaf. 
-(blueprint: proposition-unbounded-comparison-finite-coefficients--1)
+/-- Extend the scalar action by gluing, keeping the underlying abelian sheaf.
 -/
 def etaleConstantModuleRealization
     (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -65,8 +62,7 @@ def etaleConstantModuleRealization
     (𝟙 _)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Extension of the constant scalar action, on objects and morphisms. 
-(blueprint: proposition-unbounded-comparison-finite-coefficients--1)
+/-- Extension of the constant scalar action, on objects and morphisms.
 -/
 def etaleConstantModuleFunctor :
     Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⥤
@@ -84,8 +80,7 @@ def etaleConstantModuleFunctor :
   map_id J := by ext X x; rfl
   map_comp f g := by ext X x; rfl
 
-/-- The scalar extension keeps the underlying abelian presheaf. 
-(blueprint: proposition-unbounded-comparison-finite-coefficients--1)
+/-- The scalar extension keeps the underlying abelian presheaf.
 -/
 def etaleConstantModuleUnderlyingIso
     (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -94,8 +89,7 @@ def etaleConstantModuleUnderlyingIso
   Iso.refl _
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Restrict a module over the constant ring sheaf to its constant scalars. 
-(blueprint: proposition-unbounded-comparison-finite-coefficients--1)
+/-- Restrict a module over the constant ring sheaf to its constant scalars.
 -/
 def etaleConstantModuleRestriction
     (M : SheafOfModules.{u + 1} (etaleConstantModuleRing Y Λ)) :
@@ -113,8 +107,7 @@ def etaleConstantModuleRestriction
     exact M.isSheaf
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Restriction of scalars on sheaves and their morphisms. 
-(blueprint: proposition-unbounded-comparison-finite-coefficients--1)
+/-- Restriction of scalars on sheaves and their morphisms.
 -/
 def etaleConstantModuleRestrictionFunctor :
     SheafOfModules.{u + 1} (etaleConstantModuleRing Y Λ) ⥤
@@ -129,8 +122,7 @@ def etaleConstantModuleRestrictionFunctor :
   map_comp f g := by ext X x; rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The identity on sections identifies restriction after extension with the original sheaf. 
-(blueprint: proposition-unbounded-comparison-finite-coefficients--1)
+/-- The identity on sections identifies restriction after extension with the original sheaf.
 -/
 def etaleConstantModuleUnitIso :
     𝟭 (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ≅
@@ -153,8 +145,7 @@ def etaleConstantModuleUnitIso :
     rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The universal property of scalar extension supplies the counit. 
-(blueprint: proposition-unbounded-comparison-finite-coefficients--1)
+/-- The universal property of scalar extension supplies the counit.
 -/
 def etaleConstantModuleCounitHom
     (M : SheafOfModules.{u + 1} (etaleConstantModuleRing Y Λ)) :
@@ -168,8 +159,7 @@ def etaleConstantModuleCounitHom
       (PresheafOfModules.homMk (𝟙 _) (fun _ _ _ ↦ rfl))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The counit is the identity on underlying abelian presheaves. 
-(blueprint: proposition-unbounded-comparison-finite-coefficients--1)
+/-- The counit is the identity on underlying abelian presheaves.
 -/
 lemma etaleConstantModuleCounitHom_underlying
     (M : SheafOfModules.{u + 1} (etaleConstantModuleRing Y Λ)) :
@@ -184,8 +174,7 @@ lemma etaleConstantModuleCounitHom_underlying
   exact h
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Extending the restricted scalar action recovers the original ringed-site module. 
-(blueprint: proposition-unbounded-comparison-finite-coefficients--1)
+/-- Extending the restricted scalar action recovers the original ringed-site module.
 -/
 def etaleConstantModuleCounitIso :
     etaleConstantModuleRestrictionFunctor Y Λ ⋙ etaleConstantModuleFunctor Y Λ ≅
@@ -218,29 +207,7 @@ def etaleConstantModuleCounitIso :
     rfl
 
 /-- Extending to the constant ring sheaf is an equivalence of categories.
-
-Source: Stacks Project, Modules on Sites, Sections 093I and 03CV, and Sites Example 0H7J.
-The equivalence argument is the constant-scalar construction in steps 1--3 of
-lem-weil-pbc-injective-etale-constant-ring-module.
-(blueprint: proposition-unbounded-comparison-finite-coefficients--1)
-
-Proof: Let R be the sheafification of the constant ring presheaf. For a module-valued
-sheaf J, view its underlying abelian presheaf as modules over the constant ring
-presheaf. Apply the module-sheafification construction to the identity map of the
-underlying abelian sheaf. This extends the scalar action to R and leaves the
-abelian presheaf unchanged. The same construction on morphisms gives a functor F.
-Restrict scalars along the constant-ring sheafification map to define G. Its
-underlying abelian presheaf is still the original sheaf, so it is a module-valued
-sheaf. The canonical map to module sheafification is linear and is the identity
-on sections. Its bijectivity gives the natural isomorphism from J to G(F(J)).
-For M over R, the universal property of module sheafification extends the identity
-of the scalar-restricted presheaf to a morphism F(G(M)) to M. The factorization
-identity in that universal property shows that its underlying abelian-presheaf
-map is the identity. Each component is thus a bijective linear map, yielding an
-isomorphism of presheaves of modules and then of sheaves of modules. Naturality
-holds because both maps are the identity on sections. These two natural
-isomorphisms exhibit F and G as inverse equivalences. Neither construction needs
-nonzero scalars or a nonempty scheme. -/
+(Stacks, Sections 093I and 03CV, and Tag 0H7J). -/
 theorem etaleConstantModuleFunctor_isEquivalence :
     (etaleConstantModuleFunctor Y Λ).IsEquivalence :=
   Functor.IsEquivalence.mk' (etaleConstantModuleRestrictionFunctor Y Λ)

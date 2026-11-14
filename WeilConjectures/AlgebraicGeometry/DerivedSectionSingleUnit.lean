@@ -13,8 +13,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 
 /-! # The section pullback and the right-derived unit on singles
 
-Source: Stacks Project, Tag 07A6 and the defining composite unit of the Leray comparison.
-(blueprint: lem-sbc-derived-section-single-unit).
+## References
+
+* Stacks Project, Tag 07A6
 -/
 
 @[expose] public section
@@ -169,23 +170,7 @@ private lemma sections_unit {X Y : Scheme.{v}} (f : Y ⟶ X)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Before taking homology, the unit–Leray pullback intertwines the two
-right-derived units on single sheaves.
-Source: Stacks Project, Tag 07A6 (derived adjunction), and the defining
-right-derived composite unit for Leray.
-(blueprint: lem-sbc-derived-section-single-unit).
-
-Proof: Apply the defining equation for the derived adjunction unit to the
-homotopy-category image of M[0]. Apply Γ to that equation, then use naturality
-of the Γ right-derived unit. The defining equation of rightDerivedFunctorCompIso'
-identifies the composite right-derived unit with the unit of Γ on the source
-scheme. The remaining underived composite is Γ of the adjunction unit followed
-by Γ f_* ≅ Γ, which is ordinary section pullback. Move the exact inverse-image
-single comparison through the result. The mapCochainComplexSingleFunctor and
-singleFunctorIsoCompQ comparisons identify all complexes with their singles;
-their naturality turns the sectionwise map into singleFunctor.map of ordinary
-section pullback. Reassociate and cancel the inverse comparison pairs. Neither
-unit nor section pullback is inverted, so no injectivity of M or of f^*M is needed,
-and the argument applies to empty schemes. -/
+right-derived units on single sheaves (Stacks, Tag 07A6). -/
 theorem derivedSectionPullback_single_unit {Y X : Scheme.{v}} (f : X ⟶ Y)
     (M : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) :
     (let τ : rightDerivedGlobalSections AddCommGrpCat.{v + 1} Y ⟶

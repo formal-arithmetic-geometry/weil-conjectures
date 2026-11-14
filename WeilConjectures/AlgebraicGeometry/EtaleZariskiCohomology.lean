@@ -18,14 +18,15 @@ import WeilConjectures.AlgebraicGeometry.ZariskiDimensionBound
 /-!
 # Étale and Zariski cohomology of quasi-coherent modules on curves
 
-Source: Stacks Project, Descent, Proposition 03DW, part (2), and Cohomology,
-Proposition 02UZ (blueprint: proposition-p-torsion-smooth-proper-curve--3).
-
 The associated étale sheaf of the structure module `Scheme.Modules.unit C` is `Gₐ`.
 Étale cohomology uses `Sheaf.H`; Zariski module cohomology uses the recorded right
 derived functors `RingedSpace.moduleCohomology`, with their underlying additive groups.
 The comparison with the derived-global-sections encoding of étale cohomology is a
-comparison theorem, as specified by `def-weil-pbc-etale-cohomology`.
+comparison theorem.
+
+## References
+
+* Stacks Project, Tags 03DW, 02UZ
 -/
 
 @[expose] public section
@@ -38,14 +39,8 @@ namespace AlgebraicGeometry
 
 set_option autoImplicit false
 
-/-- Étale and Zariski cohomology agree for each quasi-coherent module on a curve.
-Source: Stacks Project, Descent, Proposition 03DW (2)
-(blueprint: proposition-p-torsion-smooth-proper-curve--3).
-
-Proof: Apply `lem-sc-etale-zariski-qcoh-comparison` to `C` and `F`. Invert its
-canonical comparison from Zariski to étale cohomology in degree `q` to obtain the
-stated additive equivalence. The associated sheaf is the one defined by
-`proposition-p-torsion-smooth-proper-curve`, with sections `Γ(U,u^*F)` and pullback restrictions. -/
+/-- Étale and Zariski cohomology agree for each quasi-coherent module on a curve (Stacks, Tag 03DW).
+-/
 theorem etale_zariski_cohomology_agree {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
     (F : C.Modules) [F.IsQuasicoherent] (q : ℕ) :
@@ -60,14 +55,7 @@ theorem etale_zariski_cohomology_agree {k : Type u} [Field k] [IsAlgClosed k]
   exact ⟨(Abelian.Ext.homAddEquiv.{u + 1, u}.trans
     Abelian.Ext.homAddEquiv.{u + 1, u + 1}.symm).trans (c F q).symm⟩
 
-/-- The comparison specialized to `Gₐ = (𝒪_C)_et`.
-Source: Stacks Project, Descent, Proposition 03DW (2), specialized to the structure
-sheaf (blueprint: proposition-p-torsion-smooth-proper-curve--3).
-
-Proof: In step 1, take `F = 𝒪_C`, which is quasi-coherent. By
-`proposition-p-torsion-smooth-proper-curve`, its associated étale sheaf has sections
-`Γ(U,u^*𝒪_C) = Γ(U,𝒪_U)` with addition and the usual pullback restrictions, so this
-is precisely the additive étale sheaf `Gₐ`. This is step 3 of the node's proof. -/
+/-- The comparison specialized to `Gₐ = (𝒪_C)_et` (Stacks, Tag 03DW). -/
 theorem etale_ga_cohomology_agree {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] (q : ℕ) :
     Nonempty (Sheaf.H (@Scheme.Modules.etaleTensorSectionsSheaf C (Scheme.Modules.unit C)
@@ -78,20 +66,7 @@ theorem etale_ga_cohomology_agree {k : Type u} [Field k] [IsAlgClosed k]
   exact etale_zariski_cohomology_agree f (Scheme.Modules.unit C) q
 
 /-- Both cohomology groups of `Gₐ` and `𝒪_C` vanish in degree at least two on a smooth
-connected curve. Source: Stacks Project, Descent, Proposition 03DW (2), and Cohomology,
-Proposition 02UZ (blueprint: proposition-p-torsion-smooth-proper-curve--3).
-
-Proof:
-1. As in step 1, use `lem-sc-etale-zariski-qcoh-comparison` for the structure module
-   to identify the two additive groups.
-2. By `def-sc-curves`, `C` is finite type over the field `k` and has dimension at most
-   one. The spectrum of a field is Noetherian, so
-   `lem-weil-pbc-finite-type-over-noetherian` makes `C` Noetherian. For `2 ≤ q`, we have
-   `q > dim C`. Apply `lem-sc-noetherian-cohomology-above-dimension` to obtain zero
-   Zariski cohomology. This is step 2 of the node's proof.
-3. The associated structure module sheaf is `Gₐ` by
-   `proposition-p-torsion-smooth-proper-curve`. Transport the vanishing across the comparison
-   of step 1. This is step 3 of the node's proof. -/
+connected curve (Stacks, Tags 03DW and 02UZ). -/
 theorem subsingleton_etale_ga_and_structure_cohomology {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]
     (q : ℕ) (hq : 2 ≤ q) :

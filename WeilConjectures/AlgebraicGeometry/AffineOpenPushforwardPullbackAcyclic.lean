@@ -18,9 +18,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Acyclicity after pullback of an affine-open direct image
 
-Source: Stacks Project, Tag 02KG, and the affine intersection paragraphs of
-`lem-pc-s3-affine-alternating-cech-resolution-core`.
-(blueprint: lem-pc-s3-affine-open-pushforward-pullback-acyclic).
+## References
+
+* Stacks Project, Tag 02KG
 -/
 
 @[expose] public section
@@ -31,21 +31,8 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry
 
-/-- Arbitrary base change of an affine-open direct image is acyclic over the new affine base.
-Source: Stacks Project, Tag 02KG; parent resolution node, affine intersection paragraph.
-(blueprint: lem-pc-s3-affine-open-pushforward-pullback-acyclic).
-
-Proof: Write p:X times Spec B -> X and f' for the other projection. Since f is
-separated and Spec A is affine, X is separated, so the inclusion j:W->X of an affine
-open is affine. Its base change j':W'->X' is the inclusion of the affine open W',
-since W' is the fibre product of the affine schemes W and Spec B over Spec A.
-The restriction G|W is quasi-coherent. Affine pushforward base change (02KG) identifies
-p*(j_* G|W) with j'_* (p_W*(G|W)). Restriction and pullback commute, and pullback
-preserves quasi-coherence, so the latter coefficient is (p*G)|W'. The affine-open
-pushforward acyclicity theorem applied to the separated morphism f':X'->Spec B and
-W' gives rightAcyclic of that direct image. Transport along the base change
-isomorphism. The empty open gives a zero module and is included in the argument.
-No flatness of g is needed, because base change here is along the affine j. -/
+/-- Arbitrary base change of an affine-open direct image is acyclic over the new affine base
+(Stacks, Tag 02KG). -/
 theorem affine_open_pushforward_pullback_rightAcyclic
     {A B : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A)
     [IsSeparated f] (g : Spec B ⟶ Spec A)

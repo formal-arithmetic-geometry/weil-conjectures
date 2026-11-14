@@ -21,7 +21,11 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Affine-basis lower truncation tower inputs
-Source: Stacks Project, Tags 0BKT, 0D64, 071B and 08D4. -/
+
+## References
+
+* Stacks Project, Tags 0BKT, 0D64, 071B and 08D4
+-/
 
 @[expose] public section
 universe u wC wA
@@ -30,8 +34,8 @@ set_option autoImplicit false
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Vanishing transfers through the open-restriction and source comparisons.
-Source: Stacks Project, Tags 01E1 and 03FD. -/
+/-- Vanishing transfers through the open-restriction and source comparisons
+(Stacks, Tags 01E1 and 03FD). -/
 private theorem evaluation_rightDerived_isZero
     (X : Scheme.{u}) (V : X.Opens) (M : X.Modules) (q : ℕ)
     (hM : Subsingleton ((M.restrict V.ι).H (q + 1))) :
@@ -57,20 +61,7 @@ private theorem evaluation_rightDerived_isZero
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Positive acyclicity of actual homology sheaves makes the successive lower
-truncation transition invertible in degree i once n >= 1-i.
-Source: Stacks Project, Tag 0BKT (lemma-cohomology-over-U-trivial), bounded-below
-hypercohomology argument, and Tag 08D4, proof of (2).
-(blueprint: lem-sc-affine-basis-lower-tail-sections-step).
-
-Proof: The lower-truncation step triangle has first object H^(-n)(E)[n].
-Below a this sheaf is H^(-n)(F), and above or at a it is zero. Apply derived
-sections and exact forgetting to this triangle. Its first object's homology in
-degrees i and i+1 identifies by the shifted-single comparison with positive
-right-derived sections in degrees n+i and n+i+1. These are positive since n >= 1-i.
-The hypothesis on W=V and the module-cohomology-source comparison on the restriction
-to V make both zero. The long exact homology sequence then makes the displayed
-transition monic and epic, hence invertible. No termwise acyclicity, quasi-coherence,
-boundedness or K-injectivity is required. Empty V obeys the same calculation. -/
+truncation transition invertible in degree i once n >= 1-i (Stacks, Tags 0BKT and 08D4). -/
 theorem affineBasisLowerTail_sections_step_isIso
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

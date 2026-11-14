@@ -16,8 +16,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Finite section homology from cokernel and homology acyclicity
 
-Source: Stacks Project, Tags 015B and 08C2.
-(blueprint: lem-sc-affine-basis-acyclic-sections-preserves-homology).
+## References
+
+* Stacks Project, Tags 015B and 08C2
 -/
 
 @[expose] public section
@@ -214,26 +215,8 @@ private noncomputable def outgoing_image_iso
 
 
 /-- Acyclic differential cokernels and homology sheaves make sections preserve
-left homology of the original complex. No term acyclicity or boundedness is needed.
-Source: Stacks Project, Tags 015B and 08C2, finite cycle and boundary sequences.
-(blueprint: lem-sc-affine-basis-acyclic-sections-preserves-homology).
-
-Proof: Let C^r=coker(d^(r-1)) and B^(r+1)=im(d^r). The short exact sequence
-0 → H^r(F) → C^r → B^(r+1) → 0 and the two acyclicity hypotheses imply
-H^q(V,B^(r+1))=0 for q>0 by the long exact sequence. The image of the
-induced differential out of C^r is canonically the image of d^r, because
-F^r → C^r is epi. The sequence 0 → B^r → Z^r → H^r(F) → 0 then makes
-Z^r acyclic. In particular both the incoming kernel Z^(n-1) and the incoming
-image B^n have vanishing H^1 on V. The module-to-abelian cohomology comparison
-translates these vanishings to right-derived module sections. For an epi with
-H^1-acyclic kernel the initial long exact sequence makes its section map epi.
-Apply this to the incoming map onto boundaries and the cycle-class quotient.
-Left exactness identifies section cycles and section boundaries; exactness and
-the latter epi make sections of H^n(F) the cokernel of the section differential
-into cycles. Thus sections preserve the canonical left homology data.
-Restriction is exact and all comparison isomorphisms preserve the actual maps.
-This works for every integer degree, empty V and zero complexes. Only W=V is
-needed, so the basis hypotheses here are stronger than the finite argument uses. -/
+left homology of the original complex. No term acyclicity or boundedness is needed
+(Stacks, Tags 015B and 08C2). -/
 theorem affineBasisAcyclicSections_preservesLeftHomology
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     (F : CochainComplex X.Modules ℤ)

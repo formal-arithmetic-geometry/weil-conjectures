@@ -18,7 +18,9 @@ import all WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-! # Componentwise completed internal-Hom evaluation
 
-Source: Stacks Project, Tag 0882, affine-local evaluation construction.
+## References
+
+* Stacks Project, Tag 0882
 -/
 
 @[expose] public section
@@ -36,31 +38,7 @@ set_option maxHeartbeats 500000 in
 -- Two nested tensor inductions elaborate the sheaf scalar actions at each quotient.
 /-- Construct completed evaluation and identify its individual quotient components.
 This does not identify equality with an arbitrary compatible family of morphisms and
-makes no assertion about an externally supplied map epsilon.
-
-Source: Stacks Project, Tag 0882, affine argument, and Tag 087W, module/sections comparison.
-(blueprint: lem-weil-pbc-completion-internal-hom-affine-componentwise).
-
-Proof:
-1. Coherence makes N, M and the sections Hs of internal Hom finite on U. The affine
-   Hom-section evaluation bijection gives K : Hs ≃ Hom_A(N,M). The proved affine
-   quotient-coordinate lemma identifies compatible H quotient sections with the
-   completion of Hs. Compose with AdicCompletion.congr K to construct rho.
-2. Construct E using the three finite tensor/completion equivalences, the tensor
-   extension of ordinary linear maps, and conjugation between completed N and M.
-   Completion-map naturality proves E(of(h)) = AdicCompletion.map J h.
-3. Apply he on U to an ordinary internal-Hom section h and evaluate on an ordinary
-   G section y. By the definitions of homObjMap and homObjEvalId this gives exactly
-   quotient evaluation: e_n(class(h))(class(y)) = class(K(h)(y)).
-4. The completion of finite N is generated over B by of(N). Tensor induction,
-   using pN and pM's scalar formulas with representatives modulo J^(n+1), extends
-   step 3 to arbitrary completed inputs x. A second tensor induction on completed Hs,
-   using its canonical scalar formula and linearity of e_n and E, extends this
-   equation to arbitrary completed Hom sections. The projections of the inverse
-   limit representative of s are s_n, giving the displayed component formula.
-5. Each quotient of coherent G is coherent, hence quasi-coherent. Apply the same
-   affine Hom-section evaluation bijection to each quotient to obtain injectivity.
-This uses no flat base-change comparison for Hom. -/
+makes no assertion about an externally supplied map epsilon (Stacks, Tags 0882 and 087W). -/
 theorem completion_internal_hom_affine_componentwise {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F G : CoherentModules X)
     (e : ∀ n : ℕᵒᵖ,

@@ -16,8 +16,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-!
 # Lifting the étale set counit to ring sheaves
 
-Source: Stacks Project, Proposition 00YV, proof of (2), ring paragraph.
-(blueprint: lem-weil-pbc-etale-ring-inverse-image-counit).
+## References
+
+* Stacks Project, Tag 00YV
 -/
 
 @[expose] public section
@@ -92,32 +93,8 @@ private noncomputable def ringOne.{uC, vC, w} {C : Type uC} [Category.{vC} C]
 
 set_option backward.isDefEq.respectTransparency false in
 -- Product comparisons and sectionwise operations require repeated functor reduction.
-/-- Source: Stacks Project, Proposition 00YV, proof of (2), ring paragraph.
-(blueprint: lem-weil-pbc-etale-ring-inverse-image-counit).
-
-Proof: Put β_F = er_F* followed by the set counit (where er_F* is the component
-at Rr F). The unit formula and the right triangle identity imply that the forgotten
-ring unit at Rr F, followed by R(β_F), is the identity. For a binary operation,
-precompose the desired compatibility of β_F with the isomorphism
-L(X × X) → Y × Y obtained from the product comparison and two inverse components
-of er, with X the underlying sheaf of Rr F and Y that of Lr(Rr F).
-Apply the injective set-adjunction bijection. The adjunct t of this isomorphism has
-projections equal to the forgotten ring unit composed with the projections of X × X:
-this follows from unit naturality and the projection equations for the comparison.
-On sections, replace those projections by the unit applied to each coordinate.
-Because the unit is a ring homomorphism, their sum (or product) is the unit of the
-sum (or product). Applying β_F now cancels the unit by the preceding identity.
-This proves compatibility with addition and multiplication. For zero and one,
-precompose with the invertible terminal comparison, apply the same bijection,
-and use preservation of the constant by the ring unit and its cancellation by β_F.
-The categorical product has all pairs of sections: map the sectionwise Cartesian
-tensor product to it by its two projections. The categorical terminal sheaf has
-a section at every object: map the singleton Cartesian unit to it. Evaluating the
-four operation equalities on these sections gives the ring-homomorphism axioms
-for β_F at every site object. Its naturality in the site object is already that of
-the underlying sheaf morphism, so these homomorphisms define a ring-sheaf morphism.
-Finally naturality of er and of the set counit proves naturality in F. Negation
-preservation follows from the ring-homomorphism axioms. No ring adjunction is used. -/
+/-- The counit of the sheaf-of-sets adjunction lifts to sheaves of rings, given a lift of the
+unit (Stacks, Tag 00YV). -/
 theorem etaleRingInverseImageCounit (U V : Scheme.{u}) (f : U ⟶ V)
     (hL : PreservesFiniteLimits (Scheme.etaleSetPullback f)) :
     let b := MorphismProperty.Over.pullback @Etale ⊤ f

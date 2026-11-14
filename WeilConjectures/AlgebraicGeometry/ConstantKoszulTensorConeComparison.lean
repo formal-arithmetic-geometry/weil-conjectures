@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.TensorConeTowerIso
 
 /-! # Tensor of the normalized coefficient augmentation cone
 
-Source: Stacks Project, Tags 099M, 093M and 0A0E.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 099M, 093M and 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -28,27 +29,7 @@ attribute [local instance] flatConstantCochainMonoidal flatConstantCochainMonoid
 
 /-- Tensoring the coefficient cone gives the actual cone at an arbitrary complex.
 This is a strict tower isomorphism, with no Noetherianity, flatness, localization,
-or inverse-limit assertion.
-
-Source: Stacks Project, Tags 099M and 06YP, the signed tensor-cone calculation.
-(auxiliary; not a blueprint node).
-
-Proof: at the cochain unit U, identify U tensor the dual Koszul complex with the
-dual complex by the left unitor. Scalar tensor cancellation identifies the
-reduction of U with the finite quotient in degree zero. For arbitrary P, the
-associator and unitors identify P tensor the source at U with the source at P;
-the single-degree-zero tensor comparison and scalar tensor cancellation give
-the corresponding target isomorphism. On nonzero Koszul-degree summands both
-augmentation composites are zero by the vanishing law. In degree zero, the
-Koszul unit is invertible, and the ordinary-limit unit equation, composed with
-each level projection, identifies both composites with the actual reduction
-unit. The total-tensor coproduct inclusions jointly detect the resulting square.
-These isomorphisms commute with the transitions by naturality of the unitors,
-associator and quotient maps. Apply the signed tensor-cone isomorphism and the
-cone map of this square at each level. Its sign on the shifted-source summand
-in P-degree p is (-1)^p; the same sign appears on both sides of each transition.
-The level isomorphisms therefore assemble into the strict tower isomorphism.
-This argument includes the empty generator list, zero ring and empty site. -/
+or inverse-limit assertion (Stacks, Tags 099M and 06YP). -/
 theorem constantKoszulTensorConeComparison
     (b : Bool) (r : ℕ) (a : Fin r → A)
     (α : ringedKoszulTensorTowerFunctor (coefficients J A I b) r

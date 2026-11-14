@@ -29,17 +29,8 @@ private lemma stalk_range_congr
   subst hg
   rfl
 
-/-- Target restriction sends the image of base change into the image of base change.
-
-Source: the commutative restriction square in Stacks Tag 0F07.
-(blueprint: lem-sbc-target-stalk-restriction-image)
-
-Proof: use compatibility of base change with target and source transitions. Compose
-with the inverse-image composition isomorphism, and use naturality of base change in
-that coefficient morphism. This gives a commuting square on stalks. The two expressions
-for the structure morphism agree by associativity, so their base-change ranges agree.
-The source transition followed by the coefficient comparison supplies the preimage.
--/
+/-- Target restriction sends the image of base change into the image of base change
+(Stacks, Tag 0F07). -/
 theorem baseChangeTargetStalkMap_mem_range {U V : Over T} (φ : U ⟶ V)
     (η : baseChangeSourceStalk Λ p g q F x V) :
     (baseChangeTargetStalkMap Λ p g q F x φ).hom

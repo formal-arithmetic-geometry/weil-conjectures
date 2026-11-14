@@ -8,8 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleCoordinateTraceData
 import WeilConjectures.AlgebraicGeometry.EtaleOrderedProjectionComparison
 
 /-! # Base change of a trace evaluation
-
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, second triangle.
 -/
 
 @[expose] public noncomputable section
@@ -165,21 +163,8 @@ end General
 
 variable (A : Type (u + 1)) [CommRing A]
 
-/-- Base change identifies evaluation with integration in the second projection.
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, second triangle; Stacks 0E48 and 0B56.
-(auxiliary; not a blueprint node).
-
-Proof: apply the canonical projection/exchange square to f and its self pullback,
-with the kernel f*L and coefficient K. Conjugate by the tensor symmetries to order
-K first and invert the projection and exchange isomorphisms. Naturality of the
-pullback tensor comparison moves f*t to the kernel factor. The trace compatibility
-hypothesis replaces exchange followed by coordinate and t2 with f*t followed by the
-unit comparison. Pullback preserves the right unitor with precisely that unit
-comparison. The tensor compatibility of the square comparison identifies its
-component on K tensor L with coordinateH followed by the p2 tensor comparison.
-Cancel the inverse unit and tensor comparisons. This yields the displayed formula.
-No self symmetry hypothesis, exterior tensor factor, or diagonal class is used. -/
+/-- Base change identifies evaluation with integration in the second projection
+(Stacks, Tags 0E48, 0B56). -/
 theorem traceBaseChangeEvaluation [Finite A] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)
     (t : (push A f).obj ((pull A f).obj L) ⟶ constantComplex A Y)

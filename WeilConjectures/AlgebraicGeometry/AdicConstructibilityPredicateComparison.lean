@@ -51,10 +51,6 @@ set_option linter.privateModule false
 /-!
 # Adic constructibility predicates on Noetherian schemes
 
-proof.md`, integral and rational cases, and
-sec-proetale-coefficients/sk-def-sfb-constructible, clauses 1--2 and final paragraph
-(auxiliary; not a blueprint node).
-
 The comparison uses the specified condensed multiplication and the existing internal
 module predicates. Under the section-action equivalence these are the same module sheaves.
 Both bounded predicates live in the ordinary derived category; no completion is imposed.

@@ -200,8 +200,7 @@ private theorem subalgebraTransition_quasiCompact
   infer_instance
 
 /-- A quasi-compact open in a base change to an algebra descends to a finitely generated
-subalgebra. Source: Stacks Project, Tag 0388.
-(blueprint: `lem-weil-pbc-descend-qc-open-fg-subalgebra`) -/
+subalgebra (Stacks, Tag 0388). -/
 theorem exists_fg_subalgebra_preimage_eq_of_isCompact (k : Type u) [Field k] (X : Scheme.{u})
     (f : X ⟶ Spec (CommRingCat.of k)) (A : Type u) [CommRing A] [Algebra k A] :
     ∀ (V : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k A)))).Opens),

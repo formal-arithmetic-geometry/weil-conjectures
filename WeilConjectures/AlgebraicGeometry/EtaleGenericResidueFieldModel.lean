@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 
 /-! # Spreading a finite étale generic residue field
 
-Source: Stacks Project, Tag 0551, proof (monic polynomial construction).
+## References
+
+* Stacks Project, Tag 0551
 -/
 
 @[expose] public section
@@ -26,26 +28,7 @@ open CategoryTheory Topology
 namespace AlgebraicGeometry
 
 /-- A specified finite étale generic field extension is the generic residue field
-of an étale scheme over the base, compatibly with its given structure map.
-
-Source: Stacks Project, Tag 0551, proof (monic polynomial construction).
-Proof: take an affine open through the generic point, with ring R and prime
-nilradical p. The extension L of kappa(p) is finite separable. Choose a primitive
-element and use `residue_polynomial_lift` to scale it and lift its minimal
-polynomial to a monic polynomial over R.
-The quotient B is finite free and its fibre over p is the given field L. The unique
-prime q over p has residue field L with the prescribed map from kappa(p).
-The map Spec B to Spec R is étale at q. Remove the closed image of the complement
-of its étale locus and shrink the base to a principal open containing p. The
-resulting map is finite étale. For every prime Q of the localized quotient,
-flat going down supplies a prime contained in Q over p. Uniqueness forces it to
-be q, so q is contained in every Q and is generic. Compose with the affine open
-inclusion into S. The residue-field identification gives r; functoriality of
-residue-field point morphisms gives
-the displayed equality. This construction applies to nonreduced irreducible S
-because p is the nilradical, and to the degree-one extension as well.
-
-(blueprint: lem-sbc-etale-generic-residue-field-model) -/
+of an étale scheme over the base, compatibly with its given structure map (Stacks, Tag 0551). -/
 theorem exists_etale_generic_residue_field_model {S : Scheme.{u}}
     [IrreducibleSpace S] {L : Type u} [Field L]
     (yη : Spec (CommRingCat.of L) ⟶

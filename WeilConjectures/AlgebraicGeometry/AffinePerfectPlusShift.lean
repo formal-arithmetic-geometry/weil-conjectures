@@ -17,8 +17,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine perfect extension after adjoining a shift
 
-Source: literature/stacks-project/perfect.tex, Tag 08EI (Lemma 36.13.8)
-(blueprint: lem-sc-affine-perfect-plus-shift).
+## References
+
+* Stacks Project, Tag 08EI
 -/
 
 @[expose] public section
@@ -60,15 +61,8 @@ private theorem cone_projection_iso
     biprod.braiding _ _⟩
 
 /-- If `X` is affine and `U` is a quasi-compact open, every perfect complex on `U`
-becomes the restriction of a perfect complex on `X` after adjoining its shift by one.
-Source: Stacks Project, Tag 08EI (Lemma 36.13.8)
-(blueprint: lem-sc-affine-perfect-plus-shift).
-
-Proof: use `lem-sc-affine-perfect-plus-locally-free` to extend
-`𝓕[-r] ⊕ F`; lift the projection onto the first summand by
-`lem-sc-affine-perfect-map-lift`; the cone of the lifted map is perfect by
-`lem-pc-perfect-two-out-of-three`, and its restriction is `F ⊕ F[1]` by the
-cone computation in the source proof. -/
+becomes the restriction of a perfect complex on `X` after adjoining its shift by one
+(Stacks, Tag 08EI). -/
 theorem exists_perfect_restrict_iso_directSum_shift
     (X : Scheme.{u}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -8,8 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.AdicPerfectReductionModelComplex
 
 /-! # Ordinary completed quotient realization of modules
 
-Source: Stacks Project, Tags 093T and 09C6.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 093T and 09C6
 -/
 
 @[expose] public noncomputable section
@@ -22,8 +23,7 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local irreducible] derivedExtension extend change
 
-/-- The actual completed constant module on the slice, before reduction.
-Source: Stacks Tag 09C6 (auxiliary; not a blueprint node). -/
+/-- The actual completed constant module on the slice, before reduction (Stacks, Tag 09C6). -/
 def adicPerfectLocalFunctor (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) :
@@ -48,8 +48,7 @@ instance adicPerfectModuleFunctorsInst1 (X : Scheme.{u})
       change (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A J) ⋙
       SheafOfModules.overFunctor _ U).Additive)
 
-/-- The ordinary quotient realization on modules, with its actual scalar ring.
-Source: Stacks Tag 09C6 (auxiliary; not a blueprint node). -/
+/-- The ordinary quotient realization on modules, with its actual scalar ring (Stacks, Tag 09C6). -/
 def adicPerfectQuotientFunctor (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) (n : ℕ) :
@@ -65,8 +64,7 @@ instance adicPerfectModuleFunctorsInst2 (X : Scheme.{u})
   unfold adicPerfectQuotientFunctor
   infer_instance
 
-/-- The ordinary module balancing isomorphism at a successor level.
-Source: Stacks Tags 06YY and 09C6 (auxiliary; not a blueprint node). -/
+/-- The ordinary module balancing isomorphism at a successor level (Stacks, Tags 06YY and 09C6). -/
 def adicPerfectQuotientModuleStep (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) (n : ℕ) :

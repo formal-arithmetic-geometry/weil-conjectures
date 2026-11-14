@@ -21,8 +21,10 @@ import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 Existence of algebraic inverse-image data (`inverseImageData_exists`).
 
 Part of the split of `Sheaf.Paper.ConstantCompletionEquivalence`.
-Source: Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940
-(auxiliary; not a blueprint node).
+
+## References
+
+* Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940
 -/
 
 @[expose] public noncomputable section
@@ -133,15 +135,8 @@ private theorem ringTransport_algebraic
       (L.map a).hom.app V x from
         congrArg (fun f ↦ f.hom.app V ((L.map a).hom.app V x)) e.hom_inv_id]
 
-/-- Every geometric inverse image has these algebraic lifts and canonical constant maps.
-Source: Stacks 00YV, 03D2, 099L
-(auxiliary; not a blueprint node).
-Proof: transport algebraic operations through finite products preserved by L. The
-existing generalized-section equations define the transported ring and module actions.
-Transport morphisms through the same underlying-sheaf isomorphisms. Since L is a left
-adjoint and preserves the terminal object, it preserves coproducts of the terminal object
-and hence constant sheaves. This gives the comparison naturally in every coefficient
-ring, and its maps are the canonical constant-sheaf maps. -/
+/-- Every geometric inverse image has these algebraic lifts and canonical constant maps
+(Stacks, Tags 00YV, 03D2 and 099L). -/
 theorem inverseImageData_exists (L : Sheaf J (Type u) ⥤ Sheaf J' (Type u))
     (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
     [PreservesFiniteLimits L] : Nonempty (InverseImageData L) := by

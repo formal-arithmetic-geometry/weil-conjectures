@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparison
 
 /-! # Canonical module base change under open restriction
 
-Source: Stacks Project, Tags 08FE and 08HY; the local reduction in Tag 08IB.
-(blueprint: lem-pc-canonical-module-base-change-open-comparison).
+## References
+
+* Stacks Project, Tags 08FE, 08HY and 08IB
 -/
 
 @[expose] public section
@@ -30,39 +31,8 @@ namespace AlgebraicGeometry
 set_option maxHeartbeats 700000 in
 -- The categorical composition below needs additional elaboration heartbeats.
 /-- Restriction identifies the module base-change arrow with the arrow of the
-chosen pullback of the restricted maps. No affine chart is used.
-Source: Stacks Project, Tag 08FE, proof; Tag 08HY, counit construction;
-Tag 08IB, first proof paragraph; Tag 0D5U, exact extension by zero.
-(blueprint: lem-pc-canonical-module-base-change-open-comparison).
-
-Proof:
-1. Put U = f inverse image of V and Z = f' inverse image of W. The restricted
-square with vertices Z,U,W,V is cartesian: a map to U and W agreeing over V
-composes to a cone for the original square, whose unique lift lands in Z.
-Identify Z with the chosen pullback of f restricted to V and g restricted from
-W to V. Both projections agree under this identification.
-2. Apply the pullback restriction comparison to g and direct-image restriction
-to f. Exact restriction takes G[0] to H[0], yielding a. Apply direct-image
-restriction to f', and identify restriction of g'^*G with the ordinary pullback
-of H under the first projection, yielding b. These are isomorphisms.
-3. Unpack hc as a left-derived counit epsilon. For a complex K on U, evaluate
-epsilon on its termwise extension by zero to X, restrict the result to Z, and
-use the projection comparisons to regard it as a counit for the first projection.
-Extension by zero is exact and preserves K-flatness: tensoring an extension by
-zero with a test complex is extension by zero of the tensor with its restriction,
-and both restriction and extension by zero preserve acyclicity. Thus the new
-counit is invertible on K-flat representatives and has the left-derived universal
-property. Naturality at the extension-by-zero counit j_!(M|U) -> M shows that its
-value on M|U agrees with epsilon on M restricted to Z. In particular this holds
-for M = G[0]. Compose the value on H[0] with the single-complex identification
-to obtain c0 and its comparison predicate (exists_isDerivedModulePullbackComparison).
-4. Transpose the derived mate of Tag 08HY under the restricted adjunction.
-The open-square identity for underived mates commutes with restriction on
-complexes. Localizing and using the derived adjunction equations gives the same
-identity for the derived mate. Naturality of the direct-image restriction
-comparison then composes this identity with the transported epsilon, giving the
-displayed square. No invertibility of the base-change arrow is asserted.
-The argument is valid for empty opens and the zero module. -/
+chosen pullback of the restricted maps. No affine chart is used
+(Stacks, Tags 08FE, 08HY, 08IB and 0D5U). -/
 theorem exists_canonicalModuleBaseChange_open_comparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

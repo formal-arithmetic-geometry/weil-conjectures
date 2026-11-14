@@ -62,8 +62,7 @@ private theorem chain_augmentation_compatibility
   simp [koszulOpenDiagonal, Finsupp.linearCombination_single,
     ← pow_add, show b - a + (a + 1) = b + 1 by omega]
 
-/-- Intermediate finite Koszul structural facts; source Tags 08CX and 08DC.
-(blueprint: lem-sc-affine-perfect-open-represent-cohomology-core) -/
+/-- Intermediate finite Koszul structural facts; source Tags 08CX and 08DC. -/
 theorem affine_perfect_open_represent_cohomology_core
     (A : Type uMain) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{wMain}

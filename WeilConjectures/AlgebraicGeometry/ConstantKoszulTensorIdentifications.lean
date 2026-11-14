@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.RingedNegativeKoszulLowDegrees
 
 /-! # Strict Koszul tensor and coefficient identifications
 
-Source: Stacks Project, Tags 099M, 093M and 0A0E.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 099M, 093M and 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -31,9 +32,8 @@ attribute [local instance] TensorComparison.tensorTower_additive
 attribute [local instance] flatConstantCochainMonoidal flatConstantCochainMonoidalStruct
   SheafOfModules.monoidalCategory Functor.preservesZeroMorphisms_of_additive
 
-/-- The koszulEvaluationIso comparison used in the normalized tensor square.
-Source: Stacks 099M, 06YN and 0913
-(auxiliary; not a blueprint node). -/
+/-- The koszulEvaluationIso comparison used in the normalized tensor square
+(Stacks, Tags 099M, 06YN and 0913). -/
 @[irreducible] def koszulEvaluationIso (O : Sheaf J CommRingCat.{u}) (r : ℕ)
     (s : Fin r → (O.obj ⋙ forget CommRingCat).sections)
     (P : Cx O) (n : ℕᵒᵖ) :
@@ -47,9 +47,8 @@ Source: Stacks 099M, 06YN and 0913
       ringedKoszulTensorTower, CochainComplex.of_d]
     rfl)
 
-/-- The koszulEvaluationTowerIso comparison used in the normalized tensor square.
-Source: Stacks 099M, 06YN and 0913
-(auxiliary; not a blueprint node). -/
+/-- The koszulEvaluationTowerIso comparison used in the normalized tensor square
+(Stacks, Tags 099M, 06YN and 0913). -/
 @[irreducible] def koszulEvaluationTowerIso (O : Sheaf J CommRingCat.{u}) (r : ℕ)
     (s : Fin r → (O.obj ⋙ forget CommRingCat).sections) (P : Cx O) :
     ((ringedKoszulTensorTowerFunctor O r s).obj P).asFunctor ≅
@@ -63,9 +62,8 @@ Source: Stacks 099M, 06YN and 0913
       Category.id_comp, Category.comp_id]
     rfl)
 
-/-- The koszulSourceTensorIso comparison used in the normalized tensor square.
-Source: Stacks 099M, 06YN and 0913
-(auxiliary; not a blueprint node). -/
+/-- The koszulSourceTensorIso comparison used in the normalized tensor square
+(Stacks, Tags 099M, 06YN and 0913). -/
 @[irreducible] def koszulSourceTensorIso (O : Sheaf J CommRingCat.{u}) (r : ℕ)
     (s : Fin r → (O.obj ⋙ forget CommRingCat).sections) (P : Cx O) :
     ((ringedKoszulTensorTowerFunctor O r s).obj (ringedSiteRingComplex O)).asFunctor ⋙
@@ -85,8 +83,7 @@ Source: Stacks 099M, 06YN and 0913
   exact Functor.isoWhiskerRight (koszulEvaluationTowerIso J O r s _) (tensorLeft P) ≪≫
     e ≪≫ (koszulEvaluationTowerIso J O r s P).symm
 
-/-- The source comparison on a tower level uses only unitors and evaluation.
-Source: Stacks 099M (auxiliary; not a blueprint node). -/
+/-- The source comparison on a tower level uses only unitors and evaluation (Stacks, Tag 099M). -/
 theorem koszulSourceTensorIso_hom_app (O : Sheaf J CommRingCat.{u}) (r : ℕ)
     (s : Fin r → (O.obj ⋙ forget CommRingCat).sections) (P : Cx O) (n : ℕᵒᵖ) :
     (koszulSourceTensorIso J O r s P).hom.app n =
@@ -96,8 +93,7 @@ theorem koszulSourceTensorIso_hom_app (O : Sheaf J CommRingCat.{u}) (r : ℕ)
   unfold koszulSourceTensorIso koszulEvaluationTowerIso
   rfl
 
-/-- Evaluation of the reconstructed strict tensor is identity in every degree.
-Source: Stacks 099M (auxiliary; not a blueprint node). -/
+/-- Evaluation of the reconstructed strict tensor is identity in every degree (Stacks, Tag 099M). -/
 theorem koszulEvaluationIso_inv_f (O : Sheaf J CommRingCat.{u}) (r : ℕ)
     (s : Fin r → (O.obj ⋙ forget CommRingCat).sections)
     (P : Cx O) (n : ℕᵒᵖ) (p : ℤ) :
@@ -105,9 +101,8 @@ theorem koszulEvaluationIso_inv_f (O : Sheaf J CommRingCat.{u}) (r : ℕ)
   unfold koszulEvaluationIso
   rfl
 
-/-- The koszulUnitZero_isIso comparison used in the normalized tensor square.
-Source: Stacks 099M, 06YN and 0913
-(auxiliary; not a blueprint node). -/
+/-- The koszulUnitZero_isIso comparison used in the normalized tensor square
+(Stacks, Tags 099M, 06YN and 0913). -/
 theorem koszulUnitZero_isIso (O : Sheaf J CommRingCat.{u}) (r : ℕ)
     (s : Fin r → (O.obj ⋙ forget CommRingCat).sections) (n : ℕ) :
     IsIso ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv ≫
@@ -129,9 +124,8 @@ theorem koszulUnitZero_isIso (O : Sheaf J CommRingCat.{u}) (r : ℕ)
   rw [← he, ← h₀]
   infer_instance
 
-/-- The reductionModelIso comparison used in the normalized tensor square.
-Source: Stacks 099M, 06YN and 0913
-(auxiliary; not a blueprint node). -/
+/-- The reductionModelIso comparison used in the normalized tensor square
+(Stacks, Tags 099M, 06YN and 0913). -/
 @[irreducible] def reductionModelIso (b : Bool)
     (e : reductionTower J A I b ≅
       tensorTower J (coefficients J A I b)
@@ -144,9 +138,8 @@ Source: Stacks 099M, 06YN and 0913
   HomologicalComplex.complexOfFunctorsToFunctorToComplex.mapIso
     ((NatIso.mapHomologicalComplex e (.up ℤ)).app P)
 
-/-- The reductionModelIso_hom_f comparison used in the normalized tensor square.
-Source: Stacks 099M, 06YN and 0913
-(auxiliary; not a blueprint node). -/
+/-- The reductionModelIso_hom_f comparison used in the normalized tensor square
+(Stacks, Tags 099M, 06YN and 0913). -/
 theorem reductionModelIso_hom_f (b : Bool)
     (e : reductionTower J A I b ≅
       tensorTower J (coefficients J A I b)
@@ -157,9 +150,8 @@ theorem reductionModelIso_hom_f (b : Bool)
   unfold reductionModelIso
   rfl
 
-/-- The augmentationUnitAt comparison used in the normalized tensor square.
-Source: Stacks 099M, 06YN and 0913
-(auxiliary; not a blueprint node). -/
+/-- The augmentationUnitAt comparison used in the normalized tensor square
+(Stacks, Tags 099M, 06YN and 0913). -/
 theorem augmentationUnitAt
     (b : Bool) (r : ℕ) (a : Fin r → A)
     (α : ringedKoszulTensorTowerFunctor (coefficients J A I b) r
@@ -186,9 +178,8 @@ theorem augmentationUnitAt
   rw [limit.lift_π] at h
   exact h
 
-/-- The koszulTensorUnit_f comparison used in the normalized tensor square.
-Source: Stacks 099M, 06YN and 0913
-(auxiliary; not a blueprint node). -/
+/-- The koszulTensorUnit_f comparison used in the normalized tensor square
+(Stacks, Tags 099M, 06YN and 0913). -/
 theorem koszulTensorUnit_f (O : Sheaf J CommRingCat.{u}) (r : ℕ)
     (s : Fin r → (O.obj ⋙ forget CommRingCat).sections) (P : Cx O)
     (n : ℕ) (p : ℤ) :

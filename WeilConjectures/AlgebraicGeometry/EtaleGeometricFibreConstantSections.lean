@@ -12,9 +12,9 @@ import all WeilConjectures.ConstructibleSheaf.ModuleConstantOfSetPullback
 /-!
 # Sections on a connected geometric fibre
 
-Source: Stacks Project, Étale Cohomology, Lemma 59.39.3 (Tag 0A3H), final paragraph,
-and Remark 59.23.2 (Tag 03P5), set-valued form
-(blueprint: lem-weil-pbc-etale-geometric-fibre-constant-sections).
+## References
+
+* Stacks Project, Tags 0A3H and 03P5
 -/
 
 @[expose] public section
@@ -27,31 +27,8 @@ namespace AlgebraicGeometry
 
 /-- The inverse image over a geometric point is the constant sheaf of its stalk.
 Its global sections on a nonempty connected scheme are exactly the constant sections,
-and further pullback preserves their values, even on an empty or disconnected scheme.
-The comparison is the canonical, germ-normalized family supplied by
-`etaleGeometricFibreInverseImageConstant`; the equality fixes that family's choice.
-Global sections are evaluated at the identity étale object. After base change this
-object is canonically the identity object of the source, so the final equation is
-an equation of global sections there.
-
-Source: Stacks Project, Étale Cohomology, Lemma 59.39.3 (Tag 0A3H), final paragraph,
-and Remark 59.23.2 (Tag 03P5), set-valued form
-(blueprint: lem-weil-pbc-etale-geometric-fibre-constant-sections).
-
-Proof:
-1. For `q = h ≫ s`, use lem-weil-pbc-etale-geometric-fibre-inverse-image-constant
-   and lem-weil-pbc-sets-etale-inverse-image-composition-units to identify `q⁻¹F`
-   canonically with the constant sheaf of `F_s`. Use the chosen germ-normalized family.
-2. On nonempty connected `U`, the constant-section map is bijective by
-   lem-weil-pbc-constant-sheaf-set-sections-connected-natural, applied to `F_s`.
-   Composing it with the inverse comparison on sections gives the displayed bijection.
-   The nonemptiness is included in def-weil-connected-scheme (`ConnectedSpace U`).
-3. For `v : V → U`, the naturality clause of the first comparison and the
-   constant-section naturality clause of the second lemma identify the unit-pullback
-   with the section having the same stalk value on `V`. The composition comparison
-   of lem-weil-pbc-sets-etale-inverse-image-composition-units converts the iterated
-   inverse image to the inverse image along `v ≫ h ≫ s`. This uses no connectedness
-   or nonemptiness of `V`. -/
+and further pullback preserves their values, even on an empty or disconnected scheme
+(Stacks, Tags 0A3H and 03P5). -/
 theorem etaleGeometricFibreConstantSections
     (S : Scheme.{u}) (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :

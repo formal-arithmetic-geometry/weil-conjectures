@@ -16,8 +16,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Restriction and local exactness of coherent formal modules
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087X, parts (2) and (3)
-(blueprint: lem-weil-pbc-coherent-formal-modules-local-exactness).
+Stacks Project, Tag 087X.
 -/
 
 @[expose] public section
@@ -59,26 +58,7 @@ private theorem restriction_isZero_of_cover {X : Scheme.{u}} [IsNoetherian X]
 
 /-- Restriction is the additive functor whose underlying inverse systems and maps are
 termwise restrictions. It preserves short exact sequences, and exactness and short
-exactness are detected on every open covering. The auxiliary `hz` supplies the proof
-of zero preservation needed to form the mapped short complexes, without any new hypothesis.
-The witness `hN` states that every open subscheme is Noetherian; `I.comap U.ι` is the restricted
-quasi-coherent ideal. The abelian structure is supplied by `coherentFormalModule_abelian`.
-Source: Stacks Project, Lemma 087X (2)--(3)
-(blueprint: lem-weil-pbc-coherent-formal-modules-local-exactness).
-
-Proof:
-1. Construct the actual termwise restriction functor using the object-condition theorem
-   coherentFormalModules_restriction_objects. Its full-subcategory lift is additive and
-   has the stated equality after inclusion. Opens inherit Noetherianness by Mathlib.
-2. coherentFormalModules_restriction_limits supplies finite-limit and finite-colimit
-   preservation. Mathlib then gives preservation of short exact sequences and homology.
-3. If an object restricts to zero on a cover, its zero endomorphism restricts to an
-   isomorphism at every level. coherentFormalModule_isIso_of_isIso_restrict makes this
-   zero endomorphism globally invertible, so the object itself is zero.
-4. Apply this to the left homology of a short complex. Its restricted left homology
-   is zero exactly when the restricted complex is exact; hence exactness is local.
-5. Apply the same equivalence to complexes with a zero first or second arrow to detect
-   monomorphisms and epimorphisms. Combine these with middle exactness for short exactness. -/
+exactness are detected on every open covering (Stacks, Tag 087X). -/
 theorem coherentFormalModules_local_exactness (X : Scheme.{u}) [IsNoetherian X]
     (I : X.IdealSheafData) :
     ∃ (hN : ∀ U : X.Opens, IsNoetherian U.toScheme)

@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.FieldEquivariantGermsOnePoint
 /-!
 # Global sections under the abelian Galois stalk equivalence
 
-Source: Stacks Project, Etale Cohomology, Tag 04JM, lemma-global-sections-point.
-(blueprint: lem-sc-etale-global-sections-galois-invariants).
+## References
+
+* Stacks Project, Tag 04JM
 -/
 
 @[expose] public section
@@ -29,24 +30,8 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The image of the canonical terminal germ map is precisely the invariant subgroup.
-
-Source: Stacks Project, Tags 04JM and 04JQ.
-(blueprint: aux-etale-global-sections-image).
-
-Proof: A terminal section has the same germ after any change of lift, because
-there is only one lift to a terminal object. Extend each Galois automorphism to
-Omega and apply the action compatibility hypothesis to obtain invariance.
-Conversely, represent an invariant germ on a finite separable extension inside
-Ks: shrink an etale neighbourhood to the finite connected component containing
-the geometric point. Enlarge to a finite Galois extension L/K. Restriction on
-connected pointed neighbourhoods is injective by sheaf separatedness, since a
-further nonempty etale neighbourhood covers the connected field spectrum.
-Thus invariance of the germ implies that its representative over L is fixed
-by Gal(L/K). The sheaf equalizer for the finite Galois cover Spec L of Spec K
-then descends that representative to a terminal section. Its germ is the given
-one. This argument only uses finite separable subextensions, so it also applies
-when Omega contains transcendental elements. -/
+/-- The image of the canonical terminal germ map is precisely the invariant subgroup
+(Stacks, Tags 04JM and 04JQ). -/
 theorem etaleGlobalSections_galoisInvariants_image
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

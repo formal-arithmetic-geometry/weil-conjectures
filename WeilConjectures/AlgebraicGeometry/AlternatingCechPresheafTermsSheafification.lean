@@ -11,7 +11,9 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 
 /-! # Local ingredients of alternating Čech exactness
 
-Source: Stacks Project, Tags 02FU and 01FM.
+## References
+
+* Stacks Project, Tags 02FU and 01FM
 -/
 
 @[expose] public section
@@ -22,21 +24,7 @@ universe u
 open CategoryTheory Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
-/-- Sheafification does not change the explicit intersection-product terms.
-Source: Stacks Project, Tag 02FU, direct images of restrictions are sheaves;
-finite products are sheaves, as used in the covering resolution.
-(blueprint: lem-pc-s3-alternating-cech-presheaf-terms-sheafification).
-
-Proof: For a fixed intersection W, the presheaf V ↦ G(V intersect W) is the
-direct image along the inclusion W into X of the restriction of G to W.
-The scalar restriction in cechCapModule agrees with the scalar structure
-of that direct image. It is therefore a sheaf. Products of these sheaves
-are computed as products of presheaves, and the explicit terms are exactly
-those finite products. The sheafification unit of an already sheaf
-presheaf is an isomorphism, also in the category of module presheaves,
-since the forgetful functor reflects isomorphisms. The empty product is
-the zero module presheaf and is a sheaf as well.
--/
+/-- Sheafification does not change the explicit intersection-product terms (Stacks, Tag 02FU). -/
 theorem alternatingCechSheafPresheafTerms_unit_isIso
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (p : ℕ) :
     IsIso ((PresheafOfModules.sheafificationAdjunction

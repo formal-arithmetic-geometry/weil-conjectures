@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsFpqcDescent
 /-!
 # Sections of etale sheaves under flat maps with connected geometric fibres
 
-Source: Stacks Project, Etale Cohomology, Lemma 59.39.3 (Tag 0A3H)
-(blueprint: lem-weil-pbc-etale-sections-flat-qc-connected-fibres).
+## References
+
+* Stacks Project, Tag 0A3H
 -/
 
 @[expose] public section
@@ -32,23 +33,7 @@ namespace AlgebraicGeometry
 quasi-compact morphism with connected geometric fibres. Sections upstairs are evaluated
 at the base change of the terminal etale object of `S`, which is terminal over `T`.
 The map is the unit of the same inverse-image adjunction used in
-`etaleSetInverseImageCompositionUnits`.
-Source: Stacks Project, Etale Cohomology, Lemma 59.39.3 (Tag 0A3H)
-(blueprint: lem-weil-pbc-etale-sections-flat-qc-connected-fibres).
-
-Proof:
-1. Choose a point of each nonempty geometric fibre. Applying the pullback condition
-   to that point and using `fromSpecResidueField_apply` gives a point of T above s.
-   Thus f is surjective. Mathlib's `singleton_mem_fpqcPrecoverage` gives the fpqc cover.
-2. Every section upstairs is compatible by
-   `etaleSet_section_compatible_of_connected_geometricFibres`, the connected-fibre
-   part of the argument split off as its own statement.
-3. Apply `existsUnique_etaleSection_of_fpqc_cover` to the PUnit-indexed singleton.
-   The canonical map from the identity etale object of T to the base change of the
-   identity etale object of S has inverse the second pullback projection, as checked
-   by the two pullback projection equations. Restriction along this isomorphism is
-   bijective. Unique descent therefore makes the original adjunction unit bijective,
-   by `Function.bijective_iff_existsUnique` and cancellation of that restriction. -/
+`etaleSetInverseImageCompositionUnits` (Stacks, Tag 0A3H). -/
 theorem etaleSet_sections_bijective_of_flat_qc_connected_geometricFibres
     {S T : Scheme.{u}} (f : T ⟶ S) [Flat f] [QuasiCompact f]
     (hconn : ∀ s : S, ConnectedSpace

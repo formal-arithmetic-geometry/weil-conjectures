@@ -15,7 +15,9 @@ import all WeilConjectures.AlgebraicGeometry.InternalModuleAbEquivalence
 
 /-! # Evaluation of condensed-field modules over one geometric point
 
-Source: Hemo--Richarz--Scholbach, Example 3.1; Bhatt--Scholze, Example 4.2.11.
+## References
+
+* Hemo--Richarz--Scholbach, Example 3.1; Bhatt--Scholze, Example 4.2.11
 -/
 
 @[expose] public section
@@ -214,26 +216,8 @@ private noncomputable def pointCoordinates
     ModuleCat.restrictScalars ULift.ringEquiv.symm.toRingHom
   exact (G.mapIso (pointRegularIso E Ω z)).toLinearEquiv.trans (liftedRegularCoordinates E)
 
-/-- Evaluation at the final object over one algebraically closed field.
-
-Source: Bhatt--Scholze, Example 4.2.11; Hemo--Richarz--Scholbach, Example 3.1
-(auxiliary; not a blueprint node).
-
-Proof in words. Apply final-object sections to the underlying abelian sheaf and its
-internal action. Sections is lax monoidal: its tensorator sends a pair of sections to
-its tensor section, so its image is an internal module over the ring of global sections.
-The canonical continuous realization identifies this ring with ULift E: every continuous
-function on the one-point spectrum is constant, and evaluation at z is its inverse.
-Transport the action along this ring isomorphism and use the tensor universal property
-for internal modules in abelian groups to obtain an ordinary E-module. The internal
-linearity diagrams make all evaluated arrows E-linear; they are unchanged as additive
-maps, hence this functor is additive. Over an algebraically closed field every covering
-of the final object splits. Consequently abelian sections preserves finite colimits.
-The forgetful functor from internal modules computes those colimits, and the ordinary
-module forgetful functor reflects them; hence evaluation preserves finite colimits.
-The regular module gives E with its usual action. Evaluate its endomorphism at 1 to
-get the displayed normalization, since both coefficient identifications are the
-specified continuous realization followed by evaluation at z. -/
+/-- Evaluation at the final object over one algebraically closed field
+(Bhatt--Scholze, Example 4.2.11; Hemo--Richarz--Scholbach, Example 3.1). -/
 theorem exists_condensedField_point_evaluation
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (z : Spec (.of Ω)) :

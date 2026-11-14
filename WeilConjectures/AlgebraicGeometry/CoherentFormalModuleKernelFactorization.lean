@@ -11,8 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 
 /-! # Existence of factorization through the shifted image quotients
 
-Source: Stacks Project, Lemma 087X, claim (d), factorization-existence paragraph.
-(blueprint: lem-weil-pbc-formal-kernel-factorization).
+## References
+
+* Stacks Project, Tag 087X
 -/
 
 @[expose] public section
@@ -23,11 +24,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Every transition of a coherent formal module is an epimorphism.
-Source: Stacks Project, Lemma 087X, transition-surjectivity argument.
-Proof: Successive transitions are quotient projections followed by isomorphisms.
-Induction on the index inequality expresses any transition as a composite of these.
-(blueprint: lem-weil-pbc-formal-kernel-factorization). -/
+/-- Every transition of a coherent formal module is an epimorphism (Stacks, Tag 087X). -/
 theorem formalTransition_epi {X : Scheme.{u}} [IsNoetherian X]
     {I : X.IdealSheafData} (T : CoherentFormalModule X I) {n m : ℕ} (h : n ≤ m) :
     Epi (T.obj.map (homOfLE h).op) := by
@@ -91,30 +88,7 @@ private theorem formalDescent {X : Scheme.{u}} [IsNoetherian X]
 
 /-- Every annihilated map factors through a coherent system presented by the shifted
 quotients of the images of later levelwise kernels. No uniqueness is asserted and no
-componentwise injectivity of ι is required.
-
-Source: Stacks Project, Lemma 087X, claim (d), factorization-existence paragraph.
-(blueprint: lem-weil-pbc-formal-kernel-factorization).
-
-Proof: All transitions of T are epimorphisms and identify the earlier term with the
-quotient of the later term by the earlier ideal power, by induction from the defining
-successive quotient conditions. At level m+c, γ factors through ker α_(m+c).
-Naturality and epimorphy of T_(m+c) → T_m show that γ_m has image contained in the
-image of that kernel in F_m. Via hS it therefore factors uniquely through j_m,
-giving β_m : T_m → S_m. The maps j_m are monomorphisms, so canceling them in the
-naturality squares of γ and j proves that β is compatible with all transitions.
-Compose β_(n+c) with the projection S_(n+c) → S_(n+c)/I^(n+1) S_(n+c) and e_n.
-Naturality of ideal multiplication shows that this composite kills I^(n+1) T_(n+c).
-It thus descends to T_n using the transition quotient identification. Define δ_n by
-this descent. Precompose the successive naturality square for δ with the epimorphism
-T_(n+1+c) → T_(n+1). Compatibility of β and htrans identify both composites, so the
-δ_n form a natural transformation, hence a morphism of the full subcategory. To check
-δ_n followed by ι_n equals γ_n, precompose with the epimorphism T_(n+c) → T_n:
-hcomp and β_(n+c) followed by j_(n+c) = γ_(n+c), together with naturality of γ,
-give the equality. Cancel that epimorphism, and then use componentwise equality.
-For c=0 the same descent uses the identity transition; zero ideals and the unit ideal
-also satisfy the quotient argument, without any additional hypothesis.
--/
+componentwise injectivity of ι is required (Stacks, Tag 087X). -/
 theorem coherentFormalModule_kernel_factorization {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)
     (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)

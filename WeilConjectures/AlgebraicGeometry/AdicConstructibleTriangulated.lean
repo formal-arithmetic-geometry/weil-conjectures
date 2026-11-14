@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # The bounded constructible residue locus is triangulated
 
-Source: Bhatt--Scholze, the residue condition and the observation following Definition 6.5.1.
+## References
+
+* Bhatt--Scholze, Definition 6.5.1
 -/
 
 @[expose] public noncomputable section
@@ -30,9 +32,8 @@ open scoped ZeroObject
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Bounded constructible etale origin with finite Tor amplitude of the residue.
-Source: Bhatt--Scholze, Definition 6.5.1, condition on the first derived reduction
-(auxiliary; not a blueprint node). -/
+/-- Bounded constructible etale origin with finite Tor amplitude of the residue
+(Bhatt--Scholze, Definition 6.5.1). -/
 def SfbConstructibleResidue (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A)
     (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) : Prop :=
@@ -120,24 +121,7 @@ private theorem etaleOrigin_triangulated (X : Scheme.{u}) (k : Type (u + 1)) [Fi
   infer_instance
 
 /-- The bounded constructible residue condition is invariant under isomorphisms
-and triangulated. Completeness is a separate vanishing condition.
-Source: Bhatt--Scholze, Definition 6.5.1, observation following the definition
-(auxiliary; not a blueprint node).
-
-Proof: Fixed-scalar restriction retains the underlying additive sheaf. Forgetting
-scalar structure preserves finite limits and colimits and reflects them, so this
-restriction is exact. Derived reduction and its composite with this exact functor
-are triangulated. On the etale site, bounded complexes with constructible cohomology
-are triangulated: kernels and cokernels are constructible, and the Noetherian
-extension argument applies also to infinite residue fields. Derived comparison is
-fully faithful on bounded-below objects, so its restriction to these bounded objects
-has triangulated essential image. The residue condition is the inverse image of
-this essential image under the preceding composite. To check this equality, pass
-between an etale derived object and its quotient-functor preimage using the canonical
-isomorphism, and transport homology, constructibility and bounds along that
-isomorphism. Over the residue field tensor with every etale module sheaf is exact,
-so these bounds imply the Tor clause. Inverse image preserves isomorphism closure
-and triangulatedness. This includes empty X and infinite residue fields. -/
+and triangulated (Bhatt--Scholze, Definition 6.5.1). -/
 theorem adicConstructible_residueTriangulated (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A]
     (I : Ideal A) (hI : I.IsMaximal) :

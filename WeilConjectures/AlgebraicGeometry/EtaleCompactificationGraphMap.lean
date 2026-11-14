@@ -11,8 +11,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnrami
 /-!
 # The graph map from etale sum extension to compactified sheaf pushforward
 
-Source: Stacks Project, Etale Cohomology, Tag 0F4L, graph extension, and
-More on Etale Cohomology, Tag 0GKM.
+## References
+
+* Stacks Project, Tags 0F4L and 0GKM
 -/
 
 @[expose] public section
@@ -26,14 +27,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Extend a sheet along its clopen graph in the compactification, then transpose
-under inverse image/direct image for the proper projection.
-
-Source: Stacks Project, Etale Cohomology, Tag 0F4L, graph extension.
-(auxiliary; not a blueprint node).
-
-The graph projection is constructed from the unit of inverse image/direct image for
-the graph and the inverse of its open-extension-to-direct-image comparison. Thus the
-map is specified by actual adjunctions and is not a choice of an unspecified witness. -/
+under inverse image/direct image for the proper projection
+(Stacks, Tag 0F4L). -/
 noncomputable def etaleCompactificationGraphMap
     (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (u : U ⟶ X) [Etale u] [IsSeparated u]

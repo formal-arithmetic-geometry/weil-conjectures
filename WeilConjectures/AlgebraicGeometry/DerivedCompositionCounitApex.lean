@@ -9,8 +9,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 
 /-! # The explicit pasted underived counit expression
-Source: Stacks Project, Tags 079W, 0D5S and 0D5T.
-(blueprint: def-sc-derived-composition-counit-apex).
+
+## References
+
+* Stacks Project, Tags 079W, 0D5S and 0D5T
 -/
 
 @[expose] public section
@@ -27,9 +29,7 @@ variable [∀ S : Scheme.{u},
 -- The selected scheme counits have large dependent types.
 /-- The explicit expression obtained by pasting the localized underived counits.
 This names a concrete morphism made from the already recorded choices of counits
-and adjunctions. It makes no new existential choice.
-Source: Stacks Project, Tags 079W and 0D5S.
-(blueprint: def-sc-derived-composition-counit-apex). -/
+and adjunctions. It makes no new existential choice (Stacks, Tags 079W and 0D5S). -/
 noncomputable def derivedCompositionCounitApex
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))
@@ -52,9 +52,7 @@ noncomputable def derivedCompositionCounitApex
         (ε f).app H ≫ DerivedCategory.Qh.map ((b f).counit.app K)
 
 -- The construction equation elaborates the same dependent counit types.
-/-- The construction equation for the explicit counit expression.
-Source: Stacks Project, Tags 079W and 0D5S.
-(blueprint: def-sc-derived-composition-counit-apex). -/
+/-- The construction equation for the explicit counit expression (Stacks, Tags 079W and 0D5S). -/
 theorem derivedCompositionCounitApex_eq
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))

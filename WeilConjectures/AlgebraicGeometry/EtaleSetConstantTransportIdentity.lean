@@ -12,8 +12,9 @@ import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-! # Identity transport of a map out of a constant sheaf
 
-Source: Stacks Project, Tags 03CB, 03CC, and 03P5.
-(blueprint: lem-weil-pbc-etale-set-constant-transport-identity).
+## References
+
+* Stacks Project, Tags 03CB, 03CC and 03P5
 -/
 
 @[expose] public section
@@ -143,21 +144,8 @@ private lemma constant_id (P : Scheme.{u}) (A : Type (u + 1)) :
   simp
 
 /-- Transporting a map from a constant sheaf along the identity changes only
-its target by the identity-composition cast. The map need not be invertible.
-
-Source: Stacks Project, Tags 03CB, 03CC, and 03P5.
-(blueprint: lem-weil-pbc-etale-set-constant-transport-identity).
-
-Proof: the inverse-image adjunction for the identity is identified with the identity
-adjunction by restriction along the canonical isomorphism from base change by the
-identity to the identity functor. Its unit equation identifies the chosen composition
-comparison with this identity comparison on the inverse image of F: both have the
-same value on every twice unit-pulled section, so fixed-sheaf uniqueness in
-etaleSetInverseImageCompositionUnits applies. The constant comparison is constructed
-by uniqueness of left adjoints and therefore satisfies the same identity unit equation
-on the constant sheaf. Naturality of the identity comparison with respect to tau
-cancels the two identity comparisons. The only remaining map is transport from s to
-identity composed with s, which is exactly the inverse of the displayed eqToHom. -/
+its target by the identity-composition cast. The map need not be invertible
+(Stacks, Tags 03CB, 03CC and 03P5). -/
 theorem etaleSetConstantTransportIdentity
     (S P : Scheme.{u}) (s : P ⟶ S)
     (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (A : Type (u + 1))

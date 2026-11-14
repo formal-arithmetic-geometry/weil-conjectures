@@ -19,9 +19,9 @@ import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 
 /-! # Associativity of derived pullback tensor comparisons
 
-Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product,
-and section-derived-pullback; the parent descent proof, step 3.
-(blueprint: lem-pc-derived-pullback-tensor-associativity).
+## References
+
+* Stacks Project, Tag 079U
 -/
 
 @[expose] public section
@@ -256,31 +256,7 @@ private theorem localization_tensor_isIso (S : Scheme.{uModel})
 set_option maxHeartbeats 600000 in
 -- Localization tensor instances require extra elaboration.
 /-- Associativity on three K-flat representatives, before resolving arbitrary objects.
-Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product,
-and section-derived-pullback; parent associativity proof, steps 1 and 2.
-(blueprint: lem-pc-derived-pullback-tensor-associativity).
-Proof: the tensor products P tensor N and N tensor R are K-flat by 079R.
-The counit epsilon is invertible on K-flat objects: identify F with tensorPullback
-using hF and hmap, and compare epsilon with the counit in exists_derivedPullback
-by uniqueness of left-derived functors. The localization tensorator is invertible
-on K-flat pairs, including the images under F, since pullback preserves K-flatness.
-Use naturality of mu to replace its components at Q(P) tensor Q(N), and at
-Q(N) tensor Q(R), by components at the corresponding total tensor complexes.
-Postcompose both proposed composites with L of the right-bracketed localization
-comparison, then with the counit and Q of the two right-bracketed phi comparisons.
-The four instances of hmu for (P,N), (P tensor N,R), (N,R), and (P,N tensor R)
-replace the derived tensorators with localization tensorators and counits.
-Naturality of epsilon and associativity of the lax monoidal localization Q leave
-the image under Q of the associativity diagram for phi. To check that diagram,
-precompose in every degree n with F of each triple total-tensor summand inclusion,
-indexed by p+q+r=n. The inclusions are jointly epic, since F is the left adjoint
-tensor pullback and therefore preserves their coproduct. The summand formula hphi
-turns the two paths into inverse tensorators of mF; inverse monoidal associativity
-at P.X p, N.X q, R.X r equates them. Coproduct extensionality and then complex
-extensionality give the diagram. Apply Q and cancel the invertible comparison
-maps. This proves only the representative identity; it does not transport it to
-arbitrary derived objects. Zero complexes and the empty scheme require no separate
-nonvanishing assumptions: the same summand and cancellation argument applies. -/
+(Stacks, Tag 079U) -/
 private theorem derivedPullback_tensor_associativity_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]
@@ -401,22 +377,7 @@ private theorem derivedPullback_tensor_associativity_kFlat {T X : Scheme.{uModel
 
 
 /-- The extended natural tensor comparison satisfies the associativity law.
-Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product,
-and section-derived-pullback; parent descent proof, step 3 (associativity).
-(blueprint: lem-pc-derived-pullback-tensor-associativity).
-Proof: resolve the three derived arguments by K-flat complexes P, N, and R.
-Their two bracketed tensor products are K-flat. The comparison formula hμ identifies
-both sides, after composition with the invertible localization tensorators and counits,
-with the two termwise maps from F(P) tensor F(N) tensor F(R) to F of the triple tensor.
-Precompose in each total degree with the inclusion of each summand indexed by p,q,r.
-The summand formula hφ identifies each occurrence of phi with the inverse tensorator
-of mF. The resulting equality is precisely associativity of mF at P.X p, N.X q,
-and R.X r. Coproduct extensionality proves equality of the complex maps; applying Q
-and cancelling the invertible comparison maps gives the desired identity on these
-K-flat representatives. Both composites are natural in all three derived arguments
-because μ is an isomorphism of bifunctors. Transport the identity along the three
-resolution isomorphisms to obtain it on arbitrary objects. No unit isomorphism or
-unitality law is used. -/
+(Stacks, Tag 079U) -/
 theorem derivedPullback_tensor_associativity {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]

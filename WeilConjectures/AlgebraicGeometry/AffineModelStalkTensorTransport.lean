@@ -11,7 +11,11 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import WeilConjectures.AlgebraicGeometry.AffineModelStalkPresentation
 
 /-! # Natural intermediate stalk tensor comparisons
-Source: Stacks Project, Tags 008H, 0098, 008B and 01BH. -/
+
+## References
+
+* Stacks Project, Tags 008H, 0098, 008B and 01BH
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -19,27 +23,8 @@ universe u
 open CategoryTheory TensorProduct
 namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
-/-- Natural affine-model comparison after extension from the original stalk.
-Source: Stacks Project, Tags 01BH and 008B.
-(blueprint: new-e1-affine-model-stalk-tensor-transport)
-
-Proof: Open restriction identifies the stalk of F at i(z) with the U-chart stalk.
-The supplied e identifies it with the chart restriction of tilde M. The affine
-isomorphism carries this stalk to the tilde stalk at the corresponding prime of A.
-The tilde germ map is module localization at that prime. Extension to R cancels
-this localization: each denominator is a unit in the original ring stalk and hence
-in R. Write a localized stalk element as m/s, with s outside the corresponding prime.
-Send r tensor (m/s) to (rho(s) inverse times r) tensor m. Localization equality
-is preserved since the element killing the difference also maps to a unit in R;
-the balancing relations follow from the composite A-to-S-to-R germ map. The
-inverse sends r tensor m to r tensor (m/1), transported back along e and the
-chart. Their composites are identities: on m/1 this is immediate, and on m/s
-move the invertible scalar s across the tensor. Fractions generate the localized
-stalk, and pure tensors generate each tensor product, so this proves both
-identities on all elements. All these maps respect module
-morphisms. The supplied square therefore identifies the map induced by c with the
-one induced by d. Check this on pure tensors and extend by additivity. This works
-for arbitrary modules, including zero modules, with no flatness hypothesis. -/
+/-- Natural affine-model comparison after extension from the original stalk
+(Stacks, Tags 01BH and 008B). -/
 theorem exists_affine_model_stalk_tensor_transport
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) (V : Z.Opens) (z : V.toScheme)
     (U : Y.affineOpens) (hzU : i z.1 ∈ U.1) :

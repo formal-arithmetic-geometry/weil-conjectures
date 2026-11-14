@@ -27,8 +27,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentIntegralGenericFreeNeighbourhoo
 
 /-! # A local free model along an integral closed subscheme
 
-Source: Stacks Project, Tag 01YE, the argument before clearing denominators.
-(blueprint: lem-pc-c3-coherent-generic-local-free-model)
+## References
+
+* Stacks Project, Tag 01YE
 -/
 
 @[expose] public section
@@ -79,23 +80,7 @@ private theorem sections_vanishing {X : Scheme.{u}} (E : X.Modules)
   exact exists_pow_smul_eq_zero_of_isAffineOpen E hW g t ht
 
 /-- The pushforward of a finite free module along a closed immersion is coherent
-on a locally Noetherian target.
-
-Source: Stacks Project Tag 01Y6 (finite pushforward) and Tag 01XZ (coherence).
-
-Proof: Work on an affine open Spec A of X. Its preimage is Spec B, where B is
-an A-algebra quotient because i is a closed immersion. The finite free sheaf on I
-restricts to the sheaf associated with the finite free B-module B^I. Viewed as an
-A-module it is finite: B is cyclic over A, and I is finite. On an affine target,
-closed pushforward agrees with the associated sheaf of this restricted-scalar
-module: over every basic open D(f), both sheaves have the sections (B^I)_f, with
-the same restriction maps and A_f-action. These identifications glue on the basic
-open basis and commute on overlaps. Thus the pushforward is quasi-coherent and
-of finite type. Since A is Noetherian, the finite A-module is finitely presented;
-equivalently the locally Noetherian coherence criterion makes its associated
-sheaf coherent. Coherence is local, so these affine calculations give coherence
-on X. For I empty the module and its pushforward are zero and the same argument
-applies. No integrality or pointwise annihilation hypothesis is needed. -/
+on a locally Noetherian target (Stacks, Tags 01Y6 and 01XZ). -/
 private theorem isCoherent_closedImmersion_finiteFree {X Z : Scheme.{u}}
     [IsLocallyNoetherian X] (i : Z ⟶ X) [IsClosedImmersion i]
     (I : Type u) [Finite I] :
@@ -225,28 +210,8 @@ private noncomputable def closed_pushforward_stalk_iso {X Z : Scheme.{u}}
   exact (LinearEquiv.ofBijective f hb).toModuleIso
 
 /-- A maximal-ideal-annihilated generic stalk has a local model by the closed
-pushforward of a finite free module. This asserts no global map or ideal lattice.
-
-Source: Stacks Project, Tag 01YE, first paragraphs through the local free map.
-(blueprint: lem-pc-c3-coherent-generic-local-free-model)
-
-Proof: let x be the image of the generic point of Z. The closed-immersion stalk
-map O_X,x -> O_Z,xi is surjective, and O_Z,xi is a field by integrality. Its kernel
-is therefore the maximal ideal of O_X,x. The annihilation hypothesis gives the
-actual stalk F_x a module action over this quotient, hence over O_Z,xi. Coherence
-makes F_x finite over O_X,x; the identity semilinear map makes it finite over the
-field as well. A finite basis identifies F_x with the stalk of the finite free
-sheaf E = O_Z^{direct sum r}. The canonical closed-pushforward comparison transports
-this to an O_X,x-linear isomorphism (i_*E)_x -> F_x.
-
-The private affine calculation proves i_*E coherent: closed immersion gives affine
-preimages and surjective coordinate-ring maps, basic-open localization gives
-quasi-coherence, and finite sections over the quotient ring are finite over the
-ambient Noetherian ring. Finite affine presentations then give coherence. Extend
-the stalk isomorphism between these coherent sheaves to a map on a neighbourhood,
-and shrink until it is an isomorphism (Tags 01Y4 and 01Y3). Transport the nested
-open restrictions back to an ambient open and reindex the free sheaf by Fin r.
-The same construction includes r = 0 and needs no support hypothesis on F. -/
+pushforward of a finite free module. This asserts no global map or ideal lattice (Stacks, Tag 01YE).
+-/
 theorem coherent_generic_local_free_model
     {X Z : Scheme.{u}} [IsNoetherian X]
     (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z]

@@ -11,8 +11,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 
 /-! # Totalizing an augmented CE comparison
 
-Source: Stacks Project, Derived Categories, Tags 015J and 015K.
-(blueprint: lem-weil-pbc-ce-totalize-augmented-comparison).
+## References
+
+* Stacks Project, Tags 015J and 015K
 -/
 
 @[expose] public section
@@ -192,23 +193,8 @@ private theorem etaleCE_filtration_restrictions
 set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent CE totals and representative equations together.
 /-- Totalize a supplied augmented bicomplex map, retaining its summand equations.
-This theorem constructs no pages and makes no choice of CE resolutions.
-Source: Stacks Project, Tag 015J, finite-diagonal total comparison; Tag 015K.
-(blueprint: lem-weil-pbc-ce-totalize-augmented-comparison).
-
-Proof. Apply the finite-diagonal comparison for upperStar to the source bicomplex.
-Invert this comparison, then extend φ by zero, flip and totalize it. On a nonnegative
-resolution summand the extension comparison and the total-map coprojection equation
-give the displayed formula. In negative resolution degree both sides vanish.
-In resolution degree zero, substitute this formula into D.aug_formula. The equation
-hφ identifies the result with v followed by D'.aug_formula, proving the strict square.
-Conjugate the sections map by the two totalSectionsIso maps. Their coprojection
-formulas and naturality of globalSectionsUpperStarMap show that this map carries the
-summand of complex degree q to the target summand of degree q. Each source generating
-image therefore factors through the corresponding target filtration step. Taking
-the finite supremum gives degreewise restrictions. Cancel the target step inclusions
-in the chain-map equation for b to prove that the restrictions commute with the
-differentials; they assemble to s. This argument also covers empty diagonals. -/
+This theorem constructs no pages and makes no choice of CE resolutions (Stacks, Tags 015J and 015K).
+-/
 theorem etaleCE_totalize_augmented_comparison
     {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))

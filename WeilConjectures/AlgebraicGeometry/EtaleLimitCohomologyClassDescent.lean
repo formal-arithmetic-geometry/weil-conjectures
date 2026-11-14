@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitCohomologyConnectingLadder
 
 /-! # Finite-stage representatives of limit cohomology classes
 
-Source: Stacks Project, Tags 09YQ, 09YP, 09YN, 0EXZ and 0739.
-(blueprint: lem-weil-pbc-etale-limit-cohomology-class-descent).
+## References
+
+* Stacks Project, Tags 09YQ, 09YP, 09YN, 0EXZ and 0739
 -/
 
 @[expose] public section
@@ -25,24 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Finite-stage representatives of limit cohomology classes.
-
-Source: Stacks Project, Theorem 09YQ, via 09YP, using the degree-zero
-section comparison 09YN and dimension shifting 0739.
-(blueprint: lem-weil-pbc-etale-limit-cohomology-class-descent).
-
-Proof: Induct on the degree, simultaneously for all coefficient systems and
-all supplied cohomology diagrams and comparison cocones. In degree zero use
-the finite-stage section comparison. In successor degree take the cokernel
-coefficient system and its connecting-map ladder. The surjective limit
-connecting map lifts the target class to the preceding degree for that system.
-The induction hypothesis represents this lift at a stage. Apply that stage's
-connecting map to its representative. The commuting square of the ladder,
-followed by the two representative equalities, proves the required image
-identity. The induction is on degree, not on the fixed coefficient sheaf;
-it uses no assertion about detection of zero. Empty schemes and zero sheaves
-are included in the two intermediate lemmas; degree zero needs no negative term.
--/
+/-- Finite-stage representatives of limit cohomology classes
+(Stacks, Tags 09YQ, 09YP, 09YN and 0739). -/
 theorem etale_limit_cohomology_class_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

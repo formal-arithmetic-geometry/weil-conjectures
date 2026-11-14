@@ -11,10 +11,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 /-! # Fourier--Deligne transform with ordinary condensed module coefficients
-
-Source: latest blueprint, sec-fourier-transform/sk-thm-inversion/def-fd-transform.md
-(blueprint: sec-Fourier-inversion).
-The ordinary etale transform is re-exported by the kernel module.
 -/
 
 @[expose] public noncomputable section
@@ -28,9 +24,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 
 /-- The ordinary condensed transform Rp₂! (Lp₁* K tensor Kψ)[r], using the specified
-compactification. All operations are the published module-object derived operations.
-Source: latest blueprint, def-fd-transform.md, displayed formula
-(blueprint: sec-Fourier-inversion). -/
+compactification. All operations are the published module-object derived operations. -/
 def condensedFourierTransform
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -50,9 +44,7 @@ def condensedFourierTransform
 
 /-- The standard affine-space transform for the degree-q character, normalized by
 its rank. The structure map of the product is the composite of its first projection
-and the given base map, so it introduces no additional geometric datum.
-Source: latest blueprint, def-fd-transform.md, affine application
-(blueprint: sec-Fourier-inversion). -/
+and the given base map, so it introduces no additional geometric datum. -/
 def condensedAffineFourierTransform
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -68,9 +60,7 @@ def condensedAffineFourierTransform
     ψ (AffineSpace.stdPairing n S) c (Fintype.card n)
 
 /-- The affine-line transform after a field extension of the finite field of the
-character. The field inclusion supplies the actual structure morphism.
-Source: latest blueprint, def-fd-transform.md, base change application
-(blueprint: sec-Fourier-inversion). -/
+character. The field inclusion supplies the actual structure morphism. -/
 def condensedFieldFourierTransform
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

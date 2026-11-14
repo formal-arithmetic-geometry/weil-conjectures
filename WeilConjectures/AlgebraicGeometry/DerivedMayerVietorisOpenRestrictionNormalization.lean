@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisCanonicalDat
 
 /-! # Restriction normalization by derived units
 
-Source: Stacks Project, Cohomology, Tags 08FE and 08BV.
-(blueprint: lem-pc-derived-mayer-vietoris-open-restriction-normalization).
+## References
+
+* Stacks Project, Tags 08FE and 08BV
 -/
 
 @[expose] public section
@@ -146,18 +147,8 @@ variable (X Y : Scheme.{u}) (h : X ⟶ Y)
 attribute [local instance 2000] schemeMVModuleAbelian
 
 /-- The canonical restriction comparison is the derivation of the sectionwise
-restriction identification, with its exact-source and exact-target factors.
-Source: Stacks Tag 08FE; Tag 0D5T for the composition factors.
-Proof: unfold the four factors of schemeMVOpenRestrictionComparison. For the first
-factor use the determining equation of rightDerivedFunctorCompMapDerivedCategoryIso;
-for the second use rightDerivedNatTrans_fac; for the third use the determining
-rightDerivedUnique equation of rightDerivedFunctorCompIso. For the fourth use
-rightDerivedFunctorIsoMapDerivedCategory_hom_fac. The intermediate units cancel,
-and the mapHomotopyCategory composition factors identify the remaining underived
-natural transformation with schemeMVUnderivedOpenRestriction. This proves the
-formula for every homotopy object, not only a K-injective one. Empty and full opens
-are included because the equation is a factorization of natural transformations.
-(blueprint: lem-pc-derived-mayer-vietoris-open-restriction-normalization). -/
+restriction identification, with its exact-source and exact-target factors
+(Stacks, Tags 08FE and 0D5T). -/
 theorem schemeMVOpenRestriction_unit_normalization
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))
       (ComplexShape.up ℤ)) :

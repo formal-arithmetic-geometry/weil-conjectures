@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionUnitIso
 
 /-! # Open component compatibility for derived base change
 
-Source: Stacks Project, Tags 08HY, 08BV and 0DJ9.
+## References
+
+* Stacks Project, Tags 08HY, 08BV and 0DJ9
 -/
 
 @[expose] public section
@@ -134,22 +136,8 @@ private theorem open_restriction_square
       rw [← Category.assoc, mvOpenBaseChange_unit q K K' ψ U,
         Category.assoc, open_restriction_unit]
 
-/-- Base-change components commute with restriction to a nested open.
-Source: Stacks Project, Cohomology, Lemma 08BV and Remark 08HY;
-Perfect Complexes, Tag 0DJ9, induction step, using Tag 0D5S.
-(blueprint: lem-pc-rf-mv-open-base-change-restriction).
-Proof: The transpose defining nested-open restriction sends the unit of the
-larger open to the unit of the smaller open, by the left triangle identity.
-Restriction of an open-adjunction unit to that open is invertible. Restrict
-further to the smaller open and transport across the pullback/restriction
-comparison; the pulled-back larger-open unit is still inverted by restriction
-to the smaller open. The smaller-open adjunction therefore makes precomposition
-with that unit injective on maps into its right adjoint. After precomposition,
-the desired local square follows from the two open base-change unit identities
-and the nested-open unit identity. Finally, naturality of base change in the
-coefficient object and functoriality of Rf'_* give the displayed square.
-No cover or finiteness assumption enters this argument. Equal and empty opens
-are included, since the adjunction identities and invertibility remain valid. -/
+/-- Base-change components commute with restriction to a nested open
+(Stacks, Tags 08BV, 08HY, 0DJ9 and 0D5S). -/
 theorem mvBaseChangeOpenMap_restriction
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

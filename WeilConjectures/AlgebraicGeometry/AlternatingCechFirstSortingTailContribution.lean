@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechPartialSortAdvance
 /-!
 # Tail junction deletions in the first sorting homotopy
 
-Source: Stacks Project, Tag 01FM, equation 20.23.6.1.
-(blueprint: lem-pc-alternating-cech-first-sorting-junction-tail-contribution)
+## References
+
+* Stacks Project, Tag 01FM
 -/
 
 @[expose] public section
@@ -140,30 +141,8 @@ private theorem tail_stage (X : Scheme.{u}) {I : Type v} (U : I → X.Opens)
     tail_coefficient σ τ₀ ρ₀ a hτ hc, neg_smul]
 
 open Classical in
-/-- Tail-labelled junction deletions contribute the negatives of the advanced stages.
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equation 20.23.6.1.
-
-Proof: For each fixed sigma and a, the permutation satisfying the partial
-sorting filter is unique: its prefix is sigma below a and its tail is the
-increasing enumeration of the unused labels. The same construction defines
-the unique partial permutation rho at stage a+1 (including stage p+2).
-Let tau be the stage-a permutation and b = tau.symm (sigma a). Then b >= a,
-since a label in the fixed prefix cannot equal sigma a by injectivity.
-The tail junction label sigma a occurs exactly at r = b+1. Removing that
-position leaves rho, obtained from tau by moving the entry at b to a and
-shifting entries a through b-1 one place right. This fixes sigma through a
-and leaves the remaining tail increasing. This move has sign (-1)^(b-a),
-including b=a when it is the identity. Thus sign(rho) = (-1)^(b-a) sign(tau).
-The deletion coefficient (-1)^a (-1)^(b+1) sign(tau) equals -sign(rho),
-because a+b+1 and b-a+1 differ by 2a. The two index maps compose to the
-index map of the deleted tuple since morphisms of opens form a subsingleton.
-Use the tuple equality to identify this with the map for rho. Functoriality and additivity of F
-therefore turn the unique tail term into the negative stage-a+1 term.
-Apply this for each sigma, retaining its stable sorting filter on both sides,
-and sum over a and sigma. At the last a, tau=rho=sigma and b=a, so the same
-argument still applies. Labels, rather than their values in I, are compared,
-so repetitions in t cause no extra terms; an empty I admits no such t.
-(blueprint: lem-pc-alternating-cech-first-sorting-junction-tail-contribution) -/
+/-- Tail-labelled junction deletions contribute the negatives of the advanced stages
+(Stacks, Tag 01FM). -/
 theorem cechFirstSortingJunctionTailContribution (X : Scheme.{u}) {I : Type v}
     [LinearOrder I] (U : I → X.Opens)
     (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})

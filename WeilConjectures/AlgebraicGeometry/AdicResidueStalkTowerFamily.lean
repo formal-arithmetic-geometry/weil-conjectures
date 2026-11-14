@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.LisseCoefficientConstructible
 
 /-! # Normalized algebraic stalk towers on a weakly contractible covering
 
-Source: Stacks Project, proetale.tex, Tag 09C6, before algebraic reconstruction.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 09C6
 -/
 
 @[expose] public noncomputable section
@@ -86,33 +87,8 @@ private theorem adicResidue_scalar_slice
   exact ⟨e₁ ≪≫ e₂.symm⟩
 
 /-- The finite reductions admit normalized algebraic stalk towers on one covering.
-No complex over the complete base ring is constructed here; A need not be J-complete.
-Source: Stacks Project, proetale.tex, Tag 09C6, first paragraph through the choice
-of an affine weakly contractible covering; Tags 09C2, 094I, 09BI and 090K.
-(auxiliary; not a blueprint node).
-
-Proof: Restrict M along the constant-to-completed coefficient map. The constant
-completion equivalence preserves its local derived completeness and identifies all
-finite reductions. The bounded lisse residue is constructible by the one-stratum
-stratification. Apply adic_constructible_finite_reductions to obtain the etale
-complexes C_n and their normalized consecutive quotient maps. Cover X by connected
-clopen components of affine Noetherian charts. Restrict the specified finite
-complexes and their quotient maps to those charts; the finite-reduction construction
-has already been made globally, so no local preservation of completion is needed.
-The ideal J/J^(n+1) in
-the Noetherian quotient ring is nilpotent. Nilpotent-reduction lissity makes every
-C_n lisse, with the common boundedness and Tor interval. Fix a geometric point of
-each nonempty connected chart. Exact tensor-compatible stalks give the algebraic
-levels E_n and consecutive reduction isomorphisms. Take their adjoint transposes
-for the transitions; the canonical scalar-extension adjunctions are the tower's
-extension fields. Connected etale perfect constancy proves E_0 perfect and
-identifies the pullback of every C_n on every affine weakly contractible object
-with constant E_n. Apply an affine weakly contractible cover to each chart, using
-localization and the coefficient-sized model equivalences to identify its slices.
-Transitivity assembles these into a covering of the final object. Retain E_n and
-their normalized transitions on each member. Empty charts use the empty covering.
-Only individual level isomorphisms are asserted, so no compatible markings are
-chosen on the weakly contractible objects. No inverse limit over A is used. -/
+No complex over the complete base ring is constructed here; A need not be J-complete
+(Stacks, Tags 09C6, 09C2, 094I, 09BI and 090K). -/
 theorem adicResidue_stalk_tower_family
     (X : Scheme.{u}) [IsNoetherian X]
     {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]

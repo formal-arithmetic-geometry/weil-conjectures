@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
 /-! # Reduction of an affine family before generic flatness
 
-Source: Stacks Project, Tag 0559, second proof, first paragraph.
+## References
+
+* Stacks Project, Tag 0559
 -/
 
 @[expose] public section
@@ -21,23 +23,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Topology
 namespace AlgebraicGeometry
 
-/-- Reduction produces an integral affine base and a reduced affine source, before shrinking.
-
-Source: Stacks Project, Tag 0559, second proof, first paragraph; Tags 01IZ and 054M.
-Proof: let S be the reduction of V and take q to be its canonical map. The named
-reduction theorem makes q a surjective closed immersion and S reduced. Lift η through
-q. Specialization reflects along q and the open inclusion of V, so the lift is generic.
-Thus S is irreducible, hence integral. The reduction of an affine scheme is affine.
-Since the image of f is in V, the pullback of f to V is isomorphic to X. Pullback
-pasting identifies P = X ×_T S with the pullback of this affine scheme along q;
-thus P is affine. Take Z to be the reduction of P and h its canonical map.
-The same reduction theorem makes Z reduced and h a surjective closed immersion,
-so Z is affine and h is a universal homeomorphism. The composite from Z to S is
-locally of finite type: the projection from P is a base change of f and the reduction
-map h is a closed immersion. No flatness or finite presentation is asserted here.
-The empty source is allowed; the generic point ensures a nonempty integral base.
-
-(blueprint: lem-sbc-affine-reduction-preparation) -/
+/-- Reduction produces an integral affine base and a reduced affine source, before shrinking
+(Stacks, Tags 0559, 01IZ and 054M). -/
 theorem exists_affine_reduction_preparation
     {X T : Scheme.{u}} [IsAffine X] (f : X ⟶ T) [LocallyOfFiniteType f]
     (V : T.Opens) (hV : IsAffineOpen V) (himage : Set.range f ⊆ V)

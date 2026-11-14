@@ -16,8 +16,9 @@ import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 /-!
 # EtaleInverseImageRingLift
 
-Source: Stacks Project, Sites and Sheaves, Proposition 00YV.
-(blueprint: lem-weil-pbc-etale-inverse-image-ring-lift).
+## References
+
+* Stacks Project, Tag 00YV
 -/
 
 @[expose] public section
@@ -98,27 +99,8 @@ private noncomputable def ringOne.{uC, vC, w} {C : Type uC} [Category.{vC} C]
 -- The exposed operation formulas require repeated reduction of the étale sheaf functors.
 set_option backward.isDefEq.respectTransparency false in
 
-/-- Source: Stacks Project, Sites and Sheaves, Proposition 00YV and its preceding
-quadruple/sextuple descriptions.
-(blueprint: lem-weil-pbc-etale-inverse-image-ring-lift).
-
-Proof: Identify ring-valued sheaves on both sites with internal commutative ring
-objects using `sheaves_algebraicStructures_objects`. Apply the ring clause of
-`Adjunction.liftsGroupRingObjects` to the set adjunction and `hL`. Transport its
-left functor through the inverse ring-object/sheaf functors to obtain `Lr`.
-The right functor so obtained is canonically the sectionwise direct image `Rr`:
-evaluation at each base-changed object preserves all five ring operations and all
-restriction homomorphisms. Use this identification to transport the lifted adjunction
-and call it `ar`. The underlying left comparison gives `er`; restricting the set
-adjunction bijection gives the displayed hom-set equation. Choose addition, zero,
-negation, multiplication and one to be the sectionwise operations under the
-ring-object/sheaf identification. The five lift formulas, expressed through `er`,
-give their transport equations below. For the binary operations compose the inverse
-product comparison with the two inverse components of `er`, and then cancel the
-comparison; for the constants use the unique map to the terminal object; for negation
-use the inverse component directly. Their section formulas are precisely those of
-the identification of ring sheaves with ring objects. The unit equation is not
-assumed here and will be deduced from the hom-set equation in the parent theorem. -/
+/-- If the étale inverse image `f⁻¹` preserves finite limits, it lifts to sheaves of rings,
+compatibly with the forgetful functors (Stacks, Tag 00YV). -/
 theorem etaleInverseImageRingLift (U V : Scheme.{u}) (f : U ⟶ V)
     (hL : PreservesFiniteLimits (Scheme.etaleSetPullback f)) :
     let b := MorphismProperty.Over.pullback @Etale ⊤ f

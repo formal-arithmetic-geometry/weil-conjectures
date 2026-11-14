@@ -9,7 +9,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonLaws
 
 /-! # Canonical affine étale section system
-Source: Stacks Project, Tag 09YQ. -/
+
+## References
+
+* Stacks Project, Tag 09YQ
+-/
 
 @[expose] public section
 
@@ -17,8 +21,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Stage section sets and their canonical transition maps over a fixed base stage.
-Source: Stacks Project, Tag 09YQ (blueprint: def-weil-pbc-affine-section-diagram). -/
+/-- Stage section sets and their canonical transition maps over a fixed base stage
+(Stacks, Tag 09YQ). -/
 noncomputable def etaleStageSectionDiagram
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (i₀ : I)
     (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1)))

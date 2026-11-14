@@ -12,8 +12,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # Stalks of inverse images of étale sheaves of sets, with germs
 
-Source: Stacks Project, Étale Cohomology, Tag 03Q1 (3)
-(blueprint: lem-weil-pbc-sets-etale-inverse-image-stalk-germ).
+## References
+
+* Stacks Project, Tag 03Q1
 -/
 
 @[expose] public section
@@ -24,29 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Étale Cohomology, Tag 03Q1 (3)
-(blueprint: lem-weil-pbc-sets-etale-inverse-image-stalk-germ).
-The unique map from the inverse-image stalk to the image-point stalk sends every germ of
-a unit-pulled-back section to its original germ and is bijective. The pointed neighbourhood
-on the source is the fibre product, with lift given by `pullback.lift`.
-
-Proof:
-1. Compose the inverse of the constructed/abstract sheaf-pullback comparison with
-   the inverse of `Point.sheafFiberComapIso` and `Point.sheafFiberIso` for
-   `Scheme.pointSmallEtaleComapIso`. This gives an isomorphism for set coefficients.
-   This is the general-site proof of Stacks Tag 03Q1 (3), via Sites Tag 05V1.
-2. Compose the desired germ equality with the inverse isomorphism. The germ formula
-   for the point isomorphism transports the lift, and the germ formula for
-   `sheafFiberComapIso` gives the abstract pullback unit. Germ naturality moves the
-   abstract/constructed comparison before the germ; uniqueness of left adjoints
-   identifies this composite with the constructed pullback unit in the statement.
-3. The transported lift equals `pullback.lift x.left t (Over.w x)`: both projections
-   agree, by the two projection lemmas for `pointSmallEtaleFiberEtaleIso`.
-4. The underlying map of the isomorphism is bijective. For uniqueness, write the image
-   of any inverse-image stalk element as a germ, using
-   `Point.toPresheafFiber_jointly_surjective`. The germ formula and injectivity of the
-   comparison identify the element with the corresponding pulled-back germ. Hence
-   every map satisfying the germ formula agrees with the comparison everywhere. -/
+/-- The unique map from the inverse-image stalk to the image-point stalk sends every germ of a
+unit-pulled-back section to its original germ and is bijective (Stacks, Tag 03Q1). -/
 theorem etaleSetInverseImageStalkGerm (S T : Scheme.{u}) (e : T ⟶ S)
     (G : Sheaf S.smallEtaleTopology (Type (u + 1)))
     (Ω : Type u) [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ T) :

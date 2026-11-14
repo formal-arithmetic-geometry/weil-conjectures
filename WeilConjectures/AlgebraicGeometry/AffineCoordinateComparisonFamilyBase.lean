@@ -9,8 +9,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.AffineCoordinateDerivedComparison
 
 /-! # The two-label affine comparison family
-Source: Stacks Project, Tags 08DW and 06Y1.
-(blueprint: lem-pc-affine-coordinate-comparison-family-base). -/
+
+## References
+
+* Stacks Project, Tags 08DW and 06Y1
+-/
 
 @[expose] public section
 universe u w
@@ -22,9 +25,7 @@ variable [∀ X : Scheme.{u},
 
 /-- The chart object comparisons assemble to a natural comparison on the induced
 category of the two labelled models. Naturality is the preceding chart naturality
-lemma, applied to all four possible labels and all cross-label morphisms.
-Source: Stacks Project, Tag 08DW(2).
-(blueprint: lem-pc-affine-coordinate-comparison-family-base). -/
+lemma, applied to all four possible labels and all cross-label morphisms (Stacks, Tag 08DW). -/
 theorem exists_affineCoordinateComparisonFamilyBase :
     ∃ δ : AffineCoordinateComparisonFamily.{u, w},
       ∀ (a b : AffineComparisonCoordinate.{u, w})

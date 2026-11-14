@@ -13,8 +13,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 /-!
 # Functorial maps between direct images of constant modules
 
-Source: Stacks Project, Tag 09Z1, canonical transition maps.
-(blueprint: lem-weil-pbc-constant-module-pushforward-functoriality).
+## References
+
+* Stacks Project, Tag 09Z1
 -/
 
 @[expose] public section
@@ -208,21 +209,7 @@ private lemma constantModuleTransition_comp
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical constant-module pushforward maps preserve identity and composition
-contravariantly in the scheme over the base.
-
-Source: Stacks Project, Tag 09Z1, system of sheaves and its direct-image transitions;
-Tag 09Z6, finite approximation paragraph.
-(blueprint: lem-weil-pbc-constant-module-pushforward-functoriality).
-
-Proof: The map adjoint to the canonical pullback comparison sends a constant section
-with value m to the constant section with value m. On an etale object of the base,
-its direct image is restriction along the induced map of fibre products. Restriction
-along the identity is the identity; restriction along a composite is the composite
-of restrictions in reverse order. These equalities hold on constant presheaves and
-extend uniquely to their sheafifications. The inverse-image adjunction identifies
-these restrictions with the displayed maps. The lowerStar composition comparisons
-are precisely the fibre-product pasting comparisons, so these sectionwise identities
-prove both asserted equalities. This applies also to zero modules and empty schemes. -/
+contravariantly in the scheme over the base (Stacks, Tags 09Z1 and 09Z6). -/
 theorem constantModulePushforwardMap_id_comp
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ) :
     (∀ {X Y : Scheme.{u}} (f : Y ⟶ X),
