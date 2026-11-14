@@ -385,6 +385,45 @@ private theorem scalarAssoc_tensor_good (D : Type u) [Field D] [Algebra (Padic l
     exact (SheafOfModules.KFlatTotalTensorModel.kFlat_total_tensor_model
       (coefficientSequenceCommRingSheaf.{u, u} l D W) P Q hP.1 hQ.1 hP.2 hQ.2).2.1⟩
 
+/-- Naturality of a tensor comparison with its right input fixed. -/
+private theorem scalarAssoc_tensor_naturality_right
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory D]
+    (F : C ⥤ D) (T : C × C ⥤ D) (μ : T ≅ F.prod F ⋙ MonoidalCategory.tensor D)
+    {X X' : C} (f : X ⟶ X') (Y : C) :
+    T.map (f, 𝟙 Y) ≫ μ.hom.app (X', Y) =
+      μ.hom.app (X, Y) ≫ (F.map f ▷ F.obj Y) := by
+  have h := μ.hom.naturality (X := (X, Y)) (Y := (X', Y)) (f, 𝟙 Y)
+  simp only [Functor.comp_map, Functor.prod_map, tensor_map, F.map_id] at h
+  erw [tensorHom_id] at h
+  exact h
+
+/-- Naturality of a tensor comparison with its left input fixed. -/
+private theorem scalarAssoc_tensor_naturality_left
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory D]
+    (F : C ⥤ D) (T : C × C ⥤ D) (μ : T ≅ F.prod F ⋙ MonoidalCategory.tensor D)
+    (X : C) {Y Y' : C} (f : Y ⟶ Y') :
+    T.map (𝟙 X, f) ≫ μ.hom.app (X, Y') =
+      μ.hom.app (X, Y) ≫ (F.obj X ◁ F.map f) := by
+  have h := μ.hom.naturality (X := (X, Y)) (Y := (X, Y')) (𝟙 X, f)
+  simp only [Functor.comp_map, Functor.prod_map, tensor_map, F.map_id] at h
+  erw [id_tensorHom] at h
+  exact h
+
+/-- Normalize an associator square along the two chosen tensor-model isomorphisms. -/
+private theorem scalarAssoc_model_associator
+    {D : Type*} [Category D] [MonoidalCategory D]
+    {X Y Z XY YZ L R : D}
+    (iL bL : L ≅ XY ⊗ Z) (iR bR : R ≅ X ⊗ YZ)
+    (bPQ : XY ≅ X ⊗ Y) (bQN : YZ ≅ Y ⊗ Z) (a : L ⟶ R)
+    (hL : iL = bL) (hR : iR = bR)
+    (h : iL.hom ≫ (bPQ.hom ⊗ₘ 𝟙 Z) ≫ (α_ X Y Z).hom =
+      a ≫ iR.hom ≫ (𝟙 X ⊗ₘ bQN.hom)) :
+    (bL ≪≫ whiskerRightIso bPQ Z).hom ≫ (α_ X Y Z).hom =
+      a ≫ (bR ≪≫ whiskerLeftIso X bQN).hom := by
+  subst bL bR
+  erw [tensorHom_id, id_tensorHom] at h
+  simpa only [Iso.trans_hom, whiskerRightIso_hom, whiskerLeftIso_hom, Category.assoc] using h
+
 section Representatives
 attribute [local implicit_reducible] coefficientSequenceInternalHom coefficientSequenceHasDerived
   CoefficientClosedStructure.tensor
@@ -393,9 +432,29 @@ attribute [local irreducible]
   SheafOfModules.monoidalCategory CochainComplex.IsKFlatIndependentCoefficients
   derivedInternalHomOfUniverses coefficientTotalTensor Functor.mapHomologicalComplex
 
+/-- The scalar tensorator's normalization with the fixed good scalar representatives. -/
+private theorem scalarAssoc_tensor_normalization (P Q : ScalarExtensionTower.Complex l E W)
+    (hP : ScalarExtensionTower.Good l E W P) (hQ : ScalarExtensionTower.Good l E W Q) :
+    let SE := pullbackTensorCalculus l E W
+    let SL := pullbackTensorCalculus l L W
+    let V := ScalarExtensionTower.scalar l E L ι W
+    let δ := integralComparisonSequenceScalarModel.{u, u} l E L ι W
+    (integralComparisonDerivedSequenceScalar l E L ι W).map
+        (SE.systemTensorModel.iso _ _ _ P Q hP.1 hQ.1).hom ≫
+      (ScalarExtensionTower.derivedSigma l E L ι W SE SL).hom.app
+        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
+      SL.systemClosed.tensor.map (Prod.mkHom (δ.ε.app P) (δ.ε.app Q)) =
+    δ.ε.app ((ScalarExtensionTower.tensor l E W).obj (P, Q)) ≫
+      DerivedCategory.Q.map (((ScalarExtensionTower.comparisons l).sigma E L ι W).hom.app
+        (P, Q)) ≫
+      (SL.systemTensorModel.iso _ _ _ (V.obj P) (V.obj Q)
+        (ScalarExtensionTower.scalar_good l E L ι W P hP).1
+        (ScalarExtensionTower.scalar_good l E L ι W Q hQ).1).hom := by
+  have h := (ScalarExtensionTower.derivedSigma_existsUnique l E L ι W
+    (pullbackTensorCalculus l E W) (pullbackTensorCalculus l L W)).exists.choose_spec
+  obtain ⟨_, _, h⟩ := h P Q hP hQ
+  exact h
 
-set_option maxHeartbeats 800000 in
--- Elaborating the four tensor-model normalization squares uses extra heartbeats.
 /-- Associativity of the scalar tensorator on three good representatives.
 Source: Stacks 07A4, total tensor construction (blueprint: lem-pur-system-scalar-tensor-braiding).
 Proof: insert the cochain normalizations of the scalar tensorator, of the tensor models and of
@@ -490,12 +549,6 @@ private theorem scalarAssoc_representatives (A B C : ScalarExtensionTower.Comple
   obtain ⟨aB, haB, heB⟩ := cB.associator_model P Q N hP hQ hN
   obtain ⟨aA, haA, heA⟩ := cA.associator_model (V.obj P) (V.obj Q) (V.obj N) hUP hUQ hUN
   have hc := scalarSigma_cochain_associativity l E L ι W P Q N aB aA haB haA
-  rw [show cB.tensorIso PQ N (Or.inr hN) = TB.iso J R SB PQ N hPQ hN from
-      cB.tensorIso_both PQ N hPQ hN,
-    cB.tensorIso_both P QN hP hQN] at heB
-  rw [show cA.tensorIso (A.obj (V.obj P, V.obj Q)) (V.obj N) (Or.inr hUN) =
-      TA.iso J' R' SA _ _ hAPQ hUN from cA.tensorIso_both _ _ hAPQ hUN,
-    cA.tensorIso_both (V.obj P) (A.obj (V.obj Q, V.obj N)) hUP hAQN] at heA
   let bPQ := TB.iso J R SB P Q hP hQ
   let bQN := TB.iso J R SB Q N hQ hN
   let bL := TB.iso J R SB PQ N hPQ hN
@@ -533,28 +586,18 @@ private theorem scalarAssoc_representatives (A B C : ScalarExtensionTower.Comple
       (𝟙 (V.obj P), chain.hom.app (Q, N)))
   have hB : lB.hom ≫ (α_ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)
         (DerivedCategory.Q.obj N)).hom = DerivedCategory.Q.map aB.hom ≫ rB.hom := by
-    change (bL.hom ≫ (bPQ.hom ▷ DerivedCategory.Q.obj N)) ≫
-        (α_ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)
-          (DerivedCategory.Q.obj N)).hom =
-      DerivedCategory.Q.map aB.hom ≫ (bR.hom ≫ (DerivedCategory.Q.obj P ◁ bQN.hom))
-    simpa only [bL, bR, bPQ, bQN, CoefficientClosedStructure.tensor, tensor_map,
-      tensorHom_id, id_tensorHom, Category.assoc] using heB
+    exact scalarAssoc_model_associator _ bL _ bR bPQ bQN (DerivedCategory.Q.map aB.hom)
+      (cB.tensorIso_both PQ N hPQ hN) (cB.tensorIso_both P QN hP hQN) heB
   have hA : lA.hom ≫ (α_ (DerivedCategory.Q.obj (V.obj P))
         (DerivedCategory.Q.obj (V.obj Q)) (DerivedCategory.Q.obj (V.obj N))).hom =
       DerivedCategory.Q.map aA.hom ≫ rA.hom := by
-    change (aL.hom ≫ (aPQ.hom ▷ DerivedCategory.Q.obj (V.obj N))) ≫
-        (α_ (DerivedCategory.Q.obj (V.obj P)) (DerivedCategory.Q.obj (V.obj Q))
-          (DerivedCategory.Q.obj (V.obj N))).hom =
-      DerivedCategory.Q.map aA.hom ≫ (aR.hom ≫ (DerivedCategory.Q.obj (V.obj P) ◁ aQN.hom))
-    simpa only [aL, aR, aPQ, aQN, CoefficientClosedStructure.tensor, tensor_map,
-      tensorHom_id, id_tensorHom, Category.assoc] using heA
-  have hμ := (ScalarExtensionTower.derivedSigma_existsUnique l E L ι W
-    (pullbackTensorCalculus l E W) (pullbackTensorCalculus l L W)).exists.choose_spec
-  unfold ScalarExtensionTower.DerivedSigmaModel at hμ
-  obtain ⟨_, _, hmPQ⟩ := hμ P Q hPg hQg
-  obtain ⟨_, _, hmQN⟩ := hμ Q N hQg hNg
-  obtain ⟨_, _, hmL⟩ := hμ PQ N hPQg hNg
-  obtain ⟨_, _, hmR⟩ := hμ P QN hPg hQNg
+    exact scalarAssoc_model_associator _ aL _ aR aPQ aQN (DerivedCategory.Q.map aA.hom)
+      (cA.tensorIso_both (A.obj (V.obj P, V.obj Q)) (V.obj N) hAPQ hUN)
+      (cA.tensorIso_both (V.obj P) (A.obj (V.obj Q, V.obj N)) hUP hAQN) heA
+  have hmPQ := scalarAssoc_tensor_normalization l E L ι W P Q hPg hQg
+  have hmQN := scalarAssoc_tensor_normalization l E L ι W Q N hQg hNg
+  have hmL := scalarAssoc_tensor_normalization l E L ι W PQ N hPQg hNg
+  have hmR := scalarAssoc_tensor_normalization l E L ι W P QN hPg hQNg
   change H.map bPQ.hom ≫ μ.hom.app (_, _) ≫
     ((e.app P) ⊗ₘ (e.app Q)) = e.app _ ≫ tPQ ≫ aPQ.hom at hmPQ
   change H.map bQN.hom ≫ μ.hom.app (_, _) ≫
@@ -563,32 +606,16 @@ private theorem scalarAssoc_representatives (A B C : ScalarExtensionTower.Comple
     ((e.app PQ) ⊗ₘ (e.app N)) = e.app _ ≫ tL ≫ aL₀.hom at hmL
   change H.map bR.hom ≫ μ.hom.app (_, _) ≫
     ((e.app P) ⊗ₘ (e.app QN)) = e.app _ ≫ tR ≫ aR₀.hom at hmR
-  have hnL := TA.comparison.hom.naturality
-    (X := (⟨V.obj PQ, hUPQ⟩, ⟨V.obj N, hUN⟩))
-    (Y := (⟨A.obj (V.obj P, V.obj Q), hAPQ⟩, ⟨V.obj N, hUN⟩))
-    (ObjectProperty.homMk (chain.hom.app (P, Q)), ObjectProperty.homMk (𝟙 (V.obj N)))
-  change DerivedCategory.Q.map (A.map (chain.hom.app (P, Q), 𝟙 (V.obj N))) ≫ aL.hom =
-    aL₀.hom ≫ SA.tensor.map
-      (X := (DerivedCategory.Q.obj (V.obj PQ), DerivedCategory.Q.obj (V.obj N)))
-      (Y := (DerivedCategory.Q.obj (A.obj (V.obj P, V.obj Q)),
-        DerivedCategory.Q.obj (V.obj N)))
-      (DerivedCategory.Q.map (chain.hom.app (P, Q)), DerivedCategory.Q.map (𝟙 (V.obj N))) at hnL
-  have hnR := TA.comparison.hom.naturality
-    (X := (⟨V.obj P, hUP⟩, ⟨V.obj QN, hUQN⟩))
-    (Y := (⟨V.obj P, hUP⟩, ⟨A.obj (V.obj Q, V.obj N), hAQN⟩))
-    (ObjectProperty.homMk (𝟙 (V.obj P)), ObjectProperty.homMk (chain.hom.app (Q, N)))
-  change DerivedCategory.Q.map (A.map (𝟙 (V.obj P), chain.hom.app (Q, N))) ≫ aR.hom =
-    aR₀.hom ≫ SA.tensor.map
-      (X := (DerivedCategory.Q.obj (V.obj P), DerivedCategory.Q.obj (V.obj QN)))
-      (Y := (DerivedCategory.Q.obj (V.obj P),
-        DerivedCategory.Q.obj (A.obj (V.obj Q, V.obj N))))
-      (DerivedCategory.Q.map (𝟙 (V.obj P)), DerivedCategory.Q.map (chain.hom.app (Q, N))) at hnR
-  simp only [CoefficientClosedStructure.tensor, tensor_map,
-    DerivedCategory.Q.map_id] at hnL
-  erw [tensorHom_id] at hnL
-  simp only [CoefficientClosedStructure.tensor, tensor_map,
-    DerivedCategory.Q.map_id] at hnR
-  erw [id_tensorHom] at hnR
+  have hnL : DerivedCategory.Q.map (A.map (chain.hom.app (P, Q), 𝟙 (V.obj N))) ≫
+      aL.hom = aL₀.hom ≫ (tPQ ▷ DerivedCategory.Q.obj (V.obj N)) :=
+    scalarAssoc_tensor_naturality_right _ _ TA.comparison
+      (X := ⟨V.obj PQ, hUPQ⟩) (X' := ⟨A.obj (V.obj P, V.obj Q), hAPQ⟩)
+      (ObjectProperty.homMk (chain.hom.app (P, Q))) ⟨V.obj N, hUN⟩
+  have hnR : DerivedCategory.Q.map (A.map (𝟙 (V.obj P), chain.hom.app (Q, N))) ≫
+      aR.hom = aR₀.hom ≫ (DerivedCategory.Q.obj (V.obj P) ◁ tQN) :=
+    scalarAssoc_tensor_naturality_left _ _ TA.comparison
+      (Y := ⟨V.obj QN, hUQN⟩) (Y' := ⟨A.obj (V.obj Q, V.obj N), hAQN⟩)
+      ⟨V.obj P, hUP⟩ (ObjectProperty.homMk (chain.hom.app (Q, N)))
   have hL₀ := scalarAssoc_left_square
     H μ bPQ.hom bL.hom
     (e.app P) (e.app Q) (e.app N) (e.app PQ)

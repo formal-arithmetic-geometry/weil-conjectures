@@ -66,8 +66,6 @@ private theorem restriction_stalk_smul
   erw [hg, hg]
   exact PresheafOfModules.germ_smul (R := Y.presheaf) M.val _ _ _ _ _
 
-set_option maxHeartbeats 400000 in
--- The explicit comparison of mapped stalk complexes requires more definitional checks.
 /-- The canonical additive open restriction comparison is a semilinear chain iso,
 with the same-germ component formula, including transport of the ambient point.
 
@@ -128,7 +126,7 @@ theorem exists_openSemilinearInputComplexIso (X : Scheme.{u}) (U : X.Opens) (x :
       Functor.whiskerRight_app, Functor.comp_map, AddCommGrpCat.comp_apply]
     change (Scheme.Modules.restrictStalkNatIso U.ι x).hom.app (P.X n)
         ((L₀.map ((Scheme.Modules.overFunctorEquiv U).hom.app (P.X n))) (a • q)) = _
-    erw [map_smul, restriction_stalk_smul]
+    rw [(L₀.map ((Scheme.Modules.overFunctorEquiv U).hom.app (P.X n))).hom.map_smul]
     let e := (U.stalkIso x ≪≫ X.presheaf.stalkCongr
       (.of_eq (Eq.refl x.val))).commRingCatIsoToRingEquiv
     have he : e.toRingHom = (inv (U.ι.stalkMap x)).hom := by
@@ -143,7 +141,7 @@ theorem exists_openSemilinearInputComplexIso (X : Scheme.{u}) (U : X.Opens) (x :
       simpa only [Scheme.Opens.stalkIso_inv] using (U.stalkIso x).hom_inv_id
     change _ = (e.toRingHom a) • _
     rw [he]
-    rfl
+    exact restriction_stalk_smul U.ι x (P.X n) a _
   · intro n
     simp [TopCat.Presheaf.stalkCongr, γ]
     rfl
