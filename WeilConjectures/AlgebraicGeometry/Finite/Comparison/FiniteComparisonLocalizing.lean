@@ -445,10 +445,12 @@ open CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.Obj TensorProduct ZeroObject
 
 section LocalizingArgument
-universe w v₁ v₂
+universe w v₁
 namespace CategoryTheory
 
-variable {C : Type w} {D : Type w} [Category.{v₁} C] [Category.{v₂} D]
+-- one universe of morphisms for both categories: localizing subcategories are closed under the
+-- direct sums indexed by that universe (`CategoryTheory.IsLocalizingSubcategory`)
+variable {C : Type w} {D : Type w} [Category.{v₁} C] [Category.{v₁} D]
   [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
   [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
   [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
