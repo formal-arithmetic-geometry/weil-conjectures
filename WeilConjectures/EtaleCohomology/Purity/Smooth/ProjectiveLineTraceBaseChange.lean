@@ -186,17 +186,17 @@ variable {S S' : Scheme.{u}} [HasInvertibleExponent Λ S] [HasInvertibleExponent
 
 variable (Λ) in
 /-- **Base change of the hyperplane class.** The pullback of the hyperplane class
-`h ∈ H²(ℙ¹_S, Λ(1))` (`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`) along
+`h ∈ H²(ℙ¹_S, Λ(1))` (`AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux`) along
 `g' : ℙ¹_{S'} ⟶ ℙ¹_S`, read through `Λ_{ℙ¹_{S'}} ≅ Lg'^* Λ_{ℙ¹_S}` and
 `Lg'^*(Λ(1)[2]) ≅ Λ(1)[2]`, is the hyperplane class of `ℙ¹_{S'}`. -/
-theorem projectiveLineHyperplaneClass_baseChange :
+theorem projectiveLineHyperplaneClassAux_baseChange :
     (leftDerivedUpperStarConstantComplexIso Λ
         (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g)).inv ≫
       (L((ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g)^*[ModuleCat.{u + 1} Λ])).map
-        (projectiveLineHyperplaneClass Λ S) ≫
+        (projectiveLineHyperplaneClassAux Λ S) ≫
       (leftDerivedUpperStarTateTwoIso Λ
         (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g)).hom =
-    projectiveLineHyperplaneClass Λ S' := by
+    projectiveLineHyperplaneClassAux Λ S' := by
   have hV := ProjectiveSpace.map_preimage_standardOpen g (some (⟨0⟩ : ULift.{u} (Fin 1)))
   let mV := (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g).resLE
     (ProjectiveSpace.lineInfinityOpen S) (ProjectiveSpace.lineInfinityOpen S') hV.ge
@@ -212,21 +212,37 @@ theorem projectiveLineHyperplaneClass_baseChange :
   have hs' : mV.appTop '' {ProjectiveSpace.lineInfinityCoord S} =
       {ProjectiveSpace.lineInfinityCoord S'} := by
     rw [Set.image_singleton, hs]
-  rw [projectiveLineHyperplaneClass, projectiveLineHyperplaneClass, chartBoundaryClass_eq,
+  rw [projectiveLineHyperplaneClassAux, projectiveLineHyperplaneClassAux, chartBoundaryClass_eq,
     chartBoundaryClass_eq, ← restrictSupportedClass_chartBoundarySupportedClass_of_isPullback Λ
       _ _ (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g) _ _ _ sq _
       (Scheme.isPullback_zeroLocusSubschemeι mV _ _ hs') hs,
     restrictSupportedClass_comp_counit]
 
 variable (Λ) in
+
+/-- **Base change of the hyperplane class** `h = c₁(𝒪(1))` of the notes
+(`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`): the negative of the auxiliary statement
+`AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux_baseChange`. -/
+theorem projectiveLineHyperplaneClass_baseChange :
+    (leftDerivedUpperStarConstantComplexIso Λ
+        (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g)).inv ≫
+      (L((ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g)^*[ModuleCat.{u + 1} Λ])).map
+        (projectiveLineHyperplaneClass Λ S) ≫
+      (leftDerivedUpperStarTateTwoIso Λ
+        (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g)).hom =
+    projectiveLineHyperplaneClass Λ S' := by
+  have := projectiveLineHyperplaneClassAux_baseChange Λ g
+  simp only [projectiveLineHyperplaneClass, Functor.map_neg, comp_neg, neg_comp, neg_inj] at this ⊢
+  exact this
+
 /-- **Base change of the decomposition map** (blueprint `lemma-cohomology-projective-line-trace`
 (1)). Let `g' : ℙ¹_{S'} ⟶ ℙ¹_S` be the base change of `g : S' ⟶ S`. The pullback along `g` of the
 decomposition map `(1, h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])`
-(`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`), followed by the proper base change
+(`AlgebraicGeometry.Etale.projectiveLineDecompositionMapAux`), followed by the proper base change
 map `Lg^* Rq_* ⟶ Rq'_* Lg'^*` and `Lg'^*(Λ(1)[2]) ≅ Λ(1)[2]`, is the decomposition map of
 `ℙ¹_{S'}`, preceded by the identification `Lg^*(Λ_S(1)[2] ⊕ Λ_S) ≅ Λ_{S'}(1)[2] ⊕ Λ_{S'}`. -/
-theorem projectiveLineDecompositionMap_baseChange :
-    (L((g)^*[ModuleCat.{u + 1} Λ])).map (projectiveLineDecompositionMap Λ S) ≫
+theorem projectiveLineDecompositionMapAux_baseChange :
+    (L((g)^*[ModuleCat.{u + 1} Λ])).map (projectiveLineDecompositionMapAux Λ S) ≫
         (derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
           (ProjectiveSpace.isPullback_map (Option (ULift.{u} (Fin 1))) g).toCommSq).app
           ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) ≫
@@ -238,7 +254,7 @@ theorem projectiveLineDecompositionMap_baseChange :
             (leftDerivedUpperStarTateTwoIso Λ g).hom)
           ((L((g)^*[ModuleCat.{u + 1} Λ])).map biprod.snd ≫
             (leftDerivedUpperStarConstantComplexIso Λ g).hom) ≫
-        projectiveLineDecompositionMap Λ S' := by
+        projectiveLineDecompositionMapAux Λ S' := by
   have sq := ProjectiveSpace.isPullback_map (Option (ULift.{u} (Fin 1))) g
   have hU := leftDerivedUpperStar_map_unit_comp_map_comp_derivedBaseChangeMap_comp sq.toCommSq
     (((L(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))^*[ModuleCat.{u + 1} Λ])).commShiftIso
@@ -252,16 +268,16 @@ theorem projectiveLineDecompositionMap_baseChange :
     (derivedSquareUpperStarIso_hom_app_tateTwo sq.toCommSq)
   have hC := leftDerivedUpperStar_map_unit_comp_map_comp_derivedBaseChangeMap_comp sq.toCommSq
     ((leftDerivedUpperStarConstantComplexIso Λ (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).hom ≫
-      projectiveLineHyperplaneClass Λ S)
+      projectiveLineHyperplaneClassAux Λ S)
     ((leftDerivedUpperStarConstantComplexIso Λ (ℙ(Option (ULift.{u} (Fin 1)); S') ↘ S')).hom ≫
-      projectiveLineHyperplaneClass Λ S')
+      projectiveLineHyperplaneClassAux Λ S')
     (leftDerivedUpperStarConstantComplexIso Λ g).hom
     (leftDerivedUpperStarTateTwoIso Λ (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g)).hom
     (by
-      rw [← projectiveLineHyperplaneClass_baseChange Λ g, Functor.map_comp, Category.assoc,
+      rw [← projectiveLineHyperplaneClassAux_baseChange Λ g, Functor.map_comp, Category.assoc,
         ← reassoc_of% (derivedSquareUpperStarIso_hom_app_constantComplex Λ sq.toCommSq),
         Iso.hom_inv_id_assoc])
-  simp only [projectiveLineDecompositionMap, Adjunction.homEquiv_unit, biprod.desc_eq,
+  simp only [projectiveLineDecompositionMapAux, Adjunction.homEquiv_unit, biprod.desc_eq,
     Functor.map_add, Preadditive.add_comp]
   rw [Functor.map_comp (L((g)^*[ModuleCat.{u + 1} Λ])) biprod.fst, Category.assoc, hU,
     Functor.map_comp (L((g)^*[ModuleCat.{u + 1} Λ])) biprod.snd, Category.assoc, hC]
@@ -270,22 +286,22 @@ theorem projectiveLineDecompositionMap_baseChange :
 variable (Λ) in
 /-- **Base change of the trace** (blueprint `lemma-cohomology-projective-line-trace` (2)). For
 `g : S' ⟶ S` with base change `g' : ℙ¹_{S'} ⟶ ℙ¹_S`, the pullback along `g` of the trace
-`Tr_q : Rq_*(Λ_{ℙ¹_S}(1)[2]) ⟶ Λ_S` (`AlgebraicGeometry.Etale.projectiveLineTrace`) is the
+`Tr_q : Rq_*(Λ_{ℙ¹_S}(1)[2]) ⟶ Λ_S` (`AlgebraicGeometry.Etale.projectiveLineTraceAux`) is the
 proper base change map `Lg^* Rq_* ⟶ Rq'_* Lg'^*`, followed by `Lg'^*(Λ(1)[2]) ≅ Λ(1)[2]`, the
 trace of `ℙ¹_{S'}` and `Λ_{S'} ≅ Lg^* Λ_S`. -/
-theorem projectiveLineTrace_baseChange [HasKummerClass.IsNormalized Λ] :
-    (L((g)^*[ModuleCat.{u + 1} Λ])).map (projectiveLineTrace Λ S) =
+theorem projectiveLineTraceAux_baseChange [HasKummerClass.IsNormalized Λ] :
+    (L((g)^*[ModuleCat.{u + 1} Λ])).map (projectiveLineTraceAux Λ S) =
       (derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
           (ProjectiveSpace.isPullback_map (Option (ULift.{u} (Fin 1))) g).toCommSq).app
           ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) ≫
         (R(((ℙ(Option (ULift.{u} (Fin 1)); S') ↘ S'))_*[ModuleCat.{u + 1} Λ])).map
           (leftDerivedUpperStarTateTwoIso Λ
             (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g)).hom ≫
-        projectiveLineTrace Λ S' ≫ (leftDerivedUpperStarConstantComplexIso Λ g).inv := by
-  haveI := isIso_projectiveLineDecompositionMap Λ S
-  haveI := isIso_projectiveLineDecompositionMap Λ S'
-  have h := projectiveLineDecompositionMap_baseChange Λ g
-  have h₂ : (L((g)^*[ModuleCat.{u + 1} Λ])).map (inv (projectiveLineDecompositionMap Λ S)) ≫
+        projectiveLineTraceAux Λ S' ≫ (leftDerivedUpperStarConstantComplexIso Λ g).inv := by
+  haveI := isIso_projectiveLineDecompositionMapAux Λ S
+  haveI := isIso_projectiveLineDecompositionMapAux Λ S'
+  have h := projectiveLineDecompositionMapAux_baseChange Λ g
+  have h₂ : (L((g)^*[ModuleCat.{u + 1} Λ])).map (inv (projectiveLineDecompositionMapAux Λ S)) ≫
       biprod.lift
           ((L((g)^*[ModuleCat.{u + 1} Λ])).map biprod.fst ≫
             (leftDerivedUpperStarTateTwoIso Λ g).hom)
@@ -297,17 +313,36 @@ theorem projectiveLineTrace_baseChange [HasKummerClass.IsNormalized Λ] :
         (R(((ℙ(Option (ULift.{u} (Fin 1)); S') ↘ S'))_*[ModuleCat.{u + 1} Λ])).map
           (leftDerivedUpperStarTateTwoIso Λ
             (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g)).hom) ≫
-        inv (projectiveLineDecompositionMap Λ S') := by
+        inv (projectiveLineDecompositionMapAux Λ S') := by
     rw [IsIso.eq_comp_inv, Category.assoc, ← h, ← Functor.map_comp_assoc, IsIso.inv_hom_id,
       CategoryTheory.Functor.map_id, Category.id_comp]
   rw [← cancel_mono (leftDerivedUpperStarConstantComplexIso Λ g).hom, Category.assoc,
-    Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id, projectiveLineTrace,
-    projectiveLineTrace, Functor.map_comp, Category.assoc, ← biprod.lift_snd
+    Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id, projectiveLineTraceAux,
+    projectiveLineTraceAux, Functor.map_comp, Category.assoc, ← biprod.lift_snd
       ((L((g)^*[ModuleCat.{u + 1} Λ])).map biprod.fst ≫ (leftDerivedUpperStarTateTwoIso Λ g).hom)
       ((L((g)^*[ModuleCat.{u + 1} Λ])).map biprod.snd ≫
         (leftDerivedUpperStarConstantComplexIso Λ g).hom), reassoc_of% h₂]
 
 variable (Λ) in
+
+/-- **Base change of the trace** (blueprint `lemma-cohomology-projective-line-trace` (2)). For
+`g : S' ⟶ S` with base change `g' : ℙ¹_{S'} ⟶ ℙ¹_S`, the pullback along `g` of the trace
+`Tr_q : Rq_*(Λ_{ℙ¹_S}(1)[2]) ⟶ Λ_S` (`AlgebraicGeometry.Etale.projectiveLineTrace`) is the
+proper base change map `Lg^* Rq_* ⟶ Rq'_* Lg'^*`, followed by `Lg'^*(Λ(1)[2]) ≅ Λ(1)[2]`, the
+trace of `ℙ¹_{S'}` and `Λ_{S'} ≅ Lg^* Λ_S`. From the auxiliary statement
+`AlgebraicGeometry.Etale.projectiveLineTraceAux_baseChange` by `Tr_q = -Tr_q^{aux}`. -/
+theorem projectiveLineTrace_baseChange [HasKummerClass.IsNormalized Λ] :
+    (L((g)^*[ModuleCat.{u + 1} Λ])).map (projectiveLineTrace Λ S) =
+      (derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
+          (ProjectiveSpace.isPullback_map (Option (ULift.{u} (Fin 1))) g).toCommSq).app
+          ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) ≫
+        (R(((ℙ(Option (ULift.{u} (Fin 1)); S') ↘ S'))_*[ModuleCat.{u + 1} Λ])).map
+          (leftDerivedUpperStarTateTwoIso Λ
+            (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g)).hom ≫
+        projectiveLineTrace Λ S' ≫ (leftDerivedUpperStarConstantComplexIso Λ g).inv := by
+  rw [projectiveLineTrace_eq_neg, projectiveLineTrace_eq_neg, Functor.map_neg,
+    projectiveLineTraceAux_baseChange]
+  simp only [comp_neg, neg_comp]
 /-- **Base change of the trace on the compactly supported direct image.** The trace of
 `ℙ¹_S` read on `Rq_! ≅ Rq_*`
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`)

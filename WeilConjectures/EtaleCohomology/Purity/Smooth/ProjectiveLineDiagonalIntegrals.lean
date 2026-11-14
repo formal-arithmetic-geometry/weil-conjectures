@@ -90,10 +90,19 @@ satisfying the purity hypothesis: the class `AlgebraicGeometry.Etale.cartierKumm
 supports forgotten. With the conventions of `AlgebraicGeometry.Etale.kummerBoundary` it is
 `c₁(𝒪_T(-D))`, the same convention as the hyperplane class
 `AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`. -/
-noncomputable def cartierKummerCycleClass (hP : SupportedTatePure Λ 1 i) :
+noncomputable def cartierKummerCycleClassAux (hP : SupportedTatePure Λ 1 i) :
     constantComplex Λ T ⟶ (tateObject Λ T 1)⟦(2 : ℤ)⟧ :=
   cartierKummerClass Λ i hP ≫
     (rightDerivedUpperShriekAdjunction Λ i).counit.app ((tateObject Λ T 1)⟦(2 : ℤ)⟧)
+
+/-- The *cycle class* `δ = c₁(𝒪_T(D)) : Λ_T ⟶ Λ_T(1)[2]` of an effective Cartier divisor
+`i : D ⟶ T` satisfying the purity hypothesis, with the sign of the notes (blueprint
+`lemma-class-diagonal-projective-line`, `lemma-cycle-class-cartier-divisor`): the negative of the
+forgotten-supports Kummer class `AlgebraicGeometry.Etale.cartierKummerCycleClassAux`, which is
+`c₁(𝒪_T(-D))`. -/
+noncomputable def cartierKummerCycleClass (hP : SupportedTatePure Λ 1 i) :
+    constantComplex Λ T ⟶ (tateObject Λ T 1)⟦(2 : ℤ)⟧ :=
+  -cartierKummerCycleClassAux Λ i hP
 
 end CycleClass
 
@@ -210,30 +219,30 @@ theorem cartierKummerCycleClass_diagonal_baseChange
         (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) (ProjectiveSpace.lineInfinityι S))).inv ≫
       (L((ProjectiveSpace.map (Option (ULift.{u} (Fin 1)))
           (ProjectiveSpace.lineInfinityι S))^*[ModuleCat.{u + 1} Λ])).map
-        (cartierKummerCycleClass Λ _ hP) ≫
+        (cartierKummerCycleClassAux Λ _ hP) ≫
       (leftDerivedUpperStarTateTwoIso Λ
         (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) (ProjectiveSpace.lineInfinityι S))).hom =
-    projectiveLineHyperplaneClass Λ (ProjectiveSpace.lineInfinity S) := by
-  rw [projectiveLineHyperplaneClass, chartBoundaryClass_eq,
+    projectiveLineHyperplaneClassAux Λ (ProjectiveSpace.lineInfinity S) := by
+  rw [projectiveLineHyperplaneClassAux, chartBoundaryClass_eq,
     ← restrictSupportedClass_cartierKummerClass_diagonal Λ S hP, restrictSupportedClass_comp_counit,
-    cartierKummerCycleClass]
+    cartierKummerCycleClassAux]
 
 omit [HasKummerClass.IsNormalized Λ] in
 /-- The trace of `ℙ¹_S` is normalized by `Tr_q ∘ h♭ = 1`, for the adjoint
 `h♭ : Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])` of the hyperplane class. -/
-lemma homEquiv_projectiveLineHyperplaneClass_comp_projectiveLineTrace :
+lemma homEquiv_projectiveLineHyperplaneClassAux_comp_projectiveLineTraceAux :
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
         (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).homEquiv _ _
         ((leftDerivedUpperStarConstantComplexIso Λ (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).hom ≫
-          projectiveLineHyperplaneClass Λ S) ≫
-      projectiveLineTrace Λ S = 𝟙 _ := by
+          projectiveLineHyperplaneClassAux Λ S) ≫
+      projectiveLineTraceAux Λ S = 𝟙 _ := by
   have h : (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
         (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).homEquiv _ _
         ((leftDerivedUpperStarConstantComplexIso Λ (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).hom ≫
-          projectiveLineHyperplaneClass Λ S) =
-      biprod.inr ≫ projectiveLineDecompositionMap Λ S := by
-    rw [projectiveLineDecompositionMap, biprod.inr_desc]
-  rw [h, projectiveLineTrace, Category.assoc, IsIso.hom_inv_id_assoc, biprod.inr_snd]
+          projectiveLineHyperplaneClassAux Λ S) =
+      biprod.inr ≫ projectiveLineDecompositionMapAux Λ S := by
+    rw [projectiveLineDecompositionMapAux, biprod.inr_desc]
+  rw [h, projectiveLineTraceAux, Category.assoc, IsIso.hom_inv_id_assoc, biprod.inr_snd]
 
 /-- **The restriction of the diagonal integral to the section at infinity.** The pullback along
 the section at infinity `ι : Z ⟶ ℙ¹_S` of the endomorphism
@@ -249,18 +258,18 @@ theorem leftDerivedUpperStar_lineInfinityι_map_diagonalIntegral
           ((leftDerivedUpperStarConstantComplexIso Λ
               (ℙ(Option (ULift.{u} (Fin 1)); ℙ(Option (ULift.{u} (Fin 1)); S)) ↘
                 ℙ(Option (ULift.{u} (Fin 1)); S))).hom ≫
-            cartierKummerCycleClass Λ _ hP) ≫
-        projectiveLineTrace Λ ℙ(Option (ULift.{u} (Fin 1)); S)) = 𝟙 _ := by
+            cartierKummerCycleClassAux Λ _ hP) ≫
+        projectiveLineTraceAux Λ ℙ(Option (ULift.{u} (Fin 1)); S)) = 𝟙 _ := by
   have sq := ProjectiveSpace.isPullback_map (Option (ULift.{u} (Fin 1)))
     (ProjectiveSpace.lineInfinityι S)
   have hC := leftDerivedUpperStar_map_unit_comp_map_comp_derivedBaseChangeMap_comp sq.toCommSq
     ((leftDerivedUpperStarConstantComplexIso Λ
         (ℙ(Option (ULift.{u} (Fin 1)); ℙ(Option (ULift.{u} (Fin 1)); S)) ↘
-          ℙ(Option (ULift.{u} (Fin 1)); S))).hom ≫ cartierKummerCycleClass Λ _ hP)
+          ℙ(Option (ULift.{u} (Fin 1)); S))).hom ≫ cartierKummerCycleClassAux Λ _ hP)
     ((leftDerivedUpperStarConstantComplexIso Λ
         (ℙ(Option (ULift.{u} (Fin 1)); ProjectiveSpace.lineInfinity S) ↘
           ProjectiveSpace.lineInfinity S)).hom ≫
-      projectiveLineHyperplaneClass Λ (ProjectiveSpace.lineInfinity S))
+      projectiveLineHyperplaneClassAux Λ (ProjectiveSpace.lineInfinity S))
     (leftDerivedUpperStarConstantComplexIso Λ (ProjectiveSpace.lineInfinityι S)).hom
     (leftDerivedUpperStarTateTwoIso Λ
       (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) (ProjectiveSpace.lineInfinityι S))).hom
@@ -268,10 +277,10 @@ theorem leftDerivedUpperStar_lineInfinityι_map_diagonalIntegral
       rw [← cartierKummerCycleClass_diagonal_baseChange Λ S hP, Functor.map_comp, Category.assoc,
         ← reassoc_of% (derivedSquareUpperStarIso_hom_app_constantComplex Λ sq.toCommSq),
         Iso.hom_inv_id_assoc])
-  have hD := homEquiv_projectiveLineHyperplaneClass_comp_projectiveLineTrace Λ
+  have hD := homEquiv_projectiveLineHyperplaneClassAux_comp_projectiveLineTraceAux Λ
     (ProjectiveSpace.lineInfinity S)
   rw [Adjunction.homEquiv_unit, Category.assoc] at hD
-  rw [Functor.map_comp, projectiveLineTrace_baseChange Λ (ProjectiveSpace.lineInfinityι S),
+  rw [Functor.map_comp, projectiveLineTraceAux_baseChange Λ (ProjectiveSpace.lineInfinityι S),
     Adjunction.homEquiv_unit, reassoc_of% hC,
     reassoc_of% hD, Iso.hom_inv_id]
 
@@ -281,8 +290,92 @@ projection `p : W ⟶ P`, and the diagonal `Δ : P ⟶ W` satisfying the purity 
 
 `Λ_P ⟶ Rp_* Lp^* Λ_P ≅ Rp_* Λ_W ⟶ Rp_*(Λ_W(1)[2]) ⟶ Λ_P`
 
-of the adjoint of the cycle class `δ` of `Δ` (`AlgebraicGeometry.Etale.cartierKummerCycleClass`)
-and the trace of `p` (`AlgebraicGeometry.Etale.projectiveLineTrace`) is the identity. -/
+of the adjoint of the cycle class `δ` of `Δ` (`AlgebraicGeometry.Etale.cartierKummerCycleClassAux`)
+and the trace of `p` (`AlgebraicGeometry.Etale.projectiveLineTraceAux`) is the identity. -/
+theorem projectiveLineTraceAux_diagonal
+    [IsRegularImmersion 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)]
+    (hP : SupportedTatePure Λ 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)) :
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+        (ℙ(Option (ULift.{u} (Fin 1)); ℙ(Option (ULift.{u} (Fin 1)); S)) ↘
+          ℙ(Option (ULift.{u} (Fin 1)); S))).homEquiv _ _
+        ((leftDerivedUpperStarConstantComplexIso Λ
+            (ℙ(Option (ULift.{u} (Fin 1)); ℙ(Option (ULift.{u} (Fin 1)); S)) ↘
+              ℙ(Option (ULift.{u} (Fin 1)); S))).hom ≫
+          cartierKummerCycleClassAux Λ _ hP) ≫
+      projectiveLineTraceAux Λ ℙ(Option (ULift.{u} (Fin 1)); S) = 𝟙 _ :=
+  eq_of_leftDerivedUpperStar_lineInfinityι_map_eq Λ S (by
+    rw [leftDerivedUpperStar_lineInfinityι_map_diagonalIntegral Λ S hP,
+    CategoryTheory.Functor.map_id])
+
+/-- The exchange of the factors of `W = ℙ¹_P ≅ P ×_S P`
+(`AlgebraicGeometry.ProjectiveSpace.diagonalSwap`) fixes the cycle class of the diagonal. -/
+theorem cartierKummerCycleClass_diagonalSwap
+    [IsRegularImmersion 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)]
+    (hP : SupportedTatePure Λ 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)) :
+    (leftDerivedUpperStarConstantComplexIso Λ
+        (ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S)).inv ≫
+      (L((ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S)^*[ModuleCat.{u + 1} Λ])).map
+        (cartierKummerCycleClassAux Λ _ hP) ≫
+      (leftDerivedUpperStarTateTwoIso Λ
+        (ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S)).hom =
+    cartierKummerCycleClassAux Λ _ hP := by
+  have hsq : IsPullback (𝟙 _) (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)
+      (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)
+      (ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S) :=
+    IsPullback.of_horiz_isIso ⟨by simp⟩
+  have h₁ := restrictSupportedClass_comp_counit
+    (ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S) _ _ _ hsq
+    (leftDerivedUpperStarConstantComplexIso Λ _).inv
+    (leftDerivedUpperStarTateShiftIso Λ _ 1) (cartierKummerClass Λ _ hP)
+  rw [restrictSupportedClass_cartierKummerClass Λ _ hP _ _ _ hsq hP] at h₁
+  exact h₁.symm
+
+/-- Blueprint `lemma-class-diagonal-projective-line` (`lemma-class-diagonal-projective-line--1`
+(3)), *the second integral of the diagonal class*. The second projection `p₂ = map (P ↘ S) : W ⟶ P`
+of `W = ℙ¹_P ≅ P ×_S P` is the first projection `p₁ = W ↘ P` composed with the exchange `σ` of the
+factors (`AlgebraicGeometry.ProjectiveSpace.diagonalSwap`), an isomorphism of `P`-schemes
+`(W, p₂) ≅ (W, p₁)`. Transported along `σ`, the trace of `p₂` is the trace of `p₁` and the cycle
+class `δ` of the diagonal becomes `σ^* δ`; the composite
+
+`Λ_P ⟶ Rp₁_* Λ_W ⟶ Rp₁_*(Λ_W(1)[2]) ⟶ Λ_P`
+
+of the adjoint of `σ^* δ` and the trace of `p₁` is the identity. -/
+theorem projectiveLineTraceAux_diagonal_swap
+    [IsRegularImmersion 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)]
+    (hP : SupportedTatePure Λ 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)) :
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+        (ℙ(Option (ULift.{u} (Fin 1)); ℙ(Option (ULift.{u} (Fin 1)); S)) ↘
+          ℙ(Option (ULift.{u} (Fin 1)); S))).homEquiv _ _
+        ((leftDerivedUpperStarConstantComplexIso Λ
+            (ℙ(Option (ULift.{u} (Fin 1)); ℙ(Option (ULift.{u} (Fin 1)); S)) ↘
+              ℙ(Option (ULift.{u} (Fin 1)); S))).hom ≫
+          (leftDerivedUpperStarConstantComplexIso Λ
+            (ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S)).inv ≫
+          (L((ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S)^*[ModuleCat.{u + 1}
+            Λ])).map (cartierKummerCycleClassAux Λ _ hP) ≫
+          (leftDerivedUpperStarTateTwoIso Λ
+            (ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S)).hom) ≫
+      projectiveLineTraceAux Λ ℙ(Option (ULift.{u} (Fin 1)); S) = 𝟙 _ := by
+  rw [cartierKummerCycleClass_diagonalSwap Λ S hP]
+  exact projectiveLineTraceAux_diagonal Λ S hP
+
+/-- The trace of `ℙ¹_S` is normalized by `Tr_q ∘ h♭ = 1`, for the adjoint
+`h♭ : Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])` of the hyperplane class `h = c₁(𝒪(1))` of the notes (blueprint
+`lemma-cohomology-projective-line-trace`): from the auxiliary normalisation by the two signs. -/
+lemma homEquiv_projectiveLineHyperplaneClass_comp_projectiveLineTrace :
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+        (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).homEquiv _ _
+        ((leftDerivedUpperStarConstantComplexIso Λ (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).hom ≫
+          projectiveLineHyperplaneClass Λ S) ≫
+      projectiveLineTrace Λ S = 𝟙 _ := by
+  have := homEquiv_projectiveLineHyperplaneClassAux_comp_projectiveLineTraceAux Λ S
+  simp only [projectiveLineHyperplaneClass, projectiveLineTrace_eq_neg, comp_neg,
+    Adjunction.homEquiv_unit, Functor.map_neg, neg_comp, neg_neg] at this ⊢
+  exact this
+
+/-- Blueprint `lemma-class-diagonal-projective-line`: *the first diagonal integral*, with the cycle
+class `δ = c₁(𝒪(Δ))` and the trace of the notes: `Tr_p(δ) = 1`. From the auxiliary statement
+`AlgebraicGeometry.Etale.projectiveLineTraceAux_diagonal` by the two signs. -/
 theorem projectiveLineTrace_diagonal
     [IsRegularImmersion 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)]
     (hP : SupportedTatePure Λ 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)) :
@@ -310,27 +403,14 @@ theorem cartierKummerCycleClass_diagonalSwap
       (leftDerivedUpperStarTateTwoIso Λ
         (ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S)).hom =
     cartierKummerCycleClass Λ _ hP := by
-  have hsq : IsPullback (𝟙 _) (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)
-      (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)
-      (ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S) :=
-    IsPullback.of_horiz_isIso ⟨by simp⟩
-  have h₁ := restrictSupportedClass_comp_counit
-    (ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S) _ _ _ hsq
-    (leftDerivedUpperStarConstantComplexIso Λ _).inv
-    (leftDerivedUpperStarTateShiftIso Λ _ 1) (cartierKummerClass Λ _ hP)
-  rw [restrictSupportedClass_cartierKummerClass Λ _ hP _ _ _ hsq hP] at h₁
-  exact h₁.symm
+  have := projectiveLineTraceAux_diagonal Λ S hP
+  simp only [cartierKummerCycleClass, projectiveLineTrace_eq_neg, Functor.map_neg, comp_neg,
+    neg_comp, neg_neg] at this ⊢
+  exact this
 
-/-- Blueprint `lemma-class-diagonal-projective-line` (`lemma-class-diagonal-projective-line--1`
-(3)), *the second integral of the diagonal class*. The second projection `p₂ = map (P ↘ S) : W ⟶ P`
-of `W = ℙ¹_P ≅ P ×_S P` is the first projection `p₁ = W ↘ P` composed with the exchange `σ` of the
-factors (`AlgebraicGeometry.ProjectiveSpace.diagonalSwap`), an isomorphism of `P`-schemes
-`(W, p₂) ≅ (W, p₁)`. Transported along `σ`, the trace of `p₂` is the trace of `p₁` and the cycle
-class `δ` of the diagonal becomes `σ^* δ`; the composite
-
-`Λ_P ⟶ Rp₁_* Λ_W ⟶ Rp₁_*(Λ_W(1)[2]) ⟶ Λ_P`
-
-of the adjoint of `σ^* δ` and the trace of `p₁` is the identity. -/
+/-- Blueprint `lemma-class-diagonal-projective-line`: *the second diagonal integral* (the swapped
+factor), with the cycle class and the trace of the notes. From
+`AlgebraicGeometry.Etale.projectiveLineTraceAux_diagonal_swap` by the two signs. -/
 theorem projectiveLineTrace_diagonal_swap
     [IsRegularImmersion 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)]
     (hP : SupportedTatePure Λ 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)) :
@@ -347,8 +427,10 @@ theorem projectiveLineTrace_diagonal_swap
           (leftDerivedUpperStarTateTwoIso Λ
             (ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S)).hom) ≫
       projectiveLineTrace Λ ℙ(Option (ULift.{u} (Fin 1)); S) = 𝟙 _ := by
-  rw [cartierKummerCycleClass_diagonalSwap Λ S hP]
-  exact projectiveLineTrace_diagonal Λ S hP
+  have := projectiveLineTraceAux_diagonal_swap Λ S hP
+  simp only [cartierKummerCycleClass, projectiveLineTrace_eq_neg, Functor.map_neg, comp_neg,
+    neg_comp, neg_neg] at this ⊢
+  exact this
 
 end Diagonal
 
