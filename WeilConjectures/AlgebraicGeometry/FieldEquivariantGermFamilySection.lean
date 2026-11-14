@@ -65,7 +65,7 @@ private theorem section_germ_ext_of_lifts (S : Scheme.{u}) (Ω : Type u)
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- A Galois-equivariant family of germs at a geometric point of a sheaf on the small étale
-site of `Spec K` is realized by a section over any étale `K`-scheme with one point
+site of `Spec K` is realized by a section over any étale `K`-scheme
 (Stacks, Tags 04JM, 03QW). -/
 theorem field_equivariant_germ_family_section
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]

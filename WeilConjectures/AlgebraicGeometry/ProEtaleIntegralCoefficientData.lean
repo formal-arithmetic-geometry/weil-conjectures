@@ -48,8 +48,7 @@ noncomputable def sfbIntegralFiniteTower (l : ℕ) [Fact l.Prime] (E : Type u) [
     FintypeCat.homMk (X := sfbIntegralFiniteLevel l E (n + 1))
       (Y := sfbIntegralFiniteLevel l E n) (Padic.coefficientExtensionTransition l E (n + 1)))
 
-/-- The integers with their extending absolute-value topology, bundled as a profinite set.
-integers-profinite-tower. -/
+/-- The integers with their extending absolute-value topology, bundled as a profinite set. -/
 noncomputable def sfbIntegralProfinite (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] : Profinite.{u} :=
   letI := Padic.coefficientExtensionIntegersTopology l E

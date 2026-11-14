@@ -343,7 +343,7 @@ section RelativeNoether
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-/-- The conclusion of over a subset `Z` of the target `Y`: there
+/-- The condition, over a subset `Z` of the target `Y`, that there
 are finite partitions of `Z` and of `f ⁻¹ Z` into reduced locally closed subschemes such that every
 source piece maps into a target piece `T` through a finite morphism to an iterated relative affine
 line over `T`. -/
