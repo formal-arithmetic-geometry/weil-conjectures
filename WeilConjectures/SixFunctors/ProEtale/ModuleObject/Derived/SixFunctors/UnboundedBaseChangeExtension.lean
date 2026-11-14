@@ -246,6 +246,10 @@ private theorem extension_of_preservation
         ((lowerStar Λ p).rightDerivedFunctor ⋙ (upperStar Λ g).leftDerivedFunctor) := h₁
       have h₂' : PreservesColimit (e.functor ⋙ (J ⋙ (localizingClosureProEtale Λ X).ι))
         ((upperStar Λ g').leftDerivedFunctor ⋙ (lowerStar Λ p').rightDerivedFunctor) := h₂
+      change PreservesColimit (J ⋙ (localizingClosureProEtale Λ X).ι)
+          ((lowerStar Λ p).rightDerivedFunctor ⋙ (upperStar Λ g).leftDerivedFunctor) ∧
+        PreservesColimit (J ⋙ (localizingClosureProEtale Λ X).ι)
+          ((upperStar Λ g').leftDerivedFunctor ⋙ (lowerStar Λ p').rightDerivedFunctor)
       exact ⟨Functor.Final.preservesColimit_of_comp (F := e.functor),
         Functor.Final.preservesColimit_of_comp (F := e.functor)⟩)
     (fun M hM ↦ (he M).1 (h M hM)) K hK
