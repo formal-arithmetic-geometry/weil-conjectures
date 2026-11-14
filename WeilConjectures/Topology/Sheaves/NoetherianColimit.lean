@@ -279,8 +279,6 @@ lemma hColimitProp_zero (D : J ⥤ TopCat.Sheaf AddCommGrpCat.{u} X) : HColimitP
     refine ⟨j', a, (Sheaf.H.equiv₀ _ isTerminalTop).injective ?_⟩
     rw [← Sheaf.H.equiv₀_naturality, map_zero, ha, map_zero]
 
-set_option maxHeartbeats 1600000 in
--- The elaboration of the many cohomology maps between sheaves on `X` is slow.
 /-- The dimension shifting step: if `Hⁿ` commutes with all filtered colimits, so does `Hⁿ⁺¹`,
 on the first term of a short exact sequence of diagrams whose middle term is pointwise flasque.
 -/
@@ -288,6 +286,11 @@ lemma hColimitProp_succ (n : ℕ) (ih : ∀ D : J ⥤ TopCat.Sheaf AddCommGrpCat
       HColimitProp n D)
     (S : ShortComplex (J ⥤ TopCat.Sheaf AddCommGrpCat.{u} X)) (hS : S.ShortExact)
     (hT : ∀ j, Presheaf.IsFlasque (S.X₂.obj j).obj) : HColimitProp (n + 1) S.X₁ := by
+  -- Share the categorical structures used by all the cohomology maps in the diagram chase.
+  let : HasSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{u} := inferInstance
+  let : Abelian (TopCat.Sheaf AddCommGrpCat.{u} X) := inferInstance
+  let : HasExt.{u} (TopCat.Sheaf AddCommGrpCat.{u} X) := inferInstance
+  let : HasColimitsOfShape J (TopCat.Sheaf AddCommGrpCat.{u} X) := inferInstance
   have hSj (j : J) : (S.map ((evaluation J _).obj j)).ShortExact := hS.map_of_exact _
   have hSc : (S.map colim).ShortExact := hS.map_of_exact _
   let φ (j : J) : S.map ((evaluation J _).obj j) ⟶ S.map colim :=
