@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.SixFunctors.ModuleObjects
 public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
+public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosure
 
 /-!
 # The localizing closure
@@ -33,7 +34,11 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- A property describes a full replete triangulated subcategory closed under
-all coproducts that exist in the ambient category.
+all direct sums that exist in the ambient category: the sums indexed by a type of the
+universe `v` of the morphisms, "arbitrary direct sums" in the notes meaning set-indexed sums
+(Blueprint bot, Zulip #3571; as in Mathlib's `HasCoproducts.{v}`). It is the class
+`CategoryTheory.ObjectProperty.IsLocalizing`
+(`CategoryTheory.isLocalizingSubcategory_iff_isLocalizing`).
 
 Source: blueprint definition-localizing-subcategory, first paragraph
 (blueprint: definition-localizing-subcategory). -/
@@ -42,7 +47,7 @@ def IsLocalizingSubcategory {C : Type u} [Category.{v, u} C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
     (P : ObjectProperty C) : Prop :=
   P.IsTriangulated ∧ P.IsClosedUnderIsomorphisms ∧
-    ∀ {I : Type u} (F : Discrete I ⥤ C), (hF : HasColimit F) →
+    ∀ {I : Type v} (F : Discrete I ⥤ C), (hF : HasColimit F) →
       (∀ i : I, P (F.obj (Discrete.mk i))) →
         let _ := hF
         P (colimit F)
@@ -57,6 +62,41 @@ def localizingClosure {C : Type u} [Category.{v, u} C]
     (S : ObjectProperty C) : ObjectProperty C :=
   fun K => ∀ P : ObjectProperty C, IsLocalizingSubcategory P →
     (∀ L : C, S L → P L) → P K
+
+section Identification
+
+variable {C : Type u} [Category.{v, u} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+  [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+
+/-- `IsLocalizingSubcategory` is the class `CategoryTheory.ObjectProperty.IsLocalizing`: both
+say triangulated, closed under isomorphisms and under the `v`-small direct sums that exist. -/
+theorem isLocalizingSubcategory_iff_isLocalizing (P : ObjectProperty C) :
+    IsLocalizingSubcategory P ↔ P.IsLocalizing := by
+  constructor
+  · rintro ⟨h₁, h₂, h₃⟩
+    exact { toIsTriangulated := h₁
+            toIsClosedUnderIsomorphisms := h₂
+            isClosedUnderColimitsOfShape_discrete := fun J ↦
+              ObjectProperty.IsClosedUnderColimitsOfShape.mk' (by
+                rintro _ ⟨F, hF⟩
+                exact h₃ F inferInstance fun i ↦ hF ⟨i⟩) }
+  · intro h
+    refine ⟨h.toIsTriangulated, h.toIsClosedUnderIsomorphisms, fun {I} F hF hFi ↦ ?_⟩
+    have := h.isClosedUnderColimitsOfShape_discrete I
+    exact P.prop_colimit F fun j ↦ hFi j.as
+
+/-- `localizingClosure` is the localizing closure `CategoryTheory.ObjectProperty.localizingClosure`:
+the intersection of the same family of properties. -/
+theorem localizingClosure_eq_objectProperty (S : ObjectProperty C) :
+    localizingClosure S = S.localizingClosure := by
+  ext K
+  constructor
+  · intro hK Q hSQ hQ
+    exact hK Q ((isLocalizingSubcategory_iff_isLocalizing Q).2 hQ) hSQ
+  · intro hK P hP hSP
+    exact hK P hSP ((isLocalizingSubcategory_iff_isLocalizing P).1 hP)
+
+end Identification
 
 end CategoryTheory
 
