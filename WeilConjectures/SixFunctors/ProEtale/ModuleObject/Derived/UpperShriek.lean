@@ -107,7 +107,7 @@ right adjoint `Rg^!` of the derived pushforward `Rg_*` along the proper `g`, fol
 pullback `i^*` along the open immersion `i`. -/
 noncomputable def boundedConstructibleUpperShriekOfCompactification :
     Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  (boundedConstructibleLowerStar ℓ c.overG).rightAdjoint ⋙
+  (boundedConstructibleLowerStarOfIsProper ℓ c.overG).rightAdjoint ⋙
     boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.overI
 
 /-- The adjunction `Rf_!(c) ⊣ Rf^!(c)` on bounded constructible complexes attached to a
@@ -158,7 +158,7 @@ adjoint `Rg^!` of the derived pushforward `Rg_*` along the proper `g`, followed 
 `i^*` along the open immersion `i`. -/
 noncomputable def boundedConstructibleUpperShriekOfCompactification :
     Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ :=
-  (boundedConstructibleLowerStar ℓ E c.overG).rightAdjoint ⋙
+  (boundedConstructibleLowerStarOfIsProper ℓ E c.overG).rightAdjoint ⋙
     boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ c.overI
 
 /-- The adjunction `Rf_!(c) ⊣ Rf^!(c)` on bounded constructible complexes attached to a
@@ -214,7 +214,7 @@ pullback `i^*` along the open immersion `i`. -/
 noncomputable def boundedConstructibleUpperShriekOfCompactification :
     Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧ ⥤ Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ
       E⟧ :=
-  (boundedConstructibleLowerStar ℓ E c.overG).rightAdjoint ⋙
+  (boundedConstructibleLowerStarOfIsProper ℓ E c.overG).rightAdjoint ⋙
     boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ c.overI
 
 /-- The adjunction `Rf_!(c) ⊣ Rf^!(c)` on bounded constructible complexes attached to a

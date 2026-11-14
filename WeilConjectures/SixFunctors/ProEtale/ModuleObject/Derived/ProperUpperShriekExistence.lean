@@ -160,12 +160,12 @@ theorem boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_cont
   have : QuasiCompact (Over.mk aX).hom := ‹QuasiCompact aX›
   have : IsSeparated (Over.mk aX).hom := ‹IsSeparated aX›
   let c' : Compactification (Over.homMk (U := Over.mk aX) (V := Over.mk aY) f hf).left := c
-  have := isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj ℓ
+  have := isLeftAdjoint_boundedConstructibleLowerStarOfIsProper_continuousMapRingObj ℓ
     c'.overG E
   have : (ContinuousMapRingObj.boundedConstructibleLowerShriekOfCompactification ℓ E
       c').IsLeftAdjoint :=
     inferInstanceAs (boundedConstructibleOpenImmersionLowerShriek _ ℓ c'.overI ⋙
-      ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E c'.overG).IsLeftAdjoint
+      ContinuousMapRingObj.boundedConstructibleLowerStarOfIsProper ℓ E c'.overG).IsLeftAdjoint
   have := isLeftAdjoint_rightDerivedLowerShriekBoundedConstructible_of_iso
     (lowerShriek_continuousMapRingObj ℓ E aY c)
     (ContinuousMapRingObj.boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ E c')
@@ -200,12 +200,12 @@ theorem boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padi
   have : QuasiCompact (Over.mk aX).hom := ‹QuasiCompact aX›
   have : IsSeparated (Over.mk aX).hom := ‹IsSeparated aX›
   let c' : Compactification (Over.homMk (U := Over.mk aX) (V := Over.mk aY) f hf).left := c
-  have := isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj ℓ
+  have := isLeftAdjoint_boundedConstructibleLowerStarOfIsProper_padicIntegersRingObj ℓ
     c'.overG E
   have : (PadicIntegersRingObj.boundedConstructibleLowerShriekOfCompactification ℓ E
       c').IsLeftAdjoint :=
     inferInstanceAs (boundedConstructibleOpenImmersionLowerShriek _ ℓ c'.overI ⋙
-      PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E c'.overG).IsLeftAdjoint
+      PadicIntegersRingObj.boundedConstructibleLowerStarOfIsProper ℓ E c'.overG).IsLeftAdjoint
   have := isLeftAdjoint_rightDerivedLowerShriekBoundedConstructible_of_iso
     (lowerShriek_padicIntegersRingObj ℓ E aY c)
     (PadicIntegersRingObj.boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ E c')
@@ -238,10 +238,10 @@ theorem boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padi
   have : QuasiCompact (Over.mk aX).hom := ‹QuasiCompact aX›
   have : IsSeparated (Over.mk aX).hom := ‹IsSeparated aX›
   let c' : Compactification (Over.homMk (U := Over.mk aX) (V := Over.mk aY) f hf).left := c
-  have := isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj ℓ c'.overG
+  have := isLeftAdjoint_boundedConstructibleLowerStarOfIsProper_padicAlgClRingObj ℓ c'.overG
   have : (boundedConstructibleLowerShriekOfCompactification ℓ c').IsLeftAdjoint :=
     inferInstanceAs (boundedConstructibleOpenImmersionLowerShriek _ ℓ c'.overI ⋙
-      boundedConstructibleLowerStar ℓ c'.overG).IsLeftAdjoint
+      boundedConstructibleLowerStarOfIsProper ℓ c'.overG).IsLeftAdjoint
   have := isLeftAdjoint_rightDerivedLowerShriekBoundedConstructible_of_iso
     (lowerShriek_padicAlgClRingObj ℓ aY c)
     (boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ c')

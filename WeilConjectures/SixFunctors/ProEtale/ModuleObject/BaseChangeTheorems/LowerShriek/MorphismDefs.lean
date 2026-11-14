@@ -139,7 +139,7 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChangePas
     Functor.whiskerRight
       (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso (Profinite.padicAlgClRingObj ℓ) ℓ
         (c.overBaseChange_isPullback_i sq)).hom
-      (boundedConstructibleLowerStar ℓ (c.ofIsPullback sq.overLeft).overG) ≫
+      (boundedConstructibleLowerStarOfIsProper ℓ (c.ofIsPullback sq.overLeft).overG) ≫
     (Functor.associator _ _ _).hom
 
 /-- The defining equation of `boundedConstructibleLowerShriekOfCompactificationBaseChangePasting`
@@ -156,7 +156,7 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq
           (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso (Profinite.padicAlgClRingObj ℓ)
             ℓ
             (c.overBaseChange_isPullback_i sq)).hom
-          (boundedConstructibleLowerStar ℓ (c.ofIsPullback sq.overLeft).overG) ≫
+          (boundedConstructibleLowerStarOfIsProper ℓ (c.ofIsPullback sq.overLeft).overG) ≫
         (Functor.associator _ _ _).hom := by
   rw [boundedConstructibleLowerShriekOfCompactificationBaseChangePasting]
 
@@ -202,7 +202,7 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChangePas
       (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso (Profinite.continuousMapRingObj E)
         ℓ
         (c.overBaseChange_isPullback_i sq)).hom
-      (boundedConstructibleLowerStar ℓ E (c.ofIsPullback sq.overLeft).overG) ≫
+      (boundedConstructibleLowerStarOfIsProper ℓ E (c.ofIsPullback sq.overLeft).overG) ≫
     (Functor.associator _ _ _).hom
 
 /-- The defining equation of `boundedConstructibleLowerShriekOfCompactificationBaseChangePasting`
@@ -220,7 +220,7 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq
             (Profinite.continuousMapRingObj E)
             ℓ
             (c.overBaseChange_isPullback_i sq)).hom
-          (boundedConstructibleLowerStar ℓ E (c.ofIsPullback sq.overLeft).overG) ≫
+          (boundedConstructibleLowerStarOfIsProper ℓ E (c.ofIsPullback sq.overLeft).overG) ≫
         (Functor.associator _ _ _).hom :=
   by delta boundedConstructibleLowerShriekOfCompactificationBaseChangePasting; rfl
 
@@ -269,7 +269,7 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChangePas
       (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
         (Profinite.padicIntegersRingObj ℓ E) ℓ
         (c.overBaseChange_isPullback_i sq)).hom
-      (boundedConstructibleLowerStar ℓ E (c.ofIsPullback sq.overLeft).overG) ≫
+      (boundedConstructibleLowerStarOfIsProper ℓ E (c.ofIsPullback sq.overLeft).overG) ≫
     (Functor.associator _ _ _).hom
 
 /-- The defining equation of `boundedConstructibleLowerShriekOfCompactificationBaseChangePasting`
@@ -287,7 +287,7 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq
             (Profinite.padicIntegersRingObj ℓ E)
             ℓ
             (c.overBaseChange_isPullback_i sq)).hom
-          (boundedConstructibleLowerStar ℓ E (c.ofIsPullback sq.overLeft).overG) ≫
+          (boundedConstructibleLowerStarOfIsProper ℓ E (c.ofIsPullback sq.overLeft).overG) ≫
         (Functor.associator _ _ _).hom := by
   rw [boundedConstructibleLowerShriekOfCompactificationBaseChangePasting]
 
