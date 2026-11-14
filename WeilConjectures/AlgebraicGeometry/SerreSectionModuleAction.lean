@@ -14,8 +14,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # The explicit action on the nonnegative twisted section direct sum
 
-Source: Stacks Project, Lemma 01YS(5), construction of the section module.
-(blueprint: lem-sc-p1-section-action-laws). -/
+Source: Stacks Project, Lemma 01YS(5), construction of the section module. -/
 
 @[expose] public section
 
@@ -393,7 +392,6 @@ private theorem mul_smul_law (a b : MvPolynomial (Fin 2) k) (x : serreSectionSum
 
 Source: Stacks Project, Lemma 01YS(5), the graded module of twisted global sections;
 Stacks Definition 01MN for twists and Lemma 01M7 for localizations and functoriality.
-(blueprint: lem-sc-p1-section-action-laws).
 Proof: the decomposition of a polynomial is additive and multiplicative. On a summand of
 nonnegative degree, `serreSectionHomogeneous` is the map on sections induced by multiplication
 of local homogeneous fractions, tensored with the identity of G. Multiplication of fractions

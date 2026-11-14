@@ -27,8 +27,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The terminal section of the iterated pullback corresponding to a strict-local limit leg.
 The symmetry puts the base change in the orientation `X ×_Y Spec R`.
-Source: Stacks Project, Tag 03Q9, proof.
-(blueprint: lem-weil-pbc-qcqs-strict-local-module-comparison). -/
+Source: Stacks Project, Tag 03Q9, proof. -/
 noncomputable def qcqsStrictLocalNeighbourhoodSection
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y)
@@ -53,8 +52,7 @@ noncomputable def qcqsStrictLocalNeighbourhoodSection
 /-- Restrict a section on the neighbourhood base change to strict-local global sections.
 This is the actual module adjunction unit, followed by the specified limit leg and the
 terminal-section/global-section isomorphism.
-Source: Stacks Project, Tag 03Q9, proof.
-(blueprint: lem-weil-pbc-qcqs-strict-local-module-comparison). -/
+Source: Stacks Project, Tag 03Q9, proof. -/
 noncomputable def qcqsStrictLocalSectionRestriction
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y)
@@ -80,8 +78,7 @@ noncomputable def qcqsStrictLocalSectionRestriction
         (Scheme.Etale.mk (𝟙 _)) Over.mkIdTerminal)).inv.app _
 
 /-- The germ formula characterizing a module strict-local comparison.
-Source: Stacks Project, Tag 03Q9, canonical representative restriction.
-(blueprint: lem-weil-pbc-qcqs-strict-local-module-comparison). -/
+Source: Stacks Project, Tag 03Q9, canonical representative restriction. -/
 def IsQcqsStrictLocalModuleComparison
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y)
@@ -102,7 +99,6 @@ def IsQcqsStrictLocalModuleComparison
 
 /-- Qcqs continuity for module coefficients, with its canonical representative formula.
 Source: Stacks Project, Tag 03Q9, degree zero; Tags 03D3 and 03D7 for inverse images.
-(blueprint: lem-weil-pbc-qcqs-strict-local-module-comparison).
 
 Proof: apply `sets_pushforward_stalk_strictHenselization` to the underlying set sheaf.
 The stalk is the filtered colimit over pointed neighbourhoods. The module forgetful functor

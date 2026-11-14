@@ -11,8 +11,7 @@ public import Mathlib.AlgebraicTopology.SimplicialSet.Boundary
 /-!
 # Hom objects of standard simplices and their boundaries
 
-Source: Stacks Project, Tags 0177, 018V and 0186
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 0177, 018V and 0186.
 -/
 
 @[expose] public section
@@ -23,8 +22,7 @@ open CategoryTheory CategoryTheory.Limits Opposite Simplicial
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Tags 0177, 018V and 0186
-(auxiliary; not a blueprint node).
+/-- Source: Stacks Project, Tags 0177, 018V and 0186.
 
 Proof: each degree consists of finitely many monotone maps, including constant maps.
 Nondegenerate maps are exactly the injections, hence occur in only finitely many degrees.
@@ -327,22 +325,21 @@ private theorem boundaryMatchingMap_projection {X : Scheme.{u}}
     semiRepresentableMatchingMap K (n + 1) ≫ boundaryProjection K n i = K.δ i := by
   cases n <;> simp [semiRepresentableMatchingMap, boundaryProjection]
 
-/-- Source: Stacks Project, Tags 018V and 0186
-(auxiliary; not a blueprint node).
+/-- Source: Stacks Project, Tags 018V and 0186.
 
 Proof: in positive degree constant maps lie in the boundary, so every degree is nonempty;
 its nondegenerate simplices are a subset of those of the finite standard simplex.
 Restrict a boundary family to the codimension-one faces. Conversely extend a compatible
 face tuple to any nonsurjective map `φ` by factoring it through a face missing from its
-image (lem-weil-pbc-simplex-face-factorization). Independence of the omitted value follows
-from the face identity (lem-weil-pbc-simplex-face-face-identity) and the matching equations.
+image. Independence of the omitted value follows
+from the face identity and the matching equations.
 Functoriality gives compatibility; restriction and extension are inverse and natural.
 The matching universal property (lem-weil-pbc-simplicial-matching-object, or
 lem-weil-pbc-matching-object-proper-faces) and the Hom representing property give inverse
 comparison maps, and their projection equations imply uniqueness. Finally the operators
 `K(φ)` give a boundary family and therefore a unique restriction morphism `ρ`.
 Its composite with the comparison has projections `K(δ_i) = d_i`, exactly those of the
-canonical matching map (def-weil-pbc-semi-representable-object), so they coincide.
+canonical matching map, so they coincide.
 -/
 theorem simplicial_hom_boundary_matching {X : Scheme.{u}}
     (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) (n : ℕ) :

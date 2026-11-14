@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorCompariso
 
 /-! # Ordinary evaluation on the open scheme's actual site
 Source: Stacks Project, Tags 08DJ and 08DQ, representative evaluation calculation.
-(blueprint: def-pc-scheme-ordinary-evaluation-formula).
 The existing local predicate has an over-site carrier. This predicate writes the
 same component equation directly on a scheme's opens, so that transport can be
 separated from the derived calculation. All complexes and components are actual
@@ -34,8 +33,7 @@ namespace AlgebraicGeometry
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
 /-- The ordinary component equation on the scheme site (rather than an over-site).
-Source: Stacks Project, Tags 08DJ and 08DQ.
-(blueprint: def-pc-scheme-ordinary-evaluation-formula). -/
+Source: Stacks Project, Tags 08DJ and 08DQ. -/
 def IsSchemeOrdinaryEvaluation (Y : Scheme.{u})
     (P F : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (f : pullbackTensorTotal Y F

@@ -21,7 +21,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The integral quotient fibre over the residue field identifies with the closed fibre.
 Source: Stacks Project, More on Morphisms, Tag 0EX8.
-(blueprint: new-valuation-closed-fibre-integral)
 
 Proof: The algebra map from A/m to the ideal residue field is bijective because m is
 maximal. Apply Spec to its ring equivalence and base change along f. Mathlib's

@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalAlphaUnits
 /-! # Ordinary diagonal section exchange
 
 Source: blueprint latest, thm-amb-p1-adjunction.proof.md, exchange of the two
-successive constant-object units (auxiliary; not a blueprint node).
+successive constant-object units.
 -/
 
 @[expose] public section
@@ -35,8 +35,7 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
 
 /-- The ordinary diagonal and projection units paste compatibly with inverse
 proper exchange. Source: blueprint thm-amb-p1-adjunction.proof.md, the equation
-`M = Rp2_* Delta_* M` and substitution of exchange counits
-(auxiliary; not a blueprint node).
+`M = Rp2_* Delta_* M` and substitution of exchange counits.
 
 Proof: inverse constant-object base change for the diagonal replaces its unit,
 the inverse coefficient comparison and inverse exchange by the self-product

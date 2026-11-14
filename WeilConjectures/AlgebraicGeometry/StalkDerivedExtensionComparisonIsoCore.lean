@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import WeilConjectures.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 
-/-! Natural comparison transformation for the derived stalk extension.
-(blueprint: lem-pc-stalk-derived-extension-comparison-core) -/
+/-! Natural comparison transformation for the derived stalk extension. -/
 
 @[expose] public section
 
@@ -96,8 +95,7 @@ to a natural transformation on derived categories. For a K-flat P with invertibl
 pullback counit use P itself as its resolution; the construction is precisely the
 stated equation. Invertibility of this transformation is a separate argument.
 Source: Stacks Project, perfect.tex, equation-bc before Tag 0DJ8 (Tag 0DJ7);
-Cohomology, Tags 06YB and 0D5S; More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-stalk-derived-extension-comparison-core). -/
+Cohomology, Tags 06YB and 0D5S; More on Algebra, Tag 06Y6. -/
 theorem exists_stalkDerivedExtensionComparisonTransformation (z : X') :
     letI := leftAlgebra f g' z
     letI := rightAlgebra f f' g g' sq z

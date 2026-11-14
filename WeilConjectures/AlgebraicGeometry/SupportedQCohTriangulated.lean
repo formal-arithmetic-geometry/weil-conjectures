@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentExtension
 /-! # Triangulated closure of supported quasi-coherent complexes
 
 Source: Stacks Project, Tag 0A9A, preceding definition of D_QCoh,T.
-(blueprint: lem-pc-supported-qcoh-triangulated).
 -/
 
 @[expose] public section
@@ -69,7 +68,6 @@ private theorem qcoh_extensions (X : Scheme.{u}) :
 
 /-- The supported quasi-coherent property contains a zero object.
 Source: Stacks Project, Derived Categories of Schemes, definition preceding Tag 0A9A.
-(blueprint: lem-pc-supported-qcoh-contains-zero).
 
 Proof: Choose the zero object of the derived category. Each homology functor is additive,
 so its image is a zero sheaf of modules. A zero module sheaf is quasi-coherent: on every
@@ -106,7 +104,6 @@ theorem supported_qcoh_containsZero (X : Scheme.{u})
 
 /-- The supported quasi-coherent property is stable under every integer shift.
 Source: Stacks Project, Derived Categories of Schemes, definition preceding Tag 0A9A.
-(blueprint: lem-pc-supported-qcoh-stable-shift).
 
 Proof: For integers a and n, the shift sequence gives H^n(K[a]) ≅ H^(a+n)(K).
 Transport quasi-coherence along its inverse. Applying the underlying additive
@@ -138,7 +135,6 @@ theorem supported_qcoh_stableShift (X : Scheme.{u})
 
 /-- The supported quasi-coherent property is closed under middle terms of triangles.
 Source: Stacks Project, Derived Categories of Schemes, definition preceding Tag 0A9A.
-(blueprint: lem-pc-supported-qcoh-closed-middle).
 
 Proof: For a distinguished triangle K → L → M → K[1] with K and M in the property,
 the long exact homology sequence gives a short exact sequence from the cokernel of
@@ -200,7 +196,6 @@ theorem supported_qcoh_closedMiddle (X : Scheme.{u})
 /-- Quasi-coherent cohomology with zero stalks off T is stable under triangles.
 No compactness or closedness assumption on T is needed for this closure assertion.
 Source: Stacks Project, Derived Categories of Schemes, definition preceding Tag 0A9A.
-(blueprint: lem-pc-supported-qcoh-triangulated).
 
 Proof:
 1. The zero complex has zero cohomology sheaves; these are quasi-coherent and their

@@ -373,8 +373,7 @@ private theorem lowerStarSections_eval {T Y : Scheme.{v}} (h : T ⟶ Y)
   rw [hz]
 
 /-- The underived exchange map evaluated after restriction to the strict-local base.
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-underived-sections-mate). -/
+Source: Stacks Project, Tag 03Q9, final injective-complex paragraph. -/
 noncomputable def strictLocalUnderivedMateSections {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
@@ -408,7 +407,6 @@ set_option backward.defeqAttrib.useBackward true in
 This is an equality of transformations of sheaves, before complexes or derivation.
 
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-underived-sections-mate).
 
 Proof: expand the restriction on the base as the inverse-image adjunction unit
 followed by evaluation at the pointed neighbourhood section. Expand baseChangeMap

@@ -19,8 +19,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 
 /-! # Chart factorizations of the canonical exterior-to-self-Tor comparison
 
-Source: Stacks Project, Tags 09PQ, 062I, 0BQY and 06YH.
-(blueprint: new-r4-self-tor-conormal-dual-chart-iso). -/
+Source: Stacks Project, Tags 09PQ, 062I, 0BQY and 06YH. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -30,8 +29,7 @@ namespace AlgebraicGeometry
 
 /-- Sheafify an affine module, extend it to Y, and apply ordinary tensor pullback to Z.
 Only its restriction over the chosen affine chart is used below.
-Source: Stacks Project, Tags 01I6, 0096 and 06YH.
-(blueprint: new-r4-self-tor-conormal-dual-chart-iso). -/
+Source: Stacks Project, Tags 01I6, 0096 and 06YH. -/
 noncomputable def selfTorAffineComparisonFunctor {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     (U : Y.affineOpens) : ModuleCat.{u} (Γ(Y, U.1) : Type u) ⥤ Z.Modules :=
   tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙
@@ -43,7 +41,6 @@ for this construction or for the two coordinate identifications.
 
 Source: Stacks Project, Tag 09PQ (canonical Tor products), Tag 062I (the conormal
 identification), and Tag 06YH (K-flat computation of derived tensor).
-(blueprint: new-r4-self-tor-conormal-dual-chart-iso).
 
 Proof: On U=Spec A, write I for the immersion ideal. Use a projective resolution of A/I
 and sheafify it on U. Tensoring it with A/I computes the restriction of the given

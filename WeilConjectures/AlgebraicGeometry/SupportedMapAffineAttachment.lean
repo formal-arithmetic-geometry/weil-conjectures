@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.OpenDerivedLocalizationData
 /-! # One affine attachment for supported stabilized maps
 
 Source: Stacks Project, Tag 09IM.
-(blueprint: lem-sc-supported-map-affine-attachment).
 -/
 
 @[expose] public section
@@ -56,7 +55,6 @@ set_option backward.isDefEq.respectTransparency false in
 The input source need only be perfect and supported on the old open; its behaviour
 elsewhere in X is immaterial.
 Source: Stacks Project, Tag 09IM, the case X = U union V in its proof.
-(blueprint: lem-sc-supported-map-affine-attachment).
 
 Proof: Restrict R and β to W. Its pointwise local perfect models make this
 restriction perfect, and its cohomology stalks vanish on W minus T. On W replace

@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationPointEvaluationPrope
 
 /-! # The pointed map from the neighbourhood colimit to its residue closure
 
-Source: Stacks Project, Tag 04HX, using Tags 04GW and 04GP
-(blueprint: lem-weil-pbc-strict-henselization-pointed-map).
+Source: Stacks Project, Tag 04HX, using Tags 04GW and 04GP.
 -/
 
 @[expose] public section
@@ -42,8 +41,7 @@ closures identifies it abstractly with the specified relative separable closure.
 Compose the surjection with that equivalence. A surjective map from a local ring
 to a field has kernel its maximal ideal. This existential assertion requires no
 compatibility of the chosen equivalence with the embedding into Ω; it does not
-assert that every such surjection is pointed.
-(blueprint: lem-weil-pbc-strict-henselization-pointed-map-core) -/
+assert that every such surjection is pointed. -/
 theorem strictHenselizationPointedMap_core
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (barY : Spec (.of Ω) ⟶ Y)
@@ -115,8 +113,7 @@ theorem strictHenselizationPointedMap_core
 
 
 /-- The compatible residue maps give a surjection to the relative separable closure.
-Source: Stacks Project, Tag 04HX, using Tags 04GW and 04GP
-(blueprint: lem-weil-pbc-strict-henselization-pointed-map).
+Source: Stacks Project, Tag 04HX, using Tags 04GW and 04GP.
 
 Proof: Choose an affine open containing the geometric point. By
 `Scheme.etale_local_ring_triples`, the residue embedding of every neighbourhood

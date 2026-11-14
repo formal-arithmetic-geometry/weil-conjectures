@@ -27,7 +27,6 @@ set_option maxHeartbeats 500000 in
 /-- The map to H and the normalized formal quotient maps jointly separate local sections.
 Source: Stacks Project, Tag 0889(1), omitted uniqueness verification, made explicit
 by the Artin--Rees argument of `coherentMap_torsion_completion_ext_zero`.
-(blueprint: lem-weil-pbc-torsion-local-section-separation).
 
 Proof: Fix i and a positive annihilation bound for the kernel of ai. Artin--Rees
 provides n such that ker(ai) maps monomorphically to Fi/J^(n+1)Fi. Evaluate this

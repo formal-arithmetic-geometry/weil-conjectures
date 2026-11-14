@@ -18,7 +18,6 @@ import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 /-! # Stabilization of the differentials of a smooth section
 
 Source: Stacks Project, More on Algebra, Tag 07M7, first paragraph.
-(blueprint: lem-weil-pbc-smooth-section-differential-basis).
 -/
 
 @[expose] public section
@@ -33,7 +32,7 @@ stabilization, a finite basis of differentials represented by elements of its ke
 This asserts no étaleness for the enlarged algebra or any quotient of it.
 
 Source: Stacks Project, Tag 07M7, first paragraph and the choice of the `fᵢ` in the
-second paragraph. (blueprint: lem-weil-pbc-smooth-section-differential-basis)
+second paragraph.
 
 Proof:
 1. The section is surjective since the structure map to `A/J` is surjective. Apply

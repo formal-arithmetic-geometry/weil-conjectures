@@ -128,7 +128,6 @@ attribute [local semireducible] middleComparison projectionExchange
 
 /-- The middle false comparison is the coefficient transport followed by exchange pasting.
 Source: blueprint thm-amb-p1-adjunction.proof.md, first-coordinate exchange calculation.
-(auxiliary; not a blueprint node).
 
 Proof: naturality of projectionComparison carries the opposite-projection line
 inverse through middleComposite. The normalized shifted-line square, with the two

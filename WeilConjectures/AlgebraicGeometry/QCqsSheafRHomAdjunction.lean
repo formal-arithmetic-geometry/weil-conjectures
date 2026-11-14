@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
 /-! # Coherated sheaf derived Hom adjunction
 
 Source: Stacks Project, Duality for Schemes, Lemma 48.3.6 (Tag 0A9Q), with
-equation-sheafy-trace (48.3.5.1) defining the sheafy trace
-(blueprint: lem-pc-qcqs-sheaf-rhom-adjunction).
+equation-sheafy-trace (48.3.5.1) defining the sheafy trace.
 -/
 
 @[expose] public section
@@ -128,11 +127,10 @@ set_option maxHeartbeats 900000 in
 /-- For qcqs schemes and a qcqs morphism `f`, let `adj : Rf_* ⊣ a` be the restricted
 adjunction on `D_QCoh` and let `c` be the internal-Hom comparison
 `Rf_* RHom_X(L, M) ⟶ RHom_Y(Rf_* L, Rf_* M)`, tied by the mate equation `hc` of
-`exists_derivedDirectImage_internalHom_comparison` (lem-pc-sheaf-rhom-projection-formula).
+`exists_derivedDirectImage_internalHom_comparison`.
 The sheafy trace `c(L, aK) ≫ RHom_Y(Rf_* L, ε_K)` is natural in `L` and `K`, and it becomes
 invertible after applying the coherator `DQ`.
-Source: Stacks Project, Tag 0A9Q and equation 48.3.5.1
-(blueprint: lem-pc-qcqs-sheaf-rhom-adjunction).
+Source: Stacks Project, Tag 0A9Q and equation 48.3.5.1.
 
 Proof:
 1. Naturality of c and the restricted adjunction counit give the naturality square.

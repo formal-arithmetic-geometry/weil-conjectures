@@ -28,8 +28,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-! # Chosen-lift affine sections of ordinary tensor
 
-Source: Stacks Project, Tags 08DX(2), 06YG, 06YB, 01I9 and 00LS.
-(blueprint: new-h3-self-tor-ordinary-localized-comparisons). -/
+Source: Stacks Project, Tags 08DX(2), 06YG, 06YB, 01I9 and 00LS. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -223,7 +222,6 @@ part of this statement.
 
 Source: Stacks Project, Tag 08DX(2), affine calculation, Tags 06YG and 06YB for
 K-flat comparison, Tag 01I9 for affine sections, and Tag 00LS(1) for existence of lifts.
-(blueprint: new-h3-self-tor-ordinary-localized-comparisons).
 
 Proof: Apply the functorial bounded-above flat replacement to B[0], which
 vanishes in positive degrees. It supplies r:E -> B[0], with E nonpositive

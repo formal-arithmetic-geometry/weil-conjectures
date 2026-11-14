@@ -17,8 +17,7 @@ extension of separably closed fields. Precomposition with `a` identifies the poi
 neighbourhoods of `s` and of `a ≫ s` (`AlgebraicGeometry.Scheme.isIso_pointSmallEtalePrecomp_hom`),
 hence their limits: the strict localizations `S_(a ≫ s)` and `S_(s)` are isomorphic over `S`
 (Stacks, Tag 03PN). This reduces statements about strict localizations at geometric points with
-separably closed field to the case of an algebraically closed field (blueprint
-`lemma-punctured-surface-punctured-curve--1`).
+separably closed field to the case of an algebraically closed field.
 
 ## Main statements
 

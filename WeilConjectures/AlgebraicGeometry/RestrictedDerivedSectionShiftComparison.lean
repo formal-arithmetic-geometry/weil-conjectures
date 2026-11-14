@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.RestrictedDerivedSectionsSingle
 /-! # The shifted single comparison for restricted derived section pullback
 
 Source: Stacks Project, Tags 07A6 and 0D6F.
-(blueprint: lem-sbc-restricted-derived-section-shift-comparison).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry.Etale.RawRestrictedComparison
 /-- On a shifted single sheaf, the constructed natural pullback is the explicitly
 constructed restricted cohomology map.
 Source: Stacks Project, Tags 07A6 and 0D6F; Tag 03Q8 for restriction of cohomology.
-(blueprint: lem-sbc-restricted-derived-section-shift-comparison).
 
 Proof: Commute restriction and derived global sections with the shift by p.
 The derived adjunction unit and the Leray isomorphism commute with this shift,

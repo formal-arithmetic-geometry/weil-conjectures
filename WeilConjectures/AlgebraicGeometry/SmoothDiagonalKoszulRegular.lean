@@ -19,8 +19,7 @@ import WeilConjectures.RingTheory.RegularSequenceKoszulRegular
 /-!
 # The smooth diagonal is Koszul regular, perfect and proper
 
-Source: Stacks Project, Tag 067U, and More on Morphisms, Tag 068C
-(blueprint: lem-sc-smooth-proper-diagonal-koszul-regular).
+Source: Stacks Project, Tag 067U, and More on Morphisms, Tag 068C.
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Specialize the weakly regular module theorem to the ring, transporting its homology
-vanishing along the degreewise tensor-unit isomorphisms. Source: Stacks Tag 062F
-(blueprint: lem-sc-smooth-proper-diagonal-koszul-regular). -/
+vanishing along the degreewise tensor-unit isomorphisms. Source: Stacks Tag 062F. -/
 private theorem isKoszulRegular_of_isWeaklyRegular {R : Type u} [CommRing R] {r : ℕ} (g : Fin r → R)
     (h : RingTheory.Sequence.IsWeaklyRegular R (List.ofFn g)) :
     RingTheory.Sequence.IsKoszulRegular g := by
@@ -60,8 +58,7 @@ private theorem isKoszulRegular_of_isWeaklyRegular {R : Type u} [CommRing R] {r 
 /-- A closed immersion on an affine open is the spectrum of the quotient by its section
 kernel. Surjectivity gives the ring isomorphism by the first isomorphism theorem; naturality
 of the affine spectrum isomorphism proves compatibility over the open. Source: the affine
-closed-immersion description used in Stacks Tag 068C
-(blueprint: lem-sc-smooth-proper-diagonal-koszul-regular). -/
+closed-immersion description used in Stacks Tag 068C. -/
 private theorem affine_closedImmersion_quotient {X Y : Scheme.{u}} (i : X ⟶ Y) [IsClosedImmersion i]
     (U : Y.Opens) (hU : IsAffineOpen U) :
     ∃ e : (i ⁻¹ᵁ U).toScheme ≅
@@ -93,8 +90,7 @@ every point of `X ×_S X` has an affine open neighbourhood `U` whose ideal `I` o
 diagonal is spanned by a Koszul-regular sequence, with `Δ⁻¹(U) ≅ Spec(Γ(U)/I)` over `U`;
 codimension `d` means the sequence has length `d` unless `U` misses the diagonal
 (`I = ⊤`).
-Source: Stacks Project, Tag 067U, and More on Morphisms, Tag 068C
-(blueprint: lem-sc-smooth-proper-diagonal-koszul-regular).
+Source: Stacks Project, Tag 067U, and More on Morphisms, Tag 068C.
 
 Proof: apply `lem-sc-smooth-diagonal-regular-immersion` to obtain affine neighbourhoods
 with regular generators of length `d` near the diagonal, and the unit ideal off it

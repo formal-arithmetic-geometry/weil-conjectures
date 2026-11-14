@@ -78,8 +78,7 @@ private theorem sectionClass_open_restriction {Y : Scheme.{u}}
 
 /-- Restrict derived module sections between two opens of the same scheme.
 The coefficient identification is restriction composition, with the inclusion equation.
-Source: Stacks Project, Tag 01FB.
-(blueprint: new-resolution-section-class-open-restriction) -/
+Source: Stacks Project, Tag 01FB. -/
 def cohomologyOpenRestriction {Y : Scheme.{u}} (G : Y.Modules)
     (U L : Y.Opens) (e : L ≤ U) (p : ℕ) :
     (forget₂ _ AddCommGrpCat.{u}).obj
@@ -101,7 +100,6 @@ set_option maxHeartbeats 800000 in
 /-- The normalized resolution class commutes with restriction between arbitrary opens.
 No affineness, quasi-coherence, base change or scalar extension is assumed.
 Source: Stacks Project, Tag 01E4, Lemma 20.7.3; Tag 01FB, Remark 20.14.2.
-(blueprint: new-resolution-section-class-open-restriction)
 
 Proof: Substitute U = f inverse V. Apply restrictedResolution_open_cohomology
 to the two inverse-image opens and the pinned identifications R and R'. The

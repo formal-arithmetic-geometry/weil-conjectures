@@ -23,7 +23,6 @@ namespace AlgebraicGeometry
 /-- Composition with the augmentation of an ordered localization model induces a
 bijection on derived maps from another model for the same finitely generated ideal.
 Source: Stacks Project, dualizing.tex, Tag 0A6R, the local-cohomology adjunction.
-(auxiliary; not a blueprint node)
 
 Proof: choose a finite generating list f of I and use the two augmented derived
 isomorphisms with its ordered localization complex C(f). Inverting any f_i contracts

@@ -27,8 +27,7 @@ set_option backward.isDefEq.respectTransparency.types false
 namespace AlgebraicGeometry
 
 /-- The canonical relative restriction units and differences commute with base change.
-Source: Stacks Project, Cohomology, Tags 08HY and 08HZ
-(blueprint: lem-pc-relative-mv-restriction-squares).
+Source: Stacks Project, Cohomology, Tags 08HY and 08HZ.
 Proof: Expand each base-change component as the mate of the pulled-back counit.
 For an open W, the unit identity for the composite adjunction identifies the
 composite with the relative restriction unit. Naturality in the given object map

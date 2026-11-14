@@ -69,7 +69,6 @@ provided its restricted sheaf coefficient is already the sheaf unit.
 Source: Stacks Project, Tags 09Z1, 0EZM and 03CB;
 Mathlib.Algebra.Homology.Additive, `singleMapHomologicalComplex_hom_app_self`, and
 Mathlib.Algebra.Homology.Single, `single_map_f_self`.
-(blueprint: lem-sbc-restricted-affine-single-unit-lift).
 
 Proof: Write X for the fibre product, r for its second projection, R = r^* F_i,
 q for the restricted diagram's identity transition, and gamma for the raw restricted

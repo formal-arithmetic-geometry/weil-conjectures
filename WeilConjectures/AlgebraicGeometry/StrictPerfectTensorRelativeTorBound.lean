@@ -24,7 +24,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # The relative Tor bound on a strictly perfect chart
 
 Source: Stacks Project, Tags 0DJQ and 08CI, the local relative Tor calculation.
-(blueprint: lem-pc-strict-perfect-tensor-relative-tor-bound).
 -/
 
 @[expose] public section
@@ -87,8 +86,7 @@ and hence identifies the restriction of each homology sheaf with the local
 homology. Tensoring the bounded flat model with F[0] leaves its degree
 bounds unchanged, so the homology sheaf restricts to zero on U. Its sections
 on every V <= U are zero. This also covers empty U, zero complexes, and
-reversed degree bounds, when the bounded complex in question is zero.
-(blueprint: lem-pc-strict-perfect-tensor-relative-tor-bound). -/
+reversed degree bounds, when the bounded complex in question is zero. -/
 theorem strictPerfect_tensor_relativeTor_bound
     {X S : Scheme.{u}} (f : X ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

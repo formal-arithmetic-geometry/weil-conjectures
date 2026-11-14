@@ -31,7 +31,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- In any affine open chart through which the geometric point factors, the structural
 ring map extends the distinguished prime to the maximal ideal of the strict henselization.
 Source: Stacks Project, Tag 04HX, using Tags 04GW and 04GP.
-(blueprint: lem-weil-pbc-strict-henselization-chart-maximal-ideal)
 
 Proof: restrict affine pointed neighbourhoods to those over the chart. This inclusion
 is initial by the shrinking argument in Tag 04HX. Identify its opposite with the category

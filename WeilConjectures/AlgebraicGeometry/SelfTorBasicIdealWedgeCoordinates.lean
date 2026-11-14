@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.SelfTorTargetBasicLocalization
 
 /-! # Self-Tor coordinates on principal affine localizations
 
-Source: Stacks Project, Tags 09PQ, 01R3 and 06YH.
-(blueprint: new-u4-self-tor-basic-ideal-wedge-coordinates). -/
+Source: Stacks Project, Tags 09PQ, 01R3 and 06YH. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -91,7 +90,6 @@ restrictions of ideal tuples from the larger chart. The input tuple is defined o
 not on its principal open V. General ideal tuples on V and general affine inclusions
 are not asserted here.
 Source: Stacks Project, Tags 09PQ, 01R3 and 06YH.
-(blueprint: new-u4-self-tor-basic-ideal-wedge-coordinates).
 
 Proof: For each U = Spec A identify the closed chart with Spec(A/I). Choose an
 augmented projective resolution of A/I and sheafify it using

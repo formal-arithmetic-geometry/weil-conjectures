@@ -44,8 +44,7 @@ private noncomputable def scalarForgetAdj (k : Type u) [Field k] (X : Scheme.{u}
 
 
 /-- The abelian adjunct of the forgotten scalar inverse-image adjunction unit.
-Source: Stacks Project, Tag 0096.
-(blueprint: new-sc-scalar-forget-pullback-comparison-isIso). -/
+Source: Stacks Project, Tag 0096. -/
 noncomputable def scalarForgetPullbackComparison (k : Type u) [Field k]
     {X Y : Scheme.{u}} (a : Y ⟶ X) :
     scalarAbelianForget k X ⋙ (Opens.map a.base).sheafPullback AddCommGrpCat.{u}
@@ -73,8 +72,7 @@ noncomputable def scalarForgetPullbackComparison (k : Type u) [Field k]
     exact congrArg ((scalarAbelianForget k X).map) (s.unit.naturality f)
 
 /-- Adjunction compatibility holds before asserting invertibility of the comparison.
-Source: Stacks Project, Tag 0096.
-(blueprint: new-sc-scalar-forget-pullback-comparison-isIso). -/
+Source: Stacks Project, Tag 0096. -/
 theorem scalarForgetPullbackComparison_adjunct (k : Type u) [Field k]
     {X Y : Scheme.{u}} (a : Y ⟶ X) (F : KSheaf X k) (G : KSheaf Y k)
     (q : (scalarInverseImage a).obj F ⟶ G) :
@@ -96,7 +94,6 @@ theorem scalarForgetPullbackComparison_adjunct (k : Type u) [Field k]
 
 /-- Forgetting scalars commutes with inverse image.
 Source: Stacks Project, Tag 0096; uniqueness of left adjoints.
-(blueprint: new-sc-scalar-forget-pullback-comparison-isIso).
 
 Proof: Scalar forgetting is restriction along integers followed by the equivalence
 between integer modules and abelian groups, hence has a coextension right adjoint.

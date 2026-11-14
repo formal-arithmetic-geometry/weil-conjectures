@@ -37,8 +37,7 @@ namespace AlgebraicGeometry.Etale
 This only asserts invertibility after global sections; it does not assert that the mate
 is an isomorphism of sheaves on the strict-local base.
 Source: Stacks Project, Tag 03Q9, the affine-neighbourhood continuity argument and the
-injective-representative construction of the canonical map
-(blueprint: lem-weil-pbc-strict-local-base-change-global-homology).
+injective-representative construction of the canonical map.
 
 Proof: choose a bounded-below injective representative J of K. For each affine pointed
 étale neighbourhood V of s, restriction of J to X ×_S V preserves injectives, so its

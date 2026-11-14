@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapZeroAugmentation
 /-! # Restricted tensor units in degree zero
 
 Source: Stacks Project, Cohomology, Remark Tag 01FB, equation-choice.
-(blueprint: lem-weil-pbc-tensor-unit-open-degree-zero).
 -/
 
 @[expose] public section
@@ -90,9 +89,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The restricted tensor-unit square commutes on augmented sections when the
 inverse-image open is the whole fibre product.
-Source: Stacks Project, Cohomology, Remark Tag 01FB (remark-explain-arrow),
+Source: Stacks Project, Cohomology, Remark Tag 01FB,
 equation-choice, specialized to degree zero.
-(blueprint: lem-weil-pbc-tensor-unit-open-degree-zero).
 
 Proof: Apply the canonical degree-zero augmentation square for moduleCohomologyFMap
 first to the restricted h-map D.psi and then to the restriction-adjunction unit on

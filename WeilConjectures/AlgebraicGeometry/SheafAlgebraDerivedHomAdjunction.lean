@@ -16,8 +16,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # The constructed algebra-valued derived Hom adjunction
 
 Source: Stacks Project, Duality for Schemes, Tags 0BV0 and 0BV1, with Modules Tag 0A6F
-and Derived Categories Tag 09T5
-(blueprint: lem-sc-sheaf-algebra-derived-hom-adjunction).
+and Derived Categories Tag 09T5.
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ namespace AlgebraicGeometry
 of scalars. No finiteness, Noetherianity, cohomological bound, or assertion about
 quasi-coherence of the output is involved.
 Source: Stacks Project, Duality for Schemes, Tags 0BV0 and 0BV1, with Modules Tag 0A6F
-and Derived Categories Tag 09T5
-(blueprint: lem-sc-sheaf-algebra-derived-hom-adjunction).
+and Derived Categories Tag 09T5.
 
 Proof:
 1. Restriction along B.hom has right adjoint sheafAlgebraHom Y B. On an open U,

@@ -32,7 +32,6 @@ This statement starts with cohomology of the complex of sections on S: it contai
 neither localized Hom classes nor their canonical germ map.
 
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-complex-sections-mate).
 
 Proof: let M be the complex underlying J and L = f_*M. The invertible right-derived
 unit on M gives sourceInjectiveDirectImageIso. In the homotopy category expand the

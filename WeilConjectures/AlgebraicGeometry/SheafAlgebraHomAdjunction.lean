@@ -11,8 +11,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # The underived algebra-valued sheaf Hom adjunction
 
-Source: Stacks Project, Modules, Tag 0A6F; Duality for Schemes, Tags 0BV0 and 0BV1
-(blueprint: lem-sc-sheaf-algebra-hom-adjunction).
+Source: Stacks Project, Modules, Tag 0A6F; Duality for Schemes, Tags 0BV0 and 0BV1.
 -/
 
 @[expose] public section
@@ -50,8 +49,7 @@ private noncomputable abbrev res (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf) :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Send m to the O-linear map b ↦ φ(b • m), on every open over U.
-Source: Stacks Project, Modules, Tag 0A6F
-(blueprint: lem-sc-sheaf-algebra-hom-adjunction). -/
+Source: Stacks Project, Modules, Tag 0A6F. -/
 private noncomputable def currySection
     {Y : Scheme.{u}} {B : Y.CommAlgebraSheaf} {M : BMod Y B} {F : OMod Y} (φ : (res Y B).obj M ⟶ F)
     (U : (Opens Y)ᵒᵖ) (m : M.val.obj U) : sheafAlgebraHomSections Y B F U where
@@ -93,8 +91,7 @@ private noncomputable def currySection
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Assemble the sectionwise maps into a B-linear sheaf morphism.
-Source: Stacks Project, Modules, Tag 0A6F
-(blueprint: lem-sc-sheaf-algebra-hom-adjunction). -/
+Source: Stacks Project, Modules, Tag 0A6F. -/
 private noncomputable def curry
     {Y : Scheme.{u}} {B : Y.CommAlgebraSheaf} {M : BMod Y B} {F : OMod Y}
     (φ : (res Y B).obj M ⟶ F) :
@@ -150,8 +147,7 @@ private noncomputable def curry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Evaluate at 1 to recover an O-linear sheaf morphism.
-Source: Stacks Project, Modules, Tag 0A6F
-(blueprint: lem-sc-sheaf-algebra-hom-adjunction). -/
+Source: Stacks Project, Modules, Tag 0A6F. -/
 private noncomputable def uncurry
     {Y : Scheme.{u}} {B : Y.CommAlgebraSheaf} {M : BMod Y B} {F : OMod Y}
     (ψ : M ⟶ sheafAlgebraHomObj Y B F) :
@@ -239,8 +235,7 @@ in both variables. Apply `Adjunction.mkOfHomEquiv` to these natural equivalences
 The same formulas work when B is the zero ring or the scheme is empty: units and
 module identities still hold, and no choice of a nonzero section was used.
 
-Source: Stacks Project, Modules, Tag 0A6F; Duality for Schemes, Tags 0BV0 and 0BV1
-(blueprint: lem-sc-sheaf-algebra-hom-adjunction). -/
+Source: Stacks Project, Modules, Tag 0A6F; Duality for Schemes, Tags 0BV0 and 0BV1. -/
 theorem sheafAlgebraHom_adjunction (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf) :
     Nonempty ((SheafOfModules.restrictScalars.{u}
       ((sheafCompose (Opens.grothendieckTopology Y)

@@ -19,9 +19,7 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictionTotalTensor
 
 /-! # Locality of a fixed Tor amplitude interval
 
-Source: Stacks Project, Cohomology of Sheaves, Lemma 09U9
-(cohomology-lemma-tor-amplitude-stalk).
-(blueprint: lem-pc-tor-amplitude-open-local).
+Source: Stacks Project, Cohomology of Sheaves, Lemma 09U9.
 -/
 
 @[expose] public section
@@ -145,9 +143,8 @@ private theorem open_pullback_restriction_iso (X : Scheme.{u}) (U : X.Opens)
     cmp.symm ≪≫ (derivedPullback U.ι).mapIso eP⟩
 
 /-- Tor amplitude in a fixed interval can be checked on open neighbourhoods.
-Source: Stacks Project, Cohomology of Sheaves, Lemma 09U9
-(cohomology-lemma-tor-amplitude-stalk), its proof using exact stalks and tensor.
-(blueprint: lem-pc-tor-amplitude-open-local).
+Source: Stacks Project, Cohomology of Sheaves, Lemma 09U9,
+its proof using exact stalks and tensor.
 
 Proof: Fix a global module sheaf G and a degree i outside [a,b]. Choose a K-flat
 representative P of E. Its total tensor with G[0] computes the global derived tensor.

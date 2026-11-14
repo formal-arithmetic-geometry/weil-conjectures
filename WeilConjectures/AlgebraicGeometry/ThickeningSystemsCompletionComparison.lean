@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-! # Restriction of coherent modules and its canonical comparison with completion.
 
 Source: Stacks Project, Cohomology of Schemes, Remark 088F and Lemma 087T.
-(blueprint: lem-weil-pbc-thickening-systems-completion-comparison).
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ set_option autoImplicit false
 
 /-- Restriction of coherent modules and its canonical comparison with completion.
 Source: Stacks Project, Remark 088F, Lemma 087T and equation 0880.
-(blueprint: lem-weil-pbc-thickening-systems-completion-comparison).
 
 Proof:
 1. The hypotheses imply j_n and the canonical i_n are closed immersions between

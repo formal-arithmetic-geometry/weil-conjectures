@@ -18,7 +18,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The normalized relative boundary exists and determines its Ext representative.
 proof.md, paragraphs 1--4;
-Stacks 03PL and 0A45 (auxiliary; not a blueprint node).
+Stacks 03PL and 0A45.
 
 Proof: Use existence and uniqueness of the integral pole boundary and of the etale
 Cartier reduction from CartierReductionSiteComparison. A boundary witness is also a

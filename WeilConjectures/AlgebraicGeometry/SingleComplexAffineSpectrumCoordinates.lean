@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
 /-! # Spectrum coordinates for a single-complex affine square
 
 Source: Stacks Project, Tags 0DJ8 and 0DJ9, affine coordinate reduction.
-(blueprint: lem-pc-single-complex-affine-spectrum-coordinates).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ The two displayed isomorphisms identify its endpoints and the final equation
 identifies the actual morphism, including its given coefficient map.
 Source: Stacks Project, Tag 0DJ8, affine reduction in the proof; Tag 0DJ9,
 affine-open paragraph. Canonical transport details expanded by C1.
-(blueprint: lem-pc-single-complex-affine-spectrum-coordinates).
 
 Proof: For each of the four affine schemes use its canonical isomorphism to the
 spectrum of its global section ring. Naturality of toSpecGamma identifies each

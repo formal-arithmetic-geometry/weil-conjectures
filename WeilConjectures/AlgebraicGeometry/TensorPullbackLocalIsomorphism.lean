@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.RestrictedTensorPullbackStalk
 
 /-! # Tensor pullback preserves a local isomorphism
 
-Source: Stacks Project, Tags 0095 and 0098.
-(blueprint: lem-pc-tensor-pullback-local-isomorphism). -/
+Source: Stacks Project, Tags 0095 and 0098. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -25,7 +24,6 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- A map invertible on U pulls back to a map invertible on its inverse image.
 Source: Stacks Project, Tags 0095 and 0098.
-(blueprint: lem-pc-tensor-pullback-local-isomorphism).
 
 Proof: At each point x of f inverse-image U, restriction to U identifies the
 stalk of h at f(x) with an invertible stalk map. The pullback stalk formula

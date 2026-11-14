@@ -22,8 +22,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- Restrict the given coefficient transition and apply the degree-zero single functor.
-Source: Stacks Project, Tag 09Z1, restriction to an affine etale object.
-(blueprint: def-sbc-restricted-affine-single-maps). -/
+Source: Stacks Project, Tag 09Z1, restriction to an affine etale object. -/
 @[implicit_reducible]
 noncomputable def restrictedAffineSingleTransition {S : Scheme.{v}} {I : Type v}
     [Preorder I] (D : Iᵒᵖ ⥤ Over S)
@@ -45,8 +44,7 @@ noncomputable def restrictedAffineSingleTransition {S : Scheme.{v}} {I : Type v}
 
 /-- The cone comparison, built from the given `eH`, two inverse-image composition
 isomorphisms, and the single-complex comparison. No witness is chosen.
-Source: Stacks Project, Tags 09Z1 and 0EZM, restriction of a cone coefficient system.
-(blueprint: def-sbc-restricted-affine-single-maps). -/
+Source: Stacks Project, Tags 09Z1 and 0EZM, restriction of a cone coefficient system. -/
 noncomputable def restrictedAffineSingleConeIso {S : Scheme.{v}} {I : Type v}
     [Preorder I] (D : Iᵒᵖ ⥤ Over S) (c : Cone D)
     (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1})

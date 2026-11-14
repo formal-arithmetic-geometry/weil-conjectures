@@ -18,7 +18,6 @@ import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 /-! # Pullback compatibility of the explicit unit comparison
 
 Source: Stacks Project, Tag 01F7.
-(blueprint: new-sc-scalar-unit-pullback-naturality).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ open Modules
 intertwines the two structure-sheaf pullback operations.
 Source: Stacks Project, Tag 01F7, cohomology-equation-functorial and
 cohomology-equation-choice; Tag 03FD, lemma-cohomology-modules-abelian-agree.
-(blueprint: new-sc-scalar-unit-pullback-naturality).
 
 Proof: Factor each explicit module-to-abelian comparison through scalar Ext.
 Use coefficient naturality to move the tensor-unit coefficient map into Ext, and

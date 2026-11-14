@@ -30,7 +30,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 additive presentation of fractions for the invertible module `L.tensorPow d`.
 Source: Stacks Project, Properties, Tag 0B5L (equation module-invert-s),
 Lemma 01PW(2), and the proof of Lemma 01Q1.
-(blueprint: lem-sc-section-ring-veronese-fractions).
 
 Proof: identify the degree `n • d` summand with sections of
 `(L.tensorPow d).tensorPow n` using `n • d = d * n` and `tensorPowMulIso`, and insert

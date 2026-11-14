@@ -31,7 +31,7 @@ of projective lines. This uses no base-change property of that trace.
 
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, the paragraphs using qp1 = qp2 and the
-composite-adjunction counit (auxiliary; not a blueprint node).
+composite-adjunction counit.
 
 Proof: Substitute projectionExchange, middleComparison and coordinateTrace.
 Use naturality of proper forget-supports to replace compact-support exchange by

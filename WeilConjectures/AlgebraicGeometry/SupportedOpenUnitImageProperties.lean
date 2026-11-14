@@ -21,7 +21,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunc
 /-! # Support and quasi-coherence of the open right-adjoint image
 
 Source: Stacks Project, Tags 08D5, 08FE and 08BS.
-(blueprint: lem-pc-supported-open-unit-image-properties).
 -/
 
 @[expose] public section
@@ -137,7 +136,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The open right-adjoint image of a supported quasi-coherent complex remains supported
 and quasi-coherent. This concerns the second vertex, with no cone or triangle supplied.
 Source: Stacks Project, Tags 08D5 and 08FE; Tag 08BS for derived open adjunction.
-(blueprint: lem-pc-supported-open-unit-image-properties).
 
 Proof: Identify modules on the over-site with modules on the open subscheme using
 Scheme.Modules.overEquiv U, and derive this exact equivalence. Exact restriction is

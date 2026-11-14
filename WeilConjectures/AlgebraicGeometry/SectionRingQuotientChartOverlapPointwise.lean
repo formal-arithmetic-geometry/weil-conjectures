@@ -15,7 +15,6 @@ import all WeilConjectures.AlgebraicGeometry.SectionRingProjPreimageReverse
 /-! # Underlying maps of section-ring quotient charts
 
 Source: Stacks Project, Constructions, Tags 01N8 and 01NK, uniqueness arguments.
-(blueprint: lem-sc-section-ring-quotient-chart-overlap-base-map-pointwise).
 -/
 
 @[expose] public section
@@ -126,7 +125,6 @@ private theorem proj_eq_of_positive_chart_membership
 
 /-- The underlying continuous maps of the restricted quotient charts agree.
 Source: Stacks Project, Constructions, Tags 01N8 and 01NK, uniqueness arguments.
-(blueprint: lem-sc-section-ring-quotient-chart-overlap-base-map-pointwise).
 
 Proof: Fix x in U intersect V and a positive-degree homogeneous a of degree r.
 This pointwise statement isolates the point comparison step from final function extensionality.

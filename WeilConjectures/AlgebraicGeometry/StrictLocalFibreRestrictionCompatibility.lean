@@ -23,8 +23,7 @@ open Scheme
 
 /-- Restriction along an explicit map to the strict-local pullback, followed by
 inverse-image composition and evaluation at the identity etale object.
-Source: Stacks Project, Tag 0EYP, canonical restrictions.
-(blueprint: lem-sbc-strict-local-fibre-restriction-compatibility). -/
+Source: Stacks Project, Tag 0EYP, canonical restrictions. -/
 noncomputable def strictLocalFibreRestriction
     (Λ : Type (u + 1)) [CommRing Λ]
     {X' X Y : Scheme.{u}} {g' : X' ⟶ X} {f : X ⟶ Y}
@@ -53,7 +52,6 @@ noncomputable def strictLocalFibreRestriction
 identities, and asserts neither continuity nor invertibility.
 
 Source: Stacks Project, Tag 0EYP, canonical restrictions, and Tag 03Q9.
-(blueprint: lem-sbc-strict-local-fibre-restriction-compatibility).
 
 Proof: Apply `strictLocal_section_pullback` with q = i and the two projection
 identities hi' and hi. It identifies the first two factors of the constructed

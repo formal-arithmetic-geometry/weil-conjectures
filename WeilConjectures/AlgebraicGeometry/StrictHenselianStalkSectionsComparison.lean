@@ -25,7 +25,6 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 /-- Stalkwise sections factor through inverse image to the local scheme and its
 section functor. This comparison requires no henselianity.
 Source: Stacks Project, Etale Cohomology, Tag 03Q6 (degree-zero continuity).
-(blueprint: lem-weil-pbc-strict-henselian-stalk-sections-comparison)
 
 Proof: Restrict the sheaf to the etale object i(top), then pull it back along the
 canonical map from Spec of the local ring at x to its underlying scheme. The

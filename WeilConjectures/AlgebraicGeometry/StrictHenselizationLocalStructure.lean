@@ -15,8 +15,7 @@ import WeilConjectures.RingTheory.StrictHenselizationTriples
 
 /-! # Local structure of the affine pointed-neighbourhood colimit
 
-Source: Stacks Project, Tags 04HX, 04GW and 04GP
-(blueprint: lem-weil-pbc-strict-henselization-local-structure).
+Source: Stacks Project, Tags 04HX, 04GW and 04GP.
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The chosen coordinate-ring colimit is strictly henselian.
-Source: Stacks Project, Tag 04HX, using Tags 04GW and 04GP
-(blueprint: lem-weil-pbc-strict-henselization-local-structure).
+Source: Stacks Project, Tag 04HX, using Tags 04GW and 04GP.
 
 Proof: Choose an affine open containing the image of the geometric point and factor
 that point through it. The theorem `Scheme.etale_local_ring_triples` identifies the

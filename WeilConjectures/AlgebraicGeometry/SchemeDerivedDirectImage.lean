@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 
 Source: the Weil conjectures blueprint, sec-picard-framework/det-thm-picard-coherence,
 node lemma-coherent-base-change-invertible-sheaves; Stacks Project, Tag 0A1G, with the ringed-space
-construction of Tag 079V (blueprint: lemma-coherent-base-change-invertible-sheaves).
+construction of Tag 079V.
 
 ## Main definitions
 
@@ -41,16 +41,14 @@ variable {X S : Scheme.{u}}
 construction for the underlying ringed-space morphism. Its K-injective computation is
 supplied by `RingedSpace.derivedModuleDirectImage_computed_by_resolution`.
 Source: blueprint sec-picard-framework/det-thm-picard-coherence, node
- lemma-coherent-base-change-invertible-sheaves; Stacks, Tags 0A1G and 079V
-(blueprint: lemma-coherent-base-change-invertible-sheaves). -/
+ lemma-coherent-base-change-invertible-sheaves; Stacks, Tags 0A1G and 079V. -/
 abbrev schemeDerivedDirectImage (f : X ⟶ S) :
     schemeDerivedCategory X ⥤ schemeDerivedCategory S :=
   RingedSpace.derivedModuleDirectImage f.toLRSHom.toShHom
 
 /-- The higher direct image of a derived object in integer degree `i` is `H^i(Rf_*E)`,
 a sheaf of `𝒪_S`-modules. Source: blueprint sec-picard-framework/det-thm-picard-coherence,
-node lemma-coherent-base-change-invertible-sheaves; Stacks, Tag 0A1G
-(blueprint: lemma-coherent-base-change-invertible-sheaves). -/
+node lemma-coherent-base-change-invertible-sheaves; Stacks, Tag 0A1G. -/
 def schemeHigherDirectImage (f : X ⟶ S) (i : ℤ) :
     schemeDerivedCategory X ⥤ SheafOfModules.{u} (moduleRings S.toRingedSpace) :=
   schemeDerivedDirectImage f ⋙
@@ -59,7 +57,7 @@ def schemeHigherDirectImage (f : X ⟶ S) (i : ℤ) :
 /-- For an `𝒪_X`-module, higher direct image means higher direct image of that module
 viewed as a complex in degree zero. Source: blueprint
 sec-picard-framework/det-thm-picard-coherence, node lemma-coherent-base-change-invertible-sheaves;
-Stacks, Tag 0A1G (blueprint: lemma-coherent-base-change-invertible-sheaves). -/
+Stacks, Tag 0A1G. -/
 def schemeModuleHigherDirectImage (f : X ⟶ S) (i : ℤ) :
     SheafOfModules.{u} (moduleRings X.toRingedSpace) ⥤
       SheafOfModules.{u} (moduleRings S.toRingedSpace) :=

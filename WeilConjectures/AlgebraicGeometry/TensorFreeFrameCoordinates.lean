@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackSections
 # Coordinates for a finite tensor-pullback frame
 
 Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb.
-(blueprint: lem-fd-tensor-free-frame-coordinates).
 -/
 
 @[expose] public section
@@ -178,7 +177,6 @@ set_option maxRecDepth 2048 in
 
 Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb,
 first paragraph (trivialize the vector bundle and use its frame coordinates).
-(blueprint: lem-fd-tensor-free-frame-coordinates).
 
 Proof: for h:W -> V, use the inverse of precisely the normalized composition map
 that occurs in the definition of tensor-section restriction. Follow it by the

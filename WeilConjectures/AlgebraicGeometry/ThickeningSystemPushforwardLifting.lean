@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-! # Lifting an adic system to the closed thickenings
 
 Source: Stacks Project, Cohomology of Schemes, Remark 088F and Lemma 087T.
-(blueprint: lem-weil-pbc-thickening-system-pushforward-lifting).
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ set_option autoImplicit false
 This only asserts object lifting, without constructing an equivalence or evaluation
 comparisons and without asserting full faithfulness.
 
-Source: Stacks, Remark 088F, Lemma 087T, equation 0880
-(blueprint: lem-weil-pbc-thickening-system-pushforward-lifting).
+Source: Stacks, Remark 088F, Lemma 087T, equation 0880.
 Proof: The sources of the closed immersions `j n` are Noetherian. For each term of `H`,
 the annihilation condition and `(j n).ker = J^(n+1)` place it in the essential image
 of the closed-immersion coherent equivalence. Choose coherent terms `M_n` and

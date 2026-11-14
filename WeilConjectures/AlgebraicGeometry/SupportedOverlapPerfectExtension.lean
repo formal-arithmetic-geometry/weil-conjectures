@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.SupportedOverlapRestrictionData
 /-! # Supported perfect extension across an affine overlap
 
 Source: Stacks Project, Tags 08EK and 09IM.
-(blueprint: lem-sc-supported-overlap-perfect-extension).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Extend the stabilization of a supported perfect object from the overlap to V.
 Source: Stacks Project, Tag 09IM, affine extension step using Tag 08EK.
-(blueprint: lem-sc-supported-overlap-perfect-extension).
 
 Proof: Regard W intersect V as the inverse-image open U in V. Its inclusion into the
 ambient overlap is a scheme isomorphism. Quasi-separatedness makes the intersection of

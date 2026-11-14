@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 /-! # Restriction on resolution cohomology before the section-class map
 
 Source: Stacks Project, Tags 01E2 and 01FB.
-(blueprint: lem-weil-pbc-restricted-resolution-cohomology)
 -/
 
 @[expose] public section
@@ -69,7 +68,6 @@ set_option maxHeartbeats 700000 in
 fixed resolution, followed by the pinned identification of the restricted resolution.
 This is a statement about homology of section complexes, before the map to a homology sheaf.
 Source: Stacks Project, Equation 20.7.1.1 (Tag 01E2), Remark 20.14.2 (Tag 01FB).
-(blueprint: lem-weil-pbc-restricted-resolution-cohomology)
 
 Proof: Let j be the inclusion of U. The restriction unit gives a map from I to
 j_* of its restriction. Compose it with j_* of R.comparison.inv. Naturality of

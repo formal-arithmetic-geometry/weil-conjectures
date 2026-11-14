@@ -30,7 +30,6 @@ construction; no short exact replacement on the base is required here.
 
 Source: Stacks Project, Cohomology, Tags 08BV, 08HY and 08HZ, and Derived Categories
 of Schemes, Tag 0DJ9, the induction diagram.
-(blueprint: lem-pc-relative-mv-cone-presentation).
 
 Proof: Choose K-injective resolutions with injective terms for K and K'. On each
 cover the restriction units and their difference form the short exact sequence

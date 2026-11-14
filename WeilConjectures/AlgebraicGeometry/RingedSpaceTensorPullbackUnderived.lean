@@ -37,7 +37,7 @@ set_option backward.isDefEq.respectTransparency.types false
 variable {X Y : RingedSpace.{u}} (g : X ⟶ Y)
 
 /-- The ring map `g⁻¹ O_Y → O_X` adjoint to the structure-sheaf map of `g`.
-Source: Stacks, Tag 0095 (blueprint: def-pc-module-pullback). -/
+Source: Stacks, Tag 0095. -/
 private abbrev tensorPullbackRingMap :=
   CochainComplex.tensorPullbackRingMap g.hom.base X.sheaf Y.sheaf ⟨g.hom.c⟩
 
@@ -47,7 +47,7 @@ private def tensorPullbackObj (M : (SheafOfModules.{u} (moduleRings Y))) : (Shea
     (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf M)
 
 /-- The sectionwise map of tensor presheaves is natural.
-Source: Stacks, Tag 0095 (blueprint: def-pc-module-pullback).
+Source: Stacks, Tag 0095.
 Proof: inverse image of `a` is linear and commutes with restriction (008X).
 The map `id ⊗ g⁻¹a` therefore commutes with restrictions on pure tensors;
 pure tensors generate each section tensor, giving the asserted naturality. -/
@@ -68,7 +68,7 @@ private theorem tensorPullbackPresheafMap_naturality {M N : (SheafOfModules.{u} 
     (TopCat.Sheaf.inverseImageModuleMap g.hom.base Y.sheaf M a) i
 
 /-- The tensor formula on morphisms, followed by module sheafification.
-Source: Stacks, Tag 0095 (blueprint: def-pc-module-pullback). -/
+Source: Stacks, Tag 0095. -/
 private def tensorPullbackMap {M N : (SheafOfModules.{u} (moduleRings Y))} (a : M ⟶ N) :
     tensorPullbackObj g M ⟶ tensorPullbackObj g N :=
   (PresheafOfModules.sheafification (𝟙 (moduleRings X).obj)).map
@@ -77,8 +77,7 @@ private def tensorPullbackMap {M N : (SheafOfModules.{u} (moduleRings Y))} (a : 
           ((TopCat.Sheaf.inverseImageModuleMap g.hom.base Y.sheaf M a).val.app U)
       naturality := tensorPullbackPresheafMap_naturality g a }
 
-/-- Tensor pullback preserves identities. Source: Stacks, Tag 0095
-(blueprint: def-pc-module-pullback).
+/-- Tensor pullback preserves identities. Source: Stacks, Tag 0095.
 Proof: the abelian inverse-image functor preserves identities; its module map is the
 same map with linearity supplied. Extension of scalars and sheafification preserve identities. -/
 private theorem tensorPullbackMap_id (M : (SheafOfModules.{u} (moduleRings Y))) :
@@ -107,8 +106,7 @@ private theorem tensorPullbackMap_id (M : (SheafOfModules.{u} (moduleRings Y))) 
   rw [hp, CategoryTheory.Functor.map_id]
   rfl
 
-/-- Tensor pullback preserves composition. Source: Stacks, Tag 0095
-(blueprint: def-pc-module-pullback).
+/-- Tensor pullback preserves composition. Source: Stacks, Tag 0095.
 Proof: the abelian inverse-image functor preserves composition; its module map is the
 same map with linearity supplied. Extension of scalars and sheafification preserve composition. -/
 private theorem tensorPullbackMap_comp {M N P : (SheafOfModules.{u} (moduleRings Y))} (a : M ⟶ N)
@@ -131,7 +129,7 @@ private theorem tensorPullbackMap_comp {M N P : (SheafOfModules.{u} (moduleRings
   rw [hi, CategoryTheory.Functor.map_comp]
 
 /-- Pullback of modules along a scheme morphism, defined by the tensor formula.
-Source: Stacks, Tag 0095 (blueprint: def-pc-module-pullback). -/
+Source: Stacks, Tag 0095. -/
 private def tensorPullback : (SheafOfModules.{u} (moduleRings Y)) ⥤ (SheafOfModules.{u}
   (moduleRings X)) where
   obj := tensorPullbackObj g
@@ -213,7 +211,7 @@ private def tensorPullbackPushforwardIso :
     SheafOfModules.pushforwardCongr (tensorPullbackRingMap_unit g)
 
 /-- The tensor formula is left adjoint to the sectionwise module pushforward.
-Source: Stacks, Tag 0096 (blueprint: def-pc-module-pullback).
+Source: Stacks, Tag 0096.
 Proof: apply the tensor/restriction adjunction to the change of rings, then the
 inverse-image/direct-image module adjunction (008Y). The resulting bijection is natural
 and its right-hand module action is restriction along `g.hom.c`, hence the recorded pushforward.
@@ -312,7 +310,6 @@ private theorem nonempty_tensorPullbackAdjunction : Nonempty (tensorPullback g �
 left adjoint to module direct image.
 
 Source: Stacks Project, Sheaves, Tags 008A and 008Y.
-(blueprint: lem-pc-ringed-space-tensor-pullback-underived)
 
 Proof: take the inverse-image module Hom equivalence of Tag 008Y and compose
 it with the extension/restriction-of-scalars equivalence of Tag 008A along the

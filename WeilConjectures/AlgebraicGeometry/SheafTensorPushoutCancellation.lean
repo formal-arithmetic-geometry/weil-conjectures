@@ -16,7 +16,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Cancellation of tensor extension over a pushout of ring sheaves
 
 Source: Stacks Project, Tag 01SB, tensor construction, and Tag 008A.
-(blueprint: lem-weil-pbc-sheaf-tensor-pushout-cancellation).
 -/
 
 @[expose] public section
@@ -256,8 +255,7 @@ b(c)t(a) tensor m = b(c) tensor (a • m), so it fixes β tensor m locally, henc
 These formulas commute with every restriction and with each linear map M → N, proving
 naturality. The inverse takes 1 tensor m to b(1) tensor m = 1 tensor m on every open.
 All constructions use balanced tensor relations and sheaf gluing, with no flatness or
-nonzero-ring assumption; the zero module and empty open are included.
-(blueprint: lem-weil-pbc-sheaf-tensor-pushout-cancellation). -/
+nonzero-ring assumption; the zero module and empty open are included. -/
 theorem sheafTensorPushoutCancellation
     (r : D ⟶ C) (s : D ⟶ A) (b : C ⟶ B) (t : A ⟶ B)
     (hp : IsPushout r s b t) :

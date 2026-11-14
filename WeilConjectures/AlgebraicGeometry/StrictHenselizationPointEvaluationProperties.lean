@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationPointEvaluation
 /-! # Surjectivity of pointed evaluation
 
 Source: Stacks Project, Tags 04GW and 04HX.
-(blueprint: lem-weil-pbc-strict-henselization-point-evaluation-properties).
 -/
 
 @[expose] public section
@@ -42,7 +41,6 @@ noncomputable def strictHenselizationPointEvaluationToSep
 
 /-- The codomain-restricted pointed evaluation map is surjective.
 Source: Stacks Project, Tags 04GW and 04HX.
-(blueprint: lem-weil-pbc-strict-henselization-point-evaluation-properties).
 
 Proof: Choose an affine chart U through the image of barY and lift barY to U.
 The chart residue field identifies with the residue field of Y via the open

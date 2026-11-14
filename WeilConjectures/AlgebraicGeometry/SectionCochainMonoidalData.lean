@@ -72,8 +72,7 @@ monoidal. Its oplax tensorator is mapBifunctorComparison of the curried ordinary
 oplax transformation. Equality of these ordinary components identifies the two
 curried natural transformations; sectionTotalComparison_eq then identifies the
 cochain tensorator with cochainTensorComparison. This construction is unbounded
-and also applies to zero complexes, zero coefficients and empty sites.
-(auxiliary; not a blueprint node). -/
+and also applies to zero complexes, zero coefficients and empty sites. -/
 theorem section_cochain_monoidal_data (T : Scheme.{u}) :
     ∃ m : ((equivalence Λ T).mapHomologicalComplex (.up ℤ)).functor.Monoidal,
       letI := m

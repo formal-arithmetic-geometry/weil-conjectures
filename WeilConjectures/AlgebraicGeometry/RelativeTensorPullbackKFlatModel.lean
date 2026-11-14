@@ -17,7 +17,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # The relative tensor comparison on K-flat representatives
 
 Source: Stacks Project, Cohomology, Lemma 20.27.4 (Tag 08DE).
-(blueprint: lem-pc-relative-tensor-pullback-kflat-model)
 -/
 
 @[expose] public section
@@ -207,8 +206,7 @@ induce an isomorphism of total complexes. Exact restriction of scalars commutes
 with homology, and forgetting to abelian sheaves removes the scalar action.
 Compose these identifications with the localization homology comparison.
 The construction is valid for unbounded complexes and empty schemes; it does not
-require the restriction of A to be K-flat.
-(blueprint: lem-pc-relative-tensor-pullback-kflat-model) -/
+require the restriction of A to be K-flat. -/
 theorem relativeTensorPullback_kFlat_model
     {X S : Scheme.{u}} (f : X ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

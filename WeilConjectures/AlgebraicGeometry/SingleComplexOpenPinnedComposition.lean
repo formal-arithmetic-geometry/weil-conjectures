@@ -21,8 +21,7 @@ namespace AlgebraicGeometry
 
 /-- The exact composition family already used by `schemeDerivedBaseChangeMap`.
 This name shares the pinned expression; it does not select new comparison data.
-Source: Stacks Project, Tag 0D5S, and `exists_derivedPullbackComposition`.
-(blueprint: def-pc-t2-open-pinned-composition). -/
+Source: Stacks Project, Tag 0D5S, and `exists_derivedPullbackComposition`. -/
 noncomputable abbrev singleComplexOpenPinnedComposition
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] :

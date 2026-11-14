@@ -28,7 +28,6 @@ open Scheme
 henselian local ring is injective on sections.
 
 Source: Stacks Project, Tags 09XK, 09ZH and 0A3I, proof of Tag 0EYP.
-(blueprint: lem-sbc-strict-henselian-integral-sections-injective).
 
 Proof: An integral scheme over Spec A is affine, say Spec B, with B integral over A.
 Set J to the extension of the maximal ideal of A. Tag 09XK makes (B,J) henselian.

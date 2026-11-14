@@ -146,7 +146,6 @@ set_option backward.isDefEq.respectTransparency false in
 
 Source: Stacks Project, Tag 0GS2, General case, the quotient-ring and closed-fibre
 limit paragraphs; Tags 01YW and 01YX for affine inverse limits.
-(blueprint: lem-weil-pbc-quotient-fibre-limit-transfer).
 
 Proof: For each index set K_i to the inverse image of I under alpha_i. Naturality
 of alpha ensures that every ring transition sends K_i into K_j. Define the quotient

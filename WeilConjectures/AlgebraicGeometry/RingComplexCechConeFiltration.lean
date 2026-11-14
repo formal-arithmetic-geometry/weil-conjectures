@@ -95,7 +95,6 @@ modules on which some element of I acts invertibly. This assertion concerns the 
 model alone and imposes no condition on any source of morphisms.
 Source: Stacks Project, dualizing.tex, Tag 0A6R, lemma-local-cohomology-adjoint,
 the finite localization filtration of its displayed extended Cech complex.
-(auxiliary; not a blueprint node)
 
 Proof: choose a finite generating list f of I and use the augmented model isomorphism
 in hK. For its ordered model C, the degree-zero augmentation is an isomorphism and

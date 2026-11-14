@@ -9,7 +9,6 @@ import all WeilConjectures.CategoryTheory.InternalSectionTensorComparison
 
 /-! # Section realization of the restricted scalar computation counit
 
-(auxiliary; not a blueprint node)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -274,7 +273,6 @@ attribute [local irreducible] sectionScalarRestriction
 /-- Scalar normalization and ordinary generators identify the restricted scalar
 computation after the section equivalence. Source: Stacks 03EK, 06YY, 07A6;
 scalar and ordinary part of the conjugate-computation node's first step.
-(auxiliary; not a blueprint node).
 
 Proof: substitute the K-flat computation clause of hs. Naturality of exact
 restriction moves the scalar computation counit through its section comparison.

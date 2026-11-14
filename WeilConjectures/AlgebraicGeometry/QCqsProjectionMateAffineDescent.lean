@@ -18,7 +18,6 @@ import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 /-! # Affine descent for supplied derived projection mates
 
 Source: Stacks Project, Tag 08EU, local reduction of the projection formula.
-(blueprint: lem-pc-qcqs-projection-mate-affine-descent).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry
 
 /-- The projection-mate theorem for affine targets implies its global case.
 Source: Stacks Project, Tag 08EU, first sentence of the proof.
-(blueprint: lem-pc-qcqs-projection-mate-affine-descent).
 
 Proof: cover Y by affine opens V, each identified with Spec Gamma(V,O).
 The inverse image U is quasi-compact since f is quasi-compact and V is affine,

@@ -17,7 +17,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
  # The derived base-change morphism of O-modules
 
 Source: Stacks Project, Cohomology, Remark 08HY; equivalently the unit construction
-of Lemma 02N7 (blueprint: def-pc-derived-base-change-map).
+of Lemma 02N7.
 -/
 
 @[expose] public section
@@ -36,9 +36,8 @@ set_option backward.isDefEq.respectTransparency.types true in
 set_option synthInstance.maxSize 2048 in
 -- The sheaf tensor and total-complex instances require larger search terms and budget.
 /-- Derived pullback is left adjoint to derived direct image, bifunctorially on the
-unbounded derived categories of O-modules. Source: Stacks, Tag 079W
-(blueprint: def-pc-derived-base-change-map).
-Proof: nonempty_derivedPullbackAdjunction (lem-pc-ringed-spaces-derived-adjoint)
+unbounded derived categories of O-modules. Source: Stacks, Tag 079W.
+Proof: nonempty_derivedPullbackAdjunction
 gives existence of an unbounded adjunction. To specify the canonical one, the
 module tensor pullback is left adjoint to module direct image by
 lem-pc-module-pullback-adjunction. Their left and right derived functors are the
@@ -179,8 +178,7 @@ The functor comparisons below are selected from their left-derived universal pro
 not arbitrary isomorphisms. The adjunction Hom equivalences are pinned to the same
 left-derived counits as these comparisons and to the recorded right-derived units, via
 `exists_schemeDerivedAdjunction`; no independent adjunction choice is allowed.
-Source: Stacks, cohomology.tex, Remark 08HY and Lemma 02N7
-(blueprint: def-pc-derived-base-change-map). -/
+Source: Stacks, cohomology.tex, Remark 08HY and Lemma 02N7. -/
 def schemeDerivedBaseChangeMap
     [∀ Y : Scheme.{uBC},
       HasDerivedCategory.{wBC} (SheafOfModules.{uBC} (moduleRings Y.toRingedSpace))]

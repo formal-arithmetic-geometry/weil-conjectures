@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, second triangle: common coefficient and even symmetry.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -201,7 +200,7 @@ followed by undoing the comparison on its remaining factor. This is solely an id
 of inverse images and tensor maps; it contains no projection formula or direct image.
 
 Source: thm-amb-p1-adjunction.proof.md, second triangle, the common coefficient and
-its even self-symmetry (auxiliary; not a blueprint node).
+its even self-symmetry.
 
 Proof in words: write the tensor comparisons for p1 and p2. Monoidality of the square
 comparison expresses its value on L tensor K as the tensor of its values on L and K.

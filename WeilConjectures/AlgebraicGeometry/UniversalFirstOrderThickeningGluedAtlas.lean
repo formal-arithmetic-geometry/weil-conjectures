@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.UniversalThickeningCartesianAtlas
 
 Source: Stacks Project, More on Morphisms, Lemma 37.7.1 (Tag 04F3),
 paragraph beginning "Choose an affine open covering".
-(blueprint: lem-weil-pbc-universal-first-order-thickening-glued-atlas)
 -/
 
 @[expose] public section
@@ -85,7 +84,6 @@ first order thickening and its universal charts; global universality is not asse
 Source: Stacks Project, More on Morphisms, proof of Lemma 37.7.1 (Tag 04F3),
 paragraph beginning "Choose an affine open covering", up to "is a universal
 first order thickening of Z_i over X".
-(blueprint: lem-weil-pbc-universal-first-order-thickening-glued-atlas)
 
 Proof:
 1. On each overlap of `C`, restrict the two local thickenings using the first and

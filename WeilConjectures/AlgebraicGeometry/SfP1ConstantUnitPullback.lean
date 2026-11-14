@@ -62,7 +62,6 @@ private theorem native_unit_compat
 
 /-- Inverse image preserves the specified constant-unit comparison.
 Source: blueprint thm-amb-p1-adjunction.proof.md, constant-unit normalization.
-(auxiliary; not a blueprint node).
 
 Proof: identify constantUnit with singleFunctorObjUnitIso and the ordinary
 constant inverse-image map with the native single-constant comparison. The native

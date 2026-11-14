@@ -14,8 +14,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine criteria for finite type and finite presentation of modules
 
-Source: Stacks Project, Modules, Tags 01BN and 01BO; Properties, Tags 01PB and 01PC
-(blueprint: lem-weil-pbc-quasi-coherent-finite-type-affine).
+Source: Stacks Project, Modules, Tags 01BN and 01BO; Properties, Tags 01PB and 01PC.
 -/
 
 @[expose] public section
@@ -387,8 +386,7 @@ and finite presentation on an affine open are equivalent to the corresponding fi
 of its sections. Finite generation on an affine open cover gives finite type globally
 and finite generation on every affine open; global finite presentation gives finitely
 presented sections on every affine open.
-Source: Stacks Project, Modules, Tags 01BN, 01BO; Properties, Tags 01PB, 01PC
-(blueprint: lem-weil-pbc-quasi-coherent-finite-type-affine).
+Source: Stacks Project, Modules, Tags 01BN, 01BO; Properties, Tags 01PB, 01PC.
 
 Proof:
 1. Mathlib's finite-presentation instance gives quasi-coherence directly (Stacks 01BO).

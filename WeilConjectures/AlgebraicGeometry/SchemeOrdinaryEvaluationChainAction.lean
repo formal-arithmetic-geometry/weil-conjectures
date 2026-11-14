@@ -58,7 +58,6 @@ private theorem triple_ext {C : Type*} [Category* C] [Preadditive C]
 /-- The ordinary component formula gives the tensor-unit action for a factor map.
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;
 ordinary evaluation chain calculation, step 3.
-(blueprint: lem-pc-scheme-ordinary-evaluation-chain-action).
 
 Proof: The K-injective augmentation eta_O is monic degreewise. Consequently
 the supplied factorization equation determines each component of e: on a

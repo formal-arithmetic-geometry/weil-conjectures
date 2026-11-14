@@ -14,7 +14,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 # The coinduction evaluation Hom-bijections
 
 Source: Stacks Project, Tag 0A6F and Tag 0BUZ.
-(blueprint: lem-sc-sheaf-coinduction-counit).
 -/
 
 @[expose] public section
@@ -406,7 +405,6 @@ with the internal-Hom multiplication action; the adjunction is constructed after
 
 Source: Stacks Project, Modules, Tag 0A6F, lemma-adjoint-tensor-restrict;
 Duality, Tag 0BUZ, lemma-compute-sheafhom-affine.
-(blueprint: lem-sc-sheaf-coinduction-counit).
 
 Proof: Given g : T(G) -> F, on U send m in G(U) to the local O_X-linear
 map whose component on W sends b in A(W) to g_W(b * m|W). This is O_X-linear

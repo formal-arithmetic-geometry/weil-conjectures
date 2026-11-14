@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.AffineHom
 
 /-! # Compatible affine self-Tor comparison maps
 
-Source: Stacks Project, Tags 09PQ, 01R3 and 06YH.
-(blueprint: new-n1-self-tor-compatible-affine-maps). -/
+Source: Stacks Project, Tags 09PQ, 01R3 and 06YH. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -31,8 +30,7 @@ namespace AlgebraicGeometry
 /-- An affine coordinate square for a local comparison, before duality.
 The coordinate maps themselves need not be invertible comparisons; only the changes
 of coordinates are isomorphisms. No regularity hypothesis is imposed.
-Source: Stacks Project, Tags 09PQ, 01R3 and 06YH.
-(blueprint: new-n1-self-tor-compatible-affine-maps). -/
+Source: Stacks Project, Tags 09PQ, 01R3 and 06YH. -/
 def IsAffineSelfTorChartMap {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     (U : Y.affineOpens) (n : ℕ) (E Q : Z.Modules)
     (φ : E.over (i ⁻¹ᵁ U.1) ⟶ Q.over (i ⁻¹ᵁ U.1)) : Prop :=
@@ -47,7 +45,6 @@ def IsAffineSelfTorChartMap {Z Y : Scheme.{u}} (i : Z ⟶ Y)
 /-- A local affine model is quasi-coherent on the inverse-image chart, so maps from
 any isomorphic source are determined by the component on the whole chart.
 Source: Stacks Project, Tags 01I6 and 0096.
-(blueprint: new-n1-self-tor-compatible-affine-maps).
 
 Proof: Restrict tensor pullback of the extended affine module to the inverse-image
 chart. Uniqueness of left adjoints identifies tensor pullback with ordinary pullback.
@@ -204,7 +201,6 @@ private theorem affine_chart_maps_compatible_of_nested
 
 Source: Stacks Project, Tag 09PQ (resolution-independent Tor products),
 Tag 01R3 (conormal classes), and Tag 06YH (K-flat derived tensor).
-(blueprint: new-n1-self-tor-compatible-affine-maps).
 
 Proof: For each affine U=Spec A, sheafify a projective resolution of A/I.
 The affine quotient resolution comparison identifies its augmentation with

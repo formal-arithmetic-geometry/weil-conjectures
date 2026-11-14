@@ -22,7 +22,6 @@ public import Mathlib.Algebra.Category.Grp.Zero
 /-! # Natural comparison of module and abelian cohomology
 
 Source: Stacks Project, sites-cohomology.tex, Tag 03FD.
-(blueprint: lem-sc-module-abelian-zariski-cohomology).
 -/
 
 @[expose] public section
@@ -63,7 +62,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Module cohomology and abelian sheaf cohomology are naturally isomorphic.
 
 Source: Stacks Project, sites-cohomology.tex, Lemma Tag 03FD.
-(blueprint: new-zariski-module-abelian-cohomology-components)
 
 Proof: Choose an injective resolution of each module sheaf. Forgetting to abelian sheaves
 is exact, and every forgotten injective module is acyclic for global sections. Thus the
@@ -171,7 +169,6 @@ theorem zariskiModuleAbelianCohomologyNatural_components (X : Scheme.{u}) (q : â
 /-- Module cohomology and abelian sheaf cohomology are naturally isomorphic.
 
 Source: Stacks Project, sites-cohomology.tex, Lemma Tag 03FD.
-(blueprint: lem-sc-module-abelian-zariski-cohomology)
 
 The componentwise comparison and its naturality are provided by
 `zariskiModuleAbelianCohomologyNatural_components`; `NatIso.ofComponents`

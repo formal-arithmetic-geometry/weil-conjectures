@@ -20,7 +20,6 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 /-- Local cohomology vanishing makes the fixed pushed augmentation a quasi-isomorphism.
 
 Source: Stacks Project, Cohomology on Sites, Tags 072W and 0733(1).
-(blueprint: lem-weil-pbc-zariski-etale-pushed-resolution-quasi-iso)
 
 Proof: fix I. Sheafification adjunction, the free abelian group adjunction and
 Yoneda identify Hom from the free abelian representable of an etale object to a

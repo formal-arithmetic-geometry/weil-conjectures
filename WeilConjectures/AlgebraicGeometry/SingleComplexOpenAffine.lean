@@ -17,7 +17,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 /-! # Affine source opens in the single-complex induction
 
 Source: Stacks Project, Tags 0DJ8 and 0DJ9, affine case.
-(blueprint: lem-pc-single-complex-open-affine).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry
 
 /-- The affine base case, with a source open in the coordinates used by induction.
 Source: Stacks Project, Tag 0DJ9, affine-open paragraph, and Tag 0DJ8.
-(blueprint: lem-pc-single-complex-open-affine).
 
 Proof: The inverse image U' of the affine U is affine since both bases are affine.
 Restriction preserves quasi-coherent cohomology and the stalk condition: the local

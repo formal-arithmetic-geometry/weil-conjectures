@@ -17,7 +17,6 @@ import WeilConjectures.RingTheory.SymmetricAlgebraSmooth
 /-! # Free reduced differentials after stabilizing a smooth section
 
 Source: Stacks Project, More on Algebra, Tag 07M7, first paragraph.
-(blueprint: lem-weil-pbc-smooth-section-stabilization-free).
 -/
 @[expose] public section
 universe u
@@ -27,7 +26,6 @@ open scoped TensorProduct
 symmetric-algebra stabilization. This does not choose a basis or any kernel lifts.
 
 Source: Stacks Project, More on Algebra, Tag 07M7, first paragraph.
-(blueprint: lem-weil-pbc-smooth-section-stabilization-free)
 
 Proof:
 1. Give `A/J` its `B`-algebra structure through the section. The reduced module

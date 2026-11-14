@@ -16,7 +16,6 @@ public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawTrianglePull
 /-! # Degree-zero source factors
 
 Source: Stacks Project, Tags 03D7 and 03Q8, and derived single comparisons.
-(blueprint: def-sbc-raw-scalar-source-factors).
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 /-- The source part of the scalar comparison, as a fixed derived morphism.
-Source: Stacks Project, Tags 03D7 and 03Q8.
-(blueprint: def-sbc-raw-scalar-source-factors). -/
+Source: Stacks Project, Tags 03D7 and 03Q8. -/
 noncomputable def scalarSourceFactor
     (Λ : Type (u + 1)) [CommRing Λ] {S Y : Scheme.{u}} (h : Y ⟶ S)
     (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -44,8 +42,7 @@ noncomputable def scalarSourceFactor
       ((upperStar (ModuleCat.{u + 1} Λ) h).obj L)
 
 /-- The first two module pullback factors.
-Source: Stacks Project, Tag 03Q8.
-(blueprint: def-sbc-raw-scalar-source-factors). -/
+Source: Stacks Project, Tag 03Q8. -/
 noncomputable def moduleSourceFactor
     (Λ : Type (u + 1)) [CommRing Λ] {S Y Y' : Scheme.{u}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
@@ -63,8 +60,7 @@ noncomputable def moduleSourceFactor
     ((upperStar (ModuleCat.{u + 1} Λ) a).mapDerivedCategoryPlusSingleFunctor 0).inv L
 
 /-- The first two abelian pullback factors.
-Source: Stacks Project, Tag 03Q8.
-(blueprint: def-sbc-raw-scalar-source-factors). -/
+Source: Stacks Project, Tag 03Q8. -/
 noncomputable def abelianSourceFactor
     {S Y Y' : Scheme.{u}} (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
     (E : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) :

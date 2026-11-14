@@ -12,8 +12,7 @@ import all WeilConjectures.AlgebraicGeometry.TensorUnitOpenLocalization
 
 /-! # Pulling back a local isomorphism with normalized unit sections
 
-Source: Stacks Project, Tags 0095, 0096 and 0097.
-(blueprint: lem-pc-tensor-pullback-over-iso-unit). -/
+Source: Stacks Project, Tags 0095, 0096 and 0097. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -27,7 +26,6 @@ set_option backward.isDefEq.respectTransparency.types false
 /-- A local isomorphism pulls back to an isomorphism on the inverse-image open,
 and the comparison carries each canonical unit section to its image section.
 Source: Stacks Project, Tags 0095, 0096 and 0097.
-(blueprint: lem-pc-tensor-pullback-over-iso-unit).
 
 Proof: Let R be restriction to the slice over U and S its right adjoint.
 The counit is invertible: each open in the slice is already contained in U,

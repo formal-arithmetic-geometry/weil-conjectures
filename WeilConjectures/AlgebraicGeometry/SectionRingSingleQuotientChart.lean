@@ -28,9 +28,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A single positive-degree section gives a quotient morphism on its nonvanishing open.
 No compatibility with a second morphism is asserted.
-Source: Stacks Project, Constructions, Tags 01N8 (lemma-converse-construction),
-01NK (lemma-invertible-map-into-proj).
-(blueprint: lem-sc-section-ring-single-quotient-chart).
+Source: Stacks Project, Constructions, Tags 01N8,
+01NK.
 
 Proof: On U, s is a free generator of L^{tensor d}. Its n-th tensor power
 trivializes L^{tensor nd}. Define the image of a/s^n in S_(s) to be the unique

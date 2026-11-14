@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenUnderivedTensorMate
 /-! # The open pullback square evaluated on a direct-image representative
 
 Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-(blueprint: lem-pc-e2-open-pullback-counit-representative).
 -/
 
 @[expose] public section
@@ -52,7 +51,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The representative identity after cancelling the open-restriction factorization.
 Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-(blueprint: lem-pc-e2-open-pullback-counit-representative-postcomp).
 
 This is the mate calculation before composing with the inverse factorization
 isomorphism. It is strictly weaker than the displayed representative identity,
@@ -114,7 +112,6 @@ set_option cleanup.letToHave false in
 of the sectionwise counit. This calculation does not use the derived open direct-image
 comparison: it compares the explicit pullback factors with the underived adjunction.
 Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-(blueprint: lem-pc-e2-open-pullback-counit-representative).
 
 Proof: Write F for module direct image along f, F0 for direct image along f restricted
 to V, and rX,rY for exact open restriction. On the homotopy category the sectionwise

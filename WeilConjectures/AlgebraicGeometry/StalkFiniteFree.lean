@@ -23,8 +23,7 @@ the finite coordinate decomposition there gives the corresponding
 expansion of its germ. The coordinate projections give uniqueness of
 coefficients. Thus these germs form a finite basis over O_{X,x}, establishing
 Module.Free and Module.Finite. An empty frame yields the zero module; there
-is no assertion to check if X has no points.
-(blueprint: lem-sc-stalk-finite-free-of-finite-locally-free) -/
+is no assertion to check if X has no points. -/
 theorem stalk_isFiniteFree_of_isFiniteLocallyFree
     {X : Scheme.{u}} (M : X.Modules) [M.IsFiniteLocallyFree] (x : X) :
     Module.Free (X.presheaf.stalk x)

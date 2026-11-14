@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 
 /-! # Gluing derived complexes and compatible morphisms on two opens
 
-Source: literature/stacks-project/cohomology.tex, Tag 08DG (Lemma 20.45.1)
-(blueprint: lem-sc-scheme-derived-hom-restriction-transport).
+Source: literature/stacks-project/cohomology.tex, Tag 08DG (Lemma 20.45.1).
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ namespace RestrictionTransport
 
 open CategoryTheory.Functor in
 /-- The composition comparison on a complex, with its identity complex comparison removed.
-Source: `Functor.mapDerivedCategoryCompIso_fac`.
-(blueprint: lem-sc-scheme-derived-hom-restriction-transport). -/
+Source: `Functor.mapDerivedCategoryCompIso_fac`. -/
 private lemma comp_fac
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -56,8 +54,7 @@ private lemma comp_fac
 
 open CategoryTheory.Functor in
 /-- Solve the composition factorization for its forward comparison on a complex.
-Source: `Functor.mapDerivedCategoryCompIso_fac`.
-(blueprint: lem-sc-scheme-derived-hom-restriction-transport). -/
+Source: `Functor.mapDerivedCategoryCompIso_fac`. -/
 private lemma comp_hom_Q
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -79,8 +76,7 @@ private lemma comp_hom_Q
 
 open CategoryTheory.Functor in
 /-- Solve the composition factorization for its inverse comparison on a complex.
-Source: `Functor.mapDerivedCategoryCompIso_fac`.
-(blueprint: lem-sc-scheme-derived-hom-restriction-transport). -/
+Source: `Functor.mapDerivedCategoryCompIso_fac`. -/
 private lemma comp_inv_Q
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -100,8 +96,7 @@ private lemma comp_inv_Q
 
 open CategoryTheory.Functor in
 /-- Solve the natural-isomorphism factorization for its component on a complex.
-Source: `Functor.mapDerivedCategoryNatIso_fac`.
-(blueprint: lem-sc-scheme-derived-hom-restriction-transport). -/
+Source: `Functor.mapDerivedCategoryNatIso_fac`. -/
 private lemma nat_hom_Q
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D]
@@ -124,8 +119,7 @@ Source: the factorization laws for exact derived functors and
 `Localization.natTrans_ext`. Proof: check after precomposition with the localization.
 Expand comparison maps using their factorization laws, move the inner comparison
 across the factorization of A by naturality, and cancel inverse pairs. Naturality
-of the factorization of v leaves a levelwise equality of complex morphisms.
-(blueprint: lem-sc-scheme-derived-hom-restriction-transport). -/
+of the factorization of v leaves a levelwise equality of complex morphisms. -/
 private lemma pasting
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -195,8 +189,7 @@ open CategoryTheory.Functor in
 Source: the preceding pasting identity, `Functor.map_preimage`, and naturality.
 Proof: map the full preimage back, paste the comparison square, and cancel the
 outer comparison isomorphisms. Naturality of the inner square gives the result.
-Only fullness of the derived functor is needed.
-(blueprint: lem-sc-scheme-derived-hom-restriction-transport). -/
+Only fullness of the derived functor is needed. -/
 private lemma transport
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -270,8 +263,7 @@ set_option maxHeartbeats 1600000 in
 /-- Restricting a local derived morphism commutes with transporting from the localized
 site to the open subscheme. The formula includes all derived composition comparisons.
 Source: Stacks Project, Cohomology, Tag 08BW, canonical local Hom restriction maps;
-Mathlib's equivalence Scheme.Modules.overEquiv
-(blueprint: lem-sc-scheme-derived-hom-restriction-transport).
+Mathlib's equivalence Scheme.Modules.overEquiv.
 Proof: mapDerivedCategoryCompIso identifies restriction on the open subscheme with
 restriction to the localized site followed by the derived equivalence. Transport a
 back using the full and faithful derived equivalence and these identifications.

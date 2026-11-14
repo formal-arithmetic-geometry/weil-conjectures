@@ -15,8 +15,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-!
 # Evaluation of internal Hom on stalks
 
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`), first paragraph
-(blueprint: lem-weil-pbc-stalk-internal-hom-evaluation).
+Source: Stacks Project, Modules, Lemma 01CP, first paragraph.
 -/
 
 @[expose] public section
@@ -139,8 +138,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The canonical stalk evaluation is linear in the germ of the local morphism and
 in the germ of its argument, with no finiteness assumption on the source.
 
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`), first paragraph.
-(blueprint: lem-weil-pbc-stalk-internal-hom-evaluation)
+Source: Stacks Project, Modules, Lemma 01CP, first paragraph.
 
 Proof: Represent the two input germs on a common neighborhood and evaluate the local
 morphism there. If either representative changes, equality of germs lets us shrink

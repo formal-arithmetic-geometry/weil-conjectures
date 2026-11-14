@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 /-! # Dualizing one affine self-Tor coordinate square
 
-Source: Stacks Project, Tag 01CM (internal Hom on smaller opens).
-(blueprint: new-n1-self-tor-chart-square-dualization). -/
+Source: Stacks Project, Tag 01CM (internal Hom on smaller opens). -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -23,8 +22,7 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry
 
 /-- Precompose local dual sections with a morphism on O.
-Source: Stacks Project, Tag 01CM.
-(blueprint: new-n1-self-tor-chart-square-dualization). -/
+Source: Stacks Project, Tag 01CM. -/
 private noncomputable def chartRestrictedDualMap
     {Z : Scheme.{u}} (O V : Z.Opens) {E Q : Z.Modules}
     (φ : E.over O ⟶ Q.over O) :
@@ -56,8 +54,7 @@ private noncomputable def chartRestrictedDualMap
         rfl } }
 
 /-- Precomposition by the identity leaves every dual section unchanged.
-Source: Stacks Project, Tag 01CM.
-(blueprint: new-n1-self-tor-chart-square-dualization). -/
+Source: Stacks Project, Tag 01CM. -/
 private theorem chartRestrictedDualMap_id {Z : Scheme.{u}} (O V : Z.Opens)
     (E : Z.Modules) : chartRestrictedDualMap O V (𝟙 (E.over O)) = 𝟙 _ := by
   apply SheafOfModules.hom_ext
@@ -72,8 +69,7 @@ private theorem chartRestrictedDualMap_id {Z : Scheme.{u}} (O V : Z.Opens)
   rfl
 
 /-- Precomposition reverses the order of two local morphisms.
-Source: Stacks Project, Tag 01CM.
-(blueprint: new-n1-self-tor-chart-square-dualization). -/
+Source: Stacks Project, Tag 01CM. -/
 private theorem chartRestrictedDualMap_comp {Z : Scheme.{u}} (O V : Z.Opens)
     {E Q P : Z.Modules} (φ : E.over O ⟶ Q.over O) (χ : Q.over O ⟶ P.over O) :
     chartRestrictedDualMap O V (φ ≫ χ) =
@@ -90,8 +86,7 @@ private theorem chartRestrictedDualMap_comp {Z : Scheme.{u}} (O V : Z.Opens)
   rfl
 
 /-- The local operation on a global map is its restricted transpose.
-Source: Stacks Project, Tag 01CM.
-(blueprint: new-n1-self-tor-chart-square-dualization). -/
+Source: Stacks Project, Tag 01CM. -/
 private theorem chartRestrictedDualMap_global {Z : Scheme.{u}} (O V : Z.Opens)
     {E Q : Z.Modules} (τ : E ⟶ Q) :
     chartRestrictedDualMap O V (τ.over O) =
@@ -109,8 +104,7 @@ private theorem chartRestrictedDualMap_global {Z : Scheme.{u}} (O V : Z.Opens)
   rfl
 
 /-- A local isomorphism induces an isomorphism of restricted duals.
-Source: Stacks Project, Tag 01CM.
-(blueprint: new-n1-self-tor-chart-square-dualization). -/
+Source: Stacks Project, Tag 01CM. -/
 private noncomputable def chartRestrictedDualIso {Z : Scheme.{u}} (O V : Z.Opens)
     {E Q : Z.Modules} (e : E.over O ≅ Q.over O) :
     (((Scheme.Modules.restrictFunctor V.ι).obj (Scheme.Modules.dual Q)).over
@@ -125,8 +119,7 @@ private noncomputable def chartRestrictedDualIso {Z : Scheme.{u}} (O V : Z.Opens
     rw [← chartRestrictedDualMap_comp, e.hom_inv_id, chartRestrictedDualMap_id]
 
 /-- Dualize a single local coordinate square and restrict to V intersect O.
-Source: Stacks Project, Tag 01CM.
-(blueprint: new-n1-self-tor-chart-square-dualization). -/
+Source: Stacks Project, Tag 01CM. -/
 private theorem dualizeLocalCoordinateSquare {Z : Scheme.{u}} (O V : Z.Opens)
     {E Q A B : Z.Modules} (τ : E ⟶ Q) (c : A ⟶ B)
     (s : E.over O ≅ A.over O) (t : B.over O ≅ Q.over O)
@@ -154,7 +147,6 @@ its dual coordinate square. This is a statement about one chart and an arbitrary
 morphism, not the existence or gluing of a global comparison.
 
 Source: Stacks Project, Tag 01CM (the internal Hom sheaf as local linear maps).
-(blueprint: new-n1-self-tor-chart-square-dualization).
 
 Proof: For O=i^{-1}U, a map φ:E|_O -> Q|_O acts on dual sections by
 precomposition. On an open D of V contained in W=V∩O, its image in Z lies in O.

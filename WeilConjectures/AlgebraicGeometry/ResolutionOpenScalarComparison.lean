@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.RestrictedResolutionSectionsExist
 /-! # Untwisted comparison of resolution sections
 
 Source: Stacks Project, Tags 01E1 and 01E4.
-(blueprint: lem-pc-resolution-open-scalar-comparison).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 restriction to a pulled-back principal open and for multiplication by a function.
 
 Source: Stacks Project, Tag 01E4, Lemma 20.7.3, and Tag 01E1, Lemma 20.7.1.
-(blueprint: lem-pc-resolution-open-scalar-comparison).
 
 Proof: Restrict I to Y using exact open restriction, which preserves injectives
 because extension by zero is an exact left adjoint. Apply the equivalence from

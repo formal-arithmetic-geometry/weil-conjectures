@@ -16,7 +16,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Tensor pullback of quasi-isomorphisms between K-flat complexes
 
 Source: Stacks Project, Cohomology, Tags 06YJ and 06YC.
-(blueprint: lem-pc-tensor-pullback-kflat-quasi-iso).
 -/
 
 @[expose] public section
@@ -43,8 +42,7 @@ augmentation quasi-isomorphism, while tensoring the inverse-image quasi-isomorph
 with the resolution preserves it by K-flatness. The commutative square and two-out-of-
 three give the claim. The argument works for arbitrary g, including the empty scheme
 and the identity, without any flatness of its structure-sheaf map. Additivity only
-provides the termwise complex functor.
-(blueprint: lem-pc-tensor-pullback-kflat-quasi-iso). -/
+provides the termwise complex functor. -/
 theorem tensorPullback_quasiIso_of_isKFlat {T S : Scheme.{u}} (g : T ⟶ S)
     [(Scheme.Modules.tensorPullback g).Additive]
     {P Q : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ}

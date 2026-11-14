@@ -14,8 +14,7 @@ import Mathlib.Basic.Finite.Sum
 
 /-! # Finite attachment to a split truncated simplicial family
 
-Source: Stacks Project, Tags 0DAV and 0DAU
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 0DAV and 0DAU.
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ private theorem index_surjective {A B : FormalCoproduct.{w} D} (h : A = B) :
   exact Function.surjective_id
 
 /-- Attach a finite family along its prescribed boundary.
-Source: Stacks 0DAV, construction of the extension, and 0DAU, split convention
-(auxiliary; not a blueprint node).
+Source: Stacks 0DAV, construction of the extension, and 0DAU, split convention.
 
 Proof: Compose v with the matching projections to obtain a compatible boundary
 cone on V. Normalize each old index using the split bijection and its component

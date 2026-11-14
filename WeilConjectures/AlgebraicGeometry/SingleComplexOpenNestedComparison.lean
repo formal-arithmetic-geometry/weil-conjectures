@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 
 Source: Stacks Project, Tag 0DJ9, restriction to a source open in the induction step,
 and Tag 08HY, canonical base-change map.
-(blueprint: lem-pc-single-complex-open-nested-comparison).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry
 preserves and reflects invertibility. This is a coordinate transport statement:
 it has no cover, compactness, quasi-coherence or local-isomorphism hypotheses.
 Source: Stacks Project, Tag 0DJ9, induction step on a source open, and Tag 08HY.
-(blueprint: lem-pc-single-complex-open-nested-comparison).
 
 Proof: Write A = W.ι⁻¹(Z). The composite A → W → X has image Z since Z ≤ W.
 The canonical isomorphism A ≅ Z over X identifies the smaller source. Pasting

@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.SupportedDetectorOpenLiftCore
 /-! # Lifting the detector from the smaller open
 
 Source: Stacks Project, Tag 0A9A.
-(blueprint: lem-pc-supported-detector-open-lift).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry
 /-- The lift of the smaller-cover detector detects supported objects whose open unit
 is invertible; it need not detect arbitrary supported objects on X.
 Source: Stacks Project, Tag 0A9A, induction and final adjunction paragraphs.
-(blueprint: lem-pc-supported-detector-open-lift).
 
 Proof:
 1. Remove one affine chart V from s and take U to be the union of the others. Restrict

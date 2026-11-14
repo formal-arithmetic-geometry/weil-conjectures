@@ -31,7 +31,6 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical linear restriction maps are compatible with pointed affine refinement.
 Source: Stacks Project, Tag 03Q9, proof, canonical restriction maps.
-(blueprint: lem-weil-pbc-strict-local-module-restriction-naturality).
 
 Proof: Write p for the projection to X and B for the neighbourhood base-change diagram.
 The strict-henselization cone legs commute with every refinement. After pullback symmetry,

@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedProjectionMateOpenRestrictionCom
 /-! # The derived qcqs projection isomorphism in fixed localizations
 
 Source: Stacks Project, Tag 08EU, Lemma 36.22.1.
-(blueprint: lem-pc-qcqs-derived-projection-iso-universes).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ namespace AlgebraicGeometry
 
 /-- The qcqs projection formula for quasi-coherent derived objects.
 Source: Stacks Project, Tag 08EU, Lemma 36.22.1.
-(blueprint: lem-pc-qcqs-derived-projection-iso-universes).
 
 Proof: use the derived pullback/direct-image adjunction and the K-flat tensor
 comparison to form the canonical projection map. Its isomorphy is local on Y,

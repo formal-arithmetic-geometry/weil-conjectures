@@ -24,8 +24,7 @@ namespace AlgebraicGeometry
 noncomputable section
 /-- The source comparison uses only pullback composition and the supplied comparison of
 right adjoints. All its data are explicit; no witness of existence is chosen.
-Source: Stacks Project, Tags 0ATR and 0D5S. 
-(blueprint: lem-sc-scheme-iso-second-mate-normalized-square)
+Source: Stacks Project, Tags 0ATR and 0D5S.
 -/
 def schemeIsoMateSourceIso
     [∀ Z : Scheme.{u},
@@ -99,7 +98,6 @@ set_option backward.isDefEq.respectTransparency.types true in
 Unlike the transport theorem, this asserts an equality of specified morphisms;
 it neither supplies endpoint isomorphisms nor constructs an arrow isomorphism.
 Source: Stacks Project, Tag 0ATR, composite adjunction and conjugate calculation.
-(blueprint: lem-sc-scheme-iso-second-mate-normalized-square)
 
 Proof: Expand the fixed second mate into pullback of the base unit, pullback of the
 inverse conjugate of ordinary base change, and the upper counit. The normalization

@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.IntegralReductionTowerUnrestricted
 /-!
 # Canonical reduction towers without a finite-field datum
 
-Source: Bhatt--Scholze, Definition 3.5.2, p. 24; Stacks Tags 03EK and 06YY
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Definition 3.5.2, p. 24; Stacks Tags 03EK and 06YY.
 The index n means the positive exponent n+1. All scalar extensions are the published
 universal derived scalar extensions, with their specified K-flat comparisons.
 -/
@@ -34,26 +33,26 @@ local instance (priority := 4000) : EssentiallySmall.{u + 1} X.ProEt :=
   essentiallySmallSelf.{u} _
 
 /-- The specified abelian sheafification at the coefficient size of this small site.
-Source: Stacks Tag 03DA (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03DA. -/
 noncomputable instance (priority := 3000) sfAbSheafify (Y : AlgebraicGeometry.Scheme.{u}) :
     HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y) AddCommGrpCat.{u + 1} :=
   integralCoefficientAbSheafify.{u, u} Y
 
 /-- The corresponding locally bijective criterion in the same coefficient size.
-Source: Stacks Tag 03DA (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03DA. -/
 noncomputable instance (priority := 3000) sfAbBijective (Y : AlgebraicGeometry.Scheme.{u}) :
     (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
       AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, u} Y
 
 /-- Exact restriction retains its finite-limit structure with all coefficients specified.
-Source: Stacks Tag 03CZ (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03CZ. -/
 noncomputable instance sfRestrictionLimits (n : ℕ) :
     PreservesFiniteLimits (scalarReductionRestriction.{u, u} l E X n) :=
   scalarReductionRestrictionLimits.{u, u} l E X n
 
 /-- Exact restriction retains its finite-colimit structure with all coefficients specified.
-Source: Stacks Tag 03CZ (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03CZ. -/
 noncomputable instance sfRestrictionColimits (n : ℕ) :
     PreservesFiniteColimits (scalarReductionRestriction.{u, u} l E X n) :=
   scalarReductionRestrictionColimits.{u, u} l E X n
@@ -63,7 +62,7 @@ private noncomputable instance sfRestrictionAdditive (n : ℕ) :
   Functor.additive_of_preserves_binary_products _
 
 /-- Additivity of the fixed scalar-extension functor, with explicit coefficients.
-Source: Stacks Tag 03CZ (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03CZ. -/
 noncomputable instance sfExtensionAdditive (n : ℕ) :
     (scalarReductionExtension.{u, u} l E X n).Additive :=
   scalarReductionExtensionAdditive.{u, u} l E X n

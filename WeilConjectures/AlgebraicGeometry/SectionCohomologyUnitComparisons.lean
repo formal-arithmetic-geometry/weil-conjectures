@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.NonvanishingGeneratingLocus
 /-! # Tensor-unit comparisons for raw section cohomology
 
 Source: Stacks Project, Tags 01E1 and 01E4.
-(blueprint: lem-pc-section-cohomology-unit-comparisons).
 -/
 
 @[expose] public section
@@ -97,7 +96,6 @@ private theorem unitTwistIso_section {Y : Scheme.{u}} (G : Y.Modules)
 image open, compatibly with restriction and multiplication by a tensor power of a function.
 
 Source: Stacks Project, Tag 01E4, Lemma 20.7.3, and Tag 01E1, restriction of injectives.
-(blueprint: lem-pc-section-cohomology-unit-comparisons).
 
 Proof: Put Y = f inverse W and G = F restricted to Y. Restrict I termwise to Y.
 Restriction is exact and preserves injectives, so this is a resolution of G. Evaluation

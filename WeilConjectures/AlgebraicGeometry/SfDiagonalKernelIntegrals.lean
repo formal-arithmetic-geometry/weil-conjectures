@@ -97,8 +97,7 @@ attribute [local implicit_reducible] rightDerivedLowerShriek derivedTensorRight
 triangles on the entire unbounded derived categories.
 
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, both triangle computations
-(auxiliary; not a blueprint node).
+thm-amb-p1-adjunction.proof.md, both triangle computations.
 
 Proof: Transport the trace and diagonal class through the supplied coefficient
 isomorphism e and the canonical proper forget-supports comparisons. The resulting

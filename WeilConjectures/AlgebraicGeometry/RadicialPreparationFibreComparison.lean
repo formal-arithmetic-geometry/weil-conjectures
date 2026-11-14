@@ -93,8 +93,7 @@ homeomorphism by base-change stability. Its homeomorphism of underlying spaces
 preserves irreducibility and nonemptiness. Thus the two geometric irreducibility
 tests are equivalent, also when both fibres are empty. No generic-point, finiteness,
 reducedness or radicial hypothesis on the base map is needed.
-
-(blueprint: lem-sbc-radicial-preparation-fibre-comparison) -/
+ -/
 theorem exists_radicial_preparation_fibre_comparison
     {X T S Y : Scheme.{u}} (f : X ⟶ T) (r : S ⟶ T)
     (h : Y ⟶ pullback f r) [IsUniversalHomeomorphism h] (s : S) :

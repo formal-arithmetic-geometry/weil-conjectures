@@ -199,7 +199,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Compatibility of the canonical section-degree comparison with multiplication.
 Source: Stacks Project, Tag 01CD, tensor pullback, and Tag 09MS, tensor powers.
-(blueprint: lem-sc-square-zero-tensor-section-product-comparison).
 Proof: Replace D by canonicalTensorBoundaryComparisons using hD. Its section
 comparison is boundaryPullbackPowIso followed by tensorPowMulIso. Expand these
 recursive isomorphisms, and use naturality of boundaryPullbackComparison and the

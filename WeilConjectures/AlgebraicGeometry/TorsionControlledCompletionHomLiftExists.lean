@@ -26,7 +26,6 @@ localized comparison maps where the torsion kernels and cokernels vanish, and us
 exactness of the formal gluing complex to descend these maps and glue them globally.
 This is strictly the existence half; uniqueness is supplied by
 `coherentMap_torsion_completion_ext`.
-(blueprint: lem-weil-pbc-torsion-controlled-completion-hom-lift-exists).
 -/
 theorem torsionControlled_completion_hom_lift_exists
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)

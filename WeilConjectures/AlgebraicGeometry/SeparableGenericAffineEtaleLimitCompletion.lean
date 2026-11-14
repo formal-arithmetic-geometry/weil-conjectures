@@ -145,7 +145,6 @@ separable closure.
 
 Source: Stacks Project, Tags 04HX, 03QL and 0032; the landed declarations
 `strictHenselizationAffineProperties` and `exists_directed_reindexing`.
-(blueprint: new-lem-pd-separable-generic-affine-etale-limit)
 
 The proof obtains the canonical colimit-to-residue comparison from the affine
 étale neighbourhood/triple comparison, proves that the generic strict
@@ -235,7 +234,6 @@ theorem separableGeneric_affineEtale_limit
 
 Source: Stacks Project, Tags 04HX and 03QL; the landed declaration
 `strictHenselizationPointEvaluation_pointed`.
-(blueprint: new-lem-pd-separable-generic-affine-etale-pointed)
 
 The proof substitutes the canonical cone-leg equation from
 `strictHenselizationPointEvaluation_pointed`, the displayed ring comparison,

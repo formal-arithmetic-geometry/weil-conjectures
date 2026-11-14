@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.SfExceptionalTensorTransitivity
 /-! # Canonical affine-line duality over arbitrary affine bases
 
 proof.md`, paragraphs 2-3, and
-`sk-lem-geo-affine-local/cor-amb-affine-space-adjunction.proof.md`, paragraph 1
-(auxiliary; not a blueprint node).
+`sk-lem-geo-affine-local/cor-amb-affine-space-adjunction.proof.md`, paragraph 1.
 
 The compactification is the actual standard affine chart of projective space.
 The right adjoint and adjunction are selected ambient data; their existence follows
@@ -40,8 +39,7 @@ attribute [local irreducible] sfEtaleAmbientTensorMap
 /-- The standard open-then-proper factorization of the affine-line projection.
 The homogeneous coordinates are indexed by `Option (ULift (Fin 1))`, so the
 compactifying scheme is the projective line, not the projective plane.
-Source: blueprint `cor-amb-affine-space-adjunction.proof.md`, paragraph 1
-(auxiliary; not a blueprint node). -/
+Source: blueprint `cor-amb-affine-space-adjunction.proof.md`, paragraph 1. -/
 noncomputable def sfAffineLineCompactification (S : Scheme.{u}) :
     Compactification (AffineSpace (ULift.{u} (Fin 1)) S ↘ S) where
   Z := ProjectiveSpace (Option (ULift.{u} (Fin 1))) S
@@ -178,8 +176,7 @@ an ambient right adjoint, whose existence is already guaranteed; they impose no
 additional geometric or cohomological hypothesis.
 
 Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraphs 2-3, and
-`cor-amb-affine-space-adjunction.proof.md`, paragraph 1
-(auxiliary; not a blueprint node).
+`cor-amb-affine-space-adjunction.proof.md`, paragraph 1.
 
 Proof plan:
 1. Use the standard chart j and proper projection q in sfAffineLineCompactification
@@ -192,8 +189,8 @@ Proof plan:
 3. Transpose theta_q composed with gamma_q tensor 1. Naturality of projection
    identifies its transpose with the trace counit from step 2. The adjunction
    bijection therefore identifies this composite with the right-adjoint comparison,
-   so every theta_q is invertible (lem-sf-etale-ambient-adjoint-projection).
-4. The chart j is separated etale (lem-weil-pbc-open-immersion-etale).
+   so every theta_q is invertible.
+4. The chart j is separated etale.
    Apply lem-sf-etale-unit-tensor-arbitrary-base and the etale restriction equation
    of lem-sf-exceptional-tensor-transitivity to j followed by q. Its
    counit-preserving comparison intertwines the actual theta maps, proving that

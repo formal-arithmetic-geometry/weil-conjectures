@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyPullbackLaws
 /-! # Coherence of canonical complex cohomology maps
 
 Source: Stacks Project, Tag 0EZM, canonical maps; Tags 015J and 015K.
-(blueprint: lem-sbc-raw-affine-complex-system-map-coherence).
 -/
 
 @[expose] public section
@@ -87,7 +86,6 @@ private lemma pairMap_comp {X Y Z : Scheme.{v}} (f : Y ⟶ X) (g : Z ⟶ Y)
 /-- Canonical cohomology maps of a coherent inverse-image complex system obey
 identity, composition and cone-leg equations.
 Source: Stacks Project, Tag 0EZM, canonical maps; Tags 015J and 015K.
-(blueprint: lem-sbc-raw-affine-complex-system-map-coherence).
 
 Proof: Define the pair map as rawAffineComplexPullback followed by the
 coefficient map and identify it with the formula in

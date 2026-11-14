@@ -16,7 +16,6 @@ public import WeilConjectures.AlgebraicGeometry.OpenDerivedLocalizationData
 /-! # Supported perfect gluing on the union with an affine open
 
 Source: Stacks Project, Tag 09IM, two-open construction before ambient extension.
-(blueprint: lem-sc-supported-map-affine-union-gluing).
 -/
 
 @[expose] public section
@@ -105,7 +104,6 @@ There is no ambient extension in this statement. The supplied natural comparison
 identifies iterated restriction through the union with direct restriction to `U`.
 Source: Stacks Project, Tag 09IM, proof assuming a two-open cover, using Tags 08EK,
 08EH, and 08DG.
-(blueprint: lem-sc-supported-map-affine-union-gluing).
 
 Proof: Restrict the source R to W. Intersect each strictly perfect neighbourhood
 with W and transport its bounded finite-free retract model through Modules.overEquiv;

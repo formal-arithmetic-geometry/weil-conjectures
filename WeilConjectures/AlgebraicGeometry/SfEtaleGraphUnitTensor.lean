@@ -82,8 +82,7 @@ inverse-image model. This statement concerns the graph unit before transposition
 it neither asserts invertibility nor mentions etale sum extension.
 
 Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3, and the accepted
-proof of `lem-sf-etale-graph-projection-arbitrary-base`, steps 2--6; Stacks Tag 0GKF
-(auxiliary; not a blueprint node).
+proof of `lem-sf-etale-graph-projection-arbitrary-base`, steps 2--6; Stacks Tag 0GKF.
 
 Proof in words. Write F = Rr_*Dj_!, E = D(e^*), and J = EK. The graph sigma in
 Z times_W V is clopen: it is a section of a separated proper morphism, and is an

@@ -23,8 +23,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 
 /-! # Normalized self-Tor coordinates on wedges of affine ideal sections
 
-Source: Stacks Project, Tags 09PQ, 01R3 and 06YH.
-(blueprint: new-e3-self-tor-ideal-wedge-coordinates). -/
+Source: Stacks Project, Tags 09PQ, 01R3 and 06YH. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -241,7 +240,6 @@ private theorem ideal_wedge_agreement_of_basic
 ambient affine chart. The entries here must come from the pullback unit; arbitrary
 conormal sections are not included.
 Source: Stacks Project, Tags 09PQ, 01R3 and 06YH.
-(blueprint: new-e3-self-tor-ideal-wedge-coordinates).
 
 Proof: On U = Spec A identify the closed chart with Spec(A/I). Choose a projective
 resolution of A/I with its augmentation and sheafify it using

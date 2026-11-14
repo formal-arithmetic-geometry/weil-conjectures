@@ -20,7 +20,6 @@ import Mathlib.RingTheory.TensorProduct.Pi
 
 Source: smooth purity blueprint, `sk-prop-sf-cbc`,
 `lem-weil-pbc-finite-pushforward-generic-constructible`, step 9.
-(blueprint: lem-weil-pbc-reduced-product-localization)
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ open scoped TensorProduct
 
 /-- Source: smooth purity blueprint, sk-prop-sf-cbc,
 lem-weil-pbc-finite-pushforward-generic-constructible, step 9.
-(blueprint: lem-weil-pbc-reduced-product-localization)
 
 Proof: C' is the localization of C at x. Therefore B tensor_R C' is the
 localization of B tensor_R C at the image of x, by the tensor associativity

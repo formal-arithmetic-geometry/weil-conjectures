@@ -21,8 +21,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 /-- Matching objects for a finite truncated étale diagram, with universality in schemes over
-its base. Source: blueprint finite-hypercover-descent, finite matching-limit paragraph.
-(auxiliary; not a blueprint node) -/
+its base. Source: blueprint finite-hypercover-descent, finite matching-limit paragraph. -/
 structure TruncatedEtaleMatchingData (X : Scheme.{u}) (r : ℕ)
     (S : SimplicialObject.Truncated X.Etale r) where
   matching : Fin (r + 1) → X.Etale
@@ -161,7 +160,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A truncated diagram of qcqs étale schemes has qcqs matching schemes.
 Source: the finite matching-limit paragraph of the blueprint finite-hypercover-descent proof.
-(auxiliary; not a blueprint node)
 
 Proof: work in the full subcategory of qcqs étale schemes. It has a terminal object and
 scheme fibre products, and its inclusion in schemes over X preserves finite limits.

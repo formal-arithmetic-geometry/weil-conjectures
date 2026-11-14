@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.RelativeSpectrumStructureAlgebra
 
 /-! # Existence of an affine realization of a quasi-coherent algebra
 
-Source: Stacks Project, Constructions, Lemmas 01LP and 01LV
-(blueprint: lem-weil-pbc-relative-spectrum-affine-realization).
+Source: Stacks Project, Constructions, Lemmas 01LP and 01LV.
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ local notation "𝒪⁎" f:max => Under.mk (⟨(f).c⟩ : Scheme.sheaf _ ⟶
 
 /-- Every quasi-coherent algebra is the direct image of the structure algebra of an
  affine scheme over the base.
-Source: Stacks Project, Constructions, Lemmas 01LP and 01LV, Lemma 01LX (1), (3)
-(blueprint: lem-weil-pbc-relative-spectrum-affine-realization).
+Source: Stacks Project, Constructions, Lemmas 01LP and 01LV, Lemma 01LX (1), (3).
 
 Proof: For each affine open U of S take X_U = Spec A(U), with structure map to U
 induced by O_S(U) → A(U). For V contained in U, the restriction A(U) → A(V)

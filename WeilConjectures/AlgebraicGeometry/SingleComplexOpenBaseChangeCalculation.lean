@@ -135,7 +135,6 @@ open comparisons. All comparison data are already constructed; this statement
 is only the remaining mate calculation, with no existence claim.
 Source: Stacks Project, cohomology.tex, Tags 08HY and 08FE; perfect.tex,
 Tag 0DJ9, first paragraph.
-(blueprint: lem-pc-n3-open-base-change-calculation).
 
 Proof: Work on K-flat representatives for pullback and K-injective representatives
 for direct image. Open restriction preserves K-injectives (Tag 08BS). The

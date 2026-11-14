@@ -15,8 +15,7 @@ import Mathlib.CategoryTheory.MorphismProperty.Retract
 
 /-! # Internal Hom from a strictly perfect complex
 
-Source: Stacks Project, Cohomology of Sheaves, Lemma 20.46.9, Tag 08DM
-(blueprint: lem-pc-rhom-strict-perfect-hom).
+Source: Stacks Project, Cohomology of Sheaves, Lemma 20.46.9, Tag 08DM.
 
 The affine scheme is presented as an affine open `U` of a scheme `X`; its module
 category is the recorded localized-site carrier of `Scheme.IsStrictlyPerfect`.
@@ -127,16 +126,15 @@ canonical map `𝓗om^•(P, M) ⟶ 𝓗om^•(P, I(M))` becomes an isomorphism 
 category. Since `Q (𝓗om^•(P, I(M)))` computes derived internal Hom
 (`derivedInternalHom_comparison`), this map is the ordinary-to-derived comparison.
 
-Source: Stacks Project, Cohomology of Sheaves, Lemma 20.46.9, Tag 08DM
-(blueprint: lem-pc-rhom-strict-perfect-hom).
+Source: Stacks Project, Cohomology of Sheaves, Lemma 20.46.9, Tag 08DM.
 
 Proof:
 1. Replace `M` by a functorial K-injective resolution `η.app M : M ⟶ I.obj M`.
    By `def-pur-derived-internal-hom`, the Hom complex from `P` into this resolution
    represents derived internal Hom.
 2. Each term of `P` is a direct summand of a finite free module. Its internal Hom
-   functor is therefore a direct summand of an exact finite-free internal Hom functor
-   (`lem-sc-finite-free-internal-hom-exact`), hence exact. It preserves the
+   functor is therefore a direct summand of an exact finite-free internal Hom functor,
+   hence exact. It preserves the
    quasi-isomorphism to the resolution in each fixed degree of `P`.
 3. The bounded stupid-truncation filtration of `P` has finitely many graded pieces
    `P^k[-k]`. Applying the Hom-complex functor gives termwise split short exact

@@ -15,7 +15,6 @@ import Mathlib.AlgebraicGeometry.Gluing
 /-! # Sheaf components of section-ring quotient charts
 
 Source: Stacks Project, Constructions, Tags 01N8 and 01NK, uniqueness arguments.
-(blueprint: lem-sc-section-ring-quotient-chart-overlap-sheaf-map).
 -/
 
 @[expose] public section
@@ -59,7 +58,6 @@ private theorem fraction_equation_restrict
 /-- After identifying the underlying maps, their pullbacks agree on every target open.
 The equality includes the restriction transport induced by that identification.
 Source: Stacks Project, Constructions, Tags 01N8 and 01NK, uniqueness arguments.
-(blueprint: lem-sc-section-ring-quotient-chart-overlap-sheaf-map).
 
 Proof: Write F and H for the two restrictions to U intersect V. Fix a point of
 this overlap and a positive-degree homogeneous a of degree r whose chart contains

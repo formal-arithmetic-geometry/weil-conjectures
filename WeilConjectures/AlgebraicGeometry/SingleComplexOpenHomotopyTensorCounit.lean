@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenUnderivedTensorMate
 /-! # Sectionwise counit identity for the open tensor comparison
 
 Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-(blueprint: lem-pc-k3-open-homotopy-tensor-counit).
 -/
 
 @[expose] public section
@@ -69,7 +68,6 @@ are in homotopy categories; there are no derived-category arrows or units.
 
 Source: Stacks Project, Tags 08FE (sectionwise direct-image restriction), 08HY
 (counit description of the mate), and 0D5S (tensor composition).
-(blueprint: lem-pc-k3-open-homotopy-tensor-counit).
 
 Proof: Expand openPinnedTensorRestrictionIso into its four factors: inverse open
 pullback comparison on X, inverse tensor composition along the source inclusion,

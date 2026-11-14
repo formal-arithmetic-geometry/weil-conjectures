@@ -25,7 +25,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- Injective of the raw scalar comparison on underlying groups.
 Source: Stacks Project, Tag 03FD, lemma-cohomology-modules-abelian-agree.
-(blueprint: lem-sbc-raw-module-abelian-hom-map-injective).
 
 Proof: Let two module derived classes have the same image and subtract them.
 Resolve A.hom^*G by injective module sheaves and represent the difference by a

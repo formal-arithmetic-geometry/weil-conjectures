@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.RingedSiteCompleteElementsIdeal
 /-!
 # Restriction of scalars preserves and reflects local derived completeness
 
-Source: Stacks Project, algebraization.tex, Tag 099C, using Tags 0997 and 0998
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 099C, using Tags 0997 and 0998.
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ images of sections of I. This specifies the sheaf ideal IB, without finite gener
 Restriction of scalars on derived objects is computed on Q's chosen representative;
 its underlying abelian sheaf complex is unchanged, so it is the exact derived restriction.
 
-Source: Stacks Project, algebraization.tex, Tag 099C
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 099C.
 
 Proof:
 1. Compare sheafified fraction localization with the sequential-colimit model by

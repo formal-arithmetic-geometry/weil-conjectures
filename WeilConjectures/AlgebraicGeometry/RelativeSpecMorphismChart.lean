@@ -16,8 +16,7 @@ set_option maxHeartbeats 800000 in
 -- The dependent object transports require extra elaboration heartbeats.
 /-- The local chart compatibility for the relative-spectrum anti-equivalence, provided
 its forward functor acts on morphisms by the canonical section maps (`hmap`).
-Source: Stacks Project, Morphisms, Lemma 01SA and Constructions, Lemma 01LX
-(blueprint: lem-weil-pbc-relative-spec-morphism-chart).
+Source: Stacks Project, Morphisms, Lemma 01SA and Constructions, Lemma 01LX.
 
 Proof: Apply naturality of the counit of the equivalence to an algebra morphism,
 then use the affine `toSpecΓ` naturality lemma and functoriality of `Spec.map`. -/

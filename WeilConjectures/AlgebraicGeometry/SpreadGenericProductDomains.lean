@@ -21,7 +21,6 @@ import WeilConjectures.RingTheory.FiniteProductFieldImageFactors
 
 Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
 `lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9.
-(blueprint: lem-weil-pbc-spread-generic-product-domains)
 -/
 
 @[expose] public section
@@ -40,7 +39,6 @@ idempotent-spreading step: no radicial or universal-homeomorphism conclusion is 
 Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
 `lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9, specifically spreading
 product idempotents after spreading the separable extension.
-(blueprint: lem-weil-pbc-spread-generic-product-domains)
 
 Proof:
 1. In the finite reduced algebra over the given model `A0`, kill its torsion over `A0`

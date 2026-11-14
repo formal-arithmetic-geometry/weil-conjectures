@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.TensorPowerSectionOpenRestrictionT
 
 Source: Stacks Project, Modules, Tag 01CD; Properties, Tag 01PW, restriction to the
 opens in its proof; Cohomology of Schemes, Tag 09MR, affine-open paragraph.
-(blueprint: lem-sc-tensor-power-section-open-restriction).
 -/
 
 @[expose] public section
@@ -53,7 +52,6 @@ No affineness, invertibility, quasi-coherence, or nonvanishing hypothesis is nee
 Source: Stacks Project, Modules, Tag 01CD (functorial tensor-pullback comparison),
 Properties, Tag 01PW, proof (restriction to the affine opens), and Cohomology of
 Schemes, Tag 09MR, affine-open paragraph.
-(blueprint: lem-sc-tensor-power-section-open-restriction).
 
 Proof: Identify restriction along U.ι with pullback using restrictFunctorIsoPullback.
 Pullback is strong monoidal; transport its unit and tensor comparisons to restriction.

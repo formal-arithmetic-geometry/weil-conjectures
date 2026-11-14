@@ -444,8 +444,7 @@ hold on all objects by resolving localization and the given representative
 hypotheses. The resolution compatibility of the derived pullback comparison and
 the tensor representative normalization identify these vertex maps on resolving
 objects with the same nested modelTensor and ε maps, so no replacement endpoint
-comparison is introduced.
-(auxiliary; not a blueprint node). -/
+comparison is introduced. -/
 theorem section_resolving_oplax_internal_conjugation {X Y : Scheme.{u}} (f : X ⟶ Y)
     (μ : SectionTensorArrow Λ f)
     (v : (derivedPullback Λ f).obj

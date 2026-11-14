@@ -154,8 +154,7 @@ private theorem section_vertices_of_resolving {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- Resolving-model identification of derived oplax constraint diagrams.
 Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E;
-explicit representative diagram calculation
-(auxiliary; not a blueprint node).
+explicit representative diagram calculation.
 
 Proof: take resolving closure and the six edge squares from the model-edge
 calculation. All six vertex maps are invertible by the one-sided K-flat tensor

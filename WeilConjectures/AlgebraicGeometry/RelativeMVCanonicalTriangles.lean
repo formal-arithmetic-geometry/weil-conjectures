@@ -35,8 +35,7 @@ identified by the canonical composition comparisons, and construct the morphism
 whose components are exactly the given global and local base-change composites.
 No local isomorphism hypothesis or global isomorphism conclusion is assumed.
 
-Source: Stacks Project, Tag 0DJ9, induction diagram; Cohomology, Tags 08BV, 08HZ and 08HY
-(blueprint: lem-pc-relative-mv-canonical-triangles).
+Source: Stacks Project, Tag 0DJ9, induction diagram; Cohomology, Tags 08BV, 08HZ and 08HY.
 Proof:
 1. The sources X and X' are qcqs: f and its base change are qcqs over affine
 bases. The morphism g is affine, so g' is affine; inverse images of the three

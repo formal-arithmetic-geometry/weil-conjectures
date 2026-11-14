@@ -12,8 +12,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionAssoc
 /-! # Ordinary etale compact-support projection coherence
 
 proof.md`, paragraph 3; upstream
-`LowerShriekCompositionCoherence.lean` and `LowerShriekComposition.lean`
-(auxiliary; not a blueprint node).
+`LowerShriekCompositionCoherence.lean` and `LowerShriekComposition.lean`.
 
 The inverse projections are those of the supplied open/proper factorizations.
 The compositor is the explicit graph comparison, not an unspecified isomorphism.
@@ -225,8 +224,7 @@ attribute [local instance 20000] Etale.sheafBraidedCategory
 
 /-- The inverse of the canonical compactification projection, whose invertibility
 is supplied by lem-sf-etale-ambient-adjoint-projection. Source: blueprint
-`thm-asd-smooth-tensor.proof.md`, paragraph 3
-(auxiliary; not a blueprint node). -/
+`thm-asd-smooth-tensor.proof.md`, paragraph 3. -/
 noncomputable def sfEtaleCompactProjectionInverse
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -240,8 +238,7 @@ noncomputable def sfEtaleCompactProjectionInverse
     ((sfEtaleAmbientAdjointProjection A c).2 M P)
 
 /-- Inverse projection is natural in its first argument. Source: blueprint
-`thm-asd-smooth-tensor.proof.md`, paragraph 3
-(auxiliary; not a blueprint node).
+`thm-asd-smooth-tensor.proof.md`, paragraph 3.
 Proof: step 1 of the node. The proper counit projection, open tensor comparison
 and pullback compositor are natural transformations. Their composite is natural.
 Multiply its naturality square by the inverse components, which exist on all
@@ -266,8 +263,7 @@ theorem sfEtaleCompactProjectionInverse_naturality_left
     ((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).naturality a) P).symm
 
 /-- Inverse projection is natural in its second argument. Source: blueprint
-`thm-asd-smooth-tensor.proof.md`, paragraph 3
-(auxiliary; not a blueprint node).
+`thm-asd-smooth-tensor.proof.md`, paragraph 3.
 Proof: node step 1, as in naturality in the first variable: compose the natural
 proper projection, open comparison and pullback compositor, then multiply the
 naturality square by their invertible projection components. -/
@@ -291,8 +287,7 @@ theorem sfEtaleCompactProjectionInverse_naturality_right
 
 /-- Tensor associativity for the specified inverse projection. Source: blueprint
 `thm-asd-smooth-tensor.proof.md`, paragraph 3; upstream
-`LowerShriekCompositionCoherence.lean`, projectionMapAssociativity
-(auxiliary; not a blueprint node).
+`LowerShriekCompositionCoherence.lean`, projectionMapAssociativity.
 Proof: steps 1--3 of the node. Use the canonical monoidal pullback comparisons
 of lem-sfb-ringed-derived-monoidal-comparisons. For the open comparison use flat-term
 K-flat representatives and lem-weil-pbc-site-derived-tensor-descent: both sheaf maps
@@ -360,8 +355,7 @@ attribute [local implicit_reducible] derivedTensorRightDerivedLowerShriek
 /-- Composition coherence for the graph-normalized compositor and inverse
 projections. Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3;
 upstream `LowerShriekComposition.lean`, graph construction of
-nonempty_iso_rightDerivedLowerShriek_comp
-(auxiliary; not a blueprint node).
+nonempty_iso_rightDerivedLowerShriek_comp.
 Proof: node steps 4--8. Work first with forward projections. Proper composition
 preserves them by lem-sfb-ringed-projection-tensor-composition, open composition by
 lem-amb-open-projection-composition, and Cartesian proper/open interchange by

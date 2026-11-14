@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.SchemeTorsorPullbackEquivariantHomIsIso
 # Compatibility of an equivariant representative with inverse image
 
 Source: Stacks Project Tags 03Q1 (4) and 0A5G, final paragraph.
-(blueprint: lem-weil-pbc-scheme-torsor-pullback-compatible)
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- An equivariant base-change isomorphism gives the unit-compatible sheaf isomorphism.
 Source: Stacks Project Tags 03Q1 (4), 03RV and 0A5G, final paragraph.
-(blueprint: lem-weil-pbc-scheme-torsor-pullback-compatible)
 
 Proof: Inverse image of the representable sheaf of t is the representable sheaf of
 its base change, by Tag 03Q1 (4). Compose this canonical isomorphism with Yoneda of e

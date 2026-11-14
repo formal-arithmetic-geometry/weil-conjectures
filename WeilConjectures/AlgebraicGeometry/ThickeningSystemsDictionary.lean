@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.ThickeningSystemsCompletionComparison
 
 /-! # The dictionary for coherent systems on infinitesimal thickenings
 
-Source: Stacks Project, Cohomology of Schemes, Remark 088F and Lemma 087T
-(blueprint: lem-weil-pbc-thickening-systems-dictionary).
+Source: Stacks Project, Cohomology of Schemes, Remark 088F and Lemma 087T.
 
 The natural evaluation isomorphisms specify the dictionary on both objects and morphisms.
 The unit equations specify its transitions and the canonical restriction comparisons.
@@ -103,16 +102,14 @@ private lemma support_proper_closed_square {Y X S₀ S : Scheme.{v}}
     exact ⟨Z, hZ, IsProper.of_comp (t ≫ g) q⟩
 
 /-- The dictionary, including its naturality and proper-support restriction.
-Source: Stacks, Remark 088F, Lemma 087T, equation 0880 and Lemma 0CYL
-(blueprint: lem-weil-pbc-thickening-systems-dictionary).
+Source: Stacks, Remark 088F, Lemma 087T, equation 0880 and Lemma 0CYL.
 
 Proof, in the node's twelve steps:
 1. A finite-type scheme over a Noetherian affine scheme is Noetherian (01T6).
 2. Quotient base change gives j_n closed with ideal I^(n+1)O_X; extension commutes
 with powers. Each thickening is Noetherian and its coherent modules are quasi-coherent
-of finite type (quotient-base-change-closed-immersion-ideal, coherent-ft-locnoeth).
-3. The pullback unit for a closed immersion is the quotient by its defining ideal
-(closed-immersion-unit-quotient).
+of finite type.
+3. The pullback unit for a closed immersion is the quotient by its defining ideal.
 4. Push the adjoints of the comparisons forward. Ideal-power pushforward identifies
 these transitions with the required quotient isomorphisms, giving formal coherent objects.
 5. Adjunction and fully faithful closed-immersion pushforward identify compatible

@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenPinnedAdjunctio
 
 Source: Stacks Project, Tag 08HY.
 The calculation is shared by open counit compatibility and unit-square normalization.
-(blueprint: lem-pc-open-pinned-counit-unit).
 -/
 
 @[expose] public section
@@ -42,7 +41,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Normalize the pinned derived counit at a homotopy representative.
 Source: Stacks Project, Tag 08HY, and `exists_schemeDerivedAdjunction`.
-(blueprint: lem-pc-open-pinned-counit-unit).
 
 Proof: Apply the compatibility of the pinned Hom equivalence to the underived
 homotopy counit. Its image under the underived adjunction is the identity.

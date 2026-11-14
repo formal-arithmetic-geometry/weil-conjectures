@@ -154,8 +154,7 @@ isomorphism, the quotient at level n+1 is zero, and the graph projection is an
 isomorphism. These two cases cover Spec(A). Local surjectivity is epimorphy of
 sheaves, giving the global assertion. The zero ideal makes the graph the usual
 graph of θ; the unit ideal makes a' an isomorphism. Zero modules and the empty
-scheme cause no exception.
-(blueprint: lem-weil-pbc-torsion-controlled-finite-graph-epi). -/
+scheme cause no exception. -/
 theorem torsionControlledGraphFst_epi
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     {H F F' : CoherentModules X} (a : F ⟶ H) (a' : F' ⟶ H)

@@ -50,8 +50,7 @@ public import WeilConjectures.SecSmoothPurity.CochainPullbackTensorCoherence
 # Interfaces for coefficient projection cocycles
 
 Source: Stacks Project, Cohomology on Sites, Tags 07A7 and 0E47; Tags 0D6D,
-0D6E and 07A6 for the canonical comparisons and adjunctions
-(auxiliary; not a blueprint node).
+0D6E and 07A6 for the canonical comparisons and adjunctions.
 
 The auxiliary records present the specified geometric operations, comparison and
 unit maps. Ordinary insertion and K-flat computation fix all comparisons; the
@@ -82,37 +81,34 @@ variable {C X : Type c} [Category.{v} C] [Category.{v} X]
   {J : GrothendieckTopology C} {K : GrothendieckTopology X}
 
 /-- Cache an already inferred sheaf instance on an essentially small site.
-Source: Mathlib site transport and sheafification instances. The proof is typeclass inference.
-(auxiliary; not a blueprint node). -/
+Source: Mathlib site transport and sheafification instances. The proof is typeclass inference. -/
 instance (priority := 100000) cachedComposeRings (J : GrothendieckTopology C) :
     J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r}) := inferInstance
 
 /-- Cache an already inferred sheaf instance on an essentially small site.
-Source: Mathlib site transport and sheafification instances. The proof is typeclass inference.
-(auxiliary; not a blueprint node). -/
+Source: Mathlib site transport and sheafification instances. The proof is typeclass inference. -/
 instance (priority := 100000) cachedComposeSets (J : GrothendieckTopology C) :
     J.HasSheafCompose (CategoryTheory.forget CommRingCat.{r}) := inferInstance
 
 /-- Cache an already inferred sheaf instance on an essentially small site.
-Source: Mathlib site transport and sheafification instances. The proof is typeclass inference.
-(auxiliary; not a blueprint node). -/
+Source: Mathlib site transport and sheafification instances. The proof is typeclass inference. -/
 instance (priority := 100000) cachedComposeModules (J : GrothendieckTopology C) :
     J.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{r}) := inferInstance
 
 /-- The existing underlying set-sheaf functor, used to normalize scalar insertion.
-Source: Stacks 03D7 (auxiliary; not a blueprint node). -/
+Source: Stacks 03D7. -/
 abbrev underlying (R : Sheaf J CommRingCat.{r}) :=
   toSheaf ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R) ⋙
     sheafCompose J (CategoryTheory.forget AddCommGrpCat.{r})
 
 /-- Presentations of all K-flat derived scalar extensions on this site.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks 06YY. -/
 abbrev Scalars (J : GrothendieckTopology C) :=
   ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S),
     _root_.SheafOfModules.SuccessiveDerivedQuotient.Presentation.{c, v, r, max c v (r + 1)} a
 
 /-- The normalized unit insertion into the recorded ordinary scalar extension.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 def insertion {p : Scalars.{c, v, r} J}
     (n : _root_.SheafOfModules.SuccessiveDerivedQuotient.Normalization.{c, v, r, max c v (r + 1)}
       (J := J) p)
@@ -121,7 +117,7 @@ def insertion {p : Scalars.{c, v, r} J}
   (underlying R).map ((n.ordinaryAdjunction a).unit.app M)
 
 /-- The canonical K-flat computation arrow of the recorded universal derived pair.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks 06YY. -/
 abbrev computation {R S : Sheaf J CommRingCat.{r}} {a : R ⟶ S}
     (p : _root_.SheafOfModules.SuccessiveDerivedQuotient.Presentation.{c, v, r, max c v (r + 1)} a)
     (P : CochainComplex (Mod J R) ℤ) :=
@@ -131,7 +127,7 @@ abbrev computation {R S : Sheaf J CommRingCat.{r}} {a : R ⟶ S}
 The ring maps and module operations are transported by AlgebraicInverseImage. The
 underlying unit fixes the ordinary adjunction; its canonical derived adjunction is
 used below. These are presentation witnesses for the operations of the statement.
-Source: Stacks 03D7, 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 03D7, 07A6. -/
 structure Geometry
     (uInv : Sheaf J (Type r) ⥤ Sheaf K (Type r))
     (uPush : Sheaf K (Type r) ⥤ Sheaf J (Type r)) (adj : uInv ⊣ uPush) where
@@ -166,7 +162,7 @@ variable {uInv : Sheaf J (Type r) ⥤ Sheaf K (Type r)}
   (g : Geometry uInv uPush adj)
 
 /-- Exact coefficient inverse image on ordinary unbounded derived categories.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 abbrev Geometry.left (R : Sheaf J CommRingCat.{r}) := (g.inverse R).modules.mapDerivedCategory
 
 variable {pY : Scalars.{c, v, r} J} {pX : Scalars.{c, v, r} K}
@@ -178,7 +174,7 @@ variable {pY : Scalars.{c, v, r} J} {pX : Scalars.{c, v, r} K}
 /-- The canonical inverse-image/scalar comparison. The ordinary insertion equation
 fixes the inverse-image tensor map. Its derived comparison is fixed on common
 flat-term K-flat representatives by the universal computation arrows.
-Source: Stacks 0D6D, 0G7E (auxiliary; not a blueprint node). -/
+Source: Stacks 0D6D, 0G7E. -/
 structure Comparisons where
   ordinary : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S),
     (pY a).ordinary ⋙ (g.inverse S).modules ≅

@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.H1FiniteBasicCoverUnitIdeal
 
 /-! # Serre's quasi-compact vanishing criterion
 
-Source: Stacks Project, Tag 01XF, label lemma-quasi-compact-h1-zero-covering
-(blueprint: lem-pqf-quasicompact-h1-zero).
+Source: Stacks Project, Tag 01XF, label lemma-quasi-compact-h1-zero-covering.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ namespace AlgebraicGeometry
 /-- A quasi-compact scheme whose first cohomology vanishes on every
 quasi-coherent ideal sheaf is affine.
 
-Source: Stacks Project, Cohomology of Schemes, Lemma Tag 01XF, lines 283--388
-(blueprint: lem-pqf-quasicompact-h1-zero).
+Source: Stacks Project, Cohomology of Schemes, Lemma Tag 01XF, lines 283--388.
 
 Proof: (1) For a closed point `x`, choose an affine neighbourhood `U` and
 the reduced closed subschemes on `X \ U` and `(X \ U) ∪ {x}`.  Their ideal

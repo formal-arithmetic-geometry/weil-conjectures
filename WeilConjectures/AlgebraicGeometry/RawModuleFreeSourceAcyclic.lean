@@ -18,7 +18,6 @@ import all WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComp
 /-! # Acyclicity for the pulled-back free abelian source
 
 Source: Stacks Project, Tag 03FD, second paragraph of its proof.
-(blueprint: lem-sbc-raw-module-free-source-acyclic).
 -/
 
 @[expose] public section
@@ -73,7 +72,6 @@ private noncomputable def rawSourceSectionsIso
 
 /-- Forgotten injective modules are acyclic for sections corepresented by this source.
 Source: Stacks Project, Tag 03FD, second proof paragraph and the sections adjunction.
-(blueprint: lem-sbc-raw-module-free-source-acyclic).
 
 Proof: Pullback of the represented sheaf U is represented by X times_S U.
 Pullback commutes with free abelian sheafification. Thus the source in the

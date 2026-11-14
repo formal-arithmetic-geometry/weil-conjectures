@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationPointEvaluationPrope
 
 /-! # The residue identification of the coordinate-ring strict henselization
 
-Source: Stacks Project, Tag 04HX and Definition 03PS
-(blueprint: lem-weil-pbc-strict-henselization-functoriality).
+Source: Stacks Project, Tag 04HX and Definition 03PS.
 
 This is clause (1) of `lem-weil-pbc-strict-henselization-functoriality` for the
 coordinate-ring model `Scheme.strictHenselizationRing` of the strict henselization,
@@ -38,8 +37,7 @@ closure: the point evaluation on `Scheme.strictHenselization`, precomposed with 
 colimit comparison. Its kernel is the maximal ideal, and followed by the inclusion into Ω it
 recovers every chosen pointed neighbourhood through the legs of
 `Scheme.strictHenselizationCone`.
-Source: Stacks Project, Tag 04HX, using Tags 04GW and 04GP
-(blueprint: lem-weil-pbc-strict-henselization-pointed-map). -/
+Source: Stacks Project, Tag 04HX, using Tags 04GW and 04GP. -/
 private theorem strictHenselizationRingPointedMap
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (barY : Spec (.of Ω) ⟶ Y)
@@ -97,8 +95,7 @@ identification of clause (1), for the coordinate-ring model
 `Scheme.strictHenselizationRing`. The factorization condition forces the residue
 identification to respect the base residue field; using ring equivalences therefore
 also states uniqueness as an equivalence of base-residue-field algebras.
-Source: Stacks Project, Tag 04HX and Definition 03PS
-(blueprint: lem-weil-pbc-strict-henselization-functoriality).
+Source: Stacks Project, Tag 04HX and Definition 03PS.
 
 Proof: by `strictHenselizationLocalStructure` the colimit ring $C$ is a strictly
 henselian local ring. The pointed map of the colimit, the point evaluation $\psi$ to the

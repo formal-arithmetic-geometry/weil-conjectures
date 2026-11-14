@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.OpenPerfectModelTransport
 /-! # Initial ambient representative of a supported perfect map
 
 Source: Stacks Project, Tags 08BT and 09IM.
-(blueprint: lem-sc-supported-map-initial-ambient-lift).
 -/
 
 @[expose] public section
@@ -113,7 +112,6 @@ set_option backward.isDefEq.respectTransparency false in
 which is perfect and supported at the points of that open. No perfectness is asserted
 outside the open.
 Source: Stacks Project, Tags 08BT, 00A7 (4), and 09IM (initial object of the induction).
-(blueprint: lem-sc-supported-map-initial-ambient-lift).
 
 Proof: Apply the inverse of Modules.overEquiv U to F and then exact extension by
 zero to X. These are actual functors: no arbitrary existence witness defines the

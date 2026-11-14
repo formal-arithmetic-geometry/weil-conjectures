@@ -18,7 +18,7 @@ import WeilConjectures.RingTheory.LimitFlatModules
 
 /-! # Sectionwise adic algebra limits
 
-Source: Stacks Project, sites-modules.tex, Tags 093M and 0912 (auxiliary; not a blueprint node).
+Source: Stacks Project, sites-modules.tex, Tags 093M and 0912.
 -/
 
 @[expose] public noncomputable section
@@ -32,7 +32,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 
 /-- Evaluate a constant-ring algebra sheaf as an algebra over the original ring.
-Source: Stacks Project, Tag 093M (auxiliary; not a blueprint node). The scalar map is the
+Source: Stacks Project, Tag 093M. The scalar map is the
 constant-presheaf
 sheafification unit followed by the structural map; no algebra action is chosen. -/
 def adicAlgebraSections {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
@@ -43,7 +43,7 @@ def adicAlgebraSections {C : Type u} [SmallCategory C] (J : GrothendieckTopology
     (commAlgCatEquivUnder (CommRingCat.of A)).inverse
 
 /-- The algebra of sections of the n+1 term of the given tower.
-Source: Stacks Project, Tag 093M (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 093M. -/
 abbrev adicTerm {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A]
     (S : ℕᵒᵖ ⥤ Under ((constantSheaf J CommRingCat.{u}).obj (CommRingCat.of A)))
@@ -51,7 +51,7 @@ abbrev adicTerm {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
   (adicAlgebraSections J A U).obj (S.obj (op n))
 
 /-- Sections of the ring-sheaf limit with their induced A-algebra structure.
-Source: Stacks Project, Tag 093M (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 093M. -/
 abbrev adicLimit {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A]
     (S : ℕᵒᵖ ⥤ Under ((constantSheaf J CommRingCat.{u}).obj (CommRingCat.of A)))
@@ -59,7 +59,7 @@ abbrev adicLimit {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
   (adicAlgebraSections J A U).obj (limit S)
 
 /-- The transition on algebras of sections.
-Source: Stacks Project, Tag 093M (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 093M. -/
 def adicTransition {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A]
     (S : ℕᵒᵖ ⥤ Under ((constantSheaf J CommRingCat.{u}).obj (CommRingCat.of A)))
@@ -67,7 +67,7 @@ def adicTransition {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
   ((adicAlgebraSections J A U).map (S.map (homOfLE h).op)).hom
 
 /-- The original limit projection on algebras of sections.
-Source: Stacks Project, Tag 093M (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 093M. -/
 def adicProjection {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A]
     (S : ℕᵒᵖ ⥤ Under ((constantSheaf J CommRingCat.{u}).obj (CommRingCat.of A)))
@@ -75,7 +75,7 @@ def adicProjection {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
   ((adicAlgebraSections J A U).map (limit.π S (op n))).hom
 
 /-- Canonical comparison into the product of sectionwise tensor products.
-Source: Stacks Project, Tag 0912 (auxiliary; not a blueprint node). Its image will be exactly the
+Source: Stacks Project, Tag 0912. Its image will be exactly the
 compatible families. -/
 def adicTensorComparison {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A]
@@ -86,7 +86,7 @@ def adicTensorComparison {C : Type u} [SmallCategory C] (J : GrothendieckTopolog
   LinearMap.pi (fun n ↦ (adicProjection J A S n U).toLinearMap.rTensor F)
 
 /-- A constant-ring algebra sheaf regarded as a module over the constant ring sheaf.
-Source: Stacks Project, Tag 093M (auxiliary; not a blueprint node). This is restriction of scalars
+Source: Stacks Project, Tag 093M. This is restriction of scalars
 of the unit. -/
 abbrev adicUnderlyingModule {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A]
@@ -527,7 +527,7 @@ private theorem adicModuleFactor {C : Type u} [SmallCategory C]
 /-- Flatness, finite tensor comparisons and canonical quotient projections for an adic
 algebra-sheaf tower. Positive exponents are indexed by n : ℕ, meaning n+1.
 Source: Stacks Project, sites-modules.tex, Tag 093M, generalized algebra-tower argument;
-more-algebra.tex, Tag 0912 (auxiliary; not a blueprint node).
+more-algebra.tex, Tag 0912.
 
 Proof:
 1. Evaluate the sheaf limit on U. Apply `ModuleCat.limit_flat_of_flat_quotients` to

@@ -165,7 +165,6 @@ private theorem scalar_tensor_pullback_unit
 /-- The scalar tensor coefficient commutes with the normalized module pullback
 comparison. This is an equality of coefficient sheaf morphisms, with no Ext classes.
 Source: Stacks Project, Cohomology, Tag 01F7; Modules, Tag 01CD.
-(blueprint: lem-sc-scalar-pullback-tensor-coefficient).
 
 Proof: Apply the inverse-image/direct-image adjunction to the two morphisms.
 Precompose their underlying presheaf morphisms with the tensorator of the sheaf

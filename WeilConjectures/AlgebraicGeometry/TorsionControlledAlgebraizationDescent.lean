@@ -30,7 +30,6 @@ algebraizations, not a torsion condition on the original formal map.
 
 Source: Stacks Project, Tag 0889(1), Zariski locality by uniqueness;
 Sheaves, Tags 00AL and 00AM.
-(blueprint: lem-weil-pbc-torsion-controlled-algebraization-descent).
 
 Proof: Choose the triples supplied on the covering opens. Restrict two triples to
 an overlap, using the quotient/restriction comparison to compare completions.

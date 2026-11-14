@@ -399,8 +399,7 @@ private theorem clopenTransfer_tensor
 
 /-- Pull back the open projection comparison to the self-base-change square.
 The second tensor factor is identified by the specified inverse-image square and
-exact/left-derived comparison. Source: Stacks Tags 0GL1 and 0E48
-(blueprint: lem-sf-etale-graph-transfer-tensor). -/
+exact/left-derived comparison. Source: Stacks Tags 0GL1 and 0E48. -/
 noncomputable def sfEtaleGraphTensorMap
     (A : Type (u + 1)) [CommRing A]
     {V W : Scheme.{u}} (e : V ⟶ W) (c : Compactification e)
@@ -529,8 +528,7 @@ private theorem sfEtaleGraphTransferTensor_normalization
     curriedTensor_obj_obj, curriedTensor_map_app, curriedTensor_obj_map] using h
 
 /-- Tensor compatibility of graph transfer, before applying the proper direct image.
-Source: `lem-sf-etale-graph-unit-tensor`, steps 2--4; Stacks Tags 015F and 0GL1
-(blueprint: lem-sf-etale-graph-transfer-tensor).
+Source: `lem-sf-etale-graph-unit-tensor`, steps 2--4; Stacks Tags 015F and 0GL1.
 
 Proof in words. The self graph is clopen by the existing graph geometry. For a
 clopen immersion, restriction is both left and right adjoint to extension by zero.

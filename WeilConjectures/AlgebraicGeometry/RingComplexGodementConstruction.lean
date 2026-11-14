@@ -12,7 +12,6 @@ public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 
 Source: Stacks Project, Tags 099D and 0FKS.
 The complex is constructed from global sections on the open complement of the ideal.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -148,8 +147,7 @@ def ringComplexGodementRestriction (A : CommRingCat.{u}) (I : Ideal A) :
     (ringComplexGodementFirst_closed A I)
 
 /-- The actual ring complex: the mapping fibre of restriction to Godement sections.
-Source: Stacks Project, Tags 099D, 0FKS.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 099D, 0FKS. -/
 def ringComplexGodement (A : CommRingCat.{u}) (I : Ideal A) :
     CochainComplex (RingSiteModules A) ℤ :=
   (CochainComplex.mappingCone.triangle (ringComplexGodementRestriction A I)).invRotate.obj₁

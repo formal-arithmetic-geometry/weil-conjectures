@@ -81,8 +81,7 @@ field extension of K'. This proves the stated geometric reducedness.
 No final flat shrinking is asserted, and no arbitrary scheme is selected by a definition.
 The empty generic fibre is excluded by geometric irreducibility; empty special
 fibres do not enter the field calculation.
-
-(blueprint: lem-sbc-radicial-reduced-flat-generic-fibre) -/
+ -/
 theorem exists_radicial_reduced_flat_generic_fibre
     {Z S : Scheme.{u}} [IsAffine Z] [IsReduced Z] [IsAffine S] [IsIntegral S]
     (g : Z ⟶ S) [Flat g] [LocallyOfFinitePresentation g]

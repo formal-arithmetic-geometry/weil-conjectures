@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 import WeilConjectures.AlgebraicGeometry.DualNumberSchemePushout
 
 /-! Additive and scalar operations on dual-number tangent vectors.
-(blueprint: lem-sc-tangent-vectors-operations)
 
 Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2.
 
@@ -438,7 +437,6 @@ namespace AlgebraicGeometry
 
 
 /-- Additive and scalar operations on dual-number tangent vectors.
-(blueprint: lem-sc-tangent-vectors-operations)
 
 Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2.
 

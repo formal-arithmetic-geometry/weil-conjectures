@@ -23,8 +23,7 @@ lying over a point `x` with `trdeg_K κ(x) > 0`, equivalently a non-closed point
 recall that it is also the limit of the affine pointed étale neighbourhoods of `s`,
 `AlgebraicGeometry.Scheme.isLimitStrictLocalizationConeOver`). Then there is a separably closed
 field `L` over `K` such that `X'` is an `L`-scheme and a cofiltered limit, with affine transition
-maps, of affine schemes `X_i` of finite type over `L` with `dim X_i < dim X`
-(blueprint `corollary-open-direct-image-over-field--2`, Stacks 0F0U).
+maps, of affine schemes `X_i` of finite type over `L` with `dim X_i < dim X`.
 
 ## References
 

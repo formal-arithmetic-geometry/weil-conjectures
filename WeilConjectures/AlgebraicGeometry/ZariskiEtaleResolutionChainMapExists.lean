@@ -26,7 +26,6 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 /-- An augmented comparison from a resolution to the pushed complex exists.
 
 Source: Stacks Project, Derived Categories, Tag 013P (comparison of resolutions).
-(blueprint: lem-zariski-etale-resolution-chain-map-exists)
 
 Proof: The exact inverse image preserves monomorphisms. Its right adjoint therefore
 preserves injectives, so every term of the pushed complex is injective. Extend the

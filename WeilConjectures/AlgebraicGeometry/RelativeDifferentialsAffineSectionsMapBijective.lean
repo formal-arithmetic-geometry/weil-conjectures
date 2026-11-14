@@ -24,7 +24,6 @@ variable {X S : Scheme.{u}}
 /-- A linear map compatible with the universal derivation is the affine comparison
 isomorphism.  This is the injectivity and surjectivity part of the affine calculation.
 Source: Stacks Project, Tag 01UT; affine comparison and the universal property.
-(blueprint: lem-sc-relative-differentials-affine-sections-map-bijective).
 -/
 theorem relativeDifferentials_affine_sections_map_bijective (f : X ⟶ S)
     (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1)

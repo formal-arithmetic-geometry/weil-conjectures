@@ -21,7 +21,6 @@ variable {X S : Scheme.{u}}
 /-- The universal derivation gives a linear map from affine Kähler differentials to
 sections of relative differentials.  The affine comparison constructs this map.
 Source: Stacks Project, Tag 01UT; the map part of the affine calculation.
-(blueprint: lem-sc-relative-differentials-affine-sections-map).
 -/
 theorem relativeDifferentials_affine_sections_map (f : X ⟶ S)
     (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1) :

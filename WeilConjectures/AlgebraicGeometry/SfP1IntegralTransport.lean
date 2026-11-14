@@ -118,7 +118,6 @@ Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, base-change identification of the two projection traces;
 sec-six-functors-basics/sk-prop-geo-p1-adjunction/lem-amb-p1-diagonal-integrals.proof.md,
 exact closed image and the section comparisons.
-(auxiliary; not a blueprint node).
 
 Proof: Pull the given Ext representative along the product isomorphism induced by i.
 Exact closed direct image and its derived comparison identify its source with the

@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.QuotientResolutionTensorComparison
 
 /-! # Affine derived-Tor charts from chosen resolution comparisons
 
-Source: Stacks Project, Tags 06YH, 06YG and 00LS.
-(blueprint: new-q1-self-tor-chosen-resolution-charts). -/
+Source: Stacks Project, Tags 06YH, 06YG and 00LS. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -35,7 +34,6 @@ Mathlib's chosen projective quotient resolutions. The Tor map is the explicit
 homology map of the chain comparison.
 No cycle formula or assertion about other resolutions is assumed.
 Source: Stacks Project, Tags 06YH, 06YG, 00LS and 01I6.
-(blueprint: new-q1-self-tor-chosen-resolution-charts).
 
 Proof: On each affine U use projectiveResolution of A/I, with A = Γ(Y,U).
 Sheafify its augmentation using exists_affine_quotient_sheafified_resolution.

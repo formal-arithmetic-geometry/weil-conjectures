@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 # Principal localization of tilde sections transported by an affine isomorphism
 
 Source: Stacks Project, Schemes, Lemma 01HV (2), (4), (5).
-(blueprint: lem-weil-pbc-tilde-principal-localization-transport)
 -/
 
 @[expose] public section
@@ -115,7 +114,6 @@ an affine isomorphism, preserving the section-ring action and restriction of
 whole-chart sections.
 
 Source: Stacks Project, Schemes, Lemma 01HV (2), (4), (5).
-(blueprint: lem-weil-pbc-tilde-principal-localization-transport)
 
 Proof:
 For the whole scheme compose restrictAppIso with the inverse of tilde.isoTop.

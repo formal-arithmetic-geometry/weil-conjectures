@@ -38,8 +38,7 @@ lift is a section by the second projection identity, and its base change is the 
 section by the first projection identity and uniqueness in the pullback. The later source
 is of finite presentation over the noetherian stage, hence is noetherian too. Pasting
 and cancelling the model's pullback square gives the claimed cartesian square.
-
-(blueprint: lem-sbc-affine-section-noetherian-descent) -/
+ -/
 theorem exists_noetherian_model_with_section {X S : Scheme.{u}} [IsAffine S]
     (f : X ⟶ S) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]
     (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S) :

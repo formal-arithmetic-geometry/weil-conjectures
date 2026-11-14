@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.StrictlyPerfectEvaluationLocalSection
 /-! # Evaluation comparisons with a K-injective second representative
 
 Source: Stacks Project, Cohomology of Sheaves, Tags 08DQ, 08DM and 08DL.
-(blueprint: lem-pc-strictly-perfect-kinjective-evaluation-comparisons).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ This only handles the resolved case; it does not assert the comparison for an ar
 second complex.
 
 Source: Stacks Project, Cohomology of Sheaves, Tags 08DQ, 08DM and 08DL.
-(blueprint: lem-pc-strictly-perfect-kinjective-evaluation-comparisons).
 
 Proof:
 1. Apply the local retraction and section statements to the restricted canonical

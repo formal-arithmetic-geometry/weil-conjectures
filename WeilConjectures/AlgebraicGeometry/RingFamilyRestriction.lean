@@ -10,7 +10,6 @@ public import WeilConjectures.CategoryTheory.ModuleSheafificationRestriction
 /-! # Restriction of sheafified ring-family complexes
 
 Source: Stacks Project, Tag 099E, restriction compatibility of K_{U,I}.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +28,7 @@ variable (m : RingComplexMaps K) (hm : RingComplexFunctorial K ε m)
 variable (r : ℕ) (f : Fin r → (O.obj ⋙ forget CommRingCat).sections)
 
 /-- Restrict the given global ring sections along the functor of sites.
-Source: Stacks Project, Tag 099E.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 099E. -/
 def ringFamilyRestrictedSections : Fin r →
     ((((F.sheafPushforwardContinuous CommRingCat.{u} J L).obj O).obj) ⋙
       forget CommRingCat).sections :=
@@ -40,7 +38,6 @@ set_option maxHeartbeats 400000 in
 -- The unit formula compares two composite module functors; the wall limit stays unchanged.
 /-- Ring-family complexes commute with restriction and module sheafification.
 Source: Stacks Project, Tag 099E, K_{V,I O(V)} = K_{U,I}|_V.
-(auxiliary; not a blueprint node).
 
 Proof: the presheaf complexes commute with restriction section by section: both use the
 same ring, generated ideal, transition map and differential. Apply the unit-compatible

@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.StrictHenselizationRestriction
 /-! # Derived sections unit followed by Leray on a representative
 
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-sections-unit-leray).
 -/
 
 @[expose] public section
@@ -149,7 +148,6 @@ set_option backward.defeqAttrib.useBackward true in
 
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and the
 unit factorization defining `Functor.rightDerivedFunctorCompIso`.
-(blueprint: lem-weil-pbc-strict-local-sections-unit-leray).
 
 Proof: expand the exact sections comparison and the bounded-below/unbounded
 right-derived compatibility. Their defining unit compatibilities identify their

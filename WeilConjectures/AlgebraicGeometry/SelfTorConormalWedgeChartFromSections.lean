@@ -113,7 +113,6 @@ private theorem affine_model_chart_quasicoherent {Z Y : Scheme.{u}} (i : Z ⟶ Y
 /-- Sheafification of the affine conormal section calculation.
 Source: Stacks Project, Tags 01R3 (conormal) and 01I6 (affine
 quasi-coherent sheaves, full faithfulness, and exterior powers).
-(blueprint: new-t2-self-tor-conormal-wedge-chart-from-sections).
 Proof: Let V be the inverse-image chart. It is affine since i is a closed
 immersion and U is affine. The ideal module is the kernel of the map from the
 structure module to the direct image of the structure module of its closed

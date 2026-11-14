@@ -16,8 +16,7 @@ import Mathlib.RingTheory.ZariskisMainTheorem
 
 /-! # Quasi-finite over a polynomial algebra
 
-Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00QE
-(blueprint: lem-weil-pbc-quasi-finite-over-polynomial-algebra).
+Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00QE.
 -/
 
 @[expose] public section
@@ -136,7 +135,6 @@ private theorem isOpen_singleton_fiber_of_embedding
 coordinates in `n` variables can be chosen so that the map is quasi-finite at `q`.
 Source: Stacks Project, Algebra, Lemma Tag 00QE, second paragraph of the proof,
 using Noether normalization Tag 00OY.
-(blueprint: lem-weil-pbc-quasi-finite-over-polynomial-algebra).
 
 Proof: Put `p = q ∩ R`, `k = κ(p)` and `F = k ⊗[R] S`. The fibre contains the point
 corresponding to `q`, so it is nonzero. It is finite type over `k` by base change.
@@ -289,8 +287,7 @@ set_option linter.unusedVariables false in
 /-- A finite type algebra is locally quasi-finite over a polynomial algebra in its fibre
  dimension.
 
-Source: Stacks Project, Algebra, Lemma Tag 00QE
-(blueprint: lem-weil-pbc-quasi-finite-over-polynomial-algebra).
+Source: Stacks Project, Algebra, Lemma Tag 00QE.
 Proof:
 
 1. Put `p = q ∩ R` and `F = κ(p) ⊗[R] S`. The fibre homeomorphism embeds

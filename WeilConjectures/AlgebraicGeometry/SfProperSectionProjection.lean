@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.SfProperProjectionComposition
 
 Source: Stacks Project, Tags 0B56 and 0DV0; blueprint latest,
 thm-amb-p1-adjunction.proof.md, projection naturality along the diagonal.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +29,7 @@ namespace AlgebraicGeometry.Etale.SupportedTrace
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The canonical direct-image identification for a proper section.
-Source: Stacks Project, Tag 0DV0, composition and identity comparisons
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 0DV0, composition and identity comparisons. -/
 def properSectionPushIso {X W : Scheme.{u}} (s : X ⟶ W) (p : W ⟶ X)
     [IsProper s] [IsProper p] (h : s ≫ p = 𝟙 X) :
     𝟭 (DerivedCategoryModule A X) ≅ push A s ⋙ push A p :=
@@ -39,8 +37,7 @@ def properSectionPushIso {X W : Scheme.{u}} (s : X ⟶ W) (p : W ⟶ X)
     rightDerivedLowerShriekCongrIso A h.symm ≪≫ rightDerivedLowerShriekCompIso A s p
 
 /-- The tensor-unit description of pushforward along a proper section.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the diagonal unit description
-(auxiliary; not a blueprint node). -/
+Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the diagonal unit description. -/
 def properSectionTensorIso {X W : Scheme.{u}} (s : X ⟶ W) (p : W ⟶ X)
     [IsProper s] [IsProper p] (h : s ≫ p = 𝟙 X) :
     push A s ≅ CoordinateTrace.pull A p ⋙
@@ -269,8 +266,7 @@ end Proof
 
 /-- Projection along a proper section carries insertion of its unit to the right unitor.
 Source: Stacks Project, Tags 0B56 and 0DV0; blueprint latest,
-thm-amb-p1-adjunction.proof.md, projection naturality in the two coordinate computations
-(auxiliary; not a blueprint node).
+thm-amb-p1-adjunction.proof.md, projection naturality in the two coordinate computations.
 
 Proof: apply composition coherence of the canonical projection maps to s followed by p. Use the
 canonical identification of s*(p*M) with M and its conjugate direct-image comparison to

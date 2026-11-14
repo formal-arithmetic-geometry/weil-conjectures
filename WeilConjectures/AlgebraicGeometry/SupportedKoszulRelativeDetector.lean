@@ -23,7 +23,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # A supported Koszul relative detector
 
 Source: Stacks Project, Tag 0A9A, induction step.
-(blueprint: lem-pc-supported-koszul-relative-detector).
 -/
 
 @[expose] public section
@@ -103,7 +102,6 @@ private theorem stalk_subsingleton_of_restriction_zero
 
 /-- The Koszul object on the affine complement detects supported objects zero on U.
 Source: Stacks Project, Tag 0A9A, affine and supported Koszul construction paragraphs.
-(blueprint: lem-pc-supported-koszul-relative-detector).
 
 Proof: Put S = T intersect (X minus U), closed in X and contained in V. Its complement
 in V is W = (U intersect V) union (V minus T), quasi-compact by quasi-separatedness,

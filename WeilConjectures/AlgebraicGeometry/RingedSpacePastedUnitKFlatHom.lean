@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.RingedSpaceKFlatDirectImageHomLocalizat
 # The pasted direct-image unit tested on K-flat complexes
 
 Source: Stacks Project, Cohomology, Tags 079W, 0D5S and 0D5T.
-(blueprint: lem-pc-ringed-space-pasted-unit-kflat-hom).
 -/
 
 @[expose] public section
@@ -62,7 +61,6 @@ source is a localized K-flat complex and the original target is K-injective.
 Source: Stacks Project, Cohomology, `lemma-adjoint` (079W),
 `lemma-derived-pullback-composition` (0D5S), and the argument of
 `lemma-derived-pushforward-composition` (0D5T).
-(blueprint: lem-pc-ringed-space-pasted-unit-kflat-hom).
 
 Proof: write H for the homotopy category and P = f* g* for successive tensor
 pullback. Pullback preserves K-flatness by `isKFlat_pullback`, so P K computes

@@ -43,8 +43,7 @@ W = Z intersect g inverse image V is a nonempty open of Z, containing x; it is
 irreducible. The component's trace on W is clopen, hence empty or all of W. Express W
 as Z intersect an ambient open U, giving the asserted alternatives. No constructibility
 criterion is used in this step.
-
-(blueprint: lem-sbc-section-component-generic-dichotomy) -/
+ -/
 theorem exists_open_section_component_dichotomy {P T : Scheme.{u}}
     [IsNoetherian P] [IsNoetherian T] (g : P ⟶ T)
     [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g]

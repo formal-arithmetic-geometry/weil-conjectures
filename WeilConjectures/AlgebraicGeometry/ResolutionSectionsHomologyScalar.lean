@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 /-! # Scalar transport through restricted section complexes
 
 Source: Stacks Project, Tags 01E4 and 01E5.
-(blueprint: lem-pc-resolution-sections-homology-scalar)
 -/
 
 @[expose] public section
@@ -51,7 +50,6 @@ set_option maxHeartbeats 400000 in
 -- The nested section, evaluation and homology functors require extra elaboration work.
 /-- The homology comparison of restricted section complexes is semilinear.
 Source: Stacks Project, Tags 01E4 and 01E5.
-(blueprint: lem-pc-resolution-sections-homology-scalar)
 
 Proof: Put U = f inverse V. The ring map displayed here is pullback of sections
 along f: the canonical chart V.toSpecΓ cancels ΓSpecIso, and restriction to the

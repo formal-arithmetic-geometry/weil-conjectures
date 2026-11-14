@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.RawAffineRestrictedCohomology
 /-! # Formula for the canonical restricted cohomology map
 
 Source: Stacks Project, Tag 0EZM, canonical cohomology pullback.
-(blueprint: lem-sbc-raw-affine-restricted-cohomology-map-formula).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ attribute [local irreducible] cohomology upperStar rawAffineComplexPullback
 
 /-- An explicit formula for the canonical cohomology map of any triangle over S.
 Source: Stacks Project, Tag 0EZM, canonical pullback and coefficient maps.
-(blueprint: lem-sbc-raw-affine-restricted-cohomology-map-formula).
 
 Proof: Restrict F along the second projection to U ×_S Y and place it in the
 single complex in degree zero. Pull cohomology back along the induced morphism

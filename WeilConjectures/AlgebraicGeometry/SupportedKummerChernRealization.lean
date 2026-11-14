@@ -9,8 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerBoundary
 /-!
 # Chern normalization of the supported Cartier Kummer class
 
-Source: blueprint lemma-cycle-class-cartier-divisor; Stacks 03PL and 0A45
-(auxiliary; not a blueprint node).
+Source: blueprint lemma-cycle-class-cartier-divisor; Stacks 03PL and 0A45.
 -/
 
 @[expose] public noncomputable section
@@ -39,8 +38,7 @@ private theorem integral_section (T : Scheme.{u})
 
 /-- Forgetting support in the normalized relative boundary gives the positive Kummer
 Chern class of the dual Cartier ideal, with the canonical integral constant unit.
-Source: Stacks 03PL, 0A45; blueprint lemma-cycle-class-cartier-divisor, paragraphs 3--4
-(auxiliary; not a blueprint node).
+Source: Stacks 03PL, 0A45; blueprint lemma-cycle-class-cartier-divisor, paragraphs 3--4.
 
 Proof: take the torsor extension in the boundary specification. Its fibre over the
 supported section one is the frame torsor of O(D). Pulling this extension back along

@@ -208,8 +208,7 @@ private theorem isIso_globalHomology_isoModel
 set_option backward.isDefEq.respectTransparency true in
 /-- Global sections of homology of base change to any strict-henselization model
 are invertible. No geometric stalk or choice of its field occurs in this assertion.
-Source: Stacks Project, Tag 03Q9 (theorem-higher-direct-images), and Tag 03QO.
-(blueprint: lem-weil-pbc-strict-local-base-change-model-global-homology).
+Source: Stacks Project, Tag 03Q9, and Tag 03QO.
 
 Proof:
 1. Apply `isIso_strictHenselization_baseChange_globalHomology` to f, s, K and n.

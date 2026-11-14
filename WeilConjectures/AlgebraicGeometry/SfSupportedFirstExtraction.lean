@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetri
 
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, first triangle, coordinate interchange.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -638,7 +637,7 @@ attribute [local irreducible] properRouteCompIso rightDerivedLowerShriekCompIso
 
 /-- Interchange the two supported coordinate extractions before applying any trace.
 Source: thm-amb-p1-adjunction.proof.md, first triangle, interchange of the two
-coordinates (auxiliary; not a blueprint node).
+coordinates.
 
 Proof: construct the proper-supported Kunneth route from the specified compositor,
 projection, exchange and tensor symmetry. Normalize its inverse to the ordinary

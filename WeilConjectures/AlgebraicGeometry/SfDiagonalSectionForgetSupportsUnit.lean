@@ -15,7 +15,7 @@ import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
 /-! # Unit-coefficient diagonal forget-supports normalization
 
 This is the coefficient-free special case used to prove the natural formula in
-`SfDiagonalSectionForgetSupports` (auxiliary; not a blueprint node).
+`SfDiagonalSectionForgetSupports`.
 -/
 
 @[expose] public section
@@ -338,8 +338,7 @@ Source: blueprint latest, `thm-amb-p1-adjunction.proof.md`, the equation
 compositor for `Δ` followed by either projection, apply the canonical proper
 forget-supports comparisons, and use the composition-unit identity for the
 ordinary direct-image adjunction.  The two Boolean cases use `diagonal_fst` and
-`diagonal_snd`; this is the coefficient-free core of the natural statement.
-(auxiliary; not a blueprint node). -/
+`diagonal_snd`; this is the coefficient-free core of the natural statement. -/
 theorem diagonalSection_forgetSupports_unit
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f] (a : Bool) :

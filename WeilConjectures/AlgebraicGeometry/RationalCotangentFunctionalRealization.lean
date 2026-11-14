@@ -13,8 +13,7 @@ public import Mathlib.RingTheory.Ideal.Cotangent
 /-!
 # Realization of cotangent functionals
 
-Source: Stacks Project, Tags 0B2D and 0B2E
-(blueprint: lem-sc-rational-cotangent-functional-realization).
+Source: Stacks Project, Tags 0B2D and 0B2E.
 -/
 
 @[expose] public section
@@ -36,8 +35,7 @@ private theorem stalk_transport_cancel (X : Scheme.{u}) (x y : X) (h : x = y) :
 /-- Every cotangent functional is realized by a dual-number tangent vector.
 This is only the inverse construction; it asserts neither a linear map on tangent vectors
 nor its injectivity.
-Source: Stacks Project, Tags 0B2D and 0B2E, with base `Spec k`
-(blueprint: lem-sc-rational-cotangent-functional-realization).
+Source: Stacks Project, Tags 0B2D and 0B2E, with base `Spec k`.
 
 Proof:
 1. Let `s : k → R` be the structural field map and let `c(a)` be the inverse under `r`

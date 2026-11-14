@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 /-! # Scalar sections transported along a scheme isomorphism
 
 Source: Stacks Project, Sheaves on Spaces, Tags 00A0 and 0097.
-(blueprint: lem-sc-scalar-sections-iso-transport).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Pullback along an isomorphism transports sections on corresponding opens,
 including the scalar action from the composite structure morphism.
 Source: Stacks Project, Sheaves on Spaces, Tags 00A0 and 0097.
-(blueprint: lem-sc-scalar-sections-iso-transport).
 
 Proof: Let a be the isomorphism's forward morphism and adj the tensor
 pullback/pushforward adjunction. Pushforward along a is fully faithful because

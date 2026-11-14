@@ -22,8 +22,7 @@ import WeilConjectures.AlgebraicGeometry.SectionResolvingOplaxConstraintDiagrams
 /-! # The actual internal derived tensor arrow on section representatives
 
 Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E;
-the internal/section normalization argument
-(auxiliary; not a blueprint node).
+the internal/section normalization argument.
 
 The component below is a conjugate of `internalDelta`, never a definition by its
 representative square. The other helpers expose precisely the square's two sides,
@@ -216,13 +215,13 @@ private theorem tensorIsoFromCurried_hom {C D : Type*} [Category C] [Category D]
   rfl
 
 /-- Generic representative constraint data, with the specified vertex comparisons.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def ConstraintData.regularLeft {E : Type*} [Category E] [MonoidalCategory E]
     {U : E} (e : 𝟙_ E ≅ U) (M : E) :=
   (MonoidalCategory.tensor E).map (Prod.mkHom e.inv (𝟙 M)) ≫ (λ_ M).hom
 
 /-- Generic representative constraint data, with the specified vertex comparisons.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def ConstraintData.regularRight {E : Type*} [Category E] [MonoidalCategory E]
     {U : E} (e : 𝟙_ E ≅ U) (M : E) :=
   (MonoidalCategory.tensor E).map (Prod.mkHom (𝟙 M) e.inv) ≫ (ρ_ M).hom
@@ -243,26 +242,26 @@ variable {A : Type a} {B : Type b} {C : Type c} {D : Type d}
   (v : L.obj (q.obj (𝟙_ A)) ⟶ r.obj (𝟙_ B)) (P0 : ObjectProperty A)
 
 /-- Generic representative constraint data, with the specified vertex comparisons.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def ConstraintData.input (P Q : A) := L.map (s P Q) ≫ ε.app (P ⊗ Q)
 /-- Generic representative constraint data, with the specified vertex comparisons.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def ConstraintData.output (P Q : A) :=
   (MonoidalCategory.tensor D).map (Prod.mkHom (ε.app P) (ε.app Q)) ≫
     t (F.obj P) (F.obj Q)
 /-- Generic representative constraint data, with the specified vertex comparisons.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def ConstraintData.tripleInput (P Q H : A) :=
   L.map ((MonoidalCategory.tensor C).map (Prod.mkHom (s P Q) (𝟙 (q.obj H)))) ≫
     ConstraintData.input F L q r s ε (P ⊗ Q) H
 /-- Generic representative constraint data, with the specified vertex comparisons.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def ConstraintData.tripleOutput (P Q H : A) :=
   (MonoidalCategory.tensor D).map (Prod.mkHom (ε.app P) (ConstraintData.output F L q r t ε Q H)) ≫
     t (F.obj P) (F.obj Q ⊗ F.obj H)
 
 /-- Generic representative constraint data, with the specified vertex comparisons.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def ConstraintData.AssociatorNormalization : Prop :=
   ∀ P Q H : P0.FullSubcategory,
     (L.map
@@ -299,7 +298,7 @@ def ConstraintData.AssociatorNormalization : Prop :=
             (F.obj H.obj)).hom))
 
 /-- Generic representative constraint data, with the specified vertex comparisons.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def ConstraintData.UnitorNormalization : Prop :=
   ∀ P : P0.FullSubcategory,
     (μ
@@ -341,7 +340,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
 
 /-- Conjugate the actual internal derived arrow by gamma, theta and the fixed counit.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def actualTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M N : DerivedCategory (modules Λ Y)) :
     (derivedPullback Λ f).obj ((tensor Λ Y).obj (M, N)) ⟶
@@ -368,7 +367,7 @@ def actualTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The prescribed input comparison a: LF(r_Y inverse), followed by epsilon at the total.
 Here qTensor is r inverse on resolving representatives, by the fixed K-flat normalization.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def input {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (modules Λ Y) ℤ) :
     (derivedPullback Λ f).obj
@@ -378,7 +377,7 @@ def input {X Y : Scheme.{u}} (f : X ⟶ Y)
     (pullback Λ f).mapDerivedCategoryFactors.hom.app (P ⊗ Q)
 
 /-- The prescribed output comparison c: epsilon on each factor, followed by r_X inverse.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def output {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (modules Λ Y) ℤ) :
     (tensor Λ X).obj ((derivedPullback Λ f).obj (DerivedCategory.Q.obj P),
@@ -390,26 +389,26 @@ def output {X Y : Scheme.{u}} (f : X ⟶ Y)
     (qTensor Λ X).app ((totalSectionPull Λ f).obj P, (totalSectionPull Λ f).obj Q)
 
 /-- The actual derived arrow followed by the prescribed output comparison.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def actualPath {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (modules Λ Y) ℤ) :=
   actualTensor Λ f (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q) ≫ output Λ f P Q
 
 /-- The other side of the square, using the fixed ordinary arrow b.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def cochainPath {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (modules Λ Y) ℤ) :=
   input Λ f P Q ≫ DerivedCategory.Q.map (sectionTotalIso Λ f P Q).hom
 
 /-- The fixed regular-unit comparison e, using kappa and the ordinary unit comparison.
-Source: Stacks 06YU, 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU, 07A4. -/
 def regular (T : Scheme.{u}) :
     tensorUnit Λ T ≅ DerivedCategory.Q.obj (𝟙_ (CochainComplex (modules Λ T) ℤ)) :=
   sectionLocalizationComparison Λ T (𝟙_ (CochainComplex (internalModules Λ T) ℤ)) ≪≫
     DerivedCategory.Q.mapIso (totalUnitComparison Λ T)
 
 /-- The actual derived unit conjugated by gamma and the specified regular-unit maps.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def actualUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (derivedPullback Λ f).obj
       (DerivedCategory.Q.obj (𝟙_ (CochainComplex (modules Λ Y) ℤ))) ⟶
@@ -422,7 +421,7 @@ def actualUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (regular Λ X).hom
 
 /-- Naturality of the very square under arbitrary representative maps.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def Naturality {X Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=
   ∀ (P Q P' Q' : (KFlatSectionComparison.sectionResolving Λ Y).FullSubcategory)
     (a : P.obj ⟶ P'.obj) (b : Q.obj ⟶ Q'.obj),
@@ -435,7 +434,7 @@ def Naturality {X Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=
 /-- Compatibility with inverses in the localized representative categories.
 The hypotheses identify the inverse maps by both inverse equations, so no arbitrary
 choice of an inverse or extra invertibility assumption is introduced.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def InverseNaturality {X Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=
   ∀ (P Q P' Q' : (KFlatSectionComparison.sectionResolving Λ Y).FullSubcategory)
     (a : P.obj ⟶ P'.obj) (b : Q.obj ⟶ Q'.obj),
@@ -457,7 +456,7 @@ def InverseNaturality {X Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=
 
 /-- Both actual derived associator paths become exactly the two localized cochain paths.
 All intermediate tensor factors are compared using qTensor and epsilon, as in a and c.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def AssociatorNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=
   letI := transportedDerivedMonoidal Λ X
   letI := transportedDerivedMonoidal Λ Y
@@ -469,7 +468,7 @@ def AssociatorNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=
     (actualTensor Λ f) (KFlatSectionComparison.sectionResolving Λ Y)
 
 /-- Both derived unitor paths reduce through the same a, c and e to the cochain paths.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def UnitorNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=
   letI := transportedDerivedMonoidal Λ X
   letI := transportedDerivedMonoidal Λ Y
@@ -1198,8 +1197,7 @@ private theorem output_iso {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The actual internal derived arrow satisfies the prescribed resolving square and unit,
 with its naturality, inverse-denominator compatibility, and all three constraint diagrams.
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E
-(auxiliary; not a blueprint node).
+Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E.
 
 Proof, following the five assembly steps of the node.
 1. Exactness makes every epsilon invertible. The resolving qTensor is invertible,

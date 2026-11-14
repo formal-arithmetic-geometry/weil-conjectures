@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.RationalTangentCoefficientOperations
 /-!
 # Linear descent of tangent coefficients
 
-Source: Stacks Project, Tags 0B2D and 0B2E
-(blueprint: lem-sc-rational-tangent-coefficient-linear-map).
+Source: Stacks Project, Tags 0B2D and 0B2E.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Extracting the epsilon coefficient gives a linear map to the cotangent dual.
-Source: Stacks Project, Tags 0B2D and 0B2E, with base `Spec k`
-(blueprint: lem-sc-rational-tangent-coefficient-linear-map).
+Source: Stacks Project, Tags 0B2D and 0B2E, with base `Spec k`.
 
 Proof:
 1. The closed-point restriction of a tangent vector gives the residue map upon reducing its

@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 /-! # The shifted determinant of the dual evaluates against the determinant
 
 Source: Stacks Project, Tag 0BRT, determinant inversion in the conclusion of the proof.
-(blueprint: lem-sc-shifted-determinant-dual-evaluation).
 -/
 
 @[expose] public section
@@ -121,7 +120,6 @@ private noncomputable def tensorShiftIso
 /-- The shifted top exterior powers of a finite locally free sheaf and its dual are
 mutually inverse derived tensor objects.
 Source: Stacks Project, Tag 0BRT, final determinant inversion.
-(blueprint: lem-sc-shifted-determinant-dual-evaluation).
 
 Proof: on an open cover trivializing M as O_X^d, use a basis e₁,...,e_d and its dual.
 The determinant evaluation pairs their top wedges to 1 and is therefore an isomorphism

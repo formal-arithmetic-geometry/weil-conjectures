@@ -13,8 +13,7 @@ import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 /-!
 # Tensor pullback of the structure sheaf
 
-Source: Stacks Project, Modules, pullback and tensor product, Tags 0096 and 01CA
-(blueprint: lem-weil-pbc-module-pullback-structure-sheaf).
+Source: Stacks Project, Modules, pullback and tensor product, Tags 0096 and 01CA.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
 /-- The structure-sheaf map adjoint to `g♯` under the tensor pullback adjunction.
-Source: Stacks Project, Modules, Tag 0096
-(blueprint: lem-weil-pbc-module-pullback-structure-sheaf). -/
+Source: Stacks Project, Modules, Tag 0096. -/
 def tensorPullbackObjUnitToUnit {X Y : Scheme.{u}} (g : X ⟶ Y) :
     (tensorPullback g).obj (SheafOfModules.unit Y.ringCatSheaf) ⟶
       SheafOfModules.unit X.ringCatSheaf :=
@@ -39,8 +37,7 @@ def tensorPullbackObjUnitToUnit {X Y : Scheme.{u}} (g : X ⟶ Y) :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The adjoint structure-sheaf map is an isomorphism, and its composite with the unit
-is the original structure-sheaf map. Source: Stacks Project, Modules, Tags 0096 and 01CA
-(blueprint: lem-weil-pbc-module-pullback-structure-sheaf).
+is the original structure-sheaf map. Source: Stacks Project, Modules, Tags 0096 and 01CA.
 Proof: under the chosen adjunction, the defined morphism corresponds to the
 structure-sheaf map. For every module `M`, precomposition with this morphism
 corresponds, via the adjunction and evaluation at the unit section, to pushforward

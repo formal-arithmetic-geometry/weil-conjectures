@@ -30,7 +30,6 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- Multiplication by local lifts gives a uniquely determined section of the kernel.
 Source: Stacks Project, Cohomology, Lemma 0B8S, first paragraph of its proof.
-(blueprint: lem-sc-square-zero-glued-scalar-exists-unique)
 
 Proof: Choose a cover of U and lifts b_a of f using local surjectivity of p.
 The products b_a*i(x|V_a) agree on intersections: the difference of two lifts

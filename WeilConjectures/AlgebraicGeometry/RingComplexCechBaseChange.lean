@@ -22,7 +22,6 @@ namespace AlgebraicGeometry
 quasi-isomorphism on every K-flat replacement.
 Source: Stacks Project, Tags 099D(c), 0A6R, 0ALZ;
 Tag 06YQ for bounded flat complexes.
-(auxiliary; not a blueprint node)
 
 Proof: choose a finite generating list for I. Its ordered localization complex is
 bounded and termwise flat: finite products are finite direct sums, localizations

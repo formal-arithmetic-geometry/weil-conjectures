@@ -248,8 +248,7 @@ compose to regular, so cancelling their inverse factors gives the two displayed
 equalities. Every section complex is isomorphic to a termwise image under the
 section equivalence. Naturality of qTensor and of both unitors transports these
 equalities along that isomorphism to the given complex. This uses no pullback
-functor, no resolving hypothesis, and no derived pullback constraint.
-(auxiliary; not a blueprint node). -/
+functor, no resolving hypothesis, and no derived pullback constraint. -/
 theorem section_localization_unit_constraints (T : Scheme.{u})
     (P : CochainComplex (modules Λ T) ℤ) :
     letI := derivedMonoidal Λ T

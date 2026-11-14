@@ -22,8 +22,7 @@ import WeilConjectures.RingTheory.SelfTorRestrictionConormalWedge
 
 /-! # Target self-Tor coordinates and principal localization of algebraic wedge images
 
-Source: Stacks Project, Tags 09PQ and 06YH.
-(blueprint: new-t2-self-tor-target-basic-localization). -/
+Source: Stacks Project, Tags 09PQ and 06YH. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -35,7 +34,6 @@ namespace AlgebraicGeometry
 explicit associated algebraic Tor elements under a principal localization. No exterior
 sheaf source coordinate or pullback-unit wedge equation is assumed or asserted.
 Source: Stacks Project, Tag 09PQ (normalized Tor products), Tag 06YH (K-flat tensor).
-(blueprint: new-t2-self-tor-target-basic-localization).
 
 Proof: On each U choose a projective quotient resolution with its augmentation.
 Sheafify it using exists_affine_quotient_sheafified_resolution. Its bounded-above

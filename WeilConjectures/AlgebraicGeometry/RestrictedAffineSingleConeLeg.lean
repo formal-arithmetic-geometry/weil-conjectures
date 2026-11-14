@@ -34,7 +34,6 @@ private theorem mapped_iso_inv_leg {A B C : Type*}
 /-- The explicit cone comparison carries the restricted colimit leg to the
 canonical restricted coefficient map.
 Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: lem-sbc-restricted-affine-single-cone-leg).
 
 Proof: Expand the inverse of the explicit cone isomorphism and the mapped cocone leg.
 The inverse factors are the single comparison, the inverse composition comparison for

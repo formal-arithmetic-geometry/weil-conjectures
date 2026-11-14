@@ -28,7 +28,6 @@ This concerns the comparison in these coordinates, not the universally quantifie
 stalk condition and not the base-change arrow.
 Source: Stacks Project, perfect.tex, Tag 0DJ9, first paragraph, and equation-bc
 preceding Tag 0DJ8; Cohomology, Tag 06YC.
-(blueprint: lem-pc-single-complex-open-coordinate-transport).
 
 Proof: Restrict P and N termwise to U and U'. Exact restriction transports e and e'
 through the localization comparison. K-flatness of P|U follows from the stalk

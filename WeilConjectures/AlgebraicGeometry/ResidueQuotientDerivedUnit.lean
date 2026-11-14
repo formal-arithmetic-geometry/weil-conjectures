@@ -397,7 +397,7 @@ exactness assumptions, let n>0, G an abelian sheaf, H a sheaf of ULift(Z/n)-modu
 coefficient-forgetting functor. If n:G→G followed by p:G→UH is short exact, then p satisfies
 DerivedUnit [def-sp-exact-functor-derived-unit], in any chosen unbounded derived categories.
 Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (auxiliary; not a blueprint node).
+06YY and 0GLZ.
 Proof: Realize raw module sheaves as modules over the constant residue ring and abelian sheaves as
 integer modules. Apply normalized divisible-extension reduction to the split presentation 0→G→G. Its
 quotient identification identifies the adjunction unit with p. Transport the Hom bijections along

@@ -29,7 +29,6 @@ reduced differentials and the scalar extension of the stabilizing module.
 
 Source: Stacks Project, More on Algebra, Tag 07M7, first paragraph; differentials
 of tensor products and the universal property of the symmetric algebra.
-(blueprint: lem-weil-pbc-symmetric-stabilization-differentials)
 
 Proof: write S = Sym_A₁(K) and D = S tensor_A B. The universal property of
 A₁-derivations on D identifies them with a pair consisting of an A₁-derivation

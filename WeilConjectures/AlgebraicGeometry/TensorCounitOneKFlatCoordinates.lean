@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 /-! # Tensor pullback counit in one K-flat coordinate
 
 Source: Stacks Project, cohomology.tex, Tag 079U; perfect.tex, Tag 0DJA(1).
-(blueprint: lem-pc-tensor-counit-one-kflat-coordinates).
 -/
 
 @[expose] public section
@@ -142,8 +141,7 @@ N -> G. Tensoring it with P preserves quasi-isomorphisms. Naturality
 of the universal counits, the localization tensor maps, and the termwise tensor
 pullback comparison gives the same equation after precomposing with the induced
 isomorphism on derived tensor products. Cancel that isomorphism. This proves the
-equation for arbitrary G, without imposing flatness over X or any base scheme.
-(blueprint: lem-pc-tensor-counit-one-kflat-coordinates). -/
+equation for arbitrary G, without imposing flatness over X or any base scheme. -/
 theorem tensorCounit_oneKFlat_coordinates
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

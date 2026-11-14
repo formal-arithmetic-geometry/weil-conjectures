@@ -173,7 +173,6 @@ private noncomputable def flatModel_restrict {C : Type u} [SmallCategory C]
 cokernels and extensions, in the module-valued sheaf encoding.
 
 Source: Stacks Project, Modules on Sites, Tag 093U (3).
-(auxiliary; not a blueprint node)
 
 Proof: On the site C/U, take the constant ring sheaf and the equivalence between
 module-valued sheaves and modules over that ring. Its slice comparison and the

@@ -28,7 +28,6 @@ import WeilConjectures.AlgebraicGeometry.ProjectionFormulaLocality
 /-! # The quasi-coherent derived projection mate
 
 Source: Stacks Project, perfect.tex, Tag 08EU, lemma-cohomology-base-change.
-(blueprint: lem-pc-qcqs-derived-projection-mate).
 -/
 
 @[expose] public section
@@ -38,9 +37,8 @@ open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry
 
 /-- The projection mate for quasi-coherent derived objects is invertible.
-Source: Stacks Project, Tag 08EU (lemma-cohomology-base-change),
+Source: Stacks Project, Tag 08EU,
 and the fourth Hom equality in Tag 0A9Q (lemma-iso-on-RSheafHom).
-(blueprint: lem-pc-qcqs-derived-projection-mate).
 
 Proof: write pi(M,L) for the displayed mate. It is natural in both arguments
 by naturality of t, the counit, and the adjunction Hom equivalence. Restrict to

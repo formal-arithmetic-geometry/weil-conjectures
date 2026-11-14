@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.SelfTorAffineTensorSections
 
 /-! # The algebraic exterior of conormal sections and the affine model
 
-Source: Stacks Project, Tags 01R3(2), 01I6, and 0096.
-(blueprint: new-q1-self-tor-conormal-exterior-section-model). -/
+Source: Stacks Project, Tags 01R3(2), 01I6, and 0096. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -28,7 +27,6 @@ pulled-back affine conormal exterior module. This statement does not use the
 exterior sheaf or its sheafification.
 Source: Stacks Project, Tag 01R3(2); Tag 01I6, Lemmas 26.7.1 and 26.7.3(1);
 Tag 0096 for the pullback unit.
-(blueprint: new-q1-self-tor-conormal-exterior-section-model).
 Proof: Put A = Gamma(Y,U), I = ker(i).ideal(U), V = i inverse-image U,
 and B = Gamma(Z,V). The closed immersion identifies B with A/I.
 Apply affine_conormal_sections with R=A, r the identity, and I the kernel

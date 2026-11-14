@@ -33,8 +33,7 @@ The proof follows the ULift/order-isomorphism transport in the blueprint.
 
 Proof: transport the spectral restriction map along the ULift homeomorphism and the induced
 order isomorphisms on opens; these preserve covers, sheaf sections, and the adjunction unit
-at the top open, so bijectivity is preserved.
-(blueprint: lem-weil-pbc-zariski-restriction-universe-transport) -/
+at the top open, so bijectivity is preserved. -/
 theorem zariski_restriction_universe_transport
     {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (i : Z ⟶ X) [IsClosedImmersion i]

@@ -12,8 +12,7 @@ import Mathlib.Algebra.Category.ModuleCat.Products
 /-!
 # Strict-perfect coefficient packages
 
-Source: the Weil conjectures blueprint, proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package).
+Source: the Weil conjectures blueprint, proper base change, definition 1263.
 
 ## Main definitions
 
@@ -36,8 +35,7 @@ namespace SheafOfModules
 variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
 
 /-- Chosen degreewise finite-free splittings, with no chain-map condition.
-Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+Source: proper base change, definition 1263. -/
 structure StrictPerfectCoefficientPackage (R : Sheaf J RingCat.{u})
     (F : CochainComplex (SheafOfModules.{u} R) ℤ) where
   /-- Rank of the finite free term in each degree. -/
@@ -59,8 +57,7 @@ attribute [instance] CategoryTheory.module_overFunctor_preservesZero
 
 /-- Local perfectness: covering sieves admit bounded, finite-free retract models mapping
 quasi-isomorphically to the restricted complex. Bounds and ranks vary with the cover member.
-Source: Stacks, Tag 08G5, and proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+Source: Stacks, Tag 08G5, and proper base change, definition 1263. -/
 def IsLocallyStrictPerfectComplex (R : Sheaf J CommRingCat.{u})
     (K : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ) : Prop :=
@@ -74,8 +71,7 @@ def IsLocallyStrictPerfectComplex (R : Sheaf J CommRingCat.{u})
           (ComplexShape.up ℤ)).obj K, QuasiIso α
 
 /-- Perfect objects are exactly the objects represented by locally perfect complexes.
-Source: Stacks, Tag 08G5, and proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+Source: Stacks, Tag 08G5, and proper base change, definition 1263. -/
 def IsPerfectOnRingedSite (R : Sheaf J CommRingCat.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]
@@ -93,8 +89,7 @@ variable {Λ : Type u} [CommRing Λ]
 
 /-- A global coefficient package for a fixed representative. The standard finite free
 module is the module of finite tuples, with its standard basis.
-Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+Source: proper base change, definition 1263. -/
 structure StrictPerfectCoefficientPackage (F : CochainComplex (ModuleCat.{u} Λ) ℤ) where
   /-- Finite ranks, allowed to be zero. -/
   N : ℤ → ℕ
@@ -113,16 +108,14 @@ variable {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)
   (Λ : Type u) [CommRing Λ]
 
 /-- Constant presheaves of modules, with identity restriction maps.
-Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+Source: proper base change, definition 1263. -/
 def strictPerfectConstantPresheaf :
     ModuleCat.{u} Λ ⥤ PresheafOfModules.{u} ((Functor.const Cᵒᵖ).obj (RingCat.of Λ)) where
   obj M := { obj := fun _ => M, map := fun _ => ModuleCat.ofHom (LinearMap.id) }
   map f := { app := fun _ => f }
 
 /-- Constant presheaves preserve addition componentwise.
-Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package).
+Source: proper base change, definition 1263.
 Proof: evaluate the two maps at any object; both are the original sum of linear maps. -/
 theorem strictPerfectConstantPresheaf_additive :
     (strictPerfectConstantPresheaf (C := C) Λ).Additive := by
@@ -136,8 +129,7 @@ attribute [instance] strictPerfectConstantPresheaf_additive
 
 /-- The associated constant sheaf of modules over the constant ring sheaf. This applies
 module sheafification to the constant presheaf, using the ring-sheafification unit.
-Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+Source: proper base change, definition 1263. -/
 noncomputable def strictPerfectConstantSheaf :
     ModuleCat.{u} Λ ⥤ SheafOfModules.{u} ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ)) :=
   strictPerfectConstantPresheaf (C := C) Λ ⋙
@@ -145,8 +137,7 @@ noncomputable def strictPerfectConstantSheaf :
       (toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of Λ)))
 
 /-- The constant module sheaf functor is additive.
-Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package).
+Source: proper base change, definition 1263.
 Proof: the constant presheaf functor is additive componentwise. Module sheafification
 preserves finite products and the zero object, so it is additive; compose these functors. -/
 theorem strictPerfectConstantSheaf_additive : (strictPerfectConstantSheaf J Λ).Additive := by
@@ -166,8 +157,7 @@ variable {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)
   (Λ : Type u) [CommRing Λ]
 
 /-- Coordinate evaluation followed by the coefficient-ring sheafification unit is additive.
-Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package).
+Source: proper base change, definition 1263.
 Proof: addition of tuples is pointwise, so evaluation at `k` sends the sum to
 `v k + w k`. Apply preservation of addition by the ring sheafification unit at `X`. -/
 theorem strictPerfectConstantCoordinateComponent_map_add (n : ℕ) (k : Fin n)
@@ -178,8 +168,7 @@ theorem strictPerfectConstantCoordinateComponent_map_add (n : ℕ) (k : Fin n)
   exact map_add _ _ _
 
 /-- Coordinate evaluation followed by the coefficient-ring unit respects scalar multiplication.
-Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package).
+Source: proper base change, definition 1263.
 Proof: scalar multiplication of tuples is pointwise multiplication by `r`.
 The unit preserves multiplication, and restriction of scalars makes the target action
 multiplication by the image of `r` under that same unit. -/
@@ -191,8 +180,7 @@ theorem strictPerfectConstantCoordinateComponent_map_smul (n : ℕ) (k : Fin n)
   exact map_mul _ _ _
 
 /-- A coordinate component, linear for the sheafification unit on coefficient rings.
-Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+Source: proper base change, definition 1263. -/
 noncomputable def strictPerfectConstantCoordinateComponent (n : ℕ) (k : Fin n) (X : Cᵒᵖ) :
     ModuleCat.of Λ (Fin n → Λ) ⟶
       ((PresheafOfModules.restrictScalars
@@ -207,8 +195,7 @@ noncomputable def strictPerfectConstantCoordinateComponent (n : ℕ) (k : Fin n)
       map_smul' := strictPerfectConstantCoordinateComponent_map_smul J Λ n k X }
 
 /-- The coordinate components are natural.
-Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package).
+Source: proper base change, definition 1263.
 Proof: evaluate at a tuple `v`. The left side is the image of `v k` under the ring
 sheafification unit at `Y`; the right side is its image at `X` followed by restriction.
 These agree by naturality of the ring sheafification unit. -/
@@ -231,8 +218,7 @@ theorem strictPerfectConstantCoordinate_naturality (n : ℕ) (k : Fin n)
       ((toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of Λ))).naturality f) (v k)
 
 /-- A coordinate map, obtained from the constant presheaf coordinate by module sheafification.
-Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+Source: proper base change, definition 1263. -/
 noncomputable def strictPerfectConstantCoordinate (n : ℕ) (k : Fin n) :
     (strictPerfectConstantSheaf J Λ).obj (ModuleCat.of Λ (Fin n → Λ)) ⟶
       SheafOfModules.unit ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ)) :=
@@ -242,8 +228,7 @@ noncomputable def strictPerfectConstantCoordinate (n : ℕ) (k : Fin n) :
       naturality := strictPerfectConstantCoordinate_naturality J Λ n k }
 
 /-- The canonical finite-product comparison, with coordinates the sheafified projections.
-Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+Source: proper base change, definition 1263. -/
 noncomputable def strictPerfectConstantFiniteFreeComparison (n : ℕ) :
     (strictPerfectConstantSheaf J Λ).obj (ModuleCat.of Λ (Fin n → Λ)) ⟶
       ∏ᶜ fun _ : Fin n =>
@@ -251,8 +236,7 @@ noncomputable def strictPerfectConstantFiniteFreeComparison (n : ℕ) :
   Pi.lift (strictPerfectConstantCoordinate J Λ n)
 
 /-- The canonical finite-product comparison is invertible, also in rank zero.
-Source: finite-product preservation of sheafification and proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package).
+Source: finite-product preservation of sheafification and proper base change, definition 1263.
 Proof: before sheafification the finite tuple module is the product of `n` copies of the
 coefficient ring. Sheafification preserves finite products (including the empty product),
 and sheafifying the coefficient ring gives the constant ring sheaf. The displayed map is

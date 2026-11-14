@@ -40,8 +40,7 @@ Thus the locus in Z is not dense or contains a nonempty open. The noetherian
 constructibility criterion proves constructibility. Pulling back proves local
 constructibility. Quasi-compactness and quasi-separatedness make local finite
 presentation into finite presentation, as required for this descent.
-
-(blueprint: lem-sbc-section-component-locally-constructible) -/
+ -/
 theorem isLocallyConstructible_section_component {P T : Scheme.{u}} (g : P ⟶ T)
     [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g]
     (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) :

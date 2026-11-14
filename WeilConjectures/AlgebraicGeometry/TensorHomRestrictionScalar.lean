@@ -14,7 +14,6 @@ import all WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison
 /-! # Restricting a tensor-Hom transpose with prescribed scalar values
 
 Source: Stacks Project, Modules, Tag 01CN and Tag 01YB, tensor-Hom paragraph.
-(blueprint: lem-pc-tensor-hom-restriction-scalar)
 -/
 
 @[expose] public section
@@ -36,7 +35,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Transposition sends a local scalar multiple of a Hom section to multiplication
 followed by the local morphism. No coherence or ideal-power hypothesis is required.
 Source: Stacks Project, Modules, Tag 01CN, and Tag 01YB, tensor-Hom paragraph.
-(blueprint: lem-pc-tensor-hom-restriction-scalar)
 
 Proof: For W contained in U, the assumed equality says that alpha_W(a) is
 ι_W(a) times the restriction of the local morphism s. Evaluating at g gives

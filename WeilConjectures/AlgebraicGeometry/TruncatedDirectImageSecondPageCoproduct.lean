@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.TruncatedDirectImageSecondPageCoproduct
 
 /-! # The second-page coproduct comparison for lower-truncated direct image
 
-Source: Stacks Project, Tag 08DZ, the reduction using the spectral sequences of Tag 015J
-(blueprint: lem-pc-truncated-direct-image-second-page-coproduct).
+Source: Stacks Project, Tag 08DZ, the reduction using the spectral sequences of Tag 015J.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The second-page maps for a uniformly lower-truncated ambient coproduct are isomorphisms.
-Source: Stacks Project, Tag 08DZ, bounded-below spectral-sequence paragraph, and Tag 015J
-(blueprint: lem-pc-truncated-direct-image-second-page-coproduct).
+Source: Stacks Project, Tag 08DZ, bounded-below spectral-sequence paragraph, and Tag 015J.
 
 Proof: Choose representatives of the summands and their termwise coproduct. The theorem
 `derivedAmbientDirectSums` identifies the given ambient cofan with this coproduct and

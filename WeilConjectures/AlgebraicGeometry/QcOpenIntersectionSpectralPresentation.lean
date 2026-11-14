@@ -16,8 +16,7 @@ import Mathlib.AlgebraicGeometry.Properties
 /-! # Spectral presentation of intersections of quasi-compact opens
 
 Source: Stacks Project, More on Groupoids in Spaces, `equation-sections-of-intersection`;
-Topology, Tag 0A31; Properties, Tag 094L; Schemes, Tag 01KO
-(blueprint: lem-a1-qc-open-intersection-spectral-presentation).
+Topology, Tag 0A31; Properties, Tag 094L; Schemes, Tag 01KO.
 -/
 
 @[expose] public section
@@ -31,22 +30,19 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry.Scheme
 
 /-- The distinct original opens contained in the chosen member, ordered by reverse inclusion.
-Source: Stacks, `equation-sections-of-intersection`, reduction to one member
-(blueprint: lem-a1-qc-open-intersection-spectral-presentation). -/
+Source: Stacks, `equation-sections-of-intersection`, reduction to one member. -/
 abbrev qcOpenIntersectionIndex {X : Scheme.{u}} {I : Type v} (U : I → X.Opens) (i₀ : I) :=
   OrderDual {V : X.Opens // V ∈ Set.range U ∧ V ≤ U i₀}
 
 /-- The inclusion diagram on the opposite of the reverse-inclusion index.
-Source: Stacks, Topology, Tag 0A31, assertion (b)
-(blueprint: lem-a1-qc-open-intersection-spectral-presentation). -/
+Source: Stacks, Topology, Tag 0A31, assertion (b). -/
 def qcOpenIntersectionDiagram {X : Scheme.{u}} {I : Type v} (U : I → X.Opens) (i₀ : I) :
     (qcOpenIntersectionIndex U i₀)ᵒᵖ ⥤ TopCat.{u} where
   obj V := TopCat.of V.unop.val
   map f := (Opens.toTopCat X.toTopCat).map (homOfLE (leOfHom f.unop))
 
 /-- The cone of literal inclusions from the subspace intersection, without a scheme structure
-on the intersection. Source: Stacks, Topology, Tag 0A31, assertion (b)
-(blueprint: lem-a1-qc-open-intersection-spectral-presentation). -/
+on the intersection. Source: Stacks, Topology, Tag 0A31, assertion (b). -/
 def qcOpenIntersectionCone {X : Scheme.{u}} {I : Type v} (U : I → X.Opens) (i₀ : I) :
     Cone (qcOpenIntersectionDiagram U i₀) where
   pt := TopCat.of {x : X // ∀ i : I, x ∈ U i}
@@ -61,7 +57,7 @@ def qcOpenIntersectionCone {X : Scheme.{u}} {I : Type v} (U : I → X.Opens) (i�
 
 /-- Cofinal spectral presentation of a directed intersection of quasi-compact opens.
 Source: Stacks, `equation-sections-of-intersection`; Topology, Tag 0A31; Properties, Tag 094L;
-Schemes, Tag 01KO (blueprint: lem-a1-qc-open-intersection-spectral-presentation).
+Schemes, Tag 01KO.
 
 Proof, following steps 1--5 of the node:
 1. The index is a subset of the opens of X. Y belongs to it and is least in reverse inclusion.

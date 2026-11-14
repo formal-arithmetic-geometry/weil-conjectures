@@ -31,7 +31,6 @@ set_option maxHeartbeats 800000 in
 /-- Restriction between arbitrary opens on the homology of a fixed resolution's
 section complexes, before the map to a cohomology sheaf.
 Source: Stacks Project, Equation 20.7.1.1 (Tag 01E2), Remark 20.14.2 (Tag 01FB).
-(blueprint: new-restricted-resolution-open-cohomology)
 
 Proof: Put j = homOfLE e. Restrict R.comparison along j, compose with the
 canonical restriction-composition isomorphism, and then R'.comparison inverse.

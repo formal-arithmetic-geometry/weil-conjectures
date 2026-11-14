@@ -22,7 +22,6 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 /-! # Local cohomology calculation for a strictly perfect tensor
 
 Source: Stacks Project, Tags 0DJQ, 08C4, 06YH and 01Y0.
-(blueprint: lem-pc-strict-perfect-tensor-local-cohomology).
 -/
 
 @[expose] public section
@@ -80,7 +79,6 @@ private theorem coherent_homology_of_coherent_terms (Y : Scheme.{u})
 cohomology, with the sum of the two termwise degree intervals as a vanishing interval.
 Source: Stacks Project, perfect.tex, Tag 0DJQ, local tensor calculation in Lemma 36.27.2;
 cohomology.tex, Tags 08C4 and 06YH; coherent.tex, Tag 01Y0.
-(blueprint: lem-pc-strict-perfect-tensor-local-cohomology).
 
 Proof: Restrict G termwise to U and transport through Modules.overEquiv U to the
 open subscheme. Exact restriction preserves its bounds [c,d] and coherence of its

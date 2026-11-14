@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.TorsionControlledAlgebraizationDescent
 
 /-! A bridge from componentwise annihilation to torsion-controlled algebraization.
 Source: Stacks Project, Tag 0889(1), after Remark 0888.
-(blueprint: new-stage3-torsion-controlled-easy-algebraization-bridge).
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ namespace AlgebraicGeometry
 /-- The affine componentwise annihilation condition is sufficient for a
     torsion-controlled coherent algebraization.
 
-Source: Stacks Project, Tag 0889(1), construction after Remark 0888
-(blueprint: new-stage3-torsion-controlled-easy-algebraization-bridge).
+Source: Stacks Project, Tag 0889(1), construction after Remark 0888.
 
 Proof: apply the affine algebraization construction on a finite affine cover.
 Remark 0888 identifies the componentwise annihilation hypothesis with the

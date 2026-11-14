@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 /-! # Finite local constancy under refinement
 
 Source: Stacks Project, Tags 095A, 03Q1 (3), and 03SI.
-(blueprint: lem-weil-pbc-refinement-preserves-finite-lisse).
 -/
 
 @[expose] public section
@@ -68,7 +67,6 @@ private theorem constant_over_iff {X : Scheme.{u}} (U : X.Etale)
 open CategoryTheory.Limits Opposite in
 /-- Inverse image along any scheme morphism preserves local constancy of sheaves of sets.
 Source: Stacks Project, Tag 095A (Lemma 59.64.2), using Modules on Sites, Tag 093R.
-(blueprint: lem-weil-pbc-refinement-preserves-finite-lisse).
 
 Proof: choose an etale cover of X trivializing F and base change it along g. Its members
 are etale over Y and jointly surjective, so they form an etale cover of Y. Restriction
@@ -136,7 +134,6 @@ open CategoryTheory.Limits Opposite in
 /-- Local constancy descends along a universal homeomorphism.
 Source: Stacks Project, Tags 03SI and 04DZ; compare the cover construction in
 `WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism`.
-(blueprint: lem-weil-pbc-refinement-preserves-finite-lisse).
 
 Proof: take a trivializing etale cover of the inverse image of F on Y. Base change along
 p is an equivalence of etale categories (04DZ); choose for each member an etale X-scheme
@@ -249,7 +246,6 @@ this equivalence; coverings and constant objects correspond, so a^*F is locally 
 Every geometric point of Z lifts uniquely to P because p is a surjective closed immersion
 and fields kill its defining ideal. The stalk comparison therefore also shows that all
 geometric stalks of a^*F are finite. This proves the assertion for each i.
-(blueprint: lem-weil-pbc-refinement-preserves-finite-lisse)
 -/
 theorem refinement_preserves_finite_lisse
     (X : Scheme.{u})

@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 /-! # Naturality of the localized comparison into derived pullback
 
 Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8.
-(blueprint: lem-pc-stalk-comparison-pullback-naturality).
 -/
 
 @[expose] public section
@@ -46,7 +45,6 @@ variable [∀ Y : Scheme.{u},
 Its construction uses the invertible pullback counit on the representative, the
 specified tensor-stalk isomorphism, and the localization comparison; no target
 complex or morphism to a target is involved.
-(blueprint: lem-pc-stalk-comparison-pullback-naturality)
 -/
 def comparisonIntoPullback (z : X')
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
@@ -93,8 +91,7 @@ e to C; functoriality of extension and the preceding adjunction equation yield
 exactly the square below. No isomorphism assertion about localizedComparison is
 used, and no flatness over R or Tor-independence of the square is required.
 Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8; Cohomology,
-Tag 06YB (K-flat stalks), and Tag 06Y6 (derived tensor functoriality).
-(blueprint: lem-pc-stalk-comparison-pullback-naturality). -/
+Tag 06YB (K-flat stalks), and Tag 06Y6 (derived tensor functoriality). -/
 theorem comparisonIntoPullback_naturality (z : X')
     (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (hP : P.IsKFlatTensor) (hQ : Q.IsKFlatTensor)

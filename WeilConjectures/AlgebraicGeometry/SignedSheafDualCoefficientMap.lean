@@ -25,8 +25,7 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
   {R : Sheaf J CommRingCat.{u}}
 
 /-- Postcomposition commutes with signed precomposition.
-Source: Stacks Project, Tag 0A8X. 
-(blueprint: new-g3-signed-sheaf-dual-coefficient-map)
+Source: Stacks Project, Tag 0A8X.
 -/
 theorem signedSheafDualCoefficientMap_comm
     (L : CochainComplex (SheafOfModules.{u}
@@ -42,8 +41,7 @@ theorem signedSheafDualCoefficientMap_comm
     SheafOfModules.homObjMap_comp_homObjMap, Category.id_comp, Category.comp_id]
 
 /-- The coefficient map is actual postcomposition in every degree.
-Source: Stacks Project, Tag 0A8X.
-(blueprint: new-g3-signed-sheaf-dual-coefficient-map). -/
+Source: Stacks Project, Tag 0A8X. -/
 noncomputable def signedSheafDualCoefficientMap
     (L : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)

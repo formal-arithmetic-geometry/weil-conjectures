@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 /-! # The section comparison for a short complex
 
 Source: Stacks Project, Tags 015B and 01E4.
-(blueprint: lem-pc-short-complex-section-comparison)
 -/
 
 @[expose] public section
@@ -206,7 +205,6 @@ private noncomputable def kernel_homologyπ_iso_image
 canonical sheafification comparison of a short complex to be invertible on sections.
 Source: Stacks Project, Tag 015B (degree-zero and degree-one exact sequence),
 and Tag 01E4 (the canonical cocycle-to-sheaf-class comparison).
-(blueprint: lem-pc-short-complex-section-comparison)
 
 Proof: Put Z = ker(S.g), B = im(S.f), and L = ker(S.f). Restrict to V, which
 preserves kernels, images and homology because open restriction is exact. In

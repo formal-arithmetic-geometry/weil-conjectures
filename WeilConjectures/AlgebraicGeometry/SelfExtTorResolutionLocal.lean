@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperti
 
 /-! # Local models of augmented self-Ext/self-Tor resolutions
 
-Source: Stacks Project, Tags 0BQY, 068C and 08BS.
-(blueprint: new-j3-self-ext-tor-local). -/
+Source: Stacks Project, Tags 0BQY, 068C and 08BS. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -33,7 +32,6 @@ and K-injectivity for the restriction of an augmented K-injective resolution.
 
 Source: Stacks Project, Tag 0BQY (quotient Koszul computation), Tag 068C (affine
 sheafification), and Tag 08BS (restriction of K-injective complexes).
-(blueprint: new-j3-self-ext-tor-local).
 
 Proof: Put A = Gamma(Y,U), I = ker(i)(U), and choose the finite Koszul-regular sequence
 f supplied by hU. Its Koszul complex is a bounded finite-free projective resolution

@@ -16,7 +16,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine supported zero detection
 Source: Stacks Project, Tag 0A9A, affine case.
-(blueprint: lem-pc-supported-perfect-detector-affine).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry
 /-- The affine Koszul argument, including the empty scheme, detects zero objects supported
 on a closed subset when an affine cover has at most one member.
 Source: Stacks Project, Tag 0A9A, affine paragraph, and Tag 09IR.
-(blueprint: lem-pc-supported-perfect-detector-affine).
 
 Proof:
 1. If the cover is empty, its union is empty, so X has no points. Every module sheaf

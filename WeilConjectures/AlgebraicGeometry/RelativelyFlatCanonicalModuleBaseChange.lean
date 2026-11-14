@@ -68,7 +68,6 @@ pullback comparison itself is invertible.
 
 Source: Stacks Project, Tag 0A1D; blueprint `lemma-coherent-base-change-invertible-sheaves--2`,
 Steps 1--5, and `lemma-coherent-base-change-invertible-sheaves--2`.
-(blueprint: lemma-coherent-base-change-invertible-sheaves--2).
 
 Proof: Take the left-derived counit of tensor pullback at G[0] and compose it with
 singleMapHomologicalComplex to obtain c. This is the comparison characterized by

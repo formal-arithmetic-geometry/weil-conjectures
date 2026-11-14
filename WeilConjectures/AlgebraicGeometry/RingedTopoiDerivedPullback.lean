@@ -27,8 +27,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-!
 # Derived pullback on ringed topoi
 
-Source: Stacks Project, Cohomology on Sites, Tag 06YY, lemma-derived-base-change
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Cohomology on Sites, Tag 06YY, lemma-derived-base-change.
 -/
 
 @[expose] public section
@@ -307,7 +306,7 @@ private theorem isKFlat_inverseImage
 /-- A morphism of ringed topoi admits an exact derived pullback computed on
 K-flat complexes with flat terms.  The functor `uStar` is the module-sheaf
 pullback `M ↦ S ⊗_{u⁻¹R} u⁻¹M` attached to the morphism of ringed topoi.
-Source: Stacks Project, Tag 06YY (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 06YY.
 The proof first makes termwise pullback an exact functor on homotopy categories.
 It then proves that pullback preserves quasi-isomorphisms between K-flat
 complexes with flat terms, using exactness of inverse image and change of rings.

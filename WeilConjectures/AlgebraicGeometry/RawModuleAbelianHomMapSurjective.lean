@@ -26,7 +26,6 @@ namespace AlgebraicGeometry.Etale
 set_option backward.defeqAttrib.useBackward true in
 /-- Surjective of the raw scalar comparison on underlying groups.
 Source: Stacks Project, Tag 03FD, lemma-cohomology-modules-abelian-agree.
-(blueprint: lem-sbc-raw-module-abelian-hom-map-surjective).
 
 Proof: Fix an abelian derived class. Resolve A.hom^*G by injective module
 sheaves. By Tag 03FD the underlying abelian terms are acyclic for evaluation on

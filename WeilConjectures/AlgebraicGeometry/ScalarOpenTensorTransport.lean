@@ -27,8 +27,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Pull a section over U to the whole source of a morphism whose image lies in U.
 Source: Stacks Project, Tag 0096. This is the specified adjunction unit followed
-by restriction, with no choice of a section.
-(blueprint: lem-sc-scalar-open-tensor-transport). -/
+by restriction, with no choice of a section. -/
 def tensorPullbackOpenSection {X Y : Scheme.{w}} (a : Y ⟶ X) (M : X.Modules)
     (U : X.Opens) (hTop : ⊤ ≤ a ⁻¹ᵁ U) (s : M.val.obj (op U)) :
     ((tensorPullback a).obj M).val.obj (op ⊤) :=
@@ -38,7 +37,6 @@ def tensorPullbackOpenSection {X Y : Scheme.{w}} (a : Y ⟶ X) (M : X.Modules)
 /-- On an open immersion, tensor pullback transports all tensor sections, also
 when its two coefficients are identified with other modules.
 Source: Stacks Project, Tags 0096, 0097 and 01CD.
-(blueprint: lem-sc-scalar-open-tensor-transport).
 
 Proof: The unit of the restriction adjunction on an open contained in the
 image is an isomorphism. Uniqueness of left adjoints identifies this unit

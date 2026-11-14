@@ -26,7 +26,6 @@ geometric stalk germs is invertible.
 Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-arbitrary-curve-cd/
 lem-weil-pbc-zero-dimensional-cohomology.md, both proof paragraphs;
 Stacks Project, Tags 00KH, 00FV, 054M, 03QO, 03SI and 03Q1.
-(blueprint: zero-dimensional-etale-cohomology-iso).
 
 Proof:
 1. `lem-weil-pbc-finite-type-dim-zero-artinian` gives a finite discrete space of

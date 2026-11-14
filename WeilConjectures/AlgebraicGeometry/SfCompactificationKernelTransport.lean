@@ -23,8 +23,7 @@ namespace AlgebraicGeometry.Etale
 /-- Transport the kernel adjunction through any compactification, retaining its trace formula.
 
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, G7 and canonical proper comparison
-(auxiliary; not a blueprint node).
+thm-amb-p1-adjunction.proof.md, G7 and canonical proper comparison.
 
 Proof: Let E be rightDerivedLowerShriekIso A c. Transport adj₀ along E.symm.
 Its counit at K is E at B tensor f*K followed by the original kernel counit.

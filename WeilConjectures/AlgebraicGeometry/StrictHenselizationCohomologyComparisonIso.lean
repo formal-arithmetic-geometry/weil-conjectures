@@ -84,7 +84,6 @@ private theorem isIso_globalHomology_of_data
 /-- The cohomology comparison in the unrestricted stalk formula is invertible.
 Source: Stacks Project, Tag 03Q9; this intermediate packages the compatibility of the
 strict-local base-change mate, Leray comparison, and exact inverse-image identifications.
-(blueprint: lem-weil-pbc-unrestricted-strict-henselization-stalk-comparison).
 
 Proof: apply strict-local base-change on global homology to the single complex F[0].
 The displayed comparison is the composite of four maps: global sections of the exact

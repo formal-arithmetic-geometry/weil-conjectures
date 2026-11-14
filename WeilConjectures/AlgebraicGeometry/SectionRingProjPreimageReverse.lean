@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Reverse implication for the section-ring chart formula
 
-Source: Stacks Project, Constructions, Tag 01N8; Properties, Tag 01PZ
-(blueprint: lem-sc-ample-proj-canonical-map-preimage-reverse).
+Source: Stacks Project, Constructions, Tag 01N8; Properties, Tag 01PZ.
 -/
 
 @[expose] public section
@@ -121,8 +120,7 @@ private theorem exists_sectionRing_chart {X : Scheme.{v}} (L : X.Modules) [L.IsI
 /-- If a homogeneous section is nonvanishing at a point, the point lies in the inverse
 image of its basic open. Choose a positive-degree denominator chart through the point;
 the fraction identity makes the corresponding quotient a unit in the local ring.
-Source: Stacks Project, Constructions, Tag 01N8; Properties, Tag 01PZ
-(blueprint: lem-sc-ample-proj-canonical-map-preimage-reverse).
+Source: Stacks Project, Constructions, Tag 01N8; Properties, Tag 01PZ.
 
 Proof: write y = f(x). The homogeneous prime y does not contain the irrelevant
 ideal, so choose a positive-degree homogeneous t, of degree e, outside that prime.

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.TensorModelRestrictionAdjunction
 /-! # Transposing a supplied augmented complex after open restriction
 
 Source: Stacks Project, Tags 08DJ, 08DL and 08EH.
-(blueprint: lem-sc-tensor-roof-transposition).
 -/
 
 @[expose] public section
@@ -79,7 +78,6 @@ no affine hypothesis, quasi-coherence, or existence of a perfect roof is asserte
 
 Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DL; perfect.tex, Tag 08EH,
 construction of the two maps and the restriction identity.
-(blueprint: lem-sc-tensor-roof-transposition).
 
 Proof:
 1. The unit-tensor-Hom adjunction on U and the canonical restriction comparison

@@ -18,7 +18,7 @@ public import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
 # Extension by zero and restriction on a localized site
 
 Source: literature/stacks-project/sites-modules.tex, Modules on Sites, Section 03DH
-and Lemmas 03DI--03DJ (blueprint: lem-weil-pbc-site-restriction-injectives).
+and Lemmas 03DI--03DJ.
 -/
 
 @[expose] public section
@@ -33,7 +33,7 @@ namespace CategoryTheory
 and is itself exact.
 
 Source: literature/stacks-project/sites-modules.tex, Modules on Sites, Section 03DH
-and Lemmas 03DI--03DJ (blueprint: lem-weil-pbc-site-restriction-injectives).
+and Lemmas 03DI--03DJ.
 
 Proof:
 1. Use the localized topology on `Over W`: a covering is one whose underlying
@@ -44,9 +44,9 @@ Proof:
    `Over.forget W`. This is `lem-weil-pbc-site-restriction-adjunction` and gives
    the natural adjunction between the displayed extension by zero and restriction.
 3. Apply `site_extensionByZero_exact`
-   (`lem-weil-pbc-site-extension-by-zero-exact`) to obtain one zero-morphism
+   to obtain one zero-morphism
    preservation witness and preservation of every short exact sequence on the slice.
-4. Apply `siteRestriction_exact` (`lem-weil-pbc-site-restriction-exact`) to each
+4. Apply `siteRestriction_exact` to each
    short exact sequence on the original site. Combine the three conclusions.
 -/
 theorem siteRestriction_injectives

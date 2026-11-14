@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.ThickeningIntegral
 
 Source: smooth purity blueprint, `lem-weil-pbc-finite-pushforward-generic-constructible`,
 finite-algebra calculation.
-(blueprint: lem-weil-pbc-split-reduction-spectrum-components).
 -/
 
 @[expose] public section
@@ -57,7 +56,7 @@ private theorem universalHomeomorphism_of_thickening
 /-- Lift the factors of a product decomposition through a nilradical reduction.
 
 Source: smooth purity blueprint, `lem-weil-pbc-finite-pushforward-generic-constructible`,
-finite-algebra calculation. (blueprint: lem-weil-pbc-split-reduction-spectrum-components).
+finite-algebra calculation.
 Proof: Identify the spectrum of the finite product with the coproduct of factor spectra,
 transport it across the supplied algebra equivalence, and lift the resulting clopen pieces
 through the surjective nilradical closed immersion. Restrict the immersion to each lifted

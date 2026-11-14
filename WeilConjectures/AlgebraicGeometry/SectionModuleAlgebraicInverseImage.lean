@@ -950,8 +950,7 @@ pushforward. The lifted module-adjunction unit preserves scalar multiplication;
 compose with the linear section-equivalence counit. Thus the source graph
 identity implies equality of the transposes and hence of the target maps.
 Evaluating those maps gives all seven graph fields. Choose the constructed
-module functor itself, with the identity comparison isomorphism.
-(auxiliary; not a blueprint node) -/
+module functor itself, with the identity comparison isomorphism. -/
 theorem exists_sectionModuleAlgebraicInverseImage {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj S] [IsCommMonObj S]

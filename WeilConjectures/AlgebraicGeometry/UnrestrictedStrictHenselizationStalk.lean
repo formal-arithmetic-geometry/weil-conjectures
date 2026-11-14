@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationCohomologyComparison
 /-!
 # Unrestricted strict-henselization stalk formula
 
-Source: Stacks Project, Theorem 59.53.1, Tag 03Q9, first assertion
-(blueprint: lem-weil-pbc-unrestricted-strict-henselization-stalk).
+Source: Stacks Project, Theorem 59.53.1, Tag 03Q9, first assertion.
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ The germ map `r` is specified by its neighbourhood components; its existence and
 are supplied by `existsUnique_strictHenselizationStalkRestriction`. The canonical map is
 `r ≫ strictHenselizationCohomologyComparison`, with target the cohomology of the inverse
 image along the first projection of the strict-local base change.
-Source: Stacks Project, Tag 03Q9, first assertion and proof
-(blueprint: lem-weil-pbc-unrestricted-strict-henselization-stalk).
+Source: Stacks Project, Tag 03Q9, first assertion and proof.
 
 Proof:
 1. Choose the unique germ restriction supplied by

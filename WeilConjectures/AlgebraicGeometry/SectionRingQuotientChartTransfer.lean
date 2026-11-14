@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.SectionRingChartCrossMultiplication
 /-! # Verification of section-ring quotients on a second chart
 
 Source: Stacks Project, Constructions, Tags 01N8 and 01NK.
-(blueprint: lem-sc-section-ring-quotient-chart-transfer).
 -/
 
 @[expose] public section
@@ -64,7 +63,6 @@ private theorem sectionRing_power_generator {X : Scheme.{v}} (L : X.Modules)
 /-- The coefficient equation on the chosen chart determines all other chart equations.
 Source: Stacks Project, Constructions, Tag 01N8, proof, comparison on intersecting charts;
 Tag 01NK, proof, passing between different positive degrees.
-(blueprint: lem-sc-section-ring-quotient-chart-transfer).
 
 Proof: Work locally on U where L has a basis z, and write s = b z^d and t = c z^e.
 Since s generates L^{tensor d}, b is a unit. The coefficient equation says the map on

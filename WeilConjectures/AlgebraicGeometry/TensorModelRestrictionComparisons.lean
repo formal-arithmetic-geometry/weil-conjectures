@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedRestrictionTensorHomCoherence
 /-! # Coherent tensor-model comparisons under open restriction
 
 Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DL.
-(blueprint: lem-sc-tensor-model-restriction-comparisons).
 -/
 
 @[expose] public section
@@ -93,7 +92,6 @@ private theorem transport_model_comparisons
 -- Canonical representative coherence requires substantial elaboration.
 /-- Coherent tensor-model and RHom object comparisons under open restriction.
 Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DL, and Tag 06YH.
-(blueprint: lem-sc-tensor-model-restriction-comparisons).
 
 Proof: compute tensor with the K-flat P using the natural localization tensor
 comparison. Apply tensor symmetry and eA to obtain c. Restrict P, which remains

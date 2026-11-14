@@ -16,7 +16,6 @@ import WeilConjectures.FieldTheory.CommonExtensionFields
 # Testing geometric irreducibility of a subset
 
 Source: Stacks Project, Tags 054P, 020J and 038I.
-(blueprint: lem-sbc-subset-geometric-irreducibility)
 -/
 
 @[expose] public section
@@ -51,8 +50,7 @@ subset. The latter projection is surjective, being a base change of a spectrum m
 fields. Its continuous image is therefore exactly the desired subset and is irreducible.
 This proves nonemptiness as well. No closed subscheme structure is needed, and when A is
 empty the hypothesis cannot hold.
-
-(blueprint: lem-sbc-subset-geometric-irreducibility) -/
+ -/
 theorem isIrreducible_preimage_of_isSepClosed_extension {k Ω : Type u}
     [Field k] [Field Ω] [Algebra k Ω] [IsSepClosed Ω]
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k))

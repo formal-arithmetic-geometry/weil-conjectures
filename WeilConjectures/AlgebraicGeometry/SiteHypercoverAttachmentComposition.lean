@@ -9,9 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.SiteHypercoverAttachmentOperator
 
 /-! # Composition of explicit attachment operators
 
-Source: Stacks Project, Tag 0DAV (lemma-hypercovering-object), construction of the
+Source: Stacks Project, Tag 0DAV, construction of the
 extension and the final simplicial composition check; Tag 0DAU (lemma-split).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ private theorem transport_attachment_equality
 /-- The explicitly constructed attachment operators compose contravariantly.
 Source: Stacks Project, Tag 0DAV, final paragraph of lemma-hypercovering-object;
 expanded by steps 3 and 4 of lem-weil-pbc-site-hypercover-finite-extension.
-(auxiliary; not a blueprint node).
 
 Proof: Work in normalized coordinates in the old degrees. An old summand has label
 `(r,σ,i)` and normalization component `e_(σ,i)`. Factor the composite of an ordinal

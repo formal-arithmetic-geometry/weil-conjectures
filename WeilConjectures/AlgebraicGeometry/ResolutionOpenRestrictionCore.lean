@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.NonvanishingGeneratingLocus
 import WeilConjectures.AlgebraicGeometry.ResolutionOpenRestrictionNatural
 
 /-! # The fixed comparison commutes with restriction to the scalar nonvanishing open.
-Source: Stacks Project, Tags 01E1 and 01E4.
-(blueprint: lem-pc-resolution-open-restriction-core). -/
+Source: Stacks Project, Tags 01E1 and 01E4. -/
 
 @[expose] public section
 universe u
@@ -39,7 +38,6 @@ private theorem unit_nonvanishing_basicOpen (Y : Scheme.{u}) (b : Γ(Y, ⊤)) :
 
 /-- The fixed comparison commutes with restriction to the scalar nonvanishing open.
 Source: Stacks Project, Tags 01E1 and 01E4.
-(blueprint: lem-pc-resolution-open-restriction-core).
 
 Proof: Restrict the resolution again to the inverse image of D(a). For the tensor unit the stalk
 generator identifies nonvanishing with the basic open of the pulled back scalar. Pullback of

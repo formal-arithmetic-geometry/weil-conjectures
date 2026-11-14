@@ -125,7 +125,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Evaluation at one identifies homotopy classes of maps from the structure sheaf
 in degree zero with maps from the global sections ring in degree zero.
 Source: Stacks Project, Tag 09M1, proof, first paragraph, and Tag 0B6A.
-(blueprint: lem-pc-structure-sheaf-homotopy-global-sections).
 Proof: For a complex J, a chain map from O_X[0] is an O_X-linear morphism
 O_X to J^0 whose composite with d^0 is zero. Evaluate at one on the total open.
 The inverse takes a global cycle z to the morphism whose value on an open U at

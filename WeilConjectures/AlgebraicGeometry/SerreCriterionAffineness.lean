@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.QuasiCompactH1Zero
 /-!
 # Serre's criterion for affineness
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.3.2, Tag 01XG
-(blueprint: pqf-lem-serre-criterion).
+Source: Stacks Project, Cohomology of Schemes, Lemma 30.3.2, Tag 01XG.
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ namespace AlgebraicGeometry.Scheme
 /-- A quasi-compact, quasi-separated scheme is affine if the first cohomology of every
 quasi-coherent ideal sheaf of finite type vanishes. Quasi-coherent ideal sheaves are
 `X.IdealSheafData`, and `I.toModules` is their associated submodule of `𝒪_X`.
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.3.2, Tag 01XG
-(blueprint: pqf-lem-serre-criterion).
+Source: Stacks Project, Cohomology of Schemes, Lemma 30.3.2, Tag 01XG.
 
 Proof:
 1. By `lemma-nagata-ideal-directed-union-finite-type` (Stacks Tag 01PG), every

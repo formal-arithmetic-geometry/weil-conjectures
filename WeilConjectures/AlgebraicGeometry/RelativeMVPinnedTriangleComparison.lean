@@ -54,7 +54,6 @@ about strict representatives of any of its components.
 
 Source: Stacks Project, Cohomology, Tags 08BV, 08HZ and 08HY; perfect.tex, Tag 0DJ9,
 the induction diagram.
-(blueprint: lem-pc-relative-mv-pinned-triangle-comparison).
 
 Proof: Use the two functorial restriction triangles of Tag 08BV, on X and on the
 inverse-image cover of X'. Apply Lg* Rf* and Rf'* as triangulated functors, as in

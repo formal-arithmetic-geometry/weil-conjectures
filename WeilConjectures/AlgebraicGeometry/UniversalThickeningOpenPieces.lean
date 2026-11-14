@@ -12,8 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.UniversalFirstOrderThickening
 # Open pieces of universal first order thickenings
 
 Source: Stacks Project, More on Morphisms, proof of Lemma 37.7.1 (Tag 04F3),
-the general remarks preceding the affine case
-(blueprint: lem-weil-pbc-universal-thickening-open-pieces).
+the general remarks preceding the affine case.
 -/
 
 @[expose] public section
@@ -53,8 +52,7 @@ In the first clause, for any structure morphism `b : T' ⟶ X`, the restricted s
 morphism is `W'.ι ≫ b`; the source is over `X` by composition. The equality on affine
 opens expresses restriction of the defining ideal sheaf, in Mathlib's ideal-sheaf data.
 
-Source: Stacks Project, proof of Lemma 37.7.1 (Tag 04F3), general remarks
-(blueprint: lem-weil-pbc-universal-thickening-open-pieces).
+Source: Stacks Project, proof of Lemma 37.7.1 (Tag 04F3), general remarks.
 
 Proof:
 1. Apply lem-weil-pbc-thickening-open-restriction to `iT` and `W'`, with the whole

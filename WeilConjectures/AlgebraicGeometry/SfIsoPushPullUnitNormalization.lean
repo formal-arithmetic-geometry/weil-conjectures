@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.SfP1IntegralTransportData
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, first triangle and canonical comparison maps;
 Stacks Project, Tags 03D7, 03D8, 015F and 09T5.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -210,7 +209,6 @@ private theorem exact_unit_comp
 /-- The concrete geometric cancellation `pushPull` is inverse to the canonical derived unit.
 Source: blueprint latest, thm-amb-p1-adjunction.proof.md, first triangle;
 Stacks Project, Tags 03D7, 03D8, 015F and 09T5.
-(auxiliary; not a blueprint node).
 
 Proof:
 1. Work on ordinary module sheaves. Put L = i*, R = i_*, V = (i.inv)* and U = (i.inv)_*.

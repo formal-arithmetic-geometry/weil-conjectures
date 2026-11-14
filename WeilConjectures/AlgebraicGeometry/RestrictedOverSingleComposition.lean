@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.RestrictedOverSingleData
 /-! # Triangle composition of restricted fixed-coefficient single complexes
 
 Source: Stacks Project, Tags 09Z1 and 0EZM, restriction of fixed coefficients.
-(blueprint: lem-sbc-restricted-over-single-composition).
 -/
 
 @[expose] public section
@@ -172,7 +171,6 @@ private lemma restricted_single_iso_hom {W S : Scheme.{u}} (k : W ⟶ S)
 set_option backward.isDefEq.respectTransparency true in
 /-- Composition law for a triangle of fixed-coefficient restricted single complexes.
 Source: Stacks Project, Tags 09Z1 and 0EZM, canonical fixed-coefficient comparisons.
-(blueprint: lem-sbc-restricted-over-single-composition).
 
 Proof: Substitute ha to replace the third arrow by g followed by f. Expand the
 three explicit transition homs. The second pullback projections satisfy the

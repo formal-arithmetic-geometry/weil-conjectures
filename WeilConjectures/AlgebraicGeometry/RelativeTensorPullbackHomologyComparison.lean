@@ -21,7 +21,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 Source: Stacks Project, Tag 08EV, second displayed equality;
 Cohomology, Lemma 20.27.4 (Tag 08DE).
-(blueprint: lem-pc-relative-tensor-pullback-homology-comparison)
 -/
 
 @[expose] public section
@@ -116,8 +115,7 @@ P tensor f-inverse F[0]. Exact restriction of scalars and the exact forgetful
 functor to abelian sheaves commute with homology. Finally, the isomorphism
 Q(K) -> E transports the derived tensor and its homology. The construction
 uses no chosen arbitrary derived object and works also for zero modules and
-empty schemes.
-(blueprint: lem-pc-relative-tensor-pullback-homology-comparison) -/
+empty schemes. -/
 theorem relativeTensorPullback_homology_comparison
     {X S : Scheme.{u}} (f : X ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

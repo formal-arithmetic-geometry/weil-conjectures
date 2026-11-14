@@ -22,7 +22,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Extension of a supported perfect object from an affine open
 
 Source: Stacks Project, Tags 08DP, 08DF and 0A9A.
-(blueprint: lem-pc-supported-open-extension).
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 /-- A perfect quasi-coherent object supported on a globally closed subset of an affine
 open has a perfect quasi-coherent extension with the extension-by-zero Hom formula.
 Source: Stacks Project, Tags 08DP, 08DF and 0A9A, supported Koszul construction.
-(blueprint: lem-pc-supported-open-extension).
 
 Proof: Take exact extension by zero along V, after the inverse of Modules.overEquiv V,
 and derive this exact composite termwise. Call its value on B A. The derived adjunction

@@ -15,7 +15,6 @@ public import WeilConjectures.AlgebraicGeometry.SfP1SupportedExtMapData
 The self-product map, coefficient comparisons, supported class, and trace are
 constructed from the canonical derived functors. No integral identity is used.
 Source: blueprint latest, thm-amb-p1-adjunction.proof.md, coordinate comparisons.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -32,8 +31,7 @@ namespace AlgebraicGeometry.Etale.SfP1Transport
 
 /-- Compose the inverse coefficient comparison with projection exchange.
 Keeping this composition abstract prevents expansion of a concrete coefficient iso.
-Source: the intermediate comparison in the diagonal integral transport.
-(auxiliary; not a blueprint node). -/
+Source: the intermediate comparison in the diagonal integral transport. -/
 @[irreducible]
 def middleComposite
     {C D E T : Type*} [Category C] [Category D] [Category E] [Category T]
@@ -45,8 +43,7 @@ def middleComposite
 /-- A trace transported through forget-supports and an inverse line comparison.
 Source: the ordered factors of the explicit projective-line trace construction.
 Keeping the categorical composition polymorphic prevents repeated normalization
-of its concrete shifted coefficient objects.
-(auxiliary; not a blueprint node). -/
+of its concrete shifted coefficient objects. -/
 @[irreducible]
 def traceComposite
     {D E : Type*} [Category D] [Category E]
@@ -181,8 +178,7 @@ section
 attribute [local irreducible] ordinaryFinitePushforward
 
 /-- Transport of the supported source, before applying any Ext representative.
-Source: blueprint thm-amb-p1-adjunction.proof.md, the supported diagonal morphism.
-(auxiliary; not a blueprint node). -/
+Source: blueprint thm-amb-p1-adjunction.proof.md, the supported diagonal morphism. -/
 @[irreducible]
 def diagonalLift :
     (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (TraceDiagonalDatum.diagonal f)).obj
@@ -231,8 +227,7 @@ def diagonalClass (hS : IsUnit (N : Γ(S, ⊤)))
     (coefficientComparison A N hA t f i hi hS).hom
 
 /-- Direct-image composition and inverse-image/direct-image cancellation along i.
-Source: the explicit trace construction, before the final trace arrow is inserted.
-(auxiliary; not a blueprint node). -/
+Source: the explicit trace construction, before the final trace arrow is inserted. -/
 @[irreducible]
 def presentationTrace (B : DerivedCategoryModule A (ProjectiveLine S)) :
     (ordinaryFinitePushforward A f).obj ((ordinaryFinitePullback A i.hom).obj B) ⟶
@@ -246,8 +241,7 @@ def presentationTrace (B : DerivedCategoryModule A (ProjectiveLine S)) :
 omit [Finite A] [IsProper f] in
 /-- The named comparison retains the original order of direct-image factors.
 Source: the explicit trace formula and associativity of composition.
-Proof: unfold the two-factor comparison and reassociate with the final arrow.
-(auxiliary; not a blueprint node). -/
+Proof: unfold the two-factor comparison and reassociate with the final arrow. -/
 theorem presentationTrace_assoc
     (B : DerivedCategoryModule A (ProjectiveLine S))
     {K : DerivedCategoryModule A S}
@@ -279,8 +273,7 @@ def trace (hS : IsUnit (N : Γ(S, ⊤)))
     τ (constantUnit A S).hom
 
 /-- The concrete trace-diagonal datum transported across the specified isomorphism.
-Source: the supported diagonal construction and transported trace of P1 adjunction.
-(auxiliary; not a blueprint node). -/
+Source: the supported diagonal construction and transported trace of P1 adjunction. -/
 @[irreducible]
 def datum (hS : IsUnit (N : Γ(S, ⊤)))
     (τ : ordinaryFiniteP1SplittingTarget A N hA S ⟶ ordinaryFiniteUnit A S)
@@ -294,8 +287,7 @@ def datum (hS : IsUnit (N : Γ(S, ⊤)))
     diagonalClass := diagonalClass A N hA t f i hi hS κ }
 
 /-- The class field of the concrete datum is the constructed supported class.
-Source: the explicit datum constructor.
-(auxiliary; not a blueprint node). -/
+Source: the explicit datum constructor. -/
 theorem datum_diagonalClass (hS : IsUnit (N : Γ(S, ⊤)))
     (τ : ordinaryFiniteP1SplittingTarget A N hA S ⟶ ordinaryFiniteUnit A S)
     (κ : Ext
@@ -309,8 +301,7 @@ theorem datum_diagonalClass (hS : IsUnit (N : Γ(S, ⊤)))
   rfl
 
 /-- The trace field of the concrete datum is the constructed transported trace.
-Source: the explicit datum constructor.
-(auxiliary; not a blueprint node). -/
+Source: the explicit datum constructor. -/
 theorem datum_trace (hS : IsUnit (N : Γ(S, ⊤)))
     (τ : ordinaryFiniteP1SplittingTarget A N hA S ⟶ ordinaryFiniteUnit A S)
     (κ : Ext

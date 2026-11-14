@@ -340,7 +340,6 @@ private theorem outer_boundary
 
 /-- Remove one specified outer column of a finitely supported total cycle.
 Source: Stacks Project, Homology, Tag 09IZ, proof, the two boundary corrections.
-(blueprint: aux-total-resolution-cycle-support-step)
 
 Proof. Set s=r+1 and q=n+s. Project the total cocycle equation to column -s.
 Since no column to its left occurs, the component x_s is a vertical cycle.

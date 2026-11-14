@@ -18,7 +18,6 @@ import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 /-! # Compatible pasted tensor-pullback adjunction
 
 Source: Stacks Project, Cohomology, Tags 079W, 0D5S, and 0D5T.
-(blueprint: lem-pc-ringed-space-pasted-pullback-adjunction).
 -/
 
 @[expose] public section
@@ -126,7 +125,6 @@ adjunctions; the left comparison is invertible on K-flat complexes.
 Source: Stacks Project, Cohomology, lemma-adjoint (079W),
 lemma-derived-pullback-composition (0D5S), and
 lemma-derived-pushforward-composition (0D5T).
-(blueprint: lem-pc-ringed-space-pasted-pullback-adjunction).
 
 Proof: choose the concrete tensor module pullbacks P_g and P_f, with the
 underived adjunctions induced by inverse image and extension of scalars.

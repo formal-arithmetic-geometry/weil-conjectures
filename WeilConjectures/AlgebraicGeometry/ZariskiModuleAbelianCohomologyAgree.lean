@@ -18,8 +18,7 @@ import Mathlib.CategoryTheory.Adjunction.Whiskering
 
 /-! # Cohomology of a Zariski module and its underlying abelian sheaf
 
-Source: Stacks Project, `sites-cohomology.tex`, Lemma Tag 03FD
-(blueprint: lem-sc-zariski-module-abelian-cohomology-agree).
+Source: Stacks Project, `sites-cohomology.tex`, Lemma Tag 03FD.
 -/
 
 @[expose] public section
@@ -88,8 +87,7 @@ private noncomputable def zeroIso {C : Type u} [Category.{u} C]
 /-- For a scheme and an `𝒪_X`-module, module cohomology agrees canonically and naturally
 with cohomology of the underlying abelian sheaf on the small Zariski site.
 
-Source: Stacks Project, `sites-cohomology.tex`, Lemma Tag 03FD
-(blueprint: lem-sc-zariski-module-abelian-cohomology-agree).
+Source: Stacks Project, `sites-cohomology.tex`, Lemma Tag 03FD.
 
 Proof: apply `lem-sc-module-abelian-zariski-cohomology` to obtain the comparison in every
 positive degree. In degree zero, both right derived functors are global sections by

@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 
 /-! Identity law for pullback on structure-sheaf cohomology.
-(blueprint: lem-sc-structure-sheaf-cohomology-pullback-identity)
 -/
 
 @[expose] public section
@@ -73,8 +72,7 @@ and H.map, pullback sends x to the Yoneda
 composite c.hom ; L(x) ; alpha at O. Substitution and cancellation give x.
 Thus the additive homomorphism is the identity in every degree. In degree zero this
 is the usual identity map on global sections; the argument also applies to the empty
-scheme, where all the cohomology groups are zero.
-(blueprint: lem-sc-structure-sheaf-cohomology-pullback-identity) -/
+scheme, where all the cohomology groups are zero. -/
 theorem structureSheafCohomologyPullback_identity (X : Scheme.{u}) (n : ℕ) :
     structureSheafCohomologyPullback (𝟙 X) n =
       AddMonoidHom.id (Sheaf.H (structureSheafAb X) n) := by

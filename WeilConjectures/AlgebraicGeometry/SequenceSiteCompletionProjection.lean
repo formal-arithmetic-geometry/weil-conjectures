@@ -24,7 +24,7 @@ import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 /-! # The constant/limit ringed sequence projection
 
 Source: Stacks, sites-cohomology.tex, Tags 0940 and 06YY; Zheng, Construction 4.1,
-printed p. 21 (auxiliary; not a blueprint node).
+printed p. 21.
 
 The index `n : ℕ` denotes the positive level `n+1`. All systems retain their actual
 horizontal section maps. The record below specifies the geometric morphism, its
@@ -67,7 +67,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 
 /-- Forgetting ring structure preserves sheaves in the selected coefficient universe.
-Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
+Source: Stacks 03CZ. -/
 instance (priority := 1100) ringedToposRingForgetCompose
     {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C) : J.HasSheafCompose (forget RingCat.{r}) :=
@@ -78,7 +78,7 @@ attribute [-instance] ringedToposRingForgetCompose
 scoped[CategoryTheory] attribute [instance 1100] ringedToposRingForgetCompose
 
 /-- Forgetting abelian-group structure preserves sheaves in the coefficient universe.
-Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
+Source: Stacks 03CZ. -/
 instance (priority := 1100) ringedToposAbelianForgetCompose
     {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C) : J.HasSheafCompose (forget AddCommGrpCat.{r}) :=
@@ -89,7 +89,7 @@ attribute [-instance] ringedToposAbelianForgetCompose
 scoped[CategoryTheory] attribute [instance 1100] ringedToposAbelianForgetCompose
 
 /-- Forgetting commutativity preserves sheaves in the selected coefficient universe.
-Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
+Source: Stacks 03CZ. -/
 instance (priority := 1100) ringedToposCommRingForgetCompose
     {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C) :
@@ -102,8 +102,7 @@ scoped[CategoryTheory] attribute [instance 1100] ringedToposCommRingForgetCompos
 
 /-- A geometric morphism with a structural ring map and the induced direct image on modules.
 
-Source: Stacks Project, Sites, Definition 00XA, and Modules on Sites, pushforward of modules
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Definition 00XA, and Modules on Sites, pushforward of modules.
 
 The ring identities test every generalized element of the target topos. Left exactness
 identifies the inverse image of products and the terminal object, so these are precisely

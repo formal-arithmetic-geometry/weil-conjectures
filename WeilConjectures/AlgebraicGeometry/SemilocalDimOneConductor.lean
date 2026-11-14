@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.SemilocalDimOneConductorPower
 /-! # Conductor control for a one-dimensional semilocal domain
 
 Source: literature/stacks-project/varieties.tex, Varieties Lemma 09N2
-(blueprint: lem-sc-semilocal-dim-one-conductor)
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ Krull dimension one with fraction field `K`, and for `x` nonzero in its Jacobson
 any `y`, some positive power `x ^ n` carries `y` into `B`.
 
 Source: literature/stacks-project/varieties.tex, Varieties Lemma 09N2
-(blueprint: lem-sc-semilocal-dim-one-conductor)
 
 Proof: first use the one-dimensional normalization lemma to obtain that the
 integral closure is semilocal Dedekind with fraction field `K`. For `x` and `y`,

@@ -27,7 +27,6 @@ namespace AlgebraicGeometry.Etale
 
 Source: Stacks Project, Tag 09YQ (theorem-colimit), comparison-map construction,
 and Tag 0A50, finite direct sums in Mayer--Vietoris.
-(blueprint: def-weil-pbc-stage-cohomology-comparison).
 
 The system constructor records an actual scheme limit, coherent coefficient system,
 sheaf colimit, and canonical cohomology cocone, with a stage in `allowed`.

@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ResolutionSectionsHomologyScalar
 /-! # Scalar compatibility of the normalized resolution class
 
 Source: Stacks Project, Tags 01E4, 01E5 and 03FD.
-(blueprint: lem-pc-resolution-section-scalar-map)
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ set_option maxHeartbeats 500000 in
 /-- The canonical section class map intertwines multiplication endomorphisms.
 No Ext comparison, affine open, finiteness or quasi-coherence is assumed.
 Source: Stacks Project, Tags 01E4 and 01E5; naturality of derived functors.
-(blueprint: lem-pc-resolution-section-scalar-map)
 
 Proof: Module-valued derived global sections take multiplication by b on the module
 M to scalar multiplication on cohomology, by moduleCohomology_map_smulHom. The

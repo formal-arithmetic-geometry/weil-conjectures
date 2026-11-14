@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.SectionRingQuotientChartOverlapPointwis
 /-! # Underlying maps of section-ring quotient charts
 
 Source: Stacks Project, Constructions, Tags 01N8 and 01NK, uniqueness arguments.
-(blueprint: lem-sc-section-ring-quotient-chart-overlap-base-map).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The underlying continuous maps of the restricted quotient charts agree.
 Source: Stacks Project, Constructions, Tags 01N8 and 01NK, uniqueness arguments.
-(blueprint: lem-sc-section-ring-quotient-chart-overlap-base-map).
 
 Proof: Fix x in U intersect V and a positive-degree homogeneous a of degree r.
 We show that g(x) belongs to D_+(a) if and only if a is nonvanishing at x.

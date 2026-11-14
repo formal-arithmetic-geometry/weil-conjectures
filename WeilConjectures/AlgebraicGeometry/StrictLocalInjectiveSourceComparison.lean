@@ -14,7 +14,6 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 /-! # Canonical cycle comparisons for source sections
 
 Source: Stacks Project, Tags 03Q8 and 03Q9, injective-complex computation.
-(blueprint: def-weil-pbc-strict-local-injective-source-comparison).
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ variable {C : Type (v + 1)} [Category.{v} C]
 
 /-- The sections equivalence is the composite of sheafification, free abelian groups,
 and Yoneda adjunctions.
-Source: Stacks Project, Tag 03Q8 (free-sheaf sections adjunction).
-(blueprint: def-weil-pbc-strict-local-injective-source-comparison). -/
+Source: Stacks Project, Tag 03Q8 (free-sheaf sections adjunction). -/
 noncomputable def sourceFreeSectionsEquiv (W : C)
     (G : Sheaf T AddCommGrpCat.{v + 1}) :
     ((strictLocalFreeSheaf T).obj W ⟶ G) ≃+ G.obj.obj (op W) where
@@ -46,8 +44,7 @@ noncomputable def sourceFreeSectionsEquiv (W : C)
     exact map_add _ a b
 
 /-- The sections equivalence commutes with maps of sheaves.
-Source: Stacks Project, Tag 03Q8 (naturality of free-generator evaluation).
-(blueprint: def-weil-pbc-strict-local-injective-source-comparison). -/
+Source: Stacks Project, Tag 03Q8 (naturality of free-generator evaluation). -/
 theorem sourceFreeSectionsEquiv_comp (W : C)
     {G H : Sheaf T AddCommGrpCat.{v + 1}}
     (a : (strictLocalFreeSheaf T).obj W ⟶ G) (b : G ⟶ H) :
@@ -58,8 +55,7 @@ theorem sourceFreeSectionsEquiv_comp (W : C)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Degreewise evaluation identifies the Hom complex with the sections complex.
-Source: Stacks Project, Tags 03Q8 and 03Q9, injective-complex computation.
-(blueprint: def-weil-pbc-strict-local-injective-source-comparison). -/
+Source: Stacks Project, Tags 03Q8 and 03Q9, injective-complex computation. -/
 noncomputable def sourceFreeSectionsComplexIso (W : C)
     (L : CochainComplex (Sheaf T AddCommGrpCat.{v + 1}) ℤ) :
     HomComplex ((CochainComplex.singleFunctor _ 0).obj ((strictLocalFreeSheaf T).obj W)) L ≅
@@ -81,8 +77,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The right-derived unit on a fixed injective representative identifies the
 source with the localization of its underived direct image.
-Source: Stacks Project, Tags 03Q8 and 03Q9, injective-complex computation.
-(blueprint: def-weil-pbc-strict-local-injective-source-comparison). -/
+Source: Stacks Project, Tags 03Q8 and 03Q9, injective-complex computation. -/
 noncomputable def sourceInjectiveDirectImageIso {X S : Scheme.{v}} (f : X ⟶ S)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (J : CochainComplex.Plus (InjectiveObject
@@ -109,8 +104,7 @@ noncomputable def sourceInjectiveDirectImageIso {X S : Scheme.{v}} (f : X ⟶ S)
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Localized Hom classes into a K-injective complex compute derived Hom.
-Source: Stacks Project, Tags 03Q8 and 03Q9, injective-complex computation.
-(blueprint: def-weil-pbc-strict-local-injective-source-comparison). -/
+Source: Stacks Project, Tags 03Q8 and 03Q9, injective-complex computation. -/
 noncomputable def sourceClassDerivedHomIso
     {C : Type (v + 2)} [Category.{v + 1} C] [Abelian C] [HasDerivedCategory.{v + 1} C]
     (A : C) (L : CochainComplex C ℤ) [L.IsKInjective] (n : ℤ) :
@@ -136,8 +130,7 @@ noncomputable def sourceClassDerivedHomIso
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Underived direct-image sections are sections on the base-changed stage.
-Source: Stacks Project, Tags 03Q8 and 03Q9, injective-complex computation.
-(blueprint: def-weil-pbc-strict-local-injective-source-comparison). -/
+Source: Stacks Project, Tags 03Q8 and 03Q9, injective-complex computation. -/
 noncomputable def sourceStageSectionsIso {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
@@ -177,8 +170,7 @@ noncomputable def sourceStageSectionsIso {X S : Scheme.{v}} (f : X ⟶ S)
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Transport a bounded-below shifted Hom through a specified unbounded representative.
-Source: Stacks Project, Tags 03Q8 and 03Q9, injective-complex computation.
-(blueprint: def-weil-pbc-strict-local-injective-source-comparison). -/
+Source: Stacks Project, Tags 03Q8 and 03Q9, injective-complex computation. -/
 noncomputable def sourcePlusHomIso
     {C : Type (v + 2)} [Category.{v + 1} C] [Abelian C] [HasDerivedCategory.{v + 1} C]
     (A : C) (K : DerivedCategory.Plus C) (L : CochainComplex C ℤ)
@@ -200,8 +192,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The canonical source comparison: localize the Hom complex of the underived
 injective direct image, evaluate its free generator, and identify its sections
 with sections of the inverse image on the stage. No existence witness is chosen.
-Source: Stacks Project, Tags 03Q8 and 03Q9.
-(blueprint: def-weil-pbc-strict-local-injective-source-comparison). -/
+Source: Stacks Project, Tags 03Q8 and 03Q9. -/
 noncomputable def strictLocalInjectiveSourceIso {X S : Scheme.{v}}
     (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

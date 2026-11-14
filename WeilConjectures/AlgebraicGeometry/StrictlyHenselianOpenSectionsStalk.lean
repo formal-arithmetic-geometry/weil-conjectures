@@ -13,8 +13,7 @@ import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
 /-!
 # Sections over a strictly henselian local open and geometric stalks
 
-Source: Stacks Project, Lemma 59.55.1 (Tag 03QO), applied inside an open subscheme
-(blueprint: lem-weil-pbc-sets-strictly-henselian-open-sections-stalk).
+Source: Stacks Project, Lemma 59.55.1 (Tag 03QO), applied inside an open subscheme.
 -/
 
 @[expose] public section
@@ -155,8 +154,7 @@ private theorem strictlyHenselianOpen_pointedSection
 
 /-- For a sheaf of sets on `T`, the germ map from sections over a strictly henselian
 local open `U` to the geometric stalk at its closed point is bijective.
-Source: Stacks Project, Lemma 59.55.1 (Tag 03QO)
-(blueprint: lem-weil-pbc-sets-strictly-henselian-open-sections-stalk).
+Source: Stacks Project, Lemma 59.55.1 (Tag 03QO).
 
 Proof:
 1. Represent a germ over a pointed etale neighbourhood `V`. Shrink around its marked

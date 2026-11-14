@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 /-! # Normalization of the source-open comparison at the whole scheme
 
 Source: Stacks Project, Tag 0DJ9, the final application U = X.
-(blueprint: lem-pc-single-complex-open-top).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace AlgebraicGeometry
 
 /-- The top-open comparison is the original comparison up to canonical isomorphisms.
 Source: Stacks Project, Tag 0DJ9, conclusion of source-open induction.
-(blueprint: lem-pc-single-complex-open-top).
 
 Proof: The top-open immersion is an isomorphism. Its base change is an isomorphism,
 and the other projection identifies the fibre product with X'. Derived pullback

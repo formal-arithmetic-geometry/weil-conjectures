@@ -29,8 +29,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Degree-q commutative-square exchange followed by the coefficient map.
 
-Source: Stacks Project, Tag 0EYM, first proof paragraph; Tag 07A7, remark-base-change
-(blueprint: def-kun-relative-higher-image-exchange).
+Source: Stacks Project, Tag 0EYM, first proof paragraph; Tag 07A7, remark-base-change.
 The first factor identifies inverse image of cohomology with cohomology of inverse
 image. The second takes cohomology of the derived mate `derivedBaseChangeMapPlus` and
 of the specified coefficient map, using the exact pullback comparison with degree zero.

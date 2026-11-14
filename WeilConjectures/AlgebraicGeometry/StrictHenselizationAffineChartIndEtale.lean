@@ -17,7 +17,6 @@ import WeilConjectures.RingTheory.EtaleResidueTriplesColimit
 /-! # The strict henselization is ind-etale over an affine chart
 
 Source: Stacks Project, Tag 04HX, proof, and Tags 04GW and 04GP.
-(blueprint: lem-weil-pbc-strict-henselization-affine-chart-ind-etale).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace AlgebraicGeometry.Scheme
 /-- The ring of a strict henselization is ind-etale over any affine neighbourhood
 of its geometric point, with the algebra structure specified by its structural map.
 Source: Stacks Project, Tag 04HX, proof, using Tags 04GW and 04GP.
-(blueprint: lem-weil-pbc-strict-henselization-affine-chart-ind-etale).
 
 Proof: Factor the geometric point through the open immersion i. Restrict affine
 pointed etale neighbourhoods to those whose structural map factors through i.

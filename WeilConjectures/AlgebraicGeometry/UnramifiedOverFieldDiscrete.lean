@@ -15,9 +15,8 @@ import Mathlib.RingTheory.Unramified.LocalStructure
 /-!
 # Discreteness of a scheme unramified over a field
 
-Source: Stacks Project, Morphisms, Lemma 02G7 (lemma-unramified-over-field),
-part (1), topological part of the only-if direction
-(blueprint: lem-weil-pbc-unramified-over-field-discrete).
+Source: Stacks Project, Morphisms, Lemma 02G7,
+part (1), topological part of the only-if direction.
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- A scheme unramified over a field has discrete underlying topological space.
-Source: Stacks Project, Morphisms, Lemma 02G7 (lemma-unramified-over-field), part (1)
-(blueprint: lem-weil-pbc-unramified-over-field-discrete).
+Source: Stacks Project, Morphisms, Lemma 02G7, part (1).
 
 Proof: On every pair of affine opens mapped into one another, local finite type gives
 `Algebra.FiniteType` on the section rings. The open diagonal gives formal unramifiedness

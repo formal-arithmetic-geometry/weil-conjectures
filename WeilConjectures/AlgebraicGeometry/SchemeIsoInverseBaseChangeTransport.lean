@@ -344,7 +344,6 @@ set_option maxHeartbeats 200000 in
 The component formulas determine all three comparisons uniquely.
 This theorem has no exceptional right adjoints and no second mates.
 Source: Stacks Project, Tag 0ATR, composite adjunction calculation; Tag 0D5S.
-(blueprint: lem-sc-scheme-iso-inverse-base-change-transport)
 
 Proof: The pinned pullback adjunction of each source isomorphism is an equivalence:
 pullback along its inverse is an inverse functor by the canonical composition and

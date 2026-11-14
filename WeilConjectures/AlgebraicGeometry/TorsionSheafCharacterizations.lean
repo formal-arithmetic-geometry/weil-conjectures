@@ -23,8 +23,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 # Characterizations of torsion abelian étale sheaves
 
 Source: blueprint `sec-proper-base-change/sk-def-pbc`, statement, and
-`sec-abelian-varieties/def-weil-pbc-etale-sheaves`
-(blueprint: definition-torsion-sheaves--3).
+`sec-abelian-varieties/def-weil-pbc-etale-sheaves`.
 -/
 
 @[expose] public section
@@ -35,8 +34,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: blueprint `sec-proper-base-change/sk-def-pbc`, statement
-(blueprint: definition-torsion-sheaves--3).
+/-- Source: blueprint `sec-proper-base-change/sk-def-pbc`, statement.
 
 Proof: (1) Exactness of geometric stalks (definition-torsion-sheaves--3) identifies
 stalks of the kernel of multiplication by n with n-torsion in the stalk. Commutation with
@@ -211,8 +209,7 @@ private theorem ratModInt_dyadic_not_killed (k : ℕ) (hk : 0 < k) :
 
 -- The inherited statement names a nondependent index binder `n`.
 set_option linter.unusedVariables false in
-/-- Source: blueprint `sec-abelian-varieties/def-weil-pbc-etale-sheaves`, Q/Z example
-(blueprint: definition-torsion-sheaves--3).
+/-- Source: blueprint `sec-abelian-varieties/def-weil-pbc-etale-sheaves`, Q/Z example.
 
 Proof: (5) The constant sheaf has geometric stalk Q/Z by
 definition-torsion-sheaves--3, hence is torsion by the characterization above.

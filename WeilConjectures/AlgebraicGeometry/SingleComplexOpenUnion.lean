@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenNestedComparison
 /-! # Source-open union gluing for the single-complex comparison
 
 Source: Stacks Project, Tag 0DJ9, induction step.
-(blueprint: lem-pc-single-complex-open-union).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry
 
 /-- Mayer--Vietoris on a union, expressed in the ambient scheme's open coordinates.
 Source: Stacks Project, Tag 0DJ9, induction step.
-(blueprint: lem-pc-single-complex-open-union).
 
 Proof: Put W = U union V. Inside W take the inverse images of U and V; they cover W,
 are quasi-compact, and their intersection identifies with U intersection V. Since

@@ -189,7 +189,6 @@ private theorem augmented_iso_of_good_quasiIso
 /-- Scalar extension of a K-flat augmented Čech model has the image-ideal Čech model,
 with its augmentation normalized on the actual sheafification unit.
 Source: Stacks Project, dualizing.tex, Tag 0ALZ, and algebraization.tex, Tag 099D(c).
-(auxiliary; not a blueprint node)
 
 Proof: define the augmentation by extending the semilinear map obtained from εP and φ;
 the extension/restriction adjunction gives its stated value on 1 tensor x. Choose finite

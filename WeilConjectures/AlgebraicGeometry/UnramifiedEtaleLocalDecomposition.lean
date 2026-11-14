@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteUnramifiedNeighbourhoodsDisjointR
 /-!
 # Étale-local decomposition near unramified fibre points
 
-Source: Stacks Project, Étale Morphisms, Lemma 41.17.2, Tag 04HI
-(blueprint: lem-weil-pbc-unramified-etale-local-decomposition).
+Source: Stacks Project, Étale Morphisms, Lemma 41.17.2, Tag 04HI.
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Stacks Project, Étale Morphisms, Lemma 41.17.2 (Tag 04HI)
-(blueprint: lem-weil-pbc-unramified-etale-local-decomposition).
+/-- Stacks Project, Étale Morphisms, Lemma 41.17.2 (Tag 04HI).
 A separated morphism unramified at finitely many points over `s` admits an étale
 neighbourhood with a clopen decomposition into closed immersions through the chosen point
 and a remainder whose fibre contains no point mapping to a listed point. The finite family

@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.ConstantRankExteriorDerivedComparison
 
 /-! # The dualizing object of a smooth diagonal in constant rank
 
-Source: Stacks Project, Tags 0BR0 and 08S2, fourth equality of Tag 0BRT
-(blueprint: lem-sc-smooth-diagonal-dualizing-determinant).
+Source: Stacks Project, Tags 0BR0 and 08S2, fourth equality of Tag 0BRT.
 -/
 
 @[expose] public section
@@ -62,7 +61,6 @@ private theorem singleton_one_isKoszulRegular (R : Type u) [CommRing R] :
 /-- The diagonal right adjoint takes the structure object to the shifted determinant
 of the dual of relative differentials. This does not involve the right adjoint of f.
 Source: Stacks Project, Tags 0BR0 and 08S2, fourth equality in Tag 0BRT.
-(blueprint: lem-sc-smooth-diagonal-dualizing-determinant).
 
 Proof: Properness makes the diagonal a closed immersion. Smoothness of pure relative
 dimension d makes it Koszul regular. The local generators near each diagonal point

@@ -26,7 +26,6 @@ set_option backward.isDefEq.respectTransparency false in
 have a common positive annihilating exponent on a Noetherian scheme.
 
 Source: Stacks Project, Tag 0889(1), global torsion conclusion.
-(blueprint: new-stage3-torsion-controlled-algebraization-descent-bound).
 
 Proof: Quasi-compactness gives a finite subcover. Choose the supplied exponent on
 each of its opens and take their maximum together with 1. If s is at least a

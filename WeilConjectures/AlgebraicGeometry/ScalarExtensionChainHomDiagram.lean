@@ -20,7 +20,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 /-! # Scalar-extension derived Hom diagrams
 
 Source: Stacks Project, perfect.tex, Tag 09RE, affine calculation.
-(blueprint: lem-pc-scalar-extension-chain-hom-diagram).
 -/
 
 @[expose] public section
@@ -222,7 +221,6 @@ private theorem homEquiv_map
 
 /-- The module-derived Hom diagram and its canonical scalar-extension cocone.
 Source: Stacks Project, perfect.tex, Tag 09RE, affine calculation.
-(blueprint: lem-pc-scalar-extension-chain-hom-diagram).
 
 Proof: Work first with Hom sets in the homotopy category. For an arrow apply
 termwise scalar extension and conjugate by its complex scalar-extension

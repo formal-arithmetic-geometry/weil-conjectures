@@ -20,7 +20,6 @@ import WeilConjectures.RingTheory.SectionDifferentialBasisQuotient
 
 Source: Stacks Project, More on Algebra, Tag 07M7, proof up to the final
 idempotent localization.
-(blueprint: lem-weil-pbc-smooth-section-etale-neighbourhoods).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ namespace AlgebraicGeometry
 the section kernel. No global étale localization or quotient equivalence is asserted.
 Source: Stacks Project, Tag 07M7, first paragraph and second paragraph up to
 `C_f/JC_f = A/I` (with the source's kernel ideal denoted `N` here).
-(blueprint: lem-weil-pbc-smooth-section-etale-neighbourhoods)
 
 Proof:
 1. Set `N = ker σ`. Every element of `A/J` comes from `A`, so `σ` is surjective

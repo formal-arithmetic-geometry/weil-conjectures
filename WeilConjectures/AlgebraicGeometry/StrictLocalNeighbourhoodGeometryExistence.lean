@@ -31,8 +31,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The pullback of the strict henselization is the limit of the small affine
 neighbourhood pullbacks, with qcqs stages and affine transition morphisms.
 This supplies only geometry, with no derived sheaves, cocones or mates.
-Source: Stacks, Tag 03Q9, first proof paragraph
-(blueprint: lem-weil-pbc-strict-local-neighbourhood-geometry).
+Source: Stacks, Tag 03Q9, first proof paragraph.
 
 Proof: `strictHenselizationAffineBaseChangeCone_exists` supplies the limiting cone over
 exactly the same small affine neighbourhood diagram, with vertex S_(s) ×_S X and

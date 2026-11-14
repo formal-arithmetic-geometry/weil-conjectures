@@ -86,7 +86,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Global germs and pulled global germs are invertible over strict-local bases.
 
 Source: Stacks Project, etale-cohomology.tex, Tags 03QO and 03Q1 (3).
-(blueprint: lem-weil-pbc-strict-local-global-germ-iso)
 
 Proof: For a pointed etale neighbourhood of the closed point of a strictly henselian
 local scheme, shrink to an affine chart and localize at the marked prime. The local

@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 /-! # Global sections of residue-point tensor pullback
 
 Source: Stacks Project, Sheaves, Tag 0098.
-(blueprint: lem-sc-residue-pullback-global-sections).
 -/
 
 @[expose] public section
@@ -108,7 +107,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Residue-point pullback, evaluated globally with its residue-field scalars,
 is naturally extension of scalars of the original stalk.
 Source: Stacks Project, Sheaves, Tag 0098.
-(blueprint: lem-sc-residue-pullback-global-sections).
 
 Proof: Take the closed point y of Spec kappa(x). Every neighborhood of y is
 the whole space. The germ map is surjective by representing each stalk element

@@ -159,7 +159,6 @@ private theorem index_finite_family {A : Type u} [Finite A] (n : ℕ) :
   exact ⟨m, ⟨e.trans (Fintype.equivFin A).symm⟩⟩
 
 /-- Source: Stacks Project, Tag 04HH, used by Tag 04HI; Tag 02LM and Tags 02G6, 02GA.
-(blueprint: lem-weil-pbc-unramified-etale-finite-neighbourhoods)
 
 Proof: take the union of the given unramified open neighbourhoods. Local finite type and
 unramifiedness are local on the source, so its restriction is unramified. Remove duplicate

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 /-! # Compatibility of the affine-chart colimit comparison
 
 Source: Stacks Project, Tag 04HX.
-(blueprint: lem-weil-pbc-strict-henselization-point-evaluation-comparison).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ set_option maxHeartbeats 800000 in
 set_option backward.isDefEq.respectTransparency false in
 /-- The coordinate-ring colimit comparison preserves geometric evaluation.
 Source: Stacks Project, Tag 04HX, and `etale_local_ring_triples`.
-(blueprint: lem-weil-pbc-strict-henselization-point-evaluation-comparison)
 
 Proof: the ring-written affine pointed neighbourhoods are equivalent to the full
 subcategory of affine pointed neighbourhoods, by

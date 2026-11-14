@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 /-! # Supported affine overlap data
 
 Source: Stacks Project, Tag 09IM, the construction on the affine member before gluing.
-(blueprint: lem-sc-supported-affine-overlap-map).
 -/
 
 @[expose] public section
@@ -58,7 +57,6 @@ set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Construct the affine member and its compatible overlap map; no object on the union
 is asserted. Source: Stacks Project, Tag 09IM, first two-open paragraph, Tags 08EK and 08EH.
-(blueprint: lem-sc-supported-affine-overlap-map).
 
 Proof: Restrict R to W and transport its strictly perfect neighbourhood models through
 Modules.overEquiv, intersecting each neighbourhood with W. The stabilized restriction A

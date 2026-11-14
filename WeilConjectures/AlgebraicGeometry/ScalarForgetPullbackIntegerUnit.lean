@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.ScalarForgetPullbackComparison
 /-! # The integer-unit map and the scalar inverse-image unit
 
 Source: Stacks Project, Tags 0096 and 01F7.
-(blueprint: new-sc-scalar-forget-pullback-integer-unit).
 -/
 
 @[expose] public section
@@ -102,7 +101,6 @@ private theorem scalarOne_inverseUnit (k : Type u) [Field k]
 -- The composite sheaf adjunctions require unfolding pointwise evaluation comparisons.
 /-- The integer-unit map commutes with the comparison before it is inverted.
 Source: Stacks Project, Tags 0096 and 01F7.
-(blueprint: new-sc-scalar-forget-pullback-integer-unit).
 
 Proof: Apply the constant-integer sheaf adjunction after transporting along the
 constant-integer inverse-image comparison. Its uniqueness-of-left-adjoints

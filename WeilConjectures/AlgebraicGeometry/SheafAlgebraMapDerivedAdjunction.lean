@@ -15,8 +15,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Deriving the algebra-valued Hom adjunction and comparing its localization
 
 Source: Stacks Project, Duality for Schemes, Tags 0BV0 and 0BV1;
-Modules Tag 0A6F; Derived Categories Tag 09T5
-(blueprint: lem-sc-sheaf-algebra-derived-hom-adjunction-map).
+Modules Tag 0A6F; Derived Categories Tag 09T5.
 -/
 
 @[expose] public section
@@ -69,8 +68,7 @@ adjunction with the specified `derivedRHomAlgebraModule`, with its B-action inta
 `Adjunction.ofNatIsoRight` gives the asserted adjunction.
 
 Source: Stacks Project, Duality for Schemes, Tags 0BV0, 0BV1;
-Modules Tag 0A6F; Derived Categories Tag 09T5
-(blueprint: lem-sc-sheaf-algebra-derived-hom-adjunction-map). -/
+Modules Tag 0A6F; Derived Categories Tag 09T5. -/
 theorem sheafAlgebra_mapDerivedCategory_adjunction
     (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf) (hB : B.toModule.IsQuasicoherent)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

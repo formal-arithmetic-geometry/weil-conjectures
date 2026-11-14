@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.SheafCoinductionCounit
 # The sheaf coinduction adjunction
 
 Source: Stacks Project, duality.tex, Tag 0BUZ, lemma-compute-sheafhom-affine.
-(blueprint: lem-sc-sheaf-coinduction-adjunction).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ and evaluation-at-one counit. This assertion does not require affineness.
 
 Source: Stacks Project, duality.tex, Tag 0BUZ, lemma-compute-sheafhom-affine;
 Modules, lemma-adjoint-tensor-restrict.
-(blueprint: lem-sc-sheaf-coinduction-adjunction).
 
 Proof: On each open U, put on Hom(A|U,F|U) the A(U)-action
 (a phi)_W(b) = phi_W(a|W * b). Multiplication is O-linear and restrictions

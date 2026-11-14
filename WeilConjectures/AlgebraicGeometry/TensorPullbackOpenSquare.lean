@@ -28,7 +28,6 @@ set_option backward.isDefEq.respectTransparency.types false
 -- Section transports across two composite adjunctions require extra elaboration.
 /-- The second factor of open base change preserves local unit sections.
 Source: Stacks Project, Tags 0096, 0097 and 01CD.
-(blueprint: lem-sc-tensor-pullback-open-square).
 
 Proof: compose the pushforward composition isomorphisms and transport along h to
 identify pushforward a followed by pushforward V.ι with pushforward j followed by

@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 # Quasi-coherent submodules of the structure sheaf are ideal sheaves
 
 Source: Stacks Project, Tag 01XF, coordinate-filtration paragraph;
-Mathlib's `Scheme.IdealSheafData` and `range_toModulesι_app`
-(blueprint: lem-pqf-quasi-coherent-submodule-ideal).
+Mathlib's `Scheme.IdealSheafData` and `range_toModulesι_app`.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A quasi-coherent submodule of the structure sheaf is isomorphic to the module
 of ideal sheaf data.
 
-Source: Stacks Project, Tag 01XF, coordinate-filtration paragraph
-(blueprint: lem-pqf-quasi-coherent-submodule-ideal).
+Source: Stacks Project, Tag 01XF, coordinate-filtration paragraph.
 
 Proof: On each affine open U take J(U) to be the range of the injective linear map
 on sections induced by i. It is a submodule of the section ring acting on itself,

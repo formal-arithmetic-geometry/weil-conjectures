@@ -12,7 +12,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 /-! # The open direct-image comparison on right-derived units
 
 Source: Stacks Project, Tags 08FE and 08BS.
-(blueprint: lem-pc-e2-open-direct-image-unit).
 -/
 
 @[expose] public section
@@ -23,8 +22,7 @@ namespace AlgebraicGeometry
 
 /-- The sectionwise comparison before deriving; this is the explicit comparison
 used in `singleComplexOpenDirectImageIso`.
-Source: Stacks Project, Tag 08FE.
-(blueprint: def-pc-e2-open-underived-direct-image-iso). -/
+Source: Stacks Project, Tag 08FE. -/
 noncomputable def singleComplexOpenUnderivedDirectImageIso
     {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens) :
     RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙ schemeOpenRestriction Y V ≅
@@ -47,8 +45,7 @@ noncomputable def singleComplexOpenUnderivedDirectImageIso
 
 /-- The same sectionwise comparison on homotopy categories, including the canonical
 composition comparisons for termwise application.
-Source: Stacks Project, Tag 08FE.
-(blueprint: def-pc-e2-open-homotopy-direct-image-iso). -/
+Source: Stacks Project, Tag 08FE. -/
 noncomputable def singleComplexOpenHomotopyDirectImageIso
     {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens) :
     (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomotopyCategory (.up ℤ) ⋙
@@ -166,7 +163,6 @@ set_option maxHeartbeats 1600000 in
 /-- Evaluating the constructed derived direct-image comparison on its right-derived
 units gives the underived sectionwise comparison on the homotopy category.
 Source: Stacks Project, Tags 08FE and 08BS.
-(blueprint: lem-pc-e2-open-direct-image-unit).
 
 Proof: Expand the four factors defining the derived comparison. The first factor
 is the inverse of right-derived uniqueness for postcomposition by exact restriction;

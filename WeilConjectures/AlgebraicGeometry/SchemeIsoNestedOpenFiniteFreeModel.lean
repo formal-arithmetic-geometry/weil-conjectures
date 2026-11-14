@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 /-! # Transport of a finite-free model from a nested open
 
 Source: Stacks Project, Tags 08EE and 08E7, identification with an affine spectrum and
-restriction of local models (blueprint: lem-pc-scheme-iso-nested-open-finite-free-model).
+restriction of local models.
 -/
 
 @[expose] public section
@@ -33,8 +33,7 @@ set_option backward.isDefEq.respectTransparency false in
 scheme isomorphism. Neither scheme is assumed affine, and no module localization is used.
 
 Source: Stacks Project, Tags 08EE and 08E7, the passage to an affine spectrum and the
-restriction of a local finite-free model
-(blueprint: lem-pc-scheme-iso-nested-open-finite-free-model).
+restriction of a local finite-free model.
 
 Proof: Let Z be the image of V under the open immersion V.toScheme into X, and let W be
 its image under s.hom. The composite is an open immersion and induces an isomorphism

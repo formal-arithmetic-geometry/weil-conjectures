@@ -120,7 +120,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Degreewise ordinary evaluation commutes with a map to the fixed coefficient resolution.
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;
 ordinary evaluation localization proof step 2.
-(blueprint: lem-pc-scheme-ordinary-evaluation-graded-augmentation).
 
 Proof: Fix total degree n. Use coproduct extensionality for the total tensor,
 so it suffices to compare the composites from each summand with indices p,q

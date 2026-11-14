@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.FirstOrderThickeningBaseChange
 # Universal first order thickenings under flat base change
 
 Source: Stacks Project, More on Morphisms, Lemmas 04F8 and 04F9; Morphisms,
-Lemmas 01R4 and 0473 (blueprint: lem-weil-pbc-universal-thickening-flat-base-change).
+Lemmas 01R4 and 0473.
 -/
 
 @[expose] public section
@@ -34,10 +34,9 @@ The map in the final clause is exactly the canonical map of
 The proof witnesses `hu` and `HZ` allow the conormal definition to use this thickening.
 
 Source: Stacks Project, More on Morphisms, Lemmas 04F8 and 04F9, with Morphisms,
-Lemmas 01R4 and 0473 (blueprint: lem-weil-pbc-universal-thickening-flat-base-change).
+Lemmas 01R4 and 0473.
 Proof:
-1. The first projection is formally unramified by base change of `hW`
-   (lem-weil-pbc-formally-unramified-base-change).
+1. The first projection is formally unramified by base change of `hW`.
 2. The square of `iZ`, `iW` and the second projections is cartesian by
    lem-weil-pbc-cartesian-square-pasting. Thus iZ is a first order thickening by
    lem-weil-pbc-first-order-thickening-base-change.
@@ -45,11 +44,10 @@ Proof:
    second projection. The universal property of HW gives a unique map into W'.
    Pair it with the test scheme's map to X to obtain its unique map into Z'.
    This is def-weil-pbc-universal-first-order-thickening and the fibre product property.
-4. The second projection from Z' is flat by base change of g
-   (lem-weil-pbc-flat-morphism-base-change).
+4. The second projection from Z' is flat by base change of g.
 5. By def-weil-pbc-conormal-sheaf-formally-unramified, compute the conormal sheaves
-   using HW and HZ; uniqueness of universal thickenings justifies these choices
-   (lem-weil-pbc-universal-first-order-thickening-exists). Their canonical map is the
+   using HW and HZ; uniqueness of universal thickenings justifies these choices.
+   Their canonical map is the
    map of lem-weil-pbc-closed-immersion-conormal-functorial, induced by the ambient
    second projection on ideals and def-pc-module-pullback. The cartesian square and
    its flat ambient map make it an isomorphism by

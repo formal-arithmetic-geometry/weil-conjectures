@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCond
 /-! # Ordinary tensor pullback and open restriction
 
 Source: Stacks Project, Tags 0096, 0098 and 08DW.
-(blueprint: def-pc-single-complex-open-tensor-restriction-iso).
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ open SingleComplexBaseChange
 
 /-- Localize the literal ordinary pullback square and apply the exact restriction
 factor. This is constructed on homotopy complexes, without a K-flatness hypothesis.
-Source: Stacks Project, Tag 08DW.
-(blueprint: def-pc-single-complex-open-tensor-restriction-iso). -/
+Source: Stacks Project, Tag 08DW. -/
 noncomputable def singleComplexOpenTensorRestrictionMap
     [d : ∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

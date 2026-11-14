@@ -32,7 +32,6 @@ complexes. No connecting morphisms or distinguished triangles are asserted.
 
 Source: Stacks Project, Tags 08BV, 08HY and 08HZ, the K-injective construction
 before passage to the derived triangle.
-(blueprint: lem-pc-relative-mv-ses-presentation).
 
 Proof: The two affine bases and qcqs morphisms give qcqs sources, and the affine
 base change g' takes the compact two-open cover to a compact cover. Resolve K and

@@ -31,7 +31,6 @@ traces with the coordinate traces of the explicitly transported trace.
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, the paragraphs identifying t_p1 and t_p2 with
 base change of t_q and the equality qp1 = qp2.
-(auxiliary; not a blueprint node).
 
 Proof: Apply the trace clause of hbc to the projective-line structure morphism
 P -> S. The canonical projective-space base-change isomorphism is the chart

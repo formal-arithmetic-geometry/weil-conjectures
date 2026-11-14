@@ -24,8 +24,7 @@ open AlgebraicGeometry CochainComplex CochainComplex.HomComplex
 namespace AlgebraicGeometry.Etale
 
 /-- Evaluation of localized Hom classes as cohomology of the complex of sections.
-Source: Stacks Project, Tag 03Q8, computation by an injective complex.
-(blueprint: lem-weil-pbc-strict-local-localized-hom-germ). -/
+Source: Stacks Project, Tag 03Q8, computation by an injective complex. -/
 @[irreducible] noncomputable def sourceLocalizedSectionsIso {S : Scheme.{v}}
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)
@@ -45,8 +44,7 @@ Source: Stacks Project, Tag 03Q8, computation by an injective complex.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Restricting a neighbourhood section commutes with a map of sheaves.
-Source: Stacks Project, Tag 03Q9, the canonical restriction construction.
-(blueprint: lem-weil-pbc-strict-local-localized-hom-germ). -/
+Source: Stacks Project, Tag 03Q9, the canonical restriction construction. -/
 theorem strictHenselizationSectionRestriction_naturality {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s))
@@ -83,8 +81,7 @@ theorem strictHenselizationSectionRestriction_naturality {S : Scheme.{v}}
   rfl
 
 /-- The natural transformation of pointed neighbourhood section restriction.
-Source: Stacks Project, Tag 03Q9, the canonical restriction construction.
-(blueprint: lem-weil-pbc-strict-local-localized-hom-germ). -/
+Source: Stacks Project, Tag 03Q9, the canonical restriction construction. -/
 @[irreducible] noncomputable def strictLocalSectionRestrictionNat {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
@@ -99,8 +96,7 @@ Source: Stacks Project, Tag 03Q9, the canonical restriction construction.
 set_option backward.isDefEq.respectTransparency false in
 /-- The restriction on the complex of sections, transported to strict-local homology.
 The construction applies to any complex; its definition contains no choice of a class.
-Source: Stacks Project, Tag 03Q9, restriction of the complex to the strict local scheme.
-(blueprint: lem-weil-pbc-strict-local-localized-hom-germ). -/
+Source: Stacks Project, Tag 03Q9, restriction of the complex to the strict local scheme. -/
 @[irreducible] noncomputable def strictLocalComplexSectionRestriction {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
@@ -160,7 +156,6 @@ S; it has no direct-image functor, pullback square, mate, or fibre cohomology.
 
 Source: Stacks Project, Tag 03Q8, cohomology via injective complexes, and Tag 03Q9,
 construction of restriction to the strict henselization.
-(blueprint: lem-weil-pbc-strict-local-localized-hom-germ).
 
 Proof: represent a localized Hom class by a cocycle from Z[W][0] to L[n]. Such
 representatives exist and are unique modulo homotopy because L is K-injective.

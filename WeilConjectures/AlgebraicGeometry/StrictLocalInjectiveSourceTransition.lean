@@ -16,7 +16,6 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 /-! # Computing source derived sections on an injective representative
 
 Source: Stacks Project, Tags 03Q8 and 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-injective-source-transition).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The canonical cycle comparison commutes with neighbourhood restriction.
 Source: Stacks Project, Tag 03Q8, computation of direct images by injective complexes;
 Tag 03Q9, restrictions of the complex of sections.
-(blueprint: lem-weil-pbc-strict-local-injective-source-transition).
 
 Proof: write M for the complex underlying J and L for f_*M. The right-derived unit
 on M is natural and invertible. Under its comparison with Rf_*K, precomposition by

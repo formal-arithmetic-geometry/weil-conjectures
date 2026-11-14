@@ -26,7 +26,6 @@ namespace AlgebraicGeometry
 /-- A qc separated smooth curve of relative dimension one is a finite coproduct
 of connected smooth curves, compatibly with its structure map.
 Source: blueprint theorem-cohomology-curves--6, first step.
-(blueprint: lem-sc-smooth-curve-connected-coproduct)
 
 Proof: Finite type over the field makes C Noetherian. Its connected components
 are finitely many clopen subsets. Give each its open subscheme structure and

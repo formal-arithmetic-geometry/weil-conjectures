@@ -15,8 +15,7 @@ import Mathlib.RingTheory.Flat.Basic
 
 /-! # Tensor sections and affine nonvanishing loci
 
-Source: Stacks Project, Varieties Lemma 09NC, proof, invoking Properties Lemma 01PV
-(blueprint: lem-sc-tensor-section-affine-open).
+Source: Stacks Project, Varieties Lemma 09NC, proof, invoking Properties Lemma 01PV.
 -/
 
 @[expose] public section
@@ -140,8 +139,7 @@ private theorem affine_finite_intersection {X : Scheme.{u}} {ι : Type*}
 has nonvanishing locus equal to the intersection of the factor loci. If one factor locus is
 affine, so is this intersection.
 
-Source: Stacks Project, Varieties Lemma 09NC, proof, invoking Properties Lemma 01PV
-(blueprint: lem-sc-tensor-section-affine-open).
+Source: Stacks Project, Varieties Lemma 09NC, proof, invoking Properties Lemma 01PV.
 
 Proof:
 1. The quotient-tensor equivalence identifies a zero residue-field value with a germ

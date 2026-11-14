@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.QuasiFinitePolynomialChart.Chart
 /-! # Quasi-finite polynomial charts at a fibre point
 
 Source: Stacks Project, Tag 00QE.
-(blueprint: lem-sbc-quasi-finite-polynomial-chart)
 -/
 
 @[expose] public section
@@ -44,8 +43,7 @@ A[t]: from B = A[x]/(r), adjoin the relations t_i - p_i(x), including the
 localization generator and relation. Thus e is locally of finite presentation.
 The fibre homeomorphism and the affine isomorphisms preserve dimension at the
 point, giving the asserted dimension equality. No nonempty-point assumption
-needs to be added: the quantified point y excludes an empty source.
-(blueprint: lem-sbc-quasi-finite-polynomial-chart) -/
+needs to be added: the quantified point y excludes an empty source. -/
 theorem exists_quasiFinite_polynomial_chart
     {X T : Scheme.{u}} [IsAffine X] [IsAffine T]
     (f : X ⟶ T) [LocallyOfFinitePresentation f] (y : X) :

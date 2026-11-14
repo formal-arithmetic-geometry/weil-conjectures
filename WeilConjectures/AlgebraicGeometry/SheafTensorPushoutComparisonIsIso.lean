@@ -18,7 +18,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Invertibility of the pushout tensor comparison
 
 Source: Stacks Project, Tags 01SB and 008A.
-(blueprint: lem-weil-pbc-sheaf-tensor-pushout-comparison-is-iso).
 -/
 
 @[expose] public section
@@ -119,7 +118,6 @@ or assert naturality in the module.
 
 Source: Stacks Project, Tag 01SB, tensor construction and elucidation in
 `lemma-affine-equivalence-modules`; Tag 008A, `lemma-adjointness-tensor-restrict`.
-(blueprint: lem-weil-pbc-sheaf-tensor-pushout-comparison-is-iso).
 
 Proof: C-linearity and the unit formula give the formula on every pure tensor:
 f(theta_r(c tensor m)) = theta_t(b(c) tensor m). The stalk functor from sheaves

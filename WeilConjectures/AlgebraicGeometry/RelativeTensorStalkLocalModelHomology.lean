@@ -23,7 +23,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 Source: Stacks Project, Cohomology of Sheaves, Tags 06YB, 08CG and 09U9;
 Modules, Tag 01AG; Tag 0B6G, condition (3).
-(blueprint: lem-pc-relative-tensor-stalk-local-model-homology).
 -/
 
 @[expose] public section
@@ -39,7 +38,6 @@ any local stalk model, without boundedness, projectivity or Tor assumptions.
 
 Source: Stacks Project, Cohomology of Sheaves, Tags 06YB, 08CG and 09U9;
 Modules, Tag 01AG; Tag 0B6G, condition (3).
-(blueprint: lem-pc-relative-tensor-stalk-local-model-homology).
 
 Proof: take the stalk of the inverse-image ring sheaf at y. Its canonical ring
 isomorphism with the target structure stalk at f(y) transports the stalk of F

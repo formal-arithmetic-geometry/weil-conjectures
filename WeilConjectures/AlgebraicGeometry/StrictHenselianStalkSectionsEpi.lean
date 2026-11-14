@@ -26,7 +26,6 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 /-- At a strictly henselian point, stalkwise sections preserve epimorphisms.
 Source: Stacks Project, Etale Cohomology, Tag 03Q6 (degree zero), Tag 03QO
 (exactness of sections), and Tag 09AX (local-ring argument).
-(blueprint: lem-weil-pbc-strict-henselian-stalk-sections-epi)
 
 Proof: Write A for the strictly henselian local ring at x. The equality of the
 underlying scheme functors identifies the scheme of i(top) with the top open

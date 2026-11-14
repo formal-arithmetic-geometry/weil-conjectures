@@ -164,7 +164,6 @@ private theorem squareLowerStarIso_globalSections
 /-- Global germs identify underived exchange with pullback of global sections.
 Source: Stacks Project, etale-cohomology.tex, Tag 095T, final map-on-stalks paragraph;
 cohomology.tex, Tag 01F8.
-(blueprint: lem-weil-pbc-underived-global-germ-exchange)
 
 Proof: Evaluate both transformations on a sheaf and a global section. The inverse of
 `lowerStarCompGlobalSectionsIso` views the section on the terminal object over Y.

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.SmoothSectionComponentGeneralization
 # Openness of the fibre components meeting a smooth section
 
 Source: Stacks Project, Tags 055R and 055Q.
-(blueprint: lem-sbc-smooth-section-component-open)
 -/
 
 @[expose] public section
@@ -40,8 +39,7 @@ the other special-fibre components and retain the total-space component containi
 section. Connectedness of the special fibre then implies connectedness of the generic fibre
 (Stacks 055Q). Thus the generic point belongs to the locus, proving the neighbourhood
 criterion. Every point of the locus has such a neighbourhood, so the locus is open.
-
-(blueprint: lem-sbc-smooth-section-component-open) -/
+ -/
 theorem Smooth.isOpen_section_component {P T : Scheme.{u}} (g : P ⟶ T)
     [Smooth g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) :
     IsOpen {p : P | p ∈ connectedComponentIn (g ⁻¹' {g p}) (σ (g p))} := by

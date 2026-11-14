@@ -28,7 +28,6 @@ namespace AlgebraicGeometry
 part of this assertion.
 
 Source: Stacks Project, Tag 0889(1), affine paragraph, using Tags 087W, 0ALK and 05EU.
-(blueprint: lem-weil-pbc-torsion-controlled-affine-algebraization).
 
 Proof: Identify X with Spec A via its canonical affine isomorphism. Coherent sheaves
 correspond to finite A-modules. The affine formal-module equivalence identifies N

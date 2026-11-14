@@ -10,7 +10,6 @@ public import WeilConjectures.CategoryTheory.AlgebraicInverseImage
 /-! # Pure-tensor data for a ringed-topos tensor comparison
 
 The structure records the normalization used by Stacks Project, Tag 03EL.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -28,7 +27,7 @@ variable {E : Type uC} [Category.{vC} E] [EssentiallySmall.{u} E]
   {J : GrothendieckTopology E}
 
 /-- The local pure tensor in the existing localization tensor, with independent site sizes.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 noncomputable def ringedComparisonPure (A : Sheaf J CommRingCat.{u})
     (M N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj A))
     (W : Eᵒᵖ) (m : M.val.obj W) (n : N.val.obj W) :
@@ -39,7 +38,7 @@ noncomputable def ringedComparisonPure (A : Sheaf J CommRingCat.{u})
         (M.val ⊗ N.val)).app W (m ⊗ₜ[A.obj.obj W] n))
 
 /-- A scalar-extension pure section is its presheaf tensor followed by sheafification.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 noncomputable def ringedComparisonScalarSection {A B : Sheaf J CommRingCat.{u}} (c : A ⟶ B)
     (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj A))
     (W : Eᵒᵖ) (s : B.obj.obj W) (m : M.val.obj W) :
@@ -68,7 +67,7 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
 open scoped ChangeOfRings
 
 /-- The type of scalar insertions on underlying sheaves, with independent site sizes.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 03EL. -/
 def RingedComparisonInsertion :=
   ∀ M : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R),
       ((toSheaf ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj RI) ⋙ sheafCompose JD
@@ -77,14 +76,14 @@ def RingedComparisonInsertion :=
         (CategoryTheory.forget AddCommGrpCat.{u})).obj (L.obj M))
 
 /-- The type of tensor comparison isomorphisms, without any normalization omitted.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 03EL. -/
 def RingedComparisonTensor :=
   ∀ M N : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R),
     L.obj ((monoidalCategory R).tensorObj M N) ≅
       (monoidalCategory S).tensorObj (L.obj M) (L.obj N)
 
 /-- Simultaneous naturality of the tensor comparison in both modules.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 03EL. -/
 def ringedComparisonNaturality (mu : RingedComparisonTensor R S L) : Prop :=
   ∀ {M M' N N' : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
       RingCat.{u})).obj R)} (f : M ⟶ M') (g : N ⟶ N'),
@@ -92,7 +91,7 @@ def ringedComparisonNaturality (mu : RingedComparisonTensor R S L) : Prop :=
       (mu M N).hom ≫ (monoidalCategory S).tensorHom (L.map f) (L.map g)
 
 /-- The scalar insertion normalization, factored to keep generated record declarations compact.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 03EL. -/
 def ringedComparisonInsertionCondition
     (q : ∀ M : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R),
       ((toSheaf ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj RI) ⋙ sheafCompose JD
@@ -105,7 +104,7 @@ def ringedComparisonInsertionCondition
       (ringedComparisonScalarSection c (I.modules.obj M) W 1 m)
 
 /-- The full generalized pure-tensor normalization for a specified insertion and comparison.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 03EL. -/
 def ringedComparisonPureCondition
     (q : ∀ M : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R),
       ((toSheaf ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj RI) ⋙ sheafCompose JD
@@ -158,8 +157,7 @@ open scoped ChangeOfRings
 /-- The ordinary tensor comparison with its pure-tensor characterization.
 The maps q insert 1 in scalar extension; the generalized-element equation fixes
 mu on the inverse images of all pure tensors, hence on their sheafification.
-Source: Stacks, Modules on Sites, 03EL
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Modules on Sites, 03EL. -/
 structure CanonicalRingedTensorComparison where
   /-- Scalar-extension insertion, as a map of underlying sheaves of sets. -/
   q : RingedComparisonInsertion R S RI uInv I L
@@ -197,8 +195,7 @@ set_option genInjectivity false in
 /-- The ordinary tensor comparison with its pure-tensor characterization.
 The maps q insert 1 in scalar extension; the generalized-element equation fixes
 mu on the inverse images of all pure tensors, hence on their sheafification.
-Source: Stacks, Modules on Sites, 03EL
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Modules on Sites, 03EL. -/
 structure CanonicalRingedTensorComparisonOnSmallSites where
   /-- Scalar-extension insertion, as a map of underlying sheaves of sets. -/
   q : RingedComparisonInsertion R S RI uInv I L

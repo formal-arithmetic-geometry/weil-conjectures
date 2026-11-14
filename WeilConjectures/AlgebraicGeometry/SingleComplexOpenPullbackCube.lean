@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenSquareCompariso
 /-! # Coherence of open pullback squares
 
 Source: Stacks Project, Tag 0D5S, and Tag 0DJ9, first paragraph.
-(blueprint: lem-pc-t2-open-pullback-cube).
 -/
 
 @[expose] public section
@@ -162,7 +161,6 @@ set_option maxHeartbeats 800000 in
 -- Matching the derived-open component formulas needs extra elaboration heartbeats.
 /-- The two paths around a commuting cube of pullback comparisons agree.
 Source: Stacks Project, cohomology.tex, Tag 0D5S; perfect.tex, Tag 0DJ9.
-(blueprint: lem-pc-t2-open-pullback-cube).
 
 Proof: First extend the pinned two-arrow composition isomorphisms by equality
 transport to named composites. Their three-arrow identity follows by substituting

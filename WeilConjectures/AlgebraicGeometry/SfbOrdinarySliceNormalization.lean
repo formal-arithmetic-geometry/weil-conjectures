@@ -52,8 +52,7 @@ set_option maxHeartbeats 800000 in
 with an invertible change of coefficient rings.
 
 Source: Stacks Project, sites-modules.tex, localization of modules on a site;
-sites.tex, `lemma-localize-compare`; Tags 03D2 and 00YY
-(auxiliary; not a blueprint node).
+sites.tex, `lemma-localize-compare`; Tags 03D2 and 00YY.
 
 Proof: use Over.postEquiv for AsSmall to identify the two slice sites.
 Precomposition gives the module equivalence on them. Restrict e to the slice

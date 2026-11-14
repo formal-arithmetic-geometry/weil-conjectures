@@ -16,8 +16,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine section base change for quasi-coherent modules
 
-Source: Stacks Project, Constructions, Lemma 01LN, using Schemes Lemmas 01I9 and 01IA
-(blueprint: lem-weil-pbc-quasi-coherent-affine-section-base-change).
+Source: Stacks Project, Constructions, Lemma 01LN, using Schemes Lemmas 01I9 and 01IA.
 -/
 
 @[expose] public section
@@ -34,19 +33,15 @@ namespace AlgebraicGeometry.Scheme.Modules
 the action of `O(U)` on the second tensor factor (written, as in
 lem-weil-pbc-module-pullback-affine-sections, by swapping to `O(U) ⊗[O(V)] F(V)`, acting on
 the left factor and swapping back).
-Source: Stacks Project, Constructions, Lemma 01LN, using Schemes Lemmas 01I9 and 01IA
-(blueprint: lem-weil-pbc-quasi-coherent-affine-section-base-change).
+Source: Stacks Project, Constructions, Lemma 01LN, using Schemes Lemmas 01I9 and 01IA.
 
 Proof: (1) Take the canonical affine charts Spec R → X, Spec R' → X of U and V; the
-restriction ρ : R' → R gives the open immersion j = Spec ρ with ι_V ∘ j = ι_U
-(lem-weil-pbc-affine-open-spec-points, lem-weil-pbc-affine-open-inclusion-spec-map).
+restriction ρ : R' → R gives the open immersion j = Spec ρ with ι_V ∘ j = ι_U.
 (2) The restriction of F to Spec R' is quasi-coherent, hence the tilde of M' = F(V) by the
-affine tilde-Gamma counit ε (lem-weil-pbc-module-restriction-open-immersion-colimits,
-lem-weil-pbc-affine-tilde-gamma-adjunction).
+affine tilde-Gamma counit ε.
 (3) Restricting further along j gives the restriction of F along ι_U, with sections F(U).
-(4) Open-immersion pullback is restriction, and tilde commutes with pullback along Spec ρ
-(lem-weil-pbc-open-immersion-module-pullback-restriction,
-lem-weil-pbc-tilde-pullback-base-change); taking sections gives an R-linear isomorphism
+(4) Open-immersion pullback is restriction, and tilde commutes with pullback along Spec ρ;
+taking sections gives an R-linear isomorphism
 Φ : R ⊗[R'] M' → F(U).
 (5) Tracing m' through units and counits shows Φ(r ⊗ m') = r • m'|_U, so after swapping the
 factors Φ is the canonical map, which is therefore bijective and R-linear. -/

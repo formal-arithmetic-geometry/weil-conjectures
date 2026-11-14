@@ -19,7 +19,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 Source: Stacks Project, `limits.tex`, Tag 0EY1, `lemma-descend-finite-presentation-variant`,
 essential surjectivity (lines 2722--2810); the category consists of qcqs source schemes
 with locally finitely presented structure morphisms over arbitrary bases.
-(blueprint: lem-sf-qcqs-lfp-object-limit-model)
 -/
 
 @[expose] public section
@@ -37,12 +36,11 @@ has a model at one stage, without hypotheses on the stages or on the limit.
 
 Source: Stacks Project, `limits.tex`, Tag 0EY1, `lemma-descend-finite-presentation-variant`,
 essential surjectivity (lines 2722--2810).
-(blueprint: lem-sf-qcqs-lfp-object-limit-model)
 
 Proof (node steps 1--10):
 1. Fix `i₀`.  Choose a finite affine open cover `X = ⋃ U_a` with `U_a` mapping into affine
    opens `W_{a,i₀} ⊆ S_{i₀}`; by the affine-transition limit theorem
-   (`lem-weil-pbc-limit-affine-transition`) `W_a = lim_j W_{a,j}` with all terms affine, and
+   `W_a = lim_j W_{a,j}` with all terms affine, and
    `U_a → W_a` is of finite presentation (Tags 01TQ, 01KO).  If `X` is empty take no charts.
 2. Finite-presentation descent (Tag 01ZM) over the affine systems `(W_{a,j})` gives models
    `U_{a,i} → W_{a,i} ⊆ S_i`, affine after increasing `i` (Tag 01Z6), with isomorphisms

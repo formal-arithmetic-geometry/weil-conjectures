@@ -46,7 +46,7 @@ set_option linter.privateModule false
 # Unbounded proper/open interchange and its canonical normalizations
 
 Source: Stacks Project, More on Étale Cohomology, Tags 0F7B (case (b)), 0F7C, 0F7D
-and 0F7F (auxiliary; not a blueprint node).
+and 0F7F.
 
 The sheaf isomorphism is specified by equality of its two maps into the common direct
 image. This is precisely equality of the proper-support subsheaves, and fixes the map.

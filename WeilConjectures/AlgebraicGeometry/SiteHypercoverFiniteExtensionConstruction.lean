@@ -10,9 +10,8 @@ import WeilConjectures.AlgebraicGeometry.SiteHypercoverAttachmentComposition
 
 /-! # Operators for one split simplicial attachment
 
-Source: Stacks Project, Tag 0DAV (lemma-hypercovering-object), construction of the
+Source: Stacks Project, Tag 0DAV, construction of the
 extension and the final simplicial composition check; Tag 0DAU (lemma-split).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ variable {D : Type u} [Category.{v} D] {n : ℕ}
 /-- Realize the prescribed lower faces and normalized top degeneracies as a functor.
 Source: Stacks Project, Tag 0DAV, construction of the extension, with the composition
 verification expanded in the parent node's steps 3 and 4.
-(auxiliary; not a blueprint node).
 
 Proof: Normalize every old index by the split bijection, with component isomorphism
 `e_(σ,i)`. Use the prescribed cone on new summands and the old operators on old

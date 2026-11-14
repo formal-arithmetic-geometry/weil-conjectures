@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.RawModuleScalarHomEvaluation
 /-! # Abelian expansion of the scalar raw Hom map
 
 Source: Stacks Project, Tags 03D7 and 03Q8.
-(blueprint: lem-sbc-raw-module-abelian-hom-target-formula).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- Expand the abelian raw pullback and only the source-side scalar map.
 Source: Stacks Project, Tags 03FD and 03Q8, explicit pullback factor expansion.
-(blueprint: lem-sbc-raw-module-abelian-hom-target-formula).
 
 Proof: Apply rawModuleScalar_pullback_abelian_formula to the input
 rawModuleAbelianHomMap evaluated on z. Expand the additive scalar map as derived forgetting

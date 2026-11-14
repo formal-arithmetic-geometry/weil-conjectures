@@ -12,8 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.StalkComparisonSourceTransport
 import WeilConjectures.Algebra.Homology.KFlatStalkCriterion
 import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
 
-/-! Invertibility of the derived stalk comparison from its K-flat equation.
-(blueprint: lem-pc-stalk-derived-extension-comparison-is-iso) -/
+/-! Invertibility of the derived stalk comparison from its K-flat equation. -/
 
 @[expose] public section
 
@@ -45,8 +44,7 @@ and an isomorphism from its localization to the object. Naturality transports
 invertibility from that representative to the object. Componentwise invertibility
 then gives invertibility of the natural transformation.
 Source: Stacks Project, perfect.tex, equation-bc before Tag 0DJ8 (Tag 0DJ7);
-Cohomology, Tags 06YB and 0D5S; More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-stalk-derived-extension-comparison-is-iso). -/
+Cohomology, Tags 06YB and 0D5S; More on Algebra, Tag 06Y6. -/
 theorem stalkDerivedExtensionComparison_isIso (z : X') :
     letI := leftAlgebra f g' z
     letI := rightAlgebra f f' g g' sq z

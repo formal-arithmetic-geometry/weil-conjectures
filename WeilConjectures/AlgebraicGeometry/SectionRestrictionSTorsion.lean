@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.SectionNonvanishingZeroLocus
 
 /-! # Restriction-zero sections are killed by a power of an invertible section
 
-Source: Stacks Project, Properties, Lemma 01PW (lemma-invert-s-sections), injectivity.
-(blueprint: lem-sc-p1-section-restriction-s-torsion)
+Source: Stacks Project, Properties, Lemma 01PW, injectivity.
 -/
 
 @[expose] public section
@@ -28,24 +27,20 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- A section vanishing on the nonvanishing open of an invertible section is
 annihilated by a tensor power of that section.
 
-Source: Stacks Project, Properties, Lemma 01PW (lemma-invert-s-sections), part (1).
-(blueprint: lem-sc-p1-section-restriction-s-torsion)
+Source: Stacks Project, Properties, Lemma 01PW, part (1).
 
 Proof:
 1. By quasi-compactness and local rank-one freeness, choose a finite affine cover
-   trivializing `L` (def-weil-pbc-quasi-compact-scheme, def-sc-invertible-module).
+   trivializing `L`.
    Write `s = f_i e_i` in each trivialization. Nonzero residue-field value is equivalent
-   to `f_i` lying outside the point's prime, so `X_s` meets the chart in `D(f_i)`
-   (def-weil-residue-field).
-2. Quasi-coherence identifies the restricted `F` with the tilde of its section module
-   (pqf-def-coherent, lem-weil-pbc-affine-tilde-gamma-adjunction).
-   Restriction to `D(f_i)` is localization
-   (lem-weil-pbc-spec-module-tilde-sections). Since `t` vanishes there, the localization
-   kernel criterion gives `f_i ^ n_i * t_i = 0` for some natural `n_i`
-   (def-weil-pbc-module-localization).
+   to `f_i` lying outside the point's prime, so `X_s` meets the chart in `D(f_i)`.
+2. Quasi-coherence identifies the restricted `F` with the tilde of its section module.
+   Restriction to `D(f_i)` is localization.
+   Since `t` vanishes there, the localization
+   kernel criterion gives `f_i ^ n_i * t_i = 0` for some natural `n_i`.
 3. Take the maximum of the finitely many `n_i` (zero for the empty cover). Multiplication
    by the corresponding tensor power of `s` vanishes on every chart, since in the local
-   basis it is multiplication by `f_i ^ m` (def-sc-invertible-module).
+   basis it is multiplication by `f_i ^ m`.
    The sheaf property then makes the global tensor-product section zero.
 -/
 theorem section_restriction_s_torsion

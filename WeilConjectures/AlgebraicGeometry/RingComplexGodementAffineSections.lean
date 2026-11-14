@@ -15,7 +15,6 @@ public import Mathlib.Algebra.Category.Grp.Zero
 /-! # Godement augmentation on principal affine intersections
 
 Source: Stacks Project, Tags 0FKS, 01ET, and 01XB.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -125,7 +124,6 @@ private theorem godement_eval_quasiIso (X : Scheme.{u}) (U : X.Opens)
 /-- The chosen Godement augmentation remains a quasi-isomorphism on every
 principal affine intersection of a generating cover.
 Source: Stacks Project, Tags 0FKS, 01ET and 01XB.
-(auxiliary; not a blueprint node)
 
 Proof: the span equality shows D(f_i) lies in Spec A minus V(I).
 The intersection indexed by t is therefore the principal open D(product f(t i)),

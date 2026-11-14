@@ -17,7 +17,7 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 # Positive-degree Zariski cohomology classes vanish locally
 
 Source: Stacks Project, Etale Cohomology, Lemma 0GY0 (label `lemma-gabber-criterion`),
-line 14228, proof (blueprint: lem-weil-pbc-zariski-cohomology-locally-zero).
+line 14228, proof.
 -/
 
 @[expose] public section
@@ -83,8 +83,7 @@ private lemma sectionEquiv_zero {X : Scheme.{u}} (U : X.Opens)
 /-- Section cocycles of an injective resolution represent object cohomology, naturally
 in the open, and section coboundaries represent zero.
 
-Source: Stacks Project, Cohomology on Sites, Section 01FT and Lemma 01FW, proof
-(blueprint: lem-weil-pbc-zariski-cohomology-locally-zero).
+Source: Stacks Project, Cohomology on Sites, Section 01FT and Lemma 01FW, proof.
 
 Proof: For each open U, let A_U be the sheafification of the free abelian presheaf
 on yoneda U. Sheafification, free-forgetful and Yoneda adjunctions identify
@@ -186,8 +185,7 @@ Source: Stacks Project, Etale Cohomology, Lemma 0GY0 (label `lemma-gabber-criter
 line 14228, proof; Cohomology on Sites, Lemma 01FW.  The cohomology groups and their
 restriction maps are rendered by Mathlib's cohomology presheaf; an injective resolution
 is included as the resolution used to compute the groups.
-The assertion is the four-step proof in the node
-(blueprint: lem-weil-pbc-zariski-cohomology-locally-zero).
+The assertion is the four-step proof in the node.
 -/
 theorem zariski_cohomology_class_locally_zero {X : Scheme.{u}}
     [HasExt.{u} (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})]

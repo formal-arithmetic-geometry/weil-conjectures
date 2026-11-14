@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Forward implication for the section-ring chart formula
 
-Source: Stacks Project, Constructions, Tag 01N8; Properties, Tag 01PZ
-(blueprint: lem-sc-ample-proj-canonical-map-preimage-forward).
+Source: Stacks Project, Constructions, Tag 01N8; Properties, Tag 01PZ.
 -/
 
 @[expose] public section
@@ -114,8 +113,7 @@ private theorem nonvanishing_of_local_smul {X : Scheme.{v}} (M : X.Modules)
 nonvanishing there. The proof uses the fraction identity with a section already known
 to be nonvanishing at the point; in the residue-field fibre, a nonzero numerator cannot
 be a multiple of a vanishing denominator.
-Source: Stacks Project, Constructions, Tag 01N8; Properties, Tag 01PZ
-(blueprint: lem-sc-ample-proj-canonical-map-preimage-forward).
+Source: Stacks Project, Constructions, Tag 01N8; Properties, Tag 01PZ.
 
 Proof: the nonvanishing/local-generation equivalence shows that an isomorphism
 preserves nonvanishing. Trivialize two invertible modules simultaneously and write

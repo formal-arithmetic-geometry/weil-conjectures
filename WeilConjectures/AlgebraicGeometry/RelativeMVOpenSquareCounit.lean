@@ -90,7 +90,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The single open-square counit calculation. There is no structure morphism `f`
 or second base-change morphism `g`, and no relative direct image to a base.
 Source: Stacks Project, Cohomology, Tags 08HY, 08BV and 0D5S.
-(blueprint: new-relative-mv-open-square-counit).
 Proof: Transpose the base-change map for U → X using its defining 08HY formula.
 The target restriction counit is the transpose after the comparison for W' → U' → X'.
 Naturality moves the base-change morphism through the inverse comparison. The

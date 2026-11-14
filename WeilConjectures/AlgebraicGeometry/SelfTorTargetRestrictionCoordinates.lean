@@ -23,8 +23,7 @@ import WeilConjectures.RingTheory.SelfTorRestrictionResolutionIndependence
 
 /-! # Affine Tor coordinates compatible with resolution-induced restriction
 
-Source: Stacks Project, Tags 06YH, 06YG and 00LS.
-(blueprint: new-t2-self-tor-target-restriction-coordinates). -/
+Source: Stacks Project, Tags 06YH, 06YG and 00LS. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -109,7 +108,6 @@ private theorem tensorComparison_cycle_formula
 on every Tor element, independently of the exterior-conormal comparison.
 Source: Stacks Project, Tags 06YH and 06YG (K-flat comparison), 00LS (resolution
 comparison), and 01I6 (associated sheaves).
-(blueprint: new-t2-self-tor-target-restriction-coordinates).
 
 Proof: For each affine U, resolve A/I by projective A-modules and sheafify its
 augmentation using exists_affine_quotient_sheafified_resolution. Projective terms

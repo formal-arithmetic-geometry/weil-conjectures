@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.TwoOpenComparisonDiagram
 /-! # Transport of two-open realizations
 
 Source: Stacks Project, Tag 09RF, the local compatibility calculation.
-(blueprint: lem-pc-two-open-comparison-realization).
 -/
 
 @[expose] public section
@@ -51,7 +50,6 @@ private theorem comparison_leg
 
 /-- Coherent two-open comparisons transport any realization of a compatible transition.
 Source: Stacks Project, Tag 09RF, compatibility of local comparisons before gluing.
-(blueprint: lem-pc-two-open-comparison-realization).
 
 Proof: Compose each comparison β with the image of its local realization i and θ.
 Expand the canonical restriction of each resulting map. Coherence replaces the β

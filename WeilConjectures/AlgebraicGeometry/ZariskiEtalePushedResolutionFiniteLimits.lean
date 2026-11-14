@@ -20,7 +20,6 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 Source: Stacks Project, Sites, Tags 00X5 and 00X6; Etale Cohomology, Tag 09AX;
 Modules on Sites, Tag 03DJ.
-(blueprint: lem-weil-pbc-zariski-etale-pushed-resolution-finite-limits)
 
 Proof: the usual inclusion j preserves finite limits. Both i and j become
 X.restrictFunctor after applying Scheme.Etale.forget X, whose codomain is Over X,

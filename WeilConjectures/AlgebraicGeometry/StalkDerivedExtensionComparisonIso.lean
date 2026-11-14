@@ -12,8 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.StalkComparisonSourceTransport
 import WeilConjectures.AlgebraicGeometry.StalkDerivedExtensionComparisonIsoCore
 import WeilConjectures.AlgebraicGeometry.StalkDerivedExtensionComparisonIsIso
 
-/-! Intermediate comparison isomorphism for the derived stalk extension.
-(blueprint: lem-pc-stalk-derived-extension-comparison-intermediate) -/
+/-! Intermediate comparison isomorphism for the derived stalk extension. -/
 
 @[expose] public section
 
@@ -64,8 +63,7 @@ the definition just given is precisely the displayed equation. No homology
 calculation or base-flatness is used. Zero complexes, zero stalk rings and the
 identity morphism satisfy the same construction without exceptions.
 Source: Stacks Project, Cohomology, Tags 06YB and 0D5S; More on Algebra, Tag 06Y6;
-perfect.tex, equation-bc preceding Tag 0DJ8 (Tag 0DJ7).
-(blueprint: lem-pc-stalk-derived-extension-comparison-intermediate). -/
+perfect.tex, equation-bc preceding Tag 0DJ8 (Tag 0DJ7). -/
 theorem exists_stalkDerivedExtensionComparisonIso (z : X') :
     letI := leftAlgebra f g' z
     letI := rightAlgebra f f' g g' sq z

@@ -178,7 +178,6 @@ private theorem power_torsion_of_localization_zero (A : CommRingCat.{u}) (s : A)
 of each element of the defining ideal. No coefficient module or derived Hom occurs.
 Source: Stacks Project, dualizing.tex, Tag 0A6R, lemma-local-cohomology-adjoint,
 and the finite localization calculation in its proof.
-(auxiliary; not a blueprint node)
 
 Proof: choose a finite generating list of I and append s, retaining the same span.
 Apply hT to that list. Invert s in every term of its ordered localization complex.

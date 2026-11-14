@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.RingedSpaceTensorPullbackQCoHLocal
 
 /-! # Quasi-coherence of tensor pullback on ringed spaces
 
-Source: Stacks Project, Modules, Tag 01BG
-(blueprint: lem-pc-ringed-space-tensor-pullback-qcoh).
+Source: Stacks Project, Modules, Tag 01BG.
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.RingedSpace
 
 /-- Tensor pullback along any morphism of ringed spaces preserves quasi-coherence.
-Source: Stacks Project, Modules, Tag 01BG, Lemma 17.10.4
-(blueprint: lem-pc-ringed-space-tensor-pullback-qcoh).
+Source: Stacks Project, Modules, Tag 01BG, Lemma 17.10.4.
 
 Proof: Near each point of Y choose a presentation of G as the cokernel of a map
 between free module sheaves. Restrict to the inverse-image open in X. Inverse

@@ -35,8 +35,7 @@ stalks. The finite-dimensional stalk hypothesis explicitly rules out using the
 codimension equation at infinity, where addition cannot determine the codimension.
 No frame or orientation is needed for this vanishing assertion.
 Source: Stacks Project, Tags 0FUE and 09XP; blueprint main-20261015,
-sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md, local coordinate argument
-(blueprint: lem-pur-relative-support-vanishing).
+sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md, local coordinate argument.
 
 Proof: At a geometric point on the support choose simultaneous etale coordinates for
 (V,Z) over B, and pull the chart back along e. Etale restriction is exact and preserves

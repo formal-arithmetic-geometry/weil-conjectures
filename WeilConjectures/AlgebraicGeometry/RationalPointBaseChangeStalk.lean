@@ -22,7 +22,6 @@ import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 Source: blueprint proposition-cohomology-smooth-affine-curve, affine-case unit quotient paragraph;
 Stacks Algebra, Tag 00E6, and Lemma 00PD.
-(blueprint: lem-sc-rational-point-base-change-stalk).
 -/
 
 @[expose] public section
@@ -37,8 +36,7 @@ namespace AlgebraicGeometry
 
 /-- At the point over a rational closed point, the scalar-extension stalk map preserves
 uniformizers. Source: blueprint proposition-cohomology-smooth-affine-curve, affine-case unit
-quotient paragraph; Stacks Algebra Tag 00E6 and Lemma 00PD
-(blueprint: lem-sc-rational-point-base-change-stalk).
+quotient paragraph; Stacks Algebra Tag 00E6 and Lemma 00PD.
 
 Proof: choose an affine neighbourhood Spec A of P with maximal ideal m. The residue field
 A/m is k by the Nullstellensatz. The fibre-prime correspondence identifies the points above

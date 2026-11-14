@@ -15,7 +15,6 @@ import Mathlib.Algebra.Homology.Linear
 /-! # Scalar action on derived global sections
 
 Source: Stacks Project, Tags 01E4 and 01E5.
-(blueprint: lem-pc-resolution-scalar-action)
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ attribute [local instance] enoughInjectives
 
 /-- Derived global sections send multiplication to scalar multiplication.
 Source: Stacks Project, Tags 01E4 and 01E5.
-(blueprint: lem-pc-resolution-scalar-action)
 
 Proof: Multiplication by the global section termwise on an injective resolution lifts
 multiplication on the resolved module, by naturality of multiplication. After global

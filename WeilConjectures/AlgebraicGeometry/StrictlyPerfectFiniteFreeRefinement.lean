@@ -14,7 +14,6 @@ import Mathlib.Data.Int.Interval
 /-! # Finite free refinement of a strictly perfect local model
 
 Source: Stacks Project, Tags 08C4, 08CM and 00NX.
-(blueprint: lem-pc-strictly-perfect-finite-free-refinement).
 -/
 
 @[expose] public section
@@ -41,8 +40,7 @@ rank zero. Restriction preserves the splittings and the selected finite free
 trivializations. Finally restrict hEP and use the canonical comparison between successive
 open restrictions, first on complexes and then after localization, to identify E restricted
 to V with Q(F). The empty scheme has no point to check; zero terms use the rank zero free
-module, so no nonzero-rank or nonempty-support hypothesis is needed.
-(blueprint: lem-pc-strictly-perfect-finite-free-refinement). -/
+module, so no nonzero-rank or nonempty-support hypothesis is needed. -/
 theorem exists_finiteFree_refinement_of_isStrictlyPerfect
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

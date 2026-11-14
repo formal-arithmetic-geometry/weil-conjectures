@@ -102,7 +102,6 @@ private noncomputable def truncatedHomologyCofanIsColimit
 Source: Stacks Project, Tag 08DZ, second-page direct-sum reduction, using
 Tag 07TB for filtered colimits and hence direct sums of module sheaves. Tag 015J identifies
 these ordinary higher images as second-page terms. This is the surjectivity half only.
-(blueprint: lem-pc-truncated-direct-image-second-page-coproduct-epi).
 
 Proof: Put M_i = H^r(tau_GE(a) E_i) and M = H^r(tau_GE(a) S). Choose complex
 representatives of the E_i and their termwise coproduct. Exact direct sums in

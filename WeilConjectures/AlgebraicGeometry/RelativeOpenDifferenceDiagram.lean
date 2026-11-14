@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyF
 /-! # The difference diagram for arbitrary ambient opens
 
 Source: Stacks Project, Tag 08DG, the difference arrow and its split restrictions.
-(blueprint: lem-sc-relative-open-difference-diagram).
 -/
 
 @[expose] public section
@@ -132,8 +131,7 @@ set_option maxHeartbeats 600000 in
 The middle and last objects are the explicit direct-image sum and overlap image.
 This constructs their maps, not a glued object.
 Source: Stacks Project, Cohomology, Tag 08DG, construction of the difference arrow;
-Tag 08FE for restriction of direct images
-(blueprint: lem-sc-relative-open-difference-diagram).
+Tag 08FE for restriction of direct images.
 
 Proof: write W = U ∩ V and use the exact restriction functors rU, rV, rW and
 sU, sV displayed below. Their canonical composition comparisons are eU and eV.

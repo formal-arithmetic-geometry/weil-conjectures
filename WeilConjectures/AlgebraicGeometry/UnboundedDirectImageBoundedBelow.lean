@@ -113,8 +113,7 @@ private theorem included_pullback (A : Type (u + 1)) [CommRing A]
 
 /-- The bounded-below direct-image comparison, expressed using total unbounded derivation.
 Source: blueprint `sk-prop-pe-unbounded-classical-direct-image.proof.md`, Step 9;
-`theorem-comparison-direct-images` and Stacks Tag 09A6
-(auxiliary; not a blueprint node).
+`theorem-comparison-direct-images` and Stacks Tag 09A6.
 
 Proof: Regard K as an object of D+ using its lower bound n. For each direct image use
 rightDerivedFunctorPlusCompatibility to identify its D+ value, included into D, with

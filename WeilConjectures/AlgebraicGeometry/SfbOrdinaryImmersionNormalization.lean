@@ -111,8 +111,7 @@ coefficient ring. The target coefficient identification is produced by the algeb
 inverse-image data and the specified invertible scalar map.
 
 Source: Stacks Project, sites-modules.tex, lemmas `lemma-pullback-module` and
-`lemma-adjoint-push-pull-modules` (Tags 03D2 and 03D3)
-(auxiliary; not a blueprint node).
+`lemma-adjoint-push-pull-modules` (Tags 03D2 and 03D3).
 
 Proof: let phi0 be the transported original ring adjunction unit and precompose it
 with eX inverse. Its transpose under the set-sheaf adjunction is invertible: the

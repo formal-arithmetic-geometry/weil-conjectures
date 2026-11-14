@@ -17,8 +17,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
 /-! # Normalization of derived section push-pull
 
 Source: Stacks Project, `derived.tex`, Tags 09T5 and 08BJ, and
-`sites-cohomology.tex`, Tags 07A6 and 0FPI
-(auxiliary; not a blueprint node).
+`sites-cohomology.tex`, Tags 07A6 and 0FPI.
 
 The statement records the comparison of the fixed internal module operations with
 the section-module operations after passage to derived categories.  All functors,
@@ -486,8 +485,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
 
 /-- The existing internal derived adjunction with its two functor types fixed explicitly.
-Source: Stacks 09T5 and 07A6
-(auxiliary; not a blueprint node). -/
+Source: Stacks 09T5 and 07A6. -/
 def normalizationInternalAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     internalDerivedPullback Λ f ⊣ internalDerivedPushforward Λ f :=
   CondensedRing.derivedUpperStarLowerStarAdjunction Λ f
@@ -755,8 +753,7 @@ private theorem derivedMate {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 /--
 Source: Stacks Project, `derived.tex`, Tags 09T5 and 08BJ, and
-`sites-cohomology.tex`, Tags 07A6 and 0FPI
-(auxiliary; not a blueprint node).
+`sites-cohomology.tex`, Tags 07A6 and 0FPI.
 
 Proof, following the eight steps of the node.
 1. Use the derived equivalence instance for the fixed additive section equivalence.

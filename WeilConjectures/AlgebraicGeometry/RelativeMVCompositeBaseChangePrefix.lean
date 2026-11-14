@@ -321,7 +321,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The composite base-change transpose before applying the target open counit.
 Source: Stacks Project, Cohomology, Tags 08HY, 08HZ and 0D5S.
-(blueprint: new-relative-mv-composite-base-change-prefix).
 Proof: Expand the U local arrow. The mate equation for the inverse U,f direct-image
 comparison and naturality of the composite adjunction counit express its f'-transpose
 as base change for f, followed by base change for U and the U coefficient comparison.

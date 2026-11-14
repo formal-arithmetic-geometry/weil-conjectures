@@ -30,7 +30,6 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- Linear operators obtained by multiplying with local lifts in a square-zero extension.
 Source: Stacks Project, Cohomology, Lemma 0B8S, first paragraph of its proof.
-(blueprint: lem-sc-square-zero-glued-linear-operators)
 
 Proof: Short exactness identifies I with the kernel of p, sectionwise. Cover U by
 opens on which f lifts to b. The product b*i(x) is in the kernel and has a unique

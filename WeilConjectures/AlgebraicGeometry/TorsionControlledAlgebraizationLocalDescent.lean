@@ -17,7 +17,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 Source: Stacks Project, Tag 0889(1), Zariski locality via uniqueness;
 Sheaves, Tags 00AL and 00AM.
-(blueprint: new-stage3-torsion-controlled-algebraization-local-descent).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ and does not assert annihilation for the actual global kernel or cokernel.
 
 Source: Stacks Project, Tag 0889(1), first sentence of the proof and uniqueness;
 Sheaves, Tags 00AL and 00AM.
-(blueprint: new-stage3-torsion-controlled-algebraization-local-descent).
 
 Proof: Choose one supplied triple on each open. Restrict them to pairwise
 intersections. Restriction preserves coherence, kernels and cokernels, and

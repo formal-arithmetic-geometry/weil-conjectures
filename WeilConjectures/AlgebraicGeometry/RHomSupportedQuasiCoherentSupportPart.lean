@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedInternalHomRestrictOpen
 
 /-! # SupportPart of derived internal Hom
 
-Source: Stacks Project, Tag 0A9C proof
-(blueprint: lem-sc-rhom-supported-qcoherent-support-part).
+Source: Stacks Project, Tag 0A9C proof.
 -/
 
 @[expose] public section
@@ -81,8 +80,7 @@ private theorem derivedInternalHom_zero_target
 
 /-- Internal Hom preserves support in its second argument.
 
-Source: Stacks Project, Tag 0A9C proof
-(blueprint: lem-sc-rhom-supported-qcoherent-support-part).
+Source: Stacks Project, Tag 0A9C proof.
 
 Proof: Let U be the open complement of T. Exact restriction commutes with cohomology,
 so the hypothesis makes every cohomology object of L restricted to U zero. Cohomology

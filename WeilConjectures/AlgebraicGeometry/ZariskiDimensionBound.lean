@@ -20,7 +20,7 @@ import WeilConjectures.Topology.NoetherianTopologicalCohomologyVanishing
 # The Zariski dimension bound
 
 Source: the Weil conjectures blueprint, `chap-Smooth-purity`, unit `sk-prop-sf-cbc`,
-lemma `lemma-uniform-bounds-pro-etale-affines` (blueprint: lemma-uniform-bounds-pro-etale-affines);
+lemma `lemma-uniform-bounds-pro-etale-affines`;
 Stacks Project, Cohomology, Proposition 02UZ.
 -/
 
@@ -34,16 +34,15 @@ namespace AlgebraicGeometry
 
 /-- The Zariski cohomology of every abelian sheaf on a Noetherian scheme vanishes above
 any nonnegative upper bound for its topological Krull dimension.
-Source: Stacks Project, Cohomology, Proposition 02UZ and the blueprint lemma of the same name
-(blueprint: lemma-uniform-bounds-pro-etale-affines).
+Source: Stacks Project, Cohomology, Proposition 02UZ and the blueprint lemma of the same name.
 
 Proof: forget the scheme structure. The underlying space is Noetherian by
 `lem-weil-pbc-noetherian-scheme-closed-subsets-minimal`, and its dimension is at most `d`
-by hypothesis (`def-kun-topological-krull-dimension`). The small Zariski site is the site
-of open subsets with jointly surjective open coverings (`lemma-uniform-bounds-pro-etale-affines`).
+by hypothesis. The small Zariski site is the site
+of open subsets with jointly surjective open coverings.
 Thus `F` is an abelian sheaf on that space, and its topological cohomology
-(`def-sc-topological-abelian-cohomology`) is precisely its Zariski cohomology
-(`lemma-uniform-bounds-pro-etale-affines`). Apply
+is precisely its Zariski cohomology.
+Apply
 `lem-sc-noetherian-topological-cohomology-vanishing` to obtain vanishing for every `q > d`.
 -/
 theorem isZero_zariskiCohomology_of_dimension_bound

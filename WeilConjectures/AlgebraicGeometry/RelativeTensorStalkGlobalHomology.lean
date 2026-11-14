@@ -25,8 +25,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # RelativeTensorStalkGlobalHomology
-
-(blueprint: lem-pc-relative-tensor-stalk-global-homology).
+.
 -/
 
 @[expose] public section
@@ -79,8 +78,7 @@ total tensor of P_y and M[0] is isomorphic to Q of that restricted stalk of K
 tensored in the derived category with M[0]. Stalks commute with total tensor,
 single complexes and homology. Taking homology and forgetting scalars gives
 the displayed isomorphisms for all i with this same M. This works for zero
-modules, unbounded complexes and every integer i.
-(blueprint: lem-pc-relative-tensor-stalk-global-homology). -/
+modules, unbounded complexes and every integer i. -/
 theorem relativeTensor_stalk_global_homology_iso
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)

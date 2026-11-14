@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionQuotientCutout
 
 /-! # Sections of smooth algebras modulo an ideal lift over an étale neighbourhood
 
-Source: Stacks Project, More on Algebra, Lemma Tag 07M7
-(blueprint: lem-weil-pbc-smooth-section-etale-lift).
+Source: Stacks Project, More on Algebra, Lemma Tag 07M7.
 -/
 
 @[expose] public section
@@ -28,7 +27,7 @@ open CategoryTheory AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
-/-- (blueprint: lem-weil-pbc-smooth-section-etale-lift)
+/--
 Let `A` be a commutative ring, `J` an ideal, and `B` a smooth `A`-algebra.
 Every `A`-algebra section of `B` to `A/J` lifts after an étale neighbourhood
 of `A` inducing an isomorphism on the quotient.

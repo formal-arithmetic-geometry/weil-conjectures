@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.OpenOrdinaryTensorGermTransport
 /-! # Open restriction of the ordinary tensor comparison
 
 Source: Stacks Project, perfect.tex, equation-bc before Tag 0DJ8 and Tag 0DJ9.
-(blueprint: lem-pc-single-complex-open-ordinary-comparison).
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ open SingleComplexBaseChange
 set_option synthInstance.maxSize 2048
 
 /-- Inverting a pullback counit and then applying it recovers the ordinary comparison.
-Source: the definition of `comparisonIntoPullback`.
-(blueprint: lem-pc-single-complex-open-ordinary-comparison). -/
+Source: the definition of `comparisonIntoPullback`. -/
 theorem comparisonIntoPullback_comp_counit
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -75,8 +73,7 @@ There are no points on empty opens; top opens, zero complexes, and zero stalk ri
 require no separate argument. No flatness over the base stalk is used.
 
 Source: Stacks Project, perfect.tex, equation-bc before Tag 0DJ8 and Tag 0DJ9,
-first paragraph; cohomology.tex, Tags 08HY and 08FE.
-(blueprint: lem-pc-single-complex-open-ordinary-comparison). -/
+first paragraph; cohomology.tex, Tags 08HY and 08FE. -/
 theorem exists_singleComplexOpen_ordinary_comparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

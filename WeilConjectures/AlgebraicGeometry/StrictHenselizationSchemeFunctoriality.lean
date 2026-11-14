@@ -113,7 +113,6 @@ private noncomputable def pointedPullback
 /-- Compatible geometric points admit a morphism of their strict henselization schemes
 commuting with the structural maps. No assertion of locality is made here.
 Source: Stacks Project, Tag 04GU; Tag 03Q9, inverse-limit description.
-(blueprint: lem-weil-pbc-strict-henselization-scheme-functoriality)
 
 Proof: pull back every pointed etale neighbourhood of s along g, pointing the pullback
 by t and its compatible lift to the neighbourhood. The canonical cone of the strict

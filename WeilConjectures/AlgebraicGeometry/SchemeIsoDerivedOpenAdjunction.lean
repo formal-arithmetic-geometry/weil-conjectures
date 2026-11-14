@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionIn
 /-! # Derived open adjunctions at corresponding opens of isomorphic schemes
 
 Source: Stacks Project, Tags 079W and 09IR.
-(blueprint: lem-pc-scheme-iso-derived-open-adjunction).
 -/
 
 @[expose] public section
@@ -59,7 +58,6 @@ set_option backward.isDefEq.respectTransparency false in
 derived equivalence specified by isomorphism pushforward.
 Source: Stacks Project, Tags 079W and 09IR; step 2 of
 lem-pc-affine-derived-open-transport.
-(blueprint: lem-pc-scheme-iso-derived-open-adjunction).
 
 Proof: Apply exists_scheme_iso_derived_restriction_square to obtain an equivalence
 on the two localized open derived categories and a commuting restriction square.

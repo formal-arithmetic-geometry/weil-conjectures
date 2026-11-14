@@ -76,8 +76,7 @@ private noncomputable def affineEvaluationIso
 
 /-- Evaluation on an affine open sends a quasi-coherent module colimit cocone to
 an actual colimit cocone of modules. No filteredness is needed.
-Source: Stacks Project, Schemes, Lemma 01ID and Lemma 01I7
-(blueprint: lem-weil-pbc-quasi-coherent-module-colimit-evaluation).
+Source: Stacks Project, Schemes, Lemma 01ID and Lemma 01I7.
 
 Proof: Put R = Γ(X, U) and restrict the diagram and cocone along the open immersion
 Spec R → X furnished by the affine open U. Restriction preserves colimits since it

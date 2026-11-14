@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.RationalCotangentFunctionalRealization
 /-!
 # Rational tangent vectors and cotangent functionals
 
-Source: Stacks Project, Tags 0B2D and 0B2E, with base `Spec k`
-(blueprint: lem-sc-rational-point-tangent-derivation-identification).
+Source: Stacks Project, Tags 0B2D and 0B2E, with base `Spec k`.
 -/
 
 @[expose] public section
@@ -34,14 +33,12 @@ identifies tangent vectors with the dual of the cotangent space. The map `r` is 
 map from `k` to the residue field; its bijectivity expresses rationality. Scalar structures
 are restricted along `r`. The displayed dual-number formula uses residue-field coordinates,
 so that the coefficient `D a : k` appears as `r (D a)`.
-Source: Stacks Project, Tags 0B2D and 0B2E
-(blueprint: lem-sc-rational-point-tangent-derivation-identification).
+Source: Stacks Project, Tags 0B2D and 0B2E.
 
 Proof:
 1. The closed-point condition implies that the stalk homomorphism reduces to the residue
    map, using the Spec-local-ring correspondence to reconstruct the spectrum morphism and
-   cancel the monomorphism from the local spectrum to `X`
-   (lem-weil-pbc-morphism-from-spec-local-ring).
+   cancel the monomorphism from the local spectrum to `X`.
    Unique dual-number coordinates give `D`; additivity and multiplication give additivity
    and the residue-valued Leibniz identity. The base-morphism condition makes `D` vanish on k.
 2. The Leibniz identity makes `D` vanish on products of maximal-ideal elements, hence on

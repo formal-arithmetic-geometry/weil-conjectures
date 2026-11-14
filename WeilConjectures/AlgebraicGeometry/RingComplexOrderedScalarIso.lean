@@ -96,7 +96,6 @@ private theorem scalarPointIso_one_tmul {A B : CommRingCat.{u}} (φ : A →+* B)
 and its image. This is an augmented cochain isomorphism, with no derived-category,
 K-flatness, ideal, replacement complex, or change-of-generators assumption.
 Source: Stacks Project, dualizing.tex, Tag 0ALZ; algebra.tex, Tag 00DK.
-(auxiliary; not a blueprint node).
 
 Proof: in degree zero use multiplication B tensor_A A to B. In degree q+1, tensor
 commutes with the finite product indexed by increasing (q+1)-tuples. On its t-factor

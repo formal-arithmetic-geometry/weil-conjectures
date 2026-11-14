@@ -31,8 +31,7 @@ open scoped ChangeOfRings
 -- Elaborating the composite comparison checks several transported module structures.
 /-- The normalized ordinary tensor comparison exists.
 Source: Stacks Project, Modules on Sites, Tag 03EL, together with the inverse-image
-adjunction for a morphism of topoi and extension of scalars
-(auxiliary; not a blueprint node).
+adjunction for a morphism of topoi and extension of scalars.
 
 Proof: First apply the inverse-image adjunction to the universal property of module
 bilinear maps. Finite-product preservation transports addition and scalar multiplication;

@@ -29,8 +29,7 @@ set_option backward.isDefEq.respectTransparency false in
 Proof: a map with zero first projection has second projection in ker(a'). The
 kernel equation for the graph kills its image in the separating quotient, so
 this second projection is zero as well. Pullback extensionality finishes.
-Source: Stacks Project, Tag 0889(1), comparison argument.
-(blueprint: lem-weil-pbc-torsion-controlled-completion-hom-lift-completion). -/
+Source: Stacks Project, Tag 0889(1), comparison argument. -/
 theorem torsionControlledGraphFst_mono
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     {H F F' : CoherentModules X} (a : F ⟶ H) (a' : F' ⟶ H)
@@ -69,8 +68,7 @@ theorem torsionControlledGraphFst_mono
 
 /-- The first projection is invertible: surjectivity is the affine finite-graph
 lemma, and injectivity is the separating-quotient argument above.
-Source: Stacks Project, Tag 0889(1).
-(blueprint: lem-weil-pbc-torsion-controlled-completion-hom-lift-completion). -/
+Source: Stacks Project, Tag 0889(1). -/
 theorem torsionControlledGraphFst_isIso
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     {H F F' : CoherentModules X} (a : F ⟶ H) (a' : F' ⟶ H)
@@ -90,8 +88,7 @@ theorem torsionControlledGraphFst_isIso
 /-- The lift is inverse(first graph projection) followed by second projection.
 The only choice is the unique inverse of the stated isomorphism; the graph itself
 is an actual kernel of an actual pullback discrepancy containing θ.
-Source: Stacks Project, Tag 0889(1).
-(blueprint: lem-weil-pbc-torsion-controlled-completion-hom-lift-completion). -/
+Source: Stacks Project, Tag 0889(1). -/
 noncomputable def torsionControlledCompletionHomLift
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     {H F F' : CoherentModules X} (a : F ⟶ H) (a' : F' ⟶ H)
@@ -114,8 +111,7 @@ Source: Stacks Project, Tag 0889(1), comparison morphisms.
 Proof: the pullback condition gives the equation with a'. The graph kernel
 condition gives the prescribed component of θ after cancelling the quotient
 projection. Functoriality gives the completed equation with a'; finite torsion
-detection then identifies all components with θ.
-(blueprint: lem-weil-pbc-torsion-controlled-completion-hom-lift-completion). -/
+detection then identifies all components with θ. -/
 theorem torsionControlled_completion_hom_lift_constructed
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     {H F F' : CoherentModules X} (a : F ⟶ H) (a' : F' ⟶ H)

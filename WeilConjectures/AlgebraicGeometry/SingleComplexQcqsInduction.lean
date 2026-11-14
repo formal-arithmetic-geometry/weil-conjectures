@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexTargetLocality
 
 /-! # Quasi-compact quasi-separated base change for one complex
 
-Source: Stacks Project, perfect.tex, Tag 0DJ9, lemma-single-complex-base-change
-(blueprint: lem-pc-rf-single-complex-qcqs-induction).
+Source: Stacks Project, perfect.tex, Tag 0DJ9, lemma-single-complex-base-change.
 -/
 
 @[expose] public section
@@ -46,8 +45,7 @@ Proof (the four steps of the node):
    relative Mayer--Vietoris to U union V. Apply quasiCompactOpen_induction to obtain P(X).
 4. singleComplexOpenComparison_top identifies this top-open comparison with the
    original comparison, completing the affine-base criterion of step 1.
-Source: Stacks Project, perfect.tex, Tag 0DJ9
-(blueprint: lem-pc-rf-single-complex-qcqs-induction). -/
+Source: Stacks Project, perfect.tex, Tag 0DJ9. -/
 theorem singleComplexBaseChangeQcqsInduction
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

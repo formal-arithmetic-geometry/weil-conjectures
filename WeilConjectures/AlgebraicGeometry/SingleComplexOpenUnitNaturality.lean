@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 /-! # Naturality of the source-open comparison with respect to adjunction units
 
 Source: Stacks Project, Tags 08HY and 0D5S, applied to the source-open comparison
-of Tag 0DJ9. (blueprint: lem-pc-single-complex-open-unit-naturality).
+of Tag 0DJ9.
 -/
 
 @[expose] public section
@@ -200,7 +200,6 @@ private theorem restriction_square
 coefficient morphism. This is an equality, without any invertibility hypothesis.
 Source: Stacks Project, Tag 08HY, adjoint counit description, and Tag 0D5S,
 composition of derived pullbacks; the restricted map in Tag 0DJ9.
-(blueprint: lem-pc-single-complex-open-unit-naturality).
 
 Proof: Write t = U.ι, p = pullback.fst g' t and v = pullback.snd g' t.
 The right-adjoint comparisons k are the mates of the selected pullback

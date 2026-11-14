@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.QcqsSections
 
 /-! # Clearing denominators of sections on a nonvanishing locus
 
-Source: Stacks Project, Properties, Lemma 01PW, proof of part (2)
-(blueprint: lem-sc-p1-section-clearing-denominators-qcqs).
+Source: Stacks Project, Properties, Lemma 01PW, proof of part (2).
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ variable {X : Scheme.{u}}
 section of an invertible module become restrictions of global sections after a tensor power.
 Here `U` is an open with underlying set `X_s = nonvanishingLocus L s` and the right side is
 `t ⊗ (s|_U)^{⊗ m}`.
-Source: Stacks Project, Properties, Lemma 01PW, proof of part (2)
-(blueprint: lem-sc-p1-section-clearing-denominators-qcqs).
+Source: Stacks Project, Properties, Lemma 01PW, proof of part (2).
 
 Proof:
 1. Using `def-sc-invertible-module` and `pqf-def-coherent`, choose affine neighbourhoods

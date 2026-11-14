@@ -27,8 +27,7 @@ open Scheme _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 attribute [local instance high] SymmetricCategory.toBraidedCategory in
 attribute [local instance 20000] Etale.sheafBraidedCategory in
-/-- Dualizability in the derived monoidal structure, at generic coefficients.
-(auxiliary; not a blueprint node). -/
+/-- Dualizability in the derived monoidal structure, at generic coefficients. -/
 def smoothRelativeDualizable
     (A : Type uA) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -36,8 +35,7 @@ def smoothRelativeDualizable
     (X : Scheme.{u}) (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) : Prop :=
   IsDualizable N
 
-/-- The explicitly constructed relative internal dual.
-(auxiliary; not a blueprint node). -/
+/-- The explicitly constructed relative internal dual. -/
 @[irreducible]
 noncomputable def smoothRelativeDual
     (A : Type uA) [Category.{u + 1} A] [Abelian A]
@@ -58,8 +56,7 @@ theorem smoothRelativeDual_eq
   rfl
 
 /-- The canonical relative bidual map: transpose evaluation using the braiding.
-Source: blueprint lemma-smooth-morphisms-locally-constant-sheaves, construction of the relative dual
-(auxiliary; not a blueprint node). -/
+Source: blueprint lemma-smooth-morphisms-locally-constant-sheaves, construction of the relative dual. -/
 noncomputable def smoothRelativeBidualMap
     (A : Type uA) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -76,7 +73,6 @@ attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 /-- Relative dual of a finite local system over any finite field, against an invertible
 finite-Tor coefficient.
 Source: blueprint lem-asd-smooth-generic-direct-image.proof.md, paragraphs 1--2.
-(auxiliary; not a blueprint node).
 
 Proof: By hfield, every geometric stalk of L is a finite vector space over the coefficient field,
 so L is flat and dualizable. The degree-zero functor carries its exact dual pairing to

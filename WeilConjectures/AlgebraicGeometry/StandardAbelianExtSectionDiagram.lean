@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.AbelianReplacementSectionHomotopies
 /-! # The standard-source abelian Ext section calculation
 
 Source: Stacks Project, Tags 01FB, 01F7 and 013P.
-(blueprint: new-standard-abelian-ext-section-diagram)
 -/
 
 @[expose] public section
@@ -104,7 +103,6 @@ def standardSectionExtHom {X Y : Scheme.{u}} (f : X ⟶ Y) (F : X.Modules) (p : 
 /-- The standard-source calculation of the inverse-image/counit Ext map.
 Source: Stacks Project, Tags 01FB (section diagram), 01F7 (derived functoriality),
 03FD (forgotten injective acyclicity), and 06XR (sections as Ext).
-(blueprint: new-standard-abelian-ext-section-diagram)
 
 Proof: Write T for forgetting modules. Forgotten injectives on X and Y are acyclic
 for abelian sections by 03FD. Thus T(I) computes the derived abelian direct image,

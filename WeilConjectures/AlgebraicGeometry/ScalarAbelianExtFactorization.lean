@@ -15,7 +15,6 @@ import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 /-! # Forgetting scalar Ext classes
 
 Source: Stacks Project, Tag 03FD; constant-sheaf adjunction.
-(blueprint: new-sc-scalar-abelian-ext-factorization).
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ attribute [local instance] Sheaf.monoidalCategory
 local instance (k : Type u) [Field k] (X : Scheme.{u}) : HasExt.{u + 1} (KSheaf X k) :=
   HasExt.standard _
 /-- The exact functor forgetting the k-action on scalar sheaves.
-Source: Stacks Project, Tag 03FD.
-(blueprint: new-sc-scalar-abelian-ext-factorization). -/
+Source: Stacks Project, Tag 03FD. -/
 noncomputable def scalarAbelianForget (k : Type u) [Field k] (X : Scheme.{u}) :
     KSheaf X k ⥤ Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} :=
   sheafCompose _ (forget₂ (ModuleCat.{u} k) AddCommGrpCat.{u})
@@ -66,8 +64,7 @@ instance (k : Type u) [Field k] (X : Scheme.{u}) :
   exact preservesFiniteLimits_of_reflects_of_preserves _ (sheafToPresheaf _ _)
 /-- The integer-unit class of the section 1 in the scalar tensor unit.
 It is constructed from the constant-sheaf adjunction, without choosing sections.
-Source: Stacks Project, Tag 03FD; constant-sheaf adjunction.
-(blueprint: new-sc-scalar-abelian-ext-factorization). -/
+Source: Stacks Project, Tag 03FD; constant-sheaf adjunction. -/
 noncomputable def scalarAbelianUnitClass (k : Type u) [Field k] (X : Scheme.{u}) :
     Sheaf.H.{u} ((scalarAbelianForget k X).obj (𝟙_ (KSheaf X k))) 0 :=
   (Sheaf.H.equiv₀ _ isTerminalTop).symm
@@ -75,15 +72,13 @@ noncomputable def scalarAbelianUnitClass (k : Type u) [Field k] (X : Scheme.{u})
       (((constantSheafAdj (Opens.grothendieckTopology X) (ModuleCat.{u} k)
         isTerminalTop).unit.app (ModuleCat.of k k)) (1 : k)))
 /-- Forget a scalar Ext class and precompose with the integer-unit class.
-Source: Stacks Project, Tag 03FD.
-(blueprint: new-sc-scalar-abelian-ext-factorization). -/
+Source: Stacks Project, Tag 03FD. -/
 noncomputable def scalarAbelianExtComparison (k : Type u) [Field k] (X : Scheme.{u})
     (F : KSheaf X k) (n : ℕ) (x : Abelian.Ext.{u + 1} (𝟙_ (KSheaf X k)) F n) :
     Sheaf.H.{u} ((scalarAbelianForget k X).obj F) n :=
   (scalarAbelianUnitClass k X).comp (x.mapExactFunctor (scalarAbelianForget k X)) (zero_add n)
 /-- On a single scheme the module-to-abelian comparison factors through scalar Ext.
 Source: Stacks Project, Tag 03FD; the constant-sheaf adjunction.
-(blueprint: new-sc-scalar-abelian-ext-factorization).
 
 Proof: Unfold the two explicit comparison maps. Forgetting the k-action after
 restricting scalars is the module-to-abelian functor on objects and morphisms.

@@ -23,7 +23,6 @@ only the ambient scheme and its charts, not the global source or structure morph
 
 Source: Stacks Project, More on Morphisms, proof of Lemma 37.7.1 (Tag 04F3),
 paragraphs beginning "Choose an affine open covering" and "By the general remarks".
-(blueprint: lem-weil-pbc-universal-thickening-cartesian-atlas-core)
 
 Proof: Form the source intersections as pullbacks of the open chart maps of `C`.
 Each `i k` is a homeomorphism: its kernel has square zero, so its closed image is

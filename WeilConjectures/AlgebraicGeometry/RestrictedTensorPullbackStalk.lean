@@ -20,7 +20,6 @@ open CategoryTheory TensorProduct
 namespace AlgebraicGeometry
 /-- Natural stalk comparison after restricting the target to an open.
 Source: Stacks Project, Tags 008H, 0098 and 008B.
-(blueprint: new-e1-restricted-tensor-pullback-stalk)
 
 Proof: The restriction and tensor-pullback adjunctions identify restriction to V
 with tensor pullback along V.ι. The natural composition isomorphism identifies

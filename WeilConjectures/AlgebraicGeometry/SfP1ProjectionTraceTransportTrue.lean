@@ -271,7 +271,6 @@ pure-scalar generators.  Naturality carries the arbitrary arrow `τ` through the
 remaining exchange factors, and the constant sheaf unit comparison is preserved
 by inverse image.  The argument is valid for empty bases and zero coefficient
 rings.
-(auxiliary; not a blueprint node)
 -/
 theorem projectionTraceTransport_true
     (A : Type (u + 1)) [CommRing A] [Finite A]

@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.ClassicalPullbackResolutionSections
 /-! # Ext compatibility with classical derived pullback
 
 Source: Stacks Project, Tag 01F8 and equations 01F9 and 01FA.
-(blueprint: lem-weil-pbc-sheafH-right-derived-pullback)
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ set_option backward.isDefEq.respectTransparency false in
 classical right-derived section map with the Ext pullback map.
 
 Source: Stacks Project, Tag 01F8 and equations 01F9 and 01FA.
-(blueprint: lem-weil-pbc-sheafH-right-derived-pullback)
 
 Proof: take the chosen injective resolutions of G and its inverse image. Apply exact
 inverse image to the first augmentation and lift it into the second resolution.

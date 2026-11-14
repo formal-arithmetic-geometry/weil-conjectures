@@ -16,8 +16,7 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # An affine chain representative of a bottom arrow
 
-Source: Stacks Project, Tags 0BDL and 08CR, second proof.
-(blueprint: lem-sc-zero-bottom-arrow-affine-chain-model). -/
+Source: Stacks Project, Tags 0BDL and 08CR, second proof. -/
 
 @[expose] public section
 
@@ -137,7 +136,6 @@ is invertible; invertibility of its component is not part of this assertion.
 
 Source: Stacks Project, Tag 0BDL, zero-matrix chart; Tag 08CR, second proof,
 and Tag 0D5S, composition of derived pullbacks.
-(blueprint: lem-sc-zero-bottom-arrow-affine-chain-model).
 
 Proof: Choose an affine neighbourhood W of x inside U. Restrict K termwise to W,
 obtaining B; exact restriction preserves its zero terms and zero differential,

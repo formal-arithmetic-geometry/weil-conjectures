@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangePointsFibreHom
 # Points of a zero-dimensional scheme after field extension
 
 Source: Stacks Project, algebra.tex, Lemmas 00KH and 00P4, Theorem 00FV;
-Schemes Lemma 01JT (blueprint: lem-weil-pbc-zero-dimensional-base-change-points).
+Schemes Lemma 01JT.
 -/
 
 @[expose] public section
@@ -34,7 +34,7 @@ namespace AlgebraicGeometry
 /-- A zero-dimensional finite-type scheme over an algebraically closed field has the
 same finite discrete set of points after extension of the ground field.
 Source: Stacks Project, algebra.tex, Lemmas 00KH and 00P4, Theorem 00FV;
-Schemes Lemma 01JT (blueprint: lem-weil-pbc-zero-dimensional-base-change-points).
+Schemes Lemma 01JT.
 
 The proof first obtains finiteness and discreteness from the Artinian zero-dimensional
 case, then identifies each residue field with the algebraically closed base field by

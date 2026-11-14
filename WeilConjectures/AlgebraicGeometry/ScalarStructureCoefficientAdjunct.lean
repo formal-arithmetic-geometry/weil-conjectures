@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 /-! # Scalar structure coefficient has the original structure-sheaf adjunct
 
 Source: Stacks Project, Tags 0096 and 01F7.
-(blueprint: new-sc-scalar-structure-coefficient-adjunct).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ attribute [local instance] Sheaf.monoidalCategory
 
 /-- Scalar structure coefficient has the original structure-sheaf adjunct.
 Source: Stacks Project, Tags 0096 and 01F7.
-(blueprint: new-sc-scalar-structure-coefficient-adjunct).
 
 Proof: Apply naturality on the target of the scalar inverse-image adjunction.
 The characterization of scalarPullbackCoefficient says sectionwise that its

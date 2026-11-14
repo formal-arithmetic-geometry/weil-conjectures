@@ -36,7 +36,6 @@ open Scheme Etale
 Source: Stacks Project, Tag 03QO (exact global sections are the closed-point stalk),
 Tag 03FD (module cohomology agrees with underlying abelian cohomology), and
 Tag 095T, the paragraph computing the map on stalks.
-(blueprint: lem-weil-pbc-strict-local-total-cohomology-exchange)
 
 Proof: the germ isomorphism Gamma(S, J) = J_s for a strictly henselian local
 scheme is natural and exact. The inverse-image stalk isomorphism identifies the

@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorCompariso
 
 /-! # Tensor action on a complex through the single unit
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
-(blueprint: def-pc-scheme-tensor-unit-action).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmet
 
 /-- Tensor an actual chain evaluation into the single unit with F, then act on F.
 Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DQ.
-(blueprint: def-pc-scheme-tensor-unit-action).
 The associator, tensor map and right unitor are the standard constructed complex
 maps. Keeping this composite behind a definition avoids re-elaborating its large
 coproduct instance terms in every evaluation statement. -/

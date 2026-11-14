@@ -14,8 +14,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-!
 # The tensor-formula pullback of modules is left adjoint to pushforward
 
-Source: Stacks Project, Tags 008X, 0095, 0096
-(blueprint: lem-pc-module-pullback-adjunction).
+Source: Stacks Project, Tags 008X, 0095, 0096.
 -/
 
 @[expose] public section
@@ -39,7 +38,7 @@ adjunction `tensorPullback g ⊣ pushforward g`. The adjunction is pinned to the
 composite by its unit: on a section `m` of `G` over `V` it is `θ(1 ⊗ η_G(m))`, where `η` is the
 unit of the inverse-image/direct-image adjunction of abelian sheaves and `θ` is the
 sheafification of the sectionwise tensor product.
-Source: Stacks, Tag 0096 (blueprint: lem-pc-module-pullback-adjunction).
+Source: Stacks, Tag 0096.
 Proof: by the change-of-rings adjunction (Tag 008A), `Hom_{O_X}(P_g G, F)` is
 `Hom_{g⁻¹O_Y}(g⁻¹G, F)` via `u ↦ (m ↦ u(1 ⊗ m))`. By the inverse-image/direct-image module
 adjunction (Tag 008Y) this is `Hom_{O_Y}(G, g_* F)`, where `O_Y` acts on `g_* F` through

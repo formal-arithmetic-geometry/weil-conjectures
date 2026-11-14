@@ -11,7 +11,6 @@ import all WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportCompari
 
 Source: blueprint latest, thm-amb-p1-adjunction.proof.md, first triangle and the
 interchange of the two coordinates under the direct image to the base.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -126,8 +125,7 @@ private theorem collapse_assoc (A : Type (u + 1)) [CommRing A] [Finite A]
 /-- Both ways to push a diagonal-supported object to the base agree.
 Source: blueprint latest, thm-amb-p1-adjunction.proof.md, first triangle:
 "The equality qp1=qp2 and the composition isomorphism for derived direct images
-interchange these two operations"; Stacks Project, Tag 0DV0
-(auxiliary; not a blueprint node).
+interchange these two operations"; Stacks Project, Tag 0DV0.
 
 Proof: expand directComparison as the inverse compositor for p2,f, the equality
 p2 f = p1 f, and the compositor for p1,f. Expand the two section identifications

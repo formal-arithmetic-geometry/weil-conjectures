@@ -13,7 +13,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleSectionModuleFunctors
 /-! # The actual internal total oplax arrow in section modules
 
 Source: Stacks Project, Cohomology on Sites, Tag 07A4, displayed total comparison;
-Modules on Sites, Tag 03EL (auxiliary; not a blueprint node).
+Modules on Sites, Tag 03EL.
 
 All tensors are relative to the pulled-back coefficient ring. The totalization is the
 existing signed direct-sum total, including its infinite degreewise sums. The helpers
@@ -36,24 +36,23 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 /-- The actual mate oplax structure agrees with the canonical composite structure.
 Source: the uniquely normalized direct image and its adjunction mate, Stacks 03EL.
 Proof: the direct-image pairing is uniquely normalized on balanced generators; the
-adjunction bijection transports its equality to equality of the oplax structures.
-(auxiliary; not a blueprint node). -/
+adjunction bijection transports its equality to equality of the oplax structures. -/
 theorem totalInternalOplax_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
     internalPullOplax Λ f = (CondensedRing.monoidal_upperStar Λ f).toOplaxMonoidal :=
   internalPullOplax_eq_canonical Λ f
 
 /-- The actual internal pullback applied termwise.
-Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 03EL. -/
 @[reducible] def totalInternalPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     CochainComplex (internalModules Λ Y) ℤ ⥤ CochainComplex (internalModules Λ X) ℤ :=
   retainedCochainFunctor (CondensedRing.upperStar Λ f)
 /-- The specified ringed pullback applied termwise.
-Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 03EL. -/
 @[reducible] def totalSectionPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     CochainComplex (modules Λ Y) ℤ ⥤ CochainComplex (modules Λ X) ℤ :=
   retainedCochainFunctor (pullback Λ f)
 /-- The unchanged canonical monoidal structure on the retained termwise pullback.
-Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node).
+Source: Stacks 07A4 and 03EL.
 This is the existing monoidal structure, expressed in the retained functor interface. -/
 instance totalSectionPullMonoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (totalSectionPull Λ f).Monoidal := by
@@ -61,12 +60,12 @@ instance totalSectionPullMonoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
   infer_instance
 
 /-- The fixed internal-section equivalence applied termwise.
-Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 03EL. -/
 @[reducible] def totalSectionEquivalence (X : Scheme.{u}) :
     CochainComplex (internalModules Λ X) ℤ ⥤ CochainComplex (modules Λ X) ℤ :=
   cochainSectionEquivalence Λ X
 /-- The specified total comparison, with its cochain tensor type recorded explicitly.
-Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node).
+Source: Stacks 07A4 and 03EL.
 This is the existing uniquely normalized comparison, with no new choice of data. -/
 @[irreducible] def totalTensorComparison (X : Scheme.{u})
     (P Q : CochainComplex (internalModules Λ X) ℤ) :
@@ -75,7 +74,7 @@ This is the existing uniquely normalized comparison, with no new choice of data.
   cochainTensorComparison Λ X P Q
 
 /-- The termwise lift of the fixed adjunction-mate operation comparison.
-Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 03EL. -/
 @[irreducible] def termwisePullComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (internalModules Λ Y) ℤ) :
     (totalSectionEquivalence Λ X).obj ((totalInternalPull Λ f).obj P) ≅
@@ -85,7 +84,7 @@ Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
 /-- The total of the actual internal adjunction-mate oplax map. Its inverse is the
 summed lax map. The existing mapBifunctorComparison uses the canonical left-adjoint
 coproduct comparison, and is the forward map of mapCochainComplexμIso.symm.
-Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 03EL. -/
 @[irreducible] def actualInternalTotalIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (internalModules Λ Y) ℤ) :
     (totalInternalPull Λ f).obj (P ⊗ Q) ≅
@@ -109,8 +108,7 @@ private theorem termwise_naturality
     (NatIso.mapHomologicalComplex h (.up ℤ)).hom.naturality a
 
 /-- Naturality of the fixed termwise operation comparison in its cached functor types.
-Source: Stacks 07A4 and 03EL
-(auxiliary; not a blueprint node).
+Source: Stacks 07A4 and 03EL.
 Proof: take the naturality square of NatIso.mapHomologicalComplex applied to the
 specified ordinary pullComparison. Mapping a composite functor termwise gives the
 same maps as the composite of its termwise lifts. -/
@@ -126,8 +124,7 @@ theorem termwisePullComparison_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
         (equivalence Λ Y).functor (pullback Λ f) (pullComparison Λ f) a
 
 /-- Naturality of the actual internal signed-total oplax comparison.
-Source: Stacks 07A4 and 03EL
-(auxiliary; not a blueprint node).
+Source: Stacks 07A4 and 03EL.
 Proof: the forward map is the signed-total mapBifunctorComparison of the ordinary
 pullback oplax tensor map. Its naturality in both complexes is the bifunctor
 comparison naturality theorem, with tensorHom identified with mapBifunctorMap. -/
@@ -151,7 +148,7 @@ theorem actualInternalTotalIso_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- The signed total of the specified ringed adjunction-mate tensor map. Its inverse
 is the sum of the ordinary inverse maps, the construction used by the ringed
 cochain comparison of lem-pur-cochain-pullback-tensor-coherence.
-Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 03EL. -/
 @[irreducible] def sectionTotalIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (modules Λ Y) ℤ) :
     (totalSectionPull Λ f).obj (P ⊗ Q) ≅
@@ -172,8 +169,7 @@ variable {A B C : Type*} [Category* A] [Category* B] [Category* C]
 
 /-- The forward and reverse conjugation paths are inverse.
 Source: the isomorphism laws, applied to the five factors of the total conjugation.
-Proof: cancel e, c, G(i), r and F(p), in that order, using functoriality.
-(auxiliary; not a blueprint node). -/
+Proof: cancel e, c, G(i), r and F(p), in that order, using functoriality. -/
 theorem sectionConjugation_hom_inv_id :
     (F.map p.inv ≫ r.inv ≫ G.map i.hom ≫ c.hom ≫ e.hom) ≫
       (e.inv ≫ c.inv ≫ G.map i.inv ≫ r.hom ≫ F.map p.hom) = 𝟙 _ := by
@@ -183,8 +179,7 @@ theorem sectionConjugation_hom_inv_id :
 
 /-- The reverse and forward conjugation paths are inverse.
 Source: the isomorphism laws, applied to the five factors of the total conjugation.
-Proof: cancel F(p), r, G(i), c and e, in that order, using functoriality.
-(auxiliary; not a blueprint node). -/
+Proof: cancel F(p), r, G(i), c and e, in that order, using functoriality. -/
 theorem sectionConjugation_inv_hom_id :
     (e.inv ≫ c.inv ≫ G.map i.inv ≫ r.hom ≫ F.map p.hom) ≫
       (F.map p.inv ≫ r.inv ≫ G.map i.hom ≫ c.hom ≫ e.hom) = 𝟙 _ := by
@@ -193,8 +188,7 @@ theorem sectionConjugation_inv_hom_id :
     CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_assoc, Iso.inv_hom_id]
 
 /-- The same five-factor isomorphism with its two maps stored explicitly.
-Source: the specified total conjugation in Stacks 07A4 and 03EL.
-(auxiliary; not a blueprint node). -/
+Source: the specified total conjugation in Stacks 07A4 and 03EL. -/
 def sectionConjugationIso : F.obj y ≅ t where
   hom := F.map p.inv ≫ r.inv ≫ G.map i.hom ≫ c.hom ≫ e.hom
   inv := e.inv ≫ c.inv ≫ G.map i.inv ≫ r.hom ≫ F.map p.hom
@@ -205,7 +199,7 @@ end ExplicitConjugation
 
 /-- Conjugate the actual internal total by the fixed operation and signed-total
 comparisons. Both the source and target transports are explicit.
-Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 03EL. -/
 @[irreducible] def conjugatedInternalTotalIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (internalModules Λ Y) ℤ) :
     (totalSectionPull Λ f).obj
@@ -219,7 +213,7 @@ Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
     (tensorIso (termwisePullComparison Λ f P) (termwisePullComparison Λ f Q))
 
 /-- The fixed equivalence on the ring complex in degree zero.
-Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 03EL. -/
 @[irreducible] def totalUnitComparison (X : Scheme.{u}) :
     (totalSectionEquivalence Λ X).obj (internalCochainUnit Λ X) ≅
       sectionCochainUnit Λ X :=
@@ -228,7 +222,7 @@ Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
     (HomologicalComplex.single (modules Λ X) (.up ℤ) 0).mapIso (ordinaryUnitComparison Λ X)
 
 /-- The total internal unit, induced by the specified ordinary unit in degree zero.
-Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 03EL. -/
 @[irreducible] def actualInternalTotalUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (totalInternalPull Λ f).obj (internalCochainUnit Λ Y) ⟶
       internalCochainUnit Λ X :=
@@ -238,7 +232,7 @@ Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
       (normalizationInternalUnit Λ f)
 
 /-- The ringed total unit, induced by ordinary scalar multiplication in degree zero.
-Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 03EL. -/
 @[irreducible] def sectionTotalUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (totalSectionPull Λ f).obj (sectionCochainUnit Λ Y) ⟶
       sectionCochainUnit Λ X :=
@@ -247,7 +241,7 @@ Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
     (HomologicalComplex.single (modules Λ X) (.up ℤ) 0).map (normalizationSectionUnit Λ f)
 
 /-- Conjugate the actual internal unit by the same fixed operation comparisons.
-Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 03EL. -/
 def conjugatedInternalTotalUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (totalSectionPull Λ f).obj (sectionCochainUnit Λ Y) ⟶
       sectionCochainUnit Λ X :=
@@ -257,8 +251,7 @@ def conjugatedInternalTotalUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (totalUnitComparison Λ X).hom
 
 /-- The forward projection is the specified signed sum-total comparison.
-Source: Stacks 07A4, the signed coproduct comparison
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4, the signed coproduct comparison. -/
 theorem actualInternalTotalIso_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (internalModules Λ Y) ℤ) :
     (actualInternalTotalIso Λ f P Q).hom =
@@ -269,8 +262,7 @@ theorem actualInternalTotalIso_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
   rfl
 
 /-- The forward field retains the original native oplax tensorator.
-Source: Stacks 07A4, the specified total tensor map
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4, the specified total tensor map. -/
 theorem sectionTotalIso_δ {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (modules Λ Y) ℤ) :
     (sectionTotalIso Λ f P Q).hom = Functor.OplaxMonoidal.δ (totalSectionPull Λ f) P Q := by
@@ -278,8 +270,7 @@ theorem sectionTotalIso_δ {X Y : Scheme.{u}} (f : X ⟶ Y)
   rfl
 
 /-- The specified section sum-total comparison, without its inverse data.
-Source: Stacks 07A4, signed total tensor comparison
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4, signed total tensor comparison. -/
 theorem sectionTotalIso_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (modules Λ Y) ℤ) :
     (sectionTotalIso Λ f P Q).hom =
@@ -289,8 +280,7 @@ theorem sectionTotalIso_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
   rfl
 
 /-- The specified degree-zero unit is the native cochain oplax unit.
-Source: Stacks 07A4 and 03EL, the total unit map
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 03EL, the total unit map. -/
 theorem sectionTotalUnit_η {X Y : Scheme.{u}} (f : X ⟶ Y) :
     sectionTotalUnit Λ f = Functor.OplaxMonoidal.η (totalSectionPull Λ f) := by
   unfold sectionTotalUnit normalizationSectionUnit

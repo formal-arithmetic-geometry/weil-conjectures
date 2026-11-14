@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 /-! # Eventual surjectivity of coordinate multiplication on twisted sections
 
 Source: Stacks Project, Tag 01YS (4), applied to the locally split coordinate sequence.
-(blueprint: lem-sc-p1-section-coordinate-surjective).
 -/
 
 @[expose] public section
@@ -36,7 +35,6 @@ sections in the preceding degree. This asserts no finite generation of a section
 
 Source: Stacks Project, Lemma 01YS (4), and the standard two-coordinate sequence on P¹;
 https://stacks.math.columbia.edu/tag/01YS.
-(blueprint: lem-sc-p1-section-coordinate-surjective).
 
 Proof: the coordinate maps give the sequence
 0 → O(-1) → O² → O(1) → 0, with maps t ↦ (-x₁t, x₀t) and

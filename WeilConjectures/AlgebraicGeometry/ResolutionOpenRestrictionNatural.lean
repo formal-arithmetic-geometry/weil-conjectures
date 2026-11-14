@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 
 /-! # Restriction naturality of raw section cohomology
 
-Source: Stacks Project, Tags 01E1, 01E2 and 01E4.
-(blueprint: lem-pc-resolution-open-restriction-natural). -/
+Source: Stacks Project, Tags 01E1, 01E2 and 01E4. -/
 
 @[expose] public section
 universe u
@@ -43,7 +42,6 @@ private theorem homology_restriction_transport
 
 /-- The fixed comparison is natural for inverse images of smaller base opens.
 Source: Stacks Project, Tags 01E1, 01E2 (Equation 20.7.1.1) and 01E4.
-(blueprint: lem-pc-resolution-open-restriction-natural).
 
 Proof: Compute both top-open and U-open cohomology using the given injective
 resolution R.resolution on Y. Map R.comparison through U-open sections, then

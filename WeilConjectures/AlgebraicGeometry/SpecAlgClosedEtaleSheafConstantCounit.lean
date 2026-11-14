@@ -82,7 +82,6 @@ private theorem spec_algClosed_etale_iso_of_terminal
 
 /-- The constant-sheaf counit is an isomorphism in the algebraically closed étale case.
 Source: Stacks Project, Remark 59.23.2 (Tag 03P5).
-(blueprint: lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant-counit).
 
 Proof: An etale scheme over Ω is the disjoint union of its open singleton points,
 by the discrete separable fibre theorem. Each residue extension is finite separable

@@ -76,7 +76,6 @@ attribute [local irreducible] homComplexFunctor
 /-- Restricting uncurrying and postcomposition to an arbitrary tensor summand.
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;
 ordinary evaluation chain calculation, step 3, naturality portion.
-(blueprint: lem-pc-scheme-uncurry-summand-naturality).
 
 Proof: Apply schemeTensorHomUncurry_component to the outer inclusion in degrees
 n,r,k. Its inverse tensor-Hom expression uses the projection of Hom(P,I(F)).

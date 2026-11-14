@@ -18,7 +18,6 @@ set_option autoImplicit false
 /-- The closed point of an affine presentation of a strict henselization maps to the
 selected geometric point. This is the backward half of the singleton-fibre theorem.
 Source: Stacks Project, Tags 04GW and 04GP.
-(blueprint: lem-weil-pbc-strict-henselization-closed-fiber-backward)
 Proof: give Ω the algebra structure induced by the geometric-point residue map.
 The existing strictHenselizationResidue theorem supplies a local-ring structure on the
 coordinate-ring colimit C and says that its closed point maps to s(closedPoint Ω).

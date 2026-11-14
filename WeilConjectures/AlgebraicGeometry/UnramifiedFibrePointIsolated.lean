@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.UnramifiedOverFieldDiscrete
 # Isolated points in fibres of unramified morphisms
 
 Source: Stacks Project, Morphisms, Definition 02G4 and Lemma 02G7
-(blueprint: lem-weil-pbc-unramified-fibre-point-isolated)
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A point unramified in a locally finite type morphism is isolated in its fibre.
 
 Source: Stacks Project, Morphisms, Definition 02G4 and Lemma 02G7.
-(blueprint: lem-weil-pbc-unramified-fibre-point-isolated)
 
 Proof:
 1. Choose the unramified open neighbourhood `U` of `x`. Its residue-field fibre is

@@ -361,7 +361,6 @@ private theorem sectionProduct_isIso
 
 Source: Stacks Project, Tag 095B, proof by sections over a split finite cover; the
 weakly etale base-change argument for the pro-etale site.
-(auxiliary; not a blueprint node)
 
 Proof in words. Compute inverse image along the weakly etale map g by restriction
 along the localization functor of pro-etale sites. For a test W over Y, the assumed

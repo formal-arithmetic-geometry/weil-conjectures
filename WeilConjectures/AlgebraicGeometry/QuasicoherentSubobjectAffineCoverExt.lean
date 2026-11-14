@@ -13,8 +13,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 /-! # Detecting equality of quasi-coherent subobjects on an affine cover
 
 Source: Stacks Project, Cohomology of Schemes, Tag 01Y8, proof;
-Schemes, Tag 01I6 (affine quasi-coherent modules)
-(blueprint: lem-weil-pbc-quasicoherent-subobject-affine-cover-ext).
+Schemes, Tag 01I6 (affine quasi-coherent modules).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ set_option backward.isDefEq.respectTransparency false in
 on an affine open cover. The smaller subobject need not be quasi-coherent, and no
 finiteness or Noetherian hypothesis is needed.
 Source: Stacks Project, Tag 01Y8, proof; the basic-open localization of Tag 01IA
-and sheaf gluing supply the local-to-global step
-(blueprint: lem-weil-pbc-quasicoherent-subobject-affine-cover-ext).
+and sheaf gluing supply the local-to-global step.
 
 Proof: The inequality gives the inclusion from G to H. It is injective on every open
 because it is a monomorphism. On each covering affine, equality of the images of G and H

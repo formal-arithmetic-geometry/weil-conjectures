@@ -17,7 +17,6 @@ public import WeilConjectures.CategoryTheory.RingedToposDerivedPushforwardCompos
 /-! # The supported Ext representative for projective-line integral transport
 
 Source: blueprint latest, thm-amb-p1-adjunction.proof.md, supported diagonal Ext realization.
-(auxiliary; not a blueprint node).
 The existing construction is separated so each file stays within the compilation limit.
 -/
 
@@ -33,8 +32,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale.SfP1Transport
 
 /-- The supported Ext representative with the ordinary functor endpoints fixed.
-Source: exact closed direct image and Ext realization in the diagonal calculation.
-(auxiliary; not a blueprint node). -/
+Source: exact closed direct image and Ext realization in the diagonal calculation. -/
 @[irreducible]
 def supportedMap (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (S : Scheme.{u})

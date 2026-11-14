@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 Source: Stacks Project, Lemma 01YS, proof of (5); homogeneous fraction construction
 of the twisting sheaf, Tag 01M6.
-(blueprint: lem-sc-p1-twisted-sections-constant-action).
 -/
 
 @[expose] public section
@@ -95,7 +94,6 @@ end Scheme.Modules
 
 /-- Constant homogeneous multiplication agrees with the canonical base-field action.
 Source: Stacks Project, Lemma 01YS, proof of (5), and Tag 01M6.
-(blueprint: lem-sc-p1-twisted-sections-constant-action).
 
 Proof: on D₊(Xᵢ) and each of its subopens the structure-map image of c is the degree-zero
 fraction C(c)/1. The definition of twistMul multiplies a degree-n fraction a/b by

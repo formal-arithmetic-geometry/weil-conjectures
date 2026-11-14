@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.UnitsTorsorClosedRestrictionBoundary
 # Closed restriction of classes of units torsors
 
 Source: Stacks Project, Tags 02FQ and 02UV, as used in Tag 09NY.
-(blueprint: lem-sc-units-torsor-closed-restriction-class).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Direct image of a units torsor along a closed immersion, with the action evaluated
 on inverse-image opens. Closedness supplies local sections also off the image.
-Source: Stacks Project, Tags 02FQ and 02UV.
-(blueprint: lem-sc-units-torsor-closed-restriction-class). -/
+Source: Stacks Project, Tags 02FQ and 02UV. -/
 noncomputable def unitsTorsorClosedPushforward {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (Q : Sheaf.Torsor Z.unitsSheaf) :
     Sheaf.Torsor (((Opens.map i.base).sheafPushforwardContinuous AddCommGrpCat.{u}
@@ -80,7 +78,6 @@ closed-immersion comparison; Tag 09NY, final sentence.
 Edge cases: for i = identity this is invariance under the identity comparison. If Z is
 empty, both Q and its direct image are trivial torsors, so both classes are zero.
 No surjectivity of O_X^* to i_* O_Z^* is needed.
-(blueprint: lem-sc-units-torsor-closed-restriction-class).
 
 Proof:
 1. Represent Q by an extension of the constant integer sheaf by O_Z^*, with fibre

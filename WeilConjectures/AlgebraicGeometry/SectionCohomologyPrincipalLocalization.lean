@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.SectionCohomologyPrincipalTorsion
 /-! # Principal localization of the cohomology presheaf
 
 Source: Stacks Project, Tag 09MR, tensor-unit specialization.
-(blueprint: lem-pc-section-cohomology-principal-localization).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 principal opens of an affine base open.
 
 Source: Stacks Project, Tag 09MR, Lemma 30.17.3, and Tag 01E4.
-(blueprint: lem-pc-section-cohomology-principal-localization).
 
 Proof: put Y = f⁻¹W and pull a back to a function b on Y. Y is quasi-compact
 and quasi-separated and f⁻¹D(a) = D(b). Restriction of the injective resolution

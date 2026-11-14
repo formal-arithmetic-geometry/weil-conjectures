@@ -26,7 +26,6 @@ namespace AlgebraicGeometry
 
 /-- Ordinary horizontal pasting and the adjunction comparisons for the iterated pullback.
 Source: Stacks Project, Tag 0ATR, Lemma 48.5.2; Tags 08HY, 0ATM and 0D5S.
-(blueprint: lem-sc-rectangle-ordinary-pasting-comparisons)
 
 Proof: The two projection equations identify k with the canonical iterated-pullback
 isomorphism, by the pullback universal property. Restrict the canonical pullback

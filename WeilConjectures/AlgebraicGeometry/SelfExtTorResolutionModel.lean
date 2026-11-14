@@ -24,8 +24,7 @@ import WeilConjectures.AlgebraicGeometry.SelfExtTorResolutionLocal
 
 /-! # A common complex model for self Ext and self Tor
 
-Source: Stacks Project, Tags 08DH, 08I3, 08KS, 0BQY and 068G.
-(blueprint: lem-sc-self-ext-tor-resolution-model). -/
+Source: Stacks Project, Tags 08DH, 08I3, 08KS, 0BQY and 068G. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -43,7 +42,6 @@ pullback evaluation mate (08I3); modules.tex,
 lemma-i-star-equivalence (08KS); duality.tex, lemma-regular-ideal-ext (0BQY),
 Koszul computation with quotient coefficients; more-algebra.tex,
 equation-simple-tor-product (068G), resolution computation of Tor.
-(blueprint: lem-sc-self-ext-tor-resolution-model).
 
 Proof: Choose a K-flat resolution P of B[0] with flat terms and a K-injective
 resolution J of O_Z[0]; the tensor pullback is additive by its adjunction with

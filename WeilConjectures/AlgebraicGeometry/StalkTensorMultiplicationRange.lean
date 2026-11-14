@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 # Image of stalk tensor multiplication
 
 Source: Stacks Project, Modules, Tags 01AG and 01CB.
-(blueprint: lem-weil-pbc-ideal-multiplication-stalk-range-tensor).
 -/
 
 @[expose] public section
@@ -46,7 +45,6 @@ by the stalk image of the ideal map. This is the pure-tensor calculation in the
 proof of `ideal_multiplication_stalk_range`; it follows from the stalk tensor
 comparison and the germ formula for `e`.
 Source: Stacks Project, Modules, Lemmas 01AG and 01CB.
-(blueprint: lem-weil-pbc-ideal-multiplication-stalk-range-tensor).
 -/
 theorem stalk_tensor_multiplication_range {X : Scheme.{u}} {J : X.Modules}
     (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) (F : X.Modules) (x : X)

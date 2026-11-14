@@ -62,7 +62,6 @@ to this upper prime. Finally, open immersions preserve local topological dimensi
 open neighbourhoods contained in an open chart are cofinal among all neighbourhoods,
 and the chart isomorphisms give homeomorphisms. Transport the affine equality through
 these two charts. Neither maximality nor reducedness nor separatedness is used.
-(blueprint: lem-ag-rational-point-topological-local-dimension-base-change)
 -/
 theorem topologicalKrullDimAt_rationalPoint_field_baseChange
     {k : Type u} [Field k] {X : Scheme.{u}}

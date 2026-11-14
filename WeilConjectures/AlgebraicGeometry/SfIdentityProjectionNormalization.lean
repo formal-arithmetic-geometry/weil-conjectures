@@ -11,8 +11,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence
 
 /-! # Canonical normalization of identity projection
-
-(auxiliary; not a blueprint node).
+.
 -/
 
 @[expose] public noncomputable section
@@ -80,8 +79,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
 /-- The projection map for the identity, normalized by the specified direct-image identity.
 Source: Stacks Project, Tags 0B56 and 0DV0; identity projection normalization in
 WeilConjectures.AlgebraicGeometry.SfGraphFirstProjectionSquare and the proper coincidence square in
-WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence
-(auxiliary; not a blueprint node).
+WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence.
 
 Proof: use identity_pullback_tensor to identify the pullback tensor comparison with the
 canonical identity pullback isomorphism. Transpose the ordinary direct-image projection

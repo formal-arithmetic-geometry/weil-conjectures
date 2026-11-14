@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.RawAffineRestrictedCohomology
 /-! # Coherence of restricted fixed-coefficient single complexes
 
 Source: Stacks Project, Tags 09Z1 and 0EZM, restriction of fixed coefficients.
-(blueprint: def-sbc-restricted-over-single-data).
 -/
 
 @[expose] public section
@@ -24,8 +23,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] upperStar upperStarComp upperStarId
 
 /-- Actual fibre products and their canonical transition arrows.
-Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: def-sbc-restricted-over-single-data). -/
+Source: Stacks Project, Tags 09Z1 and 0EZM. -/
 @[implicit_reducible]
 noncomputable def restrictedOverDiagram {W S : Scheme.{u}} (k : W ⟶ S)
     {I : Type u} [Category.{u} I] (D : I ⥤ Over W) (U : S.Etale) :
@@ -39,8 +37,7 @@ noncomputable def restrictedOverDiagram {W S : Scheme.{u}} (k : W ⟶ S)
     apply pullback.hom_ext <;> simp [rawAffineRestrictedMap, Category.assoc]
 
 /-- The fibre-product cone, constructed without choosing a limit witness.
-Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: def-sbc-restricted-over-single-data). -/
+Source: Stacks Project, Tags 09Z1 and 0EZM. -/
 @[implicit_reducible]
 noncomputable def restrictedOverCone {W S : Scheme.{u}} (k : W ⟶ S)
     {I : Type u} [Category.{u} I] (D : I ⥤ Over W) (c : Cone D) (U : S.Etale) :
@@ -56,8 +53,7 @@ noncomputable def restrictedOverCone {W S : Scheme.{u}} (k : W ⟶ S)
             ← Over.comp_left, c.w f] }
 
 /-- A fixed sheaf restricted to an actual fibre product, placed in degree zero.
-Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: def-sbc-restricted-over-single-data). -/
+Source: Stacks Project, Tags 09Z1 and 0EZM. -/
 @[implicit_reducible]
 noncomputable def restrictedOverSingle {W S : Scheme.{u}} (k : W ⟶ S)
     (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (A : Over W) (U : S.Etale) :
@@ -68,8 +64,7 @@ noncomputable def restrictedOverSingle {W S : Scheme.{u}} (k : W ⟶ S)
       ((upperStar AddCommGrpCat.{u + 1} A.hom).obj F))
 
 /-- The explicit isomorphism for a triangle, including the single-functor comparison.
-Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: def-sbc-restricted-over-single-data). -/
+Source: Stacks Project, Tags 09Z1 and 0EZM. -/
 noncomputable def restrictedOverSingleIso {W S : Scheme.{u}} (k : W ⟶ S)
     (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1})
     {A B : Over W} (f : A ⟶ B) (U : S.Etale) :
@@ -106,8 +101,7 @@ noncomputable def restrictedOverSingleIso {W S : Scheme.{u}} (k : W ⟶ S)
   exact asIso h
 
 /-- The constant complex on the limiting fibre product.
-Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: def-sbc-restricted-over-single-data). -/
+Source: Stacks Project, Tags 09Z1 and 0EZM. -/
 @[implicit_reducible]
 noncomputable def restrictedOverSingleG {W S : Scheme.{u}} (k : W ⟶ S)
     (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -117,8 +111,7 @@ noncomputable def restrictedOverSingleG {W S : Scheme.{u}} (k : W ⟶ S)
   (Functor.const Iᵒᵖ).obj (restrictedOverSingle k F c.pt U)
 
 /-- The cone comparison is the inverse of the explicitly constructed leg isomorphism.
-Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: def-sbc-restricted-over-single-data). -/
+Source: Stacks Project, Tags 09Z1 and 0EZM. -/
 @[implicit_reducible]
 noncomputable def restrictedOverSingleConeIso {W S : Scheme.{u}} (k : W ⟶ S)
     (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1})

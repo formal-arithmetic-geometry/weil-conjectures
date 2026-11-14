@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 /-! # Tensor product of scalar section morphisms
 
 Source: Stacks Project, Cohomology, Tags 01F7 and 0FKV.
-(blueprint: lem-sc-scalar-tensor-global-sections-morphism).
 -/
 
 @[expose] public section
@@ -110,7 +109,6 @@ private theorem inclusion_unit_inv
 
 /-- Scalar section morphisms respect the tensor coefficient.
 Source: Stacks Project, Cohomology, Tags 01F7 and 0FKV.
-(blueprint: lem-sc-scalar-tensor-global-sections-morphism).
 
 Proof: Precompose both morphisms with the constant-scalar-unit isomorphism.
 The constant-sheaf/global-sections adjunction reduces equality to the linear maps

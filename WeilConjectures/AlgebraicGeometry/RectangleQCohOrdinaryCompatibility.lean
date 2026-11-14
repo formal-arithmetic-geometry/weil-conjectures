@@ -91,7 +91,6 @@ private theorem upper_pasting_transport
 
 /-- Ordinary base-change compatibility for the canonical comparison lifts.
 Source: Stacks Project, Tag 0ATM, and Tag 08HY.
-(blueprint: lem-sc-rectangle-qcoh-ordinary-compatibility)
 
 Proof: Apply the faithful QCoh inclusion to the desired equality. Substitute the
 component formulas for p.inv and b.hom, and the given formula for s.hom. The

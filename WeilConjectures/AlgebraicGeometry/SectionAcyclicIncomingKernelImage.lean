@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 /-! # Dimension shifting for the incoming differentials
 
 Source: Stacks Project, Tags 015B and 015J.
-(blueprint: lem-pc-section-acyclic-incoming-kernel-image)
 -/
 
 @[expose] public section
@@ -126,7 +125,6 @@ private theorem cohomology_right_acyclic {Y : Scheme.{u}} (V : Y.Opens)
 are section-acyclic if its terms and homology are section-acyclic.
 Source: Stacks Project, Tag 015B (long exact sequence), applied to the cycle and
 boundary sequences in the proof of Tag 015J.
-(blueprint: lem-pc-section-acyclic-incoming-kernel-image)
 
 Proof: Write B^0 = 0, Z^n = ker(d^n), and B^(n+1) = im(d^n). Restriction to V
 is exact and hence preserves these objects and the homology objects. Induct on n.

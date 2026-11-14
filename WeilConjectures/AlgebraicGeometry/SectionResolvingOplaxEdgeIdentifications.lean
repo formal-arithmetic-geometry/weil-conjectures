@@ -246,7 +246,6 @@ vertices, uses naturality of the resolution comparison and of `modelTensor`,
 and applies the representative equation to the relevant binary pair; the
 source and target associator equations identify the remaining edge.
 Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E.
-(auxiliary; not a blueprint node).
 -/
 theorem section_resolving_oplax_edge_identifications {X Y : Scheme.{u}} (f : X ⟶ Y)
     (μ : SectionTensorArrow Λ f)

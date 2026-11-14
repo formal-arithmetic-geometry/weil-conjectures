@@ -19,7 +19,6 @@ namespace AlgebraicGeometry.Scheme
 section of its associated sheaf.
 Source: Stacks Project, Tag 01IB (associated sheaves), and Tag 01HV,
 Lemma 26.5.4 (7) (localization of module morphisms).
-(blueprint: lem-sc-tilde-scalar-section-action).
 
 Proof: A section is a dependent function with values in the localized modules
 at the points of Spec R. The tilde map acts pointwise by the localized linear

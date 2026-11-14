@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyTriangleLaws
 /-! # The canonical cohomology diagram of a ring system
 
 Source: Stacks Project, Tags 09YQ.
-(blueprint: lem-weil-pbc-spec-ring-cohomology-diagram)
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry.Etale
 and a cocone with the canonical pullback legs. No continuity assertion is made here.
 
 Source: Stacks Project, Tag 09YQ, the cohomology diagram and comparison map.
-(blueprint: lem-weil-pbc-spec-ring-cohomology-diagram)
 
 Proof: Set H(a) to the cohomology of the inverse image of G along v(a).
 For f : a to b, pull cohomology back along Spec(R(f)) and then apply the inverse

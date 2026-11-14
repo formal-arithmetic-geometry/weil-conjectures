@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenPinnedCounitUnit
 /-! # Normalizing the derived unit through the open pullback square
 
 Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-(blueprint: lem-pc-k3-open-unit-square-factorization).
 -/
 
 @[expose] public section
@@ -49,7 +48,6 @@ set_option backward.isDefEq.respectTransparency.types true in
 set_option linter.unusedVariables false in
 /-- A separate step of the open counit factorization.
 Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-(blueprint: lem-pc-k3-open-unit-square-factorization).
 
 Proof: Put P = F_h(I), beta = F.rightDerivedFunctorUnit(I), and let v be
  the homotopy tensor adjunction counit at I. Apply the pinned derived Hom-equivalence

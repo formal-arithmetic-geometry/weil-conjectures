@@ -33,8 +33,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- The canonical germ restriction identifies a geometric stalk with strict-local sections.
-Source: Stacks Project, Tag 03QO and the restriction construction of Tag 03Q9
-(blueprint: lem-weil-pbc-strict-local-germ-restriction-iso).
+Source: Stacks Project, Tag 03QO and the restriction construction of Tag 03Q9.
 
 Proof: choose an affine chart containing the image of `s`. The comparison
 `lem-weil-pbc-etale-local-ring-triples` identifies the chosen coordinate-ring colimit with

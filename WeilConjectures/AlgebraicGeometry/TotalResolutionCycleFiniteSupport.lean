@@ -15,7 +15,6 @@ import Mathlib.Algebra.Category.ModuleCat.EpiMono
 /-! # Finite support in a left half-plane total complex
 
 Source: Stacks Project, Homology, Tag 09IZ, proof, finite-support representation.
-(blueprint: aux-total-resolution-cycle-finite-support)
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ variable {R : Type u} [Ring R]
 
 /-- Every total element in a left half-plane bicomplex has a finite column expansion.
 Source: Stacks Project, Homology, Tag 09IZ, proof, finite-support representation.
-(blueprint: aux-total-resolution-cycle-finite-support)
 
 Proof. Map the dependent finite-support vectors of the modules in bidegrees
 (-i,n+i), for natural i, into the total module by summing their inclusions.

@@ -515,7 +515,6 @@ any completeness property.
 
 Source: Bhatt--Scholze, Proposition 6.6.11, coefficient-model calculation;
 Stacks Tags 03CY, 093J and 093M.
-(auxiliary; not a blueprint node).
 
 Proof: constant module realization in either presentation is the sheafification of the
 same constant module presheaf. The equivalent-site sheafification comparison, normalized

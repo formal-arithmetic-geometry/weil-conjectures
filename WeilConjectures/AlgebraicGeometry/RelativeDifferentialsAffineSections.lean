@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMapB
 # Differential sections on an affine chart
 
 Source: Stacks Project, Tag 01UT.
-(blueprint: lem-sc-relative-differentials-affine-sections).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ variable {X S : Scheme.{u}}
 /-- On an affine chart, differential sections are the ring's Kähler differentials,
 compatibly with the universal derivation.
 Source: Stacks Project, Tag 01UT; Tag 08S2, affine calculation.
-(blueprint: lem-sc-relative-differentials-affine-sections).
 Proof: restrict differentials along the open immersion of `U`, using
 `relativeDifferentialsRestrictIso`. Factor the restricted morphism through `V` and use
 `relativeDifferentialsCompIso` to remove the open immersion of the base. Identify `U`

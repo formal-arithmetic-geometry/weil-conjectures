@@ -31,7 +31,6 @@ It has no torsion or local-existence hypothesis and constructs no overlap compar
 
 Source: Stacks Project, Tag 0889(1), sheaf descent after the uniqueness argument;
 Sheaves, Tags 00AL and 00AM.
-(blueprint: new-stage3-torsion-controlled-descended-source-comparisons).
 
 Proof: Compose each φi with li through overFunctorEquiv to identify M restricted to Ui
 with Fi. Coherence is invariant under these isomorphisms and is local on the cover,

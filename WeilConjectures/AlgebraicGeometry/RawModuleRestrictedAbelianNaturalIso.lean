@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.RawModuleRestrictedAbelianNegative
 /-! # Raw module Hom and restricted abelian cohomology
 
 Source: Stacks Project, Tags 03FD, 03Q8 and 09Z1.
-(blueprint: lem-sbc-raw-module-restricted-abelian-natural-iso).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry.Etale
 There are no limit, qcqs, affineness, or indexing assumptions in this comparison.
 Source: Stacks Project, Tag 03FD, lemma-cohomology-modules-abelian; Tag 03Q8,
 restriction to an etale object; Tag 09Z1, canonical maps in lemma-relative-colimit.
-(blueprint: lem-sbc-raw-module-restricted-abelian-natural-iso).
 
 Proof: For each A, resolve A.hom^*G by injective module sheaves. The free module
 sheaf/sections adjunction on U identifies the raw derived-Hom complex with sections

@@ -19,7 +19,6 @@ namespace AlgebraicGeometry
 /-- Geometric data for a zero-dimensional base change, independently of any sheaf.
 Source: Stacks Project, Tags 00KH, 00FV and 01JT; the point description in
 lem-weil-pbc-zero-dimensional-base-change-points.
-(blueprint: lem-weil-pbc-zero-dimensional-base-change-geometric-points).
 
 Proof: Nullstellensatz identifies every residue field of C with k. The local
 Artinian pieces remain local Artinian after extending to k', with residue field k'.

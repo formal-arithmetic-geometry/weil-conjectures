@@ -14,8 +14,7 @@ import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonInheritance
 
 /-! # Tensor inheritance of the single-complex base-change condition
 
-Source: Stacks Project, perfect.tex, Tag 0DJA, part (1)
-(blueprint: lem-pc-rf-single-complex-inherited-tensor-condition).
+Source: Stacks Project, perfect.tex, Tag 0DJA, part (1).
 -/
 
 @[expose] public section
@@ -40,8 +39,7 @@ condition, identify both stalk comparisons with their ring-level cohomology mode
 The original commuting square transfers h_stalk to the localized ring comparison.
 Apply tensor inheritance for K-flat stalk complexes and the flat localization
 A tensor-over-R B -> C. The tensor square then transfers invertibility back to every
-coordinate presentation of the inherited map, by cancellation of its vertical isomorphisms.
-(blueprint: lem-pc-rf-single-complex-inherited-tensor-condition). -/
+coordinate presentation of the inherited map, by cancellation of its vertical isomorphisms. -/
 theorem singleComplexInheritedTensorCondition
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

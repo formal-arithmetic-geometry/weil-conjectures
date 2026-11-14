@@ -20,11 +20,10 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme.Hom
 
-/-- (blueprint: lem-weil-pbc-qf-degree-successor-affine-compact-aux)
+/--
 The finite-generation argument on an affine open produces a compact open whose
 carrier is the successor fibre-degree locus. Source: Stacks Project, More on
-Morphisms, Tag 07RZ, proof, second paragraph (blueprint:
-lem-weil-pbc-qf-degree-successor-affine-compact-aux).
+Morphisms, Tag 07RZ, proof, second paragraph.
 
 Proof: identify the closed degree-≤r locus on the affine open with the vanishing
 locus of an ideal I. Express I as the directed union of its finitely generated

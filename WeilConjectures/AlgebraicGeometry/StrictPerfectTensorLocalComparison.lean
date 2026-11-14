@@ -22,7 +22,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
 /-! # Comparison with prescribed local strictly perfect tensor models
 
 Source: Stacks Project, Cohomology of Sheaves, Tags 09J5 and 06YH; Schemes,
-Tag 08DX (blueprint: lem-sc-strict-perfect-tensor-local-comparison).
+Tag 08DX.
 -/
 
 @[expose] public section
@@ -82,7 +82,6 @@ local instance sptc_localTotal (X : Scheme.{u}) (U : X.Opens)
 
 /-- Strictly perfect complexes are K-flat on the localized ringed space.
 Source: Stacks Project, Tag 06YD, bounded-above flat complexes are K-flat.
-(blueprint: lem-sc-strict-perfect-tensor-local-comparison).
 -/
 private theorem strictPerfect_isKFlat_local (X : Scheme.{u}) (U : X.Opens)
     (A : CochainComplex
@@ -191,7 +190,6 @@ ordinary tensor of global K-flat representatives. No perfectness hypothesis or c
 neighbourhood is involved.
 Source: Stacks Project, Cohomology of Sheaves, Lemma 09J5, local reduction and K-flat
 computation; Tag 06YH, independence of K-flat representatives; Tag 08DX, open restriction.
-(blueprint: lem-sc-strict-perfect-tensor-local-comparison).
 
 Proof: Let R be exact restriction to the localized site over U. The comparison between
 termwise and derived restriction identifies R(Q(P)) with Q(R(P)), and similarly for N.

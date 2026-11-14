@@ -26,7 +26,6 @@ set_option backward.isDefEq.respectTransparency false in
 This identity stops before replacing derived restriction by termwise restriction:
 that replacement is the separate theorem `injectiveSections_strictLocal_comparison`.
 Source: Stacks Project, Tags 03Q8 and 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-injective-source-derived-restriction).
 
 Proof: write M for the underlying complex of J. The right-derived unit identifies
 Rf_*K with Q(f_*M), using q. Since f_*M is a bounded-below complex of injectives,

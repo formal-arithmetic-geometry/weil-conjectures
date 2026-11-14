@@ -28,7 +28,6 @@ namespace AlgebraicGeometry
 /-- Direct-image and base comparisons compatible with a fixed canonical upper comparison.
 Source: Stacks Project, Tags 0ATM (ordinary base-change pasting), 08HY (the counit
 formula), 0D5S (pullback composition), and 0D5T (direct-image composition).
-(blueprint: lem-sc-rectangle-ordinary-geometric-direct)
 
 Proof: The two projection equations identify k with the iterated pullback
 isomorphism. Let c be the pinned derived pullback composition family and let a

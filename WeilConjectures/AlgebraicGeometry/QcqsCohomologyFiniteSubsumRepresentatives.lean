@@ -16,8 +16,7 @@ import Mathlib.AlgebraicGeometry.Properties
 
 /-! # Finite-stage representatives for cohomology of a coproduct
 
-Source: Stacks Project, Cohomology, Tags 01FF and 09J7
-(blueprint: lem-weil-pbc-qcqs-cohomology-finite-subsum-representatives).
+Source: Stacks Project, Cohomology, Tags 01FF and 09J7.
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ open Classical in
 biproduct. This asserts only existence of a finite-stage representative; it does not
 identify the cohomology of that finite stage with a direct sum of cohomology modules.
 
-Source: Stacks Project, Cohomology, Lemma 01FF, applied to finite partial sums as in 09J7
-(blueprint: lem-weil-pbc-qcqs-cohomology-finite-subsum-representatives).
+Source: Stacks Project, Cohomology, Lemma 01FF, applied to finite partial sums as in 09J7.
 
 Proof: The compact opens of a qcqs scheme form a basis stable under intersection, and
 X itself is compact. The finite subsets of I form a nonempty directed preorder, including

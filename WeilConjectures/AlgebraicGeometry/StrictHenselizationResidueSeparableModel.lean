@@ -28,7 +28,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The closed point of any affine local model of the strict henselization factors
 through a base residue field, over which its own residue field is separable.
 Source: Stacks Project, Tag 04HX and Tag 04GP, property (5).
-(blueprint: lem-weil-pbc-strict-henselization-residue-separable-model)
 
 Proof: apply the existing `strictHenselizationResidue` theorem with the algebra
 structure induced by z. It identifies the coordinate colimit's residue field with

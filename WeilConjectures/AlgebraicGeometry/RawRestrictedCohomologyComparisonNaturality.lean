@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.RestrictedComparisonGeneratorPullback
 /-! # Pullback compatibility of restricted derived-Hom evaluation
 
 Source: Stacks Project, Tags 03Q8, 0D6F and 07A6.
-(blueprint: lem-sbc-raw-restricted-cohomology-comparison-naturality).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The explicit evaluation map commutes with the explicit raw pullback.
 This asserts compatibility of a constructed map, independently of invertibility.
 Source: Stacks Project, Tag 03Q8 and Cohomology on Sites, Tags 0D6F and 07A6.
-(blueprint: lem-sbc-raw-restricted-cohomology-comparison-naturality).
 
 Proof: Write V = U times_S Y, V' = U times_S Y', r : V -> Y,
 r' : V' -> Y' and q : V' -> V. The pullback projection identities give

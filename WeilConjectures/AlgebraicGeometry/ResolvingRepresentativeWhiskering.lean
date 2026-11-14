@@ -177,7 +177,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Restriction along a quotient followed by localization is fully faithful on two-variable
 functor categories when every homotopy object has a resolving representative.
 Source: Stacks Project, Categories, Tags 04VI--04VK; Cohomology on Sites, Tag 06YS.
-(blueprint: lem-weil-pbc-resolving-representative-whiskering).
 Proof: resolve the extra vertices of Ore squares and equality refinements to restrict
 the right calculus of fractions to the resolving subcategory. The induced localization
 functor is full by refining roofs, faithful by refining common roofs, and essentially

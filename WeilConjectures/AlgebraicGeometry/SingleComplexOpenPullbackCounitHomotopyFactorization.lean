@@ -20,7 +20,6 @@ import all WeilConjectures.AlgebraicGeometry.OpenPinnedCounitHomotopyRestriction
 /-! # The open pullback square evaluated on a direct-image representative
 
 Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-(blueprint: lem-pc-k3-open-counit-homotopy-factorization).
 -/
 
 @[expose] public section
@@ -75,7 +74,6 @@ end
 
 /-- Derived compatibility before the sectionwise mate identity.
 Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-(blueprint: lem-pc-k3-open-counit-homotopy-factorization).
 
 Proof: The pinned Hom equivalence identifies pullback of the right-derived unit
 followed by the derived counit with the left-derived counit followed by localization

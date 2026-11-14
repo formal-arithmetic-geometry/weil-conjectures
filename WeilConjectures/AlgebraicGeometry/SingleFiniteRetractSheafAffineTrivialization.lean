@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 /-! # Affine trivialization of a single finite free retract
 
 Source: Stacks Project, Tags 00NX, 01IA and 01IB.
-(blueprint: new-pc-single-retract-sheaf-affine-trivialization).
 -/
 
 @[expose] public section
@@ -77,8 +76,7 @@ The source library's localized-sections comparison gives a free sheaf on Spec A_
 Its open-immersion image in X is affine, contains x, and lies inside W and U.
 Restrict along the inverse isomorphism onto that image, compose the restriction
 comparisons, and use the over-site equivalence to recover the required isomorphism.
-Rank zero is allowed; if U is empty no x satisfies hx.
-(blueprint: new-pc-single-retract-sheaf-affine-trivialization). -/
+Rank zero is allowed; if U is empty no x satisfies hx. -/
 theorem exists_affine_trivialization_of_finite_retract
     (X : Scheme.{u}) (U : X.Opens)
     (M : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))

@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.ResolutionUnitTwistComparison
 /-! # Kernel torsion for raw section cohomology
 
 Source: Stacks Project, Tags 09MR and 01E4.
-(blueprint: lem-pc-section-cohomology-principal-torsion).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ no claim that classes on the principal open lift.
 
 Source: Stacks Project, Tag 09MR, Lemma 30.17.3, injectivity of the canonical map
 and the zero criterion for fractions; Tag 01E4, Lemma 20.7.3.
-(blueprint: lem-pc-section-cohomology-principal-torsion).
 
 Proof: Put Y = f⁻¹W and let b be the pullback of a. The affineness of W and
 qcqs hypotheses on f make Y qcqs. Restrict F and I to Y; open restriction

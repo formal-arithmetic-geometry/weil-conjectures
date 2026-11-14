@@ -48,7 +48,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A square-zero kernel has a local action by the quotient algebra, compatible with
 restriction. No resolutions or cohomology occur in this assertion.
 Source: Stacks Project, Cohomology, Lemma 0B8S, first paragraph of the proof.
-(blueprint: lem-sc-square-zero-quotient-local-action)
 
 Proof: Short exactness identifies I with the kernel sheaf of p. For a section f of C
 on U, choose local lifts b on an open cover of U, using that p is an epimorphism of

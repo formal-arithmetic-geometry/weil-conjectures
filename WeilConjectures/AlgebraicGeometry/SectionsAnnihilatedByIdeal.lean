@@ -19,8 +19,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # The subsheaf of sections annihilated by an ideal
 
-Source: Stacks Project, Properties, Lemma 01PO and Definition 01PP
-(blueprint: lem-weil-pbc-sections-annihilated-by-ideal).
+Source: Stacks Project, Properties, Lemma 01PO and Definition 01PP.
 -/
 
 @[expose] public section
@@ -47,8 +46,7 @@ private theorem annihilator_stalkMap_injective (X : Scheme.{u}) {G F : X.Modules
   exact (ModuleCat.mono_iff_injective _).mp hm
 
 /-- The subsheaf of sections annihilated by a quasi-coherent ideal of finite type.
-Source: Stacks Project, Properties, Lemma 01PO and Definition 01PP
-(blueprint: lem-weil-pbc-sections-annihilated-by-ideal).
+Source: Stacks Project, Properties, Lemma 01PO and Definition 01PP.
 
 The quasi-coherent ideal is `J : X.IdealSheafData` (quasi-coherence is built in), with
 ideal sheaf `J.toModules ⊆ 𝒪_X` via `J.toModulesι`; finite type is Mathlib's

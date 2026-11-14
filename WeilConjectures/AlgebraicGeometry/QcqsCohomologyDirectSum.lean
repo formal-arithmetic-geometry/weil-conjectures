@@ -16,8 +16,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 
 /-! # Cohomology commutes with direct sums on qcqs schemes
 
-Source: Stacks Project, Cohomology, Tag 01FF, applied as in Tag 09J7
-(blueprint: lem-weil-pbc-qcqs-cohomology-direct-sum).
+Source: Stacks Project, Cohomology, Tag 01FF, applied as in Tag 09J7.
 -/
 
 @[expose] public section
@@ -79,8 +78,7 @@ Its restriction to summand `i` is the map on cohomology induced by `ι i`.
 In particular, take `I = ℕ` and the family of nonnegative graded pieces of a quasi-coherent
  graded module; no quasi-coherence hypothesis is needed for the general assertion.
 
-Source: Stacks Project, Cohomology, Tag 01FF, and its direct-sum application in Tag 09J7
-(blueprint: lem-weil-pbc-qcqs-cohomology-direct-sum).
+Source: Stacks Project, Cohomology, Tag 01FF, and its direct-sum application in Tag 09J7.
 
 Proof:
 1. By lem-weil-pbc-qcqs-scheme-spectral and def-weil-spectral-space, the underlying space
@@ -90,10 +88,10 @@ Thus lem-weil-pbc-qs-scheme-cohomology-directed-colimit applies at the whole spa
 form a directed system indexed by finite subsets of I; the given coproduct is its colimit
 by lem-weil-pbc-scheme-modules-coproduct-finite-subsums, including the empty partial sum.
 3. By pqf-def-cohomology and lem-weil-pbc-right-derived-universal-delta-functor, H^p is
-additive (def-weil-pbc-delta-functor, def-weil-pbc-additive-functor). Applying it to the
+additive. Applying it to the
 finite biproduct identities identifies each finite partial cohomology sum with H^p of
 that finite partial sheaf sum.
-4. Every algebraic direct-sum element has finite support (def-weil-pbc-direct-sum-modules).
+4. Every algebraic direct-sum element has finite support.
 Functoriality identifies its image under the canonical map with the image of the
 corresponding finite partial cohomology class in the cohomology of the full coproduct.
 5. Directed-colimit cohomology gives a finite-stage representative of every target class;

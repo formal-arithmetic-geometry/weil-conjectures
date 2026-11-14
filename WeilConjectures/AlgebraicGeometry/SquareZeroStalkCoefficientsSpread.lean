@@ -115,7 +115,6 @@ private lemma finite_scalar_zero {X : Scheme.{u}} {κ : Type} [Finite κ]
 
 Source: Stacks Project, Tags 0BCD and 0BC7, spreading finite presentation matrices;
 Tag 00CR, localization as a filtered colimit.
-(blueprint: lem-sc-square-zero-stalk-coefficients-spread).
 
 Proof: Only the entries indexed by i in [a,b] can occur. Represent each entry of
 δ i on a common open neighbourhood of x, by the elementwise description of a stalk.

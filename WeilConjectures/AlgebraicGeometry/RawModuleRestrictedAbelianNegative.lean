@@ -18,7 +18,6 @@ namespace AlgebraicGeometry.Etale
 so their unique isomorphisms are natural.
 Source: Stacks Project, Tags 03FD and 03Q8; negative-degree vanishing of
 right derived sections and orthogonality of the standard derived t-structure.
-(blueprint: lem-sbc-raw-module-restricted-abelian-negative).
 
 Proof: The source of raw derived Hom is concentrated in degree zero. Its target
 is a degree-zero sheaf shifted by q < 0, hence is concentrated in degrees at

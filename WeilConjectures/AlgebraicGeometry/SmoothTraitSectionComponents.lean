@@ -43,8 +43,7 @@ each affine open, since a minimal denominator which is a positive power of a
 uniformizer would give a nonzero nilpotent in the reduced special fibre. The affine
 extensions are unique by flatness and glue to an idempotent on the connected total
 space, a contradiction. The images of both generic section points therefore lie in
-one connected subset of the original generic fibre, proving the assertion.
-(blueprint: lem-sbc-smooth-trait-section-components) -/
+one connected subset of the original generic fibre, proving the assertion. -/
 theorem Smooth.trait_sections_mem_same_generic_component {R : Type u} [CommRing R]
     [IsDomain R] [IsDiscreteValuationRing R] {P : Scheme.{u}}
     (g : P ⟶ Spec (.of R)) [Smooth g] [QuasiCompact g] [QuasiSeparated g]

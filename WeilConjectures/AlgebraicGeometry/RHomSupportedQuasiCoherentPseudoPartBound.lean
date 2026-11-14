@@ -82,8 +82,7 @@ Source: Stacks Project, Tag 0A6H, clause (1).
 On an affine neighbourhood carrying a bounded-above finite-free model of the source,
 the affine Hom-complex estimate gives a lower bound; exact restriction transports it
 to the stated neighbourhood. This is split from quasi-coherence to isolate the
-cohomological estimate.
-(blueprint: new-lem-sc-rhom-supported-qcoherent-pseudo-part-bound). -/
+cohomological estimate. -/
 theorem rhom_supported_quasiCoherent_pseudo_part_bound
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

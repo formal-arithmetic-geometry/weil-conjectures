@@ -30,8 +30,7 @@ source along the underlying homeomorphism. The inverse image of each transported
 is the original affine open. The restricted morphism is surjective and universally
 closed, so its target is affine by Tag 05YU. Hence these are matching affine covers.
 The affine criterion, local on the target, shows that the original morphism is affine.
-An affine universally closed morphism is integral by Tag 01WM.
-(blueprint: lem-trf-universally-homeomorph-integral) -/
+An affine universally closed morphism is integral by Tag 01WM. -/
 theorem isUniversalHomeomorphism_of_universally_isHomeomorph
     {X Y : Scheme.{u}} (r : X ⟶ Y)
     (hr : (topologically IsHomeomorph).universally r) : IsUniversalHomeomorphism r := by

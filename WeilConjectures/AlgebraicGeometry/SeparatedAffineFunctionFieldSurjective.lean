@@ -20,7 +20,7 @@ import WeilConjectures.RingTheory.LocalDomainDimOnePrincipalLocalization
 # Separated affine and local charts surject onto the function field
 
 Source: literature/stacks-project/varieties.tex, Varieties Lemma 09NB,
-proof, separatedness paragraph (blueprint: lem-sc-separated-affine-function-field-surjective)
+proof, separatedness paragraph
 -/
 
 @[expose] public section
@@ -32,8 +32,7 @@ universe u
 
 namespace AlgebraicGeometry
 
-/-- Source: Varieties Lemma 09NB, proof, separatedness paragraph
-(blueprint: lem-sc-separated-affine-function-field-surjective).
+/-- Source: Varieties Lemma 09NB, proof, separatedness paragraph.
 The canonical tensor-product map from an affine open and a local stalk onto the
 function field is surjective.
 
@@ -52,7 +51,7 @@ Proof (the three steps of the node):
    `U ×_X Spec B = Spec K`. By `lem-weil-pbc-fibre-product-affine-spectra`,
    the ambient product over `Spec ℤ` is `Spec (A ⊗[ℤ] B)`, with the map
    induced by the two inclusions into `K`.
-2. Separatedness (`def-weil-proper-morphism`) makes the diagonal of `X` a closed
+2. Separatedness makes the diagonal of `X` a closed
    immersion. Base change along the product of `U → X` and `Spec B → X`, using
    `lem-weil-pbc-closed-immersion-base-change`, makes `Spec K` a closed subscheme
    of `Spec (A ⊗[ℤ] B)` under the identifications in step 1.

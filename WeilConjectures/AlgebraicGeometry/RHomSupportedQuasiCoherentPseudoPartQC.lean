@@ -30,8 +30,7 @@ namespace AlgebraicGeometry
 Source: Stacks Project, Tag 0A6H, clause (1).
 The proof is the affine-local finite-free calculation, followed by local gluing of
 quasi-coherent cohomology; it is split from the local lower-bound component so that
-the two independent conclusions can be proved separately.
-(blueprint: new-lem-sc-rhom-supported-qcoherent-pseudo-part-qc). -/
+the two independent conclusions can be proved separately. -/
 theorem rhom_supported_quasiCoherent_pseudo_part_qc
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

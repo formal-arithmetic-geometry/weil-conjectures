@@ -27,7 +27,6 @@ namespace AlgebraicGeometry.Etale
 /-- Compare module raw Hom to abelian raw Hom, before taking restricted cohomology.
 Source: Stacks Project, Tag 03FD, lemma-cohomology-modules-abelian-agree;
 Tag 03Q8 and its cited restriction lemmas, the sections description.
-(blueprint: lem-sbc-raw-module-abelian-hom-comparison).
 
 Proof: Resolve each pulled-back module sheaf by injectives. The free-module
 sheaf adjunction identifies Hom from the pulled-back free representable with

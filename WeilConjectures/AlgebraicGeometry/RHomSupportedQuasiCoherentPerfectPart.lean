@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedInternalHomAdjunction
 
 /-! # PerfectPart of derived internal Hom
 
-Source: Stacks Project, Tag 0A6H
-(blueprint: lem-sc-rhom-supported-qcoherent-perfect-part).
+Source: Stacks Project, Tag 0A6H.
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ namespace AlgebraicGeometry
 
 /-- Internal Hom from a perfect source preserves quasi-coherence.
 
-Source: Stacks Project, Tag 0A6H (2)
-(blueprint: lem-sc-rhom-supported-qcoherent-perfect-part).
+Source: Stacks Project, Tag 0A6H (2).
 
 Proof: On each neighbourhood with a strictly perfect model for K, its cohomology is
 quasi-coherent: finite-free sheaves are quasi-coherent, direct summands remain

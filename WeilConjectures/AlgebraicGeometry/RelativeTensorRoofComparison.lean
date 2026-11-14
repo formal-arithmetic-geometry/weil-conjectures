@@ -21,7 +21,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Derived comparison for the relative tensor complexes
 
 Source: Stacks Project, Tags 0DJQ and 08CI, local tensor calculation.
-(blueprint: lem-pc-strict-perfect-relative-tensor-roof-comparison).
 -/
 
 @[expose] public section
@@ -157,7 +156,6 @@ private theorem flat_retract (Y : Scheme.{u})
 -- Tensor comparison transports through complex and derived module equivalences.
 /-- The open restriction of the derived tensor is computed by the ordinary total tensor.
 Source: Stacks Project, Tags 0DJQ and 06YH (local strict-perfect tensor calculation).
-(blueprint: lem-pc-strict-perfect-open-tensor-comparison).
 
 The finite-free retract terms of a strictly perfect complex are flat and bounded, hence
 K-flat. Exact open restriction and the K-flat derived tensor comparison identify the
@@ -283,8 +281,7 @@ object with the displayed scalar-restricted K and the second with the explicit
 strictPerfectRelativeTensorComplex. This works also for the empty open. The
 standard localization of the base-ring category is used, since the hypotheses
 only choose localizations for structure-ring modules. This statement concerns
-only the derived tensor computation; it does not assert or choose a roof.
-(blueprint: lem-pc-strict-perfect-relative-tensor-roof-comparison). -/
+only the derived tensor computation; it does not assert or choose a roof. -/
 theorem strictPerfect_relativeTensor_roof_comparison
     {X S : Scheme.{u}} (f : X ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenUnitRestrictionIso
 /-! # Support of the open unit cone
 
 Source: Stacks Project, Tags 09IR, 08D5 and 08DF; Tag 0E4G, support triangle.
-(blueprint: lem-pc-supported-open-unit-cone-properties).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace AlgebraicGeometry
 /-- The cone of an open unit remains quasi-coherent and supported, and is zero on U.
 This assertion constructs no generator and has no orthogonality hypothesis.
 Source: Stacks Project, Tag 09IR, unit-cone paragraph; Tags 08D5 and 08DF.
-(blueprint: lem-pc-supported-open-unit-cone-properties).
 
 Proof: Apply the already stated canonical openRestriction_support_triangle to K.
 Transport its restriction from modules on the open subscheme to the over-site by

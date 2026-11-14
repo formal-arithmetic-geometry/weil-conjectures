@@ -12,8 +12,7 @@ public import WeilConjectures.RingTheory.ProEtale.WContractible
 /-! # Coverings by w-contractible affines
 
 Source: the Weil conjectures blueprint, `chap-The-pro-etale-site`,
-`sk-thm-pe-weakly-contractible-basis/det-pe-wcb-cover.md`
-(blueprint: theorem-enough-affine-weakly-contractible-objects--1).
+`sk-thm-pe-weakly-contractible-basis/det-pe-wcb-cover.md`.
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ rings, with each covering map factoring through an affine open by a faithfully f
 ind-etale ring map. The isomorphism `e` identifies the covering object with `Spec D`;
 `j` identifies `Spec B` with an affine open of the target.
 
-Source: the Weil conjectures blueprint, `det-pe-wcb-cover.md`
-(blueprint: theorem-enough-affine-weakly-contractible-objects--1).
+Source: the Weil conjectures blueprint, `det-pe-wcb-cover.md`.
 
 Proof:
 1. Index by all affine opens `Spec B` of `U.left`. For each `B`, the strict cover

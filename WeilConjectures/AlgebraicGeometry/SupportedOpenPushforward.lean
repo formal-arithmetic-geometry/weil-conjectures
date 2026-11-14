@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedRestrictionIsIsoOpenCover
 
 /-! # Perfect pushforward and canonical maps for supported open inclusions
 
-Source: Stacks Project, Tags 08DP and 08DF
-(blueprint: lem-pc-supported-open-pushforward).
+Source: Stacks Project, Tags 08DP and 08DF.
 -/
 
 @[expose] public section
@@ -42,8 +41,7 @@ the canonical map j_!F → Rj_*F is invertible: it is the map φ whose adjunct
 Support means: every cohomology sheaf has zero stalk at every point off T.
 Derived restriction is the over-site restriction followed by `Modules.overEquiv U`.
 
-Source: Stacks Project, Tags 08DP and 08DF
-(blueprint: lem-pc-supported-open-pushforward).
+Source: Stacks Project, Tags 08DP and 08DF.
 
 Proof:
 1. Put V = X minus T. Since T ⊆ U, {U,V} covers X. For any supported G on U,
@@ -51,8 +49,8 @@ Proof:
    (Rj_*G)|_V = 0 and (Rj_*G)|_U = G, and the unit restricts to the identity on U.
    Apply this with G = E|_U: both sides vanish on V, so the cone of E → Rj_*(E|_U)
    has zero cohomology on the cover, hence is zero. The map is invertible.
-2. Extension by zero is exact and left adjoint to restriction
-   (lem-sc-derived-open-restriction-adjunction-exact), computed termwise; its restrictions
+2. Extension by zero is exact and left adjoint to restriction,
+   computed termwise; its restrictions
    are F on U and 0 on V. The canonical map to Rj_*F is the identity on U and a map between
    zero objects on V. The same cone argument proves it invertible.
 3. Perfectness is local (Tag 08CM). On U, Rj_*F is F and is perfect; on V it is zero,

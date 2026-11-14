@@ -17,8 +17,7 @@ import WeilConjectures.CategoryTheory.BoundedBelowCoproductFiltration
 
 /-! # Local surjectivity of the lower-truncated coproduct comparison
 
-Source: Stacks Project, Tags 08DZ and 015J
-(blueprint: lem-pc-truncated-direct-image-sheaf-coproduct-epi).
+Source: Stacks Project, Tags 08DZ and 015J.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The truncated direct-image coproduct comparison is an epimorphism.
-Source: Stacks Project, Tag 08DZ, bounded-below spectral-sequence argument
-(blueprint: lem-pc-truncated-direct-image-sheaf-coproduct-epi).
+Source: Stacks Project, Tag 08DZ, bounded-below spectral-sequence argument.
 
 Proof.
 1. Choose complex representatives and form their termwise coproduct. Exact sums compute

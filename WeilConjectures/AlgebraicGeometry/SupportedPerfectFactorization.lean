@@ -16,7 +16,6 @@ import all WeilConjectures.AlgebraicGeometry.SupportedKoszulRelativeDetector
 /-! # Perfect factorization of maps to supported complexes
 
 Source: Stacks Project, Tags 0A9C, 0E4G, 094A and 09SP.
-(blueprint: lem-sc-supported-perfect-factorization).
 -/
 @[expose] public section
 universe u v w
@@ -135,7 +134,6 @@ private theorem telescope_factor
 factors through a perfect object vanishing on V.
 Source: Stacks Project, Tag 0A9C, proof, finite factorization paragraph; Tags 0E4G,
 094A and 09SP.
-(blueprint: lem-sc-supported-perfect-factorization).
 
 Proof: Choose the supported perfect generator E for the closed complement of V.
 Express K as the telescope of a sequence starting at zero, with attaching terms

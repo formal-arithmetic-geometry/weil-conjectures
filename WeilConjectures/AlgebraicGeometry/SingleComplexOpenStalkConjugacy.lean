@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.OpenComparisonIntoPullbackTransport
 
 Source: Stacks Project, Tag 0DJ8, locality of equation-bc on X'; Tag 0DJ9,
 source-open induction.
-(blueprint: lem-pc-single-complex-open-stalk-conjugacy).
 -/
 
 @[expose] public section
@@ -107,8 +106,7 @@ the localized comparison itself is invertible. For an empty open there is no z;
 for the top open the same ring isomorphisms apply. Zero complexes and zero rings
 are also allowed, since every transport is through a ring or derived isomorphism.
 Source: Stacks Project, perfect.tex, Tag 0DJ8, proof of locality of condition (1);
-Tag 0DJ9, the comparison for U and its inverse image.
-(blueprint: lem-pc-single-complex-open-stalk-conjugacy). -/
+Tag 0DJ9, the comparison for U and its inverse image. -/
 theorem nonempty_stalkComparison_open_arrow_iso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -54,7 +54,6 @@ specified derived object.
 
 Source: Stacks Project, Tags 03Q9 (restriction of an injective complex) and 03QO
 (exactness of strict-local sections).
-(blueprint: lem-weil-pbc-source-cocycle-exact-restriction).
 
 Proof: the inverse of leftHomologyData.homologyIso sends the cohomology class of the
 cocycle to its homology class in the Hom complex. Degreewise free-generator evaluation
@@ -214,7 +213,6 @@ No K-injectivity or localization bijectivity is needed for this assertion.
 
 Source: Stacks Project, Tags 03Q9 and 03QO, the restriction of an injective complex
 and commutation of exact inverse image and strict-local sections with homology.
-(blueprint: lem-weil-pbc-source-cocycle-exact-restriction).
 
 Proof: evaluate the single-source cocycle degreewise using sourceFreeSectionsComplexIso.
 Its class in the sections complex is the image of the Hom-complex class under the

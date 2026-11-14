@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.OpenUnionHomGluing
 /-! # Relative two-open gluing without local finiteness conditions
 
 Source: Stacks Project, Tag 08DG, Lemma cohomology-lemma-glue.
-(blueprint: lem-sc-relative-open-gluing).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Glue derived objects and compatible maps on the union, using ambient relative
 restriction. No perfectness or support is asserted.
 Source: Stacks Project, Tag 08DG, Lemma cohomology-lemma-glue.
-(blueprint: lem-sc-relative-open-gluing).
 
 Proof: Apply exists_ambient_open_gluing_object to obtain G on X and local
 isomorphisms jW, jV with their overlap transition equation. Compose them with

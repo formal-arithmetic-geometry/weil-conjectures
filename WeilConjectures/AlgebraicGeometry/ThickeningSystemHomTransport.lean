@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-! # Transport of compatible morphism families
 
 Source: Stacks Project, Remark 088F and Lemma 087T.
-(blueprint: lem-weil-pbc-thickening-system-hom-transport).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ namespace AlgebraicGeometry
 of the natural pullback comparison chosen. This concerns a restriction functor only;
 it makes no assertion about formal completions or an equivalence of categories.
 Source: Stacks Project, Remark 088F and Lemma 087T.
-(blueprint: lem-weil-pbc-thickening-system-hom-transport).
 
 Proof: First use d as the comparison. Send a system arrow a to the family
 (r_n,G).inv followed by a.app n followed by (r_n,F).hom. In the reverse direction,

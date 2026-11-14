@@ -42,8 +42,8 @@ has a section through that point, by topological invariance of the étale site a
 
 ## Main statements
 
-- `AlgebraicGeometry.zero_dimensional_etale_cohomology`
-  (blueprint `lemma-sheaves-finite-support-finite-morphisms--1`): the statement above.
+- `AlgebraicGeometry.zero_dimensional_etale_cohomology`:
+  the statement above.
 - `AlgebraicGeometry.Etale.isIso_piLift_toPresheafFiber`: on a finite discrete scheme with
   separably closed residue fields, the sections of a sheaf are the product of its stalks.
 -/

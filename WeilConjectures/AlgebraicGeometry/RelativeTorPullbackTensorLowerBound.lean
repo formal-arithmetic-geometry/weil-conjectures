@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.KFlatDerivedTensorComparison
 
 Source: Stacks Project, Tag 08EV, proof, second displayed equality and hypothesis (3);
 Cohomology, Lemma 20.27.4.
-(blueprint: lem-pc-relative-tor-pullback-tensor-lower-bound)
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ namespace AlgebraicGeometry.Scheme
 /-- The lower endpoint of relative Tor amplitude bounds tensor with every pulled-back module.
 Source: Stacks Project, Tag 08EV, proof, second displayed equality and hypothesis (3);
 Cohomology, Lemma 20.27.4.
-(blueprint: lem-pc-relative-tor-pullback-tensor-lower-bound)
 
 Proof: Choose the interval [a,b], a representative K of E and its K-flat resolution
 P after restriction of scalars to f⁻¹O_S, from HasFiniteTorDimensionOver. Resolve a

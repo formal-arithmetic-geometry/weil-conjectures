@@ -21,7 +21,6 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
 
 /-- The single-degree constant comparison reassociates to the native constant comparison.
 Source: blueprint thm-amb-p1-adjunction.proof.md, constant-object comparisons.
-(auxiliary; not a blueprint node).
 
 Proof: the single-degree left-derived comparison consists of the exact-derived
 comparison followed by the exact single-degree comparison. Composing with the

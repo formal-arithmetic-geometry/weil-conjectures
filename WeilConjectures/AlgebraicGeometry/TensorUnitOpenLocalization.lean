@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 /-! # Localization of the tensor-pullback unit on an open set
 
 Source: Stacks Project, Tags 0096 and 01E8, local degree-zero projection formula.
-(blueprint: lem-sc-tensor-unit-open-localization)
 -/
 
 @[expose] public section
@@ -185,7 +184,6 @@ private theorem localized_unit_of_invertible_comparison
 /-- The pullback-pushforward functor and its adjunction unit restrict to an
 additive endofunctor and a natural transformation on the open slice site.
 Source: Stacks Project, Tag 0096 (adjunction) and Tag 01E8 (local calculation).
-(blueprint: lem-sc-tensor-unit-open-localization)
 
 Proof: Let R be restriction to U and S its right adjoint, with unit ι and
 counit ε. The counit is invertible: on the slice every W is already contained

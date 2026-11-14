@@ -24,8 +24,7 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-! # Finite-support representatives of truncated direct-image cohomology
 
-Source: Stacks Project, Tags 08DZ and 015J
-(blueprint: lem-pc-truncated-direct-image-affine-finite-support).
+Source: Stacks Project, Tags 08DZ and 015J.
 -/
 
 @[expose] public section
@@ -40,8 +39,7 @@ namespace AlgebraicGeometry
 open Classical in
 /-- On an affine open, every section of truncated direct-image cohomology of an
 ambient coproduct comes from finitely many summands.
-Source: Stacks Project, Tag 08DZ, bounded-below spectral-sequence argument, and Tag 015J
-(blueprint: lem-pc-truncated-direct-image-affine-finite-support).
+Source: Stacks Project, Tag 08DZ, bounded-below spectral-sequence argument, and Tag 015J.
 
 Proof. Choose termwise representatives of the ambient coproduct. Exact sums compute
 its cohomology as the sum of the summands' cohomology, and these sums are quasi-coherent.

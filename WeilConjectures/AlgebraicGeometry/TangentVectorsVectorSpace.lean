@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.TangentVectorsVectorSpaceOperations
 /-!
 # The vector space of dual-number tangent vectors
 
-Source: Stacks Project, Tag 0B2B, Lemma 33.16.2 and its proof, with base `Spec k`
-(blueprint: lem-sc-tangent-space-vector-space).
+Source: Stacks Project, Tag 0B2B, Lemma 33.16.2 and its proof, with base `Spec k`.
 -/
 
 @[expose] public section
@@ -30,7 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The dual-number tangent vectors at a point of a scheme over a field form a vector space.
-Source: Stacks Project, Tag 0B2B (blueprint: lem-sc-tangent-space-vector-space).
+Source: Stacks Project, Tag 0B2B.
 
 Proof:
 1. Apply lem-sc-dual-number-scheme-pushout with `K = X.residueField x` and two copies.

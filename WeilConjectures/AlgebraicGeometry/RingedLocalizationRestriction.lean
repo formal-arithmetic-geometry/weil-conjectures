@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.RingedLocalizationModels
 /-! # Restriction of fraction sheaves and localized complexes
 
 Source: Stacks Project, Tags 04IX, 08JB and 0996.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -32,14 +31,14 @@ variable {D E : Type u} [SmallCategory D] [SmallCategory E]
   (T : Sheaf L CommRingCat.{u})
 
 /-- Restrict a section by precomposition with the site functor.
-Source: Stacks 04IX (auxiliary; not a blueprint node). -/
+Source: Stacks 04IX. -/
 def restrictedSection (s : (T.obj ⋙ forget CommRingCat).sections) :
     (((F.sheafPushforwardContinuous CommRingCat K L).obj T).obj ⋙
       forget CommRingCat).sections :=
   ⟨fun W ↦ s.val (F.op.obj W), fun a ↦ s.property (F.op.map a)⟩
 
 /-- Restricting a fraction presheaf restricts its coefficient section.
-Source: Stacks 04IX (auxiliary; not a blueprint node).
+Source: Stacks 04IX.
 The comparison is the identity on fractions; both restriction ring maps are the
 same universal localization lift. -/
 def restrictionPresheafIso (s : (T.obj ⋙ forget CommRingCat).sections) :

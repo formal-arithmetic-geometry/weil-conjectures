@@ -131,7 +131,6 @@ set_option backward.defeqAttrib.useBackward true in
 unit restriction along that representative's marked point.
 Source: Stacks Project, Tag 03Q9, canonical restriction on representatives, and
 Tag 0A3U, degree-zero compatibility in the parent factorization.
-(blueprint: lem-weil-pbc-strict-local-section-pullback).
 
 Proof: expand `qcqsStrictLocalSectionRestriction` and the global-sections pullback.
 Naturality of terminal evaluation changes the latter into the unit for q followed

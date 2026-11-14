@@ -23,7 +23,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Pulling back a finitely presented scheme module preserves finite presentation.
 Source: Stacks Project, modules.tex, Tag 01BQ; sheaves.tex, Tags 0095--0097.
-(blueprint: lem-pc-tensor-pullback-finite-presentation).
 
 Proof: choose the local finite free presentations expressing finite presentation of M.
 The inverse images of their open domains cover X. Restriction of tensor pullback to

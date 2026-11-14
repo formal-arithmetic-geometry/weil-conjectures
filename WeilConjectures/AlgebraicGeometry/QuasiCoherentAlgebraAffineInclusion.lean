@@ -17,8 +17,7 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 /-!
 # Quasi-coherent algebras on nested affine opens
 
-Source: Stacks Project, Constructions, Lemmas 01LN and 01LO
-(blueprint: lem-weil-pbc-quasi-coherent-algebra-affine-inclusion).
+Source: Stacks Project, Constructions, Lemmas 01LN and 01LO.
 
 The tensor comparison is expressed as a pushout square of commutative rings.
 By `CommRingCat.isPushout_tensorProduct`, this says exactly that the canonical map
@@ -39,8 +38,7 @@ is an isomorphism (the ring square is a pushout). Its spectrum square, using the
 charts `U.2.isoSpec`, is cartesian. The spectrum restriction is an open immersion whose image
 is the inverse image of the smaller open in the larger one, with the structure map to `U`
 given by that square. Spectrum restrictions compose and the self-restriction is the identity.
-Source: Stacks Project, Constructions, Lemmas 01LN and 01LO
-(blueprint: lem-weil-pbc-quasi-coherent-algebra-affine-inclusion).
+Source: Stacks Project, Constructions, Lemmas 01LN and 01LO.
 
 Proof: (1) Apply lem-weil-pbc-quasi-coherent-affine-section-base-change to `A.toModule`.
 The resulting module comparison respects products and units by the algebra-sheaf structure,

@@ -46,8 +46,7 @@ target modelTensor. Bifunctoriality of tensor identifies the resulting composite
 with the prescribed vertices. The target associator square follows from its
 naturality in the three resolution counits and the normalized target qTensor
 associator equation. These calculations use the same vertex map on both adjacent
-edges and apply to arbitrary integer-indexed direct-sum totals.
-(auxiliary; not a blueprint node). -/
+edges and apply to arbitrary integer-indexed direct-sum totals. -/
 theorem section_resolving_oplax_model_edges {X Y : Scheme.{u}} (f : X ⟶ Y)
     (μ : SectionTensorArrow Λ f)
     (v : (derivedPullback Λ f).obj

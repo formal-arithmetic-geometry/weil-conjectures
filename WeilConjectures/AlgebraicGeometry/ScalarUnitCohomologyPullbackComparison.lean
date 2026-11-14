@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ScalarUnitCohomologyPullbackNaturality
 /-! # Module-to-abelian comparison for structure-sheaf pullbacks
 
 Source: Stacks Project, Tags 03FD and 01F7, functoriality of cohomology.
-(blueprint: lem-sc-scalar-unit-cohomology-pullback-comparison).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ open Modules
 with pullback along every morphism over the field. No cup product is involved.
 Source: Stacks Project, Tag 03FD, lemma-cohomology-modules-abelian-agree;
 Tag 01F7, cohomology-equation-functorial and cohomology-equation-choice.
-(blueprint: lem-sc-scalar-unit-cohomology-pullback-comparison).
 
 Proof: For every scheme choose an injective resolution of its unit module. Forgetting
 modules is exact and forgotten injectives are acyclic for abelian sections (Tag 03FD).

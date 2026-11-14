@@ -27,7 +27,6 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Restriction of a pullback along an open commutative triangle preserves unit sections.
 Source: Stacks Project, Tags 0096, 0097 and 01CD.
-(blueprint: lem-sc-tensor-pullback-open-triangle).
 
 Proof: use leftAdjointUniq from the restriction adjunction to the chosen tensor-pullback
 adjunction for j, then tensorSectionsComp j b, and transport along h. Evaluate the

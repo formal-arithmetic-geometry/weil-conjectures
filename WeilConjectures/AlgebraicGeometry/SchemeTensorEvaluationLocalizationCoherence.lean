@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.SchemeTensorUnitAction
 
 /-! # Localizing tensor evaluation against the unit
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
-(blueprint: lem-pc-scheme-tensor-evaluation-localization-coherence).
 -/
 
 @[expose] public section
@@ -66,7 +65,6 @@ private theorem lax_tensor_evaluation {C D : Type*} [Category* C] [Category* D]
 /-- Localization transports tensor evaluation against the single unit.
 Source: Stacks Project, cohomology.tex, Tags 08DM and 08DQ;
 ordinary evaluation localization proof step 2.
-(blueprint: lem-pc-scheme-tensor-evaluation-localization-coherence).
 
 Proof: Expand the tensor comparison as the lax monoidal structure of Q. Apply
 its associativity law to F,V,P, then its naturality in the second variable to

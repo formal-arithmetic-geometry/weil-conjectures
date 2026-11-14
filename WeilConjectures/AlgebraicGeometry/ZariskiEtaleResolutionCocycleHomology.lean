@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.ZariskiEtaleResolutionCocycleCompatibil
 
 Source: Stacks Project, Cohomology on Sites, Section 01FT;
 Derived Categories, Tag 06XR (1).
-(blueprint: lem-weil-pbc-zariski-etale-resolution-cocycle-homology)
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 
 Source: Stacks Project, Cohomology on Sites, Section 01FT, equation-cohomology-object-site;
 Derived Categories, Tag 06XR (1), lemma-compute-ext-resolutions.
-(blueprint: lem-weil-pbc-zariski-etale-resolution-cocycle-homology)
 
 Proof: Put P(V) = sheafification of the free abelian presheaf on yoneda(V).
 The sheafification and free abelian adjunctions followed by additive Yoneda

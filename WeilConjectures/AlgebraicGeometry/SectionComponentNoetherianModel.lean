@@ -42,8 +42,7 @@ so its base change is contained in the new component, while the continuous image
 new component is connected and contains the original section point, giving the reverse
 inclusion. Restriction to V does not change the fibres or their section points. This
 identifies the original component on U with the displayed inverse image.
-
-(blueprint: lem-sbc-section-component-noetherian-model) -/
+ -/
 theorem exists_section_component_noetherian_model {P T : Scheme.{u}} (g : P ⟶ T)
     [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g]
     (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) (p : P) :

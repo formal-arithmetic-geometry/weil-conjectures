@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.SelfTorConormalWedgeChartFromSections
 
 /-! # Affine conormal exterior coordinates preserving ideal wedges
 
-Source: Stacks Project, Tags 01R3 and 0096.
-(blueprint: new-t2-self-tor-conormal-wedge-chart). -/
+Source: Stacks Project, Tags 01R3 and 0096. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry
 pullback-unit images of ideal sections to the associated algebraic conormal wedge.
 This statement involves no derived category or Tor module.
 Source: Stacks Project, Tag 01R3 (conormal classes), Tag 0096 (pullback unit).
-(blueprint: new-t2-self-tor-conormal-wedge-chart).
 
 Proof: The closed inverse-image chart of U is affine with coordinate ring A/I,
 where A = Gamma(Y,U) and I = i.ker.ideal U. Apply affine_conormal_sections in identity

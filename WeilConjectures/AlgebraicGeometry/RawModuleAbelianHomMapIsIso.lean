@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.RawModuleAbelianHomMapSurjective
 /-! # Invertibility of the fixed raw scalar comparison
 
 Source: Stacks Project, Tag 03FD.
-(blueprint: lem-sbc-raw-module-abelian-hom-map-is-iso).
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- Forgetting the raw class induces an additive bijection.
 Source: Stacks Project, Tag 03FD, lemma-cohomology-modules-abelian-agree.
-(blueprint: lem-sbc-raw-module-abelian-hom-map-is-iso).
 
 Proof: Put V = U times_S A.left. Pullback of the represented free sheaf
 corepresents sections on V, for both coefficient categories. Resolve A.hom^*G

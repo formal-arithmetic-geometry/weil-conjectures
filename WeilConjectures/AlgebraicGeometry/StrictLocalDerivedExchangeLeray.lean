@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.StrictLocalSectionsUnitLeray
 /-! # Derived exchange and Leray before taking homology
 
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-derived-exchange-leray).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ underived direct-image complex. No neighbourhood section restriction occurs.
 
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and the
 adjunction factorization in `Adjunction.derivedPlus_mateEquiv_app_fac`.
-(blueprint: lem-weil-pbc-strict-local-derived-exchange-leray).
 
 Proof: put M = ιJ and L = f_*M. In the bounded-below homotopy category apply
 `Adjunction.derivedPlus_mateEquiv_app_fac` with `squareUpperStarIso`; its square

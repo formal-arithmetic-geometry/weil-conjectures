@@ -17,7 +17,6 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 /-! # Untwisted comparison with raw section cohomology
 
 Source: Stacks Project, Tags 01E1 and 01E4.
-(blueprint: lem-pc-section-cohomology-untwisted-comparisons).
 -/
 
 @[expose] public section
@@ -363,7 +362,6 @@ cohomology, preserving restriction and the action of every function on the base 
 Source: Stacks Project, Tag 01E4, Lemma 20.7.3 (section-complex computation), and
 Tag 01E1 (restriction of injectives). This is the untwisted part of the proof of
 `sectionCohomology_unit_comparisons`.
-(blueprint: lem-pc-section-cohomology-untwisted-comparisons).
 
 Proof: Restrict I termwise to Y = f inverse W. Exact restriction preserves
 injectives, so the restricted augmented complex resolves G. The sectionwise

@@ -41,7 +41,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 # Constructible compact support for constant finite coefficients on affine smooth curves
 
 Source: Stacks Project, `more-etale.tex`, Tag 0GKX, `lemma-constant-shriek-rel-dim-1`,
-lines 4511--4613 (blueprint: lem-fd-smooth-affine-curve-constant-shriek-constructible).
+lines 4511--4613.
 
 The theorem states constructibility of every cohomology sheaf of the bounded-below derived
 lower shriek of a finite constant module on a separated affine smooth relative curve over an
@@ -232,7 +232,7 @@ smooth relative curve over an affine Noetherian finite-dimensional base is const
 in every characteristic.
 
 Source: Stacks Project, `more-etale.tex`, Tag 0GKX, `lemma-constant-shriek-rel-dim-1`,
-lines 4511--4613 (blueprint: lem-fd-smooth-affine-curve-constant-shriek-constructible).
+lines 4511--4613.
 
 Proof: The base is Noetherian. Induct on closed subsets, allowing every closed subscheme
 structure, and use open-closed gluing of constructible sheaves. Compact-support base change,

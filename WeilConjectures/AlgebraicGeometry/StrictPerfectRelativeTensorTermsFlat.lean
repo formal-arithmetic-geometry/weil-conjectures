@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 /-! # Relative flatness of local tensor terms
 
 Source: Stacks Project, Tags 0DJQ and 08CI, local tensor calculation.
-(blueprint: lem-pc-strict-perfect-relative-tensor-terms-flat).
 -/
 
 @[expose] public section
@@ -70,8 +69,7 @@ of these flat base modules. The degreewise total is a direct sum of these tensor
 stalks commute with the tensor sheafification and this sum. Sums and retracts of
 flat modules are flat. Exactness of tensor is detected on stalks, giving flatness
 of the scalar-restricted term as a sheaf on the localized site. The empty open,
-zero summands and a zero complex satisfy the same stalkwise argument.
-(blueprint: lem-pc-strict-perfect-relative-tensor-terms-flat). -/
+zero summands and a zero complex satisfy the same stalkwise argument. -/
 theorem strictPerfect_relativeTensor_terms_flat
     {X S : Scheme.{u}} (f : X ⟶ S) (U : X.Opens)
     (L : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)

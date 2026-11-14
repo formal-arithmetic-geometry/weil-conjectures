@@ -21,9 +21,7 @@ namespace AlgebraicGeometry
 
 The overlap of a quasi-compact open with an affine open is separated and quasi-compact;
 applying separated quasi-compact open induction proves `P` on the overlap. Source:
-literature/stacks-project/coherent.tex, Cohomology of Schemes, Lemma 08DR (blueprint:
-lem-sc-invert-s-cohomology-induction), second paragraph.
-(blueprint: property-intersection-qc-affine)
+literature/stacks-project/coherent.tex, Cohomology of Schemes, Lemma 08DR, second paragraph.
 
 Proof: The intersection is quasi-compact by quasi-separatedness and finite affine cover criteria,
 and separated as an open subscheme of affine V; apply separated_quasiCompact_open_induction. -/

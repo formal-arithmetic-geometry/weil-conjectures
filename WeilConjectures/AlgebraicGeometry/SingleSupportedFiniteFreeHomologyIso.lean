@@ -17,7 +17,6 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 /-! # Cohomology of the one-column finite free Hom complex
 
 Source: Stacks Project, Tag 08I5, the one-column Hom calculation.
-(blueprint: lem-sc-single-supported-finite-free-homology-iso)
 -/
 
 @[expose] public section
@@ -80,8 +79,7 @@ complex shape directly. Finite biproducts are exact in any abelian category and
 therefore commute with kernels and cokernels, hence with homology. This gives the
 asserted isomorphism. The coproduct and biproduct coincide because the index is
 finite. For r=0 both sides are zero; the same reasoning applies to empty opens
-and unbounded targets.
-(blueprint: lem-sc-single-supported-finite-free-homology-iso). -/
+and unbounded targets. -/
 theorem single_supported_finiteFree_homology_iso
     (X : Scheme.{u}) (U : X.Opens)
     (E I : CochainComplex

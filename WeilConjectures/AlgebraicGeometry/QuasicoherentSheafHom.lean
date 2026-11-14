@@ -15,8 +15,7 @@ import Mathlib.Data.Fintype.EquivFin
 
 /-! # Quasi-coherence of sheaf Hom from a finitely presented module
 
-Source: Stacks Project, Schemes, Section 01LA, item (10), using Modules, Lemma 01CQ
-(blueprint: lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent).
+Source: Stacks Project, Schemes, Section 01LA, item (10), using Modules, Lemma 01CQ.
 -/
 
 @[expose] public section
@@ -72,8 +71,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- On a scheme `X`, sheaf Hom from a finitely presented module `G` into a quasi-coherent
 module `F` is quasi-coherent. Its sections over `W` are the `O_W`-linear maps
 `G|_W ⟶ F|_W`, as in `SheafOfModules.homObj`.
-Source: Stacks Project, Schemes, Section 01LA, item (10), and Modules, Lemma 01CQ
-(blueprint: lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent).
+Source: Stacks Project, Schemes, Section 01LA, item (10), and Modules, Lemma 01CQ.
 
 Proof:
 1. At each point choose a finite free cokernel presentation `O_U^m → O_U^n → G|_U`

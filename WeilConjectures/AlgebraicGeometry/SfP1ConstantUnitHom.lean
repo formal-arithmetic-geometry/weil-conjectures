@@ -48,7 +48,6 @@ private theorem constant_unit_hom_generic
 /-- The constant coefficient comparison is the native single-degree unit comparison.
 Source: the definition of constantUnit and the monoidal unit of constant sheafification
 in blueprint thm-amb-p1-adjunction.proof.md, first-coordinate unit normalization.
-(auxiliary; not a blueprint node).
 
 Proof: the oplax unit of constantSheaf is presheafToSheaf.map(identity) followed
 by identity. Both are identities. The inverse of its monoidal unit iso is this

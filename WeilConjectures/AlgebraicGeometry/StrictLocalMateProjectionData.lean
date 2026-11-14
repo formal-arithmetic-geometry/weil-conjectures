@@ -23,8 +23,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- The global-sections map of the degree-n homology of the derived strict-local mate.
-Source: Stacks, Tag 03Q9, final proof paragraph
-(blueprint: def-weil-pbc-strict-local-mate-projection-data). -/
+Source: Stacks, Tag 03Q9, final proof paragraph. -/
 noncomputable abbrev strictLocalBaseChangeHomologyMap
     {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
@@ -56,8 +55,7 @@ noncomputable abbrev strictLocalBaseChangeHomologyMap
             |>.app K)))
 
 /-- Exact strict-local sections and Leray identify the target with limit cohomology.
-Source: Stacks, Tags 03Q9 and 03QO
-(blueprint: def-weil-pbc-strict-local-mate-projection-data). -/
+Source: Stacks, Tags 03Q9 and 03QO. -/
 noncomputable def strictLocalBaseChangeTargetIso
     {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
@@ -80,8 +78,7 @@ noncomputable def strictLocalBaseChangeTargetIso
 
 /-- Hypercohomology identifications, their transitions, and their compatibility with
 projection restriction. There is no source colimit assertion in this data.
-Source: Stacks, Tag 03Q9, final proof paragraph
-(blueprint: def-weil-pbc-strict-local-mate-projection-data). -/
+Source: Stacks, Tag 03Q9, final proof paragraph. -/
 structure StrictLocalMateProjectionData
     {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

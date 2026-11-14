@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.RingLocalizationTensorBlocks
 /-! # Adjoining one localization factor to an ordered localization complex
 
 Source: Stacks Project, algebraization.tex, Tags 0996 and 099D(d).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -28,7 +27,6 @@ set_option maxHeartbeats 2500000 in
 of an arbitrary nonnegative augmented complex with the tail's coordinates.
 Source: Stacks Project, algebraization.tex, Tags 0996 and 099D(d), the induction
 adjoining the first factor in the tensor expansion.
-(auxiliary; not a blueprint node).
 
 Proof: write S=A[1/f(0)]. The first factor is A in degree zero, S in degree one,
 and zero elsewhere. The total tensor in degree n is therefore the direct sum of

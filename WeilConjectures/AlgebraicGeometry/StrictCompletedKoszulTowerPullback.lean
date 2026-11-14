@@ -30,7 +30,6 @@ import WeilConjectures.AlgebraicGeometry.RingedComplexTensorPullback
 /-! # Finite augmented Koszul towers under inverse image
 
 Source: Stacks Project, algebraization.tex, Tag 0A0E; sites-cohomology.tex, Tag 07A4.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -48,7 +47,6 @@ coaugmentations, before taking any inverse limit or passing to derived categorie
 
 Source: Stacks Project, algebraization.tex, Tag 0A0E, finite Koszul calculation;
 sites-cohomology.tex, Tag 07A4, pullback of tensor products.
-(auxiliary; not a blueprint node).
 
 Proof: identify pullback along the invertible completed coefficient map with pure
 module inverse image. In degree q the ordered dual Koszul tensor has its finite

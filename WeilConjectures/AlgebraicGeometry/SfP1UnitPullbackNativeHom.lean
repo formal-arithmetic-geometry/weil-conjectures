@@ -33,7 +33,6 @@ attribute [local implicit_reducible] ordinaryFiniteSingleFunctor ordinaryFiniteD
 /-- The specified ordinary finite unit pullback is the native constant-sheaf comparison.
 Source: the exact single-degree pullback construction in blueprint
 thm-amb-p1-adjunction.proof.md, first-coordinate constant-object normalization.
-(auxiliary; not a blueprint node).
 
 Proof: ordinaryFiniteUnitPullback_hom gives its specified single-degree comparison
 followed by single of the sheaf-level constant comparison at ModuleCat.of A A.

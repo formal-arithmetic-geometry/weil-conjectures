@@ -134,7 +134,6 @@ private theorem comparison_witness_eq
 
 /-- Transposing the target restriction removes the direct-image composition mates.
 Source: Stacks Project, Cohomology, Tags 08HY, 08HZ and 0D5S.
-(blueprint: new-relative-mv-composite-base-change-target-transpose).
 Proof: Expand relativeMVRestriction. Its three factors are the inverse U',f'
 right-adjoint comparison, Rf' applied to the adjoint of the restricted open counit,
 and the W',f' right-adjoint comparison. Naturality in the source of the adjunction

@@ -32,8 +32,7 @@ equivalence, whose adjunction is compared to the same identity adjunction.
 Use lowerStarId with Type coefficients for the second isomorphism, upperStarId with additive
 coefficients for the third, and lowerStarId with additive coefficients for the fourth. The
 identity clause of cohomologyPullbackFunctorial gives exactly the displayed equality for every F,
-q and x.
-(blueprint: thm-weil-pbc-universalHomeomorphism_identity) -/
+q and x. -/
 theorem universalHomeomorphism_identity {X X' : Scheme.{u}} (u : X' ⟶ X)
     [IsUniversalHomeomorphism u] :
     Nonempty (Scheme.etaleSetPullback (𝟙 X) ≅ 𝟭 _) ∧

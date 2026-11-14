@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.SfProperSectionProjection
 
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, projection naturality and the two diagonal section identities.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -495,8 +494,7 @@ end Naturality
 No trace, line condition, or normalized integral is assumed.
 
 Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the sentences beginning
-"Naturality of the tensor projection map" and "Since p1*q*K=p2*q*K"
-(auxiliary; not a blueprint node).
+"Naturality of the tensor projection map" and "Since p1*q*K=p2*q*K".
 
 Proof: Write U=RDelta!1. Naturality of the projection formula in U->p2*B moves delta
 past inverse projection, leaving tensor with Rp_i!(delta). For i=1, use the normalized

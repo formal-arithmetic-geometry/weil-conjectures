@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.RingedTopoiInverseImageTensorPairingIsI
 /-! # Tensor comparison for the algebraic inverse image
 
 Source: Stacks Project, Modules on Sites, Tag 03EL.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ variable {C D : Type u} [Category.{u} C] [Category.{u} D]
 
 /-- The specified algebraic inverse image preserves tensor products with their pairings.
 Source: Stacks Project, Modules on Sites, Tag 03EL, third equality of the proof.
-(auxiliary; not a blueprint node).
 
 Proof: The right adjoint preserves products. Transport its additive operations and the
 RI-action along the adjunction to give its module direct image, with action of R through

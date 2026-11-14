@@ -21,7 +21,6 @@ import WeilConjectures.Tactic.TransportExact
 Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
 sec-sp-grp-setup/sec-the-purity-statement/sk-thm-purity-transport/sk-thm-purity-transport.proof.md,
 Step 1 (compatibility with the finite reductions), finite-level scalar/tensor reduction.
-(blueprint: lem-pur-tate-tensor-adjunction-insertion)
 -/
 
 @[expose] public noncomputable section
@@ -114,7 +113,6 @@ The ordinary restriction tensorator is `Functor.LaxMonoidal.μ` of exact scalar 
 Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
 sec-sp-grp-setup/sec-the-purity-statement/sk-thm-purity-transport/sk-thm-purity-transport.proof.md,
 Step 1 (compatibility with the finite reductions), finite-level scalar/tensor reduction.
-(blueprint: lem-pur-tate-tensor-adjunction-insertion)
 
 Proof:
 1. The tensor of the two flat source sheaves is flat by exactness of successive tensoring.
@@ -122,8 +120,8 @@ Scalar extension of a flat sheaf is flat: restriction identifies tensoring with 
 with ordinary tensoring by that sheaf. Restriction preserves and reflects exactness. This
 uses the sheaf tensor balancing relations and the exact restriction in
 `lem-pur-sheaf-ring-derived-coefficient-adjunction`; no flatness of the ring map is needed.
-2. For each source sheaf and their tensor, use its flat single as a K-flat representative
-(`lem-sf-etale-single-flat-tensor`). The normalized coefficient adjunction identifies its
+2. For each source sheaf and their tensor, use its flat single as a K-flat representative.
+The normalized coefficient adjunction identifies its
 insertion with the canonical scalar representative followed by the single of the ordinary
 adjunct, sending x tensor b to b times eta(x). The inverse exact-single comparison in
 `def-sp-exact-degree-zero-adjoint-interface` is precisely the one in this calculation.

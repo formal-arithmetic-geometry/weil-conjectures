@@ -12,7 +12,6 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-! # Exactness of the canonical boundary on global sections
 
 Source: Stacks Project, Cohomology, Tag 01DZ.
-(blueprint: lem-sc-module-section-boundary-exact).
 -/
 
 @[expose] public section
@@ -24,8 +23,7 @@ namespace AlgebraicGeometry.RingedSpace
 universe u wC wD
 
 /-- The canonical connecting map, preceded by the degree-zero comparison from sections.
-Source: Stacks Project, Cohomology, Tag 01DZ.
-(blueprint: lem-sc-module-section-boundary-exact). -/
+Source: Stacks Project, Cohomology, Tag 01DZ. -/
 noncomputable def moduleSectionBoundary (X : RingedSpace.{u})
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X))]
     [HasDerivedCategory.{wD}
@@ -71,7 +69,6 @@ private theorem section_boundary_exact
 
 /-- A section has zero canonical boundary precisely when it lifts through the quotient.
 Source: Stacks Project, Cohomology, Tag 01DZ.
-(blueprint: lem-sc-module-section-boundary-exact).
 Proof: The image of the short exact sequence's canonical triangle under derived global
 sections is distinguished. Its homology sequence is exact at degree zero of the quotient.
 Transport that exactness through the single-complex comparison and the isomorphism from

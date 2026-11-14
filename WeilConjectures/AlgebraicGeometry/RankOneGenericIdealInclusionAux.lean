@@ -24,7 +24,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- The stalk of a closed pushforward of the structure module at the generic point
 is isomorphic to any compatible residue-field line.
 Source: Stacks Project, Tag 01YH, rank calculation following Tag 01YE.
-(blueprint: new-rank-one-generic-ideal-inclusion-aux)
 
 Proof: closed-pushforward stalk comparison identifies the source with the regular
 module over the generic local ring of W. Integrality makes that ring a field.

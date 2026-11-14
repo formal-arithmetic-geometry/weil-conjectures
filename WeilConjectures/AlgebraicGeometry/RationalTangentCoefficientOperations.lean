@@ -13,8 +13,7 @@ public import Mathlib.RingTheory.Ideal.Cotangent
 /-!
 # Compatibility of tangent coefficients with vector operations
 
-Source: Stacks Project, Tag 0B2B
-(blueprint: lem-sc-rational-tangent-coefficient-operation-compatibility).
+Source: Stacks Project, Tag 0B2B.
 -/
 
 @[expose] public section
@@ -64,8 +63,7 @@ private theorem sharp_precomp
 /-- A cotangent-functional assignment specified by stalk coefficients respects tangent
 addition and scaling. There is no assertion that such an assignment exists, is injective,
 or realizes all functionals.
-Source: Stacks Project, Tag 0B2B, the pushout addition and epsilon scaling of tangent vectors
-(blueprint: lem-sc-rational-tangent-coefficient-operation-compatibility).
+Source: Stacks Project, Tag 0B2B, the pushout addition and epsilon scaling of tangent vectors.
 
 Proof:
 1. Given two tangent vectors, glue them to the square-zero spectrum with two coordinates

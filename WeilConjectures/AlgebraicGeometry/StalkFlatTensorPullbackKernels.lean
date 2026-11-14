@@ -18,7 +18,6 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
 
 /-! # Kernels of tensor pullback along stalkwise flat morphisms
 Source: Stacks Project, Modules, Tag 02N4.
-(blueprint: lem-sc-stalk-flat-tensor-pullback-kernels)
 -/
 
 @[expose] public section
@@ -59,7 +58,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Tensor pullback along a stalkwise flat morphism preserves kernels.
 Source: Stacks Project, Modules, Tag 02N4, proof by stalks.
-(blueprint: lem-sc-stalk-flat-tensor-pullback-kernels)
 
 Proof: stalks preserve kernels. At x the inverse-image stalk comparison and the
 change-of-rings tensor stalk comparison identify P(M)_x with extension of scalars

@@ -26,8 +26,7 @@ namespace AlgebraicGeometry
 
 /-- The source comparison built from the canonical pullback composition family.
 The chosen family is fixed by its left-derived universal property, not an arbitrary
-witness of existence. 
-(blueprint: lem-sc-rectangle-inverse-base-change-mate-transport)
+witness of existence.
 -/
 noncomputable def successiveBaseChangeSourceIso
     [∀ Z : Scheme.{u},
@@ -93,7 +92,6 @@ private theorem mate_comparison
 /-- Transport the rectangle mate to the mate of the pasted inverse ordinary square.
 This comparison has no middle right adjoint and asserts no factorization of second mates.
 Source: Stacks Project, Tag 0ATR, Lemma 48.5.2.
-(blueprint: lem-sc-rectangle-inverse-base-change-mate-transport)
 
 Proof: The projection equations identify k with the iterated pullback comparison,
 which is an isomorphism by the pullback universal property. The canonical pullback

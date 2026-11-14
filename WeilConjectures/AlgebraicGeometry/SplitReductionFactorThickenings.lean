@@ -28,7 +28,6 @@ namespace AlgebraicGeometry.Scheme
 
 Source: smooth purity blueprint,
 `lem-weil-pbc-finite-pushforward-generic-constructible`, finite-algebra calculation.
-(blueprint: lem-weil-pbc-split-reduction-factor-thickenings).
 
 Proof: Compose Mathlib's finite-product spectrum homeomorphism, the homeomorphism
 induced by the supplied algebra equivalence, and the nilradical quotient's

@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.SelfTorProjectionHomology
 
 /-! # Closed-immersion self-Tor on fixed resolution representatives
 
-Source: Stacks Project, Tags 08EU, 068G, 06YS and 08KS.
-(blueprint: lem-pc-self-tor-pushforward-homology). -/
+Source: Stacks Project, Tags 08EU, 068G, 06YS and 08KS. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -29,7 +28,6 @@ is the pushforward of the homology of its termwise pulled-back K-flat resolution
 Source: Stacks Project, Derived Categories of Schemes, Tag 08EU;
 More on Algebra, Tag 068G;
 modules.tex, Tag 08KS; Tag 06YS for K-flat representatives.
-(blueprint: lem-pc-self-tor-pushforward-homology).
 
 Proof: In standard derived localizations put E=O_Z[0] and K=B[0]. A closed immersion
 is affine and hence quasi-compact and quasi-separated. Both E and K have

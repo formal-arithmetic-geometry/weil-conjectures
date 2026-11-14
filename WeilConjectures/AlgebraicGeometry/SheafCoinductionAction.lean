@@ -14,7 +14,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 # The sheaf coinduction functor and action
 
 Source: Stacks Project, Tag 0A6F and Tag 0BUZ.
-(blueprint: lem-sc-sheaf-coinduction-action).
 -/
 
 @[expose] public section
@@ -388,7 +387,6 @@ larger ring sheaf, with the multiplication action formula. No adjunction is asse
 
 Source: Stacks Project, Modules, Tag 0A6F, lemma-adjoint-tensor-restrict;
 Duality, Tag 0BUZ, lemma-compute-sheafhom-affine.
-(blueprint: lem-sc-sheaf-coinduction-action).
 
 Proof: For an O_X-module F and open U, take the additive group
 Hom_{O_X|U}(A|U,F|U). For a in A(U), precompose a section phi with the

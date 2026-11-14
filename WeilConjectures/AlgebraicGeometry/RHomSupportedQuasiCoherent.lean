@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentSupportPart
 /-! # Quasi-coherence and support of derived internal Hom
 
 Source: Stacks Project, Derived Categories of Schemes, Tag 0A6H (1), (2),
-and the support observation in the proof of Tag 0A9C
-(blueprint: lem-sc-rhom-supported-qcoherent).
+and the support observation in the proof of Tag 0A9C.
 -/
 
 @[expose] public section
@@ -36,8 +35,7 @@ subset in the second variable. Local boundedness means that each point has a nei
 on which all cohomology sheaves below some integer vanish. Support means that every
 cohomology sheaf restricts to zero on the open complement.
 
-Source: Stacks Project, Tag 0A6H (1), (2), and Tag 0A9C, proof
-(blueprint: lem-sc-rhom-supported-qcoherent).
+Source: Stacks Project, Tag 0A6H (1), (2), and Tag 0A9C, proof.
 
 Proof:
 1. By def-pur-pseudo-coherent-complex, locally choose a bounded-above finite-free model

@@ -12,8 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.DualNumbers
 /-!
 # Linearity of the map on dual-number tangent vectors
 
-Source: Stacks Project, Tag 0B2F, with base `Spec k`
-(blueprint: lem-sc-tangent-map-linear).
+Source: Stacks Project, Tag 0B2F, with base `Spec k`.
 -/
 
 @[expose] public section
@@ -49,7 +48,7 @@ private def tangentPairMap {R S : Type u} [CommRing R] [CommRing S]
 open Classical in
 /-- Postcomposition with a morphism over `k` induces a linear map on tangent vectors when
 its residue-field map is an isomorphism.
-Source: Stacks Project, Tag 0B2F (blueprint: lem-sc-tangent-map-linear).
+Source: Stacks Project, Tag 0B2F.
 
 The additive groups and modules are selected from `exists_tangentVectors_vectorSpace`.
 The target scalars are transported along the inverse residue-field isomorphism `e.symm`.
@@ -57,7 +56,7 @@ Likewise `d` identifies the two dual-number spectra, so `d ≫ θ.val ≫ f` is 
 postcomposition with `f` after the residue fields have been identified.
 
 Proof:
-1. Residue-field point naturality (lem-weil-pbc-residue-field-point-naturality) gives
+1. Residue-field point naturality gives
    `Spec.map (f.residueFieldMap x) ≫ Y.fromSpecResidueField (f x) =
    X.fromSpecResidueField x ≫ f`. Hence the composite has the required closed point.
    Associativity and `hf` also show that it is a morphism over `k`.

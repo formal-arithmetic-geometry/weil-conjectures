@@ -17,7 +17,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # The one-column finite free Hom calculation
 
 Source: Stacks Project, Tags 0A6H (2) and 08I5.
-(blueprint: lem-sc-single-supported-finite-free-hom-qc)
 -/
 
 @[expose] public section
@@ -66,8 +65,7 @@ is r copies of the target differential, so H^n is r copies of H^(k+n)(I).
 Finite sums commute with homology in the abelian category of module sheaves.
 Transport to the open subscheme by its exact localized-site equivalence, use finite
 sum closure of quasi-coherence there, and transport back. If r=0 all terms are zero;
-no boundedness of I is used.
-(blueprint: lem-sc-single-supported-finite-free-hom-qc). -/
+no boundedness of I is used. -/
 theorem single_supported_finiteFree_hom_qc
     (X : Scheme.{u}) (U : X.Opens)
     (E I : CochainComplex

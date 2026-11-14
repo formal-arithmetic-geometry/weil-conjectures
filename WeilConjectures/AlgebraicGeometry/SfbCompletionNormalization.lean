@@ -30,7 +30,7 @@ private local instance standardDerived {C : Type (u + 1)} [SmallCategory C]
     HasDerivedCategory (ConstantCompletion.Mod O) := HasDerivedCategory.standard _
 
 /-- Constant rings commute with transport to the small site.
-Source: Stacks Tag 00YY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 00YY. -/
 def constants (X : Scheme.{u}) :
     constantSheaf (ProEt.topology X) CommRingCat.{u + 1} ⋙ sfbModelRings X ≅
       constantSheaf (proEtaleModelTopology X) CommRingCat.{u + 1} := by
@@ -47,7 +47,7 @@ def constants (X : Scheme.{u}) :
     (fun f ↦ e.inv.naturality ((Functor.const X.ProEtᵒᵖ).map f))
 
 /-- The finite quotient diagrams agree, including all transition maps.
-Source: Stacks Tags 00YY and 093M (auxiliary; not a blueprint node). -/
+Source: Stacks Tags 00YY and 093M. -/
 def finiteComparison (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) :
     adicLisseRingSystem X I ⋙ sfbModelRings X ≅
@@ -68,8 +68,7 @@ def finiteComparison (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
   exact asIso t
 
 /-- The canonical completed-ring comparison, constructed from finite projections.
-Source: Stacks Tags 00YY and 093M
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 00YY and 093M. -/
 def coefficients (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     (sfbModelRings X).obj (adicLisseCompletedRing X I) ≅
       ConstantCompletion.completed (proEtaleModelTopology X) A I :=
@@ -78,8 +77,7 @@ def coefficients (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A) 
 
 /-- Normalize the actual transported localization representative by scalar restriction
 along the inverse of the canonical coefficient isomorphism.
-Source: Stacks Tags 00YY and 099C
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 00YY and 099C. -/
 def object (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) :
     ConstantCompletion.D (ConstantCompletion.completed (proEtaleModelTopology X) A I) :=
@@ -158,8 +156,7 @@ private theorem complete_iso
     exact IB.local_mem U b W hW (fun V g hg ↦ (hmem V _).mpr (h V g hg))
 
 /-- The two completed coefficient presentations give the same local completeness test.
-Source: Stacks Tags 00YY, 093M and 099C
-(auxiliary; not a blueprint node).
+Source: Stacks Tags 00YY, 093M and 099C.
 
 Proof: the canonical limit isomorphism commutes with the first projections by its
 construction. Its inverse identifies their kernel ideals. Apply preservation and

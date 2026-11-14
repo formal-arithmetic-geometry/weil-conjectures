@@ -19,7 +19,6 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 /-! # Descent of raw classes with bounded-below coefficients
 
 Source: Stacks Project, Tags 0EYL, 0EYM and 0GIT.
-(blueprint: lem-sc-raw-derived-class-affine-descent).
 -/
 
 @[expose] public section
@@ -82,7 +81,6 @@ private theorem raw_chart_transport {B Y Y' : Scheme.{u}}
 /-- A raw derived class descends with its coefficient complex fixed at the original stage.
 
 Source: Stacks Project, Tags 0EYL and 0GIT.
-(blueprint: lem-sc-raw-derived-class-affine-descent).
 
 Proof: Restrict the diagram to arrows into i. Descend V to an affine etale object
 at a stage j using finite presentation. The base changes of this object form a

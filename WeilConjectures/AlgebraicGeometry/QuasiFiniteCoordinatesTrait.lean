@@ -243,8 +243,7 @@ theorem topologicalKrullDim_fiber_le_topologicalKrullDim_pullback {K : Type u} [
     obtain ⟨p, hp, -⟩ := Scheme.Pullback.exists_preimage_pullback _ z hw
     exact ⟨p, hinj ((hφ p).trans hp)⟩
 
-/-- **Lower bound for the dimension of a flat field-valued base change** (blueprint
-`lemma-quasi-finite-coordinates`, first clause): for `f : X ⟶ T` flat and locally of finite
+/-- **Lower bound for the dimension of a flat field-valued base change**: for `f : X ⟶ T` flat and locally of finite
 presentation, a point `x` of `X` and a flat field-valued point `g : Spec K ⟶ T` whose image
 generalizes `f x` (for instance the geometric generic point of a trait), the local fibre
 dimension `dim_x X_{f x}` is at most `dim (X ×_T Spec K)`. -/
@@ -285,8 +284,7 @@ theorem traitGenericPoint_specializes (z : Spec (.of (traitGenericField k'))) (y
 
 variable {k'} {X : Scheme.{u}} (f : X ⟶ trait k') [Flat f] [LocallyOfFiniteType f]
 
-/-- **Fibre dimension and the geometric generic fibre** (blueprint
-`lemma-quasi-finite-coordinates`, first clause): for `X` flat and locally of finite type over the
+/-- **Fibre dimension and the geometric generic fibre**: for `X` flat and locally of finite type over the
 trait `S = Spec k'⟦t⟧` and a point `x` of `X`, `dim_x X_{f x} ≤ dim X_η̄`, where `X_η̄` is the base
 change of `X` to the geometric generic point `Spec Ω ⟶ S`. -/
 theorem topologicalKrullDimAt_asFiber_le_topologicalKrullDim_pullback_traitGenericPoint
@@ -297,7 +295,7 @@ theorem topologicalKrullDimAt_asFiber_le_topologicalKrullDim_pullback_traitGener
   exact topologicalKrullDimAt_asFiber_le_topologicalKrullDim_pullback f x _ z
     (traitGenericPoint_specializes k' z (f x))
 
-/-- **Quasi-finite coordinates over the trait** (blueprint `lemma-quasi-finite-coordinates`):
+/-- **Quasi-finite coordinates over the trait**:
 let `X` be flat and locally of finite type over the trait `S = Spec k'⟦t⟧`, `x` a point of `X`
 and `q = dim_x X_{f x}` the local dimension of its fibre. Then `q ≤ dim X_η̄`, and there are an
 open neighbourhood `V` of `x` and a locally quasi-finite morphism `b : V ⟶ 𝔸^q_S` over `S`;

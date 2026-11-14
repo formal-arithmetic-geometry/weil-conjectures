@@ -137,8 +137,7 @@ derived.tex, Tag 09T5, specialized to scalar restriction.
 Proof: sheafified extension is left adjoint to restriction. K-flat resolutions
 make its unbounded left derived functor everywhere defined. Restriction is exact,
 so its denominator ind-diagrams are constant. The derived adjunction theorem and
-uniqueness of the derived functor identify its right adjoint with exact restriction.
-(auxiliary; not a blueprint node). -/
+uniqueness of the derived functor identify its right adjoint with exact restriction. -/
 theorem scalarRestriction_derived_isRightAdjoint
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)

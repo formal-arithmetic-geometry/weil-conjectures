@@ -14,8 +14,7 @@ public import WeilConjectures.Topology.ProfiniteCondensedRing
 /-! # Fixed data for resolving oplax constraint diagrams
 
 Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E; agent refinement
-of the representative-square constraint computation
-(auxiliary; not a blueprint node).
+of the representative-square constraint computation.
 
 The generic diagram expressions below are specialized to the fixed section tensor,
 localization and resolution comparisons. They introduce no chosen maps or replacement
@@ -50,63 +49,53 @@ variable {A : Type a} {B : Type b} {C : Type c} {D : Type d}
   (v : L.obj (q.obj (𝟙_ A)) ⟶ r.obj (𝟙_ B))
 
 /-- The inverse of the nested left representative map.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def leftModel (P Q H : A) :=
   (s P Q ⊗ₘ 𝟙 (q.obj H)) ≫ s (P ⊗ Q) H
 
 /-- The inverse of the nested right representative map.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def rightModel (P Q H : A) :=
   (𝟙 (q.obj P) ⊗ₘ s Q H) ≫ s P (Q ⊗ H)
 
 /-- The inverse of d: L of the inverse representative comparison followed by epsilon.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def pairModel (P Q : A) := L.map (s P Q) ≫ ε.app (P ⊗ Q)
 
 /-- The prescribed comparison C_0 inverse at associativity vertex 0.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def vertex0 (P Q H : A) :=
   L.map (leftModel q s P Q H) ≫ ε.app ((P ⊗ Q) ⊗ H)
 
 /-- The prescribed comparison C_1 inverse at associativity vertex 1.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def vertex1 (P Q H : A) :=
   L.map (rightModel q s P Q H) ≫ ε.app (P ⊗ (Q ⊗ H))
 
 /-- The prescribed comparison C_2 inverse at associativity vertex 2.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def vertex2 (P Q H : A) :=
   (ε.app P ⊗ₘ pairModel (F := F) (L := L) (q := q) (r := r) s ε Q H) ≫ t (F.obj P) (F.obj (Q ⊗ H))
 
 /-- The prescribed comparison C_3 inverse at associativity vertex 3.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def vertex3 (P Q H : A) :=
   (ε.app P ⊗ₘ (ε.app Q ⊗ₘ ε.app H)) ≫
     rightModel r t (F.obj P) (F.obj Q) (F.obj H)
 
 /-- The prescribed comparison C_4 inverse at associativity vertex 4.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def vertex4 (P Q H : A) :=
   (pairModel (F := F) (L := L) (q := q) (r := r) s ε P Q ⊗ₘ ε.app H) ≫ t (F.obj (P ⊗ Q)) (F.obj H)
 
 /-- The prescribed comparison C_5 inverse at associativity vertex 5.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def vertex5 (P Q H : A) :=
   ((ε.app P ⊗ₘ ε.app Q) ⊗ₘ ε.app H) ≫
     leftModel r t (F.obj P) (F.obj Q) (F.obj H)
 
 /-- Exactly the pair equation and regular-unit equation in the node.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def RepresentativeEquations (P : ObjectProperty A) : Prop :=
   (∀ A B : P.FullSubcategory,
     μ (q.obj A.obj) (q.obj B.obj) ≫ (ε.app A.obj ⊗ₘ ε.app B.obj) ≫
@@ -115,20 +104,17 @@ def RepresentativeEquations (P : ObjectProperty A) : Prop :=
   v = ε.app (𝟙_ A) ≫ r.map unit
 
 /-- The path around the right-associated branch of the derived associator diagram.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def upperPath (P Q H : C) :=
   L.map (α_ P Q H).hom ≫ μ (P) (Q ⊗ H) ≫ L.obj P ◁ μ (Q) (H)
 
 /-- The path around the left-associated branch of the derived associator diagram.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def lowerPath (P Q H : C) :=
   μ (P ⊗ Q) (H) ≫ μ (P) (Q) ▷ L.obj H ≫ (α_ (L.obj P) (L.obj Q) (L.obj H)).hom
 
 /-- Each vertex comparison is invertible, so the same inverse is used on every edge.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def VertexInvertibility (P Q H : A) : Prop :=
   IsIso (vertex0 (F := F) (L := L) (q := q) (r := r) s ε P Q H) ∧
   IsIso (vertex1 (F := F) (L := L) (q := q) (r := r) s ε P Q H) ∧
@@ -138,8 +124,7 @@ def VertexInvertibility (P Q H : A) : Prop :=
   IsIso (vertex5 (F := F) (L := L) (q := q) (r := r) t ε P Q H)
 
 /-- All six edge squares with the specified comparison at each intermediate vertex.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def EdgeIdentification (P Q H : A) : Prop :=
   (L.map (α_ (q.obj P) (q.obj Q) (q.obj H)).hom ≫ vertex1 (F := F) (L := L) (q := q) (r := r) s
       ε P Q H =
@@ -158,8 +143,7 @@ def EdgeIdentification (P Q H : A) : Prop :=
       (F.obj H)).hom))
 
 /-- Both whole paths equal the localized displayed cochain composites, and commute.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def AssociativityPaths (P Q H : A) : Prop :=
   (upperPath L μ (q.obj P) (q.obj Q) (q.obj H) ≫ vertex3 (F := F) (L := L) (q := q) (r := r) t
       ε P Q H =
@@ -173,50 +157,41 @@ def AssociativityPaths (P Q H : A) : Prop :=
     lowerPath L μ (q.obj P) (q.obj Q) (q.obj H)
 
 /-- The regular left unitor with the fixed unit comparison.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def regularLeft (M : C) := (eA.inv ▷ M) ≫ (λ_ M).hom
 
 /-- The regular right unitor with the fixed unit comparison.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def regularRight (M : C) := (M ◁ eA.inv) ≫ (ρ_ M).hom
 
 /-- The second left-unit vertex comparison.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def leftVertex1 (P : A) := (ε.app (𝟙_ A) ⊗ₘ ε.app P) ≫ t (F.obj (𝟙_ A)) (F.obj P)
 
 /-- The third left-unit vertex comparison.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def leftVertex2 (P : A) := (𝟙 (r.obj (𝟙_ B)) ⊗ₘ ε.app P) ≫ t (𝟙_ B) (F.obj P)
 
 /-- The derived left-unit composite using the given v.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def leftUnitPath (M : C) :=
   μ (q.obj (𝟙_ A)) (M) ≫ v ▷ L.obj M ≫ regularLeft r eB (L.obj M)
 
 /-- The second right-unit vertex comparison.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def rightVertex1 (P : A) := (ε.app P ⊗ₘ ε.app (𝟙_ A)) ≫ t (F.obj P) (F.obj (𝟙_ A))
 
 /-- The third right-unit vertex comparison.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def rightVertex2 (P : A) := (ε.app P ⊗ₘ 𝟙 (r.obj (𝟙_ B))) ≫ t (F.obj P) (𝟙_ B)
 
 /-- The derived right-unit composite using the given v.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def rightUnitPath (M : C) :=
   μ (M) (q.obj (𝟙_ A)) ≫ L.obj M ◁ v ≫ regularRight r eB (L.obj M)
 
 /-- Both unit edge squares and whole paths, with common outside comparisons.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def UnitIdentification (P : A) : Prop :=
   (IsIso (pairModel (F := F) (L := L) (q := q) (r := r) s ε (𝟙_ A) P)) ∧
   (IsIso (leftVertex1 (F := F) (L := L) (q := q) (r := r) t ε P)) ∧
@@ -254,8 +229,7 @@ def UnitIdentification (P : A) : Prop :=
   (rightUnitPath (L := L) (q := q) (r := r) eB μ v (q.obj P) = L.map (regularRight q eA (q.obj P)))
 
 /-- Invertibility and edge squares for the regular units, before composing whole paths.
-Source: Stacks 07A4, resolving-model unit calculation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4, resolving-model unit calculation. -/
 def UnitEdgeIdentification (P : A) : Prop :=
   (IsIso (pairModel (F := F) (L := L) (q := q) (r := r) s ε (𝟙_ A) P)) ∧
   (IsIso (leftVertex1 (F := F) (L := L) (q := q) (r := r) t ε P)) ∧
@@ -293,8 +267,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 attribute [local irreducible] tensorComparison qTensor totalComparison tensor
 
 /-- The fixed tensor comparison with its normalized source and target types retained.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def modelTensor (T : Scheme.{u}) (P Q : CochainComplex (modules Λ T) ℤ) :
     (tensor Λ T).obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ⟶
       DerivedCategory.Q.obj (P ⊗ Q) :=
@@ -303,30 +276,26 @@ def modelTensor (T : Scheme.{u}) (P Q : CochainComplex (modules Λ T) ℤ) :
 attribute [local semireducible] tensor
 
 /-- The specified localized regular-module isomorphism e.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 def regular (T : Scheme.{u}) :
     tensorUnit Λ T ≅ DerivedCategory.Q.obj (𝟙_ (CochainComplex (modules Λ T) ℤ)) :=
   sectionLocalizationComparison Λ T (𝟙_ (CochainComplex (internalModules Λ T) ℤ)) ≪≫
     DerivedCategory.Q.mapIso (totalUnitComparison Λ T)
 
 /-- The fixed transported section derived monoidal structure, with no new choice.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
 @[implicit_reducible]
 def derivedMonoidal (T : Scheme.{u}) : MonoidalCategory (DerivedCategory (modules Λ T)) :=
   transportedDerivedMonoidal Λ T
 
 /-- The tensor transformation type for the fixed section derived tensor.
-Source: Stacks 07A4 and 0G7E, prescribed resolving-model comparisons
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, prescribed resolving-model comparisons. -/
 abbrev SectionTensorArrow {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   tensor Λ Y ⋙ derivedPullback Λ f ⟶
     ((derivedPullback Λ f).prod (derivedPullback Λ f)) ⋙ tensor Λ X
 
 /-- Both nested totals, their constituent binary totals, and all their pullbacks resolve.
-Source: Stacks 07A4 and 0G7E, prescribed resolving-model comparisons
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, prescribed resolving-model comparisons. -/
 def ResolvingClosure {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q H : CochainComplex (modules Λ Y) ℤ) : Prop :=
   (∀ A ∈ [P ⊗ Q, Q ⊗ H, (P ⊗ Q) ⊗ H, P ⊗ (Q ⊗ H)],
@@ -335,8 +304,7 @@ def ResolvingClosure {X Y : Scheme.{u}} (f : X ⟶ Y)
     KFlatSectionComparison.sectionResolving Λ X ((totalSectionPull Λ f).obj A))
 
 /-- The RepresentativeEquations formula specialized to the fixed section models.
-Source: Stacks 07A4 and 0G7E, prescribed resolving-model comparisons
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, prescribed resolving-model comparisons. -/
 def SectionHypotheses {X Y : Scheme.{u}} (f : X ⟶ Y)
     (μ : SectionTensorArrow Λ f)
     (v : (derivedPullback Λ f).obj
@@ -352,8 +320,7 @@ def SectionHypotheses {X Y : Scheme.{u}} (f : X ⟶ Y)
       (KFlatSectionComparison.sectionResolving Λ Y)
 
 /-- The VertexInvertibility formula specialized to the fixed section models.
-Source: Stacks 07A4 and 0G7E, prescribed resolving-model comparisons
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, prescribed resolving-model comparisons. -/
 def SectionVertices {X Y : Scheme.{u}} (f : X ⟶ Y)
     :=
   @VertexInvertibility (CochainComplex (modules Λ Y) ℤ) (CochainComplex (modules Λ X) ℤ)
@@ -363,8 +330,7 @@ def SectionVertices {X Y : Scheme.{u}} (f : X ⟶ Y)
     (modelTensor Λ Y) (modelTensor Λ X) (pullback Λ f).mapDerivedCategoryFactors.hom
 
 /-- The EdgeIdentification formula specialized to the fixed section models.
-Source: Stacks 07A4 and 0G7E, prescribed resolving-model comparisons
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, prescribed resolving-model comparisons. -/
 def SectionEdges {X Y : Scheme.{u}} (f : X ⟶ Y)
     (μ : SectionTensorArrow Λ f)
     :=
@@ -376,8 +342,7 @@ def SectionEdges {X Y : Scheme.{u}} (f : X ⟶ Y)
       (sectionTotalIso Λ f · · |>.hom) (fun M N => μ.app (M, N))
 
 /-- The AssociativityPaths formula specialized to the fixed section models.
-Source: Stacks 07A4 and 0G7E, prescribed resolving-model comparisons
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, prescribed resolving-model comparisons. -/
 def SectionAssociativity {X Y : Scheme.{u}} (f : X ⟶ Y)
     (μ : SectionTensorArrow Λ f)
     :=
@@ -389,8 +354,7 @@ def SectionAssociativity {X Y : Scheme.{u}} (f : X ⟶ Y)
       (sectionTotalIso Λ f · · |>.hom) (fun M N => μ.app (M, N))
 
 /-- The UnitIdentification formula specialized to the fixed section models.
-Source: Stacks 07A4 and 0G7E, prescribed resolving-model comparisons
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 0G7E, prescribed resolving-model comparisons. -/
 def SectionUnits {X Y : Scheme.{u}} (f : X ⟶ Y)
     (μ : SectionTensorArrow Λ f)
     (v : (derivedPullback Λ f).obj
@@ -407,8 +371,7 @@ def SectionUnits {X Y : Scheme.{u}} (f : X ⟶ Y)
       (fun M N => μ.app (M, N)) v
 
 /-- The unit edge squares specialized to the fixed section models.
-Source: Stacks 07A4, resolving-model unit calculation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4, resolving-model unit calculation. -/
 def SectionUnitEdges {X Y : Scheme.{u}} (f : X ⟶ Y)
     (μ : SectionTensorArrow Λ f)
     (v : (derivedPullback Λ f).obj
@@ -425,8 +388,7 @@ def SectionUnitEdges {X Y : Scheme.{u}} (f : X ⟶ Y)
       (fun M N => μ.app (M, N)) v
 
 /-- The inverse fixed tensor comparison, retaining the transported tensor types.
-Source: Stacks 07A4, fixed gamma/theta/e conjugation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4, fixed gamma/theta/e conjugation. -/
 def internalModelTensor (T : Scheme.{u})
     (M N : DerivedCategory (internalModules Λ T)) :
     (tensor Λ T).obj ((derivedEquivalence Λ T).functor.obj M,
@@ -435,8 +397,7 @@ def internalModelTensor (T : Scheme.{u})
   (tensorComparison Λ T).inv.app (M, N)
 
 /-- Internal natural tensor transformations for the final conditional clause.
-Source: Stacks 07A4, fixed gamma/theta/e conjugation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4, fixed gamma/theta/e conjugation. -/
 abbrev InternalTensorArrow {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (Functor.postcompose₂.obj (internalDerivedPullback Λ f)).obj
         (CondensedRing.derivedTensor Λ Y) ⟶
@@ -444,8 +405,7 @@ abbrev InternalTensorArrow {X Y : Scheme.{u}} (f : X ⟶ Y) :=
       (internalDerivedPullback Λ f)).obj (CondensedRing.derivedTensor Λ X)
 
 /-- The RepresentativeEquations formula for the internal and section diagrams, with gamma/theta/e.
-Source: Stacks 07A4, fixed gamma/theta/e conjugation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4, fixed gamma/theta/e conjugation. -/
 def Conjugation {X Y : Scheme.{u}} (f : X ⟶ Y) (μ : SectionTensorArrow Λ f)
     (v : (derivedPullback Λ f).obj
       (DerivedCategory.Q.obj (𝟙_ (CochainComplex (modules Λ Y) ℤ))) ⟶
@@ -466,8 +426,7 @@ def Conjugation {X Y : Scheme.{u}} (f : X ⟶ Y) (μ : SectionTensorArrow Λ f)
       (cast (by rfl) (regular Λ Y).hom) ≫ v ≫ (cast (by rfl) (regular Λ X).inv)) ⊤
 
 /-- The EdgeIdentification formula for the internal and section diagrams, with gamma/theta/e.
-Source: Stacks 07A4, fixed gamma/theta/e conjugation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4, fixed gamma/theta/e conjugation. -/
 def InternalEdges {X Y : Scheme.{u}} (f : X ⟶ Y) (μ : SectionTensorArrow Λ f)
     (δ : InternalTensorArrow Λ f)
     :=
@@ -481,8 +440,7 @@ def InternalEdges {X Y : Scheme.{u}} (f : X ⟶ Y) (μ : SectionTensorArrow Λ f
       N => (δ.app M).app N) (fun M N => μ.app (M, N))
 
 /-- The UnitIdentification formula for the internal and section diagrams, with gamma/theta/e.
-Source: Stacks 07A4, fixed gamma/theta/e conjugation
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4, fixed gamma/theta/e conjugation. -/
 def InternalUnits {X Y : Scheme.{u}} (f : X ⟶ Y) (μ : SectionTensorArrow Λ f)
     (v : (derivedPullback Λ f).obj
       (DerivedCategory.Q.obj (𝟙_ (CochainComplex (modules Λ Y) ℤ))) ⟶

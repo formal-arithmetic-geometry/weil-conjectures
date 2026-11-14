@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-! # Pushforward of coherent thickening systems is an equivalence with adic systems.
 
 Source: Stacks Project, Cohomology of Schemes, Remark 088F and Lemma 087T.
-(blueprint: lem-weil-pbc-thickening-systems-pushforward-equivalence).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ set_option autoImplicit false
 
 /-- Pushforward of coherent thickening systems is an equivalence with adic systems.
 Source: Stacks Project, Remark 088F, Lemma 087T and equation 0880.
-(blueprint: lem-weil-pbc-thickening-systems-pushforward-equivalence).
 
 Proof:
 1. The projection j_n is a closed immersion with kernel J^(n+1) by hgeom, where

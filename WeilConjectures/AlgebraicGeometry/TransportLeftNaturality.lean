@@ -13,7 +13,6 @@ public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 # Naturality of the underlying morphism of descent transport
 
 Source: the naturality field of the transport descent datum, Stacks Project, Tag 0H8K.
-(blueprint: lem-pd-transport-left-naturality).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace CategoryTheory.Over.DescentDatum
 
 /-- Naturality of transport after taking the underlying scheme morphism.
 Source: Stacks Project, Tag 0H8K, naturality of the cartesian descent datum.
-(blueprint: lem-pd-transport-left-naturality).
 
 Proof: Substitute the two equalities identifying the new maps with their composites
 with g. Morphisms in Over are determined by their underlying maps, so ha identifies

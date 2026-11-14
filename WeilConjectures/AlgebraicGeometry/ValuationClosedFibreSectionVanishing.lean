@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 # Vanishing of sections on the closed fibre of a valuation ring
 
 Source: Stacks Project, More on Morphisms, Tag 0EX8,
-Lemma `lemma-triviality-generic-fibre-valuation-ring`, closed-fibre section descent
-(blueprint: lem-sc-valuation-closed-fibre-section-vanishing).
+Lemma `lemma-triviality-generic-fibre-valuation-ring`, closed-fibre section descent.
 -/
 
 @[expose] public section
@@ -220,7 +219,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- A section vanishing on the closed fibre vanishes modulo a nonzero element of the
 maximal ideal. Source: Stacks Project, Tag 0EX8, proof of
 `lemma-triviality-generic-fibre-valuation-ring`.
-(blueprint: lem-sc-valuation-closed-fibre-section-vanishing)
 
 Proof:
 1. Since the valuation ring is not a field, its maximal ideal contains a nonzero element.

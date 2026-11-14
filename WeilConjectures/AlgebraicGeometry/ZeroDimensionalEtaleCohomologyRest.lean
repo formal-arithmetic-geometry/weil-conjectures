@@ -19,7 +19,6 @@ import Mathlib.Algebra.Category.Grp.Zero
 
 Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-arbitrary-curve-cd/
 lem-weil-pbc-zero-dimensional-cohomology.md, both proof paragraphs.
-(blueprint: zero-dimensional-etale-cohomology-rest).
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ followed by the product of the chosen geometric stalk germs is invertible.
 Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-arbitrary-curve-cd/
 lem-weil-pbc-zero-dimensional-cohomology.md, both proof paragraphs;
 Stacks Project, Tags 00KH, 00FV, 054M, 03QT, 03QU, 03SI and 03Q1.
-(blueprint: zero-dimensional-etale-cohomology-rest).
 
 Proof: Apply `zero_dimensional_global_sections_preservesFiniteColimits`; global
 sections already preserve finite limits. The exact-functor comparison

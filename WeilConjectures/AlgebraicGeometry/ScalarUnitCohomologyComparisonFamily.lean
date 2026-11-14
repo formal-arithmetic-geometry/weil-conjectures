@@ -15,7 +15,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 /-! # The explicit module-to-abelian comparison for unit coefficients
 
 Source: Stacks Project, Tag 03FD.
-(blueprint: new-sc-scalar-unit-comparison-family).
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ open Modules
 /-- Forget a module Ext class and precompose with the constant-integer class of the
 unit section. The source is the underlying additive group of restricted-scalar cohomology;
 thus this construction is independent of the structure morphism to the field.
-Source: Stacks Project, Tag 03FD, and the constant-sheaf adjunction.
-(blueprint: new-sc-scalar-unit-comparison-family). -/
+Source: Stacks Project, Tag 03FD, and the constant-sheaf adjunction. -/
 noncomputable def scalarUnitAbelianComparison (X : Scheme.{u}) :
     ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj
       (SheafOfModules.unit X.ringCatSheaf)) →+ Sheaf.H (structureSheafAb X) 1 := by
@@ -215,7 +213,6 @@ private theorem unitExtComparison_one_bijective (X : Scheme.{u})
 
 /-- The explicit comparison is bijective; no assertion about pullbacks is made here.
 Source: Stacks Project, Tag 03FD, lemma-cohomology-modules-abelian-agree.
-(blueprint: new-sc-scalar-unit-comparison-family).
 
 Proof: Resolve the unit module by injective module sheaves. Forgetting to abelian sheaves
 is exact and the forgotten injectives are acyclic for sections by Tag 03FD. Consequently

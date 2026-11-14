@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeNaturality
 /-! # Pasted mate identity for the explicit inverse-open comparison
 
 Source: Stacks Project, Cohomology, Remark 08HY and Lemma 08HZ.
-(blueprint: lem-pc-relative-mv-inverse-open-mate).
 -/
 
 @[expose] public section
@@ -34,9 +33,8 @@ under the explicitly constructed source and target comparisons. This is an
 identity of specified morphisms; no arbitrary family of comparison isomorphisms
 is quantified over.
 
-Source: Stacks Project, Cohomology, Remark 08HY (remark-base-change), the adjoint
-counit construction, and Lemma 08HZ (lemma-unbounded-relative-mayer-vietoris).
-(blueprint: lem-pc-relative-mv-inverse-open-mate).
+Source: Stacks Project, Cohomology, Remark 08HY, the adjoint
+counit construction, and Lemma 08HZ.
 
 Proof: Write j=W.ι, j'=(g'⁻¹W).ι, p=pullback.fst g' j, v=pullback.snd g' j,
 and s=pullbackRestrictIsoRestrict g' W. The equations s.hom≫j'=p and

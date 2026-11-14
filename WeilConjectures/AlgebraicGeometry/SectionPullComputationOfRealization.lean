@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.SectionScalarComputationAll
 /-! # Computation of a realized scalar pullback comparison
 
 Source: Stacks Project, Tags 03EK, 0D6D and 07A6.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public noncomputable section
@@ -687,7 +686,6 @@ set_option cleanup.letToHave false in
 All isomorphisms are supplied as inputs; this theorem selects no data.
 Source: Stacks Project, Cohomology on Sites, Tags 03EK, 0D6D and 07A6;
 section pullback normalization transport, representative computation step.
-(auxiliary; not a blueprint node)
 
 Proof: conjugate the identity restriction/pushforward square through the two
 ordinary scalar adjunctions and the two geometric adjunctions. The restriction

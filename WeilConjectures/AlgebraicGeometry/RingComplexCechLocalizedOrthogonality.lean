@@ -25,7 +25,6 @@ namespace AlgebraicGeometry
 on which an element of the defining ideal acts invertibly.
 Source: Stacks Project, dualizing.tex, Tag 0A6R, lemma-local-cohomology-adjoint,
 and the localization/restriction adjunction used in the node's finite localization proof.
-(auxiliary; not a blueprint node)
 
 Proof: take a finite generating list for I and append s; it still generates I. Apply
 hT to this list. After inverting s, insert or delete the appended index in each ordered

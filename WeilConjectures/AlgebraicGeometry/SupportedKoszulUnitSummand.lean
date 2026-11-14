@@ -20,7 +20,6 @@ import Mathlib.Algebra.Category.Grp.Zero
 /-! # The supported Koszul summand forces the open unit
 
 Source: Stacks Project, Tag 0A9A.
-(blueprint: lem-pc-supported-koszul-unit-summand).
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ namespace AlgebraicGeometry
 /-- Adding the supported Koszul summand forces the open-restriction unit to be an
 isomorphism under shifted orthogonality. This does not assert detection or use induction.
 Source: Stacks Project, Tag 0A9A, supported Koszul construction and unit paragraphs.
-(blueprint: lem-pc-supported-koszul-unit-summand).
 
 Proof:
 1. Construct a supported Koszul relative detector A on the affine complement. It is

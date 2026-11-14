@@ -30,7 +30,6 @@ attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmet
 /-- Uncurrying the ordinary evaluation equation on one triple tensor summand.
 Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DQ;
 ordinary evaluation chain calculation, step 3.
-(blueprint: lem-pc-scheme-ordinary-evaluation-triple-component).
 
 Proof: First restrict schemeTensorHomUncurry to the outer tensor summand using
 schemeTensorHomUncurry_component. Naturality of the Hom projections under

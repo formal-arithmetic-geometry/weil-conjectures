@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 
 Source: smooth purity blueprint, `sk-prop-sf-cbc`, proof of
 `lem-weil-pbc-finite-pushforward-generic-constructible`, finite-algebra calculation;
-Stacks Project, Tags 00GQ, 0BR5, 01S4 and 04DF
-(blueprint: lem-weil-pbc-spread-purely-inseparable-factors).
+Stacks Project, Tags 00GQ, 0BR5, 01S4 and 04DF.
 -/
 
 @[expose] public section
@@ -160,8 +159,7 @@ The scalar towers express that the extension of fraction fields is the induced o
 
 Source: smooth purity blueprint, `sk-prop-sf-cbc`, proof of
 `lem-weil-pbc-finite-pushforward-generic-constructible`, finite-algebra calculation;
-Stacks Project, Tags 00GQ, 0BR5, 01S4 and 04DF
-(blueprint: lem-weil-pbc-spread-purely-inseparable-factors).
+Stacks Project, Tags 00GQ, 0BR5, 01S4 and 04DF.
 
 Proof:
 1. Finiteness makes `E` integral over `A'`. The compatible fraction-field maps make

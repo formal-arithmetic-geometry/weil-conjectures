@@ -21,8 +21,7 @@ import WeilConjectures.Algebra.Homology.QuotientTensorResolutionLiftHomotopy
 
 /-! # Affine sections of ordinary tensor with a K-flat quotient resolution
 
-Source: Stacks Project, Tags 08DX(2), 06YG, 06YB, 01I9 and 00LS.
-(blueprint: new-b3-self-tor-ordinary-resolution-sections). -/
+Source: Stacks Project, Tags 08DX(2), 06YG, 06YB, 01I9 and 00LS. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -35,7 +34,6 @@ namespace AlgebraicGeometry
 with a global K-flat resolution. This is a statement entirely about complexes and homology;
 no derived tensor or existence of algebraic resolution lifts occurs in its conclusion.
 Source: Stacks Project, Tags 08DX(2), 06YG, 06YB, 01I9 and 00LS.
-(blueprint: new-b3-self-tor-ordinary-resolution-sections).
 
 Proof: Restrict K and q to each affine chart. Identify the restricted closed structure
 sheaf B with the associated sheaf of A/I, using the canonical quotient identification.

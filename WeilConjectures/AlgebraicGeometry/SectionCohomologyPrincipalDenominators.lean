@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.SectionCohomologyUnitComparisons
 /-! # Denominators for raw section cohomology
 
 Source: Stacks Project, Tags 09MR and 01E4.
-(blueprint: lem-pc-section-cohomology-principal-denominators).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ function. This asserts only denominator lifting, not the kernel of restriction.
 
 Source: Stacks Project, Tag 09MR, Lemma 30.17.3, surjectivity of the canonical map;
 Tag 01E4, Lemma 20.7.3, computation by the section complex.
-(blueprint: lem-pc-section-cohomology-principal-denominators).
 
 Proof: Put Y = f inverse W, G = F restricted to Y, and let s be the pullback
 of a viewed as a section of the tensor unit. The affine and qcqs assumptions give

@@ -19,7 +19,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 /-! # Restricting one torsion-controlled local model
 
 Source: Stacks Project, Tag 0889(1), Zariski locality by uniqueness; equation 0880.
-(blueprint: lem-weil-pbc-torsion-local-model-restriction).
 -/
 
 @[expose] public section
@@ -57,7 +56,6 @@ normalized quotient maps, to every smaller open. This asserts no comparison map
 between different local models.
 
 Source: Stacks Project, Tag 0889(1), first sentence of proof; equation 0880.
-(blueprint: lem-weil-pbc-torsion-local-model-restriction).
 
 Proof: Let f : W → U be the open immersion, R its restriction functor, and T
 its tensor pullback. Their adjunctions to the same pushforward give t : T ≅ R.

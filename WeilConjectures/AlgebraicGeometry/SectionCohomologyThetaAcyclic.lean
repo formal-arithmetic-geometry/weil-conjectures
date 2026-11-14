@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ShortComplexSectionComparison
 /-! # The section class comparison for acyclic complexes
 
 Source: Stacks Project, Tags 015J and 01E4.
-(blueprint: lem-pc-section-cohomology-theta-acyclic)
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 terms and the homology sheaves of a nonnegative complex are section-acyclic.
 Source: Stacks Project, Tag 015J (the two Cartan--Eilenberg spectral sequences),
 and Tag 01E4 (the cocycle-to-homology-sheaf map).
-(blueprint: lem-pc-section-cohomology-theta-acyclic)
 
 Proof: Restrict K to V and take a Cartan--Eilenberg injective resolution of this
 nonnegative complex. Its first spectral sequence has E1 terms H^r(V,K^n|V).

@@ -101,7 +101,6 @@ private lemma phi_transport
 /-- Canonical charts commute with restriction on homogeneous representatives.
 Source: Stacks Project, Proposition 0BXD, final paragraph; the homogeneous calculation
 in step 3 of lem-sc-p1-serre-section-module-charts.
-(blueprint: lem-sc-p1-serre-section-module-chart-restriction)
 
 Proof: for y of degree m*d the characterization of alpha_f identifies the restriction
 of phi(y) with multiplication of s by f^m. Restrict this equality to D+(g). Multiply

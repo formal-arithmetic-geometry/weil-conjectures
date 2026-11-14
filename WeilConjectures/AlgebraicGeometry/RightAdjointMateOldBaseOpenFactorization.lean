@@ -56,7 +56,6 @@ Only quasi-compactness and quasi-separatedness are needed for f; properness,
 flatness, and finite presentation play no role in this categorical factorization.
 Source: Stacks Project, duality.tex, Lemma 48.5.2 (Tag 0ATR) and
 Remark 48.6.1 (Tag 0E9S).
-(blueprint: lem-sc-right-adjoint-mate-old-base-open-factorization)
 
 Proof: The restriction square is cartesian. Its pullback along gV identifies
 U times_V T with the iterated pullback of X along V and then T. The supplied

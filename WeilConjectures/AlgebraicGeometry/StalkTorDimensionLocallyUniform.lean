@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.AffineSectionsTorBoundStalk
 /-! # Uniform stalk Tor bounds near a point
 
 Source: Stacks Project, Tags 069C and 09U9.
-(blueprint: lem-pc-stalk-tor-dimension-locally-uniform).
 -/
 
 @[expose] public section
@@ -41,8 +40,7 @@ finite Tor dimension d over A. Localizing at a source prime and its image preser
 this bound. In particular every source stalk in the chosen affine neighbourhood
 has Tor groups zero in all degrees greater than d, for every target-stalk module.
 No finite subcover of X is used. An empty source has no point to check; a flat
-morphism permits d = 0.
-(blueprint: lem-pc-stalk-tor-dimension-locally-uniform). -/
+morphism permits d = 0. -/
 theorem stalkTorDimension_locally_uniform
     {X Y : Scheme.{u}} [IsNoetherian Y]
     (f : X ⟶ Y) [LocallyOfFiniteType f]

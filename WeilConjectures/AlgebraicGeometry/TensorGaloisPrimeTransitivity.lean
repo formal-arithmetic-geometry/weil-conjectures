@@ -34,7 +34,6 @@ of the extension field.
 
 Source: Mathlib, `Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite`;
 Stacks Tag 038B, computation of invariant coefficients.
-(blueprint: lem-weil-pbc-tensor-galois-prime-transitivity).
 
 Proof: give the Galois group its Krull topology and act on the right tensor factor.
 Each tensor is a finite sum of pure tensors. The intersection of the open stabilizers

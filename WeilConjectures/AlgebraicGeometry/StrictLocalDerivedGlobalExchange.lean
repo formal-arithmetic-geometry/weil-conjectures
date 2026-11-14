@@ -35,7 +35,6 @@ no comparison with Ext-valued sheaf cohomology.
 
 Source: Stacks Project, etale-cohomology.tex, Tag 03QO and the final map-on-stalks
 paragraph of Tag 095T, before closed-fibre comparison.
-(blueprint: lem-weil-pbc-strict-local-derived-global-exchange)
 
 Proof: Choose a bounded below injective representative I of K, and a bounded below
 injective replacement g'^*I → J of its exact inverse image. Direct image preserves

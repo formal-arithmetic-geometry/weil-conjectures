@@ -37,7 +37,6 @@ private theorem generatesAt_iso {X : Scheme.{v}} {A B : X.Modules} (q : A ≅ B)
 the original section generates at its image.
 
 Source: Stacks Project, Modules, Tag 01CY (local coefficient criterion).
-(blueprint: lem-sc-tensor-pullback-generator-reflection)
 
 Proof: Trivialize M near j(y), writing σ = a e. Pullback sends this expression to
 j^♯(a) times the pulled-back basis, and a module isomorphism preserves free generators.

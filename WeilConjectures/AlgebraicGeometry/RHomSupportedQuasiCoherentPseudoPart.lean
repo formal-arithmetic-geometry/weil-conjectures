@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPartBou
 
 /-! # PseudoPart of derived internal Hom
 
-Source: Stacks Project, Tag 0A6H
-(blueprint: lem-sc-rhom-supported-qcoherent-pseudo-part).
+Source: Stacks Project, Tag 0A6H.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace AlgebraicGeometry
 
 /-- Pseudo-coherent internal Hom is quasi-coherent and locally bounded below.
 
-Source: Stacks Project, Tag 0A6H (1)
-(blueprint: lem-sc-rhom-supported-qcoherent-pseudo-part).
+Source: Stacks Project, Tag 0A6H (1).
 
 Proof: Choose a neighbourhood of each point on which K has a bounded-above finite-free
 representative, and shrink it to an affine open. The matrices of the differentials give a

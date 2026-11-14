@@ -15,9 +15,8 @@ import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 /-!
 # Canonical filtered colimit cocones of restricted cohomology
 
-Source: Stacks Project, Tag 03Q5 (lemma-colimit-cohomology), with the colimit
+Source: Stacks Project, Tag 03Q5, with the colimit
 preservation and module compatibility used in the proof of Tag 03SA(3).
-(blueprint: lem-weil-pbc-restricted-cohomology-colimit).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace AlgebraicGeometry.Etale
 cocone to a colimit cocone. This asserts the universal property, with the canonical
 legs, before any representative is selected.
 Source: Stacks Project, Tag 03Q5, with Tags 03DB, 03CO and 03D6.
-(blueprint: lem-weil-pbc-restricted-cohomology-colimit)
 
 Proof:
 1. Forget the module structure in the supplied colimit cocone. Module-sheaf

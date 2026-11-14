@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 /-! # SchemeDerivedMateEvaluation
 
 Source: Stacks Project, Tags 0D5S and 08HY.
-(blueprint: lem-pc-scheme-derived-mate-evaluation).
 -/
 
 @[expose] public section
@@ -41,8 +40,7 @@ variable [∀ Y : Scheme.{u},
 
 /-- The adjunction choice already used by `schemeDerivedBaseChangeMap`, pinned to the
 selected left-derived counit and the recorded right-derived unit.
-Source: Stacks Project, Tag 08HY.
-(blueprint: lem-pc-scheme-derived-mate-evaluation). -/
+Source: Stacks Project, Tag 08HY. -/
 noncomputable def canonicalSchemeDerivedAdjunction {P Q : Scheme.{u}} (k : P ⟶ Q) :
     derivedPullback k ⊣ schemeDerivedDirectImage k :=
   Classical.choose (exists_schemeDerivedAdjunction k
@@ -53,8 +51,7 @@ noncomputable def canonicalSchemeDerivedAdjunction {P Q : Scheme.{u}} (k : P ⟶
 
 /-- The composition choice already used by `schemeDerivedBaseChangeMap`, determined
 by the left-derived universal property in `exists_derivedPullbackComposition`.
-Source: Stacks Project, Tag 0D5S.
-(blueprint: lem-pc-scheme-derived-mate-evaluation). -/
+Source: Stacks Project, Tag 0D5S. -/
 noncomputable def canonicalDerivedPullbackComposition {P Q Z : Scheme.{u}}
     (k : P ⟶ Q) (l : Q ⟶ Z) :
     derivedPullback l ⋙ derivedPullback k ≅ derivedPullback (k ≫ l) :=
@@ -62,8 +59,7 @@ noncomputable def canonicalDerivedPullbackComposition {P Q Z : Scheme.{u}}
     (Classical.choose_spec exists_derivedPullbackComposition)))) k l
 
 /-- The square comparison already used in the defining transpose of base change.
-Source: Stacks Project, Tags 0D5S and 08HY.
-(blueprint: lem-pc-scheme-derived-mate-evaluation). -/
+Source: Stacks Project, Tags 0D5S and 08HY. -/
 noncomputable def canonicalDerivedSquareComparison {P Q P' Q' : Scheme.{u}}
     (l : P ⟶ Q) (l' : P' ⟶ Q') (r : Q' ⟶ Q) (r' : P' ⟶ P)
     (hh : r' ≫ l = l' ≫ r) (M : schemeDerivedCategory Q) :
@@ -76,8 +72,7 @@ noncomputable def canonicalDerivedSquareComparison {P Q P' Q' : Scheme.{u}}
 /-- Evaluating the counit-defined mate recovers its defining transpose.
 Proof: unfold the mate, apply the inverse-forward identity for the pinned
 adjunction Hom equivalence, and reassociate the defining square comparison.
-Source: Stacks Project, Tag 08HY.
-(blueprint: lem-pc-scheme-derived-mate-evaluation). -/
+Source: Stacks Project, Tag 08HY. -/
 theorem schemeDerivedMate_evaluation
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

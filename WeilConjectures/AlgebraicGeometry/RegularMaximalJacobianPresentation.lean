@@ -20,7 +20,6 @@ import WeilConjectures.Mathlib.RingTheory.Smooth.Local
 # Invertible Jacobian presentations near regular closed points
 
 Source: Stacks Project, Algebra, Lemmas 00TV and 00TS; standard smooth presentations.
-(blueprint: lem-weil-pbc-regular-maximal-jacobian-presentation).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ presentation and an invertible Jacobian minor. This statement concerns equations
 an algebra isomorphism; it does not assert smoothness.
 Source: Stacks Project, Algebra, Lemma 00TV (regular points with separable residue field)
 and Lemma 00TS, implication (1) => (4) (standard smooth neighbourhood).
-(blueprint: lem-weil-pbc-regular-maximal-jacobian-presentation).
 
 Proof: The source library proves smoothness at a regular closed point over an
 algebraically closed field, using independent kernel generators of a regular local
