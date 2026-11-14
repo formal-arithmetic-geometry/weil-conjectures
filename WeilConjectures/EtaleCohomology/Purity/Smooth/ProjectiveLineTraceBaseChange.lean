@@ -219,7 +219,6 @@ theorem projectiveLineHyperplaneClassAux_baseChange :
     restrictSupportedClass_comp_counit]
 
 variable (Λ) in
-
 /-- **Base change of the hyperplane class** `h = c₁(𝒪(1))` of the notes
 (`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`): the negative of the auxiliary statement
 `AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux_baseChange`. -/
@@ -326,7 +325,6 @@ theorem projectiveLineTraceAux_baseChange [HasKummerClass.IsNormalized Λ] :
         (leftDerivedUpperStarConstantComplexIso Λ g).hom), reassoc_of% h₂]
 
 variable (Λ) in
-
 /-- **Base change of the trace** (blueprint `lemma-cohomology-projective-line-trace` (2)). For
 `g : S' ⟶ S` with base change `g' : ℙ¹_{S'} ⟶ ℙ¹_S`, the pullback along `g` of the trace
 `Tr_q : Rq_*(Λ_{ℙ¹_S}(1)[2]) ⟶ Λ_S` (`AlgebraicGeometry.Etale.projectiveLineTrace`) is the
