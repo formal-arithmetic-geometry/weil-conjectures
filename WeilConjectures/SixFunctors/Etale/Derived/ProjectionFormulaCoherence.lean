@@ -16,8 +16,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 # Coherence of the projection formula
 
 Let `f : X ⟶ Y` admit a compactification. We record the coherence properties of the projection
-transformation `PF : Rf_!K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^*L)` of blueprint `sk-prop-sf-pf-coherence`
-(detailed node `prop-sf-pf-coherence`) as identities between morphisms:
+transformation `PF : Rf_!K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^*L)` of blueprint
+`proposition-composition-base-change-rf-shriek--1` (detailed node `prop-sf-pf-coherence`) as
+identities between morphisms:
 
 - naturality in `K` and `L`
   (`AlgebraicGeometry.Etale.projectionMapOfCompactification_naturality`): `PF` is a natural
@@ -73,8 +74,8 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y}
 
-/-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula; naturality in `K`
-and `L`. For morphisms `x : K ⟶ K'` and `y : L ⟶ L'`, the square
+/-- Blueprint `proposition-composition-base-change-rf-shriek--1`: Coherence of the projection
+formula; naturality in `K` and `L`. For morphisms `x : K ⟶ K'` and `y : L ⟶ L'`, the square
 ```
 Rf_!K ⊗ᴸ L  ──PF──▶ Rf_!(K ⊗ᴸ Lf^*L)
     │ Rf_!x ⊗ y          │ Rf_!(x ⊗ Lf^*y)
@@ -97,11 +98,12 @@ theorem projectionMapOfCompactification_naturality (c : Compactification f)
   exact (congrArg (_ ≫ ·) h₂).trans ((Category.assoc _ _ _).symm.trans
     ((congrArg (· ≫ _) h₁).trans (Category.assoc _ _ _)))
 
-/-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula; agreement with the
-direct-image projection formula for proper `f`. For a proper `f`, the identification
-`Rf_! ≅ Rf_*` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`)
-intertwines the projection map `PF` of `Rf_!` with the projection map
-`Rf_*K ⊗ᴸ L ⟶ Rf_*(K ⊗ᴸ Lf^*L)` of the direct image:
+/-- Blueprint `proposition-composition-base-change-rf-shriek--1`: Coherence of the projection
+formula; agreement with the direct-image projection formula for proper `f`. For a proper `f`, the
+identification `Rf_! ≅ Rf_*`
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`) intertwines the
+projection map `PF` of `Rf_!` with the projection map `Rf_*K ⊗ᴸ L ⟶ Rf_*(K ⊗ᴸ Lf^*L)` of the direct
+image:
 ```
 Rf_!K ⊗ᴸ L ──PF──▶ Rf_!(K ⊗ᴸ Lf^*L)
     │ ≅                  │ ≅
@@ -124,9 +126,9 @@ theorem projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar (f : 
   rw [h]
   exact projectionMapOfCompactification_comp_compactificationForgetSupports A _ K L
 
-/-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula; for proper `f`, the
-projection formula for `Rf_!` holds at `(K, L)` if and only if the direct-image projection
-formula holds there. -/
+/-- Blueprint `proposition-composition-base-change-rf-shriek--1`: Coherence of the projection
+formula; for proper `f`, the projection formula for `Rf_!` holds at `(K, L)` if and only if the
+direct-image projection formula holds there. -/
 theorem hasProjectionFormula_iff_isIso_rightDerivedLowerStarProjectionMap (f : X ⟶ Y)
     [IsProper f] (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
@@ -154,12 +156,12 @@ section Reduction
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 attribute [local instance 20000] Etale.sheafBraidedCategory
 
-/-- Blueprint `sk-prop-sf-pf-coherence` (and `sk-prop-sf-pf-reduction`): compatibility of the
-projection formula with finite reduction. Writing `ρ = - ⊗ᴸ (Λ/J)` for the reduction
-`AlgebraicGeometry.Etale.reductionModIdeal` and `P = (Λ/J)_Y`, the reduction of the projection
-map `ρ(PF_{K, L}) = PF_{K, L} ▷ P`, followed by the reduction comparison `ρ Rf_! ⟶ Rf_! ρ`
-(the projection map at `P`), is the projection map at `(K, L ⊗ᴸ P)` read through the
-associativity of `⊗ᴸ` and the tensor comparison of `Lf^*`. -/
+/-- Blueprint `proposition-composition-base-change-rf-shriek--1` (and `sk-prop-sf-pf-reduction`):
+compatibility of the projection formula with finite reduction. Writing `ρ = - ⊗ᴸ (Λ/J)` for the
+reduction `AlgebraicGeometry.Etale.reductionModIdeal` and `P = (Λ/J)_Y`, the reduction of the
+projection map `ρ(PF_{K, L}) = PF_{K, L} ▷ P`, followed by the reduction comparison
+`ρ Rf_! ⟶ Rf_! ρ` (the projection map at `P`), is the projection map at `(K, L ⊗ᴸ P)` read through
+the associativity of `⊗ᴸ` and the tensor comparison of `Lf^*`. -/
 theorem projectionMapOfCompactification_reductionModIdeal (c : Compactification f)
     (J : Ideal Λ) (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -178,11 +180,11 @@ end Reduction
 
 variable [Finite Λ]
 
-/-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula; independence of the
-compactification. For torsion coefficients and a quasi-compact `f`, the comparison isomorphism
-`Rf_!(c) ≅ Rf_!` between the compactly supported direct images computed with a compactification
-`c` and with the chosen one (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`) intertwines the
-projection maps:
+/-- Blueprint `proposition-composition-base-change-rf-shriek--1`: Coherence of the projection
+formula; independence of the compactification. For torsion coefficients and a quasi-compact `f`, the
+comparison isomorphism `Rf_!(c) ≅ Rf_!` between the compactly supported direct images computed with
+a compactification `c` and with the chosen one
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`) intertwines the projection maps:
 ```
 Rf_!(c)K ⊗ᴸ L ──PF_c──▶ Rf_!(c)(K ⊗ᴸ Lf^*L)
      │ ≅                      │ ≅

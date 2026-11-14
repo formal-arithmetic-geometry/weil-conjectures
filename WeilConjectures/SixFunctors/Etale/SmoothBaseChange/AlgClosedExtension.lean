@@ -47,7 +47,7 @@ Then for every `q ≥ 0` the pullback map along the first projection
 
 is bijective. Its target is the cohomology of the pullback of the constant sheaf `ℤ/n`. This is
 `AlgebraicGeometry.IsCurve.bijective_fieldExtensionCohomologyMap`.
-(blueprint: `sbc-thm-algebraically-closed-invariance`) -/
+(blueprint: `theorem-cohomology-curves--6`) -/
 theorem bijective_cohomologyMap_constantZMod {k : Type u} [Field k] [IsAlgClosed k]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [Smooth f]
     {k' : Type u} [Field k'] [IsAlgClosed k'] [Algebra k k'] (n : ℕ) (hn : (n : k) ≠ 0)
@@ -56,7 +56,7 @@ theorem bijective_cohomologyMap_constantZMod {k : Type u} [Field k] [IsAlgClosed
       (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) (X.constantZMod n) q) :=
   IsCurve.bijective_fieldExtensionCohomologyMap f k' n hn q
 
-/-- Blueprint `sbc-thm-algebraically-closed-invariance`: Invariance under extension of
+/-- Blueprint `theorem-cohomology-curves--6`: Invariance under extension of
 algebraically closed fields.
 
 Let `k ⊆ k'` be algebraically closed fields, let `C` be a smooth separated curve over `k` and
@@ -64,7 +64,7 @@ let `d ≥ 1` be prime to `char k`. For every `q ≥ 0` the pullback map
 `H^q(C_ét, ℤ/d) ⟶ H^q((C_{k'})_ét, ℤ/d)` along the projection `C_{k'} ⟶ C` is bijective.
 
 This is the case of a curve of `AlgebraicGeometry.bijective_cohomologyMap_constantZMod`
-(blueprint `sbc-thm-algebraically-closed-invariance`). -/
+(blueprint `theorem-cohomology-curves--6`). -/
 @[stacks 0A5E]
 theorem bijective_cohomologyMap_constantZMod_of_smoothOfRelativeDimension {k : Type u}
     [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))

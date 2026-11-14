@@ -176,7 +176,7 @@ import Mathlib.CategoryTheory.Preadditive.LeftExact
 
 Source: Weil blueprint main-20261015, sec-six-functors-basics/sk-lem-coefficient-heart/
 sk-lem-coefficient-heart-closure.md, clauses (1)--(2) and the concluding paragraph
-(blueprint: det-lem-coefficient-heart-closure).
+(blueprint: lemma-constructible-sheaves).
 -/
 
 @[expose] public section
@@ -459,7 +459,7 @@ private lemma heart_closure_generic
  abelian full subcategory with exact inclusion and are exactly the sheaves lisse on a
  finite stratification.
 Source: blueprint coefficient-heart-closure, clauses (1)--(2) and concluding paragraph
-(blueprint: det-lem-coefficient-heart-closure).
+(blueprint: lemma-constructible-sheaves).
 
 Proof: identify lisse modules with locally finitely presented modules using the existing
 finite-field and bounded-image algebraic-closure local-triviality results. The proved

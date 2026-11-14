@@ -11,7 +11,7 @@ public import WeilConjectures.WeilSheaf.FourierInversion.Defs
 # Fourier transforms on constructible Weil complexes
 
 Source: blueprint main-20261015, `sec-fourier-transform/sk-def-ft/def-fd-transform.md`
-(blueprint: def-fd-transform).
+(blueprint: sec-Fourier-inversion).
 
 The ordinary étale transform does not have Weil complexes as its domain. This interface
 uses the existing Weil operations to give the same formula for a pairing of any rank.
@@ -38,7 +38,7 @@ The product's structure map and its projection-over instances express the same f
 model on all three schemes. For a vector bundle and its dual, `b` is their evaluation pairing
 and `r` their rank. The definition also makes sense for an arbitrary pairing and shift.
 Source: blueprint main-20261015, `sk-def-ft/def-fd-transform.md`
-(blueprint: def-fd-transform). -/
+(blueprint: sec-Fourier-inversion). -/
 noncomputable def WeilComplex.fourierTransformOfPairing
     {S V V' : Scheme.{u}} [V.Over (Spec (CommRingCat.of k₀))]
     [V'.Over (Spec (CommRingCat.of k₀))] (π : V ⟶ S) (π' : V' ⟶ S)
@@ -60,7 +60,7 @@ noncomputable def WeilComplex.fourierTransformOfPairing
 /-- The Fourier transform of affine space, using its actual standard evaluation pairing
 and the shift by its rank, on constructible Weil complexes.
 Source: blueprint main-20261015, `sk-def-ft/def-fd-transform.md`
-(blueprint: def-fd-transform). -/
+(blueprint: sec-Fourier-inversion). -/
 noncomputable def WeilComplex.affineFourierTransform (k₀ : Type u) [Field k₀] [Finite k₀]
     (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] (n : Type u) [Fintype n]
     (ψ : AddChar k₀ (PadicAlgCl l)) :

@@ -22,7 +22,7 @@ import Mathlib.CategoryTheory.Limits.FullSubcategory
 
 Source: blueprint main-20261015, sec-six-functors/sk-lem-sf-open-ctf,
 sk-prop-proper-image-localizing-open.md
-(blueprint: det-proper-image-localizing-open).
+(blueprint: proposition-proper-direct-image-extension-zero).
 
 The ambient categories are ordinary unbounded derived categories of module objects.
 Constructibility uses finite constant models. The restricted functor is the canonical
@@ -200,7 +200,7 @@ properties needed for the inherited full-subcategory triangulations; the functor
 explicitly the canonical lift of `D(j_!)`, not an arbitrary functor.
 
 Source: blueprint main-20261015, sk-prop-proper-image-localizing-open.md and its proof
-(blueprint: det-proper-image-localizing-open).
+(blueprint: proposition-proper-direct-image-extension-zero).
 
 Proof:
 1. The existing exact module-object functor has a derived adjunction to exact pullback.

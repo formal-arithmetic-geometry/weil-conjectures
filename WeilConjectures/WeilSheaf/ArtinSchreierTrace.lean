@@ -28,7 +28,8 @@ Artin–Schreier covering as the translation by `Tr_{𝔽_{qⁿ}/k₀}(a x)`, si
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.traceFunction_artinSchreier` (`lem-fd-as-trace`): the trace
+- `AlgebraicGeometry.WeilSheaf.traceFunction_artinSchreier`
+(`lemma-artin-schreier-character-sheaf--6`): the trace
   function of `ℒ_{ψ(a x)}`.
 - `AlgebraicGeometry.affineLine.frobeniusEnd_stalkAt_artinSchreierImage`: the local Frobenius of
   `ℒ_ψ` at a geometric point `s = ĀS ∘ t` with `σⁿ ∘ t = Frⁿ ∘ σ̄_d ∘ t` is the scalar `ψ(-d)`.
@@ -530,7 +531,7 @@ end Points
 /-- **Trace function of the Artin–Schreier sheaf.** For an additive character `ψ` of `k₀`,
 `a ∈ k₀` and `n ≠ 0`, the trace function of `ℒ_{ψ(a x)}` at an `𝔽_{qⁿ}`-rational point `x` of
 the affine line is `ψ(Tr_{𝔽_{qⁿ}/k₀}(a x))`, for the local geometric Frobenius.
-(blueprint: `lem-fd-as-trace`) -/
+(blueprint: `lemma-artin-schreier-character-sheaf--6`) -/
 theorem WeilSheaf.traceFunction_artinSchreier (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) {n : ℕ}
     (hn : n ≠ 0)
     (x : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).fieldPoints

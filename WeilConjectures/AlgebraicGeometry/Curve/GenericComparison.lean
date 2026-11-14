@@ -25,7 +25,7 @@ section of `G` vanishes, locally, under some `u_U`. Such a sheaf is the filtered
 kernels of the `u_U`, each of which vanishes over `U`, hence is supported on the finitely many
 closed points outside `U` and has no cohomology in positive degrees; so `G` itself has no
 cohomology in positive degrees (`AlgebraicGeometry.IsCurve.subsingleton_H_of_genericVanishing`,
-blueprint `lem-sc-zero-generic-acyclic`). The kernel and the cokernel of `F ⟶ η_* η^* F` have
+blueprint `theorem-cohomology-curves`). The kernel and the cokernel of `F ⟶ η_* η^* F` have
 generically vanishing sections, by continuity of sections at `Spec k(C) = lim_U Spec Γ(C, U)`
 (`AlgebraicGeometry.Etale.unitComparison_app_surjective_of_isLimit`).
 
@@ -142,7 +142,7 @@ an algebraically closed field and `G` an abelian étale sheaf on `C` every secti
 vanishes locally under the unit of some nonempty affine open. Then `Hⁱ(C, G) = 0` for `i ≥ 1`:
 `G` is the filtered union of the kernels of the units, which are supported on finitely many
 closed points.
-(blueprint: `lem-sc-zero-generic-acyclic`) -/
+(blueprint: `theorem-cohomology-curves`) -/
 theorem subsingleton_H_of_genericVanishing
     (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})
     (hG : ∀ (V : C.Etale) (s : G.obj.obj (op V)),

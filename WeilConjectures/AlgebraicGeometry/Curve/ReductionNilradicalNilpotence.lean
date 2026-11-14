@@ -12,7 +12,7 @@ import Mathlib.RingTheory.Noetherian.Nilpotent
 
 /-! # A uniform nilpotence exponent for a Noetherian scheme
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1.
 (blueprint: lem-sc-reduction-nilradical-nilpotent)
 -/
 
@@ -25,7 +25,7 @@ open CategoryTheory Limits TopologicalSpace
 namespace AlgebraicGeometry.Scheme
 
 /-- A positive power of the nilradical ideal sheaf of a Noetherian scheme is zero.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1.
 (blueprint: lem-sc-reduction-nilradical-nilpotent)
 
 Proof: Each point has an affine neighbourhood whose section ring is Noetherian.

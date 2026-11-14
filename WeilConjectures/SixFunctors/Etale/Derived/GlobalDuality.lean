@@ -24,8 +24,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 
 Let `X` be smooth, proper and geometrically connected of pure relative dimension `d` over a
 base `S`, with structure morphism `a_X : X ⟶ S`. Global Verdier duality is the case `Y = S`
-of the Verdier-duality exchange `sk-thm-sf-verdier-exchange`: the coefficient dual of the
-compactly supported cohomology of `K` is the ordinary cohomology of the Verdier dual of `K`,
+of the Verdier-duality exchange `corollary-verdier-exchange-formulas--1`: the coefficient dual of
+the compactly supported cohomology of `K` is the ordinary cohomology of the Verdier dual of `K`,
 
 `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`.
 
@@ -39,14 +39,14 @@ is perfect: its tensor–internal-hom adjoint is an isomorphism.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.nonempty_iso_coefficientDual_rightDerivedLowerShriek`
-  (`sk-thm-sf-global-duality`): `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`.
+  (`theorem-global-verdier-duality`): `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`.
 - `AlgebraicGeometry.Etale.coefficientDualRightDerivedLowerShriekIso`
-  (`sk-thm-sf-global-duality`): the same isomorphism, natural in `K`, for any coefficient
+  (`theorem-global-verdier-duality`): the same isomorphism, natural in `K`, for any coefficient
   category in which the projection formula holds.
 - `AlgebraicGeometry.Etale.nonempty_iso_coefficientDual_rightDerivedLowerShriek_unit`
-  (`sk-thm-sf-global-duality`): `RΓ_c(X, Λ)^∨ ≅ RΓ(X, ω_X)`.
+  (`theorem-global-verdier-duality`): `RΓ_c(X, Λ)^∨ ≅ RΓ(X, ω_X)`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_coefficientDual_of_orientation`
-  (`sk-thm-sf-identification`): under an orientation, `RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨`.
+  (`theorem-poincare-duality--7`): under an orientation, `RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨`.
 
 ## Implementation notes
 
@@ -65,7 +65,7 @@ geometric connectedness of `X` nor the finiteness of `K` that the blueprint assu
 hypotheses are not imposed. For a general coefficient category the projection formula, and
 with it global duality, can fail.
 
-The subject of `sk-thm-sf-identification` is the pairing `β_K` — the mixed-support cup
+The subject of `theorem-poincare-duality--7` is the pairing `β_K` — the mixed-support cup
 product followed by the evaluation `K ⊗ᴸ K^∨ ⟶ Λ_X` and the normalized trace — and the
 assertion that its tensor–internal-hom adjoint is invertible. The pairing is
 `AlgebraicGeometry.Etale.poincarePairing`, and its perfectness is proved next to it
@@ -131,8 +131,8 @@ noncomputable def coefficientDualRightDerivedLowerShriekIsoOfAdjunction
   (Functor.isoWhiskerRight (derivedHomLowerShriekIsoOfAdjunction A aX adj)
     ((CategoryTheory.evaluation _ _).obj (𝟙_ _))).symm
 
-/-- Blueprint `sk-thm-sf-global-duality`: Global Verdier duality, as a natural isomorphism.
-This is also blueprint `thm-sf-global-duality`.
+/-- Blueprint `theorem-global-verdier-duality`: Global Verdier duality, as a natural isomorphism.
+This is also blueprint `theorem-global-verdier-duality`.
 
 If the projection formula holds for `a_X : X ⟶ S`, the coefficient dual of the compactly
 supported direct image is the direct image of the Verdier dual, naturally in `K ∈ D(X_ét)`:
@@ -143,7 +143,7 @@ It is the tensor–Hom exchange `AlgebraicGeometry.Etale.derivedHomRightDerivedL
 evaluated at the unit `Λ_S`, that is the Verdier-duality exchange for `f = a_X` over the base
 `S` itself, where `𝔻_S` is the coefficient dual (`AlgebraicGeometry.Etale.verdierDualIdIso`).
 Over `S = s = Spec k` the category `D(s_ét)` is the point category, in which `Ra_{X!} K` and
-`Ra_{X*} K` are `RΓ_c(X, K)` and `RΓ(X, K)` (blueprint `lem-sf-point`); so this is
+`Ra_{X*} K` are `RΓ_c(X, K)` and `RΓ(X, K)` (blueprint `theorem-global-verdier-duality`); so this is
 `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`, natural in `K`. Applying the evaluation at the geometric point
 gives the same isomorphism in `D(Λ)`
 (`AlgebraicGeometry.Etale.nonempty_iso_ihom_compactlySupportedGlobalSections_verdierDual`).
@@ -171,8 +171,8 @@ noncomputable def coefficientDualShiftIso
       ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) Z).obj (op K))⟦-a⟧ :=
   (derivedHomShiftIso (ModuleCat.{u + 1} Λ) K a).app (𝟙_ _)
 
-/-- Blueprint `sk-thm-sf-global-duality` (shifts), also `thm-sf-global-duality` (shifts): global
-duality for a shifted complex is the shift of global duality,
+/-- Blueprint `theorem-global-verdier-duality` (shifts), also `theorem-global-verdier-duality`
+(shifts): global duality for a shifted complex is the shift of global duality,
 `RΓ_c(X, K⟦a⟧)^∨ ≅ RΓ(X, 𝔻_X K)⟦-a⟧`. It is the coefficient dual of the commutation
 `Ra_{X!}(K⟦a⟧) ≅ (Ra_{X!} K)⟦a⟧`, then `(-)^∨` turning `⟦a⟧` into `⟦-a⟧`
 (`AlgebraicGeometry.Etale.coefficientDualShiftIso`), then the shift of global duality for `K`.
@@ -198,8 +198,8 @@ end General
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X S : Scheme.{u}} (aX : X ⟶ S)
   [HasCompactification aX]
 
-/-- Blueprint `sk-thm-sf-global-duality`: Global Verdier duality. This is also blueprint
-`thm-pod-global-verdier-duality` (Global Verdier duality at the point); the canonical form of the
+/-- Blueprint `theorem-global-verdier-duality`: Global Verdier duality. This is also blueprint
+`theorem-global-verdier-duality--1` (Global Verdier duality at the point); the canonical form of the
 isomorphism is `AlgebraicGeometry.Etale.globalVerdierDualityIso`.
 
 For `a_X : X ⟶ S` admitting a compactification, a finite coefficient ring `Λ` and `K` an
@@ -221,7 +221,8 @@ theorem nonempty_iso_coefficientDual_rightDerivedLowerShriek
   have := isIso_projectionMap_of_finite Λ aX
   ⟨(coefficientDualRightDerivedLowerShriekIso Λ aX).app (op K)⟩
 
-/-- Blueprint `sk-thm-sf-global-duality`: Global Verdier duality for the constant coefficients.
+/-- Blueprint `theorem-global-verdier-duality`: Global Verdier duality for the constant
+coefficients.
 
 For `K = Λ_X`, global duality reads `RΓ_c(X, Λ)^∨ ≅ RΓ(X, ω_X)`: here, one step earlier,
 `(Ra_{X!} Λ_X)^∨ ≅ Ra_{X*} ω_X` in `D(S_ét)`, since `𝔻_X Λ_X = RHom(Λ_X, ω_X) ≅ ω_X`
@@ -233,7 +234,7 @@ theorem nonempty_iso_coefficientDual_rightDerivedLowerShriek_unit :
   (nonempty_iso_coefficientDual_rightDerivedLowerShriek Λ aX (𝟙_ _)).map fun e ↦
     e ≪≫ (R((aX)_*[ModuleCat.{u + 1} Λ])).mapIso (verdierDualObjUnitIso _ aX)
 
-/-- Blueprint `thm-sf-global-duality`: Global Verdier duality, in the point category.
+/-- Blueprint `theorem-global-verdier-duality`: Global Verdier duality, in the point category.
 
 Let `k` be a separably closed field, `s = Spec k`, `a_X : X ⟶ s` admitting a compactification
 (for instance separated of finite type, smooth or not, proper or not) and `Λ` a finite
@@ -246,8 +247,9 @@ As in the blueprint it is global duality in the point category
 through the evaluation at the geometric point `RΓ(s, -)`, which carries the coefficient dual of
 the point category to the dual over `Λ`
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedGlobalSections_coefficientDual_of_isEquivalence`,
-`lem-sf-point`), `RΓ(s, Ra_{X!} K)` to `RΓ_c(X, K)` (by definition) and `RΓ(s, Ra_{X*} -)` to
-`RΓ(X, -)` (the Leray isomorphism). For `K = Λ_X` it reads `RΓ_c(X, Λ)^∨ ≅ RΓ(X, ω_X)`. -/
+`theorem-global-verdier-duality`), `RΓ(s, Ra_{X!} K)` to `RΓ_c(X, K)` (by definition) and
+`RΓ(s, Ra_{X*} -)` to `RΓ(X, -)` (the Leray isomorphism). For `K = Λ_X` it reads
+`RΓ_c(X, Λ)^∨ ≅ RΓ(X, ω_X)`. -/
 theorem nonempty_iso_ihom_compactlySupportedGlobalSections_verdierDual {k : Type u} [Field k]
     [IsSepClosed k] (aX : X ⟶ Spec (.of k)) [HasCompactification aX]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -262,7 +264,7 @@ theorem nonempty_iso_ihom_compactlySupportedGlobalSections_verdierDual {k : Type
       ((coefficientDualRightDerivedLowerShriekIso Λ aX).app (op K)) ≪≫
     (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso (ModuleCat.{u + 1} Λ) aX).app _⟩
 
-/-- Blueprint `sk-thm-sf-identification`: The derived Poincaré pairing is the duality
+/-- Blueprint `theorem-poincare-duality--7`: The derived Poincaré pairing is the duality
 isomorphism.
 
 With an orientation `o` of `a_X` of relative dimension `d` and with `K` perfect over `Λ_X`,

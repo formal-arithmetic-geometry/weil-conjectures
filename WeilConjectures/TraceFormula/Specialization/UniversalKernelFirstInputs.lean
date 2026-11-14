@@ -16,10 +16,10 @@ public import WeilConjectures.Tactic.TransportExact
 The pullback exchanges `α_{p_i}` of the projections of the product of deformation models
 (`ProEtale.CondensedRing.specializationFstExchange`,
 `ProEtale.CondensedRing.specializationSndExchange`), in
-the lax monoidal form used by the first identity of blueprint `det-tf-sp-universal-kernel`: the
-monoidality of `α_{p₂}` (`ProEtale.CondensedRing.specializationSndExchange_tensor`) and the
-defining property of the duality map `δ_K`
-(`ProEtale.CondensedRing.whiskerLeft_specializationDualityMap_comp_ev`).
+the lax monoidal form used by the first identity of blueprint
+`lemma-nearby-cycles-universal-kernel`: the monoidality of `α_{p₂}`
+(`ProEtale.CondensedRing.specializationSndExchange_tensor`) and the defining property of the duality
+map `δ_K` (`ProEtale.CondensedRing.whiskerLeft_specializationDualityMap_comp_ev`).
 
 -/
 @[expose] public section

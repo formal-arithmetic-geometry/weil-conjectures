@@ -13,8 +13,8 @@ import WeilConjectures.AlgebraicGeometry.CechSheafLocalAugmentationKernel
 import WeilConjectures.AlgebraicGeometry.CechSheafLocalPositiveExact
 /-! # Local exactness of the augmented module-sheaf Čech complex
 
-Source: blueprint `lem-pc-cech-resolution`, displayed complex and proof paragraph 1.
-(blueprint: lem-pc-cech-sheaf-local-quasi-iso).
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves`, displayed complex and proof
+paragraph 1. (blueprint: lem-pc-cech-sheaf-local-quasi-iso).
 -/
 
 @[expose] public section
@@ -27,8 +27,8 @@ namespace AlgebraicGeometry
 
 /-- Any augmented complex with the usual Čech sections and restriction augmentation
 is a quasi-isomorphism after restricting to one member of the family of opens.
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1 (insertion homotopy).
-(blueprint: lem-pc-cech-sheaf-local-quasi-iso)
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves`, proof paragraph 1 (insertion
+homotopy). (blueprint: lem-pc-cech-sheaf-local-quasi-iso)
 
 Proof: fix i and work on the open subscheme U_i. On an open V of U_i, the chosen
 member U_i covers V entirely. For a degree-p section, the degree-(p-1) homotopy

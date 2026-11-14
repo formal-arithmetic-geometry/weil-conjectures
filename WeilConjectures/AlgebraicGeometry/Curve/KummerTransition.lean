@@ -40,7 +40,7 @@ variable (X) in
 `m' = m d`: the restriction of the `d`-th power map `d • 𝟙` of `𝔾ₘ`. For a prime `l` the maps
 `μ_{lⁿ⁺¹} ⟶ μ_{lⁿ}` (`AlgebraicGeometry.Scheme.rootsOfUnityPowMap l (pow_succ l n).symm`) are the
 transition maps of the system `(μ_{lⁿ}, z ↦ z ^ l)` defining `ℤ_l(1)`
-(blueprint: `sk-d-real-jacobian`). -/
+(blueprint: `proposition-kummer-duality-integral-tate-module`). -/
 noncomputable def rootsOfUnityPowMap {m m' : ℕ} (d : ℕ) (h : m * d = m') :
     X.rootsOfUnitySheaf m' ⟶ X.rootsOfUnitySheaf m :=
   kernel.lift _ (kernel.ι (m' • 𝟙 X.gmSheaf) ≫ (d • 𝟙 X.gmSheaf)) (by
@@ -57,7 +57,7 @@ lemma rootsOfUnityPowMap_ι {m m' : ℕ} (d : ℕ) (h : m * d = m') :
 variable {k : Type u} [Field k] [IsAlgClosed k] [X.Over (Spec (.of k))]
   [IsProper (X ↘ Spec (.of k))]
 
-/-- Blueprint `lem-wf-curve-kummer-jacobian-tate-module` (transition maps): the Kummer
+/-- Blueprint `proposition-h-1-curve-tate-module--1` (transition maps): the Kummer
 identifications `H¹(X, μ_m) ≅ Pic(X)[m]` carry the map induced by the `d`-th power map
 `μ_{m d} ⟶ μ_m` to multiplication by `d` on line bundles. -/
 lemma coe_kummerTorsionEquiv_map_rootsOfUnityPowMap {m m' : ℕ} (d : ℕ) (h : m * d = m')

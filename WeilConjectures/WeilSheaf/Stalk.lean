@@ -80,7 +80,7 @@ function is computed by the local Frobenius at the closed points,
   sections to a stalk intertwines the two Frobenii.
 - `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.upperStar` (in
   `WeilConjectures.WeilSheaf.StalkUpperStar`): pullback preserves punctual purity (blueprint:
-  `lem-tw-punctual-rescaling`).
+  `proposition-weights-under-usual-operations--7`).
 
 ## Implementation notes
 
@@ -326,7 +326,7 @@ theorem traceFunction_eq_zero_of_isZero (hF : IsZero F) (n : ℕ)
 
 /-- `F` is punctually `ι`-pure of weight `w`: at every closed point `x`, every eigenvalue `α`
 of the local Frobenius `Fₓ` satisfies `|ι α| = q_x ^ (w / 2)`, with `q_x` the residue
-cardinality at `x`. (blueprint: `def-weil-punctual-weights`) -/
+cardinality at `x`. (blueprint: `definition-weights--2`) -/
 def IsPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (w : ℝ) : Prop :=
   ∀ x : X.finitePoints,
     (F.stalk x).IsPureOfWeight ι ((X ↘ Spec (CommRingCat.of k₀)).residueCard x.1) w
@@ -355,7 +355,7 @@ def IsReal (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) : Prop :=
   ∀ x : X.finitePoints, (F.stalk x).IsReal ι
 
 /-- `F` is `ι`-*realizable* if it is a direct summand of an `ι`-real lisse Weil sheaf
-(Deligne, Weil II, (1.2.13)). (blueprint: `def-wf-iota-real`) -/
+(Deligne, Weil II, (1.2.13)). (blueprint: `definition-real-sheaves`) -/
 def IsRealizable (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) : Prop :=
   ∃ (G : WeilSheaf k₀ l X) (i : F ⟶ G) (r : G ⟶ F), G.IsLisse ∧ G.IsReal ι ∧ i ≫ r = 𝟙 F
 
@@ -520,7 +520,7 @@ of the trace functions of the cohomology sheaves `𝓗ʲ(K)`
 (`AlgebraicGeometry.WeilSheaf.traceFunction`), computed with the local Frobenius on the
 stalks. The sum is finite, `K` being bounded
 (`AlgebraicGeometry.WeilComplex.traceFunction_eq_sum`).
-(blueprint: `def-fd-trace-function`; sketch blueprint: `def-fd-trace-function`) -/
+(blueprint: `definition-trace-function`; sketch blueprint: `definition-trace-function`) -/
 noncomputable def traceFunction (n : ℕ)
     (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
     PadicAlgCl l :=

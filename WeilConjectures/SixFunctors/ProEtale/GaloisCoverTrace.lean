@@ -30,7 +30,7 @@ So for `|Γ|` invertible on `H` (a `p`-group and `ℤ[1/p]`-linear coefficients)
 monomorphism, split by the normalized trace `|Γ|⁻¹ t`, whose idempotent is the average of the
 action (`CategoryTheory.comp_normalizedTrace`, `CategoryTheory.nsmul_normalizedTrace_comp_eq_sum`).
 This is the finite-level input of the averaging argument over a pro-`p` group (SGA 4½,
-[Th. finitude], §3; blueprint `det-nearby-kunneth-invariants`, `det-tf-invariants-duality`).
+[Th. finitude], §3; blueprint `prose-E-10`, `lemma-duality-invariants-pro-p--1`).
 -/
 
 @[expose] public section

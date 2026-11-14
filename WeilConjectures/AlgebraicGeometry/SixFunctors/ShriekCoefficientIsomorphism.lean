@@ -71,14 +71,14 @@ noncomputable abbrev shriekCoefficientTransport (e : Mon.mk Λ ≅ Mon.mk Λ') (
     (coefficientMap e.inv.hom T)).mapDerivedCategory
 
 /-- The existing finite-constant-model, finite-Tor property, as an object property.
-Source: blueprint det-existence-restriction, coefficient specializations
+Source: blueprint theorem-exceptional-inverse-image--18, coefficient specializations
 (blueprint: lem-sfb-shriek-coefficient-isomorphism). -/
 abbrev shriekCoefficientCtf (T : Scheme.{u}) :=
   constantModelBoundedConstructible Λ T ⊓ DerivedCategory.finiteTorAmplitude _
 
 /-- The existing intersection-defined localizing closure, with coproducts indexed in
 `Type (u + 1)`, the fixed ambient Hom universe.
-Source: blueprint det-existence-localizing and coefficient comparisons
+Source: blueprint theorem-exceptional-inverse-image and coefficient comparisons
 (blueprint: lem-sfb-shriek-coefficient-isomorphism). -/
 abbrev shriekCoefficientLocalizing (T : Scheme.{u}) :=
   (shriekCoefficientCtf (Λ := Λ) T).localizingClosure
@@ -221,7 +221,7 @@ private theorem map_closure
     (fun K hK ↦ Q.le_localizingClosure _ (h K hK))
 
 /-- Exact scalar transport identifies both the constructible classes and their closures.
-Source: blueprint det-existence-restriction and coefficient comparisons
+Source: blueprint theorem-exceptional-inverse-image--18 and coefficient comparisons
 (blueprint: lem-sfb-shriek-coefficient-isomorphism).
 
 Proof: The sheaf tensor, module-object Grothendieck, and derived coproduct theorems

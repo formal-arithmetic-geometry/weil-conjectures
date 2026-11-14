@@ -532,13 +532,15 @@ Source: Stacks Project, Tag 09BK, lemma-closed-immersion-affines
 (blueprint: lem-weil-pbc-affine-closed-site-functor-properties).
 
 Proof plan:
-1. Base change preserves ind-etale algebras by lem-weil-pbc-ind-etale-stability.
-   The indexing category for H_A(C) is filtered by lem-exc-closed-lift-filtered;
-   its etale terms give an ind-etale colimit. Postcomposition gives the lift's
-   functor laws; pullback functoriality gives those of base change.
-2. The natural Hom bijections of lem-exc-closed-lift-adjunction, reversed by Spec,
-   give the adjunction. By lem-exc-closed-lift-reduction its unit is invertible;
-   this gives full faithfulness. The retained algebra map is surjective with
+1. Base change preserves ind-etale algebras by lemma-stability.
+   The indexing category for H_A(C) is filtered by
+   proposition-extension-zero-restriction-closed-subscheme; its etale terms give an ind-etale
+   colimit. Postcomposition gives the lift's functor laws; pullback functoriality gives those of
+   base change.
+2. The natural Hom bijections of proposition-extension-zero-restriction-closed-subscheme, reversed
+by Spec,
+   give the adjunction. By proposition-extension-zero-restriction-closed-subscheme its unit is
+   invertible; this gives full faithfulness. The retained algebra map is surjective with
    quotient H_A(C)/I H_A(C) = C, giving the asserted closed pullback square.
 3. An affine fpqc covering has a finite jointly surjective subfamily. Conversely,
    finite jointly surjective weakly etale affine families are fpqc: refine affine
@@ -547,7 +549,8 @@ Proof plan:
 4. Fpqc coverings survive base change by lem-galois-fpqc-covering-base-change.
    Canonical associativity of fibre products gives preservation of pullbacks of
    covering arrows, so u is continuous in the sense of Stacks 00WV.
-5. A prime of H_A(C) is contained in a maximal ideal. By lem-exc-closed-lift-units,
+5. A prime of H_A(C) is contained in a maximal ideal. By
+proposition-extension-zero-restriction-closed-subscheme,
    every 1-b for b in I H_A(C) is a unit. Thus every maximal ideal contains this
    ideal, giving a specialization in the closed fibre; the zero ring is vacuous.
 6. Lift a finite jointly surjective subfamily. Its maps are weakly etale and flat

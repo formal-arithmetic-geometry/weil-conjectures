@@ -128,8 +128,8 @@ private noncomputable def intersectComplexIso
 /-- Evaluating the categorical Čech complex of the intersection presheaf gives
  the concrete Čech complex for the family intersected with the evaluating open.
 
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1, Čech coordinates.
-(blueprint: lem-pc-cech-evaluation-comparison)
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves`, proof paragraph 1, Čech
+coordinates. (blueprint: lem-pc-cech-evaluation-comparison)
 
 Proof: In degree n, the categorical product is indexed by tuples
  a : Fin (n+1) → ι. Evaluation and forgetting scalars preserve this product.

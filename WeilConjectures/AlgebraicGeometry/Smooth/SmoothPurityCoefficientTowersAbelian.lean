@@ -44,10 +44,10 @@ import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers
 /-!
 # The abelian category of smooth-purity coefficient towers
 
-Source: blueprint main-20261015, sec-smooth-purity, sk-def-sp-coefficient-towers,
+Source: blueprint main-20261015, chap-Smooth-purity, prose-09-21,
 `sk-def-sp-coefficient-towers-abelian.md`, clauses (1)--(3); Bhatt--Scholze,
 The pro-etale topology for schemes, Definition 3.5.3
-(blueprint: det-sp-coefficient-towers-abelian).
+(blueprint: prose-09-21).
 
 The input category is the recorded `spCoefficientTowers`, not a tower of modules
 with one fixed coefficient ring. The equivalence below only uncurries its product-site
@@ -790,7 +790,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 recovers `spCoefficientRings`: the same constant quotient sheaves and the same reduction
 ring homomorphisms are used. This is a change of bundled target category only.
 Source: blueprint, coefficient-tower lemma, clause (3)
-(blueprint: det-sp-coefficient-towers-abelian). -/
+(blueprint: prose-09-21). -/
 def spCoefficientCommRings :
     ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{max u (t + 1)} :=
   Functor.ofOpSequence
@@ -824,7 +824,7 @@ end
 
 /-- The abelian axioms for the existing componentwise preadditive structure.
 Source: blueprint, coefficient-tower lemma, clause (1); Stacks 03DA and 03DB
-(blueprint: det-sp-coefficient-towers-abelian).
+(blueprint: prose-09-21).
 Proof: give ℕ × T.ProEt the vertical topology, whose sheaf condition is exactly the
 recorded levelwise condition. The actual varying coefficient presheaf is a ring sheaf:
 its restriction to level n is naturally isomorphic to the recorded ring sheaf R_n.
@@ -877,7 +877,7 @@ theorem sp_coefficient_towers_abelian_axioms :
 /-- The abelian structure extends the existing componentwise addition of tower maps;
 all remaining fields are proofs of the preceding named axioms.
 Source: blueprint, coefficient-tower lemma, clause (1)
-(blueprint: det-sp-coefficient-towers-abelian). -/
+(blueprint: prose-09-21). -/
 instance spCoefficientTowersAbelian : Abelian (spCoefficientTowers l E T) where
   toPreadditive := inferInstance
   toIsNormalMonoCategory := (sp_coefficient_towers_abelian_axioms l E T).1
@@ -888,7 +888,7 @@ instance spCoefficientTowersAbelian : Abelian (spCoefficientTowers l E T) where
 
 /-- Evaluation after the sectionwise specified identification of the recorded tower
 category with strict semilinear systems. Source: blueprint, coefficient-tower lemma,
-clause (2) (blueprint: det-sp-coefficient-towers-abelian). -/
+clause (2) (blueprint: prose-09-21). -/
 abbrev spCoefficientEvaluation
     (e : spCoefficientTowers l E T ≌
       StrictRingSystem.{t + 1, t, max u (t + 1)} (spCoefficientCommRings l E T))
@@ -903,7 +903,7 @@ attribute [local irreducible] DerivedCategory CategoryTheory.Functor.mapDerivedC
 and all identifications fixed on sections. The scalar and tensor fields are the
 existing canonical derived-change models, not arbitrary maps or isomorphisms.
 Source: blueprint, coefficient-tower lemma, clauses (1)--(3); Bhatt--Scholze,
-Definition 3.5.3 (blueprint: det-sp-coefficient-towers-abelian). -/
+Definition 3.5.3 (blueprint: prose-09-21). -/
 structure SpCoefficientTowersAbelian where
   /-- Uncurrying into the existing varying-coefficient strict systems. -/
   equivalence : spCoefficientTowers l E T ≌

@@ -12,8 +12,8 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 /-!
 # Projective morphisms are proper
 
-Source: the Weil conjectures blueprint, chapter `sec-smooth-purity`, unit
-`sk-prop-sf-kunneth-ordinary`, lemma of order 1708; Stacks Project, Tag 01WC
+Source: the Weil conjectures blueprint, chapter `chap-Smooth-purity`, unit
+`proposition-ordinary-external-kunneth--1`, lemma of order 1708; Stacks Project, Tag 01WC
 (blueprint: lem-kun-projective-implies-proper).
 -/
 
@@ -30,8 +30,8 @@ is proper. The other conjuncts record the three properness facts in the parenthe
 projective-space projections are proper, closed immersions are proper, and proper morphisms
 are closed under composition.
 
-Source: the Weil conjectures blueprint, `sk-prop-sf-kunneth-ordinary`, lemma of order 1708;
-Stacks Project, Tag 01WC (blueprint: lem-kun-projective-implies-proper).
+Source: the Weil conjectures blueprint, `proposition-ordinary-external-kunneth--1`, lemma of order
+1708; Stacks Project, Tag 01WC (blueprint: lem-kun-projective-implies-proper).
 
 Proof: Choose a natural number `N` and a closed immersion `i` with `i ≫ q = f` using
 `def-kun-projective` (`IsHProjective.exists_closedImmersion`). The projection `q` is that of

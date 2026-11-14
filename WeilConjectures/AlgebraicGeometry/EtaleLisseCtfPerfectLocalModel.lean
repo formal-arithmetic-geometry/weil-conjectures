@@ -54,8 +54,8 @@ Proof (node steps):
    `κ(y)` (lem-pc-algebraic-closure-exists-unique) gives a geometric point `ȳ`, and
    `x̄ = v_j ȳ`. The exact geometric stalk (prop-weil-pbc-geometric-stalks-exact), the
    inverse-image stalk comparison (lemma-openclosed-stalk-upperstar), the constant-sheaf
-   stalk (lem-weil-pbc-constant-sheaf-geometric-stalk) and exact-functor localization
-   (lem-weil-pbc-exact-functor-derived-factorization) give `L_x̄ ≅ E := E_j` in `D(A)`,
+   stalk (definition-torsion-sheaves--3) and exact-functor localization
+   (situation-conventions) give `L_x̄ ≅ E := E_j` in `D(A)`,
    `A`-linearly.
 3. Choose a Tor interval `[a, b]` of `L`. For every `A`-module `N` the constant sheaf of
    `N` is a degree-zero test, and the stalk/tensor comparison
@@ -64,12 +64,12 @@ Proof (node steps):
    `H^r(L_x̄ ⊗^L N) = 0` for `r ∉ [a, b]`; by step 2, `E` has Tor amplitude in `[a, b]`.
 4. `A` is finite, hence Noetherian (def-weil-pbc-noetherian-ring), and the terms of `E` are
    finitely generated; the bounded finite-Tor perfectness criterion
-   (lem-weil-bounded-finite-tor-perfect, Stacks 0658) gives a complex `P` of finitely
+   (lemma-perfect-complexes-geometric-point, Stacks 0658) gives a complex `P` of finitely
    generated projective `A`-modules, zero outside `[a, b]`, with `P ≅ E ≅ L_x̄` in `D(A)`.
 5. The connected clause of lem-weil-pbc-finite-ring-derived-local-constancy gives a jointly
    surjective etale family `u_i : U_i → S` with `u_i^* L ≅ (L_x̄)` (constant); the exact
    `ModuleCat`-valued constant sheaf functor applied to `L_x̄ ≅ P`, through exact-functor
-   localization (lem-weil-pbc-exact-functor-derived-factorization), gives
+   localization (situation-conventions), gives
    `u_i^* L ≅ Q(constant P)` for every `i`.
 -/
 theorem etale_lisse_ctf_perfect_local_model

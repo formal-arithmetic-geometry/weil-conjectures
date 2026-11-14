@@ -13,7 +13,7 @@ import Mathlib.RingTheory.Localization.LocalizationLocalization
 # A localization of a regular ring is regular
 
 Source: Stacks Project, Algebra, proof of Lemma Tag 0381, Step 3
-(blueprint: lem-weil-pbc-localization-of-regular-ring).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -25,7 +25,7 @@ namespace RingTheory
 /-- A localization of a regular ring is regular.
 
 Source: Stacks Project, Algebra, proof of Lemma Tag 0381, Step 3
-(blueprint: lem-weil-pbc-localization-of-regular-ring).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 Give `R'` the algebra structure induced by `φ`. The three hypotheses imply
 `IsLocalization M R'`: the fraction presentation gives surjectivity after multiplying by the

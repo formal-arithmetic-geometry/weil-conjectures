@@ -21,7 +21,8 @@ category. The *external internal-hom map*
 `F₁(E₁ ⟶ L₁) ⊗ F₂(E₂ ⟶ L₂) ⟶ (F₁ E₁ ⊗ F₂ E₂ ⟶ F₁ L₁ ⊗ F₂ L₂)`
 
 is the transpose of the two evaluations, through the middle-four interchange `tensorμ`. For
-external products of étale sheaves it is the map `β` of `def-sf-kv-maps` (iii).
+external products of étale sheaves it is the map `β` of `lemma-external-duality-trace-morphism`
+(iii).
 
 This file proves the formal properties of this map used to show that `β` is an isomorphism:
 

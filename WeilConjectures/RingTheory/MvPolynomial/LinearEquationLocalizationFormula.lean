@@ -14,7 +14,7 @@ free `xⱼ` by `X j`; isolating the `i` term gives
 `fᵢ xᵢ = 1 - ∑ j ≠ i, fⱼ X j`. Multiplication by the inverse of `fᵢ` in
 `Af` yields exactly the displayed expression. Algebra equivalence operations
 preserve these coefficients and sums, so the computation holds in `Bf`.
-(blueprint: `lem-weil-pbc-linear-equation-localization-polynomial-formula`) -/
+(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
 theorem algEquiv_away_linearEquation_symm_eliminated (A : Type u) [CommRing A]
     (r : ℕ) (f : Fin r → A) (i : Fin r) :
     let I : Ideal (MvPolynomial (Fin r) A) :=

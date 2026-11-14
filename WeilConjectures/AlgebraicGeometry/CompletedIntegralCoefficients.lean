@@ -17,7 +17,7 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 /-!
 # Completed integral coefficient sheaves
 
-Source: Weil conjectures blueprint, `sec-smooth-purity`, `sk-def-sf-operations`, order 1455
+Source: Weil conjectures blueprint, `chap-Smooth-purity`, `sk-def-sf-operations`, order 1455
 (blueprint: def-weil-completed-integral-coefficients).
 
 The natural-number index `n` stands for the positive exponent `n + 1`. Coefficients are

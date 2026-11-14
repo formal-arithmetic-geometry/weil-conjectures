@@ -46,7 +46,7 @@ import Mathlib.Algebra.Field.ZMod
 # Residue reduction controls integral Tor amplitude
 
 Source: Weil conjectures blueprint, `sec-six-functors/sk-prop-sf-biduality-general`,
-`lem-coef-integral-residue-tor`, order 2133 (blueprint: lem-coef-integral-residue-tor).
+`lemma-bounds-finite-reductions--2`, order 2133 (blueprint: lemma-bounds-finite-reductions--2).
 
 The finite reduction API uses index `n` for exponent `n+1`. In particular index `0`
 is the residue reduction. Equality of the object predicates states equality of the
@@ -80,7 +80,7 @@ private noncomputable def residueTestDatum (p : ℕ) (hp : p.Prime) : FiniteFiel
 and the integral constructible and integral finite-Tor full subcategories coincide.
 This does not identify constructibility with site-perfectness.
 
-Source: blueprint order 2133 (blueprint: lem-coef-integral-residue-tor).
+Source: blueprint order 2133 (blueprint: lemma-bounds-finite-reductions--2).
 Proof:
 1. Represent each finite reduction by a cochain complex and choose a K-flat resolution.
 Transport its constructibility along the representative isomorphism. The coefficient

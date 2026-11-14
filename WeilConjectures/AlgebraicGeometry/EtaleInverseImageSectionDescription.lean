@@ -34,7 +34,7 @@ back by the adjunction unit. A morphism into the base change of `V` encodes the 
 factorization through the étale scheme `V` over `S`.
 
 Proof:
-1. By lem-weil-pbc-etale-inverse-image-algebraic-structures, the inverse image is the
+1. By situation-conventions, the inverse image is the
    sheafification of the presheaf of colimits over pairs consisting of an étale object `V`
    over `S` and a map from the test object into its base change to `T`.
 2. By lem-weil-pbc-site-sheafification-sections-local, the given section has representatives
@@ -42,7 +42,7 @@ Proof:
 3. By lem-weil-pbc-filtered-colimit-sets-elementwise, each representative comes from a
    section of some `F(V)`. Its map to the base change of `V` gives the asserted factorization.
    The identity-indexed unit followed by restriction is its image in the sheafification,
-   as in lem-weil-pbc-etale-inverse-image-algebraic-structures. -/
+   as in situation-conventions. -/
 theorem etaleInverseImageSectionDescription (S T : Scheme.{u}) (g : T ⟶ S)
     (F : Sheaf S.smallEtaleTopology (Type (u + 1)))
     (s : ((Scheme.etaleSetPullback g).obj F).obj.obj (op (Scheme.Etale.mk (𝟙 T)))) :

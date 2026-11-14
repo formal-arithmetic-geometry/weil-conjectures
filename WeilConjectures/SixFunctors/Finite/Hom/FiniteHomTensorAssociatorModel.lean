@@ -13,7 +13,7 @@ import all WeilConjectures.SixFunctors.Finite.Hom.FiniteHomTensorChainSquare
 
 /-! # The prescribed intrinsic scalar associator on chain representatives
 
-Source: blueprint thm-coef-finite-hom, successive quotient paragraph.
+Source: blueprint lemma-change-coefficients-internal-hom--1, successive quotient paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -58,7 +58,7 @@ abbrev finiteHomTensorExtensionComplex {n m : ℕ} (h : m ≤ n) :=
   (coefficientFiniteQuotientExtension.{u, u} l E X h).mapHomologicalComplex (.up ℤ)
 
 /-- The localization comparison for the exact counit fixed by the quotient calculus.
-Source: blueprint thm-coef-finite-hom, representative normalization. -/
+Source: blueprint lemma-change-coefficients-internal-hom--1, representative normalization. -/
 def finiteHomTensorComparison {n m : ℕ} (h : m ≤ n) :=
   finiteHomTensorRepresentativeComparison (coefficientFiniteQuotientExtension.{u, u} l E X h)
     (coefficientFiniteQuotientDerived.{u, u} l E X h)
@@ -146,7 +146,7 @@ def finiteHomTensorRestrictionComp {n m r : ℕ} (h : m ≤ n) (k : r ≤ m) :
         (homOfLE h).op (homOfLE k).op).symm)
 
 /-- The ordinary chain associator, formed from the prescribed ordinary adjunctions.
-Source: blueprint thm-coef-finite-hom, successive quotients. -/
+Source: blueprint lemma-change-coefficients-internal-hom--1, successive quotients. -/
 def finiteHomTensorChainAssoc {n m r : ℕ} (h : m ≤ n) (k : r ≤ m) :
     finiteHomTensorExtensionComplex l E X h ⋙ finiteHomTensorExtensionComplex l E X k ≅
       finiteHomTensorExtensionComplex l E X (k.trans h) :=
@@ -169,7 +169,7 @@ private theorem chainAssoc_transpose {n m r : ℕ} (h : m ≤ n) (k : r ≤ m)
   exact complexAssoc_transpose _ _ _ _ P
 
 /-- The prescribed derived associator is computed by its ordinary adjunction mate.
-Source: blueprint thm-coef-finite-hom, successive-quotient normalization
+Source: blueprint lemma-change-coefficients-internal-hom--1, successive-quotient normalization
 (blueprint: lem-coef-finite-hom-associator-model).
 Proof: extend the calculus unit equation from K-flat representatives to all complexes
 by naturality along K-flat resolutions. Transpose each normalized comparison.

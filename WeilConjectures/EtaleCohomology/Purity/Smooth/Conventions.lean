@@ -133,7 +133,7 @@ class HasTateTwist where
   twistObjectZeroIso (X : Scheme.{u}) [HasInvertibleExponent Λ X] :
     twistObject X 0 ≅ constantComplex Λ X
   /-- `Λ_X(m) ⊗^L Λ_X(m') ≅ Λ_X(m + m')`, which is what makes `Λ(c)[2c]` the `c`-th tensor
-  power of `Λ(1)[2]` in the Künneth iteration of `sk-prop-an`. -/
+  power of `Λ(1)[2]` in the Künneth iteration of `proposition-purity-vector-bundles`. -/
   twistObjectAddIso (X : Scheme.{u}) [HasInvertibleExponent Λ X] (m m' : ℤ) :
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (twistObject X m)).obj (twistObject X m') ≅
       twistObject X (m + m')
@@ -155,7 +155,7 @@ class HasTateTwist where
   boundedConstructibleFiniteTor_twistObject (X : Scheme.{u}) [HasInvertibleExponent Λ X]
       (m : ℤ) :
     DerivedCategory.boundedConstructibleFiniteTor Λ X (twistObject X m)
-  /-- Every twisting object is locally constant of rank one (`def-coefficient-twists-detailed`):
+  /-- Every twisting object is locally constant of rank one (`definition-tate-twists`):
   `Λ_X(m)` is a locally constant sheaf `L` of `Λ`-modules placed in degree zero, every stalk of
   which at a geometric point is free of rank one. In the concrete model
   `L = (μ_{ℓ^N} ⊗ Λ)^{⊗ m}`, respectively its `Λ`-dual for `m < 0`. -/
@@ -273,7 +273,7 @@ exponent is invertible on the schemes in sight (`AlgebraicGeometry.HasInvertible
 categories `D(X_ét, Λ)`, `D^b_{ctf}(X, Λ)`, and the twists `K(m)` defined here; the dualizing
 complex of `a : Y ⟶ Spec k` is `ω_{Y,Λ} = Ra^! Λ` (`AlgebraicGeometry.Etale.dualizingComplex`).
 The normalization of geometric Frobenius on the twists (`q^{-m}` on `Λ(m)`) is
-`def-weil-frobenius-coefficient-twists` (`WeilConjectures.WeilSheaf.FrobeniusTwist`), and the
+`prose-10-21` (`WeilConjectures.WeilSheaf.FrobeniusTwist`), and the
 other coefficient stages `𝒪_E, E, ℚ̄_ℓ` are the transports of
 `WeilConjectures.EtaleCohomology.Purity.Smooth.Transport`.
 
@@ -349,7 +349,7 @@ noncomputable def compactificationConstantComplexIso (f : X ⟶ Y) [HasCompactif
 
 variable (Λ X)
 
-/-- Blueprint `def-pur-section-invariant`: Section invariant
+/-- Blueprint `lemma-section-normal-bundle--1`: Section invariant
 
 Part of blueprint `sk-def-purity-conv`. The *section invariant*
 `𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ_B` of a morphism `g : V ⟶ B` together with a section

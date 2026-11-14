@@ -20,7 +20,7 @@ Let `M` be a nearby-cycles model of finite type over the strictly henselian trai
 `S = Spec k'⟦t⟧` along `q : 𝒳 ⟶ S` (`NearbyCyclesModel.IsTraitModelOver`). If `q` is smooth, the
 specialization unit `σ_M : ℚ̄_ℓ ⟶ Ψ_M(ℚ̄_ℓ)` is an isomorphism
 (`NearbyCyclesModel.IsTraitModelOver.isIso_unit_of_smooth`; blueprint
-`det-sp-nearby-cycles-exchanges` (1), smooth case, at the unit). The same holds for trait models
+`prose-E-03` (1), smooth case, at the unit). The same holds for trait models
 over a generic base (`NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_unit_of_smooth`).
 
 ## Proof
@@ -176,7 +176,7 @@ theorem IsTraitModelOver.isIso_pullbackExchange_toTraitGeneric_app_unit
   exact h₁ h₂
 
 /-- **The specialization unit of a smooth model over the trait is invertible** (blueprint
-`det-sp-nearby-cycles-exchanges` (1), smooth case, at the unit): if `M` is of finite type over
+`prose-E-03` (1), smooth case, at the unit): if `M` is of finite type over
 the strictly henselian trait `S` along a smooth `q`, then `σ_M : ℚ̄_ℓ ⟶ Ψ_M(ℚ̄_ℓ)` is an
 isomorphism. -/
 theorem IsTraitModelOver.isIso_unit_of_smooth [IsSepClosed k'] [Fact (ringChar k').Prime]

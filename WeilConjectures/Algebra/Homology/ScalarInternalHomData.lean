@@ -14,7 +14,7 @@ Stacks Project, sites-cohomology.tex, Tags 07A6, 07A4, 08J9, 08JA and 0D6D,
 and derived.tex, Tag 05RT
 (auxiliary; not a blueprint node).
 This is the auxiliary scalar-adjunction comparison extracted from the final
-paragraph of lem-sfb-dc-hom-preserves in the current blueprint.
+paragraph of proposition-six-operations-dctf--15 in the current blueprint.
 Every comparison is normalized on actual K-flat tensors. In particular these
 are ordinary unbounded module derived categories, with no flatness or
 perfectness assumption on a coefficient map or a derived input.

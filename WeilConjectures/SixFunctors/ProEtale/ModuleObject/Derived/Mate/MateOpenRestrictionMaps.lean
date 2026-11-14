@@ -18,7 +18,7 @@ import WeilConjectures.Compactification.BoundaryRefinement
 
 /-! # The specified comparison maps for open restriction
 
-Source: blueprint det-sf-mate-open-restriction, clauses (1)--(2).
+Source: blueprint proposition-composition-open-restriction-compactifications-f, clauses (1)--(2).
 These are the original maps, separated from the exceptional-adjoint theorem so that
 its geometric compact-support comparison can be proved independently.
 -/
@@ -40,7 +40,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- Restriction of the existing exact termwise inverse image to the recorded localizing
 closures. The witness certifies membership only; no functor is chosen.
-Source: blueprint det-sf-mate-open-restriction (1)
+Source: blueprint proposition-composition-open-restriction-compactifications-f (1)
 (blueprint: def-sfb-mate-open-restriction-maps). -/
 def mateOpenPullback {U X : Scheme.{u}} (j : U ⟶ X)
     (h : ∀ K : (localizingClosureProEtale Λ X).FullSubcategory,
@@ -51,7 +51,7 @@ def mateOpenPullback {U X : Scheme.{u}} (j : U ⟶ X)
     ((localizingClosureProEtale Λ X).ι ⋙ (upperStar Λ j).mapDerivedCategory) h
 
 /-- Restriction of actual levelwise extension by zero to the localizing closures.
-Source: blueprint det-sf-mate-open-restriction (1)
+Source: blueprint proposition-composition-open-restriction-compactifications-f (1)
 (blueprint: def-sfb-mate-open-restriction-maps). -/
 def mateOpenExtension {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (h : ∀ K : (localizingClosureProEtale Λ U).FullSubcategory,
@@ -65,8 +65,8 @@ def mateOpenExtension {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 /-- Canonical composition of open extensions: the left-adjoint comparison of the exact
 open adjunctions and the coefficient-compatible inverse-image compositor.
-Source: blueprint det-sf-mate-open-restriction (2), composite adjunction calculation
-(blueprint: def-sfb-mate-open-restriction-maps). -/
+Source: blueprint proposition-composition-open-restriction-compactifications-f (2), composite
+adjunction calculation (blueprint: def-sfb-mate-open-restriction-maps). -/
 def mateOpenExtensionComp {U X Z : Scheme.{u}} (j : U ⟶ X) (i : X ⟶ Z)
     [IsOpenImmersion j] [IsOpenImmersion i] :
     (openImmersionLowerShriek Λ j).mapDerivedCategory ⋙
@@ -82,8 +82,8 @@ def mateOpenExtensionComp {U X Z : Scheme.{u}} (j : U ⟶ X) (i : X ⟶ Z)
 /-- The canonical identification of compact-support image for the trivial open
 compactification (j,id) with levelwise extension by zero. The identity direct-image
 identification is the derived one normalized on ordinary module sheaves.
-Source: blueprint det-sf-mate-open-restriction (1), trivial compactification
-(blueprint: def-sfb-mate-open-restriction-maps). -/
+Source: blueprint proposition-composition-open-restriction-compactifications-f (1), trivial
+compactification (blueprint: def-sfb-mate-open-restriction-maps). -/
 def mateOpenTrivialLowerShriek {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     rightDerivedLowerShriekOfCompactification Λ (Compactification.ofIsOpenImmersion j) ≅
       (openImmersionLowerShriek Λ j).mapDerivedCategory :=

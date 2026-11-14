@@ -308,7 +308,7 @@ theorem comparison_descent_iso
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- A ringed site in fixed size bounds, with the existing module derived category.
-Source: Stacks 06YS and 06YY; size convention def-weil-size-convention
+Source: Stacks 06YS and 06YY; size convention prose-01-10
 (blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
 structure Site where
   C : Type u

@@ -13,9 +13,10 @@ public import WeilConjectures.WeilSheaf.Localization
 # The Verdier exchange of Weil complexes, natural form
 
 For a separated morphism of finite type `f : X ⟶ Y` of separated `k₀`-schemes of finite type,
-the Verdier exchange `𝔻_Y Rf₀! ≅ Rf_* 𝔻_X` (blueprint `fix-cor-verdier-exchange`) as a natural
-isomorphism of functors `(WeilComplex X)ᵒᵖ ⥤ WeilComplex Y`. With Verdier biduality it identifies
-`Rf^!` with `𝔻_X f^* 𝔻_Y` (`AlgebraicGeometry.WeilComplex.nonempty_upperShriek_obj_iso`).
+the Verdier exchange `𝔻_Y Rf₀! ≅ Rf_* 𝔻_X` (blueprint
+`lemma-internal-adjunction-two-exchange-formulas--2`) as a natural isomorphism of functors
+`(WeilComplex X)ᵒᵖ ⥤ WeilComplex Y`. With Verdier biduality it identifies `Rf^!` with `𝔻_X f^* 𝔻_Y`
+(`AlgebraicGeometry.WeilComplex.nonempty_upperShriek_obj_iso`).
 
 The Verdier dual `AlgebraicGeometry.WeilComplex.verdierDual` and the dualizing complex are defined
 in `WeilConjectures.WeilSheaf.VerdierDual`, which imports this file; they are spelled out here:
@@ -61,10 +62,11 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [(derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).IsLeftAdjoint]
   [(derivedLowerShriek k₀ l (Y ↘ Spec (CommRingCat.of k₀))).IsLeftAdjoint]
 
-/-- **Verdier exchange, natural in `M`** (blueprint `fix-cor-verdier-exchange`): for a separated
-morphism of finite type `f : X ⟶ Y`, `𝔻_Y (Rf₀! M) ≅ Rf_* (𝔻_X M)` naturally in the Weil
-complex `M`. Here `𝔻 = RHom(-, ω)` is the derived internal hom into the dualizing complex
-`ω = (Ra!)^{ra}(ℚ̄_ℓ)`, lifted to Weil complexes along any proofs `hX`, `hY` that it lands there.
+/-- **Verdier exchange, natural in `M`** (blueprint
+`lemma-internal-adjunction-two-exchange-formulas--2`): for a separated morphism of finite type
+`f : X ⟶ Y`, `𝔻_Y (Rf₀! M) ≅ Rf_* (𝔻_X M)` naturally in the Weil complex `M`. Here `𝔻 = RHom(-, ω)`
+is the derived internal hom into the dualizing complex `ω = (Ra!)^{ra}(ℚ̄_ℓ)`, lifted to Weil
+complexes along any proofs `hX`, `hY` that it lands there.
 
 This is the case `S = Spec k₀`, `Q = ℚ̄_ℓ` of
 `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_op_comp_iso_of_adjunction`; the

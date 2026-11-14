@@ -20,7 +20,7 @@ Let `Λ` be a commutative condensed ring and `X` a scheme, with coefficient ring
 `Λ_X`-modules satisfy `DerivedCategory.HomCommutesWithFilteredColimits.{u + 1}`, i.e. for every
 `u + 1`-small filtered colimit `B = colim Bᵢ` of `Λ_X`-modules and every `n`, the map
 `colim Hom(s, Bᵢ[n]) ⟶ Hom(s, B[n])` is bijective (blueprint
-`sk-lem-constructible-ext-continuity`, `sk-cor-pe-bounded-continuity`):
+`lemma-continuity-ext-out-constructible-complex--1`, `corollary-continuity-cohomology`):
 
 * the unit `ℤ` of abelian pro-étale sheaves in degree `0`, for `X` qcqs
   (`AlgebraicGeometry.ProEtale.homCommutesWithFilteredColimits_singleFunctor_unit`): the

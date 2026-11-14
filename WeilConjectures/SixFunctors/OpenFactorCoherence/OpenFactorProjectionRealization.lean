@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.OpenProjectionRoos.OpenProjectionRoosC
 
 /-! # Open-factor data in the fixed coefficient presentation
 
-Source: blueprint sk-prop-sf-pf-coherence, open-factor paragraph;
+Source: blueprint proposition-composition-base-change-rf-shriek--1, open-factor paragraph;
 Bhatt--Scholze 3.4.10, 6.5.5, 6.5.8; Stacks 099N, 09BN, 0GL1.
 -/
 

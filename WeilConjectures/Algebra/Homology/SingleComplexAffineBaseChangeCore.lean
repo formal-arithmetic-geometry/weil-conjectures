@@ -61,7 +61,8 @@ Proof, following the four steps of the node:
 4. Every maximal ideal is prime, so each H^i of the composite is bijective at every
    maximal localization, hence bijective
    (lem-weil-pbc-linear-map-bijective-at-maximal-localizations); the composite is a
-   quasi-isomorphism, i.e. an isomorphism in D(R') (def-pc-derived-category). -/
+   quasi-isomorphism, i.e. an isomorphism in D(R')
+   (lemma-coherent-base-change-invertible-sheaves). -/
 theorem singleComplexAffineBaseChangeCore
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

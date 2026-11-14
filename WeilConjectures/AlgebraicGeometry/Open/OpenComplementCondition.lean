@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 Source: literature/blueprint/master/blueprint/sec-smooth-purity/
 `sk-prop-a1-kummer/def-exc-open-complement-bound.md` (blueprint:
-`def-exc-open-complement-bound`).
+`theorem-f-shriek-finite-coefficients--1`).
 -/
 
 @[expose] public section
@@ -32,8 +32,8 @@ namespace AlgebraicGeometry.Scheme
 an open immersion vanish above the prescribed bound, and all higher direct images of
 constructible coefficient sheaves remain constructible.
 
-Source: blueprint node `def-exc-open-complement-bound`, order 1914
-(blueprint: def-exc-open-complement-bound).
+Source: blueprint node `theorem-f-shriek-finite-coefficients--1`, order 1914
+(blueprint: theorem-f-shriek-finite-coefficients--1).
 
 Proof: This is a definition. The first conjunct is clause (1) of the node: for every
 sheaf of `A`-modules on `Vₑₜ` and every integer `q` strictly above `c`, the `q`th

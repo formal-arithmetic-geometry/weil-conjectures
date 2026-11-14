@@ -151,12 +151,12 @@ Source: Stacks, sites-cohomology.tex, Lemma 0D6D and Modules on Sites, Lemma 03D
 Proof: (1) On each test object the fibre-product pasting isomorphism identifies the two
 module direct images. The induced coefficient identification makes it linear. The
 module adjunctions have the displayed tensor units; form their composite using
-`def-weil-pbc-composite-adjunction`. Apply `lem-weil-pbc-conjugate-iso-unit-equation`
+`def-weil-pbc-composite-adjunction`. Apply `situation-conventions`
 to obtain `a`. In inverse-image/tensor coordinates its forward map sends `m ⊗ r` to
 `(m ⊗ 1) ⊗ r`; its inverse sends `(m ⊗ s) ⊗ r` to `m ⊗ c_h(s)r`. Balancing proves
 the inverse identities and compatibility with restrictions and morphisms.
 (2) Apply this comparison termwise to obtain `b`. All three module pullbacks are exact
-by `def-weil-pbc-proetale-operations`. Their termwise functors invert quasi-isomorphisms.
+by `prose-03-02`. Their termwise functors invert quasi-isomorphisms.
 Use `lem-weil-pbc-localization-universal-property` to descend `b`, with the stated
 factorization isomorphisms, to the unique compatible derived comparison `c`.
 (3) Use `lem-pc-kflat-resolution` to represent an input by a K-flat complex with flat

@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.Finiteness.Defs
 # A uniform annihilator for a finite module with zero localization
 
 Source: Stacks Project, Exercise 076A and the proof of Lemma 07FC
-(blueprint: lem-weil-pbc-finite-module-localization-zero-annihilator).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -25,7 +25,7 @@ namespace Module
 /-- A finitely generated module whose localization at a multiplicative subset is zero
 is annihilated by one element of that subset. Source: Stacks Project, Exercise 076A,
 and the uniform-annihilator form used in the proof of Lemma 07FC.
-(blueprint: lem-weil-pbc-finite-module-localization-zero-annihilator)
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 
 Proof:
 1. Choose finitely many generators `m₁, …, mₙ` using

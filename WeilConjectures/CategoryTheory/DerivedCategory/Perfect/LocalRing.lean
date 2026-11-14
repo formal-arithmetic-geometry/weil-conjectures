@@ -15,7 +15,7 @@ A perfect complex over a commutative ring has finite Tor amplitude, and over a l
 represented by a bounded complex of finitely generated *free* modules. Over a Noetherian local
 ring (for instance the finite coefficient ring `A_{E,n} = 𝒪_E/ϖⁿ`), a bounded complex with
 finite cohomology modules therefore has finite Tor amplitude exactly when it is quasi-isomorphic
-to a bounded complex of finite free modules (`lem-trf-finite-tor-amplitude-perfect`).
+to a bounded complex of finite free modules (`lemma-perfect-complexes-geometric-point--1`).
 
 ## Main statements
 
@@ -23,7 +23,8 @@ to a bounded complex of finite free modules (`lem-trf-finite-tor-amplitude-perfe
   a perfect complex has finite Tor amplitude.
 - `DerivedCategory.IsPerfect.exists_free`: over a local ring a perfect complex is represented by
   a bounded complex of finite free modules.
-- `DerivedCategory.finiteTorAmplitude_iff_exists_free` (`lem-trf-finite-tor-amplitude-perfect`).
+- `DerivedCategory.finiteTorAmplitude_iff_exists_free`
+(`lemma-perfect-complexes-geometric-point--1`).
 -/
 
 @[expose] public section
@@ -64,14 +65,14 @@ theorem IsPerfect.exists_free [IsLocalRing R] {C : DerivedCategory (ModuleCat.{u
   have := (hP i).2
   exact ⟨Module.free_of_flat_of_isLocalRing, inferInstance⟩
 
-/-- Blueprint `lem-trf-finite-tor-amplitude-perfect`: Finite Tor amplitude and perfectness over
-the finite coefficient ring.
+/-- Blueprint `lemma-perfect-complexes-geometric-point--1`: Finite Tor amplitude and perfectness
+over the finite coefficient ring.
 
 Let `R` be a Noetherian local ring (for instance the finite coefficient ring
 `A_{E,n} = 𝒪_E/ϖⁿ`, a local Artinian ring) and `C` a bounded complex of `R`-modules with finite
 cohomology modules. Then `C` has finite Tor amplitude if and only if it is quasi-isomorphic to
 a bounded complex of finitely generated free `R`-modules, that is, lies in the category
-`D^b_fin(R)` of `def-trf-categorical-trace`. The direct implication is
+`D^b_fin(R)` of `definition-categorical-trace`. The direct implication is
 `DerivedCategory.isPerfect_of_finiteTorAmplitude` followed by freeness of finite projective
 modules over a local ring; the converse holds since free modules are flat. The Tor amplitude
 hypothesis cannot be dropped: `R/𝔪` has infinite Tor dimension unless `R` is regular. -/

@@ -212,11 +212,11 @@ Uses: lem-sf-native-adic-pullback-exact-lisse, lem-weil-proetale-isomorphism-inv
    hypothesis on the sequence.
 Uses: lem-sf-native-weil-constructible-abelian.
 4. Use B=B_X and the coefficient identifications of step 2 in
-   [det-sf-open-closed-sequence-ring-sheaf]. Its operations are the actual ring-module
-   operations, so it gives the exact underlying open extension J_0, its adjunction J_0\dashv
-   P_0, exact closed direct image I_0, invertible closed counit Q_0I_0\to\mathrm{id}, P_0I_0=0,
-   and the short exact sequence of the actual open counit and closed unit. The other adjunction
-   Q_0\dashv I_0 is the canonical tensor-pullback/module-pushforward adjunction of
+   [proposition-extension-zero-restriction-closed-subscheme]. Its operations are the actual
+   ring-module operations, so it gives the exact underlying open extension J_0, its adjunction
+   J_0\dashv P_0, exact closed direct image I_0, invertible closed counit Q_0I_0\to\mathrm{id},
+   P_0I_0=0, and the short exact sequence of the actual open counit and closed unit. The other
+   adjunction Q_0\dashv I_0 is the canonical tensor-pullback/module-pushforward adjunction of
    [lem-weil-pbc-ringed-topoi-module-adjunction]; its coefficient map is precomposition, as in
    the framework. Both P_0,Q_0 are additive exact functors by
    [lem-sf-native-adic-pullback-exact-lisse]. Direct image is additive because addition is taken
@@ -229,7 +229,8 @@ Uses: lem-sf-native-weil-constructible-abelian.
    sends a map to its composite with the sheaf unit M\to\bar i_*\bar i^{-1}M, exactly as for the
    module-object adjunction of the cited localization node. Hence Q_0\dashv I_0 has the same
    unit M\to I_0Q_0M as in its (3); the same holds for P_0 with j.
-Uses: det-sf-open-closed-sequence-ring-sheaf, lem-weil-pbc-ringed-topoi-module-adjunction,
+Uses: proposition-extension-zero-restriction-closed-subscheme,
+lem-weil-pbc-ringed-topoi-module-adjunction,
    lem-sf-native-adic-pullback-exact-lisse, def-sf-native-weil-derived-framework.
 5. Normalize the Frobenius comparisons using actual reindexing. Write T_W=F_W^*. By
    [lem-weil-proetale-isomorphism-inverse-image] and step 2, T_W is the ringed reindexing
@@ -270,9 +271,9 @@ Uses: lem-weil-proetale-isomorphism-inverse-image,
    lifted adjunction.
 Uses: lem-sf-fixed-pair-adjunction-lift, def-sf-native-weil-derived-framework.
 10. For M\in\mathcal W_X, the two actual maps of step 6 have, after forgetting, precisely the
-   counit and unit sequence of [det-sf-open-closed-sequence-ring-sheaf](3) for its carrier. That
-   sequence is short exact. Their composite is zero because the carrier composite is zero and
-   forgetting fixed pairs is faithful (its morphisms are commuting carrier maps by
+   counit and unit sequence of [proposition-extension-zero-restriction-closed-subscheme](3) for its
+   carrier. That sequence is short exact. Their composite is zero because the carrier composite is
+   zero and forgetting fixed pairs is faithful (its morphisms are commuting carrier maps by
    [def-sf-native-weil-derived-framework]). By the reflection argument of step 3 it is a short
    exact sequence in \mathcal W_X. Naturality follows from the naturality of the two lifted
    adjunction maps. The proof did not impose constructibility on M.  If U is empty, extension by
@@ -282,7 +283,8 @@ Uses: lem-sf-fixed-pair-adjunction-lift, def-sf-native-weil-derived-framework.
    exactness of these displayed sequences. In the constructibility argument, omit empty strata
    and use rank zero on the complement. Every closed-immersion input above permits arbitrary
    ideal sheaves, so nilpotents in Z have not been removed or excluded.
-Uses: det-sf-open-closed-sequence-ring-sheaf, lem-sf-native-weil-constructible-abelian,
+Uses: proposition-extension-zero-restriction-closed-subscheme,
+lem-sf-native-weil-constructible-abelian,
    def-sf-native-weil-derived-framework.
 -/
 theorem ProEtaleWeilSheaf.nativeImmersionHeartLocalization

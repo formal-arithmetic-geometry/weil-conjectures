@@ -180,7 +180,7 @@ lemma comap_comap_ι_app {i j : J} (f : i ⟶ j) :
 `R` at the contractions `p_i = ι_i⁻¹(p)` of a prime `p` of `R`, with the transition maps
 `x / s ↦ R(a)(x) / R(a)(s)`.
 
-(blueprint: `lem-weil-pbc-filtered-colimit-localization-at-prime`) -/
+(blueprint: `lemma-quasi-finite-coordinates--1`) -/
 noncomputable def localizationAtPrimeDiagram : J ⥤ CommRingCat.{u} where
   obj j := .of (Localization.AtPrime (p.comap (c.ι.app j).hom))
   map {i j} f := ofHom (Localization.localRingHom _ _ (F.map f).hom
@@ -200,7 +200,7 @@ noncomputable def localizationAtPrimeDiagram : J ⥤ CommRingCat.{u} where
 
 /-- The cocone `κ_i : (R_i)_{p_i} → R_p`, `x / s ↦ ι_i(x) / ι_i(s)`.
 
-(blueprint: `lem-weil-pbc-filtered-colimit-localization-at-prime`) -/
+(blueprint: `lemma-quasi-finite-coordinates--1`) -/
 noncomputable def localizationAtPrimeCocone : Cocone (localizationAtPrimeDiagram c p) where
   pt := .of (Localization.AtPrime p)
   ι :=
@@ -238,7 +238,7 @@ variable [IsFiltered J]
 is a filtered colimit of commutative rings and `p` is a prime of `R` with contractions
 `p_i = ι_i⁻¹(p)`, then `R_p = colim_i (R_i)_{p_i}`.
 
-(blueprint: `lem-weil-pbc-filtered-colimit-localization-at-prime`) -/
+(blueprint: `lemma-quasi-finite-coordinates--1`) -/
 noncomputable def isColimitLocalizationAtPrimeCocone (hc : IsColimit c) :
     IsColimit (localizationAtPrimeCocone c p) := by
   have := reflectsColimitsOfShape_of_reflectsIsomorphisms (G := forget CommRingCat.{u}) (J := J)
@@ -294,7 +294,7 @@ noncomputable def isColimitLocalizationAtPrimeCocone (hc : IsColimit c) :
 that all localizations `(R_i)_{p_i}` at the contractions `p_i = ι_i⁻¹(p)` are integrally closed
 domains, then `R_p` is an integrally closed domain.
 
-(blueprint: `lem-weil-pbc-filtered-colimit-normal-ring-integrally-closed`) -/
+(blueprint: `proposition-proper-direct-image-constructible-complexes`) -/
 theorem isDomain_and_isIntegrallyClosed_localization_of_isColimit (hc : IsColimit c)
     (h : ∀ j, IsDomain (Localization.AtPrime (p.comap (c.ι.app j).hom)) ∧
       IsIntegrallyClosed (Localization.AtPrime (p.comap (c.ι.app j).hom))) :

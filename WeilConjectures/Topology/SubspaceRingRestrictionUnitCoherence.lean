@@ -283,7 +283,7 @@ fixes it. This gives the first unit formula (def-weil-pbc-topological-inverse-im
 def-weil-pbc-category-colimit, def-weil-pbc-sheafification). Compose the adjunctions
 for the two inclusions (def-weil-pbc-composite-adjunction). Their composite unit is
 the successive application of the two units. Unit-preserving uniqueness of left
-adjoints (lem-weil-pbc-conjugate-iso-unit-equation) gives the composition isomorphism;
+adjoints (situation-conventions) gives the composition isomorphism;
 the hom bijection for p_V proves uniqueness already for this single G. On B = V
 this is the stated global section formula. For nested neighbourhoods, naturality
 of the unit in opens gives r_W after restriction equals r_V: both inverse-image

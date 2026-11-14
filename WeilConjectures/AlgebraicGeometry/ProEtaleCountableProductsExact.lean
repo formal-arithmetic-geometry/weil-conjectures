@@ -155,10 +155,10 @@ Stacks Project, Tags 03DB and 0947 (4)
 (auxiliary; not a blueprint node).
 
 Proof:
-1. Apply lem-weil-pbc-module-sheaves-limits-sectionwise to discrete countable
+1. Apply situation-conventions to discrete countable
    diagrams. Mathlib's module-sheaf limits give the product universal property,
    coordinatewise scalar actions, restrictions, and the evaluation identification.
-2. Kernels are sectionwise by def-weil-sheaf-of-modules-category. The product
+2. Kernels are sectionwise by situation-conventions. The product
    functor is additive and preserves kernels and zero objects, hence is left exact.
 3. For each site object use lem-weil-pbc-proetale-affine-wcontractible-covering-family
    to choose a cover by affine weakly contractible objects. By

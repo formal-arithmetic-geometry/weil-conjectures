@@ -9,7 +9,7 @@ public import WeilConjectures.PoincareDuality.PodCompletedTensorReindex.PodCompl
 
 /-! # Compatibility of normalized ordinary reindexing
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL, 07A4 and 0941.
 -/
 
@@ -73,7 +73,7 @@ attribute [local irreducible] integralOperationsTotalTensorSection
   unrestrictedIntegralTensorSection
 
 /-- The inverse normalized strict tensor comparison fixes unit tensor generators.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4 and 0941 (blueprint: lem-pod-identity-tensor-tower-inverse-generators).
 
 Proof: QuotientGenerators carries each unit reduction section to the corresponding

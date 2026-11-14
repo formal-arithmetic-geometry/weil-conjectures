@@ -259,7 +259,7 @@ the bounded below theorem, and the derived base change map at `J` is the termwis
 change map (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isIso_baseChangeMap`), an
 isomorphism by `AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isProper`.
 
-This is blueprint `lem-kun-0f0c` (for `Λ` torsion, i.e. a `ℤ/n`-algebra). -/
+This is blueprint `theorem-results-from-etale-theory--1` (for `Λ` torsion, i.e. a `ℤ/n`-algebra). -/
 theorem Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring (hΛ : IsAddTorsion Λ)
     [IsProper f] (sq : IsPullback g' f' f g) :
     IsIso (Etale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) := by

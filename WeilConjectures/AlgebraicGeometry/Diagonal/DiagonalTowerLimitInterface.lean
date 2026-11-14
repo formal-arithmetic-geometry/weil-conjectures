@@ -113,14 +113,14 @@ local instance (priority := 3000) diagonalHasLimit
 attribute [local instance 2200] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
 
 /-- Additivity of this specific limit functor, from its binary-product preservation.
-Source: blueprint clause 1 (blueprint: det-prop-diagonal-tower-limit). -/
+Source: blueprint clause 1 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 instance diagonalLimitAdditive (A : Type a) [Category.{v} A] [Abelian A]
     [HasLimitsOfShape ℕᵒᵖ A] : (lim : (ℕᵒᵖ ⥤ A) ⥤ A).Additive :=
   Functor.additive_of_preserves_binary_products _
 
 /-- A total right derived functor with its universal unit and K-injective computation.
 Source: blueprint clause 1, total derived functors on strict towers
-(blueprint: det-prop-diagonal-tower-limit). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 structure DiagonalRightDerived
     {A : Type a} [Category.{v} A] [Abelian A]
     {B : Type b} [Category.{u} B] [Abelian B]
@@ -138,7 +138,7 @@ attribute [instance] DiagonalRightDerived.shift
 /-- The total derived limit, including its canonical projections to the derived levels.
 The normalization is an equation on complexes and fixes the maps, not just their types.
 Source: blueprint clauses 1 and 3, Stacks 0940
-(blueprint: det-prop-diagonal-tower-limit). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 structure DiagonalRlim
     (A : Type a) [Category.{v} A] [Abelian A] [HasLimitsOfShape ℕᵒᵖ A]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)] extends
@@ -156,21 +156,21 @@ structure DiagonalRlim
 attribute [instance] DiagonalRlim.unitShift
 
 /-- Scalar forgetting preserves tower limits by the existing scalar adjunction.
-Source: blueprint clause 1 (blueprint: det-prop-diagonal-tower-limit). -/
+Source: blueprint clause 1 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 instance diagonalForgetTowerLimits (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
     PreservesLimitsOfShape ℕᵒᵖ (diagonalForget ℓ X) :=
   (diagonalScalarAdjunction ℓ X).rightAdjoint_preservesLimits.preservesLimitsOfShape
 
 /-- Modules over the existing completed coefficient sheaf.
 Source: blueprint completed coefficient convention, clause 3
-(blueprint: det-prop-diagonal-tower-limit). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 abbrev DiagonalCompleted (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :=
   SheafOfModules.{u + 1} (Scheme.purTwistRing X (Scheme.purTwistZlCompletion X ℓ))
 
 /-- The existing abelian structure on completed coefficient modules, named once so
 all derived expressions share its sheafification witnesses.
 Source: blueprint completed coefficient convention, clause 3
-(blueprint: det-prop-diagonal-tower-limit). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 instance (priority := 2000) diagonalCompletedAbelian
     (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) : Abelian (DiagonalCompleted ℓ X) :=
   inferInstance
@@ -189,7 +189,7 @@ local instance (priority := 3500) diagonalCompleteLimits (ℓ : ℕ) [Fact ℓ.P
 
 /-- The n-th component of the canonical completed coefficient pullback map.
 Source: blueprint clause 1, completed source coefficients
-(blueprint: det-prop-diagonal-tower-limit). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalCompletedCoefficientComponent (ℓ : ℕ) [Fact ℓ.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj
@@ -202,7 +202,7 @@ def diagonalCompletedCoefficientComponent (ℓ : ℕ) [Fact ℓ.Prime]
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The finite components respect the prescribed quotient transitions.
-Source: blueprint clause 1 (blueprint: det-prop-diagonal-tower-limit).
+Source: blueprint clause 1 (blueprint: proposition-ell-adic-cycle-class-diagonal).
 Proof: the limit projections commute with every tower arrow. The constant-sheaf
 inverse-image comparison is natural in a ring homomorphism, because it is adjoint
 to the constant-section map. Apply this naturality to each quotient transition;
@@ -232,7 +232,7 @@ theorem diagonalCompletedCoefficient_naturality (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- The canonical map from inverse-image to completed coefficients on the source.
 Its actual data is the limit lift of the finite constant-section comparisons.
-Source: blueprint clause 1 (blueprint: det-prop-diagonal-tower-limit). -/
+Source: blueprint clause 1 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalCompletedCoefficientMap (ℓ : ℕ) [Fact ℓ.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj
@@ -248,7 +248,7 @@ def diagonalCompletedCoefficientMap (ℓ : ℕ) [Fact ℓ.Prime]
 Use the completed coefficient sheaf on the diagonal, restricted along the actual
 coefficient structure map before ringed direct image.
 Source: blueprint Delta_* Z_l in clauses 1 and 3
-(blueprint: det-prop-diagonal-tower-limit). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalCompletedSource (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :
     DiagonalCompleted ℓ (diagonalSurface Y) :=
   (Scheme.proEtaleRingedDirectImage (diagonalImmersion Y)
@@ -264,7 +264,7 @@ def diagonalCompletedSource (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :
 /-- Restrict the completed action to constant scalars, then to constant sections.
 The two constant-ring presentations are identified by constantCommuteCompose.
 Source: blueprint clause 3 and Stacks 099I
-(blueprint: det-prop-diagonal-tower-limit). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalCompletedRestriction (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
     DiagonalCompleted ℓ X ⥤ DiagonalMod ℓ X :=
   letI := Scheme.purTwistForgetPreservesSheafification X
@@ -298,11 +298,11 @@ private theorem diagonalRestrictScalarsExact
     preservesFiniteColimits_of_reflects_of_preserves F (SheafOfModules.toSheaf.{b} R)⟩
 
 /-- Constant-scalar restriction is additive and exact.
-Source: blueprint clause 3, coefficient comparison (blueprint: det-prop-diagonal-tower-limit).
-Proof: all three factors retain the underlying additive sheaf. Kernels are sectionwise
-and cokernels are additive sheafifications, so finite limits, finite colimits and sums
-of morphisms are unchanged. The constant-ring equivalence extends the scalar action
-uniquely by local gluing (lem-cbc-constant-ring-module-sheaves). -/
+Source: blueprint clause 3, coefficient comparison (blueprint:
+proposition-ell-adic-cycle-class-diagonal). Proof: all three factors retain the underlying additive
+sheaf. Kernels are sectionwise and cokernels are additive sheafifications, so finite limits, finite
+colimits and sums of morphisms are unchanged. The constant-ring equivalence extends the scalar
+action uniquely by local gluing (lem-cbc-constant-ring-module-sheaves). -/
 theorem diagonalCompletedRestriction_exact (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
     (diagonalCompletedRestriction ℓ X).Additive ∧
     PreservesFiniteLimits (diagonalCompletedRestriction ℓ X) ∧
@@ -334,19 +334,19 @@ theorem diagonalCompletedRestriction_exact (ℓ : ℕ) [Fact ℓ.Prime] (X : Sch
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
 /-- The additive part of coefficient restriction. Source: blueprint clause 3
-(blueprint: det-prop-diagonal-tower-limit). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 instance diagonalCompletedRestrictionAdditive (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
     (diagonalCompletedRestriction ℓ X).Additive :=
   (diagonalCompletedRestriction_exact ℓ X).1
 
 /-- The left exact part of coefficient restriction. Source: blueprint clause 3
-(blueprint: det-prop-diagonal-tower-limit). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 instance diagonalCompletedRestrictionLimits (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
     PreservesFiniteLimits (diagonalCompletedRestriction ℓ X) :=
   (diagonalCompletedRestriction_exact ℓ X).2.1
 
 /-- The right exact part of coefficient restriction. Source: blueprint clause 3
-(blueprint: det-prop-diagonal-tower-limit). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 instance diagonalCompletedRestrictionColimits (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
     PreservesFiniteColimits (diagonalCompletedRestriction ℓ X) :=
   (diagonalCompletedRestriction_exact ℓ X).2.2
@@ -354,7 +354,7 @@ instance diagonalCompletedRestrictionColimits (ℓ : ℕ) [Fact ℓ.Prime] (X : 
 /-- Simultaneous derived quotient with its canonical quotient units on arbitrary inputs.
 The normalization with the left-derived counit specifies the actual quotient map.
 Source: blueprint clause 3, derived finite reductions; Stacks 099M
-(blueprint: det-prop-diagonal-tower-limit). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 structure DiagonalCompletedReductionData
     (ℓ : ℕ) (A : Type a) [Category.{v} A] [Abelian A]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)] where
@@ -372,21 +372,21 @@ structure DiagonalCompletedReductionData
 
 /-- The generic quotient interface at the completed coefficient category.
 Source: blueprint finite quotient normalization
-(blueprint: det-prop-diagonal-tower-limit). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 abbrev DiagonalCompletedReduction (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
     [HasDerivedCategory.{w} (DiagonalCompleted ℓ X)]
     [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ DiagonalCompleted ℓ X)] :=
   DiagonalCompletedReductionData ℓ (DiagonalCompleted ℓ X)
 
 /-- The degree-zero supported completed coefficient object.
-Source: blueprint clauses 1 and 3 (blueprint: det-prop-diagonal-tower-limit). -/
+Source: blueprint clauses 1 and 3 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 abbrev diagonalCompletedDomain (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     [HasDerivedCategory.{w} (DiagonalCompleted ℓ (diagonalSurface Y))] :
     DerivedCategory.{w} (DiagonalCompleted ℓ (diagonalSurface Y)) :=
   (DerivedCategory.singleFunctor _ 0).obj (diagonalCompletedSource ℓ Y)
 
 /-- The published completed Tate line shifted by two.
-Source: blueprint clause 3 (blueprint: det-prop-diagonal-tower-limit). -/
+Source: blueprint clause 3 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 abbrev diagonalCompletedCodomain (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     [HasDerivedCategory.{w} (DiagonalCompleted ℓ (diagonalSurface Y))] :
     DerivedCategory.{w} (DiagonalCompleted ℓ (diagonalSurface Y)) :=
@@ -394,7 +394,7 @@ abbrev diagonalCompletedCodomain (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     (Scheme.purTwistZlModule (diagonalSurface Y) ℓ))⟦(2 : ℤ)⟧
 
 /-- Exact derived restriction from completed to constant coefficients.
-Source: blueprint clause 3 (blueprint: det-prop-diagonal-tower-limit). -/
+Source: blueprint clause 3 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 abbrev diagonalCompletedUnderlying (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
     [HasDerivedCategory.{w} (DiagonalCompleted ℓ X)]
     [HasDerivedCategory.{w} (DiagonalMod ℓ X)] :=
@@ -402,7 +402,7 @@ abbrev diagonalCompletedUnderlying (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
 
 /-- The ordinary limit cone maps to its total derived limit through the derived unit.
 This is the canonical comparison with zero nullhomotopy on the Roos model.
-Source: blueprint clause 1 (blueprint: det-prop-diagonal-tower-limit). -/
+Source: blueprint clause 1 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalOrdinaryRlim
     {A : Type a} [Category.{v} A] [Abelian A] [HasLimitsOfShape ℕᵒᵖ A]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)]
@@ -421,7 +421,7 @@ attribute [local irreducible] diagonalOrdinaryRlim
 /-- The supported integral constant has a unique coefficient-unit map into the
 supported completed constant. On every constant integer section it is n times one.
 Source: blueprint clauses 1 and 3, completed source convention
-(blueprint: det-prop-diagonal-tower-limit).
+(blueprint: proposition-ell-adic-cycle-class-diagonal).
 Proof: on the diagonal site send an integer n to n times one in the diagonal
 completed ring. Ring restrictions preserve one and integer multiples, so these maps
 form a presheaf morphism. The sheafification adjunction extends it uniquely from
@@ -499,7 +499,7 @@ theorem diagonalCompletedGenerator_existsUnique (ℓ : ℕ) [Fact ℓ.Prime] (Y 
 
 /-- The unique coefficient-unit map, determined on locally constant integers.
 Source: blueprint completed source convention
-(blueprint: det-prop-diagonal-tower-limit). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalCompletedGenerator (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :=
   (diagonalCompletedGenerator_existsUnique ℓ Y).exists.choose
 
@@ -541,7 +541,7 @@ def diagonalShiftedSingleLimitComparison
 
 /-- The source endpoint identification induced by the ordinary limit comparison
 and the already normalized derived source counit.
-Source: blueprint clauses 1 and 3 (blueprint: det-prop-diagonal-tower-limit). -/
+Source: blueprint clauses 1 and 3 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalSourceLimitMap (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]
     [HasDerivedCategory.{u + 1} (DiagonalMod ℓ (diagonalSurface Y))]
@@ -562,7 +562,7 @@ attribute [local irreducible] diagonalSourceLimitMap
 
 /-- The target endpoint identification induced by the ordinary root limit,
 the canonical shift comparison, and the existing signed Kummer identification.
-Source: blueprint clauses 1 and 3 (blueprint: det-prop-diagonal-tower-limit). -/
+Source: blueprint clauses 1 and 3 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalTargetLimitMap (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]
     [HasDerivedCategory.{u + 1} (DiagonalMod ℓ (diagonalSurface Y))]
@@ -586,7 +586,7 @@ attribute [local irreducible] diagonalTargetLimitMap
 
 /-- Exact functoriality of Ext with the categorical interfaces shared by name.
 Source: exact functoriality of derived categories
-(blueprint: det-prop-diagonal-tower-limit). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalExactFunctorExtImage
     {A : Type a} [Category.{v} A] [Abelian A] [HasExt.{w} A]
     {B : Type b} [Category.{u} B] [Abelian B] [HasExt.{w} B]
@@ -611,7 +611,8 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- The root-limit comparison with its two diagrams fixed before composing isomorphisms.
-Source: blueprint root limit normalization (blueprint: det-prop-diagonal-tower-limit). -/
+Source: blueprint root limit normalization (blueprint:
+proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalRootLimitComparison (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
     (H : DiagonalSystems ℓ X)
     (roots : H ⋙ diagonalForget ℓ X ≅
@@ -624,7 +625,7 @@ def diagonalRootLimitComparison (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
 
 /-- Finite evaluations of a strict-system Ext class with fixed normalizations.
 Source: blueprint finite quotient normalization
-(blueprint: det-prop-diagonal-tower-limit). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalFiniteCycleNormalization
     {A : Type a} [Category.{v} A] [Abelian A]
     [HasExt.{w} A] [HasExt.{w} (ℕᵒᵖ ⥤ A)]
@@ -640,7 +641,7 @@ def diagonalFiniteCycleNormalization
           (Ext.mk₀.{w} t.hom) (add_zero 2)) (zero_add 2) = finiteClass n
 
 /-- Compatibility of an arrow with completion and all finite quotient units.
-Source: blueprint clause 3 (blueprint: det-prop-diagonal-tower-limit). -/
+Source: blueprint clause 3 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def DiagonalArrowCompatibility
     {C : Type a} [Category.{v} C] [Preadditive C]
     {B : Type b} [Category.{u} B] [Preadditive B]
@@ -662,7 +663,7 @@ def DiagonalArrowCompatibility
         F.map ((Rn n).map δ) = a.hom ≫ (En n).map f ≫ b.inv
 
 /-- The completed coefficient clause using the shared exact functor and endpoint maps.
-Source: blueprint diagonal limit clause 3 (blueprint: det-prop-diagonal-tower-limit). -/
+Source: blueprint diagonal limit clause 3 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalCompleteDataAssertion
     {A : Type a} [Category.{v} A] [Abelian A]
     {B : Type b} [Category.{u} B] [Abelian B]
@@ -690,7 +691,7 @@ def diagonalCompleteDataAssertion
 
 /-- The simultaneous finite and completed normalization for an integral boundary.
 Source: blueprint diagonal tower limit, clauses 1 and 3
-(blueprint: det-prop-diagonal-tower-limit). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def DiagonalLimitDataSpec
     (ℓ : ℕ) {A : Type a} [Category.{v} A] [Abelian A] [HasExt.{w} A]
     {B : Type b} [Category.{u} B] [Abelian B]

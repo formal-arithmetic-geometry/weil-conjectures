@@ -54,7 +54,7 @@ import WeilConjectures.ConstructibleSheaf.Monoidal
 
 /-! # Finiteness under exact tensor by a finite coefficient line
 
-Source: prop-weil-twist-preserves, proof steps 4--5.
+Source: definition-tate-twists--10, proof steps 4--5.
 (blueprint: lem-weil-finite-line-tensor-conditions).
 -/
 
@@ -406,7 +406,7 @@ private theorem finite_line_tor (S : Scheme.{u}) (A : Type u) [CommRing A]
   exact (hamp _).2 (DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj F ((hamp K).1 hK))
 
 /-- Exact tensor by a rank-one sheaf preserves constructible sheaves and every Tor interval.
-Source: blueprint prop-weil-twist-preserves, proof steps 4--5
+Source: blueprint definition-tate-twists--10, proof steps 4--5
 (blueprint: lem-weil-finite-line-tensor-conditions).
 
 Proof: a rank-one trivialization over the constant coefficient ring is a constant

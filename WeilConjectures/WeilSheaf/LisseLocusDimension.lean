@@ -16,7 +16,7 @@ Let `X` be a nonempty scheme of finite type over a field `k` and `F` a construct
 `ℓ`-adic sheaf on the pro-étale site of `X`. Then `F` is lisse on an open subscheme `U` whose
 complement has strictly smaller dimension than `X`
 (`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.exists_open_topologicalKrullDim_compl_lt`,
-the pro-étale clause of blueprint `fin2-lem-lisse-dense-open`).
+the pro-étale clause of blueprint `proposition-purity-lisse-part-fourier-transform`).
 
 The lisse locus `L` of `F` (the union of all opens on which `F` is lisse) is open, `F` is lisse
 on it by Zariski locality of lissity, and it contains every generic point of an irreducible
@@ -67,7 +67,8 @@ theorem IsAdicConstructibleSheaf.exists_dense_isAdicLisseSheaf
     h₂.of_iso ((adicUpperStarCongr l (morphismRestrict_ι U.ι W)).app F)
   exact h₃.of_iso ((adicUpperStarComp l (U.ι ⁻¹ᵁ W).ι U.ι).app F)
 
-/-- Blueprint `fin2-lem-lisse-dense-open` (2): A lisse locus for a constructible `ℓ`-adic sheaf.
+/-- Blueprint `proposition-purity-lisse-part-fourier-transform` (2): A lisse locus for a
+constructible `ℓ`-adic sheaf.
 
 Let `X` be a nonempty scheme of finite type over a field `k` and `F` a constructible `ℓ`-adic
 sheaf on `X_proet`. Then there is an open subscheme `U ⊆ X` with `dim (X \ U) < dim X` on which

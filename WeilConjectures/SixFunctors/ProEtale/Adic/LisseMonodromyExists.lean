@@ -34,8 +34,8 @@ namespace AlgebraicGeometry.ProEtale
 variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (Ω : Type u) [Field Ω]
 
 /-- **Lisse `ℚ̄_ℓ`-sheaves and continuous representations** (blueprint:
-`cor-galois-lisse-representations`, the case `Λ = ℚ̄_ℓ`). On a connected normal Noetherian
-scheme `Y` (its local rings are integrally closed domains; hence `Y` is geometrically
+`proposition-lattices-representations-normal-scheme`, the case `Λ = ℚ̄_ℓ`). On a connected normal
+Noetherian scheme `Y` (its local rings are integrally closed domains; hence `Y` is geometrically
 unibranch), the stalks of lisse `ℓ`-adic sheaves carry a
 monodromy along paths of fibre functors, compatible with reparametrisation, pullback, global
 sections and duals, which at every base point `t` identifies lisse sheaves with continuous

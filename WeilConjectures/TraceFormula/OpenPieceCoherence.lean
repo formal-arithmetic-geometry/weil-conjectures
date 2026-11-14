@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImme
 
 For an open immersion `j : U ⟶ X` stable under the Frobenius, the extension by zero commutes with
 the pullbacks along the Frobenii on compactly supported cohomology. This is the first square of
-the open piece in blueprint `prop-trf-trace-additivity-open-closed` (Steps 2(a) and 3).
+the open piece in blueprint `lemma-additivity-open-subscheme-complement` (Steps 2(a) and 3).
 
 ## Main input
 
@@ -153,7 +153,7 @@ lemma weilUpperStarComparison_hom_app_eq {Φ : X ⟶ X} {ΦU : U ⟶ U} (hj : Φ
 set_option maxHeartbeats 1000000 in
 -- the instances of the categories of sheaves make the rewriting slow
 /-- **The extension by zero commutes with the pullbacks along the Frobenii** (blueprint
-`prop-trf-trace-additivity-open-closed`, Step 2(a), the open piece): for `Φ_U ≫ j = j ≫ Φ`, the
+`lemma-additivity-open-subscheme-complement`, Step 2(a), the open piece): for `Φ_U ≫ j = j ≫ Φ`, the
 map `RΓ_c(U, Lj^* K) ≅ RΓ_c(X, Rj_! Lj^* K) --RΓ_c(ε)--> RΓ_c(X, K)` intertwines `Φ_U^♯`
 (followed by the Frobenius comparison of the pullback) and `Φ^♯`. -/
 lemma compToPoint_inv_app_comp_counit_comp_compactPullback {Φ : X ⟶ X} {ΦU : U ⟶ U}

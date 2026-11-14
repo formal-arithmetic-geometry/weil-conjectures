@@ -17,7 +17,7 @@ trivialized by the base change `P ×_V W ⟶ W`, a Galois cover with the same gr
 for bounded complexes with such cohomology
 (`AlgebraicGeometry.Etale.IsBoundedFiniteEllGroupMonodromy`),
 the pullback being exact
-(blueprint `det-tf-transverse-corner-vanishing`).
+(blueprint `lemma-cohomology-near-two-transverse-divisors--1`).
 
 ## Main statements
 

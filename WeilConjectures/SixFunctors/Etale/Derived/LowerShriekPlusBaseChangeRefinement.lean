@@ -19,9 +19,9 @@ Y' --v--> Y
 ```
 a compactification `c = (X ⟶[j] Z ⟶[p] Y)` of `f` and its base change
 `c ×_Y Y' = (X' ⟶[j'] Z' ⟶[p'] Y')`, with `v' : Z' ⟶ Z`, this file records the three statements
-of blueprint `det-sf-comp-composition-base-change` for the compactly supported direct images of
-the compact support formalism `AlgebraicGeometry.Etale.derivedPlusFormalism` of the bounded below
-derived categories `D⁺(-_ét, Λ)`, `Λ` finite:
+of blueprint `proposition-composition-base-change-rf-shriek--4` for the compactly supported direct
+images of the compact support formalism `AlgebraicGeometry.Etale.derivedPlusFormalism` of the
+bounded below derived categories `D⁺(-_ét, Λ)`, `Λ` finite:
 
 1. the base change map `j'_! u^* ⟶ v'^* j_!` of the extension by zero is an isomorphism;
 2. the composite `β : v^* Rp_* j_! ⟶ Rp'_* v'^* j_! ⟶ Rp'_* j'_! u^*` of proper base change and
@@ -53,8 +53,8 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {v : Y' ⟶ Y} {u' : X' ⟶ X}
 
-/-- Blueprint `det-sf-comp-composition-base-change`, parts (1) and (2): Base change for `Rf_!`
-on the localizing category.
+/-- Blueprint `proposition-composition-base-change-rf-shriek--4`, parts (1) and (2): Base change for
+`Rf_!` on the localizing category.
 
 For a cartesian square `u ≫ f = f' ≫ v`, a compactification `c = (X ⟶[j] Z ⟶[p] Y)` of `f` with
 base change `c ×_Y Y' = (X' ⟶[j'] Z' ⟶[p'] Y')` (`AlgebraicGeometry.Compactification.ofIsPullback`)
@@ -76,8 +76,8 @@ theorem isIso_derivedPlusFormalism_baseChange_and_shriekBaseChange
   ⟨isIso_derivedPlusFormalism_baseChange Λ (c.isPullback_i_ofIsPullback sq), inferInstance⟩
 
 omit [Finite Λ] in
-/-- Blueprint `det-sf-comp-composition-base-change`, part (3): **the base change isomorphism `β`
-is compatible with the comparisons between compactifications**. Let `r : c ⟶ d` and
+/-- Blueprint `proposition-composition-base-change-rf-shriek--4`, part (3): **the base change
+isomorphism `β` is compatible with the comparisons between compactifications**. Let `r : c ⟶ d` and
 `r' : c' ⟶ d'` be refinements of compactifications of `f` and of `f'` (with cartesian squares
 over `X` and `X'`), and let `hc : c'.Z ⟶ c.Z`, `hd : d'.Z ⟶ d.Z` exhibit `c'` and `d'` as base
 changes of `c` and `d`, compatibly with `r` and `r'`. Then the exchange maps of `c` and `d` are

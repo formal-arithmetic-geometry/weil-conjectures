@@ -44,27 +44,28 @@ composition and base-change isomorphisms, restricting to those same constructibl
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-int-brown,
 sk-prop-int-brown-construction.md and its proof
-(blueprint: det-prop-int-brown-construction).
+(blueprint: proposition-construction-independence-rf-shriek).
 
 Proof plan:
 1. Standing schemes are qcqs, since they are separated and finite type over k.
    det-def-localizing-closure-ctf-equals-bc identifies Dctf with Dbc for O_E, in the
    same ordinary unbounded module-object derived category, hence their Loc closures.
-2. det-cor-int-compactness-ii-extension-zero gives exactness, coproduct preservation,
+2. proposition-proper-direct-image-extension-zero gives exactness, coproduct preservation,
    and preservation of Dbc and Loc for the quasi-compact open immersion in c.
-3. det-proper-image-localizing-proper supplies the corresponding integral properties
+3. proposition-proper-direct-image-extension-zero--1 supplies the corresponding integral properties
    for the proper leg. Compose these restrictions, their triangle maps, and their
    coproduct comparisons. This includes the empty coproduct and the zero complex.
-4. det-sf-comp-coherence-cocycle gives the comparison maps, normalized by the proper
+4. proposition-construction-independence-rf-shriek gives the comparison maps, normalized by the
+proper
    counit and open unit, and their identity and cocycle equations. Fullness of Dbc
    and preservation in step 3 restrict the very same comparisons to Dbc.
 5. lem-sfb-nonrational-localizing-lower-shriek-composition, specialized to O_E, gives
    the natural composition isomorphisms, compatible with these comparisons. Step 3
    lets them restrict to Dbc as well.
-6. det-sf-comp-composition-base-change gives the proper exchange followed by inverse
+6. proposition-composition-base-change-rf-shriek--4 gives the proper exchange followed by inverse
    open exchange, and its compatibility with compactification comparisons. The locus
    of invertibility is localizing, so invertibility on generators suffices. Finally
-   sk-lem-int-tensor supplies pullback preservation of Dbc. Since pullback is exact
+   lemma-inverse-image-tensor-product supplies pullback preservation of Dbc. Since pullback is exact
    and preserves coproducts, it preserves Loc too, giving the base-change functors
    and the restriction of the same isomorphisms to Dbc. -/
 theorem integralLocalizingCompactSupport (ℓ : ℕ) [Fact ℓ.Prime]

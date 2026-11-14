@@ -20,13 +20,14 @@ images vanish, and it preserves and reflects constructibility over Noetherian ba
 - `AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerStar_singleFunctor_of_isFinite`:
   `R^q f_* F = 0` for `q ≠ 0` and `f` finite.
 - `AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_of_isFinite` (blueprint
-  `lem-fin-finite-morphism`): finite direct images of constructible sheaves over a base of finite
-  type over a field.
+  `proposition-proper-direct-image-finite-coefficients`): finite direct images of constructible
+  sheaves over a base of finite type over a field.
 - `AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_of_isClosedImmersion` (blueprint
-  `lem-fin-closed-immersion`): closed direct images of constructible sheaves.
+  `proposition-proper-direct-image-finite-coefficients`): closed direct images of constructible
+  sheaves.
 - `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible_of_rightDerivedLowerStar`
-  (blueprint `lem-fin-finite-reflects-derived`): `Rp_*` reflects membership in `D^b_c` for `p`
-  finite between Noetherian schemes.
+  (blueprint `lemma-detection-proper-direct-image--1`): `Rp_*` reflects membership in `D^b_c` for
+  `p` finite between Noetherian schemes.
 -/
 
 @[expose] public section
@@ -47,9 +48,9 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- Blueprint `lem-fin-finite-morphism`, vanishing part: for a finite morphism `f : X ⟶ S` and a
-sheaf `F` of `Λ`-modules on `X_ét`, the higher direct images `R^q f_* F` vanish for `q ≠ 0`,
-the direct image `f_*` being exact. -/
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`, vanishing part: for a finite
+morphism `f : X ⟶ S` and a sheaf `F` of `Λ`-modules on `X_ét`, the higher direct images `R^q f_* F`
+vanish for `q ≠ 0`, the direct image `f_*` being exact. -/
 theorem isZero_homology_rightDerivedLowerStar_singleFunctor_of_isFinite {X S : Scheme.{u}}
     (f : X ⟶ S) [IsFinite f] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
     (hq : q ≠ 0) :
@@ -67,7 +68,8 @@ theorem isZero_homology_rightDerivedLowerStar_singleFunctor_of_isFinite {X S : S
 
 variable [Finite Λ]
 
-/-- Blueprint `lem-fin-finite-morphism`: Finite direct images of constructible sheaves.
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Finite direct images of
+constructible sheaves.
 
 Let `f : X ⟶ S` be finite with `S` of finite type over a field `k`, and let `F` be a
 constructible sheaf of `Λ`-modules on `X_ét`. Then `f_* F` is constructible on `S_ét` and
@@ -87,7 +89,8 @@ theorem isConstructibleSheaf_lowerStar_of_isFinite {k : Type u} [Field k] {X S :
     isZero_homology_rightDerivedLowerStar_singleFunctor_of_isFinite f F q hq.ne'⟩
 
 omit [Finite Λ] in
-/-- Blueprint `lem-fin-closed-immersion`: Closed immersions preserve constructibility.
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Closed immersions preserve
+constructibility.
 
 Let `i : Z ⟶ X` be a closed immersion and `G` a constructible sheaf of `Λ`-modules on `Z_ét`.
 Then `i_* G` is constructible on `X_ét` and `R^q i_* G = 0` for `q > 0`. The open complement of
@@ -104,7 +107,7 @@ theorem isConstructibleSheaf_lowerStar_of_isClosedImmersion {Z X : Scheme.{u}} (
   exact ⟨Scheme.IsConstructibleSheaf.lowerStar_of_isClosedImmersion_of_quasiCompact i G,
     fun q hq ↦ isZero_homology_rightDerivedLowerStar_singleFunctor_of_isFinite i G q hq.ne'⟩
 
-/-- Blueprint `lem-fin-finite-reflects-derived`: Finite direct image reflects bounded
+/-- Blueprint `lemma-detection-proper-direct-image--1`: Finite direct image reflects bounded
 constructibility.
 
 Let `p : Z ⟶ S` be a finite morphism of Noetherian schemes. A complex `K` of étale sheaves of

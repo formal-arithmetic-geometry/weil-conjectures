@@ -15,7 +15,7 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # Completed-tensor composition for section-normalized ordinary reindexing
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4, 0941. -/
 
 @[expose] public noncomputable section
@@ -108,7 +108,7 @@ end RepresentativeTransport
 
 -- The representative transport involves three derived reindexing functors.
 /-- The completed-tensor equation on complete constructible inputs.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4, 0941 (blueprint: lem-pod-reindexing-composition-tensor-equation).
 
 Proof: choose flat-term K-flat representatives P,Q of the two inputs. Their

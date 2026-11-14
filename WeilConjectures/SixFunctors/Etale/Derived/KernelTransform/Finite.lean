@@ -124,7 +124,7 @@ Class: torsion; decided by compact-support base change and the projection formul
 which need `[Finite Λ]`. The composition law of `Rf_!` is applied
 to `r₁₃ ≫ s₂ = r₂₃ ≫ q₂`, `s₂ : V ×ₛ V'' ⟶ V''` being the second projection, which is why that
 composite is assumed to admit a compactification.
-(sketch blueprint: `lem-fd-kernel-composition`; blueprint: `lem-fd-kernel-composition`) -/
+(sketch blueprint: `proposition-fourier-inversion`; blueprint: `proposition-fourier-inversion`) -/
 theorem nonempty_iso_kernelTransform_comp [Finite Λ]
     [LocallyOfFiniteType π] [QuasiCompact π] [LocallyOfFiniteType π'] [QuasiCompact π']
     [HasCompactification (pullback.tripleProj₁₃ π π' π'')]
@@ -172,7 +172,7 @@ Class: torsion. The blueprint proof is formal: the projection formula for the cl
 (`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_diagonal_of_nonempty_iso`). Here
 `[Finite Λ]` enters through the projection formula and the composition law of `Rf_!`, and
 `[IsSeparated π]` makes `Δ` a closed immersion.
-(sketch blueprint: `sk-thm-inversion`, proof) -/
+(sketch blueprint: `sec-Fourier-inversion`, proof) -/
 theorem nonempty_iso_kernelTransform_diagonal [Finite Λ] [IsSeparated π] [QuasiCompact π]
     [HasCompactification (pullback.snd π π)]
     (N : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :

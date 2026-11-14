@@ -24,7 +24,8 @@ the `Λ`-module `Λ'`, which is acyclic for `f_*`
 (`CategoryTheory.Sheaf.rightAcyclic_homSheaf_obj`).
 
 This is the commutation of restriction of scalars with `Rf_*` used for the change of coefficients
-in the proof of the proper base change theorem (blueprint `sk-thm-reduction`).
+in the proof of the proper base change theorem (blueprint
+`proposition-proper-base-change-etale-site--1`).
 -/
 
 @[expose] public section

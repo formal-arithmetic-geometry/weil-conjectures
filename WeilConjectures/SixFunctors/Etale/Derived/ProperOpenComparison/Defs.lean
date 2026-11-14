@@ -20,7 +20,7 @@ constructs the comparison map
 `α_{u,K} : j₂! K ⟶ Ru_* j₁! K`
 
 on the bounded below derived categories of étale sheaves of `Λ`-modules
-(blueprint `def-weil-pbc-proper-open-comparison`).
+(blueprint `proposition-construction-independence-rf-shriek--7`).
 
 ## The construction
 
@@ -312,8 +312,8 @@ lemma comparisonApp_toLowerStar
   rw [Adjunction.homEquiv_naturality_right, comparisonApp, Equiv.apply_symm_apply, assoc,
     IsIso.inv_hom_id, comp_id]
 
-/-- Blueprint `def-weil-pbc-proper-open-comparison`: Comparison map for a proper map fixing an
-open. For a proper `u : T₁ ⟶ T₂` and open immersions `j₁, j₂` with `j₁ ≫ u = j₂`, the map
+/-- Blueprint `proposition-construction-independence-rf-shriek--7`: Comparison map for a proper map
+fixing an open. For a proper `u : T₁ ⟶ T₂` and open immersions `j₁, j₂` with `j₁ ≫ u = j₂`, the map
 
 `α_{u,K} : j₂! K ⟶ Ru_* j₁! K`
 

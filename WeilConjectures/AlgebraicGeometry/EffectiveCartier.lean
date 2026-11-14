@@ -31,7 +31,7 @@ of a divisor.
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.isInvertible_dual_toModules`: the line
   bundle `𝒪_X(D)` of an effective Cartier divisor is invertible
-  (blueprint `lem-pc-divisor-line-bundle-properties`, part 1).
+  (blueprint `theorem-riemann-roch-coherent-serre-duality`, part 1).
 - `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.isInvertible_toModules`: so is its ideal
   sheaf `𝒪_X(-D)`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.nonempty_pullback_dual_toModules_iso`:
@@ -39,7 +39,7 @@ of a divisor.
   effective Cartier (blueprint `lem-pc-recd-pullback`).
 - `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.nonempty_dual_toModules_comap_iso`: the
   line bundle commutes with flat pullback
-  (blueprint `lem-pc-divisor-line-bundle-properties`, part 2).
+  (blueprint `theorem-riemann-roch-coherent-serre-duality`, part 2).
 - `AlgebraicGeometry.Scheme.IdealSheafData.isInvertible_and_not_isReduced_ofIdealTop_X_sq`:
   `V(t²) ⊆ 𝔸¹_k` is an effective Cartier divisor which is not reduced.
 -/
@@ -204,8 +204,8 @@ theorem IdealSheafData.IsInvertible.isInvertible_toModules {J : X.IdealSheafData
 `D` (blueprint `def-pc-divisor-line-bundle`) is invertible, where `𝒪_X(-D)` is the ideal sheaf
 of the invertible ideal `J`.
 
-(blueprint: `sk-thm-picard-rr`, `lem-pc-divisor-line-bundle-properties`, part 1;
-`rem-ptr-pc-divisor-line-bundle-4`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`, part 1;
+`theorem-riemann-roch-coherent-serre-duality`) -/
 theorem IdealSheafData.IsInvertible.isInvertible_dual_toModules {J : X.IdealSheafData}
     (hJ : J.IsInvertible) : J.toModulesᵛ.IsInvertible := by
   have := hJ.isInvertible_toModules
@@ -378,7 +378,7 @@ be an effective Cartier divisor with invertible ideal `J` and let `g : X ⟶ Y` 
 ideal of `D ×[Y] X` is the pullback `J.comap g` of `J`, which is again invertible, and
 `𝒪_X(D ×[Y] X) ≅ g^* 𝒪_Y(D)`.
 
-(blueprint: `lem-pc-divisor-line-bundle-properties`, part 2) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`, part 2) -/
 theorem IdealSheafData.IsInvertible.nonempty_dual_toModules_comap_iso {Y : Scheme.{u}}
     {J : Y.IdealSheafData} (hJ : J.IsInvertible) (g : X ⟶ Y) [Flat g] :
     Nonempty ((J.comap g).toModulesᵛ ≅ (Modules.pullback g).obj J.toModulesᵛ) :=

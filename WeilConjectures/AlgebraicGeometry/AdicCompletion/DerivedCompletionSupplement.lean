@@ -77,8 +77,8 @@ public import WeilConjectures.ProEtaleCoefficients.DerivedNakayamaResolution
 /-!
 # Derived completion for pulled-back continuous integral coefficients
 
-Source: blueprint main-20261015, sec-proetale-coefficients,
-`sk-def-pe-derived-completion/_section.md` (blueprint: sk-def-pe-derived-completion).
+Source: blueprint main-20261015, chap-The-pro-etale-site,
+`sk-def-pe-derived-completion/_section.md` (blueprint: definition-derived-adic-completeness).
 
 The coefficient objects are the continuous condensed rings of DerivedNakayama,
 pulled back by the published strong monoidal inverse image from the point.
@@ -306,7 +306,7 @@ private theorem modules_countableAB4Star : CountableAB4Star (Modules l E X) :=
 
 /-- The levelwise product map used by the recorded signed Roos chain map.
 Source: the functorial reduction-tower construction
-(blueprint: sk-def-pe-derived-completion). -/
+(blueprint: definition-derived-adic-completeness). -/
 def productMap {P P' : CochainComplex (Modules l E X) ℤ} (a : P ⟶ P') :
     product l E X P ⟶ product l E X P' :=
   Limits.Pi.map (fun n ↦ (level l E X n).map a)
@@ -344,7 +344,7 @@ private theorem genericRoosMap_comm
 
 /-- The recorded coordinatewise product map commutes with the signed Roos differential.
 Source: the functorial reduction-tower construction
-(blueprint: sk-def-pe-derived-completion).
+(blueprint: definition-derived-adic-completeness).
 Proof: productMap commutes with the one-minus-shift operator because the quotient
 tensor transitions are natural. Apply the chain-map equations to the first coordinate
 and this commutation equation to the second; both mixed differential terms agree. -/
@@ -361,7 +361,7 @@ theorem roosMap_comm {P P' : CochainComplex (Modules l E X) ℤ}
 
 /-- The coordinatewise chain map of the recorded signed Roos model.
 Source: functoriality of the derived-completeness construction
-(blueprint: sk-def-pe-derived-completion). -/
+(blueprint: definition-derived-adic-completeness). -/
 def roosMap {P P' : CochainComplex (Modules l E X) ℤ} (a : P ⟶ P') :
     roos l E X P ⟶ roos l E X P' :=
   CochainComplex.ofHom
@@ -499,7 +499,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
 /-- The full inverse-system functor of canonical derived reductions.
-Source: blueprint, derived inverse limit (blueprint: sk-def-pe-derived-completion). -/
+Source: blueprint, derived inverse limit (blueprint: definition-derived-adic-completeness). -/
 def derivedTower (K : DerivedCategory (Modules l E X)) :
     ℕᵒᵖ ⥤ DerivedCategory (Modules l E X) :=
   Functor.ofOpSequence (integralStep l E X K)

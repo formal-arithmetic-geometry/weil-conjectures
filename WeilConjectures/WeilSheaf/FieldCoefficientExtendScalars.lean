@@ -11,7 +11,7 @@ public import WeilConjectures.WeilSheaf.FieldCoefficient
 /-!
 # From `E`-Weil complexes to `ℚ̄_ℓ`-Weil complexes
 
-Following blueprint `def-weil-weil-sheaf-complex`, the `ℚ̄_ℓ`-stage `D^b_{c,W}(X, ℚ̄_ℓ)` is the
+Following blueprint `definition-weil-structure`, the `ℚ̄_ℓ`-stage `D^b_{c,W}(X, ℚ̄_ℓ)` is the
 `2`-colimit of the stages `D^b_{c,W}(X, E)` over the finite extensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the
 transition functors being the extensions of scalars.
 In this repository the `ℚ̄_ℓ`-stage is realised directly, as `AlgebraicGeometry.WeilComplex`
@@ -79,7 +79,7 @@ instance : PreservesFiniteColimits (ProEtaleFieldWeilSheaf.extendScalarsToAdic h
 
 variable [Fact (ringChar k₀ ≠ l)]
 
-/-- Blueprint `def-weil-weil-sheaf-complex`: Weil sheaf and Weil complex, the functor from the
+/-- Blueprint `definition-weil-structure`: Weil sheaf and Weil complex, the functor from the
 stage `Λ = E` to the stage `ℚ̄_ℓ`.
 
 The functor `D^b_{c,W}(X, E) ⥤ D^b_{c,W}(X, ℚ̄_ℓ)` towards the `2`-colimit, induced on derived
@@ -99,7 +99,7 @@ section Subfield
 
 variable (E : IntermediateField ℚ_[l] (PadicAlgCl l)) [FiniteDimensional ℚ_[l] E]
 
-/-- Blueprint `def-weil-weil-sheaf-complex`: the functor `D^b_{c,W}(X, E) ⥤ D^b_{c,W}(X, ℚ̄_ℓ)`
+/-- Blueprint `definition-weil-structure`: the functor `D^b_{c,W}(X, E) ⥤ D^b_{c,W}(X, ℚ̄_ℓ)`
 for a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the extension of scalars along the inclusion
 `E → ℚ̄_ℓ` (`AlgebraicGeometry.FieldWeilComplex.extendScalarsToAdic`). -/
 noncomputable def FieldWeilComplex.toWeilComplex : FieldWeilComplex k₀ E X ⥤ WeilComplex k₀ l X :=

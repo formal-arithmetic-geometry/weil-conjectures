@@ -15,7 +15,7 @@ public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 # Elementary standard and strictly standard elements
 
 Source: Stacks Project, Smoothing Ring Maps, Definition Tag 07C7
-(blueprint: def-weil-pbc-strictly-standard-element).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 ## Main definitions
 
@@ -36,7 +36,7 @@ minor dividing it and its remaining relations satisfy the ideal-square condition
 The condition uses the lift `P.σ a` in the polynomial ring; changing the lift changes its
 product with a relation by an element of the square of the relation ideal.
 Source: Stacks Project, Smoothing Ring Maps, Definition Tag 07C7, equations (1) and (2)
-(blueprint: def-weil-pbc-strictly-standard-element). -/
+(blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 def IsElementaryStandardElement {R : Type u} {A : Type v} [CommRing R] [CommRing A]
     [Algebra R A] [FinitePresentation R A] (a : A) : Prop :=
   ∃ (n m c : ℕ) (P : Presentation R A (Fin n) (Fin m))
@@ -54,7 +54,7 @@ of a finite presentation and its remaining relations satisfy the ideal-square co
 The columns of each minor are ordered increasingly. The lift in the relation condition is
 `P.σ a`, and changing it does not change membership in the indicated ideal.
 Source: Stacks Project, Smoothing Ring Maps, Definition Tag 07C7, equations (3) and (4)
-(blueprint: def-weil-pbc-strictly-standard-element). -/
+(blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 def IsStrictlyStandardElement {R : Type u} {A : Type v} [CommRing R] [CommRing A]
     [Algebra R A] [FinitePresentation R A] (a : A) : Prop :=
   ∃ (n m c : ℕ) (P : Presentation R A (Fin n) (Fin m))

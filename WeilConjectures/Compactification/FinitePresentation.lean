@@ -138,7 +138,7 @@ section FinalAssembly
 /-- **The selected Noetherian base system** `N(S)` of a quasi-compact quasi-separated scheme:
 a chosen absolute Noetherian approximation (Stacks Project Tag 01ZA), selected from
 `AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`.
-(blueprint: `def-nagata-final-noetherian-base-system`) -/
+(blueprint: `theorem-nagata-s-compactification-theorem--1`) -/
 noncomputable def Scheme.noetherianBaseSystem (S : Scheme.{u}) [CompactSpace S]
     [QuasiSeparatedSpace S] : S.NoetherianApproximation :=
   Classical.choice S.nonempty_noetherianApproximation
@@ -146,7 +146,7 @@ noncomputable def Scheme.noetherianBaseSystem (S : Scheme.{u}) [CompactSpace S]
 /-- **Properties of the selected Noetherian base system**: every stage is Noetherian, quasi-compact
 and locally of finite type over `ℤ`, every transition morphism is affine, and the comparison of
 `S` with the limit of the stages is an isomorphism (`S` is a limit of the stages).
-(blueprint: `lemma-nagata-final-noetherian-base-system`) -/
+(blueprint: `theorem-nagata-s-compactification-theorem--1`) -/
 theorem Scheme.noetherianBaseSystem_spec (S : Scheme.{u}) [CompactSpace S]
     [QuasiSeparatedSpace S] :
     (∀ i, IsNoetherian (S.noetherianBaseSystem.D.obj i)) ∧
@@ -168,23 +168,23 @@ lemma exists_descendedModel :
     S.noetherianBaseSystem.isLimit f
 
 /-- The selected stage `λ_Y` of the Noetherian base system over which `f` descends
-(blueprint: `def-nagata-final-descended-model`). -/
+(blueprint: `theorem-nagata-s-compactification-theorem--1`). -/
 noncomputable def descendedModelStage : S.noetherianBaseSystem.I :=
   (exists_descendedModel f).choose
 
 /-- **The separated descended model** `Y_λ ⟶ S_λ` of `f` over the selected stage
-(Stacks Project Tag 01ZQ; blueprint: `def-nagata-final-descended-model`). -/
+(Stacks Project Tag 01ZQ; blueprint: `theorem-nagata-s-compactification-theorem--1`). -/
 noncomputable def descendedModel : Scheme.{u} :=
   (exists_descendedModel f).choose_spec.choose
 
 /-- The structure morphism `Y_λ ⟶ S_λ` of the separated descended model
-(blueprint: `def-nagata-final-descended-model`). -/
+(blueprint: `theorem-nagata-s-compactification-theorem--1`). -/
 noncomputable def descendedModelHom :
     descendedModel f ⟶ S.noetherianBaseSystem.D.obj (descendedModelStage f) :=
   (exists_descendedModel f).choose_spec.choose_spec.choose
 
 /-- The comparison morphism `X ⟶ Y_λ` exhibiting `f` as the base change of the descended model
-(blueprint: `def-nagata-final-descended-model`). -/
+(blueprint: `theorem-nagata-s-compactification-theorem--1`). -/
 noncomputable def toDescendedModel : X ⟶ descendedModel f :=
   (exists_descendedModel f).choose_spec.choose_spec.choose_spec.choose_spec.choose_spec.choose_spec
     |>.choose
@@ -206,7 +206,7 @@ theorem isPullback_descendedModel :
     |>.choose_spec
 
 /-- The base-change comparison `ε_Y : Y_λ ×_{S_λ} S ⟶ X` of the descended model
-(blueprint: `def-nagata-final-descended-model`). -/
+(blueprint: `theorem-nagata-s-compactification-theorem--1`). -/
 noncomputable def descendedModelIso :
     pullback (descendedModelHom f) (S.noetherianBaseSystem.π.app (descendedModelStage f)) ≅ X :=
   (isPullback_descendedModel f).isoPullback.symm
@@ -218,7 +218,7 @@ lemma descendedModelIso_hom_comp :
 
 /-- **Properties of the descended model**: `Y_λ ⟶ S_λ` is separated, quasi-compact and locally
 of finite presentation, the stage `S_λ` is Noetherian, and `ε_Y` is an isomorphism over `S`.
-(blueprint: `lemma-nagata-final-descended-model`) -/
+(blueprint: `theorem-nagata-s-compactification-theorem--1`) -/
 theorem descendedModel_spec :
     LocallyOfFinitePresentation (descendedModelHom f) ∧ QuasiCompact (descendedModelHom f) ∧
       IsSeparated (descendedModelHom f) ∧
@@ -230,13 +230,13 @@ theorem descendedModel_spec :
 
 /-- **The selected Noetherian compactification** `C_{Y,λ}` of the descended model, given by the
 recursive Noetherian construction `AlgebraicGeometry.noetherianCompactification`.
-(blueprint: `def-nagata-final-noetherian-compactification`) -/
+(blueprint: `theorem-nagata-s-compactification-theorem--1`) -/
 noncomputable def descendedModelCompactification : Compactification (descendedModelHom f) :=
   noetherianCompactification (descendedModelHom f)
 
 /-- **The selected Noetherian compactification is a compactification** of the descended model:
 an open immersion followed by a proper morphism, composing to `Y_λ ⟶ S_λ`.
-(blueprint: `lemma-nagata-final-noetherian-compactification`) -/
+(blueprint: `theorem-nagata-s-compactification-theorem--1`) -/
 theorem descendedModelCompactification_spec :
     IsOpenImmersion (descendedModelCompactification f).i ∧
       IsProper (descendedModelCompactification f).g ∧
@@ -249,8 +249,8 @@ theorem descendedModelCompactification_spec :
 /-- **The base-changed compactification** `C^fp(X/S)`: the base change of the Noetherian
 compactification of the descended model along `S ⟶ S_λ`, composed with the identification
 `X ≅ Y_λ ×_{S_λ} S`. It is a compactification of `f`; in particular `f` is compactifiable
-(blueprint: `def-nagata-final-basechanged-compactification`,
-`lemma-nagata-final-basechanged-compactification`). -/
+(blueprint: `theorem-nagata-s-compactification-theorem--1`,
+`theorem-nagata-s-compactification-theorem--1`). -/
 noncomputable def finitePresentationCompactification : Compactification f :=
   (descendedModelCompactification f).ofIsPullback (isPullback_descendedModel f)
 

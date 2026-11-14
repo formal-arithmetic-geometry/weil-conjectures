@@ -43,12 +43,13 @@ Proof from the node, following Stacks 0381:
    the e_j form a finite K-basis of K', their images together generate K' over k'.
 2. By lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra (037X), choose a
    smooth k'-subalgebra B of K' with fraction field K'; K' localizes B at its nonzero elements.
-3. C = k' ⊗[k] A is regular by geometric regularity (def-weil-pbc-g-ring).
+3. C = k' ⊗[k] A is regular by geometric regularity
+(theorem-finite-etale-covers-proper-henselian--2).
 4. Smooth base change (lem-weil-pbc-smooth-ring-map-base-change-composition, 00T4) and
    smooth ascent (lem-weil-pbc-regular-ring-smooth-ascent, 07NF) make C ⊗[k'] B regular.
 5. Base change of localization (lem-weil-pbc-localization-base-change) and two applications
    of lem-weil-pbc-tensor-cancel-base-change identify K' ⊗[k] A with a localization of
-   C ⊗[k'] B. Use lem-weil-pbc-localization-of-regular-ring to obtain regularity.
+   C ⊗[k'] B. Use theorem-finite-etale-covers-proper-henselian--2 to obtain regularity.
 6. The extension K'/K induces a faithfully flat map K ⊗[k] A → K' ⊗[k] A by
    lem-weil-pbc-field-extension-base-change-faithfully-flat and tensor cancellation.
    Descend regularity using lem-weil-pbc-regular-ring-faithfully-flat-descent (07NG).

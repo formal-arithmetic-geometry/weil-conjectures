@@ -258,7 +258,7 @@ def coherenceEtaleChangeIso {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f]
 
 /-- The canonical etale compositor with its chosen compactification functors displayed.
 This records the same isomorphism, while avoiding conversion of whole derived functors
-inside later compositions. Source: Stacks 0F7J and thm-sf-comp-composition
+inside later compositions. Source: Stacks 0F7J and proposition-composition-base-change-rf-shriek--1
 (blueprint: lem-pur-compact-support-site-coherence). -/
 def coherenceChosenEtaleCompositorIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
@@ -326,7 +326,7 @@ def coherenceChosenProEtaleCompositorComponent {X Y Z : Scheme.{u}}
     (coherenceChosenProEtaleCompositorIso A f g) L
 
 /-- The etale compositor evaluated using precisely the three supplied compactifications.
-Source: Stacks 0F7J; lem-amb-etale-compact-comparisons
+Source: Stacks 0F7J; proposition-construction-independence-rf-shriek--7
 (blueprint: lem-pur-compact-support-site-coherence). -/
 def coherenceEtaleCompositor {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     [QuasiCompact f] [QuasiCompact g]
@@ -351,7 +351,7 @@ def coherenceEtaleCompositor {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
 
 /-- The canonical c-to-d comparison, through the specified common refinement. Each leg
 is the actual proper-composition/inverse-proper-open construction, not a site conjugate.
-Source: prop-compactification-coherence-detailed, common-refinement comparison; node step 6
+Source: proposition-construction-independence-rf-shriek, common-refinement comparison; node step 6
 (blueprint: lem-pur-compact-support-site-coherence). -/
 def coherenceCompactificationChange {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f]
     (c d : Compactification f)
@@ -490,7 +490,7 @@ def coherenceEtaleCompositorComponent {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y 
 
 /-- The recorded pro-etale alpha, evaluated on the identity etale-origin witness.
 Its compactifications are the same c, d, e as in the etale compositor.
-Source: thm-sf-comp-composition, normalized compatible-tower construction
+Source: proposition-composition-base-change-rf-shriek--1, normalized compatible-tower construction
 (blueprint: lem-pur-compact-support-site-coherence). -/
 def coherenceProEtaleCompositor {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     [QuasiCompact f] [QuasiCompact g]
@@ -553,7 +553,7 @@ def coherenceRestrictionSource {X Y Y' : Scheme.{u}} {f : X ⟶ Y}
   comparison := (compactExchangeTransportSource A v c).app L
 
 /-- The target boundary B_f' followed by F_f'^p(a_u), for the pulled-back compactification.
-Source: def-cbc-compact-support-square and the node's open-restriction equation, step 9
+Source: remark-base-change-compactification--1 and the node's open-restriction equation, step 9
 (blueprint: lem-pur-compact-support-site-coherence). -/
 def coherenceRestrictionTarget {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     {u' : X' ⟶ X} {v : Y' ⟶ Y} (sq : IsPullback u' f' f v) (c : Compactification f)
@@ -580,7 +580,7 @@ def coherencePushBoundary {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification
     (coherenceProEtaleFunctor A c).mapIso b.comparison
 
 /-- Whisker a boundary by inverse image, inserting the canonical comparison a_v.
-Source: lem-weil-pbc-comparison-pullback and node proof steps 1 and 10
+Source: proposition-comparison-etale-derived-category--5 and node proof steps 1 and 10
 (blueprint: lem-pur-compact-support-site-coherence). -/
 def coherencePullBoundary {X Y : Scheme.{u}} (v : X ⟶ Y)
     (b : CompactSupportSiteBoundary A Y) : CompactSupportSiteBoundary A X where
@@ -672,7 +672,7 @@ inductive CompactSupportSiteDiagram (P : WeilConjectures.PurityFiniteSetting.{u}
 /-- The etale boundary composite, constructed solely with the recorded etale maps.
 The refinement uses the inverse of the upstream comparison because its upstream direction
 is d to c, whereas the node's rho is c to d.
-Source: lem-amb-etale-compact-comparisons, def-cbc-exchange-map, and node proof step 10
+Source: proposition-construction-independence-rf-shriek--7, prose-05-31, and node proof step 10
 (blueprint: lem-pur-compact-support-site-coherence). -/
 def CompactSupportSiteDiagram.etaleMap {P : WeilConjectures.PurityFiniteSetting.{u}}
     {T : Scheme.{u}} {b₀ b₁ : CompactSupportSiteBoundary P.Coefficient T}

@@ -17,7 +17,7 @@ public import Mathlib.Topology.Algebra.Ring.Ideal
 # Derived reduction towers over integral condensed coefficients
 
 This module constructs the derived reduction tower in the first paragraph of
-`def-pe-derived-complete` (blueprint: def-weil-integral-reduction-tower).
+`definition-derived-adic-completeness--1` (blueprint: def-weil-integral-reduction-tower).
 Source: `literature/blueprint/latest/blueprint/part-six-operations/sec-proetale-coefficients/
 sec-pe-localization-completion/sk-def-pe-derived-completion/def-pe-derived-complete.md`,
 first paragraph.

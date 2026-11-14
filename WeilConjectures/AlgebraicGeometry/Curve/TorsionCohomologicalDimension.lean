@@ -19,14 +19,14 @@ public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimens
 A separated scheme of finite type and dimension at most one over an algebraically closed field
 has torsion étale cohomological dimension at most two, and at most one if it is affine
 (`AlgebraicGeometry.IsCurve.hasTorsionCohomologicalDimensionLE`, blueprint
-`lem-sc-arbitrary-curve-cd`). The same holds over a separably closed field, since the base
+`theorem-cohomology-curves`). The same holds over a separably closed field, since the base
 change to an algebraic closure is a universal homeomorphism
 (`AlgebraicGeometry.IsCurve.hasTorsionCohomologicalDimensionLE_of_isSepClosed`). Consequently the
 rational function field `F(x)` in one variable over a separably closed field `F` has torsion
 cohomological dimension at most one
 (`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_one_ratFunc`, blueprint
-`lem-sc-one-variable-field-cd`): `Spec F(x)` is the limit of the nonempty affine opens of the
-affine line.
+`lemma-uniform-bounds-pro-etale-affines`): `Spec F(x)` is the limit of the nonempty affine opens of
+the affine line.
 -/
 
 @[expose] public section
@@ -37,7 +37,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `lem-sc-arbitrary-curve-cd`: The torsion bound on an arbitrary algebraic curve.
+/-- Blueprint `theorem-cohomology-curves`: The torsion bound on an arbitrary algebraic curve.
 
 Let `X` be a separated scheme of finite type and of dimension at most one over an algebraically
 closed field `k` (that is, `X ⟶ Spec k` is an `AlgebraicGeometry.IsCurve`). Then
@@ -80,7 +80,8 @@ lemma Scheme.HasTorsionCohomologicalDimensionLE.spec_of_isFractionRing (R : Comm
     (IsLocalization.algEquiv (nonZeroDivisors R) (Spec R).functionField K).toRingEquiv
   exact hlim.of_isUniversalHomeomorphism (Spec.map (CommRingCat.ofHom e.symm.toRingHom))
 
-/-- Blueprint `lem-sc-one-variable-field-cd`: One-variable fields over a separably closed field.
+/-- Blueprint `lemma-uniform-bounds-pro-etale-affines`: One-variable fields over a separably closed
+field.
 
 If `F` is a separably closed field, then the rational function field `F(x)` has torsion
 cohomological dimension at most one: `cd_tor(Spec F(x)) ≤ 1`. Indeed `Spec F(x)` is the limit of

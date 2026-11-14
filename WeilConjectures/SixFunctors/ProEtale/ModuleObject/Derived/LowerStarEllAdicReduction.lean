@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfiel
 
 Let `ℓ` be a prime and `f : X ⟶ Y` a quasi-compact quasi-separated morphism of schemes, with `X`
 topologically noetherian. The second paragraph of the proof of blueprint
-`lem-sfb-dc-lower-star-preserves` deduces the preservation of bounded constructible complexes by
+`proposition-six-operations-dctf--5` deduces the preservation of bounded constructible complexes by
 `Rf_*` for the coefficient rings `E` (a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`) and `ℚ̄_ℓ` from the
 one for the rings of integers `𝒪_E`. This file formalizes this deduction:
 
@@ -62,7 +62,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {X Y : Scheme.{u}} [TopologicalSpace.Noeth
   (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
 
 /-- **`Rf_*` on `E`-complexes from `Rf_*` on `𝒪_E`-complexes** (blueprint
-`lem-sfb-dc-lower-star-preserves`, second paragraph of the proof): if `Rf_*` carries bounded
+`proposition-six-operations-dctf--5`, second paragraph of the proof): if `Rf_*` carries bounded
 constructible `𝒪_E`-complexes to bounded constructible complexes, then so it does for
 `E`-complexes. -/
 theorem boundedConstructible_rightDerivedLowerStar_obj_continuousMapRingObj_of_padicIntegers
@@ -83,7 +83,7 @@ theorem boundedConstructible_rightDerivedLowerStar_obj_continuousMapRingObj_of_p
     (boundedConstructible_derivedExtendScalars_obj Y ℓ E ⟨_, h K₀⟩)
 
 /-- **`Rf_*` on `ℚ̄_ℓ`-complexes from `Rf_*` on `E`-complexes** (blueprint
-`lem-sfb-dc-lower-star-preserves`, second paragraph of the proof): if `Rf_*` carries bounded
+`proposition-six-operations-dctf--5`, second paragraph of the proof): if `Rf_*` carries bounded
 constructible `E`-complexes to bounded constructible complexes for every finite subextension
 `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, then so it does for `ℚ̄_ℓ`-complexes. -/
 theorem boundedConstructible_rightDerivedLowerStar_obj_padicAlgCl_of_continuousMapRingObj
@@ -102,7 +102,7 @@ theorem boundedConstructible_rightDerivedLowerStar_obj_padicAlgCl_of_continuousM
     (boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj Y ℓ E ⟨_, h E K_E⟩)
 
 /-- **`Rf_*` on `ℚ̄_ℓ`-complexes from `Rf_*` on `𝒪_E`-complexes** (blueprint
-`lem-sfb-dc-lower-star-preserves`, second paragraph of the proof): if `Rf_*` carries bounded
+`proposition-six-operations-dctf--5`, second paragraph of the proof): if `Rf_*` carries bounded
 constructible `𝒪_E`-complexes to bounded constructible complexes for every finite subextension
 `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, then so it does for `ℚ̄_ℓ`-complexes. -/
 theorem boundedConstructible_rightDerivedLowerStar_obj_padicAlgCl_of_padicIntegers

@@ -86,7 +86,7 @@ private def adjoinLisseStratum {X : Scheme.{u}}
 subscheme gives a finite constructible lisse stratification. The hypothesis concerns
 restrictions of an arbitrary set sheaf and makes no claim about finite direct images.
 
-Source: blueprint `lem-weil-pbc-finite-pushforward-constructible-noetherian`, steps 2--3;
+Source: blueprint `lemma-detection-proper-direct-image--1`, steps 2--3;
 Stacks Project, Tags 095E and 005L.
 (blueprint: lem-weil-pbc-constructible-etale-noetherian-criterion).
 

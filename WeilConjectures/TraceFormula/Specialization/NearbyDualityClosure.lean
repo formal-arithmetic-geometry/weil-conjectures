@@ -23,8 +23,8 @@ implies it for `M` (`NearbyCyclesModel.isIso_nearbyDualityMap_of_openSubmodel`):
 of `δ_{M̄, j_! K}` to `X'` is identified with `δ_{M, j^* j_! K}`
 (`NearbyCyclesModel.isIso_map_nearbyDualityMap_iff_of_isOpenImmersion`) and `j^* j_! K ≅ K`.
 This is the step "open locality allows a compactification and extension by zero" of the proof of
-blueprint `sk-prop-tf-nearby-duality-foundation`, for compactifications by trait models over the
-base.
+blueprint `proposition-nearby-cycles-commute-verdier-duality`, for compactifications by trait models
+over the base.
 
 A compactification of an affine total space over the trait
 (`NearbyCyclesModel.exists_isProper_openImmersion_of_isAffine`) is in general not a trait model
@@ -98,8 +98,8 @@ variable {Xc : Over (Spec (.of k))} [LocallyOfFiniteType Xc.hom] [QuasiCompact X
   [QuasiCompact Xc'.hom] [IsSeparated Xc'.hom] {Mc : NearbyCyclesModel Xc.left Xc'.left}
   {qc : Mc.total ⟶ trait k'} {gc : Mc.generic ⟶ Spec (.of (traitGenericField k'))}
 
-/-- **Passing to a larger model** (blueprint `sk-prop-tf-nearby-duality-foundation`, "open
-locality allows a compactification and extension by zero"): let `φ : M ⟶ M̄` be a morphism of
+/-- **Passing to a larger model** (blueprint `proposition-nearby-cycles-commute-verdier-duality`,
+"open locality allows a compactification and extension by zero"): let `φ : M ⟶ M̄` be a morphism of
 trait models over the base, over open immersions `j : X ⟶ X̄` and `j' : X' ⟶ X̄'`, whose map of
 total spaces is an open immersion compatible with the structure morphisms and whose square of
 geometric generic fibres is cartesian. If the duality map of `M̄` is an isomorphism at the

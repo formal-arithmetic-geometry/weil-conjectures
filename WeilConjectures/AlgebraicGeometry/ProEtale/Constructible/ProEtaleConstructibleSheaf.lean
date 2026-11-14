@@ -23,7 +23,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleLocallyConstant
 /-!
 # Constructible finite-coefficient module sheaves on the pro-etale site
 
-Source: Weil blueprint, `def-weil-finite-torsion-constructibility`, second paragraph
+Source: Weil blueprint, `definition-constructible-sheaves`, second paragraph
 (blueprint: def-weil-proetale-constructible-sheaf).
 
 The global finite partition convention is retained, including a positive number of strata.
@@ -47,7 +47,7 @@ locally constant restrictions with finite geometric stalks. The restriction is
 Finiteness is imposed on the underlying set of the module stalk, equivalently finite
 module generation since the coefficient ring is finite. The coefficient ring itself
 may be the zero ring, and the empty scheme is allowed.
-Source: Weil blueprint, `def-weil-finite-torsion-constructibility`, second paragraph;
+Source: Weil blueprint, `definition-constructible-sheaves`, second paragraph;
 compare Stacks Tag 09AJ, whose affine-local convention differs from this global one
 (blueprint: def-weil-proetale-constructible-sheaf). -/
 noncomputable def IsConstructibleProEtaleModuleSheaf

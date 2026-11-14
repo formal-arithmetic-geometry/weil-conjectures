@@ -28,15 +28,15 @@ subscheme and `Z' = f⁻¹ Z = V(f^* I)` its schematic inverse image, with the r
 
 This file states the exchange properties of the defect `C_{X,Z}` of
 `ProEtale.CondensedRing.specializationDefect`, which are the nodes of the blueprint subsection
-`sk-lem-tf-sp-defect-exchanges`, as compatibilities required from that subsection:
+`lemma-base-change-cone-x-z`, as compatibilities required from that subsection:
 
 * `ProEtale.CondensedRing.nonempty_specializationDefect_lowerStar_iso`,
   `ProEtale.CondensedRing.nonempty_specializationDefect_upperStar_iso`: proper and smooth exchange
-  (blueprint `det-sp-defect-proper-smooth`);
+  (blueprint `lemma-base-change-cone-x-z`);
 * `ProEtale.CondensedRing.isZero_specializationDefect_lowerStar_centreι`,
   `ProEtale.CondensedRing.nonempty_specializationDefect_lowerShriek_upperStar_iso`: the defect
   kills complexes supported on the centre, and is unchanged by `L ↦ j_! j^* L`
-  (blueprint `det-sp-defect-closed-vanishing`).
+  (blueprint `lemma-base-change-cone-x-z`).
 
 The coefficients are `ℚ̄_ℓ`, and the complexes are bounded constructible.
 
@@ -64,8 +64,8 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime
 
 
 
-/-- **Smooth exchange for the defect** (blueprint `det-sp-defect-proper-smooth`, smooth case; a
-node of the subsection `sk-lem-tf-sp-defect-exchanges`): for `f : X' ⟶ X` smooth and `L` bounded
+/-- **Smooth exchange for the defect** (blueprint `lemma-base-change-cone-x-z`, smooth case; a
+node of the subsection `lemma-base-change-cone-x-z`): for `f : X' ⟶ X` smooth and `L` bounded
 constructible on `X`, `C_{X',Z'}(Lf^* L) ≅ Lf_Z^* C_{X,Z}(L)`. The pullback exchanges of the
 deformations `f̃` and `f̃_Z` of `f` and `f_Z` are invertible by the smooth exchange of nearby cycles
 (`isIso_pullbackExchange_deformationModel_app_of_smooth`), and they carry `Lf_Z^* ε_{X,Z}(L)` to
@@ -94,8 +94,8 @@ theorem nonempty_specializationDefect_upperStar_iso [Smooth f.left]
   intro hf hg h₁
   exact h₁ hf hg
 
-/-- **Proper exchange for the defect** (blueprint `det-sp-defect-proper-smooth`, proper case; a
-node of the subsection `sk-lem-tf-sp-defect-exchanges`): for `f : X' ⟶ X` proper and `L'` bounded
+/-- **Proper exchange for the defect** (blueprint `lemma-base-change-cone-x-z`, proper case; a
+node of the subsection `lemma-base-change-cone-x-z`): for `f : X' ⟶ X` proper and `L'` bounded
 constructible on `X'`, `C_{X,Z}(Rf_* L') ≅ Rf_{Z*} C_{X',Z'}(L')`. The pushforward exchanges of the
 proper deformations `f̃` and `f̃_Z` are invertible (proper exchange of nearby cycles), and so are
 the base change morphisms of the cartesian squares `i' ≫ f = f_Z ≫ i` and `e' ≫ f_s = g_s ≫ e`
@@ -163,8 +163,8 @@ theorem nonempty_specializationDefect_lowerStar_iso [IsProper f.left]
 
 variable (X) in
 /-- **The defect kills complexes supported on the centre** (blueprint
-`det-sp-defect-closed-vanishing`, first and second assertions; a node of the subsection
-`sk-lem-tf-sp-defect-exchanges`): `C_{X,Z}(i_* M) = 0` for `M` bounded constructible on `Z`. By
+`lemma-base-change-cone-x-z`, first and second assertions; a node of the subsection
+`lemma-base-change-cone-x-z`): `C_{X,Z}(i_* M) = 0` for `M` bounded constructible on `Z`. By
 the proper exchange for the closed immersion `i`, `C_{X,Z}(i_* M) ≅ Ri_{Z*} C_{Z, i^* Z}(M)`, and
 `i^* Z = Z` is the zero ideal of `Z`, whose defect vanishes. -/
 theorem isZero_specializationDefect_lowerStar_centreι
@@ -178,8 +178,8 @@ theorem isZero_specializationDefect_lowerStar_centreι
 
 variable (X) in
 /-- **The defect is unchanged by extension by zero from the complement** (blueprint
-`det-sp-defect-closed-vanishing`, last assertion; a node of the subsection
-`sk-lem-tf-sp-defect-exchanges`): for the open immersion `j : U ⟶ X` of the complement of the
+`lemma-base-change-cone-x-z`, last assertion; a node of the subsection
+`lemma-base-change-cone-x-z`): for the open immersion `j : U ⟶ X` of the complement of the
 centre, `C_{X,Z}(j_! j^* L) ≅ C_{X,Z}(L)`. Apply `nonempty_specializationDefect_iso_of_distTriang`
 to the open–closed triangle `j_! j^* L ⟶ L ⟶ i_* i^* L`: `Li^* j_! = 0`, and the defect of
 `i_* i^* L` vanishes. Here the isomorphism is only asserted to exist. -/

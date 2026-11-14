@@ -23,7 +23,7 @@ Source: literature/blueprint/latest/blueprint/part-six-operations/
 sec-reduction-finite-coefficients/sec-descent-to-a-finite-coefficient-field/
 sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.md, clauses (1)--(3),
 with the Q30 any-field scope repair of 2026-11-02
-(blueprint: det-lem-coefficient-finite-descent-hom).
+(blueprint: lemma-descent-finite-coefficient-field--1).
 
 The old positive-characteristic theorem and the canonical maps it defines remain
 available. This statement includes characteristic zero and uses those same maps,
@@ -51,7 +51,7 @@ Source: literature/blueprint/latest/blueprint/part-six-operations/
 sec-reduction-finite-coefficients/sec-descent-to-a-finite-coefficient-field/
 sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.md (1)--(3) and its
 .proof.md, with the node's Q30 scope repair of 2026-11-02
-(blueprint: det-lem-coefficient-finite-descent-hom).
+(blueprint: lemma-descent-finite-coefficient-field--1).
 
 Proof, following the five current DAG steps:
 1. A field is Noetherian, including in characteristic zero. A finite type scheme
@@ -64,13 +64,13 @@ Proof, following the five current DAG steps:
    on C and D_F[r], also over the algebraic closure. The tensor multiplication,
    unit and shift comparisons identify their transitions with coefficient
    inclusions. Adjunction naturality gives the two displayed transition identities.
-3. By sk-prop-sfb-qlbar-colimit-x the algebraic-closure coefficient ring is the
+3. By lemma-comparison-completed-coefficients the algebraic-closure coefficient ring is the
    filtered colimit of finite fields. The tail above E is cofinal by composita.
    Tensor preserves this colimit by the coefficient calculus. Apply this termwise
    to every bounded representative K of D to obtain the specified colimiting
    coefficientComplexCocone. A zero term below a stays zero after scalar extension
    and restriction, so every stage has the same lower bound a.
-4. Apply sk-lem-constructible-ext-continuity (1) in its any-field setting to C,
+4. Apply lemma-continuity-ext-out-constructible-complex--1 (1) in its any-field setting to C,
    this coefficient diagram, and r. Its complexes have the common lower bound
    just established; its first-argument hypothesis holds for every bounded
    constructible object over E. This gives the restricted-target Hom colimit

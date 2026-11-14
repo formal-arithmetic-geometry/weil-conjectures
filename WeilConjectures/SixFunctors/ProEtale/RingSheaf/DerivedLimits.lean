@@ -20,7 +20,7 @@ categories of module sheaves, the extension by zero
 (`ProEtale.RingSheaf.preservesLimitsOfShape_mapDerivedCategory_openImmersionLowerShriek`) and
 derived limits `R lim` of towers
 (`ProEtale.RingSheaf.isHomotopyLimit_mapCone_openImmersionLowerShriek`): part (2) of blueprint
-`det-sf-open-closed-extension-zero-limits`, for a general sheaf of rings.
+`proposition-extension-zero-restriction-closed-subscheme`, for a general sheaf of rings.
 
 Products of `B`-module sheaves are exact, since they are so on underlying sheaves of `R`-modules
 (Bhatt–Scholze, Proposition 3.1.10) and the forgetful functor preserves and reflects finite
@@ -76,12 +76,12 @@ variable [CompactSpace X] [QuasiSeparatedSpace X]
   [HasDerivedCategory (Mod (Sheaf (ProEt.topology U) (ModuleCat.{u + 1} R))
     ((j)^*[ModuleCat.{u + 1} R].obj B))]
 
-/-- Blueprint `det-sf-open-closed-extension-zero-limits` (subsection `sk-prop-sf-closed-unit`),
-part (2), products, and the product assertion of blueprint `sk-prop-sf-open-closed-triangle`:
-let `X` be quasi-compact and quasi-separated, `j : U ⟶ X` a quasi-compact open immersion with
-closed complement `i`, and `B` a sheaf of `R`-algebras on `X_proét`. The extension by zero
-`j_! : D(U_proét, j^* B) ⥤ D(X_proét, B)` on derived categories of module sheaves preserves
-products. -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme` (subsection
+`lemma-local-cohomology-right-adjoint--1`), part (2), products, and the product assertion of
+blueprint `proposition-extension-zero-restriction-closed-subscheme`: let `X` be quasi-compact and
+quasi-separated, `j : U ⟶ X` a quasi-compact open immersion with closed complement `i`, and `B` a
+sheaf of `R`-algebras on `X_proét`. The extension by zero `j_! : D(U_proét, j^* B) ⥤ D(X_proét, B)`
+on derived categories of module sheaves preserves products. -/
 theorem preservesLimitsOfShape_mapDerivedCategory_openImmersionLowerShriek
     (β : Type (u + 1)) :
     PreservesLimitsOfShape (Discrete β) (openImmersionLowerShriek B i j hij).mapDerivedCategory :=
@@ -93,14 +93,15 @@ theorem preservesLimitsOfShape_mapDerivedCategory_openImmersionLowerShriek
   have := preservesLimitsOfShape_discrete_openImmersionLowerShriek B i j hij β
   Functor.preservesLimitsOfShape_discrete_mapDerivedCategory _
 
-/-- Blueprint `det-sf-open-closed-extension-zero-limits` (subsection `sk-prop-sf-closed-unit`),
-part (2), derived limits, and the derived limit assertion of blueprint
-`sk-prop-sf-open-closed-triangle`: let `X` be quasi-compact and quasi-separated, `j : U ⟶ X` a
-quasi-compact open immersion with closed complement `i`, and `B` a sheaf of `R`-algebras on
-`X_proét`. The extension by zero `j_! : D(U_proét, j^* B) ⥤ D(X_proét, B)` preserves derived
-inverse limits `R lim` of towers: it carries a homotopy limit cone (one whose legs fit into a
-distinguished Milnor triangle `R lim Kₙ ⟶ ∏ Kₙ ──1 - t──▶ ∏ Kₙ ⟶ (R lim Kₙ)[1]`) to a homotopy
-limit cone, since it is triangulated and preserves countable products. -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme` (subsection
+`lemma-local-cohomology-right-adjoint--1`), part (2), derived limits, and the derived limit
+assertion of blueprint `proposition-extension-zero-restriction-closed-subscheme`: let `X` be
+quasi-compact and quasi-separated, `j : U ⟶ X` a quasi-compact open immersion with closed complement
+`i`, and `B` a sheaf of `R`-algebras on `X_proét`. The extension by zero
+`j_! : D(U_proét, j^* B) ⥤ D(X_proét, B)` preserves derived inverse limits `R lim` of towers: it
+carries a homotopy limit cone (one whose legs fit into a distinguished Milnor triangle
+`R lim Kₙ ⟶ ∏ Kₙ ──1 - t──▶ ∏ Kₙ ⟶ (R lim Kₙ)[1]`) to a homotopy limit cone, since it is
+triangulated and preserves countable products. -/
 theorem isHomotopyLimit_mapCone_openImmersionLowerShriek
     {K : ℕᵒᵖ ⥤ DerivedCategory (Mod (Sheaf (ProEt.topology U) (ModuleCat.{u + 1} R))
       ((j)^*[ModuleCat.{u + 1} R].obj B))} {c : Cone K} (hc : IsHomotopyLimit c) :

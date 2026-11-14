@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarFiniteness
 Let `k` be an algebraically closed field with `ringChar k ≠ ℓ`, `X` a quasi-compact scheme locally
 of finite type over `k`, `i : Z ⟶ X` a closed immersion and `j : U ⟶ X` the complementary
 quasi-compact open immersion. This file proves clauses (1)–(4) of blueprint
-`prop-sf-localization-all-stages` at the coefficient stage `ℚ̄_ℓ`.
+`lemma-local-cohomology-right-adjoint--2` at the coefficient stage `ℚ̄_ℓ`.
 
 As in `WeilConjectures.SixFunctors.ClosedImmersionStages`, the stage `Dᵇc(-, ℚ̄_ℓ)` is realised in
 the Bhatt–Scholze model, rather than as the `2`-colimit over finite extensions `E ⊆ ℚ̄_ℓ` used in
@@ -90,7 +90,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {Y X : Scheme.{u}} (s : X ⟶ Sp
   [LocallyOfFiniteType s] [QuasiCompact s] (hk : ringChar k ≠ l)
 
 include s hk in
-/-- Blueprint `prop-sf-localization-all-stages`, clause (1) at the stage `ℚ̄_ℓ` (for any
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (1) at the stage `ℚ̄_ℓ` (for any
 quasi-compact quasi-separated `f` locally of finite type, e.g. an open immersion `j`): for `X`
 quasi-compact and locally of finite type over an algebraically closed field `k` with
 `ringChar k ≠ ℓ`, `Rf_*` carries `Dᵇc(Y, ℚ̄_ℓ)` into `Dᵇc(X, ℚ̄_ℓ)`. This is the finiteness theorem
@@ -199,8 +199,8 @@ lemma ProEtale.boundedConstructibleAdicRightDerivedLowerStar_essImage_of_isZero
     (asIso ((ProEtale.adicDerivedUpperStarLowerStarAdjunction l i).unit.app K.obj)).symm⟩⟩
 
 include hij in
-/-- Blueprint `prop-sf-localization-all-stages`, clause (3) at the stage `ℚ̄_ℓ`, the vanishing:
-`Hom(i_* Q[m], Rj_* G) = 0` for `Q ∈ Dᵇc(Z, ℚ̄_ℓ)` and `G ∈ Dᵇc(U, ℚ̄_ℓ)`. -/
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (3) at the stage `ℚ̄_ℓ`, the
+vanishing: `Hom(i_* Q[m], Rj_* G) = 0` for `Q ∈ Dᵇc(Z, ℚ̄_ℓ)` and `G ∈ Dᵇc(U, ℚ̄_ℓ)`. -/
 lemma ProEtale.subsingleton_hom_shift_boundedConstructibleAdic
     (Q : (ProEtale.DerivedCategory.boundedConstructibleAdic l Z).FullSubcategory)
     (G : (ProEtale.DerivedCategory.boundedConstructibleAdic l U).FullSubcategory) (m : ℤ) :
@@ -233,9 +233,9 @@ noncomputable def ProEtale.boundedConstructibleAdicClosedUpperShriek :
   have := ProEtale.isLeftAdjoint_boundedConstructibleAdicRightDerivedLowerStar s hk i j hij
   (ProEtale.boundedConstructibleAdicRightDerivedLowerStar s hk i).rightAdjoint
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (2) at the stage `ℚ̄_ℓ`: the direct image
-`i_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)` along a closed immersion has the right adjoint `Ri^!`. It is
-constructed by the recollement argument
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (2) at the stage `ℚ̄_ℓ`: the direct
+image `i_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)` along a closed immersion has the right adjoint `Ri^!`. It
+is constructed by the recollement argument
 (`CategoryTheory.Pretriangulated.Recollement.isLeftAdjoint`): the fibre of the unit
 `K ⟶ Rj_* j^* K` is killed by `j^*`, hence is `i_*` of an object of `Dᵇc(Z, ℚ̄_ℓ)`, and it
 represents `Hom(i_* -, K)` since `Hom(i_* Q[m], Rj_* G) = 0`. -/
@@ -257,7 +257,7 @@ noncomputable abbrev ProEtale.boundedConstructibleAdicClosedSupportTriangle
   Recollement.triangle (ProEtale.boundedConstructibleAdicUpperStarLowerStarAdjunction s hk j)
     (ProEtale.boundedConstructibleAdicClosedUpperShriekAdjunction s hk i j hij) K w
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (3) at the stage `ℚ̄_ℓ`: for
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (3) at the stage `ℚ̄_ℓ`: for
 `K ∈ Dᵇc(X, ℚ̄_ℓ)`, the counit `i_* Ri^! K ⟶ K` and the unit `K ⟶ Rj_* j^* K` extend to a
 distinguished triangle `i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (i_* Ri^! K)[1]` of `Dᵇc(X, ℚ̄_ℓ)`, and its
 third arrow is unique, as `Hom(i_* Q[m], Rj_* G) = 0`
@@ -270,9 +270,9 @@ theorem ProEtale.existsUnique_distTriang_boundedConstructibleAdicClosedSupportTr
     (ProEtale.isZero_boundedConstructibleAdicUpperStar_obj_rightDerivedLowerStar_obj s hk i j hij)
     (ProEtale.boundedConstructibleAdicRightDerivedLowerStar_essImage_of_isZero s hk i j hij) K
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (3) at the stage `ℚ̄_ℓ`, functoriality:
-for `φ : K ⟶ K'` in `Dᵇc(X, ℚ̄_ℓ)` and distinguished closed-support triangles of `K` and `K'`, the
-triple `(i_* Ri^! φ, φ, Rj_* j^* φ)` is a morphism of triangles. -/
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (3) at the stage `ℚ̄_ℓ`,
+functoriality: for `φ : K ⟶ K'` in `Dᵇc(X, ℚ̄_ℓ)` and distinguished closed-support triangles of `K`
+and `K'`, the triple `(i_* Ri^! φ, φ, Rj_* j^* φ)` is a morphism of triangles. -/
 theorem ProEtale.exists_triangleHom_boundedConstructibleAdicClosedSupportTriangle
     {K K' : (ProEtale.DerivedCategory.boundedConstructibleAdic l X).FullSubcategory}
     (φ : K ⟶ K') {w w'}
@@ -290,8 +290,9 @@ theorem ProEtale.exists_triangleHom_boundedConstructibleAdicClosedSupportTriangl
     (ProEtale.isZero_boundedConstructibleAdicUpperStar_obj_rightDerivedLowerStar_obj s hk i j hij)
     φ hw hw'
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (3) at the stage `ℚ̄_ℓ`, functoriality: a
-morphism of distinguished closed-support triangles is determined by its middle component. -/
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (3) at the stage `ℚ̄_ℓ`,
+functoriality: a morphism of distinguished closed-support triangles is determined by its middle
+component. -/
 theorem ProEtale.boundedConstructibleAdicClosedSupportTriangle_hom_ext
     {K K' : (ProEtale.DerivedCategory.boundedConstructibleAdic l X).FullSubcategory} {w w'}
     (hw : ProEtale.boundedConstructibleAdicClosedSupportTriangle s hk i j hij K w ∈ distTriang _)
@@ -304,8 +305,8 @@ theorem ProEtale.boundedConstructibleAdicClosedSupportTriangle_hom_ext
     (ProEtale.isZero_boundedConstructibleAdicUpperStar_obj_rightDerivedLowerStar_obj s hk i j hij)
     hw hw' h
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (4) at the stage `ℚ̄_ℓ`: `Ri^! Rj_* G = 0`
-for `G ∈ Dᵇc(U, ℚ̄_ℓ)`, as `Hom(Q, Ri^! Rj_* G) = Hom(i_* Q, Rj_* G) = 0`. -/
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (4) at the stage `ℚ̄_ℓ`:
+`Ri^! Rj_* G = 0` for `G ∈ Dᵇc(U, ℚ̄_ℓ)`, as `Hom(Q, Ri^! Rj_* G) = Hom(i_* Q, Rj_* G) = 0`. -/
 theorem ProEtale.isZero_boundedConstructibleAdicClosedUpperShriek_obj
     (G : (ProEtale.DerivedCategory.boundedConstructibleAdic l U).FullSubcategory) :
     IsZero ((ProEtale.boundedConstructibleAdicClosedUpperShriek s hk i j hij).obj

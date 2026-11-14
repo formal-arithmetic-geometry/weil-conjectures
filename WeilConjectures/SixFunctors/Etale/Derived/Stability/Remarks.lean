@@ -11,9 +11,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.CtfStability
 /-!
 # Remarks on the preservation theorem
 
-This file formalises the remarks of the blueprint subsection `sk-thm-sf-ctf-stability` that
-accompany `thm-sf-ctf-stability` (`AlgebraicGeometry.Etale.constructibleFiniteTor_stability`).
-Each remark with mathematical content is a theorem bundling the statements it points to:
+This file formalises the remarks of the blueprint subsection `proposition-six-operations-dctf` that
+accompany `proposition-six-operations-dctf`
+(`AlgebraicGeometry.Etale.constructibleFiniteTor_stability`). Each remark with mathematical content
+is a theorem bundling the statements it points to:
 
 - `AlgebraicGeometry.Etale.boundedConstructibleIntegral_leftDerivedUpperStar_of_derivedComplete`
   (`rem-sf-tor-toolbox-stages`): the integral form of clause (i);
@@ -26,11 +27,11 @@ Each remark with mathematical content is a theorem bundling the statements it po
 - `AlgebraicGeometry.Etale.NormalizedTower.reconstruction_and_integral_comparisons`: the
   normalized DVR reconstruction and the integral comparisons;
 - `AlgebraicGeometry.Etale.exceptionalInverseImage_coefficientStages`
-  (`rem-ptr-weil-exceptional-inverse-image-16`),
+  (`theorem-exceptional-inverse-image`),
   `AlgebraicGeometry.Etale.exceptionalAdjoint_admissibility_constructible`
-  (`rem-ptr-weil-exceptional-adjoint-admissibility-10`),
+  (`lemma-change-coefficients-exceptional-inverse-image`),
   `AlgebraicGeometry.Etale.exceptionalAdjoint_traceAdmissibility_coefficients`
-  (`rem-ptr-trf-admissibility-14`);
+  (`proposition-six-operations-change-coefficients`);
 - `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.ctfDescent`
   (`rem-sf-ctf-descent`): the verified domains entering the six-functor datum;
 - `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom_scope` (`open-sf-preservation-gaps`): the
@@ -45,20 +46,20 @@ The package `prop-functor-package` is consumed as follows. The smooth-purity cha
 clause (7), the relative product theorem, as the relative input for its affine-line orientation
 and its affine-space case. The duality chapter is re-based on clauses (3) and (6): its global
 duality, pairing identification, derived duality, degreewise, proper, trace and
-reciprocal-eigenvalue nodes are read off from `thm-sf-global-duality`, `thm-sf-identification`
-and the pairing statements. The trace-formula and final chapters use clause (8) (stability,
-perfectness of compact-support cohomology), the trace-layer statements
-`prop-trf-compact-support-perfectness`, `lem-trf-open-ctf` and `thm-trf-internal-hom-pullback`,
-and, outside the package, the Künneth–Verdier isomorphism `thm-trf-kunneth-verdier`, on which
-their supported pairing and local-term nodes rest. This remark is editorial and has no Lean
-counterpart.
+reciprocal-eigenvalue nodes are read off from `theorem-global-verdier-duality`,
+`theorem-poincare-duality--7` and the pairing statements. The trace-formula and final chapters use
+clause (8) (stability, perfectness of compact-support cohomology), the trace-layer statements
+`lemma-perfect-complexes-geometric-point`, `proposition-proper-direct-image-extension-zero--8` and
+`theorem-poincare-duality-frobenius--1`, and, outside the package, the Künneth–Verdier isomorphism
+`lemma-external-duality-trace-morphism--1`, on which their supported pairing and local-term nodes
+rest. This remark is editorial and has no Lean counterpart.
 
 ## Implementation notes
 The coefficient stages `E` and `ℚ̄_ℓ`, and the finite-stage comparisons
-`lem-coef-finite-direct-image`, `thm-coef-finite-hom`, `cor-coef-finite-verdier`,
-`lem-coef-finite-exceptional` (beyond the formula `Rf^! = 𝔻_X f^* 𝔻_Y`), `thm-coef-rational-verdier`
-and `det-pd-biduality-coefficients` are not formalised; the remarks are stated with the finite and
-integral stages that are.
+`lemma-change-coefficients-direct-image--1`, `lemma-change-coefficients-internal-hom--1`,
+`theorem-verdier-biduality--2`, `lemma-change-coefficients-exceptional-inverse-image--1` (beyond the
+formula `Rf^! = 𝔻_X f^* 𝔻_Y`), `theorem-verdier-biduality--3` and `theorem-verdier-biduality` are
+not formalised; the remarks are stated with the finite and integral stages that are.
 -/
 
 @[expose] public section
@@ -89,12 +90,13 @@ lemma isPrincipal_pow_of_eq_span {ϖ : Λ} (hI : I = Ideal.span {ϖ}) (n : ℕ) 
 
 /-- Blueprint `rem-sf-tor-toolbox-stages`: The four coefficient stages.
 
-The integral form of clause (i) of `thm-sf-ctf-stability`: pullback commutes with the reductions
-`K ↦ K ⊗ᴸ Λ ⧸ Iⁿ⁺¹` (`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_leftDerivedUpperStar`,
-`Lf^*` being monoidal and carrying the constant sheaf `Λ ⧸ Iⁿ⁺¹` to the constant sheaf), so the
-finite-stage pullback statements give that the reductions of `Lf^* K` are bounded constructible
-of Tor amplitude in the same interval as those of `K`. Hence, as soon as `Lf^* K` is derived
-complete, `Lf^*` carries `Dᵇc(Y, Λ)` into `Dᵇc(X, Λ)`, with the same interval. -/
+The integral form of clause (i) of `proposition-six-operations-dctf`: pullback commutes with the
+reductions `K ↦ K ⊗ᴸ Λ ⧸ Iⁿ⁺¹`
+(`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_leftDerivedUpperStar`, `Lf^*` being
+monoidal and carrying the constant sheaf `Λ ⧸ Iⁿ⁺¹` to the constant sheaf), so the finite-stage
+pullback statements give that the reductions of `Lf^* K` are bounded constructible of Tor amplitude
+in the same interval as those of `K`. Hence, as soon as `Lf^* K` is derived complete, `Lf^*` carries
+`Dᵇc(Y, Λ)` into `Dᵇc(X, Λ)`, with the same interval. -/
 theorem boundedConstructibleIntegral_leftDerivedUpperStar_of_derivedComplete {X Y : Scheme.{u}}
     (f : X ⟶ Y) {a b : ℤ}
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -163,17 +165,17 @@ At the integral stage (`Λ` a Noetherian domain complete for `I = (ϖ)`, `Λ ⧸
 exponent invertible on `k`), for a separated finite-type `f : X ⟶ Y` of separated finite-type
 `k`-schemes, the reductions `K ↦ K ⊗ᴸ Λ ⧸ Iⁿ` commute
 
-* with pullback and tensor product (`lem-fix-operation-reduction`;
+* with pullback and tensor product (`proposition-six-operations-change-coefficients`;
   `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_leftDerivedUpperStar`), with the
   ordinary and the compactly supported direct image
   (`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerStar`,
   `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_isPrincipal`);
 * with the internal Hom, for arbitrary first variables, with the finite internal Hom of the
-  reductions (`lem-coef-integral-hom-reduction`);
+  reductions (`proposition-six-operations-change-coefficients--7`);
 * with the exceptional inverse image;
 
 and a normalized DVR tower reconstructs with its stated reductions
-(`lem-coef-normalized-dvr-effectivity`). -/
+(`lemma-sp-tower-adjunction-foundation--2`). -/
 theorem coefficientTransport_status :
     (∀ n : ℕ, Nonempty (reductionModIdeal Λ Y (I ^ n) ⋙ L((f)^*[ModuleCat.{u + 1} Λ]) ≅
       L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ reductionModIdeal Λ X (I ^ n))) ∧
@@ -219,11 +221,11 @@ include hϖ hI hf in
 
 Every normalized DVR tower `M_n` reconstructs, with no common stratification or lisse local
 model: the canonical maps from its derived limit `R lim_n Res M_n` exhibit each `M_n` as the
-reduction of the limit, which is derived complete (`lem-coef-normalized-dvr-effectivity`).
+reduction of the limit, which is derived complete (`lemma-sp-tower-adjunction-foundation--2`).
 Independently, the integral internal Hom has the finite internal Homs of the reductions as its
-reductions (`lem-coef-integral-hom-reduction`), and the integral exceptional adjoint `G_f L`
-(the derived limit of the finite exceptional inverse images) is an object of `Dᵇc(X, Λ)`
-identified with `Rf^! L` compatibly with the maps to the `Rf^!(L ⊗ᴸ Λ ⧸ Iⁿ)`. -/
+reductions (`proposition-six-operations-change-coefficients--7`), and the integral exceptional
+adjoint `G_f L` (the derived limit of the finite exceptional inverse images) is an object of
+`Dᵇc(X, Λ)` identified with `Rf^! L` compatibly with the maps to the `Rf^!(L ⊗ᴸ Λ ⧸ Iⁿ)`. -/
 theorem NormalizedTower.reconstruction_and_integral_comparisons :
     (∀ (M : NormalizedTower I X) (c : Cone M.restrict), Pretriangulated.IsHomotopyLimit c →
       (∀ n : ℕ, IsDerivedBaseChange (φ := Ideal.Quotient.mk (I ^ (n + 1))) (c.π.app (op n))) ∧
@@ -249,14 +251,14 @@ theorem NormalizedTower.reconstruction_and_integral_comparisons :
   exact ⟨heff, hhom, fun L hL c hc ↦ ⟨(hexc L hL c hc).1, (hexc L hL c hc).2.1⟩⟩
 
 include hϖ hI hf in
-/-- Blueprint `rem-ptr-weil-exceptional-adjoint-admissibility-10`: Admissibility on the proved
+/-- Blueprint `lemma-change-coefficients-exceptional-inverse-image`: Admissibility on the proved
 constructible domains.
 
 On the integral constructible categories the exceptional adjoint is transported along the
 coefficient reductions: for `L ∈ Dᵇc(Y, Λ)` the derived limit `G_f L` of the `Rf^!(L ⊗ᴸ Λ ⧸ Iⁿ)`
 lies in `Dᵇc(X, Λ)`, is `Rf^! L`, and has the `Rf^!(L ⊗ᴸ Λ ⧸ Iⁿ)` as reductions; the reconstruction
 used for integral coefficients is the normalized DVR theorem
-(`lem-coef-normalized-dvr-effectivity`). -/
+(`lemma-sp-tower-adjunction-foundation--2`). -/
 theorem exceptionalAdjoint_admissibility_constructible :
     (∀ L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       DerivedCategory.boundedConstructibleIntegral I Y L →
@@ -276,7 +278,8 @@ theorem exceptionalAdjoint_admissibility_constructible :
   exact ⟨hexc, heff⟩
 
 include hϖ hI hf in
-/-- Blueprint `rem-ptr-trf-admissibility-14`: Coefficient clauses in trace admissibility.
+/-- Blueprint `proposition-six-operations-change-coefficients`: Coefficient clauses in trace
+admissibility.
 
 The coefficient comparisons used by the trace admissibility hypothesis on the integral
 constructible categories: the compactly supported direct image commutes with the reductions
@@ -318,14 +321,14 @@ include hf in
 
 For `k` algebraically closed, a finite `Λ` whose exponent is invertible on `k` and a separated
 morphism `f : X ⟶ Y` of finite-type `k`-schemes with `dim X ≤ d`, clause (iii) of
-`thm-sf-ctf-stability` holds on both sites with the interval `[a, b + 2d]`:
+`proposition-six-operations-dctf` holds on both sites with the interval `[a, b + 2d]`:
 
-* on the small étale site it is unconditional (`cor-sf-direct-image-ctf-nonproper`): `Rf_*`
+* on the small étale site it is unconditional (`proposition-six-operations-dctf--2`): `Rf_*`
   preserves `Dctf` and sends a bounded constructible complex of Tor amplitude `[a, b]` to one of
   Tor amplitude `[a, b + 2d]` (`sk-thm-sf-direct-image-tor-amplitude`, whose uniform bound is
-  the étale direct-image vanishing `lem-sf-etale-direct-image-vanishing`);
+  the étale direct-image vanishing `theorem-results-from-etale-theory--4`);
 * on the small pro-étale site the same holds for every bounded constructible complex
-  (`cor-sf-direct-image-ctf-proetale`). -/
+  (`proposition-six-operations-dctf--2`). -/
 theorem constructibleFiniteTor_rightDerivedLowerStar_proofStatus [IsAlgClosed k] [IsSeparated aX]
     [HasCompactification aX] [IsSeparated aY] [HasCompactification aY] [QuasiCompact f]
     [HasCompactification f] :
@@ -351,14 +354,14 @@ theorem constructibleFiniteTor_rightDerivedLowerStar_proofStatus [IsAlgClosed k]
   exact ⟨h₁, h₂, (torAmplitudeIn_preservation Λ aX aY f hf).2.2.1⟩
 
 include hf in
-/-- Blueprint `rem-ptr-weil-exceptional-inverse-image-16`: Constructible exceptional inverse
+/-- Blueprint `theorem-exceptional-inverse-image`: Constructible exceptional inverse
 images at all coefficient stages, the finite stage.
 
 For `k` algebraically closed, a finite `Λ` whose exponent is invertible on `k` and a separated
 finite-type `f : X ⟶ Y` of separated finite-type `k`-schemes, the exceptional inverse image
 carries `Dctf(Y, Λ)` into `Dctf(X, Λ)`, it is `Rf^! ≅ 𝔻_X f^* 𝔻_Y` there (the dual formula of
-`lem-coef-finite-exceptional`), and it is right adjoint to `Rf_!` on the constructible
-finite-Tor categories
+`lemma-change-coefficients-exceptional-inverse-image--1`), and it is right adjoint to `Rf_!` on the
+constructible finite-Tor categories
 (`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction`). The
 integral construction and adjunction are
 `AlgebraicGeometry.Etale.exceptionalAdjoint_admissibility_constructible`. -/
@@ -381,8 +384,8 @@ theorem exceptionalInverseImage_coefficientStages [IsAlgClosed k] [IsSeparated a
 omit [HasInvertibleExponent Λ (Spec (.of k))] in
 /-- Blueprint `rem-sf-ctf-descent`: How the verified domains enter the formal framework.
 
-The clauses of `thm-sf-ctf-stability` enter the six-functor datum `def-sf-datum` only on their
-displayed domains: for a finite `Λ` whose exponent is invertible on `Y` and a separated
+The clauses of `proposition-six-operations-dctf` enter the six-functor datum `def-sf-datum` only on
+their displayed domains: for a finite `Λ` whose exponent is invertible on `Y` and a separated
 finite-type `f : X ⟶ Y` of finite-type `k`-schemes, the restrictions of `Lf^*`, `Rf_*`, `Rf_!`
 and `Rf^!` to the constructible finite-Tor categories form adjunctions `Lf^* ⊣ Rf_*` and
 `Rf_! ⊣ Rf^!` there, with the units and counits of the ambient adjunctions. -/
@@ -402,7 +405,7 @@ The dimension-free internal-Hom bound needs a site-perfect first variable. For `
 over an algebraically closed `k`, `dim X ≤ m`, and bounded constructible `K`, `M` of Tor
 amplitude `[a, b]` and `[c, d]`, `RHom(K, M)` has Tor amplitude in `[c - b - 2m, d - a + 2m]`,
 and in `[c - b, d - a]` when `K` is dualizable; but the interval `[c - b, d - a]` fails for
-general constructible `K` (`rem-sf-proetale-hom-status`,
+general constructible `K` (`example-internal-hom-affine-line`,
 `AlgebraicGeometry.Etale.not_forall_torAmplitudeIn_derivedHom`, which uses the normalisation of
 the Tate twist). The remaining items of the remark (general duality at the field stages, towers
 outside the normalized DVR systems, ambient adjunctions) are scope statements with no formal

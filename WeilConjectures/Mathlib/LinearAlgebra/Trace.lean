@@ -17,7 +17,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.FreeModule.Basic
 For a short exact sequence `0 → M → N → P → 0` of modules over a commutative ring with `M` and
 `P` finite free, and endomorphisms `φM`, `φN`, `φP` compatible with the maps,
 `tr φN = tr φM + tr φP` (`LinearMap.trace_eq_trace_add_trace_of_exact`). This is the linear
-algebra behind blueprint `prop-trf-trace-formal-laws`, items (2) and (4).
+algebra behind blueprint `proposition-properties-trace`, items (2) and (4).
 
 For endomorphisms `g` of `N` and `h` of `M` (free of finite rank), the endomorphism
 `f ↦ g ∘ f ∘ h` of `M →ₗ N` has trace `tr(g) tr(h)`

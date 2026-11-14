@@ -15,7 +15,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHo
 /-!
 # Semilinear functors under raw scalar localization
 
-Source: Weil conjectures blueprint, main-20261015, `sec-smooth-purity`,
+Source: Weil conjectures blueprint, main-20261015, `chap-Smooth-purity`,
 `sk-lem-sp-field-extension/prop-pur-rational-purity-transitivity-summands.proof.md`,
 finite-extension sentence (blueprint: lem-pur-semilinear-scalar-localization).
 

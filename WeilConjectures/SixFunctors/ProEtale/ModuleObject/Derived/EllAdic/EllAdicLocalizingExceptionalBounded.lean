@@ -783,7 +783,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 /-- The exceptional-inverse-image data the restriction arguments use: the lower shriek of the
 chosen compactification on the localizing closures, its comparison with every
 compactification, and a right adjoint preserving `D_ctf`
-(blueprint: sk-thm-existence, clauses (2)--(4)). -/
+(blueprint: theorem-exceptional-inverse-image, clauses (2)--(4)). -/
 private def ExceptionalKey : Prop :=
   ∃ h : ∀ K, localizingClosureProEtale Λ Z.left K → localizingClosureProEtale Λ Y.left
       ((rightDerivedLowerShriekOfCompactification Λ (compactificationOverField g)).obj K),
@@ -802,7 +802,7 @@ private def ExceptionalKey : Prop :=
 
 omit [IsProper (Over.Hom.left g)] in
 /-- The data for `E` and `Q̄_ℓ`, from Brown representability and the rational restriction
-theorem alone (blueprint: sk-thm-restriction). -/
+theorem alone (blueprint: theorem-f-shriek-ell-adic-coefficients). -/
 private theorem exceptionalKey_rational
     (hcd : AlgebraicGeometry.ProEtale.BaseFieldFiniteCD ℓ k)
     (hr : ((∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
@@ -907,8 +907,8 @@ private theorem canonical_isBounded_of_key (hkey : ExceptionalKey Λ g)
 /-- The supplied localizing right adjoint has finite cohomological amplitude on a bounded
 constructible input.
 
-Source: blueprint `sk-thm-existence` (4), `det-existence-restriction.proof.md`, Part (2).
-Proof: use the finite affine factorization of the proper map and the boundedness part of
+Source: blueprint `theorem-exceptional-inverse-image` (4), `det-existence-restriction.proof.md`,
+Part (2). Proof: use the finite affine factorization of the proper map and the boundedness part of
 the rational restriction theorem, or its compatible integral torsion-level analogue.  A
 finite affine cover gives a common pair of cohomological bounds; uniqueness of right
 adjoints transports these bounds from the geometric construction to the supplied `G`.

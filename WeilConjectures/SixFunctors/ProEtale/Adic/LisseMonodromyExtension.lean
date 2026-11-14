@@ -23,7 +23,7 @@ monodromy representation of a lisse sheaf `G` on `Y`, and `f^* G ≅ G'` since b
 
 For an open `U` of a smooth curve and the open `V = U ∪ {z}` obtained by adding a boundary point,
 the kernel is the local inertia at `z`, and this says that a lisse sheaf with trivial local
-monodromy at `z` extends over `z` (blueprint `cor-wf-unramified-boundary-purity`).
+monodromy at `z` extends over `z` (blueprint `corollary-unramified-boundary-point--2`).
 
 ## Main definitions
 
@@ -115,7 +115,7 @@ noncomputable def universalLisseMonodromy : LisseMonodromy l Y Ω :=
     IsAdicLisseSheaf.exists_iso_upperStar_universalCover _ y G.property
 
 /-- The monodromy from universal covers is an equivalence at every base point
-(`cor-galois-lisse-representations`). -/
+(`proposition-lattices-representations-normal-scheme`). -/
 theorem universalLisseMonodromy_isEquivalenceAt (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) :
     (universalLisseMonodromy l Y Ω).IsEquivalenceAt t :=
   (Scheme.universalCovers Y Ω).lisseMonodromy_isEquivalenceAt _ t

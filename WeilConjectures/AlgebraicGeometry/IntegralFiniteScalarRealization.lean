@@ -12,7 +12,8 @@ import all WeilConjectures.ProEtaleCoefficients.DerivedNakayamaResolution
 
 /-! # Exact realization of small scalar complexes at the finite integral levels
 
-Source: current blueprint, sk-prop-integral-local-structure, finite-level comparison.
+Source: current blueprint, proposition-local-structure-integral-constructible-complexes,
+finite-level comparison.
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +29,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Realize small scalar modules by continuous coefficients on a scheme.
 The finite coefficient quotient carries its actual quotient topology.
-Source: blueprint sk-prop-integral-local-structure, finite-level comparison
-(blueprint: def-pe-integral-finite-scalar-realization). -/
+Source: blueprint proposition-local-structure-integral-constructible-complexes, finite-level
+comparison (blueprint: def-pe-integral-finite-scalar-realization). -/
 def integralFiniteScalarFunctor (W : Scheme.{u}) (n : ℕ) :
     ModuleCat.{u} (Padic.coefficientExtensionRing l E (n + 1)) ⥤
       Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1})
@@ -67,8 +68,8 @@ instance (W : Scheme.{u}) (n : ℕ) :
 
 /-- Exact scalar realization on the derived categories, using the actual finite
 quotient coefficient ring.
-Source: blueprint sk-prop-integral-local-structure, finite-level comparison
-(blueprint: def-pe-integral-finite-scalar-realization). -/
+Source: blueprint proposition-local-structure-integral-constructible-complexes, finite-level
+comparison (blueprint: def-pe-integral-finite-scalar-realization). -/
 def integralFiniteScalarRealization (W : Scheme.{u}) (n : ℕ) :=
   (integralFiniteScalarFunctor l E W n).mapDerivedCategory
 

@@ -12,9 +12,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectTrace
 /-!
 # Formal laws of the trace on perfect complexes
 
-This file proves two of the formal laws of blueprint `prop-trf-trace-formal-laws`
-(subsection `sk-p-trace`) for the categorical trace in the derived category `D(R)`, with the
-Koszul braiding `DerivedCategory.braidedCategory'` of the derived tensor product.
+This file proves two of the formal laws of blueprint `proposition-properties-trace`
+(subsection `proposition-properties-trace`) for the categorical trace in the derived category
+`D(R)`, with the Koszul braiding `DerivedCategory.braidedCategory'` of the derived tensor product.
 
 ## Main results
 
@@ -51,7 +51,7 @@ section Additivity
 variable {R : Type u} [CommRing R] [HasDerivedCategory.{u} (ModuleCat.{u} R)]
   [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} R)]
 
-/-- Blueprint `prop-trf-trace-formal-laws`, item (2) (filtered additivity), for a triangle coming
+/-- Blueprint `proposition-properties-trace`, item (2) (filtered additivity), for a triangle coming
 from a short exact sequence: let `0 → P' → P → P'' → 0` be a short exact sequence `S` of bounded
 complexes of `R`-modules with `P'` and `P''` (hence also `P`) degreewise finitely generated and
 free, and let `φ = (v', v, v'')` be an endomorphism of `S`. Then the categorical traces in `D(R)`
@@ -105,7 +105,7 @@ section Field
 variable {Λ : Type u} [Field Λ] [HasDerivedCategory.{u} (ModuleCat.{u} Λ)]
   [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} Λ)]
 
-/-- Blueprint `prop-trf-trace-formal-laws`, item (4) (supertrace over a field): for a field `Λ`,
+/-- Blueprint `proposition-properties-trace`, item (4) (supertrace over a field): for a field `Λ`,
 a bounded complex `P` of finite dimensional `Λ`-vector spaces and a chain endomorphism `v` of `P`,
 the categorical trace of `v` on the object of `D(Λ)` represented by `P` is the alternating sum of
 the traces of the maps induced by `v` on homology:

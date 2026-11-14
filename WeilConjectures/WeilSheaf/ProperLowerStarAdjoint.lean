@@ -101,7 +101,7 @@ variable {Z Y : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
 /-- **The proper direct image of Weil complexes is a left adjoint** (blueprint
-`det-pd-biduality-coefficients`, the constructible adjunction `Rf_! ⊣ Rf^!` for a proper `f`):
+`theorem-verdier-biduality`, the constructible adjunction `Rf_! ⊣ Rf^!` for a proper `f`):
 for a proper morphism `g : Z ⟶ Y` of `k₀`-schemes, `Y` separated of finite type over `k₀`, the
 derived direct image `Rg_*` of Weil complexes has a right adjoint. The adjunction `Rḡ_* ⊣ ḡ^!` on
 `Dᵇc(-, ℚ̄_ℓ)` over `k̄₀` lifts to Weil complexes

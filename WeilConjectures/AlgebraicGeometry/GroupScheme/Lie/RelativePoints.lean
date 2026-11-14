@@ -35,7 +35,8 @@ Over a field `k`, a tangent vector `y ∈ Lie(G)` gives the infinitesimal point
 
 ## Blueprint
 
-- `sk-p-comparison`: the adjoint representation, through its action on infinitesimal points.
+- `lemma-stable-subspaces-center`: the adjoint representation, through its action on infinitesimal
+points.
 -/
 
 @[expose] public section
@@ -231,7 +232,7 @@ variable {S : Scheme.{u}} (G : Over S) [GrpObj G] (X : Over S)
 
 /-- The infinitesimal points of a group scheme `G` over `S` with values in a scheme `X` over `S`:
 the points `v : X[ε] ⟶ G` over `S` with `v|_X = 1`, the kernel of `G(X[ε]) → G(X)`.
-(blueprint: `sk-p-comparison`) -/
+(blueprint: `lemma-stable-subspaces-center`) -/
 noncomputable def infPointsAt : Subgroup (overDualNumbers X ⟶ G) :=
   (pointsPrecomp G (overDualNumbersι X)).ker
 
@@ -292,7 +293,7 @@ theorem infPointsAtMap_infPointsAtScale {Y : Over S} (φ : Y ⟶ X) (c : Γ(X.le
 
 /-- The conjugation `v ↦ x v x⁻¹` of infinitesimal points with values in `X` by an `X`-point `x`
 of `G`, pulled back to `X[ε]`. This is the adjoint action of `x` on `Lie(G) ⊗ Γ(X, 𝒪_X)`.
-(blueprint: `sk-p-comparison`) -/
+(blueprint: `lemma-stable-subspaces-center`) -/
 noncomputable def infPointsAtConj (x : X ⟶ G) : infPointsAt G X →* infPointsAt G X where
   toFun v := ⟨(overDualNumbersProj X ≫ x) * v.1 * (overDualNumbersProj X ≫ x)⁻¹, by
     rw [mem_infPointsAt, MonObj.comp_mul, MonObj.comp_mul, GrpObj.comp_inv,
@@ -386,7 +387,7 @@ theorem overDualNumbersToSpec_comp_tangentPoint_mem (y : Lie G) :
     MonObj.comp_one]
 
 /-- The infinitesimal point `y_X : X[ε] ⟶ (Spec k)[ε] ⟶ G` with values in a scheme `X` over `k`
-of a tangent vector `y ∈ Lie(G)`. (blueprint: `sk-p-comparison`) -/
+of a tangent vector `y ∈ Lie(G)`. (blueprint: `lemma-stable-subspaces-center`) -/
 noncomputable def lieAt (y : Lie G) : infPointsAt G X :=
   ⟨overDualNumbersToSpec X ≫ tangentPoint y, overDualNumbersToSpec_comp_tangentPoint_mem X y⟩
 

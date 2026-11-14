@@ -173,14 +173,15 @@ Proof plan:
    lem-sc-fibre-dimension-after-base-change,
    lem-weil-pbc-dimension-supremum-local-dimensions).
 2. Inverse-image stalks identify the pulled-back sheaf as torsion
-   (lem-weil-pbc-inverse-image-stalk-germ, lem-weil-pbc-torsion-sheaf-characterizations).
+   (lem-weil-pbc-inverse-image-stalk-germ, definition-torsion-sheaves--3).
 3. For an empty geometric fibre the empty-cover sheaf axiom makes sections zero;
    applying sections to an injective resolution gives zero cohomology in every degree.
 4. Otherwise its dimension is a finite integer `e ≤ d`. An algebraically closed field
    is separably closed, hence has torsion cohomological dimension zero
-   (lem-kun-03qu-sep-closed). The finite-type torsion cohomological dimension theorem
-   thm-sc-finite-type-torsion-cd gives vanishing above `2 * e`, hence above `2 * d`.
-5. Bounded-below proper base change (thm-weil-pbc-bounded-below), exact inverse image
+   (lemma-cohomological-dimension-base-field--1). The finite-type torsion cohomological dimension
+   theorem lemma-uniform-bounds-pro-etale-affines gives vanishing above `2 * e`, hence above
+   `2 * d`.
+5. Bounded-below proper base change (theorem-proper-base-change-classical-pro), exact inverse image
    (prop-weil-pbc-inverse-image-exact), and exact sections over the geometric point
    identify the stalk of the higher direct image with this fibre cohomology
    (lem-weil-pbc-geometric-point-pullback-stalk, def-weil-pbc-direct-image,

@@ -19,11 +19,11 @@ set_option linter.privateModule false
 # The unbounded module exchange on K-injective representatives
 
 Source: Stacks Project, sites-cohomology.tex, Tags 0736 and 07A7; derived.tex,
-Tags 070I, 070K and 0DVC. Blueprint main-20261015, sk-def-exchange, final paragraph.
-(auxiliary; not a blueprint node).
+Tags 070I, 070K and 0DVC. Blueprint main-20261015, definition-derived-base-change-map, final
+paragraph. (auxiliary; not a blueprint node).
 
 The comparison below is the agent-formulated unbounded representative statement,
-using the exact inverse-image mate of `def-kun-unbounded-exchange`.
+using the exact inverse-image mate of `definition-derived-base-change-map`.
 The three auxiliary definitions spell out its canonical maps, without additional choices.
 -/
 

@@ -17,7 +17,7 @@ import Mathlib.Order.Disjointed
 # A finite surjective disjoint union of open immersions has a section
 
 Source: literature/stacks-project/etale-cohomology.tex, Lemma 59.80.6 (Tag 09ZA),
-proof, final paragraph (blueprint: lem-weil-pbc-clopen-open-cover-section).
+proof, final paragraph (blueprint: theorem-gabber-affine-proper-base-change).
 -/
 
 @[expose] public section
@@ -29,7 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Source: literature/stacks-project/etale-cohomology.tex, Lemma 59.80.6 (Tag 09ZA),
-proof, final paragraph (blueprint: lem-weil-pbc-clopen-open-cover-section).
+proof, final paragraph (blueprint: theorem-gabber-affine-proper-base-change).
 
 The finite coproduct decomposition is represented by a finite index `Fin n`, with
 open-and-closed coproduct injections `k`; the restrictions of `p` are the morphisms

@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Supported.ProEtaleSuppo
 
 /-! # Naturality of the actual pro-etale supported exterior product
 
-Source: blueprint `lem-pur-kunneth-supported`, witness-transport paragraph.
+Source: blueprint `proposition-purity-vector-bundles`, witness-transport paragraph.
 (blueprint: lem-pur-proetale-supported-product-naturality).
 -/
 

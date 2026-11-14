@@ -94,13 +94,13 @@ theorem isFlasque_of_injective [Injective F] : Presheaf.IsFlasque F.obj where
 variable [HasExt.{u} (CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})]
   [EnoughInjectives (CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})]
 
-/-- Blueprint `lem-sc-zariski-flasque-acyclic`: Flasque sheaves are acyclic.
+/-- Blueprint `lemma-uniform-bounds-pro-etale-affines`: Flasque sheaves are acyclic.
 
-**Flasque sheaves are acyclic** (flasque in the sense of blueprint `def-sc-zariski-flasque`,
-Mathlib's `TopCat.Sheaf.IsFlasque`): a flasque abelian sheaf has vanishing cohomology in every
-positive degree. Embed `F` into an injective sheaf `I`; the quotient `Q` is flasque, global
-sections of `I` surject onto those of `Q`, which kills `H¹(F)`, and `Hⁿ⁺¹(F) ≅ Hⁿ(Q)` for
-`n ≥ 1`. -/
+**Flasque sheaves are acyclic** (flasque in the sense of blueprint
+`lemma-uniform-bounds-pro-etale-affines`, Mathlib's `TopCat.Sheaf.IsFlasque`): a flasque abelian
+sheaf has vanishing cohomology in every positive degree. Embed `F` into an injective sheaf `I`; the
+quotient `Q` is flasque, global sections of `I` surject onto those of `Q`, which kills `H¹(F)`, and
+`Hⁿ⁺¹(F) ≅ Hⁿ(Q)` for `n ≥ 1`. -/
 theorem IsFlasque.subsingleton_H (n : ℕ) :
     ∀ (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
       [Presheaf.IsFlasque F.obj], Subsingleton (CategoryTheory.Sheaf.H F (n + 1)) := by

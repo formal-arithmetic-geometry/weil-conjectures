@@ -22,14 +22,14 @@ are the roots in `ℚ̄` of the reversed polynomial `C^# = C.reverse`. For `q �
 the *weight stratum* `R_i(C)` is the submultiset of those reciprocal roots that are `q`-Weil
 numbers of weight `i`. This file shows (blueprint `sk-thm-intfactors`):
 
-- `R_i(C)` is stable under `Gal(ℚ̄/ℚ)` (`prop-galois-weight-strata`);
+- `R_i(C)` is stable under `Gal(ℚ̄/ℚ)` (`theorem-weil-conjectures-smooth-proper-schemes--1`);
 - the stratum polynomial `Q_i = ∏_{α ∈ R_i} (1 - α T)` has integer coefficients
-  (`prop-galois-weight-strata-integrality`), since its coefficients are Galois-invariant
+  (`theorem-weil-conjectures-smooth-proper-schemes--1`), since its coefficients are Galois-invariant
   algebraic integers;
 - the reciprocal-root multiset of `Q_i` is exactly `R_i`
-  (`prop-galois-weight-strata-identification`).
+  (`theorem-weil-conjectures-smooth-proper-schemes--1`).
 
-It also records the `ℓ`-adic realizations of algebraic numbers (`def-weil-algebraic-closure-q`):
+It also records the `ℓ`-adic realizations of algebraic numbers (`lemma-reciprocal-roots-zeta--7`):
 inside an algebraically closed field `Ω` of characteristic zero (such as `ℚ̄_ℓ`), the elements
 algebraic over `ℚ` form an algebraic closure of `ℚ`, which is therefore isomorphic to `ℚ̄`.
 
@@ -39,14 +39,15 @@ In the blueprint, `R_i` is formed from the numerator `A` for odd `i` and from th
 ## Main declarations
 
 - `AlgebraicRealization`, `algebraicClosure_isAlgClosure_and_nonempty_realization`:
-  blueprint `def-weil-algebraic-closure-q`.
+  blueprint `lemma-reciprocal-roots-zeta--7`.
 - `Polynomial.weilStratum`, `Polynomial.weilStratumPoly`: the stratum `R_i(C)` and the
   polynomial `∏_{α ∈ R_i} (1 - α T)`.
-- `Polynomial.map_weilStratum_algEquiv`: blueprint `prop-galois-weight-strata`.
+- `Polynomial.map_weilStratum_algEquiv`: blueprint
+`theorem-weil-conjectures-smooth-proper-schemes--1`.
 - `Polynomial.exists_map_eq_weilStratumPoly`: blueprint
-  `prop-galois-weight-strata-integrality`.
+  `theorem-weil-conjectures-smooth-proper-schemes--1`.
 - `Polynomial.roots_reverse_weilStratumPoly`: blueprint
-  `prop-galois-weight-strata-identification`.
+  `theorem-weil-conjectures-smooth-proper-schemes--1`.
 -/
 
 @[expose] public section
@@ -59,14 +60,14 @@ section Realization
 
 variable (Ω : Type*) [Field Ω] [CharZero Ω]
 
-/-- Blueprint `def-weil-algebraic-closure-q`: an *`ℓ`-adic realization of algebraic numbers* in
+/-- Blueprint `lemma-reciprocal-roots-zeta--7`: an *`ℓ`-adic realization of algebraic numbers* in
 a field `Ω` of characteristic zero (in the application `Ω = ℚ̄_ℓ`) is a `ℚ`-isomorphism
 `ℚ̄ ≃ ℚ̄^{(ℓ)}` from the fixed algebraic closure `ℚ̄ = AlgebraicClosure ℚ` onto the subfield
 `ℚ̄^{(ℓ)} = algebraicClosure ℚ Ω` of elements of `Ω` that are algebraic over `ℚ`. -/
 abbrev AlgebraicRealization : Type _ :=
   AlgebraicClosure ℚ ≃ₐ[ℚ] _root_.algebraicClosure ℚ Ω
 
-/-- Blueprint `def-weil-algebraic-closure-q`: if `Ω` is an algebraically closed field of
+/-- Blueprint `lemma-reciprocal-roots-zeta--7`: if `Ω` is an algebraically closed field of
 characteristic zero (e.g. `PadicAlgCl ℓ`), then the subfield `ℚ̄^{(ℓ)}` of elements of `Ω`
 algebraic over `ℚ` is algebraically closed and is an algebraic closure of `ℚ`, and an
 `ℓ`-adic realization `ℚ̄ ≃ₐ[ℚ] ℚ̄^{(ℓ)}` exists. -/
@@ -103,26 +104,26 @@ variable (q : ℕ) (i : ℤ)
 
 open scoped Classical in
 /-- The *weight-`i` stratum* `R_i(C)` of an integer polynomial `C` (blueprint
-`prop-galois-weight-strata`): the submultiset of the reciprocal roots of `C` in
-`ℚ̄ = AlgebraicClosure ℚ`, i.e. of the roots of `C^# = C.reverse`, that are `q`-Weil numbers of
+`theorem-weil-conjectures-smooth-proper-schemes--1`): the submultiset of the reciprocal roots of `C`
+in `ℚ̄ = AlgebraicClosure ℚ`, i.e. of the roots of `C^# = C.reverse`, that are `q`-Weil numbers of
 weight `i`, counted with multiplicity. -/
 noncomputable def weilStratum (C : ℤ[X]) : Multiset (AlgebraicClosure ℚ) :=
   ((C.reverse.map (algebraMap ℤ (AlgebraicClosure ℚ))).roots).filter (IsWeilNumber q i)
 
 /-- The *stratum polynomial* `Q_i = ∏_{α ∈ R_i(C)} (1 - α T)` over `ℚ̄` (blueprint
-`prop-galois-weight-strata-integrality`). -/
+`theorem-weil-conjectures-smooth-proper-schemes--1`). -/
 noncomputable def weilStratumPoly (C : ℤ[X]) : (AlgebraicClosure ℚ)[X] :=
   ((weilStratum q i C).map fun α ↦ 1 - Polynomial.C α * X).prod
 
-/-- The parity convention of the blueprint (`prop-galois-weight-strata`): for a normalized
-presentation `Z = A / B`, the weight-`i` stratum is taken in the reciprocal roots of the
-numerator `A` for odd `i` and of the denominator `B` for even `i`. -/
+/-- The parity convention of the blueprint (`theorem-weil-conjectures-smooth-proper-schemes--1`):
+for a normalized presentation `Z = A / B`, the weight-`i` stratum is taken in the reciprocal roots
+of the numerator `A` for odd `i` and of the denominator `B` for even `i`. -/
 noncomputable def parityWeilStratum (A B : ℤ[X]) : Multiset (AlgebraicClosure ℚ) :=
   weilStratum q i (if Odd i then A else B)
 
-/-- Blueprint `prop-galois-weight-strata`: the weight stratum `R_i(C)` of an integer polynomial
-is stable, with multiplicities, under every `σ ∈ Gal(ℚ̄/ℚ)`. Indeed the roots of the rational
-polynomial `C^#` are permuted by `σ`, and the `q`-Weil condition of weight `i` is
+/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes--1`: the weight stratum `R_i(C)` of an
+integer polynomial is stable, with multiplicities, under every `σ ∈ Gal(ℚ̄/ℚ)`. Indeed the roots of
+the rational polynomial `C^#` are permuted by `σ`, and the `q`-Weil condition of weight `i` is
 Galois-invariant (`isWeilNumber_algEquiv_apply_iff`). The same holds for the parity strata
 `parityWeilStratum q i A B`, which are instances of `weilStratum`. -/
 theorem map_weilStratum_algEquiv (C : ℤ[X]) (σ : AlgebraicClosure ℚ ≃ₐ[ℚ] AlgebraicClosure ℚ) :
@@ -153,12 +154,12 @@ theorem isIntegral_of_mem_weilStratum {C : ℤ[X]} (hC : C.coeff 0 = 1) {α : Al
   refine ⟨C.reverse, monic_reverse_of_coeff_zero_eq_one hC, ?_⟩
   rwa [IsRoot, eval_map] at hα'
 
-/-- Blueprint `prop-galois-weight-strata-integrality`: for an integer polynomial `C` with
-`C(0) = 1` (as for both members of a normalized presentation `Z = A / B`), the stratum
+/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes--1`: for an integer polynomial `C`
+with `C(0) = 1` (as for both members of a normalized presentation `Z = A / B`), the stratum
 polynomial `Q_i = ∏_{α ∈ R_i(C)} (1 - α T)` has integer coefficients. Its coefficients are
-fixed by `Gal(ℚ̄/ℚ)` (`prop-galois-weight-strata`), hence rational, and are algebraic integers,
-being elementary symmetric functions of roots of the monic integer polynomial `C^#`; so they lie
-in `ℤ`. -/
+fixed by `Gal(ℚ̄/ℚ)` (`theorem-weil-conjectures-smooth-proper-schemes--1`), hence rational, and are
+algebraic integers, being elementary symmetric functions of roots of the monic integer polynomial
+`C^#`; so they lie in `ℤ`. -/
 theorem exists_map_eq_weilStratumPoly {C : ℤ[X]} (hC : C.coeff 0 = 1) :
     ∃ Q : ℤ[X], Q.map (algebraMap ℤ (AlgebraicClosure ℚ)) = weilStratumPoly q i C := by
   set S := integralClosure ℤ (AlgebraicClosure ℚ)
@@ -186,8 +187,8 @@ theorem exists_map_eq_weilStratumPoly {C : ℤ[X]} (hC : C.coeff 0 = 1) :
   obtain ⟨m, rfl⟩ := IsIntegrallyClosed.isIntegral_iff.1 hrint
   exact ⟨m, by rw [← hr, ← IsScalarTower.algebraMap_apply]⟩
 
-/-- Blueprint `prop-galois-weight-strata-identification`: the reciprocal-root multiset of the
-stratum polynomial `Q_i`, i.e. the root multiset of `Q_i^# = Q_i.reverse`, is exactly the
+/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes--1`: the reciprocal-root multiset of
+the stratum polynomial `Q_i`, i.e. the root multiset of `Q_i^# = Q_i.reverse`, is exactly the
 weight stratum `R_i(C)`. The stratum polynomial is normalized: `Q_i(0) = 1`. -/
 theorem roots_reverse_weilStratumPoly (C : ℤ[X]) :
     (weilStratumPoly q i C).reverse.roots = weilStratum q i C ∧
@@ -202,9 +203,9 @@ theorem roots_reverse_weilStratumPoly (C : ℤ[X]) :
   · rw [weilStratumPoly, coeff_zero_eq_eval_zero, eval_multiset_prod, Multiset.map_map]
     simp
 
-/-- Blueprints `prop-galois-weight-strata-integrality` and
-`prop-galois-weight-strata-identification` combined: for `C ∈ ℤ[X]` with `C(0) = 1` there is
-an integer polynomial `Q` with `Q(0) = 1` whose scalar extension to `ℚ̄` is
+/-- Blueprints `theorem-weil-conjectures-smooth-proper-schemes--1` and
+`theorem-weil-conjectures-smooth-proper-schemes--1` combined: for `C ∈ ℤ[X]` with `C(0) = 1` there
+is an integer polynomial `Q` with `Q(0) = 1` whose scalar extension to `ℚ̄` is
 `∏_{α ∈ R_i(C)} (1 - α T)` and whose reciprocal-root multiset in `ℚ̄` is exactly `R_i(C)`. -/
 theorem exists_int_weilStratumPoly {C : ℤ[X]} (hC : C.coeff 0 = 1) :
     ∃ Q : ℤ[X], Q.coeff 0 = 1 ∧

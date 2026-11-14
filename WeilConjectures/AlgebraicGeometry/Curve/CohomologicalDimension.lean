@@ -314,7 +314,7 @@ algebraically closed field `k`, with generic point `η : Spec k(C) ⟶ C`, and `
 sheaf on `C`. Then the unit `F ⟶ η_* η^* F` induces isomorphisms `Hᵠ(C, F) ≅ Hᵠ(C, η_* η^* F)` for
 `q ≥ 2`: its kernel and cokernel have zero generic restriction, hence are supported on finitely
 many closed points and have no cohomology in positive degrees.
-(blueprint: `lem-sc-generic-cohomology-comparison`) -/
+(blueprint: `theorem-cohomology-curves`) -/
 theorem isIso_functorH_map_unit_fromSpecFunctionField (f : C ⟶ Spec (.of k)) [IsCurve f]
     [Smooth f] [IsIntegral C] (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})
     (_hF : F.IsTorsion) (q : ℕ) (hq : 2 ≤ q) :
@@ -335,7 +335,7 @@ Cohomology of the quasi-compact quasi-separated scheme `C` commutes with filtere
 since `π_*` is exact, a dimension shift reduces the claim to `F = ℤ/n`. Passing to the reduced
 connected components and then to the normalization, which changes `F` only by a sheaf supported
 on finitely many closed points, reduces it to smooth affine connected `C`.
-(blueprint: `lem-sc-arbitrary-curve-cd`, the reduction step) -/
+(blueprint: `theorem-cohomology-curves`, the reduction step) -/
 theorem subsingleton_sheafH_two_of_isAffine_of_forall (f : C ⟶ Spec (.of k)) [IsCurve f]
     [IsAffine C] (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion)
     (H : ∀ (C' : Scheme.{u}) (f' : C' ⟶ Spec (.of k)), IsConnectedCurve f' → Smooth f' →
@@ -403,13 +403,13 @@ sharper bound for affine `C` is
 
 The proof reduces to integral curves
 (`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_generic`, blueprint
-`lem-sc-arbitrary-curve-cd`, Step 1): the units `F ⟶ cₚ_* cₚ^* F` for the irreducible components
+`theorem-cohomology-curves`, Step 1): the units `F ⟶ cₚ_* cₚ^* F` for the irreducible components
 `cₚ : Zₚ ⟶ C` with their reduced structure assemble to a map `F ⟶ ⨁ₚ cₚ_* cₚ^* F` which is an
 isomorphism away from finitely many closed points, hence bijective on `Hᵠ` for `q ≥ 2`. On an
 integral curve the vanishing is the generic-point argument of
 `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_isIntegral`: `Hᵠ(C, F)` agrees
 with `Hᵠ(C, η_* η^* F)` for the generic point `η`, and the function field has cohomological
-dimension at most one. (blueprint: `lem-sc-arbitrary-curve-cd`) -/
+dimension at most one. (blueprint: `theorem-cohomology-curves`) -/
 @[stacks 03SC "(1)"]
 theorem subsingleton_sheafH_of_three_le (f : C ⟶ Spec (.of k)) [IsCurve f]
     (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)
@@ -430,7 +430,7 @@ Degrees `q ≥ 3` are `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le
 `H²(C, F) ≅ H²(C, η_* η^* F)` for the generic point `η` of `C`
 (`AlgebraicGeometry.IsCurve.isIso_functorH_map_unit_fromSpecFunctionField`), and the latter
 vanishes by `AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar`.
-(blueprint: `lem-sc-affine-cohomological-dimension`) -/
+(blueprint: `theorem-cohomology-curves--2`) -/
 theorem subsingleton_sheafH_of_two_le_of_isAffine_of_smooth (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsAffine C]
     (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)
@@ -454,7 +454,7 @@ Degrees `q ≥ 3` are `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le
 reduces (`AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine_of_forall`) to smooth
 affine connected curves, where it is
 `AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_of_two_le_of_isAffine_of_smooth`.
-(blueprint: `lem-sc-arbitrary-curve-cd`) -/
+(blueprint: `theorem-cohomology-curves`) -/
 @[stacks 03SC "(2)"]
 theorem subsingleton_sheafH_of_two_le_of_isAffine (f : C ⟶ Spec (.of k)) [IsCurve f]
     [IsAffine C] (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion)
@@ -483,7 +483,7 @@ lemma Scheme.isTorsion_constantZMod (X : Scheme.{u}) {d : ℕ} (hd : d ≠ 0) :
 
 variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 
-/-- Blueprint `sbc-thm-cohomological-dimension-of-an-affine-curve`: Affine-curve cohomological
+/-- Blueprint `theorem-cohomology-curves--2`: Affine-curve cohomological
 dimension.
 
 Let `k` be algebraically closed, let `C` be a smooth affine curve over `k` and let `d ≥ 1`.
@@ -491,7 +491,7 @@ Then `H^q(C_ét, ℤ/d) = 0` for `q > 1`, and `H^0(C_ét, ℤ/d) = ℤ/d` when `
 
 The vanishing is the case of the torsion sheaf `ℤ/d` of
 `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_two_le_of_isAffine` (blueprint
-`lem-sc-arbitrary-curve-cd`), which does not need `d` to be prime to the characteristic; the degree
+`theorem-cohomology-curves`), which does not need `d` to be prime to the characteristic; the degree
 zero statement is `AlgebraicGeometry.Scheme.nonempty_addEquiv_sheafH_zero_constantZMod`. -/
 @[stacks 03SC "(2)"]
 theorem subsingleton_sheafH_constantZMod_and_nonempty_addEquiv_sheafH_zero
@@ -526,7 +526,7 @@ gives the sequence for `H¹` (`AlgebraicGeometry.IsCurve.sheafH_rootsOfUnityShea
 The finiteness statements are `AlgebraicGeometry.IsConnectedCurve.finite_units_quotient` and
 `AlgebraicGeometry.IsConnectedCurve.surjective_zsmul_pic_and_finite_torsionBy`, and the vanishing
 is `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_two_le_of_isAffine`.
-(blueprint: `thm-sc-affine-cohomology`) -/
+(blueprint: `proposition-cohomology-smooth-affine-curve--2`) -/
 theorem IsConnectedCurve.sheafH_constantZMod_of_isAffine (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsAffine C] (n : ℕ) (hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.constantZMod n) 0 ≃+ ZMod n) ∧

@@ -44,26 +44,32 @@ perfect objects of `D(R)` are the *perfect point complexes*.
 
 ## Main statements
 
-- `DerivedCategory.isPerfect_iff` (`lem-pod-perfect-point-complex-field`): over a field, `C`
+- `DerivedCategory.isPerfect_iff` (`corollary-degreewise-duality-over-fields--1`): over a field, `C`
   is perfect if and only if it is bounded with finite-dimensional cohomology.
 - `DerivedCategory.IsPerfect.bounded`, `DerivedCategory.IsPerfect.finite_homology`: a perfect
   complex over a Noetherian ring is bounded with finitely generated cohomology.
-- `DerivedCategory.isPerfect_of_finiteTorAmplitude` (`sk-lem-finite`, Step 2): conversely, over a
+- `DerivedCategory.isPerfect_of_finiteTorAmplitude` (`lemma-perfect-complexes-geometric-point`, Step
+2): conversely, over a
   Noetherian ring a bounded complex with finitely generated cohomology and finite Tor amplitude
   is perfect.
-- `DerivedCategory.IsPerfect.tensor_homology` (`sk-lem-finite`, Step 3): after a flat extension
+- `DerivedCategory.IsPerfect.tensor_homology` (`lemma-perfect-complexes-geometric-point`, Step 3):
+after a flat extension
   of scalars to a field the cohomology is finite dimensional and bounded.
-- `DerivedCategory.IsPerfect.ihom_unit` (`sk-lem-finite`, Step 3): the dual
+- `DerivedCategory.IsPerfect.ihom_unit` (`lemma-perfect-complexes-geometric-point`, Step 3): the
+dual
   `C^∨ = RHom_R(C, R)` of a perfect complex is perfect.
-- `DerivedCategory.IsPerfect.isDualizable` (`prop-pod-biduality-at-the-point`, Steps 1–3): a
+- `DerivedCategory.IsPerfect.isDualizable` (`lemma-perfect-complexes-geometric-point--8`, Steps
+1–3): a
   perfect complex is dualizable for the derived tensor product.
-- `DerivedCategory.IsPerfect.isIso_toIhomIhomUnit` (`prop-pod-biduality-at-the-point`): for
+- `DerivedCategory.IsPerfect.isIso_toIhomIhomUnit` (`lemma-perfect-complexes-geometric-point--8`):
+for
   any braiding of `D(R)`, the canonical biduality map `C ⟶ C^∨∨` is an isomorphism for a
   perfect `C`, where `C^∨ = RHom_R(C, R)`.
-- `DerivedCategory.IsPerfect.isIso_ihomUnitTensorToIhom` (`prop-pod-biduality-at-the-point`):
+- `DerivedCategory.IsPerfect.isIso_ihomUnitTensorToIhom`
+(`lemma-perfect-complexes-geometric-point--8`):
   the canonical comparison `C^∨ ⊗ᴸ_R D ⟶ RHom_R(C, D)` is an isomorphism for a perfect `C` and
   any `D`.
-- `DerivedCategory.nonempty_iso_homology_ihom` (`lem-pod-cohomology-of-dual-over-field`): over
+- `DerivedCategory.nonempty_iso_homology_ihom` (`corollary-degreewise-duality-over-fields--1`): over
   a field, `H^{-i}(C^∨) ≅ H^i(C)^∨`.
 
 ## Implementation notes
@@ -89,9 +95,10 @@ namespace DerivedCategory
 
 variable {R : Type u} [CommRing R] [HasDerivedCategory.{u} (ModuleCat.{u} R)]
 
-/-- Blueprint `pur9-def-perfect-complex`: Perfect complex of finite modules.
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Perfect complex of finite modules.
 
-Also blueprint `sk-def-perfect` (also `def-pod-perfect-point-complex`): perfect point complexes.
+Also blueprint `sk-def-perfect` (also `lemma-perfect-complexes-geometric-point`): perfect point
+complexes.
 
 An object `C` of `D(R)` is *perfect* if it is isomorphic to the image of a bounded complex of
 finitely generated projective `R`-modules. -/
@@ -148,7 +155,8 @@ theorem IsPerfect.finite_homology [IsNoetherianRing R] {C : DerivedCategory (Mod
       ((ModuleCat.epi_iff_surjective _).1 inferInstance)
   exact Module.Finite.equiv eH.toLinearEquiv.symm
 
-/-- Blueprint `sk-lem-finite` (Step 3 of its proof): flat extension of scalars to a field.
+/-- Blueprint `lemma-perfect-complexes-geometric-point` (Step 3 of its proof): flat extension of
+scalars to a field.
 
 For a perfect complex `C` over a Noetherian ring `R` and an `R`-algebra `E` which is a field
 (such as `E = Frac 𝒪_E` over `𝒪_E`), the spaces `E ⊗_R Hⁱ(C)` are finite dimensional and vanish
@@ -411,7 +419,8 @@ private lemma isPerfect_of_torAmplitudeIn (n : ℕ) {c b : ℤ} (hn : b - c ≤ 
 
 end FiniteTorAmplitude
 
-/-- Blueprint `sk-lem-finite` (Step 2 of its proof): perfectness over a Noetherian ring.
+/-- Blueprint `lemma-perfect-complexes-geometric-point` (Step 2 of its proof): perfectness over a
+Noetherian ring.
 
 Over a Noetherian ring `R`, a bounded complex `C` with finitely generated cohomology modules and
 finite Tor amplitude is perfect. The proof is by induction on the length of the Tor amplitude
@@ -427,7 +436,8 @@ theorem isPerfect_of_finiteTorAmplitude [IsNoetherianRing R]
   obtain ⟨c, d, hcd⟩ := hTor
   exact isPerfect_of_torAmplitudeIn (d - c).toNat (by omega) hcd hfin
 
-/-- Blueprint `sk-lem-finite` (Step 3 of its proof): the dual of a perfect point complex.
+/-- Blueprint `lemma-perfect-complexes-geometric-point` (Step 3 of its proof): the dual of a perfect
+point complex.
 
 The dual `C^∨ = RHom_R(C, R)` of a perfect complex `C` is perfect: if `C` is represented by a
 bounded complex `P` of finitely generated projective modules, `C^∨` is represented by the
@@ -526,7 +536,7 @@ section Field
 
 variable {K : Type u} [Field K] [HasDerivedCategory.{u} (ModuleCat.{u} K)]
 
-/-- Blueprint `lem-pod-perfect-point-complex-field`: perfect point complexes over a field.
+/-- Blueprint `corollary-degreewise-duality-over-fields--1`: perfect point complexes over a field.
 
 Over a field `K`, an object `C` of `D(K)` is perfect if and only if it is bounded and all its
 cohomology spaces `H^i(C)` are finite dimensional over `K`. -/
@@ -575,7 +585,7 @@ end Field
 
 section Biduality
 
-/-- Blueprint `prop-pod-biduality-at-the-point` (Steps 1–3 of its proof): a perfect point
+/-- Blueprint `lemma-perfect-complexes-geometric-point--8` (Steps 1–3 of its proof): a perfect point
 complex is dualizable for the derived tensor product of `D(R)`.
 
 A finitely generated projective module is dualizable, with dual `Hom_R(P, R)`
@@ -592,12 +602,12 @@ theorem IsPerfect.isDualizable {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.I
   have := (hP n).2
   exact ModuleCat.isDualizable_of_projective (P.X n)
 
-/-- Blueprint `prop-pod-biduality-at-the-point`: biduality at the point.
+/-- Blueprint `lemma-perfect-complexes-geometric-point--8`: biduality at the point.
 
 For a perfect point complex `C` and any braiding of `D(R)`, the canonical biduality map
 `C ⟶ C^∨∨`, where `C^∨ = RHom_R(C, R)`, is an isomorphism. This is also clause (3) of blueprint
-`lem-weil-coefficient-frobenius`: derived evaluation into the coefficient double dual is an
-isomorphism for every perfect complex over any ring. -/
+`lemma-perfect-complexes-geometric-point--8`: derived evaluation into the coefficient double dual is
+an isomorphism for every perfect complex over any ring. -/
 theorem IsPerfect.isIso_toIhomIhomUnit [BraidedCategory (DerivedCategory (ModuleCat.{u} R))]
     {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.IsPerfect) :
     IsIso (MonoidalClosed.toIhomIhomUnit C) :=
@@ -614,7 +624,7 @@ theorem IsPerfect.nonempty_iso_ihom_ihom {C : DerivedCategory (ModuleCat.{u} R)}
   have := hC.isIso_toIhomIhomUnit
   exact ⟨asIso (MonoidalClosed.toIhomIhomUnit C)⟩
 
-/-- Blueprint `prop-pod-biduality-at-the-point`: biduality at the point.
+/-- Blueprint `lemma-perfect-complexes-geometric-point--8`: biduality at the point.
 
 For a perfect point complex `C` and every object `D` of `D(R)`, the canonical tensor–internal-Hom
 comparison `C^∨ ⊗ᴸ_R D ⟶ RHom_R(C, D)` is an isomorphism. -/
@@ -630,8 +640,8 @@ end Biduality
 
 section CohomologyDual
 
-/-- Blueprint `lem-pod-cohomology-of-dual-over-field`: cohomology of the dual of a finite complex
-over a field.
+/-- Blueprint `corollary-degreewise-duality-over-fields--1`: cohomology of the dual of a finite
+complex over a field.
 
 Over a field `R`, the cohomology of the dual `C^∨ = RHom_R(C, R)` of a complex `C` is the dual
 of the cohomology: `H^{-i}(C^∨) ≅ H^i(C)^∨` for every `i`. The blueprint states this for a

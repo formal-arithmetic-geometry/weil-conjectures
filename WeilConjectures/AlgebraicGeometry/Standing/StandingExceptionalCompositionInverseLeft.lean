@@ -408,8 +408,8 @@ private meta partial def coefficientHEq (lhs rhs : Expr) (fuel : Nat := 160) :
 
 -- Allow explicit congruence across the standing derived-category formulas.
 /-- One inverse equation for the explicit counit-transpose candidate.
-Source: thm-pur-composition-coherence, exceptional-composition isomorphism, and
-pur9-def-upper-shriek-composition, the specified counit formula.
+Source: proposition-compatibility-purity-composition--1, exceptional-composition isomorphism, and
+proposition-composition-open-restriction-compactifications-f--1, the specified counit formula.
 Proof: on bounded-below etale-origin objects, combine the inverse standing Hom
 bijection for gf, precomposition by alpha, and the standing Hom bijections for g
 and f into E_K : Hom(K,(gf)!L) ≃ Hom(K,f!g!L). The comparison is E_R(id), and the

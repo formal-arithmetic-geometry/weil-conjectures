@@ -20,8 +20,8 @@ of dimension at most one. Over a nonempty open of `S` and after a finite surject
 `S' ⟶ S`, the reduced family `T = (X ×_S S')_red` is the target of a finite surjection
 `ν : ∐ₐ Yₐ ⟶ T` from a finite disjoint union of smooth projective curve families and finite
 étale families, which is an isomorphism outside a closed subscheme `D ⊆ T` finite over `S'`
-(`lem-fin-generic-curve-model`). The construction normalizes the geometric generic fibre and
-spreads the result out.
+(`proposition-proper-direct-image-finite-coefficients`). The construction normalizes the geometric
+generic fibre and spreads the result out.
 
 ## Main statements
 
@@ -68,8 +68,8 @@ lemma IsGenericCurveModel.of_iso {X₁ X₂ S : Scheme.{u}} (e : X₁ ≅ X₂) 
   · simpa using hD
   · simpa using hY a
 
-/-- Blueprint `lem-fin-generic-curve-model`: A generic curve model with finite comparison
-boundary.
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: A generic curve model with
+finite comparison boundary.
 
 Let `S` be integral of finite type over a field `k`, `f : X ⟶ S` projective (`f = π ∘ i` for a
 closed immersion `i : X ⟶ ℙ(n; S)`) with geometric fibres of dimension at most one. There are

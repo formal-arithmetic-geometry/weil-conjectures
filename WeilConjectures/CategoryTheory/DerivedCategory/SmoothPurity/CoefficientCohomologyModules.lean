@@ -15,7 +15,7 @@ public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiber
 /-! # Cohomology modules of coefficient complexes
 
 Source: Weil blueprint, `def-weil-ordinary-compact-cohomology`, order 1510,
-with the four coefficient categories of `def-weil-finite-coefficient-point`, order 1509
+with the four coefficient categories of `lemma-perfect-complexes-geometric-point`, order 1509
 (blueprint: def-weil-coefficient-cohomology-modules).
 
 The generic ring-level functor is Mathlib's `DerivedCategory.homologyFunctor`.

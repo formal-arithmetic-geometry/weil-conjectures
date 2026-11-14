@@ -87,7 +87,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.SixFunctors.NativeInternal
 
 Source: Weil conjectures blueprint, sec-six-functors/sk-prop-sf-biduality-general,
 order 2122; Stacks Project, Tags 08J9, 08JA and 08JC
-(blueprint: lem-weil-duality-pairing).
+(blueprint: definition-verdier-dual-evaluation--4).
 
 ## Main definitions and statement
 
@@ -115,7 +115,7 @@ open CategoryTheory.MonoidalCategory Opposite
 namespace CategoryTheory
 
 /-- Double application of the contravariant internal Hom into W.
-Source: Stacks Project, Tag 08J9 (blueprint: lem-weil-duality-pairing). -/
+Source: Stacks Project, Tag 08J9 (blueprint: definition-verdier-dual-evaluation--4). -/
 def dualityDoubleFunctor {C : Type u} [Category.{v} C]
     (H : Cᵒᵖ ⥤ C ⥤ C) (W : C) : C ⥤ C :=
   (H.flip.obj W).rightOp ⋙ H.flip.obj W
@@ -123,7 +123,7 @@ def dualityDoubleFunctor {C : Type u} [Category.{v} C]
 /-- The compatibility assertions for the specified evaluation and its specified transpose.
 This packages the conclusion, including the connecting square of triangles. The shift
 isomorphisms include coherence for zero and addition, through Functor.CommShift.
-Source: Stacks Project, Tags 08J9 and 08JC (blueprint: lem-weil-duality-pairing). -/
+Source: Stacks Project, Tags 08J9 and 08JC (blueprint: definition-verdier-dual-evaluation--4). -/
 def DualityPairingCompatibility {C : Type u} [Category.{v} C]
     [HasShift C ℤ] [HasZeroObject C] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -319,7 +319,7 @@ private theorem nativeTensorRaw
 /-- Evaluation and biduality with specified tensor, Hom, adjunction and interchange.
 The predicate P fixes the interchange by its components; the remaining clauses are the
 normalizations, naturality, integral shift coherence and triangle morphism.
-Source: Stacks Tags 08J9 and 08JC (blueprint: lem-weil-duality-pairing). -/
+Source: Stacks Tags 08J9 and 08JC (blueprint: definition-verdier-dual-evaluation--4). -/
 private def NormalizedDualityPairing {C : Type u} [Category.{v} C]
     [HasShift C ℤ] [HasZeroObject C] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -376,7 +376,7 @@ The tensor symmetry is the descended Koszul symmetry. After interchanging its fa
 evaluation corresponds to the identity under tensor-Hom adjunction. The arrow δ is its
 transpose, rather than an arbitrary natural map with the same endpoints.
 Source: Stacks Project, Tags 08J9, 08JA and 08JC
-(blueprint: lem-weil-duality-pairing). -/
+(blueprint: definition-verdier-dual-evaluation--4). -/
 def AmbientDualityPairing
     (W : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) : Prop :=
   ∃ b : derivedTensor A X ≅ (derivedTensor A X).flip,
@@ -408,7 +408,7 @@ The tensor symmetry is the descended Koszul symmetry. After interchanging its fa
 evaluation corresponds to the identity under tensor-Hom adjunction. The arrow δ is its
 transpose, rather than an arbitrary natural map with the same endpoints.
 Source: Stacks Project, Tags 08J9, 08JA and 08JC
-(blueprint: lem-weil-duality-pairing). -/
+(blueprint: definition-verdier-dual-evaluation--4). -/
 def AmbientDualityPairing
     (W : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) : Prop :=
   let T : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤
@@ -448,7 +448,7 @@ triangles, on the entire ambient derived category. The dualizing object is the o
 ambient exceptional inverse image of A, not a constructible exceptional functor.
 
 Source: Weil conjectures blueprint, order 2122; Stacks Project, Tags 08J9, 08JA and 08JC
-(blueprint: lem-weil-duality-pairing).
+(blueprint: definition-verdier-dual-evaluation--4).
 
 Proof:
 1. On a small ringed site, use lem-weil-pbc-ringed-internal-hom-exact-restriction and
@@ -587,7 +587,7 @@ variable (A : Type a) [Category.{u + 1} A] [Abelian A]
 Its value is uniquely determined: the symmetry is fixed to the descended Koszul
 symmetry, evaluation is the adjunct of the identity, and this arrow is its transpose.
 Thus this extracts determined data, rather than choosing an arbitrary pairing.
-Source: Stacks Project, Tags 08J9 and 08JA (blueprint: lem-weil-duality-pairing). -/
+Source: Stacks Project, Tags 08J9 and 08JA (blueprint: definition-verdier-dual-evaluation--4). -/
 noncomputable def Etale.AmbientDualityPairing.bidualityMap
     {W : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (h : Etale.AmbientDualityPairing A X W)
@@ -597,7 +597,7 @@ noncomputable def Etale.AmbientDualityPairing.bidualityMap
 
 /-- The double-dual morphism specified by the pro-etale evaluation-pairing theorem.
 The normalization fixes its value uniquely, just as in the etale presentation.
-Source: Stacks Project, Tags 08J9 and 08JA (blueprint: lem-weil-duality-pairing). -/
+Source: Stacks Project, Tags 08J9 and 08JA (blueprint: definition-verdier-dual-evaluation--4). -/
 noncomputable def ProEtale.AmbientDualityPairing.bidualityMap
     {W : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
     (h : ProEtale.AmbientDualityPairing A X W)
@@ -613,7 +613,7 @@ namespace AlgebraicGeometry.Etale
 Naming this predicate keeps the large derived-monoidal instance out of the implicit
 predicate argument to Classical.choose; it imposes exactly the original HEq clause.
 Source: ambient_duality_pairing proof step 1; Stacks 08J9 and 08JA
-(blueprint: lem-weil-duality-pairing). -/
+(blueprint: definition-verdier-dual-evaluation--4). -/
 def IsEtaleKoszulSymmetry (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
     (b : ∀ M N : DerivedCategoryModule A X,
       ((derivedTensor (ModuleCat.{u + 1} A) X).obj M).obj N ≅

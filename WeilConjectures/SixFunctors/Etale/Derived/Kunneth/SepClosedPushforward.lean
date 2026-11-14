@@ -20,7 +20,7 @@ projective object (`AlgebraicGeometry.Etale.projective_freeSheaf_of_isSepClosed`
 image `f_*` along any morphism `f : Spec L ⟶ Y` is exact
 (`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isSepClosed`), and hence the
 higher direct images vanish (`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isSepClosed`,
-the second half of blueprint `lem-kun-0ezp`).
+the second half of blueprint `lemma-sheaves-finite-support-finite-morphisms--1`).
 -/
 
 @[expose] public section
@@ -63,9 +63,9 @@ instance preservesHomology_lowerStar_of_isSepClosed {Y : Scheme.{u}} (f : Spec (
     ((f)_*[ModuleCat.{u + 1} Λ]).PreservesHomology :=
   Functor.preservesHomology_of_preservesEpis_and_kernels _
 
-/-- Blueprint `lem-kun-0ezp`, second half: for a separably closed field `L` and any morphism
-`f : Spec L ⟶ Y`, the higher direct images `R^q f_* F` vanish for `q ≠ 0`, the direct image
-`f_*` being exact. -/
+/-- Blueprint `lemma-sheaves-finite-support-finite-morphisms--1`, second half: for a separably
+closed field `L` and any morphism `f : Spec L ⟶ Y`, the higher direct images `R^q f_* F` vanish for
+`q ≠ 0`, the direct image `f_*` being exact. -/
 theorem isZero_higherDirectImage_of_isSepClosed {Y : Scheme.{u}} (f : Spec (.of L) ⟶ Y)
     (F : Sheaf (Spec (.of L)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) {q : ℤ} (hq : q ≠ 0) :
     IsZero (Etale.higherDirectImage Λ f q F) := by

@@ -15,8 +15,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-! # Shrinking equality for a single finite free complex
 
-Source: lem-pc-perfect-locus, extension of finite calculations near a point.
-(blueprint: lem-pc-finite-free-stalk-homotopy-q-inside)
+Source: lemma-coherent-base-change-invertible-sheaves--3, extension of finite calculations near a
+point. (blueprint: lem-pc-finite-free-stalk-homotopy-q-inside)
 -/
 
 @[expose] public section

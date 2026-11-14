@@ -22,7 +22,7 @@ the identification `PullbackData g A (g^* A)`. Hence the base change theorem
 
 - `AlgebraicGeometry.Scheme.GradedAlgebraData.pullbackOfIsAffine` — the pullback `g^* A`.
 - `AlgebraicGeometry.Scheme.GradedAlgebraData.pullbackDataOfIsAffine` — its identification with
-  the coefficientwise pullback (blueprint: `prop-nagata-relative-proj-functoriality`, item 4).
+  the coefficientwise pullback (blueprint: `definition-admissible-blow-up--1`, item 4).
 -/
 
 @[expose] public section
@@ -241,7 +241,7 @@ lemma pullbackMap_res_res {U' : X'.affineOpens} {U V : X.affineOpens} (h : U'.1 
 
 /-- The pullback `g^* A` of a quasi-coherent graded algebra along a morphism to an affine scheme
 is identified with the coefficientwise pullback of `A`; in particular `PullbackData` is not
-vacuous. (blueprint: `prop-nagata-relative-proj-functoriality`, item 4) -/
+vacuous. (blueprint: `definition-admissible-blow-up--1`, item 4) -/
 noncomputable def pullbackDataOfIsAffine : PullbackData g A (A.pullbackOfIsAffine g) where
   map h := A.pullbackMap g h
   isGradedBaseChangeAlong h := A.isGradedBaseChangeAlong_pullbackMap g h
@@ -250,7 +250,7 @@ noncomputable def pullbackDataOfIsAffine : PullbackData g A (A.pullbackOfIsAffin
 
 /-- **Base change of relative `Proj` over an affine base**: for `X` affine and any
 `g : X' ⟶ X`, `Proj_{X'}(g^* A) ≅ X' ×_X Proj_X(A)`.
-(blueprint: `prop-nagata-relative-proj-functoriality`, item 4) -/
+(blueprint: `definition-admissible-blow-up--1`, item 4) -/
 theorem isPullback_pullbackOfIsAffine :
     IsPullback (A.pullbackDataOfIsAffine g).relProjComparison
       (A.pullbackOfIsAffine g).relProjHom A.relProjHom g :=

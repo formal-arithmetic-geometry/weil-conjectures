@@ -26,11 +26,11 @@ The four finiteness inputs the purity chapter takes from the six-functor formali
 * `Rf_*` and `Rf_!` preserve bounded constructibility, with a cohomological-dimension bound
   in terms of the fibre dimension (`sk-prop-sf-finiteness`);
 * compactly supported cohomology is a perfect complex of `Λ`-modules
-  (`sk-prop-sf-trace-perfectness`);
+  (`lemma-perfect-complexes-geometric-point`);
 * finite Tor amplitude in `[a, b]` is the same as admitting a bounded flat model concentrated
-  in `[a, b]` (`sk-lem-sf-flat-model`);
+  in `[a, b]` (`lemma-flat-models-generators`);
 * the Künneth formula and the projection formula in ordinary étale cohomology
-  (`sk-prop-sf-kunneth-ordinary`).
+  (`proposition-ordinary-external-kunneth--1`).
 
 Throughout, `Λ` is a finite coefficient ring whose exponent is invertible on the schemes in
 question (`AlgebraicGeometry.HasInvertibleExponent`) and the schemes are of finite type over a

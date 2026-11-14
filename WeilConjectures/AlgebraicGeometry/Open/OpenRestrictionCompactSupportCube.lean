@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Open.OpenSupportCompactificationNatural
 
 /-! # The compact-support cube for restriction to an open
 
-Source: blueprint `prop-asd-smooth-base-change`, coherence (i).
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
 -/
 
 @[expose] public section
@@ -27,7 +27,7 @@ attribute [local irreducible] openRestrictionGraphIso sfGraphCompactificationCom
   derivedOpenImmersionLowerShriekBaseChangeIso
 
 /-- The two compact-support pastings on an open-restriction cube agree.
-Source: blueprint `prop-asd-smooth-base-change`, coherence (i).
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
 
 Proof: expand the support comparison into its graph comparison, proper/open
 interchange, and open-composition factors. Compute both paths on the product of

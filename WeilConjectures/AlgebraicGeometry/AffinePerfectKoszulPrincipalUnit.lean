@@ -34,7 +34,8 @@ Proof:
 1. The Koszul terms are finite free exterior powers and vanish above degree `r`
    (`def-weil-pbc-koszul-complex`). Deleting degree zero and negating the
    differential leaves a bounded finite free complex. Its associated sheaf is
-   strictly perfect, hence its derived object is perfect (`def-pc-perfect-complex`).
+   strictly perfect, hence its derived object is perfect
+   (`lemma-coherent-base-change-invertible-sheaves--1`).
 2. On `D(f i)`, the element `(f i)^e` is invertible. Exterior multiplication by
    `(f i)^(-e) e_i` contracts the localized Koszul complex: the differential's
    formula gives `dh + hd = id` (Stacks, Tags 0626 and 0663). The Koszul triangle

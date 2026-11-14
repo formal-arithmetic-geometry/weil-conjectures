@@ -12,8 +12,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStar
 
 /-! # Uniform upper bound for the discarded lower tail
 
-Source: blueprint `sk-lem-proper-unbounded-window` and
-`det-prop-int-compactness-direct-sums` (1)-(2).
+Source: blueprint `lemma-proper-direct-image-unbounded-complexes` and
+`proposition-compactness-proper-direct-image--2` (1)-(2).
 (blueprint: lem-sfb-adic-proper-truncation-bound)
 -/
 
@@ -43,8 +43,8 @@ set_option linter.unusedSectionVars false in
 /-- The direct image of a sufficiently low lower tail has no cohomology in
 degree `q` or above, uniformly on the bounded constructible localizing hull.
 
-Source: blueprint `sk-lem-proper-unbounded-window` (arbitrary-complex clause)
-and `det-prop-int-compactness-direct-sums` (1)-(2).
+Source: blueprint `lemma-proper-direct-image-unbounded-complexes` (arbitrary-complex clause)
+and `proposition-compactness-proper-direct-image--2` (1)-(2).
 (blueprint: lem-sfb-adic-proper-truncation-bound)
 
 Proof: the schemes and their locally closed strata are Noetherian. The class

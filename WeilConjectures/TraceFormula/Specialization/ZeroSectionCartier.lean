@@ -22,8 +22,8 @@ Let `X` be a separated `k`-scheme of finite type, `I` an ideal sheaf on `X` with
 (`ProEtale.CondensedRing.isInvertible_comap_blowupOverHom`), so `Z' = b⁻¹ Z` is an effective
 Cartier divisor of `X'`.
 
-This file proves (blueprint `det-sp-zero-section-cartier`) that the defect `C_{X,Z}(L)` of a
-bounded constructible complex `L` with `Li^* L = 0` is computed on the blow-up:
+This file proves (blueprint `theorem-verdier-s-theorem-specialization-zero`) that the defect
+`C_{X,Z}(L)` of a bounded constructible complex `L` with `Li^* L = 0` is computed on the blow-up:
 `C_{X,Z}(L) ≅ Rb_{Z*} C_{X',Z'}(Lb^* L)`
 (`ProEtale.CondensedRing.nonempty_specializationDefect_iso_blowup`).
 
@@ -237,9 +237,10 @@ noncomputable def lowerStarUpperStarBlowupOverHomIso
     asIso ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ
       (overRestrictι X I.support.compl)).counit.app _)
 
-/-- **Reduction of the defect to a Cartier divisor** (blueprint `det-sp-zero-section-cartier`):
-for `L` bounded constructible on `X` with `Li^* L = 0` and `b : X' ⟶ X` the blow-up along `I`,
-`C_{X,Z}(L) ≅ Rb_{Z*} C_{X',Z'}(Lb^* L)`, where `Z' = V(b^* I)` is an effective Cartier divisor
+/-- **Reduction of the defect to a Cartier divisor** (blueprint
+`theorem-verdier-s-theorem-specialization-zero`): for `L` bounded constructible on `X` with
+`Li^* L = 0` and `b : X' ⟶ X` the blow-up along `I`, `C_{X,Z}(L) ≅ Rb_{Z*} C_{X',Z'}(Lb^* L)`, where
+`Z' = V(b^* I)` is an effective Cartier divisor
 (`ProEtale.CondensedRing.isInvertible_comap_blowupOverHom`). Here the isomorphism is only asserted
 to exist. -/
 theorem nonempty_specializationDefect_iso_blowup

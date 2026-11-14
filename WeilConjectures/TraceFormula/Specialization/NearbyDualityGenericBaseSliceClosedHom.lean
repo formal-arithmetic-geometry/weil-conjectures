@@ -18,8 +18,8 @@ along the special-fibre map `p : 𝒳''_s ⟶ X'` and the generic-fibre map `c :
 with internal Hom
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_closedHomComparison_sliceSpecialUpperStar`,
 `NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_closedHomComparison_genericSliceUpperStar`).
-This is blueprint `det-pd-generic-closed-hom` (2) (`sk-lem-pd-generic-restriction`) for the two
-pullbacks:
+This is blueprint `lemma-restriction-geometric-generic-fibre` (2)
+(`lemma-restriction-geometric-generic-fibre`) for the two pullbacks:
 
 * `p` is the base change along the special coordinate `𝒳_s ⟶ 𝔸¹_{k'}` of the geometric generic
   point `Spec K ⟶ 𝔸¹_{k'}` (`NearbyCyclesModel.isPullback_sliceSpecialMap_traitSlicePoint`), so
@@ -80,7 +80,7 @@ omit [Fact (ringChar F).Prime] [Fact (ringChar F ≠ ℓ)] [IsSepClosed k'] [Loc
   [QuasiCompact (genericSliceBase (traitSliceCoord k') hb).hom]
   [IsSeparated (genericSliceBase (traitSliceCoord k') hb).hom] in
 /-- **The pullback to the special fibre of a generic slice commutes with internal Hom**
-(blueprint `det-pd-generic-closed-hom` (2), for the geometric generic fibre
+(blueprint `lemma-restriction-geometric-generic-fibre` (2), for the geometric generic fibre
 `𝒳''_s = 𝒳_s ×_{𝔸¹_{k'}} Spec K` of the coordinate): the comparison
 `p^* RHom(A, ω_{X'}) ⟶ RHom(p^* A, p^* ω_{X'})` is an isomorphism. -/
 theorem isIso_closedHomComparison_sliceSpecialUpperStar
@@ -105,7 +105,7 @@ omit [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
   [QuasiCompact (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom]
   [IsSeparated (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom] in
 /-- **The pullback to the base of a generic slice commutes with internal Hom** (blueprint
-`det-pd-generic-closed-hom` (2), on the generic fibres): the comparison
+`lemma-restriction-geometric-generic-fibre` (2), on the generic fibres): the comparison
 `c^* RHom(A, ω_{X₁}) ⟶ RHom(c^* A, c^* ω_{X₁})` is an isomorphism. -/
 theorem isIso_closedHomComparison_genericSliceUpperStar
     (A : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :

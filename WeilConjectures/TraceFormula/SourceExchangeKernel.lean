@@ -12,8 +12,9 @@ public import WeilConjectures.TraceFormula.SourceExchangeKunneth
 # Identity (a) of the trace-class source exchange
 
 `κ_Y ∘ ρ_f = Φ ∘ Rq_* κ_X` (`ProEtale.CondensedRing.kernelPushforward_comp_kunnethVerdierMap`,
-blueprint `lem-trf-trace-source-exchange`, Step 3), assembled from the evaluation part and the
-exceptional Künneth part proved in `WeilConjectures.TraceFormula.SourceExchangeKunneth`.
+blueprint `theorem-proper-pushforward-lefschetz-verdier--1`, Step 3), assembled from the evaluation
+part and the exceptional Künneth part proved in
+`WeilConjectures.TraceFormula.SourceExchangeKunneth`.
 
 -/
 
@@ -58,7 +59,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   (f : X ⟶ Y) [IsProper f.left] (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
 
 /-- **The kernel pushforward and the Künneth–Verdier isomorphisms** (blueprint
-`lem-trf-trace-source-exchange`, identity (a)): `κ_Y ∘ ρ_f = Φ ∘ Rq_* κ_X`. -/
+`theorem-proper-pushforward-lefschetz-verdier--1`, identity (a)): `κ_Y ∘ ρ_f = Φ ∘ Rq_* κ_X`. -/
 theorem kernelPushforward_comp_kunnethVerdierMap :
     kernelPushforward ℓ f K ≫
         kunnethVerdierMap ℓ ((boundedConstructibleLowerStar ℓ f).obj K)

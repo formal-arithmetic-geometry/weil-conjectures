@@ -15,9 +15,9 @@ Let `q : Y ⟶ B` be a morphism of separated `k`-schemes of finite type and `T �
 finite over `B`. A bounded constructible `ℚ̄_ℓ`-complex `E` on `Y` supported on `T` with
 `Rq_* E = 0` vanishes
 (`ProEtale.CondensedRing.isZero_of_isZero_rightDerivedLowerStar_of_isFinite`). This is the node
-`det-sp-constant-family-conservative` of the blueprint subsection `sk-lem-tf-sp-constant-family`,
-stated here for `ℚ̄_ℓ`-coefficients as an input of the proof of blueprint
-`det-sp-zero-section-affine-space`.
+`lemma-nearby-cycles-constant-family` of the blueprint subsection
+`lemma-nearby-cycles-constant-family`, stated here for `ℚ̄_ℓ`-coefficients as an input of the proof
+of blueprint `theorem-verdier-s-theorem-specialization-zero`.
 
 The subset `T`, the image of a morphism `t : T' ⟶ Y` finite over `B`, is closed; give it the
 structure of the scheme-theoretic image `u : T₀ ⟶ Y` of `t`.
@@ -64,11 +64,12 @@ lemma isZero_upperStar_opensOverι_of_le_opensRange {Y : Over (Spec (.of k))}
     (key _ (IsOpenImmersion.lift_fac _ _ _))
 
 /-- **Direct image is conservative on finite support** (blueprint
-`det-sp-constant-family-conservative`, a node of the subsection `sk-lem-tf-sp-constant-family`, for
-`ℚ̄_ℓ`-coefficients): let `q : Y ⟶ B` be a morphism of separated `k`-schemes of finite type and
-`T ⊆ Y` a closed subset finite over `B`, given as the image of a morphism `t : T' ⟶ Y` with
-`T' ⟶ B` finite. If `E` is bounded constructible on `Y` and supported on `T` (every point outside
-`T` has an open neighbourhood on which `E` vanishes) and `Rq_* E = 0`, then `E = 0`. -/
+`lemma-nearby-cycles-constant-family`, a node of the subsection
+`lemma-nearby-cycles-constant-family`, for `ℚ̄_ℓ`-coefficients): let `q : Y ⟶ B` be a morphism of
+separated `k`-schemes of finite type and `T ⊆ Y` a closed subset finite over `B`, given as the image
+of a morphism `t : T' ⟶ Y` with `T' ⟶ B` finite. If `E` is bounded constructible on `Y` and
+supported on `T` (every point outside `T` has an open neighbourhood on which `E` vanishes) and
+`Rq_* E = 0`, then `E = 0`. -/
 theorem isZero_of_isZero_rightDerivedLowerStar_of_isFinite {Y B : Over (Spec (.of k))}
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] [IsSeparated B.hom] (q : Y ⟶ B)

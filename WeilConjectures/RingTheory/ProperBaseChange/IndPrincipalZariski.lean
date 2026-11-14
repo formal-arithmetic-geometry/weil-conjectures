@@ -12,7 +12,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 /-! # Ind-etale, principal ind-Zariski, and weakly etale algebras
 
 Source: blueprint, proper base change, definition of ind-etale and ind-Zariski algebras
-(blueprint: def-weil-pbc-ind-etale-algebra).
+(blueprint: definition-ind-etale-pro-etale-weakly).
 
 ## Main definitions
 
@@ -39,7 +39,7 @@ namespace Algebra
 /-- An `A`-algebra `B` is ind-Zariski in the blueprint's principal-localization sense if it
 is a filtered colimit of finite products of algebras `A_f`. The empty finite product is
 allowed. Source: blueprint, proper base change, definition of ind-etale and ind-Zariski
-algebras (blueprint: def-weil-pbc-ind-etale-algebra). -/
+algebras (blueprint: definition-ind-etale-pro-etale-weakly). -/
 def IsIndPrincipalZariski (A B : Type u) [CommRing A] [CommRing B] [Algebra A B] : Prop :=
   ∃ (I : Type u) (_ : SmallCategory I) (_ : IsFiltered I)
     (P : ColimitPresentation I (CommAlgCat.of A B)),

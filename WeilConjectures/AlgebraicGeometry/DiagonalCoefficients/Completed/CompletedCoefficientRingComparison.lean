@@ -24,7 +24,7 @@ import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # The projection-normalized completed coefficient ring comparison
 
-Source: the integral limit comparison in sk-prop-sfb-qlbar-colimit-x.
+Source: the integral limit comparison in lemma-comparison-completed-coefficients.
 (blueprint: lem-diagonal-completed-coefficient-ring-comparison).
 -/
 

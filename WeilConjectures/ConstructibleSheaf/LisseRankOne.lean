@@ -31,7 +31,7 @@ namespace AlgebraicGeometry.Scheme
 
 variable {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- Blueprint `pur9-cs-def-lisse`: Lisse sheaf of rank one.
+/-- Blueprint `definition-lisse-sheaves--1`: Lisse sheaf of rank one.
 
 A sheaf `L` of `Λ`-modules on `X_ét` is *lisse of rank one* if there is an étale cover
 `{u_α : X_α ⟶ X}` of `X` such that each étale pullback `u_α^* L`

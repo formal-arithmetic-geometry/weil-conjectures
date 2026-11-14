@@ -31,7 +31,7 @@ attribute [local irreducible] comparisonUpperStar cartierUnitsComparison
 /-- For n>0 invertible on Z, commutative rings R,A killed by n and a hom φ:R→A, let
 θ:ν*(R_Z(1))→Res(ν*(A_Z(1))) be normalized on pure root tensors through the comparison adjunction
 units. Then the pro-etale root map for R followed by forget(θ) equals the pro-etale root map for A
-[def-sfb-cartier-reduction-data, sk-lem-geo-cartier].
+[def-sfb-cartier-reduction-data, lemma-cycle-class-cartier-divisor].
 Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
 06YY and 0GLZ (blueprint: lem-sp-cartier-pro-root-scalar).
 Proof: Unfold the root map and cancel its common inverse roots comparison. Transpose the remaining

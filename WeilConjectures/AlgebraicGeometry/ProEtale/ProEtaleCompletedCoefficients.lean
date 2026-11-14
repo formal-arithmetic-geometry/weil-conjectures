@@ -64,7 +64,7 @@ import WeilConjectures.NumberTheory.Padics.IntegersAlgebra
 
 Source: literature/blueprint/latest/blueprint/sec-proetale-coefficients/
 sk-prop-sfb-qlbar-colimit-x/_section.md and its two proof files
-(blueprint: sk-prop-sfb-qlbar-colimit-x).
+(blueprint: lemma-comparison-completed-coefficients).
 
 The integral comparison is stated as a limit universal property, with its reductions
 normalized on constant sections. Rationalization is stated as the sequential module
@@ -272,12 +272,12 @@ specialization to `ℤ_ℓ` and `ℚ_ℓ`.
 
 Source: literature/blueprint/latest/blueprint/sec-proetale-coefficients/
 sk-prop-sfb-qlbar-colimit-x/_section.md, all displayed formulas
-(blueprint: sk-prop-sfb-qlbar-colimit-x).
+(blueprint: lemma-comparison-completed-coefficients).
 
-Proof: (1) det-prop-sfb-qlbar-colimit-x-integral-limit identifies both the pulled-back
+Proof: (1) lemma-comparison-completed-coefficients--1 identifies both the pulled-back
 integers and the inverse limit of constant reductions with the sheaf represented by
 `X[𝒪_E]`; their ring operations agree by representability. This supplies the normalized
-limit cone. (2) det-prop-sfb-qlbar-colimit-x-invert-ell identifies the sequential module
+limit cone. (2) lemma-comparison-completed-coefficients--2 identifies the sequential module
 colimit with `E_X` by the maps `ℓ^(-m) φ`. The ring structure is the localization one;
 its universal property gives the final clause of SfbCompletedCoefficientComparison.
 (3) On the point, each section of the algebraic-closure coefficients lies in a finite
@@ -293,8 +293,9 @@ integral cone is still limiting; this does not assert preservation of arbitrary 
 `upperStarFromPointComp` respects every inclusion and every multiplication by `ℓ`.
 Uniqueness of the induced colimit maps gives precisely the displayed naturality of
 all the rationalization legs and the finite-field legs. (7) At `E = ℚ_ℓ`, the integers
-are `ℤ_ℓ`, with uniformizer `ℓ` and quotients `ZMod (ℓ^n)` by def-weil-l-adic-numbers;
-these identifications commute with reductions, giving the last two formulas.
+are `ℤ_ℓ`, with uniformizer `ℓ` and quotients `ZMod (ℓ^n)` by
+lemma-comparison-completed-coefficients--4; these identifications commute with reductions, giving
+the last two formulas.
 -/
 theorem sfb_completed_coefficients (ℓ : ℕ) [Fact ℓ.Prime] :
     (∀ (E : PadicAlgCl.FiniteIntermediateField ℓ)

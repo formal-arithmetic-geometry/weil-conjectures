@@ -12,7 +12,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
 
 /-! # Descent of exceptional base change from affine base charts
 
-Source: blueprint `prop-asd-smooth-base-change`, coherences (i) and (iii).
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherences (i) and
+(iii).
 -/
 
 @[expose] public section
@@ -23,11 +24,11 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Locality on the base of invertibility of the exceptional base-change mate.
-Source: blueprint prop-asd-smooth-base-change, proof, restriction to base charts and descent.
-For each affine open of the base, suppose the restricted morphism satisfies arbitrary base
-change. Then the original morphism satisfies base change. Restrict a chosen compactification
-and its proper/open exchange to the affine cover, use horizontal pasting of exchange maps,
-and take mates. The restrictions of the original mate differ from the local mates by
+Source: blueprint proposition-exceptional-inverse-image-smooth-morphism--6, proof, restriction to
+base charts and descent. For each affine open of the base, suppose the restricted morphism satisfies
+arbitrary base change. Then the original morphism satisfies base change. Restrict a chosen
+compactification and its proper/open exchange to the affine cover, use horizontal pasting of
+exchange maps, and take mates. The restrictions of the original mate differ from the local mates by
 invertible open-restriction comparisons. The inverse images of the affine opens cover the
 base-changed source, so their exact inverse-image functors jointly detect isomorphisms.
 (blueprint: lem-asd-exceptional-base-change-affine-locality) -/

@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteMo
 /-! # The fixed-scalar pro-etale finite-Tor constructible category
 
 Source: Weil conjectures blueprint, sec-smooth-purity/sk-def-sf-operations,
-order 1464 (blueprint: def-weil-finite-tor-amplitude).
+order 1464 (blueprint: definition-constructible-sheaves).
 
 The pro-etale predicate is transported through the recorded canonical coefficient
 realization. It uses precisely the intrinsic constant-ring predicate, without replacing
@@ -34,7 +34,7 @@ namespace WeilConjectures
 /-- The fixed-coefficient module-sheaf presentation of the recorded pro-etale
 `Dᵇ_ctf(Y,A_{E,n})`. Applying the exact canonical realization termwise identifies
 this with the original full subcategory of modules over the constant ring sheaf.
-Source: blueprint order 1464 (blueprint: def-weil-finite-tor-amplitude). -/
+Source: blueprint order 1464 (blueprint: definition-constructible-sheaves). -/
 noncomputable def finiteTorConstructibleProEtaleModule
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : Scheme.{u}) :

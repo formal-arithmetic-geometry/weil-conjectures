@@ -481,7 +481,8 @@ lemma weilSheafStalkTrace_unit (n : ℕ) (x : Spec (.of (AlgebraicClosure k)) �
 
 /-- The canonical Weil unit has local trace `1` at every point of degree `n ≠ 0`: its stalk is
 `ℚ̄_ℓ` in degree `0`, on which the Frobenius acts trivially (normalization test N1). This is the
-unit stalk trace used in the proof of the twisted variant of blueprint `cor-trf-point-counting`. -/
+unit stalk trace used in the proof of the twisted variant of blueprint
+`corollary-point-counting-zeta-function--2`. -/
 theorem weilStalkTraceAlternatingSum_weilUnit (n : ℕ) [NeZero n]
     (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left)
     (hx : x ≫ (e.pow n).hom.left = ((geometricFrobeniusField k).pow n).hom ≫ x) :

@@ -24,9 +24,9 @@ public import WeilConjectures.Compactification.Defs
 /-!
 # Proper pushforward and uniformly bounded coproducts
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-bounded.md
-(blueprint: det-proper-unbounded-window-ii-bounded).
+(blueprint: lemma-proper-direct-image-unbounded-complexes--3).
 
 Both coproducts are ambient unbounded derived coproducts. They are exhibited by colimit
 cofans, so their existence is part of the conclusion, rather than an extra hypothesis.
@@ -52,7 +52,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- Proper derived module pushforward commutes with sums of ind-constructible complexes
 in a common integer interval, for the finite subextension E of the fixed algebraic closure.
 Source: blueprint main-20261015, sk-lem-proper-unbounded-window-ii-bounded, statement
-(blueprint: det-proper-unbounded-window-ii-bounded).
+(blueprint: lemma-proper-direct-image-unbounded-complexes--3).
 
 Proof for stage 3:
 1. The module categories are Grothendieck abelian and have K-injective resolutions
@@ -66,7 +66,7 @@ Proof for stage 3:
    The cone formula (def-weil-abstract-derived-category) identifies the sum of the
    cones of chain maps with the cone of their sum, including its boundary and shift.
    Thus sums of distinguished triangles are distinguished. Cohomology commutes with
-   these sums and truncations retain ind-constructibility (det-ambient-ind-derived-sums).
+   these sums and truncations retain ind-constructibility (corollary-ambient-ind-derived).
 3. Properness gives quasi-compactness and quasi-separatedness
    (def-weil-proper-morphism, def-weil-finite-type-morphism,
    lem-pc-separated-quasi-separated). Higher direct images commute with sums on the
@@ -84,9 +84,9 @@ Proof for stage 3:
    and the coprojection equation identify this map with the canonical comparison.
    Cohomology detects isomorphisms (lem-weil-pbc-unbounded-derived-iso-cohomology).
 5. For a<b, use the truncation triangle tau_le_(b-1) M_i -> M_i -> H^b(M_i)[-b]
-   (def-kun-truncations, lem-weil-pbc-truncation-triangle), identifying tau_le_b M_i
-   with M_i by cohomology. Its outer terms are ind-constructible, in intervals
-   [a,b-1] and [b,b] (det-ambient-ind-derived-sums). Induction on b-a gives the
+   (proposition-open-direct-image-preserves-finite, theorem-pbc-injective-acyclicity), identifying
+   tau_le_b M_i with M_i by cohomology. Its outer terms are ind-constructible, in intervals
+   [a,b-1] and [b,b] (corollary-ambient-ind-derived). Induction on b-a gives the
    comparison isomorphism for the first terms; step 4 gives it for the third terms.
 6. Sum the pushed-forward triangles for the upper row and push forward the summed
    source triangles for the lower row. Both are distinguished by steps 1 and 2.
@@ -146,7 +146,7 @@ theorem properUnboundedWindowBounded
 /-- Proper derived module pushforward commutes with sums of ind-constructible complexes
 in a common integer interval, for the finite-subextension-valued condensed algebraic closure.
 Source: blueprint main-20261015, sk-lem-proper-unbounded-window-ii-bounded, statement
-(blueprint: det-proper-unbounded-window-ii-bounded).
+(blueprint: lemma-proper-direct-image-unbounded-complexes--3).
 
 Proof for stage 3:
 1. The module categories are Grothendieck abelian and have K-injective resolutions
@@ -160,7 +160,7 @@ Proof for stage 3:
    The cone formula (def-weil-abstract-derived-category) identifies the sum of the
    cones of chain maps with the cone of their sum, including its boundary and shift.
    Thus sums of distinguished triangles are distinguished. Cohomology commutes with
-   these sums and truncations retain ind-constructibility (det-ambient-ind-derived-sums).
+   these sums and truncations retain ind-constructibility (corollary-ambient-ind-derived).
 3. Properness gives quasi-compactness and quasi-separatedness
    (def-weil-proper-morphism, def-weil-finite-type-morphism,
    lem-pc-separated-quasi-separated). Higher direct images commute with sums on the
@@ -178,9 +178,9 @@ Proof for stage 3:
    and the coprojection equation identify this map with the canonical comparison.
    Cohomology detects isomorphisms (lem-weil-pbc-unbounded-derived-iso-cohomology).
 5. For a<b, use the truncation triangle tau_le_(b-1) M_i -> M_i -> H^b(M_i)[-b]
-   (def-kun-truncations, lem-weil-pbc-truncation-triangle), identifying tau_le_b M_i
-   with M_i by cohomology. Its outer terms are ind-constructible, in intervals
-   [a,b-1] and [b,b] (det-ambient-ind-derived-sums). Induction on b-a gives the
+   (proposition-open-direct-image-preserves-finite, theorem-pbc-injective-acyclicity), identifying
+   tau_le_b M_i with M_i by cohomology. Its outer terms are ind-constructible, in intervals
+   [a,b-1] and [b,b] (corollary-ambient-ind-derived). Induction on b-a gives the
    comparison isomorphism for the first terms; step 4 gives it for the third terms.
 6. Sum the pushed-forward triangles for the upper row and push forward the summed
    source triangles for the lower row. Both are distinguished by steps 1 and 2.

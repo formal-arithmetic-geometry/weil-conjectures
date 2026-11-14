@@ -20,7 +20,7 @@ model `X₀` over a finite field `k₀` and model Frobenius `Φ` (`IsModelFroben
 strictly local model in the sense of `AlgebraicGeometry.Etale.CurveLocalModel`
 (`AlgebraicGeometry.Etale.CurveLocalModel.ofModelFrobenius`): the contraction
 `Φ_m^♯ 𝔪_x ⊆ 𝔪_x²` is `AlgebraicGeometry.map_maximalIdeal_stalkMap_le_sq_of_isFrobenius`
-(blueprint `det-tf-supported-restriction`).
+(blueprint `lemma-local-term-restriction-map--1`).
 
 -/
 
@@ -40,7 +40,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {X : Over (Spec (.of k))}
   {f₀ : X₀ ⟶ Spec (.of k₀)} {p : X.left ⟶ X₀} {Φ : X ⟶ X}
 
 /-- **The strictly local model at a Frobenius fixed point** (blueprint
-`det-tf-supported-restriction`): for the model Frobenius `Φ` of a smooth curve `X` over `k`,
+`lemma-local-term-restriction-map--1`): for the model Frobenius `Φ` of a smooth curve `X` over `k`,
 `m ≥ 1` and a rational point `x` fixed by `Φ_m`, the curve `X` with the endomorphism `Φ_m` and
 the fixed point `x`. The contraction `Φ_m^♯ 𝔪_x ⊆ 𝔪_x²` holds since
 `Φ_m^♯ (t - a) = (t - a)^{q^m}` in a local coordinate. -/

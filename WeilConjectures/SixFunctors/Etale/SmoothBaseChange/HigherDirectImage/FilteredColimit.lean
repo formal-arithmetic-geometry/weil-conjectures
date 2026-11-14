@@ -293,7 +293,7 @@ private theorem Etale.preservesColimitsOfShape_higherDirectImage_of_app {X Y : S
 
 end ModuleSheafInstances
 
-/-- Blueprint `lemma-weil-pbc-direct-image-filtered-colimit`: Filtered colimits and higher
+/-- Blueprint `prose-04-17`: Filtered colimits and higher
 direct image.
 
 For a quasi-compact quasi-separated morphism `h : Y ⟶ X`, the higher direct image
@@ -316,7 +316,7 @@ theorem Etale.preservesFilteredColimitsOfSize_higherDirectImage {X Y : Scheme.{u
     ((Scheme.AffineEtale.Spec X).obj U) J
   exact preservesColimitsOfShape_of_natIso (Functor.associator _ _ _).symm
 
-/-- Blueprint `lemma-weil-pbc-direct-image-filtered-colimit`: Filtered colimits and higher
+/-- Blueprint `prose-04-17`: Filtered colimits and higher
 direct image, for filtered categories of any size
 (`AlgebraicGeometry.Etale.preservesFilteredColimitsOfSize_higherDirectImage`).
 

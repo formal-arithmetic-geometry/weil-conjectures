@@ -16,7 +16,7 @@ import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 # Torsion cohomological dimension of a finite-type scheme
 
 Source: literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/
-thm-sc-finite-type-torsion-cd.md (blueprint: thm-sc-finite-type-torsion-cd).
+thm-sc-finite-type-torsion-cd.md (blueprint: lemma-uniform-bounds-pro-etale-affines).
 -/
 
 @[expose] public section
@@ -54,7 +54,7 @@ private theorem subsingleton_H_of_subsingleton_derivedCohomology
  dimension at most `c` has torsion étale cohomological dimension at most `2 * d + c`.
 
 Source: blueprint, sec-smooth-purity/sk-prop-sf-cbc/thm-sc-finite-type-torsion-cd.md
-(blueprint: thm-sc-finite-type-torsion-cd).
+(blueprint: lemma-uniform-bounds-pro-etale-affines).
 
 Proof: Apply the affine-to-global Leray reduction
 `new-thm-sc-finite-type-torsion-cd-affine-reduction`, supplying the affine finite-type

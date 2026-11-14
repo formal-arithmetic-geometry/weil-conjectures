@@ -101,7 +101,8 @@ end
 
 /-- An evaluation transpose preserves normalized Hom shifts when the tensor comparison
 preserves cancellation of opposite shifts.
-Source: Stacks Project, Tags 08JC and 08J9; blueprint `thm-coef-finite-hom`, proof paragraph 2.
+Source: Stacks Project, Tags 08JC and 08J9; blueprint `lemma-change-coefficients-internal-hom--1`,
+proof paragraph 2.
 
 Proof. Cancel the target Hom shift and transpose using evaluation normalization. Tensor
 cancellation naturality moves the shifted comparison past cancellation. Cancel the scalar
@@ -203,7 +204,8 @@ private theorem etaleHomShiftNormalization_apply
   exact h K n
 
 /-- Derived tensor-Hom comparison respects normalized shifts.
-Source: Stacks Project, Tags 08JC and 08J9; blueprint `thm-coef-finite-hom`, proof paragraph 2.
+Source: Stacks Project, Tags 08JC and 08J9; blueprint `lemma-change-coefficients-internal-hom--1`,
+proof paragraph 2.
 
 Proof. Apply the abstract tensor-Hom evaluation chase to the derived tensor and Hom
 bifunctors. First-variable adjunction naturality and tensor-shift cancellation naturality

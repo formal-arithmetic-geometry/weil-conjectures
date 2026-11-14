@@ -29,8 +29,8 @@ namespace AlgebraicGeometry
 
 /-- On a smooth proper connected curve, Frobenius minus identity is onto in
  degree-zero additive cohomology.
- Source: blueprint `lem-sc-c5`, characteristic-p branch, and `lem-sc-c7`, paragraph 2;
- Stacks Project Tag 0A3P.
+ Source: blueprint `proposition-p-torsion-smooth-proper-curve--4`, characteristic-p branch, and
+ `proposition-p-torsion-smooth-proper-curve--4`, paragraph 2; Stacks Project Tag 0A3P.
  (blueprint: lem-sc-artin-schreier-proper-degree-zero)
 
  Proof: The natural section identifications a identify G with the additive structure

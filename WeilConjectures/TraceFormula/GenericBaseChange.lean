@@ -30,19 +30,19 @@ X ⨯ U ──(𝟙 × f)──▶ X ⨯ Y
 (`ProEtale.CondensedRing.commSq_prodMap_snd`) is cartesian, and its base change morphism
 `Lp_Y^* Rf_* ⟶ R(𝟙 × f)_* Lp_U^*` on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` is an isomorphism
 (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_prodMap`; blueprint
-`sk-lem-tf-independent-base-change`). Since `X` may be singular, smooth base change does not
-apply. Following the blueprint (`det-tf-ibc-pasting`), we choose a compactification
-`f = p ∘ i` with `i` an open immersion and `p` proper (Nagata). The square of `f` is the vertical
-pasting of the squares of `i` and of `p`, so its base change morphism is the pasting of theirs
-(`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_prodMap_comp`). The one of `p` is an
-isomorphism by proper base change, the one of `i` by base change for open direct images over a
-field.
+`lemma-base-change-along-product-projection`). Since `X` may be singular, smooth base change does
+not apply. Following the blueprint (`lemma-base-change-along-product-projection--1`), we choose a
+compactification `f = p ∘ i` with `i` an open immersion and `p` proper (Nagata). The square of `f`
+is the vertical pasting of the squares of `i` and of `p`, so its base change morphism is the pasting
+of theirs (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_prodMap_comp`). The one of
+`p` is an isomorphism by proper base change, the one of `i` by base change for open direct images
+over a field.
 
 The latter
 (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_prodMap_of_isOpenImmersion`, the
-`ℚ̄_ℓ` form of blueprint `det-geo-open-finiteness-base-change`) is deduced from finite
-coefficients as in the proof of blueprint `sk-thm-sbc-coefficients`: a bounded constructible
-`ℚ̄_ℓ`-complex has an integral model `K₀` over some `𝒪_E`
+`ℚ̄_ℓ` form of blueprint `corollary-open-direct-image-over-field--2`) is deduced from finite
+coefficients as in the proof of blueprint `theorem-smooth-base-change-all-admissible`: a bounded
+constructible `ℚ̄_ℓ`-complex has an integral model `K₀` over some `𝒪_E`
 (`ProEtale.exists_padicAlgCl_iso_integralModel`), the scalar comparisons identify the base change
 morphism at `ℚ̄_ℓ ⊗ᴸ K₀` with the extension of scalars of the integral one
 (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral`), derived
@@ -55,8 +55,9 @@ isomorphism by the étale theorem
 ## Main statements
 
 - `ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_prodMap_of_isOpenImmersion`:
-  base change for open direct images over a field (blueprint `sk-cor-geo-open-finiteness`,
-  `det-geo-open-finiteness-base-change`, section `sec-six-functors-basics`), in its `ℚ̄_ℓ` form.
+  base change for open direct images over a field (blueprint
+  `corollary-open-direct-image-over-field`, `corollary-open-direct-image-over-field--2`, section
+  `chap-Construction-of-f`), in its `ℚ̄_ℓ` form.
 - `ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_prodMap`: generic base change
   over the field `k` along `X ⨯ Y ⟶ Y`.
 
@@ -102,16 +103,16 @@ immersion `j : U ⟶ Y` of separated `k`-schemes of finite type and any separate
 finite type `X`, the base change morphism `Lp_Y^* Rj_* ⟶ R(𝟙 × j)_* Lp_U^*` of the square
 `commSq_prodMap_snd` is an isomorphism on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧`.
 
-This is the blueprint node `det-geo-open-finiteness-base-change` (equivalently the base change
-assertion of `sk-cor-geo-open-finiteness`), section `sec-six-functors-basics`, which states it for
-finite `ℓ`-primary coefficients; it is Deligne's generic base change theorem (SGA 4½,
+This is the blueprint node `corollary-open-direct-image-over-field--2` (equivalently the base change
+assertion of `corollary-open-direct-image-over-field`), section `chap-Construction-of-f`, which
+states it for finite `ℓ`-primary coefficients; it is Deligne's generic base change theorem (SGA 4½,
 [Th. finitude], Théorème 1.9) over the base `Spec k`, whose only nonempty open is itself.
 
 The finite-coefficient statement is
 `ProEtale.isIso_derivedBaseChangeMap_app_of_isOpenImmersion_of_field`. As in the proof of blueprint
-`sk-thm-sbc-coefficients`, a bounded constructible `ℚ̄_ℓ`-complex has an integral model `K₀` over
-some `𝒪_E`, the scalar comparisons reduce to the integral base change morphism at `K₀`
-(`isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral`), and derived Nakayama to its
+`theorem-smooth-base-change-all-admissible`, a bounded constructible `ℚ̄_ℓ`-complex has an integral
+model `K₀` over some `𝒪_E`, the scalar comparisons reduce to the integral base change morphism at
+`K₀` (`isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral`), and derived Nakayama to its
 first derived reduction, the pro-étale base change morphism with coefficients `𝔽_E` at a complex
 of étale origin (`isIso_boundedConstructibleBaseChange_integral_app_of_reduction`). -/
 theorem isIso_boundedConstructibleBaseChange_prodMap_of_isOpenImmersion (j : U ⟶ Y)
@@ -160,7 +161,7 @@ local notation "𝔽" => boundedConstructibleExchangeFormalism ℓ k
 /-- **Pasting of base change along a product projection**: if the base change morphisms of the
 squares `commSq_prodMap_snd i` and `commSq_prodMap_snd p` are isomorphisms, so is the one of
 `commSq_prodMap_snd (i ≫ p)`, the vertical pasting of the two squares (blueprint
-`det-tf-ibc-pasting`). -/
+`lemma-base-change-along-product-projection--1`). -/
 theorem isIso_boundedConstructibleBaseChange_prodMap_comp {Z : Over (Spec (.of k))}
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (i : U ⟶ Z) (p : Z ⟶ Y)
     (hi : IsIso (boundedConstructibleBaseChange ℓ
@@ -193,11 +194,11 @@ theorem isIso_boundedConstructibleBaseChange_prodMap_comp {Z : Over (Spec (.of k
 `k`-schemes of finite type and any `X`, the base change morphism
 `Lp_Y^* Rf_* ⟶ R(𝟙 × f)_* Lp_U^*` of the square `commSq_prodMap_snd`, i.e. of the base change
 of `f` along `X ⨯ Y ⟶ Y`, is an isomorphism on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` (blueprint
-`sk-lem-tf-independent-base-change`, stated there for finite coefficients; SGA 4½,
+`lemma-base-change-along-product-projection`, stated there for finite coefficients; SGA 4½,
 [Th. finitude], Théorème 1.9 over `Spec k`).
 
-Following the blueprint (`det-tf-ibc-pasting`), a Nagata compactification `f = p ∘ i` reduces it
-to the open immersion `i`
+Following the blueprint (`lemma-base-change-along-product-projection--1`), a Nagata compactification
+`f = p ∘ i` reduces it to the open immersion `i`
 (`isIso_boundedConstructibleBaseChange_prodMap_of_isOpenImmersion`) and the proper morphism `p`
 (`isIso_boundedConstructibleBaseChange_prodMap_of_isProper`). -/
 theorem isIso_boundedConstructibleBaseChange_prodMap (f : U ⟶ Y) :

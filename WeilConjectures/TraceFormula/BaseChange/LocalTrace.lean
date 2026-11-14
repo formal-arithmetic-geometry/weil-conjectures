@@ -20,7 +20,7 @@ the finite field `k`, and `x̄ : Spec k̄ ⟶ X` a geometric point with
 on the base change `Lπ^* K` to `X ×_k k̄`, a Weil object for the model Frobenius
 `Φ = (e^{n+1} ≫ F_X^{n+1}) ×_k k̄` (`weilGeometricBaseChange`): `x̄' = (x̄, 𝟙)` is fixed by `Φ`
 and `t_{n+1}(K; x̄)` is the supertrace of the homology of the local Frobenius `F_{x̄'}` of the
-iterate `(Lπ^* K, φ^{(n+1)})` at `x̄'`. By `prop-trf-trace-formal-laws`, item (4), this supertrace
+iterate `(Lπ^* K, φ^{(n+1)})` at `x̄'`. By `proposition-properties-trace`, item (4), this supertrace
 is the trace of `F_{x̄'}`.
 
 ## Main results
@@ -138,7 +138,7 @@ attribute [local instance] boundedConstructibleBraiding in
 degree `0`, the local trace `t_{n+1}(K; x̄)` is the trace of the local Frobenius `F_{x̄'}` at
 `x̄' = (x̄, 𝟙)` of the base change `Lπ^* K` of the iterate `(K, φ^{(n+1)})`, a Weil object for the
 model Frobenius `(e^{n+1} ≫ F_X^{n+1}) ×_k k̄`, on the dualizable stalk `(Lπ^* K)_x̄'`
-(blueprint `prop-trf-trace-formal-laws`, item (4)). The dualizability of the stalk is a
+(blueprint `proposition-properties-trace`, item (4)). The dualizability of the stalk is a
 hypothesis until the dualizability of stalks of objects of `Dᵇc` is available. -/
 theorem homologyUnitEndRingHom_weilStalkTraceAlternatingSum (K : WeilBoundedConstructible ℓ e.hom)
     [HasRightDual

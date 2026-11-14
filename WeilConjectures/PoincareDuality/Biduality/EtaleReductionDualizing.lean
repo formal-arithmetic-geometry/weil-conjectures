@@ -15,8 +15,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 Write `red_X : Dᵇc(X)⟦𝒪_E⟧ ⥤ D(X_ét, 𝒪_E ⧸ ℓⁿ)` for the reduction modulo `ℓⁿ` read on the small
 étale site (`ProEtale.CondensedRing.etaleReduction`). This file proves that `red_X` carries the
 integral dualizing complex `ω_{X, 𝒪_E} = Ra_X^! 𝒪_E` to the étale dualizing complex
-`ω_X = Ra_X^! (𝒪_E ⧸ ℓⁿ)` (blueprint `det-pd-biduality-coefficients`, proof of (ii), from the
-coefficient comparison for `f^!` of blueprint `det-prop-scalar-six-exceptional`).
+`ω_X = Ra_X^! (𝒪_E ⧸ ℓⁿ)` (blueprint `theorem-verdier-biduality`, proof of (ii), from the
+coefficient comparison for `f^!` of blueprint
+`lemma-change-coefficients-exceptional-inverse-image`).
 
 The reduction commutes canonically with `Ra_X^!` (`etaleReductionUpperShriekIso`, assembled from
 a compactification of `a_X` as an open immersion followed by a proper morphism), and it sends
@@ -72,10 +73,11 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.h
   [IsSeparated X.hom]
 
 /-- **The reduction of the integral dualizing complex is the étale dualizing complex**:
-`red_X (Ra_X^! 𝒪_E) ≅ Ra_X^! (𝒪_E ⧸ ℓⁿ)` (blueprint `det-prop-scalar-six-exceptional` for
-`𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site, at the unit): the canonical commutation of the
-reduction with `Ra_X^!` (`etaleReductionUpperShriekIso`) at the unit, followed by `Ra_X^!` of the
-reduction of the unit (`etaleReductionUnitIso`). -/
+`red_X (Ra_X^! 𝒪_E) ≅ Ra_X^! (𝒪_E ⧸ ℓⁿ)` (blueprint
+`lemma-change-coefficients-exceptional-inverse-image` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site,
+at the unit): the canonical commutation of the reduction with `Ra_X^!`
+(`etaleReductionUpperShriekIso`) at the unit, followed by `Ra_X^!` of the reduction of the unit
+(`etaleReductionUnitIso`). -/
 noncomputable def etaleReductionDualizingComplexIso :
     (etaleReduction ℓ E n X).obj (PadicIntegersRingObj.dualizingComplex ℓ E X) ≅
       Etale.dualizingComplex (integersModPowCoeff.{u} ℓ E n) X.hom :=

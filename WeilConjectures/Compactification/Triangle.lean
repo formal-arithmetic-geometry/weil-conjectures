@@ -24,8 +24,8 @@ cf.Z --cf.g--> Y
 cfg.Z ---p---> cg.Z
 ```
 is cartesian. This is the configuration on which the composition isomorphism
-`R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` is built (blueprint `sk-thm-sf-comp-composition`): extension by zero
-along `cg.i` commutes with the proper pushforward along `p`.
+`R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` is built (blueprint `proposition-composition-base-change-rf-shriek--1`):
+extension by zero along `cg.i` commutes with the proper pushforward along `p`.
 
 ## Main definitions
 

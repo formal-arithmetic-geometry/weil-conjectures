@@ -17,7 +17,7 @@ import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 # Finite subalgebras with prescribed fraction field
 
 Source: Stacks Project, More on Algebra, Tag 07PR, proof, finite algebra model paragraph
-(blueprint: lem-weil-pbc-finite-subalgebra-fraction-field).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -30,7 +30,7 @@ namespace MvPolynomial
 any finite extension `M` of its fraction field has a finite `A`-subalgebra with fraction
 field `M`. The scalar tower identifies the structural map `A → M` with `A → K → M`.
 Source: Stacks Project, More on Algebra, Tag 07PR, proof, finite algebra model paragraph
-(blueprint: lem-weil-pbc-finite-subalgebra-fraction-field).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 Proof (the source asserts the model's existence; Mathlib supplies denominator clearing):
 1. The power-series no-zero-divisor instance and polynomial domain instance prove that

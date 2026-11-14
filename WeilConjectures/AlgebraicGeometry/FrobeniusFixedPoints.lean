@@ -30,7 +30,7 @@ it is determined by its values on finitely many generators of `R`.
 ## Blueprint
 
 These are the finiteness step `A^σ = A₀(k₀)` finite of blueprint
-`prop-av-tate-no-frobenius-fixed`.
+`proposition-no-frobenius-fixed-vector`.
 -/
 
 @[expose] public section
@@ -49,7 +49,7 @@ points lie in `K`. Then only finitely many `Ω`-points of `X` over `K` lying in 
 `Spec R` are fixed by `σ`: such a point is a `K`-algebra map `R → Ω` with values in `K`, so it
 is determined by its values in `K` on finitely many generators of `R`.
 
-This is the chart computation of blueprint `prop-av-tate-no-frobenius-fixed`. -/
+This is the chart computation of blueprint `proposition-no-frobenius-fixed-vector`. -/
 theorem finite_setOf_spec_map_comp_eq_self_of_isOpenImmersion [Finite K] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of K)) {R : CommRingCat.{u}} (ι : Spec R ⟶ X) [IsOpenImmersion ι]
     [LocallyOfFiniteType (ι ≫ f)] (σ : Ω →+* Ω)
@@ -147,7 +147,7 @@ theorem finite_setOf_spec_map_comp_eq_self [Finite K] {X : Scheme.{u}} (f : X �
   rw [Subsingleton.elim y x, Scheme.Opens.range_ι]
   exact hxV
 
-/-- Blueprint `prop-av-tate-no-frobenius-fixed` (finiteness step): the geometric points of a
+/-- Blueprint `proposition-no-frobenius-fixed-vector` (finiteness step): the geometric points of a
 quasi-compact scheme `X` locally of finite type over a finite field `K` that are fixed by the
 arithmetic Frobenius `σ : x ↦ x ^ #K` of `K̄` form a finite set (they are the `K`-rational
 points of `X`). -/

@@ -128,8 +128,9 @@ theorem isDualizable_upperShriek_unit_of_smoothOfRelativeDimension (f : X ⟶ Y)
       (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ (overRestrictι X (U c))).app _)
 
 /-- **The relative dualizing complex of a smooth morphism is dualizable** (blueprint
-`sk-prop-sp-orientation`, `sk-prop-cohsm`: "`ω_f` is pro-étale locally isomorphic to
-`Λ_X(d)[2d]`"): on the open and closed subschemes where `f` has pure relative dimension it is
+`proposition-relative-dualizing-complex`, `proposition-exceptional-inverse-image-smooth-morphism`:
+"`ω_f` is pro-étale locally isomorphic to `Λ_X(d)[2d]`"): on the open and closed subschemes where
+`f` has pure relative dimension it is
 (`isDualizable_upperShriek_unit_of_smoothOfRelativeDimension`). -/
 theorem isDualizable_upperShriek_unit_of_smooth (f : X ⟶ Y) [Smooth f.left] :
     IsDualizable ((boundedConstructibleUpperShriek ℓ f).obj

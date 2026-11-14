@@ -28,7 +28,7 @@ sign, sums of traces of powers of local Frobenius of `K`, which are `ι`-real si
 - `AlgebraicGeometry.WeilSheaf.isReal_higherLowerShriek_one`: reality of `R¹f_!K` when the
   `Rᵛf_!K` vanish for `ν ≠ 1`.
 - `AlgebraicGeometry.WeilSheaf.isReal_higherLowerShriek_snd_one`
-  (`lem-fd-realness-pushforward`): the case of the second projection `𝔸² ⟶ 𝔸¹`.
+  (`proposition-purity-lisse-part-fourier-transform`): the case of the second projection `𝔸² ⟶ 𝔸¹`.
 -/
 
 @[expose] public section
@@ -107,7 +107,7 @@ restriction of `K` to `X_ξ` is `ι`-real, so `H_c^1(X_ξ ⊗ k̄, K)` is `ι`-r
 Grothendieck–Lefschetz trace formula
 (`AlgebraicGeometry.WeilSheaf.IsReal.isReal_compactlySupportedCohomology_of_subsingleton`),
 and the coefficients of `det(1 - T F_ξ)` are among those of its local polynomial.
-(blueprint: `lem-fd-realness-pushforward`, for a general `f`) -/
+(blueprint: `proposition-purity-lisse-part-fourier-transform`, for a general `f`) -/
 theorem isReal_higherLowerShriek_one {ι : PadicAlgCl l →+* ℂ} {K : WeilSheaf k₀ l X}
     (hK : K.IsReal ι) (hvan : ∀ ν : ℕ, ν ≠ 1 → IsZero ((higherLowerShriek k₀ l f ν).obj K)) :
     ((higherLowerShriek k₀ l f 1).obj K).IsReal ι := by
@@ -135,7 +135,7 @@ theorem isReal_higherLowerShriek_one {ι : PadicAlgCl l →+* ℂ} {K : WeilShea
 affine plane `𝔸¹ ×_{k₀} 𝔸¹` such that `Rpr₂!K` has no cohomology sheaves outside degree one,
 for the second projection `pr₂ : 𝔸¹ ×_{k₀} 𝔸¹ ⟶ 𝔸¹`. Then `R¹pr₂!K` is `ι`-real. This is the
 case `f = pr₂` of `AlgebraicGeometry.WeilSheaf.isReal_higherLowerShriek_one`.
-(blueprint: `lem-fd-realness-pushforward`) -/
+(blueprint: `proposition-purity-lisse-part-fourier-transform`) -/
 theorem isReal_higherLowerShriek_snd_one {ι : PadicAlgCl l →+* ℂ}
     {K : WeilSheaf k₀ l (affinePlane k₀)} (hK : K.IsReal ι)
     (hvan : ∀ ν : ℕ, ν ≠ 1 → IsZero ((higherLowerShriek k₀ l (affinePlane.snd k₀) ν).obj K)) :

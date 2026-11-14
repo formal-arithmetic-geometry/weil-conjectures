@@ -38,7 +38,7 @@ the universal point `𝟙 G`.
 
 ## Blueprint
 
-- `sk-p-comparison`: the adjoint representation `Ad : G → GL(Lie G)`.
+- `lemma-stable-subspaces-center`: the adjoint representation `Ad : G → GL(Lie G)`.
 -/
 
 @[expose] public section
@@ -187,7 +187,7 @@ variable {k : Type u} [Field k] {G : Over (Spec (.of k))} [GrpObj G] [LocallyOfF
 
 /-- The matrix of the conjugation `v ↦ x v x⁻¹` by an `X`-point `x` of `G` on the infinitesimal
 points of `G` with values in `X`, in the basis `(b_i)_X`: the `j`-th column holds the coordinates
-of `x (b_j)_X x⁻¹`. (blueprint: `sk-p-comparison`) -/
+of `x (b_j)_X x⁻¹`. (blueprint: `lemma-stable-subspaces-center`) -/
 noncomputable def adjointMatrix {X : Over (Spec (.of k))} (x : X ⟶ G) : Matrix I I Γ(X.left, ⊤) :=
   Matrix.of fun i j ↦ infPointsAtCoord b X (infPointsAtConj x (lieAt X (b j))) i
 
@@ -254,12 +254,12 @@ theorem adjointHom_comp {X Y : Over (Spec (.of k))} (φ : Y ⟶ X) (x : X ⟶ G)
 type over a field `k`, in a basis `(b_i)` of `Lie(G)`: the morphism to `GL_I` whose value at an
 `X`-point `x` of `G` is the matrix of the conjugation `v ↦ x v x⁻¹` on `Lie(G) ⊗ Γ(X, 𝒪_X)`
 (`homGLEquiv_comp_adjoint`). It is the value of these matrices at the universal point `𝟙 G`.
-(blueprint: `sk-p-comparison`) -/
+(blueprint: `lemma-stable-subspaces-center`) -/
 noncomputable def adjoint : G ⟶ 𝔾𝕃(I; k) :=
   (homGLEquiv I G).symm (adjointHom b G (𝟙 G))
 
 /-- The matrix of `Ad` at an `X`-point `x` of `G` is the matrix of the conjugation by `x` on the
-infinitesimal points with values in `X`. (blueprint: `sk-p-comparison`) -/
+infinitesimal points with values in `X`. (blueprint: `lemma-stable-subspaces-center`) -/
 theorem homGLEquiv_comp_adjoint {X : Over (Spec (.of k))} (x : X ⟶ G) :
     homGLEquiv I X (x ≫ adjoint b) = adjointHom b X x := by
   rw [homGLEquiv_comp, adjoint, MulEquiv.apply_symm_apply, ← adjointHom_comp, Category.comp_id]
@@ -306,7 +306,7 @@ theorem adjointMatrix_unit (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
 
 /-- **The adjoint representation at a rational point.** For a rational point `g` of `G`, `Ad(g)`
 is the matrix in the basis `(b_i)` of the differential `d(c_g)` of the conjugation by `g`, read
-in `Γ(Spec k, 𝒪) ≅ k`. (blueprint: `sk-p-comparison`) -/
+in `Γ(Spec k, 𝒪) ≅ k`. (blueprint: `lemma-stable-subspaces-center`) -/
 theorem homGLEquiv_comp_adjoint_unit (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
     ((homGLEquiv I _ (g ≫ adjoint b) : GL I _) :
       Matrix I I Γ((𝟙_ (Over (Spec (.of k)))).left, ⊤)) =
@@ -316,7 +316,7 @@ theorem homGLEquiv_comp_adjoint_unit (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) :
 
 /-- **The Lie algebra of a centralizer is the fixed space of `Ad(g)`.** A tangent vector `x` is
 tangent to the centralizer `C_G(g)` of a rational point `g` if and only if `Ad(g)` fixes its
-coordinates in the basis `(b_i)`. (blueprint: `sk-p-comparison`) -/
+coordinates in the basis `(b_i)`. (blueprint: `lemma-stable-subspaces-center`) -/
 theorem mem_range_differential_centralizerι_iff_adjoint (g : 𝟙_ (Over (Spec (.of k))) ⟶ G)
     (x : Lie G) :
     x ∈ (differential (centralizerι g)).range ↔
@@ -453,7 +453,8 @@ theorem infPointsAtConj_tangentPoint (x y : Lie G) :
   group
 
 /-- **The differential of the adjoint representation is the adjoint representation of the Lie
-algebra**: `d Ad = ad`, that is `Ad(1 + εx)(y) = y + ε[x, y]`. (blueprint: `sk-p-comparison`) -/
+algebra**: `d Ad = ad`, that is `Ad(1 + εx)(y) = y + ε[x, y]`. (blueprint:
+`lemma-stable-subspaces-center`) -/
 theorem differential_adjoint (x : Lie G) :
     GeneralLinearGroup.RationalHom.differential (adjoint b) x =
       LinearMap.toMatrix b b (LieAlgebra.ad k (Lie G) x) := by
@@ -496,7 +497,7 @@ theorem differential_adjoint_eq_zero_iff (x : Lie G) :
   · rw [LieAlgebra.ad_apply, LinearMap.zero_apply, ← lie_skew, h y, neg_zero]
 
 /-- **The Lie algebra of the kernel of `Ad` is the centre of `Lie(G)`**: `Lie(ker Ad) = ker(ad)`,
-and `ker(ad) = 𝔷(Lie G)`. (blueprint: `sk-p-comparison`) -/
+and `ker(ad) = 𝔷(Lie G)`. (blueprint: `lemma-stable-subspaces-center`) -/
 theorem mem_range_differential_kerι_adjoint_iff (x : Lie G) :
     x ∈ (differential (CategoryTheory.GrpObj.kerι (adjoint b))).range ↔
       x ∈ LieAlgebra.center k (Lie G) :=

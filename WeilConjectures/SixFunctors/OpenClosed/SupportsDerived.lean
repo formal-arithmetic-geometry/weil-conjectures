@@ -133,7 +133,7 @@ lemma subsingleton_hom_Q_obj_supportsShortComplex_X₃
     (DerivedCategory.Q.obj ((((j)^*[A]).mapHomologicalComplex _).obj I))
   exact ((Iso.refl T).homCongr (supportsShortComplexX₃Iso A j I)).subsingleton
 
-/-- Blueprint `lem-pur-support-localization-triangle`: Localization triangle for the exceptional
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Localization triangle for the exceptional
 inverse image
 
 **Canonicality.** For a K-injective complex `I` of injective étale sheaves on `X`, the
@@ -197,7 +197,7 @@ theorem exists_iso_supportLocalizationTriangle (hjs : Set.range s.base = (Set.ra
     (Arrow.isoMk e₁ (Iso.refl _) (by change ψ ≫ ε = u ≫ 𝟙 _; rw [comp_id]; exact hψ))
   exact ⟨e, he₂⟩
 
-/-- Blueprint `lem-pur-support-localization-triangle`: Localization triangle for the exceptional
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Localization triangle for the exceptional
 inverse image
 
 Let `K` be a bounded below complex of étale sheaves on `X`. Its specified resolution `K ≅ I` by a
@@ -241,7 +241,7 @@ section Functorial
 
 variable {U Z X : Scheme.{u}}
 
-/-- Blueprint `lem-pur-support-localization-triangle`: Localization triangle for the exceptional
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Localization triangle for the exceptional
 inverse image
 
 **Functoriality.** A morphism `φ : L ⟶ L'` induces the morphism of supported
@@ -314,7 +314,7 @@ supported localization triangle `s_* Rs^! L ⟶ L ⟶ Rj_* j^* L ⟶ [1]` with t
 `Z' = Z ×_X X'`, `U' = U ×_X X'` and `Lv^* L` (through any identification `τ : Lv^* L ≅ L'`).
 
 This is the étale base-change compatibility of the triangle of
-`lem-pur-support-localization-triangle`. Its *canonicality* — independence of the injective
+`lemma-local-cohomology-right-adjoint--2`. Its *canonicality* — independence of the injective
 resolution: the triangle of supported sections of any injective resolution is isomorphic to the
 supported localization triangle by an isomorphism which is the identity on the complex — is
 `AlgebraicGeometry.Etale.exists_iso_supportLocalizationTriangle`, and its *functoriality* is

@@ -20,7 +20,8 @@ Let `j : V ⟶ W` be an open immersion into a locally noetherian regular scheme 
 morphism (in the application, the inclusion of a divisor in the complement of `V`). If, for every
 finite `Λ`-module `N` killed by `ℓ`, the complex `ι^* Rj_* N_V` has finite locally constant
 cohomology sheaves, then so has `ι^* Rj_* E` for every bounded complex `E` on `V` whose cohomology
-sheaves have finite `ℓ`-group monodromy (blueprint `det-tf-transverse-tame-local-constancy`,
+sheaves have finite `ℓ`-group monodromy (blueprint
+`lemma-cohomology-near-two-transverse-divisors--1`,
 *Complexes*).
 
 The question is local on `D`; over a connected component `Q` of `W`, which is irreducible since
@@ -121,10 +122,10 @@ lemma isZero_of_isEmpty {V : Scheme.{u}} [IsEmpty V]
 variable (ℓ) in
 include hΛ in
 /-- **Local constancy of a direct image by dévissage** (blueprint
-`det-tf-transverse-tame-local-constancy`, *Complexes*): let `j : V ⟶ W` be an open immersion into a
-locally noetherian regular scheme and `ι : D ⟶ W` a morphism. If `ι^* Rj_* N_V` has finite locally
-constant cohomology sheaves for every finite `Λ`-module `N` killed by `ℓ`, then so has
-`ι^* Rj_* E` for every bounded complex `E` on `V` whose cohomology sheaves have finite `ℓ`-group
+`lemma-cohomology-near-two-transverse-divisors--1`, *Complexes*): let `j : V ⟶ W` be an open
+immersion into a locally noetherian regular scheme and `ι : D ⟶ W` a morphism. If `ι^* Rj_* N_V` has
+finite locally constant cohomology sheaves for every finite `Λ`-module `N` killed by `ℓ`, then so
+has `ι^* Rj_* E` for every bounded complex `E` on `V` whose cohomology sheaves have finite `ℓ`-group
 monodromy. -/
 theorem hasFiniteLocallyConstantHomology_of_constantSheaf {W V D : Scheme.{u}}
     [IsLocallyNoetherian W] [IsRegular W] (j : V ⟶ W) [IsOpenImmersion j] (ι : D ⟶ W)

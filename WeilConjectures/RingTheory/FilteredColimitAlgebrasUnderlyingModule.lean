@@ -16,7 +16,7 @@ import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 Source: Stacks Project, Algebra, Tag 00D6 (lemma-directed-colimit); the algebra version is
 used implicitly in Tag 07RI (lemma-colimit-etale).
-(blueprint: lem-weil-pbc-filtered-colimit-algebras-underlying-module)
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 -/
 
 @[expose] public section
@@ -92,7 +92,7 @@ private noncomputable def ringColimit
 with the coprojections `colimit.ι F i`, satisfies the module colimit universal property.
 Source: Stacks Project, Algebra, Tag 00D6 (lemma-directed-colimit), transcribed to algebras,
 as used implicitly in Tag 07RI (lemma-colimit-etale).
-(blueprint: lem-weil-pbc-filtered-colimit-algebras-underlying-module)
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 
 Proof, following the node's five steps:
 1. By `lem-weil-pbc-filtered-colimit-algebras-elementwise`, the colimit cocone is also a ring

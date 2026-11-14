@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.DensePoints
 # Local orders at rational points after extension of algebraically closed fields
 
 Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-thm-sc-constant-invariance, affine-case unit quotient paragraph
+proposition-cohomology-smooth-affine-curve, affine-case unit quotient paragraph
 (blueprint: lem-sc-local-dvr-base-change).
 -/
 
@@ -71,13 +71,13 @@ private theorem ord_eq_of_stalk_uniformizer
       Multiplicative.toAdd (z.unzeroD 1)) hfrac
 
 /-- The unique point over a rational closed point has a DVR stalk, and pullback preserves
-normalized orders. Source: blueprint thm-sc-constant-invariance, affine-case unit quotient
-paragraph (blueprint: lem-sc-local-dvr-base-change).
+normalized orders. Source: blueprint proposition-cohomology-smooth-affine-curve, affine-case unit
+quotient paragraph (blueprint: lem-sc-local-dvr-base-change).
 
 Proof:
 1. Choose an affine neighbourhood Spec A of P. Its residue field is k because P is closed,
    A is of finite type over the algebraically closed field k. By
-   lem-weil-pbc-fibre-ring-primes-residue-fields, points over P correspond to primes of
+   theorem-finite-etale-covers-proper-henselian--2, points over P correspond to primes of
    (A/m) tensor_k k' = k'. This field has exactly one prime, giving the unique point P'.
 2. Localize A tensor_k k' at m(A tensor_k k'). This is the corresponding localization of
    O_{X,P} tensor_k k'. The original stalk is a DVR by

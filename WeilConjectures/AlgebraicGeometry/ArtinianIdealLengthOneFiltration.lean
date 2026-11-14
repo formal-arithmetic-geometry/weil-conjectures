@@ -31,7 +31,7 @@ whose successive quotients have module length one.
 Source: literature/stacks-project/algebra.tex, Algebra, proof of Lemma Tag 02HT
 (blueprint: lem-weil-pbc-artinian-ideal-length-one-filtration). The proof uses
 `lem-weil-pbc-artinian-ring-self-finite-length` and
-`lem-weil-pbc-finite-length-module-simple-filtration`. Regard `B` as a module over
+`theorem-finite-etale-covers-proper-henselian--2`. Regard `B` as a module over
 itself and use the Artinian-ring finite-length lemma to bound strict submodule
 chains. The ideal `J` is a submodule of `B`, so it has finite length. Apply the
 finite-length simple-filtration lemma to `J`; its submodules are precisely the

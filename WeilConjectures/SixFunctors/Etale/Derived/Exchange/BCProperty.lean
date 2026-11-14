@@ -15,7 +15,8 @@ Künneth chapter says that for every base change `f' : X' ⟶ S'` of `f`, every 
 quasi-separated `g : T ⟶ S'` with base change `Y = X' ×_{S'} T`, and every sheaf `F` of
 `ℤ/n`-modules on `T_ét`, the exchange morphism `f'^* Rg_* F ⟶ Rh_* e^* F` is an isomorphism on
 cohomology sheaves in degrees `q ≤ q₀`
-(`AlgebraicGeometry.Etale.KunnethBaseChangeProperty`, blueprint `def-kun-bc-property`).
+(`AlgebraicGeometry.Etale.KunnethBaseChangeProperty`, blueprint
+`lemma-kunneth-finite-direct-image--1`).
 
 It is the universal base change property `AlgebraicGeometry.Etale.UniversalBaseChangeProperty`
 of the smooth base change chapter, for the coefficients `ℤ/n` and all degrees `q ≤ q₀`. The
@@ -35,7 +36,7 @@ namespace Etale
 
 variable {X S : Scheme.{u}}
 
-/-- Blueprint `def-kun-bc-property`: the base change property `BC(f, n, q₀)`.
+/-- Blueprint `lemma-kunneth-finite-direct-image--1`: the base change property `BC(f, n, q₀)`.
 
 `BC(f, n, q₀)` holds if for every base change `f' : X' ⟶ S'` of `f` along some `S' ⟶ S`, every
 quasi-compact quasi-separated `g : T ⟶ S'`, the cartesian square `Y = X' ×_{S'} T` with
@@ -74,9 +75,9 @@ lemma kunnethBaseChangeProperty_iff (f : X ⟶ S) (n : ℕ) (q₀ : ℤ) :
 
 open _root_.DerivedCategory in
 /-- The base change property `BC(f, n, q₀)` in terms of the unbounded exchange morphism
-`AlgebraicGeometry.Etale.unboundedExchange` (`def-kun-unbounded-exchange`): it holds if and only
-if, for every diagram as in `AlgebraicGeometry.Etale.kunnethBaseChangeProperty_iff` and every sheaf
-`F` of `ℤ/n`-modules on `T_ét`, the exchange morphism `f'^* Rg_* F ⟶ Rh_* e^* F` induces
+`AlgebraicGeometry.Etale.unboundedExchange` (`definition-derived-base-change-map`): it holds if and
+only if, for every diagram as in `AlgebraicGeometry.Etale.kunnethBaseChangeProperty_iff` and every
+sheaf `F` of `ℤ/n`-modules on `T_ét`, the exchange morphism `f'^* Rg_* F ⟶ Rh_* e^* F` induces
 isomorphisms on the cohomology sheaves in degrees `q ≤ q₀`. -/
 lemma kunnethBaseChangeProperty_iff_unboundedExchange (f : X ⟶ S) (n : ℕ) (q₀ : ℤ) :
     KunnethBaseChangeProperty f n q₀ ↔

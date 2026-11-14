@@ -20,14 +20,15 @@ normalized Kummer class, this file constructs an explicit isomorphism
 
 `ω_f = Rf^! Λ_Y ≅ Λ_X(d)[2d]`
 
-(blueprint `thm-pur-diagonal-dualizing-object`). The existence of such an isomorphism is
+(blueprint `proposition-relative-dualizing-complex--1`). The existence of such an isomorphism is
 `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`; here every step of its proof
 is replaced by a concrete map, and nothing is chosen from a `Nonempty`:
 
 1. `ω_{p₁} ≅ Lp₂^* ω_f` for the projections of `X ×_Y X` is the inverse of the canonical base
    change map of the dualizing complexes (`AlgebraicGeometry.Etale.dualizingComplexBaseChangeMap`),
-   an isomorphism by smooth base change (blueprint `lem-pur-diagonal-base-change`). Pulling back
-   along the diagonal gives `𝒞(p₁, Δ) ≅ ω_f`.
+   an isomorphism by smooth base change (blueprint
+   `proposition-exceptional-inverse-image-smooth-morphism--7`). Pulling back along the diagonal
+   gives `𝒞(p₁, Δ) ≅ ω_f`.
 2. For a closed section `s` of a smooth `g : V ⟶ B` of relative dimension `c`, the purity of the
    section `Rs^!(Λ_V(c)[2c]) ≅ Λ_B` is the inverse of the adjoint of the fundamental class
    glued from the coordinate frames (`AlgebraicGeometry.Etale.thomFundamentalClassMap`), and
@@ -91,7 +92,7 @@ noncomputable def rightDerivedUpperShriekDualizingComplexIsoOfCompEqId {V B : Sc
       (rightDerivedLowerShriekCompIsoOfEq Λ s g (𝟙 B) hs)).app (𝟙_ _) ≪≫
     (rightDerivedUpperShriekIdIso Λ B).app _
 
-/-- Blueprint `def-pur-section-invariant`: Section invariant
+/-- Blueprint `lemma-section-normal-bundle--1`: Section invariant
 
 For `s : B ⟶ V` admitting a compactification and invertible objects `ω`, `T` of `D(V_ét, Λ)`
 with `Rs^! T ≅ Λ_B` and `Rs^! ω ≅ Λ_B`, the isomorphism
@@ -139,7 +140,7 @@ noncomputable def rightDerivedUpperShriekTateObjectIsoOfSection [HasKummerClass 
   (asIso (thomFundamentalClassMap Λ (hasThomFrames_of_section Λ c g s hs aB)
     (hasRegularZariskiFrames_of_section c g s hs) (g ≫ aB))).symm
 
-/-- Blueprint `def-pur-section-invariant`: Section invariant
+/-- Blueprint `lemma-section-normal-bundle--1`: Section invariant
 
 **The section invariant of a section of a smooth morphism.** For `g : V ⟶ B` smooth of relative
 dimension `c` with a closed section `s`, `B` separated and locally of finite type over a field,
@@ -172,8 +173,8 @@ noncomputable def sectionInvariantTwistShiftIsoOfSection [HasKummerClass Λ]
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f]
   [HasCompactification f] [HasInvertibleExponent Λ X]
 
-/-- Blueprint `lem-pur-diagonal-base-change`: Base change for the dualizing object of a
-projection
+/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism--7`: Base change for the
+dualizing object of a projection
 
 Let `W = X ×_Y X` with projections `p₁, p₂`. The square `p₂ ≫ f = p₁ ≫ f` is cartesian and `p₁`
 is the base change of the smooth `f`, so the canonical base change map
@@ -194,8 +195,8 @@ noncomputable def dualizingComplexPullbackFstIso [QuasiSeparatedSpace Y] [QuasiC
     inferInstance
   (asIso (dualizingComplexBaseChangeMap Λ (IsPullback.of_hasPullback f f).flip)).symm
 
-/-- Blueprint `lem-pur-diagonal-base-change`: Base change for the dualizing object of a
-projection
+/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism--7`: Base change for the
+dualizing object of a projection
 
 The section invariant of the diagonal `Δ : X ⟶ X ×_Y X`, a closed section of `p₁`, is the
 dualizing complex of `f`: since `Δ ≫ p₂ = 𝟙 X`,
@@ -211,7 +212,7 @@ noncomputable def sectionInvariantDiagonalIso [QuasiSeparatedSpace Y] [QuasiComp
       (dualizingComplexPullbackFstIso Λ f d) ≪≫
     (leftDerivedUpperStarCompSectionIso _ _ _ (pullback.diagonal_snd f)).app _
 
-/-- Blueprint `thm-pur-diagonal-dualizing-object`: The dualizing object of a smooth morphism
+/-- Blueprint `proposition-relative-dualizing-complex--1`: The dualizing object of a smooth morphism
 
 For `f : X ⟶ Y` smooth separated of pure relative dimension `d`, `Y` separated and locally of
 finite type over a field, and a finite coefficient ring `Λ` with invertible exponent and a
@@ -221,7 +222,7 @@ normalized Kummer class, the isomorphism
 
 of the diagonal argument: the inverse of
 `AlgebraicGeometry.Etale.sectionInvariantDiagonalIso` (smooth base change, blueprint
-`lem-pur-diagonal-base-change`) followed by
+`proposition-exceptional-inverse-image-smooth-morphism--7`) followed by
 `AlgebraicGeometry.Etale.sectionInvariantTwistShiftIsoOfSection` for the diagonal, a closed
 section of the smooth projection `p₁ : X ×_Y X ⟶ X`. Every step is a concrete isomorphism, so
 this is a canonical form of `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`;

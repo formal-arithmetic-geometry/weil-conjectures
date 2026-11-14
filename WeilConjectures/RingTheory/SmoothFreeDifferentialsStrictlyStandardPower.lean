@@ -104,7 +104,7 @@ Proof (Stacks Tag 07EZ(e)), following the node's six steps:
    Clear denominators and localization torsion to obtain
    `hᵉ f_j ∈ (f₁, ..., f_c) + J²` for all `j > c` and all `e ≥ e₁`, where `h`
    lifts `a` (`def-weil-pbc-module-localization-away`). This is the second condition
-   of `def-weil-pbc-strictly-standard-element` for `aᵉ`.
+   of `theorem-finite-etale-covers-proper-henselian--2` for `aᵉ`.
 5. Let `D` be the Jacobian matrix of the first `c` relations
    (`def-weil-pbc-polynomial-partial-derivative`). The split conormal injection has a
    left inverse over `Aₐ`. Clear its denominators and localization torsion to get
@@ -113,7 +113,7 @@ Proof (Stacks Tag 07EZ(e)), following the node's six steps:
    Multiplying the coefficients gives this condition for every `e ≥ c * e₂`.
    For `c = 0`, the empty minor is `1` and this condition is automatic.
 6. Take `e₀ = max 1 (max e₁ (c * e₂))`. Both defining conditions hold for every
-   `e ≥ e₀`, so `aᵉ` is strictly standard by `def-weil-pbc-strictly-standard-element`.
+   `e ≥ e₀`, so `aᵉ` is strictly standard by `theorem-finite-etale-covers-proper-henselian--2`.
 -/
 theorem smooth_free_differentials_strictly_standard_power
     (R : Type u) (A : Type v) [CommRing R] [CommRing A] [Algebra R A]

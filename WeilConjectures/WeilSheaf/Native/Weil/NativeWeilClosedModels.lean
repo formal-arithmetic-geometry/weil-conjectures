@@ -77,7 +77,7 @@ public import WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetric
 
 /-! # Native Weil derived tensor and internal Hom under forgetting Frobenius
 
-Source: blueprint main-20261015, cor-coef-verdier-weil-equivariance, internal-Hom
+Source: blueprint main-20261015, prose-10-20, internal-Hom
 comparison and transposition of evaluation; native refinement in the DAG proof
 (blueprint: def-sf-native-weil-closed-models).
 
@@ -176,7 +176,7 @@ noncomputable abbrev nativeForget (k₀ : Type u) [Field k₀] [Finite k₀]
 
 /-- Biduality is the transpose of evaluation after symmetry, for the specified
 closed adjunction. This definition asserts no invertibility.
-Source: cor-coef-verdier-weil-equivariance, evaluation/transposition sentence
+Source: prose-10-20, evaluation/transposition sentence
 (blueprint: lem-sf-weil-native-closed-forgetful). -/
 def nativeBidual {D : Type a} [Category.{b} D] {H : Dᵒᵖ × D ⥤ D}
     (S : CoefficientClosedStructure H) (β : @SymmetricCategory D _ S.monoidal)

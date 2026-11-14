@@ -126,7 +126,7 @@ The groups `I^q(V)` are only `v`-small, so `D` lives in `AddCommGrpCat.{v}`; thi
 covering is indexed by `ι : Type v` and the cohomology is computed in `AddCommGrpCat.{v}`. See
 `Sheaf.exists_cechDoubleComplex_uliftFunctor` for other universes.
 
-(blueprint: `det-thm-picard-cech`, Steps 1 to 3 of the proof) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`, Steps 1 to 3 of the proof) -/
 theorem Sheaf.exists_cechDoubleComplex [HasExt.{v} (Sheaf J AddCommGrpCat.{v})]
     [EnoughInjectives (Sheaf J AddCommGrpCat.{v})] (F : Sheaf J AddCommGrpCat.{v}) (X : C)
     {ι : Type v} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) :
@@ -204,7 +204,7 @@ quadrant double complex `D` in `AddCommGrpCat.{max v w}` such that
 As in `Sheaf.exists_cechDoubleComplex`, it is `D^{p, q} = C^p(𝔘, I^q)` for an injective
 resolution `F → I^•`, where `I^q` is lifted to `AddCommGrpCat.{max v w}`.
 
-(blueprint: `det-thm-picard-cech`, Steps 1 to 3 of the proof) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`, Steps 1 to 3 of the proof) -/
 theorem Sheaf.exists_cechDoubleComplex_uliftFunctor [EssentiallySmall.{v} C]
     [HasExt.{w} (Sheaf J AddCommGrpCat.{v})] (F : Sheaf J AddCommGrpCat.{v}) (X : C)
     {ι : Type w} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) :
@@ -290,7 +290,7 @@ of objects of `Over X` with coefficients in the restriction of `ℋ^q(F)` to `Ov
 The site is assumed essentially small, as are the sites of the Stacks project: this provides
 injective resolutions of abelian sheaves, which need not exist on a large site.
 
-(blueprint: `det-thm-picard-cech`, `lem-sc-cech-spectral`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`, `lem-sc-cech-spectral`) -/
 theorem Sheaf.exists_cechToDerivedSpectralSequence [EssentiallySmall.{v} C]
     [HasExt.{w} (Sheaf J AddCommGrpCat.{v})] (F : Sheaf J AddCommGrpCat.{v}) (X : C)
     {ι : Type w} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) :

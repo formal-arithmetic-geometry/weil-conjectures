@@ -471,7 +471,7 @@ attribute [-instance] WeilConjectures.SemilinearSections.abelianSheafify
   WeilConjectures.SemilinearSections.locallyBijective WeilConjectures.SemilinearSections.hasDerived
 
 /-- Exact countable products on this specific constant coefficient category.
-Source: blueprint det-pe-products-exact
+Source: blueprint proposition-exact-products--1
 (blueprint: lem-pur-compact-support-scalar-limit-reduction). -/
 instance scalarRoos_exactProducts (W : Scheme.{u}) :
     HasExactLimitsOfShape (Discrete ℕ)

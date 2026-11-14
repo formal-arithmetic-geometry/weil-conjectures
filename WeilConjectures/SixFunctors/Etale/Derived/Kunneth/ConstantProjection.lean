@@ -17,11 +17,11 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficien
 
 Let `X` be a quasi-compact quasi-separated scheme. For `E ∈ D⁺(X_ét)` and `K ∈ D⁺(ℤ)`, the
 canonical map `RΓ(X_ét, E) ⊗ᴸ K ⟶ RΓ(X_ét, E ⊗ᴸ K_X)` is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_constantProjectionMap_of_isGE_int`, blueprint `lem-kun-0f0e`,
-[Stacks 0F0E]). More generally this holds over any principal ideal domain
-(`AlgebraicGeometry.Etale.isIso_constantProjectionMap_of_isPrincipalIdealRing`). Abelian sheaves
-are sheaves of modules over `ULift ℤ`, and the map is
-`AlgebraicGeometry.Etale.constantProjectionMap`.
+(`AlgebraicGeometry.Etale.isIso_constantProjectionMap_of_isGE_int`, blueprint
+`corollary-open-direct-image-over-field--2`, [Stacks 0F0E]). More generally this holds over any
+principal ideal domain
+(`AlgebraicGeometry.Etale.isIso_constantProjectionMap_of_isPrincipalIdealRing`). Abelian sheaves are
+sheaves of modules over `ULift ℤ`, and the map is `AlgebraicGeometry.Etale.constantProjectionMap`.
 
 More generally, for any commutative ring `Λ`, the map is an isomorphism for `E` bounded below
 and `K` of Tor amplitude in `[b, ∞)`
@@ -117,7 +117,8 @@ theorem isIso_constantProjectionMap_of_isPrincipalIdealRing [IsDomain Λ] [IsPri
   isIso_constantProjectionMap_of_torAmplitudeGE Λ X E a K (b - 1)
     (torAmplitudeGE_of_isGE_of_isPrincipalIdealRing K b)
 
-/-- Blueprint `lem-kun-0f0e`: tensor with a constant complex over `ℤ` ([Stacks 0F0E]).
+/-- Blueprint `corollary-open-direct-image-over-field--2`: tensor with a constant complex over `ℤ`
+([Stacks 0F0E]).
 
 Let `X` be a quasi-compact quasi-separated scheme. For `E ∈ D⁺(X_ét)` and `K ∈ D⁺(ℤ)`, the
 canonical map `RΓ(X_ét, E) ⊗ᴸ_ℤ K ⟶ RΓ(X_ét, E ⊗ᴸ_ℤ K_X)`

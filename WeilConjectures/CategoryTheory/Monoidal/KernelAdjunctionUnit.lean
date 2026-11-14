@@ -26,7 +26,7 @@ isomorphism `ι : A ⋙ Δ ≅ B ⋙ Δ` (both are the identity, as `a Δ = b Δ
   `δ : Δ_* 1 ⟶ K`), the *kernel unit*
   `ψ_M : M ⟶ A' Δ' Δ A M ≅ A' Δ' Δ B M ⟶ A' (K ⊗ B M)`
   (`CategoryTheory.Adjunction.kernelUnit`) is the map `M = a_* Δ_* M ⟶ a_*(K ⊗ b^* M)` of
-  blueprint `sk-prop-geo-p1-adjunction` (G6).
+  blueprint `proposition-adjunction-projective-line` (G6).
 
 When `Φ` is invertible, `u = Φ⁻¹ ∘ ψ : M ⟶ T ⊗ F G M` (with `K = A T`) is linear in the sense of
 `CategoryTheory.Adjunction.ofTraceCounit`

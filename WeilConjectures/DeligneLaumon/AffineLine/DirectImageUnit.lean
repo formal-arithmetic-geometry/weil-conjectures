@@ -18,7 +18,7 @@ Let `j : U₀ ↪ 𝔸¹` be a dense open immersion. For a Weil sheaf `G` on the
 `G ⟶ j_* j^* G` becomes an isomorphism on `U₀`, so its kernel and cokernel are punctual. These
 facts, and the restriction of an irreducible lisse sheaf to a smaller dense open, are the
 sheaf-theoretic input of the description of the simple curve perverse sheaves (blueprint
-`prop-a1-curve-perverse-simples`).
+`lemma-simple-objects--1`).
 
 ## Main statements
 
@@ -235,7 +235,7 @@ theorem exists_dense_forall_notMem (S : Set (affineLine k₀).finitePoints) (hS 
   obtain ⟨a, b, hab⟩ := affineLine.nontrivial k₀
   exact hab ((hx a).trans (hx b).symm)
 
-/-- **Simplicity of a middle extension, sheaf part** (`prop-a1-curve-perverse-simples`). Let
+/-- **Simplicity of a middle extension, sheaf part** (`lemma-simple-objects--1`). Let
 `A ↪ M ⟶ B ↠ C` be an exact sequence of Weil sheaves on the affine line with `M ≅ j_*N` for an
 irreducible lisse `N`, `C` punctual and `B` without nonzero punctual subsheaf. Then `A = C = 0`
 or `B = 0`. Choose a dense open `k : V ↪ U₀` on which `A` and `C` are lisse; then `C|_V = 0`,
@@ -359,7 +359,7 @@ end LisseOnDenseOpen
 /-- **Embedding into a middle extension.** A Weil sheaf `F` on the affine line without nonzero
 punctual subsheaf embeds into the direct image `j_* N` of its restriction `N` to a dense open
 `j : U₀ ↪ 𝔸¹` on which it is lisse, with punctual cokernel: the kernel and the cokernel of the
-unit `F ⟶ j_* j^* F` vanish on `U₀`. (blueprint: `prop-a1-curve-perverse-simples`) -/
+unit `F ⟶ j_* j^* F` vanish on `U₀`. (blueprint: `lemma-simple-objects--1`) -/
 theorem LisseOnDenseOpen.exists_mono_directImage {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ}
     [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {F : WeilSheaf k₀ l (affineLine k₀)}
     (hF : ∀ (G : WeilSheaf k₀ l (affineLine k₀)) (i : G ⟶ F), Mono i → G.support.Finite →

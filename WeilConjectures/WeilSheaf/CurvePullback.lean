@@ -25,9 +25,9 @@ only defined over `L`, i.e. fixed by the `N`-th iterate of the Frobenius twist
 (`AlgebraicGeometry.WeilSheaf.curvePullbackSub`).
 
 This is how the blueprint restricts a Weil sheaf and its geometric constituents to a curve which is
-only defined over a finite constant extension (`thm-zl-real-mixed-by-curves`,
-`lem-zl-curve-testing-irreducibility`). The stalks of the pullback are compared in
-`WeilConjectures.WeilSheaf.EquivariantPullback`.
+only defined over a finite constant extension (`theorem-real-constructible-sheaves-are-mixed--1`,
+`corollary-curve-preserving-geometric-irreducibility--1`). The stalks of the pullback are compared
+in `WeilConjectures.WeilSheaf.EquivariantPullback`.
 
 ## Main definitions
 

@@ -701,7 +701,7 @@ the sheaf `Ω¹_{X/S}` is invertible: Zariski-locally `f` is standard smooth, `X
 `B = R[x₁, …, xₙ₊₁]/(g₁, …, gₙ)`, and `Ω_{B/R}` is free of rank one on the class of `dxᵢ` for
 the coordinate `xᵢ` not involved in the invertible Jacobian minor.
 
-(blueprint: `lem-sc-canonical-sheaf`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
 theorem isInvertible_relativeDifferentials [SmoothOfRelativeDimension 1 f] :
     SheafOfModules.IsInvertible (R := X.ringCatSheaf) f.relativeDifferentials := by
   choose V hxV hV using f.nonempty_restrict_relativeDifferentials_iso_unit

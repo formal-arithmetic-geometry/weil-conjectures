@@ -22,7 +22,7 @@ is the base change `X ×_k Spec Ω`. Such a model maps to the trait model of the
 (`NearbyCyclesModel.IsTraitModelOfBase.toTrait`), with proper exchange
 `χ_a : Ψ_S Ra_* ⟶ Ra'_* Ψ_X` (`NearbyCyclesModel.IsTraitModelOfBase.pushforwardExchange`).
 
-The *dualizing map* `θ_X : Ψ_X ω_X ⟶ ω_{X'}` (blueprint `det-nearby-exchange-maps` (5),
+The *dualizing map* `θ_X : Ψ_X ω_X ⟶ ω_{X'}` (blueprint `prose-E-15` (5),
 `θ_X = β_{a_X}(A)`) is the exceptional adjoint of the compact-support exchange `ν_{a_X}`, read
 through the specialization unit of the trait and the base change `Lε^* ω_{X/k} ≅ ω_{𝒳_Ω/Ω}`.
 The compact-support exchange is built from a relative compactification of `𝒳` over `S`, and is
@@ -30,7 +30,7 @@ independent of the choice (`NearbyCyclesModel.IsTraitModelOfBase.dualizingMap`, 
 A family of maps `θ` with the two properties
 that characterize the dualizing maps is a `NearbyCyclesModel.NearbyDualizingData`, and its
 existence is the node lemma `NearbyCyclesModel.nonempty_nearbyDualizingData` (blueprint
-`det-nearby-exchange-maps` and the composition law `sk-lem-tf-nearby-mate-coherences` (4)):
+`prose-E-15` and the composition law `sec-Base-change-for-nearby-cycles` (4)):
 
 * **proper models**: for `q` proper and geometric generic fibre all of `X ×_k Spec Ω`,
   `ν_{a} = χ_a⁻¹` under `Ra_! ≅ Ra_*`, so `θ_X` is the unique
@@ -172,7 +172,7 @@ variable (k k')
 /-- A *family of dualizing maps* of nearby cycles over the trait `S = Spec k'⟦t⟧`: a map
 `θ_M : Ψ_M ω_X ⟶ ω_{X'}` for every trait model `M` of a `k`-scheme `X` over the base, with the
 two characteristic properties of the dualizing maps `θ_M = β_a(ℚ̄_ℓ)` of blueprint
-`det-nearby-exchange-maps` (see `NearbyCyclesModel.nonempty_nearbyDualizingData`). -/
+`prose-E-15` (see `NearbyCyclesModel.nonempty_nearbyDualizingData`). -/
 structure NearbyDualizingData where
   /-- the dualizing map `θ_M : Ψ_M ω_X ⟶ ω_{X'}`. -/
   θ {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]

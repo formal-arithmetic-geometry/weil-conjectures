@@ -21,7 +21,7 @@ base change `D_J X' = D_I X ×_{𝔸¹_B} 𝔸¹_{B'}` whenever `h` is a base ch
 charts covering `X'`.
 
 We apply this to a morphism `g : V ⟶ B` with a section `s`: the base change
-`g' : V' = V ×_B B' ⟶ B'` has the section `s' = (b ≫ s, 𝟙)`, and blueprint `sk-lem-geometry` (5)
+`g' : V' = V ×_B B' ⟶ B'` has the section `s' = (b ≫ s, 𝟙)`, and blueprint `prose-09-12` (5)
 states that the deformation space commutes with base change in `B`. For the standard pair this
 is `AlgebraicGeometry.Scheme.Hom.isPullback_deformationSpaceMap`.
 
@@ -39,9 +39,9 @@ is `AlgebraicGeometry.Scheme.Hom.isPullback_deformationSpaceMap`.
 - `AlgebraicGeometry.Scheme.Hom.deformationSpaceSection_comp_deformationSpaceMap_baseChangeSection`:
   the comparison `D_{s'} V' ⟶ D_s V` is compatible with the sections `s̃'` and `s̃`
 - `AlgebraicGeometry.Scheme.Hom.exists_isPullback_deformationSpace_baseChange_of_cover`:
-  blueprint `sk-lem-geometry` (5) under the covering hypothesis
+  blueprint `prose-09-12` (5) under the covering hypothesis
 - `AlgebraicGeometry.Scheme.Hom.exists_isPullback_deformationSpace_baseChange_of_isOpenImmersion`:
-  blueprint `sk-lem-geometry` (5) for an open immersion `b : B' ⟶ B`
+  blueprint `prose-09-12` (5) for an open immersion `b : B' ⟶ B`
 - `AlgebraicGeometry.Scheme.Hom.exists_isPullback_deformationSpace_baseChange`
 -/
 
@@ -423,7 +423,7 @@ lemma deformationSpaceSection_comp_deformationSpaceMap_baseChangeSection [IsClos
       (IdealSheafData.reesToQuotientPolynomial_comp_quotientPolynomialPullbackData_map _ _ _ _),
     affineSpaceToQuotientPolynomialSpec_comp_comparison_assoc]
 
-/-- Blueprint `sk-lem-geometry` (5), assuming that the extended Rees algebras of `s'` are the base
+/-- Blueprint `prose-09-12` (5), assuming that the extended Rees algebras of `s'` are the base
 changes of those of `s` on a family of charts covering `V' = V ×_B B'`:
 `D_{s'} V' = D_s V ×_{𝔸¹_B} 𝔸¹_{B'}`, compatibly with the sections. -/
 theorem exists_isPullback_deformationSpace_baseChange_of_cover [IsClosedImmersion s]
@@ -444,7 +444,7 @@ theorem exists_isPullback_deformationSpace_baseChange_of_cover [IsClosedImmersio
     deformationSpaceSection_comp_deformationSpaceMap_baseChangeSection g s hs b⟩
 
 
-/-- Blueprint `sk-lem-geometry` (5) for a Zariski localization of the base: if `b : B' ⟶ B` is
+/-- Blueprint `prose-09-12` (5) for a Zariski localization of the base: if `b : B' ⟶ B` is
 an open immersion, the deformation space of the base-changed section is the base change of the
 deformation space, `D_{s'} V' = D_s V ×_{𝔸¹_B} 𝔸¹_{B'}`. -/
 theorem exists_isPullback_deformationSpace_baseChange_of_isOpenImmersion [IsOpenImmersion b]
@@ -462,7 +462,7 @@ theorem exists_isPullback_deformationSpace_baseChange_of_isOpenImmersion [IsOpen
   exact ⟨⟨U, hU⟩, _, _, hx, IdealSheafData.isPushout_extendedReesPullbackData_imageSite _ _ _ _
     (ker_baseChangeSection g s hs b) _⟩
 
-/-- Blueprint `sk-lem-geometry` (5), base change in `B`: for `g : V ⟶ B` smooth of relative
+/-- Blueprint `prose-09-12` (5), base change in `B`: for `g : V ⟶ B` smooth of relative
 dimension `d` with a closed section `s`, and any `b : B' ⟶ B`, the deformation space of the
 base-changed section `s'` of `g' : V ×_B B' ⟶ B'` is the base change of the deformation space
 of `s`,

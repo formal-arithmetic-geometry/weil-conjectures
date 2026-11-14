@@ -81,7 +81,7 @@ one-element index type, and `σₖ₊₁` is the composite of `ℙ¹_{σₖ} : �
 with the multiplication morphism `ℙ¹_{ℙᵏ_S} ⟶ ℙᵏ⁺¹_S`,
 `((x : y), ∑ⱼ Gⱼ tʲ) ↦ (x t + y) · ∑ⱼ Gⱼ tʲ`
 (`AlgebraicGeometry.ProjectiveSpace.projectiveLineMul`).
-(blueprint: `def-weil-pbc-symmetric-product-morphism`) -/
+(blueprint: `lemma-finite-cover-projective-space--1`) -/
 noncomputable def symmetricProduct (S : Scheme.{u}) :
     (k : ℕ) → {ι : Type u} → (ι ≃ Fin (k + 1)) → (projectiveLinePow k S ⟶ ℙ(ι; S))
   | 0, ι, e =>
@@ -109,7 +109,7 @@ theorem symmetricProduct_over (S : Scheme.{u}) (k : ℕ) {ι : Type u} (e : ι �
 /-- **The symmetric product morphism is finite**, as a composite of base changes of the finite
 multiplication morphisms. (On the chart where all `yᵢ` are nonzero, each `zᵢ = xᵢ / yᵢ` is a
 root of the monic polynomial `Tᵏ - e₁ Tᵏ⁻¹ + ⋯ ± eₖ` over the elementary symmetric functions.)
-(blueprint: `lem-weil-pbc-symmetric-product-finite`) -/
+(blueprint: `lemma-finite-cover-projective-space--1`) -/
 theorem isFinite_symmetricProduct (S : Scheme.{u}) (k : ℕ) {ι : Type u}
     (e : ι ≃ Fin (k + 1)) : IsFinite (symmetricProduct S k e) := by
   induction k generalizing ι with
@@ -127,7 +127,7 @@ theorem isFinite_symmetricProduct (S : Scheme.{u}) (k : ℕ) {ι : Type u}
 
 /-- **The symmetric product morphism is surjective**: over an algebraically closed field every
 binary form of degree `k` is a product of `k` linear forms, including factors at infinity.
-(blueprint: `lem-weil-pbc-symmetric-product-surjective`) -/
+(blueprint: `lemma-finite-cover-projective-space--1`) -/
 theorem surjective_symmetricProduct (S : Scheme.{u}) (k : ℕ) {ι : Type u}
     (e : ι ≃ Fin (k + 1)) : Surjective (symmetricProduct S k e) := by
   induction k generalizing ι with
@@ -150,8 +150,8 @@ type `n` with `k + 1` elements there is a finite surjective morphism `σ : (ℙ�
 because each `zᵢ = xᵢ / yᵢ` is a root of the monic polynomial `Tᵏ - e₁ Tᵏ⁻¹ + ⋯ ± eₖ` over the
 elementary symmetric functions (and likewise on the other charts), and surjective because a
 binary form of degree `k` over an algebraically closed field is a product of `k` linear forms.
-(blueprint: `lemma-weil-pbc-symmetric-product-p1`, `lem-weil-pbc-symmetric-product-finite`,
-`lem-weil-pbc-symmetric-product-surjective`) -/
+(blueprint: `lemma-finite-cover-projective-space`, `lemma-finite-cover-projective-space--1`,
+`lemma-finite-cover-projective-space--1`) -/
 theorem exists_isFinite_surjective_projectiveLinePow (n : Type u) [Finite n] [Nonempty n]
     (S : Scheme.{u}) :
     ∃ (k : ℕ) (σ : projectiveLinePow k S ⟶ ℙ(n; S)), IsFinite σ ∧ Surjective σ ∧
@@ -162,7 +162,7 @@ theorem exists_isFinite_surjective_projectiveLinePow (n : Type u) [Finite n] [No
   exact ⟨k, symmetricProduct S k e, isFinite_symmetricProduct S k e,
     surjective_symmetricProduct S k e, symmetricProduct_over S k e⟩
 
-/-- Blueprint `lem-fin-symmetric-product-finite`: A finite symmetric-product cover over a
+/-- Blueprint `lemma-finite-cover-projective-space--1`: A finite symmetric-product cover over a
 Noetherian base.
 
 For a scheme `S` and `n = k + 1 ≥ 1`, with `ι` a type with `n + 1` elements indexing the

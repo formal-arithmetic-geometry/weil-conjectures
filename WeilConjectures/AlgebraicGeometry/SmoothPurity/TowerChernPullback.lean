@@ -46,10 +46,11 @@ Source: blueprint classes proof (2) (blueprint: lem-sp-tower-chern-pullback).
 Proof plan:
 1. Exact inverse image on the system topos transports the integral, finite and
 O_E/ell^n coefficient systems. Root pullback respects the power transitions
-(lem-coef-semilinear-derived-sections; det-prop-sfb-cartesian-coefficients-twists).
+(lem-coef-semilinear-derived-sections; lemma-inverse-image-coefficient-sheaves--2).
 2. Glue the line-bundle extension by (u,m)_b -> (g_ab^m u,m)_a; its fibre at 1
 is the frame torsor of L. Its constant-system boundary is lineBundleClass
-(lem-sc-line-bundle-torsor; lem-sc-torsor-h1; ext-one-extension-classification).
+(lemma-cohomology-multiplicative-group--3; lemma-cohomology-multiplicative-group--3;
+ext-one-extension-classification).
 3. Pullback of units gives (u,m) -> (a(u),m) between these extensions, so
 naturality of short-exact-sequence boundaries transports the integral class.
 No isomorphism on all units and no flatness of the scheme morphism is needed.

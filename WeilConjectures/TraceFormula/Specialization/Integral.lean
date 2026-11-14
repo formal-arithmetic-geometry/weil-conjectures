@@ -32,7 +32,7 @@ dualizing map `θ_F` is the dualizing map of the composite of `ν_X` with the co
 `ν_d` whose mate is `β_d`
 (`ProEtale.CondensedRing.Correspondence.TraceSpecialization.θF_ofSupportExchange`;
 
-blueprint `det-nearby-exceptional-tensor` (3)).
+blueprint `lemma-compatibilities-base-change-maps` (3)).
 
 ## Main definitions
 
@@ -251,8 +251,8 @@ noncomputable abbrev fixedLocusToPointCompactSupportExchange :
     (fixedLocusCompactSupportExchange (F := F) (F' := F') ΨC ΨX ΨXX χΔ βc) νX
 
 /-- **The dualizing map of the fixed locus is the dualizing map of `ν_F`** (blueprint
-`det-nearby-exceptional-tensor` (3)): for the specialization data determined by the support with
-`θ_X` the dualizing map of `ν_X`, `θ_F` is the dualizing map of
+`lemma-compatibilities-base-change-maps` (3)): for the specialization data determined by the support
+with `θ_X` the dualizing map of `ν_X`, `θ_F` is the dualizing map of
 `fixedLocusToPointCompactSupportExchange`. -/
 theorem θF_ofSupportExchange :
     (ofSupportExchange (F := F) (F' := F') ΨC ΨX ΨXX χΔ βc σC (dualizingExchange ℓ σpt νX)).θF =

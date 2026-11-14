@@ -15,7 +15,7 @@ public import WeilConjectures.FieldTheory.HenselianDVRGaloisCohomology
 Let `B` be a henselian discrete valuation ring with separably closed residue field, `K` its
 fraction field and `ℓ` a prime invertible in the residue field. We compute the étale cohomology
 of `Spec K` with coefficients in the constant sheaf `ℤ/ℓ` (blueprint
-`det-tf-transverse-corner-constant`):
+`lemma-punctured-surface-punctured-curve--1`):
 `H⁰(Spec K, ℤ/ℓ) ≃ ℤ/ℓ`, `H¹(Spec K, ℤ/ℓ) ≃ ℤ/ℓ` and `Hᵠ(Spec K, ℤ/ℓ) = 0` for `q ≥ 2`.
 
 By `AlgebraicGeometry.Scheme.sheafHConstantSheafAddEquivGaloisH` this is the Galois cohomology
@@ -56,7 +56,7 @@ variable (K) in
 /-- **Vanishing of the higher cohomology of the generic point of a strictly henselian trait.**
 If `K` is the fraction field of a henselian discrete valuation ring `B` with separably closed
 residue field, in which the prime `ℓ` is invertible, then `Hᵠ(Spec K, ℤ/ℓ) = 0` for `q ≥ 2`.
-(blueprint `det-tf-transverse-corner-constant`) -/
+(blueprint `lemma-punctured-surface-punctured-curve--1`) -/
 theorem subsingleton_sheafH_constantZMod_spec_of_isFractionRing
     (hℓ : (ℓ : ResidueField B) ≠ 0) (q : ℕ) (hq : 2 ≤ q) :
     Subsingleton (Sheaf.H ((Spec (.of K)).constantZMod ℓ) q) := by
@@ -68,7 +68,7 @@ variable (K) in
 /-- **The first cohomology of the generic point of a strictly henselian trait.**
 If `K` is the fraction field of a henselian discrete valuation ring `B` with separably closed
 residue field, in which the prime `ℓ` is invertible, then `H¹(Spec K, ℤ/ℓ) ≃ ℤ/ℓ`.
-(blueprint `det-tf-transverse-corner-constant`) -/
+(blueprint `lemma-punctured-surface-punctured-curve--1`) -/
 theorem nonempty_addEquiv_sheafH_one_constantZMod_spec_of_isFractionRing
     (hℓ : (ℓ : ResidueField B) ≠ 0) :
     Nonempty (Sheaf.H ((Spec (.of K)).constantZMod ℓ) 1 ≃+ ZMod ℓ) := by

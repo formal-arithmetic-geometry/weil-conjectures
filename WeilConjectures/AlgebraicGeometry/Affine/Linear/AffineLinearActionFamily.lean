@@ -308,7 +308,7 @@ private theorem action_baseChange
 section, and specializes to the actual action of every matrix, up to the compact-support
 base-change comparison. No assertion about traces, scalar functions, or connectedness
 is part of this statement.
-Source: blueprint lem-amb-linear-trace-invariance, proof paragraph 1
+Source: blueprint proposition-purity-vector-bundles, proof paragraph 1
 (blueprint: lem-amb-affine-linear-action-family).
 
 Proof: compactify each affine projection by its standard projective compactification.

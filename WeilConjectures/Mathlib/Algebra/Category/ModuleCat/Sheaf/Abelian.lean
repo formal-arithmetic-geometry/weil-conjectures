@@ -84,7 +84,7 @@ with compatible `R(U)`-module structures on its sections, and a morphism is a mo
 underlying sheaves of abelian groups that is `R(U)`-linear on sections: the forgetful functor
 `SheafOfModules.toSheaf R` to sheaves of abelian groups is faithful and additive. When
 sheafification of abelian presheaves exists, `SheafOfModules R` is abelian
-(`SheafOfModules.instAbelian`). (blueprint: `def-weil-sheaf-of-modules-category`) -/
+(`SheafOfModules.instAbelian`). (blueprint: `situation-conventions`) -/
 theorem faithful_toSheaf_and_abelian :
     (toSheaf.{v} R).Faithful ∧ (toSheaf.{v} R).Additive ∧
       Nonempty (Abelian (SheafOfModules.{v} R)) :=
@@ -95,7 +95,7 @@ a site where abelian presheaves can be sheafified. Then: (1) the forgetful funct
 `toSheaf R` to sheaves of abelian groups is faithful and exact; (2) sheaves of `R`-modules
 have all small limits and colimits, a colimit being the sheafification of the colimit of the
 underlying presheaves of modules; (3) `toSheaf R` preserves all small limits and colimits.
-(blueprint: `lem-weil-pbc-module-sheaves-colimits-forgetful`) -/
+(blueprint: `situation-conventions`) -/
 theorem toSheaf_exact_and_preservesLimitsColimits :
     (toSheaf.{v} R).Faithful ∧ PreservesFiniteLimits (toSheaf.{v} R) ∧
       PreservesFiniteColimits (toSheaf.{v} R) ∧

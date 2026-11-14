@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleCohomologyClassDescent
 # Continuity of etale cohomology at inverse limits
 
 Source: blueprint `sec-curve-estimates/sk-prop-h2`, lemma Etale cohomology continuity
-(blueprint: lemma-weil-pbc-etale-cohomology-continuity); Stacks Project, Tag 03Q6.
+(blueprint: corollary-cohomology-pro-etale-affine); Stacks Project, Tag 03Q6.
 
 The canonical filtered-colimit isomorphism is stated by its elementwise criterion:
 every limit class descends, and every stage class in the kernel eventually vanishes.
@@ -67,7 +67,7 @@ The composition isomorphism identifies iterated inverse images with direct inver
 
 Source: blueprint `sec-curve-estimates/sk-prop-h2`, Etale cohomology continuity;
 Stacks Project, Tag 03Q6 (the base-change case of the continuity theorem).
-(blueprint: lemma-weil-pbc-etale-cohomology-continuity).
+(blueprint: corollary-cohomology-pro-etale-affine).
 
 Proof:
 1. The class-descent theorem `exists_cohomology_class_of_isLimit` gives the first

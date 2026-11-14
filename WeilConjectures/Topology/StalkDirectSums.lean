@@ -40,7 +40,7 @@ Proof: compose the forgetful functor to presheaf modules with the linear module 
 functor of `def-weil-pbc-module-stalk`. After forgetting its target module structure,
 this is definitionally the forgetful functor to abelian sheaves followed by the abelian
 sheaf stalk functor. The former preserves coproducts by
-`lem-weil-pbc-module-sheaves-colimits-forgetful`; the latter preserves colimits by
+`situation-conventions`; the latter preserves colimits by
 Mathlib's stalk-skyscraper adjunction. Since forgetting a module structure reflects
 colimits, the module stalk functor preserves coproducts. Compose its canonical
 coproduct comparison isomorphism with `ModuleCat.coprodIsoDirectSum`, and take the

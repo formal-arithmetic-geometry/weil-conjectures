@@ -53,7 +53,7 @@ resolutions and a derived category `D(𝒪_X) = DerivedCategory X.Modules`, whos
 cochain complexes of `𝒪_X`-modules and whose morphisms are obtained by inverting the
 quasi-isomorphisms (`HasDerivedCategory.ofIsGrothendieckAbelian`).
 
-(blueprint: `def-pc-derived-category`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 instance (X : Scheme.{u}) : IsGrothendieckAbelian.{u} X.Modules :=
   SheafOfModules.isGrothendieckAbelian X.ringCatSheaf
 
@@ -61,7 +61,7 @@ instance (X : Scheme.{u}) : IsGrothendieckAbelian.{u} X.Modules :=
 `f : X ⟶ S`: the total right derived functor of the pushforward
 `AlgebraicGeometry.Scheme.Modules.pushforward f`, computed on K-injective resolutions.
 
-(blueprint: `def-pc-derived-direct-image`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 noncomputable def derivedPushforward (f : X ⟶ Y) :
     DerivedCategory X.Modules ⥤ DerivedCategory Y.Modules :=
   (pushforward f).rightDerivedFunctor
@@ -92,7 +92,7 @@ the image of a complex `P` of `𝒪_U`-modules concentrated in some interval `[a
 are finite projective (`AlgebraicGeometry.Scheme.Modules.IsFiniteProjective`). The perfect
 objects form the subcategory `D_perf(𝒪_X)`.
 
-(blueprint: `def-pc-perfect-complex`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`) -/
 def IsPerfectComplex (E : DerivedCategory X.Modules) : Prop :=
   ∀ x : X, ∃ U : X.Opens, IsAffineOpen U ∧ x ∈ U ∧
     ∃ (P : CochainComplex U.toScheme.Modules ℤ) (a b : ℤ), P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧
@@ -124,7 +124,7 @@ lemma IsInvertible.exists_isAffineOpen_restrict_iso (M : X.Modules) [M.IsInverti
 a perfect object of `D(𝒪_X)`: on an affine open `U` on which `ℒ|_U ≅ 𝒪_U`, it is the complex
 `𝒪_U[0]`, whose only term is free of rank one.
 
-(blueprint: `rem-ptr-pc-perfect-complex-9`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`) -/
 theorem isPerfectComplex_singleFunctor_obj_of_isInvertible (M : X.Modules) [M.IsInvertible] :
     IsPerfectComplex ((DerivedCategory.singleFunctor X.Modules 0).obj M) := by
   intro x

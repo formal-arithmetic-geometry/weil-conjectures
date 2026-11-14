@@ -31,7 +31,7 @@ namespace AlgebraicGeometry.WeilComplex
 
 /-- The compact-support integral of the pullback to a trivial rank-n affine bundle
 is the rank Tate twist and cohomological shift.
-Source: `thm-pur-vector-bundle-thom` and convolution-kernel proof, Step 4.
+Source: `lemma-integral-linear-character--1` and convolution-kernel proof, Step 4.
 
 Proof: the standard affine-space base-change square and the given cartesian
 square have the same cospan. Their universal property gives an isomorphism from

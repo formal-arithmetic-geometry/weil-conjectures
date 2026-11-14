@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 # Primes and residue fields of a fibre ring
 
 Source: Stacks Project, Tags 00E6 and 0H9M
-(blueprint: lem-weil-pbc-fibre-ring-primes-residue-fields).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -27,7 +27,7 @@ namespace PrimeSpectrum
 reflecting inclusions, to primes of `B` over `p`, and their residue fields are identified
 by the tensor evaluation map.
 Source: Stacks Project, Tags 00E6 and 0H9M
-(blueprint: lem-weil-pbc-fibre-ring-primes-residue-fields).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 Mathlib's fibre `Ideal.Fiber` is `κ(p) ⊗[A] B`; tensor symmetry identifies its
 `j(b) = 1 ⊗ b` (`includeRight`) with the source's `b ⊗ 1`, and `ψ_q(λ ⊗ b) = λ̄ b̄`.

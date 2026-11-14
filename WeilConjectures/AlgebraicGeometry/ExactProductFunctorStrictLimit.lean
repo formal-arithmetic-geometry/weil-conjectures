@@ -428,7 +428,7 @@ lem-cbc-completed-extension-zero-comparison, refined by Stacks Project, Tags 094
 0941 and 07KC (auxiliary; not a blueprint node).
 
 Proof, following the nine steps of the blueprint node:
-1. Apply lem-sf-exact-functor-derived-triangulated to `F` and its postcomposition on
+1. Apply situation-conventions to `F` and its postcomposition on
    towers. Levelwise exactness is lem-weil-tower-category-levelwise-abelian. Exact
    countable products identify termwise and derived products by
    lem-weil-derived-limit-products-core. The projection equations characterize phi.

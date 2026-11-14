@@ -168,7 +168,7 @@ This contains no derived functor or supported-source assertion.
 
 Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
 sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), coefficient/direct-image
-identification; integral pullback compatibility of sk-prop-sfb-qlbar-colimit-x.
+identification; integral pullback compatibility of lemma-comparison-completed-coefficients.
 (blueprint: lem-diagonal-completed-ordinary-square).
 
 Proof: identify both underlying abelian sheaves with direct image of the original

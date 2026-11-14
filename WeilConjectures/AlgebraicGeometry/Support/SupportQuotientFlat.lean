@@ -93,7 +93,7 @@ set_option linter.privateModule false
 /-!
 # Flat constant coefficients with closed support
 
-Source: blueprint `lem-pur-kunneth-supported`, support-quotient argument, and its
+Source: blueprint `proposition-purity-vector-bundles`, support-quotient argument, and its
 stage-1 refinement (blueprint: lem-pur-support-quotient-flat).
 
 The two quotients are actual cokernels of the extension-by-zero counits. Restriction

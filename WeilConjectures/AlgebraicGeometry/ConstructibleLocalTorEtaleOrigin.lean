@@ -89,13 +89,13 @@ Proof:
 1. Apply lem-sfb-proetale-tor-local-global to the local Tor condition. Quasi-compactness
    gives one interval [a,b] for all global module tests, including when X is empty.
 2. Test against the constant ring module in degree zero. The K-flat tensor construction
-   of def-weil-derived-tensor identifies M tensor A_X with M. Thus M has cohomology only
+   of prose-03-02 identifies M tensor A_X with M. Thus M has cohomology only
    in [a,b]. Together with the assumed constructibility this gives bounded constructibility.
-3. Apply sk-thm-pe-constructible-comparison: its bounded constructible equivalence is
+3. Apply theorem-comparison-constructible-sheaves: its bounded constructible equivalence is
    essentially surjective, giving a bounded constructible etale object C and an isomorphism
    from its derived comparison pullback to M. Choose a cochain representative P of C.
    The localization factorization of the comparison identifies the image of P with M.
-4. Apply det-pe-finite-tor-comparison-noetherian to C and the global interval. Invariance
+4. Apply corollary-finite-tor-amplitude-under-comparison--1 to C and the global interval. Invariance
    under the comparison isomorphism gives the same Tor interval for C. This is the small
    argument omitted in the proof of Tag 09C2 (4).
 5. Conversely, the bounded constructible comparison sends C to an object with constructible

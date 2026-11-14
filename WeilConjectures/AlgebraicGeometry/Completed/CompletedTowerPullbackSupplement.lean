@@ -859,7 +859,7 @@ def completedPullbackConstantIso :
 
 /-- Completed pullback is the derived inverse limit of the pulled-back reduction tower.
 Its restriction to intrinsically complete objects is the completed pullback of the node.
-Source: Stacks Tag 099N (blueprint: def-weil-pbc-completed-pullback). -/
+Source: Stacks Tag 099N (blueprint: definition-completed-inverse-image--1). -/
 def completedPullbackObject
     (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))) :
     DerivedCategory (pbcModules X (pbcAdicCompletion X d)) :=

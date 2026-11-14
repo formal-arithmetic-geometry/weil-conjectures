@@ -176,7 +176,7 @@ noncomputable def closedConstantSectionMap (A : Type (u + 1)) [CommRing A]
 
 /-- The canonical adjoint pullback map, defined as the mate of
 `closedConstantPullbackMap`. Source: Tag 03Q1(3);
-blueprint `prop-weil-pbc-inverse-image-modules-exact`. -/
+blueprint `situation-conventions`. -/
 noncomputable def closedConstantPullbackAdjoint (A : Type (u + 1)) [CommRing A]
     {C X X' : Scheme.{u}} (i : C ⟶ X) (v : X' ⟶ X) [IsClosedImmersion i] :
     (upperStar (ModuleCat.{u + 1} A) v).obj (closedConstantModule A i) ⟶
@@ -187,7 +187,7 @@ noncomputable def closedConstantPullbackAdjoint (A : Type (u + 1)) [CommRing A]
 /-- Compatibility of the specified pullback adjoint with the canonical constant section.
 The displayed constant-sheaf comparison is part of the equation, so this does not merely assert
 that some section map exists. Source: Stacks Tag 03Q1(3); blueprint
-`prop-weil-pbc-inverse-image-modules-exact`. -/
+`situation-conventions`. -/
 def closedConstantPullbackRestriction (A : Type (u + 1)) [CommRing A]
     {C X X' : Scheme.{u}} (i : C ⟶ X) (v : X' ⟶ X) [IsClosedImmersion i] : Prop :=
   (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) v).hom.app (ModuleCat.of A A) ≫

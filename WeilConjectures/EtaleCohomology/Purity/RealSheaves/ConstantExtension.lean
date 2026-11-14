@@ -17,9 +17,10 @@ of `𝔽_q` of degree `m`, and `C₀' = C₀ ×_{𝔽_q} 𝔽_{q ^ m}`, a geomet
 `W` of `C₀` and `W'` of `C₀'` and a path `τ` from the base point of `C₀'` to that of `C₀`, the
 projection `C₀' ⟶ C₀` induces the *natural map* `W(C₀') → W(C₀)`
 (`AlgebraicGeometry.WeilGroup.constantExtensionMap`). This file proves (blueprint
-`lem-wf-weil-group-constant-extension`) that it is a continuous injective homomorphism with image
-`W(C₀)^[m] = deg⁻¹(m ℤ)`, carrying the geometric subgroup `π₁(C)` of `W(C₀')` onto that of
-`W(C₀)`, and that the degree over `𝔽_{q ^ m}` is the degree over `𝔽_q` divided by `m`.
+`lemma-geometric-constituents-after-constant-extension`) that it is a continuous injective
+homomorphism with image `W(C₀)^[m] = deg⁻¹(m ℤ)`, carrying the geometric subgroup `π₁(C)` of
+`W(C₀')` onto that of `W(C₀)`, and that the degree over `𝔽_{q ^ m}` is the degree over `𝔽_q` divided
+by `m`.
 
 ## Main definitions
 
@@ -104,8 +105,8 @@ lemma mem_weilGroup_constantExtensionFundamentalGroupMap_iff (g : W'.fundamental
   have := W.connectedSpace
   mem_weilGroup_constantExtension_iff p W'.basePoint τ W.fundamentalGroup W'.fundamentalGroup g n
 
-/-- Blueprint `lem-wf-weil-group-constant-extension`: Weil group after a finite constant-field
-extension.
+/-- Blueprint `lemma-geometric-constituents-after-constant-extension`: Weil group after a finite
+constant-field extension.
 
 The natural map `W(C₀') → W(C₀)` from the Weil group of the constant field extension
 `C₀' = C₀ ×_{𝔽_q} 𝔽_{q ^ m}` over `𝔽_{q ^ m}` to the Weil group of `C₀` over `𝔽_q`, induced by
@@ -241,8 +242,8 @@ noncomputable def constantExtensionEquiv :
   (MonoidHom.ofInjective (W.constantExtensionMap_injective W' τ)).trans
     (MulEquiv.subgroupCongr (W.range_constantExtensionMap W' τ))
 
-/-- Blueprint `lem-wf-weil-group-constant-extension`: Weil group after a finite constant-field
-extension.
+/-- Blueprint `lemma-geometric-constituents-after-constant-extension`: Weil group after a finite
+constant-field extension.
 
 Let `C₀` be a geometically connected curve over `𝔽_q`, `L = 𝔽_{q ^ m}` and
 `C₀' = C₀ ×_{𝔽_q} 𝔽_{q ^ m}`, regarded as a curve over `𝔽_{q ^ m}`. Under the natural map
@@ -261,8 +262,8 @@ theorem constantExtension :
     W.range_constantExtensionMap W' τ, W.map_geometric_constantExtensionMap W' τ, fun w ↦ ?_⟩
   rw [deg_constantExtensionMap, toAdd_pow, nsmul_eq_mul]
 
-/-- Blueprint `lem-wf-weil-group-constant-extension`: Weil group after a finite constant-field
-extension.
+/-- Blueprint `lemma-geometric-constituents-after-constant-extension`: Weil group after a finite
+constant-field extension.
 
 If `s ∈ W(C₀)` has degree one, then `s ^ m` is the image of an element of degree one of the Weil
 group of `C₀ ×_{𝔽_q} 𝔽_{q ^ m}` over `𝔽_{q ^ m}`. -/
@@ -281,12 +282,12 @@ theorem exists_constantExtensionMap_eq_pow (s : W.carrier)
   exact h
 
 omit [Finite L] in
-/-- Blueprint `rem-ptr-wf-weil-group-1`: Pointer to the properties of `def-wf-weil-group`.
+/-- Blueprint `situation-weil`: Pointer to the properties of `situation-weil`.
 
 The degree `deg : W(C₀) → ℤ` is a surjective homomorphism with kernel the geometric subgroup
 `π₁(C)`, and it sends every lift of the geometric Frobenius `Φ` to `1`: an element of `W(C₀)`
 acting on the geometric fibres of the constant covers of `C₀` as `Φ` has degree one
-(`lem-wf-weil-group-exact-sequence`, through
+(`situation-weil`, through
 `AlgebraicGeometry.Scheme.FiniteEtale.exact_weilGroupDeg`). -/
 theorem exact_deg :
     Function.Surjective W.deg ∧ W.deg.ker = W.geometric ∧

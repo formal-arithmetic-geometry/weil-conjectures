@@ -30,7 +30,7 @@ attribute [local irreducible] AlgebraicGeometry.ProjectiveSpace
   projectiveLineTraceTransport projectiveLineTraceDatum
 
 /-- The ordered source of the finite P1 decomposition, constructed as a biproduct.
-Source: blueprint thm-amb-p1-decomposition, after twisting by A(1)[2].
+Source: blueprint lemma-cohomology-projective-line-trace, after twisting by A(1)[2].
 (auxiliary; not a blueprint node). -/
 @[implicit_reducible]
 def ordinaryFiniteP1SplittingSource (A : Type (u + 1)) [CommRing A] (N : ℕ)
@@ -38,7 +38,7 @@ def ordinaryFiniteP1SplittingSource (A : Type (u + 1)) [CommRing A] (N : ℕ)
   (ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧ ⊞ ordinaryFiniteUnit A S
 
 /-- The target of the finite P1 decomposition, constructed by derived direct image.
-Source: blueprint thm-amb-p1-decomposition, after twisting by A(1)[2].
+Source: blueprint lemma-cohomology-projective-line-trace, after twisting by A(1)[2].
 (auxiliary; not a blueprint node). -/
 @[implicit_reducible]
 def ordinaryFiniteP1SplittingTarget (A : Type (u + 1)) [CommRing A] (N : ℕ)
@@ -48,7 +48,7 @@ def ordinaryFiniteP1SplittingTarget (A : Type (u + 1)) [CommRing A] (N : ℕ)
       ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧)
 
 /-- The two specified components, before asserting invertibility.
-Source: blueprint thm-amb-p1-decomposition, after twisting by A(1)[2].
+Source: blueprint lemma-cohomology-projective-line-trace, after twisting by A(1)[2].
 (auxiliary; not a blueprint node). -/
 @[irreducible]
 def ordinaryFiniteP1SplittingMap (A : Type (u + 1)) [CommRing A] (N : ℕ)
@@ -77,7 +77,7 @@ private theorem splitting_map_naturality
 
 /-- The hyperplane Kummer class and its two-component map are natural over every base.
 Over a Noetherian base this is the already normalized Chern morphism.
-Source: blueprint thm-amb-p1-decomposition, arbitrary-base compatibility, and
+Source: blueprint lemma-cohomology-projective-line-trace, arbitrary-base compatibility, and
 lem-sp-tower-p1-arbitrary-base-integrals, steps 2–3.
 (auxiliary; not a blueprint node)
 

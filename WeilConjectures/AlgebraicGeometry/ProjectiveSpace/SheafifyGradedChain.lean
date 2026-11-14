@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.GradedModuleChartData
 /-!
 # Exactness of an associated graded chain on the projective line
 
-Source: blueprint `lem-sc-p1-graded-resolution`, sheafification clause;
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, sheafification clause;
 Stacks Project, Constructions, Tag 01M7, final paragraph.
 (blueprint: lem-sc-p1-sheafify-graded-chain).
 -/
@@ -34,7 +34,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- Sheafification and inverse transport of a given exact graded chain. The terms need not
 be free or finitely generated; the conclusion supplies their associated sheaf chart data.
-Source: blueprint `lem-sc-p1-graded-resolution`, sheafification clause;
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, sheafification clause;
 Stacks Project, Constructions, Tag 01M7, final paragraph.
 (blueprint: lem-sc-p1-sheafify-graded-chain).
 

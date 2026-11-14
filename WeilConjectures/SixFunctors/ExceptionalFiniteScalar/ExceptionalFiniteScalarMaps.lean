@@ -37,7 +37,7 @@ is invertible on these objects.  Define `b` as the `target.adjunction`-transpose
 invertible because its realization is the etale `b` up to the site comparisons (steps 6--7).
 The shift equations follow from the shift compatibility of the proper and open maps and the
 uniqueness of adjoint shifts (step 8).  Uses: lem-asd-proper-finite-coefficient-extension,
-lem-pur-etale-compact-scalar-coherence, thm-amb-etale-exceptional-adjoint.
+lem-pur-etale-compact-scalar-coherence, theorem-existence-exceptional-inverse-image--1.
 -/
 theorem finiteScalarMaps_exists
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)

@@ -20,8 +20,8 @@ preserves direct sums (it is left adjoint to `j^*`) and hence maps the localizin
 `Loc(Dbc(U, Λ))` into `Loc(Dbc(X, Λ))`
 (`localizingClosure_boundedConstructible_openImmersionLowerShriek` in the namespace
 `AlgebraicGeometry.ProEtale.CondensedRing`,
-blueprint `det-proper-image-localizing-open` at the `ℓ`-adic stages; the finite stages are
-`AlgebraicGeometry.ProEtale.localizingClosure_constructibleFiniteTor_openImmersionLowerShriek`).
+blueprint `proposition-proper-direct-image-extension-zero` at the `ℓ`-adic stages; the finite stages
+are `AlgebraicGeometry.ProEtale.localizingClosure_constructibleFiniteTor_openImmersionLowerShriek`).
 -/
 
 @[expose] public section
@@ -52,7 +52,7 @@ instance (J : Type (u + 1)) :
   inferInstance
 
 include ℓ in
-/-- Blueprint `det-proper-image-localizing-open`: Extension by zero on the localizing
+/-- Blueprint `proposition-proper-direct-image-extension-zero`: Extension by zero on the localizing
 categories, at the `ℓ`-adic stages.
 
 For a commutative condensed ring `Λ` (such as `𝒪̲_E`, `E̲` or `ℚ̲̄_ℓ`, for which
@@ -60,8 +60,8 @@ For a commutative condensed ring `Λ` (such as `𝒪̲_E`, `E̲` or `ℚ̲̄_ℓ
 `k`-schemes, the extension by zero `j_! : D(U_proét, Λ) ⥤ D(X_proét, Λ)` maps `Dbc(U, Λ)` into
 `Dbc(X, Λ)`, preserves direct sums, and maps `Loc(Dbc(U, Λ))` into `Loc(Dbc(X, Λ))`; it is
 exact, being induced by an exact functor. The first assertion is the extension-by-zero part of
-`sk-def-sfb-dc-restricted-functors`; the last one follows by
-`det-proper-image-localizing-principle`. -/
+`proposition-proper-direct-image-extension-zero`; the last one follows by
+`proposition-proper-direct-image-extension-zero`. -/
 theorem localizingClosure_boundedConstructible_openImmersionLowerShriek :
     boundedConstructible (condensedRingObj Λ U.left) ≤
         (boundedConstructible (condensedRingObj Λ X.left)).inverseImage

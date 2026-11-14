@@ -12,7 +12,7 @@ public import WeilConjectures.TraceFormula.QuotientTensor.QuotientTensorInsertio
 /-! # Finite-level normalization of the ordinary completion augmentation
 
 Source: Stacks Tags 03D2 and 03EL; expanded clause 4 of
-def-weil-frobenius-coefficient-twists.
+prose-10-21.
 (blueprint: lem-pur-isomorphism-ordinary-finite-augmentation).
 -/
 

@@ -33,8 +33,9 @@ Proof plan:
    natural numbers, finite tuples, images, and indexed unions of size at most `κ`.
 2. For any ring `R` of size at most `κ`, encode constructible subsets by finite Boolean
    expressions in principal opens and closed sets. Encode finite partitions and their chosen
-   denominators this way; there are at most `κ` indices in `def-weil-pbc-w-localization`.
-   Common refinement makes these indices directed (`def-weil-pbc-w-local`).
+   denominators this way; there are at most `κ` indices in
+   `theorem-existence-contractible-covers--1`. Common refinement makes these indices directed
+   (`definition-w-local-w-strictly-local--2`).
 3. Elements of each finite product of principal localizations are finite tuples of fractions.
    Their codes and the index codes have size at most `κ`. Every colimit element has a stage
    representative by `lem-pc-filtered-colimit-commrings-elementwise`, so `|R^w| ≤ κ`.
@@ -42,7 +43,7 @@ Proof plan:
 4. By `def-weil-pbc-finitely-presented-algebra`, finite polynomial generators and relations
    encode all finitely presented algebras up to isomorphism, and encode their elements.
    Both sets have size at most `κ`; restrict to the faithfully flat étale representatives
-   used by `def-weil-pbc-etale-contraction`, with just one per isomorphism class.
+   used by `theorem-existence-contractible-covers--1`, with just one per isomorphism class.
 5. Finite subsets of these representatives form at most `κ` indices. A finite tensor product
    has the presentation obtained by concatenating variables and relations, so has size at
    most `κ`, including the empty tensor product `R`. Stage representatives bound their
@@ -53,8 +54,8 @@ Proof plan:
 7. The zero locus `T = V(IE)` is closed. Apply step 3 to `E` to bound `E^w`. Constructible
    neighbourhoods of `T` form at most `κ` indices, directed by reverse inclusion and inhabited
    by the whole spectrum. Each localization at its selector has size at most `κ`, by fraction
-   codes. Stage representatives bound their colimit from `def-weil-pbc-retained-localization`.
-   By `def-weil-pbc-strict-w-cover`, that colimit is precisely `C_A`.
+   codes. Stage representatives bound their colimit from `theorem-existence-contractible-covers--1`.
+   By `theorem-existence-contractible-covers--1`, that colimit is precisely `C_A`.
 -/
 theorem cardinalMk_le (A : Type u) [CommRing A] (κ : Cardinal.{v})
     (hκ : Cardinal.aleph0 ≤ κ)

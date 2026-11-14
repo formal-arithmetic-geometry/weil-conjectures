@@ -41,16 +41,17 @@ Proof:
 2. Finiteness of the coefficient ring gives a positive integer annihilating every module.
    Extension by zero and inverse image are exact, so commute with cohomology and preserve
    boundedness below (lem-weil-pbc-extension-by-zero-exact,
-   lem-sp-exact-functor-preserves-homology, prop-weil-pbc-inverse-image-modules-exact).
-3. Apply thm-weil-pbc-bounded-below to the proper square for `c.g` and the torsion complex
+   lem-sp-exact-functor-preserves-homology, situation-conventions).
+3. Apply theorem-proper-base-change-classical-pro to the proper square for `c.g` and the torsion
+complex
    `c.i_! K`. By lem-weil-pbc-exchange-forget-coefficients, forgetting coefficients
    identifies the module exchange with the abelian exchange and detects invertibility.
-   The mate construction of def-weil-pbc-derived-exchange makes this natural in `K`.
-4. Apply cor-cbc-derived-extension-zero-base-change to the open immersion square to
+   The mate construction of definition-derived-base-change-map makes this natural in `K`.
+4. Apply proposition-extension-zero-restriction-closed-subscheme--11 to the open immersion square to
    identify the pullback of `c.i_! K` with extension by zero of the pullback of `K`, then
    apply the derived proper pushforward to this natural isomorphism.
 5. Compose the two natural isomorphisms and use the definition
-   def-weil-pbc-projection-compactification, `Rf_!^c = R(c.g)_* c.i_!`.
+   proposition-construction-independence-rf-shriek, `Rf_!^c = R(c.g)_* c.i_!`.
 -/
 theorem etale_compactSupport_baseChange_qcqs
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

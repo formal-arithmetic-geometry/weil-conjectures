@@ -31,8 +31,8 @@ universality of its carrier reduces to the invertibility of `smoothUnitBaseChang
 ## Status of the remaining input
 
 `IsIso (smoothUnitBaseChange ...)` is the compatibility of `Rf^!` with the change of base field
-for a *non-proper* smooth `f` (blueprint `sk-prop-sp-purity-bc` across a field extension, SGA 4½
-Th. finitude). The library proves it
+for a *non-proper* smooth `f` (blueprint `proposition-compatibility-purity-base-change` across a
+field extension, SGA 4½ Th. finitude). The library proves it
 
 * for smooth **proper** `f` along a weakly étale change of base
   (`ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_app_of_smooth_of_weaklyEtale`, where

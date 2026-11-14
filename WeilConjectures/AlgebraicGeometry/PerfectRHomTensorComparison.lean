@@ -112,7 +112,7 @@ Any two such bijections, or two such models, change these maps only by isomorphi
 so the invertibility assertions do not depend on the choices.
 For base change restrict to affine opens in inverse images of
 the cover;
-lem-pc-flat-complex-derived-pullback computes both duals by termwise pullback. The
+lemma-coherent-base-change-invertible-sheaves--2 computes both duals by termwise pullback. The
 comparison is pullback of finite-projective duals, an isomorphism on finite free
 modules and direct summands. Check invertibility locally on cohomology sheaves. -/
 theorem perfect_rhom_tensor_comparison

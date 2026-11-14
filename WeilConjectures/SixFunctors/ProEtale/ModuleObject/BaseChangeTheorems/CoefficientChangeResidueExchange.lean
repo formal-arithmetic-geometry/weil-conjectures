@@ -26,7 +26,7 @@ and a bounded below complex `K` of `𝒪_{E,X}`-module objects, the first derive
 and the pro-étale base-change morphism with coefficients `𝔽_E` at the first derived reduction of
 `K` are isomorphic arrows
 (`ProEtale.CondensedRing.nonempty_arrowIso_derivedReduction_map_exchangeRight`). This is the
-ambient form of the last assertion of blueprint `sk-lem-sbc-exchange-compatibility` for the
+ambient form of the last assertion of blueprint `lemma-naturality-pasting-comparison` for the
 residue map `𝒪_E ⟶ 𝔽_E`.
 
 It is the composite of the transfer of exchange morphisms along the non-flat coefficient change

@@ -101,9 +101,9 @@ public import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonDerivedPull
 
 /-! # Shifted line inverses on the etale and pro-etale sites
 
-Source: main-20261015, sk-prop-cohsm, thm-pur-cohomological-smoothness, first paragraph;
-Stacks Project, Tags 0B8Q, 0B8N, 06YQ, 07A4 and 0FNH.
-(blueprint: lem-pur-shifted-line-site-inverse)
+Source: main-20261015, proposition-exceptional-inverse-image-smooth-morphism,
+proposition-exceptional-inverse-image-smooth-morphism, first paragraph; Stacks Project, Tags 0B8Q,
+0B8N, 06YQ, 07A4 and 0FNH. (blueprint: lem-pur-shifted-line-site-inverse)
 -/
 
 @[expose] public noncomputable section

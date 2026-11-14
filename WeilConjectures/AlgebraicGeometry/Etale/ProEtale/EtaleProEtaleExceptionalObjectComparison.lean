@@ -49,7 +49,7 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 /-! # Object comparison for exceptional transport
 
 Source: blueprint main-20261015, the final restriction paragraph of
-`sk-prop-sf-rf-shriek-preservation`, transport Steps 1 and 2.
+`theorem-f-shriek-finite-coefficients`, transport Steps 1 and 2.
 -/
 
 @[expose] public section

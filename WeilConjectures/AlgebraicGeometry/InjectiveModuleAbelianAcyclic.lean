@@ -52,7 +52,7 @@ a presheaf of modules by lem-weil-pbc-injective-module-injective-presheaf. Exact
 Hom(-, I) then shows that Hom(K, I), hence the Cech complex of I, has zero positive
 cohomology (Step 3). Forgetting the module action leaves the section groups and
 restriction maps unchanged, so the underlying abelian sheaf has the identical Cech
-complex (def-weil-pbc-abelian-etale-sheaves and def-weil-pbc-cech-complex; Step 4).
+complex (situation-conventions and def-weil-pbc-cech-complex; Step 4).
 Apply lem-weil-pbc-cech-vanishing-criterion with all objects and all coverings. Fibre
 products exist by def-weil-pbc-etale-site, and every cover refines itself. The preceding
 Cech vanishing supplies the third hypothesis, giving zero higher right derived

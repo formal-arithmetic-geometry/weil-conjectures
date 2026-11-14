@@ -20,7 +20,7 @@ public import WeilConjectures.NumberTheory.Padics.Extension
 /-!
 # Condensed realizations of the base p-adic coefficients
 
-Source: blueprint `main-20261015`, `sk-thm-existence`, opening paragraphs of
+Source: blueprint `main-20261015`, `theorem-exceptional-inverse-image`, opening paragraphs of
 `det-existence-localizing.proof.md` and `det-existence-restriction.proof.md`
 (blueprint: lem-sfb-base-coefficient-condensed-identification).
 -/
@@ -65,7 +65,7 @@ integral condensed coefficients, compatibly with inclusion. The bottom intermedi
 has its inherited subspace norm; `PadicAlgCl.integers` is the unit ball for precisely this
 norm. Ring objects here use the tensor product of condensed abelian groups.
 
-Source: blueprint `main-20261015`, `sk-thm-existence`, introductory coefficient
+Source: blueprint `main-20261015`, `theorem-exceptional-inverse-image`, introductory coefficient
 specializations in `det-existence-localizing.proof.md` and
 `det-existence-restriction.proof.md`
 (blueprint: lem-sfb-base-coefficient-condensed-identification).

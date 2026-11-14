@@ -18,7 +18,7 @@ common refinement
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.Compactification.exists_refinement`), as for trait
 models over a base field
 (`NearbyCyclesModel.IsTraitModelOfBase.Compactification.exists_refinement`). This is the common
-refinement of the proof of blueprint `det-nearby-exchange-maps` ("two compactifications have a
+refinement of the proof of blueprint `prose-E-15` ("two compactifications have a
 common proper refinement").
 
 -/
@@ -38,7 +38,7 @@ variable {F : Type u} [Field F] {k' : Type u} [Field k']
   {g : N.generic ⟶ Spec (.of (traitGenericField k'))} {h : N.IsTraitModelOfGenericBase Y ι q g}
 
 /-- **Common refinement of two compactifications** (the first step of the proof of blueprint
-`det-nearby-exchange-maps`): any two compactifications `C₁`, `C₂` of a trait model over a generic
+`prose-E-15`): any two compactifications `C₁`, `C₂` of a trait model over a generic
 base have a common refinement `C₃`.
 
 Construction: with `X₃` the closure of the graph of `Y` in `X₁ ×_F X₂`

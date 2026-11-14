@@ -8,7 +8,7 @@ public import WeilConjectures.SmoothPurity.Exceptional.ExceptionalProEtaleRealiz
 import WeilConjectures.CategoryTheory.InverseMateEquivalence
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 /-! # Realization of the actual etale/pro-etale system comparison
-Source: blueprint def-weil-exceptional-inverse-image. All ordinary maps are fixed on
+Source: blueprint theorem-f-shriek-finite-coefficients. All ordinary maps are fixed on
 sections or by adjunction transposes; their derived maps retain the localization units.
 (blueprint: def-pur-adic-site-realization).
 -/

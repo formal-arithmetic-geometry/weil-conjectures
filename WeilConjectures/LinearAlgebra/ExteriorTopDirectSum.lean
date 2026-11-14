@@ -67,8 +67,8 @@ private noncomputable def directSumMap
         simp }
 
 /-- Multiplication of the two homogeneous wedges concatenates their factors.
-Source: blueprint `lem-sc-riemann-roch`, determinant paragraph. Apply the two inclusions
-factor by factor and use `ExteriorAlgebra.ιMulti_mul_ιMulti`.
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality--1`, determinant paragraph. Apply the
+two inclusions factor by factor and use `ExteriorAlgebra.ιMulti_mul_ιMulti`.
 (blueprint: lem-sc-exterior-top-direct-sum) -/
 private theorem directSumMap_ιMulti
     {R : Type u} [CommRing R]
@@ -164,8 +164,8 @@ private theorem tensor_wedge_ext
   intro n
   exact h m n
 
-/-- Source: Weil conjectures blueprint, `lem-sc-riemann-roch`, proof of (*), determinant
-paragraph (blueprint: lem-sc-exterior-top-direct-sum).
+/-- Source: Weil conjectures blueprint, `theorem-riemann-roch-coherent-serre-duality--1`, proof of
+(*), determinant paragraph (blueprint: lem-sc-exterior-top-direct-sum).
 
 Choose bases of `M` and `N`. The top exterior-power basis lemma
 `lem-weil-pbc-exterior-power-free-basis` gives one-element wedge bases of their top powers
@@ -200,8 +200,8 @@ theorem existsUnique_topDirectSum
     have h' : e.symm = a := LinearEquiv.toLinearMap_injective h
     exact congrArg LinearEquiv.symm h'
 
-/-- Source: Weil conjectures blueprint, `lem-sc-riemann-roch`, proof of (*), determinant
-paragraph (blueprint: lem-sc-exterior-top-direct-sum).
+/-- Source: Weil conjectures blueprint, `theorem-riemann-roch-coherent-serre-duality--1`, proof of
+(*), determinant paragraph (blueprint: lem-sc-exterior-top-direct-sum).
 
 Apply isomorphisms `f` and `g` to the pure-wedge characterization of the two isomorphisms.
 Exterior-power maps send each wedge to the wedge of the images, tensor-product maps send

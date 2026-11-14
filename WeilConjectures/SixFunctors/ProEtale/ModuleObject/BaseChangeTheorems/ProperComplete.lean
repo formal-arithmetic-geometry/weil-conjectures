@@ -26,10 +26,10 @@ below complex `R` of `𝒪_{E,P}`-modules which is derived `ℓ`-adically comple
 étale origin, the base change morphism `Lg^* Rt_* R ⟶ Rt'_* Lg'^* R` is an isomorphism
 (`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper_of_isDerivedAdicComplete`).
 
-This is blueprint `sk-prop-pbc-complete` in the case where the completed inverse images agree
-with the inverse images. The proof: both sides of the base change morphism are derived complete
-(`Rt_*` is a right adjoint, and `Lg^*`, `Lg'^*` preserve the products), hence so is its cone
-`C`. The first derived reduction of the base change morphism is the pro-étale base change
+This is blueprint `proposition-proper-base-change-complete-integral` in the case where the completed
+inverse images agree with the inverse images. The proof: both sides of the base change morphism are
+derived complete (`Rt_*` is a right adjoint, and `Lg^*`, `Lg'^*` preserve the products), hence so is
+its cone `C`. The first derived reduction of the base change morphism is the pro-étale base change
 morphism with coefficients `𝔽_E` at `R ⊗ᴸ 𝔽_E`
 (`ProEtale.CondensedRing.nonempty_arrowIso_derivedReduction_map_exchangeRight`), invertible by
 proper base change for torsion coefficients
@@ -57,11 +57,11 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
 set_option maxHeartbeats 400000 in
 -- the derived categories of module objects are slow to elaborate
 /-- **Proper base change for derived complete integral complexes** (blueprint
-`sk-prop-pbc-complete`, for pullbacks which preserve countable products): for a cartesian square
-`g' ≫ p = p' ≫ g` with `p` proper, along which `Lg^*` and `Lg'^*` preserve countable products,
-and a bounded below derived `ℓ`-adically complete `𝒪_E`-complex `R` whose first derived
-reduction is of étale origin, the base change morphism `Lg^* Rp_* R ⟶ Rp'_* Lg'^* R` is an
-isomorphism. -/
+`proposition-proper-base-change-complete-integral`, for pullbacks which preserve countable
+products): for a cartesian square `g' ≫ p = p' ≫ g` with `p` proper, along which `Lg^*` and `Lg'^*`
+preserve countable products, and a bounded below derived `ℓ`-adically complete `𝒪_E`-complex `R`
+whose first derived reduction is of étale origin, the base change morphism
+`Lg^* Rp_* R ⟶ Rp'_* Lg'^* R` is an isomorphism. -/
 theorem isIso_baseChangeMap_app_of_isProper_of_isDerivedAdicComplete [IsProper p]
     (hsq : IsPullback g' p' p g)
     [PreservesLimitsOfShape (Discrete ℕ) L((g)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)]

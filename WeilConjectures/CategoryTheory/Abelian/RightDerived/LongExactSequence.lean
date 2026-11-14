@@ -53,7 +53,7 @@ include hS
 ```
 is exact at `R^q F C` and at `R^{q+1} F A`. The connecting morphism is the one of the long
 exact homology sequence of the distinguished triangle `R⁺F(A[0]) ⟶ R⁺F(B[0]) ⟶ R⁺F(C[0]) ⟶`
-in the bounded below derived category of `D`. (blueprint: `lemma-weil-pbc-leray-acyclicity`,
+in the bounded below derived category of `D`. (blueprint: `lemma-acyclic-resolutions`,
 Step 0) -/
 theorem exists_rightDerived_δ_exact (q : ℕ) :
     ∃ (δ : (F.rightDerived q).obj S.X₃ ⟶ (F.rightDerived (q + 1)).obj S.X₁)

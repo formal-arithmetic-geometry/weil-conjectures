@@ -393,8 +393,8 @@ attribute [-instance] monoidalCategory_boundedConstructible
   ObjectProperty.instMonoidalCategoryStructFullSubcategory
 
 /-- **The slice exchange is an averaging summand at a finite level** (blueprint
-`det-tf-nearby-duality-slice`, the generic-slicing identification `g_s^* Ψ_M ≃ (Ψ_{M''} c^*)^P`,
-with `det-tf-invariants-duality`; SGA 4½, [Th. finitude], §3). For two bounded constructible
+`lemma-nearby-duality-slice--1`, the generic-slicing identification `g_s^* Ψ_M ≃ (Ψ_{M''} c^*)^P`,
+with `lemma-duality-invariants-pro-p--1`; SGA 4½, [Th. finitude], §3). For two bounded constructible
 complexes `A₁`, `A₂` on `X₁`, the pro-`p` kernel `P` of the map of inertia groups acts on
 `Ψ_{M''} c^* A₁` and `Ψ_{M''} c^* A₂` through a finite quotient `Γ`: there are automorphisms
 `ψ a` of the generic slice model, the identity on the total space, which act on the geometric

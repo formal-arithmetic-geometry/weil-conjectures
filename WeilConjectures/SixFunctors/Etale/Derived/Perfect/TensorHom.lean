@@ -19,7 +19,7 @@ repository (see `WeilConjectures.SixFunctors.Etale.Derived.Perfect`); a finite p
 
 of the tensor–internal-hom adjunction is an isomorphism, natural in `P` and `N`, and the canonical
 biduality map `P ⟶ P^∨∨` is an isomorphism. This is blueprint
-`lem-pod-finite-projective-tensor-hom`.
+`theorem-poincare-duality--5`.
 
 ## Main definitions
 
@@ -29,12 +29,12 @@ biduality map `P ⟶ P^∨∨` is an isomorphism. This is blueprint
 ## Main statements
 
 - `AlgebraicGeometry.Etale.DerivedCategory.isIso_coefficientDualTensorToDerivedHom`
-  (`lem-pod-finite-projective-tensor-hom`): it is an isomorphism for dualizable `P`.
+  (`theorem-poincare-duality--5`): it is an isomorphism for dualizable `P`.
 - `AlgebraicGeometry.Etale.DerivedCategory.coefficientDualTensorToDerivedHom_naturality_left`,
   `AlgebraicGeometry.Etale.DerivedCategory.coefficientDualTensorToDerivedHom_naturality_right`
-  (`lem-pod-finite-projective-tensor-hom`): it is natural in `P` and `N`.
+  (`theorem-poincare-duality--5`): it is natural in `P` and `N`.
 - `AlgebraicGeometry.Etale.DerivedCategory.isIso_toIhomIhomUnit_of_isDualizable`
-  (`lem-pod-finite-projective-tensor-hom`): the biduality map `P ⟶ P^∨∨` is an isomorphism.
+  (`theorem-poincare-duality--5`): the biduality map `P ⟶ P^∨∨` is an isomorphism.
 
 ## Implementation notes
 
@@ -87,7 +87,7 @@ noncomputable def coefficientDualTensorToDerivedHom
       (RHom(X)[A].obj (op P)).obj N :=
   ihomUnitTensorToIhom P N
 
-/-- Blueprint `lem-pod-finite-projective-tensor-hom`: Internal Hom with a finite projective
+/-- Blueprint `theorem-poincare-duality--5`: Internal Hom with a finite projective
 module.
 
 For a dualizable `P` (perfect over `Λ_X`, e.g. a finite projective `Λ_X`-module) and every `N`,
@@ -100,7 +100,7 @@ theorem isIso_coefficientDualTensorToDerivedHom
   obtain ⟨_⟩ := nonempty_exactPairing_swap P Pᘁ
   exact isIso_ihomUnitTensorToIhom Pᘁ P N
 
-/-- Blueprint `lem-pod-finite-projective-tensor-hom`: Internal Hom with a finite projective
+/-- Blueprint `theorem-poincare-duality--5`: Internal Hom with a finite projective
 module, naturality in `N`. -/
 theorem coefficientDualTensorToDerivedHom_naturality_right
     (P : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
@@ -110,7 +110,7 @@ theorem coefficientDualTensorToDerivedHom_naturality_right
       coefficientDualTensorToDerivedHom P N ≫ (RHom(X)[A].obj (op P)).map f := by
   exact whiskerLeft_comp_ihomUnitTensorToIhom P f
 
-/-- Blueprint `lem-pod-finite-projective-tensor-hom`: Internal Hom with a finite projective
+/-- Blueprint `theorem-poincare-duality--5`: Internal Hom with a finite projective
 module, naturality in `P`. -/
 theorem coefficientDualTensorToDerivedHom_naturality_left
     {P P' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (g : P ⟶ P')
@@ -124,7 +124,7 @@ theorem coefficientDualTensorToDerivedHom_naturality_left
   rw [associator_inv_naturality_middle_assoc, ← comp_whiskerRight_assoc,
     id_tensor_pre_app_comp_ev, comp_whiskerRight_assoc, associator_inv_naturality_left_assoc]
 
-/-- Blueprint `lem-pod-finite-projective-tensor-hom`: Internal Hom with a finite projective
+/-- Blueprint `theorem-poincare-duality--5`: Internal Hom with a finite projective
 module, biduality.
 
 For a dualizable `P` and any braiding of `D(X_ét)`, the canonical biduality map

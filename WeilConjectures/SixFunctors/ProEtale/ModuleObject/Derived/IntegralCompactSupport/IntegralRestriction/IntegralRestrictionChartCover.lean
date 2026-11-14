@@ -19,7 +19,7 @@ import Mathlib.CategoryTheory.Adjunction.Restrict
 /-! # Finite-open descent for integral restriction
 
 Source: blueprint main-20261015, sk-thm-int-restriction-glue.proof.md,
-expanded by det-thm-int-restriction-glue.
+expanded by theorem-f-shriek-ell-adic-coefficients.
 -/
 
 @[expose] public noncomputable section

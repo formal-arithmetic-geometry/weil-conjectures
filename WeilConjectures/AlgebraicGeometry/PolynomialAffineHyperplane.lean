@@ -25,7 +25,8 @@ This file provides
   (`AlgebraicGeometry.polyAffineChart`), whose image is the complement of the section at infinity
   (`AlgebraicGeometry.range_polyAffineChart`).
 
-These are the coordinates used in the proof of blueprint `det-sp-zero-section-affine-space`.
+These are the coordinates used in the proof of blueprint
+`theorem-verdier-s-theorem-specialization-zero`.
 -/
 
 @[expose] public section

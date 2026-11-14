@@ -32,7 +32,7 @@ namespace CategoryTheory.ObjectProperty
 /-- A morphism between objects of the localizing closure of an arbitrary class is invertible
 if postcomposition induces bijections on Hom from every integer shift of every generator.
 
-Source: the blueprint, `sk-prop-sf-rf-shriek-preservation`, closed-adjoint uniqueness and final
+Source: the blueprint, `theorem-f-shriek-finite-coefficients`, closed-adjoint uniqueness and final
 restriction paragraphs; Stacks Project, Derived Categories, Tags 0145, 0146, 0149, 0FXC and 05QR
 (blueprint: lem-sf-localizing-hom-test).
 

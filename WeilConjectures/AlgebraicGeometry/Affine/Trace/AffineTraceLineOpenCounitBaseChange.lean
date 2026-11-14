@@ -12,7 +12,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 
 /-!
 # Open counit compatibility for the standard affine-line exchange
-Source: blueprint sk-prop-an, Step 5(b), detailed trace proof step 8.
+Source: blueprint proposition-purity-vector-bundles, Step 5(b), detailed trace proof step 8.
 -/
 
 @[expose] public noncomputable section
@@ -431,7 +431,7 @@ private lemma line_square_standard (A : Type (u + 1)) [CommRing A]
 
 /-- The standard compact-support exchange respects the open counit before the
 projective trace is applied.
-Source: blueprint lem-amb-affine-space-top-trace, proof step 8
+Source: blueprint lemma-integral-linear-character--1, proof step 8
 (blueprint: lem-amb-affine-trace-line-open-counit-base-change).
 
 Proof: first work with the pulled-back projective compactification. Expand its
