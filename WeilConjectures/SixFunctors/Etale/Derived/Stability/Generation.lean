@@ -174,11 +174,10 @@ omit [Finite Λ] in
 /-- The dévissage step of the generation statement (`lemma-flat-models-generators`): a thick
 subcategory containing the generators `Rg_* j_! L` (`j_!` the extension by zero) contains
 `Rι_* F` for every flat constructible sheaf `F` on a closed subscheme `ι : Z ⟶ X`. By
-Noetherian induction on the
-support `T = ι(Z)`: `F` is lisse on a dense open `V ⊆ Z`, and the open–closed triangle
-`j_! j^* F ⟶ F ⟶ i_* i^* F` for `V` and its closed complement exhibits `Rι_* F` as an
-extension of a generator and of the direct image of the flat
-constructible sheaf `i^* F` from a closed subscheme with smaller support. -/
+Noetherian induction on the support `T = ι(Z)`: `F` is lisse on a dense open `V ⊆ Z`, and the
+open–closed triangle `j_! j^* F ⟶ F ⟶ i_* i^* F` for `V` and its closed complement exhibits
+`Rι_* F` as an extension of a generator and of the direct image of the flat constructible sheaf
+`i^* F` from a closed subscheme with smaller support. -/
 theorem prop_rightDerivedLowerStar_of_flat (X : Scheme.{u}) [IsNoetherian X]
     (P : ObjectProperty
       (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))))
