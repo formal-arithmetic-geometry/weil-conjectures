@@ -217,10 +217,10 @@ theorem, in `AlgebraicGeometry.Etale.preservesColimitsOfSize_tensorLeft_sheaf`.
 The additivity and exactness of `g^*` are `Etale.additive_upperStar`,
 `Etale.preservesFiniteLimits_upperStar` and `Etale.preservesHomology_upperStar` of
 `WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs`; the left exactness there rests on the
-sorried `HasSheafify` instance for the small étale site of `Z` and on left exactness of
+`HasSheafify` instance for the small étale site of `Z` and on left exactness of
 the left Kan extension along the opposite of base change, both global instances of the
 folder `WeilConjectures.CategoryTheory.GrothendieckAbelian` (for an étale `g` the latter
-is proved, not sorried). Since `g^*` is exact, it preserves in particular all K-flat
+is proved directly). Since `g^*` is exact, it preserves in particular all K-flat
 quasi-isomorphisms, which is the input needed by the derivability-structure machinery.
 -/
 

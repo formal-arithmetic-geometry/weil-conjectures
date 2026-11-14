@@ -35,7 +35,7 @@ def proEtaleUnitsPower (S : Scheme.{u}) (N : ℕ) :
   N • 𝟙 (proEtaleUnitsSheaf S)
 
 /-- The sheaf of `N`-th roots of unity, the kernel of the power map on `O_Sˣ`.
-Source: Stacks Project, Tags 03PK and 03P4 (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 03PK and 03P4 (blueprint `definition-tate-twists`). -/
 noncomputable def proEtaleRootsOfUnitySheaf (S : Scheme.{u}) (N : ℕ) :
     Sheaf (ProEt.topology S) AddCommGrpCat.{u + 1} :=
   kernel (proEtaleUnitsPower S N)

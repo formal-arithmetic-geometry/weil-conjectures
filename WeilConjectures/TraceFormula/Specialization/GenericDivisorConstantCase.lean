@@ -47,7 +47,7 @@ coordinate back to a uniformizer of `𝒪_{X,ζ}`
 * Non-constant lisse `M` (finite étale trivialisation, normalisation and proper exchange).
 
 The vanishing of the thick origin,
-`isZero_specializationDefect_polyAffineThickOrigin_unit_padicAlgCl`, is a sorried node of another
+`isZero_specializationDefect_polyAffineThickOrigin_unit_padicAlgCl`, is proved in another
 subsection.
 
 -/

@@ -212,8 +212,7 @@ geometric stalk. On an affine weakly contractible object mapping into the connec
 component of that point, its comparison pullback is the constant realization of
 that specified stalk. This assertion concerns one complex over one ring.
 Source: Stacks Project, Etale Cohomology, Tag 09BI; Pro-etale Cohomology, Tag 09C6,
-first paragraph; Sites, Tag 090K.
-(auxiliary; not a blueprint node).
+first paragraph; Sites, Tag 090K. (blueprint `lemma-local-constancy-finite-level--1`).
 
 Proof: the component of z is open in the locally Noetherian scheme. Restrict the
 complex to this nonempty connected open. Constant-scalar restriction and the AsSmall

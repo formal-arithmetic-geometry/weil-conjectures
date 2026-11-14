@@ -381,7 +381,7 @@ private theorem fixedOrigin (X : Scheme.{u})
 There is no constructibility or Noetherianity assumption.
 Source: blueprint theorem-classical-sheaves-essential-image--1, essential-image paragraph;
 Bhatt--Scholze, The pro-etale topology for schemes, Lemma 5.1.2
-(auxiliary; not a blueprint node).
+(blueprint `theorem-classical-sheaves-essential-image--1`).
 
 Proof: the constant-scalar equivalence identifies intrinsic constant-ring modules
 with sheaves of modules over the discrete coefficient ring. Transport the module

@@ -32,7 +32,7 @@ the canonical construction by its relative torsor boundary; `geoCartierSourceCom
 is the specified comparison mate, so no arbitrary source isomorphism occurs.
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-geo-cartier, statement
-and proof paragraphs 1--6; Stacks Project, Tag 03PL (blueprint: lemma-cycle-class-cartier-divisor).
+and proof paragraphs 1--6; Stacks Project, Tag 03PL (blueprint `lemma-cycle-class-cartier-divisor`).
 
 Proof:
 1. The ordinary supported Kummer theorem constructs the integral pole extension,

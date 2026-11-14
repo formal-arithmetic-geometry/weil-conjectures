@@ -51,7 +51,7 @@ these open subsets by fpqc descent. On each open the module-Isom sheaf from its 
 to F is locally the constant automorphism sheaf. Its local sections therefore descend
 to an etale cover by the locally-classical etale-section comparison. Combining the
 open subsets and etale covers gives the claimed finite module trivializations.
-(auxiliary; not a blueprint node) -/
+(blueprint `proposition-locally-constant-sheaves-finite-presentation--2`) -/
 theorem etale_cover_of_proetale_finite_models
     (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))

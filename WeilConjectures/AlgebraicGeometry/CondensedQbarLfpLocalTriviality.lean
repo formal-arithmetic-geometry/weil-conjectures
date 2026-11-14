@@ -39,8 +39,7 @@ bounded-image condensed algebraic closure of the l-adic field.
 
 Source: ConstructibleSheaf/ProEtaleModule/Def.lean, IsLocallyFinitelyPresented;
 RefactorInstruction.tex, Section 4, prop:Qbar-X and prop:continuous-X;
-Bhatt--Scholze, Definition 6.8.3
-(auxiliary; not a blueprint node).
+Bhatt--Scholze, Definition 6.8.3 (blueprint `lemma-constructible-sheaves--8`).
 
 Proof plan:
 1. Refine the presentation cover by affine weakly contractible objects

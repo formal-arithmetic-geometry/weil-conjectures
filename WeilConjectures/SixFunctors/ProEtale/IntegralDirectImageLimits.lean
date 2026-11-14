@@ -181,8 +181,7 @@ private theorem map_roos_complete
 /-- Direct image preserves canonical integral completeness and its specified residue mate
 is invertible, without a finiteness or properness hypothesis on the scheme morphism.
 Source: Stacks 099N; blueprint proposition-proper-base-change-complete-integral--1, finite-reduction
-and completion-unit clauses.
-(auxiliary; not a blueprint node).
+and completion-unit clauses. (blueprint `proposition-proper-base-change-complete-integral--1`).
 
 Proof: pass from internal modules to sectionwise modules by the exact section-action
  equivalence. The integral coefficient limit identifies the ring with the completed adic

@@ -334,7 +334,7 @@ are left exact: the first by
 `AlgebraicGeometry.ProEtale.preservesFiniteLimits_op_lan_overMap`, the second by
 the left exactness of sheafification, which is the content of `HasSheafify` beyond the
 `HasWeakSheafify` needed to define `j_!`; both are provided for the Grothendieck abelian
-coefficient category `A`, the second by the sorried instance of
+coefficient category `A`, the second by the instance of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. -/
 instance ProEtale.preservesFiniteLimits_openImmersionLowerShriek :
     PreservesFiniteLimits (j)_!open[A] := by

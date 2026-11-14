@@ -628,7 +628,7 @@ For each of the three coefficient rings, proved here:
   `𝒪_E` `sk-lem-int-ext` (1)): morphisms `C ⟶ B[n]` out of a constructible sheaf `C` into a
   filtered colimit `B = colim Bᵢ` of sheaves factor through some `Bᵢ[n]`;
 
-and still sorried:
+and:
 
 * `hasUniformConstructibleExtBound_*` (blueprints `lemma-uniform-ext-bound`, for `𝒪_E`
   `sk-lem-int-ext` (2)): `Ext^q(C, N) = 0` for `C` constructible, `q > d_C` and all constructible

@@ -179,7 +179,7 @@ identification, its left adjoint is the specified point inverse image, and evalu
 at the scheme is evaluation at the singleton. This includes ring and module structures.
 
 Source: Bhatt--Scholze, Examples 4.1.10 and 4.2.11
-(auxiliary; not a blueprint node).
+(blueprint `proposition-pro-etale-site-separably-closed--2`).
 
 Proof: The proved geometricFieldProfiniteDenseSubsite identifies the specified test
 functor with a dense subsite. Mathlib's comparison theorem gives restriction

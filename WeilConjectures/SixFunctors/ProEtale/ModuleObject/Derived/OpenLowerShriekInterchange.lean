@@ -46,7 +46,7 @@ restrictions `Lj^*` and `Lc^*` jointly reflect isomorphisms
 
 It uses proper base change
 (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper` and its
-`_padicAlgCl` version); its only sorried input is the preservation of bounded constructible
+`_padicAlgCl` version); its only external input is the preservation of bounded constructible
 complexes by the six functors
 (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`).
 

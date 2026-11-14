@@ -84,9 +84,8 @@ namespace AlgebraicGeometry
 
 variable {X : Scheme.{u}}
 
-/-- **Conrad's Theorem 2.4, reduced to the base `X`** (blueprint:
-`thm:nagata-conrad-elimination`, in the form reduced to the base `X`;
-`def:nagata-conrad-quasi-domination`).
+/-- **Conrad's Theorem 2.4, reduced to the base `X`** (blueprint
+`theorem-extension-partial-section--1`, in the form reduced to the base `X`).
 
 Conrad's Theorem 2.4 is stated for a rational map over an auxiliary base `S`; the first
 step of his proof replaces `Y` by `Y ×_S X`, which is the reduction to the form stated

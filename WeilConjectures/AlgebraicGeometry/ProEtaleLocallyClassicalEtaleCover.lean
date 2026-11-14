@@ -185,7 +185,7 @@ compatibility condition on the local sections, nor a nonemptiness condition on t
 index sets or the constant value sets.
 
 Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.4 and Proposition 6.8.4(6)
-(auxiliary; not a blueprint node).
+(blueprint `lemma-torsors-under-classical-groups--1`).
 
 Proof:
 1. The affine section formula makes the comparison unit invertible. Continuity on

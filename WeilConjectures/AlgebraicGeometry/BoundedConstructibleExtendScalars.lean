@@ -45,7 +45,7 @@ private lemma constructible_extend
     (lfp_extend (F.obj R) (F.obj S) (F.map φ) (hU i))
 
 /-- Exact extension of scalars preserves bounded constructible complexes of module objects.
-(auxiliary; not a blueprint node)
+(blueprint `lemma-descent-finite-coefficient-field--3`)
 
 Proof: scalar extension preserves colimits and sends the regular module to the regular
 module, hence preserves finite free presentations. Monoidal pullback commutes with scalar
