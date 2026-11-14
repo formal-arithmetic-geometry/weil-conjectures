@@ -100,8 +100,11 @@ noncomputable def etaleReesBaseSchemeMap
     ULift.{v} (Polynomial A) →+* ULift.{v} (MvPolynomial (Fin d) (Polynomial A)) :=
   RingHom.ulift.{v, v} (etaleReesBaseMap A d)
 
-/--
--/
+/-- **Étale Rees charts.** For an étale `A[x₁, …, x_d] → R`, the extended Rees
+algebra of the origin of affine `d`-space over `A` is described by its coefficient and variable
+maps, its base change to `R` is identified with `R[t, I/t]` by the bijection
+`etaleReesTensorMap` (acting coefficientwise on Laurent polynomials), and the resulting chart
+map is étale and smooth of relative dimension `d` over the affine line. -/
 theorem etale_rees_chart
     (A : Type u) (R : Type v) [CommRing A] [CommRing R] (d : ℕ)
     [Algebra (MvPolynomial (Fin d) A) R]
