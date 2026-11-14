@@ -149,7 +149,7 @@ noncomputable def projectiveLineLowerShriekTrace :
         ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) ⟶ 𝟙_ _ :=
   (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ)
       (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).hom.app _ ≫
-    projectiveLineTrace Λ S (isIso_projectiveLineDecompositionMap Λ S)
+    projectiveLineTrace Λ S
 
 set_option checkBinderAnnotations false in
 /-- A proof of a proposition `T` is the proof of `T` found by instance search. Rewriting with it
@@ -168,7 +168,7 @@ theorem rightDerivedLowerShriekIsoRightDerivedLowerStar_inv_app_projectiveLineLo
         (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).inv.app
         ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) ≫
       projectiveLineLowerShriekTrace Λ S =
-      (projectiveLineTrace Λ S (isIso_projectiveLineDecompositionMap Λ S) :
+      (projectiveLineTrace Λ S :
         (R(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
           ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) ⟶ 𝟙_ _) := by
   rw [projectiveLineLowerShriekTrace,

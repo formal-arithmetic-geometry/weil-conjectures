@@ -21,8 +21,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SupportsOpenImmersion
 Blueprint `lemma-cohomology-projective-line-trace`: for a scheme `S` on which the exponent of the
 finite coefficient ring `Λ` is invertible and a normalized rank-one datum, the decomposition map
 `(1, h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])` of the projective line `q : ℙ¹_S ⟶ S`
-(`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`) is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMap`).
+(`AlgebraicGeometry.Etale.projectiveLineDecompositionMapAux`) is an isomorphism
+(`AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMapAux`).
 
 ## The argument
 
@@ -267,8 +267,8 @@ theorem isIso_supportedClassMap_restrictSupportedClass_chartBoundarySupportedCla
 
 /-- The pullback of the decomposition map of the projective line to a geometric point is an
 isomorphism. -/
-theorem isIso_leftDerivedUpperStar_map_projectiveLineDecompositionMap :
-    IsIso ((L((x)^*[ModuleCat.{u + 1} Λ])).map (projectiveLineDecompositionMap Λ S)) := by
+theorem isIso_leftDerivedUpperStar_map_projectiveLineDecompositionMapAux :
+    IsIso ((L((x)^*[ModuleCat.{u + 1} Λ])).map (projectiveLineDecompositionMapAux Λ S)) := by
   have : HasInvertibleExponent Λ (Spec (.of Ω)) := .of_hom x
   obtain ⟨gZ, hgZ⟩ := ProjectiveSpace.exists_isPullback_lineInfinityι_map x
   have sq := ProjectiveSpace.isPullback_map (Option (ULift.{u} (Fin 1))) x
@@ -295,7 +295,7 @@ theorem isIso_leftDerivedUpperStar_map_projectiveLineDecompositionMap :
   simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc,
     Iso.hom_inv_id_assoc] at h
   erw [Iso.refl_hom, Category.comp_id, ← Functor.map_comp] at h
-  rw [projectiveLineDecompositionMap, Adjunction.homEquiv_unit]
+  rw [projectiveLineDecompositionMapAux, Adjunction.homEquiv_unit]
   exact isIso_leftDerivedUpperStar_map_biprodDesc_of_isPullback Λ sq _ _ h
 
 end GeometricPoint
@@ -303,13 +303,63 @@ end GeometricPoint
 /-- Blueprint `lemma-cohomology-projective-line-trace`: *the cohomology of the projective line*. For
 a scheme `S` on which the exponent of `Λ` is invertible and a normalized rank-one datum, the
 decomposition map `(1, h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])`
-(`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`) is an isomorphism. It is checked at
+(`AlgebraicGeometry.Etale.projectiveLineDecompositionMapAux`) is an isomorphism. It is checked at
 the geometric points of `S`
-(`AlgebraicGeometry.Etale.isIso_leftDerivedUpperStar_map_projectiveLineDecompositionMap`). -/
+(`AlgebraicGeometry.Etale.isIso_leftDerivedUpperStar_map_projectiveLineDecompositionMapAux`). -/
+theorem isIso_projectiveLineDecompositionMapAux [HasKummerClass.IsNormalized Λ] (S : Scheme.{u})
+    [HasInvertibleExponent Λ S] : IsIso (projectiveLineDecompositionMapAux Λ S) :=
+  isIso_of_isIso_leftDerivedUpperStar_algClosurePoint_map Λ _ fun y ↦
+    isIso_leftDerivedUpperStar_map_projectiveLineDecompositionMapAux Λ _ (S.algClosurePoint y)
+
+/-- Blueprint `lemma-cohomology-projective-line-trace`: the decomposition map `(1, h)` with the
+hyperplane class of the notes (`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`) is an
+isomorphism: it is the auxiliary one up to the automorphism `1 ⊕ (-1)`
+(`AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMap_iff`). -/
 theorem isIso_projectiveLineDecompositionMap [HasKummerClass.IsNormalized Λ] (S : Scheme.{u})
     [HasInvertibleExponent Λ S] : IsIso (projectiveLineDecompositionMap Λ S) :=
-  isIso_of_isIso_leftDerivedUpperStar_algClosurePoint_map Λ _ fun y ↦
-    isIso_leftDerivedUpperStar_map_projectiveLineDecompositionMap Λ _ (S.algClosurePoint y)
+  (isIso_projectiveLineDecompositionMap_iff Λ S).2 (isIso_projectiveLineDecompositionMapAux Λ S)
+
+/-- Blueprint `lemma-cohomology-projective-line-trace`: *the trace of the projective line*
+`Tr_q : Rq_*(Λ_{ℙ¹_S}(1)[2]) ⟶ Λ_S`, the second component of the inverse of the decomposition
+isomorphism `(1, h)` (`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`,
+`AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMap`), `h = c₁(𝒪(1))` the hyperplane
+class of the notes; it is characterised by `Tr_q ∘ h♭ = 1` and `Tr_q ∘ η = 0`
+(`AlgebraicGeometry.Etale.homEquiv_projectiveLineHyperplaneClass_comp_projectiveLineTrace`). It is
+the negative of the auxiliary trace `AlgebraicGeometry.Etale.projectiveLineTraceAux`, normalized
+by `-h` (`AlgebraicGeometry.Etale.projectiveLineTrace_eq_neg`). -/
+noncomputable def projectiveLineTrace [HasKummerClass.IsNormalized Λ] (S : Scheme.{u})
+    [HasInvertibleExponent Λ S] :
+    (R(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
+        ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) ⟶ constantComplex Λ S :=
+  haveI := isIso_projectiveLineDecompositionMap Λ S
+  inv (projectiveLineDecompositionMap Λ S) ≫ biprod.snd
+
+/-- The auxiliary trace: the second component of the inverse of the auxiliary decomposition
+isomorphism `(1, -h)` (`AlgebraicGeometry.Etale.projectiveLineDecompositionMapAux`), normalized by
+`-h`; the trace of the notes is its negative (`AlgebraicGeometry.Etale.projectiveLineTrace_eq_neg`).
+-/
+noncomputable def projectiveLineTraceAux [HasKummerClass.IsNormalized Λ] (S : Scheme.{u})
+    [HasInvertibleExponent Λ S] :
+    (R(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
+        ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) ⟶ constantComplex Λ S :=
+  haveI := isIso_projectiveLineDecompositionMapAux Λ S
+  inv (projectiveLineDecompositionMapAux Λ S) ≫ biprod.snd
+
+/-- The trace of the notes is the negative of the auxiliary trace. -/
+lemma projectiveLineTrace_eq_neg [HasKummerClass.IsNormalized Λ] (S : Scheme.{u})
+    [HasInvertibleExponent Λ S] :
+    projectiveLineTrace Λ S = -projectiveLineTraceAux Λ S := by
+  have := isIso_projectiveLineDecompositionMapAux Λ S
+  have := isIso_projectiveLineDecompositionMap Λ S
+  have hmap : IsIso (biprod.map (𝟙 ((tateObject Λ S 1)⟦(2 : ℤ)⟧)) (-𝟙 (constantComplex Λ S))) :=
+    ⟨biprod.map (𝟙 _) (-𝟙 _), by ext <;> simp, by ext <;> simp⟩
+  have hinv : inv (biprod.map (𝟙 ((tateObject Λ S 1)⟦(2 : ℤ)⟧)) (-𝟙 (constantComplex Λ S))) =
+      biprod.map (𝟙 _) (-𝟙 _) := by
+    rw [IsIso.inv_eq_of_hom_inv_id]
+    ext <;> simp
+  unfold projectiveLineTrace projectiveLineTraceAux projectiveLineDecompositionMap
+  rw [IsIso.inv_comp, hinv, Category.assoc, biprod.map_snd]
+  simp only [Preadditive.comp_neg, Category.comp_id]
 
 end Etale
 

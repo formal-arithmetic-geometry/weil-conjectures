@@ -195,24 +195,38 @@ on `ℙ¹_S = ℙ(Option (ULift (Fin 1)); S)`, the class of the section at infin
 `s = T_∞ / T₀` of the chart `D₊(T₀)` at infinity, which is closed in `ℙ¹_S`, the complement of
 the standard chart `D₊(T_∞) ≅ 𝔸¹_S` (`AlgebraicGeometry.ProjectiveSpace.range_chartBoundaryι`).
 The sign comes from `AlgebraicGeometry.Etale.chartBoundaryClass`, which forgets supports to
-`c₁(𝒪(-Z))` (blueprint `lemma-cycle-class-cartier-divisor` (b)); the decomposition
+`c₁(𝒪(-Z))` (blueprint `lemma-cycle-class-cartier-divisor` (b)): this is `-c₁(𝒪(1))`, the
+auxiliary convention of the construction; the hyperplane class of the notes is its negative
+`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`. The decomposition
 `lemma-cohomology-projective-line-trace` holds for `h` and `-h` alike. -/
-noncomputable def projectiveLineHyperplaneClass :
+noncomputable def projectiveLineHyperplaneClassAux :
     constantComplex Λ ℙ(Option (ULift.{u} (Fin 1)); S) ⟶
       (tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧ :=
   chartBoundaryClass Λ (ProjectiveSpace.standardOpen _ S (some ⟨0⟩))
     (ProjectiveSpace.coordRatio (Option (ULift.{u} (Fin 1))) S (some ⟨0⟩) none)
+
+/-- The *hyperplane class* `h = c₁(𝒪(1)) : Λ_{ℙ¹_S} ⟶ Λ_{ℙ¹_S}(1)[2]` of the projective line, the
+class of the divisor at infinity with the sign of the notes (blueprint
+`lemma-cohomology-projective-line-trace`, `lemma-cycle-class-cartier-divisor`: `c_D` is the
+class of `𝒪(D)`): the negative of the boundary class `c₁(𝒪(-∞))` of the chart at infinity
+(`AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux`). -/
+noncomputable def projectiveLineHyperplaneClass :
+    constantComplex Λ ℙ(Option (ULift.{u} (Fin 1)); S) ⟶
+      (tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧ :=
+  -projectiveLineHyperplaneClassAux Λ S
 
 /-- The *decomposition map* of the projective line `q : ℙ¹_S ⟶ S`, twisted by `(1)[2]`:
 
 `(1, h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])`,
 
 whose first component is the unit of `Lq^* ⊣ Rq_*` read through
-`Lq^*(Λ_S(1)[2]) ≅ Λ_{ℙ¹_S}(1)[2]`, and whose second component is adjoint to the hyperplane class
-`h : Lq^* Λ_S ≅ Λ_{ℙ¹_S} ⟶ Λ_{ℙ¹_S}(1)[2]`
-(`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`). This is the twist by `(1)[2]` of the
-decomposition `Λ_S ⊕ Λ_S(-1)[-2] ⟶ Rq_* Λ_{ℙ¹_S}` of `lemma-cohomology-projective-line-trace`. -/
-noncomputable def projectiveLineDecompositionMap :
+`Lq^*(Λ_S(1)[2]) ≅ Λ_{ℙ¹_S}(1)[2]`, and whose second component is adjoint to the auxiliary
+hyperplane class `-h : Lq^* Λ_S ≅ Λ_{ℙ¹_S} ⟶ Λ_{ℙ¹_S}(1)[2]`
+(`AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux`): the auxiliary form of the
+decomposition `Λ_S ⊕ Λ_S(-1)[-2] ⟶ Rq_* Λ_{ℙ¹_S}` of `lemma-cohomology-projective-line-trace`,
+see `AlgebraicGeometry.Etale.projectiveLineDecompositionMap` for the one with the sign of the
+notes. -/
+noncomputable def projectiveLineDecompositionMapAux :
     (tateObject Λ S 1)⟦(2 : ℤ)⟧ ⊞ constantComplex Λ S ⟶
       (R(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
         ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) :=
@@ -227,19 +241,54 @@ noncomputable def projectiveLineDecompositionMap :
     ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
         (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).homEquiv _ _
       ((leftDerivedUpperStarConstantComplexIso Λ (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).hom ≫
-        projectiveLineHyperplaneClass Λ S))
+        projectiveLineHyperplaneClassAux Λ S))
 
-/-- Blueprint `lemma-cohomology-projective-line-trace`: *the trace of the projective line*
-`Tr_q : Rq_*(Λ_{ℙ¹_S}(1)[2]) ⟶ Λ_S`, the second component of the inverse of the decomposition
-isomorphism `(1, h)` (`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`); it is
-characterised by `Tr_q ∘ h♭ = 1` and `Tr_q ∘ η = 0`. As `h = -c₁(𝒪(1))`
-(`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`), this is `-t_q` for the blueprint's
-trace `t_q`, normalized by `t_q(c₁(𝒪(1))) = 1`. The decomposition is an explicit hypothesis
-(`AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMap`). -/
-noncomputable def projectiveLineTrace (hdec : IsIso (projectiveLineDecompositionMap Λ S)) :
-    (R(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
-        ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) ⟶ constantComplex Λ S :=
-  inv (projectiveLineDecompositionMap Λ S) ≫ biprod.snd
+/-- The *decomposition map* of the projective line `q : ℙ¹_S ⟶ S`, twisted by `(1)[2]`, with the
+hyperplane class `h = c₁(𝒪(1))` of the notes
+(`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`):
+
+`(1, h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])`
+
+(`AlgebraicGeometry.Etale.projectiveLineDecompositionMap_eq`). It is the auxiliary decomposition
+map `(1, -h)` (`AlgebraicGeometry.Etale.projectiveLineDecompositionMapAux`) precomposed with the
+sign change `1 ⊕ (-1)` of the second summand, so that both are isomorphisms together. -/
+noncomputable def projectiveLineDecompositionMap :
+    (tateObject Λ S 1)⟦(2 : ℤ)⟧ ⊞ constantComplex Λ S ⟶
+      (R(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
+        ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) :=
+  biprod.map (𝟙 _) (-𝟙 _) ≫ projectiveLineDecompositionMapAux Λ S
+
+/-- The decomposition map is `(1, h)`: its first component is the unit of `Lq^* ⊣ Rq_*` read
+through `Lq^*(Λ_S(1)[2]) ≅ Λ_{ℙ¹_S}(1)[2]`, its second component is adjoint to the hyperplane
+class `h` (`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`). -/
+lemma projectiveLineDecompositionMap_eq :
+    projectiveLineDecompositionMap Λ S =
+      biprod.desc
+        ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+            (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).unit.app _ ≫
+          (R(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_*[ModuleCat.{u + 1} Λ])).map
+            (((L(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))^*[ModuleCat.{u + 1} Λ])).commShiftIso
+                (2 : ℤ)).hom.app _ ≫
+              (leftDerivedUpperStarTateObjectIso
+                (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S) 1).hom⟦(2 : ℤ)⟧'))
+        ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+            (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).homEquiv _ _
+          ((leftDerivedUpperStarConstantComplexIso Λ (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).hom ≫
+            projectiveLineHyperplaneClass Λ S)) := by
+  ext
+  · simp [projectiveLineDecompositionMap, projectiveLineDecompositionMapAux]
+  · simp [projectiveLineDecompositionMap, projectiveLineDecompositionMapAux,
+      projectiveLineHyperplaneClass, Adjunction.homEquiv_unit]
+
+/-- The decomposition map with the hyperplane class of the notes is an isomorphism exactly when
+the auxiliary one is: they differ by the automorphism `1 ⊕ (-1)`. -/
+lemma isIso_projectiveLineDecompositionMap_iff :
+    IsIso (projectiveLineDecompositionMap Λ S) ↔
+      IsIso (projectiveLineDecompositionMapAux Λ S) := by
+  have : IsIso (biprod.map (𝟙 ((tateObject Λ S 1)⟦(2 : ℤ)⟧)) (-𝟙 (constantComplex Λ S))) :=
+    ⟨biprod.map (𝟙 _) (-𝟙 _), by ext <;> simp, by ext <;> simp⟩
+  unfold projectiveLineDecompositionMap
+  exact ⟨fun _ ↦ IsIso.of_isIso_comp_left (biprod.map (𝟙 _) (-𝟙 _)) _, fun _ ↦ inferInstance⟩
 
 end ProjectiveLine
 
