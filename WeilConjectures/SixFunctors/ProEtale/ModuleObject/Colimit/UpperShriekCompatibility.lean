@@ -150,24 +150,22 @@ noncomputable def boundedConstructibleLowerShriekToPadicAlgClIso :
   boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso ℓ E (compactificationOverField f)
 
 /-- **The exchange for `f^!`**, for the inclusion `E ⟶ ℚ̄_ℓ`: the canonical natural transformation
-`Rf^!_E ⋙ T_X ⟶ T_Y ⋙ Rf^!_{ℚ̄_ℓ}`, the mate of the inverse of (Shriek)
-(`boundedConstructibleLowerShriekToPadicAlgClIso`) under the adjunctions `Rf_! ⊣ Rf^!`. -/
+`Rf^!_E ⋙ T_X ⟶ T_Y ⋙ Rf^!_{ℚ̄_ℓ}`, the exchange along the chosen compactification of `f`
+(`boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl`: the horizontal composite of the
+exchanges for its proper part and its open immersion, i.e. by `CategoryTheory.mateEquiv_hcomp` the
+mate of the inverse of (Shriek) under the adjunctions `Rf_! ⊣ Rf^!`). -/
 noncomputable def boundedConstructibleUpperShriekToPadicAlgCl :
     ContinuousMapRingObj.boundedConstructibleUpperShriek ℓ E f ⋙
         boundedConstructibleToPadicAlgCl X.left ℓ E ⟶
       boundedConstructibleToPadicAlgCl Y.left ℓ E ⋙
         boundedConstructibleUpperShriek ℓ f :=
-  mateEquiv (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
-    (boundedConstructibleUpperShriekAdjunction ℓ f)
-    (boundedConstructibleLowerShriekToPadicAlgClIso ℓ E f).inv
+  boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl ℓ E (compactificationOverField f)
 
-/-- The exchange for `f^!` as the mate of a two-square. -/
-lemma boundedConstructibleUpperShriekToPadicAlgCl_eq_mateEquiv :
+/-- The exchange for `f^!` is the exchange along the chosen compactification (by definition). -/
+lemma boundedConstructibleUpperShriekToPadicAlgCl_eq :
     boundedConstructibleUpperShriekToPadicAlgCl ℓ E f =
-      (mateEquiv (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
-        (boundedConstructibleUpperShriekAdjunction ℓ f)
-        (TwoSquare.mk _ _ _ _
-          (boundedConstructibleLowerShriekToPadicAlgClIso ℓ E f).inv)) :=
+      boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl ℓ E
+        (compactificationOverField f) :=
   rfl
 
 /-- The exchange for `f^!` is an isomorphism as soon as the exchange for the proper part of the
@@ -175,7 +173,8 @@ chosen compactification is one. -/
 lemma isIso_boundedConstructibleUpperShriekToPadicAlgCl_of_isIso
     [IsIso (boundedConstructibleProperUpperShriekToPadicAlgCl ℓ E (compactificationOverField f))] :
     IsIso (boundedConstructibleUpperShriekToPadicAlgCl ℓ E f) :=
-  isIso_boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl ℓ E _
+  isIso_boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl ℓ E
+    (compactificationOverField f)
 
 end Shriek
 
