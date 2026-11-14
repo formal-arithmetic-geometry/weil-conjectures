@@ -227,9 +227,8 @@ theorem cartierKummerCycleClass_diagonal_baseChange
     ← restrictSupportedClass_cartierKummerClass_diagonal Λ S hP, restrictSupportedClass_comp_counit,
     cartierKummerCycleClassAux]
 
-omit [HasKummerClass.IsNormalized Λ] in
-/-- The trace of `ℙ¹_S` is normalized by `Tr_q ∘ h♭ = 1`, for the adjoint
-`h♭ : Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])` of the hyperplane class. -/
+/-- The auxiliary trace of `ℙ¹_S` is normalized by `Tr_q^{aux} ∘ (-h)♭ = 1`, for the adjoint
+`(-h)♭ : Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])` of the auxiliary hyperplane class. -/
 lemma homEquiv_projectiveLineHyperplaneClassAux_comp_projectiveLineTraceAux :
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
         (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).homEquiv _ _

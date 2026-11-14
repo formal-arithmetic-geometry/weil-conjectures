@@ -298,8 +298,8 @@ theorem projectiveLineTraceAux_baseChange [HasKummerClass.IsNormalized Λ] :
           (leftDerivedUpperStarTateTwoIso Λ
             (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g)).hom ≫
         projectiveLineTraceAux Λ S' ≫ (leftDerivedUpperStarConstantComplexIso Λ g).inv := by
-  haveI := isIso_projectiveLineDecompositionMapAux Λ S
-  haveI := isIso_projectiveLineDecompositionMapAux Λ S'
+  have := isIso_projectiveLineDecompositionMapAux Λ S
+  have := isIso_projectiveLineDecompositionMapAux Λ S'
   have h := projectiveLineDecompositionMapAux_baseChange Λ g
   have h₂ : (L((g)^*[ModuleCat.{u + 1} Λ])).map (inv (projectiveLineDecompositionMapAux Λ S)) ≫
       biprod.lift

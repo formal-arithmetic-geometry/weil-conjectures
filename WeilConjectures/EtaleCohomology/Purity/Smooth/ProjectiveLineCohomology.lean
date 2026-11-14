@@ -349,8 +349,8 @@ noncomputable def projectiveLineTraceAux [HasKummerClass.IsNormalized Λ] (S : S
 lemma projectiveLineTrace_eq_neg [HasKummerClass.IsNormalized Λ] (S : Scheme.{u})
     [HasInvertibleExponent Λ S] :
     projectiveLineTrace Λ S = -projectiveLineTraceAux Λ S := by
-  haveI := isIso_projectiveLineDecompositionMapAux Λ S
-  haveI := isIso_projectiveLineDecompositionMap Λ S
+  have := isIso_projectiveLineDecompositionMapAux Λ S
+  have := isIso_projectiveLineDecompositionMap Λ S
   have hmap : IsIso (biprod.map (𝟙 ((tateObject Λ S 1)⟦(2 : ℤ)⟧)) (-𝟙 (constantComplex Λ S))) :=
     ⟨biprod.map (𝟙 _) (-𝟙 _), by ext <;> simp, by ext <;> simp⟩
   have hinv : inv (biprod.map (𝟙 ((tateObject Λ S 1)⟦(2 : ℤ)⟧)) (-𝟙 (constantComplex Λ S))) =
