@@ -217,27 +217,7 @@ set_option backward.isDefEq.respectTransparency false in
 its compatibility with restriction to the given geometric fibre. This assertion
 uses no integral or proper hypothesis.
 
-Source: Stacks Project, Tags 03Q9, 03Q1 and 04HX.
-
-Proof: The marked maps from Spec Omega to all affine pointed neighbourhoods form
-a cone. Its unique lift t to their limit is compatible with the structural map.
-The closed-fibre theorem for the strict henselization applies to t's image:
-its composite with the structural map has image s's point, so that image is the
-closed point of the strict henselization.
-Pull back X to this limit. Tag 03Q9 identifies its sections with the direct-image
-stalk. Apply the module-to-set inverse-image comparison and its unit equation to
-the set-valued stalk formula. Since the set comparison and all restriction maps
-commute with addition and scalar multiplication, the bijective comparison is a
-module isomorphism Theta. Affine pointed neighbourhoods are cofinal, so its
-formula extends to every V and v. The pullback lift i has composite g' with the
-projection to X. The inverse-image composition isomorphism therefore identifies
-i^* q^* F with g'^* F. Global sections followed by the canonical isomorphism to
-evaluation at the identity object gives b. Naturality of the units and their
-composition equation show that b after restriction along i after Theta takes a
-representative z to the unit image restricted along geometricFibreSectionLift:
-both lifts have projections f' followed by v and g', so pullback uniqueness makes
-them equal. This is the displayed formula, without any injectivity assertion
-about restriction along i. All constructions also apply to an empty X. -/
+Source: Stacks Project, Tags 03Q9, 03Q1 and 04HX. -/
 theorem strictHenselizationModuleFibre_factorization
     (Λ : Type (u + 1)) [CommRing Λ]
     {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

@@ -32,23 +32,10 @@ private theorem index_surjective {A B : FormalCoproduct.{w} D} (h : A = B) :
   subst B
   exact Function.surjective_id
 
-/-- Attach a finite family along its prescribed boundary.
-Source: Stacks 0DAV, construction of the extension, and 0DAU, split convention.
-
-Proof: Compose v with the matching projections to obtain a compatible boundary
-cone on V. Normalize each old index using the split bijection and its component
-isomorphism. Attach the new family in degree n+1; for an arbitrary ordinal map,
-use its epi--mono image factorization, an old operator or the prescribed face
-cone, and inverse normalization. The factorization identities prove composition
-in all eight old/top cases. This constructs the extended functor with its
-prescribed faces and normalized degeneracies. These degeneracies show that the
-old labels give exactly the degenerate indices in the new degree, and have
-invertible components; old degrees inherit splitness by restriction. The matching
-universal property gives b, and its uniqueness gives the prescribed restriction
-v. Finite old indices and the finiteness of ordinal maps give finite label sets,
-hence finiteness in the new degree. The old summand face formula is the explicit
-face construction.
--/
+/-- Attaching a finite family `V` along its prescribed boundary map `v` extends a finite
+split truncated simplicial object to a finite split one of length `n + 1`, whose
+nondegenerate top indices are exactly those of `V`, with the matching map compatible
+with `v`. Source: Stacks Project, Tags 0DAV and 0DAU. -/
 theorem exists_split_truncated_extension
     [HasFiniteLimits D]
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n)

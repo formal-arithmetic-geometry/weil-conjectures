@@ -34,6 +34,11 @@ existing ordinary etale constructions. The definitions below assemble the specif
 composition and transport the existing exchange to exact, termwise inverse image. The
 statements supply coherence and equality with the bounded-below maps, on actual natural
 transformations rather than just existence of unrelated isomorphisms.
+
+## Implementation details
+
+The composition isomorphism is computed by every proper/open tower. Thus it is independent of
+compactification choices and commutes with their refinement comparisons.
 -/
 
 @[expose] public section
@@ -133,9 +138,9 @@ private lemma exact_exchange_transport
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
 /-- Assemble the canonical proper/open tower comparison, using the closure compactification
-`ofComp`, and compare the input and output with the chosen compactifications. This is the
-explicit isomorphism in the proof of the existing unbounded composition theorem.
-Source: Stacks Project, Tag 0F7J. -/
+`ofComp`, and compare the input and output with the chosen compactifications: an isomorphism
+between the composite of the lower shrieks along `f` and `g` and the lower shriek along `f ≫ g`.
+Stacks Tag 0F7J. -/
 noncomputable def unboundedEtaleLowerShriekCompIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -1117,12 +1122,8 @@ end UnboundedFormalism
 
 attribute [local instance] unbounded_has_base_change unbounded_has_proper_exchange
 
-/-- The composition isomorphism is computed by every proper/open tower. Thus it is
-independent of compactification choices and commutes with their refinement comparisons.
-Source: Stacks Project, Tag 0F7J.
-Proof: identify the formalism's triangle compositor with the actual proper/open tower
-map, using the exact-derived open compositor and the canonical right-derived proper
-compositor. Its every-triangle equation then gives the result for the supplied tower. -/
+/-- The lower-shriek identity isomorphism of the unbounded formalism is induced by the identity
+isomorphism of the lower shriek along the open immersion `𝟙 X`. -/
 private lemma unbounded_sh_id
     (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     (unboundedFormalism A).shId X =

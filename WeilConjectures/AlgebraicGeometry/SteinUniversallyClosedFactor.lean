@@ -16,6 +16,16 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 /-! # Universal factorization before Stein connectedness
 
 Source: Stacks Project, More on Morphisms, Lemma 37.53.4 (Tag 03GY).
+
+## Implementation details
+
+The structure-sheaf identity means that the canonical map `q.c` is invertible. The
+relative-spectrum clause is expressed by the canonical algebra identification `s_* O ≅ f_* O`:
+push forward `q.c` along the integral (hence affine) map `s`. An affine scheme with this algebra
+identification is exactly the relative spectrum, by the affine/quasi-coherent-algebra
+anti-equivalence (Stacks 01S8, 01SA, 01LW). For every flat base change, two Cartesian squares
+specify the base-changed factorization, and the same canonical algebra identification asserts
+that its intermediate scheme is the relative spectrum of the new pushforward.
 -/
 
 @[expose] public section
@@ -27,34 +37,10 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
-/-- Universal-closed Stein factorization properties from Stacks, Tag 03GY.
-
-The structure-sheaf identity means that the canonical map `q.c` is invertible.
-The relative-spectrum clause is expressed by the canonical algebra identification
-`s_* O ≅ f_* O`: push forward `q.c` along the integral (hence affine) map `s`.
-An affine scheme with this algebra identification is exactly the relative spectrum,
-by the affine/quasi-coherent-algebra anti-equivalence (Stacks 01S8, 01SA, 01LW).
-For every flat base change, two Cartesian squares specify the base-changed factorization;
-the same canonical algebra identification asserts that its intermediate scheme is the
-relative spectrum of the new pushforward. Thus these are identifications of algebras
-through the canonical sharp maps, rather than arbitrary isomorphisms of ring sheaves.
-
-Proof:
-1. The Stein composite is f. Since the second map is affine and separated, universal
-   closedness of f implies universal closedness of q. Universal closedness also makes X
-   compact, and quasi-separatedness over the affine base makes X quasi-separated.
-2. Mathlib's dominant-toSpecΓ instance and closed-range criterion make q surjective.
-   Descend universal closedness of the composite through this surjection; the affine
-   second map is therefore integral.
-3. The qcqs localization theorem makes q sharp invertible on every basic open of Spec B.
-   Isomorphisms of sheaves are detected on this basis. Pushing this isomorphism forward
-   gives the canonical algebra identification along the second map.
-4. In the two Cartesian squares, b is flat as a base change of g. For every affine open
-   W of B', Mathlib's degree-zero flat base change theorem identifies sections of X' over
-   q' inverse W with the pushout of Γ(X) and Γ(W) over Γ(Spec B). The first ring map is
-   invertible (toSpecΓ_appTop). Hence the pushout inclusion and its composite with the
-   comparison are invertible. This composite is exactly q' sharp on W. Detection on the
-   affine-open basis and pushforward along s' give the final clause. -/
+/-- Universal-closed Stein factorization properties from Stacks, Tag 03GY: for `f` universally
+closed and quasi-separated over `Spec A`, the map `q = X.toSpecΓ` is universally closed,
+quasi-compact, quasi-separated and surjective, `f.steinFactorizationBase` is integral, `q.c`
+and its pushforward are isomorphisms, and the latter remains so after flat base change. -/
 theorem stein_universally_closed_factor
     {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A)
     [UniversallyClosed f] [QuasiSeparated f] :

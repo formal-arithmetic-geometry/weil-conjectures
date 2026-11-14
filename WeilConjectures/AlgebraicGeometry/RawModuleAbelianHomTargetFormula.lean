@@ -23,20 +23,9 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
-/-- Expand the abelian raw pullback and only the source-side scalar map.
-Source: Stacks Project, Tags 03FD and 03Q8, explicit pullback factor expansion.
-
-Proof: Apply rawModuleScalar_pullback_abelian_formula to the input
-rawModuleAbelianHomMap evaluated on z. Expand the additive scalar map as derived forgetting
-followed by right composition with scalarCoefficientFactor and left composition with
-scalarSourceFactor. Apply Functor.map_comp to separate the scalar coefficient factor from
-the source factor and the forgotten class. Reassociate the morphisms: the leading abelian
-source comparison and the image of the source factor composed with the class are exactly
-rawModuleScalarSourcePrefix; the final two morphisms are the image of the scalar coefficient
-factor and abelianCoefficientFactor. This argument uses only the definitions, functoriality
-and associativity. It uses neither the source coherence square nor the coefficient coherence
-square, and assumes no invertibility of the scalar Hom map. Zero and identity morphisms,
-empty test objects and q = 0 satisfy the same formula. -/
+/-- Expand the abelian raw pullback of `rawModuleAbelianHomMap Λ k G q U B z` as
+`rawModuleScalarSourcePrefix` followed by the pulled-back scalar coefficient factor and
+`abelianCoefficientFactor`. Stacks Project, Tags 03FD and 03Q8. -/
 theorem rawModuleAbelianHomMap_target_formula
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)

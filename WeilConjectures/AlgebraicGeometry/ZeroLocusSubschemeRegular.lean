@@ -16,9 +16,9 @@ public import WeilConjectures.Mathlib.RingTheory.Smooth.Local
 /-!
 # Local rings of the zero locus of a function, and regular points
 
-Auxiliary results for the local chart of blueprint `lemma-punctured-surface-punctured-curve--1`,
-where the zero locus `V(t)` of a function `t` with germ in `𝔪ₓ \ 𝔪ₓ²` on a smooth scheme is shown to
-be a regular divisor near `x`.
+Auxiliary results for showing that the zero locus `V(t)` of a function `t` with germ in
+`𝔪ₓ \ 𝔪ₓ²` on a smooth scheme is a regular divisor near `x`.
+
 
 - The local ring of `V(f) ⊆ Y` at `z` is `𝒪_{Y,z} ⧸ (f)`
   (`AlgebraicGeometry.Scheme.ker_stalkMap_zeroLocusSubschemeι_singleton`,

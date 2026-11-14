@@ -41,10 +41,8 @@ private theorem stalk_map_germ {X : Scheme.{u}} (x : X) {M N : X.Modules}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The stalk of sheaf tensor multiplication has image equal to the ideal generated
-by the stalk image of the ideal map. This is the pure-tensor calculation in the
-proof of `ideal_multiplication_stalk_range`; it follows from the stalk tensor
-comparison and the germ formula for `e`.
-Source: Stacks Project, Modules, Lemmas 01AG and 01CB.
+by the stalk image of the ideal map.
+Source: Stacks Project, Tags 01AG and 01CB.
 -/
 theorem stalk_tensor_multiplication_range {X : Scheme.{u}} {J : X.Modules}
     (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) (F : X.Modules) (x : X)

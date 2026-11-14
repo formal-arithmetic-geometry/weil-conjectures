@@ -56,11 +56,6 @@ sheaf of a morphism of schemes; it is constructed here. The dual sheaf `ℋom_{�
 
 - `AlgebraicGeometry.Scheme.Hom.tangentSheafAlong_iso_pullback_tangentSheaf`: for smooth `f`,
   the tangent sheaf along a section is the pullback of the tangent sheaf.
-
-## Blueprint
-
-- `def-wf-lie-algebra-derivation`: the tangent space of a point as the dual of the cotangent space
-  `𝔪_x/𝔪_x²`.
 -/
 
 @[expose] public section
@@ -203,13 +198,7 @@ noncomputable def tangentSheafAlong (e : S ⟶ X) : S.Modules :=
   Modules.dual ((Modules.pullback e).obj f.cotangentSheaf)
 
 /-- For a smooth morphism `f` the cotangent sheaf is locally free, so the tangent sheaf along a
-section `e` is the pullback `e^*T_{X/S}` of the tangent sheaf.
-
-Source: Stacks Project, Tags 02G1 and 0FNV. The cotangent sheaf is definitionally the
-library's relative differential sheaf, which is finite locally free for a smooth morphism.
-The dual pairing of a finite locally free module is preserved by the monoidal pullback
-functor; uniqueness of left duals gives the claimed isomorphism.
- -/
+section `e` is the pullback `e^*T_{X/S}` of the tangent sheaf. Stacks Tags 02G1 and 0FNV. -/
 theorem tangentSheafAlong_iso_pullback_tangentSheaf [Smooth f] (e : S ⟶ X) (he : e ≫ f = 𝟙 S) :
     Nonempty (f.tangentSheafAlong e ≅ (Modules.pullback e).obj f.tangentSheaf) := by
   have _ := he

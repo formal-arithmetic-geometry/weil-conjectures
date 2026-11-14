@@ -34,11 +34,7 @@ set_option synthInstance.maxSize 2048
 namespace AlgebraicGeometry
 
 /-- Derived restriction to an open is zero exactly when every cohomology stalk there
-is a subsingleton. Exact restriction commutes with homology. The open stalk
-isomorphisms give the forward direction, and sheaf section extensionality makes
-each restricted homology object zero in the converse. The homology isomorphism
-criterion then makes the restricted derived object zero.
-Source: Stacks Project, Tag 0E4G, proof of Lemma 48.4.3. -/
+is a subsingleton. Stacks Project, Tag 0E4G. -/
 theorem restriction_zero_iff_stalks
     (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -106,21 +102,7 @@ private instance qcoh_iso (Z : Scheme.{u})
     ((DerivedCategory.homologyFunctor _ n).mapIso e) (hK n)
 
 /-- The unit at one object is tested by the restricted image of its supported cone.
-Source: Stacks Project, Tag 0E4G, proof of Lemma 48.4.3(1)--(2).
-
-Proof. Complete the specified unit K → Rj_*j^*K to a distinguished triangle
-in the quasi-coherent derived category. The open-restriction support triangle
-shows that its cone Q restricts to zero, and is bounded below when K is. This
-applies to the supplied adjunction: uniqueness of adjoints identifies its unit
-with the unit constructed from restriction/direct image, up to an invertible
-map of the second vertex; transport the triangle across this isomorphism.
-Quasi-coherent derived categories are triangulated. The lift of Rf_* is exact,
-so its right adjoint a has the adjoint shift structure and is exact. Apply a,
-the ambient inclusion, and restriction to U to this triangle. In a distinguished
-triangle the first arrow is invertible exactly when the third vertex is zero.
-This is the asserted pointwise test. The same cone handles the bounded and
-unbounded cases; for V empty or all of Y the construction and the triangle
-criterion are unchanged. -/
+Stacks Project, Tag 0E4G, Lemma 48.4.3(1)--(2). -/
 theorem rightAdjoint_open_unit_cone_test
     {X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace Y] [QuasiSeparatedSpace Y]

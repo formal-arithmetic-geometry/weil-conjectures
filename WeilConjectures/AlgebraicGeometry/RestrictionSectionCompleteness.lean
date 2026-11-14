@@ -273,16 +273,7 @@ private theorem completeElement_iff_towerIso
   exact ⟨fun h ↦ h.of_iso eH.symm, fun h ↦ h.of_iso eH⟩
 
 /-- Local completeness at one section is unchanged by restricting scalars.
-Source: Stacks Project, algebraization.tex, Tag 099C, proof, last two sentences.
-Proof: Tag 0997 and the Roos distinguished triangle identify completeness with
-invertibility of one minus the product shift. Derived products exist by termwise
-products of K-injective resolutions. Restriction is exact and conservative and its
-derived functor is a right adjoint, hence preserves products and reflects
-isomorphisms (by cohomology). The product comparison identifies the two product
-shifts. Exact slice restriction commutes with scalar restriction through the
-componentwise identity isomorphism; its multiplication square commutes by
-naturality of the ring map. Conjugating the product shifts proves the equivalence.
-This works for every section without an ideal, finite generation or boundedness. -/
+Stacks Project, Tag 099C. -/
 theorem restrictScalars_completeElement_iff
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R B : Sheaf J CommRingCat.{u}) (φ : R ⟶ B)

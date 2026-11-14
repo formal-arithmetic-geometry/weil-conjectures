@@ -115,11 +115,7 @@ private theorem cancel_unit_comparisons {C : Type*} [Category* C]
   simp only [Iso.hom_inv_id_assoc]
 
 /-- The ordinary cochain unit square for the specified pullback comparisons.
-Source: Stacks 07A4.
-Proof: the unit clause of the oplax total comparison identifies the conjugated
-internal unit with the section unit. Compose with the forward termwise pullback
-comparison and the pullback of the unit comparison. Their inverse laws cancel
-both inverse factors, leaving precisely the displayed square. -/
+Source: Stacks 07A4. -/
 theorem cochainPullUnitCompatibility {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (cochainSectionEquivalence Λ X).map (internalPullUnitArrow Λ f) ≫
         (cochainUnitComparison Λ X).hom =
@@ -139,17 +135,14 @@ theorem cochainPullUnitCompatibility {X Y : Scheme.{u}} (f : X ⟶ Y) :
     totalSectionEquivalence] using h
 
 /-- The signed-total functor has the canonical cochain tensor as its object map.
-Source: Stacks 06YN.
-Proof: the functor is the uncurried canonical cochain tensor. -/
+Source: Stacks 06YN. -/
 theorem totalTensor_obj_tensor (X : Scheme.{u})
     (P Q : CochainComplex (modules Λ X) ℤ) :
     (totalTensor Λ X).obj (P, Q) = P ⊗ Q := by
   rfl
 
 /-- The canonical signed-total functor acts on a pair by tensoring its maps.
-Source: Stacks 06YN.
-Proof: the map of the uncurried tensor is the right whisker followed by the left
-whisker, which is the defining formula for tensorHom. -/
+Source: Stacks 06YN. -/
 theorem totalTensor_map (X : Scheme.{u})
     {A A' B B' : CochainComplex (modules Λ X) ℤ} (a : A ⟶ A') (b : B ⟶ B') :
     (totalTensor Λ X).map (Prod.mkHom a b) = a ⊗ₘ b := by
@@ -168,9 +161,7 @@ Source: Stacks 06YU and 07A4. -/
 
 omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)] in
 /-- Naturality of the canonical internal localization tensor map.
-Source: Stacks 06YU and 07A4.
-Proof: this is the naturality axiom of the fixed lax monoidal localization functor,
-with its source and target written using the canonical tensor components. -/
+Source: Stacks 06YU and 07A4. -/
 theorem internalQTensorArrow_naturality (T : Scheme.{u})
     {A A' B B' : CochainComplex (internalModules Λ T) ℤ} (a : A ⟶ A') (b : B ⟶ B') :
     ((internalLocalizationFunctor Λ T).map a ⊗ₘ (internalLocalizationFunctor Λ T).map b) ≫
@@ -189,10 +180,7 @@ Source: Stacks 05RU and 06YU. -/
   by with_unfolding_all exact sectionLocalizationComparison Λ T P
 
 /-- Naturality of the fixed localization comparison with canonical cochain types.
-Source: Stacks 05RU and 06YU.
-Proof: use mapDerivedCategoryFactors.hom.naturality of the fixed exact section functor.
-Its source is derivedEquivalence.functor and its target is localization of the fixed
-termwise cochain equivalence, by their defining equations. -/
+Source: Stacks 05RU and 06YU. -/
 theorem cochainLocalizationIso_naturality (T : Scheme.{u})
     {P Q : CochainComplex (internalModules Λ T) ℤ} (a : P ⟶ Q) :
     (derivedSectionFunctor Λ T).map ((internalLocalizationFunctor Λ T).map a) ≫
@@ -218,9 +206,7 @@ Source: Stacks 06YU. -/
   by with_unfolding_all exact (tensorComparison Λ T).app (M, N)
 
 /-- Naturality of the specified derived tensor comparison in canonical types.
-Source: Stacks 06YU.
-Proof: apply tensorComparison.hom.naturality to the pair of maps; the map of the
-uncurried tensor is the canonical tensor of those maps. -/
+Source: Stacks 06YU. -/
 theorem derivedSectionTensorIso_naturality (T : Scheme.{u})
     {M M' N N' : DerivedCategory (internalModules Λ T)} (a : M ⟶ M') (b : N ⟶ N') :
     (derivedSectionFunctor Λ T).map (a ⊗ₘ b) ≫
@@ -243,9 +229,7 @@ Source: Stacks 07A4 and 06YU. -/
   (qTensor Λ T).app (P, Q)
 
 /-- Naturality of the specified component, using the canonical cochain tensor map.
-Source: Stacks 07A4 and 06YU.
-Proof: apply naturality of qTensor to the pair of chain maps and use totalTensor_map
-for its signed-total image. -/
+Source: Stacks 07A4 and 06YU. -/
 theorem qTensorArrow_naturality (T : Scheme.{u})
     {P P' Q Q' : CochainComplex (modules Λ T) ℤ} (a : P ⟶ P') (b : Q ⟶ Q') :
     (tensor Λ T).map (Prod.mkHom (DerivedCategory.Q.map a) (DerivedCategory.Q.map b)) ≫
@@ -266,13 +250,7 @@ private theorem normalize_tensor
   rw [F.map_id, Category.id_comp, Iso.hom_inv_id_assoc]
 
 /-- The defining representative square, with all component types fixed canonically.
-Source: Stacks 06YU and 07A4.
-Proof: the first clause of TensorRepresentativeCondition determines qTensor on every
-pair of internal complexes. Multiply its formula on the left by the forward tensor
-comparison and the tensor of the forward localization comparisons. Functoriality and
-both inverse laws cancel the prescribed inverse factors. The localized total comparison
-is exactly localization of the cochain tensor comparison after the localization factor.
--/
+Source: Stacks 06YU and 07A4. -/
 theorem qTensorArrow_normalization (T : Scheme.{u})
     (A B : CochainComplex (internalModules Λ T) ℤ) :
     (derivedSectionFunctor Λ T).map

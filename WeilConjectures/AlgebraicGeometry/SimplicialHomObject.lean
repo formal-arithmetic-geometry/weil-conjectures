@@ -22,7 +22,7 @@ open CategoryTheory CategoryTheory.Limits Opposite Simplicial
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Compatible maps indexed by all simplices. Source: Stacks, proof of Tag 017J. -/
+/-- Compatible maps indexed by all simplices. Stacks, Tag 017J. -/
 def SimplicialHomFamily {X : Scheme.{u}}
     (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) (S : SSet.{t})
     (W : FormalCoproduct.{w} X.Etale) :=
@@ -30,12 +30,7 @@ def SimplicialHomFamily {X : Scheme.{u}}
     ∀ (m n : ℕ) (φ : ⦋m⦌ ⟶ ⦋n⦌) (s : S.obj (op ⦋n⦌)),
       f n s ≫ K.map φ.op = f m (S.map φ.op s)}
 
-/-- Precomposition preserves the compatibility equations. Source: Stacks, proof of Tag 017J.
-
-Proof: for each operator `φ` and simplex `s`, associativity rewrites
-`(g ≫ f n s) ≫ K.map φ.op` as `g ≫ (f n s ≫ K.map φ.op)`.
-Use the compatibility equation of `f` to obtain `g ≫ f m (S.map φ.op s)`.
-This is composition in the category of def-weil-pbc-semi-representable-object. -/
+/-- Precomposition preserves the compatibility equations. Stacks, Tag 017J. -/
 theorem SimplicialHomFamily.precomp_compatible {X : Scheme.{u}}
     {K : SimplicialObject (FormalCoproduct.{w} X.Etale)} {S : SSet.{t}}
     {W W' : FormalCoproduct.{w} X.Etale} (f : SimplicialHomFamily K S W) (g : W' ⟶ W) :

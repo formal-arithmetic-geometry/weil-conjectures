@@ -57,27 +57,8 @@ private theorem normalizedComplete_iso
 stratification. The comparison objects may vary with the covering arrow. They need
 not be perfect, bounded or constructible.
 
-Source: Bhatt--Scholze, Lemma 6.5.8 and Remark 6.5.10; Proposition 6.6.11,
-reverse implication; Stacks proetale.tex Tags 099L and 099M.
-
-Proof: choose a finite generating list for I by Noetherianity. Forget constructibility
-in s to obtain its finite locally closed stratification, retaining exactly its scheme
-domains and immersion maps. Transport V and its covering proof along AsSmall.up; the
-induced topology and the site equivalence identify the transported covering arrows with
-the original ones. The constant-sheaf and limit comparisons identify the transported
-completed rings and first projections with those in adicStratumCompletionUnit_detection.
-For each stratum immersion choose the algebraic inverse-image data supplied by its
-geometric adjunction. Uniqueness of the module inverse-image adjunction and scalar
-extension identifies the restriction in that theorem with sfbLocalRestriction after
-transport to the equivalent slice site. This identification is natural in the derived
-object, since both exact functors factor termwise localization. A complete L remains
-complete on this stratum and slice by adicStratumCompletionUnit. Transport its local
-isomorphism with K through the exact coefficient and site equivalences. Local internal
-Hom preserves isomorphisms in its second argument, so the restricted K is complete as
-well. Finally apply the reverse implication of adicStratumCompletionUnit_detection to
-these restrictions. The global coefficient comparison identifies its conclusion with
-IsSfbAdicComplete X I K. The same argument treats empty strata and the empty scheme:
-the conservativity theorem uses the empty-cover sheaf axiom and requires no point. -/
+Bhatt--Scholze, Lemma 6.5.8 and Remark 6.5.10; Proposition 6.6.11, reverse implication;
+Stacks Tags 099L and 099M. -/
 theorem sfbAdicComplete_of_stratum_local_iso (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (s : Stratification X)

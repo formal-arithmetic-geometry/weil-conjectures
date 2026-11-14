@@ -53,19 +53,7 @@ noncomputable def openRestrictionNumeratorIso {X Y : Scheme.{u}} (j : Y ⟶ X)
     (Iso.refl (F.restrict j) ⊗ᵢ openRestrictionTensorPowIso j L n)
 
 /-- The recursively constructed tensor-power comparison carries powers of the restricted
-section back to the ambient powers on every image open.
-Source: Stacks Project, Modules, Tag 01CD; Properties, Tag 01PW, restriction paragraph.
-
-Proof: Induct on n. In degree zero, restrictUnitIso is the structure-ring isomorphism
-and its inverse sends 1 to 1. For the successor degree, expand tensorPowSectionOne_succ
-on the restricted scheme. The inverse comparison is the inverse tensor comparison
-composed with the tensor product of the identity and the previous inverse comparison.
-The tensor-morphism formula and the pure-tensor characterization of the restriction
-comparison carry this to the tensor of the restricted section and the ambient nth
-power. Naturality of restrictAppIso and homOfGlobalSection_app_one identify the first
-factor with the ambient section restricted to the image open. The inductive hypothesis
-identifies the second factor. Apply tensorPowSectionOne_succ on X. This argument works
-for zero sections, the empty open and n = 0, without a generator or invertibility. -/
+section back to the ambient powers on every image open. Stacks Tags 01CD and 01PW. -/
 theorem openRestrictionTensorPowIso_inv_section (X : Scheme.{u}) (L : X.Modules)
     (s : Γ(L, ⊤)) (U : X.Opens) (n : ℕ) (V : U.toScheme.Opens) :
     let sU : Γ(L.restrict U.ι, ⊤) :=

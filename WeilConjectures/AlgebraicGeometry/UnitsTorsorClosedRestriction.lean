@@ -71,30 +71,7 @@ noncomputable def unitsTorsorClosedPushforward {Z X : Scheme.{u}} (i : Z ⟶ X)
 
 /-- The canonical comparison sends the class of the explicitly constructed direct-image
 torsor to the class of the original torsor.
-
-Source: Stacks Project, Tag 02FQ, boundary-of-one construction; Tag 02UV, canonical
-closed-immersion comparison; Tag 09NY, final sentence.
-
-Edge cases: for i = identity this is invariance under the identity comparison. If Z is
-empty, both Q and its direct image are trivial torsors, so both classes are zero.
-No surjectivity of O_X^* to i_* O_Z^* is needed.
-
-Proof:
-1. Represent Q by an extension of the constant integer sheaf by O_Z^*, with fibre
-Q above one. Its torsor class is the boundary of one, by the canonical torsor
-classification and its boundary representative description in Tag 02FQ.
-2. Apply exact closed direct image to this extension and pull back along the
-restriction map from the constant integer sheaf on X to its direct image from Z.
-The fibre above one is the direct image of Q: both its sections and its action
-are the sections and action of Q on inverse-image opens. This is exactly the
-explicit construction unitsTorsorClosedPushforward, so the boundary of one for
-the pulled-back extension is its torsor class.
-3. The canonical closed-immersion cohomology comparison of Tag 02UV commutes
-with the connecting maps and identifies global sections on X with those on Z.
-Its inverse is obtained by exact inverse image, the comparison of constant
-integer sheaves, and the counit; this is unitsPushforwardCohomologyComparison.
-The comparison therefore sends the boundary of one for the pulled-back image
-extension to the original boundary of one, proving the equality. -/
+Source: Stacks Project, Tags 02FQ, 02UV and 09NY. -/
 theorem unitsTorsor_closed_restriction_class {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (Q : Sheaf.Torsor Z.unitsSheaf) :
     unitsPushforwardCohomologyComparison i 1

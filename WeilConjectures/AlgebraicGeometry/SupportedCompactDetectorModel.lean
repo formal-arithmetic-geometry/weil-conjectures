@@ -21,8 +21,13 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # A small-Hom model for a supported compact detector
 
-Source: Stacks Project, duality.tex, lemma-when-sheafy, proof of (3), Section Tag 0E4G;
-derived.tex, lemma-write-as-colimit (Tag 09SN).
+Source: Stacks Project, Duality for Schemes, Section 0E4G; Derived Categories, Tag 09SN.
+
+## Implementation details
+
+In `supported_compact_detector_model`, the model is the `ShrinkHoms` model of the full
+subcategory of complexes with quasi-coherent cohomology and zero cohomology stalks on `V`,
+and `F` is its canonical inverse equivalence followed by the inclusion.
 -/
 
 @[expose] public section
@@ -192,26 +197,7 @@ private theorem supported_closed_coproducts (Y : Scheme.{u})
 
 /-- Prepare the supported subcategory for the compact-generator theorem, without
 constructing any tower or telescope.
-Source: Stacks Project, duality.tex, lemma-when-sheafy, proof of (3), Section Tag 0E4G;
-derived.tex, lemma-write-as-colimit (Tag 09SN).
-
-Proof: Form the full subcategory of ambient complexes with quasi-coherent cohomology
-and zero cohomology stalks on V. The hypothesis htri supplies its triangulated structure.
-Ambient sums have sum cohomology; stalks commute with sums, so this property is closed
-under sums, including the empty sum. The inclusion therefore creates these coproducts.
-K-injective resolutions identify derived Hom with a quotient of the small set of chain
-maps into a K-injective representative. Thus this full subcategory is locally u-small.
-Take its ShrinkHoms model, with exactly the same objects and shrunk Hom sets. Transport
-zero, addition, shifts, triangles and coproducts along the canonical equivalence.
-Compose its inverse with the full-subcategory inclusion to obtain F. The supported
-objects E and Q give e and q. Full faithfulness and agreement of coproducts identify
-the compactness comparison for e with that for E in D_QCoh(Y), so e is compact.
-The singleton coproduct is e. For a nonzero object, hgen gives a nonzero map from some
-shift of E; the shift equivalence rewrites this as a map from E into a shift of the
-object. Full faithfulness transports it to the model, proving singleton generation.
-These constructions work also for E = 0: hgen then makes the supported category zero.
-No choice of an arbitrary derived object is made; the model is ShrinkHoms of the stated
-full subcategory and F is its canonical inverse followed by the inclusion. -/
+Stacks Project, Tags 0E4G and 09SN. -/
 theorem supported_compact_detector_model (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (V : Y.Opens) (E Q : schemeDerivedQCohCategory Y)

@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.RawRestrictedResolutionEvaluation
 import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
 
 /-! # Evaluation part of the raw restricted comparison
-.
+
+The evaluation part of the raw restricted cohomology comparison at the represented identity
+is an isomorphism.
 -/
 
 @[expose] public section
@@ -111,18 +113,8 @@ private theorem evaluation_isIso_on_injectives {S Y : Scheme.{v}}
   exact (ConcreteCategory.isIso_iff_bijective _).mpr hm
 
 /-- The evaluation at the represented identity is invertible before the explicit
-shift identification.  This is the derived Yoneda and sections calculation.
-Source: Stacks Project, Tag 03Q8 and Cohomology on Sites, Tags 072W, 0BKV and 0D6F.
-
-Proof: choose a bounded-below injective resolution of `F`.  Restriction to the
-etale pullback preserves injectives by exact extension by zero.  The derived
-localization bijection identifies morphisms from the free represented sheaf
-with homotopy classes of maps into that resolution, while the sheafification,
-free-abelian Yoneda and sections adjunction identifies those classes with
-cohomology classes of the restricted sections complex.  Evaluation at the
-represented identity is exactly this identification, including degree zero and
-the empty pullback.
--/
+shift identification.
+Source: Stacks Project, Tag 03Q8 and Cohomology on Sites, Tags 072W, 0BKV and 0D6F. -/
 theorem isIso_rawRestrictedCohomologyComparisonEvaluation {S Y : Scheme.{v}}
     (h : Y ⟶ S) (p : ℕ) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})
     (U : S.Etale) :

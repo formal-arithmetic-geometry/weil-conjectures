@@ -215,25 +215,9 @@ private theorem diagram_projection
     (sfGraphCompactificationComparison_projection A ch d.compositePresentation M K) hi
   exact hp
 
-/-- Projection compatibility for the tail of the graph composition word.
-
-Source: node lem-sf-etale-compact-projection-coherence, steps 6--7;
-`LowerShriekComposition.lean`, e3 followed by inverse e2; Stacks Tags 0B56,
-0GL1 and 0F7B.
-
-Proof: apply the Cartesian graph-interchange projection square to the explicit
-product graph diagram. Normalize the actual compact-support compositor as the
-composite graph comparison, inverse raw interchange and inverse source graph
-comparison. Paste the projection squares for the source and composite graph
-comparisons with the interchange square. Naturality of these comparisons and
-cancellation of their isomorphisms give the full compositor projection square.
-Factor that compositor as the first graph comparison followed by the specified
-tail. Paste the first graph comparison's projection square and cancel tensoring
-that comparison. The remaining equality is precisely the stated tail square.
-Only graph comparison isomorphisms are cancelled; no projection map is inverted.
-The calculation applies to arbitrary schemes and unbounded complexes, including
-empty and identity opens and zero coefficients.
--/
+/-- Projection compatibility for the tail of the graph composition word
+(`LowerShriekComposition.lean`, e3 followed by inverse e2). It holds for arbitrary
+schemes and unbounded complexes. Stacks Tags 0B56, 0GL1 and 0F7B. -/
 theorem sfGraphCompositionTailIso_projection
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)

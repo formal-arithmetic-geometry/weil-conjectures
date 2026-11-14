@@ -22,6 +22,13 @@ The inverse-image comparison is descended termwise. Its derived adjunction mate 
 an actual canonical direct-image comparison; the theorem asserts its invertibility and
 its normalization by the right-derived units. This normalization identifies it with
 0D6J's K-injective replacement construction, without preservation of K-injectives.
+
+## Implementation details
+
+The unit equation for the direct-image comparison is stated on every homotopy complex. On a
+K-injective module complex `I`, applying it together with naturality of the abelian derived
+unit to a quasi-isomorphism `UI → J` with `J` abelian K-injective shows that the comparison is
+the class of `v_* UI → v_* J`, since both derived units at K-injectives are invertible.
 -/
 
 @[expose] public section
@@ -664,10 +671,9 @@ noncomputable def moduleAbelianUnboundedUpperStarIso
     Functor.mapDerivedCategoryNatIso (moduleAbelianUpperStarIso Λ v).symm ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- The adjunction mate of the termwise inverse-image comparison. Its right-derived-unit
-normalization below identifies it with the map computed by a module K-injective complex
-and an abelian K-injective replacement of its underlying complex.
-Source: Stacks Project, Tags 0D6J(3) and 07A7. -/
+/-- The adjunction mate of the termwise inverse-image comparison: a comparison between derived
+direct image of module sheaves followed by forgetting coefficients and the reverse composite.
+Stacks Tags 0D6J(3) and 07A7. -/
 noncomputable def moduleAbelianUnboundedLowerStarComparison
     (Λ : Type (u + 1)) [CommRing Λ] {A B : Scheme.{u}} (v : A ⟶ B) :
     R((v)_*[ModuleCat.{u + 1} Λ]) ⋙ D(moduleAbelianForget Λ B) ⟶
@@ -725,35 +731,12 @@ private lemma exactFunctor_reflects_derived
         (F.mapDerivedCategory.map h)); infer_instance)
   exact isIso_of_reflects_iso _ F
 
-/-- Exact conservative coefficient forgetting intertwines canonical unbounded exchange.
-The unit equation is stated on every homotopy complex: on a K-injective module complex
-`I`, apply it and naturality of the abelian derived unit to a quasi-isomorphism `UI → J`
-with `J` abelian K-injective. Both derived units at K-injectives are invertible, so the
-equation says exactly that the comparison is the class of `v_* UI → v_* J`.
-
-Source: Stacks Project, Tags 0D6J(3), 0D6E and 07A7.
-
-Proof:
-1. Forgetting preserves kernels and sheafified cokernels. The inverse of a bijective
-module map is linear. Exact-functor localization and its homology comparison imply
-exactness and reflection of isomorphisms on unbounded derived categories.
-2. Descend the ordinary inverse-image coefficient comparison termwise. Its square
-coherence follows degree by degree and survives localization.
-3. Descend the sectionwise direct-image comparison using the absolute right-derived
-functor property supplied by K-injective resolutions. Its defining unit equation holds
-on every homotopy complex. The acyclicity statement of Tag 0D6J(3), isolated in
-`moduleAbelianForget_kInjective_directImage_quasiIso`, makes the abelian derived unit
-invertible on forgotten module K-injectives. The derivability criterion therefore
-makes the descended comparison invertible.
-4. Compute the derived adjunction mate on homotopy complexes using the explicit
-normalizations of the derived unit and counit. It has the same unit equation as the
-descended comparison; uniqueness of right-derived descent identifies the two maps.
-5. The ordinary module/abelian exchange identity is already proved. Pass its cube of
-natural transformations to homotopy categories, insert the exact-functor factorization
-isomorphisms, and use the defining unit equations of the four descended comparisons.
-Right-derived uniqueness gives the cube equality on the derived category. Step 4
-identifies its four faces with the fixed mate definitions in the statement.
--/
+/-- Exact conservative coefficient forgetting intertwines canonical unbounded exchange:
+forgetting module coefficients is exact, triangulated, conservative and commutes with cohomology
+on derived categories; the direct-image comparison `moduleAbelianUnboundedLowerStarComparison`
+is an isomorphism normalized by the right-derived units; and forgetting coefficients commutes
+with the unbounded base change maps of a chosen cartesian square.
+Stacks Tags 0D6J(3), 0D6E and 07A7. -/
 theorem unbounded_abelian_exchange_comparison
     (Λ : Type (u + 1)) [CommRing Λ]
     {X X' Y Y' : Scheme.{u}}

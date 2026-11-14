@@ -252,22 +252,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- On a single sheaf the homology of the transported unit is the inverse of
 `zeroIso`, after identifying single-complex homology with underived sections.
-Source: Stacks Project, Tags 072W and 0BKV (degree-zero derived sections).
-
-Proof: expand `zeroIso` into the exact-restriction single comparison, the
-unbounded-to-bounded-below derived comparison, the injective-resolution homology
-comparison, and the classical degree-zero comparison. The compatibility of the
-two derived functors with their units, given by `Functor.rightDerivedNatTrans_app`,
-cancels the unbounded-to-bounded-below comparison. Apply the proved
-`Functor.rightDerivedPlusSingleUnitHomology_comp_comparison` to the restricted
-sheaf: it identifies the bounded-below single unit with `toRightDerivedZero`.
-Since sections preserve finite limits, `rightDerivedZeroIsoSelf` is its inverse.
-Thus the classical comparison cancels the same augmentation. The single-complex
-homology isomorphism identifies its source with the sheaf of sections. Naturality
-of exact restriction's single-complex comparison and homology's localization
-comparison gives the
-displayed equality. This argument requires no K-injectivity of the single
-sheaf, and includes the zero sheaf and the empty etale object. -/
+Source: Stacks Project, Tags 072W and 0BKV (degree-zero derived sections). -/
 theorem sectionsUnit_zero {Y : Scheme.{v}} (W : Y.Etale)
     (A : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) :
     (underivedSingleIso W A).inv ≫

@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence
 
 /-! # Canonical normalization of identity projection
-.
+
+The projection map for the identity morphism, normalized by the specified direct-image
+identity comparison.
 -/
 
 @[expose] public noncomputable section
@@ -77,25 +79,7 @@ attribute [local irreducible] derivedTensor upperStar lowerStar
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The projection map for the identity, normalized by the specified direct-image identity.
-Source: Stacks Project, Tags 0B56 and 0DV0; identity projection normalization in
-WeilConjectures.AlgebraicGeometry.SfGraphFirstProjectionSquare and the proper coincidence square in
-WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence.
-
-Proof: use identity_pullback_tensor to identify the pullback tensor comparison with the
-canonical identity pullback isomorphism. Transpose the ordinary direct-image projection
-through the derived pullback/direct-image adjunction. Its defining transpose is tensor
-comparison followed by the counit tensor identity. Substituting the preceding identity
-and the identity counit equation gives normalized_identity_projection; the conjugate
-right comparison is rightDerivedLowerStarIdIso by derived_identity_conjugate. Thus the
-ordinary projection, followed by the tensor of the identity pullback comparison, becomes
-the identity under these pullback and direct-image comparisons. Transport this equation
-through projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar. The composite
-of proper coincidence with rightDerivedLowerStarIdIso is exactly
-rightDerivedLowerShriekIdIsoOfLowerStar: naturality of the right-derived/exact-functor
-comparison identifies the two displayed constructions. Naturality moves the proper
-comparison across the tensor map. Cancel its inverse and then the direct-image identity
-comparison to obtain the inverse-oriented equality below. No section or composition of
-two nonidentity scheme maps occurs in this normalization. -/
+Stacks Project, Tags 0B56 and 0DV0. -/
 theorem identityProjectionNormalization (X : Scheme.{u})
     (V M : DerivedCategoryModule A X) :
     ((derivedTensor (ModuleCat.{u + 1} A) X).map

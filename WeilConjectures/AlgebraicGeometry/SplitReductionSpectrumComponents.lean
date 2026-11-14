@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ThickeningIntegral
 /-!
 # Components of an affine scheme with split reduction
 
-Source: smooth purity blueprint, `lem-weil-pbc-finite-pushforward-generic-constructible`,
-finite-algebra calculation.
+If the reduction of `R` is isomorphic over `A` to a finite product of `A`-algebras `D j` with
+`Spec (D j) → Spec A` universal homeomorphisms, then `Spec R` splits into disjoint open pieces,
+each mapping universally homeomorphically to `Spec A`.
 -/
 
 @[expose] public section
@@ -53,15 +54,9 @@ private theorem universalHomeomorphism_of_thickening
     exact congrArg i' hx
   exact {}
 
-/-- Lift the factors of a product decomposition through a nilradical reduction.
-
-Source: smooth purity blueprint, `lem-weil-pbc-finite-pushforward-generic-constructible`,
-finite-algebra calculation.
-Proof: Identify the spectrum of the finite product with the coproduct of factor spectra,
-transport it across the supplied algebra equivalence, and lift the resulting clopen pieces
-through the surjective nilradical closed immersion. Restrict the immersion to each lifted
-piece and use invariance of integrality under thickenings, surjectivity of the composite,
-and cancellation of universal injectivity after arbitrary base change. -/
+/-- If `R ⧸ nilradical R ≃ₐ[A] ∀ j, D j` with each `Spec (D j) → Spec A` a universal
+homeomorphism, then `Spec R` is covered by pairwise disjoint opens `W i`, each mapping
+universally homeomorphically to `Spec A`. -/
 theorem spectrum_components_of_split_reduction
     (A R : Type u) [CommRing A] [CommRing R] [Algebra A R]
     (r : ℕ) (D : Fin r → Type u) [∀ j, CommRing (D j)] [∀ j, Algebra A (D j)]

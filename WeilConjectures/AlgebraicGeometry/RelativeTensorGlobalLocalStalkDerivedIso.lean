@@ -15,7 +15,9 @@ import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 
 /-! # RelativeTensorGlobalLocalStalkDerivedIso
-.
+
+A derived comparison between the stalk of a relative tensor product of global modules and the
+same stalk computed on an open local model.
 -/
 
 @[expose] public section
@@ -29,18 +31,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 /-- Derived comparison of the global module stalk and an open local model.
 Source: Stacks Project, Modules Tag 01AG; Sheaves Tags 008H and 0098;
-Cohomology of Sheaves Tag 08CG.
-Proof: neighbourhoods of y contained in V are cofinal among neighbourhoods of y.
-The resulting natural stalk comparison identifies the composite of restriction
-to the slice over V and openModuleStalkFunctor with the global module stalk.
-The open immersion stalk map in the latter functor is exactly the scalar
-transport of this comparison. Both functors are exact, hence their comparison
-induces an isomorphism of derived functors compatible with Q. Apply the
-open stalk derived functor to eL and compose with the comparison at QK.
-Finally apply exact restriction of scalars along f.stalkMap y and its
-commutation isomorphism with Q. The result is the displayed isomorphism.
-The construction requires only y in V and is valid also for zero or acyclic
-complexes; there are no degree bounds. -/
+Cohomology of Sheaves Tag 08CG. -/
 theorem relativeTensor_global_local_stalk_derived_iso
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

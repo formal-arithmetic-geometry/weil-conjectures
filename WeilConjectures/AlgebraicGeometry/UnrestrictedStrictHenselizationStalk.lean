@@ -25,23 +25,13 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-/-- For every abelian étale sheaf, the canonical strict-local restriction is an isomorphism.
-The germ map `r` is specified by its neighbourhood components; its existence and uniqueness
-are supplied by `existsUnique_strictHenselizationStalkRestriction`. The canonical map is
-`r ≫ strictHenselizationCohomologyComparison`, with target the cohomology of the inverse
-image along the first projection of the strict-local base change.
-Source: Stacks Project, Tag 03Q9, first assertion and proof.
+/-- For every abelian étale sheaf `F`, there is a strict-henselization stalk restriction `r`
+from the stalk at `xbar` of `R^q f_* F` to the sections over the strict localization of its
+inverse image, such that `r ≫ strictHenselizationCohomologyComparison xbar f F q` is an
+isomorphism.
 
-Proof:
-1. Choose the unique germ restriction supplied by
-`existsUnique_strictHenselizationStalkRestriction`.
-2. The strict-local germ restriction is an isomorphism by
-`isIso_strictHenselizationStalkRestriction`.
-3. Apply `isIso_strictHenselization_baseChange_globalHomology` to `F` in degree zero.
-The cohomology comparison is the composite of the exact inverse-image/homology
-isomorphism, this base-change map on global homology, the strict-local Leray isomorphism,
-and the inverse-image/single-complex isomorphism. Each factor is invertible, so its
-composite with the germ restriction is invertible. -/
+Stacks Project, Tag 03Q9, first assertion. -/
+
 theorem unrestricted_strictHenselization_stalk
     {X S : Scheme.{w}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     {Ω : Type w} [Field Ω] [IsAlgClosed Ω]

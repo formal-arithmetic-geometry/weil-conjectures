@@ -30,16 +30,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical linear restriction maps are compatible with pointed affine refinement.
-Source: Stacks Project, Tag 03Q9, proof, canonical restriction maps.
-
-Proof: Write p for the projection to X and B for the neighbourhood base-change diagram.
-The strict-henselization cone legs commute with every refinement. After pullback symmetry,
-pullback extensionality therefore gives δ_j ≫ p.Etale.map (B.map a) = δ_k.
-Naturality of the module adjunction unit at B.map a identifies restriction before the unit
-with restriction after the unit. Contravariant functoriality of p⁻¹F and the preceding
-identity then identify restriction along the two graphs. Postcompose with the same inverse
-terminal-section/global-section isomorphism. This yields the displayed equation. It needs
-no qcqs hypothesis and holds for empty schemes and the zero ring. -/
+No qcqs hypothesis is needed. Source: Stacks Project, Tag 03Q9. -/
 theorem qcqsStrictLocalRestriction_naturality
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y)

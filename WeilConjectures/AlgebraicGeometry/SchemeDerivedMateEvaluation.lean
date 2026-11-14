@@ -70,9 +70,7 @@ noncomputable def canonicalDerivedSquareComparison {P Q P' Q' : Scheme.{u}}
       (canonicalDerivedPullbackComposition r' l).inv.app M
 
 /-- Evaluating the counit-defined mate recovers its defining transpose.
-Proof: unfold the mate, apply the inverse-forward identity for the pinned
-adjunction Hom equivalence, and reassociate the defining square comparison.
-Source: Stacks Project, Tag 08HY. -/
+Stacks Project, Tag 08HY. -/
 theorem schemeDerivedMate_evaluation
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

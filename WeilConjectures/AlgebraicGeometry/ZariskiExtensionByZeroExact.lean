@@ -38,13 +38,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- Extension by zero `j_! : Ab(U_Zar) ⥤ Ab(X_Zar)`, the sheafification of `j_{p!}`, is
-additive.
-
-Source: Stacks Project, Modules on Sites, Lemma 03DJ, additivity clause.
-
-Proof: `j_!` is a left adjoint of restriction (Mathlib's
-`sheafPullbackConstruction.sheafAdjunctionContinuous`); a left adjoint between
-preadditive categories preserves finite biproducts, hence is additive. -/
+additive. Stacks Project, Modules on Sites, Lemma 03DJ. -/
 @[instance]
 theorem zariski_extensionByZero_additive (X : Scheme.{u}) (U : X.Opens) :
     (Functor.sheafPullbackConstruction.sheafPullback (Over.forget U) AddCommGrpCat.{u}
@@ -59,14 +53,8 @@ theorem zariski_extensionByZero_additive (X : Scheme.{u}) (U : X.Opens) :
 /-- Extension by zero `j_! : Ab(U_Zar) ⥤ Ab(X_Zar)` (additive by
 `zariski_extensionByZero_additive`) carries every short exact sequence to a short exact
 sequence, and in particular carries monomorphisms to monomorphisms.
+Stacks Project, Modules on Sites, Lemma 03DJ. -/
 
-Source: Stacks Project, Modules on Sites, Lemma 03DJ.
-
-Proof: `j_!` is a left adjoint of restriction, hence right exact, so it preserves
-cokernels. A monomorphism of `Ab(U_Zar)` is sectionwise injective, so `j_{p!}` of it is
-sectionwise injective, and sheafification preserves finite limits, so `j_!` of it is a
-monomorphism. A short exact sequence is a mono followed by its cokernel; both are
-preserved, which gives short exactness of the image. -/
 theorem zariski_extensionByZero_exact (X : Scheme.{u}) (U : X.Opens) :
     (∀ S : ShortComplex (Sheaf ((Opens.grothendieckTopology X).over U) AddCommGrpCat.{u}),
       S.ShortExact →

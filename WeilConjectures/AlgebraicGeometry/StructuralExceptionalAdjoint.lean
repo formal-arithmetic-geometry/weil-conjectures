@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShr
 
 Source: Bhatt--Scholze, Lemmas 6.7.7 and 6.7.19, Remark 6.8.15 and Proposition 6.8.14.
 
-For a morphism `f : X ⟶ Y` of separated `k`-schemes of finite type, the blueprint lemma asserts
+For a morphism `f : X ⟶ Y` of separated `k`-schemes of finite type, the statement asserts
 that the bounded constructible compact-support functor `Rf_!` is computed by `i_! ⋙ Rp_*` for
 every compactification `c = (X ⟶[i] Z ⟶[p] Y)` of `f`, and that it has a right adjoint `Rf^!` on
 bounded constructible complexes. The adjunction is
@@ -20,6 +20,14 @@ bounded constructible complexes. The adjunction is
 (`Rf_! = boundedConstructibleLowerShriek ⊣ Rf^! = boundedConstructibleUpperShriek`); this file
 supplies the compactification-independence clause, comparing `Rf_!` on `Dᵇc` with the derived
 lower shriek `Rf_!(c)⟦ℚ̲̄_ℓ⟧` on the ambient derived categories for an arbitrary `c`.
+
+## Implementation details
+
+`boundedConstructibleLowerShriekCompatibilityOfCompactification` is the independence isomorphism
+`boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl` from the chosen
+compactification to `c`, followed by the comparison
+`boundedConstructibleLowerShriekOfCompactificationCompatibility` of `i_! ⋙ Rp_*` on `Dᵇc`
+with the ambient derived lower shriek.
 -/
 
 @[expose] public noncomputable section
@@ -45,13 +53,7 @@ compactification: for every compactification `c` of `f`, it is the restriction t
 derived lower shriek `Rf_!(c)⟦ℚ̲̄_ℓ⟧ = i_! ⋙ Rp_*` attached to `c`.
 
 Source: Bhatt--Scholze, Definition 6.7.6, Lemmas 6.7.7 and 6.7.19, Remark 6.8.15 and
-Proposition 6.8.14;
-
-Construction: the independence isomorphism
-`boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl` from the chosen
-compactification to `c`, followed by the comparison
-`boundedConstructibleLowerShriekOfCompactificationCompatibility` of `i_! ⋙ Rp_*` on `Dᵇc`
-with the ambient derived lower shriek. -/
+Proposition 6.8.14. -/
 noncomputable def boundedConstructibleLowerShriekCompatibilityOfCompactification
     {f : X ⟶ Y} (c : Compactification f.left) :
     boundedConstructibleLowerShriek ℓ f ⋙ (boundedConstructible _).ι ≅

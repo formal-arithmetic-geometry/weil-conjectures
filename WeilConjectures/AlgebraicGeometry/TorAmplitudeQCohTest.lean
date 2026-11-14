@@ -42,28 +42,7 @@ private noncomputable local instance (X : Scheme.{u}) :
   SheafOfModules.monoidalCategory X.sheaf
 
 /-- Quasi-coherent test modules detect the Tor amplitude of an object with
-quasi-coherent cohomology on a quasi-separated scheme.
-Source: Stacks Project, Tag 08EA.
-
-Proof:
-1. For an affine open `j : U → X`, quasi-separatedness makes `j` quasi-compact
-   and separated. Pushforward preserves quasi-coherence,
-   and `j* j_* G = G`, so all quasi-coherent modules on `U` extend to `X`.
-   Restriction is exact and commutes with derived tensor,
-   so the assumed vanishing holds
-   on `U` against every quasi-coherent module there.
-   Exact restriction preserves quasi-coherence of the cohomology sheaves, so
-   `E|U` lies in `D_QCoh(O_U)`.
-2. Write `U = Spec A`. The affine derived equivalence
-   represents `E|U` by an A-module complex.
-   The tensor/tilde comparison
-   and exactness and faithfulness of tilde give Tor amplitude `[a,b]` for that complex.
-   The affine criterion gives vanishing
-   against every O_U-module.
-3. For any O_X-module, restriction of its derived tensor with `E` to every affine
-   open has cohomology zero outside `[a,b]`. Restriction commutes with derived tensor
-   by `lem-pc-affine-derived-pullback-tensor-tilde`. A sheaf zero on an affine open
-   cover is zero, proving the required global vanishing. -/
+quasi-coherent cohomology on a quasi-separated scheme. Stacks Tag 08EA. -/
 theorem torAmplitude_of_quasiCoherent_tests (X : Scheme.{uT}) [QuasiSeparatedSpace X]
     [HasDerivedCategory.{wT} (SheafOfModules.{uT} (moduleRings X.toRingedSpace))]
     (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E)

@@ -124,18 +124,7 @@ noncomputable def tailOpenCohomologyCoconeLeg {I : Type u} [Preorder I]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The restricted cohomology legs commute with the restricted transitions.
-Source: Stacks Project, Tags 09YQ and 01F7.
-
-Proof: Precompose the cocone equation G.map f; L_k = L_j by eG_j.inv and substitute hG.
-Cancel the inverse isomorphisms to obtain the original coefficient leg equation.
-Restrict it along the limit-open inclusion. The projection square and transition square
-paste to the projection square at j. Vertical pasting of inverse-image square comparisons
-and naturality in the coefficient transition identify the restricted coefficient equation
-with the composite of the restricted transition and restricted leg at k. The scheme
-projections compose because both agree after the stage-open inclusion, by c.w.
-Apply cohomology pullback composition, coefficient naturality and Sheaf.H.map composition
-to this coefficient equation. The displayed naturality equality follows. The argument
-uses arbitrary cocones, and includes empty opens and zero coefficients. -/
+Stacks Tags 09YQ and 01F7. -/
 theorem tailOpenCohomologyCoconeLeg_naturality
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

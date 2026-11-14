@@ -24,16 +24,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
 
 /-- Termwise restriction gives an injective resolution and its actual section comparison.
-Source: Stacks Project, Tags 01E1 and 01E4.
-
-Proof: Exact open restriction preserves injectives by its exact left adjoint.
-Apply restriction termwise, transport the single-complex augmentation along the
-singleMapHomologicalComplex isomorphism, and retain the resulting complex as the
-restricted resolution. The comparison of complexes is the identity. Identify each
-section group using restrictAppIso and the identity U.ι_image_top. Naturality of
-restrictAppIso makes these identifications a chain isomorphism. Its explicit
-components verify the final field; the augmentation follows from the single
-complex comparison. This constructs all data without choosing an arbitrary witness. -/
+Stacks Project, Tags 01E1 and 01E4. -/
 theorem restrictedResolutionSections_exists {X : Scheme.{uBC}} {F : X.Modules}
     (I : InjectiveResolution F) (U : X.Opens) :
     Nonempty (RestrictedResolutionSections I U) := by

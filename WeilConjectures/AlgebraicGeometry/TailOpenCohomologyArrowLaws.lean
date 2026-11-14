@@ -149,20 +149,7 @@ private theorem coefficientCohomology_composition {A B C : Scheme.{u}}
     (congrArg (Sheaf.H.map β n) (cohomologyMap_map a n α (cohomologyMap b F n x)).symm)
 
 /-- Restricted cohomology transitions preserve identities and composition.
-Source: Stacks Project, Tags 09YQ (coherent systems) and 01F7 (functoriality).
-
-Proof: Cancel the monomorphic stage-open inclusions to prove that tailStageOpenMap
-preserves identities and reverses composites. Substitute hidentity in the identity
-coefficient square. The two inverse-image unit laws cancel the original identity
-comparison, leaving the canonical identity comparison on the restricted sheaf.
-Cohomology pullback along identity followed by this comparison is the identity.
-For composition substitute hcomposition, expand openSquareCoefficient, and use
-naturality to move the first coefficient transition across the second square comparison.
-Vertical pasting of inverse-image square isomorphisms identifies the comparisons with
-that of the composite square. Cohomology pullback composition, naturality in the
-coefficient sheaf, and functoriality of Sheaf.H.map then give the displayed composition.
-No cocone, colimit, continuity or vanishing assertion is used. Empty opens and zero
-coefficients are covered by the same functoriality equations. -/
+Stacks Tags 09YQ (coherent systems) and 01F7 (functoriality). -/
 theorem tailOpenCohomologyArrow_laws
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

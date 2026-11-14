@@ -30,15 +30,9 @@ noncomputable def scalarUnitCohomologyClass {k : Type u} [Field k] {X : Scheme.{
   ((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app
     (SheafOfModules.unit X.ringCatSheaf)).hom (1 : Γ(X, ⊤))
 
-/-- Bijective structure maps give normalized scalar coordinates on degree-zero cohomology.
-Source: Stacks Project, Cohomology, Tag 01DZ; Varieties, Tag 0BED.
-
-Proof: Evaluation of module sheaves at the terminal open preserves finite limits.
-Its zeroth right derived functor is therefore canonically isomorphic to evaluation.
-Restrict this isomorphism along the structure ring map. The bijective structure map
-is a linear equivalence from k to the sections of the unit module. Compose its inverse
-with the degree-zero comparison. The inverse sends r to the class of the scalar section
-r, which is r times the class of 1 by linearity. -/
+/-- Bijective structure maps give normalized scalar coordinates on degree-zero cohomology:
+a `k`-linear equivalence `d` with `k` whose inverse sends `r` to `r` times the class of one.
+Stacks Project, Cohomology, Tag 01DZ; Varieties, Tag 0BED. -/
 theorem scalar_unit_cohomology_coordinates {k : Type u} [Field k] {X : Scheme.{u}}
     (f : X ⟶ Spec (CommRingCat.of k)) (h : Function.Bijective (scalarMap f ⊤)) :
     ∃ d : scalarCohomology f (SheafOfModules.unit X.ringCatSheaf) 0 ≃ₗ[k] k,

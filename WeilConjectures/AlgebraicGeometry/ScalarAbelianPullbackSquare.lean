@@ -78,27 +78,7 @@ theorem scalarAbelianStructurePullback_apply {X Y : Scheme.{u}} (a : Y ⟶ X)
 
 /-- The canonical square of inverse image and forgetting scalars carries both the
 integer-unit generator and the tensor-unit coefficient to their abelian counterparts.
-Source: Stacks Project, Tag 01F7, cohomology-equation-functorial;
-Modules, Tag 0096, inverse-image/direct-image adjunction.
-
-Proof: Form the canonical comparison from abelian inverse image of the underlying
-scalar sheaf to the underlying sheaf of scalar inverse image. Its adjunct is the
-forgotten scalar adjunction unit; it is an isomorphism because both inverse images
-have the same stalks and forgetting scalars commutes with filtered colimits.
-Invert this comparison to obtain c, naturally in the coefficient sheaf. The
-constant-sheaf adjunction identifies its unit component: the integer generator
-maps to the scalar section 1, scalarInverseUnitIso transports the scalar section
-1 to the same section on Y, and scalarAbelianIntegerIso transports the integer
-generator to that section. Equality under the sections adjunction gives the first
-(degree-zero) equation. For the second equation apply the abelian inverse-image
-adjunction. The characterization in exists_scalarPullbackCoefficient identifies
-its sectionwise adjunct with the tensor adjunction unit. Postcomposition with
-tensorPullbackObjUnitToUnit gives the original structure-sheaf morphism, by
-tensorPullbackObjUnitToUnit_isIso. This is the adjunct defining
-scalarAbelianStructureCoefficient. Injectivity of the adjunction equivalence gives
-the equation. These are sheaf-map and degree-zero identities, with no higher
-cohomology class, module Ext comparison, or resolution choices. On the empty
-scheme all involved sections and identities are zero; no nonemptiness is needed. -/
+Stacks Project, Tags 01F7 and 0096. -/
 theorem scalar_abelian_pullback_square (k : Type u) [Field k]
     {X Y : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k))
     (g : Y ⟶ Spec (CommRingCat.of k)) (a : Y ⟶ X) (h : a ≫ f = g) :

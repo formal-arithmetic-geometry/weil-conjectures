@@ -18,8 +18,12 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-!
 # Stalk of internal Hom with finitely presented source
 
-Source: Stacks Project, Modules, Lemma 01CP,
-finitely presented case.
+Source: Stacks Project, Tag 01CP.
+
+## Implementation details
+
+The stalks are the module stalks `RingedSpace.moduleStalkFunctor`, whose carriers are the
+abelian-group stalks in which the germs live.
 -/
 
 @[expose] public section
@@ -35,28 +39,7 @@ set_option backward.isDefEq.respectTransparency false in
 an isomorphism when the source module is finitely presented. The formula on germs
 specifies the canonical map, including evaluation on every smaller neighbourhood.
 
-Source: Stacks Project, Modules, Lemma 01CP.
-
-The stalks are the module stalks `RingedSpace.moduleStalkFunctor`,
-whose carriers are the abelian-group stalks in which the germs below live.
-
-Proof:
-1. A local morphism induces a stalk map by applying it to representative sections.
-   Equality of germs makes this well defined; it is additive and stalk-ring linear.
-2. Localize at the point to a finite free presentation of F, using
-   `def-weil-pbc-module-finite-type-presentation`. Its cokernel presentation is exact
-   by `lem-weil-pbc-module-stalk-exact`; restriction preserves the stalks and the map.
-3. Apply `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` to obtain the exact sequence
-   0 -> Hom(F,G) -> G^n -> G^m of sheaves, with the maps given by evaluation and the
-   presentation matrix.
-4. Take stalks using `lem-weil-pbc-module-stalk-exact`. Stalks commute with finite sums:
-   finitely many representatives, or equalities of germs, share a neighbourhood.
-   Thus the internal-Hom stalk is the kernel of G_x^n -> G_x^m.
-5. The stalk presentation and `lem-weil-pbc-module-hom-left-exact` identify
-   Hom(F_x,G_x) with the same kernel, by evaluation on the finite free basis.
-6. The canonical map commutes with these two evaluations by its formula on germs.
-   Both evaluations are injective with the same image, so it is bijective. Its
-   linearity from step 1 yields the displayed linear equivalence. -/
+Source: Stacks Project, Tag 01CP. -/
 theorem exists_stalk_internalHom_linearEquiv_of_finitePresentation
     (X : RingedSpace.{u})
     (F G : SheafOfModules.{u}

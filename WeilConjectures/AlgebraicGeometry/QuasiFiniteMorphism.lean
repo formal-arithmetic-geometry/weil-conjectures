@@ -13,8 +13,7 @@ public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 /-!
 # Quasi-finite morphisms in the Stacks sense
 
-Source: Stacks Project, Morphisms of Schemes, Tag 01TD,
-and the blueprint's finite-fibres convention.
+Source: Stacks Project, Morphisms of Schemes, Tag 01TD.
 
 Mathlib's `LocallyQuasiFinite` and `Scheme.Hom.QuasiFiniteAt` do not impose local finite
 type. The predicates here include the finite-type conditions of Tag 01TD; with these conditions
@@ -33,13 +32,10 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.Hom
 
-/-- Quasi-finite at a point in the sense of Stacks Tag 01TD:
-some affine neighbourhood `U` of `x` maps into an affine
-open `V`, and the ring map `Γ(S, V) → Γ(X, U)` is of finite type and quasi-finite at the
-prime corresponding to `x`, in the sense of `Algebra.IsQuasiFiniteAtPrime`
-(Stacks Tag 00PL, blueprint: def-weil-pbc-ring-map-quasi-finite-at-prime). For `f` locally
-of finite type it is Mathlib's `f.QuasiFiniteAt x`
-(`Scheme.Hom.isQuasiFiniteAtPoint_iff_quasiFiniteAt`). -/
+/-- Quasi-finite at a point in the sense of Stacks Tag 01TD: some affine neighbourhood `U` of `x`
+maps into an affine open `V`, and the ring map `Γ(S, V) → Γ(X, U)` is of finite type and
+quasi-finite at the prime corresponding to `x` (`Algebra.IsQuasiFiniteAtPrime`, Stacks Tag 00PL).
+For `f` locally of finite type this is Mathlib's `f.QuasiFiniteAt x`. -/
 def IsQuasiFiniteAtPoint {X S : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ S) (x : X) : Prop :=
   ∃ (U : X.Opens) (hx : x ∈ U) (hU : AlgebraicGeometry.IsAffineOpen U)
     (V : S.Opens) (_ : AlgebraicGeometry.IsAffineOpen V) (e : U ≤ f ⁻¹ᵁ V),
@@ -65,8 +61,7 @@ def IsQuasiFinite {X S : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ S) : Prop :=
   AlgebraicGeometry.LocallyOfFiniteType f ∧ AlgebraicGeometry.QuasiCompact f ∧
     ∀ x : X, IsOpen ({f.asFiber x} : Set (f.fiber (f x)))
 
-/-- Finite fibres as in the blueprint's convention appended to Stacks Tag 01TD:
-the inverse image of every singleton is finite. -/
+/-- Finite fibres: the inverse image of every point is finite. -/
 def HasFiniteFibres {X S : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ S) : Prop :=
   ∀ s : S, (f ⁻¹' {s}).Finite
 

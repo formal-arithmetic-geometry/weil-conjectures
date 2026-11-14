@@ -48,18 +48,9 @@ noncomputable def strictLocalFibreRestriction
         (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ X')
         (Scheme.Etale.mk (𝟙 X')) Over.mkIdTerminal)).hom.app _
 
-/-- Compatibility uses only the two projections of i and the pointed limit-leg
-identities, and asserts neither continuity nor invertibility.
-
-Source: Stacks Project, Tag 0EYP, canonical restrictions, and Tag 03Q9.
-
-Proof: Apply `strictLocal_section_pullback` with q = i and the two projection
-identities hi' and hi. It identifies the first two factors of the constructed
-restriction with geometricFibreSectionRestriction followed by inverse terminal
-evaluation. Postcompose with terminal evaluation and cancel its inverse. The
-pointed limit-leg calculation and composition-unit coherence are already proved
-in that theorem. No continuity or invertibility of the restriction is used,
-and the argument includes empty schemes and the zero coefficient ring. -/
+/-- The constructed strict-local fibre restriction is compatible with the geometric
+fibre section restriction; neither continuity nor invertibility is asserted.
+Stacks Project, Tags 0EYP and 03Q9. -/
 theorem strictLocalFibreRestriction_compatibility
     (Λ : Type (u + 1)) [CommRing Λ]
     {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

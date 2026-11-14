@@ -156,12 +156,7 @@ private theorem complete_iso
     exact IB.local_mem U b W hW (fun V g hg ↦ (hmem V _).mpr (h V g hg))
 
 /-- The two completed coefficient presentations give the same local completeness test.
-Source: Stacks Tags 00YY, 093M and 099C.
-
-Proof: the canonical limit isomorphism commutes with the first projections by its
-construction. Its inverse identifies their kernel ideals. Apply preservation and
-reflection of local completeness under scalar restriction; the target-ring isomorphism
-makes the image-generated ideal exactly the kernel, section by section. -/
+Stacks Tags 00YY, 093M and 099C. -/
 theorem complete_iff (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) :
     IsSfbAdicComplete X I K ↔

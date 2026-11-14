@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
 /-! # Coherated sheaf derived Hom adjunction
 
 Source: Stacks Project, Duality for Schemes, Lemma 48.3.6 (Tag 0A9Q), with
-equation-sheafy-trace (48.3.5.1) defining the sheafy trace.
+equation (48.3.5.1) defining the sheafy trace.
 -/
 
 @[expose] public section
@@ -62,8 +62,9 @@ private theorem rightAdjoint_map_isIso_of_bijective
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The five Hom bijections in the proof of Stacks, Tag 0A9Q.
-The mate equation identifies their composite with postcomposition by the trace. -/
+/-- If the projection mate `hpf` is invertible and `c` satisfies the mate equation `hc`, then
+postcomposition with the trace `c ≫ J.map (𝟙 _ ×ₘ ε_K)` is bijective on morphisms out of `M`.
+Source: Stacks Project, Tag 0A9Q. -/
 private theorem trace_bijective_of_projection
     {C D : Type*} [Category* C] [Category* D]
     [MonoidalCategory C] [MonoidalCategory D]
@@ -130,20 +131,7 @@ adjunction on `D_QCoh` and let `c` be the internal-Hom comparison
 `exists_derivedDirectImage_internalHom_comparison`.
 The sheafy trace `c(L, aK) ≫ RHom_Y(Rf_* L, ε_K)` is natural in `L` and `K`, and it becomes
 invertible after applying the coherator `DQ`.
-Source: Stacks Project, Tag 0A9Q and equation 48.3.5.1.
-
-Proof:
-1. Naturality of c and the restricted adjunction counit give the naturality square.
-2. The coherator adjunction and Yoneda reduce invertibility to bijectivity of
-   postcomposition on Hom from each quasi-coherent M.
-3. Derived pullback preserves quasi-coherence, and
-   canonical_derivedTensor_preserve_QCoh puts Lf*M tensor L in the full subcategory.
-4. Compose pullback/direct-image, tensor-Hom and restricted adjunction equivalences.
-   Precomposition with qcqsDerivedProjectionMate_isIso supplies the fourth Hom
-   bijection; the target tensor-Hom adjunction supplies the fifth.
-5. The supplied mate equation hc, naturality of the tensor-Hom and pullback
-   adjunctions, and the counit formula for the restricted adjunction identify
-   this composite equivalence with postcomposition by the trace. -/
+Source: Stacks Project, Tag 0A9Q and equation 48.3.5.1. -/
 theorem qcqsSheafRHomAdjunction (X Y : Scheme.{u₁})
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
     [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]

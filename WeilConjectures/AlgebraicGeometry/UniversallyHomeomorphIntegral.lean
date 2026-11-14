@@ -23,14 +23,7 @@ namespace AlgebraicGeometry
 
 /-- A morphism whose every base change is a homeomorphism is an integral, universally
 injective, surjective morphism.
-Source: Stacks Project, Tag 04DF, with Tag 05YU.
-Proof: Every base change is closed and injective, so the morphism is universally closed
-and universally injective, and it is surjective. Transport an affine open cover of the
-source along the underlying homeomorphism. The inverse image of each transported open
-is the original affine open. The restricted morphism is surjective and universally
-closed, so its target is affine by Tag 05YU. Hence these are matching affine covers.
-The affine criterion, local on the target, shows that the original morphism is affine.
-An affine universally closed morphism is integral by Tag 01WM. -/
+Source: Stacks Project, Tag 04DF, with Tag 05YU. -/
 theorem isUniversalHomeomorphism_of_universally_isHomeomorph
     {X Y : Scheme.{u}} (r : X ⟶ Y)
     (hr : (topologically IsHomeomorph).universally r) : IsUniversalHomeomorphism r := by

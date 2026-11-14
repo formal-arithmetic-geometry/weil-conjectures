@@ -113,19 +113,7 @@ private theorem sectionsUnit_resolution {Y : Scheme.{v}} (W : Y.Etale)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- On a chain map, derived evaluation agrees with termwise evaluation in the resolution.
-Source: Stacks Project, Cohomology on Sites, Tags 072W, 0BKV and 0D6F.
-
-Proof: let L be etale restriction and R be sections. The comparison defining
-`resolutionSectionsIso` first uses the exact-functor localization comparison for L,
-then the inverse right-derived unit for R on the K-injective complex L(I), and finally
-homology's localization comparison. Naturality of all three comparisons identifies
-its composite with the image under H^0(R L) of the given chain map. For the degree-zero
-single source, the degree-zero derived-to-underived isomorphism `zeroIso` is the same
-comparison followed by the single-complex homology identification. Thus the element
-`zeroIso.inv (generator h U)` maps to the generator's single-complex class. Applying
-the chain map gives exactly `chainEvaluation`. This equality is independent of any
-chosen homotopy class isomorphism and does not assert its bijectivity. It also holds
-for a zero chain map and for a zero or empty restricted complex. -/
+Source: Stacks Project, Cohomology on Sites, Tags 072W, 0BKV and 0D6F. -/
 theorem rawRestricted_resolution_evaluation {S Y : Scheme.{v}}
     (h : Y ⟶ S) (U : S.Etale)
     (I : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}))

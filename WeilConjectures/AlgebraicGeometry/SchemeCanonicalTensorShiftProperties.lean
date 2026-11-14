@@ -60,18 +60,7 @@ end DerivedCategory
 
 namespace AlgebraicGeometry
 /-- Canonical tensor shifts are exact and their degree-one right-unitor squares hold.
-Source: Stacks Tag 06YH; total-complex shift/unitor calculation used in Tag 08EU.
-
-Proof. For a fixed K-flat complex the canonical shift comparison agrees with the
-comparison descended from tensoring mapping-cone triangles on the homotopy category.
-The tensor functor is therefore exact. A K-flat replacement of the fixed factor and
-naturality of the two-variable shift comparison transport this to every fixed object.
-For the unitor square, use the bifunctor localization comparison with the unit fixed
-in the second factor and a K-flat complex P in the first. Expand the comparison's
-shift square. The complex right unitor satisfies the Koszul translation identity in
-every degree. Naturality of the unitor absorbs the inclusion's shift map. Cancel the
-invertible localization shift comparison to obtain the square at Q(P). The identity
-functor has its standard shift. Zero factors and the empty scheme give zero maps. -/
+Stacks Tag 06YH; see also Tag 08EU. -/
 theorem schemeCanonicalTensorShift_properties (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] :
     letI := schemeCanonicalTensorShift Y

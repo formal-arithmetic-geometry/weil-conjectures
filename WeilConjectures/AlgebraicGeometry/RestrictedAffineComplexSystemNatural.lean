@@ -148,45 +148,10 @@ attribute [local irreducible] cohomology upperStar rawAffineComplexPullback
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency true in
-/-- The restricted-cohomology diagram comes from a qcqs scheme limit and
-single complexes with a common lower bound, before any comparison with raw Hom.
-Source: Stacks Project, Tag 09Z1 proof, before applying cohomology continuity;
-Tag 0EZM for the cohomology cocone of complexes.
-
-Proof: Base change the underlying scheme diagram and cone along U.hom. Define
-the induced maps by the pullback universal property; uniqueness proves their
-identity and composition laws and that the new cone is limiting. Affine maps
-remain affine after base change. The qcqs structure maps remain qcqs, and their
-target U is affine, so all stage schemes are compact and quasi-separated.
-Restrict the sheaves along the second projections of these pullbacks. Compare
-the two composites around each pullback square using upperStarComp; restrict
-phi through this comparison. The identity and associativity coherence of
-upperStarComp transports hphiid and hphicomp to the restricted transition laws.
-Put these sheaves into degree-zero single complexes. The lower bound is zero,
-and mapCochainComplexSingleFunctor gives the required complex transitions.
-Restrict H at the limit and use the comparison on each cone triangle and eH
-to construct eG; hH gives hG. Map the colimit cocone of H by restriction, which
-is a left adjoint, and then by the single functor, which preserves colimits
-termwise. This is L and proves hL. Use the fixed map rawAffineComplexPullback for every
-cohomology pullback. Take T to the cohomology groups of the stage complexes;
-its transition maps are P followed by the coefficient map. Naturality and
-composition of the derived adjunction unit prove hT and the functor laws.
-Take B to the limit cohomology with the same pullback/coefficient legs. The
-cone equations and coefficient cocone equations prove that these legs form a
-cocone and give hB. The stage restrictionIso is the identity under the single
-complex identifications. The colimit comparison from restriction identifies
-L.pt with the single complex of the restriction of colimit H, giving
-restrictionLimitIso. The inverse-image composition comparison on each cone
-triangle is exactly rawAffineRestrictedCoefficient. Thus the leg equality
-is exactly rawAffineRestrictedCohomologyMap, proving the leg equation.
-For a stage arrow f, the induced pullback map is rawAffineRestrictedMap of
-D.map f.op. Its restricted coefficient map is rawAffineRestrictedCoefficient
-of phi f, by the same two inverse-image composition comparisons. Applying
-cohomology to the single-functor comparison gives exactly the displayed
-restricted cohomology map. The stage restriction isomorphisms therefore
-intertwine T.map f with that map. This is a separate transition equation:
-it does not follow from equality of the cocone legs, which need not be monic.
-This construction asserts no IsColimit B and uses no cohomology continuity. -/
+/-- The restricted-cohomology diagram comes from a qcqs scheme limit and single complexes with a
+common lower bound, before any comparison with raw Hom; the stage restriction isomorphisms also
+intertwine the transition maps with the restricted cohomology maps.
+Stacks Project, Tags 09Z1 and 0EZM. -/
 theorem exists_restricted_affine_complex_system_natural {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S)

@@ -27,20 +27,7 @@ open Scheme
 /-- Restriction to any closed geometric fibre of an integral scheme over a strictly
 henselian local ring is injective on sections.
 
-Source: Stacks Project, Tags 09XK, 09ZH and 0A3I, proof of Tag 0EYP.
-
-Proof: An integral scheme over Spec A is affine, say Spec B, with B integral over A.
-Set J to the extension of the maximal ideal of A. Tag 09XK makes (B,J) henselian.
-Apply henselian degree-zero comparison to the proper identity of Spec B to see
-that restriction to Spec(B/J) is injective. The map t factors through the residue
-field k of A, since its image is the closed point. The ring k is separably closed.
-Tag 0A3I makes further restriction from the closed fibre to its extension along
-k -> Omega bijective. Forgetting modules to sets commutes with inverse images
-and the units; hence these are the same restriction maps for module coefficients.
-The pullback property identifies their composite, up to the canonical composition
-and terminal-section isomorphisms, with the displayed map. Injectivity follows.
-The zero algebra B and the empty fibre cause no exception: their section module
-is zero, and the henselian comparison also holds for the zero ring. -/
+Source: Stacks Project, Tags 09XK, 09ZH, 0A3I and 0EYP. -/
 theorem strictHenselianIntegralSections_injective
     (Λ : Type (u + 1)) [CommRing Λ]
     (A : Type u) [CommRing A] [IsStrictlyHenselianLocalRing A]

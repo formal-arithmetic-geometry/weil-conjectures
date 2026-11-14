@@ -17,7 +17,7 @@ import WeilConjectures.Topology.ClosedEmbeddingRestrictionTransport
 /-!
 # Zariski restriction along a closed immersion with connected point closures
 
-Source: Stacks Project, Tag 09ZG, `lemma-h0-topological`.
+Source: Stacks Project, Tag 09ZG.
 -/
 
 @[expose] public section
@@ -28,12 +28,10 @@ open CategoryTheory Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- Universe transport of the spectral restriction bijection to the Zariski inverse-image unit.
-The proof follows the ULift/order-isomorphism transport in the blueprint.
+/-- For a closed immersion `i : Z ⟶ X` into a quasi-compact quasi-separated scheme such that
+every point closure meets `Z` in a connected set, the unit of the inverse-image adjunction for
+sheaves of sets on `X` is bijective on global sections. -/
 
-Proof: transport the spectral restriction map along the ULift homeomorphism and the induced
-order isomorphisms on opens; these preserve covers, sheaf sections, and the adjunction unit
-at the top open, so bijectivity is preserved. -/
 theorem zariski_restriction_universe_transport
     {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (i : Z ⟶ X) [IsClosedImmersion i]

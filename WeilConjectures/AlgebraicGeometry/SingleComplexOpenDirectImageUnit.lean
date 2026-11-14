@@ -162,17 +162,7 @@ set_option maxHeartbeats 1600000 in
 -- The comparison unfolds several derived universal-property constructions.
 /-- Evaluating the constructed derived direct-image comparison on its right-derived
 units gives the underived sectionwise comparison on the homotopy category.
-Source: Stacks Project, Tags 08FE and 08BS.
-
-Proof: Expand the four factors defining the derived comparison. The first factor
-is the inverse of right-derived uniqueness for postcomposition by exact restriction;
-its unit factorization replaces it with the composite right-derived unit. The second
-factor is the right-derived natural isomorphism of the sectionwise comparison, so
-its unit factorization gives the image of that comparison under Qh. The third factor
-is right-derived composition, whose unit is the composite unit. The last factor
-identifies the right-derived exact restriction with its termwise derived functor;
-its unit factorization is the inverse of mapDerivedCategoryFactorsh. Reassociate and
-use naturality to obtain the displayed equation. No K-injectivity of I is required. -/
+Stacks Project, Tags 08FE and 08BS. -/
 theorem singleComplexOpen_directImage_unit
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -26,23 +26,10 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 -- Section transports across two composite adjunctions require extra elaboration.
-/-- The second factor of open base change preserves local unit sections.
-Source: Stacks Project, Tags 0096, 0097 and 01CD.
-
-Proof: compose the pushforward composition isomorphisms and transport along h to
-identify pushforward a followed by pushforward V.ι with pushforward j followed by
-pushforward b. Conjugate this isomorphism under the composite adjunctions
-(restriction along V.ι, tensor pullback along a) and (tensor pullback along b,
-restriction along j). Its inverse conjugate is the required coefficient comparison.
-The conjugate unit equation evaluated at V identifies the two successive units.
-The image condition hj identifies j inverse-image of b inverse-image V with the
-whole source; naturality transports the comparison to the top open. Combine the
-restriction maps into transport along hj. On the other side, the pushforward
-comparison gives only an open-equality transport. Naturality of the a unit moves
-that transport before the unit, and the restriction unit for V.ι becomes transport
-from G(V) to the global sections of G restricted to V. All comparisons remain
-isomorphisms for empty schemes and opens; no generation by global sections is used.
--/
+/-- The second factor of open base change preserves local unit sections: there is an
+isomorphism `e` from the restriction along `j` of the tensor pullback along `b` to the tensor
+pullback along `a` of the restriction to `V`, compatible with the unit sections.
+Stacks Tags 0096, 0097 and 01CD. -/
 theorem exists_tensorPullback_openSquare {A B C : Scheme.{w}}
     (j : A ⟶ B) [IsOpenImmersion j] (b : B ⟶ C) (V : C.Opens)
     (a : A ⟶ V.toScheme) (hj : j ''ᵁ ⊤ = b ⁻¹ᵁ V)

@@ -25,7 +25,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 
 /-! # Quasi-coherence of a truncated higher image
 
-Source: Stacks Project, Tag 08D5, bounded-below paragraph, and Tag 015J.
+Stacks Project, Tags 08D5 and 015J.
 -/
 
 @[expose] public section
@@ -58,7 +58,7 @@ private theorem property_pages {C : Type*} [Category* C] [Abelian C]
       (hk ((S.pageCouple r).d p q) (ih _ _) (ih _ _))
 
 /-- An isomorphism-invariant extension-closed property passes from finite graded pieces
-to the filtered object on any finite index interval, by descending induction. -/
+to the filtered object on any finite index interval. -/
 private theorem property_of_shifted_filtration {C : Type*} [Category* C] [Abelian C]
     (P : ObjectProperty C) [P.ContainsZero] [P.IsClosedUnderIsomorphisms]
     (hext : ∀ (S : ShortComplex C), S.ShortExact → P S.X₁ → P S.X₃ → P S.X₂)
@@ -86,33 +86,9 @@ private theorem property_of_shifted_filtration {C : Type*} [Category* C] [Abelia
   simp only [add_sub_cancel_right, hfull] at htop
   exact P.prop_of_iso (asIso (⊤ : Subobject M).arrow) htop
 
-/-- Each higher image of a canonical lower truncation is quasi-coherent.
-Source: Stacks Project, Tag 08D5, proof of part (1), bounded-below paragraph;
-Tag 015J supplies the bounded-below hypercohomology spectral sequence, and
-Tag 01XJ, part (1), supplies quasi-coherence of ordinary higher direct images.
-
-Proof.
-1. Put K = tau_{>= a} E. Its cohomology agrees with that of E in degrees at
-   least a and is zero in lower degrees. Thus all its cohomology sheaves are
-   quasi-coherent, including the zero sheaf, and K is bounded below by a.
-2. Use bounded-below truncation hypercohomology for module direct image. Its
-   second page in bidegree (p,r), for p >= 0, is R^p f_* H^r(K). These sheaves
-   are quasi-coherent by Tag 01XJ (1); the terms for p < 0 or r < a are zero.
-   To obtain Tag 01XJ (1) locally, restrict to an affine target open, whose
-   preimage is qcqs. Affine acyclicity and localization of cohomology on
-   principal opens identify higher-image sections with localized modules on
-   an affine source. Mayer--Vietoris induction on a finite affine cover,
-   with quasi-compact overlaps, propagates this localization comparison.
-   The higher-image presheaf description gives quasi-coherent second pages.
-3. Each subsequent page is a kernel modulo an image. Closure of quasi-coherent
-   modules under kernels, images and cokernels proves their quasi-coherence
-   by induction on the page. In total degree q, the quadrant bounds give a
-   finite convergent filtration of H^q(Rf_* K), and its graded pieces are
-   stable page terms, hence quasi-coherent. Starting with its zero last step,
-   extension closure proves quasi-coherence of each preceding filtration
-   step and finally of the whole abutment. This also covers q < a, when the
-   abutment is zero, and an empty scheme, where every module sheaf is zero.
--/
+/-- Each higher image of a canonical lower truncation is quasi-coherent: for `f` qcqs and `E`
+with quasi-coherent cohomology, `R^q f_* (τ_{≥ a} E)` is quasi-coherent.
+Stacks Tags 08D5, 015J and 01XJ. -/
 theorem truncated_higherImage_isQuasicoherent
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

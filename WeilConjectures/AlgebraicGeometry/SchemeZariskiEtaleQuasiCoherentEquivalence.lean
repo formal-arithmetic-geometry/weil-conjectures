@@ -67,11 +67,7 @@ def smallEtaleModulePresheaf (X : Scheme.{u}) : X.Etaleᵒᵖ ⥤ RingCat.{u} :=
   X.etaleStructurePresheaf ⋙ forget₂ CommRingCat.{u} RingCat.{u}
 
 /-- Regular functions form a ring sheaf on the small étale site.
-Source: Stacks 03DU.
-Proof: the underlying set presheaf is the regular-function sheaf by étale descent
-(upstream isSheaf_etaleStructurePresheaf). Compatible ring homomorphisms glue pointwise;
-the sheaf separatedness identities show that the glued map preserves every ring operation.
-This proves the ring-valued sheaf condition without any enlargement of section rings. -/
+Source: Stacks 03DU. -/
 theorem smallEtaleModulePresheaf_isSheaf (X : Scheme.{u}) :
     Presheaf.IsSheaf X.smallEtaleTopology (smallEtaleModulePresheaf X) := by
   have h : Presieve.IsSheaf X.smallEtaleTopology
@@ -151,11 +147,8 @@ def smallEtaleModulePushforward {U T : Scheme.{u}} (a : U ⟶ T) :
     SmallEtaleModules U ⥤ SmallEtaleModules T :=
   SheafOfModules.pushforward (smallEtaleModuleRingMap a)
 
-/-- The canonical ringed-site tensor pullback, left adjoint to restriction.
-It represents O_et tensor over epsilon^{-1} O_Zar with epsilon^{-1} M;
-Mathlib constructs this functor by module-presheaf pullback and sheafification.
-Only the proof that the right adjoint exists is an argument.
-Source: Stacks 03FH. -/
+/-- The canonical ringed-site tensor pullback, left adjoint to restriction; it represents
+O_et tensor over epsilon^{-1} O_Zar with epsilon^{-1} M. Source: Stacks 03FH. -/
 def zariskiEtaleModuleExtension (X : Scheme.{u})
     (hc : (AlgebraicGeometry.gabberOpenEtale X).IsContinuous
       (Opens.grothendieckTopology X) X.smallEtaleTopology)
@@ -192,8 +185,8 @@ def smallEtaleModuleAdjunction {U T : Scheme.{u}} (a : U ⟶ T)
   letI : (SheafOfModules.pushforward (smallEtaleModuleRingMap a)).IsRightAdjoint := hp
   SheafOfModules.pullbackPushforwardAdjunction (smallEtaleModuleRingMap a)
 
-/-- Proof data permitting the canonical module pullback on these presented sites.
-There is no chosen ring, module, map or functor in this structure.
+/-- The hypotheses needed for the canonical module pullback on these presented sites:
+continuity of the open-subscheme inclusion and existence of a left adjoint to restriction.
 Source: Stacks 03FH. -/
 structure ZariskiEtaleModuleContext (X : Scheme.{u}) where
   /-- The inclusion of open subschemes is continuous. -/
@@ -245,17 +238,8 @@ def zariskiEtalePushforwardComparison {U T : Scheme.{u}} (a : U ⟶ T)
       ((zariskiEtalePullbackComparison a cU cT hp r).inv.app ((pushforward a).obj H) ≫
         cU.extension.map ((Classical.choose (exists_tensorPullbackAdjunction a)).counit.app H))
 
-/-- Additive sheafification on the slices of the original small étale site, retaining
-u-small section groups despite the u+1 object universe of the presented site.
-Source: Stacks, Sites, sheafification and the affine étale basis; Descent 03DX.
-Proof: refine each étale object by its affine opens. Affine étale schemes of finite
-presentation over each affine base have a u-small skeleton: they are specified by
-finite polynomial presentations over a u-small ring. Their finite jointly surjective
-coverings form a basis. Apply the ordinary plus construction twice on this small basis,
-then extend by compatible sections on affine covers. All products are indexed by
-u-small sets; the result therefore still has u-small additive section groups. Its
-usual gluing universal property is precisely the sheafification adjunction on the
-slice site. The construction is invariant under changing the affine cover. -/
+/-- Additive sheafification exists on the slices of the original small étale site, with
+u-small section groups. Source: Stacks, Sites, sheafification; Descent 03DX. -/
 @[instance] theorem smallEtaleModuleOverHasWeakSheafify (T : Scheme.{u}) (V : T.Etale) :
     HasWeakSheafify (T.smallEtaleTopology.over V) AddCommGrpCat.{u} := by
   have : HasSheafify (T.smallEtaleTopology.over V) AddCommGrpCat.{u} :=
@@ -264,13 +248,7 @@ slice site. The construction is invariant under changing the affine cover. -/
   infer_instance
 
 /-- Sheafification inverts exactly the locally bijective additive maps on these slices.
-Source: Stacks, Sites, sheafification; Descent 03DX.
-Proof: on the affine étale basis used by smallEtaleModuleOverHasWeakSheafify, the two
-plus constructions identify sections exactly when they agree locally and every section
-is locally represented. Hence a locally bijective map sheafifies to an isomorphism.
-Conversely the sheafification units are locally bijective, so a sheafified isomorphism
-forces local injectivity and surjectivity of the original map by the same local
-representatives. Refinement transfers this equivalence to the full slice site. -/
+Source: Stacks, Sites, sheafification; Descent 03DX. -/
 @[instance] theorem smallEtaleModuleOverWEqualsLocallyBijective
     (T : Scheme.{u}) (V : T.Etale) :
     (T.smallEtaleTopology.over V).WEqualsLocallyBijective AddCommGrpCat.{u} := by

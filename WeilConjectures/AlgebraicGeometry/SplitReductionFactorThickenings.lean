@@ -15,7 +15,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 /-!
 # Factor thickenings for a split reduction
 
-Source: smooth purity blueprint, finite-algebra calculation.
+If the reduction of an algebra splits as a finite product, the factor spectra are thickened
+onto a disjoint open partition of its spectrum.
 -/
 
 @[expose] public section
@@ -24,20 +25,9 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- The split reduced factor spectra thicken onto a disjoint open partition.
-
-Source: smooth purity blueprint,
-`lem-weil-pbc-finite-pushforward-generic-constructible`, finite-algebra calculation.
-
-Proof: Compose Mathlib's finite-product spectrum homeomorphism, the homeomorphism
-induced by the supplied algebra equivalence, and the nilradical quotient's
-homeomorphism. Each factor's image is open, and bijectivity gives a disjoint
-cover, including the empty index set. The ring map from R to each factor is
-surjective, so its spectrum map is a closed immersion. Lift this map to its
-image open. The lift is surjective by construction and a preimmersion by
-cancellation against the open inclusion; its whole image is closed, so it is
-a closed immersion. Finally A-linearity of the supplied equivalence identifies
-the composite to Spec A with the specified structural morphism. -/
+/-- The split reduced factor spectra thicken onto a disjoint open partition: if the reduction
+of `R` is a finite product of `A`-algebras `D j`, then `Spec R` is covered by disjoint opens
+`W j`, each receiving a surjective closed immersion from `Spec (D j)` over `Spec A`. -/
 theorem exists_split_reduction_factor_thickenings
     (A R : Type u) [CommRing A] [CommRing R] [Algebra A R]
     (r : ℕ) (D : Fin r → Type u) [∀ j, CommRing (D j)] [∀ j, Algebra A (D j)]

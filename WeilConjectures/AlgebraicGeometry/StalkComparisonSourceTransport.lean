@@ -17,7 +17,7 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModelExtensio
 
 /-! # Transport of the source of the stalk comparison
 
-Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8.
+Source: Stacks Project, the base change map preceding Tag 0DJ8.
 -/
 
 @[expose] public section
@@ -153,12 +153,12 @@ instance comparisonStalkHomology (Y : Scheme.{u}) (y : Y) :
   exact ((RingedSpace.module_stalk_exact Y.toRingedSpace T.f).2.2.2.2
     T.X₃ T.f T.g T.zero).mp hT y
 
-/-- (blueprint: lem-pc-stalk-comparison-source-transport) -/
+/-- The stalk functor of modules on a scheme preserves finite limits. -/
 instance comparisonStalkLimits (Y : Scheme.{u}) (y : Y) :
     PreservesFiniteLimits (RingedSpace.moduleStalkFunctor Y.toRingedSpace y) :=
   Functor.preservesFiniteLimits_of_preservesHomology _
 
-/-- (blueprint: lem-pc-stalk-comparison-source-transport) -/
+/-- The stalk functor of modules on a scheme preserves finite colimits. -/
 instance comparisonStalkColimits (Y : Scheme.{u}) (y : Y) :
     PreservesFiniteColimits (RingedSpace.moduleStalkFunctor Y.toRingedSpace y) :=
   Functor.preservesFiniteColimits_of_preservesHomology _
@@ -298,20 +298,7 @@ def comparisonSourceUnderlyingIso (z : X')
     (N.cohomologyIso i).symm
 
 /-- The canonical underlying cohomology transport lifts uniquely to a tensor-algebra
-linear isomorphism. No K-flatness or morphism to a target complex is needed.
-
-Proof: apply exact stalks and exact restriction to the derived isomorphism a. The
-unique counit-compatible identification of total left derived scalar extensions
-then gives comparisonSourceUnderlyingIso. For every element of A, naturality of a
-commutes with multiplication; this holds for derived morphisms because multiplication
-is a natural transformation on complexes, hence descends through localization.
-The equations cohomologyIso_smul identify these multiplication actions with the
-A-actions on the model cohomologies. Thus the underlying B-linear isomorphism and
-its inverse commute with A. Tensor-product induction gives A-tensor-R-B linearity.
-Bundle the two linear maps as inverse module morphisms. Restriction of scalars is
-faithful, so the specified underlying homomorphism determines the isomorphism uniquely.
-Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8; More on Algebra,
-derived change of rings (Tag 06Y6). -/
+linear isomorphism. Stacks Project, the base change map preceding Tag 0DJ8; Tag 06Y6. -/
 theorem exists_comparisonSourceIso (z : X')
     (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (a : DerivedCategory.Q.obj P ≅ DerivedCategory.Q.obj Q) (i : ℤ) :

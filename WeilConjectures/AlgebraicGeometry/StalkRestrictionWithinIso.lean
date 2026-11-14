@@ -12,7 +12,13 @@ public import WeilConjectures.AlgebraicGeometry.StalkFromSpecSubopen
 
 /-! # Stalk pullback after restriction inside a fixed open
 
-Source: lem-pc-finite-free-reverse-components-lift, proof step 1.
+For `y ∈ U ≤ V`, restricting a module on `V` to `U` and pulling back to the stalk spectrum
+at `y` is canonically isomorphic to pulling back directly from `V`.
+
+## Implementation details
+
+The comparison replaces restriction by pullback, composes pullbacks, and identifies the
+composite scheme maps using `Scheme.Opens.fromSpecStalkOfMem_homOfLE`.
 -/
 
 @[expose] public section
@@ -21,12 +27,9 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The canonical comparison for restriction inside an open and the fixed ambient stalk.
-
-Source: lemma-coherent-base-change-invertible-sheaves--3, extension of the finite calculation near a
-point; lem-pc-finite-free-reverse-components-lift, proof step 1. Replace restriction by
-pullback, compose pullbacks, and identify the composite scheme maps by cancelling
-V.ι. This comparison applies to every module on V, independently of any complex. -/
+/-- The canonical comparison for restriction inside an open and the fixed ambient stalk:
+restriction along `U ≤ V` followed by pullback along `U.fromSpecStalkOfMem y hyU` is
+isomorphic to pullback along `V.fromSpecStalkOfMem y hyV`. -/
 noncomputable def stalkRestrictionWithinIso {Y : Scheme.{u}}
     (y : Y) (V : Y.Opens) (hyV : y ∈ V) (U : Y.Opens) (hUV : U ≤ V) (hyU : y ∈ U) :
     restrictFunctor (Y.homOfLE hUV) ⋙ pullback (U.fromSpecStalkOfMem y hyU) ≅

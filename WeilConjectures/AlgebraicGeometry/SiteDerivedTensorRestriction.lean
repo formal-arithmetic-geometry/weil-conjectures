@@ -25,9 +25,9 @@ attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
 /-!
 # Derived tensor with scalar restriction on a ringed site
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors/
-sk-lem-sf-kunneth-star/lem-trf-ordinary-kunneth.proof.md, Step 2;
-Stacks Project, Tags 03EK, 06YS, 06YU, 06YY.
+Source: Stacks Project, Tags 03EK, 06YS, 06YU, 06YY.
+
+## Implementation details
 
 The comparison on one K-flat factor is normalized by the recorded two-factor descent
 comparison. The representative formula uses this comparison, the change-of-rings counit,

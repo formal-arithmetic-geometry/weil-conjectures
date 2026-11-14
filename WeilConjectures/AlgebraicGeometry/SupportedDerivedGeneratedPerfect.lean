@@ -33,22 +33,7 @@ namespace AlgebraicGeometry
 
 /-- Every quasi-coherent derived object supported off a quasi-compact open is built from
 one perfect supported complex by successive cones and a sequential homotopy colimit.
-Source: Stacks Project, proof of Lemma 48.4.3(3), Tags 0E4G, 0A9A and 09SN.
-
-Proof:
-1. Apply `lem-pc-supported-perfect-generator` to the closed complement of V to obtain E.
-2. Support and quasi-coherence are preserved by shifts and cones, using the long exact
-cohomology sequence. Direct sums exist by `lem-pc-derived-qcoh-direct-sums` and agree
-with ambient sums; their cohomology is computed by sums by
-`lem-pc-derived-ambient-direct-sums`. Thus sums preserve support. By
-`lem-pc-perfect-object-compact`, E is compact in the quasi-coherent category and in its
-supported full subcategory, whose sums agree. It generates that subcategory in the sense
-of `def-pc-generators`.
-3. Apply `lem-pc-compact-generators-build-objects` to this singleton compact generating
-family. Rotate its transition triangles: their cones are sums of shifts of E, since
-shifting such a sum again gives a sum of shifts. Prepend a zero term; its first cone is
-the original first term, a sum of shifts of E. Prepending zero leaves the telescope
-unchanged. The telescope triangle is precisely the sequential derived colimit asserted.
+Stacks Project, Lemma 48.4.3(3), Tags 0E4G, 0A9A and 09SN.
 -/
 theorem supported_derived_generated_perfect (Y : Scheme.{u})
     [CompactSpace Y] [QuasiSeparatedSpace Y]

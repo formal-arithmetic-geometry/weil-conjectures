@@ -14,6 +14,13 @@ import Mathlib.RingTheory.Idempotents
 /-! # Identification of a quotient factor over an isomorphism locus
 
 Source: Stacks Project, More on Algebra, proof of Tag 09XH.
+
+## Implementation details
+
+The isomorphism on the first factor is built by extending the quotient maps to the
+localizations at a lift `g` of the idempotent (which maps to `1` in the quotients), composing
+with the inverse of the localization isomorphism given by the isomorphism locus, and descending
+along the surjective first-factor map.
 -/
 
 @[expose] public section
@@ -93,29 +100,11 @@ private theorem ker_comp_quotient_mk
     ← RingHom.ker_eq_comap_bot, Ideal.mk_ker]
   exact sup_comm _ _
 
-/-- An idempotent factor supported in the isomorphism locus is preserved isomorphically.
-
-Source: literature/stacks-project/more-algebra.tex:2529-2541, proof of Tag 09XH,
-including the localization and final quotient argument.
-
-Split S'/J' by the idempotent c as C'₁ = (S'/J')/(1-c) and C'₂ = (S'/J')/(c),
-using the Chinese remainder theorem. The equality f(c)=e.symm(1,0) makes f diagonal
-on these products and gives ring maps to D₁ and D₂. It remains to prove that the
-first map is an isomorphism. Let t lift c and K'=J'+(1-t). Its zero locus is the
-first factor and is contained in U. Write the complement of U as V(L). Since
-V(L) and V(K') are disjoint, L+K'=S'; choose 1=l+k with l in L and k in K'.
-Put g=t*l. Idempotence gives g-t in J', and g in L gives D(g) contained in U.
-The scheme isomorphism on U identifies the section rings on D(g), which are the
-localizations S'_g and S_{i(g)}, with the canonical localization map induced by i.
-Quotient this ring isomorphism by the extensions of K'=J'+(1-g) and
-K=J+(1-i(g)). These ideals correspond because J=map i J'. Since g becomes 1
-in each quotient, the localization quotients are S'/K' and S/K respectively.
-These are precisely C'₁ and D₁, and the resulting isomorphism is the first map.
-In Lean this quotient transport is implemented by extending the quotient maps to
-localizations (g maps to 1), composing with the inverse localization isomorphism,
-and descending along the surjective first-factor map. Kernel compatibility makes
-this descent well-defined; uniqueness of localization lifts proves the two inverse
-identities. The second factor map is the map already induced by f. -/
+/-- An idempotent factor supported in the isomorphism locus is preserved isomorphically: if
+`f : S'/J' → S/J` is induced by `i`, `c` is an idempotent of `S'/J'` with `f c = e.symm (1, 0)`,
+and `D(c)` lies over an open `U` on which `Spec i` is an isomorphism, then `S'/J'` splits as
+`D'₁ × D'₂` along `c` and `f` becomes `g × h` with `g : D'₁ ≃+* D₁` a ring isomorphism.
+From the proof of Stacks Tag 09XH. -/
 theorem quotient_firstFactor_equiv_of_restrict_iso
     {S' S : Type u} [CommRing S'] [CommRing S] (i : S' →+* S)
     (J' : Ideal S') (J : Ideal S) (hJ : Ideal.map i J' = J)

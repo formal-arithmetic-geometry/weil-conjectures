@@ -17,8 +17,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 
 /-! # Local bounded constant models on a small site
 
-Source: Stacks Project, Cohomology on Sites, Tag 094G, proof of
-`lemma-locally-constant`.
+Source: Stacks Project, Cohomology on Sites, Tag 094G.
+
+## Implementation details
 
 Constant-coefficient module sheaves are encoded as `Sheaf J (ModuleCat B)`:
 restriction is precomposition on the slice, and the constant complex is obtained
@@ -77,36 +78,7 @@ private theorem exists_constant_model_of_concentrated
 
 /-- A bounded object with locally constant finite cohomology has local constant
 finite-module complex models, with the same degree bounds.
-
-Source: Stacks Project, Tag 094G, strengthened assertion in the induction in the
-proof of `lemma-locally-constant`.
-
-Proof: Induct on `b - a`. Exact slice restriction preserves cohomology and cones;
-constant sheaves restrict to
-constant sheaves, and successive coverings
-compose. On empty slices use the zero complex. If `a = b`, canonical truncation
-identifies the object with its single nonzero
-cohomology sheaf; trivialize that sheaf. Otherwise trivialize the top cohomology
-as a finite module M and choose finitely many generators. Exact sheafification
-and local representatives
-lift the generators locally to
-cycles, giving a map from a constant finite free module in degree b. Its cone
-has cohomology in [a,b-1]; the long exact sequence
-and the Serre property
-give locally constant finite
-cohomology. Apply induction. Represent the boundary to the free module shifted
-by b-1 using a right fraction (lem-pc-right-fraction-representation and
-lem-pc-quasi-isomorphisms-multiplicative-system). Upper truncate the roof;
-its top component factors through top cohomology and hence yields an actual
-chain map out of the constant model. Its top component locally comes from a
-module map. On a nonempty slice,
-local equality in the constant presheaf makes the constant functor faithful,
-so this module map annihilates the preceding differential. Append the free
-module in degree b. The resulting constant complex is the shifted cone of the
-boundary; rotation and the morphism-of-triangles axiom,
-followed by the long exact cohomology
-sequence, identify it with the original object. Compose the finitely many
-covering refinements. No points or Tor-amplitude assumption is used. -/
+Source: Stacks Project, Tag 094G. -/
 theorem exists_site_bounded_constant_model
     {C : Type u} [SmallCategory C]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]

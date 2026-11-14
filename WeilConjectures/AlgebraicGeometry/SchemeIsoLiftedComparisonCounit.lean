@@ -25,18 +25,7 @@ noncomputable section
 
 /-- Rewrite the ambient normalization with a supplied lifted direct-image comparison.
 This concerns only one vertical map and its exceptional adjunction, not a square.
-Source: Stacks Project, Tag 0ATR, compatibility of the transported counit.
-
-Proof: The supplied component identity identifies the ambient hom of k at a(K),
-after any two postcompositions, with the direct image of the pinned isomorphism
-unit followed by the inverse direct-image conjugate. Take these postcompositions
-to be the direct image of φ at K and the counit of adjb at K. The result is exactly
-the ambient normalization identity hφ at K. Thus their composite equals the
-counit of adja. The maps belong to the full quasi-coherent subcategories by their
-supplied types and pullback/direct-image preservation. The inclusion is faithful,
-so the ambient equation is the equation for the lifted comparison. No existence
-or invertibility of a second mate is used. Identity isomorphisms, zero objects
-and empty schemes obey the same equation and require no additional hypotheses. -/
+Stacks Project, Tag 0ATR. -/
 theorem schemeIso_liftedComparison_counit
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

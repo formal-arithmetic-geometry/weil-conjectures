@@ -39,7 +39,7 @@ noncomputable def structureSheafAb (X : Scheme.{v}) :
 
 /-- Pullback on structure sheaf cohomology: apply the exact inverse-image functor to
 an Ext class, compare the constant integer sheaves, and then apply the adjoint of the
-structure morphism on sheaves. Source: Stacks Project, Varieties, Tag 0BED, proof;
+structure morphism on sheaves. Stacks Project, Varieties, Tag 0BED;
 Cohomology of Sheaves, Section 01F7. -/
 noncomputable def structureSheafCohomologyPullback {X Y : Scheme.{v}} (f : X ⟶ Y) (n : ℕ) :
     Sheaf.H (structureSheafAb Y) n →+ Sheaf.H (structureSheafAb X) n :=

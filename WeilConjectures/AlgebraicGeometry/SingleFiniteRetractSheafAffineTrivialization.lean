@@ -26,9 +26,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Sections preserve the splitting. The affine counit is a retract of the counit on
-finite free sheaves, hence invertible. The sections of the ambient sheaf are finite free
-by `tildeFinsupp` and the unit of tilde-Gamma, so its summand is finite projective.
+/-- A retract of a finite free sheaf on `Spec R` is quasi-coherent, and its global
+sections are a finite projective `R`-module.
 Source: Stacks Project, Tags 01IA, 01IB and 00NX. -/
 private theorem affine_retract_sections {R : CommRingCat.{u}} (M : (Spec R).Modules)
     (m : ℕ) (ι : M ⟶ SheafOfModules.free (ULift.{u} (Fin m)))
@@ -59,24 +58,9 @@ private theorem affine_retract_sections {R : CommRingCat.{u}} (M : (Spec R).Modu
         (SheafOfModules.free (ULift.{u} (Fin m)))) from inferInstance)
   exact ⟨(isQuasicoherent_iff_isIso_fromTildeΓ M).2 hi, hf, hp⟩
 
-/-- A single retract of a finite free sheaf is finite free near a specified point.
-
-Source: Stacks Project, Tag 00NX (3) implies (7), and Tags 01IA and 01IB.
-Proof: Choose an affine neighbourhood W of x inside U. Transport the splitting
-along open restriction, the over-site equivalence, and W's isomorphism to its
-spectrum. These functors preserve finite free sheaves. Applying global sections
-preserves the splitting; the sections of the ambient free sheaf are finite free,
-by tildeFinsupp and the tilde-Gamma unit. Hence the sections of the retract are
-finite projective. Naturality of the affine counit makes its component at the
-retract a retract of its component at the free sheaf. The latter is invertible,
-so the former is invertible too, proving quasi-coherence of the retract.
-Apply the finite-projective prime-local-free lemma at the prime representing x.
-It gives f outside that prime and a finite basis after localization away from f.
-The source library's localized-sections comparison gives a free sheaf on Spec A_f.
-Its open-immersion image in X is affine, contains x, and lies inside W and U.
-Restrict along the inverse isomorphism onto that image, compose the restriction
-comparisons, and use the over-site equivalence to recover the required isomorphism.
-Rank zero is allowed; if U is empty no x satisfies hx. -/
+/-- A single retract of a finite free sheaf on `U` is finite free on some affine open
+neighbourhood of a given point of `U`.
+Source: Stacks Project, Tag 00NX (3) implies (7), and Tags 01IA and 01IB. -/
 theorem exists_affine_trivialization_of_finite_retract
     (X : Scheme.{u}) (U : X.Opens)
     (M : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))

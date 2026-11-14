@@ -46,9 +46,7 @@ def schemeOrdinaryHomComparison (Y : Scheme.{u})
     (schemeDerivedInternalHomResolutionIso Y P M).inv
 
 /-- Three-variable naturality of the canonical derived tensor-Hom family.
-Source: Stacks Project, cohomology.tex, Tag 08DJ.
-Proof: unfold the chosen family and apply the naturality conjunct of its
-characterizing predicate. -/
+Stacks Project, cohomology.tex, Tag 08DJ. -/
 theorem schemeDerivedTensorHomEquiv_naturality (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (K K' L L' M M' : schemeDerivedCategory Y)
@@ -137,20 +135,7 @@ set_option maxHeartbeats 600000 in
 -- Elaborating the fixed Hom and tensor comparison maps needs extra heartbeats.
 /-- Localizing the componentwise ordinary evaluation gives its uncurried derived map.
 No Hom-exactness, K-flatness, or invertibility of the comparison maps is asserted.
-Source: Stacks Project, Tags 08DJ, 08DM and 08DQ; representative calculation.
-
-Proof: resolve both tensor inputs by K-flat complexes and the coefficient by the
-fixed K-injective functor. Apply the canonical tensor-Hom representative equation.
-Precompose with each total-tensor summand and postcompose with each Hom projection.
-Naturality of evaluation with the coefficient augmentation and the resolution maps
-reduces the equation to hf: the unit is supported in degree zero, so the component
-is the unit action when r+q=0 and zero otherwise. The coproduct inclusions and product
-projections detect equality. Localize and cancel the quasi-isomorphisms of the
-K-flat resolutions and coefficient resolution. The unit identification is the
-quotient comparison at the single complex. Finally apply three-variable naturality
-of the canonical family along eK and eN. This proves a morphism equation without
-inverting the ordinary Hom or tensor comparisons. For zero complexes or the empty
-scheme the same component equations hold, with all maps zero. -/
+Stacks Project, Tags 08DJ, 08DM and 08DQ. -/
 theorem schemeOrdinaryEvaluation_localization (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (K N : schemeDerivedCategory Y)

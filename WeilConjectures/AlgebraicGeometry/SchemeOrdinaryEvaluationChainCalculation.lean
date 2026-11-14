@@ -30,22 +30,7 @@ attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmet
 
 -- Elaborating total tensor associators uses the sheaf tensor and coproduct instances.
 /-- Ordinary evaluation is tensoring the chain evaluation into the single unit.
-Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;
-ordinary evaluation localization proof step 2.
-
-Proof: Construct e degreewise by extending evaluation of Hom(P,O)^q on P^r
-across the coproduct defining Tot(V,P). Its target is O^(q+r). The Hom
-projection differential formula and the tensor differential give the chain-map
-law, including the Koszul sign. Naturality of the tensor-Hom adjunction in the
-coefficient augmentation gives the first equation. For the second equation,
-restrict to F^p tensor V^q tensor P^r. Apply the ordinary evaluation component
-formula hf and cancel currying with uncurrying. If q+r is nonzero, the single
-unit component vanishes and both composites are zero. If q+r is zero, its
-singleObjXSelf identification turns the component into the right unit action
-on F^p. The tensor associator has no sign and reindexes exactly these summands.
-Coproduct extensionality twice gives the second chain-map equality. No derived
-category or invertibility of a tensor comparison enters this argument; it works
-for unbounded complexes, zero complexes and the empty scheme. -/
+Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ. -/
 theorem schemeOrdinaryEvaluation_chain_calculation (Y : Scheme.{u})
     (P F : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (f : pullbackTensorTotal Y F

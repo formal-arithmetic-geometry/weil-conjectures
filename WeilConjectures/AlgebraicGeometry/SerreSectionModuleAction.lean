@@ -84,12 +84,7 @@ private theorem sections_cast_heq
 
 /-- Multiplication by the homogeneous unit acts identically on twisted sections.
 
-Source: Stacks Project, Definition 01MN and Lemma 01M7.
-Proof: the twist multiplication morphism sends a local homogeneous fraction r to r * (1/1),
-which equals r. After identifying z+0 with z, it is the identity morphism of the twist.
-Tensoring this identity with G gives the identity of G tensor the twist. Evaluation at the
-whole space preserves identity morphisms, so its value on every section is the same section.
-The heterogeneous equality records only the degree identification; it adds no hypothesis. -/
+Source: Stacks Project, Definition 01MN and Lemma 01M7. -/
 private theorem serreTwistedSectionsUnit (z : ℤ)
     (s : Γ(G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) z, ⊤)) :
     HEq (Scheme.Modules.Hom.app (G ◁ Proj.twistMul z
@@ -127,15 +122,7 @@ private theorem serreTwistedSectionsUnit (z : ℤ)
 
 /-- Two successive homogeneous multiplications act by the product on twisted sections.
 
-Source: Stacks Project, Definition 01MN and Lemma 01M7.
-Proof: over every open set and at every point, twist multiplication sends r to r*(a/1).
-First multiplying by b and then by a gives (r*(b/1))*(a/1)=r*((a*b)/1), by associativity,
-commutativity, and multiplicativity of localization. The degree identity
-(z+f)+e=z+(e+f) identifies the codomains. These pointwise identities give equality of
-morphisms of twists after transport. The tensor-left functor preserves compositions and
-that equality. Evaluation at the whole space also preserves composition, so evaluating
-on a section gives the stated heterogeneous equality. This holds for zero scalars and
-arbitrary integer source degree as well. -/
+Source: Stacks Project, Definition 01MN and Lemma 01M7. -/
 private theorem serreTwistedSectionsMul (e f : ℕ) (z : ℤ)
     (a b : MvPolynomial (Fin 2) k)
     (ha : a ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k e)
@@ -388,23 +375,10 @@ private theorem mul_smul_law (a b : MvPolynomial (Fin 2) k) (x : serreSectionSum
         exact (DFinsupp.single_eq_single_iff _ _ _ _).mpr
           (Or.inl ⟨by omega, homogeneous_mul k G _ _ z _ _ a.property b.property s⟩)
 
-/-- The explicit finite-sum action satisfies the polynomial module laws.
-
-Source: Stacks Project, Lemma 01YS(5), the graded module of twisted global sections;
-Stacks Definition 01MN for twists and Lemma 01M7 for localizations and functoriality.
-Proof: the decomposition of a polynomial is additive and multiplicative. On a summand of
-nonnegative degree, `serreSectionHomogeneous` is the map on sections induced by multiplication
-of local homogeneous fractions, tensored with the identity of G. Multiplication of fractions
-is additive in each variable, multiplication by one is the identity, and composition is
-multiplication by the product, after transporting the degree equality. Tensoring and taking
-sections preserve these equalities. In negative source degrees the section group is the zero
-group, so the same equalities hold. Expand the two finite sums defining `serreSectionSMul`,
-use distributivity of finite sums, and the decomposition identity for the product of two
-polynomials to obtain `mul_smul`; the remaining additive laws follow from the additive and
-unit identities. For a homogeneous scalar and a single section summand, both decompositions
-have a single possibly nonzero component; the same expansion yields the displayed single
-summand formula, including the zero polynomial and zero section. No coherence, nonzero
-section, or finite generation hypothesis is used. -/
+/-- The explicit finite-sum action satisfies the polynomial module laws (unit, associativity,
+distributivity over sums of sections and of scalars), together with the single-summand formula
+for a homogeneous scalar acting on a single section summand.
+Stacks Project, Tag 01YS(5); Tags 01MN and 01M7. -/
 theorem serreSectionActionLaws :
     (∀ x : serreSectionSum k G, (1 : MvPolynomial (Fin 2) k) • x = x) ∧
     (∀ (a b : MvPolynomial (Fin 2) k) (x : serreSectionSum k G),
@@ -422,7 +396,7 @@ theorem serreSectionActionLaws :
   exact ⟨one_smul_law k G, mul_smul_law k G, smul_add_law k G,
     add_smul_law k G, homogeneous_single k G⟩
 
-/-- The module structure on the explicit direct sum, using only the named action-law proof. -/
+/-- The polynomial module structure on the explicit direct sum of twisted sections. -/
 noncomputable instance serreSectionSumModule :
     Module (MvPolynomial (Fin 2) k) (serreSectionSum k G) where
   one_smul := (serreSectionActionLaws k G).1

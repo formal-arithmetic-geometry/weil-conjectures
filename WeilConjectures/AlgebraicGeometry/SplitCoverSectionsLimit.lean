@@ -27,20 +27,10 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, etale-cohomology.tex, proof of Lemma 095B,
-lines 9982--9991, and sites.tex, Definition 00VM.
-
-Proof: Base change the clopen coproduct Y by W → X. Its j-th piece is W,
-using the inverse t j to i j ≫ f; its inclusion is the displayed pullback lift.
-These inclusions cover W ×_X Y and have empty pairwise overlaps for distinct
-indices. The self-overlap projections agree because the inclusions are monic.
-The sheaf condition makes sections the equalizer of the two overlap maps.
-Sections on the empty object are zero, by its empty covering. Thus every family
-of sections on the pieces is compatible and glues uniquely. For any module M,
-a family of linear maps from M to these section modules therefore glues to a
-unique map to H(W ×_X Y); uniqueness of gluing proves additivity and scalar
-linearity. This is exactly the limiting-fan property, also for the empty family.
--/
+/-- For a split cover `Y` of `X` by finitely many clopen copies of `X`, the sections of an
+étale sheaf `H` on the base change of an étale `W` over `X` form the product of the sections
+on the pieces, via the restriction maps.
+Source: Stacks Project, proof of Lemma 095B, and Definition 00VM. -/
 theorem splitCoverSectionsLimit
     {X Y : Scheme.{u}} {J : Type w} [Finite J]
     {Λ : Type (u + 1)} [CommRing Λ]

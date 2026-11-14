@@ -27,8 +27,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.FunctorCategory
 /-!
 # Strict constant-coefficient tower operations
 
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE, and the explicit
-strict-tower refinement in the blueprint.
+Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE, refined to strict towers.
 
 The index `n : ℕ` denotes positive level `n+1`. All derived categories below localize
 complexes of strict towers, rather than forming towers in separate derived categories.
@@ -68,7 +67,7 @@ noncomputable instance modules_grothendieck (X : Scheme.{u}) :
     (Scheme.ProEt.topology X) (coefficients B X)).1
 
 /-- Strict inverse systems, with index `n` representing level `n+1`.
-Source: blueprint strict-tower refinement of Tag 0F7B. -/
+Source: strict-tower variant of Stacks, Tag 0F7B. -/
 abbrev Towers (X : Scheme.{u}) := ℕᵒᵖ ⥤ Modules B X
 
 /-- Standard unbounded localization of the strict tower category.
@@ -81,10 +80,7 @@ Source: Stacks, Tag 05RU. -/
 abbrev Derived (X : Scheme.{u}) := DerivedCategory (Towers B X)
 
 /-- Constant coefficients pull back canonically for arbitrary rings, including infinite ones.
-Source: Stacks, Tag 0H7J and the blueprint's first proof step.
-Proof: maps out of a constant sheaf are maps out of its constant presheaf. Compose
-this universal property with the inverse-image adjunction. The resulting comparison
-preserves constant sections and is inverse to the canonical constant-section map. -/
+Source: Stacks, Tag 0H7J. -/
 theorem constantRing_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsIso (Scheme.proEtaleConstantInverseImageMap f CommRingCat.{u + 1} (CommRingCat.of B)) := by
   let A := CommRingCat.of B
@@ -174,23 +170,16 @@ noncomputable instance modulePullback_finiteColimits {X Y : Scheme.{u}} (f : X �
   (Scheme.proEtaleRingModuleOperations_properties f (coefficients B Y)
     (coefficients B X) (constantRingIso B f)).2.2.2.1
 
-/-- Termwise inverse image on strict towers.
-Source: blueprint, first proof step. -/
+/-- Termwise inverse image on strict towers. -/
 noncomputable abbrev towerPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (Functor.whiskeringRight ℕᵒᵖ (Modules B Y) (Modules B X)).obj (modulePullback B f)
 
-/-- Termwise direct image on strict towers.
-Source: blueprint, first proof step. -/
+/-- Termwise direct image on strict towers. -/
 noncomputable abbrev towerDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (Functor.whiskeringRight ℕᵒᵖ (Modules B X) (Modules B Y)).obj (moduleDirectImage B f)
 
 /-- Tower complexes admit K-injective resolutions, without a uniform levelwise bound.
-Source: blueprint, first proof step, Stacks, Tags 079B and 079P.
-Proof: the module category is Grothendieck abelian. Filtered colimits of towers are
-exact pointwise. If H is a separator of modules, the coproduct over n of the free
-diagrams on H is a separator of towers: transpose a detecting map at an index
-under the evaluation adjunction. Thus towers are Grothendieck abelian and the
-existing general K-injective resolution theorem applies. -/
+Source: Stacks, Tags 079B and 079P. -/
 theorem towers_hasKInjectiveResolutions (X : Scheme.{u}) :
     CategoryTheory.Abelian.HasKInjectiveResolutions (Towers B X) := by
   let M := Modules B X
@@ -220,11 +209,7 @@ noncomputable instance towers_kInjective (X : Scheme.{u}) :
     CategoryTheory.Abelian.HasKInjectiveResolutions (Towers B X) :=
   towers_hasKInjectiveResolutions B X
 
-/-- Termwise exactness uses the levelwise kernels and cokernels of strict diagrams.
-Source: blueprint, first proof step.
-Proof: evaluate each finite limit and colimit at an index. The module inverse image
-is exact, so the pointwise comparison is invertible. Evaluation jointly reflects
-isomorphisms of strict diagrams, proving both claims. -/
+/-- Termwise inverse image on strict towers preserves finite limits and finite colimits. -/
 theorem towerPullback_exact {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteLimits (towerPullback B f) ∧
       PreservesFiniteColimits (towerPullback B f) := by
@@ -232,21 +217,19 @@ theorem towerPullback_exact {X Y : Scheme.{u}} (f : X ⟶ Y) :
   · exact ⟨fun _ _ _ ↦ inferInstance⟩
   · exact ⟨fun _ _ _ ↦ inferInstance⟩
 
-/-- Left exactness on strict diagrams. Source: blueprint, first proof step. -/
+/-- Left exactness on strict diagrams. -/
 noncomputable instance towerPullback_finiteLimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteLimits (towerPullback B f) := (towerPullback_exact B f).1
 
-/-- Right exactness on strict diagrams. Source: blueprint, first proof step. -/
+/-- Right exactness on strict diagrams. -/
 noncomputable instance towerPullback_finiteColimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteColimits (towerPullback B f) := (towerPullback_exact B f).2
 
-/-- Exact inverse image on the unbounded derived strict-tower category.
-Source: blueprint, first proof step. -/
+/-- Exact inverse image on the unbounded derived strict-tower category. -/
 noncomputable def G {X Y : Scheme.{u}} (f : X ⟶ Y) : Derived B Y ⥤ Derived B X :=
   (towerPullback B f).mapDerivedCategory
 
-/-- Total right derived termwise direct image.
-Source: blueprint, first proof step. -/
+/-- Total right derived termwise direct image. -/
 noncomputable def R {X Y : Scheme.{u}} (f : X ⟶ Y) : Derived B X ⥤ Derived B Y :=
   (towerDirectImage B f).rightDerivedFunctor
 

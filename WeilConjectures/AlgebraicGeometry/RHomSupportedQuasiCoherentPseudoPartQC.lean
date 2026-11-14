@@ -25,12 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- The quasi-coherence component of the pseudo-coherent internal-Hom lemma.
-
-Source: Stacks Project, Tag 0A6H, clause (1).
-The proof is the affine-local finite-free calculation, followed by local gluing of
-quasi-coherent cohomology; it is split from the local lower-bound component so that
-the two independent conclusions can be proved separately. -/
+/-- Derived internal Hom from a pseudo-coherent `K` into a bounded-below `L` with quasi-coherent
+cohomology has quasi-coherent cohomology. Stacks Tag 0A6H (1). -/
 theorem rhom_supported_quasiCoherent_pseudo_part_qc
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

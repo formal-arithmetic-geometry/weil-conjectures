@@ -17,8 +17,9 @@ import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Zero-dimensional étale cohomology: cohomological remainder
 
-Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-arbitrary-curve-cd/
-lem-weil-pbc-zero-dimensional-cohomology.md, both proof paragraphs.
+For a separated zero-dimensional scheme of finite type over an algebraically closed field,
+positive-degree étale cohomology vanishes and degree-zero cohomology is the product of the
+geometric stalks.
 -/
 
 @[expose] public section
@@ -32,21 +33,8 @@ namespace AlgebraicGeometry
 
 /-- Positive étale cohomology is zero, and the canonical degree-zero comparison
 followed by the product of the chosen geometric stalk germs is invertible.
+Stacks Project, Tags 00KH, 00FV, 054M, 03QT, 03QU, 03SI and 03Q1. -/
 
-Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-arbitrary-curve-cd/
-lem-weil-pbc-zero-dimensional-cohomology.md, both proof paragraphs;
-Stacks Project, Tags 00KH, 00FV, 054M, 03QT, 03QU, 03SI and 03Q1.
-
-Proof: Apply `zero_dimensional_global_sections_preservesFiniteColimits`; global
-sections already preserve finite limits. The exact-functor comparison
-`Functor.singleFunctorCompRightDerivedFunctorIso` identifies derived global
-sections of F in degree zero with ordinary global sections placed in degree zero.
-Transport the vanishing of the homology of a single complex in positive degree
-through this comparison, then use `AddCommGrpCat.subsingleton_of_isZero`.
-The degree-zero conjunct is `zero_dimensional_etale_cohomology_iso`, which keeps
-the reduction, finite coproduct, and canonical germ compatibility route described
-in the source. Neither unresolved obligation restates this conjunction.
--/
 theorem zero_dimensional_etale_cohomology_rest
     (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u})
     (f : C ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f]

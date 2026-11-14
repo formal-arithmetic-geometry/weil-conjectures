@@ -262,15 +262,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- Transposing the fixed derived adjunction data needs a larger elaboration budget.
 /-- Base change commutes with the relative unit of one open.
-Source: Stacks Project, Cohomology, Tags 08HY and 08HZ.
-Proof: Transpose the two paths under the adjunction for the inverse-image open
-followed by f'. Expand base change as the transpose of the pulled-back counit.
-The unit of the composite adjunction and the right-adjoint mate defining
-relativeMVImageComp cancel by the triangle identities. The pullback composition
-coherence identifies the two remaining comparisons, using the pullback
-projection equality. Naturality of the counit moves the object map φ through
-the comparison. Both paths therefore have the same transpose. This works for
-all opens, including the empty open, and for arbitrary φ. -/
+Source: Stacks Project, Cohomology, Tags 08HY and 08HZ. -/
 theorem relativeMV_restriction_unit
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X S X' S' : Scheme.{u}}

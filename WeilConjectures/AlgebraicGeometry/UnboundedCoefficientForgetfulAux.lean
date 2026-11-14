@@ -131,23 +131,10 @@ private noncomputable def restrictScalarsForgetIso
       (show CategoryTheory.Sheaf.restrictScalars T.smallEtaleTopology φ ⋙
           Etale.moduleAbelianForget R T ≅ Etale.moduleAbelianForget S T from Iso.refl _)
 
-/-- Restriction of scalars preserves the invertibility test for the canonical unbounded
-exchange, after identifying its source and target with the restricted-coefficient versions.
-Source: Stacks Project, Tag 0D6J(3), and the canonical mate coherence of
-`lem-kun-unbounded-abelian-exchange-comparison`.
-
-Proof in words: write U_R and U_S for forgetting R- and S-module structure to abelian
-sheaves. Termwise restriction gives U_R Res = U_S, including on complexes and their
-localizations. Inverse-image commutes with this identification. For direct images,
-Tag 0D6J(3) gives canonical isomorphisms from the forgotten unbounded derived direct
-images to the abelian derived direct image. The canonical mate coherence of
-lem-kun-unbounded-abelian-exchange-comparison identifies both forgotten exchange
-morphisms with the same abelian exchange, conjugated by their invertible endpoint
-comparisons. Hence one forgotten exchange is invertible exactly when the other is.
-Forgetting R-module structure reflects isomorphisms, because homology commutes with
-this exact functor and isomorphisms of sheaves are tested sectionwise. Applying this
-test to the two R-derived morphisms gives the stated equivalence. No cyclic-coefficient,
-properness, flatness, boundedness, or exchange-invertibility hypothesis is used. -/
+/-- Restriction of scalars along `φ : R →+* S` preserves the invertibility test for the
+canonical unbounded exchange: the restricted `S`-coefficient base change map is an isomorphism
+if and only if the `R`-coefficient base change map at the restricted complex is one.
+Stacks Tag 0D6J(3). -/
 theorem isIso_restricted_derivedBaseChangeMap_iff
     {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ : R →+* S)
     (sq : IsPullback g' f' f g)

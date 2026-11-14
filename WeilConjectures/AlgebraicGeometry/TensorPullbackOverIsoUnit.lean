@@ -25,22 +25,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- A local isomorphism pulls back to an isomorphism on the inverse-image open,
 and the comparison carries each canonical unit section to its image section.
-Source: Stacks Project, Tags 0095, 0096 and 0097.
-
-Proof: Let R be restriction to the slice over U and S its right adjoint.
-The counit is invertible: each open in the slice is already contained in U,
-so its map to U intersect that open is invertible. The triangle identity
-therefore makes R applied to each localization unit G → S(R(G)) invertible.
-By tensorPullback_map_over_isIso, its pullback is invertible over f inverse-image U.
-Construct t as the pullback of the localization unit for M, followed by the
-pullback of S(e), followed by the inverse pullback of the localization unit for N.
-For V ≤ U, naturality of e along U intersect V → V identifies S(e) applied to
-the localized section with the localization of e(s). Naturality of the fixed
-canonical pullback adjunction unit for each of these three global maps then
-proves the displayed equation. Cancelling the invertible final localization
-map proves the claim for t itself. No flatness, coherence, affineness, or
-closed-immersion hypothesis is used; empty opens follow by the same construction.
--/
+Stacks Tags 0095, 0096 and 0097. -/
 theorem exists_tensorPullback_over_iso_unit
     {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) (M N : Y.Modules)
     (e : M.over U ≅ N.over U) :

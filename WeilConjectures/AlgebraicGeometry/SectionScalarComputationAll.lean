@@ -100,17 +100,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 -- Track the specified localization and termwise-equivalence instances through the diagram.
 /-- The normalized scalar comparison intertwines the universal computation maps on
 all complexes, without flatness hypotheses on their terms.
-Source: Stacks Project, Tags 06YS, 06YY and 07A6.
-
-Proof: both displayed paths are components of natural transformations on internal
-cochain complexes. Resolve the section image of an arbitrary complex by a flat-term
-K-flat complex (06YS). Lift this resolution through the termwise section equivalence.
-Its counit identifies the section image of the lift with the chosen resolution.
-Tensoring preserves isomorphisms, so K-flatness and termwise flatness transport along
-this counit. Apply SectionScalarNormalized to the lift. Naturality along the lifted
-quasi-isomorphism then gives the equation at the original complex, since its image
-under localization, the section equivalence and the derived scalar functor is an
-isomorphism and hence cancellable. -/
+Source: Stacks Project, Tags 06YS, 06YY and 07A6. -/
 theorem section_scalar_computation_all (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (s : SectionScalarComparison a T) (h : SectionScalarNormalized a T s)
     (P : CochainComplex (Modules Λ T) ℤ) :

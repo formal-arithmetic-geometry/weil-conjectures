@@ -61,27 +61,7 @@ relative Mayer--Vietoris rows. The overlap component satisfies the vertical-past
 identity. No boundary, distinguishedness, or morphism of triangles is asserted.
 
 Source: Stacks Project, Cohomology, Tags 08BV, 08HZ and 08HY; Derived Categories
-of Schemes, Tag 0DJ9, the induction diagram.
-
-Proof: For each open W, compare derived exact restriction with derived pullback
-using leftAdjointUniq for mvOpenRestrictionAdjunction and relativeMVAdj. Apply
-the direct-image functor and compose with relativeMVImageComp W.ι f. Apply Lg*
-to obtain the source comparisons. On the inverse-image cover, identify its open
-scheme with the chosen pullback using the projection-preserving canonical scheme
-isomorphism. Derive this isomorphism and use the same adjunction and composition
-comparisons to obtain the target comparisons. At the middle vertices compose the
-additive functors' biproduct comparison with biprod.mapIso of the two open
-comparisons. The unit identity for leftAdjointUniq proves the two first-arrow
-identities. Transpose the restricted counits under these adjunction comparisons;
-the counit identity and composition coherence prove the two second-arrow
-identities, with subtraction on the V summand. For the overlap expand the
-base-change map as the mate of the pulled-back counit. Substitute the composite
-adjunction counit formula and cancel both triangle identities. The two pullback
-projection composites are equal; transport along this equality and compose the
-two pinned pullback comparisons. The remaining map is precisely
-relativeMVLocalArrow. This gives the last equality. No compactness,
-quasi-coherence, or cover condition is used by these comparisons; empty opens,
-zero objects, repeated opens and the zero object map obey the same identities. -/
+of Schemes, Tag 0DJ9. -/
 theorem relativeMV_pinned_vertex_comparisons
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

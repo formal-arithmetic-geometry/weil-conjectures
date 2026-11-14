@@ -26,18 +26,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- On a quasi-compact scheme, local finite Tor dimension has a global finite bound.
-Source: Stacks Project, Cohomology of Sheaves, Definition 08CG and
-Lemma 09U9, finite-subcover consequence.
-
-Proof: Choose the neighbourhood U_x and interval [a_x,b_x] supplied at every point.
-Quasi-compactness gives a finite subcover. Insert 0 into each finite set of endpoints,
-and let lo be the minimum of the lower endpoints and hi the maximum of the upper ones.
-Then lo <= 0 <= hi, lo <= a_x and b_x <= hi for each selected neighbourhood.
-At any point choose a member of the finite subcover. Outside [lo,hi] its local
-vanishing hypothesis applies, because the degree is also outside [a_x,b_x].
-Apply torAmplitude_of_open_neighbourhoods.
-For the empty space the finite cover may be empty; the inserted endpoints make both
-bounds 0 and the local hypothesis is vacuous. No quasi-separatedness is used.
+Stacks Tags 08CG and 09U9.
 -/
 theorem hasFiniteTorDimension_of_locallyFinite (X : Scheme.{u}) [CompactSpace X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

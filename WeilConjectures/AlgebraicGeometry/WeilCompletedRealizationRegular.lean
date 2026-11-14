@@ -13,8 +13,8 @@ set_option linter.privateModule false
 
 /-! # The regular module under completed constant realization
 
-Source: Stacks Project, Modules on Sites, Tags 03D8 and 03EK,
-lemma-adjointness-tensor-restrict, and Tag 0GMW, lemma-sheafification-tensor.
+Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW.
+
 -/
 
 @[expose] public noncomputable section

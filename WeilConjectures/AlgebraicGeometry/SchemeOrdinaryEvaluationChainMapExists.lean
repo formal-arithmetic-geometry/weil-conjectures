@@ -22,22 +22,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace AlgebraicGeometry
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 /-- Ordinary evaluation factors through the single coefficient unit, independently of F.
-Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;
-ordinary evaluation chain calculation, steps 1 and 2.
-
-Proof: Put O equal to the single unit and V=Hom(P,O). For every total degree n,
-extend over the coproduct the maps V^q tensor P^r to O^n, q+r=n, given by
-symmetry followed by the inverse tensor-Hom adjunction applied to the chosen
-Hom projection. This is an explicit construction, not a choice of data from
-an arbitrary existence theorem. Project the Hom differential onto each
-Hom(P^r,O^n); the equation is d_O composed with the projection minus (-1)^q
-times precomposition by d_P. The additive tensor-Hom adjunction transports
-this to the total tensor differential equation, so these maps form a chain
-map e. On each summand, naturality of the projections and of uncurrying in
-the coefficient morphism eta_O identifies the uncurrying of Hom(P,eta_O)
-with the component of e followed by eta_O. Coproduct extensionality gives
-its chain-map equality. No boundedness is used; zero complexes and the empty
-scheme give the same equations with zero components. -/
+Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ. -/
 theorem schemeOrdinaryEvaluation_chain_map_exists (Y : Scheme.{u})
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) :
     letI := SheafOfModules.isGrothendieckAbelian (moduleRings Y.toRingedSpace)

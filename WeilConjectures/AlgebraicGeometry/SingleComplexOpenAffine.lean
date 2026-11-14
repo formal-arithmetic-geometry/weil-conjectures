@@ -26,19 +26,9 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- The affine base case, with a source open in the coordinates used by induction.
-Source: Stacks Project, Tag 0DJ9, affine-open paragraph, and Tag 0DJ8.
-
-Proof: The inverse image U' of the affine U is affine since both bases are affine.
-Restriction preserves quasi-coherent cohomology and the stalk condition: the local
-rings at points of an open subscheme are the original local rings, and the canonical
-pullback composition maps transport phi to its restriction. Identify U, U', S, S'
-with the spectra of their global section rings. Transport the cartesian square,
-objects and phi along these isomorphisms. Apply singleComplexAffineBaseChange.
-Naturality of the derived adjunction counits and pullback composition comparisons
-identifies its comparison with singleComplexOpenComparison. Transport invertibility
-back. For the empty affine open both derived categories are zero and the same
-comparison is invertible. No boundedness hypothesis is used. -/
+/-- The affine base case: for an affine source open, in the coordinates used by the
+induction, the single-complex open comparison is an isomorphism.
+Stacks Project, Tags 0DJ8 and 0DJ9. -/
 theorem singleComplexOpenComparison_affine
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -29,19 +29,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 500000 in
 -- Explicit section comparisons require unfolding several categorical functor composites.
-/-- The canonical section class map intertwines multiplication endomorphisms.
-No Ext comparison, affine open, finiteness or quasi-coherence is assumed.
-Source: Stacks Project, Tags 01E4 and 01E5; naturality of derived functors.
-
-Proof: Module-valued derived global sections take multiplication by b on the module
-M to scalar multiplication on cohomology, by moduleCohomology_map_smulHom. The
-module-valued resolution comparison e is linear, so it preserves b. The middle
-three arrows T preserve the pulled-back scalar by resolutionSectionsHomology_scalar.
-The evaluated sectionCohomologyTheta is a module morphism and hence preserves a;
-the same holds for the final inverse resolution comparison. Compose these four
-pointwise equalities. No comparison of lifts or vanishing argument is needed.
-Degree zero is multiplication on sections, and empty opens and zero modules are
-covered by the same module and homology maps. -/
+/-- The canonical section class map intertwines multiplication endomorphisms. No Ext comparison,
+affine open, finiteness or quasi-coherence is assumed. Stacks Project, Tags 01E4 and 01E5. -/
 theorem resolutionSectionClass_map_smulHom
     {X S : Scheme.{u}} (f : X ⟶ S) (F : X.Modules) (I : InjectiveResolution F)
     (p : ℕ) (V : S.Opens) (R : RestrictedResolutionSections I (f ⁻¹ᵁ V)) :

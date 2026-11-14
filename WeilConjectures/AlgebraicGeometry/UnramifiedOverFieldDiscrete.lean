@@ -28,18 +28,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- A scheme unramified over a field has discrete underlying topological space.
-Source: Stacks Project, Morphisms, Lemma 02G7, part (1).
+Stacks Project, Morphisms, Lemma 02G7, part (1). -/
 
-Proof: On every pair of affine opens mapped into one another, local finite type gives
-`Algebra.FiniteType` on the section rings. The open diagonal gives formal unramifiedness
-of the morphism and hence `Algebra.FormallyUnramified` on those rings. Mathlib's instance
-in `RingTheory.Unramified.LocalStructure` gives `Algebra.QuasiFinite`, establishing
-Mathlib's `LocallyQuasiFinite g` directly. Since a field is Artinian, its spectrum is
-locally Artinian. Apply `IsLocallyArtinian.of_locallyQuasiFinite g` to obtain that `Y`
-is locally Artinian, then the instance `IsLocallyArtinian.discreteTopology`. This is
-an implementation of the locally quasi-finite route in Stacks 02G7 using Mathlib's
-Artinian-scheme results; no comparison with the project's quasi-finiteness predicate
-or transport through the scheme-theoretic fibre is needed. -/
 theorem discreteTopology_of_unramified_over_field {k : Type u} [Field k]
     {Y : Scheme.{u}} (g : Y ⟶ Spec (CommRingCat.of k))
     [LocallyOfFiniteType g] [IsOpenImmersion (pullback.diagonal g)] :

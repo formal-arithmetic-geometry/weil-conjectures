@@ -49,58 +49,49 @@ instance totalSectionGraded (X : Scheme.{u})
     (P Q : GradedObject ℤ (modules Λ X)) : GradedObject.HasTensor P Q := inferInstance
 
 /-- The existing canonical iterated tensor property, cached for termwise comparisons.
-Source: Stacks 07A4.
-Proof: the ordinary tensor preserves the coproducts defining every graded tensor. -/
+Source: Stacks 07A4. -/
 instance totalInternalGoodLeft (X : Scheme.{u})
     (P Q H : GradedObject ℤ (internalModules Λ X)) :
     GradedObject.HasGoodTensor₁₂Tensor P Q H := inferInstance
 
 /-- The existing canonical iterated tensor property, cached for termwise comparisons.
-Source: Stacks 07A4.
-Proof: the ordinary tensor preserves the coproducts defining every graded tensor. -/
+Source: Stacks 07A4. -/
 instance totalInternalGoodRight (X : Scheme.{u})
     (P Q H : GradedObject ℤ (internalModules Λ X)) :
     GradedObject.HasGoodTensorTensor₂₃ P Q H := inferInstance
 
 /-- The existing canonical iterated tensor property, cached for termwise comparisons.
-Source: Stacks 07A4.
-Proof: the ordinary tensor preserves the coproducts defining every graded tensor. -/
+Source: Stacks 07A4. -/
 instance totalInternalTensorFour (X : Scheme.{u})
     (P Q H K : GradedObject ℤ (internalModules Λ X)) :
     GradedObject.HasTensor₄ObjExt P Q H K := inferInstance
 
 /-- The existing canonical iterated tensor property, cached for termwise comparisons.
-Source: Stacks 07A4.
-Proof: the ordinary tensor preserves the coproducts defining every graded tensor. -/
+Source: Stacks 07A4. -/
 instance totalSectionGoodLeft (X : Scheme.{u})
     (P Q H : GradedObject ℤ (modules Λ X)) :
     GradedObject.HasGoodTensor₁₂Tensor P Q H := inferInstance
 
 /-- The existing canonical iterated tensor property, cached for termwise comparisons.
-Source: Stacks 07A4.
-Proof: the ordinary tensor preserves the coproducts defining every graded tensor. -/
+Source: Stacks 07A4. -/
 instance totalSectionGoodRight (X : Scheme.{u})
     (P Q H : GradedObject ℤ (modules Λ X)) :
     GradedObject.HasGoodTensorTensor₂₃ P Q H := inferInstance
 
 /-- The existing canonical iterated tensor property, cached for termwise comparisons.
-Source: Stacks 07A4.
-Proof: the ordinary tensor preserves the coproducts defining every graded tensor. -/
+Source: Stacks 07A4. -/
 instance totalSectionTensorFour (X : Scheme.{u})
     (P Q H K : GradedObject ℤ (modules Λ X)) :
     GradedObject.HasTensor₄ObjExt P Q H K := inferInstance
 
-/-- The existing canonical cochain tensor availability, retained without repeating
-instance search through the termwise functors.
-Source: Stacks 07A4.
-Proof: the graded coproducts defining the cochain tensor already exist. -/
+/-- The existing canonical cochain tensor availability for internal modules.
+Source: Stacks 07A4. -/
 instance (priority := 4000) totalInternalHasTensor (X : Scheme.{u})
     (P Q : CochainComplex (internalModules Λ X) ℤ) :
     HomologicalComplex.HasTensor P Q := inferInstance
 
 /-- The existing canonical cochain tensor availability for section modules.
-Source: Stacks 07A4.
-Proof: the graded coproducts defining the cochain tensor already exist. -/
+Source: Stacks 07A4. -/
 instance (priority := 4000) totalSectionHasTensor (X : Scheme.{u})
     (P Q : CochainComplex (modules Λ X) ℤ) :
     HomologicalComplex.HasTensor P Q := inferInstance
@@ -174,8 +165,7 @@ The data maps and both functor laws are those of mapHomologicalComplex. -/
   map_comp a b := (F.mapHomologicalComplex (.up ℤ)).map_comp a b
 
 /-- Retaining the data fields gives exactly the original termwise functor.
-Source: Stacks 07A4.
-Proof: both functors have identical object and morphism maps; their laws are proofs. -/
+Source: Stacks 07A4. -/
 theorem retainedCochainFunctor_eq
     {C D : Type*} [Category* C] [Category* D] [HasZeroMorphisms C] [HasZeroMorphisms D]
     (F : C ⥤ D) [F.PreservesZeroMorphisms] :
@@ -257,12 +247,7 @@ private theorem ordinary_naturality (T : Scheme.{u})
   simpa only [he] using data.2.2.1 M M' N N' a b
 
 /-- Naturality of the existing signed-total comparison in its canonical types.
-Source: Stacks 06YN and 07A4.
-Proof: ordinaryTensorComparison is the natural comparison supplied by the fixed
-internal-section tensor equivalence, by uniqueness of its pure-tensor normalization.
-Precompose the desired total equality with each direct-sum inclusion. The defining
-summand equation reduces it to ordinary naturality. Coproduct extensionality and the
-faithful section equivalence imply equality of the chain maps. -/
+Source: Stacks 06YN and 07A4. -/
 theorem cochainTensorComparison_naturality (T : Scheme.{u})
     {A A' B B' : CochainComplex (internalModules Λ T) ℤ} (a : A ⟶ A') (b : B ⟶ B') :
     (cochainSectionEquivalence Λ T).map (a ⊗ₘ b) ≫ (cochainTensorComparison Λ T A' B').hom =

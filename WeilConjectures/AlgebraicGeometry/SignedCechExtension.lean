@@ -135,29 +135,7 @@ private theorem signedCechExtension_permutation (p : ℕ)
     simp [signedCechExtensionValue, ht, htσ]
 
 /-- The differential of a signed extension is again a signed extension of its ordered
-coordinates.
-
-Source: Stacks 01FJ, with the explicit signed extension of Definition 01FI.
-
-Proof: Evaluate on a tuple t. If its entries are distinct, let sigma sort t and
-reindex the differential sum by the position of the deleted entry in the sorted tuple.
-If j is the position deleted from t and k its position in the sorted tuple, the
-sorting permutation of the remaining entries has sign epsilon with
-(-1)^j epsilon = sign(sigma) (-1)^k: move the deleted entry to the end before and
-after sorting, contributing p+1-j and p+1-k transpositions, respectively. The two
-restriction composites coincide because opens form a poset;
-hence each summand equals the corresponding signed restriction of an ordered face.
-If t has exactly one repeated pair and all other entries are distinct, only the two
-faces deleting one member of that pair can contribute. Their sorted tuples agree,
-and, for equal entries in positions a < b, their sorting signs differ by
-(-1)^, since deleting the other occurrence moves it past b-a-1 entries.
-Multiplication by the face signs (-1)^a and (-1)^b gives opposite coefficients;
-their restriction maps agree,
-so they cancel. If there are more repetitions, every face still has repeated entries
-and every summand vanishes. Thus the differential has the sorting-sign transformation
-law and is zero on repeated tuples. Its value on the sorted tuple is exactly its
-ordered coordinate, yielding the asserted equality. For empty I there are no tuples;
-for degree zero the same argument is the two-term difference on pairs. -/
+coordinates. Stacks Tag 01FJ, with the explicit signed extension of Definition 01FI. -/
 theorem signedCechExtension_differential (p : ℕ)
     (s : ∀ t : {t : Fin (p + 1) → I // StrictMono t}, F.obj (op (S.W p t.1))) :
     S.differentialValue F p (signedCechExtension X U F S p s) =

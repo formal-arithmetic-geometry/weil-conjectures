@@ -413,12 +413,10 @@ private theorem evaluationTensorIso_fac (n : ℕ)
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Ordinary evaluation preserves tensor by the identity on local pure tensors.
-Source: Zheng 4.1; Stacks 03EK.
-Proof: restriction to a vertical slice commutes with sectionwise tensor and
-sheafification. Map each pure tensor to the identical tensor in that slice.
-The sheafification universal property gives a natural isomorphism. Local pure
-tensors generate, so the displayed section formula determines it uniquely. -/
+/-- Ordinary evaluation preserves tensor: there is a unique natural isomorphism from the
+evaluation of the ordinary tensor to the ordinary tensor of evaluations that is the identity
+on local pure tensors.
+Source: Zheng 4.1; Stacks 03EK. -/
 theorem ordinaryEvaluationTensor_existsUnique (n : ℕ) :
     ∃! δ : ∀ M N : Systems.{c, v, max c v r} J B τ,
       (evaluation.{c, v, max c v r} J B τ n).obj

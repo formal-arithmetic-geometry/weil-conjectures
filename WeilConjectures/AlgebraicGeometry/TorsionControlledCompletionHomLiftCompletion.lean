@@ -26,10 +26,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- At a separating depth the finite graph has monomorphic first projection.
-Proof: a map with zero first projection has second projection in ker(a'). The
-kernel equation for the graph kills its image in the separating quotient, so
-this second projection is zero as well. Pullback extensionality finishes.
-Source: Stacks Project, Tag 0889(1), comparison argument. -/
+Stacks Tag 0889(1). -/
 theorem torsionControlledGraphFst_mono
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     {H F F' : CoherentModules X} (a : F ⟶ H) (a' : F' ⟶ H)
@@ -106,12 +103,8 @@ noncomputable def torsionControlledCompletionHomLift
     (inv (torsionControlledGraphFst J a a' θ n) ≫ torsionControlledGraphSnd J a a' θ n)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Both equations hold for the lift constructed with the prescribed θ.
-Source: Stacks Project, Tag 0889(1), comparison morphisms.
-Proof: the pullback condition gives the equation with a'. The graph kernel
-condition gives the prescribed component of θ after cancelling the quotient
-projection. Functoriality gives the completed equation with a'; finite torsion
-detection then identifies all components with θ. -/
+/-- The lift constructed with the prescribed θ satisfies both equations: it is compatible with
+`a` and `a'`, and its completion is θ. Stacks Tag 0889(1). -/
 theorem torsionControlled_completion_hom_lift_constructed
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     {H F F' : CoherentModules X} (a : F ⟶ H) (a' : F' ⟶ H)

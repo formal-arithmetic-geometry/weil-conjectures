@@ -408,26 +408,7 @@ set_option synthInstance.maxSize 256 in
 /-- Local finite free models of the two relevant good truncations compute a fixed
 degree of the original K-flat tensor. The comparison needs neither Noetherianity nor
 local constancy hypotheses: the models are given.
-
-Source: Stacks Project, Cohomology on Sites, Tag 094H, truncation and finite-free
-computation; Tags 06YS, 06YQ, and Modules on Sites, Tag 0E8J.
-
-Proof: Replace the factors by bounded-above flat complexes with their cohomological
-upper bounds. K-flatness and the mapping-cone criterion show independence from the
-given representatives. Restriction is exact, commutes with sheaf tensor and coproducts,
-and preserves flatness, so it commutes with these derived tensor computations. For
-cutoffs a = i-bQ and c = i-bP, the discarded lower truncation has upper cohomological
-bound a-1, respectively c-1. Its tensor with the other factor has upper bound at most
-i-1. The truncation triangle therefore gives an isomorphism on degree-i cohomology.
-This also handles a cutoff larger than the upper bound: the corresponding object and
-the relevant tensor cohomology are zero. Use the two given derived isomorphisms.
-The constant realizations of E and F are termwise flat, since finite free modules
-realize as finite sums of the ring sheaf; they are K-flat by their upper term bounds.
-Their total tensor is the constant realization of the algebraic total tensor T:
-the tensor-basis comparison in each bidegree commutes with both differentials and the
-sign (-1)^p, and constant realization preserves coproducts. Taking cohomology on the slice
-gives the asserted isomorphism. The comparison makes no assertion
-about finite generation of the algebraic tensor or its cohomology. -/
+Source: Stacks Project, Tags 094H, 06YS, 06YQ and 0E8J. -/
 theorem site_tensor_local_model_comparison
     (J : GrothendieckTopology C) (B : Type u) [CommRing B]
     (P Q : CochainComplex (SheafOfModules.{u} (𝓡(J, B))) ℤ)

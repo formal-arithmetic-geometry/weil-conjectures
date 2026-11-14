@@ -36,20 +36,7 @@ def tensorPullbackOpenSection {X Y : Scheme.{w}} (a : Y ⟶ X) (M : X.Modules)
 
 /-- On an open immersion, tensor pullback transports all tensor sections, also
 when its two coefficients are identified with other modules.
-Source: Stacks Project, Tags 0096, 0097 and 01CD.
-
-Proof: The unit of the restriction adjunction on an open contained in the
-image is an isomorphism. Uniqueness of left adjoints identifies this unit
-with the specified tensor-pullback unit. Since the inverse image of U is
-the whole source, restricting its component to the top open is still an
-isomorphism. Restrict scalars along the structure morphisms; the equality
-of structure morphisms makes these section maps k-linear. Apply this to
-M tensor N and then the tensor-pullback comparison of Tag 01CD. Finally
-apply the tensor product of the supplied coefficient isomorphisms. The
-unit formula of the comparison sends a tensor section to the tensor of
-the two unit sections; restriction and the coefficient maps preserve
-this formula. This constructs eT and proves the equality for arbitrary
-sections of M and N, including zero modules and empty opens. -/
+Stacks Project, Tags 0096, 0097 and 01CD. -/
 theorem exists_scalarOpenTensorTransport
     {k : Type w} [Field k] {X Y : Scheme.{w}}
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

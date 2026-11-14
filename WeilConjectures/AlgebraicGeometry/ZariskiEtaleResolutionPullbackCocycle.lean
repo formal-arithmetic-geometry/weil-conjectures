@@ -40,28 +40,8 @@ private noncomputable def resolutionSectionEquiv
 /-- The characterized pullback-counit map sends a resolution cocycle to the
 section cocycle obtained by an augmented comparison.
 
-Source: Stacks Project, Cohomology, Tag 01FB; Derived Categories, Tags 013P
-and 015B (4); Cohomology on Sites, Section 01FT and Tag 0730.
+Stacks Project, Tags 01FB, 013P, 015B (4), 0730 and Section 01FT. -/
 
-Proof: Construct t from the adjunction-unit section using the inverse of the
-sheafification, free-abelian and Yoneda adjunction equivalences. In degree zero,
-unit naturality identifies pullback with precomposition by t after exact-functor
-transport of Ext. In positive degree, embed the coefficient sheaf into an
-injective and use the surjective connecting map from its cokernel. Induction
-and the assumed boundary compatibility identify this family with fstar; this
-is zariski_etale_pullback_eq_mapExt.
-Transpose each component of the supplied b through the inverse-image/direct-image
-adjunction to obtain e : LR → I. Adjunction naturality gives the chain-map
-equations, and hb gives the counit augmentation. Naturality of the unit and
-evaluation of t show that t followed by L(a) followed by e evaluates to the
-section prescribed by hsec. The free-representable section equivalence is
-injective, so this composite equals c. The theorem
-exactFunctor_resolution_cocycle computes exact-functor transport followed by
-the counit using e. Reassociate the Ext products and use
-InjectiveResolution.mk₀_comp_extMk to precompose the cocycle with t. Substitute
-the equality with c to finish. No injective preservation by inverse image,
-homology equivalence, or choice of an arbitrary existence witness is used.
-Degree zero and zero sheaves require no additional hypotheses. -/
 theorem zariski_etale_resolution_pullback_cocycle
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

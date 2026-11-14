@@ -20,23 +20,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme.Hom
 
-/-- The closed degree-at-most-r locus on an affine open has finitely many equations.
-Source: Stacks Project, More on Morphisms, Tag 07RZ, proof, second paragraph.
-
-Proof: identify W with Spec A and write its closed sublevel locus as V(I). On W,
-the lower bound r identifies the sublevel locus with the degree-r locus. Thus the
-universal degree criterion makes the pullback to Spec(A/I) finite locally free of
-rank r. The quotient A/I is the filtered colimit of A/J over finitely generated
-subideals J of I, so its spectrum is the inverse limit of those quotient spectra.
-The restriction of f to W is quasi-compact, separated, and locally of finite
-presentation, hence finitely presented. Descent of finite local freeness with
-specified rank gives a finitely generated J contained in I for which the
-pullback to Spec(A/J) has rank r. The degree criterion implies V(J) is contained
-in the degree-r locus V(I). Since J is contained in I, the reverse inclusion also
-holds. Choose a finite generating set t of J. At every point of W, membership
-in V(J) is equivalent to lying outside every basic open D(a), a in t. This is
-the asserted equivalence. Empty W and the zero ideal permit t empty; the unit
-ideal permits t containing 1, so no nonemptiness assumption is needed. -/
+/-- The closed degree-at-most-`r` locus on an affine open `W` has finitely many equations: there
+is a finite set `t` of sections over `W` such that a point of `W` has fibre degree at most `r`
+iff it lies in no basic open `D(a)`, `a ∈ t`. Stacks Tag 07RZ. -/
 theorem exists_finite_equations_degree_sublevel_inter_affine
     {X S : Scheme.{u}} (f : X ⟶ S) [Flat f]
     [LocallyOfFinitePresentation f] [IsSeparated f] (hf : f.IsQuasiFinite)

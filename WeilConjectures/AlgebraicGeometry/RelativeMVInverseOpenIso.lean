@@ -102,13 +102,7 @@ object map in a base-change square. Source: Stacks, Tags 01JR, 08HZ and 08HY. -/
     ((derivedPullback (pullback.fst g' W.ι)).obj K')
 
 /-- The explicit inverse-open comparison preserves the unit.
-Source: Stacks Project, Tag 08HZ, and adjunction uniqueness.
-
-Proof: Left-adjoint uniqueness sends the exact-open unit to the pullback unit.
-The composite adjunction unit is the j unit followed by Rj of the iso-pullback
-unit. Transport this adjunction along the pullback composition comparison and
-the projection equality. Right-adjoint uniqueness sends its unit to the p unit.
-Apply Rf' and its pinned direct-image composition comparison. -/
+Source: Stacks Project, Tag 08HZ. -/
 theorem relativeMVInverseOpenIso_unit {X X' S' : Scheme.{u}} (g' : X' ⟶ X)
     (f' : X' ⟶ S') (W : X.Opens) (K' : schemeDerivedCategory X') :
     (schemeDerivedDirectImage f').map
@@ -252,15 +246,7 @@ private theorem inverse_open_restriction_of_units
     ((relativeMVImageComp pU f).app _) ((relativeMVImageComp pW f).app _) hbase
 
 /-- The explicit inverse-open comparison intertwines nested restriction.
-Source: Stacks Project, Tags 08BV and 08HZ, restricted-counit construction.
-
-Proof: Each restriction, exact or pinned, composed with its U unit is its W unit,
-by naturality and the triangle identity. Both localization comparisons preserve
-units. Compose the desired equality with the exact U unit; the two sides then
-agree. Exact restriction to W sends that unit to an isomorphism, since restriction
-to W factors through U and open direct image is fully faithful. Transpose after
-composing with the inverse W comparison, and cancel the mapped U unit. Finally
-apply Rf' and cancel the inverse direct-image comparison on U. -/
+Source: Stacks Project, Tags 08BV and 08HZ. -/
 theorem relativeMVInverseOpenIso_restriction {X X' S' : Scheme.{u}} (g' : X' ⟶ X)
     (f' : X' ⟶ S') {W U : X.Opens} (i : W ≤ U) (K' : schemeDerivedCategory X') :
     (schemeDerivedDirectImage f').map

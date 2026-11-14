@@ -76,13 +76,9 @@ private theorem homComplex_isStrictlyGE
   · exact (homObj_isZero_of_target J R _ _
       (I.isZero_of_isStrictlyGE m (j.as + n) (by omega))).eq_of_tgt _ _
 
-/-- The local lower-bound component of the pseudo-coherent internal-Hom lemma.
-
-Source: Stacks Project, Tag 0A6H, clause (1).
-On an affine neighbourhood carrying a bounded-above finite-free model of the source,
-the affine Hom-complex estimate gives a lower bound; exact restriction transports it
-to the stated neighbourhood. This is split from quasi-coherence to isolate the
-cohomological estimate. -/
+/-- For `K` pseudo-coherent and `L` bounded below, every point has an open neighbourhood on
+which the cohomology sheaves of the derived internal Hom `RHom(K, L)` vanish below some degree.
+Stacks Tag 0A6H (1). -/
 theorem rhom_supported_quasiCoherent_pseudo_part_bound
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

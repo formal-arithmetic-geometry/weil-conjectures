@@ -39,16 +39,9 @@ private theorem counit_factorization
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Normalize the pinned derived counit at a homotopy representative.
-Source: Stacks Project, Tag 08HY, and `exists_schemeDerivedAdjunction`.
-
-Proof: Apply the compatibility of the pinned Hom equivalence to the underived
-homotopy counit. Its image under the underived adjunction is the identity.
-The image under localization is therefore the right-derived unit. Injectivity
-of the derived Hom equivalence identifies its inverse image, pullback of that
-unit followed by the derived counit, with the left-derived counit followed by
-the localized underived counit. This calculation applies to every homotopy
-complex; it uses neither invertibility of the unit nor K-injectivity. -/
+/-- Normalization of the pinned derived counit at a homotopy representative: derived
+pullback of the right-derived unit followed by the pinned counit equals the left-derived
+counit followed by the localized underived counit. Stacks Project, Tag 08HY. -/
 theorem singleComplexOpen_pinned_counit_unit
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

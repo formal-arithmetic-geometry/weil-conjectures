@@ -18,7 +18,14 @@ import Mathlib.CategoryTheory.Adjunction.Whiskering
 
 /-! # Cohomology of a Zariski module and its underlying abelian sheaf
 
-Source: Stacks Project, `sites-cohomology.tex`, Lemma Tag 03FD.
+## Implementation details
+
+Enough injectives for abelian sheaves is supplied by the Grothendieck structure of sheaves on
+the small Zariski site, rather than assumed.
+
+## References
+
+Stacks Project, Cohomology on Sites, Lemma Tag 03FD.
 -/
 
 @[expose] public section
@@ -87,20 +94,11 @@ private noncomputable def zeroIso {C : Type u} [Category.{u} C]
 /-- For a scheme and an `𝒪_X`-module, module cohomology agrees canonically and naturally
 with cohomology of the underlying abelian sheaf on the small Zariski site.
 
-Source: Stacks Project, `sites-cohomology.tex`, Lemma Tag 03FD.
+In degree zero the comparison is the identity on global sections: a section sent through
+`Γ → R⁰Γ` and `e 0`, then evaluated (via `Ext⁰` from the sheafified free abelian
+representable) at the identity of the top open, is the original section.
+Stacks Project, Lemma Tag 03FD. -/
 
-Proof: apply `lem-sc-module-abelian-zariski-cohomology` to obtain the comparison in every
-positive degree. In degree zero, both right derived functors are global sections by
-`pqf-def-cohomology` and `lemma-uniform-bounds-pro-etale-affines`; choose the identity on sections.
-The comparison is natural in the module by the naturality in the cited comparison and by
-functoriality of global sections in degree zero.
-
-The last equality spells out the degree-zero identity: send a section through the
-canonical map `Γ → R⁰Γ`, then through `e 0`; identify `Ext⁰` with morphisms from the
-sheafified free abelian representable, precompose with the sheafification unit, and
-evaluate at the generator given by the identity of the top open. The resulting section
-must be the original section. Enough injectives for abelian sheaves is supplied by the
-Grothendieck structure of sheaves on the small Zariski site, rather than assumed. -/
 theorem zariskiModuleAbelianCohomologyAgree (X : Scheme.{u}) :
     ∃ e : ∀ q : ℕ,
       (RingedSpace.moduleCohomology X.toRingedSpace q ⋙

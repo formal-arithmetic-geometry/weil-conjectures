@@ -21,8 +21,15 @@ import Mathlib.RingTheory.Etale.StandardEtale
 /-!
 # Spreading a finite separable extension
 
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
-`lem-weil-pbc-finite-pushforward-generic-constructible`.
+A finite separable extension `L` of the fraction field of a Noetherian domain `A` spreads to a
+finite étale surjective extension `S → B` of a principal localization `S = A[c⁻¹]`, with
+fraction field `L`.
+
+## Implementation details
+
+Both `S` and `B` are represented as subalgebras of `L`, with their induced algebra structures;
+`IsLocalization.Away c S` identifies `S` with `A[c⁻¹]`. That `B` is a domain is automatic
+(`B` is a subring of the field `L`), so it is not a separate conjunct.
 -/
 
 @[expose] public section
@@ -139,24 +146,7 @@ private theorem fractionRing_adjoin_of_primitive
 
 /-- A finite separable extension of the fraction field of a Noetherian domain spreads to
  a finite etale domain over a principal localization, with the given extension as fraction
- field. Both rings are represented inside the extension field, with their induced algebra
- structures; `IsLocalization.Away c S` identifies `S` with `A[c⁻¹]`. That `B` is a domain
- is automatic (`B` is a subring of the field `L`), so it is not a separate conjunct.
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
-`lem-weil-pbc-finite-pushforward-generic-constructible`.
-
-Proof:
-1. Choose a primitive element alpha by `lem-weil-pbc-finite-separable-primitive-element`.
-Its monic minimal polynomial f is irreducible and separable, and
-`lem-weil-pbc-minimal-polynomial-quotient-field-iso` identifies K[T]/(f) with K'.
-2. Clear the coefficients' denominators and invert the nonzero discriminant, giving a
-nonzero c and S = A[c⁻¹]. Then f is monic over S and f' is a unit modulo f. The algebra
-B = S[T]/(f) is finite free, embeds in K' via T mapping to alpha, and has fraction field K'.
-3. Since f' is invertible modulo f, `lem-weil-pbc-standard-etale-monic-derivative` makes
-B etale over S. Its finite free presentation gives finiteness. The inclusion S into B is
-injective and integral; `pqf-lem-lying-over` gives surjectivity on spectra.
--/
+ field, and `Spec B → Spec S` finite, étale and surjective. -/
 theorem exists_spread_finite_separable_extension
     (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A]
     (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K]

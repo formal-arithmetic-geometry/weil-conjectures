@@ -14,15 +14,11 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
 
-/-- Naturality of the class of a section cycle under a chain map.
+/-- Naturality of the class of a section cycle under a chain map: if `f` sends the cycle `x` to
+`y`, then the homology map of `f` sends the class of `x` to the class of `y`.
 
-Source: Stacks Project, Section 01FT, equation-cohomology-object-site;
-Tag 06XR (1), lemma-compute-ext-resolutions.
+Stacks Project, Section 01FT; Tag 06XR (1). -/
 
-Proof: Injectivity of the inclusion of cycles and its naturality show that the
-cycles map takes the cycle of x to the cycle of y. Naturality of the homology
-projection then identifies their homology classes. This works for every chain
-map of abelian-group cochain complexes, with no site or resolution hypotheses. -/
 theorem zariski_etale_resolution_cocycle_compatibility
     {K L : CochainComplex AddCommGrpCat.{u + 1} ℕ} (f : K ⟶ L)
     (q : ℕ) (x : K.X q) (hx : (K.d q (q + 1)).hom x = 0)

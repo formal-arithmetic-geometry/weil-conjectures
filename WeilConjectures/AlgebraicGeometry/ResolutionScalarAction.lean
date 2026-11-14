@@ -28,13 +28,8 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
 
-/-- Derived global sections send multiplication to scalar multiplication.
-Source: Stacks Project, Tags 01E4 and 01E5.
-
-Proof: Multiplication by the global section termwise on an injective resolution lifts
-multiplication on the resolved module, by naturality of multiplication. After global
-sections this is scalar multiplication on the complex. Homology preserves this scalar
-endomorphism, and naturality of the linear resolution comparison gives the result. -/
+/-- Derived global sections send multiplication by a global section `a` to scalar
+multiplication by `a`. Stacks Project, Tags 01E4 and 01E5. -/
 theorem moduleCohomology_map_smulHom {X : Scheme.{u}} (M : X.Modules)
     (I : InjectiveResolution M) (p : ℕ) (a : Γ(X, ⊤))
     (x : (RingedSpace.moduleCohomology X.toRingedSpace p).obj M) :

@@ -167,29 +167,7 @@ private theorem presentation_on_affine {X : Scheme.{u}} (H : X.Modules)
   exact hp
 
 /-- The tensor product of quasi-coherent modules is quasi-coherent, and its canonical
-section map on every affine open is bijective. Source: Stacks Project, Schemes, Lemma 01I8(1)
-and Section 01LA(1),(2),(8); Modules, Lemma 01CE(3).
-
-Proof:
-1. Fix an affine open `U`, put `R = Γ(X, U)`, and use its canonical affine chart.
-   Restriction preserves quasi-coherence. The affine tilde/global-sections equivalence
-   identifies the restrictions of `F` and `G` with the tilde sheaves of their sections.
-2. The sectionwise tensor presheaf restricts to the tensor presheaf on `U`. For the open
-   immersion `j : U ⟶ X`, its tensor presheaf `P`, and any module sheaf `H` on `U`, identify
-   Hom((Pᵟ)|U, H) with Hom(Pᵟ, j_*H), then Hom(P, j_*H), then Hom(P|U, H).
-   Here `Pᵟ` denotes sheafification. The outer identifications use the restriction/direct-
-   image adjunction; the middle
-   uses sheafification. Direct image is a sheaf.
-   Thus
-   restriction commutes with sheafification and with the sheaf tensor product.
-   Apply `lem-weil-pbc-affine-tilde-tensor` to identify this
-   restriction with the tilde sheaf of `Γ(F, U) ⊗[R] Γ(G, U)`. Track pure tensors through
-   the comparison: the original sheafification component sends `s ⊗ t` to
-   `tmulSection s t` (`tensorSectionsMap_tmul`), so its map on sections is exactly
-   `tensorSectionsMap F G U` and is bijective.
-3. Every point has an affine open neighbourhood. Step 2 identifies the
-   tensor product there with a tilde module. The affine-local criterion
-   gives quasi-coherence; Step 2 already gives the second clause for every affine open.
+section map on every affine open is bijective. Stacks Tags 01I8 (1), 01LA and 01CE (3).
 -/
 theorem quasiCoherent_tensor_product_affine_sections {X : Scheme.{u}} (F G : X.Modules)
     [F.IsQuasicoherent] [G.IsQuasicoherent] :

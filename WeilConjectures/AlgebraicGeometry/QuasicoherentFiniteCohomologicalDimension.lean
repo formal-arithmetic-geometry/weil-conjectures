@@ -61,7 +61,8 @@ private noncomputable def openCechProductsIso (X : Scheme.{u}) {I : Type u}
     simp only [SiteCechComplex.complex, CochainComplex.of_d]
     rfl)
 
-/-- Stacks 01XI, second proof: increasing tuples disappear above the cover size. -/
+/-- The Čech cohomology of a finite open cover by `n` opens, indexed by a linearly ordered type,
+vanishes in degrees `p ≥ n`. -/
 private theorem finiteCech_isZero (X : Scheme.{u}) {I : Type u}
     [Fintype I] [LinearOrder I] (U : I → X.Opens) (hU : iSup U = ⊤)
     (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{u}) (p : ℕ) (hp : Fintype.card I ≤ p) :
@@ -84,20 +85,7 @@ private theorem finiteCech_isZero (X : Scheme.{u}) {I : Type u}
 
 /-- A quasi-compact scheme over a field with affine diagonal has a uniform nonnegative
 bound on the cohomology of all quasi-coherent modules.
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.4.2, Tag 01XI.
-
-Proof: By quasi-compactness choose a finite affine open cover with `N` members.
-The affine diagonal makes pairwise intersections affine,
-hence all finite intersections affine
-by induction. The alternating Cech complex computes Cech cohomology.
-Its degree `p` term is indexed by strictly increasing
-`(p + 1)`-tuples of cover indices, so it is zero when `p ≥ N`. Cech comparison
-identifies this cohomology with `H^p(X,F)` for every
-quasi-coherent module `F`. The additive comparison
-identifies this ordinary cohomology
-with module right-derived global sections. Take `d = N`; the implication `d < p`
-then gives `N ≤ p`, including the empty cover. The cover, and therefore the bound,
-is independent of `F`. -/
+Stacks Tag 01XI. -/
 theorem exists_quasicoherent_cohomology_bound (k : Type u) [Field k]
     (X : Scheme.{u}) [X.Over (Spec (.of k))] [CompactSpace X]
     [IsAffineHom (pullback.diagonal (X ↘ Spec (.of k)))] :

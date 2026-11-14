@@ -81,13 +81,7 @@ private theorem exists_cover_mem_span_generatingList
 
 /-- Two finite lists generating one ideal sheaf generate equal section ideals locally
 on every common test span. The cover lies on the original site, without fibre products.
-Source: Stacks Project, Tag 099E, independence of generating ideals.
-
-Proof: choose the generating sections witnessing both lists. On a test span, lift the
-finitely many sections of either family through the other family's free epimorphism.
-Intersect the two resulting covering sieves. Naturality identifies their images with
-the restrictions of the specified lists, so each ideal's generators belong to the other
-ideal. This includes the empty lists because finite simultaneous lifting includes them. -/
+Stacks Project, Tag 099E. -/
 theorem exists_cover_generatingLists_ideal_eq
     (U : C) (r : ℕ) (f : Fin r → O.obj.obj (op U))
     (hf : IsRingedIdealGeneratingList O I ι U r f)

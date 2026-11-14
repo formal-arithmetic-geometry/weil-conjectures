@@ -109,22 +109,7 @@ private noncomputable def sourceNormalization
 /-- The ordinary module inverse image commutes with normalization of the source
 coefficient ring. The target coefficient identification is produced by the algebraic
 inverse-image data and the specified invertible scalar map.
-
-Source: Stacks Project, sites-modules.tex, lemmas `lemma-pullback-module` and
-`lemma-adjoint-push-pull-modules` (Tags 03D2 and 03D3).
-
-Proof: let phi0 be the transported original ring adjunction unit and precompose it
-with eX inverse. Its transpose under the set-sheaf adjunction is invertible: the
-unit-normalized ring presentation and uniqueness of left adjoints exhibit it as
-a composite of isomorphisms. The graph equations of F.algebra lift this transpose
-to an invertible ring map d. Restrict the underlying Hom adjunction to linear
-maps and compose with the tensor/restriction adjunction. This identifies pull F d
-with the specified continuous module pullback. Put eS=d inverse followed by c.
-Scalar extension along c is extension along d followed by restriction along eS
-inverse, since their right adjoints agree. Cancel eX in the source coefficient
-map by the same adjunction argument. Finally remove extension along the identity
-and cancel the module site equivalence in the original specified pullback.
-Everything is ordinary and works for zero rings and empty schemes. -/
+Stacks Project, Tags 03D2 and 03D3. -/
 theorem sfbOrdinaryImmersionNormalization
     {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     (F : ConstantCompletion.InverseImageData (SfbAdicRestriction.inverse i))

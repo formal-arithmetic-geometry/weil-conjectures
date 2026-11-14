@@ -30,26 +30,7 @@ set_option maxHeartbeats 800000 in
 -- The section calculation crosses the scheme-module and ringed-space section interfaces.
 /-- Restriction between arbitrary opens on the homology of a fixed resolution's
 section complexes, before the map to a cohomology sheaf.
-Source: Stacks Project, Equation 20.7.1.1 (Tag 01E2), Remark 20.14.2 (Tag 01FB).
-
-Proof: Put j = homOfLE e. Restrict R.comparison along j, compose with the
-canonical restriction-composition isomorphism, and then R'.comparison inverse.
-This gives a map t from j^*R.resolution to R'.resolution. Let beta be the
-restriction unit on R.resolution followed by j_*(t). Naturality of the unit,
-the restriction-composition isomorphism, and the two augmentation equations
-show that beta lifts the coefficient map displayed below.
-Construct the canonical global-section comparison a: its inverse components
-restrict along j inverse image of top = top. Apply the existing augmented-lift
-formula to compute moduleCohomologyFMap from beta and a.
-Degreewise, use the pinned components of R.sections and R'.sections. Move the
-inverse target comparison past restriction by presheaf naturality and cancel it
-with its comparison. Move the source comparison past the unit by naturality.
-The restriction-unit and restriction-composition component formulas identify
-all remaining maps with maps of I's presheaf of sections. Presheaf functoriality
-then gives R.sections followed by restriction of I's sections from U to L.
-Apply homology to this chain-map equality and cancel the target resolution
-isomorphism to obtain the asserted identity. Empty or equal opens, zero
-coefficients, and degree zero use the same equations; no restriction is inverted. -/
+Stacks Project, Equation 20.7.1.1 (Tag 01E2), Remark 20.14.2 (Tag 01FB). -/
 theorem restrictedResolution_open_cohomology {Z : Scheme.{u}} {F : Z.Modules}
     (I : InjectiveResolution F) (U L : Z.Opens) (e : L ≤ U)
     (R : RestrictedResolutionSections I U) (R' : RestrictedResolutionSections I L)

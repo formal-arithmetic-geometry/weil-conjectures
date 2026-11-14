@@ -30,20 +30,8 @@ open scoped TensorProduct Pointwise
 namespace Algebra.TensorProduct
 
 /-- Primes of a scalar extension with equal contractions differ by an automorphism
-of the extension field.
-
-Source: Mathlib, `Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite`;
-Stacks Tag 038B, computation of invariant coefficients.
-
-Proof: give the Galois group its Krull topology and act on the right tensor factor.
-Each tensor is a finite sum of pure tensors. The intersection of the open stabilizers
-of their right coefficients fixes this sum, so the discrete tensor ring has a continuous
-Galois action. The fixed field is k by InfiniteGalois.mem_range_algebraMap_iff_fixed.
-TensorProduct.injective_and_range_eq_invariants then identifies the fixed tensors with
-those of the form a tensor 1. This supplies Algebra.IsInvariant A (A tensor K) G.
-Apply profinite prime transitivity to the equal contractions. Ideal scalar multiplication
-is comap by the inverse automorphism; replace the resulting automorphism by its inverse
-and use PrimeSpectrum.ext to obtain the claimed equality. -/
+of the extension field. See Mathlib's `Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite`
+and Stacks Tag 038B. -/
 theorem exists_comap_eq_of_galois
     (k K : Type u) [Field k] [Field K] [Algebra k K] [IsGalois k K]
     (A : Type u) [CommRing A] [Algebra k A]

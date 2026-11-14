@@ -30,22 +30,6 @@ namespace AlgebraicGeometry
 
 /-- Separatedness and local quasi-finiteness are preserved by base change.
 Source: Stacks Project, Tags 01KU and 01TM.
-
-Proof:
-1. The diagonal of the second projection is the base change of the diagonal of `f`.
-   Closed immersions are stable under base change, giving the first implication.
-2. Local quasi-finiteness implies local finite type,
-   which survives base change.
-3. For any point upstairs, quasi-finiteness at its image gives an isolated point of
-   the fibre. This isolation survives
-   base change.
-4. Choose affine neighbourhoods of the point and its image with the first mapping
-   into the second.
-5. The isolated-fibre-point affine-pair criterion
-   gives a finite-type
-   ring map quasi-finite at the corresponding prime. This is quasi-finiteness at
-   the point. Since the point was arbitrary, the projection
-   is locally quasi-finite.
 -/
 theorem separated_lqf_base_change {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S) :
     (IsSeparated f → IsSeparated (pullback.snd f g)) ∧

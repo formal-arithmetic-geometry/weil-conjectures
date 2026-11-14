@@ -46,24 +46,10 @@ attribute [local irreducible] singleComplexOpenPullbackIso CategoryTheory.Functo
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 set_option linter.unusedVariables false in
-/-- A separate step of the open counit factorization.
-Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-
-Proof: Put P = F_h(I), beta = F.rightDerivedFunctorUnit(I), and let v be
- the homotopy tensor adjunction counit at I. Apply the pinned derived Hom-equivalence
- compatibility to the homotopy morphism v. The homotopy adjunction sends v to the
- identity of P, so its localized image followed by beta is beta itself. Injectivity
- of the derived Hom equivalence, whose inverse sends beta to Lf(beta) followed by
- the derived counit, gives
- Lf(beta) followed by a_f.counit = epsilon_f(P) followed by Qh(v).
- Let S be the composite natural isomorphism formed by the five displayed factors.
- Its naturality at beta moves Lf0(rY(beta)) from before S to rX(Lf(beta)) after S.
- First distribute Lf0 over the composite with the inverse source factorization.
- Then substitute this naturality equation, combine the two successive rX images,
- apply the normalized counit identity, and distribute rX over its two factors.
- Associativity gives exactly the displayed intermediate composite. This uses no
- tensor comparison cancellation, no boundedness, and no inverse of beta; hence it
- also applies to empty opens and the zero complex. -/
+/-- One step of the open counit factorization: the open pullback square evaluated on the
+right-derived unit and followed by the restricted pinned counit equals the same square on
+the direct-image representative followed by the restricted left-derived counit and the
+localized homotopy tensor counit. Stacks Project, Tags 08FE, 08HY and 0D5S. -/
 theorem singleComplexOpen_unit_square_factorization
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

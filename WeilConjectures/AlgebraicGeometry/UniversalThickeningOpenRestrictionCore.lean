@@ -15,12 +15,10 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- The open restriction data for a universal first order thickening exists.
-Source: Stacks Project, More on Morphisms, Lemma 04FA and the general remarks in
-Lemma 04F3.
-The proof restricts the closed immersion to the open determined by the image of
-`V`, factors the structure maps through `U`, and applies the universal lifting
-property; these constructions give the displayed equalities and universality. -/
+/-- The open restriction data for a universal first order thickening exists: for opens
+`V ≤ h ⁻¹ᵁ U`, there is an open `V'` of `Z'` with `i ⁻¹ᵁ V' = V` such that the restricted
+thickening `V ⟶ V'` is universal over `U`.
+Source: Stacks Project, More on Morphisms, Lemma 04FA and Lemma 04F3. -/
 theorem universalFirstOrderThickening_open_restriction_core
     {Z X Z' : Scheme.{u}} (h : Z ⟶ X) (i : Z ⟶ Z') (h' : Z' ⟶ X)
     (H : IsUniversalFirstOrderThickening h i h')

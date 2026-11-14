@@ -19,17 +19,7 @@ universe u
 open CategoryTheory TensorProduct
 namespace AlgebraicGeometry
 /-- Natural stalk comparison after restricting the target to an open.
-Source: Stacks Project, Tags 008H, 0098 and 008B.
-
-Proof: The restriction and tensor-pullback adjunctions identify restriction to V
-with tensor pullback along V.ι. The natural composition isomorphism identifies
-tensorPullback i followed by this restriction with tensorPullback (V.ι ≫ i).
-Whisker this comparison by the module stalk functor at z, and compose with
-exists_tensorPullback_stalk_iso for V.ι ≫ i. Rewrite the composite stalk map
-with Scheme.Hom.stalkMap_comp. Its component linear equivalences give β, and
-evaluating its naturality equation on x gives the asserted baseChange equality.
-No affine or flatness hypothesis is used. Zero modules and empty V cause no
-exception (there is no point z when V is empty). -/
+Stacks Project, Tags 008H, 0098 and 008B. -/
 theorem exists_restricted_tensorPullback_stalk
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) (V : Z.Opens) (z : V.toScheme) :
     let S := (Y.presheaf.stalk (i z.1) : Type u)

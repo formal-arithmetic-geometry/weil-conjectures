@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.SectionPullNormalizationTransport
 
 /-! # Scalar extension and geometric exchange
 
-proof.md, (2),
-coefficient devissage; Stacks Project, sites-cohomology.tex, Tags 07A7 and 0E47.
+Stacks Project, sites-cohomology.tex, Tags 07A7 and 0E47.
 
 All functors are the existing ordinary unbounded internal-module derived functors.
 The balancing maps are specified by their universal computation-counit normalization.
@@ -100,7 +99,7 @@ def scalarAmbientExchange (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}
 
 /-- The first route of the normalized rectangle: scalar/direct-image mate, exchange
 at the new coefficients, then the top-edge balancing map under direct image.
-Source: Stacks 07A7 and 0E47; blueprint coefficient devissage, (2). -/
+Stacks 07A7 and 0E47. -/
 def scalarExchangeLeft (φ : Λ ⟶ Λ') [IsMonHom φ]
     {X' X C Y : Scheme.{u}} {a : X' ⟶ X} {c : C ⟶ Y}
     {f : X ⟶ Y} {f' : X' ⟶ C} (sq : ChosenCartesianSquare a f' f c)
@@ -114,7 +113,7 @@ def scalarExchangeLeft (φ : Λ ⟶ Λ') [IsMonHom φ]
 
 /-- The second route: balancing along the bottom edge, scalar extension of exchange,
 then the left-edge scalar/direct-image mate.
-Source: Stacks 07A7 and 0E47; blueprint coefficient devissage, (2). -/
+Stacks 07A7 and 0E47. -/
 def scalarExchangeRight (φ : Λ ⟶ Λ') [IsMonHom φ]
     {X' X C Y : Scheme.{u}} {a : X' ⟶ X} {c : C ⟶ Y}
     {f : X ⟶ Y} {f' : X' ⟶ C} (sq : ChosenCartesianSquare a f' f c)

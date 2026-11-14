@@ -18,20 +18,9 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open CategoryTheory.Functor.sheafPullbackConstruction
 /-- Abelian pullback along an open-restriction lift preserves finite limits.
 
-Source: Stacks Project, Sites, Tags 00X5 and 00X6; Etale Cohomology, Tag 09AX;
-Modules on Sites, Tag 03DJ.
+Stacks Project, Sites, Tags 00X5 and 00X6; Etale Cohomology, Tag 09AX;
+Modules on Sites, Tag 03DJ. -/
 
-Proof: the usual inclusion j preserves finite limits. Both i and j become
-X.restrictFunctor after applying Scheme.Etale.forget X, whose codomain is Over X,
-not Scheme. This forgetful functor is fully faithful, so cancel it from the
-natural isomorphism induced by the two equalities to obtain i ≅ j. Transfer
-finite-limit preservation to i. Since the opens have finite limits, i is
-representably flat. The universe-general left-Kan-extension theorem then gives
-finite-limit preservation for i.op.lan with abelian coefficients: its pointwise
-values are filtered colimits, which are exact in AddCommGrpCat. Finally the
-constructed sheaf pullback is the composite of the sheaf inclusion, this Kan
-extension, and sheafification, each preserving finite limits. No localized-site
-factorization or extension by zero is required. -/
 theorem zariski_etale_pushed_resolution_finite_limits
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

@@ -34,16 +34,8 @@ private theorem generatesAt_iso {X : Scheme.{v}} {A B : X.Modules} (q : A ≅ B)
 
 
 /-- If the pullback of a section, transported by a module isomorphism, generates at y,
-the original section generates at its image.
-
-Source: Stacks Project, Modules, Tag 01CY (local coefficient criterion).
-
-Proof: Trivialize M near j(y), writing σ = a e. Pullback sends this expression to
-j^♯(a) times the pulled-back basis, and a module isomorphism preserves free generators.
-Generation of the transported section implies that j^♯(a) is a unit in the local ring
-at y. The stalk map is local, so a is a unit at j(y). On the basic open of a the
-original section is a free generator. This works for any scheme morphism, without
-properness, flatness or a fibre hypothesis. -/
+the original section generates at its image. This holds for any scheme morphism `j`.
+Stacks Tag 01CY. -/
 theorem tensorPullback_generatesAt_reflects {Y Z : Scheme.{v}} (j : Y ⟶ Z)
     (M : Z.Modules) [M.IsInvertible] (N : Y.Modules)
     (e : (tensorPullback j).obj M ≅ N) (σ : Γ(M, ⊤)) (τ : Γ(N, ⊤))

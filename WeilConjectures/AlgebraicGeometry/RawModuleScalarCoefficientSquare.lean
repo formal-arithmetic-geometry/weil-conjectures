@@ -99,7 +99,9 @@ private theorem coefficient_unshifted
             (Over.w f).symm).inv.app _) := by
   exact rawModuleScalar_coefficient_unshifted Λ G A B f
 
-/-- (blueprint: lem-sbc-raw-scalar-coefficient-square) -/
+/-- The coefficient square of the derived scalar pullback: the derived upper-star comparison
+followed by the forgotten module coefficient factor and `scalarCoefficientFactor` at `A` equals
+the pulled-back `scalarCoefficientFactor` at `B` followed by the abelian coefficient factor. -/
 theorem rawModuleScalar_coefficient_square
     (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)

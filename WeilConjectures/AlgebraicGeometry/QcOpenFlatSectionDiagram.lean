@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.TensorProduct.Maps
 /-!
 # Compatible flat base change on finite intersections of compact opens
 
-Source: Stacks Project, Tag 0APJ, proof of `lemma-affine-base-change`, and Tag 02KH.
+Source: Stacks Project, Tag 0APJ and Tag 02KH.
 -/
 
 @[expose] public section
@@ -85,7 +85,7 @@ def qcOpenSectionTensorRestriction {R T : CommRingCat.{u}} (r : R ⟶ T)
         simp [m] }
 
 /-- The finite-intersection refinement, indexed by nonempty finite subsets.
-Source: Stacks, Tag 0APJ, first sentence of the proof. -/
+Source: Stacks, Tag 0APJ. -/
 def qcFiniteIntersection {Y : Scheme.{u}} {I : Type v} (U : I → Y.Opens)
     (F : {F : Finset I // F.Nonempty}) : Y.Opens :=
   ⨅ i : F.val, U i.val
@@ -157,38 +157,11 @@ private theorem qcOpen_component {R T : CommRingCat.{u}} (r : R ⟶ T)
   rw [← ht, map_mul, hl, hr]
   rfl
 
-/-- The finite-intersection diagrams have canonical, compatible flat tensor isomorphisms.
-The isomorphisms are specified on every pure tensor, uniquely determining their forward
-maps. The last equality is the square on all tensor elements, expressed as equality of
-T-algebra morphisms. Thus the component inverses also give a diagram isomorphism.
-
-Source: Stacks Project, Tag 0APJ, proof of `lemma-affine-base-change`; Tag 02KH, degree zero.
-
-Proof:
-1. A singleton gives a nonempty finite subset; union gives a common upper bound.
-   Restrictions run from F to G when F is contained in G, by presheaf functoriality.
-2. The quasi-separated affine-cover criterion
-   (lem-weil-pbc-quasi-separated-affine-cover-criterion, Tag 01KO) makes intersections
-   of affine opens compact. Finite affine covers then make intersections of compact
-   opens compact. Induction proves this for every nonempty finite intersection.
-   The same affine-cover criterion proves all open subschemes quasi-separated.
-3. A map between spectra is affine.
-   Base change preserves affineness, so the
-   projection is quasi-compact and quasi-separated. The qcqs permanence theorem
-   gives quasi-separatedness of the pullback
-   and compactness of every inverse-image open. Open immersions are stable under
-   base change. The fibre-product universal
-   property identifies that inverse-image open with V_F times Spec T over Spec R,
-   respecting both projections; it is quasi-separated as an open of the pullback.
-4. Apply flat qcqs base change for global sections
-   (lem-weil-pbc-flat-base-change-global-sections-qcqs, Tag 02KH) on each V_F.
-   Identify sections of the two spectra with R and T. Tensor-pushout universality
-   identifies the comparison
-   with a tensor t mapped to g-sharp(a) times t. It respects T, as does its inverse.
-5. Naturality of the scheme comorphism and of scalar restriction makes the displayed
-   square commute on pure tensors. Tensor-pushout uniqueness gives equality of the
-   algebra maps. Restriction identity and composition give the diagrams; composing
-   the squares with the component inverses gives the inverse natural transformation. -/
+/-- For a flat `Spec T ⟶ Spec R` and compact opens `U i` of a quasi-separated `Y` over
+`Spec R`, the nonempty finite intersections `V_F` are compact and quasi-separated, as are their
+inverse images in `Y ×_{Spec R} Spec T`. Moreover `Γ(V_F) ⊗_R T` is isomorphic as a `T`-algebra
+to the sections over the inverse image of `V_F`, by isomorphisms given explicitly on pure
+tensors and compatible with restriction. Source: Stacks Project, Tags 0APJ and 02KH. -/
 theorem qc_open_flat_section_diagram {R T : CommRingCat.{u}} (r : R ⟶ T)
     [Flat (Spec.map r)] {Y : Scheme.{u}} (f : Y ⟶ Spec R) [QuasiSeparatedSpace Y]
     {I : Type v} [Nonempty I] (U : I → Y.Opens)

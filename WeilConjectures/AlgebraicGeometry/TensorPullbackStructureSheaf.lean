@@ -37,13 +37,7 @@ def tensorPullbackObjUnitToUnit {X Y : Scheme.{u}} (g : X ⟶ Y) :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The adjoint structure-sheaf map is an isomorphism, and its composite with the unit
-is the original structure-sheaf map. Source: Stacks Project, Modules, Tags 0096 and 01CA.
-Proof: under the chosen adjunction, the defined morphism corresponds to the
-structure-sheaf map. For every module `M`, precomposition with this morphism
-corresponds, via the adjunction and evaluation at the unit section, to pushforward
-of global sections. This map is bijective because inverse image on opens is final.
-The coyoneda criterion therefore makes the morphism an isomorphism. The adjunction
-unit formula gives the asserted characterization. -/
+is the original structure-sheaf map. Stacks Tags 0096 and 01CA. -/
 theorem tensorPullbackObjUnitToUnit_isIso {X Y : Scheme.{u}} (g : X ⟶ Y) :
     IsIso (tensorPullbackObjUnitToUnit g) ∧
       (Classical.choose (exists_tensorPullbackAdjunction g)).unit.app

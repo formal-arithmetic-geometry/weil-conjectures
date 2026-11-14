@@ -16,18 +16,12 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- Geometric data for a zero-dimensional base change, independently of any sheaf.
-Source: Stacks Project, Tags 00KH, 00FV and 01JT; the point description in
-lem-weil-pbc-zero-dimensional-base-change-points.
+/-- Geometric data for a zero-dimensional base change: if `C` is a curve over an algebraically
+closed field `k` of dimension at most zero and `C'` is its base change to an algebraically
+closed field `k'`, then `C'` is a curve of dimension at most zero, the projection `C' → C` is a
+bijection on points, and every point of `C'` is the image of a `k'`-point.
+Stacks Project, Tags 00KH, 00FV and 01JT. -/
 
-Proof: Nullstellensatz identifies every residue field of C with k. The local
-Artinian pieces remain local Artinian after extending to k', with residue field k'.
-Thus projection induces a bijection on points, and C' has dimension at most zero.
-Finite type and separatedness are stable under base change, giving IsCurve f'.
-At each point of C', the canonical residue-field morphism Spec k' → C' gives the
-chosen geometric point. For the empty scheme the equivalence and family are empty.
-An arbitrary cartesian square is isomorphic to the canonical fibre product, so
-transport these constructions across that isomorphism. -/
 theorem zeroDimensional_baseChange_geometric_points {k k' : Type u}
     [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsCurve f] (hC : topologicalKrullDim C ≤ 0)

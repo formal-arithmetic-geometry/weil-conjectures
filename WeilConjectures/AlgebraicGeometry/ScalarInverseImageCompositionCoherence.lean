@@ -22,7 +22,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
 /-- Composition of inverse images, normalized by their adjunction units.
-Source: Stacks Project, Tag 008I, lemma-pullback-composition. -/
+Stacks Project, Tag 008I. -/
 def scalarInverseImageCompIso (k : Type w) [Field k]
     {A B C : Scheme.{w}} (a : A ⟶ B) (b : B ⟶ C) :
     scalarInverseImage (k := k) (a ≫ b) ≅
@@ -205,20 +205,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- The two coherence computations unfold several composed sheaf adjunctions.
 /-- The normalized inverse-image comparison respects constant units and module coefficients.
-Source: Stacks Project, Tags 008I and 0097, composition of pullback adjunctions.
-
-Proof: The comparison of left adjoints identifies the composite adjunction unit with the
-successive units. For the first equality, use the constant-sheaf adjunction: each side
-is adjoint to the map sending a constant scalar to the same scalar section. Naturality
-of the constant-sheaf comparison and the unit identity therefore identify them.
-For the second equality, apply the inverse-image hom equivalence and evaluate on every
-open set and every section of F. The characterization of scalarPullbackCoefficient
-replaces each adjoint by the tensor-pullback unit. The defining left-adjoint uniqueness
-identity for scalarPullbackCompIso identifies the successive tensor units with the
-composite tensor unit. The inverse-image comparison has the identical unit identity.
-Thus both adjoints have equal components, and sheaf morphism extensionality and the
-injectivity of the hom equivalence give the second equality. These arguments apply to
-zero coefficients, empty schemes and identity arrows without cancellation of sections.
+Stacks Project, Tags 008I and 0097.
 -/
 theorem scalarInverseImageCompIso_coherence
     (k : Type w) [Field k] (A B C : Scheme.{w})

@@ -19,8 +19,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalTensorC
 
 /-! # Derived tensor normalization under the section equivalence
 
-Source: Stacks Project, Cohomology on Sites, Tag 07A4,
-`lemma-pullback-tensor-product`; Tags 06YU and 0G7E; Modules on Sites, Tag 03EL.
+Source: Stacks Project, Cohomology on Sites, Tags 07A4, 06YU and 0G7E;
+Modules on Sites, Tag 03EL.
 
 The statement compares the specified localization, tensor, unit and pullback maps.
 Its helper definitions expose existing transported constraints and the localized
@@ -956,25 +956,7 @@ private theorem equivalence_constraints (T : Scheme.{u}) :
   exact equivalenceConstraintsGeneric (derivedEquivalence Λ T) (tensorComparison Λ T) o hη hδ
 
 /-- The derived section equivalence identifies the specified tensor and actual pullback maps.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4, lemma-pullback-tensor-product.
-
-Proof.
-1. Use the chosen K-flat representative comparison for the tensor equation and
-   the specified oplax structure on the section equivalence for its constraints.
-2. Conjugate the actual internal tensor isomorphism by the fixed equivalence,
-   tensor comparison, pullback comparison and counits. Site tensor descent makes
-   restriction to flat-term K-flat representatives injective. The actual
-   representative square identifies this conjugate with tensorPullComparison.
-3. Cancel the equivalence comparisons to get the actual oplax square. Equality
-   of the inverse natural isomorphisms gives the actual lax square.
-4. Cancel the regular-unit comparisons in the actual representative unit equation.
-   Functoriality identifies the remaining composite with the localized scalar unit.
-5. The generic derived monoidal construction gives internalDelta its oplax laws.
-   The proved comparison of the ordinary mate and canonical monoidal structures
-   identifies its unit. Transport across the strong section equivalences and the
-   fixed pullback comparison; the tensor and unit squares identify its fields.
-   The transported oplax laws are the required final constraint equations.
--/
+Source: Stacks Project, Cohomology on Sites, Tag 07A4. -/
 theorem section_derived_tensor_normalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (∀ T : Scheme.{u}, TensorRepresentativeCondition Λ T (qTensor Λ T)) ∧
     (∀ T : Scheme.{u}, TensorConstraintCondition

@@ -78,19 +78,7 @@ noncomputable def scalarAbelianExtComparison (k : Type u) [Field k] (X : Scheme.
     Sheaf.H.{u} ((scalarAbelianForget k X).obj F) n :=
   (scalarAbelianUnitClass k X).comp (x.mapExactFunctor (scalarAbelianForget k X)) (zero_add n)
 /-- On a single scheme the module-to-abelian comparison factors through scalar Ext.
-Source: Stacks Project, Tag 03FD; the constant-sheaf adjunction.
-
-Proof: Unfold the two explicit comparison maps. Forgetting the k-action after
-restricting scalars is the module-to-abelian functor on objects and morphisms.
-Exact-functor composition therefore identifies their Ext maps, with independent
-Ext universes. Move the scalar-unit precomposition through the forgetful Ext map.
-Under the constant-integer sections adjunction the composite of its integer-unit
-class with the forgotten scalarUnitMorphism is the section scalarMap f top 1.
-This is 1 because scalarMap is a ring homomorphism. It is precisely the unit class
-in scalarUnitAbelianComparison. Associativity of Yoneda composition gives the
-factorization. No inverse-image functor, morphism of schemes, or bijectivity of
-scalarUnitAbelianComparison is used. For a zero class or an empty scheme the same
-additive formulas give zero on both sides. -/
+Stacks Project, Tag 03FD. -/
 theorem scalar_unit_abelian_ext_factorization (k : Type u) [Field k]
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k))
     (x : scalarCohomology f (SheafOfModules.unit X.ringCatSheaf) 1) :

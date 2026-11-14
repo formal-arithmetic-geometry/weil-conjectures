@@ -122,22 +122,7 @@ private theorem baseChange_transpose
   simp only [Functor.map_comp, Category.assoc]
 
 /-- The source path has the explicit restricted-counit normal form.
-Source: Stacks Project, Cohomology, Tags 08HY, 08BV and 08HZ.
-Proof: Transpose only the source path under L(W'→S') adjoint to R(W'→S').
-Functoriality of the Hom equivalence moves Lg(restriction) to the left of the
-base-change transpose and the coefficient comparison to its right. By 08HY,
-the base-change transpose is the pullback square comparison followed by
-L(W'→W) of the counit for W→S. Naturality of the square comparison moves
-restriction inside this pullback. Expand relativeMVRestriction. The mate
-identity for relativeMVImageComp W.ι f replaces its last factor by the counit
-of the composite adjunction, precomposed with (relativeMVComp W.ι f).inv.
-Naturality moves the initial direct-image comparison through that inverse
-pullback comparison. The composite counit is L(W→X) of the counit for f,
-followed by the counit for W→X. The triangle identity cancels the Hom-equivalence
-transpose defining the middle factor of restriction. What remains is precisely
-the displayed pullback of the two restricted counits, followed by the W
-coefficient comparison. No triple-composition coherence and no target path
-are used in this calculation. Equal and empty opens satisfy the same identities. -/
+Source: Stacks Project, Cohomology, Tags 08HY, 08BV and 08HZ. -/
 theorem relativeMV_restriction_source_counit
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

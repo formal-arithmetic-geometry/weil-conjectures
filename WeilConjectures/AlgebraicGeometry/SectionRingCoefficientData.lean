@@ -13,13 +13,9 @@ import WeilConjectures.AlgebraicGeometry.SectionRingCoefficientArithmetic
 universe v
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
-/-- Coefficient data on a homogeneous localization.
-
-The coefficient of a homogeneous fraction is defined using the unique scalar relative to
-powers of the chosen free generator. Equality of fractions is checked after clearing a
-power of the denominator; restricting to the open and using uniqueness proves independence.
-The same calculation proves preservation of zero, one, addition, and multiplication, and
-proves the displayed numerator equation. -/
+/-- Coefficient data on a homogeneous localization: a function to `Γ(X, U)` preserving
+zero, one, addition and multiplication, such that the coefficient of `ξ / s^n` times the
+restriction of `s^n` to `U` is the restriction of `ξ`. -/
 theorem exists_sectionRing_coefficient_data
     (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]
     (d : ℕ) (s : sectionRingGrade L d) (hd : 0 < d) (U : X.Opens)

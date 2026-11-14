@@ -512,21 +512,7 @@ private def completedRealizationIso (X : Scheme.{u}) (A : Type (u + 1)) [CommRin
 /-- The transported actual completed complex is the scalar restriction of the normalized
 completed coefficient complex. This is a comparison of cochain complexes, independent of
 any completeness property.
-
-Source: Bhatt--Scholze, Proposition 6.6.11, coefficient-model calculation;
-Stacks Tags 03CY, 093J and 093M.
-
-Proof: constant module realization in either presentation is the sheafification of the
-same constant module presheaf. The equivalent-site sheafification comparison, normalized
-on constant sections, gives a natural isomorphism between these realizations. The
-canonical completed-ring comparison commutes with the coefficient maps, as can be
-checked after every finite projection by naturality of constant sheafification.
-Consequently the two scalar-extension functors have canonically isomorphic right
-adjoints (restriction of scalars), and uniqueness of left adjoints gives their natural
-comparison. Apply it degreewise to P. Naturality gives compatibility with differentials.
-The termwise comparison and its inverse are chain maps by naturality. This is an
-isomorphism before localization, so it applies to unbounded P, zero rings, I=0,
-I=A and the empty site without any localization representative or completeness claim. -/
+Bhatt--Scholze, Proposition 6.6.11; Stacks Tags 03CY, 093J and 093M. -/
 theorem sfbPerfectModel_complex_comparison (X : Scheme.{u})
     (A : Type (u + 1)) [CommRing A] (I : Ideal A)
     (P : CochainComplex (ModuleCat.{u + 1} A) ℤ) :

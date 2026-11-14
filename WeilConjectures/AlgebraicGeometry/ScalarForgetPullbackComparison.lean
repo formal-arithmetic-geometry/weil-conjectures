@@ -11,7 +11,7 @@ import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
 /-! # The comparison obtained by forgetting the inverse-image unit
 
-Source: Stacks Project, Tag 0096, lemma-pullback-pushforward-adjoint.
+Source: Stacks Project, Tag 0096.
 -/
 
 @[expose] public section
@@ -92,18 +92,8 @@ theorem scalarForgetPullbackComparison_adjunct (k : Type u) [Field k]
     Functor.map_comp]
   rfl
 
-/-- Forgetting scalars commutes with inverse image.
-Source: Stacks Project, Tag 0096; uniqueness of left adjoints.
-
-Proof: Scalar forgetting is restriction along integers followed by the equivalence
-between integer modules and abelian groups, hence has a coextension right adjoint.
-Both coefficient functors preserve sheaves, so the coefficient adjunction restricts
-to sheaf categories. Its right adjoint commutes with pushforward, since both are
-pointwise. Thus the two composite left adjoints have the same right adjoint.
-The uniqueness isomorphism is the comparison constructed above: applying the
-composite adjunction to its component gives the composite unit, by naturality
-of the coefficient unit and the adjunct formula. This proves invertibility without
-any nonemptiness assumption or restriction on characteristic. -/
+/-- Forgetting scalars commutes with inverse image: the comparison map is an isomorphism.
+Stacks Project, Tag 0096. -/
 theorem scalarForgetPullbackComparison_isIso (k : Type u) [Field k]
     {X Y : Scheme.{u}} (a : Y ⟶ X) : IsIso (scalarForgetPullbackComparison k a) := by
   let b := (Opens.map a.base).sheafAdjunctionContinuous AddCommGrpCat.{u}

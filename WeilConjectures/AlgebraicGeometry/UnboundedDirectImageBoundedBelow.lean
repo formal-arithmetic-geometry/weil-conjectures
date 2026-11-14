@@ -9,7 +9,8 @@ import WeilConjectures.AlgebraicGeometry.FixedComparisonDirectImageMate
 
 /-! # Bounded-below comparison in the unbounded derived category
 
-Source: blueprint direct-image comparison, Step 9.
+For a qcqs morphism of schemes, the canonical comparison map between the étale and pro-étale
+unbounded derived direct images is an isomorphism on bounded-below complexes.
 -/
 
 @[expose] public section
@@ -111,22 +112,9 @@ private theorem included_pullback (A : Type (u + 1)) [CommRing A]
   simp only [Category.assoc]
   rfl
 
-/-- The bounded-below direct-image comparison, expressed using total unbounded derivation.
-Source: blueprint `sk-prop-pe-unbounded-classical-direct-image.proof.md`, Step 9;
-`theorem-comparison-direct-images` and Stacks Tag 09A6.
-
-Proof: Regard K as an object of D+ using its lower bound n. For each direct image use
-rightDerivedFunctorPlusCompatibility to identify its D+ value, included into D, with
-its total right derived value. Exact inverse image commutes with these inclusions.
-The pullback square becomes the same square under mapDerivedCategoryPlusCompatibility.
-Both derived adjunctions are normalized by the underived adjunction on resolutions:
-apply the derived unit/counit factorization and uniqueness of right derived functors
-on bounded-below injective resolutions. Thus the included D+ canonical mate is the
-unbounded mate, conjugated by the two compatibility isomorphisms. The D+ mate is
-invertible for qcqs g by isIso_comparisonDirectImageCanonicalMate. Inclusion and
-conjugation preserve invertibility, proving the assertion. This argument works for
-K=0, negative lower bounds, the zero coefficient ring, and empty schemes.
--/
+/-- The bounded-below direct-image comparison, expressed using total unbounded derivation: for
+a qcqs morphism `g` and a bounded-below complex `K` with finite coefficients, the unbounded
+direct-image comparison map at `K` is an isomorphism. Stacks Tag 09A6. -/
 theorem unboundedDirectImageComparison_boundedBelow
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (g : X ⟶ Y) [QuasiCompact g] [QuasiSeparated g]

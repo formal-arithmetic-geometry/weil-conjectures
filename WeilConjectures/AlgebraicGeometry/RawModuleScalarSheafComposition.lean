@@ -38,21 +38,9 @@ private lemma scalar_unit (Λ : Type (u + 1)) [CommRing Λ]
     ((moduleAbelianUpperStarComparison Λ f).app G) = _
   exact Equiv.apply_symm_apply _ _
 
-/-- Scalar forgetting commutes with inverse-image composition before deriving.
-Source: Stacks Project, Tag 03D7; Mathlib canonical Kan-extension and
-sheafification comparison unit equations.
-
-Proof: The scalar comparison is constructed from the canonical comparison for
-left Kan extension and the canonical comparison for sheafification. Their
-unit equations identify its inverse as the mate of the sectionwise scalar
-forgetting comparison for direct image. Apply the adjunction hom equivalence
-for the composite inverse image to both displayed maps. The defining unit
-formula for upperStarComp and the two scalar comparison unit equations make
-both transposes the same composite unit followed by sectionwise forgetting.
-The hom equivalence is injective, so the displayed maps agree. This uses
-only the canonical comparisons, not an arbitrary choice of isomorphism.
-Zero sheaves, the zero ring and identity arrows satisfy the same unit equations.
--/
+/-- Scalar forgetting commutes with inverse-image composition before deriving: the scalar
+pullback comparisons intertwine the module and abelian `upperStarComp` isomorphisms.
+Stacks Project, Tag 03D7. -/
 theorem rawModuleScalar_sheaf_composition
     (Λ : Type (u + 1)) [CommRing Λ] {S Y Y' : Scheme.{u}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')

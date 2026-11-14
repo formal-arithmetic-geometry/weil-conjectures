@@ -21,9 +21,7 @@ open CategoryTheory
 namespace SheafOfModules
 
 /-- The constant commutative-ring sheafification unit remains locally injective after
-forgetting to rings. Source: Stacks, sheafification, Tags 00W1 and 094H.
-Proof: equality after the unit is locally equality before it by sheafification; forgetting
-commutativity changes neither sections nor their equality. -/
+forgetting to rings. Source: Stacks, sheafification, Tags 00W1 and 094H. -/
 theorem constantCommRingUnit_locallyInjective
     {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)
     (B : Type u) [CommRing B] :
@@ -39,9 +37,7 @@ theorem constantCommRingUnit_locallyInjective
 attribute [instance] constantCommRingUnit_locallyInjective
 
 /-- The constant commutative-ring sheafification unit remains locally surjective after
-forgetting to rings. Source: Stacks, sheafification, Tags 00W1 and 094H.
-Proof: sections of a sheafification locally come from presheaf sections, and forgetting
-commutativity leaves those same sections and local lifts. -/
+forgetting to rings. Source: Stacks, sheafification, Tags 00W1 and 094H. -/
 theorem constantCommRingUnit_locallySurjective
     {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)
     (B : Type u) [CommRing B] :

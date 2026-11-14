@@ -36,41 +36,7 @@ namespace AlgebraicGeometry
 an injective resolution J of its structure sheaf. On regular affine charts T has
 a finite free zero-differential model. This statement supplies no comparison map
 from Ext to dual Tor and asserts no invertibility of such a map.
-
-Source: Stacks Project, cohomology.tex, section-internal-hom (08DH), its derived
-pullback evaluation mate (08I3); modules.tex,
-lemma-i-star-equivalence (08KS); duality.tex, lemma-regular-ideal-ext (0BQY),
-Koszul computation with quotient coefficients; more-algebra.tex,
-equation-simple-tor-product (068G), resolution computation of Tor.
-
-Proof: Choose a K-flat resolution P of B[0] with flat terms and a K-injective
-resolution J of O_Z[0]; the tensor pullback is additive by its adjunction with
-pushforward. Represent the derived pullback Li*B on Z by the ordinary tensor pullback
-of a K-flat resolution of B=i_*O_Z on Y; call this complex T. Choose a K-injective
-resolution J of O_Z. It has cohomology O_Z in degree zero and zero elsewhere.
-The internal derived pullback/direct-image adjunction identifies RHom_Y(B,i_*O_Z)
-with i_*RHom_Z(Li*B,O_Z). To see this identification, test against an arbitrary
-derived object A on Y: tensor--Hom adjunction gives Hom(A tensor B,i_*O_Z),
-derived pullback/direct-image adjunction gives Hom(Li*(A tensor B),O_Z),
-and the pullback tensor comparison followed by tensor--Hom and the same
-adjunction gives Hom(A,i_*RHom_Z(Li*B,O_Z)). Naturality and Yoneda identify
-the two objects. Closed-immersion direct image is exact and fully faithful,
-so its cohomology is i_*H^n(Hom(T,J)). Its tensor-pullback counit identifies
-ordinary i* of that cohomology with H^n(Hom(T,J)), giving eG. Similarly the derived
-projection formula identifies B tensor^L_Y B with i_*(Li*B); exact direct image
-and its counit give eQ. These computations use the fixed derived tensor on Y,
-and their comparison does not change the supplied derived universe.
-On an affine U with quotient A/I, use the Koszul projective resolution of A/I
-and its sheafified augmentation. Restricting T to the inverse-image chart gives
-the same derived pullback, hence a quasi-isomorphism roof to the sheafification
-of K_A(f) tensor_A A/I. Every f_j vanishes in A/I, so every differential of that
-complex vanishes. Its exterior-power terms are finite free, with degrees from
--minus-m to zero. Restricting further to V and the indicated over site preserves
-these properties and the two quasi-isomorphisms. Open restriction preserves
-K-injectivity of J. Thus the same T and J give all the chart models simultaneously;
-no chartwise choices are used to choose a global morphism. For m=0 the model has
-one term; for n>m the relevant homology vanishes. Empty charts and I=A give zero
-models. No proper-ideal or positive-length hypothesis is needed. -/
+Source: Stacks Project, Tags 08DH, 08I3, 08KS, 0BQY and 068G. -/
 theorem exists_selfExt_tor_resolution_model
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

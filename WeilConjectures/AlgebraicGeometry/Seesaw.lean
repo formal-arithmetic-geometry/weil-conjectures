@@ -131,11 +131,7 @@ theorem nonempty_iso_fiber_iff (f : P ⟶ T) [IsProper f] [GeometricallyIntegral
 /-- **Triviality over a field-valued point is triviality over its residue field.** Let
 `f : P ⟶ T` be proper with geometrically integral fibres, let `M`, `N` be invertible modules on
 `P`, and let `φ : Spec F ⟶ T` be a point with values in a field `F`, with image `t`. If `M` and
-`N` become isomorphic on `P ×_T Spec F`, they are isomorphic on the fibre `P_t` over `κ(t)`.
-
-Both conditions are expressed through `h⁰` of `M ⊗ Nᵛ` and `N ⊗ Mᵛ` on the fibres
-(`AlgebraicGeometry.Scheme.Modules.nonempty_iso_unit_fiber_iff`), and the fibre dimensions are
-invariant under base change (`AlgebraicGeometry.Scheme.Modules.hFiber_pullback_of_isPullback`). -/
+`N` become isomorphic on `P ×_T Spec F`, they are isomorphic on the fibre `P_t` over `κ(t)`. -/
 theorem nonempty_iso_fiber_of_nonempty_iso_pullback (f : P ⟶ T) [IsProper f]
     [GeometricallyIntegral f] (M N : P.Modules) [M.IsInvertible] [N.IsInvertible]
     {F : Type u} [Field F] (φ : Spec (.of F) ⟶ T)
@@ -164,11 +160,7 @@ theorem nonempty_iso_fiber_of_nonempty_iso_pullback (f : P ⟶ T) [IsProper f]
 /-- **The seesaw principle: the locus of triviality on the fibres is closed** (Stacks, Tags 0BDP
 and 0BF0). Let `f : P ⟶ T` be proper, flat, locally of finite presentation and with geometrically
 integral fibres, and let `M`, `N` be invertible modules on `P`. The set of points `t ∈ T` such
-that `M` and `N` become isomorphic on the fibre `P_t` is closed.
-
-By `AlgebraicGeometry.Scheme.Modules.nonempty_iso_fiber_iff` it is the set of points where
-`h⁰(P_t, (M ⊗ Nᵛ)_t) ≥ 1` and `h⁰(P_t, (N ⊗ Mᵛ)_t) ≥ 1`. Both conditions are closed by upper
-semicontinuity (`AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber`). -/
+that `M` and `N` become isomorphic on the fibre `P_t` is closed. -/
 theorem isClosed_setOf_nonempty_iso_fiber (f : P ⟶ T) [IsProper f] [Flat f]
     [LocallyOfFinitePresentation f] [GeometricallyIntegral f] (M N : P.Modules) [M.IsInvertible]
     [N.IsInvertible] :

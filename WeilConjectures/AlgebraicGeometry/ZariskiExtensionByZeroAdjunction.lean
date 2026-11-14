@@ -12,9 +12,11 @@ public import Mathlib.Topology.Sheaves.Abelian
 
 /-! # Extension by zero for abelian Zariski sheaves
 
-Source: literature/stacks-project/sites-modules.tex, Lemma 03DI and Definition 04IX;
-blueprint: lem-weil-pbc-zariski-extension-by-zero-adjunction.
+## References
+
+Stacks Project, Modules on Sites, Lemma 03DI and Definition 04IX.
 -/
+
 
 @[expose] public section
 

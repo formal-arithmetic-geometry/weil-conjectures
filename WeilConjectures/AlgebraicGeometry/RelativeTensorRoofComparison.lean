@@ -20,7 +20,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Derived comparison for the relative tensor complexes
 
-Source: Stacks Project, Tags 0DJQ and 08CI, local tensor calculation.
+Stacks Project, Tags 0DJQ and 08CI.
 -/
 
 @[expose] public section
@@ -155,13 +155,7 @@ private theorem flat_retract (Y : Scheme.{u})
 
 -- Tensor comparison transports through complex and derived module equivalences.
 /-- The open restriction of the derived tensor is computed by the ordinary total tensor.
-Source: Stacks Project, Tags 0DJQ and 06YH (local strict-perfect tensor calculation).
-
-The finite-free retract terms of a strictly perfect complex are flat and bounded, hence
-K-flat. Exact open restriction and the K-flat derived tensor comparison identify the
-restricted derived tensor with the ordinary total tensor. The compatibility with the
-localized open site is transported through the canonical module equivalence.
--/
+Stacks Project, Tags 0DJQ and 06YH. -/
 private theorem strictPerfect_openTensor_comparison
     {X : Scheme.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -267,21 +261,10 @@ private theorem restrictScalars_exact
     preservesFiniteColimits_of_reflects_of_preserves F (SheafOfModules.toSheaf.{u} R)⟩
 
 -- Scalar restriction and localization comparisons unfold nested ring-sheaf restrictions.
-/-- The two fixed base-ring complexes are isomorphic after localization.
-Source: Stacks Project, Tags 0DJQ and 06YH (local K-flat tensor computation).
-
-Proof: finite-free retracts are flat, so the bounded strictly perfect L is K-flat.
-Apply exact monoidal open restriction to eK, and identify the first factor with L
-using eL. The K-flat comparison identifies this tensor with the ordinary total
-of L and the restriction of G. Restriction of scalars is exact, so it preserves
-quasi-isomorphisms and induces a functor on derived categories. Apply that functor
-to the preceding isomorphism. Open restriction commutes with scalar restriction
-sectionwise; its comparison with the localization functor identifies the first
-object with the displayed scalar-restricted K and the second with the explicit
-strictPerfectRelativeTensorComplex. This works also for the empty open. The
-standard localization of the base-ring category is used, since the hypotheses
-only choose localizations for structure-ring modules. This statement concerns
-only the derived tensor computation; it does not assert or choose a roof. -/
+/-- If `K` represents `E ⊗ G` and `L` is a strictly perfect representative of `E` on `U`, then,
+after restricting scalars to the inverse-image base ring and restricting to `U`, the complex `K`
+becomes isomorphic in the derived category to `strictPerfectRelativeTensorComplex` of `L` and `G`.
+Stacks Project, Tags 0DJQ and 06YH. -/
 theorem strictPerfect_relativeTensor_roof_comparison
     {X S : Scheme.{u}} (f : X ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

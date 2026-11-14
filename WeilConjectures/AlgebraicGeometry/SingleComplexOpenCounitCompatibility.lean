@@ -57,20 +57,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 1600000 in
 -- The representative calculation elaborates several derived functor comparisons.
 /-- The sectionwise direct-image comparison is the mate of the open pullback square.
-Source: Stacks Project, cohomology.tex, Tags 08FE, 08BS and 08HY.
-
-Proof: Compute direct image on a K-injective complex. Open restriction preserves
-K-injectivity, since exact extension by zero is its left adjoint. The underived
-comparison used in singleComplexOpenDirectImageIso is the sectionwise identity
-on inverse-image opens. Under the tensor-pullback adjunction its mate is the
-open pullback comparison: both counit composites evaluate the same restricted
-tensor on sections. Derive this equality using the right-derived factorization
-identities and the left-derived counits defining the composition comparisons.
-The Hom equivalences of the chosen adjunctions are pinned to these same counits
-and right-derived units by exists_schemeDerivedAdjunction. Thus the equality on
-representatives descends to the displayed equality in the derived category.
-This is an identity of natural transformations, including empty opens and zero
-objects; no boundedness assumption is used. -/
+Stacks Project, Tags 08FE, 08BS and 08HY. -/
 theorem singleComplexOpen_counit_compatibility
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

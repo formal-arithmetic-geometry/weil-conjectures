@@ -60,26 +60,7 @@ private theorem isIso_derivedStalkComparison_of_map
 set_option linter.unusedVariables false in
 /-- The fixed source cube restriction map is invertible on the indicated closed-point
 stalk. This says nothing about either exchange map or compatibility with exchange.
-Source: Stacks Project, Tag 03Q9, theorem-higher-direct-images, and Tag 03QO,
-lemma-cohomology-strictly-henselian.
-
-Proof:
-1. Enlarge the point fields along ν and ν followed by ι. Étale stalks are unchanged
-under extensions of separably closed fields, by the bijection on pointed étale lifts.
-2. Exact inverse image commutes with homology. The inverse-image stalk comparisons
-for g and g₀ and the equation hρ identify the two outer stalks with those at σ and
-at ρA followed by the residue closed point of Spec A, respectively.
-3. Apply unrestricted 03Q9 to f at νισ. Transport its chosen cartesian model to X₀
-along sq₀ and eA; the inverse-image/single-complex isomorphism identifies its coefficient
-with p₀^*G. No target comparison or invertibility of an exchange map for g is used.
-4. Use exact global sections on the strict local base and the sections-to-closed-point
-stalk isomorphism (03QO) to express this restriction on higher-direct-image stalks.
-The residue equations identify the specified geometric points. The inverse-image germ
-formula and the section-restriction components of 03Q9 identify the composite with the
-fixed derivedStalkComparison in the conclusion; all remaining factors are images of
-composition, single-complex, or exact-pullback isomorphisms. Hence it is invertible.
-For q = 0 this is the usual section restriction; the argument also handles zero sheaves,
-empty total spaces, and arbitrary chosen cartesian models. -/
+Source: Stacks Project, Tags 03Q9 and 03QO. -/
 theorem Etale.isIso_strictHenselization_exchangeCube_stalkComparisons_source
     {S T X X' : Scheme.{u}} {g : T ⟶ S} {f : X ⟶ S}
     [QuasiCompact f] [QuasiSeparated f] {f' : X' ⟶ T} {g' : X' ⟶ X}

@@ -24,6 +24,13 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyF
 /-! # Supported-open comparisons before the projection formula
 
 Source: Stacks Project, Tags 08EV, 08DF, 08DX and 08DW.
+
+## Implementation details
+
+`supportedOpen_tensor_directImage_comparisons` retains the supplied localizations on `X`, `S`
+and `U`, and uses standard localizations only on auxiliary complements and inverse-image
+opens; the restriction homology and tensor comparisons and open base change allow independent
+localization universes.
 -/
 
 @[expose] public section
@@ -247,25 +254,7 @@ private theorem supportedTensor_supported_unit_iso (X : Scheme.{u}) (U : X.Opens
 
 
 /-- Restrict supported direct images, including a derived tensor input, to an open.
-Source: Stacks Project, Tag 08EV, support reduction; Tag 08DF, supported-open unit;
-Tags 08DX and 08DW, compatibility of tensor and pullback with restriction.
-
-Proof: put V = X minus T. The supported-open adjunction unit E -> Rj_*(E|_U)
-restricts to an isomorphism on U and to a map between zero objects on V, hence
-is invertible by detection on this cover. Apply Rf_* and the derived composition
-comparison to obtain the first isomorphism. Exact restriction to V annihilates E;
-its compatibility with K-flat derived tensor annihilates E tensor Lf^*K as well.
-Thus that tensor input also has all cohomology stalks zero outside T. Apply the
-same supported-open unit and composition comparison to it. Finally, exact open
-restriction commutes with derived tensor, and restriction of Lf^*K agrees with
-L(fj)^*K: compose the pullback and restriction adjunctions, transport the right
-adjoint along direct-image composition, and use uniqueness of left adjoints.
-Apply R(fj)_* to these two identifications for the second isomorphism.
-Retain the supplied localizations on X, S and U. Use standard localizations only
-on auxiliary complements and inverse-image opens; the restriction homology and
-tensor comparisons and open base change allow independent localization universes.
-No quasi-coherence, boundedness, properness,
-or projection formula is used. Empty opens and zero E give zero comparisons. -/
+Stacks Project, Tags 08EV, 08DF, 08DX and 08DW. -/
 theorem supportedOpen_tensor_directImage_comparisons
     {X S : Scheme.{u}} (f : X ⟶ S) (U : X.Opens)
     (T : Set X) (hT : IsClosed T) (hTU : T ⊆ (U : Set X))

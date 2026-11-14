@@ -24,11 +24,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Naturality of the localization and derived Hom part of the source comparison.
-Source: Stacks Project, Tags 03Q8 and 03Q9.
-
-The proof is the cocycle computation: precomposition on the Hom complex descends
-through cocycles and boundaries, and the quotient and the specified derived
-representative preserve this map. -/
+Source: Stacks Project, Tags 03Q8 and 03Q9. -/
 theorem sourceDerivedSections_naturality_core
     {C : Type (v + 1)} [Category.{v} C]
     {T : GrothendieckTopology C} [HasSheafify T AddCommGrpCat.{v + 1}]

@@ -241,22 +241,7 @@ private theorem tensorComparisonFamily
 
 -- The two naturalities and unit calculation elaborate in one declaration.
 /-- Module inverse image commutes with total tensor, naturally in both complexes,
-and the comparison respects the inverse right unitor.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4, proof by total complexes;
-sites-modules.tex, Tag 03EL, ordinary tensor and unit comparison.
-
-Proof: use the canonical ordinary tensor comparison on module sheaves. Its inverse
-on each bidegree, followed by insertion into the pulled-back total tensor, defines
-the reverse chain comparison. Naturality handles the two differentials; additivity
-preserves their signs. Module inverse image is a left adjoint, so it preserves the
-coproducts defining totalization, making this chain map invertible. Naturality on
-summands gives the two displayed naturality equations for the family of
-isomorphisms. The ordinary rank-one comparison gives the isomorphism on the ring
-complex, using preservation of zero objects outside degree zero. Test the right
-unitor equation on every tensor summand: only the ring-complex degree zero can
-contribute, and there it is the ordinary right-unit equation. All other summands
-are zero. Coproduct extensionality proves the equation of chain maps. -/
+and the comparison respects the inverse right unitor. Stacks Project, Tags 07A4 and 03EL. -/
 theorem ringedComplexTensorPullback
     {C D : Type v} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

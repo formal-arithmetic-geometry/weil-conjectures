@@ -147,21 +147,7 @@ private noncomputable def restrictedCocone
 
 /-- Fixed coefficients on an inverse scheme system have a canonical restricted
 cohomology diagram and cocone, with a complex-continuity presentation.
-Source: Stacks Project, Tags 09Z1 and 0EZM.
-
-Proof: Form restrictedOverDiagram and restrictedOverCone. Restrict the fixed
-coefficient sheaf and put it in degree zero, using restrictedOverSingle. Its
-transition isomorphisms and constant limiting diagram obey the equations in
-restrictedOverSingle_coherence. The canonical derived-unit maps on cohomology
-therefore obey identity, composition and cone-leg equations by
-derivedEtaleCohomology_pullback_laws, using the proved single-complex unit and
-composition equations. Use them to construct H and B, with
-objects restrictedOverCohomology and maps restrictedOverCohomologyMap. Their
-comparison isomorphisms are identities. The theorem
-restrictedOverAbelianCocone_complex_data supplies the required presentation;
-its only additional hypotheses are the two map equations, which are reflexive.
-This constructs the diagram without using cohomology continuity. The degree can
-be negative; the single complexes remain uniformly bounded below by zero. -/
+Stacks Project, Tags 09Z1 and 0EZM. -/
 theorem exists_restrictedOverAbelian_cohomology_presentation
     {W S : Scheme.{u}} (k : W ⟶ S)
     (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)

@@ -32,20 +32,19 @@ algebraically closed, and for every abelian étale sheaf `F` on `C`:
 * the map `H⁰(C, F) ⟶ ∏_x F_{s x}` to the stalks at geometric points `s x` over the points
   `x` of `C` is an isomorphism.
 
-The vanishing is `AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar` (a sheaf supported
-on finitely many closed points with separably closed residue fields is acyclic). For the
-degree zero statement, `F(C) = ∏_x F({x})` since the points `{x}` are open, and the pointed
-open neighbourhood `({x}, s x)` is initial among the pointed étale neighbourhoods of `s x`, so
-that `F({x}) = F_{s x}`: an étale scheme over the one-point scheme `{x}` with a point over `x`
-has a section through that point, by topological invariance of the étale site along
-`Spec κ(x) ⟶ {x}`.
-
 ## Main statements
 
 - `AlgebraicGeometry.zero_dimensional_etale_cohomology`:
   the statement above.
 - `AlgebraicGeometry.Etale.isIso_piLift_toPresheafFiber`: on a finite discrete scheme with
   separably closed residue fields, the sections of a sheaf are the product of its stalks.
+
+## Implementation details
+
+The vanishing is `AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar` (a sheaf supported
+on finitely many closed points with separably closed residue fields is acyclic). In degree
+zero, the pointed open neighbourhood `({x}, s x)` is initial among the pointed étale
+neighbourhoods of `s x`, so that `F({x}) = F_{s x}`.
 -/
 
 @[expose] public section
@@ -365,8 +364,9 @@ lemma Etale.isIso_toPresheafFiber_of_topologicalKrullDim_le_zero {k : Type u} [F
     inferInstance) Ω s hs F
   infer_instance
 
-/-- Blueprint `lemma-sheaves-finite-support-finite-morphisms--1`: **Cohomology of zero-dimensional
-schemes.** Let `C` be a separated scheme of finite type over an algebraically closed field `k`
+/-- **Cohomology of zero-dimensional schemes.**
+Let `C` be a separated scheme of finite type over an algebraically closed field `k`
+
 with `dim C ≤ 0`. Then `C` has finitely many points, and for every abelian étale sheaf `F` on
 `C`, `Hᵠ(C, F) = 0` for `q > 0` while the canonical map `H⁰(C, F) ⟶ ∏_x F_{s x}` to the
 stalks at geometric points `s x` over the points `x` of `C` is an isomorphism. -/

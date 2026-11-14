@@ -100,27 +100,10 @@ def standardSectionExtHom {X Y : Scheme.{u}} (f : X ⟶ Y) (F : X.Modules) (p : 
     (Sheaf.H.mapFunctor (invImage f) (constIso f).symm
       ((SheafOfModules.toSheaf Y.ringCatSheaf).obj ((pushforward f).obj F)) p))
 
-/-- The standard-source calculation of the inverse-image/counit Ext map.
-Source: Stacks Project, Tags 01FB (section diagram), 01F7 (derived functoriality),
-03FD (forgotten injective acyclicity), and 06XR (sections as Ext).
-
-Proof: Write T for forgetting modules. Forgotten injectives on X and Y are acyclic
-for abelian sections by 03FD. Thus T(I) computes the derived abelian direct image,
-and T(K), with the given quasi-isomorphism, is its acyclic replacement. The explicit
-standardSectionEdgeLift extends the map f_*F to f_*I to K. After localizing complexes,
-its map from the standard resolution is therefore the canonical map f_*F to Rf_*F
-of 01F7. Apply derived abelian sections to this morphism, computed on the standard
-source resolution and on K by acyclic comparison. Derived adjunction identifies this
-map with inverse image on Ext from the constant integer sheaf followed by the counit.
-The free integer generator corresponds to 1 in sections, so the source comparison
-is constIso(f).symm. The sections comparison from f_*I to I is a: its inverse agrees
-degreewise with restriction by ha. Consequently its homology map, followed by the
-section map of l, is exactly the right-hand vertical arrow below. The two ways of
-computing the localized morphism give the displayed equality. This calculation
-only uses the standard source resolution and the explicitly constructed lift;
-independence of an arbitrary source resolution and arbitrary lift is a separate
-homotopy argument. It includes degree zero and zero or empty coefficients, and
-does not assert that f_*F is acyclic or that module pullback is exact. -/
+/-- The standard-source calculation of the inverse-image/counit Ext map: computed with the
+standard source resolution and the explicit lift `standardSectionEdgeLift`, it agrees with the
+map induced on section cohomology by `a` and `l`.
+Source: Stacks Project, Tags 01FB, 01F7, 03FD and 06XR. -/
 theorem standard_abelian_ext_section_diagram {X Y : Scheme.{u}} (f : X ⟶ Y)
     {F : X.Modules} (I : InjectiveResolution F) (K : CochainComplex Y.Modules ℕ)
     (hK : ∀ n : ℕ, Injective (K.X n))

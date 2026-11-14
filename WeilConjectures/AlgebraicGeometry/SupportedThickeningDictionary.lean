@@ -49,16 +49,7 @@ private theorem restriction_iso_equation
 `(F n, φ n)` on the thickenings whose terms are killed by the ideal of `Z` is, termwise and
 compatibly with the transition maps, the system of a coherent formal module `M` supported on
 `Z`; any algebraisation `G` of `M` restricts to the given system.
-Source: Stacks Project, Remark 088F, Lemma 087T, and equation 0880.
-Proof: Apply the thickening-systems dictionary with the given adjunctions to the coherent system
-`(F, φ)`. Its evaluation isomorphisms `β n` give the termwise isomorphisms and their transition
-compatibility. At level zero, its kernel formula and the closed-immersion kernel identity
-identify the displayed ideal with the kernel used by the dictionary. Evaluation isomorphisms
-transport the given sectionwise annihilation to the formal terms. The affine-cover product-zero
-criterion at exponent one then proves SupportedOn. Finally, invert the dictionary's completion
-comparison and compose with the evaluation comparisons `r n`; their transition compatibility
-gives the requested equation with the dictionary's comparison `c`, which is characterised by its
-compatibility with the adjunction units. -/
+Stacks Remark 088F, Lemma 087T, and equation 0880. -/
 theorem supportedThickening_dictionary
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A)

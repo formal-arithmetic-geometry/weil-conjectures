@@ -18,8 +18,8 @@ import WeilConjectures.AlgebraicGeometry.ZeroDimensionalEtaleCohomologyRest
 
 /-! # Étale cohomology in dimension zero
 
-Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-arbitrary-curve-cd/
-lem-weil-pbc-zero-dimensional-cohomology.md.
+A separated zero-dimensional scheme of finite type over an algebraically closed field has
+finitely many points.
 -/
 
 @[expose] public section
@@ -34,17 +34,8 @@ namespace AlgebraicGeometry
 
 /-- The underlying point type of a separated finite-type zero-dimensional scheme
 over an algebraically closed field is finite.
+Stacks Project, Tag 00KH. -/
 
-Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-arbitrary-curve-cd/
-lem-weil-pbc-zero-dimensional-cohomology.md, finiteness clause;
-Stacks Project, Tag 00KH.
-
-Proof: By LocallyOfFiniteType.isLocallyNoetherian f, C is locally Noetherian. By
-QuasiCompact.compactSpace_of_compactSpace f, C is compact.
-IsLocallyArtinian.of_topologicalKrullDim_le_zero hdim makes C locally Artinian and hence discrete.
-Therefore finite_of_compact_of_discrete proves Finite C (node lem-weil-pbc-finite-type-dim-zero-
-artinian).
--/
 theorem zero_dimensional_etale_finite
     (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u})
     (f : C ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f]

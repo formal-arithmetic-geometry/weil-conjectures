@@ -99,20 +99,7 @@ set_option maxHeartbeats 800000 in
 -- Comparing section complexes unfolds the scheme and ringed-space module interfaces.
 /-- The normalized resolution class commutes with restriction between arbitrary opens.
 No affineness, quasi-coherence, base change or scalar extension is assumed.
-Source: Stacks Project, Tag 01E4, Lemma 20.7.3; Tag 01FB, Remark 20.14.2.
-
-Proof: Substitute U = f inverse V. Apply restrictedResolution_open_cohomology
-to the two inverse-image opens and the pinned identifications R and R'. The
-termwise restriction of I's sections equals the restriction of the pushed
-complex K's sections, degreewise by reflexivity. Expand resolutionSectionClass
-and compose the raw equality with the evaluation homology comparison and theta.
-The private sectionClass_open_restriction lemma moves section restriction past
-these two maps: NatTrans.app_homology gives the evaluation comparison square,
-and naturality of sectionCohomologyTheta gives the theta square. Finally compose
-with the inverse of I.isoRightDerivedObj at W and use its sheaf naturality to
-move restriction past it. Evaluate this morphism equality at y. The equality
-transport of sections becomes the identity after substitution. Empty or equal
-opens, zero coefficients and p = 0 use the same equations. -/
+Stacks Project, Tag 01E4, Lemma 20.7.3; Tag 01FB, Remark 20.14.2. -/
 theorem resolutionSectionClass_open_restriction
     {X S : Scheme.{u}} (f : X ⟶ S) (F : X.Modules) (I : InjectiveResolution F)
     (p : ℕ) (V W : S.Opens) (eWV : W ≤ V)

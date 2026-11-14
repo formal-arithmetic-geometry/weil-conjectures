@@ -18,11 +18,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- Fixed-coefficient raw evaluation is invertible, including empty charts.
-Source: Stacks Project, Tags 03Q8 and 0GIT.
-
-Proof: The raw derived evaluation is an isomorphism. Its second factor is the
-image, under cohomology, of the inverse of the canonical derived composition
-isomorphism. A functor preserves isomorphisms, as does composition. -/
+Stacks Project, Tags 03Q8 and 0GIT. -/
 theorem isIso_rawFixedDerivedComparison {B T Y : Scheme.{u}}
     (h : Y ⟶ B) (g : Y ⟶ T)
     (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}))

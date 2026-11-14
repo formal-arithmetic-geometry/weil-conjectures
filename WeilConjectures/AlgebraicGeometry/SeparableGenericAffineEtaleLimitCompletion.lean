@@ -140,16 +140,11 @@ theorem Scheme.separableClosure_residueField_generic_eq
   · have hy' : IsSeparable S.functionField y := mem_separableClosure_iff.mp hy
     exact mem_separableClosure_iff.mpr (hy'.of_equiv_equiv σ (RingEquiv.refl Ω) he)
 
-/-- Transport the canonical strict-henselization limit to the specified relative
-separable closure.
-
-Source: Stacks Project, Tags 04HX, 03QL and 0032; the landed declarations
-`strictHenselizationAffineProperties` and `exists_directed_reindexing`.
-
-The proof obtains the canonical colimit-to-residue comparison from the affine
-étale neighbourhood/triple comparison, proves that the generic strict
-henselization has zero maximal ideal, and transports the canonical inverse-limit
-cone through the resulting ring isomorphism and the directed reindexing.
+/-- Transport the canonical strict-henselization limit to the specified relative separable
+closure: the generic strict henselization ring is isomorphic to `F^s` compatibly with point
+evaluation, and through this isomorphism `Spec F^s` is the limit of any directed initial
+reindexing of the canonical affine étale neighbourhood diagram.
+Stacks Project, Tags 04HX, 03QL and 0032.
 -/
 theorem separableGeneric_affineEtale_limit
     (S : Scheme.{u}) [IsIntegral S]
@@ -230,15 +225,10 @@ theorem separableGeneric_affineEtale_limit
   rw [Iso.symm_hom, Iso.eq_inv_comp]
   exact congrArg (Spec.map (CommRingCat.ofHom e.toRingHom) ≫ ·) (hπcan j).symm
 
-/-- Pointedness of the canonical reindexed strict-henselization cone.
-
-Source: Stacks Project, Tags 04HX and 03QL; the landed declaration
-`strictHenselizationPointEvaluation_pointed`.
-
-The proof substitutes the canonical cone-leg equation from
-`strictHenselizationPointEvaluation_pointed`, the displayed ring comparison,
-and the structural-map equation for each canonical affine neighbourhood.
-Functoriality of the over-category supplies the final map to `S`.
+/-- Pointedness of the canonical reindexed strict-henselization cone: composing each cone leg
+with the structure map of the corresponding affine étale neighbourhood gives the canonical
+map from the specified separable closure to `S`.
+Stacks Project, Tags 04HX and 03QL.
 -/
 theorem separableGeneric_affineEtale_pointed
     (S : Scheme.{u}) [IsIntegral S]

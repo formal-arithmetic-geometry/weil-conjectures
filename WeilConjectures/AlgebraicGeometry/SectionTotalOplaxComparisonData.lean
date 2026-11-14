@@ -34,9 +34,7 @@ namespace AlgebraicGeometry.ProEtale.ModuleRingedComparison
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 /-- The actual mate oplax structure agrees with the canonical composite structure.
-Source: the uniquely normalized direct image and its adjunction mate, Stacks 03EL.
-Proof: the direct-image pairing is uniquely normalized on balanced generators; the
-adjunction bijection transports its equality to equality of the oplax structures. -/
+Source: Stacks 03EL. -/
 theorem totalInternalOplax_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
     internalPullOplax Λ f = (CondensedRing.monoidal_upperStar Λ f).toOplaxMonoidal :=
   internalPullOplax_eq_canonical Λ f
@@ -108,10 +106,7 @@ private theorem termwise_naturality
     (NatIso.mapHomologicalComplex h (.up ℤ)).hom.naturality a
 
 /-- Naturality of the fixed termwise operation comparison in its cached functor types.
-Source: Stacks 07A4 and 03EL.
-Proof: take the naturality square of NatIso.mapHomologicalComplex applied to the
-specified ordinary pullComparison. Mapping a composite functor termwise gives the
-same maps as the composite of its termwise lifts. -/
+Source: Stacks 07A4 and 03EL. -/
 theorem termwisePullComparison_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     {A B : CochainComplex (internalModules Λ Y) ℤ} (a : A ⟶ B) :
     (totalSectionEquivalence Λ X).map ((totalInternalPull Λ f).map a) ≫
@@ -124,10 +119,7 @@ theorem termwisePullComparison_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
         (equivalence Λ Y).functor (pullback Λ f) (pullComparison Λ f) a
 
 /-- Naturality of the actual internal signed-total oplax comparison.
-Source: Stacks 07A4 and 03EL.
-Proof: the forward map is the signed-total mapBifunctorComparison of the ordinary
-pullback oplax tensor map. Its naturality in both complexes is the bifunctor
-comparison naturality theorem, with tensorHom identified with mapBifunctorMap. -/
+Source: Stacks 07A4 and 03EL. -/
 theorem actualInternalTotalIso_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     {A A' B B' : CochainComplex (internalModules Λ Y) ℤ} (a : A ⟶ A') (b : B ⟶ B') :
     (totalInternalPull Λ f).map (a ⊗ₘ b) ≫ (actualInternalTotalIso Λ f A' B').hom =
@@ -146,8 +138,7 @@ theorem actualInternalTotalIso_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
         (Functor.OplaxMonoidal.δNatTrans (CondensedRing.upperStar Λ f)) (.up ℤ) a b
 
 /-- The signed total of the specified ringed adjunction-mate tensor map. Its inverse
-is the sum of the ordinary inverse maps, the construction used by the ringed
-cochain comparison of lem-pur-cochain-pullback-tensor-coherence.
+is the sum of the ordinary inverse maps.
 Source: Stacks 07A4 and 03EL. -/
 @[irreducible] def sectionTotalIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (modules Λ Y) ℤ) :
@@ -167,9 +158,7 @@ variable {A B C : Type*} [Category* A] [Category* B] [Category* C]
   (F : A ⥤ B) (G : C ⥤ B) {x y : A} {u v : C} {w t : B}
   (p : x ≅ y) (r : G.obj u ≅ F.obj x) (i : u ≅ v) (c : G.obj v ≅ w) (e : w ≅ t)
 
-/-- The forward and reverse conjugation paths are inverse.
-Source: the isomorphism laws, applied to the five factors of the total conjugation.
-Proof: cancel e, c, G(i), r and F(p), in that order, using functoriality. -/
+/-- The forward and reverse conjugation paths are inverse. -/
 theorem sectionConjugation_hom_inv_id :
     (F.map p.inv ≫ r.inv ≫ G.map i.hom ≫ c.hom ≫ e.hom) ≫
       (e.inv ≫ c.inv ≫ G.map i.inv ≫ r.hom ≫ F.map p.hom) = 𝟙 _ := by
@@ -177,9 +166,7 @@ theorem sectionConjugation_hom_inv_id :
     CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_assoc, ← F.map_comp,
     Iso.inv_hom_id, CategoryTheory.Functor.map_id]
 
-/-- The reverse and forward conjugation paths are inverse.
-Source: the isomorphism laws, applied to the five factors of the total conjugation.
-Proof: cancel F(p), r, G(i), c and e, in that order, using functoriality. -/
+/-- The reverse and forward conjugation paths are inverse. -/
 theorem sectionConjugation_inv_hom_id :
     (e.inv ≫ c.inv ≫ G.map i.inv ≫ r.hom ≫ F.map p.hom) ≫
       (F.map p.inv ≫ r.inv ≫ G.map i.hom ≫ c.hom ≫ e.hom) = 𝟙 _ := by

@@ -21,9 +21,8 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits Topology
 namespace AlgebraicGeometry
-/-- The generic fibre is reduced because its affine ring is a localization of the
-reduced source ring. The residue field at the generic point identifies with the actual
-function field of the integral base. Source: Stacks Project, Tag 0559, second proof. -/
+/-- The generic fibre of a reduced affine scheme over an integral affine scheme is reduced.
+Source: Stacks Project, Tag 0559. -/
 private theorem reduced_generic_fibre
     {Z S : Scheme.{u}} [IsAffine Z] [IsReduced Z] [IsAffine S] [IsIntegral S]
     (g : Z ⟶ S) (η : S) (hη : IsGenericPoint η Set.univ) :
@@ -82,17 +81,7 @@ private theorem reduced_generic_fibre
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A lift already constructed from the original dominant field point is dominant.
-Source: Stacks Project, Tag 0559, second proof, and Tag 030R.
-Proof: after transporting the residue field along e, its spectrum map is a
-universal homeomorphism because k'/k is purely inseparable. The fibre comparison
-is its base change. The reduction immersion is closed and surjective; base changing
-it to the generic fibre is again a universal homeomorphism. Compose these two
-comparisons to get d. The two identities on h show h ≫ d is the original dominant
-field point precomposed with Spec E → Spec L, which is surjective. Since d is a
-homeomorphism, h has dense range. The generic fibre of the reduced pullback is
-reduced by localization at the integral base's generic point, as proved above.
-Mathlib then turns dominance into scheme-theoretic dominance. The identity
-extension and arbitrary characteristic are included; no lift is constructed here. -/
+Source: Stacks Project, Tag 0559, and Tag 030R. -/
 private theorem reduced_generic_fibre_lift_dominant
     {Z S S' : Scheme.{u}} [IsAffine Z] [IsAffine S] [IsAffine S'] [IsIntegral S']
     (g : Z ⟶ S) (q : S' ⟶ S) (η : S) (η' : S') (hq : q η' = η)
@@ -210,17 +199,8 @@ private theorem reduced_generic_fibre_lift_dominant
   exact IsSchemeTheoreticallyDominant.of_isDominant h
 
 /-- The affine reduction and generic-fibre construction supplies the dominant map;
-its compatibility with the chosen residue-field embedding is handled separately.
-Proof: the compatibility of aE with e gives the scalar square. Lift the original
-field point through the pullback, then through its reduction (the field source kills
-nilpotents), and finally to the fibre. Its two projection identities are the pullback
-identities. The induced residue-field map is a purely inseparable extension, so the
-comparison from the pullback fibre to the original fibre is a universal homeomorphism.
-Base change of the surjective reduction immersion is also a universal homeomorphism.
-Their composite transfers dominance of the original field point to h. The reduced
-pullback's generic fibre is reduced: its affine ring is a localization of the reduced
-source ring, since the base residue field is its fraction field. Dominance into this
-reduced fibre gives scheme-theoretic dominance. Source: Stacks Project, Tags 0559 and 030R. -/
+its compatibility with the chosen residue-field embedding is not part of this statement.
+Source: Stacks Project, Tags 0559 and 030R. -/
 theorem exists_reduced_generic_fibre_map_core
     {Z S S' : Scheme.{u}} [IsAffine Z] [IsAffine S] [IsAffine S'] [IsIntegral S']
     (g : Z ⟶ S) (q : S' ⟶ S) (η : S) (η' : S') (hq : q η' = η)

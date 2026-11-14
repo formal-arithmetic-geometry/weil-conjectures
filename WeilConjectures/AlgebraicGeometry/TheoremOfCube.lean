@@ -90,14 +90,7 @@ Let `X`, `Y` be proper and geometrically integral over a field `K` with `K`-poin
 let `M`, `N` be invertible modules on `X ×_K Y ×_K Z` which become isomorphic on the slices
 `{x} × Y × Z` and `X × {y} × Z`. If `M` and `N` become isomorphic on the fibre
 `X ×_K Y ×_K Spec F` over a point `φ : Spec F ⟶ Z` with values in a field `F`, then they are
-isomorphic on `X ×_K Y ×_K U` for an open neighbourhood `U` of the image of `φ`.
-
-This is Tag 0BF3 applied over the base `Z` to `X ×_K Z` and `Y ×_K Z` with the sections given
-by `x` and `y`. Its proof is an infinitesimal lifting argument based on the injectivity of
-`H¹(X × Y, 𝒪) → H¹(X, 𝒪) ⊕ H¹(Y, 𝒪)` (Künneth, Tag 0BF2). Tag 0BF3 asks for triviality on the
-fibre over the residue field `κ(t)` of the image `t` of `φ`; this is equivalent to triviality
-over `F`, since a morphism `Spec F ⟶ Z` factors through the locally closed subscheme of
-Tag 0BDP if and only if `t` lies in it. -/
+isomorphic on `X ×_K Y ×_K U` for an open neighbourhood `U` of the image of `φ`. -/
 theorem exists_mem_nonempty_iso_preimageSnd_of_nonempty_iso_fiber (X Y Z : Over (Spec (.of K)))
     [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
     [GeometricallyIntegral Y.hom] (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y)
@@ -128,11 +121,7 @@ theorem exists_mem_nonempty_iso_preimageSnd_of_nonempty_iso_fiber (X Y Z : Over 
 
 Let `X`, `Y` be proper and geometrically integral over a field `K`, and let `M`, `N` be
 invertible modules on `X ×_K Y ×_K Z`. The set of points `t ∈ Z` such that `M` and `N` become
-isomorphic on the fibre `X ×_K Y ×_K Spec κ(t)` is closed.
-
-The projection `X ×_K Y ×_K Z ⟶ Z` is proper, flat, of finite presentation and has
-geometrically integral fibres, so this is the seesaw principle
-`AlgebraicGeometry.Scheme.Modules.isClosed_setOf_nonempty_iso_fiber`. -/
+isomorphic on the fibre `X ×_K Y ×_K Spec κ(t)` is closed. -/
 theorem isClosed_setOf_nonempty_iso_fiber (X Y Z : Over (Spec (.of K)))
     [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
     [GeometricallyIntegral Y.hom] (M N : ((X ⊗ Y) ⊗ Z).left.Modules) [M.IsInvertible]
@@ -172,11 +161,7 @@ lemma nonempty_iso_fiber_of_nonempty_iso_preimageSnd (X Y Z : Over (Spec (.of K)
 Let `X`, `Y` be proper and geometrically integral over a field `K` with `K`-points `x`, `y`, and
 let `M`, `N` be invertible modules on `X ×_K Y ×_K Z` which become isomorphic on the slices
 `{x} × Y × Z` and `X × {y} × Z`. Then the set of points `t ∈ Z` having an open neighbourhood
-`U` with `M ≅ N` on `X ×_K Y ×_K U` is closed.
-
-By Tag 0BF3 (`AlgebraicGeometry.exists_mem_nonempty_iso_preimageSnd_of_nonempty_iso_fiber`)
-this set is the set of `t` such that `M` and `N` are isomorphic on the fibre over `t`, which is
-closed by Tags 0BDP and 0BF0 (`AlgebraicGeometry.isClosed_setOf_nonempty_iso_fiber`). -/
+`U` with `M ≅ N` on `X ×_K Y ×_K U` is closed. -/
 theorem isClosed_setOf_exists_nonempty_iso_preimageSnd (X Y Z : Over (Spec (.of K)))
     [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
     [GeometricallyIntegral Y.hom] (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y)
@@ -207,10 +192,7 @@ theorem isClosed_setOf_exists_nonempty_iso_preimageSnd (X Y Z : Over (Spec (.of 
 Let `X`, `Y` be proper and geometrically integral over a field `K` with `K`-points `x`, `y`, and
 let `z` be a `K`-point of `Z`. If two invertible modules `M`, `N` on `X ×_K Y ×_K Z` become
 isomorphic on the slices `{x} × Y × Z`, `X × {y} × Z` and `X × Y × {z}`, then they are
-isomorphic on `X ×_K Y ×_K U` for some open neighbourhood `U` of `z`.
-
-The slice `X × Y × {z}` is the fibre over `z`, so this is
-`AlgebraicGeometry.exists_mem_nonempty_iso_preimageSnd_of_nonempty_iso_fiber`. -/
+isomorphic on `X ×_K Y ×_K U` for some open neighbourhood `U` of `z`. -/
 theorem exists_mem_nonempty_iso_preimageSnd (X Y Z : Over (Spec (.of K)))
     [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
     [GeometricallyIntegral Y.hom] (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y)
@@ -249,20 +231,13 @@ theorem exists_mem_nonempty_iso_preimageSnd (X Y Z : Over (Spec (.of K)))
   rw [H]
   exact nonempty_iso_pullback_comp _ _ hz.some
 
-/-- **Invertible modules isomorphic locally over the base are isomorphic** (Stacks, Tag 0BDP and
-the last step of the proof of Tag 0BF4).
+/-- **Invertible modules isomorphic locally over the base are isomorphic** (Stacks, Tags 0BDP
+and 0BF4).
 
 Let `X`, `Y` be proper and geometrically integral over a field `K` and let `x` be a `K`-point of
 `X`. If two invertible modules `M`, `N` on `X ×_K Y ×_K Z` are isomorphic on `X ×_K Y ×_K U` for
 the members `U` of an open cover of `Z`, and are isomorphic on the slice `{x} × Y × Z`, then
-`M ≅ N`.
-
-We show that `L = M ⊗ Nᵛ` is trivial. Let `π : X ×_K (Y ×_K Z) ⟶ Y ×_K Z` be the projection and
-`σ` the slice `{x} × Y × Z`, a section of `π`. As `X` is proper and geometrically integral, `π`
-induces bijections `Γ(V, 𝒪) ≅ Γ(π⁻¹ V, 𝒪)` on all opens `V`. Local generators of `L` over the
-opens `π⁻¹ V`, `V` lying over an open of the cover of `Z`, can be rescaled so that their
-pullbacks along `σ` agree with a fixed generator of `σ^* L ≅ 𝒪`; they then agree on overlaps and
-glue (`AlgebraicGeometry.Scheme.Modules.exists_isFreeGenerator_top_of_comp_eq_id`). -/
+`M ≅ N`. -/
 theorem nonempty_iso_of_forall_exists_nonempty_iso_preimageSnd (X Y Z : Over (Spec (.of K)))
     [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
     [GeometricallyIntegral Y.hom] (x : 𝟙_ _ ⟶ X)
@@ -325,11 +300,7 @@ theorem nonempty_iso_of_forall_exists_nonempty_iso_preimageSnd (X Y Z : Over (Sp
 Let `X`, `Y` be proper and geometrically integral over a field `K`, let `Z` be a connected
 `K`-scheme and let `x`, `y`, `z` be `K`-points of `X`, `Y`, `Z`. If two invertible modules `M`,
 `N` on `X ×_K Y ×_K Z` become isomorphic on each of the three slices `{x} × Y × Z`,
-`X × {y} × Z` and `X × Y × {z}`, then `M ≅ N`.
-
-Stacks states this for one invertible module `L` (if `L` is trivial on the three slices then
-`L` is trivial); the form here follows by applying it to `L = M ⊗ N⁻¹`. Over a field the
-flatness and finite presentation hypotheses of Tag 0BF4 are automatic. -/
+`X × {y} × Z` and `X × Y × {z}`, then `M ≅ N`. (Stacks states this for `L = M ⊗ N⁻¹`.) -/
 theorem nonempty_iso_of_nonempty_iso_overPullback_slices (X Y Z : Over (Spec (.of K)))
     [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
     [GeometricallyIntegral Y.hom] [ConnectedSpace Z.left] (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y)

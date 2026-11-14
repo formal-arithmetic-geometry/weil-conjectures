@@ -25,20 +25,9 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- Pseudo-coherent internal Hom is quasi-coherent and locally bounded below.
-
-Source: Stacks Project, Tag 0A6H (1).
-
-Proof: Choose a neighbourhood of each point on which K has a bounded-above finite-free
-representative, and shrink it to an affine open. The matrices of the differentials give a
-bounded-above finite-free module complex. Use the affine quasi-coherent derived equivalence
-to represent L there by a module complex. Exact restriction and exact, faithful tilde
-transfer the cohomological lower bound of L to that complex. The affine pseudo-coherent
-RHom calculation gives quasi-coherent cohomology and a lower bound for the internal Hom:
-if the source vanishes above b and the target below a, its Hom complex vanishes below a-b.
-The restriction isomorphism identifies this calculation with restriction of RHom(K,L).
-Quasi-coherence glues over the affine cover. The individual bounds give the claimed
-neighbourhood bound at each point; no finite cover or uniform global bound is required. -/
+/-- Derived internal Hom from a pseudo-coherent `K` into a bounded-below `L` with quasi-coherent
+cohomology has quasi-coherent cohomology, and every point has a neighbourhood on which its
+cohomology sheaves vanish below some integer. Stacks Tag 0A6H (1). -/
 theorem rhom_supported_quasiCoherent_pseudo_part
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

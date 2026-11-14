@@ -169,15 +169,7 @@ private theorem grouped_prefix_expansion
 omit [HasSmallSiteSheafify B] in
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The successive projection factors through the compactification projection on Ra M.
-Source: Stacks Tags 0B56 and 0GL1 and the canonical pullback associativity of Tag 0E48.
-
-Proof: expand the compactification projection into its proper projection, open tensor
-comparison and inverse pullback compositor. Naturality of the proper projection for a
-moves the inverse compositor through that projection. Inverse threefold pullback
-associativity then identifies the two coefficient maps. Functoriality and associativity
-paste these equalities. This uses no inverse of a projection map and has no boundedness
-or quasi-compactness hypothesis.
--/
+Stacks Tags 0B56 and 0GL1 and the canonical pullback associativity of Tag 0E48. -/
 theorem sfGraphProjectionWord_proper_prefix
     {X W Y : Scheme.{u}} {f₀ : W ⟶ Y} (c : Compactification f₀)
     (a : X ⟶ W) [IsProper a] (f : X ⟶ Y) (hf : f = a ≫ f₀)

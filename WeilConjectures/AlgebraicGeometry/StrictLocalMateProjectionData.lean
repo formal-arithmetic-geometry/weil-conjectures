@@ -23,7 +23,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- The global-sections map of the degree-n homology of the derived strict-local mate.
-Source: Stacks, Tag 03Q9, final proof paragraph. -/
+Stacks Project, Tag 03Q9. -/
 noncomputable abbrev strictLocalBaseChangeHomologyMap
     {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
@@ -78,7 +78,7 @@ noncomputable def strictLocalBaseChangeTargetIso
 
 /-- Hypercohomology identifications, their transitions, and their compatibility with
 projection restriction. There is no source colimit assertion in this data.
-Source: Stacks, Tag 03Q9, final proof paragraph. -/
+Stacks Project, Tag 03Q9. -/
 structure StrictLocalMateProjectionData
     {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

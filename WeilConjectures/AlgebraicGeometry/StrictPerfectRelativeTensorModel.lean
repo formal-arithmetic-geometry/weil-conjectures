@@ -83,24 +83,7 @@ private theorem relativeTensorComplex_bound
 
 /-- A strict-perfect tensor chart admits a bounded K-flat model over the inverse-image
 base ring, together with a common quasi-isomorphic complex connecting it to K restricted
-on the chart. Source: Stacks Project, Tags 0DJQ, 08CI and 08CG.
-
-Proof: restrict G to the open site of U and totalize its tensor with L. Boundedness
-of the two factors gives the sum interval by checking each summand in total degree.
-The terms of L are finite-free retracts and therefore flat, so this tensor represents
-the restriction of QK, using eK and eL and exact monoidal open restriction.
-At every point of U, express the stalk of each G term as a filtered colimit of its
-sections over affine neighbourhoods inside the preimage of a fixed affine base open.
-These sections are flat by hGflat; filtered colimits preserve flatness. Localization
-of the base ring then shows flatness over the base stalk. Tensoring with the finite-free
-retractions of L gives finite sums and retracts of these flat stalk modules. Thus the
-scalar restriction T of the total complex is termwise flat over the inverse-image base
-ring, and boundedness makes T K-flat. Restrict the given derived model isomorphisms
-along the base ring map; they identify T with the scalar restriction of K on U.
-Represent this derived isomorphism by a roof H with two quasi-isomorphisms, oriented
-from H to the two complexes, using the calculus of fractions for quasi-isomorphisms.
-Empty U and reversed intervals give the same construction with zero total terms.
-No witness is used to define data outside this existential proposition. -/
+on the chart. Stacks Project, Tags 0DJQ, 08CI and 08CG. -/
 theorem strictPerfect_relativeTensor_model
     {X S : Scheme.{u}} (f : X ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

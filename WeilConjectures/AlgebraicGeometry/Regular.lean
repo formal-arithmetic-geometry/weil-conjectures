@@ -234,8 +234,8 @@ theorem isIntegrallyClosed_stalk_of_smooth {k : Type u} [Field k] {X : Scheme.{u
   isIntegrallyClosed_stalk_of_isRegular hdim x
 
 /-- A connected locally noetherian regular scheme is irreducible, since its local rings, being
-regular, are integral domains. This is the consequence recorded in blueprint
-`rem-pc-regular-normal`; see also `AlgebraicGeometry.IsRegular.exists_isClopen_isIntegral`. -/
+regular, are integral domains; see also `AlgebraicGeometry.IsRegular.exists_isClopen_isIntegral`.
+-/
 theorem IsRegular.irreducibleSpace (X : Scheme.{u}) [IsRegular X] [IsLocallyNoetherian X]
     [ConnectedSpace X] : IrreducibleSpace X :=
   irreducibleSpace_of_isDomain_stalk X fun _ ↦ inferInstance

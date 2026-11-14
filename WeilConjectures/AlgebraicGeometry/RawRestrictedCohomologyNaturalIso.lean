@@ -26,26 +26,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Raw derived Hom is naturally isomorphic to cohomology on the restricted etale
 scheme, for every structure morphism and coefficient sheaf.
-Source: Stacks Project, Tag 03Q8; Cohomology on Sites, the restriction arguments
-in Tags 072W and 0BKV (Lemmas 21.7.4 and 21.20.3).
-
-Proof: For each h and U, the inverse image of the free abelian represented sheaf
-is the free sheaf of the etale Y-scheme U times_S Y. The free-sheaf sections
-adjunction followed by the exact extension-by-zero/restriction adjunction
-identifies Hom from this sheaf with sections of the restriction to that scheme.
-Restriction preserves injectives since extension by zero is exact: on geometric
-stalks it is a direct sum of abelian groups. Apply the adjunction to a bounded-below
-injective resolution of F. Hom from a degree-zero free sheaf to the shifted
-resolution computes its restricted cohomology. The fully faithful inclusion of
-D+ into D identifies this with cohomology of Q of the single complex. All steps
-are additive and give e. For a triangle a followed by h equals h', identify its
-restriction map by the two pullback projections. Inverse-image composition gives
-exactly rawAffineRestrictedCoefficient. Naturality of the adjunction unit, the
-single-functor comparison, and the shift comparison identifies the raw pullback
-with homology of the derived adjunction unit followed by the coefficient map,
-which is rawAffineRestrictedCohomologyMap. The triangle identities cancel the
-adjunction counits, proving the displayed equation. No qcqs, affinity, limit or
-continuity hypothesis is used. -/
+Source: Stacks Project, Tag 03Q8; Cohomology on Sites, Tags 072W and 0BKV. -/
 theorem exists_raw_restricted_cohomology_natural_iso (S : Scheme.{v}) (p : ℕ)
     (U : S.Etale) :
     ∃ e : ∀ {Y : Scheme.{v}} (h : Y ⟶ S)

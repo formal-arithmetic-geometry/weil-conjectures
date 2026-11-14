@@ -172,23 +172,7 @@ theorem strictHenselization_chart_isStrictHenselization
 
 /-- The geometric strict henselization is an algebraic strict henselization of a prime
 localization, compatibly with the given structural ring map. There is no divisor here.
-Source: Stacks Project, Tag 04HX, using Tag 04GW.
-
-Proof: Let q be the image of the geometric point, and put A = R_q. Its residue field is
-canonically the residue field at q. Inside the geometric field take the relative separable
-closure K of that residue field. Affine pointed etale neighbourhoods compute the geometric
-strict henselization ring. By the affine neighbourhood/triples comparison their coordinate
-ring diagram is equivalent to etale residue triples over R at q with embeddings into K.
-Passing from R to A does not change its colimit: etale algebras and their finitely many
-presentation equations descend from A to R after inverting one element outside q, and
-these principal localizations are pointed etale neighbourhoods. The equivalence between
-residue triples over the local ring A and etale A-algebras pointed in K identifies this
-colimit with the diagram defining Algebra.IsStrictHenselization. Each element outside q
-is a unit in the colimit, so the structural R-map extends uniquely to A. The comparison
-preserves the maps from R; applying the faithful spectrum functor and hb identifies that
-R-map with b. Transport the A-algebra structure through the colimit ring isomorphism;
-its composite with R -> A is therefore b. All colimit identifications are characterized
-by their legs, so no arbitrary algebraic object is chosen from mere existence. -/
+Source: Stacks Project, Tags 04HX and 04GW. -/
 theorem strictHenselizationRing_local_presentation
     (R : CommRingCat.{u})
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

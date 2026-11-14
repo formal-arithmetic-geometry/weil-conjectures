@@ -174,24 +174,7 @@ private theorem signs_apply (A : CommRingCat.{u}) (M : ModuleCat.{u} A) (q : ℕ
 
 /-- The explicitly constructed ordered Čech fibre has the localization coordinates
 and augmentation of the extended ordered complex.
-Source: Stacks Project, Tag 099D(d), and Cohomology, Tags 01EQ and 01FJ.
-
-Proof: every generator belongs to I, so each principal open D(f_i) lies in the
-ideal complement. An ordered intersection is D(product f(t i)). The sections of
-the structure module there identify, as A-modules, with the corresponding
-localization, by the principal-open section isomorphism. Under those isomorphisms
-restriction is the unique A-algebra map of localizations; use these maps for l.
-The ordered Čech complex was constructed from the products of these sections
-and their signed face restrictions. Its inverse-rotated cone adds A in degree
-zero and has zero terms in negative degrees. Projection to A is the identity
-in degree zero. Identify each positive degree of the cone with the preceding
-Čech degree, negating successive coordinates so that the shifted cone
-signs become precisely the displayed positive first differential and signed
-face sum. These coordinate signs do not change the degree-zero projection.
-This proves each equation by substitution in the cone differential. For r=0
-the section products are zero modules and the fibre is A[0]; a zero generator
-has empty principal open and zero localization, while repeated generators have
-the same restriction formulas. The zero ring is included in these formulas. -/
+Stacks Project, Tag 099D(d), and Cohomology, Tags 01EQ and 01FJ. -/
 theorem ringComplexOrderedCech_coordinates (A : CommRingCat.{u}) (I : Ideal A)
     (r : ℕ) (f : Fin r → A) (hf : Ideal.span (Set.range f) = I) :
     let C := ringComplexOrderedCech A I f

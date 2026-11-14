@@ -109,26 +109,9 @@ theorem singleComplexOpen_pullback_counit_representative_postcomp
 
 set_option cleanup.letToHave false in
 /-- The pullback-composition route, after the direct-image unit, is the localization
-of the sectionwise counit. This calculation does not use the derived open direct-image
-comparison: it compares the explicit pullback factors with the underived adjunction.
-Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-
-Proof: Write F for module direct image along f, F0 for direct image along f restricted
-to V, and rX,rY for exact open restriction. On the homotopy category the sectionwise
-comparison e identifies rY(F(I)) with F0(rX(I)). The tensor adjunctions transpose e
-to the pullback square. Indeed the composition comparisons for tensor pullback are
-conjugates of pushforward composition, and the open pullback comparison is the unique
-left-adjoint comparison with exact restriction. Evaluate on sections: both routes
-send a local tensor a tensor x to a times the restriction of x. Thus their composite
-with the underived counit is the same morphism. Apply Qh and use the left-derived
-counit factorization for each composition comparison. Cancel the open-restriction
-factorization isomorphisms, and use naturality of the recorded right-derived unit.
-The pinning of the derived Hom equivalence identifies the derived counit after that
-unit with the left-derived counit followed by Qh of the underived counit. These
-factorizations yield exactly the displayed equality. The calculation works for every
-homotopy-category I: it uses the unit, not its inverse, and needs no resolution or
-boundedness assumption. Empty opens and zero complexes satisfy the same sectionwise
-identity, so no exceptional cases are excluded. -/
+of the sectionwise counit. This compares the explicit pullback factors with the
+underived adjunction and does not involve the derived open direct-image comparison.
+Stacks Project, Tags 08FE, 08HY and 0D5S. -/
 theorem singleComplexOpen_pullback_counit_representative
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

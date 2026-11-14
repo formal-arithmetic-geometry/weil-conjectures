@@ -25,11 +25,7 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution
 
 /-- Evaluation through the terminal-source comparison agrees with the integer generator.
-Source: Stacks Project, Tag 06XR; the constant-sheaf and free-abelian adjunctions.
-
-Proof: The free singleton generator maps to the integer 1. Expand the two
-adjunctions, commute the singleton isomorphism through sheafification using
-naturality of its unit, and evaluate on that generator. -/
+Stacks Tag 06XR. -/
 theorem terminal_source_sections_evaluation (X : Scheme.{u})
     (N : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
     (a : (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj

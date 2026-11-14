@@ -153,16 +153,9 @@ private theorem ordinaryIntegralResidueSequence (T : Scheme.{u}) (n : ℕ) (hn :
       simpa only [Category.id_comp] using ordinaryFiniteIntegralGenerator_residue T n
   exact ShortComplex.shortExact_of_iso e ((quotientCast_shortExact n hn).map_of_exact F)
 
-/-- For a closed immersion i:D→T of schemes and n>0, the maps n:i_*Z_D→i_*Z_D and the normalized
-integral generator i_*Z_D→forget(i_*(ULift(Z/n))_D) form a short exact sequence of abelian etale
-sheaves [def-weil-pbc-direct-image, def-asd-ordinary-finite-p1-kummer-class].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ.
-Proof: The constant integer-to-residue sequence is exact: sheafification is exact and the elementary
-integer sequence has kernel nZ. A closed immersion is finite, so its etale direct image is exact.
-Apply this direct image to the constant sequence. The constant-sections adjunction identifies its
-quotient map with the published integral generator. Positivity ensures multiplication by n is monic,
-including n=1. -/
+/-- For a closed immersion `i : D ⟶ T` of schemes and `n > 0`, multiplication by `n` on
+`i_* ℤ_D` and the normalized integral generator `i_* ℤ_D ⟶ forget (i_* (ULift (ZMod n))_D)`
+form a short exact sequence of abelian étale sheaves. Stacks Project, Tags 0152, 06YY and 0GLZ. -/
 theorem supported_integral_residue_sequence {D T : Scheme.{u}} (i : D ⟶ T)
     [IsClosedImmersion i] (n : ℕ) (hn : 0 < n) :
     ∃ w : (n • 𝟙 ((lowerStar AddCommGrpCat.{u + 1} i).obj

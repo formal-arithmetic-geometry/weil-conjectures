@@ -153,16 +153,7 @@ private theorem section_vertices_of_resolving {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact ⟨inferInstance, inferInstance, inferInstance, inferInstance, inferInstance, inferInstance⟩
 
 /-- Resolving-model identification of derived oplax constraint diagrams.
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E;
-explicit representative diagram calculation.
-
-Proof: take resolving closure and the six edge squares from the model-edge
-calculation. All six vertex maps are invertible by the one-sided K-flat tensor
-comparison and the resolution isomorphism. Compose each branch's edge squares;
-the ordinary cochain associator equation identifies their localized middle paths.
-Cancel the common final vertex comparison. For each unit compose the three edge
-squares, use the ordinary cochain unit equation, and cancel the final resolution
-comparison. Finally apply the separate fixed internal conjugation calculation. -/
+Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E. -/
 theorem section_resolving_oplax_constraint_diagrams {X Y : Scheme.{u}} (f : X ⟶ Y)
     (μ : SectionTensorArrow Λ f)
     (v : (derivedPullback Λ f).obj

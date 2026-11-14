@@ -27,8 +27,6 @@ namespace Algebra
 
 /-- The base-changed naive presentation identifies the quotient by the mapped relations with
 scalar extension of the original quotient, sending each variable to its pure tensor.
-Proof: use `Presentation.baseChange`, identify its relation ideal with its kernel, and apply
-`Presentation.quotientEquiv`. The variable formula is `aeval_X` for the base-changed generators.
 Source: Stacks Project, Algebra, Lemma Tag 00SS, part (1). -/
 private theorem polynomialQuotient_baseChange
     (R : Type u) (R' : Type v) [CommRing R] [CommRing R'] [Algebra R R']
@@ -59,12 +57,6 @@ private theorem polynomialQuotient_baseChange
 `R'[x₁, …, xₙ]`. (a) The `R'`-algebra map `R'[x]/(f') → R' ⊗_R R[x]/(f)` with
 `xⱼ ↦ 1 ⊗ xⱼ` is an isomorphism; (b) if `R[x]/(f)` is a relative global complete
 intersection over `R`, so is `R'[x]/(f')` over `R'`.
-Proof: (a) both sides corepresent the same functor on `R'`-algebras (tuples in the zero
-locus of the `f'ᵢ`), by right exactness of the tensor product. (b) By (a), the fibre ring of
-`R'[x]/(f')` at a prime `𝔮` of `R'` lying over `𝔭` is `κ(𝔮) ⊗_{κ(𝔭)}` the fibre ring of
-`R[x]/(f)` at `𝔭`; it is nonzero exactly when the latter is, and its dimension is the same
-because dimension of finite type algebras over a field is preserved under field extension
-(Tag 00P3).
 Source: Stacks Project, Algebra, Lemma Tag 00SS, part (1).
 -/
 theorem relativeGlobalCompleteIntersection_baseChange

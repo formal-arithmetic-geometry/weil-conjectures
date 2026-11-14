@@ -419,16 +419,7 @@ theorem inverseImagePurePairing_natural
 
 /-- A canonical morphism from the tensor of inverse images to the inverse image of the
  tensor, with its normalization on every generalized pair.
-Source: Stacks Project, Modules on Sites, Tag 03EL.
-
-Proof: transport the ordinary pure pairing using the finite-product comparison and the
-specified module-underlying isomorphisms. To check each additivity or scalar equation,
-take the test sheaf of its three operands. Product preservation supplies a section above
-any given target triple. Apply the graph axioms of the algebraic inverse image to the
-source bilinear equation, and use the inverse-underlying isomorphisms on the projections.
-The transported pairing commutes with restrictions since it is a sheaf morphism. The
-sheaf tensor universal property supplies the required linear morphism. The product
-comparison equation gives the displayed normalization for every test sheaf. -/
+Stacks Project, Modules on Sites, Tag 03EL. -/
 theorem exists_inverseImageTensorPairing
     (R : Sheaf J CommRingCat.{u}) (RI : Sheaf K CommRingCat.{u})
     (F : Sheaf J (Type u) ⥤ Sheaf K (Type u)) [PreservesFiniteLimits F]

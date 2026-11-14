@@ -104,10 +104,8 @@ private theorem normalizedConstantMap_apply {R S : Type (u + 1)} [CommRing R]
   rw [normalizedConstantMap_top] at hn
   exact hn
 
-/-- Construct the normalized coefficient maps by the constant-sheaf adjunction and record their
-component formulas. Proof: use the adjunction hom-equivalence to define each map from the
-terminal generator, then use naturality of the sheafification unit to transport the terminal
-formula along every étale object. Source: Stacks Project, Tags 03QP and 06YY. -/
+/-- There are normalized coefficient maps, obtained by the constant-sheaf adjunction, with
+the recorded component formulas. Stacks Project, Tags 03QP and 06YY. -/
 theorem exists_supported_kummer_scalar_maps
     (T : Scheme.{u}) (N : ℕ)
     (A : Type (u + 1)) [CommRing A] (φ : ULift.{u + 1} (ZMod N) →+* A)
@@ -190,10 +188,7 @@ private theorem supportedConstantUnit_apply (R : Type (u + 1)) [CommRing R]
   exact congrArg (fun f ↦ f r) (NatTrans.congr_app (supportedConstantUnit_generators R i) U)
 
 /-- Normalized coefficient maps commute with the adjunction unit on constants.
-Proof: precompose with the constant-presheaf sheafification unit. The constant-pullback
-comparison is characterized by the constants/global-sections adjunction; its unit sends
-constant generators to the same generators on the pullback object. Both composites
-therefore send r to φ(r). Source: Stacks Project, Tag 03Q1. -/
+Stacks Project, Tag 03Q1. -/
 theorem supported_kummer_scalar_units_commute {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (φ : R →+* S) {D T : Scheme.{u}} (i : D ⟶ T)
     (ηD : ordinaryFiniteConstant R D ⟶

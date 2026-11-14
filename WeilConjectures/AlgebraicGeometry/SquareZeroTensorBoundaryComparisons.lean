@@ -88,11 +88,7 @@ def boundaryCoefficientDegreeIso {X Z : Scheme.{u}} (j : Z ⟶ X)
       boundaryTensorPowIso (boundaryPullbackPowIso j L n) e))
 
 /-- The multiplication inclusion is the kernel, with its canonical inclusion equation.
-Source: Stacks Tags 08KS and 09MS.
-Proof: the unit quotient theorem identifies its kernel with the image of multiplication.
-Twisting the ideal inclusion by an invertible module is mono, so multiplication equals
-its image up to the unique image isomorphism. Transport the limiting kernel fork along
-that isomorphism, and compare adjunction units by uniqueness of left adjoints. -/
+Source: Stacks Tags 08KS and 09MS. -/
 theorem boundaryIdealKernelIso_exists {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (M : X.Modules) [M.IsInvertible] :
     ∃ t : j.ker.toModules ⊗ M ≅
@@ -118,23 +114,16 @@ theorem boundaryIdealKernelIso_exists {X Z : Scheme.{u}} (j : Z ⟶ X)
   exact IsLimit.conePointUniqueUpToIso_hom_comp hμ'
     (kernelIsKernel (adj'.unit.app M)) WalkingParallelPair.zero
 
-/-- The kernel comparison is determined by its inclusion equation; no unspecified object
-is selected. Source: Stacks Tag 09MS. -/
+/-- The isomorphism `j.ker ⊗ M ≅ kernel (unit M)` determined by its inclusion equation.
+Source: Stacks Tag 09MS. -/
 def boundaryIdealKernelIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (M : X.Modules) [M.IsInvertible] :
     j.ker.toModules ⊗ M ≅
       kernel ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app M) :=
   Classical.choose (boundaryIdealKernelIso_exists j M)
 
-/-- Square-zero annihilation makes the adjunction unit on every ideal tensor power invertible.
-This statement concerns modules only, with no cohomology, section, or derivation assertion.
-
-Source: Stacks Project, Tags 09MS and 08KS.
-Proof: on an affine open where L is free of rank one, identify I tensor L^d with I.
-Multiplication by I is then zero because I squared is zero. This local calculation glues,
-so I annihilates I tensor L^d on every open. The ideal is quasi-coherent, and twisting
-by an invertible module preserves quasi-coherence. Apply the annihilated-module unit
-isomorphism for the closed immersion. Degree zero is the right unitor case. -/
+/-- If the ideal `I` of `j` has `I ^ 2 = ⊥`, the adjunction unit at `I ⊗ L ^ d` is an
+isomorphism for every invertible `L` and every `d`. Stacks Tags 09MS, 08KS. -/
 theorem square_zero_ideal_tensor_unit_isIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (d : ℕ) :

@@ -142,25 +142,11 @@ private theorem dualizeLocalCoordinateSquare {Z : Scheme.{u}} (O V : Z.Opens)
     chartRestrictedDualMap_comp, chartRestrictedDualMap_global] at hd
   simpa only [chartRestrictedDualIso, Category.assoc] using hd
 
-/-- Duality and open restriction carry an undualized affine coordinate square to
-its dual coordinate square. This is a statement about one chart and an arbitrary
-morphism, not the existence or gluing of a global comparison.
-
-Source: Stacks Project, Tag 01CM (the internal Hom sheaf as local linear maps).
-
-Proof: For O=i^{-1}U, a map φ:E|_O -> Q|_O acts on dual sections by
-precomposition. On an open D of V contained in W=V∩O, its image in Z lies in O.
-Restrict φ to that image and precompose the local linear map representing the
-section of Q's dual. This is linear in the section and commutes with restriction,
-so chartRestrictedDualMap constructs a morphism on the over-W site. Check on each
-section and each smaller open that it preserves identities, reverses composition,
-and sends τ|_O to the restriction of dualMap τ. Applying it to an isomorphism and
-its inverse gives chartRestrictedDualIso, with both inverse laws proved from those
-identities. Apply this operation to the coordinate square in hτ. The target
-coordinate becomes a and the source coordinate becomes b; reverse composition
-and identify the middle map with the functorial image of c.op. Associativity gives
-the desired equality. No finiteness, regularity, derived tensor computation, or
-descent is used. Empty W and n=0 obey the same section formulas. -/
+/-- Duality and open restriction carry an undualized affine coordinate square to its dual
+coordinate square: if `τ` is an affine self-Tor chart map over `i⁻¹ U`, then the restriction
+to `V` of `dualMap τ` factors as `a.hom ≫ F.map c.op ≫ b.hom` for isomorphisms `a` and `b`.
+This concerns one chart and an arbitrary morphism, not a global comparison.
+Stacks Project, Tag 01CM. -/
 theorem selfTor_affine_chart_square_dualization
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) (U : Y.affineOpens) (n : ℕ)
     (E Q : Z.Modules) (τ : E ⟶ Q)

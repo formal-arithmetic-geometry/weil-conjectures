@@ -49,22 +49,7 @@ private noncomputable def changeIsoRestriction
 set_option maxHeartbeats 800000 in
 -- The final transport compares module structures on the two site presentations.
 /-- Ordinary slice restriction commutes with transport to the AsSmall site and
-with an invertible change of coefficient rings.
-
-Source: Stacks Project, sites-modules.tex, localization of modules on a site;
-sites.tex, `lemma-localize-compare`; Tags 03D2 and 00YY.
-
-Proof: use Over.postEquiv for AsSmall to identify the two slice sites.
-Precomposition gives the module equivalence on them. Restrict e to the slice
-and then compose with c to identify the transported coefficient ring with T.
-Scalar extension along this isomorphism equals restriction along its inverse.
-The resulting pushforward functor G is additive on sections. It preserves finite
-limits, and cocontinuity gives preservation of finite colimits through the
-abelian-sheaf forgetful comparison. Its comparison with first transporting and then
-restricting is identity on
-sections and restriction maps before scalar extension. The tensor/restriction
-adjunction gives the stated comparison after scalar extension. All maps are
-natural in the input module, including for an empty slice and the zero ring. -/
+with an invertible change of coefficient rings. Stacks Project, Tags 03D2 and 00YY. -/
 theorem sfbOrdinarySliceNormalization
     (S : Scheme.{u}) (U : S.ProEt)
     (R : Sheaf (ProEt.topology S) CommRingCat.{u + 1})

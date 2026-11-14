@@ -28,25 +28,14 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open CategoryTheory.Functor.sheafPullbackConstruction
 
-/-- Local vanishing makes the direct image of an injective resolution a resolution.
+/-- Local vanishing makes the direct image of an injective resolution a resolution: if positive
+cohomology of `F` is locally zero on the Zariski site, then the sheaf pullback along `i`
+preserves finite limits and the pushed-forward augmentation of every injective resolution of
+`F` is a quasi-isomorphism.
 
-Source: Stacks Project, Tags 072W and 0733(1); Etale Cohomology, Tag 09AX;
-Modules on Sites, Tag 03DJ.
+Stacks Project, Tags 072W and 0733(1); Etale Cohomology, Tag 09AX;
+Modules on Sites, Tag 03DJ. -/
 
-Proof: factor the
-given open-restriction functor through the etale object i(top).
-Its left adjoint is usual exact inverse image followed by exact extension by zero,
-so it preserves finite limits. Its right adjoint therefore preserves injectives.
-Compute positive cohomology of the pushed complex by the section complex of I.
-The arbitrary-universe Ext description is naturally equivalent to this computation.
-Local injectivity of zero says each cocycle class is locally zero. Sheafification
-commutes with homology (072W), so the pushed complex is exact in positive degrees.
-Left exactness identifies its degree-zero kernel with i_*F. The pushed augmentation
-is the inverse of the single-complex comparison followed
-by the image of I.ι. Its source has only degree-zero homology, and its degree-zero
-map on homology is the identity under the kernel identification. Thus it is a
-quasi-isomorphism. This assertion fixes the pushed complex and augmentation;
-it chooses no resolution data. -/
 theorem zariski_etale_pushed_resolution
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

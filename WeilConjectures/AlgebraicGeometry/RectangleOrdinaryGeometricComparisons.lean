@@ -25,21 +25,7 @@ open scoped CategoryTheory.TwoSquare
 namespace AlgebraicGeometry
 
 /-- Geometric comparisons for the ordinary rectangle, before introducing right adjoints.
-Source: Stacks Project, Tags 0ATR, 08HY, 0ATM and 0D5S.
-
-Proof: The pullback universal property identifies k with the canonical iterated
-pullback isomorphism. Derived pullback along this isomorphism is an equivalence,
-and restriction to the full quasi-coherent subcategories remains an equivalence.
-Restrict the fixed derived pullback composition comparisons, using hk₁, to obtain
-s, with exactly the displayed ambient component; the base comparison gives b.
-The derived direct image composition comparison, the adjunction equivalence for k,
-and hk₂ give p. Transpose the ordinary rectangle and the paste under the fixed
-pullback/direct image adjunctions. The counit definition of ordinary base change
-and associativity of the canonical pullback comparisons identify their transposes.
-Injectivity of the adjunction Hom equivalence proves ordinary pasting. Invert the
-three base change isomorphisms and use naturality to move p and b, giving the
-stated inverse-square equality. This proof is valid for empty schemes and zero
-complexes, since all steps are functorial identities or universal properties. -/
+Source: Stacks Project, Tags 0ATR, 08HY, 0ATM and 0D5S. -/
 theorem rectangle_ordinary_geometric_comparisons
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X Y S T : Scheme.{u}}

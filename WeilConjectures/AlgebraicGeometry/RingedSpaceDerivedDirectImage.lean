@@ -69,12 +69,7 @@ def resolvedModuleDirectImage (g : X ⟶ Y) :
     (moduleDirectImage g).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q
 
 /-- Resolved direct image inverts quasi-isomorphisms.
-Source: Stacks, Tag 079V.
-Proof: naturality of the resolution map and two-out-of-three show that I(s) is a
-quasi-isomorphism when s is one. Both its endpoints are K-injective. By
-`CochainComplex.IsKInjective.quasiIso_iff`,
-I(s) is a homotopy equivalence. Additive direct image preserves this equivalence,
-and the target localization therefore sends it to an isomorphism. -/
+Stacks Project, Tag 079V. -/
 theorem resolvedModuleDirectImage_inverts (g : X ⟶ Y) :
     (HomologicalComplex.quasiIso (SheafOfModules.{u} (moduleRings X))
       (ComplexShape.up ℤ)).IsInvertedBy (resolvedModuleDirectImage g) := by
@@ -122,10 +117,7 @@ abbrev derivedModuleDirectImage (g : X ⟶ Y) :
 /-- The defining comparison: Q followed by Rg-star is isomorphic to the functorial
 K-injective resolution followed by termwise g-star and Q, so Rg-star(QK) = Q(g-star I(K))
 and Rg-star(Q f) = Q(g-star I(f)) up to this natural isomorphism.
-Source: Stacks, Tag 079V.
-Proof: the unit of the right derived functor is an isomorphism on the K-injective
-complexes I(K); compose it with Rg-star applied to the inverse of Q of the natural
-quasi-isomorphism K to I(K), which is natural in K. -/
+Stacks Project, Tag 079V. -/
 theorem derivedModuleDirectImageFactorization (g : X ⟶ Y) :
     Nonempty (DerivedCategory.Q ⋙ derivedModuleDirectImage g ≅ resolvedModuleDirectImage g) := by
   let C := SheafOfModules.{u} (moduleRings X)
@@ -158,12 +150,7 @@ theorem derivedModuleDirectImageFactorization (g : X ⟶ Y) :
     (asIso (Functor.whiskerLeft I β)).symm⟩
 
 /-- Any K-injective resolution computes the same derived direct image.
-Source: Stacks, Tag 079V.
-Proof: the bijection `CochainComplex.IsKInjective.Qh_map_bijective` lifts the
-isomorphism QI(K) to QJ to a homotopy class I(K) to J. Its representative is a
-quasi-isomorphism and therefore a homotopy equivalence by `quasiIso_iff`.
-Apply additive direct image and Q, and compose with the defining factorization
-(equivalently: the unit of the right derived functor is an isomorphism at J). -/
+Stacks Project, Tag 079V. -/
 theorem derivedModuleDirectImage_computed_by_resolution (g : X ⟶ Y)
     {K J : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ}
     (s : K ⟶ J) [QuasiIso s] [J.IsKInjective] :

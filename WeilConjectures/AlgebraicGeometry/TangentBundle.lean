@@ -67,7 +67,7 @@ instance isQuasicoherent_relativeDifferentials : f.relativeDifferentials.IsQuasi
 /-- Relative tangent bundle
 
 The relative tangent bundle `T_{X/Y} = Spec_X Sym_{𝒪_X}(Ω¹_{X/Y})` of a morphism `f : X ⟶ Y`.
-The blueprint considers it for smooth `f`, where `Ω¹_{X/Y}` is locally free
+It is mainly used for smooth `f`, where `Ω¹_{X/Y}` is locally free
 (`AlgebraicGeometry.Scheme.Hom.isFiniteLocallyFreeOfRank_relativeDifferentials`), but the
 construction makes sense for every morphism. -/
 noncomputable def tangentBundle : Scheme.{u} :=

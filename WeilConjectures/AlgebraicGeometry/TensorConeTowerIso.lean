@@ -57,11 +57,7 @@ private def coneTowerIso
     rfl
 
 /-- A tensor square of strict towers induces an isomorphism of their cone towers.
-Source: Stacks 06YP.
-Proof: transpose to towers of complexes. The additive evaluation functors identify
-transposition of a cone with its levelwise cone. The signed tensor-cone comparison
-is natural in every transition. Apply the cone map to the given square and to
-its inverse square, and compose the three tower isomorphisms. -/
+Stacks Tag 06YP. -/
 theorem tensorConeTowerIso
     {B : Type*} [Category B] [Abelian B]
     (F : B ⥤ B ⥤ B) [F.Additive] [∀ X : B, (F.obj X).Additive]

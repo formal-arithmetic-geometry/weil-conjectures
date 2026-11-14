@@ -25,20 +25,11 @@ namespace AlgebraicGeometry
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
-/-- The nonnegative twisted sections carry their canonical internally graded polynomial action.
+/-- The nonnegative twisted sections carry their canonical internally graded polynomial action:
+there is a `ℤ`-graded polynomial module, zero in negative degrees, whose degree `z ≥ 0` part is
+identified with `Γ(G ⊗ O(z))` compatibly with multiplication by homogeneous polynomials.
 No coherence or finiteness is asserted.
-
-Source: Stacks Project, Section 30.14, the graded module in Lemma 01YS(5), and Lemma
-0AG6(4); https://stacks.math.columbia.edu/tag/01YS.
-Proof: take the additive direct sum of the groups Γ(G ⊗ O(n), P), indexed by n ≥ 0.
-A homogeneous polynomial a of degree e sends the n-th summand to the (n+e)-th by
-G ◁ Proj.twistMul n a. Define the action of an arbitrary polynomial by adding the actions
-of its finitely many homogeneous components. Locally, twistMul is multiplication of
-fractions, so it is additive in a, sends 1 to the identity, and its composites are
-multiplication by the product, after the degree equalities are transported. These facts
-prove the module laws. The summand images give the internal integer grading; put zero
-in negative degrees. The inverse of each summand inclusion gives φ. Its definition and
-the homogeneous action give the asserted compatibility, including degree zero. -/
+Stacks Project, Tags 01YS(5) and 0AG6(4). -/
 theorem serreSectionModuleConstruction
     (k : Type u) [Field k]
     (G : (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).Modules)

@@ -136,18 +136,7 @@ private theorem top_label_cases
     exact Or.inr ⟨i, hi, rfl⟩
 
 /-- The explicit top degeneracies force splitness and identify the new nondegenerates.
-Source: Stacks Project, Tags 0DAV and 0DAU.
-
-Proof: Restriction preserves nondegeneracy in every old degree: any degeneracy
-source has smaller degree and hence still belongs to the restriction. The labels
-in an old degree are unchanged, since an epimorphism cannot increase dimension.
-At the top, each proper degeneracy has an old label as its index. Conversely every
-old label is the degeneracy of its underlying nondegenerate old index; normalization
-of a nondegenerate index has the identity label. Thus the remaining indices are
-exactly the new ones. Old normalized labels map bijectively to the old top summands,
-and identity labels on new indices map bijectively to new summands. These images
-are disjoint. All proper top component maps are isomorphisms by hypothesis, and
-the remaining components are identities. This proves the two split conditions. -/
+Source: Stacks Project, Tags 0DAV and 0DAU. -/
 theorem split_attachment_of_degeneracies
     (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K)
     (V : FormalCoproduct.{w} D)

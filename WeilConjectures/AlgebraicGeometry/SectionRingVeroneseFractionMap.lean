@@ -33,9 +33,7 @@ noncomputable def sectionRingVeroneseNumeratorIso
     L.tensorPowMulIso d n ≪≫ (λ_ _).symm
 
 /-- Send a homogeneous numerator to its fraction with denominator `s^n`.
-Source: Stacks Project, Properties, Tag 0B5L.
-Additivity follows by adding
-fractions with the same denominator in the ambient localization. -/
+Source: Stacks Project, Properties, Tag 0B5L. -/
 noncomputable def sectionRingVeroneseHomogeneousFraction
     (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]
     (d : ℕ) (s : sectionRingGrade L d) (n : ℕ) :

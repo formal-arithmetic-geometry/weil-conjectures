@@ -27,7 +27,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The terminal section of the iterated pullback corresponding to a strict-local limit leg.
 The symmetry puts the base change in the orientation `X ×_Y Spec R`.
-Source: Stacks Project, Tag 03Q9, proof. -/
+Source: Stacks Project, Tag 03Q9. -/
 noncomputable def qcqsStrictLocalNeighbourhoodSection
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y)
@@ -52,7 +52,7 @@ noncomputable def qcqsStrictLocalNeighbourhoodSection
 /-- Restrict a section on the neighbourhood base change to strict-local global sections.
 This is the actual module adjunction unit, followed by the specified limit leg and the
 terminal-section/global-section isomorphism.
-Source: Stacks Project, Tag 03Q9, proof. -/
+Source: Stacks Project, Tag 03Q9. -/
 noncomputable def qcqsStrictLocalSectionRestriction
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y)
@@ -97,22 +97,11 @@ def IsQcqsStrictLocalModuleComparison
       ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F).obj ≫ a =
         qcqsStrictLocalSectionRestriction Λ f s F j
 
-/-- Qcqs continuity for module coefficients, with its canonical representative formula.
-Source: Stacks Project, Tag 03Q9, degree zero; Tags 03D3 and 03D7 for inverse images.
-
-Proof: apply `sets_pushforward_stalk_strictHenselization` to the underlying set sheaf.
-The stalk is the filtered colimit over pointed neighbourhoods. The module forgetful functor
-preserves these colimits (shrink the universe of its filtered-colimit instance), so it
-identifies the underlying set of the module stalk with that set stalk. The canonical
-inverse-image comparison `isIso_upperStar_forget_comparison` identifies the set pullback
-with the underlying set of the module pullback; its adjoint-transpose definition identifies
-their units. Evaluation at the terminal object and the global-section isomorphism then
-transport the set comparison to the displayed target, after pullback symmetry. Each
-representative restriction is linear, and the filtered module colimit gives a linear map
-with precisely the displayed germ formula. The set comparison is bijective, so this
-linear map is an isomorphism. All transports preserve the units and restriction maps,
-which gives `IsQcqsStrictLocalModuleComparison`. No properness is used. The empty source
-and zero coefficient ring yield zero modules and the same comparison. -/
+/-- Qcqs continuity for module coefficients: for a qcqs `f`, the stalk of `f_* F` at the
+geometric point `s` is isomorphic to the global sections of the pullback of `F` to
+`X ×_Y Spec R` over the strict henselization, by an isomorphism satisfying the germ formula
+`IsQcqsStrictLocalModuleComparison`.
+Source: Stacks Project, Tag 03Q9, degree zero; Tags 03D3 and 03D7 for inverse images. -/
 theorem exists_qcqsStrictLocalModuleComparison
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     [QuasiCompact f] [QuasiSeparated f]

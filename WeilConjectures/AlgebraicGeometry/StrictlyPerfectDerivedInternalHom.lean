@@ -126,24 +126,7 @@ canonical map `𝓗om^•(P, M) ⟶ 𝓗om^•(P, I(M))` becomes an isomorphism 
 category. Since `Q (𝓗om^•(P, I(M)))` computes derived internal Hom
 (`derivedInternalHom_comparison`), this map is the ordinary-to-derived comparison.
 
-Source: Stacks Project, Cohomology of Sheaves, Lemma 20.46.9, Tag 08DM.
-
-Proof:
-1. Replace `M` by a functorial K-injective resolution `η.app M : M ⟶ I.obj M`.
-   By `def-pur-derived-internal-hom`, the Hom complex from `P` into this resolution
-   represents derived internal Hom.
-2. Each term of `P` is a direct summand of a finite free module. Its internal Hom
-   functor is therefore a direct summand of an exact finite-free internal Hom functor,
-   hence exact. It preserves the
-   quasi-isomorphism to the resolution in each fixed degree of `P`.
-3. The bounded stupid-truncation filtration of `P` has finitely many graded pieces
-   `P^k[-k]`. Applying the Hom-complex functor gives termwise split short exact
-   sequences, since only finitely many factors are nonzero. Induction, the long exact
-   cohomology sequence (Stacks Tag 0117), and the five lemma show that the induced
-   Hom-complex map is a quasi-isomorphism.
-4. Localization inverts that map. Compose with the computation isomorphism of
-   `def-pur-derived-internal-hom` to obtain the representation and the canonical
-   comparison isomorphism. Functoriality makes this independent of the replacement. -/
+Stacks Project, Lemma 20.46.9 (Tag 08DM). -/
 theorem isIso_homComplex_resolution_of_isStrictlyPerfect
     (X : Scheme.{u}) (U : X.Opens) [IsAffine U.toScheme]
     [HasDerivedCategory.{w} (SheafOfModules.{u}

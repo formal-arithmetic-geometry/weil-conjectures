@@ -33,21 +33,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
 /-- Compatible cartesian spectral charts identify an algebra sheaf with the direct image
 of the structure algebra. No quasi-coherence hypothesis is needed once charts are given.
-Source: Stacks Project, Constructions, proof of Lemma 01LV, first paragraph,
-and Lemma 01LX (3); Sheaves, Lemma 009U.
-
-Proof: Each chart is an open immersion by base change, with image the inverse image
-of U. Its sections map O_X(f⁻¹ U) → Γ(Spec A(U)) is therefore an isomorphism. Compose
-with Γ(Spec A(U)) ≅ A(U). The compatibility equation for the charts and naturality
-of this spectrum sections isomorphism prove compatibility with affine restrictions.
-Extend these maps to b : f_* O_X → A by the sheaf morphism extension theorem.
-Its affine components are isomorphisms, so b is an isomorphism. To check that b
-respects the structure maps, compose the cartesian square on sections, use the
-sections formula for the inverse affine chart, and cancel the canonical spectrum
-sections isomorphisms. Equality of morphisms can be checked on the affine basis,
-so b defines an isomorphism in Under S.sheaf. Take its inverse for the conclusion.
-The argument includes the empty base and zero section rings: empty spectra and empty
-opens are legitimate charts, and the basis extension theorem applies unchanged. -/
+Source: Stacks Project, Constructions, Lemmas 01LV and 01LX (3); Sheaves, Lemma 009U. -/
 theorem structure_algebra_iso_of_affine_spectral_charts
     (S : Scheme.{u}) (A : S.CommAlgebraSheaf) (X : Scheme.{u}) (f : X ⟶ S)
     (k : ∀ U : S.affineOpens, Spec (A.right.obj.obj (op U.1)) ⟶ X)

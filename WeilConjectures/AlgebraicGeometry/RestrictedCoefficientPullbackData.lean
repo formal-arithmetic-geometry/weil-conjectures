@@ -31,8 +31,7 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 
 /-- The ordinary restricted-regular pullback identification: restrict the regular
 S-module after pullback and apply the specified monoidal unit comparison.
-Source: blueprint rational proper-base-change proof (1), cartesian coefficients;
-Stacks 07A4. -/
+Stacks Project, Tag 07A4. -/
 def regularPullback₀ (a : R ⟶ S) [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (CondensedRing.upperStar R f).obj (B₀ a Y) ≅ B₀ a X :=
   (CondensedRing.comapUpperStarIso a f).symm.app _ ≪≫
@@ -40,7 +39,7 @@ def regularPullback₀ (a : R ⟶ S) [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ 
 
 /-- The canonical rho, using exact inverse image, its localization comparison and
 its degree-zero comparison, followed by the ordinary cartesian identification.
-Source: blueprint rational proper-base-change proof (1); Stacks 07A4 and 07A6. -/
+Stacks Project, Tags 07A4 and 07A6. -/
 def regularPullback (a : R ⟶ S) [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (L R f).obj (B a Y) ≅ B a X := by
   unfold L CondensedRing.moduleObjectDerivedPullback

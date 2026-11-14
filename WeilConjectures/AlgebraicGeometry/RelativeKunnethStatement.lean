@@ -17,13 +17,8 @@ import WeilConjectures.Compactification.NagataCompactification
 /-!
 # Relative Künneth theorem
 
-Source: current blueprint, `literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-lefschetz-verdier/sec-trace-classes-and-the-lefschetz-verdier-formula/sk-p-proper/
-sk-thm-sf-kunneth-relative/thm-sf-kunneth-relative.md`.
-
-This is the statement node `lemma-kunneth-formula-compact-supports--1` from the current blueprint.
-The canonical comparison is the published six-factor composite
-`AlgebraicGeometry.Etale.relativeKunnethIso`; its naturality is exposed by the published
+The canonical comparison is the six-factor composite
+`AlgebraicGeometry.Etale.relativeKunnethIso`; its naturality is exposed by the
 bifunctor isomorphism `relativeKunnethNatIso`.  The remaining clauses record the canonical
 base-change and proper `Rf_!`/`Rf_*` comparisons and the compact-support product after
 restriction to closed subschemes.
@@ -42,8 +37,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 
-/-- Comparison for two equal pullback paths, used in the base-change square.
-Source: lemma-kunneth-formula-compact-supports--1, compatibility with base change and proof Step 5. -/
+/-- Comparison for two equal pullback paths, used in the base-change square. -/
 noncomputable def leftDerivedUpperStarCompPathIso
     (Λ : Type (u + 1)) [CommRing Λ]
     {T S R U : Scheme.{u}} (a : T ⟶ S) (p : S ⟶ R) (q : T ⟶ U) (r : U ⟶ R)
@@ -55,9 +49,7 @@ noncomputable def leftDerivedUpperStarCompPathIso
     (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) q r (a ≫ p) h).app K
 
 /-- The pasted exchange square expressing base-change compatibility of the canonical
-relative Künneth composite.  Every comparison in this definition is a published canonical
-comparison; no auxiliary map is chosen.  Source: the base-change clause and proof Step 5 of
-`lemma-kunneth-formula-compact-supports--1`. -/
+relative Künneth composite. -/
 def relativeKunnethBaseChangeCompatibility
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     {B X Y : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B)
@@ -122,11 +114,10 @@ def relativeKunnethBaseChangeCompatibility
       ext_t ≫ ext'.hom ≫ κ'
 
 /-- Compatibility with proper direct image, expressed using the canonical forward
-ordinary Künneth map and the published forget-supports comparisons
+ordinary Künneth map and the forget-supports comparisons
 `AlgebraicGeometry.Etale.compactificationForgetSupports` of the chosen compactifications.
 The premise permits either factor to be proper. For each proper factor its comparison is the
-canonical identification `Rf_! ≅ Rf_*` (`isIso_compactificationForgetSupports`).
-Source: lemma-kunneth-formula-compact-supports--1, proper clause and proof Step 6. -/
+canonical identification `Rf_! ≅ Rf_*` (`isIso_compactificationForgetSupports`). -/
 def relativeKunnethProperCompatibility
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     {X Y B : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B)
@@ -150,10 +141,9 @@ def relativeKunnethProperCompatibility
         kunnethMap (ModuleCat.{u + 1} Λ) (pullback.fst f g) (pullback.snd f g)
           f g (pullback.toBase f g) (by simp) (by simp) K L
 
-/-- The canonical restriction comparison for exterior products. This is the explicit
-pullback-composition/tensor comparison occurring in the proof of the published
-`nonempty_iso_leftDerivedUpperStar_externalProduct`, with no choice from `Nonempty`.
-Source: lemma-kunneth-formula-compact-supports--1, proof Step 5. -/
+/-- The canonical restriction comparison for exterior products: the explicit
+pullback-composition/tensor comparison underlying
+`nonempty_iso_leftDerivedUpperStar_externalProduct`. -/
 def relativeKunnethExteriorPullbackIso
     {Λ : Type (u + 1)} [CommRing Λ]
     {X Y B Z W : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B)
@@ -174,8 +164,7 @@ def relativeKunnethExteriorPullbackIso
 
 /-- The compact-support product of the restrictions to closed subschemes, as the inverse
 of the specified Künneth comparison followed by the canonical exterior-product restriction
-comparison. Its target is `RΓ_c(Z ×_k W, (iZ × iW)^*(K ⊠ L))`, not cohomology with supports.
-Source: lemma-kunneth-formula-compact-supports--1, last display and proof Step 5. -/
+comparison. Its target is `RΓ_c(Z ×_k W, (iZ × iW)^*(K ⊠ L))`, not cohomology with supports. -/
 def relativeKunnethClosedRestrictionMap
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     {k : Type u} [Field k] {X Y Z W : Scheme.{u}}

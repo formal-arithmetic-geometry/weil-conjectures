@@ -17,10 +17,8 @@ namespace AlgebraicGeometry
 variable {X S : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The affine comparison map is injective by the uniqueness part of the universal
-property of Kähler differentials. Apply the affine Spec comparison to identify the
-target with the module of Kähler differentials, then use uniqueness of maps preserving
-the universal derivation. Source: Stacks Project, Tag 01UT. -/
+/-- A linear map from the Kähler differentials to the differential sections over an affine
+chart that preserves the universal derivation is injective. Source: Stacks Project, Tag 01UT. -/
 theorem relativeDifferentials_affine_sections_map_injective (f : X ⟶ S)
     (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1)
     (e : CommRingCat.KaehlerDifferential (f.appLE V.1 U.1 hUV) →ₗ[Γ(X, U.1)]

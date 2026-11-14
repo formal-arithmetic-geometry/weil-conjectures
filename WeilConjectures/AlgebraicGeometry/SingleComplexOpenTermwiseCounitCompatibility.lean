@@ -95,21 +95,7 @@ set_option maxHeartbeats 600000 in
 /-- The derived open coefficient on an actual restricted complex is compatible
 with ordinary tensor pullback and the pinned counits. This is an equality before
 stalks and cohomology; it needs neither a base-change square nor K-flatness.
-
-Proof: specialize `open_pinned_counit_homotopy_restriction` to the homotopy
-quotient of P. Its source exact-restriction factor is the complex localization
-factor: expand `mapDerivedCategoryFactorsh_hom_app` and cancel the identity
-quotient comparison maps. Precompose the equation with the inverse of this
-factor mapped by Lj*. Postcompose with the inverse localized homotopy tensor
-restriction isomorphism, then with the inverse target exact-restriction factor.
-Cancel the three pairs of inverse isomorphisms. The resulting target composite
-is exactly `singleComplexOpenTensorRestrictionMap`; the source composite uses
-the canonical inverse representative factor a. This works for every complex,
-before stalks or cohomology, with no inversion of a pullback counit. Empty and
-top opens and zero complexes use the same natural-transformation identities.
-
-Source: Stacks Project, cohomology.tex, Tags 08HY, 08FE and 0D5S;
-perfect.tex, Tag 0DJ9, first paragraph. -/
+Stacks Project, Tags 08HY, 08FE, 0D5S and 0DJ9. -/
 theorem singleComplexOpen_termwise_counit_compatibility
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

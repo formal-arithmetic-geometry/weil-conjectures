@@ -14,7 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.SfP1SupportedExtMapData
 
 The self-product map, coefficient comparisons, supported class, and trace are
 constructed from the canonical derived functors. No integral identity is used.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, coordinate comparisons.
 -/
 
 @[expose] public noncomputable section
@@ -177,8 +176,7 @@ section
 
 attribute [local irreducible] ordinaryFinitePushforward
 
-/-- Transport of the supported source, before applying any Ext representative.
-Source: blueprint thm-amb-p1-adjunction.proof.md, the supported diagonal morphism. -/
+/-- Transport of the supported source, before applying any Ext representative. -/
 @[irreducible]
 def diagonalLift :
     (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (TraceDiagonalDatum.diagonal f)).obj
@@ -239,9 +237,7 @@ def presentationTrace (B : DerivedCategoryModule A (ProjectiveLine S)) :
       ((pushPull A i).hom.app B)
 
 omit [Finite A] [IsProper f] in
-/-- The named comparison retains the original order of direct-image factors.
-Source: the explicit trace formula and associativity of composition.
-Proof: unfold the two-factor comparison and reassociate with the final arrow. -/
+/-- The named comparison retains the original order of direct-image factors. -/
 theorem presentationTrace_assoc
     (B : DerivedCategoryModule A (ProjectiveLine S))
     {K : DerivedCategoryModule A S}

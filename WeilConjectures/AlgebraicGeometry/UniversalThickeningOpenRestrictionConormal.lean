@@ -15,13 +15,10 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- The conormal comparison for the open restriction data.
-Source: Stacks Project, More on Morphisms, Lemma 04FA and Definition 01R2.
-The restriction of the kernel ideal along an open immersion identifies with the
-kernel ideal of the restricted thickening; tensor pullback composition and the
-open-immersion pullback/restriction comparison then give the displayed module
-isomorphism. Independence of the chosen universal thickening supplies the
-formally unramified witness and the displayed `HV`. -/
+/-- For open restriction data of a universal first order thickening, the restricted morphism
+`hV` is formally unramified, `iV` is universal over `U`, and the restriction to `V` of the
+conormal sheaf of `h` is isomorphic to the conormal sheaf of `hV`.
+Source: Stacks Project, More on Morphisms, Lemma 04FA and Definition 01R2. -/
 theorem universalFirstOrderThickening_open_restriction_conormal
     {Z X Z' : Scheme.{u}} (h : Z ⟶ X) (i : Z ⟶ Z') (h' : Z' ⟶ X)
     (H : IsUniversalFirstOrderThickening h i h')

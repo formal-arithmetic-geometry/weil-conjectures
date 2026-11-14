@@ -28,28 +28,11 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- The dual-number tangent vectors at a point of a scheme over a field form a vector space.
-Source: Stacks Project, Tag 0B2B.
-
-Proof:
-1. Apply lem-sc-dual-number-scheme-pushout with `K = X.residueField x` and two copies.
-   The coordinate projections identify the square-zero algebra with the fiber product of
-   two dual-number rings over `K`. The local-ring description of maps into arbitrary schemes
-   gives the scheme pushout. The two tangent vectors have the same restriction, so glue
-   uniquely to `Θ`. Uniqueness with target `Spec k` shows that `Θ` is over `k`.
-2. The sum map and each scaling map preserve the common closed point and the structure map
-   to `Spec k`. Thus precomposition gives elements of the displayed subtype `T`. The map
-   factoring through `Spec K` is the zero vector.
-3. Apply the same pushout lemma to three copies for associativity: both parenthesizations
-   send all three infinitesimals to epsilon. Swapping two coordinates gives commutativity.
-   Gluing a vector with the constant map gives the original vector after precomposition.
-   Gluing the two scalar multiples uses epsilon mapping to `λ ε₁ + μ ε₂`, proving scalar
-   additivity. Scaling both coordinates proves distributivity over vector addition.
-   Composition of scaling maps proves multiplicativity and the identity scalar law.
-   Scaling by minus one supplies additive inverses, since epsilon then maps to zero.
-   These identities give an additive commutative group and a `K`-module, with exactly the
-   addition, scalar multiplication and zero described in the conclusion.
--/
+/-- The dual-number tangent vectors at a point of a scheme over a field form a vector space over
+the residue field: two tangent vectors glue uniquely along the pushout square to a map from the
+two-direction square-zero spectrum, and there is a `K`-module structure whose addition, zero and
+scalar multiplication are precomposition with the sum, constant and scaling maps.
+Stacks Tag 0B2B. -/
 theorem exists_tangentVectors_vectorSpace
     (k : Type u) [Field k] (X : Scheme.{u})
     (p : X ⟶ Spec (.of k)) (x : X) :

@@ -34,8 +34,7 @@ namespace AlgebraicGeometry.Etale
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Successive proper, open and proper projection, with the canonical composite
-pullback comparison. Source: Stacks Tags 0B56, 0GL1 and 0F7B;
-node lem-sf-etale-compact-projection-coherence, steps 4--5. -/
+pullback comparison. Stacks Tags 0B56, 0GL1 and 0F7B. -/
 def sfGraphWordProjection
     (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (t : EtaleGraphPresentation f)

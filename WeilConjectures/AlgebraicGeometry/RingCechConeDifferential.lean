@@ -267,11 +267,7 @@ private theorem differential_snd_tmul (A : CommRingCat.{u}) (r q : ℕ)
     | succ q => exact differential_snd_cons_succ A r q f s x t
 
 /-- The two-block differential becomes the full alternating differential.
-Source: Stacks Project, more-algebra.tex, section-alternating-cech, formulas (2)--(3).
-Proof: subsets avoiding zero use the tail differential. On subsets containing zero,
-the first face contributes the localized first block. All remaining faces preserve zero;
-their indices increase by one, changing the signs. On pure tensors the localization maps
-commute by the universal property. Linearity extends the calculation to every tensor. -/
+Stacks Project, More on Algebra, alternating Čech complexes. -/
 theorem ringCechConeEquiv_d (A : CommRingCat.{u}) (r q : ℕ)
     (f : Fin (r + 1) → A)
     (x : ringCechTailTerm A r (fun i ↦ f i.succ) (q + 1))

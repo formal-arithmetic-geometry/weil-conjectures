@@ -15,7 +15,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-!
 # Evaluation of internal Hom on stalks
 
-Source: Stacks Project, Modules, Lemma 01CP, first paragraph.
+Source: Stacks Project, Tag 01CP.
 -/
 
 @[expose] public section
@@ -137,15 +137,7 @@ private theorem common_scalar_germs (A B : X.carrier.Presheaf Ab.{u})
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical stalk evaluation is linear in the germ of the local morphism and
 in the germ of its argument, with no finiteness assumption on the source.
-
-Source: Stacks Project, Modules, Lemma 01CP, first paragraph.
-
-Proof: Represent the two input germs on a common neighborhood and evaluate the local
-morphism there. If either representative changes, equality of germs lets us shrink
-until both representatives agree; naturality of the local morphism then makes the
-output germ unchanged. Addition and scalar multiplication can likewise be checked
-on a common neighborhood, where they are the linearity identities for evaluation.
-Thus the resulting evaluation function gives the displayed linear map. -/
+Source: Stacks Project, Tag 01CP. -/
 theorem exists_stalk_internalHom_linearMap :
     ∃ c : (moduleStalkFunctor X x).obj (F.homObj G) →ₗ[X.presheaf.stalk x]
         ((moduleStalkFunctor X x).obj F →ₗ[X.presheaf.stalk x]

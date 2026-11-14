@@ -203,10 +203,9 @@ private theorem comparison_q_hom_ext
 
 set_option maxHeartbeats 600000 in
 -- Transport scalar extension and evaluate the comparison on generalized unit tensors.
-/--
-The proof constructs the unit map from pure tensors and scalar extension.
-Source: Stacks Project, Modules on Sites, Tag 03EL.
-Proof in words: The proof constructs the unit map from pure tensors and scalar extension. -/
+/-- There is a unit isomorphism `j : L(R) ≅ S` such that, for every module `M`, the canonical
+tensor comparison at `(M, R)` followed by `𝟙 ⊗ j` and the right unitor equals `L` applied to
+the right unitor of `M`. Stacks Project, Modules on Sites, Tag 03EL. -/
 theorem canonicalRingedTensorComparison_unit_exists
     (hmap : ∀ {M N : (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
       RingCat.{u})).obj R))} (f : M ⟶ N), L.map f =

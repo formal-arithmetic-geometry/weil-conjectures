@@ -64,21 +64,10 @@ private theorem restricted_resolution_lift
     exact ⟨hn.liftFromProjective b hb, hn.liftFromProjective_comp b hb⟩
   exact ⟨ChainComplex.mkHom P.complex L z o ho step, hz⟩
 
-/-- A ring homomorphism carrying one ideal into another admits an augmented
-comparison of the chosen quotient resolutions and the induced tensor complexes.
-Source: Stacks Project, Tag 00LS, comparison of resolutions.
-
-Proof: The ideal containment gives the quotient homomorphism ψ. Restrict the
-augmented target resolution to A; restriction of scalars is exact, so it is
-still an exact augmented complex. Inductively lift the quotient map from each
-projective source term: degree zero lifts through the surjective augmentation,
-degree one through its kernel, and degree j+1 through the cycles in degree j.
-This constructs a with the required augmentation equation. Define k degreewise
-by x tensor y mapping to a(x) tensor ψ(y). Compatibility of ψ with φ and
-A-linearity of a prove the balancing relation. The chain equation for a proves
-the chain equation for k on pure tensors, hence on all tensors by induction.
-No flatness of φ or projectivity of the restricted target terms is needed.
-The argument includes zero quotients and arbitrary commutative rings. -/
+/-- A ring homomorphism `φ : A → C` with `φ(I) ⊆ J` admits an augmented comparison of the chosen
+projective resolutions of `A ⧸ I` and `C ⧸ J`: the induced map `ψ : A ⧸ I → C ⧸ J`, a chain map
+`a` lifting `ψ`, and the induced map `k` of tensor complexes sending `x ⊗ y` to `a x ⊗ ψ y`.
+Stacks Tag 00LS. -/
 theorem exists_quotient_resolution_tensor_comparison
     (A C : Type u) [CommRing A] [CommRing C]
     (I : Ideal A) (J : Ideal C) (φ : A →+* C)

@@ -13,8 +13,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 
 /-! # Ambient etale adjunction and projection for a supplied compactification
 
-proof.md`, paragraph 1;
-Stacks Project, Tags 0F0G, 0GL1 and 0F5Y.
+Source: Stacks Project, Tags 0F0G, 0GL1 and 0F5Y.
 
 The factorization is supplied explicitly as `Compactification f`, which does not
 require its open immersion to be quasi-compact. The categories are ordinary and
@@ -41,28 +40,8 @@ namespace AlgebraicGeometry.Etale
 
 /-- The ordinary unbounded compact-support functor of a supplied open/proper
 factorization has a right adjoint, and its canonical projection map is invertible.
-proof.md`, paragraph 1;
-Stacks Project, Tags 0F0G, 0GL1 and 0F5Y.
-
-Proof in words:
-1. Exact open extension by zero and exact inverse image induce the unbounded
-   derived adjunction D(j_!) ⊣ D(j^*), so the open-extension functor is a left
-   adjoint (lem-weil-pbc-extension-by-zero-adjunction,
-   lem-weil-pbc-extension-by-zero-exact,
-   situation-conventions).
-2. Proper derived direct image for finite coefficients is a left adjoint by
-   lem-etale-proper-derived-direct-image-adjoint. Compose these two left adjoints
-   to obtain a right adjoint for the supplied-compactification functor.
-3. The proper finite-coefficient projection map is invertible by
-   lem-etale-proper-projection-formula-finite. The canonical compactification map
-   is this component followed by mapped open tensor and inverse-image composition
-   isomorphisms (definition-projection-formula-map--1,
-   lem-pur-etale-open-derived-tensor, lem-weil-pbc-inverse-image-composition).
-   Therefore each of its components is invertible.
-4. For any selected right adjoint G, specialize the projection isomorphism to
-   G(A_Y), invert it, compose with the counit tensored with K and the left unitor,
-   and transpose under the adjunction. This is sfEtaleAmbientTensorMap below.
-No Noetherian, boundedness, constructibility or quasi-compact-open hypothesis is used. -/
+No Noetherian, boundedness, constructibility or quasi-compact-open hypothesis is used.
+Stacks Project, Tags 0F0G, 0GL1 and 0F5Y. -/
 theorem sfEtaleAmbientAdjointProjection
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
@@ -86,8 +65,7 @@ theorem sfEtaleAmbientAdjointProjection
 It is the transpose of inverse projection, followed by the counit tensored with
 K and the left unit constraint. The adjunction is data selecting the right
 adjoint whose existence is sfEtaleAmbientAdjointProjection, not an additional
-geometric hypothesis. No invertibility assertion is made about theta.
-proof.md`, paragraph 1. -/
+geometric hypothesis. No invertibility assertion is made about theta. -/
 noncomputable def sfEtaleAmbientTensorMap
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

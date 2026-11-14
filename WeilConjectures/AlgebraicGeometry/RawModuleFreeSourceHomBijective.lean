@@ -75,17 +75,9 @@ private lemma scalar_unit (Λ : Type (u + 1)) [CommRing Λ]
     ((moduleAbelianUpperStarComparison Λ f).app G) = _
   exact Equiv.apply_symm_apply _ _
 
-/-- The explicit generator comparison is bijective on underived Hom.
-Source: Stacks Project, Tag 03FD, equality of section complexes; Tags 03D3 and 03D7.
-
-Proof: Apply the inverse-image/direct-image adjunction in modules and in
-abelian sheaves. Then apply sheafification adjunction, the free-module/free-group
-adjunction and Yoneda. Both Hom groups become the same section group of f_*M
-at U. The two units commute with the Kan-extension/sheafification comparison
-pullbackIso. The definition of freeMap sends the identity generator to the
-identity generator, so f ↦ a ≫ forget(f) becomes the identity on that section
-group. It is therefore bijective. This works for every M, independently of
-injectivity, in degree zero, over the zero ring, and on empty schemes. -/
+/-- The explicit generator comparison is bijective on underived Hom: composing with the pulled-back
+`freeMap` and forgetting scalars is a bijection from module morphisms out of the pulled-back free
+module sheaf to `M`. Stacks Project, Tags 03FD, 03D3 and 03D7. -/
 theorem rawModuleFreeSourceHom_bijective
     (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (f : X ⟶ S)
     (U : S.Etale) (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :

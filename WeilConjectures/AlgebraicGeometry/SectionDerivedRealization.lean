@@ -52,10 +52,7 @@ attribute [local instance] sectionFunctorAdditive
 
 set_option linter.unusedSectionVars false in
 /-- Exact sequential colimits transfer through the fixed section equivalence.
-Source: Stacks 00YV.
-Proof: transfer each diagram and its colimit along the exact equivalence. Its
-inverse preserves finite limits, so the exactness of internal sequential colimits
-implies exactness of the section-module colimits. -/
+Source: Stacks 00YV. -/
 @[instance] theorem section_hasExactSequentialColimits (X : Scheme.{u}) :
     HasExactColimitsOfShape ℤ (modules Λ X) := by
   exact HasExactColimitsOfShape.of_codomain_equivalence ℤ (equivalence Λ X)
@@ -443,23 +440,8 @@ private theorem transport_tensor_representative_complete
 
 attribute [local irreducible] derivedEquivalence
 
-/-- Split existence of the normalized representative.
-Source: Stacks Project, Tags 06YU and 07A4.
-
-Proof: the normalized ordinary tensor maps are natural by the internal section
-comparison. The induced map on signed totals has the prescribed summand formula,
-so uniqueness identifies it with totalComparison and proves its naturality.
-Compose the inverse localization and derived tensor comparisons, the image of the
-internal lax tensor map, and the localized total comparison. This is a natural
-transformation on pairs of internal complexes. Fully faithful precomposition by
-the termwise section equivalence extends it to all section complexes, with the
-required normalization. The acyclic-test criterion and the braiding identify
-section K-flatness with internal categorical K-flatness. Hence either K-flat
-argument makes the internal lax tensor map invertible. Every pair of section
-complexes is isomorphic, via the equivalence counit, to an internal image; naturality
-transfers this invertibility to that pair. Finally localize the ordinary unit
-comparison and the compatibility of termwise equivalence with degree-zero single
-complexes to identify the transported unit with the regular section module. -/
+/-- Existence of a normalized tensor representative satisfying
+`TensorRepresentativeCondition`. Source: Stacks Project, Tags 06YU and 07A4. -/
 theorem section_tensor_representative_exists (X : Scheme.{u}) :
     ∃ q : (((DerivedCategory.Q (C := modules Λ X)).prod
       (DerivedCategory.Q (C := modules Λ X))) ⋙ tensor Λ X) ⟶
@@ -513,17 +495,9 @@ private theorem natTrans_eq_on_equivalence
   apply NatTrans.ext
   exact funext h
 
-/-- The transported tensor is the ringed-site K-flat derived tensor, including its unit.
-Source: Stacks 06YU and 07A4.
-Proof: apply the existing normalized internal_section_tensor_comparison degreewise;
-its summand equations identify the signed total tensors. Exactness preserves and
-reflects acyclicity. Thus the two acyclic K-flat tests agree, using the signed
-symmetry to interchange their test sides. On K-flat representatives the internal
-localization tensor comparison is invertible. Transport it across the equivalence.
-The local pure-tensor and regular-unit normalizations descend, so the unit is the
-regular ring sheaf placed in degree zero. Every section-module complex is
-isomorphic to a termwise image under E; naturality therefore uniquely determines
-q on every pair of complexes. -/
+/-- The transported tensor is the ringed-site K-flat derived tensor, including its unit:
+there is a unique representative map satisfying `TensorRepresentativeCondition`.
+Source: Stacks 06YU and 07A4. -/
 theorem tensor_representatives (X : Scheme.{u}) :
     ∃! q : (((DerivedCategory.Q (C := modules Λ X)).prod
       (DerivedCategory.Q (C := modules Λ X))) ⋙ tensor Λ X) ⟶
@@ -801,14 +775,7 @@ private theorem complex_resolving_whiskering
       (Functor.isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso _))))⟩
 
 /-- The canonical ringed tensor-pullback map is uniquely specified on representatives.
-Source: Stacks 07A4; ringedTopoiCanonicalDerivedTensorPullback.
-Proof: the normalized ordinary mate sends s tensor (m tensor n) to
-(s tensor m) tensor (1 tensor n). The direct-sum total has those components
-and the same signed differential. Compute on flat-term K-flat resolutions;
-the qTensor maps are isomorphisms there. Two-variable localization gives the
-natural isomorphism, and every pair has such resolutions, giving uniqueness.
-Exactness of pullback and the localization factor maps extend the square to
-all complex pairs, with no boundedness or flatness assumption on their terms. -/
+Source: Stacks 07A4. -/
 theorem tensorPullComparison_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! d : tensor Λ Y ⋙ derivedPullback Λ f ≅
         ((derivedPullback Λ f).prod (derivedPullback Λ f)) ⋙ tensor Λ X,

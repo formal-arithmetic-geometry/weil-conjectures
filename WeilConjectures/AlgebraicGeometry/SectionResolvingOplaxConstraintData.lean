@@ -13,13 +13,11 @@ public import WeilConjectures.Topology.ProfiniteCondensedRing
 
 /-! # Fixed data for resolving oplax constraint diagrams
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E; agent refinement
-of the representative-square constraint computation.
+Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E.
 
 The generic diagram expressions below are specialized to the fixed section tensor,
 localization and resolution comparisons. They introduce no chosen maps or replacement
-operations. Vertex maps point from derived vertices to localized cochain models and
-are precisely the inverses of the C_i in the node's proof.
+operations. Vertex maps point from derived vertices to localized cochain models.
 -/
 
 @[expose] public noncomputable section
@@ -94,8 +92,8 @@ def vertex5 (P Q H : A) :=
   ((ε.app P ⊗ₘ ε.app Q) ⊗ₘ ε.app H) ≫
     leftModel r t (F.obj P) (F.obj Q) (F.obj H)
 
-/-- Exactly the pair equation and regular-unit equation in the node.
-Source: Stacks 07A4 and 0G7E, explicit resolving-model diagram computation. -/
+/-- The pair equation and the regular-unit equation for the resolving model maps.
+Source: Stacks 07A4 and 0G7E. -/
 def RepresentativeEquations (P : ObjectProperty A) : Prop :=
   (∀ A B : P.FullSubcategory,
     μ (q.obj A.obj) (q.obj B.obj) ≫ (ε.app A.obj ⊗ₘ ε.app B.obj) ≫

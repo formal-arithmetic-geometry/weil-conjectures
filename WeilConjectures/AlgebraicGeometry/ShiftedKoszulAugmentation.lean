@@ -29,8 +29,7 @@ namespace AlgebraicGeometry
 noncomputable section
 
 /-- Square zero for the negative differential after deleting degree zero of the
-Koszul chain complex. Source: Stacks, Tag 08CX.
-Proof: the two minus signs cancel and `koszulBoundary_comp` gives zero. -/
+Koszul chain complex. Stacks, Tag 08CX. -/
 theorem shiftedKoszul_square (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (n : ℕ) :
     (-ModuleCat.ofHom (ExteriorAlgebra.koszulBoundary A r f (n + 2))) ≫
@@ -53,9 +52,7 @@ def shiftedKoszulComplex (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) :
   (shiftedKoszulChain A r f).extend ComplexShape.embeddingDownNat
 
 /-- The augmentation's degree-zero component kills the preceding differential.
-Source: Stacks, Tag 08CX.
-Proof: contraction squared is zero, and composition with the degree-zero
-exterior-power identification preserves zero. The sign does not affect vanishing. -/
+Stacks, Tag 08CX. -/
 theorem shiftedKoszul_augmentation_comp (A : Type u) [CommRing A] (r : ℕ)
     (f : Fin r → A) :
     (shiftedKoszulChain A r f).d 1 0 ≫
@@ -88,9 +85,8 @@ def shiftedKoszulAugmentation (A : Type u) [CommRing A] (r : ℕ) (f : Fin r →
 
 /-- The derived augmentation, obtained by associated sheaves then localization.
 Its source is `I` and its target is the structure sheaf in degree zero. Associated
-sheaves are Mathlib's `tilde.functor` applied termwise, in the form of the landed
-lem-pc-koszul-affine-detection and lemma-coherent-base-change-invertible-sheaves--1 citers.
-Source: Stacks, Tag 08CX; Tag 01I6. -/
+sheaves are Mathlib's `tilde.functor` applied termwise.
+Stacks, Tag 08CX; Tag 01I6. -/
 def affineKoszulAugmentation (A : Type u) [CommRing A]
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]

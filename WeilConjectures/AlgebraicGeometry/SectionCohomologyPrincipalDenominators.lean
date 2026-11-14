@@ -29,24 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A class on a principal open lifts after multiplication by a power of its defining
 function. This asserts only denominator lifting, not the kernel of restriction.
-
-Source: Stacks Project, Tag 09MR, Lemma 30.17.3, surjectivity of the canonical map;
-Tag 01E4, Lemma 20.7.3, computation by the section complex.
-
-Proof: Put Y = f inverse W, G = F restricted to Y, and let s be the pullback
-of a viewed as a section of the tensor unit. The affine and qcqs assumptions give
-compactness and quasi-separatedness of Y; restriction preserves quasi-coherence.
-Apply invertS_cohomology with the tensor unit. The comparison theorem
-sectionCohomology_unit_comparisons identifies derived sections with raw cohomology,
-compatibly with tensor-unit powers, restriction, and the a-action. Thus the image
-of each fraction [n, xi] has denominator a^n and numerator c(n)(xi).
-Descend the desired existential property by QuotientAddGroup.induction_on, and use
-DirectSum.induction_on on a representative. Zero has exponent zero and numerator
-zero. If two images have exponents n and m and numerators y and y', their sum has
-exponent n+m and numerator a^m y + a^n y', by linearity of restriction. Finally use
-surjectivity of the composite additive equivalence. No common-degree fraction
-normalization or transition identity is needed. The proof works unchanged for a=0,
-a a unit, q=0, empty W, and zero coefficients. -/
+Source: Stacks Project, Tags 09MR and 01E4. -/
 theorem sectionCohomologyPresheaf_pow_lifts {X T : Scheme.{u}}
     (f : X ⟶ T) (F : X.Modules) [QuasiCompact f] [QuasiSeparated f]
     [F.IsQuasicoherent] (I : InjectiveResolution F) (q : ℕ)

@@ -111,20 +111,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A supported perfect source and map on an open have an ambient representative
 which is perfect and supported at the points of that open. No perfectness is asserted
 outside the open.
-Source: Stacks Project, Tags 08BT, 00A7 (4), and 09IM (initial object of the induction).
-
-Proof: Apply the inverse of Modules.overEquiv U to F and then exact extension by
-zero to X. These are actual functors: no arbitrary existence witness defines the
-source. The exact extension-by-zero/restriction adjunction induces a derived
-adjunction. The adjoint of α, after the equivalence comparisons, is β. The unit
-is invertible since extension by zero restricts to the identity on U. Let e be
-its inverse, transported to the open subscheme. The adjunction unit equation gives
-β restricted to U = e.hom followed by α. At x in U extension by zero has the same
-cohomology stalk as F, proving support. Transport a strictly perfect local model
-of F at x along the equivalence of the localized site with the open subscheme.
-The bounded complex and its finite-free retracts transport termwise, providing
-O and K in the displayed local perfectness condition. The construction works for
-empty U and zero F, and does not assert that extension by zero is globally perfect. -/
+Stacks Project, Tags 08BT, 00A7 (4) and 09IM. -/
 theorem exists_supported_map_initial_ambient_lift
     (X : Scheme.{u}) (U : X.Opens) (T : Set X)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -26,23 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Pullback along an isomorphism transports sections on corresponding opens,
 including the scalar action from the composite structure morphism.
-Source: Stacks Project, Sheaves on Spaces, Tags 00A0 and 0097.
-
-Proof: Let a be the isomorphism's forward morphism and adj the tensor
-pullback/pushforward adjunction. Pushforward along a is fully faithful because
-a is an open immersion (restriction has an invertible counit). Every module
-on Q is in its essential image: composing pushforward along the inverse with
-pushforward along a is the identity, by pushforward composition and the
-inverse-hom identity. Thus adj's unit at every module is an isomorphism.
-Evaluate this unit on U. It maps sections of M on U to sections of a* M on
-a inverse-image U and is bijective. The structure-ring map carries scalarMap
-for s on U to scalarMap for a followed by s on the inverse-image open:
-rewrite both through appLE and use appLE_comp_appLE. Hence the evaluated
-unit is k-linear. Its naturality in M is adj.unit's naturality evaluated at U.
-Apply the concrete-category bijectivity criterion and assemble the resulting
-component isomorphisms with NatIso.ofComponents; invert to get the displayed
-orientation. This argument includes empty opens and zero modules and uses no
-quasi-coherence hypothesis. -/
+Stacks Project, Sheaves on Spaces, Tags 00A0 and 0097. -/
 theorem scalarSections_iso_transport
     {k : Type w} [Field k] {P Q : Scheme.{w}} (e : P ≅ Q)
     (s : Q ⟶ Spec (CommRingCat.of k)) (U : Q.Opens) :

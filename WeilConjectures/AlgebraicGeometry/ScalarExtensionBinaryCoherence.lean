@@ -93,9 +93,8 @@ noncomputable def scalarTensorLeftUnitor (R : Sheaf J CommRingCat.{u}) (N : Mod 
     (asIso (PresheafOfModules.sheafificationAdjunction
       (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (𝟙 _)).counit).app N
 
-/-- The tensor unit comparison sends a pure tensor to scalar multiplication.
-Source: Stacks, Tag 03EK.
-Proof: the sheafification adjunction identifies the comparison with sectionwise multiplication. -/
+/-- The left unitor comparison sends a pure tensor `a ⊗ x` to `a • x`.
+Stacks, Tag 03EK. -/
 theorem scalarTensorLeftUnitor_tmul (R : Sheaf J CommRingCat.{u}) (N : Mod R)
     (U : Cᵒᵖ) (a : R.obj.obj U) (x : N.val.obj U) :
     ((scalarTensorLeftUnitor R N).hom.val.app U) (siteSheafTensorTmul (𝒪 R) N U a x) =
@@ -132,9 +131,8 @@ noncomputable def scalarTensorRightUnitor (R : Sheaf J CommRingCat.{u}) (N : Mod
     (asIso (PresheafOfModules.sheafificationAdjunction
       (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (𝟙 _)).counit).app N
 
-/-- The tensor unit comparison sends a pure tensor to scalar multiplication.
-Source: Stacks, Tag 03EK.
-Proof: the sheafification adjunction identifies the comparison with sectionwise multiplication. -/
+/-- The right unitor comparison sends a pure tensor `x ⊗ a` to `a • x`.
+Stacks, Tag 03EK. -/
 theorem scalarTensorRightUnitor_tmul (R : Sheaf J CommRingCat.{u}) (N : Mod R)
     (U : Cᵒᵖ) (x : N.val.obj U) (a : R.obj.obj U) :
     ((scalarTensorRightUnitor R N).hom.val.app U) (siteSheafTensorTmul N (𝒪 R) U x a) =
@@ -191,10 +189,8 @@ noncomputable def scalarSheafificationUnit
   (PresheafOfModules.sheafificationAdjunction
     (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (𝟙 _)).unit.app P
 
-/-- scalarSheafificationUnit locallyInjective for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4.
-Proof: tensor generation, naturality of the sheafification unit, and tensor descent
-identify the displayed maps on pure tensors; the isomorphism identities give the inverse formula. -/
+/-- The sheafification unit of a presheaf of modules is locally injective.
+Stacks, Tags 03EK and 05V4. -/
 instance scalarSheafificationUnit_locallyInjective
     [J.WEqualsLocallyBijective AddCommGrpCat.{m}]
     [HasWeakSheafify J AddCommGrpCat.{m}] {R : Sheaf J CommRingCat.{u}}
@@ -205,10 +201,8 @@ instance scalarSheafificationUnit_locallyInjective
     (CategoryTheory.toSheafify J P.presheaf))
   infer_instance
 
-/-- scalarSheafificationUnit locallySurjective for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4.
-Proof: tensor generation, naturality of the sheafification unit, and tensor descent
-identify the displayed maps on pure tensors; the isomorphism identities give the inverse formula. -/
+/-- The sheafification unit of a presheaf of modules is locally surjective.
+Stacks, Tags 03EK and 05V4. -/
 instance scalarSheafificationUnit_locallySurjective
     [J.WEqualsLocallyBijective AddCommGrpCat.{m}]
     [HasWeakSheafify J AddCommGrpCat.{m}] {R : Sheaf J CommRingCat.{u}}
@@ -221,10 +215,8 @@ instance scalarSheafificationUnit_locallySurjective
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
-/-- scalarSheafification map unit for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4.
-Proof: tensor generation, naturality of the sheafification unit, and tensor descent
-identify the displayed maps on pure tensors; the isomorphism identities give the inverse formula. -/
+/-- The sheafification of a map `f` commutes with the sheafification units on sections.
+Stacks, Tags 03EK and 05V4. -/
 theorem scalarSheafification_map_unit
     [J.WEqualsLocallyBijective AddCommGrpCat.{m}]
     [HasWeakSheafify J AddCommGrpCat.{m}] {R : Sheaf J CommRingCat.{u}}
@@ -237,10 +229,8 @@ theorem scalarSheafification_map_unit
     ((PresheafOfModules.sheafificationAdjunction
       (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (𝟙 _)).unit.naturality f)).symm
 
-/-- scalarTensorSheafifyFirst isIso for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4.
-Proof: tensor generation, naturality of the sheafification unit, and tensor descent
-identify the displayed maps on pure tensors; the isomorphism identities give the inverse formula. -/
+/-- Sheafifying the tensor of the sheafification unit of `P` with `Q` gives an isomorphism.
+Stacks, Tags 03EK and 05V4. -/
 theorem scalarTensorSheafifyFirst_isIso {R : Sheaf J CommRingCat.{u}}
     (P Q : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat)) :
     IsIso ((PresheafOfModules.sheafification
@@ -296,10 +286,8 @@ noncomputable def scalarTensorAssociatorIso (R : Sheaf J CommRingCat.{u}) (N P Q
     L.mapIso (scalarTensorAssocRawIso N.val P.val Q.val) ≪≫
       scalarTensorSheafifySecondIso (siteTensorPresheaf P.val Q.val) N.val
 
-/-- scalarTensorSheafifyFirstIso hom tmul for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4.
-Proof: tensor generation, naturality of the sheafification unit, and tensor descent
-identify the displayed maps on pure tensors; the isomorphism identities give the inverse formula. -/
+/-- `scalarTensorSheafifyFirstIso` sends the image of `x ⊗ y` to `η(x) ⊗ y`, where `η` is the
+sheafification unit. Stacks, Tags 03EK and 05V4. -/
 theorem scalarTensorSheafifyFirstIso_hom_tmul {R : Sheaf J CommRingCat.{u}}
     (P Q : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat))
     (U : Cᵒᵖ) (x : P.obj U) (y : Q.obj U) :
@@ -312,10 +300,8 @@ theorem scalarTensorSheafifyFirstIso_hom_tmul {R : Sheaf J CommRingCat.{u}}
   exact scalarSheafification_map_unit (siteTensorHom (scalarSheafificationUnit P) Q)
     U (x ⊗ₜ[R.obj.obj U] y)
 
-/-- scalarTensorSheafifyFirstIso inv tmul for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4.
-Proof: tensor generation, naturality of the sheafification unit, and tensor descent
-identify the displayed maps on pure tensors; the isomorphism identities give the inverse formula. -/
+/-- The inverse of `scalarTensorSheafifyFirstIso` sends `η(x) ⊗ y` to the image of `x ⊗ y`,
+where `η` is the sheafification unit. Stacks, Tags 03EK and 05V4. -/
 theorem scalarTensorSheafifyFirstIso_inv_tmul {R : Sheaf J CommRingCat.{u}}
     (P Q : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat))
     (U : Cᵒᵖ) (x : P.obj U) (y : Q.obj U) :
@@ -331,10 +317,8 @@ theorem scalarTensorSheafifyFirstIso_inv_tmul {R : Sheaf J CommRingCat.{u}}
   rw [Iso.hom_inv_id]
   rfl
 
-/-- scalarTensorSheafifySecondIso hom tmul for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4.
-Proof: tensor generation, naturality of the sheafification unit, and tensor descent
-identify the displayed maps on pure tensors; the isomorphism identities give the inverse formula. -/
+/-- `scalarTensorSheafifySecondIso` sends the image of `y ⊗ x` to `y ⊗ η(x)`, where `η` is the
+sheafification unit. Stacks, Tags 03EK and 05V4. -/
 theorem scalarTensorSheafifySecondIso_hom_tmul {R : Sheaf J CommRingCat.{u}}
     (P Q : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat))
     (U : Cᵒᵖ) (x : P.obj U) (y : Q.obj U) :
@@ -359,10 +343,8 @@ theorem scalarTensorSheafifySecondIso_hom_tmul {R : Sheaf J CommRingCat.{u}}
   rw [scalarTensorSheafifyFirstIso_hom_tmul, scalarSheafification_map_unit]
   rfl
 
-/-- scalarTensorAssociatorIso tmul for the explicit sheaf tensor construction.
-Source: Stacks, Tags 03EK and 05V4.
-Proof: tensor generation, naturality of the sheafification unit, and tensor descent
-identify the displayed maps on pure tensors; the isomorphism identities give the inverse formula. -/
+/-- The associator of the explicit sheaf tensor sends `(x ⊗ y) ⊗ z` to `x ⊗ (y ⊗ z)`.
+Stacks, Tags 03EK and 05V4. -/
 theorem scalarTensorAssociatorIso_tmul (R : Sheaf J CommRingCat.{u}) (N P Q : Mod R)
     (U : Cᵒᵖ) (x : N.val.obj U) (y : P.val.obj U) (z : Q.val.obj U) :
     ((scalarTensorAssociatorIso R N P Q).hom.val.app U)
@@ -442,10 +424,8 @@ structure ScalarExtensionTensorCore
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
-/-- scalarExtension_hom_ext for the normalized binary comparison.
-Source: Stacks, Tag 03EK.
-Proof: tensor generation and the sheafification adjunction reduce the assertion to the
-pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
+/-- Two maps out of a scalar extension agree if they agree on all sections `s ⊗ x`.
+Stacks, Tag 03EK.
 -/
 theorem scalarExtension_hom_ext
     [J.WEqualsLocallyBijective AddCommGrpCat.{max u m}]
@@ -465,10 +445,8 @@ theorem scalarExtension_hom_ext
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
-/-- scalarExtensionSection_naturality for the normalized binary comparison.
-Source: Stacks, Tag 03EK.
-Proof: tensor generation and the sheafification adjunction reduce the assertion to the
-pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
+/-- Restriction maps of the scalar extension send `s ⊗ x` to the restrictions of `s` and `x`.
+Stacks, Tag 03EK.
 -/
 theorem scalarExtensionSection_naturality
     [J.WEqualsLocallyBijective AddCommGrpCat.{max u m}]
@@ -486,10 +464,8 @@ theorem scalarExtensionSection_naturality
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
-/-- scalarExtension_map_tmul for the normalized binary comparison.
-Source: Stacks, Tag 03EK.
-Proof: tensor generation and the sheafification adjunction reduce the assertion to the
-pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
+/-- Extension of scalars of `f` sends the section `s ⊗ x` to `s ⊗ f(x)`.
+Stacks, Tag 03EK.
 -/
 theorem scalarExtension_map_tmul
     [J.WEqualsLocallyBijective AddCommGrpCat.{max u m}]
@@ -507,10 +483,8 @@ theorem scalarExtension_map_tmul
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
-/-- scalarExtensionSection_smul for the normalized binary comparison.
-Source: Stacks, Tag 03EK.
-Proof: tensor generation and the sheafification adjunction reduce the assertion to the
-pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
+/-- Scalar multiplication on extension-of-scalars sections: `s • (t ⊗ x) = (s * t) ⊗ x`.
+Stacks, Tag 03EK.
 -/
 theorem scalarExtensionSection_smul
     [J.WEqualsLocallyBijective AddCommGrpCat.{max u m}]
@@ -525,10 +499,8 @@ theorem scalarExtensionSection_smul
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
-/-- scalarExtensionSection_base_smul for the normalized binary comparison.
-Source: Stacks, Tag 03EK.
-Proof: tensor generation and the sheafification adjunction reduce the assertion to the
-pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
+/-- Base scalars move across the extension-of-scalars section:
+`s ⊗ (a • x) = (s * α(a)) ⊗ x`. Stacks, Tag 03EK.
 -/
 theorem scalarExtensionSection_base_smul
     [J.WEqualsLocallyBijective AddCommGrpCat.{max u m}]
@@ -600,10 +572,8 @@ noncomputable def scalarExtensionLift
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
-/-- scalarExtensionLift_tmul for the normalized binary comparison.
-Source: Stacks, Tag 03EK.
-Proof: tensor generation and the sheafification adjunction reduce the assertion to the
-pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
+/-- The lift `scalarExtensionLift α N H f` sends the section `s ⊗ x` to `s • f(x)`.
+Stacks, Tag 03EK.
 -/
 theorem scalarExtensionLift_tmul
     [J.WEqualsLocallyBijective AddCommGrpCat.{max u m}]

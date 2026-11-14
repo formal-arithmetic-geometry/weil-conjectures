@@ -22,7 +22,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- Restrict the given coefficient transition and apply the degree-zero single functor.
-Source: Stacks Project, Tag 09Z1, restriction to an affine etale object. -/
+Stacks Project, Tag 09Z1. -/
 @[implicit_reducible]
 noncomputable def restrictedAffineSingleTransition {S : Scheme.{v}} {I : Type v}
     [Preorder I] (D : Iᵒᵖ ⥤ Over S)

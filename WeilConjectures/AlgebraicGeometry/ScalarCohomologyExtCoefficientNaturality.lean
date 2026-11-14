@@ -84,22 +84,7 @@ private theorem moduleExtEquiv_map_aux
   rw [hn, hJ, ← InjectiveResolution.extMk_comp_mk₀ s (n + 1) rfl hs ψ, he]
 
 /-- The recorded cohomology-to-Ext comparison respects coefficient maps.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7.
-
-Proof: Lift a coefficient morphism to a comparison map of injective resolutions.
-The right-derived-functor coefficient map is induced by the global-sections map
-of this comparison. Evaluation at 1 identifies the global-sections complex with
-Hom from the structure sheaf, naturally in the resolution: every O-linear
-comparison map takes the image of 1 to the image of the corresponding section.
-The cocycle formula specifying moduleExtEquiv therefore intertwines the derived
-coefficient map with postcomposition by the degree-zero Ext class of the
-coefficient morphism. Every cohomology class has a cocycle representative, so
-this proves naturality of moduleExtEquiv. Exact restriction to scalar sheaves
-preserves Yoneda composition and sends the degree-zero coefficient map to
-scalarHom. Precompose by scalarUnitMorphism and use associativity of Yoneda
-composition. This gives naturality of scalarCohomologyExtMap, hence of its
-AddEquiv.ofBijective wrapper scalarCohomologyExtEquiv. This argument applies
-also in degree zero and for zero coefficients or the empty scheme.
+Stacks Project, Cohomology, Tags 01DZ and 01F7.
 -/
 theorem scalarCohomologyExtEquiv_map
     (f : X ⟶ Spec (CommRingCat.of k)) {F G : X.Modules}

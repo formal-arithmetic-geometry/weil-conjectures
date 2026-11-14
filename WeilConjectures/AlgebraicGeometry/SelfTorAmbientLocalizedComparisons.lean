@@ -34,31 +34,12 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
 
-/-- Ambient affine coordinates compatible with one localized resolution comparison for each
-basic inclusion. This asserts existence of comparison lifts, not compatibility with all lifts.
-Source: Stacks Project, Tag 08DX(2), with Tags 06YG and 00LS(1).
-
-Proof: For each affine U, identify the closed structure sheaf with tilde(A/I).
-Sheafify its chosen projective resolution and augmentation using
-lem-sc-affine-quotient-resolution-sheafification. Extend it to nonpositive
-cochain degrees. Projective modules are flat, and their associated sheaves are
-flat. Apply lem-pc-bounded-above-flat-kflat and the natural affine computation
-lem-pc-affine-derived-pullback-tensor-tilde. Exactness of tilde and affine
-sections identifies the negative-n homology of the ambient self-tensor with
-homology of the quotient tensor resolution. This gives c_U directly on the tensor
-complex homology, before the separate isoLeftDerivedObj transport to Tor.
-These coordinates come from the same natural derived comparison.
-For each basic V inside U, the ideal restriction induces the quotient map psi.
-Localize the chosen U-resolution, obtaining a projective resolution over C.
-Lift its augmentation to the chosen V-resolution by the projective lifting
-argument of 00LS(1). Precompose with localization to obtain a and tensor with
-psi to obtain k, so the three displayed equations hold. Naturality of the
-K-flat comparison, exact restriction
-of scalars, and the affine section unit gives the displayed equality for this
-one lift. No uniqueness or homotopy independence is asserted here.
-For n=0 the same homology comparison applies. For I=top or an empty basic
-open, quotient and section modules are zero; the constructions and equations
-remain valid. -/
+/-- Ambient affine coordinates on the `-n`-th homology of the derived self-tensor of
+`i_* 𝒪_Z`: for each affine open `U`, an isomorphism with the `n`-th homology of the chosen
+quotient tensor resolution, together with, for each basic inclusion `V ≤ U`, one localized
+resolution comparison compatible with these coordinates. This asserts existence of
+comparison lifts, not compatibility with all lifts.
+Stacks Project, Tag 08DX(2), with Tags 06YG and 00LS(1). -/
 theorem exists_selfTor_ambient_localized_comparisons
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

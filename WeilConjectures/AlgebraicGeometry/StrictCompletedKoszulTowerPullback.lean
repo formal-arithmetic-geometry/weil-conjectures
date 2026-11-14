@@ -29,7 +29,7 @@ import WeilConjectures.AlgebraicGeometry.RingedComplexTensorPullback
 
 /-! # Finite augmented Koszul towers under inverse image
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E; sites-cohomology.tex, Tag 07A4.
+Source: Stacks Project, Tags 0A0E and 07A4.
 -/
 
 @[expose] public section
@@ -45,24 +45,7 @@ namespace CategoryTheory.ConstantCompletion
 /-- Inverse image identifies the actual finite Koszul tensor towers and their
 coaugmentations, before taking any inverse limit or passing to derived categories.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, finite Koszul calculation;
-sites-cohomology.tex, Tag 07A4, pullback of tensor products.
-
-Proof: identify pullback along the invertible completed coefficient map with pure
-module inverse image. In degree q the ordered dual Koszul tensor has its finite
-biproduct decomposition indexed by subsets of the generators, with the summand
-indexed by E equal to N.X (q + card E). The inverse image of each summand is the
-corresponding target summand. The tensor comparison supplies this identification
-canonically. The differential is the differential of N together with signed scalar
-multiplications by a_i^(m+1). The constant-ring comparison, natural in all rings,
-identifies the constant scalar a_i, and the completed coefficient comparison does
-so after every finite projection. Thus it identifies these differentials and the
-transition maps, which multiply by a_i on the selected factors and are identity on
-the others. The comparisons are natural in chain maps N. Their inverse maps are
-obtained from the inverse finite biproduct and rank-one comparisons. The
-coaugmentation has identity on its empty-subset coordinate and zero elsewhere,
-so its stated compatibility follows coordinatewise. For r=0 the sole coordinate
-is N itself; zero scalars, repeated scalars and zero rings obey the same formulas.
+Source: Stacks Project, Tags 0A0E and 07A4.
 -/
 theorem strictCompletedKoszulTowerPullback
     {C D : Type v} [SmallCategory C] [SmallCategory D]

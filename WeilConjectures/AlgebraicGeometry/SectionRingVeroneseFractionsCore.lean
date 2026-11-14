@@ -27,12 +27,9 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 -- The kernel equality is used directly to certify the quotient lift.
 
-/-- The canonical map from section-fraction classes to homogeneous fractions.
-Source: Stacks Project, Properties, Tag 0B5L and Lemma 01PW(2).
-Descend the explicit direct-sum numerator map to the quotient by section-fraction
-relations. The proved kernel equality makes this well-defined; constructing the
-map itself does not require choosing an inverse or proving surjectivity.
--/
+/-- The canonical map from section-fraction classes to homogeneous fractions, induced by
+the explicit direct-sum numerator map on the quotient by section-fraction relations.
+Source: Stacks Project, Properties, Tag 0B5L and Lemma 01PW(2). -/
 noncomputable def sectionRingVeroneseFractionCanonicalMap
     (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]
     (d : ℕ) (s : sectionRingGrade L d) :
@@ -43,17 +40,9 @@ noncomputable def sectionRingVeroneseFractionCanonicalMap
     (sectionRingVeroneseFractionMap X L d s)
     (sectionRingVeroneseFractionMap_kernel X L d s).le
 
-/-- The canonical Veronese fraction map is bijective.
-Source: Stacks Project, Properties, Tag 0B5L and Lemma 01PW(2).
-The map descends the explicit numerator-to-fraction map through the section-fraction
-relations. Its kernel is precisely the relation subgroup, which gives injectivity
-of the descended map. Surjectivity follows from the surjectivity of the numerator
-map. On a fraction generator the quotient lift evaluates to the numerator map;
-its summand formula and the tensor-power cancellation identity give exactly `ξ/s^n`.
-The construction and proof also apply when `d=0`, `n=0`, or `s` is zero or nilpotent.
-The quotient-lift computation is retained explicitly below.
-The proof uses the kernel equality directly, so no inverse choice is introduced.
--/
+/-- The canonical Veronese fraction map is bijective and sends the class of a numerator
+of degree `n` to the fraction `ξ/s^n`.
+Source: Stacks Project, Properties, Tag 0B5L and Lemma 01PW(2). -/
 theorem sectionRing_veronese_fraction_core
     (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]
     (d : ℕ) (s : sectionRingGrade L d) :

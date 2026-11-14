@@ -21,6 +21,14 @@ import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 
 Source: Stacks Project, Duality for Schemes, Tag 0A9U, hypothesis translation;
 Cohomology of Sheaves, Tags 08C4 and 08CM; More on Algebra, Tag 066Q.
+
+## Implementation details
+
+`strictPerfectClosedPushforward_stalkResolution` combines three steps: taking stalks of the
+local model (`strictPerfectClosedPushforward_stalkModel`), removing the positive tail
+(`CochainComplex.boundedProjective_nonpositiveModel`), and the private helper
+`nonpositiveProjective_resolution`, which builds the augmentation, quasi-isomorphism, index
+reversal and bound.
 -/
 
 @[expose] public section
@@ -90,29 +98,7 @@ private theorem nonpositiveProjective_resolution
 /-- A specified strictly perfect local model of the ordinary pushforward in degree zero
 along a closed immersion gives a bounded projective resolution of the source stalk
 restricted to the target stalk. No Tor assertion or tensor test module is involved.
-
-Source: Stacks Project, Tags 08C4 and 08CM, and More on Algebra, Tag 066Q;
-hypothesis translation for Duality, Tag 0A9U.
-
-Proof. Closed-pushforward stalks identify the ordinary pushforward at i(x) with
-restriction of scalars of the source stalk. Restriction to a neighbourhood preserves
-the stalk, and the exact stalk functor preserves quasi-isomorphisms. Apply it to the
-given derived isomorphism over U. Taking stalks of K thus gives a bounded complex
-representing the restricted source stalk in degree zero. Each term is projective:
-the finite-free retraction in
-IsStrictlyPerfect becomes a retraction of a finite free module on stalks.
-The first two steps are isolated in `strictPerfectClosedPushforward_stalkModel`.
-The remaining tail removal is `CochainComplex.boundedProjective_nonpositiveModel`.
-The helper `nonpositiveProjective_resolution` proves the augmentation, quasi-isomorphism,
-index reversal and bound from the output of these two intermediate statements.
-Starting at the highest positive nonzero degree, split the surjection onto the
-last projective term, which exists by exactness in that degree. Remove the resulting
-contractible two-term summand and repeat down to degree one. The remaining complex
-is concentrated in nonpositive degrees, with projective terms, and its degree-zero
-cokernel is the restricted source stalk. Reverse the indices to obtain an augmented
-projective resolution indexed by natural numbers. The original lower bound for K
-makes its terms zero above a natural-number bound. This works also for an acyclic
-model: the restricted stalk is then zero, and its zero resolution suffices. -/
+Stacks Project, Tags 08C4, 08CM, 066Q and 0A9U. -/
 theorem strictPerfectClosedPushforward_stalkResolution
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

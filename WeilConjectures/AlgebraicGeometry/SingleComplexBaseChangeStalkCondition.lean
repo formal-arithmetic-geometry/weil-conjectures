@@ -20,11 +20,13 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-! # The single-complex stalkwise base-change condition
 
-Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8, and Tag 0DJ9.
-
 K-flat coordinates express the canonical tensor-cohomology comparison, followed by
 the given derived map. Every choice is tied to the actual stalk maps or to a
 localization equation. Invertibility is independent of representative coordinates.
+
+## References
+
+Stacks Project, the base change equation preceding Tag 0DJ8, and Tag 0DJ9.
 -/
 
 @[expose] public section
@@ -176,11 +178,7 @@ def tensorComplex (z : X')
       (.up ℤ)).obj (stalkComplex g' z P)
 
 /-- Existence of the canonical degreewise pullback-stalk identification.
-Proof: the tensorMap restriction equation identifies its A-to-C map with the
-stalk map of g'. Apply the existing natural pullback-stalk isomorphism in every
-degree. Its naturality for each differential shows that these components give a
-chain isomorphism, whose components are precisely the displayed maps.
-Source: Stacks Project, Tag 0098 and perfect.tex, equation-bc before Tag 0DJ8. -/
+Stacks Project, Tag 0098 and the base change equation before Tag 0DJ8. -/
 theorem exists_tensorStalkIso (z : X')
     (P : CochainComplex (SheafOfModules.{uSC} (moduleRings X.toRingedSpace)) ℤ) :
     letI := leftAlgebra f g' z
@@ -302,15 +300,7 @@ private theorem derived_map_surjective
   simp [e]
 
 -- Elaborating the two sheaf resolutions and their localization maps needs this budget.
-/-- Every derived morphism has these K-flat coordinates.
-Proof: choose a complex representing K and a K-flat resolution P.
-Choose a K-injective representative N of K'.
-The universal left-derived counit computes pullback on P, so is invertible there.
-Compose its inverse with the pullback of e and phi, and then e' inverse. Since N
-is K-injective, the localization Hom bijection lifts this derived morphism to a
-homotopy class of chain maps from termwise pullback of P to N. Choose a chain-map
-representative t. The localization equation is exactly the represents field.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9. -/
+/-- Every derived morphism has these K-flat coordinates. Stacks Project, Tags 0DJ8 and 0DJ9. -/
 theorem nonempty_coordinates (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
     (φ : (derivedPullback g').obj K ⟶ K') : Nonempty (Coordinates g' K K' φ) := by
   obtain ⟨P, s, hP, _, hs, _⟩ := CochainComplex.exists_isKFlatResolution
@@ -346,7 +336,7 @@ pullback-stalk identification and the stalk of c.t. The target H^i(N_z) identifi
 canonically with H^i(K')_z through c.e' and exactness of stalks. Postcomposing by
 that identification preserves and reflects invertibility. The represents equation
 of c ensures this is the map induced by the given phi, rather than a free comparison.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9. -/
+Stacks Project, Tags 0DJ8 and 0DJ9. -/
 def stalkComparison {K : schemeDerivedCategory X} {K' : schemeDerivedCategory X'}
     {φ : (derivedPullback g').obj K ⟶ K'} (c : Coordinates g' K K' φ) (z : X') (i : ℤ) :=
   letI := leftAlgebra f g' z

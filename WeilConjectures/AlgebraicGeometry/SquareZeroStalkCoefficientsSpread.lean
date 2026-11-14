@@ -111,19 +111,10 @@ private lemma finite_scalar_zero {X : Scheme.{u}} {κ : Type} [Finite κ]
       (homOfLE (show U ≤ V from inf_le_left)).op := Subsingleton.elim _ _
   simpa only [map_zero, ← ConcreteCategory.comp_apply, ← Functor.map_comp, hm] using h
 
-/-- Finite-support square-zero maps of coordinate modules spread to section modules.
-
-Source: Stacks Project, Tags 0BCD and 0BC7, spreading finite presentation matrices;
-Tag 00CR, localization as a filtered colimit.
-
-Proof: Only the entries indexed by i in [a,b] can occur. Represent each entry of
-δ i on a common open neighbourhood of x, by the elementwise description of a stalk.
-The matrix product entries have zero germ by hδ. Represent the finitely many
-zero-germ witnesses and intersect their neighbourhoods. Restrict further to an
-affine open containing x. Define D by the lifted matrices on the standard bases;
-the now-zero product entries give hD. In degrees with zero source or target there
-is just the zero map. The germ equations on basis vectors are the chosen entry
-representations. Empty support and rank zero require no entries or equations. -/
+/-- Finitely supported maps `δ i` between free stalk modules with `δ i ≫ δ (i + 1) = 0` spread
+to maps `D i` between free section modules on an affine open neighbourhood `U` of `x`, with
+`D i ≫ D (i + 1) = 0` and with matrix entries whose germs are those of `δ i`.
+Stacks Tags 0BCD, 0BC7, 00CR. -/
 theorem exists_squareZero_stalk_coefficients_spread
     (X : Scheme.{u}) (x : X) (d : ℤ → ℕ) (a b : ℤ)
     (hd : ∀ i : ℤ, i < a ∨ b < i → d i = 0)

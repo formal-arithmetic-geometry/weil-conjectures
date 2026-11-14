@@ -72,20 +72,10 @@ private theorem targetHomotopyComparison
 
 end
 
-/-- Derived compatibility before the sectionwise mate identity.
-Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-
-Proof: The pinned Hom equivalence identifies pullback of the right-derived unit
-followed by the derived counit with the left-derived counit followed by localization
-of the homotopy counit. Move that unit across the five-factor pullback square by
-naturality. Apply open_pinned_counit_homotopy_restriction to the direct-image
-homotopy complex, and cancel the target restriction and tensor restriction
-isomorphisms. Naturality of the source restriction factorization moves localization
-of the homotopy counit through restriction. Functoriality of Qh then joins the
-inverse tensor comparison and restricted homotopy counit into the displayed arrow.
-This calculation does not identify that arrow with the restricted-morphism counit;
-that is the separate sectionwise mate identity. It uses no inverse of the derived
-unit, so applies also to unbounded complexes, empty opens and the zero complex. -/
+/-- The open pullback square for the pinned derived counit, evaluated on the right-derived
+unit of a direct-image representative, factors through the left-derived counit and the
+localized inverse tensor comparison followed by the restricted homotopy counit.
+Stacks Project, Tags 08FE, 08HY and 0D5S. -/
 theorem singleComplexOpen_pullback_counit_homotopy_factorization
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

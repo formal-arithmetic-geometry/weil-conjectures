@@ -16,8 +16,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-!
 # Pullback of scheme modules by the tensor formula
 
-Source: Stacks Project, Tags 0095, 0096, 0097; blueprint module base change in
-`sec-abelian-varieties/def-sc-jacobian/def-pc-base-change.md`.
+Source: Stacks Project, Tags 0095, 0096, 0097.
 -/
 
 @[expose] public section
@@ -54,11 +53,7 @@ def tensorPullbackObj (M : Y.Modules) : X.Modules :=
   SheafOfModules.changeOfRings.{w, w, w} (tensorPullbackRingMap g)
     (TopCat.Sheaf.inverseImageModule g.base Y.sheaf M)
 
-/-- The sectionwise map of tensor presheaves is natural.
-Source: Stacks, Tag 0095.
-Proof: inverse image of `a` is linear and commutes with restriction (008X).
-The map `id ⊗ g⁻¹a` therefore commutes with restrictions on pure tensors;
-pure tensors generate each section tensor, giving the asserted naturality. -/
+/-- The sectionwise map of tensor presheaves is natural. Stacks Tag 0095. -/
 theorem tensorPullbackPresheafMap_naturality {M N : Y.Modules} (a : M ⟶ N)
     {U V : (Opens X)ᵒᵖ} (i : U ⟶ V) :
     (SheafOfModules.changeOfRingsPresheaf.{w, w, w} (tensorPullbackRingMap g)
@@ -84,9 +79,7 @@ def tensorPullbackMap {M N : Y.Modules} (a : M ⟶ N) :
           ((TopCat.Sheaf.inverseImageModuleMap g.base Y.sheaf M a).val.app U)
       naturality := tensorPullbackPresheafMap_naturality g a }
 
-/-- Tensor pullback preserves identities. Source: Stacks, Tag 0095.
-Proof: the abelian inverse-image functor preserves identities; its module map is the
-same map with linearity supplied. Extension of scalars and sheafification preserve identities. -/
+/-- Tensor pullback preserves identities. Stacks Tag 0095. -/
 theorem tensorPullbackMap_id (M : Y.Modules) :
     tensorPullbackMap g (𝟙 M) = 𝟙 (tensorPullbackObj g M) := by
   let p :
@@ -113,9 +106,7 @@ theorem tensorPullbackMap_id (M : Y.Modules) :
   rw [hp, CategoryTheory.Functor.map_id]
   rfl
 
-/-- Tensor pullback preserves composition. Source: Stacks, Tag 0095.
-Proof: the abelian inverse-image functor preserves composition; its module map is the
-same map with linearity supplied. Extension of scalars and sheafification preserve composition. -/
+/-- Tensor pullback preserves composition. Stacks Tag 0095. -/
 theorem tensorPullbackMap_comp {M N P : Y.Modules} (a : M ⟶ N) (b : N ⟶ P) :
     tensorPullbackMap g (a ≫ b) = tensorPullbackMap g a ≫ tensorPullbackMap g b := by
   unfold tensorPullbackMap
@@ -205,11 +196,7 @@ private def tensorPullbackPushforwardIso :
     SheafOfModules.pushforwardCongr (tensorPullbackRingMap_unit g)
 
 /-- The tensor formula is left adjoint to the sectionwise module pushforward.
-Source: Stacks, Tag 0096.
-Proof: apply the tensor/restriction adjunction to the change of rings, then the
-inverse-image/direct-image module adjunction (008Y). The resulting bijection is natural
-and its right-hand module action is restriction along `g.c`, hence the recorded pushforward.
-These are the first two steps of this node, using lem-pc-module-pullback-adjunction. -/
+Stacks Tag 0096. -/
 theorem nonempty_tensorPullbackAdjunction : Nonempty (tensorPullback g ⊣ pushforward g) := by
   obtain ⟨E, h, adj, he⟩ := SheafOfModules.exists_changeOfRingsAdjunction X.toTopCat
     (TopCat.Sheaf.inverseImageRing g.base Y.sheaf) X.sheaf (tensorPullbackRingMap g)
@@ -297,23 +284,13 @@ theorem nonempty_tensorPullbackAdjunction : Nonempty (tensorPullback g ⊣ pushf
         (eval M N a V m).symm)
 
 /-- Identity pullback is naturally isomorphic to the identity functor.
-Source: Stacks, Tags 0095 and 0097.
-Proof: by the preceding adjunction and the identity pushforward isomorphism,
-the tensor pullback of the identity and the identity functor are left adjoints of the
-same functor. Uniqueness of left adjoints gives the isomorphism; this is the identity
-case of step three, lem-pc-module-pullback-identity-composition.
--/
+Stacks Tags 0095 and 0097. -/
 theorem nonempty_tensorPullbackId (T : Scheme.{w}) :
     Nonempty (tensorPullback (𝟙 T) ≅ 𝟭 T.Modules) := by
   obtain ⟨adj⟩ := nonempty_tensorPullbackAdjunction (𝟙 T)
   exact ⟨(adj.ofNatIsoRight (pushforwardId T)).leftAdjointUniq Adjunction.id⟩
 
-/-- Composite pullback is naturally isomorphic to successive pullback.
-Source: Stacks, Tag 0097.
-Proof: combine the two tensor-pullback adjunctions. Sectionwise pushforward composition
-identifies their right adjoint with pushforward along `g ≫ h`. Uniqueness of left adjoints
-gives this isomorphism; this is step three, lem-pc-module-pullback-identity-composition.
--/
+/-- Composite pullback is naturally isomorphic to successive pullback. Stacks Tag 0097. -/
 theorem nonempty_tensorPullbackComp (h : Y ⟶ Z) :
     Nonempty (tensorPullback (g ≫ h) ≅ tensorPullback h ⋙ tensorPullback g) := by
   obtain ⟨adjg⟩ := nonempty_tensorPullbackAdjunction g

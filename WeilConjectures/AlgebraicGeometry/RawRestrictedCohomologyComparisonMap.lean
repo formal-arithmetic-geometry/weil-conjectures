@@ -183,7 +183,6 @@ end RawRestrictedComparison
 set_option backward.isDefEq.respectTransparency false in
 /-- Apply restricted derived sections and zeroth homology to a raw class, evaluate
 at the pulled-back represented identity section, and undo the shift comparison.
-All data are explicit functorial constructions.
 Source: Stacks Project, Tag 03Q8; Tags 072W and 0BKV. -/
 noncomputable def rawRestrictedCohomologyComparison {S Y : Scheme.{v}} (h : Y ⟶ S)
     (p : ℕ) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) (U : S.Etale) :

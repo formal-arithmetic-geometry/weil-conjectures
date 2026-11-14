@@ -29,16 +29,7 @@ namespace AlgebraicGeometry.RingedSpace
 /-- Direct image of a K-injective complex is acyclic for a subsequent direct image.
 This asserts invertibility only on these particular complexes; it does not assert
 that module direct image preserves K-injectivity.
-Source: Stacks Project, Cohomology, Tags 079W, 0D5S and 0D5T.
-
-Proof: test the pasted units on localized K-flat complexes using
-`moduleDirectImage_pastedUnit_kFlat_hom_bijective`. Every derived object is
-isomorphic to a localized K-flat complex, by essential surjectivity of the
-localization and `exists_isKFlatResolution`. Precomposition by this isomorphism
-transfers both injectivity and surjectivity of the Hom test to every derived
-object. Yoneda makes the pasted unit invertible. Its second factor is derived
-direct image of the unit at I, which is invertible since I is K-injective.
-Cancel this factor to obtain the asserted invertibility. -/
+Stacks Project, Cohomology, Tags 079W, 0D5S and 0D5T. -/
 theorem isIso_moduleDirectImage_unit_on_kInjective
     {X Y Z : RingedSpace.{u}}
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y))]

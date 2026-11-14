@@ -23,8 +23,8 @@ set_option backward.isDefEq.respectTransparency.types false
 namespace AlgebraicGeometry
 open SingleComplexBaseChange
 
-/-- Localize the literal ordinary pullback square and apply the exact restriction
-factor. This is constructed on homotopy complexes, without a K-flatness hypothesis.
+/-- The localization of the literal ordinary pullback square, composed with the exact
+restriction factor. It is defined on homotopy complexes, without a K-flatness hypothesis.
 Source: Stacks Project, Tag 08DW. -/
 noncomputable def singleComplexOpenTensorRestrictionMap
     [d : ∀ Y : Scheme.{u},

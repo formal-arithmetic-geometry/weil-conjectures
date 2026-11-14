@@ -62,9 +62,7 @@ noncomputable def selfTorIdealWedge {Z Y : Scheme.{u}} (i : Z ⟶ Y)
 
 /-- Applying an affine module map to its constant section gives the constant section
 of the image element.
-Source: Stacks Project, Tags 01I6 and 0096.
-Proof: Naturality of the tilde adjunction unit, of the sheaf module map, and of the
-canonical tensor-pullback adjunction unit. -/
+Source: Stacks Project, Tags 01I6 and 0096. -/
 theorem selfTorAffineSection_map {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     (U : Y.affineOpens) {M P : ModuleCat.{u} (Γ(Y, U.1) : Type u)}
     (a : M ⟶ P) (m : M) :

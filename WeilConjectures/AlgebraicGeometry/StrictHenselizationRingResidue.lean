@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationPointEvaluationPrope
 
 Source: Stacks Project, Tag 04HX and Definition 03PS.
 
-This is clause (1) of `lem-weil-pbc-strict-henselization-functoriality` for the
+This is the analogue of `strictHenselizationResidue` for the
 coordinate-ring model `Scheme.strictHenselizationRing` of the strict henselization,
 whose canonical maps are the legs of `Scheme.strictHenselizationCone` and the structural
 map `Scheme.strictHenselizationStructuralMap`. The pointed residue map is transported from
@@ -90,27 +90,10 @@ private theorem strictHenselizationRingPointedMap
   rw [← Spec.map_comp_assoc, ← Category.assoc, hleg, Spec.map_comp_assoc]
   exact h
 
-/-- The strictly henselian ring, canonical base map, and unique pointed residue
-identification of clause (1), for the coordinate-ring model
-`Scheme.strictHenselizationRing`. The factorization condition forces the residue
-identification to respect the base residue field; using ring equivalences therefore
-also states uniqueness as an equivalence of base-residue-field algebras.
-Source: Stacks Project, Tag 04HX and Definition 03PS.
-
-Proof: by `strictHenselizationLocalStructure` the colimit ring $C$ is a strictly
-henselian local ring. The pointed map of the colimit, the point evaluation $\psi$ to the
-relative separable closure $\kappa(\bar x)$, is surjective with kernel the maximal ideal,
-so it induces an isomorphism $\sigma : C/\mathfrak m_C \to \kappa(\bar x)$. Let
-$\lambda : \operatorname{Spec}\Omega \to \operatorname{Spec} C$ be given by
-$C \to C/\mathfrak m_C \to \kappa(\bar x) \subset \Omega$. By construction of $\psi$ every
-leg $c_V$ of the limit cone satisfies $c_V \circ \lambda = \bar v$; composing with the
-structure morphism of any neighbourhood gives $j_Y \circ \lambda = \bar x$, hence $j_Y$ maps
-the closed point (the image of $\lambda$) to $y$. Since $\Omega$ is algebraically closed,
-$\kappa(\bar x)$ is a separable closure of $\kappa(y)$, hence separably closed. Uniqueness:
-another $\sigma'$ with the same factorizations gives $\lambda_{\sigma'}$ with the same
-composites with all legs of the limit cone, so $\lambda_{\sigma'} = \lambda$; then the two
-ring maps $C \to \Omega$ agree, and since the residue map is surjective and the inclusion
-into $\Omega$ is injective, $\sigma' = \sigma$. -/
+/-- The coordinate-ring model `Scheme.strictHenselizationRing` is a strictly henselian local
+ring whose closed point maps to the image of `barY`, and it has a unique pointed residue
+identification with the separable closure of the residue field in `Ω`, as in
+`strictHenselizationResidue`. Source: Stacks Project, Tags 04HX and 03PS. -/
 theorem strictHenselizationRingResidue
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (barY : Spec (.of Ω) ⟶ Y)

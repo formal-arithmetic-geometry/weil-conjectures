@@ -21,17 +21,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Hom
 
 /--
-The finite-generation argument on an affine open produces a compact open whose
-carrier is the successor fibre-degree locus. Source: Stacks Project, More on
-Morphisms, Tag 07RZ, proof, second paragraph.
-
-Proof: identify the closed degree-≤r locus on the affine open with the vanishing
-locus of an ideal I. Express I as the directed union of its finitely generated
-subideals and apply descent of finite locally free morphisms to obtain a finitely
-generated subideal J whose vanishing locus has the universal degree-r property.
-The universal criterion gives V(J)=V(I), and the complement of V(J), a finite
-union of principal opens, is quasi-compact. This also covers the empty, zero,
-and unit ideal cases. -/
+On an affine open `W` in the degree-at-least-`r` locus, there is a quasi-compact open whose
+carrier is the intersection of `W` with the degree-at-least-`(r+1)` locus. Stacks Tag 07RZ. -/
 theorem exists_compact_open_successor_degree_locus_inter_affine
     {X S : Scheme.{u}} (f : X ⟶ S) [Flat f]
     [LocallyOfFinitePresentation f] [IsSeparated f] (hf : f.IsQuasiFinite)

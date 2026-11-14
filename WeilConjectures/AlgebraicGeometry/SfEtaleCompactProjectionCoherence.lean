@@ -11,13 +11,16 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionAssoc
 
 /-! # Ordinary etale compact-support projection coherence
 
-proof.md`, paragraph 3; upstream
-`LowerShriekCompositionCoherence.lean` and `LowerShriekComposition.lean`.
-
 The inverse projections are those of the supplied open/proper factorizations.
 The compositor is the explicit graph comparison, not an unspecified isomorphism.
 All objects belong to the ordinary unbounded derived categories; no qc or
 Noetherian hypothesis is imposed.
+
+## References
+
+Upstream `LowerShriekCompositionCoherence.lean` (`projectionMapAssociativity`) and
+`LowerShriekComposition.lean` (graph construction of
+`nonempty_iso_rightDerivedLowerShriek_comp`).
 -/
 
 @[expose] public section
@@ -222,9 +225,8 @@ namespace AlgebraicGeometry.Etale
 
 attribute [local instance 20000] Etale.sheafBraidedCategory
 
-/-- The inverse of the canonical compactification projection, whose invertibility
-is supplied by lem-sf-etale-ambient-adjoint-projection. Source: blueprint
-`thm-asd-smooth-tensor.proof.md`, paragraph 3. -/
+/-- The inverse of the canonical compactification projection, whose invertibility is
+supplied by `sfEtaleAmbientAdjointProjection`. -/
 noncomputable def sfEtaleCompactProjectionInverse
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -237,12 +239,7 @@ noncomputable def sfEtaleCompactProjectionInverse
   @inv _ _ _ _ (((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app M).app P)
     ((sfEtaleAmbientAdjointProjection A c).2 M P)
 
-/-- Inverse projection is natural in its first argument. Source: blueprint
-`thm-asd-smooth-tensor.proof.md`, paragraph 3.
-Proof: step 1 of the node. The proper counit projection, open tensor comparison
-and pullback compositor are natural transformations. Their composite is natural.
-Multiply its naturality square by the inverse components, which exist on all
-unbounded inputs by lem-sf-etale-ambient-adjoint-projection. -/
+/-- Inverse projection is natural in its first argument. -/
 theorem sfEtaleCompactProjectionInverse_naturality_left
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -262,11 +259,7 @@ theorem sfEtaleCompactProjectionInverse_naturality_left
   exact (NatTrans.congr_app
     ((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).naturality a) P).symm
 
-/-- Inverse projection is natural in its second argument. Source: blueprint
-`thm-asd-smooth-tensor.proof.md`, paragraph 3.
-Proof: node step 1, as in naturality in the first variable: compose the natural
-proper projection, open comparison and pullback compositor, then multiply the
-naturality square by their invertible projection components. -/
+/-- Inverse projection is natural in its second argument. -/
 theorem sfEtaleCompactProjectionInverse_naturality_right
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -285,19 +278,8 @@ theorem sfEtaleCompactProjectionInverse_naturality_right
   rw [IsIso.comp_inv_eq, Category.assoc, IsIso.eq_inv_comp]
   exact (((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app M).naturality b).symm
 
-/-- Tensor associativity for the specified inverse projection. Source: blueprint
-`thm-asd-smooth-tensor.proof.md`, paragraph 3; upstream
-`LowerShriekCompositionCoherence.lean`, projectionMapAssociativity.
-Proof: steps 1--3 of the node. Use the canonical monoidal pullback comparisons
-of lem-sfb-ringed-derived-monoidal-comparisons. For the open comparison use flat-term
-K-flat representatives and lem-weil-pbc-site-derived-tensor-descent: both sheaf maps
-are tensor reassociation on the open and zero off it. On every triple-indexed
-summand of the total tensor complex they are the same chain map, with the same
-signed differential. Descent gives equality of actual derived morphisms. Apply
-lem-sfb-ringed-projection-tensor-composition to the proper part. Naturality moves
-its projection past the first open comparison; proper associativity combines the
-two proper factors, and open associativity combines the two open factors.
-Invert the resulting forward-projection equation, reversing the order of factors. -/
+/-- Tensor associativity for the specified inverse projection.
+-/
 theorem sfEtaleCompactProjectionInverse_associativity
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -352,29 +334,11 @@ attribute [local irreducible] projectionMapOfCompactification derivedTensor
 attribute [local implicit_reducible] derivedTensorRightDerivedLowerShriek
   rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar
 
-/-- Composition coherence for the graph-normalized compositor and inverse
-projections. Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3;
-upstream `LowerShriekComposition.lean`, graph construction of
-nonempty_iso_rightDerivedLowerShriek_comp.
-Proof: node steps 4--8. Work first with forward projections. Proper composition
-preserves them by lem-sfb-ringed-projection-tensor-composition, open composition by
-lem-amb-open-projection-composition, and Cartesian proper/open interchange by
-lem-sf-etale-proper-open-tensor-square. The inverse square also commutes by
-cancelling its inverse components. Whiskering and pasting preserve commutativity.
-For a proper/open/proper graph model, lem-sf-etale-locally-closed-graph-model
-expresses its comparison as precisely these replacements, so it intertwines
-projections; use the normalized composite adjunction for proper compositors.
-For the supplied compactifications of h and g form the product of their proper
-parts over Z. Its open over X contains the proper graph of X; the further open
-over Y contains its proper lift. Properness follows from base change and the
-proper-to-separated-target lemma; all open maps are base changes of supplied
-opens. The two graph-model comparisons compute F_h and F_f there. Split the graph
-through the further open, compose open extensions on the intersection, and use
-inverse proper/open interchange over Y. These are exactly the factors of
-sfGraphCompactSupportCompIso. Paste their projection squares to obtain the forward
-equation. Multiply by inverse projections at h, f and g and cancel to obtain
-this inverse equation. A finite ring is torsion even when it is zero. No step
-requires a qc open, Noetherian base or bounded complex. -/
+/-- Composition coherence for the graph-normalized compositor and inverse projections:
+the inverse projection for a compactification of `f ≫ g` is compatible with those for `f`
+and `g` under the graph-normalized compositor. No qc open, Noetherian base or bounded
+complex is required.
+-/
 theorem sfEtaleCompactProjectionInverse_composition
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)

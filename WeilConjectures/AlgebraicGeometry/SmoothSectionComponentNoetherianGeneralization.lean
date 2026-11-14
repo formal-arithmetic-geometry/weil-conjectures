@@ -94,7 +94,9 @@ theorem Smooth.exists_noetherian_section_component_stable_locus {P T : Scheme.{u
   have h := connectedComponentIn_mono (Limits.pullback.fst g b (σ' η)) hfibre himage
   simpa only [η, haη, hbase] using h
 
-/-- (blueprint: lem-sbc-smooth-section-component-noetherian-generalization) -/
+/-- Over a Noetherian base, the relative connected component of a smooth section is stable
+under generalization: if `y` specializes to `x` and `x` lies in the component of its fibre
+containing the section point, then so does `y`. -/
 theorem Smooth.section_component_generalization_of_isNoetherian {P T : Scheme.{u}}
     (g : P ⟶ T) [Smooth g] [QuasiCompact g] [QuasiSeparated g] [IsNoetherian T]
     (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) {x y : P} (hxy : y ⤳ x)

@@ -61,18 +61,7 @@ private theorem ordinary_monoidal (T : Scheme.{u}) :
 
 -- Identifying the signed total comparison elaborates the native cochain monoidal structure.
 /-- The termwise section equivalence is strong monoidal with the specified signed comparison.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 06YU and 07A4, and the signed-total
-construction of the tensor comparison (Tag 0FPT).
-
-Proof: take the canonical ordinary section monoidal data and identify its oplax
-comparison with ordinaryTensorComparison by the pure-tensor normalization theorem.
-The standard cochain extension of this additive monoidal equivalence is strong
-monoidal. Its oplax tensorator is mapBifunctorComparison of the curried ordinary
-oplax transformation. Equality of these ordinary components identifies the two
-curried natural transformations; sectionTotalComparison_eq then identifies the
-cochain tensorator with cochainTensorComparison. This construction is unbounded
-and also applies to zero complexes, zero coefficients and empty sites. -/
+Source: Stacks Project, Cohomology on Sites, Tags 06YU, 07A4 and 0FPT. -/
 theorem section_cochain_monoidal_data (T : Scheme.{u}) :
     ∃ m : ((equivalence Λ T).mapHomologicalComplex (.up ℤ)).functor.Monoidal,
       letI := m

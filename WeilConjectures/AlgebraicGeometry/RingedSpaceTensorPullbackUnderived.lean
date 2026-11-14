@@ -47,10 +47,7 @@ private def tensorPullbackObj (M : (SheafOfModules.{u} (moduleRings Y))) : (Shea
     (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf M)
 
 /-- The sectionwise map of tensor presheaves is natural.
-Source: Stacks, Tag 0095.
-Proof: inverse image of `a` is linear and commutes with restriction (008X).
-The map `id ⊗ g⁻¹a` therefore commutes with restrictions on pure tensors;
-pure tensors generate each section tensor, giving the asserted naturality. -/
+Stacks, Tag 0095. -/
 private theorem tensorPullbackPresheafMap_naturality {M N : (SheafOfModules.{u} (moduleRings Y))}
   (a : M ⟶ N)
     {U V : (Opens X)ᵒᵖ} (i : U ⟶ V) :
@@ -77,9 +74,7 @@ private def tensorPullbackMap {M N : (SheafOfModules.{u} (moduleRings Y))} (a : 
           ((TopCat.Sheaf.inverseImageModuleMap g.hom.base Y.sheaf M a).val.app U)
       naturality := tensorPullbackPresheafMap_naturality g a }
 
-/-- Tensor pullback preserves identities. Source: Stacks, Tag 0095.
-Proof: the abelian inverse-image functor preserves identities; its module map is the
-same map with linearity supplied. Extension of scalars and sheafification preserve identities. -/
+/-- Tensor pullback preserves identities. Stacks, Tag 0095. -/
 private theorem tensorPullbackMap_id (M : (SheafOfModules.{u} (moduleRings Y))) :
     tensorPullbackMap g (𝟙 M) = 𝟙 (tensorPullbackObj g M) := by
   let p :
@@ -106,9 +101,7 @@ private theorem tensorPullbackMap_id (M : (SheafOfModules.{u} (moduleRings Y))) 
   rw [hp, CategoryTheory.Functor.map_id]
   rfl
 
-/-- Tensor pullback preserves composition. Source: Stacks, Tag 0095.
-Proof: the abelian inverse-image functor preserves composition; its module map is the
-same map with linearity supplied. Extension of scalars and sheafification preserve composition. -/
+/-- Tensor pullback preserves composition. Stacks, Tag 0095. -/
 private theorem tensorPullbackMap_comp {M N P : (SheafOfModules.{u} (moduleRings Y))} (a : M ⟶ N)
   (b : N ⟶ P) :
     tensorPullbackMap g (a ≫ b) = tensorPullbackMap g a ≫ tensorPullbackMap g b := by
@@ -211,11 +204,7 @@ private def tensorPullbackPushforwardIso :
     SheafOfModules.pushforwardCongr (tensorPullbackRingMap_unit g)
 
 /-- The tensor formula is left adjoint to the sectionwise module pushforward.
-Source: Stacks, Tag 0096.
-Proof: apply the tensor/restriction adjunction to the change of rings, then the
-inverse-image/direct-image module adjunction (008Y). The resulting bijection is natural
-and its right-hand module action is restriction along `g.hom.c`, hence the recorded pushforward.
-These are the first two steps of this node, using lem-pc-module-pullback-adjunction. -/
+Stacks, Tag 0096. -/
 private theorem nonempty_tensorPullbackAdjunction : Nonempty (tensorPullback g ⊣
   moduleDirectImage g) := by
   obtain ⟨E, h, adj, he⟩ := SheafOfModules.exists_changeOfRingsAdjunction (X : TopCat.{u})
@@ -309,19 +298,7 @@ private theorem nonempty_tensorPullbackAdjunction : Nonempty (tensorPullback g �
 /-- The concrete inverse image followed by tensor change of rings is an additive
 left adjoint to module direct image.
 
-Source: Stacks Project, Sheaves, Tags 008A and 008Y.
-
-Proof: take the inverse-image module Hom equivalence of Tag 008Y and compose
-it with the extension/restriction-of-scalars equivalence of Tag 008A along the
-adjoint structure map. The right composite is direct image with the scalar
-structure through g-sharp: the adjunction triangle identity for the ring sheaves
-identifies the composite ring map with g-sharp. The natural Hom equivalences
-define the functor on objects and maps. On maps it is precisely inverse image
-followed by the sheafification of the sectionwise map id tensor a, by naturality
-of both equivalences. The inverse-image functor on abelian sheaves and the
-sectionwise tensor functor are additive, as is sheafification, so their composite
-is additive. This proves the prescribed object and morphism formulas and the
-underived adjunction. -/
+Stacks Project, Sheaves, Tags 008A and 008Y. -/
 theorem exists_tensorModulePullback
     {X Y : RingedSpace.{u}} (g : X ⟶ Y) :
     ∃ (P : SheafOfModules.{u} (moduleRings Y) ⥤ SheafOfModules.{u} (moduleRings X))

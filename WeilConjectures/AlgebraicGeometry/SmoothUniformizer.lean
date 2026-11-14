@@ -311,11 +311,7 @@ theorem formallySmooth_eval₂Hom_stalk_of_irreducible [PerfectField k] (X : Ove
 /-- **Smooth uniformizers.** Let `X` be locally of finite type over a perfect field `k` and
 `x : X` a point whose local ring is a discrete valuation ring. Then there are an open
 neighbourhood `W₀` of `x` and a smooth morphism `f₀ : W₀ ⟶ 𝔸¹_k` over `k` such that the pullback
-of the coordinate is a uniformizer of `𝒪_{X,x}`.
-
-Any `s` with irreducible germ `sₓ` works: `k[X₀] → 𝒪_{X,x}`, `X₀ ↦ sₓ`, is formally smooth
-(`formallySmooth_eval₂Hom_stalk_of_irreducible`), so `s : V ⟶ 𝔸¹_k` is smooth at `x`, and one
-restricts to its smooth locus. -/
+of the coordinate is a uniformizer of `𝒪_{X,x}`. -/
 theorem exists_smooth_polyAffine_irreducible_germ [PerfectField k] (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] (x : X.left) [IsDomain (X.left.presheaf.stalk x)]
     [IsDiscreteValuationRing (X.left.presheaf.stalk x)] :

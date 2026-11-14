@@ -19,11 +19,10 @@ open AlgebraicGeometry
 universe u
 namespace AlgebraicGeometry
 
-/-- The separated affine function-field construction yields a closed immersion of spectra.
-Source: Varieties Lemma 09NB, separatedness paragraph.
-The proof constructs the pullback of the diagonal along the affine charts, identifies it
-with `Spec K`, and transports the resulting closed immersion through the affine-spectrum
-identifications. -/
+/-- For a separated integral scheme, a nonempty affine open `U` and a point `x ∉ U` with
+one-dimensional Noetherian stalk, the canonical map `Spec K → Spec (Γ(X, U) ⊗[ℤ] 𝒪_{X,x})`
+induced by the function-field inclusions is a closed immersion.
+Stacks Project, Tag 09NB. -/
 theorem Scheme.isClosedImmersion_specMap_tensor_functionField
     (X : Scheme.{u}) [IsIntegral X]
     [hsep : X.IsSeparated]

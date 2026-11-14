@@ -54,23 +54,7 @@ private theorem coefficient_hom_comp {A B X : Scheme.{v}}
       (coefficientTensorAdjunction q1) (pushforwardComp a q ≪≫ pushforwardCongr h))
 
 /-- The ordinary coefficient comparisons respect a commuting triangle of pullbacks.
-Source: Stacks Project, Tags 0096 and 0D5S; step 2 of
-`lem-sc-tensor-single-pullback-composition`.
-
-Proof: Substitute a' = b ≫ a. Conjugation sends the ordinary-to-tensor
-uniqueness comparison to the identity, so each coefficient comparison is the
-component of the mixed leftAdjointCompIso for tensor pullback along q and
-ordinary pullback along a, with right-adjoint comparison pushforwardComp a q
-followed by pushforwardCongr h1. The same identification applies to b and b ≫ a.
-The ordinary pullbackComp b a is also leftAdjointCompIso, as follows by
-injectivity of conjugateEquiv and conjugateEquiv_pullbackComp_inv. Apply Mathlib's
-Adjunction.leftAdjointCompIso_assoc to these six adjunctions. Its right-adjoint
-coherence hypothesis is checked after substituting q1 and q2: at every module
-and open, pushforward composition is the identity and equality transport is the
-presheaf map of equality of opens. Functoriality and proof irrelevance identify
-the paths. Evaluate the resulting natural-isomorphism equality at L. Zero
-modules, identity morphisms and empty schemes require no additional hypotheses;
-no derived category or flatness assumption occurs. -/
+Stacks Tags 0096 and 0D5S. -/
 theorem tensorCoefficientPullback_composition
     {A B C X : Scheme.{v}} (q : A ⟶ X) (q1 : B ⟶ X) (q2 : C ⟶ X)
     (a : B ⟶ A) (b : C ⟶ B) (a' : C ⟶ A)

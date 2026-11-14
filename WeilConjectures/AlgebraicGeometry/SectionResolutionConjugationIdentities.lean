@@ -15,8 +15,7 @@ public import WeilConjectures.Topology.ProfiniteCondensedRing
 
 /-! # Resolution conjugation identities for the section equivalence
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E; the explicit
-internal/section conjugation calculation in the blueprint proof.
+Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E.
 
 The maps below are composites of the specified comparisons, never independently
 chosen tensor-pullback transformations. Composition in Lean is left to right.
@@ -498,37 +497,7 @@ private theorem qh_map_quotient
 
 -- The concrete localization and total-comparison interfaces require extra elaboration steps.
 /-- Explicit resolution conjugation identities, their naturality, and counit substitution.
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E; the agent calculation
-refining the representative square.
-
-Proof:
-1. Reverse the resolution-compatibility clause of sectionDerivedPushpullNormalization.
-   This gives the unary equation at every internal complex.
-2. The first clause of TensorRepresentativeCondition holds for every pair of internal
-   complexes. Cancel the inverse localization and tensor-comparison factors to obtain
-   the representative identity. Paste this with the unary equation at the total tensor,
-   gamma-naturality at the internal representative map, and epsilon-naturality at the
-   ordinary total comparison. The result is the binary input equation.
-3. Apply the representative identity at the two internal pullbacks. Naturality of
-   qTensor at the termwise pullback comparisons, naturality of tensorComparison at the
-   two eta maps, and the two unary equations give the output equation. Bifunctoriality
-   combines the paired transports. No resolving-preservation hypothesis is needed here.
-4. Cancel the invertible source transports in the ordinary total-comparison clause of
-   section_oplax_total_comparison. Localize and paste with kappa-naturality. For units,
-   cancel the corresponding ordinary unit transports, then apply kappa-naturality,
-   the unary equation at the internal unit, and epsilon-naturality at its comparison.
-5. The pure-tensor characterization identifies ordinaryTensorComparison with the
-   natural comparison of internal_section_tensor_comparison. Its summand formula and
-   coproduct extensionality prove naturality of totalComparison. Naturality of eta,
-   kappa, the termwise pullback comparison and the actual total oplax map then gives
-   all four Naturality squares.
-6. Use epsilon-, qTensor- and section-total naturality to transport the equations along
-   arbitrary section-complex isomorphisms. K-flatness is invariant under tensoring such
-   an isomorphism, and termwise flatness is invariant under the induced isomorphism of
-   tensor-right functors. Apply the resolving equivalence to the termwise inverse
-   image and its counit. Epsilon-naturality and inverse cancellation give the final
-   unit substitution. All the displayed maps remain the specified comparisons.
--/
+Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E. -/
 theorem section_resolution_conjugation_identities {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (∀ (A B : CochainComplex (internalModules Λ Y) ℤ),
       KFlatSectionComparison.internalResolving Λ Y A →

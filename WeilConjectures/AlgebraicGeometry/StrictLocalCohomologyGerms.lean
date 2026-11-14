@@ -159,7 +159,7 @@ noncomputable def strictLocalCohomologySourceIso {S : Scheme.{v}}
           (Scheme.strictLocalizationToBase s)) n).app L)
 
 /-- Restrict the derived-sections presheaf to the small pointed affine representatives.
-Source: Stacks, Tag 03Q9, first proof paragraph. -/
+Source: Stacks, Tag 03Q9. -/
 noncomputable def strictLocalCohomologyNeighbourhoodFunctor {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))

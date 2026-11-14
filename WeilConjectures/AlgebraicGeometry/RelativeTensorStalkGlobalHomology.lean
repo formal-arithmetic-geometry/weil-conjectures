@@ -25,7 +25,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # RelativeTensorStalkGlobalHomology
-.
+
+The stalks of the homology of a relative tensor product with a K-flat resolution are computed
+by a derived tensor product over the local ring.
 -/
 
 @[expose] public section
@@ -64,21 +66,10 @@ private theorem stalk_preservesFiniteColimits (Z : RingedSpace.{u}) (x : Z) :
         TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x)
   exact preservesFiniteColimits_of_reflects_of_preserves _ A
 
-/-- Global stalk computation for a prescribed K-flat relative representative.
-Source: Stacks Project, Cohomology of Sheaves, Tags 06YB, 08CG, 09U9;
-Sheaves Tags 008H and 0098; Modules Tag 01AG.
-Proof: form the inverse-image ringed space with underlying space X. The canonical
-inverse-image ring stalk isomorphism identifies its stalk ring with A=O_Y,f(y).
-Take M to be the actual module stalk of F restricted along that isomorphism.
-The stalk criterion makes P_y K-flat. Exactness of stalks sends q to a
-quasi-isomorphism; the germ formula for the inverse-image ring map identifies
-its target with the restriction along f.stalkMap of the module stalk of K.
-A K-flat complex computes its derived tensor with every complex, so Q of the
-total tensor of P_y and M[0] is isomorphic to Q of that restricted stalk of K
-tensored in the derived category with M[0]. Stalks commute with total tensor,
-single complexes and homology. Taking homology and forgetting scalars gives
-the displayed isomorphisms for all i with this same M. This works for zero
-modules, unbounded complexes and every integer i. -/
+/-- Given a K-flat resolution `P` of `K` over `f⁻¹O_Y`, for every module `F` there is an
+`O_{Y,f(y)}`-module `M` such that the stalk at `y` of `H^i(P ⊗ F[0])` is isomorphic to
+`H^i(K_y ⊗^L M[0])` for all `i`.
+Stacks Project, Tags 06YB, 08CG, 09U9, 008H, 0098 and 01AG. -/
 theorem relativeTensor_stalk_global_homology_iso
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)

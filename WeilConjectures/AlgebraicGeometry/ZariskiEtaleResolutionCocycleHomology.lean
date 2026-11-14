@@ -25,26 +25,12 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 
-/-- Termwise section evaluation respects the cocycle computation of Ext.
+/-- Termwise section evaluation respects the cocycle computation of Ext: there are additive
+equivalences `e₁`, `e₂` from the cohomology groups on `V` and `i(V)` to the homology of the
+evaluated resolutions such that, whenever cocycles `a` and `c` have sections at the identity
+generator related by `b`, the homology map of `b` sends `e₁` of the class of `a` to `e₂` of
+the class of `c`. Stacks Project, Section 01FT; Tag 06XR (1). -/
 
-Source: Stacks Project, Cohomology on Sites, Section 01FT, equation-cohomology-object-site;
-Derived Categories, Tag 06XR (1), lemma-compute-ext-resolutions.
-
-Proof: Put P(V) = sheafification of the free abelian presheaf on yoneda(V).
-The sheafification and free abelian adjunctions followed by additive Yoneda
-identify Hom(P(V), A) with A(V), naturally in A. Apply this in every degree
-to R. The resulting chain isomorphism identifies the cocycle representing
-R.extMk(a) with evaluation of a at the identity generator. Compute Ext with
-R and pass through this chain isomorphism to obtain e₁. Do the same for I
-at i(V); evaluation of the pushed complex at V is definitionally evaluation
-of I at i(V), giving e₂. If the chosen Ext universe differs, use the canonical
-Ext equivalence between universes before this computation. The negative terms
-of the extended resolutions are zero, so restricting to nonnegative degrees
-preserves this identification also in degree zero. Given a and c satisfying
-the displayed equality of sections, the evaluated chain map b sends the cycle
-of a to the cycle of c. The induced homology map therefore sends their classes
-to one another, giving the asserted equality. No augmentation condition or
-exactness of inverse image is used. This includes zero sheaves and empty V. -/
 theorem zariski_etale_resolution_cocycle_homology
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

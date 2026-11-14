@@ -20,8 +20,9 @@ import WeilConjectures.AlgebraicGeometry.DescendModelLocalization
 /-!
 # Spreading an injective generic product map
 
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
-`lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9.
+If the reduced generic fibre of a finite `A`-algebra `B`, base changed to `K'`, is a product of
+fields `L j`, then after shrinking a finite étale model `A'` of `K'` the reduction of
+`B ⊗[A] A'` embeds into `∀ j, L j`, with all coordinate idempotents in the image.
 -/
 
 @[expose] public section
@@ -33,34 +34,12 @@ universe u v
 open scoped TensorProduct
 open AlgebraicGeometry
 
-/-- Spread the generic product map with injectivity, coordinate idempotents, and
-coordinate denominator clearing. This does not construct any domain factors.
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
-`lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9; the torsion,
-idempotent and denominator arguments of `lem-weil-pbc-spread-generic-product-domains`.
-
-Proof: Set C to the reduction of B tensor A0. Its generic fibre is the specified product
-of fields: tensor associativity identifies the unreduced generic fibres, and localization
-commutes with taking the nilradical quotient. Since A0 is finite over the Noetherian
-localization S0, C is finite over a Noetherian domain. The kernel of C to its generic
-fibre is therefore finitely generated torsion. Choose annihilators of its generators
-and invert their product; the resulting map into the generic product is injective.
-Each coordinate idempotent in that product has a numerator in C and a nonzero denominator
-in A0. Invert the product of these finitely many denominators too. The resulting map
-contains all the coordinate idempotents. Every field element in every coordinate is
-likewise a fraction with numerator in C and nonzero denominator in A0, since the map
-on the generic fibre is surjective. These fractions remain available after shrinking.
-For each element of A0 inverted above, integrality over S0 and a monic equation of
-least degree give a nonzero constant coefficient in its principal ideal. Clear the
-coefficients' c0 denominators and invert their product together with c0 in A. Base
-change of A0 to this principal open is finite etale, a domain with fraction field K',
-and its spectrum map remains surjective. It is small because it is a finite module
-over a ring in Type u; transport it to a finite-module presentation in Type u. The
-embedding and coordinate denominator identities transport as well. The algebra maps
-to L j are the compositions through K', giving the stated scalar towers. When r = 0,
-the generic ring is zero and torsion killing makes C zero; both coordinate assertions
-are vacuous and the map from the zero ring is injective. -/
+/-- Suppose the reduction of `(K ⊗[A] B) ⊗[K] K'` is isomorphic to `∀ j, L j`, and let `A0`
+be a finite étale surjective model of `K'` over `A[c0⁻¹]`. Then for some nonzero `c : A` there
+is a finite étale surjective domain `A'` over `A[c⁻¹]` with fraction field `K'` and an injective
+`A'`-algebra map `f` from the reduction of `B ⊗[A] A'` to `∀ j, L j` whose image contains every
+coordinate idempotent, and such that every element of `L j` times some nonzero `a : A'` lies in
+the `j`-th coordinate image of `f`. -/
 theorem exists_spread_generic_product_embedding
     (A : Type u) [CommRing A] [IsNoetherianRing A] [IsDomain A]
     (B : Type v) [CommRing B] [Algebra A B] [Module.Finite A B]

@@ -150,15 +150,7 @@ private theorem leftDerived_absolute_of_resolving
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The K-flat resolving-class construction supplies the derived comparison for the
-concrete tensor pullback.  The proof follows Tags 06YJ, 079W and 06XN: resolve by
-K-flat complexes, use preservation of quasi-isomorphisms under inverse image and
-change of rings, and apply `leftDerived_from_resolvingClass` to the resulting
-functor.
-
-Proof: choose a K-flat resolution of every complex. Inverse image preserves these
-resolutions, and derived change of rings preserves quasi-isomorphisms between the
-resulting K-flat complexes. Applying the resolving-class construction to the concrete
-tensor pullback gives the displayed derived functor and its K-flat comparison. -/
+concrete tensor pullback. Stacks Project, Tags 06YJ, 079W and 06XN. -/
 theorem exists_tensorPullback_leftDerived
     {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X))]
@@ -282,13 +274,7 @@ theorem exists_tensorPullback_leftDerived
 
 /-- Absoluteness of a K-flat derived comparison: the right Kan extension over the
 cofinal K-flat resolution category is essentially constant, hence every postcomposition
-functor preserves its comparison.  This is the absolute-resolution argument of
-Stacks Tags 06XN and 05SE.
-
-Proof: the K-flat resolution category is cofinal and all transition maps are sent to
-isomorphisms by the comparison. Its right Kan extension is therefore essentially
-constant, so the limiting cone is absolute and remains a left derived comparison after
-postcomposition by any functor. -/
+functor preserves its comparison. Stacks Project, Tags 06XN and 05SE. -/
 theorem leftDerived_tensorPullback_absolute
     {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X))]

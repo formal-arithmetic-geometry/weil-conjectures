@@ -23,14 +23,8 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open CategoryTheory.Functor.sheafPullbackConstruction
 
 /-- Comparisons with equal augmentations induce equal maps of section homology.
+Stacks Project, Tags 01FB, 013P and 015B. -/
 
-Proof: exactness of inverse image makes its right adjoint preserve injectives.
-The difference of a and b vanishes on the augmentation of R. Inductively factor
-this difference through successive differentials of R and extend to the injective
-terms of the pushed complex. This constructs a null homotopy. Evaluation is additive,
-so preserves this homotopy, and homotopic maps induce equal homology maps.
-
-Source: Stacks Project, Tags 01FB, 013P and 015B. -/
 theorem zariski_etale_resolution_homology_independent
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

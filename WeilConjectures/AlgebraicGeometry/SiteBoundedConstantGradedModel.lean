@@ -30,16 +30,9 @@ open scoped ZeroObject
 
 namespace CategoryTheory
 
-/-- Realize a finite tower by successively taking mapping cocones.
-Source: Stacks Project, Tag 094G, construction of the final differential and
-rotation of the distinguished triangle.
-
-Proof: Induct on the tower. At width zero use the single complex. For a step,
-realize the lower tower and represent its boundary to the top single object by
-a chain map using its upper bound. The mapping cocone adds the finite constant
-term in the next degree and keeps all other terms up to isomorphism. Comparing
-the rotated distinguished triangles and cancelling shifts identifies its
-localization with the original object. -/
+/-- A finite constant extension tower of width `n` above degree `a` is represented by a
+complex whose terms are images under `S` of finite modules, zero outside `[a, a + n]`.
+Source: Stacks Project, Tag 094G. -/
 private theorem constant_tower_has_model
     {B : Type u} [CommRing B]
     {A : Type z} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
@@ -132,27 +125,10 @@ private theorem constant_tower_has_model
       exact ⟨(eCancel.app K).symm ≪≫ (shiftFunctor _ (-1)).mapIso eShift ≪≫
         eCancel.app (DerivedCategory.Q.obj P)⟩
 
-/-- The cohomological induction produces a bounded sheaf complex whose graded
-terms are constant finite modules. Its differentials are still sheaf morphisms.
-
-Source: Stacks Project, Cohomology on Sites, Tag 094G, proof of
-`lemma-locally-constant`, construction by induction on the cohomological interval.
-
-Proof: The cohomological induction is isolated as the local finite constant
-extension tower theorem. Its triangles have a finite constant object in degree a
-at the bottom and one finite constant attachment in each higher degree. It does
-not supply representing complexes or chain maps for the boundary morphisms.
-On each covering slice realize the tower by induction, as proved in
-constant_tower_has_model. At a successor step, the lower model E vanishes above
-n. The bounded-top chain-representative theorem realizes the boundary
-Q(E) to the single constant object in degree n by an actual chain map f. Its
-mapping cocone has term E^q direct sum F^(q-1). In the new top degree only F
-survives; in all other degrees only E survives. Thus its coefficients are finite
-and have exactly the requested bounds. Compare the rotated tower and cocone
-triangles using the inductive isomorphism and the identity on the single object.
-The triangle isomorphism gives the desired comparison after cancelling shifts.
-Finally a+(b-a).toNat=b translates the tower's bound into [a,b]. Zero modules
-and zero summands cover the zero ring and zero homology cases. -/
+/-- If the cohomology of `K` lies in `[a, b]` and is locally constant with finite
+values, then on some covering of the terminal object `K` is represented by a bounded
+sheaf complex whose graded terms are constant finite modules. Its differentials are
+still sheaf morphisms. Source: Stacks Project, Cohomology on Sites, Tag 094G. -/
 theorem exists_site_bounded_constant_graded_model
     {C : Type u} [SmallCategory C]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]

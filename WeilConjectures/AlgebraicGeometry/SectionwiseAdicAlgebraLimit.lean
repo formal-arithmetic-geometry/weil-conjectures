@@ -526,28 +526,7 @@ private theorem adicModuleFactor {C : Type u} [SmallCategory C]
 
 /-- Flatness, finite tensor comparisons and canonical quotient projections for an adic
 algebra-sheaf tower. Positive exponents are indexed by n : ℕ, meaning n+1.
-Source: Stacks Project, sites-modules.tex, Tag 093M, generalized algebra-tower argument;
-more-algebra.tex, Tag 0912.
-
-Proof:
-1. Evaluate the sheaf limit on U. Apply `ModuleCat.limit_flat_of_flat_quotients` to
-   the section module tower, using the quotient scalar towers, flatness and surjectivity.
-   Swap the two tensor factors to obtain the stated projection formula. On pure tensors
-   restrictions and maps of finite modules commute with every projection.
-2. Regard the limit as a module over the constant presheaf A. Sectionwise flat tensoring
-   preserves kernels and finite products (including the empty product), hence finite
-   limits. Apply `PresheafOfModules.isFlat_sheafification_obj` to obtain flatness over
-   the constant ring sheaf. This does not require enough points or flatness over R(U).
-3. Apply the finite tensor comparison to A/I^(n+1). The reduction hypotheses identify
-   the target with the eventually constant system S_min(m,n), whose limit is S_n.
-   The quotient-tensor equivalence sends b tensor a to the class of ab, so the resulting
-   ring isomorphism is induced by the original projection.
-4. Since A is Noetherian, I^(n+1) has finitely many generators. The cokernel of their
-   action has presheaf sections B(U)/I^(n+1)B(U). The sectionwise quotient is already
-   the sheaf S_n, so sheafification identifies this with the sheaf-module cokernel.
-5. The quotient isomorphisms commute with every transition: both composites on a
-   representative b give its n-th projection. Identity and composite transitions follow
-   from the strict functor laws. -/
+Source: Stacks Project, Tags 093M and 0912. -/
 theorem sectionwise_adic_algebra_limit
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A)

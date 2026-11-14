@@ -21,13 +21,10 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry
 
 /--
-The K-flat tensor representative and ordinary closed-immersion projection
-comparison give an invertible arrow between the displayed homology objects.
-Source: Stacks Project, Tags 06YH, 08KS, 01CB and 0098.
-Proof: compute the derived tensor square using P tensor B[0], identify this
-complex with the termwise pushforward of tensorPullback(i)(P), apply homology,
-and use exact closed-immersion module pushforward to commute homology with it.
-The localization/homology comparison identifies the actual displayed objects.
+For a K-flat resolution `P` of `i_* 𝒪_Z`, there is an isomorphism from the `k`-th homology of
+the derived self-tensor of `i_* 𝒪_Z` to `i_*` of the `k`-th homology of the termwise tensor
+pullback of `P`.
+Stacks Project, Tags 06YH, 08KS, 01CB and 0098.
 -/
 theorem exists_selfTor_projection_homology_termwise_arrow
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
@@ -59,13 +56,9 @@ theorem exists_selfTor_projection_homology_termwise_arrow
     (T.sc k).mapHomologyIso (Scheme.Modules.pushforward i)
   exact ⟨h.hom, inferInstance⟩
 
-/-- The termwise representative form of the self-Tor projection computation.
-
-This is the derived projection-formula computation followed by comparison with the
-specified K-flat resolution and exact closed-immersion pushforward.  It is separated
-from representative transport so that an arbitrary isomorphic complex can be handled
-functorially in the parent theorem.
--/
+/-- The termwise representative form of the self-Tor projection computation: for a K-flat
+resolution `P` of `i_* 𝒪_Z`, the `k`-th homology of the derived self-tensor of `i_* 𝒪_Z` is
+isomorphic to `i_*` of the `k`-th homology of the termwise tensor pullback of `P`. -/
 theorem nonempty_selfTor_projection_homology_termwise
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

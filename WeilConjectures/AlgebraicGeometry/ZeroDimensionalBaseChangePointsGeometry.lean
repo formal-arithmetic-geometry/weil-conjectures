@@ -32,13 +32,9 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- A zero-dimensional finite-type scheme over an algebraically closed field is finite and
- discrete, and its structure morphism induces residue-field isomorphisms. Source: Stacks
- Project, algebra.tex, Lemma 00KH and Theorem 00FV. Finite type over a field makes C locally
- Noetherian. The dimension bound makes its affine rings Artinian, hence C is discrete.
- Quasi-compactness then makes its point set finite. Every singleton is closed. Nullstellensatz
- makes each closed-point residue field a finite extension of k; algebraic closedness makes the
- induced field map an isomorphism. The empty scheme has a finite discrete space and the pointwise
- claims are vacuous. -/
+ discrete, and its structure morphism induces residue-field isomorphisms at every (closed)
+ point. Stacks Project, Lemma 00KH and Theorem 00FV. -/
+
 theorem zeroDimensional_baseChange_geometry
     (k : Type v) [Field k] [IsAlgClosed k]
     (C : Scheme.{v}) [C.Over (Spec (.of k))]

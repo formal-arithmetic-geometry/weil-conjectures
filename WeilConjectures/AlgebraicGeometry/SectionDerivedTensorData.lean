@@ -197,29 +197,21 @@ def comparisonSource {C : Type u₁} [Category.{v₁} C]
     {D : Type u₂} [Category.{v₂} D] {F G : C ⥤ D} (_e : F ≅ G) : C ⥤ D := F
 
 /-- Countable coproducts supply the internal graded tensor in every degree.
-Source: Stacks 06YN.
-Proof: the degree-n index consists of pairs of integers with sum n, hence is
-countable. The internal Grothendieck module category has this coproduct. -/
+Source: Stacks 06YN. -/
 @[instance] theorem internal_hasGradedTensor (X : Scheme.{u})
     (P Q : GradedObject ℤ (internalModules Λ X)) : GradedObject.HasTensor P Q := by
   have _hderived := ‹∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)›
   infer_instance
 
 /-- Countable coproducts supply the section-module graded tensor in every degree.
-Source: Stacks 06YN.
-Proof: use the coproduct over integer pairs of fixed total degree, whose existence
-transfers through the fixed section-module equivalence. -/
+Source: Stacks 06YN. -/
 @[instance] theorem section_hasGradedTensor (X : Scheme.{u})
     (P Q : GradedObject ℤ (modules Λ X)) : GradedObject.HasTensor P Q := by
   have _hderived := ‹∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)›
   infer_instance
 
 /-- Relative tensor commutes with the countable sums defining the internal graded tensor.
-Source: Stacks 03EK and 06YN.
-Proof: a balanced bilinear map from a coproduct is a family of balanced bilinear
-maps from its summands. Hence tensoring preserves each coproduct over integer
-indices of fixed sum. Iterating this property gives the triple and quadruple
-comparison universal properties of the existing graded tensor construction. -/
+Source: Stacks 03EK and 06YN. -/
 @[instance] theorem internal_goodTensorLeft (X : Scheme.{u})
     (P Q S : GradedObject ℤ (internalModules Λ X)) :
     GradedObject.HasGoodTensor₁₂Tensor P Q S := by
@@ -227,11 +219,7 @@ comparison universal properties of the existing graded tensor construction. -/
   infer_instance
 
 /-- Relative tensor commutes with the countable sums defining the internal graded tensor.
-Source: Stacks 03EK and 06YN.
-Proof: a balanced bilinear map from a coproduct is a family of balanced bilinear
-maps from its summands. Hence tensoring preserves each coproduct over integer
-indices of fixed sum. Iterating this property gives the triple and quadruple
-comparison universal properties of the existing graded tensor construction. -/
+Source: Stacks 03EK and 06YN. -/
 @[instance] theorem internal_goodTensorRight (X : Scheme.{u})
     (P Q S : GradedObject ℤ (internalModules Λ X)) :
     GradedObject.HasGoodTensorTensor₂₃ P Q S := by
@@ -239,11 +227,7 @@ comparison universal properties of the existing graded tensor construction. -/
   infer_instance
 
 /-- Relative tensor commutes with the countable sums defining the internal graded tensor.
-Source: Stacks 03EK and 06YN.
-Proof: a balanced bilinear map from a coproduct is a family of balanced bilinear
-maps from its summands. Hence tensoring preserves each coproduct over integer
-indices of fixed sum. Iterating this property gives the triple and quadruple
-comparison universal properties of the existing graded tensor construction. -/
+Source: Stacks 03EK and 06YN. -/
 @[instance] theorem internal_quadrupleTensorExt (X : Scheme.{u})
     (P Q S T : GradedObject ℤ (internalModules Λ X)) :
     GradedObject.HasTensor₄ObjExt P Q S T := by
@@ -251,11 +235,7 @@ comparison universal properties of the existing graded tensor construction. -/
   infer_instance
 
 /-- Relative tensor commutes with the countable sums defining the section graded tensor.
-Source: Stacks 03EK and 06YN.
-Proof: a balanced bilinear map from a coproduct is a family of balanced bilinear
-maps from its summands. Hence tensoring preserves each coproduct over integer
-indices of fixed sum. Iterating this property gives the triple and quadruple
-comparison universal properties of the existing graded tensor construction. -/
+Source: Stacks 03EK and 06YN. -/
 @[instance] theorem section_goodTensorLeft (X : Scheme.{u})
     (P Q S : GradedObject ℤ (modules Λ X)) :
     GradedObject.HasGoodTensor₁₂Tensor P Q S := by
@@ -263,11 +243,7 @@ comparison universal properties of the existing graded tensor construction. -/
   infer_instance
 
 /-- Relative tensor commutes with the countable sums defining the section graded tensor.
-Source: Stacks 03EK and 06YN.
-Proof: a balanced bilinear map from a coproduct is a family of balanced bilinear
-maps from its summands. Hence tensoring preserves each coproduct over integer
-indices of fixed sum. Iterating this property gives the triple and quadruple
-comparison universal properties of the existing graded tensor construction. -/
+Source: Stacks 03EK and 06YN. -/
 @[instance] theorem section_goodTensorRight (X : Scheme.{u})
     (P Q S : GradedObject ℤ (modules Λ X)) :
     GradedObject.HasGoodTensorTensor₂₃ P Q S := by
@@ -275,11 +251,7 @@ comparison universal properties of the existing graded tensor construction. -/
   infer_instance
 
 /-- Relative tensor commutes with the countable sums defining the section graded tensor.
-Source: Stacks 03EK and 06YN.
-Proof: a balanced bilinear map from a coproduct is a family of balanced bilinear
-maps from its summands. Hence tensoring preserves each coproduct over integer
-indices of fixed sum. Iterating this property gives the triple and quadruple
-comparison universal properties of the existing graded tensor construction. -/
+Source: Stacks 03EK and 06YN. -/
 @[instance] theorem section_quadrupleTensorExt (X : Scheme.{u})
     (P Q S T : GradedObject ℤ (modules Λ X)) :
     GradedObject.HasTensor₄ObjExt P Q S T := by
@@ -302,9 +274,7 @@ def internalDerivedPushforward {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 set_option linter.unusedSectionVars false in
 /-- The fixed section equivalence functor is additive.
-Source: Stacks 00YV.
-Proof: an equivalence preserves binary products, hence is additive between preadditive
-categories. -/
+Source: Stacks 00YV. -/
 theorem sectionFunctorAdditive (X : Scheme.{u}) :
     (equivalence Λ X).functor.Additive :=
   Functor.additive_of_preserves_binary_products (equivalence Λ X).functor
@@ -317,9 +287,7 @@ def derivedFunctor (X : Scheme.{u}) :
   (equivalence Λ X).functor.mapDerivedCategory
 
 /-- Localizing the termwise equivalence again gives an equivalence.
-Source: Stacks 05RU.
-Proof: an equivalence preserves and reflects quasi-isomorphisms; its localization
-is an equivalence. -/
+Source: Stacks 05RU. -/
 @[instance] theorem derivedFunctor_isEquivalence (X : Scheme.{u}) :
     (derivedFunctor Λ X).IsEquivalence := by
   change (equivalence Λ X).functor.mapDerivedCategory.IsEquivalence
@@ -333,8 +301,7 @@ def derivedEquivalence (X : Scheme.{u}) :
   (derivedFunctor Λ X).asEquivalence
 
 /-- The forward functor of the derived equivalence is the fixed localization.
-Source: Stacks 05RU.
-Proof: this is the forward field of the localized equivalence. -/
+Source: Stacks 05RU. -/
 theorem derivedEquivalence_functor (X : Scheme.{u}) :
     (derivedEquivalence Λ X).functor = (equivalence Λ X).functor.mapDerivedCategory := rfl
 
@@ -346,21 +313,14 @@ def derivedPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
   (pullback Λ f).mapDerivedCategory
 
 /-- K-injective resolutions transfer through the sectionwise exact equivalence.
-Source: Stacks 070H.
-Proof: a chain map from an acyclic complex is null-homotopic on one side exactly
-when its underlying linear maps give that same null-homotopy on the other. Transfer
-the functorial internal K-injective resolution through the equivalence. -/
+Source: Stacks 070H. -/
 @[instance] theorem section_hasKInjectiveResolutions (X : Scheme.{u}) :
     Abelian.HasKInjectiveResolutions (modules Λ X) := by
   have _hderived := ‹∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)›
   infer_instance
 
 /-- Functorial flat resolutions transfer through the fixed exact tensor equivalence.
-Source: Stacks 03EK and 06YU.
-Proof: conjugate the existing internal functorial flat-resolution functor by the
-section equivalence, and transfer its augmentation using the counit. The existing
-internal_section_tensor_comparison preserves flat objects and exactness, hence
-preserves the flatness and epimorphism requirements of this resolution. -/
+Source: Stacks 03EK and 06YU. -/
 @[instance] theorem section_hasFunctorialFlatResolutions (X : Scheme.{u}) :
     Abelian.HasFunctorialFlatResolution (modules Λ X) := by
   have _hderived := ‹∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)›
@@ -453,8 +413,7 @@ Naturality is the naturality axiom of the actual localization tensorator. -/
 
 set_option linter.unusedSectionVars false in
 /-- The cached map has exactly the existing native localization components.
-Source: Stacks 06YU.
-Proof: project the displayed transformation's component. -/
+Source: Stacks 06YU. -/
 theorem internalLocalizationTensorMap_app (X : Scheme.{u})
     (P Q : CochainComplex (internalModules Λ X) ℤ) :
     (internalLocalizationTensorMap Λ X).app (P, Q) =
@@ -485,9 +444,7 @@ def tensorUnit (X : Scheme.{u}) : DerivedCategory (modules Λ X) :=
     ((DerivedCategory.singleFunctor (internalModules Λ X) 0).obj (𝟙_ (internalModules Λ X)))
 
 /-- The tensor comparison is uniquely specified by the equivalence unit.
-Source: Stacks 06YU.
-Proof: apply the derived equivalence to the tensor of its unit isomorphisms.
-Naturality is the tensor of the two unit naturality equations. -/
+Source: Stacks 06YU. -/
 theorem tensorComparison_existsUnique (X : Scheme.{u}) :
     ∃! t : Functor.uncurry.obj (CondensedRing.derivedTensor Λ X) ⋙ (derivedEquivalence Λ
       X).functor ≅
@@ -531,8 +488,7 @@ def totalTensor [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
 
 set_option linter.unusedSectionVars false in
 /-- Naturality of the fixed ordinary tensor comparison.
-Source: Stacks 03EK.
-Proof: use the existing pure-tensor naturality calculation. -/
+Source: Stacks 03EK. -/
 theorem sectionOrdinaryTensorNaturality (X : Scheme.{u})
     (M M' N N' : internalModules Λ X) (f : M ⟶ M') (g : N ⟶ N') :
     (equivalence Λ X).functor.map (f ⊗ₘ g) ≫ (ordinaryTensorComparison Λ X M' N').hom =
@@ -557,16 +513,14 @@ Source: Stacks 03EK. -/
       simpa using sectionOrdinaryTensorNaturality Λ X M M' N N f (𝟙 N) }
 
 /-- Each ordinary comparison component is invertible.
-Source: Stacks 03EK.
-Proof: each component is the hom of ordinaryTensorComparison. -/
+Source: Stacks 03EK. -/
 theorem sectionOrdinaryTensorMap_isIso (X : Scheme.{u})
     (M N : internalModules Λ X) : IsIso (((sectionOrdinaryTensorMap Λ X).app M).app N) := by
   unfold sectionOrdinaryTensorMap
   infer_instance
 
 /-- The curried comparison has the prescribed ordinary components.
-Source: Stacks 03EK.
-Proof: unfold the natural transformation and read its component. -/
+Source: Stacks 03EK. -/
 theorem sectionOrdinaryTensorMap_app (X : Scheme.{u})
     (M N : internalModules Λ X) :
     ((sectionOrdinaryTensorMap Λ X).app M).app N =
@@ -590,10 +544,7 @@ This is the canonical signed map induced by the ordinary natural comparison. -/
   HomologicalComplex.mapBifunctorComparison (sectionOrdinaryTensorMap Λ X) (.up ℤ) P Q
 
 /-- The canonical total map equals the existing uniquely normalized comparison.
-Source: Stacks 06YN.
-Proof: the mapBifunctor comparison is invertible because its ordinary components are
-isomorphisms and the equivalence preserves coproducts. Its summand formula is exactly
-the defining normalization, so uniqueness identifies the two isomorphisms. -/
+Source: Stacks 06YN. -/
 theorem sectionTotalComparison_eq (X : Scheme.{u})
     (P Q : CochainComplex (internalModules Λ X) ℤ) :
     sectionTotalComparison Λ X P Q = (totalComparison Λ X P Q).hom := by

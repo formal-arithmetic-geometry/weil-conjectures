@@ -12,8 +12,14 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Canonical comparison of restriction followed by stalk pullback
 
-Source: finite matrix extension argument, comparison step, in
-lem-pc-finite-free-stalk-chain-map-pair-lift.
+For an open `V` containing `y`, restricting a complex of modules to `V` and then pulling back
+to `Spec 𝒪_{Y,y}` is canonically isomorphic to pulling back along `Y.fromSpecStalk y`.
+
+## Implementation details
+
+The comparison replaces restriction by pullback along the open inclusion
+(`restrictFunctorIsoPullback`), composes the pullbacks (`pullbackComp`) and uses
+`Opens.fromSpecStalkOfMem_ι`; it is then applied termwise to complexes.
 -/
 
 @[expose] public section
@@ -23,13 +29,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The canonical comparison between stalk pullback after restriction and stalk pullback.
-
-Source: lem-pc-finite-free-stalk-chain-map-pair-lift, proof step 3; Mathlib's
-`restrictFunctorIsoPullback`, `pullbackComp`, and `Opens.fromSpecStalkOfMem_ι`.
-First replace restriction by pullback along the open inclusion, then compose the
-pullbacks, and finally use the equality of the composite scheme morphism with
-`Y.fromSpecStalk y`. Apply this natural isomorphism termwise to complexes. -/
+/-- The canonical isomorphism, on complexes, between restriction to `V` followed by pullback
+along `V.fromSpecStalkOfMem y hyV` and pullback along `Y.fromSpecStalk y`. -/
 noncomputable def stalkRestrictionComplexIso {Y : Scheme.{u}} (V : Y.Opens)
     (y : Y) (hyV : y ∈ V) :
     (restrictFunctor V.ι).mapHomologicalComplex (ComplexShape.up ℤ) ⋙

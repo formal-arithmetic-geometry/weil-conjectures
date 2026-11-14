@@ -57,18 +57,7 @@ private theorem stalk_jointlyReflectIsomorphisms (X : RingedSpace.{u}) :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Tensor pullback along a stalkwise flat morphism preserves kernels.
-Source: Stacks Project, Modules, Tag 02N4, proof by stalks.
-
-Proof: stalks preserve kernels. At x the inverse-image stalk comparison and the
-change-of-rings tensor stalk comparison identify P(M)_x with extension of scalars
-of M_(g(x)) along g's stalk map. The adjoint ring-map formula identifies that scalar
-map with g.hom.stalkMap x. The prescribed map formula makes these comparisons
-natural in M. Flat extension of scalars preserves kernels, so P(kernel a)_x,
-with the stalk of P(kernel.ι a), is the kernel of (P.map a)_x. Thus the canonical
-comparison P(kernel a) → kernel(P.map a) is an isomorphism on every stalk.
-Stalks detect isomorphisms of module sheaves, so the comparison is an isomorphism
-of sheaves. This is precisely preservation of the limit of parallelPair a 0;
-additivity ensures P.map 0 = 0. No quasi-coherence assumption is used. -/
+Source: Stacks Project, Tag 02N4. -/
 theorem stalkFlat_tensorModulePullback_preservesKernels
     {X Y : RingedSpace.{u}} (g : X ⟶ Y)
     (hg : ∀ x : X, (g.hom.stalkMap x).hom.Flat)

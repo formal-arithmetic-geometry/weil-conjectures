@@ -36,13 +36,8 @@ def ringFamilyRestrictedSections : Fin r →
 
 set_option maxHeartbeats 400000 in
 -- The unit formula compares two composite module functors; the wall limit stays unchanged.
-/-- Ring-family complexes commute with restriction and module sheafification.
-Source: Stacks Project, Tag 099E, K_{V,I O(V)} = K_{U,I}|_V.
-
-Proof: the presheaf complexes commute with restriction section by section: both use the
-same ring, generated ideal, transition map and differential. Apply the unit-compatible
-module-sheafification restriction isomorphism degreewise. Its naturality for each
-presheaf differential gives a chain isomorphism. -/
+/-- Ring-family complexes commute with restriction and module sheafification:
+`K_{V, I O(V)} = K_{U, I}|_V`. Stacks Project, Tag 099E. -/
 theorem exists_ringFamilySheafModel_restrictionIso :
     ∃ e : (ringFamilySheafModel
         ((F.sheafPushforwardContinuous CommRingCat.{u} J L).obj O)

@@ -16,9 +16,14 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 /-!
 # Positive-degree Zariski cohomology classes vanish locally
 
-Source: Stacks Project, Etale Cohomology, Lemma 0GY0 (label `lemma-gabber-criterion`),
-line 14228, proof.
+Source: Stacks Project, Etale Cohomology, Lemma 0GY0.
+
+## Implementation details
+
+The cohomology groups and their restriction maps are given by Mathlib's cohomology presheaf;
+an injective resolution is passed as an argument and used to compute the groups.
 -/
+
 
 @[expose] public section
 
@@ -83,19 +88,7 @@ private lemma sectionEquiv_zero {X : Scheme.{u}} (U : X.Opens)
 /-- Section cocycles of an injective resolution represent object cohomology, naturally
 in the open, and section coboundaries represent zero.
 
-Source: Stacks Project, Cohomology on Sites, Section 01FT and Lemma 01FW, proof.
-
-Proof: For each open U, let A_U be the sheafification of the free abelian presheaf
-on yoneda U. Sheafification, free-forgetful and Yoneda adjunctions identify
-Hom(A_U, F) with F(U), naturally in both U and the abelian sheaf F. Applied to each
-term and differential of I, this identifies Hom(A_U, I) with the section complex
-I(U). Computing Ext(A_U, G, n+1) using I therefore gives the class map c_U on
-section cocycles. Every class has a cocycle representative, since cohomology is
-cycles modulo boundaries. Naturality of the adjunctions and the Ext computation
-identifies restriction along f with the class of the restricted cocycle. Finally,
-d(t) is a coboundary, so its class is zero. The proof arguments to c merely certify
-membership in the kernel; proof irrelevance makes the map independent of them.
-This comparison does not assert that any cocycle is locally a coboundary. -/
+Stacks Project, Cohomology on Sites, Section 01FT and Lemma 01FW. -/
 private theorem zariski_resolution_cocycle_classes {X : Scheme.{u}}
     [HasExt.{u} (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})]
     (G : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
@@ -181,12 +174,9 @@ private theorem exact_sheaf_section_locally_boundary {X : Scheme.{u}}
 -- Cohomology uses the Ext localization instance for Zariski sheaves.
 /-- Positive-degree cohomology classes on a scheme are locally zero.
 
-Source: Stacks Project, Etale Cohomology, Lemma 0GY0 (label `lemma-gabber-criterion`),
-line 14228, proof; Cohomology on Sites, Lemma 01FW.  The cohomology groups and their
-restriction maps are rendered by Mathlib's cohomology presheaf; an injective resolution
-is included as the resolution used to compute the groups.
-The assertion is the four-step proof in the node.
+Stacks Project, Etale Cohomology, Lemma 0GY0; Cohomology on Sites, Lemma 01FW.
 -/
+
 theorem zariski_cohomology_class_locally_zero {X : Scheme.{u}}
     [HasExt.{u} (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})]
     (G : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})

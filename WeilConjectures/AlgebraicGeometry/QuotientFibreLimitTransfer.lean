@@ -142,28 +142,11 @@ private noncomputable def quotientCoconeIsColimit
     exact h.trans h'.symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Taking quotients by inverse-image ideals commutes with a directed scheme limit.
-
-Source: Stacks Project, Tag 0GS2, General case, the quotient-ring and closed-fibre
-limit paragraphs; Tags 01YW and 01YX for affine inverse limits.
-
-Proof: For each index set K_i to the inverse image of I under alpha_i. Naturality
-of alpha ensures that every ring transition sends K_i into K_j. Define the quotient
-ring diagram using Ideal.quotientMap. Its cocone to A/I is colimiting: represent
-elements of A by stage elements, and observe that an element mapping into I already
-lies in K_i. Equivalently a compatible family of maps from the quotient stages
-induces a unique map from A killing I and hence a unique map from A/I. Apply Spec
-and its preservation of these limits. Form D stagewise by pullback of g_i along
-Spec(B_i/K_i) to Spec B_i. The naturality squares induce the transition maps and
-the cone from the closed fibre of Y. Pullback universality gives the two projection
-equations. Limits commute with pullbacks: compatible maps to all D_i are precisely
-compatible maps to all X_i and Spec(B_i/K_i) agreeing in Spec B_i. The supplied
-limit and colimit identify these with maps to Y and Spec(A/I) agreeing in Spec A,
-which proves the limiting property. Each transition factors through the pullback
-of X_j to X_i as a closed immersion, followed by a base change of the given affine
-transition of Xs, so it is affine. Choose D_i to be the indicated pullback, so the
-stage isomorphisms can be identities. This holds for I = top (empty fibres), I = 0,
-noninjective alpha_i, and the zero ring; no properness is required. -/
+/-- Taking quotients by inverse-image ideals commutes with a directed scheme limit: if `Y` is the
+limit of the `Xs i` over `Spec B i` and `A` is the colimit of the `B i`, then the closed fibre
+`Y ×_{Spec A} Spec (A/I)` is the limit, with affine transition maps, of the stages
+`Xs i ×_{Spec B i} Spec (B i / α_i⁻¹ I)`, compatibly with both projections.
+Stacks Tag 0GS2; Tags 01YW and 01YX for affine inverse limits. -/
 theorem quotient_fibre_limit_transfer
     {A : Type u} [CommRing A] (I : Ideal A)
     {Y : Scheme.{u}} (f : Y ⟶ Spec (.of A))

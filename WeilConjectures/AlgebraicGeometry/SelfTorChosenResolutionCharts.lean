@@ -29,37 +29,11 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
-/-- Affine derived-Tor charts commute with the tensor chain comparison for
-Mathlib's chosen projective quotient resolutions. The Tor map is the explicit
-homology map of the chain comparison.
-No cycle formula or assertion about other resolutions is assumed.
-Source: Stacks Project, Tags 06YH, 06YG, 00LS and 01I6.
-
-Proof: On each affine U use projectiveResolution of A/I, with A = Γ(Y,U).
-Sheafify its augmentation using exists_affine_quotient_sheafified_resolution.
-Its projective terms are summands of free modules; their associated sheaves
-are flat. Extend into nonpositive cochain degrees and apply the bounded-above
-flat K-flat criterion. The augmentation identifies its quotient tensor with
-the restriction of the fixed derived tensor. Exact tilde commutes with homology;
-isoLeftDerivedObj computes that homology as algebraic self-Tor. Multiplication
-by each element of I on the quotient tensor is zero, so tensor pullback does
-not change its homology. Compose these comparisons to obtain the family t.
-For a basic inclusion V = D(f), the restriction homomorphism sends I into J,
-so the quotient homomorphism ψ exists. The restricted target resolution is
-exact over A. Lift the source augmentation into it degree by degree using
-projectivity (00LS). Tensor a with ψ to construct k; the balancing identity
-follows from ψ being compatible with the ring restriction. It is a chain map
-by the chain-map equation for a. Let q be exactly the displayed induced map on tensor homology,
-transported through restriction-of-scalars homology and the two
-isoLeftDerivedObj isomorphisms. The K-flat
-augmentation comparisons commute with this chain map; their inverses in the
-derived category therefore commute as well. Exact tilde and naturality of
-the tilde and tensor-pullback adjunction units turn this homology square into
-the displayed equation on selfTorAffineSection, for every class x.
-This argument includes n = 0 and f = 0; localization and the zero-module
-homology calculation include empty charts and zero quotients. All isomorphisms
-are obtained from augmentations, not chosen independently of the chain maps.
-Resolution independence is a separate algebraic step, deliberately omitted. -/
+/-- Affine derived-Tor charts commute with the tensor chain comparison for Mathlib's chosen
+projective quotient resolutions: there are chart isomorphisms `t U` over `i⁻¹ U` such that,
+for each basic inclusion `V ≤ U`, the explicit homology map of the chain comparison is
+compatible with restriction of the chart sections.
+Stacks Project, Tags 06YH, 06YG, 00LS and 01I6. -/
 theorem exists_selfTor_chosen_resolution_charts
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -16,8 +16,9 @@ public import WeilConjectures.CategoryTheory.RingedToposDerivedPushforwardCompos
 
 /-! # The supported Ext representative for projective-line integral transport
 
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, supported diagonal Ext realization.
-The existing construction is separated so each file stays within the compilation limit.
+## Implementation details
+
+The construction is kept in its own file so that each file stays within the compilation limit.
 -/
 
 @[expose] public noncomputable section

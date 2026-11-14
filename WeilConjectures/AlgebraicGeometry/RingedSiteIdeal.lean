@@ -64,9 +64,7 @@ noncomputable def restrictionMap (I : RingedSiteIdeal R) {X Y : Cᵒᵖ} (f : X 
       map_smul' := fun r a => Subtype.ext (map_mul (R.obj.map f).hom r a.val) }
 
 /-- Identity law for restriction on an ideal.
-Source: Stacks Project, Modules on Sites.
-Proof: after the inclusion into the ambient ring, the law is the identity law of `R`.
-Subtype extensionality gives equality of the maps. -/
+Stacks Project, Modules on Sites. -/
 theorem restrictionMap_id (I : RingedSiteIdeal R) (X : Cᵒᵖ) :
     I.restrictionMap (𝟙 X) =
       (ModuleCat.restrictScalarsId' ((siteModuleRings R).obj.map (𝟙 X)).hom
@@ -76,9 +74,7 @@ theorem restrictionMap_id (I : RingedSiteIdeal R) (X : Cᵒᵖ) :
   exact congrArg (fun k => k a.val) (R.obj.map_id X)
 
 /-- Composition law for restriction on an ideal.
-Source: Stacks Project, Modules on Sites.
-Proof: include each output into the ambient ring and use the composition law of `R`;
-subtype extensionality then proves the displayed equality. -/
+Stacks Project, Modules on Sites. -/
 theorem restrictionMap_comp (I : RingedSiteIdeal R) {X Y Z : Cᵒᵖ}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
     I.restrictionMap (f ≫ g) = I.restrictionMap f ≫
@@ -101,10 +97,7 @@ noncomputable def modulePresheaf (I : RingedSiteIdeal R) :
   map_comp f g := I.restrictionMap_comp f g
 
 /-- The ideals of sections form a sheaf of modules.
-Source: Stacks Project, Modules on Sites.
-Proof: glue a matching family in the ambient ring sheaf. The restrictions of the glued
-section lie in the ideal on the covering sieve, so `local_mem` puts it in the ideal.
-Uniqueness follows from uniqueness of the ambient ring-sheaf gluing. -/
+Stacks Project, Modules on Sites. -/
 theorem modulePresheaf_isSheaf (I : RingedSiteIdeal R) :
     Presheaf.IsSheaf J I.modulePresheaf.presheaf := by
   let G : Subfunctor (R.obj ⋙ forget CommRingCat) :=
@@ -138,9 +131,7 @@ noncomputable def inclusionApp (I : RingedSiteIdeal R) (X : Cᵒᵖ) :
     (I.sections X.unop).subtype
 
 /-- Naturality of the sectionwise inclusion of an ideal subsheaf.
-Source: Stacks Project, Modules on Sites, ideal subsheaves.
-Proof: both composites send an ideal section to its restriction in the ambient ring;
-the subtype restriction was defined using precisely the ambient restriction map. -/
+Stacks Project, Modules on Sites. -/
 theorem inclusionApp_naturality (I : RingedSiteIdeal R) {X Y : Cᵒᵖ} (f : X ⟶ Y) :
     I.module.val.map f ≫
         (ModuleCat.restrictScalars ((siteModuleRings R).obj.map f).hom).map
@@ -156,13 +147,7 @@ noncomputable def inclusion (I : RingedSiteIdeal R) :
   val := { app := I.inclusionApp, naturality := I.inclusionApp_naturality }
 
 /-- There is a unique ideal subsheaf whose sections locally lie in the ideal generated
-by images of sections of `I`.
-Source: Stacks Project, Modules on Sites, extension of ideals; Algebraization, Tag 099I.
-Proof: take the local saturation of the sectionwise image-generated ideals. Addition,
-negation, and multiplication preserve local membership after intersecting covering sieves.
-Restriction uses pullback of covering sieves; the local-membership axiom uses transitivity.
-The displayed membership formula determines every ideal of sections and hence the subsheaf
-uniquely by proof irrelevance. -/
+by images of sections of `I`. Stacks Project, Modules on Sites; Algebraization, Tag 099I. -/
 theorem existsUnique_extension (I : RingedSiteIdeal R) (φ : R ⟶ B) :
     ∃! K : RingedSiteIdeal B,
       ∀ (U : C) (b : B.obj.obj (op U)), b ∈ K.sections U ↔

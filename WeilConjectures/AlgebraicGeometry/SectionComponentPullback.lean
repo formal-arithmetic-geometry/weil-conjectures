@@ -27,17 +27,7 @@ open CategoryTheory Limits Topology
 namespace AlgebraicGeometry
 
 /-- Section-component loci commute with any cartesian square compatible with the sections.
-
-Source: Stacks Project, Tag 055M (more-morphisms.tex, lemma-base-change-connected-along-section).
-Proof: in each fibre, the section point is rational. Its connected component is open in
-that locally noetherian fibre and is geometrically connected. Its inverse image in the
-base-changed fibre is therefore connected and contains the new section point. This proves
-one inclusion. The continuous image of the new component is connected and contains the
-old section point, proving the other inclusion. Work directly in the given cartesian
-square: restrict its first projection to the open representing the old fibre component,
-then compare residue-field fibres. The section compatibility identifies the distinguished
-points without a canonical-pullback or homeomorphism-transport lemma.
- -/
+Source: Stacks Project, Tag 055M. -/
 theorem section_component_preimage_of_isPullback {X Y X' Y' : Scheme.{u}}
     (f : X ⟶ Y) [LocallyOfFiniteType f] (σ : Y ⟶ X) (hσ : σ ≫ f = 𝟙 Y)
     (a : X' ⟶ X) (f' : X' ⟶ Y') (b : Y' ⟶ Y) (h : IsPullback a f' f b)

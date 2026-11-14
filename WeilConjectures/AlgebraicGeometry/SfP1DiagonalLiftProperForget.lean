@@ -30,11 +30,7 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
 namespace SfP1Transport
 
 /-- The defining diagonal lift, expressed using the same canonical proper comparison
-with its ordinary endpoint fixed. The inverse coefficient comparison stays intact.
-Source: SfP1IntegralTransportData.diagonalLift.
-Proof: unfold the diagonal lift. Its defining body uses the canonical endpoint
-comparison and the intact inverse coefficient comparison, so the equation is
-reflexive. -/
+with its ordinary endpoint fixed. The inverse coefficient comparison stays intact. -/
 theorem diagonalLift_eq_ordinaryProperForget
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]

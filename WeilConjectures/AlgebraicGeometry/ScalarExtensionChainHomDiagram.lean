@@ -220,27 +220,7 @@ private theorem homEquiv_map
   simp [homEquiv, Iso.homCongr]
 
 /-- The module-derived Hom diagram and its canonical scalar-extension cocone.
-Source: Stacks Project, perfect.tex, Tag 09RE, affine calculation.
-
-Proof: Work first with Hom sets in the homotopy category. For an arrow apply
-termwise scalar extension and conjugate by its complex scalar-extension
-associator and the equality of the composite ring maps. This sends the class
-of f to the class of scalarExtensionHom(f). The tensor associator pentagon
-(ModuleCat.extendScalars_assoc) gives composition, and the right-unit equation
-(extendScalars_comp_id) gives the identity. Verify these on chain maps and
-use fullness of HomotopyCategory.quotient to deduce them on all classes.
-Extension of scalars preserves projectives by its adjunction with restriction
-and preserves zero terms. Thus each extension of E is bounded above and
-termwise projective, hence K-projective. The Qh localization bijection, followed
-by conjugation with quotientCompQhIso, identifies its homotopy Hom with the
-chosen derived Hom, and sends the class of f to Q(f). Take H to be ULift of
-the homotopy Hom sets with the maps just constructed. Take d.pt to be the same
-Hom set at colim F, lifted to the required universe, and use the colimit legs
-for its maps. Composition of scalar extension and the colimit cocone equation
-give naturality. Compose Equiv.ulift with the localization equivalences for
-ident and e. Evaluating transport on a chain-map class gives the two stated
-equations. No colimit property of d is asserted. Zero rings, zero complexes
-and singleton tails are included. No flatness of the transition rings is used. -/
+No colimit property of the cocone is asserted. Stacks Project, Tag 09RE. -/
 theorem exists_scalarExtensionChainHomDiagram
     {I : Type u} [Preorder I] (i : I)
     (F : Set.Ici i ⥤ CommRingCat.{u})

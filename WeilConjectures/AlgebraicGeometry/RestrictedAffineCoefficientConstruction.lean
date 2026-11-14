@@ -22,7 +22,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- The diagram of the actual fibre products, with canonical pullback maps.
-Source: Stacks Project, Tag 09Z1 proof, base change to an affine etale object. -/
+Stacks Project, Tag 09Z1. -/
 @[implicit_reducible]
 noncomputable def restrictedAffineDiagram {S : Scheme.{v}} {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S) (U : S.Etale) : Iᵒᵖ ⥤ Scheme.{v} where
@@ -88,11 +88,7 @@ noncomputable def restrictedAffineL {S : Scheme.{v}} {I : Type v} [Preorder I]
     ((colimit.cocone H).whisker (unopUnop I))
 
 /-- Fibre-product restriction preserves the given inverse limit.
-Source: Stacks Project, Tag 09Z1 proof, base change to an affine etale object.
-
-Proof: Pullback on over categories is a right adjoint. The forgetful functor preserves
-connected limits. Apply these facts to the given limit in Over S and then use pullback
-symmetry to identify the result with the concrete diagram and cone. -/
+Stacks Project, Tag 09Z1. -/
 noncomputable def restrictedAffineConeIsLimit {S : Scheme.{v}} {I : Type v}
     [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S) (c : Cone D)

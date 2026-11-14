@@ -241,20 +241,7 @@ set_option synthInstance.maxSize 2048 in
 set_option maxHeartbeats 500000 in
 -- The resolution and evaluation comparisons use multiple concrete functor composites.
 /-- The class of an augmented restricted section is the direct-image augmentation
-of the same section on the original open.
-Source: Stacks Project, Cohomology, Tag 01E4.
-
-Proof: Expand the two canonical augmentations using
-InjectiveResolution.toRightDerivedZero_eq. Cancel the inverse derived-resolution
-comparison on the right. The augmentation equation of R and its pinned degree-zero
-section component identify the section zero-cycle with the augmentation of s in I.
-Naturality of the cycles-to-homology projection transports this identity to homology.
-The sheafification adjunction defining sectionCohomologyTheta sends that class to
-its homology-sheaf class: the counit is the identity on the original sheaf complex,
-and exact sheafification commutes with its cycles and homology. Thus the section
-class followed by the inverse resolution comparison is precisely the canonical
-augmentation evaluated on the section identified by restrictAppIso. This argument
-uses no special hypothesis on f or F and includes the empty open and zero section. -/
+of the same section on the original open. Stacks Project, Cohomology, Tag 01E4. -/
 theorem resolutionSectionClass_zero_augmentation {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F : X.Modules) (I : InjectiveResolution F) (V : Y.Opens)
     (R : RestrictedResolutionSections I (f ⁻¹ᵁ V))

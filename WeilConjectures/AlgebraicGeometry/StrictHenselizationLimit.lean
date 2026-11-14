@@ -38,7 +38,7 @@ open CategoryTheory Limits Polynomial
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: the strict henselization as a limit.
+/-- The strict henselization at a non-closed point as a limit.
 
 Let `K` be a field, `aX : X ⟶ Spec K` of finite type and `s : Spec Ω ⟶ X` a geometric point
 (`Ω` separably closed) lying over a non-closed point `x` of `X` (for `X` of finite type over `K`
@@ -200,9 +200,8 @@ lemma not_isClosed_singleton_of_residueFieldTrdeg_pos {K : Type u} [Field K] {X 
   rw [h, trdeg_eq_zero] at hx
   exact lt_irrefl _ hx
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`, in the form of the blueprint: the strict
-henselization at a geometric point over a point `x` with `trdeg_K κ(x) > 0` is a limit as in
-`exists_isLimit_strictLocalization_of_not_isClosed`. -/
+/-- The strict henselization at a geometric point over a point `x` with `trdeg_K κ(x) > 0` is a
+limit as in `exists_isLimit_strictLocalization_of_not_isClosed`. -/
 @[stacks 0F0U]
 theorem exists_isLimit_strictLocalization_of_residueFieldTrdeg_pos {K Ω : Type u} [Field K]
     [Field Ω] [IsSepClosed Ω] {X : Scheme.{u}} (aX : X ⟶ Spec (.of K)) [LocallyOfFiniteType aX]

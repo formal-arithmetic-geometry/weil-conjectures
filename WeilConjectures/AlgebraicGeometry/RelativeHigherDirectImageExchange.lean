@@ -27,13 +27,11 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Degree-q commutative-square exchange followed by the coefficient map.
+/-- Degree-q commutative-square exchange followed by the coefficient map: inverse image of
+cohomology is identified with cohomology of inverse image, followed by cohomology of the
+derived mate `derivedBaseChangeMapPlus` and of the specified coefficient map.
 
-Source: Stacks Project, Tag 0EYM, first proof paragraph; Tag 07A7, remark-base-change.
-The first factor identifies inverse image of cohomology with cohomology of inverse
-image. The second takes cohomology of the derived mate `derivedBaseChangeMapPlus` and
-of the specified coefficient map, using the exact pullback comparison with degree zero.
-No cartesian or torsion hypothesis enters this construction. -/
+Source: Stacks Project, Tag 0EYM; Tag 07A7. -/
 noncomputable def relativeHigherDirectImageExchange
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : CommSq g' f' f g)

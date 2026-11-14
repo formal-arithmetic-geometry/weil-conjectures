@@ -32,29 +32,7 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 /-- Higher-direct-image stalk exchange over strict local bases is total-space pullback.
-
-Source: Stacks Project, Tag 03QO (exact global sections are the closed-point stalk),
-Tag 03FD (module cohomology agrees with underlying abelian cohomology), and
-Tag 095T, the paragraph computing the map on stalks.
-
-Proof: the germ isomorphism Gamma(S, J) = J_s for a strictly henselian local
-scheme is natural and exact. The inverse-image stalk isomorphism identifies the
-stalk at the closed point of B of g^* J with the stalk at the closed point of A
-of J: locality ensures that the closed point maps to the closed point, and the
-extension between separably closed residue fields does not change this stalk.
-Choose an injective module resolution F -> I. Applying f_* and then the exact
-closed-point stalk computes the source as the cohomology of Gamma(X, I).
-The acyclic comparison of Tag 03FD identifies this with the abelian Ext groups,
-without asserting that forgetting modules preserves injectives. Resolve the
-exact inverse image g'^* I on X' by an injective module complex J. Applying
-f'_* and the exact closed-point stalk computes the target as Gamma(X', J),
-hence as the cohomology of the abelian inverse image of F. In degree zero the
-unit-square-isomorphism-counit mate pulls a section on X back to X'. The same
-calculation term by term, followed by the comparison g'^* I -> J, therefore
-induces the usual Ext pullback in every degree. Homotopy uniqueness of the
-resolution comparison makes the two identifications compatible with that map.
-No properness, torsion, or closed-fibre comparison is used; the argument also
-applies to q = 0, the zero ring of coefficients, and empty total spaces. -/
+Stacks Project, Tags 03QO, 03FD and 095T. -/
 theorem Etale.exists_addEquiv_strictLocal_totalCohomology_exchange
     (Λ : Type (u + 1)) [CommRing Λ]
     {A B : Type u} [CommRing A] [HenselianLocalRing A]

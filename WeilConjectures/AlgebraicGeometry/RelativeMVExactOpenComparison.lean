@@ -111,23 +111,7 @@ private theorem exact_nested_map_unit_isIso (X : Scheme.{u}) {W U : X.Opens}
 
 /-- The exact-open comparison intertwines restriction along a single inclusion.
 
-Source: Stacks Project, Cohomology, Tags 08BV and 08HZ, the restricted-counit
-construction of the second Mayer--Vietoris arrow.
-
-Proof: For any two adjunctions and a comparison L_U followed by H to L_W,
-the map defined as the transpose of the restricted U counit has composite with
-the U unit equal to the W unit. This follows by naturality of the comparison
-and the U triangle identity. Apply this observation both to exact restrictions
-and to pinned pullbacks. The uniqueness comparisons preserve their units, so
-the exact restriction followed by the W uniqueness comparison and the U
-uniqueness comparison followed by pinned restriction have equal composites
-with the exact U unit. Restriction to W sends this U unit to an isomorphism:
-open direct image is fully faithful, the U triangle identity makes restriction
-to U of its unit invertible, and exact nested restriction factors restriction
-to W through U. The W adjunction therefore makes precomposition by the U unit
-injective for maps into its direct-image objects. Cancel that unit to identify
-the maps. Apply Rf*, insert the composition comparisons on U and W, and cancel
-the comparison on U against its inverse. Empty opens and W=U are included. -/
+Source: Stacks Project, Cohomology, Tags 08BV and 08HZ. -/
 theorem relativeMVExactOpenIso_restriction {X S : Scheme.{u}} (f : X ⟶ S)
     {W U : X.Opens} (i : W ≤ U) (K : schemeDerivedCategory X) :
     (schemeDerivedDirectImage f).map

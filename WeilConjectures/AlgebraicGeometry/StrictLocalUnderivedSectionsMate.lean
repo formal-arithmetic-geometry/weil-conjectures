@@ -405,22 +405,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Evaluating the underived mate on sections is restriction along the cone leg.
 This is an equality of transformations of sheaves, before complexes or derivation.
-
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-
-Proof: expand the restriction on the base as the inverse-image adjunction unit
-followed by evaluation at the pointed neighbourhood section. Expand baseChangeMap
-as the unit along the second pullback projection, the inverse-image square
-comparison, and the counit along f. Naturality of evaluation moves the latter
-maps across the neighbourhood section. The two adjunction triangle identities
-cancel the intermediate unit and counit. The result is evaluation of f_*F on
-the stage, identified by sourceStageSectionsIso, followed by sectionsPullbackNat
-along the cone leg and the inverse composition comparison upperStarComp.
-Q.first identifies the map on the base with the pointed neighbourhood section;
-Q.over identifies the composite projection to X. These equations determine the
-map into the scheme pullback, so both evaluations use the same map. All operations
-are functorial in F, giving the equality of natural transformations. No etaleness
-of the cone leg is needed. The zero sheaf and empty fibre use the same identities. -/
+Stacks Project, Tag 03Q9. -/
 theorem strictLocalUnderivedMateSections_eq {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (Q : StrictLocalNeighbourhoodGeometry f s)

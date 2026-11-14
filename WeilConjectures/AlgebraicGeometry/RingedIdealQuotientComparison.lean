@@ -166,14 +166,7 @@ private theorem quotientComparison_locallySurjective (I : RingedSiteIdeal R) (φ
     simpa only [neg_sub] using (I.extension φ).sections V |>.neg_mem ha
 
 /-- The local quotient criterion makes the canonical quotient comparison an isomorphism
-following sheafification.
-Source: Stacks Project, Modules on Sites, Tags 03D7 and 03CY; Algebraization, Tag 099I.
-
-Proof: the local kernel criterion gives injectivity on section quotients. The local lifting
-criterion gives a covering sieve of preimages of every quotient section. A locally bijective
-map of presheaves becomes an isomorphism after sheafification. No claim that sectionwise
-quotients already form a sheaf is needed.
--/
+following sheafification. Stacks Project, Tags 03D7, 03CY and 099I. -/
 private theorem quotientComparison_sheafification_isIso (I : RingedSiteIdeal R) (φ : R ⟶ B)
     (hquot : I.IsQuotientIso φ) :
     IsIso ((presheafToSheaf J AddCommGrpCat).map (quotientComparison I φ)) := by
@@ -503,17 +496,7 @@ private theorem extendedIdealMap_inclusion (I : RingedSiteIdeal R) (φ : R ⟶ B
 
 /-- The scalar-extension unit is invertible on the quotient by an ideal subsheaf when the
 coefficient morphism induces an isomorphism modulo that ideal.
-Source: Stacks Project, Modules on Sites, Tags 03D7 and 03CY; Algebraization, Tag 099I.
-
-Proof: sheafify the sectionwise quotient presheaves. The local kernel and lifting criteria
-make their canonical comparison locally bijective, hence an isomorphism. Those sheaves are
-the categorical cokernels of the ideal inclusions. Scalar extension preserves cokernels and
-carries the rank-one ring module isomorphically to the target ring module. Its map from the
-source ideal onto the extended ideal is epic: locally every extended-ideal section is a
-finite linear combination of images of ideal sections, each of which lifts through the unit.
-These presentations identify scalar extension of the source cokernel with the target
-cokernel, and the adjunction unit becomes exactly the quotient comparison.
--/
+Stacks Project, Tags 03D7, 03CY and 099I. -/
 theorem scalarExtension_unit_cokernel_isIso (I : RingedSiteIdeal R) (φ : R ⟶ B)
     (hquot : I.IsQuotientIso φ) :
     IsIso ((SheafOfModules.RingedTensor.tensorAdjunction φ).unit.app

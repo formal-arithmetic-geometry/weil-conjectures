@@ -19,8 +19,7 @@ import WeilConjectures.RingTheory.ImprovePresentationSmoothConormalFree
 /-!
 # Smooth retract by a relative global complete intersection
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07CG,
-line 567 and proof lines 580--588.
+Source: Stacks Project, Smoothing Ring Maps, Lemma 07CG.
 -/
 
 @[expose] public section
@@ -87,16 +86,9 @@ private noncomputable def reindexCotangentEquiv
           using DFunLike.congr_fun h x }
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Algebra, Lemma 07CF.
-
-Proof. Form the generators attached to the surjective polynomial map. Identify their
-cotangent module with the kernel cotangent module, transporting freeness through the
-quotient equivalence to S. Apply Mathlib's Huber lemma to obtain a presentation whose
-relations form a conormal basis. Reindex its finite variable and relation types by Fin.
-The polynomial renaming equivalence transports the conormal basis. Finally identify S
-with the quotient by its presentation kernel, replace that kernel by the span of the
-relations, and transport the coefficients and basis through the quotient equivalence.
--/
+/-- If a finitely presented algebra `S` is a quotient of a polynomial ring by an ideal with
+free conormal module, then `S` has a finite presentation whose relation classes form a
+basis of its conormal module. Source: Stacks Project, Algebra, Lemma 07CF. -/
 private theorem finite_conormal_basis_presentation
     (R : Type u) [CommRing R] (S : Type v) [CommRing S] [Algebra R S]
     [FinitePresentation R S] (m : ℕ) (g : MvPolynomial (Fin m) R →ₐ[R] S)
@@ -157,20 +149,9 @@ private theorem finite_conormal_basis_presentation
   obtain ⟨ψQ, bQ, hQ⟩ := result
   exact ⟨_, _, P'.relation, ψQ, bQ, fun j ↦ hQ j _⟩
 
-/-- Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07CG, and the
-split conormal sequence in the proof of Lemma 07CH.
-
-Proof. The conormal sequence of the polynomial quotient splits because the quotient
-is smooth. Its middle term has rank n, and the given equation basis makes its left
-term free of rank c. Tensoring this split sequence with any residue field shows that
-c is at most n and that the differential fibre has rank n-c. For a nonempty fibre
-over a prime of R, smoothness and differentials commute with base change. Thus at
-every prime of this fibre the differential fibre has rank n-c. The dimension theorem
-for a smooth finite type algebra over a field identifies this rank with dimension at
-the point. Dimension is the supremum of dimensions at points; because this fibre is
-nontrivial its spectrum is nonempty, and the constant supremum is n-c. Empty fibres
-impose no condition, so the same argument includes the zero ring.
--/
+/-- If the quotient of a polynomial ring in `n` variables by `c` equations is smooth and the
+equation classes form a basis of its conormal module, then the presentation is a relative
+global complete intersection. Source: Stacks Project, Lemmas 07CG and 07CH. -/
 private theorem smooth_conormal_basis_fibre_dimension
     {R : Type u} [CommRing R] {n c : ℕ} (f : Fin c → MvPolynomial (Fin n) R)
     [Smooth R (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))]
@@ -202,29 +183,7 @@ private theorem smooth_conormal_basis_fibre_dimension
   simp only [(hpoint _).2, ciSup_const]
 
 /-- A smooth algebra is a retract of a relative global complete intersection that is smooth over it.
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07CG.
-
-Proof:
-1. Apply lem-weil-pbc-improve-presentation-smooth-conormal-free to obtain a smooth
-   `A`-algebra `C₀` with an `A`-algebra retraction and a polynomial presentation with free
-   conormal module. Composition of smooth maps makes `C₀` smooth, hence finitely presented,
-   over `R`.
-2. Apply lem-weil-pbc-conormal-free-presentation-basis (07CF) to get `n,c,f` and an
-   `R`-algebra isomorphism `ψ : R[x]/(f) ≃ C₀` with equation classes a conormal basis.
-   Transport smoothness over `R` across `ψ`.
-3. Set `σ = ψ⁻¹ ∘ (A → C₀)` and `π = ρ ∘ ψ`. Cancellation gives `π ∘ σ = id`.
-   Give the quotient its `A`-algebra structure through `σ`; then `ψ` is an `A`-algebra
-   isomorphism, so it transports smoothness over `A` as well.
-4. Apply lem-weil-pbc-smooth-quotient-fibre-differential-rank to the quotient and its
-   conormal basis: for each prime of a fibre, `c ≤ n` and the differential fibre has
-   rank `n - c`. This remaining rank calculation is stated in its own module.
-5. For a prime of `R`, the fibre is smooth over its residue field by base change.
-   Lemma lem-weil-pbc-smooth-over-field-dimension-differentials identifies the dimension
-   at every point of this fibre with that rank.
-6. For a nonempty fibre, lem-weil-pbc-dimension-supremum-local-dimensions identifies
-   its dimension with the supremum of these constant point dimensions, hence `n - c`.
-   This is the specified relative global complete-intersection condition.
--/
+Source: Stacks Project, Smoothing Ring Maps, Lemma 07CG. -/
 theorem smooth_retract_relative_global_complete_intersection
     (R : Type u) [CommRing R] (A : Type v) [CommRing A] [Algebra R A] [Smooth R A] :
     ∃ (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R),

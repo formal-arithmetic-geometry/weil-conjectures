@@ -37,9 +37,7 @@ section Foundation
 variable {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
   (J : GrothendieckTopology C)
 
-/-- The site fits in the chosen coefficient universe.
-Source: the small-site size convention.
-Proof: the supplied EssentiallySmall instance is exactly this small-model witness. -/
+/-- The site fits in the chosen coefficient universe. -/
 theorem siteSmall : EssentiallySmall.{r} C := by
   infer_instance
 
@@ -88,20 +86,14 @@ variable (B : ℕ → Sheaf J CommRingCat.{r})
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
 /-- The sequence site is essentially small in the same coefficient universe.
-Source: Zheng 4.1.
-Proof: take a small model of C and its product with the natural-number poset,
-using a universe lift of the latter. The product of the two equivalences is an
-equivalence with a category whose objects and arrows lie in the coefficient universe. -/
+Source: Zheng 4.1. -/
 theorem sequenceSmall : EssentiallySmall.{r} (ℕ × C) := by
   exact EssentiallySmall.mk'
     ((AsSmall.equiv : ℕ ≌ AsSmall.{r} ℕ).prod (equivSmallModel.{r} C))
 
 attribute [instance] sequenceSmall
 
-/-- A slice of an essentially small category is essentially small in the same universe.
-Source: the small-site convention.
-Proof: an equivalence with a small model induces an equivalence of slice categories.
-The slice of the small model has objects and morphisms in the same universe. -/
+/-- A slice of an essentially small category is essentially small in the same universe. -/
 theorem sliceSmall (U : C) : EssentiallySmall.{r} (Over U) := by
   exact EssentiallySmall.mk' (Over.postEquiv U (equivSmallModel.{r} C))
 
@@ -174,10 +166,7 @@ private theorem horizontal_map' {C : Type c} [Category.{v} C]
 
 set_option linter.unusedSectionVars false in
 /-- The actual ring presheaf is a sheaf for the vertical sequence topology.
-Source: Zheng 4.1.
-Proof: glue in B_n on the vertical covering slice. Separatedness on the pullbacks of
-that cover verifies compatibility with horizontal restrictions. The algebra operations
-commute with gluing since each B_n is a ring sheaf. -/
+Source: Zheng 4.1. -/
 theorem ringPresheaf_isSheaf :
     Presheaf.IsSheaf (coefficientSequenceTopology J) (ringPresheaf.{c, v, r} J B τ) := by
   intro A
@@ -202,9 +191,7 @@ abbrev DS := D.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, r} J
 
 set_option linter.unusedSectionVars false in
 /-- The slice inclusion is continuous for the actual vertical topology.
-Source: Zheng 4.1.
-Proof: a covering sieve restricts to a covering sieve on its vertical slice by the
-definition of coefficientSequenceTopology. The sheaf condition restricts accordingly. -/
+Source: Zheng 4.1. -/
 theorem evaluation_continuous (n : ℕ) :
     (Prod.sectR n C).IsContinuous J (coefficientSequenceTopology J) := by
   apply Functor.isContinuous_of_coverPreserving
@@ -233,9 +220,7 @@ instance evaluationContinuous (n : ℕ) :
   evaluation_continuous J n
 
 /-- Evaluation of B_bullet is B_n, including its restriction maps.
-Source: Zheng 4.1.
-Proof: uncurry and ofOpSequence evaluate to B_n(U); the horizontal identity is the
-identity ring map. Functor extensionality gives equality of the ring sheaves. -/
+Source: Zheng 4.1. -/
 theorem evaluation_ring (n : ℕ) :
     ((Prod.sectR n C).sheafPushforwardContinuous RingCat.{r}
       J (coefficientSequenceTopology J)).obj
@@ -301,10 +286,7 @@ private theorem sequenceEvaluation_exact
     exact preservesFiniteColimits_of_reflects_of_preserves _ T
 
 /-- Evaluation is additive and exact; kernels and cokernels are componentwise.
-Source: Zheng 4.1.
-Proof: kernels are sectionwise and cokernels are sheafifications of sectionwise
-cokernels. Vertical sheafification computes the same sheafification at each level.
-Addition of maps is sectionwise as well. -/
+Source: Zheng 4.1. -/
 theorem evaluation_exact (n : ℕ) :
     (evaluation.{c, v, r} J B τ n).Additive ∧ PreservesFiniteLimits (evaluation.{c, v, r} J B τ n) ∧
       PreservesFiniteColimits (evaluation.{c, v, r} J B τ n) := by
@@ -353,9 +335,7 @@ abbrev res : Mod.{c, v, r} J R' ⥤ Mod.{c, v, r} J R :=
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map φ)
 
 /-- Restriction leaves the underlying abelian sheaves unchanged, hence is exact.
-Source: Stacks 03CZ.
-Proof: kernels retain their sectionwise groups and cokernels retain their sheafified
-sectionwise groups; only the ring action is restricted. -/
+Source: Stacks 03CZ. -/
 theorem res_exact : PreservesFiniteLimits (res.{c, v, r} φ) ∧
     PreservesFiniteColimits (res.{c, v, r} φ) := by
   let U := SheafOfModules.toSheaf.{r} (ring.{c, v, r} J R)
@@ -431,10 +411,7 @@ abbrev ScalarData.T (A : ScalarData.{c, v, r} φ) :
 end Scalars
 
 /-- The canonical restriction-composition identification is the identity on sections.
-Source: Stacks 03CZ.
-Proof: the tower functor sends composition to composition of ring maps. Both scalar
-restrictions have the same section groups with this composite action. Identity section
-maps therefore give an isomorphism, uniquely determined by the displayed formula. -/
+Source: Stacks 03CZ. -/
 theorem restrictionComposition_existsUnique {l m n : ℕ} (h : n ≤ m) (k : m ≤ l) :
     ∃! δ : res.{c, v, r} (coefficientMap.{c, v, r} J B τ h) ⋙
         res.{c, v, r} (coefficientMap.{c, v, r} J B τ k) ≅
@@ -506,10 +483,7 @@ private theorem transition_generic
   exact congrFun (eq_of_heq (hδ' M U)) x
 
 /-- The actual semilinear transition of module systems, specified on every section.
-Source: Zheng 4.1.
-Proof: the horizontal presheaf restriction is linear over B_m after scalar
-restriction to B_n. Site naturality gives a module-sheaf map. Its formula is natural
-in the system, and sectionwise extensionality proves uniqueness. -/
+Source: Zheng 4.1. -/
 theorem transition_exists {m n : ℕ} (h : n ≤ m) :
     ∃! δ : evaluation.{c, v, r} J B τ m ⟶
       evaluation.{c, v, r} J B τ n ⋙ res.{c, v, r} (coefficientMap.{c, v, r} J B τ h),
@@ -599,10 +573,7 @@ variable (F : ℕ → Sheaf J CommRingCat.{r})
 include hα
 
 /-- A compatible coefficient map induces the unique sectionwise ring-system map.
-Source: Zheng 4.1; Stacks 03CZ.
-Proof: use α_n on each section at (n,U). Naturality in U is sheaf-map naturality;
-horizontal naturality follows by induction from hα. Component extensionality proves
-uniqueness. Thus this is the given coefficient map, not a chosen unrelated morphism. -/
+Source: Zheng 4.1; Stacks 03CZ. -/
 theorem systemMap_existsUnique :
     ∃! f : systemRing.{c, v, r} J B τ ⟶ systemRing.{c, v, r} J F σ,
       ∀ (n : ℕ) (U : Cᵒᵖ), f.hom.app (op (n, U.unop)) = (α n).hom.app U := by
@@ -625,10 +596,7 @@ def systemMap : systemRing.{c, v, r} J B τ ⟶ systemRing.{c, v, r} J F σ :=
   (systemMap_existsUnique.{c, v, r} J B τ F σ α hα).exists.choose
 
 /-- Restriction of scalars commutes with evaluation by the identity on sections.
-Source: Stacks 03CZ.
-Proof: both functors keep the same section groups and restrict the B_n action along
-α_n. The component identity is linear and natural, and determines the comparison
-uniquely. Its inverse is the same section identity. -/
+Source: Stacks 03CZ. -/
 theorem restrictionEvaluation_existsUnique (n : ℕ) :
     ∃! δ : res.{c, v, r} (systemMap.{c, v, r} J B τ F σ α hα) ⋙
         evaluation.{c, v, r} J B τ n ≅

@@ -70,18 +70,7 @@ private theorem tmul_twist_heq
 
 /-- A chart characterized by clearing homogeneous denominators respects homogeneous
 localization scalars.
-Source: Stacks Project, Proposition 0BXD, final paragraph; step 2 of
-lem-sc-p1-serre-section-module-charts.
-
-Proof: the numerator y and scalar numerator a have degrees m*d and l*d. By hsmul,
-a*y has degree (l+m)*d. Compatibility hphi identifies phi(a*y) with multiplication
-by a on phi(y), and naturality restricts this identity to D+(f). By the hypothesis
-hs and the characterization, phi(y) restricts to f^m times s. The definition of
-awayToSection on a/f^l identifies its action with multiplication by a divided by
-f^l. Hence phi(a*y) restricts to f^(l+m) times (a/f^l)*s. The characterization of
-alpha in degree (l+m)*d gives the desired fraction. If f=0 the localization is zero
-and the formula holds there as well. The argument includes l=0 and m=0, using the
-zeroth twisting isomorphism and the right unitor. -/
+Source: Stacks Project, Proposition 0BXD, final paragraph. -/
 theorem serreSectionModuleChartScalar
     (k : Type u) [Field k]
     (G : (Proj (homogeneousSubmodule (Fin 2) k)).Modules)

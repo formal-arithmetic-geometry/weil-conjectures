@@ -25,19 +25,7 @@ namespace AlgebraicGeometry
 set_option maxHeartbeats 500000 in
 -- The over-site equivalence and evaluated biproduct require extra definitional reductions.
 /-- The map to H and the normalized formal quotient maps jointly separate local sections.
-Source: Stacks Project, Tag 0889(1), omitted uniqueness verification, made explicit
-by the Artin--Rees argument of `coherentMap_torsion_completion_ext_zero`.
-
-Proof: Fix i and a positive annihilation bound for the kernel of ai. Artin--Rees
-provides n such that ker(ai) maps monomorphically to Fi/J^(n+1)Fi. Evaluate this
-monomorphism on any open of Ui; evaluation preserves kernels and monomorphisms.
-Transfer through li and overFunctorEquiv. If x and y have the same b-image, x-y
-lies in this kernel. By hqi, equality of their q-images at op n says its image
-in the quotient is zero, since beta is invertible. Monomorphy gives x-y=0.
-The open on Ui corresponding to W is arbitrary; no affineness assumption is used.
-When J=0 the first quotient detects sections. When J=1 the torsion kernel is
-zero and b detects sections. Empty opens have only the zero section.
--/
+Stacks Tag 0889(1). -/
 theorem torsion_local_section_separation
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     (H : CoherentModules X) (N : CoherentFormalModule X J)

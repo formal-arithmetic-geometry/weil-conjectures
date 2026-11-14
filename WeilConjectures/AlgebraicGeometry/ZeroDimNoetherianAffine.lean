@@ -62,9 +62,7 @@ private noncomputable def unitStalkToRing (Y : Scheme.{u}) (y : Y) :
       Y.presheaf.germ U y hy r * Y.presheaf.germ U y hy m'
     exact map_mul (Y.presheaf.germ U y hy).hom r m'
 
-/-- The tensor unit is ample on a compact affine scheme. The proof unfolds `IsAmple`,
-chooses the global section `1` in tensor power one, and identifies its nonvanishing locus
-with the top open using the stalk germ of `1`. Source: Stacks Project, Definition 01PS. -/
+/-- The tensor unit is ample on a compact affine scheme. Stacks Project, Definition 01PS. -/
 private theorem isAmple_tensorUnit_of_affine (Y : Scheme.{u}) [CompactSpace Y]
     (h_aff : IsAffine Y) : IsAmple Y (𝟙_ Y.Modules) := by
   have : IsAffine Y := h_aff
@@ -107,21 +105,8 @@ private theorem isAmple_tensorUnit_of_affine (Y : Scheme.{u}) [CompactSpace Y]
 
 /-- A Noetherian separated scheme of topological Krull dimension at most zero is affine,
 and its trivial invertible module is ample. The empty scheme is included.
-Source: Stacks Project, Properties, Lemmas 0AAX and 0CKV, and Definition 01PS.
+Stacks Project, Properties, Lemmas 0AAX and 0CKV, and Definition 01PS. -/
 
-Proof:
-1. The dimension bound makes `Y` locally Artinian
-(`IsLocallyArtinian.of_topologicalKrullDim_le_zero`), hence Artinian, so its underlying
-space is finite (`IsArtinianScheme.finite`) and discrete. This includes the empty case.
-2. Mathlib's finite-discrete scheme instance gives `IsAffine Y` directly.
-3. Take tensor power one. Transport the global section `1` along the inverse right
-unitor to obtain a section of this tensor power. Choose the top affine open.
-At every point the linear stalk map induced by the unitor, followed by the canonical
-linear map from the structure-module stalk to the local ring, sends its germ to `1`.
-If the germ belonged to the maximal ideal times the stalk module, linearity would
-put `1` in the maximal ideal, a contradiction. Thus the nonvanishing locus is all of Y.
-Compactness supplies the remaining condition of ampleness.
--/
 theorem isAffine_and_isAmple_tensorUnit_of_dim_le_zero (Y : Scheme.{u})
     [IsLocallyNoetherian Y] [CompactSpace Y] [Y.IsSeparated]
     (hdim : topologicalKrullDim Y ≤ 0) :

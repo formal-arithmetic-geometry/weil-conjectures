@@ -63,9 +63,7 @@ attribute [local irreducible] homComplexFunctor
 
 
 /-- Component criterion for scheme ordinary evaluation.
-Source: Stacks Project, Tags 08DJ and 08DQ.
-Proof: unfold the predicate and the isolated component formula; they give
-exactly the same equation for every summand and projection. -/
+Stacks Project, Tags 08DJ and 08DQ. -/
 theorem schemeOrdinaryEvaluation_of_components (Y : Scheme.{u})
     (P F : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (f : pullbackTensorTotal Y F

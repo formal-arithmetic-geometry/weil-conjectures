@@ -83,15 +83,7 @@ private lemma transport_phi
   rfl
 
 /-- The relation between homogeneous fractions and sections preserves addition.
-Source: Stacks Project, Proposition 0BXD, final paragraph.
-
-Proof: Take witnesses y/f^m and z/f^n. The numerator f^n*y+f^m*z is homogeneous
-of degree (m+n)*d by graded scalar compatibility. LocalizedModule.mk_add_mk
-identifies its fraction with the sum of the original fractions. Additivity
-of phi and restriction, compatibility of phi with homogeneous multiplication,
-and composition of twist multiplication identify its restriction with
-f^(m+n)*(s+t). Thus this numerator and denominator witness the sum relation.
-The calculation also holds for f=0 and for m or n zero. -/
+Source: Stacks Project, Proposition 0BXD, final paragraph. -/
 theorem serreSectionModuleFractionAdd
     (k : Type u) [Field k]
     (G : (Proj (homogeneousSubmodule (Fin 2) k)).Modules)

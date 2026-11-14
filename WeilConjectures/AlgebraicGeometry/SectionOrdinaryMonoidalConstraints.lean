@@ -54,15 +54,7 @@ private theorem changeComparisons
   exact ⟨ha, hl, hr⟩
 
 /-- The normalized ordinary section comparisons preserve associators and unitors.
-Source: Stacks Project, Modules on Sites, Tag 03EK; the ordinary tensor and regular
-module comparisons in internal_section_tensor_comparison.
-
-Proof: the public internal section tensor comparison theorem supplies coherent
-tensor and unit comparisons. They agree with ordinaryTensorComparison and
-ordinaryUnitComparison by uniqueness of their pure-tensor and scalar formulas.
-Substitute these equalities in its associator and left and right unitor identities.
-All three diagrams have the unchanged section equivalence as their forward functor.
-No nonzero-ring or flatness hypothesis is used. -/
+Source: Stacks Project, Modules on Sites, Tag 03EK. -/
 theorem section_ordinary_monoidal_constraints (T : Scheme.{u}) :
     (∀ M N P : internalModules Λ T,
       (ordinaryTensorComparison Λ T (M ⊗ N) P).hom ≫

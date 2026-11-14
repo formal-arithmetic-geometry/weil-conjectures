@@ -35,19 +35,11 @@ namespace AlgebraicGeometry
 
 noncomputable section
 
-/-- The canonical affine pointed-neighbourhood system, reindexed by a directed
-poset.  The displayed equations identify every field with the corresponding
-canonical map in the strict-henselization diagram.
-
-Source: Stacks Project, Tags 04HX and 0032; the library declarations
-`strictHenselizationAffineProperties` and `exists_directed_reindexing`.
-
-The proof first applies the directed-reindexing theorem to the opposite of the
-small affine pointed-neighbourhood category.  It then transports the affine
-stage maps, the transition maps, and the canonical cone legs along that
-reindexing.  The affine and étale assertions are inherited from the affine
-pointed-neighbourhood objects, and the displayed equations are the defining
-equations of the strict-henselization cone and its structural maps.
+/-- The canonical affine pointed-neighbourhood system, reindexed by a directed poset via an
+initial functor: its stages are affine and étale over `S`, and the displayed equations
+identify every field with the corresponding canonical map in the strict-henselization
+diagram.
+Stacks Project, Tags 04HX and 0032.
 -/
 theorem exists_separableGeneric_affineEtale_stages
     (S : Scheme.{u}) [IsIntegral S]

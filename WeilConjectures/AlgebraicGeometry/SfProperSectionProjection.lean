@@ -10,8 +10,9 @@ import WeilConjectures.AlgebraicGeometry.SfProperProjectionComposition
 
 /-! # Projection along a proper section
 
-Source: Stacks Project, Tags 0B56 and 0DV0; blueprint latest,
-thm-amb-p1-adjunction.proof.md, projection naturality along the diagonal.
+## References
+
+Stacks Project, Tags 0B56 and 0DV0.
 -/
 
 @[expose] public noncomputable section
@@ -36,8 +37,7 @@ def properSectionPushIso {X W : Scheme.{u}} (s : X ⟶ W) (p : W ⟶ X)
   (rightDerivedLowerShriekIdIsoOfLowerStar (ModuleCat.{u + 1} A) X).symm ≪≫
     rightDerivedLowerShriekCongrIso A h.symm ≪≫ rightDerivedLowerShriekCompIso A s p
 
-/-- The tensor-unit description of pushforward along a proper section.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the diagonal unit description. -/
+/-- The tensor-unit description of pushforward along a proper section. -/
 def properSectionTensorIso {X W : Scheme.{u}} (s : X ⟶ W) (p : W ⟶ X)
     [IsProper s] [IsProper p] (h : s ≫ p = 𝟙 X) :
     push A s ≅ CoordinateTrace.pull A p ⋙
@@ -265,20 +265,7 @@ private theorem properSectionProjectionUnit_proof {X W : Scheme.{u}} (s : X ⟶ 
 end Proof
 
 /-- Projection along a proper section carries insertion of its unit to the right unitor.
-Source: Stacks Project, Tags 0B56 and 0DV0; blueprint latest,
-thm-amb-p1-adjunction.proof.md, projection naturality in the two coordinate computations.
-
-Proof: apply composition coherence of the canonical projection maps to s followed by p. Use the
-canonical identification of s*(p*M) with M and its conjugate direct-image comparison to
-identify the composite projection with identity projection. Specialize the inside factor to
-1_X. Its left unitor is the one used in projectionUnitIso. Naturality of that unitor and the
-pullback section comparison rewrite the first projection as the displayed map from s!(s*(p*M))
-to s!1_X tensor p*M. Conjugate the projections by their canonical symmetries to put M first.
-The middle symmetries cancel. Identity projection followed by the left-unit symmetry is the
-inverse right unitor of M. This proves the displayed formula before inverting the projection
-for p, so no trace or diagonal class is used. Transport projection composition through the
-proper forget-supports comparisons to obtain the chosen rightDerivedLowerShriek compositors and
-identity comparison. -/
+Stacks Project, Tags 0B56 and 0DV0. -/
 theorem properSectionProjectionUnit {X W : Scheme.{u}} (s : X ⟶ W) (p : W ⟶ X)
     [IsProper s] [IsProper p] (h : s ≫ p = 𝟙 X) (M : DerivedCategoryModule A X) :
     (properSectionPushIso A s p h).hom.app M ≫

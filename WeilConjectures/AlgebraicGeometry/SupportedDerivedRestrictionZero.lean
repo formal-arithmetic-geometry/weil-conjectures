@@ -35,14 +35,7 @@ private theorem module_restriction_zero
   exact (hM x (hU (leOfHom V.unop.hom hx))).elim _ _
 
 /-- A derived object with cohomology supported on T restricts to zero outside T.
-Source: Stacks Project, Tag 0A9A, affine proof, and Tag 05RU.
-
-Proof:
-1. Restriction of module sheaves to an open is exact and commutes with cohomology.
-2. At a point of U, each cohomology stalk is the corresponding stalk on X and is zero
-   by the support assumption. A module sheaf with all stalks zero is zero.
-3. Thus all homology objects of the derived restriction vanish; homology detects zero
-   in the derived category of module sheaves. This also covers the empty open. -/
+Stacks Project, Tags 0A9A and 05RU. -/
 theorem supported_derived_restriction_zero
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

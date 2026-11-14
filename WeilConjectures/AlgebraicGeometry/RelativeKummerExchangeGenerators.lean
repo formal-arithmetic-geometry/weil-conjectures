@@ -15,7 +15,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeShift
 /-!
 # Exchange on normalized global generators
 
-proof.md, Step 3; Stacks Tags 0736 and 072W.
+Source: Stacks Project, Tags 0736 and 072W.
 
 Global classes are derived morphisms out of the constant free rank-one module sheaf.
 Sections are sheaf morphisms out of that same sheaf, equivalently their value on 1.
@@ -31,8 +31,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- The canonical derived pullback of a constant object in degree zero.
-Source: blueprint Step 3. -/
+/-- The canonical derived pullback of a constant object in degree zero. -/
 noncomputable def genericConstantIso (C : Type u') [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
     [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
@@ -68,8 +67,7 @@ noncomputable def genericEdge {X Y : Scheme.{u}} (f : X ⟶ Y)
       (q : ℤ) 0 (q : ℤ) (add_zero _)).hom.app _
 end Generic
 
-/-- The existing exact derived inverse image, with its arguments fixed once.
-Source: blueprint Step 3. -/
+/-- The existing exact derived inverse image, with its arguments fixed once. -/
 noncomputable abbrev generic_kummerExchangeUpper (C : Type u') [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
     [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
@@ -79,8 +77,7 @@ noncomputable abbrev generic_kummerExchangeUpper (C : Type u') [Category.{u + 1}
       _root_.DerivedCategory (Sheaf X.smallEtaleTopology C) :=
   L(upperStar C f)
 
-/-- The existing total derived direct image, with its arguments fixed once.
-Source: blueprint Step 3. -/
+/-- The existing total derived direct image, with its arguments fixed once. -/
 noncomputable abbrev generic_kummerExchangeLower (C : Type u') [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
     [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
@@ -91,8 +88,7 @@ noncomputable abbrev generic_kummerExchangeLower (C : Type u') [Category.{u + 1}
   R(lowerStar C f)
 
 /-- The canonical shift structure on exact derived inverse image, transported from
-termwise inverse image using the existing comparison, as in Etale.Derived.Shift.
-Source: blueprint Step 3. -/
+termwise inverse image using the existing comparison, as in Etale.Derived.Shift. -/
 noncomputable abbrev generic_kummerExchangeUpperCommShift
     (C : Type u') [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
@@ -102,8 +98,7 @@ noncomputable abbrev generic_kummerExchangeUpperCommShift
   commShiftLeftDerivedUpperStar C f
 
 /-- The canonical adjoint shift structure on derived direct image, as in
-Etale.Derived.Shift; no choice of a shift comparison is made.
-Source: blueprint Step 3. -/
+Etale.Derived.Shift. -/
 noncomputable abbrev generic_kummerExchangeLowerCommShift
     (C : Type u') [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
@@ -129,28 +124,24 @@ set_option backward.isDefEq.respectTransparency false
 
 set_option backward.isDefEq.respectTransparency true
 
-/-- The existing exact derived inverse image, with its arguments fixed once.
-Source: blueprint Step 3. -/
+/-- The existing exact derived inverse image, with its arguments fixed once. -/
 noncomputable abbrev kummerExchangeUpper (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   generic_kummerExchangeUpper (ModuleCat.{u + 1} A) (ModuleCat.of A A) f
 
-/-- The existing total derived direct image, with its arguments fixed once.
-Source: blueprint Step 3. -/
+/-- The existing total derived direct image, with its arguments fixed once. -/
 noncomputable abbrev kummerExchangeLower (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   generic_kummerExchangeLower (ModuleCat.{u + 1} A) (ModuleCat.of A A) f
 
 /-- The canonical shift structure on exact derived inverse image, transported from
-termwise inverse image using the existing comparison, as in Etale.Derived.Shift.
-Source: blueprint Step 3. -/
+termwise inverse image using the existing comparison, as in Etale.Derived.Shift. -/
 noncomputable instance kummerExchangeUpperCommShift (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) : (kummerExchangeUpper A f).CommShift ℤ :=
   generic_kummerExchangeUpperCommShift (ModuleCat.{u + 1} A) (ModuleCat.of A A) f
 
 /-- The canonical adjoint shift structure on derived direct image, as in
-Etale.Derived.Shift; no choice of a shift comparison is made.
-Source: blueprint Step 3. -/
+Etale.Derived.Shift. -/
 noncomputable instance kummerExchangeLowerCommShift (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) : (kummerExchangeLower A f).CommShift ℤ :=
   generic_kummerExchangeLowerCommShift (ModuleCat.{u + 1} A) (ModuleCat.of A A) f

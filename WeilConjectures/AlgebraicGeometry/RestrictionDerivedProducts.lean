@@ -132,12 +132,7 @@ private theorem exact_ind_constancy
     simp
 
 /-- Derived scalar restriction is a right adjoint.
-Source: Stacks Project, sites-cohomology.tex, Tags 07A6, 06YS and 06YT;
-derived.tex, Tag 09T5, specialized to scalar restriction.
-Proof: sheafified extension is left adjoint to restriction. K-flat resolutions
-make its unbounded left derived functor everywhere defined. Restriction is exact,
-so its denominator ind-diagrams are constant. The derived adjunction theorem and
-uniqueness of the derived functor identify its right adjoint with exact restriction. -/
+Stacks Project, Tags 07A6, 06YS, 06YT and 09T5. -/
 theorem scalarRestriction_derived_isRightAdjoint
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)

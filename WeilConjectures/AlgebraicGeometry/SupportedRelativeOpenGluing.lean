@@ -166,26 +166,12 @@ private theorem stalk_subsingleton_of_open_immersion
 
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
-/-- Glue arbitrary supported perfect local objects and compatible maps on W union V.
-Neither affineness nor a stabilization of either source is assumed.
-Source: Stacks Project, Tags 08DG and 08CM, used in Tag 09IM.
-
-Proof: Set Y=W union V and pull W and V back to opens of Y. They cover Y and are
-canonically isomorphic as open subschemes to W and V. Transport A and B through these
-isomorphisms and the exact module over-equivalences. The corresponding equivalence on the
-intersection transports c. The natural composition comparisons for restriction identify
-the given compatibility equation with the hypothesis of derived_open_gluing on Y for
-the target E restricted to Y. That theorem supplies F, its two restriction isomorphisms,
-and a map alpha with the required equations. Transport those equations back to the
-relative functors PW and PV; the composition comparison kW (respectively kV) identifies
-iterated restriction of E with its direct restriction to W (respectively V).
-For a point of Y choose W or V containing it. A strictly perfect neighbourhood model
-of A or B, restricted and transported to the corresponding open of Y, is a model of F.
-This gives IsPerfect Y F. Exact restriction identifies each homology stalk of F with
-the corresponding stalk of A or B. Off T that stalk is zero by hAT or hBT, so F is
-supported on T intersect Y. No compactness, closedness of T, or boundedness of E is used.
-If a member of the cover is empty, choose the other at each point; if Y is empty,
-the perfectness and support conclusions are vacuous. -/
+/-- Gluing of supported perfect objects relative to `X`: given perfect objects `A` on `W` and `B`
+on `V` with homology stalks vanishing off `T`, an isomorphism `c` of their restrictions to
+`W ⊓ V`, and maps `a`, `b` to the restrictions of `E` compatible with `c`, there is a perfect
+object `F` on `W ⊔ V`, supported on `T`, with a map `α` to the restriction of `E` and
+isomorphisms `PW F ≅ A`, `PV F ≅ B` under which `α` restricts to `a` and `b`.
+Stacks Tags 08DG and 08CM. -/
 theorem exists_supported_relative_open_gluing
     (X : Scheme.{u}) (W V : X.Opens) (T : Set X)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

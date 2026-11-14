@@ -46,11 +46,7 @@ def IsUniversalFirstOrderThickening {Z Z' X : Scheme.{u}}
 
 /-- Two universal first order thickenings of `Z` over `X` admit exactly one
 morphism over `X` extending the identity on `Z`; that morphism is an isomorphism.
-Apply the lifting property of the second thickening to the first with `a = 𝟙 Z`.
-Apply it symmetrically to obtain an inverse. Each composite and the identity
-extend `𝟙 Z` over `X`, so uniqueness makes both composites identities.
-Source: Stacks Project, Section 37.7 (Tag 04F2), opening paragraph and
-Lemma 37.7.1 (Tag 04F3), first general remark. -/
+Source: Stacks Project, Section 37.7 (Tag 04F2) and Lemma 37.7.1 (Tag 04F3). -/
 theorem IsUniversalFirstOrderThickening.unique {Z Z₁ Z₂ X : Scheme.{u}}
     (h : Z ⟶ X) (i₁ : Z ⟶ Z₁) (h₁ : Z₁ ⟶ X)
     (i₂ : Z ⟶ Z₂) (h₂ : Z₂ ⟶ X)

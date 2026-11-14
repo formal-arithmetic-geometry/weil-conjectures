@@ -88,20 +88,7 @@ private theorem stalk_scalar_apply (X : Scheme.{u}) (x : X)
 
 /-- A single scalar cone has zero cohomology stalks at a point where the scalar
 is invertible, or where its input already has zero cohomology stalks in every degree.
-Source: Stacks Project, Tag 08EK, cone construction, and Tag 05QR.
-
-Proof: Take the exact sequence H^n(E) → H^n(K) → H^(n+1)(E) of
-Mathlib's distinguished-triangle homology sequence and apply the module stalk
-exactness theorem. Homology is linear over global sections: its linearity on
-complexes follows from short-complex homology linearity, and descends through
-localization. On a module stalk, sectionwise scalar multiplication acts by the
-scalar's top-section germ, as follows by representing an element on an open
-neighborhood and using restriction compatibility. On the basic open this germ
-is a unit, so the scalar maps on H^n(E)_x and H^(n+1)(E)_x are isomorphisms.
-Cancel them in the two zero composites to show the incoming and connecting
-stalk maps are zero. Exactness then makes H^n(K)_x zero. If instead every input
-cohomology stalk is zero, the incoming and outgoing maps are zero directly.
-In either case a zero module has a subsingleton carrier. -/
+Stacks Project, Tags 08EK and 05QR. -/
 theorem scalar_cone_stalk_vanishing (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (g : RingCat.sectionsSubring (X.sheaf.obj ⋙ forget₂ CommRingCat RingCat.{u}))

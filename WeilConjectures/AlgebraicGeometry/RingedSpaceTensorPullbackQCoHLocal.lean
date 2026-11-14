@@ -18,10 +18,9 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.RingedSpace
 
-/-- Local quasi-coherence of tensor pullback.
-Source: Stacks Project, Modules, Tag 01BG, Lemma 17.10.4.
-The proof chooses affine-style presentation neighbourhoods and transports them through
-inverse image and extension of scalars; this is the local step of the standard proof. -/
+/-- Local quasi-coherence of tensor pullback: every point has an open neighbourhood on which
+the tensor pullback of a quasi-coherent module is quasi-coherent.
+Stacks Project, Modules, Tag 01BG, Lemma 17.10.4. -/
 theorem tensorModulePullback_isQuasicoherent_local
     {X Y : RingedSpace.{u}} (g : X ⟶ Y)
     (G : SheafOfModules.{u} (moduleRings Y)) (hG : G.IsQuasicoherent) (x : X) :

@@ -79,20 +79,9 @@ private theorem geometricallyIrreducible_field_baseChange_iff
     infer_instance
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- A universal homeomorphism onto a base-changed family preserves geometric
-irreducibility of every fibre.
-
-Source: Stacks Project, Tags 0559 and 0553 (base extension of geometric irreducibility),
-and Tag 04DF (universal homeomorphisms).
-Proof: for a point s of S, the fibre of the pullback family is the extension of
-X_{r(s)} along the residue field map. Geometric irreducibility is unchanged by
-this field extension: extend any test field and the new residue field to a common
-field, use irreducibility over that common field, and descend along the continuous
-surjective projection. The map induced by h on each geometric fibre is a universal
-homeomorphism by base-change stability. Its homeomorphism of underlying spaces
-preserves irreducibility and nonemptiness. Thus the two geometric irreducibility
-tests are equivalent, also when both fibres are empty. No generic-point, finiteness,
-reducedness or radicial hypothesis on the base map is needed.
+/-- If `h : Y ⟶ pullback f r` is a universal homeomorphism, then for every `s : S` the fibre of
+`h ≫ pullback.snd f r` over `s` is geometrically irreducible iff the fibre of `f` over `r s` is.
+Stacks Project, Tags 0553, 0559 and 04DF.
  -/
 theorem exists_radicial_preparation_fibre_comparison
     {X T S Y : Scheme.{u}} (f : X ⟶ T) (r : S ⟶ T)

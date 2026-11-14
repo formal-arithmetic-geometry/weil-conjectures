@@ -82,7 +82,7 @@ private theorem scalar_tensor_comparison_of_adjoints (t : Y ⟶ X)
     tensorHom_comp_tensorHom_assoc]
   simpa only [← Adjunction.homEquiv_unit] using h
 
-/-- Reduce the pushforward tensor comparison to pure tensors before specializing the sheaves. -/
+/-- A square of tensor comparisons through sheaf pushforward commutes if it does on pure tensors. -/
 private theorem scalar_tensor_comparison_of_sections (t : Y ⟶ X)
     {A B H : KSheaf X k} {C D I J : KSheaf Y k}
     (a : A ⊗ B ⟶ H)
@@ -164,22 +164,7 @@ private theorem scalar_tensor_pullback_unit
 
 /-- The scalar tensor coefficient commutes with the normalized module pullback
 comparison. This is an equality of coefficient sheaf morphisms, with no Ext classes.
-Source: Stacks Project, Cohomology, Tag 01F7; Modules, Tag 01CD.
-
-Proof: Apply the inverse-image/direct-image adjunction to the two morphisms.
-Precompose their underlying presheaf morphisms with the tensorator of the sheaf
-inclusion. Evaluate over each open U on a pure tensor s tensor r. The defining
-adjunction identity for scalarPullbackCoefficient identifies each factor with the
-normalized module pullback unit applied to s or r. The section formula for
-scalarTensorCoefficient sends a pure tensor to tmulSection s r. The section
-normalization of module_pullback_tensor sends the unit applied to this tensor
-section to the tensor of the two unit sections. The oplax comparison is the mate
-of the lax tensor comparison for direct image, so its adjoint gives precisely the
-same tensor of unit sections. Thus both composites agree on pure tensors. The
-linear tensor universal property extends the equality to presheaf tensors, and
-the sheafification adjunction extends it to the sheaf tensor. Finally injectivity
-of the inverse-image adjunction gives the displayed coefficient square. Empty
-schemes and zero modules require no exception: all these section identities hold.
+Stacks Project, Cohomology, Tag 01F7; Modules, Tag 01CD.
 -/
 theorem scalarPullbackCoefficient_tensor
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

@@ -9,7 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoeffic
 /-!
 # Finite source coefficient models for rational Ext
 
-Source: latest blueprint, rational Ext proof, beginning of the algebraic-closure case.
+Every lisse module with coefficients in a finite extension of `ℚ_[ℓ]` or in the algebraic closure
+of `ℚ_[ℓ]` comes, by scalar extension, from a lisse module over a finite coefficient field.
 -/
 
 @[expose] public noncomputable section
@@ -19,14 +20,10 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
-/-- A lisse source has a finite coefficient model with the specified coefficient map.
-Source: latest blueprint, rational Ext proof, fixed-source model paragraph.
-
-Proof: For a finite coefficient field use that field and the original module, with
-identity scalar extension. For the algebraic closure use the lisse finite-coefficient
-descent theorem on the qcqs source. Its specified extension map is exactly the pullback
-of the condensed inclusion recorded here. Equalities of coefficient rings are removed
-first, so the two constructions transport back along exactly the displayed maps. -/
+/-- A lisse source has a finite coefficient model with the specified coefficient map: if `Λ` is
+a finite extension `E ⊆ PadicAlgCl ℓ` of `ℚ_[ℓ]` or `PadicAlgCl ℓ` itself, every lisse module
+`L` on a qcqs scheme is the scalar extension of a lisse module over a finite intermediate field
+`E₀`, along the identity or the inclusion of `E₀` into `PadicAlgCl ℓ`. -/
 theorem rationalExt_finiteSourceModel
     (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})

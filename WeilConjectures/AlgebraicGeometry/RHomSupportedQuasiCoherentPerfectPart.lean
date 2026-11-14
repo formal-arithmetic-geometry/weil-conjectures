@@ -26,19 +26,9 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 
 namespace AlgebraicGeometry
 
-/-- Internal Hom from a perfect source preserves quasi-coherence.
-
-Source: Stacks Project, Tag 0A6H (2).
-
-Proof: On each neighbourhood with a strictly perfect model for K, its cohomology is
-quasi-coherent: finite-free sheaves are quasi-coherent, direct summands remain
-quasi-coherent, and kernels and cokernels of maps of quasi-coherent modules on schemes
-remain quasi-coherent. Thus K belongs to the quasi-coherent derived subcategory.
-The perfect tensor-Hom comparison gives a quasi-coherent perfect dual D and an
-isomorphism RHom(K,L) with L tensor^L D. Choose K-flat representatives to compute this
-tensor. Preservation of quasi-coherence under derived tensor gives quasi-coherent
-cohomology of L tensor^L D, and the comparison isomorphism transports it to RHom(K,L).
-The argument imposes no boundedness condition on L. -/
+/-- Derived internal Hom from a perfect object `K` into an object `L` with quasi-coherent
+cohomology has quasi-coherent cohomology; no boundedness of `L` is assumed.
+Stacks Tag 0A6H (2). -/
 theorem rhom_supported_quasiCoherent_perfect_part
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

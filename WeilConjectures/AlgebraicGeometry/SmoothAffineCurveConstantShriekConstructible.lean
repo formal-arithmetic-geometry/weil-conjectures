@@ -40,14 +40,16 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 /-!
 # Constructible compact support for constant finite coefficients on affine smooth curves
 
-Source: Stacks Project, `more-etale.tex`, Tag 0GKX, `lemma-constant-shriek-rel-dim-1`,
-lines 4511--4613.
+Source: Stacks Project, `more-etale.tex`, Tag 0GKX.
 
 The theorem states constructibility of every cohomology sheaf of the bounded-below derived
 lower shriek of a finite constant module on a separated affine smooth relative curve over an
-affine Noetherian finite-dimensional base. The proof follows the closed-subset induction,
-compact-support base change, good-curves diagram, quasi-finite boundary, proper-smooth models,
-open-closed triangles, and descent steps recorded in the DAG node.
+affine Noetherian finite-dimensional base.
+
+## Implementation details
+
+Neither invertibility of the characteristic nor finiteness of the Krull dimension of the
+base is used by the argument.
 -/
 
 @[expose] public section
@@ -170,7 +172,7 @@ private theorem goodCurves_constantShriek_constructible
 /-- Generic step: over a nonempty affine Noetherian base, the compactly supported cohomology
 of a finite constant module on a separated affine smooth relative curve is constructible on a
 nonempty open of the base, in every characteristic.
-Source: Stacks Project, Tag 0GKX, proof of `lemma-constant-shriek-rel-dim-1`. -/
+Source: Stacks Project, Tag 0GKX. -/
 private theorem generic_constantShriek_constructible
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X S : Scheme.{u}} [IsNoetherian S] [IsAffine S] [Nonempty S]
@@ -230,31 +232,7 @@ private theorem generic_constantShriek_constructible
 /-- Compactly supported cohomology of a finite constant module on a separated affine
 smooth relative curve over an affine Noetherian finite-dimensional base is constructible
 in every characteristic.
-
-Source: Stacks Project, `more-etale.tex`, Tag 0GKX, `lemma-constant-shriek-rel-dim-1`,
-lines 4511--4613.
-
-Proof: The base is Noetherian. Induct on closed subsets, allowing every closed subscheme
-structure, and use open-closed gluing of constructible sheaves. Compact-support base change,
-exact inverse image and constant pullback reduce the induction step to the base-changed
-smooth affine curve over the closed base. Choose a generic point of an irreducible component
-and a good-curves diagram. Surjective-pullback descent reduces constructibility on a nonempty
-open of the base to the finite cover in that diagram.
-
-The curve's boundary is quasi-finite: its fibre is a closed complement of a dense open in a
-Noetherian space of dimension at most one, hence zero-dimensional and discrete. Quasi-finite
-shriek constructibility and the open-closed triangle reduce to the dense open. Its finite
-closed cover is a thickening; the open-closed triangle for that closed cover has zero first
-term, and therefore reduces to the inverse image of the dense open.
-
-For each proper model, use the identity compactification and the all-characteristic proper
-smooth finite-module lemma; then compose with the finite etale map using quasi-finite shriek
-constructibility. The good-curves-preimage lemma assembles those models. This proves the
-generic step, and open-closed gluing completes the induction. The last comparison converts
-finite-stalk constructibility to the finite-constant-value predicate of the statement. No
-invertibility of the characteristic is used, and the finiteness of the Krull dimension of the
-base is not needed by this argument.
--/
+Source: Stacks Project, Tag 0GKX. -/
 theorem constructibleCohomology_lowerShriek_constant_of_smooth_relativeDimension_one_all_char
     (ell : ℕ) (A : Type (u + 1)) [Field A] [Finite A] [CharP A ell]
     (S : Scheme.{u}) [IsAffine S] [IsNoetherian S]

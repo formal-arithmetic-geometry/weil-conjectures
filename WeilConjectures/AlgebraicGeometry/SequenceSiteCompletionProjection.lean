@@ -100,17 +100,10 @@ instance (priority := 1100) ringedToposCommRingForgetCompose
 attribute [-instance] ringedToposCommRingForgetCompose
 scoped[CategoryTheory] attribute [instance 1100] ringedToposCommRingForgetCompose
 
-/-- A geometric morphism with a structural ring map and the induced direct image on modules.
-
-Source: Stacks Project, Sites, Definition 00XA, and Modules on Sites, pushforward of modules.
-
-The ring identities test every generalized element of the target topos. Left exactness
-identifies the inverse image of products and the terminal object, so these are precisely
-the identities for a morphism of ring objects. The last identity specifies addition and
-scalar multiplication on the module direct image under the sheaf adjunction. It includes
-zero by taking all three module elements zero. Thus the supplied module direct image is
-the usual induced one, up to its displayed natural identification, not an arbitrary lift.
-No exactness of the tensor module pullback or preservation of K-injectives is assumed. -/
+/-- A geometric morphism with a structural ring map and the induced direct image on modules,
+together with the identities making the ring map a morphism of ring objects and identifying
+the module operations on the direct image with those induced by the sheaf adjunction.
+Stacks Project, Tag 00XA. -/
 structure RingedToposMorphismOfUniverses
     {C : Type c} {D : Type d} [Category.{v} C] [Category.{w} D]
     [EssentiallySmall.{r} C] [EssentiallySmall.{r} D]

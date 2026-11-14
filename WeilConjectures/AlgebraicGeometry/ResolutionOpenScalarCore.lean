@@ -27,18 +27,9 @@ attribute [local instance] enoughInjectives
 
 set_option maxHeartbeats 800000 in
 -- Comparing the two exact homology calculations needs additional elaboration.
-/-- The fixed comparison intertwines the scalar endomorphisms.
-Source: Stacks Project, Tags 01E1 and 01E4.
-
-Proof: Multiplication by b on each term of the restricted resolution lifts G.smulHom b by naturality
-of smulHom and the augmentation. Naturality of isoRightDerivedObj identifies its induced
-homology map with the cohomology map. The fixed section comparison is semilinear by
-resolutionSectionsHomology_scalar: its ring map equals f.app W followed by topIso.inv, by the
-canonical chart cancellation. Use the same computation with a^n and the fact that this ring
-map preserves powers. The exact evaluation and forgetful homology comparisons commute with
-these endomorphisms. Thus every arrow in the displayed fixed comparison intertwines b^n with
-a^n, yielding the equality. For n=0 the maps are identities; degree zero and empty opens use
-the same comparisons. -/
+/-- The fixed comparison intertwines the scalar endomorphisms: multiplication by `a^n` on
+section cohomology corresponds to multiplication by the pulled-back `b^n` on open cohomology.
+Stacks Project, Tags 01E1 and 01E4. -/
 theorem resolution_open_scalar_core {X T : Scheme.{u}}
     (f : X ⟶ T) (F : X.Modules) (I : InjectiveResolution F) (q : ℕ)
     (W : T.Opens) (a : Γ(T, W))

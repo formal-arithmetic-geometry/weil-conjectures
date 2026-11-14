@@ -48,12 +48,7 @@ private theorem projectionComparison_whole
   rfl
 
 /-- The defining projection comparison, using the canonical proper comparison with
-its ordinary endpoint fixed before whiskering, evaluated at any coefficient object.
-Source: SfP1IntegralTransportData.projectionComparison.
-Proof: first unfold projectionComparison as a whole isomorphism. Its defining
-body is the whiskered canonical proper forget-supports isomorphism followed by
-inverse exchange. Evaluate this equality at K, then apply the component formula
-for a whiskered composite, proved privately in arbitrary categories. -/
+its ordinary endpoint fixed before whiskering, evaluated at any coefficient object. -/
 theorem projectionComparison_eq_ordinaryProperForget
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]

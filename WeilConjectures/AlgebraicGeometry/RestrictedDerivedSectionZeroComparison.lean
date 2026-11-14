@@ -85,19 +85,7 @@ noncomputable def restrictedSectionPullback {S Y Y' : Scheme.{v}}
 
 /-- On a single sheaf in degree zero, the constructed derived section pullback is
 ordinary section pullback, followed by the restricted coefficient map.
-Source: Stacks Project, Tags 07A6 (derived adjunction) and 0D6F (restriction).
-
-Proof: Write q = U times_S a and r,r' for the two projections. The comparison
-of restrictions is the derived image of q^* r^* = r'^* a^*, and on singles its
-single comparison is the underived upperStarComp comparison. Under the zeroth
-right-derived comparison, the derived adjunction unit for q is the underived
-unit: compute both on an injective resolution and use naturality of the
-augmentation and the right-derived unit. The Leray comparison similarly
-identifies with the ordinary pushforward/global-section comparison in degree
-zero, by its defining composite unit. Hence their composite is the ordinary
-section pullback. Naturality of the zero comparison for ψ gives the final
-coefficient map. Cancel the single and zero comparisons with their inverses.
-This argument uses no invertibility of ψ and applies to the empty scheme. -/
+Stacks Project, Tags 07A6 and 0D6F. -/
 theorem restrictedSectionPullback_zero {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
     (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})

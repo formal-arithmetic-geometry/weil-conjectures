@@ -15,8 +15,13 @@ import WeilConjectures.AlgebraicGeometry.LocallyQuasicoherentAffinePullbackSecti
 
 /-! # Affine sections of the chart model after tensor pullback
 
-Source: Stacks Project, Tags 01I9, lemma-widetilde-pullback, and 0096,
-lemma-pullback-modules. -/
+Source: Stacks Project, Tags 01I9 and 0096.
+
+## Implementation details
+
+The comparison in `exists_selfTor_affine_tensor_sections` is built locally on the affine
+open `U` (via the affine pullback comparison between `U` and its preimage), so it needs
+neither quasi-coherence of the pushforward on all of `Y` nor quasi-separatedness of `Y`. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -28,25 +33,10 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 
-/-- Tensor extension of an arbitrary affine module computes the chart model sections.
-Source: Stacks Project, Tag 01I9(1), lemma-widetilde-pullback; Tag 01I7,
-lemma-compare-constructions; Tag 0096, lemma-pullback-modules.
-Proof: Put V=i inverse-image U, A=Gamma(Y,U), B=Gamma(Z,V), and j:U to Y.
-Because i is affine, V is affine. Restrict j_* of the associated M back to U.
-The open-immersion restriction comparison identifies this restriction with
-that associated module, since j inverse-image U is all of U. Its map on
-sections is inverse to the restriction map used in selfTorAffineSection.
-Restriction commutes with tensor pullback; identify the resulting sheaf on V
-with the pullback of the associated module along V to U. Use the affine
-pullback comparison on these two affine schemes (not on all of Y): it gives
-B tensor_A M as the sections over V. The tilde adjunction unit is an
-isomorphism, so its inverse identifies the original sections with M.
-Naturality of the open restriction and tensor-pullback adjunction units shows
-that the composite sends b tensor m to b times selfTorAffineSection(i,U,M,m).
-This also proves B-linearity. Each comparison is an isomorphism, giving the
-claimed equivalence. If V is empty then B and both modules are zero. This
-argument is local on U, so it does not require the pushforward along j to be
-quasi-coherent on all of Y, nor any quasi-separatedness assumption on Y. -/
+/-- For an affine morphism `i : Z ⟶ Y` and an affine open `U`, the sections over `i⁻¹ U` of
+the tensor pullback of the chart model of `M` are `Γ(Z, i⁻¹ U) ⊗[Γ(Y, U)] M`, via an
+isomorphism sending `b ⊗ m` to `b • selfTorAffineSection i U M m`.
+Stacks Project, Tags 01I9, 01I7 and 0096. -/
 theorem exists_selfTor_affine_tensor_sections
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsAffineHom i]
     (U : Y.affineOpens) (M : ModuleCat.{u} (Γ(Y, U.1) : Type u)) :

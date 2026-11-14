@@ -219,8 +219,7 @@ noncomputable def pureBilin (M N : SheafOfModules.{u} (ringSheaf R)) (W : Cᵒ�
       ((monoidalCategory R).tensorObj M N).val.obj W :=
   TensorProduct.curry ((pureMap R M N).app W).hom
 
-/-- A map from a tensor is determined by pure sections. Source: Stacks 03EK.
-Proof: use the module sheafification adjunction, then sectionwise tensor generation. -/
+/-- A map from a tensor is determined by pure sections. Stacks 03EK. -/
 theorem pure_hom_ext (M N H : SheafOfModules.{u} (ringSheaf R))
     {f g : (monoidalCategory R).tensorObj M N ⟶ H}
     (h : ∀ W m n, f.val.app W (pure R M N W m n) =

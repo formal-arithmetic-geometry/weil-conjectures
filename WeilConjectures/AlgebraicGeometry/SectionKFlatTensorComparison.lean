@@ -12,8 +12,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-! # Specified K-flat tensor comparison under the section equivalence
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YU and 0FPT;
-internal/section model identification, Steps 1–7 of the blueprint proof.
+Source: Stacks Project, Cohomology on Sites, Tags 06YU and 0FPT.
 
 The helper predicates spell out resolving membership, the prescribed representative
 square, native localization normalization, and the three constraint diagrams.
@@ -81,8 +80,7 @@ def NativeLocalizationCondition (T : Scheme.{u})
 
 /-- The displayed representative equation, written with the inverse resolution maps.
 The internal lax map goes from the derived tensor to the localized total; the
-section qTensor has the same orientation. Thus this is the node's equation after
-multiplication by the two invertible resolution comparisons.
+section qTensor has the same orientation.
 Source: Stacks 06YU. -/
 def RepresentativeCondition (T : Scheme.{u})
     (θ : Functor.uncurry.obj (CondensedRing.derivedTensor Λ T) ⋙
@@ -327,35 +325,7 @@ private theorem native_model_data (T : Scheme.{u}) :
       (hf (DerivedCategory (modules Λ T)) inferInstance)
 
 /-- The specified internal/section comparison, including native model identification.
-Source: Stacks Project, sites-cohomology.tex, Tags 06YU and 0FPT.
-
-Proof.
-1. Exactness and reflection of isomorphisms give the quasi-isomorphism equivalence.
-   The ordinary internal/section comparison identifies the acyclic K-flat tests
-   and the degreewise flatness tests.
-2. Abstract flat-term K-flat resolutions give resolving internal representatives.
-   Restrict the homotopy localization by the resolving calculus of fractions;
-   its comparison from the model localization is an equivalence. Two-variable
-   localization gives the arbitrary-target transformation bijection.
-3. The defining normalization of qTensor gives its representative condition.
-   Cancel the equivalence-unit comparison and the two localization factors to
-   obtain the required square for the fixed tensorComparison.
-4. Restrict qTensor to flat-term K-flat pairs, where it is invertible. Compose
-   with the canonical cochain model comparison and lift this composite through
-   the fully faithful resolving-pair restriction to obtain v. Define the native
-   localization map as v inverse followed by qTensor on all complexes. On the
-   resolving pairs the cochain model comparison is exactly tensorDescentPair;
-   the lifted equation and cancellation give the required native normalization.
-5. On resolving pairs the square determines theta by cancellation. Resolve
-   arbitrary derived objects, and use naturality along those isomorphisms to
-   prove uniqueness on all derived pairs.
-6. The unit is flat; its single complex is K-flat and has flat terms. Compose
-   kappa with the specified ordinary single-complex unit comparison to get e.
-7. Give the inverse equivalence its induced monoidal structure. Its left adjoint
-   is oplax monoidal; the triangle identities identify its unit with the identity
-   and its tensor maps with the fixed equivalence-unit formula for tensorComparison.
-   These are precisely the required associator and two unitor constraints.
--/
+Source: Stacks Project, Cohomology on Sites, Tags 06YU and 0FPT. -/
 theorem section_kflat_tensor_comparison (T : Scheme.{u}) :
     (∀ (P Q : CochainComplex (internalModules Λ T) ℤ) (f : P ⟶ Q),
       QuasiIso f ↔ QuasiIso ((complexes Λ T).map f)) ∧

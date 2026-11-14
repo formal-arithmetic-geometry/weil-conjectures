@@ -29,10 +29,8 @@ variable {C D : Type u} [Category.{u} C] [Category.{u} D]
 open scoped ChangeOfRings
 
 set_option linter.unusedVariables false in
-/--
-The proof cancels the tensor comparison and uses the tensor universal property to identify maps.
-Source: Stacks Project, Modules on Sites, Tag 03EL.
-Proof in words: cancel the tensor comparison and apply the tensor universal property. -/
+/-- Any two unit isomorphisms `j, j' : L(R) ≅ S` satisfying the right-unitor normalization of
+the canonical tensor comparison are equal. Stacks Project, Modules on Sites, Tag 03EL. -/
 theorem canonicalRingedTensorComparison_unit_unique
     (hmap : ∀ {M N : (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
       RingCat.{u})).obj R))} (f : M ⟶ N), L.map f =

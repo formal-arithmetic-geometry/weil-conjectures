@@ -45,20 +45,7 @@ private theorem isIso_sigmaRestrictInclusion
 
 /-- If a coproduct map is an isomorphism over U and each summand modification is
 an isomorphism over the corresponding inverse image, their composite coproduct
-map is an isomorphism over U.
-Source: the coproduct and restriction gluing in
-`theorem-cohomology-curves`, step 3 (Stacks Project,
-Morphisms, Tag 0BAJ, componentwise reduction).
-
-Proof: Write p = Sigma.desc ι and q = Sigma.map ν. The composite q ≫ p is
-Sigma.desc (fun i ↦ ν i ≫ ι i) by the coproduct universal property.
-Base change along the open U identifies p's restricted source with the coproduct
-of C i restricted to ι i's inverse image of U. Under this identification the
-restriction of q is the coproduct of the restrictions of ν i. Each is an
-isomorphism by hypothesis, so their coproduct is an isomorphism. Compose with
-the given isomorphism p restricted to U, using morphismRestrict_comp.
-This works for an empty family as well, since the coproduct of an empty family
-of isomorphisms is the identity of an initial object. -/
+map is an isomorphism over U. Stacks Project, Tag 0BAJ. -/
 theorem isIso_sigmaDesc_comp_restrict
     (X : Scheme.{u}) (n : ℕ) (C Y : Fin n → Scheme.{u})
     (ι : ∀ i, C i ⟶ X) (ν : ∀ i, Y i ⟶ C i) (U : X.Opens)

@@ -38,16 +38,7 @@ is an isomorphism (the ring square is a pushout). Its spectrum square, using the
 charts `U.2.isoSpec`, is cartesian. The spectrum restriction is an open immersion whose image
 is the inverse image of the smaller open in the larger one, with the structure map to `U`
 given by that square. Spectrum restrictions compose and the self-restriction is the identity.
-Source: Stacks Project, Constructions, Lemmas 01LN and 01LO.
-
-Proof: (1) Apply lem-weil-pbc-quasi-coherent-affine-section-base-change to `A.toModule`.
-The resulting module comparison respects products and units by the algebra-sheaf structure,
-so the canonical tensor comparison is a ring isomorphism, or equivalently the ring square
-is a pushout. (2) By lem-weil-pbc-fibre-product-affine-spectra the affine fibre product is
-Spec of the tensor product; (1) identifies it with Spec A(U). Base change of the inclusion
-U → V is an open immersion and identifies its image with the preimage of U, by
-lem-weil-pbc-open-preimage-fibre-product. (3) Restriction maps compose and self-restrictions
-are identities. Contravariant functoriality of Spec gives the last two equations. -/
+Stacks Tags 01LN and 01LO. -/
 theorem quasi_coherent_algebra_affine_inclusion
     (S : Scheme.{u}) (A : S.CommAlgebraSheaf) (hA : A.toModule.IsQuasicoherent) :
     (∀ (U V : S.affineOpens) (hUV : U.1 ≤ V.1),

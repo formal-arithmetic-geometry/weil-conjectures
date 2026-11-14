@@ -25,20 +25,7 @@ namespace AlgebraicGeometry
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
 /-- Cancellation of the ordinary component equation under tensor-Hom uncurrying.
-Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DQ;
-ordinary evaluation chain calculation, step 3, cancellation portion.
-
-Proof: The equality n+r=k identifies k with r+n, so apply hf at p,q,n,r.
-Apply tensorHomEquiv.symm to the component equation and precompose with the
-braiding of F^p tensor V^q and P^r. If r+q=0, the inverse laws for tensorHomEquiv
-cancel its forward application. Symmetry cancels the two successive braidings,
-leaving precisely the associator, dual projection, single-unit identification,
-right unitor and the degree transport displayed on the right. The degree sums
-and r+q=0 imply p=k; proof irrelevance identifies the degree transports. If
-r+q is nonzero, hf gives zero. Under the monoidal closed structure supplied by
-tensorClosed, uncurrying is a tensor whiskering followed by evaluation, hence
-sends zero to zero by monoidal preadditivity. Precomposition also preserves zero.
-The argument is valid in every integer degree and for zero complexes. -/
+Stacks Project, cohomology.tex, Tags 08DJ and 08DQ. -/
 theorem schemeOrdinaryEvaluation_uncurried_component (Y : Scheme.{u})
     (P F : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (f : pullbackTensorTotal Y F

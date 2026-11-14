@@ -44,7 +44,7 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [MonoidalCategory A]
   (e : ∀ X Y : A, L.obj (X ⊗ Y) ≅ L.obj X ⊗ L.obj Y)
 
 /-- The inverse ordinary tensor comparison, summed over all bidegrees.
-Source: Stacks 07A4, last display of the proof. -/
+Stacks 07A4. -/
 noncomputable def tensorPullbackTotalComponent (P Q : CochainComplex A ℤ) (n : ℤ) :
     (CochainComplex.mapBifunctor
       ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
@@ -57,10 +57,7 @@ noncomputable def tensorPullbackTotalComponent (P Q : CochainComplex A ℤ) (n :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The ordinary summand comparison commutes with the two tensor differentials.
-Source: Stacks 07A4, construction of the total comparison.
-Proof: test on every summand. Naturality of e handles d_P and d_Q separately.
-Additivity of L preserves the sign (-1)^a on the second differential. The two
-summand equations add to the asserted chain-map equation. -/
+Stacks 07A4. -/
 theorem tensorPullbackTotalComponent_comm
     (he : ∀ {X X' Y Y' : A} (f : X ⟶ X') (g : Y ⟶ Y'),
       L.map (f ⊗ₘ g) ≫ (e X' Y').hom = (e X Y).hom ≫ (L.map f ⊗ₘ L.map g))
@@ -143,12 +140,7 @@ noncomputable def tensorPullbackTotal
   comm' n m _ := tensorPullbackTotalComponent_comm L e he P Q n m
 
 /-- A left adjoint preserves the coproducts defining total tensor, so beta is invertible.
-Source: Stacks 07A4 and Modules on Sites 03D7.
-Proof: each inverse ordinary comparison is invertible. The adjunction identifies
-maps out of a pulled-back coproduct with families of maps out of the pulled-back
-summands, so its coproduct comparison is invertible. Each degree of beta is the
-composite of these two isomorphisms. A degreewise isomorphism of complexes is an
-isomorphism of complexes. -/
+Stacks 07A4 and Modules on Sites 03D7. -/
 theorem tensorPullbackTotal_isIso
     (he : ∀ {X X' Y Y' : A} (f : X ⟶ X') (g : Y ⟶ Y'),
       L.map (f ⊗ₘ g) ≫ (e X' Y').hom = (e X Y).hom ≫ (L.map f ⊗ₘ L.map g))
@@ -429,9 +421,7 @@ variable {C D : Type u} [Category.{u} C] [Category.{u} D]
 open scoped ChangeOfRings
 
 /-- Bilinearity of the existing sheaf tensor, assembled from its additive tensor functors.
-Source: Stacks 03EK.
-Proof: the additive tensorLeft and tensorRight functors of MonoidalFree give the
-four zero and addition laws of MonoidalPreadditive. Assemble those four laws. -/
+Stacks 03EK. -/
 theorem ringedTensorPreadditive :
     @MonoidalPreadditive (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
       RingCat.{u})).obj R)) _ _ (monoidalCategory R) :=
@@ -451,13 +441,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 -- Compare bilinear maps through sheafification and the scalar-extension adjunctions.
 /-- The pure-tensor conditions determine the ordinary comparison uniquely and are attainable.
-Source: Stacks 03EL.
-Proof: use the separate existence construction for the specified inverse-image lift.
-For uniqueness, q_one fixes q on every section. Preservation of binary products lifts
-every pair of inverse-image sections to a generalized pair. The two pure equations
-then identify the inverse tensorators on inserted pure tensors. Cancel tensor
-sheafification and apply the two scalar-extension adjunctions to obtain equality
-on the whole tensor product. Proof irrelevance identifies all remaining law fields. -/
+Stacks 03EL. -/
 theorem canonicalRingedTensorComparison_existsUnique
     (uPush : Sheaf JD (Type u) ⥤ Sheaf JC (Type u))
     (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv]
@@ -535,10 +519,7 @@ theorem canonicalRingedTensorComparison_existsUnique
 end TensorUniqueness
 
 /-- The ordinary unit normalization of the canonical tensor comparison.
-Source: Stacks 03EL, pure tensors with the second factor the coefficient ring.
-Proof: scalar multiplication gives L(R) = S. On a generalized pure tensor m tensor r,
-both composites multiply by the image of r in S. Sheafification extends equality.
-The equation at M=R, together with the tensor unitors, uniquely determines j. -/
+Stacks 03EL. -/
 theorem canonicalRingedTensorComparison_unit
     (hmap : ∀ {M N : (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
       RingCat.{u})).obj R))} (f : M ⟶ N), L.map f =

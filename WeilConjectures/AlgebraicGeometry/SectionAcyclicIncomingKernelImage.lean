@@ -123,23 +123,7 @@ private theorem cohomology_right_acyclic {Y : Scheme.{u}} (V : Y.Opens)
 
 /-- The kernels and images of incoming differentials of a nonnegative complex
 are section-acyclic if its terms and homology are section-acyclic.
-Source: Stacks Project, Tag 015B (long exact sequence), applied to the cycle and
-boundary sequences in the proof of Tag 015J.
-
-Proof: Write B^0 = 0, Z^n = ker(d^n), and B^(n+1) = im(d^n). Restriction to V
-is exact and hence preserves these objects and the homology objects. Induct on n.
-The sequence 0 -> B^n -> Z^n -> H^n(K) -> 0 shows that Z^n is acyclic once
-B^n is acyclic: in each positive degree the cohomology of Z^n lies between the
-zero cohomology of the two outer terms. The sequence
-0 -> Z^n -> K^n -> B^(n+1) -> 0 then shows that B^(n+1) is acyclic: for r > 0,
-H^r(B^(n+1)) lies between H^r(K^n) and H^(r+1)(Z^n), both zero.
-The long exact sequences are for module right-derived global sections on V.
-This proves the simultaneous induction from B^0 = 0. For p > 0 the incoming
-kernel is Z^(p-1), and its image is B^p. For p = 0 Mathlib's incoming map is
-K.d 0 0 = 0 (since the predecessor of zero is zero); its kernel is K^0,
-acyclic by the term hypothesis, and its image is zero. Transport all assertions
-through these kernel and image isomorphisms. The argument includes the zero
-complex and the empty open, since zero objects have zero derived cohomology. -/
+Source: Stacks Project, Tags 015B and 015J. -/
 theorem section_acyclic_incoming_kernel_image
     {Y : Scheme.{u}} (K : CochainComplex Y.Modules ℕ) (V : Y.Opens)
     (hterms : ∀ (n r : ℕ), 0 < r →

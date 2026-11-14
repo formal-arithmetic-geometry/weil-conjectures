@@ -15,7 +15,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # Projection mates on shifted structure sheaves
 
-Source: Stacks Project, Tag 08EU, final sentence of the proof.
+Source: Stacks Project, Tag 08EU.
 -/
 
 @[expose] public section
@@ -167,24 +167,10 @@ private theorem shifted_unit_tensorLeft_isEquivalence (X : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The supplied projection mate is invertible when the first factor is a shifted
-structure sheaf. No quasi-compactness or quasi-coherence hypothesis is needed.
-Source: Stacks Project, Tag 08EU, final sentence of the proof.
-
-Proof: derived pullback takes the structure sheaf to the structure sheaf and
-commutes with shifts. Tensoring with O[k] identifies naturally with translation
-by k. These identifications turn t(O[k],-) into a natural isomorphism between
-the two shifted versions of pullback. The adjunction between pullback and direct
-image induces an adjunction between their shifted versions; the canonical
-pullback shift isomorphism induces the direct-image shift isomorphism by mates.
-Under these isomorphisms the displayed projection mate is the adjunction
-conjugate of the supplied comparison at O[k]. Conjugation preserves inverses,
-as follows by inserting the unit/counit formulas and cancelling the two triangle
-identities. Thus it is an isomorphism, for any p and t. Naturality in M,
-obtained from naturality of t and the counit and the Hom equivalence, transports
-the result along hM. For k = 0 this is the unit triangle calculation, modified
-by an arbitrary natural automorphism of pullback and its conjugate; for empty
-schemes every map here is the unique isomorphism of zero objects. -/
+/-- The supplied projection mate is invertible when the first factor is isomorphic to a
+shifted structure sheaf `O_Y[k]`, for any adjunction `p` and tensor comparison `t`. No
+quasi-compactness or quasi-coherence hypothesis is needed.
+Source: Stacks Project, Tag 08EU. -/
 theorem qcqsProjectionMate_shiftedUnit_isIso (X Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

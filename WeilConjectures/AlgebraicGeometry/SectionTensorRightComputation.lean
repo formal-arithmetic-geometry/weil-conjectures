@@ -250,18 +250,7 @@ private theorem computationPasteMapped
 omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)]
   [IsCommMonObj Λ'] in
 /-- The tensor localization comparison commutes with putting the right coefficient
-in degree zero. Source: Stacks 06YN and 06YU; representative clause of
-lem-pd-section-derived-tensor-normalization.
-
-Proof: apply the representative equation for qTensor to P and the degree-zero
-complex of B₀. Naturality moves the canonical map-complex/single comparison
-through qTensor. Cancel the two section localization isomorphisms. The remaining
-ordinary square compares the total tensor with a single factor to degreewise
-right tensor. Precompose in each degree with each direct-sum summand injection.
-All summands outside right degree zero vanish; in degree zero both maps are
-exactly the ordinary tensor comparison. The coproduct universal property proves
-the square. Localize it and combine the two localization factors. This argument
-works for all unbounded complexes, with no flatness assumption. -/
+in degree zero. Source: Stacks 06YN and 06YU. -/
 theorem section_tensor_right_computation (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (P : CochainComplex (Modules Λ T) ℤ) :
     (ModuleRingedComparison.tensorComparison Λ T).hom.app (DerivedCategory.Q.obj P, B a T) ≫

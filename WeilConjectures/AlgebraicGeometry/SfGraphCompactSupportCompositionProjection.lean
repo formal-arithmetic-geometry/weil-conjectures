@@ -12,7 +12,12 @@ import WeilConjectures.AlgebraicGeometry.SfEtaleCompactProjectionForward
 
 /-! # Projection compatibility of the fixed graph compositor
 
-Source: blueprint proposition-composition-base-change-rf-shriek--1, composition pentagon.
+The explicit graph compositor `sfGraphCompactSupportCompIso` preserves the projection maps.
+
+## Implementation details
+
+In `sfGraphCompactSupportCompIso_projection` the two coefficient braiding instances are
+definitionally equal; the conversion must keep the derived-category constructions folded.
 -/
 
 @[expose] public section
@@ -124,22 +129,8 @@ private meta partial def graphProjectionCongrHEq (a b : Expr) : MetaM Expr := do
       right arguments {(b.getAppArgs.map fun x ↦ x.getAppFn)}"
   return ← mkHEqRefl a
 
-/-- The explicitly constructed graph compositor preserves the projection maps.
-
-Source: blueprint proposition-composition-base-change-rf-shriek--1, composition pentagon; steps 1--3
-of lem-route-exists-right-derived-lower-shriek-comp-iso.
-
-Proof: apply sfEtaleCompactProjectionInverse_composition to the three chosen
-compactifications. All three projection components are invertible by
-sfEtaleAmbientAdjointProjection. Precompose its equation with the projection
-for the composite, then postcompose with the projection for g and the image
-under g of the projection for f. Cancel the three inverse pairs. The resulting
-forward equation is exactly ProjectionCompCompatible. Identify derivedTensor's
-object and morphism APIs with tensor objects and whiskering, and unfold only
-projectionMap and rightDerivedLowerShriek to identify the chosen compactifications.
-The two coefficient braiding instances are definitionally equal; the conversion
-must retain the derived-category constructions folded. This assertion involves
-only projection maps, and imposes no base-change compatibility. -/
+/-- The explicitly constructed graph compositor preserves the projection maps
+(`ProjectionCompCompatible`). -/
 theorem sfGraphCompactSupportCompIso_projection
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)

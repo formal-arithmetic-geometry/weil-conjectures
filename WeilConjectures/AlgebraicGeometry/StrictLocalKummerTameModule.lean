@@ -18,8 +18,8 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 /-!
 # Strict-local compatible-root tameness
 
-Source: the strict-local tame condition in paragraph (3) of the direct-image proof,
-blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-ctf-stability.
+This formalises the strict-local tame condition used in the proof of constructibility of
+direct images.
 -/
 
 @[expose] public noncomputable section

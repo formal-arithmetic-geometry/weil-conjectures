@@ -32,28 +32,10 @@ private theorem stalk_transport_cancel (X : Scheme.{u}) (x y : X) (h : x = y) :
   subst y
   simp
 
-/-- Every cotangent functional is realized by a dual-number tangent vector.
-This is only the inverse construction; it asserts neither a linear map on tangent vectors
-nor its injectivity.
-Source: Stacks Project, Tags 0B2D and 0B2E, with base `Spec k`.
-
-Proof:
-1. Let `s : k → R` be the structural field map and let `c(a)` be the inverse under `r`
-   of the residue of `a`. The element `a - s (c(a))` belongs to the maximal ideal, since its
-   residue is zero. Apply the given functional to its cotangent class to define `D(a)`.
-2. This function is additive and vanishes on `s(k)`. Write `a = s(c(a)) + a'` and
-   `b = s(c(b)) + b'` with `a', b'` in the maximal ideal. Their product `a' b'` has zero
-   cotangent class. Expanding the product and using linearity gives the residue-valued
-   Leibniz identity. Thus `a ↦ inl (residue a) + inr (r (D(a)))` is a ring homomorphism.
-3. This homomorphism is local: the maximal ideal maps into the epsilon ideal, and an element
-   with nonzero residue maps to a unit. The Spec-local-ring correspondence gives a morphism
-   to `X` taking the closed point to `x`. Reducing the homomorphism gives the canonical residue
-   map, so the morphism restricts to `X.fromSpecResidueField x`. Its restriction on `s(k)`
-   consists of constants; hence the morphism is over `Spec k`, and is a tangent vector.
-4. For `a` in the maximal ideal, `c(a) = 0`, so the constructed coefficient is exactly the
-   prescribed functional on the class of `a`. The stalk map of the constructed morphism is
-   the local homomorphism used in the construction, by the inverse identity in the
-   Spec-local-ring correspondence. This gives both displayed formulas. -/
+/-- At a rational point `x`, every `k`-linear functional `ℓ` on the cotangent space is realized
+by a dual-number tangent vector `θ` at `x`: the stalk map of `θ` is
+`a ↦ inl (residue a) + inr (r (D a))` for a function `D` that agrees with `ℓ` on the classes of
+elements of the maximal ideal. Stacks Project, Tags 0B2D and 0B2E. -/
 theorem exists_rationalCotangent_tangent_realization
     (k : Type u) [Field k] (X : Scheme.{u}) (p : X ⟶ Spec (.of k)) (x : X) :
     let R := X.presheaf.stalk x

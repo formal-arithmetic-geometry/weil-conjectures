@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenIntersectionProperty
 /-!
 # Induction principle for quasi-compact opens
 
-Source: literature/stacks-project/coherent.tex, Cohomology of Schemes, Lemma 08DR.
+Source: Stacks Project, Cohomology of Schemes, Lemma 08DR.
 -/
 
 @[expose] public section
@@ -25,24 +25,9 @@ open TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- Stacks Project, Cohomology of Schemes, Lemma 08DR: induction for quasi-compact opens.
-
-First handle separated quasi-compact opens using finite affine covers.
-Induct on their size. The empty
-open is affine. Adjoin the last affine V to the union U of the preceding charts.
-Each chart's intersection with V is affine by
-`lem-weil-pbc-separated-affine-open-intersection`. Thus both U and U ∩ V have
-shorter covers and satisfy P by induction. Their separatedness follows from open
-immersions and composition (`lem-weil-pbc-separated-cancellation` and
-`lem-weil-pbc-proper-fp-permanence`). Apply the gluing hypothesis.
-
-For any quasi-compact open W, induct on a finite affine cover in the same way.
-Quasi-separatedness makes U ∩ V quasi-compact.
-It is separated as an
-open of affine V (`lem-sc-separated-over-affine-scheme-separated` and
-`lem-weil-pbc-separated-cancellation`). Apply
-`lem-sc-invert-s-cohomology-separated-induction` to it, the induction hypothesis
-to U, and the affine hypothesis to V, then glue. Finally take W = X. -/
+/-- Induction for quasi-compact opens: on a quasi-compact quasi-separated scheme `X`, a
+property `P` of opens that holds for affine opens and passes from `U`, `V`, `U ⊓ V` to `U ⊔ V`
+(for `U` quasi-compact and `V` affine) holds for every quasi-compact open. Stacks Tag 08DR. -/
 theorem quasiCompactOpen_induction (X : Scheme.{u}) [CompactSpace X]
     [QuasiSeparatedSpace X] (P : X.Opens → Prop)
     (h_affine : ∀ U : X.Opens, IsAffineOpen U → P U)

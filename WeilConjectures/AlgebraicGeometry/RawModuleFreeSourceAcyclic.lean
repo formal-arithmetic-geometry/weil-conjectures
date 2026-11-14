@@ -70,20 +70,9 @@ private noncomputable def rawSourceSectionsIso
       Adjunction.homEquiv_naturality_right]
     rfl)
 
-/-- Forgotten injective modules are acyclic for sections corepresented by this source.
-Source: Stacks Project, Tag 03FD, second proof paragraph and the sections adjunction.
-
-Proof: Pullback of the represented sheaf U is represented by X times_S U.
-Pullback commutes with free abelian sheafification. Thus the source in the
-statement is the free abelian sheaf of that etale object of X. Sheafification,
-free abelian and Yoneda adjunctions give a natural additive isomorphism from
-Hom(source,-) to evaluation at X times_S U. Right derived functors respect this
-isomorphism. Tag 03FD gives zero positive right derived evaluation on the
-underlying abelian sheaf of every injective module sheaf. One may transport
-ModuleCat-valued sheaves to modules over the constant ring sheaf without
-changing underlying sections or injectivity. Therefore the rightAcyclic
-condition holds in every positive degree. The empty object and zero ring give
-the same conclusion; the underlying abelian sheaf need not be injective. -/
+/-- Forgotten injective modules are acyclic for sections corepresented by the pullback along `f`
+of the free abelian sheaf on `U`: the underlying abelian sheaf of an injective module sheaf `I` is
+right acyclic for `Hom` out of this source. Stacks Project, Tag 03FD. -/
 theorem rawModuleFreeSource_acyclic
     (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (f : X ⟶ S)
     (U : S.Etale) (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

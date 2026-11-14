@@ -216,38 +216,10 @@ private theorem exists_nonpositive_flat_quasiIso (Y : Scheme.{u})
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The ordinary affine tensor comparison is compatible with one augmented algebraic
-comparison for each basic inclusion. Independence of the supplied comparison is not
-part of this statement.
-
-Source: Stacks Project, Tag 08DX(2), affine calculation, Tags 06YG and 06YB for
-K-flat comparison, Tag 01I9 for affine sections, and Tag 00LS(1) for existence of lifts.
-
-Proof: Apply the functorial bounded-above flat replacement to B[0], which
-vanishes in positive degrees. It supplies r:E -> B[0], with E nonpositive
-and termwise flat. Bounded-above flatness makes E K-flat. The new bounded
-chart lemma supplies its affine coordinates and restriction formula for
-supplied augmented algebraic comparison maps.
-
-Compare E and K over B[0] in the derived category. A common roof gives two
-quasi-isomorphisms from a common complex; replace that complex by a K-flat
-resolution F. Both maps F -> E and F -> K remain quasi-isomorphisms after
-tensoring with B[0]. Here the proof uses a K-flat replacement of B[0] in a
-commuting tensor square: tensoring a quasi-isomorphism with a K-flat factor
-is a quasi-isomorphism by the cone criterion, and the other two sides are
-quasi-isomorphisms for the same reason. Two-of-three proves the fourth side.
-Taking homology and inverting one leg gives an isomorphism of sheaves
-H^{-n}(E tensor B[0]) -> H^{-n}(K tensor B[0]). Compose every E-coordinate
-with its induced linear equivalence on sections to obtain c_U.
-
-For a basic inclusion, ideal restriction gives the containment required by
-exists_quotient_resolution_tensor_comparison. Apply it to the two chosen
-projective resolutions to construct psi, a, and k and their three equations.
-The bounded chart lemma gives their restriction equation for E. Naturality
-of the homology sheaf isomorphism transports this equation to K. No chain
-inverse, coherence of a chosen family of chain lifts, or data definition
-from a mere existence assertion is introduced. The construction covers zero
-rings, the zero quotient, degree zero, and empty basic opens. -/
+/-- For a K-flat resolution `K` of `i_* 𝒪_Z`, the `-n`-th homology of `K ⊗ (i_* 𝒪_Z)[0]` has
+affine quotient-tensor coordinates compatible with one augmented algebraic comparison for each
+basic inclusion. Independence of the supplied comparison is not part of this statement.
+Stacks Project, Tags 08DX(2), 06YG, 06YB, 01I9 and 00LS(1). -/
 theorem exists_selfTor_ordinary_localized_comparisons
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [IsClosedImmersion i]

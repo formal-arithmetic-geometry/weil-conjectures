@@ -23,25 +23,8 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency true in
-/-- The concrete scalar comparison commutes with the five-factor raw pullback.
-Source: Stacks Project, Tags 03FD and 03Q8, with the inverse-image adjunction of 03D7.
-
-Proof: Expand rawModuleAbelianHomMap and both raw pullbacks. The Kan-extension and
-sheafification comparisons commute with their units. Under the inverse-image
-adjunction their inverse therefore corresponds to the underlying module unit.
-Naturality of this unit and the adjunction triangle identity show that its
-composition comparison
-commutes with upperStarComp. The same calculation applied to freeMap moves
-the source generator comparison across the first pullback factor. The single
-comparison commutes with scalar forgetting by naturality of
-mapDerivedCategoryPlusSingleFunctor. Functoriality of derived forgetting moves
-the class itself through the third factor. Compatibility of its commShiftIso
-with the single comparison identifies the fourth factor. Finally the mate
-composition equation identifies the inverse coefficient comparison with the
-abelian upperStarComp inverse in the fifth factor. Associativity gives the
-stated equality. No invertibility of the raw Hom map is needed in this argument;
-in particular this is independent of the acyclicity argument of Tag 03FD.
-The computation also applies to identity arrows, degree zero and empty objects. -/
+/-- The concrete scalar comparison `rawModuleAbelianHomMap` commutes with the five-factor raw
+pullback along morphisms in `Over W`. Stacks Project, Tags 03FD, 03Q8 and 03D7. -/
 theorem rawModuleAbelianHomMap_naturality
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale) :

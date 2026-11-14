@@ -31,12 +31,7 @@ noncomputable def regularCoefficientMap : regular R ⟶ (comap φ).obj (regular 
     rw [IsMonHom.mul_hom, tensorHom_def']
     exact Category.assoc _ _ _)
 
-/-- Extension of scalars sends the regular module to the regular module.
-Source: the extension--restriction adjunction and the universal property of the regular module.
-
-Proof: extend the coefficient map. In the other direction use the unique S-linear map
-sending 1 to the image of 1 under the adjunction unit. The two composite identities follow
-from the regular-module universal property and the adjunction identities. -/
+/-- Extension of scalars sends the regular module to the regular module. -/
 noncomputable def regularExtensionIso :
     (extendScalars φ).obj (regular R) ≅ regular S := by
   let h := regularCoefficientMap φ

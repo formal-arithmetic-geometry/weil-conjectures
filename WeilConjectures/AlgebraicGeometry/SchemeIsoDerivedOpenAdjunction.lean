@@ -56,25 +56,7 @@ private theorem exists_adjunction_of_square
 set_option backward.isDefEq.respectTransparency false in
 /-- Open restriction has derived right adjoints whose units correspond under any
 derived equivalence specified by isomorphism pushforward.
-Source: Stacks Project, Tags 079W and 09IR; step 2 of
-lem-pc-affine-derived-open-transport.
-
-Proof: Apply exists_scheme_iso_derived_restriction_square to obtain an equivalence
-on the two localized open derived categories and a commuting restriction square.
-The underived overFunctor is a left adjoint and is exact. Its right adjoint is
-additive. The localized module-sheaf category is Grothendieck abelian by the small
-ringed-site resolution theorem, hence has K-injective resolutions. The unbounded
-derived adjunction for an exact left adjoint therefore supplies a right adjoint RY
-to derived restriction on Y. Compose this adjunction on the left with the global
-equivalence adjunction and on the right with the inverse open equivalence
-adjunction. The restriction square and the open equivalence unit identify its
-left adjoint with derived restriction on X, yielding RX and adjX. The unit of the
-composite adjunction is the image of the Y unit composed with equivalence units;
-the change of left adjoint composes it with one more isomorphism. Cancel these
-isomorphisms and use that e.inverse reflects isomorphisms. This identifies
-invertibility with the Y unit at e.functor.obj (e.inverse.obj K). Naturality of
-that unit along e.counitIso.app K gives invertibility at K. Empty and full opens
-use the same argument. -/
+Stacks Project, Tags 079W and 09IR. -/
 theorem exists_scheme_iso_derived_open_adjunction {X Y : Scheme.{u}} (s : X ≅ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

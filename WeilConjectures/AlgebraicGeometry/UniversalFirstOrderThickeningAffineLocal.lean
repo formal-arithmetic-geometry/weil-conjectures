@@ -29,8 +29,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Enlarge an open base using the existing open-pieces theorem, after identifying
-an open immersion's source with its open image. -/
+/-- A universal first order thickening of `Z` over `U` stays universal over `X` after
+composing the structure morphisms with an open immersion `s : U ⟶ X`. -/
 private theorem universal_over_openImmersion
     {Z Z' U X : Scheme.{u}} (g : Z ⟶ U) (i : Z ⟶ Z') (g' : Z' ⟶ U)
     (s : U ⟶ X) [IsOpenImmersion s]
@@ -100,12 +100,9 @@ private theorem exists_affine_thickening {Z X : Scheme.{u}}
         simpa only [h', Category.assoc, Iso.hom_inv_id, Category.comp_id] using hc'.1
       · simpa only [i, Category.assoc] using hc'.2
 
-/-- The affine pieces of the square-zero construction and their gluing produce a
-first-order thickening which has the universal lifting property for affine tests.
-Source: Stacks, More on Morphisms, Lemma 37.7.1 (Tag 04F3), affine construction.
-Proof: choose an affine open cover, apply the affine square-zero construction, glue
-the pieces using uniqueness on overlaps, and verify the lifting property whenever
-both the test schemes are affine. -/
+/-- A formally unramified morphism `h : Z ⟶ X` admits a first-order thickening of `Z` over
+`X` with the universal lifting property for affine test schemes.
+Source: Stacks, More on Morphisms, Lemma 37.7.1 (Tag 04F3). -/
 theorem FormallyUnramified.exists_affine_local_universalFirstOrderThickening
     {Z X : Scheme.{u}} (h : Z ⟶ X) [FormallyUnramified h] :
     ∃ (Z' : Scheme.{u}) (i : Z ⟶ Z') (h' : Z' ⟶ X),
