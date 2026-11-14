@@ -9,8 +9,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # The unshifted target of an exact realization composite -/
 
-/- Repair note: this explicit constructor is delivered together with its DAG node. -/
-
 @[expose] public noncomputable section
 set_option autoImplicit false
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits

@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerSystemInte
 
 /-! # Finite scalar restriction in the realization's coefficient category -/
 
-/- Repair note: this source is included with its new DAG node so the interface packet
-   carries the declaration and its recorded lean.file together. -/
-
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
