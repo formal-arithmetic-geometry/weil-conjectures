@@ -51,6 +51,66 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
+-- Cancel the inverse tensor comparison before specializing to derived categories.
+private theorem tensorComparison_of_oplax
+    {C D : Type*} [Category C] [Category D] (Q : C ⥤ D)
+    {A B : C} {X Y U V : D} (d : A ⟶ B) (m : B ⟶ A) (e : X ≅ Y)
+    (f : X ⟶ U) (f' : U ⟶ Q.obj A) (t : Y ⟶ V) (t' : V ⟶ Q.obj B)
+    (h : e.hom ≫ t ≫ t' = f ≫ f' ≫ Q.map d) (hd : d ≫ m = 𝟙 _) :
+    e.inv ≫ f ≫ f' = t ≫ t' ≫ Q.map m := by
+  rw [← cancel_epi e.hom, Iso.hom_inv_id_assoc, reassoc_of% h,
+    ← Q.map_comp, hd, Q.map_id, Category.comp_id]
+
+-- The formal mate calculation only uses the comparison squares and their unit/counit formulas.
+private theorem projectionMap_of_comparison
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory C'] [MonoidalCategory D']
+    {L : D ⥤ C} {G : C ⥤ D} {L' : D' ⥤ C'} {G' : C' ⥤ D'} [G'.Monoidal]
+    (adj : L ⊣ G) (adj' : L' ⊣ G') (Q : C ⥤ C') (R : D ⥤ D')
+    [Q.LaxMonoidal] [R.LaxMonoidal]
+    (a : R ⋙ L' ≅ L ⋙ Q) (b : Q ⋙ G' ≅ G ⋙ R) (A : C) (T : D)
+    (m : G.obj A ⊗ G.obj (L.obj T) ⟶ G.obj (A ⊗ L.obj T))
+    (hu : adj'.unit.app (R.obj T) =
+      R.map (adj.unit.app T) ≫ b.inv.app (L.obj T) ≫ G'.map (a.inv.app T))
+    (hc : adj'.counit.app (Q.obj (A ⊗ L.obj T)) =
+      L'.map (b.hom.app (A ⊗ L.obj T)) ≫ a.hom.app (G.obj (A ⊗ L.obj T)) ≫
+        Q.map (adj.counit.app (A ⊗ L.obj T)))
+    (hm : Functor.LaxMonoidal.μ G' (Q.obj A) (Q.obj (L.obj T)) ≫
+      G'.map (Functor.LaxMonoidal.μ Q A (L.obj T)) ≫ b.hom.app (A ⊗ L.obj T) =
+      (b.hom.app A ⊗ₘ b.hom.app (L.obj T)) ≫
+        Functor.LaxMonoidal.μ R (G.obj A) (G.obj (L.obj T)) ≫ R.map m)
+    (p : L.obj (G.obj A ⊗ T) ⟶ A ⊗ L.obj T)
+    (hp : L.map (G.obj A ◁ adj.unit.app T ≫ m) ≫ adj.counit.app (A ⊗ L.obj T) = p) :
+    (Functor.Monoidal.projectionMap adj' (Q.obj A)).app (R.obj T) ≫
+      (Q.obj A ◁ a.hom.app T) ≫ Functor.LaxMonoidal.μ Q A (L.obj T) =
+    L'.map ((b.hom.app A ▷ R.obj T) ≫ Functor.LaxMonoidal.μ R (G.obj A) T) ≫
+      a.hom.app (G.obj A ⊗ T) ≫ Q.map p := by
+  rw [← hp]
+  simp only [Functor.Monoidal.projectionMap, Category.assoc]
+  have hn := (adj'.counit.naturality
+    (Q.obj A ◁ a.hom.app T ≫ Functor.LaxMonoidal.μ Q A (L.obj T))).symm
+  dsimp only [Functor.comp_obj, Functor.id_obj, Functor.comp_map, Functor.id_map] at hn
+  rw [hn, hc, hu]
+  simp only [Functor.map_comp, Category.assoc]
+  have ha' {Y Y' : D} (f : Y ⟶ Y') :
+      a.hom.app Y ≫ Q.map (L.map f) = L'.map (R.map f) ≫ a.hom.app Y' :=
+    (a.hom.naturality f).symm
+  rw [reassoc_of% ha', reassoc_of% ha']
+  simp only [← Functor.map_comp_assoc]
+  congr 2
+  have ha : (Q.obj A ◁ a.inv.app T) ≫ (Q.obj A ◁ a.hom.app T) = 𝟙 _ := by
+    rw [← MonoidalCategory.whiskerLeft_comp, Iso.inv_hom_id_app,
+      MonoidalCategory.whiskerLeft_id]
+  simp only [MonoidalCategory.whiskerLeft_comp, Functor.map_comp, Category.assoc]
+  rw [reassoc_of% (Functor.LaxMonoidal.μ_natural_right G' (Q.obj A) (a.inv.app T))]
+  rw [← Functor.map_comp_assoc G', ha]
+  erw [CategoryTheory.Functor.map_id]
+  rw [Category.id_comp, hm, MonoidalCategory.tensorHom_def, Category.assoc]
+  erw [whisker_exchange_assoc]
+  erw [← MonoidalCategory.whiskerLeft_comp_assoc, Iso.inv_hom_id_app,
+    MonoidalCategory.whiskerLeft_id, Category.id_comp, whisker_exchange_assoc]
+  erw [reassoc_of% (Functor.LaxMonoidal.μ_natural_right R (G.obj A) (adj.unit.app T))]
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -116,15 +176,96 @@ instance preservesColimitsOfShape_weaklyEtaleLowerShriek_discrete_π (j : ℤ) :
     (weaklyEtaleLowerShriekUpperStarAdjunction Λ g).leftAdjoint_preservesColimits
   inferInstance
 
-set_option synthInstance.maxHeartbeats 400000 in
--- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology X) Ab) _`
 /-- The pullback of module objects is monoidal on cochain complexes. -/
 noncomputable instance monoidal_upperStar_mapHomologicalComplex :
     ((g)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)).Monoidal :=
   Functor.mapCochainComplexMonoidal _
 
-set_option maxHeartbeats 3200000 in
--- the chase unfolds the derived unit, counit and tensor comparison on complexes of module objects
+open HomotopyCategory DerivedCategory in
+private lemma weaklyEtaleProjection_unit
+    (T : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1})
+      (condensedRingObj Λ W)) (.up ℤ)) :
+    (derivedWeaklyEtaleLowerShriekLeftDerivedUpperStarAdjunction Λ g).unit.app (Qh.obj T) =
+      Qh.map (((weaklyEtaleLowerShriekUpperStarAdjunction Λ g).mapHomotopyCategory
+        (.up ℤ)).unit.app T) ≫
+      (asIso ((g)^*⟦Λ⟧.leftDerivedFunctorCounit)).inv.app
+        (((weaklyEtaleLowerShriek Λ g).mapHomotopyCategory (.up ℤ)).obj T) ≫
+      L((g)^*⟦Λ⟧).map ((weaklyEtaleLowerShriek Λ g).mapDerivedCategoryFactorsh.inv.app T) := by
+  unfold derivedWeaklyEtaleLowerShriekLeftDerivedUpperStarAdjunction
+  rw [Adjunction.localization_unit_app]
+  rfl
+
+open HomotopyCategory DerivedCategory in
+private lemma weaklyEtaleProjection_counit
+    (A : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) (.up ℤ)) :
+    (derivedWeaklyEtaleLowerShriekLeftDerivedUpperStarAdjunction Λ g).counit.app (Qh.obj A) =
+      (weaklyEtaleLowerShriek Λ g).mapDerivedCategory.map
+        ((g)^*⟦Λ⟧.leftDerivedFunctorCounit.app A) ≫
+      (weaklyEtaleLowerShriek Λ g).mapDerivedCategoryFactorsh.hom.app
+        (((g)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj A) ≫
+      Qh.map (((weaklyEtaleLowerShriekUpperStarAdjunction Λ g).mapHomotopyCategory
+        (.up ℤ)).counit.app A) := by
+  unfold derivedWeaklyEtaleLowerShriekLeftDerivedUpperStarAdjunction
+  rw [Adjunction.localization_counit_app]
+  rfl
+
+omit [WeaklyEtale g] in
+open HomotopyCategory DerivedCategory in
+private lemma weaklyEtaleProjection_tensorComparison
+    (K₁ K₂ : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) ℤ) :
+    Functor.LaxMonoidal.μ L((g)^*⟦Λ⟧) (Qh.obj ((quotient _ _).obj K₁))
+      (Qh.obj ((quotient _ _).obj K₂)) ≫
+    L((g)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ Qh ((quotient _ _).obj K₁)
+      ((quotient _ _).obj K₂)) ≫
+    (g)^*⟦Λ⟧.leftDerivedFunctorCounit.app ((quotient _ _).obj K₁ ⊗
+      (quotient _ _).obj K₂) =
+    ((g)^*⟦Λ⟧.leftDerivedFunctorCounit.app ((quotient _ _).obj K₁) ⊗ₘ
+      (g)^*⟦Λ⟧.leftDerivedFunctorCounit.app
+        ((quotient _ _).obj K₂)) ≫
+    Functor.LaxMonoidal.μ Qh (((g)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj
+        ((quotient _ _).obj K₁))
+      (((g)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj
+        ((quotient _ _).obj K₂)) ≫
+    Qh.map ((quotient _ _).map (Functor.LaxMonoidal.μ ((g)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ))
+      K₁ K₂)) := by
+  have h := leftDerivedUpperStarTensor_laxSquare Λ g
+    ((quotient _ _).obj K₁) ((quotient _ _).obj K₂)
+  exact tensorComparison_of_oplax Qh
+    ((quotient _ _).map (Functor.OplaxMonoidal.δ
+      ((g)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)) K₁ K₂))
+    ((quotient _ _).map (Functor.LaxMonoidal.μ
+      ((g)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)) K₁ K₂))
+    (Functor.Monoidal.μIso L((g)^*⟦Λ⟧) _ _).symm
+    _ _ _ _ h (by rw [← Functor.map_comp, Functor.Monoidal.δ_μ,
+      CategoryTheory.Functor.map_id])
+
+open HomotopyCategory in
+private lemma weaklyEtaleProjection_mapProjection
+    (K : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) ℤ)
+    (T : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1})
+      (condensedRingObj Λ W)) ℤ) :
+    ((weaklyEtaleLowerShriek Λ g).mapHomotopyCategory (.up ℤ)).map
+      ((((g)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj ((quotient _ _).obj K) ◁
+        ((weaklyEtaleLowerShriekUpperStarAdjunction Λ g).mapHomotopyCategory (.up ℤ)).unit.app
+          ((quotient _ _).obj T)) ≫
+        (quotient _ _).map (Functor.LaxMonoidal.μ ((g)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ))
+          K (((weaklyEtaleLowerShriek Λ g).mapHomologicalComplex (.up ℤ)).obj T))) ≫
+      ((weaklyEtaleLowerShriekUpperStarAdjunction Λ g).mapHomotopyCategory (.up ℤ)).counit.app
+        ((quotient _ _).obj K ⊗
+          ((weaklyEtaleLowerShriek Λ g).mapHomotopyCategory (.up ℤ)).obj ((quotient _ _).obj T)) =
+    (quotient _ _).map
+      ((Functor.Monoidal.projectionMap
+        ((weaklyEtaleLowerShriekUpperStarAdjunction Λ g).mapHomologicalComplex
+          (.up ℤ)) K).app T) := by
+  erw [Adjunction.mapHomotopyCategory_unit_app_quotient,
+    Adjunction.mapHomotopyCategory_counit_app_quotient]
+  erw [← HomotopyCategory.MonoidalCategory.quotient_map_whiskerLeft']
+  rw [← Functor.map_comp, Functor.mapHomotopyCategory_map, ← Functor.map_comp]
+  rfl
+
 open HomotopyCategory DerivedCategory in
 /-- On objects coming from cochain complexes, the derived projection map of `Dg_! ⊣ Lg^*` is
 the image of the projection map on cochain complexes, up to the tensor comparison maps of
@@ -150,101 +291,18 @@ lemma projectionMap_derivedWeaklyEtaleLowerShriek_app_Qh
         Qh.map ((quotient _ _).map ((Functor.Monoidal.projectionMap
           ((weaklyEtaleLowerShriekUpperStarAdjunction Λ g).mapHomologicalComplex
             (.up ℤ)) K₁).app T₁)) := by
-  simp only [Functor.Monoidal.projectionMap, Category.assoc]
-  have hn := ((derivedWeaklyEtaleLowerShriekLeftDerivedUpperStarAdjunction Λ g).counit.naturality
-    (Qh.obj ((quotient _ _).obj K₁) ◁
-      (weaklyEtaleLowerShriek Λ g).mapDerivedCategoryFactorsh.hom.app
-        ((quotient _ _).obj T₁) ≫
-      Functor.LaxMonoidal.μ Qh ((quotient _ _).obj K₁)
-        (((weaklyEtaleLowerShriek Λ g).mapHomotopyCategory (.up ℤ)).obj
-          ((quotient _ _).obj T₁)))).symm
-  dsimp only [Functor.comp_obj, Functor.id_obj, Functor.comp_map, Functor.id_map] at hn
-  rw [hn]
-  simp only [derivedWeaklyEtaleLowerShriekLeftDerivedUpperStarAdjunction]
-  erw [Adjunction.localization_counit_app, Adjunction.localization_unit_app]
-  dsimp only [CatCommSq.iso, Iso.symm_hom, Iso.symm_inv, asIso_hom, asIso_inv]
-  erw [Adjunction.mapHomotopyCategory_unit_app_quotient,
-    Adjunction.mapHomotopyCategory_counit_app_quotient]
-  conv_rhs => rw [Functor.map_comp, Functor.map_comp, ← Functor.mapHomotopyCategory_map]
-  conv_rhs => simp only [Functor.map_comp, Category.assoc]
-  have hφ : ∀ {Y Y' : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1})
-      (condensedRingObj Λ W)) (.up ℤ)} (f : Y ⟶ Y'),
-      (weaklyEtaleLowerShriek Λ g).mapDerivedCategoryFactorsh.hom.app Y ≫
-        Qh.map (((weaklyEtaleLowerShriek Λ g).mapHomotopyCategory (.up ℤ)).map f) =
-      (weaklyEtaleLowerShriek Λ g).mapDerivedCategory.map (Qh.map f) ≫
-        (weaklyEtaleLowerShriek Λ g).mapDerivedCategoryFactorsh.hom.app Y' :=
-    fun f ↦ ((weaklyEtaleLowerShriek Λ g).mapDerivedCategoryFactorsh.hom.naturality f).symm
-  rw [reassoc_of% hφ, reassoc_of% hφ]
-  simp only [← Functor.map_comp_assoc, Category.assoc]
-  congr 2
-  have key : Functor.LaxMonoidal.μ L((g)^*⟦Λ⟧) (Qh.obj ((quotient _ _).obj K₁))
-        (Qh.obj (((weaklyEtaleLowerShriek Λ g).mapHomotopyCategory (.up ℤ)).obj
-          ((quotient _ _).obj T₁))) ≫
-      L((g)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ Qh ((quotient _ _).obj K₁)
-        (((weaklyEtaleLowerShriek Λ g).mapHomotopyCategory (.up ℤ)).obj
-          ((quotient _ _).obj T₁))) ≫
-      (g)^*⟦Λ⟧.leftDerivedFunctorCounit.app ((quotient _ _).obj K₁ ⊗
-        ((weaklyEtaleLowerShriek Λ g).mapHomotopyCategory (.up ℤ)).obj
-          ((quotient _ _).obj T₁)) =
-      ((g)^*⟦Λ⟧.leftDerivedFunctorCounit.app ((quotient _ _).obj K₁) ⊗ₘ
-        (g)^*⟦Λ⟧.leftDerivedFunctorCounit.app
-          (((weaklyEtaleLowerShriek Λ g).mapHomotopyCategory (.up ℤ)).obj
-            ((quotient _ _).obj T₁))) ≫
-      Functor.LaxMonoidal.μ Qh (((g)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj
-          ((quotient _ _).obj K₁))
-        (((g)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj
-          (((weaklyEtaleLowerShriek Λ g).mapHomotopyCategory (.up ℤ)).obj
-            ((quotient _ _).obj T₁))) ≫
-      Qh.map ((quotient _ _).map (Functor.LaxMonoidal.μ ((g)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ))
-        K₁ (((weaklyEtaleLowerShriek Λ g).mapHomologicalComplex (.up ℤ)).obj T₁))) := by
-    have h := leftDerivedUpperStarTensor_laxSquare Λ g ((quotient _ _).obj K₁)
-      (((weaklyEtaleLowerShriek Λ g).mapHomotopyCategory (.up ℤ)).obj
-        ((quotient _ _).obj T₁))
-    rw [← cancel_epi (Functor.OplaxMonoidal.δ L((g)^*⟦Λ⟧) _ _), Functor.Monoidal.δ_μ_assoc]
-    erw [reassoc_of% h]
-    rw [← Functor.map_comp DerivedCategory.Qh]
-    have hδ : Functor.OplaxMonoidal.δ ((g)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ))
-        ((quotient _ _).obj K₁)
-        (((weaklyEtaleLowerShriek Λ g).mapHomotopyCategory (.up ℤ)).obj
-          ((quotient _ _).obj T₁)) ≫
-        (quotient _ _).map (Functor.LaxMonoidal.μ ((g)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)) K₁
-          (((weaklyEtaleLowerShriek Λ g).mapHomologicalComplex (.up ℤ)).obj T₁)) =
-        𝟙 _ := by
-      change (quotient _ _).map (Functor.OplaxMonoidal.δ
-        ((g)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ))
-        K₁ (((weaklyEtaleLowerShriek Λ g).mapHomologicalComplex (.up ℤ)).obj T₁)) ≫
-        _ = _
-      rw [← Functor.map_comp, Functor.Monoidal.δ_μ]
-      exact CategoryTheory.Functor.map_id _ _
-    erw [hδ, CategoryTheory.Functor.map_id]
-    rw [Category.comp_id]
-  have hφ' : (Qh.obj ((quotient _ _).obj K₁) ◁
-      (weaklyEtaleLowerShriek Λ g).mapDerivedCategoryFactorsh.inv.app
-        ((quotient _ _).obj T₁)) ≫ (Qh.obj ((quotient _ _).obj K₁) ◁
-      (weaklyEtaleLowerShriek Λ g).mapDerivedCategoryFactorsh.hom.app
-        ((quotient _ _).obj T₁)) = 𝟙 _ := by
-    rw [← MonoidalCategory.whiskerLeft_comp, Iso.inv_hom_id_app, MonoidalCategory.whiskerLeft_id]
-  simp only [MonoidalCategory.whiskerLeft_comp, Functor.map_comp, Category.assoc]
-  have hμ := Functor.LaxMonoidal.μ_natural_right L((g)^*⟦Λ⟧) (Qh.obj ((quotient _ _).obj K₁))
-    ((weaklyEtaleLowerShriek Λ g).mapDerivedCategoryFactorsh.inv.app
-      ((quotient _ _).obj T₁))
-  rw [reassoc_of% hμ]
-  rw [← Functor.map_comp_assoc L((g)^*⟦Λ⟧), hφ']
-  erw [CategoryTheory.Functor.map_id]
-  rw [Category.id_comp]
-  rw [key, MonoidalCategory.tensorHom_def, Category.assoc]
-  erw [whisker_exchange_assoc]
-  rw [← MonoidalCategory.whiskerLeft_comp_assoc,
-    NatIso.isIso_inv_app, IsIso.inv_hom_id, MonoidalCategory.whiskerLeft_id, Category.id_comp,
-    whisker_exchange_assoc]
-  congr 1
-  have hq := Functor.LaxMonoidal.μ_natural_right Qh
-    (((g)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj ((quotient _ _).obj K₁))
-    ((quotient _ _).map (((weaklyEtaleLowerShriekUpperStarAdjunction Λ g).mapHomologicalComplex
-      (.up ℤ)).unit.app T₁))
-  erw [reassoc_of% hq]
-  erw [← HomotopyCategory.MonoidalCategory.quotient_map_whiskerLeft']
-  rfl
+  exact projectionMap_of_comparison
+    ((weaklyEtaleLowerShriekUpperStarAdjunction Λ g).mapHomotopyCategory (.up ℤ))
+    (derivedWeaklyEtaleLowerShriekLeftDerivedUpperStarAdjunction Λ g) Qh Qh
+    (weaklyEtaleLowerShriek Λ g).mapDerivedCategoryFactorsh
+    (asIso ((g)^*⟦Λ⟧.leftDerivedFunctorCounit))
+    ((quotient _ _).obj K₁) ((quotient _ _).obj T₁)
+    ((quotient _ _).map (Functor.LaxMonoidal.μ ((g)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ))
+      K₁ (((weaklyEtaleLowerShriek Λ g).mapHomologicalComplex (.up ℤ)).obj T₁)))
+    (weaklyEtaleProjection_unit Λ g _) (weaklyEtaleProjection_counit Λ g _)
+    (weaklyEtaleProjection_tensorComparison Λ g K₁
+      (((weaklyEtaleLowerShriek Λ g).mapHomologicalComplex (.up ℤ)).obj T₁))
+    _ (weaklyEtaleProjection_mapProjection Λ g K₁ T₁)
 
 -- the K-flat derivability structure on complexes of module objects is found by instance search
 /-- The lax monoidal structure `Qh K ⊗ᴸ Qh M ⟶ Qh (K ⊗ M)` of `Qh` on complexes of module
