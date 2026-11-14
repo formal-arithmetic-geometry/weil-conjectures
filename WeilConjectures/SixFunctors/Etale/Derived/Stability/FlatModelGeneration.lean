@@ -193,10 +193,10 @@ variable (Λ) in
 Let `X` be Noetherian, `a = j ≫ g : U ⟶ X` a locally closed immersion (an open immersion
 `j : U ⟶ Ū` followed by a closed immersion `g : Ū ⟶ X`) and `L` a flat finite locally constant
 sheaf of `Λ`-modules on `U`. Then `a_! L = g_* j_! L` is a flat constructible sheaf, the derived
-`Rg_* Rj_! L` is `a_! L` placed in degree `0`, and it lies in `Dctf(X, Λ)` (Tor amplitude
-`[0, 0]`). -/
-theorem constructibleFiniteTor_rightDerivedLowerStar_rightDerivedLowerShriek [IsNoetherian X]
-    {U Ubar : Scheme.{u}} (j : U ⟶ Ubar) [IsOpenImmersion j] [HasCompactification j]
+`Rg_* j_! L` (with `j_!` the exact extension by zero) is `a_! L` placed in degree `0`, and it
+lies in `Dctf(X, Λ)` (Tor amplitude `[0, 0]`). -/
+theorem constructibleFiniteTor_rightDerivedLowerStar_openImmersionLowerShriek [IsNoetherian X]
+    {U Ubar : Scheme.{u}} (j : U ⟶ Ubar) [IsOpenImmersion j]
     (g : Ubar ⟶ X) [IsClosedImmersion g]
     (L : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf L]
     (hL : ObjectProperty.flat L) :
@@ -204,12 +204,12 @@ theorem constructibleFiniteTor_rightDerivedLowerStar_rightDerivedLowerShriek [Is
         ((j)_!open[ModuleCat.{u + 1} Λ].obj L)) ∧
       IsConstructibleSheaf ((g)_*[ModuleCat.{u + 1} Λ].obj
         ((j)_!open[ModuleCat.{u + 1} Λ].obj L)) ∧
-      Nonempty ((R((g)_*[ModuleCat.{u + 1} Λ])).obj ((R(j)_![ModuleCat.{u + 1} Λ]).obj
+      Nonempty ((R((g)_*[ModuleCat.{u + 1} Λ])).obj (D((j)_!open[ModuleCat.{u + 1} Λ]).obj
           ((_root_.DerivedCategory.singleFunctor _ 0).obj L)) ≅
         (_root_.DerivedCategory.singleFunctor _ 0).obj ((g)_*[ModuleCat.{u + 1} Λ].obj
           ((j)_!open[ModuleCat.{u + 1} Λ].obj L))) ∧
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-        ((R((g)_*[ModuleCat.{u + 1} Λ])).obj ((R(j)_![ModuleCat.{u + 1} Λ]).obj
+        ((R((g)_*[ModuleCat.{u + 1} Λ])).obj (D((j)_!open[ModuleCat.{u + 1} Λ]).obj
           ((_root_.DerivedCategory.singleFunctor _ 0).obj L))) := by
   have : TopologicalSpace.NoetherianSpace Ubar :=
     g.isClosedEmbedding.isInducing.noetherianSpace
@@ -227,13 +227,12 @@ theorem constructibleFiniteTor_rightDerivedLowerStar_rightDerivedLowerShriek [Is
       ((j)_!open[ModuleCat.{u + 1} Λ].obj L)) :=
     IsConstructibleSheaf.lowerStar_of_isClosedImmersion_of_quasiCompact g _
   have hf := flat_lowerStar_openImmersionLowerShriek j g hL
-  let e : (R((g)_*[ModuleCat.{u + 1} Λ])).obj ((R(j)_![ModuleCat.{u + 1} Λ]).obj
+  let e : (R((g)_*[ModuleCat.{u + 1} Λ])).obj (D((j)_!open[ModuleCat.{u + 1} Λ]).obj
       ((_root_.DerivedCategory.singleFunctor _ 0).obj L)) ≅
       (_root_.DerivedCategory.singleFunctor _ 0).obj ((g)_*[ModuleCat.{u + 1} Λ].obj
         ((j)_!open[ModuleCat.{u + 1} Λ].obj L)) :=
     (R((g)_*[ModuleCat.{u + 1} Λ])).mapIso
-        ((rightDerivedLowerShriekIsoOfIsOpenImmersion Λ j).app _ ≪≫
-          (((j)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app L) ≪≫
+        ((((j)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app L) ≪≫
       (Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory _ g).app _ ≪≫
       (((g)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app _
   refine ⟨hf, hc, ⟨e⟩, (constructibleFiniteTor _ X).prop_of_iso e.symm
@@ -242,19 +241,20 @@ theorem constructibleFiniteTor_rightDerivedLowerStar_rightDerivedLowerShriek [Is
 
 variable (Λ) in
 /-- Blueprint `lemma-flat-models-generators--2`, part (2): every generator of `ctfGenerators` (an
-object `Rg_* Rj_! L ≅ a_! L`) lies in `Dctf(X, Λ)`, for `X` Noetherian. -/
+object `Rg_* j_! L ≅ a_! L`) lies in `Dctf(X, Λ)`, for `X` Noetherian. -/
 theorem constructibleFiniteTor_of_ctfGenerators [IsNoetherian X]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : ctfGenerators Λ X K) : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K := by
-  obtain ⟨str, i, Ubar, j, _, _, g, _, -, -, L, _, hL, ⟨e⟩⟩ := hK
+  obtain ⟨str, i, Ubar, j, _, g, _, -, -, L, _, hL, ⟨e⟩⟩ := hK
   exact (constructibleFiniteTor _ X).prop_of_iso e.symm
-    (constructibleFiniteTor_rightDerivedLowerStar_rightDerivedLowerShriek Λ j g L hL).2.2.2
+    (constructibleFiniteTor_rightDerivedLowerStar_openImmersionLowerShriek Λ j g L hL).2.2.2
 
 variable (Λ) in
+omit [Finite Λ] in
 /-- Blueprint `lemma-flat-models-generators--2`, part (2): a flat constructible sheaf `F` on a
 Noetherian `X` is an iterated extension of the sheaves `a_! L` of its strata, in the form: every
 triangulated property of objects of `D(X_ét, Λ)`, closed under isomorphisms and holding for the
-generators `Rg_* Rj_! L ≅ a_! L` (`L` lisse and flat on a stratum), holds for `F` placed in
+generators `Rg_* j_! L ≅ a_! L` (`L` lisse and flat on a stratum), holds for `F` placed in
 degree `0`. This is the Noetherian induction on the open–closed sequences
 `0 ⟶ j_!(F|_U) ⟶ F ⟶ i_* i^* F ⟶ 0` of
 `AlgebraicGeometry.Etale.prop_rightDerivedLowerStar_of_flat`. -/
@@ -267,9 +267,9 @@ theorem prop_singleFunctor_of_flat [IsNoetherian X]
     P ((_root_.DerivedCategory.singleFunctor _ 0).obj F) :=
   P.prop_of_iso ((rightDerivedLowerStarIdIso Λ X).app _)
     (prop_rightDerivedLowerStar_of_flat Λ X P
-      (fun str i Ubar j _ _ g _ h₁ h₂ L _ hL ↦ hP _
-        ⟨str, i, Ubar, j, inferInstance, inferInstance, g, inferInstance, h₁, h₂, L,
-          inferInstance, hL, ⟨Iso.refl _⟩⟩)
+      (fun str i Ubar j _ g _ h₁ h₂ L _ hL ↦ hP _
+        ⟨str, i, Ubar, j, inferInstance, g, inferInstance, h₁, h₂, L, inferInstance, hL,
+          ⟨Iso.refl _⟩⟩)
       ⊤ (𝟙 X) (by simp) F hF)
 
 variable (Λ) in
@@ -280,7 +280,8 @@ Let `X` be a Noetherian scheme and `Λ` a finite commutative ring. Then `Dctf(X,
 smallest full subcategory of `D(X_ét, Λ)` containing the objects `a_! L` and closed under
 shifts, extensions (cones) and direct summands (`ObjectProperty.triangEnvelope`). Here
 `a = j ≫ g` is a locally closed immersion of a stratum `U` of a stratification of `X`, with
-`j : U ⟶ Ū` open and `g : Ū ⟶ X` the closed immersion of the closure, `a_! L = Rg_* Rj_! L`,
+`j : U ⟶ Ū` open and `g : Ū ⟶ X` the closed immersion of the closure, `a_! L = Rg_* j_! L`
+with `j_!` the extension by zero (as in the notes, no compactification of `j` is used),
 and `L` is locally constant and flat, equivalently with finite projective stalks
 (`AlgebraicGeometry.Etale.flat_iff_forall_projective_sheafFiber`); these are the objects of
 `AlgebraicGeometry.Etale.ctfGenerators`.
@@ -288,16 +289,16 @@ and `L` is locally constant and flat, equivalently with finite projective stalks
 The generators lie in `Dctf(X, Λ)` (`constructibleFiniteTor_of_ctfGenerators`), which is thick;
 conversely an object of `Dctf(X, Λ)` has a bounded flat constructible model, whose stupid
 truncations reduce it to its terms, each an iterated extension of sheaves `a_! L`
-(`AlgebraicGeometry.Etale.ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek`). -/
+(`AlgebraicGeometry.Etale.ctf_generated_by_rightDerivedLowerStar_openImmersionLowerShriek`). -/
 theorem constructibleFiniteTor_eq_triangEnvelope_ctfGenerators_of_isNoetherian
     (X : Scheme.{u}) [IsNoetherian X] :
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) X = (ctfGenerators Λ X).triangEnvelope := by
   refine le_antisymm (fun K hK ↦ ?_) ((ObjectProperty.triangEnvelope_le_iff _).2
     fun K hK ↦ constructibleFiniteTor_of_ctfGenerators Λ hK)
-  refine ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek Λ X _
-    (fun str i Ubar j _ _ g _ h₁ h₂ L _ hL ↦ ?_) K hK
+  refine ctf_generated_by_rightDerivedLowerStar_openImmersionLowerShriek Λ X _
+    (fun str i Ubar j _ g _ h₁ h₂ L _ hL ↦ ?_) K hK
   exact ObjectProperty.le_triangEnvelope _ _
-    ⟨str, i, Ubar, j, inferInstance, inferInstance, g, inferInstance, h₁, h₂, L, inferInstance,
+    ⟨str, i, Ubar, j, inferInstance, g, inferInstance, h₁, h₂, L, inferInstance,
       hL, ⟨Iso.refl _⟩⟩
 
 end Generators
