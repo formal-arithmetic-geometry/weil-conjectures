@@ -791,7 +791,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Full faithfulness of the set-valued comparison, in its unit-normalized form.
 Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.2.
-(blueprint `theorem-classical-sheaves-essential-image--1`).
+(auxiliary; not a blueprint node).
 
 Proof: Restrict the unit to the dense affine etale subsite. At every affine etale
 object the Kan-extension unit is invertible because the inclusion is fully faithful,

@@ -152,7 +152,8 @@ private theorem transportCompleteEquivalence
 
 /-- The complete-object equivalence in the canonical internal coefficient presentation.
 This statement imposes neither constructibility nor a cohomological bound.
-Source: Stacks Tags 099C, 099L and 099M (blueprint `lemma-integral-models--1`).
+Source: Stacks Tags 099C, 099L and 099M
+(auxiliary; not a blueprint node).
 
 Proof: use the exact section-action and small-site equivalences, with their natural
 scalar-restriction comparison, and localize them to the derived categories. The ordinary
