@@ -156,7 +156,8 @@ lemma boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl_eq :
     (G := boundedConstructibleToPadicAlgCl X.left ℓ E)
     (H := boundedConstructibleToPadicAlgCl c.overObj.left ℓ E)
     (K := boundedConstructibleToPadicAlgCl Y.left ℓ E)
-    (L₁ := boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ c.overI)
+    (L₁ := boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ
+      c.overI)
     (R₁ := boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ c.overI)
     (L₂ := boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.overI)
     (R₂ := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.overI)
