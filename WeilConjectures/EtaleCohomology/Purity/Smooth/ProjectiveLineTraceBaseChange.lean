@@ -345,6 +345,7 @@ theorem projectiveLineTrace_baseChange [HasKummerClass.IsNormalized Λ] :
   rw [projectiveLineTrace_eq_neg, projectiveLineTrace_eq_neg, Functor.map_neg,
     projectiveLineTraceAux_baseChange]
   simp only [Preadditive.comp_neg, Preadditive.neg_comp]
+variable (Λ) in
 /-- **Base change of the trace on the compactly supported direct image.** The trace of
 `ℙ¹_S` read on `Rq_! ≅ Rq_*`
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`)
