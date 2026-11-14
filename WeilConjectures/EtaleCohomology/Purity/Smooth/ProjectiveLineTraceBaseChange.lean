@@ -273,16 +273,15 @@ variable (Λ) in
 `Tr_q : Rq_*(Λ_{ℙ¹_S}(1)[2]) ⟶ Λ_S` (`AlgebraicGeometry.Etale.projectiveLineTrace`) is the
 proper base change map `Lg^* Rq_* ⟶ Rq'_* Lg'^*`, followed by `Lg'^*(Λ(1)[2]) ≅ Λ(1)[2]`, the
 trace of `ℙ¹_{S'}` and `Λ_{S'} ≅ Lg^* Λ_S`. -/
-theorem projectiveLineTrace_baseChange (hdec : IsIso (projectiveLineDecompositionMap Λ S))
-    (hdec' : IsIso (projectiveLineDecompositionMap Λ S')) :
-    (L((g)^*[ModuleCat.{u + 1} Λ])).map (projectiveLineTrace Λ S hdec) =
+theorem projectiveLineTrace_baseChange [HasKummerClass.IsNormalized Λ] :
+    (L((g)^*[ModuleCat.{u + 1} Λ])).map (projectiveLineTrace Λ S) =
       (derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
           (ProjectiveSpace.isPullback_map (Option (ULift.{u} (Fin 1))) g).toCommSq).app
           ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) ≫
         (R(((ℙ(Option (ULift.{u} (Fin 1)); S') ↘ S'))_*[ModuleCat.{u + 1} Λ])).map
           (leftDerivedUpperStarTateTwoIso Λ
             (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g)).hom ≫
-        projectiveLineTrace Λ S' hdec' ≫ (leftDerivedUpperStarConstantComplexIso Λ g).inv := by
+        projectiveLineTrace Λ S' ≫ (leftDerivedUpperStarConstantComplexIso Λ g).inv := by
   have h := projectiveLineDecompositionMap_baseChange Λ g
   have h₂ : (L((g)^*[ModuleCat.{u + 1} Λ])).map (inv (projectiveLineDecompositionMap Λ S)) ≫
       biprod.lift
@@ -314,14 +313,12 @@ commutes with base change through the compactly supported base change map
 `Ex_! : Lg^* Rq_! ⟶ Rq'_! Lg'^*` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap`):
 `Rq_! ≅ Rq_*` intertwines `Ex_!` with the proper base change map
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap_comp_lowerStarIso`). -/
-theorem projectiveLineTrace_lowerShriek_baseChange
-    (hdec : IsIso (projectiveLineDecompositionMap Λ S))
-    (hdec' : IsIso (projectiveLineDecompositionMap Λ S')) :
+theorem projectiveLineTrace_lowerShriek_baseChange [HasKummerClass.IsNormalized Λ] :
     (L((g)^*[ModuleCat.{u + 1} Λ])).map
         ((rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ)
           (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).hom.app
             ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) ≫
-          projectiveLineTrace Λ S hdec) =
+          projectiveLineTrace Λ S) =
       (rightDerivedLowerShriekBaseChangeMap Λ
           (ProjectiveSpace.isPullback_map (Option (ULift.{u} (Fin 1))) g)).app
           ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) ≫
@@ -331,8 +328,8 @@ theorem projectiveLineTrace_lowerShriek_baseChange
         (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ)
           (ℙ(Option (ULift.{u} (Fin 1)); S') ↘ S')).hom.app
             ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S') 1)⟦(2 : ℤ)⟧) ≫
-        projectiveLineTrace Λ S' hdec' ≫ (leftDerivedUpperStarConstantComplexIso Λ g).inv := by
-  rw [Functor.map_comp, projectiveLineTrace_baseChange Λ g hdec hdec',
+        projectiveLineTrace Λ S' ≫ (leftDerivedUpperStarConstantComplexIso Λ g).inv := by
+  rw [Functor.map_comp, projectiveLineTrace_baseChange Λ g,
     ← rightDerivedLowerShriekBaseChangeMap_app_comp_lowerStarIso_assoc,
     NatTrans.naturality_assoc]
 

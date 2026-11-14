@@ -110,7 +110,6 @@ theorem projectiveLineLowerShriekTrace_baseChange (g : S' ⟶ S) :
             (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g)).hom ≫
           projectiveLineLowerShriekTrace Λ S' := by
   have htr := projectiveLineTrace_lowerShriek_baseChange Λ g
-    (isIso_projectiveLineDecompositionMap Λ S) (isIso_projectiveLineDecompositionMap Λ S')
   rw [projectiveLineLowerShriekTrace, projectiveLineLowerShriekTrace,
     proof_eq_instance (projectiveLineLowerShriekTrace._proof_2 Λ S),
     proof_eq_instance (projectiveLineLowerShriekTrace._proof_4 Λ S),

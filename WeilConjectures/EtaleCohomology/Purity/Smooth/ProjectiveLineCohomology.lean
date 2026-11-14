@@ -311,6 +311,20 @@ theorem isIso_projectiveLineDecompositionMap [HasKummerClass.IsNormalized Λ] (S
   isIso_of_isIso_leftDerivedUpperStar_algClosurePoint_map Λ _ fun y ↦
     isIso_leftDerivedUpperStar_map_projectiveLineDecompositionMap Λ _ (S.algClosurePoint y)
 
+/-- Blueprint `lemma-cohomology-projective-line-trace`: *the trace of the projective line*
+`Tr_q : Rq_*(Λ_{ℙ¹_S}(1)[2]) ⟶ Λ_S`, the second component of the inverse of the decomposition
+isomorphism `(1, h)` (`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`,
+`AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMap`); it is characterised by
+`Tr_q ∘ h♭ = 1` and `Tr_q ∘ η = 0`. As `h = -c₁(𝒪(1))`
+(`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`), this is `-t_q` for the blueprint's
+trace `t_q`, normalized by `t_q(c₁(𝒪(1))) = 1`. -/
+noncomputable def projectiveLineTrace [HasKummerClass.IsNormalized Λ] (S : Scheme.{u})
+    [HasInvertibleExponent Λ S] :
+    (R(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
+        ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) ⟶ constantComplex Λ S :=
+  haveI := isIso_projectiveLineDecompositionMap Λ S
+  inv (projectiveLineDecompositionMap Λ S) ≫ biprod.snd
+
 end Etale
 
 end AlgebraicGeometry

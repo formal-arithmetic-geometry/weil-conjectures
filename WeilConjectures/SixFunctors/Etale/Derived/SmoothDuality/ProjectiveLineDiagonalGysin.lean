@@ -100,7 +100,7 @@ set_option hygiene false in
 /-- The trace `Rq_* Lq^* τ ≅ Rq_* Λ_P(1)[2] ⟶ Λ_S` of the projective line, for `τ = Λ_S(1)[2]`. -/
 local notation "𝐭" =>
   ((R(((𝐏 ↘ S))_*[ModuleCat.{u + 1} Λ])).map (leftDerivedUpperStarTateTwoIso Λ (𝐏 ↘ S)).hom ≫
-    projectiveLineTrace Λ S (isIso_projectiveLineDecompositionMap Λ S) :
+    projectiveLineTrace Λ S :
       (R(((𝐏 ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
         ((L(((𝐏 ↘ S))^*[ModuleCat.{u + 1} Λ])).obj 𝛕) ⟶ 𝟙_ _)
 
@@ -185,14 +185,13 @@ theorem kernelTraceA_projectiveLineKernelSquareIso :
       (R(((𝐖 ↘ 𝐏))_*[ModuleCat.{u + 1} Λ])).map
           ((L((𝐛)^*[ModuleCat.{u + 1} Λ])).map (leftDerivedUpperStarTateTwoIso Λ (𝐏 ↘ S)).hom ≫
             (leftDerivedUpperStarTateTwoIso Λ 𝐛).hom) ≫
-        projectiveLineTrace Λ 𝐏 (isIso_projectiveLineDecompositionMap Λ _) := by
+        projectiveLineTrace Λ 𝐏 := by
   have hn := (derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
     (ProjectiveSpace.isPullback_map (Option (ULift.{u} (Fin 1))) (𝐏 ↘ S)).toCommSq).naturality
       (leftDerivedUpperStarTateTwoIso Λ (𝐏 ↘ S)).hom
   simp only [Functor.comp_map] at hn
   rw [Adjunction.kernelTraceA, IsIso.inv_comp_eq, kernelBaseChange_projectiveLineKernelSquareIso,
-    Functor.map_comp, projectiveLineTrace_baseChange Λ (𝐏 ↘ S)
-      (isIso_projectiveLineDecompositionMap Λ S) (isIso_projectiveLineDecompositionMap Λ _),
+    Functor.map_comp, projectiveLineTrace_baseChange Λ (𝐏 ↘ S),
     ← leftDerivedUpperStarConstantComplexIso_hom_eq_η]
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id, Functor.map_comp]
   rw [reassoc_of% hn]

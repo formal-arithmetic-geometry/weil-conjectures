@@ -229,18 +229,6 @@ noncomputable def projectiveLineDecompositionMap :
       ((leftDerivedUpperStarConstantComplexIso Λ (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).hom ≫
         projectiveLineHyperplaneClass Λ S))
 
-/-- Blueprint `lemma-cohomology-projective-line-trace`: *the trace of the projective line*
-`Tr_q : Rq_*(Λ_{ℙ¹_S}(1)[2]) ⟶ Λ_S`, the second component of the inverse of the decomposition
-isomorphism `(1, h)` (`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`); it is
-characterised by `Tr_q ∘ h♭ = 1` and `Tr_q ∘ η = 0`. As `h = -c₁(𝒪(1))`
-(`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`), this is `-t_q` for the blueprint's
-trace `t_q`, normalized by `t_q(c₁(𝒪(1))) = 1`. The decomposition is an explicit hypothesis
-(`AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMap`). -/
-noncomputable def projectiveLineTrace (hdec : IsIso (projectiveLineDecompositionMap Λ S)) :
-    (R(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
-        ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) ⟶ constantComplex Λ S :=
-  inv (projectiveLineDecompositionMap Λ S) ≫ biprod.snd
-
 end ProjectiveLine
 
 end Etale
