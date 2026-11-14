@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProperNoetherian
 
 /-!
 # Finiteness of direct images
@@ -497,8 +498,10 @@ theorem boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent (f :
 compactification, between `k`-schemes locally of finite type with `Y` quasi-compact, `Rf_!`
 carries `D^b_c(X, Λ)` into `D^b_c(Y, Λ)`. For the chosen compactification `X ⟶[j] Z ⟶[g] Y`,
 `Rf_! = Rg_* ∘ j_!`: extension by zero preserves constructibility, and `Rg_*` preserves bounded
-constructibility by
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`.
+constructibility by proper finiteness
+(`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian`,
+blueprint `proposition-proper-direct-image-finite-coefficients--1`), as in the notes' proof of
+`theorem-results-from-etale-theory--3`; the finiteness theorem for arbitrary `f` is not used.
 
 As for `Rf_*`, some finiteness hypothesis on `Y` is needed. -/
 theorem boundedConstructible_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactification f]
@@ -516,13 +519,11 @@ theorem boundedConstructible_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactif
   | inr hX =>
     have := HasInvertibleExponent.of_hom_of_nonempty (Λ := Λ) (f ≫ aY)
     let c := HasCompactification.compactification f
-    have : HasInvertibleExponent Λ c.Z := HasInvertibleExponent.of_hom (c.g ≫ aY)
     have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
-    have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
-    have : IsNoetherian c.Z := { __ := LocallyOfFiniteType.isLocallyNoetherian (c.g ≫ aY) }
+    have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian aY }
     have : TopologicalSpace.NoetherianSpace X := c.i.isOpenEmbedding.isInducing.noetherianSpace
-    exact boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent Λ c.g (c.g ≫ aY) aY
-      rfl _ (boundedConstructible_mapDerivedCategory_openImmersionLowerShriek Λ c.i hK)
+    exact boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian aY c.g
+      (boundedConstructible_mapDerivedCategory_openImmersionLowerShriek Λ c.i hK)
 
 /-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility
 

@@ -78,20 +78,18 @@ include aX in
 
 For `X` of finite type over `k` and a finite `Λ` whose exponent is invertible on `X`, the
 internal hom carries `Dctf(X, Λ) × Dctf(X, Λ)` into `Dctf(X, Λ)`, for two arbitrary objects.
-This is `AlgebraicGeometry.Etale.boundedConstructible_derivedHom` together with the
-dimension-dependent bound `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom`, `X` having
-finite dimension. -/
-theorem constructibleFiniteTor_derivedHom [IsAlgClosed k] [HasInvertibleExponent Λ X]
+This is the notes' proof (`proposition-six-operations-dctf`): by the generation theorem for
+`Dctf(X, Λ)` it suffices to treat a first argument `Rg_* Rj_! P` supported on one stratum, where
+the internal hom is computed by the tensor–Hom exchanges for `g` and `j`
+(`AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom_of_field`). No Verdier duality is
+used, and `k` need not be algebraically closed. -/
+theorem constructibleFiniteTor_derivedHom [HasInvertibleExponent Λ X]
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
     (hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M) :
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) := by
-  obtain ⟨hKbc, a, b, hKt⟩ := hK
-  obtain ⟨hMbc, c, d, hMt⟩ := hM
-  obtain ⟨m, hm⟩ := exists_topologicalKrullDim_le aX
-  exact ⟨boundedConstructible_derivedHom Λ aX a b c d hKbc hKt hMbc hMt, _, _,
-    torAmplitudeIn_derivedHom Λ aX m hm a b c d hKbc hKt hMbc hMt⟩
+      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) :=
+  constructibleFiniteTor_derivedHom_of_field Λ aX hK hM
 
 omit [Finite Λ] in
 /-- A Tate twisting object `Λ_X(m)` is a constructible flat sheaf placed in degree `0`, every

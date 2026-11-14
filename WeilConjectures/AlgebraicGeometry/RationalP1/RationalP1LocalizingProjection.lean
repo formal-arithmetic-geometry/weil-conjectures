@@ -74,10 +74,10 @@ private theorem selected_projection_isIso
       [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]
       [IsSeparated (T ↘ Spec (.of k))] :
       constantModelBoundedConstructible Λ T = boundedConstructible (condensedRingObj Λ T) := by
-    have h := (finiteCoefficientDescentTwoColimit k p l (Fact.out : p.Prime).pos hpl T).2.2.2
     cases c with
-    | none => exact h.2.1.1
-    | some E => exact (h.1 E).1
+    | none => exact constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl_of_finiteType k l T
+    | some E =>
+      exact constantModelBoundedConstructible_eq_boundedConstructible_subfield_of_finiteType k l E T
   have hctf (T : Scheme.{u}) [T.Over (Spec (.of k))]
       [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]
       [IsSeparated (T ↘ Spec (.of k))] :
@@ -116,7 +116,7 @@ private theorem selected_projection_isIso
       cases c with
       | none => exact Or.inr ⟨Iso.refl _⟩
       | some E => exact Or.inl ⟨E, ⟨Iso.refl _⟩⟩
-    exact (constantModelBoundedConstructible_derivedTensor l p (Fact.out : p.Prime).pos hpl
+    exact (constantModelBoundedConstructible_derivedTensor l p hpl
       (T ↘ Spec (.of k)) Λ hc).1 A B hA hB
   apply (projection_localizing_of_interfaces Λ f (hbc X) (hbc S) (hctf X) (hctf S)
     hp (pullback_bounded_constructible Λ f (pullback_constructible Λ f))

@@ -557,7 +557,6 @@ private theorem rationalTatePull_constructible
     | none => exact Or.inr ⟨eqToIso (by rfl)⟩
     | some E => exact Or.inl ⟨E, ⟨eqToIso (by rfl)⟩⟩
   have ht := (constantModelBoundedConstructible_derivedTensor ℓ (ringChar k)
-    (Fact.out : (ringChar k).Prime).pos
     (Fact.out : ringChar k ≠ ℓ) (X ↘ Spec (.of k)) Λ hΛ).1
   have hl : P ((DerivedCategory.singleFunctor _ 0).obj (RationalP1.line ℓ c X)) :=
     single_constructible Λ X _
